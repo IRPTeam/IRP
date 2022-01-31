@@ -119,6 +119,7 @@
   <subsystems>Subsystem.Treasury</subsystems>
   <subsystems>Subsystem.UniqueID</subsystems>
   <subsystems>Subsystem.Retail</subsystems>
+  <subsystems>Subsystem.Accounting</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -397,6 +398,11 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.UserSettingsClientServer</commonModules>
   <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
+  <commonModules>CommonModule.DocJournalEntryServer</commonModules>
+  <commonModules>CommonModule.DocJournalEntryClient</commonModules>
+  <commonModules>CommonModule.AccountingClient</commonModules>
+  <commonModules>CommonModule.AccountingClientServer</commonModules>
+  <commonModules>CommonModule.AccountingServer</commonModules>
   <commonModules>CommonModule.LandedCostServer</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
@@ -449,6 +455,7 @@
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -501,6 +508,7 @@
   <constants>Constant.UseItemKey</constants>
   <constants>Constant.UseLockDataModification</constants>
   <constants>Constant.EnableLinkedRowsIntegrity</constants>
+  <constants>Constant.UseAccounting</constants>
   <commonForms>CommonForm.DataMappingForm</commonForms>
   <commonForms>CommonForm.EditAddProperties</commonForms>
   <commonForms>CommonForm.EditDescriptions</commonForms>
@@ -526,6 +534,7 @@
   <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.EditCurrencies</commonForms>
   <commonForms>CommonForm.EditHiddenTables</commonForms>
+  <commonForms>CommonForm.EditTrialBallanceAccounts</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
@@ -595,6 +604,8 @@
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.AdvancesKeys</catalogs>
   <catalogs>Catalog.TransactionsKeys</catalogs>
+  <catalogs>Catalog.LadgerTypes</catalogs>
+  <catalogs>Catalog.AccountingOperations</catalogs>
   <catalogs>Catalog.Batches</catalogs>
   <catalogs>Catalog.BatchKeys</catalogs>
   <documents>Document.BankPayment</documents>
@@ -641,6 +652,7 @@
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.VendorsAdvancesClosing</documents>
+  <documents>Document.JournalEntry</documents>
   <documents>Document.CalculationMovementCosts</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
@@ -688,6 +700,8 @@
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
+  <enums>Enum.LadgerTypeVariants</enums>
+  <enums>Enum.AccountingAnalyticTypes</enums>
   <enums>Enum.BatchDirection</enums>
   <enums>Enum.BatchType</enums>
   <enums>Enum.CalculationMode</enums>
@@ -748,7 +762,13 @@
   <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2016S_VendorsAdvancesRelevance</informationRegisters>
   <informationRegisters>InformationRegister.T2017S_CustomersAdvancesRelevance</informationRegisters>
+  <informationRegisters>InformationRegister.ItemKeyTBAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.PartnerTBAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.CashAccountTBAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.TaxTBAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.CompanyLadgerTypes</informationRegisters>
   <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
+  <informationRegisters>InformationRegister.LadgerTypeOperations</informationRegisters>
   <informationRegisters>InformationRegister.T6010S_BatchesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T6020S_BatchKeysInfo</informationRegisters>
   <informationRegisters>InformationRegister.T6030S_BatchRelevance</informationRegisters>
@@ -823,6 +843,8 @@
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3024B_SalesOrdersToBePaid</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T1040T_AccountingAmounts</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T1050T_AccountingQuantities</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6010B_BatchWiseBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6020B_BatchBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6030T_BatchShortageOutgoing</accumulationRegisters>
@@ -835,4 +857,7 @@
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>
+  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</chartsOfCharacteristicTypes>
+  <chartsOfAccounts>ChartOfAccounts.R6010C_Master</chartsOfAccounts>
+  <accountingRegisters>AccountingRegister.R6010A_Master</accountingRegisters>
 </mdclass:Configuration>

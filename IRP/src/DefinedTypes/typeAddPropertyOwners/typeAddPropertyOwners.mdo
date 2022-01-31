@@ -87,5 +87,7 @@
     <types>CatalogRef.ChequeBonds</types>
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
+    <types>DocumentRef.JournalEntry</types>
+    <types>CatalogRef.LadgerTypes</types>
   </type>
 </mdclass:DefinedType>

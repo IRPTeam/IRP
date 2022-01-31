@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="27bdf7a8-0648-43ce-be4a-dbbc5555b62f">
+  <producedTypes>
+    <refType typeId="1aa66a1e-f457-4526-ba2c-023900fac8ff" valueTypeId="c9e8292e-bb63-4d6b-909b-80f88217fc45"/>
+    <listType typeId="c8705758-a344-4e98-8130-83661de3bf5c" valueTypeId="cefa160f-8893-4df5-b0e7-71d07db975f4"/>
+    <managerType typeId="c4484a2f-ee31-4afd-9f51-9fcd92bcdc1f" valueTypeId="5af300fa-dba6-47d6-91b6-d43d97e81817"/>
+  </producedTypes>
+  <name>LadgerTypeVariants</name>
+  <synonym>
+    <key>en</key>
+    <value>Ladger type variants</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="86a0a8d3-d38e-4c6b-af10-c9c214eada16">
+    <name>Main</name>
+    <synonym>
+      <key>en</key>
+      <value>Main</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

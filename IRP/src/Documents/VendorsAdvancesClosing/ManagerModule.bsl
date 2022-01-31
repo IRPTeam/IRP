@@ -579,7 +579,7 @@ Procedure OffsetTransactionsToAdvances(Parameters, Records_TransactionsKey, Reco
 	|	TransactionsBalance.AmountBalance AS TransactionAmount
 	|FROM
 	|	AccumulationRegister.TM1030B_TransactionsKey.Balance(
-	|  &TransactionBoundary //|ENDOFPERIOD(&EndOfPeriod, DAY)
+	|  &TransactionBoundary
 	|, TransactionKey = &TransactionKey
 	|	AND TransactionKey.IsVendorTransaction) AS TransactionsBalance";
 
@@ -1552,6 +1552,12 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 		Or TypeOf(Row.Document) = Type("DocumentRef.DebitNote")
 		Or TypeOf(Row.Document) = Type("DocumentRef.OpeningEntry");
 		
+		// Accounting amounts (advances)
+		RecordSet_AccountingAmounts = AccumulationRegisters.T1040T_AccountingAmounts.CreateRecordSet();
+		RecordSet_AccountingAmounts.Filter.Recorder.Set(Row.Document);
+		TableAccountingAmounts = RecordSet_AccountingAmounts.UnloadColumns();
+		TableAccountingAmounts.Columns.Delete(TableAccountingAmounts.Columns.PointInTime);
+		
 		RecordSet_AdvancesToVendors = AccumulationRegisters.R1020B_AdvancesToVendors.CreateRecordSet();
 		RecordSet_AdvancesToVendors.Filter.Recorder.Set(Row.Document);
 		TableAdvances = RecordSet_AdvancesToVendors.UnloadColumns();
@@ -1563,10 +1569,11 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 		TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
 		
 		OffsetInfoByDocument = Records_OffsetOfAdvances.Copy(New Structure("Document", Row.Document));
-		
+				
 		If UseKeyForCurrency Then
 			TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 			TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+			TableAccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 		EndIf;
 		
 		OffsetInfoByDocument = Records_OffsetOfAdvances.Copy(New Structure("Document", Row.Document));
@@ -1578,6 +1585,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			NewRow_Advances.RecordType = AccumulationRecordType.Expense;
 			NewRow_Advances.VendorsAdvancesClosing = Parameters.Object.Ref;
 			NewRow_Advances.Order = RowOffset.AdvancesOrder;
+
 			If UseKeyForCurrency Then
 				NewRow_Advances.Key = RowOffset.Key;
 			EndIf;
@@ -1596,6 +1604,16 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			If UseKeyForCurrency Then
 				NewRow_Transactions.Key = RowOffset.Key;
 			EndIf;
+			
+			// Accounting amounts (advances)
+			NewRow_AccountingAmounts = TableAccountingAmounts.Add();
+			FillPropertyValues(NewRow_AccountingAmounts, RowOffset);
+			NewRow_AccountingAmounts.AdvancesClosing = Parameters.Object.Ref;
+			NewRow_AccountingAmounts.RowKey = RowOffset.Key;
+			NewRow_AccountingAmounts.IsAdvanceClosing = True;
+			If UseKeyForCurrency Then
+				NewRow_AccountingAmounts.Key = RowOffset.Key;
+			EndIf;
 		EndDo;
 	
 		// Currency calculation
@@ -1605,6 +1623,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 
 		PostingDataTables.Insert(RecordSet_AdvancesToVendors, New Structure("RecordSet", TableAdvances));
 		PostingDataTables.Insert(RecordSet_VendorsTransactions, New Structure("RecordSet", TableTransactions));
+		PostingDataTables.Insert(RecordSet_AccountingAmounts, New Structure("RecordSet", TableAccountingAmounts));
 		ArrayOfPostingInfo = New Array();
 		For Each DataTable In PostingDataTables Do
 			ArrayOfPostingInfo.Add(DataTable);
@@ -1632,6 +1651,16 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 				EndDo;
 				RecordSet_VendorsTransactions.SetActive(True);
 				RecordSet_VendorsTransactions.Write();
+			EndIf;
+			
+			// Accounting amounts (advances)
+			If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.T1040T_AccountingAmounts") Then
+				RecordSet_AccountingAmounts.Read();
+				For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet Do
+					FillPropertyValues(RecordSet_AccountingAmounts.Add(), RowPostingInfo);
+				EndDo;
+				RecordSet_AccountingAmounts.SetActive(True);
+				RecordSet_AccountingAmounts.Write();
 			EndIf;
 		EndDo;
 	EndDo;
@@ -1661,7 +1690,7 @@ Procedure Clear_SelfRecords(Parameters)
 	|	R1021B_VendorsTransactions.Recorder
 	|;
 	|
-	|///////////////////////////////////////////////////////////////////////////////
+	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	R5012B_VendorsAging.Recorder
 	|FROM
@@ -1669,35 +1698,37 @@ Procedure Clear_SelfRecords(Parameters)
 	|WHERE
 	|	R5012B_VendorsAging.AgingClosing = &Ref
 	|GROUP BY
-	|	R5012B_VendorsAging.Recorder";
+	|	R5012B_VendorsAging.Recorder
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T1040T_AccountingAmounts.Recorder
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
+	|WHERE
+	|	T1040T_AccountingAmounts.AdvancesClosing = &Ref
+	|GROUP BY
+	|	T1040T_AccountingAmounts.Recorder";
 	
 	Ref = Parameters.Object.Ref;
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
 
-	For Each Row In QueryResults[0].Unload() Do
-		RecordSet = AccumulationRegisters.R1020B_AdvancesToVendors.CreateRecordSet();
-		RecordSet.Filter.Recorder.Set(Row.Recorder);
-		RecordSet.Read();
-		ArrayForDelete = New Array();
-		For Each Record In RecordSet Do
-			If Record.VendorsAdvancesClosing = Ref Then
-				ArrayForDelete.Add(Record);
-			EndIf;
-		EndDo;
-		For Each ItemForDelete In ArrayForDelete Do
-			RecordSet.Delete(ItemForDelete);
-		EndDo;
-		RecordSet.Write();
-	EndDo;
+	ClearRegisterRecords(Ref, QueryResults[0].Unload(), "R1020B_AdvancesToVendors"   , "VendorsAdvancesClosing");
+	ClearRegisterRecords(Ref, QueryResults[1].Unload(), "R1021B_VendorsTransactions" , "VendorsAdvancesClosing");
+	ClearRegisterRecords(Ref, QueryResults[2].Unload(), "R5012B_VendorsAging"        , "AgingClosing");
+	ClearRegisterRecords(Ref, QueryResults[3].Unload(), "T1040T_AccountingAmounts"   , "AdvancesClosing");
+EndProcedure
 
-	For Each Row In QueryResults[1].Unload() Do
-		RecordSet = AccumulationRegisters.R1021B_VendorsTransactions.CreateRecordSet();
+Procedure ClearRegisterRecords(DocRef, TableOfRecorders, RegisterName, AttrName)
+	For Each Row In TableOfRecorders Do
+		RecordSet = AccumulationRegisters[RegisterName].CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(Row.Recorder);
 		RecordSet.Read();
 		ArrayForDelete = New Array();
 		For Each Record In RecordSet Do
-			If Record.VendorsAdvancesClosing = Ref Then
+			If Record[AttrName] = DocRef Then
 				ArrayForDelete.Add(Record);
 			EndIf;
 		EndDo;
@@ -1705,23 +1736,7 @@ Procedure Clear_SelfRecords(Parameters)
 			RecordSet.Delete(ItemForDelete);
 		EndDo;
 		RecordSet.Write();
-	EndDo;
-
-	For Each Row In QueryResults[2].Unload() Do
-		RecordSet = AccumulationRegisters.R5012B_VendorsAging.CreateRecordSet();
-		RecordSet.Filter.Recorder.Set(Row.Recorder);
-		RecordSet.Read();
-		ArrayForDelete = New Array();
-		For Each Record In RecordSet Do
-			If Record.AgingClosing = Ref Then
-				ArrayForDelete.Add(Record);
-			EndIf;
-		EndDo;
-		For Each ItemForDelete In ArrayForDelete Do
-			RecordSet.Delete(ItemForDelete);
-		EndDo;
-		RecordSet.Write();
-	EndDo;
+	EndDo;	
 EndProcedure
 
 Function VendorsAdvancesClosingQueryText()

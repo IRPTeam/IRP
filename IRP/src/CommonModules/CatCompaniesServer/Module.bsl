@@ -58,6 +58,31 @@ Procedure ClearTaxesIntoFormTable(CurrentCompany) Export
 	Set.Write();
 EndProcedure
 
+Procedure ReadLadgerTypesFormTable(Form) Export
+	Set = InformationRegisters.CompanyLadgerTypes.CreateRecordSet();
+	Set.Filter.Company.Set(Form.Parameters.Key);
+	Set.Read();
+	Form.CompanyLadgerTypes.Load(Set.Unload());	
+EndProcedure
+
+Procedure WriteLadgerTypesFormTable(Form, CurrentCompany) Export
+	Set = InformationRegisters.CompanyLadgerTypes.CreateRecordSet();
+	Set.Filter.Company.Set(CurrentCompany);
+	For Each Row In Form.CompanyLadgerTypes Do
+		Record = Set.Add();
+		FillPropertyValues(Record, Row);
+		Record.Company = CurrentCompany;
+	EndDo;
+	Set.Write();
+EndProcedure
+
+Procedure ClearLadgerTypesFormTable(CurrentCompany) Export
+	Set = InformationRegisters.CompanyLadgerTypes.CreateRecordSet();
+	Set.Filter.Company.Set(CurrentCompany);
+	Set.Clear();
+	Set.Write();
+EndProcedure
+
 Function isUseCompanies() Export
 	Return GetFunctionalOption("UseCompanies");
 EndFunction

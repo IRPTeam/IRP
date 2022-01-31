@@ -179,6 +179,9 @@ Function FieldsListForDescriptions(Val Source) Export
 	If Source = "CatalogManager.Currencies" Then
 		Fields.Add("Code");
 		Return Fields;
+	ElsIf Source = "ChartOfAccountsManager.R6010C_Master" Then
+		Fields.Add("Code");
+		Return Fields;
 	ElsIf Source = "CatalogManager.PriceKeys" Then
 		Fields.Add("Ref");
 		Return Fields;

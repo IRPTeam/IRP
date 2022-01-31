@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dae141e9-c68d-4ee9-a643-51b4416f0df1">
+  <producedTypes>
+    <objectType typeId="2bc8afcf-cbcf-4501-8ef4-9457fd56e363" valueTypeId="ba0dd252-238f-4161-8aa4-72e7882141d9"/>
+    <refType typeId="c7e61594-4b0a-42ab-a291-10c918c0828a" valueTypeId="630cbf59-ded4-463a-afcb-ba642ec7614b"/>
+    <selectionType typeId="c2053172-4faf-4410-95b5-35c3a3a64c85" valueTypeId="eaac8613-7dad-43a5-89b3-5c099159c46e"/>
+    <listType typeId="3dbedc9e-abb9-46ba-b3e1-78641a20441e" valueTypeId="00f70393-531e-43a0-9a86-2a70a46dd112"/>
+    <managerType typeId="ef5eca8d-c17c-4539-9f45-59df122ae2a3" valueTypeId="1b3d6f79-c80b-4312-81f4-6f58f6c8052e"/>
+  </producedTypes>
+  <name>JournalEntry</name>
+  <synonym>
+    <key>en</key>
+    <value>Journal entry</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.JournalEntry.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_JournalEntry</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_JournalEntry</value>
+    </typesFilterValue>
+    <characteristicValues>Document.JournalEntry.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.JournalEntry.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.JournalEntry.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.JournalEntry.Form.ChoiceForm</defaultChoiceForm>
+  <posting>Deny</posting>
+  <registerRecords>AccountingRegister.R6010A_Master</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <attributes uuid="6be09410-c60e-4f67-9a7a-796dffddd541">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7c7a88b5-e014-4533-a568-be5246c62a8c">
+    <name>LadgerType</name>
+    <synonym>
+      <key>en</key>
+      <value>Ladger type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LadgerTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="394ef6d8-5b4b-46b0-b464-409486bf29a0">
+    <name>Basis</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a6b8398a-18fb-4b0b-a9a4-4b5c007c767a">
+    <name>UserDefined</name>
+    <synonym>
+      <key>en</key>
+      <value>User defined</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="a7ceddf1-8c4e-44f9-a830-42106fc0bc53">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="f6fb5536-eb71-4fec-ae16-cf171fca6762">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="57195246-c6a2-46b0-bc5a-cbc57208d5b4">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="8701e96e-1e6a-4e84-89d4-488947079cde">
+    <producedTypes>
+      <objectType typeId="65c49faa-3787-43bf-8ac2-d344564087e6" valueTypeId="7dea86f3-5982-4794-8098-a4b719a20776"/>
+      <rowType typeId="92aea984-b6b4-468b-8f90-676ef1439f08" valueTypeId="48f68ba1-8b9a-4e8c-8d24-315c387290da"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="afae46d8-9248-44f5-a78f-9431a4bf0192">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="63c74c89-8858-4b78-8b26-797f8a5242a5">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

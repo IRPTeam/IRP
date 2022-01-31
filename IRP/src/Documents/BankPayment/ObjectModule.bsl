@@ -10,6 +10,10 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
 	
+	If WriteMode = DocumentWriteMode.Posting Then
+		AccountingClientServer.BeforeWriteAccountingDocument(ThisObject, "PaymentList");
+	EndIf;
+	
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");
 EndProcedure
 

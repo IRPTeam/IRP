@@ -74,6 +74,7 @@
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesReturnOrder</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.InventoryTransfer</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesInvoice</content>
+  <content>Document.JournalEntry.Attribute.Basis</content>
   <content>Document.AdditionalCostAllocation.TabularSection.CostList.Attribute.Basis</content>
   <content>Document.AdditionalCostAllocation.TabularSection.AllocationList.Attribute.Document</content>
   <content>Document.AdditionalCostAllocation.TabularSection.CostDocuments.Attribute.Document</content>
@@ -129,6 +130,7 @@
       <types>DocumentRef.PhysicalInventory</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.CashExpense</types>
+      <types>DocumentRef.JournalEntry</types>
       <types>DocumentRef.AdditionalCostAllocation</types>
       <types>DocumentRef.AdditionalRevenueAllocation</types>
     </commandParameterType>

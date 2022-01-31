@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccountingRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0e4e7667-4177-428e-a1ba-6a1f2e04f976">
+  <producedTypes>
+    <selectionType typeId="2a7b0d8f-a437-453f-9929-4dc3d8e48ba3" valueTypeId="4b87f7d4-119c-42cb-838c-5d47356a140c"/>
+    <listType typeId="29466a2b-1fd2-4389-939a-bcc3a2aa124e" valueTypeId="cbd8c6f1-c6db-4491-b557-782f0f043781"/>
+    <managerType typeId="ff0dfd33-0934-4be3-8d30-fa519051661e" valueTypeId="0a7748f1-806b-4830-be3e-325389d96dcc"/>
+    <recordSetType typeId="b1947a61-ba8f-48f5-bb63-8711a2c7108c" valueTypeId="f5e7436c-abb8-480a-bea3-4cdfc54c5625"/>
+    <recordKeyType typeId="1066511e-ebc8-4b8e-993b-063274c66b0a" valueTypeId="9d19de03-d494-4f72-9bdd-860293457748"/>
+    <recordType typeId="5fe9d158-5dcd-4c6e-8881-ce72cb643be5" valueTypeId="e2b05953-d72b-4126-9218-5448440b7e16"/>
+    <extDimensionsType typeId="ed7787bf-0cb2-44da-9687-f4695995f843" valueTypeId="38efffe7-b813-4698-a785-e20d3f0b03f2"/>
+  </producedTypes>
+  <name>R6010A_Master</name>
+  <synonym>
+    <key>en</key>
+    <value>R6010 Master (account register)</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <chartOfAccounts>ChartOfAccounts.R6010C_Master</chartOfAccounts>
+  <correspondence>true</correspondence>
+  <defaultListForm>AccountingRegister.R6010A_Master.Form.ListForm</defaultListForm>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <dimensions uuid="fca6aa4f-a583-4809-91a5-3a19ae6774d5">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <balance>true</balance>
+  </dimensions>
+  <dimensions uuid="b57d4a42-dd22-4236-8cb9-d382312ae872">
+    <name>LadgerType</name>
+    <synonym>
+      <key>en</key>
+      <value>Ladger type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LadgerTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <balance>true</balance>
+  </dimensions>
+  <dimensions uuid="bdc1372a-07f5-4f5f-8f1b-36fa37491274">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+  <resources uuid="cc6fef8c-2038-416a-ba26-1a62c4829671">
+    <name>Amount</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <balance>true</balance>
+  </resources>
+  <resources uuid="80879adc-1e5f-4637-982a-f2545c9ab7c5">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="96bd6da8-59c8-40e4-a8ef-0469a92072de">
+    <name>CurrencyAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <forms uuid="ba8e9fb6-4643-4aa6-82c4-b7cb66965ce4">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:AccountingRegister>

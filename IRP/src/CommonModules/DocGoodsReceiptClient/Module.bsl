@@ -177,8 +177,15 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = 
 	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form);
 EndProcedure
 
-Procedure ItemListItemKeyOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+Procedure ItemListItemKeyOnChange(Object, Form, Item, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentRow = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+
+	CalculationSettings = New Structure();
+	CalculationSettings.Insert("UpdateUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 EndProcedure
 

@@ -241,8 +241,8 @@ Scenario: _0154056 check item and item key input by search in line in a document
 		| 'Boots'    | '36/18SD' |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
-		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
+		And drop-down list named "ItemListItem" is equal to:
+		| (J22001) Jacket J22001 |			
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
 		| 'Item'     |
@@ -265,7 +265,7 @@ Scenario: _0154057 check item and item key input by search in line in a document
 		| 'Boots'    | '36/18SD' |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
-		And drop-down list "Item" is equal to:
+		And drop-down list named "ItemListItem" is equal to:
 		| (J22001) Jacket J22001 |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
@@ -338,7 +338,7 @@ Scenario: _0154060 check item and item key input by search in line in a document
 		| 'Boots'    | '36/18SD' |
 		And I click "Add" button
 		And I input "J22001" text in "Item" field of "ItemList" table		
-		And drop-down list "Item" is equal to:
+		And drop-down list named "ItemListItem" is equal to:
 		| (J22001) Jacket J22001 |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines

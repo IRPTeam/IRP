@@ -296,6 +296,7 @@ Scenario: Open object form "DataHistory"
 	And "MetadataTree" table became equal
 		| 'Use' | 'Name'                        |
 		| 'No'  | 'Catalogs'                    |
+		| 'No'  | 'ChartsOfAccounts'            |
 		| 'No'  | 'ChartsOfCharacteristicTypes' |
 		| 'No'  | 'Constants'                   |
 		| 'No'  | 'Documents'                   |

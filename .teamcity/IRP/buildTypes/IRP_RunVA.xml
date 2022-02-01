@@ -781,7 +781,8 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
         <parameters>
           <param name="keepData.1.artifactPatterns" value="+:**/*" />
           <param name="keepData.1.type" value="artifacts" />
-          <param name="limit.type" value="all" />
+          <param name="limit.buildsCount" value="30" />
+          <param name="limit.type" value="lastNBuilds" />
           <param name="partitions.1.type" value="perBranch" />
           <param name="preserveArtifacts" value="true" />
           <param name="ruleDisabled" value="false" />

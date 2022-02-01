@@ -777,6 +777,16 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="teamcity.file.content.replacer.wildcards" value="**/*.feature" />
         </parameters>
       </extension>
+      <extension id="KEEP_RULE_1" type="keepRules">
+        <parameters>
+          <param name="keepData.1.artifactPatterns" value="+:**/*" />
+          <param name="keepData.1.type" value="artifacts" />
+          <param name="limit.type" value="all" />
+          <param name="partitions.1.type" value="perBranch" />
+          <param name="preserveArtifacts" value="true" />
+          <param name="ruleDisabled" value="false" />
+        </parameters>
+      </extension>
     </build-extensions>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_2" sourceBuildTypeId="ExternalDataProcessor_ExtConvertToCfe" cleanDestination="false">

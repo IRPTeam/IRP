@@ -784,7 +784,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="limit.buildsCount" value="30" />
           <param name="limit.type" value="lastNBuilds" />
           <param name="partitions.1.type" value="perBranch" />
-          <param name="preserveArtifacts" value="true" />
+          <param name="preserveArtifacts" value="false" />
           <param name="ruleDisabled" value="false" />
         </parameters>
       </extension>

@@ -821,7 +821,11 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
         </options>
       </depend-on>
     </dependencies>
-    <cleanup />
+    <cleanup>
+      <options>
+        <option name="disableCleanupPolicies" value="true" />
+      </options>
+    </cleanup>
   </settings>
 </build-type>
 

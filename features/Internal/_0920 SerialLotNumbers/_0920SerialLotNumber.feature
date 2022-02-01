@@ -2376,9 +2376,248 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 			| ''                                     | 'Expense'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '*'      | '36/Yellow' | '99098809009999'    |
 		And I close all client application windows
 		
+Scenario: _092015 check serial lot number in the Shipment confirmation
+		And I close all client application windows
+	* Create Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And I select "Sales" exact value from "Transaction type" drop-down list		
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+	* Add items (first item with serial lot number, second - without serial lot number)
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '38/18SD'  |
+		And I select current line in "List" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table		
+	* Filling in serial lot number in the first string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		* Create serial lot number for item
+			And I click the button named "FormCreate"
+			And I input "99098809009999" text in "Serial number" field
+			And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Owner'     | 'Serial number'  |
+			| '38/Yellow' | '99098809009999' |
+		And I activate "Serial number" field in "List" table
+		And I click the button named "FormChoose"
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Check that the field Serial lot number is inactive in the second string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity'     |
+			| 'Boots'    | '38/18SD' | '1,000' |
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+        |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
 
+Scenario: _092016 check serial lot number in the Goods receipt
+		And I close all client application windows
+	* Create Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I select "Purchase" exact value from "Transaction type" drop-down list		
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+	* Add items (first item with serial lot number, second - without serial lot number)
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '38/18SD'  |
+		And I select current line in "List" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table		
+	* Filling in serial lot number in the first string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		* Create serial lot number for item
+			And I click the button named "FormCreate"
+			And I input "99098809009999" text in "Serial number" field
+			And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Owner'     | 'Serial number'  |
+			| '38/Yellow' | '99098809009999' |
+		And I activate "Serial number" field in "List" table
+		And I click the button named "FormChoose"
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Check that the field Serial lot number is inactive in the second string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity'     |
+			| 'Boots'    | '38/18SD' | '1,000' |
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+        |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
+
+Scenario: _092007 check serial lot number in the Inventory transfer
+		And I close all client application windows
+	* Create Inventory transfer
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Store sender" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I click Select button of "Store receiver" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'    |
+		And I select current line in "List" table
+	* Add items (first item with serial lot number, second - without serial lot number)
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '38/18SD'  |
+		And I select current line in "List" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table		
+	* Filling in serial lot number in the first string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity'     |
+			| 'Trousers' | '38/Yellow' | '1,000' |
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		* Create serial lot number for item
+			And I click the button named "FormCreate"
+			And I input "99098809009999" text in "Serial number" field
+			And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Owner'     | 'Serial number'  |
+			| '38/Yellow' | '99098809009999' |
+		And I activate "Serial number" field in "List" table
+		And I click the button named "FormChoose"
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Check that the field Serial lot number is inactive in the second string
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Quantity'     |
+			| 'Boots'    | '38/18SD' | '1,000' |
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+        |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
 
 Scenario: _092020 check choice form Serial Lot number
+		And I close all client application windows
 	* Create Serial lot number
 		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
 		* For item key (Dree M/Brown)

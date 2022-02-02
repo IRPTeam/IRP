@@ -770,6 +770,7 @@ Procedure CompanyStepsEnabler_Cash(Parameters, Chain) Export
 EndProcedure
 
 Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
+	// RequireCallCreateTaxesFormControls
 	Chain.RequireCallCreateTaxesFormControls.Enable = True;
 	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
 	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
@@ -779,6 +780,45 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
 	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
+	
+	// TEST{
+	
+	// ChangeTaxRate
+	Chain.ChangeTaxRate.Enable = True;
+	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
+	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Company   = GetPropertyObject(Parameters, "Company");
+	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
+	TaxRates = Undefined;
+	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
+		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
+		TaxRates = New Structure();
+		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
+		EndDo;
+	EndIf;
+	
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		// ChangeTaxRate
+		Options = ModelClientServer_V2.ChangeTaxRateOptions();
+		Options.Date      = Options_Date;
+		Options.Company   = Options_Company;
+		Options.Agreement = Options_Agreement;
+		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		
+		If TaxRates <> Undefined Then
+			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+				SetProperty(Parameters.Cache, "ItemList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
+			EndDo;
+			Row.Insert("TaxRates", TaxRates);
+		EndIf;
+		
+		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
+		Options.Key = Row.Key;
+		Chain.ChangeTaxRate.Options.Add(Options);
+	EndDo;
+	// }TEST
 EndProcedure
 
 #EndRegion
@@ -1302,6 +1342,18 @@ Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
 	Chain.ChangeTaxRate.Enable = True;
 	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
 	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Company   = GetPropertyObject(Parameters, "Company");
+	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
+	TaxRates = Undefined;
+	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
+		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
+		TaxRates = New Structure();
+		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
+		EndDo;
+	EndIf;
+	
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		// ChangePriceTypeByAgreement
 		Options = ModelClientServer_V2.ChangePriceTypeByAgreementOptions();
@@ -1311,11 +1363,19 @@ Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
 		
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date      = GetPropertyObject(Parameters, "Date");
-		Options.Company   = GetPropertyObject(Parameters, "Company");
-		Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+		Options.Date      = Options_Date;
+		Options.Company   = Options_Company;
+		Options.Agreement = Options_Agreement;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
+		
+		If TaxRates <> Undefined Then
+			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+				SetProperty(Parameters.Cache, "ItemList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
+			EndDo;
+			Row.Insert("TaxRates", TaxRates);
+		EndIf;
+		
+		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
 		Options.Key = Row.Key;
 		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
@@ -2451,7 +2511,6 @@ Procedure PutToChangedData(Parameters, DataPath, OldValue, NewValue, _Key)
 EndProcedure
 
 // Устанавливает свойства по переданному DataPath, например ItemList.PriceType или Company
-// возвращает True если хотябы одно свойство было изменено
 Function SetProperty(Cache, DataPath, _Key, _Value)
 	// измененные свойства сохраняются в кэш
 	Segments = StrSplit(DataPath, ".");

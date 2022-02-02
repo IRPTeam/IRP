@@ -781,7 +781,7 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo");
+	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, TaxColumnExists");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
@@ -815,7 +815,7 @@ Function ChangeTaxRateExecute(Options) Export
 				ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
 			EndIf;
 			If ArrayOfTaxRates.Count() Then
-				Result[ItemOfTaxInfo.Name] = ArrayOfTaxRates[0].TaxRate;
+				Result.Insert(ItemOfTaxInfo.Name, ArrayOfTaxRates[0].TaxRate);
 			EndIf;
 		EndIf;
 	EndDo;

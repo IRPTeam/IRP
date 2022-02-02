@@ -530,7 +530,9 @@ EndProcedure
 
 Procedure OnOpenFormNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
 		DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
@@ -561,7 +563,9 @@ EndProcedure
 
 Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
@@ -589,7 +593,9 @@ Procedure OnSetItemListItemKey(Parameters) Export
 	// Документы у которых есть серийные номера
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
 		SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form);
 	EndIf;
 EndProcedure
@@ -697,14 +703,18 @@ Procedure OnSetItemListQuantityInBaseUnit(Parameters) Export
 	// Update -> SrialLotNubersTree
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 	
 	// Update -> RowIDInfoQuantity
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" 
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
 	

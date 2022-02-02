@@ -1,8 +1,33 @@
 #Region FormEvents
 
 &AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+	DocStockAdjustmentAsSurplusServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+
+	DocStockAdjustmentAsSurplusServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	DocStockAdjustmentAsSurplusClient.OnOpen(Object, ThisObject, Cancel);
+EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocStockAdjustmentAsSurplusClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
 &AtClient
@@ -23,45 +48,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 EndProcedure
 
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability(Object, ThisObject);
-	EndIf;
-
-	DocStockAdjustmentAsSurplusServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-EndProcedure
-
-&AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocStockAdjustmentAsSurplusServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure OnOpen(Cancel)
-	DocStockAdjustmentAsSurplusClient.OnOpen(Object, ThisObject, Cancel);
-EndProcedure
-
-&AtClient
-Procedure AfterWrite(WriteParameters)
-	DocStockAdjustmentAsSurplusClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
-EndProcedure
-
-&AtClient
-Procedure ItemListBeforeDeleteRow(Item, Cancel)
-	DocStockAdjustmentAsSurplusClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
-EndProcedure
-
-
-&AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-	DocStockAdjustmentAsSurplusServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-EndProcedure
-
-&AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtClient
@@ -75,11 +64,22 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 EndProcedure
 
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
 #EndRegion
 
 &AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocStockAdjustmentAsSurplusClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocStockAdjustmentAsSurplusClient.ItemListOnChange(Object, ThisObject, Item);
+	Return;
+	//DocStockAdjustmentAsSurplusClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -89,7 +89,8 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocStockAdjustmentAsSurplusClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+	Return;
+	//DocStockAdjustmentAsSurplusClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient

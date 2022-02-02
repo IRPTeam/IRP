@@ -8,6 +8,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
+	
+	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export

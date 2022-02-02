@@ -1560,6 +1560,8 @@ Function ItemListItemStepsBinding(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "ItemListItemStepsEnabler");
 	Binding.Insert("GoodsReceipt"        , "ItemListItemStepsEnabler");
+	Binding.Insert("StockAdjustmentAsSurplus" , "ItemListItemStepsEnabler");
+	Binding.Insert("StockAdjustmentAsWriteOff", "ItemListItemStepsEnabler");
 	Binding.Insert("SalesInvoice"        , "ItemListItemStepsEnabler");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
@@ -1599,6 +1601,8 @@ Function ItemListItemKeyStepsBinding(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
 	Binding.Insert("GoodsReceipt"        , "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
+	Binding.Insert("StockAdjustmentAsSurplus" , "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
+	Binding.Insert("StockAdjustmentAsWriteOff", "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
 	Binding.Insert("SalesInvoice"        , "ItemListItemKeyStepsEnabler_Trade_Shipment");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction

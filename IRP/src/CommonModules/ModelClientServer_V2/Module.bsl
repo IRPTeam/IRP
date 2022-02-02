@@ -894,7 +894,11 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("QuantityInBaseUnit" , Options.QuantityOptions.QuantityInBaseUnit);
 	
 	If Options.CalculateQuantityInBaseUnit.Enable Then
-		UnitFactor = GetItemInfo.GetUnitFactor(Options.QuantityOptions.ItemKey, Options.QuantityOptions.Unit);
+		If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
+			UnitFactor = 0;
+		Else
+			UnitFactor = GetItemInfo.GetUnitFactor(Options.QuantityOptions.ItemKey, Options.QuantityOptions.Unit);
+		EndIf;
 		Result.QuantityInBaseUnit = Options.QuantityOptions.Quantity * UnitFactor;
 	EndIf;
 	

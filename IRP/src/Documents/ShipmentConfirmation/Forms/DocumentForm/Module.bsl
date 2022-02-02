@@ -77,6 +77,7 @@ EndProcedure
 #EndRegion
 
 #Region Store
+
 &AtClient
 Procedure StoreOnChange(Item)
 	DocShipmentConfirmationClient.StoreOnChange(Object, ThisObject, Item);

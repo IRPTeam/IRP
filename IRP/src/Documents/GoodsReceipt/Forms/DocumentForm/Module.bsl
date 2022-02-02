@@ -2,7 +2,7 @@
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	SetVisibilityAvailability(CurrentObject, ThisObject);
+	SetVisibilityAvailability(Object, ThisObject);
 	DocGoodsReceiptServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 EndProcedure
 

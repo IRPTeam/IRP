@@ -7,6 +7,9 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 IsUsedNewFunctionality = TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
 	Or TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation")
 	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
+	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsSurplus")
+	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsWriteOff")
+	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
 	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice");
 //===
 

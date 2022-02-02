@@ -78,7 +78,8 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocStockAdjustmentAsWriteOffClient.ItemListOnChange(Object, ThisObject, Item);
+	Return;
+	//DocStockAdjustmentAsWriteOffClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -94,7 +95,8 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocStockAdjustmentAsWriteOffClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+	Return;
+	//DocStockAdjustmentAsWriteOffClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient

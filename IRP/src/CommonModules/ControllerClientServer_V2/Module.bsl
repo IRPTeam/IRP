@@ -702,11 +702,39 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 	Options.CurrentDeliveryDate = GetPropertyForm(Parameters, "DeliveryDate");
 	Chain.ChangeDeliveryDateByAgreement.Options.Add(Options);
 	
+	// RequireCallCreateTaxesFormControls
+	Chain.RequireCallCreateTaxesFormControls.Enable = True;
+	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
+	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
+	Options.Ref            = Parameters.Object.Ref;
+	Options.Date           = GetPropertyObject(Parameters, "Date");
+	Options.Company        = GetPropertyObject(Parameters, "Company");
+	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
+	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
+	
 	// ChangePriceByPriceType
 	Chain.ChangePriceByPriceType.Enable = True;
 	Chain.ChangePriceByPriceType.Setter = "SetItemListPrice";
 	
+	// ChangeTaxRate
+	Chain.ChangeTaxRate.Enable = True;
+	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
+	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Company   = GetPropertyObject(Parameters, "Company");
+	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
+	TaxRates = Undefined;
+	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
+		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
+		TaxRates = New Structure();
+		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
+		EndDo;
+	EndIf;
+	
 	For Each Row In GetRows(Parameters, "ItemList") Do
+		// ChangePriceByPriceType
 		Options = ModelClientServer_V2.ChangePriceByPriceTypeOptions();
 		Options.Ref          = Parameters.Object.Ref;
 		Options.Date         = GetPropertyObject(Parameters, "Date");
@@ -716,6 +744,24 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 		Options.Unit         = GetPropertyObject(Parameters, "ItemList.Unit"     , Row.Key);
 		Options.Key          = Row.Key;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
+		
+		// ChangeTaxRate
+		Options = ModelClientServer_V2.ChangeTaxRateOptions();
+		Options.Date      = Options_Date;
+		Options.Company   = Options_Company;
+		Options.Agreement = Options_Agreement;
+		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		
+		If TaxRates <> Undefined Then
+			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+				SetProperty(Parameters.Cache, "ItemList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
+			EndDo;
+			Row.Insert("TaxRates", TaxRates);
+		EndIf;
+		
+		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
+		Options.Key = Row.Key;
+		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 	
 	// UpdatePaymentTerms

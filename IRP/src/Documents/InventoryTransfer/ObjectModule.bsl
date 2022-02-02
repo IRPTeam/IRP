@@ -36,6 +36,11 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_094, "UseGoodsReceipt");
 		Cancel = True;
 	EndIf;
+	
+	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
+		Cancel = True;
+	EndIf;
+	
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_IT(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();

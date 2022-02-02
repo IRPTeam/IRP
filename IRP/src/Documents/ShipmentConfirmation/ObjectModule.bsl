@@ -59,6 +59,11 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 	
+	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
+		Cancel = True;
+	EndIf;
+	
+	
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_SC(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();

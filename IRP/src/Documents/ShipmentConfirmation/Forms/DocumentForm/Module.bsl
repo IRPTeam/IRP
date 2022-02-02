@@ -26,7 +26,7 @@ EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters)
-	DocShipmentConfirmationClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);	
+	DocShipmentConfirmationClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
 &AtClient
@@ -38,7 +38,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-	
+
 	If EventName = "LockLinkedRows" Then
 		If Source <> ThisObject Then
 			LockLinkedRows();
@@ -123,31 +123,13 @@ Procedure ItemListOnStartEdit(Item, NewRow, Clone)
 EndProcedure
 
 &AtClient
-Procedure ItemListStoreOnChange(Item)
-	DocShipmentConfirmationClient.ItemListStoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ItemListItemOnChange(Item)
 	DocShipmentConfirmationClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocShipmentConfirmationClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
-EndProcedure
-
-&AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocShipmentConfirmationClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
-//	CurrentRow = Items.ItemList.CurrentData;
-//	If CurrentRow = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdateUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 &AtClient
@@ -158,6 +140,17 @@ EndProcedure
 &AtClient
 Procedure ItemListUnitOnChange(Item)
 	DocShipmentConfirmationClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
+	DocShipmentConfirmationClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	DocShipmentConfirmationClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #Region ItemCompany
@@ -332,6 +325,8 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	EndIf;
 	ThisObject.Modified = True;
 	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, ThisObject);
 EndProcedure
 
 &AtServer

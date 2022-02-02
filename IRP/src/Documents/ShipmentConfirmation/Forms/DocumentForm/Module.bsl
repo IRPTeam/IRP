@@ -62,9 +62,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 
-	PartnerVisible = (Object.TransactionType = PredefinedValue(
-		"Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor") Or Object.TransactionType = PredefinedValue(
-		"Enum.ShipmentConfirmationTransactionTypes.Sales"));
+	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor") 
+		Or Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales"));
 	Form.Items.LegalName.Enabled = PartnerVisible And ValueIsFilled(Object.Partner);
 	Form.Items.Partner.Visible   = PartnerVisible;
 	Form.Items.LegalName.Visible = PartnerVisible;
@@ -92,7 +91,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocShipmentConfirmationClient.ItemListOnChange(Object, ThisObject, Item);
+	//DocShipmentConfirmationClient.ItemListOnChange(Object, ThisObject, Item);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -109,7 +108,13 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnActivateRow(Item)
-	DocShipmentConfirmationClient.ItemListOnActivateRow(Object, ThisObject, Item);
+	Return;
+	//DocShipmentConfirmationClient.ItemListOnActivateRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocShipmentConfirmationClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
@@ -119,7 +124,8 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocShipmentConfirmationClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+	Return;
+	//DocShipmentConfirmationClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient
@@ -140,6 +146,11 @@ EndProcedure
 &AtClient
 Procedure ItemListUnitOnChange(Item)
 	DocShipmentConfirmationClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListStoreOnChange(Item)
+	DocShipmentConfirmationClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient

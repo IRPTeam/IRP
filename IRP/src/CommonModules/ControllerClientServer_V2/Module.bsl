@@ -370,7 +370,10 @@ Procedure AddNewRow(TableName, Parameters) Export
 	EndIf;
 EndProcedure
 
-Procedure DeleteRows(TableName, Parameters) Export
+Procedure DeleteRows(TableName, Parameters, ViewNotify = Undefined) Export
+	If ViewNotify <> Undefined Then
+		AddViewNotify(ViewNotify, Parameters);
+	EndIf;
 	For Each DepTableName In Parameters.ObjectMetadataInfo.DependencyTables Do
 		ArrayForDelete = New Array();
 		For Each Row In Parameters.Object[DepTableName] Do
@@ -391,12 +394,13 @@ EndProcedure
 Function ListOnDeleteStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation", "ItemListOnDeleteStepsEnabler_Shipment");
+	Binding.Insert("ShipmentConfirmation", "ItemListOnDeleteStepsEnabler_ShipmentReceipt");
+	Binding.Insert("GoodsReceipt"        , "ItemListOnDeleteStepsEnabler_ShipmentReceipt");
 	Binding.Insert("SalesInvoice"        , "ItemListOnDeleteStepsEnabler_Trade_Shipment");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure ItemListOnDeleteStepsEnabler_Shipment(Parameters, Chain) Export
+Procedure ItemListOnDeleteStepsEnabler_ShipmentReceipt(Parameters, Chain) Export
 	// ChangeStoreInHeaderByStoresInList
 	Chain.ChangeStoreInHeaderByStoresInList.Enable = True;
 	Chain.ChangeStoreInHeaderByStoresInList.Setter = "SetStore";
@@ -800,6 +804,7 @@ Function PartnerStepsBinding(Parameters)
 	DataPath = "Partner";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "PartnerStepsEnabler_Warehouse");
+	Binding.Insert("GoodsReceipt"        , "PartnerStepsEnabler_Warehouse");
 	Binding.Insert("SalesInvoice"        , "PartnerStepsEnabler_Trade_PartnerIsCustomer");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
@@ -1007,8 +1012,8 @@ EndProcedure
 Function StoreDefaultBinding(Parameters)
 	DataPath = "Store";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation", "StoreDefault_Shipment");
-	Binding.Insert("GoodsReceipt"        , "StoreDefault_Shipment");
+	Binding.Insert("ShipmentConfirmation", "StoreDefault_ShipmentReceipt");
+	Binding.Insert("GoodsReceipt"        , "StoreDefault_ShipmentReceipt");
 
 	Binding.Insert("SalesInvoice"   , "StoreDefault_Trade");
 	Binding.Insert("PurchaseInvoice", "StoreDefault_Trade");
@@ -1036,7 +1041,7 @@ Function StoreStepsBinding(Parameters)
 	Return BindSteps("StoreStepsEnabler", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure StoreDefault_Shipment(Parameters, Chain) Export
+Procedure StoreDefault_ShipmentReceipt(Parameters, Chain) Export
 	// DefaultStoreInHeader
 	Chain.DefaultStoreInHeader.Enable = True;
 	Chain.DefaultStoreInHeader.Setter = "SetStore";
@@ -1139,7 +1144,7 @@ Function ItemListStoreSptepsBinding(Parameters)
 	DataPath = "ItemList.Store";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "ItemListStoreStepsEnabler_HaveStoreInHeader");
-	Binding.Insert("GoodsReceitp"        , "ItemListStoreStepsEnabler_HaveStoreInHeader");
+	Binding.Insert("GoodsReceipt"        , "ItemListStoreStepsEnabler_HaveStoreInHeader");
 
 	Binding.Insert("SalesInvoice"   , "ItemListStoreStepsEnabler_HaveUseShipmentConfirmationInList");
 	Binding.Insert("PurchaseInvoice", "ItemListStoreStepsEnabler_HaveUseGoodsReceiptInList");
@@ -1554,6 +1559,7 @@ Function ItemListItemStepsBinding(Parameters)
 	DataPath = "ItemList.Item";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "ItemListItemStepsEnabler");
+	Binding.Insert("GoodsReceipt"        , "ItemListItemStepsEnabler");
 	Binding.Insert("SalesInvoice"        , "ItemListItemStepsEnabler");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
@@ -1591,12 +1597,13 @@ EndProcedure
 Function ItemListItemKeyStepsBinding(Parameters)
 	DataPath = "ItemList.ItemKey";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation", "ItemListItemKeyStepsEnabler_Warehouse_Shipment");
+	Binding.Insert("ShipmentConfirmation", "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
+	Binding.Insert("GoodsReceipt"        , "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
 	Binding.Insert("SalesInvoice"        , "ItemListItemKeyStepsEnabler_Trade_Shipment");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure ItemListItemKeyStepsEnabler_Warehouse_Shipment(Parameters, Chain) Export
+Procedure ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt(Parameters, Chain) Export
 	Chain.ChangeUnitByItemKey.Enable = True;
 	Chain.ChangeUnitByItemKey.Setter = "SetItemListUnit";
 	For Each Row In GetRows(Parameters, "ItemList") Do

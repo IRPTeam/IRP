@@ -6,6 +6,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 //===
 IsUsedNewFunctionality = TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
 	Or TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation")
+	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
 	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice");
 //===
 
@@ -40,35 +41,35 @@ IsUsedNewFunctionality = TypeOf(Source) = Type("DocumentObject.IncomingPaymentOr
 			EndIf;
 		EndDo;
 	
-	ReadOnlyProperties = "";
-	Source.AdditionalProperties.Property("ReadOnlyProperties", ReadOnlyProperties);
+		ReadOnlyProperties = "";
+		Source.AdditionalProperties.Property("ReadOnlyProperties", ReadOnlyProperties);
 	
-	// если документ был введен на основании то у него уже есть заполненные реквизиты
-	// список этих реквизитов в ReadOnlyProperties
-	// нужно для каждого уже заполненного реквизита вызвать его обработчик
+		// если документ был введен на основании то у него уже есть заполненные реквизиты
+		// список этих реквизитов в ReadOnlyProperties
+		// нужно для каждого уже заполненного реквизита вызвать его обработчик
 	
-	ArrayOfProperties = StrSplit(ReadOnlyProperties, ",");
+		ArrayOfProperties = StrSplit(ReadOnlyProperties, ",");
 	
-	For Each TableName In ArrayOfMainTables Do
+		For Each TableName In ArrayOfMainTables Do
 		
-		For Each PropertyName In ArrayOfProperties Do
-			If Not ValueIsFilled(PropertyName) Then
-				Continue;
-			EndIf;
-			DataPath = StrSplit(PropertyName, ".");
-			If DataPath.Count() = 1 Then // для табличных частей пока не реализовано
-				Property = New Structure("DataPath", TrimAll(DataPath[0]));
+			For Each PropertyName In ArrayOfProperties Do
+				If Not ValueIsFilled(PropertyName) Then
+					Continue;
+				EndIf;
+				DataPath = StrSplit(PropertyName, ".");
+				If DataPath.Count() = 1 Then // для табличных частей пока не реализовано
+					Property = New Structure("DataPath", TrimAll(DataPath[0]));
 				
-				ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
-				ServerParameters.TableName          = TableName;
-				ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
-				Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+					ServerParameters.TableName          = TableName;
+					ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
+					Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 				
-				ControllerClientServer_V2.API_SetProperty(Parameters, Property, Source[Property.DataPath]);
-			EndIf;
+					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Source[Property.DataPath]);
+				EndIf;
+			EndDo;
+		
 		EndDo;
-		
-	EndDo;
 	EndIf; // IsUsedNewFunctionality 
 	//==
 	

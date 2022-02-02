@@ -1479,6 +1479,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.Store</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListStoreOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListStoreExtendedTooltip</name>
             <id>66</id>
@@ -2042,6 +2046,10 @@
         <handlers>
           <event>Selection</event>
           <name>ItemListSelection</name>
+        </handlers>
+        <handlers>
+          <event>BeforeAddRow</event>
+          <name>ItemListBeforeAddRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>

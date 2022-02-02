@@ -197,7 +197,8 @@ Procedure OnChainComplete(Parameters) Export
 	
 	// изменение склада (реквизит шапки) в шапке документа
 	If Parameters.EventCaller = "StoreOnUserChange" Then
-		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
+		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
 			If  NeedQueryStoreOnUserChange(Parameters) Then
 				// Вопрос про изменение склада в табличной части
 				NotifyParameters = New Structure("Parameters", Parameters);
@@ -209,7 +210,8 @@ Procedure OnChainComplete(Parameters) Export
 		EndIf;
 	// изменение склада в табличной части ItemList
 	ElsIf Parameters.EventCaller = "ItemListStoreOnUserChange" Then
-		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
+		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
 			If NeedCommitChangesItemListStoreOnUserChange(Parameters) Then
 				CommitChanges = True;
 			EndIf;
@@ -510,7 +512,7 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
 	Return NewRow;
 EndFunction
 
-Procedure DeleteRows(Object, Form, TableName)
+Procedure DeleteRows(Object, Form, TableName, ViewNotify = Undefined)
 	Parameters = GetSimpleParameters(Object, Form, TableName);
 	ControllerClientServer_V2.DeleteRows(TableName, Parameters);
 EndProcedure
@@ -527,7 +529,12 @@ Procedure OnOpen(Object, Form, TableNames) Export
 EndProcedure
 
 Procedure OnOpenFormNotify(Parameters) Export
-	Return;
+	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
+		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
+		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -549,7 +556,15 @@ Procedure ItemListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefi
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "ItemList");
+	DeleteRows(Object, Form, "ItemList", "ItemListAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
+		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -571,7 +586,10 @@ Procedure ItemListItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
 EndProcedure
 
 Procedure OnSetItemListItemKey(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+	// Документы у которых есть серийные номера
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
 		SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form);
 	EndIf;
 EndProcedure
@@ -676,13 +694,22 @@ Procedure OnSetItemListQuantityNotify(Parameters) Export
 EndProcedure
 
 Procedure OnSetItemListQuantityInBaseUnit(Parameters) Export
+	// Update -> SrialLotNubersTree
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
-		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+	EndIf;
+	
+	// Update -> RowIDInfoQuantity
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
 	
+	// Update -> TradeDocumentsTree
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
-		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
 			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 	EndIf;

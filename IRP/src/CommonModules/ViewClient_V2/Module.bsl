@@ -478,7 +478,9 @@ EndProcedure
 
 #EndRegion
 
-Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
+Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow, 
+															OnAddViewNotify = Undefined, 
+															OnCopyViewNotify = Undefined)
 	Cancel = True;
 	NewRow = Object[TableName].Add();
 	If Clone Then // Copy()
@@ -501,23 +503,29 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
 			ArrayOfExcludeProperties.Add("InternalLinks");
 		EndIf;
 		
+		If Parameters.ObjectMetadataInfo.DependencyTables.Find("SerialLotNumbers") <> Undefined Then
+			// эти колонки реквизиты формы
+			ArrayOfExcludeProperties.Add("SerialLotNumbersPresentation");
+			ArrayOfExcludeProperties.Add("SerialLotNumberIsFilling");
+		EndIf;
+		
 		FillPropertyValues(NewRow, OriginRows[0], ,StrConcat(ArrayOfExcludeProperties, ","));
 		
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
-		ControllerClientServer_V2.CopyRow(TableName, Parameters);
+		ControllerClientServer_V2.CopyRow(TableName, Parameters, OnCopyViewNotify);
 	Else // Add()
 		NewRow.Key = String(New UUID());
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
-		ControllerClientServer_V2.AddNewRow(TableName, Parameters);
+		ControllerClientServer_V2.AddNewRow(TableName, Parameters, OnAddViewNotify);
 	EndIf;
 	Return NewRow;
 EndFunction
 
 Procedure DeleteRows(Object, Form, TableName, ViewNotify = Undefined)
 	Parameters = GetSimpleParameters(Object, Form, TableName);
-	ControllerClientServer_V2.DeleteRows(TableName, Parameters);
+	ControllerClientServer_V2.DeleteRows(TableName, Parameters, ViewNotify);
 EndProcedure
 
 #Region FORM
@@ -563,9 +571,18 @@ EndProcedure
 #Region _ITEM_LIST_
 
 Procedure ItemListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
-	NewRow = AddOrCopyRow(Object, Form, "ItemList", Cancel, Clone, CurrentData);
+	NewRow = AddOrCopyRow(Object, Form, "ItemList", Cancel, Clone, CurrentData,
+		"ItemListOnAddRowFormNotify", "ItemListOnCopyRowFormNotify");
 	Form.Items.ItemList.CurrentRow = NewRow.GetID();
 	Form.Items.ItemList.ChangeRow();
+EndProcedure
+
+Procedure ItemListOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ItemListOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form) Export
@@ -576,7 +593,8 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;

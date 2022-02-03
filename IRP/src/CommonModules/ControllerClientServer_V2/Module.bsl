@@ -339,7 +339,11 @@ EndFunction
 
 #Region _LIST_ADD
 
-Procedure AddNewRow(TableName, Parameters) Export
+Procedure AddNewRow(TableName, Parameters, ViewNotify) Export
+	If ViewNotify <> Undefined Then
+		AddViewNotify(ViewNotify, Parameters);
+	EndIf;
+	
 	NewRow = Parameters.Rows[0];
 	UserSettingsClientServer.FillingRowFromSettings(Parameters.Object, StrTemplate("Object.%1", TableName), NewRow, True);
 	Parameters.Insert("RowFilledByUserSettings", NewRow);

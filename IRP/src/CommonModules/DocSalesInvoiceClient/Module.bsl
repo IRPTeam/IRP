@@ -85,9 +85,10 @@ ViewClient_V2.OnOpen(Object, Form, "ItemList");
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
-	If EventName = "CalculationStringsComplete" Then
-		DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
-	EndIf;
+	Return;
+//	If EventName = "CalculationStringsComplete" Then
+//		DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
+//	EndIf;
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export

@@ -2186,6 +2186,7 @@ Procedure ItemListTotalAmountStepsEnabler(Parameters, Chain) Export
 		Options = ModelClientServer_V2.ChangePriceTypeAsManualOptions();
 		Options.IsTotalAmountChange = True;
 		Options.CurrentPriceType = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
+		Options.DontCalculateRow = GetPropertyObject(Parameters, "ItemList.DontCalculateRow", Row.Key);
 		Options.Key = Row.Key;
 		Chain.ChangePriceTypeAsManual.Options.Add(Options);
 	EndDo;

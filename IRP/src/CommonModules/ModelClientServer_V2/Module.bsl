@@ -396,10 +396,15 @@ EndFunction
 #Region CHANGE_PRICE_TYPE_AS_MANUAL
 
 Function ChangePriceTypeAsManualOptions() Export
-	Return GetChainLinkOptions("IsUserChange, IsTotalAmountChange, CurrentPriceType");
+	Return GetChainLinkOptions("IsUserChange, IsTotalAmountChange, CurrentPriceType, DontCalculateRow");
 EndFunction
 
 Function ChangePriceTypeAsManualExecute(Options) Export
+	// если это изменение TotalAmount и установлена галочка DontCalculateRow, менять тип цены не нужно
+	If Options.DontCalculateRow = True And Options.IsTotalAmountChange = True Then
+		Return Options.CurrentPriceType;
+	EndIf;
+	
 	If Options.IsUserChange = True Or Options.IsTotalAmountChange = True Then
 		Return PredefinedValue("Catalog.PriceTypes.ManualPriceType");
 	Else

@@ -503,6 +503,9 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
 		
 		FillPropertyValues(NewRow, OriginRows[0], ,StrConcat(ArrayOfExcludeProperties, ","));
 		
+		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
+		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+		ControllerClientServer_V2.CopyRow(TableName, Parameters);
 	Else // Add()
 		NewRow.Key = String(New UUID());
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);

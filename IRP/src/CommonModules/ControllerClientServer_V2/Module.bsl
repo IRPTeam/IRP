@@ -337,6 +337,8 @@ EndFunction
 
 #Region _LIST_
 
+#Region _LIST_ADD
+
 Procedure AddNewRow(TableName, Parameters) Export
 	NewRow = Parameters.Rows[0];
 	UserSettingsClientServer.FillingRowFromSettings(Parameters.Object, StrTemplate("Object.%1", TableName), NewRow, True);
@@ -369,6 +371,10 @@ Procedure AddNewRow(TableName, Parameters) Export
 		CommitChainChanges(Parameters);
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region _LIST_DELETE
 
 Procedure DeleteRows(TableName, Parameters, ViewNotify = Undefined) Export
 	If ViewNotify <> Undefined Then
@@ -447,6 +453,45 @@ Procedure ItemListOnDeleteStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 	Options.TotalAmount = TotalAmount;
 	Chain.UpdatePaymentTerms.Options.Add(Options);
 EndProcedure
+
+#EndRegion
+
+#Region _LIST_COPY
+
+Procedure CopyRow(TableName, Parameters, ViewNotify = Undefined) Export
+	If ViewNotify <> Undefined Then
+		AddViewNotify(ViewNotify, Parameters);
+	EndIf;
+	// выполняем обработчики после копирования строки
+	Binding = ListOnCopyStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// <TableName>.OnCopy.Bind
+Function ListOnCopyStepsBinding(Parameters)
+	DataPath = "";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice"        , "ItemListOnCopyStepsEnabler_Trade_Shipment");
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure ItemListOnCopyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
+	// UpdatePaymentTerms
+	Chain.UpdatePaymentTerms.Enable = True;
+	Chain.UpdatePaymentTerms.Setter = "SetPaymentTerms";
+	Options = ModelClientServer_V2.UpdatePaymentTermsOptions();
+	Options.Date = GetPropertyObject(Parameters, "Date");
+	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
+	// нужны все строки таблицы
+	TotalAmount = 0;
+	For Each Row In Parameters.Object.ItemList Do
+		TotalAmount = TotalAmount + GetPropertyObject(Parameters, "ItemList.TotalAmount", Row.Key);
+	EndDo;
+	Options.TotalAmount = TotalAmount;
+	Chain.UpdatePaymentTerms.Options.Add(Options);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 

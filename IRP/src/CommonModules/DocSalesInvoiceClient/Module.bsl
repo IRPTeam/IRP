@@ -72,12 +72,12 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 //#If AtClient Then
 //	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 //#EndIf
-	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
-	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
-	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "ShipmentConfirmations");
-	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "ShipmentConfirmations", "ShipmentConfirmationsTree",
-		"QuantityInShipmentConfirmation");
+//	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+//	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
+//	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
+//	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "ShipmentConfirmations");
+//	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "ShipmentConfirmations", "ShipmentConfirmationsTree",
+//		"QuantityInShipmentConfirmation");
 		
 //
 ViewClient_V2.OnOpen(Object, Form, "ItemList");

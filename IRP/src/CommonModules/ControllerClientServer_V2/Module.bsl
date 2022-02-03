@@ -747,10 +747,11 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 		
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date      = Options_Date;
-		Options.Company   = Options_Company;
-		Options.Agreement = Options_Agreement;
+		Options.Date           = Options_Date;
+		Options.Company        = Options_Company;
+		Options.Agreement      = Options_Agreement;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.Ref            = Parameters.Object.Ref;
 		
 		If TaxRates <> Undefined Then
 			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
@@ -848,10 +849,11 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date      = Options_Date;
-		Options.Company   = Options_Company;
-		Options.Agreement = Options_Agreement;
+		Options.Date           = Options_Date;
+		Options.Company        = Options_Company;
+		Options.Agreement      = Options_Agreement;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.Ref            = Parameters.Object.Ref;
 		
 		If TaxRates <> Undefined Then
 			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
@@ -1409,10 +1411,11 @@ Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
 		
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date      = Options_Date;
-		Options.Company   = Options_Company;
-		Options.Agreement = Options_Agreement;
+		Options.Date           = Options_Date;
+		Options.Company        = Options_Company;
+		Options.Agreement      = Options_Agreement;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.Ref            = Parameters.Object.Ref;
 		
 		If TaxRates <> Undefined Then
 			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
@@ -1763,13 +1766,14 @@ Procedure ItemListItemKeyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 		
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date      = GetPropertyObject(Parameters, "Date");
-		Options.Company   = GetPropertyObject(Parameters, "Company");
-		Options.Agreement = GetPropertyObject(Parameters, "Agreement");
-		Options.ItemKey   = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.Date           = GetPropertyObject(Parameters, "Date");
+		Options.Company        = GetPropertyObject(Parameters, "Company");
+		Options.Agreement      = GetPropertyObject(Parameters, "Agreement");
+		Options.ItemKey        = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.Ref            = Parameters.Object.Ref;
 		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
-		Options.Key = Row.Key;
+		Options.Key            = Row.Key;
 		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 EndProcedure

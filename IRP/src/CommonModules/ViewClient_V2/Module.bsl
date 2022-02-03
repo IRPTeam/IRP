@@ -532,10 +532,18 @@ Procedure OnOpenFormNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
 		DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, 
+			"ShipmentConfirmations");
+		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
+			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 	EndIf;
 EndProcedure
 

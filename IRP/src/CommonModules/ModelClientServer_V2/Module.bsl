@@ -781,42 +781,59 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, TaxColumnExists");
+	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, Ref");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
+	// налоги которые учитываются по организации на дату документа
+	DocumentName = Options.Ref.Metadata().Name;
+	AllTaxes = TaxesServer.GetTaxesByCompany(Options.Date, Options.Company);
+	RequiredTaxes = New Array();
+	For Each ItemOfAllTaxes In AllTaxes Do
+		If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
+			RequiredTaxes.Add(ItemOfAllTaxes.Tax);
+		EndIf;
+	EndDo;
+	
 	Result = New Structure();
 	For Each TaxRate In Options.TaxRates Do
 		Result.Insert(TaxRate.Key, TaxRate.Value);
 	EndDo;
 	For Each ItemOfTaxInfo In Options.ArrayOfTaxInfo Do
-		If ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate") Then
-	
-			ArrayOfTaxRates = New Array();
-			If ValueIsFilled(Options.Agreement) Then
-				Parameters = New Structure();
-				Parameters.Insert("Date"      , Options.Date);
-				Parameters.Insert("Company"   , Options.Company);
-				Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
-				Parameters.Insert("Agreement" , Options.Agreement);
-				ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
-			EndIf;
+		If ItemOfTaxInfo.Type <> PredefinedValue("Enum.TaxType.Rate") Then
+			Continue;
+		EndIf;
+		
+		// Если налог не учитывается организацией то очистим ставку налога TaxRate = Undefined
+		If RequiredTaxes.Find(ItemOfTaxInfo.Tax) = Undefined Then
+			Result.Insert(ItemOfTaxInfo.Name, Undefined);
+			Continue;
+		EndIf;
+		
+		ArrayOfTaxRates = New Array();
+		If ValueIsFilled(Options.Agreement) Then
+			Parameters = New Structure();
+			Parameters.Insert("Date"      , Options.Date);
+			Parameters.Insert("Company"   , Options.Company);
+			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
+			Parameters.Insert("Agreement" , Options.Agreement);
+			ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
+		EndIf;
 
-			If Not ArrayOfTaxRates.Count() Then
-				Parameters = New Structure();
-				Parameters.Insert("Date"    , Options.Date);
-				Parameters.Insert("Company" , Options.Company);
-				Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
-				If ValueIsFilled(Options.ItemKey) Then
-					Parameters.Insert("ItemKey", Options.ItemKey);
-				Else
-					Parameters.Insert("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
-				EndIf;
-				ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
+		If Not ArrayOfTaxRates.Count() Then
+			Parameters = New Structure();
+			Parameters.Insert("Date"    , Options.Date);
+			Parameters.Insert("Company" , Options.Company);
+			Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
+			If ValueIsFilled(Options.ItemKey) Then
+				Parameters.Insert("ItemKey", Options.ItemKey);
+			Else
+				Parameters.Insert("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
 			EndIf;
-			If ArrayOfTaxRates.Count() Then
-				Result.Insert(ItemOfTaxInfo.Name, ArrayOfTaxRates[0].TaxRate);
-			EndIf;
+			ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
+		EndIf;
+		If ArrayOfTaxRates.Count() Then
+			Result.Insert(ItemOfTaxInfo.Name, ArrayOfTaxRates[0].TaxRate);
 		EndIf;
 	EndDo;
 		

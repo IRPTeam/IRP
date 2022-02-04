@@ -891,8 +891,6 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
 	
-	// TEST{
-	
 	// ChangeTaxRate
 	Chain.ChangeTaxRate.Enable = True;
 	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
@@ -900,6 +898,7 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 	Options_Date      = GetPropertyObject(Parameters, "Date");
 	Options_Company   = GetPropertyObject(Parameters, "Company");
 	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
+	
 	TaxRates = Undefined;
 	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
 		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
@@ -917,6 +916,7 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 		Options.Agreement      = Options_Agreement;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
 		Options.Ref            = Parameters.Object.Ref;
+		Options.ChangeOnlyWhenAgreementIsFilled = True;
 		
 		If TaxRates <> Undefined Then
 			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
@@ -925,11 +925,10 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 			Row.Insert("TaxRates", TaxRates);
 		EndIf;
 		
-		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
+		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
 		Options.Key = Row.Key;
 		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
-	// }TEST
 EndProcedure
 
 #EndRegion

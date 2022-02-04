@@ -801,10 +801,20 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, Ref");
+	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, Ref, 
+		|ChangeOnlyWhenAgreementIsFilled");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
+	Result = New Structure();
+	For Each TaxRate In Options.TaxRates Do
+		Result.Insert(TaxRate.Key, TaxRate.Value);
+	EndDo;
+	
+	If Options.ChangeOnlyWhenAgreementIsFilled = True And Not ValueIsFilled(Options.Agreement) Then
+		Return Result;
+	EndIf;
+	
 	// налоги которые учитываются по организации на дату документа
 	DocumentName = Options.Ref.Metadata().Name;
 	AllTaxes = TaxesServer.GetTaxesByCompany(Options.Date, Options.Company);
@@ -815,10 +825,6 @@ Function ChangeTaxRateExecute(Options) Export
 		EndIf;
 	EndDo;
 	
-	Result = New Structure();
-	For Each TaxRate In Options.TaxRates Do
-		Result.Insert(TaxRate.Key, TaxRate.Value);
-	EndDo;
 	For Each ItemOfTaxInfo In Options.ArrayOfTaxInfo Do
 		If ItemOfTaxInfo.Type <> PredefinedValue("Enum.TaxType.Rate") Then
 			Continue;

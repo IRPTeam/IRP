@@ -407,6 +407,7 @@ Scenario: _004 creating Sales invoice by last date and checking the mechanism fo
 			And I move to "Other" tab
 			And I input "13.08.2021 16:53:01" text in "Date" field
 			And I move to the next attribute
+			And Delay 10
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "9 100" text in "Number" field

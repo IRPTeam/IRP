@@ -329,7 +329,7 @@ Procedure __tmp_OnChainComplite(Parameters)
 	EndIf;
 	
 	Changes = IsChangedTaxRates(Parameters);
-	If Changes.IsChanged Then
+	If Changes.IsChanged And Not Parameters.EventCaller = "CompanyOnUserChange" Then
 		// вопрос при перезаполнении TaxRates
 		ChangedPoints.Insert("IsChangedTaxRates");
 		QuestionsParameters.Add(New Structure("Action, QuestionText",
@@ -904,9 +904,9 @@ EndProcedure
 Procedure StoreOnChange(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do
 		FormParameters = GetFormParameters(Form);
-		FormParameters.EventCaller = "StoreOnUserChange";
 		ExtractValueBeforeChange_Form("Store", FormParameters);
-	
+		FormParameters.EventCaller = "StoreOnUserChange";
+		
 		ServerParameters = GetServerParameters(Object);
 		ServerParameters.TableName = TableName;
 	
@@ -937,9 +937,9 @@ EndProcedure
 Procedure DeliveryDateOnChange(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do
 		FormParameters = GetFormParameters(Form);
-		FormParameters.EventCaller = "DeliveryDateOnUserChange";
 		ExtractValueBeforeChange_Form("DeliveryDate", FormParameters);
-	
+		FormParameters.EventCaller = "DeliveryDateOnUserChange";
+		
 		ServerParameters = GetServerParameters(Object);
 		ServerParameters.TableName = TableName;
 	

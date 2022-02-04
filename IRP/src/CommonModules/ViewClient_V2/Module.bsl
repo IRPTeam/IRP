@@ -245,9 +245,7 @@ EndFunction
 
 Procedure StoreOnUserChangeContinue(Answer, NotifyPrameters) Export
 	If Answer = DialogReturnCode.Yes Then
-		ControllerClientServer_V2.CommitChainChanges(NotifyPrameters.Parameters);
-		UpdateCacheBeforeChange(NotifyPrameters.Parameters.Object,
-								NotifyPrameters.Parameters.Form);
+		CommitChanges(NotifyPrameters.Parameters);
 	EndIf;
 EndProcedure
 
@@ -360,10 +358,11 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	If Not Answer.Property("UpdateStores") And ChangedPoints.Property("IsChangedItemListStore") Then
 		RemoveFromCacheItemListStore(Parameters);
 	EndIf;
-	If Not Answer.Property("UpdatePriceTypes") And ChangedPoints.Property("IsChangedItemListPriceTypes") Then
+	If Not Answer.Property("UpdatePriceTypes") And ChangedPoints.Property("IsChangedItemListPriceType") Then
 		RemoveFromCacheItemListPriceType(Parameters);
 		NeedRecalculate = True;
 	EndIf;
+	
 	If Not Answer.Property("UpdatePrices") And ChangedPoints.Property("IsChangedItemListPrice") Then
 		RemoveFromCacheItemListPrice(Parameters);
 		NeedRecalculate = True;

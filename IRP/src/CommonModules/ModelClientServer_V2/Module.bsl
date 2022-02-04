@@ -54,6 +54,8 @@ EndFunction
 Function GetChainLinkOptions(StrOptions)
 	Options = New Structure();
 	Options.Insert("Key");
+	Options.Insert("StepsEnablerName"); // for debug only
+	Options.Insert("DontExecuteIfExecutedBefore", False);
 	Segments = StrSplit(StrOptions, ",");
 	For Each Segment In Segments Do
 		If ValueIsFilled(Segment) Then
@@ -70,15 +72,28 @@ Function GetChainLinkResult(Options, Value)
 	Return Result;
 EndFunction
 
+Function IsAlreadyExecutedStep(Parameters, Name, Key)
+	For Each Step In Parameters.ModelInveronment.AlreadyExecutedSteps Do
+		If Upper(Step.Name) = Upper(Name) And Upper(Step.Key) = Upper(Key) Then
+			Return True;
+		EndIf;
+	EndDo;
+	Return False;
+EndFunction
+
 Procedure ExecuteChain(Parameters, Chain)
 	For Each ChainLink in Chain Do
 		Name = ChainLink.Key;
 		If Chain[Name].Enable Then
 			Results = New Array();
 			For Each Options In Chain[Name].Options Do
+				If Options.DontExecuteIfExecutedBefore And IsAlreadyExecutedStep(Parameters, Name, Options.Key) Then
+					Continue;
+				EndIf;
 				Result = Undefined;
 				Execute StrTemplate("Result = %1(Options)", Chain[Name].ExecutorName);
 				Results.Add(GetChainLinkResult(Options, Result));
+				Parameters.ModelInveronment.AlreadyExecutedSteps.Add(New Structure("Name, Key", Name, Options.Key));
 			EndDo;
 			Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
 		EndIf;
@@ -1154,8 +1169,9 @@ EndProcedure
 Procedure InitEntryPoint(StepsEnablerName, Parameters)
 	If Not Parameters.Property("ModelInveronment") Then
 		Inveronment = New Structure();
-		Inveronment.Insert("FirstStepsEnablerName", StepsEnablerName);
+		Inveronment.Insert("FirstStepsEnablerName"  , StepsEnablerName);
 		Inveronment.Insert("StepsEnablerNameCounter", New Array());
+		Inveronment.Insert("AlreadyExecutedSteps"   , New Array());
 		Parameters.Insert("ModelInveronment", Inveronment)
 	EndIf;
 EndProcedure

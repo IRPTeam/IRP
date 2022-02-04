@@ -733,6 +733,8 @@ Function DateStepsBinding(Parameters)
 EndFunction
 
 Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
+	StepsEnablerName = "DateStepsEnabler_Trade_PartnerIsCustomer";
+	
 	// ChangeAgreementByPartner
 	Chain.ChangeAgreementByPartner.Enable = True;
 	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
@@ -762,6 +764,10 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
 	
+	// ChangePriceTypeByAgreement
+	Chain.ChangePriceTypeByAgreement.Enable = True;
+	Chain.ChangePriceTypeByAgreement.Setter = "SetItemListPriceType";
+	
 	// ChangePriceByPriceType
 	Chain.ChangePriceByPriceType.Enable = True;
 	Chain.ChangePriceByPriceType.Setter = "SetItemListPrice";
@@ -783,15 +789,23 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 	EndIf;
 	
 	For Each Row In GetRows(Parameters, "ItemList") Do
+		// ChangePriceTypeByAgreement
+		Options = ModelClientServer_V2.ChangePriceTypeByAgreementOptions();
+		Options.Agreement = Options_Agreement;
+		Options.Key = Row.Key;
+		Chain.ChangePriceTypeByAgreement.Options.Add(Options);
+		
 		// ChangePriceByPriceType
 		Options = ModelClientServer_V2.ChangePriceByPriceTypeOptions();
 		Options.Ref          = Parameters.Object.Ref;
-		Options.Date         = GetPropertyObject(Parameters, "Date");
+		Options.Date         = Options_Date;
 		Options.CurrentPrice = GetPropertyObject(Parameters, "ItemList.Price", Row.Key);
 		Options.PriceType    = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
 		Options.ItemKey      = GetPropertyObject(Parameters, "ItemList.ItemKey"  , Row.Key);
 		Options.Unit         = GetPropertyObject(Parameters, "ItemList.Unit"     , Row.Key);
 		Options.Key          = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Options.DontExecuteIfExecutedBefore = True;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
 		
 		// ChangeTaxRate
@@ -1893,10 +1907,14 @@ Function ItemListPriceTypeStepsBinding(Parameters)
 EndFunction
 
 Procedure ItemListPriceTypeStepsEnabler(Parameters, Chain) Export
+	StepsEnablerName = "ItemListPriceTypeStepsEnabler";
+	
+	// ChangePriceByPriceType
 	Chain.ChangePriceByPriceType.Enable = True;
 	Chain.ChangePriceByPriceType.Setter = "SetItemListPrice";
 	
 	For Each Row In GetRows(Parameters, "ItemList") Do
+		// ChangePriceByPriceType
 		Options = ModelClientServer_V2.ChangePriceByPriceTypeOptions();
 		Options.Ref          = Parameters.Object.Ref;
 		Options.Date         = GetPropertyObject(Parameters, "Date");
@@ -1905,6 +1923,7 @@ Procedure ItemListPriceTypeStepsEnabler(Parameters, Chain) Export
 		Options.ItemKey      = GetPropertyObject(Parameters, "ItemList.ItemKey"  , Row.Key);
 		Options.Unit         = GetPropertyObject(Parameters, "ItemList.Unit"     , Row.Key);
 		Options.Key          = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
 	EndDo;
 EndProcedure

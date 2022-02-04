@@ -1181,7 +1181,9 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 
 	Object 	= AddInfo.Object;
 	Form 	= AddInfo.Form;
-
+	
+	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
+	
 	Settings = New Structure();
 	Settings.Insert("Rows", New Array());
 	CalculationSettings = New Structure();
@@ -1198,8 +1200,51 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
 
 	FilterStructure = New Structure(FilterString);
+	
+	//=== 
+	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") Then
+		For Each ResultElement In Result Do
+			FillPropertyValues(FilterStructure, ResultElement);
+			ExistingRows = Object.ItemList.FindRows(FilterStructure);
+			If ExistingRows.Count() Then
+				Row = ExistingRows[0];
+				ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
+			Else
+				Row = ViewClient_V2.ItemListBeforeAddRow(Object, Form);
+				
+				ViewClient_V2.SetItemListItem(Object    , Form, Row, ResultElement.Item);
+				ViewClient_V2.SetItemListItemKey(Object , Form, Row, ResultElement.ItemKey);
+				ViewClient_V2.SetItemListUnit(Object    , Form, Row, ResultElement.Unit);
+				ViewClient_V2.SetItemListQuantity(Object, Form, Row, ResultElement.Quantity);
+				
+				If ResultElement.Property("Price") And CommonFunctionsClientServer.ObjectHasProperty(Row, "Price") Then
+					ViewClient_V2.SetItemListPrice(Object, Form, Row, ResultElement.Price); 
+				EndIf;
+			EndIf;
+			
+			If UseSerialLotNumbers Then
+				If ValueIsFilled(ResultElement.SerialLotNumber) Then
+					SerialLotNumbersArray = New Array();
+					SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
+					SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
+					SerialLotNumbers.Quantity = 1;
+					SerialLotNumbersArray.Add(SerialLotNumbers);
+					SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
 
-	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
+					SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
+				ElsIf ResultElement.UseSerialLotNumber Then
+					Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
+				EndIf;
+				SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
+			EndIf;
+			
+		EndDo;
+		
+		Return;
+	EndIf;
+	//===
+	
+	
 
 	Row = Undefined;
 	For Each ResultElement In Result Do

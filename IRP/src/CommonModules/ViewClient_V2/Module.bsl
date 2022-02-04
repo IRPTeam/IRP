@@ -570,12 +570,13 @@ EndProcedure
 
 #Region _ITEM_LIST_
 
-Procedure ItemListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+Function ItemListBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
 	NewRow = AddOrCopyRow(Object, Form, "ItemList", Cancel, Clone, CurrentData,
 		"ItemListOnAddRowFormNotify", "ItemListOnCopyRowFormNotify");
 	Form.Items.ItemList.CurrentRow = NewRow.GetID();
 	Form.Items.ItemList.ChangeRow();
-EndProcedure
+	Return NewRow;
+EndFunction
 
 Procedure ItemListOnAddRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
@@ -611,10 +612,28 @@ Procedure ItemListItemOnChange(Object, Form, CurrentData = Undefined) Export
 	ControllerClientServer_V2.ItemListItemOnChange(Parameters);
 EndProcedure
 
+// ItemList.Item.Set
+Procedure SetItemListItem(Object, Form, Row, Value) Export
+	Row.Item = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgrammChange", True);
+	ControllerClientServer_V2.ItemListItemOnChange(Parameters);
+EndProcedure
+
 // ItemList.ItemKey
 Procedure ItemListItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListItemKeyOnChange(Parameters);
+EndProcedure
+
+// ItemList.ItemKey.Set
+Procedure SetItemListItemKey(Object, Form, Row, Value) Export
+	Row.ItemKey = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgrammChange", True);
 	ControllerClientServer_V2.ItemListItemKeyOnChange(Parameters);
 EndProcedure
 
@@ -636,6 +655,15 @@ Procedure ItemListUnitOnChange(Object, Form, CurrentData = Undefined) Export
 	ControllerClientServer_V2.ItemListUnitOnChange(Parameters);
 EndProcedure
 
+// ItemList.Unit.Set
+Procedure SetItemListUnit(Object, Form, Row, Value) Export
+	Row.Unit = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgrammChange", True);
+	ControllerClientServer_V2.ItemListUnitOnChange(Parameters);
+EndProcedure
+
 // ItemList.TaxRate
 Procedure ItemListTaxRateOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
@@ -654,6 +682,15 @@ EndProcedure
 Procedure ItemListPriceOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListPriceOnChange(Parameters);
+EndProcedure
+
+// ItemList.Price.Set
+Procedure SetItemListPrice(Object, Form, Row, Value) Export
+	Row.Price = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgrammChange", True);
 	ControllerClientServer_V2.ItemListPriceOnChange(Parameters);
 EndProcedure
 
@@ -721,6 +758,15 @@ EndProcedure
 Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
+EndProcedure
+
+// ItemList.Quantity.Set
+Procedure SetItemListQuantity(Object, Form, Row, Value) Export
+	Row.Quantity = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgrammChange", True);
 	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
 EndProcedure
 

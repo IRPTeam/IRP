@@ -339,7 +339,7 @@ EndFunction
 
 #Region _LIST_ADD
 
-Procedure AddNewRow(TableName, Parameters, ViewNotify) Export
+Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined) Export
 	If ViewNotify <> Undefined Then
 		AddViewNotify(ViewNotify, Parameters);
 	EndIf;
@@ -2671,6 +2671,10 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 EndFunction
 
 Function IsUserChange(Parameters)
+	If Parameters.Property("IsProgrammChange") And Parameters.IsProgrammChange Then
+		Return False; // Is programm change via scan barcode or other external forms
+	EndIf;
+	
 	If Parameters.Property("ModelInveronment")
 		And Parameters.ModelInveronment.Property("StepsEnablerNameCounter") Then
 		Return Parameters.ModelInveronment.StepsEnablerNameCounter.Count() = 1;

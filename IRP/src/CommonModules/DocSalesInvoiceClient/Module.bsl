@@ -869,7 +869,13 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 EndProcedure
 
 Procedure SearchByBarcode(Barcode, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Barcode, Object, Form, , Form.CurrentPriceType);
+	PriceType = Undefined;
+	If ValueIsFilled(Object.Agreement) Then
+		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
+		PriceType = AgreementInfo.PriceType;
+	EndIf;
+	DocumentsClient.SearchByBarcode(Barcode, Object, Form, , PriceType);
+	//DocumentsClient.SearchByBarcode(Barcode, Object, Form, , Form.CurrentPriceType);
 EndProcedure
 
 #EndRegion

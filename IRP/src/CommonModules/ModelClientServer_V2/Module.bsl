@@ -892,6 +892,10 @@ Function CalculationsOptions() Export
 	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit");
 	Options.Insert("QuantityOptions", QuantityOptions);
 	
+	// SpecialOffers columns: Key, Offer, Amount, Percent
+	OffersOptions = New Structure("SpecialOffers", New Array());
+	Options.Insert("OffersOptions", OffersOptions);
+	
 	Options.Insert("CalculateTotalAmount"            , New Structure("Enable", False));
 	Options.Insert("CalculateTotalAmountByNetAmount" , New Structure("Enable", False));
 	
@@ -908,6 +912,8 @@ Function CalculationsOptions() Export
 
 	Options.Insert("CalculateQuantityInBaseUnit" , New Structure("Enable", False));
 	
+	Options.Insert("CalculateSpecialOffers" , New Structure("Enable", False));
+	
 	Return Options;
 EndFunction
 
@@ -922,10 +928,6 @@ Function CalculationsExecute(Options) Export
 //		RecalculateAppliedOffers(Object, ItemRow, AddInfo);
 //	EndIf;
 
-//	If Actions.Property("CalculateSpecialOffers") Then //
-//		CalculateSpecialOffers(Object, ItemRow, AddInfo);
-//	EndIf;
-	
 	Result = New Structure();
 	Result.Insert("NetAmount"    , Options.AmountOptions.NetAmount);
 	Result.Insert("OffersAmount" , Options.AmountOptions.OffersAmount);
@@ -936,6 +938,16 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("TaxList"      , New Array());
 	Result.Insert("QuantityInBaseUnit" , Options.QuantityOptions.QuantityInBaseUnit);
 	
+	// CalculateSpecialOffers
+	If Options.CalculateSpecialOffers.Enable Then
+		TotalOffers = 0;
+		For Each Row In Options.OffersOptions.SpecialOffers Do
+			TotalOffers = TotalOffers + Row.Amount;
+		EndDo;
+		Result.OffersAmount = TotalOffers;
+	EndIf;
+	
+	// CalculateQuantityInBaseUnit
 	If Options.CalculateQuantityInBaseUnit.Enable Then
 		If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
 			UnitFactor = 0;

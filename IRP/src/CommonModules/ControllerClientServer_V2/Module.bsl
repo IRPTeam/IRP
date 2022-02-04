@@ -83,13 +83,15 @@ Function CreateParameters(ServerParameters, FormParameters)
 	ArrayOfTableNames = New Array();
 	ArrayOfTableNames.Add(ServerParameters.TableName);
 	ArrayOfTableNames.Add("TaxList");
+	ArrayOfTableNames.Add("SpecialOffers");
 	
 	// MetadataName
 	// Tables.TableName.Columns
 	// DependencyTables
 	ObjectMetadataInfo = ViewServer_V2.GetObjectMetadataInfo(ServerParameters.Object, StrConcat(ArrayOfTableNames, ","));
-	Parameters.Insert("ObjectMetadataInfo", ObjectMetadataInfo);
-	Parameters.Insert("TaxListIsExists", ObjectMetadataInfo.Tables.Property("TaxList"));
+	Parameters.Insert("ObjectMetadataInfo"    , ObjectMetadataInfo);
+	Parameters.Insert("TaxListIsExists"       , ObjectMetadataInfo.Tables.Property("TaxList"));
+	Parameters.Insert("SpecialOffersIsExists" , ObjectMetadataInfo.Tables.Property("SpecialOffers"));
 	
 	
 	Parameters.Insert("ArrayOfTaxInfo", New Array());
@@ -151,8 +153,19 @@ Function CreateParameters(ServerParameters, FormParameters)
 			EndIf;
 		EndDo;
 		
-		NewRow.Insert("TaxRates", TaxRates);
-		NewRow.Insert("TaxList" , ArrayOfRowsTaxList);
+		// SpecialOffers
+		ArrayOfRowsSpecialOffers = New Array();
+		If Parameters.SpecialOffersIsExists Then
+			For Each SpecialOfferRow In ServerParameters.Object.SpecialOffers.FindRows(New Structure("Key", Row.Key)) Do
+				NewRowSpecialOffer = New Structure(ObjectMetadataInfo.Tables.SpecialOffers.Columns);
+				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
+				ArrayOfRowsSpecialOffers.Add(NewRowSpecialOffer);
+			EndDo;
+		EndIf;
+		
+		NewRow.Insert("TaxRates"      , TaxRates);
+		NewRow.Insert("TaxList"       , ArrayOfRowsTaxList);
+		NewRow.Insert("SpecialOffers" , ArrayOfRowsSpecialOffers);
 	EndDo;
 	
 	If ArrayOfRows.Count() Then
@@ -1631,6 +1644,27 @@ EndProcedure
 
 #EndRegion
 
+#Region OFFERS
+
+// Offers.OnChange
+Procedure OffersOnChange(Parameters) Export
+	Binding = OffersStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PriceIncludeTax.Bind
+Function OffersStepsBinding(Parameters)
+	DataPath = "Offers";
+	Binding = New Structure();
+	Return BindSteps("OffersStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure OffersStepsEnabler(Parameters, Chain) Export
+	ItemListEnableCalculations(Parameters, Chain, "IsOffersChanged");
+EndProcedure
+
+#EndRegion
+
 #Region PAYMENT_LIST
 
 #Region PAYMENT_LIST_PARTNER
@@ -2260,11 +2294,12 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		// нужно пересчитать NetAmount, TotalAmount, TaxAmount, OffersAmount
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
-			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "RecalculationsAfterQuestionToUser"
-			Or WhoIsChanged = "RecalculationsOnCopy" Then
-			Options.CalculateNetAmount.Enable   = True;
-			Options.CalculateTotalAmount.Enable = True;
-			Options.CalculateTaxAmount.Enable   = True;
+			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "IsOffersChanged"
+			Or WhoIsChanged = "RecalculationsAfterQuestionToUser" Or WhoIsChanged = "RecalculationsOnCopy" Then
+			Options.CalculateNetAmount.Enable     = True;
+			Options.CalculateTotalAmount.Enable   = True;
+			Options.CalculateTaxAmount.Enable     = True;
+			Options.CalculateSpecialOffers.Enable = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// при изменении TotalAmount налоги расчитываются в обратную сторону, меняется NetAmount и Price
 			Options.CalculateTaxAmountReverse.Enable   = True;
@@ -2295,6 +2330,8 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
 		Options.TaxOptions.TaxRates         = GetItemListTaxRate(Parameters, Row);
 		Options.TaxOptions.TaxList          = Row.TaxList;
+		
+		Options.OffersOptions.SpecialOffers = Row.SpecialOffers;
 		
 		Options.Key = Row.Key;
 		

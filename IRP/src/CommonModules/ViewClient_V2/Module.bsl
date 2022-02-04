@@ -1100,3 +1100,13 @@ EndProcedure
 
 #EndRegion
 
+#Region OFFERS
+	
+Procedure OffersOnChange(Object, Form) Export
+	Parameters = GetSimpleParameters(Object, Form, "ItemList");
+	ControllerClientServer_V2.OffersOnChange(Parameters);
+EndProcedure
+	
+#EndRegion
+
+

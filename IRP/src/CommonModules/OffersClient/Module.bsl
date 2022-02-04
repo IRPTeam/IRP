@@ -31,11 +31,13 @@ Procedure SpecialOffersEditFinish_ForDocument(OffersInfo, Object, Form, AddInfo 
 
 	CalculationStringsClientServer.RecalculateAppliedOffers_ForRow(Object);
 
-	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
-		CalculationStringsClientServer.GetCalculationSettings(), TaxesClient.GetArrayOfTaxInfo(Form));
+	//CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
+	//	CalculationStringsClientServer.GetCalculationSettings(), TaxesClient.GetArrayOfTaxInfo(Form));
+	ViewClient_V2.OffersOnChange(Object, Form);
+	
 	Form.Modified = True;
 	Form.TaxAndOffersCalculated = True;
-
+	
 	ExecuteCallback(AddInfo);
 EndProcedure
 
@@ -58,10 +60,12 @@ Procedure SpecialOffersEditFinish_ForRow(OffersInfo, Object, Form, AddInfo = Und
 	If OffersInfo = Undefined Then
 		Return;
 	EndIf;
-	CalculationStringsClientServer.CalculateAndLoadOffers_ForRow(Object, OffersInfo.OffersAddress,
-		OffersInfo.ItemListRowKey);
-	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
-		CalculationStringsClientServer.GetCalculationSettings(), TaxesClient.GetArrayOfTaxInfo(Form));
+	CalculationStringsClientServer.CalculateAndLoadOffers_ForRow(Object, OffersInfo.OffersAddress, OffersInfo.ItemListRowKey);
+	
+	//CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
+	//	CalculationStringsClientServer.GetCalculationSettings(), TaxesClient.GetArrayOfTaxInfo(Form));
+	ViewClient_V2.OffersOnChange(Object, Form);
+	
 	Form.Modified = True;
 	ExecuteCallback(AddInfo);
 EndProcedure

@@ -1791,6 +1791,8 @@ Procedure ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt(Parameters, Chai
 EndProcedure
 
 Procedure ItemListItemKeyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
+	StepsEnablerName = "ItemListItemKeyStepsEnabler_Trade_Shipment";
+	
 	// ChangeUnitByItemKey
 	Chain.ChangeUnitByItemKey.Enable = True;
 	Chain.ChangeUnitByItemKey.Setter = "SetItemListUnit";
@@ -1803,40 +1805,72 @@ Procedure ItemListItemKeyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 	Chain.ChangePriceTypeByAgreement.Enable = True;
 	Chain.ChangePriceTypeByAgreement.Setter = "SetItemListPriceType";
 	
+	
+	// ChangePriceByPriceType
+	Chain.ChangePriceByPriceType.Enable = True;
+	Chain.ChangePriceByPriceType.Setter = "SetItemListPrice";
+	
 	// ChangeTaxRate
 	Chain.ChangeTaxRate.Enable = True;
 	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
 	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
+	Options_Company   = GetPropertyObject(Parameters, "Company");
+	
 	For Each Row In GetRows(Parameters, "ItemList") Do
+		
+		Options_ItemKey   = GetPropertyObject(Parameters, "ItemList.ItemKey"  , Row.Key);
+		Options_Store     = GetPropertyObject(Parameters, "ItemList.Store"    , Row.Key);
+		Options_Price     = GetPropertyObject(Parameters, "ItemList.Price"    , Row.Key);
+		Options_PriceType = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
+		Options_Unit      = GetPropertyObject(Parameters, "ItemList.Unit"     , Row.Key);
+		
 		// ChangeUnitByItemKey
 		Options = ModelClientServer_V2.ChangeUnitByItemKeyOptions();
-		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.ItemKey = Options_ItemKey;
 		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeUnitByItemKey.Options.Add(Options);
 		
 		// ChangeUseShipmentConfirmationByStore
 		Options = ModelClientServer_V2.ChangeUseShipmentConfirmationByStoreOptions();
-		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
-		Options.Store   = GetPropertyObject(Parameters, "ItemList.Store"  , Row.Key);
+		Options.ItemKey = Options_ItemKey;
+		Options.Store   = Options_Store;
 		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeUseShipmentConfirmationByStore.Options.Add(Options);
 		
 		// ChangePriceTypeByAgreement
 		Options = ModelClientServer_V2.ChangePriceTypeByAgreementOptions();
-		Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+		Options.Agreement = Options_Agreement;
 		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangePriceTypeByAgreement.Options.Add(Options);
 		
+		// ChangePriceByPriceType
+		Options = ModelClientServer_V2.ChangePriceByPriceTypeOptions();
+		Options.Ref          = Parameters.Object.Ref;
+		Options.Date         = Options_Date;
+		Options.CurrentPrice = Options_Price;
+		Options.PriceType    = Options_PriceType;
+		Options.ItemKey      = Options_ItemKey;
+		Options.Unit         = Options_Unit;
+		Options.Key          = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangePriceByPriceType.Options.Add(Options);
+	
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date           = GetPropertyObject(Parameters, "Date");
-		Options.Company        = GetPropertyObject(Parameters, "Company");
-		Options.Agreement      = GetPropertyObject(Parameters, "Agreement");
-		Options.ItemKey        = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.Date           = Options_Date;
+		Options.Company        = Options_Company;
+		Options.Agreement      = Options_Agreement;
+		Options.ItemKey        = Options_ItemKey;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
 		Options.Ref            = Parameters.Object.Ref;
 		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
 		Options.Key            = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 EndProcedure

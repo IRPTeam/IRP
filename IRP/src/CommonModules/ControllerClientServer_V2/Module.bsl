@@ -1898,6 +1898,7 @@ Procedure ItemListItemKeyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 		Options.Unit         = Options_Unit;
 		Options.Key          = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
+		Options.DontExecuteIfExecutedBefore = True;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
 	
 		// ChangeTaxRate

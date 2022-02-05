@@ -949,6 +949,10 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
 			And I select current line in "List" table
+			#-> new step
+			Then "Update item list info" window is opened
+			And I click "OK" button
+			#<-
 		* Tax calculation check
 			And "ItemList" table contains lines
 				| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |

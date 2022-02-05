@@ -838,6 +838,7 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 		
 		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
 		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 	
@@ -893,6 +894,8 @@ Procedure CompanyStepsEnabler_Cash(Parameters, Chain) Export
 EndProcedure
 
 Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
+	StepsEnablerName = "CompanyStepsEnabler_WithTaxes";
+	
 	// RequireCallCreateTaxesFormControls
 	Chain.RequireCallCreateTaxesFormControls.Enable = True;
 	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
@@ -940,6 +943,7 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 		
 		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
 		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -1449,6 +1453,8 @@ Function AgreementStepsBinding(Parameters)
 EndFunction
 
 Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
+	StepsEnablerName = "AgreementStepsEnabler_Trade";
+	
 	// ChangeCompanyByAgreement
 	Chain.ChangeCompanyByAgreement.Enable = True;
 	Chain.ChangeCompanyByAgreement.Setter = "SetCompany";
@@ -1501,6 +1507,7 @@ Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
 		
 		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
 		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 	

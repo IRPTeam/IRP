@@ -147,7 +147,8 @@ Function GetChain()
 	Chain.Insert("UpdatePaymentTerms" , GetChainLink("UpdatePaymentTermsExecute"));
 	
 	// Extractors
-	Chain.Insert("ExtractDataItemKeyIsService" , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
+	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
+	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
 	
 	Return Chain;
 EndFunction
@@ -182,6 +183,16 @@ Function ChangeItemKeyByItemExecute(Options) Export
 	EndIf;
 	Return CatItemsServer.GetItemKeyByItem(Options.Item);
 EndFunction
+
+//---
+Function ExtractDataItemKeysWithSerialLotNumbersOptions() Export
+	Return GetChainLinkOptions("ItemKey");
+EndFunction
+
+Function ExtractDataItemKeysWithSerialLotNumbersExecute(Options) Export
+	Return ModelServer_V2.ExtractDataItemKeysWithSerialLotNumbersImp(Options.Itemkey);
+EndFunction
+//---
 
 // Для вычисления Unit нужен только ItemKey
 Function ChangeUnitByItemKeyOptions() Export

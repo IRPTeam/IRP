@@ -544,9 +544,16 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
-		DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
-		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
-		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+			
+			ServerData = Undefined;
+			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
+				ServerData = New Structure("ServerData", New Structure());
+				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
+			EndIf;
+			
+			DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
+			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object, ServerData);
+			SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
@@ -643,7 +650,12 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
-		SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form);
+			ServerData = Undefined;
+			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
+				ServerData = New Structure("ServerData", New Structure());
+				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
+			EndIf;
+			SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form, ServerData);
 	EndIf;
 EndProcedure
 

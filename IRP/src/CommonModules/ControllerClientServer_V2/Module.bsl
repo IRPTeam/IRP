@@ -343,8 +343,29 @@ EndProcedure
 Function FormOnOpenStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+	Binding.Insert("ShipmentConfirmation"      , "OnOpenStepsEnabler_WithSerialLotNumbers");
+	Binding.Insert("GoodsReceipt"              , "OnOpenStepsEnabler_WithSerialLotNumbers");
+	Binding.Insert("StockAdjustmentAsSurplus"  , "OnOpenStepsEnabler_WithSerialLotNumbers");
+	Binding.Insert("StockAdjustmentAsWriteOff" , "OnOpenStepsEnabler_WithSerialLotNumbers");
+	Binding.Insert("SalesInvoice"              , "OnOpenStepsEnabler_WithSerialLotNumbers");
+	Return BindSteps("StepsEnablerEmpty"       , DataPath, Binding, Parameters);
 EndFunction
+
+Procedure OnOpenStepsEnabler_WithSerialLotNumbers(Parameters, Chain) Export
+	StepsEnablerName = "OnOpenStepsEnabler_WithSerialLotNumbers";
+	
+	// ExtractDataItemKeysWithSerialLotNumbers
+	Chain.ExtractDataItemKeysWithSerialLotNumbers.Enable = True;
+	Chain.ExtractDataItemKeysWithSerialLotNumbers.Setter = "SetExtractDataItemKeysWithSerialLotNumbers";
+	For Each Row In Parameters.Object.ItemList Do
+		Options = ModelClientServer_V2.ExtractDataItemKeysWithSerialLotNumbersOptions();
+		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Options.DontExecuteIfExecutedBefore = True;
+		Chain.ExtractDataItemKeysWithSerialLotNumbers.Options.Add(Options);
+	EndDo;
+EndProcedure
 
 #EndRegion
 
@@ -493,6 +514,7 @@ Function ListOnCopyStepsBinding(Parameters)
 EndFunction
 
 Procedure ItemListOnCopyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
+	ItemListEnableCalculations(Parameters, Chain, "IsCopyRow");
 	// UpdatePaymentTerms
 	Chain.UpdatePaymentTerms.Enable = True;
 	Chain.UpdatePaymentTerms.Setter = "SetPaymentTerms";
@@ -509,6 +531,29 @@ Procedure ItemListOnCopyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region _EXTRACT_DATA_
+
+Procedure SetExtractDataItemKeyIsService(Parameters, Results) Export
+	Parameters.ExtractedData.Insert("DataItemKeyIsService", New Array());
+	For Each Result In Results Do
+		NewRow = New Structure();
+		NewRow.Insert("Key"       , Result.Options.Key);
+		NewRow.Insert("IsService" , Result.Value);
+		Parameters.ExtractedData.DataItemKeyIsService.Add(NewRow);
+	EndDo;
+EndProcedure
+
+Procedure SetExtractDataItemKeysWithSerialLotNumbers(Parameters, Results) Export
+	Parameters.ExtractedData.Insert("ItemKeysWithSerialLotNumbers", New Array());
+	For Each Result In Results Do
+		If Result.Value Then // have serial lot numbers
+			Parameters.ExtractedData.ItemKeysWithSerialLotNumbers.Add(Result.Options.ItemKey);
+		EndIf;
+	EndDo;
+EndProcedure
 
 #EndRegion
 
@@ -1389,16 +1434,6 @@ Procedure ItemListStoreStepsEnabler_HaveUseShipmentConfirmationInList(Parameters
 	EndDo;
 EndProcedure
 
-Procedure SetExtractDataItemKeyIsService(Parameters, Results) Export
-	Parameters.ExtractedData.Insert("DataItemKeyIsService", New Array());
-	For Each Result In Results Do
-		NewRow = New Structure();
-		NewRow.Insert("Key"       , Result.Options.Key);
-		NewRow.Insert("IsService" , Result.Value);
-		Parameters.ExtractedData.DataItemKeyIsService.Add(NewRow);
-	EndDo;
-EndProcedure
-
 Procedure ItemListStoreStepsEnabler_HaveUseGoodsReceiptInList(Parameters, Chain) Export
 	ItemListStoreStepsEnabler_HaveStoreInHeader(Parameters, Chain);
 	
@@ -1820,9 +1855,25 @@ Function ItemListItemKeyStepsBinding(Parameters)
 EndFunction
 
 Procedure ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt(Parameters, Chain) Export
+	StepsEnablerName = "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt";
+	
+	// ExtractDataItemKeysWithSerialLotNumbers
+	Chain.ExtractDataItemKeysWithSerialLotNumbers.Enable = True;
+	Chain.ExtractDataItemKeysWithSerialLotNumbers.Setter = "SetExtractDataItemKeysWithSerialLotNumbers";
+	For Each Row In Parameters.Object.ItemList Do
+		Options = ModelClientServer_V2.ExtractDataItemKeysWithSerialLotNumbersOptions();
+		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Options.DontExecuteIfExecutedBefore = True;
+		Chain.ExtractDataItemKeysWithSerialLotNumbers.Options.Add(Options);
+	EndDo;
+	
+	// ChangeUnitByItemKey
 	Chain.ChangeUnitByItemKey.Enable = True;
 	Chain.ChangeUnitByItemKey.Setter = "SetItemListUnit";
 	For Each Row In GetRows(Parameters, "ItemList") Do
+		// ChangeUnitByItemKey
 		Options = ModelClientServer_V2.ChangeUnitByItemKeyOptions();
 		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
 		Options.Key = Row.Key;
@@ -1832,6 +1883,18 @@ EndProcedure
 
 Procedure ItemListItemKeyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 	StepsEnablerName = "ItemListItemKeyStepsEnabler_Trade_Shipment";
+	
+	// ExtractDataItemKeysWithSerialLotNumbers
+	Chain.ExtractDataItemKeysWithSerialLotNumbers.Enable = True;
+	Chain.ExtractDataItemKeysWithSerialLotNumbers.Setter = "SetExtractDataItemKeysWithSerialLotNumbers";
+	For Each Row In Parameters.Object.ItemList Do
+		Options = ModelClientServer_V2.ExtractDataItemKeysWithSerialLotNumbersOptions();
+		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Options.DontExecuteIfExecutedBefore = True;
+		Chain.ExtractDataItemKeysWithSerialLotNumbers.Options.Add(Options);
+	EndDo;
 	
 	// ChangeUnitByItemKey
 	Chain.ChangeUnitByItemKey.Enable = True;
@@ -2303,6 +2366,7 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "IsOffersChanged"
+			Or WhoIsChanged = "IsCopyRow"
 			Or WhoIsChanged = "RecalculationsAfterQuestionToUser" Or WhoIsChanged = "RecalculationsOnCopy" Then
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;

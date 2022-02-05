@@ -1359,11 +1359,18 @@ Function PickupItemsParameters(Object, Form)
 		StoreArray = New Array();
 	EndTry;
 	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
-	Try
-		PriceType = Form.CurrentPriceType;
-	Except
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
+		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
+		PriceType = AgreementInfo.PriceType;
+	Else
 		PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
-	EndTry;
+	EndIf;
+	//Try
+	//	PriceType = Form.CurrentPriceType;
+	//Except
+	//	PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
+	//EndTry;
 
 	ReturnValue.Insert("Stores", StoreArray);
 	ReturnValue.Insert("EndPeriod", EndPeriod);

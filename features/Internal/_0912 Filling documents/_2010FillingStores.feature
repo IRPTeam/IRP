@@ -534,8 +534,6 @@ Scenario: _201006 check filling in Store field in the Goods receipt
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			And I input "" text in the field named "Store"
-			Then "1C:Enterprise" window is opened
-			And I click "No" button
 			And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |

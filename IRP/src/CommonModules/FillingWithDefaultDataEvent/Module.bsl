@@ -4,7 +4,9 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	EndIf;
 
 //===
-IsUsedNewFunctionality = TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
+IsUsedNewFunctionality =
+	   TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
+	Or TypeOf(Source) = Type("DocumentObject.BankPayment")
 	Or TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation")
 	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsSurplus")

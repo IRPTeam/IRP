@@ -1009,7 +1009,7 @@ Procedure DateStepsEnabler_BankPayment(Parameters, Chain) Export
 			Row.Insert("TaxRates", TaxRates);
 		EndIf;
 		
-		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
+		Options.TaxRates = GetPaymentListTaxRate(Parameters, Row);
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeTaxRate.Options.Add(Options);
@@ -1169,7 +1169,7 @@ Procedure CompanyStepsEnabler_BankPayment(Parameters, Chain) Export
 			Row.Insert("TaxRates", TaxRates);
 		EndIf;
 		
-		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
+		Options.TaxRates = GetPaymentListTaxRate(Parameters, Row);
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeTaxRate.Options.Add(Options);
@@ -1942,12 +1942,12 @@ Procedure PaymentListPartnerStepsEnabler_BankPayment(Parameters, Chain) Export
 	
 	// ChangeAgreementByPartner
 	Chain.ChangeAgreementByPartner.Enable = True;
-	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
+	Chain.ChangeAgreementByPartner.Setter = "SetPaymentListAgreement";
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options_Partner   = GetPropertyObject(Parameters, "PaymentList.Partner", Row.Key);
-		Options_LegalName = GetPropertyObject(Parameters, "PaymentList.Payee"  , Row.Key);
-		Options_Agreement = GetPropertyObject(Parameters, "Agreement", Row.Key);
+		Options_Partner   = GetPropertyObject(Parameters, "PaymentList.Partner"  , Row.Key);
+		Options_LegalName = GetPropertyObject(Parameters, "PaymentList.Payee"    , Row.Key);
+		Options_Agreement = GetPropertyObject(Parameters, "PaymentList.Agreement", Row.Key);
 		
 		// ChangeLegalNameByPartner
 		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
@@ -2004,7 +2004,7 @@ Procedure PaymentListAgreementStepsEnabler_BankPayment(Parameters, Chain) Export
 	
 	//ChangeOrderByAgreement
 	Chain.ChangeOrderByAgreement.Enable = True;
-	Chain.ChangeOrderByAgreement.Setter = "SetPaymentListBasisDocument";
+	Chain.ChangeOrderByAgreement.Setter = "SetPaymentListOrder";
 	
 	// ChangeTaxRate
 	Chain.ChangeTaxRate.Enable = True;
@@ -2055,7 +2055,7 @@ Procedure PaymentListAgreementStepsEnabler_BankPayment(Parameters, Chain) Export
 			Row.Insert("TaxRates", TaxRates);
 		EndIf;
 		
-		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
+		Options.TaxRates = GetPaymentListTaxRate(Parameters, Row);
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeTaxRate.Options.Add(Options);
@@ -2277,6 +2277,23 @@ Procedure SetPaymentListTaxRate(Parameters, Results) Export
 	EndDo;
 EndProcedure
 
+// PaymentList.TaxRate.Get
+Function GetPaymentListTaxRate(Parameters, Row)
+	TaxRates = New Structure();
+	// когда нет формы то колонки со ставками налогов только в кэше
+	// потому что колонки со ставками налога это реквизиты формы
+	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
+	For Each TaxRate In Row.TaxRates Do
+		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
+			TaxRates.Insert(TaxRate.Key, TaxRate.Value);
+		Else
+			TaxRates.Insert(TaxRate.Key, 
+				GetPropertyObject(Parameters, "PaymentList."+TaxRate.Key, Row.Key, ReadOnlyFromCache));
+		EndIf;
+	EndDo;
+	Return TaxRates;
+EndFunction
+
 // PaymentList.TaxRate.Bind
 Function PaymentListTaxRateStepsBinding(Parameters)
 	DataPath = "PaymentList.";
@@ -2426,7 +2443,7 @@ Procedure PaymentListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		Options.AmountOptions.TotalAmount      = GetPropertyObject(Parameters, "PaymentList.TotalAmount"  , Row.Key);
 		
 		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
-		Options.TaxOptions.TaxRates         = GetItemListTaxRate(Parameters, Row);
+		Options.TaxOptions.TaxRates         = GetPaymentListTaxRate(Parameters, Row);
 		Options.TaxOptions.TaxList          = Row.TaxList;
 		
 		Options.Key = Row.Key;
@@ -2927,7 +2944,7 @@ Procedure SetItemListTaxRate(Parameters, Results) Export
 	EndDo;
 EndProcedure
 
-// TaxRate.Get
+// ItemList.TaxRate.Get
 Function GetItemListTaxRate(Parameters, Row)
 	TaxRates = New Structure();
 	// когда нет формы то колонки со ставками налогов только в кэше

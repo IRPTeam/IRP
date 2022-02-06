@@ -8,8 +8,14 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		FillPaymentList(Object, Is);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-	Taxes_CreateFormControls(Form, Is);
-	CalculateTableAtServer(Form, Object, Is);
+	
+	// mvc
+	If Is.BankPayment Then
+		ViewServer_V2.OnCreateAtServer(Object, Form, "PaymentList");
+	Else
+		Taxes_CreateFormControls(Form, Is);
+		CalculateTableAtServer(Form, Object, Is);
+	EndIf;
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -32,6 +38,11 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 EndProcedure
 
 Procedure FillFormAttributes(Object, Form, Is)
+	// mvc
+	If Is.BankPayment Then
+		Return;
+	EndIf;
+	
 	If Is.BankPayment Or Is.BankReceipt Then
 		Form.CurrentCurrency        = Object.Currency;
 		Form.CurrentAccount         = Object.Account;
@@ -48,7 +59,7 @@ Procedure FillFormAttributes(Object, Form, Is)
 			Form.Currency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
 		EndIf;
 	EndIf;
-	//If Is.IncomingPaymentOrder Or Is.OutgoingPaymentOrder Then
+	
 	If Is.OutgoingPaymentOrder Then
 		If ValueIsFilled(Object.Account) And ValueIsFilled(Object.Account.Currency) 
 			And Not ValueIsFilled(Object.Currency) Then

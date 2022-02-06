@@ -245,7 +245,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 		ArrayOfFilters = AgreementParameters.ArrayOfFilters;
 	Else
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		If AgreementParameters.Property("AgreementType") Then
+		If AgreementParameters.Property("AgreementType") And ValueIsFilled(AgreementParameters.AgreementType) Then
 			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementParameters.AgreementType,
 				ComparisonType.Equal));
 		EndIf;

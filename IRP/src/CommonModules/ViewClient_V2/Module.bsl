@@ -833,16 +833,57 @@ EndProcedure
 
 #Region _PAYMENT_LIST_COLUMNS
 
+// PaymentList.Partner
 Procedure PaymentListPartnerOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	ControllerClientServer_V2.PaymentListPartnerOnChange(Parameters);
 EndProcedure
 
+// PaymentList.Agreement
+Procedure PaymentListAgreementOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListAgreementOnChange(Parameters);
+EndProcedure
+
+// PaymentList.LegalName
 Procedure PaymentListLegalNameOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	ControllerClientServer_V2.PaymentListLegalNameOnChange(Parameters);
+EndProcedure
+
+// PaymentList.BasisDocument
+Procedure PaymentListBasisDocumentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
+EndProcedure
+
+// PaymentList.BasisDocument.Set
+Procedure SetPaymentListBasisDocument(Object, Form, Row, Value) Export
+	Row.Item = Value;
+	Rows = GetRowsByCurrentData(Form, "PaymentList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.Insert("IsProgrammChange", True);
+	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
+EndProcedure
+
+// PaymentList.TotalAmount
+Procedure PaymentListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.PaymentListTotalAmountOnChange(Parameters);
+EndProcedure
+
+// PaymentList.TotalAmount.Set
+Procedure SetPaymentListTotalAmount(Object, Form, Row, Value) Export
+	Row.TotalAmount = Value;
+	Rows = GetRowsByCurrentData(Form, "PaymentList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.Insert("IsProgrammChange", True);
+	ControllerClientServer_V2.PaymentListTotalAmountOnChange(Parameters);
 EndProcedure
 
 #EndRegion

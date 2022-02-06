@@ -278,6 +278,28 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_BASIS_DOCUMENT_BY_AGREEMENT
+
+Function ChangeBasisDocumentByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement, CurrentBasisDocument");
+EndFunction
+
+Function ChangeBasisDocumentByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Undefined;
+	EndIf;
+	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
+		Return Undefined;
+	ElsIf Options.CurrentBasisDocument <> Undefined
+		And Not ServiceSystemServer.GetObjectAttribute(Options.CurrentBasisDocument, "Agreement") = Options.Agreement Then
+		Return Undefined;
+	EndIf;
+	Return Options.CurrentBasisDocument;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_MANAGER_SEGMENT_BY_PARTNER
 
 Function ChangeManagerSegmentByPartnerOptions() Export

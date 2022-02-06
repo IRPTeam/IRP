@@ -138,19 +138,21 @@ EndProcedure
 
 #EndRegion
 
-#Region TotalAmount
+#Region TOTAL_AMOUNT
 
 Procedure PaymentListTotalAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	ViewClient_V2.PaymentListTotalAmountOnChange(Object, Form);
+	
+//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 EndProcedure
 
-Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-	DocumentsClient.ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-EndProcedure
+//Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+//	DocumentsClient.ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+//EndProcedure
 
 #EndRegion
 
@@ -425,18 +427,20 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemBasisDocument
+#Region BASIS_DOCUMENT
 
 Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	If Not ValueIsFilled(CurrentData.BasisDocument) Then
-		CurrentData.BasisDocument = Undefined;
-	EndIf;
+	ViewClient_V2.PaymentListBasisDocumentOnChange(Object, Form);
+	
+//	CurrentData = Form.Items.PaymentList.CurrentData;
+//
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	If Not ValueIsFilled(CurrentData.BasisDocument) Then
+//		CurrentData.BasisDocument = Undefined;
+//	EndIf;
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -477,19 +481,22 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	Object = AdditionalParameters.Object;
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData <> Undefined Then
-		CurrentData.BasisDocument = Result.BasisDocument;
-		CurrentData.TotalAmount   = Result.Amount;
+		ViewClient_V2.SetPaymentListBasisDocument(Object, Form, CurrentData, Result.BasisDocument);
+		ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
 		
-		Settings = New Structure();
-		Settings.Insert("Rows", New Array());
-		Settings.Rows.Add(CurrentData);
-		
-		CalculationSettings = New Structure();
-		CalculationSettings.Insert("CalculateTaxByTotalAmount");
-		CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
-	
-		Settings.Insert("CalculateSettings", CalculationSettings);
-		CalculateItemsRows(Object, Form, Settings);
+//		CurrentData.BasisDocument = Result.BasisDocument;
+//		CurrentData.TotalAmount   = Result.Amount;
+//		
+//		Settings = New Structure();
+//		Settings.Insert("Rows", New Array());
+//		Settings.Rows.Add(CurrentData);
+//		
+//		CalculationSettings = New Structure();
+//		CalculationSettings.Insert("CalculateTaxByTotalAmount");
+//		CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+//	
+//		Settings.Insert("CalculateSettings", CalculationSettings);
+//		CalculateItemsRows(Object, Form, Settings);
 	EndIf;
 EndProcedure
 
@@ -668,29 +675,31 @@ EndProcedure
 
 #EndRegion
 
-#Region Agreement
+#Region AGREEMENT
 
 Procedure PaymentListAgreementOnChange(Object, Form, Item = Undefined) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
-
-	CurrentData.ApArPostingDetail = AgreementInfo.ApArPostingDetail;
-	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
-		CurrentData.BasisDocument = Undefined;
-	ElsIf CurrentData.BasisDocument <> Undefined 
-		And Not ServiceSystemServer.GetObjectAttribute(CurrentData.BasisDocument, "Agreement") = CurrentData.Agreement Then
-		CurrentData.BasisDocument = Undefined;
-	EndIf;
-	Settings = New Structure();
-	Settings.Insert("Rows", New Array());
-	Settings.Rows.Add(CurrentData);
-	Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
-	CalculateItemsRows(Object, Form, Settings);
+	ViewClient_V2.PaymentListAgreementOnChange(Object, Form);
+	
+//	CurrentData = Form.Items.PaymentList.CurrentData;
+//
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
+//
+//	CurrentData.ApArPostingDetail = AgreementInfo.ApArPostingDetail;
+//	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
+//		CurrentData.BasisDocument = Undefined;
+//	ElsIf CurrentData.BasisDocument <> Undefined 
+//		And Not ServiceSystemServer.GetObjectAttribute(CurrentData.BasisDocument, "Agreement") = CurrentData.Agreement Then
+//		CurrentData.BasisDocument = Undefined;
+//	EndIf;
+//	Settings = New Structure();
+//	Settings.Insert("Rows", New Array());
+//	Settings.Rows.Add(CurrentData);
+//	Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
+//	CalculateItemsRows(Object, Form, Settings);
 EndProcedure
 
 Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -766,13 +775,15 @@ EndProcedure
 
 #EndRegion
 
-#Region Payee
+#Region PAYEE
 
 Procedure PaymentListPayeeOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-	If ValueIsFilled(CurrentData.Payee) Then
-		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
-	EndIf;
+	ViewClient_V2.PaymentListLegalNameOnChange(Object, Form);
+	
+//	CurrentData = Form.Items.PaymentList.CurrentData;
+//	If ValueIsFilled(CurrentData.Payee) Then
+//		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
+//	EndIf;
 EndProcedure
 
 Procedure PaymentListPayeeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

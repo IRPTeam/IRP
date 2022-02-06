@@ -125,6 +125,8 @@ Function GetChain()
 	Chain.Insert("ChangeStoreByAgreement"       , GetChainLink("ChangeStoreByAgreementExecute"));
 	Chain.Insert("ChangeDeliveryDateByAgreement"       , GetChainLink("ChangeDeliveryDateByAgreementExecute"));
 	Chain.Insert("ChangePriceIncludeTaxByAgreement"    , GetChainLink("ChangePriceIncludeTaxByAgreementExecute"));
+	Chain.Insert("ChangeBasisDocumentByAgreement", GetChainLink("ChangeBasisDocumentByAgreementExecute"));
+	Chain.Insert("ChangeOrderByAgreement"        , GetChainLink("ChangeOrderByAgreementExecute"));
 	Chain.Insert("ChangeCashAccountByCompany"   , GetChainLink("ChangeCashAccountByCompanyExecute"));
 	Chain.Insert("ChangeTransitAccountByAccount", GetChainLink("ChangeTransitAccountByAccountExecute"));
 	
@@ -291,11 +293,30 @@ Function ChangeBasisDocumentByAgreementExecute(Options) Export
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
 		Return Undefined;
-	ElsIf Options.CurrentBasisDocument <> Undefined
+	ElsIf ValueIsFilled(Options.CurrentBasisDocument)
 		And Not ServiceSystemServer.GetObjectAttribute(Options.CurrentBasisDocument, "Agreement") = Options.Agreement Then
 		Return Undefined;
 	EndIf;
 	Return Options.CurrentBasisDocument;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_ORDER_BY_AGREEMENT
+
+Function ChangeOrderByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement, CurrentOrder");
+EndFunction
+
+Function ChangeOrderByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Undefined;
+	EndIf;
+	If ValueIsFilled(Options.CurrentOrder)
+		And Not ServiceSystemServer.GetObjectAttribute(Options.CurrentOrder, "Agreement") = Options.Agreement Then
+		Return Undefined;
+	EndIf;
+	Return Options.CurrentOrder;
 EndFunction
 
 #EndRegion

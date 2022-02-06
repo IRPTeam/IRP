@@ -820,9 +820,18 @@ EndProcedure
 #Region _PAYMENT_LIST_
 
 Procedure PaymentListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
-	NewRow = AddOrCopyRow(Object, Form, "PaymentList", Cancel, Clone, CurrentData);
+	NewRow = AddOrCopyRow(Object, Form, "PaymentList", Cancel, Clone, CurrentData,
+		"PaymentListOnAddRowFormNotify", "PaymentListOnCopyRowFormNotify");
 	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
 	Form.Items.PaymentList.ChangeRow();
+EndProcedure
+
+Procedure PaymentListOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure PaymentListOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
 EndProcedure
 
 Procedure PaymentListAfterDeleteRow(Object, Form) Export
@@ -863,11 +872,48 @@ EndProcedure
 
 // PaymentList.BasisDocument.Set
 Procedure SetPaymentListBasisDocument(Object, Form, Row, Value) Export
-	Row.Item = Value;
+	Row.BasisDocument = Value;
 	Rows = GetRowsByCurrentData(Form, "PaymentList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	Parameters.Insert("IsProgrammChange", True);
 	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
+EndProcedure
+
+// PaymentList.Order
+Procedure PaymentListOrderOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListOrderOnChange(Parameters);
+EndProcedure
+
+// PaymentList.Order.Set
+Procedure SetPaymentListOrder(Object, Form, Row, Value) Export
+	Row.Order = Value;
+	Rows = GetRowsByCurrentData(Form, "PaymentList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.Insert("IsProgrammChange", True);
+	ControllerClientServer_V2.PaymentListOrderOnChange(Parameters);
+EndProcedure
+
+// PaymentList.TaxRate
+Procedure PaymentListTaxRateOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListTaxRateOnChange(Parameters);
+EndProcedure
+
+// PaymentList.TaxAmount
+Procedure PaymentListTaxAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListTaxAmountOnChange(Parameters);
+EndProcedure
+
+// PaymentList.NetAmount
+Procedure PaymentListNetAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.PaymentListNetAmountOnChange(Parameters);
 EndProcedure
 
 // PaymentList.TotalAmount

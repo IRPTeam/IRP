@@ -122,19 +122,21 @@ EndProcedure
 
 #EndRegion
 
-#Region NetAmount
+#Region NET_AMOUNT
 
 Procedure PaymentListNetAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	DocumentsClient.ItemListCalculateRowAmounts_NetAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	ViewClient_V2.PaymentListNetAmountOnChange(Object, Form);
+	
+//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	DocumentsClient.ItemListCalculateRowAmounts_NetAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 EndProcedure
 
-Procedure ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-	DocumentsClient.ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-EndProcedure
+//Procedure ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+//	DocumentsClient.ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+//EndProcedure
 
 #EndRegion
 
@@ -156,39 +158,43 @@ EndProcedure
 
 #EndRegion
 
-#Region TaxAmount
+#Region TAX_AMOUNT
 
 Procedure ItemListTaxAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	DocumentsClient.ItemListCalculateRowAmounts_TaxAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	ViewClient_V2.PaymentListTaxAmountOnChange(Object, Form);
+	
+//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	DocumentsClient.ItemListCalculateRowAmounts_TaxAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 EndProcedure
 
-Procedure ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-	DocumentsClient.ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-EndProcedure
+//Procedure ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+//	DocumentsClient.ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+//EndProcedure
 
 #EndRegion
 
-#Region TaxValue
+#Region TAX_RATE
 
 Procedure ItemListTaxValueOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	DocumentsClient.ItemListCalculateRowAmounts_TaxValueChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	ViewClient_V2.PaymentListTaxRateOnChange(Object, Form);
+	
+//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	DocumentsClient.ItemListCalculateRowAmounts_TaxValueChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 EndProcedure
 
-Procedure ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-	DocumentsClient.ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-EndProcedure
+//Procedure ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+//	DocumentsClient.ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+//EndProcedure
 
 #EndRegion
 
-#Region PaymentList
+#Region PAYMENT_LIST
 
 Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
 	If Upper(Field.Name) = Upper("PaymentListTaxAmount") Then
@@ -204,60 +210,64 @@ Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardP
 	EndIf;
 EndProcedure
 
-Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	If Clone Then
-		CurrentData.Key = New UUID();
-		Settings = New Structure();
-
-		Settings.Insert("Rows", New Array());
-		Settings.Rows.Add(CurrentData);
-
-		Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
-		CalculateItemsRows(Object, Form, Settings);
-		Return;
-	EndIf;
-EndProcedure
+//Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
+//	CurrentData = Form.Items.PaymentList.CurrentData;
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	If Clone Then
+//		CurrentData.Key = New UUID();
+//		Settings = New Structure();
+//
+//		Settings.Insert("Rows", New Array());
+//		Settings.Rows.Add(CurrentData);
+//
+//		Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
+//		CalculateItemsRows(Object, Form, Settings);
+//		Return;
+//	EndIf;
+//EndProcedure
 
 Procedure PaymentListAfterDeleteRow(Object, Form, Item) Export
-	CalculationStringsClientServer.ClearDependentData(Object, New Structure("TableParent", "PaymentList"));
+	ViewClient_V2.PaymentListAfterDeleteRow(Object, Form);
+	
+	//CalculationStringsClientServer.ClearDependentData(Object, New Structure("TableParent", "PaymentList"));
 EndProcedure
 
-Procedure PaymentListOnChange(Object, Form, Item) Export
-	For Each Row In Object.PaymentList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
-EndProcedure
+//Procedure PaymentListOnChange(Object, Form, Item) Export
+//	For Each Row In Object.PaymentList Do
+//		If Not ValueIsFilled(Row.Key) Then
+//			Row.Key = New UUID();
+//		EndIf;
+//	EndDo;
+//EndProcedure
 
-Procedure PaymentListOnActivateRow(Object, Form, Item) Export
-	Return;
-EndProcedure
+//Procedure PaymentListOnActivateRow(Object, Form, Item) Export
+//	Return;
+//EndProcedure
 
 Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
-	If Clone Then
-		Return;
-	EndIf;
-	Cancel = True;
-	NewRow = Object.PaymentList.Add();
-	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
-	UserSettingsClientServer.FillingRowFromSettings(Object, "Object.PaymentList", NewRow, True);
-	Form.Items.PaymentList.ChangeRow();
-	PaymentListOnChange(Object, Form, Item);
-	If Not Saas.SeparationUsed() Then
-		NewRow.Partner = DocumentsServer.GetPartnerByLegalName(NewRow.Payee, NewRow.Partner);
-		PaymentListPartnerOnChange(Object, Form, Item);
-	EndIf;
+	ViewClient_V2.PaymentListBeforeAddRow(Object, Form, Cancel, Clone);
+	
+//	If Clone Then
+//		Return;
+//	EndIf;
+//	Cancel = True;
+//	NewRow = Object.PaymentList.Add();
+//	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+//	UserSettingsClientServer.FillingRowFromSettings(Object, "Object.PaymentList", NewRow, True);
+//	Form.Items.PaymentList.ChangeRow();
+//	PaymentListOnChange(Object, Form, Item);
+//	If Not Saas.SeparationUsed() Then
+//		NewRow.Partner = DocumentsServer.GetPartnerByLegalName(NewRow.Payee, NewRow.Partner);
+//		PaymentListPartnerOnChange(Object, Form, Item);
+//	EndIf;
 EndProcedure
 
-Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export
-	Return;
-EndProcedure
+//Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export
+//	Return;
+//EndProcedure
 
 #EndRegion
 
@@ -363,7 +373,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemOrder
+#Region _ORDER
 
 Procedure PaymentListOrderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	StandardProcessing = False;
@@ -407,20 +417,23 @@ Procedure PaymentListOrderStartChoiceEnd(Result, AdditionalParameters) Export
 	Object = AdditionalParameters.Object;
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData <> Undefined Then
-		CurrentData.Order       = Result.BasisDocument;
+		ViewClient_V2.SetPaymentListOrder(Object, Form, CurrentData, Result.BasisDocument);
+		//CurrentData.Order       = Result.BasisDocument;
 		If Not ValueIsFilled(CurrentData.BasisDocument) Then
-			CurrentData.TotalAmount = Result.Amount;
-		
-			Settings = New Structure();
-			Settings.Insert("Rows", New Array());
-			Settings.Rows.Add(CurrentData);
-		
-			CalculationSettings = New Structure();
-			CalculationSettings.Insert("CalculateTaxByTotalAmount");
-			CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
-	
-			Settings.Insert("CalculateSettings", CalculationSettings);
-			CalculateItemsRows(Object, Form, Settings);
+			ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
+			
+//			CurrentData.TotalAmount = Result.Amount;
+//		
+//			Settings = New Structure();
+//			Settings.Insert("Rows", New Array());
+//			Settings.Rows.Add(CurrentData);
+//		
+//			CalculationSettings = New Structure();
+//			CalculationSettings.Insert("CalculateTaxByTotalAmount");
+//			CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+//	
+//			Settings.Insert("CalculateSettings", CalculationSettings);
+//			CalculateItemsRows(Object, Form, Settings);
 		EndIf;
 	EndIf;
 EndProcedure
@@ -751,7 +764,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ExpenseType
+#Region EXPENSE_TYPE
 
 Procedure PaymentListExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	DocumentsClient.ExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
@@ -763,7 +776,7 @@ EndProcedure
 
 #EndRegion
 
-#Region FinancialMovementType
+#Region FINANCIAL_MOVEMENT_TYPE
 
 Procedure PaymentListFinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);

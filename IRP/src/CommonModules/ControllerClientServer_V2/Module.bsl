@@ -2002,6 +2002,10 @@ Procedure PaymentListAgreementStepsEnabler_BankPayment(Parameters, Chain) Export
 	Chain.ChangeBasisDocumentByAgreement.Enable = True;
 	Chain.ChangeBasisDocumentByAgreement.Setter = "SetPaymentListBasisDocument";
 	
+	//ChangeOrderByAgreement
+	Chain.ChangeOrderByAgreement.Enable = True;
+	Chain.ChangeOrderByAgreement.Setter = "SetPaymentListBasisDocument";
+	
 	// ChangeTaxRate
 	Chain.ChangeTaxRate.Enable = True;
 	Chain.ChangeTaxRate.Setter = "SetPaymentListTaxRate";
@@ -2018,6 +2022,7 @@ Procedure PaymentListAgreementStepsEnabler_BankPayment(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		Options_Agreement     = GetPropertyObject(Parameters, "PaymentList.Agreement"    , Row.Key);
 		Options_BasisDocument = GetPropertyObject(Parameters, "PaymentList.BasisDocument", Row.Key);
+		Options_Order         = GetPropertyObject(Parameters, "PaymentList.Order"        , Row.Key);
 		
 		// ChangeBasisDocumentByAgreement
 		Options = ModelClientServer_V2.ChangeBasisDocumentByAgreementOptions();
@@ -2026,6 +2031,14 @@ Procedure PaymentListAgreementStepsEnabler_BankPayment(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeBasisDocumentByAgreement.Options.Add(Options);
+		
+		// ChangeOrderByAgreement
+		Options = ModelClientServer_V2.ChangeOrderByAgreementOptions();
+		Options.Agreement    = Options_Agreement;
+		Options.CurrentOrder = Options_Order;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeOrderByAgreement.Options.Add(Options);
 		
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
@@ -2134,6 +2147,127 @@ EndFunction
 
 #EndRegion
 
+#Region PAYMENT_LIST_ORDER
+
+// PaymentList.Order.OnChange
+Procedure PaymentListOrderOnChange(Parameters) Export
+	Binding = PaymentListOrderStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.Order.Set
+Procedure SetPaymentListOrder(Parameters, Results) Export
+	Binding = PaymentListOrderStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.Order.Bind
+Function PaymentListOrderStepsBinding(Parameters)
+	DataPath = "PymentList.Order";
+	Binding = New Structure();
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_TAX_RATE
+
+// PaymentList.TaxRate.OnChange
+Procedure PaymentListTaxRateOnChange(Parameters) Export
+	Binding = PaymentListTaxRateStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.TaxRate.Set
+Procedure SetPaymentListTaxRate(Parameters, Results) Export
+	Binding = PaymentListTaxRateStepsBinding(Parameters);
+	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
+	For Each Result In Results Do
+		For Each TaxRate In Result.Value Do
+			TaxRateResult = New Array();
+			TaxRateResult.Add(New Structure("Value, Options", TaxRate.Value, Result.Options));
+			SetterObject(Binding.StepsEnabler, Binding.DataPath + TaxRate.Key,
+				Parameters, TaxRateResult, , , ,ReadOnlyFromCache);
+		EndDo;
+	EndDo;
+EndProcedure
+
+// PaymentList.TaxRate.Bind
+Function PaymentListTaxRateStepsBinding(Parameters)
+	DataPath = "PaymentList.";
+	Binding = New Structure();
+	Return BindSteps("PaymentListTaxRateStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure PaymentListTaxRateStepsEnabler(Parameters, Chain) Export
+	PaymentListEnableCalculations(Parameters, Chain, "IsTaxRateChanged");
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_TAX_AMOUNT
+
+// PaymentList.TaxAmount.OnChange
+Procedure PaymentListTaxAmountOnChange(Parameters) Export
+	Binding = PaymentListTaxAmountStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.TaxAmount.Set
+Procedure SetPaymentListTaxAmount(Parameters, Results) Export
+	Binding = PaymentListTaxAmountStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.TaxAmount.Bind
+Function PaymentListTaxAmountStepsBinding(Parameters)
+	DataPath = "PaymentList.TaxAmount";
+	Binding = New Structure();
+	Return BindSteps("PaymentListTaxAmountStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure PaymentListTaxAmountStepsEnabler(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListTaxAmountStepsEnabler";
+	
+	PaymentListEnableCalculations(Parameters, Chain, "IsTaxAmountChanged");
+	
+	// ChangeTaxAmountAsManualAmount
+	Chain.ChangeTaxAmountAsManualAmount.Enable = True;
+	Chain.ChangeTaxAmountAsManualAmount.Setter = "SetPaymentListTaxAmount";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options = ModelClientServer_V2.ChangeTaxAmountAsManualAmountOptions();
+		Options.TaxAmount = GetPropertyObject(Parameters, "PaymentList.TaxAmount", Row.Key);
+		Options.TaxList   = Row.TaxList;
+		Options.Key       = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeTaxAmountAsManualAmount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_NET_AMOUNT
+
+// PaymentList.NetAmount.OnChange
+Procedure PaymentListNetAmountOnChange(Parameters) Export
+	Binding = PaymentListNetAmountStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.NetAmount.Bind
+Function PaymentListNetAmountStepsBinding(Parameters)
+	DataPath = "PaymentList.NetAmount";
+	Binding = New Structure();
+	Binding.Insert("BankPayment", "PaymentListNetAmountStepsEnabler");
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure PaymentListNetAmountStepsEnabler(Parameters, Chain) Export
+	PaymentListEnableCalculations(Parameters, Chain, "IsNetAmountChanged");
+EndProcedure
+
+#EndRegion
+
 #Region PAYMENT_LIST_TOTAL_AMOUNT
 
 // PaymentList.TotalAmount.OnChange
@@ -2153,6 +2287,101 @@ EndFunction
 Procedure PaymentListTotalAmountStepsEnabler(Parameters, Chain) Export
 	PaymentListEnableCalculations(Parameters, Chain, "IsTotalAmountChanged");
 EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_CALCULATIONS_NET_TAX_TOTAL
+
+Procedure PaymentListEnableCalculations(Parameters, Chain, WhoIsChanged)
+	StepsEnablerName = "PaymentListEnableCalculations";
+	
+	Chain.Calculations.Enable = True;
+	Chain.Calculations.Setter = "SetPaymentListCalculations";
+	
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		
+		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		
+		// нужно пересчитать NetAmount, TotalAmount, TaxAmount
+		If     WhoIsChanged = "IsTaxRateChanged" Or WhoIsChanged = "IsCopyRow"
+			Or WhoIsChanged = "RecalculationsOnCopy" Then
+			Options.CalculateNetAmount.Enable     = True;
+			Options.CalculateTotalAmount.Enable   = True;
+			Options.CalculateTaxAmount.Enable     = True;
+			
+		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
+			// при изменении TotalAmount налоги расчитываются в обратную сторону, меняется NetAmount
+			Options.CalculateTaxAmountReverse.Enable   = True;
+			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
+			
+		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
+			// указываем на то что нужно использовать ManualAmount (сумма введеная вручную) при расчете TaxAmount
+			Options.TaxOptions.UseManualAmount = True;
+			
+			Options.CalculateNetAmount.Enable   = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable   = True;
+			
+		ElsIf WhoIsChanged = "IsNetAmountChanged" Then
+			Options.CalculateTaxAmountByNetAmount.Enable   = True;
+			Options.CalculateTotalAmountByNetAmount.Enable = True;
+		EndIf;
+		
+		Options.AmountOptions.DontCalculateRow = False;
+		
+		Options.AmountOptions.NetAmount        = GetPropertyObject(Parameters, "PaymentList.NetAmount"    , Row.Key);
+		Options.AmountOptions.TaxAmount        = GetPropertyObject(Parameters, "PaymentList.TaxAmount"    , Row.Key);
+		Options.AmountOptions.TotalAmount      = GetPropertyObject(Parameters, "PaymentList.TotalAmount"  , Row.Key);
+		
+		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
+		Options.TaxOptions.TaxRates         = GetItemListTaxRate(Parameters, Row);
+		Options.TaxOptions.TaxList          = Row.TaxList;
+		
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.Calculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// PaymentList.Calculations.Set
+Procedure SetPaymentListCalculations(Parameters, Results) Export
+	Binding = PaymentListCalculationsStepsBinding(Parameters);
+	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, , "NetAmount");
+	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, , "TaxAmount");
+	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, , "TotalAmount");
+	
+	// табличная часть TaxList кэщируется целиком, потом так же целиком переносится в документ
+	For Each Result In Results Do
+		If Result.Value.TaxList.Count() Then
+			If Not Parameters.Cache.Property("TaxList") Then
+				Parameters.Cache.Insert("TaxList", New Array());
+			EndIf;
+			
+			// удаляем из кэша старые строки
+			Count = Parameters.Cache.TaxList.Count();
+			For i = 1 To Count Do
+				Index = Count - i;
+				ArrayItem = Parameters.Cache.TaxList[Index];
+				If ArrayItem.Key = Result.Options.Key Then
+					Parameters.Cache.TaxList.Delete(Index);
+				EndIf;
+			EndDo;
+			
+			// добавляем новые строки
+			For Each Row In Result.Value.TaxList Do
+				Parameters.Cache.TaxList.Add(Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+// PaymentList.Calculations.Bind
+Function PaymentListCalculationsStepsBinding(Parameters)
+	DataPath = "";
+	Binding = New Structure();
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 
@@ -2593,29 +2822,9 @@ Procedure ItemListTaxRateOnChange(Parameters) Export
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
-// PaymentList.TaxRate.OnChange
-Procedure PaymentListTaxRateOnChange(Parameters) Export
-	Binding = PaymentListTaxRateStepsBinding(Parameters);
-	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
-
 // ItemList.TaxRate.Set
 Procedure SetItemListTaxRate(Parameters, Results) Export
 	Binding = ItemListTaxRateStepsBinding(Parameters);
-	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
-	For Each Result In Results Do
-		For Each TaxRate In Result.Value Do
-			TaxRateResult = New Array();
-			TaxRateResult.Add(New Structure("Value, Options", TaxRate.Value, Result.Options));
-			SetterObject(Binding.StepsEnabler, Binding.DataPath + TaxRate.Key,
-				Parameters, TaxRateResult, , , ,ReadOnlyFromCache);
-		EndDo;
-	EndDo;
-EndProcedure
-
-// PaymentList.TaxRate.Set
-Procedure SetPaymentListTaxRate(Parameters, Results) Export
-	Binding = PaymentListTaxRateStepsBinding(Parameters);
 	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
 	For Each Result In Results Do
 		For Each TaxRate In Result.Value Do
@@ -2651,19 +2860,8 @@ Function ItemListTaxRateStepsBinding(Parameters)
 	Return BindSteps("ItemListTaxRateStepsEnabler", DataPath, Binding, Parameters);
 EndFunction
 
-// ItemList.TaxRate.Bind
-Function PaymentListTaxRateStepsBinding(Parameters)
-	DataPath = "PaymentList.";
-	Binding = New Structure();
-	Return BindSteps("PaymentListTaxRateStepsEnabler", DataPath, Binding, Parameters);
-EndFunction
-
 Procedure ItemListTaxRateStepsEnabler(Parameters, Chain) Export
 	ItemListEnableCalculations(Parameters, Chain, "IsTaxRateChanged");
-EndProcedure
-
-Procedure PaymentListTaxRateStepsEnabler(Parameters, Chain) Export
-	PaymentListEnableCalculations(Parameters, Chain, "IsTaxRateChanged");
 EndProcedure
 
 #EndRegion

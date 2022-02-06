@@ -211,18 +211,20 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnChange(Item)
-	DocBankPaymentClient.PaymentListOnChange(Object, ThisObject, Item);
+	//DocBankPaymentClient.PaymentListOnChange(Object, ThisObject, Item);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure PaymentListOnActivateRow(Item)
-	DocBankPaymentClient.PaymentListOnActivateRow(Object, ThisObject, Item);
+	Return;
+	//DocBankPaymentClient.PaymentListOnActivateRow(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure PaymentListOnStartEdit(Item, NewRow, Clone)
-	DocBankPaymentClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+	Return;
+	//DocBankPaymentClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient
@@ -237,12 +239,14 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnActivateCell(Item)
-	DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item);
+	Return;
+	//DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure PaymentListBeforeRowChange(Item, Cancel)
-	DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item, Cancel);
+	Return;
+	//DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient

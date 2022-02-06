@@ -879,6 +879,13 @@ Procedure SetPaymentListBasisDocument(Object, Form, Row, Value) Export
 	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
 EndProcedure
 
+// PaymentList.PlanningTransactionBasis
+Procedure PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListPlanningTransactionBasisOnChange(Parameters);
+EndProcedure
+
 // PaymentList.Order
 Procedure PaymentListOrderOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);

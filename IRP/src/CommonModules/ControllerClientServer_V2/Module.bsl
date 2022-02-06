@@ -2147,6 +2147,91 @@ EndFunction
 
 #EndRegion
 
+#Region PAYMENT_LIST_PLANNING_TRANSACTION_BASIS
+
+// PaymentList.PlanningTransactionBasis.OnChange
+Procedure PaymentListPlanningTransactionBasisOnChange(Parameters) Export
+	Binding = PaymentListPlanningTransactionBasisStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.PlanningTransactionBasis.Set
+Procedure SetPaymentListPlanningTransactionBasis(Parameters, Results) Export
+	Binding = PaymentListPlanningTransactionBasisStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.PlanningTransactionBasis.Bind
+Function PaymentListPlanningTransactionBasisStepsBinding(Parameters)
+	DataPath = "PaymentList.PlanningTransactionBasis";
+	Binding = New Structure();
+	Binding.Insert("BankPayment" , "PaymentListPlanningTransactionBasisStepsEnabler_BankPayment");
+	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+EndFunction
+
+Procedure PaymentListPlanningTransactionBasisStepsEnabler_BankPayment(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListPlanningTransactionBasisStepsEnabler_BankPayment";
+	
+	Options_Company  = GetPropertyObject(Parameters, "Company");
+	Options_Account  = GetPropertyObject(Parameters, "Account");
+	Options_Currency = GetPropertyObject(Parameters, "Currency");
+	
+	// ChangeCompanyByPlanningTransactionBasis
+	Chain.ChangeCompanyByPlanningTransactionBasis.Enable = True;
+	Chain.ChangeCompanyByPlanningTransactionBasis.Setter = "SetCompany";
+	
+	// ChangeCashAccountByPlanningTransactionBasis
+	Chain.ChangeCashAccountByPlanningTransactionBasis.Enable = True;
+	Chain.ChangeCashAccountByPlanningTransactionBasis.Setter = "SetAccount";
+	
+	// ChangeCurrencyByPlanningTransactionBasis
+	Chain.ChangeCurrencyByPlanningTransactionBasis.Enable = True;
+	Chain.ChangeCurrencyByPlanningTransactionBasis.Setter = "SetCurrency";
+	
+	// ChangeTotalAmountByPlanningTransactionBasis
+	Chain.ChangeTotalAmountByPlanningTransactionBasis.Enable = True;
+	Chain.ChangeTotalAmountByPlanningTransactionBasis.Setter = "SetPaymentListTotalAmount";
+	
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options_PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlanningTransactionBasis", Row.Key);
+	
+		// ChangeCompanyByPlanningTransactionBasis
+		Options = ModelClientServer_V2.ChangeCompanyByPlanningTransactionBasisOptions();
+		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
+		Options.CurrentCompany = Options_Company;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeCompanyByPlanningTransactionBasis.Options.Add(Options);
+		
+		// ChangeCashAccountByPlanningTransactionBasis
+		Options = ModelClientServer_V2.ChangeCashAccountByPlanningTransactionBasisOptions();
+		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
+		Options.CurrentAccount = Options_Account;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeCashAccountByPlanningTransactionBasis.Options.Add(Options);
+		
+		// ChangeCurrencyByPlanningTransactionBasis
+		Options = ModelClientServer_V2.ChangeCurrencyByPlanningTransactionBasisOptions();
+		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
+		Options.CurrentCurrency = Options_Currency;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeCurrencyByPlanningTransactionBasis.Options.Add(Options);
+		
+		// ChangeTotalAmountByPlanningTransactionBasis
+		Options = ModelClientServer_V2.ChangeTotalAmountByPlanningTransactionBasisOptions();
+		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
+		Options.CurrentTotalAmount = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
+		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeTotalAmountByPlanningTransactionBasis.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region PAYMENT_LIST_ORDER
 
 // PaymentList.Order.OnChange
@@ -2274,6 +2359,12 @@ EndProcedure
 Procedure PaymentListTotalAmountOnChange(Parameters) Export
 	Binding = PaymentListTotalAmountStepsBinding(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.TotalAmount.Set
+Procedure SetPaymentListTotalAmount(Parameters, Results) Export
+	Binding = PaymentListTotalAmountStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
 // PaymentList.TotalAmount.Bind

@@ -515,56 +515,57 @@ EndProcedure
 
 #EndRegion
 
-#Region PlanningTransactionBasis
+#Region PLANNING_TRANSACTION_BASIS
 
 Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	If ValueIsFilled(CurrentData.PlaningTransactionBasis) And TypeOf(CurrentData.PlaningTransactionBasis) = Type(
-		"DocumentRef.CashTransferOrder") Then
-		CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankPayment(
-			CurrentData.PlaningTransactionBasis);
-		If Not ValueIsFilled(Object.Account) Then
-			Object.Account = CashTransferOrderInfo.Account;
-			If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
-				Object.TransitAccount = ServiceSystemServer.GetCompositeObjectAttribute(Object.Account,"TransitAccount");
-			EndIf;
-		EndIf;
-
-		If Not ValueIsFilled(Object.Company) Then
-			Object.Company = CashTransferOrderInfo.Company;
-		EndIf;
-
-		If Not ValueIsFilled(Object.Currency) Then
-			Object.Currency = CashTransferOrderInfo.Currency;
-		EndIf;
-
-		ArrayOfPlaningTransactionBasises = New Array();
-		ArrayOfPlaningTransactionBasises.Add(CurrentData.PlaningTransactionBasis);
-		ArrayOfBalance = DocBankPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(
-			ArrayOfPlaningTransactionBasises, Object.Ref);
-		If ArrayOfBalance.Count() Then
-			RowOfBalance = ArrayOfBalance[0];
-			CurrentData.TotalAmount = RowOfBalance.Amount;
-			
-			Settings = New Structure();
-			Settings.Insert("Rows", New Array());
-			Settings.Rows.Add(CurrentData);
-		
-			CalculationSettings = New Structure();
-			CalculationSettings.Insert("CalculateTaxByTotalAmount");
-			CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+	ViewClient_V2.PaymentListPlanningTransactionBasisOnChange(Object, Form);
 	
-			Settings.Insert("CalculateSettings", CalculationSettings);
-			CalculateItemsRows(Object, Form, Settings);
-		EndIf;
-	EndIf;
-
-	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, Form, Item);
+//	CurrentData = Form.Items.PaymentList.CurrentData;
+//
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	If ValueIsFilled(CurrentData.PlaningTransactionBasis) 
+//		And TypeOf(CurrentData.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+//		CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankPayment(CurrentData.PlaningTransactionBasis);
+//		
+//		If Not ValueIsFilled(Object.Account) Then
+//			Object.Account = CashTransferOrderInfo.Account;
+//			If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
+//				Object.TransitAccount = ServiceSystemServer.GetCompositeObjectAttribute(Object.Account,"TransitAccount");
+//			EndIf;
+//		EndIf;
+//
+//		If Not ValueIsFilled(Object.Company) Then
+//			Object.Company = CashTransferOrderInfo.Company;
+//		EndIf;
+//
+//		If Not ValueIsFilled(Object.Currency) Then
+//			Object.Currency = CashTransferOrderInfo.Currency;
+//		EndIf;
+//
+//		ArrayOfPlaningTransactionBasises = New Array();
+//		ArrayOfPlaningTransactionBasises.Add(CurrentData.PlaningTransactionBasis);
+//		ArrayOfBalance = DocBankPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises, Object.Ref);
+//		If ArrayOfBalance.Count() Then
+//			RowOfBalance = ArrayOfBalance[0];
+//			CurrentData.TotalAmount = RowOfBalance.Amount;
+//			
+//			Settings = New Structure();
+//			Settings.Insert("Rows", New Array());
+//			Settings.Rows.Add(CurrentData);
+//		
+//			CalculationSettings = New Structure();
+//			CalculationSettings.Insert("CalculateTaxByTotalAmount");
+//			CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+//	
+//			Settings.Insert("CalculateSettings", CalculationSettings);
+//			CalculateItemsRows(Object, Form, Settings);
+//		EndIf;
+//	EndIf;
+//
+//	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, Form, Item);
 EndProcedure
 
 Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

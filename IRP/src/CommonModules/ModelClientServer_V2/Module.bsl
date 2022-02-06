@@ -129,6 +129,12 @@ Function GetChain()
 	Chain.Insert("ChangeOrderByAgreement"        , GetChainLink("ChangeOrderByAgreementExecute"));
 	Chain.Insert("ChangeCashAccountByCompany"   , GetChainLink("ChangeCashAccountByCompanyExecute"));
 	Chain.Insert("ChangeTransitAccountByAccount", GetChainLink("ChangeTransitAccountByAccountExecute"));
+	Chain.Insert("ChangeCashAccountByCurrency"  , GetChainLink("ChangeCashAccountByCurrencyExecute"));
+	
+	Chain.Insert("ChangeCashAccountByPlanningTransactionBasis" , GetChainLink("ChangeCashAccountByPlanningTransactionBasisExecute"));
+	Chain.Insert("ChangeCompanyByPlanningTransactionBasis"     , GetChainLink("ChangeCompanyByPlanningTransactionBasisExecute"));
+	Chain.Insert("ChangeCurrencyByPlanningTransactionBasis"    , GetChainLink("ChangeCurrencyByPlanningTransactionBasisExecute"));
+	Chain.Insert("ChangeTotalAmountByPlanningTransactionBasis" , GetChainLink("ChangeTotalAmountByPlanningTransactionBasisExecute"));
 	
 	Chain.Insert("ChangeItemKeyByItem"    , GetChainLink("ChangeItemKeyByItemExecute"));
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
@@ -274,6 +280,27 @@ Function ChangeCashAccountByCurrencyExecute(Options) Export
 	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Options.CurrenctAccount, "Currency");
 	If Options.Currency <> AccountCurrency And ValueIsFilled(AccountCurrency) Then
 		Return Undefined;
+	EndIf;
+	Return Options.CurrentAccount;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CASH_ACCOUNT_BY_PLANNING_TRANSACTION_BASIS
+
+Function ChangeCashAccountByPlanningTransactionBasisOptions() Export
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentAccount");
+EndFunction
+
+Function ChangeCashAccountByPlanningTransactionBasisExecute(Options) Export
+	If ValueIsFilled(Options.CurrentAccount) Then
+		Return Options.CurrentAccount;
+	EndIf;
+	
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankPayment(Options.PlanningTransactionBasis);
+			Return CashTransferOrderInfo.Account;
 	EndIf;
 	Return Options.CurrentAccount;
 EndFunction
@@ -462,6 +489,27 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_CURRENCY_BY_PLANNING_TRANSACTION_BASIS
+
+Function ChangeCurrencyByPlanningTransactionBasisOptions() Export
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCurrency");
+EndFunction
+
+Function ChangeCurrencyByPlanningTransactionBasisExecute(Options) Export
+	If ValueIsFilled(Options.CurrentCurrency) Then
+		Return Options.CurrentCurrency;
+	EndIf;
+	
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankPayment(Options.PlanningTransactionBasis);
+			Return CashTransferOrderInfo.Currency;
+	EndIf;
+	Return Options.CurrentCurrency;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_COMPANY_BY_AGREEMENT
 
 Function ChangeCompanyByAgreementOptions() Export
@@ -472,6 +520,27 @@ Function ChangeCompanyByAgreementExecute(Options) Export
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If ValueIsFilled(AgreementInfo.Company) Then
 		Return AgreementInfo.Company;
+	EndIf;
+	Return Options.CurrentCompany;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_COMPANY_BY_PLANNING_TRANSACTION_BASIS
+
+Function ChangeCompanyByPlanningTransactionBasisOptions() Export
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCompany");
+EndFunction
+
+Function ChangeCompanyByPlanningTransactionBasisExecute(Options) Export
+	If ValueIsFilled(Options.CurrentCompany) Then
+		Return Options.CurrentCompany;
+	EndIf;
+	
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankPayment(Options.PlanningTransactionBasis);
+			Return CashTransferOrderInfo.Company;
 	EndIf;
 	Return Options.CurrentCompany;
 EndFunction
@@ -543,6 +612,30 @@ Function ChangePriceByPriceTypeExecute(Options) Export
 	PriceParameters.Insert("Unit"         , Options.Unit);
 	PriceInfo = GetItemInfo.ItemPriceInfo(PriceParameters);
 	Return ?(PriceInfo = Undefined, 0, PriceInfo.Price);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_TOTAL_AMOUNT_BY_PLANNING_TRANSACTION_BASIS
+
+Function ChangeTotalAmountByPlanningTransactionBasisOptions() Export
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentTotalAmount, Ref");
+EndFunction
+
+Function ChangeTotalAmountByPlanningTransactionBasisExecute(Options) Export
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			ArrayOfPlaningTransactionBasises = New Array();
+			ArrayOfPlaningTransactionBasises.Add(Options.PlanningTransactionBasis);
+			ArrayOfBalance = 
+			DocBankPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises, Options.Ref);
+			If ArrayOfBalance.Count() Then
+				Return ArrayOfBalance[0].Amount;
+			Else
+				Return Options.CurrentTotalAmount;
+			EndIf;
+	EndIf;
+	Return Options.CurrentTotalAmount;
 EndFunction
 
 #EndRegion

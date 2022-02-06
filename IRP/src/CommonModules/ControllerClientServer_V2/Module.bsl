@@ -724,20 +724,66 @@ Procedure SetAccount(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetAccountNotify");
 EndProcedure
 
+// TransitAccount.Set
+Procedure SetTransitAccount(Parameters, Results) Export
+	Binding = TransitAccountStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
 // Account.Bind
 Function AccountStepsBinding(Parameters)
 	DataPath = "Account";
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "AccountStepsEnabler");
+	Binding.Insert("BankPayment"         , "AccountStepsEnabler_BankPayment");
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+// TransitAccount.Bind
+Function TransitAccountStepsBinding(Parameters)
+	DataPath = "TransitAccount";
+	Binding = New Structure();
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure AccountStepsEnabler(Parameters, Chain) Export
+	StepsEnablerName = "AccountStepsEnabler";
+	
+	// ChangeCurrencyByAccount
 	Chain.ChangeCurrencyByAccount.Enable = True;
 	Chain.ChangeCurrencyByAccount.Setter = "SetCurrency";
 	Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
 	Options.Account         = GetPropertyObject(Parameters, "Account");
 	Options.CurrentCurrency = GetPropertyObject(Parameters, "Currency");
+	Options.StepsEnablerName = StepsEnablerName;
+	Chain.ChangeCurrencyByAccount.Options.Add(Options);
+EndProcedure
+
+Procedure AccountStepsEnabler_BankPayment(Parameters, Chain) Export
+	StepsEnablerName = "AccountStepsEnabler_BankPayment";
+	
+	Options_Account  = GetPropertyObject(Parameters, "Account");
+	Options_Currency = GetPropertyObject(Parameters, "Currency");
+	Options_TransactionType = GetPropertyObject(Parameters, "TransactionType");
+	Options_TransitAccount  = GetPropertyObject(Parameters, "TransitAccount");
+	
+	// ChangeCurrencyByAccount
+	Chain.ChangeCurrencyByAccount.Enable = True;
+	Chain.ChangeCurrencyByAccount.Setter = "SetCurrency";
+	Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
+	Options.Account         = Options_Account;
+	Options.CurrentCurrency = Options_Currency;
+	Options.StepsEnablerName = StepsEnablerName;
+	Chain.ChangeCurrencyByAccount.Options.Add(Options);
+	
+	// ChangeTransitAccountByAccount
+	Chain.ChangeTransitAccountByAccount.Enable = True;
+	Chain.ChangeTransitAccountByAccount.Setter = "SetTransitAccount";
+	Options = ModelClientServer_V2.ChangeTransitAccountByAccountOptions();
+	Options.TransactionType       = Options_TransactionType;
+	Options.Account               = Options_Account;
+	Options.CurrentTransitAccount = Options_TransitAccount;
+	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangeCurrencyByAccount.Options.Add(Options);
 EndProcedure
 
@@ -762,9 +808,23 @@ EndProcedure
 Function CurrencyStepsBinding(Parameters)
 	DataPath = "Currency";
 	Binding = New Structure();
+	Binding.Insert("BankPayment"         , "CurrencyStepsEnabler_BankPayment");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
+Procedure CurrencyStepsEnabler_BankPayment(Parameters, Chain) Export
+	StepsEnablerName = "CurrencyStepsEnabler_BankPayment";
+	
+	// ChangeCashAccountByCurrency
+	Chain.ChangeCashAccountByCurrency.Enable = True;
+	Chain.ChangeCashAccountByCurrency.Setter = "SetAccount";
+	Options = ModelClientServer_V2.ChangeCashAccountByCurrencyOptions();
+	Options.CurrentAccount = GetPropertyObject(Parameters, "Account");
+	Options.Currency       = GetPropertyObject(Parameters, "Currency");
+	Options.StepsEnablerName = StepsEnablerName;
+	Chain.ChangeCurrencyByAccount.Options.Add(Options);
+EndProcedure
+	
 #EndRegion
 
 #Region _DATE
@@ -786,7 +846,8 @@ EndProcedure
 Function DateStepsBinding(Parameters)
 	DataPath = "Date";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice"        , "DateStepsEnabler_Trade_PartnerIsCustomer");
+	Binding.Insert("SalesInvoice" , "DateStepsEnabler_Trade_PartnerIsCustomer");
+	Binding.Insert("BankPayment"  , "DateStepsEnabler_BankPayment");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -881,7 +942,7 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 			Row.Insert("TaxRates", TaxRates);
 		EndIf;
 		
-		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
+		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeTaxRate.Options.Add(Options);
@@ -900,6 +961,59 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 	EndDo;
 	Options.TotalAmount = TotalAmount;
 	Chain.UpdatePaymentTerms.Options.Add(Options);
+EndProcedure
+
+Procedure DateStepsEnabler_BankPayment(Parameters, Chain) Export
+	StepsEnablerName = "DateStepsEnabler_BankPayment";
+	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Company   = GetPropertyObject(Parameters, "Company");
+	
+	// RequireCallCreateTaxesFormControls
+	Chain.RequireCallCreateTaxesFormControls.Enable = True;
+	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
+	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
+	Options.Ref            = Parameters.Object.Ref;
+	Options.Date           = Options_Date;
+	Options.Company        = Options_Company;
+	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
+	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
+	
+	// ChangeTaxRate
+	Chain.ChangeTaxRate.Enable = True;
+	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
+	
+	TaxRates = Undefined;
+	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
+		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
+		TaxRates = New Structure();
+		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
+		EndDo;
+	EndIf;
+	
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		// ChangeTaxRate
+		Options = ModelClientServer_V2.ChangeTaxRateOptions();
+		Options.Date           = Options_Date;
+		Options.Company        = Options_Company;
+		Options.Agreement      = GetPropertyObject(Parameters, "PaymentList.Agreement", Row.Key);;
+		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.Ref            = Parameters.Object.Ref;
+		
+		If TaxRates <> Undefined Then
+			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+				SetProperty(Parameters.Cache, "PaymentList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
+			EndDo;
+			Row.Insert("TaxRates", TaxRates);
+		EndIf;
+		
+		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeTaxRate.Options.Add(Options);
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -925,29 +1039,38 @@ Function CompanyStepsBinding(Parameters)
 	DataPath = "Company";
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "CompanyStepsEnabler_Cash");
+	Binding.Insert("BankPayment"         , "CompanyStepsEnabler_BankPayment");
 	Binding.Insert("SalesInvoice"        , "CompanyStepsEnabler_WithTaxes");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure CompanyStepsEnabler_Cash(Parameters, Chain) Export
+	StepsEnablerName = "CompanyStepsEnabler_Cash";
+	
+	// ChangeCashAccountByCompany
 	Chain.ChangeCashAccountByCompany.Enable = True;
 	Chain.ChangeCashAccountByCompany.Setter = "SetAccount";
 	Options = ModelClientServer_V2.ChangeCashAccountByCompanyOptions();
 	Options.Company = GetPropertyObject(Parameters, "Company");
 	Options.Account = GetPropertyObject(Parameters, "Account");
+	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangeCashAccountByCompany.Options.Add(Options);
 EndProcedure
 
 Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 	StepsEnablerName = "CompanyStepsEnabler_WithTaxes";
 	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Company   = GetPropertyObject(Parameters, "Company");
+	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
+	
 	// RequireCallCreateTaxesFormControls
 	Chain.RequireCallCreateTaxesFormControls.Enable = True;
 	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
 	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
 	Options.Ref            = Parameters.Object.Ref;
-	Options.Date           = GetPropertyObject(Parameters, "Date");
-	Options.Company        = GetPropertyObject(Parameters, "Company");
+	Options.Date           = Options_Date;
+	Options.Company        = Options_Company;
 	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
 	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
@@ -955,10 +1078,6 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 	// ChangeTaxRate
 	Chain.ChangeTaxRate.Enable = True;
 	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
-	
-	Options_Date      = GetPropertyObject(Parameters, "Date");
-	Options_Company   = GetPropertyObject(Parameters, "Company");
-	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
 	
 	TaxRates = Undefined;
 	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
@@ -982,6 +1101,70 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 		If TaxRates <> Undefined Then
 			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
 				SetProperty(Parameters.Cache, "ItemList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
+			EndDo;
+			Row.Insert("TaxRates", TaxRates);
+		EndIf;
+		
+		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeTaxRate.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure CompanyStepsEnabler_BankPayment(Parameters, Chain) Export
+	StepsEnablerName = "CompanyStepsEnabler_WithTaxes";
+	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Company   = GetPropertyObject(Parameters, "Company");
+	Options_Account   = GetPropertyObject(Parameters, "Account");
+	
+	// ChangeCashAccountByCompany
+	Chain.ChangeCashAccountByCompany.Enable = True;
+	Chain.ChangeCashAccountByCompany.Setter = "SetAccount";
+	Options = ModelClientServer_V2.ChangeCashAccountByCompanyOptions();
+	Options.Company = Options_Company;
+	Options.Account = Options_Account;
+	Options.AccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
+	Options.StepsEnablerName = StepsEnablerName;
+	Chain.ChangeCashAccountByCompany.Options.Add(Options);
+	
+	// RequireCallCreateTaxesFormControls
+	Chain.RequireCallCreateTaxesFormControls.Enable = True;
+	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
+	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
+	Options.Ref            = Parameters.Object.Ref;
+	Options.Date           = Options_Date;
+	Options.Company        = Options_Company;
+	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
+	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
+	
+	// ChangeTaxRate
+	Chain.ChangeTaxRate.Enable = True;
+	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
+	
+	TaxRates = Undefined;
+	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
+		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
+		TaxRates = New Structure();
+		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
+		EndDo;
+	EndIf;
+	
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		// ChangeTaxRate
+		Options = ModelClientServer_V2.ChangeTaxRateOptions();
+		Options.Date           = Options_Date;
+		Options.Company        = Options_Company;
+		Options.Agreement      = GetPropertyObject(Parameters, "PaymentList.Agreement", Row.Key);;
+		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.Ref            = Parameters.Object.Ref;
+		
+		If TaxRates <> Undefined Then
+			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+				SetProperty(Parameters.Cache, "PaymentList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
 			EndDo;
 			Row.Insert("TaxRates", TaxRates);
 		EndIf;
@@ -1728,10 +1911,14 @@ Function PaymentListPartnerStepsBinding(Parameters)
 	DataPath = "PaymentList.Partner";
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "PaymentListPartnerStepsEnabler_LegalNameIsPayer");
+	Binding.Insert("BankPayment"         , "PaymentListPartnerStepsEnabler_BankPayment");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
 Procedure PaymentListPartnerStepsEnabler_LegalNameIsPayer(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListPartnerStepsEnabler_LegalNameIsPayer";
+	
+	// ChangeLegalNameByPartner
 	Chain.ChangeLegalNameByPartner.Enable = True;
 	Chain.ChangeLegalNameByPartner.Setter = "SetPaymentListLegalName";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
@@ -1739,7 +1926,45 @@ Procedure PaymentListPartnerStepsEnabler_LegalNameIsPayer(Parameters, Chain) Exp
 		Options.Partner   = GetPropertyObject(Parameters, "PaymentList.Partner", Row.Key);
 		Options.LegalName = GetPropertyObject(Parameters, "PaymentList.Payer"  , Row.Key);
 		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeLegalNameByPartner.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure PaymentListPartnerStepsEnabler_BankPayment(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListPartnerStepsEnabler_BankPayment";
+	
+	Options_Date = GetPropertyObject(Parameters, "Date");
+	
+	// ChangeLegalNameByPartner
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	Chain.ChangeLegalNameByPartner.Setter = "SetPaymentListLegalName";
+	
+	// ChangeAgreementByPartner
+	Chain.ChangeAgreementByPartner.Enable = True;
+	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
+	
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options_Partner   = GetPropertyObject(Parameters, "PaymentList.Partner", Row.Key);
+		Options_LegalName = GetPropertyObject(Parameters, "PaymentList.Payee"  , Row.Key);
+		Options_Agreement = GetPropertyObject(Parameters, "Agreement", Row.Key);
+		
+		// ChangeLegalNameByPartner
+		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+		Options.Partner   = Options_Partner;
+		Options.LegalName = Options_LegalName;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeLegalNameByPartner.Options.Add(Options);
+		
+		// ChangeAgreementByPartner
+		Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+		Options.Partner       = Options_Partner;
+		Options.Agreement     = Options_Agreement;
+		Options.CurrentDate   = Options_Date;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeAgreementByPartner.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -1763,13 +1988,18 @@ EndProcedure
 Function PaymentListLegalNameStepsBinding(Parameters)
 	DataPath = New Map();
 	DataPath.Insert("IncomingPaymentOrder", "PaymentList.Payer");
+	DataPath.Insert("BankPayment"         , "PaymentList.Payee");
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "PaymentListLegalNameStepsEnabler_LegalNameIsPayer");
+	Binding.Insert("BankPayment"         , "PaymentListLegalNameStepsEnabler_LegalNameIsPayee");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
 Procedure PaymentListLegalNameStepsEnabler_LegalNameIsPayer(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListLegalNameStepsEnabler_LegalNameIsPayer";
+	
+	// ChangePartnerByLegalName
 	Chain.ChangePartnerByLegalName.Enable = True;
 	Chain.ChangePartnerByLegalName.Setter = "SetPaymentListPartner";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
@@ -1777,6 +2007,23 @@ Procedure PaymentListLegalNameStepsEnabler_LegalNameIsPayer(Parameters, Chain) E
 		Options.Partner   = GetPropertyObject(Parameters, "PaymentList.Partner", Row.Key);
 		Options.LegalName = GetPropertyObject(Parameters, "PaymentList.Payer"  , Row.Key);
 		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangePartnerByLegalName.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure PaymentListLegalNameStepsEnabler_LegalNameIsPayee(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListLegalNameStepsEnabler_LegalNameIsPayee";
+	
+	// ChangePartnerByLegalName
+	Chain.ChangePartnerByLegalName.Enable = True;
+	Chain.ChangePartnerByLegalName.Setter = "SetPaymentListPartner";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+		Options.Partner   = GetPropertyObject(Parameters, "PaymentList.Partner", Row.Key);
+		Options.LegalName = GetPropertyObject(Parameters, "PaymentList.Payee"  , Row.Key);
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangePartnerByLegalName.Options.Add(Options);
 	EndDo;
 EndProcedure

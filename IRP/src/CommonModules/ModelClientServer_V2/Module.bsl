@@ -126,6 +126,7 @@ Function GetChain()
 	Chain.Insert("ChangeDeliveryDateByAgreement"       , GetChainLink("ChangeDeliveryDateByAgreementExecute"));
 	Chain.Insert("ChangePriceIncludeTaxByAgreement"    , GetChainLink("ChangePriceIncludeTaxByAgreementExecute"));
 	Chain.Insert("ChangeCashAccountByCompany"   , GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeTransitAccountByAccount", GetChainLink("ChangeTransitAccountByAccountExecute"));
 	
 	Chain.Insert("ChangeItemKeyByItem"    , GetChainLink("ChangeItemKeyByItemExecute"));
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
@@ -211,16 +212,40 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_TRANSIT_ACCOUNT_BY_ACCOUNT
+
+Function ChangeTransitAccountByAccountOptions() Export
+	Return GetChainLinkOptions("TransactionType, Account, CurrentTransitAccount");
+EndFunction
+
+Function ChangeTransitAccountByAccountExecute(Options) Export
+	TransitAccount = Options.CurrentTransitAccount;
+	If Options.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
+		TransitAccount = ServiceSystemServer.GetObjectAttribute(Options.Account, "TransitAccount");
+	EndIf;
+	Return TransitAccount;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_CASH_ACCOUNT_BY_COMPANY
 
 Function ChangeCashAccountByCompanyOptions() Export
-	Return GetChainLinkOptions("Company, Account");
+	Return GetChainLinkOptions("Company, Account, AccountType");
 EndFunction
 
 Function ChangeCashAccountByCompanyExecute(Options) Export
 	Filters = New Array();
-	Filters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False, ComparisonType.Equal,
-		DataCompositionComparisonType.Equal));
+	Filters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False, 
+		ComparisonType.Equal, DataCompositionComparisonType.Equal));
+		
+	If ValueIsFilled(Options.AccountType) Then
+		Filters.Add(DocumentsClientServer.CreateFilterItem("Type", Options.AccountType,
+			ComparisonType.Equal, DataCompositionComparisonType.Equal));
+	Else
+		Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Transit"), 
+			ComparisonType.NotEqual, DataCompositionComparisonType.NotEqual));
+	EndIf;
 
 	ComplexFilters = New Array();
 	ComplexFilters.Add(DocumentsClientServer.CreateFilterItem("ByCompanyWithEmpty", Options.Company));
@@ -237,22 +262,18 @@ EndFunction
 
 #EndRegion
 
-#Region CHANGE_CURRENCY_BY_ACCOUNT
+#Region CHANGE_CASH_ACCOUNT_BY_CURRENCY
 
-// Параметры которые нужны для вычисления Currency, в этом случае достаточно только Account
-// если в Account не будет указана Currency то останется CurrentCurrency (та что уже указана в документе)
-Function ChangeCurrencyByAccountOptions() Export
-	Return GetChainLinkOptions("Account, CurrentCurrency");
+Function ChangeCashAccountByCurrencyOptions() Export
+	Return GetChainLinkOptions("Currency, CurrentAccount");
 EndFunction
 
-// Возвращает Currency которая указана в Account
-// если в Account пусто возвращает Currency которая уже указана в документе (параметр CurrentCurrency)
-Function ChangeCurrencyByAccountExecute(Options) Export
-	Currency = ServiceSystemServer.GetObjectAttribute(Options.Account, "Currency");
-	If ValueIsFilled(Currency) Then
-		Return Currency;
+Function ChangeCashAccountByCurrencyExecute(Options) Export
+	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Options.CurrenctAccount, "Currency");
+	If Options.Currency <> AccountCurrency And ValueIsFilled(AccountCurrency) Then
+		Return Undefined;
 	EndIf;
-	Return Options.CurrentCurrency;
+	Return Options.CurrentAccount;
 EndFunction
 
 #EndRegion
@@ -372,6 +393,26 @@ Function ChangeCurrencyByAgreementExecute(Options) Export
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If ValueIsFilled(AgreementInfo.Currency) Then
 		Return AgreementInfo.Currency;
+	EndIf;
+	Return Options.CurrentCurrency;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CURRENCY_BY_ACCOUNT
+
+// Параметры которые нужны для вычисления Currency, в этом случае достаточно только Account
+// если в Account не будет указана Currency то останется CurrentCurrency (та что уже указана в документе)
+Function ChangeCurrencyByAccountOptions() Export
+	Return GetChainLinkOptions("Account, CurrentCurrency");
+EndFunction
+
+// Возвращает Currency которая указана в Account
+// если в Account пусто возвращает Currency которая уже указана в документе (параметр CurrentCurrency)
+Function ChangeCurrencyByAccountExecute(Options) Export
+	Currency = ServiceSystemServer.GetObjectAttribute(Options.Account, "Currency");
+	If ValueIsFilled(Currency) Then
+		Return Currency;
 	EndIf;
 	Return Options.CurrentCurrency;
 EndFunction

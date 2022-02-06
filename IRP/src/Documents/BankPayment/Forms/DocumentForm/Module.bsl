@@ -76,6 +76,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	EndIf;
+	Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	Form.Items.EditTrialBallanceAccounts.Enabled = Not Form.ReadOnly;
 EndProcedure
@@ -142,9 +143,10 @@ Procedure AccountOnChange(Item)
 	If CashTransferOrdersInPaymentList(AccountCurrency) And AccountCurrency <> CurrentCurrency Then
 		ShowQueryBox(New NotifyDescription("AccountOnChangeContinue", ThisObject), R().QuestionToUser_008,
 			QuestionDialogMode.YesNoCancel);
-		Return;
+	Else
+		DocBankPaymentClient.AccountOnChange(Object, ThisObject, Item);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	DocBankPaymentClient.AccountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -153,6 +155,7 @@ Procedure AccountOnChangeContinue(Answer, AdditionalParameters) Export
 		CurrentAccount = Object.Account;
 		DocBankPaymentClient.AccountOnChange(Object, ThisObject, Items.Currency);
 		ClearCashTransferOrders(Object.Currency);
+		SetVisibilityAvailability(Object, ThisObject);
 	Else
 		Object.Account = CurrentAccount;
 	EndIf;
@@ -457,9 +460,9 @@ EndProcedure
 Function CashTransferOrdersInPaymentList(Val CashTransferOrderCurrency)
 	Answer = False;
 	For Each Row In Object.PaymentList Do
-		If ValueIsFilled(Row.PlaningTransactionBasis) And TypeOf(Row.PlaningTransactionBasis) = Type(
-			"DocumentRef.CashTransferOrder") And ServiceSystemServer.GetObjectAttribute(Row.PlaningTransactionBasis,
-			"ReceiveCurrency") <> CashTransferOrderCurrency Then
+		If ValueIsFilled(Row.PlaningTransactionBasis) 
+			And TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
+			And ServiceSystemServer.GetObjectAttribute(Row.PlaningTransactionBasis, "ReceiveCurrency") <> CashTransferOrderCurrency Then
 			Answer = True;
 			Break;
 		EndIf;

@@ -562,6 +562,10 @@ Procedure OnOpenFormNotify(Parameters) Export
 		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
 			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment" Then
+		DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
+	EndIf;
 EndProcedure
 
 #EndRegion

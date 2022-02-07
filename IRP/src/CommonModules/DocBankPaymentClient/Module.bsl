@@ -280,8 +280,9 @@ EndProcedure
 #Region ItemTransactionType
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
-	CleanDataByTransactionType(Object, Form);
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.TransactionTypeOnChange(Object, Form, "PaymentList");
+//	CleanDataByTransactionType(Object, Form);
+//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure CleanDataByTransactionType(Object, Form) Export

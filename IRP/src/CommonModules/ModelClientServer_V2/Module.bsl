@@ -139,6 +139,7 @@ Function GetChain()
 	Chain.Insert("ChangeItemKeyByItem"    , GetChainLink("ChangeItemKeyByItemExecute"));
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
 	Chain.Insert("ChangeCurrencyByAccount", GetChainLink("ChangeCurrencyByAccountExecute"));
+	Chain.Insert("ChangePlanningTransactionBasisByCurrency", GetChainLink("ChangePlanningTransactionBasisByCurrencyExecute"));
 	Chain.Insert("FillStoresInList"       , GetChainLink("FillStoresInListExecute"));
 	Chain.Insert("FillDeliveryDateInList" , GetChainLink("FillDeliveryDateInListExecute"));
 	Chain.Insert("ChangeStoreInHeaderByStoresInList"    , GetChainLink("ChangeStoreInHeaderByStoresInListExecute"));
@@ -277,7 +278,7 @@ Function ChangeCashAccountByCurrencyOptions() Export
 EndFunction
 
 Function ChangeCashAccountByCurrencyExecute(Options) Export
-	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Options.CurrenctAccount, "Currency");
+	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Options.CurrentAccount, "Currency");
 	If Options.Currency <> AccountCurrency And ValueIsFilled(AccountCurrency) Then
 		Return Undefined;
 	EndIf;
@@ -325,6 +326,24 @@ Function ChangeBasisDocumentByAgreementExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	Return Options.CurrentBasisDocument;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PLANNING_TRANSACTION_BASIS_BY_CURRENCY
+
+Function ChangePlanningTransactionBasisByCurrencyOptions() Export
+	Return GetChainLinkOptions("Currency, PlanningTransactionBasis");
+EndFunction
+
+Function ChangePlanningTransactionBasisByCurrencyExecute(Options) Export
+	If ValueIsFilled(Options.PlanningTransactionBasis) 
+			And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
+			And ServiceSystemServer.GetObjectAttribute(Options.PlanningTransactionBasis,"SendCurrency") 
+			<> Options.Currency Then
+				Return Undefined;
+	EndIf;
+	Return Options.PlanningTransactionBasis;
 EndFunction
 
 #EndRegion
@@ -480,6 +499,9 @@ EndFunction
 // Возвращает Currency которая указана в Account
 // если в Account пусто возвращает Currency которая уже указана в документе (параметр CurrentCurrency)
 Function ChangeCurrencyByAccountExecute(Options) Export
+	If Not ValueIsFilled(Options.Account) Then
+		Return Options.CurrentCurrency;
+	EndIf;
 	Currency = ServiceSystemServer.GetObjectAttribute(Options.Account, "Currency");
 	If ValueIsFilled(Currency) Then
 		Return Currency;
@@ -1221,7 +1243,7 @@ Function CalculationsExecute(Options) Export
 		EndIf;
 
 		If Options.CalculateTaxAmountByTotalAmount.Enable And IsCalculatedRow Then
-			CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True);
+			CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True, True);
 		EndIf;
 
 		If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -1294,7 +1316,7 @@ Function _CalculateAmount(PriceOptions, Result)
 	Return Result.TotalAmount;
 EndFunction
 
-Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPriority)
+Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPriority, PriceIncludeTax = False)
 	ArrayOfTaxInfo = TaxOptions.ArrayOfTaxInfo;
 	If TaxOptions.ArrayOfTaxInfo = Undefined Then
 		Return;
@@ -1311,7 +1333,11 @@ Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPri
 		TaxParameters = New Structure();
 		TaxParameters.Insert("Tax"             , ItemOfTaxInfo.Tax);
 		TaxParameters.Insert("TaxRateOrAmount" , Result.TaxRates[ItemOfTaxInfo.Name]);
-		TaxParameters.Insert("PriceIncludeTax" , TaxOptions.PriceIncludeTax);
+		If TaxOptions.PriceIncludeTax = Undefined Then
+			TaxParameters.Insert("PriceIncludeTax" , PriceIncludeTax);
+		Else
+			TaxParameters.Insert("PriceIncludeTax" , TaxOptions.PriceIncludeTax);
+		EndIf;
 		TaxParameters.Insert("Key"             , Options.Key);
 		TaxParameters.Insert("TotalAmount"     , Result.TotalAmount);
 		TaxParameters.Insert("NetAmount"       , Result.NetAmount);

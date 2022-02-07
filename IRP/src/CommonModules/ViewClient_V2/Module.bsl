@@ -159,7 +159,7 @@ EndProcedure
 
 // возвращает список реквизитов объекта для которых нужно получить значение до изменения
 Function GetObjectPropertyNamesBeforeChange()
-	Return "Date, Company, Partner, Agreement, Sender, Receiver";
+	Return "Date, Company, Partner, Agreement, Currency, Account, TransactionType, Sender, Receiver";
 EndFunction
 
 Function GetListPropertyNamesBeforeChange()
@@ -191,9 +191,16 @@ Procedure OnChainComplete(Parameters) Export
 	
 	// временно для SalesInvoice отдельно
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
-		__tmp_OnChainComplite(Parameters);
+		__tmp_SalesInvoice_OnChainComplete(Parameters);
 		Return;
 	EndIf;
+	
+	// временно для BankPayment отдельно
+	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment" Then
+		__tmp_BankPayment_OnChainComplete(Parameters);
+		Return;
+	EndIf;
+	 
 	
 	// изменение склада (реквизит шапки) в шапке документа
 	If Parameters.EventCaller = "StoreOnUserChange" Then
@@ -272,7 +279,7 @@ Function NeedCommitChangesItemListStoreOnUserChange(Parameters)
 EndFunction
 
 // временная для SalesInvoice
-Procedure __tmp_OnChainComplite(Parameters)
+Procedure __tmp_SalesInvoice_OnChainComplete(Parameters)
 	
 	// изменение склада в табличной части ItemList
 	If Parameters.EventCaller = "ItemListStoreOnUserChange" Then
@@ -345,6 +352,19 @@ Procedure __tmp_OnChainComplite(Parameters)
 	Else
 		CommitChanges(Parameters);
 	EndIf;
+EndProcedure
+
+// временная для BankPayment
+Procedure __tmp_BankPayment_OnChainComplete(Parameters)
+	ArrayOfEventCallers = New Array();
+	ArrayOfEventCallers.Add("DateOnUserChange");
+	
+	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
+		CommitChanges(Parameters);
+		Return;
+	EndIf;
+	
+	CommitChanges(Parameters);
 EndProcedure
 
 Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
@@ -919,14 +939,14 @@ EndProcedure
 // PaymentList.NetAmount
 Procedure PaymentListNetAmountOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	ControllerClientServer_V2.PaymentListNetAmountOnChange(Parameters);
 EndProcedure
 
 // PaymentList.TotalAmount
 Procedure PaymentListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	ControllerClientServer_V2.PaymentListTotalAmountOnChange(Parameters);
 EndProcedure
 
@@ -1119,8 +1139,13 @@ EndProcedure
 #Region ACCOUNT
 
 Procedure AccountOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Account", FormParameters);
+	FormParameters.EventCaller = "AccountOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
-		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.AccountOnChange(Parameters);
 	EndDo;
 EndProcedure
@@ -1131,11 +1156,36 @@ EndProcedure
 
 #EndRegion
 
+#Region TRANSACTION_TYPE
+
+Procedure TransactionTypeOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("TransactionType", FormParameters);
+	FormParameters.EventCaller = "TransactionTypeOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.TransactionTypeOnChange(Parameters);
+	EndDo;
+EndProcedure
+	
+Procedure OnSetTransactionTypeNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
 #Region CURRENCY
 
 Procedure CurrencyOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Currency", FormParameters);
+	FormParameters.EventCaller = "CurrencyOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
-		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.CurrencyOnChange(Parameters);
 	EndDo;
 EndProcedure

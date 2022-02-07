@@ -1472,8 +1472,12 @@ Function ClearByTransactionTypeExecute(Options) Export
 	EndDo;
 	
 	For Each KeyValue In Result Do
-		If ArrayOfAttributes.Find(KeyValue.Key) = Undefined Then
-			Result[KeyValue.Key] = Undefined;
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
 		EndIf;
 	EndDo;
 	Return Result;

@@ -113,7 +113,10 @@ Function GetChain()
 	// Default.Header
 	Chain.Insert("DefaultStoreInHeader"        , GetChainLink("DefaultStoreInHeaderExecute"));
 	Chain.Insert("DefaultDeliveryDateInHeader" , GetChainLink("DefaultDeliveryDateInHeaderExecute"));
-		
+	
+	// Clears
+	Chain.Insert("ClearByTransactionType", GetChainLink("ClearByTransactionTypeExecute"));
+	
 	// Changes
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
 	Chain.Insert("ChangeLegalNameByPartner"     , GetChainLink("ChangeLegalNameByPartnerExecute"));
@@ -161,7 +164,6 @@ Function GetChain()
 	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	
-	Chain.Insert("ClearByTransactionType", GetChainLink("ClearByTransactionTypeExecute"));
 	Return Chain;
 EndFunction
 
@@ -220,11 +222,16 @@ Function ChangeTransitAccountByAccountOptions() Export
 EndFunction
 
 Function ChangeTransitAccountByAccountExecute(Options) Export
-	TransitAccount = Options.CurrentTransitAccount;
-	If Options.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
-		TransitAccount = ServiceSystemServer.GetObjectAttribute(Options.Account, "TransitAccount");
+	If Options.TransactionType <> PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
+		Return Undefined;
 	EndIf;
-	Return TransitAccount;
+	
+	TransitAccount = ServiceSystemServer.GetObjectAttribute(Options.Account, "TransitAccount");
+	
+	If ValueIsFilled(TransitAccount) Then
+		Return TransitAccount;
+	EndIf;
+	Return Options.CurrentTransitAccount;
 EndFunction
 
 #EndRegion

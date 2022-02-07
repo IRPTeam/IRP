@@ -850,7 +850,6 @@ EndFunction
 
 // TransactionType.Clear
 Procedure ClearTransactionType(Parameters, Results) Export
-	//SetterObject(Undefined, "TransitAccount"                      , Parameters, Results, , "TransitAccount");
 	SetterObject(Undefined, "PaymentList.Partner"                 , Parameters, Results, , "Partner");
 	SetterObject(Undefined, "PaymentList.Payee"                   , Parameters, Results, , "Payee");
 	SetterObject(Undefined, "PaymentList.Agreement"               , Parameters, Results, , "Agreement");
@@ -858,6 +857,12 @@ Procedure ClearTransactionType(Parameters, Results) Export
 	SetterObject(Undefined, "PaymentList.BasisDocument"           , Parameters, Results, , "BasisDocument");
 	SetterObject(Undefined, "PaymentList.PlaningTransactionBasis" , Parameters, Results, , "PlanningTransactionBasis");
 	SetterObject(Undefined, "PaymentList.Order"                   , Parameters, Results, , "Order");
+	
+	Results_TransitAccount = New Array();
+	For Each Result In Results Do
+		Results_TransitAccount.Add(New Structure("Value, Options", Result.Value.TransitAccount, New Structure("Key")));
+	EndDo;
+	SetterObject(Undefined, "TransitAccount" , Parameters, Results_TransitAccount);
 EndProcedure
 
 Procedure TransactionTypeStepsEnabler_BankPayment(Parameters, Chain) Export

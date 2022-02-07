@@ -277,7 +277,7 @@ EndProcedure
 //		ArrayOfTaxInfo, AddInfo);
 //EndProcedure
 
-#Region ItemTransactionType
+#Region TRANSACTION_TYPE
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
 	ViewClient_V2.TransactionTypeOnChange(Object, Form, "PaymentList");
@@ -285,51 +285,51 @@ Procedure TransactionTypeOnChange(Object, Form, Item) Export
 //	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-Procedure CleanDataByTransactionType(Object, Form) Export
-	SetTransitAccount(Object, Form);
+//Procedure CleanDataByTransactionType(Object, Form) Export
+//	SetTransitAccount(Object, Form);
+//
+//	If Object.PaymentList.Count() = 0 Or Object.TransactionType = Form.CurrentTransactionType Then
+//		Return;
+//	EndIf;
+//
+//	AdditionalParameters = New Structure();
+//	AdditionalParameters.Insert("Object", Object);
+//	AdditionalParameters.Insert("Form", Form);
+//
+//	ShowQueryBox(New NotifyDescription("CleanDataByTransactionTypeContinue", ThisObject, AdditionalParameters),
+//		R().QuestionToUser_014, QuestionDialogMode.OKCancel);
+//EndProcedure
 
-	If Object.PaymentList.Count() = 0 Or Object.TransactionType = Form.CurrentTransactionType Then
-		Return;
-	EndIf;
+//Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Export
+//	Form = AdditionalParameters.Form;
+//	Object = AdditionalParameters.Object;
+//
+//	If Result = DialogReturnCode.OK Then
+//		ArrayAll = New Array();
+//		ArrayByType = New Array();
+//		DocBankPaymentServer.FillAttributesByType(Object.Ref, Object.TransactionType, ArrayAll, ArrayByType);
+//		DocumentsClientServer.CleanDataByArray(Object, ArrayAll, ArrayByType);
+//		For Each Row In Object.PaymentList Do
+//			Row.PlaningTransactionBasis = Undefined;
+//			Row.BasisDocument = Undefined;
+//			Row.Order = Undefined;
+//		EndDo;
+//	Else
+//		Object.TransactionType = Form.CurrentTransactionType;
+//		SetTransitAccount(Object, Form);
+//		Form.FormSetVisibilityAvailability();
+//	EndIf;
+//
+//	Form.CurrentTransactionType = Object.TransactionType;
+//EndProcedure
 
-	AdditionalParameters = New Structure();
-	AdditionalParameters.Insert("Object", Object);
-	AdditionalParameters.Insert("Form", Form);
-
-	ShowQueryBox(New NotifyDescription("CleanDataByTransactionTypeContinue", ThisObject, AdditionalParameters),
-		R().QuestionToUser_014, QuestionDialogMode.OKCancel);
-EndProcedure
-
-Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Export
-	Form = AdditionalParameters.Form;
-	Object = AdditionalParameters.Object;
-
-	If Result = DialogReturnCode.OK Then
-		ArrayAll = New Array();
-		ArrayByType = New Array();
-		DocBankPaymentServer.FillAttributesByType(Object.Ref, Object.TransactionType, ArrayAll, ArrayByType);
-		DocumentsClientServer.CleanDataByArray(Object, ArrayAll, ArrayByType);
-		For Each Row In Object.PaymentList Do
-			Row.PlaningTransactionBasis = Undefined;
-			Row.BasisDocument = Undefined;
-			Row.Order = Undefined;
-		EndDo;
-	Else
-		Object.TransactionType = Form.CurrentTransactionType;
-		SetTransitAccount(Object, Form);
-		Form.FormSetVisibilityAvailability();
-	EndIf;
-
-	Form.CurrentTransactionType = Object.TransactionType;
-EndProcedure
-
-Procedure SetTransitAccount(Object, Form) Export
-	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
-		TransitAccount = ServiceSystemServer.GetObjectAttribute(Object.Account, "TransitAccount");
-		Object.TransitAccount = TransitAccount;
-		Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
-	EndIf;
-EndProcedure
+//Procedure SetTransitAccount(Object, Form) Export
+//	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
+//		TransitAccount = ServiceSystemServer.GetObjectAttribute(Object.Account, "TransitAccount");
+//		Object.TransitAccount = TransitAccount;
+//		Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
+//	EndIf;
+//EndProcedure
 
 #EndRegion
 

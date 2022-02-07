@@ -1448,23 +1448,23 @@ Function ClearByTransactionTypeExecute(Options) Export
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	
 	If Options.TransactionType = Outgoing_CashTransferOrder Then
-		StrByType = "
-		|PlanningTransactionBasis";
+		StrByType = "";
+		//|PlanningTransactionBasis";
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
 		StrByType = "
-		|TransitAccount, 
-		|PlanningTransactionBasis";
+		|TransitAccount"; 
+		//|PlanningTransactionBasis";
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
 		StrByType = "
-		|BasisDocument,
+		//|BasisDocument,
 		|Partner,
 		|Agreement,
 		|Payee,
-		|PlaninngTransactionBasis,
+		//|PlaninngTransactionBasis,
 		|LegalNameContract";
-		If Options.TransactionType = Outgoing_PaymentToVendor Then
-			StrByType = StrByType + ", PaymentList.Order";
-		EndIf;
+		//If Options.TransactionType = Outgoing_PaymentToVendor Then
+		//	StrByType = StrByType + ", PaymentList.Order";
+		//EndIf;
 	EndIf;
 	ArrayOfAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do

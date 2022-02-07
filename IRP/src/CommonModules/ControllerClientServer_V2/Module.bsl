@@ -848,6 +848,18 @@ Function TransactionTypeStepsBinding(Parameters)
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
+// TransactionType.Clear
+Procedure ClearTransactionType(Parameters, Results) Export
+	//SetterObject(Undefined, "TransitAccount"                      , Parameters, Results, , "TransitAccount");
+	SetterObject(Undefined, "PaymentList.Partner"                 , Parameters, Results, , "Partner");
+	SetterObject(Undefined, "PaymentList.Payee"                   , Parameters, Results, , "Payee");
+	SetterObject(Undefined, "PaymentList.Agreement"               , Parameters, Results, , "Agreement");
+	SetterObject(Undefined, "PaymentList.LegalNameContract"       , Parameters, Results, , "LegalNameContract");
+	SetterObject(Undefined, "PaymentList.BasisDocument"           , Parameters, Results, , "BasisDocument");
+	SetterObject(Undefined, "PaymentList.PlaningTransactionBasis" , Parameters, Results, , "PlanningTransactionBasis");
+	SetterObject(Undefined, "PaymentList.Order"                   , Parameters, Results, , "Order");
+EndProcedure
+
 Procedure TransactionTypeStepsEnabler_BankPayment(Parameters, Chain) Export
 	StepsEnablerName = "TransactionTypeStepsEnabler_BankPayment";
 	
@@ -864,6 +876,27 @@ Procedure TransactionTypeStepsEnabler_BankPayment(Parameters, Chain) Export
 	Options.CurrentTransitAccount = Options_TransitAccount;
 	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangeTransitAccountByAccount.Options.Add(Options);
+	
+	// ClearByTransactionType
+	Chain.ClearByTransactionType.Enable = True;
+	Chain.ClearByTransactionType.Setter = "ClearTransactionType";
+	
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		// ClearByTransactionType
+		Options = ModelClientServer_V2.ClearByTransactionTypeOptions();
+		Options.TransactionType          = Options_TransactionType;
+		Options.TransitAccount           = Options_TransitAccount;
+		Options.Partner                  = GetPropertyObject(Parameters, "PaymentList.Partner"                 , Row.Key);
+		Options.Payee                    = GetPropertyObject(Parameters, "PaymentList.Payee"                   , Row.Key);
+		Options.Agreement                = GetPropertyObject(Parameters, "PaymentList.Agreement"               , Row.Key);
+		Options.LegalNameContract        = GetPropertyObject(Parameters, "PaymentList.LegalNameContract"       , Row.Key);
+		Options.BasisDocument            = GetPropertyObject(Parameters, "PaymentList.BasisDocument"           , Row.Key);
+		Options.PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
+		Options.Order                    = GetPropertyObject(Parameters, "PaymentList.Order"                   , Row.Key);
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ClearByTransactionType.Options.Add(Options);
+	EndDo;
 EndProcedure
 
 #EndRegion

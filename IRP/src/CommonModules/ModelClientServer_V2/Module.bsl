@@ -161,6 +161,7 @@ Function GetChain()
 	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	
+	Chain.Insert("ClearByTransactionType", GetChainLink("ClearByTransactionTypeExecute"));
 	Return Chain;
 EndFunction
 
@@ -1378,7 +1379,7 @@ EndProcedure
 
 #EndRegion
 
-#Region EXTRACTORS
+#Region _EXTRACT_DATA_
 
 Function ExtractDataItemKeyIsServiceOptions() Export
 	Return GetChainLinkOptions("ItemKey, IsUserChange");
@@ -1405,6 +1406,70 @@ EndFunction
 
 Function ExtractDataAgreementApArPostingDetailExecute(Options) Export
 	Return ModelServer_V2.ExtractDataAgreementApArPostingDetailImp(Options.Agreement);
+EndFunction
+
+#EndRegion
+
+#Region TRANSACTION_TYPE
+
+Function ClearByTransactionTypeOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|TransitAccount,
+		|Partner,
+		|Payee,
+		|Agreement,
+		|LegalNameContract,
+		|BasisDocument,
+		|PlanningTransactionBasis,
+		|Order");
+EndFunction
+
+Function ClearByTransactionTypeExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("TransitAccount"          , Options.TransitAccount);
+	Result.Insert("Partner"                 , Options.Partner);
+	Result.Insert("Payee"                   , Options.Payee);
+	Result.Insert("Agreement"               , Options.Agreement);
+	Result.Insert("LegalNameContract"       , Options.LegalNameContract);
+	Result.Insert("BasisDocument"           , Options.BasisDocument);
+	Result.Insert("PlanningTransactionBasis" , Options.PlanningTransactionBasis);
+	Result.Insert("Order"                   , Options.Order);
+	
+	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
+	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
+	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
+	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
+	
+	If Options.TransactionType = Outgoing_CashTransferOrder Then
+		StrByType = "
+		|PlanningTransactionBasis";
+	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
+		StrByType = "
+		|TransitAccount, 
+		|PlanningTransactionBasis";
+	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
+		StrByType = "
+		|BasisDocument,
+		|Partner,
+		|Agreement,
+		|Payee,
+		|PlaninngTransactionBasis,
+		|LegalNameContract";
+		If Options.TransactionType = Outgoing_PaymentToVendor Then
+			StrByType = StrByType + ", PaymentList.Order";
+		EndIf;
+	EndIf;
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		If ArrayOfAttributes.Find(KeyValue.Key) = Undefined Then
+			Result[KeyValue.Key] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
 EndFunction
 
 #EndRegion

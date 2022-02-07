@@ -369,14 +369,14 @@ Procedure __tmp_BankPayment_OnChainComplete(Parameters)
 	If IsChangedProperty(Parameters, "TransactionType").IsChanged Then
 		NotifyParameters = New Structure("Parameters", Parameters);
 		ShowQueryBox(New NotifyDescription("TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
-					R().QuestionToUser_008, QuestionDialogMode.YesNoCancel);
+					R().QuestionToUser_008, QuestionDialogMode.OKCancel);
 	Else
 		__tmp_BankPayment_CommitChanges(Parameters);
 	EndIf;
 EndProcedure
 
 Procedure TransactionTypeOnUserChangeContinue(Answer, NotifyParameters) Export
-	If Answer = DialogReturnCode.Yes Then
+	If Answer = DialogReturnCode.OK Then
 		__tmp_BankPayment_CommitChanges(NotifyParameters.Parameters);
 	EndIf;
 EndProcedure

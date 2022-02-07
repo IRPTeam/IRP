@@ -159,6 +159,7 @@ Function GetChain()
 	// Extractors
 	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
 	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
+	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	
 	Return Chain;
 EndFunction
@@ -193,16 +194,6 @@ Function ChangeItemKeyByItemExecute(Options) Export
 	EndIf;
 	Return CatItemsServer.GetItemKeyByItem(Options.Item);
 EndFunction
-
-//---
-Function ExtractDataItemKeysWithSerialLotNumbersOptions() Export
-	Return GetChainLinkOptions("ItemKey");
-EndFunction
-
-Function ExtractDataItemKeysWithSerialLotNumbersExecute(Options) Export
-	Return ModelServer_V2.ExtractDataItemKeysWithSerialLotNumbersImp(Options.Itemkey);
-EndFunction
-//---
 
 // Для вычисления Unit нужен только ItemKey
 Function ChangeUnitByItemKeyOptions() Export
@@ -943,17 +934,6 @@ Function ChangeStoreInHeaderByStoresInListExecute(Options) Export
 		Return Undefined;
 	EndIf;
 EndFunction
-
-Function ExtractDataItemKeyIsServiceOptions() Export
-	Return GetChainLinkOptions("ItemKey, IsUserChange");
-EndFunction
-
-Function ExtractDataItemKeyIsServiceExecute(Options) Export
-	If Not Options.IsUserChange = True Then
-		Return Undefined;
-	EndIf;
-	Return ModelServer_V2.ExtractDataItemKeyIsServiceServerImp(Options.Itemkey);
-EndFunction
 	
 #EndRegion
 
@@ -1395,6 +1375,37 @@ Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPri
 
 	Result.TaxAmount = TaxAmount;
 EndProcedure
+
+#EndRegion
+
+#Region EXTRACTORS
+
+Function ExtractDataItemKeyIsServiceOptions() Export
+	Return GetChainLinkOptions("ItemKey, IsUserChange");
+EndFunction
+
+Function ExtractDataItemKeyIsServiceExecute(Options) Export
+	If Not Options.IsUserChange = True Then
+		Return Undefined;
+	EndIf;
+	Return ModelServer_V2.ExtractDataItemKeyIsServiceServerImp(Options.Itemkey);
+EndFunction
+
+Function ExtractDataItemKeysWithSerialLotNumbersOptions() Export
+	Return GetChainLinkOptions("ItemKey");
+EndFunction
+
+Function ExtractDataItemKeysWithSerialLotNumbersExecute(Options) Export
+	Return ModelServer_V2.ExtractDataItemKeysWithSerialLotNumbersImp(Options.Itemkey);
+EndFunction
+
+Function ExtractDataAgreementApArPostingDetailOptions() Export
+	Return GetChainLinkOptions("Agreement");
+EndFunction
+
+Function ExtractDataAgreementApArPostingDetailExecute(Options) Export
+	Return ModelServer_V2.ExtractDataAgreementApArPostingDetailImp(Options.Agreement);
+EndFunction
 
 #EndRegion
 

@@ -579,6 +579,16 @@ Procedure SetExtractDataItemKeysWithSerialLotNumbers(Parameters, Results) Export
 	EndDo;
 EndProcedure
 
+Procedure SetExtractDataAgreementApArPostingDetail(Parameters, Results) Export
+	Parameters.ExtractedData.Insert("DataAgreementApArPostingDetail", New Array());
+	For Each Result In Results Do
+		NewRow = New Structure();
+		NewRow.Insert("Key"               , Result.Options.Key);
+		NewRow.Insert("ApArPostingDetail" , Result.Value);
+		Parameters.ExtractedData.DataAgreementApArPostingDetail.Add(NewRow);
+	EndDo;
+EndProcedure
+
 #EndRegion
 
 #Region RECALCULATION_AFTER_QUESTIONS_TO_USER
@@ -2093,6 +2103,10 @@ Procedure PaymentListAgreementStepsEnabler_BankPayment(Parameters, Chain) Export
 	Chain.ChangeOrderByAgreement.Enable = True;
 	Chain.ChangeOrderByAgreement.Setter = "SetPaymentListOrder";
 	
+	// ExtractDataAgreementApArPostingDetail
+	Chain.ExtractDataAgreementApArPostingDetail.Enable = True;
+	Chain.ExtractDataAgreementApArPostingDetail.Setter = "SetExtractDataAgreementApArPostingDetail";
+	
 	// ChangeTaxRate
 	Chain.ChangeTaxRate.Enable = True;
 	Chain.ChangeTaxRate.Setter = "SetPaymentListTaxRate";
@@ -2126,6 +2140,12 @@ Procedure PaymentListAgreementStepsEnabler_BankPayment(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeOrderByAgreement.Options.Add(Options);
+		
+		// ExtractDataAgreementApArPostingDetail
+		Options = ModelClientServer_V2.ExtractDataAgreementApArPostingDetailOptions();
+		Options.Agreement = Options_Agreement;
+		Options.Key = Row.Key;
+		Chain.ExtractDataAgreementApArPostingDetail.Options.Add(Options);
 		
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
@@ -2990,7 +3010,7 @@ EndProcedure
 Procedure SetItemListQuantityInBaseUnit(Parameters, Results) Export
 	Binding = ItemListQuantityInBaseUnitStepsBinding(Parameters);
 	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results,
-		"OnSetItemListQuantityInBaseUnit", "QuantityInBaseUnit");
+		"OnSetItemListQuantityInBaseUnitNotify", "QuantityInBaseUnit");
 EndProcedure
 
 // ItemList.QuantityInBaseUnit.Bind

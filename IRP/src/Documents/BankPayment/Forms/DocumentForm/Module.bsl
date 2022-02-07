@@ -44,6 +44,11 @@ Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure SetFormRules(Object, Form) Export
+	SetVisibilityAvailability(Object, Form);
+EndProcedure
+	
 &AtClientAtServerNoContext
 Function GetVisibleAttributesByTransactionType(TransactionType)
 	StrAll = "TransitAccount,
@@ -256,7 +261,7 @@ EndProcedure
 &AtClient
 Procedure TransactionTypeOnChange(Item)
 	DocBankPaymentClient.TransactionTypeOnChange(Object, ThisObject, Item);
-	SetVisibilityAvailability(Object, ThisObject);
+	//SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion

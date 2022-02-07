@@ -44,3 +44,25 @@ Function ExtractDataItemKeysWithSerialLotNumbersImp(ItemKey) Export
 	EndIf;
 	Return False;
 EndFunction
+
+Function ExtractDataAgreementApArPostingDetailImp(Agreement) Export
+	If Not ValueIsFilled(Agreement) Then
+		Return Enums.ApArPostingDetail.EmptyRef();
+	EndIf;
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Agreements.ApArPostingDetail
+	|FROM
+	|	Catalog.Agreements AS Agreements
+	|WHERE
+	|	Agreements.Ref = &Ref";
+	Query.SetParameter("Ref", Agreement);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.ApArPostingDetail;
+	EndIf;
+	Return Enums.ApArPostingDetail.EmptyRef();
+EndFunction
+

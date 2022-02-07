@@ -250,9 +250,9 @@ Function NeedQueryStoreOnUserChange(Parameters)
 	Return False;
 EndFunction
 
-Procedure StoreOnUserChangeContinue(Answer, NotifyPrameters) Export
+Procedure StoreOnUserChangeContinue(Answer, NotifyParameters) Export
 	If Answer = DialogReturnCode.Yes Then
-		CommitChanges(NotifyPrameters.Parameters);
+		CommitChanges(NotifyParameters.Parameters);
 	EndIf;
 EndProcedure
 
@@ -356,14 +356,44 @@ EndProcedure
 
 // временная для BankPayment
 Procedure __tmp_BankPayment_OnChainComplete(Parameters)
+	
 	ArrayOfEventCallers = New Array();
-	ArrayOfEventCallers.Add("DateOnUserChange");
+	ArrayOfEventCallers.Add("TransactionTypeOnUserChange");
 	
 	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
-		CommitChanges(Parameters);
+		__tmp_BankPayment_CommitChanges(Parameters);
 		Return;
 	EndIf;
 	
+	// Вопрос про изменение TransactionType
+	If IsChangedProperty(Parameters, "TransactionType").IsChanged Then
+		NotifyParameters = New Structure("Parameters", Parameters);
+		ShowQueryBox(New NotifyDescription("TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
+					R().QuestionToUser_008, QuestionDialogMode.YesNoCancel);
+	Else
+		__tmp_BankPayment_CommitChanges(Parameters);
+	EndIf;
+EndProcedure
+
+Procedure TransactionTypeOnUserChangeContinue(Answer, NotifyParameters) Export
+	If Answer = DialogReturnCode.Yes Then
+		__tmp_BankPayment_CommitChanges(NotifyParameters.Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_BankPayment_CommitChanges(Parameters)
+	// обновление реквизитов формы, в клиентском модуле сделать нельзя
+	// так как используются серверные данные
+	If Parameters.ExtractedData.Property("DataAgreementApArPostingDetail") Then
+		For Each RowPaymentList In Parameters.Object.PaymentList Do
+			For Each RowData In Parameters.ExtractedData.DataAgreementApArPostingDetail Do
+				If RowData.Key = RowPaymentList.Key Then
+					RowPaymentList.ApArPostingDetail = RowData.ApArPostingDetail;
+					Break;
+				EndIf;
+			EndDo;
+		EndDo;
+	EndIf;
 	CommitChanges(Parameters);
 EndProcedure
 
@@ -809,7 +839,7 @@ Procedure OnSetItemListQuantityNotify(Parameters) Export
 	Return;
 EndProcedure
 
-Procedure OnSetItemListQuantityInBaseUnit(Parameters) Export
+Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	// Update -> SrialLotNubersTree
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
@@ -1171,6 +1201,9 @@ Procedure TransactionTypeOnChange(Object, Form, TableNames) Export
 EndProcedure
 	
 Procedure OnSetTransactionTypeNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment" Then
+		Parameters.Form.SetFormRules(Parameters.Object, Parameters.Form);
+	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 

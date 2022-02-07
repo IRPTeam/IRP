@@ -289,24 +289,21 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
-			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
-			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '5,000' | 'pcs'            | '240,25'     | '350,00'   | '18%' | '175,00'        | '1 334,75'   | '1 575,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
-			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000' | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | 'Revenue'      |
+			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '*'          | '520,00'   | '18%' | '*'          | '*'            | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
+			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '5,000' | 'pcs'            | '*'          | '350,00'   | '18%' | '*'          | '*'            | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
+			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000' | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | 'Revenue'      |
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
-			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'   |
-			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '7 549,06' |
-			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '44 095'   |
-			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '44 095'   |
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '*'      |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '*'      |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '*'      |
 		And I close current window
 		Then the form attribute named "Branch" became equal to "Distribution department"
 		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Currency" became equal to "TRY"
-		Then the form attribute named "ItemListTotalNetAmount" became equal to "37 368,65"
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "6 726,35"
-		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "44 095,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Post SI and check Row ID Info tab
 		And I click the button named "FormPost"

@@ -204,7 +204,7 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListSelection(Item, RowSelected, Field, StandardProcessing)
-	DocBankPaymentClient.PaymentListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+	DocCashPaymentClient.PaymentListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -249,7 +249,7 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListTotalAmountOnChange(Item)
-	DocBankPaymentClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
+	DocCashPaymentClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -258,7 +258,7 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListNetAmountOnChange(Item)
-	DocBankPaymentClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
+	DocCashPaymentClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -351,7 +351,7 @@ EndProcedure
 
 &AtClient
 Procedure TaxValueOnChange(Item) Export
-	DocBankPaymentClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+	DocCashPaymentClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtServer
@@ -361,7 +361,7 @@ EndFunction
 
 &AtClient
 Procedure PaymentListTaxAmountOnChange(Item)
-	DocBankPaymentClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+	DocCashPaymentClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

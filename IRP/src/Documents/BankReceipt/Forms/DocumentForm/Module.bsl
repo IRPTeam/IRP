@@ -278,7 +278,7 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListTotalAmountOnChange(Item)
-	DocBankPaymentClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
+	DocBankReceiptClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -287,7 +287,7 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListNetAmountOnChange(Item)
-	DocBankPaymentClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
+	DocBankReceiptClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -391,7 +391,7 @@ EndProcedure
 
 &AtClient
 Procedure TaxValueOnChange(Item) Export
-	DocBankPaymentClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+	DocBankReceiptClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtServer
@@ -401,7 +401,7 @@ EndFunction
 
 &AtClient
 Procedure PaymentListTaxAmountOnChange(Item)
-	DocBankPaymentClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+	DocBankReceiptClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

@@ -45,12 +45,66 @@ Procedure FormSetVisibilityAvailability() Export
 EndProcedure
 
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form)
-	ArrayAll = New Array();
-	ArrayByType = New Array();
-	DocBankPaymentServer.FillAttributesByType(Object.Ref, Object.TransactionType, ArrayAll, ArrayByType);
-	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
+Function GetVisibleAttributesByTransactionType(TransactionType)
+	StrAll = "TransitAccount,
+	|PaymentList.Partner,
+	|PaymentList.Payee,
+	|PaymentList.Agreement,
+	|PaymentList.LegalNameContract,
+	|PaymentList.BasisDocument,
+	|PaymentList.PlaningTransactionBasis,
+	|PaymentList.Order";
+	
+	ArrayOfAllAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrAll, ",") Do
+		ArrayOfAllAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+	EndDo;
+	
+	CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
+	CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
+	PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
+	ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
+	
+	If TransactionType = CashTransferOrder Then
+		StrByType = "
+		|PaymentList.PlaningTransactionBasis";
+	ElsIf TransactionType = CurrencyExchange Then
+		StrByType = "TransitAccount, 
+		|PaymentList.PlaningTransactionBasis";
+	ElsIf TransactionType = PaymentToVendor Or TransactionType = ReturnToCustomer Then
+		StrByType = "
+		|PaymentList.BasisDocument,
+		|PaymentList.Partner,
+		|PaymentList.Agreement,
+		|PaymentList.Payee,
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.LegalNameContract";
+		If TransactionType = PaymentToVendor Then
+			StrByType = StrByType + ", PaymentList.Order";
+		EndIf;
+	EndIf;
+	
+	ArrayOfVisibleAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfVisibleAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+	EndDo;
+	Return New Structure("AllAtributes, VisibleAttributes", ArrayOfAllAttributes, ArrayOfVisibleAttributes);
+EndFunction
 
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+//	ArrayAll = New Array();
+//	ArrayByType = New Array();
+//	DocBankPaymentServer.FillAttributesByType(Object.Ref, Object.TransactionType, ArrayAll, ArrayByType);
+//	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
+	
+	AttributesForChangeVisible = GetVisibleAttributesByTransactionType(Object.TransactionType);
+	For Each Attr In AttributesForChangeVisible.AllAtributes Do
+		ItemName = StrReplace(Attr, ".", "");
+		Visibility = (AttributesForChangeVisible.VisibleAttributes.Find(Attr) <> Undefined);
+		Form.Items[TrimAll(ItemName)].Visible = Visibility;
+	EndDo;
+	
 	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange")
 		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
 		BasedOnCashTransferOrder = False;

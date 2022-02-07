@@ -528,7 +528,8 @@ EndProcedure
 Function ListOnCopyStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice"        , "ItemListOnCopyStepsEnabler_Trade_Shipment");
+	Binding.Insert("SalesInvoice" , "ItemListOnCopyStepsEnabler_Trade_Shipment");
+	Binding.Insert("BankPayment"  , "ItemListOnCopyStepsEnabler_BankPayment");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -547,6 +548,10 @@ Procedure ItemListOnCopyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 	EndDo;
 	Options.TotalAmount = TotalAmount;
 	Chain.UpdatePaymentTerms.Options.Add(Options);
+EndProcedure
+
+Procedure ItemListOnCopyStepsEnabler_BankPayment(Parameters, Chain) Export
+	PaymentListEnableCalculations(Parameters, Chain, "IsCopyRow");
 EndProcedure
 
 #EndRegion
@@ -2281,7 +2286,6 @@ Procedure PaymentListPlanningTransactionBasisStepsEnabler_BankPayment(Parameters
 		Options = ModelClientServer_V2.ChangeCompanyByPlanningTransactionBasisOptions();
 		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
 		Options.CurrentCompany = Options_Company;
-		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeCompanyByPlanningTransactionBasis.Options.Add(Options);
 		
@@ -2289,7 +2293,6 @@ Procedure PaymentListPlanningTransactionBasisStepsEnabler_BankPayment(Parameters
 		Options = ModelClientServer_V2.ChangeCashAccountByPlanningTransactionBasisOptions();
 		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
 		Options.CurrentAccount = Options_Account;
-		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeCashAccountByPlanningTransactionBasis.Options.Add(Options);
 		
@@ -2297,7 +2300,6 @@ Procedure PaymentListPlanningTransactionBasisStepsEnabler_BankPayment(Parameters
 		Options = ModelClientServer_V2.ChangeCurrencyByPlanningTransactionBasisOptions();
 		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
 		Options.CurrentCurrency = Options_Currency;
-		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeCurrencyByPlanningTransactionBasis.Options.Add(Options);
 		
@@ -2494,13 +2496,12 @@ Procedure PaymentListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		Options.Ref = Parameters.Object.Ref;
 		
 		// нужно пересчитать NetAmount, TotalAmount, TaxAmount
-		If     WhoIsChanged = "IsTaxRateChanged" Or WhoIsChanged = "IsCopyRow"
-			Or WhoIsChanged = "RecalculationsOnCopy" Then
+		If     WhoIsChanged = "IsTaxRateChanged" Or WhoIsChanged = "IsCopyRow" Then
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;
 			Options.CalculateTaxAmount.Enable     = True;
 			
-		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
+		ElsIf WhoIsChanged = "IsTotalAmountChanged" Or WhoIsChanged = "RecalculationsOnCopy" Then
 			// при изменении TotalAmount налоги расчитываются в обратную сторону, меняется NetAmount
 			Options.CalculateTaxAmountReverse.Enable   = True;
 			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;

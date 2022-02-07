@@ -366,7 +366,8 @@ Procedure __tmp_BankPayment_OnChainComplete(Parameters)
 	EndIf;
 	
 	// Вопрос про изменение TransactionType
-	If IsChangedProperty(Parameters, "TransactionType").IsChanged Then
+	If IsChangedProperty(Parameters, "TransactionType").IsChanged 
+		And Parameters.Object.PaymentList.Count() Then
 		NotifyParameters = New Structure("Parameters", Parameters);
 		ShowQueryBox(New NotifyDescription("TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_008, QuestionDialogMode.OKCancel);

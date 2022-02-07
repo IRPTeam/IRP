@@ -303,7 +303,8 @@ EndProcedure
 Function FormOnCreateAtServerStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice", "OnCreateAtServerStepsEnabler_WithTaxes");
+	Binding.Insert("SalesInvoice", "OnCreateAtServerStepsEnabler_SalesInvoice");
+	Binding.Insert("BankPayment" , "OnCreateAtServerStepsEnabler_BankPayment");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -314,7 +315,7 @@ Procedure FormModificator_CreateTaxesFormControls(Parameters, Results) Export
 	EndIf;
 EndProcedure
 
-Procedure OnCreateAtServerStepsEnabler_WithTaxes(Parameters, Chain) Export
+Procedure OnCreateAtServerStepsEnabler_SalesInvoice(Parameters, Chain) Export
 	// RequireCallCreateTaxesFormControls
 	Chain.RequireCallCreateTaxesFormControls.Enable = True;
 	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
@@ -329,6 +330,24 @@ Procedure OnCreateAtServerStepsEnabler_WithTaxes(Parameters, Chain) Export
 	// при копировании документа нужно перерасчитать TaxAmount
 	If Parameters.FormIsExists And ValueIsFilled(Parameters.Form.Parameters.CopyingValue) Then
 		ItemListEnableCalculations(Parameters, Chain, "RecalculationsOnCopy");
+	EndIf;
+EndProcedure
+
+Procedure OnCreateAtServerStepsEnabler_BankPayment(Parameters, Chain) Export
+	// RequireCallCreateTaxesFormControls
+	Chain.RequireCallCreateTaxesFormControls.Enable = True;
+	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
+	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
+	Options.Ref            = Parameters.Object.Ref;
+	Options.Date           = GetPropertyObject(Parameters, "Date");
+	Options.Company        = GetPropertyObject(Parameters, "Company");
+	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
+	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
+	
+	// при копировании документа нужно перерасчитать TaxAmount
+	If Parameters.FormIsExists And ValueIsFilled(Parameters.Form.Parameters.CopyingValue) Then
+		PaymentListEnableCalculations(Parameters, Chain, "RecalculationsOnCopy");
 	EndIf;
 EndProcedure
 
@@ -2497,7 +2516,8 @@ Procedure PaymentListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		ElsIf WhoIsChanged = "IsNetAmountChanged" Then
 			Options.CalculateTaxAmountByNetAmount.Enable   = True;
 			Options.CalculateTotalAmountByNetAmount.Enable = True;
-			
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
 		EndIf;
 		
 		Options.AmountOptions.DontCalculateRow = False;
@@ -3158,6 +3178,8 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
 		EndIf;
 		
 		Options.AmountOptions.DontCalculateRow = GetPropertyObject(Parameters, "ItemList.DontCalculateRow", Row.Key);

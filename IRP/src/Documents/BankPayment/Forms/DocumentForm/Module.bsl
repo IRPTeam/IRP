@@ -201,8 +201,8 @@ EndProcedure
 
 &AtClient
 Procedure TransactionTypeOnChange(Item)
-	SetVisibilityAvailability(Object, ThisObject);
 	DocBankPaymentClient.TransactionTypeOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion

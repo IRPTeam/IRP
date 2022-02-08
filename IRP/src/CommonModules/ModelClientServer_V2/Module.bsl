@@ -866,7 +866,7 @@ Function ChangeAmountExchangeByPTBBankReceiptExecute(Options) Export
 			ArrayOfPlaningTransactionBasises = New Array();
 			ArrayOfPlaningTransactionBasises.Add(Options.PlanningTransactionBasis);
 			ArrayOfBalance = 
-			DocBankPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises, Options.Ref);
+			DocBankReceiptServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises, Options.Ref);
 			If ArrayOfBalance.Count() Then
 				Return ArrayOfBalance[0].AmountExchange;
 			Else

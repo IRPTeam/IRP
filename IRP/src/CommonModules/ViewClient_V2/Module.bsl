@@ -1206,7 +1206,7 @@ EndProcedure
 Procedure OnSetTransactionTypeNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt" Then
-		Parameters.Form.FormSetVisibilityAvailability(Parameters.Object, Parameters.Form);
+		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure

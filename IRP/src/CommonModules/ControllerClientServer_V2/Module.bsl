@@ -1010,7 +1010,7 @@ Function CurrencyExchangeStepsBinding(Parameters)
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure CurrencyStepsEnabler_BankPayment(Parameters, Chain) Export
+Procedure CurrencyStepsEnabler_BankPaymentReceipt(Parameters, Chain) Export
 	StepsEnablerName = "CurrencyStepsEnabler_BankPaymentReceipt";
 	
 	Options_Currency = GetPropertyObject(Parameters, "Currency");
@@ -2128,8 +2128,8 @@ Function PaymentListPartnerStepsBinding(Parameters)
 	DataPath = "PaymentList.Partner";
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "PaymentListPartnerStepsEnabler_LegalNameIsPayer");
-	Binding.Insert("BankPayment"         , "PaymentListPartnerStepsEnabler_BankPaymentReceipt");
-	Binding.Insert("BankReceipt"         , "PaymentListPartnerStepsEnabler_BankPaymentReceipt");
+	Binding.Insert("BankPayment"         , "PaymentListPartnerStepsEnabler_BankPayment");
+	Binding.Insert("BankReceipt"         , "PaymentListPartnerStepsEnabler_BankReceipt");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
@@ -2149,8 +2149,8 @@ Procedure PaymentListPartnerStepsEnabler_LegalNameIsPayer(Parameters, Chain) Exp
 	EndDo;
 EndProcedure
 
-Procedure PaymentListPartnerStepsEnabler_BankPaymentReceipt(Parameters, Chain) Export
-	StepsEnablerName = "PaymentListPartnerStepsEnabler_BankPaymentReceipt";
+Procedure PaymentListPartnerStepsEnabler_BankPayment(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListPartnerStepsEnabler_BankPayment";
 	
 	Options_Date = GetPropertyObject(Parameters, "Date");
 	
@@ -2165,6 +2165,43 @@ Procedure PaymentListPartnerStepsEnabler_BankPaymentReceipt(Parameters, Chain) E
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		Options_Partner   = GetPropertyObject(Parameters, "PaymentList.Partner"  , Row.Key);
 		Options_LegalName = GetPropertyObject(Parameters, "PaymentList.Payee"    , Row.Key);
+		Options_Agreement = GetPropertyObject(Parameters, "PaymentList.Agreement", Row.Key);
+		
+		// ChangeLegalNameByPartner
+		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+		Options.Partner   = Options_Partner;
+		Options.LegalName = Options_LegalName;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeLegalNameByPartner.Options.Add(Options);
+		
+		// ChangeAgreementByPartner
+		Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+		Options.Partner       = Options_Partner;
+		Options.Agreement     = Options_Agreement;
+		Options.CurrentDate   = Options_Date;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeAgreementByPartner.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure PaymentListPartnerStepsEnabler_BankReceipt(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListPartnerStepsEnabler_BankReceipt";
+	
+	Options_Date = GetPropertyObject(Parameters, "Date");
+	
+	// ChangeLegalNameByPartner
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	Chain.ChangeLegalNameByPartner.Setter = "SetPaymentListLegalName";
+	
+	// ChangeAgreementByPartner
+	Chain.ChangeAgreementByPartner.Enable = True;
+	Chain.ChangeAgreementByPartner.Setter = "SetPaymentListAgreement";
+	
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options_Partner   = GetPropertyObject(Parameters, "PaymentList.Partner"  , Row.Key);
+		Options_LegalName = GetPropertyObject(Parameters, "PaymentList.Payer"    , Row.Key);
 		Options_Agreement = GetPropertyObject(Parameters, "PaymentList.Agreement", Row.Key);
 		
 		// ChangeLegalNameByPartner
@@ -2397,6 +2434,7 @@ Function PaymentListPlanningTransactionBasisStepsBinding(Parameters)
 	DataPath = "PaymentList.PlaningTransactionBasis";
 	Binding = New Structure();
 	Binding.Insert("BankPayment" , "PaymentListPTBStepsEnabler_BankPayment");
+	Binding.Insert("BankReceipt" , "PaymentListPTBStepsEnabler_BankReceipt");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
@@ -2459,7 +2497,7 @@ Procedure PaymentListPTBStepsEnabler_BankPayment(Parameters, Chain) Export
 EndProcedure
 
 Procedure PaymentListPTBStepsEnabler_BankReceipt(Parameters, Chain) Export
-	StepsEnablerName = "PaymentListPTBStepsEnabler_BankPayment";
+	StepsEnablerName = "PaymentListPTBStepsEnabler_BankReceip";
 	
 	Options_Company          = GetPropertyObject(Parameters, "Company");
 	Options_Account          = GetPropertyObject(Parameters, "Account");

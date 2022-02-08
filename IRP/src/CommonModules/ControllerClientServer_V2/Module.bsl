@@ -4249,11 +4249,17 @@ Function SetProperty(Cache, DataPath, _Key, _Value)
 EndFunction
 
 Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
+	Result = New Structure();
+	Result.Insert("FullDataPath" , "");
+	Result.Insert("StepsEnabler" , "");
+	Result.Insert("DataPath"     , "");
+	
 	If TypeOf(DataPath) = Type("Map") Then
 		DataPath = DataPath.Get(Parameters.ObjectMetadataInfo.MetadataName);
 		If DataPath = Undefined Then
-			Raise StrTemplate("DataPath instance of Map not found value by key [%1]", 
-				Parameters.ObjectMetadataInfo.MetadataName);
+			Return Result;
+			//Raise StrTemplate("DataPath instance of Map not found value by key [%1]", 
+			//	Parameters.ObjectMetadataInfo.MetadataName);
 		EndIf;
 	EndIf;
 	
@@ -4269,10 +4275,9 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 		Raise StrTemplate("Steps enabler is not defined [%1]", DataPath);
 	Endif;
 	
-	Result = New Structure();
-	Result.Insert("FullDataPath" , FullDataPath);
-	Result.Insert("StepsEnabler" , StepsEnabler);
-	Result.Insert("DataPath", DataPath);
+	Result.FullDataPath = FullDataPath;
+	Result.StepsEnabler = StepsEnabler;
+	Result.DataPath     = DataPath;
 	Return Result;
 EndFunction
 

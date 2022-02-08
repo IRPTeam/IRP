@@ -44,7 +44,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Chain
+#Region CHAIN
 
 Function GetChainLink(ExecutorName)
 	ChainLink = New Structure();
@@ -166,6 +166,9 @@ Function GetChain()
 
 	Chain.Insert("ChangeAmountExchangeByPTBBankReceipt" , GetChainLink("ChangeAmountExchangeByPTBBankReceiptExecute"));
 	Chain.Insert("ChangeAmountExchangeByPTBCashReceipt" , GetChainLink("ChangeAmountExchangeByPTBCashReceiptExecute"));
+	
+	Chain.Insert("ChangePartnerByPTBCashPayment" , GetChainLink("ChangePartnerByPTBCashPaymentExecute"));
+	Chain.Insert("ChangePartnerByPTBCashReceipt" , GetChainLink("ChangePartnerByPTBCashReceiptExecute"));
 	
 	Chain.Insert("ChangeItemKeyByItem"    , GetChainLink("ChangeItemKeyByItemExecute"));
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
@@ -320,6 +323,7 @@ EndFunction
 
 #Region CHANGE_CASH_ACCOUNT_BY_PLANNING_TRANSACTION_BASIS
 
+// Bank Payment
 Function ChangeCashAccountByPTBBankPaymentOptions() Export
 	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentAccount");
 EndFunction
@@ -337,6 +341,7 @@ Function ChangeCashAccountByPTBBankPaymentExecute(Options) Export
 	Return Options.CurrentAccount;
 EndFunction
 
+// Bank Receipt
 Function ChangeCashAccountByPTBBankReceiptOptions() Export
 	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentAccount");
 EndFunction
@@ -354,20 +359,40 @@ Function ChangeCashAccountByPTBBankReceiptExecute(Options) Export
 	Return Options.CurrentAccount;
 EndFunction
 
+// Cash Payment
 Function ChangeCashAccountByPTBCashPaymentOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentAccount");
 EndFunction
 
 Function ChangeCashAccountByPTBCashPaymentExecute(Options) Export
-	Return Undefined;
+	If ValueIsFilled(Options.CurrentAccount) Then
+		Return Options.CurrentAccount;
+	EndIf;
+	
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashPayment(Options.PlanningTransactionBasis);
+			Return CashTransferOrderInfo.Account;
+	EndIf;
+	Return Options.CurrentAccount;
 EndFunction
 
+// Cash Receipt
 Function ChangeCashAccountByPTBCashReceiptOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentAccount");
 EndFunction
 
 Function ChangeCashAccountByPTBCashReceiptExecute(Options) Export
-	Return Undefined;
+	If ValueIsFilled(Options.CurrentAccount) Then
+		Return Options.CurrentAccount;
+	EndIf;
+	
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashReceipt(Options.PlanningTransactionBasis);
+			Return CashTransferOrderInfo.Account;
+	EndIf;
+	Return Options.CurrentAccount;
 EndFunction
 
 #EndRegion
@@ -471,6 +496,52 @@ Function ChangePartnerByLegalNameExecute(Options) Export
 		EndIf;
 	EndIf;
 	Return Options.Partner;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_BY_PLANNING_TRANSACTION_BASIS
+
+// Cash Payment
+Function ChangePartnerByPTBCashPaymentOptions() Export
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentPartner, Ref");
+EndFunction
+
+Function ChangePartnerByPTBCashPaymentExecute(Options) Export
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			ArrayOfPlaningTransactionBasises = New Array();
+			ArrayOfPlaningTransactionBasises.Add(Options.PlanningTransactionBasis);
+			ArrayOfBalance = 
+			DocCashPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises, Options.Ref);
+			If ArrayOfBalance.Count() Then 
+				Return ArrayOfBalance[0].Partner;
+			Else
+				Return Options.CurrentPartner;
+			EndIf;
+	EndIf;
+	Return Options.CurrentPartner;
+EndFunction
+
+// Cash Receipt
+Function ChangePartnerByPTBCashReceiptOptions() Export
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentPartner, Ref");
+EndFunction
+
+Function ChangePartnerByPTBCashReceiptExecute(Options) Export
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			ArrayOfPlaningTransactionBasises = New Array();
+			ArrayOfPlaningTransactionBasises.Add(Options.PlanningTransactionBasis);
+			ArrayOfBalance = 
+			DocCashReceiptServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises);
+			If ArrayOfBalance.Count() Then 
+				Return ArrayOfBalance[0].Partner;
+			Else
+				Return Options.CurrentPartner;
+			EndIf;
+	EndIf;
+	Return Options.CurrentPartner;
 EndFunction
 
 #EndRegion
@@ -582,6 +653,7 @@ EndFunction
 
 #Region CHANGE_CURRENCY_BY_PLANNING_TRANSACTION_BASIS
 
+// Bank Payment
 Function ChangeCurrencyByPTBBankPaymentOptions() Export
 	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCurrency");
 EndFunction
@@ -599,6 +671,7 @@ Function ChangeCurrencyByPTBBankPaymentExecute(Options) Export
 	Return Options.CurrentCurrency;
 EndFunction
 
+// Bank Receipt
 Function ChangeCurrencyByPTBBankReceiptOptions() Export
 	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCurrency");
 EndFunction
@@ -616,22 +689,43 @@ Function ChangeCurrencyByPTBBankReceiptExecute(Options) Export
 	Return Options.CurrentCurrency;
 EndFunction
 
+// Cash Payment
 Function ChangeCurrencyByPTBCashPaymentOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCurrency");
 EndFunction
 
 Function ChangeCurrencyByPTBCashPaymentExecute(Options) Export
-	Return Undefined;
+	If ValueIsFilled(Options.CurrentCurrency) Then
+		Return Options.CurrentCurrency;
+	EndIf;
+	
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashPayment(Options.PlanningTransactionBasis);
+			Return CashTransferOrderInfo.Currency;
+	EndIf;
+	Return Options.CurrentCurrency;
 EndFunction
 
+// Cash Receipt
 Function ChangeCurrencyByPTBCashReceiptOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCurrency");
 EndFunction
 
 Function ChangeCurrencyByPTBCashReceiptExecute(Options) Export
-	Return Undefined;
+	If ValueIsFilled(Options.CurrentCurrency) Then
+		Return Options.CurrentCurrency;
+	EndIf;
+	
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashReceipt(Options.PlanningTransactionBasis);
+			Return CashTransferOrderInfo.Currency;
+	EndIf;
+	Return Options.CurrentCurrency;
 EndFunction
 
+// Bank Receipt
 Function ChangeCurrencyExchangeByPTBBankReceiptOptions() Export
 	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCurrencyExchange");
 EndFunction
@@ -649,12 +743,22 @@ Function ChangeCurrencyExchangeByPTBBankReceiptExecute(Options) Export
 	Return Options.CurrentCurrencyExchange;
 EndFunction
 
+// Cash Receipt
 Function ChangeCurrencyExchangeByPTBCashReceiptOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCurrencyExchange");
 EndFunction
 
 Function ChangeCurrencyExchangeByPTBCashReceiptExecute(Options) Export
-	Return Undefined;
+	If ValueIsFilled(Options.CurrentCurrencyExchange) Then
+		Return Options.CurrentCurrencyExchange;
+	EndIf;
+	
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashReceipt(Options.PlanningTransactionBasis);
+			Return CashTransferOrderInfo.CurrencyExchange;
+	EndIf;
+	Return Options.CurrentCurrencyExchange;
 EndFunction
 
 #EndRegion
@@ -677,6 +781,7 @@ EndFunction
 
 #Region CHANGE_COMPANY_BY_PLANNING_TRANSACTION_BASIS
 
+// Bank Payment
 Function ChangeCompanyByPTBBankPaymentOptions() Export
 	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCompany");
 EndFunction
@@ -694,6 +799,7 @@ Function ChangeCompanyByPTBBankPaymentExecute(Options) Export
 	Return Options.CurrentCompany;
 EndFunction
 
+// Bank Receipt
 Function ChangeCompanyByPTBBankReceiptOptions() Export
 	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCompany");
 EndFunction
@@ -711,20 +817,40 @@ Function ChangeCompanyByPTBBankReceiptExecute(Options) Export
 	Return Options.CurrentCompany;
 EndFunction
 
+// Cash Payment
 Function ChangeCompanyByPTBCashPaymentOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCompany");
 EndFunction
 
 Function ChangeCompanyByPTBCashPaymentExecute(Options) Export
-	Return Undefined;
+	If ValueIsFilled(Options.CurrentCompany) Then
+		Return Options.CurrentCompany;
+	EndIf;
+	
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashPayment(Options.PlanningTransactionBasis);
+			Return CashTransferOrderInfo.Company;
+	EndIf;
+	Return Options.CurrentCompany;
 EndFunction
 
+// Cash Receipt
 Function ChangeCompanyByPTBCashReceiptOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentCompany");
 EndFunction
 
 Function ChangeCompanyByPTBCashReceiptExecute(Options) Export
-	Return Undefined;
+	If ValueIsFilled(Options.CurrentCompany) Then
+		Return Options.CurrentCompany;
+	EndIf;
+	
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			CashTransferOrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashReceipt(Options.PlanningTransactionBasis);
+			Return CashTransferOrderInfo.Company;
+	EndIf;
+	Return Options.CurrentCompany;
 EndFunction
 
 #EndRegion
@@ -800,6 +926,7 @@ EndFunction
 
 #Region CHANGE_TOTAL_AMOUNT_BY_PLANNING_TRANSACTION_BASIS
 
+// Bank Payment
 Function ChangeTotalAmountByPTBBankPaymentOptions() Export
 	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentTotalAmount, Ref");
 EndFunction
@@ -812,7 +939,8 @@ Function ChangeTotalAmountByPTBBankPaymentExecute(Options) Export
 			ArrayOfBalance = 
 			DocBankPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises, Options.Ref);
 			If ArrayOfBalance.Count() Then
-				Return ArrayOfBalance[0].Amount;
+				Amount = ArrayOfBalance[0].Amount;
+				Return ?(ValueIsFilled(Amount), Amount, 0);
 			Else
 				Return Options.CurrentTotalAmount;
 			EndIf;
@@ -820,6 +948,7 @@ Function ChangeTotalAmountByPTBBankPaymentExecute(Options) Export
 	Return Options.CurrentTotalAmount;
 EndFunction
 
+// Bank Receipt
 Function ChangeTotalAmountByPTBBankReceiptOptions() Export
 	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentTotalAmount, Ref");
 EndFunction
@@ -841,22 +970,51 @@ Function ChangeTotalAmountByPTBBankReceiptExecute(Options) Export
 	Return Options.CurrentTotalAmount;
 EndFunction
 
+// Cash Payment
 Function ChangeTotalAmountByPTBCashPaymentOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentTotalAmount, Ref");
 EndFunction
 
 Function ChangeTotalAmountByPTBCashPaymentExecute(Options) Export
-	Return Undefined;
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			ArrayOfPlaningTransactionBasises = New Array();
+			ArrayOfPlaningTransactionBasises.Add(Options.PlanningTransactionBasis);
+			ArrayOfBalance = 
+			DocCashPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises, Options.Ref);
+			If ArrayOfBalance.Count() Then
+				Amount = ArrayOfBalance[0].Amount;
+				Return ?(ValueIsFilled(Amount), Amount, 0);
+			Else
+				Return Options.CurrentTotalAmount;
+			EndIf;
+	EndIf;
+	Return Options.CurrentTotalAmount;
 EndFunction
 
+// Cash Receipt
 Function ChangeTotalAmountByPTBCashReceiptOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentTotalAmount, Ref");
 EndFunction
 
 Function ChangeTotalAmountByPTBCashReceiptExecute(Options) Export
-	Return Undefined;
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			ArrayOfPlaningTransactionBasises = New Array();
+			ArrayOfPlaningTransactionBasises.Add(Options.PlanningTransactionBasis);
+			ArrayOfBalance = 
+			DocCashReceiptServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises);
+			If ArrayOfBalance.Count() Then
+				Amount = ArrayOfBalance[0].Amount;
+				Return ?(ValueIsFilled(Amount), Amount, 0);
+			Else
+				Return Options.CurrentTotalAmount;
+			EndIf;
+	EndIf;
+	Return Options.CurrentTotalAmount;
 EndFunction
 
+// Bank Receipt
 Function ChangeAmountExchangeByPTBBankReceiptOptions() Export
 	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentAmountExchange, Ref");
 EndFunction
@@ -869,7 +1027,8 @@ Function ChangeAmountExchangeByPTBBankReceiptExecute(Options) Export
 			ArrayOfBalance = 
 			DocBankReceiptServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises, Options.Ref);
 			If ArrayOfBalance.Count() Then
-				Return ArrayOfBalance[0].AmountExchange;
+				Amount = ArrayOfBalance[0].AmountExchange;
+				Return ?(ValueIsFilled(Amount), Amount, 0);
 			Else
 				Return Options.CurrentAmountExchange;
 			EndIf;
@@ -877,12 +1036,26 @@ Function ChangeAmountExchangeByPTBBankReceiptExecute(Options) Export
 	Return Options.CurrentAmountExchange;
 EndFunction
 
+// Cash Receipt
 Function ChangeAmountExchangeByPTBCashReceiptOptions() Export
-	Return GetChainLinkOptions("");
+	Return GetChainLinkOptions("PlanningTransactionBasis, CurrentAmountExchange, Ref");
 EndFunction
 
 Function ChangeAmountExchangeByPTBCashReceiptExecute(Options) Export
-	Return Undefined;
+	If ValueIsFilled(Options.PlanningTransactionBasis)
+		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+			ArrayOfPlaningTransactionBasises = New Array();
+			ArrayOfPlaningTransactionBasises.Add(Options.PlanningTransactionBasis);
+			ArrayOfBalance = 
+			DocCashReceiptServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises);
+			If ArrayOfBalance.Count() Then
+				Amount = ArrayOfBalance[0].AmountExchange;
+				Return ?(ValueIsFilled(Amount), Amount, 0);
+			Else
+				Return Options.CurrentAmountExchange;
+			EndIf;
+	EndIf;
+	Return Options.CurrentAmountExchange;
 EndFunction
 
 #EndRegion
@@ -1645,6 +1818,7 @@ EndFunction
 
 #Region TRANSACTION_TYPE
 
+// Bank Payment
 Function ClearByTransactionTypeBankPaymentOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|TransitAccount,
@@ -1705,6 +1879,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Return Result;
 EndFunction
 
+// Bank Receipt
 Function ClearByTransactionTypeBankReceiptOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|TransitAccount,
@@ -1758,6 +1933,130 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_TransferFromPOS Then
 		StrByType = "
 		|PaymentList.POSAccount";
+	EndIf;
+	
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+// Cash Payment
+Function ClearByTransactionTypeCashPaymentOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|BasisDocument,
+		|Partner,
+		|PlanningTransactionBasis,
+		|Agreement,
+		|LegalNameContract,
+		|Payee,
+		|Order");
+EndFunction
+
+Function ClearByTransactionTypeCashPaymentExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("BasisDocument"            , Options.BasisDocument);
+	Result.Insert("Partner"                  , Options.Partner);
+	Result.Insert("PlanningTransactionBasis" , Options.PlanningTransactionBasis);
+	Result.Insert("Agreement"                , Options.Agreement);
+	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
+	Result.Insert("Payee"                    , Options.Payee);
+	Result.Insert("Order"                    , Options.Order);
+
+	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
+	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
+	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
+	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
+
+	// список реквизитов которые не надо очищать
+	// PlanningTransactionBasis, BasisDocument, Order - очищаются всегда
+	If Options.TransactionType = Outgoing_CashTransferOrder Then
+		StrByType = "";
+	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
+		StrByType = "
+		|Partner"; 
+	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
+		StrByType = "
+		|Partner,
+		|Agreement,
+		|Payee,
+		|LegalNameContract";
+	EndIf;
+	
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+// Cash Receipt
+Function ClearByTransactionTypeCashReceiptOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|CurrencyExchange,
+		|BasisDocument,
+		|Partner,
+		|PlaningTransactionBasis,
+		|Agreement,
+		|LegalNameContract,
+		|Payer,
+		|AmountExchange,
+		|Order");
+EndFunction
+
+Function ClearByTransactionTypeCashReceiptExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("CurrencyExchange"        , Options.CurrencyExchange);
+	Result.Insert("BasisDocument"           , Options.BasisDocument);
+	Result.Insert("Partner"                 , Options.Partner);
+	Result.Insert("PlaningTransactionBasis" , Options.PlaningTransactionBasis);
+	Result.Insert("Agreement"               , Options.Agreement);
+	Result.Insert("LegalNameContract"       , Options.LegalNameContract);
+	Result.Insert("Payer"                   , Options.Payer);
+	Result.Insert("AmountExchange"          , Options.AmountExchange);
+	Result.Insert("Order"                   , Options.Order);
+
+	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
+	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
+	Incoming_PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
+	Incoming_ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
+	
+	// список реквизитов которые не надо очищать
+	// PlanningTransactionBasis, BasisDocument, Order - очищаются всегда
+	If Options.TransactionType = Incoming_CashTransferOrder Then
+		StrByType = "";
+	ElsIf Options.TransactionType = Incoming_CurrencyExchange Then
+		StrByType = "
+		|Partner, 
+		|CurrencyExchange,
+		|AmountExchange";
+	ElsIf Options.TransactionType = Incoming_PaymentFromCustomer Or Options.TransactionType = Incoming_ReturnFromVendor Then
+		StrByType = "
+		|Partner,
+		|Agreement,
+		|Payer,
+		|LegalNameContract";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();

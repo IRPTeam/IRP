@@ -159,7 +159,7 @@ EndProcedure
 
 // возвращает список реквизитов объекта для которых нужно получить значение до изменения
 Function GetObjectPropertyNamesBeforeChange()
-	Return "Date, Company, Partner, Agreement, Currency, Account, TransactionType, Sender, Receiver";
+	Return "Date, Company, Partner, Agreement, Currency, Account, CashAccount, TransactionType, Sender, Receiver";
 EndFunction
 
 Function GetListPropertyNamesBeforeChange()
@@ -195,10 +195,12 @@ Procedure OnChainComplete(Parameters) Export
 		Return;
 	EndIf;
 	
-	// временно для BankPaymentReceipt отдельно
+	// временно для BankCashPaymentReceipt отдельно
 	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt" Then
-		__tmp_BankPaymentReceipt_OnChainComplete(Parameters);
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt" Then
+		__tmp_BankCashPaymentReceipt_OnChainComplete(Parameters);
 		Return;
 	EndIf;
 	 
@@ -355,14 +357,14 @@ Procedure __tmp_SalesInvoice_OnChainComplete(Parameters)
 	EndIf;
 EndProcedure
 
-// временная для BankPaymentReceipt
-Procedure __tmp_BankPaymentReceipt_OnChainComplete(Parameters)
+// временная для BankCashPaymentReceipt
+Procedure __tmp_BankCashPaymentReceipt_OnChainComplete(Parameters)
 	
 	ArrayOfEventCallers = New Array();
 	ArrayOfEventCallers.Add("TransactionTypeOnUserChange");
 	
 	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
-		__tmp_BankPaymentReceipt_CommitChanges(Parameters);
+		__tmp_BankCashPaymentReceipt_CommitChanges(Parameters);
 		Return;
 	EndIf;
 	
@@ -373,17 +375,17 @@ Procedure __tmp_BankPaymentReceipt_OnChainComplete(Parameters)
 		ShowQueryBox(New NotifyDescription("TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_014, QuestionDialogMode.OKCancel);
 	Else
-		__tmp_BankPaymentReceipt_CommitChanges(Parameters);
+		__tmp_BankCashPaymentReceipt_CommitChanges(Parameters);
 	EndIf;
 EndProcedure
 
 Procedure TransactionTypeOnUserChangeContinue(Answer, NotifyParameters) Export
 	If Answer = DialogReturnCode.OK Then
-		__tmp_BankPaymentReceipt_CommitChanges(NotifyParameters.Parameters);
+		__tmp_BankCashPaymentReceipt_CommitChanges(NotifyParameters.Parameters);
 	EndIf;
 EndProcedure
 
-Procedure __tmp_BankPaymentReceipt_CommitChanges(Parameters)
+Procedure __tmp_BankCashPaymentReceipt_CommitChanges(Parameters)
 	// обновление реквизитов формы, в клиентском модуле сделать нельзя
 	// так как используются серверные данные
 	If Parameters.ExtractedData.Property("DataAgreementApArPostingDetail") Then
@@ -616,7 +618,9 @@ Procedure OnOpenFormNotify(Parameters) Export
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt" Then
 		DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 	EndIf;
 EndProcedure
@@ -1189,6 +1193,26 @@ EndProcedure
 
 #EndRegion
 
+#Region CASH_ACCOUNT
+
+Procedure CashAccountOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("CashAccount", FormParameters);
+	FormParameters.EventCaller = "AccountOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.AccountOnChange(Parameters);
+	EndDo;
+EndProcedure
+	
+Procedure OnSetCashAccountNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
 #Region TRANSACTION_TYPE
 
 Procedure TransactionTypeOnChange(Object, Form, TableNames) Export
@@ -1205,7 +1229,9 @@ EndProcedure
 	
 Procedure OnSetTransactionTypeNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);

@@ -175,9 +175,14 @@ Scenario: _043400 preparation (Bank receipt)
 			| "Documents.BankReceipt.FindByNumber(513).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankReceipt.FindByNumber(514).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankReceipt.FindByNumber(515).GetObject().Write(DocumentWriteMode.Posting);" |	
+	* Load PR
+		When Create document PurchaseReturn objects (advance)
+		And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document BankPayment objects (Return from vendor)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.BankReceipt.FindByNumber(517).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
 Scenario: _043401 check Bank receipt movements by the Register "R3010 Cash on hand"
@@ -463,6 +468,29 @@ Scenario: _043425 check Bank receipt movements by the Register "R3010 Cash on ha
 			| ''                                           | 'Receipt'     | '02.09.2021 14:30:07' | '100'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                                           | 'Receipt'     | '02.09.2021 14:30:07' | '200'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                           | 'Receipt'     | '02.09.2021 14:30:07' | '200'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |			
+	And I close all client application windows
+
+Scenario: _043426 check Bank receipt movements by the Register "R1021 Vendors transactions" (Return from vendor, with basis)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '517' |
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 517 dated 08.02.2022 12:44:01' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''              | ''        | ''                   | ''                                             | ''      | ''                     | ''                         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''              | ''        | ''                   | ''                                             | ''      | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"'     | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''              | ''        | ''                   | ''                                             | ''      | ''                     | ''                         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''              | ''        | ''                   | ''                                             | ''      | 'Attributes'           | ''                         |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'          | 'Basis'                                        | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                           | 'Expense'     | '08.02.2022 12:44:01' | '-50'       | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |
+			| ''                                           | 'Expense'     | '08.02.2022 12:44:01' | '-50'       | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |
+			| ''                                           | 'Expense'     | '08.02.2022 12:44:01' | '-50'       | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |
+			| ''                                           | 'Expense'     | '08.02.2022 12:44:01' | '-8,56'     | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |		
 	And I close all client application windows
 
 Scenario: _043430 Bank receipt clear posting/mark for deletion

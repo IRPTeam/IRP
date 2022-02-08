@@ -398,7 +398,12 @@ EndFunction
 
 Function ChangePartnerByLegalNameExecute(Options) Export
 	If ValueIsFilled(Options.LegalName) Then
-		Return DocumentsServer.GetPartnerByLegalName(Options.LegalName, Options.Partner);
+		Partner = DocumentsServer.GetPartnerByLegalName(Options.LegalName, Options.Partner);
+		If ValueIsFilled(Partner) Then
+			Return Partner;
+		Else
+			Return Options.Partner;
+		EndIf;
 	EndIf;
 	Return Options.Partner;
 EndFunction

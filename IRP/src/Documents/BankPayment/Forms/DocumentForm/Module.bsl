@@ -44,11 +44,6 @@ Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
-&AtClient
-Procedure SetFormRules(Object, Form) Export
-	SetVisibilityAvailability(Object, Form);
-EndProcedure
-	
 &AtClientAtServerNoContext
 Function GetVisibleAttributesByTransactionType(TransactionType)
 	StrAll = "TransitAccount,

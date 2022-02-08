@@ -303,8 +303,15 @@ EndProcedure
 Function FormOnCreateAtServerStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice", "OnCreateAtServerStepsEnabler_SalesInvoice");
-	Binding.Insert("BankPayment" , "OnCreateAtServerStepsEnabler_BankPayment");
+	Binding.Insert("SalesInvoice", "StepsEnabler_ItemListEnableCalculations_RecalculationsOnCopy,
+									|StepsEnabler_RequireCallCreateTaxesFormControls");
+									
+	Binding.Insert("BankPayment" , "StepsEnabler_PaymentListEnableCalculations_RecalculationsOnCopy,
+									|StepsEnabler_RequireCallCreateTaxesFormControls");
+
+	Binding.Insert("BankReceipt" , "StepsEnabler_PaymentListEnableCalculations_RecalculationsOnCopy,
+									|StepsEnabler_RequireCallCreateTaxesFormControls");
+
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -315,7 +322,7 @@ Procedure FormModificator_CreateTaxesFormControls(Parameters, Results) Export
 	EndIf;
 EndProcedure
 
-Procedure OnCreateAtServerStepsEnabler_SalesInvoice(Parameters, Chain) Export
+Procedure StepsEnabler_RequireCallCreateTaxesFormControls(Parameters, Chain) Export
 	// RequireCallCreateTaxesFormControls
 	Chain.RequireCallCreateTaxesFormControls.Enable = True;
 	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
@@ -326,25 +333,16 @@ Procedure OnCreateAtServerStepsEnabler_SalesInvoice(Parameters, Chain) Export
 	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
 	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
-	
+EndProcedure
+
+Procedure StepsEnabler_ItemListEnableCalculations_RecalculationsOnCopy(Parameters, Chain) Export
 	// при копировании документа нужно перерасчитать TaxAmount
 	If Parameters.FormIsExists And ValueIsFilled(Parameters.Form.Parameters.CopyingValue) Then
 		ItemListEnableCalculations(Parameters, Chain, "RecalculationsOnCopy");
 	EndIf;
 EndProcedure
 
-Procedure OnCreateAtServerStepsEnabler_BankPayment(Parameters, Chain) Export
-	// RequireCallCreateTaxesFormControls
-	Chain.RequireCallCreateTaxesFormControls.Enable = True;
-	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
-	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
-	Options.Ref            = Parameters.Object.Ref;
-	Options.Date           = GetPropertyObject(Parameters, "Date");
-	Options.Company        = GetPropertyObject(Parameters, "Company");
-	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
-	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
-	
+Procedure StepsEnabler_PaymentListEnableCalculations_RecalculationsOnCopy(Parameters, Chain) Export
 	// при копировании документа нужно перерасчитать TaxAmount
 	If Parameters.FormIsExists And ValueIsFilled(Parameters.Form.Parameters.CopyingValue) Then
 		PaymentListEnableCalculations(Parameters, Chain, "RecalculationsOnCopy");
@@ -529,7 +527,8 @@ Function ListOnCopyStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice" , "ItemListOnCopyStepsEnabler_Trade_Shipment");
-	Binding.Insert("BankPayment"  , "ItemListOnCopyStepsEnabler_BankPayment");
+	Binding.Insert("BankPayment"  , "ItemListOnCopyStepsEnabler_BankPaymentReceipt");
+	Binding.Insert("BankReceipt"  , "ItemListOnCopyStepsEnabler_BankPaymentReceipt");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -550,7 +549,7 @@ Procedure ItemListOnCopyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 	Chain.UpdatePaymentTerms.Options.Add(Options);
 EndProcedure
 
-Procedure ItemListOnCopyStepsEnabler_BankPayment(Parameters, Chain) Export
+Procedure ItemListOnCopyStepsEnabler_BankPaymentReceipt(Parameters, Chain) Export
 	PaymentListEnableCalculations(Parameters, Chain, "IsCopyRow");
 EndProcedure
 
@@ -770,7 +769,8 @@ Function AccountStepsBinding(Parameters)
 	DataPath = "Account";
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "AccountStepsEnabler");
-	Binding.Insert("BankPayment"         , "AccountStepsEnabler_BankPayment");
+	Binding.Insert("BankPayment"         , "AccountStepsEnabler_BankPaymentReceipt");
+	Binding.Insert("BankReceipt"         , "AccountStepsEnabler_BankPaymentReceipt");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -794,8 +794,8 @@ Procedure AccountStepsEnabler(Parameters, Chain) Export
 	Chain.ChangeCurrencyByAccount.Options.Add(Options);
 EndProcedure
 
-Procedure AccountStepsEnabler_BankPayment(Parameters, Chain) Export
-	StepsEnablerName = "AccountStepsEnabler_BankPayment";
+Procedure AccountStepsEnabler_BankPaymentReceipt(Parameters, Chain) Export
+	StepsEnablerName = "AccountStepsEnabler_BankPaymentReceipt";
 	
 	Options_Account  = GetPropertyObject(Parameters, "Account");
 	Options_Currency = GetPropertyObject(Parameters, "Currency");
@@ -926,12 +926,26 @@ EndProcedure
 Function CurrencyStepsBinding(Parameters)
 	DataPath = "Currency";
 	Binding = New Structure();
-	Binding.Insert("BankPayment"         , "CurrencyStepsEnabler_BankPayment");
+	Binding.Insert("BankPayment"         , "CurrencyStepsEnabler_BankPaymentReceipt");
+	Binding.Insert("BankReceipt"         , "CurrencyStepsEnabler_BankPaymentReceipt");
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+// CurrencyExchange.Set
+Procedure SetCurrencyExchange(Parameters, Results) Export
+	Binding = CurrencyExchangeStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// CurrencyExchange.Bind
+Function CurrencyExchangeStepsBinding(Parameters)
+	DataPath = "CurrencyExchange";
+	Binding = New Structure();
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure CurrencyStepsEnabler_BankPayment(Parameters, Chain) Export
-	StepsEnablerName = "CurrencyStepsEnabler_BankPayment";
+	StepsEnablerName = "CurrencyStepsEnabler_BankPaymentReceipt";
 	
 	Options_Currency = GetPropertyObject(Parameters, "Currency");
 	Options_Account  = GetPropertyObject(Parameters, "Account");
@@ -982,7 +996,8 @@ Function DateStepsBinding(Parameters)
 	DataPath = "Date";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice" , "DateStepsEnabler_Trade_PartnerIsCustomer");
-	Binding.Insert("BankPayment"  , "DateStepsEnabler_BankPayment");
+	Binding.Insert("BankPayment"  , "DateStepsEnabler_BankPaymentReceipt");
+	Binding.Insert("BankReceipt"  , "DateStepsEnabler_BankPaymentReceipt");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1098,8 +1113,8 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 	Chain.UpdatePaymentTerms.Options.Add(Options);
 EndProcedure
 
-Procedure DateStepsEnabler_BankPayment(Parameters, Chain) Export
-	StepsEnablerName = "DateStepsEnabler_BankPayment";
+Procedure DateStepsEnabler_BankPaymentReceipt(Parameters, Chain) Export
+	StepsEnablerName = "DateStepsEnabler_BankPaymentReceipt";
 	
 	Options_Date      = GetPropertyObject(Parameters, "Date");
 	Options_Company   = GetPropertyObject(Parameters, "Company");
@@ -1174,7 +1189,8 @@ Function CompanyStepsBinding(Parameters)
 	DataPath = "Company";
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "CompanyStepsEnabler_Cash");
-	Binding.Insert("BankPayment"         , "CompanyStepsEnabler_BankPayment");
+	Binding.Insert("BankPayment"         , "CompanyStepsEnabler_BankPaymentReceipt");
+	Binding.Insert("BankReceipt"         , "CompanyStepsEnabler_BankPaymentReceipt");
 	Binding.Insert("SalesInvoice"        , "CompanyStepsEnabler_WithTaxes");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
@@ -1247,8 +1263,8 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 	EndDo;
 EndProcedure
 
-Procedure CompanyStepsEnabler_BankPayment(Parameters, Chain) Export
-	StepsEnablerName = "CompanyStepsEnabler_WithTaxes";
+Procedure CompanyStepsEnabler_BankPaymentReceipt(Parameters, Chain) Export
+	StepsEnablerName = "CompanyStepsEnabler_BankPaymentReceipt";
 	
 	Options_Date      = GetPropertyObject(Parameters, "Date");
 	Options_Company   = GetPropertyObject(Parameters, "Company");
@@ -2046,7 +2062,8 @@ Function PaymentListPartnerStepsBinding(Parameters)
 	DataPath = "PaymentList.Partner";
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "PaymentListPartnerStepsEnabler_LegalNameIsPayer");
-	Binding.Insert("BankPayment"         , "PaymentListPartnerStepsEnabler_BankPayment");
+	Binding.Insert("BankPayment"         , "PaymentListPartnerStepsEnabler_BankPaymentReceipt");
+	Binding.Insert("BankReceipt"         , "PaymentListPartnerStepsEnabler_BankPaymentReceipt");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
@@ -2066,8 +2083,8 @@ Procedure PaymentListPartnerStepsEnabler_LegalNameIsPayer(Parameters, Chain) Exp
 	EndDo;
 EndProcedure
 
-Procedure PaymentListPartnerStepsEnabler_BankPayment(Parameters, Chain) Export
-	StepsEnablerName = "PaymentListPartnerStepsEnabler_BankPayment";
+Procedure PaymentListPartnerStepsEnabler_BankPaymentReceipt(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListPartnerStepsEnabler_BankPaymentReceipt";
 	
 	Options_Date = GetPropertyObject(Parameters, "Date");
 	
@@ -2123,12 +2140,13 @@ EndProcedure
 Function PaymentListAgreementStepsBinding(Parameters)
 	DataPath = "PaymentList.Agreement";
 	Binding = New Structure();
-	Binding.Insert("BankPayment" , "PaymentListAgreementStepsEnabler_BankPayment");
+	Binding.Insert("BankPayment" , "PaymentListAgreementStepsEnabler_BankPaymentReceipt");
+	Binding.Insert("BankReceipt" , "PaymentListAgreementStepsEnabler_BankPaymentReceipt");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
-Procedure PaymentListAgreementStepsEnabler_BankPayment(Parameters, Chain) Export
-	StepsEnablerName = "PaymentListAgreementStepsEnabler_BankPayment";
+Procedure PaymentListAgreementStepsEnabler_BankPaymentReceipt(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListAgreementStepsEnabler_BankPaymentReceipt";
 	
 	Options_Date    = GetPropertyObject(Parameters, "Date");
 	Options_Company = GetPropertyObject(Parameters, "Company");
@@ -2228,10 +2246,12 @@ Function PaymentListLegalNameStepsBinding(Parameters)
 	DataPath = New Map();
 	DataPath.Insert("IncomingPaymentOrder", "PaymentList.Payer");
 	DataPath.Insert("BankPayment"         , "PaymentList.Payee");
+	DataPath.Insert("BankReceipt"         , "PaymentList.Payer");
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "PaymentListLegalNameStepsEnabler_LegalNameIsPayer");
 	Binding.Insert("BankPayment"         , "PaymentListLegalNameStepsEnabler_LegalNameIsPayee");
+	Binding.Insert("BankReceipt"         , "PaymentListLegalNameStepsEnabler_LegalNameIsPayer");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
@@ -2310,65 +2330,148 @@ EndProcedure
 Function PaymentListPlanningTransactionBasisStepsBinding(Parameters)
 	DataPath = "PaymentList.PlaningTransactionBasis";
 	Binding = New Structure();
-	Binding.Insert("BankPayment" , "PaymentListPlanningTransactionBasisStepsEnabler_BankPayment");
+	Binding.Insert("BankPayment" , "PaymentListPTBStepsEnabler_BankPayment");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
-Procedure PaymentListPlanningTransactionBasisStepsEnabler_BankPayment(Parameters, Chain) Export
-	StepsEnablerName = "PaymentListPlanningTransactionBasisStepsEnabler_BankPayment";
+Procedure PaymentListPTBStepsEnabler_BankPayment(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListPTBStepsEnabler_BankPayment";
 	
 	Options_Company  = GetPropertyObject(Parameters, "Company");
 	Options_Account  = GetPropertyObject(Parameters, "Account");
 	Options_Currency = GetPropertyObject(Parameters, "Currency");
 	
-	// ChangeCompanyByPlanningTransactionBasis
-	Chain.ChangeCompanyByPlanningTransactionBasis.Enable = True;
-	Chain.ChangeCompanyByPlanningTransactionBasis.Setter = "SetCompany";
+	// ChangeCompanyByPTBBankPayment
+	Chain.ChangeCompanyByPTBBankPayment.Enable = True;
+	Chain.ChangeCompanyByPTBBankPayment.Setter = "SetCompany";
 	
-	// ChangeCashAccountByPlanningTransactionBasis
-	Chain.ChangeCashAccountByPlanningTransactionBasis.Enable = True;
-	Chain.ChangeCashAccountByPlanningTransactionBasis.Setter = "SetAccount";
+	// ChangeCashAccountByPTBBankPayment
+	Chain.ChangeCashAccountByPTBBankPayment.Enable = True;
+	Chain.ChangeCashAccountByPTBBankPayment.Setter = "SetAccount";
 	
-	// ChangeCurrencyByPlanningTransactionBasis
-	Chain.ChangeCurrencyByPlanningTransactionBasis.Enable = True;
-	Chain.ChangeCurrencyByPlanningTransactionBasis.Setter = "SetCurrency";
+	// ChangeCurrencyByPTBBankPayment
+	Chain.ChangeCurrencyByPTBBankPayment.Enable = True;
+	Chain.ChangeCurrencyByPTBBankPayment.Setter = "SetCurrency";
 	
-	// ChangeTotalAmountByPlanningTransactionBasis
-	Chain.ChangeTotalAmountByPlanningTransactionBasis.Enable = True;
-	Chain.ChangeTotalAmountByPlanningTransactionBasis.Setter = "SetPaymentListTotalAmount";
+	// ChangeTotalAmountByPTBBankPayment
+	Chain.ChangeTotalAmountByPTBBankPayment.Enable = True;
+	Chain.ChangeTotalAmountByPTBBankPayment.Setter = "SetPaymentListTotalAmount";
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		Options_PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
 	
-		// ChangeCompanyByPlanningTransactionBasis
-		Options = ModelClientServer_V2.ChangeCompanyByPlanningTransactionBasisOptions();
+		// ChangeCompanyByPTBBankPayment
+		Options = ModelClientServer_V2.ChangeCompanyByPTBBankPaymentOptions();
 		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
 		Options.CurrentCompany = Options_Company;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCompanyByPlanningTransactionBasis.Options.Add(Options);
+		Chain.ChangeCompanyByPTBBankPayment.Options.Add(Options);
 		
-		// ChangeCashAccountByPlanningTransactionBasis
-		Options = ModelClientServer_V2.ChangeCashAccountByPlanningTransactionBasisOptions();
+		// ChangeCashAccountByPTBBankPayment
+		Options = ModelClientServer_V2.ChangeCashAccountByPTBBankPaymentOptions();
 		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
 		Options.CurrentAccount = Options_Account;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCashAccountByPlanningTransactionBasis.Options.Add(Options);
+		Chain.ChangeCashAccountByPTBBankPayment.Options.Add(Options);
 		
-		// ChangeCurrencyByPlanningTransactionBasis
-		Options = ModelClientServer_V2.ChangeCurrencyByPlanningTransactionBasisOptions();
+		// ChangeCurrencyByPTBBankPayment
+		Options = ModelClientServer_V2.ChangeCurrencyByPTBBankPaymentOptions();
 		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
 		Options.CurrentCurrency = Options_Currency;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCurrencyByPlanningTransactionBasis.Options.Add(Options);
+		Chain.ChangeCurrencyByPTBBankPayment.Options.Add(Options);
 		
-		// ChangeTotalAmountByPlanningTransactionBasis
-		Options = ModelClientServer_V2.ChangeTotalAmountByPlanningTransactionBasisOptions();
+		// ChangeTotalAmountByPTBBankPayment
+		Options = ModelClientServer_V2.ChangeTotalAmountByPTBBankPaymentOptions();
 		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
 		Options.CurrentTotalAmount = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
 		Options.Ref = Parameters.Object.Ref;
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTotalAmountByPlanningTransactionBasis.Options.Add(Options);
+		Chain.ChangeTotalAmountByPTBBankPayment.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure PaymentListPTBStepsEnabler_BankReceipt(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListPTBStepsEnabler_BankPayment";
+	
+	Options_Company          = GetPropertyObject(Parameters, "Company");
+	Options_Account          = GetPropertyObject(Parameters, "Account");
+	Options_Currency         = GetPropertyObject(Parameters, "Currency");
+	Options_CurrencyExchange = GetPropertyObject(Parameters, "CurrencyExchange");
+	
+	// ChangeCompanyByPTBBankReceipt
+	Chain.ChangeCompanyByPTBBankReceipt.Enable = True;
+	Chain.ChangeCompanyByPTBBankReceipt.Setter = "SetCompany";
+	
+	// ChangeCashAccountByPTBBankReceipt
+	Chain.ChangeCashAccountByPTBBankReceipt.Enable = True;
+	Chain.ChangeCashAccountByPTBBankReceipt.Setter = "SetAccount";
+	
+	// ChangeCurrencyByPTBBankReceipt
+	Chain.ChangeCurrencyByPTBBankReceipt.Enable = True;
+	Chain.ChangeCurrencyByPTBBankReceipt.Setter = "SetCurrency";
+	
+	// ChangeCurrencyExchangeByPTBBankReceipt
+	Chain.ChangeCurrencyExchangeByPTBBankReceipt.Enable = True;
+	Chain.ChangeCurrencyExchangeByPTBBankReceipt.Setter = "SetCurrencyExchange";
+	
+	// ChangeTotalAmountByPTBBankReceipt
+	Chain.ChangeTotalAmountByPTBBankReceipt.Enable = True;
+	Chain.ChangeTotalAmountByPTBBankReceipt.Setter = "SetPaymentListTotalAmount";
+	
+	// ChangeAmountExchangeByPTBBankReceipt
+	Chain.ChangeAmountExchangeByPTBBankReceipt.Enable = True;
+	Chain.ChangeAmountExchangeByPTBBankReceipt.Setter = "SetPaymentListAmountExchange";
+	
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options_PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
+	
+		// ChangeCompanyByPTBBankReceipt
+		Options = ModelClientServer_V2.ChangeCompanyByPTBBankReceiptOptions();
+		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
+		Options.CurrentCompany = Options_Company;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeCompanyByPTBBankReceipt.Options.Add(Options);
+		
+		// ChangeCashAccountByPTBBankReceipt
+		Options = ModelClientServer_V2.ChangeCashAccountByPTBBankReceiptOptions();
+		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
+		Options.CurrentAccount = Options_Account;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeCashAccountByPTBBankReceipt.Options.Add(Options);
+		
+		// ChangeCurrencyByPTBBankReceipt
+		Options = ModelClientServer_V2.ChangeCurrencyByPTBBankReceiptOptions();
+		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
+		Options.CurrentCurrency = Options_Currency;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeCurrencyByPTBBankReceipt.Options.Add(Options);
+		
+		// ChangeCurrencyExchangeByPTBBankReceipt
+		Options = ModelClientServer_V2.ChangeCurrencyExchangeByPTBBankReceiptOptions();
+		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
+		Options.CurrentCurrencyExchange = Options_CurrencyExchange;
+		Options.StepsEnablerName        = StepsEnablerName;
+		Chain.ChangeCurrencyExchangeByPTBBankReceipt.Options.Add(Options);
+		
+		// ChangeTotalAmountByPTBBankReceipt
+		Options = ModelClientServer_V2.ChangeTotalAmountByPTBBankReceiptOptions();
+		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
+		Options.CurrentTotalAmount = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
+		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeTotalAmountByPTBBankReceipt.Options.Add(Options);
+		
+		// ChangeAmountExchangeByPTBBankReceipt
+		Options = ModelClientServer_V2.ChangeAmountExchangeByPTBBankReceiptOptions();
+		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
+		Options.CurrentAmountExchange = GetPropertyObject(Parameters, "PaymentList.AmountExchange", Row.Key);
+		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeAmountExchangeByPTBBankReceipt.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -2503,6 +2606,7 @@ Function PaymentListNetAmountStepsBinding(Parameters)
 	DataPath = "PaymentList.NetAmount";
 	Binding = New Structure();
 	Binding.Insert("BankPayment", "PaymentListNetAmountStepsEnabler");
+	Binding.Insert("BankReceipt", "PaymentListNetAmountStepsEnabler");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -2531,12 +2635,30 @@ Function PaymentListTotalAmountStepsBinding(Parameters)
 	DataPath = "PaymentList.TotalAmount";
 	Binding = New Structure();
 	Binding.Insert("BankPayment", "PaymentListTotalAmountStepsEnabler");
+	Binding.Insert("BankReceipt", "PaymentListTotalAmountStepsEnabler");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure PaymentListTotalAmountStepsEnabler(Parameters, Chain) Export
 	PaymentListEnableCalculations(Parameters, Chain, "IsTotalAmountChanged");
 EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_AMOUNT_EXCHANGE
+
+// PaymentList.AmountExchange.Set
+Procedure SetPaymentListAmountExchange(Parameters, Results) Export
+	Binding = PaymentListAmountExchangeStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.AmountExchange.Bind
+Function PaymentListAmountExchangeStepsBinding(Parameters)
+	DataPath = "PaymentList.AmountExchange";
+	Binding = New Structure();
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 
@@ -3663,7 +3785,7 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 	If TypeOf(DataPath) = Type("Map") Then
 		DataPath = DataPath.Get(Parameters.ObjectMetadataInfo.MetadataName);
 		If DataPath = Undefined Then
-			Raise StrTemplate("DataPath instance of Map not funnd value by key [%1]", 
+			Raise StrTemplate("DataPath instance of Map not found value by key [%1]", 
 				Parameters.ObjectMetadataInfo.MetadataName);
 		EndIf;
 	EndIf;
@@ -3679,6 +3801,7 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 	If Not ValueIsFilled(StepsEnabler) Then
 		Raise StrTemplate("Steps enabler is not defined [%1]", DataPath);
 	Endif;
+	
 	Result = New Structure();
 	Result.Insert("FullDataPath" , FullDataPath);
 	Result.Insert("StepsEnabler" , StepsEnabler);

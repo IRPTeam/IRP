@@ -195,9 +195,10 @@ Procedure OnChainComplete(Parameters) Export
 		Return;
 	EndIf;
 	
-	// временно для BankPayment отдельно
-	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment" Then
-		__tmp_BankPayment_OnChainComplete(Parameters);
+	// временно для BankPaymentReceipt отдельно
+	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt" Then
+		__tmp_BankPaymentReceipt_OnChainComplete(Parameters);
 		Return;
 	EndIf;
 	 
@@ -354,14 +355,14 @@ Procedure __tmp_SalesInvoice_OnChainComplete(Parameters)
 	EndIf;
 EndProcedure
 
-// временная для BankPayment
-Procedure __tmp_BankPayment_OnChainComplete(Parameters)
+// временная для BankPaymentReceipt
+Procedure __tmp_BankPaymentReceipt_OnChainComplete(Parameters)
 	
 	ArrayOfEventCallers = New Array();
 	ArrayOfEventCallers.Add("TransactionTypeOnUserChange");
 	
 	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
-		__tmp_BankPayment_CommitChanges(Parameters);
+		__tmp_BankPaymentReceipt_CommitChanges(Parameters);
 		Return;
 	EndIf;
 	
@@ -370,19 +371,19 @@ Procedure __tmp_BankPayment_OnChainComplete(Parameters)
 		And Parameters.Object.PaymentList.Count() Then
 		NotifyParameters = New Structure("Parameters", Parameters);
 		ShowQueryBox(New NotifyDescription("TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
-					R().QuestionToUser_008, QuestionDialogMode.OKCancel);
+					R().QuestionToUser_014, QuestionDialogMode.OKCancel);
 	Else
-		__tmp_BankPayment_CommitChanges(Parameters);
+		__tmp_BankPaymentReceipt_CommitChanges(Parameters);
 	EndIf;
 EndProcedure
 
 Procedure TransactionTypeOnUserChangeContinue(Answer, NotifyParameters) Export
 	If Answer = DialogReturnCode.OK Then
-		__tmp_BankPayment_CommitChanges(NotifyParameters.Parameters);
+		__tmp_BankPaymentReceipt_CommitChanges(NotifyParameters.Parameters);
 	EndIf;
 EndProcedure
 
-Procedure __tmp_BankPayment_CommitChanges(Parameters)
+Procedure __tmp_BankPaymentReceipt_CommitChanges(Parameters)
 	// обновление реквизитов формы, в клиентском модуле сделать нельзя
 	// так как используются серверные данные
 	If Parameters.ExtractedData.Property("DataAgreementApArPostingDetail") Then
@@ -614,7 +615,8 @@ Procedure OnOpenFormNotify(Parameters) Export
 			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt" Then
 		DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 	EndIf;
 EndProcedure
@@ -1202,8 +1204,9 @@ Procedure TransactionTypeOnChange(Object, Form, TableNames) Export
 EndProcedure
 	
 Procedure OnSetTransactionTypeNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment" Then
-		Parameters.Form.SetFormRules(Parameters.Object, Parameters.Form);
+	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt" Then
+		Parameters.Form.FormSetVisibilityAvailability(Parameters.Object, Parameters.Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure

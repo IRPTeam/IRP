@@ -418,6 +418,7 @@ Procedure PaymentListOrderStartChoiceEnd(Result, AdditionalParameters) Export
 	Object = AdditionalParameters.Object;
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData <> Undefined Then
+		
 		ViewClient_V2.SetPaymentListOrder(Object, Form, CurrentData, Result.BasisDocument);
 		//CurrentData.Order       = Result.BasisDocument;
 		If Not ValueIsFilled(CurrentData.BasisDocument) Then

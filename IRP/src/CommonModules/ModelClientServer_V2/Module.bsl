@@ -832,7 +832,8 @@ Function ChangeTotalAmountByPTBBankReceiptExecute(Options) Export
 			ArrayOfBalance = 
 			DocBankReceiptServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfPlaningTransactionBasises, Options.Ref);
 			If ArrayOfBalance.Count() Then
-				Return ArrayOfBalance[0].Amount;
+				Amount = ArrayOfBalance[0].Amount;
+				Return ?(ValueIsFilled(Amount), Amount, 0);
 			Else
 				Return Options.CurrentTotalAmount;
 			EndIf;

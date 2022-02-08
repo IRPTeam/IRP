@@ -183,6 +183,9 @@ Scenario: _043400 preparation (Bank receipt)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankReceipt.FindByNumber(517).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document BankReceipt objects (with partner term by document, without basis)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(518).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
 Scenario: _043401 check Bank receipt movements by the Register "R3010 Cash on hand"
@@ -491,6 +494,29 @@ Scenario: _043426 check Bank receipt movements by the Register "R1021 Vendors tr
 			| ''                                           | 'Expense'     | '08.02.2022 12:44:01' | '-50'       | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |
 			| ''                                           | 'Expense'     | '08.02.2022 12:44:01' | '-50'       | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |
 			| ''                                           | 'Expense'     | '08.02.2022 12:44:01' | '-8,56'     | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |		
+	And I close all client application windows
+
+
+Scenario: _043427 check Bank receipt movements by the Register "R2020 Advances from customer" (with partner term by document, without basis)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '518' |
+	* Check movements by the Register  "R2020 Advances from customer" 
+		And I click "Registrations report" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 518 dated 08.02.2022 13:39:01' | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                           |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"'   | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                           |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                  | ''          | ''      | 'Attributes'           | ''                           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:39:01' | '8,56'      | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                           |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:39:01' | '50'        | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                           |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:39:01' | '50'        | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                           |		
 	And I close all client application windows
 
 Scenario: _043430 Bank receipt clear posting/mark for deletion

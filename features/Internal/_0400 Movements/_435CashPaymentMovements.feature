@@ -133,6 +133,9 @@ Scenario: _043500 preparation (Cash payment)
 		When Create document CashPayment objects (return to customer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(327).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document CashPayment objects (with partner term by document, without basis)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashPayment.FindByNumber(328).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
 
@@ -359,6 +362,30 @@ Scenario: _043522 check absence Cash payment movements by the Register "R5010 Re
 		Then "ResultTable" spreadsheet document does not contain values
 			| 'R5010 Reconciliation statement'   | 
 	And I close all client application windows
+
+Scenario: _043523 check Cash payment movements by the Register "R1020 Advances to vendors" (with partner term by document, without basis)
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '328' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R1020 Advances to vendors" 
+		And I click "Registrations report" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 328 dated 08.02.2022 13:43:58' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'      | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''      | 'Attributes'           | ''                         |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:43:58' | '8,56'      | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                         |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:43:58' | '50'        | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                         |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:43:58' | '50'        | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                         |		
+	And I close all client application windows
+
 
 Scenario: _043530 Cash payment clear posting/mark for deletion
 	And I close all client application windows

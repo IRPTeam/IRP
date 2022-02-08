@@ -136,6 +136,11 @@ Scenario: _043300 preparation (Bank payment)
 		When Create document BankPayment objects (return to customer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document BankPayment objects (with partner term by document, without basis)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(328).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I close all client application windows
+		
 		
 Scenario: _043301 check Bank payment movements by the Register "R3010 Cash on hand"
 	* Select Bank payment
@@ -435,7 +440,27 @@ Scenario: _043321 check Bank payment movements by the Register "R5010 Reconcilia
 			| ''                                           | 'Receipt'     | '02.09.2021 14:24:44' | '100'       | 'Main Company' | 'Distribution department' | 'TRY'      | 'Company Kalipso' | ''                    |				
 	And I close all client application windows
 
-
+Scenario: _043322 check Bank payment movements by the Register "R1020 Advances to vendors" (with partner term by document, without basis)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '328'       |
+	* Check movements by the Register  "R1020 Advances to vendors" 
+		And I click "Registrations report" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 328 dated 08.02.2022 13:43:58' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'      | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''      | 'Attributes'           | ''                         |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:43:58' | '8,56'      | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                         |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:43:58' | '50'        | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                         |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:43:58' | '50'        | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                         |	
+	And I close all client application windows
 
 
 Scenario: _043330 Bank payment clear posting/mark for deletion

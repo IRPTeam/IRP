@@ -272,7 +272,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 EndFunction
 
 Function GetLegalNameByPartner(Partner, LegalName) Export
-	If Not Partner.IsEmpty() Then
+	If ValueIsFilled(Partner) Then
 		ArrayOfFilters = New Array();
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 		AdditionalParameters = New Structure();

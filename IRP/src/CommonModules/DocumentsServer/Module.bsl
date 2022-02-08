@@ -236,7 +236,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 
 	Partner = AgreementParameters.Partner;
 
-	If Partner.IsEmpty() Then
+	If Not ValueIsFilled(Partner) Then
 		Return Catalogs.Agreements.EmptyRef();
 	EndIf;
 
@@ -756,7 +756,7 @@ EndProcedure
 #EndRegion
 
 Function GetPartnerByLegalName(LegalName, Partner) Export
-	If Not LegalName.IsEmpty() Then
+	If ValueIsFilled(LegalName) Then
 		ArrayOfFilters = New Array();
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 		If ValueIsFilled(Partner) Then

@@ -119,7 +119,10 @@ Function GetChain()
 	Chain.Insert("DefaultDeliveryDateInHeader" , GetChainLink("DefaultDeliveryDateInHeaderExecute"));
 	
 	// Clears
-	Chain.Insert("ClearByTransactionType", GetChainLink("ClearByTransactionTypeExecute"));
+	Chain.Insert("ClearByTransactionTypeBankPayment", GetChainLink("ClearByTransactionTypeBankPaymentExecute"));
+	Chain.Insert("ClearByTransactionTypeBankReceipt", GetChainLink("ClearByTransactionTypeBankReceiptExecute"));
+	Chain.Insert("ClearByTransactionTypeCashPayment", GetChainLink("ClearByTransactionTypeCashPaymentExecute"));
+	Chain.Insert("ClearByTransactionTypeCashReceipt", GetChainLink("ClearByTransactionTypeCashReceiptExecute"));
 	
 	// Changes
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
@@ -1641,7 +1644,7 @@ EndFunction
 
 #Region TRANSACTION_TYPE
 
-Function ClearByTransactionTypeOptions() Export
+Function ClearByTransactionTypeBankPaymentOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|TransitAccount,
 		|Partner,
@@ -1653,22 +1656,24 @@ Function ClearByTransactionTypeOptions() Export
 		|Order");
 EndFunction
 
-Function ClearByTransactionTypeExecute(Options) Export
+Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result = New Structure();
-	Result.Insert("TransitAccount"          , Options.TransitAccount);
-	Result.Insert("Partner"                 , Options.Partner);
-	Result.Insert("Payee"                   , Options.Payee);
-	Result.Insert("Agreement"               , Options.Agreement);
-	Result.Insert("LegalNameContract"       , Options.LegalNameContract);
-	Result.Insert("BasisDocument"           , Options.BasisDocument);
+	Result.Insert("TransitAccount"           , Options.TransitAccount);
+	Result.Insert("Partner"                  , Options.Partner);
+	Result.Insert("Payee"                    , Options.Payee);
+	Result.Insert("Agreement"                , Options.Agreement);
+	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
+	Result.Insert("BasisDocument"            , Options.BasisDocument);
 	Result.Insert("PlanningTransactionBasis" , Options.PlanningTransactionBasis);
-	Result.Insert("Order"                   , Options.Order);
+	Result.Insert("Order"                    , Options.Order);
 	
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
 	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	
+	// список реквизитов которые не надо очищать
+	// PlanningTransactionBasis, BasisDocument, Order - очищаются всегда
 	If Options.TransactionType = Outgoing_CashTransferOrder Then
 		StrByType = "";
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
@@ -1681,6 +1686,79 @@ Function ClearByTransactionTypeExecute(Options) Export
 		|Payee,
 		|LegalNameContract";
 	EndIf;
+	
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+Function ClearByTransactionTypeBankReceiptOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|TransitAccount,
+		|CurrencyExchange,
+		|Partner,
+		|Payer,
+		|Agreement,
+		|LegalNameContract,
+		|BasisDocument,
+		|PlanningTransactionBasis,
+		|Order,
+		|AmountExchange,
+		|POSAccount");
+EndFunction
+
+Function ClearByTransactionTypeBankReceiptExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("TransitAccount"           , Options.TransitAccount);
+	Result.Insert("CurrencyExchange"         , Options.CurrencyExchange);
+	Result.Insert("Partner"                  , Options.Partner);
+	Result.Insert("Payer"                    , Options.Payer);
+	Result.Insert("Agreement"                , Options.Agreement);
+	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
+	Result.Insert("BasisDocument"            , Options.BasisDocument);
+	Result.Insert("PlanningTransactionBasis" , Options.PlanningTransactionBasis);
+	Result.Insert("Order"                    , Options.Order);
+	Result.Insert("AmountExchange"           , Options.AmountExchange);
+	Result.Insert("POSAccount"               , Options.POSAccount);
+	
+	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
+	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
+	Incoming_PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
+	Incoming_ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
+	Incoming_TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
+	
+	// список реквизитов которые не надо очищать
+	// PlanningTransactionBasis, BasisDocument, Order - очищаются всегда
+	If Options.TransactionType = Incoming_CashTransferOrder Then
+		StrByType = "";
+	ElsIf Options.TransactionType = Incoming_CurrencyExchange Then
+		StrByType = "
+		|TransitAccount, 
+		|CurrencyExchange,
+		|AmountExchange";
+	ElsIf Options.TransactionType = Incoming_PaymentFromCustomer Or Options.TransactionType = Incoming_ReturnFromVendor Then
+		StrByType = "
+		|Partner,
+		|Agreement,
+		|Payer,
+		|LegalNameContract";
+	ElsIf Options.TransactionType = Incoming_TransferFromPOS Then
+		StrByType = "
+		|PaymentList.POSAccount";
+	EndIf;
+	
 	ArrayOfAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
 		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));

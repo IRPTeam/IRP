@@ -277,7 +277,7 @@ EndProcedure
 //		ArrayOfTaxInfo, AddInfo);
 //EndProcedure
 
-#Region ItemTransactionType
+#Region TRANSACTION_TYPE
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
 	ViewClient_V2.TransactionTypeOnChange(Object, Form, "PaymentList");

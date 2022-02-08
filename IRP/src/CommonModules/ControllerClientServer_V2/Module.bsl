@@ -844,12 +844,17 @@ EndProcedure
 Function TransactionTypeStepsBinding(Parameters)
 	DataPath = "Account";
 	Binding = New Structure();
-	Binding.Insert("BankPayment" , "TransactionTypeStepsEnabler_BankPayment");
+	Binding.Insert("BankPayment" , "StepsEnabler_ChangeTransitAccountByAccount,
+									|TransactionTypeStepsEnabler_BankPayment");
+
+	Binding.Insert("BankReceipt" , "StepsEnabler_ChangeTransitAccountByAccount,
+									|TransactionTypeStepsEnabler_BankReceipt");
+	
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-// TransactionType.Clear
-Procedure ClearTransactionType(Parameters, Results) Export
+// TransactionType.BankPayment.Clear
+Procedure ClearTransactionType_BankPayment(Parameters, Results) Export
 	SetterObject(Undefined, "PaymentList.Partner"                 , Parameters, Results, , "Partner");
 	SetterObject(Undefined, "PaymentList.Payee"                   , Parameters, Results, , "Payee");
 	SetterObject(Undefined, "PaymentList.Agreement"               , Parameters, Results, , "Agreement");
@@ -865,8 +870,30 @@ Procedure ClearTransactionType(Parameters, Results) Export
 	SetterObject(Undefined, "TransitAccount" , Parameters, Results_TransitAccount);
 EndProcedure
 
-Procedure TransactionTypeStepsEnabler_BankPayment(Parameters, Chain) Export
-	StepsEnablerName = "TransactionTypeStepsEnabler_BankPayment";
+// TransactionType.BankReceipt.Clear
+Procedure ClearTransactionType_BankReceipt(Parameters, Results) Export
+	SetterObject(Undefined, "PaymentList.Partner"                 , Parameters, Results, , "Partner");
+	SetterObject(Undefined, "PaymentList.Payer"                   , Parameters, Results, , "Payer");
+	SetterObject(Undefined, "PaymentList.Agreement"               , Parameters, Results, , "Agreement");
+	SetterObject(Undefined, "PaymentList.LegalNameContract"       , Parameters, Results, , "LegalNameContract");
+	SetterObject(Undefined, "PaymentList.BasisDocument"           , Parameters, Results, , "BasisDocument");
+	SetterObject(Undefined, "PaymentList.PlaningTransactionBasis" , Parameters, Results, , "PlanningTransactionBasis");
+	SetterObject(Undefined, "PaymentList.Order"                   , Parameters, Results, , "Order");
+	SetterObject(Undefined, "PaymentList.AmountExchange"          , Parameters, Results, , "AmountExchange");
+	SetterObject(Undefined, "PaymentList.POSAccount"              , Parameters, Results, , "POSAccount");
+	
+	Results_TransitAccount  = New Array();
+	Results_CurrencyExchange = New Array();
+	For Each Result In Results Do
+		Results_TransitAccount.Add(New Structure("Value, Options", Result.Value.TransitAccount, New Structure("Key")));
+		Results_CurrencyExchange.Add(New Structure("Value, Options", Result.Value.CurrencyExchange, New Structure("Key")));
+	EndDo;
+	SetterObject(Undefined, "TransitAccount"   , Parameters, Results_TransitAccount);
+	SetterObject(Undefined, "CurrencyExchange" , Parameters, Results_CurrencyExchange);
+EndProcedure
+
+Procedure StepsEnabler_ChangeTransitAccountByAccount(Parameters, Chain) Export
+	StepsEnablerName = "StepsEnabler_ChangeTransitAccountByAccount";
 	
 	Options_Account         = GetPropertyObject(Parameters, "Account");
 	Options_TransactionType = GetPropertyObject(Parameters, "TransactionType");
@@ -881,14 +908,21 @@ Procedure TransactionTypeStepsEnabler_BankPayment(Parameters, Chain) Export
 	Options.CurrentTransitAccount = Options_TransitAccount;
 	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangeTransitAccountByAccount.Options.Add(Options);
+EndProcedure
 	
-	// ClearByTransactionType
-	Chain.ClearByTransactionType.Enable = True;
-	Chain.ClearByTransactionType.Setter = "ClearTransactionType";
+Procedure TransactionTypeStepsEnabler_BankPayment(Parameters, Chain) Export
+	StepsEnablerName = "TransactionTypeStepsEnabler_BankPayment";
+	
+	Options_TransactionType = GetPropertyObject(Parameters, "TransactionType");
+	Options_TransitAccount  = GetPropertyObject(Parameters, "TransitAccount");
+	
+	// ClearByTransactionTypeBankPayment
+	Chain.ClearByTransactionTypeBankPayment.Enable = True;
+	Chain.ClearByTransactionTypeBankPayment.Setter = "ClearTransactionType_BankPayment";
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		// ClearByTransactionType
-		Options = ModelClientServer_V2.ClearByTransactionTypeOptions();
+		// ClearByTransactionTypeBankPayment
+		Options = ModelClientServer_V2.ClearByTransactionTypeBankPaymentOptions();
 		Options.TransactionType          = Options_TransactionType;
 		Options.TransitAccount           = Options_TransitAccount;
 		Options.Partner                  = GetPropertyObject(Parameters, "PaymentList.Partner"                 , Row.Key);
@@ -900,7 +934,39 @@ Procedure TransactionTypeStepsEnabler_BankPayment(Parameters, Chain) Export
 		Options.Order                    = GetPropertyObject(Parameters, "PaymentList.Order"                   , Row.Key);
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ClearByTransactionType.Options.Add(Options);
+		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure TransactionTypeStepsEnabler_BankReceipt(Parameters, Chain) Export
+	StepsEnablerName = "TransactionTypeStepsEnabler_BankReceipt";
+	
+	Options_TransactionType  = GetPropertyObject(Parameters, "TransactionType");
+	Options_TransitAccount   = GetPropertyObject(Parameters, "TransitAccount");
+	Options_CurrencyExchange = GetPropertyObject(Parameters, "CurrencyExchange");
+	
+	// ClearByTransactionTypeBankReceipt
+	Chain.ClearByTransactionTypeBankReceipt.Enable = True;
+	Chain.ClearByTransactionTypeBankReceipt.Setter = "ClearTransactionType_BankReceipt";
+	
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		// ClearByTransactionTypeBankReceipt
+		Options = ModelClientServer_V2.ClearByTransactionTypeBankReceiptOptions();
+		Options.TransactionType          = Options_TransactionType;
+		Options.TransitAccount           = Options_TransitAccount;
+		Options.CurrencyExchange         = Options_CurrencyExchange;
+		Options.Partner                  = GetPropertyObject(Parameters, "PaymentList.Partner"                 , Row.Key);
+		Options.Payer                    = GetPropertyObject(Parameters, "PaymentList.Payer"                   , Row.Key);
+		Options.Agreement                = GetPropertyObject(Parameters, "PaymentList.Agreement"               , Row.Key);
+		Options.LegalNameContract        = GetPropertyObject(Parameters, "PaymentList.LegalNameContract"       , Row.Key);
+		Options.BasisDocument            = GetPropertyObject(Parameters, "PaymentList.BasisDocument"           , Row.Key);
+		Options.PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis" , Row.Key);
+		Options.Order                    = GetPropertyObject(Parameters, "PaymentList.Order"                   , Row.Key);
+		Options.AmountExchange           = GetPropertyObject(Parameters, "PaymentList.AmountExchange"          , Row.Key);
+		Options.POSAccount               = GetPropertyObject(Parameters, "PaymentList.POSAccount"              , Row.Key);
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ClearByTransactionTypeBankReceipt.Options.Add(Options);
 	EndDo;
 EndProcedure
 

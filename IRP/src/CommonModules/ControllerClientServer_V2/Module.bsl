@@ -2637,7 +2637,7 @@ Procedure FIllPaymentListPlanningTransactionBasis_CashPayment(Parameters, Result
 	ResourceToDataPath.Insert("Account"     , "CashAccount");
 	ResourceToDataPath.Insert("Company"     , "Company");
 	ResourceToDataPath.Insert("Currency"    , "Currency");
-	ResourceToDataPath.Insert("Partner"     , "Partner");
+	ResourceToDataPath.Insert("Partner"     , "PaymentList.Partner");
 	ResourceToDataPath.Insert("TotalAmount" , "PaymentList.TotalAmount");
 	MultiSetterObject(Parameters, Results, ResourceToDataPath);
 EndProcedure

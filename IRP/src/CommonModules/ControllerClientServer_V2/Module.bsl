@@ -787,7 +787,7 @@ Function AccountStepsBinding(Parameters)
 	Binding.Insert("BankPayment"         , "StepsEnabler_ChangeCurrencyByAccount,
 											|StepsEnabler_ChangeTransitAccountByAccount");
 
-	Binding.Insert("BankReceipt"         , "AccountStepsEnabler_BankPaymentReceipt,
+	Binding.Insert("BankReceipt"         , "StepsEnabler_ChangeCurrencyByAccount,
 											|StepsEnabler_ChangeTransitAccountByAccount");
 	
 	Binding.Insert("CashPayment", "StepsEnabler_ChangeCurrencyByCashAccount");
@@ -891,72 +891,63 @@ Function TransactionTypeStepsBinding(Parameters)
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-// TransactionType.BankPayment.Clear
-Procedure ClearTransactionType_BankPayment(Parameters, Results) Export
-	SetterObject(Undefined, "PaymentList.Partner"                 , Parameters, Results, , "Partner");
-	SetterObject(Undefined, "PaymentList.Payee"                   , Parameters, Results, , "Payee");
-	SetterObject(Undefined, "PaymentList.Agreement"               , Parameters, Results, , "Agreement");
-	SetterObject(Undefined, "PaymentList.LegalNameContract"       , Parameters, Results, , "LegalNameContract");
-	SetterObject(Undefined, "PaymentList.BasisDocument"           , Parameters, Results, , "BasisDocument");
-	SetterObject(Undefined, "PaymentList.PlaningTransactionBasis" , Parameters, Results, , "PlanningTransactionBasis");
-	SetterObject(Undefined, "PaymentList.Order"                   , Parameters, Results, , "Order");
-	
-	Results_TransitAccount = New Array();
-	For Each Result In Results Do
-		Results_TransitAccount.Add(New Structure("Value, Options", Result.Value.TransitAccount, New Structure("Key")));
-	EndDo;
-	SetterObject(Undefined, "TransitAccount" , Parameters, Results_TransitAccount);
+// TransactionType.BankPayment.Fill
+Procedure FillTransactionType_BankPayment(Parameters, Results) Export
+	ResourceToDataPath = New Map();
+	ResourceToDataPath.Insert("Partner"                  , "PaymentList.Partner");
+	ResourceToDataPath.Insert("Payee"                    , "PaymentList.Payee");
+	ResourceToDataPath.Insert("Agreement"                , "PaymentList.Agreement");
+	ResourceToDataPath.Insert("LegalNameContract"        , "PaymentList.LegalNameContract");
+	ResourceToDataPath.Insert("BasisDocument"            , "PaymentList.BasisDocument");
+	ResourceToDataPath.Insert("PlanningTransactionBasis" , "PaymentList.PlaningTransactionBasis");
+	ResourceToDataPath.Insert("Order"                    , "PaymentList.Order");
+	ResourceToDataPath.Insert("TransitAccount"           , "TransitAccount");
+	MultiSetterObject(Parameters, Results, ResourceToDataPath);
 EndProcedure
 
-// TransactionType.BankReceipt.Clear
-Procedure ClearTransactionType_BankReceipt(Parameters, Results) Export
-	SetterObject(Undefined, "PaymentList.Partner"                 , Parameters, Results, , "Partner");
-	SetterObject(Undefined, "PaymentList.Payer"                   , Parameters, Results, , "Payer");
-	SetterObject(Undefined, "PaymentList.Agreement"               , Parameters, Results, , "Agreement");
-	SetterObject(Undefined, "PaymentList.LegalNameContract"       , Parameters, Results, , "LegalNameContract");
-	SetterObject(Undefined, "PaymentList.BasisDocument"           , Parameters, Results, , "BasisDocument");
-	SetterObject(Undefined, "PaymentList.PlaningTransactionBasis" , Parameters, Results, , "PlanningTransactionBasis");
-	SetterObject(Undefined, "PaymentList.Order"                   , Parameters, Results, , "Order");
-	SetterObject(Undefined, "PaymentList.AmountExchange"          , Parameters, Results, , "AmountExchange");
-	SetterObject(Undefined, "PaymentList.POSAccount"              , Parameters, Results, , "POSAccount");
-	
-	Results_TransitAccount  = New Array();
-	Results_CurrencyExchange = New Array();
-	For Each Result In Results Do
-		Results_TransitAccount.Add(New Structure("Value, Options", Result.Value.TransitAccount, New Structure("Key")));
-		Results_CurrencyExchange.Add(New Structure("Value, Options", Result.Value.CurrencyExchange, New Structure("Key")));
-	EndDo;
-	SetterObject(Undefined, "TransitAccount"   , Parameters, Results_TransitAccount);
-	SetterObject(Undefined, "CurrencyExchange" , Parameters, Results_CurrencyExchange);
+// TransactionType.BankReceipt.Fill
+Procedure FillTransactionType_BankReceipt(Parameters, Results) Export
+	ResourceToDataPath = New Map();
+	ResourceToDataPath.Insert("Partner"                  , "PaymentList.Partner");
+	ResourceToDataPath.Insert("Payer"                    , "PaymentList.Payer");
+	ResourceToDataPath.Insert("Agreement"                , "PaymentList.Agreement");
+	ResourceToDataPath.Insert("LegalNameContract"        , "PaymentList.LegalNameContract");
+	ResourceToDataPath.Insert("BasisDocument"            , "PaymentList.BasisDocument");
+	ResourceToDataPath.Insert("PlanningTransactionBasis" , "PaymentList.PlaningTransactionBasis");
+	ResourceToDataPath.Insert("Order"                    , "PaymentList.Order");
+	ResourceToDataPath.Insert("AmountExchange"           , "PaymentList.AmountExchange");
+	ResourceToDataPath.Insert("POSAccount"               , "PaymentList.POSAccount");
+	ResourceToDataPath.Insert("TransitAccount"           , "TransitAccount");
+	ResourceToDataPath.Insert("CurrencyExchange"         , "CurrencyExchange");
+	MultiSetterObject(Parameters, Results, ResourceToDataPath);
 EndProcedure
 
-// TransactionType.CashPayment.Clear
-Procedure ClearTransactionType_CashPayment(Parameters, Results) Export
-	SetterObject(Undefined, "PaymentList.BasisDocument"           , Parameters, Results, , "BasisDocument");
-	SetterObject(Undefined, "PaymentList.Partner"                 , Parameters, Results, , "Partner");
-	SetterObject(Undefined, "PaymentList.PlaningTransactionBasis" , Parameters, Results, , "PlanningTransactionBasis");
-	SetterObject(Undefined, "PaymentList.Agreement"               , Parameters, Results, , "Agreement");
-	SetterObject(Undefined, "PaymentList.LegalNameContract"       , Parameters, Results, , "LegalNameContract");
-	SetterObject(Undefined, "PaymentList.Payee"                   , Parameters, Results, , "Payee");
-	SetterObject(Undefined, "PaymentList.Order"                   , Parameters, Results, , "Order");
+// TransactionType.CashPayment.Fill
+Procedure FillTransactionType_CashPayment(Parameters, Results) Export
+	ResourceToDataPath = New Map();
+	ResourceToDataPath.Insert("Partner"                  , "PaymentList.Partner");
+	ResourceToDataPath.Insert("Payee"                    , "PaymentList.Payee");
+	ResourceToDataPath.Insert("Agreement"                , "PaymentList.Agreement");
+	ResourceToDataPath.Insert("LegalNameContract"        , "PaymentList.LegalNameContract");
+	ResourceToDataPath.Insert("BasisDocument"            , "PaymentList.BasisDocument");
+	ResourceToDataPath.Insert("PlanningTransactionBasis" , "PaymentList.PlaningTransactionBasis");
+	ResourceToDataPath.Insert("Order"                    , "PaymentList.Order");
+	MultiSetterObject(Parameters, Results, ResourceToDataPath);
 EndProcedure
 
-// TransactionType.CashReceipt.Clear
-Procedure ClearTransactionType_CashReceipt(Parameters, Results) Export
-	SetterObject(Undefined, "PaymentList.BasisDocument"           , Parameters, Results, , "BasisDocument");
-	SetterObject(Undefined, "PaymentList.Partner"                 , Parameters, Results, , "Partner");
-	SetterObject(Undefined, "PaymentList.PlaningTransactionBasis" , Parameters, Results, , "PlanningTransactionBasis");
-	SetterObject(Undefined, "PaymentList.Agreement"               , Parameters, Results, , "Agreement");
-	SetterObject(Undefined, "PaymentList.LegalNameContract"       , Parameters, Results, , "LegalNameContract");
-	SetterObject(Undefined, "PaymentList.Payer"                   , Parameters, Results, , "Payer");
-	SetterObject(Undefined, "PaymentList.AmountExchange"          , Parameters, Results, , "AmountExchange");
-	SetterObject(Undefined, "PaymentList.Order"                   , Parameters, Results, , "Order");
-	
-	Results_CurrencyExchange = New Array();
-	For Each Result In Results Do
-		Results_CurrencyExchange.Add(New Structure("Value, Options", Result.Value.CurrencyExchange, New Structure("Key")));
-	EndDo;
-	SetterObject(Undefined, "CurrencyExchange" , Parameters, Results_CurrencyExchange);
+// TransactionType.CashReceipt.Fill
+Procedure FillTransactionType_CashReceipt(Parameters, Results) Export
+	ResourceToDataPath = New Map();
+	ResourceToDataPath.Insert("Partner"                  , "PaymentList.Partner");
+	ResourceToDataPath.Insert("Payer"                    , "PaymentList.Payer");
+	ResourceToDataPath.Insert("Agreement"                , "PaymentList.Agreement");
+	ResourceToDataPath.Insert("LegalNameContract"        , "PaymentList.LegalNameContract");
+	ResourceToDataPath.Insert("BasisDocument"            , "PaymentList.BasisDocument");
+	ResourceToDataPath.Insert("PlanningTransactionBasis" , "PaymentList.PlaningTransactionBasis");
+	ResourceToDataPath.Insert("Order"                    , "PaymentList.Order");
+	ResourceToDataPath.Insert("AmountExchange"           , "PaymentList.AmountExchange");
+	ResourceToDataPath.Insert("CurrencyExchange"         , "CurrencyExchange");
+	MultiSetterObject(Parameters, Results, ResourceToDataPath);
 EndProcedure
 
 Procedure StepsEnabler_ClearByTransactionTypeBankPayment(Parameters, Chain) Export
@@ -967,7 +958,7 @@ Procedure StepsEnabler_ClearByTransactionTypeBankPayment(Parameters, Chain) Expo
 	
 	// ClearByTransactionTypeBankPayment
 	Chain.ClearByTransactionTypeBankPayment.Enable = True;
-	Chain.ClearByTransactionTypeBankPayment.Setter = "ClearTransactionType_BankPayment";
+	Chain.ClearByTransactionTypeBankPayment.Setter = "FillTransactionType_BankPayment";
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		// ClearByTransactionTypeBankPayment
@@ -996,7 +987,7 @@ Procedure StepsEnabler_ClearByTransactionTypeBankReceipt(Parameters, Chain) Expo
 	
 	// ClearByTransactionTypeBankReceipt
 	Chain.ClearByTransactionTypeBankReceipt.Enable = True;
-	Chain.ClearByTransactionTypeBankReceipt.Setter = "ClearTransactionType_BankReceipt";
+	Chain.ClearByTransactionTypeBankReceipt.Setter = "FillTransactionType_BankReceipt";
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		// ClearByTransactionTypeBankReceipt
@@ -1026,7 +1017,7 @@ Procedure StepsEnabler_ClearByTransactionTypeCashPayment(Parameters, Chain) Expo
 	
 	// ClearByTransactionTypeCashPayment
 	Chain.ClearByTransactionTypeCashPayment.Enable = True;
-	Chain.ClearByTransactionTypeCashPayment.Setter = "ClearTransactionType_CashPayment";
+	Chain.ClearByTransactionTypeCashPayment.Setter = "FillTransactionType_CashPayment";
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		// ClearByTransactionTypeCashPayment
@@ -1053,7 +1044,7 @@ Procedure StepsEnabler_ClearByTransactionTypeCashReceipt(Parameters, Chain) Expo
 	
 	// ClearByTransactionTypeCashReceipt
 	Chain.ClearByTransactionTypeCashReceipt.Enable = True;
-	Chain.ClearByTransactionTypeCashReceipt.Setter = "ClearTransactionType_CashReceipt";
+	Chain.ClearByTransactionTypeCashReceipt.Setter = "FillTransactionType_CashReceipt";
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		// ClearByTransactionTypeCashReceipt
@@ -2630,6 +2621,52 @@ Function PaymentListPlanningTransactionBasisStepsBinding(Parameters)
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
+// PaymentList.PlanningTransactionBasis.BankPayment.Fill
+Procedure FIllPaymentListPlanningTransactionBasis_BankPayment(Parameters, Results) Export
+	ResourceToDataPath = New Map();
+	ResourceToDataPath.Insert("Account"     , "Account");
+	ResourceToDataPath.Insert("Company"     , "Company");
+	ResourceToDataPath.Insert("Currency"    , "Currency");
+	ResourceToDataPath.Insert("TotalAmount" , "PaymentList.TotalAmount");
+	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+EndProcedure
+
+// PaymentList.PlanningTransactionBasis.CashPayment.Fill
+Procedure FIllPaymentListPlanningTransactionBasis_CashPayment(Parameters, Results) Export
+	ResourceToDataPath = New Map();
+	ResourceToDataPath.Insert("Account"     , "CashAccount");
+	ResourceToDataPath.Insert("Company"     , "Company");
+	ResourceToDataPath.Insert("Currency"    , "Currency");
+	ResourceToDataPath.Insert("Partner"     , "Partner");
+	ResourceToDataPath.Insert("TotalAmount" , "PaymentList.TotalAmount");
+	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+EndProcedure
+
+// PaymentList.PlanningTransactionBasis.BankReceipt.Fill
+Procedure FIllPaymentListPlanningTransactionBasis_BankReceipt(Parameters, Results) Export
+	ResourceToDataPath = New Map();
+	ResourceToDataPath.Insert("Account"          , "Account");
+	ResourceToDataPath.Insert("Company"          , "Company");
+	ResourceToDataPath.Insert("Currency"         , "Currency");
+	ResourceToDataPath.Insert("CurrencyExchange" , "CurrencyExchange");
+	ResourceToDataPath.Insert("TotalAmount"      , "PaymentList.TotalAmount");
+	ResourceToDataPath.Insert("AmountExchange"   , "PaymentList.AmountExchange");
+	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+EndProcedure
+
+// PaymentList.PlanningTransactionBasis.CashReceipt.Fill
+Procedure FIllPaymentListPlanningTransactionBasis_CashReceipt(Parameters, Results) Export
+	ResourceToDataPath = New Map();
+	ResourceToDataPath.Insert("Account"          , "CashAccount");
+	ResourceToDataPath.Insert("Company"          , "Company");
+	ResourceToDataPath.Insert("Currency"         , "Currency");
+	ResourceToDataPath.Insert("CurrencyExchange" , "CurrencyExchange");
+	ResourceToDataPath.Insert("Partner"          , "PaymentList.Partner");
+	ResourceToDataPath.Insert("TotalAmount"      , "PaymentList.TotalAmount");
+	ResourceToDataPath.Insert("AmountExchange"   , "PaymentList.AmountExchange");
+	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+EndProcedure
+
 Procedure PaymentListPTBStepsEnabler_BankPayment(Parameters, Chain) Export
 	StepsEnablerName = "PaymentListPTBStepsEnabler_BankPayment";
 	
@@ -2637,54 +2674,23 @@ Procedure PaymentListPTBStepsEnabler_BankPayment(Parameters, Chain) Export
 	Options_Account  = GetPropertyObject(Parameters, "Account");
 	Options_Currency = GetPropertyObject(Parameters, "Currency");
 	
-	// ChangeCompanyByPTBBankPayment
-	Chain.ChangeCompanyByPTBBankPayment.Enable = True;
-	Chain.ChangeCompanyByPTBBankPayment.Setter = "SetCompany";
-	
-	// ChangeCashAccountByPTBBankPayment
-	Chain.ChangeCashAccountByPTBBankPayment.Enable = True;
-	Chain.ChangeCashAccountByPTBBankPayment.Setter = "SetAccount";
-	
-	// ChangeCurrencyByPTBBankPayment
-	Chain.ChangeCurrencyByPTBBankPayment.Enable = True;
-	Chain.ChangeCurrencyByPTBBankPayment.Setter = "SetCurrency";
-	
-	// ChangeTotalAmountByPTBBankPayment
-	Chain.ChangeTotalAmountByPTBBankPayment.Enable = True;
-	Chain.ChangeTotalAmountByPTBBankPayment.Setter = "SetPaymentListTotalAmount";
+	// FillByPTBBankPayment
+	Chain.FillByPTBBankPayment.Enable = True;
+	Chain.FillByPTBBankPayment.Setter = "FIllPaymentListPlanningTransactionBasis_BankPayment";
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options_PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
 	
-		// ChangeCompanyByPTBBankPayment
-		Options = ModelClientServer_V2.ChangeCompanyByPTBBankPaymentOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentCompany = Options_Company;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCompanyByPTBBankPayment.Options.Add(Options);
-		
-		// ChangeCashAccountByPTBBankPayment
-		Options = ModelClientServer_V2.ChangeCashAccountByPTBBankPaymentOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentAccount = Options_Account;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCashAccountByPTBBankPayment.Options.Add(Options);
-		
-		// ChangeCurrencyByPTBBankPayment
-		Options = ModelClientServer_V2.ChangeCurrencyByPTBBankPaymentOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentCurrency = Options_Currency;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCurrencyByPTBBankPayment.Options.Add(Options);
-		
-		// ChangeTotalAmountByPTBBankPayment
-		Options = ModelClientServer_V2.ChangeTotalAmountByPTBBankPaymentOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentTotalAmount = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
+		// FillByPTBBankPayment
+		Options = ModelClientServer_V2.FillByPTBBankPaymentOptions();
+		Options.PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
+		Options.TotalAmount = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
+		Options.Company     = Options_Company;
+		Options.Account     = Options_Account;
+		Options.Currency    = Options_Currency;
 		Options.Ref = Parameters.Object.Ref;
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTotalAmountByPTBBankPayment.Options.Add(Options);
+		Chain.FillByPTBBankPayment.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -2695,67 +2701,25 @@ Procedure PaymentListPTBStepsEnabler_CashPayment(Parameters, Chain) Export
 	Options_Account  = GetPropertyObject(Parameters, "CashAccount");
 	Options_Currency = GetPropertyObject(Parameters, "Currency");
 	
-	// ChangeCompanyByPTBCashPayment
-	Chain.ChangeCompanyByPTBCashPayment.Enable = True;
-	Chain.ChangeCompanyByPTBCashPayment.Setter = "SetCompany";
+	// FillByPTBCashPayment
+	Chain.FillByPTBCashPayment.Enable = True;
+	Chain.FillByPTBCashPayment.Setter = "FIllPaymentListPlanningTransactionBasis_CashPayment";
 	
-	// ChangeCashAccountByPTBCashPayment
-	Chain.ChangeCashAccountByPTBCashPayment.Enable = True;
-	Chain.ChangeCashAccountByPTBCashPayment.Setter = "SetAccount";
-	
-	// ChangeCurrencyByPTBCashPayment
-	Chain.ChangeCurrencyByPTBCashPayment.Enable = True;
-	Chain.ChangeCurrencyByPTBCashPayment.Setter = "SetCurrency";
-	
-	// ChangeTotalAmountByPTBCashPayment
-	Chain.ChangeTotalAmountByPTBCashPayment.Enable = True;
-	Chain.ChangeTotalAmountByPTBCashPayment.Setter = "SetPaymentListTotalAmount";
-	
-	// ChangePartnerByPTBCashPayment
-	Chain.ChangePartnerByPTBCashPayment.Enable = True;
-	Chain.ChangePartnerByPTBCashPayment.Setter = "SetPaymentListPartner";
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options_PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
 	
-		// ChangeCompanyByPTBCashPayment
-		Options = ModelClientServer_V2.ChangeCompanyByPTBCashPaymentOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentCompany = Options_Company;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCompanyByPTBCashPayment.Options.Add(Options);
-		
-		// ChangeCashAccountByPTBCashPayment
-		Options = ModelClientServer_V2.ChangeCashAccountByPTBCashPaymentOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentAccount = Options_Account;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCashAccountByPTBCashPayment.Options.Add(Options);
-		
-		// ChangeCurrencyByPTBCashPayment
-		Options = ModelClientServer_V2.ChangeCurrencyByPTBCashPaymentOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentCurrency = Options_Currency;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCurrencyByPTBCashPayment.Options.Add(Options);
-		
-		// ChangeTotalAmountByPTBCashPayment
-		Options = ModelClientServer_V2.ChangeTotalAmountByPTBCashPaymentOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentTotalAmount = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
+		// FillByPTBCashPayment
+		Options = ModelClientServer_V2.FillByPTBCashPaymentOptions();
+		Options.PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
+		Options.TotalAmount = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
+		Options.Partner     = GetPropertyObject(Parameters, "PaymentList.Partner", Row.Key);
+		Options.Company     = Options_Company;
+		Options.Account     = Options_Account;
+		Options.Currency    = Options_Currency;
 		Options.Ref = Parameters.Object.Ref;
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTotalAmountByPTBCashPayment.Options.Add(Options);
-		
-		// ChangePartnerByPTBCashPayment
-		Options = ModelClientServer_V2.ChangePartnerByPTBCashPaymentOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentPartner = GetPropertyObject(Parameters, "PaymentList.Partner", Row.Key);
-		Options.Ref = Parameters.Object.Ref;
-		Options.Key = Row.Key;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangePartnerByPTBCashPayment.Options.Add(Options);
+		Chain.FillByPTBCashPayment.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -2767,78 +2731,25 @@ Procedure PaymentListPTBStepsEnabler_BankReceipt(Parameters, Chain) Export
 	Options_Currency         = GetPropertyObject(Parameters, "Currency");
 	Options_CurrencyExchange = GetPropertyObject(Parameters, "CurrencyExchange");
 	
-	// ChangeCompanyByPTBBankReceipt
-	Chain.ChangeCompanyByPTBBankReceipt.Enable = True;
-	Chain.ChangeCompanyByPTBBankReceipt.Setter = "SetCompany";
-	
-	// ChangeCashAccountByPTBBankReceipt
-	Chain.ChangeCashAccountByPTBBankReceipt.Enable = True;
-	Chain.ChangeCashAccountByPTBBankReceipt.Setter = "SetAccount";
-	
-	// ChangeCurrencyByPTBBankReceipt
-	Chain.ChangeCurrencyByPTBBankReceipt.Enable = True;
-	Chain.ChangeCurrencyByPTBBankReceipt.Setter = "SetCurrency";
-	
-	// ChangeCurrencyExchangeByPTBBankReceipt
-	Chain.ChangeCurrencyExchangeByPTBBankReceipt.Enable = True;
-	Chain.ChangeCurrencyExchangeByPTBBankReceipt.Setter = "SetCurrencyExchange";
-	
-	// ChangeTotalAmountByPTBBankReceipt
-	Chain.ChangeTotalAmountByPTBBankReceipt.Enable = True;
-	Chain.ChangeTotalAmountByPTBBankReceipt.Setter = "SetPaymentListTotalAmount";
-	
-	// ChangeAmountExchangeByPTBBankReceipt
-	Chain.ChangeAmountExchangeByPTBBankReceipt.Enable = True;
-	Chain.ChangeAmountExchangeByPTBBankReceipt.Setter = "SetPaymentListAmountExchange";
+	// FillByPTBBankReceipt
+	Chain.FIllByPTBBankReceipt.Enable = True;
+	Chain.FillByPTBBankReceipt.Setter = "FIllPaymentListPlanningTransactionBasis_BankReceipt";
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options_PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
-	
-		// ChangeCompanyByPTBBankReceipt
-		Options = ModelClientServer_V2.ChangeCompanyByPTBBankReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentCompany = Options_Company;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCompanyByPTBBankReceipt.Options.Add(Options);
 		
-		// ChangeCashAccountByPTBBankReceipt
-		Options = ModelClientServer_V2.ChangeCashAccountByPTBBankReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentAccount = Options_Account;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCashAccountByPTBBankReceipt.Options.Add(Options);
-		
-		// ChangeCurrencyByPTBBankReceipt
-		Options = ModelClientServer_V2.ChangeCurrencyByPTBBankReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentCurrency = Options_Currency;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCurrencyByPTBBankReceipt.Options.Add(Options);
-		
-		// ChangeCurrencyExchangeByPTBBankReceipt
-		Options = ModelClientServer_V2.ChangeCurrencyExchangeByPTBBankReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentCurrencyExchange = Options_CurrencyExchange;
-		Options.StepsEnablerName        = StepsEnablerName;
-		Chain.ChangeCurrencyExchangeByPTBBankReceipt.Options.Add(Options);
-		
-		// ChangeTotalAmountByPTBBankReceipt
-		Options = ModelClientServer_V2.ChangeTotalAmountByPTBBankReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentTotalAmount = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
+		// FillByPTBBankReceipt
+		Options = ModelClientServer_V2.FillByPTBBankReceiptOptions();
+		Options.PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
+		Options.TotalAmount    = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
+		Options.AmountExchange = GetPropertyObject(Parameters, "PaymentList.AmountExchange", Row.Key);
+		Options.Company  = Options_Company;
+		Options.Account  = Options_Account;
+		Options.Currency = Options_Currency;
+		Options.CurrencyExchange = Options_CurrencyExchange;
 		Options.Ref = Parameters.Object.Ref;
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTotalAmountByPTBBankReceipt.Options.Add(Options);
-		
-		// ChangeAmountExchangeByPTBBankReceipt
-		Options = ModelClientServer_V2.ChangeAmountExchangeByPTBBankReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentAmountExchange = GetPropertyObject(Parameters, "PaymentList.AmountExchange", Row.Key);
-		Options.Ref = Parameters.Object.Ref;
-		Options.Key = Row.Key;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeAmountExchangeByPTBBankReceipt.Options.Add(Options);
+		Chain.FillByPTBBankReceipt.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -2850,91 +2761,26 @@ Procedure PaymentListPTBStepsEnabler_CashReceipt(Parameters, Chain) Export
 	Options_Currency         = GetPropertyObject(Parameters, "Currency");
 	Options_CurrencyExchange = GetPropertyObject(Parameters, "CurrencyExchange");
 	
-	// ChangeCompanyByPTBCashReceipt
-	Chain.ChangeCompanyByPTBCashReceipt.Enable = True;
-	Chain.ChangeCompanyByPTBCashReceipt.Setter = "SetCompany";
+	// FillByPTBCashReceipt
+	Chain.FillByPTBCashReceipt.Enable = True;
+	Chain.FillByPTBCashReceipt.Setter = "FIllPaymentListPlanningTransactionBasis_CashReceipt";
 	
-	// ChangeCashAccountByPTBCashReceipt
-	Chain.ChangeCashAccountByPTBCashReceipt.Enable = True;
-	Chain.ChangeCashAccountByPTBCashReceipt.Setter = "SetAccount";
-	
-	// ChangeCurrencyByPTBCashReceipt
-	Chain.ChangeCurrencyByPTBCashReceipt.Enable = True;
-	Chain.ChangeCurrencyByPTBCashReceipt.Setter = "SetCurrency";
-	
-	// ChangeCurrencyExchangeByPTBCashReceipt
-	Chain.ChangeCurrencyExchangeByPTBCashReceipt.Enable = True;
-	Chain.ChangeCurrencyExchangeByPTBCashReceipt.Setter = "SetCurrencyExchange";
-	
-	// ChangeTotalAmountByPTBCashReceipt
-	Chain.ChangeTotalAmountByPTBCashReceipt.Enable = True;
-	Chain.ChangeTotalAmountByPTBCashReceipt.Setter = "SetPaymentListTotalAmount";
-	
-	// ChangeAmountExchangeByPTBCashReceipt
-	Chain.ChangeAmountExchangeByPTBCashReceipt.Enable = True;
-	Chain.ChangeAmountExchangeByPTBCashReceipt.Setter = "SetPaymentListAmountExchange";
-	
-	// ChangePartnerByPTBCashReceipt
-	Chain.ChangePartnerByPTBCashReceipt.Enable = True;
-	Chain.ChangePartnerByPTBCashReceipt.Setter = "SetPaymentListPartner";
-
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options_PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
-	
-		// ChangeCompanyByPTBCashReceipt
-		Options = ModelClientServer_V2.ChangeCompanyByPTBCashReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentCompany = Options_Company;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCompanyByPTBCashReceipt.Options.Add(Options);
 		
-		// ChangeCashAccountByPTBCashReceipt
-		Options = ModelClientServer_V2.ChangeCashAccountByPTBCashReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentAccount = Options_Account;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCashAccountByPTBCashReceipt.Options.Add(Options);
-		
-		// ChangeCurrencyByPTBCashReceipt
-		Options = ModelClientServer_V2.ChangeCurrencyByPTBCashReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentCurrency = Options_Currency;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeCurrencyByPTBCashReceipt.Options.Add(Options);
-		
-		// ChangeCurrencyExchangeByPTBCashReceipt
-		Options = ModelClientServer_V2.ChangeCurrencyExchangeByPTBCashReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentCurrencyExchange = Options_CurrencyExchange;
-		Options.StepsEnablerName        = StepsEnablerName;
-		Chain.ChangeCurrencyExchangeByPTBCashReceipt.Options.Add(Options);
-		
-		// ChangeTotalAmountByPTBCashReceipt
-		Options = ModelClientServer_V2.ChangeTotalAmountByPTBCashReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentTotalAmount = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
+		// FillByPTBCashReceipt
+		Options = ModelClientServer_V2.FillByPTBCashReceiptOptions();
+		Options.PlanningTransactionBasis = GetPropertyObject(Parameters, "PaymentList.PlaningTransactionBasis", Row.Key);
+		Options.TotalAmount       = GetPropertyObject(Parameters, "PaymentList.TotalAmount", Row.Key);
+		Options.AmountExchange    = GetPropertyObject(Parameters, "PaymentList.AmountExchange", Row.Key);
+		Options.Partner           = GetPropertyObject(Parameters, "PaymentList.Partner", Row.Key);
+		Options.Company  = Options_Company;
+		Options.Account  = Options_Account;
+		Options.Currency = Options_Currency;
+		Options.CurrencyExchange = Options_CurrencyExchange;		
 		Options.Ref = Parameters.Object.Ref;
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTotalAmountByPTBCashReceipt.Options.Add(Options);
-		
-		// ChangeAmountExchangeByPTBCashReceipt
-		Options = ModelClientServer_V2.ChangeAmountExchangeByPTBCashReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentAmountExchange = GetPropertyObject(Parameters, "PaymentList.AmountExchange", Row.Key);
-		Options.Ref = Parameters.Object.Ref;
-		Options.Key = Row.Key;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeAmountExchangeByPTBCashReceipt.Options.Add(Options);
-		
-		// ChangePartnerByPTBCashReceipt
-		Options = ModelClientServer_V2.ChangePartnerByPTBCashReceiptOptions();
-		Options.PlanningTransactionBasis = Options_PlanningTransactionBasis;
-		Options.CurrentPartner = GetPropertyObject(Parameters, "PaymentList.Partner", Row.Key);
-		Options.Ref = Parameters.Object.Ref;
-		Options.Key = Row.Key;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangePartnerByPTBCashReceipt.Options.Add(Options);
+		Chain.FillByPTBCashReceipt.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -4064,6 +3910,26 @@ EndFunction
 Procedure SetterForm(StepsEnablerName, DataPath, Parameters, Results, 
 	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False)
 	Setter("Form", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
+EndProcedure
+
+Procedure MultiSetterObject(Parameters, Results, ResourceToDataPath)
+	For Each KeyValue In ResourceToDataPath Do
+		Resource = KeyValue.Key;
+		DataPath = KeyValue.Value;
+		Segments = StrSplit(DataPath, ".");
+		If Segments.Count() = 1 Then // это реквизит шапки
+			_Results = New Array();
+			For Each Result In Results Do
+				_Results.Add(New Structure("Value, Options", Result.Value[Resource], New Structure("Key")));
+				Break;
+			EndDo;
+			SetterObject(Undefined, DataPath , Parameters, _Results);
+		ElsIf Segments.Count() = 2 Then // это колонка таблицы
+			SetterObject(Undefined, DataPath , Parameters, Results, , Resource);
+		Else
+			Raise StrTemplate("Wrong data path [%1]", DataPath);
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure SetterObject(StepsEnablerName, DataPath, Parameters, Results, 

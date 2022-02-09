@@ -620,7 +620,9 @@ Procedure OnOpenFormNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "IncomingPaymentOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingPaymentOrder" Then
 		DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 	EndIf;
 EndProcedure

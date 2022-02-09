@@ -140,6 +140,7 @@ Function GetChain()
 	Chain.Insert("ChangeCashAccountByCompany"   , GetChainLink("ChangeCashAccountByCompanyExecute"));
 	Chain.Insert("ChangeTransitAccountByAccount", GetChainLink("ChangeTransitAccountByAccountExecute"));
 	Chain.Insert("ChangeCashAccountByCurrency"  , GetChainLink("ChangeCashAccountByCurrencyExecute"));
+	Chain.Insert("ChangeCashAccountByPartner"   , GetChainLink("ChangeCashAccountByPartnerExecute"));
 	
 	Chain.Insert("FillByPTBBankReceipt" , GetChainLink("FillByPTBBankReceiptExecute"));
 	Chain.Insert("FillByPTBCashReceipt" , GetChainLink("FillByPTBCashReceiptExecute"));
@@ -293,6 +294,19 @@ Function ChangeCashAccountByCurrencyExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	Return Options.CurrentAccount;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CASH_ACCOUNT_BY_PARTNER
+
+Function ChangeCashAccountByPartnerOptions() Export
+	Return GetChainLinkOptions("Partner, LegalName, Currency");
+EndFunction
+
+Function ChangeCashAccountByPartnerExecute(Options) Export
+	Return DocumentsServer.GetBankAccountByPartner(Options.Partner,
+			Options.LegalName, Options.Currency);
 EndFunction
 
 #EndRegion

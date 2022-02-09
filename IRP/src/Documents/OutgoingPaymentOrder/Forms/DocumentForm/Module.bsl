@@ -12,6 +12,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure OnOpen(Cancel, AddInfo = Undefined) Export
+	DocOutgoingPaymentOrderClient.OnOpen(Object, ThisObject, Cancel);
+EndProcedure
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
@@ -22,11 +27,12 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnChange(Item)
-	For Each Row In Object.PaymentList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
+	Return;
+//	For Each Row In Object.PaymentList Do
+//		If Not ValueIsFilled(Row.Key) Then
+//			Row.Key = New UUID();
+//		EndIf;
+//	EndDo;
 EndProcedure
 
 &AtServer
@@ -42,11 +48,6 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined
 EndProcedure
 
 &AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocOutgoingPaymentOrderClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
@@ -59,8 +60,18 @@ EndProcedure
 #EndRegion
 
 &AtClient
-Procedure OnOpen(Cancel, AddInfo = Undefined) Export
-	DocOutgoingPaymentOrderClient.OnOpen(Object, ThisObject, Cancel);
+Procedure DescriptionClick(Item, StandardProcessing)
+	DocOutgoingPaymentOrderClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOutgoingPaymentOrderClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure PaymentListAfterDeleteRow(Item)
+	DocOutgoingPaymentOrderClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
 #Region ItemCompany
@@ -126,6 +137,11 @@ EndProcedure
 #EndRegion
 
 &AtClient
+Procedure CurrencyOnChange(Item, AddInfo = Undefined) Export
+	DocOutgoingPaymentOrderClient.CurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure DateOnChange(Item, AddInfo = Undefined) Export
 	DocOutgoingPaymentOrderClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
@@ -133,11 +149,6 @@ EndProcedure
 &AtClient
 Procedure StatusOnChange(Item, AddInfo = Undefined) Export
 	DocOutgoingPaymentOrderClient.StatusOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrencyOnChange(Item, AddInfo = Undefined) Export
-	DocOutgoingPaymentOrderClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -209,6 +220,7 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 #EndRegion
+
 #Region ExternalCommands
 
 &AtClient
@@ -247,3 +259,4 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+

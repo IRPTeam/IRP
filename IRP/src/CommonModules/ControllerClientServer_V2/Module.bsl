@@ -776,6 +776,7 @@ EndProcedure
 Function AccountStepsBinding(Parameters)
 	DataPath = New Map();
 	DataPath.Insert("IncomingPaymentOrder", "Account");
+	DataPath.Insert("OutgoingPaymentOrder", "Account");
 	DataPath.Insert("BankPayment", "Account");
 	DataPath.Insert("BankReceipt", "Account");
 	DataPath.Insert("CashPayment", "CashAccount");
@@ -783,6 +784,7 @@ Function AccountStepsBinding(Parameters)
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "StepsEnabler_ChangeCurrencyByAccount");
+	Binding.Insert("OutgoingPaymentOrder", "StepsEnabler_ChangeCurrencyByAccount");
 	
 	Binding.Insert("BankPayment"         , "StepsEnabler_ChangeCurrencyByAccount,
 											|StepsEnabler_ChangeTransitAccountByAccount");
@@ -1383,6 +1385,7 @@ Function CompanyStepsBinding(Parameters)
 	DataPath = "Company";
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "CompanyStepsEnabler_Cash");
+	Binding.Insert("OutgoingPaymentOrder", "CompanyStepsEnabler_Cash");
 	
 	Binding.Insert("BankPayment"         , "CompanyStepsEnabler_BankCashPaymentReceipt, 
 											|StepsEnabler_ChangeAccountByCompany");
@@ -2300,7 +2303,8 @@ EndProcedure
 Function PaymentListPartnerStepsBinding(Parameters)
 	DataPath = "PaymentList.Partner";
 	Binding = New Structure();
-	Binding.Insert("IncomingPaymentOrder", "PaymentListPartnerStepsEnabler_LegalNameIsPayer");
+	Binding.Insert("IncomingPaymentOrder", "PaymentListPartnerStepsEnabler_PaymentOrder_LegalNameIsPayer");
+	Binding.Insert("OutgoingPaymentOrder", "PaymentListPartnerStepsEnabler_PaymentOrder_LegalNameIsPayee");
 	Binding.Insert("BankPayment"         , "PaymentListPartnerStepsEnabler_BankCashPayment");
 	Binding.Insert("BankReceipt"         , "PaymentListPartnerStepsEnabler_BankCashReceipt");
 	Binding.Insert("CashPayment"         , "PaymentListPartnerStepsEnabler_BankCashPayment");
@@ -2308,8 +2312,8 @@ Function PaymentListPartnerStepsBinding(Parameters)
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
-Procedure PaymentListPartnerStepsEnabler_LegalNameIsPayer(Parameters, Chain) Export
-	StepsEnablerName = "PaymentListPartnerStepsEnabler_LegalNameIsPayer";
+Procedure PaymentListPartnerStepsEnabler_PaymentOrder_LegalNameIsPayer(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListPartnerStepsEnabler_PaymentOrder_LegalNameIsPayer";
 	
 	// ChangeLegalNameByPartner
 	Chain.ChangeLegalNameByPartner.Enable = True;
@@ -2322,6 +2326,43 @@ Procedure PaymentListPartnerStepsEnabler_LegalNameIsPayer(Parameters, Chain) Exp
 		Options.StepsEnablerName = StepsEnablerName;
 		Chain.ChangeLegalNameByPartner.Options.Add(Options);
 	EndDo;
+EndProcedure
+
+Procedure PaymentListPartnerStepsEnabler_PaymentOrder_LegalNameIsPayee(Parameters, Chain) Export
+	StepsEnablerName = "PaymentListPartnerStepsEnabler_LegalNameIsPayee";
+
+	Options_Currency = GetPropertyObject(Parameters, "Currency");
+	
+	// ChangeLegalNameByPartner
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	Chain.ChangeLegalNameByPartner.Setter = "SetPaymentListLegalName";
+	
+	// ChangeCashAccountByPartner
+	Chain.ChangeCashAccountByPartner.Enable = True;
+	Chain.ChangeCashAccountByPartner.Setter = "SetPaymentListPartnerBankAccount";
+	
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options_Partner   = GetPropertyObject(Parameters, "PaymentList.Partner", Row.Key);
+		Options_LegalName = GetPropertyObject(Parameters, "PaymentList.Payee"  , Row.Key);
+		
+		// ChangeLegalNameByPartner
+		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+		Options.Partner   = Options_Partner;
+		Options.LegalName = Options_LegalName;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeLegalNameByPartner.Options.Add(Options);
+		
+		// ChangeCashAccountByPartner
+		Options = ModelClientServer_V2.ChangeCashAccountByPartnerOptions();
+		Options.Partner   = Options_Partner;
+		Options.LegalName = Options_LegalName;
+		Options.Currency  = Options_Currency;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeCashAccountByPartner.Options.Add(Options);
+	EndDo;
+	
 EndProcedure
 
 Procedure PaymentListPartnerStepsEnabler_BankCashPayment(Parameters, Chain) Export
@@ -2397,6 +2438,29 @@ Procedure PaymentListPartnerStepsEnabler_BankCashReceipt(Parameters, Chain) Expo
 		Chain.ChangeAgreementByPartner.Options.Add(Options);
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_PARTNER_BANK_ACCOUNT
+
+// PaymentList.PartnerBankAccount.OnChange
+Procedure PaymentListPartnerBankAccountOnChange(Parameters) Export
+	Binding = PaymentListPartnerBankAccountStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.PartnerBankAccount.Set
+Procedure SetPaymentListPartnerBankAccount(Parameters, Results) Export
+	Binding = PaymentListPartnerBankAccountStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.PartnerBankAccount.Bind
+Function PaymentListPartnerBankAccountStepsBinding(Parameters)
+	DataPath = "PaymentList.PartnerBankAccount";
+	Binding = New Structure();
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 

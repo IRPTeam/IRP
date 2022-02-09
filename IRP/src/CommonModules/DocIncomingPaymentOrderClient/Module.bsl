@@ -7,12 +7,12 @@ EndProcedure
 
 #EndRegion
 
-#Region FormEvents
+#Region FORM
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-	
 	ViewClient_V2.OnOpen(Object, Form, "PaymentList");
+	
+	//DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -225,6 +225,6 @@ Procedure PlaningPeriodOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
-	Return New Structure();
-EndFunction
+//Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+//	Return New Structure();
+//EndFunction

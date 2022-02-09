@@ -188,7 +188,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Payee
+#Region Payer
 
 &AtClient
 Procedure PaymentListPayerOnChange(Item, AddInfo = Undefined) Export
@@ -220,6 +220,7 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 #EndRegion
+
 #Region ExternalCommands
 
 &AtClient

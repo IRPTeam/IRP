@@ -1489,7 +1489,7 @@ Function FillByPTBCashReceiptExecute(Options) Export
 	If ValueIsFilled(Options.PlanningTransactionBasis)
 		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
 			OrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashReceipt(Options.PlanningTransactionBasis);
-			Result.Account  = OrderInfo.Account;
+			Result.Account  = OrderInfo.CashAccount;
 			Result.Company  = OrderInfo.Company;
 			Result.Currency = OrderInfo.Currency;
 			Result.CurrencyExchange = OrderInfo.CurrencyExchange;

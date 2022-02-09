@@ -893,61 +893,61 @@ EndFunction
 
 // TransactionType.BankPayment.Fill
 Procedure FillTransactionType_BankPayment(Parameters, Results) Export
-	ResourceToDataPath = New Map();
-	ResourceToDataPath.Insert("Partner"                  , "PaymentList.Partner");
-	ResourceToDataPath.Insert("Payee"                    , "PaymentList.Payee");
-	ResourceToDataPath.Insert("Agreement"                , "PaymentList.Agreement");
-	ResourceToDataPath.Insert("LegalNameContract"        , "PaymentList.LegalNameContract");
-	ResourceToDataPath.Insert("BasisDocument"            , "PaymentList.BasisDocument");
-	ResourceToDataPath.Insert("PlanningTransactionBasis" , "PaymentList.PlaningTransactionBasis");
-	ResourceToDataPath.Insert("Order"                    , "PaymentList.Order");
-	ResourceToDataPath.Insert("TransitAccount"           , "TransitAccount");
-	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"                  , PaymentListPartnerStepsBinding(Parameters));
+	ResourceToBinding.Insert("Payee"                    , PaymentListLegalNameStepsBinding(Parameters));
+	ResourceToBinding.Insert("Agreement"                , PaymentListAgreementStepsBinding(Parameters));
+	ResourceToBinding.Insert("LegalNameContract"        , PaymentListLegalNameContractStepsBinding(Parameters));
+	ResourceToBinding.Insert("BasisDocument"            , PaymentListBasisDocumentStepsBinding(Parameters));
+	ResourceToBinding.Insert("PlanningTransactionBasis" , PaymentListPlanningTransactionBasisStepsBinding(Parameters));
+	ResourceToBinding.Insert("Order"                    , PaymentListOrderStepsBinding(Parameters));
+	ResourceToBinding.Insert("TransitAccount"           , TransitAccountStepsBinding(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
 // TransactionType.BankReceipt.Fill
 Procedure FillTransactionType_BankReceipt(Parameters, Results) Export
-	ResourceToDataPath = New Map();
-	ResourceToDataPath.Insert("Partner"                  , "PaymentList.Partner");
-	ResourceToDataPath.Insert("Payer"                    , "PaymentList.Payer");
-	ResourceToDataPath.Insert("Agreement"                , "PaymentList.Agreement");
-	ResourceToDataPath.Insert("LegalNameContract"        , "PaymentList.LegalNameContract");
-	ResourceToDataPath.Insert("BasisDocument"            , "PaymentList.BasisDocument");
-	ResourceToDataPath.Insert("PlanningTransactionBasis" , "PaymentList.PlaningTransactionBasis");
-	ResourceToDataPath.Insert("Order"                    , "PaymentList.Order");
-	ResourceToDataPath.Insert("AmountExchange"           , "PaymentList.AmountExchange");
-	ResourceToDataPath.Insert("POSAccount"               , "PaymentList.POSAccount");
-	ResourceToDataPath.Insert("TransitAccount"           , "TransitAccount");
-	ResourceToDataPath.Insert("CurrencyExchange"         , "CurrencyExchange");
-	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"                  , PaymentListPartnerStepsBinding(Parameters));
+	ResourceToBinding.Insert("Payer"                    , PaymentListLegalNameStepsBinding(Parameters));
+	ResourceToBinding.Insert("Agreement"                , PaymentListAgreementStepsBinding(Parameters));
+	ResourceToBinding.Insert("LegalNameContract"        , PaymentListLegalNameContractStepsBinding(Parameters));
+	ResourceToBinding.Insert("BasisDocument"            , PaymentListBasisDocumentStepsBinding(Parameters));
+	ResourceToBinding.Insert("PlanningTransactionBasis" , PaymentListPlanningTransactionBasisStepsBinding(Parameters));
+	ResourceToBinding.Insert("Order"                    , PaymentListOrderStepsBinding(Parameters));
+	ResourceToBinding.Insert("AmountExchange"           , PaymentListAmountExchangeStepsBinding(Parameters));
+	ResourceToBinding.Insert("POSAccount"               , PaymentListPOSAccountStepsBinding(Parameters));
+	ResourceToBinding.Insert("TransitAccount"           , TransitAccountStepsBinding(Parameters));
+	ResourceToBinding.Insert("CurrencyExchange"         , CurrencyExchangeStepsBinding(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
 // TransactionType.CashPayment.Fill
 Procedure FillTransactionType_CashPayment(Parameters, Results) Export
-	ResourceToDataPath = New Map();
-	ResourceToDataPath.Insert("Partner"                  , "PaymentList.Partner");
-	ResourceToDataPath.Insert("Payee"                    , "PaymentList.Payee");
-	ResourceToDataPath.Insert("Agreement"                , "PaymentList.Agreement");
-	ResourceToDataPath.Insert("LegalNameContract"        , "PaymentList.LegalNameContract");
-	ResourceToDataPath.Insert("BasisDocument"            , "PaymentList.BasisDocument");
-	ResourceToDataPath.Insert("PlanningTransactionBasis" , "PaymentList.PlaningTransactionBasis");
-	ResourceToDataPath.Insert("Order"                    , "PaymentList.Order");
-	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"                  , PaymentListPartnerStepsBinding(Parameters));
+	ResourceToBinding.Insert("Payee"                    , PaymentListLegalNameStepsBinding(Parameters));
+	ResourceToBinding.Insert("Agreement"                , PaymentListAgreementStepsBinding(Parameters));
+	ResourceToBinding.Insert("LegalNameContract"        , PaymentListLegalNameContractStepsBinding(Parameters));
+	ResourceToBinding.Insert("BasisDocument"            , PaymentListBasisDocumentStepsBinding(Parameters));
+	ResourceToBinding.Insert("PlanningTransactionBasis" , PaymentListPlanningTransactionBasisStepsBinding(Parameters));
+	ResourceToBinding.Insert("Order"                    , PaymentListOrderStepsBinding(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
 // TransactionType.CashReceipt.Fill
 Procedure FillTransactionType_CashReceipt(Parameters, Results) Export
-	ResourceToDataPath = New Map();
-	ResourceToDataPath.Insert("Partner"                  , "PaymentList.Partner");
-	ResourceToDataPath.Insert("Payer"                    , "PaymentList.Payer");
-	ResourceToDataPath.Insert("Agreement"                , "PaymentList.Agreement");
-	ResourceToDataPath.Insert("LegalNameContract"        , "PaymentList.LegalNameContract");
-	ResourceToDataPath.Insert("BasisDocument"            , "PaymentList.BasisDocument");
-	ResourceToDataPath.Insert("PlanningTransactionBasis" , "PaymentList.PlaningTransactionBasis");
-	ResourceToDataPath.Insert("Order"                    , "PaymentList.Order");
-	ResourceToDataPath.Insert("AmountExchange"           , "PaymentList.AmountExchange");
-	ResourceToDataPath.Insert("CurrencyExchange"         , "CurrencyExchange");
-	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"                  , PaymentListPartnerStepsBinding(Parameters));
+	ResourceToBinding.Insert("Payer"                    , PaymentListLegalNameStepsBinding(Parameters));
+	ResourceToBinding.Insert("Agreement"                , PaymentListAgreementStepsBinding(Parameters));
+	ResourceToBinding.Insert("LegalNameContract"        , PaymentListLegalNameContractStepsBinding(Parameters));
+	ResourceToBinding.Insert("BasisDocument"            , PaymentListBasisDocumentStepsBinding(Parameters));
+	ResourceToBinding.Insert("PlanningTransactionBasis" , PaymentListPlanningTransactionBasisStepsBinding(Parameters));
+	ResourceToBinding.Insert("Order"                    , PaymentListOrderStepsBinding(Parameters));
+	ResourceToBinding.Insert("AmountExchange"           , PaymentListAmountExchangeStepsBinding(Parameters));
+	ResourceToBinding.Insert("CurrencyExchange"         , CurrencyExchangeStepsBinding(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
 Procedure StepsEnabler_ClearByTransactionTypeBankPayment(Parameters, Chain) Export
@@ -2573,6 +2573,52 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYMENT_LIST_LEGAL_NAME_CONTRACT
+
+// PaymentList.LegalNameContract.OnChange
+Procedure PaymentListLegalNameContractOnChange(Parameters) Export
+	Binding = PaymentListLegalNameContractStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.LegalNameContract.Set
+Procedure SetPaymentListLegalNameContract(Parameters, Results) Export
+	Binding = PaymentListLegalNameContractStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.LegalNameContract.Bind
+Function PaymentListLegalNameContractStepsBinding(Parameters)
+	DataPath = "PaymentList.LegalNameContract";
+	Binding = New Structure();
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_POS_ACCOUNT
+
+// PaymentList.POSAccount.OnChange
+Procedure PaymentListPOSAccountOnChange(Parameters) Export
+	Binding = PaymentListPOSAccountStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.POSAccount.Set
+Procedure SetPaymentListPOSAccount(Parameters, Results) Export
+	Binding = PaymentListPOSAccountStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.POSAccount.Bind
+Function PaymentListPOSAccountStepsBinding(Parameters)
+	DataPath = "PaymentList.POSAccount";
+	Binding = New Structure();
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region PAYMENT_LIST_BASIS_DOCUMENT
 
 // PaymentList.BasisDocument.OnChange
@@ -2623,48 +2669,48 @@ EndFunction
 
 // PaymentList.PlanningTransactionBasis.BankPayment.Fill
 Procedure FIllPaymentListPlanningTransactionBasis_BankPayment(Parameters, Results) Export
-	ResourceToDataPath = New Map();
-	ResourceToDataPath.Insert("Account"     , "Account");
-	ResourceToDataPath.Insert("Company"     , "Company");
-	ResourceToDataPath.Insert("Currency"    , "Currency");
-	ResourceToDataPath.Insert("TotalAmount" , "PaymentList.TotalAmount");
-	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Account"     , AccountStepsBinding(Parameters));
+	ResourceToBinding.Insert("Company"     , CompanyStepsBinding(Parameters));
+	ResourceToBinding.Insert("Currency"    , CurrencyStepsBinding(Parameters));
+	ResourceToBinding.Insert("TotalAmount" , PaymentListTotalAmountStepsBinding(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
 // PaymentList.PlanningTransactionBasis.CashPayment.Fill
 Procedure FIllPaymentListPlanningTransactionBasis_CashPayment(Parameters, Results) Export
-	ResourceToDataPath = New Map();
-	ResourceToDataPath.Insert("Account"     , "CashAccount");
-	ResourceToDataPath.Insert("Company"     , "Company");
-	ResourceToDataPath.Insert("Currency"    , "Currency");
-	ResourceToDataPath.Insert("Partner"     , "PaymentList.Partner");
-	ResourceToDataPath.Insert("TotalAmount" , "PaymentList.TotalAmount");
-	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Account"     , AccountStepsBinding(Parameters));
+	ResourceToBinding.Insert("Company"     , CompanyStepsBinding(Parameters));
+	ResourceToBinding.Insert("Currency"    , CurrencyStepsBinding(Parameters));
+	ResourceToBinding.Insert("Partner"     , PaymentListPartnerStepsBinding(Parameters));
+	ResourceToBinding.Insert("TotalAmount" , PaymentListTotalAmountStepsBinding(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
 // PaymentList.PlanningTransactionBasis.BankReceipt.Fill
 Procedure FIllPaymentListPlanningTransactionBasis_BankReceipt(Parameters, Results) Export
-	ResourceToDataPath = New Map();
-	ResourceToDataPath.Insert("Account"          , "Account");
-	ResourceToDataPath.Insert("Company"          , "Company");
-	ResourceToDataPath.Insert("Currency"         , "Currency");
-	ResourceToDataPath.Insert("CurrencyExchange" , "CurrencyExchange");
-	ResourceToDataPath.Insert("TotalAmount"      , "PaymentList.TotalAmount");
-	ResourceToDataPath.Insert("AmountExchange"   , "PaymentList.AmountExchange");
-	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Account"          , AccountStepsBinding(Parameters));
+	ResourceToBinding.Insert("Company"          , CompanyStepsBinding(Parameters));
+	ResourceToBinding.Insert("Currency"         , CurrencyStepsBinding(Parameters));
+	ResourceToBinding.Insert("CurrencyExchange" , CurrencyExchangeStepsBinding(Parameters));
+	ResourceToBinding.Insert("TotalAmount"      , PaymentListTotalAmountStepsBinding(Parameters));
+	ResourceToBinding.Insert("AmountExchange"   , PaymentListAmountExchangeStepsBinding(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
 // PaymentList.PlanningTransactionBasis.CashReceipt.Fill
 Procedure FIllPaymentListPlanningTransactionBasis_CashReceipt(Parameters, Results) Export
-	ResourceToDataPath = New Map();
-	ResourceToDataPath.Insert("Account"          , "CashAccount");
-	ResourceToDataPath.Insert("Company"          , "Company");
-	ResourceToDataPath.Insert("Currency"         , "Currency");
-	ResourceToDataPath.Insert("CurrencyExchange" , "CurrencyExchange");
-	ResourceToDataPath.Insert("Partner"          , "PaymentList.Partner");
-	ResourceToDataPath.Insert("TotalAmount"      , "PaymentList.TotalAmount");
-	ResourceToDataPath.Insert("AmountExchange"   , "PaymentList.AmountExchange");
-	MultiSetterObject(Parameters, Results, ResourceToDataPath);
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Account"          , AccountStepsBinding(Parameters));
+	ResourceToBinding.Insert("Company"          , CompanyStepsBinding(Parameters));
+	ResourceToBinding.Insert("Currency"         , CurrencyStepsBinding(Parameters));
+	ResourceToBinding.Insert("CurrencyExchange" , CurrencyExchangeStepsBinding(Parameters));
+	ResourceToBinding.Insert("Partner"          , PaymentListPartnerStepsBinding(Parameters));
+	ResourceToBinding.Insert("TotalAmount"      , PaymentListTotalAmountStepsBinding(Parameters));
+	ResourceToBinding.Insert("AmountExchange"   , PaymentListAmountExchangeStepsBinding(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
 Procedure PaymentListPTBStepsEnabler_BankPayment(Parameters, Chain) Export
@@ -3912,22 +3958,22 @@ Procedure SetterForm(StepsEnablerName, DataPath, Parameters, Results,
 	Setter("Form", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
 EndProcedure
 
-Procedure MultiSetterObject(Parameters, Results, ResourceToDataPath)
-	For Each KeyValue In ResourceToDataPath Do
+Procedure MultiSetterObject(Parameters, Results, ResourceToBinding)
+	For Each KeyValue In ResourceToBinding Do
 		Resource = KeyValue.Key;
-		DataPath = KeyValue.Value;
-		Segments = StrSplit(DataPath, ".");
+		Binding = KeyValue.Value;
+		Segments = StrSplit(Binding.DataPath, ".");
 		If Segments.Count() = 1 Then // это реквизит шапки
 			_Results = New Array();
 			For Each Result In Results Do
 				_Results.Add(New Structure("Value, Options", Result.Value[Resource], New Structure("Key")));
 				Break;
 			EndDo;
-			SetterObject(Undefined, DataPath , Parameters, _Results);
+			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, _Results);
 		ElsIf Segments.Count() = 2 Then // это колонка таблицы
-			SetterObject(Undefined, DataPath , Parameters, Results, , Resource);
+			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, , Resource);
 		Else
-			Raise StrTemplate("Wrong data path [%1]", DataPath);
+			Raise StrTemplate("Wrong data path [%1]", Binding.DataPath);
 		EndIf;
 	EndDo;
 EndProcedure

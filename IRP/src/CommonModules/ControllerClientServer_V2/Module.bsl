@@ -73,6 +73,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 	
 	Parameters.Insert("ReadOnlyProperties"    , ServerParameters.ReadOnlyProperties);
 	Parameters.Insert("ReadOnlyPropertiesMap" , New Map());
+	Parameters.Insert("ProcessedReadOnlyPropertiesMap" , New Map()); // ReadOnlyProperties для которых уже вызывались обработчики
 	ArrayOfProperties = StrSplit(ServerParameters.ReadOnlyProperties, ",");
 	For Each Property In ArrayOfProperties Do
 		Parameters.ReadOnlyPropertiesMap.Insert(TrimAll(Property), True);
@@ -4074,9 +4075,10 @@ Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNo
 		If IsChanged Then
 			ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
 		ElsIf Parameters.ReadOnlyPropertiesMap.Get(DataPath) = True Then
-			Parameters.ReadOnlyPropertiesMap.Insert(DataPath, False);
-			ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
-			
+			If Parameters.ProcessedReadOnlyPropertiesMap.Get(DataPath) = Undefined Then
+				Parameters.ProcessedReadOnlyPropertiesMap.Insert(DataPath, True);
+				ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
+			EndIf;
 		EndIf;
 	EndIf;
 EndProcedure

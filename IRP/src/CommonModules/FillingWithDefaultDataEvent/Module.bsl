@@ -51,6 +51,16 @@ IsUsedNewFunctionality =
 				ArrayOfMainTables.Add(TableName);
 			EndIf;
 		EndDo;
+		
+		// свойства которые были заполнены из настроек пользователя
+		ArrayOfUserSettingsProperties = New Array();
+		For Each KeyValue In Data Do
+			If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) 
+				And ValueIsFilled(Data[KeyValue.Key]) Then				
+				ArrayOfUserSettingsProperties.Add(TrimAll(KeyValue.Key));	
+			EndIf;
+		EndDo;
+		UserSettinsProperties = StrConcat(ArrayOfUserSettingsProperties, ",");
 	
 		ReadOnlyProperties = "";
 		Source.AdditionalProperties.Property("ReadOnlyProperties", ReadOnlyProperties);
@@ -95,10 +105,21 @@ IsUsedNewFunctionality =
 				Property = New Structure("DataPath", KeyValue.Key);
 				Value    = KeyValue.Value;
 				
+				ArrayOfReadOnlyProperties = StrSplit(ReadOnlyProperties, ",");
+				If ValueIsFilled(Value) Then
+					If ArrayOfReadOnlyProperties.Find(Property.DataPath) = Undefined Then
+						Source[Property.DataPath] = Value;
+					EndIf;
+				EndIf;
+				
 				For Each TableName In ArrayOfMainTables Do
 					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
 					ServerParameters.TableName          = TableName;
-					ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
+					
+					ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(ReadOnlyProperties), 
+						ReadOnlyProperties + ", " + UserSettinsProperties, UserSettinsProperties);
+					//ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
+					
 					Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 					
 					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);

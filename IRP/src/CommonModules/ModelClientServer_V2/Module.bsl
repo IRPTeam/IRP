@@ -1360,10 +1360,6 @@ Function FillByPTBBankPaymentExecute(Options) Export
 	Result.Insert("Currency"    , Options.Currency);
 	Result.Insert("TotalAmount" , Options.TotalAmount);
 	
-	If ValueIsFilled(Options.CurrentAccount) Then
-		Return Options.CurrentAccount;
-	EndIf;
-	
 	If ValueIsFilled(Options.PlanningTransactionBasis)
 		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
 			OrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankPayment(Options.PlanningTransactionBasis);
@@ -1449,7 +1445,7 @@ Function FillByPTBCashPaymentExecute(Options) Export
 	If ValueIsFilled(Options.PlanningTransactionBasis)
 		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
 			OrderInfo = DocCashTransferOrderServer.GetInfoForFillingCashPayment(Options.PlanningTransactionBasis);
-			Result.Account  = OrderInfo.Account;
+			Result.Account  = OrderInfo.CashAccount;
 			Result.Company  = OrderInfo.Company;
 			Result.Currency = OrderInfo.Currency;
 			

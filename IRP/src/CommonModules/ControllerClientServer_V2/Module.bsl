@@ -216,6 +216,7 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("Receiver"        , "SetAccountReceiver");
 	SettersMap.Insert("ReceiveCurrency" , "SetReceiveCurrency");
 	SettersMap.Insert("Account"         , "SetAccount");
+	SettersMap.Insert("CashAccount"     , "SetAccount");
 	SettersMap.Insert("Currency"        , "SetCurrency");
 	SettersMap.Insert("Date"            , "SetDate");
 	SettersMap.Insert("Company"         , "SetCompany");
@@ -228,6 +229,7 @@ Function GetSetterNameByDataPath(DataPath)
 	// PaymentList
 	SettersMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
 	SettersMap.Insert("PaymentList.Payer"   , "SetPaymentListLegalName");
+	SettersMap.Insert("PaymentList.Payee"   , "SetPaymentListLegalName");
 	
 	// ItemList
 	SettersMap.Insert("ItemList.ItemKey"            , "SetItemListItemKey");

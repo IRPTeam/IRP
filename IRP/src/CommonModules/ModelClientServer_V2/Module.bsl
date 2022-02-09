@@ -143,6 +143,8 @@ Function GetChain()
 	
 	Chain.Insert("FillByPTBBankReceipt" , GetChainLink("FillByPTBBankReceiptExecute"));
 	Chain.Insert("FillByPTBCashReceipt" , GetChainLink("FillByPTBCashReceiptExecute"));
+	Chain.Insert("FillByPTBBankPayment" , GetChainLink("FillByPTBBankPaymentExecute"));
+	Chain.Insert("FillByPTBCashPayment" , GetChainLink("FillByPTBCashPaymentExecute"));
 	
 	Chain.Insert("ChangeItemKeyByItem"    , GetChainLink("ChangeItemKeyByItemExecute"));
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));

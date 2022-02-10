@@ -2593,6 +2593,7 @@ EndProcedure
 Function PaymentListLegalNameStepsBinding(Parameters)
 	DataPath = New Map();
 	DataPath.Insert("IncomingPaymentOrder", "PaymentList.Payer");
+	DataPath.Insert("OutgoingPaymentOrder", "PaymentList.Payee");
 	DataPath.Insert("BankPayment"         , "PaymentList.Payee");
 	DataPath.Insert("BankReceipt"         , "PaymentList.Payer");
 	DataPath.Insert("CashPayment"         , "PaymentList.Payee");
@@ -2600,6 +2601,7 @@ Function PaymentListLegalNameStepsBinding(Parameters)
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "PaymentListLegalNameStepsEnabler_LegalNameIsPayer");
+	Binding.Insert("OutgoingPaymentOrder", "PaymentListLegalNameStepsEnabler_LegalNameIsPayee");
 	Binding.Insert("BankPayment"         , "PaymentListLegalNameStepsEnabler_LegalNameIsPayee");
 	Binding.Insert("BankReceipt"         , "PaymentListLegalNameStepsEnabler_LegalNameIsPayer");
 	Binding.Insert("CashPayment"         , "PaymentListLegalNameStepsEnabler_LegalNameIsPayee");

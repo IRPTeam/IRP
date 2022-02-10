@@ -17,7 +17,6 @@ IsUsedNewFunctionality =
 	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsSurplus")
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsWriteOff")
-	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
 	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice");
 //===
 
@@ -78,7 +77,7 @@ IsUsedNewFunctionality =
 					Continue;
 				EndIf;
 				DataPath = StrSplit(PropertyName, ".");
-				If DataPath.Count() = 1 Then // для табличных частей пока не реализовано
+				If DataPath.Count() = 1 Then
 					Property = New Structure("DataPath", TrimAll(DataPath[0]));
 				
 					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
@@ -106,7 +105,7 @@ IsUsedNewFunctionality =
 				Value    = KeyValue.Value;
 				
 				ArrayOfReadOnlyProperties = StrSplit(ReadOnlyProperties, ",");
-				If ValueIsFilled(Value) Then
+				If ValueIsFilled(Value) And Not ValueIsFilled(Source[Property.DataPath]) Then
 					If ArrayOfReadOnlyProperties.Find(Property.DataPath) = Undefined Then
 						Source[Property.DataPath] = Value;
 					EndIf;

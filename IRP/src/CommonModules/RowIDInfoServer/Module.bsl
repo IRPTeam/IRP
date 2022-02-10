@@ -7124,12 +7124,16 @@ Function AddLinkedDocumentRows(Object, FillingValues) Export
 	TableNames_Refreshable.Add("ItemList");
 	
 	UpdatedProperties = New Array();
-	
+	ArrayOfNewRows = New Array();
 	For Each TableName In TableNames_Refreshable Do
 		If FillingValue.Property(TableName) And CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
 			For Each Row In FillingValue[TableName] Do
 				NewRow = Object[TableName].Add();
 				FillPropertyValues(NewRow, Row);
+				
+				If Upper(TableName) = Upper("ItemList") Then
+					ArrayOfNewRows.Add(NewRow);
+				EndIf;
 				
 				For Each KeyValue In Row Do
 					PropertyName = TrimAll(KeyValue.Key);
@@ -7139,7 +7143,8 @@ Function AddLinkedDocumentRows(Object, FillingValues) Export
 			EndDo;
 		EndIf;
 	EndDo;
-	Return StrConcat(UpdatedProperties, ",");
+	Return New Structure("UpdatedProperties, NewRows", 
+		StrConcat(UpdatedProperties, ","), ArrayOfNewRows);
 EndFunction
 
 Procedure PutToUpdatedProperties(PropertyName, TableName, Source, UpdatedProperties)

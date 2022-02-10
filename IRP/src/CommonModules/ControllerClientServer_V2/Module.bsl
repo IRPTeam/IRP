@@ -81,6 +81,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 	
 	
 	// таблицы для которых нужно получить колонки
+	Parameters.Insert("TableName", ServerParameters.TableName);
 	ArrayOfTableNames = New Array();
 	ArrayOfTableNames.Add(ServerParameters.TableName);
 	ArrayOfTableNames.Add("TaxList");
@@ -3910,11 +3911,13 @@ Procedure CommitChainChanges(Parameters) Export
 			Execute StrTemplate("%1.%2(Parameters);", ViewModuleName, FormModificator);
 		EndDo;
 		
-	EndIf;
+		_CommitChainChanges(Parameters.CacheForm, Parameters.Form);
+		
+	//EndIf;
 	
 	
 	#IF Client THEN
-		_CommitChainChanges(Parameters.CacheForm, Parameters.Form);
+		//_CommitChainChanges(Parameters.CacheForm, Parameters.Form);
 		
 		UniqueViewNotify = New Array();
 		For Each ViewNotify In Parameters.ViewNotify Do
@@ -3926,6 +3929,7 @@ Procedure CommitChainChanges(Parameters) Export
 			Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewClientModuleName, ViewNotify);
 		EndDo;
 	#ENDIF
+	EndIf;
 EndProcedure
 
 // Переносит изменения из Cache в Object из CacheForm в Fomr
@@ -4055,7 +4059,7 @@ Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNo
 	For Each Result In Results Do
 		_Key   = Result.Options.Key;
 		If ValueIsFilled(ValueDataPath) Then
-			_Value = Result.Value[ValueDataPath];
+			_Value = ?(Result.Value = Undefined, Undefined, Result.Value[ValueDataPath]);
 		Else
 			_Value = Result.Value;
 		EndIf;
@@ -4153,9 +4157,30 @@ Function GetProperty(Cache, Source, DataPath, Key, ReadOnlyFromCache)
 EndFunction
 
 Function SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache = False)
-	// если свойство ReadOnly, то ничего не меняем в нем
+	// если свойство ReadOnly и оно заполнено то не меняем
 	If Parameters.ReadOnlyPropertiesMap.Get(DataPath) <> Undefined Then
-		Return False; // Свойство ReadOnly
+		Segments = StrSplit(DataPath, ".");
+		If Segments.Count() = 1 Then
+			If ValueIsFilled(Parameters.Object[DataPath]) Then
+				Return False; // Свойство ReadOnly и заполнено, не меняем
+			EndIf;
+		ElsIf Segments.Count() = 2 Then
+			// для табличной части нужно сначало найти строку
+			TableName = TrimAll(Segments[0]);
+			PropertyName = TrimAll(Segments[1]);
+			If Upper(TableName) = Upper(Parameters.TableName) Then
+				For Each Row In GetRows(Parameters, TableName) Do
+					If Row.Key = _Key Then
+						If ValueIsFilled(Row[PropertyName]) Then
+							Return False; // Свойство ReadOnly и заполнено, не меняем
+						EndIf;
+						Break;
+					EndIf;
+				EndDo;
+			EndIf;
+		Else
+			Raise StrTemplate("Wrong data path for read only property [%1]", DataPath);
+		EndIf;
 	EndIf;
 	
 	CurrentValue = GetPropertyObject(Parameters, DataPath, _Key, ReadOnlyFromCache);
@@ -4273,3 +4298,64 @@ Function IsUserChange(Parameters)
 	Return False;
 EndFunction
 
+#IF Server THEN
+
+Function AddLinkedDocumentRows(Object, Form, LinkedResult, TableName) Export
+	FormParameters = GetFormParameters(Form);
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.TableName = TableName;
+	ServerParameters.ReadOnlyProperties = LinkedResult.UpdatedProperties;
+	ServerParameters.Rows = LinkedResult.NewRows;
+		
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	For Each PropertyName In StrSplit(ServerParameters.ReadOnlyProperties, ",") Do
+		If StrStartsWith(PropertyName, TableName) Then
+			Property = New Structure("DataPath", TrimAll(PropertyName));
+			API_SetProperty(Parameters, Property, Undefined);
+		EndIf;
+	EndDo;
+	Return Parameters.ExtractedData;
+EndFunction
+
+Procedure SetReadOnlyProperties_RowID(Object, PropertiesHeader, PropertiesTables) Export
+	ArrayOfPropertiesHeader = New Array();
+	For Each PropertyName In StrSplit(PropertiesHeader, ",") Do
+		PropertyName = TrimAll(PropertyName);
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, PropertyName)
+			And ValueIsFilled(Object[PropertyName])
+			And ArrayOfPropertiesHeader.Find(PropertyName) = Undefined Then
+				ArrayOfPropertiesHeader.Add(PropertyName);
+		EndIf;
+	EndDo;
+	Object.AdditionalProperties.Insert("ReadOnlyProperties", 
+			StrConcat(ArrayOfPropertiesHeader, ",") + ", " + PropertiesTables);
+EndProcedure
+
+Procedure SetReadOnlyProperties(Object, FillingData) Export
+	HeaderProperties = New Array();
+	TabularProperties = New Array();
+	For Each KeyValue In FillingData Do
+		Property = KeyValue.Key;
+		Value    = KeyValue.Value;
+		If Not CommonFunctionsClientServer.ObjectHasProperty(Object, Property) Then
+			Continue;
+		EndIf;
+					
+		If TypeOf(Value) = Type("Array") Then // is tabular section
+			If Value.Count() Then
+				For Each Column In Value[0] Do
+					If Object.Metadata().TabularSections[Property]
+						.Attributes.Find(Column.Key) <> Undefined Then
+							TabularProperties.Add(StrTemplate("%1.%2",Property, Column.Key));
+					EndIf;
+				EndDo;
+			EndIf;
+		Else // is header property
+			HeaderProperties.Add(Property);
+		EndIf;
+	EndDo;
+	ReadOnlyProperties = StrConcat(HeaderProperties, ",") +","+StrConcat(TabularProperties, ",");
+	Object.AdditionalProperties.Insert("ReadOnlyProperties", ReadOnlyProperties);
+EndProcedure
+
+#ENDIF

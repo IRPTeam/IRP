@@ -507,8 +507,12 @@ Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_SI(Object));
 	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
 	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
@@ -516,34 +520,38 @@ Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_SI(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
 	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
-Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
-	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	Taxes_CreateFormControls();
-	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, ThisObject, "ShipmentConfirmations");
-	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, "ShipmentConfirmations", "ShipmentConfirmationsTree",
-		"QuantityInShipmentConfirmation");
-	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
-	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, ThisObject);
+	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	If ExtractedData <> Undefined Then
+		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
+	EndIf;
 EndProcedure
 
 &AtServer
-Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
 		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
-		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	EndIf;
 	LockLinkedRows();
-EndProcedure
+	Return ExtractedData;
+EndFunction
 
 &AtServer
 Procedure LockLinkedRows()

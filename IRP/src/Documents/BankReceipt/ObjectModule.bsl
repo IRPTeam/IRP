@@ -41,11 +41,10 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		If FillingData.BasedOn = "CashTransferOrder"
 			Or FillingData.BasedOn = "IncomingPaymentOrder"
-			Or FillingData.BasedOn = "SalesInvoice" Then
-			Filling_BasedOn(FillingData);
-		EndIf;
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesOrder" Then
-			Filling_BasedOn(FillingData);
+			Or FillingData.BasedOn = "SalesInvoice"
+			Or FillingData.BasedOn = "SalesOrder" Then
+				ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+				Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;
 EndProcedure

@@ -1099,6 +1099,40 @@ Procedure OnSetStoreNotify(Parameters) Export
 	EndIf;
 EndProcedure
 
+Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		FormParameters = GetFormParameters(Form);
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TableName;
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		OnSetStoreNotify(Parameters);
+		
+		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+				
+				ServerData = Undefined;
+				If ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
+					ServerData = New Structure("ServerData", New Structure());
+					ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", ExtractedData.ItemKeysWithSerialLotNumbers);
+				EndIf;
+				
+				SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
+				SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+		EndIf;
+		
+		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+			Parameters.Form.Taxes_CreateFormControls();
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, 
+				"ShipmentConfirmations");
+			DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
+				"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+		EndIf;
+	EndDo;
+EndProcedure
+
 #EndRegion
 
 #Region DELIVERY_DATE

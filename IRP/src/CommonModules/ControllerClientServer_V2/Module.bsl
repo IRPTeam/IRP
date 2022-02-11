@@ -96,7 +96,6 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("TaxListIsExists"       , ObjectMetadataInfo.Tables.Property("TaxList"));
 	Parameters.Insert("SpecialOffersIsExists" , ObjectMetadataInfo.Tables.Property("SpecialOffers"));
 	
-	
 	Parameters.Insert("ArrayOfTaxInfo", New Array());
 	If Parameters.TaxListIsExists Then
 		If Parameters.FormTaxColumnsExists Then
@@ -165,7 +164,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 				ArrayOfRowsSpecialOffers.Add(NewRowSpecialOffer);
 			EndDo;
 		EndIf;
-		
+		NewRow.Insert("TaxIsAlreadyCalculated", Parameters.IsBasedOn And ArrayOfRowsTaxList.Count());
 		NewRow.Insert("TaxRates"      , TaxRates);
 		NewRow.Insert("TaxList"       , ArrayOfRowsTaxList);
 		NewRow.Insert("SpecialOffers" , ArrayOfRowsSpecialOffers);
@@ -346,13 +345,27 @@ Procedure StepsEnabler_RequireCallCreateTaxesFormControls(Parameters, Chain) Exp
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
 EndProcedure
 
-Procedure StepsEnabler_ChangeTaxRate(Parameters, Chain) Export
-	StepsEnablerName = "StepsEnabler_ChangeTaxRate";
+Procedure StepsEnabler_ChangeTaxRate_AgreementInHeader(Parameters, Chain) Export
+	StepsEnablerName = "StepsEnabler_ChangeTaxRate_AgreementInHeader";
+	StepsEnabler_ChangeTaxRate(Parameters, Chain, StepsEnablerName, True, False, False);
+EndProcedure
+
+Procedure StepsEnabler_ChangeTaxRate_AgreementInList(Parameters, Chain) Export
+	StepsEnablerName = "StepsEnabler_ChangeTaxRate_AgreementInList";
+	StepsEnabler_ChangeTaxRate(Parameters, Chain, StepsEnablerName, False, True, False);
+EndProcedure
+
+Procedure StepsEnabler_ChangeTaxRate_OnlyWhenAgreementIsFilled(Parameters, Chain) Export
+	StepsEnablerName = "StepsEnabler_ChangeTaxRate_OnlyWhenAgreementIsFilled";
+	StepsEnabler_ChangeTaxRate(Parameters, Chain, StepsEnablerName, True, False, True);
+EndProcedure
+
+Procedure StepsEnabler_ChangeTaxRate(Parameters, Chain, StepsEnablerName,
+	AgreementInHeader, AgreementInList, OnlyWhenAgreementIsFilled)
 	
 	Options_Date      = GetPropertyObject(Parameters, "Date");
 	Options_Company   = GetPropertyObject(Parameters, "Company");
-	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
-	
+
 	// ChangeTaxRate
 	Chain.ChangeTaxRate.Enable = True;
 	Chain.ChangeTaxRate.Setter = "Set" + Parameters.TableName + "TaxRate";
@@ -369,9 +382,16 @@ Procedure StepsEnabler_ChangeTaxRate(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
+		If AgreementInHeader Then
+			Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+		EndIf;
+		If AgreementInList Then
+			Options.Agreement = GetPropertyObject(Parameters, Parameters.TableName + "." + "Agreement", Row.Key);
+		EndIf;
+		Options.ChangeOnlyWhenAgreementIsFilled = OnlyWhenAgreementIsFilled;
+		
 		Options.Date           = Options_Date;
 		Options.Company        = Options_Company;
-		Options.Agreement      = Options_Agreement;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
 		Options.IsBasedOn      = Parameters.IsBasedOn;
 		Options.Ref            = Parameters.Object.Ref;
@@ -1256,12 +1276,20 @@ Function DateStepsBinding(Parameters)
 	DataPath = "Date";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice" , "DateStepsEnabler_Trade_PartnerIsCustomer, 
-		|StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate");
+		|StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate_AgreementInHeader");
 
-	Binding.Insert("BankPayment"  , "StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate");
-	Binding.Insert("BankReceipt"  , "StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate");
-	Binding.Insert("CashPayment"  , "StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate");
-	Binding.Insert("CashReceipt"  , "StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate");
+	Binding.Insert("BankPayment"  , "StepsEnabler_RequireCallCreateTaxesFormControls, 
+		|StepsEnabler_ChangeTaxRate_AgreementInList");
+		
+	Binding.Insert("BankReceipt"  , "StepsEnabler_RequireCallCreateTaxesFormControls, 
+		|StepsEnabler_ChangeTaxRate_AgreementInList");
+		
+	Binding.Insert("CashPayment"  , "StepsEnabler_RequireCallCreateTaxesFormControls, 
+		|StepsEnabler_ChangeTaxRate_AgreementInList");
+		
+	Binding.Insert("CashReceipt"  , "StepsEnabler_RequireCallCreateTaxesFormControls, 
+		|StepsEnabler_ChangeTaxRate_AgreementInList");
+		
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1360,19 +1388,19 @@ Function CompanyStepsBinding(Parameters)
 	Binding.Insert("OutgoingPaymentOrder", "CompanyStepsEnabler_Cash");
 	
 	Binding.Insert("BankPayment" , "StepsEnabler_RequireCallCreateTaxesFormControls, 
-		|StepsEnabler_ChangeTaxRate, StepsEnabler_ChangeAccountByCompany");
+		|StepsEnabler_ChangeTaxRate_AgreementInList, StepsEnabler_ChangeAccountByCompany");
 	
 	Binding.Insert("BankReceipt" , "StepsEnabler_RequireCallCreateTaxesFormControls, 
-		|StepsEnabler_ChangeTaxRate, StepsEnabler_ChangeAccountByCompany");
+		|StepsEnabler_ChangeTaxRate_AgreementInList, StepsEnabler_ChangeAccountByCompany");
 	
 	Binding.Insert("CashPayment" , "StepsEnabler_RequireCallCreateTaxesFormControls, 
-		|StepsEnabler_ChangeTaxRate, StepsEnabler_ChangeCashAccountByCompany");
+		|StepsEnabler_ChangeTaxRate_AgreementInList, StepsEnabler_ChangeCashAccountByCompany");
 	
 	Binding.Insert("CashReceipt" , "StepsEnabler_RequireCallCreateTaxesFormControls, 
-		|StepsEnabler_ChangeTaxRate, StepsEnabler_ChangeCashAccountByCompany");
+		|StepsEnabler_ChangeTaxRate_AgreementInList, StepsEnabler_ChangeCashAccountByCompany");
 	
 	Binding.Insert("SalesInvoice" , "StepsEnabler_RequireCallCreateTaxesFormControls,
-		|StepsEnabler_ChangeTaxRate");
+		|StepsEnabler_ChangeTaxRate_OnlyWhenAgreementIsFilled");
 		
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
@@ -1914,7 +1942,7 @@ EndProcedure
 Function AgreementStepsBinding(Parameters)
 	DataPath = "Agreement";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice"        , "AgreementStepsEnabler_Trade, StepsEnabler_ChangeTaxRate");
+	Binding.Insert("SalesInvoice"        , "AgreementStepsEnabler_Trade, StepsEnabler_ChangeTaxRate_AgreementInHeader");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -2313,10 +2341,10 @@ EndProcedure
 Function PaymentListAgreementStepsBinding(Parameters)
 	DataPath = "PaymentList.Agreement";
 	Binding = New Structure();
-	Binding.Insert("BankPayment" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate");
-	Binding.Insert("BankReceipt" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate");
-	Binding.Insert("CashPayment" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate");
-	Binding.Insert("CashReceipt" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate");
+	Binding.Insert("BankPayment" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate_AgreementInList");
+	Binding.Insert("BankReceipt" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate_AgreementInList");
+	Binding.Insert("CashPayment" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate_AgreementInList");
+	Binding.Insert("CashReceipt" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate_AgreementInList");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
@@ -3029,7 +3057,7 @@ Function ItemListItemKeyStepsBinding(Parameters)
 	Binding.Insert("GoodsReceipt"             , "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
 	Binding.Insert("StockAdjustmentAsSurplus" , "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
 	Binding.Insert("StockAdjustmentAsWriteOff", "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
-	Binding.Insert("SalesInvoice"             , "ItemListItemKeyStepsEnabler_Trade_Shipment, StepsEnabler_ChangeTaxRate");
+	Binding.Insert("SalesInvoice"             , "ItemListItemKeyStepsEnabler_Trade_Shipment, StepsEnabler_ChangeTaxRate_AgreementInHeader");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3547,6 +3575,7 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
 		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
 		Options.TaxOptions.TaxList          = Row.TaxList;
+		Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
 		
 		Options.OffersOptions.SpecialOffers = Row.SpecialOffers;
 		

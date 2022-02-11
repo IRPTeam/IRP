@@ -64,6 +64,7 @@ IsUsedNewFunctionality =
 		ReadOnlyProperties = "";
 		Source.AdditionalProperties.Property("ReadOnlyProperties", ReadOnlyProperties);
 		ReadOnlyProperties = ?(ReadOnlyProperties = Undefined, "", ReadOnlyProperties);
+		
 		IsBasedOn = False;
 		Source.AdditionalProperties.Property("IsBasedOn", IsBasedOn);
 		IsBasedOn = ?(IsBasedOn = Undefined, False, IsBasedOn);
@@ -72,70 +73,98 @@ IsUsedNewFunctionality =
 		// список этих реквизитов в ReadOnlyProperties
 		// нужно для каждого уже заполненного реквизита вызвать его обработчик
 	
-		ArrayOfProperties = StrSplit(ReadOnlyProperties, ",");
-	
+		ArrayOfBasisDocumentProperties = StrSplit(ReadOnlyProperties, ",");
+		ArrayOfUserSettinsProperties   = StrSplit(UserSettinsProperties, ",");
 		For Each TableName In ArrayOfMainTables Do
-		
-			For Each PropertyName In ArrayOfProperties Do
+			// BasisDocument
+			ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+			ServerParameters.IsBasedOn          = IsBasedOn;
+			ServerParameters.TableName          = TableName;
+			ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
+			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+			
+			For Each PropertyName In ArrayOfBasisDocumentProperties Do
 				If Not ValueIsFilled(PropertyName) Then
 					Continue;
 				EndIf;
 				DataPath = StrSplit(PropertyName, ".");
 				If DataPath.Count() = 1 Then
 					Property = New Structure("DataPath", TrimAll(DataPath[0]));
-				
-					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
-					ServerParameters.IsBasedOn          = IsBasedOn;
-					ServerParameters.TableName          = TableName;
-					ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
-					Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-				
 					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Source[Property.DataPath]);
 				EndIf;
 			EndDo;
-		
+			
+			// UserSetting
+			ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+			ServerParameters.IsBasedOn          = IsBasedOn;
+			ServerParameters.TableName          = TableName;
+			ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(ReadOnlyProperties), 
+				ReadOnlyProperties + ", " + UserSettinsProperties, UserSettinsProperties);;
+			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+			
+			For Each PropertyName In ArrayOfUserSettinsProperties Do
+				If Not ValueIsFilled(PropertyName) Then
+					Continue;
+				EndIf;
+				Value = Data[PropertyName];
+				If ValueIsFilled(Value) 
+					And Not ValueIsFilled(Source[PropertyName])
+					And ArrayOfBasisDocumentProperties.Find(PropertyName) = Undefined Then
+						Source[PropertyName] = Value;
+				Else
+						Continue;
+				EndIf;
+				
+				DataPath = StrSplit(PropertyName, ".");
+				If DataPath.Count() = 1 Then
+					Property = New Structure("DataPath", TrimAll(DataPath[0]));
+					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+				EndIf;
+			EndDo;
+			
 		EndDo;
+		
+		
 	EndIf; // IsUsedNewFunctionality 
 	//==
 	
 	For Each KeyValue In Data Do
 		If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) Then
 			//==
-			If IsUsedNewFunctionality Then
-				// временно, потом перенести в модуль Controller
-				
-				// заполняем реквизиты из настроек пользователя,
-				// но только не те что в ReadOnlyProperties
-				Property = New Structure("DataPath", KeyValue.Key);
-				Value    = KeyValue.Value;
-				
-				ArrayOfReadOnlyProperties = StrSplit(ReadOnlyProperties, ",");
-				If ValueIsFilled(Value) And Not ValueIsFilled(Source[Property.DataPath]) Then
-					If ArrayOfReadOnlyProperties.Find(Property.DataPath) = Undefined Then
-						Source[Property.DataPath] = Value;
-					EndIf;
-				EndIf;
-				
-				For Each TableName In ArrayOfMainTables Do
-					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
-					ServerParameters.TableName          = TableName;
-					
-					ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(ReadOnlyProperties), 
-						ReadOnlyProperties + ", " + UserSettinsProperties, UserSettinsProperties);
-					//ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
-					
-					Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-					
-					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
-				EndDo;
-			Else
+//			If IsUsedNewFunctionality Then
+//				// временно, потом перенести в модуль Controller
+//				
+//				// заполняем реквизиты из настроек пользователя,
+//				// но только не те что в ReadOnlyProperties
+//				Property = New Structure("DataPath", KeyValue.Key);
+//				Value    = KeyValue.Value;
+//				
+//				ArrayOfReadOnlyProperties = StrSplit(ReadOnlyProperties, ",");
+//				If ValueIsFilled(Value) And Not ValueIsFilled(Source[Property.DataPath]) Then
+//					If ArrayOfReadOnlyProperties.Find(Property.DataPath) = Undefined Then
+//						Source[Property.DataPath] = Value;
+//					EndIf;
+//				EndIf;
+//				
+//				For Each TableName In ArrayOfMainTables Do
+//					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+//					ServerParameters.TableName = TableName;
+//					
+//					ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(ReadOnlyProperties), 
+//						ReadOnlyProperties + ", " + UserSettinsProperties, UserSettinsProperties);
+//					
+//					Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+//					
+//					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
+//				EndDo;
+//			Else
 			//==
 				If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
 					Source[KeyValue.Key] = KeyValue.Value;
 				ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Or Force Then
 					Source[KeyValue.Key] = KeyValue.Value;
 				EndIf;
-			EndIf;
+//			EndIf;
 			//==
 		EndIf;
 	EndDo;

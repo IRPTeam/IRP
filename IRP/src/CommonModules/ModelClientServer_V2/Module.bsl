@@ -952,9 +952,30 @@ Function ChangeTaxRateExecute(Options) Export
 		Result.Insert(TaxRate.Key, TaxRate.Value);
 	EndDo;
 	
-	// при вводе на основании ничего не пересчитываем
+	// при вводе на основании когда заполнен TaxList ничего не пересчитываем,
+	// ставки налогов берем из TaxList 
 	If Options.IsBasedOn = True And Options.TaxList.Count() Then
-		
+		For Each KeyValue In Result Do
+			TaxRef = Undefined;
+			For Each RowInfo In Options.ArrayOfTaxInfo Do
+				If KeyValue.Key = RowInfo.Name Then
+					TaxRef = RowInfo.Tax;
+					Break;
+				EndIf;
+			EndDo;
+			If TaxRef = Undefined Then
+				Result[KeyValue.Key] = Undefined;
+				Continue;
+			EndIf;
+			TaxRateValue = Undefined;
+			For Each RowTaxList In Options.TaxList Do
+				If RowTaxList.Tax = TaxRef Then
+						TaxRateValue = RowTaxList.TaxRate;
+					Break;
+				EndIf;
+			EndDo;
+			Result[KeyValue.Key] = TaxRateValue;
+		EndDo;
 		Return Result;
 	EndIf;
 	
@@ -1032,7 +1053,7 @@ Function CalculationsOptions() Export
 	Options.Insert("PriceOptions", PriceOptions);
 	
 	// TaxList columns: Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount
-	TaxOptions = New Structure("PriceIncludeTax, ArrayOfTaxInfo, TaxRates, UseManualAmount");
+	TaxOptions = New Structure("PriceIncludeTax, ArrayOfTaxInfo, TaxRates, UseManualAmount, IsAlreadyCalculated");
 	TaxOptions.Insert("TaxList", New Array());
 	Options.Insert("TaxOptions", TaxOptions);
 	
@@ -1043,22 +1064,28 @@ Function CalculationsOptions() Export
 	OffersOptions = New Structure("SpecialOffers", New Array());
 	Options.Insert("OffersOptions", OffersOptions);
 	
+	// TotalAmount
 	Options.Insert("CalculateTotalAmount"            , New Structure("Enable", False));
 	Options.Insert("CalculateTotalAmountByNetAmount" , New Structure("Enable", False));
 	
+	// NetAmount
 	Options.Insert("CalculateNetAmount"                            , New Structure("Enable", False));
 	Options.Insert("CalculateNetAmountByTotalAmount"               , New Structure("Enable", False));
 	Options.Insert("CalculateNetAmountAsTotalAmountMinusTaxAmount" , New Structure("Enable", False));
 	
+	// TaxAmount
 	Options.Insert("CalculateTaxAmount"              , New Structure("Enable", False));
 	Options.Insert("CalculateTaxAmountByNetAmount"   , New Structure("Enable", False));
 	Options.Insert("CalculateTaxAmountByTotalAmount" , New Structure("Enable", False));
+	Options.Insert("CalculateTaxAmountReverse"       , New Structure("Enable", False));
 	
-	Options.Insert("CalculateTaxAmountReverse"   , New Structure("Enable", False));
+	// Price
 	Options.Insert("CalculatePriceByTotalAmount" , New Structure("Enable", False));
-
+	
+	// QuantityInBaseUnit
 	Options.Insert("CalculateQuantityInBaseUnit" , New Structure("Enable", False));
 	
+	// SpecialOffers
 	Options.Insert("CalculateSpecialOffers" , New Structure("Enable", False));
 	
 	Return Options;
@@ -1254,6 +1281,20 @@ Function _CalculateAmount(PriceOptions, Result)
 EndFunction
 
 Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPriority, PriceIncludeTax = False)
+	//
+	If TaxOptions.IsAlreadyCalculated = True Then
+		TaxAmount = 0;
+		For Each Row In TaxOptions.TaxList Do
+			Result.TaxList.Add(Row);
+			If Row.IncludeToTotalAmount Then
+				TaxAmount = Round(TaxAmount + Row.ManualAmount, 2);
+			EndIf;
+		EndDo;
+		Result.TaxAmount = TaxAmount;
+		Return;
+	EndIf;
+	
+	//
 	ArrayOfTaxInfo = TaxOptions.ArrayOfTaxInfo;
 	If TaxOptions.ArrayOfTaxInfo = Undefined Then
 		Return;

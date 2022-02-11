@@ -8,6 +8,7 @@ Function GetServerParameters(Object) Export
 	Result.Insert("TableName", "");
 	Result.Insert("Rows", Undefined);
 	Result.Insert("ReadOnlyProperties", "");
+	Result.Insert("IsBasedOn", False);
 	Return Result;
 EndFunction
 
@@ -71,6 +72,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("Cache"  , New Structure());
 	Parameters.Insert("ControllerModuleName", ServerParameters.ControllerModuleName);
 	
+	Parameters.Insert("IsBasedOn"             , ServerParameters.IsBasedOn);
 	Parameters.Insert("ReadOnlyProperties"    , ServerParameters.ReadOnlyProperties);
 	Parameters.Insert("ReadOnlyPropertiesMap" , New Map());
 	Parameters.Insert("ProcessedReadOnlyPropertiesMap" , New Map()); // ReadOnlyProperties для которых уже вызывались обработчики
@@ -78,7 +80,6 @@ Function CreateParameters(ServerParameters, FormParameters)
 	For Each Property In ArrayOfProperties Do
 		Parameters.ReadOnlyPropertiesMap.Insert(TrimAll(Property), True);
 	EndDo;
-	
 	
 	// таблицы для которых нужно получить колонки
 	Parameters.Insert("TableName", ServerParameters.TableName);
@@ -1283,6 +1284,7 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 		Options.Company        = Options_Company;
 		Options.Agreement      = Options_Agreement;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.IsBasedOn      = Parameters.IsBasedOn;
 		Options.Ref            = Parameters.Object.Ref;
 		
 		If TaxRates <> Undefined Then
@@ -1350,6 +1352,7 @@ Procedure DateStepsEnabler_BankCashPaymentReceipt(Parameters, Chain) Export
 		Options.Company        = Options_Company;
 		Options.Agreement      = GetPropertyObject(Parameters, "PaymentList.Agreement", Row.Key);;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.IsBasedOn      = Parameters.IsBasedOn;
 		Options.Ref            = Parameters.Object.Ref;
 		
 		If TaxRates <> Undefined Then
@@ -1492,6 +1495,7 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 		Options.Company        = Options_Company;
 		Options.Agreement      = Options_Agreement;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.IsBasedOn      = Parameters.IsBasedOn;
 		Options.Ref            = Parameters.Object.Ref;
 		Options.ChangeOnlyWhenAgreementIsFilled = True;
 		
@@ -1557,6 +1561,7 @@ Procedure CompanyStepsEnabler_BankCashPaymentReceipt(Parameters, Chain) Export
 		Options.Company        = Options_Company;
 		Options.Agreement      = GetPropertyObject(Parameters, "PaymentList.Agreement", Row.Key);;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.IsBasedOn      = Parameters.IsBasedOn;
 		Options.Ref            = Parameters.Object.Ref;
 		
 		If TaxRates <> Undefined Then
@@ -2111,6 +2116,7 @@ Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
 		Options.Company        = Options_Company;
 		Options.Agreement      = Options_Agreement;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.IsBasedOn      = Parameters.IsBasedOn;
 		Options.Ref            = Parameters.Object.Ref;
 		
 		If TaxRates <> Undefined Then
@@ -2557,6 +2563,7 @@ Procedure PaymentListAgreementStepsEnabler_BankCashPaymentReceipt(Parameters, Ch
 		Options.Company        = Options_Company;
 		Options.Agreement      = Options_Agreement;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.IsBasedOn      = Parameters.IsBasedOn;
 		Options.Ref            = Parameters.Object.Ref;
 		
 		If TaxRates <> Undefined Then
@@ -3375,6 +3382,7 @@ Procedure ItemListItemKeyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 		Options.Agreement      = Options_Agreement;
 		Options.ItemKey        = Options_ItemKey;
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.IsBasedOn      = Parameters.IsBasedOn;
 		Options.Ref            = Parameters.Object.Ref;
 		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
 		Options.Key            = Row.Key;
@@ -4331,6 +4339,7 @@ Procedure SetReadOnlyProperties_RowID(Object, PropertiesHeader, PropertiesTables
 	EndDo;
 	Object.AdditionalProperties.Insert("ReadOnlyProperties", 
 			StrConcat(ArrayOfPropertiesHeader, ",") + ", " + PropertiesTables);
+	Object.AdditionalProperties.Insert("IsBasedOn", True);
 EndProcedure
 
 Procedure SetReadOnlyProperties(Object, FillingData) Export
@@ -4358,6 +4367,7 @@ Procedure SetReadOnlyProperties(Object, FillingData) Export
 	EndDo;
 	ReadOnlyProperties = StrConcat(HeaderProperties, ",") +","+StrConcat(TabularProperties, ",");
 	Object.AdditionalProperties.Insert("ReadOnlyProperties", ReadOnlyProperties);
+	Object.AdditionalProperties.Insert("IsBasedOn", True);
 EndProcedure
 
 #ENDIF

@@ -63,7 +63,11 @@ IsUsedNewFunctionality =
 	
 		ReadOnlyProperties = "";
 		Source.AdditionalProperties.Property("ReadOnlyProperties", ReadOnlyProperties);
-	
+		ReadOnlyProperties = ?(ReadOnlyProperties = Undefined, "", ReadOnlyProperties);
+		IsBasedOn = False;
+		Source.AdditionalProperties.Property("IsBasedOn", IsBasedOn);
+		IsBasedOn = ?(IsBasedOn = Undefined, False, IsBasedOn);
+		
 		// если документ был введен на основании то у него уже есть заполненные реквизиты
 		// список этих реквизитов в ReadOnlyProperties
 		// нужно для каждого уже заполненного реквизита вызвать его обработчик
@@ -81,6 +85,7 @@ IsUsedNewFunctionality =
 					Property = New Structure("DataPath", TrimAll(DataPath[0]));
 				
 					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+					ServerParameters.IsBasedOn          = IsBasedOn;
 					ServerParameters.TableName          = TableName;
 					ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
 					Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);

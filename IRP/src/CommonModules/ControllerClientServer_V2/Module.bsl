@@ -78,7 +78,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("ProcessedReadOnlyPropertiesMap" , New Map()); // ReadOnlyProperties для которых уже вызывались обработчики
 	ArrayOfProperties = StrSplit(ServerParameters.ReadOnlyProperties, ",");
 	For Each Property In ArrayOfProperties Do
-		Parameters.ReadOnlyPropertiesMap.Insert(TrimAll(Property), True);
+		Parameters.ReadOnlyPropertiesMap.Insert(Upper(TrimAll(Property)), True);
 	EndDo;
 	
 	// таблицы для которых нужно получить колонки
@@ -3848,9 +3848,9 @@ Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNo
 		// или свойство не изменено но если оно ReadOnly, то вызовем его следующие шаги
 		If IsChanged Then
 			ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
-		ElsIf Parameters.ReadOnlyPropertiesMap.Get(DataPath) = True Then
-			If Parameters.ProcessedReadOnlyPropertiesMap.Get(DataPath) = Undefined Then
-				Parameters.ProcessedReadOnlyPropertiesMap.Insert(DataPath, True);
+		ElsIf Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) = True Then
+			If Parameters.ProcessedReadOnlyPropertiesMap.Get(Upper(DataPath)) = Undefined Then
+				Parameters.ProcessedReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
 				ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
 			EndIf;
 		EndIf;
@@ -3928,7 +3928,7 @@ EndFunction
 
 Function SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache = False)
 	// если свойство ReadOnly и оно заполнено то не меняем
-	If Parameters.ReadOnlyPropertiesMap.Get(DataPath) <> Undefined Then
+	If Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) <> Undefined Then
 		Segments = StrSplit(DataPath, ".");
 		If Segments.Count() = 1 Then
 			If ValueIsFilled(Parameters.Object[DataPath]) Then

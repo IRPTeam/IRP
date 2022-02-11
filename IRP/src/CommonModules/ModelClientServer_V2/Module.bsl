@@ -943,7 +943,7 @@ EndFunction
 
 Function ChangeTaxRateOptions() Export
 	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, Ref, 
-		|ChangeOnlyWhenAgreementIsFilled, IsBasedOn");
+		|ChangeOnlyWhenAgreementIsFilled, IsBasedOn, TaxList");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
@@ -953,7 +953,8 @@ Function ChangeTaxRateExecute(Options) Export
 	EndDo;
 	
 	// при вводе на основании ничего не пересчитываем
-	If Options.IsBasedOn = True Then
+	If Options.IsBasedOn = True And Options.TaxList.Count() Then
+		
 		Return Result;
 	EndIf;
 	

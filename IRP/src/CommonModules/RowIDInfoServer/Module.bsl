@@ -7133,23 +7133,22 @@ Function AddLinkedDocumentRows(Object, FillingValues) Export
 				
 				If Upper(TableName) = Upper("ItemList") Then
 					ArrayOfNewRows.Add(NewRow);
+					For Each KeyValue In Row Do
+						PropertyName = TrimAll(KeyValue.Key);
+						PutToUpdatedProperties(PropertyName, TableName, NewRow, UpdatedProperties);
+					EndDo;
 				EndIf;
-				
-				For Each KeyValue In Row Do
-					PropertyName = TrimAll(KeyValue.Key);
-					PutToUpdatedProperties(PropertyName, TableName, NewRow, UpdatedProperties);
-				EndDo;
 				
 			EndDo;
 		EndIf;
 	EndDo;
-	Return New Structure("UpdatedProperties, NewRows", 
+	Return New Structure("UpdatedProperties, Rows", 
 		StrConcat(UpdatedProperties, ","), ArrayOfNewRows);
 EndFunction
 
-Procedure PutToUpdatedProperties(PropertyName, TableName, Source, UpdatedProperties)
-	If CommonFunctionsClientServer.ObjectHasProperty(Source, PropertyName)
-		And ValueIsFilled(Source[PropertyName]) Then
+Procedure PutToUpdatedProperties(PropertyName, TableName, Row, UpdatedProperties)
+	If CommonFunctionsClientServer.ObjectHasProperty(Row, PropertyName)
+		And ValueIsFilled(Row[PropertyName]) Then
 		DataPath = TrimAll(TableName) + "." + PropertyName;
 		If UpdatedProperties.Find(DataPath) = Undefined Then
 			UpdatedProperties.Add(DataPath);
@@ -7157,7 +7156,7 @@ Procedure PutToUpdatedProperties(PropertyName, TableName, Source, UpdatedPropert
 	EndIf;
 EndProcedure
 
-Procedure LinkUnlinkDocumentRows(Object, FillingValues) Export
+Function LinkUnlinkDocumentRows(Object, FillingValues) Export
 	
 	// Tables with linked documents, will be cleaning on unlink
 	TableNames_LinkedDocuments = GetTableNames_LinkedDocuments();
@@ -7176,7 +7175,7 @@ Procedure LinkUnlinkDocumentRows(Object, FillingValues) Export
 		EndDo;
 		Unlink(Object, UnlinkRows, TableNames_LinkedDocuments, AttributeNames_LinkedDocuments);
 		Object.RowIDInfo.Clear();
-		Return;
+		Return New Structure("UpdatedProperties, Rows","", New Array());
 	EndIf;
 	
 	// Unlink
@@ -7184,14 +7183,19 @@ Procedure LinkUnlinkDocumentRows(Object, FillingValues) Export
 	Unlink(Object, UnlinkRows, TableNames_LinkedDocuments, AttributeNames_LinkedDocuments);
 		
 	// Link
+	UpdatedProperties = New Array();
+	ArrayOfLinkedRows = New Array();
 	LinkRows = GetLinkRows(Object, FillingValue);
-	Link(Object, FillingValue, LinkRows, TableNames_Refreshable);
+	Link(Object, FillingValue, LinkRows, TableNames_Refreshable, UpdatedProperties, ArrayOfLinkedRows);
 
 	Object.RowIDInfo.Clear();
 	For Each Row In FillingValue.RowIDInfo Do
 		FillPropertyValues(Object.RowIDInfo.Add(), Row);
 	EndDo;
-EndProcedure
+	
+	Return New Structure("UpdatedProperties, Rows",
+		StrConcat(UpdatedProperties, ","), ArrayOfLinkedRows);
+EndFunction
 
 Function GetFillingValue(FillingValues)
 	If TypeOf(FillingValues) = Type("Structure") Then
@@ -7285,11 +7289,11 @@ EndProcedure
 
 #Region Link
 
-Procedure Link(Object, FillingValue, LinkRows, TableNames)
+Procedure Link(Object, FillingValue, LinkRows, TableNames, UpdatedProperties, ArrayOfLinkedRows)
 	For Each LinkRow In LinkRows Do
 		ArrayOfExcludingKeys = New Array();
 		// Update ItemList row
-		LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys);
+		LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, ArrayOfLinkedRows);
 		
 		// Update tables
 		LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcludingKeys);
@@ -7355,7 +7359,7 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 	EndDo;
 EndProcedure
 
-Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys)
+Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, ArrayOfLinkedRows)
 	ArrayOfRefillColumns = New Array();
 	ArrayOfRefillColumns.Add(Upper("TotalAmount"));
 	ArrayOfRefillColumns.Add(Upper("NetAmount"));
@@ -7370,6 +7374,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys)
 			Continue;
 		EndIf;
 		For Each Row In Object.ItemList.FindRows(New Structure("Key", LinkRow.Key)) Do
+			IsLinked = False;
 			NeedRefillColumns = True;
 
 			For Each KeyValue In Row_ItemList Do
@@ -7385,18 +7390,27 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys)
 						+ KeyValue.Key)) <> Undefined Then
 						Continue;
 					EndIf;
-					Row[KeyValue.Key] = KeyValue.Value;
+					Row[KeyValue.Key] = KeyValue.Value;// ???
+					PropertyName = TrimAll(KeyValue.Key);
+					PutToUpdatedProperties(PropertyName, "ItemList", Row, UpdatedProperties);
+					IsLinked = True;
 				EndIf;
 			EndDo;
 
 			If NeedRefillColumns Then
 				For Each RefillColumn In ArrayOfRefillColumns Do
 					If Row.Property(RefillColumn) And Row_ItemLIst.Property(RefillColumn) Then
-						Row[RefillColumn] = Row_ItemList[RefillColumn];
+						Row[RefillColumn] = Row_ItemList[RefillColumn];// ???
+						PropertyName = TrimAll(RefillColumn);
+						PutToUpdatedProperties(PropertyName, "ItemList", Row, UpdatedProperties);
+						IsLinked = True;
 					EndIf;
 				EndDo;
 			EndIf;
-
+			
+			If IsLinked Then
+				ArrayOfLinkedRows.Add(Row);
+			EndIf;
 		EndDo;
 
 	EndDo;

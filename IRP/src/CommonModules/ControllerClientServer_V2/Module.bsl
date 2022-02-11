@@ -346,6 +346,67 @@ Procedure StepsEnabler_RequireCallCreateTaxesFormControls(Parameters, Chain) Exp
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
 EndProcedure
 
+Procedure StepsEnabler_ChangeTaxRate(Parameters, Chain) Export
+	StepsEnablerName = "StepsEnabler_ChangeTaxRate";
+	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Company   = GetPropertyObject(Parameters, "Company");
+	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
+	
+	// ChangeTaxRate
+	Chain.ChangeTaxRate.Enable = True;
+	Chain.ChangeTaxRate.Setter = "Set" + Parameters.TableName + "TaxRate";
+	
+	TaxRates = Undefined;
+	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
+		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
+		TaxRates = New Structure();
+		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
+		EndDo;
+	EndIf;
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		// ChangeTaxRate
+		Options = ModelClientServer_V2.ChangeTaxRateOptions();
+		Options.Date           = Options_Date;
+		Options.Company        = Options_Company;
+		Options.Agreement      = Options_Agreement;
+		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.IsBasedOn      = Parameters.IsBasedOn;
+		Options.Ref            = Parameters.Object.Ref;
+		
+		If TaxRates <> Undefined Then
+			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+				SetProperty(Parameters.Cache, Parameters.TableName + "." + ItemOfTaxInfo.Name, Row.Key, Undefined);
+			EndDo;
+			Row.Insert("TaxRates", TaxRates);
+		EndIf;
+		
+		Options.TaxRates = GetTaxRate(Parameters, Row);
+		Options.TaxList  = Row.TaxList;
+		Options.Key = Row.Key;
+		Options.StepsEnablerName = StepsEnablerName;
+		Chain.ChangeTaxRate.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Function GetTaxRate(Parameters, Row)
+	TaxRates = New Structure();
+	// когда нет формы то колонки со ставками налогов только в кэше
+	// потому что колонки со ставками налога это реквизиты формы
+	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
+	For Each TaxRate In Row.TaxRates Do
+		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
+			TaxRates.Insert(TaxRate.Key, TaxRate.Value);
+		Else
+			TaxRates.Insert(TaxRate.Key, 
+				GetPropertyObject(Parameters, Parameters.TableName + "." + TaxRate.Key, Row.Key, ReadOnlyFromCache));
+		EndIf;
+	EndDo;
+	Return TaxRates;
+EndFunction
+
 Procedure StepsEnabler_ItemListEnableCalculations_RecalculationsOnCopy(Parameters, Chain) Export
 	// при копировании документа нужно перерасчитать TaxAmount
 	If Parameters.FormIsExists And ValueIsFilled(Parameters.Form.Parameters.CopyingValue) Then
@@ -1194,24 +1255,30 @@ EndProcedure
 Function DateStepsBinding(Parameters)
 	DataPath = "Date";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice" , "DateStepsEnabler_Trade_PartnerIsCustomer");
-	Binding.Insert("BankPayment"  , "DateStepsEnabler_BankCashPaymentReceipt");
-	Binding.Insert("BankReceipt"  , "DateStepsEnabler_BankCashPaymentReceipt");
-	Binding.Insert("CashPayment"  , "DateStepsEnabler_BankCashPaymentReceipt");
-	Binding.Insert("CashReceipt"  , "DateStepsEnabler_BankCashPaymentReceipt");
+	Binding.Insert("SalesInvoice" , "DateStepsEnabler_Trade_PartnerIsCustomer, 
+		|StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate");
+
+	Binding.Insert("BankPayment"  , "StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate");
+	Binding.Insert("BankReceipt"  , "StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate");
+	Binding.Insert("CashPayment"  , "StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate");
+	Binding.Insert("CashReceipt"  , "StepsEnabler_RequireCallCreateTaxesFormControls, StepsEnabler_ChangeTaxRate");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 	StepsEnablerName = "DateStepsEnabler_Trade_PartnerIsCustomer";
 	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Partner   = GetPropertyObject(Parameters, "Partner");
+	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
+	
 	// ChangeAgreementByPartner
 	Chain.ChangeAgreementByPartner.Enable = True;
 	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
 	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
-	Options.Partner       = GetPropertyObject(Parameters, "Partner");
-	Options.Agreement     = GetPropertyObject(Parameters, "Agreement");
-	Options.CurrentDate   = GetPropertyObject(Parameters, "Date");
+	Options.Partner       = Options_Partner;
+	Options.Agreement     = Options_Agreement;
+	Options.CurrentDate   = Options_Date;
 	Options.AgreementType = PredefinedValue("Enum.AgreementTypes.Customer");
 	Chain.ChangeAgreementByPartner.Options.Add(Options);
 
@@ -1219,20 +1286,9 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 	Chain.ChangeDeliveryDateByAgreement.Enable = True;
 	Chain.ChangeDeliveryDateByAgreement.Setter = "SetDeliveryDate";
 	Options = ModelClientServer_V2.ChangeDeliveryDateByAgreementOptions();
-	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+	Options.Agreement           = Options_Agreement;
 	Options.CurrentDeliveryDate = GetPropertyForm(Parameters, "DeliveryDate");
 	Chain.ChangeDeliveryDateByAgreement.Options.Add(Options);
-	
-	// RequireCallCreateTaxesFormControls
-	Chain.RequireCallCreateTaxesFormControls.Enable = True;
-	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
-	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
-	Options.Ref            = Parameters.Object.Ref;
-	Options.Date           = GetPropertyObject(Parameters, "Date");
-	Options.Company        = GetPropertyObject(Parameters, "Company");
-	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
-	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
 	
 	// ChangePriceTypeByAgreement
 	Chain.ChangePriceTypeByAgreement.Enable = True;
@@ -1241,22 +1297,6 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 	// ChangePriceByPriceType
 	Chain.ChangePriceByPriceType.Enable = True;
 	Chain.ChangePriceByPriceType.Setter = "SetItemListPrice";
-	
-	// ChangeTaxRate
-	Chain.ChangeTaxRate.Enable = True;
-	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
-	
-	Options_Date      = GetPropertyObject(Parameters, "Date");
-	Options_Company   = GetPropertyObject(Parameters, "Company");
-	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
-	TaxRates = Undefined;
-	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
-		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
-		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
-		EndDo;
-	EndIf;
 	
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		// ChangePriceTypeByAgreement
@@ -1269,7 +1309,7 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 		Options = ModelClientServer_V2.ChangePriceByPriceTypeOptions();
 		Options.Ref          = Parameters.Object.Ref;
 		Options.Date         = Options_Date;
-		Options.CurrentPrice = GetPropertyObject(Parameters, "ItemList.Price", Row.Key);
+		Options.CurrentPrice = GetPropertyObject(Parameters, "ItemList.Price"    , Row.Key);
 		Options.PriceType    = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
 		Options.ItemKey      = GetPropertyObject(Parameters, "ItemList.ItemKey"  , Row.Key);
 		Options.Unit         = GetPropertyObject(Parameters, "ItemList.Unit"     , Row.Key);
@@ -1277,34 +1317,13 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 		Options.StepsEnablerName = StepsEnablerName;
 		Options.DontExecuteIfExecutedBefore = True;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
-		
-		// ChangeTaxRate
-		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date           = Options_Date;
-		Options.Company        = Options_Company;
-		Options.Agreement      = Options_Agreement;
-		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-		Options.IsBasedOn      = Parameters.IsBasedOn;
-		Options.Ref            = Parameters.Object.Ref;
-		
-		If TaxRates <> Undefined Then
-			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-				SetProperty(Parameters.Cache, "ItemList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
-			EndDo;
-			Row.Insert("TaxRates", TaxRates);
-		EndIf;
-		
-		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
-		Options.Key = Row.Key;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 	
 	// UpdatePaymentTerms
 	Chain.UpdatePaymentTerms.Enable = True;
 	Chain.UpdatePaymentTerms.Setter = "SetPaymentTerms";
 	Options = ModelClientServer_V2.UpdatePaymentTermsOptions();
-	Options.Date = GetPropertyObject(Parameters, "Date");
+	Options.Date = Options_Date;
 	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
 	// нужны все строки таблицы
 	TotalAmount = 0;
@@ -1313,60 +1332,6 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 	EndDo;
 	Options.TotalAmount = TotalAmount;
 	Chain.UpdatePaymentTerms.Options.Add(Options);
-EndProcedure
-
-Procedure DateStepsEnabler_BankCashPaymentReceipt(Parameters, Chain) Export
-	StepsEnablerName = "DateStepsEnabler_BankCashPaymentReceipt";
-	
-	Options_Date      = GetPropertyObject(Parameters, "Date");
-	Options_Company   = GetPropertyObject(Parameters, "Company");
-	
-	// RequireCallCreateTaxesFormControls
-	Chain.RequireCallCreateTaxesFormControls.Enable = True;
-	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
-	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
-	Options.Ref            = Parameters.Object.Ref;
-	Options.Date           = Options_Date;
-	Options.Company        = Options_Company;
-	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
-	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
-	
-	// ChangeTaxRate
-	Chain.ChangeTaxRate.Enable = True;
-	Chain.ChangeTaxRate.Setter = "SetPaymentListTaxRate";
-	
-	TaxRates = Undefined;
-	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
-		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
-		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
-		EndDo;
-	EndIf;
-	
-	For Each Row In GetRows(Parameters, "PaymentList") Do
-		// ChangeTaxRate
-		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date           = Options_Date;
-		Options.Company        = Options_Company;
-		Options.Agreement      = GetPropertyObject(Parameters, "PaymentList.Agreement", Row.Key);;
-		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-		Options.IsBasedOn      = Parameters.IsBasedOn;
-		Options.Ref            = Parameters.Object.Ref;
-		
-		If TaxRates <> Undefined Then
-			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-				SetProperty(Parameters.Cache, "PaymentList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
-			EndDo;
-			Row.Insert("TaxRates", TaxRates);
-		EndIf;
-		
-		Options.TaxRates = GetPaymentListTaxRate(Parameters, Row);
-		Options.Key = Row.Key;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTaxRate.Options.Add(Options);
-	EndDo;
 EndProcedure
 
 #EndRegion
@@ -1394,19 +1359,21 @@ Function CompanyStepsBinding(Parameters)
 	Binding.Insert("IncomingPaymentOrder", "CompanyStepsEnabler_Cash");
 	Binding.Insert("OutgoingPaymentOrder", "CompanyStepsEnabler_Cash");
 	
-	Binding.Insert("BankPayment"         , "CompanyStepsEnabler_BankCashPaymentReceipt, 
-											|StepsEnabler_ChangeAccountByCompany");
+	Binding.Insert("BankPayment" , "StepsEnabler_RequireCallCreateTaxesFormControls, 
+		|StepsEnabler_ChangeTaxRate, StepsEnabler_ChangeAccountByCompany");
 	
-	Binding.Insert("BankReceipt"         , "CompanyStepsEnabler_BankCashPaymentReceipt, 
-											|StepsEnabler_ChangeAccountByCompany");
+	Binding.Insert("BankReceipt" , "StepsEnabler_RequireCallCreateTaxesFormControls, 
+		|StepsEnabler_ChangeTaxRate, StepsEnabler_ChangeAccountByCompany");
 	
-	Binding.Insert("CashPayment"         , "CompanyStepsEnabler_BankCashPaymentReceipt, 
-											|StepsEnabler_ChangeCashAccountByCompany");
+	Binding.Insert("CashPayment" , "StepsEnabler_RequireCallCreateTaxesFormControls, 
+		|StepsEnabler_ChangeTaxRate, StepsEnabler_ChangeCashAccountByCompany");
 	
-	Binding.Insert("CashReceipt"         , "CompanyStepsEnabler_BankCashPaymentReceipt, 
-											|StepsEnabler_ChangeCashAccountByCompany");
+	Binding.Insert("CashReceipt" , "StepsEnabler_RequireCallCreateTaxesFormControls, 
+		|StepsEnabler_ChangeTaxRate, StepsEnabler_ChangeCashAccountByCompany");
 	
-	Binding.Insert("SalesInvoice"        , "CompanyStepsEnabler_WithTaxes");
+	Binding.Insert("SalesInvoice" , "StepsEnabler_RequireCallCreateTaxesFormControls,
+		|StepsEnabler_ChangeTaxRate");
+		
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1455,127 +1422,6 @@ Procedure CompanyStepsEnabler_Cash(Parameters, Chain) Export
 	Options.Account = GetPropertyObject(Parameters, "Account");
 	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangeCashAccountByCompany.Options.Add(Options);
-EndProcedure
-
-Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
-	StepsEnablerName = "CompanyStepsEnabler_WithTaxes";
-	
-	Options_Date      = GetPropertyObject(Parameters, "Date");
-	Options_Company   = GetPropertyObject(Parameters, "Company");
-	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
-	
-	// RequireCallCreateTaxesFormControls
-	Chain.RequireCallCreateTaxesFormControls.Enable = True;
-	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
-	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
-	Options.Ref            = Parameters.Object.Ref;
-	Options.Date           = Options_Date;
-	Options.Company        = Options_Company;
-	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
-	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
-	
-	// ChangeTaxRate
-	Chain.ChangeTaxRate.Enable = True;
-	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
-	
-	TaxRates = Undefined;
-	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
-		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
-		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
-		EndDo;
-	EndIf;
-	
-	For Each Row In GetRows(Parameters, "ItemList") Do
-		// ChangeTaxRate
-		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date           = Options_Date;
-		Options.Company        = Options_Company;
-		Options.Agreement      = Options_Agreement;
-		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-		Options.IsBasedOn      = Parameters.IsBasedOn;
-		Options.Ref            = Parameters.Object.Ref;
-		Options.ChangeOnlyWhenAgreementIsFilled = True;
-		
-		If TaxRates <> Undefined Then
-			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-				SetProperty(Parameters.Cache, "ItemList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
-			EndDo;
-			Row.Insert("TaxRates", TaxRates);
-		EndIf;
-		
-		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
-		Options.Key = Row.Key;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTaxRate.Options.Add(Options);
-	EndDo;
-EndProcedure
-
-Procedure CompanyStepsEnabler_BankCashPaymentReceipt(Parameters, Chain) Export
-	StepsEnablerName = "CompanyStepsEnabler_BankCashPaymentReceipt";
-	
-	Options_Date      = GetPropertyObject(Parameters, "Date");
-	Options_Company   = GetPropertyObject(Parameters, "Company");
-	//Options_Account   = GetPropertyObject(Parameters, "Account");
-	
-//	// ChangeCashAccountByCompany
-//	Chain.ChangeCashAccountByCompany.Enable = True;
-//	Chain.ChangeCashAccountByCompany.Setter = "SetAccount";
-//	Options = ModelClientServer_V2.ChangeCashAccountByCompanyOptions();
-//	Options.Company = Options_Company;
-//	Options.Account = Options_Account;
-//	Options.AccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
-//	Options.StepsEnablerName = StepsEnablerName;
-//	Chain.ChangeCashAccountByCompany.Options.Add(Options);
-	
-	// RequireCallCreateTaxesFormControls
-	Chain.RequireCallCreateTaxesFormControls.Enable = True;
-	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
-	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
-	Options.Ref            = Parameters.Object.Ref;
-	Options.Date           = Options_Date;
-	Options.Company        = Options_Company;
-	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
-	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
-	
-	// ChangeTaxRate
-	Chain.ChangeTaxRate.Enable = True;
-	Chain.ChangeTaxRate.Setter = "SetPaymentListTaxRate";
-	
-	TaxRates = Undefined;
-	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
-		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
-		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
-		EndDo;
-	EndIf;
-	
-	For Each Row In GetRows(Parameters, "PaymentList") Do
-		// ChangeTaxRate
-		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date           = Options_Date;
-		Options.Company        = Options_Company;
-		Options.Agreement      = GetPropertyObject(Parameters, "PaymentList.Agreement", Row.Key);;
-		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-		Options.IsBasedOn      = Parameters.IsBasedOn;
-		Options.Ref            = Parameters.Object.Ref;
-		
-		If TaxRates <> Undefined Then
-			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-				SetProperty(Parameters.Cache, "PaymentList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
-			EndDo;
-			Row.Insert("TaxRates", TaxRates);
-		EndIf;
-		
-		Options.TaxRates = GetPaymentListTaxRate(Parameters, Row);
-		Options.Key = Row.Key;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTaxRate.Options.Add(Options);
-	EndDo;
 EndProcedure
 
 #EndRegion
@@ -2068,107 +1914,81 @@ EndProcedure
 Function AgreementStepsBinding(Parameters)
 	DataPath = "Agreement";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice"        , "AgreementStepsEnabler_Trade");
+	Binding.Insert("SalesInvoice"        , "AgreementStepsEnabler_Trade, StepsEnabler_ChangeTaxRate");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
 	StepsEnablerName = "AgreementStepsEnabler_Trade";
 	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Company   = GetPropertyObject(Parameters, "Company");
+	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
+	Options_Currency  = GetPropertyObject(Parameters, "Currency");
+	
 	// ChangeCompanyByAgreement
 	Chain.ChangeCompanyByAgreement.Enable = True;
 	Chain.ChangeCompanyByAgreement.Setter = "SetCompany";
 	Options = ModelClientServer_V2.ChangeCompanyByAgreementOptions();
-	Options.Agreement      = GetPropertyObject(Parameters, "Agreement");
-	Options.CurrentCompany = GetPropertyObject(Parameters, "Company");	
+	Options.Agreement      = Options_Agreement;
+	Options.CurrentCompany = Options_Company;
+	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangeCompanyByAgreement.Options.Add(Options);
 	
 	// ChangePriceTypeByAgreement
 	Chain.ChangePriceTypeByAgreement.Enable = True;
 	Chain.ChangePriceTypeByAgreement.Setter = "SetItemListPriceType";
 	
-	// ChangeTaxRate
-	Chain.ChangeTaxRate.Enable = True;
-	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
-	
-	Options_Date      = GetPropertyObject(Parameters, "Date");
-	Options_Company   = GetPropertyObject(Parameters, "Company");
-	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
-	TaxRates = Undefined;
-	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
-		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
-		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
-		EndDo;
-	EndIf;
-	
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		// ChangePriceTypeByAgreement
 		Options = ModelClientServer_V2.ChangePriceTypeByAgreementOptions();
-		Options.Agreement = GetPropertyObject(Parameters, "Agreement");
-		Options.Key = Row.Key;
-		Chain.ChangePriceTypeByAgreement.Options.Add(Options);
-		
-		// ChangeTaxRate
-		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date           = Options_Date;
-		Options.Company        = Options_Company;
-		Options.Agreement      = Options_Agreement;
-		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-		Options.IsBasedOn      = Parameters.IsBasedOn;
-		Options.Ref            = Parameters.Object.Ref;
-		
-		If TaxRates <> Undefined Then
-			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-				SetProperty(Parameters.Cache, "ItemList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
-			EndDo;
-			Row.Insert("TaxRates", TaxRates);
-		EndIf;
-		
-		Options.TaxRates = GetItemListTaxRate(Parameters, Row);
+		Options.Agreement = Options_Agreement;
 		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTaxRate.Options.Add(Options);
+		Chain.ChangePriceTypeByAgreement.Options.Add(Options);
 	EndDo;
 	
 	// ChangeCurrencyByAgreement
 	Chain.ChangeCurrencyByAgreement.Enable = True;
 	Chain.ChangeCurrencyByAgreement.Setter = "SetCurrency";
 	Options = ModelClientServer_V2.ChangeCurrencyByAgreementOptions();
-	Options.Agreement       = GetPropertyObject(Parameters, "Agreement");
-	Options.CurrentCurrency = GetPropertyObject(Parameters, "Currency");
+	Options.Agreement       = Options_Agreement;
+	Options.CurrentCurrency = Options_Currency;
+	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangeCurrencyByAgreement.Options.Add(Options);
 	
 	// ChangePriceIncludeTaxByAgreement
 	Chain.ChangePriceIncludeTaxByAgreement.Enable = True;
 	Chain.ChangePriceIncludeTaxByAgreement.Setter = "SetPriceIncludeTax";
 	Options = ModelClientServer_V2.ChangePriceIncludeTaxByAgreementOptions();
-	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+	Options.Agreement = Options_Agreement;
+	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangePriceIncludeTaxByAgreement.Options.Add(Options);
 	
 	// ChangeStoreByAgreement
 	Chain.ChangeStoreByAgreement.Enable = True;
 	Chain.ChangeStoreByAgreement.Setter = "SetStore";
 	Options = ModelClientServer_V2.ChangeStoreByAgreementOptions();
-	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+	Options.Agreement = Options_Agreement;
 	Options.CurrentStore = GetPropertyForm(Parameters, "Store");
+	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangeStoreByAgreement.Options.Add(Options);
 	
 	// ChangeDeliveryDate
 	Chain.ChangeDeliveryDateByAgreement.Enable = True;
 	Chain.ChangeDeliveryDateByAgreement.Setter = "SetDeliveryDate";
 	Options = ModelClientServer_V2.ChangeDeliveryDateByAgreementOptions();
-	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+	Options.Agreement = Options_Agreement;
 	Options.CurrentDeliveryDate = GetPropertyForm(Parameters, "DeliveryDate");
+	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangeDeliveryDateByAgreement.Options.Add(Options);
 	
 	// ChangePaymentTerms
 	Chain.ChangePaymentTermsByAgreement.Enable = True;
 	Chain.ChangePaymentTermsByAgreement.Setter = "SetPaymentTerms";
 	Options = ModelClientServer_V2.ChangePaymentTermsByAgreementOptions();
-	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
-	Options.Date = GetPropertyObject(Parameters, "Date");
+	Options.Agreement = Options_Agreement;
+	Options.Date      = Options_Date;
 	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
 	// нужны все строки таблицы
 	TotalAmount = 0;
@@ -2176,6 +1996,7 @@ Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
 		TotalAmount = TotalAmount + GetPropertyObject(Parameters, "ItemList.TotalAmount", Row.Key);
 	EndDo;
 	Options.TotalAmount = TotalAmount;
+	Options.StepsEnablerName = StepsEnablerName;
 	Chain.ChangePaymentTermsByAgreement.Options.Add(Options);
 EndProcedure
 
@@ -2492,18 +2313,15 @@ EndProcedure
 Function PaymentListAgreementStepsBinding(Parameters)
 	DataPath = "PaymentList.Agreement";
 	Binding = New Structure();
-	Binding.Insert("BankPayment" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt");
-	Binding.Insert("BankReceipt" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt");
-	Binding.Insert("CashPayment" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt");
-	Binding.Insert("CashReceipt" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt");
+	Binding.Insert("BankPayment" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate");
+	Binding.Insert("BankReceipt" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate");
+	Binding.Insert("CashPayment" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate");
+	Binding.Insert("CashReceipt" , "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt, StepsEnabler_ChangeTaxRate");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
 Procedure PaymentListAgreementStepsEnabler_BankCashPaymentReceipt(Parameters, Chain) Export
 	StepsEnablerName = "PaymentListAgreementStepsEnabler_BankCashPaymentReceipt";
-	
-	Options_Date    = GetPropertyObject(Parameters, "Date");
-	Options_Company = GetPropertyObject(Parameters, "Company");
 	
 	//ChangeBasisDocumentByAgreement
 	Chain.ChangeBasisDocumentByAgreement.Enable = True;
@@ -2516,19 +2334,6 @@ Procedure PaymentListAgreementStepsEnabler_BankCashPaymentReceipt(Parameters, Ch
 	// ExtractDataAgreementApArPostingDetail
 	Chain.ExtractDataAgreementApArPostingDetail.Enable = True;
 	Chain.ExtractDataAgreementApArPostingDetail.Setter = "SetExtractDataAgreementApArPostingDetail";
-	
-	// ChangeTaxRate
-	Chain.ChangeTaxRate.Enable = True;
-	Chain.ChangeTaxRate.Setter = "SetPaymentListTaxRate";
-	
-	TaxRates = Undefined;
-	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
-		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
-		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
-		EndDo;
-	EndIf;
 	
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		Options_Agreement     = GetPropertyObject(Parameters, "PaymentList.Agreement"    , Row.Key);
@@ -2555,28 +2360,8 @@ Procedure PaymentListAgreementStepsEnabler_BankCashPaymentReceipt(Parameters, Ch
 		Options = ModelClientServer_V2.ExtractDataAgreementApArPostingDetailOptions();
 		Options.Agreement = Options_Agreement;
 		Options.Key = Row.Key;
-		Chain.ExtractDataAgreementApArPostingDetail.Options.Add(Options);
-		
-		// ChangeTaxRate
-		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date           = Options_Date;
-		Options.Company        = Options_Company;
-		Options.Agreement      = Options_Agreement;
-		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-		Options.IsBasedOn      = Parameters.IsBasedOn;
-		Options.Ref            = Parameters.Object.Ref;
-		
-		If TaxRates <> Undefined Then
-			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-				SetProperty(Parameters.Cache, "PaymentList." + ItemOfTaxInfo.Name, Row.Key, Undefined);
-			EndDo;
-			Row.Insert("TaxRates", TaxRates);
-		EndIf;
-		
-		Options.TaxRates = GetPaymentListTaxRate(Parameters, Row);
-		Options.Key = Row.Key;
 		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTaxRate.Options.Add(Options);
+		Chain.ExtractDataAgreementApArPostingDetail.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -2954,23 +2739,6 @@ Procedure SetPaymentListTaxRate(Parameters, Results) Export
 	EndDo;
 EndProcedure
 
-// PaymentList.TaxRate.Get
-Function GetPaymentListTaxRate(Parameters, Row)
-	TaxRates = New Structure();
-	// когда нет формы то колонки со ставками налогов только в кэше
-	// потому что колонки со ставками налога это реквизиты формы
-	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
-	For Each TaxRate In Row.TaxRates Do
-		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
-			TaxRates.Insert(TaxRate.Key, TaxRate.Value);
-		Else
-			TaxRates.Insert(TaxRate.Key, 
-				GetPropertyObject(Parameters, "PaymentList."+TaxRate.Key, Row.Key, ReadOnlyFromCache));
-		EndIf;
-	EndDo;
-	Return TaxRates;
-EndFunction
-
 // PaymentList.TaxRate.Bind
 Function PaymentListTaxRateStepsBinding(Parameters)
 	DataPath = "PaymentList.";
@@ -3144,7 +2912,7 @@ Procedure PaymentListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		Options.AmountOptions.TotalAmount      = GetPropertyObject(Parameters, "PaymentList.TotalAmount"  , Row.Key);
 		
 		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
-		Options.TaxOptions.TaxRates         = GetPaymentListTaxRate(Parameters, Row);
+		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
 		Options.TaxOptions.TaxList          = Row.TaxList;
 		
 		Options.Key = Row.Key;
@@ -3257,11 +3025,11 @@ EndProcedure
 Function ItemListItemKeyStepsBinding(Parameters)
 	DataPath = "ItemList.ItemKey";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation", "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
-	Binding.Insert("GoodsReceipt"        , "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
+	Binding.Insert("ShipmentConfirmation"     , "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
+	Binding.Insert("GoodsReceipt"             , "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
 	Binding.Insert("StockAdjustmentAsSurplus" , "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
 	Binding.Insert("StockAdjustmentAsWriteOff", "ItemListItemKeyStepsEnabler_Warehouse_ShipmentReceipt");
-	Binding.Insert("SalesInvoice"        , "ItemListItemKeyStepsEnabler_Trade_Shipment");
+	Binding.Insert("SalesInvoice"             , "ItemListItemKeyStepsEnabler_Trade_Shipment, StepsEnabler_ChangeTaxRate");
 	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3295,6 +3063,9 @@ EndProcedure
 Procedure ItemListItemKeyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 	StepsEnablerName = "ItemListItemKeyStepsEnabler_Trade_Shipment";
 	
+	Options_Date      = GetPropertyObject(Parameters, "Date");
+	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
+	
 	// ExtractDataItemKeysWithSerialLotNumbers
 	Chain.ExtractDataItemKeysWithSerialLotNumbers.Enable = True;
 	Chain.ExtractDataItemKeysWithSerialLotNumbers.Setter = "SetExtractDataItemKeysWithSerialLotNumbers";
@@ -3319,18 +3090,9 @@ Procedure ItemListItemKeyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 	Chain.ChangePriceTypeByAgreement.Enable = True;
 	Chain.ChangePriceTypeByAgreement.Setter = "SetItemListPriceType";
 	
-	
 	// ChangePriceByPriceType
 	Chain.ChangePriceByPriceType.Enable = True;
 	Chain.ChangePriceByPriceType.Setter = "SetItemListPrice";
-	
-	// ChangeTaxRate
-	Chain.ChangeTaxRate.Enable = True;
-	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
-	
-	Options_Date      = GetPropertyObject(Parameters, "Date");
-	Options_Agreement = GetPropertyObject(Parameters, "Agreement");
-	Options_Company   = GetPropertyObject(Parameters, "Company");
 	
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		
@@ -3374,20 +3136,6 @@ Procedure ItemListItemKeyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 		Options.StepsEnablerName = StepsEnablerName;
 		Options.DontExecuteIfExecutedBefore = True;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
-	
-		// ChangeTaxRate
-		Options = ModelClientServer_V2.ChangeTaxRateOptions();
-		Options.Date           = Options_Date;
-		Options.Company        = Options_Company;
-		Options.Agreement      = Options_Agreement;
-		Options.ItemKey        = Options_ItemKey;
-		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-		Options.IsBasedOn      = Parameters.IsBasedOn;
-		Options.Ref            = Parameters.Object.Ref;
-		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
-		Options.Key            = Row.Key;
-		Options.StepsEnablerName = StepsEnablerName;
-		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -3646,23 +3394,6 @@ Procedure SetItemListTaxRate(Parameters, Results) Export
 	EndDo;
 EndProcedure
 
-// ItemList.TaxRate.Get
-Function GetItemListTaxRate(Parameters, Row)
-	TaxRates = New Structure();
-	// когда нет формы то колонки со ставками налогов только в кэше
-	// потому что колонки со ставками налога это реквизиты формы
-	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
-	For Each TaxRate In Row.TaxRates Do
-		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
-			TaxRates.Insert(TaxRate.Key, TaxRate.Value);
-		Else
-			TaxRates.Insert(TaxRate.Key, 
-				GetPropertyObject(Parameters, "ItemList."+TaxRate.Key, Row.Key, ReadOnlyFromCache));
-		EndIf;
-	EndDo;
-	Return TaxRates;
-EndFunction
-
 // ItemList.TaxRate.Bind
 Function ItemListTaxRateStepsBinding(Parameters)
 	DataPath = "ItemList.";
@@ -3814,7 +3545,7 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		
 		Options.TaxOptions.PriceIncludeTax  = GetPropertyObject(Parameters, "PriceIncludeTax");
 		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
-		Options.TaxOptions.TaxRates         = GetItemListTaxRate(Parameters, Row);
+		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
 		Options.TaxOptions.TaxList          = Row.TaxList;
 		
 		Options.OffersOptions.SpecialOffers = Row.SpecialOffers;
@@ -4314,8 +4045,9 @@ Function AddLinkedDocumentRows(Object, Form, LinkedResult, TableName) Export
 	FormParameters = GetFormParameters(Form);
 	ServerParameters = GetServerParameters(Object);
 	ServerParameters.TableName = TableName;
+	ServerParameters.IsBasedOn = True;
 	ServerParameters.ReadOnlyProperties = LinkedResult.UpdatedProperties;
-	ServerParameters.Rows = LinkedResult.NewRows;
+	ServerParameters.Rows = LinkedResult.Rows;
 		
 	Parameters = GetParameters(ServerParameters, FormParameters);
 	For Each PropertyName In StrSplit(ServerParameters.ReadOnlyProperties, ",") Do

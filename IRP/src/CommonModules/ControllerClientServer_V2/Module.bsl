@@ -1155,24 +1155,24 @@ Function BindDate(Parameters)
 		|StepChangeDeliveryDateByAgreement,
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
-		|Step_ChangeTaxRate_AgreementInHeader,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
 
 	Binding.Insert("BankPayment",
 		"StepRequireCallCreateTaxesFormControls, 
-		|Step_ChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_AgreementInList");
 		
 	Binding.Insert("BankReceipt",
 		"StepRequireCallCreateTaxesFormControls, 
-		|Step_ChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_AgreementInList");
 		
 	Binding.Insert("CashPayment",
 		"StepRequireCallCreateTaxesFormControls, 
-		|Step_ChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_AgreementInList");
 		
 	Binding.Insert("CashReceipt",
 		"StepRequireCallCreateTaxesFormControls, 
-		|Step_ChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_AgreementInList");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1209,27 +1209,27 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("BankPayment",
 		"StepRequireCallCreateTaxesFormControls, 
-		|Step_ChangeTaxRate_AgreementInList,
+		|StepChangeTaxRate_AgreementInList,
 		|StepChangeCashAccountByCompany_AccountTypeIsBank");
 	
 	Binding.Insert("BankReceipt",
 		"StepRequireCallCreateTaxesFormControls, 
-		|Step_ChangeTaxRate_AgreementInList,
+		|StepChangeTaxRate_AgreementInList,
 		|StepChangeCashAccountByCompany_AccountTypeIsBank");
 	
 	Binding.Insert("CashPayment",
 		"StepRequireCallCreateTaxesFormControls, 
-		|Step_ChangeTaxRate_AgreementInList,
+		|StepChangeTaxRate_AgreementInList,
 		|StepChangeCashAccountByCompany_AccountTypeIsBank");
 	
 	Binding.Insert("CashReceipt",
 		"StepRequireCallCreateTaxesFormControls, 
-		|Step_ChangeTaxRate_AgreementInList,
+		|StepChangeTaxRate_AgreementInList,
 		|StepChangeCashAccountByCompany_AccountTypeIsBank");
 	
 	Binding.Insert("SalesInvoice",
 		"StepRequireCallCreateTaxesFormControls,
-		|Step_ChangeTaxRate_OnlyWhenAgreementIsFilled");
+		|StepChangeTaxRate_OnlyWhenAgreementIsFilled");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1578,10 +1578,10 @@ Function BindAgreement(Parameters)
 		|StepChangeCurrencyByAgreement,
 		|StepChangeStoreByAgreement,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangePriceTypeByAgreement,
+		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepChangePaymentTermsByAgreement,
-		|Step_ChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1807,17 +1807,17 @@ EndProcedure
 #Region TAX_RATE
 
 // <List>.ChangeTaxRate.[AgreementInHeader].Step
-Procedure Step_ChangeTaxRate_AgreementInHeader(Parameters, Chain) Export
+Procedure StepChangeTaxRate_AgreementInHeader(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain, True, False, False);
 EndProcedure
 
 // <List>.ChangeTaxRate.[AgreementInList].Step
-Procedure Step_ChangeTaxRate_AgreementInList(Parameters, Chain) Export
+Procedure StepChangeTaxRate_AgreementInList(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain, False, True, False);
 EndProcedure
 
 // <List>.ChangeTaxRate.[AgreementInList].Step
-Procedure Step_ChangeTaxRate_OnlyWhenAgreementIsFilled(Parameters, Chain) Export
+Procedure StepChangeTaxRate_OnlyWhenAgreementIsFilled(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain, True, False, True);
 EndProcedure
 
@@ -2024,25 +2024,25 @@ Function BindPaymentListAgreement(Parameters)
 		"StepPaymentListChangeBasisDocumentByAgreement,
 		|StepPaymentListChangeOrderByAgreement,
 		|StepExtractDataAgreementApArPostingDetail,
-		|Step_ChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_AgreementInList");
 	
 	Binding.Insert("BankReceipt",
 		"StepPaymentListChangeBasisDocumentByAgreement,
 		|StepPaymentListChangeOrderByAgreement,
 		|StepExtractDataAgreementApArPostingDetail,
-		|Step_ChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_AgreementInList");
 	
 	Binding.Insert("CashPayment",
 		"StepPaymentListChangeBasisDocumentByAgreement,
 		|StepPaymentListChangeOrderByAgreement,
 		|StepExtractDataAgreementApArPostingDetail,
-		|Step_ChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_AgreementInList");
 	
 	Binding.Insert("CashReceipt",
 		"StepPaymentListChangeBasisDocumentByAgreement,
 		|StepPaymentListChangeOrderByAgreement,
 		|StepExtractDataAgreementApArPostingDetail,
-		|Step_ChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_AgreementInList");
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction
 
@@ -2782,7 +2782,7 @@ Function BindItemListItemKey(Parameters)
 		"StepItemListChangeUseShipmentConfirmationByStore,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
-		|Step_ChangeTaxRate_AgreementInHeader,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepExtractDataItemKeysWithSerialLotNumbers,
 		|StepChangeUnitByItemKey");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);

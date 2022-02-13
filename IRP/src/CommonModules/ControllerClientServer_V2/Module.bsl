@@ -787,7 +787,7 @@ EndFunction
 
 // TransactionType.Bind
 Function BindTransactionType(Parameters)
-	DataPath = "Account";
+	DataPath = "TransactionType";
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
 		"StepChangeTransitAccountByAccount,

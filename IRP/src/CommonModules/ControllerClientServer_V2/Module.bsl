@@ -343,7 +343,7 @@ Procedure StepRequireCallCreateTaxesFormControls(Parameters, Chain) Export
 	Options.Company        = GetCompany(Parameters);
 	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
 	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
-	Options.StepsEnablerName = "StepRequireCallCreateTaxesFormControls";
+	Options.StepName = "StepRequireCallCreateTaxesFormControls";
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
 EndProcedure
 
@@ -522,7 +522,7 @@ Procedure StepExtractDataItemKeysWithSerialLotNumbers(Parameters, Chain) Export
 		Options = ModelClientServer_V2.ExtractDataItemKeysWithSerialLotNumbersOptions();
 		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepExtractDataItemKeysWithSerialLotNumbers";
+		Options.StepName = "StepExtractDataItemKeysWithSerialLotNumbers";
 		Options.DontExecuteIfExecutedBefore = True;
 		Chain.ExtractDataItemKeysWithSerialLotNumbers.Options.Add(Options);
 	EndDo;
@@ -547,7 +547,7 @@ Procedure StepExtractDataAgreementApArPostingDetail(Parameters, Chain) Export
 		Options = ModelClientServer_V2.ExtractDataAgreementApArPostingDetailOptions();
 		Options.Agreement = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepExtractDataAgreementApArPostingDetail";
+		Options.StepName = "StepExtractDataAgreementApArPostingDetail";
 		Chain.ExtractDataAgreementApArPostingDetail.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -631,7 +631,7 @@ Procedure StepChangeCashAccountByCurrency(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeCashAccountByCurrencyOptions();
 	Options.CurrentAccount = GetAccount(Parameters);
 	Options.Currency       = GetCurrency(Parameters);
-	Options.StepsEnablerName = "StepChangeCashAccountByCurrency";
+	Options.StepName = "StepChangeCashAccountByCurrency";
 	Chain.ChangeCashAccountByCurrency.Options.Add(Options);
 EndProcedure
 
@@ -658,7 +658,7 @@ Procedure StepChangeCashAccountByCompany(Parameters, Chain, AccountType)
 	Options.Company = GetCompany(Parameters);
 	Options.Account = GetAccount(Parameters);
 	Options.AccountType = AccountType;
-	Options.StepsEnablerName = "StepChangeCashAccountByCompany";
+	Options.StepName = "StepChangeCashAccountByCompany";
 	Chain.ChangeCashAccountByCompany.Options.Add(Options);
 EndProcedure
 
@@ -758,7 +758,7 @@ Procedure StepChangeTransitAccountByAccount(Parameters, Chain) Export
 	Options.TransactionType       = GetTransactionType(Parameters);
 	Options.Account               = GetAccount(Parameters);
 	Options.CurrentTransitAccount = GetTransitAccount(Parameters);
-	Options.StepsEnablerName = "StepChangeTransitAccountByAccount";
+	Options.StepName = "StepChangeTransitAccountByAccount";
 	Chain.ChangeTransitAccountByAccount.Options.Add(Options);
 EndProcedure
 
@@ -878,7 +878,7 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepClearByTransactionTypeBankPayment";
+		Options.StepName = "StepClearByTransactionTypeBankPayment";
 		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -902,7 +902,7 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.AmountExchange           = GetPaymentListAmountExchange(Parameters, Row.Key);
 		Options.POSAccount               = GetPaymentListPOSAccount(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepClearByTransactionTypeBankReceipt";
+		Options.StepName = "StepClearByTransactionTypeBankReceipt";
 		Chain.ClearByTransactionTypeBankReceipt.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -922,7 +922,7 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.Payee                    = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepClearByTransactionTypeCashPayment";
+		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -944,7 +944,7 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.AmountExchange           = GetPaymentListAmountExchange(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepClearByTransactionTypeCashReceipt";
+		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -1002,7 +1002,7 @@ Procedure StepChangeCurrencyByAccount(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
 	Options.Account         = GetAccount(Parameters);
 	Options.CurrentCurrency = GetCurrency(Parameters);
-	Options.StepsEnablerName = "StepChangeCurrencyByAccount";
+	Options.StepName = "StepChangeCurrencyByAccount";
 	Chain.ChangeCurrencyByAccount.Options.Add(Options);
 EndProcedure
 
@@ -1013,7 +1013,7 @@ Procedure StepChangeCurrencyByAgreement(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeCurrencyByAgreementOptions();
 	Options.Agreement       = GetAgreement(Parameters);
 	Options.CurrentCurrency = GetCurrency(Parameters);
-	Options.StepsEnablerName = "StepChangeCurrencyByAgreement";
+	Options.StepName = "StepChangeCurrencyByAgreement";
 	Chain.ChangeCurrencyByAgreement.Options.Add(Options);
 EndProcedure
 
@@ -1052,7 +1052,7 @@ Procedure StepChangeReceiveCurrencyByAccount(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
 	Options.Account         = GetAccountReceiver(Parameters);
 	Options.CurrentCurrency = GetReceiveCurrency(Parameters);
-	Options.StepsEnablerName = "StepChangeReceiveCurrencyByAccount";
+	Options.StepName = "StepChangeReceiveCurrencyByAccount";
 	Chain.ChangeCurrencyByAccount.Options.Add(Options);
 EndProcedure
 
@@ -1091,7 +1091,7 @@ Procedure StepChangeSendCurrencyByAccount(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
 	Options.Account         = GetAccountSender(Parameters);
 	Options.CurrentCurrency = GetSendCurrency(Parameters);
-	Options.StepsEnablerName = "StepChangeSendCurrencyByAccount";
+	Options.StepName = "StepChangeSendCurrencyByAccount";
 	Chain.ChangeCurrencyByAccount.Options.Add(Options);
 EndProcedure
 
@@ -1241,7 +1241,7 @@ Procedure StepChangeCompanyByAgreement(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeCompanyByAgreementOptions();
 	Options.Agreement      = GetAgreement(Parameters);
 	Options.CurrentCompany = GetCompany(Parameters);
-	Options.StepsEnablerName = "StepChangeCompanyByAgreement";
+	Options.StepName = "StepChangeCompanyByAgreement";
 	Chain.ChangeCompanyByAgreement.Options.Add(Options);
 EndProcedure
 
@@ -1319,7 +1319,7 @@ Procedure StepChangeLegalNameByPartner(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
 	Options.Partner   = GetPartner(Parameters);
 	Options.LegalName = GetLegalName(Parameters);
-	Options.StepsEnablerName = "StepChangeLegalNameByPartner";
+	Options.StepName = "StepChangeLegalNameByPartner";
 	Chain.ChangeLegalNameByPartner.Options.Add(Options);
 EndProcedure
 
@@ -1368,7 +1368,7 @@ Procedure StepChangeDeliveryDateByAgreement(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeDeliveryDateByAgreementOptions();
 	Options.Agreement           = GetAgreement(Parameters);
 	Options.CurrentDeliveryDate = GetDeliveryDate(Parameters);
-	Options.StepsEnablerName = "StepChangeDeliveryDateByAgreement";
+	Options.StepName = "StepChangeDeliveryDateByAgreement";
 	Chain.ChangeDeliveryDateByAgreement.Options.Add(Options);
 EndProcedure
 
@@ -1384,7 +1384,7 @@ Procedure StepDefaultDeliveryDateInHeader(Parameters, Chain) Export
 		ArrayOfDeliveryDateInList.Add(GetItemListDeliveryDate(Parameters, Row.Key));
 	EndDo;
 	Options.ArrayOfDeliveryDateInList = ArrayOfDeliveryDateInList; 
-	Options.StepsEnablerName = "StepDefaultDeliveryDateInHeader";
+	Options.StepName = "StepDefaultDeliveryDateInHeader";
 	Chain.DefaultDeliveryDateInHeader.Options.Add(Options);
 EndProcedure
 
@@ -1398,7 +1398,7 @@ Procedure StepChangeDeliveryDateInHeaderByDeliveryDateInList(Parameters, Chain) 
 		ArrayOfDeliveryDateInList.Add(GetItemListDeliveryDate(Parameters, Row.Key));
 	EndDo;
 	Options.ArrayOfDeliveryDateInList = ArrayOfDeliveryDateInList; 
-	Options.StepsEnablerName = "StepChangeDeliveryDateInHeaderByDeliveryDateInList";
+	Options.StepName = "StepChangeDeliveryDateInHeaderByDeliveryDateInList";
 	Chain.ChangeDeliveryDateInHeaderByDeliveryDateInList.Options.Add(Options);
 EndProcedure
 
@@ -1469,7 +1469,7 @@ Procedure StepChangeStoreByAgreement(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeStoreByAgreementOptions();
 	Options.Agreement    = GetAgreement(Parameters);
 	Options.CurrentStore = GetStore(Parameters);
-	Options.StepsEnablerName = "StepChangeStoreByAgreement";
+	Options.StepName = "StepChangeStoreByAgreement";
 	Chain.ChangeStoreByAgreement.Options.Add(Options);
 EndProcedure
 
@@ -1497,7 +1497,7 @@ Procedure StepEmptyStoreInHeader(Parameters, Chain, AgreementInHeader)
 		ArrayOfStoresInList.Add(GetItemListStore(Parameters, Row.Key));
 	EndDo;
 	Options.ArrayOfStoresInList = ArrayOfStoresInList;
-	Options.StepsEnablerName = "StepEmptyStoreInHeader";
+	Options.StepName = "StepEmptyStoreInHeader";
 	Chain.EmptyStoreInHeader.Options.Add(Options);
 EndProcedure
 
@@ -1525,7 +1525,7 @@ Procedure StepDefaultStoreInHeader(Parameters, Chain, AgreementInHeader)
 		ArrayOfStoresInList.Add(GetItemListStore(Parameters, Row.Key));
 	EndDo;
 	Options.ArrayOfStoresInList = ArrayOfStoresInList;
-	Options.StepsEnablerName = "StepDefaultStoreInHeader";
+	Options.StepName = "StepDefaultStoreInHeader";
 	Chain.DefaultStoreInHeader.Options.Add(Options);
 EndProcedure
 
@@ -1542,7 +1542,7 @@ Procedure StepChangeStoreInHeaderByStoresInList(Parameters, Chain) Export
 		ArrayOfStoresInList.Add(NewRow);
 	EndDo;
 	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
-	Options.StepsEnablerName = "StepChangeStoreInHeaderByStoresInList";
+	Options.StepName = "StepChangeStoreInHeaderByStoresInList";
 	Chain.ChangeStoreInHeaderByStoresInList.Options.Add(Options);
 EndProcedure
 
@@ -1605,7 +1605,7 @@ Procedure StepChangeAgreementByPartner(Parameters, Chain, AgreementType)
 	Options.Agreement     = GetAgreement(Parameters);
 	Options.CurrentDate   = GetDate(Parameters);
 	Options.AgreementType = AgreementType;
-	Options.StepsEnablerName = "StepChangeAgreementByPartner";
+	Options.StepName = "StepChangeAgreementByPartner";
 	Chain.ChangeAgreementByPartner.Options.Add(Options);
 EndProcedure
 
@@ -1638,7 +1638,7 @@ Procedure StepChangeManagerSegmentByPartner(Parameters, Chain) Export
 	Chain.ChangeManagerSegmentByPartner.Setter = "SetManagerSegment";
 	Options = ModelClientServer_V2.ChangeManagerSegmentByPartnerOptions();
 	Options.Partner = GetPartner(Parameters);
-	Options.StepsEnablerName = "StepChangeManagerSegmentByPartner";
+	Options.StepName = "StepChangeManagerSegmentByPartner";
 	Chain.ChangeManagerSegmentByPartner.Options.Add(Options);
 EndProcedure
 
@@ -1676,7 +1676,7 @@ Procedure StepChangePriceIncludeTaxByAgreement(Parameters, Chain) Export
 	Chain.ChangePriceIncludeTaxByAgreement.Setter = "SetPriceIncludeTax";
 	Options = ModelClientServer_V2.ChangePriceIncludeTaxByAgreementOptions();
 	Options.Agreement = GetAgreement(Parameters);
-	Options.StepsEnablerName = "StepChangePriceIncludeTaxByAgreement";
+	Options.StepName = "StepChangePriceIncludeTaxByAgreement";
 	Chain.ChangePriceIncludeTaxByAgreement.Options.Add(Options);
 EndProcedure
 
@@ -1734,7 +1734,7 @@ Procedure StepChangePaymentTermsByAgreement(Parameters, Chain) Export
 		TotalAmount = TotalAmount + GetItemListTotalAmount(Parameters, Row.Key);
 	EndDo;
 	Options.TotalAmount = TotalAmount;
-	Options.StepsEnablerName = "StepChangePaymentTermsByAgreement";
+	Options.StepName = "StepChangePaymentTermsByAgreement";
 	Chain.ChangePaymentTermsByAgreement.Options.Add(Options);	
 EndProcedure
 
@@ -1750,7 +1750,7 @@ Procedure StepUpdatePaymentTerms(Parameters, Chain) Export
 		TotalAmount = TotalAmount + GetItemListTotalAmount(Parameters, Row.Key);
 	EndDo;
 	Options.TotalAmount = TotalAmount;
-	Options.StepsEnablerName = "StepUpdatePaymentTerms";
+	Options.StepName = "StepUpdatePaymentTerms";
 	Chain.UpdatePaymentTerms.Options.Add(Options);
 EndProcedure
 
@@ -1868,7 +1868,7 @@ Procedure StepChangeTaxRate(Parameters, Chain,
 		Options.TaxRates = GetTaxRate(Parameters, Row);
 		Options.TaxList  = Row.TaxList;
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepChangeTaxRate";
+		Options.StepName = "StepChangeTaxRate";
 		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -1952,7 +1952,7 @@ Procedure StepPaymentListChangePartnerByLegalName(Parameters, Chain) Export
 		Options.Partner   = GetPaymentListPartner(Parameters, Row.Key);
 		Options.LegalName = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepPaymentListChangePartnerByLegalName";
+		Options.StepName = "StepPaymentListChangePartnerByLegalName";
 		Chain.ChangePartnerByLegalName.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -1990,7 +1990,7 @@ Procedure StepPaymentListChangeCashAccountByPartner(Parameters, Chain) Export
 		Options.LegalName = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Currency  = GetCurrency(Parameters);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "PaymentListChangeCashAccountByPartner";
+		Options.StepName = "PaymentListChangeCashAccountByPartner";
 		Chain.ChangeCashAccountByPartner.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2056,7 +2056,7 @@ Procedure StepPaymentListChangeAgreementByPartner(Parameters, Chain) Export
 		Options.Agreement     = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.CurrentDate   = GetDate(Parameters);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "PaymentListChangeAgreementByPartner";
+		Options.StepName = "PaymentListChangeAgreementByPartner";
 		Chain.ChangeAgreementByPartner.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2111,7 +2111,7 @@ Procedure StepPaymentListChangeLegalNameByPartner(Parameters, Chain) Export
 		Options.Partner   = GetPaymentListPartner(Parameters, Row.Key);
 		Options.LegalName = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepPaymentListChangeLegalNameByPartner";
+		Options.StepName = "StepPaymentListChangeLegalNameByPartner";
 		Chain.ChangeLegalNameByPartner.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2209,7 +2209,7 @@ Procedure StepPaymentListChangeBasisDocumentByAgreement(Parameters, Chain) Expor
 		Options.Agreement            = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.CurrentBasisDocument = GetPaymentListBasisDocument(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepPaymentListChangeBasisDocumentByAgreement";
+		Options.StepName = "StepPaymentListChangeBasisDocumentByAgreement";
 		Chain.ChangeBasisDocumentByAgreement.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2255,7 +2255,7 @@ Procedure StepChangePlanningTransactionBasisByCurrency(Parameters, Chain) Export
 		Options.Currency = GetCurrency(Parameters);
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepChangePlanningTransactionBasisByCurrency";
+		Options.StepName = "StepChangePlanningTransactionBasisByCurrency";
 		Chain.ChangePlanningTransactionBasisByCurrency.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2319,7 +2319,7 @@ Procedure StepPaymentListFillByPTBBankPayment(Parameters, Chain) Export
 		Options.Currency    = GetCurrency(Parameters);
 		Options.Ref = Parameters.Object.Ref;
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepPaymentListFillByPTBBankPayment";
+		Options.StepName = "StepPaymentListFillByPTBBankPayment";
 		Chain.FillByPTBBankPayment.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2338,7 +2338,7 @@ Procedure StepPaymentListFillByPTBCashPayment(Parameters, Chain) Export
 		Options.Currency    = GetCurrency(Parameters);
 		Options.Ref = Parameters.Object.Ref;
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepPaymentListFillByPTBCashPayment";
+		Options.StepName = "StepPaymentListFillByPTBCashPayment";
 		Chain.FillByPTBCashPayment.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2358,7 +2358,7 @@ Procedure StepPaymentListFIllByPTBBankReceipt(Parameters, Chain) Export
 		Options.CurrencyExchange = GetCurrencyExchange(Parameters);
 		Options.Ref = Parameters.Object.Ref;
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepPaymentListFIllByPTBBankReceipt";
+		Options.StepName = "StepPaymentListFIllByPTBBankReceipt";
 		Chain.FillByPTBBankReceipt.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2379,7 +2379,7 @@ Procedure StepPaymentListFillByPTBCashReceipt(Parameters, Chain) Export
 		Options.CurrencyExchange = GetCurrencyExchange(Parameters);
 		Options.Ref = Parameters.Object.Ref;
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepPaymentListFillByPTBCashReceipt";
+		Options.StepName = "StepPaymentListFillByPTBCashReceipt";
 		Chain.FillByPTBCashReceipt.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2421,7 +2421,7 @@ Procedure StepPaymentListChangeOrderByAgreement(Parameters, Chain) Export
 		Options.Agreement    = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.CurrentOrder = GetPaymentListOrder(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepPaymentListChangeOrderByAgreement";
+		Options.StepName = "StepPaymentListChangeOrderByAgreement";
 		Chain.ChangeOrderByAgreement.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2510,7 +2510,7 @@ Procedure StepPaymentListChangeTaxAmountAsManualAmount(Parameters, Chain) Export
 		Options.TaxAmount = GetPaymentListTaxAmount(Parameters, Row.Key);
 		Options.TaxList   = Row.TaxList;
 		Options.Key       = Row.Key;
-		Options.StepsEnablerName = "StepPaymentListChangeTaxAmountAsManualAmount";
+		Options.StepName = "StepPaymentListChangeTaxAmountAsManualAmount";
 		Chain.ChangeTaxAmountAsManualAmount.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2694,7 +2694,7 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.TaxOptions.TaxList          = Row.TaxList;
 		
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepPaymentListCalculations" + WhoIsChanged;
+		Options.StepName = "StepPaymentListCalculations" + WhoIsChanged;
 		Chain.Calculations.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2797,7 +2797,7 @@ Procedure StepItemListChangeItemKeyByItem(Parameters, Chain) Export
 		Options.Item    = ItemListItemGet(Parameters, Row.Key);
 		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepItemListChangeItemKeyByItem";
+		Options.StepName = "StepItemListChangeItemKeyByItem";
 		Chain.ChangeItemKeyByItem.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2838,7 +2838,7 @@ Procedure StepChangeUnitByItemKey(Parameters, Chain) Export
 		Options = ModelClientServer_V2.ChangeUnitByItemKeyOptions();
 		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepChangeUnitByItemKey";
+		Options.StepName = "StepChangeUnitByItemKey";
 		Chain.ChangeUnitByItemKey.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2890,7 +2890,7 @@ Procedure StepItemListFillDeliveryDateInList(Parameters, Chain) Export
 		Options.DeliveryDate       = GetDeliveryDate(Parameters);
 		Options.DeliveryDateInList = GetItemListDeliveryDate(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepItemListFillDeliveryDateInList";
+		Options.StepName = "StepItemListFillDeliveryDateInList";
 		Chain.FillDeliveryDateInList.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -2906,7 +2906,7 @@ Procedure StepItemListDefaultDeliveryDateInList(Parameters, Chain) Export
 	Options.Date                 = GetDate(Parameters);
 	Options.Agreement            = GetAgreement(Parameters);
 	Options.Key = NewRow.Key;
-	Options.StepsEnablerName = "StepItemListDefaultDeliveryDateInList";
+	Options.StepName = "StepItemListDefaultDeliveryDateInList";
 	Chain.DefaultDeliveryDateInList.Options.Add(Options);
 EndProcedure
 
@@ -2975,7 +2975,7 @@ Procedure StepItemListFillStoresInList(Parameters, Chain) Export
 		Options.StoreInList  = GetItemListStore(Parameters, Row.Key);
 		Options.IsUserChange = IsUserChange(Parameters);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepItemListFillStoresInList";
+		Options.StepName = "StepItemListFillStoresInList";
 		Chain.FillStoresInList.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -3003,7 +3003,7 @@ Procedure StepItemListDefaultStoreInList(Parameters, Chain, AgreementInHeader)
 	Options.StoreInList   = GetItemListStore(Parameters, NewRow.Key);
 	Options.StoreInHeader = GetStore(Parameters);
 	Options.Key = NewRow.Key;
-	Options.StepsEnablerName = "StepItemListDefaultStoreInList";
+	Options.StepName = "StepItemListDefaultStoreInList";
 	Chain.DefaultStoreInList.Options.Add(Options);
 EndProcedure
 
@@ -3025,7 +3025,7 @@ Procedure StepItemListChangeUseShipmentConfirmationByStore(Parameters, Chain) Ex
 		Options.Store   = GetItemListStore(Parameters, Row.Key);
 		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepItemListChangeUseShipmentConfirmationByStore";
+		Options.StepName = "StepItemListChangeUseShipmentConfirmationByStore";
 		Chain.ChangeUseShipmentConfirmationByStore.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -3048,7 +3048,7 @@ Procedure StepItemListChangeUseGoodsReceiptByStore(Parameters, Chain) Export
 		Options.Store   = GetItemListStore(Parameters, Row.Key);
 		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepChangeUseGoodsReceiptByStore";
+		Options.StepName = "StepChangeUseGoodsReceiptByStore";
 		Chain.ChangeUseGoodsReceiptByStore.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -3078,7 +3078,6 @@ EndFunction
 Function BindItemListPriceType(Parameters)
 	DataPath = "ItemList.PriceType";
 	Binding = New Structure();
-	//Return BindSteps("ItemListPriceTypeStepsEnabler", DataPath, Binding, Parameters);
 	Return BindSteps("StepItemListChangePriceByPriceType", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3090,7 +3089,7 @@ Procedure StepItemListChangePriceTypeByAgreement(Parameters, Chain) Export
 		Options = ModelClientServer_V2.ChangePriceTypeByAgreementOptions();
 		Options.Agreement = GetAgreement(Parameters);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepItemListChangePriceTypeByAgreement";
+		Options.StepName = "StepItemListChangePriceTypeByAgreement";
 		Chain.ChangePriceTypeByAgreement.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -3119,7 +3118,7 @@ Procedure StepItemListChangePriceTypeAsManual(Parameters, Chain, IsUserChange, I
 			Options.DontCalculateRow = GetItemListDontCalculateRow(Parameters, Row.Key);
 		EndIf;
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepItemListChangePriceTypeAsManual";
+		Options.StepName = "StepItemListChangePriceTypeAsManual";
 		Chain.ChangePriceTypeAsManual.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -3170,33 +3169,11 @@ Procedure StepItemListChangePriceByPriceType(Parameters, Chain) Export
 		Options.ItemKey      = GetItemListItemKey(Parameters, Row.Key);
 		Options.Unit         = GetItemListUnit(Parameters, Row.Key);
 		Options.Key          = Row.Key;
-		Options.StepsEnablerName = "StepItemListChangePriceByPriceType";
+		Options.StepName = "StepItemListChangePriceByPriceType";
 		Options.DontExecuteIfExecutedBefore = True;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
 	EndDo;
 EndProcedure
-
-//Procedure ItemListPriceTypeStepsEnabler(Parameters, Chain) Export
-//	StepsEnablerName = "ItemListPriceTypeStepsEnabler";
-//	
-//	// ChangePriceByPriceType
-//	Chain.ChangePriceByPriceType.Enable = True;
-//	Chain.ChangePriceByPriceType.Setter = "SetItemListPrice";
-//	
-//	For Each Row In GetRows(Parameters, "ItemList") Do
-//		// ChangePriceByPriceType
-//		Options = ModelClientServer_V2.ChangePriceByPriceTypeOptions();
-//		Options.Ref          = Parameters.Object.Ref;
-//		Options.Date         = GetPropertyObject(Parameters, "Date");
-//		Options.CurrentPrice = GetPropertyObject(Parameters, "ItemList.Price", Row.Key);
-//		Options.PriceType    = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
-//		Options.ItemKey      = GetPropertyObject(Parameters, "ItemList.ItemKey"  , Row.Key);
-//		Options.Unit         = GetPropertyObject(Parameters, "ItemList.Unit"     , Row.Key);
-//		Options.Key          = Row.Key;
-//		Options.StepsEnablerName = StepsEnablerName;
-//		Chain.ChangePriceByPriceType.Options.Add(Options);
-//	EndDo;
-//EndProcedure
 
 #EndRegion
 
@@ -3309,7 +3286,7 @@ Procedure StepItemListCalculateQuantityInBaseUnit(Parameters, Chain) Export
 		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
 		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepItemListCalculateQuantityInBaseUnit";
+		Options.StepName = "StepItemListCalculateQuantityInBaseUnit";
 		Chain.Calculations.Options.Add(Options);
 	EndDo;	
 EndProcedure
@@ -3596,7 +3573,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.OffersOptions.SpecialOffers = Row.SpecialOffers;
 		
 		Options.Key = Row.Key;
-		Options.StepsEnablerName = "StepItemListCalculations";
+		Options.StepName = "StepItemListCalculations";
 		Chain.Calculations.Options.Add(Options);
 	EndDo;
 EndProcedure
@@ -3641,13 +3618,8 @@ Procedure CommitChainChanges(Parameters) Export
 		EndDo;
 		
 		_CommitChainChanges(Parameters.CacheForm, Parameters.Form);
-		
-	//EndIf;
-	
 	
 	#IF Client THEN
-		//_CommitChainChanges(Parameters.CacheForm, Parameters.Form);
-		
 		UniqueViewNotify = New Array();
 		For Each ViewNotify In Parameters.ViewNotify Do
 			If UniqueViewNotify.Find(ViewNotify) = Undefined Then
@@ -3753,9 +3725,9 @@ Function GetRows(Parameters, TableName)
 	Return Parameters.Object[TableName];
 EndFunction
 
-Procedure SetterForm(StepsEnablerName, DataPath, Parameters, Results, 
+Procedure SetterForm(StepNames, DataPath, Parameters, Results, 
 	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False)
-	Setter("Form", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
+	Setter("Form", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
 EndProcedure
 
 Procedure MultiSetterObject(Parameters, Results, ResourceToBinding)
@@ -3778,12 +3750,12 @@ Procedure MultiSetterObject(Parameters, Results, ResourceToBinding)
 	EndDo;
 EndProcedure
 
-Procedure SetterObject(StepsEnablerName, DataPath, Parameters, Results, 
+Procedure SetterObject(StepNames, DataPath, Parameters, Results, 
 	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False)
-	Setter("Object", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
+	Setter("Object", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
 EndProcedure
 
-Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache)
+Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache)
 	IsChanged = False;
 	For Each Result In Results Do
 		_Key   = Result.Options.Key;
@@ -3802,15 +3774,15 @@ Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNo
 	If IsChanged Or NotifyAnyWay Then
 		AddViewNotify(ViewNotify, Parameters);
 	EndIf;
-	If ValueIsFilled(StepsEnablerName) Then
+	If ValueIsFilled(StepNames) Then
 		// свойство изменено и есть следующие шаги
 		// или свойство не изменено но если оно ReadOnly, то вызовем его следующие шаги
 		If IsChanged Then
-			ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
+			ModelClientServer_V2.EntryPoint(StepNames, Parameters);
 		ElsIf Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) = True Then
 			If Parameters.ProcessedReadOnlyPropertiesMap.Get(Upper(DataPath)) = Undefined Then
 				Parameters.ProcessedReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
-				ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
+				ModelClientServer_V2.EntryPoint(StepNames, Parameters);
 			EndIf;
 		EndIf;
 	EndIf;
@@ -4023,8 +3995,8 @@ Function IsUserChange(Parameters)
 	EndIf;
 	
 	If Parameters.Property("ModelInveronment")
-		And Parameters.ModelInveronment.Property("StepsEnablerNameCounter") Then
-		Return Parameters.ModelInveronment.StepsEnablerNameCounter.Count() = 1;
+		And Parameters.ModelInveronment.Property("StepNamesCounter") Then
+		Return Parameters.ModelInveronment.StepNamesCounter.Count() = 1;
 	EndIf;
 	Return False;
 EndFunction

@@ -1,9 +1,9 @@
 
 #Region ENTRY_POINTS
 
-Procedure EntryPoint(StepsEnablerName, Parameters) Export
-	InitEntryPoint(StepsEnablerName, Parameters);
-	Parameters.ModelInveronment.StepsEnablerNameCounter.Add(StepsEnablerName);
+Procedure EntryPoint(StepNames, Parameters) Export
+	InitEntryPoint(StepNames, Parameters);
+	Parameters.ModelInveronment.StepNamesCounter.Add(StepNames);
 	
 #IF Client THEN
 	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
@@ -17,7 +17,7 @@ Procedure EntryPoint(StepsEnablerName, Parameters) Export
 	EndIf;
 #ENDIF
 
-	ModelServer_V2.ServerEntryPoint(StepsEnablerName, Parameters);
+	ModelServer_V2.ServerEntryPoint(StepNames, Parameters);
 	
 #IF Client THEN
 	Parameters.Form   = Transfer.Form;
@@ -26,15 +26,15 @@ Procedure EntryPoint(StepsEnablerName, Parameters) Export
 	
 	// проверяем что кэш был инициализирован из этой EntryPoint
 	// и если это так и мы дошли до конца процедуры то значит что ChainComplete 
-	If Parameters.ModelInveronment.FirstStepsEnablerName = StepsEnablerName Then
+	If Parameters.ModelInveronment.FirstStepNames = StepNames Then
 		Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ControllerModuleName);
 		DestroyEntryPoint(Parameters);
 	EndIf;
 EndProcedure
 
-Procedure ServerEntryPoint(StepsEnablerName, Parameters) Export
+Procedure ServerEntryPoint(StepNames, Parameters) Export
 	Chain = GetChain();
-	For Each ArrayItem In StrSplit(StepsEnablerName, ",") Do
+	For Each ArrayItem In StrSplit(StepNames, ",") Do
 		Execute StrTemplate("%1.%2(Parameters, Chain);", 
 			Parameters.ControllerModuleName, 
 			StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
@@ -58,7 +58,7 @@ EndFunction
 Function GetChainLinkOptions(StrOptions)
 	Options = New Structure();
 	Options.Insert("Key");
-	Options.Insert("StepsEnablerName"); // for debug only
+	Options.Insert("StepName"); // for debug only
 	Options.Insert("DontExecuteIfExecutedBefore", False);
 	Segments = StrSplit(StrOptions, ",");
 	For Each Segment In Segments Do
@@ -1834,11 +1834,11 @@ EndFunction
 
 #EndRegion
 
-Procedure InitEntryPoint(StepsEnablerName, Parameters)
+Procedure InitEntryPoint(StepNames, Parameters)
 	If Not Parameters.Property("ModelInveronment") Then
 		Inveronment = New Structure();
-		Inveronment.Insert("FirstStepsEnablerName"  , StepsEnablerName);
-		Inveronment.Insert("StepsEnablerNameCounter", New Array());
+		Inveronment.Insert("FirstStepNames"  , StepNames);
+		Inveronment.Insert("StepNamesCounter", New Array());
 		Inveronment.Insert("AlreadyExecutedSteps"   , New Array());
 		Parameters.Insert("ModelInveronment", Inveronment)
 	EndIf;

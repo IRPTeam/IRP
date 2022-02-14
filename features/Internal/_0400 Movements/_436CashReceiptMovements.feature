@@ -153,6 +153,10 @@ Scenario: _043600 preparation (Cash receipt)
 			| "Documents.CashTransferOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Load PR
+		When Create document PurchaseReturn objects (advance)
+		And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Cash receipt (cash planning)
 		When Create document CashReceipt objects (cash planning)
 		And I execute 1C:Enterprise script at server
@@ -162,6 +166,10 @@ Scenario: _043600 preparation (Cash receipt)
 	When Create document CashReceipt objects (return from vendor)
 	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.CashReceipt.FindByNumber(517).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document CashReceipt objects (with partner term by document, without basis)
+	And I execute 1C:Enterprise script at server
+		| "Documents.CashReceipt.FindByNumber(518).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I close all client application windows
 		
 
@@ -448,6 +456,51 @@ Scenario: _043623 check absence Cash receipt movements by the Register "R5010 Re
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document does not contain values
 			| 'R5010 Reconciliation statement'   | 
+	And I close all client application windows
+
+Scenario: _043624 check Cash receipt movements by the Register "R1021 Vendors transactions" (Return from vendor, with basis)
+	And I close all client application windows
+	* Select Cash receipt (Currency exchange)
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '517' |
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 517 dated 08.02.2022 13:18:32' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''              | ''        | ''                   | ''                                             | ''      | ''                     | ''                         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''              | ''        | ''                   | ''                                             | ''      | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"'     | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''              | ''        | ''                   | ''                                             | ''      | ''                     | ''                         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''              | ''        | ''                   | ''                                             | ''      | 'Attributes'           | ''                         |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'          | 'Basis'                                        | 'Order' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                           | 'Expense'     | '08.02.2022 13:18:32' | '-50'       | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |
+			| ''                                           | 'Expense'     | '08.02.2022 13:18:32' | '-50'       | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |
+			| ''                                           | 'Expense'     | '08.02.2022 13:18:32' | '-50'       | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |
+			| ''                                           | 'Expense'     | '08.02.2022 13:18:32' | '-8,56'     | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Company Maxim' | 'Maxim'   | 'Partner term Maxim' | 'Purchase return 21 dated 28.04.2021 21:50:02' | ''      | 'No'                   | ''                         |			
+	And I close all client application windows
+
+Scenario: _043625 check Cash receipt movements by the Register "R2020 Advances from customer" (with partner term by document, without basis)
+	And I close all client application windows
+	* Select Cash receipt (Currency exchange)
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '518' |
+	* Check movements by the Register  "R2020 Advances from customer" 
+		And I click "Registrations report" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 518 dated 08.02.2022 13:39:52' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                           |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"'   | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                           |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                  | ''          | ''      | 'Attributes'           | ''                           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:39:52' | '8,56'      | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                           |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:39:52' | '50'        | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                           |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:39:52' | '50'        | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                           |		
 	And I close all client application windows
 
 Scenario: _043630 Cash receipt clear posting/mark for deletion

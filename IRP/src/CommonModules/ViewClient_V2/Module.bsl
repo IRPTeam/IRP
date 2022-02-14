@@ -204,6 +204,12 @@ Procedure OnChainComplete(Parameters) Export
 		Return;
 	EndIf;
 	 
+	// временно для CashExpenseRevenue отдельно
+	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
+		__tmp_CashExpenseRevenue_OnChainComplete(Parameters);
+		Return;
+	EndIf;
 	
 	// изменение склада (реквизит шапки) в шапке документа
 	If Parameters.EventCaller = "StoreOnUserChange" Then
@@ -357,6 +363,38 @@ Procedure __tmp_SalesInvoice_OnChainComplete(Parameters)
 	EndIf;
 EndProcedure
 
+// временная для CashExpenseRevenueReceipt
+Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
+	ArrayOfEventCallers = New Array();
+	ArrayOfEventCallers.Add("AccountOnUserChange");
+	
+	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
+		__tmp_CashExpenseRevenue_CommitChanges(Parameters);
+		Return;
+	EndIf;
+	
+	// Вопрос про изменение PaymentList.Currency
+	If IsChangedProperty(Parameters, "PaymentList.Currency").IsChanged 
+		And Parameters.Object.PaymentList.Count() Then
+		NotifyParameters = New Structure("Parameters", Parameters);
+		ShowQueryBox(New NotifyDescription("__tmp_CashExpenseRevenue_AccountOnUserChangeContinue", ThisObject, NotifyParameters), 
+					R().QuestionToUser_006, QuestionDialogMode.YesNo);
+	Else
+		__tmp_CashExpenseRevenue_CommitChanges(Parameters);
+	EndIf;
+	
+EndProcedure
+
+Procedure __tmp_CashExpenseRevenue_AccountOnUserChangeContinue(Answer, NotifyParameters) Export
+	If Answer = DialogReturnCode.Yes Then
+		__tmp_CashExpenseRevenue_CommitChanges(NotifyParameters.Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_CashExpenseRevenue_CommitChanges(Parameters)
+	CommitChanges(Parameters);
+EndProcedure
+
 // временная для BankCashPaymentReceipt
 Procedure __tmp_BankCashPaymentReceipt_OnChainComplete(Parameters)
 	
@@ -372,14 +410,14 @@ Procedure __tmp_BankCashPaymentReceipt_OnChainComplete(Parameters)
 	If IsChangedProperty(Parameters, "TransactionType").IsChanged 
 		And Parameters.Object.PaymentList.Count() Then
 		NotifyParameters = New Structure("Parameters", Parameters);
-		ShowQueryBox(New NotifyDescription("TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
+		ShowQueryBox(New NotifyDescription("__tmp_BankCashPaymentReceipt_TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_014, QuestionDialogMode.OKCancel);
 	Else
 		__tmp_BankCashPaymentReceipt_CommitChanges(Parameters);
 	EndIf;
 EndProcedure
 
-Procedure TransactionTypeOnUserChangeContinue(Answer, NotifyParameters) Export
+Procedure __tmp_BankCashPaymentReceipt_TransactionTypeOnUserChangeContinue(Answer, NotifyParameters) Export
 	If Answer = DialogReturnCode.OK Then
 		__tmp_BankCashPaymentReceipt_CommitChanges(NotifyParameters.Parameters);
 	EndIf;
@@ -605,7 +643,6 @@ Procedure OnOpenFormNotify(Parameters) Export
 				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
 			EndIf;
 			
-			DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object, ServerData);
 			SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
@@ -617,14 +654,7 @@ Procedure OnOpenFormNotify(Parameters) Export
 			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "IncomingPaymentOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingPaymentOrder" Then
-		DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
-	EndIf;
+	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 EndProcedure
 
 #EndRegion

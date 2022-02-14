@@ -110,6 +110,7 @@ Function GetChain()
 	Chain.Insert("DefaultStoreInList"        , GetChainLink("DefaultStoreInListExecute"));
 	Chain.Insert("DefaultDeliveryDateInList" , GetChainLink("DefaultDeliveryDateInListExecute"));
 	Chain.Insert("DefaultQuantityInList"     , GetChainLink("DefaultQuantityInListExecute"));
+	Chain.Insert("DefaultCurrencyInList"     , GetChainLink("DefaultCurrencyInListExecute"));
 	
 	// Empty.Header
 	Chain.Insert("EmptyStoreInHeader"     , GetChainLink("EmptyStoreInHeaderExecute"));
@@ -508,6 +509,22 @@ EndFunction
 // если в Account пусто возвращает Currency которая уже указана в документе (параметр CurrentCurrency)
 Function ChangeCurrencyByAccountExecute(Options) Export
 	If Not ValueIsFilled(Options.Account) Then
+		Return Options.CurrentCurrency;
+	EndIf;
+	Currency = ServiceSystemServer.GetObjectAttribute(Options.Account, "Currency");
+	If ValueIsFilled(Currency) Then
+		Return Currency;
+	EndIf;
+	Return Options.CurrentCurrency;
+EndFunction
+
+
+Function DefaultCurrencyInListOptions() Export
+	Return GetChainLinkOptions("CurrentCurrency, Account");
+EndFunction
+
+Function DefaultCurrencyInListExecute(Options) Export
+	If Not ValueIsFilled(Options.Account) Or ValueIsFilled(Options.CurrentCurrency) Then
 		Return Options.CurrentCurrency;
 	EndIf;
 	Currency = ServiceSystemServer.GetObjectAttribute(Options.Account, "Currency");

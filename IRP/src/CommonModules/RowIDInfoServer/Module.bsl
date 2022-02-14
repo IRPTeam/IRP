@@ -78,6 +78,7 @@ Procedure Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode)
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	RowIDInfo.RowID,
+	|	RowIDInfo.Key AS BasisKey,
 	|	RowIDInfo.NextStep AS Step,
 	|	ItemList.Order AS Basis,
 	|	RowIDInfo.RowRef
@@ -97,11 +98,12 @@ Procedure Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode)
 	|	-TM1010B_RowIDMovementsBalance.QuantityBalance AS Quantity,
 	|	*
 	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&BalancePeriod, (RowID, Step, Basis, RowRef) IN
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&BalancePeriod, (RowID, Step, Basis, BasisKey, RowRef) IN
 	|		(SELECT
 	|			RowIDInfo.RowID,
 	|			RowIDInfo.Step,
 	|			RowIDInfo.Basis,
+	|			RowIDInfo.BasisKey,
 	|			RowIDInfo.RowRef
 	|		FROM
 	|			RowIDInfo AS RowIDInfo)) AS TM1010B_RowIDMovementsBalance";
@@ -131,6 +133,7 @@ Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
 	|SELECT
 	|	RowIDInfo.RowID,
 	|	RowIDInfo.NextStep AS Step,
+	|	RowIDInfo.Key AS BasisKey,
 	|	ItemList.Order AS Basis,
 	|	RowIDInfo.RowRef
 	|INTO RowIDInfo
@@ -149,11 +152,12 @@ Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
 	|	-TM1010B_RowIDMovementsBalance.QuantityBalance AS Quantity,
 	|	*
 	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&BalancePeriod, (RowID, Step, Basis, RowRef) IN
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&BalancePeriod, (RowID, Step, Basis, BasisKey, RowRef) IN
 	|		(SELECT
 	|			RowIDInfo.RowID,
 	|			RowIDInfo.Step,
 	|			RowIDInfo.Basis,
+	|			RowIDInfo.BasisKey,
 	|			RowIDInfo.RowRef
 	|		FROM
 	|			RowIDInfo AS RowIDInfo)) AS TM1010B_RowIDMovementsBalance";
@@ -171,6 +175,7 @@ Procedure Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode)
 	|	RowIDInfo.Ref.Date AS Period,
 	|	RowIDInfo.Ref AS Recorder,
 	|	RowIDInfo.RowID,
+	|	RowIDInfo.BasisKey,
 	|	RowIDInfo.CurrentStep AS Step,
 	|	- RowIDInfo.Quantity AS Quantity,
 	|	RowIDInfo.Basis AS Basis,
@@ -184,6 +189,7 @@ Procedure Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode)
 	|	RowIDInfo.Ref.Date,
 	|	RowIDInfo.Ref,
 	|	RowIDInfo.RowID,
+	|	RowIDInfo.BasisKey,
 	|	RowIDInfo.CurrentStep,
 	|	RowIDInfo.Quantity,
 	|	RowIDInfo.Basis,
@@ -213,6 +219,7 @@ Procedure Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
 	|	RowIDInfo.Ref.Date AS Period,
 	|	RowIDInfo.Ref AS Recorder,
 	|	RowIDInfo.RowID,
+	|	RowIDInfo.Key AS BasisKey,
 	|	&NextStep AS Step,
 	|	RowIDInfo.Quantity,
 	|	RowIDInfo.Ref AS Basis,
@@ -225,6 +232,7 @@ Procedure Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
 	|	RowIDInfo.Ref.Date,
 	|	RowIDInfo.Ref,
 	|	RowIDInfo.RowID,
+	|	RowIDInfo.Key,
 	|	RowIDInfo.Quantity,
 	|	RowIDInfo.RowRef";
 	Query.SetParameter("Ref", Source.Ref);
@@ -295,6 +303,7 @@ Function GetRecordsInDocument(Source)
 		|	Table.Ref AS Recorder,
 		|	Table.Ref.Date AS Period, 
 		|	Table.RowID,
+		|	Table.BasisKey,
 		|	Table.CurrentStep,
 		| 	Table.Basis,
 		|	Table.RowRef,
@@ -308,6 +317,7 @@ Function GetRecordsInDocument(Source)
 		|	Table.Ref,
 		|	Table.Ref.Date, 
 		|	Table.RowID,
+		|	Table.BasisKey,
 		|	Table.CurrentStep,
 		| 	Table.Basis,
 		|	Table.RowRef
@@ -317,6 +327,7 @@ Function GetRecordsInDocument(Source)
 		|	Table.Ref AS Recorder,
 		|	Table.Ref.Date AS Period, 
 		|	Table.RowID,
+		|	Table.Key,
 		|	Table.NextStep,
 		| 	Table.Basis,
 		|	Table.RowRef,
@@ -333,6 +344,7 @@ Function GetRecordsInDocument(Source)
 		|	Table.Recorder,
 		|	Table.Period,
 		|	Table.RowID,
+		|	Table.BasisKey,
 		|	Table.CurrentStep AS Step,
 		|	CASE
 		|		WHEN Table.Basis.Ref IS NULL
@@ -347,9 +359,10 @@ Function GetRecordsInDocument(Source)
 		|	END AS Quantity
 		|FROM
 		|	RowIDMovements AS Table
-		|		INNER JOIN AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, (RowID, Step, Basis, RowRef) IN
+		|		INNER JOIN AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, (RowID, BasisKey, Step, Basis, RowRef) IN
 		|			(SELECT
 		|				Table.RowID,
+		|				Table.BasisKey,
 		|				Table.CurrentStep,
 		|				Table.Basis,
 		|				Table.RowRef
@@ -358,6 +371,7 @@ Function GetRecordsInDocument(Source)
 		|			WHERE
 		|				NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef))) AS TM1010B_RowIDMovements
 		|		ON TM1010B_RowIDMovements.RowID = Table.RowID
+		|		AND TM1010B_RowIDMovements.BasisKey = Table.BasisKey
 		|		AND TM1010B_RowIDMovements.Step = Table.CurrentStep
 		|		AND TM1010B_RowIDMovements.Basis = Table.Basis
 		|		AND TM1010B_RowIDMovements.RowRef = Table.RowRef
@@ -371,6 +385,7 @@ Function GetRecordsInDocument(Source)
 		|	Table.Recorder,
 		|	Table.Period,
 		|	Table.RowID,
+		|	Table.Key,
 		|	Table.NextStep AS Step,
 		|	&Ref,
 		|	Table.RowRef,
@@ -3567,8 +3582,9 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 	If IsLinkRows <> Undefined And IsLinkRows Then
 		UniqueColumnNames = UniqueColumnNames + ", Key";
 	EndIf;
+	ColumnNamesSum_ItemList = GetColumnNamesSum_ItemList();
 	ItemListGrouped = Tables.ItemList.Copy();
-	ItemListGrouped.GroupBy(UniqueColumnNames, GetColumnNamesSum_ItemList());
+	ItemListGrouped.GroupBy(UniqueColumnNames, ColumnNamesSum_ItemList);
 	ItemListResult = Tables.ItemList.CopyColumns();
 
 	For Each RowGrouped In ItemListGrouped Do
@@ -3587,7 +3603,9 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 			EndDo;
 			KeyTable.GroupBy("Key");
 			If KeyTable.Count() = 1 Then
-				FillPropertyValues(ItemListResult.Add(), ArrayOfItemListRows[0]);
+				NewRow = ItemListResult.Add();
+				FillPropertyValues(NewRow, ArrayOfItemListRows[0]);
+				FillPropertyValues(NewRow, RowGrouped, ColumnNamesSum_ItemList);
 				Continue;
 			EndIf;
 		EndIf;
@@ -3620,7 +3638,7 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 
 		NewRow = ItemListResult.Add();
 		FillPropertyValues(NewRow, ArrayOfItemListRows[0]);
-		FillPropertyValues(NewRow, RowGrouped, GetColumnNamesSum_ItemList());
+		FillPropertyValues(NewRow, RowGrouped, ColumnNamesSum_ItemList);
 		NewRow.Key = NewKey;
 	EndDo;
 
@@ -4217,6 +4235,7 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SO_ForSI
@@ -4283,6 +4302,7 @@ Procedure ApplyFilterSet_SO_ForPRR(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SO_ForPRR
@@ -4334,6 +4354,7 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SO_ForSC
@@ -4390,6 +4411,7 @@ Procedure ApplyFilterSet_SO_ForPO_ForPI(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SO_ForPO_ForPI
@@ -4455,7 +4477,8 @@ Function GetDataByFilterSet_SO_ForSI()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_SO_ForSI AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 Function GetDataByFilterSet_SO_ForPRR()
@@ -4483,7 +4506,8 @@ Function GetDataByFilterSet_SO_ForPRR()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_SO_ForPRR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 Function GetDataByFilterSet_SO_ForSC()
@@ -4539,7 +4563,8 @@ Function GetDataByFilterSet_SO_ForPO_ForPI()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_SO_ForPO_ForPI AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -4599,6 +4624,7 @@ Procedure ApplyFilterSet_SI_ForSC(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SI_ForSC
@@ -4656,6 +4682,7 @@ Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_SI_ForSR_ForSRO
@@ -4743,7 +4770,8 @@ Function GetDataByFilterSet_SI_ForSC()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_SI_ForSC AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 Function GetDataByFilterSet_SI_ForSR_ForSRO()
@@ -4771,7 +4799,8 @@ Function GetDataByFilterSet_SI_ForSR_ForSRO()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_SI_ForSR_ForSRO AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -4834,6 +4863,7 @@ Procedure ApplyFilterSet_SC_ForSI(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SC_ForSI
@@ -4891,6 +4921,7 @@ Procedure ApplyFilterSet_SC_ForPR(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SC_ForPR
@@ -4967,7 +4998,8 @@ Function GetDataByFilterSet_SC_ForSI()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_SC_ForSI AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 Function GetDataByFilterSet_SC_ForPR()
@@ -4995,7 +5027,8 @@ Function GetDataByFilterSet_SC_ForPR()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_SC_ForPR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -5040,6 +5073,7 @@ Procedure ApplyFilterSet_SRO_ForSR(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SRO_ForSR
@@ -5126,7 +5160,8 @@ Function GetDataByFilterSet_SRO_ForSR()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_SRO_ForSR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -5186,6 +5221,7 @@ Procedure ApplyFilterSet_PO_ForPI(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PO_ForPI
@@ -5253,6 +5289,7 @@ Procedure ApplyFilterSet_PO_ForGR(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PO_ForGR
@@ -5328,7 +5365,8 @@ Function GetDataByFilterSet_PO_ForPI()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_PO_ForPI AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 Function GetDataByFilterSet_PO_ForGR()
@@ -5356,7 +5394,8 @@ Function GetDataByFilterSet_PO_ForGR()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_PO_ForGR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -5421,6 +5460,7 @@ Procedure ApplyFilterSet_GR_ForSI_ForSC(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_GR_ForSI_ForSC
@@ -5458,6 +5498,7 @@ Procedure ApplyFilterSet_GR_ForPI(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_GR_ForPI
@@ -5515,6 +5556,7 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_GR_ForSR
@@ -5591,7 +5633,8 @@ Function GetDataByFilterSet_GR_ForSI_ForSC()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_GR_ForSI_ForSC AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 Function GetDataByFilterSet_GR_ForPI()
@@ -5619,7 +5662,8 @@ Function GetDataByFilterSet_GR_ForPI()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_GR_ForPI AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 Function GetDataByFilterSet_GR_ForSR()
@@ -5647,7 +5691,8 @@ Function GetDataByFilterSet_GR_ForSR()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_GR_ForSR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -5713,6 +5758,7 @@ Procedure ApplyFilterSet_PI_ForGR(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PI_ForGR
@@ -5770,6 +5816,7 @@ Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_PI_ForPR_ForPRO
@@ -5838,6 +5885,7 @@ Procedure ApplyFIlterSet_PI_ForSI_ForSC(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PI_ForSI_ForSC
@@ -5894,7 +5942,8 @@ Function GetDataByFilterSet_PI_ForGR()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_PI_ForGR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 Function GetDataByFilterSet_PI_ForPR_ForPRO()
@@ -5922,7 +5971,8 @@ Function GetDataByFilterSet_PI_ForPR_ForPRO()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_PI_ForPR_ForPRO AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 Function GetDataByFilterSet_PI_ForSI_ForSC()
@@ -5950,7 +6000,8 @@ Function GetDataByFilterSet_PI_ForSI_ForSC()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_PI_ForSI_ForSC AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -5991,6 +6042,7 @@ Procedure ApplyFIlterSet_ITO_ForIT(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_ITO_ForIT
@@ -6061,7 +6113,8 @@ Function GetDataByFilterSet_ITO_ForIT()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_ITO_ForIT AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -6112,6 +6165,7 @@ Procedure ApplyFilterSet_IT_ForSC(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_IT_ForSC
@@ -6158,6 +6212,7 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_IT_ForGR
@@ -6223,7 +6278,8 @@ Function GetDataByFilterSet_IT_ForSC()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_IT_ForSC AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 Function GetDataByFilterSet_IT_ForGR()
@@ -6251,7 +6307,8 @@ Function GetDataByFilterSet_IT_ForGR()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_IT_ForGR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -6280,6 +6337,7 @@ Procedure ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_ISR_ForITO_ForPO_ForPI
@@ -6340,7 +6398,8 @@ Function GetDataByFilterSet_ISR_ForITO_ForPO_ForPI()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_ISR_ForITO_ForPO_ForPI AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -6390,6 +6449,7 @@ Procedure ApplyFilterSet_PR_ForSC(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PR_ForSC
@@ -6466,7 +6526,8 @@ Function GetDataByFilterSet_PR_ForSC()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_PR_ForSC AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -6515,6 +6576,7 @@ Procedure ApplyFilterSet_SR_ForGR(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SR_ForGR
@@ -6591,7 +6653,8 @@ Function GetDataByFilterSet_SR_ForGR()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_SR_ForGR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -6637,6 +6700,7 @@ Procedure ApplyFilterSet_PRO_ForPR(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PRO_ForPR
@@ -6723,7 +6787,8 @@ Function GetDataByFilterSet_PRO_ForPR()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_PRO_ForPR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -6755,6 +6820,7 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_RSR_ForRRR
@@ -6842,7 +6908,8 @@ Function GetDataByFilterSet_RSR_ForRRR()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_RSR_ForRRR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -6931,6 +6998,7 @@ Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
 	|	RowIDMovements.RowID,
 	|	RowIDMovements.Step,
 	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PhysicalInventory_ForSurplus_ForWriteOff
@@ -6981,7 +7049,8 @@ Function GetDataByFilterSet_PhysicalInventory_ForSurplus_ForWriteOff()
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_PhysicalInventory_ForSurplus_ForWriteOff AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
-		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion

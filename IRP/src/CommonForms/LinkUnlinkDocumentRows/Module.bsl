@@ -282,23 +282,32 @@ Function IsCanLink(ItemListRowsData = Undefined, BasisesTreeData = Undefined)
 	Result.Insert("ItemKey" , ItemListRowsData.ItemKey);
 	Result.Insert("Store"   , ItemListRowsData.Store);
 
-	If ValueIsFilled(ItemListRowsData.ItemKey) And ValueIsFilled(ItemListRowsData.Unit) And ValueIsFilled(
-		ItemListRowsData.Quantity) Then
-		ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(ItemListRowsData.ItemKey,
-			ItemListRowsData.Unit, ItemListRowsData.Quantity);
-
-		Result.Insert("QuantityInBaseUnit", ConvertationResult.QuantityInBaseUnit);
-		Result.Insert("BasisUnit", ConvertationResult.BasisUnit);
-	Else
+	If TypeOf(BasisesTreeData.Basis) = Type("DocumentRef.ShipmentConfirmation") 
+		Or TypeOf(BasisesTreeData.Basis) = Type("DocumentRef.GoodsReceipt") Then
 		Result.Insert("QuantityInBaseUnit", BasisesTreeData.QuantityInBaseUnit);
 		Result.Insert("BasisUnit", BasisesTreeData.BasisUnit);
-	EndIf;
-
-	If ValueIsFilled(ItemListRowsData.Unit) Then
-		Result.Insert("Unit", ItemListRowsData.Unit);
-	Else
 		Result.Insert("Unit", BasisesTreeData.Unit);
+	Else
+		If ValueIsFilled(ItemListRowsData.ItemKey) 
+			And ValueIsFilled(ItemListRowsData.Unit) 
+			And ValueIsFilled(ItemListRowsData.Quantity) Then
+		
+			ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(ItemListRowsData.ItemKey,
+				ItemListRowsData.Unit, ItemListRowsData.Quantity);
+
+			Result.Insert("QuantityInBaseUnit", ConvertationResult.QuantityInBaseUnit);
+			Result.Insert("BasisUnit", ConvertationResult.BasisUnit);
+		Else
+			Result.Insert("QuantityInBaseUnit", BasisesTreeData.QuantityInBaseUnit);
+			Result.Insert("BasisUnit", BasisesTreeData.BasisUnit);
+		EndIf;
+		If ValueIsFilled(ItemListRowsData.Unit) Then
+			Result.Insert("Unit", ItemListRowsData.Unit);
+		Else
+			Result.Insert("Unit", BasisesTreeData.Unit);
+		EndIf;
 	EndIf;
+	
 
 	Result.Insert("RowRef"      , BasisesTreeData.RowRef);
 	Result.Insert("CurrentStep" , BasisesTreeData.CurrentStep);

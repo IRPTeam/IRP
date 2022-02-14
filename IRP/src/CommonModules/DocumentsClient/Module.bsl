@@ -3366,6 +3366,7 @@ Procedure TradeDocumentsTreeQuantityOnChange(Object, Form, TableName, TreeName, 
 	RowParent.Quantity = TotalQuantity;
 	Filter = New Structure();
 	Filter.Insert("Key", CurrentRow.Key);
+	Filter.Insert("BasisKey", CurrentRow.BasisKey);
 	Filter.Insert(TrimAll(DocumentColumnName), CurrentRow[DocumentColumnName]);
 	ArrayOfRows = Object[TableName].FindRows(Filter);
 	For Each Row In ArrayOfRows Do

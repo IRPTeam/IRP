@@ -282,32 +282,33 @@ Function IsCanLink(ItemListRowsData = Undefined, BasisesTreeData = Undefined)
 	Result.Insert("ItemKey" , ItemListRowsData.ItemKey);
 	Result.Insert("Store"   , ItemListRowsData.Store);
 
-	If TypeOf(BasisesTreeData.Basis) = Type("DocumentRef.ShipmentConfirmation") 
-		Or TypeOf(BasisesTreeData.Basis) = Type("DocumentRef.GoodsReceipt") Then
-		Result.Insert("QuantityInBaseUnit", BasisesTreeData.QuantityInBaseUnit);
-		Result.Insert("BasisUnit", BasisesTreeData.BasisUnit);
-		Result.Insert("Unit", BasisesTreeData.Unit);
+	QuantityInBaseUnit = 0;
+	If ValueIsFilled(ItemListRowsData.ItemKey) 
+		And ValueIsFilled(ItemListRowsData.Unit) 
+		And ValueIsFilled(ItemListRowsData.Quantity) Then
+		ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(ItemListRowsData.ItemKey,
+			ItemListRowsData.Unit, ItemListRowsData.Quantity);
+			
+		QuantityInBaseUnit = ConvertationResult.QuantityInBaseUnit;
+		Result.Insert("BasisUnit", ConvertationResult.BasisUnit);
 	Else
-		If ValueIsFilled(ItemListRowsData.ItemKey) 
-			And ValueIsFilled(ItemListRowsData.Unit) 
-			And ValueIsFilled(ItemListRowsData.Quantity) Then
-		
-			ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(ItemListRowsData.ItemKey,
-				ItemListRowsData.Unit, ItemListRowsData.Quantity);
-
-			Result.Insert("QuantityInBaseUnit", ConvertationResult.QuantityInBaseUnit);
-			Result.Insert("BasisUnit", ConvertationResult.BasisUnit);
-		Else
-			Result.Insert("QuantityInBaseUnit", BasisesTreeData.QuantityInBaseUnit);
-			Result.Insert("BasisUnit", BasisesTreeData.BasisUnit);
-		EndIf;
-		If ValueIsFilled(ItemListRowsData.Unit) Then
-			Result.Insert("Unit", ItemListRowsData.Unit);
-		Else
-			Result.Insert("Unit", BasisesTreeData.Unit);
-		EndIf;
+		QuantityInBaseUnit = BasisesTreeData.QuantityInBaseUnit;
+		Result.Insert("BasisUnit", BasisesTreeData.BasisUnit);
+	EndIf;
+	If ValueIsFilled(ItemListRowsData.Unit) Then
+		Result.Insert("Unit", ItemListRowsData.Unit);
+	Else
+		Result.Insert("Unit", BasisesTreeData.BasisUnit);
 	EndIf;
 	
+	If TypeOf(BasisesTreeData.Basis) = Type("DocumentRef.ShipmentConfirmation") 
+		Or TypeOf(BasisesTreeData.Basis) = Type("DocumentRef.GoodsReceipt") Then
+		Result.Insert("QuantityInBaseUnit", Min(BasisesTreeData.QuantityInBaseUnit, QuantityInBaseUnit));
+		Result.Insert("BasisUnit", BasisesTreeData.BasisUnit);
+		Result.Insert("Unit", BasisesTreeData.BasisUnit);
+	Else
+		Result.Insert("QuantityInBaseUnit", QuantityInBaseUnit);
+	EndIf;
 
 	Result.Insert("RowRef"      , BasisesTreeData.RowRef);
 	Result.Insert("CurrentStep" , BasisesTreeData.CurrentStep);

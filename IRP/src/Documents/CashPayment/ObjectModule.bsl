@@ -42,7 +42,8 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		If FillingData.BasedOn = "CashTransferOrder" 
 			Or FillingData.BasedOn = "OutgoingPaymentOrder"
 			Or FillingData.BasedOn = "PurchaseInvoice" 
-			Or FillingData.BasedOn = "PurchaseOrder" Then
+			Or FillingData.BasedOn = "PurchaseOrder"
+			Or FillingData.BasedOn = "SalesReturn" Then
 			Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;

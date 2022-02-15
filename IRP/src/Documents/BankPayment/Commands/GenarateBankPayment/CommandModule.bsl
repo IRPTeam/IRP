@@ -57,6 +57,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_OutgoingPaymentOrder = New Array();
 	ArrayOf_PurchaseInvoice = New Array();
 	ArrayOf_PurchaseOrder = New Array();
+	ArrayOf_SalesReturn = New Array();
 	
 	For Each Row In ArrayOfBasisDocuments Do
 
@@ -68,6 +69,8 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 			ArrayOf_PurchaseInvoice.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.PurchaseOrder") Then
 			ArrayOf_PurchaseOrder.Add(Row);
+		ElsIf TypeOf(Row) = Type("DocumentRef.SalesReturn") Then
+			ArrayOf_SalesReturn.Add(Row);
 		Else
 			Raise R().Error_043;
 		EndIf;
@@ -79,6 +82,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_OutgoingPaymentOrder(ArrayOf_OutgoingPaymentOrder));
 	ArrayOfTables.Add(GetDocumentTable_PurchaseInvoice(ArrayOf_PurchaseInvoice));
 	ArrayOfTables.Add(GetDocumentTable_PurchaseOrder(ArrayOf_PurchaseOrder));
+	ArrayOfTables.Add(GetDocumentTable_SalesReturn(ArrayOf_SalesReturn));
 	
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
@@ -209,4 +213,9 @@ EndFunction
 &AtServer
 Function GetDocumentTable_PurchaseOrder(ArrayOfBasisDocuments)
 	Return DocumentsGenerationServer.GetDocumentTable_PurchaseOrder_ForPayment(ArrayOfBasisDocuments);
+EndFunction
+
+&AtServer
+Function GetDocumentTable_SalesReturn(ArrayOfBasisDocuments)
+	Return DocumentsGenerationServer.GetDocumentTable_SalesReturn_ForPayment(ArrayOfBasisDocuments);
 EndFunction

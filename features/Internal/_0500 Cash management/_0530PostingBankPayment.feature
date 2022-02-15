@@ -79,6 +79,9 @@ Scenario: _053000 preparation (Bank payment)
 				| "Number" |
 				| "$$NumberPurchaseInvoice29604$$" |
 			When create a purchase invoice for the purchase of sets and dimensional grids at the tore 02
+	When Create document SalesReturn objects (advance, customers)
+	And I execute 1C:Enterprise script at server
+ 			| "Documents.SalesReturn.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
 Scenario: _053001 create Bank payment based on Purchase invoice
@@ -382,6 +385,34 @@ Scenario: _053008 check partner filter in tabular part in document Bank payment
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	When check the partner filter in the tabular part of the payment documents.
 	
+Scenario: _053009 create Bank payment based on Sales return
+	And I close all client application windows
+	* Select SR
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Date'                | 'Number' |
+			| '27.01.2021 19:50:46' | '12'     |
+		And I select current line in "List" table
+		And I click "Bank payment" button
+	* Check creation
+		Then the form attribute named "DecorationGroupTitleCollapsedPicture" became equal to "Decoration group title collapsed picture"
+		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return to customer   "
+		Then the form attribute named "DecorationGroupTitleUncollapsedPicture" became equal to "DecorationGroupTitleUncollapsedPicture"
+		Then the form attribute named "DecorationGroupTitleUncollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return to customer   "
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to ""
+		Then the form attribute named "TransactionType" became equal to "Return to customer"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Payee'             | 'Partner term'             | 'Legal name contract' | 'Basis document'                            | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | ''                    | 'Sales return 12 dated 27.01.2021 19:50:46' | '500,00'       | ''                        | ''                           |
+		
+		Then the form attribute named "Branch" became equal to "Distribution department"
+		And the editing text of form attribute named "DocumentAmount" became equal to "500,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	And I close all client application windows
+
+
 
 # EndFilters
 

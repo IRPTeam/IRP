@@ -71,6 +71,11 @@ Scenario: _024000 preparation (Sales invoice)
 		| "Documents.ShipmentConfirmation.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
 		| "Documents.ShipmentConfirmation.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);" |
 		| "Documents.ShipmentConfirmation.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);" |
+	When create SO, SC with two same items
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);" |	
+		| "Documents.ShipmentConfirmation.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);" |
+
 	
 
 
@@ -665,7 +670,153 @@ Scenario: _024027 cancel line in the SO and create SI
 			| 'Dress (XS/Blue)'  | '10,000'   | 'pcs'  |
 		And I close all client application windows
 		
-	
+Scenario: _024028 create SI based on SC with two same items (creation based on)
+	* Select SC
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 111'      |
+		And I click the button named "FormDocumentSalesInvoiceGenerate"	
+	* Create SI
+		And "BasisesTree" table became equal
+			| 'Row presentation'                                      | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 1 111 dated 15.02.2022 11:03:38'           | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Dress (XS/Blue)'                                       | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (M/White)'                                       | 'Yes' | '5,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                       | 'Yes' | '9,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (M/White)'                                       | 'Yes' | '5,000'    | 'pcs'  | '520,00' | 'TRY'      |
+		And I click "Ok" button
+	* Check
+		And "ItemList" table contains lines
+			| '#' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 | 'Revenue type' |
+			| '1' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'Distribution department' | 'No'                 | '1 507,12'   | ''                   | '19,000' | 'pcs'  | '520,00' | '18%' | ''              | '8 372,88'   | '9 880,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
+			| '2' | 'Basic Price Types' | 'Dress' | 'M/White'  | 'Distribution department' | 'No'                 | '793,22'     | ''                   | '10,000' | 'pcs'  | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
+		And I close all client application windows
+		
+Scenario: _024029 create SI based on SC with two same items (link items)
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in customer information
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+				| 'Description' |
+				| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+				| 'Description'              |
+				| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+				| Description |
+				| Store 02    |
+		And I select current line in "List" table
+	* Select items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "19,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		Then "Sales invoice (create) *" window is opened
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then "Link / unlink document row" window is opened
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '520,00' | '9,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"	
+		And I click "Ok" button				
+	* Check
+		And "ItemList" table contains lines
+			| 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 | 'Revenue type' |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'Distribution department' | 'No'                 | '1 507,12'   | ''                   | '19,000' | 'pcs'  | '520,00' | '18%' | ''              | '8 372,88'   | '9 880,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
+		Then "Sales invoice (create) *" window is opened
+		And I click "Show row key" button
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table became equal
+			| 'Key' | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '10,000' | '6c91e0f0-6936-4c02-8827-a74810daf826' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
+			| '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '9,000'  | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
+		And I close all client application windows
+
+Scenario: _024029 create SI based on SC with two same items (link items)
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in customer information
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+				| 'Description' |
+				| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+				| 'Description'              |
+				| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+				| Description |
+				| Store 02    |
+		And I select current line in "List" table
+	* Select items
+		And in the table "ItemList" I click "Add basis documents" button
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                                      | 'Use' |
+			| 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | 'No'  |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '9,000'    | 'Dress (XS/Blue)'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '5,000'    | 'Dress (M/White)'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+	* Check
+		And "ItemList" table became equal
+			| 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 | 'Revenue type' |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'Distribution department' | 'No'                 | '1 507,12'   | ''                   | '19,000' | 'pcs'  | '520,00' | '18%' | ''              | '8 372,88'   | '9 880,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
+			| 'Basic Price Types' | 'Dress' | 'M/White'  | 'Distribution department' | 'No'                 | '396,61'     | ''                   | '5,000'  | 'pcs'  | '520,00' | '18%' | ''              | '2 203,39'   | '2 600,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
+		And I click "Show row key" button
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table became equal
+			| '#' | 'Key' | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '10,000' | '6c91e0f0-6936-4c02-8827-a74810daf826' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
+			| '2' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '9,000'  | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
+			| '3' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '2d14e136-93bc-4968-b1a9-89e56be271cf' | ''          | '5,000'  | 'c2843939-e765-4207-81cf-1143a5137357' | 'SI'           | '2d14e136-93bc-4968-b1a9-89e56be271cf' |	
+		And I close all client application windows
+		
+					
+
 Scenario: _300505 check connection to Sales invoice report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Form report Related documents

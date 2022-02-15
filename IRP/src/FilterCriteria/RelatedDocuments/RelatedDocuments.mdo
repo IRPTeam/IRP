@@ -83,6 +83,15 @@
   <content>Document.AdditionalRevenueAllocation.TabularSection.AllocationList.Attribute.Document</content>
   <content>Document.AdditionalRevenueAllocation.TabularSection.RevenueDocuments.Attribute.Document</content>
   <content>Document.AdditionalRevenueAllocation.TabularSection.AllocationDocuments.Attribute.Document</content>
+  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.Order</content>
+  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.Order</content>
+  <content>Document.CashPayment.TabularSection.PaymentList.Attribute.Order</content>
+  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.Order</content>
+  <content>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.PhysicalInventory</content>
+  <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.PhysicalInventory</content>
+  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SalesOrder</content>
+  <content>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.Basis</content>
+  <content>Document.IncomingPaymentOrder.TabularSection.PaymentList.Attribute.Basis</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>

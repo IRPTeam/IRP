@@ -282,22 +282,32 @@ Function IsCanLink(ItemListRowsData = Undefined, BasisesTreeData = Undefined)
 	Result.Insert("ItemKey" , ItemListRowsData.ItemKey);
 	Result.Insert("Store"   , ItemListRowsData.Store);
 
-	If ValueIsFilled(ItemListRowsData.ItemKey) And ValueIsFilled(ItemListRowsData.Unit) And ValueIsFilled(
-		ItemListRowsData.Quantity) Then
+	QuantityInBaseUnit = 0;
+	If ValueIsFilled(ItemListRowsData.ItemKey) 
+		And ValueIsFilled(ItemListRowsData.Unit) 
+		And ValueIsFilled(ItemListRowsData.Quantity) Then
 		ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(ItemListRowsData.ItemKey,
 			ItemListRowsData.Unit, ItemListRowsData.Quantity);
-
-		Result.Insert("QuantityInBaseUnit", ConvertationResult.QuantityInBaseUnit);
+			
+		QuantityInBaseUnit = ConvertationResult.QuantityInBaseUnit;
 		Result.Insert("BasisUnit", ConvertationResult.BasisUnit);
 	Else
-		Result.Insert("QuantityInBaseUnit", BasisesTreeData.QuantityInBaseUnit);
+		QuantityInBaseUnit = BasisesTreeData.QuantityInBaseUnit;
 		Result.Insert("BasisUnit", BasisesTreeData.BasisUnit);
 	EndIf;
-
 	If ValueIsFilled(ItemListRowsData.Unit) Then
 		Result.Insert("Unit", ItemListRowsData.Unit);
 	Else
-		Result.Insert("Unit", BasisesTreeData.Unit);
+		Result.Insert("Unit", BasisesTreeData.BasisUnit);
+	EndIf;
+	
+	If TypeOf(BasisesTreeData.Basis) = Type("DocumentRef.ShipmentConfirmation") 
+		Or TypeOf(BasisesTreeData.Basis) = Type("DocumentRef.GoodsReceipt") Then
+		Result.Insert("QuantityInBaseUnit", Min(BasisesTreeData.QuantityInBaseUnit, QuantityInBaseUnit));
+		Result.Insert("BasisUnit", BasisesTreeData.BasisUnit);
+		Result.Insert("Unit", BasisesTreeData.BasisUnit);
+	Else
+		Result.Insert("QuantityInBaseUnit", QuantityInBaseUnit);
 	EndIf;
 
 	Result.Insert("RowRef"      , BasisesTreeData.RowRef);
@@ -436,10 +446,6 @@ Function CreateBasisesTable(SelectedRowInfo)
 
 	If ValueIsFilled(ThisObject.LinkedRowID) Then
 		For Each Row In BasisesTable Do
-			If Row.RowID <> ThisObject.LinkedRowID Then
-				ArrayForDelete.Add(Row);
-				Continue;
-			EndIf;
 			If ThisObject.ShipingReceipt Then
 				If Not (TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation") 
 					Or TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then

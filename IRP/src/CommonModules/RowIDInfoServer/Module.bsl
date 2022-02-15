@@ -7558,7 +7558,11 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 			TablesFilters.Add(New Structure("Ref, Key", RowItemList.Ref, RowItemList.Key));
 			FillingValues.ItemList.Add(ValueTableRowToStructure(Tables.ItemList.Columns, RowItemList));
 		EndDo;
-
+		
+		tmpTable_ShipmentConfirmations = GetEmptyTable_ShipmentConfirmations();
+		tmpTable_GoodsReceipts = GetEmptyTable_GoodsReceipts();
+		tmpTable_RowIDInfo = GetEmptyTable_RowIDInfo();
+		
 		For Each TableFilter In TablesFilters Do
 			For Each TableName_Refreshable In TableNames_Refreshable Do
 				If Not CommonFunctionsClientServer.ObjectHasProperty(Tables, TableName_Refreshable) Then
@@ -7572,11 +7576,34 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 				EndIf;
 
 				For Each Row_DepTable In DepTable Do
-					FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
+					If Upper(TableName_Refreshable) = Upper("ShipmentConfirmations") Then
+						FillPropertyValues(tmpTable_ShipmentConfirmations.Add(), Row_DepTable);
+					ElsIf Upper(TableName_Refreshable) = Upper("GoodsReceipts") Then
+						FillPropertyValues(tmpTable_GoodsReceipts.Add(), Row_DepTable);
+					ElsIf Upper(TableName_Refreshable) = Upper("RowIDInfo") Then
+						FillPropertyValues(tmpTable_RowIDInfo.Add(), Row_DepTable);
+					Else
+						FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
+					EndIf;
 				EndDo;
 			EndDo;
 		EndDo;
-
+			
+		tmpTable_ShipmentConfirmations.GroupBy((GetColumnNames_ShipmentConfirmations() + ", " + GetColumnNamesSum_ShipmentConfirmations()));
+		For Each Row_DepTable In tmpTable_ShipmentConfirmations Do
+			FillingValues.ShipmentConfirmations.Add(ValueTableRowToStructure(Tables.ShipmentConfirmations.Columns, Row_DepTable));
+		EndDo;
+	
+		tmpTable_GoodsReceipts.GroupBy((GetColumnNames_GoodsReceipts() + ", " + GetColumnNamesSum_GoodsReceipts()));
+		For Each Row_DepTable In tmpTable_GoodsReceipts Do
+			FillingValues.GoodsReceipts.Add(ValueTableRowToStructure(Tables.GoodsReceipts.Columns, Row_DepTable));
+		EndDo;
+	
+		tmpTable_RowIDInfo.GroupBy((GetColumnNames_RowIDInfo() + ", " + GetColumnNamesSum_RowIDInfo()));
+		For Each Row_DepTable In tmpTable_RowIDInfo Do
+			FillingValues.RowIDInfo.Add(ValueTableRowToStructure(Tables.RowIDInfo.Columns, Row_DepTable));
+		EndDo;
+		
 		For Each TableName_Refreshable In TableNames_Refreshable Do
 			If Not CommonFunctionsClientServer.ObjectHasProperty(Tables, TableName_Refreshable) Then
 				Continue;

@@ -446,10 +446,6 @@ Function CreateBasisesTable(SelectedRowInfo)
 
 	If ValueIsFilled(ThisObject.LinkedRowID) Then
 		For Each Row In BasisesTable Do
-			If Row.RowID <> ThisObject.LinkedRowID Then
-				ArrayForDelete.Add(Row);
-				Continue;
-			EndIf;
 			If ThisObject.ShipingReceipt Then
 				If Not (TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation") 
 					Or TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then

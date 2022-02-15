@@ -715,6 +715,12 @@ Scenario: _024029 create SI based on SC with two same items (link items)
 				| Description |
 				| Store 02    |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table		
 	* Select items
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -733,9 +739,6 @@ Scenario: _024029 create SI based on SC with two same items (link items)
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
-		Then "Sales invoice (create) *" window is opened
-		And in the table "ItemList" I click "Link unlink basis documents" button
-		Then "Link / unlink document row" window is opened
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
@@ -749,7 +752,6 @@ Scenario: _024029 create SI based on SC with two same items (link items)
 		And "ItemList" table contains lines
 			| 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 | 'Revenue type' |
 			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'Distribution department' | 'No'                 | '1 507,12'   | ''                   | '19,000' | 'pcs'  | '520,00' | '18%' | ''              | '8 372,88'   | '9 880,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
-		Then "Sales invoice (create) *" window is opened
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
@@ -758,7 +760,8 @@ Scenario: _024029 create SI based on SC with two same items (link items)
 			| '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '9,000'  | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
 		And I close all client application windows
 
-Scenario: _024029 create SI based on SC with two same items (link items)
+Scenario: _024030 create SI based on SC with two same items (add linked document rows)
+	And I close all client application windows
 	* Create SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -777,6 +780,12 @@ Scenario: _024029 create SI based on SC with two same items (link items)
 		And I go to line in "List" table
 				| Description |
 				| Store 02    |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
 		And I select current line in "List" table
 	* Select items
 		And in the table "ItemList" I click "Add basis documents" button

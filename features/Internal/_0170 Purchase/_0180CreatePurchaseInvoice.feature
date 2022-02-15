@@ -67,8 +67,11 @@ Scenario: _018000 preparation
 		When Create document InternalSupplyRequest objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
-
-
+		When create PO, GR with two same items
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
 Scenario: _018001 create document Purchase Invoice based on order (partial quantity, PO-PI)
@@ -732,6 +735,166 @@ Scenario: _018015 cancel line in the PO and create PI
 			| 'Service (Interner)' | '2,000'    | 'pcs'  |
 		And I close all client application windows
 
+Scenario: _018016 create PI based on GR with two same items (creation based on)
+	* Select GR
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 111'      |
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"	
+	* Create PI
+		And "BasisesTree" table became equal
+			| 'Row presentation'                               | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Purchase order 1 111 dated 15.02.2022 12:31:27' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Goods receipt 1 111 dated 15.02.2022 14:34:54'  | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Dress (XS/Blue)'                                | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (M/White)'                                | 'Yes' | '5,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                | 'Yes' | '9,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (M/White)'                                | 'Yes' | '5,000'    | 'pcs'  | '520,00' | 'TRY'      |
+		And I click "Ok" button
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Q'      | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Is additional item cost' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'en description is empty' | 'Dress' | 'XS/Blue'  | ''                   | 'No'                 | '1 507,12'   | 'pcs'  | '19,000' | ''                   | '520,00' | '18%' | ''              | '9 880,00'     | ''                    | ''                        | 'Store 02' | ''              | 'No'                      | ''             | 'Purchase order 1 111 dated 15.02.2022 12:31:27' | ''       | ''            | '8 372,88'   | 'Yes'               |
+			| '2' | 'en description is empty' | 'Dress' | 'M/White'  | ''                   | 'No'                 | '793,22'     | 'pcs'  | '10,000' | ''                   | '520,00' | '18%' | ''              | '5 200,00'     | ''                    | ''                        | 'Store 02' | ''              | 'No'                      | ''             | 'Purchase order 1 111 dated 15.02.2022 12:31:27' | ''       | ''            | '4 406,78'   | 'Yes'               |
+		And I close all client application windows
+		
+Scenario: _018017 create PI based on GR with two same items (link items)
+	* Create PI
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling in vendor information
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+				| 'Description' |
+				| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+				| 'Description'              |
+				| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+				| Description |
+				| Store 02    |
+		And I select current line in "List" table
+	* Select items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "19,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		Then "Link / unlink document row" window is opened
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '520,00' | '9,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I click "Ok" button	
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Q'      | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Is additional item cost' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'en description is empty' | 'Dress' | 'XS/Blue'  | ''                   | 'No'                 | '1 507,12'   | 'pcs'  | '19,000' | ''                   | '520,00' | '18%' | ''              | '9 880,00'     | ''                    | ''                        | 'Store 02' | ''              | 'No'                      | ''             | 'Purchase order 1 111 dated 15.02.2022 12:31:27' | ''       | ''            | '8 372,88'   | 'Yes'               |
+		And I click "Show row key" button
+		And I move to "Row ID Info" tab	
+		And "RowIDInfo" table became equal
+			| 'Key' | 'Basis'                                         | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '10,000' | '17c1c453-6971-467e-96a5-baadd8496c38' | 'PI'           | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '9,000'  | '5848e9dc-c303-4dfe-afef-4b2853214cac' | 'PI'           | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
+		And I close all client application windows
+		
+		
+Scenario: _018018 create PI based on GR with two same items (add linked document rows)
+	* Create PI
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling in vendor information
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+				| 'Description' |
+				| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+				| 'Description'              |
+				| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+				| Description |
+				| Store 02    |
+		And I select current line in "List" table
+	* Add linked document rows	
+		And in the table "ItemList" I click "Add basis documents" button
+		And I expand current line in "BasisesTree" table
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                           | 'Use' |
+			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | 'No'  |
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                               | 'Use' |
+			| 'Purchase order 1 111 dated 15.02.2022 12:31:27' | 'No'  |
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                              | 'Use' |
+			| 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | 'No'  |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '5,000'    | 'Dress (M/White)'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '9,000'    | 'Dress (XS/Blue)'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '5,000'    | 'Dress (M/White)'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+	* Check
+		And "ItemList" table became equal
+			| 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Q'      | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Is additional item cost' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| 'en description is empty' | 'Dress' | 'XS/Blue'  | ''                   | 'No'                 | '1 507,12'   | 'pcs'  | '19,000' | ''                   | '520,00' | '18%' | ''              | '9 880,00'     | ''                    | ''                        | 'Store 02' | ''              | 'No'                      | ''             | 'Purchase order 1 111 dated 15.02.2022 12:31:27' | ''       | ''            | '8 372,88'   | 'Yes'               |
+			| 'en description is empty' | 'Dress' | 'M/White'  | ''                   | 'No'                 | '793,22'     | 'pcs'  | '10,000' | ''                   | '520,00' | '18%' | ''              | '5 200,00'     | ''                    | ''                        | 'Store 02' | ''              | 'No'                      | ''             | 'Purchase order 1 111 dated 15.02.2022 12:31:27' | ''       | ''            | '4 406,78'   | 'Yes'               |	
+		And I click "Show row key" button
+		And I move to "Row ID Info" tab	
+		And "RowIDInfo" table became equal
+			| 'Key' | 'Basis'                                         | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '10,000' | '17c1c453-6971-467e-96a5-baadd8496c38' | 'PI'           | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '9,000'  | '5848e9dc-c303-4dfe-afef-4b2853214cac' | 'PI'           | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | 'f5b7bbaf-7525-4d01-a472-687190c70d35' | ''          | '5,000'  | '6ff368ba-803b-4c49-a03a-9d0f4a05e5bf' | 'PI'           | 'f5b7bbaf-7525-4d01-a472-687190c70d35' |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | 'f5b7bbaf-7525-4d01-a472-687190c70d35' | ''          | '5,000'  | '5dff43f5-e537-4fae-a925-7fd7a77a4aae' | 'PI'           | 'f5b7bbaf-7525-4d01-a472-687190c70d35' |
+		And I close all client application windows
+		
+									
+				
+		
+				
 
 
 

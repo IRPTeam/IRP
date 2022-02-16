@@ -76,8 +76,6 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document GoodsReceipt objects (use serial lot number)	
-		And I execute 1C:Enterprise script at server
-			| "Documents.GoodsReceipt.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document ShipmentConfirmation objects (use serial lot number)
 		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -3162,7 +3160,6 @@ Scenario: _092050 check filling in serial lot number in the GR from Purchase inv
 		And I go to line in "List" table
 			| 'Number'     |
 			| '29' |
-		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormDocumentGoodsReceiptGenerate"
 		And I click "OK" button
 	* Check filling in serial lot number from Purchase invoice
@@ -3217,13 +3214,14 @@ Scenario: _092052 check filling in serial lot number in the SI from SC
 		And I close all client application windows
 
 Scenario: _092053 check filling in serial lot number in the PI from GR
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Create PI based on GR
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number'     |
 			| '1 029' |
-		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		And I click "OK" button
 	* Check filling in serial lot number from GR

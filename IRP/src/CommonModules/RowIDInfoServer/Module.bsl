@@ -2100,7 +2100,19 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
 	|		ON BasisesTable.Basis = ItemList.Ref
-	|		AND BasisesTable.BasisKey = ItemList.Key";
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|FROM
+	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2108,7 +2120,8 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableRowIDInfo             = QueryResults[1].Unload();
 	TableItemList              = QueryResults[2].Unload();
 	TableShipmentConfirmations = QueryResults[3].Unload();
-
+	TableSerialLotNumbers      = QueryResults[4].Unload();
+	
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit,
 			RowItemList.QuantityInBaseUnit);
@@ -2118,7 +2131,8 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
-
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	
 	AddTables(Tables);
 
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
@@ -2160,7 +2174,19 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 							  |	BasisesTable AS BasisesTable
 							  |		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
 							  |		ON BasisesTable.Basis = ItemList.Ref
-							  |		AND BasisesTable.BasisKey = ItemList.Key";
+							  |		AND BasisesTable.BasisKey = ItemList.Key
+							  |;
+							  |////////////////////////////////////////////////////////////////////////////////
+							  |SELECT DISTINCT
+							  |	UNDEFINED AS Ref,
+							  |	BasisesTable.Key,
+							  |	SerialLotNumbers.SerialLotNumber,
+							  |	SerialLotNumbers.Quantity
+							  |FROM
+							  |	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+							  |		INNER JOIN BasisesTable AS BasisesTable
+							  |		ON BasisesTable.Basis = SerialLotNumbers.Ref
+							  |		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2170,13 +2196,15 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 
 	TableRowIDInfo             = QueryResults[1].Unload();
 	TableShipmentConfirmations = QueryResults[3].Unload();
-
+	TableSerialLotNumbers      = QueryResults[4].Unload();
+	
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesSO.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("TaxList", TablesSO.TaxList);
 	Tables.Insert("SpecialOffers", TablesSO.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -2219,7 +2247,19 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver, AddInfo = Und
 							  |	BasisesTable AS BasisesTable
 							  |		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
 							  |		ON BasisesTable.Basis = ItemList.Ref
-							  |		AND BasisesTable.BasisKey = ItemList.Key";
+							  |		AND BasisesTable.BasisKey = ItemList.Key
+							  |;
+							  |////////////////////////////////////////////////////////////////////////////////
+							  |SELECT DISTINCT
+							  |	UNDEFINED AS Ref,
+							  |	BasisesTable.Key,
+							  |	SerialLotNumbers.SerialLotNumber,
+							  |	SerialLotNumbers.Quantity
+							  |FROM
+							  |	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+							  |		INNER JOIN BasisesTable AS BasisesTable
+							  |		ON BasisesTable.Basis = SerialLotNumbers.Ref
+							  |		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2229,14 +2269,16 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver, AddInfo = Und
 
 	TableRowIDInfo             = QueryResults[1].Unload();
 	TableShipmentConfirmations = QueryResults[3].Unload();
-
+	TableSerialLotNumbers      = QueryResults[4].Unload();
+	
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesSI.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("TaxList", TablesSI.TaxList);
 	Tables.Insert("SpecialOffers", TablesSI.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
-
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	
 	AddTables(Tables);
 
 	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey", AddInfo);
@@ -2278,7 +2320,19 @@ Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver, 
 							  |	BasisesTable AS BasisesTable
 							  |		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
 							  |		ON BasisesTable.Basis = ItemList.Ref
-							  |		AND BasisesTable.BasisKey = ItemList.Key";
+							  |		AND BasisesTable.BasisKey = ItemList.Key
+							  |;
+							  |////////////////////////////////////////////////////////////////////////////////
+							  |SELECT DISTINCT
+							  |	UNDEFINED AS Ref,
+							  |	BasisesTable.Key,
+							  |	SerialLotNumbers.SerialLotNumber,
+							  |	SerialLotNumbers.Quantity
+							  |FROM
+							  |	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+							  |		INNER JOIN BasisesTable AS BasisesTable
+							  |		ON BasisesTable.Basis = SerialLotNumbers.Ref
+							  |		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2288,14 +2342,16 @@ Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver, 
 
 	TableRowIDInfo             = QueryResults[1].Unload();
 	TableShipmentConfirmations = QueryResults[3].Unload();
-
+	TableSerialLotNumbers      = QueryResults[4].Unload();
+	
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesPIGRSO.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("TaxList", TablesPIGRSO.TaxList);
 	Tables.Insert("SpecialOffers", TablesPIGRSO.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
-
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	
 	AddTables(Tables);
 
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
@@ -2601,7 +2657,19 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
 	|		ON BasisesTable.Basis = ItemList.Ref
-	|		AND BasisesTable.BasisKey = ItemList.Key";
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|FROM
+	|	Document.GoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2609,7 +2677,8 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableItemList      = QueryResults[2].Unload();
 	TableGoodsReceipts = QueryResults[3].Unload();
-
+	TableSerialLotNumbers = QueryResults[4].Unload();
+	
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit,
 			RowItemList.QuantityInBaseUnit);
@@ -2619,7 +2688,8 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("GoodsReceipts", TableGoodsReceipts);
-
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	
 	AddTables(Tables);
 
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
@@ -2661,7 +2731,20 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver, AddInfo = Und
 							  |	BasisesTable AS BasisesTable
 							  |		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
 							  |		ON BasisesTable.Basis = ItemList.Ref
-							  |		AND BasisesTable.BasisKey = ItemList.Key";
+							  |		AND BasisesTable.BasisKey = ItemList.Key
+							  |;
+							  |////////////////////////////////////////////////////////////////////////////////
+							  |SELECT DISTINCT
+							  |	UNDEFINED AS Ref,
+							  |	BasisesTable.Key,
+							  |	SerialLotNumbers.SerialLotNumber,
+							  |	SerialLotNumbers.Quantity
+							  |FROM
+							  |	Document.GoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+							  |		INNER JOIN BasisesTable AS BasisesTable
+							  |		ON BasisesTable.Basis = SerialLotNumbers.Ref
+							  |		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+							  
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2671,13 +2754,15 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver, AddInfo = Und
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableGoodsReceipts = QueryResults[3].Unload();
-
+	TableSerialLotNumbers = QueryResults[4].Unload();
+	
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesPO.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("TaxList", TablesPO.TaxList);
 	Tables.Insert("SpecialOffers", TablesPO.SpecialOffers);
 	Tables.Insert("GoodsReceipts", TableGoodsReceipts);
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -2720,7 +2805,20 @@ Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver, AddInfo = Und
 							  |	BasisesTable AS BasisesTable
 							  |		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
 							  |		ON BasisesTable.Basis = ItemList.Ref
-							  |		AND BasisesTable.BasisKey = ItemList.Key";
+							  |		AND BasisesTable.BasisKey = ItemList.Key
+							  |;
+							  |////////////////////////////////////////////////////////////////////////////////
+							  |SELECT DISTINCT
+							  |	UNDEFINED AS Ref,
+							  |	BasisesTable.Key,
+							  |	SerialLotNumbers.SerialLotNumber,
+							  |	SerialLotNumbers.Quantity
+							  |FROM
+							  |	Document.GoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+							  |		INNER JOIN BasisesTable AS BasisesTable
+							  |		ON BasisesTable.Basis = SerialLotNumbers.Ref
+							  |		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+							  
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2730,14 +2828,16 @@ Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver, AddInfo = Und
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableGoodsReceipts = QueryResults[3].Unload();
-
+	TableSerialLotNumbers = QueryResults[4].Unload();
+	
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesPI.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("TaxList", TablesPI.TaxList);
 	Tables.Insert("SpecialOffers", TablesPI.SpecialOffers);
 	Tables.Insert("GoodsReceipts", TableGoodsReceipts);
-
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	
 	AddTables(Tables);
 
 	Return CollapseRepeatingItemListRows(Tables, "PurchaseInvoiceItemListKey", AddInfo);
@@ -2768,13 +2868,13 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 							  |		AND BasisesTable.BasisKey = ItemList.Key
 							  |ORDER BY
 							  |	ItemList.LineNumber";
-
+							  
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
 	TableRowIDInfo = QueryResults[1].Unload();
 	TableItemList  = QueryResults[2].Unload();
-
+	
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit,
 			RowItemList.QuantityInBaseUnit);
@@ -2783,7 +2883,7 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-
+	
 	AddTables(Tables);
 
 	Return Tables;
@@ -2821,7 +2921,20 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		ON BasisesTable.Basis = ItemList.Ref
 	|		AND BasisesTable.BasisKey = ItemList.Key
 	|ORDER BY
-	|	ItemList.LineNumber";
+	|	ItemList.LineNumber
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|FROM
+	|	Document.InventoryTransfer.SerialLotNumbers AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+
 
 	StoreName = "UNDEFINED";
 	TransactionType = "UNDEFINED";
@@ -2839,7 +2952,8 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo  = QueryResults[1].Unload();
 	TableItemList   = QueryResults[2].Unload();
-
+	TableSerialLotNumbers = QueryResults[3].Unload();
+	
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit,
 			RowItemList.QuantityInBaseUnit);
@@ -2848,7 +2962,8 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
-
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	
 	AddTables(Tables);
 
 	Return Tables;

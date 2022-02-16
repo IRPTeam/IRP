@@ -998,6 +998,13 @@ Procedure PaymentListTaxRateOnChange(Object, Form, CurrentData = Undefined) Expo
 	ControllerClientServer_V2.PaymentListTaxRateOnChange(Parameters);
 EndProcedure
 
+// PaymentList.DontCalculateRow
+Procedure PaymentListDontCalculateRowOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListDontCalculateRowOnChange(Parameters);
+EndProcedure
+
 // PaymentList.TaxAmount
 Procedure PaymentListTaxAmountOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);

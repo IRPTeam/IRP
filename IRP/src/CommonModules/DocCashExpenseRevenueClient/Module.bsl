@@ -262,6 +262,10 @@ Procedure PaymentListCurrencyOnChange(Object, Form) Export
 	Return;
 EndProcedure
 
+Procedure PaymentListDontCalculateRowOnChange(Object, Form, Item) Export
+	ViewClient_V2.PaymentListDontCalculateRowOnChange(Object, Form);
+EndProcedure
+
 Procedure PaymentListNetAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
 	ViewClient_V2.PaymentListNetAmountOnChange(Object, Form);
 	

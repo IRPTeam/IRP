@@ -2562,6 +2562,34 @@ EndFunction
 
 #EndRegion
 
+#Region PAYMENT_LIST_DONTCALCULATEROW
+
+// PaymentList.DontCalculateRow.OnChange
+Procedure PaymentListDontCalculateRowOnChange(Parameters) Export
+	Binding = BindPaymentListDontCalculateRow(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.DontCalculateRow.Set
+Procedure SetPaymentListDontCalculateRow(Parameters, Results) Export
+	Binding = BindPaymentListDontCalculateRow(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.DontCalculateRow.Get
+Function GetPaymentListDontCalculateRow(Parameters, _Key)
+	Return GetPropertyObject(Parameters, "PaymentList.DontCalculateRow", _Key);
+EndFunction
+
+// PaymentList.DontCalculateRow.Bind
+Function BindPaymentListDontCalculateRow(Parameters)
+	DataPath = "PaymentList.DontCalculateRow";
+	Binding = New Structure();
+	Return BindSteps("StepPaymentListCalculations_IsDontCalculateRowChanged", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region PAYMENT_LIST_TAX_AMOUNT
 
 // PaymentList.TaxAmount.OnChange
@@ -2638,10 +2666,6 @@ EndFunction
 Function BindPaymentListNetAmount(Parameters)
 	DataPath = "PaymentList.NetAmount";
 	Binding = New Structure();
-//	Binding.Insert("BankPayment", "StepPaymentListCalculations_IsNetAmountChanged");
-//	Binding.Insert("BankReceipt", "StepPaymentListCalculations_IsNetAmountChanged");
-//	Binding.Insert("CashPayment", "StepPaymentListCalculations_IsNetAmountChanged");
-//	Binding.Insert("CashReceipt", "StepPaymentListCalculations_IsNetAmountChanged");
 	Steps = "StepPaymentListCalculations_IsNetAmountChanged";
 	Return BindSteps(Steps, DataPath, Binding, Parameters);
 EndFunction
@@ -2754,7 +2778,12 @@ Procedure StepPaymentListCalculations_IsTotalAmountChanged(Parameters, Chain) Ex
 	StepPaymentListCalculations(Parameters, Chain, "IsTotalAmountChanged");
 EndProcedure
 
-Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged)
+// PaymentList.Calculations.[IsDontCalculateRowChanged].Step
+Procedure StepPaymentListCalculations_IsDontCalculateRowChanged(Parameters, Chain) Export
+	StepPaymentListCalculations(Parameters, Chain, "IsDontCalculateRowChanged");
+EndProcedure
+
+Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 	Chain.Calculations.Enable = True;
 	Chain.Calculations.Setter = "SetPaymentListCalculations";
 	
@@ -2782,14 +2811,21 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
 			
-		ElsIf WhoIsChanged = "IsNetAmountChanged" Then
+		ElsIf WhoIsChanged = "IsNetAmountChanged" Or WhoIsChanged = "IsDontCalculateRowChanged" Then
+			Options.CalculateTaxAmountByNetAmount.Enable   = True;
+			Options.CalculateTotalAmountByNetAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsDontCalculateRowChanged" Then
 			Options.CalculateTaxAmountByNetAmount.Enable   = True;
 			Options.CalculateTotalAmountByNetAmount.Enable = True;
 		Else
 			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
 		EndIf;
 		
-		Options.AmountOptions.DontCalculateRow = False;
+		If StrSplit(Parameters.ObjectMetadataInfo.Tables.PaymentList.Columns,",").Find("DontCalculateRow") <> Undefined Then
+			Options.AmountOptions.DontCalculateRow = GetPaymentListDontCalculateRow(Parameters, Row.Key);
+		Else
+			Options.AmountOptions.DontCalculateRow = False;
+		EndIf;
 		
 		Options.AmountOptions.NetAmount        = GetPaymentListNetAmount(Parameters, Row.Key);
 		Options.AmountOptions.TaxAmount        = GetPaymentListTaxAmount(Parameters, Row.Key);

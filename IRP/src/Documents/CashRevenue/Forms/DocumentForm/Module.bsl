@@ -126,6 +126,11 @@ Procedure PaymentListAfterDeleteRow(Item)
 EndProcedure
 
 &AtClient
+Procedure PaymentListDontCalculateRowOnChange(Item)
+	DocCashExpenseRevenueClient.PaymentListDontCalculateRowOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure PaymentListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	DocCashExpenseRevenueClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
@@ -279,4 +284,5 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+
 

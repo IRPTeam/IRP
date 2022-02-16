@@ -72,6 +72,18 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create document PurchaseInvoice objects (use serial lot number)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(29).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document SalesInvoice objects (use serial lot number)	
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document GoodsReceipt objects (use serial lot number)	
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document ShipmentConfirmation objects (use serial lot number)
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document InventoryTransfer objects (use serial lot number)
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
 Scenario: _092001 checkbox Use serial lot number in the Item type
@@ -3130,6 +3142,7 @@ Scenario: _092035 product scanning with and without serial lot number
 				
 Scenario: _092045 product scanning with serial lot number in the document without serial column
 	* Open Sales order
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 		And in the table "ItemList" I click "SearchByBarcode" button
@@ -3142,8 +3155,116 @@ Scenario: _092045 product scanning with serial lot number in the document withou
 			| 'Trousers' | '38/Yellow' |
 		And I close all client application windows
 		
-		
-			
+Scenario: _092050 check filling in serial lot number in the GR from Purchase invoice
+	* Create GR based on Purchase invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'     |
+			| '29' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "OK" button
+	* Check filling in serial lot number from Purchase invoice
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Purchase invoice'                              | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000'    | 'pcs'  | 'Purchase invoice 29 dated 25.01.2021 12:37:04' | 'Store 01' |
+		And I click the button named "FormPost"
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Purchase invoice'                              | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000'    | 'pcs'  | 'Purchase invoice 29 dated 25.01.2021 12:37:04' | 'Store 01' |
+		And I close all client application windows	
+
+
+Scenario: _092051 check filling in serial lot number in the SC from Sales invoice
+	* Create SC based on Sales invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'     |
+			| '1 029' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "OK" button
+	* Check filling in serial lot number from Sales invoice
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Sales invoice'                                 | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000'    | 'pcs'  | 'Sales invoice 1 029 dated 16.02.2022 13:02:27' | 'Store 01' |
+		And I click the button named "FormPost"
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Sales invoice'                                 | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000'    | 'pcs'  | 'Sales invoice 1 029 dated 16.02.2022 13:02:27' | 'Store 01' |
+		And I close all client application windows
+
+Scenario: _092052 check filling in serial lot number in the SI from SC
+	* Create SI based on SC
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'     |
+			| '1 029' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "OK" button
+	* Check filling in serial lot number from SC
+		And "ItemList" table became equal
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Store'    | 'Use shipment confirmation' |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'Store 01' | 'Yes'                       |		
+		And I click the button named "FormPost"
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Store'    | 'Use shipment confirmation' |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'Store 01' | 'Yes'                       |
+		And I close all client application windows
+
+Scenario: _092053 check filling in serial lot number in the PI from GR
+	* Create PI based on GR
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'     |
+			| '1 029' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "OK" button
+	* Check filling in serial lot number from GR
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Store'    | 'Use goods receipt' |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'Store 01' | 'Yes'               |
+		And I close all client application windows
+
+Scenario: _092054 check filling in serial lot number in the SC from IT
+	* Create SC based on IT
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'     |
+			| '1 029' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "OK" button
+	* Check filling in serial lot number from IT
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Store'    |
+			| 'Trousers' | '36/Yellow' | '0512; 0514'         | '3,000'    | 'pcs'  | 'Store 02' |
+		And I close all client application windows	
+
+Scenario: _092055 check filling in serial lot number in the GR from IT
+	* Create GR based on IT
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'     |
+			| '1 029' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "OK" button
+	* Check filling in serial lot number from IT
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Store'    |
+			| 'Trousers' | '36/Yellow' | '0512; 0514'         | '3,000'    | 'pcs'  | 'Store 03' |
+		And I close all client application windows
+
+
 Scenario: _092090 uncheck checkbox Use serial lot number in the Item type
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 	* Check box Use serial lot number

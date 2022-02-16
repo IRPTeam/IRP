@@ -366,6 +366,8 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus"  , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("StockAdjustmentAsWriteOff" , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("SalesInvoice"              , "StepExtractDataItemKeysWithSerialLotNumbers");
+	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
+	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
 EndFunction
 
@@ -561,6 +563,24 @@ Procedure StepExtractDataAgreementApArPostingDetail(Parameters, Chain) Export
 	EndDo;
 EndProcedure
 
+// ExtractDataCurrencyFromAccount.Set
+Procedure SetExtractDataCurrencyFromAccount(Parameters, Results) Export
+	Parameters.ExtractedData.Insert("DataCurrencyFromAccount", New Array());
+	For Each Result In Results Do
+		Parameters.ExtractedData.DataCurrencyFromAccount.Add(Result.Value);
+	EndDo;
+EndProcedure
+
+// ExtractDataCurrencyFromAccount.Step
+Procedure StepExtractDataCurrencyFromAccount(Parameters, Chain) Export
+	Chain.ExtractDataCurrencyFromAccount.Enable = True;
+	Chain.ExtractDataCurrencyFromAccount.Setter = "SetExtractDataCurrencyFromAccount";
+	Options = ModelClientServer_V2.ExtractDataCurrencyFromAccountOptions();
+	Options.Account = GetAccount(Parameters);
+	Options.StepName = "StepExtractDataCurrencyFromAccount";
+	Chain.ExtractDataCurrencyFromAccount.Options.Add(Options);
+EndProcedure
+
 #EndRegion
 
 #Region RECALCULATION_AFTER_QUESTIONS_TO_USER
@@ -632,8 +652,13 @@ Function BindAccount(Parameters)
 	Binding.Insert("CashPayment", "StepChangeCurrencyByAccount");
 	Binding.Insert("CashReceipt", "StepChangeCurrencyByAccount");
 
-	Binding.Insert("CashExpense", "StepChangeCurrencyByAccount_CurrencyInList");
-	Binding.Insert("CashRevenue", "StepChangeCurrencyByAccount_CurrencyInList");
+	Binding.Insert("CashExpense",
+		"StepChangeCurrencyByAccount_CurrencyInList,
+		|StepExtractDataCurrencyFromAccount");
+		
+	Binding.Insert("CashRevenue",
+		"StepChangeCurrencyByAccount_CurrencyInList,
+		|StepExtractDataCurrencyFromAccount");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

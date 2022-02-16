@@ -172,6 +172,7 @@ Function GetChain()
 	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
 	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
+	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
 	
 	Return Chain;
 EndFunction
@@ -1420,6 +1421,14 @@ EndFunction
 
 Function ExtractDataAgreementApArPostingDetailExecute(Options) Export
 	Return ModelServer_V2.ExtractDataAgreementApArPostingDetailImp(Options.Agreement);
+EndFunction
+
+Function ExtractDataCurrencyFromAccountOptions() Export
+	Return GetChainLinkOptions("Account");
+EndFunction
+
+Function ExtractDataCurrencyFromAccountExecute(Options) Export
+	Return ServiceSystemServer.GetObjectAttribute(Options.Account, "Currency");
 EndFunction
 
 #EndRegion

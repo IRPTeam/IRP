@@ -392,6 +392,10 @@ Procedure __tmp_CashExpenseRevenue_AccountOnUserChangeContinue(Answer, NotifyPar
 EndProcedure
 
 Procedure __tmp_CashExpenseRevenue_CommitChanges(Parameters)
+	If Parameters.ExtractedData.Property("DataCurrencyFromAccount") 
+		And Parameters.ExtractedData.DataCurrencyFromAccount.Count() Then
+		Parameters.Form.Currency = Parameters.ExtractedData.DataCurrencyFromAccount[0];
+	EndIf;
 	CommitChanges(Parameters);
 EndProcedure
 
@@ -652,6 +656,11 @@ Procedure OnOpenFormNotify(Parameters) Export
 			"ShipmentConfirmations");
 		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
 			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
+		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
@@ -1261,6 +1270,10 @@ Procedure AccountOnChange(Object, Form, TableNames) Export
 EndProcedure
 	
 Procedure OnSetAccountNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 

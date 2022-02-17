@@ -184,7 +184,7 @@ Procedure FillPropertyFormByDefault(Form, DataPaths, Parameters) Export
 	ArrayOfDataPath = StrSplit(DataPaths, ",");
 	
 	Bindings = GetAllBindings(Parameters);
-	Defaults = GetAllFillByDefault(Parameters);
+	Defaults = GetAllBindingsByDefault(Parameters);
 	
 	For Each DataPath In ArrayOfDataPath Do
 		DataPath = TrimAll(DataPath);
@@ -278,7 +278,7 @@ Function GetAllBindings(Parameters)
 	Return BindingMap;
 EndFunction
 
-Function GetAllFillByDefault(Parameters)
+Function GetAllBindingsByDefault(Parameters)
 	Binding = New Map();
 	Binding.Insert("Store"        , BindDefaultStore(Parameters));
 	Binding.Insert("DeliveryDate" , BindDefaultDeliveryDate(Parameters));
@@ -286,6 +286,9 @@ Function GetAllFillByDefault(Parameters)
 	Binding.Insert("ItemList.Store"        , BindDefaultItemListStore(Parameters));
 	Binding.Insert("ItemList.DeliveryDate" , BindDefaultItemListDeliveryDate(Parameters));
 	Binding.Insert("ItemList.Quantity"     , BindDefaultItemListQuantity(Parameters));
+	Binding.Insert("PaymentList.Currency"  , BindDefaultPaymentListCurrency(Parameters));
+	Binding.Insert("PaymentList."          , BindDefaultPaymentListTaxRate(Parameters));
+	
 	Return Binding;
 EndFunction
 
@@ -363,6 +366,8 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus"  , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("StockAdjustmentAsWriteOff" , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("SalesInvoice"              , "StepExtractDataItemKeysWithSerialLotNumbers");
+	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
+	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
 EndFunction
 
@@ -382,13 +387,17 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined) Export
 	Parameters.Insert("RowFilledByUserSettings", NewRow);
 	
 	Bindings = GetAllBindings(Parameters);
-	Defaults = GetAllFillByDefault(Parameters);
+	Defaults = GetAllBindingsByDefault(Parameters);
 	
 	ForceCommintChanges = True;
 	For Each ColumnName In StrSplit(Parameters.ObjectMetadataInfo.Tables[TableName].Columns, ",") Do
 		
 		// у колонки есть собственный обработчик .Default вызываем его
 		DataPath = StrTemplate("%1.%2", TableName, ColumnName);
+		Segments = StrSplit(DataPath, ".");
+		If Segments.Count() = 2 And StrStartsWith(Segments[1], "_" ) Then
+			DataPath = Segments[0] + ".";
+		EndIf;
 		Default = Defaults.Get(DataPath);
 		If Default<> Undefined Then
 			ForceCommintChanges = False;
@@ -471,6 +480,8 @@ Function BindListOnCopy(Parameters)
 	Binding.Insert("BankReceipt"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashPayment"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashReceipt"  , "StepPaymentListCalculations_IsCopyRow");
+	Binding.Insert("CashEXpense"  , "StepPaymentListCalculations_IsCopyRow");
+	Binding.Insert("CashRevenue"  , "StepPaymentListCalculations_IsCopyRow");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -552,6 +563,24 @@ Procedure StepExtractDataAgreementApArPostingDetail(Parameters, Chain) Export
 	EndDo;
 EndProcedure
 
+// ExtractDataCurrencyFromAccount.Set
+Procedure SetExtractDataCurrencyFromAccount(Parameters, Results) Export
+	Parameters.ExtractedData.Insert("DataCurrencyFromAccount", New Array());
+	For Each Result In Results Do
+		Parameters.ExtractedData.DataCurrencyFromAccount.Add(Result.Value);
+	EndDo;
+EndProcedure
+
+// ExtractDataCurrencyFromAccount.Step
+Procedure StepExtractDataCurrencyFromAccount(Parameters, Chain) Export
+	Chain.ExtractDataCurrencyFromAccount.Enable = True;
+	Chain.ExtractDataCurrencyFromAccount.Setter = "SetExtractDataCurrencyFromAccount";
+	Options = ModelClientServer_V2.ExtractDataCurrencyFromAccountOptions();
+	Options.Account = GetAccount(Parameters);
+	Options.StepName = "StepExtractDataCurrencyFromAccount";
+	Chain.ExtractDataCurrencyFromAccount.Options.Add(Options);
+EndProcedure
+
 #EndRegion
 
 #Region RECALCULATION_AFTER_QUESTIONS_TO_USER
@@ -605,6 +634,8 @@ Function BindAccount(Parameters)
 	DataPath.Insert("BankReceipt", "Account");
 	DataPath.Insert("CashPayment", "CashAccount");
 	DataPath.Insert("CashReceipt", "CashAccount");
+	DataPath.Insert("CashExpense", "Account");
+	DataPath.Insert("CashRevenue", "Account");
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCurrencyByAccount");
@@ -620,6 +651,14 @@ Function BindAccount(Parameters)
 	
 	Binding.Insert("CashPayment", "StepChangeCurrencyByAccount");
 	Binding.Insert("CashReceipt", "StepChangeCurrencyByAccount");
+
+	Binding.Insert("CashExpense",
+		"StepChangeCurrencyByAccount_CurrencyInList,
+		|StepExtractDataCurrencyFromAccount");
+		
+	Binding.Insert("CashRevenue",
+		"StepChangeCurrencyByAccount_CurrencyInList,
+		|StepExtractDataCurrencyFromAccount");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -974,7 +1013,7 @@ EndFunction
 
 // Currency.Bind
 Function BindCurrency(Parameters)
-	DataPath = "Currency";
+	DataPath = "Currency";	
 	Binding = New Structure();
 	Binding.Insert("BankPayment", 
 		"StepChangeCashAccountByCurrency,
@@ -994,6 +1033,20 @@ Function BindCurrency(Parameters)
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+// Currency.ChangeCurrencyByAccount.[CurrencyInList].Step
+Procedure StepChangeCurrencyByAccount_CurrencyInList(Parameters, Chain) Export
+	Chain.ChangeCurrencyByAccount.Enable = True;
+	Chain.ChangeCurrencyByAccount.Setter = "SetPaymentListCurrency";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
+		Options.Account         = GetAccount(Parameters);
+		Options.CurrentCurrency = GetPaymentListCurrency(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeCurrencyByAccount_CurrencyInList";
+		Chain.ChangeCurrencyByAccount.Options.Add(Options);
+	EndDo;
+EndProcedure
 
 // Currency.ChangeCurrencyByAccount.Step
 Procedure StepChangeCurrencyByAccount(Parameters, Chain) Export
@@ -1173,6 +1226,14 @@ Function BindDate(Parameters)
 	Binding.Insert("CashReceipt",
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_AgreementInList");
+
+	Binding.Insert("CashExpense",
+		"StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_AgreementInList");
+	
+	Binding.Insert("CashRevenue",
+		"StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_AgreementInList");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1204,6 +1265,10 @@ EndFunction
 Function BindCompany(Parameters)
 	DataPath = "Company";
 	Binding = New Structure();
+	Binding.Insert("SalesInvoice",
+		"StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_OnlyWhenAgreementIsFilled");
+	
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
 	Binding.Insert("OutgoingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
 	
@@ -1220,16 +1285,22 @@ Function BindCompany(Parameters)
 	Binding.Insert("CashPayment",
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_AgreementInList,
-		|StepChangeCashAccountByCompany_AccountTypeIsBank");
+		|StepChangeCashAccountByCompany_AccountTypeIsCash");
 	
 	Binding.Insert("CashReceipt",
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_AgreementInList,
-		|StepChangeCashAccountByCompany_AccountTypeIsBank");
+		|StepChangeCashAccountByCompany_AccountTypeIsCash");
 	
-	Binding.Insert("SalesInvoice",
-		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled");
+	Binding.Insert("CashExpense",
+		"StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_WithoutAgreement,
+		|StepChangeCashAccountByCompany_AccountTypeIsCash");
+
+	Binding.Insert("CashRevenue",
+		"StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_WithoutAgreement,
+		|StepChangeCashAccountByCompany_AccountTypeIsCash");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1806,24 +1877,48 @@ EndProcedure
 
 #Region TAX_RATE
 
+// TaxRate.Get
+Function GetTaxRate(Parameters, Row)
+	TaxRates = New Structure();
+	// когда нет формы то колонки со ставками налогов только в кэше
+	// потому что колонки со ставками налога это реквизиты формы
+	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
+	For Each TaxRate In Row.TaxRates Do
+		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
+			TaxRates.Insert(TaxRate.Key, TaxRate.Value);
+		Else
+			TaxRates.Insert(TaxRate.Key, 
+				GetPropertyObject(Parameters, Parameters.TableName + "." + TaxRate.Key, Row.Key, ReadOnlyFromCache));
+		EndIf;
+	EndDo;
+	Return TaxRates;
+EndFunction
+
 // <List>.ChangeTaxRate.[AgreementInHeader].Step
 Procedure StepChangeTaxRate_AgreementInHeader(Parameters, Chain) Export
-	StepChangeTaxRate(Parameters, Chain, True, False, False);
+	StepChangeTaxRate(Parameters, Chain, True);
 EndProcedure
 
 // <List>.ChangeTaxRate.[AgreementInList].Step
 Procedure StepChangeTaxRate_AgreementInList(Parameters, Chain) Export
-	StepChangeTaxRate(Parameters, Chain, False, True, False);
+	StepChangeTaxRate(Parameters, Chain, , True);
 EndProcedure
 
-// <List>.ChangeTaxRate.[AgreementInList].Step
+// <List>.ChangeTaxRate.[OnlyWhenAgreementIsFilled].Step
 Procedure StepChangeTaxRate_OnlyWhenAgreementIsFilled(Parameters, Chain) Export
-	StepChangeTaxRate(Parameters, Chain, True, False, True);
+	StepChangeTaxRate(Parameters, Chain, True, , True);
+EndProcedure
+
+// <List>.ChangeTaxRate.[WithoutAgreement].Step
+Procedure StepChangeTaxRate_WithoutAgreement(Parameters, Chain) Export
+	StepChangeTaxRate(Parameters, Chain);
 EndProcedure
 
 // <List>.ChangeTaxRate.Step
 Procedure StepChangeTaxRate(Parameters, Chain,
-	AgreementInHeader, AgreementInList, OnlyWhenAgreementIsFilled)
+			AgreementInHeader = False,
+			AgreementInList = False, 
+			OnlyWhenAgreementIsFilled = False)
 	
 	Options_Date      = GetDate(Parameters);
 	Options_Company   = GetCompany(Parameters);
@@ -1872,23 +1967,6 @@ Procedure StepChangeTaxRate(Parameters, Chain,
 		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 EndProcedure
-
-// TaxRate.Get
-Function GetTaxRate(Parameters, Row)
-	TaxRates = New Structure();
-	// когда нет формы то колонки со ставками налогов только в кэше
-	// потому что колонки со ставками налога это реквизиты формы
-	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
-	For Each TaxRate In Row.TaxRates Do
-		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
-			TaxRates.Insert(TaxRate.Key, TaxRate.Value);
-		Else
-			TaxRates.Insert(TaxRate.Key, 
-				GetPropertyObject(Parameters, Parameters.TableName + "." + TaxRate.Key, Row.Key, ReadOnlyFromCache));
-		EndIf;
-	EndDo;
-	Return TaxRates;
-EndFunction
 
 #EndRegion
 
@@ -2059,6 +2137,47 @@ Procedure StepPaymentListChangeAgreementByPartner(Parameters, Chain) Export
 		Options.StepName = "PaymentListChangeAgreementByPartner";
 		Chain.ChangeAgreementByPartner.Options.Add(Options);
 	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_CURRENCY
+
+// PaymentList.Currency.Set
+Procedure SetPaymentListCurrency(Parameters, Results) Export
+	Binding = BindPaymentListCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.Currency.Get
+Function GetPaymentListCurrency(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListCurrency(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.Currency.Default.Bind
+Function BindDefaultPaymentListCurrency(Parameters)
+	DataPath = "PaymentList.Currency";
+	Binding = New Structure();
+	Return BindSteps("StepPaymentListDefaultCurrencyInList", DataPath, Binding, Parameters);
+EndFunction
+
+// PaymentList.Currency.Bind
+Function BindPaymentListCurrency(Parameters)
+	DataPath = "PaymentList.Currency";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// PaymentList.Currency..StepPaymentListDefaultCurrencyInList.Step
+Procedure StepPaymentListDefaultCurrencyInList(Parameters, Chain) Export
+	Chain.DefaultCurrencyInList.Enable = True;
+	Chain.DefaultCurrencyInList.Setter = "SetPaymentListCurrency";
+	Options = ModelClientServer_V2.DefaultCurrencyInListOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.Account         = GetAccount(Parameters);
+	Options.CurrentCurrency = GetPaymentListCurrency(Parameters, NewRow.Key);
+	Options.Key = NewRow.Key;
+	Chain.DefaultCurrencyInList.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -2457,6 +2576,43 @@ Function BindPaymentListTaxRate(Parameters)
 	Return BindSteps("StepPaymentListCalculations_IsTaxRateChanged", DataPath, Binding, Parameters);
 EndFunction
 
+// PaymentList.TaxRate.Default.Bind
+Function BindDefaultPaymentListTaxRate(Parameters)
+	DataPath = "PaymentList.";
+	Binding = New Structure();
+	Binding.Insert("CashExpense", "StepChangeTaxRate_WithoutAgreement");
+	Binding.Insert("CashRevenue", "StepChangeTaxRate_WithoutAgreement");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_DONTCALCULATEROW
+
+// PaymentList.DontCalculateRow.OnChange
+Procedure PaymentListDontCalculateRowOnChange(Parameters) Export
+	Binding = BindPaymentListDontCalculateRow(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.DontCalculateRow.Set
+Procedure SetPaymentListDontCalculateRow(Parameters, Results) Export
+	Binding = BindPaymentListDontCalculateRow(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.DontCalculateRow.Get
+Function GetPaymentListDontCalculateRow(Parameters, _Key)
+	Return GetPropertyObject(Parameters, "PaymentList.DontCalculateRow", _Key);
+EndFunction
+
+// PaymentList.DontCalculateRow.Bind
+Function BindPaymentListDontCalculateRow(Parameters)
+	DataPath = "PaymentList.DontCalculateRow";
+	Binding = New Structure();
+	Return BindSteps("StepPaymentListCalculations_IsDontCalculateRowChanged", DataPath, Binding, Parameters);
+EndFunction
+
 #EndRegion
 
 #Region PAYMENT_LIST_TAX_AMOUNT
@@ -2482,23 +2638,24 @@ EndFunction
 Function BindPaymentListTaxAmount(Parameters)
 	DataPath = "PaymentList.TaxAmount";
 	Binding = New Structure();
-	Binding.Insert("BankPayment",
-		"StepPaymentListCalculations_IsTaxAmountChanged,
-		|StepPaymentListChangeTaxAmountAsManualAmount");
-		
-	Binding.Insert("BankReceipt",
-		"StepPaymentListCalculations_IsTaxAmountChanged,
-		|StepPaymentListChangeTaxAmountAsManualAmount");
-		
-	Binding.Insert("CashPayment",
-		"StepPaymentListCalculations_IsTaxAmountChanged,
-		|StepPaymentListChangeTaxAmountAsManualAmount");
-		
-	Binding.Insert("CashReceipt",
-		"StepPaymentListCalculations_IsTaxAmountChanged,
-		|StepPaymentListChangeTaxAmountAsManualAmount");
-	
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+//	Binding.Insert("BankPayment",
+//		"StepPaymentListCalculations_IsTaxAmountChanged,
+//		|StepPaymentListChangeTaxAmountAsManualAmount");
+//		
+//	Binding.Insert("BankReceipt",
+//		"StepPaymentListCalculations_IsTaxAmountChanged,
+//		|StepPaymentListChangeTaxAmountAsManualAmount");
+//		
+//	Binding.Insert("CashPayment",
+//		"StepPaymentListCalculations_IsTaxAmountChanged,
+//		|StepPaymentListChangeTaxAmountAsManualAmount");
+//		
+//	Binding.Insert("CashReceipt",
+//		"StepPaymentListCalculations_IsTaxAmountChanged,
+//		|StepPaymentListChangeTaxAmountAsManualAmount");
+	Steps = "StepPaymentListCalculations_IsTaxAmountChanged,
+		|StepPaymentListChangeTaxAmountAsManualAmount";
+	Return BindSteps(Steps, DataPath, Binding, Parameters);
 EndFunction
 
 // PaymentList.TaxAmount.ChangeTaxAmountAsManualAmount.Step
@@ -2534,11 +2691,8 @@ EndFunction
 Function BindPaymentListNetAmount(Parameters)
 	DataPath = "PaymentList.NetAmount";
 	Binding = New Structure();
-	Binding.Insert("BankPayment", "StepPaymentListCalculations_IsNetAmountChanged");
-	Binding.Insert("BankReceipt", "StepPaymentListCalculations_IsNetAmountChanged");
-	Binding.Insert("CashPayment", "StepPaymentListCalculations_IsNetAmountChanged");
-	Binding.Insert("CashReceipt", "StepPaymentListCalculations_IsNetAmountChanged");
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+	Steps = "StepPaymentListCalculations_IsNetAmountChanged";
+	Return BindSteps(Steps, DataPath, Binding, Parameters);
 EndFunction
 
 #EndRegion
@@ -2566,11 +2720,12 @@ EndFunction
 Function BindPaymentListTotalAmount(Parameters)
 	DataPath = "PaymentList.TotalAmount";
 	Binding = New Structure();
-	Binding.Insert("BankPayment", "StepPaymentListCalculations_IsTotalAmountChanged");
-	Binding.Insert("BankReceipt", "StepPaymentListCalculations_IsTotalAmountChanged");
-	Binding.Insert("CashPayment", "StepPaymentListCalculations_IsTotalAmountChanged");
-	Binding.Insert("CashReceipt", "StepPaymentListCalculations_IsTotalAmountChanged");
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+//	Binding.Insert("BankPayment", "StepPaymentListCalculations_IsTotalAmountChanged");
+//	Binding.Insert("BankReceipt", "StepPaymentListCalculations_IsTotalAmountChanged");
+//	Binding.Insert("CashPayment", "StepPaymentListCalculations_IsTotalAmountChanged");
+//	Binding.Insert("CashReceipt", "StepPaymentListCalculations_IsTotalAmountChanged");
+	Steps = "StepPaymentListCalculations_IsTotalAmountChanged";
+	Return BindSteps(Steps, DataPath, Binding, Parameters);
 EndFunction
 
 #EndRegion
@@ -2648,7 +2803,12 @@ Procedure StepPaymentListCalculations_IsTotalAmountChanged(Parameters, Chain) Ex
 	StepPaymentListCalculations(Parameters, Chain, "IsTotalAmountChanged");
 EndProcedure
 
-Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged)
+// PaymentList.Calculations.[IsDontCalculateRowChanged].Step
+Procedure StepPaymentListCalculations_IsDontCalculateRowChanged(Parameters, Chain) Export
+	StepPaymentListCalculations(Parameters, Chain, "IsDontCalculateRowChanged");
+EndProcedure
+
+Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 	Chain.Calculations.Enable = True;
 	Chain.Calculations.Setter = "SetPaymentListCalculations";
 	
@@ -2676,14 +2836,21 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
 			
-		ElsIf WhoIsChanged = "IsNetAmountChanged" Then
+		ElsIf WhoIsChanged = "IsNetAmountChanged" Or WhoIsChanged = "IsDontCalculateRowChanged" Then
+			Options.CalculateTaxAmountByNetAmount.Enable   = True;
+			Options.CalculateTotalAmountByNetAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsDontCalculateRowChanged" Then
 			Options.CalculateTaxAmountByNetAmount.Enable   = True;
 			Options.CalculateTotalAmountByNetAmount.Enable = True;
 		Else
 			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
 		EndIf;
 		
-		Options.AmountOptions.DontCalculateRow = False;
+		If StrSplit(Parameters.ObjectMetadataInfo.Tables.PaymentList.Columns,",").Find("DontCalculateRow") <> Undefined Then
+			Options.AmountOptions.DontCalculateRow = GetPaymentListDontCalculateRow(Parameters, Row.Key);
+		Else
+			Options.AmountOptions.DontCalculateRow = False;
+		EndIf;
 		
 		Options.AmountOptions.NetAmount        = GetPaymentListNetAmount(Parameters, Row.Key);
 		Options.AmountOptions.TaxAmount        = GetPaymentListTaxAmount(Parameters, Row.Key);

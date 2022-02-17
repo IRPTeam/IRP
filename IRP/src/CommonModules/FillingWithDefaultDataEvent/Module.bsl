@@ -13,6 +13,9 @@ IsUsedNewFunctionality =
 	Or TypeOf(Source) = Type("DocumentObject.CashPayment")
 	Or TypeOf(Source) = Type("DocumentObject.CashReceipt")
 	
+	Or TypeOf(Source) = Type("DocumentObject.CashExpense")
+	Or TypeOf(Source) = Type("DocumentObject.CashRevenue")
+	
 	Or TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation")
 	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsSurplus")

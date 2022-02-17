@@ -11,7 +11,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	
 	// mvc
 	If Is.BankPayment Or Is.BankReceipt Or Is.CashPayment Or Is.CashReceipt 
-		Or Is.IncomingPaymentOrder Or Is.OutgoingPaymentOrder Then
+		Or Is.IncomingPaymentOrder Or Is.OutgoingPaymentOrder
+		Or Is.CashExpense Or Is.CashRevenue Then
 		ViewServer_V2.OnCreateAtServer(Object, Form, "PaymentList");
 	Else
 		Taxes_CreateFormControls(Form, Is);
@@ -41,7 +42,8 @@ EndProcedure
 Procedure FillFormAttributes(Object, Form, Is)
 	// mvc
 	If Is.BankPayment Or Is.BankReceipt Or Is.CashPayment Or Is.CashReceipt 
-		Or Is.IncomingPaymentOrder Or Is.OutgoingPaymentOrder Then
+		Or Is.IncomingPaymentOrder Or Is.OutgoingPaymentOrder 
+		Or Is.CashExpense Or Is.CashRevenue Then
 		Return;
 	EndIf;
 	

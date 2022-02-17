@@ -73,7 +73,8 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnChange(Item)
-	DocCashExpenseRevenueClient.PaymentListOnChange(Object, ThisObject, Item);
+	Return;
+	//DocCashExpenseRevenueClient.PaymentListOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -104,7 +105,8 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnStartEdit(Item, NewRow, Clone)
-	DocCashExpenseRevenueClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+	Return;
+	//DocCashExpenseRevenueClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient
@@ -121,6 +123,11 @@ EndProcedure
 &AtClient
 Procedure PaymentListAfterDeleteRow(Item)
 	DocCashExpenseRevenueClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListDontCalculateRowOnChange(Item)
+	DocCashExpenseRevenueClient.PaymentListDontCalculateRowOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -153,7 +160,8 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListProfitLossCenterOnChange(Item)
-	DocCashExpenseRevenueClient.PaymentListProfitLossCenterOnChange(Object, ThisObject, Item);
+	Return
+	//DocCashExpenseRevenueClient.PaymentListProfitLossCenterOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -276,4 +284,5 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+
 

@@ -89,18 +89,18 @@
 	Тогда открылось окно 'Item barcode (create)'
 	И в поле с именем 'Barcode' я ввожу текст '123123'
 	И я нажимаю кнопку выбора у поля с именем "SerialLotNumber"
-	Тогда открылось окно 'Item serial/lot numbers'
-	И в таблице "List" я активизирую поле с именем "Description"
-	И в таблице "List" я выбираю текущую строку
-	Тогда открылось окно 'Item barcode (create) *'
-	И я нажимаю кнопку выбора у поля с именем "Unit"
-	Тогда открылось окно 'Item units'
-	И в таблице "List" я активизирую поле с именем "Description"
-	И в таблице "List" я выбираю текущую строку
-	Тогда открылось окно 'Item barcode (create) *'
+	Когда открылось окно 'Item serial/lot numbers'
+	И я нажимаю на кнопку с именем 'FormCreate'
+	Тогда открылось окно 'Item serial/lot number (create)'
+	И в поле с именем 'Description' я ввожу текст '111111'
 	И я нажимаю на кнопку с именем 'FormWriteAndClose'
-	И я жду закрытия окна 'Item barcode (create) *' в течение 20 секунд
-		
+	И я жду закрытия окна 'Item serial/lot number (create) *' в течение 20 секунд
+	И в таблице "List" я активизирую поле с именем "Description"
+	И в таблице "List" я выбираю текущую строку
+	Тогда открылось окно 'Item barcode *'
+	И я нажимаю на кнопку с именем 'FormWriteAndClose'
+	И я жду закрытия окна 'Item barcode *' в течение 20 секунд
+			
 
 
 

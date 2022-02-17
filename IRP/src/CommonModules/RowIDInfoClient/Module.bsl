@@ -13,6 +13,13 @@ Procedure DeleteRows(Object, Form) Export
 EndProcedure
 
 Procedure UpdateQuantity(Object, Form) Export
+	TabularSectionName = "";
+	If Object.Property("ShipmentConfirmations") Then
+		TabularSectionName = "ShipmentConfirmations";
+	ElsIf Object.Property("GoodsReceipts") Then
+		TabularSectionName = "GoodsReceipts";
+	EndIf;
+	
 	For Each RowItemList In Object.ItemList Do
 		IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 1 Then
@@ -22,14 +29,6 @@ Procedure UpdateQuantity(Object, Form) Export
 				IDInfoRows[0].Quantity = RowItemList.QuantityInBaseUnit;
 			EndIf;
 		Else
-
-			TabularSectionName = "";
-			If Object.Property("ShipmentConfirmations") Then
-				TabularSectionName = "ShipmentConfirmations";
-			ElsIf Object.Property("GoodsReceipts") Then
-				TabularSectionName = "GoodsReceipts";
-			EndIf;
-
 			If Not ValueIsFilled(TabularSectionName) Then
 				If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
 					For Each IDInfoRow In IDInfoRows Do
@@ -41,18 +40,19 @@ Procedure UpdateQuantity(Object, Form) Export
 						IDInfoRow.Quantity = RowItemList.QuantityInBaseUnit;
 					EndDo;
 				EndIf;
-				Continue;
+			Else
+				For Each Row In Object[TabularSectionName] Do
+					If Row.Key <> RowItemList.Key Then
+						Continue;
+					EndIf;
+					IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key, BasisKey", Row.Key, Row.BasisKey));
+					If IDInfoRows.Count() = 1 Then
+						IDInfoRows[0].Quantity = Row.Quantity;
+					EndIf;
+				EndDo;
 			EndIf;
-
-			For Each Row In Object[TabularSectionName] Do
-				IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key, BasisKey", Row.Key, Row.BasisKey));
-				If IDInfoRows.Count() = 1 Then
-					IDInfoRows[0].Quantity = Row.Quantity;
-				EndIf;
-			EndDo;
-
 		EndIf;
-	EndDo;
+	EndDo;	
 EndProcedure
 
 Function GetSelectedRowInfo(CurrentData) Export

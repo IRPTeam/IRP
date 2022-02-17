@@ -85,6 +85,9 @@ Scenario: _050000 preparation (Cash receipt)
 				| "Number" |
 				| "$$NumberSalesInvoice024008$$" |
 			When create SalesInvoice024008	
+	When Create document PurchaseReturn objects (creation based on)
+	And I execute 1C:Enterprise script at server
+ 			| "Documents.PurchaseReturn.FindByNumber(351).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 
 Scenario: _050001 create Cash receipt based on Sales invoice
@@ -394,6 +397,35 @@ Scenario: _050008 check partner filter in tabular part in document Cash receipt
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	When check the partner filter in the tabular part of the payment receipt documents
 
+Scenario: _050009 create Cash receipt based on Purchase return
+	And I close all client application windows
+	* Select PR
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Date'                | 'Number' |
+			| '24.03.2021 16:08:15' | '351'     |
+		And I select current line in "List" table
+		And I click "Cash receipt" button
+	* Check creation
+		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return from vendor   "
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "TransactionType" became equal to "Return from vendor"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyExchange" became equal to ""
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Payer'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Purchase return 351 dated 24.03.2021 16:08:15' | '5 710,00'     | ''                        | ''                           |
+		
+		Then the form attribute named "Branch" became equal to ""
+		And the editing text of form attribute named "DocumentAmount" became equal to "5 710,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	And I close all client application windows
+		
+		
+				
+				
+
+
 
 
 # EndFilters
@@ -480,6 +512,7 @@ Scenario: _050015 check the display of details on the form Cash receipt with the
 		And "PaymentList" table contains lines
 		| '#' | 'Total amount' | 'Planning transaction basis' |
 		| '1' | '100,00' | ''                          |
+
 
 
 

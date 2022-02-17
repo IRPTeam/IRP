@@ -44,7 +44,8 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			Or FillingData.BasedOn = "PurchaseInvoice" 
 			Or FillingData.BasedOn = "PurchaseOrder"
 			Or FillingData.BasedOn = "SalesReturn" Then
-			Filling_BasedOn(FillingData);
+				ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+				Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;
 EndProcedure

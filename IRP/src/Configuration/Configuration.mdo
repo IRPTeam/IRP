@@ -390,6 +390,13 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.MoneyDocumentsServer</commonModules>
+  <commonModules>CommonModule.BuilderServer_V2</commonModules>
+  <commonModules>CommonModule.ModelClientServer_V2</commonModules>
+  <commonModules>CommonModule.ViewClient_V2</commonModules>
+  <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
+  <commonModules>CommonModule.ModelServer_V2</commonModules>
+  <commonModules>CommonModule.ViewServer_V2</commonModules>
+  <commonModules>CommonModule.UserSettingsClientServer</commonModules>
   <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
   <commonModules>CommonModule.DocJournalEntryServer</commonModules>
   <commonModules>CommonModule.DocJournalEntryClient</commonModules>
@@ -721,6 +728,7 @@
   <dataProcessors>DataProcessor.Procurement</dataProcessors>
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
+  <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

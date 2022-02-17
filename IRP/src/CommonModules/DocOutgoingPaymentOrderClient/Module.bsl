@@ -7,22 +7,34 @@ EndProcedure
 
 #EndRegion
 
-#Region FormEvents
+#Region FORM
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+	ViewClient_V2.OnOpen(Object, Form, "PaymentList");
+	
+	//DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
 #EndRegion
 
+Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.PaymentListBeforeAddRow(Object, Form,  Cancel, Clone);
+EndProcedure
+
+Procedure PaymentListAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.PaymentListAfterDeleteRow(Object, Form);
+EndProcedure
+
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
-	DefaultCustomParameters = New Structure("Company", Object.Company);
-	CustomParameters = CatCashAccountsClient.DefaultCustomParameters(DefaultCustomParameters);
-	CustomParameters.Insert("CashAccount", Object.Account);
-	Object.Account = CatCashAccountsServer.GetCashAccountByCompany(Object.Company, CustomParameters);
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.CompanyOnChange(Object, Form, "PaymentList");
+	
+//	DefaultCustomParameters = New Structure("Company", Object.Company);
+//	CustomParameters = CatCashAccountsClient.DefaultCustomParameters(DefaultCustomParameters);
+//	CustomParameters.Insert("CashAccount", Object.Account);
+//	Object.Account = CatCashAccountsServer.GetCashAccountByCompany(Object.Company, CustomParameters);
+//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -47,7 +59,7 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitle
+#Region GroupTitleDecorationsEvents
 
 Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
@@ -67,32 +79,18 @@ EndProcedure
 
 #EndRegion
 
-Procedure StatusOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-EndProcedure
-
-Procedure CurrencyOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-EndProcedure
-
-Procedure PlaningPeriodOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-EndProcedure
-
-Procedure DateOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-EndProcedure
-
 #Region ItemAccount
 
 Procedure AccountOnChange(Object, Form, Item) Export
-	If ValueIsFilled(Object.Account) Then
-		AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
-		If ValueIsFilled(AccountCurrency) Then
-			Object.Currency = AccountCurrency;
-		EndIf;
-	EndIf;
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.AccountOnChange(Object, Form, "PaymentList");
+	
+//	If ValueIsFilled(Object.Account) Then
+//		AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
+//		If ValueIsFilled(AccountCurrency) Then
+//			Object.Currency = AccountCurrency;
+//		EndIf;
+//	EndIf;
+//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -112,9 +110,9 @@ Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
-Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
-	Return New Structure();
-EndFunction
+//Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
+//	Return New Structure();
+//EndFunction
 
 #EndRegion
 
@@ -133,17 +131,19 @@ EndProcedure
 #Region Partner
 
 Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	If ValueIsFilled(CurrentData.Partner) Then
-		CurrentData.Payee = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payee);
-		CurrentData.PartnerBankAccount = DocumentsServer.GetBankAccountByPartner(CurrentData.Partner,
-			CurrentData.Payee, Object.Currency);
-	EndIf;
+	ViewClient_V2.PaymentListPartnerOnChange(Object, Form);
+	
+//	CurrentData = Form.Items.PaymentList.CurrentData;
+//
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	If ValueIsFilled(CurrentData.Partner) Then
+//		CurrentData.Payee = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payee);
+//		CurrentData.PartnerBankAccount = DocumentsServer.GetBankAccountByPartner(CurrentData.Partner,
+//			CurrentData.Payee, Object.Currency);
+//	EndIf;
 EndProcedure
 
 Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -213,3 +213,20 @@ Procedure PaymentListPayeeEditTextChange(Object, Form, Item, Text, StandardProce
 EndProcedure
 
 #EndRegion
+
+Procedure DateOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+Procedure StatusOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+Procedure CurrencyOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+Procedure PlaningPeriodOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+

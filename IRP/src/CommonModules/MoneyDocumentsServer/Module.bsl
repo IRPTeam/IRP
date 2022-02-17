@@ -8,8 +8,16 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		FillPaymentList(Object, Is);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-	Taxes_CreateFormControls(Form, Is);
-	CalculateTableAtServer(Form, Object, Is);
+	
+	// mvc
+	If Is.BankPayment Or Is.BankReceipt Or Is.CashPayment Or Is.CashReceipt 
+		Or Is.IncomingPaymentOrder Or Is.OutgoingPaymentOrder
+		Or Is.CashExpense Or Is.CashRevenue Then
+		ViewServer_V2.OnCreateAtServer(Object, Form, "PaymentList");
+	Else
+		Taxes_CreateFormControls(Form, Is);
+		CalculateTableAtServer(Form, Object, Is);
+	EndIf;
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -32,6 +40,13 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 EndProcedure
 
 Procedure FillFormAttributes(Object, Form, Is)
+	// mvc
+	If Is.BankPayment Or Is.BankReceipt Or Is.CashPayment Or Is.CashReceipt 
+		Or Is.IncomingPaymentOrder Or Is.OutgoingPaymentOrder 
+		Or Is.CashExpense Or Is.CashRevenue Then
+		Return;
+	EndIf;
+	
 	If Is.BankPayment Or Is.BankReceipt Then
 		Form.CurrentCurrency        = Object.Currency;
 		Form.CurrentAccount         = Object.Account;
@@ -48,7 +63,8 @@ Procedure FillFormAttributes(Object, Form, Is)
 			Form.Currency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
 		EndIf;
 	EndIf;
-	If Is.IncomingPaymentOrder Or Is.OutgoingPaymentOrder Then
+	
+	If Is.OutgoingPaymentOrder Then
 		If ValueIsFilled(Object.Account) And ValueIsFilled(Object.Account.Currency) 
 			And Not ValueIsFilled(Object.Currency) Then
 			Object.Currency = Object.Account.Currency;
@@ -159,14 +175,14 @@ EndProcedure
 
 Procedure CalculateTableAtServer(Form, Object, Is)
 	If Form.Parameters.FillingValues.Property("BasedOn") And IsSupportTaxes(Is) Then
-		SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
-		If SavedData.Property("ArrayOfColumnsInfo") Then
-			TaxInfo = SavedData.ArrayOfColumnsInfo;
+		SavedData = TaxesClientServer.GetTaxesCache(Form);
+		If SavedData.Property("ArrayOfTaxInfo") Then
+			ArrayOfTaxInfo = SavedData.ArrayOfTaxInfo;
 		EndIf;
 		CalculationSettings = New Structure();
 		CalculationSettings.Insert("CalculateTaxByTotalAmount");
 		CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
-		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.PaymentList, CalculationSettings, TaxInfo);
+		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.PaymentList, CalculationSettings, ArrayOfTaxInfo);
 	EndIf;
 EndProcedure
 

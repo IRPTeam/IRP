@@ -45,12 +45,66 @@ Procedure FormSetVisibilityAvailability() Export
 EndProcedure
 
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form)
-	ArrayAll = New Array();
-	ArrayByType = New Array();
-	DocBankPaymentServer.FillAttributesByType(Object.Ref, Object.TransactionType, ArrayAll, ArrayByType);
-	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
+Function GetVisibleAttributesByTransactionType(TransactionType)
+	StrAll = "TransitAccount,
+	|PaymentList.Partner,
+	|PaymentList.Payee,
+	|PaymentList.Agreement,
+	|PaymentList.LegalNameContract,
+	|PaymentList.BasisDocument,
+	|PaymentList.PlaningTransactionBasis,
+	|PaymentList.Order";
+	
+	ArrayOfAllAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrAll, ",") Do
+		ArrayOfAllAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+	EndDo;
+	
+	CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
+	CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
+	PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
+	ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
+	
+	If TransactionType = CashTransferOrder Then
+		StrByType = "
+		|PaymentList.PlaningTransactionBasis";
+	ElsIf TransactionType = CurrencyExchange Then
+		StrByType = "TransitAccount, 
+		|PaymentList.PlaningTransactionBasis";
+	ElsIf TransactionType = PaymentToVendor Or TransactionType = ReturnToCustomer Then
+		StrByType = "
+		|PaymentList.BasisDocument,
+		|PaymentList.Partner,
+		|PaymentList.Agreement,
+		|PaymentList.Payee,
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.LegalNameContract";
+		If TransactionType = PaymentToVendor Then
+			StrByType = StrByType + ", PaymentList.Order";
+		EndIf;
+	EndIf;
+	
+	ArrayOfVisibleAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfVisibleAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+	EndDo;
+	Return New Structure("AllAtributes, VisibleAttributes", ArrayOfAllAttributes, ArrayOfVisibleAttributes);
+EndFunction
 
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+//	ArrayAll = New Array();
+//	ArrayByType = New Array();
+//	DocBankPaymentServer.FillAttributesByType(Object.Ref, Object.TransactionType, ArrayAll, ArrayByType);
+//	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
+	
+	AttributesForChangeVisible = GetVisibleAttributesByTransactionType(Object.TransactionType);
+	For Each Attr In AttributesForChangeVisible.AllAtributes Do
+		ItemName = StrReplace(Attr, ".", "");
+		Visibility = (AttributesForChangeVisible.VisibleAttributes.Find(Attr) <> Undefined);
+		Form.Items[TrimAll(ItemName)].Visible = Visibility;
+	EndDo;
+	
 	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange")
 		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
 		BasedOnCashTransferOrder = False;
@@ -76,6 +130,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	EndIf;
+	Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	Form.Items.EditTrialBallanceAccounts.Enabled = Not Form.ReadOnly;
 EndProcedure
@@ -112,25 +167,25 @@ EndProcedure
 
 &AtClient
 Procedure CurrencyOnChange(Item)
-	If CashTransferOrdersInPaymentList(Object.Currency) And Object.Currency <> CurrentCurrency Then
-		ShowQueryBox(New NotifyDescription("CurrencyOnChangeContinue", ThisObject), R().QuestionToUser_008,
-			QuestionDialogMode.YesNoCancel);
-		Return;
-	EndIf;
+//	If CashTransferOrdersInPaymentList(Object.Currency) And Object.Currency <> CurrentCurrency Then
+//		ShowQueryBox(New NotifyDescription("CurrencyOnChangeContinue", ThisObject), R().QuestionToUser_008,
+//			QuestionDialogMode.YesNoCancel);
+//		Return;
+//	EndIf;
 	DocBankPaymentClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure CurrencyOnChangeContinue(Answer, AdditionalParameters) Export
-	If Answer = DialogReturnCode.Yes Then
-		// delete rows with cash transfers
-		ClearCashTransferOrders(Object.Currency);
-		CurrentCurrency = Object.Currency;
-		DocBankPaymentClient.CurrencyOnChange(Object, ThisObject, Items.Currency);
-	Else
-		Object.Currency = CurrentCurrency;
-	EndIf;
-EndProcedure
+//&AtClient
+//Procedure CurrencyOnChangeContinue(Answer, AdditionalParameters) Export
+//	If Answer = DialogReturnCode.Yes Then
+//		// delete rows with cash transfers
+//		ClearCashTransferOrders(Object.Currency);
+//		CurrentCurrency = Object.Currency;
+//		DocBankPaymentClient.CurrencyOnChange(Object, ThisObject, Items.Currency);
+//	Else
+//		Object.Currency = CurrentCurrency;
+//	EndIf;
+//EndProcedure
 
 #EndRegion
 
@@ -138,25 +193,27 @@ EndProcedure
 
 &AtClient
 Procedure AccountOnChange(Item)
-	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
-	If CashTransferOrdersInPaymentList(AccountCurrency) And AccountCurrency <> CurrentCurrency Then
-		ShowQueryBox(New NotifyDescription("AccountOnChangeContinue", ThisObject), R().QuestionToUser_008,
-			QuestionDialogMode.YesNoCancel);
-		Return;
-	EndIf;
-	DocBankPaymentClient.AccountOnChange(Object, ThisObject, Item);
+//	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
+//	If CashTransferOrdersInPaymentList(AccountCurrency) And AccountCurrency <> CurrentCurrency Then
+//		ShowQueryBox(New NotifyDescription("AccountOnChangeContinue", ThisObject), R().QuestionToUser_008,
+//			QuestionDialogMode.YesNoCancel);
+//	Else
+		DocBankPaymentClient.AccountOnChange(Object, ThisObject, Item);
+		SetVisibilityAvailability(Object, ThisObject);
+//	EndIf;
 EndProcedure
 
-&AtClient
-Procedure AccountOnChangeContinue(Answer, AdditionalParameters) Export
-	If Answer = DialogReturnCode.Yes Then
-		CurrentAccount = Object.Account;
-		DocBankPaymentClient.AccountOnChange(Object, ThisObject, Items.Currency);
-		ClearCashTransferOrders(Object.Currency);
-	Else
-		Object.Account = CurrentAccount;
-	EndIf;
-EndProcedure
+//&AtClient
+//Procedure AccountOnChangeContinue(Answer, AdditionalParameters) Export
+//	If Answer = DialogReturnCode.Yes Then
+//		CurrentAccount = Object.Account;
+//		DocBankPaymentClient.AccountOnChange(Object, ThisObject, Items.Currency);
+//		ClearCashTransferOrders(Object.Currency);
+//		SetVisibilityAvailability(Object, ThisObject);
+//	Else
+//		Object.Account = CurrentAccount;
+//	EndIf;
+//EndProcedure
 
 &AtClient
 Procedure AccountStartChoice(Item, ChoiceData, StandardProcessing)
@@ -198,8 +255,8 @@ EndProcedure
 
 &AtClient
 Procedure TransactionTypeOnChange(Item)
-	SetVisibilityAvailability(Object, ThisObject);
 	DocBankPaymentClient.TransactionTypeOnChange(Object, ThisObject, Item);
+	//SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -208,18 +265,20 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnChange(Item)
-	DocBankPaymentClient.PaymentListOnChange(Object, ThisObject, Item);
+	//DocBankPaymentClient.PaymentListOnChange(Object, ThisObject, Item);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure PaymentListOnActivateRow(Item)
-	DocBankPaymentClient.PaymentListOnActivateRow(Object, ThisObject, Item);
+	Return;
+	//DocBankPaymentClient.PaymentListOnActivateRow(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure PaymentListOnStartEdit(Item, NewRow, Clone)
-	DocBankPaymentClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+	Return;
+	//DocBankPaymentClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient
@@ -234,12 +293,14 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnActivateCell(Item)
-	DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item);
+	Return;
+	//DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure PaymentListBeforeRowChange(Item, Cancel)
-	DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item, Cancel);
+	Return;
+	//DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient
@@ -442,30 +503,30 @@ EndProcedure
 
 #Region Common
 
-&AtClient
-Procedure ClearCashTransferOrders(Val CashTransferOrderCurrency) Export
-	For Each Row In Object.PaymentList Do
-		If ValueIsFilled(Row.PlaningTransactionBasis) And TypeOf(Row.PlaningTransactionBasis) = Type(
-			"DocumentRef.CashTransferOrder") And ServiceSystemServer.GetObjectAttribute(Row.PlaningTransactionBasis,
-			"SendCurrency") <> CashTransferOrderCurrency Then
-			Row.PlaningTransactionBasis = Undefined;
-		EndIf;
-	EndDo;
-EndProcedure
+//&AtClient
+//Procedure ClearCashTransferOrders(Val CashTransferOrderCurrency) Export
+//	For Each Row In Object.PaymentList Do
+//		If ValueIsFilled(Row.PlaningTransactionBasis) 
+//			And TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
+//			And ServiceSystemServer.GetObjectAttribute(Row.PlaningTransactionBasis,"SendCurrency") <> CashTransferOrderCurrency Then
+//			Row.PlaningTransactionBasis = Undefined;
+//		EndIf;
+//	EndDo;
+//EndProcedure
 
-&AtClient
-Function CashTransferOrdersInPaymentList(Val CashTransferOrderCurrency)
-	Answer = False;
-	For Each Row In Object.PaymentList Do
-		If ValueIsFilled(Row.PlaningTransactionBasis) And TypeOf(Row.PlaningTransactionBasis) = Type(
-			"DocumentRef.CashTransferOrder") And ServiceSystemServer.GetObjectAttribute(Row.PlaningTransactionBasis,
-			"ReceiveCurrency") <> CashTransferOrderCurrency Then
-			Answer = True;
-			Break;
-		EndIf;
-	EndDo;
-	Return Answer;
-EndFunction
+//&AtClient
+//Function CashTransferOrdersInPaymentList(Val CashTransferOrderCurrency)
+//	Answer = False;
+//	For Each Row In Object.PaymentList Do
+//		If ValueIsFilled(Row.PlaningTransactionBasis) 
+//			And TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
+//			And ServiceSystemServer.GetObjectAttribute(Row.PlaningTransactionBasis, "ReceiveCurrency") <> CashTransferOrderCurrency Then
+//			Answer = True;
+//			Break;
+//		EndIf;
+//	EndDo;
+//	Return Answer;
+//EndFunction
 
 #EndRegion
 

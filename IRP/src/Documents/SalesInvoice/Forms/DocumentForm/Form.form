@@ -2057,6 +2057,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.DeliveryDate</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListDeliveryDateOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListDeliveryDateExtendedTooltip</name>
             <id>425</id>
@@ -2649,6 +2653,10 @@
         <handlers>
           <event>BeforeDeleteRow</event>
           <name>ItemListBeforeDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>BeforeAddRow</event>
+          <name>ItemListBeforeAddRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>

@@ -1,6 +1,12 @@
 #Region FormEvents
 
 &AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(Object, ThisObject);
+	DocGoodsReceiptServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
@@ -13,52 +19,14 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocGoodsReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocGoodsReceiptServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
 &AtClient
 Procedure OnOpen(Cancel)
 	DocGoodsReceiptClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
-&AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-	DocGoodsReceiptServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-EndProcedure
-
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	DocGoodsReceiptClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
-EndProcedure
-
-&AtClient
-Procedure FormSetVisibilityAvailability() Export
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
-	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
-
-	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer")
-		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
-	Form.Items.LegalName.Enabled = PartnerVisible And ValueIsFilled(Object.Partner);
-	Form.Items.Partner.Visible   = PartnerVisible;
-	Form.Items.LegalName.Visible = PartnerVisible;
-#If Client Then
-	For Each Row In Object.ItemList Do
-		If ValueIsFilled(Row.ReceiptBasis) Then
-			Row.ReceiptBasisCurrency = ServiceSystemServer.GetCompositeObjectAttribute(Row.ReceiptBasis, "Currency");
-		Else
-			Row.ReceiptBasisCurrency = Undefined;
-		EndIf;
-	EndDo;
-#EndIf
 EndProcedure
 
 &AtClient
@@ -76,6 +44,36 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 			LockLinkedRows();
 		EndIf;
 	EndIf;
+EndProcedure
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocGoodsReceiptServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
+
+	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer")
+		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
+	Form.Items.LegalName.Enabled = PartnerVisible And ValueIsFilled(Object.Partner);
+	Form.Items.Partner.Visible   = PartnerVisible;
+	Form.Items.LegalName.Visible = PartnerVisible;
+	For Each Row In Object.ItemList Do
+		If ValueIsFilled(Row.ReceiptBasis) Then
+			Row.ReceiptBasisCurrency = ServiceSystemServer.GetCompositeObjectAttribute(Row.ReceiptBasis, "Currency");
+		Else
+			Row.ReceiptBasisCurrency = Undefined;
+		EndIf;
+	EndDo;
 EndProcedure
 
 &AtServer
@@ -100,7 +98,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocGoodsReceiptClient.ItemListOnChange(Object, ThisObject, Item);
+	//DocGoodsReceiptClient.ItemListOnChange(Object, ThisObject, Item);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -116,8 +114,35 @@ Procedure ItemListAfterDeleteRow(Item)
 EndProcedure
 
 &AtClient
+Procedure ItemListOnActivateRow(Item)
+	Return;
+	//DocGoodsReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocGoodsReceiptClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
 Procedure ItemListBeforeDeleteRow(Item, Cancel)
 	DocGoodsReceiptClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure ItemListOnStartEdit(Item, NewRow, Clone)
+	Return;
+	//DocGoodsReceiptClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	DocGoodsReceiptClient.ItemListItemOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemKeyOnChange(Item)
+	DocGoodsReceiptClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -131,23 +156,8 @@ Procedure ItemListUnitOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure ItemListOnActivateRow(Item)
-	DocGoodsReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocGoodsReceiptClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemOnChange(Item)
-	DocGoodsReceiptClient.ItemListItemOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemKeyOnChange(Item)
-	DocGoodsReceiptClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+Procedure ItemListStoreOnChange(Item)
+	DocGoodsReceiptClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -176,6 +186,45 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocGoodsReceiptClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ItemPartner
+
+&AtClient
+Procedure PartnerOnChange(Item)
+	DocGoodsReceiptClient.PartnerOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocGoodsReceiptClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	DocGoodsReceiptClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ItemLegalName
+
+&AtClient
+Procedure LegalNameOnChange(Item)
+	DocGoodsReceiptClient.LegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocGoodsReceiptClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocGoodsReceiptClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -222,44 +271,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPartner
-
-&AtClient
-Procedure PartnerOnChange(Item)
-	DocGoodsReceiptClient.PartnerOnChange(Object, ThisObject, Item);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocGoodsReceiptClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
-	DocGoodsReceiptClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemLegalName
-
-&AtClient
-Procedure LegalNameOnChange(Item)
-	DocGoodsReceiptClient.LegalNameOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocGoodsReceiptClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocGoodsReceiptClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
 
 #Region Commands
 
@@ -331,29 +342,38 @@ Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_GR(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
 	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
 &AtClient
-Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
-	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
-	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, ThisObject);
+	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	If ExtractedData <> Undefined Then
+		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
+	EndIf;
 EndProcedure
 
 &AtServer
-Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
 		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
-		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	EndIf;
 	LockLinkedRows();
-EndProcedure
+	Return ExtractedData;
+EndFunction
 
 &AtServer
 Procedure LockLinkedRows()

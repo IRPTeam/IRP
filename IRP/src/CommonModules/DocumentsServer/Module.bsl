@@ -236,7 +236,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 
 	Partner = AgreementParameters.Partner;
 
-	If Partner.IsEmpty() Then
+	If Not ValueIsFilled(Partner) Then
 		Return Catalogs.Agreements.EmptyRef();
 	EndIf;
 
@@ -245,8 +245,10 @@ Function GetAgreementByPartner(AgreementParameters) Export
 		ArrayOfFilters = AgreementParameters.ArrayOfFilters;
 	Else
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementParameters.AgreementType,
-			ComparisonType.Equal));
+		If AgreementParameters.Property("AgreementType") And ValueIsFilled(AgreementParameters.AgreementType) Then
+			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementParameters.AgreementType,
+				ComparisonType.Equal));
+		EndIf;
 	EndIf;
 
 	AdditionalParameters = New Structure();
@@ -270,7 +272,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 EndFunction
 
 Function GetLegalNameByPartner(Partner, LegalName) Export
-	If Not Partner.IsEmpty() Then
+	If ValueIsFilled(Partner) Then
 		ArrayOfFilters = New Array();
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 		AdditionalParameters = New Structure();
@@ -365,8 +367,8 @@ Function PrepareServerData(Parameters) Export
 			ArrayOfTaxesInCache = New Array();
 
 			SavedData = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.TaxesCache.Cache);
-			If SavedData.Property("ArrayOfColumnsInfo") Then
-				ArrayOfTaxInfo = SavedData.ArrayOfColumnsInfo;
+			If SavedData.Property("ArrayOfTaxInfo") Then
+				ArrayOfTaxInfo = SavedData.ArrayOfTaxInfo;
 				For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
 					ItemOfTaxInfo.Insert("TaxTypeIsRate", ItemOfTaxInfo.Type = Enums.TaxType.Rate);
 					If Parameters.TaxesCache.Property("GetArrayOfTaxRates") Then
@@ -754,7 +756,7 @@ EndProcedure
 #EndRegion
 
 Function GetPartnerByLegalName(LegalName, Partner) Export
-	If Not LegalName.IsEmpty() Then
+	If ValueIsFilled(LegalName) Then
 		ArrayOfFilters = New Array();
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 		If ValueIsFilled(Partner) Then

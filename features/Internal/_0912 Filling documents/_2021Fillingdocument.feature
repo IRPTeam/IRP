@@ -949,7 +949,13 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
 			And I select current line in "List" table
+			#-> new step
+			Then "Update item list info" window is opened
+			And I click "OK" button
+			#<-
 		* Tax calculation check
+			If window with "Update item list info" header has appeared Then
+				And I click "OK" button
 			And "ItemList" table contains lines
 				| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | ''       | 'Trousers' | '18%' | '38/Yellow' | '64,98'      | '1%'       | '1,000' | 'pcs'  | '335,02'     | '400,00'       | 'Store 01' |
@@ -3440,10 +3446,22 @@ Scenario: _0154116 check filling in and refilling Cash expence
 	* Check the Net amount recalculation when Total amount changes and with changes in taxes
 		And I input "220,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Profit loss center'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
-			| '186,45'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,00'       |
-	* Check the Total amount recalculation when Net amount changes and with changes in taxes
+			| 'Net amount' | 'Profit loss center' | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| '186,44'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,56'      | '220,00'       |
+	* Check Dont calculate row
+		And I activate "Dont calculate row" field in "PaymentList" table
+		And I set "Dont calculate row" checkbox in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTaxAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "33,55" text in the field named "PaymentListTaxAmount" of "PaymentList" table
+		And I activate field named "PaymentListNetAmount" in "PaymentList" table
 		And I input "187,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "220,55" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Expense type'                     | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '187,00'     | 'Telephone communications'         | 'TRY'      | '18%' | '33,55'      | '220,55'       |
@@ -3486,7 +3504,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 	* Delete a line and check the total amount conversion
 		And I activate field named "PaymentListCurrency" in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| 'Profit loss center'      | 'Currency' | 'Expense type'             | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Profit loss center' | 'Currency' | 'Expense type'             | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
 			| 'Accountants office' | 'TRY'      | 'Telephone communications' | '187,00'     | '33,55'      | '220,55'       | '18%' |
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuDelete"
 		And the editing text of form attribute named "PaymentListTotalNetAmount" became equal to "200,00"
@@ -3513,7 +3531,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I click "Yes" button
 		And "PaymentList" table does not contain lines
 			| 'Net amount' | 'Profit loss center' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
-			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
+			| '200,00'     | 'Front office'       | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
 	* Change the company (without taxes) and check to delete the VAT column
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -3678,16 +3696,22 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		And "PaymentList" table contains lines
 		| 'Net amount' | 'Revenue type'               | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '186,44'     | 'Telephone communications'   | 'TRY'      | '18%' | '33,55'      | '219,99'       |
-	* Check the Net amount recalculation when Total amount changes and with changes in taxes
-		And I input "220,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
-		And "PaymentList" table contains lines
-		| 'Net amount' | 'Profit loss center'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
-		| '186,45'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,00'       |
-	* Check the Total amount recalculation when Net amount changes and with changes in taxes
+	* Check Donr calculate row
+		And I activate "Dont calculate row" field in "PaymentList" table
+		And I set "Dont calculate row" checkbox in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListNetAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
 		And I input "187,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTaxAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "33,55" text in the field named "PaymentListTaxAmount" of "PaymentList" table
+		And I input "220,55" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-		| 'Net amount' | 'Revenue type'                     | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
-		| '187,00'     | 'Telephone communications'         | 'TRY'      | '18%' | '33,55'      | '220,55'       |
+		| 'Net amount' | 'Profit loss center' | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+		| '187,00'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 	* Check the currency form connection
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal

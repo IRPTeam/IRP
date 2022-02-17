@@ -78,7 +78,8 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocStockAdjustmentAsWriteOffClient.ItemListOnChange(Object, ThisObject, Item);
+	Return;
+	//DocStockAdjustmentAsWriteOffClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -94,7 +95,8 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocStockAdjustmentAsWriteOffClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+	Return;
+	//DocStockAdjustmentAsWriteOffClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient
@@ -276,29 +278,35 @@ Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_StockAdjustmentAsWriteOff(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
 	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
 &AtClient
-Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
 	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
-	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, ThisObject);
 EndProcedure
 
 &AtServer
-Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
 		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
-		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	EndIf;
 	LockLinkedRows();
-EndProcedure
+	Return ExtractedData;
+EndFunction
 
 &AtServer
 Procedure LockLinkedRows()

@@ -39,14 +39,13 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-
 		If FillingData.BasedOn = "CashTransferOrder" 
 			Or FillingData.BasedOn = "IncomingPaymentOrder"
 			Or FillingData.BasedOn = "SalesInvoice" 
 			Or FillingData.BasedOn = "SalesOrder"
 			Or FillingData.BasedOn = "PurchaseReturn" Then
-
-			Filling_BasedOn(FillingData);
+				ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+				Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;
 EndProcedure

@@ -5,23 +5,25 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Form.Parameters.Key.IsEmpty() Then
 		DocumentsServer.FillItemList(Object, Form);
 
-		ObjectData = DocumentsClientServer.GetStructureFillStores();
-		FillPropertyValues(ObjectData, Object);
-		DocumentsClientServer.FillStores(ObjectData, Form);
+		//ObjectData = DocumentsClientServer.GetStructureFillStores();
+		//FillPropertyValues(ObjectData, Object);
+		//DocumentsClientServer.FillStores(ObjectData, Form);
 
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 	FillTransactionTypeChoiceList(Form);
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
+	
+	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsServer.FillItemList(Object, Form);
 
-	ObjectData = DocumentsClientServer.GetStructureFillStores();
-	FillPropertyValues(ObjectData, CurrentObject);
-	DocumentsClientServer.FillStores(ObjectData, Form);
+	//ObjectData = DocumentsClientServer.GetStructureFillStores();
+	//FillPropertyValues(ObjectData, CurrentObject);
+	//DocumentsClientServer.FillStores(ObjectData, Form);
 
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
@@ -30,9 +32,9 @@ EndProcedure
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsServer.FillItemList(Object, Form);
 
-	ObjectData = DocumentsClientServer.GetStructureFillStores();
-	FillPropertyValues(ObjectData, CurrentObject);
-	DocumentsClientServer.FillStores(ObjectData, Form);
+	//ObjectData = DocumentsClientServer.GetStructureFillStores();
+	//FillPropertyValues(ObjectData, CurrentObject);
+	//DocumentsClientServer.FillStores(ObjectData, Form);
 
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
@@ -59,32 +61,32 @@ EndProcedure
 
 #EndRegion
 
-Function PutQueryTableToTempTable(QueryTable) Export
-	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-	For Each Row In QueryTable Do
-		Row.Key = Row.RowKey;
-	EndDo;
-	tempManager = New TempTablesManager();
-	Query = New Query();
-	Query.TempTablesManager = tempManager;
-	Query.Text =
-	"SELECT
-	|	QueryTable.Store,
-	|	QueryTable.ShipmentBasis,
-	|	QueryTable.Currency,
-	|   QueryTable.ItemKey,
-	|   QueryTable.Unit,
-	|	QueryTable.Quantity,
-	|   QueryTable.Key,
-	|   QueryTable.RowKey
-	|INTO tmpQueryTable
-	|FROM
-	|	&QueryTable AS QueryTable";
-
-	Query.SetParameter("QueryTable", QueryTable);
-	Query.Execute();
-	Return tempManager;
-EndFunction
+//Function PutQueryTableToTempTable(QueryTable) Export
+//	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+//	For Each Row In QueryTable Do
+//		Row.Key = Row.RowKey;
+//	EndDo;
+//	tempManager = New TempTablesManager();
+//	Query = New Query();
+//	Query.TempTablesManager = tempManager;
+//	Query.Text =
+//	"SELECT
+//	|	QueryTable.Store,
+//	|	QueryTable.ShipmentBasis,
+//	|	QueryTable.Currency,
+//	|   QueryTable.ItemKey,
+//	|   QueryTable.Unit,
+//	|	QueryTable.Quantity,
+//	|   QueryTable.Key,
+//	|   QueryTable.RowKey
+//	|INTO tmpQueryTable
+//	|FROM
+//	|	&QueryTable AS QueryTable";
+//
+//	Query.SetParameter("QueryTable", QueryTable);
+//	Query.Execute();
+//	Return tempManager;
+//EndFunction
 
 #Region ListFormEvents
 
@@ -103,10 +105,10 @@ EndProcedure
 #EndRegion
 
 Procedure FillTransactionTypeChoiceList(Form)
-	Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.Sales,
-		Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.Sales.Synonym);
-	Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor,
-		Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.ReturnToVendor.Synonym);
-	Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.InventoryTransfer,
-		Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.InventoryTransfer.Synonym);
+	EnumValues   = Enums.ShipmentConfirmationTransactionTypes;
+	EnumMetadata = Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues;
+	
+	Form.Items.TransactionType.ChoiceList.Add(EnumValues.Sales             , EnumMetadata.Sales.Synonym);
+	Form.Items.TransactionType.ChoiceList.Add(EnumValues.ReturnToVendor    , EnumMetadata.ReturnToVendor.Synonym);
+	Form.Items.TransactionType.ChoiceList.Add(EnumValues.InventoryTransfer , EnumMetadata.InventoryTransfer.Synonym);
 EndProcedure

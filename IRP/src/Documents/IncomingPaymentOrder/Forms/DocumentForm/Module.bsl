@@ -27,11 +27,12 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnChange(Item)
-	For Each Row In Object.PaymentList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
+	Return;
+//	For Each Row In Object.PaymentList Do
+//		If Not ValueIsFilled(Row.Key) Then
+//			Row.Key = New UUID();
+//		EndIf;
+//	EndDo;
 EndProcedure
 
 &AtServer
@@ -61,6 +62,16 @@ EndProcedure
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
 	DocIncomingPaymentOrderClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocIncomingPaymentOrderClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure PaymentListAfterDeleteRow(Item)
+	DocIncomingPaymentOrderClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
 #Region ItemCompany
@@ -177,7 +188,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Payee
+#Region Payer
 
 &AtClient
 Procedure PaymentListPayerOnChange(Item, AddInfo = Undefined) Export
@@ -209,6 +220,7 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 #EndRegion
+
 #Region ExternalCommands
 
 &AtClient

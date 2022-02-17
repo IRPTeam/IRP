@@ -3,6 +3,26 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		Force = False;
 	EndIf;
 
+//===
+IsUsedNewFunctionality =
+	   TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
+	Or TypeOf(Source) = Type("DocumentObject.OutgoingPaymentOrder")
+	   
+	Or TypeOf(Source) = Type("DocumentObject.BankPayment")
+	Or TypeOf(Source) = Type("DocumentObject.BankReceipt")
+	Or TypeOf(Source) = Type("DocumentObject.CashPayment")
+	Or TypeOf(Source) = Type("DocumentObject.CashReceipt")
+	
+	Or TypeOf(Source) = Type("DocumentObject.CashExpense")
+	Or TypeOf(Source) = Type("DocumentObject.CashRevenue")
+	
+	Or TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation")
+	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
+	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsSurplus")
+	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsWriteOff")
+	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice");
+//===
+
 	Data = New Structure();
 
 	Data.Insert("Author", SessionParameters.CurrentUser);
@@ -15,24 +35,157 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	Data = New Structure();
 	Data.Insert("ManagerSegment", SessionParameters.CurrentUserPartner);
 	For Each Row In UserSettings Do
-		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular Or Row.KindOfAttribute
-			= Enums.KindsOfAttributes.Common Then
+		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular 
+			Or Row.KindOfAttribute = Enums.KindsOfAttributes.Common Then
 			Data.Insert(Row.AttributeName, Row.Value);
 		EndIf;
 	EndDo;
-
+	
+	//==
+	If IsUsedNewFunctionality Then
+		ArrayOfAllMainTables = New Array();
+		ArrayOfAllMainTables.Add("ItemList");
+		ArrayOfAllMainTables.Add("PaymentList");
+		ArrayOfAllMainTables.Add("Transactions");
+		ArrayOfMainTables = New Array();
+		For Each TableName In ArrayOfAllMainTables Do
+			If CommonFunctionsClientServer.ObjectHasProperty(Source, TableName) Then
+				ArrayOfMainTables.Add(TableName);
+			EndIf;
+		EndDo;
+		
+		// свойства которые были заполнены из настроек пользователя
+		ArrayOfUserSettingsProperties = New Array();
+		For Each KeyValue In Data Do
+			If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) 
+				And ValueIsFilled(Data[KeyValue.Key]) Then				
+				ArrayOfUserSettingsProperties.Add(TrimAll(KeyValue.Key));	
+			EndIf;
+		EndDo;
+		UserSettinsProperties = StrConcat(ArrayOfUserSettingsProperties, ",");
+	
+		ReadOnlyProperties = "";
+		Source.AdditionalProperties.Property("ReadOnlyProperties", ReadOnlyProperties);
+		ReadOnlyProperties = ?(ReadOnlyProperties = Undefined, "", ReadOnlyProperties);
+		
+		IsBasedOn = False;
+		Source.AdditionalProperties.Property("IsBasedOn", IsBasedOn);
+		IsBasedOn = ?(IsBasedOn = Undefined, False, IsBasedOn);
+		
+		// если документ был введен на основании то у него уже есть заполненные реквизиты
+		// список этих реквизитов в ReadOnlyProperties
+		// нужно для каждого уже заполненного реквизита вызвать его обработчик
+	
+		ArrayOfBasisDocumentProperties = StrSplit(ReadOnlyProperties, ",");
+		ArrayOfUserSettinsProperties   = StrSplit(UserSettinsProperties, ",");
+		For Each TableName In ArrayOfMainTables Do
+			// BasisDocument
+			ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+			ServerParameters.IsBasedOn          = IsBasedOn;
+			ServerParameters.TableName          = TableName;
+			ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
+			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+			
+			For Each PropertyName In ArrayOfBasisDocumentProperties Do
+				If Not ValueIsFilled(PropertyName) Then
+					Continue;
+				EndIf;
+				DataPath = StrSplit(PropertyName, ".");
+				If DataPath.Count() = 1 Then
+					Property = New Structure("DataPath", TrimAll(DataPath[0]));
+					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Source[Property.DataPath]);
+				EndIf;
+			EndDo;
+			
+			// UserSetting
+			ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+			ServerParameters.IsBasedOn          = IsBasedOn;
+			ServerParameters.TableName          = TableName;
+			ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(ReadOnlyProperties), 
+				ReadOnlyProperties + ", " + UserSettinsProperties, UserSettinsProperties);;
+			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+			
+			For Each PropertyName In ArrayOfUserSettinsProperties Do
+				If Not ValueIsFilled(PropertyName) Then
+					Continue;
+				EndIf;
+				Value = Data[PropertyName];
+				If ValueIsFilled(Value) 
+					And Not ValueIsFilled(Source[PropertyName])
+					And ArrayOfBasisDocumentProperties.Find(PropertyName) = Undefined Then
+						Source[PropertyName] = Value;
+				Else
+						Continue;
+				EndIf;
+				
+				DataPath = StrSplit(PropertyName, ".");
+				If DataPath.Count() = 1 Then
+					Property = New Structure("DataPath", TrimAll(DataPath[0]));
+					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+				EndIf;
+			EndDo;
+			
+		EndDo;
+		
+		
+	EndIf; // IsUsedNewFunctionality 
+	//==
+	
 	For Each KeyValue In Data Do
 		If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) Then
-			If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
-				Source[KeyValue.Key] = KeyValue.Value;
-			ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Or Force Then
-				Source[KeyValue.Key] = KeyValue.Value;
-			EndIf;
+			//==
+//			If IsUsedNewFunctionality Then
+//				// временно, потом перенести в модуль Controller
+//				
+//				// заполняем реквизиты из настроек пользователя,
+//				// но только не те что в ReadOnlyProperties
+//				Property = New Structure("DataPath", KeyValue.Key);
+//				Value    = KeyValue.Value;
+//				
+//				ArrayOfReadOnlyProperties = StrSplit(ReadOnlyProperties, ",");
+//				If ValueIsFilled(Value) And Not ValueIsFilled(Source[Property.DataPath]) Then
+//					If ArrayOfReadOnlyProperties.Find(Property.DataPath) = Undefined Then
+//						Source[Property.DataPath] = Value;
+//					EndIf;
+//				EndIf;
+//				
+//				For Each TableName In ArrayOfMainTables Do
+//					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+//					ServerParameters.TableName = TableName;
+//					
+//					ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(ReadOnlyProperties), 
+//						ReadOnlyProperties + ", " + UserSettinsProperties, UserSettinsProperties);
+//					
+//					Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+//					
+//					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
+//				EndDo;
+//			Else
+			//==
+				If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
+					Source[KeyValue.Key] = KeyValue.Value;
+				ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Or Force Then
+					Source[KeyValue.Key] = KeyValue.Value;
+				EndIf;
+//			EndIf;
+			//==
 		EndIf;
 	EndDo;
 
 	Attributes = Source.Metadata().Attributes;
-
+	
+	StatusAttribute = Attributes.Find("Status");
+	If StatusAttribute <> Undefined And StatusAttribute.Type = New TypeDescription("CatalogRef.ObjectStatuses")
+		And Not ValueIsFilled(Source.Status) Then
+		Source.Status = ObjectStatusesServer.GetStatusByDefault(Source.Ref);
+	EndIf;
+	
+	//===
+	If IsUsedNewFunctionality Then
+		Return;
+	EndIf;
+	//===
+	
 	UseShipmentConfirmation = False;
 	If Attributes.Find("StoreSender") <> Undefined And Attributes.Find("UseShipmentConfirmation") <> Undefined Then
 		UseShipmentConfirmation = Source.StoreSender.UseShipmentConfirmation;
@@ -46,27 +199,23 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	AgreementAttribute = Attributes.Find("Agreement");
 	If AgreementAttribute <> Undefined And AgreementAttribute.Type = New TypeDescription("CatalogRef.Agreements") Then
 
-		If Attributes.Find("Partner") <> Undefined And ValueIsFilled(Source.Partner) And ValueIsFilled(
-			Source.Agreement) Then
-			AgreementParameters = New Structure();
-			AgreementParameters.Insert("Partner", Source.Partner);
-			AgreementParameters.Insert("Agreement", Source.Agreement);
-			AgreementParameters.Insert("CurrentDate", CurrentDate());
-			AgreementParameters.Insert("ArrayOfFilters", New Array());
-			AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-				ComparisonType.NotEqual));
-			AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue(
-				"Enum.AgreementKinds.Standard"), ComparisonType.NotEqual));
-			Source.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
+		If Attributes.Find("Partner") <> Undefined 
+			And ValueIsFilled(Source.Partner) 
+			And ValueIsFilled(Source.Agreement) Then
+				AgreementParameters = New Structure();
+				AgreementParameters.Insert("Partner"        , Source.Partner);
+				AgreementParameters.Insert("Agreement"      , Source.Agreement);
+				AgreementParameters.Insert("CurrentDate"    , CurrentDate());
+				AgreementParameters.Insert("ArrayOfFilters" , New Array());
+				AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark",
+					True, ComparisonType.NotEqual));
+				AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind",
+					PredefinedValue("Enum.AgreementKinds.Standard"), ComparisonType.NotEqual));
+				Source.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		EndIf;
 
 	EndIf;
 
-	StatusAttribute = Attributes.Find("Status");
-	If StatusAttribute <> Undefined And StatusAttribute.Type = New TypeDescription("CatalogRef.ObjectStatuses")
-		And Not ValueIsFilled(Source.Status) Then
-		Source.Status = ObjectStatusesServer.GetStatusByDefault(Source.Ref);
-	EndIf;
 EndProcedure
 
 Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export

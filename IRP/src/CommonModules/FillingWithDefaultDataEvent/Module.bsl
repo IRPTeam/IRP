@@ -23,7 +23,6 @@ IsUsedNewFunctionality =
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsSurplus")
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsWriteOff")
 	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice");
-//===
 
 	Data = New Structure();
 

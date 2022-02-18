@@ -464,6 +464,7 @@ Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 	Else
 		__tmp_CashExpenseRevenue_CommitChanges(Parameters);
 	EndIf;
+
 EndProcedure
 
 Procedure __tmp_CashExpenseRevenue_AccountOnUserChangeContinue(Answer, NotifyParameters) Export

@@ -608,6 +608,13 @@
         <value>85</value>
       </code>
     </items>
+    <items id="3b171d98-0069-4860-9c06-5aa41d3f4218">
+      <name>Document_MoneyTransfer</name>
+      <description>Document money transfer</description>
+      <code xsi:type="core:NumberValue">
+        <value>86</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

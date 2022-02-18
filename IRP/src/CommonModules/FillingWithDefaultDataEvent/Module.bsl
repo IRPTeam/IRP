@@ -7,6 +7,8 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 IsUsedNewFunctionality =
 	   TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
 	Or TypeOf(Source) = Type("DocumentObject.OutgoingPaymentOrder")
+	
+	Or TypeOf(Source) = Type("DocumentObject.MoneyTransfer")
 	   
 	Or TypeOf(Source) = Type("DocumentObject.BankPayment")
 	Or TypeOf(Source) = Type("DocumentObject.BankReceipt")

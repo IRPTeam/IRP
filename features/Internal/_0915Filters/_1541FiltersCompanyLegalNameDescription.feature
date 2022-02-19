@@ -407,6 +407,11 @@ Scenario: _028012 check Description in the document Labeling
 	Given I open hyperlink "e1cib/list/Document.Labeling"
 	When check Description
 
+Scenario: _028013 check Description in the document Money transfer
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+	When check Description
+
 
 Scenario: _028050 check the filter by Company when selecting cash/bank in Cash expense document
 	* Temporary filling in Cash desk 3 Second Company

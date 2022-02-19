@@ -129,10 +129,10 @@ Scenario: _054101 filling Money transfer (same currency and account type)
 		And the editing text of form attribute named "ReceiveAmount" became equal to "500,00"
 		Then the form attribute named "Branch" became equal to "Distribution department"
 		Then the form attribute named "CashTransferOrder" became equal to ""
-	* Check creation
-		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And I save the value of "Number" field as "NumberMoneyTransfer054101"
 		And I click "Post and close" button
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And "List" table contains lines
 			| 'Number' |
 			| '$NumberMoneyTransfer054101$'      |	
@@ -199,10 +199,10 @@ Scenario: _054102 filling Money transfer (different currency and account type)
 		And the editing text of form attribute named "ReceiveAmount" became equal to "500,00"
 		Then the form attribute named "Branch" became equal to "Distribution department"
 		Then the form attribute named "CashTransferOrder" became equal to ""
-	* Check creation
-		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And I save the value of "Number" field as "NumberMoneyTransfer054102"
 		And I click "Post and close" button
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And "List" table contains lines
 			| 'Number' |
 			| '$NumberMoneyTransfer054102$'      |	

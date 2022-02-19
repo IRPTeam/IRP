@@ -20,18 +20,18 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters) Export
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocBankReceiptServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure OnOpen(Cancel) Export
+Procedure OnOpen(Cancel)
 	DocBankReceiptClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source) Export
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -150,7 +150,7 @@ EndProcedure
 #Region _DATE
 
 &AtClient
-Procedure DateOnChange(Item) Export
+Procedure DateOnChange(Item)
 	DocBankReceiptClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -159,7 +159,7 @@ EndProcedure
 #Region COMPANY
 
 &AtClient
-Procedure CompanyOnChange(Item) Export
+Procedure CompanyOnChange(Item)
 	DocBankReceiptClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -178,7 +178,7 @@ EndProcedure
 #Region CURRENCY
 
 &AtClient
-Procedure CurrencyOnChange(Item) Export
+Procedure CurrencyOnChange(Item)
 	DocBankReceiptClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -187,7 +187,7 @@ EndProcedure
 #Region ACCOUNT
 
 &AtClient
-Procedure AccountOnChange(Item) Export
+Procedure AccountOnChange(Item)
 	DocBankReceiptClient.AccountOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -246,7 +246,7 @@ EndProcedure
 #Region PARTNER
 
 &AtClient
-Procedure PaymentListPartnerOnChange(Item) Export
+Procedure PaymentListPartnerOnChange(Item)
 	DocBankReceiptClient.PaymentListPartnerOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -265,7 +265,7 @@ EndProcedure
 #Region PAYER
 
 &AtClient
-Procedure PaymentListPayerOnChange(Item) Export
+Procedure PaymentListPayerOnChange(Item)
 	DocBankReceiptClient.PaymentListPayerOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -284,7 +284,7 @@ EndProcedure
 #Region AGREEMENT
 
 &AtClient
-Procedure PaymentListAgreementOnChange(Item) Export
+Procedure PaymentListAgreementOnChange(Item)
 	DocBankReceiptClient.PaymentListAgreementOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -303,7 +303,7 @@ EndProcedure
 #Region BASIS_DOCUMENT
 
 &AtClient
-Procedure PaymentListBasisDocumentOnChange(Item) Export
+Procedure PaymentListBasisDocumentOnChange(Item)
 	DocBankReceiptClient.PaymentListBasisDocumentOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -317,7 +317,7 @@ EndProcedure
 #Region PLANNING_TRANSACTION_BASIS
 
 &AtClient
-Procedure PaymentListPlaningTransactionBasisOnChange(Item) Export
+Procedure PaymentListPlaningTransactionBasisOnChange(Item)
 	DocBankReceiptClient.PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -355,14 +355,12 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankReceiptClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
+	DocBankReceiptClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocBankReceiptClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
-		StandardProcessing);
+	DocBankReceiptClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

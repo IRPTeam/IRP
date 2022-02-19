@@ -20,18 +20,18 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters) Export
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocCashPaymentServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure OnOpen(Cancel) Export
+Procedure OnOpen(Cancel)
 	DocCashPaymentClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source) Export
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -137,7 +137,7 @@ EndProcedure
 #Region _DATE
 
 &AtClient
-Procedure DateOnChange(Item) Export
+Procedure DateOnChange(Item)
 	DocCashPaymentClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -146,7 +146,7 @@ EndProcedure
 #Region COMPANY
 
 &AtClient
-Procedure CompanyOnChange(Item) Export
+Procedure CompanyOnChange(Item)
 	DocCashPaymentClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -165,7 +165,7 @@ EndProcedure
 #Region CURRENCY
 
 &AtClient
-Procedure CurrencyOnChange(Item) Export
+Procedure CurrencyOnChange(Item)
 	DocCashPaymentClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -174,7 +174,7 @@ EndProcedure
 #Region ACCOUNT
 
 &AtClient
-Procedure AccountOnChange(Item) Export
+Procedure AccountOnChange(Item)
 	DocCashPaymentClient.AccountOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -193,7 +193,7 @@ EndProcedure
 #Region TRANSACTION_TYPE
 
 &AtClient
-Procedure TransactionTypeOnChange(Item) Export
+Procedure TransactionTypeOnChange(Item)
 	DocCashPaymentClient.TransactionTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -219,7 +219,7 @@ EndProcedure
 #Region PARTNER
 
 &AtClient
-Procedure PaymentListPartnerOnChange(Item) Export
+Procedure PaymentListPartnerOnChange(Item)
 	DocCashPaymentClient.PaymentListPartnerOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -238,13 +238,13 @@ EndProcedure
 #Region PAYEE
 
 &AtClient
-Procedure PaymentListPayeeEditTextChange(Item, Text, StandardProcessing)
-	DocCashPaymentClient.PaymentListPayeeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure PaymentListPayeeOnChange(Item)
+	DocCashPaymentClient.PaymentListPayeeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayeeOnChange(Item) Export
-	DocCashPaymentClient.PaymentListPayeeOnChange(Object, ThisObject, Item);
+Procedure PaymentListPayeeEditTextChange(Item, Text, StandardProcessing)
+	DocCashPaymentClient.PaymentListPayeeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -257,7 +257,7 @@ EndProcedure
 #Region AGREEMENT
 
 &AtClient
-Procedure PaymentListAgreementOnChange(Item) Export
+Procedure PaymentListAgreementOnChange(Item)
 	DocCashPaymentClient.PaymentListAgreementOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -276,7 +276,7 @@ EndProcedure
 #Region BASIS_DOCUMENT
 
 &AtClient
-Procedure PaymentListBasisDocumentOnChange(Item) Export
+Procedure PaymentListBasisDocumentOnChange(Item)
 	DocCashPaymentClient.PaymentListBasisDocumentOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -290,7 +290,7 @@ EndProcedure
 #Region PLANNING_TRANSACTION_BASIS
 
 &AtClient
-Procedure PaymentListPlaningTransactionBasisOnChange(Item) Export
+Procedure PaymentListPlaningTransactionBasisOnChange(Item)
 	DocCashPaymentClient.PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -314,14 +314,12 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashPaymentClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
+	DocCashPaymentClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocCashPaymentClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
-		StandardProcessing);
+	DocCashPaymentClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

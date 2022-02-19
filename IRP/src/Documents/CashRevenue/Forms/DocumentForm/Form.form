@@ -720,10 +720,6 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.PaymentList.ProfitLossCenter</segments>
           </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>PaymentListProfitLossCenterOnChange</name>
-          </handlers>
           <extendedTooltip>
             <name>PaymentListProfitLossCenterExtendedTooltip</name>
             <id>455</id>
@@ -890,10 +886,6 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.PaymentList.Currency</segments>
           </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>PaymentListCurrencyOnChange</name>
-          </handlers>
           <extendedTooltip>
             <name>PaymentListCurrencyExtendedTooltip</name>
             <id>58</id>
@@ -1242,16 +1234,8 @@
           <name>PaymentListBeforeAddRow</name>
         </handlers>
         <handlers>
-          <event>OnStartEdit</event>
-          <name>PaymentListOnStartEdit</name>
-        </handlers>
-        <handlers>
           <event>AfterDeleteRow</event>
           <name>PaymentListAfterDeleteRow</name>
-        </handlers>
-        <handlers>
-          <event>OnChange</event>
-          <name>PaymentListOnChange</name>
         </handlers>
         <handlers>
           <event>Selection</event>
@@ -2420,10 +2404,6 @@
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
-      <event>AfterWrite</event>
-      <name>AfterWrite</name>
-    </handlers>
-    <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
     </handlers>
@@ -2432,16 +2412,8 @@
       <name>OnReadAtServer</name>
     </handlers>
     <handlers>
-      <event>BeforeWrite</event>
-      <name>BeforeWrite</name>
-    </handlers>
-    <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>OnWriteAtServer</event>
-      <name>OnWriteAtServer</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

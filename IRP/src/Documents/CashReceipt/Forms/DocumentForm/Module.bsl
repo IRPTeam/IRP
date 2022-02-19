@@ -20,18 +20,18 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters) Export
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocCashReceiptServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure OnOpen(Cancel) Export
+Procedure OnOpen(Cancel)
 	DocCashReceiptClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source) Export
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -143,7 +143,7 @@ EndProcedure
 #Region _DATE
 
 &AtClient
-Procedure DateOnChange(Item) Export
+Procedure DateOnChange(Item)
 	DocCashReceiptClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -152,7 +152,7 @@ EndProcedure
 #Region COMPANY
 
 &AtClient
-Procedure CompanyOnChange(Item) Export
+Procedure CompanyOnChange(Item)
 	DocCashReceiptClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -171,7 +171,7 @@ EndProcedure
 #Region CURRENCY
 
 &AtClient
-Procedure CurrencyOnChange(Item) Export
+Procedure CurrencyOnChange(Item)
 	DocCashReceiptClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -180,7 +180,7 @@ EndProcedure
 #Region ACCOUNT
 
 &AtClient
-Procedure AccountOnChange(Item) Export
+Procedure AccountOnChange(Item)
 	DocCashReceiptClient.AccountOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -199,7 +199,7 @@ EndProcedure
 #Region TRANSACTION_TYPE
 
 &AtClient
-Procedure TransactionTypeOnChange(Item) Export
+Procedure TransactionTypeOnChange(Item)
 	DocCashReceiptClient.TransactionTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -225,7 +225,7 @@ EndProcedure
 #Region PARTNER
 
 &AtClient
-Procedure PaymentListPartnerOnChange(Item) Export
+Procedure PaymentListPartnerOnChange(Item)
 	DocCashReceiptClient.PaymentListPartnerOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -244,7 +244,7 @@ EndProcedure
 #Region PAYER
 
 &AtClient
-Procedure PaymentListPayerOnChange(Item) Export
+Procedure PaymentListPayerOnChange(Item)
 	DocCashReceiptClient.PaymentListPayerOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -263,7 +263,7 @@ EndProcedure
 #Region AGREEMENT
 
 &AtClient
-Procedure PaymentListAgreementOnChange(Item) Export
+Procedure PaymentListAgreementOnChange(Item)
 	DocCashReceiptClient.PaymentListAgreementOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -282,7 +282,7 @@ EndProcedure
 #Region BASIS_DOCUMENT
 
 &AtClient
-Procedure PaymentListBasisDocumentOnChange(Item) Export
+Procedure PaymentListBasisDocumentOnChange(Item)
 	DocCashReceiptClient.PaymentListBasisDocumentOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -296,7 +296,7 @@ EndProcedure
 #Region PLANNING_TRANSACTION_BASIS
 
 &AtClient
-Procedure PaymentListPlaningTransactionBasisOnChange(Item) Export
+Procedure PaymentListPlaningTransactionBasisOnChange(Item)
 	DocCashReceiptClient.PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item);
 EndProcedure
 

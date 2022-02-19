@@ -629,7 +629,7 @@ Function CreateFormControls_ItemList(Object, Form, AddInfo) Export
 	Return GetArrayOfTaxInfo(Object, Form);
 EndFunction
 
-Function CreateFormControls_PaymentList(Object, Form, AddInfo) Export
+Function CreateFormControls_PaymentList(Object, Form, AddInfo = Undefined) Export
 	TaxesParameters = GetCreateFormControlsParameters();
 	TaxesParameters.Date                  = Object.Date;
 	TaxesParameters.Company               = Object.Company;

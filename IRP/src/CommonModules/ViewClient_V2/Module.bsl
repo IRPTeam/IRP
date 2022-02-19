@@ -1271,7 +1271,11 @@ EndProcedure
 	
 Procedure OnSetAccountNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);

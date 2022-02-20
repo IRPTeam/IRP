@@ -162,7 +162,19 @@ Scenario: Open object form "CashTransferOrder"
 		Then I raise "Failed to open document form CashTransferOrder" exception
 	And I close current window
 
+Scenario: Open list form "MoneyTransfer" 
+	And I close all client application windows
+	Given I open "MoneyTransfer" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form MoneyTransfer" exception
+	And I close current window
 
+Scenario: Open object form "MoneyTransfer"
+	And I close all client application windows
+	Given I open "MoneyTransfer" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form MoneyTransfer" exception
+	And I close current window
 
 
 

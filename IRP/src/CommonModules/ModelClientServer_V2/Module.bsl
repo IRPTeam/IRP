@@ -119,6 +119,9 @@ Function GetChain()
 	Chain.Insert("DefaultStoreInHeader"        , GetChainLink("DefaultStoreInHeaderExecute"));
 	Chain.Insert("DefaultDeliveryDateInHeader" , GetChainLink("DefaultDeliveryDateInHeaderExecute"));
 	
+	Chain.Insert("GenerateNewSendUUID"    , GetChainLink("GenerateNewUUIDExecute"));
+	Chain.Insert("GenerateNewReceiptUUID" , GetChainLink("GenerateNewUUIDExecute"));
+	
 	// Clears
 	Chain.Insert("ClearByTransactionTypeBankPayment", GetChainLink("ClearByTransactionTypeBankPaymentExecute"));
 	Chain.Insert("ClearByTransactionTypeBankReceipt", GetChainLink("ClearByTransactionTypeBankReceiptExecute"));
@@ -138,7 +141,11 @@ Function GetChain()
 	Chain.Insert("ChangePriceIncludeTaxByAgreement"    , GetChainLink("ChangePriceIncludeTaxByAgreementExecute"));
 	Chain.Insert("ChangeBasisDocumentByAgreement", GetChainLink("ChangeBasisDocumentByAgreementExecute"));
 	Chain.Insert("ChangeOrderByAgreement"        , GetChainLink("ChangeOrderByAgreementExecute"));
-	Chain.Insert("ChangeCashAccountByCompany"   , GetChainLink("ChangeCashAccountByCompanyExecute"));
+	
+	Chain.Insert("ChangeCashAccountByCompany"    , GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeAccountSenderByCompany"  , GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeAccountReceiverByCompany", GetChainLink("ChangeCashAccountByCompanyExecute"));
+	
 	Chain.Insert("ChangeTransitAccountByAccount", GetChainLink("ChangeTransitAccountByAccountExecute"));
 	Chain.Insert("ChangeCashAccountByCurrency"  , GetChainLink("ChangeCashAccountByCurrencyExecute"));
 	Chain.Insert("ChangeCashAccountByPartner"   , GetChainLink("ChangeCashAccountByPartnerExecute"));
@@ -147,6 +154,8 @@ Function GetChain()
 	Chain.Insert("FillByPTBCashReceipt" , GetChainLink("FillByPTBCashReceiptExecute"));
 	Chain.Insert("FillByPTBBankPayment" , GetChainLink("FillByPTBBankPaymentExecute"));
 	Chain.Insert("FillByPTBCashPayment" , GetChainLink("FillByPTBCashPaymentExecute"));
+	
+	Chain.Insert("FillByCashTransferOrder" , GetChainLink("FillByCashTransferOrderExecute"));
 	
 	Chain.Insert("ChangeItemKeyByItem"    , GetChainLink("ChangeItemKeyByItemExecute"));
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
@@ -1598,6 +1607,56 @@ EndFunction
 
 #EndRegion
 
+#Region CASH_TRANSFER_ORDER
+
+Function FillByCashTransferOrderOptions() Export
+	Return GetChainLinkOptions("Ref, Company, Branch, CashTransferOrder,
+		|Sender, SendCurrency, SendFinancialMovementType, SendAmount,
+		|Receiver, ReceiveCurrency, ReceiveFinancialMovementType, ReceiveAmount");
+EndFunction
+
+Function FillByCashTransferOrderExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Company"                      , Options.Company);
+	Result.Insert("Branch"                       , Options.Branch);
+	Result.Insert("CashTransferOrder"            , Options.CashTransferOrder);
+	Result.Insert("Sender"                       , Options.Sender);
+	Result.Insert("SendCurrency"                 , Options.SendCurrency);
+	Result.Insert("SendFinancialMovementType"    , Options.SendFinancialMovementType);
+	Result.Insert("SendAmount"                   , Options.SendAmount);
+	Result.Insert("Receiver"                     , Options.Receiver);
+	Result.Insert("ReceiveCurrency"              , Options.ReceiveCurrency);
+	Result.Insert("ReceiveFinancialMovementType" , Options.ReceiveFinancialMovementType);
+	Result.Insert("ReceiveAmount"                , Options.ReceiveAmount);
+	
+	If Not ValueIsFilled(Options.CashTransferOrder) Then
+		Return Result;
+	EndIf;
+	ArrayOfBasisDocuments = New Array();
+	ArrayOfBasisDocuments.Add(Options.CashTransferOrder);
+	ArrayOfResults = DocMoneyTransferServer.GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, Options.Ref);
+	
+	If Not ArrayOfResults.Count() Then
+		Return Result;
+	EndIf;
+	
+	Result.Company                      = ArrayOfResults[0].Company;
+	Result.Branch                       = ArrayOfResults[0].Branch;
+	Result.CashTransferOrder            = ArrayOfResults[0].CashTransferOrder;
+	Result.Sender                       = ArrayOfResults[0].Sender;
+	Result.SendCurrency                 = ArrayOfResults[0].SendCurrency;
+	Result.SendFinancialMovementType    = ArrayOfResults[0].SendFinancialMovementType;
+	Result.SendAmount                   = ArrayOfResults[0].SendAmount;
+	Result.Receiver                     = ArrayOfResults[0].Receiver;
+	Result.ReceiveCurrency              = ArrayOfResults[0].ReceiveCurrency;
+	Result.ReceiveFinancialMovementType = ArrayOfResults[0].ReceiveFinancialMovementType;
+	Result.ReceiveAmount                = ArrayOfResults[0].ReceiveAmount;
+	
+	Return Result;
+EndFunction
+
+#EndRegion
+
 #Region TRANSACTION_TYPE
 
 // Bank Payment
@@ -1856,6 +1915,21 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 		EndIf;
 	EndDo;
 	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region GENERATE_NEW_HEADER_UUID
+
+Function GenerateNewUUIDOptions() Export
+	Return GetChainLinkOptions("Ref, CurrentUUID");
+EndFunction
+
+Function GenerateNewUUIDExecute(Options) Export
+	If ValueIsFilled(Options.Ref) Then
+		Return Options.CurrentUUID;
+	EndIf;
+	Return New UUID();
 EndFunction
 
 #EndRegion

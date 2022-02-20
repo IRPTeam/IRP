@@ -92,6 +92,7 @@
   <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SalesOrder</content>
   <content>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.Basis</content>
   <content>Document.IncomingPaymentOrder.TabularSection.PaymentList.Attribute.Basis</content>
+  <content>Document.MoneyTransfer.Attribute.CashTransferOrder</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>
@@ -142,6 +143,7 @@
       <types>DocumentRef.JournalEntry</types>
       <types>DocumentRef.AdditionalCostAllocation</types>
       <types>DocumentRef.AdditionalRevenueAllocation</types>
+      <types>DocumentRef.MoneyTransfer</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

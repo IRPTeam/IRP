@@ -7,6 +7,8 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 IsUsedNewFunctionality =
 	   TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
 	Or TypeOf(Source) = Type("DocumentObject.OutgoingPaymentOrder")
+	
+	Or TypeOf(Source) = Type("DocumentObject.MoneyTransfer")
 	   
 	Or TypeOf(Source) = Type("DocumentObject.BankPayment")
 	Or TypeOf(Source) = Type("DocumentObject.BankReceipt")
@@ -21,7 +23,6 @@ IsUsedNewFunctionality =
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsSurplus")
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsWriteOff")
 	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice");
-//===
 
 	Data = New Structure();
 

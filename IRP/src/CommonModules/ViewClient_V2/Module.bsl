@@ -159,7 +159,17 @@ EndProcedure
 
 // возвращает список реквизитов объекта для которых нужно получить значение до изменения
 Function GetObjectPropertyNamesBeforeChange()
-	Return "Date, Company, Partner, Agreement, Currency, Account, CashAccount, TransactionType, Sender, Receiver";
+	Return "Date,
+		|Company,
+		|Partner,
+		|Agreement,
+		|Currency,
+		|Account,
+		|CashAccount,
+		|TransactionType,
+		|Sender,
+		|Receiver,
+		|CashTransferOrder";
 EndFunction
 
 Function GetListPropertyNamesBeforeChange()
@@ -201,6 +211,12 @@ Procedure OnChainComplete(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt" Then
 		__tmp_BankCashPaymentReceipt_OnChainComplete(Parameters);
+		Return;
+	EndIf;
+	
+	// временно для MoneyTransfer отдельно
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+		__tmp_MoneyTransfer_OnChainComplete(Parameters);
 		Return;
 	EndIf;
 	 
@@ -363,6 +379,72 @@ Procedure __tmp_SalesInvoice_OnChainComplete(Parameters)
 	EndIf;
 EndProcedure
 
+// временная для MoneyTransfer
+Procedure __tmp_MoneyTransfer_OnChainComplete(Parameters)
+	ArrayOfEventCallers = New Array();
+	ArrayOfEventCallers.Add("CompanyOnUserChange");
+	ArrayOfEventCallers.Add("CashTransferOrderOnUserChange");
+	
+	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
+		__tmp_MoneyTransfer_CommitChanges(Parameters);
+		Return;
+	EndIf;
+	
+	// Вопрос при изменении Company
+	If Parameters.EventCaller = "CompanyOnUserChange" Then
+		
+		If (IsChangedProperty(Parameters, "Sender").IsChanged 
+			Or IsChangedProperty(Parameters, "Receiver").IsChanged) Then
+	
+			NotifyParameters = New Structure("Parameters", Parameters);
+			ShowQueryBox(New NotifyDescription("__tmp_MoneyTransfer_CompanyOnUserChangeContinue", ThisObject, NotifyParameters), 
+					R().QuestionToUser_015, QuestionDialogMode.OKCancel);
+		Else
+			__tmp_MoneyTransfer_CommitChanges(Parameters);
+		EndIf;
+		
+	// Вопрос при изменение CashTransferOrder
+	ElsIf Parameters.EventCaller = "CashTransferOrderOnUserChange" Then
+		
+		If (IsChangedProperty(Parameters, "Company").IsChanged 
+			Or IsChangedProperty(Parameters, "Branch").IsChanged
+			Or IsChangedProperty(Parameters, "Sender").IsChanged
+			Or IsChangedProperty(Parameters, "SendCurrency").IsChanged
+			Or IsChangedProperty(Parameters, "SendFinancialMovementType").IsChanged
+			Or IsChangedProperty(Parameters, "SendAmount").IsChanged
+			Or IsChangedProperty(Parameters, "Receiver").IsChanged
+			Or IsChangedProperty(Parameters, "ReceiveCurrency").IsChanged
+			Or IsChangedProperty(Parameters, "ReceiveFinancialMovementType").IsChanged
+			Or IsChangedProperty(Parameters, "ReceiveAmount").IsChanged) Then
+	
+			NotifyParameters = New Structure("Parameters", Parameters);
+			ShowQueryBox(New NotifyDescription("__tmp_MoneyTransfer_CashTransferOrderOnUserChangeContinue", ThisObject, NotifyParameters), 
+					R().QuestionToUser_023, QuestionDialogMode.OKCancel);
+		Else
+			__tmp_MoneyTransfer_CommitChanges(Parameters);
+		EndIf;
+		
+	Else
+		__tmp_MoneyTransfer_CommitChanges(Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_MoneyTransfer_CompanyOnUserChangeContinue(Answer, NotifyParameters) Export
+	If Answer = DialogReturnCode.OK Then
+		__tmp_MoneyTransfer_CommitChanges(NotifyParameters.Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_MoneyTransfer_CashTransferOrderOnUserChangeContinue(Answer, NotifyParameters) Export
+	If Answer = DialogReturnCode.OK Then
+		__tmp_MoneyTransfer_CommitChanges(NotifyParameters.Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_MoneyTransfer_CommitChanges(Parameters)
+	CommitChanges(Parameters);
+EndProcedure
+
 // временная для CashExpenseRevenueReceipt
 Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 	ArrayOfEventCallers = New Array();
@@ -382,7 +464,7 @@ Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 	Else
 		__tmp_CashExpenseRevenue_CommitChanges(Parameters);
 	EndIf;
-	
+
 EndProcedure
 
 Procedure __tmp_CashExpenseRevenue_AccountOnUserChangeContinue(Answer, NotifyParameters) Export
@@ -1056,26 +1138,46 @@ Procedure AccountSenerOnChange(Object, Form) Export
 	ControllerClientServer_V2.AccountSenderOnChange(Parameters);
 EndProcedure
 
-Procedure OnSetAccountSenderNotify_IsUserChange(Parameters) Export
-	CommonFunctionsClientServer.SetFormItemModifiedByUser(Parameters.Form, "Sender");
-	SetSendCurrencyReadOnly(Parameters);
-EndProcedure
-
-Procedure OnSetAccountSenderNotify_IsProgrammChange(Parameters) Export
-	SetSendCurrencyReadOnly(Parameters);
-EndProcedure
-
-Procedure SetSendCurrencyReadOnly(Parameters)
-	AccountSenderCurrency = ServiceSystemServer.GetObjectAttribute(Parameters.Object.Sender, "Currency");
-	Parameters.Form.Items.SendCurrency.ReadOnly = ValueIsFilled(AccountSenderCurrency);
+Procedure OnSetAccountSenderNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 
 #EndRegion
 
-#Region CURRENCY_SENDER
+#Region CURRENCY_SEND
 
-Procedure OnSetSendCurrencyNotify_IsProgrammChange(Parameters) Export
-	Return;
+Procedure SendCurrencyOnChange(Object, Form) Export
+	FormParameters = GetFormParameters(Form);
+	ServerParameters = GetServerParameters(Object);
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.SendCurrencyOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetSendCurrencyNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT_SEND
+
+Procedure SendAmountOnChange(Object, Form) Export
+	FormParameters = GetFormParameters(Form);
+	ServerParameters = GetServerParameters(Object);
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.SendAmountOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetSendAmountNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -1090,26 +1192,68 @@ Procedure AccountReceiverOnChange(Object, Form) Export
 	ControllerClientServer_V2.AccountReceiverOnChange(Parameters);
 EndProcedure
 
-Procedure OnSetAccountReceiverNotify_IsUserChange(Parameters) Export
-	CommonFunctionsClientServer.SetFormItemModifiedByUser(Parameters.Form, "Receiver");
-	SetReceiveCurrencyReadOnly(Parameters);
-EndProcedure
-
-Procedure OnSetAccountReceiverNotify_IsProgrammChange(Parameters) Export
-	SetReceiveCurrencyReadOnly(Parameters);
-EndProcedure
-
-Procedure SetReceiveCurrencyReadOnly(Parameters)
-	AccountReceiverCurrency = ServiceSystemServer.GetObjectAttribute(Parameters.Object.Receiver, "Currency");
-	Parameters.Form.Items.ReceiveCurrency.ReadOnly = ValueIsFilled(AccountReceiverCurrency);
+Procedure OnSetAccountReceiverNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 
 #EndRegion
 
-#Region CURRENCY_RECEIVER
+#Region CURRENCY_RECEIVE
 
-Procedure OnSetReceiveCurrencyNotify_IsProgrammChange(Parameters) Export
-	Return;
+Procedure ReceiveCurrencyOnChange(Object, Form) Export
+	FormParameters = GetFormParameters(Form);
+	ServerParameters = GetServerParameters(Object);
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.ReceiveCurrencyOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetReceiveCurrencyNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT_RECEIVE
+
+Procedure ReceiveAmountOnChange(Object, Form) Export
+	FormParameters = GetFormParameters(Form);
+	ServerParameters = GetServerParameters(Object);
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.ReceiveAmountOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetReceiveAmountNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region CASH_TRANSFER_ORDER
+
+Procedure CashTransferOrderOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("CashTransferOrder", FormParameters);
+	FormParameters.EventCaller = "CashTransferOrderOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.CashTransferOrderOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetCashTransferOrderNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
 EndProcedure
 
 #EndRegion

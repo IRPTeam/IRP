@@ -95,7 +95,7 @@ Function GetCacheBeforeChange(Cache, DataPath, Rows = Undefined)
 		If Not Cache.Property(DataPath) Then
 			Raise StrTemplate("Property by DataPath [%1] not found in CacheBeforeChange", DataPath);
 		EndIf;
-		// значение которое было в реквизите до того как он был изменен
+		// value in attribute before it was changed
 		ValueBeforeChange = Cache[DataPath];
 		Return New Structure("DataPath, ValueBeforeChange", DataPath, ValueBeforeChange);
 	Else
@@ -103,17 +103,17 @@ Function GetCacheBeforeChange(Cache, DataPath, Rows = Undefined)
 	EndIf;
 EndFunction
 
-// хранит значения реквизитов до изменения
+// stores attribute values before changing
 Procedure UpdateCacheBeforeChange(Object, Form)
-	// реквизиты Object которые нужно кэшировать
+	// Object properties to be cached
 	CacheObject = New Structure(GetObjectPropertyNamesBeforeChange());
 	FillPropertyValues(CacheObject, Object);
 	
-	// реквизиты Form которые нужно кэшировать
+	// Form properties to be cached
 	CacheForm = New Structure(GetFormPropertyNamesBeforeChange());
 	FillPropertyValues(CacheForm, Form);
 	
-	// реквизиты таблиц которые нужно кэшировать
+	// Tables properties to be cached
 	CacheList = New Structure();
 	Tables    = New Structure();
 	ListProperties = StrSplit(GetListPropertyNamesBeforeChange(), ",");
@@ -157,7 +157,7 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 	Form.CacheBeforeChange = CommonFunctionsServer.SerializeXMLUseXDTO(CacheBeforeChange);
 EndProcedure
 
-// возвращает список реквизитов объекта для которых нужно получить значение до изменения
+// returns list of Object attributes for get value before the change
 Function GetObjectPropertyNamesBeforeChange()
 	Return "Date,
 		|Company,
@@ -172,11 +172,12 @@ Function GetObjectPropertyNamesBeforeChange()
 		|CashTransferOrder";
 EndFunction
 
+// returns list of Table attributes for get value before the change
 Function GetListPropertyNamesBeforeChange()
 	Return "ItemList.Store, ItemList.DeliveryDate";
 EndFunction
 
-// возвращает список реквизитов формы для которых нужно получить значение до изменения
+// returns list of Form attributes for get value before the change
 Function GetFormPropertyNamesBeforeChange()
 	Return "Store, DeliveryDate";
 EndFunction
@@ -197,15 +198,12 @@ EndFunction
 #Region ON_CHAIN_COMPLETE
 
 Procedure OnChainComplete(Parameters) Export
-	CommitChanges = False;
-	
-	// временно для SalesInvoice отдельно
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
-		__tmp_SalesInvoice_OnChainComplete(Parameters);
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+		__tmp_SalesPurchaseInvoice_OnChainComplete(Parameters);
 		Return;
 	EndIf;
 	
-	// временно для BankCashPaymentReceipt отдельно
 	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
@@ -214,47 +212,22 @@ Procedure OnChainComplete(Parameters) Export
 		Return;
 	EndIf;
 	
-	// временно для MoneyTransfer отдельно
 	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
 		__tmp_MoneyTransfer_OnChainComplete(Parameters);
 		Return;
 	EndIf;
 	 
-	// временно для CashExpenseRevenue отдельно
 	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
 		__tmp_CashExpenseRevenue_OnChainComplete(Parameters);
 		Return;
 	EndIf;
 	
-	// изменение склада (реквизит шапки) в шапке документа
-	If Parameters.EventCaller = "StoreOnUserChange" Then
-		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
-			If  NeedQueryStoreOnUserChange(Parameters) Then
-				// Вопрос про изменение склада в табличной части
-				NotifyParameters = New Structure("Parameters", Parameters);
-				ShowQueryBox(New NotifyDescription("StoreOnUserChangeContinue", ThisObject, NotifyParameters), 
-					R().QuestionToUser_005, QuestionDialogMode.YesNoCancel);
-			Else
-				CommitChanges = True;
-			EndIf;
-		EndIf;
-	// изменение склада в табличной части ItemList
-	ElsIf Parameters.EventCaller = "ItemListStoreOnUserChange" Then
-		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
-			If NeedCommitChangesItemListStoreOnUserChange(Parameters) Then
-				CommitChanges = True;
-			EndIf;
-		EndIf;
-	Else
-		CommitChanges = True;
-	EndIf;
-	
-	If CommitChanges Then
-		CommitChanges(Parameters);
-	EndIf;		
+	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
+		Return;
+	EndIf;	
 EndProcedure
 
 Procedure CommitChanges(Parameters)
@@ -275,12 +248,6 @@ Function NeedQueryStoreOnUserChange(Parameters)
 	Return False;
 EndFunction
 
-Procedure StoreOnUserChangeContinue(Answer, NotifyParameters) Export
-	If Answer = DialogReturnCode.Yes Then
-		CommitChanges(NotifyParameters.Parameters);
-	EndIf;
-EndProcedure
-
 Function NeedCommitChangesItemListStoreOnUserChange(Parameters)
 	If Parameters.Cache.Property("ItemList") Then
 		For Each Row In Parameters.Cache.ItemList Do
@@ -296,17 +263,16 @@ Function NeedCommitChangesItemListStoreOnUserChange(Parameters)
 			EndIf;
 			
 			If Row.Property("Store") And Not ValueIsFilled(Row.Store) And Not IsService Then
-				Return False; // очистка ItemList.Store невозможна
+				Return False; // clear ItemList.Store impossible
 			EndIf;
 		EndDo;
 	EndIf;
 	Return True;
 EndFunction
 
-// временная для SalesInvoice
-Procedure __tmp_SalesInvoice_OnChainComplete(Parameters)
+Procedure __tmp_SalesPurchaseInvoice_OnChainComplete(Parameters)
 	
-	// изменение склада в табличной части ItemList
+	// ItemList.Store is changed
 	If Parameters.EventCaller = "ItemListStoreOnUserChange" Then
 		If NeedCommitChangesItemListStoreOnUserChange(Parameters) Then
 			CommitChanges(Parameters);
@@ -328,33 +294,30 @@ Procedure __tmp_SalesInvoice_OnChainComplete(Parameters)
 	
 	QuestionsParameters = New Array();
 	ChangedPoints = New Structure();
-	Changes = IsChangedItemListStore(Parameters);
-	If Changes.IsChanged Then
-		// вопрос при перезаполнении ItemList.Store
+	
+	Changes = IsChangedProperty(Parameters, "ItemList.Store");
+	If Changes.IsChanged Then // refill question ItemList.Store
 		ChangedPoints.Insert("IsChangedItemListStore");
 		QuestionsParameters.Add(New Structure("Action, QuestionText",
 			"Stores", StrTemplate(R().QuestionToUser_009, String(Changes.NewValue))));
 	EndIf;
 	
-	Changes = IsChangedItemListPriceType(Parameters);
-	If Changes.IsChanged Then
-		// вопрос при перезаполнении ItemList.PriceType
+	Changes = IsChangedProperty(Parameters, "ItemList.PriceType");
+	If Changes.IsChanged Then // refill question ItemList.PriceType
 		ChangedPoints.Insert("IsChangedItemListPriceType");
 		QuestionsParameters.Add(New Structure("Action, QuestionText",
 			"PriceTypes", StrTemplate(R().QuestionToUser_011, String(Changes.NewValue))));
 	EndIf;
 	
-	Changes = IsChangedItemListPrice(Parameters);
-	If Changes.IsChanged Then
-		// вопрос при перезаполнении ItemList.Price
+	Changes = IsChangedProperty(Parameters, "ItemList.Price");
+	If Changes.IsChanged Then // refill question ItemList.Price
 		ChangedPoints.Insert("IsChangedItemListPrice");
 		QuestionsParameters.Add(New Structure("Action, QuestionText",
 			"Prices", R().QuestionToUser_013));
 	EndIf;
 	
-	Changes = IsChangedPymentTerms(Parameters);
-	If Changes.IsChanged Then
-		// вопрос при перезаполнении PaymentTerms
+	Changes = IsChangedProperty(Parameters, "PaymentTerms");
+	If Changes.IsChanged Then // refill question PaymentTerms
 		ChangedPoints.Insert("IsChangedPymentTerms");
 		QuestionsParameters.Add(New Structure("Action, QuestionText",
 			"PaymentTerm", R().QuestionToUser_019));
@@ -362,7 +325,7 @@ Procedure __tmp_SalesInvoice_OnChainComplete(Parameters)
 	
 	Changes = IsChangedTaxRates(Parameters);
 	If Changes.IsChanged And Not Parameters.EventCaller = "CompanyOnUserChange" Then
-		// вопрос при перезаполнении TaxRates
+		// refill question TaxRates
 		ChangedPoints.Insert("IsChangedTaxRates");
 		QuestionsParameters.Add(New Structure("Action, QuestionText",
 			"TaxRates", R().QuestionToUser_004));
@@ -379,7 +342,6 @@ Procedure __tmp_SalesInvoice_OnChainComplete(Parameters)
 	EndIf;
 EndProcedure
 
-// временная для MoneyTransfer
 Procedure __tmp_MoneyTransfer_OnChainComplete(Parameters)
 	ArrayOfEventCallers = New Array();
 	ArrayOfEventCallers.Add("CompanyOnUserChange");
@@ -390,7 +352,7 @@ Procedure __tmp_MoneyTransfer_OnChainComplete(Parameters)
 		Return;
 	EndIf;
 	
-	// Вопрос при изменении Company
+	// refill question Company
 	If Parameters.EventCaller = "CompanyOnUserChange" Then
 		
 		If (IsChangedProperty(Parameters, "Sender").IsChanged 
@@ -403,7 +365,7 @@ Procedure __tmp_MoneyTransfer_OnChainComplete(Parameters)
 			__tmp_MoneyTransfer_CommitChanges(Parameters);
 		EndIf;
 		
-	// Вопрос при изменение CashTransferOrder
+	// refill question CashTransferOrder
 	ElsIf Parameters.EventCaller = "CashTransferOrderOnUserChange" Then
 		
 		If (IsChangedProperty(Parameters, "Company").IsChanged 
@@ -445,7 +407,6 @@ Procedure __tmp_MoneyTransfer_CommitChanges(Parameters)
 	CommitChanges(Parameters);
 EndProcedure
 
-// временная для CashExpenseRevenueReceipt
 Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 	ArrayOfEventCallers = New Array();
 	ArrayOfEventCallers.Add("AccountOnUserChange");
@@ -455,7 +416,7 @@ Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 		Return;
 	EndIf;
 	
-	// Вопрос про изменение PaymentList.Currency
+	// refill question PaymentList.Currency
 	If IsChangedProperty(Parameters, "PaymentList.Currency").IsChanged 
 		And Parameters.Object.PaymentList.Count() Then
 		NotifyParameters = New Structure("Parameters", Parameters);
@@ -481,7 +442,6 @@ Procedure __tmp_CashExpenseRevenue_CommitChanges(Parameters)
 	CommitChanges(Parameters);
 EndProcedure
 
-// временная для BankCashPaymentReceipt
 Procedure __tmp_BankCashPaymentReceipt_OnChainComplete(Parameters)
 	
 	ArrayOfEventCallers = New Array();
@@ -492,7 +452,7 @@ Procedure __tmp_BankCashPaymentReceipt_OnChainComplete(Parameters)
 		Return;
 	EndIf;
 	
-	// Вопрос про изменение TransactionType
+	// refill question TransactionType
 	If IsChangedProperty(Parameters, "TransactionType").IsChanged 
 		And Parameters.Object.PaymentList.Count() Then
 		NotifyParameters = New Structure("Parameters", Parameters);
@@ -510,8 +470,7 @@ Procedure __tmp_BankCashPaymentReceipt_TransactionTypeOnUserChangeContinue(Answe
 EndProcedure
 
 Procedure __tmp_BankCashPaymentReceipt_CommitChanges(Parameters)
-	// обновление реквизитов формы, в клиентском модуле сделать нельзя
-	// так как используются серверные данные
+	// update form attributes
 	If Parameters.ExtractedData.Property("DataAgreementApArPostingDetail") Then
 		For Each RowPaymentList In Parameters.Object.PaymentList Do
 			For Each RowData In Parameters.ExtractedData.DataAgreementApArPostingDetail Do
@@ -525,29 +484,71 @@ Procedure __tmp_BankCashPaymentReceipt_CommitChanges(Parameters)
 	CommitChanges(Parameters);
 EndProcedure
 
+Procedure __tmp_GoodsShipmentReceipt_OnChainComplete(Parameters)
+	
+	// ItemList.Store is changed
+	If Parameters.EventCaller = "ItemListStoreOnUserChange" Then
+		If NeedCommitChangesItemListStoreOnUserChange(Parameters) Then
+			__tmp_GoodsShipmentReceipt_CommitChanges(Parameters);
+		EndIf;
+		Return;
+	EndIf;
+	
+	ArrayOfEventCallers = New Array();
+	ArrayOfEventCallers.Add("StoreOnUserChange");
+	
+	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
+		__tmp_GoodsShipmentReceipt_CommitChanges(Parameters);
+		Return;
+	EndIf;
+
+	If NeedQueryStoreOnUserChange(Parameters) Then
+		// refill question ItemList.Store
+		NotifyParameters = New Structure("Parameters", Parameters);
+		ShowQueryBox(New NotifyDescription("__tmp_GoodsShipmentReceipt_StoreOnUserChangeContinue", ThisObject, NotifyParameters), 
+					R().QuestionToUser_005, QuestionDialogMode.YesNoCancel);
+	Else
+		__tmp_GoodsShipmentReceipt_CommitChanges(Parameters);
+	EndIf;
+	
+EndProcedure
+
+Procedure __tmp_GoodsShipmentReceipt_StoreOnUserChangeContinue(Answer, NotifyParameters) Export
+	If Answer = DialogReturnCode.Yes Then
+		__tmp_GoodsShipmentReceipt_CommitChanges(NotifyParameters.Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_GoodsShipmentReceipt_CommitChanges(Parameters)
+	CommitChanges(Parameters);
+EndProcedure
+
 Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	If Answer = Undefined Then
-		Return; // нажали кнопку Cancel, переносить изменения из Cache в Object не нужно
+		Return; // is Cancel pressed
 	EndIf;
 	Parameters    = NotifyParameters.Parameters;
 	ChangedPoints = NotifyParameters.ChangedPoints;
 	
 	NeedRecalculate = False;
 	If Not Answer.Property("UpdateStores") And ChangedPoints.Property("IsChangedItemListStore") Then
-		RemoveFromCacheItemListStore(Parameters);
+		RemoveFromCache("Store, ItemList.Store, ItemList.UseShipmentConfirmation, ItemList.UseGoodsReceipt", Parameters);
 	EndIf;
+	
 	If Not Answer.Property("UpdatePriceTypes") And ChangedPoints.Property("IsChangedItemListPriceType") Then
-		RemoveFromCacheItemListPriceType(Parameters);
+		RemoveFromCache("ItemList.PriceType", Parameters);
 		NeedRecalculate = True;
 	EndIf;
 	
 	If Not Answer.Property("UpdatePrices") And ChangedPoints.Property("IsChangedItemListPrice") Then
-		RemoveFromCacheItemListPrice(Parameters);
+		RemoveFromCache("ItemList.Price", Parameters);
 		NeedRecalculate = True;
 	EndIf;
+	
 	If Not Answer.Property("UpdatePaymentTerm") And ChangedPoints.Property("IsChangedPymentTerms") Then
-		RemoveFromCachePaymentTerms(Parameters);
+		RemoveFromCache("PaymentTerms", Parameters);
 	EndIf;
+	
 	If Not Answer.Property("UpdateTaxRates") And ChangedPoints.Property("IsChangedTaxRates") Then
 		RemoveFromCacheTaxRates(Parameters);
 		NeedRecalculate = True;
@@ -563,42 +564,6 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	Else
 		CommitChanges(Parameters);
 	EndIf;
-EndProcedure
-
-Function IsChangedItemListStore(Parameters)
-	Return IsChangedProperty(Parameters, "ItemList.Store");
-EndFunction
-
-Procedure RemoveFromCacheItemListStore(Parameters)
-	DataPaths = "Store, ItemList.Store, ItemList.UseShipmentConfirmation, ItemList.UseGoodsReceipt";
-	RemoveFromCache(DataPaths, Parameters);
-EndProcedure
-
-Function IsChangedItemListPriceType(Parameters)
-	Return IsChangedProperty(Parameters, "ItemList.PriceType");
-EndFunction
-
-Procedure RemoveFromCacheItemListPriceType(Parameters)
-	DataPaths = "ItemList.PriceType";
-	RemoveFromCache(DataPaths, Parameters);
-EndProcedure
-
-Function IsChangedItemListPrice(Parameters)
-	Return IsChangedProperty(Parameters, "ItemList.Price");
-EndFunction
-
-Procedure RemoveFromCacheItemListPrice(Parameters)
-	DataPaths = "ItemList.Price";
-	RemoveFromCache(DataPaths, Parameters);
-EndProcedure
-
-Function IsChangedPymentTerms(Parameters)
-	Return IsChangedProperty(Parameters, "PaymentTerms");
-EndFunction
-
-Procedure RemoveFromCachePaymentTerms(Parameters)
-	DataPaths = "PaymentTerms";
-	RemoveFromCache(DataPaths, Parameters);
 EndProcedure
 
 Function IsChangedTaxRates(Parameters)
@@ -669,11 +634,11 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
 		
-		// колонки которые не нужно копировать
+		// columns that do not need to be copied
 		ArrayOfExcludeProperties = New Array();
 		ArrayOfExcludeProperties.Add("Key");
 		If Parameters.ObjectMetadataInfo.DependencyTables.Find("RowIDInfo") <> Undefined Then
-			// эти колонки реквизиты формы
+			// columns is form attributes
 			ArrayOfExcludeProperties.Add("IsExternalLinked");
 			ArrayOfExcludeProperties.Add("IsInternalLinked");
 			ArrayOfExcludeProperties.Add("ExternalLinks");
@@ -681,7 +646,7 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 		EndIf;
 		
 		If Parameters.ObjectMetadataInfo.DependencyTables.Find("SerialLotNumbers") <> Undefined Then
-			// эти колонки реквизиты формы
+			// columns is form attributes
 			ArrayOfExcludeProperties.Add("SerialLotNumbersPresentation");
 			ArrayOfExcludeProperties.Add("SerialLotNumberIsFilling");
 		EndIf;
@@ -836,7 +801,6 @@ Procedure SetItemListItemKey(Object, Form, Row, Value) Export
 EndProcedure
 
 Procedure OnSetItemListItemKey(Parameters) Export
-	// Документы у которых есть серийные номера
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
@@ -1579,5 +1543,3 @@ Procedure OffersOnChange(Object, Form) Export
 EndProcedure
 	
 #EndRegion
-
-

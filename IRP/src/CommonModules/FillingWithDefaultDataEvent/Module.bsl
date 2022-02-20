@@ -3,7 +3,6 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		Force = False;
 	EndIf;
 
-//===
 IsUsedNewFunctionality =
 	   TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
 	Or TypeOf(Source) = Type("DocumentObject.OutgoingPaymentOrder")
@@ -24,7 +23,6 @@ IsUsedNewFunctionality =
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsWriteOff")
 	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice")
 	Or TypeOf(Source) = Type("DocumentObject.PurchaseInvoice");
-//===
 
 	Data = New Structure();
 
@@ -44,7 +42,6 @@ IsUsedNewFunctionality =
 		EndIf;
 	EndDo;
 	
-	//==
 	If IsUsedNewFunctionality Then
 		ArrayOfAllMainTables = New Array();
 		ArrayOfAllMainTables.Add("ItemList");
@@ -57,7 +54,7 @@ IsUsedNewFunctionality =
 			EndIf;
 		EndDo;
 		
-		// свойства которые были заполнены из настроек пользователя
+		// properties from UserSettings
 		ArrayOfUserSettingsProperties = New Array();
 		For Each KeyValue In Data Do
 			If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) 
@@ -75,9 +72,9 @@ IsUsedNewFunctionality =
 		Source.AdditionalProperties.Property("IsBasedOn", IsBasedOn);
 		IsBasedOn = ?(IsBasedOn = Undefined, False, IsBasedOn);
 		
-		// если документ был введен на основании то у него уже есть заполненные реквизиты
-		// список этих реквизитов в ReadOnlyProperties
-		// нужно для каждого уже заполненного реквизита вызвать его обработчик
+		// if document was generated on basis, then it already has completed attributes
+		// list of completed attributes in ReadOnlyProperties
+		// need call handler OnChange for each already filled attribute
 	
 		ArrayOfBasisDocumentProperties = StrSplit(ReadOnlyProperties, ",");
 		ArrayOfUserSettinsProperties   = StrSplit(UserSettinsProperties, ",");
@@ -130,48 +127,15 @@ IsUsedNewFunctionality =
 			
 		EndDo;
 		
-		
 	EndIf; // IsUsedNewFunctionality 
-	//==
 	
 	For Each KeyValue In Data Do
 		If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) Then
-			//==
-//			If IsUsedNewFunctionality Then
-//				// временно, потом перенести в модуль Controller
-//				
-//				// заполняем реквизиты из настроек пользователя,
-//				// но только не те что в ReadOnlyProperties
-//				Property = New Structure("DataPath", KeyValue.Key);
-//				Value    = KeyValue.Value;
-//				
-//				ArrayOfReadOnlyProperties = StrSplit(ReadOnlyProperties, ",");
-//				If ValueIsFilled(Value) And Not ValueIsFilled(Source[Property.DataPath]) Then
-//					If ArrayOfReadOnlyProperties.Find(Property.DataPath) = Undefined Then
-//						Source[Property.DataPath] = Value;
-//					EndIf;
-//				EndIf;
-//				
-//				For Each TableName In ArrayOfMainTables Do
-//					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
-//					ServerParameters.TableName = TableName;
-//					
-//					ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(ReadOnlyProperties), 
-//						ReadOnlyProperties + ", " + UserSettinsProperties, UserSettinsProperties);
-//					
-//					Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-//					
-//					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
-//				EndDo;
-//			Else
-			//==
-				If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
-					Source[KeyValue.Key] = KeyValue.Value;
-				ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Or Force Then
-					Source[KeyValue.Key] = KeyValue.Value;
-				EndIf;
-//			EndIf;
-			//==
+			If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
+				Source[KeyValue.Key] = KeyValue.Value;
+			ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Or Force Then
+				Source[KeyValue.Key] = KeyValue.Value;
+			EndIf;
 		EndIf;
 	EndDo;
 
@@ -183,11 +147,9 @@ IsUsedNewFunctionality =
 		Source.Status = ObjectStatusesServer.GetStatusByDefault(Source.Ref);
 	EndIf;
 	
-	//===
 	If IsUsedNewFunctionality Then
 		Return;
 	EndIf;
-	//===
 	
 	UseShipmentConfirmation = False;
 	If Attributes.Find("StoreSender") <> Undefined And Attributes.Find("UseShipmentConfirmation") <> Undefined Then

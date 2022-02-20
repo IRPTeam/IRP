@@ -20,7 +20,8 @@ IsUsedNewFunctionality =
 	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsSurplus")
 	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsWriteOff")
-	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice");
+	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice")
+	Or TypeOf(Source) = Type("DocumentObject.PurchaseInvoice");
 //===
 
 	Data = New Structure();

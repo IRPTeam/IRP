@@ -366,6 +366,7 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus"  , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("StockAdjustmentAsWriteOff" , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("SalesInvoice"              , "StepExtractDataItemKeysWithSerialLotNumbers");
+	Binding.Insert("PurchaseInvoice"           , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
 	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
@@ -453,6 +454,10 @@ Function BindListOnDelete(Parameters)
 		"StepChangeStoreInHeaderByStoresInList,
 		|StepUpdatePaymentTerms");
 	
+	Binding.Insert("PurchaseInvoice",
+		"StepChangeStoreInHeaderByStoresInList,
+		|StepUpdatePaymentTerms");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -473,7 +478,12 @@ EndProcedure
 Function BindListOnCopy(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice" , "StepItemListCalculations_IsCopyRow,
+	Binding.Insert("SalesInvoice" ,
+		"StepItemListCalculations_IsCopyRow,
+		|StepUpdatePaymentTerms");
+	
+	Binding.Insert("PurchaseInvoice" ,
+		"StepItemListCalculations_IsCopyRow,
 		|StepUpdatePaymentTerms");
 	
 	Binding.Insert("BankPayment"  , "StepPaymentListCalculations_IsCopyRow");
@@ -1211,6 +1221,15 @@ Function BindDate(Parameters)
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
 
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeDeliveryDateByAgreement,
+		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepUpdatePaymentTerms");
+
 	Binding.Insert("BankPayment",
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_AgreementInList");
@@ -1350,6 +1369,10 @@ Function BindPartner(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
 		|StepChangeLegalNameByPartner,
 		|StepChangeManagerSegmentByPartner");
+
+	Binding.Insert("PurchaseInvoice",
+		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		|StepChangeLegalNameByPartner");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1421,7 +1444,8 @@ EndFunction
 Function BindDefaultDeliveryDate(Parameters)
 	DataPath = "DeliveryDate";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice", "StepDefaultDeliveryDateInHeader");
+	Binding.Insert("SalesInvoice"   , "StepDefaultDeliveryDateInHeader");
+	Binding.Insert("PurchaseInvoice", "StepDefaultDeliveryDateInHeader");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1645,6 +1669,16 @@ Function BindAgreement(Parameters)
 	DataPath = "Agreement";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement,
+		|StepChangeStoreByAgreement,
+		|StepChangeDeliveryDateByAgreement,
+		|StepItemListChangePriceTypeByAgreement,
+		|StepChangePriceIncludeTaxByAgreement,
+		|StepChangePaymentTermsByAgreement,
+		|StepChangeTaxRate_AgreementInHeader");
+
+	Binding.Insert("PurchaseInvoice",
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement,
 		|StepChangeStoreByAgreement,
@@ -2900,6 +2934,7 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus" , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("StockAdjustmentAsWriteOff", "StepItemListChangeItemKeyByItem");
 	Binding.Insert("SalesInvoice"             , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("PurchaseInvoice"          , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -2952,6 +2987,15 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepExtractDataItemKeysWithSerialLotNumbers,
 		|StepChangeUnitByItemKey");
+	
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListChangeUseGoodsReceiptByStore,
+		|StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUnitByItemKey");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3036,7 +3080,8 @@ EndFunction
 Function BindDefaultItemListDeliveryDate(Parameters)
 	DataPath = "ItemList.DeliveryDate";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice", "StepItemListDefaultDeliveryDateInList");
+	Binding.Insert("SalesInvoice"   , "StepItemListDefaultDeliveryDateInList");
+	Binding.Insert("PurchaseInvoice", "StepItemListDefaultDeliveryDateInList");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3044,7 +3089,8 @@ EndFunction
 Function BindItemListDeliveryDate(Parameters)
 	DataPath = "ItemList.DeliveryDate";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice", "StepChangeDeliveryDateInHeaderByDeliveryDateInList");
+	Binding.Insert("SalesInvoice"   , "StepChangeDeliveryDateInHeaderByDeliveryDateInList");
+	Binding.Insert("PurchaseInvoice", "StepChangeDeliveryDateInHeaderByDeliveryDateInList");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3319,6 +3365,10 @@ Function BindItemListPrice(Parameters)
 	Binding.Insert("SalesInvoice",
 		"StepItemListChangePriceTypeAsManual_IsUserChange,
 		|StepItemListCalculations_IsPriceChanged");
+
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListChangePriceTypeAsManual_IsUserChange,
+		|StepItemListCalculations_IsPriceChanged");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -3517,8 +3567,12 @@ Function BindItemListTaxAmount(Parameters)
 	Binding.Insert("SalesInvoice", 
 		"StepItemListCalculations_IsTaxAmountChanged,
 		|StepItemListChangeTaxAmountAsManualAmount");
+
+	Binding.Insert("PurchaseInvoice", 
+		"StepItemListCalculations_IsTaxAmountChanged,
+		|StepItemListChangeTaxAmountAsManualAmount");
 		
-	Return BindSteps("ItemListTaxAmountStepsEnabler", DataPath, Binding, Parameters);
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
 // ItemList.TaxAmount.ChangeTaxAmountAsManualAmount.Step
@@ -3598,6 +3652,10 @@ Function BindItemListTotalAmount(Parameters)
 	DataPath = "ItemList.TotalAmount";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice",
+		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+		|StepItemListCalculations_IsTotalAmountChanged");
+
+	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged");
 		

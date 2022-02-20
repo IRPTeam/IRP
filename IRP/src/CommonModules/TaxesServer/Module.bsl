@@ -613,7 +613,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	Form.TaxesCache = CommonFunctionsServer.SerializeXMLUseXDTO(New Structure("ArrayOfTaxInfo", ArrayOfTaxInfo));
 EndProcedure
 
-Function CreateFormControls_ItemList(Object, Form, AddInfo) Export
+Function CreateFormControls_ItemList(Object, Form, AddInfo = Undefined) Export
 	TaxesParameters = GetCreateFormControlsParameters();
 	TaxesParameters.Date                  = Object.Date;
 	TaxesParameters.Company               = Object.Company;

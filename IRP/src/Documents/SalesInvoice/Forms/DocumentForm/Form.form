@@ -2635,20 +2635,8 @@
           <name>ItemListSelection</name>
         </handlers>
         <handlers>
-          <event>OnActivateRow</event>
-          <name>ItemListOnActivateRow</name>
-        </handlers>
-        <handlers>
-          <event>OnStartEdit</event>
-          <name>ItemListOnStartEdit</name>
-        </handlers>
-        <handlers>
           <event>AfterDeleteRow</event>
           <name>ItemListAfterDeleteRow</name>
-        </handlers>
-        <handlers>
-          <event>OnChange</event>
-          <name>ItemListOnChange</name>
         </handlers>
         <handlers>
           <event>BeforeDeleteRow</event>
@@ -5616,10 +5604,6 @@
         <dataPath xsi:type="form:DataPath">
           <segments>Object.Manager</segments>
         </dataPath>
-        <handlers>
-          <event>OnChange</event>
-          <name>ManagerOnChange</name>
-        </handlers>
         <extendedTooltip>
           <name>ManagerExtendedTooltip</name>
           <id>207</id>
@@ -8241,16 +8225,16 @@
       <name>OnReadAtServer</name>
     </handlers>
     <handlers>
-      <event>BeforeWrite</event>
-      <name>BeforeWrite</name>
-    </handlers>
-    <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
     </handlers>
     <handlers>
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWrite</event>
+      <name>BeforeWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

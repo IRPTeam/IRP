@@ -31,7 +31,8 @@ Procedure SpecialOffersEditFinish_ForDocument(OffersInfo, Object, Form, AddInfo 
 
 	CalculationStringsClientServer.RecalculateAppliedOffers_ForRow(Object);
 	
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") Then
+	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
+		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
 		ViewClient_V2.OffersOnChange(Object, Form);
 	Else
 		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
@@ -65,7 +66,8 @@ Procedure SpecialOffersEditFinish_ForRow(OffersInfo, Object, Form, AddInfo = Und
 	EndIf;
 	CalculationStringsClientServer.CalculateAndLoadOffers_ForRow(Object, OffersInfo.OffersAddress, OffersInfo.ItemListRowKey);
 	
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") Then
+	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") 
+		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
 		ViewClient_V2.OffersOnChange(Object, Form);
 	Else
 		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,

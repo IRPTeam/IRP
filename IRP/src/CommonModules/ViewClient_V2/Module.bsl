@@ -658,6 +658,13 @@ Procedure OnOpenFormNotify(Parameters) Export
 			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 	EndIf;
 	
+	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form,
+			"GoodsReceipts");
+		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
+			"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
 		Parameters.Form.FormSetVisibilityAvailability();
@@ -703,6 +710,7 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
@@ -747,7 +755,8 @@ EndProcedure
 
 Procedure OnSetItemListItemKey(Parameters) Export
 	// Документы у которых есть серийные номера
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
@@ -1364,6 +1373,11 @@ Procedure PartnerOnChange(Object, Form, TableNames) Export
 EndProcedure
 
 Procedure OnSetPartnerNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+	
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 

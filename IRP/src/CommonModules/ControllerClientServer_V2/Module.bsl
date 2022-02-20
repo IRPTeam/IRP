@@ -325,6 +325,10 @@ Function BindFormOnCreateAtServer(Parameters)
 	Binding.Insert("CashReceipt",
 		"StepPaymentListCalculations_RecalculationsOnCopy,
 		|StepRequireCallCreateTaxesFormControls");
+	
+	Binding.Insert("MoneyTransfer",
+		"StepGenerateNewSendUUID,
+		|StepGenerateNewReceiptUUID");
 
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -718,7 +722,7 @@ EndProcedure
 // AccountSender.OnChange
 Procedure AccountSenderOnChange(Parameters) Export
 	ProceedPropertyBeforeChange_Object(Parameters);
-	AddViewNotify("OnSetAccountSenderNotify_IsUserChange", Parameters);
+	AddViewNotify("OnSetAccountSenderNotify", Parameters);
 	Binding = BindAccountSender(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -741,6 +745,18 @@ Function BindAccountSender(Parameters)
 	Return BindSteps("StepChangeSendCurrencyByAccount", DataPath, Binding, Parameters);
 EndFunction
 
+// AccountSender.ChangeAccountSenderByCompany.Step
+Procedure StepChangeAccountSenderByCompany(Parameters, Chain) Export
+	Chain.ChangeAccountSenderByCompany.Enable = True;
+	Chain.ChangeAccountSenderByCompany.Setter = "SetAccountSender";
+	Options = ModelClientServer_V2.ChangeCashAccountByCompanyOptions();
+	Options.Company = GetCompany(Parameters);
+	Options.Account = GetAccountSender(Parameters);
+	Options.AccountType = PredefinedValue("Enum.CashAccountTypes.EmptyRef");
+	Options.StepName = "StepChangeAccountSenderByCompany";
+	Chain.ChangeAccountSenderByCompany.Options.Add(Options);
+EndProcedure
+
 #EndRegion
 
 #Region ACCOUNT_RECEIVER
@@ -748,7 +764,7 @@ EndFunction
 // AccountReceiver.OnChange
 Procedure AccountReceiverOnChange(Parameters) Export
 	ProceedPropertyBeforeChange_Object(Parameters);
-	AddViewNotify("OnSetAccountReceiverNotify_IsUserChange", Parameters);
+	AddViewNotify("OnSetAccountReceiverNotify", Parameters);
 	Binding = BindAccountReceiver(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -770,6 +786,18 @@ Function BindAccountReceiver(Parameters)
 	Binding = New Structure();
 	Return BindSteps("StepChangeReceiveCurrencyByAccount", DataPath, Binding, Parameters);
 EndFunction
+
+// AccountReceiver.ChangeAccountReceiverByCompany.Step
+Procedure StepChangeAccountReceiverByCompany(Parameters, Chain) Export
+	Chain.ChangeAccountReceiverByCompany.Enable = True;
+	Chain.ChangeAccountReceiverByCompany.Setter = "SetAccountReceiver";
+	Options = ModelClientServer_V2.ChangeCashAccountByCompanyOptions();
+	Options.Company = GetCompany(Parameters);
+	Options.Account = GetAccountReceiver(Parameters);
+	Options.AccountType = PredefinedValue("Enum.CashAccountTypes.EmptyRef");
+	Options.StepName = "StepChangeAccountReceiverByCompany";
+	Chain.ChangeAccountReceiverByCompany.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -809,6 +837,72 @@ Procedure StepChangeTransitAccountByAccount(Parameters, Chain) Export
 	Options.CurrentTransitAccount = GetTransitAccount(Parameters);
 	Options.StepName = "StepChangeTransitAccountByAccount";
 	Chain.ChangeTransitAccountByAccount.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region SEND_UUID
+
+// SendUUID.Set
+Procedure SetSendUUID(Parameters, Results) Export
+	Binding = BindSendUUID(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// SendUUID.Get
+Function GetSendUUID(Parameters)
+	Return GetPropertyObject(Parameters, BindSendUUID(Parameters).DataPath);
+EndFunction
+
+// SendUUID.Bind
+Function BindSendUUID(Parameters)
+	DataPath = "SendUUID";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// SendUUID.GenerateNewSendUUID.Step
+Procedure StepGenerateNewSendUUID(Parameters, Chain) Export
+	Chain.GenerateNewSendUUID.Enable = True;
+	Chain.GenerateNewSendUUID.Setter = "SetSendUUID";
+	Options = ModelClientServer_V2.GenerateNewUUIDOptions();
+	Options.Ref = Parameters.Object.Ref;
+	Options.CurrentUUID = GetSendUUID(Parameters);
+	Options.StepName = "StepGenerateNewSendUUID";
+	Chain.GenerateNewSendUUID.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIVE_UUID
+
+// ReceiveUUID.Set
+Procedure SetReceiveUUID(Parameters, Results) Export
+	Binding = BindReceiveUUID(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiveUUID.Get
+Function GetReceiveUUID(Parameters)
+	Return GetPropertyObject(Parameters, BindReceiveUUID(Parameters).DataPath);
+EndFunction
+
+// ReceiveUUID.Bind
+Function BindReceiveUUID(Parameters)
+	DataPath = "ReceiveUUID";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ReceiveUUID.GenerateNewReceiptUUID.Step
+Procedure StepGenerateNewReceiptUUID(Parameters, Chain) Export
+	Chain.GenerateNewReceiptUUID.Enable = True;
+	Chain.GenerateNewReceiptUUID.Setter = "SetReceiveUUID";
+	Options = ModelClientServer_V2.GenerateNewUUIDOptions();
+	Options.Ref = Parameters.Object.Ref;
+	Options.CurrentUUID = GetReceiveUUID(Parameters);
+	Options.StepName = "StepGenerateNewReceiptUUID";
+	Chain.GenerateNewReceiptUUID.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -1086,6 +1180,7 @@ EndProcedure
 
 // ReceiveCurrency.OnChange
 Procedure ReceiveCurrencyOnChange(Parameters) Export
+	AddViewNotify("OnSetReceiveCurrencyNotify", Parameters);
 	Binding = BindReceiveCurrency(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -1093,7 +1188,7 @@ EndProcedure
 // ReceiveCurrency.Set
 Procedure SetReceiveCurrency(Parameters, Results) Export
 	Binding = BindReceiveCurrency(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetReceiveCurrencyNotify_IsProgrammChange");
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetReceiveCurrencyNotify");
 EndProcedure
 
 // ReceiveCurrency.Get
@@ -1125,6 +1220,7 @@ EndProcedure
 
 // SendCurrency.OnChange
 Procedure SendCurrencyOnChange(Parameters) Export
+	AddViewNotify("OnSetSendCurrencyNotify", Parameters);
 	Binding = BindSendCurrency(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -1132,7 +1228,7 @@ EndProcedure
 // SendCurrency.Set
 Procedure SetSendCurrency(Parameters, Results) Export
 	Binding = BindSendCurrency(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetSendCurrencyNotify_IsProgrammChange");
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetSendCurrencyNotify");
 EndProcedure
 
 // SendCurrency.Get
@@ -1185,6 +1281,179 @@ Function BindCurrencyExchange(Parameters)
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+#EndRegion
+
+#Region AMOUNT_SEND
+
+// SendAmount.OnChange
+Procedure SendAmountOnChange(Parameters) Export
+	AddViewNotify("OnSetSendAmountNotify", Parameters);
+	Binding = BindSendAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SendAmount.Set
+Procedure SetSendAmount(Parameters, Results) Export
+	Binding = BindSendAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetSendAmountNotify");
+EndProcedure
+
+// SendAmount.Get
+Function GetSendAmount(Parameters)
+	Return GetPropertyObject(Parameters, BindSendAmount(Parameters).DataPath);
+EndFunction
+
+// SendAmount.Bind
+Function BindSendAmount(Parameters)
+	DataPath = "SendAmount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region AMOUNT_RECEIVE
+
+// ReceiveAmount.OnChange
+Procedure ReceiveAmountOnChange(Parameters) Export
+	AddViewNotify("OnSetReceiveAmountNotify", Parameters);
+	Binding = BindReceiveAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceiveAmount.Set
+Procedure SetReceiveAmount(Parameters, Results) Export
+	Binding = BindReceiveAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetReceiveAmountNotify");
+EndProcedure
+
+// ReceiveAmount.Get
+Function GetReceiveAmount(Parameters)
+	Return GetPropertyObject(Parameters, BindReceiveAmount(Parameters).DataPath);
+EndFunction
+
+// ReceiveAmount.Bind
+Function BindReceiveAmount(Parameters)
+	DataPath = "ReceiveAmount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region FINANCIAL_MOVEMENT_TYPE_SEND
+
+// SendFinancialMovementType.Set
+Procedure SetSendFinancialMovementType(Parameters, Results) Export
+	Binding = BindSendFinancialMovementType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// SendFinancialMovementType.Get
+Function GetSendFinancialMovementType(Parameters)
+	Return GetPropertyObject(Parameters, BindSendFinancialMovementType(Parameters).DataPath);
+EndFunction
+
+// SendFinancialMovementType.Bind
+Function BindSendFinancialMovementType(Parameters)
+	DataPath = "SendFinancialMovementType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region FINANCIAL_MOVEMENT_TYPE_RECEIVE
+
+// ReceiveFinancialMovementType.Set
+Procedure SetReceiveFinancialMovementType(Parameters, Results) Export
+	Binding = BindReceiveFinancialMovementType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiveFinancialMovementType.Get
+Function GetReceiveFinancialMovementType(Parameters)
+	Return GetPropertyObject(Parameters, BindReceiveFinancialMovementType(Parameters).DataPath);
+EndFunction
+
+// ReceiveFinancialMovementType.Bind
+Function BindReceiveFinancialMovementType(Parameters)
+	DataPath = "ReceiveFinancialMovementType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region CASH_TRANSFER_ORDER
+
+// CashTransferOrder.OnChange
+Procedure CashTransferOrderOnChange(Parameters) Export
+	ProceedPropertyBeforeChange_Object(Parameters);
+	AddViewNotify("OnSetCashTransferOrderNotify", Parameters);
+	Binding = BindCashTransferOrder(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// CashTransferOrder.Set
+Procedure SetCashTransferOrder(Parameters, Results) Export
+	Binding = BindCashTransferOrder(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetCashTransferOrderNotify");
+EndProcedure
+
+// CashTransferOrder.Get
+Function GetCashTransferOrder(Parameters)
+	Return GetPropertyObject(Parameters, BindCashTransferOrder(Parameters).DataPath);
+EndFunction
+
+// CashTransferOrder.Bind
+Function BindCashTransferOrder(Parameters)
+	DataPath = "CashTransferOrder";
+	Binding = New Structure();
+	Binding.Insert("MoneyTransfer", "StepFillByCashTransferOrder");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// CashTransferOrder.MoneyTransfer.Fill
+Procedure FillCashTransferOrder_MoneyTransfer(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Company"                      , BindCompany(Parameters));
+	ResourceToBinding.Insert("Branch"                       , BindBranch(Parameters));
+	ResourceToBinding.Insert("CashTransferOrder"            , BindCashTransferOrder(Parameters));
+	ResourceToBinding.Insert("Sender"                       , BindAccountSender(Parameters));
+	ResourceToBinding.Insert("SendCurrency"                 , BindSendCurrency(Parameters));
+	ResourceToBinding.Insert("SendFinancialMovementType"    , BindSendFinancialMovementType(Parameters));
+	ResourceToBinding.Insert("SendAmount"                   , BindSendAmount(Parameters));
+	ResourceToBinding.Insert("Receiver"                     , BindAccountReceiver(Parameters));
+	ResourceToBinding.Insert("ReceiveCurrency"              , BindReceiveCurrency(Parameters));
+	ResourceToBinding.Insert("ReceiveFinancialMovementType" , BindReceiveFinancialMovementType(Parameters));
+	ResourceToBinding.Insert("ReceiveAmount"                , BindReceiveAmount(Parameters));
+	
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// CashTransferOrder.FillByCashTarnsferOrder.Step
+Procedure StepFillByCashTransferOrder(Parameters, Chain) Export
+	Chain.FillByCashTransferOrder.Enable = True;
+	Chain.FillByCashTransferOrder.Setter = "FillCashTransferOrder_MoneyTransfer";
+		
+	Options = ModelClientServer_V2.FillByCashTransferOrderOptions();
+	Options.Company           = GetCompany(Parameters);
+	Options.Branch            = GetBranch(Parameters);
+	Options.CashTransferOrder = GetCashTransferOrder(Parameters);
+	Options.Sender            = GetAccountSender(Parameters);
+	Options.SendCurrency      = GetSendCurrency(Parameters);
+	Options.SendAmount        = GetSendAmount(Parameters);
+	Options.Receiver          = GetAccountReceiver(Parameters);
+	Options.ReceiveCurrency   = GetReceiveCurrency(Parameters);
+	Options.ReceiveAmount     = GetReceiveAmount(Parameters);
+	Options.SendFinancialMovementType    = GetSendFinancialMovementType(Parameters);
+	Options.ReceiveFinancialMovementType = GetReceiveFinancialMovementType(Parameters);
+	Options.Ref = Parameters.Object.Ref;
+	Options.StepName = "StepFillByCashTransferOrder";
+	Chain.FillByCashTransferOrder.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -1320,7 +1589,11 @@ Function BindCompany(Parameters)
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement,
 		|StepChangeCashAccountByCompany_AccountTypeIsCash");
-		
+	
+	Binding.Insert("MoneyTransfer",
+		"StepChangeAccountSenderByCompany,
+		|StepChangeAccountReceiverByCompany");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1334,6 +1607,28 @@ Procedure StepChangeCompanyByAgreement(Parameters, Chain) Export
 	Options.StepName = "StepChangeCompanyByAgreement";
 	Chain.ChangeCompanyByAgreement.Options.Add(Options);
 EndProcedure
+
+#EndRegion
+
+#Region BRANCH
+
+// Branch.Set
+Procedure SetBranch(Parameters, Results) Export
+	Binding = BindBranch(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Branch.Get
+Function GetBranch(Parameters)
+	Return GetPropertyObject(Parameters, BindBranch(Parameters).DataPath);
+EndFunction
+
+// Branch.Bind
+Function BindBranch(Parameters)
+	DataPath = "Branch";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 

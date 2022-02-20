@@ -1125,6 +1125,31 @@ Scenario: _0154088 check company, operation type, partner, legal name, Partner t
 		And I close all client application windows
 
 
+Scenario: _0154089 check company, sender, receiver, send currency, receive currency, cash advance holder input by search in line in a Money transfer (in english)
+	And I close all client application windows
+	* Open a creation form Money transfer
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Sender input by search in line
+		And I select from "Sender" drop-down list by "3" string
+	* Input by string Receiver
+		And I select from "Receiver" drop-down list by "1" string
+	* Currency input by search in line
+		And I select from "Send currency" drop-down list by "dol" string
+		And I select from "Receive currency" drop-down list by "EUR" string
+	* Check entered values
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Sender" became equal to "Cash desk №3"
+		Then the form attribute named "SendCurrency" became equal to "USD"
+		Then the form attribute named "Receiver" became equal to "Cash desk №1"
+		Then the form attribute named "ReceiveCurrency" became equal to "EUR"
+		And I close all client application windows
+
+
+
+
 Scenario: _0154100 check company, operation type, partner, legal name, Partner term, profit loss center, expence type input by search in line in a DebitNote (in english)
 	And I close all client application windows
 	* Open a creation form DebitNote

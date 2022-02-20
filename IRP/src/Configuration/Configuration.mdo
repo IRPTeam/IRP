@@ -408,6 +408,8 @@
   <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
   <commonModules>CommonModule.DocAdditionalRevenueAllocationClient</commonModules>
   <commonModules>CommonModule.DocAdditionalRevenueAllocationServer</commonModules>
+  <commonModules>CommonModule.DocMoneyTransferClient</commonModules>
+  <commonModules>CommonModule.DocMoneyTransferServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -656,6 +658,7 @@
   <documents>Document.CalculationMovementCosts</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
+  <documents>Document.MoneyTransfer</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>

@@ -81,6 +81,7 @@
       <types>DocumentRef.CalculationMovementCosts</types>
       <types>DocumentRef.AdditionalCostAllocation</types>
       <types>DocumentRef.AdditionalRevenueAllocation</types>
+      <types>DocumentRef.MoneyTransfer</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

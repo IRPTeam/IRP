@@ -619,6 +619,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_102", NStr("en = 'Default file storage volume is not set.'", Lang));
 	Strings.Insert("Error_103", NStr("en = '%1 is undefined.'", Lang));
 	Strings.Insert("Error_104", NStr("en = 'Document [%1] have negative stock balance'", Lang));
+	Strings.Insert("Error_105", NStr("en = 'Document [%1] already have related documents'", Lang));
 #EndRegion
 
 #Region InfoMessages
@@ -712,6 +713,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_020", NStr("en = 'Do you want to overwrite saved option?'", Lang));
 	Strings.Insert("QuestionToUser_021", NStr("en = 'Do you want to close this form? All changes will be lost.'", Lang));
 	Strings.Insert("QuestionToUser_022", NStr("en = 'Do you want to upload this files'", Lang) + ": " + Chars.LF + "%1");
+	Strings.Insert("QuestionToUser_023", NStr("en = 'Do you want to fill according to cash transfer order?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser

@@ -45,7 +45,7 @@ EndProcedure
 #Region ACCOUNT_SENDER
 
 Procedure SenderOnChange(Object, Form, Item) Export
-	ViewClient_V2.AccountSenerOnChange(Object, Form);
+	ViewClient_V2.AccountSenderOnChange(Object, Form);
 EndProcedure
 
 Procedure SenderEditTextChange(Object, Form, Item, Text, StandardProcessing) Export

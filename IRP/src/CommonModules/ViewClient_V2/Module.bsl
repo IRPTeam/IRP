@@ -1104,7 +1104,7 @@ EndProcedure
 
 #Region ACCOUNT_SENDER
 
-Procedure AccountSenerOnChange(Object, Form) Export
+Procedure AccountSenderOnChange(Object, Form) Export
 	FormParameters = GetFormParameters(Form);
 	ExtractValueBeforeChange_Object("Sender", FormParameters);
 	ServerParameters = GetServerParameters(Object);

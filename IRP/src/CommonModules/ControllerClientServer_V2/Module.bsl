@@ -504,7 +504,7 @@ Function BindListOnCopy(Parameters)
 	Binding.Insert("BankReceipt"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashPayment"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashReceipt"  , "StepPaymentListCalculations_IsCopyRow");
-	Binding.Insert("CashEXpense"  , "StepPaymentListCalculations_IsCopyRow");
+	Binding.Insert("CashExpense"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashRevenue"  , "StepPaymentListCalculations_IsCopyRow");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

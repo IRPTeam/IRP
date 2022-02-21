@@ -606,7 +606,7 @@ Procedure RemoveFromCache(DataPaths, Parameters)
 			TableName  = TrimAll(Segments[0]);
 			ColumnName = TrimAll(Segments[1]);
 			If Not Parameters.Cache.Property(TableName) Then
-				Raise StrTemplate("Not foud property in cache for delete [%1]", DataPath);
+				Raise StrTemplate("Not found property in cache for delete [%1]", DataPath);
 			EndIf;
 			For Each Row In Parameters.Cache[TableName] Do
 				Row.Delete(ColumnName);

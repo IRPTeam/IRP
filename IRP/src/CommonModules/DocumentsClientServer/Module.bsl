@@ -16,14 +16,14 @@ Function GetGroupItemsArray(Object, Form)
 	ItemStructure.Insert("Value", ?(Not ValueIsFilled(Object.Number), "", String(Object.Number)));
 	ItemsArray.Add(ItemStructure);
 
-	For Each Atr In Form.GroupItems Do
+	For Each Attr In Form.GroupItems Do
 		// hidden attributes will Not be shown
-		If Form.Items.Find(Atr.Value) <> Undefined And Not Form.Items[Atr.Value].Visible Then
+		If Form.Items.Find(Attr.Value) <> Undefined And Not Form.Items[Attr.Value].Visible Then
 			Continue;
 		EndIf;
 		ItemStructure = New Structure();
-		ItemStructure.Insert("Title", Atr.Presentation);
-		ItemStructure.Insert("Value", ?(Not ValueIsFilled(Object[Atr.Value]), "", String(Object[Atr.Value])));
+		ItemStructure.Insert("Title", Attr.Presentation);
+		ItemStructure.Insert("Value", ?(Not ValueIsFilled(Object[Attr.Value]), "", String(Object[Attr.Value])));
 		ItemsArray.Add(ItemStructure);
 	EndDo;
 

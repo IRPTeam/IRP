@@ -211,9 +211,9 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
-	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
-			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+	For Each Attr In AttributesArray Do
+		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
+			Object.Ref.Metadata().Attributes[Attr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 

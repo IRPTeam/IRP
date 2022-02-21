@@ -44,15 +44,15 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AllAttributes = StrSplit("Company, Account, CashAccount, Currency, PlanningPeriod, Status, TransactionType", ",");
 	AttributesArray = New Array();
-	For Each Atr In AllAttributes Do
-		If Object.Property(TrimAll(Atr)) Then
-			AttributesArray.Add(TrimAll(Atr));
+	For Each Attr In AllAttributes Do
+		If Object.Property(TrimAll(Attr)) Then
+			AttributesArray.Add(TrimAll(Attr));
 		EndIf;
 	EndDo;
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
-	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
-			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+	For Each Attr In AttributesArray Do
+		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
+			Object.Ref.Metadata().Attributes[Attr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 

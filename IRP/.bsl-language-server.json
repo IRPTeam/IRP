@@ -30,7 +30,10 @@
         "checkRecordSetModule": false
       },
       "AssignAliasFieldsInQuery": false,
-      "CommonModuleMissingAPI": false
+      "CommonModuleMissingAPI": false,
+      "PublicMethodsDescription": {
+        "checkAllRegion": false
+      }
     }
   }
 }

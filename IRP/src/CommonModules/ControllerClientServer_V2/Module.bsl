@@ -4510,7 +4510,7 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 EndFunction
 
 Function IsUserChange(Parameters)
-	If Parameters.Property("IsProgrammChange") And Parameters.IsProgrammChange Then
+	If Parameters.Property("IsProgramChange") And Parameters.IsProgramChange Then
 		Return False; // Is programm change via scan barcode or other external forms
 	EndIf;
 	

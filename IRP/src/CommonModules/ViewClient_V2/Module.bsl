@@ -781,7 +781,7 @@ Procedure SetItemListItem(Object, Form, Row, Value) Export
 	Row.Item = Value;
 	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	Parameters.Insert("IsProgrammChange", True);
+	Parameters.Insert("IsProgramChange", True);
 	ControllerClientServer_V2.ItemListItemOnChange(Parameters);
 EndProcedure
 
@@ -797,7 +797,7 @@ Procedure SetItemListItemKey(Object, Form, Row, Value) Export
 	Row.ItemKey = Value;
 	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	Parameters.Insert("IsProgrammChange", True);
+	Parameters.Insert("IsProgramChange", True);
 	ControllerClientServer_V2.ItemListItemKeyOnChange(Parameters);
 EndProcedure
 
@@ -829,7 +829,7 @@ Procedure SetItemListUnit(Object, Form, Row, Value) Export
 	Row.Unit = Value;
 	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	Parameters.Insert("IsProgrammChange", True);
+	Parameters.Insert("IsProgramChange", True);
 	ControllerClientServer_V2.ItemListUnitOnChange(Parameters);
 EndProcedure
 
@@ -859,7 +859,7 @@ Procedure SetItemListPrice(Object, Form, Row, Value) Export
 	Row.Price = Value;
 	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	Parameters.Insert("IsProgrammChange", True);
+	Parameters.Insert("IsProgramChange", True);
 	ControllerClientServer_V2.ItemListPriceOnChange(Parameters);
 EndProcedure
 
@@ -935,7 +935,7 @@ Procedure SetItemListQuantity(Object, Form, Row, Value) Export
 	Row.Quantity = Value;
 	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	Parameters.Insert("IsProgrammChange", True);
+	Parameters.Insert("IsProgramChange", True);
 	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
 EndProcedure
 
@@ -1029,7 +1029,7 @@ Procedure SetPaymentListBasisDocument(Object, Form, Row, Value) Export
 	Row.BasisDocument = Value;
 	Rows = GetRowsByCurrentData(Form, "PaymentList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
-	Parameters.Insert("IsProgrammChange", True);
+	Parameters.Insert("IsProgramChange", True);
 	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
 EndProcedure
 
@@ -1052,7 +1052,7 @@ Procedure SetPaymentListOrder(Object, Form, Row, Value) Export
 	Row.Order = Value;
 	Rows = GetRowsByCurrentData(Form, "PaymentList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
-	Parameters.Insert("IsProgrammChange", True);
+	Parameters.Insert("IsProgramChange", True);
 	ControllerClientServer_V2.PaymentListOrderOnChange(Parameters);
 EndProcedure
 
@@ -1096,7 +1096,7 @@ Procedure SetPaymentListTotalAmount(Object, Form, Row, Value) Export
 	Row.TotalAmount = Value;
 	Rows = GetRowsByCurrentData(Form, "PaymentList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
-	Parameters.Insert("IsProgrammChange", True);
+	Parameters.Insert("IsProgramChange", True);
 	ControllerClientServer_V2.PaymentListTotalAmountOnChange(Parameters);
 EndProcedure
 

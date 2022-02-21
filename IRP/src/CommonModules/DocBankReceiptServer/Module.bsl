@@ -12,10 +12,6 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	MoneyDocumentsServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
-Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Export
-	MoneyDocumentsServer.FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType);
-EndProcedure
-
 #EndRegion
 
 #Region Public

@@ -1,5 +1,5 @@
 
-Procedure EditTrialBallanceAccounts(Result, AdditionalParameters) Export
+Procedure EditTrialBalanceAccounts(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;

@@ -77,7 +77,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
-	Form.Items.EditTrialBallanceAccounts.Enabled = Not Form.ReadOnly;
+	Form.Items.EditTrialBalanceAccounts.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
@@ -645,17 +645,17 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 &AtClient
-Procedure EditTrialBallanceAccounts(Command)
+Procedure EditTrialBalanceAccounts(Command)
 	CurrentData = ThisObject.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = AccountingClientServer.GetParametersEditTrialBallanceAccounts(Object, CurrentData, "ItemList");
+	FormParameters = AccountingClientServer.GetParametersEditTrialBalanceAccounts(Object, CurrentData, "ItemList");
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditTrialBallanceAccounts", AccountingClient, NotifyParameters);
-	OpenForm("CommonForm.EditTrialBallanceAccounts", FormParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+	Notify = New NotifyDescription("EditTrialBalanceAccounts", AccountingClient, NotifyParameters);
+	OpenForm("CommonForm.EditTrialBalanceAccounts", FormParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 #EndRegion

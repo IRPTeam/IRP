@@ -164,7 +164,7 @@ Procedure DeleteUnusedRowsFromAnalyticsTable(Object, MainTableName) Export
 	EndDo;
 EndProcedure
 
-Function GetParametersEditTrialBallanceAccounts(Object, CurrentData, MainTableName, Filter_LedgerType = Undefined) Export
+Function GetParametersEditTrialBalanceAccounts(Object, CurrentData, MainTableName, Filter_LedgerType = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("DocumentRef", Object.Ref);
 	Parameters.Insert("MainTableName"     , MainTableName);

@@ -536,7 +536,7 @@
   <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.EditCurrencies</commonForms>
   <commonForms>CommonForm.EditHiddenTables</commonForms>
-  <commonForms>CommonForm.EditTrialBallanceAccounts</commonForms>
+  <commonForms>CommonForm.EditTrialBalanceAccounts</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>

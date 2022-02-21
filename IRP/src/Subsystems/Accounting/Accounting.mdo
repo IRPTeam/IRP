@@ -14,5 +14,5 @@
   <content>InformationRegister.CompanyLedgerTypes</content>
   <content>AccumulationRegister.T1040T_AccountingAmounts</content>
   <content>FunctionalOption.UseAccounting</content>
-  <subsystems>TrialBallanceAccounts</subsystems>
+  <subsystems>TrialBalanceAccounts</subsystems>
 </mdclass:Subsystem>

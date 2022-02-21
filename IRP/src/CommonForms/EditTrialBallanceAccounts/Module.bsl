@@ -227,7 +227,7 @@ EndProcedure
 Function GetDefaultAccountingAnalytics(Val Object, MainTableName, RowKey, Filter_LedgerType = Undefined)
 	AccountingClientServer.BeforeWriteAccountingDocument(Object, MainTableName, Filter_LedgerType);
 	CurrentData = New Structure("Key" , RowKey);
-	Result = AccountingClientServer.GetParametersEditTrialBallanceAccounts(Object, CurrentData, MainTableName, Filter_LedgerType);
+	Result = AccountingClientServer.GetParametersEditTrialBalanceAccounts(Object, CurrentData, MainTableName, Filter_LedgerType);
 	Return Result;
 EndFunction
 

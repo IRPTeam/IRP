@@ -5832,14 +5832,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Accounting.Subsystem.TrialBallanceAccounts</name>
+		<name>Subsystem.Accounting.Subsystem.TrialBalanceAccounts</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.EditTrialBallanceAccounts</name>
+		<name>CommonForm.EditTrialBalanceAccounts</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

@@ -2690,7 +2690,7 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>EditTrialBallanceAccounts</name>
+            <name>EditTrialBalanceAccounts</name>
             <id>974</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2698,7 +2698,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>EditTrialBallanceAccountsExtendedTooltip</name>
+              <name>EditTrialBalanceAccountsExtendedTooltip</name>
               <id>975</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2712,7 +2712,7 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <commandName>Form.Command.EditTrialBallanceAccounts</commandName>
+            <commandName>Form.Command.EditTrialBalanceAccounts</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -8402,10 +8402,10 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>EditTrialBallanceAccounts</name>
+    <name>EditTrialBalanceAccounts</name>
     <title>
       <key>en</key>
-      <value>Edit trial ballance accounts</value>
+      <value>Edit trial Balance accounts</value>
     </title>
     <id>17</id>
     <use>
@@ -8416,7 +8416,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>EditTrialBallanceAccounts</name>
+        <name>EditTrialBalanceAccounts</name>
       </handler>
     </action>
     <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>

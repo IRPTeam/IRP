@@ -93,7 +93,7 @@ Procedure SaveChosenSetting(Val OptionDescription, Val ReportOption = Undefined)
 		NotifyParameters = New Structure();
 		NotifyParameters.Insert("OptionKey", OptionKey);
 		Notify = New NotifyDescription("ShareEnd", ThisObject, NotifyParameters);
-		Users = GetSharedUsers(OptionKey);
+		Users = GetShaReducers(OptionKey);
 		UsersValueList = New ValueList();
 		UsersValueList.LoadValues(Users);
 		OpenFormParameters = New Structure();
@@ -106,7 +106,7 @@ Procedure SaveChosenSetting(Val OptionDescription, Val ReportOption = Undefined)
 EndProcedure
 
 &AtServer
-Function GetSharedUsers(Val OptionKey)
+Function GetShaReducers(Val OptionKey)
 	ReportOption = Catalogs.ReportOptions.FindByCode(OptionKey);
 	Return InformationRegisters.SharedReportOptions.GetUsersByReportOption(ReportOption);
 EndFunction

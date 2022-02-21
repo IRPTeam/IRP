@@ -1933,7 +1933,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	RecalculateAmounts(Tables);
 
-	Return ReduseExtractedDataInfo_SO(Tables, DataReceiver);
+	Return ReduceExtractedDataInfo_SO(Tables, DataReceiver);
 EndFunction
 
 Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -3767,8 +3767,8 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 	Return Tables;
 EndFunction
 
-Function ReduseExtractedDataInfo(Tables, ReduseInfo)
-	If Not ReduseInfo.Reduse Then
+Function ReduceExtractedDataInfo(Tables, ReduceInfo)
+	If Not ReduceInfo.Reduce Then
 		Return Tables;
 	EndIf;
 
@@ -3779,11 +3779,11 @@ Function ReduseExtractedDataInfo(Tables, ReduseInfo)
 			Continue;
 		EndIf;
 
-		If Not ReduseInfo.Tables.Property(TableName) Then
+		If Not ReduceInfo.Tables.Property(TableName) Then
 			Tables[TableName].Clear();
 		Else
 			ColumnNames = New Array();
-			For Each ColumnName In StrSplit(ReduseInfo.Tables[TableName], ",") Do
+			For Each ColumnName In StrSplit(ReduceInfo.Tables[TableName], ",") Do
 				ColumnNames.Add(TrimAll(ColumnName));
 			EndDo;
 
@@ -3798,16 +3798,16 @@ Function ReduseExtractedDataInfo(Tables, ReduseInfo)
 	Return Tables;
 EndFunction
 
-Function ReduseExtractedDataInfo_SO(Tables, DataReceiver)
-	ReduseInfo = New Structure("Reduse, Tables", False, New Structure());
+Function ReduceExtractedDataInfo_SO(Tables, DataReceiver)
+	ReduceInfo = New Structure("Reduce, Tables", False, New Structure());
 
 	If Is(DataReceiver).PO Or Is(DataReceiver).PI Then
-		ReduseInfo.Reduse = True;
-		ReduseInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
+		ReduceInfo.Reduce = True;
+		ReduceInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
 											 |Item, ItemKey, Unit, BasisUnit, Quantity, QuantityInBaseUnit");
 	EndIf;
 
-	Return ReduseExtractedDataInfo(Tables, ReduseInfo);
+	Return ReduceExtractedDataInfo(Tables, ReduceInfo);
 EndFunction
 
 #EndRegion

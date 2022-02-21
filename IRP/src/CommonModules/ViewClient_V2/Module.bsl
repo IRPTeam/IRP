@@ -1482,7 +1482,9 @@ EndProcedure
 
 Procedure OnSetPartnerNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	

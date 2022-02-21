@@ -1,14 +1,9 @@
-#Region FormEvents
+#Region FORM
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+Procedure OnReadAtServer(CurrentObject)
+	DocShipmentConfirmationServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
-	DocShipmentConfirmationServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-EndProcedure
-
-&AtServer
-Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -19,14 +14,20 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocShipmentConfirmationServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
-&AtClient
-Procedure OnOpen(Cancel)
-	DocShipmentConfirmationClient.OnOpen(Object, ThisObject, Cancel);
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+	DocShipmentConfirmationServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtClient
-Procedure AfterWrite(WriteParameters)
-	DocShipmentConfirmationClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+Procedure OnOpen(Cancel)
+	DocShipmentConfirmationClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtClient
@@ -47,9 +48,13 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 EndProcedure
 
 &AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocShipmentConfirmationServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocShipmentConfirmationClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
 &AtClient
@@ -69,103 +74,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LegalName.Visible = PartnerVisible;
 EndProcedure
 
-&AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
-EndProcedure
-
 #EndRegion
 
-#Region Store
-
-&AtClient
-Procedure StoreOnChange(Item)
-	DocShipmentConfirmationClient.StoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-&AtClient
-Procedure TransactionTypeOnChange(Item)
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	//DocShipmentConfirmationClient.ItemListOnChange(Object, ThisObject, Item);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
-	DocShipmentConfirmationClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListAfterDeleteRow(Item)
-	DocShipmentConfirmationClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	LockLinkedRows();
-EndProcedure
-
-&AtClient
-Procedure ItemListOnActivateRow(Item)
-	Return;
-	//DocShipmentConfirmationClient.ItemListOnActivateRow(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocShipmentConfirmationClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
-EndProcedure
-
-&AtClient
-Procedure ItemListBeforeDeleteRow(Item, Cancel)
-	DocShipmentConfirmationClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	Return;
-	//DocShipmentConfirmationClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemOnChange(Item)
-	DocShipmentConfirmationClient.ItemListItemOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemKeyOnChange(Item)
-	DocShipmentConfirmationClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListQuantityOnChange(Item)
-	DocShipmentConfirmationClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListUnitOnChange(Item)
-	DocShipmentConfirmationClient.ItemListUnitOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListStoreOnChange(Item)
-	DocShipmentConfirmationClient.ItemListStoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
-	DocShipmentConfirmationClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	DocShipmentConfirmationClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#Region ItemCompany
+#Region COMPANY
 
 &AtClient
 Procedure CompanyOnChange(Item)
@@ -184,12 +95,11 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPartner
+#Region PARTNER
 
 &AtClient
 Procedure PartnerOnChange(Item)
 	DocShipmentConfirmationClient.PartnerOnChange(Object, ThisObject, Item);
-	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -204,7 +114,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemLegalName
+#Region LEGAL_NAME
 
 &AtClient
 Procedure LegalNameOnChange(Item)
@@ -223,7 +133,142 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorations
+#Region STORE
+
+&AtClient
+Procedure StoreOnChange(Item)
+	DocShipmentConfirmationClient.StoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TRANSACTION_TYPE
+
+&AtClient
+Procedure TransactionTypeOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST
+
+&AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocShipmentConfirmationClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocShipmentConfirmationClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocShipmentConfirmationClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocShipmentConfirmationClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
+EndProcedure
+
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	DocShipmentConfirmationClient.ItemListItemOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocShipmentConfirmationClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	DocShipmentConfirmationClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure ItemListItemKeyOnChange(Item)
+	DocShipmentConfirmationClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocShipmentConfirmationClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocShipmentConfirmationClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region STORE
+
+&AtClient
+Procedure ItemListStoreOnChange(Item)
+	DocShipmentConfirmationClient.ItemListStoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region SERIAL_LOT_NUMBERS
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing)
+	DocShipmentConfirmationClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	DocShipmentConfirmationClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocShipmentConfirmationClient);
+	Str.Insert("Server", DocShipmentConfirmationServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	DocShipmentConfirmationClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -247,22 +292,36 @@ EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocShipmentConfirmationClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
+#Region ADD_ATTRIBUTES
 
 &AtClient
-Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocShipmentConfirmationClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
 EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
 
 &AtClient
-Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	DocShipmentConfirmationClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
-#Region Commands
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
@@ -281,35 +340,7 @@ EndProcedure
 
 #EndRegion
 
-#Region AddAttributes
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure AddAttributesCreateFormControl()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
-EndProcedure
-
-#EndRegion
-#Region ExternalCommands
-
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-#EndRegion
-
-#Region LinkedDocuments
+#Region LINKED_DOCUMENTS
 
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
@@ -381,16 +412,6 @@ Procedure FromUnlockLinkedRows(Command)
 EndProcedure
 
 #EndRegion
-
-#Region Service
-
-&AtClient
-Function GetProcessingModule() Export
-	Str = New Structure;
-	Str.Insert("Client", DocShipmentConfirmationClient);
-	Str.Insert("Server", DocShipmentConfirmationServer);
-	Return Str;
-EndFunction
 
 &AtClient
 Procedure ShowHiddenTables(Command)

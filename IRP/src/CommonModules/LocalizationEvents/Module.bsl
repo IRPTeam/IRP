@@ -376,7 +376,7 @@ Procedure CheckDescriptionDuplicate(Source, Cancel)
 	For Each Attribute In AllDescription Do
 		If ValueIsFilled(Source[Attribute]) Then
 			FieldLeftString = "Cat." + Attribute + " = &" + Attribute;
-			FieldString = "ISNUll(MAX(" + FieldLeftString + "), FALSE) AS " + Attribute;
+			FieldString = "IsNull(MAX(" + FieldLeftString + "), FALSE) AS " + Attribute;
 			QueryFieldsSection.Add(FieldString);
 			QueryConditionsSection.Add(FieldLeftString);
 			Query.SetParameter(Attribute, Source[Attribute]);

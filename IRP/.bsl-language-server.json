@@ -21,7 +21,7 @@
         "maxLineLength": 160
       },
       "Typo": {
-        "userWordsToIgnore": "Modificators,Attr,TRN,Http,Trn,Writeoff,Refreshable,PIGR,SOR,irpteam,Prog,Convertation,Langs,Numpad,Num,NLZ,Multiselect,annulated,noreply,gmail,XDTO,sizepx,javascript,css,unpost,UNPOST,Undopost,Localizations,charset,Splitted,HHM,Unposting,Unselect,Reposting,tmp,Grupped,Acc,Attr,basises,uncheck,Unchecking,cheque,auth,uri,oauth,urlencoded,json,googleapis,Auth,Cheques,Barcodes,Mss,Mdd,jpeg,jpg,png,ico,cfe,Integrations,Expence,Cheque,Args,Unpost,Uncollapsed,Deserialize,Basises,localhost,Webclient,barcode,pcs,Exc,Unbundling,Param,Undoposting",
+        "userWordsToIgnore": "Decomposite,Modificators,Attr,TRN,Http,Trn,Writeoff,Refreshable,PIGR,SOR,irpteam,Prog,Convertation,Langs,Numpad,Num,NLZ,Multiselect,annulated,noreply,gmail,XDTO,sizepx,javascript,css,unpost,UNPOST,Undopost,Localizations,charset,Splitted,HHM,Unposting,Unselect,Reposting,tmp,Grupped,Acc,Attr,basises,uncheck,Unchecking,cheque,auth,uri,oauth,urlencoded,json,googleapis,Auth,Cheques,Barcodes,Mss,Mdd,jpeg,jpg,png,ico,cfe,Integrations,Expence,Cheque,Args,Unpost,Uncollapsed,Deserialize,Basises,localhost,Webclient,barcode,pcs,Exc,Unbundling,Param,Undoposting",
         "minWordLength": 3
       },
       "RedundantAccessToObject": {

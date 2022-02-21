@@ -14,10 +14,6 @@ EndProcedure
 
 #EndRegion
 
-Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Export
-	MoneyDocumentsServer.FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType);
-EndProcedure
-
 Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = Undefined) Export
 	TempTableManager = New TempTablesManager();
 	Query = New Query();

@@ -149,7 +149,7 @@ Function GetQueryTextQueryTable()
 		   |	QueryTable.ProfitLossCenter AS ProfitLossCenter,
 		   |	QueryTable.ExpenseType AS ExpenseType,
 		   |	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
-		   |	QueryTable.Commission AS Commission,	
+		   |	QueryTable.Commission AS Commission,
 		   |	QueryTable.Branch AS Branch
 		   |INTO tmp
 		   |FROM

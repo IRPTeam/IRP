@@ -4573,7 +4573,7 @@ Procedure SetReadOnlyProperties(Object, FillingData) Export
 				For Each Column In Value[0] Do
 					If Object.Metadata().TabularSections[Property]
 						.Attributes.Find(Column.Key) <> Undefined Then
-							TabularProperties.Add(StrTemplate("%1.%2",Property, Column.Key));
+							TabularProperties.Add(StrTemplate("%1.%2", Property, Column.Key));
 					EndIf;
 				EndDo;
 			EndIf;

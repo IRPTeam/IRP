@@ -1194,7 +1194,7 @@ Function GetTableOfSupplyRequests(Store, StartDate, EndDate)
 	|	SUM(OrderBalanceTurnovers.QuantityExpense) AS QuantityOrdered
 	|INTO tmpOrderBalance
 	|FROM
-	|	AccumulationRegister.OrderBalance.Turnovers(,,, Order REFS Document.InternalSupplyRequest
+	|	AccumulationRegister.OrderBalance.Turnovers(, , , Order REFS Document.InternalSupplyRequest
 	|	AND Store = &Store
 	|	AND CASE
 	|		WHEN CAST(Order AS Document.InternalSupplyRequest).ProcurementDate = DATETIME(1, 1, 1)
@@ -1263,7 +1263,7 @@ Function GetProcurementByItemKey(Store, ItemKey, StartDate, EndDate)
 	"SELECT
 	|	SUM(OrderBalanceTurnovers.QuantityReceipt) AS Quantity
 	|FROM
-	|	AccumulationRegister.OrderBalance.Turnovers(,,, Order REFS Document.InternalSupplyRequest
+	|	AccumulationRegister.OrderBalance.Turnovers(, , , Order REFS Document.InternalSupplyRequest
 	|	AND Store = &Store
 	|	AND CASE
 	|		WHEN CAST(Order AS Document.InternalSupplyRequest).ProcurementDate = DATETIME(1, 1, 1)
@@ -1295,7 +1295,7 @@ Function GetTreeOfProcurementDocuments(Store, ItemKey, StartDate, EndDate)
 	|	CloserOrders.QuantityExpense AS QuantityExpense,
 	|	InternalSupplyRequest.RowKey
 	|FROM
-	|	AccumulationRegister.OrderBalance.Turnovers(,,, Order REFS Document.InternalSupplyRequest
+	|	AccumulationRegister.OrderBalance.Turnovers(, , , Order REFS Document.InternalSupplyRequest
 	|	AND Store = &Store
 	|	AND CASE
 	|		WHEN CAST(Order AS Document.InternalSupplyRequest).ProcurementDate = DATETIME(1, 1, 1)
@@ -1303,7 +1303,7 @@ Function GetTreeOfProcurementDocuments(Store, ItemKey, StartDate, EndDate)
 	|		ELSE CAST(Order AS Document.InternalSupplyRequest).ProcurementDate
 	|	END BETWEEN BEGINOFPERIOD(&StartDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
 	|	AND ItemKey = &ItemKey) AS InternalSupplyRequest
-	|		LEFT JOIN AccumulationRegister.OrderBalance.Turnovers(,, Recorder, Order REFS Document.InternalSupplyRequest
+	|		LEFT JOIN AccumulationRegister.OrderBalance.Turnovers(, , Recorder, Order REFS Document.InternalSupplyRequest
 	|		AND Store = &Store
 	|		AND ItemKey = &ItemKey) AS CloserOrders
 	|		ON CAST(InternalSupplyRequest.Order AS Document.InternalSupplyRequest) = CAST(CloserOrders.Order AS
@@ -1332,7 +1332,7 @@ Function GetProcurementReceiptByItemKeyAndOrder(Store, ItemKey, Order, StartDate
 	"SELECT
 	|	SUM(OrderBalanceTurnovers.QuantityReceipt) AS Quantity
 	|FROM
-	|	AccumulationRegister.OrderBalance.Turnovers(,,, Order REFS Document.InternalSupplyRequest
+	|	AccumulationRegister.OrderBalance.Turnovers(, , , Order REFS Document.InternalSupplyRequest
 	|	AND Store = &Store
 	|	AND CASE
 	|		WHEN CAST(Order AS Document.InternalSupplyRequest).ProcurementDate = DATETIME(1, 1, 1)
@@ -1385,7 +1385,7 @@ Function GetExpenseQueryText_InventoryTransferOrder()
 	Return "SELECT
 		   |	SUM(OrderBalanceTurnovers.QuantityExpense) AS Quantity
 		   |FROM
-		   |	AccumulationRegister.OrderBalance.Turnovers(,, Recorder, Order REFS Document.InternalSupplyRequest
+		   |	AccumulationRegister.OrderBalance.Turnovers(, , Recorder, Order REFS Document.InternalSupplyRequest
 		   |	AND Store = &Store
 		   |	AND CASE
 		   |		WHEN CAST(Order AS Document.InternalSupplyRequest).ProcurementDate = DATETIME(1, 1, 1)
@@ -1409,7 +1409,7 @@ Function GetExpenseQueryText_PurchaseOrder()
 		   |	OrderBalanceTurnovers.RowKey
 		   |INTO tmpPurchaseOrders
 		   |FROM
-		   |	AccumulationRegister.OrderBalance.Turnovers(,, Recorder, Order REFS Document.InternalSupplyRequest
+		   |	AccumulationRegister.OrderBalance.Turnovers(, , Recorder, Order REFS Document.InternalSupplyRequest
 		   |	AND Store = &Store
 		   |	AND ItemKey = &ItemKey
 		   |	AND CAST(Order AS Document.InternalSupplyRequest) = &Order) AS OrderBalanceTurnovers
@@ -1449,7 +1449,7 @@ Function TableOfOrdersWithoutSupplyRequest(Store, ItemKey = Undefined)
 	|	OrderBalanceTurnovers.RowKey AS RowKey
 	|INTO tmp
 	|FROM
-	|	AccumulationRegister.OrderBalance.Turnovers(,,, CASE
+	|	AccumulationRegister.OrderBalance.Turnovers(, , , CASE
 	|		WHEN &Filter_ItemKey
 	|			THEN ItemKey = &ItemKey
 	|		ELSE TRUE
@@ -1468,7 +1468,7 @@ Function TableOfOrdersWithoutSupplyRequest(Store, ItemKey = Undefined)
 	|	MAX(BEGINOFPERIOD(GoodsReceiptSchedule.DeliveryDate, DAY)) AS DeliveryDate
 	|INTO tmpPurchaseOrders
 	|FROM
-	|	AccumulationRegister.OrderBalance.Turnovers(,,, Store = &Store
+	|	AccumulationRegister.OrderBalance.Turnovers(, , , Store = &Store
 	|	AND CASE
 	|		WHEN &Filter_ItemKey
 	|			THEN ItemKey = &ItemKey
@@ -1505,7 +1505,7 @@ Function TableOfOrdersWithoutSupplyRequest(Store, ItemKey = Undefined)
 	|	BEGINOFPERIOD(CAST(TransferOrderBalanceTurnovers.Order AS Document.InventoryTransferOrder).Date, DAY) AS DeliveryDate
 	|INTO tmpInventoryTransferOrders
 	|FROM
-	|	AccumulationRegister.TransferOrderBalance.Turnovers(,,, StoreReceiver = &Store
+	|	AccumulationRegister.TransferOrderBalance.Turnovers(, , , StoreReceiver = &Store
 	|	AND CASE
 	|		WHEN &Filter_ItemKey
 	|			THEN ItemKey = &ItemKey

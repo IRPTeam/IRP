@@ -60,7 +60,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
-		ArrayOfAllAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayOfAllAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	
 	CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
@@ -89,7 +89,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	
 	ArrayOfVisibleAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
-		ArrayOfVisibleAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayOfVisibleAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	Return New Structure("AllAtributes, VisibleAttributes", ArrayOfAllAttributes, ArrayOfVisibleAttributes);
 EndFunction

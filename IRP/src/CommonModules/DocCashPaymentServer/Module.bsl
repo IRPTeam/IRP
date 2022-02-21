@@ -68,7 +68,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 		   |	Doc.CashAdvanceHolder AS Partner
 		   |INTO tmp_CashTransferOrder
 		   |FROM
-		   |	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+		   |	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate, ,
 		   |		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
 		   |	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 		   |	AND CASE

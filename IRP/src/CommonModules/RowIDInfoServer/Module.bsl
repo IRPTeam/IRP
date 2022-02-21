@@ -1320,7 +1320,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	
 	Is = Is(Source);
 	If Is.SC And Is(RowRefObject.Basis).ISR Then
-		FillPropertyValues(RowRefObject, RowItemList,,"Store");
+		FillPropertyValues(RowRefObject, RowItemList, , "Store");
 	Else
 		FillPropertyValues(RowRefObject, RowItemList);
 	EndIf;
@@ -4307,7 +4307,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |Store                , ItemList.Store";
 		
 	ElsIf ExternalDocAliase = Aliases.PRR Then
-		Result.Header   = "Company, Branch, Store, Status,ItemListSetProcurementMethods";
+		Result.Header   = "Company, Branch, Store, Status, ItemListSetProcurementMethods";
 		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
@@ -4802,7 +4802,7 @@ Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_SI_ForSR_ForSRO
 	|FROM
-	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period, , Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -5936,7 +5936,7 @@ Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_PI_ForPR_ForPRO
 	|FROM
-	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period, , Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -6940,7 +6940,7 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_RSR_ForRRR
 	|FROM
-	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period, , Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -7066,7 +7066,7 @@ Function GetFieldsToLock_InternalLink_StockAdjustmentAsSurplus(InternalDocAliase
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PhysicalInventory Then
 		Result.Header   = "Store";
-		Result.ItemList = "Item, ItemKey,BasisDocument, PhysicalInventory";
+		Result.ItemList = "Item, ItemKey, BasisDocument, PhysicalInventory";
 	Else
 		Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]", InternalDocAliase);
 	EndIf;
@@ -7081,7 +7081,7 @@ Function GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAlias
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PhysicalInventory Then
 		Result.Header   = "Store";
-		Result.ItemList = "Item, ItemKey,BasisDocument, PhysicalInventory";
+		Result.ItemList = "Item, ItemKey, BasisDocument, PhysicalInventory";
 	Else
 		Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]", InternalDocAliase);
 	EndIf;
@@ -7359,7 +7359,7 @@ Function LinkUnlinkDocumentRows(Object, FillingValues) Export
 		EndDo;
 		Unlink(Object, UnlinkRows, TableNames_LinkedDocuments, AttributeNames_LinkedDocuments);
 		Object.RowIDInfo.Clear();
-		Return New Structure("UpdatedProperties, Rows","", New Array());
+		Return New Structure("UpdatedProperties, Rows", "", New Array());
 	EndIf;
 	
 	// Unlink
@@ -8724,7 +8724,7 @@ EndProcedure
 Procedure SetAppearance(Object, Form) Export
 	ClearAppearance_Header(Object, Form);
 	ClearAppearance_ItemList(Object, Form);
-	FieldsToLock = GetFieldsToLock(Object,Form);
+	FieldsToLock = GetFieldsToLock(Object, Form);
 	AddAppearance_Header(Object, Form, FieldsToLock.All);
 	AddAppearance_ItemList(Object, Form, FieldsToLock.Internal, "InternalLinks");
 	AddAppearance_ItemList(Object, Form, FieldsToLock.External, "ExternalLinks");	

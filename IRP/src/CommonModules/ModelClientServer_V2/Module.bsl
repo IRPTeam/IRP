@@ -36,7 +36,7 @@ Procedure ServerEntryPoint(StepNames, Parameters) Export
 	For Each ArrayItem In StrSplit(StepNames, ",") Do
 		Execute StrTemplate("%1.%2(Parameters, Chain);", 
 			Parameters.ControllerModuleName, 
-			StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+			StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	ExecuteChain(Parameters, Chain);
 EndProcedure
@@ -1669,7 +1669,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	
 	ArrayOfAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
-		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	
 	For Each KeyValue In Result Do
@@ -1742,7 +1742,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	
 	ArrayOfAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
-		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	
 	For Each KeyValue In Result Do
@@ -1801,7 +1801,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	
 	ArrayOfAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
-		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	
 	For Each KeyValue In Result Do
@@ -1866,7 +1866,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	
 	ArrayOfAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
-		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	
 	For Each KeyValue In Result Do

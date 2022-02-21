@@ -695,7 +695,7 @@ Function GetBatchTree(TempTablesManager, Company, BeginPeriod, EndPeriod)
 	"SELECT
 	|	R6050T_SalesBatchesTurnovers.Batch.Document AS BatchDocument
 	|FROM
-	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(,,, SalesInvoice IN (&ArrayOfReturnedSalesInvoices)) AS
+	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(, , , SalesInvoice IN (&ArrayOfReturnedSalesInvoices)) AS
 	|		R6050T_SalesBatchesTurnovers
 	|GROUP BY
 	|	R6050T_SalesBatchesTurnovers.Batch.Document";
@@ -735,7 +735,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 				FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);
 			EndIf;
 			
-			If ValueIsFilled(Row.SalesInvoice)Then //Return by sales invoice
+			If ValueIsFilled(Row.SalesInvoice) Then //Return by sales invoice
 				
 				Table_SalesBatches = GetSalesBatches(Row.SalesInvoice, Tables.DataForSalesBatches, Row.BatchKey.ItemKey);
 				
@@ -833,7 +833,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 						ExpenseAmount = Row_Batch.AmountBalance;
 					Else
 						If Row_Batch.QuantityBalance <> 0 Then
-							ExpenseAmount = Round((Row_Batch.AmountBalance / Row_Batch.QuantityBalance) * ExpenseQuantity,2);
+							ExpenseAmount = Round((Row_Batch.AmountBalance / Row_Batch.QuantityBalance) * ExpenseQuantity, 2);
 						EndIf;
 					EndIf;
 					Row_Batch.QuantityBalance = Row_Batch.QuantityBalance - ExpenseQuantity;
@@ -1185,7 +1185,7 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	|	R6050T_SalesBatchesTurnovers.AmountTurnover AS Amount
 	|INTO SalesBatches
 	|FROM
-	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(,, Record, SalesInvoice = &SalesInvoice
+	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(, , Record, SalesInvoice = &SalesInvoice
 	|	AND BatchKey.ItemKey = &BatchKey_ItemKey) AS R6050T_SalesBatchesTurnovers
 	|;
 	|

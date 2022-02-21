@@ -100,7 +100,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|	Incoming.BasisDocument AS CashTransferOrder
 	|INTO tmp_Incoming
 	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate, ,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND CASE
@@ -126,7 +126,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|	Outgoing.BasisDocument AS CashTransferOrder
 	|INTO tmp_Outgoing
 	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate, ,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND CASE

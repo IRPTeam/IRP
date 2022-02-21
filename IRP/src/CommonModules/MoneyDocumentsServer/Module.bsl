@@ -119,7 +119,7 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 	
 	ArrayAll = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
-		ArrayAll.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayAll.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	
 	If TransactionType = Enums.OutgoingPaymentTransactionTypes.CashTransferOrder 
@@ -169,7 +169,7 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 	EndIf;
 	ArrayByType = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
-		ArrayByType.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayByType.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 EndProcedure
 

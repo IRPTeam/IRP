@@ -354,7 +354,7 @@ Function GetAgingTable(Invoice)
 	|	SUM(Aging.AmountReceipt) AS Receipt,
 	|	SUM(Aging.AmountExpense) AS Expense
 	|FROM
-	|	AccumulationRegister.R5012B_VendorsAging.BalanceAndTurnovers(,,,, Invoice = &Invoice) AS Aging
+	|	AccumulationRegister.R5012B_VendorsAging.BalanceAndTurnovers(, , , , Invoice = &Invoice) AS Aging
 	|GROUP BY
 	|	Aging.PaymentDate";
 	If ReportType = "Customers" Then
@@ -526,8 +526,8 @@ Function GetMainTable()
 	ArrayForDelete = New Array();
 	For Each Row In QueryTable Do
 		If Not ValueIsFilled(Row.Agreement) Then
-			ar = QueryTable.FindRows(New Structure("Company, Branch,Currency, Partner,LegalName",
-			Row.Company, Row.Branch,Row.Currency, Row.Partner,Row.LegalName));
+			ar = QueryTable.FindRows(New Structure("Company, Branch, Currency, Partner, LegalName",
+			Row.Company, Row.Branch, Row.Currency, Row.Partner, Row.LegalName));
 			found = False;
 			For Each i in ar Do
 				If ValueIsFilled(i.Agreement) Then

@@ -68,7 +68,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 		   |	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis
 		   |INTO tmp_CashTransferOrder
 		   |FROM
-		   |	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+		   |	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate, ,
 		   |		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
 		   |	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 		   |	AND CASE

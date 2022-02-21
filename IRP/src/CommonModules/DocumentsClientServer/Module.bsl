@@ -53,25 +53,25 @@ Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 	TitleFont = New Font(Form.Items.DecorationGroupTitleCollapsedLabel.Font, , , True);
 	TitleTextColor = WebColors.Gray;
 	TitleBackColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
-	If TitleBackColor = New Color()Then
+	If TitleBackColor = New Color() Then
 		TitleBackColor = WebColors.White;
 	EndIf;
 
 	ValueFont = New Font(Form.Items.DecorationGroupTitleCollapsedLabel.Font);
 	ValueTextColor = New Color(28, 85, 174); // Standard hyperlink color (28, 85, 174)
 	ValueBackColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
-	If ValueBackColor = New Color()Then
+	If ValueBackColor = New Color() Then
 		ValueBackColor = WebColors.White;
 	EndIf;
 
 	SeparatorText = "   ";
 	SeparatorFont = New Font(Form.Items.DecorationGroupTitleCollapsedLabel.Font);
 	SeparatorTextColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
-	If SeparatorTextColor = New Color()Then
+	If SeparatorTextColor = New Color() Then
 		SeparatorTextColor = WebColors.White;
 	EndIf;
 	SeparatorBackColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
-	If SeparatorBackColor = New Color()Then
+	If SeparatorBackColor = New Color() Then
 		SeparatorBackColor = WebColors.White;
 	EndIf;
 
@@ -99,25 +99,25 @@ Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 	TitleFont = New Font(Form.Items.DecorationGroupTitleUncollapsedLabel.Font, , , True);
 	TitleTextColor = WebColors.LightGray;
 	TitleBackColor = Form.Items.DecorationGroupTitleUncollapsedLabel.BackColor;
-	If TitleBackColor = New Color()Then
+	If TitleBackColor = New Color() Then
 		TitleBackColor = WebColors.White;
 	EndIf;
 
 	ValueFont = New Font(Form.Items.DecorationGroupTitleUncollapsedLabel.Font);
 	ValueTextColor = New Color(111, 168, 255);
 	ValueBackColor = Form.Items.DecorationGroupTitleUncollapsedLabel.BackColor;
-	If ValueBackColor = New Color()Then
+	If ValueBackColor = New Color() Then
 		ValueBackColor = WebColors.White;
 	EndIf;
 
 	SeparatorText = "   ";
 	SeparatorFont = New Font(Form.Items.DecorationGroupTitleUncollapsedLabel.Font);
 	SeparatorTextColor = Form.Items.DecorationGroupTitleUncollapsedLabel.BackColor;
-	If SeparatorTextColor = New Color()Then
+	If SeparatorTextColor = New Color() Then
 		SeparatorTextColor = WebColors.White;
 	EndIf;
 	SeparatorBackColor = Form.Items.DecorationGroupTitleUncollapsedLabel.BackColor;
-	If SeparatorBackColor = New Color()Then
+	If SeparatorBackColor = New Color() Then
 		SeparatorBackColor = WebColors.White;
 	EndIf;
 

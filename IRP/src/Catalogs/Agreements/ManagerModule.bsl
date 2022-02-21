@@ -216,7 +216,7 @@ Function GetAgreementPaymentTerms(Agreement) Export
 	If ValueIsFilled(Agreement) And ValueIsFilled(Agreement.PaymentTerm) Then
 		For Each Stage In Agreement.PaymentTerm.StagesOfPayment Do
 			NewRow = New Structure();
-			NewRow.Insert("Date"                , Date(1,1,1));
+			NewRow.Insert("Date"                , Date(1, 1, 1));
 			NewRow.Insert("ProportionOfPayment" , Stage.ProportionOfPayment);
 			NewRow.Insert("DuePeriod"           , Stage.DuePeriod);
 			NewRow.Insert("Amount"              , 0);

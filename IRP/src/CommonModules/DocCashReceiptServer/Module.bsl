@@ -73,7 +73,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|	CashAdvanceBalance.AmountBalance AS AmountExchange
 	|INTO tmp
 	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate, ,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND CASE
@@ -115,7 +115,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|	NULL,
 	|	0
 	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate, ,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND CASE

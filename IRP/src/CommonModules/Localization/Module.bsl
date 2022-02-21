@@ -104,8 +104,8 @@
 //	* Error_045 - String - Document is empty.
 //	* Error_047 - String - "%1" is a required field.
 //	* Error_049 - String - Default picture storage volume is not set.
-//	* Error_050 - String - Currency exchange is available only for the same-type accounts (cash accounts or bank accounts).'",Lang));
-//	* Error_051 - String - There are no lines for which you can create a "%1" document, or all "%1" documents are already created.'",Lang));
+//	* Error_050 - String - Currency exchange is available only for the same-type accounts (cash accounts or bank accounts).'", Lang));
+//	* Error_051 - String - There are no lines for which you can create a "%1" document, or all "%1" documents are already created.'", Lang));
 //	* Error_052 - String - Cannot clear the "%2" check box. Documents "%3" from store %1 were already created.
 //	* Error_053 - String - Cannot clear the "%2" check box. Documents "%3" from store %1 were already created.
 //	* Error_054 - String - Cannot continue. The "%1"document has an incorrect status.

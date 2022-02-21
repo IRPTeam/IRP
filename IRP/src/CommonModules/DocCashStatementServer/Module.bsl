@@ -82,7 +82,7 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	|	R3050T_RetailCash.CommissionTurnover AS Commission,
 	|	R3050T_RetailCash.Account.Currency AS Currency
 	|FROM
-	|	AccumulationRegister.R3050T_RetailCash.Turnovers(BEGINOFPERIOD(&BegOfPeriod, DAY), ENDOFPERIOD(&EndOfPeriod, DAY),,
+	|	AccumulationRegister.R3050T_RetailCash.Turnovers(BEGINOFPERIOD(&BegOfPeriod, DAY), ENDOFPERIOD(&EndOfPeriod, DAY), ,
 	|		Company = &Company
 	|	AND Branch = &Branch) AS R3050T_RetailCash";
 

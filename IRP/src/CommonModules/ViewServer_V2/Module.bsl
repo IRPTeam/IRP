@@ -48,7 +48,7 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 		EndDo;
 		Tables.Insert(TableName, New Structure ("Columns", StrConcat(ArrayOfColumns, ",")));
 	EndDo;
-	Result.Insert("Tables",Tables);
+	Result.Insert("Tables", Tables);
 	
 	AllDepTables = New Array();
 	AllDepTables.Add("SpecialOffers");

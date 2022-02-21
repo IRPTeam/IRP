@@ -85,7 +85,7 @@ EndProcedure
 #Region LEGAL_NAME
 
 Procedure LegalNameOnChange(Object, Form, Item) Export
-	ViewClient_V2.LegalNameOnChange(Object, Form, "ItemLIst");
+	ViewClient_V2.LegalNameOnChange(Object, Form, "ItemList");
 EndProcedure
 
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -119,7 +119,7 @@ EndProcedure
 #Region STORE
 
 Procedure StoreOnChange(Object, Form, Item) Export
-	ViewClient_V2.StoreOnChange(Object, Form, "ItemLIst");
+	ViewClient_V2.StoreOnChange(Object, Form, "ItemList");
 EndProcedure
 
 #EndRegion

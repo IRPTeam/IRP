@@ -3081,7 +3081,7 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 							  |	ItemList.ProfitLossCenter AS ProfitLossCenter,
 							  |	ItemList.ExpenseType AS ExpenseType,
 							  |	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
-							  |	ItemLIst.ReturnReason AS ReturnReason,
+							  |	ItemList.ReturnReason AS ReturnReason,
 							  |	ItemList.Store.UseShipmentConfirmation
 							  |	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
 							  |	VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS TransactionType,
@@ -7552,7 +7552,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 
 	ArrayOfNotRefilingColumns = GetNotRefilingColumns(TypeOf(Object.Ref));
 
-	For Each Row_ItemLIst In FillingValue.ItemList Do
+	For Each Row_ItemList In FillingValue.ItemList Do
 		If LinkRow.Key <> Row_ItemList.Key Then
 			Continue;
 		EndIf;
@@ -7564,7 +7564,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 				If Upper(KeyValue.Key) = Upper("Price") And Row.Property("Price") And ValueIsFilled(Row.Price)
 					And Row.Property("PriceType") And Row.PriceType = Catalogs.PriceTypes.ManualPriceType Then
 					NeedRefillColumns = False;
-					ArrayOfExcludingKeys.Add(Row_ItemLIst.Key);
+					ArrayOfExcludingKeys.Add(Row_ItemList.Key);
 					Continue;
 				EndIf;
 
@@ -7582,7 +7582,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 
 			If NeedRefillColumns Then
 				For Each RefillColumn In ArrayOfRefillColumns Do
-					If Row.Property(RefillColumn) And Row_ItemLIst.Property(RefillColumn) Then
+					If Row.Property(RefillColumn) And Row_ItemList.Property(RefillColumn) Then
 						Row[RefillColumn] = Row_ItemList[RefillColumn];// ???
 						PropertyName = TrimAll(RefillColumn);
 						PutToUpdatedProperties(PropertyName, "ItemList", Row, UpdatedProperties);

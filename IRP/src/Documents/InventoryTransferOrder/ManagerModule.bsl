@@ -226,7 +226,7 @@ Function R4011B_FreeStocks()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	NOT ItemLIst.PurchaseOrderExists
+		   |	NOT ItemList.PurchaseOrderExists
 		   |GROUP BY
 		   |	ItemList.Period,
 		   |	ItemList.StoreSender,
@@ -311,7 +311,7 @@ Function R4035B_IncomingStocks()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	ItemLIst.PurchaseOrderExists
+		   |	ItemList.PurchaseOrderExists
 		   |GROUP BY
 		   |	ItemList.Period,
 		   |	ItemList.StoreSender,

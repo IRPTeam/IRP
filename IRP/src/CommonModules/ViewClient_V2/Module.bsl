@@ -153,7 +153,7 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 	CacheBeforeChange = New Structure();
 	CacheBeforeChange.Insert("CacheObject", CacheObject);
 	CacheBeforeChange.Insert("CacheForm"  , CacheForm);
-	CacheBeforeChange.Insert("CacheList"  , CacheLIst);
+	CacheBeforeChange.Insert("CacheList"  , CacheList);
 	Form.CacheBeforeChange = CommonFunctionsServer.SerializeXMLUseXDTO(CacheBeforeChange);
 EndProcedure
 

@@ -7551,7 +7551,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 	ArrayOfRefillColumns.Add(Upper("TaxAmount"));
 	ArrayOfRefillColumns.Add(Upper("PriceType"));
 
-	ArrayOfNotReffilingColumns = GetNotReffilingColumns(TypeOf(Object.Ref));
+	ArrayOfNotRefilingColumns = GetNotRefilingColumns(TypeOf(Object.Ref));
 
 	For Each Row_ItemLIst In FillingValue.ItemList Do
 		If LinkRow.Key <> Row_ItemList.Key Then
@@ -7570,7 +7570,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 				EndIf;
 
 				If ArrayOfRefillColumns.Find(Upper(KeyValue.Key)) = Undefined And Row.Property(KeyValue.Key) Then
-					If ArrayOfNotReffilingColumns <> Undefined And ArrayOfNotReffilingColumns.Find(Upper("ItemList."
+					If ArrayOfNotRefilingColumns <> Undefined And ArrayOfNotRefilingColumns.Find(Upper("ItemList."
 						+ KeyValue.Key)) <> Undefined Then
 						Continue;
 					EndIf;
@@ -7600,7 +7600,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 	EndDo;
 EndProcedure
 
-Function GetNotReffilingColumns(ObjectType)
+Function GetNotRefilingColumns(ObjectType)
 	Map = New Map();
 	ArrayOfColumns = New Array();
 	ArrayOfColumns.Add(Upper("ItemList.ProfitLossCenter"));

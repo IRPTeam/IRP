@@ -16,7 +16,7 @@ Function GetFormParameters(Doc)
 	ElsIf TypeOf(Doc) = Type("DocumentRef.CustomersAdvancesClosing") Then
 		FormParameters.Insert("ReportType", "Customers");
 	Else
-		Raise StrTemplate("Unsupported docyment type [%1]", TypeOf(Doc));
+		Raise StrTemplate("Unsupported document type [%1]", TypeOf(Doc));
 	EndIf;
 	Return FormParameters;
 EndFunction

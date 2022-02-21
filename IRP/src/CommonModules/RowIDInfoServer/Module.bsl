@@ -4125,12 +4125,12 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	EndIf;
 
 	If FilterSets.PI_ForGR Then
-		ApplyFIlterSet_PI_ForGR(Query);
+		ApplyFilterSet_PI_ForGR(Query);
 		QueryArray.Add(GetDataByFilterSet_PI_ForGR());
 	EndIf;
 
 	If FilterSets.PI_ForSI_ForSC Then
-		ApplyFIlterSet_PI_ForSI_ForSC(Query);
+		ApplyFilterSet_PI_ForSI_ForSC(Query);
 		QueryArray.Add(GetDataByFilterSet_PI_ForSI_ForSC());
 	EndIf;
 
@@ -4180,7 +4180,7 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	EndIf;
 
 	If FilterSets.SR_ForGR Then
-		ApplyFIlterSet_SR_ForGR(Query);
+		ApplyFilterSet_SR_ForGR(Query);
 		QueryArray.Add(GetDataByFilterSet_SR_ForGR());
 	EndIf;
 
@@ -5994,7 +5994,7 @@ Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure ApplyFIlterSet_PI_ForSI_ForSC(Query)
+Procedure ApplyFilterSet_PI_ForSI_ForSC(Query)
 	Query.Text =
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -6151,7 +6151,7 @@ Function GetFieldsToLock_ExternalLink_ITO(ExternalDocAliase, Aliases)
 	Return Result;
 EndFunction
 
-Procedure ApplyFIlterSet_ITO_ForIT(Query)
+Procedure ApplyFilterSet_ITO_ForIT(Query)
 	Query.Text =
 	"SELECT
 	|	RowIDMovements.RowID,

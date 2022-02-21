@@ -13,8 +13,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			ElsIf FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual Then
 				DeleteFilterItemFromCashAccountTypeFilter(FilterItem.RightValue);
 			ElsIf FilterItem.ComparisonType = DataCompositionComparisonType.NotInList Then
-				For Each FIlterValue In FilterItem.RightValue Do
-					DeleteFilterItemFromCashAccountTypeFilter(FIlterValue.Value);
+				For Each FilterValue In FilterItem.RightValue Do
+					DeleteFilterItemFromCashAccountTypeFilter(FilterValue.Value);
 				EndDo;
 			EndIf;
 		EndIf;

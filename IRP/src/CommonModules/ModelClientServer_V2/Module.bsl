@@ -3,7 +3,7 @@
 
 Procedure EntryPoint(StepNames, Parameters) Export
 	InitEntryPoint(StepNames, Parameters);
-	Parameters.ModelInveronment.StepNamesCounter.Add(StepNames);
+	Parameters.ModelEnvironment.StepNamesCounter.Add(StepNames);
 	
 #IF Client THEN
 	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
@@ -25,7 +25,7 @@ Procedure EntryPoint(StepNames, Parameters) Export
 #ENDIF
 	
 	// if cache was initialized from this EntryPoint then ChainComplete
-	If Parameters.ModelInveronment.FirstStepNames = StepNames Then
+	If Parameters.ModelEnvironment.FirstStepNames = StepNames Then
 		Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ControllerModuleName);
 		DestroyEntryPoint(Parameters);
 	EndIf;
@@ -76,7 +76,7 @@ Function GetChainLinkResult(Options, Value)
 EndFunction
 
 Function IsAlreadyExecutedStep(Parameters, Name, Key)
-	For Each Step In Parameters.ModelInveronment.AlreadyExecutedSteps Do
+	For Each Step In Parameters.ModelEnvironment.AlreadyExecutedSteps Do
 		If Upper(Step.Name) = Upper(Name) And Upper(Step.Key) = Upper(Key) Then
 			Return True;
 		EndIf;
@@ -96,7 +96,7 @@ Procedure ExecuteChain(Parameters, Chain)
 				Result = Undefined;
 				Execute StrTemplate("Result = %1(Options)", Chain[Name].ExecutorName);
 				Results.Add(GetChainLinkResult(Options, Result));
-				Parameters.ModelInveronment.AlreadyExecutedSteps.Add(New Structure("Name, Key", Name, Options.Key));
+				Parameters.ModelEnvironment.AlreadyExecutedSteps.Add(New Structure("Name, Key", Name, Options.Key));
 			EndDo;
 			Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
 		EndIf;
@@ -1899,17 +1899,17 @@ EndFunction
 #EndRegion
 
 Procedure InitEntryPoint(StepNames, Parameters)
-	If Not Parameters.Property("ModelInveronment") Then
-		Inveronment = New Structure();
-		Inveronment.Insert("FirstStepNames"  , StepNames);
-		Inveronment.Insert("StepNamesCounter", New Array());
-		Inveronment.Insert("AlreadyExecutedSteps"   , New Array());
-		Parameters.Insert("ModelInveronment", Inveronment)
+	If Not Parameters.Property("ModelEnvironment") Then
+		Environment = New Structure();
+		Environment.Insert("FirstStepNames"  , StepNames);
+		Environment.Insert("StepNamesCounter", New Array());
+		Environment.Insert("AlreadyExecutedSteps"   , New Array());
+		Parameters.Insert("ModelEnvironment", Environment)
 	EndIf;
 EndProcedure
 
 Procedure DestroyEntryPoint(Parameters)
-	If Parameters.Property("ModelInveronment") Then
-		Parameters.Delete("ModelInveronment");
+	If Parameters.Property("ModelEnvironment") Then
+		Parameters.Delete("ModelEnvironment");
 	EndIf;
 EndProcedure

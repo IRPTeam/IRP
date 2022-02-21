@@ -4514,9 +4514,9 @@ Function IsUserChange(Parameters)
 		Return False; // Is programm change via scan barcode or other external forms
 	EndIf;
 	
-	If Parameters.Property("ModelInveronment")
-		And Parameters.ModelInveronment.Property("StepNamesCounter") Then
-		Return Parameters.ModelInveronment.StepNamesCounter.Count() = 1;
+	If Parameters.Property("ModelEnvironment")
+		And Parameters.ModelEnvironment.Property("StepNamesCounter") Then
+		Return Parameters.ModelEnvironment.StepNamesCounter.Count() = 1;
 	EndIf;
 	Return False;
 EndFunction

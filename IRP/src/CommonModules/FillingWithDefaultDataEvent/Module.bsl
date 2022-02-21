@@ -62,7 +62,7 @@ IsUsedNewFunctionality =
 				ArrayOfUserSettingsProperties.Add(TrimAll(KeyValue.Key));	
 			EndIf;
 		EndDo;
-		UserSettinsProperties = StrConcat(ArrayOfUserSettingsProperties, ",");
+		UserSettingsProperties = StrConcat(ArrayOfUserSettingsProperties, ",");
 	
 		ReadOnlyProperties = "";
 		Source.AdditionalProperties.Property("ReadOnlyProperties", ReadOnlyProperties);
@@ -77,7 +77,7 @@ IsUsedNewFunctionality =
 		// need call handler OnChange for each already filled attribute
 	
 		ArrayOfBasisDocumentProperties = StrSplit(ReadOnlyProperties, ",");
-		ArrayOfUserSettinsProperties   = StrSplit(UserSettinsProperties, ",");
+		ArrayOfUserSettingsProperties   = StrSplit(UserSettingsProperties, ",");
 		For Each TableName In ArrayOfMainTables Do
 			// BasisDocument
 			ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
@@ -102,10 +102,10 @@ IsUsedNewFunctionality =
 			ServerParameters.IsBasedOn          = IsBasedOn;
 			ServerParameters.TableName          = TableName;
 			ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(ReadOnlyProperties), 
-				ReadOnlyProperties + ", " + UserSettinsProperties, UserSettinsProperties);;
+				ReadOnlyProperties + ", " + UserSettingsProperties, UserSettingsProperties);;
 			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 			
-			For Each PropertyName In ArrayOfUserSettinsProperties Do
+			For Each PropertyName In ArrayOfUserSettingsProperties Do
 				If Not ValueIsFilled(PropertyName) Then
 					Continue;
 				EndIf;

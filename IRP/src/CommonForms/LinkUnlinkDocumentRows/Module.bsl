@@ -143,9 +143,9 @@ Procedure SetAlreadyLinkedInfo(TreeRows, Key)
 			ThisObject.LinkedRowID = TreeRow.RowID;
 			If TypeOf(TreeRow.Basis) = Type("DocumentRef.ShipmentConfirmation") 
 				Or TypeOf(TreeRow.Basis) = Type("DocumentRef.GoodsReceipt") Then
-				ThisObject.ShipingReceipt = True;
+				ThisObject.ShippingReceipt = True;
 			Else
-				ThisObject.ShipingReceipt = False;
+				ThisObject.ShippingReceipt = False;
 			EndIf;
 		EndIf;
 		SetAlreadyLinkedInfo(TreeRow.GetItems(), Key);
@@ -187,7 +187,7 @@ Procedure FillResultsTree(SelectedRow)
 		ThisObject.ResultsTree.GetItems());
 
 	ThisObject.LinkedRowID = "";
-	ThisObject.ShipingReceipt = False;
+	ThisObject.ShippingReceipt = False;
 
 	SetAlreadyLinkedInfo(ThisObject.ResultsTree.GetItems(), SelectedRow.Key);
 EndProcedure
@@ -446,7 +446,7 @@ Function CreateBasisesTable(SelectedRowInfo)
 
 	If ValueIsFilled(ThisObject.LinkedRowID) Then
 		For Each Row In BasisesTable Do
-			If ThisObject.ShipingReceipt Then
+			If ThisObject.ShippingReceipt Then
 				If Not (TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation") 
 					Or TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then
 					ArrayForDelete.Add(Row);

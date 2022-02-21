@@ -428,16 +428,16 @@ Function CreateBasisesTable(SelectedRowInfo)
 
 	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
 
-	AlredyLinkedRows = ThisObject.ResultsTable.FindRows(New Structure("Key", SelectedRowInfo.SelectedRow.Key));
+	AlreadyLinkedRows = ThisObject.ResultsTable.FindRows(New Structure("Key", SelectedRowInfo.SelectedRow.Key));
 	
 	// filter by already linked
-	For Each Row In AlredyLinkedRows Do
+	For Each Row In AlreadyLinkedRows Do
 		Filter = New Structure();
 		Filter.Insert("RowID"    , Row.RowID);
 		Filter.Insert("BasisKey" , Row.BasisKey);
 		Filter.Insert("Basis"    , Row.Basis);
-		ArrayAlredyLinked = BasisesTable.FindRows(Filter);
-		For Each ItemArray In ArrayAlredyLinked Do
+		ArrayAlreadyLinked = BasisesTable.FindRows(Filter);
+		For Each ItemArray In ArrayAlreadyLinked Do
 			BasisesTable.Delete(ItemArray);
 		EndDo;
 	EndDo;

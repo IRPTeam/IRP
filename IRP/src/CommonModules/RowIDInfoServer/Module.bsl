@@ -2935,7 +2935,6 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
 	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 
-
 	StoreName = "UNDEFINED";
 	TransactionType = "UNDEFINED";
 	If Is(DataReceiver).SC Then
@@ -9063,5 +9062,4 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 

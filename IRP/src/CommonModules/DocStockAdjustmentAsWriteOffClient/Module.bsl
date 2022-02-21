@@ -93,7 +93,6 @@ EndProcedure
 //	RowIDInfoClient.UpdateQuantity(Object, Form);
 //EndProcedure
 
-
 //Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
 //	CurrentData = Item.CurrentData;
 //	If CurrentData = Undefined Then

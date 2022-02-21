@@ -49,8 +49,6 @@ Procedure BeforeStart(Cancel)
 
 EndProcedure
 
-
-
 #Region Hardware
 
 Procedure ConnectAllEquipments() Export

@@ -441,7 +441,6 @@ EndProcedure
 
 #Region ItemCurrency
 
-
 Procedure CurrencyOnChange2(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
 	CurrencySettings = Module.CurrencySettings(Object, Form);

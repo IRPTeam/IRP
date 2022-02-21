@@ -13,7 +13,6 @@ Procedure EnterCountOnScan(Command)
 	ByOneScan = Items.ItemListEnterCountOnScan.Check; 
 EndProcedure
 
-
 &AtClient
 Procedure OnOpen(Cancel)
 	FillItemList(FormOwner.Object);

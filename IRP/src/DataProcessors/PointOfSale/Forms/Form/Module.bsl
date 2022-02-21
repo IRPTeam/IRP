@@ -429,7 +429,6 @@ Async Procedure FillSalesPersonInItemList()
 	EndDo;
 EndProcedure
 
-
 &AtServer
 Function GetSalesPersonsAtServer()
 	Query = New Query;

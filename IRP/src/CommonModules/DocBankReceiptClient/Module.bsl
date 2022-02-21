@@ -256,7 +256,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region BASIS_DOCUMENT
 
 Procedure PaymentListBasisDocumentOnChange(Object, Form, Item, CurrentData = Undefined) Export

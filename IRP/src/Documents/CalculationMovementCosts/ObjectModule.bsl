@@ -19,4 +19,3 @@ Procedure UndoPosting(Cancel)
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Reset(ThisObject.Company, ThisObject.BeginDate);
 EndProcedure
 
-

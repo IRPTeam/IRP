@@ -3627,7 +3627,6 @@ Procedure StepItemListChangePriceTypeAsManual(Parameters, Chain, IsUserChange, I
 	EndDo;
 EndProcedure
 
-
 #EndRegion
 
 #Region ITEM_LIST_PRICE
@@ -4095,7 +4094,6 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Chain.Calculations.Options.Add(Options);
 	EndDo;
 EndProcedure
-
 
 #EndRegion
 

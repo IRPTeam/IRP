@@ -319,7 +319,7 @@ Procedure __tmp_SalesPurchaseInvoice_OnChainComplete(Parameters)
 	
 	Changes = IsChangedProperty(Parameters, "PaymentTerms");
 	If Changes.IsChanged Then // refill question PaymentTerms
-		ChangedPoints.Insert("IsChangedPymentTerms");
+		ChangedPoints.Insert("IsChangedPaymentTerms");
 		QuestionsParameters.Add(New Structure("Action, QuestionText",
 			"PaymentTerm", R().QuestionToUser_019));
 	EndIf;
@@ -546,7 +546,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		NeedRecalculate = True;
 	EndIf;
 	
-	If Not Answer.Property("UpdatePaymentTerm") And ChangedPoints.Property("IsChangedPymentTerms") Then
+	If Not Answer.Property("UpdatePaymentTerm") And ChangedPoints.Property("IsChangedPaymentTerms") Then
 		RemoveFromCache("PaymentTerms", Parameters);
 	EndIf;
 	

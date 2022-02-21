@@ -227,7 +227,8 @@ Procedure OnChainComplete(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
 		__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
 		Return;
-	EndIf;	
+	EndIf;
+	CommitChanges(Parameters);
 EndProcedure
 
 Procedure CommitChanges(Parameters)

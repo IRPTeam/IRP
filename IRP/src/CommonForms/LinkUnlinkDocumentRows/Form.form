@@ -5367,10 +5367,10 @@
     </edit>
   </attributes>
   <attributes>
-    <name>ShipingReceipt</name>
+    <name>ShippingReceipt</name>
     <title>
       <key>en</key>
-      <value>Shiping receipt</value>
+      <value>Shipping receipt</value>
     </title>
     <id>72</id>
     <valueType>

@@ -141,7 +141,7 @@
 //	* Error_091 - String - Only Administrator can create users.
 //	* Error_092 - String - Can not use %1 role in SaaS mode
 //	* Error_093 - String - Cancel reason has to be filled if string was canceled
-//	* Error_094 - String - Сan not use confirmation of shipment without goods receipt
+//	* Error_094 - String - Can not use confirmation of shipment without goods receipt
 //	* Error_095 - String - Payment amount [%1] and sales amount [%2] not match
 //	* Error_096 - String - Select any document
 //	* Error_097 - String - Default file storage volume is not set.
@@ -584,7 +584,7 @@ Function Strings(Lang) Export
 
 	Strings.Insert("Error_092", NStr("en = 'Can not use %1 role in SaaS mode'", Lang));
 	Strings.Insert("Error_093", NStr("en = 'Cancel reason has to be filled if string was canceled'", Lang));
-	Strings.Insert("Error_094", NStr("en = 'Сan not use confirmation of shipment without goods receipt'", Lang));
+	Strings.Insert("Error_094", NStr("en = 'Can not use confirmation of shipment without goods receipt'", Lang));
 	
 	// %1 - 100.00 
 	// %2 - 120.00
@@ -682,7 +682,7 @@ Function Strings(Lang) Export
   	// %1 - 
 	Strings.Insert("InfoMessage_022", NStr("en = 'This order is closed by %1'", Lang));
 	Strings.Insert("InfoMessage_023", NStr(
-		"en = 'Сan not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled.'", Lang));
+		"en = 'Can not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled.'", Lang));
 	Strings.Insert("InfoMessage_024", NStr("en = 'Will be available after save.'", Lang));
 #EndRegion
 

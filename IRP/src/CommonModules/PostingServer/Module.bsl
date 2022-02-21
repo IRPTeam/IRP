@@ -837,8 +837,8 @@ Function GetExpenseRecorders(Parameters)
 	|ORDER BY
 	|	BalanceRegister.Recorder.PointInTime DESC";
 	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
-	QueryResut = Query.Execute();
-	QueryTable = QueryResut.Unload();
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
 

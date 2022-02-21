@@ -143,9 +143,9 @@ Procedure SetAlreadyLinkedInfo(TreeRows, Key)
 			ThisObject.LinkedRowID = TreeRow.RowID;
 			If TypeOf(TreeRow.Basis) = Type("DocumentRef.ShipmentConfirmation") 
 				Or TypeOf(TreeRow.Basis) = Type("DocumentRef.GoodsReceipt") Then
-				ThisObject.ShipingReceipt = True;
+				ThisObject.ShippingReceipt = True;
 			Else
-				ThisObject.ShipingReceipt = False;
+				ThisObject.ShippingReceipt = False;
 			EndIf;
 		EndIf;
 		SetAlreadyLinkedInfo(TreeRow.GetItems(), Key);
@@ -187,7 +187,7 @@ Procedure FillResultsTree(SelectedRow)
 		ThisObject.ResultsTree.GetItems());
 
 	ThisObject.LinkedRowID = "";
-	ThisObject.ShipingReceipt = False;
+	ThisObject.ShippingReceipt = False;
 
 	SetAlreadyLinkedInfo(ThisObject.ResultsTree.GetItems(), SelectedRow.Key);
 EndProcedure
@@ -428,16 +428,16 @@ Function CreateBasisesTable(SelectedRowInfo)
 
 	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
 
-	AlredyLinkedRows = ThisObject.ResultsTable.FindRows(New Structure("Key", SelectedRowInfo.SelectedRow.Key));
+	AlreadyLinkedRows = ThisObject.ResultsTable.FindRows(New Structure("Key", SelectedRowInfo.SelectedRow.Key));
 	
 	// filter by already linked
-	For Each Row In AlredyLinkedRows Do
+	For Each Row In AlreadyLinkedRows Do
 		Filter = New Structure();
 		Filter.Insert("RowID"    , Row.RowID);
 		Filter.Insert("BasisKey" , Row.BasisKey);
 		Filter.Insert("Basis"    , Row.Basis);
-		ArrayAlredyLinked = BasisesTable.FindRows(Filter);
-		For Each ItemArray In ArrayAlredyLinked Do
+		ArrayAlreadyLinked = BasisesTable.FindRows(Filter);
+		For Each ItemArray In ArrayAlreadyLinked Do
 			BasisesTable.Delete(ItemArray);
 		EndDo;
 	EndDo;
@@ -446,7 +446,7 @@ Function CreateBasisesTable(SelectedRowInfo)
 
 	If ValueIsFilled(ThisObject.LinkedRowID) Then
 		For Each Row In BasisesTable Do
-			If ThisObject.ShipingReceipt Then
+			If ThisObject.ShippingReceipt Then
 				If Not (TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation") 
 					Or TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then
 					ArrayForDelete.Add(Row);

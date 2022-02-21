@@ -1933,7 +1933,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	RecalculateAmounts(Tables);
 
-	Return ReduseExtractedDataInfo_SO(Tables, DataReceiver);
+	Return ReduceExtractedDataInfo_SO(Tables, DataReceiver);
 EndFunction
 
 Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -3767,8 +3767,8 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 	Return Tables;
 EndFunction
 
-Function ReduseExtractedDataInfo(Tables, ReduseInfo)
-	If Not ReduseInfo.Reduse Then
+Function ReduceExtractedDataInfo(Tables, ReduceInfo)
+	If Not ReduceInfo.Reduce Then
 		Return Tables;
 	EndIf;
 
@@ -3779,11 +3779,11 @@ Function ReduseExtractedDataInfo(Tables, ReduseInfo)
 			Continue;
 		EndIf;
 
-		If Not ReduseInfo.Tables.Property(TableName) Then
+		If Not ReduceInfo.Tables.Property(TableName) Then
 			Tables[TableName].Clear();
 		Else
 			ColumnNames = New Array();
-			For Each ColumnName In StrSplit(ReduseInfo.Tables[TableName], ",") Do
+			For Each ColumnName In StrSplit(ReduceInfo.Tables[TableName], ",") Do
 				ColumnNames.Add(TrimAll(ColumnName));
 			EndDo;
 
@@ -3798,16 +3798,16 @@ Function ReduseExtractedDataInfo(Tables, ReduseInfo)
 	Return Tables;
 EndFunction
 
-Function ReduseExtractedDataInfo_SO(Tables, DataReceiver)
-	ReduseInfo = New Structure("Reduse, Tables", False, New Structure());
+Function ReduceExtractedDataInfo_SO(Tables, DataReceiver)
+	ReduceInfo = New Structure("Reduce, Tables", False, New Structure());
 
 	If Is(DataReceiver).PO Or Is(DataReceiver).PI Then
-		ReduseInfo.Reduse = True;
-		ReduseInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
+		ReduceInfo.Reduce = True;
+		ReduceInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
 											 |Item, ItemKey, Unit, BasisUnit, Quantity, QuantityInBaseUnit");
 	EndIf;
 
-	Return ReduseExtractedDataInfo(Tables, ReduseInfo);
+	Return ReduceExtractedDataInfo(Tables, ReduceInfo);
 EndFunction
 
 #EndRegion
@@ -4125,12 +4125,12 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	EndIf;
 
 	If FilterSets.PI_ForGR Then
-		ApplyFIlterSet_PI_ForGR(Query);
+		ApplyFilterSet_PI_ForGR(Query);
 		QueryArray.Add(GetDataByFilterSet_PI_ForGR());
 	EndIf;
 
 	If FilterSets.PI_ForSI_ForSC Then
-		ApplyFIlterSet_PI_ForSI_ForSC(Query);
+		ApplyFilterSet_PI_ForSI_ForSC(Query);
 		QueryArray.Add(GetDataByFilterSet_PI_ForSI_ForSC());
 	EndIf;
 
@@ -4180,7 +4180,7 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	EndIf;
 
 	If FilterSets.SR_ForGR Then
-		ApplyFIlterSet_SR_ForGR(Query);
+		ApplyFilterSet_SR_ForGR(Query);
 		QueryArray.Add(GetDataByFilterSet_SR_ForGR());
 	EndIf;
 
@@ -5994,7 +5994,7 @@ Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure ApplyFIlterSet_PI_ForSI_ForSC(Query)
+Procedure ApplyFilterSet_PI_ForSI_ForSC(Query)
 	Query.Text =
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -6151,7 +6151,7 @@ Function GetFieldsToLock_ExternalLink_ITO(ExternalDocAliase, Aliases)
 	Return Result;
 EndFunction
 
-Procedure ApplyFIlterSet_ITO_ForIT(Query)
+Procedure ApplyFilterSet_ITO_ForIT(Query)
 	Query.Text =
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -7551,7 +7551,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 	ArrayOfRefillColumns.Add(Upper("TaxAmount"));
 	ArrayOfRefillColumns.Add(Upper("PriceType"));
 
-	ArrayOfNotReffilingColumns = GetNotReffilingColumns(TypeOf(Object.Ref));
+	ArrayOfNotRefilingColumns = GetNotRefilingColumns(TypeOf(Object.Ref));
 
 	For Each Row_ItemLIst In FillingValue.ItemList Do
 		If LinkRow.Key <> Row_ItemList.Key Then
@@ -7570,7 +7570,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 				EndIf;
 
 				If ArrayOfRefillColumns.Find(Upper(KeyValue.Key)) = Undefined And Row.Property(KeyValue.Key) Then
-					If ArrayOfNotReffilingColumns <> Undefined And ArrayOfNotReffilingColumns.Find(Upper("ItemList."
+					If ArrayOfNotRefilingColumns <> Undefined And ArrayOfNotRefilingColumns.Find(Upper("ItemList."
 						+ KeyValue.Key)) <> Undefined Then
 						Continue;
 					EndIf;
@@ -7600,7 +7600,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 	EndDo;
 EndProcedure
 
-Function GetNotReffilingColumns(ObjectType)
+Function GetNotRefilingColumns(ObjectType)
 	Map = New Map();
 	ArrayOfColumns = New Array();
 	ArrayOfColumns.Add(Upper("ItemList.ProfitLossCenter"));
@@ -7621,7 +7621,7 @@ EndFunction
 
 #Region DataToFillingValues
 
-Function GetSeperatorColumns(DocReceiverMetadata) Export
+Function GetSeparatorColumns(DocReceiverMetadata) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
 		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName";
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
@@ -7661,7 +7661,7 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 
 	TableNames_Refreshable = GetTableNames_Refreshable();
 
-	SeparatorColumns = GetSeperatorColumns(DocReceiverMetadata);
+	SeparatorColumns = GetSeparatorColumns(DocReceiverMetadata);
 
 	UniqueRows = Tables.ItemList.Copy();
 	UniqueRows.GroupBy(SeparatorColumns);

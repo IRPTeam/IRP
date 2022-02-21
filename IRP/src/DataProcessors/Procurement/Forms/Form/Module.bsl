@@ -802,13 +802,13 @@ Function CollectDataFor_PurchaseOrder(ItemKey)
 			Continue;
 		EndIf;
 		Filter = New Structure();
-		FIlter.Insert("Partner", Row.Partner);
-		FIlter.Insert("Agreement", Row.Agreement);
-		FIlter.Insert("PriceType", Row.PriceType);
-		FIlter.Insert("Price", Row.Price);
-		FIlter.Insert("DeliveryDate", Row.DeliveryDate);
-		FIlter.Insert("Unit", Row.Unit);
-		FIlter.Insert("Store", Row.Store);
+		Filter.Insert("Partner", Row.Partner);
+		Filter.Insert("Agreement", Row.Agreement);
+		Filter.Insert("PriceType", Row.PriceType);
+		Filter.Insert("Price", Row.Price);
+		Filter.Insert("DeliveryDate", Row.DeliveryDate);
+		Filter.Insert("Unit", Row.Unit);
+		Filter.Insert("Store", Row.Store);
 
 		ArrayOfRows = DataTable.FindRows(Filter);
 		TotalQ = 0;

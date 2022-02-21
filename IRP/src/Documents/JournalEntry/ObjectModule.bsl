@@ -11,19 +11,19 @@ Procedure OnWrite(Cancel)
 	EndIf;
 	ThisObject.RegisterRecords.R6010A_Master.Clear();
 	For Each Row In ThisObject.Basis.AccountingRowAnalytics Do
-		If Row.LadgerType <> ThisObject.LadgerType Then
+		If Row.LedgerType <> ThisObject.LedgerType Then
 			Continue;
 		EndIf;
 		
 		Record = ThisObject.RegisterRecords.R6010A_Master.Add();
 		Record.Period     = ThisObject.Date;
 		Record.Company    = ThisObject.Company;
-		Record.LadgerType = Row.LadgerType;
+		Record.LedgerType = Row.LedgerType;
 		
 		Filter = New Structure();
 		Filter.Insert("Key"          , Row.Key);
 		Filter.Insert("Identifier"   , Row.Identifier);
-		Filter.Insert("LadgerType"   , Row.LadgerType);
+		Filter.Insert("LedgerType"   , Row.LedgerType);
 		Filter.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.EmptyRef());
 		
 		// Debit analytics

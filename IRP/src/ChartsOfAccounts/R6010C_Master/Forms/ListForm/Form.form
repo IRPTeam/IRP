@@ -147,7 +147,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>LadgerTypeVariant</name>
+      <name>LedgerTypeVariant</name>
       <id>43</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -155,10 +155,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.LadgerTypeVariant</segments>
+        <segments>List.LedgerTypeVariant</segments>
       </dataPath>
       <extendedTooltip>
-        <name>LadgerTypeVariantExtendedTooltip</name>
+        <name>LedgerTypeVariantExtendedTooltip</name>
         <id>45</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -173,7 +173,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>LadgerTypeVariantContextMenu</name>
+        <name>LedgerTypeVariantContextMenu</name>
         <id>44</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -817,7 +817,7 @@
       <queryText>SELECT
 	Table.Ref AS Ref,
 	Table.Code AS Code,
-	Table.LadgerTypeVariant,
+	Table.LedgerTypeVariant,
 	Table.Description_en AS Description,
 	CASE
 		WHEN Table.Type = VALUE(AccountType.Active)

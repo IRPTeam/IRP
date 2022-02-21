@@ -125,7 +125,7 @@ Procedure BeginStartAdditionalCommand_End(DriverObject, CommandParameters) Expor
 		Result = ProcessingModule.RunCommand(CommandParameters.Command, CommandParameters.IncomingParams,
 			OutParameters, DriverObject, CommandParameters.Parameters, preConnectionParameters);
 		If Not Result Then
-			If OutParameters.Количество() >= 2 Then
+			If OutParameters.Count() >= 2 Then
 				ErrorText = OutParameters[1];
 			EndIf;
 			OutParameters.Add(R().Eq_001);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormField">
-    <name>LadgerType</name>
+    <name>LedgerType</name>
     <id>62</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -9,14 +9,14 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>LadgerType</segments>
+      <segments>LedgerType</segments>
     </dataPath>
     <handlers>
       <event>OnChange</event>
-      <name>LadgerTypeOnChange</name>
+      <name>LedgerTypeOnChange</name>
     </handlers>
     <extendedTooltip>
-      <name>LadgerTypeExtendedTooltip</name>
+      <name>LedgerTypeExtendedTooltip</name>
       <id>64</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -31,7 +31,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>LadgerTypeContextMenu</name>
+      <name>LedgerTypeContextMenu</name>
       <id>63</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1256,14 +1256,14 @@
       </edit>
     </columns>
     <columns>
-      <name>LadgerType</name>
+      <name>LedgerType</name>
       <title>
         <key>en</key>
-        <value>Ladger type</value>
+        <value>Ledger type</value>
       </title>
       <id>17</id>
       <valueType>
-        <types>CatalogRef.LadgerTypes</types>
+        <types>CatalogRef.LedgerTypes</types>
       </valueType>
       <view>
         <common>true</common>
@@ -1325,14 +1325,14 @@
     </columns>
   </attributes>
   <attributes>
-    <name>LadgerType</name>
+    <name>LedgerType</name>
     <title>
       <key>en</key>
-      <value>Ladger type</value>
+      <value>Ledger type</value>
     </title>
     <id>19</id>
     <valueType>
-      <types>CatalogRef.LadgerTypes</types>
+      <types>CatalogRef.LedgerTypes</types>
     </valueType>
     <view>
       <common>true</common>

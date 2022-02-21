@@ -606,7 +606,7 @@
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.AdvancesKeys</catalogs>
   <catalogs>Catalog.TransactionsKeys</catalogs>
-  <catalogs>Catalog.LadgerTypes</catalogs>
+  <catalogs>Catalog.LedgerTypes</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>
   <catalogs>Catalog.Batches</catalogs>
   <catalogs>Catalog.BatchKeys</catalogs>
@@ -703,7 +703,7 @@
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
-  <enums>Enum.LadgerTypeVariants</enums>
+  <enums>Enum.LedgerTypeVariants</enums>
   <enums>Enum.AccountingAnalyticTypes</enums>
   <enums>Enum.BatchDirection</enums>
   <enums>Enum.BatchType</enums>
@@ -769,9 +769,9 @@
   <informationRegisters>InformationRegister.PartnerTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.CashAccountTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.TaxTBAccounts</informationRegisters>
-  <informationRegisters>InformationRegister.CompanyLadgerTypes</informationRegisters>
+  <informationRegisters>InformationRegister.CompanyLedgerTypes</informationRegisters>
   <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
-  <informationRegisters>InformationRegister.LadgerTypeOperations</informationRegisters>
+  <informationRegisters>InformationRegister.LedgerTypeOperations</informationRegisters>
   <informationRegisters>InformationRegister.T6010S_BatchesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T6020S_BatchKeysInfo</informationRegisters>
   <informationRegisters>InformationRegister.T6030S_BatchRelevance</informationRegisters>

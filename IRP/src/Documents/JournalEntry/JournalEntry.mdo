@@ -70,13 +70,13 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="7c7a88b5-e014-4533-a568-be5246c62a8c">
-    <name>LadgerType</name>
+    <name>LedgerType</name>
     <synonym>
       <key>en</key>
-      <value>Ladger type</value>
+      <value>Ledger type</value>
     </synonym>
     <type>
-      <types>CatalogRef.LadgerTypes</types>
+      <types>CatalogRef.LedgerTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -31,13 +31,13 @@
   <defaultListForm>ChartOfAccounts.R6010C_Master.Form.ListForm</defaultListForm>
   <defaultChoiceForm>ChartOfAccounts.R6010C_Master.Form.ChoiceForm</defaultChoiceForm>
   <attributes uuid="b37dad27-9ea5-4c9d-8d6d-bb9d13f202d7">
-    <name>LadgerTypeVariant</name>
+    <name>LedgerTypeVariant</name>
     <synonym>
       <key>en</key>
-      <value>Ladger type variant</value>
+      <value>Ledger type variant</value>
     </synonym>
     <type>
-      <types>EnumRef.LadgerTypeVariants</types>
+      <types>EnumRef.LedgerTypeVariants</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

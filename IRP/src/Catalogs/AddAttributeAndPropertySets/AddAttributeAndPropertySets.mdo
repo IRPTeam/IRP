@@ -602,8 +602,8 @@
       </code>
     </items>
     <items id="d5c6b9c5-5c08-4b68-938c-e177ac303e2d">
-      <name>Catalog_LadgerTypes</name>
-      <description>Catalog ladger types</description>
+      <name>Catalog_LedgerTypes</name>
+      <description>Catalog Ledger types</description>
       <code xsi:type="core:NumberValue">
         <value>85</value>
       </code>

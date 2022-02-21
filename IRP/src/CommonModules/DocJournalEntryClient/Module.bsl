@@ -40,9 +40,9 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
-#Region ItemLadgerType
+#Region ItemLedgerType
 
-Procedure LadgerTypeOnChange(Object, Form, Item) Export
+Procedure LedgerTypeOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 

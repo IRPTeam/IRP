@@ -1,39 +1,39 @@
 
-Procedure BeforeWriteAccountingDocument(Object, MainTableName, Filter_LadgerType = Undefined) Export
+Procedure BeforeWriteAccountingDocument(Object, MainTableName, Filter_LedgerType = Undefined) Export
 	DeleteUnusedRowsFromAnalyticsTable(Object, MainTableName);
-	CompanyLadgerTypes = AccountingServer.GetLadgerTypesByCompany(Object.Ref, Object.Date, Object.Company);
+	CompanyLedgerTypes = AccountingServer.GetLedgerTypesByCompany(Object.Ref, Object.Date, Object.Company);
 	Period = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
-	For Each LadgerType In CompanyLadgerTypes Do
-		If Filter_LadgerType <> Undefined Then
-			If LadgerType <> Filter_LadgerType Then
+	For Each LedgerType In CompanyLedgerTypes Do
+		If Filter_LedgerType <> Undefined Then
+			If LedgerType <> Filter_LedgerType Then
 				Continue;
 			EndIf;
 		EndIf;
-		LadgerTypeAccountingOperations = AccountingServer.GetAccountingOperationsByLadgerType(Object.Ref, Period, LadgerType);
-		For Each Operation In LadgerTypeAccountingOperations Do
+		LedgerTypeAccountingOperations = AccountingServer.GetAccountingOperationsByLedgerType(Object.Ref, Period, LedgerType);
+		For Each Operation In LedgerTypeAccountingOperations Do
 			If Not Operation.ByRow Then
 				UpdateAccountingAnalytics(Object, Undefined, "", 
-					Operation.Identifier, LadgerType, Operation.MetadataName, MainTableName);
+					Operation.Identifier, LedgerType, Operation.MetadataName, MainTableName);
 			Else
 				For Each Row In Object[MainTableName] Do
 					UpdateAccountingAnalytics(Object, Row, Row.Key, 
-						Operation.Identifier, LadgerType, Operation.MetadataName, MainTableName);
+						Operation.Identifier, LedgerType, Operation.MetadataName, MainTableName);
 				EndDo;
 			EndIf;
 		EndDo;
 	EndDo;
 EndProcedure
 
-Procedure UpdateAccountingAnalytics(Object, Row, RowKey, Identifier, LadgerType, MetadataName, MainTableName)
+Procedure UpdateAccountingAnalytics(Object, Row, RowKey, Identifier, LedgerType, MetadataName, MainTableName)
 	AnalyticRow = Undefined;
 	Filter = New Structure();
 	Filter.Insert("Key"       , RowKey);
 	Filter.Insert("Identifier", Identifier);
-	Filter.Insert("LadgerType", LadgerType);
+	Filter.Insert("LedgerType", LedgerType);
 	AnalyticRows = Object.AccountingRowAnalytics.FindRows(Filter);
 	If AnalyticRows.Count() > 1 Then
-		Raise StrTemplate("More than 1 analytic rows by filter: Key[%1] Identifier[%2] LadgerType[%3]",
-				Filter.Key, Filter.Identifier, Filter.LadgerType);
+		Raise StrTemplate("More than 1 analytic rows by filter: Key[%1] Identifier[%2] LedgerType[%3]",
+				Filter.Key, Filter.Identifier, Filter.LedgerType);
 	ElsIf AnalyticRows.Count() = 1 Then
 		AnalyticRow = AnalyticRows[0];
 		If AnalyticRow.IsFixed Then
@@ -41,7 +41,7 @@ Procedure UpdateAccountingAnalytics(Object, Row, RowKey, Identifier, LadgerType,
 		EndIf;
 	EndIf;
 				
-	AnalyticData = GetAccountingAnalytics(Object, Row, Identifier, LadgerType, MetadataName, MainTableName);
+	AnalyticData = GetAccountingAnalytics(Object, Row, Identifier, LedgerType, MetadataName, MainTableName);
 
 	If AnalyticRow = Undefined Then
 		AnalyticRow = Object.AccountingRowAnalytics.Add();
@@ -54,20 +54,20 @@ Procedure UpdateAccountingAnalytics(Object, Row, RowKey, Identifier, LadgerType,
 	EndIf;
 EndProcedure
 
-Function GetAccountingAnalytics(Object, TableRow, Identifier, LadgerType, MetadataName, MainTableName) Export
+Function GetAccountingAnalytics(Object, TableRow, Identifier, LedgerType, MetadataName, MainTableName) Export
 	DocumentData = AccountingServer.GetDocumentData(Object, TableRow, MainTableName);
 	Parameters = New Structure();
 	Parameters.Insert("ObjectData"   , DocumentData.ObjectData);
 	Parameters.Insert("RowData"      , DocumentData.RowData);
 	Parameters.Insert("Identifier"   , Identifier);
-	Parameters.Insert("LadgerType"   , LadgerType);
+	Parameters.Insert("LedgerType"   , LedgerType);
 	Parameters.Insert("MetadataName" , MetadataName);
 	Return AccountingServer.GetAccountingAnalytics(Parameters, MetadataName);
 EndFunction
 
 Procedure FillAccountingAnalytics(AnalyticRow, AnalyticData, AccountingExtDimensions) Export
 	AnalyticRow.Identifier = AnalyticData.Identifier;
-	AnalyticRow.LadgerType = AnalyticData.LadgerType;
+	AnalyticRow.LedgerType = AnalyticData.LedgerType;
 	
 	AnalyticRow.AccountDebit = AnalyticData.Debit;
 	FillAccountingExtDimensions(AnalyticData.DebitExtDimensions, AccountingExtDimensions);
@@ -82,7 +82,7 @@ Procedure FillAccountingExtDimensions(ArrayOfData, AccountingExtDimensions)
 		Filter.Insert("Key"          , ExtDim.Key);
 		Filter.Insert("AnalyticType" , ExtDim.AnalyticType);
 		Filter.Insert("Identifier"   , ExtDim.Identifier);
-		Filter.Insert("LadgerType"   , ExtDim.LadgerType);
+		Filter.Insert("LedgerType"   , ExtDim.LedgerType);
 		AccountingExtDimensionRows = AccountingExtDimensions.FindRows(Filter);
 		For Each RowForDelete In AccountingExtDimensionRows Do
 			AccountingExtDimensions.Delete(RowForDelete);
@@ -94,7 +94,7 @@ Procedure FillAccountingExtDimensions(ArrayOfData, AccountingExtDimensions)
 		NewRow.Key              = ExtDim.Key;
 		NewRow.AnalyticType     = ExtDim.AnalyticType;
 		NewRow.Identifier       = ExtDim.Identifier;
-		NewRow.LadgerType       = ExtDim.LadgerType;
+		NewRow.LedgerType       = ExtDim.LedgerType;
 		NewRow.ExtDimensionType = ExtDim.ExtDimensionType;
 		NewRow.ExtDimension     = ExtDim.ExtDimension;
 	EndDo;
@@ -122,7 +122,7 @@ EndFunction
 Function GetColumnsAccountingRowAnalytics()
 	Return
 	"Identifier, 
-	|LadgerType, 
+	|LedgerType, 
 	|AccountDebit,
 	|AccountCredit";
 EndFunction
@@ -164,11 +164,11 @@ Procedure DeleteUnusedRowsFromAnalyticsTable(Object, MainTableName) Export
 	EndDo;
 EndProcedure
 
-Function GetParametersEditTrialBallanceAccounts(Object, CurrentData, MainTableName, Filter_LadgerType = Undefined) Export
+Function GetParametersEditTrialBallanceAccounts(Object, CurrentData, MainTableName, Filter_LedgerType = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("DocumentRef", Object.Ref);
 	Parameters.Insert("MainTableName"     , MainTableName);
-	Parameters.Insert("ArrayOfLadgerTypes", AccountingServer.GetLadgerTypesByCompany(Object.Ref, Object.Date, Object.Company));
+	Parameters.Insert("ArrayOfLedgerTypes", AccountingServer.GetLedgerTypesByCompany(Object.Ref, Object.Date, Object.Company));
 	Parameters.Insert("RowKey", CurrentData.Key);
 	
 	Parameters.Insert("AccountingAnalytics", New Array());
@@ -177,15 +177,15 @@ Function GetParametersEditTrialBallanceAccounts(Object, CurrentData, MainTableNa
 			Continue;
 		EndIf;
 		
-		If Filter_LadgerType <> Undefined Then
-			If RowAnalytics.LadgerType <> Filter_LadgerType Then
+		If Filter_LedgerType <> Undefined Then
+			If RowAnalytics.LedgerType <> Filter_LedgerType Then
 				Continue;
 			EndIf;
 		EndIf;
 		
 		NewAnalyticRow = New Structure();
 		NewAnalyticRow.Insert("Key"           , RowAnalytics.Key);
-		NewAnalyticRow.Insert("LadgerType"    , RowAnalytics.LadgerType);
+		NewAnalyticRow.Insert("LedgerType"    , RowAnalytics.LedgerType);
 		NewAnalyticRow.Insert("Identifier"    , RowAnalytics.Identifier);
 		NewAnalyticRow.Insert("AccountDebit"  , RowAnalytics.AccountDebit);
 		NewAnalyticRow.Insert("AccountCredit" , RowAnalytics.AccountCredit);
@@ -196,7 +196,7 @@ Function GetParametersEditTrialBallanceAccounts(Object, CurrentData, MainTableNa
 		For Each RowExtDimensions In Object.AccountingExtDimensions Do
 			If RowExtDimensions.Key <> RowAnalytics.Key
 				Or RowExtDimensions.Identifier <> RowAnalytics.Identifier
-				Or RowExtDimensions.LadgerType <> RowAnalytics.LadgerType Then
+				Or RowExtDimensions.LedgerType <> RowAnalytics.LedgerType Then
 				Continue;
 			EndIf;
 			NewExtDimension = New Structure();

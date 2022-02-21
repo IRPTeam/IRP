@@ -65,11 +65,11 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemLadgerType
+#Region ItemLedgerType
 
 &AtClient
-Procedure LadgerTypeOnChange(Item)
-	DocJournalEntryClient.LadgerTypeOnChange(Object, ThisObject, Item);
+Procedure LedgerTypeOnChange(Item)
+	DocJournalEntryClient.LedgerTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

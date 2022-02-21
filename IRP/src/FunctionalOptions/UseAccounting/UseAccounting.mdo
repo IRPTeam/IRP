@@ -10,17 +10,17 @@
   <content>ChartOfAccounts.R6010C_Master</content>
   <content>CommonForm.EditTrialBallanceAccounts</content>
   <content>InformationRegister.CashAccountTBAccounts</content>
-  <content>InformationRegister.LadgerTypeOperations</content>
+  <content>InformationRegister.LedgerTypeOperations</content>
   <content>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</content>
   <content>InformationRegister.PartnerTBAccounts</content>
   <content>AccumulationRegister.T1050T_AccountingQuantities</content>
   <content>AccountingRegister.R6010A_Master</content>
   <content>Subsystem.Accounting.Subsystem.TrialBallanceAccounts</content>
-  <content>Catalog.LadgerTypes</content>
+  <content>Catalog.LedgerTypes</content>
   <content>Catalog.AccountingOperations</content>
   <content>Document.JournalEntry</content>
   <content>AccumulationRegister.T1040T_AccountingAmounts</content>
-  <content>InformationRegister.CompanyLadgerTypes</content>
+  <content>InformationRegister.CompanyLedgerTypes</content>
   <content>InformationRegister.TaxTBAccounts</content>
   <content>InformationRegister.ItemKeyTBAccounts</content>
   <content>Subsystem.Accounting</content>

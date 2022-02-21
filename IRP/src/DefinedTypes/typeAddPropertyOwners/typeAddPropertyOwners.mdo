@@ -88,6 +88,6 @@
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
     <types>DocumentRef.JournalEntry</types>
-    <types>CatalogRef.LadgerTypes</types>
+    <types>CatalogRef.LedgerTypes</types>
   </type>
 </mdclass:DefinedType>

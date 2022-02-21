@@ -22,7 +22,7 @@ Procedure EditTrialBallanceAccounts(Result, AdditionalParameters) Export
 		NewRow.Key = Row.Key;
 		NewRow.IsFixed = Row.IsFixed;
 		NewRow.Identifier    = Row.Identifier;
-		NewRow.LadgerType    = Row.LadgerType;
+		NewRow.LedgerType    = Row.LedgerType;
 		NewRow.AccountDebit  = Row.AccountDebit;
 		NewRow.AccountCredit = Row.AccountCredit;
 		
@@ -67,7 +67,7 @@ Procedure AddExtDimensionRow(Object, AnalyticRow, AnalyticType, ExtDimType, ExtD
 	NewRow = Object.AccountingExtDimensions.Add();
 	NewRow.Key = AnalyticRow.Key;
 	NewRow.Identifier   = AnalyticRow.Identifier;
-	NewRow.LadgerType   = AnalyticRow.LadgerType;
+	NewRow.LedgerType   = AnalyticRow.LedgerType;
 	NewRow.AnalyticType = AnalyticType;
 	NewRow.ExtDimensionType = ExtDimType;
 	NewRow.ExtDimension     = ExtDim;

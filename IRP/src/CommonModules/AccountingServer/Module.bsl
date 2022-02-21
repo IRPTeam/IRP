@@ -4,7 +4,7 @@
 Function GetAccountingAnalyticsResult(Parameters) Export
 	AccountingAnalytics = New Structure();
 	AccountingAnalytics.Insert("Identifier", Parameters.Identifier);
-	AccountingAnalytics.Insert("LadgerType", Parameters.LadgerType);
+	AccountingAnalytics.Insert("LedgerType", Parameters.LedgerType);
 	
 	// Debit - PartnerTBAccounts
 	AccountingAnalytics.Insert("Debit", Undefined);
@@ -113,7 +113,7 @@ Procedure SetDebitExtDimensions(Parameters, AccountingAnalytics) Export
 			ExtDimension.Insert("Key"          , Parameters.RowData.Key);
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Debit);
 			ExtDimension.Insert("Identifier"   , Parameters.Identifier);
-			ExtDimension.Insert("LadgerType"   , Parameters.LadgerType);
+			ExtDimension.Insert("LedgerType"   , Parameters.LedgerType);
 			AccountingAnalytics.DebitExtDimensions.Add(ExtDimension);
 		EndDo;
 	EndIf;
@@ -131,7 +131,7 @@ Procedure SetCreditExtDimensions(Parameters, AccountingAnalytics) Export
 			ExtDimension.Insert("Key"          , Parameters.RowData.Key);
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Credit);
 			ExtDimension.Insert("Identifier"   , Parameters.Identifier);
-			ExtDimension.Insert("LadgerType"   , Parameters.LadgerType);
+			ExtDimension.Insert("LedgerType"   , Parameters.LedgerType);
 			AccountingAnalytics.CreditExtDimensions.Add(ExtDimension);
 		EndDo;
 	EndIf;
@@ -159,7 +159,7 @@ Function GetDataByAccountingAnalytics(BasisRef, RowData) Export
 	Parameters.Insert("Recorder" , BasisRef);
 	Parameters.Insert("RowKey"   , RowData.Key);
 	Parameters.Insert("Identifier"   , RowData.Identifier);
-	Parameters.Insert("CurrencyMovementType", RowData.LadgerType.CurrencyMovementType);
+	Parameters.Insert("CurrencyMovementType", RowData.LedgerType.CurrencyMovementType);
 	MetadataName = BasisRef.Metadata().Name;
 	Data = Documents[MetadataName].GetAccountingData(Parameters);
 	If Data = Undefined Then
@@ -168,28 +168,28 @@ Function GetDataByAccountingAnalytics(BasisRef, RowData) Export
 	Return FillAccountingDataResult(Data);
 EndFunction
 
-Function GetLadgerTypesByCompany(Ref, Date, Company) Export
+Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 	If Not ValueIsFilled(Company) Then
 		Return New Array();
 	EndIf;
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	CompanyLadgerTypesSliceLast.LadgerType
+	|	CompanyLedgerTypesSliceLast.LedgerType
 	|FROM
-	|	InformationRegister.CompanyLadgerTypes.SliceLast(&Period, Company = &Company) AS CompanyLadgerTypesSliceLast
+	|	InformationRegister.CompanyLedgerTypes.SliceLast(&Period, Company = &Company) AS CompanyLedgerTypesSliceLast
 	|WHERE
-	|	CompanyLadgerTypesSliceLast.Use";
+	|	CompanyLedgerTypesSliceLast.Use";
 	Period = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Ref, Date);
 	Query.SetParameter("Period" , Period);
 	Query.SetParameter("Company", Company);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-	ArrayOfLadgerTypes = QueryTable.UnloadColumn("LadgerType");
-	Return ArrayOfLadgerTypes;
+	ArrayOfLedgerTypes = QueryTable.UnloadColumn("LedgerType");
+	Return ArrayOfLedgerTypes;
 EndFunction
 
-Function GetAccountingOperationsByLadgerType(Ref, Period, LadgerType) Export
+Function GetAccountingOperationsByLedgerType(Ref, Period, LedgerType) Export
 	Map = New Map();
 	AO = Catalogs.AccountingOperations;
 	Map.Insert(AO.BankPayment_Dr_PartnerAccount_Cr_CashAccount              , True);
@@ -201,14 +201,14 @@ Function GetAccountingOperationsByLadgerType(Ref, Period, LadgerType) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
-	|	LadgerTypeOperationsSliceLast.AccountingOperation AS AccountingOperation
+	|	LedgerTypeOperationsSliceLast.AccountingOperation AS AccountingOperation
 	|FROM
-	|	InformationRegister.LadgerTypeOperations.SliceLast(&Period, LadgerType = &LadgerType
-	|	AND AccountingOperation.Parent = &AccountingOperationGroup) AS LadgerTypeOperationsSliceLast
+	|	InformationRegister.LedgerTypeOperations.SliceLast(&Period, LedgerType = &LedgerType
+	|	AND AccountingOperation.Parent = &AccountingOperationGroup) AS LedgerTypeOperationsSliceLast
 	|WHERE
-	|	LadgerTypeOperationsSliceLast.Use";
+	|	LedgerTypeOperationsSliceLast.Use";
 	Query.SetParameter("Period", Period);
-	Query.SetParameter("LadgerType", LadgerType);
+	Query.SetParameter("LedgerType", LedgerType);
 	Query.SetParameter("AccountingOperationGroup", AccountingOperationGroup);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

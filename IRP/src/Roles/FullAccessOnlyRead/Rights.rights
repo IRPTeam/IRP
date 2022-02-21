@@ -5688,7 +5688,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.CompanyLadgerTypes</name>
+		<name>InformationRegister.CompanyLedgerTypes</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -5699,7 +5699,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.LadgerTypeOperations</name>
+		<name>InformationRegister.LedgerTypeOperations</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -5802,7 +5802,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.LadgerTypes</name>
+		<name>Catalog.LedgerTypes</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

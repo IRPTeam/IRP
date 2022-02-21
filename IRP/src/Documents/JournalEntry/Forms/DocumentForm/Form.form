@@ -365,7 +365,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>LadgerType</name>
+          <name>LedgerType</name>
           <id>10</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -373,14 +373,14 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.LadgerType</segments>
+            <segments>Object.LedgerType</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
-            <name>LadgerTypeOnChange</name>
+            <name>LedgerTypeOnChange</name>
           </handlers>
           <extendedTooltip>
-            <name>LadgerTypeExtendedTooltip</name>
+            <name>LedgerTypeExtendedTooltip</name>
             <id>12</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -395,7 +395,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>LadgerTypeContextMenu</name>
+            <name>LedgerTypeContextMenu</name>
             <id>11</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -600,7 +600,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>LadgerTypeCurrencyMovementTypeCurrency</name>
+          <name>LedgerTypeCurrencyMovementTypeCurrency</name>
           <id>154</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -608,10 +608,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.LadgerType.CurrencyMovementType.Currency</segments>
+            <segments>Object.LedgerType.CurrencyMovementType.Currency</segments>
           </dataPath>
           <extendedTooltip>
-            <name>LadgerTypeCurrencyMovementTypeCurrencyExtendedTooltip</name>
+            <name>LedgerTypeCurrencyMovementTypeCurrencyExtendedTooltip</name>
             <id>156</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -626,7 +626,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>LadgerTypeCurrencyMovementTypeCurrencyContextMenu</name>
+            <name>LedgerTypeCurrencyMovementTypeCurrencyContextMenu</name>
             <id>155</id>
             <visible>true</visible>
             <enabled>true</enabled>

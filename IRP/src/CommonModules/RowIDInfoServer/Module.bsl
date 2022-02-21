@@ -7621,7 +7621,7 @@ EndFunction
 
 #Region DataToFillingValues
 
-Function GetSeperatorColumns(DocReceiverMetadata) Export
+Function GetSeparatorColumns(DocReceiverMetadata) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
 		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName";
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
@@ -7661,7 +7661,7 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 
 	TableNames_Refreshable = GetTableNames_Refreshable();
 
-	SeparatorColumns = GetSeperatorColumns(DocReceiverMetadata);
+	SeparatorColumns = GetSeparatorColumns(DocReceiverMetadata);
 
 	UniqueRows = Tables.ItemList.Copy();
 	UniqueRows.GroupBy(SeparatorColumns);

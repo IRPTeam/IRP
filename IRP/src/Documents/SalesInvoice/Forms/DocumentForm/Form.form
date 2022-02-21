@@ -8232,10 +8232,6 @@
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
     </handlers>
-    <handlers>
-      <event>BeforeWrite</event>
-      <name>BeforeWrite</name>
-    </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>
 </form:Form>

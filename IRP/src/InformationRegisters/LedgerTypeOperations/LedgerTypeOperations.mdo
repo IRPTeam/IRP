@@ -18,6 +18,10 @@
   <editType>InDialog</editType>
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Ledger type operation</value>
+  </recordPresentation>
   <resources uuid="49e792be-7405-4eab-88ed-f90b600fa138">
     <name>Use</name>
     <synonym>

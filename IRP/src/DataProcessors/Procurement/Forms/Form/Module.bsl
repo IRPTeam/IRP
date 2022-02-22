@@ -1163,6 +1163,7 @@ Procedure ShowPrecisionOnChange(Item)
 	SaveSettings();
 EndProcedure
 
+&AtClient
 Procedure ShowPrecision()
 	FieldFormat = ?(ThisObject.ShowPrecision, "", "NFD=0");
 	For Each Row In ThisObject.TableOfColumns Do

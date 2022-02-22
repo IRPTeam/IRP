@@ -1,6 +1,5 @@
 #Region FormEvents
 
-&AtClient
 Procedure ExternalEvent(Object, Form, Source, Event, Data) Export
 	If Data <> Undefined Then
 		NotifyParameters = New Structure();
@@ -15,12 +14,10 @@ EndProcedure
 
 #Region Public
 
-&AtClient
 Procedure BeforePayment(Object, Cancel, AddInfo = Undefined) Export
 	Return;
 EndProcedure
 
-&AtClient
 Procedure PrintLastReceipt(Object, Cancel, AddInfo = Undefined) Export
 	LastRetailSalesReceipt = DPPointOfSaleServer.GetLastRetailSalesReceiptDoc();
 	If LastRetailSalesReceipt.isEmpty() Then

@@ -19,6 +19,10 @@
   <defaultRecordForm>InformationRegister.CompanyLedgerTypes.Form.RecordForm</defaultRecordForm>
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Company Ledger type</value>
+  </recordPresentation>
   <resources uuid="56275698-670b-40ed-8aac-77eaf3c633c8">
     <name>Use</name>
     <synonym>

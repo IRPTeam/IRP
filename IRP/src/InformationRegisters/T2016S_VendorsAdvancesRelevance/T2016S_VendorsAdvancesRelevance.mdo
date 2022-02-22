@@ -17,6 +17,10 @@
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>T2016 Vendors advances relevance</value>
+  </recordPresentation>
   <resources uuid="40aaee78-4c5b-455a-b89c-eef5a0aa2ed9">
     <name>Document</name>
     <synonym>

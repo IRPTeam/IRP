@@ -19,6 +19,10 @@
   <defaultRecordForm>InformationRegister.ItemKeyTBAccounts.Form.RecordForm</defaultRecordForm>
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Item key TB account</value>
+  </recordPresentation>
   <resources uuid="26486334-1d28-4aa5-bdfc-a98d6b0de605">
     <name>Account</name>
     <synonym>

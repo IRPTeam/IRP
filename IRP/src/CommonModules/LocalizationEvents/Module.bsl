@@ -417,7 +417,7 @@ EndProcedure
 //  Structure - Custom search filter:
 // * FieldName - String
 // * Value - Undefined
-// * ComparisonType - ComparisonType
+// * ComparisonType - ComparisonType -
 // * DataCompositionComparisonType - Undefined
 Function NewCustomSearchFilter() Export
 	Structure = New Structure;

@@ -687,7 +687,8 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
 			
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
@@ -945,7 +946,8 @@ EndProcedure
 
 Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	// Update -> SrialLotNubersTree
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
@@ -954,7 +956,8 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	EndIf;
 	
 	// Update -> RowIDInfoQuantity
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
@@ -966,6 +969,10 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
 		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
 			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+	EndIf;
+	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
+			"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
 	EndIf;
 EndProcedure
 
@@ -1275,7 +1282,8 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 			Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
 				
 				ServerData = Undefined;
 				If ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
@@ -1293,6 +1301,14 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 				"ShipmentConfirmations");
 			DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
 				"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+		EndIf;
+		
+		If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+			Parameters.Form.Taxes_CreateFormControls();
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form,
+				"GoodsReceipts");
+			DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
+				"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
 		EndIf;
 	EndDo;
 EndProcedure

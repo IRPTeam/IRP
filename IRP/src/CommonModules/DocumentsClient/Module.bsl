@@ -1201,9 +1201,15 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	FilterStructure = New Structure(FilterString);
 	
 	// documents use ViewClient module
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") 
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
-			
+	IsUsedNewFunctionality =
+	   TypeOf(Object.Ref) = Type("DocumentRef.ShipmentConfirmation")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.GoodsReceipt")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.StockAdjustmentAsSurplus")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.StockAdjustmentAsWriteOff")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice");
+	
+	If IsUsedNewFunctionality Then	
 		For Each ResultElement In Result Do
 			FillPropertyValues(FilterStructure, ResultElement);
 			ExistingRows = Object.ItemList.FindRows(FilterStructure);

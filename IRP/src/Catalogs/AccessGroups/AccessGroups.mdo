@@ -20,6 +20,10 @@
     <key>en</key>
     <value>User access group</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>User access groups</value>
+  </listPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>

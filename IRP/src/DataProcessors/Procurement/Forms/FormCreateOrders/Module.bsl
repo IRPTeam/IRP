@@ -151,7 +151,7 @@ Procedure ShowPrecisionOnChange(Item)
 	ShowPrecision();
 EndProcedure
 
-&AtServer
+&AtClient
 Procedure ShowPrecision()
 	FieldFormat = ?(ThisObject.ShowPrecision, "", "NFD=0");
 	Items.TableOfBalanceBalance.Format = FieldFormat;

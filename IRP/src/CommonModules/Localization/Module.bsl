@@ -619,6 +619,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_103", NStr("en = '%1 is undefined.'", Lang));
 	Strings.Insert("Error_104", NStr("en = 'Document [%1] have negative stock balance'", Lang));
 	Strings.Insert("Error_105", NStr("en = 'Document [%1] already have related documents'", Lang));
+	Strings.Insert("Error_106", NStr("en = 'Can not lock data'", Lang));
+	
 #EndRegion
 
 #Region InfoMessages

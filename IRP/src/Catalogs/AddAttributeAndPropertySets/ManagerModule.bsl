@@ -144,8 +144,11 @@ Procedure WriteDataToObject(Set, ArrayOfAttributes)
 	ItemLock.Mode = DataLockMode.Exclusive;
 	ItemLock.DataSource = DataSource;
 	ItemLock.UseFromDataSource("Ref", "Ref");
+	Try
 	DataLock.Lock();
-
+	Except
+		Raise R().Error_106;
+	EndTry;	
 	CatalogObject = Set.GetObject();
 	CatalogObject.Attributes.Clear();
 	For Each Attribute In ArrayOfAttributes Do

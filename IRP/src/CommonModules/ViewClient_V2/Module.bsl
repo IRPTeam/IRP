@@ -555,6 +555,8 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		NeedRecalculate = True;
 	EndIf;
 	
+	CommitChanges(Parameters);
+	
 	If NeedRecalculate Then
 		FormParameters = GetFormParameters(Parameters.Form);
 		FormParameters.EventCaller = "RecalculationsAfterQuestionToUser";
@@ -562,8 +564,6 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		ServerParameters.TableName = "ItemList";
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.RecalculationsAfterQuestionToUser(Parameters);
-	Else
-		CommitChanges(Parameters);
 	EndIf;
 EndProcedure
 

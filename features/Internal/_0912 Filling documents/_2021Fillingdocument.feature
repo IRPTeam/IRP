@@ -7279,9 +7279,9 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			And I input "945,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
-				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types'       | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -7289,9 +7289,9 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			And I select current line in "ItemList" table
 			And I input "3,000" text in "Q" field of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
-				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types'       | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change total amount and check tax and net amount calculation (Price does not include tax)
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -7299,18 +7299,18 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			And I select current line in "ItemList" table
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
-				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types'       | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price includes tax and check tax and net amount calculation when change total amount
 			And I move to "Other" tab
 			And I move to "More" tab
 			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '183,31'     | '1 018,37'   | '1 201,68'     |
-				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'en description is empty' | 'pcs'  | 'No'                 | '183,31'     | '1 018,37'   | '1 201,68'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types'       | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
@@ -7318,9 +7318,9 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			And I input "1200,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '183,05'     | '1 016,95'   | '1 200,00'     |
-				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |		 			
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'en description is empty' | 'pcs'  | 'No'                 | '183,05'     | '1 016,95'   | '1 200,00'     |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types'       | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -7328,9 +7328,9 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			And I select current line in "ItemList" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
-				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'en description is empty' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
+				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'Basic Price Types'       | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I close all client application windows
 			
 

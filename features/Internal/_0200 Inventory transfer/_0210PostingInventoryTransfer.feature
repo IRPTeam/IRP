@@ -385,7 +385,7 @@ Scenario: _02104808 check filling in fields Use GR and Use SC from Store in the 
 			| 'Store 01'  |
 		And I select current line in "List" table
 		And I move to "Other" tab
-		Then I wait that in user messages the "Сan not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled." substring will appear in 20 seconds
+		Then I wait that in user messages the "Can not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled." substring will appear in 20 seconds
 		Then the form attribute named "UseShipmentConfirmation" became equal to "Yes"
 		Then the form attribute named "UseGoodsReceipt" became equal to "Yes"
 		And I close all client application windows

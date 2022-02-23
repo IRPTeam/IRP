@@ -49,8 +49,6 @@ Procedure BeforeStart(Cancel)
 
 EndProcedure
 
-
-
 #Region Hardware
 
 Procedure ConnectAllEquipments() Export
@@ -62,7 +60,7 @@ EndProcedure
 // Returns:
 //  Structure - New equipments:
 // * Drivers - Map -
-// * ConnectionSettings - Array -
+// * ConnectionSettings - Array of CatalogRef.IntegrationSettings -
 Function NewEquipments()
 	globalEquipments = New Structure();
 	globalEquipments.Insert("Drivers", New Map());

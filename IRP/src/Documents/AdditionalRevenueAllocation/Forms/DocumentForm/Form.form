@@ -1624,7 +1624,7 @@
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
-              <name>AllocationRowsAllocateRevenueAmmount</name>
+              <name>AllocationRowsAllocateRevenueAmount</name>
               <id>634</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1632,7 +1632,7 @@
                 <common>true</common>
               </userVisible>
               <extendedTooltip>
-                <name>AllocationRowsAllocateRevenueAmmountExtendedTooltip</name>
+                <name>AllocationRowsAllocateRevenueAmountExtendedTooltip</name>
                 <id>635</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1646,7 +1646,7 @@
                   <horizontalAlign>Left</horizontalAlign>
                 </extInfo>
               </extendedTooltip>
-              <commandName>Form.Command.AllocateRevenueAmmount</commandName>
+              <commandName>Form.Command.AllocateRevenueAmount</commandName>
               <representation>Auto</representation>
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
@@ -4528,10 +4528,10 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>AllocateRevenueAmmount</name>
+    <name>AllocateRevenueAmount</name>
     <title>
       <key>en</key>
-      <value>Allocate revenue ammount</value>
+      <value>Allocate revenue Amount</value>
     </title>
     <id>2</id>
     <use>
@@ -4539,7 +4539,7 @@
     </use>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>AllocateRevenueAmmount</name>
+        <name>AllocateRevenueAmount</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

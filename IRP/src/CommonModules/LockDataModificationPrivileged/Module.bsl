@@ -163,7 +163,7 @@ Function CalculateRuleByObject(SourceParams, AddInfo = Undefined)
 		Return Undefined;
 	EndIf;
 	VT = QueryResult.Unload();
-	If Not SafeMode() Then
+	If Not ValueIsFilled(SafeMode()) Then
 		SetSafeMode(True);
 	EndIf;
 	For Each Row In VT Do

@@ -9,15 +9,19 @@
     <recordType typeId="fc853307-b65b-4340-aaf8-b6e30a17febd" valueTypeId="d06edf5a-2ce4-4b90-9c9b-15ec70704ec2"/>
     <recordManagerType typeId="d67ebb59-de62-43bd-89e5-6e72746543cc" valueTypeId="9abe177f-1c28-427f-b9bf-f8854bd14a70"/>
   </producedTypes>
-  <name>LadgerTypeOperations</name>
+  <name>LedgerTypeOperations</name>
   <synonym>
     <key>en</key>
-    <value>Ladger type operations</value>
+    <value>Ledger type operations</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Ledger type operation</value>
+  </recordPresentation>
   <resources uuid="49e792be-7405-4eab-88ed-f90b600fa138">
     <name>Use</name>
     <synonym>
@@ -34,13 +38,13 @@
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="788df50a-6c4e-40c6-ab42-74b029ce5acc">
-    <name>LadgerType</name>
+    <name>LedgerType</name>
     <synonym>
       <key>en</key>
-      <value>Ladger type</value>
+      <value>Ledger type</value>
     </synonym>
     <type>
-      <types>CatalogRef.LadgerTypes</types>
+      <types>CatalogRef.LedgerTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

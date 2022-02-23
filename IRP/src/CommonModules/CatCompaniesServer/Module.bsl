@@ -58,17 +58,17 @@ Procedure ClearTaxesIntoFormTable(CurrentCompany) Export
 	Set.Write();
 EndProcedure
 
-Procedure ReadLadgerTypesFormTable(Form) Export
-	Set = InformationRegisters.CompanyLadgerTypes.CreateRecordSet();
+Procedure ReadLedgerTypesFormTable(Form) Export
+	Set = InformationRegisters.CompanyLedgerTypes.CreateRecordSet();
 	Set.Filter.Company.Set(Form.Parameters.Key);
 	Set.Read();
-	Form.CompanyLadgerTypes.Load(Set.Unload());	
+	Form.CompanyLedgerTypes.Load(Set.Unload());	
 EndProcedure
 
-Procedure WriteLadgerTypesFormTable(Form, CurrentCompany) Export
-	Set = InformationRegisters.CompanyLadgerTypes.CreateRecordSet();
+Procedure WriteLedgerTypesFormTable(Form, CurrentCompany) Export
+	Set = InformationRegisters.CompanyLedgerTypes.CreateRecordSet();
 	Set.Filter.Company.Set(CurrentCompany);
-	For Each Row In Form.CompanyLadgerTypes Do
+	For Each Row In Form.CompanyLedgerTypes Do
 		Record = Set.Add();
 		FillPropertyValues(Record, Row);
 		Record.Company = CurrentCompany;
@@ -76,8 +76,8 @@ Procedure WriteLadgerTypesFormTable(Form, CurrentCompany) Export
 	Set.Write();
 EndProcedure
 
-Procedure ClearLadgerTypesFormTable(CurrentCompany) Export
-	Set = InformationRegisters.CompanyLadgerTypes.CreateRecordSet();
+Procedure ClearLedgerTypesFormTable(CurrentCompany) Export
+	Set = InformationRegisters.CompanyLedgerTypes.CreateRecordSet();
 	Set.Filter.Company.Set(CurrentCompany);
 	Set.Clear();
 	Set.Write();

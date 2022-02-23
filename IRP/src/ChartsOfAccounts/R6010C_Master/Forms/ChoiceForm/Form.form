@@ -147,7 +147,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>LadgerTypeVariant</name>
+      <name>LedgerTypeVariant</name>
       <id>31</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -155,10 +155,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.LadgerTypeVariant</segments>
+        <segments>List.LedgerTypeVariant</segments>
       </dataPath>
       <extendedTooltip>
-        <name>LadgerTypeVariantExtendedTooltip</name>
+        <name>LedgerTypeVariantExtendedTooltip</name>
         <id>33</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -173,7 +173,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>LadgerTypeVariantContextMenu</name>
+        <name>LedgerTypeVariantContextMenu</name>
         <id>32</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -614,7 +614,7 @@
 	Table.Predefined,
 	Table.Quantity,
 	Table.Currency,
-	Table.LadgerTypeVariant,
+	Table.LedgerTypeVariant,
 	Table.Description_en AS Description
 FROM
 	ChartOfAccounts.R6010C_Master AS Table</queryText>

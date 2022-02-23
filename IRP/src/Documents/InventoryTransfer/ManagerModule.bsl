@@ -267,7 +267,7 @@ Function R4011B_FreeStocks()
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	ItemList.Period,
 		   |	ItemList.StoreReceiver,
-		   |	ItemLIst.ItemKey,
+		   |	ItemList.ItemKey,
 		   |	ItemList.Quantity
 		   |FROM
 		   |	ItemList AS ItemList
@@ -441,7 +441,7 @@ Function R4050B_StockInventory()
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
 		   |	ItemList.StoreReceiver,
-		   |	ItemLIst.ItemKey,
+		   |	ItemList.ItemKey,
 		   |	ItemList.Quantity
 		   |FROM
 		   |	ItemList AS ItemList

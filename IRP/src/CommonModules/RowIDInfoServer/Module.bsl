@@ -1320,7 +1320,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	
 	Is = Is(Source);
 	If Is.SC And Is(RowRefObject.Basis).ISR Then
-		FillPropertyValues(RowRefObject, RowItemList,,"Store");
+		FillPropertyValues(RowRefObject, RowItemList, , "Store");
 	Else
 		FillPropertyValues(RowRefObject, RowItemList);
 	EndIf;
@@ -1933,7 +1933,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	RecalculateAmounts(Tables);
 
-	Return ReduseExtractedDataInfo_SO(Tables, DataReceiver);
+	Return ReduceExtractedDataInfo_SO(Tables, DataReceiver);
 EndFunction
 
 Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -2935,7 +2935,6 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
 	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 
-
 	StoreName = "UNDEFINED";
 	TransactionType = "UNDEFINED";
 	If Is(DataReceiver).SC Then
@@ -3082,7 +3081,7 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 							  |	ItemList.ProfitLossCenter AS ProfitLossCenter,
 							  |	ItemList.ExpenseType AS ExpenseType,
 							  |	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
-							  |	ItemLIst.ReturnReason AS ReturnReason,
+							  |	ItemList.ReturnReason AS ReturnReason,
 							  |	ItemList.Store.UseShipmentConfirmation
 							  |	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
 							  |	VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS TransactionType,
@@ -3767,8 +3766,8 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 	Return Tables;
 EndFunction
 
-Function ReduseExtractedDataInfo(Tables, ReduseInfo)
-	If Not ReduseInfo.Reduse Then
+Function ReduceExtractedDataInfo(Tables, ReduceInfo)
+	If Not ReduceInfo.Reduce Then
 		Return Tables;
 	EndIf;
 
@@ -3779,11 +3778,11 @@ Function ReduseExtractedDataInfo(Tables, ReduseInfo)
 			Continue;
 		EndIf;
 
-		If Not ReduseInfo.Tables.Property(TableName) Then
+		If Not ReduceInfo.Tables.Property(TableName) Then
 			Tables[TableName].Clear();
 		Else
 			ColumnNames = New Array();
-			For Each ColumnName In StrSplit(ReduseInfo.Tables[TableName], ",") Do
+			For Each ColumnName In StrSplit(ReduceInfo.Tables[TableName], ",") Do
 				ColumnNames.Add(TrimAll(ColumnName));
 			EndDo;
 
@@ -3798,16 +3797,16 @@ Function ReduseExtractedDataInfo(Tables, ReduseInfo)
 	Return Tables;
 EndFunction
 
-Function ReduseExtractedDataInfo_SO(Tables, DataReceiver)
-	ReduseInfo = New Structure("Reduse, Tables", False, New Structure());
+Function ReduceExtractedDataInfo_SO(Tables, DataReceiver)
+	ReduceInfo = New Structure("Reduce, Tables", False, New Structure());
 
 	If Is(DataReceiver).PO Or Is(DataReceiver).PI Then
-		ReduseInfo.Reduse = True;
-		ReduseInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
+		ReduceInfo.Reduce = True;
+		ReduceInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
 											 |Item, ItemKey, Unit, BasisUnit, Quantity, QuantityInBaseUnit");
 	EndIf;
 
-	Return ReduseExtractedDataInfo(Tables, ReduseInfo);
+	Return ReduceExtractedDataInfo(Tables, ReduceInfo);
 EndFunction
 
 #EndRegion
@@ -4125,12 +4124,12 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	EndIf;
 
 	If FilterSets.PI_ForGR Then
-		ApplyFIlterSet_PI_ForGR(Query);
+		ApplyFilterSet_PI_ForGR(Query);
 		QueryArray.Add(GetDataByFilterSet_PI_ForGR());
 	EndIf;
 
 	If FilterSets.PI_ForSI_ForSC Then
-		ApplyFIlterSet_PI_ForSI_ForSC(Query);
+		ApplyFilterSet_PI_ForSI_ForSC(Query);
 		QueryArray.Add(GetDataByFilterSet_PI_ForSI_ForSC());
 	EndIf;
 
@@ -4180,7 +4179,7 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	EndIf;
 
 	If FilterSets.SR_ForGR Then
-		ApplyFIlterSet_SR_ForGR(Query);
+		ApplyFilterSet_SR_ForGR(Query);
 		QueryArray.Add(GetDataByFilterSet_SR_ForGR());
 	EndIf;
 
@@ -4307,7 +4306,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |Store                , ItemList.Store";
 		
 	ElsIf ExternalDocAliase = Aliases.PRR Then
-		Result.Header   = "Company, Branch, Store, Status,ItemListSetProcurementMethods";
+		Result.Header   = "Company, Branch, Store, Status, ItemListSetProcurementMethods";
 		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
@@ -4802,7 +4801,7 @@ Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_SI_ForSR_ForSRO
 	|FROM
-	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period, , Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -5936,7 +5935,7 @@ Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_PI_ForPR_ForPRO
 	|FROM
-	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period, , Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -5994,7 +5993,7 @@ Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure ApplyFIlterSet_PI_ForSI_ForSC(Query)
+Procedure ApplyFilterSet_PI_ForSI_ForSC(Query)
 	Query.Text =
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -6151,7 +6150,7 @@ Function GetFieldsToLock_ExternalLink_ITO(ExternalDocAliase, Aliases)
 	Return Result;
 EndFunction
 
-Procedure ApplyFIlterSet_ITO_ForIT(Query)
+Procedure ApplyFilterSet_ITO_ForIT(Query)
 	Query.Text =
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -6940,7 +6939,7 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_RSR_ForRRR
 	|FROM
-	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period, , Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -7066,7 +7065,7 @@ Function GetFieldsToLock_InternalLink_StockAdjustmentAsSurplus(InternalDocAliase
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PhysicalInventory Then
 		Result.Header   = "Store";
-		Result.ItemList = "Item, ItemKey,BasisDocument, PhysicalInventory";
+		Result.ItemList = "Item, ItemKey, BasisDocument, PhysicalInventory";
 	Else
 		Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]", InternalDocAliase);
 	EndIf;
@@ -7081,7 +7080,7 @@ Function GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAlias
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PhysicalInventory Then
 		Result.Header   = "Store";
-		Result.ItemList = "Item, ItemKey,BasisDocument, PhysicalInventory";
+		Result.ItemList = "Item, ItemKey, BasisDocument, PhysicalInventory";
 	Else
 		Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]", InternalDocAliase);
 	EndIf;
@@ -7359,7 +7358,7 @@ Function LinkUnlinkDocumentRows(Object, FillingValues) Export
 		EndDo;
 		Unlink(Object, UnlinkRows, TableNames_LinkedDocuments, AttributeNames_LinkedDocuments);
 		Object.RowIDInfo.Clear();
-		Return New Structure("UpdatedProperties, Rows","", New Array());
+		Return New Structure("UpdatedProperties, Rows", "", New Array());
 	EndIf;
 	
 	// Unlink
@@ -7551,9 +7550,9 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 	ArrayOfRefillColumns.Add(Upper("TaxAmount"));
 	ArrayOfRefillColumns.Add(Upper("PriceType"));
 
-	ArrayOfNotReffilingColumns = GetNotReffilingColumns(TypeOf(Object.Ref));
+	ArrayOfNotRefilingColumns = GetNotRefilingColumns(TypeOf(Object.Ref));
 
-	For Each Row_ItemLIst In FillingValue.ItemList Do
+	For Each Row_ItemList In FillingValue.ItemList Do
 		If LinkRow.Key <> Row_ItemList.Key Then
 			Continue;
 		EndIf;
@@ -7565,12 +7564,12 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 				If Upper(KeyValue.Key) = Upper("Price") And Row.Property("Price") And ValueIsFilled(Row.Price)
 					And Row.Property("PriceType") And Row.PriceType = Catalogs.PriceTypes.ManualPriceType Then
 					NeedRefillColumns = False;
-					ArrayOfExcludingKeys.Add(Row_ItemLIst.Key);
+					ArrayOfExcludingKeys.Add(Row_ItemList.Key);
 					Continue;
 				EndIf;
 
 				If ArrayOfRefillColumns.Find(Upper(KeyValue.Key)) = Undefined And Row.Property(KeyValue.Key) Then
-					If ArrayOfNotReffilingColumns <> Undefined And ArrayOfNotReffilingColumns.Find(Upper("ItemList."
+					If ArrayOfNotRefilingColumns <> Undefined And ArrayOfNotRefilingColumns.Find(Upper("ItemList."
 						+ KeyValue.Key)) <> Undefined Then
 						Continue;
 					EndIf;
@@ -7583,7 +7582,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 
 			If NeedRefillColumns Then
 				For Each RefillColumn In ArrayOfRefillColumns Do
-					If Row.Property(RefillColumn) And Row_ItemLIst.Property(RefillColumn) Then
+					If Row.Property(RefillColumn) And Row_ItemList.Property(RefillColumn) Then
 						Row[RefillColumn] = Row_ItemList[RefillColumn];// ???
 						PropertyName = TrimAll(RefillColumn);
 						PutToUpdatedProperties(PropertyName, "ItemList", Row, UpdatedProperties);
@@ -7600,7 +7599,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 	EndDo;
 EndProcedure
 
-Function GetNotReffilingColumns(ObjectType)
+Function GetNotRefilingColumns(ObjectType)
 	Map = New Map();
 	ArrayOfColumns = New Array();
 	ArrayOfColumns.Add(Upper("ItemList.ProfitLossCenter"));
@@ -7621,7 +7620,7 @@ EndFunction
 
 #Region DataToFillingValues
 
-Function GetSeperatorColumns(DocReceiverMetadata) Export
+Function GetSeparatorColumns(DocReceiverMetadata) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
 		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName";
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
@@ -7661,7 +7660,7 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 
 	TableNames_Refreshable = GetTableNames_Refreshable();
 
-	SeparatorColumns = GetSeperatorColumns(DocReceiverMetadata);
+	SeparatorColumns = GetSeparatorColumns(DocReceiverMetadata);
 
 	UniqueRows = Tables.ItemList.Copy();
 	UniqueRows.GroupBy(SeparatorColumns);
@@ -8724,7 +8723,7 @@ EndProcedure
 Procedure SetAppearance(Object, Form) Export
 	ClearAppearance_Header(Object, Form);
 	ClearAppearance_ItemList(Object, Form);
-	FieldsToLock = GetFieldsToLock(Object,Form);
+	FieldsToLock = GetFieldsToLock(Object, Form);
 	AddAppearance_Header(Object, Form, FieldsToLock.All);
 	AddAppearance_ItemList(Object, Form, FieldsToLock.Internal, "InternalLinks");
 	AddAppearance_ItemList(Object, Form, FieldsToLock.External, "ExternalLinks");	
@@ -9063,5 +9062,4 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
 

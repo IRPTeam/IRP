@@ -196,7 +196,7 @@ Function GetAgreementInfo(Agreement) Export
 	|WHERE
 	|	Table.Ref = &Ref";
 	Query.SetParameter("Ref", Agreement);
-	Query.SetParameter("CurrentDate", CurrentDate());
+	Query.SetParameter("CurrentDate", CurrentSessionDate());
 	QueryResult = Query.Execute();
 
 	Result = New Structure();
@@ -216,7 +216,7 @@ Function GetAgreementPaymentTerms(Agreement) Export
 	If ValueIsFilled(Agreement) And ValueIsFilled(Agreement.PaymentTerm) Then
 		For Each Stage In Agreement.PaymentTerm.StagesOfPayment Do
 			NewRow = New Structure();
-			NewRow.Insert("Date"                , Date(1,1,1));
+			NewRow.Insert("Date"                , Date(1, 1, 1));
 			NewRow.Insert("ProportionOfPayment" , Stage.ProportionOfPayment);
 			NewRow.Insert("DuePeriod"           , Stage.DuePeriod);
 			NewRow.Insert("Amount"              , 0);

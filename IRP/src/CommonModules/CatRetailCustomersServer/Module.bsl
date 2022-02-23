@@ -9,14 +9,14 @@ Function GetRetailCustomerInfo(RetailCustomer, AddInfo = Undefined) Export
 
 	If RetailCustomerInfo.UsePartnerTransactions Then
 		If Not RetailCustomerInfo.UsePartnerInfo Then
-			FillPropertyValues(RetailCustomerInfo, GetPartnerInfoFromUserSettinfs());
+			FillPropertyValues(RetailCustomerInfo, GetPartnerInfoFromUserSettings());
 		Else
 			RetailCustomerInfo.Partner   = RetailCustomer.Partner;
 			RetailCustomerInfo.LegalName = RetailCustomer.LegalName;
 			RetailCustomerInfo.Agreement = RetailCustomer.Agreement;
 		EndIf;
 	Else
-		FillPropertyValues(RetailCustomerInfo, GetPartnerInfoFromUserSettinfs());
+		FillPropertyValues(RetailCustomerInfo, GetPartnerInfoFromUserSettings());
 	EndIf;
 
 	RetailCustomerInfo.Insert("ManagerSegment", DocumentsServer.GetManagerSegmentByPartner(RetailCustomerInfo.Partner));
@@ -24,7 +24,7 @@ Function GetRetailCustomerInfo(RetailCustomer, AddInfo = Undefined) Export
 	Return RetailCustomerInfo;
 EndFunction
 
-Function GetPartnerInfoFromUserSettinfs()
+Function GetPartnerInfoFromUserSettings()
 	Result = New Structure("Partner, LegalName, Agreement");
 	FilterParameters = New Structure();
 	FilterParameters.Insert("MetadataObject", Metadata.Documents.RetailSalesReceipt);

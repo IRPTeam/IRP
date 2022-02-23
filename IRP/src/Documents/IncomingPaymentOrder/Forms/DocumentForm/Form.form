@@ -1200,10 +1200,6 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>OnChange</event>
-          <name>PaymentListOnChange</name>
-        </handlers>
-        <handlers>
           <event>BeforeAddRow</event>
           <name>PaymentListBeforeAddRow</name>
         </handlers>

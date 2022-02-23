@@ -28,6 +28,10 @@
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Accounting operation</value>
+  </objectPresentation>
   <hierarchical>true</hierarchical>
   <limitLevelCount>true</limitLevelCount>
   <levelCount>2</levelCount>

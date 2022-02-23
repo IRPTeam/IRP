@@ -36,7 +36,6 @@ Procedure AfterWrite(WriteParameters)
 	DocPhysicalInventoryClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
-
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocPhysicalInventoryServer.OnReadAtServer(Object, ThisObject, CurrentObject);

@@ -7,20 +7,20 @@
     <listType typeId="46d59d9f-05ee-4ddd-a572-01b267568a4e" valueTypeId="ff4dde10-b6a5-408c-987c-cd5fbb2a38bd"/>
     <managerType typeId="dd9f40ae-bd1c-4748-97af-7a32ee4a5982" valueTypeId="b38d1f91-2bef-44c2-9a9e-7490c1a93319"/>
   </producedTypes>
-  <name>LadgerTypes</name>
+  <name>LedgerTypes</name>
   <synonym>
     <key>en</key>
-    <value>Ladger types</value>
+    <value>Ledger types</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.LadgerTypes.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.LedgerTypes.StandardAttribute.Code</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_LadgerTypes</value>
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_LedgerTypes</value>
     </typesFilterValue>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
@@ -32,16 +32,20 @@
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_LadgerTypes</value>
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_LedgerTypes</value>
     </typesFilterValue>
-    <characteristicValues>Catalog.LadgerTypes.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.LadgerTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.LadgerTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.LadgerTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <characteristicValues>Catalog.LedgerTypes.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.LedgerTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.LedgerTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.LedgerTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
   </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Ledger type</value>
+  </objectPresentation>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
@@ -51,9 +55,9 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.LadgerTypes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.LadgerTypes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.LadgerTypes.Form.ChoiceForm</defaultChoiceForm>
+  <defaultObjectForm>Catalog.LedgerTypes.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.LedgerTypes.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.LedgerTypes.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="8c72245f-3e16-4de3-af8b-bf52de45f5a5">
     <name>CurrencyMovementType</name>
@@ -78,7 +82,7 @@
       <value>Variant</value>
     </synonym>
     <type>
-      <types>EnumRef.LadgerTypeVariants</types>
+      <types>EnumRef.LedgerTypeVariants</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -124,7 +128,7 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
         <name>Filter.Owner</name>
-        <field>Catalog.LadgerTypes.TabularSection.AddAttributes.Attribute.Property</field>
+        <field>Catalog.LedgerTypes.TabularSection.AddAttributes.Attribute.Property</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>

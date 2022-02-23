@@ -364,11 +364,11 @@ Procedure AllocationRowsBeforeAddRowEnd(Result, AdditionalParameters) Export
 EndProcedure
 
 &AtClient
-Procedure AllocateRevenueAmmount(Command)
+Procedure AllocateRevenueAmount(Command)
 	If Not CheckFilling() Then
 		Return;
 	EndIf;
-	Result = AllocateRevenueAmmountAtServer();
+	Result = AllocateRevenueAmountAtServer();
 	For Each Row_TopLevel In ThisObject.AllocationRows.GetItems() Do
 		For Each Row_SecondLevel In Row_TopLevel.GetItems() Do
 			For Each Row In Result.ArrayOfAllocatedAmounts Do
@@ -383,7 +383,7 @@ Procedure AllocateRevenueAmmount(Command)
 EndProcedure
 
 &AtServer
-Function AllocateRevenueAmmountAtServer()
+Function AllocateRevenueAmountAtServer()
 	Result = New Structure("ArrayOfAllocatedAmounts", New Array());
 	AllocationListTable = Object.AllocationList.Unload();
 	For Each Row_RevenueList In Object.RevenueList Do

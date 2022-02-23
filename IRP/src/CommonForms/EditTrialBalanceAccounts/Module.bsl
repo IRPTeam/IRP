@@ -5,11 +5,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.MainTableName = Parameters.MainTableName;
 	ThisObject.RowKey        = Parameters.RowKey;
 	
-	For Each CompanyLadgerType In Parameters.ArrayOfLadgerTypes Do
-		ThisObject.Items.LadgerType.ChoiceList.Add(CompanyLadgerType, String(CompanyLadgerType));
+	For Each CompanyLedgerType In Parameters.ArrayOfLedgerTypes Do
+		ThisObject.Items.LedgerType.ChoiceList.Add(CompanyLedgerType, String(CompanyLedgerType));
 	EndDo;
-	If Parameters.ArrayOfLadgerTypes.Count() Then
-		ThisObject.LadgerType = Parameters.ArrayOfLadgerTypes[0];
+	If Parameters.ArrayOfLedgerTypes.Count() Then
+		ThisObject.LedgerType = Parameters.ArrayOfLedgerTypes[0];
 	EndIf;
 	
 	FillAccountingAnalytics(Parameters.AccountingAnalytics);
@@ -21,18 +21,18 @@ Procedure OnOpen(Cancel)
 		DefaultAnalytics = GetDefaultAccountingAnalytics(ThisObject.FormOwner.Object, ThisObject.MainTableName, ThisObject.RowKey);
 		FillAccountingAnalytics(DefaultAnalytics.AccountingAnalytics);
 	EndIf;
-	SetVisibleByLadgerType();
+	SetVisibleByLedgerType();
 	ClearColumnTitle();
 EndProcedure
 
 &AtClient
 Procedure SetByDefault(Command)
 	DefaultAnalytics = 
-		GetDefaultAccountingAnalytics(ThisObject.FormOwner.Object, ThisObject.MainTableName, ThisObject.RowKey, ThisObject.LadgerType);
+		GetDefaultAccountingAnalytics(ThisObject.FormOwner.Object, ThisObject.MainTableName, ThisObject.RowKey, ThisObject.LedgerType);
 	
 	ArrayForDelete = New Array();
 	For Each Row In ThisObject.AccountingAnalytics Do
-		If Row.LadgerType = ThisObject.LadgerType Then
+		If Row.LedgerType = ThisObject.LedgerType Then
 			ArrayForDelete.Add(Row);
 		EndIf;
 	EndDo;
@@ -42,7 +42,7 @@ Procedure SetByDefault(Command)
 	
 	FillAccountingAnalytics(DefaultAnalytics.AccountingAnalytics);
 	
-	SetVisibleByLadgerType();
+	SetVisibleByLedgerType();
 EndProcedure
 
 &AtClient
@@ -67,7 +67,7 @@ Procedure Ok(Command)
 								|ExtDimensionCr2,
 								|ExtDimensionCr3,
 								|Key,
-								|LadgerType,
+								|LedgerType,
 								|Identifier,
 								|IsFixed");
 		FillPropertyValues(NewRow, Row);
@@ -77,8 +77,8 @@ Procedure Ok(Command)
 EndProcedure
 
 &AtClient
-Procedure LadgerTypeOnChange(Item)
-	SetVisibleByLadgerType();
+Procedure LedgerTypeOnChange(Item)
+	SetVisibleByLedgerType();
 EndProcedure
 
 &AtClient
@@ -87,12 +87,12 @@ Procedure Cancel(Command)
 EndProcedure
 
 &AtClient
-Procedure SetVisibleByLadgerType()
-	If Not ValueIsFilled(ThisObject.LadgerType) Then
+Procedure SetVisibleByLedgerType()
+	If Not ValueIsFilled(ThisObject.LedgerType) Then
 		Return;
 	EndIf;
 	For Each Row In ThisObject.AccountingAnalytics Do
-		Row.IsVisible = (Row.LadgerType = ThisObject.LadgerType);
+		Row.IsVisible = (Row.LedgerType = ThisObject.LedgerType);
 	EndDo;
 EndProcedure
 
@@ -102,7 +102,7 @@ Procedure FillAccountingAnalytics(ArrayOfAnalytics)
 		NewRow = ThisObject.AccountingAnalytics.Add();
 		NewRow.Key = AccountingAnalytic.Key;
 		
-		NewRow.LadgerType = AccountingAnalytic.LadgerType;
+		NewRow.LedgerType = AccountingAnalytic.LedgerType;
 		NewRow.Identifier = AccountingAnalytic.Identifier;
 		
 		// Debit
@@ -224,10 +224,10 @@ Procedure ClearColumnTitle()
 EndProcedure
 
 &AtServer
-Function GetDefaultAccountingAnalytics(Val Object, MainTableName, RowKey, Filter_LadgerType = Undefined)
-	AccountingClientServer.BeforeWriteAccountingDocument(Object, MainTableName, Filter_LadgerType);
+Function GetDefaultAccountingAnalytics(Val Object, MainTableName, RowKey, Filter_LedgerType = Undefined)
+	AccountingClientServer.BeforeWriteAccountingDocument(Object, MainTableName, Filter_LedgerType);
 	CurrentData = New Structure("Key" , RowKey);
-	Result = AccountingClientServer.GetParametersEditTrialBallanceAccounts(Object, CurrentData, MainTableName, Filter_LadgerType);
+	Result = AccountingClientServer.GetParametersEditTrialBalanceAccounts(Object, CurrentData, MainTableName, Filter_LedgerType);
 	Return Result;
 EndFunction
 

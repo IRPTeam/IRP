@@ -422,7 +422,7 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 EndProcedure
 
 Procedure SearchByBarcode(Barcode, Object, Form) Export
-	PriceType = Undefined;
+	PriceType = PredefinedValue("Catalog.PriceKeys.EmptyRef");
 	If ValueIsFilled(Object.Agreement) Then
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
 		PriceType = AgreementInfo.PriceType;

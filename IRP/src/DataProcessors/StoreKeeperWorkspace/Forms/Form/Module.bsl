@@ -10,7 +10,6 @@ Procedure GoodsInTransitIncomingRefreshRequestProcessing(Item)
 	GoodsInTransitIncomingRefreshRequestProcessingAtServer();
 EndProcedure
 
-
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	AddInfo = New Structure("ClientModule", ThisObject);
@@ -174,6 +173,4 @@ Procedure CreateDocuments(Val StructureRow, CreateGoodsReceipt, CreateInventoryT
 	EndIf;
 	Items.PagesSettings.CurrentPage = Items.PageSettings;
 EndProcedure
-
-
 

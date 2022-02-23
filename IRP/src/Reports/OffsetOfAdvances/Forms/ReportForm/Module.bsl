@@ -84,6 +84,7 @@ Procedure RunAtServer()
 	Doc.FixedTop=2;
 EndProcedure
 
+&AtServer
 Function GetFromTRN_ToADV(ArrayOf_FromTRN)
 	Query = New Query();
 	Query.Text = 
@@ -178,6 +179,7 @@ Function GetFromTRN_ToADV(ArrayOf_FromTRN)
 	Return QueryTable;
 EndFunction
 
+&AtServer
 Function GetFromADV_ToTRN(ArrayOf_FromADV)
 	Query = New Query();
 	Query.Text = 
@@ -272,6 +274,7 @@ Function GetFromADV_ToTRN(ArrayOf_FromADV)
 	Return QueryTable;
 EndFunction
 
+&AtServer
 Function GetTRN_KEY(Company, Branch, Currency, Partner, LegalName, Agreement, Order, TransactionBasis)
 	Query = New Query();
 	Query.Text = 
@@ -311,6 +314,7 @@ Function GetTRN_KEY(Company, Branch, Currency, Partner, LegalName, Agreement, Or
 	Return "";
 EndFunction
 
+&AtServer
 Function GetADV_KEY(Company, Branch, Currency, Partner, LegalName, Order)
 	Query = New Query();
 	Query.Text = 
@@ -346,6 +350,7 @@ Function GetADV_KEY(Company, Branch, Currency, Partner, LegalName, Order)
 	Return "";
 EndFunction
 
+&AtServer
 Function GetAgingTable(Invoice)
 	Query = New Query();
 	Query.Text = 
@@ -354,7 +359,7 @@ Function GetAgingTable(Invoice)
 	|	SUM(Aging.AmountReceipt) AS Receipt,
 	|	SUM(Aging.AmountExpense) AS Expense
 	|FROM
-	|	AccumulationRegister.R5012B_VendorsAging.BalanceAndTurnovers(,,,, Invoice = &Invoice) AS Aging
+	|	AccumulationRegister.R5012B_VendorsAging.BalanceAndTurnovers(, , , , Invoice = &Invoice) AS Aging
 	|GROUP BY
 	|	Aging.PaymentDate";
 	If ReportType = "Customers" Then
@@ -366,6 +371,7 @@ Function GetAgingTable(Invoice)
 	Return QueryTable;
 EndFunction
 
+&AtServer
 Function GetDocumentTable(MainRow)
 	Query = New Query();
 	Query.Text = 
@@ -456,6 +462,7 @@ Function GetDocumentTable(MainRow)
 	Return QueryTable;
 EndFunction
 
+&AtServer
 Function GetMainTable()
 	Query = New Query();
 	Query.Text = 
@@ -526,8 +533,8 @@ Function GetMainTable()
 	ArrayForDelete = New Array();
 	For Each Row In QueryTable Do
 		If Not ValueIsFilled(Row.Agreement) Then
-			ar = QueryTable.FindRows(New Structure("Company, Branch,Currency, Partner,LegalName",
-			Row.Company, Row.Branch,Row.Currency, Row.Partner,Row.LegalName));
+			ar = QueryTable.FindRows(New Structure("Company, Branch, Currency, Partner, LegalName",
+			Row.Company, Row.Branch, Row.Currency, Row.Partner, Row.LegalName));
 			found = False;
 			For Each i in ar Do
 				If ValueIsFilled(i.Agreement) Then

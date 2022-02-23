@@ -60,7 +60,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
-		ArrayOfAllAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayOfAllAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	
 	CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
@@ -89,15 +89,15 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	
 	ArrayOfVisibleAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
-		ArrayOfVisibleAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayOfVisibleAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
-	Return New Structure("AllAtributes, VisibleAttributes", ArrayOfAllAttributes, ArrayOfVisibleAttributes);
+	Return New Structure("AllAttributes, VisibleAttributes", ArrayOfAllAttributes, ArrayOfVisibleAttributes);
 EndFunction
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	AttributesForChangeVisible = GetVisibleAttributesByTransactionType(Object.TransactionType);
-	For Each Attr In AttributesForChangeVisible.AllAtributes Do
+	For Each Attr In AttributesForChangeVisible.AllAttributes Do
 		ItemName = StrReplace(Attr, ".", "");
 		Visibility = (AttributesForChangeVisible.VisibleAttributes.Find(Attr) <> Undefined);
 		Form.Items[TrimAll(ItemName)].Visible = Visibility;
@@ -130,7 +130,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndIf;
 	Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
-	Form.Items.EditTrialBallanceAccounts.Enabled = Not Form.ReadOnly;
+	Form.Items.EditTrialBalanceAccounts.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
@@ -470,17 +470,17 @@ Procedure EditCurrencies(Command)
 EndProcedure
 
 &AtClient
-Procedure EditTrialBallanceAccounts(Command)
+Procedure EditTrialBalanceAccounts(Command)
 	CurrentData = ThisObject.Items.PaymentList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = AccountingClientServer.GetParametersEditTrialBallanceAccounts(Object, CurrentData, "PaymentList");
+	FormParameters = AccountingClientServer.GetParametersEditTrialBalanceAccounts(Object, CurrentData, "PaymentList");
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditTrialBallanceAccounts", AccountingClient, NotifyParameters);
-	OpenForm("CommonForm.EditTrialBallanceAccounts", FormParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+	Notify = New NotifyDescription("EditTrialBalanceAccounts", AccountingClient, NotifyParameters);
+	OpenForm("CommonForm.EditTrialBalanceAccounts", FormParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient

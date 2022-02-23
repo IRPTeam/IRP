@@ -3182,7 +3182,7 @@ Scenario: _0154115 check filling in and refilling Cash transfer order
 		And I select current line in "List" table
 		Then the form attribute named "ReceiveCurrency" became equal to "TRY"
 		Then the form attribute named "SendCurrency" became equal to "EUR"
-	* Check filling in ammount in Receive amount from Send amount in the case of the same currencies
+	* Check filling in Amount in Receive amount from Send amount in the case of the same currencies
 		And I click Select button of "Sender" field
 		And I go to line in "List" table
 			| 'Description'  |

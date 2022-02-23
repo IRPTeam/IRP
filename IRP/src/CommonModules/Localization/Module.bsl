@@ -104,8 +104,8 @@
 //	* Error_045 - String - Document is empty.
 //	* Error_047 - String - "%1" is a required field.
 //	* Error_049 - String - Default picture storage volume is not set.
-//	* Error_050 - String - Currency exchange is available only for the same-type accounts (cash accounts or bank accounts).'",Lang));
-//	* Error_051 - String - There are no lines for which you can create a "%1" document, or all "%1" documents are already created.'",Lang));
+//	* Error_050 - String - Currency exchange is available only for the same-type accounts (cash accounts or bank accounts).'", Lang));
+//	* Error_051 - String - There are no lines for which you can create a "%1" document, or all "%1" documents are already created.'", Lang));
 //	* Error_052 - String - Cannot clear the "%2" check box. Documents "%3" from store %1 were already created.
 //	* Error_053 - String - Cannot clear the "%2" check box. Documents "%3" from store %1 were already created.
 //	* Error_054 - String - Cannot continue. The "%1"document has an incorrect status.
@@ -141,7 +141,7 @@
 //	* Error_091 - String - Only Administrator can create users.
 //	* Error_092 - String - Can not use %1 role in SaaS mode
 //	* Error_093 - String - Cancel reason has to be filled if string was canceled
-//	* Error_094 - String - Сan not use confirmation of shipment without goods receipt
+//	* Error_094 - String - Can not use confirmation of shipment without goods receipt
 //	* Error_095 - String - Payment amount [%1] and sales amount [%2] not match
 //	* Error_096 - String - Select any document
 //	* Error_097 - String - Default file storage volume is not set.
@@ -491,7 +491,6 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_066", NStr("en = 'Specification is not unique.'", Lang));
 	Strings.Insert("Error_067", NStr("en = 'Fill Users or Group tables.'", Lang));
 
-
 	// %1 - 12
 	// %2 - Boots
 	// %3 - Red XL
@@ -584,7 +583,7 @@ Function Strings(Lang) Export
 
 	Strings.Insert("Error_092", NStr("en = 'Can not use %1 role in SaaS mode'", Lang));
 	Strings.Insert("Error_093", NStr("en = 'Cancel reason has to be filled if string was canceled'", Lang));
-	Strings.Insert("Error_094", NStr("en = 'Сan not use confirmation of shipment without goods receipt'", Lang));
+	Strings.Insert("Error_094", NStr("en = 'Can not use confirmation of shipment without goods receipt'", Lang));
 	
 	// %1 - 100.00 
 	// %2 - 120.00
@@ -620,6 +619,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_103", NStr("en = '%1 is undefined.'", Lang));
 	Strings.Insert("Error_104", NStr("en = 'Document [%1] have negative stock balance'", Lang));
 	Strings.Insert("Error_105", NStr("en = 'Document [%1] already have related documents'", Lang));
+	Strings.Insert("Error_106", NStr("en = 'Can not lock data'", Lang));
+	
 #EndRegion
 
 #Region InfoMessages
@@ -682,7 +683,7 @@ Function Strings(Lang) Export
   	// %1 - 
 	Strings.Insert("InfoMessage_022", NStr("en = 'This order is closed by %1'", Lang));
 	Strings.Insert("InfoMessage_023", NStr(
-		"en = 'Сan not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled.'", Lang));
+		"en = 'Can not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled.'", Lang));
 	Strings.Insert("InfoMessage_024", NStr("en = 'Will be available after save.'", Lang));
 #EndRegion
 

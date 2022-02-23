@@ -1342,10 +1342,10 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormGroup">
-      <name>GroupLadgerTypes</name>
+      <name>GroupLedgerTypes</name>
       <id>104</id>
       <items xsi:type="form:Table">
-        <name>CompanyLadgerTypes</name>
+        <name>CompanyLedgerTypes</name>
         <id>106</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1353,11 +1353,11 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>CompanyLadgerTypes</segments>
+          <segments>CompanyLedgerTypes</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
-          <name>CompanyLadgerTypesPeriod</name>
+          <name>CompanyLedgerTypesPeriod</name>
           <id>125</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1366,14 +1366,14 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>CompanyLadgerTypes.Period</segments>
+              <segments>CompanyLedgerTypes.Period</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>CompanyLadgerTypes.Period</segments>
+              <segments>CompanyLedgerTypes.Period</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>CompanyLadgerTypesPeriodExtendedTooltip</name>
+            <name>CompanyLedgerTypesPeriodExtendedTooltip</name>
             <id>127</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1388,7 +1388,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>CompanyLadgerTypesPeriodContextMenu</name>
+            <name>CompanyLedgerTypesPeriodContextMenu</name>
             <id>126</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1412,7 +1412,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>CompanyLadgerTypesUse</name>
+          <name>CompanyLedgerTypesUse</name>
           <id>122</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1421,14 +1421,14 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>CompanyLadgerTypes.Use</segments>
+              <segments>CompanyLedgerTypes.Use</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>CompanyLadgerTypes.Use</segments>
+              <segments>CompanyLedgerTypes.Use</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>CompanyLadgerTypesUseExtendedTooltip</name>
+            <name>CompanyLedgerTypesUseExtendedTooltip</name>
             <id>124</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1443,7 +1443,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>CompanyLadgerTypesUseContextMenu</name>
+            <name>CompanyLedgerTypesUseContextMenu</name>
             <id>123</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1460,7 +1460,7 @@
           <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
         </items>
         <items xsi:type="form:FormField">
-          <name>CompanyLadgerTypesLadgerType</name>
+          <name>CompanyLedgerTypesLedgerType</name>
           <id>119</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1469,14 +1469,14 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>CompanyLadgerTypes.LadgerType</segments>
+              <segments>CompanyLedgerTypes.LedgerType</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>CompanyLadgerTypes.LadgerType</segments>
+              <segments>CompanyLedgerTypes.LedgerType</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>CompanyLadgerTypesLadgerTypeExtendedTooltip</name>
+            <name>CompanyLedgerTypesLedgerTypeExtendedTooltip</name>
             <id>121</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1491,7 +1491,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>CompanyLadgerTypesLadgerTypeContextMenu</name>
+            <name>CompanyLedgerTypesLedgerTypeContextMenu</name>
             <id>120</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1515,7 +1515,7 @@
           </extInfo>
         </items>
         <autoCommandBar>
-          <name>CompanyLadgerTypesCommandBar</name>
+          <name>CompanyLedgerTypesCommandBar</name>
           <id>107</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1527,11 +1527,11 @@
         </autoCommandBar>
         <handlers>
           <event>OnStartEdit</event>
-          <name>CompanyLadgerTypesOnStartEdit</name>
+          <name>CompanyLedgerTypesOnStartEdit</name>
         </handlers>
         <handlers>
           <event>OnChange</event>
-          <name>CompanyLadgerTypesOnChange</name>
+          <name>CompanyLedgerTypesOnChange</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1539,10 +1539,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>CompanyLadgerTypesSearchString</name>
+          <name>CompanyLedgerTypesSearchString</name>
           <id>110</id>
           <extendedTooltip>
-            <name>CompanyLadgerTypesSearchStringExtendedTooltip</name>
+            <name>CompanyLedgerTypesSearchStringExtendedTooltip</name>
             <id>112</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1557,7 +1557,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>CompanyLadgerTypesSearchStringContextMenu</name>
+            <name>CompanyLedgerTypesSearchStringContextMenu</name>
             <id>111</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1576,10 +1576,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>CompanyLadgerTypesViewStatus</name>
+          <name>CompanyLedgerTypesViewStatus</name>
           <id>116</id>
           <extendedTooltip>
-            <name>CompanyLadgerTypesViewStatusExtendedTooltip</name>
+            <name>CompanyLedgerTypesViewStatusExtendedTooltip</name>
             <id>118</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1594,7 +1594,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>CompanyLadgerTypesViewStatusContextMenu</name>
+            <name>CompanyLedgerTypesViewStatusContextMenu</name>
             <id>117</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1614,10 +1614,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>CompanyLadgerTypesSearchControl</name>
+          <name>CompanyLedgerTypesSearchControl</name>
           <id>113</id>
           <extendedTooltip>
-            <name>CompanyLadgerTypesSearchControlExtendedTooltip</name>
+            <name>CompanyLedgerTypesSearchControlExtendedTooltip</name>
             <id>115</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1632,7 +1632,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>CompanyLadgerTypesSearchControlContextMenu</name>
+            <name>CompanyLedgerTypesSearchControlContextMenu</name>
             <id>114</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1647,7 +1647,7 @@
           </extInfo>
         </searchControlAddition>
         <extendedTooltip>
-          <name>CompanyLadgerTypesExtendedTooltip</name>
+          <name>CompanyLedgerTypesExtendedTooltip</name>
           <id>109</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1662,7 +1662,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>CompanyLadgerTypesContextMenu</name>
+          <name>CompanyLedgerTypesContextMenu</name>
           <id>108</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1697,10 +1697,10 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Ladger types</value>
+        <value>Ledger types</value>
       </title>
       <extendedTooltip>
-        <name>GroupLadgerTypesExtendedTooltip</name>
+        <name>GroupLedgerTypesExtendedTooltip</name>
         <id>105</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1907,10 +1907,10 @@
     </edit>
   </attributes>
   <attributes>
-    <name>RewriteLadgerTypes</name>
+    <name>RewriteLedgerTypes</name>
     <title>
       <key>en</key>
-      <value>Rewrite ladger types</value>
+      <value>Rewrite Ledger types</value>
     </title>
     <id>8</id>
     <valueType>
@@ -1924,10 +1924,10 @@
     </edit>
   </attributes>
   <attributes>
-    <name>CompanyLadgerTypes</name>
+    <name>CompanyLedgerTypes</name>
     <title>
       <key>en</key>
-      <value>Company ladger types</value>
+      <value>Company Ledger types</value>
     </title>
     <id>9</id>
     <valueType>
@@ -1941,14 +1941,14 @@
     </edit>
     <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
     <columns>
-      <name>LadgerType</name>
+      <name>LedgerType</name>
       <title>
         <key>en</key>
-        <value>Ladger type</value>
+        <value>Ledger type</value>
       </title>
       <id>10</id>
       <valueType>
-        <types>CatalogRef.LadgerTypes</types>
+        <types>CatalogRef.LedgerTypes</types>
       </valueType>
       <view>
         <common>true</common>
@@ -2014,7 +2014,7 @@
         <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
-        <command>InformationRegister.CompanyLadgerTypes.StandardCommand.OpenByValue.Company</command>
+        <command>InformationRegister.CompanyLedgerTypes.StandardCommand.OpenByValue.Company</command>
         <commandParameter xsi:type="form:DataPath">
           <segments>Object.Ref</segments>
         </commandParameter>

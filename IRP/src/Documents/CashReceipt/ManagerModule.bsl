@@ -17,7 +17,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryPaymentList.Text = GetQueryTextCashReceiptPaymentList();
 	QueryPaymentList.SetParameter("Ref", Ref);
 	QueryResultsPaymentList = QueryPaymentList.Execute();
-	QueryTablePaymentList = QueryResultsPaymentLIst.Unload();
+	QueryTablePaymentList = QueryResultsPaymentList.Unload();
 
 	Query = New Query();
 	Query.Text = GetQueryTextQueryTable();

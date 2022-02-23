@@ -37,4 +37,3 @@ Procedure Select(Command)
 	Close(GetSelectedData());
 EndProcedure
 
-

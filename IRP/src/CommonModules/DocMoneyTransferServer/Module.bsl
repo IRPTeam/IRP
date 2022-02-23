@@ -100,7 +100,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|	Incoming.BasisDocument AS CashTransferOrder
 	|INTO tmp_Incoming
 	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate, ,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND CASE
@@ -126,7 +126,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|	Outgoing.BasisDocument AS CashTransferOrder
 	|INTO tmp_Outgoing
 	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate, ,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND CASE
@@ -211,9 +211,9 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
-	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
-			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+	For Each Attr In AttributesArray Do
+		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
+			Object.Ref.Metadata().Attributes[Attr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 

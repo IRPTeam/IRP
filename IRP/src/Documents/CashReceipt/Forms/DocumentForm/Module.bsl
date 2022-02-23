@@ -61,7 +61,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
-		ArrayOfAllAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayOfAllAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	
 	CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
@@ -96,15 +96,15 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 
 	ArrayOfVisibleAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
-		ArrayOfVisibleAttributes.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+		ArrayOfVisibleAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
-	Return New Structure("AllAtributes, VisibleAttributes", ArrayOfAllAttributes, ArrayOfVisibleAttributes);
+	Return New Structure("AllAttributes, VisibleAttributes", ArrayOfAllAttributes, ArrayOfVisibleAttributes);
 EndFunction
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	AttributesForChangeVisible = GetVisibleAttributesByTransactionType(Object.TransactionType);
-	For Each Attr In AttributesForChangeVisible.AllAtributes Do
+	For Each Attr In AttributesForChangeVisible.AllAttributes Do
 		ItemName = StrReplace(Attr, ".", "");
 		Visibility = (AttributesForChangeVisible.VisibleAttributes.Find(Attr) <> Undefined);
 		Form.Items[TrimAll(ItemName)].Visible = Visibility;

@@ -12,10 +12,6 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	MoneyDocumentsServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
-Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Export
-	MoneyDocumentsServer.FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType);
-EndProcedure
-
 #EndRegion
 
 #Region Public
@@ -73,7 +69,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 		   |	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis
 		   |INTO tmp_IncomingMoney
 		   |FROM
-		   |	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+		   |	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate, ,
 		   |		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
 		   |	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 		   |	AND CASE

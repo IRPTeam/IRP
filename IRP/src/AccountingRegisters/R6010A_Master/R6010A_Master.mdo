@@ -34,13 +34,13 @@
     <balance>true</balance>
   </dimensions>
   <dimensions uuid="b57d4a42-dd22-4236-8cb9-d382312ae872">
-    <name>LadgerType</name>
+    <name>LedgerType</name>
     <synonym>
       <key>en</key>
-      <value>Ladger type</value>
+      <value>Ledger type</value>
     </synonym>
     <type>
-      <types>CatalogRef.LadgerTypes</types>
+      <types>CatalogRef.LedgerTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

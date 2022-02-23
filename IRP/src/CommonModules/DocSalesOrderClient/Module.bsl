@@ -159,7 +159,6 @@ Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefine
 	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
 EndProcedure
 
-
 #EndRegion
 
 #Region ItemListItemsEvents

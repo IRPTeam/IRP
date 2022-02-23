@@ -19,6 +19,9 @@
     "right-start-automation": {
       "enabled": false
     },
+    "form-named-element-name": {
+      "enabled": false
+    },
     "right-interactive-delete": {
       "enabled": false
     },

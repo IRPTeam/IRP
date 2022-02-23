@@ -442,7 +442,7 @@ Function GetFromTaxTable(Form, Key, Tax)
 	Return Undefined;
 EndFunction
 
-// временная для теста
+// Template date for testing
 Function _GetArrayOfTaxInfo(Object, Date, Company) Export
 	
 	ArrayOfTaxes = New Array();

@@ -407,9 +407,9 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 			And I click "Save" button							
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
-				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
-				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''              | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
+				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
+				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''                   | 'Vendor price, TRY' | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
+				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''                   | 'Vendor price, TRY' | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 			And "RowIDInfo" table contains lines
 				| 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'GR'          | '10,000' | 'ITO&PO&PI'    |
@@ -441,8 +441,8 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 		And I click "Show row key" button	
 		And "ItemList" table contains lines
 			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
-			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
-			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''              | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
+			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''                   | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
+			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''                   | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |

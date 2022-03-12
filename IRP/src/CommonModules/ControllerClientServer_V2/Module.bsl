@@ -620,12 +620,12 @@ Function BindRecalculationsAfterQuestionToUser(Parameters)
 	DataPath = "";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser");
-		//|StepUpdatePaymentTerms");
+		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
+		|StepUpdatePaymentTerms");
 
 	Binding.Insert("PurchaseInvoice", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser");
-		//|StepUpdatePaymentTerms");
+		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
+		|StepUpdatePaymentTerms");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1501,8 +1501,8 @@ Function BindDate(Parameters)
 		|StepChangeDeliveryDateByAgreement,
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
-		//|StepUpdatePaymentTerms");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepUpdatePaymentTerms");
 
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangePriceTypeByAgreement,
@@ -1510,8 +1510,8 @@ Function BindDate(Parameters)
 		|StepChangeDeliveryDateByAgreement,
 		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
-		//|StepUpdatePaymentTerms");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepUpdatePaymentTerms");
 
 	Binding.Insert("BankPayment",
 		"StepRequireCallCreateTaxesFormControls, 
@@ -2106,7 +2106,9 @@ EndProcedure
 Procedure SetPaymentTerms(Parameters, Results) Export
 	Binding = BindPaymentTerms(Parameters);
 	For Each Result In Results Do
-		Parameters.Cache.Insert(Binding.DataPath, Result.Value.ArrayOfPaymentTerms);
+		If Parameters.ChangedData.Get(Binding.DataPath) = Undefined Then
+			Parameters.Cache.Insert(Binding.DataPath, Result.Value.ArrayOfPaymentTerms);
+		EndIf;
 		// data is changed only when Object.PaymentTerms have rows
 		If Parameters.Object.PaymentTerms.Count() Then
 			PutToChangedData(Parameters, Binding.DataPath, Undefined, Undefined, Undefined);

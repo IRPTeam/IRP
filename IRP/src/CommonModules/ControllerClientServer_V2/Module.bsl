@@ -620,12 +620,12 @@ Function BindRecalculationsAfterQuestionToUser(Parameters)
 	DataPath = "";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
-		|StepUpdatePaymentTerms");
+		"StepItemListCalculations_RecalculationsAfterQuestionToUser");
+		//|StepUpdatePaymentTerms");
 
 	Binding.Insert("PurchaseInvoice", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
-		|StepUpdatePaymentTerms");
+		"StepItemListCalculations_RecalculationsAfterQuestionToUser");
+		//|StepUpdatePaymentTerms");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1501,8 +1501,8 @@ Function BindDate(Parameters)
 		|StepChangeDeliveryDateByAgreement,
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader,
-		|StepUpdatePaymentTerms");
+		|StepChangeTaxRate_AgreementInHeader");
+		//|StepUpdatePaymentTerms");
 
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangePriceTypeByAgreement,
@@ -1510,8 +1510,8 @@ Function BindDate(Parameters)
 		|StepChangeDeliveryDateByAgreement,
 		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader,
-		|StepUpdatePaymentTerms");
+		|StepChangeTaxRate_AgreementInHeader");
+		//|StepUpdatePaymentTerms");
 
 	Binding.Insert("BankPayment",
 		"StepRequireCallCreateTaxesFormControls, 

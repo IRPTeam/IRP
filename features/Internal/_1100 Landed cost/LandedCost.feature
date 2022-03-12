@@ -609,6 +609,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '39/18SD'  |
 		And I select current line in "List" table
+		And I input "50,00" text in "Price" field of "ItemList" table
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1 and checking report
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -642,6 +643,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
+		And I input "50,00" text in "Price" field of "ItemList" table
 		And I click "Post and close" button
 		And I go to line in "List" table
 			| 'Number' | 'Partner' |

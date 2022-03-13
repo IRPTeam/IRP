@@ -15,12 +15,10 @@ EndProcedure
 
 #Region Public
 
-&AtClient
 Procedure BeforePayment(Object, Cancel, AddInfo = Undefined) Export
 	Return;
 EndProcedure
 
-&AtClient
 Procedure PrintLastReceipt(Object, Cancel, AddInfo = Undefined) Export
 	LastRetailSalesReceipt = DPPointOfSaleServer.GetLastRetailSalesReceiptDoc();
 	If LastRetailSalesReceipt.isEmpty() Then

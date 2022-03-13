@@ -4057,8 +4057,12 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateSpecialOffers.Enable = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount and Price
-			Options.CalculateTaxAmountReverse.Enable   = True;
-			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
+			
+			//Options.CalculateTaxAmountReverse.Enable   = True;
+			//Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
+			Options.CalculateTaxAmount.Enable     = True;
+			Options.CalculateNetAmount.Enable     = True;
+			
 			Options.CalculatePriceByTotalAmount.Enable = True;
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
 		// enable use ManualAmount when calculating TaxAmount

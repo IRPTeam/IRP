@@ -4040,6 +4040,8 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	Chain.Calculations.Enable = True;
 	Chain.Calculations.Setter = "SetItemListCalculations";
 	
+	PriceIncludeTax = GetPriceIncludeTax(Parameters);
+	
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		
 		Options     = ModelClientServer_V2.CalculationsOptions();
@@ -4058,10 +4060,13 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount and Price
 			
-			//Options.CalculateTaxAmountReverse.Enable   = True;
-			//Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
-			Options.CalculateTaxAmount.Enable     = True;
-			Options.CalculateNetAmount.Enable     = True;
+			If PriceIncludeTax Then
+				Options.CalculateTaxAmount.Enable     = True;
+				Options.CalculateNetAmount.Enable     = True;
+			Else
+				Options.CalculateTaxAmountReverse.Enable   = True;
+				Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
+			EndIf;
 			
 			Options.CalculatePriceByTotalAmount.Enable = True;
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
@@ -4087,7 +4092,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.PriceOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
 		Options.PriceOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
 		
-		Options.TaxOptions.PriceIncludeTax  = GetPriceIncludeTax(Parameters);
+		Options.TaxOptions.PriceIncludeTax  = PriceIncludeTax;
 		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
 		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
 		Options.TaxOptions.TaxList          = Row.TaxList;

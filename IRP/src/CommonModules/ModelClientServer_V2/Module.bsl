@@ -1265,10 +1265,11 @@ EndFunction
 Function _CalculateAmount(PriceOptions, Result)
 	If PriceOptions.PriceType <> Undefined And PriceOptions.QuantityInBaseUnit <> Undefined 
 		And PriceOptions.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
-		
-		Return PriceOptions.Price * PriceOptions.QuantityInBaseUnit;
+		Return Result.Price * PriceOptions.QuantityInBaseUnit;
+		//Return PriceOptions.Price * PriceOptions.QuantityInBaseUnit;
 	ElsIf PriceOptions.Quantity <> Undefined Then
-		Return PriceOptions.Price * PriceOptions.Quantity;
+		Return Result.Price * PriceOptions.Quantity;
+		//Return PriceOptions.Price * PriceOptions.Quantity;
 	EndIf;
 	Return Result.TotalAmount;
 EndFunction

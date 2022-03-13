@@ -531,40 +531,41 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	Parameters    = NotifyParameters.Parameters;
 	ChangedPoints = NotifyParameters.ChangedPoints;
 	
-	//NeedRecalculate = False;
+	NeedRecalculate = False;
 	If Not Answer.Property("UpdateStores") And ChangedPoints.Property("IsChangedItemListStore") Then
 		RemoveFromCache("Store, ItemList.Store, ItemList.UseShipmentConfirmation, ItemList.UseGoodsReceipt", Parameters);
 	EndIf;
 	
 	If Not Answer.Property("UpdatePriceTypes") And ChangedPoints.Property("IsChangedItemListPriceType") Then
 		RemoveFromCache("ItemList.PriceType", Parameters);
-		//NeedRecalculate = True;
+		NeedRecalculate = True;
 	EndIf;
 	
 	If Not Answer.Property("UpdatePrices") And ChangedPoints.Property("IsChangedItemListPrice") Then
 		RemoveFromCache("ItemList.Price", Parameters);
-		//NeedRecalculate = True;
+		NeedRecalculate = True;
 	EndIf;
 	
 	If Not Answer.Property("UpdatePaymentTerm") And ChangedPoints.Property("IsChangedPaymentTerms") Then
 		RemoveFromCache("PaymentTerms", Parameters);
+		NeedRecalculate = True;
 	EndIf;
 	
 	If Not Answer.Property("UpdateTaxRates") And ChangedPoints.Property("IsChangedTaxRates") Then
 		RemoveFromCacheTaxRates(Parameters);
-		//NeedRecalculate = True;
+		NeedRecalculate = True;
 	EndIf;
 	
 	CommitChanges(Parameters);
 	
-//	If NeedRecalculate Then
+	If NeedRecalculate Then
 		FormParameters = GetFormParameters(Parameters.Form);
 		FormParameters.EventCaller = "RecalculationsAfterQuestionToUser";
 		ServerParameters = GetServerParameters(Parameters.Object);
 		ServerParameters.TableName = "ItemList";
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.RecalculationsAfterQuestionToUser(Parameters);
-//	EndIf;
+	EndIf;
 EndProcedure
 
 Function IsChangedTaxRates(Parameters)

@@ -22,7 +22,7 @@ Function SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestP
 	AddInfo = Undefined)
 
 	If ConnectionSetting.IntegrationSettingsRef.DeletionMark Then
-		Raise StrTemplate(R().Error_106, ConnectionSetting.IntegrationSettingsRef);
+		Raise StrTemplate(R().Error_107, ConnectionSetting.IntegrationSettingsRef);
 	EndIf;
 
 	ServerResponse = ServerResponse(AddInfo);

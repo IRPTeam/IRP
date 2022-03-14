@@ -1351,22 +1351,6 @@ Function PickupItemsParameters(Object, Form)
 	ReturnValue = New Structure();
 
 	StoreArray = New Array();
-//	Try
-//		For Each Row In Object.ItemList Do
-//			If ValueIsFilled(Row.Store) Then
-//				If StoreArray.Find(Row.Store) = Undefined Then
-//					StoreArray.Add(Row.Store);
-//				EndIf;
-//			EndIf;
-//		EndDo;
-//
-//		If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
-//			StoreArray.Add(Form.CurrentStore);
-//		EndIf;
-//	Except
-//		StoreArray = New Array();
-//	EndTry;
-	
 	StoreInItemList = False;
 	For Each Row In Object.ItemList Do
 		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Store") Then
@@ -1391,12 +1375,6 @@ Function PickupItemsParameters(Object, Form)
 	Else
 		PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
 	EndIf;
-	//Try
-	//	PriceType = Form.CurrentPriceType;
-	//Except
-	//	PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
-	//EndTry;
-
 	ReturnValue.Insert("Stores", StoreArray);
 	ReturnValue.Insert("EndPeriod", EndPeriod);
 	ReturnValue.Insert("PriceType", PriceType);

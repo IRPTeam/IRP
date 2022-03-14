@@ -15,7 +15,6 @@ EndProcedure
 
 Procedure CompanyOnChange(Object, Form, Item) Export
 	ViewClient_V2.CompanyOnChange(Object, Form, "ItemList");
-	//DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -42,7 +41,6 @@ EndProcedure
 
 Procedure StoreOnChange(Object, Form, Item) Export
 	ViewClient_V2.StoreObjectAttrOnChange(Object, Form, "ItemList");
-	//DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -63,7 +61,6 @@ EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	ViewClient_V2.ItemListAfterDeleteRow(Object, Form);
-	//DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
 
 #Region ITEM_LIST_COLUMNS
@@ -72,20 +69,6 @@ EndProcedure
 
 Procedure ItemListItemOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListItemOnChange(Object, Form, CurrentData);
-	
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
-//	If ValueIsFilled(CurrentData.ItemKey) 
-//		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item")	<> CurrentData.Item Then
-//		CurrentData.ItemKey = Undefined;
-//	EndIf;
-//
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdateUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -112,13 +95,6 @@ EndProcedure
 
 Procedure ItemListQuantityOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListQuantityOnChange(Object, Form, CurrentData);
-	
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	Actions = New Structure("CalculateQuantityInBaseUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 EndProcedure
 
 #EndRegion
@@ -127,13 +103,6 @@ EndProcedure
 
 Procedure ItemListUnitOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListUnitOnChange(Object, Form, CurrentData);
-	
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	Actions = New Structure("CalculateQuantityInBaseUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 EndProcedure
 
 #EndRegion
@@ -141,22 +110,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
-//Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
-//	DocumentsClient.FillRowIDInItemList(Object);
-//	RowIDInfoClient.UpdateQuantity(Object, Form);
-//EndProcedure
-//
-//Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
-//	CurrentData = Item.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	If Clone Then
-//		CurrentData.Key = New UUID();
-//	EndIf;
-//	RowIDInfoClient.ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo);
-//EndProcedure
 
 #Region SERVICE
 
@@ -195,48 +148,6 @@ EndProcedure
 
 Procedure OpenPickupItems(Object, Form, Command) Export
 	DocumentsClient.OpenPickupItems(Object, Form, Command);
-	
-//	NotifyParameters = New Structure();
-//	NotifyParameters.Insert("Object", Object);
-//	NotifyParameters.Insert("Form", Form);
-//	NotifyDescription = New NotifyDescription("PickupItemsEnd", DocInternalSupplyRequestClient, NotifyParameters);
-//	OpenFormParameters = New Structure();
-//	StoreArray = New Array();
-//	StoreArray.Add(Object.Store);
-//	If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
-//		StoreArray.Add(Form.CurrentStore);
-//	EndIf;
-//
-//	If Command.AssociatedTable <> Undefined Then
-//		OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
-//		OpenFormParameters.Insert("Object", Object);
-//	EndIf;
-//
-//	OpenFormParameters.Insert("Stores", StoreArray);
-//	OpenFormParameters.Insert("EndPeriod", CommonFunctionsServer.GetCurrentSessionDate());
-//	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , NotifyDescription);
 EndProcedure
-
-//Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-//	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") Or Not AdditionalParameters.Property(
-//		"Form") Then
-//		Return;
-//	EndIf;
-//
-//	FilterString = "Item, ItemKey, Unit";
-//	FilterStructure = New Structure(FilterString);
-//	For Each ResultElement In Result Do
-//		FillPropertyValues(FilterStructure, ResultElement);
-//		ExistingRows = AdditionalParameters.Object.ItemList.FindRows(FilterStructure);
-//		If ExistingRows.Count() Then
-//			Row = ExistingRows[0];
-//		Else
-//			Row = AdditionalParameters.Object.ItemList.Add();
-//			FillPropertyValues(Row, ResultElement, FilterString);
-//		EndIf;
-//		Row.Quantity = Row.Quantity + ResultElement.Quantity;
-//	EndDo;
-//	ItemListOnChange(AdditionalParameters.Object, AdditionalParameters.Form, Undefined, Undefined);
-//EndProcedure
 
 #EndRegion

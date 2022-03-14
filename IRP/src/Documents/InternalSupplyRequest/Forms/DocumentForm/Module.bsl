@@ -131,15 +131,6 @@ EndProcedure
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocInternalSupplyRequestClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
-	
-//	CurrentRow = Items.ItemList.CurrentData;
-//	If CurrentRow = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdateUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 #EndRegion
@@ -165,16 +156,6 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
-//&AtClient
-//Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-//	DocInternalSupplyRequestClient.ItemListOnChange(Object, ThisObject, Item);
-//EndProcedure
-
-//&AtClient
-//Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-//	DocInternalSupplyRequestClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
-//EndProcedure
 
 #Region SERVICE
 

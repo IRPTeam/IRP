@@ -12,6 +12,14 @@ Function ServerResponse(AddInfo = Undefined) Export
 	Return ServerResponse;
 EndFunction
 
+// @skip-check form-module-pragma
+&AtClient
+Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
+    Return IntegrationServer.ConnectionSetting(IntegrationSettingName, AddInfo);
+EndFunction
+
+// @skip-check form-module-pragma
+&AtServer
 Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 	Return IntegrationServer.ConnectionSetting(IntegrationSettingName, AddInfo);
 EndFunction

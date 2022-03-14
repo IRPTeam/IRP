@@ -487,17 +487,17 @@ Function PicturesInfoForSlider(ItemRef, FileRef = Undefined, UseFullSizePhoto = 
 			EndIf;
 			PictureStructure.Text = Picture.Ref.Description;
 			PictureStructure.ID = Picture.FileID;
-			PictureStructure.Preview = GetURL(Picture.Ref, "Preview");
+			PictureStructure.Preview = "e1c://" + GetURL(Picture.Ref, "Preview");
 			PicArray.Add(PictureStructure);
 		EndDo;
 	Else
 		PicArray = New Array();
 		For Each Picture In Pictures Do
 			PictureStructure = New Structure("Src, SrcBD, ID, PictureURLStructure, Preview, Text");
-			PictureStructure.Src = GetURL(Picture.Ref, "Preview");
+			PictureStructure.Src = "e1c://" + GetURL(Picture.Ref, "Preview");
 			PictureStructure.Text = Picture.Ref.Description;
 			PictureStructure.ID = Picture.FileID;
-			PictureStructure.Preview = GetURL(Picture.Ref, "Preview");
+			PictureStructure.Preview = "e1c://" + GetURL(Picture.Ref, "Preview");
 			PicArray.Add(PictureStructure);
 		EndDo;
 		Pictures = New Structure("Pictures", PicArray);

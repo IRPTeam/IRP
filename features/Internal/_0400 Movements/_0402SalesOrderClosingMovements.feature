@@ -21,6 +21,7 @@ Scenario: _040158 preparation (Sales order closing)
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
 		When Create catalog Agreements objects
+		When Create catalog CashAccounts objects
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
@@ -83,6 +84,18 @@ Scenario: _040158 preparation (Sales order closing)
 		And I go to line in "List" table
 			| 'Number' |
 			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I close all client application windows
+		When Create document SalesOrder, SalesInvoice, SalesOrderClosing, CashReceipt objects (with aging)
+		And I execute 1C:Enterprise script at server
+				| "Documents.SalesOrder.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesOrder.FindByNumber(230).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesInvoice.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.CashReceipt.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);" |
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I close all client application windows
 	// * Check query for sales order closing movements
@@ -297,6 +310,25 @@ Scenario: _040167 check Sales order closing movements by the Register  "R2012 In
 			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '-494'    | '-418,64'    | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
 			| ''                                                  | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '-95'     | '-80,51'     | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'Interner' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' |
 
+		And I close all client application windows
+
+Scenario: _0401671 check Sales order closing movements by the Register  "T2014 Advances info"
+	* Select Sales order closing
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "T2014 Advances info" 
+		And I click "Registrations report" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order closing 4 dated 10.03.2022 11:27:01' | ''          | ''                        | ''                     | ''                    | ''    | ''             | ''                        | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''                                     |
+			| 'Document registrations records'                  | ''          | ''                        | ''                     | ''                    | ''    | ''             | ''                        | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''                                     |
+			| 'Register  "T2014 Advances info"'                 | ''          | ''                        | ''                     | ''                    | ''    | ''             | ''                        | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''                                     |
+			| ''                                                | 'Resources' | ''                        | ''                     | 'Dimensions'          | ''    | ''             | ''                        | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''                                     |
+			| ''                                                | 'Amount'    | 'Is purchase order close' | 'Is sales order close' | 'Date'                | 'Key' | 'Company'      | 'Branch'                  | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID'                            |
+			| ''                                                | ''          | 'No'                      | 'Yes'                  | '10.03.2022 11:27:01' | ''    | 'Main Company' | 'Distribution department' | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'No'                | 'Yes'                 | '*'                                    |
 		And I close all client application windows
 
 Scenario: _040169 Sales order closing clear posting/mark for deletion

@@ -1207,7 +1207,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	Or TypeOf(Object.Ref) = Type("DocumentRef.StockAdjustmentAsSurplus")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.StockAdjustmentAsWriteOff")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice");
+	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.InternalSupplyRequest");
 	
 	If IsUsedNewFunctionality Then	
 		For Each ResultElement In Result Do

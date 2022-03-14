@@ -161,6 +161,7 @@ EndProcedure
 Function GetObjectPropertyNamesBeforeChange()
 	Return "Date,
 		|Company,
+		|Store,
 		|Partner,
 		|Agreement,
 		|Currency,
@@ -1241,6 +1242,27 @@ EndProcedure
 #EndRegion
 
 #Region STORE
+
+#Region STORE_OBJECT_ATTR
+
+Procedure StoreObjectAttrOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Store", FormParameters);
+	FormParameters.EventCaller = "StoreObjectAttrOnUserChange";
+
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.StoreObjectAttrOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetStoreObjectAttrNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
 
 Procedure StoreOnChange(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do

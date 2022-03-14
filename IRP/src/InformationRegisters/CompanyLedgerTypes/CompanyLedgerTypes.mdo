@@ -9,16 +9,20 @@
     <recordType typeId="dfa5865e-92f3-4fa3-ba1f-73713d63f2e7" valueTypeId="e48cdf57-2848-4326-84f1-425f227c909e"/>
     <recordManagerType typeId="cdb93f34-f539-4a8e-a136-f8da0c6d3786" valueTypeId="f0d31648-da43-45b8-9876-235875e7e6bb"/>
   </producedTypes>
-  <name>CompanyLadgerTypes</name>
+  <name>CompanyLedgerTypes</name>
   <synonym>
     <key>en</key>
-    <value>Company ladger types</value>
+    <value>Company Ledger types</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.CompanyLadgerTypes.Form.RecordForm</defaultRecordForm>
+  <defaultRecordForm>InformationRegister.CompanyLedgerTypes.Form.RecordForm</defaultRecordForm>
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Company Ledger type</value>
+  </recordPresentation>
   <resources uuid="56275698-670b-40ed-8aac-77eaf3c633c8">
     <name>Use</name>
     <synonym>
@@ -53,13 +57,13 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="724971e2-ddd5-4137-b4ba-e19241e5fbf9">
-    <name>LadgerType</name>
+    <name>LedgerType</name>
     <synonym>
       <key>en</key>
-      <value>Ladger type</value>
+      <value>Ledger type</value>
     </synonym>
     <type>
-      <types>CatalogRef.LadgerTypes</types>
+      <types>CatalogRef.LedgerTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

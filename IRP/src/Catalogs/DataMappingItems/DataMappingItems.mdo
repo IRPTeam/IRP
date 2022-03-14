@@ -69,6 +69,10 @@
   <standardAttributes>
     <dataHistory>Use</dataHistory>
     <name>Parent</name>
+    <synonym>
+      <key>en</key>
+      <value>Parent</value>
+    </synonym>
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>

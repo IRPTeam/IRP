@@ -112,7 +112,7 @@ Scenario: _1002003 check Aging tab in the Purchase invoice
 		* Check payment date calculation
 			And I move to "Other" tab
 			And I input "03.11.2020" text in "Date" field
-			And I move to "Aging" tab
+			And I move to the next attribute
 			Then "Update item list info" window is opened
 			And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 			And I remove checkbox "Do you want to update filled prices?"
@@ -253,7 +253,7 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 			| 'Document registrations records'           |
 		And I close all client application windows
 	* Post Vendors advance closing document
-        Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
+		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"	
 		And in the table "List" I click the button named "ListContextMenuPost"		

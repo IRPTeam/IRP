@@ -5,10 +5,10 @@
     <listType typeId="c8705758-a344-4e98-8130-83661de3bf5c" valueTypeId="cefa160f-8893-4df5-b0e7-71d07db975f4"/>
     <managerType typeId="c4484a2f-ee31-4afd-9f51-9fcd92bcdc1f" valueTypeId="5af300fa-dba6-47d6-91b6-d43d97e81817"/>
   </producedTypes>
-  <name>LadgerTypeVariants</name>
+  <name>LedgerTypeVariants</name>
   <synonym>
     <key>en</key>
-    <value>Ladger type variants</value>
+    <value>Ledger type variants</value>
   </synonym>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>

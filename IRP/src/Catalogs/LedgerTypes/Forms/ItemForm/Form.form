@@ -753,7 +753,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>CatalogObject.LadgerTypes</types>
+      <types>CatalogObject.LedgerTypes</types>
     </valueType>
     <view>
       <common>true</common>

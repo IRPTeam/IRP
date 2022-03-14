@@ -1,6 +1,5 @@
 #Region FormEvents
 
-&AtClient
 Procedure ExternalEvent(Object, Form, Source, Event, Data) Export
 	If Data <> Undefined Then
 		NotifyParameters = New Structure();

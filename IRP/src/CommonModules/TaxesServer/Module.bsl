@@ -442,7 +442,7 @@ Function GetFromTaxTable(Form, Key, Tax)
 	Return Undefined;
 EndFunction
 
-// временная для теста
+// Template date for testing
 Function _GetArrayOfTaxInfo(Object, Date, Company) Export
 	
 	ArrayOfTaxes = New Array();
@@ -613,7 +613,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	Form.TaxesCache = CommonFunctionsServer.SerializeXMLUseXDTO(New Structure("ArrayOfTaxInfo", ArrayOfTaxInfo));
 EndProcedure
 
-Function CreateFormControls_ItemList(Object, Form, AddInfo) Export
+Function CreateFormControls_ItemList(Object, Form, AddInfo = Undefined) Export
 	TaxesParameters = GetCreateFormControlsParameters();
 	TaxesParameters.Date                  = Object.Date;
 	TaxesParameters.Company               = Object.Company;
@@ -629,7 +629,7 @@ Function CreateFormControls_ItemList(Object, Form, AddInfo) Export
 	Return GetArrayOfTaxInfo(Object, Form);
 EndFunction
 
-Function CreateFormControls_PaymentList(Object, Form, AddInfo) Export
+Function CreateFormControls_PaymentList(Object, Form, AddInfo = Undefined) Export
 	TaxesParameters = GetCreateFormControlsParameters();
 	TaxesParameters.Date                  = Object.Date;
 	TaxesParameters.Company               = Object.Company;

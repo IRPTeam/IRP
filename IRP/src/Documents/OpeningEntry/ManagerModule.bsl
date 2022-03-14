@@ -130,7 +130,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(ItemList());
-	QueryArray.Add(AccauntBalance());
+	QueryArray.Add(AccountBalance());
 	QueryArray.Add(AdvancesToVendors());
 	QueryArray.Add(VendorsTransactions());
 	QueryArray.Add(AdvancesFromCustomers());
@@ -186,7 +186,7 @@ Function ItemList()
 	|	OpeningEntryInventory.Ref = &Ref";
 EndFunction
 
-Function AccauntBalance()
+Function AccountBalance()
 	Return "SELECT
 		   |	AccountBalance.Ref.Company AS Company,
 		   |	AccountBalance.Ref.Branch AS Branch,
@@ -195,7 +195,7 @@ Function AccauntBalance()
 		   |	AccountBalance.Amount AS Amount,
 		   |	AccountBalance.Ref.Date AS Period,
 		   |	AccountBalance.Key
-		   |INTO AccauntBalance
+		   |INTO AccountBalance
 		   |FROM
 		   |	Document.OpeningEntry.AccountBalance AS AccountBalance
 		   |WHERE
@@ -496,7 +496,7 @@ Function R3010B_CashOnHand()
 		   |	*
 		   |INTO R3010B_CashOnHand
 		   |FROM
-		   |	AccauntBalance AS AccauntBalance
+		   |	AccountBalance AS AccountBalance
 		   |WHERE 
 		   |	TRUE";
 EndFunction

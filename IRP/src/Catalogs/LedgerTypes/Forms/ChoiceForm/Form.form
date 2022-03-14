@@ -475,8 +475,8 @@
 	Table.Variant,
 	Table.Description_en AS Description
 FROM
-	Catalog.LadgerTypes AS Table</queryText>
-      <mainTable>Catalog.LadgerTypes</mainTable>
+	Catalog.LedgerTypes AS Table</queryText>
+      <mainTable>Catalog.LedgerTypes</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>

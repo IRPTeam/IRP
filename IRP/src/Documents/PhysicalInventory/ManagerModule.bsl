@@ -108,8 +108,6 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 	EndIf;	
 EndProcedure
 
-
-
 #EndRegion
 
 Function GetItemListWithFillingPhysCount(Ref) Export

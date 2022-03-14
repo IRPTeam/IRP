@@ -13,7 +13,6 @@ Procedure EnterCountOnScan(Command)
 	ByOneScan = Items.ItemListEnterCountOnScan.Check; 
 EndProcedure
 
-
 &AtClient
 Procedure OnOpen(Cancel)
 	FillItemList(FormOwner.Object);
@@ -125,11 +124,11 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			SearchInItemList = Object.ItemList.FindRows(Filter);
 			Row.Insert("CurrentQuantity", 0);
 			Row.Insert("Diff", 0);
-			Row.Insert("QunatityAtDocument", 0);
+			Row.Insert("QuantityAtDocument", 0);
 			If SearchInItemList.Count() Then
-				Row.QunatityAtDocument = SearchInItemList[0].Quantity;
+				Row.QuantityAtDocument = SearchInItemList[0].Quantity;
 				Row.CurrentQuantity = SearchInItemList[0].ScannedQuantity;
-				Row.Diff = Row.QunatityAtDocument - Row.CurrentQuantity;
+				Row.Diff = Row.QuantityAtDocument - Row.CurrentQuantity;
 			EndIf;
 			NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
 			OpenForm("DataProcessor.ScanBarcode.Form.RowForm", New Structure("FillingData" ,Row), ThisObject, , , , NotifyOnClosing);

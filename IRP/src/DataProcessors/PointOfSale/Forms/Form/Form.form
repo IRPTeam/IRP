@@ -2266,7 +2266,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormGroup">
-              <name>GroupTotalTotalAmmount</name>
+              <name>GroupTotalTotalAmount</name>
               <id>940</id>
               <items xsi:type="form:FormField">
                 <name>ItemListTotalTotalAmount</name>
@@ -2337,7 +2337,7 @@
                 <common>true</common>
               </userVisible>
               <extendedTooltip>
-                <name>GroupTotalTotalAmmountExtendedTooltip</name>
+                <name>GroupTotalTotalAmountExtendedTooltip</name>
                 <id>941</id>
                 <visible>true</visible>
                 <enabled>true</enabled>

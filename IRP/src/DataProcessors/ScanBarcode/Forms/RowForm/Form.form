@@ -149,7 +149,7 @@
     <name>GroupDocument</name>
     <id>19</id>
     <items xsi:type="form:FormField">
-      <name>QunatityAtDocument</name>
+      <name>QuantityAtDocument</name>
       <id>7</id>
       <displayImportance>VeryHigh</displayImportance>
       <visible>true</visible>
@@ -158,10 +158,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>QunatityAtDocument</segments>
+        <segments>QuantityAtDocument</segments>
       </dataPath>
       <extendedTooltip>
-        <name>QunatityAtDocumentExtendedTooltip</name>
+        <name>QuantityAtDocumentExtendedTooltip</name>
         <id>9</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -176,7 +176,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>QunatityAtDocumentContextMenu</name>
+        <name>QuantityAtDocumentContextMenu</name>
         <id>8</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -562,7 +562,7 @@
     </edit>
   </attributes>
   <attributes>
-    <name>QunatityAtDocument</name>
+    <name>QuantityAtDocument</name>
     <title>
       <key>en</key>
       <value>Document</value>

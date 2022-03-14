@@ -101,7 +101,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>LadgerType</name>
+    <name>LedgerType</name>
     <id>7</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -109,10 +109,10 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Record.LadgerType</segments>
+      <segments>Record.LedgerType</segments>
     </dataPath>
     <extendedTooltip>
-      <name>LadgerTypeExtendedTooltip</name>
+      <name>LedgerTypeExtendedTooltip</name>
       <id>9</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -127,7 +127,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>LadgerTypeContextMenu</name>
+      <name>LedgerTypeContextMenu</name>
       <id>8</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -217,7 +217,7 @@
     <name>Record</name>
     <id>1</id>
     <valueType>
-      <types>InformationRegisterRecordManager.CompanyLadgerTypes</types>
+      <types>InformationRegisterRecordManager.CompanyLedgerTypes</types>
     </valueType>
     <view>
       <common>true</common>

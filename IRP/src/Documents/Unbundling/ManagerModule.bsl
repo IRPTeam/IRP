@@ -146,7 +146,7 @@ Function ItemList()
 	|	UnbundlingItemList.QuantityInBaseUnit * UnbundlingItemList.Ref.QuantityInBaseUnit AS Quantity,
 	|	UnbundlingItemList.Ref,
 	|	UnbundlingItemList.AmountValue
-	|INTO ItemLIst
+	|INTO ItemList
 	|FROM
 	|	Document.Unbundling.ItemList AS UnbundlingItemList
 	|WHERE

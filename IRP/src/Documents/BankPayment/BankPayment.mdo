@@ -779,13 +779,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="2da7e756-e3a8-4ab7-8201-0d80759fb866">
-      <name>LadgerType</name>
+      <name>LedgerType</name>
       <synonym>
         <key>en</key>
-        <value>Ladger type</value>
+        <value>Ledger type</value>
       </synonym>
       <type>
-        <types>CatalogRef.LadgerTypes</types>
+        <types>CatalogRef.LedgerTypes</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -876,13 +876,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="a1942dc9-723e-49d2-8d3d-86340cc4bb91">
-      <name>LadgerType</name>
+      <name>LedgerType</name>
       <synonym>
         <key>en</key>
-        <value>Ladger type</value>
+        <value>Ledger type</value>
       </synonym>
       <type>
-        <types>CatalogRef.LadgerTypes</types>
+        <types>CatalogRef.LedgerTypes</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

@@ -1982,6 +1982,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.DeliveryDate</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListDeliveryDateOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListDeliveryDateExtendedTooltip</name>
             <id>318</id>
@@ -2686,7 +2690,7 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>EditTrialBallanceAccounts</name>
+            <name>EditTrialBalanceAccounts</name>
             <id>974</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2694,7 +2698,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>EditTrialBallanceAccountsExtendedTooltip</name>
+              <name>EditTrialBalanceAccountsExtendedTooltip</name>
               <id>975</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2708,7 +2712,7 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <commandName>Form.Command.EditTrialBallanceAccounts</commandName>
+            <commandName>Form.Command.EditTrialBalanceAccounts</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -2728,24 +2732,16 @@
           <name>ItemListSelection</name>
         </handlers>
         <handlers>
-          <event>OnActivateRow</event>
-          <name>ItemListOnActivateRow</name>
-        </handlers>
-        <handlers>
-          <event>OnStartEdit</event>
-          <name>ItemListOnStartEdit</name>
-        </handlers>
-        <handlers>
           <event>AfterDeleteRow</event>
           <name>ItemListAfterDeleteRow</name>
         </handlers>
         <handlers>
-          <event>OnChange</event>
-          <name>ItemListOnChange</name>
-        </handlers>
-        <handlers>
           <event>BeforeDeleteRow</event>
           <name>ItemListBeforeDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>BeforeAddRow</event>
+          <name>ItemListBeforeAddRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -8406,10 +8402,10 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>EditTrialBallanceAccounts</name>
+    <name>EditTrialBalanceAccounts</name>
     <title>
       <key>en</key>
-      <value>Edit trial ballance accounts</value>
+      <value>Edit trial Balance accounts</value>
     </title>
     <id>17</id>
     <use>
@@ -8420,7 +8416,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>EditTrialBallanceAccounts</name>
+        <name>EditTrialBalanceAccounts</name>
       </handler>
     </action>
     <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
@@ -8443,10 +8439,6 @@
     <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
-    </handlers>
-    <handlers>
-      <event>BeforeWrite</event>
-      <name>BeforeWrite</name>
     </handlers>
     <handlers>
       <event>BeforeWriteAtServer</event>

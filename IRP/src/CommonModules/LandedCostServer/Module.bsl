@@ -201,7 +201,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
 	|	MAX(CostAllocationInfo.Amount) AS Amount
-	|INTO CostAmmounts_tmp
+	|INTO CostAmounts_tmp
 	|FROM
 	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
 	|		INNER JOIN CostAllocationInfo AS CostAllocationInfo
@@ -220,20 +220,20 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	CostAmmounts_tmp.Company AS Company,
-	|	CostAmmounts_tmp.Document AS Document,
-	|	CostAmmounts_tmp.Store AS Store,
-	|	CostAmmounts_tmp.ItemKey AS ItemKey,
-	|	CostAmmounts_tmp.Quantity AS Quantity,
-	|	CostAmmounts_tmp.Amount AS Amount,
+	|	CostAmounts_tmp.Company AS Company,
+	|	CostAmounts_tmp.Document AS Document,
+	|	CostAmounts_tmp.Store AS Store,
+	|	CostAmounts_tmp.ItemKey AS ItemKey,
+	|	CostAmounts_tmp.Quantity AS Quantity,
+	|	CostAmounts_tmp.Amount AS Amount,
 	|	CASE
-	|		WHEN CostAmmounts_tmp.Quantity = 0
+	|		WHEN CostAmounts_tmp.Quantity = 0
 	|			THEN 0
-	|		ELSE CostAmmounts_tmp.Amount / CostAmmounts_tmp.Quantity
+	|		ELSE CostAmounts_tmp.Amount / CostAmounts_tmp.Quantity
 	|	END AS AmountPerOneUnit
-	|INTO CostAmmounts
+	|INTO CostAmounts
 	|FROM
-	|	CostAmmounts_tmp AS CostAmmounts_tmp
+	|	CostAmounts_tmp AS CostAmounts_tmp
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -251,15 +251,15 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	R6010B_BatchWiseBalance.Document AS Document,
 	|	0 AS Quantity,
 	|	0 AS Amount,
-	|	CostAmmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountCost
+	|	CostAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountCost
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
-	|		INNER JOIN CostAmmounts AS CostAmmounts
-	|		ON R6010B_BatchWiseBalance.Batch.Document = CostAmmounts.Document
-	|		AND R6010B_BatchWiseBalance.Batch.Company = CostAmmounts.Company
-	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = CostAmmounts.ItemKey
+	|		INNER JOIN CostAmounts AS CostAmounts
+	|		ON R6010B_BatchWiseBalance.Batch.Document = CostAmounts.Document
+	|		AND R6010B_BatchWiseBalance.Batch.Company = CostAmounts.Company
+	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = CostAmounts.ItemKey
 	|WHERE
-	|	CostAmmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
+	|	CostAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -276,15 +276,15 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	R6050T_SalesBatches.AmountCost AS AmountCost1,
 	|	0 AS Quantity,
 	|	0 AS Amount,
-	|	CostAmmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity AS AmountCost
+	|	CostAmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity AS AmountCost
 	|FROM
 	|	AccumulationRegister.R6050T_SalesBatches AS R6050T_SalesBatches
-	|		INNER JOIN CostAmmounts AS CostAmmounts
-	|		ON R6050T_SalesBatches.Batch.Document = CostAmmounts.Document
-	|		AND R6050T_SalesBatches.Batch.Company = CostAmmounts.Company
-	|		AND R6050T_SalesBatches.BatchKey.ItemKey = CostAmmounts.ItemKey
+	|		INNER JOIN CostAmounts AS CostAmounts
+	|		ON R6050T_SalesBatches.Batch.Document = CostAmounts.Document
+	|		AND R6050T_SalesBatches.Batch.Company = CostAmounts.Company
+	|		AND R6050T_SalesBatches.BatchKey.ItemKey = CostAmounts.ItemKey
 	|WHERE
-	|	CostAmmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0";
+	|	CostAmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0";
 	
 	Query.SetParameter("Company"     , Company);
 	Query.SetParameter("BeginPeriod" , BeginPeriod);
@@ -347,7 +347,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
 	|	MAX(RevenueAllocationInfo.Amount) AS Amount
-	|INTO RevenueAmmounts_tmp
+	|INTO RevenueAmounts_tmp
 	|FROM
 	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
 	|		INNER JOIN RevenueAllocationInfo AS RevenueAllocationInfo
@@ -366,20 +366,20 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	RevenueAmmounts_tmp.Company AS Company,
-	|	RevenueAmmounts_tmp.Document AS Document,
-	|	RevenueAmmounts_tmp.Store AS Store,
-	|	RevenueAmmounts_tmp.ItemKey AS ItemKey,
-	|	RevenueAmmounts_tmp.Quantity AS Quantity,
-	|	RevenueAmmounts_tmp.Amount AS Amount,
+	|	RevenueAmounts_tmp.Company AS Company,
+	|	RevenueAmounts_tmp.Document AS Document,
+	|	RevenueAmounts_tmp.Store AS Store,
+	|	RevenueAmounts_tmp.ItemKey AS ItemKey,
+	|	RevenueAmounts_tmp.Quantity AS Quantity,
+	|	RevenueAmounts_tmp.Amount AS Amount,
 	|	CASE
-	|		WHEN RevenueAmmounts_tmp.Quantity = 0
+	|		WHEN RevenueAmounts_tmp.Quantity = 0
 	|			THEN 0
-	|		ELSE RevenueAmmounts_tmp.Amount / RevenueAmmounts_tmp.Quantity
+	|		ELSE RevenueAmounts_tmp.Amount / RevenueAmounts_tmp.Quantity
 	|	END AS AmountPerOneUnit
-	|INTO RevenueAmmounts
+	|INTO RevenueAmounts
 	|FROM
-	|	RevenueAmmounts_tmp AS RevenueAmmounts_tmp
+	|	RevenueAmounts_tmp AS RevenueAmounts_tmp
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -397,15 +397,15 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	|	R6010B_BatchWiseBalance.Document AS Document,
 	|	0 AS Quantity,
 	|	0 AS Amount,
-	|	-(RevenueAmmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity) AS AmountCost
+	|	-(RevenueAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity) AS AmountCost
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
-	|		INNER JOIN RevenueAmmounts AS RevenueAmmounts
-	|		ON R6010B_BatchWiseBalance.Batch.Document = RevenueAmmounts.Document
-	|		AND R6010B_BatchWiseBalance.Batch.Company = RevenueAmmounts.Company
-	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = RevenueAmmounts.ItemKey
+	|		INNER JOIN RevenueAmounts AS RevenueAmounts
+	|		ON R6010B_BatchWiseBalance.Batch.Document = RevenueAmounts.Document
+	|		AND R6010B_BatchWiseBalance.Batch.Company = RevenueAmounts.Company
+	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = RevenueAmounts.ItemKey
 	|WHERE
-	|	RevenueAmmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
+	|	RevenueAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -422,15 +422,15 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	|	R6050T_SalesBatches.AmountCost AS AmountCost1,
 	|	0 AS Quantity,
 	|	0 AS Amount,
-	|	-(RevenueAmmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity) AS AmountCost
+	|	-(RevenueAmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity) AS AmountCost
 	|FROM
 	|	AccumulationRegister.R6050T_SalesBatches AS R6050T_SalesBatches
-	|		INNER JOIN RevenueAmmounts AS RevenueAmmounts
-	|		ON R6050T_SalesBatches.Batch.Document = RevenueAmmounts.Document
-	|		AND R6050T_SalesBatches.Batch.Company = RevenueAmmounts.Company
-	|		AND R6050T_SalesBatches.BatchKey.ItemKey = RevenueAmmounts.ItemKey
+	|		INNER JOIN RevenueAmounts AS RevenueAmounts
+	|		ON R6050T_SalesBatches.Batch.Document = RevenueAmounts.Document
+	|		AND R6050T_SalesBatches.Batch.Company = RevenueAmounts.Company
+	|		AND R6050T_SalesBatches.BatchKey.ItemKey = RevenueAmounts.ItemKey
 	|WHERE
-	|	RevenueAmmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0";
+	|	RevenueAmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0";
 	
 	Query.SetParameter("Company"     , Company);
 	Query.SetParameter("BeginPeriod" , BeginPeriod);
@@ -695,7 +695,7 @@ Function GetBatchTree(TempTablesManager, Company, BeginPeriod, EndPeriod)
 	"SELECT
 	|	R6050T_SalesBatchesTurnovers.Batch.Document AS BatchDocument
 	|FROM
-	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(,,, SalesInvoice IN (&ArrayOfReturnedSalesInvoices)) AS
+	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(, , , SalesInvoice IN (&ArrayOfReturnedSalesInvoices)) AS
 	|		R6050T_SalesBatchesTurnovers
 	|GROUP BY
 	|	R6050T_SalesBatchesTurnovers.Batch.Document";
@@ -735,7 +735,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 				FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);
 			EndIf;
 			
-			If ValueIsFilled(Row.SalesInvoice)Then //Return by sales invoice
+			If ValueIsFilled(Row.SalesInvoice) Then //Return by sales invoice
 				
 				Table_SalesBatches = GetSalesBatches(Row.SalesInvoice, Tables.DataForSalesBatches, Row.BatchKey.ItemKey);
 				
@@ -833,7 +833,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 						ExpenseAmount = Row_Batch.AmountBalance;
 					Else
 						If Row_Batch.QuantityBalance <> 0 Then
-							ExpenseAmount = Round((Row_Batch.AmountBalance / Row_Batch.QuantityBalance) * ExpenseQuantity,2);
+							ExpenseAmount = Round((Row_Batch.AmountBalance / Row_Batch.QuantityBalance) * ExpenseQuantity, 2);
 						EndIf;
 					EndIf;
 					Row_Batch.QuantityBalance = Row_Batch.QuantityBalance - ExpenseQuantity;
@@ -1185,7 +1185,7 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	|	R6050T_SalesBatchesTurnovers.AmountTurnover AS Amount
 	|INTO SalesBatches
 	|FROM
-	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(,, Record, SalesInvoice = &SalesInvoice
+	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(, , Record, SalesInvoice = &SalesInvoice
 	|	AND BatchKey.ItemKey = &BatchKey_ItemKey) AS R6050T_SalesBatchesTurnovers
 	|;
 	|

@@ -346,7 +346,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>LadgerType</name>
+      <name>LedgerType</name>
       <id>37</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -354,10 +354,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.LadgerType</segments>
+        <segments>List.LedgerType</segments>
       </dataPath>
       <extendedTooltip>
-        <name>LadgerTypeExtendedTooltip</name>
+        <name>LedgerTypeExtendedTooltip</name>
         <id>39</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -372,7 +372,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>LadgerTypeContextMenu</name>
+        <name>LedgerTypeContextMenu</name>
         <id>38</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1529,7 +1529,7 @@
 	Master.ExtDimensionCr3,
 	Master.ExtDimensionTypeCr3,
 	Master.Company,
-	Master.LadgerType,
+	Master.LedgerType,
 	Master.CurrencyDr,
 	Master.CurrencyCr,
 	Master.Amount,

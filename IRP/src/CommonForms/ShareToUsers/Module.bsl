@@ -17,7 +17,7 @@ EndProcedure
 &AtClient
 Procedure SaveShare(Command)
 	FormCloseParameters = New Structure();
-	FormCloseParameters.Insert("Users", SharedUsers());
+	FormCloseParameters.Insert("Users", ShaReducers());
 	Close(FormCloseParameters);
 EndProcedure
 
@@ -40,7 +40,7 @@ EndProcedure
 #Region Private
 
 &AtServer
-Function SharedUsers()
+Function ShaReducers()
 	ReturnValue = New ValueList();
 	FilterChecked = New Structure("Use", True);
 	Users = UsersList.Unload(FilterChecked, "User");

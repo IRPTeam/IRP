@@ -1,41 +1,25 @@
-#Region FormEvents
+#Region FORM
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
 		DocumentsServer.FillItemList(Object, Form);
-
-		//ObjectData = DocumentsClientServer.GetStructureFillStores();
-		//FillPropertyValues(ObjectData, Object);
-		//DocumentsClientServer.FillStores(ObjectData, Form);
-
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 	FillTransactionTypeChoiceList(Form);
-	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
-	
+	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);	
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsServer.FillItemList(Object, Form);
-
-	//ObjectData = DocumentsClientServer.GetStructureFillStores();
-	//FillPropertyValues(ObjectData, CurrentObject);
-	//DocumentsClientServer.FillStores(ObjectData, Form);
-
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsServer.FillItemList(Object, Form);
-
-	//ObjectData = DocumentsClientServer.GetStructureFillStores();
-	//FillPropertyValues(ObjectData, CurrentObject);
-	//DocumentsClientServer.FillStores(ObjectData, Form);
-
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
@@ -45,50 +29,26 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitle
+#Region TITLE_DECORATIONS
 
 Procedure SetGroupItemsList(Object, Form)
+	If SessionParameters.isMobile Then
+		Return;
+	EndIf;
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Partner");
 	AttributesArray.Add("LegalName");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
-	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
-			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+	For Each Attr In AttributesArray Do
+		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
+			Object.Ref.Metadata().Attributes[Attr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 
 #EndRegion
 
-//Function PutQueryTableToTempTable(QueryTable) Export
-//	QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-//	For Each Row In QueryTable Do
-//		Row.Key = Row.RowKey;
-//	EndDo;
-//	tempManager = New TempTablesManager();
-//	Query = New Query();
-//	Query.TempTablesManager = tempManager;
-//	Query.Text =
-//	"SELECT
-//	|	QueryTable.Store,
-//	|	QueryTable.ShipmentBasis,
-//	|	QueryTable.Currency,
-//	|   QueryTable.ItemKey,
-//	|   QueryTable.Unit,
-//	|	QueryTable.Quantity,
-//	|   QueryTable.Key,
-//	|   QueryTable.RowKey
-//	|INTO tmpQueryTable
-//	|FROM
-//	|	&QueryTable AS QueryTable";
-//
-//	Query.SetParameter("QueryTable", QueryTable);
-//	Query.Execute();
-//	Return tempManager;
-//EndFunction
-
-#Region ListFormEvents
+#Region LIST_FORM
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
@@ -96,7 +56,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ChoiceFormEvents
+#Region CHOICE_FORM
 
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);

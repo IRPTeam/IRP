@@ -1330,7 +1330,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.JournalEntry.Attribute.LadgerType</name>
+		<name>Document.JournalEntry.Attribute.LedgerType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

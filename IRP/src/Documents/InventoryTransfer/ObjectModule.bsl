@@ -26,7 +26,7 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata()));
 		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 	EndIf;
 EndProcedure

@@ -10,7 +10,7 @@
         <name>GroupFilter</name>
         <id>285</id>
         <items xsi:type="form:FormGroup">
-          <name>GroupFIlterRight</name>
+          <name>GroupFilterRight</name>
           <id>361</id>
           <items xsi:type="form:FormField">
             <name>Company</name>
@@ -138,7 +138,7 @@
             <value>Group filter right</value>
           </title>
           <extendedTooltip>
-            <name>GroupFIlterRightExtendedTooltip</name>
+            <name>GroupFilterRightExtendedTooltip</name>
             <id>362</id>
             <visible>true</visible>
             <enabled>true</enabled>

@@ -21,16 +21,16 @@ Procedure CreateSCAtServer()
 	Doc = Builder.CreateDocument(Metadata.Documents.ShipmentConfirmation);
 	
 	// устанавливаем значения в 3 реквизита
-	// Через совойство Atr объекта Doc будут доступны все реквизиты документа
+	// Через совойство Attr объекта Doc будут доступны все реквизиты документа
 	// 3 параметр значение реквизита, 
 	// LegalName не устанавливаем - будет заполнено из Partner
-	Builder.SetProperty(Doc, Doc.Atr.Date           , CurrentSessionDate());
-	Builder.SetProperty(Doc, Doc.Atr.TransactionType, Enums.ShipmentConfirmationTransactionTypes.Sales);
-	Builder.SetProperty(Doc, Doc.Atr.Partner        , RefPartner);
+	Builder.SetProperty(Doc, Doc.Attr.Date           , CurrentSessionDate());
+	Builder.SetProperty(Doc, Doc.Attr.TransactionType, Enums.ShipmentConfirmationTransactionTypes.Sales);
+	Builder.SetProperty(Doc, Doc.Attr.Partner        , RefPartner);
 	
 	// Через свойство Tables будут доступны все табличные части документа
 	// Колонки будут доступны как Doc.Tables.<Имя таблицы>.<Имя колонки>
-	// Колонка Item доступна не будет,это реквизит формы
+	// Колонка Item доступна не будет, это реквизит формы
 	ItemList = Doc.Tables.ItemList;
 	
 	// добавляем первую строку

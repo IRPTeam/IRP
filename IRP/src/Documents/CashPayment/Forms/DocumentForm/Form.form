@@ -1498,28 +1498,8 @@
           <name>PaymentListBeforeAddRow</name>
         </handlers>
         <handlers>
-          <event>BeforeRowChange</event>
-          <name>PaymentListBeforeRowChange</name>
-        </handlers>
-        <handlers>
-          <event>OnStartEdit</event>
-          <name>PaymentListOnStartEdit</name>
-        </handlers>
-        <handlers>
           <event>AfterDeleteRow</event>
           <name>PaymentListAfterDeleteRow</name>
-        </handlers>
-        <handlers>
-          <event>OnActivateCell</event>
-          <name>PaymentListOnActivateCell</name>
-        </handlers>
-        <handlers>
-          <event>OnChange</event>
-          <name>PaymentListOnChange</name>
-        </handlers>
-        <handlers>
-          <event>OnActivateRow</event>
-          <name>PaymentListOnActivateRow</name>
         </handlers>
         <handlers>
           <event>Selection</event>

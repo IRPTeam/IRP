@@ -49,13 +49,13 @@ EndFunction
 
 Function CreateParameters(ServerParameters, FormParameters)
 	Parameters = New Structure();
-	// параметры для Client 
+	// parameters for Client 
 	Parameters.Insert("Form"             , FormParameters.Form);
 	Parameters.Insert("FormIsExists"     , FormParameters.Form <> Undefined);
 	Parameters.Insert("FormTaxColumnsExists", FormParameters.Form <> Undefined 
 		And ValueIsFilled(FormParameters.TaxesCache));
 	Parameters.Insert("FormModificators" , New Array());
-	Parameters.Insert("CacheForm"        , New Structure()); // кэш для реквизитов формы
+	Parameters.Insert("CacheForm"        , New Structure()); // cache for form attributes
 	Parameters.Insert("ViewNotify"       , New Array());
 	Parameters.Insert("ViewClientModuleName"   , FormParameters.ViewClientModuleName);
 	Parameters.Insert("ViewServerModuleName"   , FormParameters.ViewServerModuleName);
@@ -66,8 +66,14 @@ Function CreateParameters(ServerParameters, FormParameters)
 	
 	Parameters.Insert("PropertyBeforeChange", FormParameters.PropertyBeforeChange);
 	
-	// параметры для Server + Client
-	// кэш для реквизитов объекта
+	Parameters.Insert("FormParameters", New Structure("IsCopy", False));
+	If Parameters.FormIsExists Then
+		If FormParameters.Form.Parameters.Property("CopyingValue") Then
+			Parameters.FormParameters.IsCopy = ValueIsFilled(FormParameters.Form.Parameters.CopyingValue);
+		EndIf;
+	EndIf;
+	
+	// parameters for Server + Client
 	Parameters.Insert("Object" , ServerParameters.Object);
 	Parameters.Insert("Cache"  , New Structure());
 	Parameters.Insert("ControllerModuleName", ServerParameters.ControllerModuleName);
@@ -75,13 +81,12 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("IsBasedOn"             , ServerParameters.IsBasedOn);
 	Parameters.Insert("ReadOnlyProperties"    , ServerParameters.ReadOnlyProperties);
 	Parameters.Insert("ReadOnlyPropertiesMap" , New Map());
-	Parameters.Insert("ProcessedReadOnlyPropertiesMap" , New Map()); // ReadOnlyProperties для которых уже вызывались обработчики
+	Parameters.Insert("ProcessedReadOnlyPropertiesMap" , New Map());
 	ArrayOfProperties = StrSplit(ServerParameters.ReadOnlyProperties, ",");
 	For Each Property In ArrayOfProperties Do
 		Parameters.ReadOnlyPropertiesMap.Insert(Upper(TrimAll(Property)), True);
 	EndDo;
 	
-	// таблицы для которых нужно получить колонки
 	Parameters.Insert("TableName", ServerParameters.TableName);
 	ArrayOfTableNames = New Array();
 	ArrayOfTableNames.Add(ServerParameters.TableName);
@@ -107,15 +112,16 @@ Function CreateParameters(ServerParameters, FormParameters)
 		EndIf;
 	EndIf;
 	
-	// если не переданы конкретные строки то используем все что есть в таблице c именем TableName
-	If ServerParameters.Rows = Undefined And ValueIsFilled(ServerParameters.TableName) Then
-		ServerParameters.Rows = ServerParameters.Object[ServerParameters.TableName];
-	EndIf;
-	If ServerParameters.Rows = Undefined Then
-		ServerParameters.Rows = New Array();
+	// if specific rows are not passed, then we use everything that is in the table with the name TableName
+	If ServerParameters.Rows = Undefined Then 
+		If ValueIsFilled(ServerParameters.TableName) Then
+			ServerParameters.Rows = ServerParameters.Object[ServerParameters.TableName];
+		Else
+			ServerParameters.Rows = New Array();
+		EndIf;
 	EndIf;
 	
-	// строку таблицы нельзя передать на сервер, поэтому помещаем данные в массив структур
+	// the table row cannot be transferred to the server, so we put the data in an array of structures
 	// Rows
 	ArrayOfRows = New Array();
 	For Each Row In ServerParameters.Rows Do
@@ -136,14 +142,14 @@ Function CreateParameters(ServerParameters, FormParameters)
 		// TaxRates
 		TaxRates = New Structure();
 		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			// когда нет формы то нет и колонки созданной программно
+			// when there is no form, then there is no column created programmatically
 			If Parameters.FormTaxColumnsExists Then
 				TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
 			Else
-			// создадим псевдо колонки для ставок налога
+			// create pseudo columns for tax rates
 				NewRow.Insert(ItemOfTaxInfo.Name);
 				
-				// ставки налогов берем из таблицы TaxList
+				// tax rates are taken from the TaxList table
 				TaxRate = Undefined;
 				For Each TaxRow In ArrayOfRowsTaxList Do
 					If TaxRow.Tax = ItemOfTaxInfo.Tax Then
@@ -190,18 +196,18 @@ Procedure FillPropertyFormByDefault(Form, DataPaths, Parameters) Export
 		DataPath = TrimAll(DataPath);
 		Default = Defaults.Get(DataPath);
 		If Default<> Undefined Then
-			ForceCommintChanges = False;
+			ForceCommitChanges = False;
 			ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
 		ElsIf ValueIsFilled(Form[DataPath]) Then
 			SetPropertyForm(Parameters, DataPath, , Form[DataPath]);
 			Binding = Bindings.Get(DataPath);
 			If Binding <> Undefined Then
-				ForceCommintChanges = False;
+				ForceCommitChanges = False;
 				ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 			EndIf;
 		EndIf;
 	EndDo;
-	If ForceCommintChanges Then
+	If ForceCommitChanges Then
 		CommitChainChanges(Parameters);
 	EndIf;
 EndProcedure
@@ -210,7 +216,7 @@ EndProcedure
 
 #Region API
 
-// реквизиты которые доступны через API
+// attributes that available through API
 Function GetSetterNameByDataPath(DataPath)
 	SettersMap = New Map();
 	SettersMap.Insert("Sender"          , "SetAccountSender");
@@ -309,6 +315,10 @@ Function BindFormOnCreateAtServer(Parameters)
 	Binding.Insert("SalesInvoice",
 		"StepItemListCalculations_RecalculationsOnCopy,
 		|StepRequireCallCreateTaxesFormControls");
+	
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListCalculations_RecalculationsOnCopy,
+		|StepRequireCallCreateTaxesFormControls");
 									
 	Binding.Insert("BankPayment",
 		"StepPaymentListCalculations_RecalculationsOnCopy,
@@ -370,6 +380,7 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus"  , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("StockAdjustmentAsWriteOff" , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("SalesInvoice"              , "StepExtractDataItemKeysWithSerialLotNumbers");
+	Binding.Insert("PurchaseInvoice"           , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
 	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
@@ -393,10 +404,10 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined) Export
 	Bindings = GetAllBindings(Parameters);
 	Defaults = GetAllBindingsByDefault(Parameters);
 	
-	ForceCommintChanges = True;
+	ForceCommitChanges = True;
 	For Each ColumnName In StrSplit(Parameters.ObjectMetadataInfo.Tables[TableName].Columns, ",") Do
 		
-		// у колонки есть собственный обработчик .Default вызываем его
+		// column has its own handler .Default call it
 		DataPath = StrTemplate("%1.%2", TableName, ColumnName);
 		Segments = StrSplit(DataPath, ".");
 		If Segments.Count() = 2 And StrStartsWith(Segments[1], "_" ) Then
@@ -404,20 +415,20 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined) Export
 		EndIf;
 		Default = Defaults.Get(DataPath);
 		If Default<> Undefined Then
-			ForceCommintChanges = False;
+			ForceCommitChanges = False;
 			ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
 
-		// если колонка заполнена, и у нее есть обработчик .OnChage, вызываем его
+		// if column is filled  and has its own handler .OnChage call it
 		ElsIf ValueIsFilled(NewRow[ColumnName]) Then
 			SetPropertyObject(Parameters, DataPath, NewRow.Key, NewRow[ColumnName]);
 			Binding = Bindings.Get(DataPath);
 			If Binding <> Undefined Then
-				ForceCommintChanges = False;
+				ForceCommitChanges = False;
 				ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 			EndIf;
 		EndIf;
 	EndDo;
-	If ForceCommintChanges Then
+	If ForceCommitChanges Then
 		CommitChainChanges(Parameters);
 	EndIf;
 EndProcedure
@@ -441,7 +452,7 @@ Procedure DeleteRows(TableName, Parameters, ViewNotify = Undefined) Export
 			Parameters.Object[DepTableName].Delete(ItemForDelete);
 		EndDo;
 	EndDo;
-	// выполняем обработчики после удаления строки
+	// execute handlers after deleting row
 	Binding = BindListOnDelete(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -457,6 +468,10 @@ Function BindListOnDelete(Parameters)
 		"StepChangeStoreInHeaderByStoresInList,
 		|StepUpdatePaymentTerms");
 	
+	Binding.Insert("PurchaseInvoice",
+		"StepChangeStoreInHeaderByStoresInList,
+		|StepUpdatePaymentTerms");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -468,7 +483,7 @@ Procedure CopyRow(TableName, Parameters, ViewNotify = Undefined) Export
 	If ViewNotify <> Undefined Then
 		AddViewNotify(ViewNotify, Parameters);
 	EndIf;
-	// выполняем обработчики после копирования строки
+	// execute handlers after copy row
 	Binding = BindListOnCopy(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -477,14 +492,19 @@ EndProcedure
 Function BindListOnCopy(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice" , "StepItemListCalculations_IsCopyRow,
+	Binding.Insert("SalesInvoice" ,
+		"StepItemListCalculations_IsCopyRow,
+		|StepUpdatePaymentTerms");
+	
+	Binding.Insert("PurchaseInvoice" ,
+		"StepItemListCalculations_IsCopyRow,
 		|StepUpdatePaymentTerms");
 	
 	Binding.Insert("BankPayment"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("BankReceipt"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashPayment"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashReceipt"  , "StepPaymentListCalculations_IsCopyRow");
-	Binding.Insert("CashEXpense"  , "StepPaymentListCalculations_IsCopyRow");
+	Binding.Insert("CashExpense"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashRevenue"  , "StepPaymentListCalculations_IsCopyRow");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -600,6 +620,10 @@ Function BindRecalculationsAfterQuestionToUser(Parameters)
 	DataPath = "";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice", 
+		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
+		|StepUpdatePaymentTerms");
+
+	Binding.Insert("PurchaseInvoice", 
 		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
 		|StepUpdatePaymentTerms");
 		
@@ -1480,6 +1504,15 @@ Function BindDate(Parameters)
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
 
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeDeliveryDateByAgreement,
+		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepUpdatePaymentTerms");
+
 	Binding.Insert("BankPayment",
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_AgreementInList");
@@ -1535,6 +1568,10 @@ Function BindCompany(Parameters)
 	DataPath = "Company";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice",
+		"StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_OnlyWhenAgreementIsFilled");
+
+	Binding.Insert("PurchaseInvoice",
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_OnlyWhenAgreementIsFilled");
 	
@@ -1645,6 +1682,10 @@ Function BindPartner(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
 		|StepChangeLegalNameByPartner,
 		|StepChangeManagerSegmentByPartner");
+
+	Binding.Insert("PurchaseInvoice",
+		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		|StepChangeLegalNameByPartner");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1716,7 +1757,8 @@ EndFunction
 Function BindDefaultDeliveryDate(Parameters)
 	DataPath = "DeliveryDate";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice", "StepDefaultDeliveryDateInHeader");
+	Binding.Insert("SalesInvoice"   , "StepDefaultDeliveryDateInHeader");
+	Binding.Insert("PurchaseInvoice", "StepDefaultDeliveryDateInHeader");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1948,6 +1990,16 @@ Function BindAgreement(Parameters)
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepChangePaymentTermsByAgreement,
 		|StepChangeTaxRate_AgreementInHeader");
+
+	Binding.Insert("PurchaseInvoice",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement,
+		|StepChangeStoreByAgreement,
+		|StepChangeDeliveryDateByAgreement,
+		|StepItemListChangePriceTypeByAgreement,
+		|StepChangePriceIncludeTaxByAgreement,
+		|StepChangePaymentTermsByAgreement,
+		|StepChangeTaxRate_AgreementInHeader");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -2054,8 +2106,10 @@ EndProcedure
 Procedure SetPaymentTerms(Parameters, Results) Export
 	Binding = BindPaymentTerms(Parameters);
 	For Each Result In Results Do
-		Parameters.Cache.Insert(Binding.DataPath, Result.Value.ArrayOfPaymentTerms);
-		// данные изменены только если в Object.PaymentTerms уже есть строки
+		If Parameters.ChangedData.Get(Binding.DataPath) = Undefined Then
+			Parameters.Cache.Insert(Binding.DataPath, Result.Value.ArrayOfPaymentTerms);
+		EndIf;
+		// data is changed only when Object.PaymentTerms have rows
 		If Parameters.Object.PaymentTerms.Count() Then
 			PutToChangedData(Parameters, Binding.DataPath, Undefined, Undefined, Undefined);
 		EndIf;
@@ -2065,11 +2119,11 @@ EndProcedure
 // PaymentTerms.Get
 Function GetPaymentTerms(Parameters) Export
 	Binding = BindPaymentTerms(Parameters);
-	// если есть в кэше берем из него
+	// if data in cache get from cache
 	If Parameters.Cache.Property(Binding.DataPath) Then
 		Return Parameters.Cache[Binding.DataPath];
 	EndIf;
-	// если нету, считываем из объекта
+	// if not data in cache get from object 
 	ArrayOfPaymentTerms = New Array();
 	For Each Row In Parameters.Object.PaymentTerms Do
 		NewRow = New Structure("Date, ProportionOfPayment, DuePeriod,
@@ -2143,14 +2197,14 @@ EndFunction
 
 // TaxList.Set
 Procedure SetTaxList(Parameters, Results)
-	// табличная часть TaxList кэщируется целиком, потом так же целиком переносится в документ
+	// for tabular part TaxList needed full transfer from cache to object
 	For Each Result In Results Do
 		If Result.Value.TaxList.Count() Then
 			If Not Parameters.Cache.Property("TaxList") Then
 				Parameters.Cache.Insert("TaxList", New Array());
 			EndIf;
 			
-			// удаляем из кэша старые строки
+			// remove from cache old rows
 			Count = Parameters.Cache.TaxList.Count();
 			For i = 1 To Count Do
 				Index = Count - i;
@@ -2160,7 +2214,7 @@ Procedure SetTaxList(Parameters, Results)
 				EndIf;
 			EndDo;
 			
-			// добавляем новые строки
+			// add new rows
 			For Each Row In Result.Value.TaxList Do
 				Parameters.Cache.TaxList.Add(Row);
 			EndDo;
@@ -2175,8 +2229,6 @@ EndProcedure
 // TaxRate.Get
 Function GetTaxRate(Parameters, Row)
 	TaxRates = New Structure();
-	// когда нет формы то колонки со ставками налогов только в кэше
-	// потому что колонки со ставками налога это реквизиты формы
 	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
 	For Each TaxRate In Row.TaxRates Do
 		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
@@ -2933,21 +2985,6 @@ EndFunction
 Function BindPaymentListTaxAmount(Parameters)
 	DataPath = "PaymentList.TaxAmount";
 	Binding = New Structure();
-//	Binding.Insert("BankPayment",
-//		"StepPaymentListCalculations_IsTaxAmountChanged,
-//		|StepPaymentListChangeTaxAmountAsManualAmount");
-//		
-//	Binding.Insert("BankReceipt",
-//		"StepPaymentListCalculations_IsTaxAmountChanged,
-//		|StepPaymentListChangeTaxAmountAsManualAmount");
-//		
-//	Binding.Insert("CashPayment",
-//		"StepPaymentListCalculations_IsTaxAmountChanged,
-//		|StepPaymentListChangeTaxAmountAsManualAmount");
-//		
-//	Binding.Insert("CashReceipt",
-//		"StepPaymentListCalculations_IsTaxAmountChanged,
-//		|StepPaymentListChangeTaxAmountAsManualAmount");
 	Steps = "StepPaymentListCalculations_IsTaxAmountChanged,
 		|StepPaymentListChangeTaxAmountAsManualAmount";
 	Return BindSteps(Steps, DataPath, Binding, Parameters);
@@ -3015,10 +3052,6 @@ EndFunction
 Function BindPaymentListTotalAmount(Parameters)
 	DataPath = "PaymentList.TotalAmount";
 	Binding = New Structure();
-//	Binding.Insert("BankPayment", "StepPaymentListCalculations_IsTotalAmountChanged");
-//	Binding.Insert("BankReceipt", "StepPaymentListCalculations_IsTotalAmountChanged");
-//	Binding.Insert("CashPayment", "StepPaymentListCalculations_IsTotalAmountChanged");
-//	Binding.Insert("CashReceipt", "StepPaymentListCalculations_IsTotalAmountChanged");
 	Steps = "StepPaymentListCalculations_IsTotalAmountChanged";
 	Return BindSteps(Steps, DataPath, Binding, Parameters);
 EndFunction
@@ -3067,8 +3100,7 @@ EndFunction
 
 // PaymentList.Calculations.[RecalculationsOnCopy].Step
 Procedure StepPaymentListCalculations_RecalculationsOnCopy(Parameters, Chain) Export
-	// при копировании документа нужно перерасчитать TaxAmount
-	If Parameters.FormIsExists And ValueIsFilled(Parameters.Form.Parameters.CopyingValue) Then
+	If Parameters.FormIsExists And Parameters.FormParameters.IsCopy Then
 		StepPaymentListCalculations(Parameters, Chain, "RecalculationsOnCopy");
 	EndIf;
 EndProcedure
@@ -3112,19 +3144,19 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		
-		// нужно пересчитать NetAmount, TotalAmount, TaxAmount
+		// need recalculate NetAmount, TotalAmount, TaxAmount
 		If     WhoIsChanged = "IsTaxRateChanged" Or WhoIsChanged = "IsCopyRow" Then
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;
 			Options.CalculateTaxAmount.Enable     = True;
 			
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Or WhoIsChanged = "RecalculationsOnCopy" Then
-			// при изменении TotalAmount налоги расчитываются в обратную сторону, меняется NetAmount
+		//  when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount
 			Options.CalculateTaxAmountReverse.Enable   = True;
 			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
 			
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
-			// указываем на то что нужно использовать ManualAmount (сумма введеная вручную) при расчете TaxAmount
+		// enable use ManualAmount when calculating TaxAmount
 			Options.TaxOptions.UseManualAmount = True;
 			
 			Options.CalculateNetAmount.Enable   = True;
@@ -3195,6 +3227,7 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("StockAdjustmentAsSurplus" , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("StockAdjustmentAsWriteOff", "StepItemListChangeItemKeyByItem");
 	Binding.Insert("SalesInvoice"             , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("PurchaseInvoice"          , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3247,6 +3280,15 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepExtractDataItemKeysWithSerialLotNumbers,
 		|StepChangeUnitByItemKey");
+	
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListChangeUseGoodsReceiptByStore,
+		|StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUnitByItemKey");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3331,7 +3373,8 @@ EndFunction
 Function BindDefaultItemListDeliveryDate(Parameters)
 	DataPath = "ItemList.DeliveryDate";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice", "StepItemListDefaultDeliveryDateInList");
+	Binding.Insert("SalesInvoice"   , "StepItemListDefaultDeliveryDateInList");
+	Binding.Insert("PurchaseInvoice", "StepItemListDefaultDeliveryDateInList");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3339,7 +3382,8 @@ EndFunction
 Function BindItemListDeliveryDate(Parameters)
 	DataPath = "ItemList.DeliveryDate";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice", "StepChangeDeliveryDateInHeaderByDeliveryDateInList");
+	Binding.Insert("SalesInvoice"   , "StepChangeDeliveryDateInHeaderByDeliveryDateInList");
+	Binding.Insert("PurchaseInvoice", "StepChangeDeliveryDateInHeaderByDeliveryDateInList");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3585,7 +3629,6 @@ Procedure StepItemListChangePriceTypeAsManual(Parameters, Chain, IsUserChange, I
 	EndDo;
 EndProcedure
 
-
 #EndRegion
 
 #Region ITEM_LIST_PRICE
@@ -3612,6 +3655,10 @@ Function BindItemListPrice(Parameters)
 	DataPath = "ItemList.Price";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice",
+		"StepItemListChangePriceTypeAsManual_IsUserChange,
+		|StepItemListCalculations_IsPriceChanged");
+
+	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangePriceTypeAsManual_IsUserChange,
 		|StepItemListCalculations_IsPriceChanged");
 		
@@ -3731,7 +3778,8 @@ EndFunction
 Function BindItemListQuantityInBaseUnit(Parameters)
 	DataPath = "ItemList.QuantityInBaseUnit";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice", "StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	Binding.Insert("SalesInvoice"    , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	Binding.Insert("PurchaseInvoice" , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3812,8 +3860,12 @@ Function BindItemListTaxAmount(Parameters)
 	Binding.Insert("SalesInvoice", 
 		"StepItemListCalculations_IsTaxAmountChanged,
 		|StepItemListChangeTaxAmountAsManualAmount");
+
+	Binding.Insert("PurchaseInvoice", 
+		"StepItemListCalculations_IsTaxAmountChanged,
+		|StepItemListChangeTaxAmountAsManualAmount");
 		
-	Return BindSteps("ItemListTaxAmountStepsEnabler", DataPath, Binding, Parameters);
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
 // ItemList.TaxAmount.ChangeTaxAmountAsManualAmount.Step
@@ -3895,6 +3947,10 @@ Function BindItemListTotalAmount(Parameters)
 	Binding.Insert("SalesInvoice",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged");
+
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+		|StepItemListCalculations_IsTotalAmountChanged");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -3918,13 +3974,14 @@ EndProcedure
 Function BindItemListCalculations(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("SalesInvoice", "StepUpdatePaymentTerms");
+	Binding.Insert("SalesInvoice"    , "StepUpdatePaymentTerms");
+	Binding.Insert("PurchaseInvoice" , "StepUpdatePaymentTerms");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
 // ItemList.Calculations.[RecalculationsOnCopy].Step
 Procedure StepItemListCalculations_RecalculationsOnCopy(Parameters, Chain) Export
-	If Parameters.FormIsExists And ValueIsFilled(Parameters.Form.Parameters.CopyingValue) Then
+	If Parameters.FormIsExists And Parameters.FormParameters.IsCopy Then
 		StepItemListCalculations(Parameters, Chain, "RecalculationsOnCopy");
 	EndIf;
 EndProcedure
@@ -3983,12 +4040,14 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	Chain.Calculations.Enable = True;
 	Chain.Calculations.Setter = "SetItemListCalculations";
 	
+	PriceIncludeTax = GetPriceIncludeTax(Parameters);
+	
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		
-		// нужно пересчитать NetAmount, TotalAmount, TaxAmount, OffersAmount
+		// need recalculate NetAmount, TotalAmount, TaxAmount, OffersAmount
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "IsOffersChanged"
@@ -3999,12 +4058,19 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateTaxAmount.Enable     = True;
 			Options.CalculateSpecialOffers.Enable = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
-		// при изменении TotalAmount налоги расчитываются в обратную сторону, меняется NetAmount и Price
-			Options.CalculateTaxAmountReverse.Enable   = True;
-			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
+		// when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount and Price
+			
+			If PriceIncludeTax Then
+				Options.CalculateTaxAmount.Enable     = True;
+				Options.CalculateNetAmount.Enable     = True;
+			Else
+				Options.CalculateTaxAmountReverse.Enable   = True;
+				Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
+			EndIf;
+			
 			Options.CalculatePriceByTotalAmount.Enable = True;
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
-			// указываем на то что нужно использовать ManualAmount (сумма введеная вручную) при расчете TaxAmount
+		// enable use ManualAmount when calculating TaxAmount
 			Options.TaxOptions.UseManualAmount = True;
 			
 			Options.CalculateNetAmount.Enable   = True;
@@ -4026,7 +4092,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.PriceOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
 		Options.PriceOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
 		
-		Options.TaxOptions.PriceIncludeTax  = GetPriceIncludeTax(Parameters);
+		Options.TaxOptions.PriceIncludeTax  = PriceIncludeTax;
 		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
 		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
 		Options.TaxOptions.TaxList          = Row.TaxList;
@@ -4040,20 +4106,19 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	EndDo;
 EndProcedure
 
-
 #EndRegion
 
 #EndRegion
 
-// Вызывается когда вся цепочка связанных действий будет заверщена
+// called when all chain steps is complete
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
-		// на клиенте возможно нужно задать вопрос пользователю, поэтому сразу из кэша в объект не переносим
+		// on client need ask user, do not transfer from cache to object
 		Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ViewClientModuleName);
 	#ENDIF
 	
 	#IF Server THEN
-		// на сервере спрашивать некого, сразу переносим из кэша в объект
+		// on server transfer from cache to object
 		CommitChainChanges(Parameters);
 	#ENDIF
 EndProcedure
@@ -4095,13 +4160,13 @@ Procedure CommitChainChanges(Parameters) Export
 	EndIf;
 EndProcedure
 
-// Переносит изменения из Cache в Object из CacheForm в Fomr
+// move changes from Cache to Object form CacheForm to Form
 Procedure _CommitChainChanges(Cache, Source)
 	For Each Property In Cache Do
 		PropertyName  = Property.Key;
 		PropertyValue = Property.Value;
 		If Upper(PropertyName) = Upper("TaxList") Then
-			// табличная часть налогов переносится целиком
+			// tabular part Taxex moved transferred completely
 			ArrayOfKeys = New Array();
 			For Each Row In PropertyValue Do
 				If ArrayOfKeys.Find(Row.Key) = Undefined Then
@@ -4119,23 +4184,22 @@ Procedure _CommitChainChanges(Cache, Source)
 				FillPropertyValues(Source.TaxList.Add(), Row);
 			EndDo;
 		
-		
-		ElsIf TypeOf(PropertyValue) = Type("Array") Then // это табличная часть
+		ElsIf TypeOf(PropertyValue) = Type("Array") Then // it is tabular part
 			IsRowWithKey = PropertyValue.Count() And PropertyValue[0].Property("Key");
-			// Табличные части ItemList и PaymentList переносятся построчно так как Key в строках уникален
+			// tabular parts ItemList and PaymentList moved by rows, key in rows is unique
 			If IsRowWithKey Then
 				For Each Row In PropertyValue Do
 					FillPropertyValues(Source[PropertyName].FindRows(New Structure("Key", Row.Key))[0], Row);
 				EndDo;
 			Else
-				// если в строке нет ключа то переносится целиком, например PaymentTerms
+				// if tabular parts not contain key then transfered completely, for example PaymentTerms
 				Source[PropertyName].Clear();
 				For Each Row In PropertyValue Do
 					FillPropertyValues(Source[PropertyName].Add(), Row);
 				EndDo;
 			EndIf;
 		Else
-			Source[PropertyName] = PropertyValue; // это реквизит шапки
+			Source[PropertyName] = PropertyValue; // it is property of object
 		EndIf;
 	EndDo;
 EndProcedure
@@ -4197,14 +4261,14 @@ Procedure MultiSetterObject(Parameters, Results, ResourceToBinding)
 		Resource = KeyValue.Key;
 		Binding = KeyValue.Value;
 		Segments = StrSplit(Binding.DataPath, ".");
-		If Segments.Count() = 1 Then // это реквизит шапки
+		If Segments.Count() = 1 Then // it is property of object
 			_Results = New Array();
 			For Each Result In Results Do
 				_Results.Add(New Structure("Value, Options", Result.Value[Resource], New Structure("Key")));
 				Break;
 			EndDo;
 			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, _Results);
-		ElsIf Segments.Count() = 2 Then // это колонка таблицы
+		ElsIf Segments.Count() = 2 Then // it is column of table
 			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, , Resource);
 		Else
 			Raise StrTemplate("Wrong data path [%1]", Binding.DataPath);
@@ -4237,8 +4301,8 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 		AddViewNotify(ViewNotify, Parameters);
 	EndIf;
 	If ValueIsFilled(StepNames) Then
-		// свойство изменено и есть следующие шаги
-		// или свойство не изменено но если оно ReadOnly, то вызовем его следующие шаги
+		// property is changed and have next steps
+		// or property is ReadInly, call next steps
 		If IsChanged Then
 			ModelClientServer_V2.EntryPoint(StepNames, Parameters);
 		ElsIf Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) = True Then
@@ -4251,8 +4315,9 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 EndProcedure
 
 Procedure AddViewNotify(ViewNotify, Parameters)
-	// переадресация в клиентский модуль, вызов был с клиента, на форме что то надо обновить
-	// вызывать будем потом когда завершится вся цепочка действий, и изменения будут перенесены с кэша в объект
+	// redirect to the client module, the call was from the client, something needs to be updated on the form
+	// we will call later when the whole chain of actions is completed,
+	// and the changes will be transferred from the cache to the object
 	If ValueIsFilled(ViewNotify) Then
 		Parameters.ViewNotify.Add(ViewNotify);
 	EndIf;
@@ -4270,10 +4335,11 @@ Function GetPropertyObject(Parameters, DataPath, Key = Undefined, ReadOnlyFromCa
 	Return GetProperty(Parameters.Cache, Parameters.Object, DataPath, Key, ReadOnlyFromCache);
 EndFunction
 
-// параметр Key используется когда DataPath указывает на реквизит табличной части, например ItemList.PriceType
+// parameter Key used when DataPath points to the attribute of the tabular section, for example, ItemList.PriceType
 Function GetProperty(Cache, Source, DataPath, Key, ReadOnlyFromCache)
 	Segments = StrSplit(DataPath, ".");
-	If Segments.Count() = 1 Then // это реквизит шапки, он указывается без точки, например Company
+	// this is the header attribute, it is indicated without a dot, for example, Company
+	If Segments.Count() = 1 Then
 		If ValueIsFilled(Key) Then
 			Raise StrTemplate("Key [%1] not allowed for data path [%2]", Key, DataPath);
 		EndIf;
@@ -4285,7 +4351,8 @@ Function GetProperty(Cache, Source, DataPath, Key, ReadOnlyFromCache)
 			EndIf;
 			Return Source[DataPath];
 		EndIf;
-	ElsIf Segments.Count() = 2 Then // это реквизит табличной части, состоит из двух частей разделенных точкой ItemList.PriceType
+	// this is an attribute of the tabular part, consists of two parts separated by a dot ItemList.PriceType
+	ElsIf Segments.Count() = 2 Then
 		TableName = Segments[0];
 		ColumnName = Segments[1];
 		
@@ -4301,7 +4368,7 @@ Function GetProperty(Cache, Source, DataPath, Key, ReadOnlyFromCache)
 				EndIf;
 			EndDo;
 		EndIf;
-		// не нашли в кэше
+		// not found in cache
 		If RowByKey = Undefined Then
 			If ReadOnlyFromCache Then
 				Return Undefined;
@@ -4314,28 +4381,28 @@ Function GetProperty(Cache, Source, DataPath, Key, ReadOnlyFromCache)
 		EndIf;
 		Return RowByKey[ColumnName];
 	Else
-		// реквизитов с таким путем не бывает
+		// there are no props with this path
 		Raise StrTemplate("Wrong data path [%1]", DataPath);
 	EndIf;
 EndFunction
 
 Function SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache = False)
-	// если свойство ReadOnly и оно заполнено то не меняем
+	// if property is ReadOnly and filled then do not change
 	If Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) <> Undefined Then
 		Segments = StrSplit(DataPath, ".");
 		If Segments.Count() = 1 Then
 			If ValueIsFilled(Parameters.Object[DataPath]) Then
-				Return False; // Свойство ReadOnly и заполнено, не меняем
+				Return False; // property is ReadOnly and filled, do not change
 			EndIf;
 		ElsIf Segments.Count() = 2 Then
-			// для табличной части нужно сначало найти строку
+			// for tabular part, first need to find row
 			TableName = TrimAll(Segments[0]);
 			PropertyName = TrimAll(Segments[1]);
 			If Upper(TableName) = Upper(Parameters.TableName) Then
 				For Each Row In GetRows(Parameters, TableName) Do
 					If Row.Key = _Key Then
 						If ValueIsFilled(Row[PropertyName]) Then
-							Return False; // Свойство ReadOnly и заполнено, не меняем
+							Return False; // property is ReadOnly and filled, do not change
 						EndIf;
 						Break;
 					EndIf;
@@ -4348,9 +4415,9 @@ Function SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache
 	
 	CurrentValue = GetPropertyObject(Parameters, DataPath, _Key, ReadOnlyFromCache);
 	If ?(ValueIsFilled(CurrentValue), CurrentValue, Undefined) = ?(ValueIsFilled(_Value), _Value, Undefined) Then
-		Return False; // Свойство не изменилось
+		Return False; // property is not changed
 	EndIf;
-	// Свойство изменилось
+	// property is changed
 	IsChanged = SetProperty(Parameters.Cache, DataPath, _Key, _Value);
 	If IsChanged Then
 		PutToChangedData(Parameters, DataPath, CurrentValue, _Value, _Key);
@@ -4361,9 +4428,9 @@ EndFunction
 Function SetPropertyForm(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache = False)
 	CurrentValue = GetPropertyForm(Parameters, DataPath, _Key, ReadOnlyFromCache);
 	If ?(ValueIsFilled(CurrentValue), CurrentValue, Undefined) = ?(ValueIsFilled(_Value), _Value, Undefined) Then
-		Return False; // Свойство не изменилось
+		Return False; // property is not changed
 	EndIf;
-	// Свойство изменилось
+	// property is changed
 	IsChanged = SetProperty(Parameters.CacheForm, DataPath, _Key, _Value);
 	If IsChanged Then
 		PutToChangedData(Parameters, DataPath, CurrentValue, _Value, _Key);
@@ -4371,7 +4438,7 @@ Function SetPropertyForm(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache =
 	Return IsChanged;
 EndFunction
 
-// логирует измененные данные, для того чтобы можно было задавать вопросы пользователю
+// logs changed data so that you can ask questions to the user
 Procedure PutToChangedData(Parameters, DataPath, OldValue, NewValue, _Key)
 	If Parameters.ChangedData.Get(DataPath) = Undefined Then
 		Parameters.ChangedData.Insert(DataPath, New Array());
@@ -4383,13 +4450,15 @@ Procedure PutToChangedData(Parameters, DataPath, OldValue, NewValue, _Key)
 	Parameters.ChangedData.Get(DataPath).Add(ChangedData);
 EndProcedure
 
-// Устанавливает свойства по переданному DataPath, например ItemList.PriceType или Company
+// sets properties on the passed DataPath, such as ItemList.PriceType or Company
 Function SetProperty(Cache, DataPath, _Key, _Value)
-	// измененные свойства сохраняются в кэш
+	// changed properties put to cache
 	Segments = StrSplit(DataPath, ".");
-	If Segments.Count() = 1 Then // это реквизит шапки, он указывается без точки, например Company
+	// this is the header attribute, it is indicated without a dot, for example, Company
+	If Segments.Count() = 1 Then
 		Cache.Insert(DataPath, _Value);
-	ElsIf Segments.Count() = 2 Then // это реквизит табличной части, состоит из двух частей разделенных точкой ItemList.PriceType
+	// this is an attribute of the tabular part, consists of two parts separated by a dot ItemList.PriceType
+	ElsIf Segments.Count() = 2 Then
 		TableName = Segments[0];
 		ColumnName = Segments[1];
 		If Not Cache.Property(TableName) Then
@@ -4410,7 +4479,7 @@ Function SetProperty(Cache, DataPath, _Key, _Value)
 			Cache[TableName].Add(NewRow);
 		EndIf;
 	Else
-		// реквизитов с таким путем не бывает
+		// there are no props with this path
 		Raise StrTemplate("Wrong data path [%1]", DataPath);
 	EndIf;	
 	Return True;
@@ -4452,13 +4521,13 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 EndFunction
 
 Function IsUserChange(Parameters)
-	If Parameters.Property("IsProgrammChange") And Parameters.IsProgrammChange Then
+	If Parameters.Property("IsProgramChange") And Parameters.IsProgramChange Then
 		Return False; // Is programm change via scan barcode or other external forms
 	EndIf;
 	
-	If Parameters.Property("ModelInveronment")
-		And Parameters.ModelInveronment.Property("StepNamesCounter") Then
-		Return Parameters.ModelInveronment.StepNamesCounter.Count() = 1;
+	If Parameters.Property("ModelEnvironment")
+		And Parameters.ModelEnvironment.Property("StepNamesCounter") Then
+		Return Parameters.ModelEnvironment.StepNamesCounter.Count() = 1;
 	EndIf;
 	Return False;
 EndFunction
@@ -4513,7 +4582,7 @@ Procedure SetReadOnlyProperties(Object, FillingData) Export
 				For Each Column In Value[0] Do
 					If Object.Metadata().TabularSections[Property]
 						.Attributes.Find(Column.Key) <> Undefined Then
-							TabularProperties.Add(StrTemplate("%1.%2",Property, Column.Key));
+							TabularProperties.Add(StrTemplate("%1.%2", Property, Column.Key));
 					EndIf;
 				EndDo;
 			EndIf;

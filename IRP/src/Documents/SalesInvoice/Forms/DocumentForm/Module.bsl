@@ -1,4 +1,10 @@
-#Region FormEvents
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocSalesInvoiceServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
@@ -6,7 +12,17 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-//	DocSalesInvoiceServer.CalculateTableAtServer(ThisObject, Object);
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	DocSalesInvoiceServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtClient
@@ -15,7 +31,7 @@ Procedure OnOpen(Cancel)
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -33,14 +49,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
-
-	DocSalesInvoiceClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source, AddInfo);
-
-EndProcedure
-
-&AtClient
-Procedure BeforeWrite(Cancel, WriteParameters)
-	Return;
 EndProcedure
 
 &AtServer
@@ -54,21 +62,9 @@ Procedure AfterWrite(WriteParameters)
 EndProcedure
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	DocSalesInvoiceServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocSalesInvoiceServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
-&AtServer
-Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
-EndProcedure
+Function Taxes_CreateFormControls() Export
+	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
+EndFunction
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
@@ -85,48 +81,16 @@ EndProcedure
 
 #EndRegion
 
-#Region FormItemsEvents
+#Region _DATE
+
 &AtClient
 Procedure DateOnChange(Item)
 	DocSalesInvoiceClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure StoreOnChange(Item)
-	DocSalesInvoiceClient.StoreOnChange(Object, ThisObject, Item);
-EndProcedure
+#EndRegion
 
-&AtClient
-Procedure DeliveryDateOnChange(Item)
-	DocSalesInvoiceClient.DeliveryDateOnChange(Object, ThisObject, Item);
-	//DocumentsClient.DeliveryDateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListDeliveryDateOnChange(Item)
-	DocSalesInvoiceClient.ItemListDeliveryDateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PartnerOnChange(Item)
-	DocSalesInvoiceClient.PartnerOnChange(Object, ThisObject, Item);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure LegalNameOnChange(Item)
-	DocSalesInvoiceClient.LegalNameOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure LegalNameContractOnChange(Item)
-	DocSalesInvoiceClient.LegalNameContractOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure AgreementOnChange(Item)
-	DocSalesInvoiceClient.AgreementOnChange(Object, ThisObject, Item);
-EndProcedure
+#Region COMPANY
 
 &AtClient
 Procedure CompanyOnChange(Item)
@@ -134,44 +98,120 @@ Procedure CompanyOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure PriceIncludeTaxOnChange(Item)
-	DocSalesInvoiceClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesInvoiceClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocSalesInvoiceClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region PARTNER
+
+&AtClient
+Procedure PartnerOnChange(Item)
+	DocSalesInvoiceClient.PartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesInvoiceClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	DocSalesInvoiceClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME
+
+&AtClient
+Procedure LegalNameOnChange(Item)
+	DocSalesInvoiceClient.LegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesInvoiceClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocSalesInvoiceClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT
+
+&AtClient
+Procedure AgreementOnChange(Item)
+	DocSalesInvoiceClient.AgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesInvoiceClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	DocSalesInvoiceClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region CURRENCY
 
 &AtClient
 Procedure CurrencyOnChange(Item)
 	DocSalesInvoiceClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
+	
+#EndRegion
+
+#Region STORE
 
 &AtClient
-Procedure ManagerOnChange(Item)
-	Return;
+Procedure StoreOnChange(Item)
+	DocSalesInvoiceClient.StoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
 
-#Region ItemListEvents
+#Region DELIVERY_DATE
 
 &AtClient
-Procedure ItemListAfterDeleteRow(Item)
-	DocSalesInvoiceClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	LockLinkedRows();
+Procedure DeliveryDateOnChange(Item)
+	DocSalesInvoiceClient.DeliveryDateOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure ItemListOnChange(Item) Export
-	DocSalesInvoiceClient.ItemListOnChange(Object, ThisObject, Item);
-EndProcedure
+#EndRegion
+
+#Region LEGAL_NAME_CONTRACT
 
 &AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocSalesInvoiceClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+Procedure LegalNameContractOnChange(Item)
+	DocSalesInvoiceClient.LegalNameContractOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region PRICE_INCLUDE_TAX
+
 &AtClient
-Procedure ItemListOnActivateRow(Item)
-	DocSalesInvoiceClient.ItemListOnActivateRow(Object, ThisObject, Item);
+Procedure PriceIncludeTaxOnChange(Item)
+	DocSalesInvoiceClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
 EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST
 
 &AtClient
 Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
@@ -179,13 +219,24 @@ Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocSalesInvoiceClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter)
+EndProcedure
+
+&AtClient
 Procedure ItemListBeforeDeleteRow(Item, Cancel)
 	DocSalesInvoiceClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
-#EndRegion
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocSalesInvoiceClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
+EndProcedure
 
-#Region ItemListItemsEvents
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
 
 &AtClient
 Procedure ItemListItemOnChange(Item)
@@ -202,67 +253,122 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocSalesInvoiceClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+#EndRegion
+
+#Region ITEM_KEY
+
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocSalesInvoiceClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocSalesInvoiceClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter)
-EndProcedure
+#EndRegion
 
+#Region PRICE_TYPE
 
 &AtClient
 Procedure ItemListPriceTypeOnChange(Item)
 	DocSalesInvoiceClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region UNIT
+
 &AtClient
 Procedure ItemListUnitOnChange(Item)
 	DocSalesInvoiceClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item)
 	DocSalesInvoiceClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region PRICE
+
 &AtClient
 Procedure ItemListPriceOnChange(Item)
 	DocSalesInvoiceClient.ItemListPriceOnChange(Object, ThisObject, Item);
 EndProcedure
+
+#EndRegion
+
+#Region TOTAL_AMOUNT
 
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item)
 	DocSalesInvoiceClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region TAX_AMOUNT
+
 &AtClient
 Procedure ItemListTaxAmountOnChange(Item)
 	DocSalesInvoiceClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
 EndProcedure
+
+#EndRegion
+
+#Region DONT_CALCULATE_ROW
 
 &AtClient
 Procedure ItemListDontCalculateRowOnChange(Item)
 	DocSalesInvoiceClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region STORE
+
 &AtClient
 Procedure ItemListStoreOnChange(Item)
 	DocSalesInvoiceClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region DELIVERY_DATE
+
+&AtClient
+Procedure ItemListDeliveryDateOnChange(Item)
+	DocSalesInvoiceClient.ItemListDeliveryDateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_RATE
+
+&AtClient
+Procedure TaxValueOnChange(Item) Export
+	DocSalesInvoiceClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region SERIAL_LOT_NUMBERS
+
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
-	DocSalesInvoiceClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
+	DocSalesInvoiceClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
 	DocSalesInvoiceClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
+
+#EndRegion
+
+#Region REVENUE_TYPE
 
 &AtClient
 Procedure ItemListRevenueTypeStartChoice(Item, ChoiceData, StandardProcessing)
@@ -276,7 +382,11 @@ EndProcedure
 
 #EndRegion
 
-#Region PaymentTermsItemsEvents
+#EndRegion
+
+#EndRegion
+
+#Region PAYMENT_TERMS
 
 &AtClient
 Procedure PaymentTermsDateOnChange(Item)
@@ -290,74 +400,9 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPartner
+#Region SPECIAL_OFFERS
 
-&AtClient
-Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocSalesInvoiceClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
-	DocSalesInvoiceClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemLegalName
-
-&AtClient
-Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocSalesInvoiceClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocSalesInvoiceClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemAgreement
-
-&AtClient
-Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	DocSalesInvoiceClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
-	DocSalesInvoiceClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemCompany
-
-&AtClient
-Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-	DocSalesInvoiceClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
-	DocSalesInvoiceClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region DescriptionEvents
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region SpecialOffers
-
-#Region Offers_for_document
+#Region FOR_DOCUMENT
 
 &AtClient
 Procedure SetSpecialOffers(Command)
@@ -371,12 +416,11 @@ EndProcedure
 
 #EndRegion
 
-#Region Offers_for_row
+#Region FOR_ROW
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
-		"SpecialOffersEditFinish_ForRow");
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject, "SpecialOffersEditFinish_ForRow");
 EndProcedure
 
 &AtClient
@@ -388,7 +432,47 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorations
+#Region SHIPMENT_CONFIRMATIONS
+
+&AtClient
+Procedure ShipmentConfirmationsTreeQuantityOnChange(Item)
+	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, "ShipmentConfirmations",
+		"ShipmentConfirmationsTree", "ShipmentConfirmation");
+	RowIDInfoClient.UpdateQuantity(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ShipmentConfirmationsTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure ShipmentConfirmationsTreeBeforeDeleteRow(Item, Cancel)
+	Cancel = True;
+EndProcedure
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocSalesInvoiceClient);
+	Str.Insert("Server", DocSalesInvoiceServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -412,7 +496,36 @@ EndProcedure
 
 #EndRegion
 
-#Region Commands
+#Region ADD_ATTRIBUTES
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
 
 &AtClient
 Procedure OpenPickupItems(Command)
@@ -436,70 +549,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Taxes
-&AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocSalesInvoiceClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtServer
-Function Taxes_CreateFormControls(AddInfo = Undefined) Export
-	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject, AddInfo);
-EndFunction
-
-#EndRegion
-
-#Region AddAttributes
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure AddAttributesCreateFormControl()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
-EndProcedure
-
-#EndRegion
-
-#Region ExternalCommands
-
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-#EndRegion
-
-#Region ShipmentConfirmationsTree
-
-&AtClient
-Procedure ShipmentConfirmationsTreeQuantityOnChange(Item)
-	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, "ShipmentConfirmations",
-		"ShipmentConfirmationsTree", "ShipmentConfirmation");
-	RowIDInfoClient.UpdateQuantity(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ShipmentConfirmationsTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure ShipmentConfirmationsTreeBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
-EndProcedure
-
-#EndRegion
-
-#Region LinkedDocuments
+#Region LINKED_DOCUMENTS
 
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
@@ -576,18 +626,6 @@ EndProcedure
 
 #EndRegion
 
-#Region Service
-
-&AtClient
-Function GetProcessingModule() Export
-	Str = New Structure;
-	Str.Insert("Client", DocSalesInvoiceClient);
-	Str.Insert("Server", DocSalesInvoiceServer);
-	Return Str;
-EndFunction
-
-#EndRegion
-
 &AtClient
 Procedure EditCurrencies(Command)
 	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
@@ -603,3 +641,4 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
+#EndRegion

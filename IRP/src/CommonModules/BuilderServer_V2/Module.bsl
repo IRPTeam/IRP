@@ -7,13 +7,13 @@ Function CreateDocument(DocMetadata) Export
 	Wrapper = New Structure("Object", New Structure());
 	Wrapper.Insert("_DocumentMetadata_" , DocMetadata);
 	Wrapper.Insert("_DocumentObject_"   , DocObject);
-	Wrapper.Insert("Atr"    , New Structure());
+	Wrapper.Insert("Attr"    , New Structure());
 	Wrapper.Insert("Tables" , New Structure());
-	For Each Atr In DocMetadata.StandardAttributes Do
-		FillAtrInfo(Wrapper, DocObject, Atr);
+	For Each Attr In DocMetadata.StandardAttributes Do
+		FillAttrInfo(Wrapper, DocObject, Attr);
 	EndDo;
-	For Each Atr In DocMetadata.Attributes Do
-		FillAtrInfo(Wrapper, DocObject, Atr);
+	For Each Attr In DocMetadata.Attributes Do
+		FillAttrInfo(Wrapper, DocObject, Attr);
 	EndDo;
 	For Each Table In DocMetadata.TabularSections Do
 		Wrapper.Object.Insert(Table.Name, New ValueTable());
@@ -28,11 +28,11 @@ Function CreateDocument(DocMetadata) Export
 	Return Wrapper;
 EndFunction
 
-Procedure FillAtrInfo(Wrapper, DocObject, Atr)
-	Wrapper.Object.Insert(Atr.Name, DocObject[Atr.Name]);
-	AtrInfo = New Structure();
-	AtrInfo.Insert("DataPath", Atr.Name);
-	Wrapper.Atr.Insert(Atr.Name, AtrInfo);
+Procedure FillAttrInfo(Wrapper, DocObject, Attr)
+	Wrapper.Object.Insert(Attr.Name, DocObject[Attr.Name]);
+	AttrInfo = New Structure();
+	AttrInfo.Insert("DataPath", Attr.Name);
+	Wrapper.Attr.Insert(Attr.Name, AttrInfo);
 EndProcedure
 
 Procedure FillColumnInfo(Wrapper, DocObject, Table, Column)

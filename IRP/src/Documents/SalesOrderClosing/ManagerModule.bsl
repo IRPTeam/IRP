@@ -195,7 +195,7 @@ Function R2011B_SalesOrdersShipment()
 	Return "SELECT
 		   |	&Period AS Period,
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	- R2011B_SalesOrdersShipmentBalance.QuantityBalance AS Quantity,	
+		   |	- R2011B_SalesOrdersShipmentBalance.QuantityBalance AS Quantity,
 		   |	*
 		   |INTO R2011B_SalesOrdersShipment
 		   |FROM

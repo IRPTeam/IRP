@@ -209,7 +209,6 @@ EndProcedure
 
 #Region Currency
 
-&AtClient
 Procedure TransactionsCurrencyOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	Return;
 EndProcedure
@@ -218,7 +217,6 @@ EndProcedure
 
 #Region Amount
 
-&AtClient
 Procedure TransactionsAmountOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	Return;
 EndProcedure

@@ -21,12 +21,12 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 			If Not ValueIsFilled(Level2.Period) Then
 				Continue;
 			EndIf;
-			RecordSet = InformationRegisters.LadgerTypeOperations.CreateRecordSet();
+			RecordSet = InformationRegisters.LedgerTypeOperations.CreateRecordSet();
 			RecordSet.Filter.Period.Set(Level2.Period);
-			RecordSet.Filter.LadgerType.Set(Object.Ref);
+			RecordSet.Filter.LedgerType.Set(Object.Ref);
 			RecordSet.Filter.AccountingOperation.Set(Level2.AccountingOperation);
 			NewRecord = RecordSet.Add();
-			NewRecord.LadgerType = Object.Ref;
+			NewRecord.LedgerType = Object.Ref;
 			NewRecord.AccountingOperation = Level2.AccountingOperation;
 			NewRecord.Period = Level2.Period;
 			NewRecord.Use = Level2.Use;
@@ -68,17 +68,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 EndProcedure
 
 &AtServerNoContext
-Function GetAccountingOperations(LadgerTypeRef)
+Function GetAccountingOperations(LedgerTypeRef)
 	ArrayOfAccountingOperations = New Array();
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	LadgerTypeOperationsSliceLast.Period AS Period,
-	|	LadgerTypeOperationsSliceLast.AccountingOperation AS AccountingOperation,
-	|	LadgerTypeOperationsSliceLast.Use AS Use
+	|	LedgerTypeOperationsSliceLast.Period AS Period,
+	|	LedgerTypeOperationsSliceLast.AccountingOperation AS AccountingOperation,
+	|	LedgerTypeOperationsSliceLast.Use AS Use
 	|INTO tmp
 	|FROM
-	|	InformationRegister.LadgerTypeOperations.SliceLast(, LadgerType = &LadgerType) AS LadgerTypeOperationsSliceLast
+	|	InformationRegister.LedgerTypeOperations.SliceLast(, LedgerType = &LedgerType) AS LedgerTypeOperationsSliceLast
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +96,7 @@ Function GetAccountingOperations(LadgerTypeRef)
 	|TOTALS
 	|BY
 	|	Document";
-	Query.SetParameter("LadgerType", LadgerTypeRef);
+	Query.SetParameter("LedgerType", LedgerTypeRef);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select(QueryResultIteration.ByGroups);
 	While QuerySelection.Next() Do

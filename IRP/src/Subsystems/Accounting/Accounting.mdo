@@ -7,12 +7,12 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.LadgerTypes</content>
+  <content>Catalog.LedgerTypes</content>
   <content>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</content>
   <content>Document.JournalEntry</content>
   <content>ChartOfAccounts.R6010C_Master</content>
-  <content>InformationRegister.CompanyLadgerTypes</content>
+  <content>InformationRegister.CompanyLedgerTypes</content>
   <content>AccumulationRegister.T1040T_AccountingAmounts</content>
   <content>FunctionalOption.UseAccounting</content>
-  <subsystems>TrialBallanceAccounts</subsystems>
+  <subsystems>TrialBalanceAccounts</subsystems>
 </mdclass:Subsystem>

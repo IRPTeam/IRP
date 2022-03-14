@@ -17,6 +17,10 @@
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>DontUse</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>R6010 Master (extra dimension type)</value>
+  </objectPresentation>
   <type>
     <types>CatalogRef.Partners</types>
     <types>CatalogRef.CashAccounts</types>

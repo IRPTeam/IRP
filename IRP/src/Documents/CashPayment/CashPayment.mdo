@@ -175,11 +175,6 @@
       <key>en</key>
       <value>Document form</value>
     </synonym>
-    <help>
-      <pages>
-        <lang>en</lang>
-      </pages>
-    </help>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>

@@ -1,8 +1,9 @@
-#Region FormEvents
+#Region FORM
 
 &AtServer
-Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+Procedure OnReadAtServer(CurrentObject)
+	DocCashExpenseRevenueServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
@@ -14,19 +15,19 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocCashExpenseRevenueServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters) Export
+	DocCashExpenseRevenueServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure OnOpen(Cancel, AddInfo = Undefined) Export
+Procedure OnOpen(Cancel) Export
 	DocCashExpenseRevenueClient.OnOpen(Object, ThisObject, Cancel);
-EndProcedure
-
-&AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	Return;
 EndProcedure
 
 &AtClient
@@ -37,15 +38,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 EndProcedure
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	DocCashExpenseRevenueServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure BeforeWrite(Cancel, WriteParameters)
-	Return;
-EndProcedure
+Function Taxes_CreateFormControls() Export
+	Return TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
+EndFunction
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
@@ -60,135 +55,19 @@ EndProcedure
 
 #EndRegion
 
-#Region FormItemsEvents
+#Region _DATE
+
 &AtClient
-Procedure DateOnChange(Item, AddInfo = Undefined) Export
+Procedure DateOnChange(Item)
 	DocCashExpenseRevenueClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure PaymentListOnChange(Item)
-	Return;
-	//DocCashExpenseRevenueClient.PaymentListOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListCurrencyOnChange(Item, AddInfo = Undefined) Export
-	DocCashExpenseRevenueClient.PaymentListCurrencyOnChange(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure PaymentListNetAmountOnChange(Item, AddInfo = Undefined) Export
-	DocCashExpenseRevenueClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure AccountOnChange(Item, AddInfo = Undefined) Export
-	DocCashExpenseRevenueClient.AccountOnChange(Object, ThisObject, Item);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure AccountStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashExpenseRevenueClient.AccountStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure AccountEditTextChange(Item, Text, StandardProcessing)
-	DocCashExpenseRevenueClient.AccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListOnStartEdit(Item, NewRow, Clone)
-	Return;
-	//DocCashExpenseRevenueClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
-EndProcedure
-
-&AtClient
-Procedure PaymentListSelection(Item, RowSelected, Field, StandardProcessing)
-	DocCashExpenseRevenueClient.PaymentListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocCashExpenseRevenueClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder,
-		Parameter);
-EndProcedure
-
-&AtClient
-Procedure PaymentListAfterDeleteRow(Item)
-	DocCashExpenseRevenueClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListDontCalculateRowOnChange(Item)
-	DocCashExpenseRevenueClient.PaymentListDontCalculateRowOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListTotalAmountOnChange(Item, AddInfo = Undefined) Export
-	DocCashExpenseRevenueClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashExpenseRevenueClient.PaymentListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
-	DocCashExpenseRevenueClient.PaymentListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListProfitLossCenterOnChange(Item)
-	Return;
-	//DocCashExpenseRevenueClient.PaymentListProfitLossCenterOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
 #EndRegion
 
-#Region Taxes
+#Region COMPANY
 
 &AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocCashExpenseRevenueClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtServer
-Function Taxes_CreateFormControls(AddInfo = Undefined) Export
-	Return TaxesServer.CreateFormControls_PaymentList(Object, ThisObject, AddInfo);
-EndFunction
-
-&AtClient
-Procedure PaymentListTaxAmountOnChange(Item)
-	DocCashExpenseRevenueClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region ItemCompany
-
-&AtClient
-Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
+Procedure CompanyOnChange(Item)
 	DocCashExpenseRevenueClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -204,7 +83,129 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorations
+#Region ACCOUNT
+
+&AtClient
+Procedure AccountOnChange(Item)
+	DocCashExpenseRevenueClient.AccountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AccountStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashExpenseRevenueClient.AccountStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AccountEditTextChange(Item, Text, StandardProcessing)
+	DocCashExpenseRevenueClient.AccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST
+
+&AtClient
+Procedure PaymentListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocCashExpenseRevenueClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure PaymentListAfterDeleteRow(Item)
+	DocCashExpenseRevenueClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#Region EXPENSE_TYPE
+
+&AtClient
+Procedure PaymentListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region FINANCIAL_MOVEMENT_TYPE
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region DONT_CALCULATE_ROW
+
+&AtClient
+Procedure PaymentListDontCalculateRowOnChange(Item)
+	DocCashExpenseRevenueClient.PaymentListDontCalculateRowOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region NET_AMOUNT
+
+&AtClient
+Procedure PaymentListNetAmountOnChange(Item)
+	DocCashExpenseRevenueClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TOTAL_AMOUNT
+
+&AtClient
+Procedure PaymentListTotalAmountOnChange(Item)
+	DocCashExpenseRevenueClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_AMOUNT
+
+&AtClient
+Procedure PaymentListTaxAmountOnChange(Item)
+	DocCashExpenseRevenueClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_RATE
+
+&AtClient
+Procedure TaxValueOnChange(Item) Export
+	DocCashExpenseRevenueClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -228,12 +229,7 @@ EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure ShowRowKey(Command)
-	DocumentsClient.ShowRowKey(ThisObject);
-EndProcedure
-
-#Region AddAttributes
+#Region ADD_ATTRIBUTES
 
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
@@ -246,7 +242,8 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 #EndRegion
-#Region ExternalCommands
+
+#Region EXTERNAL_COMMANDS
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -276,8 +273,13 @@ Procedure EditCurrencies(Command)
 EndProcedure
 
 &AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+&AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
-
+#EndRegion

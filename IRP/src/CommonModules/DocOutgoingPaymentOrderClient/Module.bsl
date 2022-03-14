@@ -1,52 +1,33 @@
-#Region ItemDescription
-
-Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
-	StandardProcessing = False;
-	CommonFormActions.EditMultilineText(Item.Name, Form);
-EndProcedure
-
-#EndRegion
-
 #Region FORM
 
-Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
+Procedure OnOpen(Object, Form, Cancel) Export
 	ViewClient_V2.OnOpen(Object, Form, "PaymentList");
-	
-	//DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
 #EndRegion
 
-Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
-	ViewClient_V2.PaymentListBeforeAddRow(Object, Form,  Cancel, Clone);
+#Region _DATE
+
+Procedure DateOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-Procedure PaymentListAfterDeleteRow(Object, Form, Item) Export
-	ViewClient_V2.PaymentListAfterDeleteRow(Object, Form);
-EndProcedure
+#EndRegion
 
-#Region ItemCompany
+#Region COMPANY
 
 Procedure CompanyOnChange(Object, Form, Item) Export
 	ViewClient_V2.CompanyOnChange(Object, Form, "PaymentList");
-	
-//	DefaultCustomParameters = New Structure("Company", Object.Company);
-//	CustomParameters = CatCashAccountsClient.DefaultCustomParameters(DefaultCustomParameters);
-//	CustomParameters.Insert("CashAccount", Object.Account);
-//	Object.Account = CatCashAccountsServer.GetCashAccountByCompany(Object.Company, CustomParameters);
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
 		DataCompositionComparisonType.NotEqual));
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
 		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -59,38 +40,10 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorationsEvents
-
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
-
-#Region ItemAccount
+#Region ACCOUNT
 
 Procedure AccountOnChange(Object, Form, Item) Export
 	ViewClient_V2.AccountOnChange(Object, Form, "PaymentList");
-	
-//	If ValueIsFilled(Object.Account) Then
-//		AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
-//		If ValueIsFilled(AccountCurrency) Then
-//			Object.Currency = AccountCurrency;
-//		EndIf;
-//	EndIf;
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -110,45 +63,52 @@ Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
-//Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
-//	Return New Structure();
-//EndFunction
-
 #EndRegion
 
-#Region FinancialMovementType
+#Region CURRENCY
 
-Procedure PaymentListFinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-Procedure PaymentListFinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	DocumentsClient.FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+Procedure CurrencyOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 #EndRegion
 
-#Region Partner
+#Region PLANNING_PERIOD
 
-Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
-	ViewClient_V2.PaymentListPartnerOnChange(Object, Form);
-	
-//	CurrentData = Form.Items.PaymentList.CurrentData;
-//
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	If ValueIsFilled(CurrentData.Partner) Then
-//		CurrentData.Payee = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payee);
-//		CurrentData.PartnerBankAccount = DocumentsServer.GetBankAccountByPartner(CurrentData.Partner,
-//			CurrentData.Payee, Object.Currency);
-//	EndIf;
+Procedure PlaningPeriodOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region STATUS
+
+Procedure StatusOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST
+
+Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.PaymentListBeforeAddRow(Object, Form,  Cancel, Clone);
+EndProcedure
+
+Procedure PaymentListAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.PaymentListAfterDeleteRow(Object, Form);
+EndProcedure
+
+#Region PAYMENT_LIST_COLUMNS
+
+#Region PARTNER
+
+Procedure PaymentListPartnerOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListPartnerOnChange(Object, Form, CurrentData);
 EndProcedure
 
 Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
 		DataCompositionComparisonType.NotEqual));
@@ -169,24 +129,19 @@ Procedure PaymentListPartnerEditTextChange(Object, Form, Item, Text, StandardPro
 		AdditionalParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payee);
 		AdditionalParameters.Insert("FilterPartnersByCompanies", True);
 	EndIf;
-	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure
 
 #EndRegion
 
-#Region Payee
+#Region PAYEE
 
-Procedure PaymentListPayeeOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-	If ValueIsFilled(CurrentData.Payee) Then
-		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
-	EndIf;
+Procedure PaymentListPayeeOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListLegalNameOnChange(Object, Form, CurrentData);
 EndProcedure
 
 Procedure PaymentListPayeeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
 		DataCompositionComparisonType.NotEqual));
@@ -196,7 +151,6 @@ Procedure PaymentListPayeeStartChoice(Object, Form, Item, ChoiceData, StandardPr
 		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
 	OpenSettings.FillingData = New Structure("Partner", Form.Items.PaymentList.CurrentData.Partner);
-
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -208,25 +162,56 @@ Procedure PaymentListPayeeEditTextChange(Object, Form, Item, Text, StandardProce
 		AdditionalParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
 		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
-	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure
 
 #EndRegion
 
-Procedure DateOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+#Region FINANCIAL_MOVEMENT_TYPE
+
+Procedure PaymentListFinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
-Procedure StatusOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+Procedure PaymentListFinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
-Procedure CurrencyOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+#Region DESCRIPTION
+
+Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
+	StandardProcessing = False;
+	CommonFormActions.EditMultilineText(Item.Name, Form);
 EndProcedure
 
-Procedure PlaningPeriodOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+#EndRegion
+
+#Region TITLE_DECORATIONS
+
+Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
 EndProcedure
 
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
+EndProcedure
+
+Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
+EndProcedure
+
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
+EndProcedure
+
+#EndRegion
+
+#EndRegion

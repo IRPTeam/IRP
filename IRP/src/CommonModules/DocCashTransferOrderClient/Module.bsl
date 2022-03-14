@@ -163,7 +163,7 @@ EndProcedure
 Procedure SenderOnChange(Object, Form, Item) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
 	SetSenderCurrency(Object, Form);
-	//ViewClient_V2.AccountSenerOnChange(Object, Form);
+	//ViewClient_V2.AccountSenderOnChange(Object, Form);
 EndProcedure
 
 Procedure SenderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

@@ -2342,6 +2342,191 @@ EndProcedure
 
 #EndRegion
 
+#Region TRANSACTIONS_LIST
+
+#Region TRANSACTIONS_LIST_PARTNER
+
+// Transactions.Partner.OnChange
+Procedure TransactionsPartnerOnChange(Parameters) Export
+	Binding = BindTransactionsPartner(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Transactions.Partner.Set
+Procedure SetTransactionsPartner(Parameters, Results) Export
+	Binding = BindTransactionsPartner(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Transactions.Partner.Get
+Function GetTransactionsPartner(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTransactionsPartner(Parameters).DataPath, _Key);
+EndFunction
+
+// Transactions.Partner.Bind
+Function BindTransactionsPartner(Parameters)
+	DataPath = "Transactions.Partner";
+	Binding = New Structure();
+	Binding.Insert("CreditNote",
+		"StepTransactionsChangeLegalNameByPartner,
+		|StepTransactionsChangeAgreementByPartner");
+	
+	Binding.Insert("DebitNote",
+		"StepTransactionsChangeLegalNameByPartner,
+		|StepTransactionsChangeAgreementByPartner");
+		
+	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+EndFunction
+
+// Transactions.Partner.ChangePartnerByLegalName.Step
+Procedure StepTransactionsChangePartnerByLegalName(Parameters, Chain) Export
+	Chain.ChangePartnerByLegalName.Enable = True;
+	Chain.ChangePartnerByLegalName.Setter = "SetTransactionsPartner";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+		Options.Partner   = GetTransactionsPartner(Parameters, Row.Key);
+		Options.LegalName = GetTransactionsLegalName(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepTransactionsChangePartnerByLegalName";
+		Chain.ChangePartnerByLegalName.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region TRANSACTIONS_LIST_AGREEMENT
+
+// Transactions.Agreement.OnChange
+Procedure TransactionsAgreementOnChange(Parameters) Export
+	Binding = BindTransactionsAgreement(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Transactions.Agreement.Set
+Procedure SetTransactionsAgreement(Parameters, Results) Export
+	Binding = BindTransactionsAgreement(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Transactions.Agreement.Get
+Function GetTransactionsAgreement(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTransactionsAgreement(Parameters).DataPath , _Key);
+EndFunction
+
+// Transactions.Agreement.Bind
+Function BindTransactionsAgreement(Parameters)
+	DataPath = "Transactions.Agreement";
+	Binding = New Structure();
+	Binding.Insert("CreditNote",
+		"StepTransactionsChangeCurrencyByAgreement");
+	
+	Binding.Insert("DebitNote",
+		"StepTransactionsChangeCurrencyByAgreement");
+	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+EndFunction
+
+// Transactions.Agreement.ChangeAgreementByPartner.Step
+Procedure StepTransactionsChangeAgreementByPartner(Parameters, Chain) Export
+	Chain.ChangeAgreementByPartner.Enable = True;
+	Chain.ChangeAgreementByPartner.Setter = "SetTransactionsAgreement";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+		Options.Partner       = GetTransactionsPartner(Parameters, Row.Key);
+		Options.Agreement     = GetTransactionsAgreement(Parameters, Row.Key);
+		Options.CurrentDate   = GetDate(Parameters);
+		Options.Key = Row.Key;
+		Options.StepName = "StepTransactionsChangeAgreementByPartner";
+		Chain.ChangeAgreementByPartner.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region TRANSACTIONS_LIST_LEGAL_NAME
+
+// Transactions.LegalName.OnChange
+Procedure TransactionsLegalNameOnChange(Parameters) Export
+	Binding = BindTransactionsLegalName(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Transactions.LegalName.Set
+Procedure SetTransactionsLegalName(Parameters, Results) Export
+	Binding = BindTransactionsLegalName(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Transactions.LegalName.Get
+Function GetTransactionsLegalName(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTransactionsLegalName(Parameters).DataPath , _Key);
+EndFunction
+
+// Transactions.LegalName.Bind
+Function BindTransactionsLegalName(Parameters)
+	DataPath = "Transactions.LegalName";
+	Binding = New Structure();
+	Binding.Insert("CreditNote",
+		"StepTransactionsChangePartnerByLegalName");
+	
+	Binding.Insert("DebitNote",
+		"StepTransactionsChangePartnerByLegalName");
+	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+EndFunction
+
+// Transactions.LegalName.ChangeLegalNameByPartner.Step
+Procedure StepTransactionsChangeLegalNameByPartner(Parameters, Chain) Export
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	Chain.ChangeLegalNameByPartner.Setter = "SetTransactionsLegalName";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+		Options.Partner   = GetTransactionsPartner(Parameters, Row.Key);
+		Options.LegalName = GetTransactionsLegalName(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepTransactionsChangeLegalNameByPartner";
+		Chain.ChangeLegalNameByPartner.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region TRANSACTIONS_LIST_CURRENCY
+
+// Transactions.Currency.Set
+Procedure SetTransactionsCurrency(Parameters, Results) Export
+	Binding = BindTransactionsCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Transactions.Currency.Get
+Function GetTransactionsCurrency(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTransactionsCurrency(Parameters).DataPath , _Key);
+EndFunction
+
+// Transactions.Currency.Bind
+Function BindTransactionsCurrency(Parameters)
+	DataPath = "Transactions.Currency";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Transactions.Currency.ChangeCurrencyByAgreement.Step
+Procedure StepTransactionsChangeCurrencyByAgreement(Parameters, Chain) Export
+	Chain.ChangeCurrencyByAgreement.Enable = True;
+	Chain.ChangeCurrencyByAgreement.Setter = "SetTransactionsCurrency";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeCurrencyByAgreementOptions();
+		Options.Agreement       = GetTransactionsAgreement(Parameters, Row.Key);
+		Options.CurrentCurrency = GetTransactionsCurrency(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepTransactionsChangeCurrencyByAgreement";
+		Chain.ChangeCurrencyByAgreement.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 #Region PAYMENT_LIST
 
 #Region PAYMENT_LIST_PARTNER

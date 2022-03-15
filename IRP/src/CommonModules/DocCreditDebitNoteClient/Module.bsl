@@ -1,39 +1,34 @@
-#Region FormEvents
 
-Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-EndProcedure
+#Region FORM
 
-Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
-	Return;
+Procedure OnOpen(Object, Form, Cancel) Export
+	ViewClient_V2.OnOpen(Object, Form, "Transactions");
 EndProcedure
 
 #EndRegion
 
-#Region _Date
+#Region _DATE
 
-Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+Procedure DateOnChange(Object, Form, Item) Export
+	ViewClient_V2.DateOnChange(Object, Form, "Transactions");
 EndProcedure
 
 #EndRegion
 
-#Region Company
+#Region COMPANY
 
-Procedure CompanyOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+Procedure CompanyOnChange(Object, Form, Item) Export
+	ViewClient_V2.CompanyOnChange(Object, Form, "Transactions");
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
 		DataCompositionComparisonType.NotEqual));
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
 		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -46,43 +41,31 @@ EndProcedure
 
 #EndRegion
 
-#Region Partner
+#Region TRANSACTIONS_LIST
 
-Procedure TransactionsPartnerOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.Transactions.CurrentData;
+Procedure TransactionsBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.TransactionsBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
 
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
+Procedure TransactionsAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.TransactionsAfterDeleteRow(Object, Form);
+EndProcedure
 
-	If ValueIsFilled(CurrentData.Partner) Then
-		CurrentData.LegalName = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.LegalName);
+#Region TRANSACTIONS_LIST_COLUMNS
 
-		AgreementParameters = New Structure();
-		AgreementParameters.Insert("Partner", CurrentData.Partner);
-		AgreementParameters.Insert("Agreement", CurrentData.Agreement);
-		AgreementParameters.Insert("CurrentDate", Object.Date);
-		AgreementParameters.Insert("ArrayOfFilters", New Array());
-		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-			ComparisonType.NotEqual));
-		NewAgreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
-		If Not CurrentData.Agreement = NewAgreement Then
-			CurrentData.Agreement = NewAgreement;
-			TransactionsAgreementOnChange(Object, Form, Undefined, AddInfo);
-		EndIf;
-	EndIf;
-	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, CurrentData);
+#Region PARTNER
+
+Procedure TransactionsPartnerOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TransactionsPartnerOnChange(Object, Form, CurrentData);
 EndProcedure
 
 Procedure TransactionsPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
 		DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FillingData = New Structure();
-
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -90,26 +73,15 @@ Procedure TransactionsPartnerEditTextChange(Object, Form, Item, Text, StandardPr
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	AdditionalParameters = New Structure();
-	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure
 
 #EndRegion
 
-#Region Agreement
+#Region AGREEMENT
 
-Procedure TransactionsAgreementOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.Transactions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
-
-	If CurrentData.Currency <> AgreementInfo.Currency Then
-		CurrentData.Currency = AgreementInfo.Currency;
-		TransactionsCurrencyOnChange(Object, Form, Undefined);
-	EndIf;
-	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, CurrentData);
+Procedure TransactionsAgreementOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TransactionsAgreementOnChange(Object, Form, CurrentData);
 EndProcedure
 
 Procedure TransactionsAgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -160,21 +132,10 @@ EndProcedure
 
 #EndRegion
 
-#Region LegalName
+#Region LEGAL_NAME
 
-Procedure TransactionsLegalNameOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.Transactions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	If ValueIsFilled(CurrentData.LegalName) Then
-		NewPartner = DocumentsServer.GetPartnerByLegalName(CurrentData.LegalName, CurrentData.Partner);
-		If NewPartner <> CurrentData.Partner Then
-			CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.LegalName, CurrentData.Partner);
-			TransactionsPartnerOnChange(Object, Form, Undefined);
-		EndIf;
-	EndIf;
-	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, CurrentData);
+Procedure TransactionsLegalNameOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TransactionsLegalNameOnChange(Object, Form, CurrentData);
 EndProcedure
 
 Procedure TransactionsLegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -207,33 +168,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Currency
-
-Procedure TransactionsCurrencyOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	Return;
-EndProcedure
-
-#EndRegion
-
-#Region Amount
-
-Procedure TransactionsAmountOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	Return;
-EndProcedure
-
-#EndRegion
-
-#Region Transactions
-
-Procedure TransactionsBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
-	Return;
-EndProcedure
-
-Procedure TransactionsOnActivateRow(Object, Form, Item, AddInfo = Undefined) Export
-	Return;
-EndProcedure
-
-#Region ExpenseType
+#Region EXPENSE_TYPE
 
 Procedure TransactionsExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	DocumentsClient.ExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
@@ -245,7 +180,7 @@ EndProcedure
 
 #EndRegion
 
-#Region RevenueType
+#Region REVENUE_TYPE
 
 Procedure TransactionsRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	DocumentsClient.RevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
@@ -259,7 +194,11 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemDescription
+#EndRegion
+
+#Region SERVICE
+
+#Region DESCRIPTION
 
 Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
 	StandardProcessing = False;
@@ -268,9 +207,7 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitle
-
-#Region GroupTitleDecorationsEvents
+#Region TITLE_DECORATIONS
 
 Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);

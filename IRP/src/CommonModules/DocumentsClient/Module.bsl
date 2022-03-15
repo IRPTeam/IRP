@@ -3273,7 +3273,7 @@ Procedure ShowHiddenTables(Object, Form) Export
 EndProcedure
 
 Procedure ShowRowKey(Form) Export
-	ItemNames = "ItemListKey, SpecialOffersKey,
+	ItemNames = "ItemListKey, SpecialOffersKey, TransactionsKey,
 				|ItemListRowsKey,
 				|ResultsTable,
 				|RowIDInfo,

@@ -1531,11 +1531,11 @@ Function BindDate(Parameters)
 
 	Binding.Insert("CashExpense",
 		"StepRequireCallCreateTaxesFormControls, 
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_WithoutAgreement");
 	
 	Binding.Insert("CashRevenue",
 		"StepRequireCallCreateTaxesFormControls, 
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_WithoutAgreement");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

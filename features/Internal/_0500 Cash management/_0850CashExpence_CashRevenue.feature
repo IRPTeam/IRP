@@ -36,6 +36,8 @@ Scenario: _085000 preparation (Cash expence and Cash revenue)
 		When Create catalog CashAccounts objects
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+		When Create document CashExpense objects
+		When Create document CashRevenue objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -45,6 +47,11 @@ Scenario: _085000 preparation (Cash expence and Cash revenue)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
+	* Post
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashExpense.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashRevenue.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I close all client application windows
 	
 
 
@@ -318,4 +325,35 @@ Scenario: _085008 check the availability of currency selection in Cash revenue (
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And in "PaymentList" table "Currency" attribute is available
 	
+Scenario: _085009 copy Cash expense and change date
+	* Select Cash expense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+	* Copy Cash expense
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I input "14.03.2022 00:00:00" text in the field named "Date"
+		And I click "Post" button
+		Then user message window does not contain messages
+
+Scenario: _085010 copy Cash revenue and change date
+	* Select Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+	* Copy Cash revenue
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		And I move to "Other" tab
+		And I move to "More" tab
+		And I input "14.03.2022 00:00:00" text in the field named "Date"
+		And I click "Post" button
+		Then user message window does not contain messages	
+		
+				
+
+		
 

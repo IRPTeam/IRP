@@ -1814,6 +1814,31 @@ EndProcedure
 
 #Region STORE
 
+#Region STORE_OBJECT_ATTR
+
+// StoreObjectAttr.OnChange
+Procedure StoreObjectAttrOnChange(Parameters) Export
+	ProceedPropertyBeforeChange_Form(Parameters);
+	AddViewNotify("OnSetStoreObjectAttrNotify", Parameters);
+	Binding = BindStoreObjectAttr(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// StoreObjectAttr.Set
+Procedure SetStoreObjectAttr(Parameters, Results) Export
+	Binding = BindStoreObjectAttr(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetStoreObjectAttrNotify");
+EndProcedure
+
+// StoreObjectAttr.Bind
+Function BindStoreObjectAttr(Parameters)
+	DataPath = "Store";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 // Store.OnChange
 Procedure StoreOnChange(Parameters) Export
 	ProceedPropertyBeforeChange_Form(Parameters);
@@ -3228,6 +3253,7 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("StockAdjustmentAsWriteOff", "StepItemListChangeItemKeyByItem");
 	Binding.Insert("SalesInvoice"             , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("PurchaseInvoice"          , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("InternalSupplyRequest"    , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3288,6 +3314,9 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepExtractDataItemKeysWithSerialLotNumbers,
 		|StepChangeUnitByItemKey");
+	
+	Binding.Insert("InternalSupplyRequest",
+		"StepChangeUnitByItemKey");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

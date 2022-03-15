@@ -1,4 +1,4 @@
-#Region FormEvents
+#Region FORM
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)

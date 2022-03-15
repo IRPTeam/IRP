@@ -1,4 +1,9 @@
-#Region FormEventHandlers
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocInternalSupplyRequestServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
@@ -6,8 +11,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocInternalSupplyRequestServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -23,16 +33,6 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	DocInternalSupplyRequestClient.OnOpen(Object, ThisObject, Cancel);
-EndProcedure
-
-&AtServer
-Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
-EndProcedure
-
-&AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtClient
@@ -51,23 +51,19 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		EndIf;
 	EndIf;
 EndProcedure
+
 #EndRegion
 
-&AtClient
-Procedure OpenPickupItems(Command)
-	DocInternalSupplyRequestClient.OpenPickupItems(Object, ThisObject, Command);
-EndProcedure
-
-#Region ItemCompany
-
-&AtClient
-Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-	DocInternalSupplyRequestClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
+#Region COMPANY
 
 &AtClient
 Procedure CompanyOnChange(Item)
 	DocInternalSupplyRequestClient.CompanyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocInternalSupplyRequestClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -77,33 +73,25 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemListItem
+#Region STORE
 
 &AtClient
-Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocInternalSupplyRequestClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	DocInternalSupplyRequestClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemOnChange(Item)
-	DocInternalSupplyRequestClient.ItemListItemOnChange(Object, ThisObject, Item);
+Procedure StoreOnChange(Item)
+	DocInternalSupplyRequestClient.StoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocInternalSupplyRequestClient.ItemListOnChange(Object, ThisObject, Item);
-EndProcedure
+#Region ITEM_LIST
 
 &AtClient
 Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
 	DocInternalSupplyRequestClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocInternalSupplyRequestClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
@@ -117,39 +105,78 @@ Procedure ItemListAfterDeleteRow(Item)
 	LockLinkedRows();
 EndProcedure
 
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
+
 &AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocInternalSupplyRequestClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+Procedure ItemListItemOnChange(Item)
+	DocInternalSupplyRequestClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure
+
+&AtClient
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocInternalSupplyRequestClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	DocInternalSupplyRequestClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
-	CurrentRow = Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	DocInternalSupplyRequestClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure StoreOnChange(Item)
-	DocInternalSupplyRequestClient.StoreOnChange(Object, ThisObject, Item);
-EndProcedure
+#EndRegion
+
+#Region QUANTITY
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item)
 	DocInternalSupplyRequestClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region UNIT
+
 &AtClient
 Procedure ItemListUnitOnChange(Item)
 	DocInternalSupplyRequestClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
-#Region GroupTitleDecorations
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocInternalSupplyRequestClient);
+	Str.Insert("Server", DocInternalSupplyRequestServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	DocInternalSupplyRequestClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -173,22 +200,21 @@ EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure SearchByBarcode(Command, Barcode = "")
-	DocInternalSupplyRequestClient.SearchByBarcode(Barcode, Object, ThisObject);
-EndProcedure
+#Region ADD_ATTRIBUTES
 
 &AtClient
-Procedure OpenScanForm(Command)
-	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
 EndProcedure
 
-&AtClient
-Procedure ShowRowKey(Command)
-	DocumentsClient.ShowRowKey(ThisObject);
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
-#Region ExternalCommands
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -203,21 +229,31 @@ EndProcedure
 
 #EndRegion
 
-#Region AddAttributes
+#Region COMMANDS
 
 &AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocInternalSupplyRequestClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
-&AtServer
-Procedure AddAttributesCreateFormControl()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocInternalSupplyRequestClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
 #EndRegion
 
-#Region LinkedDocuments
+#Region LINKED_DOCUMENTS
 
 &AtServer
 Procedure LockLinkedRows()
@@ -241,16 +277,6 @@ Procedure FromUnlockLinkedRows(Command)
 EndProcedure
 
 #EndRegion
-
-#Region Service
-
-&AtClient
-Function GetProcessingModule() Export
-	Str = New Structure;
-	Str.Insert("Client", DocInternalSupplyRequestClient);
-	Str.Insert("Server", DocInternalSupplyRequestServer);
-	Return Str;
-EndFunction
 
 &AtClient
 Procedure ShowHiddenTables(Command)

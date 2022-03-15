@@ -1207,7 +1207,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	Or TypeOf(Object.Ref) = Type("DocumentRef.StockAdjustmentAsSurplus")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.StockAdjustmentAsWriteOff")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice");
+	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.InternalSupplyRequest");
 	
 	If IsUsedNewFunctionality Then	
 		For Each ResultElement In Result Do
@@ -1350,21 +1351,22 @@ Function PickupItemsParameters(Object, Form)
 	ReturnValue = New Structure();
 
 	StoreArray = New Array();
-	Try
-		For Each Row In Object.ItemList Do
-			If ValueIsFilled(Row.Store) Then
-				If StoreArray.Find(Row.Store) = Undefined Then
-					StoreArray.Add(Row.Store);
-				EndIf;
+	StoreInItemList = False;
+	For Each Row In Object.ItemList Do
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Store") Then
+			StoreInItemList = True;
+			If ValueIsFilled(Row.Store) And StoreArray.Find(Row.Store) = Undefined Then
+				StoreArray.Add(Row.Store);
 			EndIf;
-		EndDo;
-
-		If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
-			StoreArray.Add(Form.CurrentStore);
 		EndIf;
-	Except
-		StoreArray = New Array();
-	EndTry;
+	EndDo;
+	
+	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
+		If ValueIsFilled(Object.Store) Then
+			StoreArray.Add(Object.Store);
+		EndIf;
+	EndIf;
+	
 	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
@@ -1373,12 +1375,6 @@ Function PickupItemsParameters(Object, Form)
 	Else
 		PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
 	EndIf;
-	//Try
-	//	PriceType = Form.CurrentPriceType;
-	//Except
-	//	PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
-	//EndTry;
-
 	ReturnValue.Insert("Stores", StoreArray);
 	ReturnValue.Insert("EndPeriod", EndPeriod);
 	ReturnValue.Insert("PriceType", PriceType);

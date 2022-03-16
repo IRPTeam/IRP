@@ -1111,6 +1111,54 @@ EndProcedure
 
 #EndRegion
 
+#Region _TRANSACTIONS_LIST
+
+Procedure TransactionsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Transactions", Cancel, Clone, CurrentData,
+		"TransactionsOnAddRowFormNotify", "TransactionsOnCopyRowFormNotify");
+	Form.Items.Transactions.CurrentRow = NewRow.GetID();
+	Form.Items.Transactions.ChangeRow();
+EndProcedure
+
+Procedure TransactionsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure TransactionsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure TransactionsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "Transactions");
+EndProcedure
+
+#EndRegion
+
+#Region _TRANSACTIONS_LIST_COLUMNS
+
+// Transactions.Partner
+Procedure TransactionsPartnerOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Transactions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
+	ControllerClientServer_V2.TransactionsPartnerOnChange(Parameters);
+EndProcedure
+
+// Transactions.Agreement
+Procedure TransactionsAgreementOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Transactions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
+	ControllerClientServer_V2.TransactionsAgreementOnChange(Parameters);
+EndProcedure
+
+// Transactions.LegalName
+Procedure TransactionsLegalNameOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Transactions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
+	ControllerClientServer_V2.TransactionsLegalNameOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region ACCOUNT_SENDER
 
 Procedure AccountSenderOnChange(Object, Form) Export

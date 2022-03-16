@@ -525,6 +525,55 @@
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
+          <name>TransactionsKey</name>
+          <id>302</id>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.Key</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>TransactionsKeyExtendedTooltip</name>
+            <id>304</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>TransactionsKeyContextMenu</name>
+            <id>303</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>TransactionsLineNumber</name>
           <id>38</id>
           <visible>true</visible>
@@ -817,10 +866,6 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Transactions.Currency</segments>
           </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>TransactionsCurrencyOnChange</name>
-          </handlers>
           <extendedTooltip>
             <name>TransactionsCurrencyExtendedTooltip</name>
             <id>58</id>
@@ -871,10 +916,6 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Transactions.Amount</segments>
           </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>TransactionsAmountOnChange</name>
-          </handlers>
           <extendedTooltip>
             <name>TransactionsAmountExtendedTooltip</name>
             <id>93</id>
@@ -1114,20 +1155,12 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>BeforeDeleteRow</event>
-          <name>TransactionsBeforeDeleteRow</name>
+          <event>BeforeAddRow</event>
+          <name>TransactionsBeforeAddRow</name>
         </handlers>
         <handlers>
-          <event>OnActivateRow</event>
-          <name>TransactionsOnActivateRow</name>
-        </handlers>
-        <handlers>
-          <event>OnStartEdit</event>
-          <name>TransactionsOnStartEdit</name>
-        </handlers>
-        <handlers>
-          <event>OnChange</event>
-          <name>TransactionsOnChange</name>
+          <event>AfterDeleteRow</event>
+          <name>TransactionsAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1706,23 +1739,6 @@
       <tablePath xsi:type="form:DataPath">
         <segments>Object.Transactions</segments>
       </tablePath>
-      <columns>
-        <name>BasisDocumentReadOnly</name>
-        <title>
-          <key>en</key>
-          <value>Basis document read only</value>
-        </title>
-        <id>12</id>
-        <valueType>
-          <types>Boolean</types>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
-      </columns>
     </additionalColumns>
   </attributes>
   <attributes>
@@ -1828,10 +1844,6 @@
     <commandBar/>
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
-    <handlers>
-      <event>AfterWrite</event>
-      <name>AfterWrite</name>
-    </handlers>
     <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>

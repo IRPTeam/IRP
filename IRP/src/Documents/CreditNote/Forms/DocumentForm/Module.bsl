@@ -1,10 +1,5 @@
-#Region FormEvents
 
-&AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	DocCreditDebitNoteServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
+#Region FORM
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
@@ -20,23 +15,24 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocCreditDebitNoteServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
-&AtClient
-Procedure OnOpen(Cancel, AddInfo = Undefined) Export
-	DocCreditDebitNoteClient.OnOpen(Object, ThisObject, Cancel);
-EndProcedure
-
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
-&AtClient
-Procedure AfterWrite(WriteParameters)
-	DocCreditDebitNoteClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	DocCreditDebitNoteServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+Procedure OnOpen(Cancel)
+	DocCreditDebitNoteClient.OnOpen(Object, ThisObject, Cancel);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -54,19 +50,19 @@ EndProcedure
 
 #EndRegion
 
-#Region _Date
+#Region _DATE
 
 &AtClient
-Procedure DateOnChange(Item, AddInfo = Undefined) Export
+Procedure DateOnChange(Item)
 	DocCreditDebitNoteClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
 
-#Region Company
+#Region COMPANY
 
 &AtClient
-Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
+Procedure CompanyOnChange(Item)
 	DocCreditDebitNoteClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -82,10 +78,24 @@ EndProcedure
 
 #EndRegion
 
-#Region Partner
+#Region TRANSACTIONS_LIST
 
 &AtClient
-Procedure TransactionsPartnerOnChange(Item, AddInfo = Undefined) Export
+Procedure TransactionsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocCreditDebitNoteClient.TransactionsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure TransactionsAfterDeleteRow(Item)
+	DocCreditDebitNoteClient.TransactionsAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#Region TRANSACTIONS_LIST_COLUMNS
+
+#Region PARTNER
+
+&AtClient
+Procedure TransactionsPartnerOnChange(Item)
 	DocCreditDebitNoteClient.TransactionsPartnerOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -101,10 +111,10 @@ EndProcedure
 
 #EndRegion
 
-#Region Agreement
+#Region AGREEMENT
 
 &AtClient
-Procedure TransactionsAgreementOnChange(Item, AddInfo = Undefined) Export
+Procedure TransactionsAgreementOnChange(Item)
 	DocCreditDebitNoteClient.TransactionsAgreementOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -120,10 +130,10 @@ EndProcedure
 
 #EndRegion
 
-#Region LegalName
+#Region LEGAL_NAME
 
 &AtClient
-Procedure TransactionsLegalNameOnChange(Item, AddInfo = Undefined) Export
+Procedure TransactionsLegalNameOnChange(Item)
 	DocCreditDebitNoteClient.TransactionsLegalNameOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -139,54 +149,11 @@ EndProcedure
 
 #EndRegion
 
-#Region Currency
-
-&AtClient
-Procedure TransactionsCurrencyOnChange(Item)
-	DocCreditDebitNoteClient.TransactionsCurrencyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region Amount
-
-&AtClient
-Procedure TransactionsAmountOnChange(Item)
-	DocCreditDebitNoteClient.TransactionsAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region Transaction
-
-&AtClient
-Procedure TransactionsOnStartEdit(Item, NewRow, Clone)
-	UserSettingsClient.TableOnStartEdit(Object, ThisObject, "Object.Transactions", Item, NewRow, Clone);
-EndProcedure
-
-&AtClient
-Procedure TransactionsOnChange(Item)
-	For Each Row In Object.Transactions Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure TransactionsBeforeDeleteRow(Item, Cancel)
-	DocCreditDebitNoteClient.TransactionsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
-EndProcedure
-
-&AtClient
-Procedure TransactionsOnActivateRow(Item)
-	DocCreditDebitNoteClient.TransactionsOnActivateRow(Object, ThisObject, Item);
-EndProcedure
+#Region EXPENSE_TYPE
 
 &AtClient
 Procedure TransactionsExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCreditDebitNoteClient.TransactionsExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
+	DocCreditDebitNoteClient.TransactionsExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -196,7 +163,13 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemDescription
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+#Region DESCRIPTION
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
@@ -205,7 +178,7 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorations
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -229,7 +202,21 @@ EndProcedure
 
 #EndRegion
 
-#Region ExternalCommands
+#Region ADD_ATTRIBUTES
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -240,20 +227,6 @@ EndProcedure
 &AtServer
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-#EndRegion
-
-#Region AddAttributes
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure AddAttributesCreateFormControl()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
 #EndRegion
@@ -281,3 +254,6 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+
+#EndRegion
+

@@ -1,17 +1,17 @@
-#Region FormEvents
+
+#Region FORM
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-		DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, Undefined);
 	EndIf;
+	ViewServer_V2.OnCreateAtServer(Object, Form, "Transactions");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, Undefined);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -19,12 +19,11 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, Undefined);
 EndProcedure
 
 #EndRegion
 
-#Region GroupTitle
+#Region TITLE_DECORATIONS
 
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
@@ -38,11 +37,7 @@ EndProcedure
 
 #EndRegion
 
-Function GetCompaniesByPartner(PartnerRef) Export
-	Return Catalogs.Partners.GetCompaniesForPartner(PartnerRef);
-EndFunction
-
-#Region ListFormEvents
+#Region LIST_FORM
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
@@ -50,17 +45,10 @@ EndProcedure
 
 #EndRegion
 
-#Region ChoiceFormEvents
+#Region CHOICE_FORM
 
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
 EndProcedure
 
 #EndRegion
-
-Function IsBasisDocumentReadOnly(ArrayOfAgreements) Export
-	For Each ItemOfAgreements In ArrayOfAgreements Do
-		ItemOfAgreements.ReadOnly = ItemOfAgreements.Agreement.ApArPostingDetail <> Enums.ApArPostingDetail.ByDocuments;
-	EndDo;
-	Return ArrayOfAgreements;
-EndFunction

@@ -257,7 +257,6 @@
   <commonModules>CommonModule.DocCashTransferOrderClient</commonModules>
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
-  <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>

@@ -132,7 +132,7 @@ Scenario: _020000 preparation (Loadinfo)
 		And I close all client application windows
 		
 			
-Scenario: _020001 check load currency rate
+Scenario: _020001 check load currency rate from tcmb.gov.tr
 	And I turn on asynchronous execution mode with interval "1"
 	* Open catalog currency
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
@@ -180,6 +180,17 @@ Scenario: _020001 check load currency rate
 		And in the table "Currencies" I click "Download" button
 		And Delay 40
 		And I close all client application windows
+	* Check currency downloads
+		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
+		And "List" table contains lines
+			| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |
+			| 'TRY'            | 'USD'           | 'Forex Seling'  | '1'            | '*'     |
+			| 'TRY'            | 'USD'           | 'Forex Seling'  | '1'            | '*'     |
+			| 'TRY'            | 'USD'           | 'Forex Buying'  | '1'            | '*'     |
+			| 'TRY'            | 'EUR'           | 'Forex Buying'  | '1'            | '*'     |
+		And I close all client application windows
+
+Scenario: _020002 check load currency rate from bank.gov.ua
 	* Upload currency rate Bank UA (from bank.gov.ua)
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
 		And I click "Integrations" button
@@ -217,14 +228,27 @@ Scenario: _020001 check load currency rate
 			| 'UAH'            | 'USD'           | 'Bank UA'       | '1'            | '*'     |
 			| 'UAH'            | 'EUR'           | 'Bank UA'       | '1'            | '*'     |
 			| 'UAH'            | 'TRY'           | 'Bank UA'       | '1'            | '*'     |
-			| 'TRY'            | 'USD'           | 'Forex Seling'  | '1'            | '*'     |
-			| 'TRY'            | 'USD'           | 'Forex Seling'  | '1'            | '*'     |
-			| 'TRY'            | 'USD'           | 'Forex Buying'  | '1'            | '*'     |
-			| 'TRY'            | 'EUR'           | 'Forex Buying'  | '1'            | '*'     |
+
+Scenario: _020003 delete integration settings
+	* Delete integration settings
+		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Forex Buying' |
+		And I activate field named "Description" in "List" table
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	* Open catalog currency
+		Given I open hyperlink "e1cib/list/Catalog.Currencies"
+	* Upload currency rate Forex Buying (from tcmb.gov.tr)
+		And I click "Integrations" button
+		And "IntegrationTable" table does not contain lines
+			| Integration settings |
+			| Forex Buying         |
 		And I close all client application windows
-
-
-
+		
+		
 Scenario: _999999 close TestClient session
 	Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 	And I go to line in "List" table

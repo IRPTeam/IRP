@@ -57,16 +57,19 @@
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb76684b9f6872' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'Размер'         | ''                 | ''               | ''               | '_aa59a52a77bd48d5af340a2ff98411a9' |
 		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb76684b9f6877' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'Цвет'           | ''                 | ''               | ''               | '_453185245f214e42a64fd25b1daf8614' |
 
-	Сценарий: Открытие формы списка "Items" 
+Сценарий: Открытие формы списка "Items" 
 
 	Дано Я открываю основную форму списка справочника "Items"
 	Если появилось предупреждение тогда
 		Тогда я вызываю исключение "Не удалось открыть форму справочника Items"
 	И Я закрываю текущее окно
 
-	Сценарий: Открытие формы объекта "Items"
+Сценарий: Открытие формы объекта "Items"
 
 	Дано Я открываю основную форму справочника "Items"
 	Если появилось предупреждение тогда
 		Тогда я вызываю исключение "Не удалось открыть форму справочника Items"
 	И Я закрываю текущее окно
+
+
+

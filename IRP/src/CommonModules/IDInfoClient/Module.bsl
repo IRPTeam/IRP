@@ -21,9 +21,10 @@ Procedure IDInfoOpeningNotify(Result, AddInfo = Undefined) Export
 	IDInfoTypeUniqueID = Right(AddInfo.Item.Name, StrLen(AddInfo.Item.Name) - 1);
 	IDInfoType = IDInfoServer.GetIDInfoRefByUniqueID(IDInfoTypeUniqueID);
 	Args = New Structure();
-	Args.Insert("IDInfoType", IDInfoType);
-	Args.Insert("CurrentValue", AddInfo.Form[AddInfo.Item.Name]);
-	Args.Insert("RelatedValues", IDInfoServer.GetRelatedIDInfoTypes(IDInfoType, AddInfo.Object.Ref));
+	Args.Insert("IDInfoType"    , IDInfoType);
+	Args.Insert("CurrentValue"  , AddInfo.Form[AddInfo.Item.Name]);
+	Args.Insert("Period"        , AddInfo.Form[AddInfo.Item.Name + "_Period"]);
+	Args.Insert("RelatedValues" , IDInfoServer.GetRelatedIDInfoTypes(IDInfoType, AddInfo.Object.Ref));
 
 	ArrayOfIDInfoTypes = New Array();
 	ArrayOfIDInfoTypes.Add(IDInfoType);
@@ -57,11 +58,12 @@ Procedure StartEditIDInfo(Form, Result, Parameters) Export
 		Return;
 	EndIf;
 	OpenFormArgs = AddDataProcServer.AddDataProcInfo(Result);
-	OpenFormArgs.Insert("CurrentValue", Parameters.CurrentValue);
-	OpenFormArgs.Insert("Country", Result.Country);
-	OpenFormArgs.Insert("RelatedValues", Parameters.RelatedValues);
-	OpenFormArgs.Insert("IDInfoType", Parameters.IDInfoType);
-	OpenFormArgs.Insert("Settings", Result.Settings);
+	OpenFormArgs.Insert("CurrentValue"  , Parameters.CurrentValue);
+	OpenFormArgs.Insert("Period"        , Parameters.Period);
+	OpenFormArgs.Insert("Country"       , Result.Country);
+	OpenFormArgs.Insert("RelatedValues" , Parameters.RelatedValues);
+	OpenFormArgs.Insert("IDInfoType"    , Parameters.IDInfoType);
+	OpenFormArgs.Insert("Settings"      , Result.Settings);
 
 	Parameters.Insert("Country", Result.Country);
 
@@ -90,8 +92,9 @@ Procedure NotificationProcessing(Form, Ref, EventName, Parameter, Source) Export
 			IDInfoType = IDInfoServer.GetIDInfoRefByUniqueID(IDInfoTypeUniqueID);
 			ArrayOfIDInfoTypes = New Array();
 			ArrayOfIDInfoTypes.Add(IDInfoType);
-
-			Form[AttributeName] = IDInfoServer.GetIDInfoTypeValue(Ref, ArrayOfIDInfoTypes);
+			Values = IDInfoServer.GetIDInfoTypeValue(Ref, ArrayOfIDInfoTypes);
+			Form[AttributeName] = Values.Value;
+			Form[AttributeName + "_Period"] = Values.Period;
 		EndDo;
 	EndIf;
 EndProcedure

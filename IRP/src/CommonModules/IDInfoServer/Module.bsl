@@ -23,7 +23,7 @@ Procedure AfterWriteAtServer(Form, CurrentObject, WriteParameters, AddInfo = Und
 		EndIf;
 
 		UpdateIDInfoTypeValue(CurrentObject.Ref, GetIDInfoRefByUniqueID(NameToUniqueId(AttributeName)),
-			Form[AttributeName], Undefined);
+			Form[AttributeName], Form[AttributeName + "_Period"], Undefined);
 	EndDo;
 EndProcedure
 
@@ -39,7 +39,10 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformat
 				Continue;
 			EndIf;
 			ArrayForDelete.Add(AttrName);
+			ArrayForDelete.Add(AttrName + "_Period");
 			NotSavedAttrValues.Insert(AttrName, Form[AttrName]);
+			NotSavedAttrValues.Insert(AttrName + "_Period", Form[AttrName + "_Period"]);
+			
 			Form.Items.Delete(Form.Items[AttrName]);
 		EndDo;
 		If ArrayForDelete.Count() Then
@@ -56,8 +59,8 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformat
 
 	For Each Row In ObjectAttributes Do
 		AttributeInfo = AttributeAndPropertyInfo(Row.IDInfoType, AddInfo);
-		Attributes.Add(New FormAttribute(AttributeInfo.Name, AttributeInfo.Type, , AttributeInfo.Title,
-			AttributeInfo.StoredData));
+		Attributes.Add(New FormAttribute(AttributeInfo.Name, AttributeInfo.Type, , AttributeInfo.Title, AttributeInfo.StoredData));
+		Attributes.Add(New FormAttribute(AttributeInfo.Name + "_Period", New TypeDescription("Date")));
 		FormAttributesInfo.Add(AttributeInfo);
 		ArrayOfNames.Add(AttributeInfo.Name);
 	EndDo;
@@ -70,15 +73,16 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformat
 	Query = New Query();
 	Query.Text =
 	"SELECT
-	|	IDInfo.Object,
-	|	IDInfo.IDInfoType,
-	|	IDInfo.Value,
-	|	IDInfo.Info,
-	|	IDInfo.Country
+	|	IDInfoSliceLast.Period,
+	|	IDInfoSliceLast.Object,
+	|	IDInfoSliceLast.IDInfoType,
+	|	IDInfoSliceLast.Value,
+	|	IDInfoSliceLast.Info,
+	|	IDInfoSliceLast.Country
 	|FROM
-	|	InformationRegister.IDInfo AS IDInfo
+	|	InformationRegister.IDInfo.SliceLast AS IDInfoSliceLast
 	|WHERE
-	|	IDInfo.Object = &Object";
+	|	IDInfoSliceLast.Object = &Object";
 	Query.SetParameter("Object", Form.Object.Ref);
 	QueryResult = Query.Execute();
 	IDInfoValueTable = QueryResult.Unload();
@@ -89,7 +93,11 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformat
 			Form[AttributeInfo.Name] = NotSavedAttrValues[AttributeInfo.Name];
 			Continue;
 		EndIf;
-		FillPropertyValues(Form, New Structure(AttributeInfo.Name, Row.Value));
+		StructureOfValues = New Structure();
+		StructureOfValues.Insert(AttributeInfo.Name, Row.Value);
+		StructureOfValues.Insert(AttributeInfo.Name + "_Period", Row.Period);
+		
+		FillPropertyValues(Form, StructureOfValues);
 	EndDo;
 
 	For Each AttrInfo In FormAttributesInfo Do
@@ -307,16 +315,18 @@ Function GetIDInfoTypeValues(Ref, ArrayOfIDInfoTypes = Undefined, AddInfo = Unde
 	|		ELSE TRUE
 	|	END
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	IDInfoRegister.Value AS Value,
+	|	IDInfoSliceLast.Value AS Value,
 	|	IDInfo.IDInfoType AS IDInfoType,
-	|	IDInfoRegister.Country AS Country
+	|	IDInfoSliceLast.Country AS Country,
+	|	IDInfoSliceLast.Period
 	|FROM
 	|	IDInfo AS IDInfo
-	|		LEFT JOIN InformationRegister.IDInfo AS IDInfoRegister
-	|		ON IDInfo.IDInfoType = IDInfoRegister.IDInfoType
-	|		AND (IDInfoRegister.Object = &Object)";
+	|		LEFT JOIN InformationRegister.IDInfo.SliceLast AS IDInfoSliceLast
+	|		ON IDInfo.IDInfoType = IDInfoSliceLast.IDInfoType
+	|		AND (IDInfoSliceLast.Object = &Object)";
 
 	Query.SetParameter("Object", Ref);
 	Query.SetParameter("SetRef", SetRef);
@@ -338,7 +348,10 @@ EndFunction
 Function GetIDInfoTypeValue(Ref, ArrayOfIDInfoTypes, AddInfo = Undefined) Export
 	Values = IDInfoServer.GetIDInfoTypeValues(Ref, ArrayOfIDInfoTypes);
 	If Values.Count() Then
-		Return Values[0].Value;
+		Result = New Structure();
+		Result.Insert("Period" , Values[0].Period);
+		Result.Insert("Value"  , Values[0].Value);
+		Return Result;
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -364,12 +377,15 @@ Procedure SaveIDInfoTypeValues(Ref, ValueTable, AddInfo = Undefined) Export
 	RecordSet.Write();
 EndProcedure
 
-Procedure UpdateIDInfoTypeValue(Ref, IDInfoType, Value, Country, AddInfo = Undefined) Export
-
+Procedure UpdateIDInfoTypeValue(Ref, IDInfoType, Value, Period, Country, AddInfo = Undefined) Export
+	
+	_Period = ?(ValueIsFilled(Period), Period, Date(2000, 01, 01));
+	
 	RecordSet = InformationRegisters.IDInfo.CreateRecordSet();
 	RecordSet.Filter.Object.Set(Ref);
 	RecordSet.Filter.IDInfoType.Set(IDInfoType);
-
+	RecordSet.Filter.Period.Set(_Period);
+	
 	tmpCountry = Undefined;
 
 	RecordSet.Read();
@@ -380,22 +396,29 @@ Procedure UpdateIDInfoTypeValue(Ref, IDInfoType, Value, Country, AddInfo = Undef
 		Record = RecordSet.Add();
 		tmpCountry = Country;
 	EndIf;
-	Record.Object = Ref;
+	Record.Object     = Ref;
 	Record.IDInfoType = IDInfoType;
-	Record.Value = Value;
-	Record.Country = tmpCountry;
-
+	Record.Period     = _Period;
+	Record.Value      = Value;
+	Record.Country    = tmpCountry;
+	
 	RecordSet.Write();
 EndProcedure
 
 Procedure EndEditIDInfo(Ref, Result, Parameters, AddInfo = Undefined) Export
-	UpdateIDInfoTypeValue(Ref, Parameters.IDInfoType, Result.Value, Parameters.Country);
+	Period = Undefined;
+	If Result.Property("Period") Then
+		Period = Result.Period;
+	EndIf;
+	UpdateIDInfoTypeValue(Ref, Parameters.IDInfoType, Result.Value, Period, Parameters.Country);
 	If IsUpdateIDInfoTypeValue(Result) Then
-		UpdateIDInfoTypeValue(Ref, Result.StructuredAddress, Result.StructuredAddressRef, Parameters.Country);
+		UpdateIDInfoTypeValue(Ref, Result.StructuredAddress, Result.StructuredAddressRef, Period, Parameters.Country);
 	EndIf;
 EndProcedure
 
 Function IsUpdateIDInfoTypeValue(Result)
-	Return Result.Property("StructuredAddressRef") And Result.Property("StructuredAddress") And ValueIsFilled(
-		Result.StructuredAddressRef) And ValueIsFilled(Result.StructuredAddress);
+	Return Result.Property("StructuredAddressRef") 
+		And Result.Property("StructuredAddress") 
+		And ValueIsFilled(Result.StructuredAddressRef) 
+		And ValueIsFilled(Result.StructuredAddress);
 EndFunction

@@ -156,7 +156,7 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 		EndIf;
 	ElsIf Data.Property("Description") Then
 		Presentation = String(Data.Description);
-	ElsIf Data.Property("FullDescription") Then
+	ElsIf Data.Property("FullDescription") And ValueIsFilled(Data.FullDescription) Then
 		Presentation = String(Data.FullDescription);
 	Else
 		Presentation = String(Data["Description_" + LocalizationReuse.UserLanguageCode()]);

@@ -358,8 +358,10 @@ EndFunction
 
 Procedure SaveIDInfoTypeValues(Ref, ValueTable, AddInfo = Undefined) Export
 
+	_Period = CurrentSessionDate();
 	RecordSet = InformationRegisters.IDInfo.CreateRecordSet();
 	RecordSet.Filter.Object.Set(Ref);
+	RecordSet.Filter.Period.Set(_Period);
 	ValueTable.Columns.Add("Object");
 	ValueTable.FillValues(Ref, "Object");
 
@@ -374,6 +376,9 @@ Procedure SaveIDInfoTypeValues(Ref, ValueTable, AddInfo = Undefined) Export
 	EndDo;
 
 	RecordSet.Load(ValueTable);
+	For Each Record In RecordSet Do
+		Record.Period = _Period;
+	EndDo;
 	RecordSet.Write();
 EndProcedure
 

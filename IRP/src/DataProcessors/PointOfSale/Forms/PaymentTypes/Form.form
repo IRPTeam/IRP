@@ -152,94 +152,6 @@
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
-  <items xsi:type="form:Decoration">
-    <name>DecorationTop</name>
-    <id>12</id>
-    <title>
-      <key>en</key>
-      <value>Decoration top</value>
-    </title>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <extendedTooltip>
-      <name>DecorationTopExtendedTooltip</name>
-      <id>14</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <contextMenu>
-      <name>DecorationTopContextMenu</name>
-      <id>13</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-    </contextMenu>
-    <autoMaxWidth>true</autoMaxWidth>
-    <height>2</height>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:PictureDecorationExtInfo">
-      <fileDragMode>AsFileRef</fileDragMode>
-    </extInfo>
-  </items>
-  <items xsi:type="form:Decoration">
-    <name>DecorationBottom</name>
-    <id>15</id>
-    <title>
-      <key>en</key>
-      <value>Decoration bottom</value>
-    </title>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <extendedTooltip>
-      <name>DecorationBottomExtendedTooltip</name>
-      <id>17</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <contextMenu>
-      <name>DecorationBottomContextMenu</name>
-      <id>16</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-    </contextMenu>
-    <autoMaxWidth>true</autoMaxWidth>
-    <height>2</height>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:PictureDecorationExtInfo">
-      <fileDragMode>AsFileRef</fileDragMode>
-    </extInfo>
-  </items>
   <items xsi:type="form:FormGroup">
     <name>PaymentPages</name>
     <id>18</id>
@@ -258,71 +170,6 @@
       <extendedTooltip>
         <name>PaymentGroupExtendedTooltip</name>
         <id>21</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <type>Page</type>
-      <extInfo xsi:type="form:PageGroupExtInfo">
-        <group>Vertical</group>
-        <showTitle>true</showTitle>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormGroup">
-      <name>PaymentTypesButtons</name>
-      <id>22</id>
-      <items xsi:type="form:FormGroup">
-        <name>GroupButtons</name>
-        <id>10</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <extendedTooltip>
-          <name>GroupButtonsExtendedTooltip</name>
-          <id>11</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <type>UsualGroup</type>
-        <extInfo xsi:type="form:UsualGroupExtInfo">
-          <group>HorizontalIfPossible</group>
-          <showLeftMargin>true</showLeftMargin>
-          <united>true</united>
-          <throughAlign>Auto</throughAlign>
-          <currentRowUse>Auto</currentRowUse>
-        </extInfo>
-      </items>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <title>
-        <key>en</key>
-        <value>Payment types</value>
-      </title>
-      <extendedTooltip>
-        <name>PaymentTypesButtonsExtendedTooltip</name>
-        <id>23</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -383,6 +230,10 @@
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
+  </handlers>
+  <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -480,6 +331,10 @@
   </attributes>
   <formCommands>
     <name>CloseButton</name>
+    <title>
+      <key>en</key>
+      <value>[Esc]</value>
+    </title>
     <id>1</id>
     <toolTip>
       <key>en</key>
@@ -496,7 +351,7 @@
         <name>CloseButton</name>
       </handler>
     </action>
-    <representation>Picture</representation>
+    <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -520,7 +375,7 @@
     <name>BackToSelectGroup</name>
     <title>
       <key>en</key>
-      <value>Back to select group</value>
+      <value>[0]</value>
     </title>
     <id>4</id>
     <use>
@@ -529,7 +384,29 @@
     <picture xsi:type="core:PictureRef">
       <picture>StdPicture.MoveLeft</picture>
     </picture>
-    <representation>Picture</representation>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>BackToSelectGroup</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>PayButtonGroup</name>
+    <title>
+      <key>en</key>
+      <value>Pay button group</value>
+    </title>
+    <id>5</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>PayButtonGroup</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <parameters>

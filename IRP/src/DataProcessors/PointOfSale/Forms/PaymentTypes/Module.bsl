@@ -9,8 +9,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	ButtonsArray = Parameters.PayButtons; // Array of See POSClient.ButtonSetings
 	CreateFormElement(ButtonsArray);
-
-	Items.PaymentPages.CurrentPage = Items.PaymentGroup;
+	
 	Items.BackToSelectGroup.Shortcut = New Shortcut(Key["Num0"]);
 	
 EndProcedure
@@ -75,6 +74,11 @@ Procedure CreateFormElement(ButtonsArray)
 		EndDo;
 		GroupIndex = GroupIndex + 1;
 	EndDo;
+	
+	If GroupIndex = 1 Then
+		Items.PaymentPages.CurrentPage = NewPageItem;
+	EndIf;
+	
 EndProcedure
 
 #EndRegion
@@ -117,6 +121,14 @@ EndProcedure
 
 &AtClient
 Procedure SetHotKey()
+	
+	For Each Page In Items.PaymentPages.ChildItems Do
+		For Each Item In Page.ChildItems Do
+			
+			Item.Shortcut = New Shortcut(Key.None);
+			
+		EndDo;	
+	EndDo;
 	
 	For Each Item In Items.PaymentPages.CurrentPage.ChildItems Do
 		

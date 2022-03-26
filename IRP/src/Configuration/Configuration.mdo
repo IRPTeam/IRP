@@ -409,6 +409,7 @@
   <commonModules>CommonModule.DocAdditionalRevenueAllocationServer</commonModules>
   <commonModules>CommonModule.DocMoneyTransferClient</commonModules>
   <commonModules>CommonModule.DocMoneyTransferServer</commonModules>
+  <commonModules>CommonModule.POSClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

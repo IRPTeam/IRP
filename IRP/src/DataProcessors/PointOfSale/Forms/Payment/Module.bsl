@@ -185,6 +185,7 @@ Procedure OpenPaymentForm(PaymentTypesTable, PaymentType)
 			NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 	Else
 		ButtonSetings = POSClient.ButtonSetings();
+		ButtonSetings.PaymentTypeEnum = PaymentType;
 		FillPropertyValues(ButtonSetings, PaymentTypesTable[0]);
 		ChoiceEndAdditionalParameters = New Structure();
 		FillPayments(ButtonSetings, ChoiceEndAdditionalParameters);
@@ -424,14 +425,15 @@ Function GetCashPaymentTypesValue()
 	
 	Query = New Query();
 	Query.Text = "SELECT
-				 |	PaymentTypes.Ref AS PaymentType,
-				 |	PaymentTypes.Description_en AS Description,
-				 |	&CashAccount AS Account
-				 |FROM
-				 |	Catalog.PaymentTypes AS PaymentTypes
-				 |WHERE
-				 |	PaymentTypes.Type = VALUE(Enum.PaymentTypes.Cash)
-				 |	AND NOT PaymentTypes.DeletionMark";
+	|	PaymentTypes.Ref AS PaymentType,
+	|	PaymentTypes.Description_en AS Description,
+	|	&CashAccount AS Account,
+	|	VALUE(Enum.PaymentTypes.Cash) AS PaymentTypeEnum
+	|FROM
+	|	Catalog.PaymentTypes AS PaymentTypes
+	|WHERE
+	|	PaymentTypes.Type = VALUE(Enum.PaymentTypes.Cash)
+	|	AND NOT PaymentTypes.DeletionMark";
 	Query.SetParameter("CashAccount", Object.Workstation.CashAccount);
 	Return Query.Execute().Unload();
 	

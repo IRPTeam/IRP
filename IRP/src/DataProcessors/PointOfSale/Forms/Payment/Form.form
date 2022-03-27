@@ -2399,6 +2399,23 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>PaymentTypeEnum</name>
+      <title>
+        <key>en</key>
+        <value>Payment type enum</value>
+      </title>
+      <id>29</id>
+      <valueType>
+        <types>EnumRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>BankPaymentTypes</name>

@@ -185,7 +185,7 @@ Procedure OpenPaymentForm(PaymentTypesTable, PaymentType)
 			NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 	Else
 		ButtonSetings = POSClient.ButtonSetings();
-		ButtonSetings.PaymentTypeEnum = PaymentType;
+
 		FillPropertyValues(ButtonSetings, PaymentTypesTable[0]);
 		ChoiceEndAdditionalParameters = New Structure();
 		FillPayments(ButtonSetings, ChoiceEndAdditionalParameters);

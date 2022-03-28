@@ -1,3 +1,5 @@
+// @strict-types
+
 Function ItemWidthSizeSettings() Export
 	Size = New Structure();
 	Size.Insert("Small", 5);

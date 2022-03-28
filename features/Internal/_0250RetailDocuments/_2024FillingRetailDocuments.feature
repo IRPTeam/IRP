@@ -3541,7 +3541,140 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		And I close all client application windows
 		
 
+Scenario: _0154191 create payment type group
+	* Open payment type catalog
+		Given I open hyperlink "e1cib/list/Catalog.PaymentTypes"
+	* Create payment type group
+		And I click "Create group" button
+		Then "Payment types (create folder)" window is opened
+		And I input "Bank 01" text in "ENG" field
+		And I click "Save and close" button
+		And I click "Create group" button
+		Then "Payment types (create folder)" window is opened
+		And I input "Bank 02" text in "ENG" field
+		And I click "Save and close" button
+	* Create 2 payment type in group
+		And I click "Create" button
+		And I input "Card 03" text in "ENG" field
+		And I select "Card" exact value from the drop-down list named "Type"
+		And I click "Save and close" button
+		Then "Payment types" window is opened
+		And I activate field named "Description" in "List" table
+		And in the table "List" I click the button named "ListContextMenuMoveItem"
+		Then "Payment types" window is opened
+		And I go to line in "List" table
+			| 'Reference' |
+			| 'Bank 02'   |
+		And I click the button named "FormChoose"
+		And I click "Create" button
+		And I input "Card 04" text in "ENG" field
+		And I select "Card" exact value from the drop-down list named "Type"
+		And I click "Save and close" button
+		Then "Payment types" window is opened
+		And I activate field named "Description" in "List" table
+		And in the table "List" I click the button named "ListContextMenuMoveItem"
+		Then "Payment types" window is opened
+		And I go to line in "List" table
+			| 'Reference' |
+			| 'Bank 02'   |
+		And I click the button named "FormChoose"
+		And I close all client application windows
+		
 
+Scenario: _0154138 create document Retail Sales Receipt from Point of sale (payment by card)
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.BankTerms"
+		And I go to line in "ItemsPickup" table
+			| 'Item'     |
+			| 'Bank term 01' |
+		And I select current line in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term)" window is opened
+		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
+		And I click choice button of "Payment type" attribute in "PaymentTypes" table
+		Then "Payment types" window is opened
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 03'     |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Account" field in "PaymentTypes" table
+		And I click choice button of "Account" attribute in "PaymentTypes" table
+		Then "Cash/Bank accounts" window is opened
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Percent" field in "PaymentTypes" table
+		And I input "1,00" text in "Percent" field of "PaymentTypes" table
+		And I finish line editing in "PaymentTypes" table
+		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
+		And I click choice button of "Payment type" attribute in "PaymentTypes" table
+		Then "Payment types" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 04'     |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Account" field in "PaymentTypes" table
+		And I click choice button of "Account" attribute in "PaymentTypes" table
+		Then "Cash/Bank accounts" window is opened
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Percent" field in "PaymentTypes" table
+		And I input "1,00" text in "Percent" field of "PaymentTypes" table
+		And I finish line editing in "PaymentTypes" table
+		And I click "Save and close" button		
+		And I close all client application windows
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"
+	* Add product (pick up)
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+			| 'Item'     |
+			| 'Trousers' |
+		And I activate field named "ItemsPickupItem" in "ItemsPickup" table
+		And I go to line in "ItemKeysPickup" table
+			| 'Presentation' |
+			| '38/Yellow' |
+		And I select current line in "ItemKeysPickup" table
+		And "ItemList" table became equal
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
+	* Payment (Card)
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+	* Select payment type from group
+		And I click "[1] Bank 02" button
+		And I click "[2] Card 04" button
+		Then "Payment: Point of sale" window is opened
+		And I click "2" button
+		And I click "0" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I click "[2] " button
+		And I click "[2] Card 02" button
+		Then "Payment: Point of sale" window is opened
+		And I click "2" button
+		And I click "0" button
+		And I click "0" button
+		And I click the button named "Enter"
+		And I close all client application windows
+		
+		
+						
+				
+		
+				
 
 		
 							

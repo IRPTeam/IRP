@@ -82,7 +82,8 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create document InventoryTransfer objects (use serial lot number)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
-
+	* Workstation
+		When create Workstation
 
 Scenario: _092001 checkbox Use serial lot number in the Item type
 	When checkbox Use serial lot number in the Item type Clothes

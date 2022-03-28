@@ -28,18 +28,18 @@ Scenario: _010004 create Contact info Type - Addresses
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
 		* Adding Plugin sessing 
-			And I select external file "#workingDir#/DataProcessor/InputAddress.epf"
+			And I select external file "#workingDir#/DataProcessor/ShippingAddress.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
-			And I input "ExternaInputAddress" text in "Name" field
+			And I input "ExternaShippingAddress" text in "Name" field
 			And I click Open button of the field named "Description_en"
-			And I input "ExternalInputAddress" text in the field named "Description_en"
-			And I input "ExternalInputAddress" text in the field named "Description_tr"
+			And I input "ExternalShippingAddress" text in the field named "Description_en"
+			And I input "ExternalShippingAddress" text in the field named "Description_tr"
 			And I click "Ok" button
 			And I click "Save and close" button
 			And Delay 5
 		* Check adding Plugin sessing
-			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalInputAddress"
+			Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalShippingAddress"
 	* Opening a form to add Plugin sessing
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 		And I click the button named "FormCreate"
@@ -62,7 +62,7 @@ Scenario: _010004 create Contact info Type - Addresses
 		Then "Plugins" window is opened
 		And I go to line in "List" table
 			| 'Description'                |
-			| 'ExternalInputAddress' |
+			| 'ExternalShippingAddress' |
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 5
@@ -246,7 +246,7 @@ Scenario: _010010 adding addresses to a Contact info type
 			Then "Plugins" window is opened
 			And I go to line in "List" table
 				| 'Description'                |
-				| 'ExternalInputAddress' |
+				| 'ExternalShippingAddress' |
 			And I select current line in "List" table
 			And I finish line editing in "ExternalDataProcess" table
 		* Adding Plugin sessing to specify the address for Turkey
@@ -261,7 +261,7 @@ Scenario: _010010 adding addresses to a Contact info type
 			Then "Plugins" window is opened
 			And I go to line in "List" table
 				| 'Description'                |
-				| 'ExternalInputAddress' |
+				| 'ExternalShippingAddress' |
 			And I select current line in "List" table
 			And I finish line editing in "ExternalDataProcess" table
 			And I click "Save and close" button
@@ -295,7 +295,7 @@ Scenario: _010010 adding addresses to a Contact info type
 			Then "Plugins" window is opened
 			And I go to line in "List" table
 				| 'Description'                |
-				| 'ExternalInputAddress' |
+				| 'ExternalShippingAddress' |
 			And I select current line in "List" table
 			And I finish line editing in "ExternalDataProcess" table
 		* Adding Plugin sessing to specify the address for Turkey
@@ -310,7 +310,7 @@ Scenario: _010010 adding addresses to a Contact info type
 			Then "Plugins" window is opened
 			And I go to line in "List" table
 				| 'Description'                |
-				| 'ExternalInputAddress' |
+				| 'ExternalShippingAddress' |
 			And I select current line in "List" table
 			And I finish line editing in "ExternalDataProcess" table
 			And I click "Save and close" button
@@ -801,6 +801,8 @@ Scenario: _010014 filling phones for partners
 		And I click Open button of "Partner phone" field
 		And I input "+305500077043" text in "Phone" field
 		And I click "Ok" button
+		And I click "Save" button
+		Then the form attribute named "_Phone_2" became equal to "+305500077043"		
 		And I click "Save and close" button
 	
 	
@@ -847,18 +849,23 @@ Scenario: _010016 address structure input
 		| Country |
 		| Ukraine |
 		And I select current line in "CountryTable" table
-		And I input "Country" text in "InputLevel_1" field
-		And I click the button named "ButtonAdd_2"
-		And I input "Region" text in "InputLevel_2" field
-		And I click the button named "ButtonAdd_3"
-		And I input "City" text in "InputLevel_3" field
-		And I click the button named "ButtonAdd_4"
-		And I input "Street" text in "InputLevel_4" field
-		And I input "Ukraine" text in "InputValue_1" field
-		And I input "Odesska oblast" text in "InputValue_2" field
-		And I input "Odessa" text in "InputValue_3" field
-		And I input "Kanatna" text in "InputValue_4" field
-		And I click "Ok" button
+		// And I input "Country" text in "InputLevel_1" field
+		// And I click the button named "ButtonAdd_2"
+		// And I input "Region" text in "InputLevel_2" field
+		// And I click the button named "ButtonAdd_3"
+		// And I input "City" text in "InputLevel_3" field
+		// And I click the button named "ButtonAdd_4"
+		// And I input "Street" text in "InputLevel_4" field
+		// And I input "Ukraine" text in "InputValue_1" field
+		// And I input "Odesska oblast" text in "InputValue_2" field
+		// And I input "Odessa" text in "InputValue_3" field
+		// And I input "Kanatna" text in "InputValue_4" field
+		Then "Shipping address" window is opened
+		And I input "25.03.2022" text in the field named "Period"
+		And I input "Ukraine, Odessa, Kanatna 5" text in "Description en" field
+		And I input "Украина, Одесса, Канатная 5" text in "Description ru" field
+		And I input "Ukraine, Odessa, Kanatna 5" text in "Description tr" field
+		And I click the button named "Ok"		
 		And I click "Save and close" button
 		And Delay 5
 	* Check to save the address structure for Billing address (Company)
@@ -872,21 +879,14 @@ Scenario: _010016 address structure input
 		| Country |
 		| Ukraine |
 		And I select current line in "CountryTable" table
-		And I select from "InputLevel_1" drop-down list by "C" string
-		And I click the button named "ButtonAdd_2"
-		And I click the button named "ButtonAdd_3"
-		And I click the button named "ButtonAdd_4"
-		And I input "Bunina" text in "InputValue_4" field
-		Then the form attribute named "InputLevel_1" became equal to "Country"
-		Then the form attribute named "InputValue_1" became equal to "Ukraine"
-		Then the form attribute named "InputLevel_2" became equal to "Region"
-		Then the form attribute named "InputValue_2" became equal to "Odesska oblast"
-		Then the form attribute named "InputLevel_3" became equal to "City"
-		Then the form attribute named "InputValue_3" became equal to "Odessa"
-		Then the form attribute named "InputLevel_4" became equal to "Street"
-		Then the form attribute named "InputValue_4" became equal to "Bunina"
-		And I click "Ok" button
+		Then "Shipping address" window is opened
+		And I input "25.03.2022" text in the field named "Period"
+		And I input "Ukraine, Odessa, Bunina 5" text in "Description en" field
+		And I input "Украина, Одесса, Бунина 5" text in "Description ru" field
+		And I input "Ukraine, Odessa, Bunina 5" text in "Description tr" field
+		And I click the button named "Ok"		
 		And I click "Save and close" button
+		
 
 
 // Scenario: _010017 gps coordinates on the map for clients from different countries and filling in the address from Google map

@@ -19,7 +19,7 @@ Function FindCatalogItem(Deep, Parent, Level, Value, Country, IDInfoType)
 	|	AND IDInfoAddresses.Country = &Country
 	|	AND IDInfoAddresses.Parent = &Parent
 	|	AND IDInfoAddresses.Level = &Level
-	|	AND IDInfoAddresses.Description = &Value
+	|	AND IDInfoAddresses.Description_en = &Value
 	|	AND IDInfoAddresses.Owner = &Owner
 	|	AND NOT IDInfoAddresses.DeletionMark";
 
@@ -48,7 +48,12 @@ Function CreateCatalogItem(Parent, Level, Value, Country, IDInfoType)
 	NewItem.Owner = IDInfoType;
 	NewItem.Parent = Parent;
 	NewItem.Level = Level;
-	NewItem.Description = Value;
+	If TypeOf(Value) = Type("Structure") Then
+		FillPropertyValues(NewItem, Value);
+	Else
+		NewItem.Description_en = Value;
+	EndIf;
+
 	NewItem.Country = Country;
 	Try
 		NewItem.Write();
@@ -69,9 +74,24 @@ Function WriteDataToCatalog(Values, Country, IDInfoType) Export
 	BeginTransaction(DataLockControlMode.Managed);
 	Try
 		For Each Row In Values Do
-			CatalogItem = FindCatalogItem(Deep, CurrentParent, Row.Level, Row.Value, Country, IDInfoType);
+			If CommonFunctionsClientServer.ObjectHasProperty(Row, "Value") Then
+				CatalogItem = FindCatalogItem(Deep, CurrentParent, Row.Level, Row.Value, Country, IDInfoType);
+			Else
+				CatalogItem = FindCatalogItem(Deep, CurrentParent, Row.Description_en, Row.Description_en, Country, IDInfoType);
+			EndIf;
+			
 			If Not CatalogItem.Success Then
-				CatalogItem = CreateCatalogItem(CurrentParent, Row.Level, Row.Value, Country, IDInfoType);
+				If CommonFunctionsClientServer.ObjectHasProperty(Row, "Value") Then
+					CatalogItem = CreateCatalogItem(CurrentParent, Row.Level, Row.Value, Country, IDInfoType);
+				Else
+					DescriptionStructure = New Structure();
+					DescriptionStructure.Insert("Description_en"   , Row.Description_en);
+					DescriptionStructure.Insert("Description_ru"   , Row.Description_ru);
+					DescriptionStructure.Insert("Description_tr"   , Row.Description_tr);
+					DescriptionStructure.Insert("Description_hash" , Row.Description_hash);
+					CatalogItem = CreateCatalogItem(CurrentParent, Row.Level, DescriptionStructure, Country, IDInfoType);
+				EndIf;
+				
 				If Not CatalogItem.Success Then
 					Raise CatalogItem.ErrorMessage;
 				Else

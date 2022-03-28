@@ -187,7 +187,6 @@ Function FieldsListForDescriptions(Val Source) Export
 		Return Fields;
 	ElsIf Source = "CatalogManager.IDInfoAddresses" Then
 		Fields.Add("FullDescription");
-		Return Fields;
 	ElsIf Not LocalizationReuse.UseMultiLanguage(Source) Then
 		Fields.Add("Description");
 		Return Fields;

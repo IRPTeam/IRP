@@ -3581,7 +3581,7 @@ Scenario: _0154191 create payment type group
 		And I close all client application windows
 		
 
-Scenario: _0154138 create document Retail Sales Receipt from Point of sale (payment by card)
+Scenario: _0154192 create document Retail Sales Receipt from Point of sale (payment by card)
 	* Preparation
 		Given I open hyperlink "e1cib/list/Catalog.BankTerms"
 		And I go to line in "ItemsPickup" table

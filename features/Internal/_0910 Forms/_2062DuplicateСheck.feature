@@ -30,12 +30,12 @@ Scenario: _206200 preparation
 				| 'Test02'  |
 		And I close all client application windows
 	* Create test Addresses hierarchy element
-	 	Given I open hyperlink "e1cib/list/Catalog.IDInfoAddresses"
-		 If "List" table does not contain lines Then
+		Given I open hyperlink "e1cib/list/Catalog.IDInfoAddresses"
+		If "List" table does not contain lines Then
 			| 'Description' |
 			| 'Test02'  |
 			And I click the button named "FormCreate"
-			And I input "Test02" text in "Description" field
+			And I input "Test02" text in "ENG" field
 			And I click Select button of "Owner" field
 			And I click the button named "FormCreate"
 			And I input "Test02" text in "ENG" field
@@ -127,14 +127,14 @@ Scenario: _206205 duplicate check (not multi language catalog)
 	* Duplicate check (Description)
 		Given I open hyperlink "e1cib/list/Catalog.IDInfoAddresses"
 		And I click the button named "FormCreate"
-		And I input "Test02" text in "Description" field
+		And I input "Test02" text in "ENG" field
 		And I click Select button of "Owner" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Test02'      |
 		And I select current line in "List" table		
 		And I click "Save and close" button
-		Then I wait that in user messages the 'Description "Test02" is already in use.' substring will appear in "10" seconds
+		Then I wait that in user messages the 'Description (en) "Test02" is already in use.' substring will appear in "10" seconds
 		And I close all client application windows
 		
 

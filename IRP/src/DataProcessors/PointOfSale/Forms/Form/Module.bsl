@@ -366,7 +366,7 @@ Procedure UpdateHTMLPictures() Export
 	EndIf;
 
 	ItemPicture = GetURL(GetPictureFile(CurrentRow.Item), "Preview");
-	Message(ItemPicture);
+
 EndProcedure
 
 &AtServerNoContext

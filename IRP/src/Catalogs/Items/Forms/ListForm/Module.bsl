@@ -33,19 +33,15 @@ EndProcedure
 
 &AtClient
 Async Procedure PictureViewerHTMLDocumentComplete(Item)
-//	If HTMLWindowPictures = Undefined Then
-		HTMLWindowPictures = PictureViewerClient.InfoDocumentComplete(Item);
-		HTMLWindowPictures.displayTarget("toolbar", False);
-		UpdateHTMLPictures();
-//	EndIf;
+	HTMLWindowPictures = PictureViewerClient.InfoDocumentComplete(Item);
+	HTMLWindowPictures.displayTarget("toolbar", False);
+	UpdateHTMLPictures();
 EndProcedure
 
 &AtClient
 Async Procedure AddAttributesHTMLDocumentComplete(Item)
-	If HTMLWindowAddAttributes = Undefined Then
-		HTMLWindowAddAttributes = PictureViewerClient.InfoDocumentComplete(Item);
-		UpdateHTMLAddAttributes();
-	EndIf;
+	HTMLWindowAddAttributes = PictureViewerClient.InfoDocumentComplete(Item);
+	UpdateHTMLAddAttributes();
 EndProcedure
 
 &AtClient

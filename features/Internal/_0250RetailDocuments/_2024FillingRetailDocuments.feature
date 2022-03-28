@@ -532,7 +532,7 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 	* Payment (Card)
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
-		And I click "Card 01" button
+		And I click "[1] Card 01" button		
 		And I click "2" button
 		And I click "0" button
 		And I click "5" button
@@ -791,7 +791,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "8" button
 			And I click "8" button
 			And I click "Card (*)" button
-			And I click "Card 01" button
+			And I click "[1] Card 01" button
 			And I click "1" button
 			And I click "0" button
 			And I click "0" button
@@ -878,7 +878,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "Card 01" button
+				And I click "[1] Card 01" button
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -898,7 +898,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "Card 01" button
+				And I click "[1] Card 01" button
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -921,7 +921,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "Card 01" button
+				And I click "[1] Card 01" button
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -3399,21 +3399,21 @@ Scenario: _0154175 check change amount in POS
 		And I input "2202283739" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Quantity'  | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '1,000'     | '550,00' | ''              | '550,00'       |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
 		And I click "Search by barcode (F7)" button
 		And I input "2202283713" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''              | '550,00'       |
-			| 'Dress' | 'S/Yellow' | '1,000'    | '550,00' | ''              | '550,00'       |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
+			| 'Dress' | 'S/Yellow' | '1,000'    | '550,00' | ''       | '550,00' |
 	* Change AMOUNT and check amount recalculate
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price'  | 'Quantity'  | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '550,00' | '1,000'     | '550,00'       |
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Total'  |
+			| 'Dress' | 'L/Green'  | '550,00' | '1,000'    | '550,00' |
 		And I select current line in "ItemList" table
-		And I input "500,00" text in "Total amount" field of "ItemList" table
+		And I input "500,00" text in "Total" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 050"
 		And Delay 2

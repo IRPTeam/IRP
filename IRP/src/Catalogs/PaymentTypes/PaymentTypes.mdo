@@ -77,6 +77,36 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="252c4285-2a08-4947-bc74-cfebb19f9dd1">
+    <name>Icon</name>
+    <synonym>
+      <key>en</key>
+      <value>Icon</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="43d9f2fa-b9ba-4d65-bd4c-eb566d2f13a7">
+    <name>isIconSet</name>
+    <synonym>
+      <key>en</key>
+      <value>Is icon set</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="a5dcefe8-e456-4d84-8df3-c135d0762863">
     <producedTypes>
       <objectType typeId="b0f43e36-7c8a-4ed3-994d-30250d4960dc" valueTypeId="c4c4958d-f3f1-4fbb-8562-3481507c86a9"/>

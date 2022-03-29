@@ -39,26 +39,24 @@ Procedure CreateFormElement(ButtonsArray)
 	EndDo;
 
 	GroupIndex = 0;
+
 	For Each PayGroup In PayButtonsParent Do
 		
 		PayButtonsIntoGroup = PayGroup.Value; // Array of See POSClient.ButtonSetings
+		PaymentTypeGroup = PayGroup.Key; // CatalogRef.PaymentTypes
 		
 		ButtonName = StrTemplate("Page_%1", GroupIndex);
-		NewCommand = Commands.Add(ButtonName);
-		NewCommand.Action = "PayButtonGroup";
-		NewCommand.Title = String(PayGroup.Key);
-			
-		NewItem = Items.Add(ButtonName, Type("FormButton"), Items.PaymentGroup);
-		NewItem.Type = FormButtonType.UsualButton;
-		NewItem.Title = "[" + String(GroupIndex + 1) + "] " + String(PayGroup.Key) + ?(PayButtonsIntoGroup.Count() > 1, " >", "");
-		NewItem.CommandName = NewCommand.Name;
-		NewItem.Font = StyleFonts.ExtraLargeTextFont;
-		NewItem.HorizontalStretch = True;
 		
+		Description = "[" + String(GroupIndex + 1) + "] " + String(PaymentTypeGroup) 
+		+ ?(PayButtonsIntoGroup.Count() > 1, " >", "");
+		
+		DrawButton(PaymentTypeGroup, ButtonName, Description, Items.PaymentGroup, "PayButtonGroup");
+		
+				
 		NewPageItem = Items.Add("ButtonPage_" + GroupIndex, Type("FormGroup"), Items.PaymentPages);
 		NewPageItem.Type = FormGroupType.Page;
-		NewPageItem.Title = String(PayGroup.Key);
-		
+		NewPageItem.Title = String(PaymentTypeGroup);
+		NewPageItem.Visible = False;
 		
 		For Index = 0 To PayButtonsIntoGroup.UBound() Do
 			ButtonSettings = PayButtonsIntoGroup[Index]; 
@@ -67,18 +65,13 @@ Procedure CreateFormElement(ButtonsArray)
 			NewPayment = LinkedPayButtons.Add();
 			NewPayment.ButtonName = ButtonName;
 			FillPropertyValues(NewPayment, ButtonSettings);
-
-			NewCommand = Commands.Add(ButtonName);
-			NewCommand.Action = "PayButtonPress";
-			NewCommand.Title = String(ButtonSettings.PaymentType);
 			
-			NewItem = Items.Add(ButtonName, Type("FormButton"), NewPageItem);
-			NewItem.Type = FormButtonType.UsualButton;
-			NewItem.Title = "[" + String(Index + 1) + "] " + String(ButtonSettings.PaymentType);
-			NewItem.CommandName = NewCommand.Name;
-			NewItem.Font = StyleFonts.ExtraLargeTextFont;
-			NewItem.HorizontalStretch = True;
+			Description = "[" + String(Index + 1) + "] " + String(ButtonSettings.PaymentType);
+			
+			DrawButton(PaymentTypeGroup, ButtonName, Description, NewPageItem, "PayButtonPress");
+			
 		EndDo;
+		
 		GroupIndex = GroupIndex + 1;
 	EndDo;
 	
@@ -88,14 +81,42 @@ Procedure CreateFormElement(ButtonsArray)
 	
 EndProcedure
 
+&AtServer
+Procedure DrawButton(PaymentTypeGroup, ButtonName, Description, Page, Action)
+
+	NewAttributeArray = New Array;
+	NewAttributeArray.Add(New FormAttribute(ButtonName, New TypeDescription("String")));
+	ChangeAttributes(NewAttributeArray);	
+	
+	
+	NewDecoration = Items.Add(ButtonName, Type("FormField"), Page);
+	NewDecoration.Type = FormFieldType.PictureField;
+	NewDecoration.DataPath = ButtonName;
+	NewDecoration.SetAction("Click", Action);
+	NewDecoration.Hyperlink = True;
+	NewDecoration.TitleLocation = FormItemTitleLocation.None; 
+	NewDecoration.Height = 2;
+	NewDecoration.VerticalStretch = False;
+	NewDecoration.NonselectedPictureText = Description;
+	NewDecoration.ToolTip = Description;
+		
+	ThisObject[ButtonName] = GetURL(PaymentTypeGroup, "Icon");
+EndProcedure
+
 #EndRegion
 
 #Region Commands
 
+// Pay button press.
+// 
+// Parameters:
+//  Item - FormCommand - Item
+//  StandardProcessing - Boolean - Standard processing
 &AtClient
-Procedure PayButtonPress(Command)
+Procedure PayButtonPress(Item, StandardProcessing)
 	
-	ReturnValueAndCloseForm(Command.Name);
+	StandardProcessing = False;
+	ReturnValueAndCloseForm(Item.Name);
 	
 EndProcedure
 
@@ -109,13 +130,20 @@ Procedure ReturnValueAndCloseForm(Val CommandName)
 	Close(Result);
 EndProcedure
 
+// Pay button group.
+// 
+// Parameters:
+//  Item - FormCommand - Item
+//  StandardProcessing - Boolean - Standard processing
 &AtClient
-Procedure PayButtonGroup(Command)
-	ButtonPage = Items.Find("Button" + Command.Name);
+Procedure PayButtonGroup(Item, StandardProcessing)
+	StandardProcessing = False;
+	
+	ButtonPage = Items.Find("Button" + Item.Name);
 	If ButtonPage.ChildItems.Count() = 1 Then
-		ReturnValueAndCloseForm(ButtonPage.ChildItems[0].CommandName)
+		ReturnValueAndCloseForm(ButtonPage.ChildItems[0].Name)
 	Else
-		Items.PaymentPages.CurrentPage = Items.Find("Button" + Command.Name);
+		Items.PaymentPages.CurrentPage = Items.Find("Button" + Item.Name);
 		SetHotKey();
 	EndIf;
 	
@@ -144,7 +172,8 @@ Procedure SetHotKey()
 			
 			Item.Shortcut = New Shortcut(Key.None);
 			
-		EndDo;	
+		EndDo;
+		Page.Visible = Page = Items.PaymentPages.CurrentPage;
 	EndDo;
 	
 	For Each Item In Items.PaymentPages.CurrentPage.ChildItems Do

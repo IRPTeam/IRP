@@ -15,6 +15,7 @@
         <id>19</id>
         <titleFont xsi:type="core:FontRef">
           <font>Style.ExtraLargeTextFont</font>
+          <height>0.0</height>
         </titleFont>
         <visible>true</visible>
         <userVisible>
@@ -58,8 +59,7 @@
           <autoMaxHeight>true</autoMaxHeight>
           <horizontalStretch>false</horizontalStretch>
           <font xsi:type="core:FontRef">
-            <font>Style.NormalTextFont</font>
-            <height>20.0</height>
+            <font>Style.ExtraLargeTextFont</font>
           </font>
         </extInfo>
       </items>
@@ -2068,7 +2068,6 @@
     <name>FillCheckProcessingAtServer</name>
   </handlers>
   <windowOpeningMode>LockWholeInterface</windowOpeningMode>
-  <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
   <autoFillCheck>true</autoFillCheck>

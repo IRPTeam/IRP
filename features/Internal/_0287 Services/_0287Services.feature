@@ -689,7 +689,7 @@ Scenario: _029150 create Retail return receipt for service and product
 			| 'Register  "R3050 Retail cash"' | ''       | ''          | ''           | ''             | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
 			| ''                              | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
 			| ''                              | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
-			| ''                              | '*'      | '-450'      | ''           | 'Main Company' | '*'       | 'Card 02'      | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
+			| ''                              | '*'      | '-450'      | ''           | 'Main Company' | '*'       | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
 	
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button

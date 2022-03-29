@@ -3545,49 +3545,41 @@ Scenario: _0154191 create payment type group
 	* Open payment type catalog
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTypes"
 	* Create payment type group
-		And I click "Create group" button
-		Then "Payment types (create folder)" window is opened
+		And I click "Create" button
 		And I input "Bank 01" text in "ENG" field
 		And I click "Save and close" button
-		And I click "Create group" button
-		Then "Payment types (create folder)" window is opened
+		And I click "Create" button
 		And I input "Bank 02" text in "ENG" field
 		And I click "Save and close" button
 	* Create 2 payment type in group
 		And I click "Create" button
 		And I input "Card 03" text in "ENG" field
 		And I select "Card" exact value from the drop-down list named "Type"
-		And I click "Save and close" button
-		Then "Payment types" window is opened
-		And I activate field named "Description" in "List" table
-		And in the table "List" I click the button named "ListContextMenuMoveItem"
+		And I click Choice button of the field named "Parent"
 		Then "Payment types" window is opened
 		And I go to line in "List" table
-			| 'Reference' |
-			| 'Bank 02'   |
-		And I click the button named "FormChoose"
+			| 'Description' |
+			| 'Bank 02'     |
+		And I select current line in "List" table		
+		And I click "Save and close" button
 		And I click "Create" button
 		And I input "Card 04" text in "ENG" field
 		And I select "Card" exact value from the drop-down list named "Type"
-		And I click "Save and close" button
-		Then "Payment types" window is opened
-		And I activate field named "Description" in "List" table
-		And in the table "List" I click the button named "ListContextMenuMoveItem"
-		Then "Payment types" window is opened
+		And I click Choice button of the field named "Parent"
 		And I go to line in "List" table
-			| 'Reference' |
-			| 'Bank 02'   |
-		And I click the button named "FormChoose"
+			| 'Description' |
+			| 'Bank 02'     |
+		And I select current line in "List" table
+		And I click "Save and close" button
 		And I close all client application windows
 		
 
 Scenario: _0154192 create document Retail Sales Receipt from Point of sale (payment by card)
 	* Preparation
 		Given I open hyperlink "e1cib/list/Catalog.BankTerms"
-		And I go to line in "ItemsPickup" table
-			| 'Item'     |
+		And I go to line in "List" table
+			| 'Description'     |
 			| 'Bank term 01' |
-		And I select current line in "List" table
 		And I select current line in "List" table
 		Then "Bank term * (Bank term)" window is opened
 		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
@@ -3653,15 +3645,17 @@ Scenario: _0154192 create document Retail Sales Receipt from Point of sale (paym
 	* Payment (Card)
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
-	* Select payment type from group
-		And I click "[1] Bank 02" button
+	* Select payment type from group					
+		And I click "[1] Bank 02 >" button	
+		And I click "[0]" button
+		And I click "[Esc]" button
+		And I click "Card (*)" button	
 		And I click "[2] Card 04" button
 		Then "Payment: Point of sale" window is opened
 		And I click "2" button
 		And I click "0" button
 		And I click "0" button
 		And I click "Card (*)" button
-		And I click "[2] " button
 		And I click "[2] Card 02" button
 		Then "Payment: Point of sale" window is opened
 		And I click "2" button

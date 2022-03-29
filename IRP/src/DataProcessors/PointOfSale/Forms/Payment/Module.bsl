@@ -93,10 +93,10 @@ EndProcedure
 Procedure Enter(Command)
 	
 	If Not Payments.Count() And CashPaymentTypes.Count() Then
-		ButtonSetings = POSClient.ButtonSetings();
-		FillPropertyValues(ButtonSetings, CashPaymentTypes[0]);
+		ButtonSettings = POSClient.ButtonSettings();
+		FillPropertyValues(ButtonSettings, CashPaymentTypes[0]);
 		AdditionalParameters = New Structure();
-		FillPayments(ButtonSetings, AdditionalParameters);
+		FillPayments(ButtonSettings, AdditionalParameters);
 	EndIf;
 	
 	If Not CheckFilling() Then
@@ -149,10 +149,10 @@ EndProcedure
 Procedure NumPress(Command)
 	
 	If Not Payments.Count() And CashPaymentTypes.Count() Then
-		ButtonSetings = POSClient.ButtonSetings();
-		FillPropertyValues(ButtonSetings, CashPaymentTypes[0]);
+		ButtonSettings = POSClient.ButtonSettings();
+		FillPropertyValues(ButtonSettings, CashPaymentTypes[0]);
 		AdditionalParameters = New Structure();
-		FillPayments(ButtonSetings, AdditionalParameters);
+		FillPayments(ButtonSettings, AdditionalParameters);
 	EndIf;
 	
 	NumButtonPress(Command.Name);
@@ -173,10 +173,10 @@ Procedure OpenPaymentForm(PaymentTypesTable, PaymentType)
 		NotifyDescription = New NotifyDescription("FillPayments", ThisObject, NotifyParameters);
 		PayButtons = New Array();
 		For Each CollectionItem In PaymentTypesTable Do
-			ButtonSetings = POSClient.ButtonSetings();
-			FillPropertyValues(ButtonSetings, CollectionItem);
-			ButtonSetings.PaymentTypeEnum = PaymentType;
-			PayButtons.Add(ButtonSetings);
+			ButtonSettings = POSClient.ButtonSettings();
+			FillPropertyValues(ButtonSettings, CollectionItem);
+			ButtonSettings.PaymentTypeEnum = PaymentType;
+			PayButtons.Add(ButtonSettings);
 		EndDo;
 		
 		OpeningFormParameters = New Structure();
@@ -184,11 +184,11 @@ Procedure OpenPaymentForm(PaymentTypesTable, PaymentType)
 		OpenForm("DataProcessor.PointOfSale.Form.PaymentTypes", OpeningFormParameters, ThisObject, UUID, , ,
 			NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 	Else
-		ButtonSetings = POSClient.ButtonSetings();
+		ButtonSettings = POSClient.ButtonSettings();
 
-		FillPropertyValues(ButtonSetings, PaymentTypesTable[0]);
+		FillPropertyValues(ButtonSettings, PaymentTypesTable[0]);
 		ChoiceEndAdditionalParameters = New Structure();
-		FillPayments(ButtonSetings, ChoiceEndAdditionalParameters);
+		FillPayments(ButtonSettings, ChoiceEndAdditionalParameters);
 	EndIf;
 	
 EndProcedure
@@ -442,7 +442,7 @@ EndFunction
 // Fill payments
 // 
 // Parameters:
-//  Result - See POSClient.ButtonSetings
+//  Result - See POSClient.ButtonSettings
 //  AdditionalParameters - Arbitrary - Additional parameters
 &AtClient
 Procedure FillPayments(Result, AdditionalParameters) Export

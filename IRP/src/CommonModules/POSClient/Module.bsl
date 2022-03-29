@@ -3,21 +3,21 @@
 #Region Constructors
 
 
-// Button setings.
+// Button Settings.
 // 
 // Returns:
-//  Structure - Button setings:
+//  Structure - Button Settings:
 // * PaymentType - CatalogRef.PaymentTypes -
 // * BankTerm - CatalogRef.BankTerms -
 // * PaymentTypeEnum - EnumRef.PaymentTypes -
-Function ButtonSetings() Export
+Function ButtonSettings() Export
 	
-	ButtonSetings = New Structure();
-	ButtonSetings.Insert("PaymentType", PredefinedValue("Catalog.PaymentTypes.EmptyRef"));
-	ButtonSetings.Insert("BankTerm", PredefinedValue("Catalog.BankTerms.EmptyRef"));
-	ButtonSetings.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.EmptyRef"));
+	ButtonSettings = New Structure();
+	ButtonSettings.Insert("PaymentType", PredefinedValue("Catalog.PaymentTypes.EmptyRef"));
+	ButtonSettings.Insert("BankTerm", PredefinedValue("Catalog.BankTerms.EmptyRef"));
+	ButtonSettings.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.EmptyRef"));
 	
-	Return ButtonSetings;
+	Return ButtonSettings;
 	
 EndFunction
 

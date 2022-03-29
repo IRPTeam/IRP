@@ -7,7 +7,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
-	ButtonsArray = Parameters.PayButtons; // Array of See POSClient.ButtonSetings
+	ButtonsArray = Parameters.PayButtons; // Array of See POSClient.ButtonSettings
 	CreateFormElement(ButtonsArray);
 	
 	Items.BackToSelectGroup.Shortcut = New Shortcut(Key["Num0"]);
@@ -42,7 +42,7 @@ Procedure CreateFormElement(ButtonsArray)
 
 	For Each PayGroup In PayButtonsParent Do
 		
-		PayButtonsIntoGroup = PayGroup.Value; // Array of See POSClient.ButtonSetings
+		PayButtonsIntoGroup = PayGroup.Value; // Array of See POSClient.ButtonSettings
 		PaymentTypeGroup = PayGroup.Key; // CatalogRef.PaymentTypes
 		
 		ButtonName = StrTemplate("Page_%1", GroupIndex);
@@ -124,7 +124,7 @@ EndProcedure
 Procedure ReturnValueAndCloseForm(Val CommandName)
 
 	FindPaymentType = LinkedPayButtons.FindRows(New Structure("ButtonName", CommandName));
-	Result = POSClient.ButtonSetings();
+	Result = POSClient.ButtonSettings();
 	FillPropertyValues(Result, FindPaymentType[0]);
 
 	Close(Result);

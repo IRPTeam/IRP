@@ -200,7 +200,8 @@ EndFunction
 
 Procedure OnChainComplete(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 		__tmp_SalesPurchaseInvoice_OnChainComplete(Parameters);
 		Return;
 	EndIf;
@@ -690,7 +691,8 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 			
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
@@ -762,7 +764,8 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
@@ -810,7 +813,8 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
 				ServerData = New Structure("ServerData", New Structure());
@@ -953,7 +957,8 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 	
@@ -963,7 +968,8 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
 	
@@ -1572,7 +1578,8 @@ Procedure OnSetPartnerNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	

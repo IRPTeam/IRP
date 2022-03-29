@@ -1,4 +1,10 @@
-#Region FormEvents
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocRetailSalesReceiptServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
@@ -6,16 +12,27 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	DocRetailSalesReceiptServer.CalculateTableAtServer(ThisObject, Object);
+	//DocRetailSalesReceiptServer.CalculateTableAtServer(ThisObject, Object);
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	DocRetailSalesReceiptServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure OnOpen(Cancel, AddInfo = Undefined) Export
+Procedure OnOpen(Cancel)
 	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -35,13 +52,12 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 
 	DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-
 EndProcedure
 
-&AtClient
-Procedure BeforeWrite(Cancel, WriteParameters)
-	Return;
-EndProcedure
+//&AtClient
+//Procedure BeforeWrite(Cancel, WriteParameters)
+//	Return;
+//EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
@@ -49,31 +65,14 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
-Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
+Procedure AfterWrite(WriteParameters)
 	DocRetailSalesReceiptClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
-&AtClient
-Procedure ItemListBeforeDeleteRow(Item, Cancel)
-	DocRetailSalesReceiptClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
-EndProcedure
-
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	DocRetailSalesReceiptServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocRetailSalesReceiptServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
-&AtServer
-Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
-EndProcedure
+Function Taxes_CreateFormControls() Export
+	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
+EndFunction
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
@@ -88,224 +87,21 @@ EndProcedure
 
 #EndRegion
 
-#Region FormItemsEvents
+#Region _DATE
+
 &AtClient
-Procedure DateOnChange(Item, AddInfo = Undefined) Export
+Procedure DateOnChange(Item)
 	DocRetailSalesReceiptClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure StoreOnChange(Item)
-	DocRetailSalesReceiptClient.StoreOnChange(Object, ThisObject, Item);
-EndProcedure
+#EndRegion
 
-&AtClient
-Procedure PartnerOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.PartnerOnChange(Object, ThisObject, Item);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure LegalNameOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.LegalNameOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure LegalNameContractOnChange(Item)
-	DocRetailSalesReceiptClient.LegalNameContractOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.AgreementOnChange(Object, ThisObject, Item);
-EndProcedure
+#Region COMPANY
 
 &AtClient
 Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
-
-&AtClient
-Procedure PriceIncludeTaxOnChange(Item)
-	DocRetailSalesReceiptClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrencyOnChange(Item)
-	DocRetailSalesReceiptClient.CurrencyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ManagerOnChange(Item)
-	Return;
-EndProcedure
-
-&AtClient
-Procedure RetailCustomerOnChange(Item)
-	DocRetailSalesReceiptClient.RetailCustomerOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region ItemListEvents
-
-&AtClient
-Procedure ItemListAfterDeleteRow(Item)
-	DocRetailSalesReceiptClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	LockLinkedRows();
-EndProcedure
-
-&AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocRetailSalesReceiptClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnActivateRow(Item)
-	DocRetailSalesReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
-	DocRetailSalesReceiptClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemListItemsEvents
-
-&AtClient
-Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListItemOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocRetailSalesReceiptClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	DocRetailSalesReceiptClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListUnitOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListPriceOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListTaxAmountOnChange(Item)
-	DocRetailSalesReceiptClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListDontCalculateRowOnChange(Item)
-	DocRetailSalesReceiptClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListStoreOnChange(Item)
-	DocRetailSalesReceiptClient.ItemListStoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListRevenueTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocRetailSalesReceiptClient.ItemListRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
-	DocRetailSalesReceiptClient.ItemListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemPartner
-
-&AtClient
-Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocRetailSalesReceiptClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
-	DocRetailSalesReceiptClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemLegalName
-
-&AtClient
-Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocRetailSalesReceiptClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocRetailSalesReceiptClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemAgreement
-
-&AtClient
-Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	DocRetailSalesReceiptClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
-	DocRetailSalesReceiptClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ItemCompany
 
 &AtClient
 Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
@@ -319,18 +115,278 @@ EndProcedure
 
 #EndRegion
 
-#Region DescriptionEvents
+#Region PARTNER
 
 &AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+Procedure PartnerOnChange(Item)
+	DocRetailSalesReceiptClient.PartnerOnChange(Object, ThisObject, Item);
+	//SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailSalesReceiptClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	DocRetailSalesReceiptClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
 
-#Region SpecialOffers
+#Region LEGAL_NAME
 
-#Region Offers_for_document
+&AtClient
+Procedure LegalNameOnChange(Item)
+	DocRetailSalesReceiptClient.LegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailSalesReceiptClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocRetailSalesReceiptClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT
+
+&AtClient
+Procedure AgreementOnChange(Item)
+	DocRetailSalesReceiptClient.AgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailSalesReceiptClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	DocRetailSalesReceiptClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region CURRENCY
+
+&AtClient
+Procedure CurrencyOnChange(Item)
+	DocRetailSalesReceiptClient.CurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region STORE
+
+&AtClient
+Procedure StoreOnChange(Item)
+	DocRetailSalesReceiptClient.StoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME_CONTRACT
+
+&AtClient
+Procedure LegalNameContractOnChange(Item)
+	DocRetailSalesReceiptClient.LegalNameContractOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region PRICE_INCLUDE_TAX
+
+&AtClient
+Procedure PriceIncludeTaxOnChange(Item)
+	DocRetailSalesReceiptClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region RETAIL_CUSTOMER
+
+&AtClient
+Procedure RetailCustomerOnChange(Item)
+	DocRetailSalesReceiptClient.RetailCustomerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST
+
+&AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocRetailSalesReceiptClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocRetailSalesReceiptClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);	
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocRetailSalesReceiptClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocRetailSalesReceiptClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
+EndProcedure
+
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListItemOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailSalesReceiptClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	DocRetailSalesReceiptClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure ItemListItemKeyOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region PRICE_TYPE
+
+&AtClient
+Procedure ItemListPriceTypeOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
+	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region PRICE
+
+&AtClient
+Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
+	DocRetailSalesReceiptClient.ItemListPriceOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TOTAL_AMOUNT
+
+&AtClient
+Procedure ItemListTotalAmountOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_AMOUNT
+
+&AtClient
+Procedure ItemListTaxAmountOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region DONT_CALCULATE_ROW
+
+&AtClient
+Procedure ItemListDontCalculateRowOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region STORE
+
+&AtClient
+Procedure ItemListStoreOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListStoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_RATE
+
+&AtClient
+Procedure TaxValueOnChange(Item) Export
+	DocRetailSalesReceiptClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region SERIAL_LOT_NUMBERS
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region REVENUE_TYPE
+
+&AtClient
+Procedure ItemListRevenueTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailSalesReceiptClient.ItemListRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
+	DocRetailSalesReceiptClient.ItemListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SPECIAL_OFFERS
+
+#Region FOR_DOCUMENT
 
 &AtClient
 Procedure SetSpecialOffers(Command)
@@ -345,12 +401,11 @@ EndProcedure
 
 #EndRegion
 
-#Region Offers_for_row
+#Region FOR_ROW
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
-		"SpecialOffersEditFinish_ForRow");
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject, "SpecialOffersEditFinish_ForRow");
 EndProcedure
 
 &AtClient
@@ -362,7 +417,26 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorations
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocRetailSalesReceiptClient);
+	Str.Insert("Server", DocRetailSalesReceiptServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -386,7 +460,36 @@ EndProcedure
 
 #EndRegion
 
-#Region Commands
+#Region ADD_ATTRIBUTES
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
 
 &AtClient
 Procedure OpenPickupItems(Command)
@@ -410,48 +513,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Taxes
-
-&AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocRetailSalesReceiptClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtServer
-Function Taxes_CreateFormControls(AddInfo = Undefined) Export
-	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject, AddInfo);
-EndFunction
-
-#EndRegion
-
-#Region AddAttributes
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure AddAttributesCreateFormControl()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
-EndProcedure
-
-#EndRegion
-
-#Region ExternalCommands
-
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-#EndRegion
+#Region LINKED_DOCUMENTS
 
 &AtServer
 Procedure LockLinkedRows()
@@ -474,16 +536,6 @@ Procedure FromUnlockLinkedRows(Command)
 	EndIf;
 EndProcedure
 
-#Region Service
-
-&AtClient
-Function GetProcessingModule() Export
-	Str = New Structure;
-	Str.Insert("Client", DocRetailSalesReceiptClient);
-	Str.Insert("Server", DocRetailSalesReceiptServer);
-	Return Str;
-EndFunction
-
 #EndRegion
 
 &AtClient
@@ -500,3 +552,5 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+
+#EndRegion

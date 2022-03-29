@@ -25,7 +25,11 @@ Procedure CreateFormElement(ButtonsArray)
 	PayButtonsParent = New Map; 
 	
 	For Each ButtonSettings In ButtonsArray Do 
-		If PayButtonsParent.Get(ButtonSettings.PaymentType.Parent) = Undefined Then
+		If ButtonSettings.PaymentType.Parent.IsEmpty() Then
+			ButtonsList = New Array;
+			ButtonsList.Add(ButtonSettings);
+			PayButtonsParent.Insert(ButtonSettings.PaymentType, ButtonsList);
+		ElsIf PayButtonsParent.Get(ButtonSettings.PaymentType.Parent) = Undefined Then
 			ButtonsList = New Array;
 			ButtonsList.Add(ButtonSettings);
 			PayButtonsParent.Insert(ButtonSettings.PaymentType.Parent, ButtonsList);
@@ -36,6 +40,9 @@ Procedure CreateFormElement(ButtonsArray)
 
 	GroupIndex = 0;
 	For Each PayGroup In PayButtonsParent Do
+		
+		PayButtonsIntoGroup = PayGroup.Value; // Array of See POSClient.ButtonSetings
+		
 		ButtonName = StrTemplate("Page_%1", GroupIndex);
 		NewCommand = Commands.Add(ButtonName);
 		NewCommand.Action = "PayButtonGroup";
@@ -43,7 +50,7 @@ Procedure CreateFormElement(ButtonsArray)
 			
 		NewItem = Items.Add(ButtonName, Type("FormButton"), Items.PaymentGroup);
 		NewItem.Type = FormButtonType.UsualButton;
-		NewItem.Title = "[" + String(GroupIndex + 1) + "] " + String(PayGroup.Key);
+		NewItem.Title = "[" + String(GroupIndex + 1) + "] " + String(PayGroup.Key) + ?(PayButtonsIntoGroup.Count() > 1, " >", "");
 		NewItem.CommandName = NewCommand.Name;
 		NewItem.Font = StyleFonts.ExtraLargeTextFont;
 		NewItem.HorizontalStretch = True;
@@ -52,7 +59,7 @@ Procedure CreateFormElement(ButtonsArray)
 		NewPageItem.Type = FormGroupType.Page;
 		NewPageItem.Title = String(PayGroup.Key);
 		
-		PayButtonsIntoGroup = PayGroup.Value; // Array of See POSClient.ButtonSetings
+		
 		For Index = 0 To PayButtonsIntoGroup.UBound() Do
 			ButtonSettings = PayButtonsIntoGroup[Index]; 
 			ButtonName = StrTemplate("PayButton_%1_%2", GroupIndex, Index);
@@ -88,19 +95,29 @@ EndProcedure
 &AtClient
 Procedure PayButtonPress(Command)
 	
-	FindPaymentType = LinkedPayButtons.FindRows(New Structure("ButtonName", Command.Name));
-	Result = POSClient.ButtonSetings();
-	FillPropertyValues(Result, FindPaymentType[0]);
-
-	Close(Result);
+	ReturnValueAndCloseForm(Command.Name);
 	
 EndProcedure
 
 &AtClient
+Procedure ReturnValueAndCloseForm(Val CommandName)
+
+	FindPaymentType = LinkedPayButtons.FindRows(New Structure("ButtonName", CommandName));
+	Result = POSClient.ButtonSetings();
+	FillPropertyValues(Result, FindPaymentType[0]);
+
+	Close(Result);
+EndProcedure
+
+&AtClient
 Procedure PayButtonGroup(Command)
-	
-	Items.PaymentPages.CurrentPage = Items.Find("Button" + Command.Name);
-	SetHotKey();
+	ButtonPage = Items.Find("Button" + Command.Name);
+	If ButtonPage.ChildItems.Count() = 1 Then
+		ReturnValueAndCloseForm(ButtonPage.ChildItems[0].CommandName)
+	Else
+		Items.PaymentPages.CurrentPage = Items.Find("Button" + Command.Name);
+		SetHotKey();
+	EndIf;
 	
 EndProcedure
 

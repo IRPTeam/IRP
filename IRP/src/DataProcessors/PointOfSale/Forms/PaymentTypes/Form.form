@@ -109,7 +109,6 @@
       <commandName>Form.Command.CloseButton</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
-      <height>1</height>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
       <font xsi:type="core:FontRef">

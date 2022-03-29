@@ -29,7 +29,7 @@ EndFunction
 Function SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint,
 	AddInfo = Undefined)
 
-	If ConnectionSetting.IntegrationSettingsRef.DeletionMark Then
+	If ServiceSystemServer.GetObjectAttribute(ConnectionSetting.IntegrationSettingsRef, "DeletionMark") Then
 		Raise StrTemplate(R().Error_107, ConnectionSetting.IntegrationSettingsRef);
 	EndIf;
 

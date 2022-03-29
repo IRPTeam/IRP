@@ -44,6 +44,9 @@
     <key>en</key>
     <value>Payment type</value>
   </objectPresentation>
+  <hierarchical>true</hierarchical>
+  <hierarchyType>HierarchyOfItems</hierarchyType>
+  <limitLevelCount>true</limitLevelCount>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
@@ -54,8 +57,10 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.PaymentTypes.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.PaymentTypes.Form.GroupForm</defaultFolderForm>
   <defaultListForm>Catalog.PaymentTypes.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.PaymentTypes.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.PaymentTypes.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="8e4bc5b0-9652-4c7f-9cc9-16ba8c661548">
     <name>Type</name>
@@ -65,6 +70,36 @@
     </synonym>
     <type>
       <types>EnumRef.PaymentTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="252c4285-2a08-4947-bc74-cfebb19f9dd1">
+    <name>Icon</name>
+    <synonym>
+      <key>en</key>
+      <value>Icon</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="43d9f2fa-b9ba-4d65-bd4c-eb566d2f13a7">
+    <name>isIconSet</name>
+    <synonym>
+      <key>en</key>
+      <value>Is icon set</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -114,6 +149,7 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <use>ForFolderAndItem</use>
   </tabularSections>
   <forms uuid="22902463-20cf-4b29-b85a-4d889c8828df">
     <name>ItemForm</name>
@@ -138,6 +174,24 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="defd488d-2495-4a34-b4e0-595dd25c9a77">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="148be6d7-0162-4920-a4ac-31dc14e93124">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

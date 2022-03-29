@@ -340,8 +340,37 @@ Scenario: _300110 opening Files catalog element
 		Then "dresswhite.jpg (File)" window is opened
 		Then system warning window does not appear
 		And I close all client application windows
-		
+	
 
+Scenario: _300112 show pictures in the item list
+	* Open Item catalog list form
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+	* Show pictures
+		And I click the button named "ViewPictures"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'       |
+		Then user message window does not contain messages
+		And I click the button named "ViewPictures"
+		Then user message window does not contain messages
+		
+Scenario: _300113 show add attributes in the item list
+	And I close all client application windows
+	* Open Item catalog list form
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+	* Show add attributes
+		And I click the button named "ViewAdditionalAttribute"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'    |
+		And I activate current test client window
+		And I click Test Client element "Rose" "Edit" UI Automation
+		And I click the button named "ViewAdditionalAttribute"
+		When I Check the steps for Exception
+        	|"And I click Test Client element "Rose" "Edit" UI Automation"|
+		And I close all client application windows
+		
+				
 
 
 Scenario: _300115 check removal of pictures from Item

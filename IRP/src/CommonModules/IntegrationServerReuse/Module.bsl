@@ -21,6 +21,7 @@ EndFunction
 
 Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefined) Export
 	ConnectionSetting = New Structure();
+	ConnectionSetting.Insert("IntegrationSettingsRef", Catalogs.IntegrationSettings.EmptyRef());
 	If IntegrationType = Enums.IntegrationType.LocalFileStorage Then
 		ConnectionSetting.Insert("AddressPath", "");
 	ElsIf IntegrationType = Enums.IntegrationType.Email Then

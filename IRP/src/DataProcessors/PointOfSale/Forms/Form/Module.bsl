@@ -21,9 +21,9 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If Source = ThisObject Then
-		DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-	EndIf;
+//	If Source = ThisObject Then
+//		DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
+//	EndIf;
 
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
@@ -42,7 +42,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListOnChange(Object, ThisObject, Item);
+//	DocRetailSalesReceiptClient.ItemListOnChange(Object, ThisObject, Item);
 	EnabledPaymentButton();
 	ItemListOnActivateRow(Item);
 	FillSalesPersonInItemList();
@@ -58,7 +58,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnActivateRow(Item)
-	DocRetailSalesReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
+//	DocRetailSalesReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
 	UpdateHTMLPictures();
 	CurrentData = Items.ItemList.CurrentData;
 	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));

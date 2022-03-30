@@ -120,18 +120,19 @@ Scenario: _005012 filling in the "Integration settings" catalog
 		And I wait the field named "UniqueID" will be filled in "10" seconds
 		Then the form attribute named "IntegrationType" became equal to "File storage"
 		And "ConnectionSetting" table became equal
-			| '#'  | 'Key'                 | 'Value'            |
-			| '1'  | 'QueryType'           | 'GET'              |
-			| '2'  | 'ResourceAddress'     | '/hs/filetransfer' |
-			| '3'  | 'Ip'                  | 'localhost'        |
-			| '4'  | 'Port'                | '8 080'            |
-			| '5'  | 'User'                | 'Admin'            |
-			| '6'  | 'Password'            | '123'              |
-			| '7'  | 'Proxy'               | ''                 |
-			| '8'  | 'TimeOut'             | '60'               |
-			| '9'  | 'SecureConnection'    | 'Yes'              |
-			| '10' | 'UseOSAuthentication' | 'No'               |
-			| '11' | 'Headers'             | 'Map'              |
+			| '#'  | 'Key'                    | 'Value'            |
+			| '1'  | 'IntegrationSettingsRef' | 'GET'              |
+			| '2'  | 'QueryType'              | 'POST'             |
+			| '3'  | 'ResourceAddress'        | '/hs/filetransfer' |
+			| '4'  | 'Ip'                     | 'localhost'        |
+			| '5'  | 'Port'                   | '8 080'            |
+			| '6'  | 'User'                   | 'Admin'            |
+			| '7'  | 'Password'               | '123'              |
+			| '8'  | 'Proxy'                  | ''                 |
+			| '9'  | 'TimeOut'                | '60'               |
+			| '10' | 'SecureConnection'       | 'Yes'              |
+			| '11' | 'UseOSAuthentication'    | 'No'               |
+			| '12' | 'Headers'                | 'Map'              |		
 		Then the form attribute named "ExternalDataProc" became equal to ""
 		And I click "Save and close" button
 	* Create setting with integration type Other (without connection)

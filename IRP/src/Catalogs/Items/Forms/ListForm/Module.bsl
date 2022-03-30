@@ -33,25 +33,21 @@ EndProcedure
 
 &AtClient
 Async Procedure PictureViewerHTMLDocumentComplete(Item)
-	If HTMLWindowPictures = Undefined Then
-		HTMLWindowPictures = PictureViewerClient.InfoDocumentComplete(Item);
-		HTMLWindowPictures.displayTarget("toolbar", False);
-		UpdateHTMLPictures();
-	EndIf;
+	HTMLWindowPictures = PictureViewerClient.InfoDocumentComplete(Item);
+	HTMLWindowPictures.displayTarget("toolbar", False);
+	UpdateHTMLPictures();
 EndProcedure
 
 &AtClient
 Async Procedure AddAttributesHTMLDocumentComplete(Item)
-	If HTMLWindowAddAttributes = Undefined Then
-		HTMLWindowAddAttributes = PictureViewerClient.InfoDocumentComplete(Item);
-		UpdateHTMLAddAttributes();
-	EndIf;
+	HTMLWindowAddAttributes = PictureViewerClient.InfoDocumentComplete(Item);
+	UpdateHTMLAddAttributes();
 EndProcedure
 
 &AtClient
 Async Procedure UpdateHTMLPictures() Export
 	CurrentRow = Items.List.CurrentData;
-	If CurrentRow = Undefined Or Not CurrentRow.Property("Ref") Then
+	If CurrentRow = Undefined Or Not CurrentRow.Property("Ref") Or Not Items.PictureViewHTML.Visible Then
 		Return;
 	EndIf;
 
@@ -62,7 +58,7 @@ EndProcedure
 &AtClient
 Async Procedure UpdateHTMLAddAttributes() Export
 	CurrentRow = Items.List.CurrentData;
-	If CurrentRow = Undefined Or Not CurrentRow.Property("Ref") Then
+	If CurrentRow = Undefined Or Not CurrentRow.Property("Ref") Or Not Items.AddAttributeViewHTML.Visible Then
 		Return;
 	EndIf;
 
@@ -76,4 +72,10 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		UpdateHTMLPictures();
 	EndIf;
 EndProcedure
+
+&AtClient
+Procedure HTMLViewControl(Command)
+	PictureViewerClient.HTMLViewControl(ThisObject, Command.Name);
+EndProcedure
+
 #EndRegion

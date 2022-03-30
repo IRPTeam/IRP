@@ -1,3 +1,4 @@
+
 Function GetPictureURL(FileRef) Export
 	URLStructure = PictureViewerServer.GetPictureURL(FileRef);
 	ProcessingCommonModule = Eval(URLStructure.ProcessingModule);
@@ -171,31 +172,38 @@ EndFunction
 Function PicturesInfoForSlider(ItemRef, UUID, FileRef = Undefined, UseFullSizePhoto = False) Export
 
 	Pictures = PictureViewerServer.PicturesInfoForSlider(ItemRef, FileRef, UseFullSizePhoto);
-	
-	If UseFullSizePhoto Then
-		PicArray = New Array();
-		For Each Picture In Pictures Do
-			PictureStructure = New Structure("Src, Preview, ID");
+	PicArray = New Array();
+		
+	For Each Picture In Pictures Do
+		PictureStructure = New Structure("Src, Preview, ID");
+		Preview = PutToTempStorage(Picture.Preview, UUID);
+		If UseFullSizePhoto Then
 			
-			ProcessingCommonModule = Eval(Picture.PictureURLStructure.ProcessingModule);
-			Picture.Src = ProcessingCommonModule.PreparePictureURL(
+			If TypeOf(Picture.Src) = Type("String") Then
+				ProcessingCommonModule = Eval(Picture.PictureURLStructure.ProcessingModule);
+				Picture.Src = ProcessingCommonModule.PreparePictureURL(
 								Picture.PictureURLStructure.IntegrationSettings, Picture.Src, UUID);
-			If Picture.SrcBD = Undefined Then
-				PictureStructure.Src = Picture.Src;
-			Else
-				PictureStructure.Src = PutToTempStorage(Picture.SrcBD, UUID);
 			EndIf;
-			PictureStructure.Preview = PictureStructure.Preview;
-
-			PictureStructure.ID = Picture.ID;
-			PicArray.Add(PictureStructure);
-			Str = New Structure("Pictures", PicArray);
-		EndDo;	
-	Else
-		Str = Pictures; // String - JSON String
-	EndIf;
+			
+			If TypeOf(Picture.Src) = Type("String") Then
+				PictureStructure.Src = Picture.Src;
+			ElsIf TypeOf(Picture.Src) = Type("BinaryData") Then
+				PictureStructure.Src = PutToTempStorage(Picture.Src, UUID);
+			Else
+				PictureStructure.Src = Preview;
+			EndIf;
+		Else
+			PictureStructure.Src = Preview;
+		EndIf;
+		
+		PictureStructure.Preview = Preview;
+		PictureStructure.ID = Picture.ID;
+		PicArray.Add(PictureStructure);
+	EndDo;	
 	
-	Return Str;
+	StrForJSON = New Structure("Pictures", PicArray);
+	PicArrayJSON = CommonFunctionsServer.SerializeJSON(StrForJSON);
+	Return PicArrayJSON;
 
 EndFunction
 
@@ -228,10 +236,10 @@ Function InfoDocumentComplete(Item) Export
 #If MobileAppClient Or MobileClient Then
 	BrWindow = Item.document.defaultView;
 #Else
-		BrWindow = Item.document.parentWindow;
-		If BrWindow = Undefined Then
-			BrWindow = Item.document.defaultView;
-		EndIf;
+	BrWindow = Item.document.parentWindow;
+	If BrWindow = Undefined Then
+		BrWindow = Item.document.defaultView;
+	EndIf;
 #EndIf
 	Return BrWindow;
 EndFunction
@@ -325,4 +333,36 @@ Procedure AddFile(File, Val Volume, AdditionalParameters) Export
 		Notify("UpdateObjectPictures_AddNewOne", FileInfo.Ref, AdditionalParameters.UUID);
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region ButtonsControl
+
+// HTMLView control.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  CommandName - String - Command
+Procedure HTMLViewControl(Form, CommandName) Export
+	
+	CommandItem = Form.Items[CommandName];
+	CommandItem.Check = Not CommandItem.Check;
+	Visible = CommandItem.Check;
+	
+	If Visible Then
+		CommandItem.BackColor = CommonFunctionsServer.GetStyleByName("ActivityColor");
+	Else
+		CommandItem.BackColor = CommonFunctionsServer.GetStyleByName("ButtonBackColor");
+	EndIf;
+	
+	If CommandName = "ViewPictures" Then
+		Form.Items.PictureViewHTML.Visible = Visible;
+		PictureViewerClient.UpdateObjectPictures(Form, PredefinedValue("Catalog.Items.EmptyRef"));
+	ElsIf CommandName = "ViewAdditionalAttribute" Then
+		Form.Items.AddAttributeViewHTML.Visible = Visible;
+		AddAttributesAndPropertiesClient.UpdateObjectAddAttributeHTML(Form, PredefinedValue("Catalog.Items.EmptyRef"));
+	EndIf;
+	
+EndProcedure
+
 #EndRegion

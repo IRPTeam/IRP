@@ -184,6 +184,7 @@
   <sessionParameters>SessionParameter.LocalizationCode</sessionParameters>
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
+  <sessionParameters>SessionParameter.SessionPrefix</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.CreateOrModifyUsers</roles>
   <roles>Role.FilterForUserSettings</roles>
@@ -409,6 +410,7 @@
   <commonModules>CommonModule.DocAdditionalRevenueAllocationServer</commonModules>
   <commonModules>CommonModule.DocMoneyTransferClient</commonModules>
   <commonModules>CommonModule.DocMoneyTransferServer</commonModules>
+  <commonModules>CommonModule.POSClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

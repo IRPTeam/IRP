@@ -624,6 +624,10 @@
     <horizontalAlign>Left</horizontalAlign>
     <autoFill>true</autoFill>
   </autoCommandBar>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
+  </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -646,9 +650,23 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	Table.Ref,
+	Table.DeletionMark,
+	Table.Owner,
+	Table.Parent,
+	Table.Code,
+	Table.Level,
+	Table.Country,
+	Table.FullDescription,
+	Table.Description_en AS Description,
+	Table.PredefinedDataName
+FROM
+	Catalog.IDInfoAddresses AS Table</queryText>
       <mainTable>Catalog.IDInfoAddresses</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

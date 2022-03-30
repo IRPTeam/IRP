@@ -14,8 +14,8 @@
         <name>Amount</name>
         <id>19</id>
         <titleFont xsi:type="core:FontRef">
-          <font>Style.NormalTextFont</font>
-          <height>20.0</height>
+          <font>Style.ExtraLargeTextFont</font>
+          <height>0.0</height>
         </titleFont>
         <visible>true</visible>
         <userVisible>
@@ -59,8 +59,7 @@
           <autoMaxHeight>true</autoMaxHeight>
           <horizontalStretch>false</horizontalStretch>
           <font xsi:type="core:FontRef">
-            <font>Style.NormalTextFont</font>
-            <height>20.0</height>
+            <font>Style.ExtraLargeTextFont</font>
           </font>
         </extInfo>
       </items>
@@ -178,10 +177,8 @@
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
       <font xsi:type="core:FontRef">
-        <font>Style.NormalTextFont</font>
-        <height>20.0</height>
+        <font>Style.ExtraLargeTextFont</font>
       </font>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>
@@ -751,10 +748,9 @@
               <backColor xsi:type="core:ColorRef">
                 <color>Web.HoneyDew</color>
               </backColor>
-              <font xsi:type="core:FontDef">
-                <height>14.0</height>
+              <font xsi:type="core:FontRef">
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -838,14 +834,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -885,14 +875,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -932,14 +916,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -979,14 +957,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <visible>true</visible>
@@ -1059,10 +1031,9 @@
               <textColor xsi:type="core:ColorRef">
                 <color>Windows.ToolTip</color>
               </textColor>
-              <font xsi:type="core:FontDef">
-                <height>14.0</height>
+              <font xsi:type="core:FontRef">
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -1146,14 +1117,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1193,14 +1158,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1240,14 +1199,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1290,14 +1243,8 @@
                 <color>Style.ReportHeaderBackColor</color>
               </backColor>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <visible>true</visible>
@@ -1367,13 +1314,12 @@
               <backColor xsi:type="core:ColorRef">
                 <color>Web.Cream</color>
               </backColor>
-              <font xsi:type="core:FontDef">
-                <height>14.0</height>
+              <font xsi:type="core:FontRef">
+                <font>Style.ExtraLargeTextFont</font>
               </font>
               <picture xsi:type="core:PictureRef">
                 <picture>CommonPicture.Finance</picture>
               </picture>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -1457,14 +1403,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1504,14 +1444,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1551,14 +1485,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1601,14 +1529,8 @@
                 <color>Style.ToolTipBackColor</color>
               </backColor>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <visible>true</visible>
@@ -1678,13 +1600,12 @@
               <backColor xsi:type="core:ColorRef">
                 <color>Web.AliceBlue</color>
               </backColor>
-              <font xsi:type="core:FontDef">
-                <height>14.0</height>
+              <font xsi:type="core:FontRef">
+                <font>Style.ExtraLargeTextFont</font>
               </font>
               <picture xsi:type="core:PictureRef">
                 <picture>CommonPicture.Purchase</picture>
               </picture>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -1764,14 +1685,8 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1814,14 +1729,8 @@
               <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.NormalTextFont</font>
-                <height>16.0</height>
-                <bold>true</bold>
-                <italic>false</italic>
-                <underline>false</underline>
-                <strikeout>false</strikeout>
+                <font>Style.ExtraLargeTextFont</font>
               </font>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <visible>true</visible>
@@ -2151,10 +2060,6 @@
     <horizontalAlign>Right</horizontalAlign>
   </autoCommandBar>
   <handlers>
-    <event>OnOpen</event>
-    <name>OnOpen</name>
-  </handlers>
-  <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
@@ -2163,7 +2068,6 @@
     <name>FillCheckProcessingAtServer</name>
   </handlers>
   <windowOpeningMode>LockWholeInterface</windowOpeningMode>
-  <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
   <autoFillCheck>true</autoFillCheck>
@@ -2494,6 +2398,23 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>PaymentTypeEnum</name>
+      <title>
+        <key>en</key>
+        <value>Payment type enum</value>
+      </title>
+      <id>29</id>
+      <valueType>
+        <types>EnumRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>BankPaymentTypes</name>
@@ -2586,6 +2507,40 @@
         <value>Description</value>
       </title>
       <id>16</id>
+      <valueType>
+        <types>DefinedType.typeDescription</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>PaymentTypeParent</name>
+      <title>
+        <key>en</key>
+        <value>Payment type parent</value>
+      </title>
+      <id>27</id>
+      <valueType>
+        <types>CatalogRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>ParentDescription</name>
+      <title>
+        <key>en</key>
+        <value>Parent description</value>
+      </title>
+      <id>28</id>
       <valueType>
         <types>DefinedType.typeDescription</types>
       </valueType>
@@ -2921,6 +2876,31 @@
     </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <parameters>
+    <name>Amount</name>
+    <valueType>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>15</precision>
+        <scale>3</scale>
+      </numberQualifiers>
+    </valueType>
+    <keyParameter>true</keyParameter>
+  </parameters>
+  <parameters>
+    <name>Branch</name>
+    <valueType>
+      <types>CatalogRef.BusinessUnits</types>
+    </valueType>
+    <keyParameter>true</keyParameter>
+  </parameters>
+  <parameters>
+    <name>Workstation</name>
+    <valueType>
+      <types>CatalogRef.Workstations</types>
+    </valueType>
+    <keyParameter>true</keyParameter>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

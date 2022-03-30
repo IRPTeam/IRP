@@ -109,9 +109,11 @@ Procedure UpdateSerialLotNumbersTree(Object, Form) Export
 		EndIf;
 	EndDo;
 
-	For Each ItemTreeRows In Form.SerialLotNumbersTree.GetItems() Do
-		Form.Items.SerialLotNumbersTree.Expand(ItemTreeRows.GetID());
-	EndDo;
+	If Form.Items.SerialLotNumbersTree.Visible Then
+		For Each ItemTreeRows In Form.SerialLotNumbersTree.GetItems() Do
+			Form.Items.SerialLotNumbersTree.Expand(ItemTreeRows.GetID());
+		EndDo;
+	EndIf;
 EndProcedure
 
 Procedure UpdateUseSerialLotNumber(Object, Form, AddInfo = Undefined) Export

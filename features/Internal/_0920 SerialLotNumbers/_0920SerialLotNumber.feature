@@ -82,7 +82,8 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create document InventoryTransfer objects (use serial lot number)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
-
+	* Workstation
+		When create Workstation
 
 Scenario: _092001 checkbox Use serial lot number in the Item type
 	When checkbox Use serial lot number in the Item type Clothes
@@ -3064,21 +3065,12 @@ Scenario: _092035 product scanning with and without serial lot number
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' |
 			| 'Dress' | 'M/White'  | '89999'         | '1,000'    |
-		And "SerialLotNumbersTree" table became equal
-			| 'Item'  | 'Item key' | 'Serial lot number' | 'Quantity' | 'Item key quantity' |
-			| 'Dress' | 'M/White'  | ''                  | '1,000'    | '1,000'             |
-			| ''      | ''         | '89999'             | '1,000'    | ''                  |
 		And I click "Search by barcode (F7)" button
 		And I input "590876909358" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' |
 			| 'Dress' | 'M/White'  | '89999; 89999'  | '2,000'    |
-		And "SerialLotNumbersTree" table became equal
-			| 'Item'  | 'Item key' | 'Serial lot number' | 'Quantity' | 'Item key quantity' |
-			| 'Dress' | 'M/White'  | ''                  | '2,000'    | '2,000'             |
-			| ''      | ''         | '89999'             | '1,000'    | ''                  |		
-			| ''      | ''         | '89999'             | '1,000'    | ''                  |	
 	* Check product scanning without own serial lot number
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in "InputFld" field
@@ -3100,13 +3092,6 @@ Scenario: _092035 product scanning with and without serial lot number
 			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' |
 			| 'Dress' | 'M/White'  | '89999; 89999'  | '2,000'    |
 			| 'Dress' | 'XS/Blue'  | '10'            | '1,000'    |
-		And "SerialLotNumbersTree" table became equal
-			| 'Item'  | 'Item key' | 'Serial lot number' | 'Quantity' | 'Item key quantity' |
-			| 'Dress' | 'M/White'  | ''                  | '2,000'    | '2,000'             |
-			| ''      | ''         | '89999'             | '1,000'    | ''                  |
-			| ''      | ''         | '89999'             | '1,000'    | ''                  |
-			| 'Dress' | 'XS/Blue'  | ''                  | '1,000'    | '1,000'             |
-			| ''      | ''         | '10'                | '1,000'    | ''                  |
 	* Check product scanning without own serial lot number (input  serial lot number by string)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283739" text in "InputFld" field

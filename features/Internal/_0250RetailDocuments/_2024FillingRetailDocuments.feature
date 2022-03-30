@@ -419,8 +419,8 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		And I input "2202283739" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Quantity'  | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '1,000'     | '550,00' | ''              | '550,00'       |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
 	* Add product (pick up)
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
@@ -432,14 +432,14 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 			| '38/Yellow' |
 		And I select current line in "ItemKeysPickup" table
 		And "ItemList" table became equal
-			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''              | '550,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''              | '400,00'       |
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
 		Then the form attribute named "ItemListTotalQuantity" became equal to "2"
 		Then the form attribute named "ItemListTotalTotalAmount" became equal to "950"
 	* Change quantity and check amount recalculate
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price'  | 'Quantity'  | 'Total amount' |
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity'  | 'Total' |
 			| 'Dress' | 'L/Green'  | '550,00' | '1,000'     | '550,00'       |
 		And I select current line in "ItemList" table
 		And I input "3,000" text in "Quantity" field of "ItemList" table
@@ -461,9 +461,9 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "Cashback" became equal to "1"
 		And I click "Enter" button
 		And "ItemList" table does not contain lines
-			| 'Item'     | 'Item key'  | 'Quantity'  | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000'     | '550,00' | ''              | '550,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000'     | '400,00' | ''              | '400,00'       |
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
 		And I close current window
 		And Delay 2
 	* Check Retail Sales Receipt
@@ -477,8 +477,8 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
 			| 'Profit loss center' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
-			| 'Shop 01'       | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '251,69'     | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | ''                    | 'Store 01' | ''       |
-			| 'Shop 01'       | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '61,02'      | '400,00' | '18%' | ''              | '338,98'     | '400,00'       | ''                    | 'Store 01' | ''       |
+			| 'Shop 01'            | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '251,69'     | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | ''                    | 'Store 01' | ''       |
+			| 'Shop 01'            | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '61,02'      | '400,00' | '18%' | ''              | '338,98'     | '400,00'       | ''                    | 'Store 01' | ''       |
 		And "Payments" table contains lines
 			| 'Payment type' | 'Payment terminal' | 'Bank term' | 'Amount'   | 'Account'      | 'Commission' | 'Percent' |
 			| 'Cash'         | ''                 | ''          | '2 051,00' | 'Cash desk №2' | ''           | ''        |
@@ -500,8 +500,8 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And I input "2202283739" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Quantity'| 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '1,000'   | '550,00' | ''              | '550,00'       |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
 	* Add product (pick up)
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
@@ -513,15 +513,15 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 			| '38/Yellow' |
 		And I select current line in "ItemKeysPickup" table
 		And "ItemList" table became equal
-			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''              | '550,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''              | '400,00'       |
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
 		Then the form attribute named "ItemListTotalQuantity" became equal to "2"
 		Then the form attribute named "ItemListTotalTotalAmount" became equal to "950"
 	* Change quantity and check amount recalculate
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '550,00' | '1,000'    | '550,00'       |
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Total'  |
+			| 'Dress' | 'L/Green'  | '550,00' | '1,000'    | '550,00' |
 		And I select current line in "ItemList" table
 		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And Delay 4
@@ -532,7 +532,8 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 	* Payment (Card)
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
-		And I click "Card 01" button
+		// And I click "[2] Card 01" button	
+		And I click the hyperlink named "Page_1"			
 		And I click "2" button
 		And I click "0" button
 		And I click "5" button
@@ -545,9 +546,9 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And I click "Enter" button
 		And Delay 4
 		And "ItemList" table does not contain lines
-			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''              | '550,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''              | '400,00'       |
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
 		And I close current window
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -791,7 +792,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "8" button
 			And I click "8" button
 			And I click "Card (*)" button
-			And I click "Card 01" button
+			And I click the hyperlink named "Page_1"
 			And I click "1" button
 			And I click "0" button
 			And I click "0" button
@@ -878,7 +879,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "Card 01" button
+				And I click the hyperlink named "Page_1"
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -898,7 +899,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "Card 01" button
+				And I click the hyperlink named "Page_1"
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -921,7 +922,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "Card 01" button
+				And I click the hyperlink named "Page_1"
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -948,7 +949,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' | 'Amount'   |
 					| 'Card 01'      | '560,40'   |
 					| 'Cash'         | '899,60'     |
-				And I close "Payment: Point of sale" window
+				And I close "Payment" window
 	* New retail sales receipt with amount 1 299 754,89
 		And I go to line in "ItemsPickup" table
 			| 'Item'  |
@@ -1029,7 +1030,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '10 000 000,98' |
 			Then the form attribute named "Cashback" became equal to "8 698 786,09"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 	* New retail sales receipt with amount 0,4
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
@@ -1068,7 +1069,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '1,00' |
 			Then the form attribute named "Cashback" became equal to "0,6"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 	* New retail sales receipt with amount 0,41
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I go to line in "ItemsPickup" table
@@ -1093,7 +1094,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '1,00' |
 			Then the form attribute named "Cashback" became equal to "0,59"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 	* New retail sales receipt with amount 0,09
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I go to line in "ItemsPickup" table
@@ -1120,7 +1121,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '0,10' |
 			Then the form attribute named "Cashback" became equal to "0,01"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 		And I close all client application windows
 		
 Scenario: _0154140 check filling in retail customer from the POS (without partner)
@@ -1188,15 +1189,15 @@ Scenario: _0154188 check customer on change in POS
 		And I click "OK" button
 	* Check price
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''              | '520,00'       |
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''       | '520,00' |
 	* Delete retail customer and check price change
 		And I click the button named "ClearRetailCustomer"
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''              | '520,00'       |
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''       | '520,00' |
 	* Select retail customer with own partner term again and check price change
 		And I click "Search customer" button
 		And I go to line in "List" table
@@ -1207,8 +1208,8 @@ Scenario: _0154188 check customer on change in POS
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''              | '520,00'       |
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''       | '520,00' |
 	* Change retail customer and check price change
 		And I click "Search customer" button
 		And I go to line in "List" table
@@ -1219,8 +1220,8 @@ Scenario: _0154188 check customer on change in POS
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''              | '520,00'       |
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''       | '520,00' |
 		And I close all client application windows
 
 Scenario:  _0154141 manual price adjustment in the POS
@@ -1232,8 +1233,8 @@ Scenario:  _0154141 manual price adjustment in the POS
 		And I input "2202283739" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity'  | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '1,000'     | '550,00' | ''              | '550,00'       |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
 			| 'Item'     |
@@ -1244,13 +1245,13 @@ Scenario:  _0154141 manual price adjustment in the POS
 			| '38/Yellow' |
 		And I select current line in "ItemKeysPickup" table
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''              | '550,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''              | '400,00'       |
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
 	* Price adjustment
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''              | '400,00'       |
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Add one more items and check price filling
@@ -1258,10 +1259,10 @@ Scenario:  _0154141 manual price adjustment in the POS
 		And I input "2202283713" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''              | '550,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000'    | '200,00' | ''              | '200,00'       |
-			| 'Dress'    | 'S/Yellow'  | '1,000'    | '550,00' | ''              | '550,00'       |
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '200,00' | ''       | '200,00' |
+			| 'Dress'    | 'S/Yellow'  | '1,000'    | '550,00' | ''       | '550,00' |
 		And I go to line in "ItemsPickup" table
 			| 'Item'     |
 			| 'Trousers' |
@@ -1271,11 +1272,11 @@ Scenario:  _0154141 manual price adjustment in the POS
 			| '36/Yellow' |
 		And I select current line in "ItemKeysPickup" table
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''              | '550,00'       |
-			| 'Trousers' | '38/Yellow' | '1,000'    | '200,00' | ''              | '200,00'       |
-			| 'Dress'    | 'S/Yellow'  | '1,000'    | '550,00' | ''              | '550,00'       |
-			| 'Trousers' | '36/Yellow' | '1,000'    | '400,00' | ''              | '400,00'       |
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '200,00' | ''       | '200,00' |
+			| 'Dress'    | 'S/Yellow'  | '1,000'    | '550,00' | ''       | '550,00' |
+			| 'Trousers' | '36/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
 		And I close all client application windows
 
 Scenario:  _0154148 check that the Retail return receipt amount and the amount of payment must match
@@ -3399,21 +3400,21 @@ Scenario: _0154175 check change amount in POS
 		And I input "2202283739" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Quantity'  | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '1,000'     | '550,00' | ''              | '550,00'       |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
 		And I click "Search by barcode (F7)" button
 		And I input "2202283713" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''              | '550,00'       |
-			| 'Dress' | 'S/Yellow' | '1,000'    | '550,00' | ''              | '550,00'       |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
+			| 'Dress' | 'S/Yellow' | '1,000'    | '550,00' | ''       | '550,00' |
 	* Change AMOUNT and check amount recalculate
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price'  | 'Quantity'  | 'Total amount' |
-			| 'Dress' | 'L/Green'  | '550,00' | '1,000'     | '550,00'       |
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Total'  |
+			| 'Dress' | 'L/Green'  | '550,00' | '1,000'    | '550,00' |
 		And I select current line in "ItemList" table
-		And I input "500,00" text in "Total amount" field of "ItemList" table
+		And I input "500,00" text in "Total" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 050"
 		And Delay 2
@@ -3469,8 +3470,8 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
-			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''              | '520,00'       |		
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''       | '520,00' |
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
@@ -3541,7 +3542,137 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		And I close all client application windows
 		
 
+Scenario: _0154191 create payment type group
+	* Open payment type catalog
+		Given I open hyperlink "e1cib/list/Catalog.PaymentTypes"
+	* Create payment type group
+		And I click "Create" button
+		And I input "Bank 01" text in "ENG" field
+		And I click "Save and close" button
+		And I click "Create" button
+		And I input "Bank 02" text in "ENG" field
+		And I click "Save and close" button
+	* Create 2 payment type in group
+		And I click "Create" button
+		And I input "Card 03" text in "ENG" field
+		And I select "Card" exact value from the drop-down list named "Type"
+		And I click Choice button of the field named "Parent"
+		Then "Payment types" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bank 02'     |
+		And I select current line in "List" table		
+		And I click "Save and close" button
+		And I click "Create" button
+		And I input "Card 04" text in "ENG" field
+		And I select "Card" exact value from the drop-down list named "Type"
+		And I click Choice button of the field named "Parent"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bank 02'     |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I close all client application windows
+		
 
+Scenario: _0154192 create document Retail Sales Receipt from Point of sale (payment by card)
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.BankTerms"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Bank term 01' |
+		And I select current line in "List" table
+		Then "Bank term * (Bank term)" window is opened
+		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
+		And I click choice button of "Payment type" attribute in "PaymentTypes" table
+		Then "Payment types" window is opened
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 03'     |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Account" field in "PaymentTypes" table
+		And I click choice button of "Account" attribute in "PaymentTypes" table
+		Then "Cash/Bank accounts" window is opened
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Percent" field in "PaymentTypes" table
+		And I input "1,00" text in "Percent" field of "PaymentTypes" table
+		And I finish line editing in "PaymentTypes" table
+		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
+		And I click choice button of "Payment type" attribute in "PaymentTypes" table
+		Then "Payment types" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 04'     |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Account" field in "PaymentTypes" table
+		And I click choice button of "Account" attribute in "PaymentTypes" table
+		Then "Cash/Bank accounts" window is opened
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Percent" field in "PaymentTypes" table
+		And I input "1,00" text in "Percent" field of "PaymentTypes" table
+		And I finish line editing in "PaymentTypes" table
+		And I click "Save and close" button		
+		And I close all client application windows
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"
+	* Add product (pick up)
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+			| 'Item'     |
+			| 'Trousers' |
+		And I activate field named "ItemsPickupItem" in "ItemsPickup" table
+		And I go to line in "ItemKeysPickup" table
+			| 'Presentation' |
+			| '38/Yellow' |
+		And I select current line in "ItemKeysPickup" table
+		And "ItemList" table became equal
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
+	* Payment (Card)
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+	* Select payment type from group					
+		Then "Payment types" window is opened
+		And I click the hyperlink named "Page_0"
+		And I move to the next attribute		
+		And I click "[0]" button
+		And I click "[Esc]" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_0"	
+		And I click the hyperlink named "PayButton_0_0"
+		Then "Payment" window is opened
+		And I click "2" button
+		And I click "0" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"	
+		Then "Payment" window is opened
+		And I click "2" button
+		And I click "0" button
+		And I click "0" button
+		And I click the button named "Enter"
+		And I close all client application windows
+		
+		
+						
+				
+		
+				
 
 		
 							

@@ -134,6 +134,10 @@ Function XSLTransformation(XML, XSLT) Export
 	Return XSLTransform.TransformFromString(XML);
 EndFunction
 
+Function GetStyleByName(Name) Export
+	Return StyleColors[Name];
+EndFunction
+
 #Region QueryBuilder
 
 Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export

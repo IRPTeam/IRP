@@ -2,7 +2,6 @@
 	<head>
 	 <style>
 	div.containerDate {
-	  height: 10em;
 	  display: flex;
 	  align-items: center;
 	  justify-content: center
@@ -10,7 +9,7 @@
 	div.containerDate p {
 	  margin: 0
 	  }
-	html { overflow:  hidden; }
+	html { overflow:  hidden;  font-family: 'tahoma'; }
   </style>
   </head>
 	<body>

@@ -245,9 +245,8 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
 	ObjectParameters.Insert("Workstation", Workstation);
-	OpenFormParameters = New Structure();
-	OpenFormParameters.Insert("Parameters", ObjectParameters);
-	OpenForm("DataProcessor.PointOfSale.Form.Payment", OpenFormParameters, ThisObject, UUID, , ,
+
+	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
 		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
@@ -367,6 +366,7 @@ Procedure UpdateHTMLPictures() Export
 	EndIf;
 
 	ItemPicture = GetURL(GetPictureFile(CurrentRow.Item), "Preview");
+
 EndProcedure
 
 &AtServerNoContext

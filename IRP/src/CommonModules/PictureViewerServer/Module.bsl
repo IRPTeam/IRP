@@ -508,7 +508,7 @@ Function PicturesInfoForSlider(ItemRef, FileRef = Undefined, UseFullSizePhoto = 
 			EndIf;
 		EndIf;
 		
-		PictureStructure.Preview = Picture.Ref.Preview.Get();
+		PictureStructure.Preview = GetURL(Picture.Ref, "Preview");
 
 		PicArray.Add(PictureStructure);
 	EndDo;

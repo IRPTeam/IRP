@@ -57,10 +57,8 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.PaymentTypes.Form.ItemForm</defaultObjectForm>
-  <defaultFolderForm>Catalog.PaymentTypes.Form.GroupForm</defaultFolderForm>
   <defaultListForm>Catalog.PaymentTypes.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.PaymentTypes.Form.ChoiceForm</defaultChoiceForm>
-  <defaultFolderChoiceForm>Catalog.PaymentTypes.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="8e4bc5b0-9652-4c7f-9cc9-16ba8c661548">
     <name>Type</name>
@@ -174,24 +172,6 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="defd488d-2495-4a34-b4e0-595dd25c9a77">
-    <name>GroupChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Group choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="148be6d7-0162-4920-a4ac-31dc14e93124">
-    <name>GroupForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Group form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

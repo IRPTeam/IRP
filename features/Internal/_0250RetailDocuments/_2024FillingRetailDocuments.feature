@@ -532,7 +532,8 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 	* Payment (Card)
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
-		And I click "Card 01" button
+		// And I click "[2] Card 01" button	
+		And I click the hyperlink named "Page_1"			
 		And I click "2" button
 		And I click "0" button
 		And I click "5" button
@@ -791,7 +792,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "8" button
 			And I click "8" button
 			And I click "Card (*)" button
-			And I click "Card 01" button
+			And I click the hyperlink named "Page_1"
 			And I click "1" button
 			And I click "0" button
 			And I click "0" button
@@ -878,7 +879,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "Card 01" button
+				And I click the hyperlink named "Page_1"
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -898,7 +899,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "Card 01" button
+				And I click the hyperlink named "Page_1"
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -921,7 +922,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "Card 01" button
+				And I click the hyperlink named "Page_1"
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -948,7 +949,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' | 'Amount'   |
 					| 'Card 01'      | '560,40'   |
 					| 'Cash'         | '899,60'     |
-				And I close "Payment: Point of sale" window
+				And I close "Payment" window
 	* New retail sales receipt with amount 1 299 754,89
 		And I go to line in "ItemsPickup" table
 			| 'Item'  |
@@ -1029,7 +1030,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '10 000 000,98' |
 			Then the form attribute named "Cashback" became equal to "8 698 786,09"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 	* New retail sales receipt with amount 0,4
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
@@ -1068,7 +1069,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '1,00' |
 			Then the form attribute named "Cashback" became equal to "0,6"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 	* New retail sales receipt with amount 0,41
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I go to line in "ItemsPickup" table
@@ -1093,7 +1094,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '1,00' |
 			Then the form attribute named "Cashback" became equal to "0,59"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 	* New retail sales receipt with amount 0,09
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I go to line in "ItemsPickup" table
@@ -1120,7 +1121,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '0,10' |
 			Then the form attribute named "Cashback" became equal to "0,01"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 		And I close all client application windows
 		
 Scenario: _0154140 check filling in retail customer from the POS (without partner)
@@ -3542,6 +3543,104 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		
 
 
+Scenario: _0154192 create document Retail Sales Receipt from Point of sale (payment by card)
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.BankTerms"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Bank term 01' |
+		And I select current line in "List" table
+		Then "Bank term * (Bank term)" window is opened
+		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
+		And I click choice button of "Payment type" attribute in "PaymentTypes" table
+		Then "Payment types" window is opened
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 03'     |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Account" field in "PaymentTypes" table
+		And I click choice button of "Account" attribute in "PaymentTypes" table
+		Then "Cash/Bank accounts" window is opened
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Percent" field in "PaymentTypes" table
+		And I input "1,00" text in "Percent" field of "PaymentTypes" table
+		And I finish line editing in "PaymentTypes" table
+		And in the table "PaymentTypes" I click the button named "PaymentTypesAdd"
+		And I click choice button of "Payment type" attribute in "PaymentTypes" table
+		Then "Payment types" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 04'     |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Account" field in "PaymentTypes" table
+		And I click choice button of "Account" attribute in "PaymentTypes" table
+		Then "Cash/Bank accounts" window is opened
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		Then "Bank term * (Bank term) *" window is opened
+		And I activate "Percent" field in "PaymentTypes" table
+		And I input "1,00" text in "Percent" field of "PaymentTypes" table
+		And I finish line editing in "PaymentTypes" table
+		And I click "Save and close" button		
+		And I close all client application windows
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"
+	* Add product (pick up)
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+			| 'Item'     |
+			| 'Trousers' |
+		And I activate field named "ItemsPickupItem" in "ItemsPickup" table
+		And I go to line in "ItemKeysPickup" table
+			| 'Presentation' |
+			| '38/Yellow' |
+		And I select current line in "ItemKeysPickup" table
+		And "ItemList" table became equal
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Trousers' | '38/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
+	* Payment (Card)
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+	* Select payment type from group					
+		Then "Payment types" window is opened
+		And I click the hyperlink named "Page_0"
+		And I move to the next attribute		
+		And I click "[0]" button
+		And I click "[Esc]" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_0"	
+		And I click the hyperlink named "PayButton_0_0"
+		Then "Payment" window is opened
+		And I click "2" button
+		And I click "0" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"	
+		Then "Payment" window is opened
+		And I click "2" button
+		And I click "0" button
+		And I click "0" button
+		And I click the button named "Enter"
+		And I close all client application windows
+		
+		
+						
+				
+		
+				
 
 		
 							

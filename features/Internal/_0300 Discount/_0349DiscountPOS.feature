@@ -19,7 +19,7 @@ Scenario: _034901 preparation (discounts in POS)
 Scenario: _034902 check discount price type calculation in POS
 	* Open POS and add items
 		And In the command interface I select "Retail" "Point of sale"
-		Then "POS" window is opened
+		Then "Point of sale" window is opened
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
 			| 'Item'  |

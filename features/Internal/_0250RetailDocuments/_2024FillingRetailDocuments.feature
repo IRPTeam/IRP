@@ -532,7 +532,8 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 	* Payment (Card)
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
-		And I click "[1] Card 01" button		
+		// And I click "[2] Card 01" button	
+		And I click the hyperlink named "Page_1"			
 		And I click "2" button
 		And I click "0" button
 		And I click "5" button
@@ -791,7 +792,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "8" button
 			And I click "8" button
 			And I click "Card (*)" button
-			And I click "[1] Card 01" button
+			And I click the hyperlink named "Page_1"
 			And I click "1" button
 			And I click "0" button
 			And I click "0" button
@@ -878,7 +879,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "[1] Card 01" button
+				And I click the hyperlink named "Page_1"
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -898,7 +899,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "[1] Card 01" button
+				And I click the hyperlink named "Page_1"
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -921,7 +922,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
 				And I click "Card (*)" button
-				And I click "[1] Card 01" button
+				And I click the hyperlink named "Page_1"
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -948,7 +949,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' | 'Amount'   |
 					| 'Card 01'      | '560,40'   |
 					| 'Cash'         | '899,60'     |
-				And I close "Payment: Point of sale" window
+				And I close "Payment" window
 	* New retail sales receipt with amount 1 299 754,89
 		And I go to line in "ItemsPickup" table
 			| 'Item'  |
@@ -1029,7 +1030,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '10 000 000,98' |
 			Then the form attribute named "Cashback" became equal to "8 698 786,09"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 	* New retail sales receipt with amount 0,4
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
@@ -1068,7 +1069,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '1,00' |
 			Then the form attribute named "Cashback" became equal to "0,6"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 	* New retail sales receipt with amount 0,41
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I go to line in "ItemsPickup" table
@@ -1093,7 +1094,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '1,00' |
 			Then the form attribute named "Cashback" became equal to "0,59"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 	* New retail sales receipt with amount 0,09
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I go to line in "ItemsPickup" table
@@ -1120,7 +1121,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '0,10' |
 			Then the form attribute named "Cashback" became equal to "0,01"
-			And I close "Payment: Point of sale" window
+			And I close "Payment" window
 		And I close all client application windows
 		
 Scenario: _0154140 check filling in retail customer from the POS (without partner)
@@ -3646,18 +3647,21 @@ Scenario: _0154192 create document Retail Sales Receipt from Point of sale (paym
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
 	* Select payment type from group					
-		And I click "[1] Bank 02 >" button	
+		Then "Payment types" window is opened
+		And I click the hyperlink named "Page_0"
+		And I move to the next attribute		
 		And I click "[0]" button
 		And I click "[Esc]" button
-		And I click "Card (*)" button	
-		And I click "[2] Card 04" button
-		Then "Payment: Point of sale" window is opened
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_0"	
+		And I click the hyperlink named "PayButton_0_0"
+		Then "Payment" window is opened
 		And I click "2" button
 		And I click "0" button
 		And I click "0" button
 		And I click "Card (*)" button
-		And I click "[2] Card 02" button
-		Then "Payment: Point of sale" window is opened
+		And I click the hyperlink named "Page_1"	
+		Then "Payment" window is opened
 		And I click "2" button
 		And I click "0" button
 		And I click "0" button

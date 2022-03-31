@@ -1783,6 +1783,7 @@ EndProcedure
 
 // RetailCustomer.OnChange
 Procedure RetailCustomerOnChange(Parameters) Export
+	ProceedPropertyBeforeChange_Object(Parameters);
 	Binding = BindRetailCustomer(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure

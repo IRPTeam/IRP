@@ -170,7 +170,8 @@ Function GetObjectPropertyNamesBeforeChange()
 		|TransactionType,
 		|Sender,
 		|Receiver,
-		|CashTransferOrder";
+		|CashTransferOrder,
+		|RetailCustomer";
 EndFunction
 
 // returns list of Table attributes for get value before the change
@@ -289,6 +290,7 @@ Procedure __tmp_SalesPurchaseInvoice_OnChainComplete(Parameters)
 	ArrayOfEventCallers.Add("PartnerOnUserChange");
 	ArrayOfEventCallers.Add("AgreementOnUserChange");
 	ArrayOfEventCallers.Add("StoreOnUserChange");
+	ArrayOfEventCallers.Add("RetailCustomerOnUserChange");
 	
 	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
 		CommitChanges(Parameters);
@@ -1626,8 +1628,13 @@ EndProcedure
 #Region RETAIL_CUSTOMER
 
 Procedure RetailCustomerOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("RetailCustomer", FormParameters);
+	FormParameters.EventCaller = "RetailCustomerOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
-		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.RetailCustomerOnChange(Parameters);
 	EndDo;
 EndProcedure

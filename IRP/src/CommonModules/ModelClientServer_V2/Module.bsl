@@ -176,6 +176,10 @@ Function GetChain()
 	Chain.Insert("Calculations" , GetChainLink("CalculationsExecute"));
 	Chain.Insert("UpdatePaymentTerms" , GetChainLink("UpdatePaymentTermsExecute"));
 	
+	Chain.Insert("ChangePartnerByRetailCustomer"   , GetChainLink("ChangePartnerByRetailCustomerExecute"));
+	Chain.Insert("ChangeAgreementByRetailCustomer" , GetChainLink("ChangeAgreementByRetailCustomerExecute"));
+	Chain.Insert("ChangeLegalNameByRetailCustomer" , GetChainLink("ChangeLegalNameByRetailCustomerExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
 	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
@@ -397,6 +401,19 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_LEGAL_NAME_BY_RETAIL_CUSTOMER
+
+Function ChangeLegalNameByRetailCustomerOptions() Export
+	Return GetChainLinkOptions("RetailCustomer");
+EndFunction
+
+Function ChangeLegalNameByRetailCustomerExecute(Options) Export
+	RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
+	Return RetailCustomerInfo.LegalName;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_PARTNER_BY_LEGAL_NAME
 
 Function ChangePartnerByLegalNameOptions() Export
@@ -417,6 +434,19 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_PARTNER_BY_RETAIL_CUSTOMER
+
+Function ChangePartnerByRetailCustomerOptions() Export
+	Return GetChainLinkOptions("RetailCustomer");
+EndFunction
+
+Function ChangePartnerByRetailCustomerExecute(Options) Export
+	RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
+	Return RetailCustomerInfo.Partner;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_AGREEMENT_BY_PARTNER
 
 Function ChangeAgreementByPartnerOptions() Export
@@ -425,6 +455,19 @@ EndFunction
 
 Function ChangeAgreementByPartnerExecute(Options) Export
 	Return DocumentsServer.GetAgreementByPartner(Options);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_AGREEMENT_BY_RETAIL_CUSTOMER
+
+Function ChangeAgreementByRetailCustomerOptions() Export
+	Return GetChainLinkOptions("RetailCustomer");
+EndFunction
+
+Function ChangeAgreementByRetailCustomerExecute(Options) Export
+	RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
+	Return RetailCustomerInfo.Agreement;
 EndFunction
 
 #EndRegion

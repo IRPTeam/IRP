@@ -1623,6 +1623,17 @@ EndProcedure
 
 #EndRegion
 
+#Region RETAIL_CUSTOMER
+
+Procedure RetailCustomerOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.RetailCustomerOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region PRICE_INCLUDE_TAX
 
 Procedure PriceIncludeTaxOnChange(Object, Form) Export

@@ -31,6 +31,16 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	Return;
+EndProcedure
+
 #Region FormTableItemsEventHandlers
 
 #Region ItemListEvents
@@ -371,7 +381,7 @@ EndProcedure
 Procedure SetRetailCustomer(Value, AddInfo = Undefined) Export
 	If ValueIsFilled(Value) Then
 		Object.RetailCustomer = Value;
-		DocRetailSalesReceiptClient.RetailCustomerPointOfSaleOnChange(Object, ThisObject,
+		DocRetailSalesReceiptClient.RetailCustomerOnChange(Object, ThisObject,
 			ThisObject.Items.RetailCustomer);
 	EndIf;
 EndProcedure
@@ -402,8 +412,11 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
-		"SpecialOffersEditFinish_ForRow");
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, CurrentData, ThisObject, "SpecialOffersEditFinish_ForRow");
 EndProcedure
 
 &AtClient
@@ -754,7 +767,7 @@ EndProcedure
 &AtClient
 Procedure ClearRetailCustomer(Command)
 	Object.RetailCustomer = Undefined;
-	DocRetailSalesReceiptClient.RetailCustomerPointOfSaleOnChange(Object, ThisObject, Undefined);
+	DocRetailSalesReceiptClient.RetailCustomerOnChange(Object, ThisObject, Undefined);
 
 	ClearRetailCustomerAtServer();
 	DocRetailSalesReceiptClient.AgreementOnChange(Object, ThisObject, Items.RetailCustomer);

@@ -1705,7 +1705,7 @@ Function BindPartner(Parameters)
 		|StepChangeLegalNameByPartner,
 		|StepChangeManagerSegmentByPartner");
 
-Binding.Insert("RetailSalesReceipt",
+	Binding.Insert("RetailSalesReceipt",
 		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
 		|StepChangeLegalNameByPartner,
 		|StepChangeManagerSegmentByPartner");
@@ -1716,6 +1716,16 @@ Binding.Insert("RetailSalesReceipt",
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+// Partner.ChangePartnerByRetailCustomer.Step
+Procedure StepChangePartnerByRetailCustomer(Parameters, Chain) Export
+	Chain.ChangePartnerByRetailCustomer.Enable = True;
+	Chain.ChangePartnerByRetailCustomer.Setter = "SetPartner";
+	Options = ModelClientServer_V2.ChangePartnerByRetailCustomerOptions();
+	Options.RetailCustomer = GetRetailCustomer(Parameters);
+	Options.StepName = "StepChangePartnerByRetailCustomer";
+	Chain.ChangePartnerByRetailCustomer.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -1756,6 +1766,48 @@ Procedure StepChangeLegalNameByPartner(Parameters, Chain) Export
 	Options.StepName = "StepChangeLegalNameByPartner";
 	Chain.ChangeLegalNameByPartner.Options.Add(Options);
 EndProcedure
+
+// LegalName.ChangeLegalNameByRetailCustomer.Step
+Procedure StepChangeLegalNameByRetailCustomer(Parameters, Chain) Export
+	Chain.ChangeLegalNameByRetailCustomer.Enable = True;
+	Chain.ChangeLegalNameByRetailCustomer.Setter = "SetLegalName";
+	Options = ModelClientServer_V2.ChangeLegalNameByRetailCustomerOptions();
+	Options.RetailCustomer = GetRetailCustomer(Parameters);
+	Options.StepName = "StepChangeLegalNameByRetailCustomer";
+	Chain.ChangeLegalNameByRetailCustomer.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region RETAIL_CUSTOMER
+
+// RetailCustomer.OnChange
+Procedure RetailCustomerOnChange(Parameters) Export
+	Binding = BindRetailCustomer(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// RetailCustomer.Set
+Procedure SetRetailCustomer(Parameters, Results) Export
+	Binding = BindRetailCustomer(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// RetailCustomer.Get
+Function GetRetailCustomer(Parameters)
+	Return GetPropertyObject(Parameters, BindRetailCustomer(Parameters).DataPath);
+EndFunction
+
+// RetailCustomer.Bind
+Function BindRetailCustomer(Parameters)
+	DataPath = "RetailCustomer";
+	Binding = New Structure();
+	Binding.Insert("RetailSalesReceipt",
+		"StepChangePartnerByRetailCustomer,
+		|StepChangeAgreementByRetailCustomer,
+		|StepChangeLegalNameByRetailCustomer");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 
@@ -2087,6 +2139,16 @@ Procedure StepChangeAgreementByPartner(Parameters, Chain, AgreementType)
 	Options.AgreementType = AgreementType;
 	Options.StepName = "StepChangeAgreementByPartner";
 	Chain.ChangeAgreementByPartner.Options.Add(Options);
+EndProcedure
+
+// Agreement.ChangeAgreementByRetailCustomer.Step
+Procedure StepChangeAgreementByRetailCustomer(Parameters, Chain) Export
+	Chain.ChangeAgreementByRetailCustomer.Enable = True;
+	Chain.ChangeAgreementByRetailCustomer.Setter = "SetAgreement";
+	Options = ModelClientServer_V2.ChangeAgreementByRetailCustomerOptions();
+	Options.RetailCustomer = GetRetailCustomer(Parameters);
+	Options.StepName = "StepChangeAgreementByRetailCustomer";
+	Chain.ChangeAgreementByRetailCustomer.Options.Add(Options);
 EndProcedure
 
 #EndRegion

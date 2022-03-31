@@ -6191,4 +6191,15 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>InformationRegister.ExpenseRevenueTypeSettings</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

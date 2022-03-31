@@ -1518,7 +1518,6 @@ Function BindDate(Parameters)
 	Binding.Insert("RetailSalesReceipt",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
-		|StepChangeDeliveryDateByAgreement,
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");

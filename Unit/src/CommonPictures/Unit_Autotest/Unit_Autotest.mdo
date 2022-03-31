@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5352e896-3717-4623-a465-da9b2ec63e3d">
+  <name>Unit_Autotest</name>
+  <synonym>
+    <key>en</key>
+    <value>Autotest</value>
+  </synonym>
+</mdclass:CommonPicture>

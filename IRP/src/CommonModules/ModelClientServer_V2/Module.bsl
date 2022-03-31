@@ -179,6 +179,7 @@ Function GetChain()
 	Chain.Insert("ChangePartnerByRetailCustomer"   , GetChainLink("ChangePartnerByRetailCustomerExecute"));
 	Chain.Insert("ChangeAgreementByRetailCustomer" , GetChainLink("ChangeAgreementByRetailCustomerExecute"));
 	Chain.Insert("ChangeLegalNameByRetailCustomer" , GetChainLink("ChangeLegalNameByRetailCustomerExecute"));
+	Chain.Insert("ChangeUsePartnerTransactionsByRetailCustomer" , GetChainLink("ChangeUsePartnerTransactionsByRetailCustomerExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
@@ -443,6 +444,19 @@ EndFunction
 Function ChangePartnerByRetailCustomerExecute(Options) Export
 	RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
 	Return RetailCustomerInfo.Partner;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_USE_PARTNER_TRANSACTIONS_BY_RETAIL_CUSTOMER
+
+Function ChangeUsePartnerTransactionsByRetailCustomerOptions() Export
+	Return GetChainLinkOptions("RetailCustomer");
+EndFunction
+
+Function ChangeUsePartnerTransactionsByRetailCustomerExecute(Options) Export
+	RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Options.RetailCustomer);
+	Return RetailCustomerInfo.UsePartnerTransactions;
 EndFunction
 
 #EndRegion

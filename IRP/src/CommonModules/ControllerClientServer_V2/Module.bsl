@@ -1806,9 +1806,38 @@ Function BindRetailCustomer(Parameters)
 	Binding.Insert("RetailSalesReceipt",
 		"StepChangePartnerByRetailCustomer,
 		|StepChangeAgreementByRetailCustomer,
-		|StepChangeLegalNameByRetailCustomer");
+		|StepChangeLegalNameByRetailCustomer,
+		|StepChangeUsePartnerTransactionsByRetailCustomer");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+#EndRegion
+
+#Region USE_PARTNER_TRANSACTIONS 
+
+// UsePartnerTransactions.Set
+Procedure SetUsePartnerTransactions(Parameters, Results) Export
+	Binding = BindUsePartnerTransactions(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// UsePartnerTransactions.Bind
+Function BindUsePartnerTransactions(Parameters)
+	DataPath = "UsePartnerTransactions";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// UsePartnerTransactions.ChangeUsePartnerTransactionsByRetailCustomer.Step
+Procedure StepChangeUsePartnerTransactionsByRetailCustomer(Parameters, Chain) Export
+	Chain.ChangeUsePartnerTransactionsByRetailCustomer.Enable = True;
+	Chain.ChangeUsePartnerTransactionsByRetailCustomer.Setter = "SetUsePartnerTransactions";
+	Options = ModelClientServer_V2.ChangeUsePartnerTransactionsByRetailCustomerOptions();
+	Options.RetailCustomer = GetRetailCustomer(Parameters);
+	Options.StepName = "StepChangeUsePartnerTransactionsByRetailCustomer";
+	Chain.ChangeUsePartnerTransactionsByRetailCustomer.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 

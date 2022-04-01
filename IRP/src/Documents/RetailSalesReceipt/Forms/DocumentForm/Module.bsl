@@ -12,7 +12,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	//DocRetailSalesReceiptServer.CalculateTableAtServer(ThisObject, Object);
 EndProcedure
 
 &AtServer
@@ -51,11 +50,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		Return;
 	EndIf;
 EndProcedure
-
-//&AtClient
-//Procedure BeforeWrite(Cancel, WriteParameters)
-//	Return;
-//EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
@@ -118,7 +112,6 @@ EndProcedure
 &AtClient
 Procedure PartnerOnChange(Item)
 	DocRetailSalesReceiptClient.PartnerOnChange(Object, ThisObject, Item);
-	//SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient

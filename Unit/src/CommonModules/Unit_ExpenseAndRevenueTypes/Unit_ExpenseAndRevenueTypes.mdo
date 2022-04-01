@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="35e8b531-63ad-4d81-9d58-6e4deafd226b">
+  <name>Unit_ExpenseAndRevenueTypes</name>
+  <synonym>
+    <key>en</key>
+    <value>Expense and revenue types</value>
+  </synonym>
+  <server>true</server>
+  <externalConnection>true</externalConnection>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

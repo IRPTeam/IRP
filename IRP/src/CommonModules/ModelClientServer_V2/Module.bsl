@@ -180,6 +180,9 @@ Function GetChain()
 	Chain.Insert("ChangeAgreementByRetailCustomer" , GetChainLink("ChangeAgreementByRetailCustomerExecute"));
 	Chain.Insert("ChangeLegalNameByRetailCustomer" , GetChainLink("ChangeLegalNameByRetailCustomerExecute"));
 	Chain.Insert("ChangeUsePartnerTransactionsByRetailCustomer" , GetChainLink("ChangeUsePartnerTransactionsByRetailCustomerExecute"));
+
+	Chain.Insert("ChangeExpenseTypeByItemKey" , GetChainLink("ChangeExpenseTypeByItemKeyExecute"));
+	Chain.Insert("ChangeRevenueTypeByItemKey" , GetChainLink("ChangeRevenueTypeByItemKeyExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
@@ -703,6 +706,30 @@ Function ChangeDeliveryDateByAgreementExecute(Options) Export
 		Return AgreementInfo.DeliveryDate;
 	EndIf;
 	Return Options.CurrentDeliveryDate;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_EXPENSE_TYPE_BY_ITEMKEY
+
+Function ChangeExpenseTypeByItemKeyOptions() Export
+	Return GetChainLinkOptions("Company, ItemKey");
+EndFunction
+
+Function ChangeExpenseTypeByItemKeyExecute(Options) Export
+	Return CatExpenseAndRevenueTypesServer.GetExpenseType(Options.Company, Options.ItemKey);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_REVENUE_TYPE_BY_ITEMKEY
+
+Function ChangeRevenueTypeByItemKeyOptions() Export
+	Return GetChainLinkOptions("Company, ItemKey");
+EndFunction
+
+Function ChangeRevenueTypeByItemKeyExecute(Options) Export
+	Return CatExpenseAndRevenueTypesServer.GetRevenueType(Options.Company, Options.ItemKey);
 EndFunction
 
 #EndRegion

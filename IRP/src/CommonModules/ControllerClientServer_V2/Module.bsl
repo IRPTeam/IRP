@@ -1569,11 +1569,13 @@ Function BindCompany(Parameters)
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled");
+		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepItemListChangeRevenueTypeByItemKey");
 
 	Binding.Insert("PurchaseInvoice",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled");
+		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
 	Binding.Insert("OutgoingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
@@ -3490,7 +3492,8 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepExtractDataItemKeysWithSerialLotNumbers,
-		|StepChangeUnitByItemKey");
+		|StepChangeUnitByItemKey,
+		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangeUseGoodsReceiptByStore,
@@ -3498,7 +3501,8 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepExtractDataItemKeysWithSerialLotNumbers,
-		|StepChangeUnitByItemKey");
+		|StepChangeUnitByItemKey,
+		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("InternalSupplyRequest",
 		"StepChangeUnitByItemKey");
@@ -4317,6 +4321,68 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";
 		Chain.Calculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region REVENUE_TYPE
+
+// ItemList.RevenueType.Set
+Procedure SetItemListRevenueType(Parameters, Results) Export
+	Binding = BindItemListRevenueType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.RevenueType.Bind
+Function BindItemListRevenueType(Parameters)
+	DataPath = "ItemList.RevenueType";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.RevenueType.ChangeRevenueTypeByItemKey.Step
+Procedure StepItemListChangeRevenueTypeByItemKey(Parameters, Chain) Export
+	Chain.ChangeRevenueTypeByItemKey.Enable = True;
+	Chain.ChangeRevenueTypeByItemKey.Setter = "SetItemListRevenueType";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeRevenueTypeByItemKeyOptions();
+		Options.Company = GetCompany(Parameters);
+		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeRevenueTypeByItemKey";
+		Chain.ChangeRevenueTypeByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region EXPENSE_TYPE
+
+// ItemList.ExpenseType.Set
+Procedure SetItemListExpenseType(Parameters, Results) Export
+	Binding = BindItemListExpenseType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ExpenseType.Bind
+Function BindItemListExpenseType(Parameters)
+	DataPath = "ItemList.ExpenseType";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.ExpenseType.ChangeExpenseTypeByItemKey.Step
+Procedure StepItemListChangeExpenseTypeByItemKey(Parameters, Chain) Export
+	Chain.ChangeExpenseTypeByItemKey.Enable = True;
+	Chain.ChangeExpenseTypeByItemKey.Setter = "SetItemListExpenseType";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeExpenseTypeByItemKeyOptions();
+		Options.Company = GetCompany(Parameters);
+		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeExpenseTypeByItemKey";
+		Chain.ChangeExpenseTypeByItemKey.Options.Add(Options);
 	EndDo;
 EndProcedure
 

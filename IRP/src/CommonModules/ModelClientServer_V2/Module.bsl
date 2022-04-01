@@ -176,6 +176,9 @@ Function GetChain()
 	Chain.Insert("Calculations" , GetChainLink("CalculationsExecute"));
 	Chain.Insert("UpdatePaymentTerms" , GetChainLink("UpdatePaymentTermsExecute"));
 	
+	Chain.Insert("ChangeExpenseTypeByItemKey" , GetChainLink("ChangeExpenseTypeByItemKeyExecute"));
+	Chain.Insert("ChangeRevenueTypeByItemKey" , GetChainLink("ChangeRevenueTypeByItemKeyExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
 	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
@@ -646,6 +649,30 @@ Function ChangeDeliveryDateByAgreementExecute(Options) Export
 		Return AgreementInfo.DeliveryDate;
 	EndIf;
 	Return Options.CurrentDeliveryDate;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_EXPENSE_TYPE_BY_ITEMKEY
+
+Function ChangeExpenseTypeByItemKeyOptions() Export
+	Return GetChainLinkOptions("Company, ItemKey");
+EndFunction
+
+Function ChangeExpenseTypeByItemKeyExecute(Options) Export
+	Return CatExpenseAndRevenueTypesServer.GetExpenseType(Options.Company, Options.ItemKey);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_REVENUE_TYPE_BY_ITEMKEY
+
+Function ChangeRevenueTypeByItemKeyOptions() Export
+	Return GetChainLinkOptions("Company, ItemKey");
+EndFunction
+
+Function ChangeRevenueTypeByItemKeyExecute(Options) Export
+	Return CatExpenseAndRevenueTypesServer.GetRevenueType(Options.Company, Options.ItemKey);
 EndFunction
 
 #EndRegion

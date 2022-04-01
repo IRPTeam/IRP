@@ -1193,8 +1193,8 @@ Scenario: _0154188 check customer on change in POS
 			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''       | '520,00' |
 	* Delete retail customer and check price change
 		And I click the button named "ClearRetailCustomer"
-		Then "Update item list info" window is opened
-		And I click "OK" button
+		#Then "Update item list info" window is opened
+		#And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''       | '520,00' |
@@ -1205,8 +1205,8 @@ Scenario: _0154188 check customer on change in POS
 			| 'Name Retail customer Surname Retail customer' |
 		And I select current line in "List" table
 		And I click "OK" button
-		Then "Update item list info" window is opened
-		And I click "OK" button
+		#Then "Update item list info" window is opened
+		#And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''       | '520,00' |
@@ -1217,8 +1217,8 @@ Scenario: _0154188 check customer on change in POS
 			| 'Retail customer Second' |
 		And I select current line in "List" table
 		And I click "OK" button
-		Then "Update item list info" window is opened
-		And I click "OK" button
+		#Then "Update item list info" window is opened
+		#And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''       | '520,00' |

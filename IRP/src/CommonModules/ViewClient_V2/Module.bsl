@@ -201,10 +201,15 @@ EndFunction
 
 Procedure OnChainComplete(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
 		__tmp_SalesPurchaseInvoice_OnChainComplete(Parameters);
 		Return;
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		And Upper(Parameters.Form.FormName) = Upper("Document.RetailSalesReceipt.Form.DocumentForm") Then
+			__tmp_SalesPurchaseInvoice_OnChainComplete(Parameters);
+			Return;
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"

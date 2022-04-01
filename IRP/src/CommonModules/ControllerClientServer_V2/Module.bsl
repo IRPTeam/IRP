@@ -409,7 +409,6 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined) Export
 	Bindings = GetAllBindings(Parameters);
 	Defaults = GetAllBindingsByDefault(Parameters);
 	
-//	ForceCommitChanges = True;
 	For Each ColumnName In StrSplit(Parameters.ObjectMetadataInfo.Tables[TableName].Columns, ",") Do
 		
 		// column has its own handler .Default call it
@@ -420,7 +419,6 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined) Export
 		EndIf;
 		Default = Defaults.Get(DataPath);
 		If Default<> Undefined Then
-//			ForceCommitChanges = False;
 			ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
 
 		// if column is filled  and has its own handler .OnChage call it
@@ -428,14 +426,12 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined) Export
 			SetPropertyObject(Parameters, DataPath, NewRow.Key, NewRow[ColumnName]);
 			Binding = Bindings.Get(DataPath);
 			If Binding <> Undefined Then
-//				ForceCommitChanges = False;
 				ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 			EndIf;
 		EndIf;
 	EndDo;
-//	If ForceCommitChanges Then
-		CommitChainChanges(Parameters);
-//	EndIf;
+	
+	CommitChainChanges(Parameters);
 EndProcedure
 
 #EndRegion

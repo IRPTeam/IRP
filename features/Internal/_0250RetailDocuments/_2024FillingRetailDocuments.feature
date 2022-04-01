@@ -1185,8 +1185,8 @@ Scenario: _0154188 check customer on change in POS
 			| 'Name Retail customer Surname Retail customer' |
 		And I select current line in "List" table
 		And I click "OK" button
-		Then "Update item list info" window is opened
-		And I click "OK" button
+		#Then "Update item list info" window is opened
+		#And I click "OK" button
 	* Check price
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
@@ -2494,6 +2494,8 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'Basic Partner terms, TRY' |
 			And I select current line in "List" table
 		* Tax calculation check
+			Then "Update item list info" window is opened
+			And I click "OK" button
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '61,02'      | '338,98'     | '400,00'       | 'Store 01' | 'Shop 01'       |
@@ -3467,8 +3469,8 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 			| 'Name Retail customer Surname Retail customer' |
 		And I select current line in "List" table
 		And I click "OK" button
-		Then "Update item list info" window is opened
-		And I click "OK" button
+		#Then "Update item list info" window is opened
+		#And I click "OK" button
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''       | '520,00' |

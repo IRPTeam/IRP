@@ -3438,7 +3438,7 @@ Scenario: _0154175 check change amount in POS
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
 			| 'Profit loss center' | 'Item'  | 'Price type'        | 'Item key' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    |
-			| 'Shop 01'       | 'Dress' | 'Basic Price Types' | 'L/Green'  | '1,000' | 'pcs'  | '76,27'      | '500,00' | '18%' | ''              | '423,73'     | '500,00'       | ''                    | 'Store 01' |
+			| 'Shop 01'       | 'Dress' | 'en description is empty' | 'L/Green'  | '1,000' | 'pcs'  | '76,27'      | '500,00' | '18%' | ''              | '423,73'     | '500,00'       | ''                    | 'Store 01' |
 			| 'Shop 01'       | 'Dress' | 'Basic Price Types' | 'S/Yellow' | '1,000' | 'pcs'  | '83,90'      | '550,00' | '18%' | ''              | '466,10'     | '550,00'       | ''                    | 'Store 01' |
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "889,83"
 		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "160,17"

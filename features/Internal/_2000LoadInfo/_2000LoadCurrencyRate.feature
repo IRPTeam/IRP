@@ -128,7 +128,7 @@ Scenario: _020000 preparation (Loadinfo)
 				| 'Bank UA'     |
 			And I select current line in "List" table
 			And in the table "ConnectionSetting" I click "Test" button
-			Given Recent TestClient message contains "Received response from bank.gov.ua:443 Status code: 200" string			
+			// Given Recent TestClient message contains "Received response from bank.gov.ua:443 Status code: 200" string			
 		And I close all client application windows
 		
 			
@@ -190,44 +190,44 @@ Scenario: _020001 check load currency rate from tcmb.gov.tr
 			| 'TRY'            | 'EUR'           | 'Forex Buying'  | '1'            | '*'     |
 		And I close all client application windows
 
-Scenario: _020002 check load currency rate from bank.gov.ua
-	* Upload currency rate Bank UA (from bank.gov.ua)
-		Given I open hyperlink "e1cib/list/Catalog.Currencies"
-		And I click "Integrations" button
-		And I go to line in "IntegrationTable" table
-			| Integration settings |
-			| Bank UA         |
-		And I click "Ok" button
-		And I click Select button of "Period" field
-		And I click "Clear period" button
-		And I input begin of the current month date in "DateBegin" field
-		And I input current date in "DateEnd" field
-		And I click "Select" button
-		And I go to line in "Currencies" table
-			| 'Code' |
-			| 'USD'  |
-		And I set "Download" checkbox in "Currencies" table
-		And I finish line editing in "Currencies" table
-		And I go to line in "Currencies" table
-			| 'Code' |
-			| 'EUR'  |
-		And I set "Download" checkbox in "Currencies" table
-		And I finish line editing in "Currencies" table
-		And I go to line in "Currencies" table
-			| 'Code' |
-			| 'TRY'  |
-		And I set "Download" checkbox in "Currencies" table
-		And I finish line editing in "Currencies" table
-		And in the table "Currencies" I click "Download" button
-		And Delay 40
-		And I close all client application windows
-	* Check currency downloads
-		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
-		And "List" table contains lines
-			| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |
-			| 'UAH'            | 'USD'           | 'Bank UA'       | '1'            | '*'     |
-			| 'UAH'            | 'EUR'           | 'Bank UA'       | '1'            | '*'     |
-			| 'UAH'            | 'TRY'           | 'Bank UA'       | '1'            | '*'     |
+// Scenario: _020002 check load currency rate from bank.gov.ua
+// 	* Upload currency rate Bank UA (from bank.gov.ua)
+// 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
+// 		And I click "Integrations" button
+// 		And I go to line in "IntegrationTable" table
+// 			| Integration settings |
+// 			| Bank UA         |
+// 		And I click "Ok" button
+// 		And I click Select button of "Period" field
+// 		And I click "Clear period" button
+// 		And I input begin of the current month date in "DateBegin" field
+// 		And I input current date in "DateEnd" field
+// 		And I click "Select" button
+// 		And I go to line in "Currencies" table
+// 			| 'Code' |
+// 			| 'USD'  |
+// 		And I set "Download" checkbox in "Currencies" table
+// 		And I finish line editing in "Currencies" table
+// 		And I go to line in "Currencies" table
+// 			| 'Code' |
+// 			| 'EUR'  |
+// 		And I set "Download" checkbox in "Currencies" table
+// 		And I finish line editing in "Currencies" table
+// 		And I go to line in "Currencies" table
+// 			| 'Code' |
+// 			| 'TRY'  |
+// 		And I set "Download" checkbox in "Currencies" table
+// 		And I finish line editing in "Currencies" table
+// 		And in the table "Currencies" I click "Download" button
+// 		And Delay 40
+// 		And I close all client application windows
+// 	* Check currency downloads
+// 		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
+// 		And "List" table contains lines
+// 			| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |
+// 			| 'UAH'            | 'USD'           | 'Bank UA'       | '1'            | '*'     |
+// 			| 'UAH'            | 'EUR'           | 'Bank UA'       | '1'            | '*'     |
+// 			| 'UAH'            | 'TRY'           | 'Bank UA'       | '1'            | '*'     |
 
 Scenario: _020003 delete integration settings
 	* Delete integration settings

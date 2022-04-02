@@ -132,37 +132,39 @@ EndFunction
 Function ItemList()
 
 	Return "SELECT
-		   |	SalesOrderItemList.Ref.Date AS Period,
-		   |	SalesOrderItemList.Ref.Company AS Company,
-		   |	SalesOrderItemList.Store AS Store,
-		   |	SalesOrderItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
-		   |	SalesOrderItemList.ItemKey AS ItemKey,
-		   |	SalesOrderItemList.Ref.SalesOrder AS Order,
-		   |	SalesOrderItemList.Unit,
-		   |	SalesOrderItemList.ItemKey.Item AS Item,
-		   |	SalesOrderItemList.Key AS RowKey,
-		   |	SalesOrderItemList.DeliveryDate AS DeliveryDate,
-		   |	SalesOrderItemList.ProcurementMethod,
-		   |	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
-		   |	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
-		   |	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) 
-		   |	OR SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.IncomingReserve) AS IsProcurementMethod_NonReserve,
-		   |	SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-		   |	SalesOrderItemList.Ref.Currency AS Currency,
-		   |	SalesOrderItemList.Cancel AS IsCanceled,
-		   |	SalesOrderItemList.CancelReason,
-		   |	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
-		   |	SalesOrderItemList.Quantity AS UnitQuantity,
-		   |	SalesOrderItemList.QuantityInBaseUnit AS Quantity,
-		   |	SalesOrderItemList.OffersAmount AS OffersAmount,
-		   |	SalesOrderItemList.NetAmount AS NetAmount,
-		   |	SalesOrderItemList.TotalAmount AS Amount,
-		   |	SalesOrderItemList.Ref.Branch AS Branch
-		   |	INTO ItemList
-		   |FROM
-		   |	Document.SalesOrderClosing.ItemList AS SalesOrderItemList
-		   |WHERE
-		   |	SalesOrderItemList.Ref = &Ref";
+	|	SalesOrderItemList.Ref.Date AS Period,
+	|	SalesOrderItemList.Ref.Company AS Company,
+	|	SalesOrderItemList.Store AS Store,
+	|	SalesOrderItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+	|	SalesOrderItemList.ItemKey AS ItemKey,
+	|	SalesOrderItemList.Ref.SalesOrder AS Order,
+	|	SalesOrderItemList.Unit,
+	|	SalesOrderItemList.ItemKey.Item AS Item,
+	|	SalesOrderItemList.Key AS RowKey,
+	|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
+	|	SalesOrderItemList.ProcurementMethod,
+	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
+	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
+	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve)
+	|	OR SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.IncomingReserve) AS
+	|		IsProcurementMethod_NonReserve,
+	|	SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	SalesOrderItemList.Ref.Currency AS Currency,
+	|	SalesOrderItemList.Cancel AS IsCanceled,
+	|	SalesOrderItemList.CancelReason,
+	|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
+	|	SalesOrderItemList.Quantity AS UnitQuantity,
+	|	SalesOrderItemList.QuantityInBaseUnit AS Quantity,
+	|	SalesOrderItemList.OffersAmount AS OffersAmount,
+	|	SalesOrderItemList.NetAmount AS NetAmount,
+	|	SalesOrderItemList.TotalAmount AS Amount,
+	|	SalesOrderItemList.Ref.Branch AS Branch,
+	|	SalesOrderItemList.SalesPerson
+	|INTO ItemList
+	|FROM
+	|	Document.SalesOrderClosing.ItemList AS SalesOrderItemList
+	|WHERE
+	|	SalesOrderItemList.Ref = &Ref";
 EndFunction
 
 Function R2010T_SalesOrders()

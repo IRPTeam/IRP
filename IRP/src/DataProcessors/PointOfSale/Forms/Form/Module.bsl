@@ -1,3 +1,4 @@
+
 &AtClient
 Var Component Export;
 
@@ -21,13 +22,19 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If Source = ThisObject Then
-		DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-	EndIf;
-
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	Return;
 EndProcedure
 
 #Region FormTableItemsEventHandlers
@@ -42,23 +49,17 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListOnChange(Object, ThisObject, Item);
 	EnabledPaymentButton();
-	ItemListOnActivateRow(Item);
 	FillSalesPersonInItemList();
 EndProcedure
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	If Clone Then
-		Item.CurrentData.Key = New UUID();
-	EndIf;
-	DocumentsClient.TableOnStartEdit(Object, ThisObject, "Object.ItemList", Item, NewRow, Clone);
+	Return;
 EndProcedure
 
 &AtClient
 Procedure ItemListOnActivateRow(Item)
-	DocRetailSalesReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
 	UpdateHTMLPictures();
 	CurrentData = Items.ItemList.CurrentData;
 	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
@@ -69,43 +70,34 @@ EndProcedure
 #Region ItemListItemsEvents
 
 &AtClient
-Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListItemOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListItemKeyOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 	UpdateHTMLPictures();
 EndProcedure
 
 &AtClient
-Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListUnitOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListQuantityOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListPriceOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListPriceOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
-	CurrentData = ThisObject.Items.ItemList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	TaxesClient.CalculateReverseTaxOnChangeTotalAmount(Object, ThisObject, CurrentData);
+Procedure ItemListTotalAmountOnChange(Item)
+	DocRetailSalesReceiptClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -119,8 +111,9 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 #Region SerialLotNumbers
+
 &AtClient
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
 	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
 		StandardProcessing);
 EndProcedure
@@ -129,6 +122,7 @@ EndProcedure
 Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
 	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item);
 EndProcedure
+
 #EndRegion
 
 #EndRegion
@@ -138,33 +132,24 @@ EndProcedure
 &AtClient
 Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	StandardProcessing = False;
-	AddItemToItemList();
-EndProcedure
-
-&AtClient
-Procedure AddItemToItemList()
 	CurrentData = Items.ItemsPickup.CurrentData;
-	ItemListOnActivateRow(Items.ItemList);
-	Result = AfterItemChoice(CurrentData.Item, True);
-	If Not Result Then
+	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	ItemListOnStartEdit(Items.ItemList, True, False);
-	ItemListOnChange(Items.ItemList);
-	ItemListItemOnChange(Items.ItemList);
-	ItemListItemKeyOnChange(Items.ItemList);
-	CurrentDataItemList = Items.ItemList.CurrentData;
-
-	BuildDetailedInformation(?(CurrentDataItemList = Undefined, Undefined, CurrentDataItemList.ItemKey));
+	If ThisObject.ItemKeysPickup.Count() = 1 Then
+		AddItemKeyToItemList(CurrentData.Item, ThisObject.ItemKeysPickup[0].Ref);
+	EndIf;
 EndProcedure
 
 &AtClient
 Procedure ItemsPickupOnActivateRow(Item)
 	CurrentData = Items.ItemsPickup.CurrentData;
 	If CurrentData = Undefined Then
-		Return;
+		GetItemKeysByItem(Undefined);
+	Else
+		GetItemKeysByItem(CurrentData.Item);
 	EndIf;
-	AfterItemChoice(CurrentData.Item);
+
 	UpdateHTMLPictures();
 EndProcedure
 
@@ -174,22 +159,35 @@ EndProcedure
 
 &AtClient
 Procedure ItemKeysPickupSelection(Item, SelectedRow, Field, StandardProcessing)
-	AddItemKeyToItemList();
-EndProcedure
-
-&AtClient
-Procedure AddItemKeyToItemList()
-	Var CurrentData;
+	StandardProcessing = False;
 	CurrentData = Items.ItemKeysPickup.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	ItemKeysSelectionAtServer(CurrentData.Ref);
-	ItemListOnStartEdit(Items.ItemList, True, False);
-	ItemListOnChange(Items.ItemList);
-	ItemListItemKeyOnChange(Items.ItemList);
+	AddItemKeyToItemList(CurrentData.Item, CurrentData.Ref);
+EndProcedure
 
-	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.Ref));
+&AtClient
+Procedure AddItemKeyToItemList(Item, ItemKey)
+	Filter = New Structure("ItemKey", ItemKey);
+	ExistingRows = Object.ItemList.FindRows(Filter);
+	
+	If ExistingRows.Count() Then
+		Row = ExistingRows[0];
+		ViewClient_V2.SetItemListQuantity(Object, ThisObject, Row, Row.Quantity + 1);
+	Else
+		Row = ViewClient_V2.ItemListBeforeAddRow(Object, ThisObject);
+		
+		If Row.Item <> Item Then
+			ViewClient_V2.SetItemListItem(Object    , ThisObject, Row, Item);
+		EndIf;
+		If Row.ItemKey <> ItemKey Then
+			ViewClient_V2.SetItemListItemKey(Object , ThisObject, Row, ItemKey);
+		EndIf;
+	EndIf;
+	EnabledPaymentButton();
+	CurrentData = Items.ItemList.CurrentData;
+	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
 EndProcedure
 
 #EndRegion
@@ -205,7 +203,12 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, CurrentPriceType);
+	PriceType = PredefinedValue("Catalog.PriceKeys.EmptyRef");
+	If ValueIsFilled(Object.Agreement) Then
+		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
+		PriceType = AgreementInfo.PriceType;
+	EndIf;
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, PriceType);
 EndProcedure
 
 &AtClient
@@ -283,27 +286,39 @@ EndProcedure
 
 &AtClient
 Procedure SearchCustomer(Command)
-
 	Notify = New NotifyDescription("SetRetailCustomer", ThisObject);
 	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), , , ,
 		, Notify, FormWindowOpeningMode.LockOwnerWindow);
-
 EndProcedure
 
 &AtClient
 Procedure SetRetailCustomer(Value, AddInfo = Undefined) Export
 	If ValueIsFilled(Value) Then
 		Object.RetailCustomer = Value;
-		DocRetailSalesReceiptClient.RetailCustomerPointOfSaleOnChange(Object, ThisObject,
+		DocRetailSalesReceiptClient.RetailCustomerOnChange(Object, ThisObject,
 			ThisObject.Items.RetailCustomer);
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
-
-	AddItemKeyToItemList();
-
+	StandardProcessing = False;
+	If DragParameters.Action = DragAction.Move And DragParameters.Value.Count() Then
+		Value = DragParameters.Value[0];
+		If TypeOf(Value) = Type("CatalogRef.Items") Then
+			If ThisObject.ItemKeysPickup.Count() = 1 Then
+				AddItemKeyToItemList(Value, ThisObject.ItemKeysPickup[0].Ref);
+			EndIf;
+		ElsIf TypeOf(Value) = Type("FormDataCollectionItem") Then
+			If CommonFunctionsClientServer.ObjectHasProperty(Value, "Ref") 
+				And CommonFunctionsClientServer.ObjectHasProperty(Value, "Item") Then
+				CurrentData = Items.ItemKeysPickup.CurrentData;
+				If CurrentData <> Undefined Then
+					AddItemKeyToItemList(CurrentData.Item, CurrentData.Ref);
+				EndIf;
+			EndIf;
+		EndIf;
+	EndIf;
 EndProcedure
 
 #Region SpecialOffers
@@ -318,7 +333,6 @@ EndProcedure
 &AtClient
 Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
 	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
-
 EndProcedure
 
 #EndRegion
@@ -327,8 +341,11 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
-		"SpecialOffersEditFinish_ForRow");
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, CurrentData, ThisObject, "SpecialOffersEditFinish_ForRow");
 EndProcedure
 
 &AtClient
@@ -479,7 +496,7 @@ EndProcedure
 &AtServer
 Procedure NewTransactionAtServer()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
-	FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True);
+	ObjectValue.Fill(Undefined);
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ValueToFormAttribute(ObjectValue, "Object");
 	Cancel = False;
@@ -546,58 +563,43 @@ EndProcedure
 &AtClient
 Procedure SetShowItems()
 	Items.GroupPickupItems.Visible = Items.ItemListShowItems.Check;
+	
 	CurrentData = Items.ItemsPickup.CurrentData;
-	If CurrentData <> Undefined Then
-		AfterItemChoice(CurrentData.Item);
+	If CurrentData = Undefined Then
+		GetItemKeysByItem(Undefined);
 	Else
-		AfterItemChoice(PredefinedValue("Catalog.Items.EmptyRef"));
+		GetItemKeysByItem(CurrentData.Item);
 	EndIf;
 EndProcedure
 
 &AtServer
-Function AfterItemChoice(Val ChoicedItem, AddToItemList = False)
-	ReturnValue = False;
+Procedure GetItemKeysByItem(Item)
+	ThisObject.ItemKeysPickup.Clear();
+	If Not ValueIsFilled(Item) Then
+		Return;
+	EndIf;
+
 	Query = New Query();
-	Query.Text = "SELECT
-				 |	CatalogItemKeys.Ref AS Ref,
-				 |	CatalogItemKeys.Ref AS Presentation
-				 |FROM
-				 |	Catalog.ItemKeys AS CatalogItemKeys
-				 |WHERE
-				 |	CatalogItemKeys.Item = &Item
-				 |	AND NOT CatalogItemKeys.DeletionMark
-				 |ORDER BY
-				 |	Ref";
-	Query.SetParameter("Item", ChoicedItem);
+	Query.Text = 
+	"SELECT
+	|	&Item AS Item,
+	|	CatalogItemKeys.Ref AS Ref,
+	|	CatalogItemKeys.Ref AS Presentation
+	|FROM
+	|	Catalog.ItemKeys AS CatalogItemKeys
+	|WHERE
+	|	CatalogItemKeys.Item = &Item
+	|	AND NOT CatalogItemKeys.DeletionMark
+	|ORDER BY
+	|	Ref";
+	Query.SetParameter("Item", Item);
 	QueryExecute = Query.Execute();
 	QueryUnload = QueryExecute.Unload();
-	ItemKeysPickup.Load(QueryUnload);
-	If QueryUnload.Count() = 1 And AddToItemList Then
-		ItemKeysSelectionAtServer(QueryUnload[0].Ref);
-		ReturnValue = True;
-	EndIf;
-	Return ReturnValue;
-EndFunction
-
-&AtServer
-Procedure ItemKeysSelectionAtServer(Val ChoicedItemKey)
-	ItemListFilter = New Structure();
-	ItemListFilter.Insert("ItemKey", ChoicedItemKey);
-	FoundRows = Object.ItemList.FindRows(ItemListFilter);
-	If FoundRows.Count() Then
-		NewRow = FoundRows.Get(0);
-	Else
-		NewRow = Object.ItemList.Add();
-		NewRow.ItemKey = ChoicedItemKey;
-		NewRow.Item = ChoicedItemKey.Item;
-	EndIf;
-	NewRow.Quantity = NewRow.Quantity + 1;
-	NewRow.TotalAmount = NewRow.Quantity * NewRow.Price;
-	Items.ItemList.CurrentRow = NewRow.GetID();
-	EnabledPaymentButton();
+	
+	ThisObject.ItemKeysPickup.Load(QueryUnload);
 EndProcedure
 
-&AtServer
+&AtClient
 Procedure EnabledPaymentButton()
 	Items.qPayment.Enabled = Object.ItemList.Count();
 EndProcedure
@@ -632,7 +634,7 @@ EndProcedure
 &AtClient
 Procedure ClearRetailCustomer(Command)
 	Object.RetailCustomer = Undefined;
-	DocRetailSalesReceiptClient.RetailCustomerPointOfSaleOnChange(Object, ThisObject, Undefined);
+	DocRetailSalesReceiptClient.RetailCustomerOnChange(Object, ThisObject, Undefined);
 
 	ClearRetailCustomerAtServer();
 	DocRetailSalesReceiptClient.AgreementOnChange(Object, ThisObject, Items.RetailCustomer);

@@ -2563,24 +2563,16 @@
           <name>ItemListSelection</name>
         </handlers>
         <handlers>
-          <event>OnActivateRow</event>
-          <name>ItemListOnActivateRow</name>
-        </handlers>
-        <handlers>
-          <event>OnStartEdit</event>
-          <name>ItemListOnStartEdit</name>
-        </handlers>
-        <handlers>
           <event>AfterDeleteRow</event>
           <name>ItemListAfterDeleteRow</name>
         </handlers>
         <handlers>
-          <event>OnChange</event>
-          <name>ItemListOnChange</name>
-        </handlers>
-        <handlers>
           <event>BeforeDeleteRow</event>
           <name>ItemListBeforeDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>BeforeAddRow</event>
+          <name>ItemListBeforeAddRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -4540,10 +4532,6 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Manager</segments>
           </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>ManagerOnChange</name>
-          </handlers>
           <extendedTooltip>
             <name>ManagerExtendedTooltip</name>
             <id>207</id>
@@ -7039,10 +7027,6 @@
     <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
-    </handlers>
-    <handlers>
-      <event>BeforeWrite</event>
-      <name>BeforeWrite</name>
     </handlers>
     <handlers>
       <event>BeforeWriteAtServer</event>

@@ -170,7 +170,8 @@ Function GetObjectPropertyNamesBeforeChange()
 		|TransactionType,
 		|Sender,
 		|Receiver,
-		|CashTransferOrder";
+		|CashTransferOrder,
+		|RetailCustomer";
 EndFunction
 
 // returns list of Table attributes for get value before the change
@@ -203,6 +204,12 @@ Procedure OnChainComplete(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
 		__tmp_SalesPurchaseInvoice_OnChainComplete(Parameters);
 		Return;
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		And Upper(Parameters.Form.FormName) = Upper("Document.RetailSalesReceipt.Form.DocumentForm") Then
+			__tmp_SalesPurchaseInvoice_OnChainComplete(Parameters);
+			Return;
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
@@ -288,6 +295,7 @@ Procedure __tmp_SalesPurchaseInvoice_OnChainComplete(Parameters)
 	ArrayOfEventCallers.Add("PartnerOnUserChange");
 	ArrayOfEventCallers.Add("AgreementOnUserChange");
 	ArrayOfEventCallers.Add("StoreOnUserChange");
+	ArrayOfEventCallers.Add("RetailCustomerOnUserChange");
 	
 	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
 		CommitChanges(Parameters);
@@ -690,7 +698,8 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 			
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
@@ -762,7 +771,8 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
@@ -810,7 +820,8 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
 				ServerData = New Structure("ServerData", New Structure());
@@ -953,7 +964,8 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 	
@@ -963,7 +975,8 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
 	
@@ -1572,7 +1585,8 @@ Procedure OnSetPartnerNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	
@@ -1612,6 +1626,22 @@ EndProcedure
 
 Procedure OnSetAgreementNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region RETAIL_CUSTOMER
+
+Procedure RetailCustomerOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("RetailCustomer", FormParameters);
+	FormParameters.EventCaller = "RetailCustomerOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.RetailCustomerOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 #EndRegion

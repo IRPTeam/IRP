@@ -738,40 +738,37 @@
   <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
   <informationRegisters>InformationRegister.BranchBankTerms</informationRegisters>
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
+  <informationRegisters>InformationRegister.CashAccountTBAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.CompanyLedgerTypes</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
+  <informationRegisters>InformationRegister.ExpenseRevenueTypeSettings</informationRegisters>
   <informationRegisters>InformationRegister.ExternalCommands</informationRegisters>
   <informationRegisters>InformationRegister.IDInfo</informationRegisters>
   <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>
+  <informationRegisters>InformationRegister.ItemKeyTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.ItemSegments</informationRegisters>
+  <informationRegisters>InformationRegister.LedgerTypeOperations</informationRegisters>
   <informationRegisters>InformationRegister.LockDataModificationRules</informationRegisters>
   <informationRegisters>InformationRegister.ObjectStatuses</informationRegisters>
   <informationRegisters>InformationRegister.PartnerSegments</informationRegisters>
+  <informationRegisters>InformationRegister.PartnerTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.PricesByItemKeys</informationRegisters>
   <informationRegisters>InformationRegister.PricesByItems</informationRegisters>
   <informationRegisters>InformationRegister.PricesByProperties</informationRegisters>
   <informationRegisters>InformationRegister.RemainingItemsInfo</informationRegisters>
+  <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
   <informationRegisters>InformationRegister.SavedItems</informationRegisters>
   <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
   <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
   <informationRegisters>InformationRegister.T2010S_OffsetOfAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
-  <informationRegisters>InformationRegister.Taxes</informationRegisters>
-  <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
-  <informationRegisters>InformationRegister.UserSettings</informationRegisters>
-  <informationRegisters>InformationRegister.T3010S_RowIDInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2014S_AdvancesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2016S_VendorsAdvancesRelevance</informationRegisters>
   <informationRegisters>InformationRegister.T2017S_CustomersAdvancesRelevance</informationRegisters>
-  <informationRegisters>InformationRegister.ItemKeyTBAccounts</informationRegisters>
-  <informationRegisters>InformationRegister.PartnerTBAccounts</informationRegisters>
-  <informationRegisters>InformationRegister.CashAccountTBAccounts</informationRegisters>
-  <informationRegisters>InformationRegister.TaxTBAccounts</informationRegisters>
-  <informationRegisters>InformationRegister.CompanyLedgerTypes</informationRegisters>
-  <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
-  <informationRegisters>InformationRegister.LedgerTypeOperations</informationRegisters>
+  <informationRegisters>InformationRegister.T3010S_RowIDInfo</informationRegisters>
   <informationRegisters>InformationRegister.T6010S_BatchesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T6020S_BatchKeysInfo</informationRegisters>
   <informationRegisters>InformationRegister.T6030S_BatchRelevance</informationRegisters>
@@ -779,6 +776,10 @@
   <informationRegisters>InformationRegister.T6050S_ManualBundleAmountValues</informationRegisters>
   <informationRegisters>InformationRegister.T6060S_BatchCostAllocationInfo</informationRegisters>
   <informationRegisters>InformationRegister.T6070S_BatchRevenueAllocationInfo</informationRegisters>
+  <informationRegisters>InformationRegister.Taxes</informationRegisters>
+  <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
+  <informationRegisters>InformationRegister.TaxTBAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

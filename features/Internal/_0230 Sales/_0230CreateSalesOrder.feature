@@ -183,9 +183,9 @@ Scenario: _023003 copy SO and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center'           | 'Price type'        | 'Item'     | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key'  | 'Cancel' | 'Cancel reason' |
-			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress'    | 'No'                 | '5,000' | 'pcs'  | '419,49'     | '550,00' | '18%' | ''              | '2 330,51'   | '2 750,00'     | 'Store 01' | 'Revenue'      | '123'    | 'Stock'              | 'L/Green'   | 'No'     | ''              |
-			| '2' | 'Distribution department' | 'Basic Price Types' | 'Trousers' | 'No'                 | '4,000' | 'pcs'  | '244,07'     | '400,00' | '18%' | ''              | '1 355,93'   | '1 600,00'     | 'Store 01' | 'Revenue'      | ''       | 'Stock'              | '36/Yellow' | 'No'     | ''              |
+			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'     | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key'  | 'Cancel' | 'Cancel reason' | 'Sales person'    |
+			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress'    | 'No'                 | '5,000' | 'pcs'  | '419,49'     | '550,00' | '18%' | ''              | '2 330,51'   | '2 750,00'     | 'Store 01' | 'Revenue'      | '123'    | 'Stock'              | 'L/Green'   | 'No'     | ''              | 'Anna Petrova'    |
+			| '2' | 'Distribution department' | 'Basic Price Types' | 'Trousers' | 'No'                 | '4,000' | 'pcs'  | '244,07'     | '400,00' | '18%' | ''              | '1 355,93'   | '1 600,00'     | 'Store 01' | 'Revenue'      | ''       | 'Stock'              | '36/Yellow' | 'No'     | ''              | 'Alexander Orlov' |
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |

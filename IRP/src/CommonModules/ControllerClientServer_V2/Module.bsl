@@ -3684,6 +3684,19 @@ EndFunction
 Function BindItemListUnit(Parameters)
 	DataPath = "ItemList.Unit";
 	Binding = New Structure();
+	
+	Binding.Insert("SalesInvoice", 
+		"StepItemListCalculateQuantityInBaseUnit,
+		|StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseInvoice", 
+		"StepItemListCalculateQuantityInBaseUnit,
+		|StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("RetailSalesReceipt", 
+		"StepItemListCalculateQuantityInBaseUnit,
+		|StepItemListChangePriceByPriceType");
+	
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
 

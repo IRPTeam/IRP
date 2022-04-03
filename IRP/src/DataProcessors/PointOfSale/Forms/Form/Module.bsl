@@ -22,10 +22,6 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-//	If Source = ThisObject Then
-//		DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-//	EndIf;
-
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
@@ -53,24 +49,17 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-//	DocRetailSalesReceiptClient.ItemListOnChange(Object, ThisObject, Item);
 	EnabledPaymentButton();
-//	ItemListOnActivateRow(Item);
 	FillSalesPersonInItemList();
 EndProcedure
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
 	Return;
-//	If Clone Then
-//		Item.CurrentData.Key = New UUID();
-//	EndIf;
-//	DocumentsClient.TableOnStartEdit(Object, ThisObject, "Object.ItemList", Item, NewRow, Clone);
 EndProcedure
 
 &AtClient
 Procedure ItemListOnActivateRow(Item)
-//	DocRetailSalesReceiptClient.ItemListOnActivateRow(Object, ThisObject, Item);
 	UpdateHTMLPictures();
 	CurrentData = Items.ItemList.CurrentData;
 	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
@@ -82,49 +71,33 @@ EndProcedure
 
 &AtClient
 Procedure ItemListItemOnChange(Item)
-//Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
-//Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 	UpdateHTMLPictures();
 EndProcedure
 
-//&AtClient
-//Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
-//	DocRetailSalesReceiptClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
-//EndProcedure
-
 &AtClient
 Procedure ItemListUnitOnChange(Item)
-//Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item)
-//Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListPriceOnChange(Item)
-//Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListPriceOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item)
-//Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
-//	CurrentData = ThisObject.Items.ItemList.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	TaxesClient.CalculateReverseTaxOnChangeTotalAmount(Object, ThisObject, CurrentData);
 EndProcedure
 
 &AtClient
@@ -141,7 +114,6 @@ EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
-//Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
 		StandardProcessing);
 EndProcedure
@@ -167,35 +139,10 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	If ThisObject.ItemKeysPickup.Count() = 1 Then
 		AddItemKeyToItemList(CurrentData.Item, ThisObject.ItemKeysPickup[0].Ref);
 	EndIf;
-	
-//	AddItemToItemList();
-//EndProcedure
-
-//&AtClient
-//Procedure AddItemToItemList()
-//	CurrentData = Items.ItemsPickup.CurrentData;
-//	ItemListOnActivateRow(Items.ItemList);
-//	Result = AfterItemChoice(CurrentData.Item, True);
-//	If Not Result Then
-//		Return;
-//	EndIf;
-//	ItemListOnStartEdit(Items.ItemList, True, False);
-//	ItemListOnChange(Items.ItemList);
-//	ItemListItemOnChange(Items.ItemList);
-//	ItemListItemKeyOnChange(Items.ItemList);
-	
-//	CurrentData = Items.ItemList.CurrentData;
-//	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
 EndProcedure
 
 &AtClient
 Procedure ItemsPickupOnActivateRow(Item)
-//	CurrentData = Items.ItemsPickup.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	AfterItemChoice(CurrentData.Item);
-
 	CurrentData = Items.ItemsPickup.CurrentData;
 	If CurrentData = Undefined Then
 		GetItemKeysByItem(Undefined);
@@ -237,38 +184,8 @@ Procedure AddItemKeyToItemList(Item, ItemKey)
 		If Row.ItemKey <> ItemKey Then
 			ViewClient_V2.SetItemListItemKey(Object , ThisObject, Row, ItemKey);
 		EndIf;
-		//ViewClient_V2.SetItemListUnit(Object    , ThisObject, Row, ResultElement.Unit);
-		//ViewClient_V2.SetItemListQuantity(Object, ThisObject, Row, ResultElement.Quantity);		
 	EndIf;
-		
-	//-----------------------------
-//	ItemListFilter = New Structure();
-//	ItemListFilter.Insert("ItemKey", ChoicedItemKey);
-//	FoundRows = Object.ItemList.FindRows(ItemListFilter);
-//	If FoundRows.Count() Then
-//		NewRow = FoundRows.Get(0);
-//	Else
-//		NewRow = Object.ItemList.Add();
-//		NewRow.ItemKey = ChoicedItemKey;
-//		NewRow.Item = ChoicedItemKey.Item;
-//	EndIf;
-//	NewRow.Quantity = NewRow.Quantity + 1;
-//	NewRow.TotalAmount = NewRow.Quantity * NewRow.Price;
-//	Items.ItemList.CurrentRow = NewRow.GetID();
 	EnabledPaymentButton();
-	//-----------------------------
-	
-//	Var CurrentData;
-//	CurrentData = Items.ItemKeysPickup.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	ItemKeysSelectionAtServer(CurrentData.Ref);
-//	ItemListOnStartEdit(Items.ItemList, True, False);
-//	ItemListOnChange(Items.ItemList);
-//	ItemListItemKeyOnChange(Items.ItemList);
-//
-//	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.Ref));
 	CurrentData = Items.ItemList.CurrentData;
 	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
 EndProcedure
@@ -291,7 +208,6 @@ Procedure SearchByBarcode(Command, Barcode = "")
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
 		PriceType = AgreementInfo.PriceType;
 	EndIf;
-	
 	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, PriceType);
 EndProcedure
 
@@ -370,11 +286,9 @@ EndProcedure
 
 &AtClient
 Procedure SearchCustomer(Command)
-
 	Notify = New NotifyDescription("SetRetailCustomer", ThisObject);
 	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), , , ,
 		, Notify, FormWindowOpeningMode.LockOwnerWindow);
-
 EndProcedure
 
 &AtClient
@@ -388,8 +302,23 @@ EndProcedure
 
 &AtClient
 Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
-	f=1;
-	//AddItemKeyToItemList();
+	StandardProcessing = False;
+	If DragParameters.Action = DragAction.Move And DragParameters.Value.Count() Then
+		Value = DragParameters.Value[0];
+		If TypeOf(Value) = Type("CatalogRef.Items") Then
+			If ThisObject.ItemKeysPickup.Count() = 1 Then
+				AddItemKeyToItemList(Value, ThisObject.ItemKeysPickup[0].Ref);
+			EndIf;
+		ElsIf TypeOf(Value) = Type("FormDataCollectionItem") Then
+			If CommonFunctionsClientServer.ObjectHasProperty(Value, "Ref") 
+				And CommonFunctionsClientServer.ObjectHasProperty(Value, "Item") Then
+				CurrentData = Items.ItemKeysPickup.CurrentData;
+				If CurrentData <> Undefined Then
+					AddItemKeyToItemList(CurrentData.Item, CurrentData.Ref);
+				EndIf;
+			EndIf;
+		EndIf;
+	EndIf;
 EndProcedure
 
 #Region SpecialOffers
@@ -568,7 +497,6 @@ EndProcedure
 Procedure NewTransactionAtServer()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
 	ObjectValue.Fill(Undefined);
-	//FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True);
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ValueToFormAttribute(ObjectValue, "Object");
 	Cancel = False;
@@ -642,23 +570,15 @@ Procedure SetShowItems()
 	Else
 		GetItemKeysByItem(CurrentData.Item);
 	EndIf;
-	
-//	CurrentData = Items.ItemsPickup.CurrentData;
-//	If CurrentData <> Undefined Then
-//		AfterItemChoice(CurrentData.Item);
-//	Else
-//		AfterItemChoice(PredefinedValue("Catalog.Items.EmptyRef"));
-//	EndIf;
 EndProcedure
 
 &AtServer
-//Function AfterItemChoice(Val ChoicedItem, AddToItemList = False)
 Procedure GetItemKeysByItem(Item)
 	ThisObject.ItemKeysPickup.Clear();
 	If Not ValueIsFilled(Item) Then
 		Return;
 	EndIf;
-//	ReturnValue = False;
+
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -677,61 +597,7 @@ Procedure GetItemKeysByItem(Item)
 	QueryUnload = QueryExecute.Unload();
 	
 	ThisObject.ItemKeysPickup.Load(QueryUnload);
-//	If QueryUnload.Count() = 1 And AddToItemList Then
-//		ItemKeysSelectionAtServer(QueryUnload[0].Ref);
-//		ReturnValue = True;
-//	EndIf;
-//	Return ReturnValue;
 EndProcedure
-
-//&AtServer
-//Procedure ItemKeysSelectionAtServer(Val ChoicedItemKey)
-//	ItemListFilter = New Structure();
-//	ItemListFilter.Insert("ItemKey", ChoicedItemKey);
-//	FoundRows = Object.ItemList.FindRows(ItemListFilter);
-//	If FoundRows.Count() Then
-//		NewRow = FoundRows.Get(0);
-//	Else
-//		NewRow = Object.ItemList.Add();
-//		NewRow.ItemKey = ChoicedItemKey;
-//		NewRow.Item = ChoicedItemKey.Item;
-//	EndIf;
-//	NewRow.Quantity = NewRow.Quantity + 1;
-//	NewRow.TotalAmount = NewRow.Quantity * NewRow.Price;
-//	Items.ItemList.CurrentRow = NewRow.GetID();
-//	EnabledPaymentButton();
-//EndProcedure
-
-
-//	NewRow = Wrapper.Object[Table._TableName_].Add();
-//	NewRow.Key = String(New UUID());
-//	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
-//	ServerParameters.TableName = Table._TableName_;
-//	Rows = New Array();
-//	Rows.Add(NewRow);
-//	ServerParameters.Rows = Rows;
-//	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-//	ControllerClientServer_V2.AddNewRow(Table._TableName_, Parameters);
-//	Return Wrapper.Object[Table._TableName_].FindRows(New Structure("Key", NewRow.Key))[0];
-
-
-//		    If ExistingRows.Count() Then
-//				Row = ExistingRows[0];
-//				ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
-//			Else
-//				Row = ViewClient_V2.ItemListBeforeAddRow(Object, Form);
-//				
-//				ViewClient_V2.SetItemListItem(Object    , Form, Row, ResultElement.Item);
-//				ViewClient_V2.SetItemListItemKey(Object , Form, Row, ResultElement.ItemKey);
-//				ViewClient_V2.SetItemListUnit(Object    , Form, Row, ResultElement.Unit);
-//				ViewClient_V2.SetItemListQuantity(Object, Form, Row, ResultElement.Quantity);
-//				
-//				If ResultElement.Property("Price") And CommonFunctionsClientServer.ObjectHasProperty(Row, "Price") Then
-//					ViewClient_V2.SetItemListPrice(Object, Form, Row, ResultElement.Price); 
-//				EndIf;
-//			EndIf;
-	
-
 
 &AtClient
 Procedure EnabledPaymentButton()

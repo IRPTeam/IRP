@@ -129,31 +129,32 @@ EndFunction
 
 Function ItemList()
 	Return "SELECT
-		   |	SalesReturnOrderList.Ref.Company AS Company,
-		   |	SalesReturnOrderList.Store AS Store,
-		   |	SalesReturnOrderList.ItemKey AS ItemKey,
-		   |	SalesReturnOrderList.Ref AS Order,
-		   |	SalesReturnOrderList.Quantity AS UnitQuantity,
-		   |	SalesReturnOrderList.QuantityInBaseUnit AS Quantity,
-		   |	SalesReturnOrderList.Unit,
-		   |	SalesReturnOrderList.ItemKey.Item AS Item,
-		   |	SalesReturnOrderList.Ref.Date AS Period,
-		   |	SalesReturnOrderList.Key AS RowKey,
-		   |	VALUE(Enum.ProcurementMethods.EmptyRef) AS ProcurementMethod,
-		   |	SalesReturnOrderList.TotalAmount AS Amount,
-		   |	SalesReturnOrderList.Ref.Currency AS Currency,
-		   |	SalesReturnOrderList.Cancel AS IsCanceled,
-		   |	SalesReturnOrderList.CancelReason,
-		   |	SalesReturnOrderList.NetAmount,
-		   |	SalesReturnOrderList.OffersAmount,
-		   |	&StatusInfoPosting AS StatusInfoPosting,
-		   |	SalesReturnOrderList.Ref.Branch AS Branch
-		   |INTO ItemList
-		   |FROM
-		   |	Document.SalesReturnOrder.ItemList AS SalesReturnOrderList
-		   |WHERE
-		   |	SalesReturnOrderList.Ref = &Ref
-		   |	AND &StatusInfoPosting";
+	|	SalesReturnOrderList.Ref.Company AS Company,
+	|	SalesReturnOrderList.Store AS Store,
+	|	SalesReturnOrderList.ItemKey AS ItemKey,
+	|	SalesReturnOrderList.Ref AS Order,
+	|	SalesReturnOrderList.Quantity AS UnitQuantity,
+	|	SalesReturnOrderList.QuantityInBaseUnit AS Quantity,
+	|	SalesReturnOrderList.Unit,
+	|	SalesReturnOrderList.ItemKey.Item AS Item,
+	|	SalesReturnOrderList.Ref.Date AS Period,
+	|	SalesReturnOrderList.Key AS RowKey,
+	|	VALUE(Enum.ProcurementMethods.EmptyRef) AS ProcurementMethod,
+	|	SalesReturnOrderList.TotalAmount AS Amount,
+	|	SalesReturnOrderList.Ref.Currency AS Currency,
+	|	SalesReturnOrderList.Cancel AS IsCanceled,
+	|	SalesReturnOrderList.CancelReason,
+	|	SalesReturnOrderList.NetAmount,
+	|	SalesReturnOrderList.OffersAmount,
+	|	&StatusInfoPosting AS StatusInfoPosting,
+	|	SalesReturnOrderList.Ref.Branch AS Branch,
+	|	SalesReturnOrderList.SalesPerson
+	|INTO ItemList
+	|FROM
+	|	Document.SalesReturnOrder.ItemList AS SalesReturnOrderList
+	|WHERE
+	|	SalesReturnOrderList.Ref = &Ref
+	|	AND &StatusInfoPosting";
 EndFunction
 
 Function R2010T_SalesOrders()

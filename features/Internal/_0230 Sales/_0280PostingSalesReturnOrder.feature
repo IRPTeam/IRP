@@ -87,12 +87,12 @@ Scenario: _028001 create document Sales return order based on SI (button Create)
 		And I select "Approved" exact value from "Status" drop-down list
 	* Check items tab
 		And "ItemList" table became equal
-			| 'Profit loss center'           | '#' | 'Item'    | 'Dont calculate row' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales invoice'                              | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
-			| 'Distribution department' | '1' | 'Dress'   | 'No'                 | '1,000'  | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | 'XS/Blue'  | 'No'     | ''              |
-			| 'Distribution department' | '2' | 'Shirt'   | 'No'                 | '12,000' | 'pcs'            | '640,68'     | '350,00'   | '18%' | ''              | '3 559,32'   | '4 200,00'     | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '36/Red'   | 'No'     | ''              |
-			| 'Distribution department' | '3' | 'Boots'   | 'No'                 | '2,000'  | 'Boots (12 pcs)' | '2 434,58'   | '8 400,00' | '18%' | '840,00'        | '13 525,42'  | '15 960,00'    | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
-			| 'Front office'            | '4' | 'Service' | 'No'                 | '1,000'  | 'pcs'            | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | 'Interner' | 'No'     | ''              |
-			| ''                        | '5' | 'Shirt'   | 'No'                 | '2,000'  | 'pcs'            | '106,78'     | '350,00'   | '18%' | ''              | '593,22'     | '700,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | '38/Black' | 'No'     | ''              |
+			| 'Profit loss center'      | '#' | 'Item'    | 'Dont calculate row' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales invoice'                              | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' | 'Sales person' |
+			| 'Distribution department' | '1' | 'Dress'   | 'No'                 | '1,000'  | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | 'XS/Blue'  | 'No'     | ''              |'Alexander Orlov'|
+			| 'Distribution department' | '2' | 'Shirt'   | 'No'                 | '12,000' | 'pcs'            | '640,68'     | '350,00'   | '18%' | ''              | '3 559,32'   | '4 200,00'     | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '36/Red'   | 'No'     | ''              |'Alexander Orlov'|
+			| 'Distribution department' | '3' | 'Boots'   | 'No'                 | '2,000'  | 'Boots (12 pcs)' | '2 434,58'   | '8 400,00' | '18%' | '840,00'        | '13 525,42'  | '15 960,00'    | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '37/18SD'  | 'No'     | ''              |'Alexander Orlov'|
+			| 'Front office'            | '4' | 'Service' | 'No'                 | '1,000'  | 'pcs'            | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | 'Interner' | 'No'     | ''              |''|
+			| ''                        | '5' | 'Shirt'   | 'No'                 | '2,000'  | 'pcs'            | '106,78'     | '350,00'   | '18%' | ''              | '593,22'     | '700,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | '38/Black' | 'No'     | ''              |'Anna Petrova'|
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "871,00"
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "18 177,11"
@@ -194,6 +194,11 @@ Scenario: _028009 create Sales return order without bases document
 		And I go to line in "List" table
 			| 'Item key' |
 			| 'L/Green'  |
+		And I select current line in "List" table
+		And I click choice button of "Sales person" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Alexander Orlov'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"

@@ -247,7 +247,8 @@ Function ItemList()
 	|	SalesInvoiceItemList.Key,
 	|	SalesInvoiceItemList.Ref.Branch AS Branch,
 	|	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
-	|	SalesInvoiceItemList.PriceType
+	|	SalesInvoiceItemList.PriceType,
+	|	SalesInvoiceItemList.SalesPerson
 	|INTO ItemList
 	|FROM
 	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList

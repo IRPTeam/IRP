@@ -58,9 +58,9 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		CloseOrder = True;
 		SalesOrder = FillingData.SalesOrder;
 		If CloseOrder Then
-			SalesOrderData = DocSalesOrderServer.GetSalesOrderForClosing(FillingData.SalesOrder);
+			SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderForClosing(FillingData.SalesOrder);
 		Else
-			SalesOrderData = DocSalesOrderServer.GetSalesOrderInfo(FillingData.SalesOrder);
+			SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderInfo(FillingData.SalesOrder);
 		EndIf;
 
 		FillPropertyValues(ThisObject, SalesOrderData.SalesOrderInfo);

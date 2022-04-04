@@ -337,7 +337,8 @@ Function ItemList()
 	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
 	|	ItemList.OffersAmount,
-	|	ItemList.PriceType
+	|	ItemList.PriceType,
+	|	ItemList.SalesPerson
 	|INTO ItemList
 	|FROM
 	|	Document.SalesReturn.ItemList AS ItemList

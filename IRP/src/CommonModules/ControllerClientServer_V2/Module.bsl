@@ -274,7 +274,6 @@ Function GetAllBindings(Parameters)
 	BindingMap.Insert("ItemList.Item"     , BindItemListItem(Parameters));
 	BindingMap.Insert("ItemList.ItemKey"  , BindItemListItemKey(Parameters));
 	BindingMap.Insert("ItemList.Unit"     , BindItemListUnit(Parameters));
-	BindingMap.Insert("ItemList.Store"    , BindItemListStore(Parameters));
 	BindingMap.Insert("ItemList.Quantity" , BindItemListQuantity(Parameters));
 	Return BindingMap;
 EndFunction

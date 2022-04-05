@@ -69,3 +69,30 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	
 	Return Result;
 EndFunction
+
+Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValues) Export
+	ControllerClientServer_V2.AddNewRow(TableName, Parameters, OnAddViewNotify);
+	
+	If FillingValues = Undefined Then
+		Return;
+	EndIf;
+	_Key = Parameters.Rows[0].Key;
+	
+	If FillingValues.Property("Item") Then
+		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, _Key));
+	EndIf;
+	
+	If FillingValues.Property("ItemKey") Then
+		ControllerClientServer_V2.SetItemListItemKey(Parameters, PrepareValue(FillingValues.ItemKey, _Key));
+	EndIf;
+EndProcedure
+
+Function PrepareValue(Value, Key)
+	Result = New Array();
+	Data = New Structure();
+	Data.Insert("Value", Value);
+	Data.Insert("Options", New Structure("Key", Key));
+	Result.Add(Data);
+	Return Result;
+EndFunction
+

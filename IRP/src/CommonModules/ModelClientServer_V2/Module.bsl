@@ -7,21 +7,13 @@ Procedure EntryPoint(StepNames, Parameters) Export
 	
 #IF Client THEN
 	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
-	If ValueIsFilled(Parameters.PropertyBeforeChange.Form.Names) Then
-		// transfer form to structure, in server will be available attributes for read data
-		TransferForm = New Structure(Parameters.PropertyBeforeChange.Form.Names);
-		FillPropertyValues(TransferForm, Transfer.Form);
-		Parameters.Form = TransferForm;
-	Else
-		Parameters.Form = Undefined;
-	EndIf;
+	TransferFormToStructure(Transfer, Parameters);
 #ENDIF
 
 	ModelServer_V2.ServerEntryPoint(StepNames, Parameters);
 	
 #IF Client THEN
-	Parameters.Form   = Transfer.Form;
-	Parameters.Object = Transfer.Object;
+	TransferStructureToForm(Transfer, Parameters);
 #ENDIF
 	
 	// if cache was initialized from this EntryPoint then ChainComplete
@@ -39,6 +31,22 @@ Procedure ServerEntryPoint(StepNames, Parameters) Export
 			StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
 	ExecuteChain(Parameters, Chain);
+EndProcedure
+
+Procedure TransferFormToStructure(Transfer, Parameters) Export
+	If ValueIsFilled(Parameters.PropertyBeforeChange.Form.Names) Then
+		// transfer form to structure, on server will be available attributes for read data
+		TransferForm = New Structure(Parameters.PropertyBeforeChange.Form.Names);
+		FillPropertyValues(TransferForm, Transfer.Form);
+		Parameters.Form = TransferForm;
+	Else
+		Parameters.Form = Undefined;
+	EndIf;
+EndProcedure
+
+Procedure TransferStructureToForm(Transfer, Parameters) Export
+	Parameters.Form   = Transfer.Form;
+	Parameters.Object = Transfer.Object;
 EndProcedure
 
 #EndRegion

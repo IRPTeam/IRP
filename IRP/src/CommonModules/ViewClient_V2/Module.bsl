@@ -633,7 +633,8 @@ EndProcedure
 
 Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow, 
 															OnAddViewNotify = Undefined, 
-															OnCopyViewNotify = Undefined)
+															OnCopyViewNotify = Undefined,
+															FillingValues = Undefined)
 	Cancel = True;
 	NewRow = Object[TableName].Add();
 	If Clone Then // Copy()
@@ -671,7 +672,12 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 		NewRow.Key = String(New UUID());
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
-		ControllerClientServer_V2.AddNewRow(TableName, Parameters, OnAddViewNotify);
+		
+		Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
+		ModelClientServer_V2.TransferFormToStructure(Transfer, Parameters);
+		ViewServer_V2.AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValues);
+		ModelClientServer_V2.TransferStructureToForm(Transfer, Parameters);
+		ControllerClientServer_V2.CommitChainChanges(Parameters);
 	EndIf;
 	Return NewRow;
 EndFunction
@@ -776,6 +782,16 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
+EndProcedure
+
+Procedure ItemListAddFilledRow(Object, Form,  FillingValues) Export
+	Cancel      = False;
+	Clone       = False;
+	CurrentData = Undefined;
+	NewRow = AddOrCopyRow(Object, Form, "ItemList", Cancel, Clone, CurrentData,
+		"ItemListOnAddRowFormNotify", "ItemListOnCopyRowFormNotify", FillingValues);
+	Form.Items.ItemList.CurrentRow = NewRow.GetID();
+	Form.Items.ItemList.ChangeRow();
 EndProcedure
 
 #EndRegion

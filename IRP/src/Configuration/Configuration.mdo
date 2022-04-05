@@ -395,6 +395,7 @@
   <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
   <commonModules>CommonModule.ModelServer_V2</commonModules>
   <commonModules>CommonModule.ViewServer_V2</commonModules>
+  <commonModules>CommonModule.ControllerServer_V2</commonModules>
   <commonModules>CommonModule.UserSettingsClientServer</commonModules>
   <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
   <commonModules>CommonModule.DocJournalEntryServer</commonModules>

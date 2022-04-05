@@ -176,14 +176,8 @@ Procedure AddItemKeyToItemList(Item, ItemKey)
 		Row = ExistingRows[0];
 		ViewClient_V2.SetItemListQuantity(Object, ThisObject, Row, Row.Quantity + 1);
 	Else
-		Row = ViewClient_V2.ItemListBeforeAddRow(Object, ThisObject);
-		
-		If Row.Item <> Item Then
-			ViewClient_V2.SetItemListItem(Object    , ThisObject, Row, Item);
-		EndIf;
-		If Row.ItemKey <> ItemKey Then
-			ViewClient_V2.SetItemListItemKey(Object , ThisObject, Row, ItemKey);
-		EndIf;
+		FillingValues = New Structure("Item, ItemKey", Item, ItemKey);
+		ViewClient_V2.ItemListAddFilledRow(Object, ThisObject, FillingValues);
 	EndIf;
 	EnabledPaymentButton();
 	CurrentData = Items.ItemList.CurrentData;

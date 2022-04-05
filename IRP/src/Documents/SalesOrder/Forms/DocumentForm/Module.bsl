@@ -69,7 +69,7 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocSalesOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	ThisObject.ClosingOrder = DocSalesOrderServer.GetLastSalesOrderClosingBySalesOrder(Object.Ref);
+	ThisObject.ClosingOrder = DocSalesOrderClosingServer.GetLastSalesOrderClosingBySalesOrder(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 

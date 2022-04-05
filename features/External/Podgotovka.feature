@@ -795,6 +795,11 @@ Scenario: create SalesOrder023001
 			| 'Revenue'     |
 		And I select current line in "List" table
 		And I input "123" text in "Detail" field of "ItemList" table
+		And I click choice button of "Sales person" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Anna Petrova'     |
+		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -819,6 +824,11 @@ Scenario: create SalesOrder023001
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Revenue'     |
+		And I select current line in "List" table
+		And I click choice button of "Sales person" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Alexander Orlov'     |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Check store filling in the tabular section

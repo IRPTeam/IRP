@@ -275,7 +275,8 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 	|		ELSE -1 * SalesOrdersInvoiceClosing.NetAmountBalance
 	|	END AS NetAmount,
 	|	ItemList.TaxAmount AS TaxAmount,
-	|	ItemList.OffersAmount AS OffersAmount
+	|	ItemList.OffersAmount AS OffersAmount,
+	|	ItemList.SalesPerson
 	|INTO ItemList
 	|FROM
 	|	Document.SalesOrder.ItemList AS ItemList

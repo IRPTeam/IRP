@@ -1,7 +1,7 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	Param = New Structure();
-	CSO = DocSalesOrderServer.GetLastSalesOrderClosingBySalesOrder(CommandParameter);
+	CSO = DocSalesOrderClosingServer.GetLastSalesOrderClosingBySalesOrder(CommandParameter);
 	If Not CSO.IsEmpty() Then
 		Param.Insert("Key", CSO);
 	Else

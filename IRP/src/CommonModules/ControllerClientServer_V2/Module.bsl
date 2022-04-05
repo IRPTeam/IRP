@@ -96,21 +96,15 @@ Function CreateParameters(ServerParameters, FormParameters)
 	// MetadataName
 	// Tables.TableName.Columns
 	// DependencyTables
-	ObjectMetadataInfo = ViewServer_V2.GetObjectMetadataInfo(ServerParameters.Object, StrConcat(ArrayOfTableNames, ","));
-	Parameters.Insert("ObjectMetadataInfo"    , ObjectMetadataInfo);
-	Parameters.Insert("TaxListIsExists"       , ObjectMetadataInfo.Tables.Property("TaxList"));
-	Parameters.Insert("SpecialOffersIsExists" , ObjectMetadataInfo.Tables.Property("SpecialOffers"));
-	
-	Parameters.Insert("ArrayOfTaxInfo", New Array());
-	If Parameters.TaxListIsExists Then
-		If Parameters.FormTaxColumnsExists Then
-			DeserializedCache = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.TaxesCache);
-			Parameters.ArrayOfTaxInfo = DeserializedCache.ArrayOfTaxInfo;
-		Else
-			Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(ServerParameters.Object,
-				ServerParameters.Object.Date, ServerParameters.Object.Company);
-		EndIf;
-	EndIf;
+	ServerData = ControllerServer_V2.GetServerData(ServerParameters.Object, 
+												   ArrayOfTableNames,
+												   Parameters.FormTaxColumnsExists, 
+												   Parameters.TaxesCache);
+		
+	Parameters.Insert("ObjectMetadataInfo"    , ServerData.ObjectMetadataInfo);
+	Parameters.Insert("TaxListIsExists"       , ServerData.ObjectMetadataInfo.Tables.Property("TaxList"));
+	Parameters.Insert("SpecialOffersIsExists" , ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers"));
+	Parameters.Insert("ArrayOfTaxInfo"        , ServerData.ArrayOfTaxInfo);
 	
 	// if specific rows are not passed, then we use everything that is in the table with the name TableName
 	If ServerParameters.Rows = Undefined Then 
@@ -125,7 +119,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 	// Rows
 	ArrayOfRows = New Array();
 	For Each Row In ServerParameters.Rows Do
-		NewRow = New Structure(ObjectMetadataInfo.Tables[ServerParameters.TableName].Columns);
+		NewRow = New Structure(ServerData.ObjectMetadataInfo.Tables[ServerParameters.TableName].Columns);
 		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
 		
@@ -133,7 +127,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 		ArrayOfRowsTaxList = New Array();
 		If Parameters.TaxListIsExists Then
 			For Each TaxRow In ServerParameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
-				NewRowTaxList = New Structure(ObjectMetadataInfo.Tables.TaxList.Columns);
+				NewRowTaxList = New Structure(ServerData.ObjectMetadataInfo.Tables.TaxList.Columns);
 				FillPropertyValues(NewRowTaxList, TaxRow);
 				ArrayOfRowsTaxList.Add(NewRowTaxList);
 			EndDo;
@@ -165,7 +159,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 		ArrayOfRowsSpecialOffers = New Array();
 		If Parameters.SpecialOffersIsExists Then
 			For Each SpecialOfferRow In ServerParameters.Object.SpecialOffers.FindRows(New Structure("Key", Row.Key)) Do
-				NewRowSpecialOffer = New Structure(ObjectMetadataInfo.Tables.SpecialOffers.Columns);
+				NewRowSpecialOffer = New Structure(ServerData.ObjectMetadataInfo.Tables.SpecialOffers.Columns);
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffers.Add(NewRowSpecialOffer);
 			EndDo;
@@ -420,7 +414,7 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined) Export
 		Default = Defaults.Get(DataPath);
 		If Default<> Undefined Then
 			ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
-
+			
 		// if column is filled  and has its own handler .OnChage call it
 		ElsIf ValueIsFilled(NewRow[ColumnName]) Then
 			SetPropertyObject(Parameters, DataPath, NewRow.Key, NewRow[ColumnName]);
@@ -430,8 +424,6 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined) Export
 			EndIf;
 		EndIf;
 	EndDo;
-	
-	CommitChainChanges(Parameters);
 EndProcedure
 
 #EndRegion

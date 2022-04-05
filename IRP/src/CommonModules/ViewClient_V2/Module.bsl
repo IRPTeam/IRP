@@ -201,7 +201,10 @@ EndFunction
 
 Procedure OnChainComplete(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt" Then
 		__tmp_SalesPurchaseInvoice_OnChainComplete(Parameters);
 		Return;
 	EndIf;
@@ -705,7 +708,10 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt" Then
 			
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
@@ -717,14 +723,16 @@ Procedure OnOpenFormNotify(Parameters) Export
 			SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, 
 			"ShipmentConfirmations");
 		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
 			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form,
 			"GoodsReceipts");
 		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
@@ -778,7 +786,10 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
@@ -837,7 +848,10 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
 				ServerData = New Structure("ServerData", New Structure());
@@ -981,7 +995,10 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 	
@@ -992,16 +1009,21 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
 	
 	// Update -> TradeDocumentsTree
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
 			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 	EndIf;
-	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
 			"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
 	EndIf;
@@ -1383,7 +1405,10 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 			Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 				
 				ServerData = Undefined;
 				If ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
@@ -1395,7 +1420,8 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 				SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 		EndIf;
 		
-		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 			Parameters.Form.Taxes_CreateFormControls();
 			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, 
 				"ShipmentConfirmations");
@@ -1403,7 +1429,8 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 				"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 		EndIf;
 		
-		If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" Then
+		If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 			Parameters.Form.Taxes_CreateFormControls();
 			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form,
 				"GoodsReceipts");
@@ -1602,7 +1629,10 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	

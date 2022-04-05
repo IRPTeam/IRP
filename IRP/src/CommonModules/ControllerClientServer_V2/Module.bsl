@@ -1637,7 +1637,7 @@ Function BindCompany(Parameters)
 	Binding.Insert("SalesReturn",
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
-		|StepItemListChangeExpenseTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("PurchaseReturn",
 		"StepRequireCallCreateTaxesFormControls,
@@ -1647,7 +1647,7 @@ Function BindCompany(Parameters)
 	Binding.Insert("RetailReturnReceipt",
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
-		|StepItemListChangeExpenseTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
 	Binding.Insert("OutgoingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");

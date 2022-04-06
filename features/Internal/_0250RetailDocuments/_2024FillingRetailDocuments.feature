@@ -2171,6 +2171,8 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
 			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Tax calculation check
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |

@@ -1767,7 +1767,7 @@ Function BindPartner(Parameters)
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("RetailReturnReceipt",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("PurchaseReturn",
@@ -1775,7 +1775,7 @@ Function BindPartner(Parameters)
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("SalesReturn",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
 		|StepChangeLegalNameByPartner");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);

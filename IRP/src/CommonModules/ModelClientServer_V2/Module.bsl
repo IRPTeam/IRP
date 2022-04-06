@@ -1165,7 +1165,9 @@ Function CalculationsOptions() Export
 	Options.Insert("QuantityOptions", QuantityOptions);
 	
 	// SpecialOffers columns: Key, Offer, Amount, Percent
-	OffersOptions = New Structure("SpecialOffers", New Array());
+	OffersOptions = New Structure();
+	OffersOptions.Insert("SpecialOffers"      , New Array());
+	OffersOptions.Insert("SpecialOffersCache" , New Array());
 	Options.Insert("OffersOptions", OffersOptions);
 	
 	// TotalAmount
@@ -1190,7 +1192,8 @@ Function CalculationsOptions() Export
 	Options.Insert("CalculateQuantityInBaseUnit" , New Structure("Enable", False));
 	
 	// SpecialOffers
-	Options.Insert("CalculateSpecialOffers" , New Structure("Enable", False));
+	Options.Insert("CalculateSpecialOffers"   , New Structure("Enable", False));
+	Options.Insert("RecalculateSpecialOffers" , New Structure("Enable", False));
 	
 	Return Options;
 EndFunction
@@ -1211,12 +1214,36 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("TaxRates"     , Options.TaxOptions.TaxRates);
 	Result.Insert("TaxList"      , New Array());
 	Result.Insert("QuantityInBaseUnit" , Options.QuantityOptions.QuantityInBaseUnit);
+	Result.Insert("SpecialOffers", New Array());
+	
+	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
+		NewOfferRow = New Structure("Key, Offer, Amount, Percent");
+		FillPropertyValues(NewOfferRow, OfferRow);
+		Result.SpecialOffers.Add(NewOfferRow);
+	EndDo;
+	
+	// RecalculateSpecialOffers
+	If Options.RecalculateSpecialOffers.Enable Then
+		For Each OfferRow In Options.OffersOptions.SpecialOffersCache Do
+			Amount = 0;
+			If Options.PriceOptions.Quantity = OfferRow.Quantity Then
+				Amount = OfferRow.Amount;
+			Else
+				Amount = (OfferRow.Amount / OfferRow.Quantity) * Options.PriceOptions.Quantity;
+			EndIf;
+			For Each ResultOfferRow In Result.SpecialOffers Do
+				If OfferRow.Key = ResultOfferRow.Key And OfferRow.Offer = ResultOfferRow.Offer Then
+					ResultOfferRow.Amount = Amount;
+				EndIf;
+			EndDo;
+		EndDo;
+	EndIf;
 	
 	// CalculateSpecialOffers
 	If Options.CalculateSpecialOffers.Enable Then
 		TotalOffers = 0;
-		For Each Row In Options.OffersOptions.SpecialOffers Do
-			TotalOffers = TotalOffers + Row.Amount;
+		For Each OfferRow In Result.SpecialOffers Do
+			TotalOffers = TotalOffers + OfferRow.Amount;
 		EndDo;
 		Result.OffersAmount = TotalOffers;
 	EndIf;

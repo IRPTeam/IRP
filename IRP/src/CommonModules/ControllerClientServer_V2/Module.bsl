@@ -164,10 +164,23 @@ Function CreateParameters(ServerParameters, FormParameters)
 				ArrayOfRowsSpecialOffers.Add(NewRowSpecialOffer);
 			EndDo;
 		EndIf;
-		NewRow.Insert("TaxIsAlreadyCalculated", Parameters.IsBasedOn And ArrayOfRowsTaxList.Count());
-		NewRow.Insert("TaxRates"      , TaxRates);
-		NewRow.Insert("TaxList"       , ArrayOfRowsTaxList);
-		NewRow.Insert("SpecialOffers" , ArrayOfRowsSpecialOffers);
+		
+		// SpecialOffersCache
+		ArrayOfRowsSpecialOffersCache = New Array();
+		If Parameters.FormIsExists 
+			And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "SpecialOffersCache") Then
+			For Each SpecialOfferRow In Parameters.Form.SpecialOffersCache.FindRows(New Structure("Key", Row.Key)) Do
+				NewRowSpecialOffer = New Structure("Key, Offer, Amount, Quantity");
+				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
+				ArrayOfRowsSpecialOffersCache.Add(NewRowSpecialOffer);
+			EndDo;
+		EndIf;
+		
+		NewRow.Insert("TaxIsAlreadyCalculated" , Parameters.IsBasedOn And ArrayOfRowsTaxList.Count());
+		NewRow.Insert("TaxRates"               , TaxRates);
+		NewRow.Insert("TaxList"                , ArrayOfRowsTaxList);
+		NewRow.Insert("SpecialOffers"          , ArrayOfRowsSpecialOffers);
+		NewRow.Insert("SpecialOffersCache"     , ArrayOfRowsSpecialOffersCache);
 	EndDo;
 	
 	If ArrayOfRows.Count() Then
@@ -1536,22 +1549,16 @@ Function BindDate(Parameters)
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("SalesReturn",
-		//"StepItemListChangePriceTypeByAgreement,
-		//|StepItemListChangePriceByPriceType,
 		"StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("PurchaseReturn",
-		//"StepItemListChangePriceTypeByAgreement,
-		//|StepItemListChangePriceByPriceType,
 		"StepChangeAgreementByPartner_AgreementTypeIsVendor, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("RetailReturnReceipt",
-		//"StepItemListChangePriceTypeByAgreement,
-		//|StepItemListChangePriceByPriceType,
 		"StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
@@ -2430,6 +2437,32 @@ EndProcedure
 Procedure OffersOnChange(Parameters) Export
 	Binding = BindOffers(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Offers.Set
+Procedure SetSpecialOffers(Parameters, Results)
+	For Each Result In Results Do
+		If Result.Value.SpecialOffers.Count() Then
+			If Not Parameters.Cache.Property("SpecialOffers") Then
+				Parameters.Cache.Insert("SpecialOffers", New Array());
+			EndIf;
+			
+			// remove from cache old rows
+			Count = Parameters.Cache.SpecialOffers.Count();
+			For i = 1 To Count Do
+				Index = Count - i;
+				ArrayItem = Parameters.Cache.SpecialOffers[Index];
+				If ArrayItem.Key = Result.Options.Key Then
+					Parameters.Cache.SpecialOffers.Delete(Index);
+				EndIf;
+			EndDo;
+			
+			// add new rows
+			For Each Row In Result.Value.SpecialOffers Do
+				Parameters.Cache.SpecialOffers.Add(Row);
+			EndDo;
+		EndIf;
+	EndDo;
 EndProcedure
 
 // Offers.Bind
@@ -4285,6 +4318,10 @@ EndFunction
 Function BindItemListQuantity(Parameters)
 	DataPath = "ItemList.Quantity";
 	Binding = New Structure();
+	Binding.Insert("SalesReturn"         , "StepItemListCalculations_IsQuantityOnReturnChanged");
+	Binding.Insert("PurchaseReturn"      , "StepItemListCalculations_IsQuantityOnReturnChanged");
+	Binding.Insert("RetailReturnReceipt" , "StepItemListCalculations_IsQuantityOnReturnChanged");
+	
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4544,6 +4581,7 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, , "Price");
 	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, , "TotalAmount");
 	SetTaxList(Parameters, Results);
+	SetSpecialOffers(Parameters, Results);
 EndProcedure
 
 // ItemList.Calculations.Bind
@@ -4602,6 +4640,11 @@ Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged(Parameters, Chain
 	StepItemListCalculations(Parameters, Chain, "IsQuantityInBaseUnitChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsQuantityOnReturnChanged].Step
+Procedure StepItemListCalculations_IsQuantityOnReturnChanged(Parameters, Chain) Export
+	StepItemListCalculations(Parameters, Chain, "IsQuantityOnReturnChanged");
+EndProcedure
+
 // ItemList.Calculations.[IsTaxRateChanged].Step
 Procedure StepItemListCalculations_IsTaxRateChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsTaxRateChanged");
@@ -4627,12 +4670,16 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "IsOffersChanged"
-			Or WhoIsChanged = "IsCopyRow"
+			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsQuantityOnReturnChanged"
 			Or WhoIsChanged = "RecalculationsAfterQuestionToUser" Or WhoIsChanged = "RecalculationsOnCopy" Then
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;
 			Options.CalculateTaxAmount.Enable     = True;
 			Options.CalculateSpecialOffers.Enable = True;
+			
+			If WhoIsChanged = "IsQuantityOnReturnChanged" Then
+				Options.RecalculateSpecialOffers.Enable = True;
+			EndIf;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount and Price
 			
@@ -4674,7 +4721,8 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.TaxOptions.TaxList          = Row.TaxList;
 		Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
 		
-		Options.OffersOptions.SpecialOffers = Row.SpecialOffers;
+		Options.OffersOptions.SpecialOffers      = Row.SpecialOffers;
+		Options.OffersOptions.SpecialOffersCache = Row.SpecialOffersCache;
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";

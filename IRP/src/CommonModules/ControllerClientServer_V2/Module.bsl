@@ -4318,9 +4318,9 @@ EndFunction
 Function BindItemListQuantity(Parameters)
 	DataPath = "ItemList.Quantity";
 	Binding = New Structure();
-	Binding.Insert("SalesReturn"         , "StepItemListCalculations_IsQuantityOnReturnChanged");
-	Binding.Insert("PurchaseReturn"      , "StepItemListCalculations_IsQuantityOnReturnChanged");
-	Binding.Insert("RetailReturnReceipt" , "StepItemListCalculations_IsQuantityOnReturnChanged");
+	//---Binding.Insert("SalesReturn"         , "StepItemListCalculations_IsQuantityOnReturnChanged");
+	//---Binding.Insert("PurchaseReturn"      , "StepItemListCalculations_IsQuantityOnReturnChanged");
+	//---Binding.Insert("RetailReturnReceipt" , "StepItemListCalculations_IsQuantityOnReturnChanged");
 	
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
@@ -4641,9 +4641,9 @@ Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged(Parameters, Chain
 EndProcedure
 
 // ItemList.Calculations.[IsQuantityOnReturnChanged].Step
-Procedure StepItemListCalculations_IsQuantityOnReturnChanged(Parameters, Chain) Export
-	StepItemListCalculations(Parameters, Chain, "IsQuantityOnReturnChanged");
-EndProcedure
+//---Procedure StepItemListCalculations_IsQuantityOnReturnChanged(Parameters, Chain) Export
+//---	StepItemListCalculations(Parameters, Chain, "IsQuantityOnReturnChanged");
+//---EndProcedure
 
 // ItemList.Calculations.[IsTaxRateChanged].Step
 Procedure StepItemListCalculations_IsTaxRateChanged(Parameters, Chain) Export
@@ -4670,16 +4670,16 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "IsOffersChanged"
-			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsQuantityOnReturnChanged"
+			Or WhoIsChanged = "IsCopyRow"                 //---Or WhoIsChanged = "IsQuantityOnReturnChanged"
 			Or WhoIsChanged = "RecalculationsAfterQuestionToUser" Or WhoIsChanged = "RecalculationsOnCopy" Then
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;
 			Options.CalculateTaxAmount.Enable     = True;
 			Options.CalculateSpecialOffers.Enable = True;
 			
-			If WhoIsChanged = "IsQuantityOnReturnChanged" Then
+			//---If WhoIsChanged = "IsQuantityOnReturnChanged" Then
 				Options.RecalculateSpecialOffers.Enable = True;
-			EndIf;
+			//---EndIf;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount and Price
 			

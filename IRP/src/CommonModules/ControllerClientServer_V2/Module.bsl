@@ -1537,21 +1537,21 @@ Function BindDate(Parameters)
 
 	Binding.Insert("SalesReturn",
 		"StepItemListChangePriceTypeByAgreement,
-		|StepItemListChangePriceByPriceType,
+		//|StepItemListChangePriceByPriceType,
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("PurchaseReturn",
 		"StepItemListChangePriceTypeByAgreement,
-		|StepItemListChangePriceByPriceType,
+		//|StepItemListChangePriceByPriceType,
 		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListChangePriceTypeByAgreement,
-		|StepItemListChangePriceByPriceType,
+		//|StepItemListChangePriceByPriceType,
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");

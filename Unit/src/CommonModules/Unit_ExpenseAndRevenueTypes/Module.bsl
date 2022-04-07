@@ -104,14 +104,14 @@ Function ExpenseTypeCompany1ItemKey() Export
 	Data = GetData();
 	Filters = GetFilter("Part1", "ItemKey");
 	Result = InformationRegisters.ExpenseRevenueTypeSettings.GetExpenseType(Filters);
-	Unit_Service.isEqual(Data.Part1.ERType_Item, Result);
+	Unit_Service.isEqual(Data.Part1.ERType_ItemKey, Result);
 	Return "";
 EndFunction
 
 Function ExpenseTypeCompany1Item() Export
 	PrepareDB();
 	Data = GetData();
-	Filters = New Structure;
+	Filters = GetFilter("Part1", "Item");
 	Result = InformationRegisters.ExpenseRevenueTypeSettings.GetExpenseType(Filters);
 	Unit_Service.isEqual(Data.Part1.ERType_Item, Result);
 	Return "";

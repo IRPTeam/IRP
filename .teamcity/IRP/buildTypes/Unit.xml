@@ -23,6 +23,7 @@
     </disabled-settings>
     <parameters>
       <param name="env.Database1CName" value="%teamcity.build.id%" />
+      <param name="env.ExtName" value="Unit" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_12" name="Convert files to xml format" type="simpleRunner">

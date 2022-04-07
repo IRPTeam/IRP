@@ -18,6 +18,7 @@
       <setting-ref ref="RUNNER_58" />
       <setting-ref ref="RUNNER_59" />
       <setting-ref ref="RUNNER_66" />
+      <setting-ref ref="vcsTrigger" />
     </disabled-settings>
     <parameters>
       <param name="env.Database1CName" value="%teamcity.build.id%" />

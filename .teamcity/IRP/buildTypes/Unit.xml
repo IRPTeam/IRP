@@ -91,7 +91,7 @@ echo  "##teamcity[testFinished name='Upload extention to cfe']"]]></param>
       <build-trigger id="TRIGGER_5" type="buildDependencyTrigger">
         <parameters>
           <param name="afterSuccessfulBuildOnly" value="true" />
-          <param name="branchFilter" value="+:&lt;default&gt;" />
+          <param name="branchFilter" value="+:*" />
           <param name="dependsOn" value="IRP_BuildCF" />
         </parameters>
       </build-trigger>

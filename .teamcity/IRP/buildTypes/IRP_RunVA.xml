@@ -700,7 +700,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
       <build-trigger id="TRIGGER_8" type="buildDependencyTrigger">
         <parameters>
           <param name="afterSuccessfulBuildOnly" value="true" />
-          <param name="branchFilter" value="+:&lt;default&gt;" />
+          <param name="branchFilter" value="+:*" />
           <param name="dependsOn" value="Unit" />
         </parameters>
       </build-trigger>

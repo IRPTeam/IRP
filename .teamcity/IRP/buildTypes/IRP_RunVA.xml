@@ -804,7 +804,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
       </dependency>
       <dependency id="ARTIFACT_DEPENDENCY_15" sourceBuildTypeId="Unit" cleanDestination="false">
         <revisionRule name="sameChainOrLastFinished" revision="latest.sameChainOrLastFinished" />
-        <artifact sourcePath="Unit.cfe" />
+        <artifact sourcePath="Unit.cfe=&gt;DataProcessor" />
       </dependency>
       <dependency id="ARTIFACT_DEPENDENCY_11" sourceBuildTypeId="IRP_AdditionalFunctionality_Build" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" />

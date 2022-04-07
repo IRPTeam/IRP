@@ -3,7 +3,8 @@
 &AtClient
 Procedure FillTests(Command)
 	
-	FillTestsAtServer();
+	FillTestsAtServer();  
+	UpdateLog();
 	
 EndProcedure
 
@@ -23,6 +24,7 @@ EndProcedure
 Procedure RunTest(Command)
 	
 	RunTestAtServer();
+	UpdateLog();
 	
 EndProcedure
 
@@ -46,12 +48,14 @@ Procedure RunTestByRow(Row)
 		Row.Error = Result;
 	EndIf;
 	
+	
 EndProcedure
 
 &AtClient
 Procedure RunAllTest(Command)
 	
 	RunAllTestAtServer();
+	UpdateLog(); 
 	
 EndProcedure
 
@@ -64,4 +68,21 @@ Procedure RunAllTestAtServer()
 	
 EndProcedure
 
+&AtServer
+Procedure UpdateLog()
+	Done = 0;
+	Error = 0;
+	Total = 0;            
+	Log = "";
+	For Each Row In TestList Do
+		If Row.Done Then
+			Done = Done + 1;
+		ElsIf Not IsBlankString(Row.Error) Then
+			Error = Error + 1; 
+			Log = Log + Row.Test + Chars.LF + Row.Error + Chars.LF + "========================================" + Chars.Lf;			
+		EndIf;
+		Total = Total + 1;
+	EndDo;
+	
+EndProcedure
 

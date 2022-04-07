@@ -17,7 +17,7 @@ When Create catalog ExternalDataProc objects (test data base)
 				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				And I go to line in "List" table
 						| 'Description'    |
-						| 'Расчет налогов' |
+						| 'TaxCalculation' |
 				And I select current line in "List" table
 				And I select external file "#workingDir#/DataProcessor/TaxCalculateVAT_TR.epf"
 				And I click the button named "FormAddExtDataProc"
@@ -39,7 +39,7 @@ When Create catalog ExternalDataProc objects (test data base)
 				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				And I go to line in "List" table
 						| 'Description'    |
-						| 'Адрес' |
+						| 'Address' |
 				And I select current line in "List" table
 				And I select external file "#workingDir#/DataProcessor/InputAddress.epf"
 				And I click the button named "FormAddExtDataProc"
@@ -90,12 +90,12 @@ When Create information register Taxes records (test data base)
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
 						| 'Description'  |
-						| 'Собственная компания 1' |
+						| 'Own company 1' |
 		And I select current line in "List" table
 		And I move to "Tax types" tab
 		And I go to line in "CompanyTaxes" table
 						| 'Tax' |
-						| 'НДС' |
+						| 'VAT' |
 		And I select current line in "CompanyTaxes" table
 		And I click Open button of "Tax" field
 		And I click "Settings" button

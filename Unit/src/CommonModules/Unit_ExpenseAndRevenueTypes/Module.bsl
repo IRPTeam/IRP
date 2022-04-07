@@ -22,29 +22,29 @@ Function GetData() Export
 	PreparedData = New Structure;
 	
 	Data = New Structure;
-	Data.Insert("Item", Unit_Service.GetData("Catalog.Items?ref=a2c1aafaa4d87ef711ecb0fbebb448a9"));
-	Data.Insert("ItemKey", Unit_Service.GetData("Catalog.ItemKeys?ref=a2c1aafaa4d87ef711ecb0fbebb448aa"));
-	Data.Insert("ItemType", Unit_Service.GetData("Catalog.ItemTypes?ref=a2c1aafaa4d87ef711ecb0fbebb448a7"));
-	Data.Insert("Company", Unit_Service.GetData("Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"));	
+	Data.Insert("Item", Unit_Service.GetData("Catalog.Items?ref=b762b13668d0905011eb76684b9f687d"));
+	Data.Insert("ItemKey", Unit_Service.GetData("Catalog.ItemKeys?ref=b762b13668d0905011eb76684b9f687e"));
+	Data.Insert("ItemType", Unit_Service.GetData("Catalog.ItemTypes?ref=b762b13668d0905011eb76684b9f6878"));
+	Data.Insert("Company", Unit_Service.GetData("Catalog.Companies?ref=b762b13668d0905011eb7663e35d7964"));	
 	
-	Data.Insert("ERType_Empty", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=a2c1aafaa4d87ef711ecb0fbebb448ab"));
-	Data.Insert("ERType_Item", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=a2c1aafaa4d87ef711ecb0fbebb448ac"));
-	Data.Insert("ERType_ItemKey", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=a2c1aafaa4d87ef711ecb0fbebb448ad"));
-	Data.Insert("ERType_ItemType", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=a2c1aafaa4d87ef711ecb0fbebb448ae"));
+	Data.Insert("ERType_Empty", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6861"));
+	Data.Insert("ERType_Item", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6862"));
+	Data.Insert("ERType_ItemKey", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6863"));
+	Data.Insert("ERType_ItemType", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6864"));
 
 	PreparedData.Insert("Part1", Data);
 	
 	
 	Data = New Structure;	
-	Data.Insert("ItemKey", Unit_Service.GetData("Catalog.ItemKeys?ref=a2c1aafaa4d87ef711ecb0fbebb448aa"));
-	Data.Insert("Item", Unit_Service.GetData("Catalog.Items?ref=a2c1aafaa4d87ef711ecb0fbebb448a9"));
-	Data.Insert("ItemType", Unit_Service.GetData("Catalog.ItemTypes?ref=a2c1aafaa4d87ef711ecb0fbebb448a7"));
-	Data.Insert("Company", Unit_Service.GetData("Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"));
+	Data.Insert("ItemKey", Unit_Service.GetData("Catalog.ItemKeys?ref=b762b13668d0905011eb766bf96b2759"));
+	Data.Insert("Item", Unit_Service.GetData("Catalog.Items?ref=b762b13668d0905011eb766bf96b2754"));
+	Data.Insert("ItemType", Unit_Service.GetData("Catalog.ItemTypes?ref=b762b13668d0905011eb76684b9f6878"));
+	Data.Insert("Company", Unit_Service.GetData("Catalog.Companies?ref=b762b13668d0905011eb76684b9f685b"));
 
-	Data.Insert("ERType_Empty", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=a2c1aafaa4d87ef711ecb0fbebb448ab"));
-	Data.Insert("ERType_ItemKey", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=a2c1aafaa4d87ef711ecb0fbebb448ad"));
-	Data.Insert("ERType_Item", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=a2c1aafaa4d87ef711ecb0fbebb448ac"));
-	Data.Insert("ERType_ItemType", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=a2c1aafaa4d87ef711ecb0fbebb448ae"));
+	Data.Insert("ERType_Empty", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6861"));
+	Data.Insert("ERType_ItemKey", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6862"));
+	Data.Insert("ERType_Item", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6863"));
+	Data.Insert("ERType_ItemType", Unit_Service.GetData("Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6864"));
 
 	PreparedData.Insert("Part2", Data);
 	

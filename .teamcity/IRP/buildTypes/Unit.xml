@@ -3,6 +3,9 @@
   <name>Unit</name>
   <description />
   <settings ref="BuildExt">
+    <disabled-settings>
+      <setting-ref ref="RUNNER_34" />
+    </disabled-settings>
     <parameters>
       <param name="env.Database1CName" value="%teamcity.build.id%" />
     </parameters>

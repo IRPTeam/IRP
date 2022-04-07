@@ -22,7 +22,18 @@
     <parameters>
       <param name="env.Database1CName" value="%teamcity.build.id%" />
     </parameters>
-    <build-runners />
+    <build-runners>
+      <runner id="RUNNER_12" name="Convert files to xml format" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[rd /q /s "%%userprofile%%\AppData\Local\1C\1Cv8\"
+rd /q /s "%%userprofile%%\AppData\Roaming\1C\1Cv8\"
+
+call ring edt@%env.EDT_VERSION% workspace export --project %system.teamcity.build.workingDir%\%teamcity.build.id% --configuration-files %system.teamcity.build.workingDir%\xml --workspace-location %system.teamcity.build.workingDir%\WP]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />
     </vcs-settings>

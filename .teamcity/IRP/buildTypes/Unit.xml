@@ -30,7 +30,7 @@
           <param name="script.content"><![CDATA[rd /q /s "%%userprofile%%\AppData\Local\1C\1Cv8\"
 rd /q /s "%%userprofile%%\AppData\Roaming\1C\1Cv8\"
 
-call ring edt@%env.EDT_VERSION% workspace export --project %system.teamcity.build.workingDir%\%teamcity.build.id% --configuration-files %system.teamcity.build.workingDir%\xml --workspace-location %system.teamcity.build.workingDir%\WP]]></param>
+call ring edt@%env.EDT_VERSION% workspace export --project %system.teamcity.build.workingDir%\%env.ExtName% --configuration-files %system.teamcity.build.workingDir%\xml --workspace-location %system.teamcity.build.workingDir%\WP]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>

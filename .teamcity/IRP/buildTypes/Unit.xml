@@ -7,7 +7,9 @@
       <param name="env.Database1CName" value="%teamcity.build.id%" />
     </parameters>
     <build-runners />
-    <vcs-settings />
+    <vcs-settings>
+      <vcs-entry-ref root-id="IRP_GitTC" />
+    </vcs-settings>
     <requirements />
     <build-triggers />
     <cleanup />

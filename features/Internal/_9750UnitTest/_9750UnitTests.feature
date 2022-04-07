@@ -1,7 +1,6 @@
 ﻿#language: en
 @tree
-@Positive
-@TestDataBase
+@Unit
 
 Functionality: filling in test data base
 
@@ -9,7 +8,7 @@ Background:
 		Given I open new TestClient session or connect the existing one
 
 
-Scenario: _970001 filling in test data base
+Scenario: _975001 preparation
 
 When Create catalog ExternalDataProc objects (test data base)
 * Add ExternalDataProc
@@ -373,6 +372,28 @@ When Create catalog PartnerItems objects (test data base)
 		And Delay "3"
 And I close all client application windows
 
+Scenario: _975002 unit
+	Given I open hyperlink "e1cib/app/DataProcessor.Unit_RunTest"
+	Then "Run test" window is opened
+	And in the table "TestList" I click "Fill tests" button
+	And in the table "TestList" I click "Run all test" button
+	If the field named "Log" is filled Then
+		And I save the value of "Log" field as "VariableName"
+		And I display "VariableName" variable value
+		And in the table "TestList" I click "Output list..." button
+		Then "Display list" window is opened
+		And I click the button named "Ok"
+		Given "SpreadsheetDocument" spreadsheet document is equal to "Template"
+	And I close all client application windows
+	
+
+		
+		
+				
+		
+				
+		
+	
 
 	
 		

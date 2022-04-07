@@ -26,7 +26,11 @@ IsUsedNewFunctionality =
 	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice")
 	Or TypeOf(Source) = Type("DocumentObject.PurchaseInvoice")
 	Or TypeOf(Source) = Type("DocumentObject.InternalSupplyRequest")
-	Or TypeOf(Source) = Type("DocumentObject.RetailSalesReceipt");
+	Or TypeOf(Source) = Type("DocumentObject.RetailSalesReceipt")
+	
+	Or TypeOf(Source) = Type("DocumentObject.SalesReturn")
+	Or TypeOf(Source) = Type("DocumentObject.PurchaseReturn")
+	Or TypeOf(Source) = Type("DocumentObject.RetailReturnReceipt");
 
 	Data = New Structure();
 

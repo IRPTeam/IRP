@@ -1,6 +1,6 @@
 #Region FORM
 
-Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
+Procedure OnOpen(Object, Form, Cancel) Export
 	ViewClient_V2.OnOpen(Object, Form, "ItemList");
 EndProcedure
 

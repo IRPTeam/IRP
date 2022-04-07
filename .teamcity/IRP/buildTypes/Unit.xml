@@ -5,6 +5,7 @@
   <settings ref="BuildExt">
     <disabled-settings>
       <setting-ref ref="RUNNER_34" />
+      <setting-ref ref="RUNNER_35" />
       <setting-ref ref="RUNNER_66" />
     </disabled-settings>
     <parameters>

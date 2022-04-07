@@ -4,7 +4,7 @@
   <description />
   <settings ref="BuildExt">
     <options>
-      <option name="artifactRules" value="%teamcity.build.id%.cfe" />
+      <option name="artifactRules" value="%env.ExtName%.cfe" />
     </options>
     <disabled-settings>
       <setting-ref ref="ARTIFACT_DEPENDENCY_14" />

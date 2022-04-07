@@ -7,6 +7,7 @@
       <option name="artifactRules" value="%teamcity.build.id%.cfe" />
     </options>
     <disabled-settings>
+      <setting-ref ref="ARTIFACT_DEPENDENCY_14" />
       <setting-ref ref="RUNNER_34" />
       <setting-ref ref="RUNNER_35" />
       <setting-ref ref="RUNNER_36" />

@@ -4082,16 +4082,14 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeUnitByItemKey");
 		
 	Binding.Insert("SalesOrder",
-		"StepItemListChangeUseShipmentConfirmationByStore,
-		|StepItemListChangePriceTypeByAgreement,
+		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("SalesOrderClosing",
-		"StepItemListChangeUseShipmentConfirmationByStore,
-		|StepItemListChangePriceTypeByAgreement,
+		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
@@ -4107,8 +4105,7 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangeRevenueTypeByItemKey");
 
 	Binding.Insert("PurchaseReturnOrder",
-		"StepItemListChangeUseShipmentConfirmationByStore,
-		|StepItemListChangePriceTypeByAgreement,
+		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
@@ -4140,16 +4137,14 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("PurchaseOrder",
-		"StepItemListChangeUseGoodsReceiptByStore,
-		|StepItemListChangePriceTypeByAgreement,
+		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("PurchaseOrderClosing",
-		"StepItemListChangeUseGoodsReceiptByStore,
-		|StepItemListChangePriceTypeByAgreement,
+		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
@@ -4165,8 +4160,7 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("SalesReturnOrder",
-		"StepItemListChangeUseGoodsReceiptByStore,
-		|StepItemListChangePriceTypeByAgreement,
+		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
@@ -4421,13 +4415,11 @@ Function BindItemListStore(Parameters)
 	Binding.Insert("GoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("SalesOrder",
-		"StepItemListChangeUseShipmentConfirmationByStore,
-		|StepExtractDataItemKeyIsService,
+		"StepExtractDataItemKeyIsService,
 		|StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("SalesOrderClosing",
-		"StepItemListChangeUseShipmentConfirmationByStore,
-		|StepExtractDataItemKeyIsService,
+		"StepExtractDataItemKeyIsService,
 		|StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("SalesInvoice",
@@ -4436,8 +4428,7 @@ Function BindItemListStore(Parameters)
 		|StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("PurchaseReturnOrder",
-		"StepItemListChangeUseShipmentConfirmationByStore,
-		|StepExtractDataItemKeyIsService,
+		"StepExtractDataItemKeyIsService,
 		|StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("PurchaseReturn",
@@ -4454,13 +4445,11 @@ Function BindItemListStore(Parameters)
 		|StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("PurchaseOrder",
-		"StepItemListChangeUseGoodsReceiptByStore,
-		|StepExtractDataItemKeyIsService,
+		"StepExtractDataItemKeyIsService,
 		|StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("PurchaseOrderClosing",
-		"StepItemListChangeUseGoodsReceiptByStore,
-		|StepExtractDataItemKeyIsService,
+		"StepExtractDataItemKeyIsService,
 		|StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("PurchaseInvoice",
@@ -4469,8 +4458,7 @@ Function BindItemListStore(Parameters)
 		|StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("SalesReturnOrder",
-		"StepItemListChangeUseGoodsReceiptByStore,
-		|StepExtractDataItemKeyIsService,
+		"StepExtractDataItemKeyIsService,
 		|StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("SalesReturn",

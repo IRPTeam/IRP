@@ -2042,7 +2042,7 @@ EndFunction
 
 #EndRegion
 
-#Region NUMBER
+#Region _NUMBER
 
 // Number.OnChange
 Procedure NumberOnChange(Parameters) Export

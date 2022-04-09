@@ -198,7 +198,7 @@ EndProcedure
 
 #EndRegion
 
-#Region NUMBER
+#Region _NUMBER
 
 Procedure NumberOnChange(Object, Form, Item) Export
 	ViewClient_V2.NumberOnChange(Object, Form, "ItemList");

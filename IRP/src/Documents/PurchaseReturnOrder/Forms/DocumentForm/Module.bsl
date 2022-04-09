@@ -214,7 +214,7 @@ EndProcedure
 
 #EndRegion
 
-#Region NUMBER
+#Region _NUMBER
 
 &AtClient
 Procedure NumberOnChange(Item)

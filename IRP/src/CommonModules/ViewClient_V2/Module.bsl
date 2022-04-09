@@ -1813,7 +1813,7 @@ EndProcedure
 
 #EndRegion
 
-#Region NUMBER
+#Region _NUMBER
 
 Procedure NumberOnChange(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do

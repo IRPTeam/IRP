@@ -1212,7 +1212,14 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesReturn")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseReturn")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.RetailReturnReceipt");
+	Or TypeOf(Object.Ref) = Type("DocumentRef.RetailReturnReceipt")
+	
+	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesOrderClosing")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrderClosing")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesReturnOrder")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseReturnOrder");
 	
 	If IsUsedNewFunctionality Then	
 		For Each ResultElement In Result Do

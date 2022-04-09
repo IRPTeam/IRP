@@ -30,7 +30,14 @@ IsUsedNewFunctionality =
 	
 	Or TypeOf(Source) = Type("DocumentObject.SalesReturn")
 	Or TypeOf(Source) = Type("DocumentObject.PurchaseReturn")
-	Or TypeOf(Source) = Type("DocumentObject.RetailReturnReceipt");
+	Or TypeOf(Source) = Type("DocumentObject.RetailReturnReceipt")
+
+	Or TypeOf(Source) = Type("DocumentObject.SalesOrder")
+	Or TypeOf(Source) = Type("DocumentObject.SalesOrderClosing")
+	Or TypeOf(Source) = Type("DocumentObject.PurchaseOrder")
+	Or TypeOf(Source) = Type("DocumentObject.PurchaseOrderClosing")
+	Or TypeOf(Source) = Type("DocumentObject.SalesReturnOrder")
+	Or TypeOf(Source) = Type("DocumentObject.PurchaseReturnOrder");
 
 	Data = New Structure();
 

@@ -1,4 +1,11 @@
-#Region FormEvents
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocPurchaseReturnOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPurchaseReturnOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
@@ -7,13 +14,24 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 EndProcedure
 
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	DocPurchaseReturnOrderServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
 &AtClient
-Procedure OnOpen(Cancel, AddInfo = Undefined) Export
+Procedure OnOpen(Cancel)
 	DocPurchaseReturnOrderClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -32,13 +50,13 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		Return;
 	EndIf;
 
-	DocPurchaseReturnOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
+	//DocPurchaseReturnOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 EndProcedure
 
-&AtClient
-Procedure BeforeWrite(Cancel, WriteParameters)
-	Return;
-EndProcedure
+//&AtClient
+//Procedure BeforeWrite(Cancel, WriteParameters)
+//	Return;
+//EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
@@ -46,26 +64,14 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
-Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
+Procedure AfterWrite(WriteParameters)
 	DocPurchaseReturnOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	DocPurchaseReturnOrderServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocPurchaseReturnOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
-&AtServer
-Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
-EndProcedure
+Function Taxes_CreateFormControls() Export
+	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
+EndFunction
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
@@ -82,53 +88,133 @@ EndProcedure
 
 #EndRegion
 
-#Region FormItemsEvents
+#Region _DATE
 
 &AtClient
-Procedure StatusOnChange(Item)
-	DocPurchaseReturnOrderClient.StatusOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DateOnChange(Item, AddInfo = Undefined) Export
+Procedure DateOnChange(Item)
 	DocPurchaseReturnOrderClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
+
+#EndRegion
+
+#Region COMPANY
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	DocPurchaseReturnOrderClient.CompanyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPurchaseReturnOrderClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocPurchaseReturnOrderClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region PARTNER
+
+&AtClient
+Procedure PartnerOnChange(Item)
+	DocPurchaseReturnOrderClient.PartnerOnChange(Object, ThisObject, Item);
+	//SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPurchaseReturnOrderClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	DocPurchaseReturnOrderClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME
+
+&AtClient
+Procedure LegalNameOnChange(Item)
+	DocPurchaseReturnOrderClient.LegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPurchaseReturnOrderClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocPurchaseReturnOrderClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT
+
+&AtClient
+Procedure AgreementOnChange(Item)
+	DocPurchaseReturnOrderClient.AgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPurchaseReturnOrderClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	DocPurchaseReturnOrderClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region CURRENCY
+
+&AtClient
+Procedure CurrencyOnChange(Item)
+	DocPurchaseReturnOrderClient.CurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region STORE
 
 &AtClient
 Procedure StoreOnChange(Item)
 	DocPurchaseReturnOrderClient.StoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure PartnerOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseReturnOrderClient.PartnerOnChange(Object, ThisObject, Item);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
+#EndRegion
+
+#Region DELIVERY_DATE
+
+#EndRegion
+
+#Region STATUS
 
 &AtClient
-Procedure LegalNameOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseReturnOrderClient.LegalNameOnChange(Object, ThisObject, Item);
+Procedure StatusOnChange(Item)
+	DocPurchaseReturnOrderClient.StatusOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseReturnOrderClient.AgreementOnChange(Object, ThisObject, Item);
-EndProcedure
+#EndRegion
 
-&AtClient
-Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseReturnOrderClient.CompanyOnChange(Object, ThisObject, Item);
-EndProcedure
+#Region PRICE_INCLUDE_TAX
 
 &AtClient
 Procedure PriceIncludeTaxOnChange(Item)
 	DocPurchaseReturnOrderClient.PriceIncludeTaxOnChange(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure CurrencyOnChange(Item)
-	DocPurchaseReturnOrderClient.CurrencyOnChange(Object, ThisObject, Item);
-EndProcedure
+#EndRegion
+
+#Region NUMBER
 
 &AtClient
 Procedure NumberOnChange(Item)
@@ -137,28 +223,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemListEvents
-
-&AtClient
-Procedure ItemListAfterDeleteRow(Item)
-	DocPurchaseReturnOrderClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	LockLinkedRows();
-EndProcedure
-
-&AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseReturnOrderClient.ItemListOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocPurchaseReturnOrderClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnActivateRow(Item)
-	DocPurchaseReturnOrderClient.ItemListOnActivateRow(Object, ThisObject, Item);
-EndProcedure
+#Region ITEM_LIST
 
 &AtClient
 Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
@@ -166,16 +231,27 @@ Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocPurchaseReturnOrderClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
 Procedure ItemListBeforeDeleteRow(Item, Cancel)
 	DocPurchaseReturnOrderClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
-#EndRegion
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocPurchaseReturnOrderClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
+EndProcedure
 
-#Region ItemListItemsEvents
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
 
 &AtClient
-Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListItemOnChange(Item)
 	DocPurchaseReturnOrderClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -189,45 +265,90 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocPurchaseReturnOrderClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+#EndRegion
+
+#Region ITEM_KEY
+
 &AtClient
-Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListItemKeyOnChange(Item)
 	DocPurchaseReturnOrderClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region UNIT
+
 &AtClient
-Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListUnitOnChange(Item)
 	DocPurchaseReturnOrderClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region QUANTITY
+
 &AtClient
-Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListQuantityOnChange(Item)
 	DocPurchaseReturnOrderClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region PRICE
+
 &AtClient
-Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListPriceOnChange(Item)
 	DocPurchaseReturnOrderClient.ItemListPriceOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region TOTAL_AMOUNT
+
 &AtClient
-Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListTotalAmountOnChange(Item)
 	DocPurchaseReturnOrderClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
+
+#EndRegion
+
+#Region TAX_AMOUNT
 
 &AtClient
 Procedure ItemListTaxAmountOnChange(Item)
 	DocPurchaseReturnOrderClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region DONT_CALCULATE_ROW
+
 &AtClient
 Procedure ItemListDontCalculateRowOnChange(Item)
 	DocPurchaseReturnOrderClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region STORE
+
 &AtClient
 Procedure ItemListStoreOnChange(Item)
 	DocPurchaseReturnOrderClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
+
+#EndRegion
+
+#Region TAX_RATE
+
+&AtClient
+Procedure TaxValueOnChange(Item) Export
+	DocPurchaseReturnOrderClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region EXPENSE_TYPE
 
 &AtClient
 Procedure ItemListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
@@ -242,72 +363,17 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPartner
-
-&AtClient
-Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseReturnOrderClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseReturnOrderClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
+#EndRegion
 
 #EndRegion
 
-#Region ItemLegalName
-
-&AtClient
-Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseReturnOrderClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseReturnOrderClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
+#Region PAYMENT_TERMS
 
 #EndRegion
 
-#Region ItemAgreement
+#Region SPECIAL_OFFERS
 
-&AtClient
-Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseReturnOrderClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseReturnOrderClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure DateStartListChoice(Item, StandardProcessing)
-	CurrentPartner = Object.Partner;
-	CurrentAgreement = Object.Agreement;
-	CurrentDate = Object.Date;
-EndProcedure
-
-#EndRegion
-
-#Region ItemCompany
-
-&AtClient
-Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseReturnOrderClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseReturnOrderClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region SpecialOffers
-
-#Region Offers_for_document
+#Region FOR_DOCUMENT
 
 &AtClient
 Procedure SetSpecialOffers(Command)
@@ -321,7 +387,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Offers_for_row
+#Region FOR_ROW
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
@@ -338,7 +404,25 @@ EndProcedure
 
 #EndRegion
 
-#Region DescriptionEvents
+#Region SHIPMENT_CONFIRMATIONS
+
+#EndRegion
+
+#Region GOODS_RECEIPTS
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocPurchaseReturnOrderClient);
+	Str.Insert("Server", DocPurchaseReturnOrderServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
@@ -347,7 +431,7 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorations
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -371,21 +455,36 @@ EndProcedure
 
 #EndRegion
 
-#Region Taxes
+#Region ADD_ATTRIBUTES
 
 &AtClient
-Procedure TaxValueOnChange(Item) Export
-	DocPurchaseReturnOrderClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
 EndProcedure
 
 &AtServer
-Function Taxes_CreateFormControls(AddInfo = Undefined) Export
-	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject, AddInfo);
-EndFunction
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
 
 #EndRegion
 
-#Region Commands
+#Region EXTERNAL_COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
 
 &AtClient
 Procedure DecorationStatusHistoryClick(Item)
@@ -414,36 +513,7 @@ EndProcedure
 
 #EndRegion
 
-#Region AddAttributes
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure AddAttributesCreateFormControl()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
-EndProcedure
-
-#EndRegion
-
-#Region ExternalCommands
-
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-#EndRegion
-
-#Region LinkedDocuments
+#Region LINKED_DOCUMENTS
 
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
@@ -451,37 +521,51 @@ Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_PRO(Object));
 	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
 	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
 Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_PRO(Object));
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_SI(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
 	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
 &AtClient
-Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
-	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	Taxes_CreateFormControls();
+	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	If ExtractedData <> Undefined Then
+		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
+	EndIf;
 EndProcedure
 
 &AtServer
-Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
-		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;
+	ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	LockLinkedRows();
-EndProcedure
+	Return ExtractedData;
+EndFunction
 
 &AtServer
 Procedure LockLinkedRows()
@@ -506,18 +590,6 @@ EndProcedure
 
 #EndRegion
 
-#Region Service
-
-&AtClient
-Function GetProcessingModule() Export
-	Str = New Structure;
-	Str.Insert("Client", DocPurchaseReturnOrderClient);
-	Str.Insert("Server", DocPurchaseReturnOrderServer);
-	Return Str;
-EndFunction
-
-#EndRegion
-
 &AtClient
 Procedure EditCurrencies(Command)
 	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
@@ -533,3 +605,4 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
+#EndRegion

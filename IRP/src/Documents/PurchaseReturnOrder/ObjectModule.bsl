@@ -32,9 +32,16 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata()));
-		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+		PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
+		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
+		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
 	EndIf;
+
+//	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
+//		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata()));
+//		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+//	EndIf;
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

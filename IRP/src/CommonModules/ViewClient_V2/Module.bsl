@@ -991,6 +991,16 @@ Procedure ItemListTaxAmountOnChange(Object, Form, CurrentData = Undefined) Expor
 	ControllerClientServer_V2.ItemListTaxAmountOnChange(Parameters);
 EndProcedure
 
+// ItemList.TaxAmount.UserForm
+Procedure ItemListTaxAmountUserFormOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	For Each Row In Parameters.Rows Do
+		Row.TaxIsAlreadyCalculated = True;
+	EndDo;
+	ControllerClientServer_V2.ItemListTaxAmountUserFormOnChange(Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region ITEM_LIST_OFFERS_AMOUNT
@@ -1271,6 +1281,16 @@ Procedure PaymentListTaxAmountOnChange(Object, Form, CurrentData = Undefined) Ex
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	ControllerClientServer_V2.PaymentListTaxAmountOnChange(Parameters);
+EndProcedure
+
+// PaymentList.TaxAmount.UserForm
+Procedure PaymentListTaxAmountUserFormOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	For Each Row In Parameters.Rows Do
+		Row.TaxIsAlreadyCalculated = True;
+	EndDo;
+	ControllerClientServer_V2.PaymentListTaxAmountUserFormOnChange(Parameters);
 EndProcedure
 
 // PaymentList.NetAmount

@@ -3758,6 +3758,23 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYMENT_LIST_TAX_AMOUNT_USER_FORM
+
+// PaymentList.TaxAmountUserForm.OnChange
+Procedure PaymentListTaxAmountUserFormOnChange(Parameters) Export
+	Binding = BindPaymentListTaxAmountUserForm(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payment.TaxAmountUserForm.Bind
+Function BindPaymentListTaxAmountUserForm(Parameters)
+	DataPath = "PaymentList.TaxAmount";
+	Binding = New Structure();
+	Return BindSteps("StepItemListCalculations_IsTaxAmountUserFormChanged", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region PAYMENT_LIST_NET_AMOUNT
 
 // PaymentList.NetAmount.OnChange
@@ -4995,6 +5012,35 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_TAX_AMOUNT_USER_FORM
+
+// ItemList.TaxAmountUserForm.OnChange
+Procedure ItemListTaxAmountUserFormOnChange(Parameters) Export
+	Binding = BindItemListTaxAmountUserForm(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.TaxAmountUserForm.Bind
+Function BindItemListTaxAmountUserForm(Parameters)
+	DataPath = "ItemList.TaxAmount";
+	Binding = New Structure();
+	Binding.Insert("SalesOrder"           , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("SalesOrderClosing"    , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("SalesInvoice"         , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("RetailSalesReceipt"   , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("PurchaseOrder"        , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("PurchaseOrderClosing" , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("PurchaseInvoice"      , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("RetailReturnReceipt"  , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("PurchaseReturnOrder"  , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("PurchaseReturn"       , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("SalesReturnOrder"     , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("SalesReturn"          , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region ITEM_LIST_OFFERS_AMOUNT
 
 // ItemList.OffersAmount.OnChange
@@ -5199,6 +5245,11 @@ Procedure StepItemListCalculations_IsTaxAmountChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsTaxAmountChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsTaxAmountUserFormChanged].Step
+Procedure StepItemListCalculations_IsTaxAmountUserFormChanged(Parameters, Chain) Export
+	StepItemListCalculations(Parameters, Chain, "IsTaxAmountUserFormChanged");
+EndProcedure
+
 Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	Chain.Calculations.Enable = True;
 	Chain.Calculations.Setter = "SetItemListCalculations";
@@ -5214,7 +5265,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "IsOffersChanged"
-			Or WhoIsChanged = "IsCopyRow"
+			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsTaxAmountUserFormChanged"
 			Or WhoIsChanged = "RecalculationsAfterQuestionToUser" Or WhoIsChanged = "RecalculationsOnCopy" Then
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;

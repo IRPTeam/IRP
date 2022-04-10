@@ -1306,7 +1306,7 @@ Function CalculationsExecute(Options) Export
 				Result.TotalAmount = CalculateTotalAmount_PriceIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
+			If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 				CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False);
 			EndIf;
 
@@ -1335,7 +1335,7 @@ Function CalculationsExecute(Options) Export
 				Result.NetAmount = CalculateNetAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
+			If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 				CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False);
 			EndIf;
 
@@ -1353,7 +1353,7 @@ Function CalculationsExecute(Options) Export
 			(Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity);
 		EndIf;
 		
-		If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
+		If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 			CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True);
 		EndIf;
 

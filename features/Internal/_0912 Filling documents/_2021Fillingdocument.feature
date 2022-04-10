@@ -7407,7 +7407,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
+				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | ''              | 'Basic Price Types' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
 			And I go to line in "ItemList" table

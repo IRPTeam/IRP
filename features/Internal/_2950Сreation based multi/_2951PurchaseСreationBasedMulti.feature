@@ -237,6 +237,8 @@ Scenario: _090304 create Purchase invoice for several Purchase order with differ
 				| Description       |
 				| Company Ferron BP |
 			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
 				| Description        |

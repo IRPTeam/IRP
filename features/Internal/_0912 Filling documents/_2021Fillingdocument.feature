@@ -548,6 +548,8 @@ Scenario: _0154101 check filling in and refilling Sales order
 				| 'Description'           |
 				| 'Basic Partner terms, TRY' |
 			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
 		* Tax calculation check
 			And "ItemList" table contains lines
 				| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |

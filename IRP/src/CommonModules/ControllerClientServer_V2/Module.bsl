@@ -4103,7 +4103,8 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeRevenueTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey,
+		|StepItemListChangeProcurementMethodByItemKey");
 	
 	Binding.Insert("SalesOrderClosing",
 		"StepItemListChangePriceTypeByAgreement,
@@ -4209,6 +4210,42 @@ Procedure StepItemListChangeItemKeyByItem(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListChangeItemKeyByItem";
 		Chain.ChangeItemKeyByItem.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_PROCUREMENT_METHOD
+
+// ItemList.ProcurementMethod.Set
+Procedure SetItemListProcurementMethod(Parameters, Results) Export
+	Binding = BindItemListProcurementMethod(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ProcurementMethod.Get
+Function GetItemListProcurementMethod(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListProcurementMethod(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.ProcurementMethod.Bind
+Function BindItemListProcurementMethod(Parameters)
+	DataPath = "ItemList.ProcurementMethod";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.ProcurementMethod.StepItemListChangeProcurementMethodByItemKey.Step
+Procedure StepItemListChangeProcurementMethodByItemKey(Parameters, Chain) Export
+	Chain.ChangeProcurementMethodByItemKey.Enable = True;
+	Chain.ChangeProcurementMethodByItemKey.Setter = "SetItemListProcurementMethod";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeProcurementMethodByItemKeyOptions();
+		Options.ProcurementMethod = GetItemListProcurementMethod(Parameters, Row.Key);
+		Options.ItemKey           = GetItemListItemKey(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeProcurementMethodByItemKey";
+		Chain.ChangeProcurementMethodByItemKey.Options.Add(Options);
 	EndDo;
 EndProcedure
 

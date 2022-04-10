@@ -166,6 +166,7 @@ Function GetChain()
 	
 	Chain.Insert("ChangeItemByPartnerItem" , GetChainLink("ChangeItemByPartnerItemExecute"));
 	Chain.Insert("ChangeItemKeyByItem"     , GetChainLink("ChangeItemKeyByItemExecute"));
+	Chain.Insert("ChangeProcurementMethodByItemKey" , GetChainLink("ChangeProcurementMethodByItemKeyExecute"));
 	
 	Chain.Insert("ChangeCurrencyByAccount", GetChainLink("ChangeCurrencyByAccountExecute"));
 	Chain.Insert("ChangePlanningTransactionBasisByCurrency", GetChainLink("ChangePlanningTransactionBasisByCurrencyExecute"));
@@ -754,6 +755,24 @@ EndFunction
 
 Function ChangeItemByPartnerItemExecute(Options) Export
 	Return DocumentsServer.GetItemAndItemKeyByPartnerItem(Options.PartnerItem);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PROCUREMENT_METHOD_BY_ITEM_KEY
+
+Function ChangeProcurementMethodByItemKeyOptions() Export
+	Return GetChainLinkOptions("ProcurementMethod, ItemKey");
+EndFunction
+
+Function ChangeProcurementMethodByItemKeyExecute(Options) Export
+	If ValueIsFilled(Options.ProcurementMethod) Then
+		Return Options.ProcurementMethod;
+	EndIf;
+	If CatItemsServer.StoreMustHave(Options.ItemKey) Then
+		Return PredefinedValue("Enum.ProcurementMethods.Stock");
+	EndIf;
+	Return PredefinedValue("Enum.ProcurementMethods.EmptyRef");
 EndFunction
 
 #EndRegion

@@ -5167,12 +5167,13 @@ EndFunction
 // ItemList.Calculations.Set
 Procedure SetItemListCalculations(Parameters, Results) Export
 	ViewNotify = "OnSetCalculationsNotify";
+	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
-	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount");
-	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount");
-	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, ViewNotify, "OffersAmount");
-	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price");
-	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, ViewNotify, "TotalAmount");
+	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"    , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, ViewNotify, "OffersAmount" , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"        , NotifyAnyway);
+	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, ViewNotify, "TotalAmount" ,NotifyAnyway);
 	SetTaxList(Parameters, Results);
 	SetSpecialOffers(Parameters, Results);
 EndProcedure

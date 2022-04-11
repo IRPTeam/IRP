@@ -334,7 +334,7 @@ Function QueryByItemPriceInfo_Specification(ItemList, Period, AddInfo = Undefine
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	SpecificationRows.ItemKey AS ItemKey,
 	|	SpecificationRows.Specification AS Specification,
 	|	SpecificationRows.Item AS Item,
@@ -390,7 +390,7 @@ Function QueryByItemPriceInfo_Specification(ItemList, Period, AddInfo = Undefine
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	PriceKeys.PriceKey AS PriceKey,
 	|	PriceKeys.ItemKey AS ItemKey,
 	|	PriceKeys.Specification AS Specification,
@@ -431,7 +431,7 @@ Function QueryByItemPriceInfo_Specification(ItemList, Period, AddInfo = Undefine
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	tmp3.PriceKey AS PriceKey,
 	|	tmp3.ItemKey AS ItemKey,
 	|	tmp3.Specification AS Specification,
@@ -538,7 +538,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	ItemKeys.ItemKey AS ItemKey,
 	|	ItemKeys.Specification AS Specification,
 	|	ItemKeys.AffectPricingMD5 AS AffectPricingMD5,
@@ -567,7 +567,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	PriceKeys.Ref AS PriceKey,
 	|	tmp2.ItemKey AS ItemKey,
 	|	tmp2.AffectPricingMD5 AS AffectPricingMD5,
@@ -581,7 +581,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	PriceKeys.ItemKey AS ItemKey,
 	|	PriceKeys.Item AS Item,
 	|	PriceKeys.PriceType AS PriceType,
@@ -595,7 +595,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	tmp3.ItemKey AS ItemKey,
 	|	tmp3.Item AS Item,
 	|	tmp3.PriceType AS PriceType
@@ -607,7 +607,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	tmp3.ItemKey AS ItemKey,
 	|	tmp3.Item AS Item,
 	|	tmp3.PriceType AS PriceType,
@@ -626,7 +626,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
+	|SELECT ALLOWED
 	|	ItemKeys.ItemKey AS ItemKey,
 	|	ItemKeys.Specification AS Specification,
 	|	ItemKeys.AffectPricingMD5 AS AffectPricingMD5,

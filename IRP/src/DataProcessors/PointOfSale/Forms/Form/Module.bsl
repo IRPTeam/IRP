@@ -51,6 +51,8 @@ EndProcedure
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	EnabledPaymentButton();
 	FillSalesPersonInItemList();
+	CurrentData = Items.ItemList.CurrentData;
+	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
 EndProcedure
 
 &AtClient

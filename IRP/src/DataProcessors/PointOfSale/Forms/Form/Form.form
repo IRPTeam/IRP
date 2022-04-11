@@ -2854,7 +2854,7 @@
               <color>Style.FormBackColor</color>
             </borderColor>
             <font xsi:type="core:FontRef">
-              <font>Style.LargeTextFont</font>
+              <font>Style.NormalTextFont</font>
             </font>
             <representationInContextMenu>Auto</representationInContextMenu>
             <shapeRepresentation>WhenActive</shapeRepresentation>
@@ -2895,7 +2895,7 @@
               <color>Style.FormBackColor</color>
             </borderColor>
             <font xsi:type="core:FontRef">
-              <font>Style.LargeTextFont</font>
+              <font>Style.NormalTextFont</font>
             </font>
             <picture xsi:type="core:PictureRef">
               <picture>CommonPicture.Share</picture>
@@ -3005,7 +3005,7 @@
             <verticalStretch>true</verticalStretch>
             <placementArea>UserCmds</placementArea>
             <font xsi:type="core:FontRef">
-              <font>Style.LargeTextFont</font>
+              <font>Style.NormalTextFont</font>
             </font>
             <representationInContextMenu>Auto</representationInContextMenu>
             <shapeRepresentation>WhenActive</shapeRepresentation>
@@ -3045,10 +3045,9 @@
               <color>Style.FormBackColor</color>
             </borderColor>
             <font xsi:type="core:FontRef">
-              <font>Style.LargeTextFont</font>
+              <font>Style.NormalTextFont</font>
             </font>
             <representationInContextMenu>Auto</representationInContextMenu>
-            <shape>Oval</shape>
             <shapeRepresentation>WhenActive</shapeRepresentation>
           </items>
           <visible>true</visible>
@@ -3117,7 +3116,7 @@
               <color>Style.FormBackColor</color>
             </borderColor>
             <font xsi:type="core:FontRef">
-              <font>Style.LargeTextFont</font>
+              <font>Style.NormalTextFont</font>
             </font>
             <representationInContextMenu>Auto</representationInContextMenu>
             <shapeRepresentation>WhenActive</shapeRepresentation>
@@ -3157,7 +3156,7 @@
               <color>Style.FormBackColor</color>
             </borderColor>
             <font xsi:type="core:FontRef">
-              <font>Style.LargeTextFont</font>
+              <font>Style.NormalTextFont</font>
             </font>
             <representationInContextMenu>Auto</representationInContextMenu>
             <shapeRepresentation>WhenActive</shapeRepresentation>
@@ -3232,7 +3231,7 @@
               <color>Style.FormBackColor</color>
             </borderColor>
             <font xsi:type="core:FontRef">
-              <font>Style.LargeTextFont</font>
+              <font>Style.NormalTextFont</font>
             </font>
             <representationInContextMenu>Auto</representationInContextMenu>
             <shapeRepresentation>WhenActive</shapeRepresentation>
@@ -3271,7 +3270,7 @@
               <color>Style.FormBackColor</color>
             </borderColor>
             <font xsi:type="core:FontRef">
-              <font>Style.LargeTextFont</font>
+              <font>Style.NormalTextFont</font>
             </font>
             <representationInContextMenu>Auto</representationInContextMenu>
             <shapeRepresentation>WhenActive</shapeRepresentation>

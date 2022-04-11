@@ -41,9 +41,9 @@ Scenario: _034902 check discount price type calculation in POS
 		And I select current line in "Offers" table
 		And in the table "Offers" I click "OK" button
 		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total' |
-			| 'Dress' | 'XS/Blue'  | ''              | '1,000'    | '520,00' | '131,00'        | '389,00'       |
-			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | '131,00'        | '389,00'       |
+			| 'Item'  | 'Item key' | 'Serials' | 'Quantity' | 'Price'  | 'Offers' | 'Total' |
+			| 'Dress' | 'XS/Blue'  | ''        | '1,000'    | '520,00' | '131,00' | '389,00'|
+			| 'Dress' | 'M/White'  | ''        | '1,000'    | '520,00' | '131,00' | '389,00'|
 	* Add one more item and check discount calculation
 		And I go to line in "ItemsPickup" table
 			| 'Item'  |
@@ -55,10 +55,10 @@ Scenario: _034902 check discount price type calculation in POS
 		And I click "Discount document" button
 		And in the table "Offers" I click "OK" button
 		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total' |
-			| 'Dress' | 'XS/Blue'  | ''              | '1,000'    | '520,00' | '131,00'        | '389,00'       |
-			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | '131,00'        | '389,00'       |
-			| 'Dress' | 'L/Green'  | ''              | '1,000'    | '550,00' | '137,00'        | '413,00'       |
+			| 'Item'  | 'Item key' | 'Serials' | 'Quantity' | 'Price'  | 'Offers' | 'Total' |
+			| 'Dress' | 'XS/Blue'  | ''        | '1,000'    | '520,00' | '131,00' | '389,00'|
+			| 'Dress' | 'M/White'  | ''        | '1,000'    | '520,00' | '131,00' | '389,00'|
+			| 'Dress' | 'L/Green'  | ''        | '1,000'    | '550,00' | '137,00' | '413,00'|
 		Then the form attribute named "ItemListTotalOffersAmount" became equal to "399"
 		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 191"		
 		And I close all client application windows

@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<style>
-	div.containerDate {
-	  display: flex;
-	  align-items: center;
-	  justify-content: center
-	  }
-	div.containerDate p {
-	  margin: 0
-	  }
-	html { overflow:  hidden; font-family: 'tahoma'; }
+		span {
+			overflow: hidden;
+			width: 100%;
+			margin: 0;
+  			font-size: calc(3vw + 3vh);
+  			white-space:nowrap;
+  			display: block;
+	}
+	* { 
+		overflow:  hidden;
+		font-family: 'tahoma';
+		margin: 0; 
+	}
 	</style>
 	<body>
-		<h2><span id="text"/></h2>
+		<span id="text"/>
 	</body>
 </html>

@@ -60,9 +60,9 @@
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
             <extInfo xsi:type="form:HtmlFieldExtInfo">
-              <width>10</width>
+              <width>1</width>
               <autoMaxWidth>true</autoMaxWidth>
-              <height>4</height>
+              <height>2</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
               <borderColor xsi:type="core:ColorRef">
@@ -363,7 +363,6 @@
                       <textEdit>true</textEdit>
                       <font xsi:type="core:FontRef">
                         <font>Style.LargeTextFont</font>
-                        <scale>150</scale>
                       </font>
                     </extInfo>
                   </items>
@@ -427,7 +426,7 @@
                       </choiceParameterLinks>
                       <font xsi:type="core:FontRef">
                         <font>Style.LargeTextFont</font>
-                        <scale>150</scale>
+                        <scale>100</scale>
                       </font>
                     </extInfo>
                   </items>
@@ -477,7 +476,7 @@
                   <id>970</id>
                   <title>
                     <key>en</key>
-                    <value>Serial number</value>
+                    <value>Serials</value>
                   </title>
                   <titleFont xsi:type="core:FontRef">
                     <font>Style.LargeTextFont</font>
@@ -536,7 +535,7 @@
                       <event>Clearing</event>
                       <name>ItemListSerialLotNumbersPresentationClearing</name>
                     </handlers>
-                    <width>15</width>
+                    <width>10</width>
                     <autoMaxWidth>true</autoMaxWidth>
                     <autoMaxHeight>true</autoMaxHeight>
                     <wrap>true</wrap>
@@ -616,7 +615,7 @@
                     <typeDomainEnabled>true</typeDomainEnabled>
                     <textEdit>true</textEdit>
                     <font xsi:type="core:FontRef">
-                      <font>Style.ExtraLargeTextFont</font>
+                      <font>Style.LargeTextFont</font>
                     </font>
                   </extInfo>
                 </items>
@@ -740,7 +739,7 @@
                     <typeDomainEnabled>true</typeDomainEnabled>
                     <textEdit>true</textEdit>
                     <font xsi:type="core:FontRef">
-                      <font>Style.ExtraLargeTextFont</font>
+                      <font>Style.LargeTextFont</font>
                     </font>
                   </extInfo>
                 </items>
@@ -809,7 +808,7 @@
                     <typeDomainEnabled>true</typeDomainEnabled>
                     <textEdit>true</textEdit>
                     <font xsi:type="core:FontRef">
-                      <font>Style.ExtraLargeTextFont</font>
+                      <font>Style.LargeTextFont</font>
                     </font>
                   </extInfo>
                 </items>
@@ -869,98 +868,163 @@
                     </font>
                   </extInfo>
                 </items>
-                <items xsi:type="form:FormField">
-                  <name>ItemListSalesPerson</name>
-                  <id>1015</id>
-                  <titleFont xsi:type="core:FontRef">
-                    <font>Style.LargeTextFont</font>
-                  </titleFont>
+                <items xsi:type="form:FormGroup">
+                  <name>ItemListGroupTotal</name>
+                  <id>1032</id>
+                  <items xsi:type="form:FormField">
+                    <name>ItemListTotalAmount</name>
+                    <id>776</id>
+                    <title>
+                      <key>en</key>
+                      <value>Total</value>
+                    </title>
+                    <titleFont xsi:type="core:FontRef">
+                      <font>Style.LargeTextFont</font>
+                    </titleFont>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <dataPath xsi:type="form:DataPath">
+                      <segments>Object.ItemList.TotalAmount</segments>
+                    </dataPath>
+                    <titleBackColor xsi:type="core:ColorRef">
+                      <color>Style.FormBackColor</color>
+                    </titleBackColor>
+                    <handlers>
+                      <event>OnChange</event>
+                      <name>ItemListTotalAmountOnChange</name>
+                    </handlers>
+                    <extendedTooltip>
+                      <name>ItemListTotalAmountExtendedTooltip</name>
+                      <id>778</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <contextMenu>
+                      <name>ItemListTotalAmountContextMenu</name>
+                      <id>777</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <autoFill>true</autoFill>
+                    </contextMenu>
+                    <type>InputField</type>
+                    <readOnly>true</readOnly>
+                    <editMode>Enter</editMode>
+                    <showInHeader>true</showInHeader>
+                    <headerPicture xsi:type="core:PictureRef">
+                      <picture>CommonPicture.Total</picture>
+                    </headerPicture>
+                    <headerHorizontalAlign>Center</headerHorizontalAlign>
+                    <showInFooter>true</showInFooter>
+                    <footerHorizontalAlign>Center</footerHorizontalAlign>
+                    <extInfo xsi:type="form:InputFieldExtInfo">
+                      <width>15</width>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <wrap>true</wrap>
+                      <chooseType>true</chooseType>
+                      <typeDomainEnabled>true</typeDomainEnabled>
+                      <textEdit>true</textEdit>
+                      <font xsi:type="core:FontRef">
+                        <font>Style.LargeTextFont</font>
+                        <bold>true</bold>
+                        <italic>false</italic>
+                        <underline>false</underline>
+                        <strikeout>false</strikeout>
+                        <scale>100</scale>
+                      </font>
+                    </extInfo>
+                  </items>
+                  <items xsi:type="form:FormField">
+                    <name>ItemListSalesPerson</name>
+                    <id>1015</id>
+                    <titleFont xsi:type="core:FontRef">
+                      <font>Style.LargeTextFont</font>
+                    </titleFont>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <dataPath xsi:type="form:DataPath">
+                      <segments>Object.ItemList.SalesPerson</segments>
+                    </dataPath>
+                    <titleBackColor xsi:type="core:ColorRef">
+                      <color>Style.FormBackColor</color>
+                    </titleBackColor>
+                    <extendedTooltip>
+                      <name>ItemListSalesPersonExtendedTooltip</name>
+                      <id>1017</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <contextMenu>
+                      <name>ItemListSalesPersonContextMenu</name>
+                      <id>1016</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <autoFill>true</autoFill>
+                    </contextMenu>
+                    <type>InputField</type>
+                    <readOnly>true</readOnly>
+                    <editMode>Enter</editMode>
+                    <headerPicture xsi:type="core:PictureRef">
+                      <picture>CommonPicture.PersonCard</picture>
+                    </headerPicture>
+                    <headerHorizontalAlign>Center</headerHorizontalAlign>
+                    <showInFooter>true</showInFooter>
+                    <footerHorizontalAlign>Center</footerHorizontalAlign>
+                    <extInfo xsi:type="form:InputFieldExtInfo">
+                      <width>15</width>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <wrap>true</wrap>
+                      <chooseType>true</chooseType>
+                      <typeDomainEnabled>true</typeDomainEnabled>
+                      <textEdit>true</textEdit>
+                      <font xsi:type="core:FontRef">
+                        <font>Style.LargeTextFont</font>
+                      </font>
+                    </extInfo>
+                  </items>
                   <visible>true</visible>
                   <enabled>true</enabled>
                   <userVisible>
                     <common>true</common>
                   </userVisible>
-                  <dataPath xsi:type="form:DataPath">
-                    <segments>Object.ItemList.SalesPerson</segments>
-                  </dataPath>
-                  <titleBackColor xsi:type="core:ColorRef">
-                    <color>Style.FormBackColor</color>
-                  </titleBackColor>
-                  <extendedTooltip>
-                    <name>ItemListSalesPersonExtendedTooltip</name>
-                    <id>1017</id>
-                    <visible>true</visible>
-                    <enabled>true</enabled>
-                    <userVisible>
-                      <common>true</common>
-                    </userVisible>
-                    <type>Label</type>
-                    <autoMaxWidth>true</autoMaxWidth>
-                    <autoMaxHeight>true</autoMaxHeight>
-                    <extInfo xsi:type="form:LabelDecorationExtInfo">
-                      <horizontalAlign>Left</horizontalAlign>
-                    </extInfo>
-                  </extendedTooltip>
-                  <contextMenu>
-                    <name>ItemListSalesPersonContextMenu</name>
-                    <id>1016</id>
-                    <visible>true</visible>
-                    <enabled>true</enabled>
-                    <userVisible>
-                      <common>true</common>
-                    </userVisible>
-                    <autoFill>true</autoFill>
-                  </contextMenu>
-                  <type>InputField</type>
-                  <editMode>Enter</editMode>
-                  <showInHeader>true</showInHeader>
-                  <headerPicture xsi:type="core:PictureRef">
-                    <picture>CommonPicture.PersonCard</picture>
-                  </headerPicture>
-                  <headerHorizontalAlign>Center</headerHorizontalAlign>
-                  <showInFooter>true</showInFooter>
-                  <footerHorizontalAlign>Center</footerHorizontalAlign>
-                  <extInfo xsi:type="form:InputFieldExtInfo">
-                    <width>15</width>
-                    <autoMaxWidth>true</autoMaxWidth>
-                    <autoMaxHeight>true</autoMaxHeight>
-                    <wrap>true</wrap>
-                    <chooseType>true</chooseType>
-                    <typeDomainEnabled>true</typeDomainEnabled>
-                    <textEdit>true</textEdit>
-                    <font xsi:type="core:FontRef">
-                      <font>Style.LargeTextFont</font>
-                    </font>
-                  </extInfo>
-                </items>
-                <items xsi:type="form:FormField">
-                  <name>ItemListTotalAmount</name>
-                  <id>776</id>
                   <title>
                     <key>en</key>
-                    <value>Total</value>
+                    <value>Item list group total</value>
                   </title>
-                  <titleFont xsi:type="core:FontRef">
-                    <font>Style.LargeTextFont</font>
-                  </titleFont>
-                  <visible>true</visible>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <dataPath xsi:type="form:DataPath">
-                    <segments>Object.ItemList.TotalAmount</segments>
-                  </dataPath>
-                  <titleBackColor xsi:type="core:ColorRef">
-                    <color>Style.FormBackColor</color>
-                  </titleBackColor>
-                  <handlers>
-                    <event>OnChange</event>
-                    <name>ItemListTotalAmountOnChange</name>
-                  </handlers>
                   <extendedTooltip>
-                    <name>ItemListTotalAmountExtendedTooltip</name>
-                    <id>778</id>
+                    <name>ItemListGroupTotalExtendedTooltip</name>
+                    <id>1033</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
                     <userVisible>
@@ -973,43 +1037,11 @@
                       <horizontalAlign>Left</horizontalAlign>
                     </extInfo>
                   </extendedTooltip>
-                  <contextMenu>
-                    <name>ItemListTotalAmountContextMenu</name>
-                    <id>777</id>
-                    <visible>true</visible>
-                    <enabled>true</enabled>
-                    <userVisible>
-                      <common>true</common>
-                    </userVisible>
-                    <autoFill>true</autoFill>
-                  </contextMenu>
-                  <type>InputField</type>
-                  <readOnly>true</readOnly>
-                  <editMode>Enter</editMode>
-                  <fixingInTable>Right</fixingInTable>
-                  <showInHeader>true</showInHeader>
-                  <headerPicture xsi:type="core:PictureRef">
-                    <picture>CommonPicture.Total</picture>
-                  </headerPicture>
-                  <headerHorizontalAlign>Center</headerHorizontalAlign>
-                  <showInFooter>true</showInFooter>
-                  <footerHorizontalAlign>Center</footerHorizontalAlign>
-                  <extInfo xsi:type="form:InputFieldExtInfo">
-                    <width>15</width>
-                    <autoMaxWidth>true</autoMaxWidth>
-                    <autoMaxHeight>true</autoMaxHeight>
-                    <wrap>true</wrap>
-                    <chooseType>true</chooseType>
-                    <typeDomainEnabled>true</typeDomainEnabled>
-                    <textEdit>true</textEdit>
-                    <font xsi:type="core:FontRef">
-                      <font>Style.ExtraLargeTextFont</font>
-                      <bold>true</bold>
-                      <italic>false</italic>
-                      <underline>false</underline>
-                      <strikeout>false</strikeout>
-                      <scale>150</scale>
-                    </font>
+                  <type>ColumnGroup</type>
+                  <extInfo xsi:type="form:ColumnGroupExtInfo">
+                    <group>Vertical</group>
+                    <showTitle>true</showTitle>
+                    <fixingInTable>Right</fixingInTable>
                   </extInfo>
                 </items>
                 <autoCommandBar>
@@ -1757,6 +1789,42 @@
             </extendedTooltip>
             <type>Pages</type>
             <extInfo xsi:type="form:PagesGroupExtInfo">
+              <currentRowUse>Auto</currentRowUse>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormGroup">
+            <name>GroupBottom</name>
+            <id>1027</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <title>
+              <key>en</key>
+              <value>Group bottom</value>
+            </title>
+            <extendedTooltip>
+              <name>GroupBottomExtendedTooltip</name>
+              <id>1028</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualGroup</type>
+            <extInfo xsi:type="form:UsualGroupExtInfo">
+              <group>HorizontalIfPossible</group>
+              <showLeftMargin>true</showLeftMargin>
+              <united>true</united>
+              <throughAlign>Auto</throughAlign>
               <currentRowUse>Auto</currentRowUse>
             </extInfo>
           </items>
@@ -2534,7 +2602,6 @@
           </font>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
@@ -2572,7 +2639,6 @@
           <name>HTMLDate</name>
           <id>956</id>
           <visible>true</visible>
-          <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
@@ -2614,10 +2680,11 @@
           <extInfo xsi:type="form:HtmlFieldExtInfo">
             <width>1</width>
             <autoMaxWidth>true</autoMaxWidth>
-            <height>2</height>
+            <height>1</height>
             <autoMaxHeight>true</autoMaxHeight>
             <maxHeight>1</maxHeight>
             <horizontalStretch>true</horizontalStretch>
+            <verticalStretch>true</verticalStretch>
             <borderColor xsi:type="core:ColorRef">
               <color>Style.FieldBackColor</color>
             </borderColor>
@@ -2702,8 +2769,10 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:ImageFieldExtInfo">
-            <height>8</height>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
             <horizontalStretch>true</horizontalStretch>
+            <verticalStretch>true</verticalStretch>
             <pictureSize>AutoSize</pictureSize>
             <borderColor xsi:type="core:ColorRef">
               <color>Web.White</color>
@@ -2979,6 +3048,7 @@
               <font>Style.LargeTextFont</font>
             </font>
             <representationInContextMenu>Auto</representationInContextMenu>
+            <shape>Oval</shape>
             <shapeRepresentation>WhenActive</shapeRepresentation>
           </items>
           <visible>true</visible>
@@ -3158,9 +3228,6 @@
             <horizontalStretch>true</horizontalStretch>
             <verticalStretch>true</verticalStretch>
             <placementArea>UserCmds</placementArea>
-            <backColor xsi:type="core:ColorRef">
-              <color>Web.Cream</color>
-            </backColor>
             <borderColor xsi:type="core:ColorRef">
               <color>Style.FormBackColor</color>
             </borderColor>
@@ -3200,9 +3267,6 @@
             <horizontalStretch>true</horizontalStretch>
             <verticalStretch>true</verticalStretch>
             <placementArea>UserCmds</placementArea>
-            <backColor xsi:type="core:ColorRef">
-              <color>Web.Beige</color>
-            </backColor>
             <borderColor xsi:type="core:ColorRef">
               <color>Style.FormBackColor</color>
             </borderColor>
@@ -3513,12 +3577,12 @@
             <color>Style.FormBackColor</color>
           </borderColor>
           <font xsi:type="core:FontRef">
-            <font>Style.ExtraLargeTextFont</font>
+            <font>Style.LargeTextFont</font>
             <bold>true</bold>
             <italic>false</italic>
             <underline>false</underline>
             <strikeout>false</strikeout>
-            <scale>150</scale>
+            <scale>100</scale>
           </font>
           <representationInContextMenu>Auto</representationInContextMenu>
           <shapeRepresentation>WhenActive</shapeRepresentation>
@@ -3549,7 +3613,7 @@
         </extendedTooltip>
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
-          <group>HorizontalIfPossible</group>
+          <group>Vertical</group>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -3704,10 +3768,11 @@
   </handlers>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
+  <verticalSpacing>None</verticalSpacing>
   <autoFillCheck>true</autoFillCheck>
   <allowFormCustomize>true</allowFormCustomize>
   <enabled>true</enabled>
-  <scalingMode>Compact</scalingMode>
+  <scalingMode>Normal</scalingMode>
   <attributes>
     <name>TextLine</name>
     <title>

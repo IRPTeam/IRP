@@ -85,6 +85,18 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	If FillingValues.Property("ItemKey") Then
 		ControllerClientServer_V2.SetItemListItemKey(Parameters, PrepareValue(FillingValues.ItemKey, _Key));
 	EndIf;
+	
+	If FillingValues.Property("Unit") Then
+		ControllerClientServer_V2.SetItemListUnit(Parameters, PrepareValue(FillingValues.Unit, _Key));
+	EndIf;
+	
+	If FillingValues.Property("Quantity") Then
+		ControllerClientServer_V2.SetItemListQuantity(Parameters, PrepareValue(FillingValues.Quantity, _Key));
+	EndIf;
+	
+	If FillingValues.Property("Price") Then
+		ControllerClientServer_V2.SetItemListPrice(Parameters, PrepareValue(FillingValues.Price, _Key));
+	EndIf;
 EndProcedure
 
 Function PrepareValue(Value, Key)

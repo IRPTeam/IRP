@@ -1222,16 +1222,15 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 				Row = ExistingRows[0];
 				ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
 			Else
-				Row = ViewClient_V2.ItemListBeforeAddRow(Object, Form);
-				
-				ViewClient_V2.SetItemListItem(Object    , Form, Row, ResultElement.Item);
-				ViewClient_V2.SetItemListItemKey(Object , Form, Row, ResultElement.ItemKey);
-				ViewClient_V2.SetItemListUnit(Object    , Form, Row, ResultElement.Unit);
-				ViewClient_V2.SetItemListQuantity(Object, Form, Row, ResultElement.Quantity);
-				
-				If ResultElement.Property("Price") And CommonFunctionsClientServer.ObjectHasProperty(Row, "Price") Then
-					ViewClient_V2.SetItemListPrice(Object, Form, Row, ResultElement.Price); 
+				FillingValues = New Structure();
+				FillingValues.Insert("Item"     , ResultElement.Item);
+				FillingValues.Insert("ItemKey"  , ResultElement.ItemKey);
+				FillingValues.Insert("Unit"     , ResultElement.Unit);
+				FillingValues.Insert("Quantity" , ResultElement.Quantity);
+				If ResultElement.Property("Price") Then
+					FillingValues.Insert("Price", ResultElement.Price);
 				EndIf;
+				Row = ViewClient_V2.ItemListAddFilledRow(Object, Form, FillingValues);
 			EndIf;
 			
 			If UseSerialLotNumbers Then

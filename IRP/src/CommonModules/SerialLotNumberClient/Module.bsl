@@ -117,36 +117,35 @@ Procedure UpdateSerialLotNumbersTree(Object, Form) Export
 EndProcedure
 
 Procedure UpdateUseSerialLotNumber(Object, Form, AddInfo = Undefined) Export
-	
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	
 	CurrentData = Form.Items.ItemList.CurrentData;
-	If CurrentData = Undefined And ServerData = Undefined Then
+	
+	// if current data is not set restore current data by key
+	If CurrentData = Undefined And ServerData <> Undefined And ServerData.Rows.Count() Then
+		ObjectRows = Object.ItemList.FindRows(New Structure("Key", ServerData.Rows[0].Key));
+		If ObjectRows.Count() Then
+			CurrentData = ObjectRows[0];
+		EndIf;
+	EndIf;
+	
+	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 
-	If Not CurrentData = Undefined Then
+	If ServerData = Undefined Then
 		CurrentData.UseSerialLotNumber = 
 			SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(CurrentData.ItemKey);
-		If Not CurrentData.UseSerialLotNumber Then
-			DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
-		EndIf;
-	ElsIf Not ServerData = Undefined Then
-		For Each Row In Object.ItemList Do
-			Row.UseSerialLotNumber = 
-				ServerData.ItemKeysWithSerialLotNumbers.Find(Row.ItemKey) <> Undefined;
-			
-			If Not Row.UseSerialLotNumber Then
-				DeleteUnusedSerialLotNumbers(Object, Row.Key);
-			EndIf;
-		EndDo;
 	Else
-		Return;
+		CurrentData.UseSerialLotNumber = 
+			ServerData.ItemKeysWithSerialLotNumbers.Find(CurrentData.ItemKey) <> Undefined;
 	EndIf;
-	
-	UpdateSerialLotNumbersPresentation(Object, AddInfo);
-	UpdateSerialLotNumbersTree(Object, Form);
-	
+
+	If Not CurrentData.UseSerialLotNumber Then
+		DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
+		UpdateSerialLotNumbersPresentation(Object, AddInfo);
+		UpdateSerialLotNumbersTree(Object, Form);
+	EndIf;
 EndProcedure
 
 Procedure DeleteUnusedSerialLotNumbers(Object, KeyForDelete = Undefined) Export

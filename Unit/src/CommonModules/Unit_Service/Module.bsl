@@ -89,7 +89,7 @@ EndFunction
 Procedure isEqual(weWait, weGot) Export
 	
 	If Not weWait = weGot Then
-		Error = "We wait for: " + weWait + Chars.LF + "And got: " + weGot;
+		Error = "We wait for: " + weWait + ". And got: " + weGot + Chars.LF;
 		Raise Error;
 	EndIf;
 	

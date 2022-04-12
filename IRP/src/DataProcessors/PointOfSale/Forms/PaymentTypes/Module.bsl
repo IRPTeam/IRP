@@ -180,7 +180,10 @@ Procedure SetHotKey()
 		
 		Array = StrSplit(Item.Name, "_");
 		Num = Number(Array[Array.UBound()]) + 1;
-		Item.Shortcut = New Shortcut(Key["Num" + Num]);
+		MaxNumKey = 10;
+		If Num < MaxNumKey Then
+			Item.Shortcut = New Shortcut(Key["Num" + Num]);
+		EndIf;
 		
 	EndDo;
 	

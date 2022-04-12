@@ -155,58 +155,59 @@ EndFunction
 
 Function ItemList()
 	Return "SELECT
-		   |	RowIDInfo.Ref AS Ref,
-		   |	RowIDInfo.Key AS Key,
-		   |	MAX(RowIDInfo.RowID) AS RowID
-		   |INTO TableRowIDInfo
-		   |FROM
-		   |	Document.RetailSalesReceipt.RowIDInfo AS RowIDInfo
-		   |WHERE
-		   |	RowIDInfo.Ref = &Ref
-		   |GROUP BY
-		   |	RowIDInfo.Ref,
-		   |	RowIDInfo.Key
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	ItemList.Ref.Company AS Company,
-		   |	ItemList.Store AS Store,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.QuantityInBaseUnit AS Quantity,
-		   |	ItemList.TotalAmount AS TotalAmount,
-		   |	ItemList.Ref.Partner AS Partner,
-		   |	ItemList.Ref.LegalName AS LegalName,
-		   |	CASE
-		   |		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		   |		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		   |			THEN ItemList.Ref.Agreement.StandardAgreement
-		   |		ELSE ItemList.Ref.Agreement
-		   |	END AS Agreement,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref AS RetailSalesReceipt,
-		   |	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-		   |	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		   |	ItemList.RevenueType AS RevenueType,
-		   |	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		   |	CASE
-		   |		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN ItemList.Ref
-		   |		ELSE UNDEFINED
-		   |	END AS BasisDocument,
-		   |	ItemList.NetAmount AS NetAmount,
-		   |	ItemList.OffersAmount AS OffersAmount,
-		   |	ItemList.Ref AS Invoice,
-		   |	ItemList.Key AS RowKey,
-		   |	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Ref.LegalNameContract AS LegalNameContract
-		   |INTO ItemList
-		   |FROM
-		   |	Document.RetailSalesReceipt.ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.Ref = &Ref";
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.RetailSalesReceipt.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.QuantityInBaseUnit AS Quantity,
+	|	ItemList.TotalAmount AS TotalAmount,
+	|	ItemList.Ref.Partner AS Partner,
+	|	ItemList.Ref.LegalName AS LegalName,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN ItemList.Ref.Agreement.StandardAgreement
+	|		ELSE ItemList.Ref.Agreement
+	|	END AS Agreement,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref AS RetailSalesReceipt,
+	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+	|	ItemList.RevenueType AS RevenueType,
+	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN ItemList.Ref
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	ItemList.NetAmount AS NetAmount,
+	|	ItemList.OffersAmount AS OffersAmount,
+	|	ItemList.Ref AS Invoice,
+	|	ItemList.Key AS RowKey,
+	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+	|	ItemList.SalesPerson
+	|INTO ItemList
+	|FROM
+	|	Document.RetailSalesReceipt.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function Payments()

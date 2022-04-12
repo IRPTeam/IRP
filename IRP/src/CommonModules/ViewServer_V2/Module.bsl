@@ -76,26 +76,33 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	If FillingValues = Undefined Then
 		Return;
 	EndIf;
-	_Key = Parameters.Rows[0].Key;
+	Row = Parameters.Rows[0];
 	
-	If FillingValues.Property("Item") Then
-		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, _Key));
+	
+	ItemIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Item");
+	ItemKeyIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "ItemKey");
+	UnitIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Unit");
+	QuantityIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Quantity");
+	PriceIsPresent    = CommonFunctionsClientServer.ObjectHasProperty(Row, "Price");
+	
+	If FillingValues.Property("Item") And ItemIsPresent Then
+		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
 	EndIf;
 	
-	If FillingValues.Property("ItemKey") Then
-		ControllerClientServer_V2.SetItemListItemKey(Parameters, PrepareValue(FillingValues.ItemKey, _Key));
+	If FillingValues.Property("ItemKey") And ItemKeyIsPresent Then
+		ControllerClientServer_V2.SetItemListItemKey(Parameters, PrepareValue(FillingValues.ItemKey, Row.Key));
 	EndIf;
 	
-	If FillingValues.Property("Unit") Then
-		ControllerClientServer_V2.SetItemListUnit(Parameters, PrepareValue(FillingValues.Unit, _Key));
+	If FillingValues.Property("Unit") And UnitIsPresent Then
+		ControllerClientServer_V2.SetItemListUnit(Parameters, PrepareValue(FillingValues.Unit, Row.Key));
 	EndIf;
 	
-	If FillingValues.Property("Quantity") Then
-		ControllerClientServer_V2.SetItemListQuantity(Parameters, PrepareValue(FillingValues.Quantity, _Key));
+	If FillingValues.Property("Quantity") And QuantityIsPresent Then
+		ControllerClientServer_V2.SetItemListQuantity(Parameters, PrepareValue(FillingValues.Quantity, Row.Key));
 	EndIf;
 	
-	If FillingValues.Property("Price") Then
-		ControllerClientServer_V2.SetItemListPrice(Parameters, PrepareValue(FillingValues.Price, _Key));
+	If FillingValues.Property("Price") And PriceIsPresent Then
+		ControllerClientServer_V2.SetItemListPrice(Parameters, PrepareValue(FillingValues.Price, Row.Key));
 	EndIf;
 EndProcedure
 

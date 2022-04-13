@@ -215,6 +215,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		NotifyParameters.Insert("Object", Object);
 		Items.DetailedInformation.document.getElementById("text").innerHTML = "";
 		DocumentsClient.PickupItemsEnd(AdditionalParameters.FoundedItems, NotifyParameters);
+		EnabledPaymentButton();
 	Else
 		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(
 			AdditionalParameters.Barcodes, ",")) + "</span>";

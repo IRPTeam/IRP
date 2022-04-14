@@ -51,6 +51,8 @@ EndProcedure
 Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	EnabledPaymentButton();
 	FillSalesPersonInItemList();
+	CurrentData = Items.ItemList.CurrentData;
+	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
 EndProcedure
 
 &AtClient
@@ -213,6 +215,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		NotifyParameters.Insert("Object", Object);
 		Items.DetailedInformation.document.getElementById("text").innerHTML = "";
 		DocumentsClient.PickupItemsEnd(AdditionalParameters.FoundedItems, NotifyParameters);
+		EnabledPaymentButton();
 	Else
 		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(
 			AdditionalParameters.Barcodes, ",")) + "</span>";

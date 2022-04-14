@@ -120,6 +120,15 @@ Procedure UpdateUseSerialLotNumber(Object, Form, AddInfo = Undefined) Export
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	
 	CurrentData = Form.Items.ItemList.CurrentData;
+	
+	// if current data is not set restore current data by key
+	If CurrentData = Undefined And ServerData <> Undefined And ServerData.Rows.Count() Then
+		ObjectRows = Object.ItemList.FindRows(New Structure("Key", ServerData.Rows[0].Key));
+		If ObjectRows.Count() Then
+			CurrentData = ObjectRows[0];
+		EndIf;
+	EndIf;
+	
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -131,7 +140,6 @@ Procedure UpdateUseSerialLotNumber(Object, Form, AddInfo = Undefined) Export
 		CurrentData.UseSerialLotNumber = 
 			ServerData.ItemKeysWithSerialLotNumbers.Find(CurrentData.ItemKey) <> Undefined;
 	EndIf;
-	//CurrentData.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(CurrentData.ItemKey);
 
 	If Not CurrentData.UseSerialLotNumber Then
 		DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);

@@ -1,6 +1,10 @@
 <html>
 	<head>
 	 <style>
+	* {
+  		box-sizing: border-box;
+  		margin: 0;
+	}
 	div.containerDate {
 	  display: flex;
 	  align-items: center;
@@ -14,7 +18,7 @@
   </head>
 	<body>
 	<div style="text-align: center;">
-		<h3><span class="containerDate" id="datetime"/></h3>
+		<span class="containerDate" id="datetime"/>
 	</div>
 		<script>
 			timer();

@@ -815,7 +815,7 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 	EndIf;
 EndProcedure
 
-Procedure ItemListAddFilledRow(Object, Form,  FillingValues) Export
+Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
 	Cancel      = False;
 	Clone       = False;
 	CurrentData = Undefined;
@@ -823,7 +823,8 @@ Procedure ItemListAddFilledRow(Object, Form,  FillingValues) Export
 		"ItemListOnAddRowFormNotify", "ItemListOnCopyRowFormNotify", FillingValues);
 	Form.Items.ItemList.CurrentRow = NewRow.GetID();
 	Form.Items.ItemList.ChangeRow();
-EndProcedure
+	Return NewRow;
+EndFunction
 
 #EndRegion
 
@@ -893,6 +894,7 @@ Procedure OnSetItemListItemKey(Parameters) Export
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
 				ServerData = New Structure("ServerData", New Structure());
 				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
+				ServerData.ServerData.Insert("Rows", Parameters.Rows);
 			EndIf;
 			SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form, ServerData);
 	EndIf;

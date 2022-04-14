@@ -387,6 +387,14 @@ Function BindFormOnCreateAtServer(Parameters)
 	Binding.Insert("MoneyTransfer",
 		"StepGenerateNewSendUUID,
 		|StepGenerateNewReceiptUUID");
+		
+	Binding.Insert("CashRevenue",
+		"StepPaymentListCalculations_RecalculationsOnCopy,
+		|StepRequireCallCreateTaxesFormControls");
+		
+	Binding.Insert("CashExpense",
+		"StepPaymentListCalculations_RecalculationsOnCopy,
+		|StepRequireCallCreateTaxesFormControls");
 
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

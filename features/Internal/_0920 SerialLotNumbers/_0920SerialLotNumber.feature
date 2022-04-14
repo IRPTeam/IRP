@@ -3063,14 +3063,14 @@ Scenario: _092035 product scanning with and without serial lot number
 		And I input "590876909358" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' |
-			| 'Dress' | 'M/White'  | '89999'         | '1,000'    |
+			| 'Item'  | 'Item key' | 'Serials' | 'Quantity' |
+			| 'Dress' | 'M/White'  | '89999'   | '1,000'    |
 		And I click "Search by barcode (F7)" button
 		And I input "590876909358" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' |
-			| 'Dress' | 'M/White'  | '89999; 89999'  | '2,000'    |
+			| 'Item'  | 'Item key' | 'Serials'      | 'Quantity' |
+			| 'Dress' | 'M/White'  | '89999; 89999' | '2,000'    |
 	* Check product scanning without own serial lot number
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in "InputFld" field
@@ -3089,9 +3089,9 @@ Scenario: _092035 product scanning with and without serial lot number
 		And I finish line editing in "SerialLotNumbers" table
 		And I click "Ok" button
 		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' |
-			| 'Dress' | 'M/White'  | '89999; 89999'  | '2,000'    |
-			| 'Dress' | 'XS/Blue'  | '10'            | '1,000'    |
+			| 'Item'  | 'Item key' | 'Serials'      | 'Quantity' |
+			| 'Dress' | 'M/White'  | '89999; 89999' | '2,000'    |
+			| 'Dress' | 'XS/Blue'  | '10'           | '1,000'    |
 	* Check product scanning without own serial lot number (input  serial lot number by string)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283739" text in "InputFld" field
@@ -3106,10 +3106,10 @@ Scenario: _092035 product scanning with and without serial lot number
 		And I finish line editing in "SerialLotNumbers" table
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' |
-			| 'Dress' | 'M/White'  | '89999; 89999'  | '2,000'    |
-			| 'Dress' | 'XS/Blue'  | '10'            | '1,000'    |
-			| 'Dress' | 'L/Green'  | '10'            | '1,000'    |	
+			| 'Item'  | 'Item key' | 'Serials'      | 'Quantity' |
+			| 'Dress' | 'M/White'  | '89999; 89999' | '2,000'    |
+			| 'Dress' | 'XS/Blue'  | '10'           | '1,000'    |
+			| 'Dress' | 'L/Green'  | '10'           | '1,000'    |
 	* Check message if user scan new serial lot number
 		And I click "Search by barcode (F7)" button
 		And I input "2202283739" text in "InputFld" field

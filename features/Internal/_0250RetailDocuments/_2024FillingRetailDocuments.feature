@@ -1189,14 +1189,14 @@ Scenario: _0154188 check customer on change in POS
 		#And I click "OK" button
 	* Check price
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Item'  | 'Item key' | 'Serials' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''       | '520,00' |
 	* Delete retail customer and check price change
 		And I click the button named "ClearRetailCustomer"
 		#Then "Update item list info" window is opened
 		#And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Item'  | 'Item key' | 'Serials' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''       | '520,00' |
 	* Select retail customer with own partner term again and check price change
 		And I click "Search customer" button
@@ -1208,7 +1208,7 @@ Scenario: _0154188 check customer on change in POS
 		#Then "Update item list info" window is opened
 		#And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Item'  | 'Item key' | 'Serials' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''       | '520,00' |
 	* Change retail customer and check price change
 		And I click "Search customer" button
@@ -1220,7 +1220,7 @@ Scenario: _0154188 check customer on change in POS
 		#Then "Update item list info" window is opened
 		#And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Item'  | 'Item key' | 'Serials' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''       | '520,00' |
 		And I close all client application windows
 
@@ -3474,8 +3474,8 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 		#Then "Update item list info" window is opened
 		#And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
-			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''       | '520,00' |
+			| 'Item'  | 'Item key' | 'Serials' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
+			| 'Dress' | 'M/White'  | ''        | '1,000'    | '440,68' | ''       | '520,00' |
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button

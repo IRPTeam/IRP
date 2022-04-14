@@ -51,7 +51,7 @@ Function GetERType(Filter)
 
 	Query = New Query;
 	Query.Text =
-		"SELECT
+		"SELECT ALLOWED
 		|	ERTS.ExpenseType,
 		|	ERTS.RevenueType,
 		|	CASE
@@ -74,9 +74,6 @@ Function GetERType(Filter)
 		|	InformationRegister.ExpenseRevenueTypeSettings AS ERTS
 		|WHERE
 		|	ERTS.Company = &Company
-		|	AND (ERTS.ItemKey = &ItemKey
-		|	OR ERTS.Item = &Item
-		|	OR ERTS.ItemType = &ItemType)
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////

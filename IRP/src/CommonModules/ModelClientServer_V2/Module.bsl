@@ -1309,6 +1309,12 @@ Function CalculationsExecute(Options) Export
 		Result.QuantityInBaseUnit = Options.QuantityOptions.Quantity * UnitFactor;
 	EndIf;
 	
+	If Not IsCalculatedRow Then
+		For Each Row In Options.TaxOptions.TaxList Do
+			Result.TaxList.Add(Row);
+		EndDo;
+	EndIf;
+	
 	If Options.TaxOptions.PriceIncludeTax <> Undefined Then
 		If Options.TaxOptions.PriceIncludeTax Then
 			

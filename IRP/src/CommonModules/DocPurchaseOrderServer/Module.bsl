@@ -130,6 +130,9 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
+	|	""PurchaseOrder"" AS BasedOn,
+	|	TRUE AS CloseOrder,
+	|	PurchaseOrder.Ref AS PurchaseOrder,
 	|	PurchaseOrder.Agreement AS Agreement,
 	|	PurchaseOrder.Company AS Company,
 	|	PurchaseOrder.Currency AS Currency,
@@ -188,7 +191,7 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 	|	ItemList.ExpenseType,
 	|	ItemList.SalesOrder,
 	|	ItemList.InternalSupplyRequest
-	|INTO ItemList
+	//|INTO ItemList
 	|FROM
 	|	Document.PurchaseOrder.ItemList AS ItemList
 	|		INNER JOIN AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.Balance(, Order = &PurchaseOrder) AS
@@ -206,7 +209,7 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 	|	PurchaseOrderSpecialOffers.Offer AS Offer,
 	|	PurchaseOrderSpecialOffers.Amount AS Amount,
 	|	PurchaseOrderSpecialOffers.Percent AS Percent
-	|INTO SpecialOffers
+	//|INTO SpecialOffers
 	|FROM
 	|	Document.PurchaseOrder.SpecialOffers AS PurchaseOrderSpecialOffers
 	|WHERE
@@ -224,52 +227,117 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 	|	PurchaseOrderTaxList.Amount AS Amount,
 	|	PurchaseOrderTaxList.IncludeToTotalAmount AS IncludeToTotalAmount,
 	|	PurchaseOrderTaxList.ManualAmount AS ManualAmount
-	|INTO TaxList
+	//|INTO TaxList
 	|FROM
 	|	Document.PurchaseOrder.TaxList AS PurchaseOrderTaxList
 	|WHERE
 	|	FALSE";
 	Query.SetParameter("PurchaseOrder", PurchaseOrder);
-	Query.TempTablesManager = New TempTablesManager();
-	QueryResult = Query.Execute();
-	PurchaseOrderInfo = QueryResult.Select();
-	PurchaseOrderInfo.Next();
+	//Query.TempTablesManager = New TempTablesManager();
+	QueryResults = Query.ExecuteBatch();
+	//PurchaseOrderInfo = QueryResult.Select();
+	//PurchaseOrderInfo.Next();
 
-	Str = New Structure();
-	Str.Insert("PurchaseOrderInfo", PurchaseOrderInfo);
-	StrTables = New Structure();
-	For Each Table In Query.TempTablesManager.Tables Do
-		StrTables.Insert(Table.FullName, Table.GetData().Unload());
+	Header              = QueryResults[0].Unload()[0];
+	Table_ItemList      = QueryResults[1].Unload();
+	Table_SpecialOffers = QueryResults[2].Unload();
+	Table_TaxList       = QueryResults[3].Unload();
+	
+	// ItemList
+	ArrayOfColumns = New Array();
+	For Each Column In Table_ItemList.Columns Do
+		ArrayOfColumns.Add(Column.Name);
 	EndDo;
+	Columns_ItemList = StrConcat(ArrayOfColumns, ",");
+	
+	// SpecialOffers
+	ArrayOfColumns.Clear();
+	For Each Column In Table_SpecialOffers.Columns Do
+		ArrayOfColumns.Add(Column.Name);
+	EndDo;
+	Columns_SpecialOffers = StrConcat(ArrayOfColumns, ",");
+	
+	// TaxList
+	ArrayOfColumns.Clear();
+	For Each Column In Table_TaxList.Columns Do
+		ArrayOfColumns.Add(Column.Name);
+	EndDo;
+	Columns_TaxList = StrConcat(ArrayOfColumns, ",");
+		
+	FillingValues = New Structure("BasedOn,
+								  |CloseOrder,
+								  |PurchaseOrder,
+								  |Agreement, 
+								  |Company, 
+								  |Currency, 
+								  |LegalName, 
+								  |Partner, 
+								  |PriceIncludeTax, 
+								  |Status,
+								  |Author, 
+								  |Branch, 
+								  |Description");
+	
+	FillingValues.Insert("ItemList"      , New Array());
+	FillingValues.Insert("TaxList"       , New Array());
+	FillingValues.Insert("SpecialOffers" , New Array());
+	FillPropertyValues(FillingValues, Header);
 
-	For Each Row In StrTables.ItemList Do
+//	Str = New Structure();
+//	Str.Insert("PurchaseOrderInfo", PurchaseOrderInfo);
+//	StrTables = New Structure();
+//	For Each Table In Query.TempTablesManager.Tables Do
+//		StrTables.Insert(Table.FullName, Table.GetData().Unload());
+//	EndDo;
+
+	//For Each Row In StrTables.ItemList Do
+	For Each Row In Table_ItemList Do
 		ItemRowInSO = PurchaseOrder.ItemList.FindRows(New Structure("Key", Row.Key))[0];
 		QuantityPart = Row.QuantityInBaseUnit / ItemRowInSO.QuantityInBaseUnit;
 
 		TaxRowInSO = PurchaseOrder.TaxList.FindRows(New Structure("Key", Row.Key));
 		TaxAmount = 0;
 		For Each TaxRow In TaxRowInSO Do
-			NewTaxRow = StrTables.TaxList.Add();
-			FillPropertyValues(NewTaxRow, TaxRow);
-			NewTaxRow.Amount = TaxRow.Amount * QuantityPart;
-			NewTaxRow.ManualAmount = TaxRow.ManualAmount * QuantityPart;
-			TaxAmount = TaxAmount + NewTaxRow.ManualAmount;
+			//NewTaxRow = StrTables.TaxList.Add();
+			//FillPropertyValues(NewTaxRow, TaxRow);
+			//NewTaxRow.Amount = TaxRow.Amount * QuantityPart;
+			//NewTaxRow.ManualAmount = TaxRow.ManualAmount * QuantityPart;
+			//TaxAmount = TaxAmount + NewTaxRow.ManualAmount;
+			
+			NewRow_TaxList = New Structure(Columns_TaxList);
+			FillPropertyValues(NewRow_TaxList, TaxRow);
+			NewRow_TaxList.Amount = TaxRow.Amount * QuantityPart;
+			NewRow_TaxList.ManualAmount = TaxRow.ManualAmount * QuantityPart;
+			TaxAmount = TaxAmount + NewRow_TaxList.ManualAmount;
+			FillingValues.TaxList.Add(NewRow_TaxList);
 		EndDo;
 		Row.TaxAmount = TaxAmount;
+		
 		SpecialOffersRowInSO = PurchaseOrder.SpecialOffers.FindRows(New Structure("Key", Row.Key));
 		SpecialOffersAmount = 0;
 		For Each SpecialOffersRow In SpecialOffersRowInSO Do
-			NewSpecialOffers = StrTables.SpecialOffers.Add();
-			FillPropertyValues(NewSpecialOffers, SpecialOffersRow);
-			NewSpecialOffers.Amount = SpecialOffersRow.Amount * QuantityPart;
-			SpecialOffersAmount = SpecialOffersAmount + NewSpecialOffers.Amount;
+			//NewSpecialOffers = StrTables.SpecialOffers.Add();
+			//FillPropertyValues(NewSpecialOffers, SpecialOffersRow);
+			//NewSpecialOffers.Amount = SpecialOffersRow.Amount * QuantityPart;
+			//SpecialOffersAmount = SpecialOffersAmount + NewSpecialOffers.Amount;
+			
+			NewRow_SpecialOffers = New Structure(Columns_SpecialOffers);
+			FillPropertyValues(NewRow_SpecialOffers, SpecialOffersRow);
+			NewRow_SpecialOffers.Amount = SpecialOffersRow.Amount * QuantityPart;
+			SpecialOffersAmount = SpecialOffersAmount + NewRow_SpecialOffers.Amount;
+			FillingValues.SpecialOffers.Add(NewRow_SpecialOffers);
 		EndDo;
 		Row.OffersAmount = SpecialOffersAmount;
+		
+		NewRow_ItemList = New Structure(Columns_ItemList);
+		FillPropertyValues(NewRow_ItemList, Row);
+		FillingValues.ItemList.Add(NewRow_ItemList);
 	EndDo;
 
-	Str.Insert("Tables", StrTables);
-	Return Str;
-
+	Return FillingValues;
+	
+//	Str.Insert("Tables", StrTables);
+//	Return Str;
 EndFunction
 
 #EndRegion

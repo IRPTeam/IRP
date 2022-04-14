@@ -68,7 +68,233 @@ Scenario: _0202100 preparation (filling expence, revenue)
 		When add sales tax settings 
 		When Create catalog CancelReturnReasons objects
 	
+Scenario: _0202101 filling revenue type in the SI (from Company)
+	And I close all client application windows
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	* Select Company
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+		And I click "Create" button
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'     |
+		And I select current line in "List" table
+	* Select Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key'  |
+			| 'XS/Blue' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table		
+	* Check filling in revenue type
+		And "ItemList" table became equal
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Rent'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
+	* Reselect Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second Company'     |
+		And I select current line in "List" table
+	* Check filling in revenue type
+		And "ItemList" table became equal
+			| 'Revenue type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Telephone communications' | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
+	And I close all client application windows
 	
+
+Scenario: _0202102 filling expense type in the PO (from Company)
+	And I close all client application windows
+	* Select Company
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"	
+		And I click "Create" button
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'     |
+		And I select current line in "List" table
+	* Select Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Service'       |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key'  |
+			| 'Rent' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table		
+	* Check filling in Expense type
+		And "ItemList" table became equal
+			| 'Expense type' | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
+			| 'Rent'         | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
+	* Reselect Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second Company'     |
+		And I select current line in "List" table
+	* Check filling in Expense type
+		And "ItemList" table became equal
+			| 'Expense type'             | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
+			| 'Telephone communications' | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
+	And I close all client application windows
+			
+Scenario: _0202103 filling revenue type in the SR (from Company)
+	And I close all client application windows
+	* Select Company
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"	
+		And I click "Create" button
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'     |
+		And I select current line in "List" table
+	* Select Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key'  |
+			| 'XS/Blue' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table		
+	* Check filling in revenue type
+		And "ItemList" table became equal
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Rent'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
+	* Reselect Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second Company'     |
+		And I select current line in "List" table
+	* Check filling in revenue type
+		And "ItemList" table became equal
+			| 'Revenue type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Telephone communications' | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
+	And I close all client application windows		
+						
+
+Scenario: _0202104 filling expense type in the PR (from Company)
+	And I close all client application windows
+	* Select Company
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"	
+		And I click "Create" button
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'     |
+		And I select current line in "List" table
+	* Select Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Service'       |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key'  |
+			| 'Rent' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table		
+	* Check filling in Expense type
+		And "ItemList" table became equal
+			| 'Expense type' | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
+			| 'Rent'         | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
+	* Reselect Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second Company'     |
+		And I select current line in "List" table
+	* Check filling in Expense type
+		And "ItemList" table became equal
+			| 'Expense type'             | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
+			| 'Telephone communications' | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
+	And I close all client application windows
 		
+Scenario: _0202103 filling revenue type in the SI (from item type)
+	And I close all client application windows
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne SI
+		* Select Company
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+			And I click "Create" button
+			And I click Choice button of the field named "Company"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Main Company'     |
+			And I select current line in "List" table
+		* Select Item
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item key'  |
+				| 'XS/Blue' |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table		
+		* Check filling in revenue type
+			And "ItemList" table became equal
+				| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+				| 'Rent'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
+		* Reselect item
+			And I click Choice button of the field named "Company"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Second Company'     |
+			And I select current line in "List" table
+		* Check filling in revenue type
+			And "ItemList" table became equal
+				| 'Revenue type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+				| 'Telephone communications' | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
+	And I close all client application windows					
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

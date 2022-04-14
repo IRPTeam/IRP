@@ -1849,3 +1849,19 @@ Scenario: Create Item with SerialLotNumbers (Phone)
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5ec' | 'False'        | 3      | '12345670'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e4' | 'False'    |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5ed' | 'False'        | 4      | '13456778'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2' | 'False'    |
 
+Scenario: Create information register ExpenseRevenueTypeSettings records (Company)
+
+	And I check or create information register "ExpenseRevenueTypeSettings" records:
+		| 'Company'                                                           | 'ItemType' | 'Item' | 'ItemKey' | 'ExpenseType'                                                                    | 'RevenueType'                                                                    |
+		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''         | ''     | ''        | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' |
+		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | ''         | ''     | ''        | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' |
+
+
+
+Scenario: Create information register ExpenseRevenueTypeSettings records (item type)
+
+	And I check or create information register "ExpenseRevenueTypeSettings" records:
+		| 'Company'                                                           | 'ItemType'                                                          | 'Item' | 'ItemKey' | 'ExpenseType'                                                                    | 'RevenueType'                                                                    |	| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''                                                                  | ''     | ''        | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' |
+		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | ''     | ''        | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' |
+		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f2' | ''     | ''        | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' |
+	

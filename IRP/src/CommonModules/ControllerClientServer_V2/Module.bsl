@@ -4123,7 +4123,8 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeRevenueTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey,
+		|StepItemListChangeProcurementMethodByItemKey");
 	
 	Binding.Insert("SalesInvoice",
 		"StepItemListChangeUseShipmentConfirmationByStore,

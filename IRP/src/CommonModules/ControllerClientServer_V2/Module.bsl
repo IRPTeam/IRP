@@ -2875,6 +2875,9 @@ Procedure StepChangeTaxRate(Parameters, Chain,
 		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
 		Options.IsBasedOn      = Parameters.IsBasedOn;
 		Options.Ref            = Parameters.Object.Ref;
+		If Row.Property("ItemKey") Then
+			Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
+		EndIf;
 		
 		If TaxRates <> Undefined Then
 			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do

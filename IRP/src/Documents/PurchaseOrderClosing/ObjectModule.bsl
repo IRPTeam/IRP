@@ -39,21 +39,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;
-	
-//	If FillingData = Undefined Then
-//		Return;
-//	EndIf;
-//	If FillingData.Property("PurchaseOrder") Then
-//		CloseOrder = True;
-//		PurchaseOrder = FillingData.PurchaseOrder;
-//		PurchaseOrderData = DocPurchaseOrderServer.GetPurchaseOrderForClosing(FillingData.PurchaseOrder);
-//
-//		FillPropertyValues(ThisObject, PurchaseOrderData.PurchaseOrderInfo);
-//
-//		For Each Table In PurchaseOrderData.Tables Do
-//			ThisObject[Table.Key].Load(Table.Value);
-//		EndDo;
-//	EndIf;
 EndProcedure
 
 Procedure Filling_BasedOn(FillingData)

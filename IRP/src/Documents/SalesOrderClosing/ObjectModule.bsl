@@ -57,31 +57,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;
-
-//	If FillingData = Undefined Then
-//		Return;
-//	EndIf;
-//	If FillingData.Property("SalesOrder") Then
-//		CloseOrder = True;
-//		SalesOrder = FillingData.SalesOrder;
-//		If CloseOrder Then
-//			SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderForClosing(FillingData.SalesOrder);
-//		Else
-//			SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderInfo(FillingData.SalesOrder);
-//		EndIf;
-//
-//		FillPropertyValues(ThisObject, SalesOrderData.SalesOrderInfo);
-//
-//		For Each Table In SalesOrderData.Tables Do
-//			ThisObject[Table.Key].Load(Table.Value);
-//		EndDo;
-//
-//	Else
-//		FillPropertyValues(ThisObject, FillingData);
-//		Number = Undefined;
-//		Date = Undefined;
-//	EndIf;
-
 EndProcedure
 
 Procedure Filling_BasedOn(FillingData)

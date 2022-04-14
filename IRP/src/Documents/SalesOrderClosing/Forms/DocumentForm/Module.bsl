@@ -12,7 +12,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	//ThisObject.TaxAndOffersCalculated = True;
 	SetConditionalAppearance();
 EndProcedure
 
@@ -30,7 +29,6 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	DocSalesOrderClosingClient.OnOpen(Object, ThisObject, Cancel);
-	//UpdateTotalAmounts();
 EndProcedure
 
 &AtClient
@@ -46,18 +44,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
-
-//	DocSalesOrderClosingClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-//	
-//	If Upper(EventName) = Upper("CalculationStringsComplete") Then
-//		UpdateTotalAmounts();
-//	EndIf;
 EndProcedure
-
-//&AtClient
-//Procedure BeforeWrite(Cancel, WriteParameters)
-//	Return;
-//EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
@@ -124,8 +111,7 @@ Procedure UpdateTotalAmounts() Export
 
 		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
 		For Each RowTax In ArrayOfTaxesRows Do
-			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount,
-				0);
+			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
 		EndDo;
 
 		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
@@ -170,7 +156,6 @@ EndProcedure
 &AtClient
 Procedure PartnerOnChange(Item)
 	DocSalesOrderClosingClient.PartnerOnChange(Object, ThisObject, Item);
-	//SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -279,7 +264,6 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocSalesOrderClosingClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	//UpdateTotalAmounts();
 EndProcedure
 
 #Region ITEM_LIST_COLUMNS
@@ -353,7 +337,6 @@ EndProcedure
 &AtClient
 Procedure ItemListNetAmountOnChange(Item)
 	DocSalesOrderClosingClient.ItemListNetAmountOnChange(Object, ThisObject, Item);
-	//UpdateTotalAmounts();
 EndProcedure
 
 #EndRegion
@@ -363,10 +346,6 @@ EndProcedure
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item)
 	DocSalesOrderClosingClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
-//	CurrentData = Items.ItemList.CurrentData;
-//	If CurrentData <> Undefined And CurrentData.DontCalculateRow Then
-//		UpdateTotalAmounts();
-//	EndIf;
 EndProcedure
 
 #EndRegion
@@ -426,7 +405,6 @@ EndProcedure
 &AtClient
 Procedure ItemListCancelOnChange(Item)
 	DocSalesOrderClosingClient.ItemListCancelOnChange(Object, ThisObject, Item);
-	//UpdateTotalAmounts();
 EndProcedure
 
 #EndRegion
@@ -447,13 +425,7 @@ EndProcedure
 &AtClient
 Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
 	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
-	//SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters);
 EndProcedure
-
-//&AtServer
-//Procedure SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters) Export
-//	DocumentsServer.FillItemList(Object);
-//EndProcedure
 
 #EndRegion
 
@@ -595,39 +567,3 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 #EndRegion
-
-
-//#Region SalesOrderClosing
-//
-//&AtClient
-//Procedure FillByOrder()
-//	FillByOrderAtServer();
-//	Cancel = False;
-//	DocSalesOrderClosingClient.OnOpen(Object, ThisObject, Cancel);
-//	DocSalesOrderClosingClient.ItemListQuantityOnChange(Object, ThisObject, Undefined);
-//	UpdateTotalAmounts();
-//EndProcedure
-//
-//&AtServer
-//Procedure FillByOrderAtServer()
-//	If Object.CloseOrder Then
-//		SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderForClosing(Object.SalesOrder);
-//	Else
-//		SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderInfo(Object.SalesOrder);
-//	EndIf;
-//
-//	FillPropertyValues(Object, SalesOrderData.SalesOrderInfo);
-//
-//	For Each Table In SalesOrderData.Tables Do
-//		Object[Table.Key].Load(Table.Value);
-//	EndDo;
-//
-//	Cancel = False;
-//	StandardProcessing = True;
-//	DocSalesOrderClosingServer.OnReadAtServer(Object, ThisObject, Object);
-//	DocSalesOrderClosingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-//
-//EndProcedure
-//
-//#EndRegion
-//

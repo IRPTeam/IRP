@@ -3,54 +3,23 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
-		//Form.CurrentPartner    = Object.Partner;
-		//Form.CurrentAgreement  = Object.Agreement;
-		//Form.CurrentDate       = Object.Date;
-		//Form.StoreBeforeChange = Form.Store;
-
-		//DocumentsClientServer.FillDefinedData(Object, Form);
-
 		SetGroupItemsList(Object, Form);
 		DocumentsServer.FillItemList(Object);
-
-		//ObjectData = DocumentsClientServer.GetStructureFillStores();
-		//FillPropertyValues(ObjectData, Object);
-		//DocumentsClientServer.FillStores(ObjectData, Form);
-
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-	//Form.Taxes_CreateFormControls();
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
-//	Form.CurrentPartner   = CurrentObject.Partner;
-//	Form.CurrentAgreement = CurrentObject.Agreement;
-//	Form.CurrentDate      = CurrentObject.Date;
-
 	DocumentsServer.FillItemList(Object);
-
-//	ObjectData = DocumentsClientServer.GetStructureFillStores();
-//	FillPropertyValues(ObjectData, CurrentObject);
-//	DocumentsClientServer.FillStores(ObjectData, Form);
-
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	Form.Taxes_CreateFormControls();
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-//	Form.CurrentPartner = CurrentObject.Partner;
-//	Form.CurrentAgreement = CurrentObject.Agreement;
-//	Form.CurrentDate = CurrentObject.Date;
-
 	DocumentsServer.FillItemList(Object);
-
-//	ObjectData = DocumentsClientServer.GetStructureFillStores();
-//	FillPropertyValues(ObjectData, CurrentObject);
-//	DocumentsClientServer.FillStores(ObjectData, Form);
-
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
@@ -191,7 +160,6 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 	|	ItemList.ExpenseType,
 	|	ItemList.SalesOrder,
 	|	ItemList.InternalSupplyRequest
-	//|INTO ItemList
 	|FROM
 	|	Document.PurchaseOrder.ItemList AS ItemList
 	|		INNER JOIN AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.Balance(, Order = &PurchaseOrder) AS
@@ -209,7 +177,6 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 	|	PurchaseOrderSpecialOffers.Offer AS Offer,
 	|	PurchaseOrderSpecialOffers.Amount AS Amount,
 	|	PurchaseOrderSpecialOffers.Percent AS Percent
-	//|INTO SpecialOffers
 	|FROM
 	|	Document.PurchaseOrder.SpecialOffers AS PurchaseOrderSpecialOffers
 	|WHERE
@@ -227,16 +194,12 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 	|	PurchaseOrderTaxList.Amount AS Amount,
 	|	PurchaseOrderTaxList.IncludeToTotalAmount AS IncludeToTotalAmount,
 	|	PurchaseOrderTaxList.ManualAmount AS ManualAmount
-	//|INTO TaxList
 	|FROM
 	|	Document.PurchaseOrder.TaxList AS PurchaseOrderTaxList
 	|WHERE
 	|	FALSE";
 	Query.SetParameter("PurchaseOrder", PurchaseOrder);
-	//Query.TempTablesManager = New TempTablesManager();
 	QueryResults = Query.ExecuteBatch();
-	//PurchaseOrderInfo = QueryResult.Select();
-	//PurchaseOrderInfo.Next();
 
 	Header              = QueryResults[0].Unload()[0];
 	Table_ItemList      = QueryResults[1].Unload();
@@ -283,14 +246,6 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 	FillingValues.Insert("SpecialOffers" , New Array());
 	FillPropertyValues(FillingValues, Header);
 
-//	Str = New Structure();
-//	Str.Insert("PurchaseOrderInfo", PurchaseOrderInfo);
-//	StrTables = New Structure();
-//	For Each Table In Query.TempTablesManager.Tables Do
-//		StrTables.Insert(Table.FullName, Table.GetData().Unload());
-//	EndDo;
-
-	//For Each Row In StrTables.ItemList Do
 	For Each Row In Table_ItemList Do
 		ItemRowInSO = PurchaseOrder.ItemList.FindRows(New Structure("Key", Row.Key))[0];
 		QuantityPart = Row.QuantityInBaseUnit / ItemRowInSO.QuantityInBaseUnit;
@@ -298,12 +253,6 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 		TaxRowInSO = PurchaseOrder.TaxList.FindRows(New Structure("Key", Row.Key));
 		TaxAmount = 0;
 		For Each TaxRow In TaxRowInSO Do
-			//NewTaxRow = StrTables.TaxList.Add();
-			//FillPropertyValues(NewTaxRow, TaxRow);
-			//NewTaxRow.Amount = TaxRow.Amount * QuantityPart;
-			//NewTaxRow.ManualAmount = TaxRow.ManualAmount * QuantityPart;
-			//TaxAmount = TaxAmount + NewTaxRow.ManualAmount;
-			
 			NewRow_TaxList = New Structure(Columns_TaxList);
 			FillPropertyValues(NewRow_TaxList, TaxRow);
 			NewRow_TaxList.Amount = TaxRow.Amount * QuantityPart;
@@ -316,11 +265,6 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 		SpecialOffersRowInSO = PurchaseOrder.SpecialOffers.FindRows(New Structure("Key", Row.Key));
 		SpecialOffersAmount = 0;
 		For Each SpecialOffersRow In SpecialOffersRowInSO Do
-			//NewSpecialOffers = StrTables.SpecialOffers.Add();
-			//FillPropertyValues(NewSpecialOffers, SpecialOffersRow);
-			//NewSpecialOffers.Amount = SpecialOffersRow.Amount * QuantityPart;
-			//SpecialOffersAmount = SpecialOffersAmount + NewSpecialOffers.Amount;
-			
 			NewRow_SpecialOffers = New Structure(Columns_SpecialOffers);
 			FillPropertyValues(NewRow_SpecialOffers, SpecialOffersRow);
 			NewRow_SpecialOffers.Amount = SpecialOffersRow.Amount * QuantityPart;
@@ -335,9 +279,6 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 	EndDo;
 
 	Return FillingValues;
-	
-//	Str.Insert("Tables", StrTables);
-//	Return Str;
 EndFunction
 
 #EndRegion

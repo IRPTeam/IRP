@@ -49,14 +49,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
-
-	//DocPurchaseReturnOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 EndProcedure
-
-//&AtClient
-//Procedure BeforeWrite(Cancel, WriteParameters)
-//	Return;
-//EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
@@ -121,7 +114,6 @@ EndProcedure
 &AtClient
 Procedure PartnerOnChange(Item)
 	DocPurchaseReturnOrderClient.PartnerOnChange(Object, ThisObject, Item);
-	//SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient

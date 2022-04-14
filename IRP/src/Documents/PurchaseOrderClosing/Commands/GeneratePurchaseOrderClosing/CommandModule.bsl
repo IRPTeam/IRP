@@ -7,14 +7,4 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		FillingValues = DocPurchaseOrderServer.GetPurchaseOrderForClosing(CommandParameter);
 		OpenForm("Document.PurchaseOrderClosing.ObjectForm", New Structure("FillingValues", FillingValues), , New UUID());
 	EndIf;
-
-//	Param = New Structure();
-//	POC = DocPurchaseOrderServer.GetLastPurchaseOrderClosingByPurchaseOrder(CommandParameter);
-//	If Not POC.IsEmpty() Then
-//		Param.Insert("Key", POC);
-//	Else
-//		Param.Insert("FillingValues", New Structure("PurchaseOrder", CommandParameter));
-//	EndIf;
-//
-//	OpenForm("Document.PurchaseOrderClosing.ObjectForm", Param, , New UUID());
 EndProcedure

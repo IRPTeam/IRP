@@ -13,7 +13,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	//ThisObject.TaxAndOffersCalculated = True;
 	SetConditionalAppearance();
 EndProcedure
 
@@ -31,7 +30,6 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocSalesOrderClient.OnOpen(Object, ThisObject, Cancel);
-	//UpdateTotalAmounts();
 EndProcedure
 
 &AtClient
@@ -53,18 +51,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
-
-//	DocSalesOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-//	
-//	If Upper(EventName) = Upper("CalculationStringsComplete") Then
-//		UpdateTotalAmounts();
-//	EndIf;
 EndProcedure
-
-//&AtClient
-//Procedure BeforeWrite(Cancel, WriteParameters)
-//	Return;
-//EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
@@ -179,7 +166,6 @@ EndProcedure
 &AtClient
 Procedure PartnerOnChange(Item)
 	DocSalesOrderClient.PartnerOnChange(Object, ThisObject, Item);
-	//SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -297,7 +283,6 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocSalesOrderClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	//UpdateTotalAmounts();
 	LockLinkedRows();
 EndProcedure
 
@@ -308,22 +293,6 @@ EndProcedure
 &AtClient
 Procedure ItemListPartnerItemOnChange(Item)
 	DocSalesOrderClient.ItemListPartnerItemOnChange(Object, ThisObject, Item);
-	
-//	CurrentData = Items.ItemList.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	ItemAndItemKeyByPartnerItem = DocumentsServer.GetItemAndItemKeyByPartnerItem(CurrentData.PartnerItem);
-//
-//	If ItemAndItemKeyByPartnerItem.Item <> CurrentData.Item Then
-//		CurrentData.Item = ItemAndItemKeyByPartnerItem.Item;
-//		DocSalesOrderClient.ItemListItemOnChange(Object, ThisObject, Item);
-//	EndIf;
-//
-//	If ItemAndItemKeyByPartnerItem.ItemKey <> CurrentData.ItemKey Then
-//		CurrentData.ItemKey = ItemAndItemKeyByPartnerItem.ItemKey;
-//		DocSalesOrderClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
-//	EndIf;
 EndProcedure
 
 #EndRegion
@@ -397,7 +366,6 @@ EndProcedure
 &AtClient
 Procedure ItemListNetAmountOnChange(Item)
 	DocSalesOrderClient.ItemListNetAmountOnChange(Object, ThisObject, Item);
-	//UpdateTotalAmounts();
 EndProcedure
 
 #EndRegion
@@ -407,10 +375,6 @@ EndProcedure
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item)
 	DocSalesOrderClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
-//	CurrentData = Items.ItemList.CurrentData;
-//	If CurrentData <> Undefined And CurrentData.DontCalculateRow Then
-//		UpdateTotalAmounts();
-//	EndIf;
 EndProcedure
 
 #EndRegion
@@ -470,8 +434,6 @@ EndProcedure
 &AtClient
 Procedure ItemListCancelOnChange(Item)
 	DocSalesOrderClient.ItemListCancelOnChange(Object, ThisObject, Item);
-	//UpdateTotalAmounts();
-	//DocumentsClient.CalculatePaymentTermDateAndAmount(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -506,13 +468,7 @@ EndProcedure
 &AtClient
 Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
 	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
-	//SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters);
 EndProcedure
-
-//&AtServer
-//Procedure SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters) Export
-//	DocumentsServer.FillItemList(Object);
-//EndProcedure
 
 #EndRegion
 

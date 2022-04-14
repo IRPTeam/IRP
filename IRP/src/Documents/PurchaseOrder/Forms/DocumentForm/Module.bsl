@@ -3,7 +3,6 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocPurchaseOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	//Taxes_CreateFormControls();
 	ThisObject.ClosingOrder = DocPurchaseOrderServer.GetLastPurchaseOrderClosingByPurchaseOrder(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
@@ -30,7 +29,6 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	DocPurchaseOrderClient.OnOpen(Object, ThisObject, Cancel);
-	//UpdateTotalAmounts();
 EndProcedure
 
 &AtClient
@@ -52,18 +50,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
-
-//	DocPurchaseOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-//
-//	If Upper(EventName) = Upper("CalculationStringsComplete") Then
-//		UpdateTotalAmounts();
-//	EndIf;
 EndProcedure
-
-//&AtClient
-//Procedure BeforeWrite(Cancel, WriteParameters)
-//	Return;
-//EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
@@ -73,7 +60,6 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	DocPurchaseOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
-	//Notify("WriteProcurementOrder", , ThisObject);
 	UpdateTotalAmounts();
 EndProcedure
 
@@ -116,8 +102,7 @@ Procedure UpdateTotalAmounts() Export
 
 		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
 		For Each RowTax In ArrayOfTaxesRows Do
-			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount,
-				0);
+			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
 		EndDo;
 
 		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
@@ -162,7 +147,6 @@ EndProcedure
 &AtClient
 Procedure PartnerOnChange(Item)
 	DocPurchaseOrderClient.PartnerOnChange(Object, ThisObject, Item);
-	//SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -289,7 +273,6 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocPurchaseOrderClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	//UpdateTotalAmounts();
 	LockLinkedRows();
 EndProcedure
 
@@ -300,22 +283,6 @@ EndProcedure
 &AtClient
 Procedure ItemListPartnerItemOnChange(Item)
 	DocPurchaseOrderClient.ItemListPartnerItemOnChange(Object, ThisObject, Item);
-	
-//	CurrentData = Items.ItemList.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	ItemAndItemKeyByPartnerItem = DocumentsServer.GetItemAndItemKeyByPartnerItem(CurrentData.PartnerItem);
-//
-//	If ItemAndItemKeyByPartnerItem.Item <> CurrentData.Item Then
-//		CurrentData.Item = ItemAndItemKeyByPartnerItem.Item;
-//		DocPurchaseOrderClient.ItemListItemOnChange(Object, ThisObject, Item);
-//	EndIf;
-//
-//	If ItemAndItemKeyByPartnerItem.ItemKey <> CurrentData.ItemKey Then
-//		CurrentData.ItemKey = ItemAndItemKeyByPartnerItem.ItemKey;
-//		DocPurchaseOrderClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
-//	EndIf;
 EndProcedure
 
 #EndRegion
@@ -389,7 +356,6 @@ EndProcedure
 &AtClient
 Procedure ItemListNetAmountOnChange(Item)
 	DocPurchaseOrderClient.ItemListNetAmountOnChange(Object, ThisObject, Item);
-	//UpdateTotalAmounts();
 EndProcedure
 
 #EndRegion
@@ -399,10 +365,6 @@ EndProcedure
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item)
 	DocPurchaseOrderClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
-//	CurrentData = Items.ItemList.CurrentData;
-//	If CurrentData <> Undefined And CurrentData.DontCalculateRow Then
-//		UpdateTotalAmounts();
-//	EndIf;
 EndProcedure
 
 #EndRegion
@@ -462,8 +424,6 @@ EndProcedure
 &AtClient
 Procedure ItemListCancelOnChange(Item)
 	DocPurchaseOrderClient.ItemListCancelOnChange(Object, ThisObject, Item);
-	//UpdateTotalAmounts();
-	//DocumentsClient.CalculatePaymentTermDateAndAmount(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -498,13 +458,7 @@ EndProcedure
 &AtClient
 Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
 	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
-	//SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters);
 EndProcedure
-
-//&AtServer
-//Procedure SpecialOffersEditFinishAtServer_ForDocument(Result, AdditionalParameters) Export
-//	DocumentsServer.FillItemList(Object);
-//EndProcedure
 
 #EndRegion
 

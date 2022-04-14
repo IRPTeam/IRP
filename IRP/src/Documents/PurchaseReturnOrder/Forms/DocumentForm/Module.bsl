@@ -532,7 +532,7 @@ EndProcedure
 &AtClient
 Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_SI(Object));
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_PRO(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);

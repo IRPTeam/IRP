@@ -563,6 +563,9 @@ Function ChangeCurrencyByAgreementOptions() Export
 EndFunction
 
 Function ChangeCurrencyByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentCurrency;
+	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If ValueIsFilled(AgreementInfo.Currency) Then
 		Return AgreementInfo.Currency;
@@ -613,6 +616,9 @@ Function ChangeCompanyByAgreementOptions() Export
 EndFunction
 
 Function ChangeCompanyByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentCompany;
+	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If ValueIsFilled(AgreementInfo.Company) Then
 		Return AgreementInfo.Company;
@@ -625,10 +631,13 @@ EndFunction
 #Region CHANGE_PRICE_INCLUDE_TAX_BY_AGREEMENT
 
 Function ChangePriceIncludeTaxByAgreementOptions() Export
-	Return GetChainLinkOptions("Agreement");
+	Return GetChainLinkOptions("Agreement, CurrentPriceIncludeTax");
 EndFunction
 
 Function ChangePriceIncludeTaxByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentPriceIncludeTax;
+	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	Return AgreementInfo.PriceIncludeTax;
 EndFunction
@@ -638,11 +647,15 @@ EndFunction
 #Region CHANGE_PRICE_TYPE_BY_AGREEMENT
 
 Function ChangePriceTypeByAgreementOptions() Export
-	Return GetChainLinkOptions("Agreement");
+	Return GetChainLinkOptions("Agreement, CurrentPriceType");
 EndFunction
 
 Function ChangePriceTypeByAgreementExecute(Options) Export
-	Return CatAgreementsServer.GetAgreementInfo(Options.Agreement).PriceType;
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentPriceType;
+	EndIf;
+	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+	Return AgreementInfo.PriceType;
 EndFunction
 
 #EndRegion
@@ -698,6 +711,9 @@ Function ChangeStoreByAgreementOptions() Export
 EndFunction
 
 Function ChangeStoreByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentStore;
+	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If ValueIsFilled(AgreementInfo.Store)  Then
 		Return AgreementInfo.Store;
@@ -714,6 +730,9 @@ Function ChangeDeliveryDateByAgreementOptions() Export
 EndFunction
 
 Function ChangeDeliveryDateByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentDeliveryDate;
+	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If ValueIsFilled(AgreementInfo.DeliveryDate)  Then
 		Return AgreementInfo.DeliveryDate;

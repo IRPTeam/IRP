@@ -2643,6 +2643,7 @@ Procedure StepChangePriceIncludeTaxByAgreement(Parameters, Chain) Export
 	Chain.ChangePriceIncludeTaxByAgreement.Setter = "SetPriceIncludeTax";
 	Options = ModelClientServer_V2.ChangePriceIncludeTaxByAgreementOptions();
 	Options.Agreement = GetAgreement(Parameters);
+	Options.CurrentPriceIncludeTax = GetPriceIncludeTax(Parameters);
 	Options.StepName = "StepChangePriceIncludeTaxByAgreement";
 	Chain.ChangePriceIncludeTaxByAgreement.Options.Add(Options);
 EndProcedure
@@ -4678,6 +4679,7 @@ Procedure StepItemListChangePriceTypeByAgreement(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.ChangePriceTypeByAgreementOptions();
 		Options.Agreement = GetAgreement(Parameters);
+		Options.CurrentPriceType = GetItemListPriceType(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListChangePriceTypeByAgreement";
 		Chain.ChangePriceTypeByAgreement.Options.Add(Options);

@@ -217,6 +217,9 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
+	|	""SalesOrder"" AS BasedOn,
+	|	TRUE AS CloseOrder,
+	|	SalesOrder.Ref AS SalesOrder,
 	|	SalesOrder.Agreement AS Agreement,
 	|	SalesOrder.Company AS Company,
 	|	SalesOrder.Currency AS Currency,
@@ -278,7 +281,7 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 	|	ItemList.TaxAmount AS TaxAmount,
 	|	ItemList.OffersAmount AS OffersAmount,
 	|	ItemList.SalesPerson
-	|INTO ItemList
+	//|INTO ItemList
 	|FROM
 	|	Document.SalesOrder.ItemList AS ItemList
 	|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order = &SalesOrder) AS
@@ -296,7 +299,7 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 	|	SalesOrderSpecialOffers.Offer AS Offer,
 	|	SalesOrderSpecialOffers.Amount AS Amount,
 	|	SalesOrderSpecialOffers.Percent AS Percent
-	|INTO SpecialOffers
+	//|INTO SpecialOffers
 	|FROM
 	|	Document.SalesOrder.SpecialOffers AS SalesOrderSpecialOffers
 	|WHERE
@@ -314,128 +317,201 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 	|	SalesOrderTaxList.Amount AS Amount,
 	|	SalesOrderTaxList.IncludeToTotalAmount AS IncludeToTotalAmount,
 	|	SalesOrderTaxList.ManualAmount AS ManualAmount
-	|INTO TaxList
+	//|INTO TaxList
 	|FROM
 	|	Document.SalesOrder.TaxList AS SalesOrderTaxList
 	|WHERE
 	|	FALSE";
 	Query.SetParameter("SalesOrder", SalesOrder);
-	Query.TempTablesManager = New TempTablesManager();
-	QueryResult = Query.Execute();
-	SalesOrderInfo = QueryResult.Select();
-	SalesOrderInfo.Next();
-
-	Str = New Structure();
-	Str.Insert("SalesOrderInfo", SalesOrderInfo);
-	StrTables = New Structure();
-	For Each Table In Query.TempTablesManager.Tables Do
-		StrTables.Insert(Table.FullName, Table.GetData().Unload());
+	//Query.TempTablesManager = New TempTablesManager();
+	QueryResults = Query.ExecuteBatch();
+	//SalesOrderInfo = QueryResult.Select();
+	//QuerySelection = QueryResult.Select();
+	
+	//----------------------------
+	Header              = QueryResults[0].Unload()[0];
+	Table_ItemList      = QueryResults[1].Unload();
+	Table_SpecialOffers = QueryResults[2].Unload();
+	Table_TaxList       = QueryResults[3].Unload();
+	
+	// ItemList
+	ArrayOfColumns = New Array();
+	For Each Column In Table_ItemList.Columns Do
+		ArrayOfColumns.Add(Column.Name);
 	EndDo;
+	Columns_ItemList = StrConcat(ArrayOfColumns, ",");
+	
+	// SpecialOffers
+	ArrayOfColumns.Clear();
+	For Each Column In Table_SpecialOffers.Columns Do
+		ArrayOfColumns.Add(Column.Name);
+	EndDo;
+	Columns_SpecialOffers = StrConcat(ArrayOfColumns, ",");
+	
+	// TaxList
+	ArrayOfColumns.Clear();
+	For Each Column In Table_TaxList.Columns Do
+		ArrayOfColumns.Add(Column.Name);
+	EndDo;
+	Columns_TaxList = StrConcat(ArrayOfColumns, ",");
+	
+	FillingValues = New Structure("BasedOn,
+								  |CloseOrder,
+								  |SalesOrder,
+								  |Agreement, 
+								  |Company, 
+								  |Currency, 
+								  |DateOfShipment, 
+								  |LegalName, 
+								  |ManagerSegment, 
+								  |Partner, 
+								  |PriceIncludeTax, 
+								  |Status, 
+								  |UseItemsShipmentScheduling, 
+								  |Author, 
+								  |Branch, 
+								  |Description");
+	
+	FillingValues.Insert("ItemList"      , New Array());
+	FillingValues.Insert("TaxList"       , New Array());
+	FillingValues.Insert("SpecialOffers" , New Array());
+	FillPropertyValues(FillingValues, Header);
+	
+	//----------------------------
+	
+	//SalesOrderInfo.Next();
+	
+	//Str = New Structure();
+	//Str.Insert("SalesOrderInfo", SalesOrderInfo);
+	//StrTables = New Structure();
+	//For Each Table In Query.TempTablesManager.Tables Do
+	//	StrTables.Insert(Table.FullName, Table.GetData().Unload());
+	//EndDo;
 
-	For Each Row In StrTables.ItemList Do
+	//For Each Row In StrTables.ItemList Do
+	For Each Row In Table_ItemList Do
 		ItemRowInSO = SalesOrder.ItemList.FindRows(New Structure("Key", Row.Key))[0];
 		QuantityPart = Row.QuantityInBaseUnit / ItemRowInSO.QuantityInBaseUnit;
 
 		TaxRowInSO = SalesOrder.TaxList.FindRows(New Structure("Key", Row.Key));
 		TaxAmount = 0;
 		For Each TaxRow In TaxRowInSO Do
-			NewTaxRow = StrTables.TaxList.Add();
-			FillPropertyValues(NewTaxRow, TaxRow);
-			NewTaxRow.Amount = TaxRow.Amount * QuantityPart;
-			NewTaxRow.ManualAmount = TaxRow.ManualAmount * QuantityPart;
-			TaxAmount = TaxAmount + NewTaxRow.ManualAmount;
+			//NewTaxRow = StrTables.TaxList.Add();
+			//FillPropertyValues(NewTaxRow, TaxRow);
+			//NewTaxRow.Amount = TaxRow.Amount * QuantityPart;
+			//NewTaxRow.ManualAmount = TaxRow.ManualAmount * QuantityPart;
+			//TaxAmount = TaxAmount + NewTaxRow.ManualAmount;
+			
+			NewRow_TaxList = New Structure(Columns_TaxList);
+			FillPropertyValues(NewRow_TaxList, TaxRow);
+			NewRow_TaxList.Amount = TaxRow.Amount * QuantityPart;
+			NewRow_TaxList.ManualAmount = TaxRow.ManualAmount * QuantityPart;
+			TaxAmount = TaxAmount + NewRow_TaxList.ManualAmount;
+			FillingValues.TaxList.Add(NewRow_TaxList);
 		EndDo;
 		Row.TaxAmount = TaxAmount;
+		
 		SpecialOffersRowInSO = SalesOrder.SpecialOffers.FindRows(New Structure("Key", Row.Key));
 		SpecialOffersAmount = 0;
 		For Each SpecialOffersRow In SpecialOffersRowInSO Do
-			NewSpecialOffers = StrTables.SpecialOffers.Add();
-			FillPropertyValues(NewSpecialOffers, SpecialOffersRow);
-			NewSpecialOffers.Amount = SpecialOffersRow.Amount * QuantityPart;
-			SpecialOffersAmount = SpecialOffersAmount + NewSpecialOffers.Amount;
+			//NewSpecialOffers = StrTables.SpecialOffers.Add();
+			//FillPropertyValues(NewSpecialOffers, SpecialOffersRow);
+			//NewSpecialOffers.Amount = SpecialOffersRow.Amount * QuantityPart;
+			//SpecialOffersAmount = SpecialOffersAmount + NewSpecialOffers.Amount;
+			
+			NewRow_SpecialOffers = New Structure(Columns_SpecialOffers);
+			FillPropertyValues(NewRow_SpecialOffers, SpecialOffersRow);
+			NewRow_SpecialOffers.Amount = SpecialOffersRow.Amount * QuantityPart;
+			SpecialOffersAmount = SpecialOffersAmount + NewRow_SpecialOffers.Amount;
+			FillingValues.SpecialOffers.Add(NewRow_SpecialOffers);
 		EndDo;
 		Row.OffersAmount = SpecialOffersAmount;
+		
+		NewRow_ItemList = New Structure(Columns_ItemList);
+		FillPropertyValues(NewRow_ItemList, Row);
+		FillingValues.ItemList.Add(NewRow_ItemList);
 	EndDo;
 
-	Str.Insert("Tables", StrTables);
-	Return Str;
-
+	//Str.Insert("Tables", StrTables);
+	//Return Str;
+	
+	Return FillingValues;
 EndFunction
 
-Function GetSalesOrderInfo(SalesOrder, AddInfo = Undefined) Export
-
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	SalesOrder.Agreement,
-	|	SalesOrder.Company,
-	|	SalesOrder.Currency,
-	|	SalesOrder.DateOfShipment,
-	|	SalesOrder.LegalName,
-	|	SalesOrder.ManagerSegment,
-	|	SalesOrder.Partner,
-	|	SalesOrder.PriceIncludeTax,
-	|	SalesOrder.Status,
-	|	SalesOrder.UseItemsShipmentScheduling,
-	|	SalesOrder.Author,
-	|	SalesOrder.Branch,
-	|	SalesOrder.Description,
-	|	SalesOrder.DocumentAmount
-	|FROM
-	|	Document.SalesOrder AS SalesOrder
-	|WHERE
-	|	SalesOrder.Ref = &SalesOrder
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT *
-	|INTO ItemList
-	|FROM
-	|	Document.SalesOrder.ItemList
-	|WHERE
-	|	Ref = &SalesOrder
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT *
-	|INTO SpecialOffers
-	|FROM
-	|	Document.SalesOrder.SpecialOffers
-	|WHERE
-	|	Ref = &SalesOrder
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT *
-	|INTO TaxList
-	|FROM
-	|	Document.SalesOrder.TaxList
-	|WHERE
-	|	Ref = &SalesOrder
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT *
-	|INTO Currencies
-	|FROM
-	|	Document.SalesOrder.Currencies
-	|WHERE
-	|	Ref = &SalesOrder";
-	Query.SetParameter("SalesOrder", SalesOrder);
-	Query.TempTablesManager = New TempTablesManager();
-	QueryResult = Query.Execute();
-	SalesOrderInfo = QueryResult.Select();
-	SalesOrderInfo.Next();
-
-	Str = New Structure();
-	Str.Insert("SalesOrderInfo", SalesOrderInfo);
-	StrTables = New Structure();
-	For Each Table In Query.TempTablesManager.Tables Do
-		StrTables.Insert(Table.FullName, Table.GetData().Unload());
-	EndDo;
-	Str.Insert("Tables", StrTables);
-	Return Str;
-
-EndFunction
+//Function GetSalesOrderInfo(SalesOrder, AddInfo = Undefined) Export
+//
+//	Query = New Query();
+//	Query.Text =
+//	"SELECT
+//	|	SalesOrder.Agreement,
+//	|	SalesOrder.Company,
+//	|	SalesOrder.Currency,
+//	|	SalesOrder.DateOfShipment,
+//	|	SalesOrder.LegalName,
+//	|	SalesOrder.ManagerSegment,
+//	|	SalesOrder.Partner,
+//	|	SalesOrder.PriceIncludeTax,
+//	|	SalesOrder.Status,
+//	|	SalesOrder.UseItemsShipmentScheduling,
+//	|	SalesOrder.Author,
+//	|	SalesOrder.Branch,
+//	|	SalesOrder.Description,
+//	|	SalesOrder.DocumentAmount
+//	|FROM
+//	|	Document.SalesOrder AS SalesOrder
+//	|WHERE
+//	|	SalesOrder.Ref = &SalesOrder
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT *
+//	|INTO ItemList
+//	|FROM
+//	|	Document.SalesOrder.ItemList
+//	|WHERE
+//	|	Ref = &SalesOrder
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT *
+//	|INTO SpecialOffers
+//	|FROM
+//	|	Document.SalesOrder.SpecialOffers
+//	|WHERE
+//	|	Ref = &SalesOrder
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT *
+//	|INTO TaxList
+//	|FROM
+//	|	Document.SalesOrder.TaxList
+//	|WHERE
+//	|	Ref = &SalesOrder
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT *
+//	|INTO Currencies
+//	|FROM
+//	|	Document.SalesOrder.Currencies
+//	|WHERE
+//	|	Ref = &SalesOrder";
+//	Query.SetParameter("SalesOrder", SalesOrder);
+//	Query.TempTablesManager = New TempTablesManager();
+//	QueryResult = Query.Execute();
+//	SalesOrderInfo = QueryResult.Select();
+//	SalesOrderInfo.Next();
+//
+//	Str = New Structure();
+//	Str.Insert("SalesOrderInfo", SalesOrderInfo);
+//	StrTables = New Structure();
+//	For Each Table In Query.TempTablesManager.Tables Do
+//		StrTables.Insert(Table.FullName, Table.GetData().Unload());
+//	EndDo;
+//	Str.Insert("Tables", StrTables);
+//	Return Str;
+//
+//EndFunction
 
 #EndRegion

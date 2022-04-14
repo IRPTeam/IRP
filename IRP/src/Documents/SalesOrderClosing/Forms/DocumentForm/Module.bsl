@@ -597,37 +597,37 @@ EndProcedure
 #EndRegion
 
 
-#Region SalesOrderClosing
-
-&AtClient
-Procedure FillByOrder()
-	FillByOrderAtServer();
-	Cancel = False;
-	DocSalesOrderClosingClient.OnOpen(Object, ThisObject, Cancel);
-	DocSalesOrderClosingClient.ItemListQuantityOnChange(Object, ThisObject, Undefined);
-	UpdateTotalAmounts();
-EndProcedure
-
-&AtServer
-Procedure FillByOrderAtServer()
-	If Object.CloseOrder Then
-		SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderForClosing(Object.SalesOrder);
-	Else
-		SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderInfo(Object.SalesOrder);
-	EndIf;
-
-	FillPropertyValues(Object, SalesOrderData.SalesOrderInfo);
-
-	For Each Table In SalesOrderData.Tables Do
-		Object[Table.Key].Load(Table.Value);
-	EndDo;
-
-	Cancel = False;
-	StandardProcessing = True;
-	DocSalesOrderClosingServer.OnReadAtServer(Object, ThisObject, Object);
-	DocSalesOrderClosingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-
-EndProcedure
-
-#EndRegion
-
+//#Region SalesOrderClosing
+//
+//&AtClient
+//Procedure FillByOrder()
+//	FillByOrderAtServer();
+//	Cancel = False;
+//	DocSalesOrderClosingClient.OnOpen(Object, ThisObject, Cancel);
+//	DocSalesOrderClosingClient.ItemListQuantityOnChange(Object, ThisObject, Undefined);
+//	UpdateTotalAmounts();
+//EndProcedure
+//
+//&AtServer
+//Procedure FillByOrderAtServer()
+//	If Object.CloseOrder Then
+//		SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderForClosing(Object.SalesOrder);
+//	Else
+//		SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderInfo(Object.SalesOrder);
+//	EndIf;
+//
+//	FillPropertyValues(Object, SalesOrderData.SalesOrderInfo);
+//
+//	For Each Table In SalesOrderData.Tables Do
+//		Object[Table.Key].Load(Table.Value);
+//	EndDo;
+//
+//	Cancel = False;
+//	StandardProcessing = True;
+//	DocSalesOrderClosingServer.OnReadAtServer(Object, ThisObject, Object);
+//	DocSalesOrderClosingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+//
+//EndProcedure
+//
+//#EndRegion
+//

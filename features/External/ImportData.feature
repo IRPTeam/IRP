@@ -1855,13 +1855,3 @@ Scenario: Create information register ExpenseRevenueTypeSettings records (Compan
 		| 'Company'                                                           | 'ItemType' | 'Item' | 'ItemKey' | 'ExpenseType'                                                                    | 'RevenueType'                                                                    |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''         | ''     | ''        | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | ''         | ''     | ''        | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' |
-
-
-
-Scenario: Create information register ExpenseRevenueTypeSettings records (item type)
-
-	And I check or create information register "ExpenseRevenueTypeSettings" records:
-		| 'Company'                                                           | 'ItemType'                                                          | 'Item' | 'ItemKey' | 'ExpenseType'                                                                    | 'RevenueType'                                                                    |	| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''                                                                  | ''     | ''        | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' |
-		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | ''     | ''        | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' |
-		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f2' | ''     | ''        | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' |
-	

@@ -186,6 +186,7 @@ Scenario: 950405 create reasons for documents with different comparison type
 			And I move to "Other" tab
 			And I input "07.10.2020 00:00:00" text in "Date" field
 			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I move to the next attribute
 			If current window header is "Update item list info" Then
 				And I click "OK" button		
 			And I click "Post and close" button

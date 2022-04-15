@@ -68,7 +68,225 @@ Scenario: _0202100 preparation (filling expence, revenue)
 		When add sales tax settings 
 		When Create catalog CancelReturnReasons objects
 	
+Scenario: _0202101 filling revenue type in the SI (from Company)
+	And I close all client application windows
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+	* Check
+		When check filling revenue type (from Company)
+	And I close all client application windows
 	
+
+Scenario: _0202102 filling expense type in the PI (from Company)
+	And I close all client application windows
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Check
+		When check	filling expense type (from Company)
+	And I close all client application windows
+			
+Scenario: _0202103 filling revenue type in the SR (from Company)
+	And I close all client application windows
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"	
+	* Check
+		When check filling revenue type (from Company)
+	And I close all client application windows		
+						
+
+Scenario: _0202104 filling expense type in the PR (from Company)
+	And I close all client application windows
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"	
+	* Check
+		When check	filling expense type (from Company)
+	And I close all client application windows
+
+Scenario: _0202105 filling revenue type in the RSR (from Company)
+	And I close all client application windows
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+	* Check
+		When check filling revenue type (from Company)
+	And I close all client application windows
+
+Scenario: _0202106 filling revenue type in the RRR (from Company)
+	And I close all client application windows
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"	
+	* Check
+		When check filling revenue type (from Company)
+	And I close all client application windows
 		
+Scenario: _0202110 filling revenue type in the SI (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne SI
+		When check filling revenue type (from item type)
+	And I close all client application windows					
+
+Scenario: _0202111 filling revenue type in the SR (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne SR
+		When check filling revenue type (from item type)
+	And I close all client application windows
+
+Scenario: _0202111 filling revenue type in the RSR (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne RSR
+		When check filling revenue type (from item type)
+	And I close all client application windows
+
+Scenario: _0202112 filling revenue type in the RRR (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne RSR
+		When check filling revenue type (from item type)
+	And I close all client application windows
+
+Scenario: _0202113 filling expence type in the PI (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne PI
+		When check filling expense type (from item type)
+	And I close all client application windows
+
+Scenario: _0202114 filling expence type in the PR (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne PR
+		When check filling expense type (from item type)
+	And I close all client application windows
+
+Scenario: _0202110 filling revenue type in the SI (from item)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne SI
+		When check filling revenue type (item)
+	And I close all client application windows					
+
+Scenario: _0202111 filling revenue type in the SR (from item)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne SR
+		When check filling revenue type (item)
+	And I close all client application windows
+
+Scenario: _0202111 filling revenue type in the RSR (from item)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne RSR
+		When check filling revenue type (item)
+	And I close all client application windows
+
+Scenario: _0202112 filling revenue type in the RRR (from)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne RSR
+		When check filling revenue type (item)
+	And I close all client application windows
+
+Scenario: _0202113 filling expence type in the PI (from item)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne PI
+		When check filling expense type (from item)
+	And I close all client application windows
+
+Scenario: _0202114 filling expence type in the PR (from item)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne PR
+		When check filling expense type (from item)
+	And I close all client application windows
+
+
+Scenario: _0202120 filling revenue type in the SI (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne SI
+		When check filling revenue type (item key)
+	And I close all client application windows					
+
+Scenario: _0202121 filling revenue type in the SR (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne SR
+		When check filling revenue type (item key)
+	And I close all client application windows
+
+Scenario: _0202122 filling revenue type in the RSR (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne RSR
+		When check filling revenue type (item key)
+	And I close all client application windows
+
+Scenario: _0202123 filling revenue type in the RRR (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne RSR
+		When check filling revenue type (item key)
+	And I close all client application windows
+
+Scenario: _0202124 filling expence type in the PI (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne PI
+		When check filling expense type (from item key)
+	And I close all client application windows
+
+Scenario: _0202125 filling expence type in the PR (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne PR
+		When check filling expense type (from item key)
+	And I close all client application windows
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

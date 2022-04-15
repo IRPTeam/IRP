@@ -1455,7 +1455,16 @@ Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPri
 	If TaxOptions.IsAlreadyCalculated = True Then
 		TaxAmount = 0;
 		For Each Row In TaxOptions.TaxList Do
-			Result.TaxList.Add(Row);
+			ResultRowIsExists = False;
+			For Each ResultRow In Result.TaxList Do
+				If ResultRow.Key = Row.Key And ResultRow.Tax = Row.Tax Then
+					ResultRowIsExists = True;
+					Break;
+				EndIf;
+			EndDo;
+			If Not ResultRowIsExists Then
+				Result.TaxList.Add(Row);
+			EndIf;
 			If Row.IncludeToTotalAmount Then
 				TaxAmount = Round(TaxAmount + Row.ManualAmount, 2);
 			EndIf;

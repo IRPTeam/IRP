@@ -151,57 +151,17 @@ Procedure TaxEditContinue(Result, AdditionalParameters) Export
 		          AdditionalParameters.AddInfo);
 EndProcedure
 
-Procedure UpdateTaxList(Object, Form, Key, ArrayOfTaxListRows, AddInfo = Undefined) Export
-
-	//ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	ArrayForDelete = Object.TaxList.FindRows(New Structure("Key", Key));
-	For Each ItemOfArrayForDelete In ArrayForDelete Do
-		Object.TaxList.Delete(ItemOfArrayForDelete);
-	EndDo;
-	//TotalTaxAmount = 0;
-	For Each ItemOfArrayOfTaxListRows In ArrayOfTaxListRows Do
-		FillPropertyValues(Object.TaxList.Add(), ItemOfArrayOfTaxListRows);
-		//If ItemOfArrayOfTaxListRows.IncludeToTotalAmount Then
-		//	TotalTaxAmount = TotalTaxAmount + ItemOfArrayOfTaxListRows.ManualAmount;
-		//EndIf;
+Procedure UpdateTaxList(Object, Form, Key, ArrayOfTaxListRows, AddInfo = Undefined) Export	
+	For Each Row In ArrayOfTaxListRows Do
+		TaxListRows = Object.TaxList.FindRows(New Structure("Key, Tax", Key, Row.Tax));
+		For Each TaxListRow In TaxListRows Do
+			TaxListRow.ManualAmount = Row.ManualAmount;
+		EndDo;	
 	EndDo;
 	
-	//--------------------------------------------
 	If Object.Property("ItemList") Then
 		ViewClient_V2.ItemListTaxAmountUserFormOnChange(Object, Form);
 	ElsIf Object.Property("PaymentList") Then
 		ViewClient_V2.PaymentListTaxAmountUserFormOnChange(Object, Form);
 	EndIf;
-	//--------------------------------------------
-	
-//	ArrayOfItemListRows = New Array();
-//	If Object.Property("ItemList") Then
-//		ArrayOfItemListRows = Object.ItemList.FindRows(New Structure("Key", Key));
-//	ElsIf Object.Property("PaymentList") Then
-//		ArrayOfItemListRows = Object.PaymentList.FindRows(New Structure("Key", Key));
-//	EndIf;
-//	
-//	IsCalculatedRow = True;
-//	For Each ItemOfItemListRows In ArrayOfItemListRows Do
-//		If CommonFunctionsClientServer.ObjectHasProperty(ItemOfItemListRows, "DontCalculateRow")
-//			And ItemOfItemListRows.DontCalculateRow Then
-//			IsCalculatedRow = False;
-//			ItemOfItemListRows.TaxAmount = TotalTaxAmount;
-//		EndIf;
-//	EndDo;
-//
-//	If IsCalculatedRow Then
-//		Actions = New Structure();
-//		If Object.Property("SpecialOffers") Then
-//			Actions.Insert("CalculateSpecialOffers");
-//		EndIf;
-//		Actions.Insert("CalculateNetAmount");
-//		Actions.Insert("CalculateTax");
-//		Actions.Insert("CalculateTotalAmount");
-//
-//		CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayOfItemListRows, Actions,
-//			ServerData.ArrayOfTaxInfo, AddInfo);
-//	Else
-//		Notify("CalculationStringsComplete", New Structure("AddInfo", AddInfo), Form);
-//	EndIf;
 EndProcedure

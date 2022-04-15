@@ -5355,7 +5355,11 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.AmountOptions.TotalAmount      = GetItemListTotalAmount(Parameters, Row.Key);
 		
 		Options.PriceOptions.Price              = GetItemListPrice(Parameters, Row.Key);
-		Options.PriceOptions.PriceType          = GetItemListPriceType(Parameters, Row.Key);
+		If WhoIsChanged = "IsPriceChanged" And IsUserChange(Parameters) Then
+			Options.PriceOptions.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType");
+		Else
+			Options.PriceOptions.PriceType = GetItemListPriceType(Parameters, Row.Key);
+		EndIf;
 		Options.PriceOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
 		Options.PriceOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
 		

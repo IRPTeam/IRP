@@ -1,61 +1,100 @@
 {
   "version": 1,
   "settings": {
-    "right-interactive-open-external-data-processors": {
+    "md-standard-attribute-synonym-empty": {
       "enabled": false
     },
-    "module-accessibility-at-client": {
+    "configuration-data-lock-mode": {
+      "enabled": false
+    },
+    "common-module-name-client-server": {
+      "enabled": false
+    },
+    "doc-comment-procedure-return-section": {
       "enabled": false
     },
     "right-administration": {
       "enabled": false
     },
-    "common-module-type": {
+    "use-non-recommended-method": {
+      "enabled": false
+    },
+    "bsl-canonical-pragma": {
+      "enabled": false
+    },
+    "module-region-empty": {
+      "enabled": false
+    },
+    "mdo-scheduled-job-description": {
+      "enabled": false
+    },
+    "ql-temp-table-index": {
+      "enabled": false
+    },
+    "lock-out-of-try": {
       "enabled": false
     },
     "right-configuration-extensions-administration": {
       "enabled": false
     },
-    "right-start-automation": {
+    "common-module-name-client-cached": {
       "enabled": false
     },
-    "form-named-element-name": {
+    "module-empty-method": {
       "enabled": false
     },
     "right-interactive-delete": {
       "enabled": false
     },
-    "right-view-event-log": {
-      "enabled": false
-    },
     "right-data-administration": {
       "enabled": false
     },
-    "notify-description-to-server-procedure": {
+    "event-heandler-boolean-param": {
+      "enabled": false
+    },
+    "change-and-validate-instead-of-around": {
       "enabled": false
     },
     "right-interactive-clear-deletion-mark-predefined-data": {
       "enabled": false
     },
-    "right-interactive-delete-predefined-data": {
+    "doc-comment-parameter-in-description-suggestion": {
       "enabled": false
     },
-    "right-start-external-connection": {
+    "doc-comment-export-function-return-section": {
+      "enabled": false
+    },
+    "doc-comment-complex-type-with-link": {
+      "enabled": false
+    },
+    "input-field-list-choice-mode": {
+      "enabled": false
+    },
+    "doc-comment-parameter-section": {
       "enabled": false
     },
     "role-right-has-rls": {
       "enabled": false
     },
-    "right-interactive-delete-marked-predefined-data": {
-      "enabled": false
-    },
-    "right-start-thin-client": {
-      "enabled": false
-    },
     "method-too-many-params": {
       "enabled": false
     },
-    "query-in-loop": {
+    "empty-except-statement": {
+      "enabled": false
+    },
+    "form-module-missing-pragma": {
+      "enabled": false
+    },
+    "doc-comment-field-name": {
+      "enabled": false
+    },
+    "doc-comment-field-in-description-suggestion": {
+      "enabled": false
+    },
+    "doc-comment-ref-link": {
+      "enabled": false
+    },
+    "doc-comment-return-section-type": {
       "enabled": false
     },
     "right-active-users": {
@@ -64,13 +103,7 @@
     "module-structure-top-region": {
       "enabled": false
     },
-    "structure-consructor-too-many-keys": {
-      "enabled": false
-    },
     "right-interactive-set-deletion-mark-predefined-data": {
-      "enabled": false
-    },
-    "right-exclusive-mode": {
       "enabled": false
     },
     "right-output-to-printer-file-clipboard": {
@@ -85,7 +118,127 @@
     "right-all-functions-mode": {
       "enabled": false
     },
+    "common-module-name-server-call": {
+      "enabled": false
+    },
     "right-start-web-client": {
+      "enabled": false
+    },
+    "ql-camel-case-string-literal": {
+      "enabled": false
+    },
+    "shceduled-job-periodicity-too-short": {
+      "enabled": false
+    },
+    "right-interactive-open-external-data-processors": {
+      "enabled": false
+    },
+    "module-accessibility-at-client": {
+      "enabled": false
+    },
+    "doc-comment-field-type": {
+      "enabled": false
+    },
+    "new-color": {
+      "enabled": false
+    },
+    "ql-virtual-table-filters": {
+      "enabled": false
+    },
+    "ql-join-to-sub-query": {
+      "enabled": false
+    },
+    "common-module-name-server-call-cached": {
+      "enabled": false
+    },
+    "using-isinrole": {
+      "enabled": false
+    },
+    "data-exchange-load": {
+      "enabled": false
+    },
+    "common-module-type": {
+      "enabled": false
+    },
+    "doc-comment-type": {
+      "enabled": false
+    },
+    "invocation-form-event-handler": {
+      "enabled": false
+    },
+    "right-start-automation": {
+      "enabled": false
+    },
+    "doc-comment-collection-item-type": {
+      "enabled": false
+    },
+    "module-unused-local-variable": {
+      "enabled": false
+    },
+    "common-module-name-client": {
+      "enabled": false
+    },
+    "form-named-element-name": {
+      "enabled": false
+    },
+    "common-module-name-global": {
+      "enabled": false
+    },
+    "bsl-nstr-string-literal-format": {
+      "enabled": false
+    },
+    "ql-cast-to-max-number": {
+      "enabled": false
+    },
+    "common-module-name-cached": {
+      "enabled": false
+    },
+    "right-view-event-log": {
+      "enabled": false
+    },
+    "ql-using-for-update": {
+      "enabled": false
+    },
+    "notify-description-to-server-procedure": {
+      "enabled": false
+    },
+    "mdo-name-length": {
+      "enabled": false
+    },
+    "export-method-in-command-form-module": {
+      "enabled": false
+    },
+    "right-interactive-delete-predefined-data": {
+      "enabled": false
+    },
+    "form-module-pragma": {
+      "enabled": false
+    },
+    "right-start-external-connection": {
+      "enabled": false
+    },
+    "doc-comment-use-minus": {
+      "enabled": false
+    },
+    "right-interactive-delete-marked-predefined-data": {
+      "enabled": false
+    },
+    "md-list-object-presentation": {
+      "enabled": false
+    },
+    "right-start-thin-client": {
+      "enabled": false
+    },
+    "query-in-loop": {
+      "enabled": false
+    },
+    "structure-consructor-too-many-keys": {
+      "enabled": false
+    },
+    "right-exclusive-mode": {
+      "enabled": false
+    },
+    "module-unused-method": {
       "enabled": false
     },
     "right-save-user-data": {

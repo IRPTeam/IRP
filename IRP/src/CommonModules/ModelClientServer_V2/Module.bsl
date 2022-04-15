@@ -949,7 +949,7 @@ Function DefaultStoreInHeaderExecute(Options) Export
 EndFunction
 
 Function DefaultStoreInListOptions() Export
-	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement");
+	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement, StoreInPreviousRow");
 EndFunction
 
 // fill store in tabular part ItemList by default
@@ -960,6 +960,10 @@ Function DefaultStoreInListExecute(Options) Export
 	
 	If ValueIsFilled(Options.StoreInHeader) Then
 		Return Options.StoreInHeader; // store for document header
+	EndIf;
+	
+	If ValueIsFilled(Options.StoreInPreviousRow) Then
+		Return Options.StoreInPreviousRow; // store from previous row
 	EndIf;
 	
 	If ValueIsFilled(Options.Agreement) Then

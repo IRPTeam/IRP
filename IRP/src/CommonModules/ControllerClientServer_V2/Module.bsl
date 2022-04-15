@@ -4573,6 +4573,11 @@ Procedure StepItemListDefaultStoreInList(Parameters, Chain, AgreementInHeader)
 	EndIf;
 	Options.StoreInList   = GetItemListStore(Parameters, NewRow.Key);
 	Options.StoreInHeader = GetStore(Parameters);
+	ItemListCount = Parameters.Object.ItemList.Count();
+	If ItemListCount > 1 Then
+		PreviousRowKey = Parameters.Object.ItemList[ItemListCount - 2].Key;
+		Options.StoreInPreviousRow = GetItemListStore(Parameters, PreviousRowKey);
+	EndIf;
 	Options.Key = NewRow.Key;
 	Options.StepName = "StepItemListDefaultStoreInList";
 	Chain.DefaultStoreInList.Options.Add(Options);

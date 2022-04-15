@@ -72,228 +72,220 @@ Scenario: _0202101 filling revenue type in the SI (from Company)
 	And I close all client application windows
 	* Load registers settings
 		When Create information register ExpenseRevenueTypeSettings records (Company)
-	* Select Company
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
-		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'     |
-		And I select current line in "List" table
-	* Select Item
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I activate field named "ItemListItem" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key'  |
-			| 'XS/Blue' |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table		
-	* Check filling in revenue type
-		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
-			| 'Rent'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
-	* Reselect Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Second Company'     |
-		And I select current line in "List" table
-	* Check filling in revenue type
-		And "ItemList" table became equal
-			| 'Revenue type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
-			| 'Telephone communications' | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+	* Check
+		When check filling revenue type (from Company)
 	And I close all client application windows
 	
 
-Scenario: _0202102 filling expense type in the PO (from Company)
+Scenario: _0202102 filling expense type in the PI (from Company)
 	And I close all client application windows
-	* Select Company
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"	
-		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'     |
-		And I select current line in "List" table
-	* Select Item
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I activate field named "ItemListItem" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'       |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key'  |
-			| 'Rent' |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table		
-	* Check filling in Expense type
-		And "ItemList" table became equal
-			| 'Expense type' | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
-			| 'Rent'         | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
-	* Reselect Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Second Company'     |
-		And I select current line in "List" table
-	* Check filling in Expense type
-		And "ItemList" table became equal
-			| 'Expense type'             | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
-			| 'Telephone communications' | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Check
+		When check	filling expense type (from Company)
 	And I close all client application windows
 			
 Scenario: _0202103 filling revenue type in the SR (from Company)
 	And I close all client application windows
-	* Select Company
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"	
-		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'     |
-		And I select current line in "List" table
-	* Select Item
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I activate field named "ItemListItem" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Dress'       |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key'  |
-			| 'XS/Blue' |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table		
-	* Check filling in revenue type
-		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
-			| 'Rent'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
-	* Reselect Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Second Company'     |
-		And I select current line in "List" table
-	* Check filling in revenue type
-		And "ItemList" table became equal
-			| 'Revenue type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
-			| 'Telephone communications' | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"	
+	* Check
+		When check filling revenue type (from Company)
 	And I close all client application windows		
 						
 
 Scenario: _0202104 filling expense type in the PR (from Company)
 	And I close all client application windows
-	* Select Company
-		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"	
-		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Main Company'     |
-		And I select current line in "List" table
-	* Select Item
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I activate field named "ItemListItem" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'       |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item key'  |
-			| 'Rent' |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table		
-	* Check filling in Expense type
-		And "ItemList" table became equal
-			| 'Expense type' | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
-			| 'Rent'         | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
-	* Reselect Company
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Second Company'     |
-		And I select current line in "List" table
-	* Check filling in Expense type
-		And "ItemList" table became equal
-			| 'Expense type'             | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
-			| 'Telephone communications' | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"	
+	* Check
+		When check	filling expense type (from Company)
+	And I close all client application windows
+
+Scenario: _0202105 filling revenue type in the RSR (from Company)
+	And I close all client application windows
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+	* Check
+		When check filling revenue type (from Company)
+	And I close all client application windows
+
+Scenario: _0202106 filling revenue type in the RRR (from Company)
+	And I close all client application windows
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (Company)
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"	
+	* Check
+		When check filling revenue type (from Company)
 	And I close all client application windows
 		
-Scenario: _0202103 filling revenue type in the SI (from item type)
+Scenario: _0202110 filling revenue type in the SI (from item type)
 	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Load registers settings
 		When Create information register ExpenseRevenueTypeSettings records (item type)
 	* Check in tne SI
-		* Select Company
-			Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
-			And I click "Create" button
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Main Company'     |
-			And I select current line in "List" table
-		* Select Item
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I activate field named "ItemListItem" in "ItemList" table
-			And I select current line in "ItemList" table
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'       |
-			And I select current line in "List" table
-			And I finish line editing in "ItemList" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I select current line in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item key'  |
-				| 'XS/Blue' |
-			And I select current line in "List" table
-			And I finish line editing in "ItemList" table		
-		* Check filling in revenue type
-			And "ItemList" table became equal
-				| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
-				| 'Rent'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
-		* Reselect item
-			And I click Choice button of the field named "Company"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Second Company'     |
-			And I select current line in "List" table
-		* Check filling in revenue type
-			And "ItemList" table became equal
-				| 'Revenue type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
-				| 'Telephone communications' | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
+		When check filling revenue type (from item type)
 	And I close all client application windows					
+
+Scenario: _0202111 filling revenue type in the SR (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne SR
+		When check filling revenue type (from item type)
+	And I close all client application windows
+
+Scenario: _0202111 filling revenue type in the RSR (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne RSR
+		When check filling revenue type (from item type)
+	And I close all client application windows
+
+Scenario: _0202112 filling revenue type in the RRR (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne RSR
+		When check filling revenue type (from item type)
+	And I close all client application windows
+
+Scenario: _0202113 filling expence type in the PI (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne PI
+		When check filling expense type (from item type)
+	And I close all client application windows
+
+Scenario: _0202114 filling expence type in the PR (from item type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item type)
+	* Check in tne PR
+		When check filling expense type (from item type)
+	And I close all client application windows
+
+Scenario: _0202110 filling revenue type in the SI (from item)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne SI
+		When check filling revenue type (item)
+	And I close all client application windows					
+
+Scenario: _0202111 filling revenue type in the SR (from item)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne SR
+		When check filling revenue type (item)
+	And I close all client application windows
+
+Scenario: _0202111 filling revenue type in the RSR (from item)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne RSR
+		When check filling revenue type (item)
+	And I close all client application windows
+
+Scenario: _0202112 filling revenue type in the RRR (from)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne RSR
+		When check filling revenue type (item)
+	And I close all client application windows
+
+Scenario: _0202113 filling expence type in the PI (from item)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne PI
+		When check filling expense type (from item)
+	And I close all client application windows
+
+Scenario: _0202114 filling expence type in the PR (from item)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item)
+	* Check in tne PR
+		When check filling expense type (from item)
+	And I close all client application windows
+
+
+Scenario: _0202120 filling revenue type in the SI (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne SI
+		When check filling revenue type (item key)
+	And I close all client application windows					
+
+Scenario: _0202121 filling revenue type in the SR (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne SR
+		When check filling revenue type (item key)
+	And I close all client application windows
+
+Scenario: _0202122 filling revenue type in the RSR (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne RSR
+		When check filling revenue type (item key)
+	And I close all client application windows
+
+Scenario: _0202123 filling revenue type in the RRR (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne RSR
+		When check filling revenue type (item key)
+	And I close all client application windows
+
+Scenario: _0202124 filling expence type in the PI (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne PI
+		When check filling expense type (from item key)
+	And I close all client application windows
+
+Scenario: _0202125 filling expence type in the PR (from item key)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	* Load registers settings
+		When Create information register ExpenseRevenueTypeSettings records (item key)
+	* Check in tne PR
+		When check filling expense type (from item key)
+	And I close all client application windows
 
 
 Scenario: _999999 close TestClient session

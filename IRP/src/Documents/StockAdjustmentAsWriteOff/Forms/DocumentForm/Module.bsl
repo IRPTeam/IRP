@@ -127,7 +127,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListItemOnChange(Item)
-	DocStockAdjustmentAsWriteOffClient.ItemListItemOnChange(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.ItemListItemOnChange(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -146,7 +146,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
-	DocStockAdjustmentAsWriteOffClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.ItemListItemKeyOnChange(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -155,7 +155,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item)
-	DocStockAdjustmentAsWriteOffClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.ItemListQuantityOnChange(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -164,7 +164,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListUnitOnChange(Item)
-	DocStockAdjustmentAsWriteOffClient.ItemListUnitOnChange(Object, ThisObject, Item);
+	DocStockAdjustmentAsWriteOffClient.ItemListUnitOnChange(Object, ThisObject);
 EndProcedure
 
 #EndRegion

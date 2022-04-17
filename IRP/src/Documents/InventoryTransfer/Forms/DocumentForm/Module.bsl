@@ -1,12 +1,47 @@
-#Region FormEvents
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocInventoryTransferServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	DocInventoryTransferServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+	DocInventoryTransferServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+Procedure AfterWrite(WriteParameters)
+	DocInventoryTransferClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	DocInventoryTransferClient.OnOpen(Object, ThisObject, Cancel);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -22,47 +57,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability(Object, ThisObject);
-	EndIf;
-
-	DocInventoryTransferServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocInventoryTransferServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure OnOpen(Cancel)
-	DocInventoryTransferClient.OnOpen(Object, ThisObject, Cancel);
-EndProcedure
-
-&AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-	DocInventoryTransferServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-EndProcedure
-
-&AtClient
-Procedure AfterWrite(WriteParameters)
-	DocInventoryTransferClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
-EndProcedure
-
-&AtClient
-Procedure ItemListBeforeDeleteRow(Item, Cancel)
-	DocInventoryTransferClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
-EndProcedure
-
-&AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
-EndProcedure
-
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
@@ -76,74 +70,7 @@ EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure ItemListAfterDeleteRow(Item)
-	DocInventoryTransferClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	LockLinkedRows();
-EndProcedure
-
-&AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocInventoryTransferClient.ItemListOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
-	DocInventoryTransferClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocInventoryTransferClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemOnChange(Item)
-	DocInventoryTransferClient.ItemListItemOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemKeyOnChange(Item)
-	DocInventoryTransferClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListQuantityOnChange(Item)
-	DocInventoryTransferClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListUnitOnChange(Item)
-	DocInventoryTransferClient.ItemListUnitOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure OpenPickupItems(Command)
-	DocInventoryTransferClient.OpenPickupItems(Object, ThisObject, Command);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocInventoryTransferClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	DocInventoryTransferClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
-	DocInventoryTransferClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	DocInventoryTransferClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#Region ItemCompany
+#Region COMPANY
 
 &AtClient
 Procedure CompanyOnChange(Item)
@@ -162,58 +89,163 @@ EndProcedure
 
 #EndRegion
 
-#Region StoreInfo
+
+#Region STORE_TRANSIT
 
 &AtClient
 Procedure StoreTransitOnChange(Item)
 	DocInventoryTransferClient.StoreTransitOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region STORE_SENDER
+
 &AtClient
 Procedure StoreSenderOnChange(Item)
 	DocInventoryTransferClient.StoreSenderOnChange(Object, ThisObject, Item);
-	StoreSenderOnChangeAtServer();
 EndProcedure
 
-&AtServer
-Procedure StoreSenderOnChangeAtServer()
-	DocInventoryTransferServer.StoreSenderOnChange(Object);
-EndProcedure
+#EndRegion
+
+#Region STORE_RECEIVER
 
 &AtClient
 Procedure StoreReceiverOnChange(Item)
 	DocInventoryTransferClient.StoreReceiverOnChange(Object, ThisObject, Item);
-	StoreReceiverOnChangeAtServer();
-EndProcedure
-
-&AtServer
-Procedure StoreReceiverOnChangeAtServer()
-	DocInventoryTransferServer.StoreReceiverOnChange(Object);
-EndProcedure
-
-&AtClient
-Procedure UseShipmentConfirmationOnChange(Item)
-	CheckAndUpdateUseGRAtServer();
-EndProcedure
-
-&AtServer
-Procedure CheckAndUpdateUseGRAtServer()
-	DocInventoryTransferServer.CheckAndUpdateUseGR(Object);
-EndProcedure
-
-&AtClient
-Procedure UseGoodsReceiptOnChange(Item)
-	CheckAndUpdateUseGRAtServer();
 EndProcedure
 
 #EndRegion
+
+#Region USE_SHIPMENT_CONFIRMATION
+
+&AtClient
+Procedure UseShipmentConfirmationOnChange(Item)
+	DocInventoryTransferClient.UseShipmentConfirmationOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region USE_GOODS_RECEIPT
+
+&AtClient
+Procedure UseGoodsReceiptOnChange(Item)
+	DocInventoryTransferClient.UseGoodsReceiptOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST
+
+&AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocInventoryTransferClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocInventoryTransferClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocInventoryTransferClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocInventoryTransferClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
+EndProcedure
+
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	DocInventoryTransferClient.ItemListItemOnChange(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocInventoryTransferClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	DocInventoryTransferClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure ItemListItemKeyOnChange(Item)
+	DocInventoryTransferClient.ItemListItemKeyOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocInventoryTransferClient.ItemListQuantityOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocInventoryTransferClient.ItemListUnitOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region SERIAL_LOT_NUMBER
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
+	DocInventoryTransferClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	DocInventoryTransferClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocInventoryTransferClient);
+	Str.Insert("Server", DocInventoryTransferServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
 	DocInventoryTransferClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
-#Region GroupTitleDecorations
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -237,17 +269,7 @@ EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure SearchByBarcode(Command, Barcode = "")
-	DocInventoryTransferClient.SearchByBarcode(Barcode, Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure OpenScanForm(Command)
-	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
-EndProcedure
-
-#Region AddAttributes
+#Region ADD_ATTRIBUTES
 
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
@@ -261,12 +283,7 @@ EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure ShowRowKey(Command)
-	DocumentsClient.ShowRowKey(ThisObject);
-EndProcedure
-
-#Region ExternalCommands
+#Region EXTERNAL_COMMANDS
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -281,7 +298,31 @@ EndProcedure
 
 #EndRegion
 
-#Region LinkedDocuments
+#Region COMMANDS
+
+&AtClient
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocInventoryTransferClient.SearchByBarcode(Barcode, Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocInventoryTransferClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region LINKED_DOCUMENTS
 
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
@@ -298,29 +339,38 @@ Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_IT(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
 	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
 &AtClient
-Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
-	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
-	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, ThisObject);
+	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	If ExtractedData <> Undefined Then
+		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
+	EndIf;
 EndProcedure
 
 &AtServer
-Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	ExtractedData = Undefined;
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
 		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
-		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	EndIf;
 	LockLinkedRows();
-EndProcedure
+	Return ExtractedData;
+EndFunction
 
 &AtServer
 Procedure LockLinkedRows()
@@ -344,16 +394,6 @@ Procedure FromUnlockLinkedRows(Command)
 EndProcedure
 
 #EndRegion
-
-#Region Service
-
-&AtClient
-Function GetProcessingModule() Export
-	Str = New Structure;
-	Str.Insert("Client", DocInventoryTransferClient);
-	Str.Insert("Server", DocInventoryTransferServer);
-	Return Str;
-EndFunction
 
 &AtClient
 Procedure ShowHiddenTables(Command)

@@ -240,6 +240,8 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("Agreement"       , "SetAgreement");
 	SettersMap.Insert("ManagerSegment"  , "SetManagerSegment");
 	SettersMap.Insert("PriceIncludeTax" , "SetPriceIncludeTax");
+	SettersMap.Insert("StoreSender"     , "SetStoreSender");
+	SettersMap.Insert("StoreReceiver"   , "SetStoreReceiver");
 	
 	// PaymentList
 	SettersMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
@@ -278,11 +280,13 @@ EndProcedure
 
 Function GetAllBindings(Parameters)
 	BindingMap = New Map();
-	BindingMap.Insert("Company"   , BindCompany(Parameters));
-	BindingMap.Insert("Account"   , BindAccount(Parameters));
-	BindingMap.Insert("Partner"   , BindPartner(Parameters));
-	BindingMap.Insert("LegalName" , BindLegalName(Parameters));
-	BindingMap.Insert("Currency"  , BindCurrency(Parameters));
+	BindingMap.Insert("Company"       , BindCompany(Parameters));
+	BindingMap.Insert("Account"       , BindAccount(Parameters));
+	BindingMap.Insert("Partner"       , BindPartner(Parameters));
+	BindingMap.Insert("LegalName"     , BindLegalName(Parameters));
+	BindingMap.Insert("Currency"      , BindCurrency(Parameters));
+	BindingMap.Insert("StoreSender"   , BindStoreSender(Parameters));
+	BindingMap.Insert("StoreReceiver" , BindStoreReceiver(Parameters));
 	
 	BindingMap.Insert("ItemList.Item"     , BindItemListItem(Parameters));
 	BindingMap.Insert("ItemList.ItemKey"  , BindItemListItemKey(Parameters));
@@ -441,6 +445,7 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("RetailReturnReceipt"       , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("PurchaseReturn"            , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("SalesReturn"               , "StepExtractDataItemKeysWithSerialLotNumbers");
+	Binding.Insert("InventoryTransfer"         , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
 	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
@@ -2409,6 +2414,196 @@ EndProcedure
 
 #EndRegion
 
+#Region STORE_TRANSIT
+
+// StoreTransit.OnChange
+Procedure StoreTransitOnChange(Parameters) Export
+	AddViewNotify("OnSetStoreTransitNotify", Parameters);
+	Binding = BindStoreTransit(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// StoreTransit.Set
+Procedure SetStoreTransit(Parameters, Results) Export
+	Binding = BindStoreTransit(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetStoreTransitNotify");
+EndProcedure
+
+// StoreTransit.Bind
+Function BindStoreTransit(Parameters)
+	DataPath = "StoreTransit";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region STORE_SENDER
+
+// StoreSender.OnChange
+Procedure StoreSenderOnChange(Parameters) Export
+	AddViewNotify("OnSetStoreSenderNotify", Parameters);
+	Binding = BindStoreSender(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// StoreSender.Set
+Procedure SetStoreSender(Parameters, Results) Export
+	Binding = BindStoreSender(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetStoreSenderNotify");
+EndProcedure
+
+// StoreSender.Get
+Function GetStoreSender(Parameters)
+	Return GetPropertyObject(Parameters, BindStoreSender(Parameters).DataPath);
+EndFunction
+
+// StoreSender.Bind
+Function BindStoreSender(Parameters)
+	DataPath = "StoreSender";
+	Binding = New Structure();
+	Binding.Insert("InventoryTransfer", "StepChangeUseShipmentConfirmationByStoreSender");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region STORE_RECEIVER
+
+// StoreReceiver.OnChange
+Procedure StoreReceiverOnChange(Parameters) Export
+	AddViewNotify("OnSetStoreReceiverNotify", Parameters);
+	Binding = BindStoreReceiver(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// StoreReceiver.Set
+Procedure SetStoreReceiver(Parameters, Results) Export
+	Binding = BindStoreReceiver(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetStoreReceiverNotify");
+EndProcedure
+
+// StoreReceiver.Get
+Function GetStoreReceiver(Parameters)
+	Return GetPropertyObject(Parameters, BindStoreReceiver(Parameters).DataPath);
+EndFunction
+
+// StoreReceiver.Bind
+Function BindStoreReceiver(Parameters)
+	DataPath = "StoreReceiver";
+	Binding = New Structure();
+	Binding.Insert("InventoryTransfer", "StepChangeUseGoodsReceiptByStoreReceiver");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region USE_SHIPMENT_CONFIRMATION
+
+// UseShipmentConfirmation.OnChange
+Procedure UseShipmentConfirmationOnChange(Parameters) Export
+	Binding = BindUseShipmentConfirmation(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// UseShipmentConfirmation.Set
+Procedure SetUseShipmentConfirmation(Parameters, Results) Export
+	Binding = BindUseShipmentConfirmation(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// UseShipmentConfirmation.Get
+Function GetUseShipmentConfirmation(Parameters)
+	Return GetPropertyObject(Parameters, BindUseShipmentConfirmation(Parameters).DataPath);
+EndFunction
+
+// UseShipmentConfirmation.Bind
+Function BindUseShipmentConfirmation(Parameters)
+	DataPath = "UseShipmentConfirmation";
+	Binding = New Structure();
+	Binding.Insert("InventoryTransfer", "StepChangeUseGoodsReceiptByUseShipmentConfirmation");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// UseShipmentConfirmation.ChangeUseShipmentConfirmationByStoreSender.Step
+Procedure StepChangeUseShipmentConfirmationByStoreSender(Parameters, Chain) Export
+	Chain.ChangeUseShipmentConfirmationByStore.Enable = True;
+	Chain.ChangeUseShipmentConfirmationByStore.Setter = "SetUseShipmentConfirmation";
+	Options = ModelClientServer_V2.ChangeUseShipmentConfirmationByStoreOptions();
+	Options.Store   = GetStoreSender(Parameters);
+	Options.StepName = "StepChangeUseShipmentConfirmationByStoreSender";
+	Chain.ChangeUseShipmentConfirmationByStore.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region USE_GOODS_RECEIPT
+
+// UseGoodsReceipt.OnChange
+Procedure UseGoodsReceiptOnChange(Parameters) Export
+	Binding = BindUseGoodsReceipt(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// UseGoodsReceipt.Set
+Procedure SetUseGoodsReceipt(Parameters, Results) Export
+	Binding = BindUseGoodsReceipt(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);	
+EndProcedure
+
+// UseGoodsReceipt.Set.WithViewNotify
+Procedure SetUseGoodsReceipt_WithViewNotify(Parameters, Results) Export
+	Binding = BindUseGoodsReceipt(Parameters);
+	SetterObject("BindVoid", Binding.DataPath, Parameters, Results);
+	
+	// if this property set programmatically as tru, notify client for show user message
+	If Results[0].Options.ShowUserMessage = True Then
+		AddViewNotify("OnSetUseGoodsReceiptNotify_IsProgrammAsTrue", Parameters);
+	EndIf;
+EndProcedure
+
+// UseGoodsReceipt.Get
+Function GetUseGoodsReceipt(Parameters)
+	Return GetPropertyObject(Parameters, BindUseGoodsReceipt(Parameters).DataPath);
+EndFunction
+
+// UseGoodsReceipt.Bind
+Function BindUseGoodsReceipt(Parameters)
+	DataPath = "UseGoodsReceipt";
+	Binding = New Structure();
+	Binding.Insert("InventoryTransfer", "StepChangeUseGoodsReceiptByUseShipmentConfirmation");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// UseGoodsReceipt.ChangeUseGoodsReceiptByStoreReceiver.Step
+Procedure StepChangeUseGoodsReceiptByStoreReceiver(Parameters, Chain) Export
+	Chain.ChangeUseGoodsReceiptByStore.Enable = True;
+	Chain.ChangeUseGoodsReceiptByStore.Setter = "SetUseGoodsReceipt";
+	Options = ModelClientServer_V2.ChangeUseGoodsReceiptByStoreOptions();
+	Options.Store   = GetStoreReceiver(Parameters);
+	Options.StepName = "StepChangeUseGoodsReceiptByStoreReceiver";
+	Chain.ChangeUseGoodsReceiptByStore.Options.Add(Options);
+EndProcedure
+
+// UseGoodsReceipt.ChangeUseGoodsReceiptByUseShipmentConfirmation.Step
+Procedure StepChangeUseGoodsReceiptByUseShipmentConfirmation(Parameters, Chain) Export
+	Chain.ChangeUseGoodsReceiptByUseShipmentConfirmation.Enable = True;
+	Chain.ChangeUseGoodsReceiptByUseShipmentConfirmation.Setter = "SetUseGoodsReceipt_WithViewNotify";
+	Options = ModelClientServer_V2.ChangeUseGoodsReceiptByUseShipmentConfirmationOptions();
+	Options.UseShipmentConfirmation = GetUseShipmentConfirmation(Parameters);
+	Options.UseGoodsReceipt         = GetUseGoodsReceipt(Parameters);
+	Options.StoreSender             = GetStoreSender(Parameters);
+	Options.StoreReceiver           = GetStoreReceiver(Parameters);
+	Options.StepName = "StepChangeUseGoodsReceiptByUseShipmentConfirmation";
+	Chain.ChangeUseGoodsReceiptByUseShipmentConfirmation.Options.Add(Options);	
+EndProcedure
+
+#EndRegion
+
 #Region AGREEMENT
 
 // Agreement.OnChange
@@ -4052,6 +4247,8 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("SalesReturnOrder"          , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("SalesReturn"               , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("InternalSupplyRequest"     , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("InventoryTransfer"         , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("InventoryTransferOrder"    , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4109,6 +4306,13 @@ Function BindItemListItemKey(Parameters)
 	Binding.Insert("StockAdjustmentAsWriteOff",
 		"StepExtractDataItemKeysWithSerialLotNumbers,
 		|StepChangeUnitByItemKey");
+
+	Binding.Insert("InventoryTransfer",
+		"StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUnitByItemKey");
+	
+	Binding.Insert("InventoryTransferOrder",
+		"StepChangeUnitByItemKey");
 		
 	Binding.Insert("SalesOrder",
 		"StepItemListChangePriceTypeByAgreement,
@@ -5874,6 +6078,9 @@ EndFunction
 #IF Server THEN
 
 Function AddLinkedDocumentRows(Object, Form, LinkedResult, TableName) Export
+	If Not ValueIsFilled(LinkedResult) Then
+		Return Undefined;
+	EndIf;
 	FormParameters = GetFormParameters(Form);
 	ServerParameters = GetServerParameters(Object);
 	ServerParameters.TableName = TableName;

@@ -1,19 +1,4 @@
 
-Function GetLockFields(Data) Export
-	Result = New Structure();
-	Result.Insert("RegisterName", "AccumulationRegister.TM1010B_RowIDMovements");
-	Result.Insert("LockInfo", New Structure("Data, Fields", Data, PostingServer.GetLockFieldsMap(GetLockFieldNames())));
-	Return Result;
-EndFunction
-
-Function GetLockFieldNames() Export
-	Return "RowID, Step, Basis, RowRef";
-EndFunction
-
-Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Export
-	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.TM1010B_RowIDMovements", RecordType, AddInfo);
-EndFunction
-
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
 	Query = New Query();
 	Query.TempTablesManager = PostingServer.PrepareRecordsTables(GetLockFieldNames(), "RowID", ItemList_InDocument,

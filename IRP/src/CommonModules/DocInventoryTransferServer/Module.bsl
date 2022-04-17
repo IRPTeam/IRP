@@ -1,4 +1,4 @@
-#Region FormEvents
+#Region FORM
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
@@ -8,6 +8,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
+	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -25,27 +26,9 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
-Procedure StoreSenderOnChange(Object) Export
-	Object.UseShipmentConfirmation = Object.StoreSender.UseShipmentConfirmation;
-	CheckAndUpdateUseGR(Object);
-EndProcedure
-
-Procedure StoreReceiverOnChange(Object) Export
-	Object.UseGoodsReceipt = Object.StoreReceiver.UseGoodsReceipt;
-	CheckAndUpdateUseGR(Object);
-EndProcedure
-
-Procedure CheckAndUpdateUseGR(Object) Export
-	If Object.UseShipmentConfirmation And Not Object.UseGoodsReceipt And Not Object.StoreSender.isEmpty()
-		And Not Object.StoreReceiver.isEmpty() Then
-		Object.UseGoodsReceipt = True;
-		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_023, "Object.UseGoodsReceipt");
-	EndIf;
-EndProcedure
-
 #EndRegion
 
-#Region GroupTitle
+#Region TITLE_DECORATIONS
 
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
@@ -62,7 +45,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ListFormEvents
+#Region LIST_FORM
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
@@ -70,7 +53,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ChoiceFormEvents
+#Region CHOICE_FORM
 
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);

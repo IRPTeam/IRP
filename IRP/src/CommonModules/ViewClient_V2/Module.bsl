@@ -717,7 +717,8 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 			
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
@@ -746,7 +747,9 @@ Procedure OnOpenFormNotify(Parameters) Export
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	
@@ -802,7 +805,8 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
@@ -1556,7 +1560,11 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		ServerParameters = GetServerParameters(Object);
 		ServerParameters.TableName = TableName;
 		Parameters = GetParameters(ServerParameters, FormParameters);
-		OnSetStoreNotify(Parameters);
+		
+		If Not (Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder") Then
+			OnSetStoreNotify(Parameters);
+		EndIf;
 		
 		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
@@ -1596,6 +1604,79 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 				"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
 		EndIf;
 	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region STORE_TRANSIT
+
+Procedure StoreTransitOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.StoreTransitOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetStoreTransitNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region STORE_SENDER
+
+Procedure StoreSenderOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.StoreSenderOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetStoreSenderNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region STORE_RECEIVER
+
+Procedure StoreReceiverOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.StoreReceiverOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetStoreReceiverNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region USE_SHIPMENT_CONFIRMATION
+
+Procedure UseShipmentConfirmationOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.UseShipmentConfirmationOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region USE_GOODS_RECEIPT
+
+Procedure UseGoodsReceiptOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.UseGoodsReceiptOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetUseGoodsReceiptNotify_IsProgrammAsTrue(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_023, "Object.UseGoodsReceipt");
+	EndIf;
 EndProcedure
 
 #EndRegion

@@ -176,6 +176,8 @@ Function GetChain()
 	Chain.Insert("ChangeDeliveryDateInHeaderByDeliveryDateInList" , GetChainLink("ChangeDeliveryDateInHeaderByDeliveryDateInListExecute"));
 	Chain.Insert("ChangeUseShipmentConfirmationByStore" , GetChainLink("ChangeUseShipmentConfirmationByStoreExecute"));
 	Chain.Insert("ChangeUseGoodsReceiptByStore"         , GetChainLink("ChangeUseGoodsReceiptByStoreExecute"));
+	Chain.Insert("ChangeUseGoodsReceiptByUseShipmentConfirmation", GetChainLink("ChangeUseGoodsReceiptByUseShipmentConfirmationExecute"));
+	
 	Chain.Insert("ChangePriceTypeByAgreement"   , GetChainLink("ChangePriceTypeByAgreementExecute"));
 	Chain.Insert("ChangePriceTypeAsManual"      , GetChainLink("ChangePriceTypeAsManualExecute"));
 
@@ -1003,6 +1005,22 @@ Function ChangeOrderSchemeByStore(Options, ReceiptShipment)
 		Return Not StoreInfo.IsService And StoreInfo[ReceiptShipment];
 	EndIf;
 	Return StoreInfo[ReceiptShipment];
+EndFunction
+
+Function ChangeUseGoodsReceiptByUseShipmentConfirmationOptions() Export
+	Return GetChainLinkOptions("UseShipmentConfirmation, UseGoodsReceipt, StoreSender, StoreReceiver, ShowUserMessage");
+EndFunction
+
+Function ChangeUseGoodsReceiptByUseShipmentConfirmationExecute(Options) Export
+	If Options.UseShipmentConfirmation 
+		And Not Options.UseGoodsReceipt 
+		And ValueIsFilled(Options.StoreSender) 
+		And ValueIsFilled(Options.StoreReceiver) Then
+		Options.ShowUserMessage = True;
+		Return True;
+	Else
+		Return Options.UseGoodsReceipt;
+	EndIf;
 EndFunction
 
 Function FillStoresInListOptions() Export

@@ -7,94 +7,99 @@ Function GetArrayOfTaxInfo(Form) Export
 	Return New Array();
 EndFunction
 
-Function GetCalculateRowsActions() Export
-	Actions = New Structure();
-	Actions.Insert("CalculateTax");
-	Actions.Insert("CalculateTotalAmount");
-	Return Actions;
-EndFunction
+// @deprecated
+//Function GetCalculateRowsActions() Export
+//	Actions = New Structure();
+//	Actions.Insert("CalculateTax");
+//	Actions.Insert("CalculateTotalAmount");
+//	Return Actions;
+//EndFunction
 
-Function GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo) Export
-	ArrayOfTaxInfo = Undefined;
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	If ServerData = Undefined Then
-		If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
-			ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfo(Form);
-		EndIf;
-	Else
-		ArrayOfTaxInfo = ServerData.ArrayOfTaxInfo;
-	EndIf;
-	Return ArrayOfTaxInfo;
-EndFunction
+// @deprecated
+//Function GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo) Export
+//	ArrayOfTaxInfo = Undefined;
+//	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+//	If ServerData = Undefined Then
+//		If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
+//			ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfo(Form);
+//		EndIf;
+//	Else
+//		ArrayOfTaxInfo = ServerData.ArrayOfTaxInfo;
+//	EndIf;
+//	Return ArrayOfTaxInfo;
+//EndFunction
 
-Procedure CalculateReverseTaxOnChangeNetAmount(Object, Form, CurrentData, AddInfo = Undefined) Export
-	ArrayOfTaxInfo = GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo);
-	
-	ArrayRows = New Array();
-	ArrayRows.Add(CurrentData);
-	
-	Actions = New Structure();
-	Actions.Insert("CalculateTaxByNetAmount");
-	Actions.Insert("CalculateTotalAmountByNetAmount");
-	
-	CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayRows, Actions, ArrayOfTaxInfo, AddInfo);
-EndProcedure
+// @deprecated
+//Procedure CalculateReverseTaxOnChangeNetAmount(Object, Form, CurrentData, AddInfo = Undefined) Export
+//	ArrayOfTaxInfo = GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo);
+//	
+//	ArrayRows = New Array();
+//	ArrayRows.Add(CurrentData);
+//	
+//	Actions = New Structure();
+//	Actions.Insert("CalculateTaxByNetAmount");
+//	Actions.Insert("CalculateTotalAmountByNetAmount");
+//	
+//	CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayRows, Actions, ArrayOfTaxInfo, AddInfo);
+//EndProcedure
 
-Procedure CalculateReverseTaxOnChangeTotalAmount(Object, Form, CurrentData, AddInfo = Undefined) Export
-	ArrayOfTaxInfo = GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo);
+// @deprecated
+//Procedure CalculateReverseTaxOnChangeTotalAmount(Object, Form, CurrentData, AddInfo = Undefined) Export
+//	ArrayOfTaxInfo = GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo);
+//
+//	If Object.Property("PriceIncludeTax") And Object.PriceIncludeTax Then
+//		CalculationStringsClientServer.CalculateTaxReverse_PriceIncludeTax(Object, CurrentData, ArrayOfTaxInfo);
+//		CurrentData.Price = ?(CurrentData.Quantity = 0, 0, CurrentData.TotalAmount / CurrentData.Quantity);
+//	Else
+//		CalculationStringsClientServer.CalculateTaxReverse_PriceNotIncludeTax(Object, CurrentData, ArrayOfTaxInfo);
+//		If CurrentData.Property("Price") Then
+//			CurrentData.Price = ?(CurrentData.Quantity = 0, 0, (CurrentData.TotalAmount - CurrentData.TaxAmount) / CurrentData.Quantity);
+//		EndIf;
+//	EndIf;
+//
+//	ArrayRows = New Array();
+//	ArrayRows.Add(CurrentData);
+//	
+//	Actions = New Structure();
+//	Actions.Insert("CalculateNetAmountAsTotalAmountMinusTaxAmount");
+//	
+//	CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayRows, Actions, ArrayOfTaxInfo, AddInfo);
+//EndProcedure
 
-	If Object.Property("PriceIncludeTax") And Object.PriceIncludeTax Then
-		CalculationStringsClientServer.CalculateTaxReverse_PriceIncludeTax(Object, CurrentData, ArrayOfTaxInfo);
-		CurrentData.Price = ?(CurrentData.Quantity = 0, 0, CurrentData.TotalAmount / CurrentData.Quantity);
-	Else
-		CalculationStringsClientServer.CalculateTaxReverse_PriceNotIncludeTax(Object, CurrentData, ArrayOfTaxInfo);
-		If CurrentData.Property("Price") Then
-			CurrentData.Price = ?(CurrentData.Quantity = 0, 0, (CurrentData.TotalAmount - CurrentData.TaxAmount) / CurrentData.Quantity);
-		EndIf;
-	EndIf;
-
-	ArrayRows = New Array();
-	ArrayRows.Add(CurrentData);
-	
-	Actions = New Structure();
-	Actions.Insert("CalculateNetAmountAsTotalAmountMinusTaxAmount");
-	
-	CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayRows, Actions, ArrayOfTaxInfo, AddInfo);
-EndProcedure
-
-Procedure CalculateTaxOnChangeTaxValue(Object, Form, CurrentData, Item, AddInfo = Undefined) Export
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-
-	TaxRef = Undefined;
-	For Each ItemOfColumnsInfo In ServerData.ArrayOfTaxInfo Do
-		If ItemOfColumnsInfo.Name = Item.Name Then
-			TaxRef = ItemOfColumnsInfo.Tax;
-			Break;
-		EndIf;
-	EndDo;
-	If Not ValueIsFilled(TaxRef) Then
-		Raise StrTemplate(R().Error_042, Item.Name);
-	EndIf;
-
-	ArrayOfRowsTaxTable = Form.TaxesTable.FindRows(New Structure("Key, Tax", CurrentData.Key, TaxRef));
-	TaxTableRow = Undefined;
-	If ArrayOfRowsTaxTable.Count() = 0 Then
-		TaxTableRow = Form.TaxesTable.Add();
-	ElsIf ArrayOfRowsTaxTable.Count() = 1 Then
-		TaxTableRow = ArrayOfRowsTaxTable[0];
-	Else
-		Raise StrTemplate(R().Error_041, CurrentData.Key, TaxRef);
-	EndIf;
-	TaxTableRow.Key = CurrentData.Key;
-	TaxTableRow.Tax = TaxRef;
-	TaxTableRow.Value =  CurrentData[Item.Name];
-
-	ArrayRows = New Array();
-	ArrayRows.Add(CurrentData);
-
-	CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayRows,
-		New Structure("CalculateTax, CalculateTotalAmount, CalculateNetAmount"), ServerData.ArrayOfTaxInfo, AddInfo);
-EndProcedure
+// @deprecated
+//Procedure CalculateTaxOnChangeTaxValue(Object, Form, CurrentData, Item, AddInfo = Undefined) Export
+//	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+//
+//	TaxRef = Undefined;
+//	For Each ItemOfColumnsInfo In ServerData.ArrayOfTaxInfo Do
+//		If ItemOfColumnsInfo.Name = Item.Name Then
+//			TaxRef = ItemOfColumnsInfo.Tax;
+//			Break;
+//		EndIf;
+//	EndDo;
+//	If Not ValueIsFilled(TaxRef) Then
+//		Raise StrTemplate(R().Error_042, Item.Name);
+//	EndIf;
+//
+//	ArrayOfRowsTaxTable = Form.TaxesTable.FindRows(New Structure("Key, Tax", CurrentData.Key, TaxRef));
+//	TaxTableRow = Undefined;
+//	If ArrayOfRowsTaxTable.Count() = 0 Then
+//		TaxTableRow = Form.TaxesTable.Add();
+//	ElsIf ArrayOfRowsTaxTable.Count() = 1 Then
+//		TaxTableRow = ArrayOfRowsTaxTable[0];
+//	Else
+//		Raise StrTemplate(R().Error_041, CurrentData.Key, TaxRef);
+//	EndIf;
+//	TaxTableRow.Key = CurrentData.Key;
+//	TaxTableRow.Tax = TaxRef;
+//	TaxTableRow.Value =  CurrentData[Item.Name];
+//
+//	ArrayRows = New Array();
+//	ArrayRows.Add(CurrentData);
+//
+//	CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayRows,
+//		New Structure("CalculateTax, CalculateTotalAmount, CalculateNetAmount"), ServerData.ArrayOfTaxInfo, AddInfo);
+//EndProcedure
 
 Procedure ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo = Undefined) Export
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");

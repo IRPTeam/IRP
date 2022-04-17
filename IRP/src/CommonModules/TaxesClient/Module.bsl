@@ -1,8 +1,8 @@
 
 Function GetArrayOfTaxInfo(Form) Export
-	SavedData = TaxesClientServer.GetTaxesCache(Form);
-	If SavedData.Property("ArrayOfTaxInfo") Then
-		Return SavedData.ArrayOfTaxInfo;
+	TaxesCache = TaxesClientServer.GetTaxesCache(Form);
+	If TaxesCache.Property("ArrayOfTaxInfo") Then
+		Return TaxesCache.ArrayOfTaxInfo;
 	EndIf;
 	Return New Array();
 EndFunction
@@ -102,8 +102,10 @@ EndFunction
 //EndProcedure
 
 Procedure ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo = Undefined) Export
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	If ServerData.ArrayOfTaxInfo.Count() = 1 
+//	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+//	If ServerData.ArrayOfTaxInfo.Count() = 1 
+	ArrayOfTaxInfo = GetArrayOfTaxInfo(Form);
+	If ArrayOfTaxInfo.Count() = 1 
 		And Object.TaxList.FindRows(New Structure("Key", Parameters.CurrentData.Key)).Count() = 1 Then
 		Parameters.Field.ReadOnly  = False;
 	Else
@@ -115,11 +117,11 @@ Procedure ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo 
 		Else
 			MainTableData.Insert("Currency", Parameters.CurrentData.Currency);
 		EndIf;
-		OpenForm_ChangeTaxAmount(Object, Form, Parameters.Item, StandardProcessing, MainTableData, AddInfo);
+		OpenForm_ChangeTaxAmount(Object, Form, Parameters.Item, StandardProcessing, MainTableData);//, AddInfo);
 	EndIf;
 EndProcedure
 
-Procedure OpenForm_ChangeTaxAmount(Object, Form, Item, StandardProcessing, MainTableData, AddInfo = Undefined)
+Procedure OpenForm_ChangeTaxAmount(Object, Form, Item, StandardProcessing, MainTableData)//, AddInfo = Undefined)
 	StandardProcessing = False;
 
 	ArrayOfTaxListRows = New Array();
@@ -136,7 +138,7 @@ Procedure OpenForm_ChangeTaxAmount(Object, Form, Item, StandardProcessing, MainT
 	AdditionalParameters = New Structure();
 	AdditionalParameters.Insert("Object"        , Object);
 	AdditionalParameters.Insert("Form"          , Form);
-	AdditionalParameters.Insert("AddInfo"       , AddInfo);
+//	AdditionalParameters.Insert("AddInfo"       , AddInfo);
 	AdditionalParameters.Insert("MainTableData" , MainTableData);
 
 	Notify = New NotifyDescription("TaxEditContinue", ThisObject, AdditionalParameters);
@@ -149,16 +151,20 @@ Procedure TaxEditContinue(Result, AdditionalParameters) Export
 		Return;
 	EndIf;
 
-	UpdateTaxList(AdditionalParameters.Object, 
-				  AdditionalParameters.Form, 
-				  Result.Key, 
-				  Result.ArrayOfTaxListRows,
-		          AdditionalParameters.AddInfo);
-EndProcedure
+	Object = AdditionalParameters.Object;
+	Form   = AdditionalParameters.Form;
+	
+//	UpdateTaxList(AdditionalParameters.Object, 
+//				  AdditionalParameters.Form, 
+//				  Result.Key, 
+//				  Result.ArrayOfTaxListRows,
+//		          AdditionalParameters.AddInfo);
+//EndProcedure
 
-Procedure UpdateTaxList(Object, Form, Key, ArrayOfTaxListRows, AddInfo = Undefined) Export	
-	For Each Row In ArrayOfTaxListRows Do
-		TaxListRows = Object.TaxList.FindRows(New Structure("Key, Tax", Key, Row.Tax));
+//Procedure UpdateTaxList(Object, Form, Key, ArrayOfTaxListRows, AddInfo = Undefined) Export
+	
+	For Each Row In Result.ArrayOfTaxListRows Do
+		TaxListRows = Object.TaxList.FindRows(New Structure("Key, Tax", Result.Key, Row.Tax));
 		For Each TaxListRow In TaxListRows Do
 			TaxListRow.ManualAmount = Row.ManualAmount;
 		EndDo;	

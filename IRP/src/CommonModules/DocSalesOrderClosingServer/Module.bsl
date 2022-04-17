@@ -10,18 +10,19 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
-Procedure OnCreateAtServerMobile(Object, Form, Cancel, StandardProcessing) Export
-	If Form.Parameters.Key.IsEmpty() Then
-		Form.CurrentPartner = Object.Partner;
-		Form.CurrentAgreement = Object.Agreement;
-		Form.CurrentDate = Object.Date;
-
-		ObjectData = DocumentsClientServer.GetStructureFillStores();
-		FillPropertyValues(ObjectData, Object);
-		DocumentsClientServer.FillStores(ObjectData, Form);
-		DocumentsServer.FillItemList(Object);
-	EndIf;
-EndProcedure
+// @deprecated
+//Procedure OnCreateAtServerMobile(Object, Form, Cancel, StandardProcessing) Export
+//	If Form.Parameters.Key.IsEmpty() Then
+//		Form.CurrentPartner = Object.Partner;
+//		Form.CurrentAgreement = Object.Agreement;
+//		Form.CurrentDate = Object.Date;
+//
+//		ObjectData = DocumentsClientServer.GetStructureFillStores();
+//		FillPropertyValues(ObjectData, Object);
+//		DocumentsClientServer.FillStores(ObjectData, Form);
+//		DocumentsServer.FillItemList(Object);
+//	EndIf;
+//EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsServer.FillItemList(Object);
@@ -103,35 +104,39 @@ Function CheckItemList(Object) Export
 	Return StrTemplate(R().Error_064, Stores);
 EndFunction
 
-Function GetItemRowType(Item) Export
-	Return Item.ItemType.Type;
-EndFunction
+// @deprecated
+//Function GetItemRowType(Item) Export
+//	Return Item.ItemType.Type;
+//EndFunction
 
-Procedure StoreOnChange(TempStructure) Export
-	For Each Row In TempStructure.Object.ItemList Do
-		Row.Store = TempStructure.Store;
-	EndDo;
-EndProcedure
+// @deprecated
+//Procedure StoreOnChange(TempStructure) Export
+//	For Each Row In TempStructure.Object.ItemList Do
+//		Row.Store = TempStructure.Store;
+//	EndDo;
+//EndProcedure
 
-Function GetStoresArray(Val Object) Export
-	ReturnValue = New Array();
-	TableOfStore = Object.ItemList.Unload( , "Store");
-	TableOfStore.GroupBy("Store");
-	ReturnValue = TableOfStore.UnloadColumn("Store");
-	Return ReturnValue;
-EndFunction
+// @deprecated
+//Function GetStoresArray(Val Object) Export
+//	ReturnValue = New Array();
+//	TableOfStore = Object.ItemList.Unload( , "Store");
+//	TableOfStore.GroupBy("Store");
+//	ReturnValue = TableOfStore.UnloadColumn("Store");
+//	Return ReturnValue;
+//EndFunction
 
-Function GetActualStore(Object) Export
-	ReturnValue = Catalogs.Stores.EmptyRef();
-	If Object.ItemList.Count() = 1 Then
-		ReturnValue = Object.AgreementInfo.Store;
-	Else
-		RowCount = Object.ItemList.Count();
-		PreviousRow = Object.ItemList.Get(RowCount - 2);
-		ReturnValue = PreviousRow.Store;
-	EndIf;
-	Return ReturnValue;
-EndFunction
+// @deprecated
+//Function GetActualStore(Object) Export
+//	ReturnValue = Catalogs.Stores.EmptyRef();
+//	If Object.ItemList.Count() = 1 Then
+//		ReturnValue = Object.AgreementInfo.Store;
+//	Else
+//		RowCount = Object.ItemList.Count();
+//		PreviousRow = Object.ItemList.Get(RowCount - 2);
+//		ReturnValue = PreviousRow.Store;
+//	EndIf;
+//	Return ReturnValue;
+//EndFunction
 
 #Region ListFormEvents
 

@@ -191,6 +191,10 @@ EndProcedure
 &AtServer
 Procedure AddChild(MetaItem, AttributeChoiceList, DataType)
 
+	If MetaItem = Undefined Then
+		Return;
+	EndIf;
+	
 	If Not MetaItem[DataType].Count() Then
 		Return;
 	EndIf;

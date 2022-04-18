@@ -9,6 +9,7 @@ Background:
 	Given I open new TestClient session or connect the existing one
 
 Scenario: set True value to the constant (LC)
+	And Delay "10"
 	And I set "True" value to the constant "UseItemKey"
 	And I set "True" value to the constant "UseCompanies"
 

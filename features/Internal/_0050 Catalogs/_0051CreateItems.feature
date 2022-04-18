@@ -508,6 +508,61 @@ Scenario: _005116 filling in the "Items" catalog
 		| 'Bodie'       | 'Coat'      |
 		| 'Jeans'       | 'Jeans'     |
 
+Scenario: _005118 check filling in additional property for item
+	And I close all client application windows
+	* Opening the Item form
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bodie' |
+	* Filling additional property
+		And I click "Add properties" button
+		Then "Edit add properties" window is opened
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I click the button named "FormCreate"
+		And I input "Property 001" text in "ENG" field
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I input "Property 002" text in "ENG" field
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Property 001' |
+		And I click the button named "FormChoose"
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+	* Check
+		And "Properties" table became equal
+			| 'Property'    | 'Value'        |
+			| 'Property 01' | 'Property 001' |
+	* Refill property		
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
+			| 'Additional attribute' | 'Description'  |
+			| 'Property 01'          | 'Property 002' |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check saving
+		Then "Items" window is opened
+		And I click "Add properties" button
+		Then "Edit add properties" window is opened
+		And "Properties" table became equal
+			| 'Property'    | 'Value'        |
+			| 'Property 01' | 'Property 002' |
+		And I click "Save and close" button
+		
+				
+		
+				
+
+
+
+
 Scenario: _005117 filling in Item keys
 # Bodie, Shoes
 	And I close all client application windows

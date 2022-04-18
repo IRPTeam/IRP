@@ -10,7 +10,7 @@ I want to check the filling and refilling of returns
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _0299900 preparation (check filling in and refilling returns)

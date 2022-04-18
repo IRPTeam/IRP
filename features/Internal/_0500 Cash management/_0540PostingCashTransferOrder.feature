@@ -10,7 +10,7 @@ I want to transfer money from one account to another.
 For actual Cash/Bank accountsing
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 # The currency of reports is lira
 

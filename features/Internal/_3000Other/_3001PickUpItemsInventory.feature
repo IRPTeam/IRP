@@ -8,7 +8,7 @@ Feature: check form of selection of item in store documents
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _3001000 preparation

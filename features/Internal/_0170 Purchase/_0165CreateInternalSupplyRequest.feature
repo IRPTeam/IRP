@@ -11,7 +11,7 @@ For ordering items to the planning department (purchasing or transfer from the s
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

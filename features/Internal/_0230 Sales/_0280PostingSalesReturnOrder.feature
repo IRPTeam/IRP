@@ -11,7 +11,7 @@ To track a product that needs to be returned from customer
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _028000 preparation (Sales return order)

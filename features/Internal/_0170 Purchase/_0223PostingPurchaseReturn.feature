@@ -10,7 +10,7 @@ I want to create a Purchase return document
 To track a product that returned to the vendor
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _022300 preparation

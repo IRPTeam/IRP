@@ -10,7 +10,7 @@ I want to create a processing to download currency rates from external resources
 To upload currency rates to the base
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

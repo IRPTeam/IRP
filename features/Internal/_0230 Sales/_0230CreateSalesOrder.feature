@@ -12,7 +12,7 @@ I want to create a Sales order document
 To track the items ordered by the customer
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

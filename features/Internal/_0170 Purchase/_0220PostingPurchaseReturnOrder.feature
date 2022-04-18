@@ -10,7 +10,7 @@ I want to create a Purchase return order document
 To track a product that needs to be returned to the vendor
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

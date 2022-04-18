@@ -10,7 +10,7 @@ I want to put a price on the Item and the properties
 In order to have the same price applied to all item key of one Item, and also to be able to set prices for the properties of
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

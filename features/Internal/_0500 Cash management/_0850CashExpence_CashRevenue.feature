@@ -10,7 +10,7 @@ I want to create Cash revenue and Cash expence documents
 For write off expenses and record income directly to/from the account
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 # Cash revenue

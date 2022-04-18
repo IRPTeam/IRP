@@ -11,7 +11,7 @@ I want to create a basic system of discounts: price type discount, 5+1 type disc
 For calculating special offers in documents
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

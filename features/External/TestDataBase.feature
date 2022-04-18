@@ -7,7 +7,7 @@
 Feature: export scenarios
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 Scenario: Refill constants by value (test data base)
 	And I refill constant "SaasMode" by value "False"

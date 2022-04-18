@@ -7,7 +7,7 @@ Feature: check item unit form
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _206101 check item unit list form

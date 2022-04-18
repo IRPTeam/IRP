@@ -8,7 +8,7 @@ Feature: check filling in and refilling in documents forms + currency form conne
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 	

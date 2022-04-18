@@ -10,7 +10,7 @@ Feature: check Inventory transfer order movements
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _04027 preparation (Inventory transfer order)

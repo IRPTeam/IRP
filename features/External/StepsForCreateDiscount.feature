@@ -5,7 +5,7 @@
 Feature: export scenarios for special offers
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 Scenario: select the plugin to create the type of special offer 
 	Given I open hyperlink "e1cib/list/Catalog.SpecialOfferTypes"

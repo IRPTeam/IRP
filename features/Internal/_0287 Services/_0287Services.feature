@@ -10,7 +10,7 @@ I want to fill out the information on the services I received and which I provid
 For cost analysis
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

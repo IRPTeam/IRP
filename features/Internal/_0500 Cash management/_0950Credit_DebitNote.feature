@@ -10,7 +10,7 @@ I want to create a Credit_DebitNote document.
 For write-off of accounts receivable and payable
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

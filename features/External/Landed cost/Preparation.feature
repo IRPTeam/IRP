@@ -6,7 +6,7 @@
 Feature: export scenarios
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 Scenario: set True value to the constant (LC)
 	And I set "True" value to the constant "UseItemKey"

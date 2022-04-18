@@ -7,7 +7,7 @@ Feature: role Full access only read
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: 950000 preparation (role Full access only read)

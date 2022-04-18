@@ -8,7 +8,7 @@ Feature: check the cleaning of fields in forms of directories with switches (the
 
 
 Background:
-        Given I launch TestClient opening script or connect the existing one
+        Given I open new TestClient session or connect the existing one
         
 
 

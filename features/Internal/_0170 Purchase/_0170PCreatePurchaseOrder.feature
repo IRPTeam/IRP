@@ -10,7 +10,7 @@ I want to create a Purchase order document
 For tracking an item that has been ordered from a vendor
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 Scenario: _017000 preparation

@@ -12,7 +12,7 @@ So that discounts in the Minimal group are calculated by choosing the lowest dis
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 # Checking the discount calculation in the group Minimum created inside the group Minimum, which is in the group Maximum

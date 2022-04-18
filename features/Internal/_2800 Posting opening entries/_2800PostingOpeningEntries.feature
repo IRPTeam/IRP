@@ -10,7 +10,7 @@ I want to create a document to enter the opening balance
 To input the client's balance when you start working with the base
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

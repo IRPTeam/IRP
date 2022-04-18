@@ -10,7 +10,7 @@ I want to settle general Partner terms for all partners.
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

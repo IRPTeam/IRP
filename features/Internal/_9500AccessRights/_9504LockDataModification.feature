@@ -7,7 +7,7 @@ Feature: lock data modification
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 Scenario: 950400 preparation
 	And I close TestClient session

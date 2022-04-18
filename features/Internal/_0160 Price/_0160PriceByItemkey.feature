@@ -12,7 +12,7 @@ To sell and purchase goods and services
 
 
 Background:
-	Given I launch TestClient opening script or connect the existing one
+	Given I open new TestClient session or connect the existing one
 
 
 

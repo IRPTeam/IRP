@@ -1,8 +1,39 @@
 #Region FormEvents
 
 &AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocPhysicalInventoryServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+EndProcedure
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	DocPhysicalInventoryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+EndProcedure
+
+&AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	DocPhysicalInventoryServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocPhysicalInventoryClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	DocPhysicalInventoryClient.OnOpen(Object, ThisObject, Cancel);
+//	UpdateResponsibleView();
 EndProcedure
 
 &AtClient
@@ -26,36 +57,30 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocPhysicalInventoryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	Form.Items.SetResponsiblePerson.Visible = Object.UseResponsiblePersonByRow;
+	Form.Items.ItemListResponsiblePerson.Visible = Object.UseResponsiblePersonByRow;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST
 
 &AtClient
-Procedure AfterWrite(WriteParameters)
-	DocPhysicalInventoryClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocPhysicalInventoryClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocPhysicalInventoryServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-EndProcedure
 
-&AtClient
-Procedure OnOpen(Cancel)
-	DocPhysicalInventoryClient.OnOpen(Object, ThisObject, Cancel);
-	UpdateResponsibleView();
-EndProcedure
+#Region ITEM_LIST_COLUMNS
 
-&AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	DocPhysicalInventoryServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-EndProcedure
-
-&AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
-EndProcedure
+#EndRegion
 
 #EndRegion
 
@@ -77,26 +102,11 @@ Procedure ItemListOnStartEdit(Item, NewRow, Clone)
 	DocPhysicalInventoryClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
+#Region _ITEM
+
 &AtClient
 Procedure ItemListItemOnChange(Item)
-	DocPhysicalInventoryClient.ItemListItemOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemKeyOnChange(Item)
-	CurrentRow = Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
-EndProcedure
-
-&AtClient
-Procedure OpenPickupItems(Command)
-	DocPhysicalInventoryClient.OpenPickupItems(Object, ThisObject, Command);
+	DocPhysicalInventoryClient.ItemListItemOnChange(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -108,6 +118,32 @@ EndProcedure
 Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocPhysicalInventoryClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure ItemListItemKeyOnChange(Item)
+	DocPhysicalInventoryClient.ItemListItemKeyOnChange(Object, ThisObject);
+	
+//	CurrentRow = Items.ItemList.CurrentData;
+//	If CurrentRow = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	CalculationSettings = New Structure();
+//	CalculationSettings.Insert("UpdateUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+EndProcedure
+
+#EndRegion
+
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocPhysicalInventoryClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
 
 &AtClient
 Procedure StoreOnChange(Item)
@@ -163,10 +199,6 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocPhysicalInventoryClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
-&AtClient
-Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
-	DocPhysicalInventoryClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
 
 &AtClient
 Procedure SetResponsiblePerson(Command)
@@ -254,11 +286,6 @@ EndProcedure
 
 #Region Privat
 
-&AtClient
-Procedure UpdateResponsibleView()
-	Items.SetResponsiblePerson.Visible = Object.UseResponsiblePersonByRow;
-	Items.ItemListResponsiblePerson.Visible = Object.UseResponsiblePersonByRow;
-EndProcedure
 
 &AtServer
 Procedure UpdatePhysicalCountsByLocations()

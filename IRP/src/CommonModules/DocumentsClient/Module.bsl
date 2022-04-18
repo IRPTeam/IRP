@@ -1405,6 +1405,12 @@ Function PickupItemsParameters(Object, Form)
 		EndIf;
 	EndIf;
 	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreReceiver") Then
+		ArrayOfReceiverStores = New Array();
+		ArrayOfReceiverStores.Add(Object.StoreReceiver);
+		ReturnValue.Insert("ReceiverStores", ArrayOfReceiverStores);
+	EndIf;
+	
 	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then

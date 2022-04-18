@@ -1399,6 +1399,12 @@ Function PickupItemsParameters(Object, Form)
 		EndIf;
 	EndIf;
 	
+	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreSender") Then
+		If ValueIsFilled(Object.StoreSender) Then
+			StoreArray.Add(Object.StoreSender);
+		EndIf;
+	EndIf;
+	
 	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then

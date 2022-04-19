@@ -15,7 +15,7 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Unde
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
-Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
 	If Upper(Field.Name) = Upper("ItemListPhysicalCountByLocationPresentation") Then
 		CurrentData = Form.Items.ItemList.CurrentData;
 		If CurrentData = Undefined Then
@@ -28,7 +28,7 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 		EndIf;
 	EndIf;
 	
-	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo);
+	ViewClient_V2.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export

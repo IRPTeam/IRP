@@ -86,18 +86,8 @@ EndProcedure
 
 #Region PAYMENT_LIST
 
-Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
-	If Upper(Field.Name) = Upper("PaymentListTaxAmount") Then
-		CurrentData = Form.Items.PaymentList.CurrentData;
-		If CurrentData <> Undefined Then
-			DocumentsClient.ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo);
-			Parameters = New Structure();
-			Parameters.Insert("CurrentData", CurrentData);
-			Parameters.Insert("Item", Item);
-			Parameters.Insert("Field", Field);
-			TaxesClient.ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo);
-		EndIf;
-	EndIf;
+Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ViewClient_V2.PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export

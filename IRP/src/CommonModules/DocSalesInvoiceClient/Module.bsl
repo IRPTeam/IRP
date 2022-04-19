@@ -213,19 +213,8 @@ EndProcedure
 
 #Region ITEM_LIST
 
-Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
-	If Upper(Field.Name) = Upper("ItemListTaxAmount") Then
-		CurrentData = Form.Items.ItemList.CurrentData;
-		If CurrentData <> Undefined Then
-			DocumentsClient.ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo);
-			Parameters = New Structure();
-			Parameters.Insert("CurrentData", CurrentData);
-			Parameters.Insert("Item", Item);
-			Parameters.Insert("Field", Field);
-			TaxesClient.ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo);
-		EndIf;
-	EndIf;
-	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo);
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ViewClient_V2.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export

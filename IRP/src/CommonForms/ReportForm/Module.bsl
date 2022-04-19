@@ -33,7 +33,7 @@ EndProcedure
 #Region Commands
 
 &AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
+Procedure GeneratedFormCommandActionByName(Command)
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Report, ThisObject, Command.Name);
 	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure

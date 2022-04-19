@@ -10,14 +10,14 @@ EndProcedure
 #Region Commands
 
 &AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
+Procedure GeneratedFormCommandActionByName(Command)
 	SelectedRows = Items.List.SelectedRows;
 	ExternalCommandsClient.GeneratedListChoiceFormCommandActionByName(SelectedRows, ThisObject, Command.Name);
 	GeneratedFormCommandActionByNameServer(Command.Name, SelectedRows);
 EndProcedure
 
 &AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName, SelectedRows) Export
+Procedure GeneratedFormCommandActionByNameServer(CommandName, SelectedRows)
 	ExternalCommandsServer.GeneratedListChoiceFormCommandActionByName(SelectedRows, ThisObject, CommandName);
 EndProcedure
 

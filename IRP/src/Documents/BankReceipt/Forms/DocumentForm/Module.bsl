@@ -461,7 +461,7 @@ Procedure GeneratedFormCommandActionByName(Command)
 EndProcedure
 
 &AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+Procedure GeneratedFormCommandActionByNameServer(CommandName)
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
 

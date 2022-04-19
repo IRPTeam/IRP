@@ -39,7 +39,7 @@ Procedure GeneratedFormCommandActionByName(Command)
 EndProcedure
 
 &AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+Procedure GeneratedFormCommandActionByNameServer(CommandName)
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Report, ThisObject, CommandName);
 EndProcedure
 

@@ -7,7 +7,13 @@
     "module-accessibility-at-client": {
       "enabled": false
     },
+    "common-module-name-client-server": {
+      "enabled": false
+    },
     "right-administration": {
+      "enabled": false
+    },
+    "common-module-name-server-call-cached": {
       "enabled": false
     },
     "common-module-type": {
@@ -16,10 +22,19 @@
     "right-configuration-extensions-administration": {
       "enabled": false
     },
+    "common-module-name-client-cached": {
+      "enabled": false
+    },
     "right-start-automation": {
       "enabled": false
     },
+    "common-module-name-client": {
+      "enabled": false
+    },
     "form-named-element-name": {
+      "enabled": false
+    },
+    "common-module-name-cached": {
       "enabled": false
     },
     "right-interactive-delete": {
@@ -83,6 +98,9 @@
       "enabled": false
     },
     "right-all-functions-mode": {
+      "enabled": false
+    },
+    "common-module-name-server-call": {
       "enabled": false
     },
     "right-start-web-client": {

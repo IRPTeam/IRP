@@ -42,36 +42,6 @@ Procedure DateOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-#Region PickUpItems
-
-Procedure OpenPickupItems(Object, Form, Command) Export
-	DocumentsClient.OpenPickupItems(Object, Form, Command);
-EndProcedure
-
-Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") Or Not AdditionalParameters.Property(
-		"Form") Then
-		Return;
-	EndIf;
-
-	FilterString = "Item, ItemKey, Unit";
-	FilterStructure = New Structure(FilterString);
-	For Each ResultElement In Result Do
-		FillPropertyValues(FilterStructure, ResultElement);
-		ExistingRows = AdditionalParameters.Object.ItemList.FindRows(FilterStructure);
-		If ExistingRows.Count() Then
-			Row = ExistingRows[0];
-		Else
-			Row = AdditionalParameters.Object.ItemList.Add();
-			FillPropertyValues(Row, ResultElement, FilterString);
-		EndIf;
-		Row.Quantity = Row.Quantity + ResultElement.Quantity;
-	EndDo;
-	ItemListOnChange(AdditionalParameters.Object, AdditionalParameters.Form, Undefined, Undefined);
-EndProcedure
-
-#EndRegion
-
 #Region FormTableItemsEventHandlers
 #Region ItemList
 

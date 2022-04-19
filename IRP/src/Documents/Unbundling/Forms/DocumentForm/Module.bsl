@@ -48,7 +48,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocUnbundlingClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 #EndRegion

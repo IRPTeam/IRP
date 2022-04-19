@@ -461,7 +461,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocSalesReturnOrderClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient

@@ -110,11 +110,3 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
-#Region SERVICE
-
-Procedure OpenPickupItems(Object, Form, Command) Export
-	DocumentsClient.OpenPickupItems(Object, Form, Command);
-EndProcedure
-
-#EndRegion

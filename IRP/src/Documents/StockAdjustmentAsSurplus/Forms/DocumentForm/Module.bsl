@@ -279,7 +279,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocStockAdjustmentAsSurplusClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient

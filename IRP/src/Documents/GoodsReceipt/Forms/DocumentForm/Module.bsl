@@ -342,7 +342,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocGoodsReceiptClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient

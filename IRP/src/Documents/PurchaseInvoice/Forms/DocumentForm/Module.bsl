@@ -532,7 +532,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocPurchaseInvoiceClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient

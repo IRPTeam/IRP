@@ -243,7 +243,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocInternalSupplyRequestClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient

@@ -399,7 +399,30 @@ Scenario: _300115 check removal of pictures from Item
 			| 'Owner'    | 'File'          |
 			| 'Dress'    | 'dressblue.jpg' |
 	And I close all client application windows
+
+Scenario: _300116 check download pictures from Item
+		And I close all client application windows
+	* Open Item list form
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Dress'        |
+		And I select current line in "List" table
+	* Download picture
+		And I click "Attached files" button
+		Then "Attach file" window is opened
+		And I click "Download file" button
+		Then "Get file" window is opened
+		// And I click "Save" button
+		// Given I press ENTER
+		Then user message window does not contain messages
+		And I close all client application windows
 		
+				
+		
+		
+				
+
 
 // Scenario: _300150 removal of unused elements of the Files catalog
 // 	* Open catalog Files

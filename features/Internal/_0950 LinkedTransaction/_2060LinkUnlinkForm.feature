@@ -1873,7 +1873,9 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			| '3' | 'en description is empty' | 'Phone A' | 'Brown'    | ''                   | 'No'                 | '90,00'      | 'pcs'  | '13456778'           | '1,000' | '500,00' | '18%' | ''              | '590,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '500,00'     | 'Yes'               |
 			| '4' | 'en description is empty' | 'Router'  | 'Router'   | ''                   | 'No'                 | '18,00'      | 'pcs'  | ''                   | '1,000' | '100,00' | '18%' | ''              | '118,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '100,00'     | 'Yes'               |
 		And I close all client application windows
-	
+
+
+
 Scenario: _2060020 check button Show quantity in base unit in the Link form
 	And I close all client application windows
 	* Open form for create SC
@@ -1967,7 +1969,78 @@ Scenario: _2060020 check button Show quantity in base unit in the Link form
 			| 'Dress (XS/Blue)'  | 'box Dress (8 pcs)' | '2,000'    | 'pcs'          | '16,000'           | 'Store 01' |
 		And I close all client application windows
 			
+Scenario: _2060021 check button	Select all/ Uncheck all in the Add linked documents rows
+		And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		Then "Sales invoices" window is opened
+		And I go to line in "List" table
+			| 'Date'                | 'Number' |
+			| '05.03.2021 12:57:59' | '102'    |
+		And I click the button named "FormDocumentSalesReturnGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+	* Check Add linked documents rows
+		And "BasisesTree" table became equal
+			| 'Row presentation'                            | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                             | 'Yes' | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |
+			| 'Dress (M/White)'                             | 'Yes' | '2,000'    | 'pcs'  | '520,00' | 'TRY'      |
+	* Check Uncheck all
+		And I click "Uncheck all" button
+		And "BasisesTree" table became equal
+			| 'Row presentation'                            | 'Use'| 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'No' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                             | 'No' | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |
+			| 'Dress (M/White)'                             | 'No' | '2,000'    | 'pcs'  | '520,00' | 'TRY'      |
+	* Check Check all
+		And I click "Check all" button
+		And "BasisesTree" table became equal
+			| 'Row presentation'                            | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                             | 'Yes' | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |
+			| 'Dress (M/White)'                             | 'Yes' | '2,000'    | 'pcs'  | '520,00' | 'TRY'      |
+		And I close all client application windows
+			
+Scenario: _2060022 check button	Show row key in the Add linked documents rows
+		And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		Then "Sales invoices" window is opened
+		And I go to line in "List" table
+			| 'Date'                | 'Number' |
+			| '05.03.2021 12:57:59' | '102'    |
+		And I click the button named "FormDocumentSalesReturnGenerate"
+		Then "Add linked document rows" window is opened
+		And I click "Ok" button
+		And in the table "ItemList" I click "Add basis documents" button
+		And I expand current line in "BasisesTree" table
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                            | 'Use' |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'No'  |		
+	* Check button Show row key	
+		And I click "Show row key" button
+		And "ResultsTable" table became equal
+			| 'Item'  | 'Item key' | 'Store'    | 'Key'                                  | 'Basis'                                       | 'Unit' | 'Basis unit' | 'Quantity in base unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
+			| 'Boots' | '37/18SD'  | 'Store 01' | 'c6dc7512-eebf-42f2-bd80-f3b5b339f3b8' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | '1,000'                 | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
+			| 'Dress' | 'M/White'  | 'Store 01' | 'c84f01e0-32c0-4130-81e2-48a824edd89b' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''     | 'pcs'        | '2,000'                 | 'SRO&SR'       | '*'       | ''             | '*'      | '*'         |
+		And I click "Cancel" button
+		Then user message window does not contain messages
 		
+				
+		
+				
+		
+				
+		
+		
+							
+		
+		
+				
+		
+				
+
 		
 				
 

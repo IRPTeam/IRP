@@ -346,19 +346,6 @@ EndProcedure
 
 #EndRegion
 
-#Region SERIAL_LOT_NUMBERS
-
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
-	DocumentsClient.ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo);
-	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo);
-EndProcedure
-
-Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
-	SerialLotNumberClient.PresentationClearing(Object, Form, Item, AddInfo);
-EndProcedure
-
-#EndRegion
-
 #Region EXPENSE_TYPE
 
 Procedure ItemListExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

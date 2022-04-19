@@ -194,19 +194,6 @@ EndProcedure
 
 #EndRegion
 
-#Region SERIAL_LOT_NUMBERS
-
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	DocumentsClient.ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form);
-	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, StandardProcessing) Export
-	SerialLotNumberClient.PresentationClearing(Object, Form, Item);
-EndProcedure
-
-#EndRegion
-
 #EndRegion
 
 #EndRegion

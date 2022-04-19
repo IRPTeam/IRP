@@ -172,15 +172,13 @@ EndProcedure
 #Region SERIAL_LOT_NUMBERS
 
 &AtClient
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
-	DocStockAdjustmentAsWriteOffClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item,
-		ChoiceData, StandardProcessing);
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
+	SerialLotNumberClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	DocStockAdjustmentAsWriteOffClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item,
-		StandardProcessing);
+	SerialLotNumberClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion

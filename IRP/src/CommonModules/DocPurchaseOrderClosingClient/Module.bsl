@@ -357,39 +357,10 @@ EndProcedure
 
 #EndRegion
 
-#Region TITLE_DECORATIONS
-
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
-
 #Region PICK_UP_ITEMS
 
 Procedure OpenPickupItems(Object, Form, Command) Export
 	DocumentsClient.OpenPickupItems(Object, Form, Command);
-EndProcedure
-
-Procedure SearchByBarcode(Barcode, Object, Form) Export
-	PriceType = PredefinedValue("Catalog.PriceKeys.EmptyRef");
-	If ValueIsFilled(Object.Agreement) Then
-		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
-		PriceType = AgreementInfo.PriceType;
-	EndIf;
-	DocumentsClient.SearchByBarcode(Barcode, Object, Form, , PriceType);
 EndProcedure
 
 #EndRegion

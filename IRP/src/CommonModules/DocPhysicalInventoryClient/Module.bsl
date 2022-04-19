@@ -122,31 +122,6 @@ Procedure StoreOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
-	StandardProcessing = False;
-	CommonFormActions.EditMultilineText(Item.Name, Form);
-EndProcedure
-
-#Region GroupTitleDecorationsEvents
-
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
-
 #Region CreatePhysicalCount
 Procedure CreatePhysicalCount(ObjectRef) Export
 	CountDocsToCreate = 0;
@@ -174,10 +149,6 @@ Procedure CreatePhysicalCountEnd(CountDocsToCreate, AdditionalParameters) Export
 
 EndProcedure
 #EndRegion
-
-Procedure SearchByBarcode(Barcode, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
-EndProcedure
 
 Procedure FillExpCount(Object, Form) Export
 

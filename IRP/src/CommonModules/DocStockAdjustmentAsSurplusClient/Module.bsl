@@ -126,36 +126,7 @@ EndProcedure
 
 #EndRegion
 
-#Region TITLE_DECORATIONS
-
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
-
 #Region SERVICE
-
-Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
-	StandardProcessing = False;
-	CommonFormActions.EditMultilineText(Item.Name, Form);
-EndProcedure
-
-Procedure SearchByBarcode(Barcode, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
-EndProcedure
 
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") 

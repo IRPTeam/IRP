@@ -893,7 +893,8 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
 				ServerData = New Structure("ServerData", New Structure());

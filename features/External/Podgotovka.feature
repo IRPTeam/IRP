@@ -1333,7 +1333,6 @@ Scenario: create PurchaseReturn300301
 
 
 Scenario: set True value to the constant
-		And Delay "10"
 		And I set "True" value to the constant "UseItemKey"
 		And I set "True" value to the constant "UseCompanies"
 

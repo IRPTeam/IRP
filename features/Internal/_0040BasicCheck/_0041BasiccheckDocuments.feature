@@ -9,7 +9,6 @@ I want to check opening and closing of documents forms
 
 Background:
 	Given I open new TestClient session or connect the existing one
-	And Delay "10"
 	And I set "True" value to the constant "UseItemKey"
 	And I set "True" value to the constant "UseCompanies"
 

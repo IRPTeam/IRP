@@ -1,6 +1,8 @@
-Procedure EditMultilineText(ItemName, Form, AddInfo = Undefined) Export
-	OpenForm("CommonForm.EditMultilineText", New Structure("ItemName", ItemName), Form, , , ,
-		New NotifyDescription("OnEditedMultilineTextEnd", ThisObject, New Structure("Form, ItemName", Form, ItemName)),
+
+Procedure EditMultilineText(Form, Item, StandardProcessing) Export
+	StandardProcessing = False;
+	OpenForm("CommonForm.EditMultilineText", New Structure("ItemName", Item.Name), Form, , , ,
+		New NotifyDescription("OnEditedMultilineTextEnd", ThisObject, New Structure("Form, ItemName", Form, Item.Name)),
 		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

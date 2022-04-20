@@ -221,7 +221,7 @@ Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undef
 	EndIf;
 EndProcedure
 
-Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
 	If Upper(Field.Name) = Upper("ItemListIsInternalLinked") 
 		Or Upper(Field.Name) = Upper("ItemListIsExternalLinked") Then
 		CurrentData = Form.Items.ItemList.CurrentData;

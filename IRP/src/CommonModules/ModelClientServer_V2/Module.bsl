@@ -164,8 +164,10 @@ Function GetChain()
 	
 	Chain.Insert("FillByCashTransferOrder" , GetChainLink("FillByCashTransferOrderExecute"));
 	
-	Chain.Insert("ChangeItemKeyByItem"    , GetChainLink("ChangeItemKeyByItemExecute"));
-	//Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
+	Chain.Insert("ChangeItemByPartnerItem" , GetChainLink("ChangeItemByPartnerItemExecute"));
+	Chain.Insert("ChangeItemKeyByItem"     , GetChainLink("ChangeItemKeyByItemExecute"));
+	Chain.Insert("ChangeProcurementMethodByItemKey" , GetChainLink("ChangeProcurementMethodByItemKeyExecute"));
+	
 	Chain.Insert("ChangeCurrencyByAccount", GetChainLink("ChangeCurrencyByAccountExecute"));
 	Chain.Insert("ChangePlanningTransactionBasisByCurrency", GetChainLink("ChangePlanningTransactionBasisByCurrencyExecute"));
 	Chain.Insert("FillStoresInList"       , GetChainLink("FillStoresInListExecute"));
@@ -174,12 +176,14 @@ Function GetChain()
 	Chain.Insert("ChangeDeliveryDateInHeaderByDeliveryDateInList" , GetChainLink("ChangeDeliveryDateInHeaderByDeliveryDateInListExecute"));
 	Chain.Insert("ChangeUseShipmentConfirmationByStore" , GetChainLink("ChangeUseShipmentConfirmationByStoreExecute"));
 	Chain.Insert("ChangeUseGoodsReceiptByStore"         , GetChainLink("ChangeUseGoodsReceiptByStoreExecute"));
+	Chain.Insert("ChangeUseGoodsReceiptByUseShipmentConfirmation", GetChainLink("ChangeUseGoodsReceiptByUseShipmentConfirmationExecute"));
+	
 	Chain.Insert("ChangePriceTypeByAgreement"   , GetChainLink("ChangePriceTypeByAgreementExecute"));
 	Chain.Insert("ChangePriceTypeAsManual"      , GetChainLink("ChangePriceTypeAsManualExecute"));
-	//---
+
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
 	
-	Chain.Insert("ChangePriceByPriceType"       , GetChainLink("ChangePriceByPriceTypeExecute"));
+	Chain.Insert("ChangePriceByPriceType"        , GetChainLink("ChangePriceByPriceTypeExecute"));
 	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
 	Chain.Insert("RequireCallCreateTaxesFormControls", GetChainLink("RequireCallCreateTaxesFormControlsExecute"));
 	Chain.Insert("ChangeTaxRate", GetChainLink("ChangeTaxRateExecute"));
@@ -561,6 +565,9 @@ Function ChangeCurrencyByAgreementOptions() Export
 EndFunction
 
 Function ChangeCurrencyByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentCurrency;
+	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If ValueIsFilled(AgreementInfo.Currency) Then
 		Return AgreementInfo.Currency;
@@ -611,6 +618,9 @@ Function ChangeCompanyByAgreementOptions() Export
 EndFunction
 
 Function ChangeCompanyByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentCompany;
+	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If ValueIsFilled(AgreementInfo.Company) Then
 		Return AgreementInfo.Company;
@@ -623,10 +633,13 @@ EndFunction
 #Region CHANGE_PRICE_INCLUDE_TAX_BY_AGREEMENT
 
 Function ChangePriceIncludeTaxByAgreementOptions() Export
-	Return GetChainLinkOptions("Agreement");
+	Return GetChainLinkOptions("Agreement, CurrentPriceIncludeTax");
 EndFunction
 
 Function ChangePriceIncludeTaxByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentPriceIncludeTax;
+	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	Return AgreementInfo.PriceIncludeTax;
 EndFunction
@@ -636,11 +649,15 @@ EndFunction
 #Region CHANGE_PRICE_TYPE_BY_AGREEMENT
 
 Function ChangePriceTypeByAgreementOptions() Export
-	Return GetChainLinkOptions("Agreement");
+	Return GetChainLinkOptions("Agreement, CurrentPriceType");
 EndFunction
 
 Function ChangePriceTypeByAgreementExecute(Options) Export
-	Return CatAgreementsServer.GetAgreementInfo(Options.Agreement).PriceType;
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentPriceType;
+	EndIf;
+	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+	Return AgreementInfo.PriceType;
 EndFunction
 
 #EndRegion
@@ -696,6 +713,9 @@ Function ChangeStoreByAgreementOptions() Export
 EndFunction
 
 Function ChangeStoreByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentStore;
+	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If ValueIsFilled(AgreementInfo.Store)  Then
 		Return AgreementInfo.Store;
@@ -712,6 +732,9 @@ Function ChangeDeliveryDateByAgreementOptions() Export
 EndFunction
 
 Function ChangeDeliveryDateByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentDeliveryDate;
+	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
 	If ValueIsFilled(AgreementInfo.DeliveryDate)  Then
 		Return AgreementInfo.DeliveryDate;
@@ -741,6 +764,36 @@ EndFunction
 
 Function ChangeRevenueTypeByItemKeyExecute(Options) Export
 	Return CatExpenseAndRevenueTypesServer.GetRevenueType(Options.Company, Options.ItemKey);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_ITEM_BY_PARTNER_ITEM
+
+Function ChangeItemByPartnerItemOptions() Export
+	Return GetChainLinkOptions("PartnerItem");
+EndFunction
+
+Function ChangeItemByPartnerItemExecute(Options) Export
+	Return DocumentsServer.GetItemAndItemKeyByPartnerItem(Options.PartnerItem);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PROCUREMENT_METHOD_BY_ITEM_KEY
+
+Function ChangeProcurementMethodByItemKeyOptions() Export
+	Return GetChainLinkOptions("ProcurementMethod, ItemKey");
+EndFunction
+
+Function ChangeProcurementMethodByItemKeyExecute(Options) Export
+	If ValueIsFilled(Options.ProcurementMethod) Then
+		Return Options.ProcurementMethod;
+	EndIf;
+	If CatItemsServer.StoreMustHave(Options.ItemKey) Then
+		Return PredefinedValue("Enum.ProcurementMethods.Stock");
+	EndIf;
+	Return PredefinedValue("Enum.ProcurementMethods.EmptyRef");
 EndFunction
 
 #EndRegion
@@ -898,7 +951,7 @@ Function DefaultStoreInHeaderExecute(Options) Export
 EndFunction
 
 Function DefaultStoreInListOptions() Export
-	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement");
+	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement, StoreInPreviousRow");
 EndFunction
 
 // fill store in tabular part ItemList by default
@@ -909,6 +962,10 @@ Function DefaultStoreInListExecute(Options) Export
 	
 	If ValueIsFilled(Options.StoreInHeader) Then
 		Return Options.StoreInHeader; // store for document header
+	EndIf;
+	
+	If ValueIsFilled(Options.StoreInPreviousRow) Then
+		Return Options.StoreInPreviousRow; // store from previous row
 	EndIf;
 	
 	If ValueIsFilled(Options.Agreement) Then
@@ -948,6 +1005,22 @@ Function ChangeOrderSchemeByStore(Options, ReceiptShipment)
 		Return Not StoreInfo.IsService And StoreInfo[ReceiptShipment];
 	EndIf;
 	Return StoreInfo[ReceiptShipment];
+EndFunction
+
+Function ChangeUseGoodsReceiptByUseShipmentConfirmationOptions() Export
+	Return GetChainLinkOptions("UseShipmentConfirmation, UseGoodsReceipt, StoreSender, StoreReceiver, ShowUserMessage");
+EndFunction
+
+Function ChangeUseGoodsReceiptByUseShipmentConfirmationExecute(Options) Export
+	If Options.UseShipmentConfirmation 
+		And Not Options.UseGoodsReceipt 
+		And ValueIsFilled(Options.StoreSender) 
+		And ValueIsFilled(Options.StoreReceiver) Then
+		Options.ShowUserMessage = True;
+		Return True;
+	Else
+		Return Options.UseGoodsReceipt;
+	EndIf;
 EndFunction
 
 Function FillStoresInListOptions() Export
@@ -1258,6 +1331,12 @@ Function CalculationsExecute(Options) Export
 		Result.QuantityInBaseUnit = Options.QuantityOptions.Quantity * UnitFactor;
 	EndIf;
 	
+	If Not IsCalculatedRow Then
+		For Each Row In Options.TaxOptions.TaxList Do
+			Result.TaxList.Add(Row);
+		EndDo;
+	EndIf;
+	
 	If Options.TaxOptions.PriceIncludeTax <> Undefined Then
 		If Options.TaxOptions.PriceIncludeTax Then
 			
@@ -1274,7 +1353,7 @@ Function CalculationsExecute(Options) Export
 				Result.TotalAmount = CalculateTotalAmount_PriceIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
+			If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 				CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False);
 			EndIf;
 
@@ -1303,7 +1382,7 @@ Function CalculationsExecute(Options) Export
 				Result.NetAmount = CalculateNetAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
+			If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 				CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False);
 			EndIf;
 
@@ -1321,7 +1400,7 @@ Function CalculationsExecute(Options) Export
 			(Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity);
 		EndIf;
 		
-		If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
+		If Options.CalculateTaxAmount.Enable And (IsCalculatedRow Or Options.TaxOptions.IsAlreadyCalculated = True) Then
 			CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True);
 		EndIf;
 
@@ -1398,7 +1477,16 @@ Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPri
 	If TaxOptions.IsAlreadyCalculated = True Then
 		TaxAmount = 0;
 		For Each Row In TaxOptions.TaxList Do
-			Result.TaxList.Add(Row);
+			ResultRowIsExists = False;
+			For Each ResultRow In Result.TaxList Do
+				If ResultRow.Key = Row.Key And ResultRow.Tax = Row.Tax Then
+					ResultRowIsExists = True;
+					Break;
+				EndIf;
+			EndDo;
+			If Not ResultRowIsExists Then
+				Result.TaxList.Add(Row);
+			EndIf;
 			If Row.IncludeToTotalAmount Then
 				TaxAmount = Round(TaxAmount + Row.ManualAmount, 2);
 			EndIf;

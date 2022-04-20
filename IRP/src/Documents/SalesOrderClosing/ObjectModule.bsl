@@ -51,30 +51,45 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If FillingData = Undefined Then
-		Return;
-	EndIf;
-	If FillingData.Property("SalesOrder") Then
-		CloseOrder = True;
-		SalesOrder = FillingData.SalesOrder;
-		If CloseOrder Then
-			SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderForClosing(FillingData.SalesOrder);
-		Else
-			SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderInfo(FillingData.SalesOrder);
+	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
+		If FillingData.BasedOn = "SalesOrder" Then 
+			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+			Filling_BasedOn(FillingData);
 		EndIf;
-
-		FillPropertyValues(ThisObject, SalesOrderData.SalesOrderInfo);
-
-		For Each Table In SalesOrderData.Tables Do
-			ThisObject[Table.Key].Load(Table.Value);
-		EndDo;
-
-	Else
-		FillPropertyValues(ThisObject, FillingData);
-		Number = Undefined;
-		Date = Undefined;
 	EndIf;
+EndProcedure
 
+Procedure Filling_BasedOn(FillingData)
+	FillPropertyValues(ThisObject, FillingData);
+	
+	// ItemList
+	For Each Row In FillingData.ItemList Do
+		NewRow = ThisObject.ItemList.Add();
+		FillPropertyValues(NewRow, Row);
+		If Not ValueIsFilled(NewRow.Key) Then
+			NewRow.Key = New UUID();
+		EndIf;
+	EndDo;
+	
+	// SpecialOffers
+	For Each Row In FillingData.SpecialOffers Do
+		NewRow = ThisObject.SpecialOffers.Add();
+		FillPropertyValues(NewRow, Row);
+		If Not ValueIsFilled(NewRow.Key) Then
+			NewRow.Key = New UUID();
+		EndIf;
+	EndDo;
+	
+	// TaxList
+	For Each Row In FillingData.TaxList Do
+		NewRow = ThisObject.TaxList.Add();
+		FillPropertyValues(NewRow, Row);
+		If Not ValueIsFilled(NewRow.Key) Then
+			NewRow.Key = New UUID();
+		EndIf;
+	EndDo;
+	
+	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ThisObject.ItemList);
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

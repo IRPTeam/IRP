@@ -163,88 +163,93 @@ EndProcedure
 
 #EndRegion
 
-Procedure SetVisibilityItemsByArray(Items, Val ArrayAll, Val ArrayVisible) Export
-	If TypeOf(ArrayVisible) <> Type("Array") Then
-		ArrayVisible = New Array();
-	EndIf;
-	For Each ArrayElement In ArrayAll Do
-		ItemName = StrReplace(ArrayElement, ".", "");
-		Visibility = (ArrayVisible.Find(ArrayElement) <> Undefined);
-		If Items.Find(ItemName) <> Undefined And Items[ItemName].Visible <> Visibility Then
-			Items[ItemName].Visible = Visibility;
-		EndIf;
-	EndDo;
-EndProcedure
+// @deprecated
+//Procedure SetVisibilityItemsByArray(Items, Val ArrayAll, Val ArrayVisible) Export
+//	If TypeOf(ArrayVisible) <> Type("Array") Then
+//		ArrayVisible = New Array();
+//	EndIf;
+//	For Each ArrayElement In ArrayAll Do
+//		ItemName = StrReplace(ArrayElement, ".", "");
+//		Visibility = (ArrayVisible.Find(ArrayElement) <> Undefined);
+//		If Items.Find(ItemName) <> Undefined And Items[ItemName].Visible <> Visibility Then
+//			Items[ItemName].Visible = Visibility;
+//		EndIf;
+//	EndDo;
+//EndProcedure
 
-Procedure CleanDataByArray(Object, Val ArrayAll, Val ArrayVisible) Export
-	If TypeOf(ArrayVisible) <> Type("Array") Then
-		ArrayVisible = New Array();
-	EndIf;
-	For Each ArrayElement In ArrayAll Do
-		If Not ArrayVisible.Find(ArrayElement) = Undefined Then
-			Continue;
-		EndIf;
-
-		If StrFind(ArrayElement, ".") Then
-			TableName = Left(ArrayElement, StrFind(ArrayElement, ".") - 1);
-			ItemName = StrReplace(ArrayElement, TableName + ".", "");
-			For Each Row In Object[TableName] Do
-				If CommonFunctionsClientServer.ObjectHasProperty(Row, ItemName) Then
-					Row[ItemName] = Undefined;
-				EndIf;
-			EndDo;
-		Else
-			If CommonFunctionsClientServer.ObjectHasProperty(Object, ArrayElement) Then
-				Object[ArrayElement] = Undefined;
-			EndIf;
-		EndIf;
-	EndDo;
-EndProcedure
+// @deprecated
+//Procedure CleanDataByArray(Object, Val ArrayAll, Val ArrayVisible) Export
+//	If TypeOf(ArrayVisible) <> Type("Array") Then
+//		ArrayVisible = New Array();
+//	EndIf;
+//	For Each ArrayElement In ArrayAll Do
+//		If Not ArrayVisible.Find(ArrayElement) = Undefined Then
+//			Continue;
+//		EndIf;
+//
+//		If StrFind(ArrayElement, ".") Then
+//			TableName = Left(ArrayElement, StrFind(ArrayElement, ".") - 1);
+//			ItemName = StrReplace(ArrayElement, TableName + ".", "");
+//			For Each Row In Object[TableName] Do
+//				If CommonFunctionsClientServer.ObjectHasProperty(Row, ItemName) Then
+//					Row[ItemName] = Undefined;
+//				EndIf;
+//			EndDo;
+//		Else
+//			If CommonFunctionsClientServer.ObjectHasProperty(Object, ArrayElement) Then
+//				Object[ArrayElement] = Undefined;
+//			EndIf;
+//		EndIf;
+//	EndDo;
+//EndProcedure
 
 #Region Stores
-Procedure FillStores(ObjectData, Form) Export
 
-#If AtServer Then
-	If Not ValueIsFilled(Form.CurrentStore) Then
-		Form.CurrentStore = DocumentsServer.GetCurrentStore(ObjectData);
-	EndIf;
-#EndIf
+// @deprecated
+//Procedure FillStores(ObjectData, Form) Export
+//
+//#If AtServer Then
+//	If Not ValueIsFilled(Form.CurrentStore) Then
+//		Form.CurrentStore = DocumentsServer.GetCurrentStore(ObjectData);
+//	EndIf;
+//#EndIf
+//
+//	StoreArray = New Array();
+//	For Each Row In ObjectData.ItemList Do
+//		If ValueIsFilled(Row.Store) Then
+//			If StoreArray.Find(Row.Store) = Undefined Then
+//				StoreArray.Add(Row.Store);
+//			EndIf;
+//		EndIf;
+//	EndDo;
+//
+//	If StoreArray.Count() = 0 Then
+//		Form.Items.Store.InputHint = "";
+//		Form.Store = Form.CurrentStore;
+//	ElsIf StoreArray.Count() = 1 Then
+//		Form.Items.Store.InputHint = "";
+//		Form.Store = StoreArray[0];
+//		If Not ValueIsFilled(Form.CurrentStore) Then
+//			Form.CurrentStore = Form.Store;
+//		EndIf;
+//	Else
+//		Form.Store = PredefinedValue("Catalog.Stores.EmptyRef");
+//		Form.Items.Store.InputHint = StrConcat(StoreArray, "; ");
+//	EndIf;
+//	Form.StoreBeforeChange = Form.Store;
+//
+//EndProcedure
 
-	StoreArray = New Array();
-	For Each Row In ObjectData.ItemList Do
-		If ValueIsFilled(Row.Store) Then
-			If StoreArray.Find(Row.Store) = Undefined Then
-				StoreArray.Add(Row.Store);
-			EndIf;
-		EndIf;
-	EndDo;
-
-	If StoreArray.Count() = 0 Then
-		Form.Items.Store.InputHint = "";
-		Form.Store = Form.CurrentStore;
-	ElsIf StoreArray.Count() = 1 Then
-		Form.Items.Store.InputHint = "";
-		Form.Store = StoreArray[0];
-		If Not ValueIsFilled(Form.CurrentStore) Then
-			Form.CurrentStore = Form.Store;
-		EndIf;
-	Else
-		Form.Store = PredefinedValue("Catalog.Stores.EmptyRef");
-		Form.Items.Store.InputHint = StrConcat(StoreArray, "; ");
-	EndIf;
-	Form.StoreBeforeChange = Form.Store;
-
-EndProcedure
-
-Function GetStructureFillStores() Export
-
-	ObjectData = New Structure();
-	ObjectData.Insert("ItemList");
-	ObjectData.Insert("Agreement");
-	ObjectData.Insert("Ref");
-
-	Return ObjectData;
-EndFunction
+// @deprecated
+//Function GetStructureFillStores() Export
+//
+//	ObjectData = New Structure();
+//	ObjectData.Insert("ItemList");
+//	ObjectData.Insert("Agreement");
+//	ObjectData.Insert("Ref");
+//
+//	Return ObjectData;
+//EndFunction
 
 #EndRegion
 
@@ -263,17 +268,20 @@ EndFunction
 #EndRegion
 
 #Region Common
-Procedure FillDefinedData(Object, Form) Export
-	IsCopy = Form.Parameters.Property("CopyingValue") And ValueIsFilled(Form.Parameters.CopyingValue);
-	IsBasedOn = Form.Parameters.Property("BasedOn") Or (Form.Parameters.Property("FillingValues")
-		And Form.Parameters.FillingValues.Property("BasedOn"));
 
-	If Not IsCopy And Not IsBasedOn Then
-		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
-		Object.PriceIncludeTax 	= AgreementInfo.PriceIncludeTax;
-		Object.Currency 		= AgreementInfo.Currency;
-	EndIf;
-EndProcedure
+// @deprecated
+//Procedure FillDefinedData(Object, Form) Export
+//	IsCopy = Form.Parameters.Property("CopyingValue") And ValueIsFilled(Form.Parameters.CopyingValue);
+//	IsBasedOn = Form.Parameters.Property("BasedOn") Or (Form.Parameters.Property("FillingValues")
+//		And Form.Parameters.FillingValues.Property("BasedOn"));
+//
+//	If Not IsCopy And Not IsBasedOn Then
+//		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
+//		Object.PriceIncludeTax 	= AgreementInfo.PriceIncludeTax;
+//		Object.Currency 		= AgreementInfo.Currency;
+//	EndIf;
+//EndProcedure
+
 #EndRegion
 
 Procedure SetReadOnlyPaymentTermsCanBePaid(Object, Form) Export
@@ -287,6 +295,7 @@ Procedure SetReadOnlyPaymentTermsCanBePaid(Object, Form) Export
 		EndIf;
 	EndDo;
 EndProcedure
+
 
 Function FindRowInArrayOfStructures(ArrayOfStructures, KeyNames, 
                                     Value1 = Undefined, 

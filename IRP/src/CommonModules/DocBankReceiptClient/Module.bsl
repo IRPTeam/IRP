@@ -108,18 +108,8 @@ EndProcedure
 
 #Region PAYMENT_LIST
 
-Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
-	If Upper(Field.Name) = Upper("PaymentListTaxAmount") Then
-		CurrentData = Form.Items.PaymentList.CurrentData;
-		If CurrentData <> Undefined Then
-			DocumentsClient.ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo);
-			Parameters = New Structure();
-			Parameters.Insert("CurrentData", CurrentData);
-			Parameters.Insert("Item", Item);
-			Parameters.Insert("Field", Field);
-			TaxesClient.ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo);
-		EndIf;
-	EndIf;
+Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ViewClient_V2.PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
@@ -477,39 +467,6 @@ EndProcedure
 
 Procedure ItemListTaxValueOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.PaymentListTaxRateOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
-#EndRegion
-
-#Region SERVICE
-
-#Region DESCRIPTION
-
-Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
-	StandardProcessing = False;
-	CommonFormActions.EditMultilineText(Item.Name, Form);
-EndProcedure
-
-#EndRegion
-
-#Region TITLE_DECORATIONS
-
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClient.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClient.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClient.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClient.ChangeTitleCollapse(Object, Form, False);
 EndProcedure
 
 #EndRegion

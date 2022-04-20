@@ -15,7 +15,7 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Unde
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
-Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
 	If Upper(Field.Name) = Upper("ItemListPhysicalCountByLocationPresentation") Then
 		CurrentData = Form.Items.ItemList.CurrentData;
 		If CurrentData = Undefined Then
@@ -28,7 +28,7 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 		EndIf;
 	EndIf;
 	
-	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo);
+	ViewClient_V2.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
@@ -62,52 +62,6 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
-#Region PickUpItems
-
-Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") Or Not AdditionalParameters.Property(
-		"Form") Then
-		Return;
-	EndIf;
-
-	FilterString = "Item, ItemKey, Unit";
-	FilterStructure = New Structure(FilterString);
-	For Each ResultElement In Result Do
-		FillPropertyValues(FilterStructure, ResultElement);
-		ExistingRows = AdditionalParameters.Object.ItemList.FindRows(FilterStructure);
-		If ExistingRows.Count() Then
-			Row = ExistingRows[0];
-		Else
-			Row = AdditionalParameters.Object.ItemList.Add();
-			FillPropertyValues(Row, ResultElement, FilterString);
-		EndIf;
-		Row.PhysCount = Row.PhysCount + ResultElement.Quantity;
-		Row.Difference = Row.PhysCount - Row.ExpCount;
-	EndDo;
-	ItemListOnChange(AdditionalParameters.Object, AdditionalParameters.Form, Undefined, Undefined);
-EndProcedure
-
-Procedure OpenPickupItems(Object, Form, Command) Export
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", Form);
-	NotifyDescription = New NotifyDescription("PickupItemsEnd", DocPhysicalInventoryClient, NotifyParameters);
-	OpenFormParameters = New Structure();
-	StoreArray = New Array();
-	StoreArray.Add(Object.Store);
-
-	If Command.AssociatedTable <> Undefined Then
-		OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
-		OpenFormParameters.Insert("Object", Object);
-	EndIf;
-
-	OpenFormParameters.Insert("Stores", StoreArray);
-	OpenFormParameters.Insert("EndPeriod", CommonFunctionsServer.GetCurrentSessionDate());
-	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , NotifyDescription);
-EndProcedure
-
-#EndRegion
-
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsForSelectItemWithoutServiceFilter();
 	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
@@ -121,31 +75,6 @@ EndProcedure
 Procedure StoreOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
-
-Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
-	StandardProcessing = False;
-	CommonFormActions.EditMultilineText(Item.Name, Form);
-EndProcedure
-
-#Region GroupTitleDecorationsEvents
-
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
 
 #Region CreatePhysicalCount
 Procedure CreatePhysicalCount(ObjectRef) Export
@@ -174,10 +103,6 @@ Procedure CreatePhysicalCountEnd(CountDocsToCreate, AdditionalParameters) Export
 
 EndProcedure
 #EndRegion
-
-Procedure SearchByBarcode(Barcode, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
-EndProcedure
 
 Procedure FillExpCount(Object, Form) Export
 

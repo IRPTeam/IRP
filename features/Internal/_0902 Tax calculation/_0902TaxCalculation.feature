@@ -475,7 +475,7 @@ Scenario: _090204 manual tax correction in Sales order
 	* Manual selection of tax rate
 		And I activate "VAT" field in "ItemList" table
 		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "10,20"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "8,00"
 	And I close all client application windows
 
 

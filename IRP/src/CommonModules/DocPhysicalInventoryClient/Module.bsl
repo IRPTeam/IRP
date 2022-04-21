@@ -9,10 +9,6 @@ Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined)
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
-Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
-	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
-EndProcedure
-
 #EndRegion
 
 #Region STORE
@@ -42,6 +38,10 @@ EndProcedure
 
 Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
 	ViewClient_V2.ItemListBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export

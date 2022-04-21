@@ -20,6 +20,79 @@ Background:
 # Checking for overall discounts on orders (not on lines). 
 # Discounts that are outside the group are at least checked by lines and applied according to the rule "most advantageous to the client". 
 
+Scenario: _032000 discount form
+	And I close all client application windows
+	* Open SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+	* Filling SO
+		And I click Select button of "Partner" field
+		And I click "List" button	
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'MIO' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                     |
+			| 'Basic Partner terms, without VAT' |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'  |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description'                     |
+			| 'Shirt' |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item key' |
+			| '38/Black'  |
+		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I input "8,000" text in "Q" field of "ItemList" table
+		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check discount form
+		And in the table "ItemList" I click "% Offers" button
+		And I go to line in "Offers" table
+			| 'Presentation' |
+			| 'Maximum'      |
+		And I activate current test client window
+		And I press keyboard shortcut "Enter"
+		And "Offers" table became equal
+			| 'Presentation'              | 'Is select' | '%' | '∑' |
+			| 'Special Offers'            | ''          | ''  | ''  |
+			| 'Minimum'                   | ''          | ''  | ''  |
+			| 'Special Message DialogBox' | '✔'         | ''  | ''  |
+			| 'Discount 1 without Vat'    | '✔'         | ''  | ''  |
+			| 'Maximum'                   | ''          | ''  | ''  |
+			| 'Document discount'         | '☐'         | ''  | ''  |
+		And I go to line in "Offers" table
+			| 'Presentation' |
+			| 'Maximum'      |
+		And I activate current test client window
+		And I press keyboard shortcut "Enter"
+		And "Offers" table contains lines
+			| 'Presentation'                                                               | 'Is select' | '%' | '∑' |
+			| 'Maximum'                                                                    | ''          | ''  | ''  |
+			| 'Discount Price 1'                                                           | '☐'         | ''  | ''  |
+			| 'Special Message Notification'                                               | '✔'         | ''  | ''  |
+			| 'Discount Price 2'                                                           | '☐'         | ''  | ''  |
+			| 'Discount 2 without Vat'                                                     | '✔'         | ''  | ''  |
+			| 'All items 5+1, Discount on Basic Partner terms'                             | '☐'         | ''  | ''  |
+			| '4+1 Dress and Trousers, Discount on Basic Partner terms'                    | '☐'         | ''  | ''  |
+			| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' | '☐'         | ''  | ''  |
+		And I close all client application windows
+		
+				
 
 Scenario: _032001 discount calculation Discount 2 without Vat in the group Sum in Minimum and Discount 1 without Vat in the group Minimum (manual)
 	# Discounted Discount 1 without Vat

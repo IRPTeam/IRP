@@ -51,35 +51,6 @@ Procedure DateOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-#Region ItemDescription
-
-Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
-	StandardProcessing = False;
-	CommonFormActions.EditMultilineText(Item.Name, Form);
-EndProcedure
-
-#EndRegion
-
-#Region GroupTitleDecorationsEvents
-
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
-
 #Region FormTableItemsEventHandlers
 #Region ItemList
 
@@ -88,8 +59,8 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Unde
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
-Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
-	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo);
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ViewClient_V2.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export

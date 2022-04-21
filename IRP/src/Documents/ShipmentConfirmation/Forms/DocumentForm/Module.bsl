@@ -235,12 +235,12 @@ EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
-	DocShipmentConfirmationClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	SerialLotNumberClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	DocShipmentConfirmationClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
+	SerialLotNumberClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -263,7 +263,7 @@ EndFunction
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
-	DocShipmentConfirmationClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -272,22 +272,22 @@ EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocShipmentConfirmationClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocShipmentConfirmationClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocShipmentConfirmationClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocShipmentConfirmationClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 #EndRegion
@@ -325,7 +325,7 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocShipmentConfirmationClient.SearchByBarcode(Barcode, Object, ThisObject);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 &AtClient

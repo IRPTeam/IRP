@@ -211,13 +211,12 @@ EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
-	DocInventoryTransferClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
+	SerialLotNumberClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	DocInventoryTransferClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
+	SerialLotNumberClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -240,7 +239,7 @@ EndFunction
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
-	DocInventoryTransferClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -249,22 +248,22 @@ EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocInventoryTransferClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocInventoryTransferClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocInventoryTransferClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocInventoryTransferClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 #EndRegion
@@ -302,12 +301,12 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocInventoryTransferClient.SearchByBarcode(Barcode, Object, ThisObject);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocInventoryTransferClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient

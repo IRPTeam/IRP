@@ -84,22 +84,22 @@ EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocManualRegisterEntryClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocManualRegisterEntryClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocManualRegisterEntryClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocManualRegisterEntryClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 #EndRegion
@@ -108,7 +108,7 @@ EndProcedure
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
-	DocumentModuleClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion

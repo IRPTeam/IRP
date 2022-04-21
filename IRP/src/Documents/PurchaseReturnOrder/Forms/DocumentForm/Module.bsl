@@ -418,7 +418,7 @@ EndFunction
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
-	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -427,22 +427,22 @@ EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocPurchaseReturnOrderClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocPurchaseReturnOrderClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocPurchaseReturnOrderClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocPurchaseReturnOrderClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 #EndRegion
@@ -485,12 +485,12 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocPurchaseReturnOrderClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocPurchaseReturnOrderClient.SearchByBarcode(Barcode, Object, ThisObject);
+	DocumentsClient.SearchByBarcodeWithPriceType(Barcode, Object, ThisObject);
 EndProcedure
 
 &AtClient

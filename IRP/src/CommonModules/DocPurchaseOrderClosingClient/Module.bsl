@@ -193,18 +193,8 @@ EndProcedure
 
 #Region ITEM_LIST
 
-Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
-	If Upper(Field.Name) = Upper("ItemListTaxAmount") Then
-		CurrentData = Form.Items.ItemList.CurrentData;
-		If CurrentData <> Undefined Then
-			DocumentsClient.ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo);
-			Parameters = New Structure();
-			Parameters.Insert("CurrentData", CurrentData);
-			Parameters.Insert("Item", Item);
-			Parameters.Insert("Field", Field);
-			TaxesClient.ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo);
-		EndIf;
-	EndIf;
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ViewClient_V2.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
@@ -354,42 +344,5 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
-#EndRegion
-
-#Region TITLE_DECORATIONS
-
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
-
-#Region PICK_UP_ITEMS
-
-Procedure OpenPickupItems(Object, Form, Command) Export
-	DocumentsClient.OpenPickupItems(Object, Form, Command);
-EndProcedure
-
-Procedure SearchByBarcode(Barcode, Object, Form) Export
-	PriceType = PredefinedValue("Catalog.PriceKeys.EmptyRef");
-	If ValueIsFilled(Object.Agreement) Then
-		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
-		PriceType = AgreementInfo.PriceType;
-	EndIf;
-	DocumentsClient.SearchByBarcode(Barcode, Object, Form, , PriceType);
-EndProcedure
 
 #EndRegion

@@ -33,10 +33,12 @@ Procedure OpenListForm(FormName, ArrayOfFilters, FormParameters, Source = Undefi
 	ListForm.Open();
 EndProcedure
 
-Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
-	StandardProcessing = False;
-	CommonFormActions.EditMultilineText(Item.Name, Form);
-EndProcedure
+// @deprecated
+//Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
+//	StandardProcessing = False;
+//	CommonFormActions.EditMultilineText(Item.Name, Form);
+//EndProcedure
+
 #EndRegion
 
 #Region Account
@@ -923,21 +925,25 @@ EndProcedure
 
 #Region GroupTitleDecorationsEvents
 
-Procedure DecorationGroupTitleCollapsedPictureClick(Object = Undefined, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse( , Form, True);
-EndProcedure
+// @deprecated
+//Procedure DecorationGroupTitleCollapsedPictureClick(Object = Undefined, Form, Item) Export
+//	DocumentsClientServer.ChangeTitleCollapse( , Form, True);
+//EndProcedure
 
-Procedure DecorationGroupTitleCollapsedLabelClick(Object = Undefined, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse( , Form, True);
-EndProcedure
+// @deprecated
+//Procedure DecorationGroupTitleCollapsedLabelClick(Object = Undefined, Form, Item) Export
+//	DocumentsClientServer.ChangeTitleCollapse( , Form, True);
+//EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object = Undefined, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse( , Form, False);
-EndProcedure
+// @deprecated
+//Procedure DecorationGroupTitleUncollapsedPictureClick(Object = Undefined, Form, Item) Export
+//	DocumentsClientServer.ChangeTitleCollapse( , Form, False);
+//EndProcedure
 
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object = Undefined, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse( , Form, False);
-EndProcedure
+// @deprecated
+//Procedure DecorationGroupTitleUncollapsedLabelClick(Object = Undefined, Form, Item) Export
+//	DocumentsClientServer.ChangeTitleCollapse( , Form, False);
+//EndProcedure
 
 #EndRegion
 
@@ -1399,6 +1405,18 @@ Function PickupItemsParameters(Object, Form)
 		EndIf;
 	EndIf;
 	
+	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreSender") Then
+		If ValueIsFilled(Object.StoreSender) Then
+			StoreArray.Add(Object.StoreSender);
+		EndIf;
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreReceiver") Then
+		ArrayOfReceiverStores = New Array();
+		ArrayOfReceiverStores.Add(Object.StoreReceiver);
+		ReturnValue.Insert("ReceiverStores", ArrayOfReceiverStores);
+	EndIf;
+	
 	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
@@ -1597,6 +1615,15 @@ EndProcedure
 #EndRegion
 
 #Region Commands
+
+Procedure SearchByBarcodeWithPriceType(Barcode, Object, Form) Export
+	PriceType = PredefinedValue("Catalog.PriceKeys.EmptyRef");
+	If ValueIsFilled(Object.Agreement) Then
+		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
+		PriceType = AgreementInfo.PriceType;
+	EndIf;
+	SearchByBarcode(Barcode, Object, Form, , PriceType);
+EndProcedure
 
 Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined,
 	AddInfo = Undefined) Export

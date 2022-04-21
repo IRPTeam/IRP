@@ -172,15 +172,13 @@ EndProcedure
 #Region SERIAL_LOT_NUMBERS
 
 &AtClient
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
-	DocStockAdjustmentAsWriteOffClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item,
-		ChoiceData, StandardProcessing);
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
+	SerialLotNumberClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	DocStockAdjustmentAsWriteOffClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item,
-		StandardProcessing);
+	SerialLotNumberClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -219,7 +217,7 @@ EndFunction
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
-	DocStockAdjustmentAsWriteOffClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -228,22 +226,22 @@ EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 #EndRegion
@@ -281,12 +279,12 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocStockAdjustmentAsWriteOffClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocStockAdjustmentAsWriteOffClient.SearchByBarcode(Barcode, Object, ThisObject);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 &AtClient

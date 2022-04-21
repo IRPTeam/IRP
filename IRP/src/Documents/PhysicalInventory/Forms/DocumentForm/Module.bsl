@@ -119,6 +119,11 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocPhysicalInventoryClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
 #EndRegion
 
 #Region ITEM_KEY
@@ -152,7 +157,7 @@ EndProcedure
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
-	DocPhysicalInventoryClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -196,7 +201,7 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocPhysicalInventoryClient.SearchByBarcode(Barcode, Object, ThisObject);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
 
@@ -264,22 +269,22 @@ EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocPhysicalInventoryClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocPhysicalInventoryClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocPhysicalInventoryClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocPhysicalInventoryClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
 #EndRegion

@@ -50,8 +50,8 @@ EndProcedure
 
 #Region ITEM_LIST
 
-Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
-	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo);
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ViewClient_V2.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
@@ -122,93 +122,6 @@ EndProcedure
 
 #EndRegion
 
-#Region SERIAL_LOT_NUMBERS
-
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
-	AddInfo = Undefined) Export
-	DocumentsClient.ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo);
-	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo);
-EndProcedure
-
-Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
-	SerialLotNumberClient.PresentationClearing(Object, Form, Item, AddInfo);
-EndProcedure
-
 #EndRegion
-
-#EndRegion
-
-#EndRegion
-
-#Region TITLE_DECORATIONS
-
-Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
-
-#Region SERVICE
-
-Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
-	StandardProcessing = False;
-	CommonFormActions.EditMultilineText(Item.Name, Form);
-EndProcedure
-
-Procedure SearchByBarcode(Barcode, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
-EndProcedure
-
-Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") 
-		Or Not AdditionalParameters.Property("Form") Then
-		Return;
-	EndIf;
-
-	FilterString = "Item, ItemKey, Unit";
-	FilterStructure = New Structure(FilterString);
-	For Each ResultElement In Result Do
-		FillPropertyValues(FilterStructure, ResultElement);
-		ExistingRows = AdditionalParameters.Object.ItemList.FindRows(FilterStructure);
-		If ExistingRows.Count() Then
-			Row = ExistingRows[0];
-		Else
-			Row = AdditionalParameters.Object.ItemList.Add();
-			FillPropertyValues(Row, ResultElement, FilterString);
-		EndIf;
-		Row.Quantity = Row.Quantity + ResultElement.Quantity;
-	EndDo;
-EndProcedure
-
-Procedure OpenPickupItems(Object, Form, Command) Export
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", Form);
-	NotifyDescription = New NotifyDescription("PickupItemsEnd", DocStockAdjustmentAsSurplusClient, NotifyParameters);
-	OpenFormParameters = New Structure();
-	StoreArray = New Array();
-	StoreArray.Add(Object.Store);
-
-	If Command.AssociatedTable <> Undefined Then
-		OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
-		OpenFormParameters.Insert("Object", Object);
-	EndIf;
-
-	OpenFormParameters.Insert("Stores", StoreArray);
-	OpenFormParameters.Insert("EndPeriod", CommonFunctionsServer.GetCurrentSessionDate());
-	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , NotifyDescription);
-EndProcedure
 
 #EndRegion

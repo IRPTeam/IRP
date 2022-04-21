@@ -144,10 +144,11 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
 
-#Region NewRegistersPosting
-	PostingServer.SetLockDataSource(DataMapWithLockFields, AccumulationRegisters.R1020B_AdvancesToVendors,
-		DocumentDataTables.VendorsTransactions);
-#EndRegion
+// @deprecated
+//#Region NewRegistersPosting
+//	PostingServer.SetLockDataSource(DataMapWithLockFields, AccumulationRegisters.R1020B_AdvancesToVendors,
+//		DocumentDataTables.VendorsTransactions);
+//#EndRegion
 
 	Return DataMapWithLockFields;
 EndFunction

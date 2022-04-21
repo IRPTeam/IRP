@@ -640,6 +640,13 @@ EndProcedure
 
 #EndRegion
 
+#Region _LIST
+
+Procedure ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing)
+	TaxesClient.ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
 Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow, 
 															OnAddViewNotify = Undefined, 
 															OnCopyViewNotify = Undefined,
@@ -695,6 +702,8 @@ Procedure DeleteRows(Object, Form, TableName, ViewNotify = Undefined)
 	Parameters = GetSimpleParameters(Object, Form, TableName);
 	ControllerClientServer_V2.DeleteRows(TableName, Parameters, ViewNotify);
 EndProcedure
+
+#EndRegion
 
 #Region FORM
 
@@ -774,6 +783,10 @@ EndProcedure
 #EndRegion
 
 #Region _ITEM_LIST_
+
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
 
 Function ItemListBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
 	NewRow = AddOrCopyRow(Object, Form, "ItemList", Cancel, Clone, CurrentData,
@@ -893,7 +906,8 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
 				ServerData = New Structure("ServerData", New Structure());
@@ -1153,7 +1167,10 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" Then
+		
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
 	
@@ -1184,6 +1201,10 @@ EndProcedure
 #EndRegion
 
 #Region _PAYMENT_LIST_
+
+Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
 
 Procedure PaymentListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
 	NewRow = AddOrCopyRow(Object, Form, "PaymentList", Cancel, Clone, CurrentData,

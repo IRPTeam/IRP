@@ -1,8 +1,33 @@
-#Region FormEvents
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocStockAdjustmentAsWriteOffServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	DocStockAdjustmentAsWriteOffServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+	DocStockAdjustmentAsWriteOffServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	DocStockAdjustmentAsWriteOffClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtClient
@@ -23,44 +48,13 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 EndProcedure
 
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability(Object, ThisObject);
-	EndIf;
-
-	DocStockAdjustmentAsWriteOffServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocStockAdjustmentAsWriteOffServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure OnOpen(Cancel)
-	DocStockAdjustmentAsWriteOffClient.OnOpen(Object, ThisObject, Cancel);
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	DocStockAdjustmentAsWriteOffClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
-EndProcedure
-
-&AtClient
-Procedure ItemListBeforeDeleteRow(Item, Cancel)
-	DocStockAdjustmentAsWriteOffClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
-EndProcedure
-
-&AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	SetVisibilityAvailability(CurrentObject, ThisObject);
-	DocStockAdjustmentAsWriteOffServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-EndProcedure
-
-&AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtClient
@@ -76,95 +70,7 @@ EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	Return;
-	//DocStockAdjustmentAsWriteOffClient.ItemListOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
-	DocStockAdjustmentAsWriteOffClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocStockAdjustmentAsWriteOffClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder,
-		Parameter);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	Return;
-	//DocStockAdjustmentAsWriteOffClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
-EndProcedure
-
-&AtClient
-Procedure ItemListAfterDeleteRow(Item)
-	DocStockAdjustmentAsWriteOffClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	LockLinkedRows();
-EndProcedure
-
-&AtClient
-Procedure ItemListItemOnChange(Item)
-	DocStockAdjustmentAsWriteOffClient.ItemListItemOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemKeyOnChange(Item)
-	DocStockAdjustmentAsWriteOffClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListQuantityOnChange(Item)
-	DocStockAdjustmentAsWriteOffClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListUnitOnChange(Item)
-	DocStockAdjustmentAsWriteOffClient.ItemListUnitOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
-	DocStockAdjustmentAsWriteOffClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item,
-		ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	DocStockAdjustmentAsWriteOffClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure OpenPickupItems(Command)
-	DocStockAdjustmentAsWriteOffClient.OpenPickupItems(Object, ThisObject, Command);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocStockAdjustmentAsWriteOffClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	DocStockAdjustmentAsWriteOffClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocStockAdjustmentAsWriteOffClient.ItemListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
-	DocStockAdjustmentAsWriteOffClient.ItemListExpenseTypeEditTextChange(Object, ThisObject, Item, Text,
-		StandardProcessing);
-EndProcedure
-
-#Region ItemCompany
+#Region COMPANY
 
 &AtClient
 Procedure CompanyOnChange(Item)
@@ -183,56 +89,164 @@ EndProcedure
 
 #EndRegion
 
+#Region STORE
+
 &AtClient
 Procedure StoreOnChange(Item)
 	DocStockAdjustmentAsWriteOffClient.StoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region ITEM_LIST
+
 &AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocStockAdjustmentAsWriteOffClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocStockAdjustmentAsWriteOffClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure ShowRowKey(Command)
-	DocumentsClient.ShowRowKey(ThisObject);
-EndProcedure
-
-#Region GroupTitleDecorations
-
-&AtClient
-Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocStockAdjustmentAsWriteOffClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocStockAdjustmentAsWriteOffClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+Procedure ItemListAfterDeleteRow(Item)
+	DocStockAdjustmentAsWriteOffClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
+EndProcedure
+
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	DocStockAdjustmentAsWriteOffClient.ItemListItemOnChange(Object, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocStockAdjustmentAsWriteOffClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocStockAdjustmentAsWriteOffClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	DocStockAdjustmentAsWriteOffClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
 
+#Region ITEM_KEY
+
 &AtClient
-Procedure SearchByBarcode(Command, Barcode = "")
-	DocStockAdjustmentAsWriteOffClient.SearchByBarcode(Barcode, Object, ThisObject);
+Procedure ItemListItemKeyOnChange(Item)
+	DocStockAdjustmentAsWriteOffClient.ItemListItemKeyOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocStockAdjustmentAsWriteOffClient.ItemListQuantityOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocStockAdjustmentAsWriteOffClient.ItemListUnitOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region SERIAL_LOT_NUMBERS
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
+	SerialLotNumberClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure OpenScanForm(Command)
-	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	SerialLotNumberClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
-#Region AddAttributes
+#EndRegion
+
+#Region EXPENSE_TYPE
+
+&AtClient
+Procedure ItemListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocStockAdjustmentAsWriteOffClient.ItemListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
+	DocStockAdjustmentAsWriteOffClient.ItemListExpenseTypeEditTextChange(Object, ThisObject, Item, Text,
+		StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocStockAdjustmentAsWriteOffClient);
+	Str.Insert("Server", DocStockAdjustmentAsWriteOffServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+#EndRegion
+
+#Region ADD_ATTRIBUTES
 
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
@@ -246,7 +260,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ExternalCommands
+#Region EXTERNAL_COMMANDS
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -261,7 +275,31 @@ EndProcedure
 
 #EndRegion
 
-#Region LinkedDocuments
+#Region COMMANDS
+
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region LINKED_DOCUMENTS
 
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
@@ -330,16 +368,6 @@ Procedure FromUnlockLinkedRows(Command)
 EndProcedure
 
 #EndRegion
-
-#Region Service
-
-&AtClient
-Function GetProcessingModule() Export
-	Str = New Structure;
-	Str.Insert("Client", DocStockAdjustmentAsWriteOffClient);
-	Str.Insert("Server", DocStockAdjustmentAsWriteOffServer);
-	Return Str;
-EndFunction
 
 &AtClient
 Procedure ShowHiddenTables(Command)

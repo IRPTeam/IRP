@@ -1,12 +1,10 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
-	Param = New Structure();
-	POC = DocPurchaseOrderServer.GetLastPurchaseOrderClosingByPurchaseOrder(CommandParameter);
-	If Not POC.IsEmpty() Then
-		Param.Insert("Key", POC);
+	PurchaseOrderClosingRef = DocPurchaseOrderServer.GetLastPurchaseOrderClosingByPurchaseOrder(CommandParameter);
+	If ValueIsFilled(PurchaseOrderClosingRef) Then
+		OpenForm("Document.PurchaseOrderClosing.ObjectForm", New Structure("Key", PurchaseOrderClosingRef), , New UUID());
 	Else
-		Param.Insert("FillingValues", New Structure("PurchaseOrder", CommandParameter));
+		FillingValues = DocPurchaseOrderServer.GetPurchaseOrderForClosing(CommandParameter);
+		OpenForm("Document.PurchaseOrderClosing.ObjectForm", New Structure("FillingValues", FillingValues), , New UUID());
 	EndIf;
-
-	OpenForm("Document.PurchaseOrderClosing.ObjectForm", Param, , New UUID());
 EndProcedure

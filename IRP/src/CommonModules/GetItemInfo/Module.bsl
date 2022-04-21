@@ -1,134 +1,139 @@
-Function ItemsInfo(Parameters, AddInfo = Undefined) Export
-	Query = ItemInfo_Query(Parameters, AddInfo);
 
-	QueryResult = Query.Execute().Unload();
+// @deprecated
+//Function ItemsInfo(Parameters, AddInfo = Undefined) Export
+//	Query = ItemInfo_Query(Parameters, AddInfo);
+//
+//	QueryResult = Query.Execute().Unload();
+//
+//	Return QueryResult;
+//EndFunction
 
-	Return QueryResult;
-EndFunction
+// @deprecated
+//Function ItemInfo_Query(Parameters, AddInfo)
+//
+//	Var Query;
+//	Query = New Query();
+//	Query.Text =
+//	"SELECT
+//	|	Items.Ref AS Item,
+//	|	PRESENTATION(Items.Ref) AS ItemPresentation
+//	|INTO ItemVT
+//	|FROM
+//	|	Catalog.Items AS Items
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	ItemKeys.Ref AS ItemKey,
+//	|	&PriceType AS PriceType,
+//	|	ItemKeys.Item AS Item,
+//	|	ItemVT.ItemPresentation AS ItemPresentation,
+//	|	ItemKeys.Item.ItemType AS ItemType,
+//	|	0 AS Remaining,
+//	|	ISNULL(ItemKeys.Item.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
+//	|	ISNULL(PriceList.Price, 0) AS Price,
+//	|	0 AS Quantity,
+//	|	0 AS TotalAmount,
+//	|	0 AS NetAmount,
+//	|	0 AS TaxAmount,
+//	|	CAST("""" AS STRING(200)) AS Info,
+//	|	0 AS OffersAmount
+//	|FROM
+//	|	Catalog.ItemKeys AS ItemKeys
+//	|		LEFT JOIN (SELECT
+//	|			PricesSliceLast.ItemKey AS ItemKey,
+//	|			PricesSliceLast.Price AS Price,
+//	|			PricesSliceLast.Unit AS Unit
+//	|		FROM
+//	|			InformationRegister.PricesByItemKeys.SliceLast(&Period, PriceType = &PriceType
+//	|			AND ItemKey.Item IN
+//	|				(SELECT
+//	|					ItemVT.Item
+//	|				FROM
+//	|					ItemVT)) AS PricesSliceLast) AS PriceList
+//	|		ON ItemKeys.Ref = PriceList.ItemKey
+//	|		AND ItemKeys.Item.Unit = PriceList.Unit
+//	|		INNER JOIN ItemVT AS ItemVT
+//	|		ON ItemKeys.Item = ItemVT.Item
+//	|GROUP BY
+//	|	ItemKeys.Ref,
+//	|	ItemKeys.Item.ItemType,
+//	|	PriceList.Price,
+//	|	ItemVT.ItemPresentation,
+//	|	ItemKeys.Item,
+//	|	ISNULL(ItemKeys.Item.Unit, VALUE(Catalog.Units.EmptyRef))
+//	|ORDER BY
+//	|	ItemPresentation
+//	|AUTOORDER";
+//
+//	QueryScheme = New QuerySchema();
+//	QueryScheme.SetQueryText(Query.Text);
+//
+//	If ValueIsFilled(Parameters.ItemType) Then
+//
+//		ItemVT = QueryScheme.QueryBatch.Get(0);
+//		Filters = ItemVT.Operators[0].Filter;
+//
+//		Expression = "Items.%1 IN HIERARCHY(&%1)";
+//
+//		Filters.Add(New QuerySchemaExpression(StrTemplate(Expression, "ItemType")));
+//	EndIf;
+//
+//	If ValueIsFilled(Parameters.SearchString) Then
+//
+//		ItemVT = QueryScheme.QueryBatch.Get(0);
+//		Filters = ItemVT.Operators[0].Filter;
+//
+//		Expression = "Items.Description_" + SessionParameters.LocalizationCode + " LIKE " + Char(34) + "%"
+//			+ Parameters.SearchString + "%" + Char(34);
+//
+//		Filters.Add(New QuerySchemaExpression(Expression));
+//	EndIf;
+//
+//	For Each Parameter In Parameters Do
+//		Query.Parameters.Insert(Parameter.Key, Parameter.Value);
+//	EndDo;
+//
+//	If Not Query.Parameters.Property("Period") Then
+//		Query.Parameters.Insert("Period", CurrentUniversalDate());
+//	EndIf;
+//
+//	Query.Text = QueryScheme.GetQueryText();
+//
+//	Return Query;
+//EndFunction
 
-Function ItemInfo_Query(Parameters, AddInfo)
+// @deprecated
+//Function SpecialOffersInfo(Parameters, AddInfo = Undefined) Export
+//	Query = SpecialOffersInfo_Query(Parameters, AddInfo);
+//
+//	QueryResult = Query.Execute().Unload(QueryResultIteration.ByGroups);
+//
+//	Return QueryResult;
+//EndFunction
 
-	Var Query;
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	Items.Ref AS Item,
-	|	PRESENTATION(Items.Ref) AS ItemPresentation
-	|INTO ItemVT
-	|FROM
-	|	Catalog.Items AS Items
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemKeys.Ref AS ItemKey,
-	|	&PriceType AS PriceType,
-	|	ItemKeys.Item AS Item,
-	|	ItemVT.ItemPresentation AS ItemPresentation,
-	|	ItemKeys.Item.ItemType AS ItemType,
-	|	0 AS Remaining,
-	|	ISNULL(ItemKeys.Item.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
-	|	ISNULL(PriceList.Price, 0) AS Price,
-	|	0 AS Quantity,
-	|	0 AS TotalAmount,
-	|	0 AS NetAmount,
-	|	0 AS TaxAmount,
-	|	CAST("""" AS STRING(200)) AS Info,
-	|	0 AS OffersAmount
-	|FROM
-	|	Catalog.ItemKeys AS ItemKeys
-	|		LEFT JOIN (SELECT
-	|			PricesSliceLast.ItemKey AS ItemKey,
-	|			PricesSliceLast.Price AS Price,
-	|			PricesSliceLast.Unit AS Unit
-	|		FROM
-	|			InformationRegister.PricesByItemKeys.SliceLast(&Period, PriceType = &PriceType
-	|			AND ItemKey.Item IN
-	|				(SELECT
-	|					ItemVT.Item
-	|				FROM
-	|					ItemVT)) AS PricesSliceLast) AS PriceList
-	|		ON ItemKeys.Ref = PriceList.ItemKey
-	|		AND ItemKeys.Item.Unit = PriceList.Unit
-	|		INNER JOIN ItemVT AS ItemVT
-	|		ON ItemKeys.Item = ItemVT.Item
-	|GROUP BY
-	|	ItemKeys.Ref,
-	|	ItemKeys.Item.ItemType,
-	|	PriceList.Price,
-	|	ItemVT.ItemPresentation,
-	|	ItemKeys.Item,
-	|	ISNULL(ItemKeys.Item.Unit, VALUE(Catalog.Units.EmptyRef))
-	|ORDER BY
-	|	ItemPresentation
-	|AUTOORDER";
-
-	QueryScheme = New QuerySchema();
-	QueryScheme.SetQueryText(Query.Text);
-
-	If ValueIsFilled(Parameters.ItemType) Then
-
-		ItemVT = QueryScheme.QueryBatch.Get(0);
-		Filters = ItemVT.Operators[0].Filter;
-
-		Expression = "Items.%1 IN HIERARCHY(&%1)";
-
-		Filters.Add(New QuerySchemaExpression(StrTemplate(Expression, "ItemType")));
-	EndIf;
-
-	If ValueIsFilled(Parameters.SearchString) Then
-
-		ItemVT = QueryScheme.QueryBatch.Get(0);
-		Filters = ItemVT.Operators[0].Filter;
-
-		Expression = "Items.Description_" + SessionParameters.LocalizationCode + " LIKE " + Char(34) + "%"
-			+ Parameters.SearchString + "%" + Char(34);
-
-		Filters.Add(New QuerySchemaExpression(Expression));
-	EndIf;
-
-	For Each Parameter In Parameters Do
-		Query.Parameters.Insert(Parameter.Key, Parameter.Value);
-	EndDo;
-
-	If Not Query.Parameters.Property("Period") Then
-		Query.Parameters.Insert("Period", CurrentUniversalDate());
-	EndIf;
-
-	Query.Text = QueryScheme.GetQueryText();
-
-	Return Query;
-EndFunction
-
-Function SpecialOffersInfo(Parameters, AddInfo = Undefined) Export
-	Query = SpecialOffersInfo_Query(Parameters, AddInfo);
-
-	QueryResult = Query.Execute().Unload(QueryResultIteration.ByGroups);
-
-	Return QueryResult;
-EndFunction
-
-Function SpecialOffersInfo_Query(Parameters, AddInfo)
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	SpecialOffers.Ref AS SpecialOffers,
-	|	SpecialOffers.IsFolder AS IsFolder
-	|FROM
-	|	Catalog.SpecialOffers AS SpecialOffers
-	|WHERE
-	|	NOT SpecialOffers.DeletionMark
-	|	AND
-	|	NOT SpecialOffers.IsFolder
-	|ORDER BY
-	|	SpecialOffers.IsFolder,
-	|	SpecialOffers.Ref
-	|TOTALS
-	|BY
-	|	SpecialOffers ONLY HIERARCHY";
-
-	Return Query;
-EndFunction
+// @deprecated
+//Function SpecialOffersInfo_Query(Parameters, AddInfo)
+//	Query = New Query();
+//	Query.Text =
+//	"SELECT
+//	|	SpecialOffers.Ref AS SpecialOffers,
+//	|	SpecialOffers.IsFolder AS IsFolder
+//	|FROM
+//	|	Catalog.SpecialOffers AS SpecialOffers
+//	|WHERE
+//	|	NOT SpecialOffers.DeletionMark
+//	|	AND
+//	|	NOT SpecialOffers.IsFolder
+//	|ORDER BY
+//	|	SpecialOffers.IsFolder,
+//	|	SpecialOffers.Ref
+//	|TOTALS
+//	|BY
+//	|	SpecialOffers ONLY HIERARCHY";
+//
+//	Return Query;
+//EndFunction
 
 // Description
 // 

@@ -62,6 +62,7 @@ Scenario: _032000 discount form
 		And I finish line editing in "ItemList" table
 	* Check discount form
 		And in the table "ItemList" I click "% Offers" button
+		And I activate current test client window
 		And I go to line in "Offers" table
 			| 'Presentation' |
 			| 'Maximum'      |

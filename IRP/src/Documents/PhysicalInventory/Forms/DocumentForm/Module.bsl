@@ -1,13 +1,17 @@
-#Region FormEvents
+#Region FORM
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocPhysicalInventoryServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPhysicalInventoryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -22,6 +26,7 @@ EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 	DocPhysicalInventoryServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 EndProcedure
 
@@ -33,11 +38,10 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	DocPhysicalInventoryClient.OnOpen(Object, ThisObject, Cancel);
-//	UpdateResponsibleView();
 EndProcedure
 
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -70,6 +74,69 @@ EndProcedure
 
 #EndRegion
 
+#Region STORE
+
+&AtClient
+Procedure StoreOnChange(Item)
+	DocPhysicalInventoryClient.StoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region RESPONSIBLE_PERSON
+
+&AtClient
+Procedure SetResponsiblePerson(Command)
+	SelectedRows = Items.ItemList.SelectedRows;
+	If Not SelectedRows.Count() Then
+		Return;
+	EndIf;
+	Filter = New Structure("Employee", True);
+	FormParameters = New Structure("ChoiceMode, CloseOnChoice, Filter", True, True, Filter);
+	NotifyParameters = New Structure("SelectedRows", SelectedRows);
+	Notify = New NotifyDescription("OnChoiceResponsiblePerson", ThisObject, NotifyParameters);
+	OpenForm("Catalog.Partners.ChoiceForm", FormParameters, ThisObject, , , , Notify);
+EndProcedure
+
+&AtClient
+Procedure OnChoiceResponsiblePerson(Result, AdditionalsParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	For Each RowID In AdditionalsParameters.SelectedRows Do
+		Row = Object.ItemList.FindByID(RowID);
+		If Not ValueIsFilled(Row.ResponsiblePerson) Then
+			Row.ResponsiblePerson = Result;
+		EndIf;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure UseResponsiblePersonByRowOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region PHYSICAL_COUNT_BY_LOCATION
+
+&AtClient
+Procedure PhysicalCountByLocationListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure PhysicalCountByLocationListOnChange(Item)
+	UpdatePhysicalCountsByLocations();
+EndProcedure
+
+&AtServer
+Procedure UpdatePhysicalCountByLocationsAtServer()
+	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST
 
 &AtClient
@@ -77,18 +144,21 @@ Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
 	DocPhysicalInventoryClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
-
-#Region ITEM_LIST_COLUMNS
-
-#EndRegion
-
-#EndRegion
-
-#Region ItemsFormEvents
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocPhysicalInventoryClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);	
+EndProcedure
 
 &AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocPhysicalInventoryClient.ItemListOnChange(Object, ThisObject, Item);
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If CurrentData.Locked Then
+		Cancel = True;
+	EndIf;
+	DocPhysicalInventoryClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient
@@ -97,10 +167,7 @@ Procedure ItemListAfterDeleteRow(Item)
 	LockLinkedRows();
 EndProcedure
 
-&AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	DocPhysicalInventoryClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
-EndProcedure
+#Region ITEM_LIST_COLUMNS
 
 #Region _ITEM
 
@@ -119,11 +186,6 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocPhysicalInventoryClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
-&AtClient
-Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
-EndProcedure
-
 #EndRegion
 
 #Region ITEM_KEY
@@ -131,34 +193,11 @@ EndProcedure
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocPhysicalInventoryClient.ItemListItemKeyOnChange(Object, ThisObject);
-	
-//	CurrentRow = Items.ItemList.CurrentData;
-//	If CurrentRow = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdateUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 #EndRegion
 
-&AtClient
-Procedure OpenPickupItems(Command)
-	DocPhysicalInventoryClient.OpenPickupItems(Object, ThisObject, Command);
-EndProcedure
-
-
-&AtClient
-Procedure StoreOnChange(Item)
-	DocPhysicalInventoryClient.StoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
-EndProcedure
+#Region PHYS_COUNT
 
 &AtClient
 Procedure ItemListPhysCountOnChange(Item)
@@ -166,106 +205,27 @@ Procedure ItemListPhysCountOnChange(Item)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-
 	CurrentRow.Difference = CurrentRow.PhysCount - CurrentRow.ExpCount;
-EndProcedure
-
-&AtClient
-Procedure FillExpCount(Command)
-	DocPhysicalInventoryClient.FillExpCount(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ItemListBeforeDeleteRow(Item, Cancel)
-	CurrentData = Items.ItemList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	If CurrentData.Locked Then
-		Cancel = True;
-	EndIf;
-	DocPhysicalInventoryClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
-EndProcedure
-
-&AtClient
-Procedure UpdateExpCount(Command)
-	DocPhysicalInventoryClient.UpdateExpCount(Object, ThisObject);
-	UpdatePhysicalCountsByLocations();
-EndProcedure
-
-&AtClient
-Procedure UpdatePhysCount(Command)
-	DocPhysicalInventoryClient.UpdatePhysCount(Object, ThisObject);
-	UpdatePhysicalCountsByLocations();
-EndProcedure
-
-&AtClient
-Procedure SearchByBarcode(Command, Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
-EndProcedure
-
-
-&AtClient
-Procedure SetResponsiblePerson(Command)
-	SelectedRows = Items.ItemList.SelectedRows;
-	If Not SelectedRows.Count() Then
-		Return;
-	EndIf;
-
-	Filter = New Structure("Employee", True);
-
-	OpenFormParameters = New Structure("ChoiceMode, CloseOnChoice, Filter", True, True, Filter);
-
-	OnChoiceNotify = New NotifyDescription("OnChoiceResponsiblePerson", ThisObject, New Structure("SelectedRows",
-		SelectedRows));
-
-	OpenForm("Catalog.Partners.ChoiceForm", OpenFormParameters, ThisObject, , , , OnChoiceNotify);
-EndProcedure
-
-&AtClient
-Procedure OnChoiceResponsiblePerson(Result, AdditionalsParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-
-	For Each RowID In AdditionalsParameters.SelectedRows Do
-		Row = Object.ItemList.FindByID(RowID);
-		If Not ValueIsFilled(Row.ResponsiblePerson) Then
-			Row.ResponsiblePerson = Result;
-		EndIf;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure PhysicalCountByLocationListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure DecorationStatusHistoryClick(Item)
-	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure PhysicalCountByLocationListOnChange(Item)
-	UpdatePhysicalCountsByLocations();
-EndProcedure
-
-&AtServer
-Procedure UpdatePhysicalCountByLocationsAtServer()
-	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure UseResponsiblePersonByRowOnChange(Item)
-
-	UpdateResponsibleView();
-
 EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorations
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -289,17 +249,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Privat
-
-
-&AtServer
-Procedure UpdatePhysicalCountsByLocations()
-	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
-EndProcedure
-
-#EndRegion
-
-#Region AddAttributes
+#Region ADD_ATTRIBUTES
 
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
@@ -313,7 +263,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ExternalCommands
+#Region EXTERNAL_COMMANDS
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -327,6 +277,8 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+#Region LINKED_DOCUMENTS
 
 &AtServer
 Procedure LockLinkedRows()
@@ -349,12 +301,57 @@ Procedure FromUnlockLinkedRows(Command)
 	EndIf;
 EndProcedure
 
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure FillExpCount(Command)
+	DocPhysicalInventoryClient.FillExpCount(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure UpdateExpCount(Command)
+	DocPhysicalInventoryClient.UpdateExpCount(Object, ThisObject);
+	UpdatePhysicalCountsByLocations();
+EndProcedure
+
+&AtClient
+Procedure UpdatePhysCount(Command)
+	DocPhysicalInventoryClient.UpdatePhysCount(Object, ThisObject);
+	UpdatePhysicalCountsByLocations();
+EndProcedure
+
+&AtServer
+Procedure UpdatePhysicalCountsByLocations()
+	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure DecorationStatusHistoryClick(Item)
+	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
 &AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
+#EndRegion
+
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+
+#EndRegion

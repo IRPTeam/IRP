@@ -844,7 +844,8 @@ Scenario: _200001 customize the CI user settings
 		Then "Edit user settings" window is opened
 		And in the table "MetadataTree" I click "Collapse all" button
 		And in the table "MetadataTree" I click "Expande all" button
-		Then user message window does not contain messages		
+		Then user message window does not contain messages
+		And I click "Ok" button		
 	And I click "Save and close" button
 
 

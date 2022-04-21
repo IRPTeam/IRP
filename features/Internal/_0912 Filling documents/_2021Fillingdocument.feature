@@ -2172,9 +2172,10 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		Then "Edit currencies" window is opened
 		And I click "Update" button
 		And "CurrenciesTable" table became equal
-			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
-			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
-			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,2000' | '20,00'  |
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '20,00'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |			
 		And I click "Currency rates" button
 		And "List" table became equal
 			| 'Currency from' | 'Currency to' | 'Source'       | 'Multiplicity' | 'Rate'   |

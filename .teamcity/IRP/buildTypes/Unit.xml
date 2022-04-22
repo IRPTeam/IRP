@@ -26,6 +26,7 @@
       <param name="env.1CUser" value="CI" />
       <param name="env.Database1CName" value="%teamcity.build.id%" />
       <param name="env.ExtName" value="Unit" />
+      <param name="env.FileDB" value="" />
       <param name="env.SQLHostname" value="" />
     </parameters>
     <build-runners>

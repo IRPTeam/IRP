@@ -1249,7 +1249,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	Or TypeOf(Object.Ref) = Type("DocumentRef.InventoryTransfer")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.InventoryTransferOrder")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.PhysicalInventory")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.ItemStockAdjustment");
+	Or TypeOf(Object.Ref) = Type("DocumentRef.ItemStockAdjustment")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.Bundling");
 	
 	If IsUsedNewFunctionality Then	
 		For Each ResultElement In Result Do

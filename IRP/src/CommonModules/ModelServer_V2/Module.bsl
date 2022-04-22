@@ -65,8 +65,12 @@ Function ExtractDataAgreementApArPostingDetailImp(Agreement) Export
 	EndIf;
 	Return Enums.ApArPostingDetail.EmptyRef();
 EndFunction
-
-Function CovertQuantityToQuantityInBaseUnitOptions(ItemBundle, Unit, Quantity) Export
-	Return Catalogs.Units.Convert(Unit, ItemBundle.Unit, Quantity);
-EndFunction	
+	
+Function ConvertQuantityToQuantityInBaseUnit(Bundle, Unit, Quantity) Export
+	If TypeOf(Bundle) = Type("CatalogRef.ItemKeys") Then
+		Return Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(Bundle, Unit, Quantity).QuantityInBaseUnit;
+	ElsIf TypeOf(Bundle) = Type("CatalogRef.Items") Then
+		Return Catalogs.Units.Convert(Unit, Bundle.Unit, Quantity);
+	EndIf;
+EndFunction
 	

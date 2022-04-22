@@ -2869,7 +2869,8 @@ EndFunction
 Function BindQuantity(Parameters)
 	DataPath = "Quantity";
 	Binding = New Structure();
-	Binding.Insert("Bundling", "StepCovertQuantityToQuantityInBaseUnit");
+	Binding.Insert("Bundling"   , "StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
+	Binding.Insert("Unbundling" , "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -2890,12 +2891,27 @@ Function BindQuantityInBaseUnit(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
-// QuantityInBaseUnit.CovertQuantityToQuantityInBaseUnit.Step
-Procedure StepCovertQuantityToQuantityInBaseUnit(Parameters, Chain) Export
+// QuantityInBaseUnit.CovertQuantityToQuantityInBaseUnit[ItemBundle].Step
+Procedure StepCovertQuantityToQuantityInBaseUnit_ItemBundle(Parameters, Chain) Export
+	StepCovertQuantityToQuantityInBaseUnit(Parameters, Chain, "ItemBundle");
+EndProcedure
+
+// QuantityInBaseUnit.CovertQuantityToQuantityInBaseUnit[ItemKeyBundle].Step
+Procedure StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle(Parameters, Chain) Export
+	StepCovertQuantityToQuantityInBaseUnit(Parameters, Chain, "ItemKeyBundle")
+EndProcedure
+
+Procedure StepCovertQuantityToQuantityInBaseUnit(Parameters, Chain, Type)
 	Chain.CovertQuantityToQuantityInBaseUnit.Enable = True;
 	Chain.CovertQuantityToQuantityInBaseUnit.Setter = "SetQuantityInBaseUnit";
 	Options = ModelClientServer_V2.CovertQuantityToQuantityInBaseUnitOptions(); 
-	Options.ItemBundle = GetItemBundle(Parameters);
+	If Type = "ItemBundle" Then
+		Options.ItemBundle = GetItemBundle(Parameters);
+	ElsIf Type = "ItemKeyBundle" Then
+		Options.ItemBundle = GetItemKeyBundle(Parameters);
+	Else
+		Raise StrTemplate("Unsupported bundle type [%1]", Type);
+	EndIf;
 	Options.Unit       = GetUnit(Parameters);
 	Options.Quantity   = GetQuantity(Parameters);
 	Options.StepName   = "StepCovertQuantityToQuantityInBaseUnit";
@@ -2928,7 +2944,9 @@ EndFunction
 Function BindUnit(Parameters)
 	DataPath = "Unit";
 	Binding = New Structure();
-	Binding.Insert("Bundling", "StepCovertQuantityToQuantityInBaseUnit");
+	Binding.Insert("Bundling"   , "StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
+	Binding.Insert("Unbundling" , "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -2958,7 +2976,37 @@ EndFunction
 Function BindItemBundle(Parameters)
 	DataPath = "ItemBundle";
 	Binding = New Structure();
-	Binding.Insert("Bundling", "StepCovertQuantityToQuantityInBaseUnit");
+	Binding.Insert("Bundling", "StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_KEY_BUNDLE
+
+// ItemKeyBundle.OnChange
+Procedure ItemKeyBundleOnChange(Parameters) Export
+	AddViewNotify("OnSetItemKeyBundleNotify", Parameters);
+	Binding = BindItemKeyBundle(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemKeyBundle.Set
+Procedure SetItemKeyBundle(Parameters, Results) Export
+	Binding = BindItemKeyBundle(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetItemKeyBundleNotify");
+EndProcedure
+
+// ItemKeyBundle.Get
+Function GetItemKeyBundle(Parameters)
+	Return GetPropertyObject(Parameters, BindItemKeyBundle(Parameters).DataPath);
+EndFunction
+
+// ItemKeyBundle.Bind
+Function BindItemKeyBundle(Parameters)
+	DataPath = "ItemKeyBundle";
+	Binding = New Structure();
+	Binding.Insert("Unbundling", "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

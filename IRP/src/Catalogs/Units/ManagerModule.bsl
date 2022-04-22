@@ -81,12 +81,12 @@ Function Convert(FromUnit, ToUnit, Quantity) Export
 EndFunction
 
 Function ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity) Export
-	BasisUnit = GetBasisQuantity(ItemKey);
+	BasisUnit = GetBasisUnit(ItemKey);
 	QuantityInBaseUnit =  Convert(Unit, BasisUnit, Quantity);
 	Return New Structure("BasisUnit, QuantityInBaseUnit", BasisUnit, QuantityInBaseUnit);
 EndFunction
 
-Function GetBasisQuantity(ItemKey) Export
+Function GetBasisUnit(ItemKey)
 	If ValueIsFilled(ItemKey.Unit) Then
 		Return ItemKey.Unit;
 	Else

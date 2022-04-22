@@ -2042,6 +2042,21 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_KEY_BUNDLE
+
+Procedure ItemKeyBundleOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.ItemKeyBundleOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetItemKeyBundleNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
 #Region OFFERS
 	
 Procedure OffersOnChange(Object, Form) Export

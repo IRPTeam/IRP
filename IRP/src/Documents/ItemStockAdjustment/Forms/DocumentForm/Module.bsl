@@ -1,9 +1,4 @@
-#Region FormEventHandlers
-
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocItemStockAdjustmentServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-EndProcedure
+#Region FORM
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
@@ -11,8 +6,8 @@ Procedure OnReadAtServer(CurrentObject)
 EndProcedure
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	DocItemStockAdjustmentServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	DocItemStockAdjustmentServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 &AtServer
@@ -20,8 +15,18 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	DocItemStockAdjustmentServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+Procedure OnOpen(Cancel)
+	DocItemStockAdjustmentClient.OnOpen(Object, ThisObject, Cancel);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -31,16 +36,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure OnOpen(Cancel)
-	DocItemStockAdjustmentClient.OnOpen(Object, ThisObject, Cancel);
-EndProcedure
-
 #EndRegion
 
-#Region FormHeaderItemsEventHandlers
-
-#Region ItemCompany
+#Region COMPANY
 
 &AtClient
 Procedure CompanyOnChange(Item)
@@ -58,33 +56,45 @@ Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 #EndRegion
+
+#Region STORE
+
 &AtClient
 Procedure StoreOnChange(Item)
 	DocItemStockAdjustmentClient.StoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region _DATE
+
 &AtClient
 Procedure DateOnChange(Item)
 	DocItemStockAdjustmentClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
+
 #EndRegion
 
-#Region FormTableItemsEventHandlers
-#Region ItemList
+#Region ITEM_LIST
+
 &AtClient
-Procedure SearchByBarcodeCommand(Command)
-	SearchByBarcode();
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocItemStockAdjustmentClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
-Procedure ItemListOnChange(Item) Export
-	DocItemStockAdjustmentClient.ItemListOnChange(Object, ThisObject, Item);
+Procedure ItemListAfterDeleteRow(Item)
+	DocItemStockAdjustmentClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
-#Region Item
+
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
+
 &AtClient
 Procedure ItemListItemOnChange(Item)
-	DocItemStockAdjustmentClient.ItemListItemOnChange(Object, ThisObject, Item);
+	DocItemStockAdjustmentClient.ItemListItemOnChange(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -96,57 +106,60 @@ EndProcedure
 Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocItemStockAdjustmentClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
+
 #EndRegion
 
-#Region ItemKey
+#Region _ITEM_KEY
+
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
-	DocItemStockAdjustmentClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+	DocItemStockAdjustmentClient.ItemListItemKeyOnChange(Object, ThisObject);
 EndProcedure
+
 #EndRegion
 
-#Region Unit
+#Region UNIT
+
 &AtClient
 Procedure ItemListUnitOnChange(Item)
-	DocItemStockAdjustmentClient.ItemListUnitOnChange(Object, ThisObject, Item);
+	DocItemStockAdjustmentClient.ItemListUnitOnChange(Object, ThisObject);
 EndProcedure
 
 #EndRegion
 
-#Region Quantity
+#Region QUANTITY
+
 &AtClient
 Procedure ItemListQuantityOnChange(Item)
-	DocItemStockAdjustmentClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+	DocItemStockAdjustmentClient.ItemListQuantityOnChange(Object, ThisObject);
 EndProcedure
+
 #EndRegion
 
 #EndRegion
+
 #EndRegion
 
-#Region FormCommandsEventHandlers
-&AtClient
-Procedure ShowRowKey(Command)
-	DocumentsClient.ShowRowKey(ThisObject);
-EndProcedure
-#EndRegion
-
-#Region Public
-// все методы, которые являются экспортными, и не относятся к оповещениям внутри формы
-#EndRegion
-
-#Region Private
+#Region SERVICE
 
 &AtClient
-Procedure SearchByBarcode(Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
-EndProcedure
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocItemStockAdjustmentClient);
+	Str.Insert("Server", DocItemStockAdjustmentServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
 
 &AtClient
-Procedure OpenScanForm(Command)
-	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
 EndProcedure
 
-#Region GroupTitleDecorations
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -170,16 +183,7 @@ EndProcedure
 
 #EndRegion
 
-#Region DescriptionEvents
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region AddAttributes
+#Region ADD_ATTRIBUTES
 
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
@@ -193,7 +197,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ExternalCommands
+#Region EXTERNAL_COMMANDS
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -208,17 +212,24 @@ EndProcedure
 
 #EndRegion
 
-#EndRegion
-
-#Region Service
+#Region COMMANDS
 
 &AtClient
-Function GetProcessingModule() Export
-	Str = New Structure;
-	Str.Insert("Client", DocItemStockAdjustmentClient);
-	Str.Insert("Server", DocItemStockAdjustmentServer);
-	Return Str;
-EndFunction
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+#EndRegion
 
 &AtClient
 Procedure ShowHiddenTables(Command)

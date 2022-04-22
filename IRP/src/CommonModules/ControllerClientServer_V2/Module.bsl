@@ -4250,6 +4250,7 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("InventoryTransfer"         , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("InventoryTransferOrder"    , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("PhysicalInventory"         , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("ItemStockAdjustment"       , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4415,6 +4416,9 @@ Function BindItemListItemKey(Parameters)
 		"StepChangeUnitByItemKey");
 	
 	Binding.Insert("PhysicalInventory",
+		"StepChangeUnitByItemKey");
+	
+	Binding.Insert("ItemStockAdjustment",
 		"StepChangeUnitByItemKey");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);

@@ -1,4 +1,28 @@
-#Region FormEvents
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	SetEnableWaysToFillItemListByBundle();
+	DocUnbundlingServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+EndProcedure
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	DocUnbundlingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Parameters.Key.IsEmpty() Then
+		SetEnableWaysToFillItemListByBundle();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
@@ -6,9 +30,9 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocUnbundlingServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 EndProcedure
 
-&AtServer
-Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+&AtClient
+Procedure OnOpen(Cancel)
+	DocUnbundlingClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtClient
@@ -23,35 +47,265 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 EndProcedure
 
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocUnbundlingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-	If Parameters.Key.IsEmpty() Then
-		SetEnableWaysToFillItemListByBundle();
-	EndIf;
+Procedure SetEnableWaysToFillItemListByBundle()
+	WaysToFilling = Catalogs.ItemKeys.GetWaysToFillItemListByBundle(Object.ItemKeyBundle);
+
+	Items.FillItemListBySpecification.Enabled = WaysToFilling.BySpecification;
+	Items.FillItemListByBundling.Enabled = WaysToFilling.ByBundling;
 EndProcedure
 
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	SetEnableWaysToFillItemListByBundle();
-	DocUnbundlingServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+#EndRegion
+
+#Region COMPANY
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	DocUnbundlingClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure OnOpen(Cancel)
-	DocUnbundlingClient.OnOpen(Object, ThisObject, Cancel);
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocUnbundlingClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocUnbundlingClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_BUNDLE
+
+&AtClient
+Procedure ItemBundleOnChange(Item)
+	DocUnbundlingClient.ItemBundleOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemBundleStartChoice(Item, ChoiceData, StandardProcessing)
+	DocUnbundlingClient.ItemBundleStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemBundleEditTextChange(Item, Text, StandardProcessing)
+	DocUnbundlingClient.ItemBundleEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY_BUNDLE
+
+&AtClient
+Procedure ItemKeyBundleOnChange(Item)
+	DocUnbundlingClient.ItemKeyBundleOnChange(Object, ThisObject, Item);
+	SetEnableWaysToFillItemListByBundle();
+EndProcedure
+
+#EndRegion
+
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocUnbundlingClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region STORE
+
+&AtClient
+Procedure StoreOnChange(Item)
+	DocUnbundlingClient.StoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure QuantityOnChange(Item)
+	DocUnbundlingClient.QuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure UnitOnChange(Item)
+	DocUnbundlingClient.UnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocUnbundlingClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocUnbundlingClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	DocUnbundlingClient.ItemListItemOnChange(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocUnbundlingClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	DocUnbundlingClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure ItemListItemKeyOnChange(Item)
+	DocUnbundlingClient.ItemListItemKeyOnChange(Object, ThisObject);
+	
+//	CurrentRow = Items.ItemList.CurrentData;
+//	If CurrentRow = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	CalculationSettings = New Structure();
+//	CalculationSettings.Insert("UpdateUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocUnbundlingClient.ItemListQuantityOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocUnbundlingClient.ItemListUnitOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocUnbundlingClient);
+	Str.Insert("Server", DocUnbundlingServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+#EndRegion
+
+#Region ADD_ATTRIBUTES
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
 EndProcedure
 
 &AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
+
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
 
 &AtClient
 Procedure OpenPickupItems(Command)
 	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
-#EndRegion
+&AtClient
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
 
 &AtClient
 Procedure FillItemListBySpecification(Command)
@@ -87,217 +341,7 @@ Procedure FillItemListByBundleContentAtServer()
 	DocumentsServer.FillItemList(Object, ThisObject);
 EndProcedure
 
-#Region ItemList
-
-&AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocUnbundlingClient.ItemListOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	If Clone Then
-		Item.CurrentData.Key = New UUID();
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure ItemListItemOnChange(Item)
-	DocUnbundlingClient.ItemListItemOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemKeyOnChange(Item)
-	CurrentRow = Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBundlingClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	DocBundlingClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
 #EndRegion
-
-#Region ItemCompany
-
-&AtClient
-Procedure CompanyOnChange(Item)
-	DocUnbundlingClient.CompanyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-	DocUnbundlingClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
-	DocUnbundlingClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-&AtClient
-Procedure ItemKeyBundleOnChange(Item)
-	DocUnbundlingClient.ItemKeyBundleOnChange(Object, ThisObject, Item);
-	SetEnableWaysToFillItemListByBundle();
-EndProcedure
-
-&AtServer
-Procedure SetEnableWaysToFillItemListByBundle()
-	WaysToFilling = Catalogs.ItemKeys.GetWaysToFillItemListByBundle(Object.ItemKeyBundle);
-
-	Items.FillItemListBySpecification.Enabled = WaysToFilling.BySpecification;
-	Items.FillItemListByBundling.Enabled = WaysToFilling.ByBundling;
-EndProcedure
-
-#Region ItemItemBundle
-
-&AtClient
-Procedure ItemBundleOnChange(Item)
-	DocUnbundlingClient.ItemBundleOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemBundleStartChoice(Item, ChoiceData, StandardProcessing)
-	DocUnbundlingClient.ItemBundleStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemBundleEditTextChange(Item, Text, StandardProcessing)
-	DocUnbundlingClient.ItemBundleEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-&AtClient
-Procedure StoreOnChange(Item)
-	DocUnbundlingClient.StoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure QuantityOnChange(Item)
-	DocUnbundlingClient.QuantityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure UnitOnChange(Item)
-	DocUnbundlingClient.UnitOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListQuantityOnChange(Item)
-	DocUnbundlingClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListUnitOnChange(Item)
-	DocUnbundlingClient.ItemListUnitOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DateOnChange(Item)
-	DocUnbundlingClient.DateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure SearchByBarcode(Command, Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure OpenScanForm(Command)
-	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
-EndProcedure
-
-&AtClient
-Procedure ShowRowKey(Command)
-	DocumentsClient.ShowRowKey(ThisObject);
-EndProcedure
-
-#Region GroupTitleDecorations
-
-&AtClient
-Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
-EndProcedure
-
-&AtClient
-Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
-EndProcedure
-
-#EndRegion
-
-#Region DescriptionEvents
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region AddAttributes
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure AddAttributesCreateFormControl()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
-EndProcedure
-
-#EndRegion
-
-#Region ExternalCommands
-
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-#EndRegion
-
-#Region Service
-
-&AtClient
-Function GetProcessingModule() Export
-	Str = New Structure;
-	Str.Insert("Client", DocUnbundlingClient);
-	Str.Insert("Server", DocUnbundlingServer);
-	Return Str;
-EndFunction
 
 &AtClient
 Procedure ShowHiddenTables(Command)

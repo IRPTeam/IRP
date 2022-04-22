@@ -1071,11 +1071,11 @@ EndFunction
 #Region CONVERT_QUANTITY_IN_QUANTITY_IN_BASE_UNIT
 
 Function CovertQuantityToQuantityInBaseUnitOptions() Export
-	Return GetChainLinkOptions("ItemBundle, Unit, Quantity");
+	Return GetChainLinkOptions("Bundle, Unit, Quantity");
 EndFunction
 
 Function CovertQuantityToQuantityInBaseUnitExecute(Options) Export
-	Return ModelServer_V2.CovertQuantityToQuantityInBaseUnitOptions(Options.ItemBundle, Options.Unit, Options.Quantity);
+	Return ModelServer_V2.ConvertQuantityToQuantityInBaseUnit(Options.ItemBundle, Options.Unit, Options.Quantity);
 EndFunction
 
 #EndRegion

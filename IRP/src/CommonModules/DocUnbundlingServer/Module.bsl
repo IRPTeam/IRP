@@ -10,6 +10,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsServer.FillItemList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
+	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -25,9 +26,9 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
-Function CalculateQuantityInBaseUnit(ItemKey, Unit, Quantity) Export
-	Return Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity).QuantityInBaseUnit;
-EndFunction
+//Function CalculateQuantityInBaseUnit(ItemKey, Unit, Quantity) Export
+//	Return Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity).QuantityInBaseUnit;
+//EndFunction
 
 #EndRegion
 

@@ -68,14 +68,10 @@ Scenario: _032000 discount form
 			| 'Maximum'      |
 		And I activate current test client window
 		And I press keyboard shortcut "Enter"
-		And "Offers" table became equal
-			| 'Presentation'              | 'Is select' | '%' | '∑' |
-			| 'Special Offers'            | ''          | ''  | ''  |
-			| 'Minimum'                   | ''          | ''  | ''  |
-			| 'Special Message DialogBox' | '✔'        | ''  | ''  |
-			| 'Discount 1 without Vat'    | '✔'        | ''  | ''  |
-			| 'Maximum'                   | ''          | ''  | ''  |
-			| 'Document discount'         | '☐'        | ''  | ''  |
+		When I Check the steps for Exception
+        	|"And I go to line in "Offers" table"|
+			| 'Presentation' |
+			| 'Discount Price 1'      |
 		And I go to line in "Offers" table
 			| 'Presentation' |
 			| 'Maximum'      |

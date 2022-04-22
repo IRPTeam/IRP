@@ -2883,11 +2883,6 @@ Procedure SetQuantityInBaseUnit(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results);
 EndProcedure
 
-// QuantityInBaseUnit.Get
-Function GetQuantityInBaseUnit(Parameters)
-	Return GetPropertyObject(Parameters, BindQuantityInBaseUnit(Parameters).DataPath);
-EndFunction
-
 // QuantityInBaseUnit.Bind
 Function BindQuantityInBaseUnit(Parameters)
 	DataPath = "QuantityInBaseUnit";

@@ -4249,6 +4249,7 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("InternalSupplyRequest"     , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("InventoryTransfer"         , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("InventoryTransferOrder"    , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("PhysicalInventory"         , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4413,6 +4414,9 @@ Function BindItemListItemKey(Parameters)
 	Binding.Insert("InternalSupplyRequest",
 		"StepChangeUnitByItemKey");
 	
+	Binding.Insert("PhysicalInventory",
+		"StepChangeUnitByItemKey");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4539,6 +4543,8 @@ Function BindItemListUnit(Parameters)
 	Binding.Insert("RetailReturnReceipt", 
 		"StepItemListCalculateQuantityInBaseUnit,
 		|StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PhysicalInventory", "BindVoid");
 	
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
@@ -5149,6 +5155,40 @@ Procedure StepItemListCalculateQuantityInBaseUnit(Parameters, Chain) Export
 		Chain.Calculations.Options.Add(Options);
 	EndDo;	
 EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_PHYS_COUNT
+
+// ItemList.PhysCount.Set
+Procedure SetItemListPhysCount(Parameters, Results) Export
+	Binding = BindItemListPhysCount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.PhysCount.Bind
+Function BindItemListPhysCount(Parameters)
+	DataPath = "ItemList.PhysCount";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_DIFFERENCE
+
+// ItemList.Difference.Set
+Procedure SetItemListDifference(Parameters, Results) Export
+	Binding = BindItemListDifference(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.Difference.Bind
+Function BindItemListDifference(Parameters)
+	DataPath = "ItemList.Difference";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 

@@ -39,7 +39,8 @@ IsUsedNewFunctionality =
 	Or TypeOf(Source) = Type("DocumentObject.SalesReturnOrder")
 	Or TypeOf(Source) = Type("DocumentObject.PurchaseReturnOrder")
 	Or TypeOf(Source) = Type("DocumentObject.InventoryTransfer")
-	Or TypeOf(Source) = Type("DocumentObject.InventoryTransferOrder");
+	Or TypeOf(Source) = Type("DocumentObject.InventoryTransferOrder")
+	Or TypeOf(Source) = Type("DocumentObject.PhysicalInventory");
 
 	Data = New Structure();
 

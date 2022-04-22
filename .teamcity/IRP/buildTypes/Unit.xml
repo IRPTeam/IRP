@@ -23,6 +23,7 @@
     </disabled-settings>
     <parameters>
       <param name="env.1CPwd" value="8HRUYXL2UC" />
+      <param name="env.1CUser" value="CI" />
       <param name="env.Database1CName" value="%teamcity.build.id%" />
       <param name="env.ExtName" value="Unit" />
       <param name="env.SQLHostname" value="" />

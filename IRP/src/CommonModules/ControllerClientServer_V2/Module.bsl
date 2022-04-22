@@ -2906,9 +2906,9 @@ Procedure StepCovertQuantityToQuantityInBaseUnit(Parameters, Chain, Type)
 	Chain.CovertQuantityToQuantityInBaseUnit.Setter = "SetQuantityInBaseUnit";
 	Options = ModelClientServer_V2.CovertQuantityToQuantityInBaseUnitOptions(); 
 	If Type = "ItemBundle" Then
-		Options.ItemBundle = GetItemBundle(Parameters);
+		Options.Bundle = GetItemBundle(Parameters);
 	ElsIf Type = "ItemKeyBundle" Then
-		Options.ItemBundle = GetItemKeyBundle(Parameters);
+		Options.Bundle = GetItemKeyBundle(Parameters);
 	Else
 		Raise StrTemplate("Unsupported bundle type [%1]", Type);
 	EndIf;
@@ -4419,6 +4419,7 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("PhysicalInventory"         , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("ItemStockAdjustment"       , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("Bundling"                  , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("Unbundling"                  , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4586,6 +4587,7 @@ Function BindItemListItemKey(Parameters)
 	Binding.Insert("PhysicalInventory"   , "StepChangeUnitByItemKey");
 	Binding.Insert("ItemStockAdjustment" , "StepChangeUnitByItemKey");
 	Binding.Insert("Bundling"            , "StepChangeUnitByItemKey");
+	Binding.Insert("Unbundling"            , "StepChangeUnitByItemKey");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

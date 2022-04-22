@@ -1075,7 +1075,7 @@ Function CovertQuantityToQuantityInBaseUnitOptions() Export
 EndFunction
 
 Function CovertQuantityToQuantityInBaseUnitExecute(Options) Export
-	Return ModelServer_V2.ConvertQuantityToQuantityInBaseUnit(Options.ItemBundle, Options.Unit, Options.Quantity);
+	Return ModelServer_V2.ConvertQuantityToQuantityInBaseUnit(Options.Bundle, Options.Unit, Options.Quantity);
 EndFunction
 
 #EndRegion

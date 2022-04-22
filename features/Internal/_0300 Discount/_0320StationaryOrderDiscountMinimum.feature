@@ -72,18 +72,22 @@ Scenario: _032000 discount form
 			| 'Presentation'              | 'Is select' | '%' | '∑' |
 			| 'Special Offers'            | ''          | ''  | ''  |
 			| 'Minimum'                   | ''          | ''  | ''  |
-			| 'Special Message DialogBox' | '✔'         | ''  | ''  |
-			| 'Discount 1 without Vat'    | '✔'         | ''  | ''  |
+			| 'Special Message DialogBox' | '✔'        | ''  | ''  |
+			| 'Discount 1 without Vat'    | '✔'        | ''  | ''  |
 			| 'Maximum'                   | ''          | ''  | ''  |
-			| 'Document discount'         | '☐'         | ''  | ''  |
+			| 'Document discount'         | '☐'        | ''  | ''  |
 		And I go to line in "Offers" table
 			| 'Presentation' |
 			| 'Maximum'      |
 		And I activate current test client window
 		And I press keyboard shortcut "Enter"
-		And "Offers" table contains lines
-			| 'Presentation'                                                               | 'Is select' | '%' | '∑' |
-			| 'Maximum'                                                                    | ''          | ''  | ''  |
+		And "Offers" table became equal
+			| 'Presentation'                                                               | 'Is select'  | '%' | '∑' |
+			| 'Special Offers'                                                             | ''           | ''  | ''  |
+			| 'Minimum'                                                                    | ''           | ''  | ''  |
+			| 'Special Message DialogBox'                                                  | '✔'         | ''  | ''  |
+			| 'Discount 1 without Vat'                                                     | '✔'         | ''  | ''  |
+			| 'Maximum'                                                                    | ''           | ''  | ''  |
 			| 'Discount Price 1'                                                           | '☐'         | ''  | ''  |
 			| 'Special Message Notification'                                               | '✔'         | ''  | ''  |
 			| 'Discount Price 2'                                                           | '☐'         | ''  | ''  |
@@ -91,6 +95,7 @@ Scenario: _032000 discount form
 			| 'All items 5+1, Discount on Basic Partner terms'                             | '☐'         | ''  | ''  |
 			| '4+1 Dress and Trousers, Discount on Basic Partner terms'                    | '☐'         | ''  | ''  |
 			| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' | '☐'         | ''  | ''  |
+			| 'Document discount'                                                          | '☐'         | ''  | ''  |
 		And I close all client application windows
 		
 				

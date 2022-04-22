@@ -1,4 +1,4 @@
-#Region FormEvents
+#Region FORM
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
@@ -26,13 +26,9 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
-//Function CalculateQuantityInBaseUnit(ItemKey, Unit, Quantity) Export
-//	Return Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity).QuantityInBaseUnit;
-//EndFunction
-
 #EndRegion
 
-#Region GroupTitle
+#Region TITLE_DECORATIONS
 
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
@@ -50,7 +46,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ListFormEvents
+#Region LIST_FORM
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
@@ -58,7 +54,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ChoiceFormEvents
+#Region CHOICE_FORM
 
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);

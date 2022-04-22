@@ -3,7 +3,6 @@
 
 Procedure OnOpen(Object, Form, Cancel) Export
 	ViewClient_V2.OnOpen(Object, Form, "ItemList");	
-//	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -13,7 +12,6 @@ EndProcedure
 
 Procedure DateOnChange(Object, Form, Item) Export
 	ViewClient_V2.DateOnChange(Object, Form, "ItemList");
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -22,7 +20,6 @@ EndProcedure
 
 Procedure CompanyOnChange(Object, Form, Item) Export
 	ViewClient_V2.CompanyOnChange(Object, Form, "ItemList");
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -49,7 +46,6 @@ EndProcedure
 
 Procedure StoreOnChange(Object, Form, Item) Export
 	ViewClient_V2.StoreObjectAttrOnChange(Object, Form, "ItemList");
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -58,9 +54,6 @@ EndProcedure
 
 Procedure QuantityOnChange(Object, Form, Item) Export
 	ViewClient_V2.QuantityOnChange(Object, Form, "ItemList");
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-//	Object.QuantityInBaseUnit = DocUnbundlingServer.CalculateQuantityInBaseUnit(Object.ItemKeyBundle, Object.Unit,
-//		Object.Quantity);
 EndProcedure
 
 #EndRegion
@@ -69,9 +62,6 @@ EndProcedure
 
 Procedure UnitOnChange(Object, Form, Item) Export
 	ViewClient_V2.UnitOnChange(Object, Form, "ItemList");
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-//	Object.QuantityInBaseUnit = DocUnbundlingServer.CalculateQuantityInBaseUnit(Object.ItemKeyBundle, Object.Unit,
-//		Object.Quantity);
 EndProcedure
 
 #EndRegion
@@ -80,7 +70,6 @@ EndProcedure
 
 Procedure ItemBundleOnChange(Object, Form, Item) Export
 	ViewClient_V2.ItemBundleOnChange(Object, Form, "ItemList");
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure ItemBundleStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -99,7 +88,6 @@ EndProcedure
 
 Procedure ItemKeyBundleOnChange(Object, Form, Item) Export
 	ViewClient_V2.ItemKeyBundleOnChange(Object, Form, "ItemList");
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -120,20 +108,6 @@ EndProcedure
 
 Procedure ItemListItemOnChange(Object, Form, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListItemOnChange(Object, Form, CurrentData);
-	
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
-//	If ValueIsFilled(CurrentData.ItemKey) 
-//		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item")	<> CurrentData.Item Then
-//		CurrentData.ItemKey = Undefined;
-//	EndIf;
-//
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdateUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -145,10 +119,6 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 	ArrayOfFilters = DocumentsClient.GetArrayOfFiltersForSelectItemWithoutServiceFilter();
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
-
-//Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
-//	DocumentsClient.FillRowIDInItemList(Object);
-//EndProcedure
 
 #EndRegion
 
@@ -164,13 +134,6 @@ EndProcedure
 
 Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListQuantityOnChange(Object, Form, CurrentData);
-	
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	Actions = New Structure("CalculateQuantityInBaseUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 EndProcedure
 
 #EndRegion
@@ -179,13 +142,6 @@ EndProcedure
 
 Procedure ItemListUnitOnChange(Object, Form, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListUnitOnChange(Object, Form, CurrentData);
-
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	Actions = New Structure("CalculateQuantityInBaseUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 EndProcedure
 
 #EndRegion

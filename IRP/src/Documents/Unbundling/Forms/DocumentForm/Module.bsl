@@ -178,15 +178,6 @@ EndProcedure
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocUnbundlingClient.ItemListItemKeyOnChange(Object, ThisObject);
-	
-//	CurrentRow = Items.ItemList.CurrentData;
-//	If CurrentRow = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdateUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 #EndRegion

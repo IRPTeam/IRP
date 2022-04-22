@@ -110,10 +110,10 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			When in opened panel I select "$$SalesOrder300521$$"
 			And I click "Related documents" button
 			And "DocumentsTree" table contains lines
-			| 'Presentation'                          |
-			| '$$SalesOrder300521$$'           |
-			| '$$ShipmentConfirmation300521$$' |
-			| '$$SalesInvoice300521$$'         |
+				| 'Presentation'                          |
+				| '$$SalesOrder300521$$'           |
+				| '$$ShipmentConfirmation300521$$' |
+				| '$$SalesInvoice300521$$'         |
 		* Check unpost Sales invoice from report Related documents
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeUnpost"
@@ -136,8 +136,8 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And I click "Refresh" button
 			And Delay 10
 			And "List" table contains lines
-			| 'Recorder'             |
-			| '$$SalesInvoice300521$$' |
+				| 'Recorder'             |
+				| '$$SalesInvoice300521$$' |
 		* Mark for deletion Sales invoice from report Related documents
 			When in opened panel I select "Related documents"
 			And I go to the last line in "DocumentsTree" table
@@ -151,6 +151,30 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeDelete"
 			And I go to the last line in "DocumentsTree" table
+		* Open document from list form
+			And I go to the first line in "DocumentsTree" table
+			And I select current line in "DocumentsTree" table
+			Then "Sales order * dated *" window is opened
+			And I close current window
+		* Click Edit command
+			And I go to the first line in "DocumentsTree" table
+			And in the table "DocumentsTree" I click the button named "DocumentsTreeEdit"
+			Then "Sales order * dated *" window is opened
+			And I close current window
+		* Click Refresh command
+			And in the table "DocumentsTree" I click the button named "DocumentsTreeRefresh"
+			Then user message window does not contain messages
+		* Delete, F9
+			And I go to the first line in "DocumentsTree" table
+			And I press keyboard shortcut "F9"
+			Then user message window does not contain messages	
+			And I press keyboard shortcut "Delete"	
+			Then user message window does not contain messages
+			And "DocumentsTree" table contains lines
+				| 'Presentation'                          |
+				| '$$SalesOrder300521$$'           |
+				| '$$ShipmentConfirmation300521$$' |
+				| '$$SalesInvoice300521$$'         |									
 		And I close all client application windows
 
 

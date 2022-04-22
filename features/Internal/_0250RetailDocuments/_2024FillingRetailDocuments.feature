@@ -3672,13 +3672,21 @@ Scenario: _0154192 create document Retail Sales Receipt from Point of sale (paym
 		And I click the button named "Enter"
 		And I close all client application windows
 		
-		
-						
-				
-		
-				
+Scenario: _0154193 check print last receipt from POS
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"
+	* Print receipt
+		And I click "Print last receipt" button
+		And in "Result" spreadsheet document I move to "R2C2" cell
+		Then "Print form" window is opened
+		And I click "Edit result" button
+		And in "Result" spreadsheet document I move to "R16C4" cell
+		And in "Result" spreadsheet document I double-click the current cell
+		And in "Result" spreadsheet document I input text "111"
+		And in "Result" spreadsheet document I move to "R21C4" cell
+		Then user message window does not contain messages
+		And I close all client application windows
 
-		
 							
 
 Scenario: _999999 close TestClient session

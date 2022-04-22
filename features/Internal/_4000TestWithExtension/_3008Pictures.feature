@@ -366,6 +366,7 @@ Scenario: _300113 show add attributes in the item list
 		And I activate current test client window
 		And I click Test Client element "Rose" "Edit" UI Automation
 		And I click the button named "ViewAdditionalAttribute"
+		And I activate current test client window
 		When I Check the steps for Exception
         	|"And I click Test Client element "Rose" "Edit" UI Automation"|
 		And I close all client application windows
@@ -406,15 +407,28 @@ Scenario: _300116 check download pictures from Item
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
 			| 'Description'  |
-			| 'Dress'        |
+			| 'Trousers'        |
 		And I select current line in "List" table
-	* Download picture
+	* Select DefaultFilesStorageVolume
 		And I click "Attached files" button
 		Then "Attach file" window is opened
+		And I click Choice button of the field named "DefaultFilesStorageVolume"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'DEFAULT PICTURE STORAGE' |
+		And I select current line in "List" table	
+	* Download picture
+		// And I input "#workingDir#/features/Internal" text in the field named "dragFile"	
+		And I input "#workingDir#/features/Internal/_4000TestWithExtension\dresswhite.jpg" text in the field named "dragFile"	
+		And I click the button named "dragFileBtn"	
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "FileList" table became equal
+			| 'File'           |
+			| 'dresswhite.jpg' |
+		And I input "#workingDir#/features/Internal/_4000TestWithExtension\dresswhite12.jpg" text in the field named "saveFile"	
 		And I click "Download file" button
-		Then "Get file" window is opened
-		// And I click "Save" button
-		// Given I press ENTER
+		// And I wait for "resswhite12" file existence in "20" seconds
 		Then user message window does not contain messages
 		And I close all client application windows
 		

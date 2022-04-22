@@ -2167,7 +2167,23 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
+	* Update currency form
+		And in the table "PaymentList" I click "Edit currencies" button
+		Then "Edit currencies" window is opened
+		And I click "Update" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '20,00'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |			
+		And I click "Currency rates" button
+		And "List" table became equal
+			| 'Currency from' | 'Currency to' | 'Source'       | 'Multiplicity' | 'Rate'   |
+			| 'TRY'           | 'USD'         | 'Forex Seling' | '1'            | '0,2000' |
+			| 'TRY'           | 'USD'         | 'Forex Seling' | '1'            | '0,1712' |	
 		If user messages contain "Specify a base document for line 1." string Then
+		And I close all client application windows
+		
 
 Scenario: _0154108 total amount calculation in Cash receipt
 	* Open form Cash receipt
@@ -8207,6 +8223,31 @@ Scenario: _0154180 check that author does not copy when copying a document
 	Then the form attribute named "Author" became equal to "CI"
 	And I close all client application windows	
 	
-		
+Scenario: _0154181 additional tables
+	And I close all client application windows
+	* Open SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+		And I go to line in "List" table
+			| "Number" |
+			| "$$NumberSalesInvoice024025$$" |
+		And I select current line in "List" table
+	* Check additional tables
+		And I click "Show hidden tables" button					
+		And I expand "RowIDInfo [1]" group
+		And I move to "RowIDInfo [1]" tab
+		And I activate "Next step" field in "RowIDInfo" table
+		And I select current line in "RowIDInfo" table
+		And I input "" text in "Next step" field of "RowIDInfo" table
+		And I finish line editing in "RowIDInfo" table
+		And I click "Save" button
+		And I close "Edit hidden tables" window
+		And I click "Show row key" button
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table became equal
+			| 'Next step' |
+			| ''          |
+		And I close all client application windows
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

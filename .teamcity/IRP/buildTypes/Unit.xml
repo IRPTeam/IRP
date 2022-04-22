@@ -32,6 +32,7 @@
       <param name="env.SQLHostname" value="" />
       <param name="env.SQLPwd" value="" />
       <param name="env.SQLUser" value="" />
+      <param name="env.isExtension" value="true" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_12" name="Convert files to xml format" type="simpleRunner">

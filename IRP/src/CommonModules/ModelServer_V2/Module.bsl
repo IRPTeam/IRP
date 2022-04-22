@@ -66,3 +66,7 @@ Function ExtractDataAgreementApArPostingDetailImp(Agreement) Export
 	Return Enums.ApArPostingDetail.EmptyRef();
 EndFunction
 
+Function CovertQuantityToQuantityInBaseUnitOptions(ItemBundle, Unit, Quantity) Export
+	Return Catalogs.Units.Convert(Unit, ItemBundle.Unit, Quantity);
+EndFunction	
+	

@@ -5280,6 +5280,40 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_PHYS_COUNT
+
+// ItemList.PhysCount.Set
+Procedure SetItemListPhysCount(Parameters, Results) Export
+	Binding = BindItemListPhysCount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.PhysCount.Bind
+Function BindItemListPhysCount(Parameters)
+	DataPath = "ItemList.PhysCount";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_DIFFERENCE
+
+// ItemList.Difference.Set
+Procedure SetItemListDifference(Parameters, Results) Export
+	Binding = BindItemListDifference(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.Difference.Bind
+Function BindItemListDifference(Parameters)
+	DataPath = "ItemList.Difference";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region ITEM_LIST_TAX_RATE
 
 // ItemList.TaxRate.OnChange

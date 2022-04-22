@@ -31,6 +31,7 @@
       <param name="env.ProjectID" value="Unit" />
       <param name="env.SQLHostname" value="" />
       <param name="env.SQLPwd" value="" />
+      <param name="env.SQLUser" value="" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_12" name="Convert files to xml format" type="simpleRunner">

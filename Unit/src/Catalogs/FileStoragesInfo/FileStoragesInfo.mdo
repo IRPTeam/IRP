@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="11d25fa5-42b7-431e-b305-274685a5aad3" extendedConfigurationObject="3657a1bb-c369-497a-9638-a221c14e356d">
+  <producedTypes>
+    <objectType typeId="563d9bde-e720-46f7-ade3-bb4c7e0bb493" valueTypeId="9be15c6d-ec70-416e-982b-a0fe2fb34718"/>
+    <refType typeId="abe62a8e-6cd3-4612-8925-56aa5da26a1f" valueTypeId="0763d0b7-8f65-4093-9092-c21dd1bb7651"/>
+    <selectionType typeId="bf90f6ae-76c9-440d-b5f1-a2fb72a48d09" valueTypeId="2313f3a1-5389-4d16-b0d9-d215bd37966b"/>
+    <listType typeId="dffca77c-13f3-4c60-ac72-bcd1d82848d2" valueTypeId="b3db1e45-1c1f-44ba-83a0-5d5d4f7a562d"/>
+    <managerType typeId="72e06375-2c3c-4f7d-b324-ecae9949b06b" valueTypeId="af3dd224-793f-4a04-bfeb-a165a61380b1"/>
+  </producedTypes>
+  <name>FileStoragesInfo</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CatalogExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+</mdclass:Catalog>

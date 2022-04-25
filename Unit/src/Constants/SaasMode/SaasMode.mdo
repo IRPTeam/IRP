@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="df2e6703-fc00-48a1-839e-362b4b9204cb">
+  <producedTypes>
+    <managerType typeId="aa12625f-49ff-4113-b6a2-34fcc6efae73" valueTypeId="0137e848-67bb-45b9-a314-ce35637db1a4"/>
+    <valueManagerType typeId="7a3b12b9-f065-4bee-afc2-13b5fd6624fa" valueTypeId="e17cd5ee-7f3a-4e57-95ff-b187a9ae9043"/>
+    <valueKeyType typeId="e8718a75-1054-48ff-aab6-613291e81428" valueTypeId="254eee9d-3239-437a-b66e-7d781592c0d2"/>
+  </producedTypes>
+  <name>SaasMode</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:ConstantExtension">
+    <typeExtension>
+      <types>
+        <state>Checked</state>
+        <type>Boolean</type>
+      </types>
+    </typeExtension>
+  </extension>
+</mdclass:Constant>

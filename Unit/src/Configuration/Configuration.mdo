@@ -42,10 +42,52 @@
     </extension>
     <languageCode>en</languageCode>
   </languages>
+  <subsystems>Subsystem.Reports</subsystems>
   <subsystems>Subsystem.Unit_UnitTest</subsystems>
+  <commonPictures>CommonPicture.IconCollection2</commonPictures>
   <commonPictures>CommonPicture.Unit_Autotest</commonPictures>
+  <roles>Role.FullAccess</roles>
   <roles>Role.Unit_MainRole</roles>
   <commonModules>CommonModule.Unit_ExpenseAndRevenueTypes</commonModules>
   <commonModules>CommonModule.Unit_Service</commonModules>
+  <commonAttributes>CommonAttribute.Author</commonAttributes>
+  <commonAttributes>CommonAttribute.Branch</commonAttributes>
+  <commonAttributes>CommonAttribute.Description</commonAttributes>
+  <commonAttributes>CommonAttribute.Description_en</commonAttributes>
+  <commonAttributes>CommonAttribute.Description_hash</commonAttributes>
+  <commonAttributes>CommonAttribute.Description_ru</commonAttributes>
+  <commonAttributes>CommonAttribute.Description_tr</commonAttributes>
+  <commonAttributes>CommonAttribute.DocumentAmount</commonAttributes>
+  <commonAttributes>CommonAttribute.Height</commonAttributes>
+  <commonAttributes>CommonAttribute.ID</commonAttributes>
+  <commonAttributes>CommonAttribute.Length</commonAttributes>
+  <commonAttributes>CommonAttribute.UniqueID</commonAttributes>
+  <commonAttributes>CommonAttribute.Volume</commonAttributes>
+  <commonAttributes>CommonAttribute.Weight</commonAttributes>
+  <commonAttributes>CommonAttribute.Width</commonAttributes>
+  <definedTypes>DefinedType.typeAmount</definedTypes>
+  <definedTypes>DefinedType.typeDescription</definedTypes>
+  <definedTypes>DefinedType.typeFilesOwner</definedTypes>
+  <constants>Constant.SaasMode</constants>
+  <commonForms>CommonForm.AttachFile</commonForms>
+  <catalogs>Catalog.BusinessUnits</catalogs>
+  <catalogs>Catalog.Currencies</catalogs>
+  <catalogs>Catalog.FileStoragesInfo</catalogs>
+  <catalogs>Catalog.FileStorageVolumes</catalogs>
+  <catalogs>Catalog.IntegrationSettings</catalogs>
+  <catalogs>Catalog.ItemKeys</catalogs>
+  <catalogs>Catalog.Items</catalogs>
+  <catalogs>Catalog.ItemTypes</catalogs>
+  <catalogs>Catalog.Partners</catalogs>
+  <catalogs>Catalog.Specifications</catalogs>
+  <catalogs>Catalog.Units</catalogs>
+  <catalogs>Catalog.Users</catalogs>
+  <enums>Enum.CurrencyType</enums>
+  <enums>Enum.REP_ReportParametrTypes</enums>
+  <reports>Report.REP_Barcodes</reports>
   <dataProcessors>DataProcessor.Unit_RunTest</dataProcessors>
+  <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
+  <informationRegisters>InformationRegister.REP_ReportParameters</informationRegisters>
+  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
+  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>
 </mdclass:Configuration>

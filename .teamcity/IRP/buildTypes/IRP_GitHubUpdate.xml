@@ -6,6 +6,9 @@
     <options>
       <option name="cleanBuild" value="true" />
     </options>
+    <disabled-settings>
+      <setting-ref ref="vcsTrigger" />
+    </disabled-settings>
     <parameters />
     <build-runners />
     <vcs-settings>

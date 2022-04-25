@@ -1,10 +1,11 @@
-#Region FormEvents
+#Region FORM
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
+	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -22,7 +23,7 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitle
+#Region TITLE_DECORATIONS
 
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
@@ -37,7 +38,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ListFormEvents
+#Region LIST_FORM
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
@@ -45,7 +46,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ChoiceFormEvents
+#Region CHOICE_FORM
 
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);

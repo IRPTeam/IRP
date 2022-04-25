@@ -147,7 +147,6 @@ Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	DocInventoryTransferClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
-
 &AtClient
 Procedure ItemListBeforeDeleteRow(Item, Cancel)
 	DocInventoryTransferClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);

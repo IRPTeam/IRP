@@ -1,19 +1,8 @@
-#Region FormEvents
+#Region FORM
 
 &AtServer
-Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
-EndProcedure
-
-&AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControl();
-	EndIf;
-
-	If EventName = "NewBarcode" And IsInputAvailable() Then
-		SearchByBarcode(Undefined, Parameter);
-	EndIf;
+Procedure OnReadAtServer(CurrentObject)
+	DocBundlingServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 EndProcedure
 
 &AtServer
@@ -22,8 +11,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocBundlingServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -36,57 +30,20 @@ Procedure OnOpen(Cancel)
 	DocBundlingClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
-&AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControl();
+	EndIf;
+
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
 EndProcedure
 
 #EndRegion
 
-#Region ItemList
-
-&AtClient
-Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBundlingClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	DocBundlingClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
-	DocBundlingClient.ItemListOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	If Clone Then
-		Item.CurrentData.Key = New UUID();
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure ItemListItemOnChange(Item)
-	DocBundlingClient.ItemListItemOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemKeyOnChange(Item)
-	CurrentRow = Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
-EndProcedure
-
-#EndRegion
-
-#Region ItemCompany
+#Region COMPANY
 
 &AtClient
 Procedure CompanyOnChange(Item)
@@ -105,7 +62,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemItemBundle
+#Region ITEM_BUNDLE
 
 &AtClient
 Procedure ItemBundleOnChange(Item)
@@ -124,7 +81,126 @@ EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorations
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocBundlingClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region STORE
+
+&AtClient
+Procedure StoreOnChange(Item)
+	DocBundlingClient.StoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure QuantityOnChange(Item)
+	DocBundlingClient.QuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure UnitOnChange(Item)
+	DocBundlingClient.UnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocBundlingClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocBundlingClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	DocBundlingClient.ItemListItemOnChange(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBundlingClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	DocBundlingClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure ItemListItemKeyOnChange(Item)
+	DocBundlingClient.ItemListItemKeyOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocBundlingClient.ItemListQuantityOnChange(Object, ThisObject);
+EndProcedure
+
+#Endregion
+
+#Region UNIT
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocBundlingClient.ItemListUnitOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocBundlingClient);
+	Str.Insert("Server", DocBundlingServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -148,66 +224,7 @@ EndProcedure
 
 #EndRegion
 
-#Region DescriptionEvents
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-&AtClient
-Procedure SearchByBarcode(Command, Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure OpenScanForm(Command)
-	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
-EndProcedure
-
-&AtClient
-Procedure StoreOnChange(Item)
-	DocBundlingClient.StoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure QuantityOnChange(Item)
-	DocBundlingClient.QuantityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure UnitOnChange(Item)
-	DocBundlingClient.UnitOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListQuantityOnChange(Item)
-	DocBundlingClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListUnitOnChange(Item)
-	DocBundlingClient.ItemListUnitOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure DateOnChange(Item)
-	DocBundlingClient.DateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
-EndProcedure
-
-&AtClient
-Procedure ShowRowKey(Command)
-	DocumentsClient.ShowRowKey(ThisObject);
-EndProcedure
-
-#Region AddAttributes
+#Region ADD_ATTRIBUTES
 
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
@@ -221,7 +238,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ExternalCommands
+#Region EXTERNAL_COMMANDS
 
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
@@ -236,15 +253,29 @@ EndProcedure
 
 #EndRegion
 
-#Region Service
+#Region COMMANDS
 
 &AtClient
-Function GetProcessingModule() Export
-	Str = New Structure;
-	Str.Insert("Client", DocBundlingClient);
-	Str.Insert("Server", DocBundlingServer);
-	Return Str;
-EndFunction
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+#EndRegion
 
 &AtClient
 Procedure ShowHiddenTables(Command)

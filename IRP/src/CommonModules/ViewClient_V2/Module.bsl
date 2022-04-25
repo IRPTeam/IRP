@@ -1997,6 +1997,66 @@ EndProcedure
 
 #EndRegion
 
+#Region QUANTITY
+
+Procedure QuantityOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.QuantityOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetQuantityNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+Procedure UnitOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.UnitOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetUnitNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_BUNDLE
+
+Procedure ItemBundleOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.ItemBundleOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetItemBundleNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY_BUNDLE
+
+Procedure ItemKeyBundleOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.ItemKeyBundleOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetItemKeyBundleNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
 #Region OFFERS
 	
 Procedure OffersOnChange(Object, Form) Export

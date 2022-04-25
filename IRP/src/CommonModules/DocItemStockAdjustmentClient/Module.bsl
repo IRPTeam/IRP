@@ -1,27 +1,26 @@
-#Region FormEvents
 
-Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+#Region FORM
+
+Procedure OnOpen(Object, Form, Cancel) Export
+	ViewClient_V2.OnOpen(Object, Form, "ItemList");
 EndProcedure
 
 #EndRegion
 
-#Region ItemCompany
+#Region COMPANY
 
 Procedure CompanyOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.CompanyOnChange(Object, Form, "ItemList");
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
 		DataCompositionComparisonType.NotEqual));
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
 		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -34,37 +33,38 @@ EndProcedure
 
 #EndRegion
 
+#Region STORE
+
 Procedure StoreOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.StoreObjectAttrOnChange(Object, Form, "ItemList");
 EndProcedure
+
+#EndRegion
+
+#Region _DATE
 
 Procedure DateOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.DateOnChange(Object, Form, "ItemList");
 EndProcedure
 
-#Region FormTableItemsEventHandlers
-#Region ItemList
+#EndRegion
 
-Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
-	DocumentsClient.FillRowIDInItemList(Object);
+#Region ITEM_LIST
+
+Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.ItemListBeforeAddRow(Object, Form, Cancel, Clone);
 EndProcedure
 
-#Region Item
+Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.ItemListAfterDeleteRow(Object, Form);
+EndProcedure
 
-Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
-	If ValueIsFilled(CurrentData.ItemKey) 
-		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item")	<> CurrentData.Item Then
-		CurrentData.ItemKey = Undefined;
-	EndIf;
+#Region ITEM_LIST_COLUMNS
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
+#Region _ITEM
+
+Procedure ItemListItemOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListItemOnChange(Object, Form, CurrentData);
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -79,46 +79,30 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemKey
-Procedure ItemListItemKeyOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
+#Region ITEM_KEY
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
+Procedure ItemListItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListItemKeyOnChange(Object, Form, CurrentData);
 EndProcedure
+
 #EndRegion
 
-#Region Quantity
-Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
+#Region QUANTITY
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
+Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListQuantityOnChange(Object, Form, CurrentData);
 EndProcedure
+
 #EndRegion
 
-#Region Unit
+#Region UNIT
 
-Procedure ItemListUnitOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
+Procedure ItemListUnitOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListUnitOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion
 
 #EndRegion
+
 #EndRegion

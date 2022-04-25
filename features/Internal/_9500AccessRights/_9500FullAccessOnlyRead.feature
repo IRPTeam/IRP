@@ -118,7 +118,6 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create document VendorsAdvancesClosing objects
 	When Create document CustomersAdvancesClosing objects
 	When Create catalog PlanningPeriods objects
-	When add test extension
 	* Set password for Sofia Borisova (Manager 3)
 			Given I open hyperlink "e1cib/list/Catalog.Users"
 			And I go to line in "List" table

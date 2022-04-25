@@ -41,12 +41,7 @@ Scenario: _300100 preparation (image setting)
 		When update ItemKeys
 		When Create catalog InterfaceGroups objects
 		When Create catalog Currencies objects
-	* Add test extension
-		Given I open hyperlink "e1cib/list/Catalog.Extensions"
-		If "List" table does not contain lines Then
-				| "Description" |
-				| "TestExtension" |
-			When add test extension
+
 
 Scenario: _300101 image setting
 	* Filling in settings in  File storages info

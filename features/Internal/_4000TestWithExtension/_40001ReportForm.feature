@@ -42,12 +42,7 @@ Scenario: _4000100 preparation
 			And I select current line in "List" table
 			And I click "Save and close" button
 		And I close all client application windows
-	# * Add test extension
-	# 	Given I open hyperlink "e1cib/list/Catalog.Extensions"
-	# 	If "List" table does not contain lines Then
-	# 			| "Description" |
-	# 			| "TestExtension" |
-	# 		When add test extension
+
 						
 
 	

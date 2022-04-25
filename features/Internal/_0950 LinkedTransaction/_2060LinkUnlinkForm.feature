@@ -210,6 +210,7 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'TRY'      | '648,15' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
+		And I click "Show row key" button
 		And I click "Ok" button
 		And I click "Show row key" button
 	* Check RowIDInfo
@@ -450,6 +451,141 @@ Scenario: _2060003 check auto link button in the SI
 			| '4' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Boots'   | '36/18SD'  | 'Front office'            | 'No'                 | ''                   | '65,000' | 'pcs'  | '6 940,68'   | '8 400,00' | '18%' | ''              | '38 559,32'  | '45 500,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close all client application windows
+
+Scenario: _20600031 check Link unlink basis documents form
+	* Open form for create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table		
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'  |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+	* Add items	
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check Link unlink basis documents forms
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then "Link / unlink document row" window is opened
+		And "ItemListRows" table contains lines
+			| 'Row presentation' |
+			| 'Dress (XS/Blue)'  |
+		And "BasisesTree" table became equal
+			| 'Row presentation'                        | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 3 dated 27.01.2021 19:50:45' | ''         | ''     | ''       | ''         |
+			| 'Dress (XS/Blue)'                         | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |	
+		* Delete and F9
+			And I go to line in "ItemListRows" table
+				| 'Row presentation' |
+				| 'Dress (XS/Blue)'  |
+			And I go to line in "BasisesTree" table
+				| 'Row presentation' |
+				| 'Dress (XS/Blue)'  |			
+			And I activate current test client window
+			And I press keyboard shortcut "Delete"
+			And "BasisesTree" table became equal
+				| 'Row presentation'                        | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+				| 'Sales order 3 dated 27.01.2021 19:50:45' | ''         | ''     | ''       | ''         |
+				| 'Dress (XS/Blue)'                         | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			And I activate current test client window
+			And I press keyboard shortcut "F9"
+			And "BasisesTree" table became equal
+				| 'Row presentation'                        | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+				| 'Sales order 3 dated 27.01.2021 19:50:45' | ''         | ''     | ''       | ''         |
+				| 'Dress (XS/Blue)'                         | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			And I go to line in "ItemListRows" table
+				| 'Row presentation' |
+				| 'Dress (XS/Blue)'  |
+			And I activate current test client window
+			And I press keyboard shortcut "Delete"
+			And "ItemListRows" table contains lines
+				| 'Row presentation' |
+				| 'Dress (XS/Blue)'  |
+			And I go to line in "ItemListRows" table
+				| 'Row presentation' |
+				| 'Dress (XS/Blue)'  |
+			And I activate current test client window
+			And I press keyboard shortcut "F9"
+			And I wait that in "ItemListRows" table number of lines will be "equal" "1" for "10" seconds
+		* Show row key
+			And I click "Show row key" button
+			Then the number of "ResultsTable" table lines is "равно" 0
+			And I activate current test client window
+			And I go to line in "BasisesTree" table
+				| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+				| 'TRY'      | '520,00' | '1,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
+			And I activate current test client window
+			And Delay 5
+			And I press keyboard shortcut "Enter"
+			And "ResultsTable" table became equal
+				| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                   | 'Unit' | 'Basis unit' | 'Quantity in base unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
+				| 'Dress' | 'XS/Blue'  | 'Store 02' | '*'   | 'Sales order 3 dated 27.01.2021 19:50:45' | 'pcs'  | 'pcs'        | '2,000'                 | 'SI&SC'        | '*'       | ''             | '*'      | '*'         |
+		* Delete Quantity and check Link unlink basis documents
+			And I close "Link / unlink document row" window
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "0,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And "BasisesTree" table became equal
+				| 'Row presentation'                        | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+				| 'Sales order 3 dated 27.01.2021 19:50:45' | ''         | ''     | ''       | ''         |
+				| 'Dress (XS/Blue)'                         | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			And I go to line in "BasisesTree" table
+				| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+				| 'TRY'      | '520,00' | '1,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
+			And in the table "BasisesTree" I click the button named "Link"
+			And I click "Ok" button
+			And "ItemList" table became equal
+				| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Price'  | 'Sales order'                             |
+				| 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  | '520,00' | 'Sales order 3 dated 27.01.2021 19:50:45' |
+		And I close all client application windows
+		
+		
+
+
 
 Scenario: _2060004 check link/unlink form in the SRO
 	* Open form for create SRO

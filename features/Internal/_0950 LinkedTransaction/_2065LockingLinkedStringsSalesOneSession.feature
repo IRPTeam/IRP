@@ -82,9 +82,62 @@ Scenario: _2065001 preparation (locking linked strings)
 		| "Documents.SalesOrder.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);" |
 		| "Documents.PurchaseOrder.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);" |
 		| "Documents.PlannedReceiptReservation.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);" |
-		
+
+
+Scenario: _20650011 Info linked documents row
+	And I close all client application windows
+	* Open SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '36'     |
+		And I select current line in "List" table
+	* Check Info linked documents row
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I activate "Locked row" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Is internal linked" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Info linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I expand a line in "BasisesTree" table
+			| 'Doc ref'                                            | 'Row presentation'                                   |
+			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' |
+	* Show row key
+		And I click "Show row key" button
+		And "ResultsTable" table became equal
+			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                              | 'Basis unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Quantity in base unit' | 'Basis key' | 'Unit' |
+			| 'Shirt' | '36/Red'   | 'Store 02' | '*'   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'pcs'        | 'SI'           | '*'       | ''             | '*'      | '10,000'                | '*'         | ''     |
+	* Try Delete row
+		And I go to line in "BasisesTree" table
+			| 'Quantity' | 'Row presentation' |
+			| '10,000'   | 'Shirt (36/Red)'   |
+		And I activate current test client window
+		And I press keyboard shortcut "Delete"
+		And "BasisesTree" table became equal
+			| 'Row presentation'                                   | 'Quantity in base unit' | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Doc ref'                                            | 'Basis'                                              | 'Key' | 'Row ID' | 'Basis key' | 'Current step' |
+			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | 'Sales order 35 dated 23.09.2021 10:19:43'           | ''    | ''       | ''          | ''             |
+			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''    | ''       | ''          | ''             |
+			| 'Shirt (36/Red)'                                     | '10,000'                | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | ''                                                   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'   | '*'      | '*'         | 'SI'           |		
+	* Try copy row
+		And I go to line in "BasisesTree" table
+			| 'Quantity' | 'Row presentation' |
+			| '10,000'   | 'Shirt (36/Red)'   |
+		And I activate current test client window
+		And I press keyboard shortcut "F9"
+		And "BasisesTree" table became equal
+			| 'Row presentation'                                   | 'Quantity in base unit' | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Doc ref'                                            | 'Basis'                                              | 'Key' | 'Row ID' | 'Basis key' | 'Current step' |
+			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | 'Sales order 35 dated 23.09.2021 10:19:43'           | ''    | ''       | ''          | ''             |
+			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''    | ''       | ''          | ''             |
+			| 'Shirt (36/Red)'                                     | '10,000'                | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | ''                                                   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'   | '*'      | '*'         | 'SI'           |
+		And I close all client application windows
+				
+						
 
 Scenario: _2065002 check locking header in the SO with linked documents (one session)
+	And I close all client application windows
 	* Open SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -1333,8 +1386,38 @@ Scenario: _2065072 unlock linked rows
 			| 'Trousers' | '36/Yellow' |
 		And I close all client application windows
 		
-
+Scenario: _2065073 try unlink all rows in the SC (SO-SC-SI)
+	And I close all client application windows	
+	* Select SС
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '36'     |
+		And I select current line in "List" table	
+	* Try unlink all rows
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And I expand a line in "ResultsTree" table
+			| 'Row presentation'                         |
+			| 'Sales order 35 dated 23.09.2021 10:19:43' |
+		And I activate field named "ResultsTreeRowPresentation" in "ResultsTree" table
+		And I expand a line in "ResultsTree" table
+			| 'Row presentation'                           |
+			| 'Sales invoice 35 dated 23.09.2021 10:20:04' |
+		And in the table "ResultsTree" I click "Unlink all" button
+	* Check
+		And "ResultsTree" table became equal
+			| 'Row presentation'                         | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 35 dated 23.09.2021 10:19:43' | ''         | ''     | ''       | ''         |
+			| 'Dress (XS/Blue)'                          | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                           | '11,000'   | 'pcs'  | '350,00' | 'TRY'      |
+	And I close all client application windows
+		
+		
 				
+		
+						
 		
 				
 

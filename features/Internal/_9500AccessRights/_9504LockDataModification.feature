@@ -17,12 +17,6 @@ Scenario: 950400 preparation
 		| 'Number'         |
 		| '100' |
 	And in the table "List" I click the button named "ListContextMenuPost"
-	* Add test extension
-		Given I open hyperlink "e1cib/list/Catalog.Extensions"
-		If "List" table does not contain lines Then
-				| "Description" |
-				| "TestExtension" |
-			When add test extension
 	* Filling settings for attribute from extension
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table

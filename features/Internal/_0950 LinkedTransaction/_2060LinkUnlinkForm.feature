@@ -554,9 +554,10 @@ Scenario: _20600031 check Link unlink basis documents form
 			Then the number of "ResultsTable" table lines is "равно" 0
 			And I activate current test client window
 			And I go to line in "BasisesTree" table
-				| 'Row presentation' |
-				| 'Dress (XS/Blue)'  |	
+				| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+				| 'TRY'      | '520,00' | '1,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
 			And I activate current test client window
+			And Delay 5
 			And I press keyboard shortcut "Enter"
 			And "ResultsTable" table became equal
 				| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                   | 'Unit' | 'Basis unit' | 'Quantity in base unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |

@@ -443,6 +443,7 @@
                   <titleFont xsi:type="core:FontRef">
                     <font>Style.LargeTextFont</font>
                   </titleFont>
+                  <horizontalStretch>true</horizontalStretch>
                   <extendedTooltip>
                     <name>ItemListGroupItemExtendedTooltip</name>
                     <id>858</id>
@@ -536,7 +537,7 @@
                       <event>Clearing</event>
                       <name>ItemListSerialLotNumbersPresentationClearing</name>
                     </handlers>
-                    <width>10</width>
+                    <width>5</width>
                     <autoMaxWidth>true</autoMaxWidth>
                     <autoMaxHeight>true</autoMaxHeight>
                     <wrap>true</wrap>
@@ -3376,69 +3377,6 @@
           <name>AdditionalPage</name>
           <id>1038</id>
           <items xsi:type="form:FormField">
-            <name>Agreement</name>
-            <id>1040</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.Agreement</segments>
-            </dataPath>
-            <titleLocation>Top</titleLocation>
-            <handlers>
-              <event>OnChange</event>
-              <name>AgreementOnChange</name>
-            </handlers>
-            <extendedTooltip>
-              <name>AgreementExtendedTooltip</name>
-              <id>1042</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <type>Label</type>
-              <autoMaxWidth>true</autoMaxWidth>
-              <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:LabelDecorationExtInfo">
-                <horizontalAlign>Left</horizontalAlign>
-              </extInfo>
-            </extendedTooltip>
-            <contextMenu>
-              <name>AgreementContextMenu</name>
-              <id>1041</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <autoFill>true</autoFill>
-            </contextMenu>
-            <type>InputField</type>
-            <editMode>Enter</editMode>
-            <showInHeader>true</showInHeader>
-            <headerHorizontalAlign>Left</headerHorizontalAlign>
-            <showInFooter>true</showInFooter>
-            <extInfo xsi:type="form:InputFieldExtInfo">
-              <handlers>
-                <event>StartChoice</event>
-                <name>AgreementStartChoice</name>
-              </handlers>
-              <handlers>
-                <event>EditTextChange</event>
-                <name>AgreementEditTextChange</name>
-              </handlers>
-              <autoMaxWidth>true</autoMaxWidth>
-              <autoMaxHeight>true</autoMaxHeight>
-              <wrap>true</wrap>
-              <chooseType>true</chooseType>
-              <typeDomainEnabled>true</typeDomainEnabled>
-              <textEdit>true</textEdit>
-            </extInfo>
-          </items>
-          <items xsi:type="form:FormField">
             <name>Description</name>
             <id>1043</id>
             <visible>true</visible>
@@ -3487,6 +3425,88 @@
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
               <textEdit>true</textEdit>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>Agreement</name>
+            <id>1040</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.Agreement</segments>
+            </dataPath>
+            <skipOnInput>true</skipOnInput>
+            <titleLocation>Top</titleLocation>
+            <handlers>
+              <event>OnChange</event>
+              <name>AgreementOnChange</name>
+            </handlers>
+            <extendedTooltip>
+              <name>AgreementExtendedTooltip</name>
+              <id>1042</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>AgreementContextMenu</name>
+              <id>1041</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <handlers>
+                <event>StartChoice</event>
+                <name>AgreementStartChoice</name>
+              </handlers>
+              <handlers>
+                <event>EditTextChange</event>
+                <name>AgreementEditTextChange</name>
+              </handlers>
+              <handlers>
+                <event>Click</event>
+                <name>AgreementClick</name>
+              </handlers>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <choiceButtonRepresentation>ShowInInputField</choiceButtonRepresentation>
+              <openButton>false</openButton>
+              <quickChoice>true</quickChoice>
+              <chooseType>true</chooseType>
+              <incompleteChoiceMode>OnActivate</incompleteChoiceMode>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textColor xsi:type="core:ColorRef">
+                <color>Web.MidnightBlue</color>
+              </textColor>
+              <borderColor xsi:type="core:ColorRef">
+                <color>Style.FormBackColor</color>
+              </borderColor>
+              <inputHint>
+                <key>en</key>
+                <value>Partner term</value>
+              </inputHint>
+              <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
             </extInfo>
           </items>
           <visible>true</visible>
@@ -3762,6 +3782,7 @@
           <userVisible>
             <common>true</common>
           </userVisible>
+          <defaultItem>true</defaultItem>
           <extendedTooltip>
             <name>qPaymentExtendedTooltip</name>
             <id>605</id>

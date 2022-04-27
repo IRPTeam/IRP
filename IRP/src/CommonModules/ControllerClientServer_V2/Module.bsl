@@ -391,6 +391,10 @@ Function BindFormOnCreateAtServer(Parameters)
 	Binding.Insert("MoneyTransfer",
 		"StepGenerateNewSendUUID,
 		|StepGenerateNewReceiptUUID");
+
+	Binding.Insert("CashTransferOrder",
+		"StepGenerateNewSendUUID,
+		|StepGenerateNewReceiptUUID");
 		
 	Binding.Insert("CashRevenue",
 		"StepPaymentListCalculations_RecalculationsOnCopy,
@@ -1845,6 +1849,10 @@ Function BindCompany(Parameters)
 		|StepChangeCashAccountByCompany_AccountTypeIsCash");
 	
 	Binding.Insert("MoneyTransfer",
+		"StepChangeAccountSenderByCompany,
+		|StepChangeAccountReceiverByCompany");
+
+	Binding.Insert("CashTransferOrder",
 		"StepChangeAccountSenderByCompany,
 		|StepChangeAccountReceiverByCompany");
 	

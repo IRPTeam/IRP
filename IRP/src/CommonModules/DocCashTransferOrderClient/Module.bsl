@@ -1,10 +1,6 @@
 #Region FORM
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-//	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-//	If Not ValueIsFilled(Object.Ref) Then
-//		CheckFillData(Object, Form);
-//	EndIf;
 	ViewClient_V2.OnOpen(Object, Form, "");
 EndProcedure
 
@@ -14,56 +10,7 @@ EndProcedure
 
 Procedure CompanyOnChange(Object, Form, Item) Export
 	ViewClient_V2.CompanyOnChange(Object, Form, "");
-	
-//	RefillData = New Structure();
-//	If ValueIsFilled(Object.Sender) Then
-//		TransferParameters = New Structure("Company", Object.Company);
-//		CustomParameters = CatCashAccountsClient.DefaultCustomParameters(TransferParameters);
-//		CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Ref", Object.Sender, ComparisonType.Equal,
-//			DataCompositionComparisonType.Equal));
-//		GetDefaultChoiceRef = CatCashAccountsServer.GetDefaultChoiceRef(CustomParameters);
-//		If Object.Sender <> GetDefaultChoiceRef Then
-//			RefillData.Insert("Sender", PredefinedValue("Catalog.CashAccounts.EmptyRef"));
-//		EndIf;
-//	EndIf;
-//	If ValueIsFilled(Object.Receiver) Then
-//		TransferParameters = New Structure("Company", Object.Company);
-//		CustomParameters = CatCashAccountsClient.DefaultCustomParameters(TransferParameters);
-//		CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Ref", Object.Receiver, ComparisonType.Equal,
-//			DataCompositionComparisonType.Equal));
-//		GetDefaultChoiceRef = CatCashAccountsServer.GetDefaultChoiceRef(CustomParameters);
-//		If Object.Receiver <> GetDefaultChoiceRef Then
-//			RefillData.Insert("Receiver", PredefinedValue("Catalog.CashAccounts.EmptyRef"));
-//		EndIf;
-//	EndIf;
-//	If RefillData.Count() Then
-//		NotifyParameters = New Structure();
-//		NotifyParameters.Insert("Form", Form);
-//		NotifyParameters.Insert("Object", Object);
-//		NotifyParameters.Insert("RefillData", RefillData);
-//		Notify = New NotifyDescription("CompanyOnChangeEnd", ThisObject, NotifyParameters);
-//		QueryText = R().QuestionToUser_015;
-//		QueryButtons = QuestionDialogMode.OKCancel;
-//		ShowQueryBox(Notify, QueryText, QueryButtons);
-//	Else
-//		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-//	EndIf;
 EndProcedure
-
-//Procedure CompanyOnChangeEnd(Result, AdditionalParameters) Export
-//	Object = AdditionalParameters.Object;
-//	Form = AdditionalParameters.Form;
-//	RefillData = AdditionalParameters.RefillData;
-//	If Result = DialogReturnCode.OK Then
-//		CommonFunctionsClientServer.SetObjectPreviousValue(Object, Form, "Company");
-//		For Each RefillDataItem In RefillData Do
-//			Object[RefillDataItem.Key] = RefillDataItem.Value;
-//		EndDo;
-//		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-//	Else
-//		Object.Company = CommonFunctionsClientServer.GetObjectPreviousValue(Object, Form, "Company");
-//	EndIf;
-//EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
@@ -89,7 +36,6 @@ EndProcedure
 
 Procedure DateOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-//	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
 EndProcedure
 
 #EndRegion
@@ -97,8 +43,6 @@ EndProcedure
 #Region ACCOUNT_SENDER
 
 Procedure SenderOnChange(Object, Form, Item) Export
-//	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-//	SetSenderCurrency(Object, Form);
 	ViewClient_V2.AccountSenderOnChange(Object, Form);
 EndProcedure
 
@@ -138,8 +82,6 @@ EndProcedure
 #Region AMOUNT_SEND
 
 Procedure SendAmountOnChange(Object, Form, Item) Export
-//	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-//	FillReceiveAmountBySendAmount(Object, Form);
 	ViewClient_V2.SendAmountOnChange(Object, Form);
 EndProcedure
 
@@ -148,9 +90,6 @@ EndProcedure
 #Region ACCOUNT_RECEIVER
 
 Procedure ReceiverOnChange(Object, Form, Item) Export
-//	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-//	SetReceiverCurrency(Object, Form);
-//	FillReceiveAmountBySendAmount(Object, Form);
 	ViewClient_V2.AccountReceiverOnChange(Object, Form);
 EndProcedure
 
@@ -191,16 +130,7 @@ EndProcedure
 
 Procedure ReceiveAmountOnChange(Object, Form, Item) Export
 	ViewClient_V2.ReceiveAmountOnChange(Object, Form);
-//	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
 EndProcedure
-
-//Procedure FillReceiveAmountBySendAmount(Object, Form)
-//	If Not CommonFunctionsClientServer.IsFormItemModifiedByUser(Form, "ReceiveAmount") 
-//		And ValueIsFilled(Object.SendCurrency) = ValueIsFilled(Object.ReceiveCurrency) 
-//		And Object.SendCurrency = Object.ReceiveCurrency Then
-//		Object.ReceiveAmount = Object.SendAmount;
-//	EndIf;
-//EndProcedure
 
 #EndRegion
 
@@ -229,30 +159,6 @@ EndProcedure
 
 #EndRegion
 
-//#Region ItemSenderCurrency
-//
-//Procedure SetSenderCurrency(Object, Form)
-//	ObjectSenderCurrency = ServiceSystemServer.GetObjectAttribute(Object.Sender, "Currency");
-//	If ValueIsFilled(ObjectSenderCurrency) Then
-//		Object.SendCurrency = ObjectSenderCurrency;
-//	EndIf;
-//	Form.Items.SendCurrency.ReadOnly = ValueIsFilled(ObjectSenderCurrency);
-//EndProcedure
-//
-//#EndRegion
-//
-//#Region ItemReceiverCurrency
-//
-//Procedure SetReceiverCurrency(Object, Form)
-//	ObjectReceiverCurrency = ServiceSystemServer.GetObjectAttribute(Object.Receiver, "Currency");
-//	If ValueIsFilled(ObjectReceiverCurrency) Then
-//		Object.ReceiveCurrency = ObjectReceiverCurrency;
-//	EndIf;
-//	Form.Items.ReceiveCurrency.ReadOnly = ValueIsFilled(ObjectReceiverCurrency);
-//EndProcedure
-//
-//#EndRegion
-
 #Region FINANCIAL_MOVEMENT_TYPE
 
 Procedure FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -264,16 +170,3 @@ Procedure FinancialMovementTypeEditTextChange(Object, Form, Item, Text, Standard
 EndProcedure
 
 #EndRegion
-
-//#Region CheckFillData
-//
-//Procedure CheckFillData(Object, Form)
-//	SetSenderCurrency(Object, Form);
-//	SetReceiverCurrency(Object, Form);
-//EndProcedure
-
-//Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
-//	Return New Structure();
-//EndFunction
-
-//#EndRegion

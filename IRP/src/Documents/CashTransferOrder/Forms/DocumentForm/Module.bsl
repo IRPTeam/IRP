@@ -12,10 +12,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-//	If Not ValueIsFilled(Object.Ref) Then
-//		Object.SendUUID = New UUID();
-//		Object.ReceiveUUID = New UUID();
-//	EndIf;
 EndProcedure
 
 &AtServer
@@ -95,7 +91,6 @@ EndProcedure
 &AtClient
 Procedure SenderOnChange(Item, AddInfo = Undefined) Export
 	DocCashTransferOrderClient.SenderOnChange(Object, ThisObject, Item);
-//	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -115,7 +110,6 @@ EndProcedure
 &AtClient
 Procedure SendCurrencyOnChange(Item)
 	DocCashTransferOrderClient.SendCurrencyOnChange(Object, ThisObject, Item);
-//	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -125,7 +119,6 @@ EndProcedure
 &AtClient
 Procedure ReceiveCurrencyOnChange(Item)
 	DocCashTransferOrderClient.ReceiveCurrencyOnChange(Object, ThisObject, Item);
-//	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -144,7 +137,6 @@ EndProcedure
 &AtClient
 Procedure ReceiverOnChange(Item)
 	DocCashTransferOrderClient.ReceiverOnChange(Object, ThisObject, Item);
-//	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient

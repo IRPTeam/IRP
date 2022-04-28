@@ -5,8 +5,6 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-//	Else
-//		CommonFunctionsClientServer.SetObjectPreviousValue(Object, Form, "Company");
 	EndIf;
 	ViewServer_V2.OnCreateAtServer(Object, Form, "");
 EndProcedure

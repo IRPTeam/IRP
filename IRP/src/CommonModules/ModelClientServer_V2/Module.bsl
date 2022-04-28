@@ -199,6 +199,8 @@ Function GetChain()
 	Chain.Insert("ChangeExpenseTypeByItemKey" , GetChainLink("ChangeExpenseTypeByItemKeyExecute"));
 	Chain.Insert("ChangeRevenueTypeByItemKey" , GetChainLink("ChangeRevenueTypeByItemKeyExecute"));
 	
+	Chain.Insert("ChangeReceiveAmountBySendAmount" , GetChainLink("ChangeReceiveAmountBySendAmountExecute"));
+	
 	Chain.Insert("CovertQuantityToQuantityInBaseUnit" , GetChainLink("CovertQuantityToQuantityInBaseUnitExecute"));
 	
 	// Extractors
@@ -796,6 +798,23 @@ Function ChangeProcurementMethodByItemKeyExecute(Options) Export
 		Return PredefinedValue("Enum.ProcurementMethods.Stock");
 	EndIf;
 	Return PredefinedValue("Enum.ProcurementMethods.EmptyRef");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_RECEIVE_AMOUNT_BY_SEND_AMOUNT
+
+Function ChangeReceiveAmountBySendAmountOptions() Export
+	Return GetChainLinkOptions("SendAmount, ReceiveAmount, SendCurrency, ReceiveCurrency");
+EndFunction
+
+Function ChangeReceiveAmountBySendAmountExecute(Options) Export
+	If ValueIsFilled(Options.SendCurrency) And ValueIsFilled(Options.ReceiveCurrency) 
+		And Options.SendCurrency = Options.ReceiveCurrency Then
+		Return Options.SendAmount;
+	Else
+		Return Options.ReceiveAmount;
+	EndIf;
 EndFunction
 
 #EndRegion

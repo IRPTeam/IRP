@@ -194,14 +194,15 @@ Procedure ReceiveAmountOnChange(Object, Form, Item) Export
 //	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
 EndProcedure
 
-#EndRegion
-
 //Procedure FillReceiveAmountBySendAmount(Object, Form)
-//	If Not CommonFunctionsClientServer.IsFormItemModifiedByUser(Form, "ReceiveAmount") And ValueIsFilled(
-//		Object.SendCurrency) = ValueIsFilled(Object.ReceiveCurrency) And Object.SendCurrency = Object.ReceiveCurrency Then
+//	If Not CommonFunctionsClientServer.IsFormItemModifiedByUser(Form, "ReceiveAmount") 
+//		And ValueIsFilled(Object.SendCurrency) = ValueIsFilled(Object.ReceiveCurrency) 
+//		And Object.SendCurrency = Object.ReceiveCurrency Then
 //		Object.ReceiveAmount = Object.SendAmount;
 //	EndIf;
 //EndProcedure
+
+#EndRegion
 
 #Region CASH_ADVANCE_HOLDER
 

@@ -1346,8 +1346,8 @@ Scenario:  _0154143 change payment term in POS
 			And I select current line in "List" table
 			And I click Select button of "Price type" field
 			And I go to line in "List" table
-				| 'Currency' |
-				| 'TRY'      |
+				| 'Description' |
+				| 'Discount Price TRY 1'      |
 			And I select current line in "List" table
 			And I click "Save and close" button
 		And I go to line in "List" table

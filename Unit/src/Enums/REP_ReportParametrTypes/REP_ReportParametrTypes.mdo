@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="443953ab-5b8f-474d-9463-47fed1318759">
+  <producedTypes>
+    <refType typeId="b2fd7ef5-f46e-4e83-9a4f-609ddbc45b7f" valueTypeId="a7580dff-7a34-46cb-a5b7-b7a157dc9eb2"/>
+    <listType typeId="def38369-3d18-42e6-8d77-607ebf5bccb2" valueTypeId="80a32fd7-9abc-44fc-bf14-56c6f78b4b14"/>
+    <managerType typeId="587ca2ca-3919-4967-a02f-204a0da38923" valueTypeId="f0a7ad2f-8bb5-4597-bd8f-8efbb70548ef"/>
+  </producedTypes>
+  <name>REP_ReportParametrTypes</name>
+  <synonym>
+    <key>en</key>
+    <value>Report parametr types</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="65e8bb21-7b6b-4cc4-bd76-eb22aad44cdf">
+    <name>CurrencyMovementTypeForReportSalesByCustomer</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency movement type for report sales by customer</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="fea77612-2418-47e2-94dd-4933e8fea7ff">
+    <name>CurrencyMovementTypeForReportPurchasesByVendor</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency movement type for report purchases by vendor</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

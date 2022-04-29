@@ -199,6 +199,8 @@ Function GetChain()
 	Chain.Insert("ChangeExpenseTypeByItemKey" , GetChainLink("ChangeExpenseTypeByItemKeyExecute"));
 	Chain.Insert("ChangeRevenueTypeByItemKey" , GetChainLink("ChangeRevenueTypeByItemKeyExecute"));
 	
+	Chain.Insert("CovertQuantityToQuantityInBaseUnit" , GetChainLink("CovertQuantityToQuantityInBaseUnitExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
 	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
@@ -1064,6 +1066,18 @@ Function ChangeStoreInHeaderByStoresInListExecute(Options) Export
 	EndIf;
 EndFunction
 	
+#EndRegion
+
+#Region CONVERT_QUANTITY_IN_QUANTITY_IN_BASE_UNIT
+
+Function CovertQuantityToQuantityInBaseUnitOptions() Export
+	Return GetChainLinkOptions("Bundle, Unit, Quantity");
+EndFunction
+
+Function CovertQuantityToQuantityInBaseUnitExecute(Options) Export
+	Return ModelServer_V2.ConvertQuantityToQuantityInBaseUnit(Options.Bundle, Options.Unit, Options.Quantity);
+EndFunction
+
 #EndRegion
 
 #Region TAXES

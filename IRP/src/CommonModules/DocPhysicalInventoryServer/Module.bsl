@@ -1,4 +1,4 @@
-#Region FormEvents
+#Region FORM
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
@@ -9,13 +9,14 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		UpdatePhysicalCountByLocations(Object, Form);
 	EndIf;
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
+	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsServer.FillItemList(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	UpdatePhysicalCountByLocations(Object, Form);
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
+	UpdatePhysicalCountByLocations(Object, Form);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -24,13 +25,42 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	UpdatePhysicalCountByLocations(Object, Form);
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
+	UpdatePhysicalCountByLocations(Object, Form);
 EndProcedure
 
 #EndRegion
 
-#Region Public
+#Region TITLE_DECORATIONS
+
+Procedure SetGroupItemsList(Object, Form)
+	AttributesArray = New Array();
+	AttributesArray.Add("Store");
+	AttributesArray.Add("Status");
+	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
+	For Each Attr In AttributesArray Do
+		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
+			Object.Ref.Metadata().Attributes[Attr].Synonym + ":" + Chars.NBSp));
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region LIST_FORM
+
+Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region CHOICE_FORM
+
+Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
 
 Function GetArrayOfInstance(GenerateParameters) Export
 	Result = New Array();
@@ -118,22 +148,6 @@ Procedure CreatePhysicalCount(ObjectRef, GenerateParameters) Export
 	GenerateParameters.Insert("ArrayOfInstance", ArrayOfInstance);
 	Documents.PhysicalCountByLocation.GeneratePhysicalCountByLocation(GenerateParameters);
 EndProcedure
-#EndRegion
-
-#Region GroupTitle
-
-Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array();
-	AttributesArray.Add("Store");
-	AttributesArray.Add("Status");
-	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
-	For Each Attr In AttributesArray Do
-		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
-			Object.Ref.Metadata().Attributes[Attr].Synonym + ":" + Chars.NBSp));
-	EndDo;
-EndProcedure
-
-#EndRegion
 
 Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	Result = Documents.PhysicalInventory.GetItemListWithFillingExpCount(Ref, Store, ItemList);
@@ -176,19 +190,3 @@ Function HavePhysicalCountByLocation(PhysicalInventoryRef) Export
 	QuerySelection = QueryResult.Select();
 	Return QuerySelection.Next();
 EndFunction
-
-#Region ListFormEvents
-
-Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
-	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region ChoiceFormEvents
-
-Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
-	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
-EndProcedure
-
-#EndRegion

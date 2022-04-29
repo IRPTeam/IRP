@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="fbcc190e-019c-4f60-812f-b43bd4253929" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="fbcc190e-019c-4f60-812f-b43bd4253929" paused="true" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
   <name>2.1 Unit</name>
   <description />
   <settings ref="BuildExt">
@@ -19,11 +19,21 @@
       <setting-ref ref="RUNNER_58" />
       <setting-ref ref="RUNNER_59" />
       <setting-ref ref="RUNNER_66" />
+      <setting-ref ref="TRIGGER_5" />
       <setting-ref ref="vcsTrigger" />
     </disabled-settings>
     <parameters>
+      <param name="env.1CPwd" value="8HRUYXL2UC" />
+      <param name="env.1CUser" value="CI" />
+      <param name="env.DBServerName" value="localhost" />
       <param name="env.Database1CName" value="%teamcity.build.id%" />
       <param name="env.ExtName" value="Unit" />
+      <param name="env.FileDB" value="" />
+      <param name="env.ProjectID" value="Unit" />
+      <param name="env.SQLHostname" value="" />
+      <param name="env.SQLPwd" value="" />
+      <param name="env.SQLUser" value="" />
+      <param name="env.isExtension" value="true" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_12" name="Convert files to xml format" type="simpleRunner">

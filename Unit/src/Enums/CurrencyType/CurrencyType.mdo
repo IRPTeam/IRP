@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="53dc4335-5e9d-41bc-b3a5-b4c4250f5942">
+  <producedTypes>
+    <refType typeId="55bb2838-748f-48bc-a01c-8a0099e12a99" valueTypeId="bde6e7b2-daf2-4232-9e66-6a43ef72c6b3"/>
+    <listType typeId="597f6594-93f0-41d0-a4ae-690f7e3ed145" valueTypeId="7f4e6ccc-3e4d-4846-97f8-42c2d4321b97"/>
+    <managerType typeId="20dceb7b-c322-4765-b3a8-f6e6afdda240" valueTypeId="08712222-9fde-4c3f-98af-94c2cbfde3d0"/>
+  </producedTypes>
+  <name>CurrencyType</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:EnumExtension"/>
+  <enumValues uuid="e3e8f2d4-b5b0-4795-b77b-5292fad26d57">
+    <name>Legal</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:MdObjectExtension"/>
+  </enumValues>
+</mdclass:Enum>

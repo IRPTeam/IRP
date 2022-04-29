@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7f2b4266-2190-45dc-8a50-eaa7d2e2fa01" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7f2b4266-2190-45dc-8a50-eaa7d2e2fa01" paused="true" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
   <name>3. RunVA</name>
   <description />
   <settings>
@@ -10,6 +10,7 @@
     </options>
     <disabled-settings>
       <setting-ref ref="BUILD_EXT_19" />
+      <setting-ref ref="RUNNER_6" />
       <setting-ref ref="RUNNER_75" />
       <setting-ref ref="TRIGGER_4" />
     </disabled-settings>
@@ -33,6 +34,7 @@
       <param name="env.StopOnError" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StreamCount" value="3" />
       <param name="env.TR_Bank_Key" value="credentialsJSON:8036a633-0c14-4d64-991c-b98b36c82dd1" spec="password display='normal' readOnly='true'" />
+      <param name="env.TagsFullList" value="&quot;TestDataBase&quot;,&quot;Movements&quot;,&quot;Discount&quot;,&quot;StockControl&quot;,&quot;Forms&quot;,&quot;FillingDocuments&quot;,&quot;CreationBasedMulti&quot;,&quot;Other&quot;,&quot;PlannedReceiptReservation&quot;,&quot;CashManagement&quot;,&quot;Inventory&quot;,&quot;BankCashDocuments&quot;,&quot;Filters&quot;,&quot;Purchase&quot;,&quot;AdditionalAttributes&quot;,&quot;UserSettings&quot;,&quot;Sales&quot;,&quot;LinkedTransaction&quot;,&quot;AgingAndCreditLimit&quot;,&quot;RetailDocuments&quot;,&quot;PartnerCatalogs&quot;,&quot;InfoMessages&quot;,&quot;ExtensionReportForm&quot;,&quot;ContactInformation&quot;,&quot;StandartAgreement&quot;,&quot;AccessRights&quot;,&quot;ItemCatalogs&quot;,&quot;PhysicalInventory&quot;,&quot;Price&quot;,&quot;SerialLotNumber&quot;,&quot;InputBySearchInLine&quot;,&quot;LoadInfo&quot;,&quot;Services&quot;,&quot;SettingsCatalogs&quot;,&quot;BasicFormsCheck&quot;,&quot;OpeningEntries&quot;,&quot;InventoryTransfer&quot;,&quot;UserCatalogs&quot;,&quot;CompanyCatalogs&quot;,&quot;TaxCalculation&quot;,&quot;PrintForm&quot;,&quot;CurrencyRate&quot;,&quot;Barcodes&quot;,&quot;SalesOrderProcurement&quot;,&quot;Advance&quot;,&quot;LandedCost&quot;,&quot;AdditionalCostAllocation&quot;" />
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/" />
       <param name="env.VA_PID" value="" />
       <param name="env.dbgs_PID" value="" />
@@ -825,10 +827,6 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:develop" />
         <artifact sourcePath="allure-report.zip!/history=&gt;allure-history" />
       </dependency>
-      <dependency id="ARTIFACT_DEPENDENCY_15" sourceBuildTypeId="Unit" cleanDestination="false">
-        <revisionRule name="sameChainOrLastFinished" revision="latest.sameChainOrLastFinished" />
-        <artifact sourcePath="Unit.cfe" />
-      </dependency>
       <dependency id="ARTIFACT_DEPENDENCY_11" sourceBuildTypeId="IRP_AdditionalFunctionality_Build" cleanDestination="false">
         <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" />
         <artifact sourcePath="IRP_AdditionalFunctionality.cfe=&gt;DataProcessor/" />
@@ -840,12 +838,6 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
     </artifact-dependencies>
     <dependencies>
       <depend-on sourceBuildTypeId="IRP_BuildCF">
-        <options>
-          <option name="take-started-build-with-same-revisions" value="true" />
-          <option name="take-successful-builds-only" value="true" />
-        </options>
-      </depend-on>
-      <depend-on sourceBuildTypeId="Unit">
         <options>
           <option name="take-started-build-with-same-revisions" value="true" />
           <option name="take-successful-builds-only" value="true" />

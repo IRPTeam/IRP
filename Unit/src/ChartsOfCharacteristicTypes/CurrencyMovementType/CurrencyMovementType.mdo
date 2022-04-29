@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:ChartOfCharacteristicTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="10d738d3-2d56-40a4-93e4-f2b0496421d0">
+  <producedTypes>
+    <objectType typeId="166d1c94-55ee-4d40-89a8-09bcc57e1156" valueTypeId="312bc615-6168-4ff1-bdba-4bee49db3147"/>
+    <refType typeId="a5572f8b-47c6-4326-94ef-7f59ff9b7196" valueTypeId="c07fac51-bf33-4910-ac93-b457d462efd6"/>
+    <selectionType typeId="34927243-2a38-4fd7-93f4-5c8ea1d7700b" valueTypeId="4a2cd79a-d6b6-4d44-af5e-b36a514a1b37"/>
+    <listType typeId="243aee04-4ce0-4190-a791-3a63e0e167b6" valueTypeId="0871c437-da4f-4352-8127-19da6963011b"/>
+    <managerType typeId="2a320d3d-bf1b-4b7f-ac6e-4b534dd3a72c" valueTypeId="5f5b1f6b-5dc3-4932-bd79-acc3ba9b0a77"/>
+    <containerType typeId="aa4b2ee8-a652-4c64-bf65-9227aa08370c" valueTypeId="caa817ed-7af2-45fc-af81-98e2c029694f"/>
+  </producedTypes>
+  <name>CurrencyMovementType</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:ChartOfCharacteristicTypesExtension">
+    <typeExtension>
+      <types>
+        <state>Checked</state>
+        <type>EnumRef.CurrencyType</type>
+      </types>
+    </typeExtension>
+    <codeLength>Checked</codeLength>
+    <codeAllowedLength>Checked</codeAllowedLength>
+    <descriptionLength>Checked</descriptionLength>
+  </extension>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <attributes uuid="10234ece-e0e7-42a2-bb49-47d16a9f4d2a">
+    <name>DeferredCalculation</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>Boolean</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
+  <attributes uuid="4695ec89-0581-41ad-ab80-2dbd6913f7c0">
+    <name>Currency</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>CatalogRef.Currencies</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
+  <attributes uuid="125a412a-3b5f-4c8e-8887-69f1b5d32a19">
+    <name>Source</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>CatalogRef.IntegrationSettings</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
+  <attributes uuid="e2bd6ab9-2236-4a0c-b8a3-0351897a6ad5">
+    <name>Type</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>EnumRef.CurrencyType</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
+</mdclass:ChartOfCharacteristicTypes>

@@ -2845,6 +2845,173 @@ EndProcedure
 
 #EndRegion
 
+#Region QUANTITY
+
+// Quantity.OnChange
+Procedure QuantityOnChange(Parameters) Export
+	AddViewNotify("OnSetQuantityNotify", Parameters);
+	Binding = BindQuantity(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Quantity.Set
+Procedure SetQuantity(Parameters, Results) Export
+	Binding = BindQuantity(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetQuantityNotify");
+EndProcedure
+
+// Quantity.Get
+Function GetQuantity(Parameters)
+	Return GetPropertyObject(Parameters, BindQuantity(Parameters).DataPath);
+EndFunction
+
+// Quantity.Bind
+Function BindQuantity(Parameters)
+	DataPath = "Quantity";
+	Binding = New Structure();
+	Binding.Insert("Bundling"   , "StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
+	Binding.Insert("Unbundling" , "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region QUANTITY_IN_BASE_UNIT
+
+// QuantityInBaseUnit.Set
+Procedure SetQuantityInBaseUnit(Parameters, Results) Export
+	Binding = BindQuantityInBaseUnit(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results);
+EndProcedure
+
+// QuantityInBaseUnit.Bind
+Function BindQuantityInBaseUnit(Parameters)
+	DataPath = "QuantityInBaseUnit";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// QuantityInBaseUnit.CovertQuantityToQuantityInBaseUnit[ItemBundle].Step
+Procedure StepCovertQuantityToQuantityInBaseUnit_ItemBundle(Parameters, Chain) Export
+	StepCovertQuantityToQuantityInBaseUnit(Parameters, Chain, "ItemBundle");
+EndProcedure
+
+// QuantityInBaseUnit.CovertQuantityToQuantityInBaseUnit[ItemKeyBundle].Step
+Procedure StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle(Parameters, Chain) Export
+	StepCovertQuantityToQuantityInBaseUnit(Parameters, Chain, "ItemKeyBundle")
+EndProcedure
+
+Procedure StepCovertQuantityToQuantityInBaseUnit(Parameters, Chain, Type)
+	Chain.CovertQuantityToQuantityInBaseUnit.Enable = True;
+	Chain.CovertQuantityToQuantityInBaseUnit.Setter = "SetQuantityInBaseUnit";
+	Options = ModelClientServer_V2.CovertQuantityToQuantityInBaseUnitOptions(); 
+	If Type = "ItemBundle" Then
+		Options.Bundle = GetItemBundle(Parameters);
+	ElsIf Type = "ItemKeyBundle" Then
+		Options.Bundle = GetItemKeyBundle(Parameters);
+	Else
+		Raise StrTemplate("Unsupported bundle type [%1]", Type);
+	EndIf;
+	Options.Unit       = GetUnit(Parameters);
+	Options.Quantity   = GetQuantity(Parameters);
+	Options.StepName   = "StepCovertQuantityToQuantityInBaseUnit";
+	Chain.CovertQuantityToQuantityInBaseUnit.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+// Unit.OnChange
+Procedure UnitOnChange(Parameters) Export
+	AddViewNotify("OnSetUnitNotify", Parameters);
+	Binding = BindUnit(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Unit.Set
+Procedure SetUnit(Parameters, Results) Export
+	Binding = BindUnit(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetUnitNotify");
+EndProcedure
+
+// Unit.Get
+Function GetUnit(Parameters)
+	Return GetPropertyObject(Parameters, BindUnit(Parameters).DataPath);
+EndFunction
+
+// Unit.Bind
+Function BindUnit(Parameters)
+	DataPath = "Unit";
+	Binding = New Structure();
+	Binding.Insert("Bundling"   , "StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
+	Binding.Insert("Unbundling" , "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_BUNDLE
+
+// ItemBundle.OnChange
+Procedure ItemBundleOnChange(Parameters) Export
+	AddViewNotify("OnSetItemBundleNotify", Parameters);
+	Binding = BindItemBundle(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemBundle.Set
+Procedure SetItemBundle(Parameters, Results) Export
+	Binding = BindItemBundle(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetItemBundleNotify");
+EndProcedure
+
+// ItemBundle.Get
+Function GetItemBundle(Parameters)
+	Return GetPropertyObject(Parameters, BindItemBundle(Parameters).DataPath);
+EndFunction
+
+// ItemBundle.Bind
+Function BindItemBundle(Parameters)
+	DataPath = "ItemBundle";
+	Binding = New Structure();
+	Binding.Insert("Bundling", "StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_KEY_BUNDLE
+
+// ItemKeyBundle.OnChange
+Procedure ItemKeyBundleOnChange(Parameters) Export
+	AddViewNotify("OnSetItemKeyBundleNotify", Parameters);
+	Binding = BindItemKeyBundle(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemKeyBundle.Set
+Procedure SetItemKeyBundle(Parameters, Results) Export
+	Binding = BindItemKeyBundle(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetItemKeyBundleNotify");
+EndProcedure
+
+// ItemKeyBundle.Get
+Function GetItemKeyBundle(Parameters)
+	Return GetPropertyObject(Parameters, BindItemKeyBundle(Parameters).DataPath);
+EndFunction
+
+// ItemKeyBundle.Bind
+Function BindItemKeyBundle(Parameters)
+	DataPath = "ItemKeyBundle";
+	Binding = New Structure();
+	Binding.Insert("Unbundling", "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region PAYMENT_TERMS_LIST
 
 // PaymentTerms.Set
@@ -4249,6 +4416,10 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("InternalSupplyRequest"     , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("InventoryTransfer"         , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("InventoryTransferOrder"    , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("PhysicalInventory"         , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("ItemStockAdjustment"       , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("Bundling"                  , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("Unbundling"                  , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4413,6 +4584,11 @@ Function BindItemListItemKey(Parameters)
 	Binding.Insert("InternalSupplyRequest",
 		"StepChangeUnitByItemKey");
 	
+	Binding.Insert("PhysicalInventory"   , "StepChangeUnitByItemKey");
+	Binding.Insert("ItemStockAdjustment" , "StepChangeUnitByItemKey");
+	Binding.Insert("Bundling"            , "StepChangeUnitByItemKey");
+	Binding.Insert("Unbundling"            , "StepChangeUnitByItemKey");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4539,6 +4715,8 @@ Function BindItemListUnit(Parameters)
 	Binding.Insert("RetailReturnReceipt", 
 		"StepItemListCalculateQuantityInBaseUnit,
 		|StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PhysicalInventory", "BindVoid");
 	
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
@@ -5149,6 +5327,40 @@ Procedure StepItemListCalculateQuantityInBaseUnit(Parameters, Chain) Export
 		Chain.Calculations.Options.Add(Options);
 	EndDo;	
 EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_PHYS_COUNT
+
+// ItemList.PhysCount.Set
+Procedure SetItemListPhysCount(Parameters, Results) Export
+	Binding = BindItemListPhysCount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.PhysCount.Bind
+Function BindItemListPhysCount(Parameters)
+	DataPath = "ItemList.PhysCount";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_DIFFERENCE
+
+// ItemList.Difference.Set
+Procedure SetItemListDifference(Parameters, Results) Export
+	Binding = BindItemListDifference(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.Difference.Bind
+Function BindItemListDifference(Parameters)
+	DataPath = "ItemList.Difference";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 

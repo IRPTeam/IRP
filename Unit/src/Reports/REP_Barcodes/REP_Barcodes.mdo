@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="538fb132-2c75-4e9a-90cb-d6881ec71ceb">
+  <producedTypes>
+    <objectType typeId="d04ec5be-0da3-4e6b-9d78-a7f8a4032ddc" valueTypeId="9b3de526-0c25-412a-be6f-65bd4e235ad5"/>
+    <managerType typeId="5e608ad3-70a5-4242-ba63-c598290a9e3e" valueTypeId="300d52ae-e711-4bb9-9c83-44a8649bb564"/>
+  </producedTypes>
+  <name>REP_Barcodes</name>
+  <synonym>
+    <key>en</key>
+    <value>Barcodes</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.REP_Barcodes.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="1312bd2e-39f0-438f-88ec-484bdcdb4d7e">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
+</mdclass:Report>

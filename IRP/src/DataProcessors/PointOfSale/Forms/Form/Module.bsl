@@ -37,6 +37,25 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Return;
 EndProcedure
 
+#Region AGREEMENT
+
+&AtClient
+Procedure AgreementOnChange(Item)
+	DocRetailSalesReceiptClient.AgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailSalesReceiptClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	DocRetailSalesReceiptClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region FormTableItemsEventHandlers
 
 #Region ItemListEvents

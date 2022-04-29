@@ -1247,7 +1247,11 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesReturnOrder")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseReturnOrder")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.InventoryTransfer")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.InventoryTransferOrder");
+	Or TypeOf(Object.Ref) = Type("DocumentRef.InventoryTransferOrder")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.PhysicalInventory")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.ItemStockAdjustment")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.Bundling")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.Unbundling");
 	
 	If IsUsedNewFunctionality Then	
 		For Each ResultElement In Result Do
@@ -1255,13 +1259,19 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			ExistingRows = Object.ItemList.FindRows(FilterStructure);
 			If ExistingRows.Count() Then
 				Row = ExistingRows[0];
-				ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
+				If Row.Property("PhysCount") And Row.Property("Difference") Then
+					Row.PhysCount  = Row.PhysCount + ResultElement.Quantity;
+					Row.Difference = Row.PhysCount - Row.ExpCount;
+				Else
+					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
+				EndIf;
 			Else
 				FillingValues = New Structure();
 				FillingValues.Insert("Item"     , ResultElement.Item);
 				FillingValues.Insert("ItemKey"  , ResultElement.ItemKey);
 				FillingValues.Insert("Unit"     , ResultElement.Unit);
 				FillingValues.Insert("Quantity" , ResultElement.Quantity);
+				
 				If ResultElement.Property("Price") Then
 					FillingValues.Insert("Price", ResultElement.Price);
 				EndIf;

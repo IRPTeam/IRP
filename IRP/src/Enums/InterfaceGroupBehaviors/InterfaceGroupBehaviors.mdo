@@ -1,36 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e80407fa-e76a-46ee-89b4-fa6f99e52b79">
-  <producedTypes>
-    <refType typeId="7f7bbd12-f99d-4ebd-a850-7a2adc8e3762" valueTypeId="cc667fb5-13e5-4db2-ac6e-8a604f4b0c6b"/>
-    <listType typeId="7ada565e-3ea8-485e-abd9-28b8a875e574" valueTypeId="dcdb289f-64b2-4e82-889b-af128fac4046"/>
-    <managerType typeId="fb71d4f8-1ff7-4a09-8ba7-d6eaa48decbd" valueTypeId="16ace91c-62cf-4b91-94fd-af137e211872"/>
-  </producedTypes>
-  <name>InterfaceGroupBehaviors</name>
+ <producedTypes>
+  <refType typeId="7f7bbd12-f99d-4ebd-a850-7a2adc8e3762" valueTypeId="cc667fb5-13e5-4db2-ac6e-8a604f4b0c6b"/>
+  <listType typeId="7ada565e-3ea8-485e-abd9-28b8a875e574" valueTypeId="dcdb289f-64b2-4e82-889b-af128fac4046"/>
+  <managerType typeId="fb71d4f8-1ff7-4a09-8ba7-d6eaa48decbd" valueTypeId="16ace91c-62cf-4b91-94fd-af137e211872"/>
+ </producedTypes>
+ <name>InterfaceGroupBehaviors</name>
+ <synonym>
+  <key>ru</key>
+  <value>Поведение группы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Interface group behaviors</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Arayüz grup görüntüleme tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="9d4d2e81-23d4-4889-8081-5a36a3787f2d">
+  <name>Usual</name>
   <synonym>
-    <key>en</key>
-    <value>Interface group behaviors</value>
+   <key>ru</key>
+   <value>Обычная</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="9d4d2e81-23d4-4889-8081-5a36a3787f2d">
-    <name>Usual</name>
-    <synonym>
-      <key>en</key>
-      <value>Usual</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f382a5ce-c57f-46a0-a43e-3ccc0a313b1d">
-    <name>Collapsible</name>
-    <synonym>
-      <key>en</key>
-      <value>Collapsible</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="533bd7a9-273c-4b87-8889-7c7e0b6cfd15">
-    <name>PopUp</name>
-    <synonym>
-      <key>en</key>
-      <value>Pop up</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Usual</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Genel</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f382a5ce-c57f-46a0-a43e-3ccc0a313b1d">
+  <name>Collapsible</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сворачиваемая</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Collapsible</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Açılır panel</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="533bd7a9-273c-4b87-8889-7c7e0b6cfd15">
+  <name>PopUp</name>
+  <synonym>
+   <key>ru</key>
+   <value>Всплывающая</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Pop up</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Pop up</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

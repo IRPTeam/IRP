@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7b50f64b-1349-4beb-a961-b061a0df5b04">
-  <name>SpecialOffers</name>
-  <synonym>
-    <key>en</key>
-    <value>Special offers</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.SpecialOfferTypes</content>
-  <content>Catalog.SpecialOfferRules</content>
-  <content>Catalog.SpecialOffers</content>
-  <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
+ <name>SpecialOffers</name>
+ <synonym>
+  <key>ru</key>
+  <value>Специальные предложения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Special offers</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kampanyalar</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.SpecialOfferTypes</content>
+ <content>Catalog.SpecialOfferRules</content>
+ <content>Catalog.SpecialOffers</content>
+ <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

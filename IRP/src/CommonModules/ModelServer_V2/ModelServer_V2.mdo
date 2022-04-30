@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fbdaba41-69ef-446c-a1bb-c3c4dd99ef17">
-  <name>ModelServer_V2</name>
-  <synonym>
-    <key>en</key>
-    <value>Model server v2</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>ModelServer_V2</name>
+ <synonym>
+  <key>ru</key>
+  <value>Модель сервер v2</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Model server v2</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Model server v2</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

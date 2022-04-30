@@ -1,107 +1,163 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="970c6a60-1e23-4643-8ecf-a4f0b20b7921">
-  <producedTypes>
-    <selectionType typeId="6d9f807a-0edb-4dba-8444-eb2ae3ac1bff" valueTypeId="e29f829a-6f0f-4d03-93b4-1a70edfc0820"/>
-    <listType typeId="3701e0ff-f14b-41a0-9ca9-d474494efa96" valueTypeId="3ab5b737-aee1-433e-805f-32adff3ed6ac"/>
-    <managerType typeId="948e6eb7-5618-47ef-8dbb-3285c1847734" valueTypeId="b83434ad-42a0-4e63-a2a9-5b64b70557b8"/>
-    <recordSetType typeId="402b817a-6e43-47a3-adaf-bfeb1a1d86ff" valueTypeId="4de481d2-5248-4ccf-a24a-f6d86022b4dd"/>
-    <recordKeyType typeId="e8f31ee7-3fbc-4afc-ba71-bee16c07a8fd" valueTypeId="f65a8545-deae-45ba-8ec2-ee51f005a919"/>
-    <recordType typeId="1d46b57c-78eb-4b9b-97fb-2cbbc9b43e32" valueTypeId="05638f34-ece3-4606-9cc1-15b0e90a683c"/>
-    <recordManagerType typeId="ed025777-f21d-4988-8b05-e47c0d461243" valueTypeId="d8eccd5a-abf1-4581-8ffc-e4141269785e"/>
-  </producedTypes>
-  <name>DataMappingTable</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="970c6a60-1e23-4643-8ecf-a4f0b20b7921">
+ <producedTypes>
+  <selectionType typeId="6d9f807a-0edb-4dba-8444-eb2ae3ac1bff" valueTypeId="e29f829a-6f0f-4d03-93b4-1a70edfc0820"/>
+  <listType typeId="3701e0ff-f14b-41a0-9ca9-d474494efa96" valueTypeId="3ab5b737-aee1-433e-805f-32adff3ed6ac"/>
+  <managerType typeId="948e6eb7-5618-47ef-8dbb-3285c1847734" valueTypeId="b83434ad-42a0-4e63-a2a9-5b64b70557b8"/>
+  <recordSetType typeId="402b817a-6e43-47a3-adaf-bfeb1a1d86ff" valueTypeId="4de481d2-5248-4ccf-a24a-f6d86022b4dd"/>
+  <recordKeyType typeId="e8f31ee7-3fbc-4afc-ba71-bee16c07a8fd" valueTypeId="f65a8545-deae-45ba-8ec2-ee51f005a919"/>
+  <recordType typeId="1d46b57c-78eb-4b9b-97fb-2cbbc9b43e32" valueTypeId="05638f34-ece3-4606-9cc1-15b0e90a683c"/>
+  <recordManagerType typeId="ed025777-f21d-4988-8b05-e47c0d461243" valueTypeId="d8eccd5a-abf1-4581-8ffc-e4141269785e"/>
+ </producedTypes>
+ <name>DataMappingTable</name>
+ <synonym>
+  <key>ru</key>
+  <value>Таблица соответствий внешних данных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Data mapping table</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Veri mapping tablosu</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Таблица соответствий внешних данных</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Data mapping table</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Veri mapping tablosu</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Таблицы соответствий внешних данных</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Data mapping tables</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Veri mapping tabloları</value>
+ </listPresentation>
+ <resources uuid="6167ec7a-3b1f-4320-a1d4-19e7c0c3b158">
+  <name>Target</name>
   <synonym>
-    <key>en</key>
-    <value>Data mapping table</value>
+   <key>ru</key>
+   <value>Получатель</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Data mapping table</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Data mapping tables</value>
-  </listPresentation>
-  <resources uuid="6167ec7a-3b1f-4320-a1d4-19e7c0c3b158">
-    <name>Target</name>
-    <synonym>
-      <key>en</key>
-      <value>Target</value>
-    </synonym>
-    <type>
-      <types>AnyRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="25c2994f-585c-46ea-a0f7-b8c4b4ca4401">
-    <name>AddInfo</name>
-    <synonym>
-      <key>en</key>
-      <value>Add info</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-      <types>String</types>
-      <types>Date</types>
-      <types>Number</types>
-      <types>AnyRef</types>
-      <numberQualifiers>
-        <precision>10</precision>
-      </numberQualifiers>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-  </resources>
-  <attributes uuid="0a634db2-c62e-4b3e-ba9c-f7f7667c97a5">
-    <name>DataInStorage</name>
-    <synonym>
-      <key>en</key>
-      <value>Data in storage</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <dimensions uuid="55e4a4be-84ef-4772-84d9-30395a61d0b9">
-    <name>Source</name>
-    <synonym>
-      <key>en</key>
-      <value>Source</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.DataMappingItems</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceFoldersAndItems>FoldersAndItems</choiceFoldersAndItems>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Target</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hedef</value>
+  </synonym>
+  <type>
+   <types>AnyRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="25c2994f-585c-46ea-a0f7-b8c4b4ca4401">
+  <name>AddInfo</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительная информация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Add info</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek bilgiler</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+   <types>String</types>
+   <types>Date</types>
+   <types>Number</types>
+   <types>AnyRef</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+   <stringQualifiers>
+    <length>10</length>
+   </stringQualifiers>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+ </resources>
+ <attributes uuid="0a634db2-c62e-4b3e-ba9c-f7f7667c97a5">
+  <name>DataInStorage</name>
+  <synonym>
+   <key>ru</key>
+   <value>Данные в хранилище</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Data in storage</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Veri hazinedeki veri</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <dimensions uuid="55e4a4be-84ef-4772-84d9-30395a61d0b9">
+  <name>Source</name>
+  <synonym>
+   <key>ru</key>
+   <value>Источник</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Source</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.DataMappingItems</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceFoldersAndItems>FoldersAndItems</choiceFoldersAndItems>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

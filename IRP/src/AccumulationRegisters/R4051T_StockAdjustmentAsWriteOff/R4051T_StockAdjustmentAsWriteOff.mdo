@@ -1,75 +1,115 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a64408e7-c3e8-46ff-8e68-410500bcbe42">
-  <producedTypes>
-    <selectionType typeId="75101784-9554-48ad-ab1b-ed3fdb7348c4" valueTypeId="5930d731-599e-40c7-8a6e-b8234a0843d5"/>
-    <listType typeId="55a67275-ebe8-4892-8f53-7b87416b66c9" valueTypeId="934e4900-b0d8-47ef-be53-2cc550949990"/>
-    <managerType typeId="d0ac147c-598d-4cb3-84c9-f51ebe4e825f" valueTypeId="40e0074d-1337-4442-87ee-a769ee3cb93a"/>
-    <recordSetType typeId="79611e86-74d8-433f-83a9-a08d347b0047" valueTypeId="8524e78f-ba77-4ff1-ae20-3dbb421decec"/>
-    <recordKeyType typeId="a072e054-0865-427b-b015-bb4915a4cf7e" valueTypeId="b0b4fc7f-6400-4480-ac94-67e454426a50"/>
-    <recordType typeId="5192d0e1-0cb5-4a83-a646-bcd4b852f211" valueTypeId="cbf6b95f-c16e-4a14-ad9f-59188d967015"/>
-  </producedTypes>
-  <name>R4051T_StockAdjustmentAsWriteOff</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a64408e7-c3e8-46ff-8e68-410500bcbe42">
+ <producedTypes>
+  <selectionType typeId="75101784-9554-48ad-ab1b-ed3fdb7348c4" valueTypeId="5930d731-599e-40c7-8a6e-b8234a0843d5"/>
+  <listType typeId="55a67275-ebe8-4892-8f53-7b87416b66c9" valueTypeId="934e4900-b0d8-47ef-be53-2cc550949990"/>
+  <managerType typeId="d0ac147c-598d-4cb3-84c9-f51ebe4e825f" valueTypeId="40e0074d-1337-4442-87ee-a769ee3cb93a"/>
+  <recordSetType typeId="79611e86-74d8-433f-83a9-a08d347b0047" valueTypeId="8524e78f-ba77-4ff1-ae20-3dbb421decec"/>
+  <recordKeyType typeId="a072e054-0865-427b-b015-bb4915a4cf7e" valueTypeId="b0b4fc7f-6400-4480-ac94-67e454426a50"/>
+  <recordType typeId="5192d0e1-0cb5-4a83-a646-bcd4b852f211" valueTypeId="cbf6b95f-c16e-4a14-ad9f-59188d967015"/>
+ </producedTypes>
+ <name>R4051T_StockAdjustmentAsWriteOff</name>
+ <synonym>
+  <key>ru</key>
+  <value>R4051 Корректировки товаров организации (списание)</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R4051 Stock adjustment (Write off)</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R4051 Stok sayım çıkışları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="b5a24fe9-0cc0-493b-9cd4-5b0cb90c9223">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R4051 Stock adjustment (Write off)</value>
+   <key>ru</key>
+   <value>Количество</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="b5a24fe9-0cc0-493b-9cd4-5b0cb90c9223">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="7d8509ff-d284-4d9b-a881-f5885baed35c">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="bf75fb81-a69b-4cc5-9537-a6c8c2964087">
-    <name>Basis</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeStockAdjustmentAsWriteOffBasises</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="c1bc4bce-7c68-4371-842d-859cc5ea085c">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="7d8509ff-d284-4d9b-a881-f5885baed35c">
+  <name>Store</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="bf75fb81-a69b-4cc5-9537-a6c8c2964087">
+  <name>Basis</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документ основание</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Basis</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeStockAdjustmentAsWriteOffBasises</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="c1bc4bce-7c68-4371-842d-859cc5ea085c">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

@@ -1,94 +1,150 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7be48962-7a2d-4929-8259-6d197fa92948">
-  <producedTypes>
-    <selectionType typeId="a4d894a7-585b-4846-a571-9b5065e3b857" valueTypeId="00c00d48-5dbd-40fe-8907-70e3f191e19d"/>
-    <listType typeId="441bf6c9-114e-47e0-9176-a22c58c24d7c" valueTypeId="42cfb884-ac60-43f6-aca7-b569b69186db"/>
-    <managerType typeId="44a5fe09-98f6-4624-827f-078a02520489" valueTypeId="3783fa0c-a931-4df4-8120-ecc3fd2fd004"/>
-    <recordSetType typeId="166a30a3-3649-4f74-b493-df2bd2b9309c" valueTypeId="b6ecfff2-f486-4b12-a31a-8db7c1687e88"/>
-    <recordKeyType typeId="8bcde1a8-3ec7-42cd-aec5-e43ce14ae5eb" valueTypeId="fd3e0448-3366-4926-b8e4-8069792ee495"/>
-    <recordType typeId="09636ea6-b8c9-4beb-a180-08e0cc1575b1" valueTypeId="7a16897a-495c-440d-9a04-4f6db14a3957"/>
-    <recordManagerType typeId="5ca13289-9ee7-43cf-93a1-83c033929d24" valueTypeId="167a5dd6-596f-43a0-a31e-6b0520e129f6"/>
-  </producedTypes>
-  <name>BarcodeScanInfoCheck</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7be48962-7a2d-4929-8259-6d197fa92948">
+ <producedTypes>
+  <selectionType typeId="a4d894a7-585b-4846-a571-9b5065e3b857" valueTypeId="00c00d48-5dbd-40fe-8907-70e3f191e19d"/>
+  <listType typeId="441bf6c9-114e-47e0-9176-a22c58c24d7c" valueTypeId="42cfb884-ac60-43f6-aca7-b569b69186db"/>
+  <managerType typeId="44a5fe09-98f6-4624-827f-078a02520489" valueTypeId="3783fa0c-a931-4df4-8120-ecc3fd2fd004"/>
+  <recordSetType typeId="166a30a3-3649-4f74-b493-df2bd2b9309c" valueTypeId="b6ecfff2-f486-4b12-a31a-8db7c1687e88"/>
+  <recordKeyType typeId="8bcde1a8-3ec7-42cd-aec5-e43ce14ae5eb" valueTypeId="fd3e0448-3366-4926-b8e4-8069792ee495"/>
+  <recordType typeId="09636ea6-b8c9-4beb-a180-08e0cc1575b1" valueTypeId="7a16897a-495c-440d-9a04-4f6db14a3957"/>
+  <recordManagerType typeId="5ca13289-9ee7-43cf-93a1-83c033929d24" valueTypeId="167a5dd6-596f-43a0-a31e-6b0520e129f6"/>
+ </producedTypes>
+ <name>BarcodeScanInfoCheck</name>
+ <synonym>
+  <key>ru</key>
+  <value>Проверка информации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Info check</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Bilgi kontrolü</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Проверка информации</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Info check</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Bilgi kontrolü</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Проверка информации</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Info check</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Bilgi kontrolü</value>
+ </listPresentation>
+ <resources uuid="3a42492d-21f8-4dc0-99b6-9691901e995b">
+  <name>Status</name>
   <synonym>
-    <key>en</key>
-    <value>Info check</value>
+   <key>ru</key>
+   <value>Статус</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Info check</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Info check</value>
-  </listPresentation>
-  <resources uuid="3a42492d-21f8-4dc0-99b6-9691901e995b">
-    <name>Status</name>
-    <synonym>
-      <key>en</key>
-      <value>Status</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="087ec7fc-14d7-42cb-9291-c79b395cf281">
-    <name>User</name>
-    <synonym>
-      <key>en</key>
-      <value>User</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="c42dcbc2-82c8-4978-a18b-e66ff626c500">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="ff2d5ab0-6090-4064-9bb0-fd81af4dadd6">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Status</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Statü</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="087ec7fc-14d7-42cb-9291-c79b395cf281">
+  <name>User</name>
+  <synonym>
+   <key>ru</key>
+   <value>Пользователь</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>User</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="c42dcbc2-82c8-4978-a18b-e66ff626c500">
+  <name>Item</name>
+  <synonym>
+   <key>ru</key>
+   <value>Номенклатура</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="ff2d5ab0-6090-4064-9bb0-fd81af4dadd6">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5f9f4f1d-2d82-4741-ad56-415936e724e7">
-  <name>ConnectionSettings</name>
-  <synonym>
-    <key>en</key>
-    <value>Connection settings</value>
-  </synonym>
-  <type>
-    <types>CatalogRef.DataBaseStatus</types>
-  </type>
+ <name>ConnectionSettings</name>
+ <synonym>
+  <key>ru</key>
+  <value>Строка соединения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Connection settings</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Bağlantı ayarları</value>
+ </synonym>
+ <type>
+  <types>CatalogRef.DataBaseStatus</types>
+ </type>
 </mdclass:SessionParameter>

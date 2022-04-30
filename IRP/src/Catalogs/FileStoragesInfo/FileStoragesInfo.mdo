@@ -1,166 +1,222 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3657a1bb-c369-497a-9638-a221c14e356d">
-  <producedTypes>
-    <objectType typeId="abf87cf3-ef90-42d5-8931-bfb5f1b362f6" valueTypeId="2ef605ec-001c-4869-85b5-38423679921a"/>
-    <refType typeId="7bd2edc9-ac37-4eb9-9080-0c6ad8b2ffe7" valueTypeId="036833e8-3f5e-4d14-ae42-bd3d27501dee"/>
-    <selectionType typeId="a285b46e-32c7-4aad-801f-39cd850e5154" valueTypeId="9c8b7ddc-0270-4561-8700-ab2495664ed7"/>
-    <listType typeId="b7330386-111a-4a70-b5a7-732a65935ce3" valueTypeId="8285c260-0391-4a56-bd99-6a34eb477af6"/>
-    <managerType typeId="ed8d1725-3cf2-4111-94f6-135756e1c05f" valueTypeId="b56f2613-e885-4c65-ae2c-8717930ab359"/>
-  </producedTypes>
-  <name>FileStoragesInfo</name>
-  <synonym>
-    <key>en</key>
-    <value>File storages info</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.FileStoragesInfo.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <synonym>
-      <key>en</key>
-      <value>Path to catalog at server</value>
-    </synonym>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3657a1bb-c369-497a-9638-a221c14e356d">
+ <producedTypes>
+  <objectType typeId="abf87cf3-ef90-42d5-8931-bfb5f1b362f6" valueTypeId="2ef605ec-001c-4869-85b5-38423679921a"/>
+  <refType typeId="7bd2edc9-ac37-4eb9-9080-0c6ad8b2ffe7" valueTypeId="036833e8-3f5e-4d14-ae42-bd3d27501dee"/>
+  <selectionType typeId="a285b46e-32c7-4aad-801f-39cd850e5154" valueTypeId="9c8b7ddc-0270-4561-8700-ab2495664ed7"/>
+  <listType typeId="b7330386-111a-4a70-b5a7-732a65935ce3" valueTypeId="8285c260-0391-4a56-bd99-6a34eb477af6"/>
+  <managerType typeId="ed8d1725-3cf2-4111-94f6-135756e1c05f" valueTypeId="b56f2613-e885-4c65-ae2c-8717930ab359"/>
+ </producedTypes>
+ <name>FileStoragesInfo</name>
+ <synonym>
+  <key>ru</key>
+  <value>Адрес файловых хранилищ</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>File storages info</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dosya deplama bilgisi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.FileStoragesInfo.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>File storages info</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.FileStoragesInfo.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.FileStoragesInfo.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.FileStoragesInfo.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="6d408f82-6d41-4b0c-aadd-275b20629884">
-    <name>URLAlias</name>
-    <synonym>
-      <key>en</key>
-      <value>URL alias</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>15</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="b5ce7adc-f54e-4610-8ea9-dde20302c074">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3e883c91-2838-47c8-8a31-496ae855bd11">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="fb7eddc2-21f2-4d63-b906-091e78bfcaa0">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <synonym>
+   <key>ru</key>
+   <value>Путь к папке на сервере</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Path to catalog at server</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Serverde klasör konumu</value>
+  </synonym>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Адрес файловых хранилищ</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>File storages info</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Dosya deplama bilgisi</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.FileStoragesInfo.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.FileStoragesInfo.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.FileStoragesInfo.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="6d408f82-6d41-4b0c-aadd-275b20629884">
+  <name>URLAlias</name>
+  <synonym>
+   <key>ru</key>
+   <value>URL alias</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>URL alias</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Diğer adıyle URL</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>15</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="b5ce7adc-f54e-4610-8ea9-dde20302c074">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3e883c91-2838-47c8-8a31-496ae855bd11">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="fb7eddc2-21f2-4d63-b906-091e78bfcaa0">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

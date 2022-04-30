@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f05f1f2e-355b-460f-9a96-7d493fc16d0e">
-  <name>DPPointOfSaleClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Data processor Point of sale</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DPPointOfSaleClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Обработка Рабочее место кассира</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Data processor Point of sale</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Veri işlemcisi Satış ekranı</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

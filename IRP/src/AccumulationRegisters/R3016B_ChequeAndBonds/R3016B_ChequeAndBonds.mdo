@@ -1,143 +1,223 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f116c970-e973-4fb6-a347-7320dba7ca4b">
-  <producedTypes>
-    <selectionType typeId="3873903a-6162-4470-8a51-9ad28d9629b5" valueTypeId="e755c9ae-6bd7-479f-89c5-edaa11a1594e"/>
-    <listType typeId="74943e34-8b91-4ee9-b160-60689912ced5" valueTypeId="e0033d5e-36a4-41a1-8491-3d02b0bdeedb"/>
-    <managerType typeId="de6acfb2-4f0d-4707-8e6e-ea4ad2161711" valueTypeId="8d19e1bb-7282-491a-b57a-74eefe053cb5"/>
-    <recordSetType typeId="b3a9f6eb-ff2d-47e0-906c-da2baf4dda63" valueTypeId="91993987-5d64-46d6-8af0-3eeb61437995"/>
-    <recordKeyType typeId="c181f1a8-81d6-4894-8514-392e382b309e" valueTypeId="31782bb6-c9f8-48f6-857f-a69a2a27ba30"/>
-    <recordType typeId="2996ed2c-378e-4906-a329-b6b6f8e4cd12" valueTypeId="35f8e4c0-00a9-4909-ab56-49ddd2e6c999"/>
-  </producedTypes>
-  <name>R3016B_ChequeAndBonds</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f116c970-e973-4fb6-a347-7320dba7ca4b">
+ <producedTypes>
+  <selectionType typeId="3873903a-6162-4470-8a51-9ad28d9629b5" valueTypeId="e755c9ae-6bd7-479f-89c5-edaa11a1594e"/>
+  <listType typeId="74943e34-8b91-4ee9-b160-60689912ced5" valueTypeId="e0033d5e-36a4-41a1-8491-3d02b0bdeedb"/>
+  <managerType typeId="de6acfb2-4f0d-4707-8e6e-ea4ad2161711" valueTypeId="8d19e1bb-7282-491a-b57a-74eefe053cb5"/>
+  <recordSetType typeId="b3a9f6eb-ff2d-47e0-906c-da2baf4dda63" valueTypeId="91993987-5d64-46d6-8af0-3eeb61437995"/>
+  <recordKeyType typeId="c181f1a8-81d6-4894-8514-392e382b309e" valueTypeId="31782bb6-c9f8-48f6-857f-a69a2a27ba30"/>
+  <recordType typeId="2996ed2c-378e-4906-a329-b6b6f8e4cd12" valueTypeId="35f8e4c0-00a9-4909-ab56-49ddd2e6c999"/>
+ </producedTypes>
+ <name>R3016B_ChequeAndBonds</name>
+ <synonym>
+  <key>ru</key>
+  <value>R3016 Чеки и долговые обязательства</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R3016 Cheque and bonds</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R3016 Çek/Senetler</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="9e07f506-5ef7-43b2-91f1-7da5463d2d35">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>R3016 Cheque and bonds</value>
+   <key>ru</key>
+   <value>Сумма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="9e07f506-5ef7-43b2-91f1-7da5463d2d35">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="28814e46-6c2b-41ac-aa92-3cf4e3b834ab">
-    <name>DeferredCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Deferred calculation</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="0e60f86e-c092-4366-9983-6bda01ca3092">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="2529ffaa-4abf-4903-a46a-19fdf43f584b">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="eba21aa7-2ed7-43a4-aae1-2f5c459ccabf">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Multi currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="dd52609b-38f2-46cb-a16c-b04738bb4c0c">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="1b814b84-e0d1-4ba7-a080-7dd9438b1e28">
-    <name>Cheque</name>
-    <synonym>
-      <key>en</key>
-      <value>Cheque</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ChequeBonds</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="9f67f24b-27d1-49ec-a04d-1252847e4d69">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="164d9ed8-17ca-44f8-a820-5c32a8a5c34b">
-    <name>LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="28814e46-6c2b-41ac-aa92-3cf4e3b834ab">
+  <name>DeferredCalculation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Отложенный расчет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Deferred calculation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ertelenen hesaplama</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="0e60f86e-c092-4366-9983-6bda01ca3092">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="2529ffaa-4abf-4903-a46a-19fdf43f584b">
+  <name>Branch</name>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="eba21aa7-2ed7-43a4-aae1-2f5c459ccabf">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Multi currency movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz kırılım tipi</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="dd52609b-38f2-46cb-a16c-b04738bb4c0c">
+  <name>Currency</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="1b814b84-e0d1-4ba7-a080-7dd9438b1e28">
+  <name>Cheque</name>
+  <synonym>
+   <key>ru</key>
+   <value>Банковский чек</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Cheque</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çek/Senet</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ChequeBonds</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="9f67f24b-27d1-49ec-a04d-1252847e4d69">
+  <name>Partner</name>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="164d9ed8-17ca-44f8-a820-5c32a8a5c34b">
+  <name>LegalName</name>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Legal name</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

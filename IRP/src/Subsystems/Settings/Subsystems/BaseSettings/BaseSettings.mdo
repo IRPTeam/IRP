@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ab10cc2d-30be-4ba4-9c64-1d65b3b00efb">
-  <name>BaseSettings</name>
-  <synonym>
-    <key>en</key>
-    <value>Base settings</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.ConfigurationMetadata</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>BaseSettings</name>
+ <synonym>
+  <key>ru</key>
+  <value>Основные настройки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Base settings</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ana ayarlar</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.ConfigurationMetadata</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

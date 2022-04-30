@@ -1,116 +1,180 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7dd41ab9-aaa4-4451-9340-8e348df5a3cc">
-  <producedTypes>
-    <selectionType typeId="697702d1-f939-4f49-bb07-6c7603118ff5" valueTypeId="0f01b247-a3bb-49d8-ac0f-bce7be94fb52"/>
-    <listType typeId="4fe66155-ae31-475a-bc12-f35e83661a85" valueTypeId="dca2e5a1-20e7-47f1-bcac-185486674100"/>
-    <managerType typeId="871c4642-9e97-44d7-a5e6-061e563bb33c" valueTypeId="7ecae48d-146a-4723-a53e-bbf984582186"/>
-    <recordSetType typeId="0385365f-cc69-4f16-9d03-374b387fa35f" valueTypeId="b9b65a5c-289d-4a40-ba6d-f6bffc240d9e"/>
-    <recordKeyType typeId="e2adee5a-8391-40e6-abe7-fe3eec93f7c6" valueTypeId="7e118126-768d-4a7c-a855-42e8d56e9416"/>
-    <recordType typeId="74fa0ea5-a723-47c7-ab29-dfe2c5260086" valueTypeId="8c5bb627-e81f-4230-859e-553d1b172ee1"/>
-  </producedTypes>
-  <name>R3050T_RetailCash</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7dd41ab9-aaa4-4451-9340-8e348df5a3cc">
+ <producedTypes>
+  <selectionType typeId="697702d1-f939-4f49-bb07-6c7603118ff5" valueTypeId="0f01b247-a3bb-49d8-ac0f-bce7be94fb52"/>
+  <listType typeId="4fe66155-ae31-475a-bc12-f35e83661a85" valueTypeId="dca2e5a1-20e7-47f1-bcac-185486674100"/>
+  <managerType typeId="871c4642-9e97-44d7-a5e6-061e563bb33c" valueTypeId="7ecae48d-146a-4723-a53e-bbf984582186"/>
+  <recordSetType typeId="0385365f-cc69-4f16-9d03-374b387fa35f" valueTypeId="b9b65a5c-289d-4a40-ba6d-f6bffc240d9e"/>
+  <recordKeyType typeId="e2adee5a-8391-40e6-abe7-fe3eec93f7c6" valueTypeId="7e118126-768d-4a7c-a855-42e8d56e9416"/>
+  <recordType typeId="74fa0ea5-a723-47c7-ab29-dfe2c5260086" valueTypeId="8c5bb627-e81f-4230-859e-553d1b172ee1"/>
+ </producedTypes>
+ <name>R3050T_RetailCash</name>
+ <synonym>
+  <key>ru</key>
+  <value>R3050 Денежные средства в рознице</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R3050 Retail cash</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R3050 Perakende kasa hareketleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="680ed740-a0a5-48ef-93d5-5aaa0d061962">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>R3050 Retail cash</value>
+   <key>ru</key>
+   <value>Сумма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="680ed740-a0a5-48ef-93d5-5aaa0d061962">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="2ebf7488-6e51-45bc-848d-3cedd4010847">
-    <name>Commission</name>
-    <synonym>
-      <key>en</key>
-      <value>Commission</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="af1ba1a6-e7b1-4078-b73b-e6922878883f">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="78181d18-902d-473b-bdab-0181bc61a1a7">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="51544a7a-c21a-45d3-ab27-b513bdb1970c">
-    <name>PaymentType</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PaymentTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="cb0c3f9e-d203-4145-aab8-ffc154c46b9f">
-    <name>Account</name>
-    <synonym>
-      <key>en</key>
-      <value>Account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="700f4c5a-7bf8-454a-817e-171122f59797">
-    <name>PaymentTerminal</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment terminal</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PaymentTerminals</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="2ebf7488-6e51-45bc-848d-3cedd4010847">
+  <name>Commission</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма комиссии</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Commission</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Komisyon</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="af1ba1a6-e7b1-4078-b73b-e6922878883f">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="78181d18-902d-473b-bdab-0181bc61a1a7">
+  <name>Branch</name>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="51544a7a-c21a-45d3-ab27-b513bdb1970c">
+  <name>PaymentType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид оплаты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Payment type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme tipi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PaymentTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="cb0c3f9e-d203-4145-aab8-ffc154c46b9f">
+  <name>Account</name>
+  <synonym>
+   <key>ru</key>
+   <value>Касса/Банковский счет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Account</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kasa/Banka</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="700f4c5a-7bf8-454a-817e-171122f59797">
+  <name>PaymentTerminal</name>
+  <synonym>
+   <key>ru</key>
+   <value>Платежный терминал</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Payment terminal</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme terminali</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PaymentTerminals</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

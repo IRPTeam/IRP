@@ -1,165 +1,261 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5e5cde0f-ac9f-434b-9d7d-85b3a08d25ad">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="5e5cde0f-ac9f-434b-9d7d-85b3a08d25ad">
+ <producedTypes>
+  <objectType typeId="a2d5a967-6cd1-4243-9f56-eb1726fe5a53" valueTypeId="00bde476-b676-419c-9696-1fac498fb1b8"/>
+  <refType typeId="f397df20-0eea-4ac3-a47f-704df594c282" valueTypeId="e272643e-516d-4d62-b07d-a49c51bd5e58"/>
+  <selectionType typeId="8ce0204b-7e5c-4d34-8bd6-8e816b4ded74" valueTypeId="2112e392-7031-44fe-87d9-bf8624729ebf"/>
+  <listType typeId="a84be357-6d8c-49b2-bb1b-ffe5240b5691" valueTypeId="93c019b0-5465-4bd0-a288-8d5e594fddff"/>
+  <managerType typeId="b48124ec-0248-4867-9ac2-91a10d27f28a" valueTypeId="a3bf43f8-790d-46b6-b03b-645cba8a51b8"/>
+ </producedTypes>
+ <name>IDInfoSets</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки контактной информации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Contact info sets</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İletişim bilgi setleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Настройки контактной информации</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Contact info set</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>İletişim bilgi seti</value>
+ </objectPresentation>
+ <hierarchyType>HierarchyOfItems</hierarchyType>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="cc292e14-9ccb-4fdb-83ea-ae02177089a1">
+   <name>Catalog_Stores</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="a8d65579-1f88-4b9b-9c47-aefd32253e30">
+   <name>Catalog_Companies</name>
+   <description>Catalog companies</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="3da031ae-3c4a-4e8a-b3af-4d732b45af27">
+   <name>Catalog_Partners</name>
+   <description>Catalog partners</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.IDInfoSets.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.IDInfoSets.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.IDInfoSets.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <tabularSections uuid="237b0925-c7c5-480d-a416-e99d5618742a">
   <producedTypes>
-    <objectType typeId="a2d5a967-6cd1-4243-9f56-eb1726fe5a53" valueTypeId="00bde476-b676-419c-9696-1fac498fb1b8"/>
-    <refType typeId="f397df20-0eea-4ac3-a47f-704df594c282" valueTypeId="e272643e-516d-4d62-b07d-a49c51bd5e58"/>
-    <selectionType typeId="8ce0204b-7e5c-4d34-8bd6-8e816b4ded74" valueTypeId="2112e392-7031-44fe-87d9-bf8624729ebf"/>
-    <listType typeId="a84be357-6d8c-49b2-bb1b-ffe5240b5691" valueTypeId="93c019b0-5465-4bd0-a288-8d5e594fddff"/>
-    <managerType typeId="b48124ec-0248-4867-9ac2-91a10d27f28a" valueTypeId="a3bf43f8-790d-46b6-b03b-645cba8a51b8"/>
+   <objectType typeId="2a13d23e-fb79-4178-9d18-4a2194452796" valueTypeId="d2ae176c-689a-4ada-8b18-8b3bfdfb6176"/>
+   <rowType typeId="25356394-fb29-455b-b9c1-5910d899b6ac" valueTypeId="c8943090-b5c2-4786-b7fe-eacef5c3a2ea"/>
   </producedTypes>
-  <name>IDInfoSets</name>
+  <name>IDInfoTypes</name>
   <synonym>
-    <key>en</key>
-    <value>Contact info sets</value>
+   <key>ru</key>
+   <value>Вид контактной информации</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Contact info types</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İletişim bilgi türleri</value>
+  </synonym>
+  <attributes uuid="6d89c214-8d2d-400b-832d-b3b2a2a84fc7">
+   <name>IDInfoType</name>
+   <synonym>
+    <key>ru</key>
+    <value>Вид контактной информации</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Contact info set</value>
-  </objectPresentation>
-  <hierarchyType>HierarchyOfItems</hierarchyType>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="cc292e14-9ccb-4fdb-83ea-ae02177089a1">
-      <name>Catalog_Stores</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="a8d65579-1f88-4b9b-9c47-aefd32253e30">
-      <name>Catalog_Companies</name>
-      <description>Catalog companies</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="3da031ae-3c4a-4e8a-b3af-4d732b45af27">
-      <name>Catalog_Partners</name>
-      <description>Catalog partners</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.IDInfoSets.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.IDInfoSets.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.IDInfoSets.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <tabularSections uuid="237b0925-c7c5-480d-a416-e99d5618742a">
-    <producedTypes>
-      <objectType typeId="2a13d23e-fb79-4178-9d18-4a2194452796" valueTypeId="d2ae176c-689a-4ada-8b18-8b3bfdfb6176"/>
-      <rowType typeId="25356394-fb29-455b-b9c1-5910d899b6ac" valueTypeId="c8943090-b5c2-4786-b7fe-eacef5c3a2ea"/>
-    </producedTypes>
-    <name>IDInfoTypes</name>
-    <synonym>
-      <key>en</key>
-      <value>Contact info types</value>
-    </synonym>
-    <attributes uuid="6d89c214-8d2d-400b-832d-b3b2a2a84fc7">
-      <name>IDInfoType</name>
-      <synonym>
-        <key>en</key>
-        <value>Contact info type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="e83e531a-fc1e-47e4-8a00-88fdde5f3b9d">
-      <name>Condition</name>
-      <synonym>
-        <key>en</key>
-        <value>Condition</value>
-      </synonym>
-      <type>
-        <types>ValueStorage</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="b4187b53-0f80-4dee-a00b-086de74bd280">
-      <name>IsConditionSet</name>
-      <synonym>
-        <key>en</key>
-        <value>Is condition set</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <forms uuid="f08efaf3-5938-432a-8dff-098c00f34d57">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="271fcb48-951b-4df7-97a1-8670eddf9a8e">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e52d1a10-929d-4ab3-a346-2dc67ad4ad5f">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ec0f09b0-b42e-4a37-a589-2703f508597a">
-    <name>EditCondition</name>
-    <synonym>
-      <key>en</key>
-      <value>Edit condition</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="5e050964-1a71-4925-acb4-cfa30fac99fd">
-    <name>DCS_Catalog</name>
-    <synonym>
-      <key>en</key>
-      <value>DCS catalog</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
-  <templates uuid="560090de-208d-4be6-80e8-490462b943d5">
-    <name>DCS_Document</name>
-    <synonym>
-      <key>en</key>
-      <value>DCS document</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+    <value>Contact info type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>İletişim bilgi türü</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e83e531a-fc1e-47e4-8a00-88fdde5f3b9d">
+   <name>Condition</name>
+   <synonym>
+    <key>ru</key>
+    <value>Условие</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Condition</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Koşul</value>
+   </synonym>
+   <type>
+    <types>ValueStorage</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b4187b53-0f80-4dee-a00b-086de74bd280">
+   <name>IsConditionSet</name>
+   <synonym>
+    <key>ru</key>
+    <value>Условие</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Is condition set</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Koşul belirlendi</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <forms uuid="f08efaf3-5938-432a-8dff-098c00f34d57">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="271fcb48-951b-4df7-97a1-8670eddf9a8e">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e52d1a10-929d-4ab3-a346-2dc67ad4ad5f">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ec0f09b0-b42e-4a37-a589-2703f508597a">
+  <name>EditCondition</name>
+  <synonym>
+   <key>ru</key>
+   <value>Редактировать условие</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Edit condition</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Koşul değiştir</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="5e050964-1a71-4925-acb4-cfa30fac99fd">
+  <name>DCS_Catalog</name>
+  <synonym>
+   <key>ru</key>
+   <value>Справочник DCS</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>DCS catalog</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>DCS kart listesi</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+ <templates uuid="560090de-208d-4be6-80e8-490462b943d5">
+  <name>DCS_Document</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документ DCS</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>DCS document</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>DCS evrak</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Catalog>

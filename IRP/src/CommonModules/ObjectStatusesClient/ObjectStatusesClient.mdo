@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7ba10bdc-509a-41e8-a6e4-dc86bde394d5">
-  <name>ObjectStatusesClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Object statuses client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>ObjectStatusesClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Статусы объектов клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Object statuses client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Obje statüleri client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

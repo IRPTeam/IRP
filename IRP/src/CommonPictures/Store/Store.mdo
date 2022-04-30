@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a205b048-3e15-446a-a401-49640d62630f">
-  <name>Store</name>
-  <synonym>
-    <key>en</key>
-    <value>Store</value>
-  </synonym>
+ <name>Store</name>
+ <synonym>
+  <key>ru</key>
+  <value>Склад</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Store</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Depo</value>
+ </synonym>
 </mdclass:CommonPicture>

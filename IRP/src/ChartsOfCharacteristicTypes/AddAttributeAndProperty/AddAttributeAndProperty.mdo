@@ -1,120 +1,184 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:ChartOfCharacteristicTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="78d3d275-5362-4d5a-978a-488685b93e3d">
-  <producedTypes>
-    <objectType typeId="3b33f0d0-e575-46d6-86e5-1f05f8a135b6" valueTypeId="a40c4648-68ea-4256-bac3-f0c3c9d1284a"/>
-    <refType typeId="ee081ed5-4b9a-48ff-b9c0-2bca047d7aa3" valueTypeId="e3bacd1a-ed9e-4cb3-a560-edf3fe7741ec"/>
-    <selectionType typeId="30f42c39-4156-4730-a5f9-453f9aa5365f" valueTypeId="0360c88e-a60f-4006-aba9-08012ce6fea2"/>
-    <listType typeId="9b0c219f-f4f0-47e1-9a03-98db6fbe5e72" valueTypeId="e994ebcd-0254-406d-a8e9-39b77d28a15b"/>
-    <managerType typeId="4d24ca47-cf5b-41ea-ae9f-2f3799fd78b2" valueTypeId="c704bb1d-223a-4a1d-bf6b-f81d214c104e"/>
-    <containerType typeId="d360c1b5-1cdd-4470-857d-1b2be21e251c" valueTypeId="42495d80-44ab-4e3a-bdec-8d1ffece1eb5"/>
-  </producedTypes>
-  <name>AddAttributeAndProperty</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:ChartOfCharacteristicTypes xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="78d3d275-5362-4d5a-978a-488685b93e3d">
+ <producedTypes>
+  <objectType typeId="3b33f0d0-e575-46d6-86e5-1f05f8a135b6" valueTypeId="a40c4648-68ea-4256-bac3-f0c3c9d1284a"/>
+  <refType typeId="ee081ed5-4b9a-48ff-b9c0-2bca047d7aa3" valueTypeId="e3bacd1a-ed9e-4cb3-a560-edf3fe7741ec"/>
+  <selectionType typeId="30f42c39-4156-4730-a5f9-453f9aa5365f" valueTypeId="0360c88e-a60f-4006-aba9-08012ce6fea2"/>
+  <listType typeId="9b0c219f-f4f0-47e1-9a03-98db6fbe5e72" valueTypeId="e994ebcd-0254-406d-a8e9-39b77d28a15b"/>
+  <managerType typeId="4d24ca47-cf5b-41ea-ae9f-2f3799fd78b2" valueTypeId="c704bb1d-223a-4a1d-bf6b-f81d214c104e"/>
+  <containerType typeId="d360c1b5-1cdd-4470-857d-1b2be21e251c" valueTypeId="42495d80-44ab-4e3a-bdec-8d1ffece1eb5"/>
+ </producedTypes>
+ <name>AddAttributeAndProperty</name>
+ <synonym>
+  <key>ru</key>
+  <value>Типы дополнительных реквизитов и сведений</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Additional attribute types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek özellik tipleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Тип дополнительного реквизита</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Additional attribute type</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Ek özellik tipi</value>
+ </objectPresentation>
+ <characteristicExtValues>Catalog.AddAttributeAndPropertyValues</characteristicExtValues>
+ <type>
+  <types>Boolean</types>
+  <types>CatalogRef.Currencies</types>
+  <types>CatalogRef.AddAttributeAndPropertyValues</types>
+  <types>String</types>
+  <types>Date</types>
+  <types>Number</types>
+  <numberQualifiers>
+   <precision>15</precision>
+   <scale>4</scale>
+  </numberQualifiers>
+  <stringQualifiers>
+   <length>512</length>
+  </stringQualifiers>
+  <dateQualifiers>
+   <dateFractions>Date</dateFractions>
+  </dateQualifiers>
+ </type>
+ <hierarchical>true</hierarchical>
+ <foldersOnTop>true</foldersOnTop>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>BothWays</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.GroupForm</defaultFolderForm>
+ <defaultListForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="a46de28d-274c-4547-a6fd-6e426d8be0b0">
+  <name>Icon</name>
   <synonym>
-    <key>en</key>
-    <value>Additional attribute types</value>
+   <key>ru</key>
+   <value>Иконка</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Additional attribute type</value>
-  </objectPresentation>
-  <characteristicExtValues>Catalog.AddAttributeAndPropertyValues</characteristicExtValues>
+  <synonym>
+   <key>en</key>
+   <value>Icon</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Simge</value>
+  </synonym>
   <type>
-    <types>Boolean</types>
-    <types>CatalogRef.Currencies</types>
-    <types>CatalogRef.AddAttributeAndPropertyValues</types>
-    <types>String</types>
-    <types>Date</types>
-    <types>Number</types>
-    <numberQualifiers>
-      <precision>15</precision>
-      <scale>4</scale>
-    </numberQualifiers>
-    <stringQualifiers>
-      <length>512</length>
-    </stringQualifiers>
-    <dateQualifiers>
-      <dateFractions>Date</dateFractions>
-    </dateQualifiers>
+   <types>ValueStorage</types>
   </type>
-  <hierarchical>true</hierarchical>
-  <foldersOnTop>true</foldersOnTop>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>BothWays</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.ItemForm</defaultObjectForm>
-  <defaultFolderForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.GroupForm</defaultFolderForm>
-  <defaultListForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>ChartOfCharacteristicTypes.AddAttributeAndProperty.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="a46de28d-274c-4547-a6fd-6e426d8be0b0">
-    <name>Icon</name>
-    <synonym>
-      <key>en</key>
-      <value>Icon</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="c6468cbb-beb3-46b0-bec6-8e7652700222">
-    <name>isIconSet</name>
-    <synonym>
-      <key>en</key>
-      <value>Is icon set</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="c33e15bc-2f64-4500-8ca5-c9789a8dc330">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="43c074e4-cce6-4d47-88bc-d04dd235a2e1">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="a27f0ea2-37c3-4170-84b5-212b32322ea5">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3812a981-a428-45ce-9ef3-67f2529720c8">
-    <name>GroupForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Group form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c6468cbb-beb3-46b0-bec6-8e7652700222">
+  <name>isIconSet</name>
+  <synonym>
+   <key>ru</key>
+   <value>Иконка установлена</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Is icon set</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Simge belirlendi</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="c33e15bc-2f64-4500-8ca5-c9789a8dc330">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="43c074e4-cce6-4d47-88bc-d04dd235a2e1">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="a27f0ea2-37c3-4170-84b5-212b32322ea5">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3812a981-a428-45ce-9ef3-67f2529720c8">
+  <name>GroupForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма группы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Group form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup from</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:ChartOfCharacteristicTypes>

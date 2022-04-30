@@ -1,4 +1,4 @@
-Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
+﻿Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
 	If Actions = Undefined Then
 		Actions = New Structure();
 	EndIf;

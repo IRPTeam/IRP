@@ -1,36 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="82a94a3f-7d9e-4a73-a24e-d5d432d5beab">
-  <producedTypes>
-    <refType typeId="07bdf21b-5dcd-4b32-a37b-8849bee99876" valueTypeId="287e558e-e8f3-456e-aa5d-d1906a023539"/>
-    <listType typeId="5f7f7564-7c56-4083-87ba-5c94f71b60f5" valueTypeId="016b9788-a7f7-4ae9-8736-c799764632b0"/>
-    <managerType typeId="faac8593-7912-4054-aa86-050d87be0127" valueTypeId="9a68f4d2-643d-45f1-9001-08964e973f7d"/>
-  </producedTypes>
-  <name>CalculationTypes</name>
+ <producedTypes>
+  <refType typeId="07bdf21b-5dcd-4b32-a37b-8849bee99876" valueTypeId="287e558e-e8f3-456e-aa5d-d1906a023539"/>
+  <listType typeId="5f7f7564-7c56-4083-87ba-5c94f71b60f5" valueTypeId="016b9788-a7f7-4ae9-8736-c799764632b0"/>
+  <managerType typeId="faac8593-7912-4054-aa86-050d87be0127" valueTypeId="9a68f4d2-643d-45f1-9001-08964e973f7d"/>
+ </producedTypes>
+ <name>CalculationTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Варианты оплаты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Calculation types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Hesaplama türleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="4b9283e7-d7c8-491d-874f-df964762bdba">
+  <name>AdvancesUntilHolds</name>
   <synonym>
-    <key>en</key>
-    <value>Calculation types</value>
+   <key>ru</key>
+   <value>Аванс (до обеспечения)</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="4b9283e7-d7c8-491d-874f-df964762bdba">
-    <name>AdvancesUntilHolds</name>
-    <synonym>
-      <key>en</key>
-      <value>Advances until holds</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="c3c5692d-4071-4c32-8431-1d17872500b1">
-    <name>Prepaid</name>
-    <synonym>
-      <key>en</key>
-      <value>Prepaid</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="0b2fa0a3-0395-44e8-9f30-974c63592e7b">
-    <name>PostShipmentCredit</name>
-    <synonym>
-      <key>en</key>
-      <value>Post-shipment credit</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Advances until holds</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Açık hesap</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="c3c5692d-4071-4c32-8431-1d17872500b1">
+  <name>Prepaid</name>
+  <synonym>
+   <key>ru</key>
+   <value>Предоплата (до отгрузки)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Prepaid</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Önceden ödemeli</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="0b2fa0a3-0395-44e8-9f30-974c63592e7b">
+  <name>PostShipmentCredit</name>
+  <synonym>
+   <key>ru</key>
+   <value>Кредит (после отгрузки)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Post-shipment credit</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sevkiyat sonrası kredi</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

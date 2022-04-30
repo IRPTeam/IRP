@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b112d924-13cc-44ab-a887-a721b24874c8">
-  <producedTypes>
-    <refType typeId="58e99479-707f-404d-8059-8f821a534f37" valueTypeId="df13e2d0-1160-4f45-bf9a-75c798217eaa"/>
-    <listType typeId="bbd15aac-7dc7-473e-9b41-4febf4d2c5d4" valueTypeId="332af6d5-9385-48d3-a531-42fbd543f7bb"/>
-    <managerType typeId="5409fab0-408b-4f61-b9b9-d619c370c183" valueTypeId="4cf2a88d-d239-41e7-a784-25643a8694a0"/>
-  </producedTypes>
-  <name>BatchDirection</name>
+ <producedTypes>
+  <refType typeId="58e99479-707f-404d-8059-8f821a534f37" valueTypeId="df13e2d0-1160-4f45-bf9a-75c798217eaa"/>
+  <listType typeId="bbd15aac-7dc7-473e-9b41-4febf4d2c5d4" valueTypeId="332af6d5-9385-48d3-a531-42fbd543f7bb"/>
+  <managerType typeId="5409fab0-408b-4f61-b9b9-d619c370c183" valueTypeId="4cf2a88d-d239-41e7-a784-25643a8694a0"/>
+ </producedTypes>
+ <name>BatchDirection</name>
+ <synonym>
+  <key>ru</key>
+  <value>Направление партии</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Batch direction</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Parti yönü</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="03ec6752-4923-4369-a849-4fc56ca5fa51">
+  <name>Receipt</name>
   <synonym>
-    <key>en</key>
-    <value>Batch direction</value>
+   <key>ru</key>
+   <value>Приход</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="03ec6752-4923-4369-a849-4fc56ca5fa51">
-    <name>Receipt</name>
-    <synonym>
-      <key>en</key>
-      <value>Receipt</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="5105d989-2cdf-4291-90b7-c40c026e7a48">
-    <name>Expense</name>
-    <synonym>
-      <key>en</key>
-      <value>Expense</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Receipt</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Giriş</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="5105d989-2cdf-4291-90b7-c40c026e7a48">
+  <name>Expense</name>
+  <synonym>
+   <key>ru</key>
+   <value>Расход</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Expense</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çıkış</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

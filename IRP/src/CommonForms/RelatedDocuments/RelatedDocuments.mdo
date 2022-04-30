@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cde552ba-f522-4b71-a675-51cff5d8743b">
-  <name>RelatedDocuments</name>
-  <synonym>
-    <key>en</key>
-    <value>Related documents</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>RelatedDocuments</name>
+ <synonym>
+  <key>ru</key>
+  <value>Связанные документы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Related documents</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Bağlı evrakları</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

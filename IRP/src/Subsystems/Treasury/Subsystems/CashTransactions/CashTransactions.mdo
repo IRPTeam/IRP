@@ -1,18 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="54e688f2-a9eb-4646-90eb-5b83bb62cc4b">
-  <name>CashTransactions</name>
-  <synonym>
-    <key>en</key>
-    <value>Cash transactions</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.CashTransferOrder</content>
-  <content>Document.ReconciliationStatement</content>
-  <content>Document.CashExpense</content>
-  <content>Document.CashRevenue</content>
-  <content>Document.CreditNote</content>
-  <content>Document.DebitNote</content>
-  <content>Document.MoneyTransfer</content>
-  <parentSubsystem>Subsystem.Treasury</parentSubsystem>
+ <name>CashTransactions</name>
+ <synonym>
+  <key>ru</key>
+  <value>Контроль взаиморасчетов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cash transactions</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kasa/banka işlemleri</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.CashTransferOrder</content>
+ <content>Document.ReconciliationStatement</content>
+ <content>Document.CashExpense</content>
+ <content>Document.CashRevenue</content>
+ <content>Document.CreditNote</content>
+ <content>Document.DebitNote</content>
+ <content>Document.MoneyTransfer</content>
+ <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

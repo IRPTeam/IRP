@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="83afca57-8f5f-49f8-85c9-eb07aa0c68fe">
-  <name>OtherGroup</name>
-  <synonym>
-    <key>en</key>
-    <value>Other group</value>
-  </synonym>
+ <name>OtherGroup</name>
+ <synonym>
+  <key>ru</key>
+  <value>Группа прочие</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Other group</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Diğer grup</value>
+ </synonym>
 </mdclass:CommonPicture>

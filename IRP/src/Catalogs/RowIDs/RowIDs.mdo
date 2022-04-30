@@ -1,503 +1,719 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a47f586d-df66-4c99-8ed2-63838293b0ea">
-  <producedTypes>
-    <objectType typeId="46fd1056-0fea-4267-8a2b-e3f093f0999d" valueTypeId="5e787ecb-646e-4677-9428-5d5e927a5f99"/>
-    <refType typeId="d0e5acaa-1197-4fd8-82a4-55e30bbb88bb" valueTypeId="ac3f55a9-0130-45d4-845a-144fbf7d8bcd"/>
-    <selectionType typeId="90af7700-58b2-4627-9843-5e89ae182608" valueTypeId="f877faa3-d10a-42c3-8392-f910faa56e6f"/>
-    <listType typeId="04e0c154-4202-4b82-b9b9-d2bc8b15ce01" valueTypeId="67ed1bf2-4db5-4b39-8334-9d616fb5520f"/>
-    <managerType typeId="f592e181-1c17-4436-b745-eae873330251" valueTypeId="9d2518e8-6850-4aa3-a1ee-35f1bdef7a25"/>
-  </producedTypes>
-  <name>RowIDs</name>
-  <synonym>
-    <key>en</key>
-    <value>Row IDs</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.RowIDs.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a47f586d-df66-4c99-8ed2-63838293b0ea">
+ <producedTypes>
+  <objectType typeId="46fd1056-0fea-4267-8a2b-e3f093f0999d" valueTypeId="5e787ecb-646e-4677-9428-5d5e927a5f99"/>
+  <refType typeId="d0e5acaa-1197-4fd8-82a4-55e30bbb88bb" valueTypeId="ac3f55a9-0130-45d4-845a-144fbf7d8bcd"/>
+  <selectionType typeId="90af7700-58b2-4627-9843-5e89ae182608" valueTypeId="f877faa3-d10a-42c3-8392-f910faa56e6f"/>
+  <listType typeId="04e0c154-4202-4b82-b9b9-d2bc8b15ce01" valueTypeId="67ed1bf2-4db5-4b39-8334-9d616fb5520f"/>
+  <managerType typeId="f592e181-1c17-4436-b745-eae873330251" valueTypeId="9d2518e8-6850-4aa3-a1ee-35f1bdef7a25"/>
+ </producedTypes>
+ <name>RowIDs</name>
+ <synonym>
+  <key>ru</key>
+  <value>Row IDs</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Row IDs</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satır IDler</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.RowIDs.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Row ID</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>36</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.RowIDs.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="d1438373-f6eb-4b5a-9ae6-a036c668d603">
-    <name>AgreementSales</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner term (Sales)</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <createOnInput>DontUse</createOnInput>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-  </attributes>
-  <attributes uuid="de644888-2881-4ae5-adc6-5c20999278fb">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="6bc4a204-5c5d-4221-9af7-227a547e24a1">
-    <name>CurrencySales</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency (Sales)</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="b3a9e561-72a6-4cb9-a148-bd105f86da90">
-    <name>LegalNameSales</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name (Sales)</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="92b1dc6d-6cb7-4022-91e3-8860e878e22a">
-    <name>PartnerSales</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner (Sales)</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="e03c8729-1525-4318-a1bd-2ca8732f620b">
-    <name>PriceIncludeTaxSales</name>
-    <synonym>
-      <key>en</key>
-      <value>Price includes tax (Sales)</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="2dae109c-31d6-448e-9704-c83f3830c1d1">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="0c549ed8-e401-4e23-b7f2-953605c95f9e">
-    <name>Unit</name>
-    <synonym>
-      <key>en</key>
-      <value>Unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <createOnInput>DontUse</createOnInput>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-  </attributes>
-  <attributes uuid="e6261bb3-ebcc-4509-8af1-02c732db970c">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="59fe7567-b25b-483b-9367-56c2c8c97b2b">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="ed1b3424-0171-4f7d-b39c-49459bdc17be">
-    <name>Basis</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis</value>
-    </synonym>
-    <type>
-      <types>DocumentRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="f8b2ef78-dad9-4510-bc71-311795501b84">
-    <name>RowID</name>
-    <synonym>
-      <key>en</key>
-      <value>Row ID</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="36946680-c7fd-4c04-84cc-ed54b5f272ae">
-    <name>ProcurementMethod</name>
-    <synonym>
-      <key>en</key>
-      <value>Procurement method</value>
-    </synonym>
-    <type>
-      <types>EnumRef.ProcurementMethods</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="2965fc91-6ccd-4e55-9875-bc3a8492e35d">
-    <name>StoreSender</name>
-    <synonym>
-      <key>en</key>
-      <value>Store sender</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="172348a6-2eba-49a9-901f-33c023bcced1">
-    <name>StoreReceiver</name>
-    <synonym>
-      <key>en</key>
-      <value>Store receiver</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="16ba789e-358d-414e-ba01-5339a79c536c">
-    <name>TransactionTypeSC</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction type SC</value>
-    </synonym>
-    <type>
-      <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="2ec92af5-aa30-4ad3-a981-7f5a5b57589c">
-    <name>TransactionTypeGR</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction type GR</value>
-    </synonym>
-    <type>
-      <types>EnumRef.GoodsReceiptTransactionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="1daa5b17-bc59-4001-b273-6d398c6bb3bd">
-    <name>TransactionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.GoodsReceiptTransactionTypes</types>
-      <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="439e9df1-4ee2-4fb5-8fcd-f4e477a6eae2">
-    <name>Requester</name>
-    <synonym>
-      <key>en</key>
-      <value>Requester</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.SalesOrder</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="2c75300d-a052-41c5-9a04-d95eda280216">
-    <name>AgreementPurchases</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner term (Purchases)</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <createOnInput>DontUse</createOnInput>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-  </attributes>
-  <attributes uuid="66c82d9b-4afc-4660-bc58-8dfde4332066">
-    <name>PartnerPurchases</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner (Purchases)</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="d589b99f-4e03-41c2-8b0b-7233550ae3a6">
-    <name>LegalNamePurchases</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name (Purchases)</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="6b212c34-98b3-4ee1-b975-d67438fdd351">
-    <name>PriceIncludeTaxPurchases</name>
-    <synonym>
-      <key>en</key>
-      <value>Price includes tax (Purchases)</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="fe2c7008-aade-4fc9-bdc7-966d37247a41">
-    <name>CurrencyPurchases</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency (Purchases)</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>ID Строки</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Row ID</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Satır ID</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>36</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.RowIDs.Form.ItemForm</defaultObjectForm>
+ <attributes uuid="d1438373-f6eb-4b5a-9ae6-a036c668d603">
+  <name>AgreementSales</name>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение (Продажи)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner term (Sales)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sözleşme (Satışlar)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <createOnInput>DontUse</createOnInput>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+ </attributes>
+ <attributes uuid="de644888-2881-4ae5-adc6-5c20999278fb">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="6bc4a204-5c5d-4221-9af7-227a547e24a1">
+  <name>CurrencySales</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта (Продажи)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency (Sales)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dövizler (Satışlar)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b3a9e561-72a6-4cb9-a148-bd105f86da90">
+  <name>LegalNameSales</name>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент (Продажи)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Legal name (Sales)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı (Satışlar)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="92b1dc6d-6cb7-4022-91e3-8860e878e22a">
+  <name>PartnerSales</name>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер (Продажи)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner (Sales)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap (Satışlar)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e03c8729-1525-4318-a1bd-2ca8732f620b">
+  <name>PriceIncludeTaxSales</name>
+  <synonym>
+   <key>ru</key>
+   <value>Цена включает НДС (Продажи)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Price includes tax (Sales)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fiyata KDV dahil (Satışlar)</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2dae109c-31d6-448e-9704-c83f3830c1d1">
+  <name>Store</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0c549ed8-e401-4e23-b7f2-953605c95f9e">
+  <name>Unit</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ед. изм.</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Unit</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Birim</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Units</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <createOnInput>DontUse</createOnInput>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+ </attributes>
+ <attributes uuid="e6261bb3-ebcc-4509-8af1-02c732db970c">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="59fe7567-b25b-483b-9367-56c2c8c97b2b">
+  <name>Branch</name>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ed1b3424-0171-4f7d-b39c-49459bdc17be">
+  <name>Basis</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документ основание</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Basis</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f8b2ef78-dad9-4510-bc71-311795501b84">
+  <name>RowID</name>
+  <synonym>
+   <key>ru</key>
+   <value>ID Строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row ID</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır ID</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <attributes uuid="36946680-c7fd-4c04-84cc-ed54b5f272ae">
+  <name>ProcurementMethod</name>
+  <synonym>
+   <key>ru</key>
+   <value>Метод обеспечения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Procurement method</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tedarik şekli</value>
+  </synonym>
+  <type>
+   <types>EnumRef.ProcurementMethods</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2965fc91-6ccd-4e55-9875-bc3a8492e35d">
+  <name>StoreSender</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад-отправитель</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store sender</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gönderen depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="172348a6-2eba-49a9-901f-33c023bcced1">
+  <name>StoreReceiver</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад-получатель</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store receiver</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Giriş depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="16ba789e-358d-414e-ba01-5339a79c536c">
+  <name>TransactionTypeSC</name>
+  <synonym>
+   <key>ru</key>
+   <value>Операция (расходная товарная накладная)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Transaction type SC</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hareket tipi Sevk irsaliyesi</value>
+  </synonym>
+  <type>
+   <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2ec92af5-aa30-4ad3-a981-7f5a5b57589c">
+  <name>TransactionTypeGR</name>
+  <synonym>
+   <key>ru</key>
+   <value>Операция (приходная товарная накладная)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Transaction type GR</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hareket tipi Alım irsaliyesi</value>
+  </synonym>
+  <type>
+   <types>EnumRef.GoodsReceiptTransactionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1daa5b17-bc59-4001-b273-6d398c6bb3bd">
+  <name>TransactionType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Операция</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Transaction type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem tipi</value>
+  </synonym>
+  <type>
+   <types>EnumRef.GoodsReceiptTransactionTypes</types>
+   <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="439e9df1-4ee2-4fb5-8fcd-f4e477a6eae2">
+  <name>Requester</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документ заявитель</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Requester</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Talep eden</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2c75300d-a052-41c5-9a04-d95eda280216">
+  <name>AgreementPurchases</name>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение (Закупки)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner term (Purchases)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sözleşme (Alımlar)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <createOnInput>DontUse</createOnInput>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+ </attributes>
+ <attributes uuid="66c82d9b-4afc-4660-bc58-8dfde4332066">
+  <name>PartnerPurchases</name>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер (Закупки)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner (Purchases)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap (Alımlar)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="d589b99f-4e03-41c2-8b0b-7233550ae3a6">
+  <name>LegalNamePurchases</name>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент (Закупки)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Legal name (Purchases)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı (Alımlar)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="6b212c34-98b3-4ee1-b975-d67438fdd351">
+  <name>PriceIncludeTaxPurchases</name>
+  <synonym>
+   <key>ru</key>
+   <value>Цена включает НДС (Закупки)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Price includes tax (Purchases)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fiyata KDV dahil (Alımlar)</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="fe2c7008-aade-4fc9-bdc7-966d37247a41">
+  <name>CurrencyPurchases</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта (Закупки)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency (Purchases)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz (Alımlar)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

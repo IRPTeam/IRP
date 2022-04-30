@@ -1,302 +1,390 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f35d8dc7-17eb-4938-bce1-d09c94a76937">
-  <producedTypes>
-    <objectType typeId="84f703f4-2397-4338-9597-d7bafc0d24da" valueTypeId="c7a54c6a-452e-48d8-b102-62f906bf4c3e"/>
-    <refType typeId="7f7e6117-25fa-411a-851b-54150be73458" valueTypeId="a76adb50-482e-4625-a3e9-d8b03eb77898"/>
-    <selectionType typeId="05eb808b-cee4-4627-bb7b-bed43be4a75a" valueTypeId="163067c4-bb97-46ae-b829-96f30bd23e7a"/>
-    <listType typeId="42804dbf-ac9b-43bb-bd78-a0ab9425d296" valueTypeId="c968079e-4cc1-4b38-91e4-5cf5d4e45a8d"/>
-    <managerType typeId="18c41632-1cf5-4aa4-8dc5-059f11f147cd" valueTypeId="aad1e0bd-aa1e-41c3-b69a-772af5cafebd"/>
-  </producedTypes>
-  <name>ObjectStatuses</name>
-  <synonym>
-    <key>en</key>
-    <value>Objects statuses</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <synonym>
-      <key>en</key>
-      <value>Object</value>
-    </synonym>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f35d8dc7-17eb-4938-bce1-d09c94a76937">
+ <producedTypes>
+  <objectType typeId="84f703f4-2397-4338-9597-d7bafc0d24da" valueTypeId="c7a54c6a-452e-48d8-b102-62f906bf4c3e"/>
+  <refType typeId="7f7e6117-25fa-411a-851b-54150be73458" valueTypeId="a76adb50-482e-4625-a3e9-d8b03eb77898"/>
+  <selectionType typeId="05eb808b-cee4-4627-bb7b-bed43be4a75a" valueTypeId="163067c4-bb97-46ae-b829-96f30bd23e7a"/>
+  <listType typeId="42804dbf-ac9b-43bb-bd78-a0ab9425d296" valueTypeId="c968079e-4cc1-4b38-91e4-5cf5d4e45a8d"/>
+  <managerType typeId="18c41632-1cf5-4aa4-8dc5-059f11f147cd" valueTypeId="aad1e0bd-aa1e-41c3-b69a-772af5cafebd"/>
+ </producedTypes>
+ <name>ObjectStatuses</name>
+ <synonym>
+  <key>ru</key>
+  <value>Статусы объектов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Objects statuses</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Nesne statüleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <synonym>
+   <key>ru</key>
+   <value>Объект</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Object</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Obje</value>
+  </synonym>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Статус объекта</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Objects status</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Nesne statüsü</value>
+ </objectPresentation>
+ <hierarchical>true</hierarchical>
+ <limitLevelCount>true</limitLevelCount>
+ <levelCount>3</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="e171ffad-e13a-4e2e-9319-9037bec5904d">
+   <name>SalesOrder</name>
+   <description>Sales order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="72d5c9d9-a3f0-42c2-87f0-169d621fae5e">
+   <name>SalesReturnOrder</name>
+   <description>Sales return order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="2a12c8b2-ef6e-485d-9e7b-11932d60003b">
+   <name>PurchaseOrder</name>
+   <description>Purchase order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="a8559087-bcb5-408a-b346-99a24f2cc035">
+   <name>PurchaseReturnOrder</name>
+   <description>Purchase return order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="4bca0f62-13eb-4af1-ba7b-7de74bfc953a">
+   <name>InventoryTransferOrder</name>
+   <description>Inventory transfer order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="d16d1352-b5bc-4397-af42-16678054bcea">
+   <name>OutgoingPaymentOrder</name>
+   <description>Outgoing payment order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="e904823b-2419-48d9-9136-b230e4da8a3b">
+   <name>ReconciliationStatement</name>
+   <description>Reconciliation statement</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="748479bd-dbd2-459d-ac53-92c750c6505d">
+   <name>PhysicalCountByLocation</name>
+   <description>Physical count by location</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="94db2442-3d9d-4627-ae9e-5d83003e1aec">
+    <name>Complete</name>
+    <description>Complete</description>
+    <code xsi:type="core:NumberValue">
+     <value>0</value>
+    </code>
+   </content>
+  </items>
+  <items id="83a9eeaa-a8f6-4fa4-9496-74fd8b74d65a">
+   <name>PhysicalInventory</name>
+   <description>Physical inventory</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="e25ea91f-552c-4a7b-bf52-23e520acf75c">
+   <name>IncomingPaymentOrder</name>
+   <description>Incoming payment order</description>
+   <code xsi:type="core:NumberValue">
+    <value>1</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <quickChoice>true</quickChoice>
+ <choiceMode>QuickChoice</choiceMode>
+ <defaultObjectForm>Catalog.ObjectStatuses.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.ObjectStatuses.Form.GroupForm</defaultFolderForm>
+ <defaultListForm>Catalog.ObjectStatuses.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.ObjectStatuses.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="2fcc43d5-489e-4b83-a634-2af9a1f4c676">
+  <name>SetByDefault</name>
+  <synonym>
+   <key>ru</key>
+   <value>По умолчанию</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Set by default</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varsayılan olarak ayarla</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="31a6a12e-7f2d-4b1b-98f4-bca102f78a63">
+  <name>Posting</name>
+  <synonym>
+   <key>ru</key>
+   <value>Делает проводки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Posting</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="41596e8a-eee2-42e8-bfbf-281e1176d952">
+  <producedTypes>
+   <objectType typeId="cd2e02a5-bbbd-4d01-bbbf-99a19de4f276" valueTypeId="0a0472ba-8eb3-49d8-a1b5-be07fb68acdd"/>
+   <rowType typeId="07043e89-8bea-4ff7-b8ac-161a2ff44996" valueTypeId="7617db38-a330-415d-a5b4-eb109e549382"/>
+  </producedTypes>
+  <name>NextPossibleStatuses</name>
+  <synonym>
+   <key>ru</key>
+   <value>Следующие возможные статусы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Next possible statuses</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sonraki uygun statüler</value>
+  </synonym>
+  <attributes uuid="1787d1b7-e818-4ffc-8059-56acd4b34f1e">
+   <name>Status</name>
+   <synonym>
+    <key>ru</key>
+    <value>Статус</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Objects status</value>
-  </objectPresentation>
-  <hierarchical>true</hierarchical>
-  <limitLevelCount>true</limitLevelCount>
-  <levelCount>3</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="e171ffad-e13a-4e2e-9319-9037bec5904d">
-      <name>SalesOrder</name>
-      <description>Sales order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="72d5c9d9-a3f0-42c2-87f0-169d621fae5e">
-      <name>SalesReturnOrder</name>
-      <description>Sales return order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="2a12c8b2-ef6e-485d-9e7b-11932d60003b">
-      <name>PurchaseOrder</name>
-      <description>Purchase order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="a8559087-bcb5-408a-b346-99a24f2cc035">
-      <name>PurchaseReturnOrder</name>
-      <description>Purchase return order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="4bca0f62-13eb-4af1-ba7b-7de74bfc953a">
-      <name>InventoryTransferOrder</name>
-      <description>Inventory transfer order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="d16d1352-b5bc-4397-af42-16678054bcea">
-      <name>OutgoingPaymentOrder</name>
-      <description>Outgoing payment order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="e904823b-2419-48d9-9136-b230e4da8a3b">
-      <name>ReconciliationStatement</name>
-      <description>Reconciliation statement</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="748479bd-dbd2-459d-ac53-92c750c6505d">
-      <name>PhysicalCountByLocation</name>
-      <description>Physical count by location</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="94db2442-3d9d-4627-ae9e-5d83003e1aec">
-        <name>Complete</name>
-        <description>Complete</description>
-        <code xsi:type="core:NumberValue">
-          <value>0</value>
-        </code>
-      </content>
-    </items>
-    <items id="83a9eeaa-a8f6-4fa4-9496-74fd8b74d65a">
-      <name>PhysicalInventory</name>
-      <description>Physical inventory</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="e25ea91f-552c-4a7b-bf52-23e520acf75c">
-      <name>IncomingPaymentOrder</name>
-      <description>Incoming payment order</description>
-      <code xsi:type="core:NumberValue">
-        <value>1</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <quickChoice>true</quickChoice>
-  <choiceMode>QuickChoice</choiceMode>
-  <defaultObjectForm>Catalog.ObjectStatuses.Form.ItemForm</defaultObjectForm>
-  <defaultFolderForm>Catalog.ObjectStatuses.Form.GroupForm</defaultFolderForm>
-  <defaultListForm>Catalog.ObjectStatuses.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.ObjectStatuses.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="2fcc43d5-489e-4b83-a634-2af9a1f4c676">
-    <name>SetByDefault</name>
-    <synonym>
-      <key>en</key>
-      <value>Set by default</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Status</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Statü</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ObjectStatuses</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="31a6a12e-7f2d-4b1b-98f4-bca102f78a63">
-    <name>Posting</name>
-    <synonym>
-      <key>en</key>
-      <value>Posting</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="41596e8a-eee2-42e8-bfbf-281e1176d952">
-    <producedTypes>
-      <objectType typeId="cd2e02a5-bbbd-4d01-bbbf-99a19de4f276" valueTypeId="0a0472ba-8eb3-49d8-a1b5-be07fb68acdd"/>
-      <rowType typeId="07043e89-8bea-4ff7-b8ac-161a2ff44996" valueTypeId="7617db38-a330-415d-a5b4-eb109e549382"/>
-    </producedTypes>
-    <name>NextPossibleStatuses</name>
-    <synonym>
-      <key>en</key>
-      <value>Next possible statuses</value>
-    </synonym>
-    <attributes uuid="1787d1b7-e818-4ffc-8059-56acd4b34f1e">
-      <name>Status</name>
-      <synonym>
-        <key>en</key>
-        <value>Status</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ObjectStatuses</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="65420be6-a4f9-47e1-b911-63d0c2e2c8f9">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3a481351-84ab-45b2-ba05-538f6facd794">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="11d323fb-ea58-4d49-bb16-b4eb36d457c0">
-    <name>GroupForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Group form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="000993b6-5857-4338-93a8-33327b5c475d">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="65420be6-a4f9-47e1-b911-63d0c2e2c8f9">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3a481351-84ab-45b2-ba05-538f6facd794">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="11d323fb-ea58-4d49-bb16-b4eb36d457c0">
+  <name>GroupForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма группы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Group form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup from</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="000993b6-5857-4338-93a8-33327b5c475d">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

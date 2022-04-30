@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ef4ad6c1-d7d5-4d88-94eb-0e2dd06cd944">
-  <name>CatCashAccountsClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Cat cash accounts client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>CatCashAccountsClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Справочник кассы/банковские счета клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cat cash accounts client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cat kasa/banka client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

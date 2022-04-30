@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="85485185-64ca-4cef-84ec-2be1fae3f02f">
-  <name>FullAccess</name>
-  <synonym>
-    <key>en</key>
-    <value>Full access</value>
-  </synonym>
+ <name>FullAccess</name>
+ <synonym>
+  <key>ru</key>
+  <value>Полные права</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Full access</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tam yetki</value>
+ </synonym>
 </mdclass:Role>

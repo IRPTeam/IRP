@@ -1,4 +1,4 @@
-Function GetOrCreateTopLevel(UniqueID, AddInfo = Undefined) Export
+﻿Function GetOrCreateTopLevel(UniqueID, AddInfo = Undefined) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT

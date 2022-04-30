@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="988faaae-03f9-4daf-8f63-1bb70bb082e2">
-  <name>OpenVendorAgreements</name>
-  <synonym>
-    <key>en</key>
-    <value>Vendors partner terms</value>
-  </synonym>
-  <group>NavigationPanelImportant</group>
-  <commandParameterType/>
-  <representation>Auto</representation>
+ <name>OpenVendorAgreements</name>
+ <synonym>
+  <key>ru</key>
+  <value>Соглашения с поставщиками</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Vendors partner terms</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tedarikçi sözleşmesi</value>
+ </synonym>
+ <group>NavigationPanelImportant</group>
+ <commandParameterType/>
+ <representation>Auto</representation>
 </mdclass:CommonCommand>

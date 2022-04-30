@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ee5b5784-6640-4551-89b6-0584fc88318a">
-  <name>SpecialOffer</name>
-  <synonym>
-    <key>en</key>
-    <value>Special offer</value>
-  </synonym>
+ <name>SpecialOffer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Специальное предложение</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Special offer</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kampanya</value>
+ </synonym>
 </mdclass:CommonPicture>

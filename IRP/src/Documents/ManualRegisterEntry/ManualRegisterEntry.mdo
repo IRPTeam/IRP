@@ -1,199 +1,279 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="09930681-7d82-4725-ad79-b389896a8e4d">
-  <producedTypes>
-    <objectType typeId="dac84901-80b9-4677-b38e-0825d32efef5" valueTypeId="a0fc0e73-3ac9-4fce-97c1-328b858b1b1a"/>
-    <refType typeId="48705453-133a-4871-994b-c0305e84dc19" valueTypeId="0beb7976-c6c1-4194-9423-04aebadd8dad"/>
-    <selectionType typeId="9230bc9d-08c5-4cb6-902e-60bbe2da025f" valueTypeId="a4fe38d7-6e21-41a0-ab17-95e638fd59a5"/>
-    <listType typeId="e964e518-ae8b-4f98-b8ad-278b7136266e" valueTypeId="88eb3ee5-bf55-4f68-a132-4a5a7fbad0c2"/>
-    <managerType typeId="28e94b5a-8d30-42f7-a7dd-a92fd08cf448" valueTypeId="05c34004-80ec-4283-837e-5334e8fdee93"/>
-  </producedTypes>
-  <name>ManualRegisterEntry</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="09930681-7d82-4725-ad79-b389896a8e4d">
+ <producedTypes>
+  <objectType typeId="dac84901-80b9-4677-b38e-0825d32efef5" valueTypeId="a0fc0e73-3ac9-4fce-97c1-328b858b1b1a"/>
+  <refType typeId="48705453-133a-4871-994b-c0305e84dc19" valueTypeId="0beb7976-c6c1-4194-9423-04aebadd8dad"/>
+  <selectionType typeId="9230bc9d-08c5-4cb6-902e-60bbe2da025f" valueTypeId="a4fe38d7-6e21-41a0-ab17-95e638fd59a5"/>
+  <listType typeId="e964e518-ae8b-4f98-b8ad-278b7136266e" valueTypeId="88eb3ee5-bf55-4f68-a132-4a5a7fbad0c2"/>
+  <managerType typeId="28e94b5a-8d30-42f7-a7dd-a92fd08cf448" valueTypeId="05c34004-80ec-4283-837e-5334e8fdee93"/>
+ </producedTypes>
+ <name>ManualRegisterEntry</name>
+ <synonym>
+  <key>ru</key>
+  <value>Ручная проводка в регистры</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Manual register entry</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Manuel kayıt tablo düzeltme fişi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.ManualRegisterEntry.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_ManualRegisterEntry</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_ManualRegisterEntry</value>
+  </typesFilterValue>
+  <characteristicValues>Document.ManualRegisterEntry.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.ManualRegisterEntry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Ручная проводка в регистры</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Manual register entry</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Manuel kayıt tablo düzeltme fişi</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Ручные проводки в регистры</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Manual register entries</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Manuel kayıt tablo düzeltme fişleri</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.ManualRegisterEntry.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.ManualRegisterEntry.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.ManualRegisterEntry.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.R1002T_PurchaseReturns</registerRecords>
+ <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+ <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
+ <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
+ <registerRecords>AccumulationRegister.R3011T_CashMovements</registerRecords>
+ <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
+ <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
+ <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>
+ <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+ <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+ <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
+ <registerRecords>AccumulationRegister.R3022B_CashInTransitOutgoing</registerRecords>
+ <registerRecords>AccumulationRegister.R4020T_StockTransferOrders</registerRecords>
+ <registerRecords>AccumulationRegister.R4015T_InternalSupplyRequests</registerRecords>
+ <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
+ <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
+ <registerRecords>AccumulationRegister.R2002T_SalesReturns</registerRecords>
+ <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
+ <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+ <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+ <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
+ <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
+ <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
+ <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
+ <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
+ <registerRecords>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</registerRecords>
+ <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+ <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
+ <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
+ <registerRecords>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</registerRecords>
+ <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
+ <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
+ <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+ <registerRecords>AccumulationRegister.R5041B_TaxesPayable</registerRecords>
+ <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
+ <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
+ <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+ <registerRecords>AccumulationRegister.R1014T_CanceledPurchaseOrders</registerRecords>
+ <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
+ <registerRecords>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</registerRecords>
+ <registerRecords>AccumulationRegister.R1010T_PurchaseOrders</registerRecords>
+ <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
+ <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
+ <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
+ <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
+ <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
+ <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+ <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="0efb3e65-ce41-418b-bedd-d2b4e61ae11a">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Manual register entry</value>
+   <key>ru</key>
+   <value>Организация</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.ManualRegisterEntry.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_ManualRegisterEntry</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_ManualRegisterEntry</value>
-    </typesFilterValue>
-    <characteristicValues>Document.ManualRegisterEntry.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.ManualRegisterEntry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="8dd092ee-efb1-4209-aa78-3cfd4775f3bf">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="cc7ba433-f893-4aca-ab26-e12404b5f12b">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="41a1bcca-d2be-4e85-a592-7d656316283d">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="f8498e80-9115-4c04-b3e9-6dc8a1019573">
+  <producedTypes>
+   <objectType typeId="24b3045e-5371-4b11-b3a5-730833cd3b61" valueTypeId="17c2b9c3-ec6b-4a9e-8b24-a990d56e340e"/>
+   <rowType typeId="b7230b94-0e79-49f4-9bbf-609f70ea6b44" valueTypeId="90f4273b-bfde-41b5-a758-5851d647a1e7"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="7a3a7a12-7533-477d-b76e-e12f3f838bcd">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Manual register entry</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Manual register entries</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.ManualRegisterEntry.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.ManualRegisterEntry.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.ManualRegisterEntry.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R1002T_PurchaseReturns</registerRecords>
-  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
-  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
-  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R3011T_CashMovements</registerRecords>
-  <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
-  <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>
-  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
-  <registerRecords>AccumulationRegister.R3022B_CashInTransitOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.R4020T_StockTransferOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R4015T_InternalSupplyRequests</registerRecords>
-  <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
-  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
-  <registerRecords>AccumulationRegister.R2002T_SalesReturns</registerRecords>
-  <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
-  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
-  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
-  <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</registerRecords>
-  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
-  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
-  <registerRecords>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</registerRecords>
-  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
-  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
-  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
-  <registerRecords>AccumulationRegister.R5041B_TaxesPayable</registerRecords>
-  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
-  <registerRecords>AccumulationRegister.R1014T_CanceledPurchaseOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
-  <registerRecords>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</registerRecords>
-  <registerRecords>AccumulationRegister.R1010T_PurchaseOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
-  <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
-  <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
-  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <attributes uuid="0efb3e65-ce41-418b-bedd-d2b4e61ae11a">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="8dd092ee-efb1-4209-aa78-3cfd4775f3bf">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="cc7ba433-f893-4aca-ab26-e12404b5f12b">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="41a1bcca-d2be-4e85-a592-7d656316283d">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="f8498e80-9115-4c04-b3e9-6dc8a1019573">
-    <producedTypes>
-      <objectType typeId="24b3045e-5371-4b11-b3a5-730833cd3b61" valueTypeId="17c2b9c3-ec6b-4a9e-8b24-a990d56e340e"/>
-      <rowType typeId="b7230b94-0e79-49f4-9bbf-609f70ea6b44" valueTypeId="90f4273b-bfde-41b5-a758-5851d647a1e7"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="7a3a7a12-7533-477d-b76e-e12f3f838bcd">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="f967edc4-8d24-42b8-bd4a-b4f6e95cd509">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
+  <attributes uuid="f967edc4-8d24-42b8-bd4a-b4f6e95cd509">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
 </mdclass:Document>

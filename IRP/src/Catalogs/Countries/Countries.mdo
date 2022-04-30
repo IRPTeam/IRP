@@ -1,166 +1,246 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3c3ee96d-f804-41bc-9e61-46922136697a">
-  <producedTypes>
-    <objectType typeId="e3778691-f0e7-42eb-8a09-0d1d36f98887" valueTypeId="10f4ec49-cba4-47d9-9126-ffabc1a8aabc"/>
-    <refType typeId="b8030ab7-2352-4a5a-aa2a-5d8269f64239" valueTypeId="7f5324fa-e3d6-42c9-9281-8cc436e02e0f"/>
-    <selectionType typeId="3d244ba3-f74b-4921-96ee-e2c39665df42" valueTypeId="f7422c5b-b2f1-4ca3-b183-cdbb097337dd"/>
-    <listType typeId="5514de3d-773a-4b58-ac2c-abcb6cb690d2" valueTypeId="ccaab740-fd97-475f-a43a-8ee25e937b93"/>
-    <managerType typeId="b56139a9-d64d-423d-899f-f3bf2b1e5f85" valueTypeId="6ccc5d9f-7d01-40aa-82cf-f55b12ab9b86"/>
-  </producedTypes>
-  <name>Countries</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3c3ee96d-f804-41bc-9e61-46922136697a">
+ <producedTypes>
+  <objectType typeId="e3778691-f0e7-42eb-8a09-0d1d36f98887" valueTypeId="10f4ec49-cba4-47d9-9126-ffabc1a8aabc"/>
+  <refType typeId="b8030ab7-2352-4a5a-aa2a-5d8269f64239" valueTypeId="7f5324fa-e3d6-42c9-9281-8cc436e02e0f"/>
+  <selectionType typeId="3d244ba3-f74b-4921-96ee-e2c39665df42" valueTypeId="f7422c5b-b2f1-4ca3-b183-cdbb097337dd"/>
+  <listType typeId="5514de3d-773a-4b58-ac2c-abcb6cb690d2" valueTypeId="ccaab740-fd97-475f-a43a-8ee25e937b93"/>
+  <managerType typeId="b56139a9-d64d-423d-899f-f3bf2b1e5f85" valueTypeId="6ccc5d9f-7d01-40aa-82cf-f55b12ab9b86"/>
+ </producedTypes>
+ <name>Countries</name>
+ <synonym>
+  <key>ru</key>
+  <value>Страны</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Countries</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ülkeler</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Countries</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Countries</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.Countries.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.Countries.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.Countries.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.Countries.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Страна</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Country</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Ülke</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.Countries.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.Countries.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.Countries.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="c81a36e4-4c50-47a8-811c-a787f2d4ce4d">
+  <name>Currency</name>
   <synonym>
-    <key>en</key>
-    <value>Countries</value>
+   <key>ru</key>
+   <value>Валюта</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Countries</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Countries</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.Countries.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.Countries.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.Countries.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.Countries.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="613d1695-2a56-4778-a6cb-1a5d86f5ee2f">
+  <name>LocalizationCode</name>
+  <synonym>
+   <key>ru</key>
+   <value>Код локализации</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Localization code</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Lokalisasyon kodu</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>2</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="810799ee-3b8a-46a7-9b14-dcd6bd417364">
+  <producedTypes>
+   <objectType typeId="3b628b6a-c75c-456d-878d-931f680f398f" valueTypeId="475a0d27-36f3-457a-9891-7d4505dde866"/>
+   <rowType typeId="2d406af9-8d9f-439a-8a2f-1306a0b7ec00" valueTypeId="8a2c9cc3-532b-4ba2-a2e1-35a9da5596be"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="058a6885-e068-4d2e-86e7-0e6dcfa8e2b2">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Country</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Countries.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.Countries.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.Countries.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="c81a36e4-4c50-47a8-811c-a787f2d4ce4d">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="613d1695-2a56-4778-a6cb-1a5d86f5ee2f">
-    <name>LocalizationCode</name>
-    <synonym>
-      <key>en</key>
-      <value>Localization code</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>2</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="9c933c78-6168-4b89-b12a-090fc6949719">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.Countries.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="810799ee-3b8a-46a7-9b14-dcd6bd417364">
-    <producedTypes>
-      <objectType typeId="3b628b6a-c75c-456d-878d-931f680f398f" valueTypeId="475a0d27-36f3-457a-9891-7d4505dde866"/>
-      <rowType typeId="2d406af9-8d9f-439a-8a2f-1306a0b7ec00" valueTypeId="8a2c9cc3-532b-4ba2-a2e1-35a9da5596be"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="058a6885-e068-4d2e-86e7-0e6dcfa8e2b2">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9c933c78-6168-4b89-b12a-090fc6949719">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.Countries.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="a2057f05-5025-48f5-b472-fecac5f3df5d">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="67dc10dc-52d7-45af-bd7b-4881e0945185">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="7a17eae2-7bff-4756-b2ff-d34b3734ded3">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="a2057f05-5025-48f5-b472-fecac5f3df5d">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="67dc10dc-52d7-45af-bd7b-4881e0945185">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="7a17eae2-7bff-4756-b2ff-d34b3734ded3">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

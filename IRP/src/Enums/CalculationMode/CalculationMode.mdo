@@ -1,36 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4c910f14-bab2-4b44-9705-3cea894f0381">
-  <producedTypes>
-    <refType typeId="f5ebe3ae-28c6-4b9a-9704-122151bd3fa0" valueTypeId="4e66047f-3d72-4397-bf04-4592587a5bbf"/>
-    <listType typeId="be16fd22-6a43-4576-a236-5294b4927273" valueTypeId="801b3eb7-fc96-4015-9d62-2d3f596f9584"/>
-    <managerType typeId="39b2a07e-7040-47f0-93d7-364c7bc6e900" valueTypeId="fec1f7da-207f-4145-bfb0-59be07683532"/>
-  </producedTypes>
-  <name>CalculationMode</name>
+ <producedTypes>
+  <refType typeId="f5ebe3ae-28c6-4b9a-9704-122151bd3fa0" valueTypeId="4e66047f-3d72-4397-bf04-4592587a5bbf"/>
+  <listType typeId="be16fd22-6a43-4576-a236-5294b4927273" valueTypeId="801b3eb7-fc96-4015-9d62-2d3f596f9584"/>
+  <managerType typeId="39b2a07e-7040-47f0-93d7-364c7bc6e900" valueTypeId="fec1f7da-207f-4145-bfb0-59be07683532"/>
+ </producedTypes>
+ <name>CalculationMode</name>
+ <synonym>
+  <key>ru</key>
+  <value>Вид расчета</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Calculation mode</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Hesaplama türü</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="bffa7f17-aa06-4533-8238-f6597368a5b9">
+  <name>LandedCost</name>
   <synonym>
-    <key>en</key>
-    <value>Calculation mode</value>
+   <key>ru</key>
+   <value>Расчет себестоимости товаров</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="bffa7f17-aa06-4533-8238-f6597368a5b9">
-    <name>LandedCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Landed cost</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="bc3e075a-555d-45fc-889f-3ca360c6662c">
-    <name>AdditionalItemCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional item cost</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="854f820a-12e7-4d31-a9e4-3759774e2b2b">
-    <name>AdditionalItemRevenue</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional item revenue</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Landed cost</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ürün maliyet hesaplama</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="bc3e075a-555d-45fc-889f-3ca360c6662c">
+  <name>AdditionalItemCost</name>
+  <synonym>
+   <key>ru</key>
+   <value>Доп. расход на товары</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional item cost</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek maliyet hesaplama</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="854f820a-12e7-4d31-a9e4-3759774e2b2b">
+  <name>AdditionalItemRevenue</name>
+  <synonym>
+   <key>ru</key>
+   <value>Доп. доходы на товары</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional item revenue</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek gelir hesaplama</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

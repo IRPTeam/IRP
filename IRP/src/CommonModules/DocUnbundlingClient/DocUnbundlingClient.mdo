@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bb4305e0-21b7-4430-92b2-91ff1174f39b">
-  <name>DocUnbundlingClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc unbundling client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocUnbundlingClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ разукомлектация набора клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc unbundling client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc takım bozma fişi client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

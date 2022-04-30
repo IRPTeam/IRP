@@ -1,16 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cd8d0fed-3687-4c8d-9f5e-11e0b177d77d">
-  <name>Localization</name>
-  <synonym>
-    <key>en</key>
-    <value>Localization</value>
-  </synonym>
-  <content>CommonModule.LocalizationClientServer</content>
-  <content>Enum.TypeExternalObject</content>
-  <content>CommonModule.Localization</content>
-  <content>CommonModule.LocalizationReuse</content>
-  <content>CommonAttribute.Description_en</content>
-  <content>DefinedType.typeDescription</content>
-  <content>CommonModule.LocalizationEvents</content>
-  <content>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</content>
+ <name>Localization</name>
+ <synonym>
+  <key>ru</key>
+  <value>Локализация</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Localization</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Lokalizasyon</value>
+ </synonym>
+ <content>CommonModule.LocalizationClientServer</content>
+ <content>Enum.TypeExternalObject</content>
+ <content>CommonModule.Localization</content>
+ <content>CommonModule.LocalizationReuse</content>
+ <content>CommonAttribute.Description_en</content>
+ <content>DefinedType.typeDescription</content>
+ <content>CommonModule.LocalizationEvents</content>
+ <content>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</content>
 </mdclass:Subsystem>

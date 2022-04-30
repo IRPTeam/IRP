@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2fe64e79-096d-4d47-8513-6c7cc2e979d3">
-  <name>ViewServer_V2</name>
-  <synonym>
-    <key>en</key>
-    <value>View server v2</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>ViewServer_V2</name>
+ <synonym>
+  <key>ru</key>
+  <value>Просмотр сервер v2</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>View server v2</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>View server v2</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

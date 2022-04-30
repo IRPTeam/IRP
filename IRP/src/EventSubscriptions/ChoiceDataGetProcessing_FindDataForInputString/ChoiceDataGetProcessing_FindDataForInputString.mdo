@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b4a42279-681b-48da-910f-cb1d995b63f5">
-  <name>ChoiceDataGetProcessing_FindDataForInputString</name>
-  <synonym>
-    <key>en</key>
-    <value>Choice data get processing find data for input string</value>
-  </synonym>
-  <source>
-    <types>CatalogManager</types>
-    <types>ChartOfCharacteristicTypesManager.CurrencyMovementType</types>
-  </source>
-  <event>ChoiceDataGetProcessing</event>
-  <handler>CommonModule.LocalizationEvents.FindDataForInputStringChoiceDataGetProcessing</handler>
+ <name>ChoiceDataGetProcessing_FindDataForInputString</name>
+ <synonym>
+  <key>ru</key>
+  <value>Обработка получения данных выбора найти данные для вывода</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Choice data get processing find data for input string</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Veri seç veri işleme satır başı girişi için veri bulma</value>
+ </synonym>
+ <source>
+  <types>CatalogManager</types>
+  <types>ChartOfCharacteristicTypesManager.CurrencyMovementType</types>
+ </source>
+ <event>ChoiceDataGetProcessing</event>
+ <handler>CommonModule.LocalizationEvents.FindDataForInputStringChoiceDataGetProcessing</handler>
 </mdclass:EventSubscription>

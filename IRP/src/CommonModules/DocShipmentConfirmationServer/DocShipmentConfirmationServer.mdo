@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2cb050d1-9f8e-4874-942d-e73f9dcf5cd6">
-  <name>DocShipmentConfirmationServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc shipment confirmation server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocShipmentConfirmationServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ расходная товарная накладная сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc shipment confirmation server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc sevk irsaliyesi server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

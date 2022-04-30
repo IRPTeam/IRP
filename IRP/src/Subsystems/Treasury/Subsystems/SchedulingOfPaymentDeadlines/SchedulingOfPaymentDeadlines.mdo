@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6e73db61-546e-4cdf-ab4a-d645479cc5c1">
-  <name>SchedulingOfPaymentDeadlines</name>
-  <synonym>
-    <key>en</key>
-    <value>Scheduling of payment deadlines</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.OutgoingPaymentOrder</content>
-  <content>Document.IncomingPaymentOrder</content>
-  <parentSubsystem>Subsystem.Treasury</parentSubsystem>
+ <name>SchedulingOfPaymentDeadlines</name>
+ <synonym>
+  <key>ru</key>
+  <value>Планирование денежных средств</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Scheduling of payment deadlines</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ödeme son tarih zamanlaması</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.OutgoingPaymentOrder</content>
+ <content>Document.IncomingPaymentOrder</content>
+ <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

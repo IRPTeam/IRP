@@ -1,116 +1,180 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2243cbc9-650b-486b-b5b0-f884cd952c61">
-  <producedTypes>
-    <selectionType typeId="9c26dbd1-aece-4473-8f19-71d833ca55ff" valueTypeId="33830b5f-95b6-4d2c-9bcc-b4c01f27075d"/>
-    <listType typeId="58aa6f27-e0ee-4494-8873-615e9248a85b" valueTypeId="81f2c211-e9fc-448f-b03f-b9817a352954"/>
-    <managerType typeId="41912889-b5f1-48ae-89a7-ad713457a02d" valueTypeId="30d8fc37-d607-4ef6-9a82-ff57b8c36df3"/>
-    <recordSetType typeId="ed62178d-9f03-4625-9a51-a66292423a0f" valueTypeId="9f4915ed-73f1-4e9f-9e91-70119a8ae054"/>
-    <recordKeyType typeId="dd975bdc-96fe-4fab-ba4b-4289f1e0cfa1" valueTypeId="f42f6827-b40c-45c2-a03c-8642c532ee02"/>
-    <recordType typeId="541d9496-8f6d-4578-99d3-38ef9e7c8cd1" valueTypeId="c629d0ba-18ba-46c4-af44-ef57b3d4db54"/>
-  </producedTypes>
-  <name>R3011T_CashMovements</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2243cbc9-650b-486b-b5b0-f884cd952c61">
+ <producedTypes>
+  <selectionType typeId="9c26dbd1-aece-4473-8f19-71d833ca55ff" valueTypeId="33830b5f-95b6-4d2c-9bcc-b4c01f27075d"/>
+  <listType typeId="58aa6f27-e0ee-4494-8873-615e9248a85b" valueTypeId="81f2c211-e9fc-448f-b03f-b9817a352954"/>
+  <managerType typeId="41912889-b5f1-48ae-89a7-ad713457a02d" valueTypeId="30d8fc37-d607-4ef6-9a82-ff57b8c36df3"/>
+  <recordSetType typeId="ed62178d-9f03-4625-9a51-a66292423a0f" valueTypeId="9f4915ed-73f1-4e9f-9e91-70119a8ae054"/>
+  <recordKeyType typeId="dd975bdc-96fe-4fab-ba4b-4289f1e0cfa1" valueTypeId="f42f6827-b40c-45c2-a03c-8642c532ee02"/>
+  <recordType typeId="541d9496-8f6d-4578-99d3-38ef9e7c8cd1" valueTypeId="c629d0ba-18ba-46c4-af44-ef57b3d4db54"/>
+ </producedTypes>
+ <name>R3011T_CashMovements</name>
+ <synonym>
+  <key>ru</key>
+  <value>R3011 Движения денежных средств</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R3011 Cash movements</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R3011 Finansal hareketler</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="e806f098-3665-4b91-bda7-50dd652770a6">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>R3011 Cash movements</value>
+   <key>ru</key>
+   <value>Сумма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="e806f098-3665-4b91-bda7-50dd652770a6">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="6c40e73c-0dc1-4a9d-8692-9846bdf987d6">
-    <name>DeferredCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Deferred calculation</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="83fd8e36-1b37-4091-ab8c-069479eb7293">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="58517632-0226-4966-bb8a-672dbb741f90">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="a679c871-0117-4b3c-9d19-698fdc633c62">
-    <name>Account</name>
-    <synonym>
-      <key>en</key>
-      <value>Account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="5dbc69a5-3da3-4d5e-a400-8490ee5b79ff">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="4ed05c5f-0723-4232-9997-1dfa77e2cb5e">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Multi currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="6c40e73c-0dc1-4a9d-8692-9846bdf987d6">
+  <name>DeferredCalculation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Отложенный расчет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Deferred calculation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ertelenen hesaplama</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="83fd8e36-1b37-4091-ab8c-069479eb7293">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="58517632-0226-4966-bb8a-672dbb741f90">
+  <name>Branch</name>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="a679c871-0117-4b3c-9d19-698fdc633c62">
+  <name>Account</name>
+  <synonym>
+   <key>ru</key>
+   <value>Касса/Банковский счет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Account</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kasa/Banka</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="5dbc69a5-3da3-4d5e-a400-8490ee5b79ff">
+  <name>Currency</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="4ed05c5f-0723-4232-9997-1dfa77e2cb5e">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Multi currency movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz kırılım tipi</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

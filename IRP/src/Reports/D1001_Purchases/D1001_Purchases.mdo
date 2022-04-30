@@ -1,22 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ac020903-1831-48db-bfef-755770afcaae">
-  <producedTypes>
-    <objectType typeId="ef1c27bc-d412-4177-a635-9335600a9a50" valueTypeId="adf8d095-4dc4-41c1-809c-650b1278e6c4"/>
-    <managerType typeId="5caf4634-e47b-4c33-80e2-63c96c3a46d3" valueTypeId="2138fe1e-eee6-410b-8ed0-809028f58080"/>
-  </producedTypes>
-  <name>D1001_Purchases</name>
+ <producedTypes>
+  <objectType typeId="ef1c27bc-d412-4177-a635-9335600a9a50" valueTypeId="adf8d095-4dc4-41c1-809c-650b1278e6c4"/>
+  <managerType typeId="5caf4634-e47b-4c33-80e2-63c96c3a46d3" valueTypeId="2138fe1e-eee6-410b-8ed0-809028f58080"/>
+ </producedTypes>
+ <name>D1001_Purchases</name>
+ <synonym>
+  <key>ru</key>
+  <value>D1010 Закупки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>D1001 Purchases</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>D1001 Alımlar</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.D1001_Purchases.Template.Template</mainDataCompositionSchema>
+ <templates uuid="ba189443-b3f1-45cd-9a43-57958a5cd477">
+  <name>Template</name>
   <synonym>
-    <key>en</key>
-    <value>D1001 Purchases</value>
+   <key>ru</key>
+   <value>Шаблон</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.D1001_Purchases.Template.Template</mainDataCompositionSchema>
-  <templates uuid="ba189443-b3f1-45cd-9a43-57958a5cd477">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>en</key>
+   <value>Template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

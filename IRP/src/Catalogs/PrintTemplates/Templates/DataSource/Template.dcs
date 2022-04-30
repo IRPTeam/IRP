@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<dataSource>
 		<name>DataSource1</name>
@@ -11,8 +11,16 @@
 			<field>Barcode</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Штрихкод</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Barcode</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Barkod</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -21,8 +29,16 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номенклатура</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -31,8 +47,16 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Характеристика</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item key</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Varyant</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -41,8 +65,16 @@
 			<field>Price</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Цена</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Price</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fiyat</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -51,8 +83,16 @@
 			<field>BarcodePicture</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Картинка штрихкода</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Barcode picture</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Bakord resmi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -61,8 +101,16 @@
 			<field>QRPicture</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>QR картинка</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>QR picture</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>QR resim</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -71,8 +119,16 @@
 			<field>Picture</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Картинка</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Picture</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Resim</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -81,8 +137,16 @@
 			<field>ItemKeyPicture</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Картинка характеристики</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item key picture</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Varyant resmi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -91,8 +155,16 @@
 			<field>ItemPicture</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Картинка номенклатуры</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item picture</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme resimi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -101,8 +173,16 @@
 			<field>PriceType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Вид цены</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Price type</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fiyat tipi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -159,8 +239,16 @@ FROM
 		<name>Period</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Период</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Period</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

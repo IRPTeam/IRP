@@ -1,22 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="15b826e0-db90-45c0-bb34-0887b119f377">
-  <producedTypes>
-    <objectType typeId="900684ac-f61d-4675-a221-fb19c7c0bb26" valueTypeId="efbb9b45-1c8c-4394-99e7-cf484810005d"/>
-    <managerType typeId="b8fbe1dc-b5fd-48a0-bf39-70923ff772f1" valueTypeId="10e50d75-e719-4621-abaf-3ad227f04d41"/>
-  </producedTypes>
-  <name>D4012_StockReservation</name>
+ <producedTypes>
+  <objectType typeId="900684ac-f61d-4675-a221-fb19c7c0bb26" valueTypeId="efbb9b45-1c8c-4394-99e7-cf484810005d"/>
+  <managerType typeId="b8fbe1dc-b5fd-48a0-bf39-70923ff772f1" valueTypeId="10e50d75-e719-4621-abaf-3ad227f04d41"/>
+ </producedTypes>
+ <name>D4012_StockReservation</name>
+ <synonym>
+  <key>ru</key>
+  <value>D4012 Товары в резерве</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>D4012 Stock reservation</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>D4012 Stok rezerv tablosu</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.D4012_StockReservation.Template.Template</mainDataCompositionSchema>
+ <templates uuid="bc96d914-2cee-4aee-a961-d1956eb0d5a2">
+  <name>Template</name>
   <synonym>
-    <key>en</key>
-    <value>D4012 Stock reservation</value>
+   <key>ru</key>
+   <value>Шаблон</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.D4012_StockReservation.Template.Template</mainDataCompositionSchema>
-  <templates uuid="bc96d914-2cee-4aee-a961-d1956eb0d5a2">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>en</key>
+   <value>Template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

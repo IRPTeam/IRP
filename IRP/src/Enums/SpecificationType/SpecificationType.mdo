@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="86bd8054-c13d-4254-b97e-1de58a5ce057">
-  <producedTypes>
-    <refType typeId="f66e499c-d9e1-45f3-b4c0-383e12398fa1" valueTypeId="881f6e52-1b55-4e0f-8b71-3cd3e22fc529"/>
-    <listType typeId="9f328c14-dc77-4871-9bd5-a9a6f778177d" valueTypeId="ac7f0450-9a1b-4bf8-8b6e-a8d4804f0b1f"/>
-    <managerType typeId="40b180aa-1c5b-4b7b-9102-3c6f2ebad98d" valueTypeId="eb5f2771-e2f7-4275-9e95-122f8680d012"/>
-  </producedTypes>
-  <name>SpecificationType</name>
+ <producedTypes>
+  <refType typeId="f66e499c-d9e1-45f3-b4c0-383e12398fa1" valueTypeId="881f6e52-1b55-4e0f-8b71-3cd3e22fc529"/>
+  <listType typeId="9f328c14-dc77-4871-9bd5-a9a6f778177d" valueTypeId="ac7f0450-9a1b-4bf8-8b6e-a8d4804f0b1f"/>
+  <managerType typeId="40b180aa-1c5b-4b7b-9102-3c6f2ebad98d" valueTypeId="eb5f2771-e2f7-4275-9e95-122f8680d012"/>
+ </producedTypes>
+ <name>SpecificationType</name>
+ <synonym>
+  <key>ru</key>
+  <value>Вид спецификации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Specification type</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Malzeme reçete tipi</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="8168e16c-84eb-4b95-a725-a043bef47281">
+  <name>Bundle</name>
   <synonym>
-    <key>en</key>
-    <value>Specification type</value>
+   <key>ru</key>
+   <value>Набор</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="8168e16c-84eb-4b95-a725-a043bef47281">
-    <name>Bundle</name>
-    <synonym>
-      <key>en</key>
-      <value>Bundle</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b3310141-ae38-40ef-bf28-132a44f98bec">
-    <name>Set</name>
-    <synonym>
-      <key>en</key>
-      <value>Set</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Bundle</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme takımı</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b3310141-ae38-40ef-bf28-132a44f98bec">
+  <name>Set</name>
+  <synonym>
+   <key>ru</key>
+   <value>Комплект</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Set</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Set</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b847934a-df66-4aee-bfbd-6f859658f137">
-  <name>StandardAttributes</name>
-  <synonym>
-    <key>en</key>
-    <value>Standard attributes</value>
-  </synonym>
+ <name>StandardAttributes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Стандарные реквизиты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Standard attributes</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Standart öznitellikler</value>
+ </synonym>
 </mdclass:CommonPicture>

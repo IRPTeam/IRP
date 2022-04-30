@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3341eadb-c14f-46b9-b355-9ca8ab7938b4">
-  <name>EditMultilineText</name>
-  <synonym>
-    <key>en</key>
-    <value>Edit description</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>EditMultilineText</name>
+ <synonym>
+  <key>ru</key>
+  <value>Редактирование комментария</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Edit description</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Açıklama değiştir</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

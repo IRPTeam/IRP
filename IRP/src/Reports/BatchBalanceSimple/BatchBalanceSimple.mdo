@@ -1,22 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5c2c9e59-3780-48db-af04-bcd3c038e9bb">
-  <producedTypes>
-    <objectType typeId="9c08e041-5db1-4361-80eb-061a120fad3f" valueTypeId="5a5b4c76-b142-40b6-8c5a-bcc00b02dc96"/>
-    <managerType typeId="e6993694-8e7c-41a5-8140-1484cdf816d0" valueTypeId="23824d8e-3664-46c2-b616-ff2d4d61b979"/>
-  </producedTypes>
-  <name>BatchBalanceSimple</name>
+ <producedTypes>
+  <objectType typeId="9c08e041-5db1-4361-80eb-061a120fad3f" valueTypeId="5a5b4c76-b142-40b6-8c5a-bcc00b02dc96"/>
+  <managerType typeId="e6993694-8e7c-41a5-8140-1484cdf816d0" valueTypeId="23824d8e-3664-46c2-b616-ff2d4d61b979"/>
+ </producedTypes>
+ <name>BatchBalanceSimple</name>
+ <synonym>
+  <key>ru</key>
+  <value>Остаток по партиям (простой)</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Batch balance (simple)</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Parti bakiyeleri (basit)</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.BatchBalanceSimple.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="0c06b934-435b-4fca-959a-c33c07349d8f">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>Batch balance (simple)</value>
+   <key>ru</key>
+   <value>Основная схема компоновки</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.BatchBalanceSimple.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="0c06b934-435b-4fca-959a-c33c07349d8f">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

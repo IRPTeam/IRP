@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fce6c704-a03b-40b3-9715-653b0cd115c4">
-  <name>TaxesServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Taxes server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>TaxesServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Налоги сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Taxes server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Vergiler server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

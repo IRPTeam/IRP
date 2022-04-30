@@ -1,38 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3a48aa50-0f07-4659-943b-fd2df919739f">
-  <name>UseItemKey</name>
-  <synonym>
-    <key>en</key>
-    <value>Use item key</value>
-  </synonym>
-  <location>Constant.UseItemKey</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.PhysicalCountByLocation.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.InventoryTransferOrder.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.InternalSupplyRequest.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.ItemKey</content>
-  <content>InformationRegister.RemainingItemsInfo.Dimension.ItemKey</content>
-  <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.Unbundling.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.PriceList.TabularSection.ItemKeyList.Attribute.ItemKey</content>
-  <content>Document.SalesOrder.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.PhysicalInventory.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>InformationRegister.BundleContents.Dimension.ItemKey</content>
-  <content>InformationRegister.ItemSegments.Dimension.ItemKey</content>
-  <content>Document.SalesReturnOrder.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Catalog.ItemKeys.Command.OpenItemKeysList</content>
-  <content>InformationRegister.Barcodes.Resource.ItemKey</content>
-  <content>Document.Labeling.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>Document.Bundling.TabularSection.ItemList.Attribute.ItemKey</content>
-  <content>InformationRegister.PricesByItemKeys.Dimension.ItemKey</content>
-  <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.ItemKey</content>
+ <name>UseItemKey</name>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать ключи аналитики (характеристики) номенклатуры</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use item key</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Varyant kullanmak</value>
+ </synonym>
+ <location>Constant.UseItemKey</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.PhysicalCountByLocation.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.InventoryTransferOrder.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.InternalSupplyRequest.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.ItemKey</content>
+ <content>InformationRegister.RemainingItemsInfo.Dimension.ItemKey</content>
+ <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.Unbundling.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.PriceList.TabularSection.ItemKeyList.Attribute.ItemKey</content>
+ <content>Document.SalesOrder.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.PhysicalInventory.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>InformationRegister.BundleContents.Dimension.ItemKey</content>
+ <content>InformationRegister.ItemSegments.Dimension.ItemKey</content>
+ <content>Document.SalesReturnOrder.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Catalog.ItemKeys.Command.OpenItemKeysList</content>
+ <content>InformationRegister.Barcodes.Resource.ItemKey</content>
+ <content>Document.Labeling.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>Document.Bundling.TabularSection.ItemList.Attribute.ItemKey</content>
+ <content>InformationRegister.PricesByItemKeys.Dimension.ItemKey</content>
+ <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.ItemKey</content>
 </mdclass:FunctionalOption>

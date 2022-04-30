@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="aa156758-2929-4b8a-b2b6-8a1538f73887">
-  <producedTypes>
-    <refType typeId="88a41c82-caef-4791-800e-49267a3b8c0f" valueTypeId="497065e1-39d4-42ea-8144-521bf26cc8a6"/>
-    <listType typeId="9cebb8b4-c0ee-4fac-bfda-51d8469e2bc0" valueTypeId="9463cde1-ecdd-4bec-9bd9-68ceec0585ff"/>
-    <managerType typeId="71f3af1f-5717-44ef-bed7-0649a4267700" valueTypeId="226cf470-ab0b-4d2e-b254-2be73b1d77e2"/>
-  </producedTypes>
-  <name>CashFlowDirections</name>
+ <producedTypes>
+  <refType typeId="88a41c82-caef-4791-800e-49267a3b8c0f" valueTypeId="497065e1-39d4-42ea-8144-521bf26cc8a6"/>
+  <listType typeId="9cebb8b4-c0ee-4fac-bfda-51d8469e2bc0" valueTypeId="9463cde1-ecdd-4bec-9bd9-68ceec0585ff"/>
+  <managerType typeId="71f3af1f-5717-44ef-bed7-0649a4267700" valueTypeId="226cf470-ab0b-4d2e-b254-2be73b1d77e2"/>
+ </producedTypes>
+ <name>CashFlowDirections</name>
+ <synonym>
+  <key>ru</key>
+  <value>Направления денежных потоков</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cash flow directions</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Nakit akış yönleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="d18225e2-12cd-4b19-9b11-2ff5623725df">
+  <name>Incoming</name>
   <synonym>
-    <key>en</key>
-    <value>Cash flow directions</value>
+   <key>ru</key>
+   <value>Входящие</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="d18225e2-12cd-4b19-9b11-2ff5623725df">
-    <name>Incoming</name>
-    <synonym>
-      <key>en</key>
-      <value>Incoming</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="4cf4b67f-aa4a-466a-8026-986b2e6d1b10">
-    <name>Outgoing</name>
-    <synonym>
-      <key>en</key>
-      <value>Outgoing</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Incoming</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gelen</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="4cf4b67f-aa4a-466a-8026-986b2e6d1b10">
+  <name>Outgoing</name>
+  <synonym>
+   <key>ru</key>
+   <value>Исходящие</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Outgoing</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çıkan</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

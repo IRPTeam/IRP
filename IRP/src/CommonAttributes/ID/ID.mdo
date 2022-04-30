@@ -1,35 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="de698183-624c-47c6-8297-fca6f49f8639">
-  <name>ID</name>
-  <synonym>
-    <key>en</key>
-    <value>ID</value>
-  </synonym>
-  <type>
-    <types>Number</types>
-    <numberQualifiers>
-      <precision>6</precision>
-      <nonNegative>true</nonNegative>
-    </numberQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataHistory>Use</dataHistory>
-  <fillFromFillingValue>true</fillFromFillingValue>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <content>
-    <metadata>ScheduledJob.AreaUpdate</metadata>
-    <use>DontUse</use>
-  </content>
-  <content>
-    <metadata>Catalog.DataAreas</metadata>
-    <use>DontUse</use>
-  </content>
-  <content>
-    <metadata>Constant.SaasMode</metadata>
-    <use>DontUse</use>
-  </content>
-  <dataSeparationValue>SessionParameter.IDValue</dataSeparationValue>
-  <dataSeparationUse>SessionParameter.IDUse</dataSeparationUse>
-  <conditionalSeparation>Constant.SaasMode</conditionalSeparation>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="de698183-624c-47c6-8297-fca6f49f8639">
+ <name>ID</name>
+ <synonym>
+  <key>ru</key>
+  <value>Артикул</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>ID</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>ID</value>
+ </synonym>
+ <type>
+  <types>Number</types>
+  <numberQualifiers>
+   <precision>6</precision>
+   <nonNegative>true</nonNegative>
+  </numberQualifiers>
+ </type>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataHistory>Use</dataHistory>
+ <fillFromFillingValue>true</fillFromFillingValue>
+ <fillValue xsi:type="core:UndefinedValue"/>
+ <content>
+  <metadata>ScheduledJob.AreaUpdate</metadata>
+  <use>DontUse</use>
+ </content>
+ <content>
+  <metadata>Catalog.DataAreas</metadata>
+  <use>DontUse</use>
+ </content>
+ <content>
+  <metadata>Constant.SaasMode</metadata>
+  <use>DontUse</use>
+ </content>
+ <dataSeparationValue>SessionParameter.IDValue</dataSeparationValue>
+ <dataSeparationUse>SessionParameter.IDUse</dataSeparationUse>
+ <conditionalSeparation>Constant.SaasMode</conditionalSeparation>
 </mdclass:CommonAttribute>

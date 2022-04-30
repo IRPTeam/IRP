@@ -1,199 +1,295 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="de7962d8-87e6-4b4d-bc0a-dc167b55c371">
-  <producedTypes>
-    <objectType typeId="8e4bbe18-5888-400a-88b8-4d0657b1c6e9" valueTypeId="323f36d4-b952-4b4e-b13f-0b5a63803954"/>
-    <refType typeId="8ddedbe5-ddb6-4b92-87d7-d204a6c05533" valueTypeId="dee58deb-35eb-4a2c-ba67-33a023812172"/>
-    <selectionType typeId="9de6b9dc-fb6b-4e22-92ce-fd8d207cd1e8" valueTypeId="b2482b1d-94eb-41c9-b7a2-b39fc80b53c1"/>
-    <listType typeId="dee8ff39-1333-413e-8c88-c05b84d03707" valueTypeId="b0df1e1f-2252-4cfd-ac78-248f21c6beba"/>
-    <managerType typeId="4b255899-f8f6-4f41-8986-6a3a0b818e32" valueTypeId="cf00a0a6-b570-4bcb-bd6c-cc5eefbfc4c8"/>
-  </producedTypes>
-  <name>PartnerItems</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="de7962d8-87e6-4b4d-bc0a-dc167b55c371">
+ <producedTypes>
+  <objectType typeId="8e4bbe18-5888-400a-88b8-4d0657b1c6e9" valueTypeId="323f36d4-b952-4b4e-b13f-0b5a63803954"/>
+  <refType typeId="8ddedbe5-ddb6-4b92-87d7-d204a6c05533" valueTypeId="dee58deb-35eb-4a2c-ba67-33a023812172"/>
+  <selectionType typeId="9de6b9dc-fb6b-4e22-92ce-fd8d207cd1e8" valueTypeId="b2482b1d-94eb-41c9-b7a2-b39fc80b53c1"/>
+  <listType typeId="dee8ff39-1333-413e-8c88-c05b84d03707" valueTypeId="b0df1e1f-2252-4cfd-ac78-248f21c6beba"/>
+  <managerType typeId="4b255899-f8f6-4f41-8986-6a3a0b818e32" valueTypeId="cf00a0a6-b570-4bcb-bd6c-cc5eefbfc4c8"/>
+ </producedTypes>
+ <name>PartnerItems</name>
+ <synonym>
+  <key>ru</key>
+  <value>Номенклатура партнера</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Partner items</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cari hesap malzemeleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.PartnerItems.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PartnerItems</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.PartnerItems.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.PartnerItems.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.PartnerItems.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.PartnerItems.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PartnerItems</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Номенклатура партнера</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Partner item</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Cari hesap malzemesi</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.PartnerItems.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.PartnerItems.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.PartnerItems.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="25daef82-bf2a-4716-b100-f055981013f0">
+  <name>Partner</name>
   <synonym>
-    <key>en</key>
-    <value>Partner items</value>
+   <key>ru</key>
+   <value>Партнер</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.PartnerItems.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PartnerItems</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.PartnerItems.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.PartnerItems.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.PartnerItems.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.PartnerItems.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PartnerItems</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Partner</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="57095b03-e6f2-4c34-9f28-ca330aae51cd">
+  <name>ItemID</name>
+  <synonym>
+   <key>ru</key>
+   <value>Артикул</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item ID</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme ID</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>100</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b06e3399-969a-4077-97bf-f9b3f7639e60">
+  <name>Item</name>
+  <synonym>
+   <key>ru</key>
+   <value>Номенклатура</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="32fb2265-e730-4a50-9482-46bc47785fc5">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Item</name>
+   <field>Catalog.PartnerItems.Attribute.Item</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="895aae85-865c-4edd-b570-1b65b70e2d13">
+  <producedTypes>
+   <objectType typeId="41b63998-6a52-43db-8531-d4b0297919bd" valueTypeId="4ecd4d6f-e302-4531-aa66-d4dd70d98949"/>
+   <rowType typeId="ef16c5bf-c204-4196-9f8a-a7c07d9c8bc4" valueTypeId="769d1ebb-a357-4c82-b1f6-12245d6decaa"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="baed32cd-e0a5-45fa-9aa1-2b889fddccb7">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Partner item</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.PartnerItems.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.PartnerItems.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.PartnerItems.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="25daef82-bf2a-4716-b100-f055981013f0">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="57095b03-e6f2-4c34-9f28-ca330aae51cd">
-    <name>ItemID</name>
-    <synonym>
-      <key>en</key>
-      <value>Item ID</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="f048081b-e7cf-4409-bd3c-0af5b8784a91">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.PartnerItems.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="b06e3399-969a-4077-97bf-f9b3f7639e60">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="32fb2265-e730-4a50-9482-46bc47785fc5">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameterLinks>
-      <name>Filter.Item</name>
-      <field>Catalog.PartnerItems.Attribute.Item</field>
-    </choiceParameterLinks>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="895aae85-865c-4edd-b570-1b65b70e2d13">
-    <producedTypes>
-      <objectType typeId="41b63998-6a52-43db-8531-d4b0297919bd" valueTypeId="4ecd4d6f-e302-4531-aa66-d4dd70d98949"/>
-      <rowType typeId="ef16c5bf-c204-4196-9f8a-a7c07d9c8bc4" valueTypeId="769d1ebb-a357-4c82-b1f6-12245d6decaa"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="baed32cd-e0a5-45fa-9aa1-2b889fddccb7">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="f048081b-e7cf-4409-bd3c-0af5b8784a91">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.PartnerItems.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <forms uuid="97f31b14-f6af-424b-b6a4-9c2a470ce877">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="6267a069-e131-4b36-93c1-b78bc6469678">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e58d9a48-31f6-431b-9834-79d849f09a92">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="97f31b14-f6af-424b-b6a4-9c2a470ce877">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6267a069-e131-4b36-93c1-b78bc6469678">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e58d9a48-31f6-431b-9834-79d849f09a92">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

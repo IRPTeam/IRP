@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="30dd6ca5-a2bd-4b6d-8eaa-cc2be39e6ec5">
-  <name>AccountingServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Accounting server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>AccountingServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Бухгалтерия сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Accounting server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Muhasebe server</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

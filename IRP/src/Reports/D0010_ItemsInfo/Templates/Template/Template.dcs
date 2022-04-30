@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<dataSource>
 		<name>DataSource1</name>
@@ -11,8 +11,16 @@
 			<field>File</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Файл</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>File</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dosya</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -28,8 +36,16 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номенклатура</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -38,8 +54,16 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Характеристика</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item key</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Varyant</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -48,8 +72,16 @@
 			<field>Barcode</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Штрихкод</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Barcode</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Barkod</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -58,8 +90,16 @@
 			<field>SerialLotNumber</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Серия номенклатуры</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item serial/lot number</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ürün seri/lot numarası</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -68,8 +108,16 @@
 			<field>Unit</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ед. изм.</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Unit</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Birim</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -142,7 +190,15 @@ FROM
 		<name>CharLF</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Символ переноса строки</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
+				<v8:content>Char LF</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
 				<v8:content>Char LF</v8:content>
 			</v8:item>
 		</title>

@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a18cef19-1b11-48c5-8108-819ec8571d19">
-  <name>LocalizationReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>Localization reuse</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <returnValuesReuse>DuringSession</returnValuesReuse>
+ <name>LocalizationReuse</name>
+ <synonym>
+  <key>ru</key>
+  <value>Повторное использование локализации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Localization reuse</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Lokalizasyon reuse</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <returnValuesReuse>DuringSession</returnValuesReuse>
 </mdclass:CommonModule>

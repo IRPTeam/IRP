@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b8d5647a-abcd-4496-9c81-ed75f1d605d7">
-  <name>WorkstationServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Workstation server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>WorkstationServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Рабочее место сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Workstation server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Çalışma yeri server</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

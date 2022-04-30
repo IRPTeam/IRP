@@ -1,36 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d19cb3ba-26fd-4955-806e-ea0dcbde79b2">
-  <producedTypes>
-    <refType typeId="a59bc939-8e62-45a8-bdab-753517959ea7" valueTypeId="675dc326-ba61-4e49-b10d-9c72bd7991f9"/>
-    <listType typeId="73006765-d4b2-41f6-97b8-49667837a5c0" valueTypeId="07f62be2-7fc1-4a80-bd3d-71a0bf8555dd"/>
-    <managerType typeId="482c97b2-5c14-4ca7-8c66-c540dc4522ee" valueTypeId="768cdd31-0cba-4c88-8cc0-da3e9db758b4"/>
-  </producedTypes>
-  <name>OffersDocumentTypes</name>
+ <producedTypes>
+  <refType typeId="a59bc939-8e62-45a8-bdab-753517959ea7" valueTypeId="675dc326-ba61-4e49-b10d-9c72bd7991f9"/>
+  <listType typeId="73006765-d4b2-41f6-97b8-49667837a5c0" valueTypeId="07f62be2-7fc1-4a80-bd3d-71a0bf8555dd"/>
+  <managerType typeId="482c97b2-5c14-4ca7-8c66-c540dc4522ee" valueTypeId="768cdd31-0cba-4c88-8cc0-da3e9db758b4"/>
+ </producedTypes>
+ <name>OffersDocumentTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Типы документов применения специальных предложений</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Offers document types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kampanya evrak tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="36aa2d3e-10bb-4389-b48d-b9b99b1a090c">
+  <name>Sales</name>
   <synonym>
-    <key>en</key>
-    <value>Offers document types</value>
+   <key>ru</key>
+   <value>Продажи</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="36aa2d3e-10bb-4389-b48d-b9b99b1a090c">
-    <name>Sales</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="9abf9c49-906d-4937-a4f7-5455e1618acc">
-    <name>Purchases</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchases</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="9495b4a6-a1b8-4fbc-af2f-28e3cc407852">
-    <name>PurchasesAndSales</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchases and sales</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Sales</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satışlar</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="9abf9c49-906d-4937-a4f7-5455e1618acc">
+  <name>Purchases</name>
+  <synonym>
+   <key>ru</key>
+   <value>Закупки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Purchases</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alımlar</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="9495b4a6-a1b8-4fbc-af2f-28e3cc407852">
+  <name>PurchasesAndSales</name>
+  <synonym>
+   <key>ru</key>
+   <value>Закупки и продажи</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Purchases and sales</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alımlar ve satışlar</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

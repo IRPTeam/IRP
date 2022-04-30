@@ -1,22 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="088a4787-93a3-4aa9-8191-4aed9fc2050f">
-  <producedTypes>
-    <containerType typeId="d4983f50-270f-41f7-8a10-5c18b4c2415c" valueTypeId="0c202c54-307d-4792-b771-1a3c235944a8"/>
-  </producedTypes>
-  <name>UseUniqueID</name>
-  <synonym>
-    <key>en</key>
-    <value>Use unique ID</value>
-  </synonym>
-  <type>
-    <types>ChartOfCharacteristicTypesObject.AddAttributeAndProperty</types>
-    <types>ChartOfCharacteristicTypesObject.IDInfoTypes</types>
-    <types>ChartOfCharacteristicTypesObject.CustomUserSettings</types>
-    <types>CatalogObject.ObjectStatuses</types>
-    <types>CatalogObject.IntegrationSettings</types>
-    <types>CatalogObject.DataMappingItems</types>
-    <types>CatalogObject.ItemTypes</types>
-    <types>CatalogObject.AddAttributeAndPropertyValues</types>
-    <types>CatalogObject.Extensions</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="d4983f50-270f-41f7-8a10-5c18b4c2415c" valueTypeId="0c202c54-307d-4792-b771-1a3c235944a8"/>
+ </producedTypes>
+ <name>UseUniqueID</name>
+ <synonym>
+  <key>ru</key>
+  <value>Использование уникального ID</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use unique ID</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Eşsiz ID kullan</value>
+ </synonym>
+ <type>
+  <types>ChartOfCharacteristicTypesObject.AddAttributeAndProperty</types>
+  <types>ChartOfCharacteristicTypesObject.IDInfoTypes</types>
+  <types>ChartOfCharacteristicTypesObject.CustomUserSettings</types>
+  <types>CatalogObject.ObjectStatuses</types>
+  <types>CatalogObject.IntegrationSettings</types>
+  <types>CatalogObject.DataMappingItems</types>
+  <types>CatalogObject.ItemTypes</types>
+  <types>CatalogObject.AddAttributeAndPropertyValues</types>
+  <types>CatalogObject.Extensions</types>
+ </type>
 </mdclass:DefinedType>

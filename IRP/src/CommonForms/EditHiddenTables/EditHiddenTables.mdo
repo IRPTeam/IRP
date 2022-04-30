@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="28eea8f0-8674-4c92-9448-d136f47b543d">
-  <name>EditHiddenTables</name>
-  <synonym>
-    <key>en</key>
-    <value>Edit hidden tables</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>EditHiddenTables</name>
+ <synonym>
+  <key>ru</key>
+  <value>Редактирование скрытых таблиц</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Edit hidden tables</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Gizli tabloları düzelt</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

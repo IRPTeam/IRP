@@ -1,43 +1,83 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="45c70ce5-fedf-4ffd-b204-729803a41ac2">
-  <producedTypes>
-    <refType typeId="078a5f35-fa39-4d60-a810-faec0145a8a5" valueTypeId="ba340df1-241d-4960-8bf7-a6bef60b3fbc"/>
-    <listType typeId="0b0cdb19-bb35-4c27-9d56-340b38e42b84" valueTypeId="a1060720-d3b3-4e71-8d45-bb040873b020"/>
-    <managerType typeId="a71c2aaf-3990-4a3a-b5b2-78756d58b975" valueTypeId="5c8114ca-b7d2-44b2-905c-209b34fdc0c7"/>
-  </producedTypes>
-  <name>ChequeBondTypes</name>
+ <producedTypes>
+  <refType typeId="078a5f35-fa39-4d60-a810-faec0145a8a5" valueTypeId="ba340df1-241d-4960-8bf7-a6bef60b3fbc"/>
+  <listType typeId="0b0cdb19-bb35-4c27-9d56-340b38e42b84" valueTypeId="a1060720-d3b3-4e71-8d45-bb040873b020"/>
+  <managerType typeId="a71c2aaf-3990-4a3a-b5b2-78756d58b975" valueTypeId="5c8114ca-b7d2-44b2-905c-209b34fdc0c7"/>
+ </producedTypes>
+ <name>ChequeBondTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Типы банковских чеков</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cheque bond types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Çek/Senet tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="0551469f-89ee-4fd0-8f6f-079f1ef276f9">
+  <name>OwnCheque</name>
   <synonym>
-    <key>en</key>
-    <value>Cheque bond types</value>
+   <key>ru</key>
+   <value>Собственный банковский чек</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="0551469f-89ee-4fd0-8f6f-079f1ef276f9">
-    <name>OwnCheque</name>
-    <synonym>
-      <key>en</key>
-      <value>Own cheque</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="41eefbdc-80b6-42b6-9b8f-ec99605cc365">
-    <name>PartnerCheque</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner cheque</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="e609d87c-b3ad-47dc-acd8-4c149e62fbf6">
-    <name>OwnObligation</name>
-    <synonym>
-      <key>en</key>
-      <value>Own obligation</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b4d90fd5-3960-4cc4-bb4b-2311483fa5af">
-    <name>PartnerObligation</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner obligation</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Own cheque</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kendi çekimiz</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="41eefbdc-80b6-42b6-9b8f-ec99605cc365">
+  <name>PartnerCheque</name>
+  <synonym>
+   <key>ru</key>
+   <value>Партнерский банковский чек</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner cheque</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Müşteri çeki</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="e609d87c-b3ad-47dc-acd8-4c149e62fbf6">
+  <name>OwnObligation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Собственная облигация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Own obligation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kendi senedimiz</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b4d90fd5-3960-4cc4-bb4b-2311483fa5af">
+  <name>PartnerObligation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Партнерская облигация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner obligation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Müşteri senedi</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

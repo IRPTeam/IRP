@@ -1,26 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d5d3263d-8752-4a94-9a5e-a643fa90df45">
-  <producedTypes>
-    <containerType typeId="177454db-e23f-4601-bec0-c17ac190c6ab" valueTypeId="d28d88d2-7940-468e-b18f-59c7a792acd9"/>
-  </producedTypes>
-  <name>typeBatchDocuments</name>
-  <synonym>
-    <key>en</key>
-    <value>Type batch documents</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.Bundling</types>
-    <types>DocumentRef.InventoryTransfer</types>
-    <types>DocumentRef.ItemStockAdjustment</types>
-    <types>DocumentRef.OpeningEntry</types>
-    <types>DocumentRef.PurchaseInvoice</types>
-    <types>DocumentRef.PurchaseReturn</types>
-    <types>DocumentRef.RetailReturnReceipt</types>
-    <types>DocumentRef.RetailSalesReceipt</types>
-    <types>DocumentRef.SalesInvoice</types>
-    <types>DocumentRef.SalesReturn</types>
-    <types>DocumentRef.StockAdjustmentAsSurplus</types>
-    <types>DocumentRef.StockAdjustmentAsWriteOff</types>
-    <types>DocumentRef.Unbundling</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="177454db-e23f-4601-bec0-c17ac190c6ab" valueTypeId="d28d88d2-7940-468e-b18f-59c7a792acd9"/>
+ </producedTypes>
+ <name>typeBatchDocuments</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип партионные документы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type batch documents</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip parti evrakları</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.Bundling</types>
+  <types>DocumentRef.InventoryTransfer</types>
+  <types>DocumentRef.ItemStockAdjustment</types>
+  <types>DocumentRef.OpeningEntry</types>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.PurchaseReturn</types>
+  <types>DocumentRef.RetailReturnReceipt</types>
+  <types>DocumentRef.RetailSalesReceipt</types>
+  <types>DocumentRef.SalesInvoice</types>
+  <types>DocumentRef.SalesReturn</types>
+  <types>DocumentRef.StockAdjustmentAsSurplus</types>
+  <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+  <types>DocumentRef.Unbundling</types>
+ </type>
 </mdclass:DefinedType>

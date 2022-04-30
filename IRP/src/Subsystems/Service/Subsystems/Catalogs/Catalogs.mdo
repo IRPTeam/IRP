@@ -1,29 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7926fce-da7b-4d92-9aa4-1ed2f64b2df1">
-  <name>Catalogs</name>
-  <synonym>
-    <key>en</key>
-    <value>Catalogs</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.CashAccounts</content>
-  <content>Catalog.Companies</content>
-  <content>Catalog.Countries</content>
-  <content>Catalog.Currencies</content>
-  <content>Catalog.Items</content>
-  <content>Catalog.ItemSegments</content>
-  <content>Catalog.ItemTypes</content>
-  <content>Catalog.Partners</content>
-  <content>Catalog.PaymentTypes</content>
-  <content>Catalog.PriceTypes</content>
-  <content>Catalog.SpecialOffers</content>
-  <content>Catalog.Stores</content>
-  <content>Catalog.TaxRates</content>
-  <content>Catalog.Users</content>
-  <content>Catalog.ItemKeys</content>
-  <content>Catalog.InterfaceGroups</content>
-  <content>Catalog.PartnerItems</content>
-  <content>CommonCommand.AttachedFiles</content>
-  <parentSubsystem>Subsystem.Service</parentSubsystem>
+ <name>Catalogs</name>
+ <synonym>
+  <key>ru</key>
+  <value>Справочники</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Catalogs</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kart listeleri</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.CashAccounts</content>
+ <content>Catalog.Companies</content>
+ <content>Catalog.Countries</content>
+ <content>Catalog.Currencies</content>
+ <content>Catalog.Items</content>
+ <content>Catalog.ItemSegments</content>
+ <content>Catalog.ItemTypes</content>
+ <content>Catalog.Partners</content>
+ <content>Catalog.PaymentTypes</content>
+ <content>Catalog.PriceTypes</content>
+ <content>Catalog.SpecialOffers</content>
+ <content>Catalog.Stores</content>
+ <content>Catalog.TaxRates</content>
+ <content>Catalog.Users</content>
+ <content>Catalog.ItemKeys</content>
+ <content>Catalog.InterfaceGroups</content>
+ <content>Catalog.PartnerItems</content>
+ <content>CommonCommand.AttachedFiles</content>
+ <parentSubsystem>Subsystem.Service</parentSubsystem>
 </mdclass:Subsystem>

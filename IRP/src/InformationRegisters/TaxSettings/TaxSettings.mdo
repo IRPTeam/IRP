@@ -1,173 +1,261 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f84554da-831b-4a78-91be-f07cf805d4af">
-  <producedTypes>
-    <selectionType typeId="af2e5a13-d5e9-4989-a149-fa6472f9448c" valueTypeId="89fbba04-07ed-4ba3-a922-ef4eea3af35a"/>
-    <listType typeId="4f6a1bce-e3e1-4f88-9126-4b9d9199280a" valueTypeId="60795d98-ff8d-469c-b406-7b0f483eb209"/>
-    <managerType typeId="9f5d986a-c1bb-4a04-bc7a-5fdff5ca1806" valueTypeId="0db16249-a7d8-4a55-864b-2b8fbdff8ef5"/>
-    <recordSetType typeId="2138a5f8-900a-44ad-9458-ec6706f9c57d" valueTypeId="00f459c3-bf6d-44f9-ba50-deca90af3696"/>
-    <recordKeyType typeId="f77b002d-08b5-400e-a3e8-7e189794c326" valueTypeId="1ef39b9f-f9c9-4a99-8e8a-ea7976e3297c"/>
-    <recordType typeId="b1328652-0270-4072-8bb2-203b08391419" valueTypeId="8546998e-da00-4dae-9e09-6dca814d1008"/>
-    <recordManagerType typeId="24813a52-f8ec-41dc-b5ae-631dc4582bc4" valueTypeId="052540f9-203d-498d-aee1-1c0728dd160b"/>
-  </producedTypes>
-  <name>TaxSettings</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f84554da-831b-4a78-91be-f07cf805d4af">
+ <producedTypes>
+  <selectionType typeId="af2e5a13-d5e9-4989-a149-fa6472f9448c" valueTypeId="89fbba04-07ed-4ba3-a922-ef4eea3af35a"/>
+  <listType typeId="4f6a1bce-e3e1-4f88-9126-4b9d9199280a" valueTypeId="60795d98-ff8d-469c-b406-7b0f483eb209"/>
+  <managerType typeId="9f5d986a-c1bb-4a04-bc7a-5fdff5ca1806" valueTypeId="0db16249-a7d8-4a55-864b-2b8fbdff8ef5"/>
+  <recordSetType typeId="2138a5f8-900a-44ad-9458-ec6706f9c57d" valueTypeId="00f459c3-bf6d-44f9-ba50-deca90af3696"/>
+  <recordKeyType typeId="f77b002d-08b5-400e-a3e8-7e189794c326" valueTypeId="1ef39b9f-f9c9-4a99-8e8a-ea7976e3297c"/>
+  <recordType typeId="b1328652-0270-4072-8bb2-203b08391419" valueTypeId="8546998e-da00-4dae-9e09-6dca814d1008"/>
+  <recordManagerType typeId="24813a52-f8ec-41dc-b5ae-631dc4582bc4" valueTypeId="052540f9-203d-498d-aee1-1c0728dd160b"/>
+ </producedTypes>
+ <name>TaxSettings</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки налоговых ставок</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Tax rate settings</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Vergi oranı ayarları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultRecordForm>InformationRegister.TaxSettings.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSliceLast>true</enableTotalsSliceLast>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Настройка налоговой ставки</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Tax rate setting</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Vergi oranı ayarı</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Настройки налоговых ставок</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Tax rate settings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Vergi oranı ayarları</value>
+ </listPresentation>
+ <resources uuid="7f385d0d-f444-4b7b-ab2e-ad808d3b099a">
+  <name>TaxRate</name>
   <synonym>
-    <key>en</key>
-    <value>Tax rate settings</value>
+   <key>ru</key>
+   <value>Налоговая ставка</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultRecordForm>InformationRegister.TaxSettings.Form.RecordForm</defaultRecordForm>
-  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSliceLast>true</enableTotalsSliceLast>
-  <recordPresentation>
-    <key>en</key>
-    <value>Tax rate setting</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Tax rate settings</value>
-  </listPresentation>
-  <resources uuid="7f385d0d-f444-4b7b-ab2e-ad808d3b099a">
-    <name>TaxRate</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax rate</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.TaxRates</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="7b234a59-94c6-4227-baaa-ce160118d231">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.OurCompany</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="147e7a3c-302d-4e4f-ac7d-320a6ba6424f">
-    <name>Tax</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Taxes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.Type</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Enum.TaxType.EnumValue.Rate</value>
-      </value>
-    </choiceParameters>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="a838dba8-8116-4296-af81-bb05b5c04169">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="438e7218-34a5-4c1b-bcb8-4d5b51925339">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="8ae12989-90c1-4752-8570-df056fb1e951">
-    <name>ItemType</name>
-    <synonym>
-      <key>en</key>
-      <value>Item type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="6127f6fd-9796-47bf-a7ac-4e606a0d575d">
-    <name>Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner term</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="0ea4f4dc-5141-44dd-9058-2c31c57de7ad">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Tax rate</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi oranı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.TaxRates</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="7b234a59-94c6-4227-baaa-ce160118d231">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="147e7a3c-302d-4e4f-ac7d-320a6ba6424f">
+  <name>Tax</name>
+  <synonym>
+   <key>ru</key>
+   <value>Налог</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Taxes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.Type</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Enum.TaxType.EnumValue.Rate</value>
+   </value>
+  </choiceParameters>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="a838dba8-8116-4296-af81-bb05b5c04169">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="438e7218-34a5-4c1b-bcb8-4d5b51925339">
+  <name>Item</name>
+  <synonym>
+   <key>ru</key>
+   <value>Номенклатура</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="8ae12989-90c1-4752-8570-df056fb1e951">
+  <name>ItemType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид номенклатуры</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme tipi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="6127f6fd-9796-47bf-a7ac-4e606a0d575d">
+  <name>Agreement</name>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner term</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sözleşme</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="0ea4f4dc-5141-44dd-9058-2c31c57de7ad">
+  <name>RecordForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

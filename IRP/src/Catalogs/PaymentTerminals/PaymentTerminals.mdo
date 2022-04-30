@@ -1,161 +1,241 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="00f20a8f-0335-467e-8936-a31871a31e97">
-  <producedTypes>
-    <objectType typeId="e0b4c4d1-c5c3-41dd-afc1-97b3a29ff1bf" valueTypeId="92bd247b-fa83-4ff0-b78d-c167d446751f"/>
-    <refType typeId="0943448d-908a-42f3-81d1-4ba40ee793e8" valueTypeId="eca1d33c-c8de-4d48-9966-3cfca2e63cbe"/>
-    <selectionType typeId="35b555db-38d8-4440-bbfc-aea47243b5b3" valueTypeId="3f42d1e5-92a3-4423-aa3d-8b0cfa7596f1"/>
-    <listType typeId="3b327193-12b7-4843-b990-a51a3900b88e" valueTypeId="95ee0da6-f897-4f10-8e0a-dc654570ab8c"/>
-    <managerType typeId="5e16b06d-6a0e-461e-9b77-a96fa5ed4923" valueTypeId="7520e36c-58e7-4467-b44c-58c3fbffdff0"/>
-  </producedTypes>
-  <name>PaymentTerminals</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="00f20a8f-0335-467e-8936-a31871a31e97">
+ <producedTypes>
+  <objectType typeId="e0b4c4d1-c5c3-41dd-afc1-97b3a29ff1bf" valueTypeId="92bd247b-fa83-4ff0-b78d-c167d446751f"/>
+  <refType typeId="0943448d-908a-42f3-81d1-4ba40ee793e8" valueTypeId="eca1d33c-c8de-4d48-9966-3cfca2e63cbe"/>
+  <selectionType typeId="35b555db-38d8-4440-bbfc-aea47243b5b3" valueTypeId="3f42d1e5-92a3-4423-aa3d-8b0cfa7596f1"/>
+  <listType typeId="3b327193-12b7-4843-b990-a51a3900b88e" valueTypeId="95ee0da6-f897-4f10-8e0a-dc654570ab8c"/>
+  <managerType typeId="5e16b06d-6a0e-461e-9b77-a96fa5ed4923" valueTypeId="7520e36c-58e7-4467-b44c-58c3fbffdff0"/>
+ </producedTypes>
+ <name>PaymentTerminals</name>
+ <synonym>
+  <key>ru</key>
+  <value>Платежные терминалы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Payment terminals</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ödeme terminalleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentTerminals</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentTerminals</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.PaymentTerminals.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.PaymentTerminals.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.PaymentTerminals.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.PaymentTerminals.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Платежный терминал</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Payment terminal</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Ödeme terminali</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.PaymentTerminals.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.PaymentTerminals.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.PaymentTerminals.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="e37a24d6-5078-4228-92b2-4e7a5e2d6ee3">
+  <name>Account</name>
   <synonym>
-    <key>en</key>
-    <value>Payment terminals</value>
+   <key>ru</key>
+   <value>Касса/Банковский счет</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentTerminals</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentTerminals</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.PaymentTerminals.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.PaymentTerminals.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.PaymentTerminals.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.PaymentTerminals.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Account</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kasa/Banka</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="d7d7c1a1-4908-42a7-ad5e-4bef783f138d">
+  <name>Percent</name>
+  <synonym>
+   <key>ru</key>
+   <value>Процент</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Percent</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Yüzde</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typePercent</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="b14595cf-2efd-477c-9cf2-2805a8a0533a">
+  <producedTypes>
+   <objectType typeId="e48e1555-1a91-4460-ac93-559b258a65bb" valueTypeId="2b2f5fd7-6e96-496b-914a-5c143ef319b1"/>
+   <rowType typeId="f8381797-8def-450d-8f38-7ad5410ef6ca" valueTypeId="0716d2eb-504c-40f6-8807-0ea5b535b72c"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="f6473beb-acd2-427f-8477-5f5c2686babf">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Payment terminal</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.PaymentTerminals.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.PaymentTerminals.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.PaymentTerminals.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="e37a24d6-5078-4228-92b2-4e7a5e2d6ee3">
-    <name>Account</name>
-    <synonym>
-      <key>en</key>
-      <value>Account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="d7d7c1a1-4908-42a7-ad5e-4bef783f138d">
-    <name>Percent</name>
-    <synonym>
-      <key>en</key>
-      <value>Percent</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePercent</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="bbc4ee52-cc5b-41c3-9748-9b5d059e510a">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.PaymentTerminals.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="b14595cf-2efd-477c-9cf2-2805a8a0533a">
-    <producedTypes>
-      <objectType typeId="e48e1555-1a91-4460-ac93-559b258a65bb" valueTypeId="2b2f5fd7-6e96-496b-914a-5c143ef319b1"/>
-      <rowType typeId="f8381797-8def-450d-8f38-7ad5410ef6ca" valueTypeId="0716d2eb-504c-40f6-8807-0ea5b535b72c"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="f6473beb-acd2-427f-8477-5f5c2686babf">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="bbc4ee52-cc5b-41c3-9748-9b5d059e510a">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.PaymentTerminals.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="8be8f451-4748-4fed-af27-356cd1376a89">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="fa737c7c-8a61-43c6-afaf-d608ec2680ad">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="25a89685-34f2-4cfe-ab69-787f620d4d79">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="8be8f451-4748-4fed-af27-356cd1376a89">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="fa737c7c-8a61-43c6-afaf-d608ec2680ad">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="25a89685-34f2-4cfe-ab69-787f620d4d79">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

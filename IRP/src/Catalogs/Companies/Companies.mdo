@@ -1,271 +1,407 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fd2d5b46-1ddd-4a01-80b0-75144cfc1ef4">
-  <producedTypes>
-    <objectType typeId="a83ceb3b-a4b0-4e6c-a330-7d067946aaa1" valueTypeId="0b249a1c-2e01-4702-ac88-ff4b1e195cdc"/>
-    <refType typeId="0178d099-f8ff-4d02-9e2d-136ade567356" valueTypeId="b3e2b3f7-6b31-4c34-988c-64b721b51590"/>
-    <selectionType typeId="94d9d5bc-c7a5-42f5-99e8-60d5d434d4e1" valueTypeId="ac46305e-ecf7-4b69-a3a7-d3823952c6e2"/>
-    <listType typeId="38a25869-f87f-407a-89e5-d41316e924f9" valueTypeId="b9e1608b-b2f1-4b05-a706-c1b5e83ec1db"/>
-    <managerType typeId="cdd8113d-6bc4-4ba5-a751-7b94883bb28e" valueTypeId="e1ca7da9-2fdf-44af-af30-f5d1839e4a55"/>
-  </producedTypes>
-  <name>Companies</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="fd2d5b46-1ddd-4a01-80b0-75144cfc1ef4">
+ <producedTypes>
+  <objectType typeId="a83ceb3b-a4b0-4e6c-a330-7d067946aaa1" valueTypeId="0b249a1c-2e01-4702-ac88-ff4b1e195cdc"/>
+  <refType typeId="0178d099-f8ff-4d02-9e2d-136ade567356" valueTypeId="b3e2b3f7-6b31-4c34-988c-64b721b51590"/>
+  <selectionType typeId="94d9d5bc-c7a5-42f5-99e8-60d5d434d4e1" valueTypeId="ac46305e-ecf7-4b69-a3a7-d3823952c6e2"/>
+  <listType typeId="38a25869-f87f-407a-89e5-d41316e924f9" valueTypeId="b9e1608b-b2f1-4b05-a706-c1b5e83ec1db"/>
+  <managerType typeId="cdd8113d-6bc4-4ba5-a751-7b94883bb28e" valueTypeId="e1ca7da9-2fdf-44af-af30-f5d1839e4a55"/>
+ </producedTypes>
+ <name>Companies</name>
+ <synonym>
+  <key>ru</key>
+  <value>Организации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Companies</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Şirketler</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.IDInfoSets.TabularSection.IDInfoTypes</characteristicTypes>
+  <keyField>Catalog.IDInfoSets.TabularSection.IDInfoTypes.Attribute.IDInfoType</keyField>
+  <typesFilterField>Catalog.IDInfoSets.TabularSection.IDInfoTypes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.IDInfoSets.Catalog_Companies</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.IDInfo</characteristicValues>
+  <objectField>InformationRegister.IDInfo.Dimension.Object</objectField>
+  <typeField>InformationRegister.IDInfo.Dimension.IDInfoType</typeField>
+  <valueField>InformationRegister.IDInfo.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Companies</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Companies</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.Companies.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.Companies.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.Companies.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.Companies.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Организация</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Company</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Şirket</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.Companies.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.Companies.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.Companies.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="51d489e0-dbb4-4e9a-840d-8fdb407b87d1">
+  <name>Country</name>
   <synonym>
-    <key>en</key>
-    <value>Companies</value>
+   <key>ru</key>
+   <value>Страна</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.IDInfoSets.TabularSection.IDInfoTypes</characteristicTypes>
-    <keyField>Catalog.IDInfoSets.TabularSection.IDInfoTypes.Attribute.IDInfoType</keyField>
-    <typesFilterField>Catalog.IDInfoSets.TabularSection.IDInfoTypes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.IDInfoSets.Catalog_Companies</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.IDInfo</characteristicValues>
-    <objectField>InformationRegister.IDInfo.Dimension.Object</objectField>
-    <typeField>InformationRegister.IDInfo.Dimension.IDInfoType</typeField>
-    <valueField>InformationRegister.IDInfo.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Companies</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Companies</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.Companies.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.Companies.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.Companies.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.Companies.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Country</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ülke</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Countries</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7883f47e-ebbb-48c7-9adf-d912824b4285">
+  <name>MainCompany</name>
+  <synonym>
+   <key>ru</key>
+   <value>Главная организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ana şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0662bc12-ad78-4117-9bbf-e46a12b7ada0">
+  <name>Partner</name>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3c46f8d6-5cf8-418e-a1ce-db3069ae7810">
+  <name>Type</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tip</value>
+  </synonym>
+  <type>
+   <types>EnumRef.CompanyLegalType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ab77ee1c-edf0-43e5-aa67-4b3687a0bb57">
+  <name>OurCompany</name>
+  <synonym>
+   <key>ru</key>
+   <value>Наша организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Our Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kendi şirketimiz</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="316cd067-43c5-4130-99d8-6add52d427c0">
+  <name>LandedCostCurrencyMovementType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики для расчета себестоимости товаров</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Landed cost currency movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Maliyet çoklu döviz kırılım tipi</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
+  <producedTypes>
+   <objectType typeId="e9c801b9-6993-4bc6-9c66-a808cd465688" valueTypeId="ef76d03a-c4a6-4068-9bd0-e3f4f8ae223d"/>
+   <rowType typeId="1f053fd4-e077-4488-a2f7-1222618b8d8c" valueTypeId="893cb734-0b06-45df-ba1c-27a56c049242"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currencies</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dövizler</value>
+  </synonym>
+  <attributes uuid="ff24a91c-8062-4b0f-b42d-e4c08c616ba8">
+   <name>MovementType</name>
+   <synonym>
+    <key>ru</key>
+    <value>Статья движених денежных средств</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Company</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Companies.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.Companies.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.Companies.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="51d489e0-dbb4-4e9a-840d-8fdb407b87d1">
-    <name>Country</name>
-    <synonym>
-      <key>en</key>
-      <value>Country</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Countries</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Movement type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hareket tipi</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="7883f47e-ebbb-48c7-9adf-d912824b4285">
-    <name>MainCompany</name>
-    <synonym>
-      <key>en</key>
-      <value>Main company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="8f75a048-ed0e-4e74-a988-88cf133cd59c">
+  <producedTypes>
+   <objectType typeId="f09954b8-0a0e-4ea1-8758-18f4364862df" valueTypeId="03b97038-8ce3-49ff-a655-1a4e12d8761e"/>
+   <rowType typeId="4e9037ea-a3fd-4505-b327-760850a501fa" valueTypeId="0736d392-a449-4ffd-a171-c74e0450a380"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="917568d6-d219-47ee-979c-96c7b6f651a9">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="0662bc12-ad78-4117-9bbf-e46a12b7ada0">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="961db9cd-9074-4160-bdeb-324985a8f283">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.Companies.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="3c46f8d6-5cf8-418e-a1ce-db3069ae7810">
-    <name>Type</name>
-    <synonym>
-      <key>en</key>
-      <value>Type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.CompanyLegalType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="ab77ee1c-edf0-43e5-aa67-4b3687a0bb57">
-    <name>OurCompany</name>
-    <synonym>
-      <key>en</key>
-      <value>Our Company</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="316cd067-43c5-4130-99d8-6add52d427c0">
-    <name>LandedCostCurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Landed cost currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
-    <producedTypes>
-      <objectType typeId="e9c801b9-6993-4bc6-9c66-a808cd465688" valueTypeId="ef76d03a-c4a6-4068-9bd0-e3f4f8ae223d"/>
-      <rowType typeId="1f053fd4-e077-4488-a2f7-1222618b8d8c" valueTypeId="893cb734-0b06-45df-ba1c-27a56c049242"/>
-    </producedTypes>
-    <name>Currencies</name>
-    <synonym>
-      <key>en</key>
-      <value>Currencies</value>
-    </synonym>
-    <attributes uuid="ff24a91c-8062-4b0f-b42d-e4c08c616ba8">
-      <name>MovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Movement type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="8f75a048-ed0e-4e74-a988-88cf133cd59c">
-    <producedTypes>
-      <objectType typeId="f09954b8-0a0e-4ea1-8758-18f4364862df" valueTypeId="03b97038-8ce3-49ff-a655-1a4e12d8761e"/>
-      <rowType typeId="4e9037ea-a3fd-4505-b327-760850a501fa" valueTypeId="0736d392-a449-4ffd-a171-c74e0450a380"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="917568d6-d219-47ee-979c-96c7b6f651a9">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="961db9cd-9074-4160-bdeb-324985a8f283">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.Companies.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="d095d91d-fac2-4a22-9e3f-aadb52dd2d88">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="5d10b32c-5eb4-4d27-a9cd-3c7d147cc84d">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="09668165-d5e2-45a8-a307-841bacab31b1">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <commands uuid="ba778d95-167a-4177-888f-e00c234be339">
-    <name>OpenCompanyList</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <group>FormNavigationPanelGoTo</group>
-    <commandParameterType>
-      <types>CatalogRef.Partners</types>
-    </commandParameterType>
-    <representation>Auto</representation>
-  </commands>
+ </tabularSections>
+ <forms uuid="d095d91d-fac2-4a22-9e3f-aadb52dd2d88">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5d10b32c-5eb4-4d27-a9cd-3c7d147cc84d">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="09668165-d5e2-45a8-a307-841bacab31b1">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <commands uuid="ba778d95-167a-4177-888f-e00c234be339">
+  <name>OpenCompanyList</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <group>FormNavigationPanelGoTo</group>
+  <commandParameterType>
+   <types>CatalogRef.Partners</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Catalog>

@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e319bf6f-c225-4a0d-9fd9-549e13b1dbe0">
-  <producedTypes>
-    <refType typeId="41897b99-4b59-4d1b-8ca5-aed6c136776c" valueTypeId="b58b55ea-cad6-49f1-af78-18a40d1b59a6"/>
-    <listType typeId="46737127-bd64-4eea-b92a-cef876ef7ef6" valueTypeId="dc6e9244-3527-4bb8-bb51-f60731d0faf5"/>
-    <managerType typeId="2bfafd0c-2ad4-4938-8a4f-15cc98464f03" valueTypeId="08035db0-ac55-48b6-bd79-569fdbc4fd33"/>
-  </producedTypes>
-  <name>AgreementTypes</name>
+ <producedTypes>
+  <refType typeId="41897b99-4b59-4d1b-8ca5-aed6c136776c" valueTypeId="b58b55ea-cad6-49f1-af78-18a40d1b59a6"/>
+  <listType typeId="46737127-bd64-4eea-b92a-cef876ef7ef6" valueTypeId="dc6e9244-3527-4bb8-bb51-f60731d0faf5"/>
+  <managerType typeId="2bfafd0c-2ad4-4938-8a4f-15cc98464f03" valueTypeId="08035db0-ac55-48b6-bd79-569fdbc4fd33"/>
+ </producedTypes>
+ <name>AgreementTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Типы соглашений</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Partner term types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Sözleşme tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="578a44a6-4ba2-449e-9053-6b7fbe143f91">
+  <name>Customer</name>
   <synonym>
-    <key>en</key>
-    <value>Partner term types</value>
+   <key>ru</key>
+   <value>Клиент</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="578a44a6-4ba2-449e-9053-6b7fbe143f91">
-    <name>Customer</name>
-    <synonym>
-      <key>en</key>
-      <value>Customer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="01eff728-d491-46eb-8a1c-a99c70c7e375">
-    <name>Vendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Vendor</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Customer</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Müşteri</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="01eff728-d491-46eb-8a1c-a99c70c7e375">
+  <name>Vendor</name>
+  <synonym>
+   <key>ru</key>
+   <value>Поставщик</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Vendor</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Terarikçi</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

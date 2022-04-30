@@ -1,18 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d4372a7e-37c3-476e-9129-ff410c9069e1">
-  <producedTypes>
-    <containerType typeId="625ef7f4-0dc3-4f17-be54-a229a67361bc" valueTypeId="0960b0b0-3f12-42df-bef8-5640d8067e5d"/>
-  </producedTypes>
-  <name>typeObjectWithTaxes</name>
-  <synonym>
-    <key>en</key>
-    <value>Type object with taxes</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.PurchaseInvoice</types>
-    <types>DocumentRef.CashRevenue</types>
-    <types>DocumentRef.RetailSalesReceipt</types>
-    <types>DocumentRef.SalesInvoice</types>
-    <types>DocumentRef.CashExpense</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="625ef7f4-0dc3-4f17-be54-a229a67361bc" valueTypeId="0960b0b0-3f12-42df-bef8-5640d8067e5d"/>
+ </producedTypes>
+ <name>typeObjectWithTaxes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип объект с налогами</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type object with taxes</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip vergi içeren nesne</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.CashRevenue</types>
+  <types>DocumentRef.RetailSalesReceipt</types>
+  <types>DocumentRef.SalesInvoice</types>
+  <types>DocumentRef.CashExpense</types>
+ </type>
 </mdclass:DefinedType>

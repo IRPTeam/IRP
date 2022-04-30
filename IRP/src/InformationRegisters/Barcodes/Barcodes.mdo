@@ -1,147 +1,235 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="de24d264-7281-43a3-a558-14ef2f3b053e">
-  <producedTypes>
-    <selectionType typeId="73096f53-a65c-4acc-9fb6-e9cf86cc65b9" valueTypeId="b1069a69-f35b-495a-82d8-feda08babb7e"/>
-    <listType typeId="97b5da41-a316-42c2-8f50-2d05ddd18b56" valueTypeId="88759561-0ec4-473c-bcea-1a88b974c2d2"/>
-    <managerType typeId="50c3ab37-642a-4a87-a628-b25ef6934295" valueTypeId="fee57bd7-ed5c-4ab2-8341-2cb70d217e7c"/>
-    <recordSetType typeId="fcf81855-4f37-4295-a5fb-1e5c5a59ca59" valueTypeId="7845f14a-0bcd-4c6d-bb07-11609598a6eb"/>
-    <recordKeyType typeId="0a0e3765-c137-471c-984b-56837d07a935" valueTypeId="64bbc2d2-4e79-462b-b243-3f9bc8a73940"/>
-    <recordType typeId="34735f04-b75e-4bac-a2b2-e81425eec076" valueTypeId="1c5a2c29-580d-44e2-829a-93d72113fdc0"/>
-    <recordManagerType typeId="a15b808b-0eb9-41f2-9075-39210f37c6f4" valueTypeId="9e483d95-9800-41ff-8c1f-658a68710b92"/>
-  </producedTypes>
-  <name>Barcodes</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="de24d264-7281-43a3-a558-14ef2f3b053e">
+ <producedTypes>
+  <selectionType typeId="73096f53-a65c-4acc-9fb6-e9cf86cc65b9" valueTypeId="b1069a69-f35b-495a-82d8-feda08babb7e"/>
+  <listType typeId="97b5da41-a316-42c2-8f50-2d05ddd18b56" valueTypeId="88759561-0ec4-473c-bcea-1a88b974c2d2"/>
+  <managerType typeId="50c3ab37-642a-4a87-a628-b25ef6934295" valueTypeId="fee57bd7-ed5c-4ab2-8341-2cb70d217e7c"/>
+  <recordSetType typeId="fcf81855-4f37-4295-a5fb-1e5c5a59ca59" valueTypeId="7845f14a-0bcd-4c6d-bb07-11609598a6eb"/>
+  <recordKeyType typeId="0a0e3765-c137-471c-984b-56837d07a935" valueTypeId="64bbc2d2-4e79-462b-b243-3f9bc8a73940"/>
+  <recordType typeId="34735f04-b75e-4bac-a2b2-e81425eec076" valueTypeId="1c5a2c29-580d-44e2-829a-93d72113fdc0"/>
+  <recordManagerType typeId="a15b808b-0eb9-41f2-9075-39210f37c6f4" valueTypeId="9e483d95-9800-41ff-8c1f-658a68710b92"/>
+ </producedTypes>
+ <name>Barcodes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Штрихкоды номенклатуры</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Item barcodes</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ürün barkodları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultRecordForm>InformationRegister.Barcodes.Form.RecordForm</defaultRecordForm>
+ <defaultListForm>InformationRegister.Barcodes.Form.ListForm</defaultListForm>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Штрихкод номенклатуры</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Item barcode</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Ürün barkodu</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Штрихкоды номенклатуры</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Item barcodes</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Ürün barkodları</value>
+ </listPresentation>
+ <resources uuid="aa86891f-2265-4581-8672-22f39d95004e">
+  <name>ItemKey</name>
   <synonym>
-    <key>en</key>
-    <value>Item barcodes</value>
+   <key>ru</key>
+   <value>Характеристика</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultRecordForm>InformationRegister.Barcodes.Form.RecordForm</defaultRecordForm>
-  <defaultListForm>InformationRegister.Barcodes.Form.ListForm</defaultListForm>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Item barcode</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Item barcodes</value>
-  </listPresentation>
-  <resources uuid="aa86891f-2265-4581-8672-22f39d95004e">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-  </resources>
-  <resources uuid="1d577dee-d548-4b86-a243-efe75bd061e9">
-    <name>SerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Item serial/lot number</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="a28bcd7c-a08a-4e9b-9f1e-28e86ce01af7">
-    <name>Unit</name>
-    <synonym>
-      <key>en</key>
-      <value>Unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.ItemKey</name>
-      <field>InformationRegister.Barcodes.Resource.ItemKey</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <attributes uuid="5325c9a5-fbb3-4e4d-92a5-1c64e4c8f10f">
-    <name>Presentation</name>
-    <synonym>
-      <key>en</key>
-      <value>Presentation</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQR</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-  </attributes>
-  <dimensions uuid="72cf742b-9480-4cc3-9639-a8a877cf8539">
-    <name>Barcode</name>
-    <synonym>
-      <key>en</key>
-      <value>Barcode</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeBarcode</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="d7ce871c-ddda-43b3-a7f1-4d3149930122">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ac34f25d-9149-463f-bbd3-c6de169bcc6e">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <commands uuid="84508cd5-1f27-4220-b708-40dc9567f467">
-    <name>ShowBarcodeList</name>
-    <synonym>
-      <key>en</key>
-      <value>Barcodes</value>
-    </synonym>
-    <group>FormNavigationPanelGoTo</group>
-    <commandParameterType>
-      <types>CatalogRef.Items</types>
-      <types>CatalogRef.ItemKeys</types>
-    </commandParameterType>
-    <representation>Auto</representation>
-  </commands>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+ </resources>
+ <resources uuid="1d577dee-d548-4b86-a243-efe75bd061e9">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>ru</key>
+   <value>Серия номенклатуры</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item serial/lot number</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ürün seri/lot numarası</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="a28bcd7c-a08a-4e9b-9f1e-28e86ce01af7">
+  <name>Unit</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ед. изм.</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Unit</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Birim</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Units</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.ItemKey</name>
+   <field>InformationRegister.Barcodes.Resource.ItemKey</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <attributes uuid="5325c9a5-fbb3-4e4d-92a5-1c64e4c8f10f">
+  <name>Presentation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Представление</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Presentation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Görünüm</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQR</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+ </attributes>
+ <dimensions uuid="72cf742b-9480-4cc3-9639-a8a877cf8539">
+  <name>Barcode</name>
+  <synonym>
+   <key>ru</key>
+   <value>Штрихкод</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Barcode</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Barkod</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeBarcode</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="d7ce871c-ddda-43b3-a7f1-4d3149930122">
+  <name>RecordForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ac34f25d-9149-463f-bbd3-c6de169bcc6e">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <commands uuid="84508cd5-1f27-4220-b708-40dc9567f467">
+  <name>ShowBarcodeList</name>
+  <synonym>
+   <key>ru</key>
+   <value>Штрихкоды</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Barcodes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Barkodlar</value>
+  </synonym>
+  <group>FormNavigationPanelGoTo</group>
+  <commandParameterType>
+   <types>CatalogRef.Items</types>
+   <types>CatalogRef.ItemKeys</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:InformationRegister>

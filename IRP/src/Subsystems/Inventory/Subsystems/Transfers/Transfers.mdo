@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0273a8e5-2d20-4cf6-9999-93bf7e6f97d5">
-  <name>Transfers</name>
-  <synonym>
-    <key>en</key>
-    <value>Transfers</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.InventoryTransfer</content>
-  <content>Document.InventoryTransferOrder</content>
-  <content>Document.InternalSupplyRequest</content>
-  <parentSubsystem>Subsystem.Inventory</parentSubsystem>
+ <name>Transfers</name>
+ <synonym>
+  <key>ru</key>
+  <value>Внутреннее товародвижение</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Transfers</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Transferler</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.InventoryTransfer</content>
+ <content>Document.InventoryTransferOrder</content>
+ <content>Document.InternalSupplyRequest</content>
+ <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

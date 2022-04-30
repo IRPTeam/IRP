@@ -1,23 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="94d9a9c1-d692-42e7-bcae-533ddd13f590">
-  <producedTypes>
-    <objectType typeId="f65aac01-2229-44fb-a31c-9d2613904137" valueTypeId="de538711-9574-492c-a1b2-a150bf129cf3"/>
-    <managerType typeId="943279d3-c7d6-4d45-ba61-c117ef046495" valueTypeId="9960cbf8-ea6f-485d-8445-d686e0ba5544"/>
-  </producedTypes>
-  <name>DataHistory</name>
+ <producedTypes>
+  <objectType typeId="f65aac01-2229-44fb-a31c-9d2613904137" valueTypeId="de538711-9574-492c-a1b2-a150bf129cf3"/>
+  <managerType typeId="943279d3-c7d6-4d45-ba61-c117ef046495" valueTypeId="9960cbf8-ea6f-485d-8445-d686e0ba5544"/>
+ </producedTypes>
+ <name>DataHistory</name>
+ <synonym>
+  <key>ru</key>
+  <value>История данных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Data history</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Veri tarihçesi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.DataHistory.Form.Form</defaultForm>
+ <forms uuid="eecf5f59-6879-4439-9878-1437c32eafc0">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Data history</value>
+   <key>ru</key>
+   <value>Форма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.DataHistory.Form.Form</defaultForm>
-  <forms uuid="eecf5f59-6879-4439-9878-1437c32eafc0">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

@@ -1,43 +1,83 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b8be28ed-ec2b-4857-b2df-30ec5caeac34">
-  <producedTypes>
-    <refType typeId="d02c6411-5626-4776-814e-b71cafa36241" valueTypeId="1a166c19-5d14-4139-979e-0197a5de6f20"/>
-    <listType typeId="61c07566-08ab-4b57-94a5-f51967306bc6" valueTypeId="fb5c33dc-5270-4667-851b-c954f7841440"/>
-    <managerType typeId="2cc92df9-0400-4c42-8d26-8f3b03f46604" valueTypeId="eaaa4edb-ae38-4f6e-af9e-ad4fa0d7ecdb"/>
-  </producedTypes>
-  <name>CashAccountTypes</name>
+ <producedTypes>
+  <refType typeId="d02c6411-5626-4776-814e-b71cafa36241" valueTypeId="1a166c19-5d14-4139-979e-0197a5de6f20"/>
+  <listType typeId="61c07566-08ab-4b57-94a5-f51967306bc6" valueTypeId="fb5c33dc-5270-4667-851b-c954f7841440"/>
+  <managerType typeId="2cc92df9-0400-4c42-8d26-8f3b03f46604" valueTypeId="eaaa4edb-ae38-4f6e-af9e-ad4fa0d7ecdb"/>
+ </producedTypes>
+ <name>CashAccountTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Виды мест хранения денежных средств</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cash account types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kasa/banka tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="d51c1e26-6658-4fd9-a2bf-9bd7a8c1164d">
+  <name>Bank</name>
   <synonym>
-    <key>en</key>
-    <value>Cash account types</value>
+   <key>ru</key>
+   <value>Банковский счет</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="d51c1e26-6658-4fd9-a2bf-9bd7a8c1164d">
-    <name>Bank</name>
-    <synonym>
-      <key>en</key>
-      <value>Bank</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="574c6301-f60a-48e7-8b09-a5e75da0a750">
-    <name>Cash</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="9a4687c6-dc01-42a3-b95c-1cb860faa504">
-    <name>Transit</name>
-    <synonym>
-      <key>en</key>
-      <value>Transit</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="5656b9fa-ea7c-47ef-a836-ce78cdbc12df">
-    <name>POS</name>
-    <synonym>
-      <key>en</key>
-      <value>POS</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Bank</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Banka</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="574c6301-f60a-48e7-8b09-a5e75da0a750">
+  <name>Cash</name>
+  <synonym>
+   <key>ru</key>
+   <value>Касса</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Cash</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kasa</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="9a4687c6-dc01-42a3-b95c-1cb860faa504">
+  <name>Transit</name>
+  <synonym>
+   <key>ru</key>
+   <value>Транзитный</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Transit</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Transit</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="5656b9fa-ea7c-47ef-a836-ce78cdbc12df">
+  <name>POS</name>
+  <synonym>
+   <key>ru</key>
+   <value>РМК</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>POS</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>POS</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

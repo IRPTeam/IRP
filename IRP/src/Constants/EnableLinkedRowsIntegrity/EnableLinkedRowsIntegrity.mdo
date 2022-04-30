@@ -1,20 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fa985292-6501-4967-8cb8-14a6f143980f">
-  <producedTypes>
-    <managerType typeId="161d4720-441a-4696-b2b3-a0d7f35d9477" valueTypeId="3d851b05-5149-4959-bb59-b235539c320e"/>
-    <valueManagerType typeId="b87cb17f-86ed-464b-a785-3ba51d5751a9" valueTypeId="d8ae7ce0-716e-469c-9caf-3a6931e5d787"/>
-    <valueKeyType typeId="6ccd0d06-e183-4666-a159-35a3f613494b" valueTypeId="30549603-4c49-48c2-9cb8-4076b6ae16b2"/>
-  </producedTypes>
-  <name>EnableLinkedRowsIntegrity</name>
-  <synonym>
-    <key>en</key>
-    <value>Enable linked rows integrity</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="fa985292-6501-4967-8cb8-14a6f143980f">
+ <producedTypes>
+  <managerType typeId="161d4720-441a-4696-b2b3-a0d7f35d9477" valueTypeId="3d851b05-5149-4959-bb59-b235539c320e"/>
+  <valueManagerType typeId="b87cb17f-86ed-464b-a785-3ba51d5751a9" valueTypeId="d8ae7ce0-716e-469c-9caf-3a6931e5d787"/>
+  <valueKeyType typeId="6ccd0d06-e183-4666-a159-35a3f613494b" valueTypeId="30549603-4c49-48c2-9cb8-4076b6ae16b2"/>
+ </producedTypes>
+ <name>EnableLinkedRowsIntegrity</name>
+ <synonym>
+  <key>ru</key>
+  <value>Включить проверку целостности связанных строк</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Enable linked rows integrity</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Bağlı satır bütünlülüğü aç</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

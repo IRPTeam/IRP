@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8e929e73-27c6-48d0-9202-e74cdc7688e3">
-  <name>DocCashReceiptClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc cash receipt client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocCashReceiptClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ приходный кассовый ордер клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc cash receipt client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak kasa tahsilat fişi client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

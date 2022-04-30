@@ -1,131 +1,195 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a53d34a2-e6d9-4d3f-ab9e-ddfd3ff7af05">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a53d34a2-e6d9-4d3f-ab9e-ddfd3ff7af05">
+ <producedTypes>
+  <objectType typeId="7d789e69-70fb-4615-8e3b-236d08ccf8d1" valueTypeId="6afc77ef-e759-4367-b2cb-413ed7cb9643"/>
+  <refType typeId="f5af4c9a-1711-400d-9d05-1ca2cd11413e" valueTypeId="87b69673-de53-4000-a8a4-c3b360c60932"/>
+  <selectionType typeId="34187f5f-4d82-4597-8a4a-3cfe97d1af08" valueTypeId="79216054-c156-419c-9294-09e06f4d2fed"/>
+  <listType typeId="4093e540-1c40-4a78-86a3-fa1c9a5c2e96" valueTypeId="64d56277-7563-4190-82d0-a55de76b437e"/>
+  <managerType typeId="4209f831-4a62-407a-9e37-cc23aaa80e65" valueTypeId="3402eb52-e8b8-464f-ab06-55a8f8545b40"/>
+ </producedTypes>
+ <name>BusinessUnits</name>
+ <synonym>
+  <key>ru</key>
+  <value>Подразделения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Business units</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Departmanlar</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_BusinessUnits</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_BusinessUnits</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.BusinessUnits.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.BusinessUnits.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.BusinessUnits.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.BusinessUnits.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Подразделение</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Business unit</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Departman</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.BusinessUnits.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.BusinessUnits.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.BusinessUnits.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <tabularSections uuid="8776674e-0405-4e17-9c00-6b256c306c3b">
   <producedTypes>
-    <objectType typeId="7d789e69-70fb-4615-8e3b-236d08ccf8d1" valueTypeId="6afc77ef-e759-4367-b2cb-413ed7cb9643"/>
-    <refType typeId="f5af4c9a-1711-400d-9d05-1ca2cd11413e" valueTypeId="87b69673-de53-4000-a8a4-c3b360c60932"/>
-    <selectionType typeId="34187f5f-4d82-4597-8a4a-3cfe97d1af08" valueTypeId="79216054-c156-419c-9294-09e06f4d2fed"/>
-    <listType typeId="4093e540-1c40-4a78-86a3-fa1c9a5c2e96" valueTypeId="64d56277-7563-4190-82d0-a55de76b437e"/>
-    <managerType typeId="4209f831-4a62-407a-9e37-cc23aaa80e65" valueTypeId="3402eb52-e8b8-464f-ab06-55a8f8545b40"/>
+   <objectType typeId="99a8f668-6c85-483b-95d0-571935ca7020" valueTypeId="c692eb30-a872-4dd4-b7fb-685783ca53b7"/>
+   <rowType typeId="e6eacdac-d7a3-4ec4-afc1-8c1a10c13912" valueTypeId="2724655c-547d-47bc-ab6a-61fa5562655b"/>
   </producedTypes>
-  <name>BusinessUnits</name>
+  <name>AddAttributes</name>
   <synonym>
-    <key>en</key>
-    <value>Business units</value>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_BusinessUnits</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_BusinessUnits</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.BusinessUnits.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.BusinessUnits.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.BusinessUnits.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.BusinessUnits.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="32a2d18d-da17-4983-9fcb-afe80b4a640c">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Business unit</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.BusinessUnits.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.BusinessUnits.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.BusinessUnits.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <tabularSections uuid="8776674e-0405-4e17-9c00-6b256c306c3b">
-    <producedTypes>
-      <objectType typeId="99a8f668-6c85-483b-95d0-571935ca7020" valueTypeId="c692eb30-a872-4dd4-b7fb-685783ca53b7"/>
-      <rowType typeId="e6eacdac-d7a3-4ec4-afc1-8c1a10c13912" valueTypeId="2724655c-547d-47bc-ab6a-61fa5562655b"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="32a2d18d-da17-4983-9fcb-afe80b4a640c">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="11284a0a-3bea-4359-a642-c57b223e2b45">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.BusinessUnits.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="3b2e1f6a-39b3-4bcc-9f0e-15bf0df36432">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ad98df43-b4be-4328-894a-f01d6c6fa33c">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e8822c90-869b-4875-8e78-a729a8634330">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="11284a0a-3bea-4359-a642-c57b223e2b45">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.BusinessUnits.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="3b2e1f6a-39b3-4bcc-9f0e-15bf0df36432">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ad98df43-b4be-4328-894a-f01d6c6fa33c">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e8822c90-869b-4875-8e78-a729a8634330">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

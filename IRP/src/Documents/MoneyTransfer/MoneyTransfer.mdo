@@ -1,489 +1,737 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0f9fe51e-e30e-4599-8f63-94071df44750">
-  <producedTypes>
-    <objectType typeId="71e25b87-341c-4fd0-a5e3-bea3b186f724" valueTypeId="4f7a0819-ec55-4a87-84b9-afed972588dd"/>
-    <refType typeId="702e7263-f708-4dcf-903f-e45cb14d3cca" valueTypeId="b1d4f6a2-a55e-4fa1-b0a1-596bc7d2fa30"/>
-    <selectionType typeId="ed9c01e5-5308-4377-8d32-82be1ed8eab6" valueTypeId="417e7a1d-20ae-4905-8c50-f40cec1d84c1"/>
-    <listType typeId="466724aa-37b8-4045-922e-56314c4ac771" valueTypeId="2fc92fe5-21da-4d68-a56c-a3474efbaccf"/>
-    <managerType typeId="ffc4365b-2ec5-4120-8060-97ab96dedbf0" valueTypeId="199fa8a5-d4d1-4bb0-91a6-ad80a6b0a0df"/>
-  </producedTypes>
-  <name>MoneyTransfer</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0f9fe51e-e30e-4599-8f63-94071df44750">
+ <producedTypes>
+  <objectType typeId="71e25b87-341c-4fd0-a5e3-bea3b186f724" valueTypeId="4f7a0819-ec55-4a87-84b9-afed972588dd"/>
+  <refType typeId="702e7263-f708-4dcf-903f-e45cb14d3cca" valueTypeId="b1d4f6a2-a55e-4fa1-b0a1-596bc7d2fa30"/>
+  <selectionType typeId="ed9c01e5-5308-4377-8d32-82be1ed8eab6" valueTypeId="417e7a1d-20ae-4905-8c50-f40cec1d84c1"/>
+  <listType typeId="466724aa-37b8-4045-922e-56314c4ac771" valueTypeId="2fc92fe5-21da-4d68-a56c-a3474efbaccf"/>
+  <managerType typeId="ffc4365b-2ec5-4120-8060-97ab96dedbf0" valueTypeId="199fa8a5-d4d1-4bb0-91a6-ad80a6b0a0df"/>
+ </producedTypes>
+ <name>MoneyTransfer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Перемещение денежных средств</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Money transfer</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kasa/banka transfer fişi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.MoneyTransfer.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
+  <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
+  <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.CurrencyMovementSets.Document_CashTransferOrder</value>
+  </typesFilterValue>
+  <characteristicValues>Document.MoneyTransfer.TabularSection.Currencies</characteristicValues>
+  <objectField>Document.MoneyTransfer.TabularSection.Currencies.StandardAttribute.Ref</objectField>
+  <typeField>Document.MoneyTransfer.TabularSection.Currencies.Attribute.MovementType</typeField>
+  <valueField>Document.MoneyTransfer.TabularSection.Currencies.Attribute.Amount</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_CashTransferOrder</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_CashTransferOrder</value>
+  </typesFilterValue>
+  <characteristicValues>Document.MoneyTransfer.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.MoneyTransfer.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.MoneyTransfer.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.MoneyTransfer.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <listPresentation>
+  <key>ru</key>
+  <value>Перемещения денежных средств</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Money transfers</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Kasa/banka transfer fişleri</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.MoneyTransfer.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.MoneyTransfer.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.MoneyTransfer.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
+ <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="db3b88f3-90f6-44be-a687-9c9c7938edce">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Money transfer</value>
+   <key>ru</key>
+   <value>Организация</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.MoneyTransfer.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
-    <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
-    <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.CurrencyMovementSets.Document_CashTransferOrder</value>
-    </typesFilterValue>
-    <characteristicValues>Document.MoneyTransfer.TabularSection.Currencies</characteristicValues>
-    <objectField>Document.MoneyTransfer.TabularSection.Currencies.StandardAttribute.Ref</objectField>
-    <typeField>Document.MoneyTransfer.TabularSection.Currencies.Attribute.MovementType</typeField>
-    <valueField>Document.MoneyTransfer.TabularSection.Currencies.Attribute.Amount</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_CashTransferOrder</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_CashTransferOrder</value>
-    </typesFilterValue>
-    <characteristicValues>Document.MoneyTransfer.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.MoneyTransfer.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.MoneyTransfer.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.MoneyTransfer.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <listPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0567feaf-125f-4419-9ff1-676ebe2d168e">
+  <name>ReceiveAmount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма получения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Receive amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tahsilat tutarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ed4a9ddd-9bc3-4fb6-bc78-37c24d81c015">
+  <name>ReceiveCurrency</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта получения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Receive currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alıcı dövizi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3975e669-7ac2-472e-ae11-5c5025ef6eec">
+  <name>Receiver</name>
+  <synonym>
+   <key>ru</key>
+   <value>Получатель</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Receiver</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alıcı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0e3f3ec1-321a-4e0a-8bc2-ffda31c7403a">
+  <name>ReceiveUUID</name>
+  <synonym>
+   <key>ru</key>
+   <value>UUID получения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Receive UUID</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gelen UUID</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="61dbec7b-d636-42ab-9792-b18d433d00ef">
+  <name>SendAmount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма отправки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Send amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gönderilen tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ec2e9c21-c7b7-4c02-a981-0501158fe10d">
+  <name>SendCurrency</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта отправки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Send currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gönderilen döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e92653c6-60db-43c2-8b0f-79e9672cdd70">
+  <name>Sender</name>
+  <synonym>
+   <key>ru</key>
+   <value>Отправитель</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Sender</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gönderen</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8ab2b1eb-6488-4f55-b3f8-5ce5d51bfdc7">
+  <name>SendUUID</name>
+  <synonym>
+   <key>ru</key>
+   <value>UUID отправки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Send UUID</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Giden UUID</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ae48a328-6a3c-42d4-bb0e-7720590982ea">
+  <name>SendFinancialMovementType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Статья ДДС отправки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Send financial movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gelen finans hareket tipi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9ee7e0f1-60a3-4b8c-91f0-4e0c29751d21">
+  <name>ReceiveFinancialMovementType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Статья ДДС получения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Receive financial movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Giden finans hareket tipi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e2c6e6ef-8052-4cf6-a946-6861924eafdb">
+  <name>CashTransferOrder</name>
+  <synonym>
+   <key>ru</key>
+   <value>Заявка на перемещение денежных средств</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Cash transfer order</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Finansal transfer siparişi</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.CashTransferOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="9199dc05-6aa4-4c94-99b2-08023fc5cb21">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e12d5815-d60a-43b5-9e38-b1916318f61b">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3c0208f6-3606-4489-8e60-6c212becb01f">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="62237176-c457-4ef9-b148-51400c38000c">
+  <producedTypes>
+   <objectType typeId="c2370344-91c1-4a9d-8f9c-55a73767114c" valueTypeId="7394966f-6967-4ac8-bb7f-75f8f6617ca8"/>
+   <rowType typeId="7407cdfe-1b6e-4e8a-897b-4ec5fd51490b" valueTypeId="8aa23968-35d0-462a-911e-9e2ad6322560"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currencies</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dövizler</value>
+  </synonym>
+  <attributes uuid="10e9a6e6-e514-468d-9014-ccc46497184c">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Money transfers</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.MoneyTransfer.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.MoneyTransfer.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.MoneyTransfer.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="db3b88f3-90f6-44be-a687-9c9c7938edce">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="0567feaf-125f-4419-9ff1-676ebe2d168e">
-    <name>ReceiveAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Receive amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="df2c0881-c453-4666-a4cb-6a1a1eddf05f">
+   <name>CurrencyFrom</name>
+   <synonym>
+    <key>ru</key>
+    <value>С валюты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Currency from</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Dövizden</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="ed4a9ddd-9bc3-4fb6-bc78-37c24d81c015">
-    <name>ReceiveCurrency</name>
-    <synonym>
-      <key>en</key>
-      <value>Receive currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="35bbb0ff-bfba-478c-aa5b-0df22fe72d1b">
+   <name>Rate</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ставка</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Rate</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Oran</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="3975e669-7ac2-472e-ae11-5c5025ef6eec">
-    <name>Receiver</name>
-    <synonym>
-      <key>en</key>
-      <value>Receiver</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="60618173-0af8-4226-ac45-f4c7dd693487">
+   <name>ReverseRate</name>
+   <synonym>
+    <key>ru</key>
+    <value>Обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Reverse rate</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="0e3f3ec1-321a-4e0a-8bc2-ffda31c7403a">
-    <name>ReceiveUUID</name>
-    <synonym>
-      <key>en</key>
-      <value>Receive UUID</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="9202442c-af78-458a-a707-e7c64034169c">
+   <name>ShowReverseRate</name>
+   <synonym>
+    <key>ru</key>
+    <value>Показать обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Show reverse rate</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur göster</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="61dbec7b-d636-42ab-9792-b18d433d00ef">
-    <name>SendAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Send amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="6f2c3340-7217-444b-a7c0-794e4734f405">
+   <name>Multiplicity</name>
+   <synonym>
+    <key>ru</key>
+    <value>Кратность</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Multiplicity</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Çarpan</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="ec2e9c21-c7b7-4c02-a981-0501158fe10d">
-    <name>SendCurrency</name>
-    <synonym>
-      <key>en</key>
-      <value>Send currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="1879bafc-ab0e-443d-8c51-fef15a1f471d">
+   <name>MovementType</name>
+   <synonym>
+    <key>ru</key>
+    <value>Статья движених денежных средств</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Movement type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hareket tipi</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="e92653c6-60db-43c2-8b0f-79e9672cdd70">
-    <name>Sender</name>
-    <synonym>
-      <key>en</key>
-      <value>Sender</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="7c3731fc-0542-4923-802a-9ae36614a8a2">
+   <name>Amount</name>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма оплаты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="8ab2b1eb-6488-4f55-b3f8-5ce5d51bfdc7">
-    <name>SendUUID</name>
-    <synonym>
-      <key>en</key>
-      <value>Send UUID</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="346eda3b-b101-447e-a656-1febfb0e921b">
+   <name>IsFixed</name>
+   <synonym>
+    <key>ru</key>
+    <value>Фиксированный</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Is fixed</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sabittir</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="ae48a328-6a3c-42d4-bb0e-7720590982ea">
-    <name>SendFinancialMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Send financial movement type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="ea5dc853-90e9-40e8-bccc-69123cb23358">
+  <producedTypes>
+   <objectType typeId="4e60ef29-f264-4613-b68b-b2343f601e85" valueTypeId="3710baf3-a847-4e77-9751-a7e64136aee2"/>
+   <rowType typeId="3168233a-911c-4b36-be21-cf8a5ab72d71" valueTypeId="893bc024-9ea4-4e34-a381-618def80a6a4"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="109b0ade-f442-483f-8ce6-976fee756226">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="9ee7e0f1-60a3-4b8c-91f0-4e0c29751d21">
-    <name>ReceiveFinancialMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Receive financial movement type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="39c3a370-a1e4-498d-b148-a4091dbe335f">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.MoneyTransfer.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="e2c6e6ef-8052-4cf6-a946-6861924eafdb">
-    <name>CashTransferOrder</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash transfer order</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CashTransferOrder</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="9199dc05-6aa4-4c94-99b2-08023fc5cb21">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e12d5815-d60a-43b5-9e38-b1916318f61b">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3c0208f6-3606-4489-8e60-6c212becb01f">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="62237176-c457-4ef9-b148-51400c38000c">
-    <producedTypes>
-      <objectType typeId="c2370344-91c1-4a9d-8f9c-55a73767114c" valueTypeId="7394966f-6967-4ac8-bb7f-75f8f6617ca8"/>
-      <rowType typeId="7407cdfe-1b6e-4e8a-897b-4ec5fd51490b" valueTypeId="8aa23968-35d0-462a-911e-9e2ad6322560"/>
-    </producedTypes>
-    <name>Currencies</name>
-    <synonym>
-      <key>en</key>
-      <value>Currencies</value>
-    </synonym>
-    <attributes uuid="10e9a6e6-e514-468d-9014-ccc46497184c">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="df2c0881-c453-4666-a4cb-6a1a1eddf05f">
-      <name>CurrencyFrom</name>
-      <synonym>
-        <key>en</key>
-        <value>Currency from</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Currencies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="35bbb0ff-bfba-478c-aa5b-0df22fe72d1b">
-      <name>Rate</name>
-      <synonym>
-        <key>en</key>
-        <value>Rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="60618173-0af8-4226-ac45-f4c7dd693487">
-      <name>ReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Reverse rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9202442c-af78-458a-a707-e7c64034169c">
-      <name>ShowReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Show reverse rate</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6f2c3340-7217-444b-a7c0-794e4734f405">
-      <name>Multiplicity</name>
-      <synonym>
-        <key>en</key>
-        <value>Multiplicity</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="1879bafc-ab0e-443d-8c51-fef15a1f471d">
-      <name>MovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Movement type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7c3731fc-0542-4923-802a-9ae36614a8a2">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="346eda3b-b101-447e-a656-1febfb0e921b">
-      <name>IsFixed</name>
-      <synonym>
-        <key>en</key>
-        <value>Is fixed</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="ea5dc853-90e9-40e8-bccc-69123cb23358">
-    <producedTypes>
-      <objectType typeId="4e60ef29-f264-4613-b68b-b2343f601e85" valueTypeId="3710baf3-a847-4e77-9751-a7e64136aee2"/>
-      <rowType typeId="3168233a-911c-4b36-be21-cf8a5ab72d71" valueTypeId="893bc024-9ea4-4e34-a381-618def80a6a4"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="109b0ade-f442-483f-8ce6-976fee756226">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="39c3a370-a1e4-498d-b148-a4091dbe335f">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.MoneyTransfer.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <commands uuid="f2e159f1-ef98-4bfe-93af-b0e8d28fa31b">
-    <name>GenerateMoneyTransfer</name>
-    <synonym>
-      <key>en</key>
-      <value>Money transfer</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.CashTransferOrder</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-  </commands>
+ </tabularSections>
+ <commands uuid="f2e159f1-ef98-4bfe-93af-b0e8d28fa31b">
+  <name>GenerateMoneyTransfer</name>
+  <synonym>
+   <key>ru</key>
+   <value>Перемещение денежных средств</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Money transfer</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kasa/banka transfer fişi</value>
+  </synonym>
+  <group>FormCommandBarCreateBasedOn</group>
+  <commandParameterType>
+   <types>DocumentRef.CashTransferOrder</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

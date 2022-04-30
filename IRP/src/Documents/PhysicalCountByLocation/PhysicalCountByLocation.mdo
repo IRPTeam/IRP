@@ -1,375 +1,575 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="68776962-9298-4319-98da-22abfc39c643">
-  <producedTypes>
-    <objectType typeId="3c21905f-94db-4a0f-9408-2e3c6837d94f" valueTypeId="6d46a42b-5758-4186-9cd7-25e1e1e4ac95"/>
-    <refType typeId="7e0906a1-5e1f-4885-a670-98c1e26a21ed" valueTypeId="9ab978ce-deaa-4c2b-a109-6752db329f62"/>
-    <selectionType typeId="11610ca9-82f5-4f7d-99d0-3b47f3284bc7" valueTypeId="0de493bf-0104-4bac-8583-e8c67e86aa7b"/>
-    <listType typeId="9834fed3-61fb-428e-82e5-d722338345d0" valueTypeId="6572c484-4896-469a-83f2-1a80eda945f1"/>
-    <managerType typeId="a9777923-ea54-4ecb-9734-f84dfc506547" valueTypeId="ab9c3dab-ece3-424b-9c63-e3dd869af184"/>
-  </producedTypes>
-  <name>PhysicalCountByLocation</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="68776962-9298-4319-98da-22abfc39c643">
+ <producedTypes>
+  <objectType typeId="3c21905f-94db-4a0f-9408-2e3c6837d94f" valueTypeId="6d46a42b-5758-4186-9cd7-25e1e1e4ac95"/>
+  <refType typeId="7e0906a1-5e1f-4885-a670-98c1e26a21ed" valueTypeId="9ab978ce-deaa-4c2b-a109-6752db329f62"/>
+  <selectionType typeId="11610ca9-82f5-4f7d-99d0-3b47f3284bc7" valueTypeId="0de493bf-0104-4bac-8583-e8c67e86aa7b"/>
+  <listType typeId="9834fed3-61fb-428e-82e5-d722338345d0" valueTypeId="6572c484-4896-469a-83f2-1a80eda945f1"/>
+  <managerType typeId="a9777923-ea54-4ecb-9734-f84dfc506547" valueTypeId="ab9c3dab-ece3-424b-9c63-e3dd869af184"/>
+ </producedTypes>
+ <name>PhysicalCountByLocation</name>
+ <synonym>
+  <key>ru</key>
+  <value>Пересчет товаров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Physical count by location</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Lokasyon sayım fişi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.PhysicalCountByLocation.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_PhysicalCountByLocation</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_PhysicalCountByLocation</value>
+  </typesFilterValue>
+  <characteristicValues>Document.PhysicalCountByLocation.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Локация пересчета</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Location count</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Lokasyon sayımı</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Пересчеты товаров</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Physical count by location list</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Lokasyon sayım fiş listesi</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.PhysicalCountByLocation.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.PhysicalCountByLocation.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.PhysicalCountByLocation.Form.ChoiceForm</defaultChoiceForm>
+ <posting>Deny</posting>
+ <realTimePosting>Deny</realTimePosting>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="0a2b235a-cf47-41d9-87f4-a12e7d32c118">
+  <name>Barcode</name>
   <synonym>
-    <key>en</key>
-    <value>Physical count by location</value>
+   <key>ru</key>
+   <value>Штрихкод</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.PhysicalCountByLocation.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_PhysicalCountByLocation</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_PhysicalCountByLocation</value>
-    </typesFilterValue>
-    <characteristicValues>Document.PhysicalCountByLocation.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Barcode</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Barkod</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeBarcode</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c6410d44-1a5c-44ad-8a8f-17968de73e3c">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0670f01e-a581-46af-b5d8-968db0acec20">
+  <name>PhysicalInventory</name>
+  <synonym>
+   <key>ru</key>
+   <value>Инвентаризация товаров</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Physical inventory</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sayım fişi</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PhysicalInventory</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="4774f18c-b89a-48c7-8498-587dc88fc10b">
+  <name>ResponsiblePerson</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ответственный</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Responsible person</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sorumlu kişi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="907b4287-36b3-476d-b6bd-46db651096a9">
+  <name>ResponsibleUser</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ответсвенный</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Responsible user</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sorumlu kişi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3d50db2e-55b6-4f69-b8a9-276c663313d9">
+  <name>RuleEditQuantity</name>
+  <synonym>
+   <key>ru</key>
+   <value>Правило - устанавливать количество</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Rule edit quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kural - miktar düzltme</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="617d2d2e-4327-4dde-bf74-cae8fd0ef57f">
+  <name>Status</name>
+  <synonym>
+   <key>ru</key>
+   <value>Статус</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Status</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Statü</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ObjectStatuses</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.Parent</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Catalog.ObjectStatuses.PhysicalCountByLocation</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c9902a9d-1174-45fa-bbc5-41b9ea756f1f">
+  <name>Store</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="ad26591d-5369-4c93-9de5-6ffa616f750a">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5710b461-fe76-41e1-b168-8f34f9d4946d">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="abb77983-2652-4630-8d3b-d7f0e0b73023">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="942e8a25-95aa-4552-83b4-30c03cbe4d9d">
+  <producedTypes>
+   <objectType typeId="47ebebbf-d447-479a-a2f5-150f52feb653" valueTypeId="3e679140-e25f-4022-bdde-089669543de0"/>
+   <rowType typeId="473113f9-1ebe-4ea4-a67c-d491f1f6c4e5" valueTypeId="dc6dab6d-3e86-4848-9d99-8fde15be9624"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>ru</key>
+   <value>Товары</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item list</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
+  </synonym>
+  <attributes uuid="adbcd93d-59b8-4572-8b4c-cbbbff9f728c">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Location count</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0b4a2426-e0df-4e0b-9723-b57404f2de24">
+   <name>ItemKey</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Physical count by location list</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.PhysicalCountByLocation.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.PhysicalCountByLocation.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.PhysicalCountByLocation.Form.ChoiceForm</defaultChoiceForm>
-  <posting>Deny</posting>
-  <realTimePosting>Deny</realTimePosting>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="0a2b235a-cf47-41d9-87f4-a12e7d32c118">
-    <name>Barcode</name>
-    <synonym>
-      <key>en</key>
-      <value>Barcode</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeBarcode</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Item key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Varyant</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="c6410d44-1a5c-44ad-8a8f-17968de73e3c">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="6f24d3f6-3c19-408a-9a11-0f5aca352919">
+   <name>Unit</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ед. изм.</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Unit</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Birim</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="0670f01e-a581-46af-b5d8-968db0acec20">
-    <name>PhysicalInventory</name>
-    <synonym>
-      <key>en</key>
-      <value>Physical inventory</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.PhysicalInventory</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="6d61c175-fc85-47f0-899a-619b8afcb279">
+   <name>ExpCount</name>
+   <synonym>
+    <key>ru</key>
+    <value>По учету</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Exp. count</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Stok adedi</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="4774f18c-b89a-48c7-8498-587dc88fc10b">
-    <name>ResponsiblePerson</name>
-    <synonym>
-      <key>en</key>
-      <value>Responsible person</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="8c76278a-732a-45fb-990f-ee828502d953">
+   <name>PhysCount</name>
+   <synonym>
+    <key>ru</key>
+    <value>Фактическое количество</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Phys. count</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sayım adedi</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="907b4287-36b3-476d-b6bd-46db651096a9">
-    <name>ResponsibleUser</name>
-    <synonym>
-      <key>en</key>
-      <value>Responsible user</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="e8610d01-491d-459f-8cdf-f3ed0cc0bcea">
+   <name>Difference</name>
+   <synonym>
+    <key>ru</key>
+    <value>Разница</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Difference</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Fark</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="3d50db2e-55b6-4f69-b8a9-276c663313d9">
-    <name>RuleEditQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Rule edit quantity</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="30deb38e-fd24-44c5-a4e5-98d68e749fd7">
+  <producedTypes>
+   <objectType typeId="b9c3e222-37f1-4225-b003-f2815bdac500" valueTypeId="22305f38-c152-40ec-bea2-e7bf8c9e3d8f"/>
+   <rowType typeId="109d8b08-d03c-485d-8a5f-9678d110ab60" valueTypeId="798f3e7e-3696-4406-9311-596d7103da04"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="a26a3d65-2095-41bb-aaa4-3f662a4474aa">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="617d2d2e-4327-4dde-bf74-cae8fd0ef57f">
-    <name>Status</name>
-    <synonym>
-      <key>en</key>
-      <value>Status</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ObjectStatuses</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.Parent</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Catalog.ObjectStatuses.PhysicalCountByLocation</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="39412199-869b-42fa-a4c1-02cd6858c303">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.PhysicalCountByLocation.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="c9902a9d-1174-45fa-bbc5-41b9ea756f1f">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="ad26591d-5369-4c93-9de5-6ffa616f750a">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="5710b461-fe76-41e1-b168-8f34f9d4946d">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="abb77983-2652-4630-8d3b-d7f0e0b73023">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="942e8a25-95aa-4552-83b4-30c03cbe4d9d">
-    <producedTypes>
-      <objectType typeId="47ebebbf-d447-479a-a2f5-150f52feb653" valueTypeId="3e679140-e25f-4022-bdde-089669543de0"/>
-      <rowType typeId="473113f9-1ebe-4ea4-a67c-d491f1f6c4e5" valueTypeId="dc6dab6d-3e86-4848-9d99-8fde15be9624"/>
-    </producedTypes>
-    <name>ItemList</name>
-    <synonym>
-      <key>en</key>
-      <value>Item list</value>
-    </synonym>
-    <attributes uuid="adbcd93d-59b8-4572-8b4c-cbbbff9f728c">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="0b4a2426-e0df-4e0b-9723-b57404f2de24">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6f24d3f6-3c19-408a-9a11-0f5aca352919">
-      <name>Unit</name>
-      <synonym>
-        <key>en</key>
-        <value>Unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Units</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6d61c175-fc85-47f0-899a-619b8afcb279">
-      <name>ExpCount</name>
-      <synonym>
-        <key>en</key>
-        <value>Exp. count</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="8c76278a-732a-45fb-990f-ee828502d953">
-      <name>PhysCount</name>
-      <synonym>
-        <key>en</key>
-        <value>Phys. count</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="e8610d01-491d-459f-8cdf-f3ed0cc0bcea">
-      <name>Difference</name>
-      <synonym>
-        <key>en</key>
-        <value>Difference</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="30deb38e-fd24-44c5-a4e5-98d68e749fd7">
-    <producedTypes>
-      <objectType typeId="b9c3e222-37f1-4225-b003-f2815bdac500" valueTypeId="22305f38-c152-40ec-bea2-e7bf8c9e3d8f"/>
-      <rowType typeId="109d8b08-d03c-485d-8a5f-9678d110ab60" valueTypeId="798f3e7e-3696-4406-9311-596d7103da04"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="a26a3d65-2095-41bb-aaa4-3f662a4474aa">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="39412199-869b-42fa-a4c1-02cd6858c303">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.PhysicalCountByLocation.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <templates uuid="38c4f8d6-b3a2-4c8b-806a-39dd553bc10c">
-    <name>PrintQR</name>
-    <synonym>
-      <key>en</key>
-      <value>Print QR</value>
-    </synonym>
-  </templates>
-  <commands uuid="66a904b5-df3b-4dc7-946d-495c6f10f23d">
-    <name>PrintQR</name>
-    <group>FormCommandBarImportant</group>
-    <commandParameterType>
-      <types>DocumentRef.PhysicalCountByLocation</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-  </commands>
+ </tabularSections>
+ <templates uuid="38c4f8d6-b3a2-4c8b-806a-39dd553bc10c">
+  <name>PrintQR</name>
+  <synonym>
+   <key>ru</key>
+   <value>Распечатать QR</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Print QR</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>QR Yazdır</value>
+  </synonym>
+ </templates>
+ <commands uuid="66a904b5-df3b-4dc7-946d-495c6f10f23d">
+  <name>PrintQR</name>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType>
+   <types>DocumentRef.PhysicalCountByLocation</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

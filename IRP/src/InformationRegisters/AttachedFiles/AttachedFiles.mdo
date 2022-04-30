@@ -1,98 +1,154 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="51464da2-69a0-446f-b4f5-e1489d29db0e">
-  <producedTypes>
-    <selectionType typeId="5d414f31-1670-4aa6-8bb7-aa303b960ec9" valueTypeId="2235a6aa-cbdc-41fc-aa6d-473b6d1fa7b8"/>
-    <listType typeId="8ea4f5a6-44dc-4daf-91d8-bdca9547e01a" valueTypeId="ad874464-8a5b-423d-bd8d-ae9c9072d81c"/>
-    <managerType typeId="891c99d6-b4f3-4e95-bb47-1d491964d0af" valueTypeId="401b1aa8-7037-4171-85bf-461b3b24fc18"/>
-    <recordSetType typeId="9f01dc96-3721-4d3f-8fc5-6034e22f0869" valueTypeId="ff112c22-abca-4bef-baa1-e2475518eea9"/>
-    <recordKeyType typeId="9539a1c8-01d0-4eed-850d-dae647e3dfde" valueTypeId="317031f9-0658-44b7-b21e-18e76bbf91af"/>
-    <recordType typeId="91840248-4a3f-4f39-b14c-eb8a0970eb88" valueTypeId="fdbd5f0e-00d8-4a86-b503-4dd6aafdba22"/>
-    <recordManagerType typeId="38dfa81f-ff63-4780-9adf-104d6e53262b" valueTypeId="de8edf16-2904-4983-9d9e-925acbef8621"/>
-  </producedTypes>
-  <name>AttachedFiles</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="51464da2-69a0-446f-b4f5-e1489d29db0e">
+ <producedTypes>
+  <selectionType typeId="5d414f31-1670-4aa6-8bb7-aa303b960ec9" valueTypeId="2235a6aa-cbdc-41fc-aa6d-473b6d1fa7b8"/>
+  <listType typeId="8ea4f5a6-44dc-4daf-91d8-bdca9547e01a" valueTypeId="ad874464-8a5b-423d-bd8d-ae9c9072d81c"/>
+  <managerType typeId="891c99d6-b4f3-4e95-bb47-1d491964d0af" valueTypeId="401b1aa8-7037-4171-85bf-461b3b24fc18"/>
+  <recordSetType typeId="9f01dc96-3721-4d3f-8fc5-6034e22f0869" valueTypeId="ff112c22-abca-4bef-baa1-e2475518eea9"/>
+  <recordKeyType typeId="9539a1c8-01d0-4eed-850d-dae647e3dfde" valueTypeId="317031f9-0658-44b7-b21e-18e76bbf91af"/>
+  <recordType typeId="91840248-4a3f-4f39-b14c-eb8a0970eb88" valueTypeId="fdbd5f0e-00d8-4a86-b503-4dd6aafdba22"/>
+  <recordManagerType typeId="38dfa81f-ff63-4780-9adf-104d6e53262b" valueTypeId="de8edf16-2904-4983-9d9e-925acbef8621"/>
+ </producedTypes>
+ <name>AttachedFiles</name>
+ <synonym>
+  <key>ru</key>
+  <value>Прикрепленные файлы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Attached files</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dış dosyalar</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Прикрепленный файл</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Attached file</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Dış dosya</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Прикрепленные файлы</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Attached files</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Dış dosyalar</value>
+ </listPresentation>
+ <resources uuid="21dca71f-b68c-4283-bb07-94fb7a86dd8f">
+  <name>Priority</name>
   <synonym>
-    <key>en</key>
-    <value>Attached files</value>
+   <key>ru</key>
+   <value>Приоритет</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Attached file</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Attached files</value>
-  </listPresentation>
-  <resources uuid="21dca71f-b68c-4283-bb07-94fb7a86dd8f">
-    <name>Priority</name>
-    <synonym>
-      <key>en</key>
-      <value>Priority</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <attributes uuid="3a569aa1-4f93-4139-a71b-e285d070886e">
-    <name>CreationDate</name>
-    <synonym>
-      <key>en</key>
-      <value>Creation date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <dimensions uuid="6a2ce54d-155f-4064-9a4b-43c8a8aefc63">
-    <name>Owner</name>
-    <synonym>
-      <key>en</key>
-      <value>Owner</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeFilesOwner</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="dd894eb2-bc76-4f09-bfe7-5c4f650512ad">
-    <name>File</name>
-    <synonym>
-      <key>en</key>
-      <value>File</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Files</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Priority</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Önem</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <attributes uuid="3a569aa1-4f93-4139-a71b-e285d070886e">
+  <name>CreationDate</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дата создания</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Creation date</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Oluşturma tarihi</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <dimensions uuid="6a2ce54d-155f-4064-9a4b-43c8a8aefc63">
+  <name>Owner</name>
+  <synonym>
+   <key>ru</key>
+   <value>Владелец</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Owner</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sahip</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeFilesOwner</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="dd894eb2-bc76-4f09-bfe7-5c4f650512ad">
+  <name>File</name>
+  <synonym>
+   <key>ru</key>
+   <value>Файл</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>File</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dosya</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Files</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

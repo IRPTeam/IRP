@@ -1,16 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonCommand xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c17260bc-05a0-48ea-87ea-bdfe487cc7ac">
-  <name>AttachedFiles</name>
-  <synonym>
-    <key>en</key>
-    <value>Attached files</value>
-  </synonym>
-  <group>FormCommandBarImportant</group>
-  <commandParameterType>
-    <types>DefinedType.typeFilesOwner</types>
-  </commandParameterType>
-  <representation>Auto</representation>
-  <picture xsi:type="core:PictureRef">
-    <picture>StdPicture.Attach</picture>
-  </picture>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c17260bc-05a0-48ea-87ea-bdfe487cc7ac">
+ <name>AttachedFiles</name>
+ <synonym>
+  <key>ru</key>
+  <value>Прикрепленные файлы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Attached files</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dış dosyalar</value>
+ </synonym>
+ <group>FormCommandBarImportant</group>
+ <commandParameterType>
+  <types>DefinedType.typeFilesOwner</types>
+ </commandParameterType>
+ <representation>Auto</representation>
+ <picture xsi:type="core:PictureRef">
+  <picture>StdPicture.Attach</picture>
+ </picture>
 </mdclass:CommonCommand>

@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c379b3b0-800f-45ba-bc72-6259f0530fb9">
-  <name>SaasMode</name>
-  <synonym>
-    <key>en</key>
-    <value>Saas mode</value>
-  </synonym>
-  <location>Constant.SaasMode</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Subsystem.Saas</content>
-  <content>Catalog.DataAreas</content>
+ <name>SaasMode</name>
+ <synonym>
+  <key>ru</key>
+  <value>Saas режим</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Saas mode</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Saas biçimi</value>
+ </synonym>
+ <location>Constant.SaasMode</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Subsystem.Saas</content>
+ <content>Catalog.DataAreas</content>
 </mdclass:FunctionalOption>

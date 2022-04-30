@@ -1,22 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5bd62a8a-d58e-4831-a9b9-c7394b394bef">
-  <producedTypes>
-    <refType typeId="b7925b95-38a0-4a91-b826-9800a12bcd39" valueTypeId="5f17503a-49f6-42e5-8d5f-013efa0e4086"/>
-    <listType typeId="64cc2c3a-d17d-404f-8cba-07da975ac502" valueTypeId="74b48eb7-6c32-40ce-ae5e-9bd4a6c9d308"/>
-    <managerType typeId="1b8e9274-8cb9-4415-a830-41844b4a5871" valueTypeId="e63940f5-df69-4a56-9c66-0a751e31d19c"/>
-  </producedTypes>
-  <name>SerialNumbersOwner</name>
+ <producedTypes>
+  <refType typeId="b7925b95-38a0-4a91-b826-9800a12bcd39" valueTypeId="5f17503a-49f6-42e5-8d5f-013efa0e4086"/>
+  <listType typeId="64cc2c3a-d17d-404f-8cba-07da975ac502" valueTypeId="74b48eb7-6c32-40ce-ae5e-9bd4a6c9d308"/>
+  <managerType typeId="1b8e9274-8cb9-4415-a830-41844b4a5871" valueTypeId="e63940f5-df69-4a56-9c66-0a751e31d19c"/>
+ </producedTypes>
+ <name>SerialNumbersOwner</name>
+ <synonym>
+  <key>ru</key>
+  <value>Владелец серийного номера</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Serial numbers owner</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Seri numaralarının sahibi</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="2a48a7ee-d8e9-46d7-b2d7-996331a0150a">
+  <name>ItemType</name>
   <synonym>
-    <key>en</key>
-    <value>Serial numbers owner</value>
+   <key>ru</key>
+   <value>Вид номенклатуры</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="2a48a7ee-d8e9-46d7-b2d7-996331a0150a">
-    <name>ItemType</name>
-    <synonym>
-      <key>en</key>
-      <value>Item type</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Item type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme tipi</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

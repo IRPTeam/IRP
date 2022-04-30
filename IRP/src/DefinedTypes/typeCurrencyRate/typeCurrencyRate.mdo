@@ -1,18 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="85912d3f-546f-427a-9d06-7d4155f5581f">
-  <producedTypes>
-    <containerType typeId="6e260e3a-f402-4d64-9d3d-c76311db0daf" valueTypeId="e0b8f125-0b03-44d8-91bb-50a6989a9130"/>
-  </producedTypes>
-  <name>typeCurrencyRate</name>
-  <synonym>
-    <key>en</key>
-    <value>Type currency rate</value>
-  </synonym>
-  <type>
-    <types>Number</types>
-    <numberQualifiers>
-      <precision>14</precision>
-      <scale>4</scale>
-    </numberQualifiers>
-  </type>
+ <producedTypes>
+  <containerType typeId="6e260e3a-f402-4d64-9d3d-c76311db0daf" valueTypeId="e0b8f125-0b03-44d8-91bb-50a6989a9130"/>
+ </producedTypes>
+ <name>typeCurrencyRate</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип курс валют</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type currency rate</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip döviz kuru</value>
+ </synonym>
+ <type>
+  <types>Number</types>
+  <numberQualifiers>
+   <precision>14</precision>
+   <scale>4</scale>
+  </numberQualifiers>
+ </type>
 </mdclass:DefinedType>

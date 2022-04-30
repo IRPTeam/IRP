@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7ee0b06d-d3b7-48bf-a935-e6f57da75780">
-  <name>BeforeWrite_DocumentsLockDataModification</name>
-  <synonym>
-    <key>en</key>
-    <value>Before write documents lock data modification</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>BeforeWrite</event>
-  <handler>CommonModule.LockDataModificationPrivileged.BeforeWrite_DocumentsLockDataModification</handler>
+ <name>BeforeWrite_DocumentsLockDataModification</name>
+ <synonym>
+  <key>ru</key>
+  <value>Перед записью документов запрет изменения данных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Before write documents lock data modification</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kaydetmeden önce eraklar veri düzeltme kısıtlaması</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.LockDataModificationPrivileged.BeforeWrite_DocumentsLockDataModification</handler>
 </mdclass:EventSubscription>

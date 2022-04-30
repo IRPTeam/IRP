@@ -1,25 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="daf80fe7-152c-48ef-97e6-445975662a3a">
-  <name>Saas</name>
-  <synonym>
-    <key>en</key>
-    <value>Saas</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Cloud</picture>
-  </picture>
-  <content>SessionParameter.IDValue</content>
-  <content>SessionParameter.IDUse</content>
-  <content>CommonAttribute.ID</content>
-  <content>Catalog.DataAreas</content>
-  <content>CommonModule.Saas</content>
-  <content>CommonModule.SaasClient</content>
-  <content>Catalog.Extensions</content>
-  <content>CommonPicture.Cloud</content>
-  <content>ScheduledJob.AreaUpdate</content>
-  <content>Enum.DataAreaStatus</content>
-  <content>Constant.SaasMode</content>
-  <content>FunctionalOption.SaasMode</content>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="daf80fe7-152c-48ef-97e6-445975662a3a">
+ <name>Saas</name>
+ <synonym>
+  <key>ru</key>
+  <value>SaaS</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Saas</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Saas</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Cloud</picture>
+ </picture>
+ <content>SessionParameter.IDValue</content>
+ <content>SessionParameter.IDUse</content>
+ <content>CommonAttribute.ID</content>
+ <content>Catalog.DataAreas</content>
+ <content>CommonModule.Saas</content>
+ <content>CommonModule.SaasClient</content>
+ <content>Catalog.Extensions</content>
+ <content>CommonPicture.Cloud</content>
+ <content>ScheduledJob.AreaUpdate</content>
+ <content>Enum.DataAreaStatus</content>
+ <content>Constant.SaasMode</content>
+ <content>FunctionalOption.SaasMode</content>
 </mdclass:Subsystem>

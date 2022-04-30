@@ -1,4 +1,4 @@
-#Region FORM
+﻿#Region FORM
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)

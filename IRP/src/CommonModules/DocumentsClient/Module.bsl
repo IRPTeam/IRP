@@ -1,4 +1,4 @@
-#Region FormEvents
+﻿#Region FormEvents
 
 // @deprecated
 //Procedure OnOpen(Object, Form, Cancel) Export

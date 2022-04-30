@@ -1,133 +1,205 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:ChartOfCharacteristicTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e576a633-fe90-4b81-9537-fd9ff1c87df4">
-  <producedTypes>
-    <objectType typeId="2c5cc4ec-683e-4036-af5f-df02a2d4fcd4" valueTypeId="a5f1808f-c853-4826-b0fb-e99f3ae856ef"/>
-    <refType typeId="17cc0e35-6c36-4df6-8c96-0640b069fa5a" valueTypeId="c1e5cd9e-1b90-476f-bcff-ca635c1ba210"/>
-    <selectionType typeId="e6875ff1-bdbe-431b-be66-ae85590a56b9" valueTypeId="9147347f-248e-429a-90b2-52dd309068e5"/>
-    <listType typeId="bb292988-4659-4ff8-917f-b3563b4b86f1" valueTypeId="584d2eda-76a1-49f5-8711-8911d78c4b6c"/>
-    <managerType typeId="860695e8-87d6-47ac-a40c-87005a5f4a34" valueTypeId="a3b0efb1-7ffd-48ce-9778-4e1c37e7d213"/>
-    <containerType typeId="ffefaa3a-4fb6-4518-9023-128cc0f88417" valueTypeId="0a9de0c7-0447-4d01-beea-6732a747f0e2"/>
-  </producedTypes>
-  <name>CurrencyMovementType</name>
-  <synonym>
-    <key>en</key>
-    <value>Multi currency movement types</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Multi currency movement type</value>
-  </objectPresentation>
-  <type>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:ChartOfCharacteristicTypes xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e576a633-fe90-4b81-9537-fd9ff1c87df4">
+ <producedTypes>
+  <objectType typeId="2c5cc4ec-683e-4036-af5f-df02a2d4fcd4" valueTypeId="a5f1808f-c853-4826-b0fb-e99f3ae856ef"/>
+  <refType typeId="17cc0e35-6c36-4df6-8c96-0640b069fa5a" valueTypeId="c1e5cd9e-1b90-476f-bcff-ca635c1ba210"/>
+  <selectionType typeId="e6875ff1-bdbe-431b-be66-ae85590a56b9" valueTypeId="9147347f-248e-429a-90b2-52dd309068e5"/>
+  <listType typeId="bb292988-4659-4ff8-917f-b3563b4b86f1" valueTypeId="584d2eda-76a1-49f5-8711-8911d78c4b6c"/>
+  <managerType typeId="860695e8-87d6-47ac-a40c-87005a5f4a34" valueTypeId="a3b0efb1-7ffd-48ce-9778-4e1c37e7d213"/>
+  <containerType typeId="ffefaa3a-4fb6-4518-9023-128cc0f88417" valueTypeId="0a9de0c7-0447-4d01-beea-6732a747f0e2"/>
+ </producedTypes>
+ <name>CurrencyMovementType</name>
+ <synonym>
+  <key>ru</key>
+  <value>Виды мультивалютной аналитики</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Multi currency movement types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Çoklu döviz kırılım tipleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Вид мультивалютной аналитики</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Multi currency movement type</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Çoklu döviz kırılım tipi</value>
+ </objectPresentation>
+ <type>
+  <types>EnumRef.CurrencyType</types>
+ </type>
+ <foldersOnTop>true</foldersOnTop>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="f71f3bfa-242f-4c9c-9e10-2d66fe1c1801">
+   <name>SettlementCurrency</name>
+   <description>Settlement currency</description>
+   <type>
     <types>EnumRef.CurrencyType</types>
+   </type>
+  </items>
+ </predefined>
+ <editType>BothWays</editType>
+ <choiceMode>BothWays</choiceMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <defaultObjectForm>ChartOfCharacteristicTypes.CurrencyMovementType.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>ChartOfCharacteristicTypes.CurrencyMovementType.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>ChartOfCharacteristicTypes.CurrencyMovementType.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="2453fec5-f677-41ba-8d7d-9bdf098b77cb">
+  <name>Currency</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
   </type>
-  <foldersOnTop>true</foldersOnTop>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="f71f3bfa-242f-4c9c-9e10-2d66fe1c1801">
-      <name>SettlementCurrency</name>
-      <description>Settlement currency</description>
-      <type>
-        <types>EnumRef.CurrencyType</types>
-      </type>
-    </items>
-  </predefined>
-  <editType>BothWays</editType>
-  <choiceMode>BothWays</choiceMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <defaultObjectForm>ChartOfCharacteristicTypes.CurrencyMovementType.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>ChartOfCharacteristicTypes.CurrencyMovementType.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>ChartOfCharacteristicTypes.CurrencyMovementType.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="2453fec5-f677-41ba-8d7d-9bdf098b77cb">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="e188cb7e-0517-4894-a057-b43e40e73af5">
-    <name>Source</name>
-    <synonym>
-      <key>en</key>
-      <value>Source</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="81a3d6c4-9880-40fa-8a43-7e60020911ca">
-    <name>Type</name>
-    <synonym>
-      <key>en</key>
-      <value>Type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.CurrencyType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="0dafc4d4-3d79-49fc-af68-46b640d671eb">
-    <name>DeferredCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Deferred calculation</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="fc4a2c0c-74f9-47c7-a27a-f6df6c80b215">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ee5c669a-75d5-43ca-a1ca-3ef35e661ab6">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e3efb700-2e6a-4912-88a2-f2b2f9a1acad">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e188cb7e-0517-4894-a057-b43e40e73af5">
+  <name>Source</name>
+  <synonym>
+   <key>ru</key>
+   <value>Источник</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Source</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="81a3d6c4-9880-40fa-8a43-7e60020911ca">
+  <name>Type</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tip</value>
+  </synonym>
+  <type>
+   <types>EnumRef.CurrencyType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0dafc4d4-3d79-49fc-af68-46b640d671eb">
+  <name>DeferredCalculation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Отложенный расчет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Deferred calculation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ertelenen hesaplama</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="fc4a2c0c-74f9-47c7-a27a-f6df6c80b215">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ee5c669a-75d5-43ca-a1ca-3ef35e661ab6">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e3efb700-2e6a-4912-88a2-f2b2f9a1acad">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:ChartOfCharacteristicTypes>

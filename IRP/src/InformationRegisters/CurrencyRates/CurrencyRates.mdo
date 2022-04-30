@@ -1,122 +1,186 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3eb158c8-96f8-40fa-9019-c16369a3e39e">
-  <producedTypes>
-    <selectionType typeId="b26858a6-15d3-434b-9fba-dc1fb02f0b5b" valueTypeId="651b490d-0519-4de1-9c31-540c572373b6"/>
-    <listType typeId="8744961d-af3e-414f-b287-3afa8b46145f" valueTypeId="d37b8334-72a3-45a1-9d30-1c689b906fe8"/>
-    <managerType typeId="d46c1287-df19-432f-ad18-ec9438230558" valueTypeId="1bb82725-b521-4830-aeb5-531f2ec94078"/>
-    <recordSetType typeId="c03d8960-e4a6-4db2-b6da-ec70a0040a79" valueTypeId="15504fc1-8503-4351-9a42-97ca830d8dde"/>
-    <recordKeyType typeId="f0dcdef6-518a-4b2d-b30b-6fb02e5ca14e" valueTypeId="bf5b5f8f-cd92-40b8-82c2-eaacefd36f8b"/>
-    <recordType typeId="94fed92b-048e-4299-a15d-ce0f4f73e00f" valueTypeId="6fc90c6b-85f2-458e-b527-287aab87a755"/>
-    <recordManagerType typeId="04c938c0-7bcd-4a01-887b-7bc9f6a5990b" valueTypeId="152a8634-f02e-43bf-827f-a70aa1e45b7f"/>
-  </producedTypes>
-  <name>CurrencyRates</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3eb158c8-96f8-40fa-9019-c16369a3e39e">
+ <producedTypes>
+  <selectionType typeId="b26858a6-15d3-434b-9fba-dc1fb02f0b5b" valueTypeId="651b490d-0519-4de1-9c31-540c572373b6"/>
+  <listType typeId="8744961d-af3e-414f-b287-3afa8b46145f" valueTypeId="d37b8334-72a3-45a1-9d30-1c689b906fe8"/>
+  <managerType typeId="d46c1287-df19-432f-ad18-ec9438230558" valueTypeId="1bb82725-b521-4830-aeb5-531f2ec94078"/>
+  <recordSetType typeId="c03d8960-e4a6-4db2-b6da-ec70a0040a79" valueTypeId="15504fc1-8503-4351-9a42-97ca830d8dde"/>
+  <recordKeyType typeId="f0dcdef6-518a-4b2d-b30b-6fb02e5ca14e" valueTypeId="bf5b5f8f-cd92-40b8-82c2-eaacefd36f8b"/>
+  <recordType typeId="94fed92b-048e-4299-a15d-ce0f4f73e00f" valueTypeId="6fc90c6b-85f2-458e-b527-287aab87a755"/>
+  <recordManagerType typeId="04c938c0-7bcd-4a01-887b-7bc9f6a5990b" valueTypeId="152a8634-f02e-43bf-827f-a70aa1e45b7f"/>
+ </producedTypes>
+ <name>CurrencyRates</name>
+ <synonym>
+  <key>ru</key>
+  <value>Курсы валюты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Currency rates</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Döviz kurları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+ <mainFilterOnPeriod>true</mainFilterOnPeriod>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Курс валюты</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Currency rate</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Döviz kuru</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Курсы валюты</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Currency rates</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Döviz kurları</value>
+ </listPresentation>
+ <resources uuid="a6129b2c-aedf-4ead-abdd-824477778f4f">
+  <name>Multiplicity</name>
   <synonym>
-    <key>en</key>
-    <value>Currency rates</value>
+   <key>ru</key>
+   <value>Кратность</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
-  <mainFilterOnPeriod>true</mainFilterOnPeriod>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Currency rate</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Currency rates</value>
-  </listPresentation>
-  <resources uuid="a6129b2c-aedf-4ead-abdd-824477778f4f">
-    <name>Multiplicity</name>
-    <synonym>
-      <key>en</key>
-      <value>Multiplicity</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:NumberValue">
-      <value>1</value>
-    </fillValue>
-  </resources>
-  <resources uuid="db86501b-de2d-4f98-97d6-e03fbd89b224">
-    <name>Rate</name>
-    <synonym>
-      <key>en</key>
-      <value>Rate</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeCurrencyRate</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="9c3b0ee4-351f-43c5-bfca-e33a2b05c817">
-    <name>CurrencyFrom</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency from</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="846f0ce7-3734-45ed-a4b8-d829224173b4">
-    <name>CurrencyTo</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency to</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="18187ec9-383e-4f7c-8279-0684d287d97a">
-    <name>Source</name>
-    <synonym>
-      <key>en</key>
-      <value>Source</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.IntegrationType</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Enum.IntegrationType.EnumValue.CurrencyRates</value>
-      </value>
-    </choiceParameters>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Multiplicity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çarpan</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:NumberValue">
+   <value>1</value>
+  </fillValue>
+ </resources>
+ <resources uuid="db86501b-de2d-4f98-97d6-e03fbd89b224">
+  <name>Rate</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ставка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Rate</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Oran</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeCurrencyRate</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="9c3b0ee4-351f-43c5-bfca-e33a2b05c817">
+  <name>CurrencyFrom</name>
+  <synonym>
+   <key>ru</key>
+   <value>С валюты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency from</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dövizden</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="846f0ce7-3734-45ed-a4b8-d829224173b4">
+  <name>CurrencyTo</name>
+  <synonym>
+   <key>ru</key>
+   <value>На валюту</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency to</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dövize</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="18187ec9-383e-4f7c-8279-0684d287d97a">
+  <name>Source</name>
+  <synonym>
+   <key>ru</key>
+   <value>Источник</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Source</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IntegrationType</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Enum.IntegrationType.EnumValue.CurrencyRates</value>
+   </value>
+  </choiceParameters>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

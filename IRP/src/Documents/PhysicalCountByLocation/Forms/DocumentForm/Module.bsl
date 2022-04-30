@@ -1,4 +1,4 @@
-#Region FormEvents
+﻿#Region FormEvents
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)

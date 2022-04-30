@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="146dac78-e310-4e5c-b595-79c537448993">
-  <name>MobileSubsystem</name>
-  <synonym>
-    <key>en</key>
-    <value>Mobile subsystem</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>MobileSubsystem</name>
+ <synonym>
+  <key>ru</key>
+  <value>Мобильная подсистема</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Mobile subsystem</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Mobil alt sistemi</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

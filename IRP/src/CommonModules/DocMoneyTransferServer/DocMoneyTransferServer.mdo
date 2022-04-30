@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6705f62c-4a5c-4f01-b74e-65a52e5f6021">
-  <name>DocMoneyTransferServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc money transfer server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocMoneyTransferServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ перемещение денежных средств сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc money transfer server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak kasa banka transfer fişi server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

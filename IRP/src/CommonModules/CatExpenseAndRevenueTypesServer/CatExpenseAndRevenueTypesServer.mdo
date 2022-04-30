@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6c83d1ae-151a-4408-8aa6-21bb2092f080">
-  <name>CatExpenseAndRevenueTypesServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Cat expense and revenue types server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CatExpenseAndRevenueTypesServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Справочники типы статей затрат и доходов сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cat expense and revenue types server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cat gider ve gelir tipleri server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

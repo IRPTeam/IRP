@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ccf37b27-e42b-4682-9007-8c3a0fecc837">
-  <name>Cash</name>
-  <synonym>
-    <key>en</key>
-    <value>Cash</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.CashPayment</content>
-  <content>Document.CashReceipt</content>
-  <parentSubsystem>Subsystem.Treasury</parentSubsystem>
+ <name>Cash</name>
+ <synonym>
+  <key>ru</key>
+  <value>Касса</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cash</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kasa</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.CashPayment</content>
+ <content>Document.CashReceipt</content>
+ <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,15 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="788cdd75-4a4c-423d-b776-12b9d4c2e690">
-  <name>OnCopy_AddAttributes</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional attributes on copy</value>
-  </synonym>
-  <source>
-    <types>ChartOfCharacteristicTypesObject</types>
-    <types>CatalogObject</types>
-    <types>DocumentObject</types>
-  </source>
-  <event>OnCopy</event>
-  <handler>CommonModule.AddAttributesAndPropertiesServer.EventSubscriptionOnCopy</handler>
+ <name>OnCopy_AddAttributes</name>
+ <synonym>
+  <key>ru</key>
+  <value>При копировании дополнительных реквизитов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Additional attributes on copy</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek alanlar kopyalarken</value>
+ </synonym>
+ <source>
+  <types>ChartOfCharacteristicTypesObject</types>
+  <types>CatalogObject</types>
+  <types>DocumentObject</types>
+ </source>
+ <event>OnCopy</event>
+ <handler>CommonModule.AddAttributesAndPropertiesServer.EventSubscriptionOnCopy</handler>
 </mdclass:EventSubscription>

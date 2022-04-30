@@ -1,162 +1,242 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="63333e38-ba26-4391-b790-280e8254a524">
-  <producedTypes>
-    <objectType typeId="640c601a-d62a-46c8-8904-c1255de53230" valueTypeId="5db001ee-af59-40d2-a409-7bcf7ace47d0"/>
-    <refType typeId="c41d85ba-2414-4865-916d-8fa2afff734a" valueTypeId="6b6eb7f6-aebb-45f7-9826-0eabf455c490"/>
-    <selectionType typeId="bbb319d8-e75b-4e48-83be-9ee7b9bbb08a" valueTypeId="dcf1e006-1199-4fa2-957e-6583c77dce27"/>
-    <listType typeId="daa86a40-5d1e-469e-bbec-c5e68ea836b7" valueTypeId="5100dc96-8e28-43ed-b2bd-600076fe32a0"/>
-    <managerType typeId="a1a6307c-5666-4c26-b19a-054bfe72dd32" valueTypeId="82b2abbf-d2f6-42b3-ad9f-edc459a186f7"/>
-  </producedTypes>
-  <name>CashStatementStatuses</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="63333e38-ba26-4391-b790-280e8254a524">
+ <producedTypes>
+  <objectType typeId="640c601a-d62a-46c8-8904-c1255de53230" valueTypeId="5db001ee-af59-40d2-a409-7bcf7ace47d0"/>
+  <refType typeId="c41d85ba-2414-4865-916d-8fa2afff734a" valueTypeId="6b6eb7f6-aebb-45f7-9826-0eabf455c490"/>
+  <selectionType typeId="bbb319d8-e75b-4e48-83be-9ee7b9bbb08a" valueTypeId="dcf1e006-1199-4fa2-957e-6583c77dce27"/>
+  <listType typeId="daa86a40-5d1e-469e-bbec-c5e68ea836b7" valueTypeId="5100dc96-8e28-43ed-b2bd-600076fe32a0"/>
+  <managerType typeId="a1a6307c-5666-4c26-b19a-054bfe72dd32" valueTypeId="82b2abbf-d2f6-42b3-ad9f-edc459a186f7"/>
+ </producedTypes>
+ <name>CashStatementStatuses</name>
+ <synonym>
+  <key>ru</key>
+  <value>Статусы кассовой книги</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cash statement statuses</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İcmal statüleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_CashAccounts</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_CashStatementStatuses</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.CashStatementStatuses.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Статус кассовой книги</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Cash statement statuse</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>İcmal statüsü</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.CashStatementStatuses.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.CashStatementStatuses.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.CashStatementStatuses.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="241ed8d1-bfe9-4542-a69d-ae3deb270d4b">
+  <name>ForbidCorrections</name>
   <synonym>
-    <key>en</key>
-    <value>Cash statement statuses</value>
+   <key>ru</key>
+   <value>Запретить редактирование</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_CashAccounts</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_CashStatementStatuses</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.CashStatementStatuses.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.CashStatementStatuses.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Forbid corrections</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Değişikliği yazakla</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="ea0635c5-fb4a-46b5-9332-b31e3b354591">
+  <producedTypes>
+   <objectType typeId="2bac10b9-da8f-454d-9b63-d03ec0bd6471" valueTypeId="1c58a2a0-0b52-4533-9238-3a783b2527da"/>
+   <rowType typeId="f04c29f1-c5d3-4d39-837e-2b3431bfb8d0" valueTypeId="ae87f6f7-f775-4595-8da9-09630bc43eb7"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="ad82718e-beb4-4bbc-96dc-e07920013188">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Cash statement statuse</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.CashStatementStatuses.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.CashStatementStatuses.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.CashStatementStatuses.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="241ed8d1-bfe9-4542-a69d-ae3deb270d4b">
-    <name>ForbidCorrections</name>
-    <synonym>
-      <key>en</key>
-      <value>Forbid corrections</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="ea0635c5-fb4a-46b5-9332-b31e3b354591">
-    <producedTypes>
-      <objectType typeId="2bac10b9-da8f-454d-9b63-d03ec0bd6471" valueTypeId="1c58a2a0-0b52-4533-9238-3a783b2527da"/>
-      <rowType typeId="f04c29f1-c5d3-4d39-837e-2b3431bfb8d0" valueTypeId="ae87f6f7-f775-4595-8da9-09630bc43eb7"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="ad82718e-beb4-4bbc-96dc-e07920013188">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7f30b7d0-e9bb-406e-82c6-253025e29b2e">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.CashStatementStatuses.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="89263bf1-4ee9-4c56-b33b-81b71013e95d">
-      <name>SearchLiteral</name>
-      <synonym>
-        <key>en</key>
-        <value>Search literal</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="5c320e42-a86e-4354-bef2-bb6802965f32">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="a3a168b3-1230-4107-ac43-73812732f011">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f9874fd6-cfd5-4ebd-9199-f1cc5584e7f7">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="7f30b7d0-e9bb-406e-82c6-253025e29b2e">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.CashStatementStatuses.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="89263bf1-4ee9-4c56-b33b-81b71013e95d">
+   <name>SearchLiteral</name>
+   <synonym>
+    <key>ru</key>
+    <value>Буквальный поиск</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Search literal</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Arama metni</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>500</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="5c320e42-a86e-4354-bef2-bb6802965f32">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="a3a168b3-1230-4107-ac43-73812732f011">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f9874fd6-cfd5-4ebd-9199-f1cc5584e7f7">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

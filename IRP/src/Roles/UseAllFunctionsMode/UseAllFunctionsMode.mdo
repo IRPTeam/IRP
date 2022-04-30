@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="28c86396-85aa-4c93-8369-420ff9d21848">
-  <name>UseAllFunctionsMode</name>
-  <synonym>
-    <key>en</key>
-    <value>Use all functions mode</value>
-  </synonym>
+ <name>UseAllFunctionsMode</name>
+ <synonym>
+  <key>ru</key>
+  <value>Режим "Все функции"</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use all functions mode</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tüm fonksiyonlar menüsü kullanma</value>
+ </synonym>
 </mdclass:Role>

@@ -1,23 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b682fd03-3c66-4898-9386-417265202b2a">
-  <producedTypes>
-    <containerType typeId="379fbc67-094a-4059-8093-0e19ebfb6959" valueTypeId="1a02c77b-3add-4518-9612-cd26900508f2"/>
-  </producedTypes>
-  <name>typeObjectWithStatuses</name>
-  <synonym>
-    <key>en</key>
-    <value>Type object with statuses</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.IncomingPaymentOrder</types>
-    <types>DocumentRef.SalesReturnOrder</types>
-    <types>DocumentRef.PurchaseReturnOrder</types>
-    <types>DocumentRef.PurchaseOrder</types>
-    <types>DocumentRef.OutgoingPaymentOrder</types>
-    <types>DocumentRef.SalesOrder</types>
-    <types>DocumentRef.PhysicalCountByLocation</types>
-    <types>DocumentRef.InventoryTransferOrder</types>
-    <types>DocumentRef.ReconciliationStatement</types>
-    <types>DocumentRef.PhysicalInventory</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="379fbc67-094a-4059-8093-0e19ebfb6959" valueTypeId="1a02c77b-3add-4518-9612-cd26900508f2"/>
+ </producedTypes>
+ <name>typeObjectWithStatuses</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип объект со статусом</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type object with statuses</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip statüye sahip siparişler</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.IncomingPaymentOrder</types>
+  <types>DocumentRef.SalesReturnOrder</types>
+  <types>DocumentRef.PurchaseReturnOrder</types>
+  <types>DocumentRef.PurchaseOrder</types>
+  <types>DocumentRef.OutgoingPaymentOrder</types>
+  <types>DocumentRef.SalesOrder</types>
+  <types>DocumentRef.PhysicalCountByLocation</types>
+  <types>DocumentRef.InventoryTransferOrder</types>
+  <types>DocumentRef.ReconciliationStatement</types>
+  <types>DocumentRef.PhysicalInventory</types>
+ </type>
 </mdclass:DefinedType>

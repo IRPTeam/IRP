@@ -1,17 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="775fc545-53e2-4928-9f69-1ed2cdee6c14">
-  <name>Sales</name>
-  <synonym>
-    <key>en</key>
-    <value>Sales</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.SalesOrder</content>
-  <content>Document.SalesInvoice</content>
-  <content>5a2a8a1f-b29b-4352-9833-04e70902c2cb</content>
-  <content>Document.ShipmentConfirmation</content>
-  <content>Document.SalesOrderClosing</content>
-  <content>Document.PlannedReceiptReservation</content>
-  <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
+ <name>Sales</name>
+ <synonym>
+  <key>ru</key>
+  <value>Продажи</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Sales</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satışlar</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.SalesOrder</content>
+ <content>Document.SalesInvoice</content>
+ <content>5a2a8a1f-b29b-4352-9833-04e70902c2cb</content>
+ <content>Document.ShipmentConfirmation</content>
+ <content>Document.SalesOrderClosing</content>
+ <content>Document.PlannedReceiptReservation</content>
+ <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

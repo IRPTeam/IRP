@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6953ef9e-37d5-48cb-ae74-c7aa8f4418b8">
-  <name>DocShipmentConfirmationClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc shipment confirmation client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocShipmentConfirmationClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ расходная товарная накладная клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc shipment confirmation client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak sevk irsaliyesi client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

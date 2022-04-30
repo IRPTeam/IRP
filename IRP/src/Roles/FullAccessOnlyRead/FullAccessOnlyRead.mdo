@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="67b17387-64df-493c-94c2-13846d850785">
-  <name>FullAccessOnlyRead</name>
-  <synonym>
-    <key>en</key>
-    <value>Full access only read</value>
-  </synonym>
+ <name>FullAccessOnlyRead</name>
+ <synonym>
+  <key>ru</key>
+  <value>Полный доступ только чтение</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Full access only read</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Salt okunur (Tam okuma izni)</value>
+ </synonym>
 </mdclass:Role>

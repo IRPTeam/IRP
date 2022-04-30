@@ -1,23 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d29cb9d4-ed41-4c36-8e40-376c053ff3ae">
-  <name>Retail</name>
-  <synonym>
-    <key>en</key>
-    <value>Retail</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Retail</picture>
-  </picture>
-  <content>Document.RetailSalesReceipt</content>
-  <content>Catalog.PaymentTerminals</content>
-  <content>Document.RetailReturnReceipt</content>
-  <content>Catalog.RetailCustomers</content>
-  <content>DataProcessor.PointOfSale</content>
-  <content>Document.CashStatement</content>
-  <content>Catalog.CashStatementStatuses</content>
-  <content>AccumulationRegister.R3050T_RetailCash</content>
-  <content>AccumulationRegister.R2050T_RetailSales</content>
-  <content>InformationRegister.RetailWorkers</content>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="d29cb9d4-ed41-4c36-8e40-376c053ff3ae">
+ <name>Retail</name>
+ <synonym>
+  <key>ru</key>
+  <value>Розница</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Retail</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Perakende</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Retail</picture>
+ </picture>
+ <content>Document.RetailSalesReceipt</content>
+ <content>Catalog.PaymentTerminals</content>
+ <content>Document.RetailReturnReceipt</content>
+ <content>Catalog.RetailCustomers</content>
+ <content>DataProcessor.PointOfSale</content>
+ <content>Document.CashStatement</content>
+ <content>Catalog.CashStatementStatuses</content>
+ <content>AccumulationRegister.R3050T_RetailCash</content>
+ <content>AccumulationRegister.R2050T_RetailSales</content>
+ <content>InformationRegister.RetailWorkers</content>
 </mdclass:Subsystem>

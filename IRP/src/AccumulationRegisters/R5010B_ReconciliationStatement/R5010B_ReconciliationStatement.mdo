@@ -1,102 +1,158 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3cda0607-84dd-45c7-978a-ff4bab8f304c">
-  <producedTypes>
-    <selectionType typeId="eea83f4d-f084-4189-aed4-b71bc592ce09" valueTypeId="c247584f-1380-41a3-ba23-25e56cd986ab"/>
-    <listType typeId="56cda68e-2654-48ee-8790-ea02fc0e53cd" valueTypeId="06bedf69-7ffe-4029-9115-a152134968eb"/>
-    <managerType typeId="d8faae1e-6d69-49b8-9077-bf4a61eab0a8" valueTypeId="7003587c-8339-4365-922e-27c6f720b6f6"/>
-    <recordSetType typeId="beed826a-a881-4363-ba52-8b9c69608ab9" valueTypeId="b3fadd05-9907-4352-b09f-d537ac21fde6"/>
-    <recordKeyType typeId="7259650a-304c-4a1f-a07f-a51f48d03775" valueTypeId="82bfc5e2-7ab6-4509-a603-abcde30c89af"/>
-    <recordType typeId="a99e111c-648c-40e3-abc1-f13844142bb6" valueTypeId="200e3a07-b7f5-4dc3-a103-019a29fcb4c6"/>
-  </producedTypes>
-  <name>R5010B_ReconciliationStatement</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3cda0607-84dd-45c7-978a-ff4bab8f304c">
+ <producedTypes>
+  <selectionType typeId="eea83f4d-f084-4189-aed4-b71bc592ce09" valueTypeId="c247584f-1380-41a3-ba23-25e56cd986ab"/>
+  <listType typeId="56cda68e-2654-48ee-8790-ea02fc0e53cd" valueTypeId="06bedf69-7ffe-4029-9115-a152134968eb"/>
+  <managerType typeId="d8faae1e-6d69-49b8-9077-bf4a61eab0a8" valueTypeId="7003587c-8339-4365-922e-27c6f720b6f6"/>
+  <recordSetType typeId="beed826a-a881-4363-ba52-8b9c69608ab9" valueTypeId="b3fadd05-9907-4352-b09f-d537ac21fde6"/>
+  <recordKeyType typeId="7259650a-304c-4a1f-a07f-a51f48d03775" valueTypeId="82bfc5e2-7ab6-4509-a603-abcde30c89af"/>
+  <recordType typeId="a99e111c-648c-40e3-abc1-f13844142bb6" valueTypeId="200e3a07-b7f5-4dc3-a103-019a29fcb4c6"/>
+ </producedTypes>
+ <name>R5010B_ReconciliationStatement</name>
+ <synonym>
+  <key>ru</key>
+  <value>R5010 Взаиморасчеты по контрагентам</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R5010 Reconciliation statement</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R5010 Cari hesap mutabakat</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="04c966e9-a2fa-4705-90c4-66d7dfc7f22d">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>R5010 Reconciliation statement</value>
+   <key>ru</key>
+   <value>Сумма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="04c966e9-a2fa-4705-90c4-66d7dfc7f22d">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="934bcf53-4129-48c0-aa45-856409dc5702">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="8ff785cd-2537-4b5a-a983-1f93442c1bfe">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="f18f5703-786f-4013-9628-7e61cc7cd5d8">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="b83a2039-1410-4797-becc-b82dbaefb3e8">
-    <name>LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="83568593-4b55-49a4-889c-cef1db39bc55">
-    <name>LegalNameContract</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name contract</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LegalNameContracts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="934bcf53-4129-48c0-aa45-856409dc5702">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="8ff785cd-2537-4b5a-a983-1f93442c1bfe">
+  <name>Branch</name>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="f18f5703-786f-4013-9628-7e61cc7cd5d8">
+  <name>Currency</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="b83a2039-1410-4797-becc-b82dbaefb3e8">
+  <name>LegalName</name>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Legal name</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="83568593-4b55-49a4-889c-cef1db39bc55">
+  <name>LegalNameContract</name>
+  <synonym>
+   <key>ru</key>
+   <value>Договор контрагента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Legal name contract</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesap kontratı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LegalNameContracts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

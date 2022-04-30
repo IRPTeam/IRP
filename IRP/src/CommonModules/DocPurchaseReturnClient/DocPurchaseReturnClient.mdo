@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="77d7c16e-d17a-4cba-b488-f30a158fcbc1">
-  <name>DocPurchaseReturnClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc purchase return client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocPurchaseReturnClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ возврат поставщику клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc purchase return client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak alım iadesi client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

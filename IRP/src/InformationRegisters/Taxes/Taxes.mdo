@@ -1,105 +1,169 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="abbf0760-acd3-4459-9360-46acbe394b37">
-  <producedTypes>
-    <selectionType typeId="9fd36c47-1b3b-4ab7-a539-b2fb073b92c4" valueTypeId="36379c33-4e5b-4453-8b19-1c39710c6143"/>
-    <listType typeId="3ecc8b98-08ed-48d5-b3e5-097fde00bb60" valueTypeId="cfc46168-b8a2-4aeb-ad84-76c2dd68d6b7"/>
-    <managerType typeId="5937b4ab-118a-4e75-bb28-286b5b24acc5" valueTypeId="3b056c40-d55d-4aea-bfd5-f1e888cc05c4"/>
-    <recordSetType typeId="2f8a63b0-8c96-4563-8082-6632504c5892" valueTypeId="6d850734-5e89-4474-9bc9-aa1c776c1004"/>
-    <recordKeyType typeId="4693b419-06f2-49ca-ba30-e43547fbf976" valueTypeId="df98308b-ca8e-49d3-9908-fea133debdc4"/>
-    <recordType typeId="b2bc2bc9-998f-45bd-9edc-4428dbc9e7c2" valueTypeId="476f199e-9de2-4cf8-9523-b784c7291184"/>
-    <recordManagerType typeId="f0ecac78-54a1-42e5-baba-fc0f04961c14" valueTypeId="9f545a4e-93c8-4586-b3f7-a4a03e1d1642"/>
-  </producedTypes>
-  <name>Taxes</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="abbf0760-acd3-4459-9360-46acbe394b37">
+ <producedTypes>
+  <selectionType typeId="9fd36c47-1b3b-4ab7-a539-b2fb073b92c4" valueTypeId="36379c33-4e5b-4453-8b19-1c39710c6143"/>
+  <listType typeId="3ecc8b98-08ed-48d5-b3e5-097fde00bb60" valueTypeId="cfc46168-b8a2-4aeb-ad84-76c2dd68d6b7"/>
+  <managerType typeId="5937b4ab-118a-4e75-bb28-286b5b24acc5" valueTypeId="3b056c40-d55d-4aea-bfd5-f1e888cc05c4"/>
+  <recordSetType typeId="2f8a63b0-8c96-4563-8082-6632504c5892" valueTypeId="6d850734-5e89-4474-9bc9-aa1c776c1004"/>
+  <recordKeyType typeId="4693b419-06f2-49ca-ba30-e43547fbf976" valueTypeId="df98308b-ca8e-49d3-9908-fea133debdc4"/>
+  <recordType typeId="b2bc2bc9-998f-45bd-9edc-4428dbc9e7c2" valueTypeId="476f199e-9de2-4cf8-9523-b784c7291184"/>
+  <recordManagerType typeId="f0ecac78-54a1-42e5-baba-fc0f04961c14" valueTypeId="9f545a4e-93c8-4586-b3f7-a4a03e1d1642"/>
+ </producedTypes>
+ <name>Taxes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Налоги организации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Company taxes</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Şirket vergileri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultRecordForm>InformationRegister.Taxes.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Налог организации</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Company tax</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Şirket vergisi</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Налоги организации</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Company taxes</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Şirket vergileri</value>
+ </listPresentation>
+ <resources uuid="f51ef633-7048-483b-a625-da52e21085f4">
+  <name>Use</name>
   <synonym>
-    <key>en</key>
-    <value>Company taxes</value>
+   <key>ru</key>
+   <value>Применить</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultRecordForm>InformationRegister.Taxes.Form.RecordForm</defaultRecordForm>
-  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Company tax</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Company taxes</value>
-  </listPresentation>
-  <resources uuid="f51ef633-7048-483b-a625-da52e21085f4">
-    <name>Use</name>
-    <synonym>
-      <key>en</key>
-      <value>Use</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="a25d893c-31bd-463f-95c2-1b23da47ba5e">
-    <name>Priority</name>
-    <synonym>
-      <key>en</key>
-      <value>Priority</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>3</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="ea15a6c3-3598-4685-abe5-9fa75df0f291">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="f39ae6cd-8867-474d-92a3-44eb78d9f27e">
-    <name>Tax</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Taxes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="e106da62-9cde-470d-880e-10c2c65b3b42">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Use</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullan</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="a25d893c-31bd-463f-95c2-1b23da47ba5e">
+  <name>Priority</name>
+  <synonym>
+   <key>ru</key>
+   <value>Приоритет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Priority</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Önem</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>3</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="ea15a6c3-3598-4685-abe5-9fa75df0f291">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f39ae6cd-8867-474d-92a3-44eb78d9f27e">
+  <name>Tax</name>
+  <synonym>
+   <key>ru</key>
+   <value>Налог</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Taxes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="e106da62-9cde-470d-880e-10c2c65b3b42">
+  <name>RecordForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

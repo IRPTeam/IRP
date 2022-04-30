@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dc746109-ec8f-4abc-b821-b7caab20157c">
-  <name>AddDataProc</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional dataproc</value>
-  </synonym>
+ <name>AddDataProc</name>
+ <synonym>
+  <key>ru</key>
+  <value>Внешняя обработка</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Additional dataproc</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek plugin</value>
+ </synonym>
 </mdclass:CommonPicture>

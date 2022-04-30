@@ -1,87 +1,143 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b2e72ded-71d7-4769-9e94-6f4af6778d06">
-  <producedTypes>
-    <selectionType typeId="b1d16db2-30e6-42c2-ab7a-b17708e08ade" valueTypeId="447ffda4-77b2-4236-9bce-7f454e8f8d1c"/>
-    <listType typeId="a7091324-dfd4-4cb5-bdb6-dd5591df46b2" valueTypeId="4233bfc0-61f5-40ea-8628-6e45245e8321"/>
-    <managerType typeId="a3ad51c5-348c-4067-ab02-815534bd3f50" valueTypeId="f74f5ecf-7aad-477f-b8be-e92306c06d0e"/>
-    <recordSetType typeId="3b7c4b88-2788-4139-b745-25ff89261e9d" valueTypeId="ce748568-cfa8-49ed-a7e5-8c2dd6d26a13"/>
-    <recordKeyType typeId="386950cb-a7ac-4e1e-8e22-b37c33271473" valueTypeId="e7fb47eb-c404-418f-9ed4-2d5a2df72395"/>
-    <recordType typeId="0282cdea-0a61-4163-8764-3806a2e72f6b" valueTypeId="79c05765-bd0a-40a8-8336-783076262050"/>
-    <recordManagerType typeId="0bb1f3e5-5766-4741-828e-0bfd874ca222" valueTypeId="5b34de5e-b15a-4fb1-bf9f-9a3b35ef1201"/>
-  </producedTypes>
-  <name>RemainingItemsInfo</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="b2e72ded-71d7-4769-9e94-6f4af6778d06">
+ <producedTypes>
+  <selectionType typeId="b1d16db2-30e6-42c2-ab7a-b17708e08ade" valueTypeId="447ffda4-77b2-4236-9bce-7f454e8f8d1c"/>
+  <listType typeId="a7091324-dfd4-4cb5-bdb6-dd5591df46b2" valueTypeId="4233bfc0-61f5-40ea-8628-6e45245e8321"/>
+  <managerType typeId="a3ad51c5-348c-4067-ab02-815534bd3f50" valueTypeId="f74f5ecf-7aad-477f-b8be-e92306c06d0e"/>
+  <recordSetType typeId="3b7c4b88-2788-4139-b745-25ff89261e9d" valueTypeId="ce748568-cfa8-49ed-a7e5-8c2dd6d26a13"/>
+  <recordKeyType typeId="386950cb-a7ac-4e1e-8e22-b37c33271473" valueTypeId="e7fb47eb-c404-418f-9ed4-2d5a2df72395"/>
+  <recordType typeId="0282cdea-0a61-4163-8764-3806a2e72f6b" valueTypeId="79c05765-bd0a-40a8-8336-783076262050"/>
+  <recordManagerType typeId="0bb1f3e5-5766-4741-828e-0bfd874ca222" valueTypeId="5b34de5e-b15a-4fb1-bf9f-9a3b35ef1201"/>
+ </producedTypes>
+ <name>RemainingItemsInfo</name>
+ <synonym>
+  <key>ru</key>
+  <value>Информация по остаткам товаров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Remaining items info</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Malzeme bakiye bilgisi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Информация по остаткам товара</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Remaining item info</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Malzeme bakiye bilgisi</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Информация по остаткам товаров</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Remaining items info</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Malzeme bakiye bilgisi</value>
+ </listPresentation>
+ <resources uuid="46dc1d13-93c7-4aeb-9ed7-a195cfaa920d">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>Remaining items info</value>
+   <key>ru</key>
+   <value>Количество</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Remaining item info</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Remaining items info</value>
-  </listPresentation>
-  <resources uuid="46dc1d13-93c7-4aeb-9ed7-a195cfaa920d">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Q</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="64e24f8d-c74c-4853-9e00-d00dee0fbd71">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="95ab521b-469c-473d-b656-79510595393e">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="fe15f2c1-8c4a-4c97-a4b6-3164a8dddf24">
-    <name>Unit</name>
-    <synonym>
-      <key>en</key>
-      <value>Unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <createOnInput>DontUse</createOnInput>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Q</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="64e24f8d-c74c-4853-9e00-d00dee0fbd71">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="95ab521b-469c-473d-b656-79510595393e">
+  <name>Store</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="fe15f2c1-8c4a-4c97-a4b6-3164a8dddf24">
+  <name>Unit</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ед. изм.</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Unit</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Birim</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Units</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <createOnInput>DontUse</createOnInput>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
 </mdclass:InformationRegister>

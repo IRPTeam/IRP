@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3621d76a-bb82-485b-82f2-91075136f0f9">
-  <name>BeforeWrite_AccumulationRegistersLockDataModification</name>
-  <synonym>
-    <key>en</key>
-    <value>Before write accumulation registers lock data modification</value>
-  </synonym>
-  <source>
-    <types>AccumulationRegisterRecordSet</types>
-  </source>
-  <event>BeforeWrite</event>
-  <handler>CommonModule.LockDataModificationPrivileged.BeforeWrite_AccumulationRegistersLockDataModification</handler>
+ <name>BeforeWrite_AccumulationRegistersLockDataModification</name>
+ <synonym>
+  <key>ru</key>
+  <value>Перед записью регистов накопления запрет изменения данных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Before write accumulation registers lock data modification</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kaydetmeden önce birikim kayıt tablosu veri düzeltme kısıtlaması</value>
+ </synonym>
+ <source>
+  <types>AccumulationRegisterRecordSet</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.LockDataModificationPrivileged.BeforeWrite_AccumulationRegistersLockDataModification</handler>
 </mdclass:EventSubscription>

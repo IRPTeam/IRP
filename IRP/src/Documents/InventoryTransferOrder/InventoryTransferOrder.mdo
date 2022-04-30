@@ -1,452 +1,692 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dfcafed1-cccc-4b34-842d-3507cd12808c">
-  <producedTypes>
-    <objectType typeId="b240a3a4-810e-4674-9057-36414304f6de" valueTypeId="b26710c5-3a9b-4379-bcef-d26c8c698dcc"/>
-    <refType typeId="bba2110a-f217-4248-ae0e-cee207799748" valueTypeId="cb93c599-efe3-417b-942c-7f6714b2edff"/>
-    <selectionType typeId="9037ce0f-913e-4251-bdc0-cc9f2390d69a" valueTypeId="a5b86cdc-ba11-4acd-9201-dba08086f0ef"/>
-    <listType typeId="8b845d4a-6770-4583-95b2-5b1cb3a9cd7f" valueTypeId="2088840f-e623-4b84-b4cf-a1a86f4ae940"/>
-    <managerType typeId="7d9dff4e-dc10-482f-a599-fc9b81bebb65" valueTypeId="d2443d17-bb66-4d5f-8798-186fc23c72b4"/>
-  </producedTypes>
-  <name>InventoryTransferOrder</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="dfcafed1-cccc-4b34-842d-3507cd12808c">
+ <producedTypes>
+  <objectType typeId="b240a3a4-810e-4674-9057-36414304f6de" valueTypeId="b26710c5-3a9b-4379-bcef-d26c8c698dcc"/>
+  <refType typeId="bba2110a-f217-4248-ae0e-cee207799748" valueTypeId="cb93c599-efe3-417b-942c-7f6714b2edff"/>
+  <selectionType typeId="9037ce0f-913e-4251-bdc0-cc9f2390d69a" valueTypeId="a5b86cdc-ba11-4acd-9201-dba08086f0ef"/>
+  <listType typeId="8b845d4a-6770-4583-95b2-5b1cb3a9cd7f" valueTypeId="2088840f-e623-4b84-b4cf-a1a86f4ae940"/>
+  <managerType typeId="7d9dff4e-dc10-482f-a599-fc9b81bebb65" valueTypeId="d2443d17-bb66-4d5f-8798-186fc23c72b4"/>
+ </producedTypes>
+ <name>InventoryTransferOrder</name>
+ <synonym>
+  <key>ru</key>
+  <value>Заказ на перемещение товаров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Inventory transfer order</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Depo transfer siparişi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.InventoryTransferOrder.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_InventoryTransferOrder</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_InventoryTransferOrder</value>
+  </typesFilterValue>
+  <characteristicValues>Document.InventoryTransferOrder.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.InventoryTransferOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.InventoryTransferOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.InventoryTransferOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <listPresentation>
+  <key>ru</key>
+  <value>Заказы на перемещение товаров</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Inventory transfer orders</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Depo transfer siparişleri</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.InventoryTransferOrder.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.InventoryTransferOrder.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.InventoryTransferOrder.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+ <registerRecords>AccumulationRegister.R4020T_StockTransferOrders</registerRecords>
+ <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
+ <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
+ <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+ <registerRecords>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</registerRecords>
+ <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
+ <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
+ <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="29ee3f07-c06b-4b55-93e6-05bc75f2f0a4">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Inventory transfer order</value>
+   <key>ru</key>
+   <value>Организация</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.InventoryTransferOrder.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_InventoryTransferOrder</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_InventoryTransferOrder</value>
-    </typesFilterValue>
-    <characteristicValues>Document.InventoryTransferOrder.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.InventoryTransferOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.InventoryTransferOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.InventoryTransferOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <listPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3b29c339-4ba1-4e0b-bb50-5842ed0fff30">
+  <name>Status</name>
+  <synonym>
+   <key>ru</key>
+   <value>Статус</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Status</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Statü</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ObjectStatuses</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.Parent</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Catalog.ObjectStatuses.InventoryTransferOrder</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="074f005f-7f5b-48fa-98b5-540940a7a70c">
+  <name>StoreReceiver</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад-получатель</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store receiver</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Giriş depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="d83df841-35e2-4107-90c0-9163d052ff0b">
+  <name>StoreSender</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад-отправитель</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store sender</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gönderen depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="c88dc45e-adda-414a-8699-de3e4b37450f">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="0838a40b-9efe-48ee-8cb4-ca06cd01940d">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="64609791-db74-48d0-8068-b5a444480022">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="499ea0b9-621c-4f65-8709-ad3f5d210d56">
+  <producedTypes>
+   <objectType typeId="b72d6482-d24b-4e30-a918-d56057bcbff4" valueTypeId="c9cc7386-fd07-4b61-9ce3-7c182cd499bb"/>
+   <rowType typeId="686ef8f0-0e20-4388-8a80-51feeb85bc66" valueTypeId="37223707-edad-4d78-ad38-4f784d29a83f"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>ru</key>
+   <value>Товары</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item list</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
+  </synonym>
+  <attributes uuid="17f2fed6-87d6-43aa-a550-3fe46eb5e528">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Inventory transfer orders</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.InventoryTransferOrder.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.InventoryTransferOrder.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.InventoryTransferOrder.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.R4020T_StockTransferOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
-  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
-  <registerRecords>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</registerRecords>
-  <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
-  <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
-  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="29ee3f07-c06b-4b55-93e6-05bc75f2f0a4">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="3b29c339-4ba1-4e0b-bb50-5842ed0fff30">
-    <name>Status</name>
-    <synonym>
-      <key>en</key>
-      <value>Status</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ObjectStatuses</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.Parent</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Catalog.ObjectStatuses.InventoryTransferOrder</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="b3f74d1d-87ef-4172-9992-be387de6eb3f">
+   <name>ItemKey</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Item key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Varyant</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="074f005f-7f5b-48fa-98b5-540940a7a70c">
-    <name>StoreReceiver</name>
-    <synonym>
-      <key>en</key>
-      <value>Store receiver</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="27361e8f-b795-426f-8446-b1b112999f40">
+   <name>Unit</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ед. изм.</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Unit</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Birim</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="d83df841-35e2-4107-90c0-9163d052ff0b">
-    <name>StoreSender</name>
-    <synonym>
-      <key>en</key>
-      <value>Store sender</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="3ba485f9-fb5b-444d-9712-af015653f75e">
+   <name>Quantity</name>
+   <synonym>
+    <key>ru</key>
+    <value>Количество</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Quantity</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Miktar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="c88dc45e-adda-414a-8699-de3e4b37450f">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="0838a40b-9efe-48ee-8cb4-ca06cd01940d">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="64609791-db74-48d0-8068-b5a444480022">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="499ea0b9-621c-4f65-8709-ad3f5d210d56">
-    <producedTypes>
-      <objectType typeId="b72d6482-d24b-4e30-a918-d56057bcbff4" valueTypeId="c9cc7386-fd07-4b61-9ce3-7c182cd499bb"/>
-      <rowType typeId="686ef8f0-0e20-4388-8a80-51feeb85bc66" valueTypeId="37223707-edad-4d78-ad38-4f784d29a83f"/>
-    </producedTypes>
-    <name>ItemList</name>
-    <synonym>
-      <key>en</key>
-      <value>Item list</value>
-    </synonym>
-    <attributes uuid="17f2fed6-87d6-43aa-a550-3fe46eb5e528">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="b3f74d1d-87ef-4172-9992-be387de6eb3f">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="27361e8f-b795-426f-8446-b1b112999f40">
-      <name>Unit</name>
-      <synonym>
-        <key>en</key>
-        <value>Unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Units</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="3ba485f9-fb5b-444d-9712-af015653f75e">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="60b639e9-a28e-4abf-b79f-618bd6dec3fb">
-      <name>InternalSupplyRequest</name>
-      <synonym>
-        <key>en</key>
-        <value>Internal supply request</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.InternalSupplyRequest</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a975fbd1-69e1-475b-aba9-ccd4cae29c3d">
-      <name>QuantityInBaseUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity in base unit</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="28784251-7202-4cd4-97a9-ea3d6cc73d44">
-      <name>PurchaseOrder</name>
-      <synonym>
-        <key>en</key>
-        <value>Purchase order</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.PurchaseOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="141a08c8-178a-4978-8af5-29466bd1a517">
-    <producedTypes>
-      <objectType typeId="6aff04a2-e552-4a0c-8c27-96711eb10b9f" valueTypeId="69e0d29e-5808-47c0-b89d-994e5a2cede8"/>
-      <rowType typeId="317d37ab-30d9-4caa-80c3-0a4eff90a2c1" valueTypeId="b921fa56-2a55-4b7f-9d04-0cf76f5f7876"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="451ca28b-ae0b-4a3a-80c1-be806728904d">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="5b75a3a6-da67-4bd9-9911-9dc32b016745">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.InventoryTransferOrder.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="9b487516-e0df-4858-8767-888c7cea6239">
-    <producedTypes>
-      <objectType typeId="0f233ed0-b9e3-4e05-8b59-3327d1bb4c1b" valueTypeId="3e7a3f92-a997-40b8-ae98-d4068e27bc6a"/>
-      <rowType typeId="34e366bc-e5be-457c-90c4-813190649dc4" valueTypeId="b8dd4da9-5882-4f94-b1c4-c8f69e14cb8e"/>
-    </producedTypes>
-    <name>RowIDInfo</name>
-    <synonym>
-      <key>en</key>
-      <value>Row IDInfo</value>
-    </synonym>
-    <standardAttributes>
-      <dataHistory>Use</dataHistory>
-      <name>LineNumber</name>
-      <fillValue xsi:type="core:UndefinedValue"/>
-      <fullTextSearch>Use</fullTextSearch>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </standardAttributes>
-    <attributes uuid="f1a3f0f1-ca36-4231-b5d6-918ee8dd669d">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="3e9c3fd3-ef68-4a62-9b0b-d2fb56d7630e">
-      <name>RowID</name>
-      <synonym>
-        <key>en</key>
-        <value>Row ID</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="6f425c2b-d97a-4192-84ce-2cec1f9a9232">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Q</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="8b4de447-b891-4927-969a-b4a43abaec9b">
-      <name>Basis</name>
-      <synonym>
-        <key>en</key>
-        <value>Basis</value>
-      </synonym>
-      <type>
-        <types>DocumentRef</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5fb34757-4fe4-4283-9661-9b22f7daa020">
-      <name>CurrentStep</name>
-      <synonym>
-        <key>en</key>
-        <value>Current step</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.MovementRules</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <createOnInput>Use</createOnInput>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="fc359210-57d3-4bf8-a328-2549bbafd4bf">
-      <name>NextStep</name>
-      <synonym>
-        <key>en</key>
-        <value>Next step</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.MovementRules</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d58f95a8-62ae-4fe5-8f86-24af004ae238">
-      <name>RowRef</name>
-      <synonym>
-        <key>en</key>
-        <value>Row ref</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.RowIDs</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="f3a068e7-ce22-4558-88a7-e64a36c59cb0">
-      <name>BasisKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Basis key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <commands uuid="05afd2ec-bc48-4541-b975-3137c621f045">
-    <name>Generate</name>
-    <synonym>
-      <key>en</key>
-      <value>Inventory transfer order</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.InternalSupplyRequest</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-  </commands>
+  <attributes uuid="60b639e9-a28e-4abf-b79f-618bd6dec3fb">
+   <name>InternalSupplyRequest</name>
+   <synonym>
+    <key>ru</key>
+    <value>Заявка на обеспечение товара</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Internal supply request</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>İç talep siparişi</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.InternalSupplyRequest</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a975fbd1-69e1-475b-aba9-ccd4cae29c3d">
+   <name>QuantityInBaseUnit</name>
+   <synonym>
+    <key>ru</key>
+    <value>Количество в основной единице измерения</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Quantity in base unit</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ana birim miktarı</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="28784251-7202-4cd4-97a9-ea3d6cc73d44">
+   <name>PurchaseOrder</name>
+   <synonym>
+    <key>ru</key>
+    <value>Заказ поставщику</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Purchase order</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Satın alma siparişi</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.PurchaseOrder</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="141a08c8-178a-4978-8af5-29466bd1a517">
+  <producedTypes>
+   <objectType typeId="6aff04a2-e552-4a0c-8c27-96711eb10b9f" valueTypeId="69e0d29e-5808-47c0-b89d-994e5a2cede8"/>
+   <rowType typeId="317d37ab-30d9-4caa-80c3-0a4eff90a2c1" valueTypeId="b921fa56-2a55-4b7f-9d04-0cf76f5f7876"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="451ca28b-ae0b-4a3a-80c1-be806728904d">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5b75a3a6-da67-4bd9-9911-9dc32b016745">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.InventoryTransferOrder.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="9b487516-e0df-4858-8767-888c7cea6239">
+  <producedTypes>
+   <objectType typeId="0f233ed0-b9e3-4e05-8b59-3327d1bb4c1b" valueTypeId="3e7a3f92-a997-40b8-ae98-d4068e27bc6a"/>
+   <rowType typeId="34e366bc-e5be-457c-90c4-813190649dc4" valueTypeId="b8dd4da9-5882-4f94-b1c4-c8f69e14cb8e"/>
+  </producedTypes>
+  <name>RowIDInfo</name>
+  <synonym>
+   <key>ru</key>
+   <value>Row ID Инфо</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row IDInfo</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır ID bilgisi</value>
+  </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <attributes uuid="f1a3f0f1-ca36-4231-b5d6-918ee8dd669d">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3e9c3fd3-ef68-4a62-9b0b-d2fb56d7630e">
+   <name>RowID</name>
+   <synonym>
+    <key>ru</key>
+    <value>ID Строки</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Row ID</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Satır ID</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6f425c2b-d97a-4192-84ce-2cec1f9a9232">
+   <name>Quantity</name>
+   <synonym>
+    <key>ru</key>
+    <value>Количество</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Q</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Miktar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="8b4de447-b891-4927-969a-b4a43abaec9b">
+   <name>Basis</name>
+   <synonym>
+    <key>ru</key>
+    <value>Документ основание</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Basis</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kaynak evrak</value>
+   </synonym>
+   <type>
+    <types>DocumentRef</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5fb34757-4fe4-4283-9661-9b22f7daa020">
+   <name>CurrentStep</name>
+   <synonym>
+    <key>ru</key>
+    <value>Текущий шаг</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Current step</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Geçerli adım</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.MovementRules</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <createOnInput>Use</createOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="fc359210-57d3-4bf8-a328-2549bbafd4bf">
+   <name>NextStep</name>
+   <synonym>
+    <key>ru</key>
+    <value>Следующий шаг</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Next step</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sonraki adım</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.MovementRules</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d58f95a8-62ae-4fe5-8f86-24af004ae238">
+   <name>RowRef</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ссылка строки</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Row ref</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Satır Ref</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.RowIDs</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f3a068e7-ce22-4558-88a7-e64a36c59cb0">
+   <name>BasisKey</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ документа основания</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Basis key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kaynak anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <commands uuid="05afd2ec-bc48-4541-b975-3137c621f045">
+  <name>Generate</name>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ на перемещение товаров</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Inventory transfer order</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo transfer siparişi</value>
+  </synonym>
+  <group>FormCommandBarCreateBasedOn</group>
+  <commandParameterType>
+   <types>DocumentRef.InternalSupplyRequest</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

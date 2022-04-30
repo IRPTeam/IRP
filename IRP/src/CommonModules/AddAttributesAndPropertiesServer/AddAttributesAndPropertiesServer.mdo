@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8501ef5b-655b-4b7b-97f4-30ddae207cd5">
-  <name>AddAttributesAndPropertiesServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional attributes server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>AddAttributesAndPropertiesServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Дополнительные реквизиты сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Additional attributes server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek öznitelik sunucu</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

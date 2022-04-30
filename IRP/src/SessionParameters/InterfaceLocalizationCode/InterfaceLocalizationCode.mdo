@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4551d333-28aa-4955-ba7c-cab126c54876">
-  <name>InterfaceLocalizationCode</name>
-  <synonym>
-    <key>en</key>
-    <value>Interface localization code</value>
-  </synonym>
-  <type>
-    <types>String</types>
-    <stringQualifiers>
-      <length>5</length>
-    </stringQualifiers>
-  </type>
+ <name>InterfaceLocalizationCode</name>
+ <synonym>
+  <key>ru</key>
+  <value>Код локализации интерфейса</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Interface localization code</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Arayüz dil kodu</value>
+ </synonym>
+ <type>
+  <types>String</types>
+  <stringQualifiers>
+   <length>5</length>
+  </stringQualifiers>
+ </type>
 </mdclass:SessionParameter>

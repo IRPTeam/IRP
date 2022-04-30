@@ -1,15 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="03b87aca-2c53-48c7-a590-021850d26841">
-  <name>FillCheckProcessing_DescriptionCheckFilling</name>
-  <synonym>
-    <key>en</key>
-    <value>Fill check processing description check filling</value>
-  </synonym>
-  <source>
-    <types>ChartOfCharacteristicTypesObject</types>
-    <types>ExchangePlanObject</types>
-    <types>CatalogObject</types>
-  </source>
-  <event>FillCheckProcessing</event>
-  <handler>CommonModule.LocalizationEvents.FillCheckProcessing_DescriptionCheckFilling</handler>
+ <name>FillCheckProcessing_DescriptionCheckFilling</name>
+ <synonym>
+  <key>ru</key>
+  <value>Проверка заполнения наименования проверка заполнения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Fill check processing description check filling</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tanım kontrolü doldurma denetimi</value>
+ </synonym>
+ <source>
+  <types>ChartOfCharacteristicTypesObject</types>
+  <types>ExchangePlanObject</types>
+  <types>CatalogObject</types>
+ </source>
+ <event>FillCheckProcessing</event>
+ <handler>CommonModule.LocalizationEvents.FillCheckProcessing_DescriptionCheckFilling</handler>
 </mdclass:EventSubscription>

@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a41c5fc0-9674-4a9d-b426-69c7352649cb">
-  <name>RadioButton</name>
-  <synonym>
-    <key>en</key>
-    <value>Radio button</value>
-  </synonym>
+ <name>RadioButton</name>
+ <synonym>
+  <key>ru</key>
+  <value>Переключатель</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Radio button</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Radio button</value>
+ </synonym>
 </mdclass:CommonPicture>

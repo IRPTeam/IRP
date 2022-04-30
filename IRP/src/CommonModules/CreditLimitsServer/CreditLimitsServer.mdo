@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="715b3b48-b41d-44a6-a4d4-99d249f72e58">
-  <name>CreditLimitsServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Credit limits server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CreditLimitsServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Кредитные лимиты сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Credit limits server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Borç limiti server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

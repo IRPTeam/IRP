@@ -1,133 +1,197 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="092183ca-0113-41e9-991d-85fd24a2f3c7">
-  <producedTypes>
-    <selectionType typeId="a538879b-6138-4295-8c35-aeb3fcee9eff" valueTypeId="e30ae391-b993-4554-908e-01f075fe04fa"/>
-    <listType typeId="b33c16ff-3fb3-4f3f-b8a5-c93b696426da" valueTypeId="4da9f242-5833-49e5-86bc-174154c20631"/>
-    <managerType typeId="d2ba1dec-4e80-4e7f-94f0-e58d88f01cd7" valueTypeId="e8a41e04-0719-45bf-91e1-99364bc57d49"/>
-    <recordSetType typeId="1625978e-28f5-4d1f-a782-9a58c6cf88ec" valueTypeId="fac3d907-fc69-46b8-9677-6ee97b825587"/>
-    <recordKeyType typeId="fc0c5ac9-17aa-40c6-9b26-52c7cd81b0b2" valueTypeId="e3ef886d-88f2-40a9-9537-37620352343f"/>
-    <recordType typeId="779b236a-01ec-4444-a065-72fc0dccbaf0" valueTypeId="a529a41e-b4d8-49b7-a24f-dc5848c07359"/>
-    <recordManagerType typeId="9d937534-8625-402b-9e37-195354f103c0" valueTypeId="5a3f81b0-736d-401b-a443-a55c334815ab"/>
-  </producedTypes>
-  <name>T6060S_BatchCostAllocationInfo</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="092183ca-0113-41e9-991d-85fd24a2f3c7">
+ <producedTypes>
+  <selectionType typeId="a538879b-6138-4295-8c35-aeb3fcee9eff" valueTypeId="e30ae391-b993-4554-908e-01f075fe04fa"/>
+  <listType typeId="b33c16ff-3fb3-4f3f-b8a5-c93b696426da" valueTypeId="4da9f242-5833-49e5-86bc-174154c20631"/>
+  <managerType typeId="d2ba1dec-4e80-4e7f-94f0-e58d88f01cd7" valueTypeId="e8a41e04-0719-45bf-91e1-99364bc57d49"/>
+  <recordSetType typeId="1625978e-28f5-4d1f-a782-9a58c6cf88ec" valueTypeId="fac3d907-fc69-46b8-9677-6ee97b825587"/>
+  <recordKeyType typeId="fc0c5ac9-17aa-40c6-9b26-52c7cd81b0b2" valueTypeId="e3ef886d-88f2-40a9-9537-37620352343f"/>
+  <recordType typeId="779b236a-01ec-4444-a065-72fc0dccbaf0" valueTypeId="a529a41e-b4d8-49b7-a24f-dc5848c07359"/>
+  <recordManagerType typeId="9d937534-8625-402b-9e37-195354f103c0" valueTypeId="5a3f81b0-736d-401b-a443-a55c334815ab"/>
+ </producedTypes>
+ <name>T6060S_BatchCostAllocationInfo</name>
+ <synonym>
+  <key>ru</key>
+  <value>T6060 Информация по распределению доп. расходов на партию</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>T6060 Batch cost allocation info</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T6060 Parti ek gider dağıtım bilgisi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="bff4de2e-84d0-4daf-af23-457250af6d71">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>T6060 Batch cost allocation info</value>
+   <key>ru</key>
+   <value>Сумма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="bff4de2e-84d0-4daf-af23-457250af6d71">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="7cd20313-2980-46bc-b881-e2ba95f51a63">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="3334f81c-18a2-41cd-8a47-33009a25b330">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.PurchaseInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="a30ccb8e-501c-4334-a444-205c7c52a8a1">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="6e76db97-f3f2-46d9-99f9-974529da527a">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="b39016a8-2875-49f0-a251-3b9ee439fa6b">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="ec741feb-5aa9-4404-95dc-51bdce1d4a77">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="7cd20313-2980-46bc-b881-e2ba95f51a63">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="3334f81c-18a2-41cd-8a47-33009a25b330">
+  <name>Document</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="a30ccb8e-501c-4334-a444-205c7c52a8a1">
+  <name>Store</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="6e76db97-f3f2-46d9-99f9-974529da527a">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="b39016a8-2875-49f0-a251-3b9ee439fa6b">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz hareket tipi</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="ec741feb-5aa9-4404-95dc-51bdce1d4a77">
+  <name>Currency</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

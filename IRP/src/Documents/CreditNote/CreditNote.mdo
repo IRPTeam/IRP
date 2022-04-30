@@ -1,458 +1,698 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e91da949-718c-4b5d-bb88-389aca4d373f">
-  <producedTypes>
-    <objectType typeId="2373622f-c6cb-4155-ad8b-9c25caa5e6a1" valueTypeId="b07a3590-e859-461b-8d48-2d015d1a6e4c"/>
-    <refType typeId="2f22cd59-dad0-408f-aa08-1d8b85699d64" valueTypeId="55f43f03-e27f-43e0-b7e2-2dfde29b0e82"/>
-    <selectionType typeId="6e5f83c5-a1ec-4dc5-b94a-cd390a5b5bbd" valueTypeId="fb408dd0-51ff-4806-ac32-c5e08fe4dff7"/>
-    <listType typeId="4716f928-ca18-4b08-b008-a492792d0e3f" valueTypeId="83b977f9-d752-47c1-a6d9-4c2fd62002df"/>
-    <managerType typeId="f43f7216-0ed2-49c6-869d-95f1cea85b47" valueTypeId="a3666094-9d40-4b21-badb-3328b8624434"/>
-  </producedTypes>
-  <name>CreditNote</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e91da949-718c-4b5d-bb88-389aca4d373f">
+ <producedTypes>
+  <objectType typeId="2373622f-c6cb-4155-ad8b-9c25caa5e6a1" valueTypeId="b07a3590-e859-461b-8d48-2d015d1a6e4c"/>
+  <refType typeId="2f22cd59-dad0-408f-aa08-1d8b85699d64" valueTypeId="55f43f03-e27f-43e0-b7e2-2dfde29b0e82"/>
+  <selectionType typeId="6e5f83c5-a1ec-4dc5-b94a-cd390a5b5bbd" valueTypeId="fb408dd0-51ff-4806-ac32-c5e08fe4dff7"/>
+  <listType typeId="4716f928-ca18-4b08-b008-a492792d0e3f" valueTypeId="83b977f9-d752-47c1-a6d9-4c2fd62002df"/>
+  <managerType typeId="f43f7216-0ed2-49c6-869d-95f1cea85b47" valueTypeId="a3666094-9d40-4b21-badb-3328b8624434"/>
+ </producedTypes>
+ <name>CreditNote</name>
+ <synonym>
+  <key>ru</key>
+  <value>Кредит-нота</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Credit note</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Alacak dekontu</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.CreditNote.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_CreditNote</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
+  <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
+  <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.CurrencyMovementSets.Document_CreditNote</value>
+  </typesFilterValue>
+  <characteristicValues>Document.CreditNote.TabularSection.Currencies</characteristicValues>
+  <objectField>Document.CreditNote.TabularSection.Currencies.StandardAttribute.Ref</objectField>
+  <typeField>Document.CreditNote.TabularSection.Currencies.Attribute.MovementType</typeField>
+  <valueField>Document.CreditNote.TabularSection.Currencies.Attribute.Amount</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <listPresentation>
+  <key>ru</key>
+  <value>Кредит-ноты</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Credit notes</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Alacak dekontlar</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.CreditNote.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.CreditNote.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.CreditNote.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+ <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+ <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
+ <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+ <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
+ <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
+ <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="c234dcac-0747-4c23-80fc-83feda79e64c">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Credit note</value>
+   <key>ru</key>
+   <value>Организация</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.CreditNote.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_CreditNote</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
-    <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
-    <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.CurrencyMovementSets.Document_CreditNote</value>
-    </typesFilterValue>
-    <characteristicValues>Document.CreditNote.TabularSection.Currencies</characteristicValues>
-    <objectField>Document.CreditNote.TabularSection.Currencies.StandardAttribute.Ref</objectField>
-    <typeField>Document.CreditNote.TabularSection.Currencies.Attribute.MovementType</typeField>
-    <valueField>Document.CreditNote.TabularSection.Currencies.Attribute.Amount</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <listPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="423866d9-0079-49e9-9c93-34c2e98b0be9">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="9e1b63b4-f448-4576-bbdb-c5a11de67179">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="d9fbf252-bb83-45a2-96a0-6af67dd20a04">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="dde06c4e-0172-407b-b64b-fa1b881127d3">
+  <producedTypes>
+   <objectType typeId="e1fb99d6-8a4b-498f-9182-9a81738a523e" valueTypeId="9a8d5cb6-de96-491b-89ed-c7f214dd661f"/>
+   <rowType typeId="3db3cee2-5521-4152-9ad0-8f2be44a7f36" valueTypeId="af771585-af61-4316-8f68-bc98f0c21adf"/>
+  </producedTypes>
+  <name>Transactions</name>
+  <synonym>
+   <key>ru</key>
+   <value>Основное</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Transactions</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlemler</value>
+  </synonym>
+  <attributes uuid="b2e9b47d-21ab-442c-ab5f-8f2ce92a9699">
+   <name>Partner</name>
+   <synonym>
+    <key>ru</key>
+    <value>Партнер</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Credit notes</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.CreditNote.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.CreditNote.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.CreditNote.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
-  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
-  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
-  <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
-  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
-  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
-  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="c234dcac-0747-4c23-80fc-83feda79e64c">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Partner</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Cari hesap</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <forms uuid="423866d9-0079-49e9-9c93-34c2e98b0be9">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="9e1b63b4-f448-4576-bbdb-c5a11de67179">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="d9fbf252-bb83-45a2-96a0-6af67dd20a04">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="dde06c4e-0172-407b-b64b-fa1b881127d3">
-    <producedTypes>
-      <objectType typeId="e1fb99d6-8a4b-498f-9182-9a81738a523e" valueTypeId="9a8d5cb6-de96-491b-89ed-c7f214dd661f"/>
-      <rowType typeId="3db3cee2-5521-4152-9ad0-8f2be44a7f36" valueTypeId="af771585-af61-4316-8f68-bc98f0c21adf"/>
-    </producedTypes>
-    <name>Transactions</name>
-    <synonym>
-      <key>en</key>
-      <value>Transactions</value>
-    </synonym>
-    <attributes uuid="b2e9b47d-21ab-442c-ab5f-8f2ce92a9699">
-      <name>Partner</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="bba2013e-b2b2-4196-a1e9-cc414ac9c228">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="38831a52-1500-4bf2-8b58-e5f3efb97fc3">
-      <name>Agreement</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner term</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Agreements</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="84fe2a88-acc6-4b67-8e37-345953787ecf">
-      <name>Currency</name>
-      <synonym>
-        <key>en</key>
-        <value>Currency</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Currencies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="916231c4-ac03-4f45-b31f-71671526d323">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="47938513-2818-4dee-a64c-e6ae0e463735">
-      <name>ProfitLossCenter</name>
-      <synonym>
-        <key>en</key>
-        <value>Profit loss center</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BusinessUnits</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3a39e7e5-13ea-468d-b0a7-d48e3241fca7">
-      <name>ExpenseType</name>
-      <synonym>
-        <key>en</key>
-        <value>Expense type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExpenseAndRevenueTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="35372ab4-9f6d-46c3-a78a-c31a7a23b722">
-      <name>AdditionalAnalytic</name>
-      <synonym>
-        <key>en</key>
-        <value>Additional analytic</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5c4d3bf2-61d6-4ec0-8dd5-9096fc3ab346">
-      <name>LegalName</name>
-      <synonym>
-        <key>en</key>
-        <value>Legal name</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Companies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="2aef44e7-7104-4e1d-87bc-7f3164ab1509">
-      <name>LegalNameContract</name>
-      <synonym>
-        <key>en</key>
-        <value>Legal name contract</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.LegalNameContracts</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Company</name>
-        <field>Document.CreditNote.TabularSection.Transactions.Attribute.LegalName</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="60518354-b0ed-4c3a-94ca-aac151a28234">
-    <producedTypes>
-      <objectType typeId="3571e750-f2ff-4ee8-b838-ace905ec0505" valueTypeId="1fd89c2c-dc9b-4064-8b5d-0ce1fb7cd228"/>
-      <rowType typeId="2a075a78-b708-4b16-9138-51b2494f6f55" valueTypeId="fdd5afee-af45-4513-818f-bed8781b40da"/>
-    </producedTypes>
-    <name>Currencies</name>
-    <synonym>
-      <key>en</key>
-      <value>Currencies</value>
-    </synonym>
-    <attributes uuid="980f03a7-ccf3-4979-8d2b-9bc68ab17b5a">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3626957b-77d4-4225-a6db-a79533fee18f">
-      <name>CurrencyFrom</name>
-      <synonym>
-        <key>en</key>
-        <value>Currency from</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Currencies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="cb26c842-9b4f-424e-ad06-97ac2698a4e0">
-      <name>Rate</name>
-      <synonym>
-        <key>en</key>
-        <value>Rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="14038e1d-7c85-4397-9ff8-71ed070a3d23">
-      <name>ReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Reverse rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="22863303-2f53-41ba-916e-7b12243ffea8">
-      <name>ShowReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Show reverse rate</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="e9a1e28d-474a-4eb1-9459-afdc84c55e51">
-      <name>Multiplicity</name>
-      <synonym>
-        <key>en</key>
-        <value>Multiplicity</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="b8c737d8-3b7f-4bfb-8184-ddaf1c0031df">
-      <name>MovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Movement type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3c8d123b-5882-4db0-abee-29f8bb0f3b96">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="303d596a-6c81-4482-a663-43d751b23c8c">
-      <name>IsFixed</name>
-      <synonym>
-        <key>en</key>
-        <value>Is fixed</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="2fbe7cb9-a0c5-4cd9-a81e-0ee5eb5ac64d">
-    <producedTypes>
-      <objectType typeId="5a5250b6-11f1-4ca3-8efd-080aa021613e" valueTypeId="e981efcd-f2b2-4708-a494-8e09a3800a00"/>
-      <rowType typeId="d94cae2c-e363-443d-aa1b-e47752911e6a" valueTypeId="cf81b239-e951-48b7-b445-e4cd40fad548"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="2e86b46b-7095-4e40-820d-a8f28362b275">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="517d291a-7c5c-490d-b1ad-8bd6ba58c84a">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.CreditNote.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+  <attributes uuid="bba2013e-b2b2-4196-a1e9-cc414ac9c228">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="38831a52-1500-4bf2-8b58-e5f3efb97fc3">
+   <name>Agreement</name>
+   <synonym>
+    <key>ru</key>
+    <value>Валюта соглашения</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Partner term</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sözleşme</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Agreements</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="84fe2a88-acc6-4b67-8e37-345953787ecf">
+   <name>Currency</name>
+   <synonym>
+    <key>ru</key>
+    <value>Валюта</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Currency</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Döviz</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="916231c4-ac03-4f45-b31f-71671526d323">
+   <name>Amount</name>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="47938513-2818-4dee-a64c-e6ae0e463735">
+   <name>ProfitLossCenter</name>
+   <synonym>
+    <key>ru</key>
+    <value>Центр прибыли/убытков</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Profit loss center</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="3a39e7e5-13ea-468d-b0a7-d48e3241fca7">
+   <name>ExpenseType</name>
+   <synonym>
+    <key>ru</key>
+    <value>Статья расходов</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Expense type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Gider tipi</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="35372ab4-9f6d-46c3-a78a-c31a7a23b722">
+   <name>AdditionalAnalytic</name>
+   <synonym>
+    <key>ru</key>
+    <value>Дополнительная аналитика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Additional analytic</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ek detaylar</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5c4d3bf2-61d6-4ec0-8dd5-9096fc3ab346">
+   <name>LegalName</name>
+   <synonym>
+    <key>ru</key>
+    <value>Контрагент</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Legal name</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Fatura hesabı</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Companies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="2aef44e7-7104-4e1d-87bc-7f3164ab1509">
+   <name>LegalNameContract</name>
+   <synonym>
+    <key>ru</key>
+    <value>Договор контрагента</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Legal name contract</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Fatura hesap kontratı</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.LegalNameContracts</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Company</name>
+    <field>Document.CreditNote.TabularSection.Transactions.Attribute.LegalName</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="60518354-b0ed-4c3a-94ca-aac151a28234">
+  <producedTypes>
+   <objectType typeId="3571e750-f2ff-4ee8-b838-ace905ec0505" valueTypeId="1fd89c2c-dc9b-4064-8b5d-0ce1fb7cd228"/>
+   <rowType typeId="2a075a78-b708-4b16-9138-51b2494f6f55" valueTypeId="fdd5afee-af45-4513-818f-bed8781b40da"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currencies</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dövizler</value>
+  </synonym>
+  <attributes uuid="980f03a7-ccf3-4979-8d2b-9bc68ab17b5a">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="3626957b-77d4-4225-a6db-a79533fee18f">
+   <name>CurrencyFrom</name>
+   <synonym>
+    <key>ru</key>
+    <value>С валюты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Currency from</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Dövizden</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="cb26c842-9b4f-424e-ad06-97ac2698a4e0">
+   <name>Rate</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ставка</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Rate</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Oran</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="14038e1d-7c85-4397-9ff8-71ed070a3d23">
+   <name>ReverseRate</name>
+   <synonym>
+    <key>ru</key>
+    <value>Обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Reverse rate</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="22863303-2f53-41ba-916e-7b12243ffea8">
+   <name>ShowReverseRate</name>
+   <synonym>
+    <key>ru</key>
+    <value>Показать обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Show reverse rate</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur göster</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="e9a1e28d-474a-4eb1-9459-afdc84c55e51">
+   <name>Multiplicity</name>
+   <synonym>
+    <key>ru</key>
+    <value>Кратность</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Multiplicity</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Çarpan</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b8c737d8-3b7f-4bfb-8184-ddaf1c0031df">
+   <name>MovementType</name>
+   <synonym>
+    <key>ru</key>
+    <value>Статья движених денежных средств</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Movement type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hareket tipi</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="3c8d123b-5882-4db0-abee-29f8bb0f3b96">
+   <name>Amount</name>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="303d596a-6c81-4482-a663-43d751b23c8c">
+   <name>IsFixed</name>
+   <synonym>
+    <key>ru</key>
+    <value>Фиксированный</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Is fixed</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sabittir</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="2fbe7cb9-a0c5-4cd9-a81e-0ee5eb5ac64d">
+  <producedTypes>
+   <objectType typeId="5a5250b6-11f1-4ca3-8efd-080aa021613e" valueTypeId="e981efcd-f2b2-4708-a494-8e09a3800a00"/>
+   <rowType typeId="d94cae2c-e363-443d-aa1b-e47752911e6a" valueTypeId="cf81b239-e951-48b7-b445-e4cd40fad548"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="2e86b46b-7095-4e40-820d-a8f28362b275">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="517d291a-7c5c-490d-b1ad-8bd6ba58c84a">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.CreditNote.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
 </mdclass:Document>

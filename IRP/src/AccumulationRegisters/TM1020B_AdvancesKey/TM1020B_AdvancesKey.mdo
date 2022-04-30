@@ -1,57 +1,89 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="69771a96-d6de-4929-ad92-9cda1a029456">
-  <producedTypes>
-    <selectionType typeId="2c37cc58-a1b3-4a80-9058-79f1f7054d12" valueTypeId="dfe91da4-69e3-4d66-93d2-87ec77c14245"/>
-    <listType typeId="b4f35ec2-bff9-469e-8b0b-09fa854b5e4c" valueTypeId="44dbcc48-a38b-47ab-b028-70f59a16a009"/>
-    <managerType typeId="8d537925-8267-4a8d-ba70-cfb58c6045e1" valueTypeId="b3009473-5a4c-4248-86c2-635c33ca5a3e"/>
-    <recordSetType typeId="d39fb610-3202-4fc6-a127-e55d091c4adc" valueTypeId="f2ff9a76-ebc1-40db-a1af-3299707c4779"/>
-    <recordKeyType typeId="0d077341-3b63-4d05-89c5-aa97fa46107c" valueTypeId="5be7d088-22d8-47b5-896a-b1eccf70f098"/>
-    <recordType typeId="5ea31a31-3360-489a-9f12-33dc541b101f" valueTypeId="6be5e30b-90da-4f24-ab8d-0d5a532c20b0"/>
-  </producedTypes>
-  <name>TM1020B_AdvancesKey</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="69771a96-d6de-4929-ad92-9cda1a029456">
+ <producedTypes>
+  <selectionType typeId="2c37cc58-a1b3-4a80-9058-79f1f7054d12" valueTypeId="dfe91da4-69e3-4d66-93d2-87ec77c14245"/>
+  <listType typeId="b4f35ec2-bff9-469e-8b0b-09fa854b5e4c" valueTypeId="44dbcc48-a38b-47ab-b028-70f59a16a009"/>
+  <managerType typeId="8d537925-8267-4a8d-ba70-cfb58c6045e1" valueTypeId="b3009473-5a4c-4248-86c2-635c33ca5a3e"/>
+  <recordSetType typeId="d39fb610-3202-4fc6-a127-e55d091c4adc" valueTypeId="f2ff9a76-ebc1-40db-a1af-3299707c4779"/>
+  <recordKeyType typeId="0d077341-3b63-4d05-89c5-aa97fa46107c" valueTypeId="5be7d088-22d8-47b5-896a-b1eccf70f098"/>
+  <recordType typeId="5ea31a31-3360-489a-9f12-33dc541b101f" valueTypeId="6be5e30b-90da-4f24-ab8d-0d5a532c20b0"/>
+ </producedTypes>
+ <name>TM1020B_AdvancesKey</name>
+ <synonym>
+  <key>ru</key>
+  <value>TM1050 Ключи авансов партнеров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>TM1020 Advances key</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>TM1020 Cari hesap avans anahtarları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultListForm>AccumulationRegister.TM1020B_AdvancesKey.Form.ListForm</defaultListForm>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="ffc15173-69ce-480f-8f6c-01f2b116fd87">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>TM1020 Advances key</value>
+   <key>ru</key>
+   <value>Сумма оплаты</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultListForm>AccumulationRegister.TM1020B_AdvancesKey.Form.ListForm</defaultListForm>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="ffc15173-69ce-480f-8f6c-01f2b116fd87">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="2056ac88-0767-4242-ba6b-5f59482fa52e">
-    <name>AdvanceKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Advance key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.AdvancesKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <forms uuid="4271fa25-2f1d-41a5-a26c-b04bd47cb03b">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="2056ac88-0767-4242-ba6b-5f59482fa52e">
+  <name>AdvanceKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ аванса партнеров</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Advance key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap avans anahtarı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.AdvancesKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <forms uuid="4271fa25-2f1d-41a5-a26c-b04bd47cb03b">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:AccumulationRegister>

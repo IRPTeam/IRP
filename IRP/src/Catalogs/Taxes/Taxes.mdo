@@ -1,247 +1,375 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="723a9818-32af-46ee-bc1d-d3bc21325ddd">
-  <producedTypes>
-    <objectType typeId="aceae708-8ef4-4b2d-9a9d-5ff6e9cf6b24" valueTypeId="b33e940e-1d63-4de0-b3f9-f5408d76feef"/>
-    <refType typeId="b111dda1-60b7-4c80-9523-5f86868cddef" valueTypeId="4a1dbe57-8943-4a9f-a86a-86fdf3e602a3"/>
-    <selectionType typeId="32fe60a9-324c-471c-b912-1cdd30e1c75d" valueTypeId="fd1cb97e-e71a-4adf-8803-30c262b85743"/>
-    <listType typeId="0e399761-ef46-46f1-95e1-f65994ccbdec" valueTypeId="3a8a6cd9-a196-4305-881f-eaafbf2b4e28"/>
-    <managerType typeId="dec1cbf7-92bd-41a0-81e6-b15190bad1a8" valueTypeId="fde0da9a-8e4f-4fa3-adb7-70ab2777c0c8"/>
-  </producedTypes>
-  <name>Taxes</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="723a9818-32af-46ee-bc1d-d3bc21325ddd">
+ <producedTypes>
+  <objectType typeId="aceae708-8ef4-4b2d-9a9d-5ff6e9cf6b24" valueTypeId="b33e940e-1d63-4de0-b3f9-f5408d76feef"/>
+  <refType typeId="b111dda1-60b7-4c80-9523-5f86868cddef" valueTypeId="4a1dbe57-8943-4a9f-a86a-86fdf3e602a3"/>
+  <selectionType typeId="32fe60a9-324c-471c-b912-1cdd30e1c75d" valueTypeId="fd1cb97e-e71a-4adf-8803-30c262b85743"/>
+  <listType typeId="0e399761-ef46-46f1-95e1-f65994ccbdec" valueTypeId="3a8a6cd9-a196-4305-881f-eaafbf2b4e28"/>
+  <managerType typeId="dec1cbf7-92bd-41a0-81e6-b15190bad1a8" valueTypeId="fde0da9a-8e4f-4fa3-adb7-70ab2777c0c8"/>
+ </producedTypes>
+ <name>Taxes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Виды налогов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Tax types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Vergi tipleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Taxes</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Taxes</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.Taxes.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.Taxes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.Taxes.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.Taxes.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Вид налога</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Tax type</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Vergi türü</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.Taxes.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.Taxes.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.Taxes.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="96dd4c52-3f32-422a-9a9f-8a80bfc5da45">
+  <name>ExternalDataProcSettings</name>
   <synonym>
-    <key>en</key>
-    <value>Tax types</value>
+   <key>ru</key>
+   <value>Настройки внешней обработки</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Taxes</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Taxes</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.Taxes.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.Taxes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.Taxes.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.Taxes.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Plugin settings</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Eklentiler ayarları</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="55d1c507-7cbc-44c5-a841-eb9d029a7df2">
+  <name>ExternalDataProc</name>
+  <synonym>
+   <key>ru</key>
+   <value>Внешняя обработка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Plugins</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Eklentiler</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExternalDataProc</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="756e5b91-20cc-4d3b-ac64-44a1b36a8948">
+  <name>Type</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tip</value>
+  </synonym>
+  <type>
+   <types>EnumRef.TaxType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="cdc68f49-26d5-42c6-aacd-85fe929d386e">
+  <producedTypes>
+   <objectType typeId="f0cf4f9b-1f4c-4400-9d90-2509369a03d3" valueTypeId="6f43b356-5cc3-4de7-853c-2fa728fd6452"/>
+   <rowType typeId="80e775e4-842e-4b31-9856-fb226d8fd420" valueTypeId="aac4dbba-372a-4b0b-ac75-1bbf52a81be2"/>
+  </producedTypes>
+  <name>TaxRates</name>
+  <synonym>
+   <key>ru</key>
+   <value>Налоговые ставки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax rates</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi oranları</value>
+  </synonym>
+  <attributes uuid="ecc823f8-14ce-43b4-b8b9-167d43789b03">
+   <name>TaxRate</name>
+   <synonym>
+    <key>ru</key>
+    <value>Налоговая ставка</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Tax type</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Taxes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.Taxes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.Taxes.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="96dd4c52-3f32-422a-9a9f-8a80bfc5da45">
-    <name>ExternalDataProcSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>Plugin settings</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Tax rate</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Vergi oranı</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="55d1c507-7cbc-44c5-a841-eb9d029a7df2">
-    <name>ExternalDataProc</name>
-    <synonym>
-      <key>en</key>
-      <value>Plugins</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExternalDataProc</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="d3e0325a-24a1-455c-8965-2c9f9b0b0331">
+  <producedTypes>
+   <objectType typeId="08d5dcd8-0bf0-4970-8798-e1c6651a82ae" valueTypeId="ac6b49ad-3407-4658-82a4-ffa3a1920155"/>
+   <rowType typeId="2d154c69-0826-4dc6-9d45-7a61ffc54100" valueTypeId="4ffc46d2-b08f-414a-a6fe-150ee8663d1f"/>
+  </producedTypes>
+  <name>UseDocuments</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документы применения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Use documents</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak kullanmak</value>
+  </synonym>
+  <attributes uuid="39f0bb03-7fe7-4444-a256-ba920c587672">
+   <name>DocumentName</name>
+   <synonym>
+    <key>ru</key>
+    <value>Наименование документа</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Document name</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Evrak ismi</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>50</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="756e5b91-20cc-4d3b-ac64-44a1b36a8948">
-    <name>Type</name>
-    <synonym>
-      <key>en</key>
-      <value>Type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.TaxType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="db8598bf-75e8-4867-b1c2-2dd00de73f07">
+  <producedTypes>
+   <objectType typeId="65e82cd9-ccf9-4fa6-a22d-b63976abb463" valueTypeId="5c1fe18c-6116-4daa-b94e-4998cd1dff95"/>
+   <rowType typeId="1cf2dc7a-e0ae-4458-948c-9c0f9015bccf" valueTypeId="a2c5ea94-8e33-45b4-93a9-6dc1419a034c"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="9083420a-a5b7-4c23-9627-09df5bd74a36">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="cdc68f49-26d5-42c6-aacd-85fe929d386e">
-    <producedTypes>
-      <objectType typeId="f0cf4f9b-1f4c-4400-9d90-2509369a03d3" valueTypeId="6f43b356-5cc3-4de7-853c-2fa728fd6452"/>
-      <rowType typeId="80e775e4-842e-4b31-9856-fb226d8fd420" valueTypeId="aac4dbba-372a-4b0b-ac75-1bbf52a81be2"/>
-    </producedTypes>
-    <name>TaxRates</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax rates</value>
-    </synonym>
-    <attributes uuid="ecc823f8-14ce-43b4-b8b9-167d43789b03">
-      <name>TaxRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Tax rate</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.TaxRates</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="d3e0325a-24a1-455c-8965-2c9f9b0b0331">
-    <producedTypes>
-      <objectType typeId="08d5dcd8-0bf0-4970-8798-e1c6651a82ae" valueTypeId="ac6b49ad-3407-4658-82a4-ffa3a1920155"/>
-      <rowType typeId="2d154c69-0826-4dc6-9d45-7a61ffc54100" valueTypeId="4ffc46d2-b08f-414a-a6fe-150ee8663d1f"/>
-    </producedTypes>
-    <name>UseDocuments</name>
-    <synonym>
-      <key>en</key>
-      <value>Use documents</value>
-    </synonym>
-    <attributes uuid="39f0bb03-7fe7-4444-a256-ba920c587672">
-      <name>DocumentName</name>
-      <synonym>
-        <key>en</key>
-        <value>Document name</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>50</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="db8598bf-75e8-4867-b1c2-2dd00de73f07">
-    <producedTypes>
-      <objectType typeId="65e82cd9-ccf9-4fa6-a22d-b63976abb463" valueTypeId="5c1fe18c-6116-4daa-b94e-4998cd1dff95"/>
-      <rowType typeId="1cf2dc7a-e0ae-4458-948c-9c0f9015bccf" valueTypeId="a2c5ea94-8e33-45b4-93a9-6dc1419a034c"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="9083420a-a5b7-4c23-9627-09df5bd74a36">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9cbb4176-9889-4488-95f8-603ca242a1ee">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.Taxes.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3c68d3c4-e72d-4679-a1f9-2d50cc72cf16">
-      <name>SearchLiteral</name>
-      <synonym>
-        <key>en</key>
-        <value>Search literal</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="976c42dd-94f0-4def-88b5-5d9c13d6f5cc">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2f2d97af-e862-478c-b833-d840f4e88036">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f5551971-f031-4c07-82db-b47cb2d864f3">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="9cbb4176-9889-4488-95f8-603ca242a1ee">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.Taxes.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="3c68d3c4-e72d-4679-a1f9-2d50cc72cf16">
+   <name>SearchLiteral</name>
+   <synonym>
+    <key>ru</key>
+    <value>Буквальный поиск</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Search literal</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Arama metni</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>500</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="976c42dd-94f0-4def-88b5-5d9c13d6f5cc">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2f2d97af-e862-478c-b833-d840f4e88036">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f5551971-f031-4c07-82db-b47cb2d864f3">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

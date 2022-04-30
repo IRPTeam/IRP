@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="78566321-8155-49b8-8e45-f9de2b1020f3">
-  <name>RunThinClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Run thin client</value>
-  </synonym>
+ <name>RunThinClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Запуск тонкого клиента</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Run thin client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İnce istemci çalıştırma</value>
+ </synonym>
 </mdclass:Role>

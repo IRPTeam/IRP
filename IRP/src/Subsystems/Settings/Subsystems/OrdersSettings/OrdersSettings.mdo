@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6e382d5a-6b29-4f4f-9252-fc4048c44413">
-  <name>OrdersSettings</name>
-  <synonym>
-    <key>en</key>
-    <value>Orders settings</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.ObjectStatuses</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>OrdersSettings</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки документов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Orders settings</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Sipariş ayarları</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.ObjectStatuses</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

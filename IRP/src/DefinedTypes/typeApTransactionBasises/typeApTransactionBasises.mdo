@@ -1,20 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1337bec2-50b4-4a58-a050-6091c5ee2ee4">
-  <producedTypes>
-    <containerType typeId="bb06566e-5116-45a9-89ce-dd1a118126b3" valueTypeId="ed3bbd78-e58b-4d9c-ab23-1d12cc594d48"/>
-  </producedTypes>
-  <name>typeApTransactionBasises</name>
-  <synonym>
-    <key>en</key>
-    <value>Type AP transaction basises</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.CashTransferOrder</types>
-    <types>DocumentRef.PurchaseInvoice</types>
-    <types>DocumentRef.DebitNote</types>
-    <types>DocumentRef.CreditNote</types>
-    <types>DocumentRef.PurchaseReturn</types>
-    <types>DocumentRef.OpeningEntry</types>
-    <types>DocumentRef.SalesReturn</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="bb06566e-5116-45a9-89ce-dd1a118126b3" valueTypeId="ed3bbd78-e58b-4d9c-ab23-1d12cc594d48"/>
+ </producedTypes>
+ <name>typeApTransactionBasises</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип основание операции взаиморасчета с поставщиком</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type AP transaction basises</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip Satışlar işlem kaynağı</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.CashTransferOrder</types>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.DebitNote</types>
+  <types>DocumentRef.CreditNote</types>
+  <types>DocumentRef.PurchaseReturn</types>
+  <types>DocumentRef.OpeningEntry</types>
+  <types>DocumentRef.SalesReturn</types>
+ </type>
 </mdclass:DefinedType>

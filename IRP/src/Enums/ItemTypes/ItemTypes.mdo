@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="85fc740a-0bba-4bcd-8ca3-447d426c14ed">
-  <producedTypes>
-    <refType typeId="04b8c2e2-510e-4973-a771-f4fc806b1f33" valueTypeId="6d38738e-0a06-470f-bcf2-e7a418995058"/>
-    <listType typeId="c0858e6f-c523-4190-852a-0a0937a341ed" valueTypeId="b53d81af-f89e-4acc-b0ee-981ef6ee3961"/>
-    <managerType typeId="df6180f3-7b40-49e0-add5-ff3d85eb810e" valueTypeId="f9b5587e-b3f0-4525-92a6-4844a61b5be8"/>
-  </producedTypes>
-  <name>ItemTypes</name>
+ <producedTypes>
+  <refType typeId="04b8c2e2-510e-4973-a771-f4fc806b1f33" valueTypeId="6d38738e-0a06-470f-bcf2-e7a418995058"/>
+  <listType typeId="c0858e6f-c523-4190-852a-0a0937a341ed" valueTypeId="b53d81af-f89e-4acc-b0ee-981ef6ee3961"/>
+  <managerType typeId="df6180f3-7b40-49e0-add5-ff3d85eb810e" valueTypeId="f9b5587e-b3f0-4525-92a6-4844a61b5be8"/>
+ </producedTypes>
+ <name>ItemTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Виды номенклатуры</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Item types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Malzeme tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="4be789f8-2d36-4169-9f2d-4c825c8d712c">
+  <name>Service</name>
   <synonym>
-    <key>en</key>
-    <value>Item types</value>
+   <key>ru</key>
+   <value>Услуга</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="4be789f8-2d36-4169-9f2d-4c825c8d712c">
-    <name>Service</name>
-    <synonym>
-      <key>en</key>
-      <value>Service</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7bbe3a49-8365-4785-a38c-abee4d666e13">
-    <name>Product</name>
-    <synonym>
-      <key>en</key>
-      <value>Product</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Service</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Servis</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="7bbe3a49-8365-4785-a38c-abee4d666e13">
+  <name>Product</name>
+  <synonym>
+   <key>ru</key>
+   <value>Товар</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Product</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,20 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c948ea53-0a86-4d5f-b57b-3c84511e4f40">
-  <producedTypes>
-    <containerType typeId="3a216acd-3e72-4341-b9ac-61f8f77ab888" valueTypeId="a483e850-d14b-4d2e-bd85-12c402b16c81"/>
-  </producedTypes>
-  <name>typeReceiptBasis</name>
-  <synonym>
-    <key>en</key>
-    <value>Type receipt basis</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.PurchaseInvoice</types>
-    <types>DocumentRef.Unbundling</types>
-    <types>DocumentRef.PurchaseOrder</types>
-    <types>DocumentRef.SalesReturn</types>
-    <types>DocumentRef.Bundling</types>
-    <types>DocumentRef.InventoryTransfer</types>
-    <types>DocumentRef.GoodsReceipt</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="3a216acd-3e72-4341-b9ac-61f8f77ab888" valueTypeId="a483e850-d14b-4d2e-bd85-12c402b16c81"/>
+ </producedTypes>
+ <name>typeReceiptBasis</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип основание приемки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type receipt basis</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip irsaliye kaynak evrakı</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.Unbundling</types>
+  <types>DocumentRef.PurchaseOrder</types>
+  <types>DocumentRef.SalesReturn</types>
+  <types>DocumentRef.Bundling</types>
+  <types>DocumentRef.InventoryTransfer</types>
+  <types>DocumentRef.GoodsReceipt</types>
+ </type>
 </mdclass:DefinedType>

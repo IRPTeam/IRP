@@ -1,52 +1,84 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Enum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="76036079-c839-4815-98a9-864809de6d17">
-  <producedTypes>
-    <refType typeId="12f76e56-9b79-4d42-bd53-19bfcf36e785" valueTypeId="eb8cd390-9e82-4f23-b962-947025c3c695"/>
-    <listType typeId="32687e9f-d818-4714-bcc3-de9202c3cd60" valueTypeId="60b9d895-45e0-40c5-a39d-ea71cb98af9d"/>
-    <managerType typeId="a788958b-532d-480f-9c40-b2cd5eef3cb6" valueTypeId="1846f068-fb88-4490-b7a6-8cce5b796890"/>
-  </producedTypes>
-  <name>DataAreaStatus</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="76036079-c839-4815-98a9-864809de6d17">
+ <producedTypes>
+  <refType typeId="12f76e56-9b79-4d42-bd53-19bfcf36e785" valueTypeId="eb8cd390-9e82-4f23-b962-947025c3c695"/>
+  <listType typeId="32687e9f-d818-4714-bcc3-de9202c3cd60" valueTypeId="60b9d895-45e0-40c5-a39d-ea71cb98af9d"/>
+  <managerType typeId="a788958b-532d-480f-9c40-b2cd5eef3cb6" valueTypeId="1846f068-fb88-4490-b7a6-8cce5b796890"/>
+ </producedTypes>
+ <name>DataAreaStatus</name>
+ <synonym>
+  <key>ru</key>
+  <value>Статус рабочей области</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Data area status</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Veri alanlar statüsü</value>
+ </synonym>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Order</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="b05025ec-ba53-4144-bdbb-6b4fa7c7c1ab">
+  <name>AreaPreparation</name>
   <synonym>
-    <key>en</key>
-    <value>Data area status</value>
+   <key>ru</key>
+   <value>Подготовка области</value>
   </synonym>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Order</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="b05025ec-ba53-4144-bdbb-6b4fa7c7c1ab">
-    <name>AreaPreparation</name>
-    <synonym>
-      <key>en</key>
-      <value>Area preparation</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="247ab147-aaa9-4f44-8d72-5731ee0ed071">
-    <name>Working</name>
-    <synonym>
-      <key>en</key>
-      <value>Working</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="29053376-d9db-4b62-88fb-50267b81d0b8">
-    <name>Closed</name>
-    <synonym>
-      <key>en</key>
-      <value>Closed</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Area preparation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alan hazırlama</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="247ab147-aaa9-4f44-8d72-5731ee0ed071">
+  <name>Working</name>
+  <synonym>
+   <key>ru</key>
+   <value>Рабочая</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Working</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Devam ediyor</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="29053376-d9db-4b62-88fb-50267b81d0b8">
+  <name>Closed</name>
+  <synonym>
+   <key>ru</key>
+   <value>Закрытая</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Closed</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kapalı</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,27 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SettingsStorage xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9917f843-94bf-4c5e-a09f-b195691a7609">
-  <producedTypes>
-    <managerType typeId="e560640d-5faf-45e6-94df-5b531f02da07" valueTypeId="8d92ca73-a378-4463-9103-bf05c74e51f9"/>
-  </producedTypes>
-  <name>ReportOptions</name>
+ <producedTypes>
+  <managerType typeId="e560640d-5faf-45e6-94df-5b531f02da07" valueTypeId="8d92ca73-a378-4463-9103-bf05c74e51f9"/>
+ </producedTypes>
+ <name>ReportOptions</name>
+ <synonym>
+  <key>ru</key>
+  <value>Варианты отчета</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report options</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Rapor seçenekleri</value>
+ </synonym>
+ <defaultSaveForm>SettingsStorage.ReportOptions.Form.SaveForm</defaultSaveForm>
+ <defaultLoadForm>SettingsStorage.ReportOptions.Form.LoadForm</defaultLoadForm>
+ <forms uuid="f23f5e01-5a16-4494-ab71-37a3e2cfbf44">
+  <name>SaveForm</name>
   <synonym>
-    <key>en</key>
-    <value>Report options</value>
+   <key>ru</key>
+   <value>Сохранить форму</value>
   </synonym>
-  <defaultSaveForm>SettingsStorage.ReportOptions.Form.SaveForm</defaultSaveForm>
-  <defaultLoadForm>SettingsStorage.ReportOptions.Form.LoadForm</defaultLoadForm>
-  <forms uuid="f23f5e01-5a16-4494-ab71-37a3e2cfbf44">
-    <name>SaveForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Save form</value>
-    </synonym>
-  </forms>
-  <forms uuid="93fb0566-9a73-45da-835b-0c2811c50bc0">
-    <name>LoadForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Load form</value>
-    </synonym>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Save form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form kaydet</value>
+  </synonym>
+ </forms>
+ <forms uuid="93fb0566-9a73-45da-835b-0c2811c50bc0">
+  <name>LoadForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Загрузить форму</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Load form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Yükleme kaynağı</value>
+  </synonym>
+ </forms>
 </mdclass:SettingsStorage>

@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="10681d34-36d8-4f04-b3a0-cf5ada7d97f3">
-  <name>Delivery</name>
-  <synonym>
-    <key>en</key>
-    <value>Delivery</value>
-  </synonym>
+ <name>Delivery</name>
+ <synonym>
+  <key>ru</key>
+  <value>Доставка</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Delivery</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Teslimat</value>
+ </synonym>
 </mdclass:CommonPicture>

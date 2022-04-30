@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="82d91519-4708-4c45-b849-773f10cc11c3">
-  <name>HardwareServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Hardware server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>HardwareServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Оборудование сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Hardware server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Donanım server</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

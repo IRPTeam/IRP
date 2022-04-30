@@ -1224,7 +1224,7 @@ Scenario: _0154188 check customer on change in POS
 			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''       | '520,00' |
 		And I close all client application windows
 
-Scenario:  _0154141 manual price adjustment in the POS
+Scenario: _0154141 manual price adjustment in the POS
 	And I close all client application windows
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
@@ -1278,6 +1278,115 @@ Scenario:  _0154141 manual price adjustment in the POS
 			| 'Dress'    | 'S/Yellow'  | '1,000'    | '550,00' | ''       | '550,00' |
 			| 'Trousers' | '36/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
 		And I close all client application windows
+
+Scenario:  _0154142 change comment in POS
+	And I close all client application windows
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"
+	* Add products
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+				| 'Item'  |
+				| 'Dress' |
+		And I go to line in "ItemKeysPickup" table
+				| 'Presentation' |
+				| 'M/White'      |
+		And I select current line in "ItemKeysPickup" table
+	* Filling comment
+		And I move to "Additional" tab
+		And I input "test" text in the field named "Description"		
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "Enter" button
+	* Check Retail Sales Receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "Description" became equal to "test"
+		Then the form attribute named "UsePartnerTransactions" became equal to "No"
+		And I delete "$$NumberRetailSalesReceipt0154142$$" variable
+		And I delete "$$RetailSalesReceipt0154142$$" variable
+		And I save the value of "Number" field as "$$NumberRetailSalesReceipt0154142$$"
+		And I click the button named "FormPost"
+		And I save the window as "$$RetailSalesReceipt0154142$$"
+	And I close all client application windows	
+
+Scenario:  _0154143 change payment term in POS
+	And I close all client application windows
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"
+	* Add products
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+				| 'Item'  |
+				| 'Dress' |
+		And I go to line in "ItemKeysPickup" table
+				| 'Presentation' |
+				| 'M/White'      |
+		And I select current line in "ItemKeysPickup" table
+	* Change partner term
+		And I move to "Additional" tab
+		And I click Select button of "Partner term" field	
+		If "List" table does not contain lines Then
+			| 'Description'           |
+			| 'Retail partner term 2' |
+			And I click the button named "FormCreate"
+			And I input "Retail partner term 2" text in "ENG" field
+			And I click Select button of "Multi currency movement type" field
+			Then "Multi currency movement types" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'TRY'         |
+			And I select current line in "List" table
+			And I click Select button of "Price type" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Discount Price TRY 1'      |
+			And I select current line in "List" table
+			And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Retail partner term 2' |
+		And I select current line in "List" table
+	* Check price change
+		And "ItemList" table became equal
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress' | ''             | 'M/White'  | ''        | '494,00' | '1,000'    | ''       | '582,92' |
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "Enter" button
+	* Check Retail Sales Receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term 2"
+		And "ItemList" table contains lines
+			| 'Price type'           | 'Item'  | 'Profit loss center' | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Discount Price TRY 1' | 'Dress' | 'Shop 01'            | 'M/White'  | 'No'                 | '1,000' | 'pcs'  | '88,92'      | '494,00' | '18%' | '494,00'     | '582,92'       | 'Store 01' |	
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "582,92"		
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "UsePartnerTransactions" became equal to "No"
+		And I delete "$$NumberRetailSalesReceipt0154143$$" variable
+		And I delete "$$RetailSalesReceipt0154143$$" variable
+		And I save the value of "Number" field as "$$NumberRetailSalesReceipt0154143$$"
+		And I click the button named "FormPost"
+		And I save the window as "$$RetailSalesReceipt0154143$$"
+	And I close all client application windows	
+		
+				
+		
+				
+
 
 Scenario:  _0154148 check that the Retail return receipt amount and the amount of payment must match
 	* Create Retail return receipt

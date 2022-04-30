@@ -1353,21 +1353,12 @@ Scenario: add sales tax settings
 		And I close all client application windows
 		
 
-Scenario: add test extension
-	Given I open hyperlink "e1cib/list/Catalog.Extensions"
-	And I click the button named "FormCreate"
-	And I select external file "#workingDir#/DataProcessor/IRP_TestExtension.cfe"
-	And I click "Add file" button
-	And I input "TestExtension" text in "Description" field
-	And I click the button named "FormWriteAndClose"
-	And I close TestClient session
-	And I install the "TestExtension" extension
-	Given I open new TestClient session or connect the existing one
+
 
 Scenario: add Additional Functionality extension
 	Given I open hyperlink "e1cib/list/Catalog.Extensions"
 	And I click the button named "FormCreate"
-	And I select external file "#workingDir#/DataProcessor/IRP_AdditionalFunctionality.cfe"
+	And I select external file "#workingDir#/DataProcessor/AdditionalFunctionality.cfe"
 	And I click "Add file" button
 	And Delay 2
 	And I input "AdditionalFunctionality" text in "Description" field

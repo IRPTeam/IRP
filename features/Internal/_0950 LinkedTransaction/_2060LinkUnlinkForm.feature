@@ -558,7 +558,7 @@ Scenario: _20600031 check Link unlink basis documents form
 				| 'TRY'      | '520,00' | '1,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
 			And I activate current test client window
 			And Delay 5
-			And I press keyboard shortcut "Enter"
+			And I select current line in "BasisesTree" table
 			And "ResultsTable" table became equal
 				| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                   | 'Unit' | 'Basis unit' | 'Quantity in base unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' |
 				| 'Dress' | 'XS/Blue'  | 'Store 02' | '*'   | 'Sales order 3 dated 27.01.2021 19:50:45' | 'pcs'  | 'pcs'        | '2,000'                 | 'SI&SC'        | '*'       | ''             | '*'      | '*'         |

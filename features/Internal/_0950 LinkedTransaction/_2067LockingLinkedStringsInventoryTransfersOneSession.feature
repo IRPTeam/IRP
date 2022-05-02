@@ -65,9 +65,13 @@ Scenario: _2067001 preparation (locking linked strings)
 	When Create ISR,ITO,IT,SC (locking linked strings)
 	And I execute 1C:Enterprise script at server
 		| "Documents.InternalSupplyRequest.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.InventoryTransferOrder.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.InventoryTransfer.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.ShipmentConfirmation.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.GoodsReceipt.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
 
 

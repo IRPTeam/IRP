@@ -80,6 +80,7 @@ Scenario: _043000 preparation (Debit note)
 			When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -90,6 +91,7 @@ Scenario: _043000 preparation (Debit note)
 			When Create document ShipmentConfirmation objects (check movements)
 			And I execute 1C:Enterprise script at server
 				| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		If "List" table does not contain lines Then
@@ -99,6 +101,7 @@ Scenario: _043000 preparation (Debit note)
 			When Create document SalesInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		If "List" table does not contain lines Then
@@ -116,10 +119,12 @@ Scenario: _043000 preparation (Debit note)
 			When Create document SalesReturn objects (check movements)
 			And I execute 1C:Enterprise script at server
 					| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 					| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document DebitNote objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.DebitNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.DebitNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		

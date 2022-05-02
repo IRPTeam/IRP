@@ -61,11 +61,14 @@ Scenario: _028500 preparation (create document Sales return)
 		When Create document SalesInvoice objects (linked)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesReturnOrder objects (creation based on)
 		And I execute 1C:Enterprise script at server
@@ -73,7 +76,9 @@ Scenario: _028500 preparation (create document Sales return)
 		When Create document SalesReturnOrder objects (creation based on, without SI)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturnOrder.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturnOrder.FindByNumber(106).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturnOrder.FindByNumber(107).GetObject().Write(DocumentWriteMode.Posting);" |
 
 

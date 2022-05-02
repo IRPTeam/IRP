@@ -64,16 +64,20 @@ Scenario: _024000 preparation (Sales invoice)
 	When Create document SalesOrder objects (SC before SI, creation based on)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document ShipmentConfirmation objects (creation based on, for SI 15)
 	When Create document ShipmentConfirmation objects (creation based on, without SO and SI)
 	And I execute 1C:Enterprise script at server
 		| "Documents.ShipmentConfirmation.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.ShipmentConfirmation.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.ShipmentConfirmation.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create SO, SC with two same items
 	And I execute 1C:Enterprise script at server
-		| "Documents.SalesOrder.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);" |	
+		| "Documents.SalesOrder.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server	
 		| "Documents.ShipmentConfirmation.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);" |
 
 	

@@ -61,11 +61,14 @@ Scenario: _028000 preparation (Sales return order)
 	When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document SalesInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: _028001 create document Sales return order based on SI (button Create)

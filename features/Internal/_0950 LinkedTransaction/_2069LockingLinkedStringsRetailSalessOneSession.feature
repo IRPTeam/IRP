@@ -67,6 +67,7 @@ Scenario: _2069001 preparation (locking linked strings)
 	When Create Retail sales receipt, Retail return receipt (locking linked strings)
 	And I execute 1C:Enterprise script at server
 		| "Documents.RetailSalesReceipt.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.RetailReturnReceipt.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: _2069002 check locking header in the Retail sales receipt with linked documents (one session)

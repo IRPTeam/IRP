@@ -89,8 +89,11 @@ Scenario: _040158 preparation (Sales order closing)
 		When Create document SalesOrder, SalesInvoice, SalesOrderClosing, CashReceipt objects (with aging)
 		And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(230).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 				| "Documents.SalesInvoice.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 				| "Documents.CashReceipt.FindByNumber(229).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table

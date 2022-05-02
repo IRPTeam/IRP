@@ -86,6 +86,7 @@ Scenario: _043100 preparation (Credit note)
 			When Create document PurchaseInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		If "List" table does not contain lines Then
@@ -95,10 +96,12 @@ Scenario: _043100 preparation (Credit note)
 			When Create document GoodsReceipt objects (check movements)
 			And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document CreditNote objects (check movements)
 		And I execute 1C:Enterprise script at server
 				| "Documents.CreditNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 				| "Documents.CreditNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 

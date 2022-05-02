@@ -75,12 +75,15 @@ Scenario: _040115 preparation (Purchase order)
 				| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
 		When Create document PurchaseOrder objects (check movements, PI before GR, not Use receipt sheduling)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)	
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 	# * Check query for Purchase order movements
 	# 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"

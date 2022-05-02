@@ -67,8 +67,11 @@ Scenario: _045300 preparation (Cash transfer order)
 		When Create document MoneyTransfer objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.MoneyTransfer.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.MoneyTransfer.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.MoneyTransfer.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.MoneyTransfer.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 

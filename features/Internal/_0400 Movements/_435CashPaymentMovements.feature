@@ -87,6 +87,7 @@ Scenario: _043500 preparation (Cash payment)
 			When Create document PurchaseInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		If "List" table does not contain lines Then
@@ -96,39 +97,50 @@ Scenario: _043500 preparation (Cash payment)
 			When Create document GoodsReceipt objects (check movements)
 			And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document CashTransferOrder objects
 		When Create document CashTransferOrder objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load PO, PI, OPO
 		When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document PurchaseInvoice objects (with aging, prepaid, post-shipment credit)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document OutgoingPaymentOrder objects (Cash planning)
 		And I execute 1C:Enterprise script at server
 			| "Documents.OutgoingPaymentOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.OutgoingPaymentOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Cash payment
 		When Create document CashPayment objects (payment to vendor without basis document)
 		When Create document CashPayment objects (exchange and transfer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		When Create document CashPayment objects (cash planning)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(325).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document CashPayment objects (return to customer)
 		And I execute 1C:Enterprise script at server

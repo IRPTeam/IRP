@@ -80,25 +80,36 @@ Scenario: _041300 preparation (Sales return)
 			When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 		When Create document SalesOrder objects (SI more than SO)
 		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
+ 			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load SC
 		When Create document ShipmentConfirmation objects (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Sales invoice document
 		When Create document SalesInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Goods
 		When Create document GoodsReceipt objects (check movements, transaction type - return from customers)
@@ -116,6 +127,7 @@ Scenario: _041300 preparation (Sales return)
 		When Create document SalesInvoice objects (offsetting advances on returns)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document BankReceipt objects (offsetting advances on returns)
 		And I execute 1C:Enterprise script at server
@@ -124,8 +136,11 @@ Scenario: _041300 preparation (Sales return)
 		When Create document SalesReturn objects (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
@@ -135,8 +150,11 @@ Scenario: _041300 preparation (Sales return)
 		When Create document SalesReturn objects (offsetting advances on returns)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesReturn.FindByNumber(106).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(107).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(108).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(109).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 	

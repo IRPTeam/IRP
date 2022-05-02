@@ -54,6 +54,7 @@ Scenario: _028400 preparation (GR-SR)
 	When Create document GoodsReceipt objects (creation based on, without PO and PI)
 	And I execute 1C:Enterprise script at server
 		| "Documents.GoodsReceipt.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.GoodsReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"  |
 
 Scenario: _028401 create GR with transaction type return from customer and create Sales return

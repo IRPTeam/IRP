@@ -391,6 +391,10 @@ Function BindFormOnCreateAtServer(Parameters)
 	Binding.Insert("MoneyTransfer",
 		"StepGenerateNewSendUUID,
 		|StepGenerateNewReceiptUUID");
+
+	Binding.Insert("CashTransferOrder",
+		"StepGenerateNewSendUUID,
+		|StepGenerateNewReceiptUUID");
 		
 	Binding.Insert("CashRevenue",
 		"StepPaymentListCalculations_RecalculationsOnCopy,
@@ -1332,6 +1336,7 @@ EndFunction
 Function BindReceiveCurrency(Parameters)
 	DataPath = "ReceiveCurrency";
 	Binding = New Structure();
+	Binding.Insert("CashTransferOrder", "StepChangeReceiveAmountBySendAmount");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1372,6 +1377,7 @@ EndFunction
 Function BindSendCurrency(Parameters)
 	DataPath = "SendCurrency";
 	Binding = New Structure();
+	Binding.Insert("CashTransferOrder", "StepChangeReceiveAmountBySendAmount");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1440,6 +1446,7 @@ EndFunction
 Function BindSendAmount(Parameters)
 	DataPath = "SendAmount";
 	Binding = New Structure();
+	Binding.Insert("CashTransferOrder", "StepChangeReceiveAmountBySendAmount");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1471,6 +1478,19 @@ Function BindReceiveAmount(Parameters)
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+// ReceiveAmount.ChangeReceiveAmountBySendAmount.Step
+Procedure StepChangeReceiveAmountBySendAmount(Parameters, Chain) Export
+	Chain.ChangeReceiveAmountBySendAmount.Enable = True;
+	Chain.ChangeReceiveAmountBySendAmount.Setter = "SetReceiveAmount";
+	Options = ModelClientServer_V2.ChangeReceiveAmountBySendAmountOptions();
+	Options.SendAmount      = GetSendAmount(Parameters);
+	Options.ReceiveAmount   = GetReceiveAmount(Parameters);
+	Options.SendCurrency    = GetSendCurrency(Parameters);
+	Options.ReceiveCurrency = GetReceiveCurrency(Parameters);
+	Options.StepName = "StepChangeReceiveAmountBySendAmount";
+	Chain.ChangeReceiveAmountBySendAmount.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -1845,6 +1865,10 @@ Function BindCompany(Parameters)
 		|StepChangeCashAccountByCompany_AccountTypeIsCash");
 	
 	Binding.Insert("MoneyTransfer",
+		"StepChangeAccountSenderByCompany,
+		|StepChangeAccountReceiverByCompany");
+
+	Binding.Insert("CashTransferOrder",
 		"StepChangeAccountSenderByCompany,
 		|StepChangeAccountReceiverByCompany");
 	

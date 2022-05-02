@@ -43,7 +43,9 @@ IsUsedNewFunctionality =
 	Or TypeOf(Source) = Type("DocumentObject.PhysicalInventory")
 	Or TypeOf(Source) = Type("DocumentObject.ItemStockAdjustment")
 	Or TypeOf(Source) = Type("DocumentObject.Bundling")
-	Or TypeOf(Source) = Type("DocumentObject.Unbundling");
+	Or TypeOf(Source) = Type("DocumentObject.Unbundling")
+	
+	Or TypeOf(Source) = Type("DocumentObject.CashTransferOrder");
 
 	Data = New Structure();
 

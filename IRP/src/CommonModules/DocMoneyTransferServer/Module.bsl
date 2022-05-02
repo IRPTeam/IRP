@@ -189,7 +189,7 @@ EndFunction
 
 #EndRegion
 
-#Region LIST_FROM
+#Region LIST_FORM
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);

@@ -5,10 +5,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-	Else
-		CommonFunctionsClientServer.SetObjectPreviousValue(Object, Form, "Company");
 	EndIf;
-	//ViewServer_V2.OnCreateAtServer(Object, Form);
+	ViewServer_V2.OnCreateAtServer(Object, Form, "");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -24,6 +22,24 @@ EndProcedure
 
 #EndRegion
 
+#Region LIST_FORM
+
+Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region CHOICE_FORM
+
+Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region SERVICE
+
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");
@@ -34,23 +50,7 @@ Procedure SetGroupItemsList(Object, Form)
 	EndDo;
 EndProcedure
 
-#Region ListFormEvents
-
-Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
-	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
-EndProcedure
-
 #EndRegion
-
-#Region ChoiceFormEvents
-
-Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
-	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region CommonFunctions
 
 Function UseCashAdvanceHolder(Val Object) Export
 	If Object.Sender.Type = Enums.CashAccountTypes.Cash And Object.Receiver.Type = Enums.CashAccountTypes.Cash
@@ -60,8 +60,6 @@ Function UseCashAdvanceHolder(Val Object) Export
 	EndIf;
 	Return False;
 EndFunction
-
-#EndRegion
 
 Function GetInfoForFillingCashReceipt(Ref) Export
 	Result = New Structure("Ref, CashAccount, Company, Currency, CurrencyExchange");

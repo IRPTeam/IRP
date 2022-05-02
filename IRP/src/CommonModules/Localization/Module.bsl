@@ -808,7 +808,7 @@ EndFunction
 // Predefined descriptions.
 // 
 // Parameters:
-//  Strings - Structure - Strings
+//  Strings - See Strings
 //  CodeLanguage - String - Code language
 Procedure PredefinedDescriptions(Strings, CodeLanguage)
 	Strings.Insert("Description_A001", NStr("en = 'Catalog Partner terms'", CodeLanguage));

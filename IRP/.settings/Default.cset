@@ -10,10 +10,10 @@
     "common-module-name-client-server": {
       "enabled": false
     },
-    "doc-comment-procedure-return-section": {
+    "right-administration": {
       "enabled": false
     },
-    "right-administration": {
+    "doc-comment-procedure-return-section": {
       "enabled": false
     },
     "use-non-recommended-method": {
@@ -109,10 +109,10 @@
     "right-output-to-printer-file-clipboard": {
       "enabled": false
     },
-    "right-update-database-configuration": {
+    "right-start-thick-client": {
       "enabled": false
     },
-    "right-start-thick-client": {
+    "right-update-database-configuration": {
       "enabled": false
     },
     "right-all-functions-mode": {
@@ -139,19 +139,19 @@
     "doc-comment-field-type": {
       "enabled": false
     },
-    "new-color": {
+    "ql-virtual-table-filters": {
       "enabled": false
     },
-    "ql-virtual-table-filters": {
+    "new-color": {
       "enabled": false
     },
     "ql-join-to-sub-query": {
       "enabled": false
     },
-    "common-module-name-server-call-cached": {
+    "using-isinrole": {
       "enabled": false
     },
-    "using-isinrole": {
+    "common-module-name-server-call-cached": {
       "enabled": false
     },
     "data-exchange-load": {
@@ -175,10 +175,10 @@
     "module-unused-local-variable": {
       "enabled": false
     },
-    "common-module-name-client": {
+    "form-named-element-name": {
       "enabled": false
     },
-    "form-named-element-name": {
+    "common-module-name-client": {
       "enabled": false
     },
     "common-module-name-global": {
@@ -211,10 +211,10 @@
     "right-interactive-delete-predefined-data": {
       "enabled": false
     },
-    "form-module-pragma": {
+    "right-start-external-connection": {
       "enabled": false
     },
-    "right-start-external-connection": {
+    "form-module-pragma": {
       "enabled": false
     },
     "doc-comment-use-minus": {

@@ -138,19 +138,18 @@
 // Description
 // 
 // Parameters:
-// 	TableItemKeys
-// 	* ItemKey
-// 	* PriceType
-// 	* Unit
-// 	Period
+// 	TableItemKeys - ValueTable:
+// 	* ItemKey - CatalogRef.ItemKeys
+// 	* PriceType - CatalogRef.PriceTypes
+// 	* Unit - CatalogRef.Units
+// 	Period - Date
 // 	AddInfo - Undefined - Description
 // Returns:
 // 	ValueTable - Description:
 // * ItemKey - CatalogRef.ItemKeys -
 // * PriceType - CatalogRef.PriceTypes -
 // * Unit - CatalogRef.Units -
-// * Price 
-// * Price 
+// * Price - Number 
 Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 
 	TableOfResults = New ValueTable();

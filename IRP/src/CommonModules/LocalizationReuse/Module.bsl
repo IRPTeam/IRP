@@ -57,7 +57,7 @@ EndFunction
 // Returns:
 //  Boolean - Use multi language
 Function UseMultiLanguage(Val MetadataFullName, AddInfo = Undefined) Export
-	Return LocalizationServer.UseMultiLanguage(MetadataFullName, AddInfo);
+	Return LocalizationServer.UseMultiLanguage(MetadataFullName, , AddInfo);
 EndFunction
 
 // Get localization code.

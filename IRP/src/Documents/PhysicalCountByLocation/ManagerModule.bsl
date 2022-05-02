@@ -23,7 +23,6 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 			PhysicalCountByLocationObject.PhysicalInventory = Parameters.PhysicalInventory;
 			PhysicalCountByLocationObject.Store = Parameters.Store;
 			PhysicalCountByLocationObject.RuleEditQuantity = Parameters.PhysicalInventory.RuleEditQuantity;
-			PhysicalCountByLocationObject.ResponsiblePerson = Instance.ResponsiblePerson;
 			PhysicalCountByLocationObject.ItemList.Clear();
 			For Each ItemListRow In Instance.ItemList Do
 				NewRow = PhysicalCountByLocationObject.ItemList.Add();
@@ -60,8 +59,7 @@ Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefi
 	|	PhysicalCountByLocationItemList.Key,
 	|	PhysicalCountByLocationItemList.Ref,
 	|	PhysicalCountByLocationItemList.Ref.Number AS Number,
-	|	PhysicalCountByLocationItemList.Ref.Date AS Date,
-	|	PhysicalCountByLocationItemList.Ref.ResponsiblePerson AS ResponsiblePerson
+	|	PhysicalCountByLocationItemList.Ref.Date AS Date
 	|FROM
 	|	Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
 	|WHERE
@@ -72,7 +70,7 @@ Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefi
 	QuerySelection = QueryResult.Select();
 	Result = New Array();
 	While QuerySelection.Next() Do
-		Row = New Structure("Key, Ref, Number, Date, ResponsiblePerson");
+		Row = New Structure("Key, Ref, Number, Date");
 		FillPropertyValues(Row, QuerySelection);
 
 		Result.Add(Row);

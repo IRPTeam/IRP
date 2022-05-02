@@ -182,7 +182,6 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 		ItemListTyped.Columns.Add("ItemKey", AccReg.Dimensions.ItemKey.Type);
 		ItemListTyped.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
 		ItemListTyped.Columns.Add("PhysCount", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
-		ItemListTyped.Columns.Add("ResponsiblePerson", New TypeDescription("CatalogRef.Partners"));
 		For Each Row In ItemList Do
 			FillPropertyValues(ItemListTyped.Add(), Row);
 		EndDo;
@@ -240,8 +239,7 @@ Function GetQueryTextFillExpCount_ByItemList()
 		   |	tmp.Store AS Store,
 		   |	tmp.ItemKey AS ItemKey,
 		   |	tmp.Unit AS Unit,
-		   |	tmp.PhysCount AS PhysCount,
-		   |	tmp.ResponsiblePerson AS ResponsiblePerson
+		   |	tmp.PhysCount AS PhysCount
 		   |INTO ItemList
 		   |FROM
 		   |	&ItemList AS tmp
@@ -275,8 +273,7 @@ Function GetQueryTextFillExpCount_ByItemList()
 		   |	ISNULL(ItemList.Unit, ActualStocks.Unit) AS Unit,
 		   |	ISNULL(ItemList.PhysCount, 0) AS PhysCount,
 		   |	ISNULL(ActualStocks.ExpCount, 0) AS ExpCount,
-		   |	ISNULL(ItemList.LineNumber, -1) AS LineNumber,
-		   |	ISNULL(ItemList.ResponsiblePerson, VALUE(Catalog.Partners.EmptyRef)) AS ResponsiblePerson
+		   |	ISNULL(ItemList.LineNumber, -1) AS LineNumber
 		   |FROM
 		   |	ItemList AS ItemList
 		   |		FULL JOIN ActualStocks AS ActualStocks

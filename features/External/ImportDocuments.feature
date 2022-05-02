@@ -674,8 +674,8 @@ Scenario: Create document Bundling objects
 Scenario: Create document PhysicalCountByLocation objects
 
 	And I check or create document "PhysicalCountByLocation" objects:
-		| 'Ref'                                                                              | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'ItemKey' | 'Barcode' | 'Store'                                                          | 'PhysicalInventory'                                                          | 'ResponsiblePerson'                                                | 'Status'                                                                 | 'Author'                                                        | 'Description' |
-		| 'e1cib/data/Document.PhysicalCountByLocation?ref=aa78120ed92fbced11eaf13c5c2df458' | 'False'           | '1'      | '07.09.2020 22:05:36' | 'False'     | ''        | ''        | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444' | 'e1cib/data/Document.PhysicalInventory?ref=aa78120ed92fbced11eaf13c5c2df457' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c611' | 'e1cib/data/Catalog.ObjectStatuses?ref=aa78120ed92fbced11eaf13c5c2df44c' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            |
+		| 'Ref'                                                                              | 'DeletionMark'    | 'Number' | 'Date'                | 'Posted'    | 'ItemKey' | 'Barcode' | 'Store'                                                          | 'PhysicalInventory'                                                          | 'Status'                                                                 | 'Author'                                                        | 'Description' |
+		| 'e1cib/data/Document.PhysicalCountByLocation?ref=aa78120ed92fbced11eaf13c5c2df458' | 'False'           | '1'      | '07.09.2020 22:05:36' | 'False'     | ''        | ''        | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444' | 'e1cib/data/Document.PhysicalInventory?ref=aa78120ed92fbced11eaf13c5c2df457' | 'e1cib/data/Catalog.ObjectStatuses?ref=aa78120ed92fbced11eaf13c5c2df44c' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            |
 		
 
 	And I refill object tabular section "ItemList":
@@ -691,9 +691,9 @@ Scenario: Create document PhysicalInventory objects
 		
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                                        | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'ExpCount' | 'PhysCount' | 'Difference' | 'ResponsiblePerson'                                                |
-		| 'e1cib/data/Document.PhysicalInventory?ref=aa78120ed92fbced11eaf13c5c2df44f' | '06a391a0-b75c-4d6e-aa7f-faf921f735cc' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '120'      | '125'       | '5'          | ''                                                                 |
-		| 'e1cib/data/Document.PhysicalInventory?ref=aa78120ed92fbced11eaf13c5c2df44f' | 'f270d3dd-f4ed-48c3-8009-7e6a83f62c38' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '200'      | '198'       | '-2'         | ''                                                                 |
+		| 'Ref'                                                                        | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'ExpCount' | 'PhysCount' | 'Difference' |
+		| 'e1cib/data/Document.PhysicalInventory?ref=aa78120ed92fbced11eaf13c5c2df44f' | '06a391a0-b75c-4d6e-aa7f-faf921f735cc' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '120'      | '125'       | '5'          |
+		| 'e1cib/data/Document.PhysicalInventory?ref=aa78120ed92fbced11eaf13c5c2df44f' | 'f270d3dd-f4ed-48c3-8009-7e6a83f62c38' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '200'      | '198'       | '-2'         |
 		
 
 Scenario: Create document ReconciliationStatement objects
@@ -2289,13 +2289,13 @@ Scenario: Create document ItemStockAdjustment objects (stock control)
 Scenario: Create document PhysicalInventory objects (stock control)
 
 	And I check or create document "PhysicalInventory"  objects:
-		| 'Ref'                                                                        | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'RuleEditQuantity' | 'Status'                                                                 | 'Store'                                                          | 'UseResponsiblePersonByRow' | 'Author'                                                        | 'Description' |
-		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb832c02e0c9eb' | 'False'        | '251'    | '10.03.2021 12:00:00' | 'True'   | 'False'            | 'e1cib/data/Catalog.ObjectStatuses?ref=aa78120ed92fbced11eaf13c5c2df449' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | 'False'                     | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            |
+		| 'Ref'                                                                        | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'RuleEditQuantity' | 'Status'                                                                 | 'Store'                                                          | 'Author'                                                        | 'Description' |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb832c02e0c9eb' | 'False'        | '251'    | '10.03.2021 12:00:00' | 'True'   | 'False'            | 'e1cib/data/Catalog.ObjectStatuses?ref=aa78120ed92fbced11eaf13c5c2df449' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            |
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                                        | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'ExpCount' | 'PhysCount' | 'Difference' | 'ResponsiblePerson' |
-		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb832c02e0c9eb' | '4a95d9a1-1b0a-409d-8a77-401d622ec1f6' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8c' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '0'        | '20'        | '20'         | ''                  |
-		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb832c02e0c9eb' | 'f2e893b3-979d-43b7-924f-6afdba041fc7' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c608' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '0'        | '10'        | '10'         | ''                  |
+		| 'Ref'                                                                        | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'ExpCount' | 'PhysCount' | 'Difference' |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb832c02e0c9eb' | '4a95d9a1-1b0a-409d-8a77-401d622ec1f6' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8c' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '0'        | '20'        | '20'         |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb832c02e0c9eb' | 'f2e893b3-979d-43b7-924f-6afdba041fc7' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c608' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '0'        | '10'        | '10'         |
 
 Scenario: Create document PurchaseInvoice objects (stock control)
 
@@ -2556,13 +2556,13 @@ Scenario: Create document SalesOrderClosing objects (stock control)
 Scenario: Create document PhysicalInventory objects (check movements)
 
 	And I check or create document "PhysicalInventory" objects:
-		| 'Ref'                                                                        | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'RuleEditQuantity' | 'Status'                                                                 | 'Store'                                                          | 'UseResponsiblePersonByRow' | 'Author'                                                        | 'Description' |
-		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb85925283a1d0' | 'False'        | '201'    | '15.03.2021 15:29:31' | 'True'   | 'False'            | 'e1cib/data/Catalog.ObjectStatuses?ref=aa78120ed92fbced11eaf13c5c2df449' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df445' | 'True'                      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            |
+		| 'Ref'                                                                        | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'RuleEditQuantity' | 'Status'                                                                 | 'Store'                                                          | 'Author'                                                        | 'Description' |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb85925283a1d0' | 'False'        | '201'    | '15.03.2021 15:29:31' | 'True'   | 'False'            | 'e1cib/data/Catalog.ObjectStatuses?ref=aa78120ed92fbced11eaf13c5c2df449' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df445' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            |
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                                        | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'ExpCount' | 'PhysCount' | 'Difference' | 'ResponsiblePerson' |
-		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb85925283a1d0' | '38ac5003-0c31-429f-a70c-f8c9bac19091' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '400'      | '398'       | '-2'         | ''                  |
-		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb85925283a1d0' | '2bf2e2e0-4d82-4fdb-8701-7c8b4b1425ef' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c600' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '400'      | '405'       | '5'          | ''                  |
+		| 'Ref'                                                                        | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'ExpCount' | 'PhysCount' | 'Difference' |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb85925283a1d0' | '38ac5003-0c31-429f-a70c-f8c9bac19091' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '400'      | '398'       | '-2'         |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b762b13668d0905011eb85925283a1d0' | '2bf2e2e0-4d82-4fdb-8701-7c8b4b1425ef' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c600' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '400'      | '405'       | '5'          |
 
 
 Scenario: Create document StockAdjustmentAsSurplus objects (check movements)

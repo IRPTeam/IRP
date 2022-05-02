@@ -116,21 +116,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="d011b250-f20f-4e7e-9bbc-67cbc95fc56e">
-    <name>UseResponsiblePersonByRow</name>
-    <synonym>
-      <key>en</key>
-      <value>Use responsible person by row</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <forms uuid="7a53caab-91a2-4514-9ee0-e2a5d917a31c">
     <name>DocumentForm</name>
     <synonym>
@@ -247,20 +232,6 @@
       </synonym>
       <type>
         <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="c8bb103f-f054-469a-b798-fa6a619fd9cb">
-      <name>ResponsiblePerson</name>
-      <synonym>
-        <key>en</key>
-        <value>Responsible person</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

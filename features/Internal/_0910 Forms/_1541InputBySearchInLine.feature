@@ -1245,7 +1245,6 @@ Scenario: _0154092 check store, responsible person input by search in line in Ph
 		And I select from "Responsible person" drop-down list by "Anna" string
 	* Check filling in
 		Then the form attribute named "Store" became equal to "Store 02"
-		Then the form attribute named "ResponsiblePerson" became equal to "Anna Petrova"
 		And I close all client application windows
 
 

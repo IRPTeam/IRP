@@ -68,8 +68,7 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.SetResponsiblePerson.Visible = Object.UseResponsiblePersonByRow;
-	Form.Items.ItemListResponsiblePerson.Visible = Object.UseResponsiblePersonByRow;
+	Return;
 EndProcedure
 
 #EndRegion
@@ -82,42 +81,6 @@ Procedure StoreOnChange(Item)
 EndProcedure
 
 #EndRegion
-
-#Region RESPONSIBLE_PERSON
-
-&AtClient
-Procedure SetResponsiblePerson(Command)
-	SelectedRows = Items.ItemList.SelectedRows;
-	If Not SelectedRows.Count() Then
-		Return;
-	EndIf;
-	Filter = New Structure("Employee", True);
-	FormParameters = New Structure("ChoiceMode, CloseOnChoice, Filter", True, True, Filter);
-	NotifyParameters = New Structure("SelectedRows", SelectedRows);
-	Notify = New NotifyDescription("OnChoiceResponsiblePerson", ThisObject, NotifyParameters);
-	OpenForm("Catalog.Partners.ChoiceForm", FormParameters, ThisObject, , , , Notify);
-EndProcedure
-
-&AtClient
-Procedure OnChoiceResponsiblePerson(Result, AdditionalsParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	For Each RowID In AdditionalsParameters.SelectedRows Do
-		Row = Object.ItemList.FindByID(RowID);
-		If Not ValueIsFilled(Row.ResponsiblePerson) Then
-			Row.ResponsiblePerson = Result;
-		EndIf;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure UseResponsiblePersonByRowOnChange(Item)
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-#EndRegion
-
 #Region PHYSICAL_COUNT_BY_LOCATION
 
 &AtClient

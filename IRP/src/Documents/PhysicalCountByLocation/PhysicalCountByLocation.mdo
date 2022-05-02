@@ -109,21 +109,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="4774f18c-b89a-48c7-8498-587dc88fc10b">
-    <name>ResponsiblePerson</name>
-    <synonym>
-      <key>en</key>
-      <value>Responsible person</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="907b4287-36b3-476d-b6bd-46db651096a9">
     <name>ResponsibleUser</name>
     <synonym>

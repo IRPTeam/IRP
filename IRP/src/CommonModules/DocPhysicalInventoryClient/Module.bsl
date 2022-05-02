@@ -85,17 +85,10 @@ EndProcedure
 Procedure CreatePhysicalCount(ObjectRef) Export
 	CountDocsToCreate = 0;
 	AddInfo =  New Structure("ObjectRef", ObjectRef);
-	UseResponsiblePersonByRow = CommonFunctionsServer.GetRefAttribute(ObjectRef, "UseResponsiblePersonByRow");
-	AddInfo.Insert("UseResponsiblePersonByRow", UseResponsiblePersonByRow);
 	AddInfo.Insert("CountDocsToCreate", CountDocsToCreate);
 
-	If UseResponsiblePersonByRow Then
-		DocPhysicalInventoryServer.CreatePhysicalCount(AddInfo.ObjectRef, AddInfo);
-		Notify("CreatedPhysicalCountByLocations", , ObjectRef);
-	Else
-		NotifyDescription = New NotifyDescription("CreatePhysicalCountEnd", ThisObject, AddInfo);
-		ShowInputNumber(NotifyDescription, CountDocsToCreate, R().QuestionToUser_017, 2, 0);
-	EndIf;
+	NotifyDescription = New NotifyDescription("CreatePhysicalCountEnd", ThisObject, AddInfo);
+	ShowInputNumber(NotifyDescription, CountDocsToCreate, R().QuestionToUser_017, 2, 0);	
 EndProcedure
 
 Procedure CreatePhysicalCountEnd(CountDocsToCreate, AdditionalParameters) Export
@@ -117,7 +110,7 @@ EndProcedure
 Procedure UpdateExpCount(Object, Form) Export
 	ItemList = New Array();
 	For Each Row In Object.ItemList Do
-		NewRow = New Structure("Key, LineNumber, Store, ItemKey, Unit, PhysCount, ResponsiblePerson");
+		NewRow = New Structure("Key, LineNumber, Store, ItemKey, Unit, PhysCount");
 		FillPropertyValues(NewRow, Row);
 		NewRow.Store = Object.Store;
 		ItemList.Add(NewRow);

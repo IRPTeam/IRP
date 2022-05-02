@@ -29,7 +29,6 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Store");
-	AttributesArray.Add("ResponsiblePerson");
 	AttributesArray.Add("Status");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do

@@ -27,9 +27,6 @@
 				<field>ItemListDifference</field>
 			</item>
 			<item>
-				<field>ItemListResponsiblePerson</field>
-			</item>
-			<item>
 				<field>ItemListPhysicalCountByLocationPresentation</field>
 			</item>
 			<item>

@@ -64,57 +64,11 @@ EndProcedure
 
 Function GetArrayOfInstance(GenerateParameters) Export
 	Result = New Array();
-	If GenerateParameters.UseResponsiblePersonByRow Then
-		Query = New Query();
-		Query.Text =
-		"SELECT
-		|	PhysicalInventoryItemList.Key AS Key,
-		|	PhysicalInventoryItemList.ItemKey AS ItemKey,
-		|	PhysicalInventoryItemList.Unit AS Unit,
-		|	PhysicalInventoryItemList.ExpCount AS ExpCount,
-		|	PhysicalInventoryItemList.PhysCount AS PhysCount,
-		|	PhysicalInventoryItemList.Difference AS Difference,
-		|	PhysicalInventoryItemList.ResponsiblePerson AS ResponsiblePerson
-		|FROM
-		|	Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
-		|		LEFT JOIN Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
-		|		ON PhysicalCountByLocationItemList.Ref.PhysicalInventory = PhysicalInventoryItemList.Ref
-		|		AND PhysicalCountByLocationItemList.Key = PhysicalInventoryItemList.Key
-		|		AND PhysicalCountByLocationItemList.ItemKey = PhysicalInventoryItemList.ItemKey
-		|		AND
-		|		NOT PhysicalCountByLocationItemList.Ref.DeletionMark
-		|WHERE
-		|	PhysicalInventoryItemList.Ref = &PhysicalInventoryRef
-		|	AND PhysicalInventoryItemList.ResponsiblePerson <> VALUE(Catalog.Partners.EmptyRef)
-		|	AND PhysicalCountByLocationItemList.Key IS NULL
-		|TOTALS
-		|BY
-		|	ResponsiblePerson";
-		Query.SetParameter("PhysicalInventoryRef", GenerateParameters.ObjectRef);
-		QueryResult = Query.Execute();
-		QuerySelection  = QueryResult.Select(QueryResultIteration.ByGroups);
-
-		While QuerySelection.Next() Do
-			Instance = New Structure("ResponsiblePerson, ItemList", QuerySelection.ResponsiblePerson, New Array());
-			QuerySelectionDetails = QuerySelection.Select();
-			While QuerySelectionDetails.Next() Do
-				ItemListRow = New Structure();
-				ItemListRow.Insert("Key", QuerySelectionDetails.Key);
-				ItemListRow.Insert("ItemKey", QuerySelectionDetails.ItemKey);
-				ItemListRow.Insert("Unit", QuerySelectionDetails.Unit);
-				ItemListRow.Insert("ExpCount", QuerySelectionDetails.ExpCount);
-				ItemListRow.Insert("PhysCount", QuerySelectionDetails.PhysCount);
-				ItemListRow.Insert("Difference", QuerySelectionDetails.Difference);
-				Instance.ItemList.Add(ItemListRow);
-			EndDo;
-			Result.Add(Instance);
-		EndDo;
-	Else
-		Instance = New Structure("ResponsiblePerson, ItemList", Undefined, New Array());
-		For Index = 1 To GenerateParameters.CountDocsToCreate Do
-			Result.Add(Instance);
-		EndDo;
-	EndIf;
+	
+	Instance = New Structure("ItemList", New Array());
+	For Index = 1 To GenerateParameters.CountDocsToCreate Do
+		Result.Add(Instance);
+	EndDo;
 
 	Return Result;
 EndFunction
@@ -153,7 +107,7 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	Result = Documents.PhysicalInventory.GetItemListWithFillingExpCount(Ref, Store, ItemList);
 	ArrayOfResult = New Array();
 	For Each Row In Result Do
-		NewRow = New Structure("Key, Store, Item, ItemKey, Unit, ExpCount, PhysCount, ResponsiblePerson");
+		NewRow = New Structure("Key, Store, Item, ItemKey, Unit, ExpCount, PhysCount");
 		FillPropertyValues(NewRow, Row);
 		ArrayOfResult.Add(NewRow);
 	EndDo;

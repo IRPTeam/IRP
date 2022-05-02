@@ -59,7 +59,9 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 	When Create document SalesOrder objects (check SalesOrderProcurement)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(501).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(502).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(503).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: _029201 create Purchase order based on Sales order

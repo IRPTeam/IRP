@@ -51,7 +51,9 @@ Scenario: _054100 preparation (Money transfer)
 		When Create document CashTransferOrder objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 

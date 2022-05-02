@@ -76,7 +76,9 @@ Scenario: _04027 preparation (Inventory transfer order)
 		When Create document InventoryTransferOrder objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransferOrder.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"  |
+		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransferOrder.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransferOrder.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
 
 

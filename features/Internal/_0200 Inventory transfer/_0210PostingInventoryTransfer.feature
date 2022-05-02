@@ -51,6 +51,7 @@ Scenario: _0201000 preparation
 		When Create document InventoryTransferOrder objects (creation based on)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransferOrder.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransferOrder.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);" |
 
 

@@ -66,7 +66,9 @@ Scenario: _2068001 preparation (locking linked strings)
 	When Create Physical inventory, Stock adjustment as surplus, Stock adjustment as write off (locking linked strings)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PhysicalInventory.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.StockAdjustmentAsSurplus.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.StockAdjustmentAsWriteOff.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 

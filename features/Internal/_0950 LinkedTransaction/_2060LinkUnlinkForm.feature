@@ -68,6 +68,7 @@ Scenario: _2060001 preparation
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Save PI numbers
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -92,7 +93,9 @@ Scenario: _2060001 preparation
 	When Create document SalesInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document SalesOrder objects (SI before SC, not Use shipment sheduling)
 	And I execute 1C:Enterprise script at server
@@ -132,21 +135,28 @@ Scenario: _2060001 preparation
 	When create GoodsReceipt and PurchaseOrder objects (select from basis in the PI)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);"|
+	And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create ShipmentConfirmation and SalesOrder objects (select from basis in the PI)
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);"|
+	And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create SO and SC for link
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);"|
+	And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create PO and GR for link
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);"|
+	And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |	
 	When Create catalog CancelReturnReasons objects
 		

@@ -79,23 +79,32 @@ Scenario: _041600 preparation (Purchase return)
 	When Create document PurchaseOrder objects (check movements, PI before GR, not Use receipt sheduling)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
+	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load GR
 	When Create document GoodsReceipt objects (check movements)
 	And I execute 1C:Enterprise script at server
-			| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server	
 			| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 			// | "Documents.GoodsReceipt.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load PI
 	When Create document PurchaseInvoice objects (check movements)
 	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.PurchaseInvoice.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
-			| "Documents.PurchaseInvoice.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |	
+	And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseInvoice.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |	
 	When Create document PurchaseReturnOrder objects (check movements)
 	And I execute 1C:Enterprise script at server
@@ -105,8 +114,10 @@ Scenario: _041600 preparation (Purchase return)
 		| "Documents.ShipmentConfirmation.FindByNumber(233).GetObject().Write(DocumentWriteMode.Posting);" |	
 	When Create document PurchaseReturn objects (check movements)
 	And I execute 1C:Enterprise script at server
-		| "Documents.PurchaseReturn.FindByNumber(231).GetObject().Write(DocumentWriteMode.Posting);" |	
-		| "Documents.PurchaseReturn.FindByNumber(232).GetObject().Write(DocumentWriteMode.Posting);" |	
+		| "Documents.PurchaseReturn.FindByNumber(231).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server	
+		| "Documents.PurchaseReturn.FindByNumber(232).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseReturn.FindByNumber(233).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document PurchaseReturn objects (advance)
 	And I execute 1C:Enterprise script at server

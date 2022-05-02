@@ -65,14 +65,23 @@ Scenario: _2066001 preparation (locking linked strings)
 	When Create PO,PI,GR,PRO,PR (locking linked strings)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseOrder.FindByNumber(35).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(35).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseReturnOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseReturn.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.GoodsReceipt.FindByNumber(35).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.GoodsReceipt.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.ShipmentConfirmation.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 		
 		

@@ -111,6 +111,7 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create document SalesOrder objects (stock control)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(252).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesOrderClosing objects (stock control)
 		And I execute 1C:Enterprise script at server

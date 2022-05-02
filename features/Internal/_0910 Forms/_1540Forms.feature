@@ -1370,35 +1370,35 @@ Scenario: _012019 check filling in partner and customer/vendor sign when creatin
 	And I close all client application windows
 
 
-Scenario: _012020 check sorting of item keys
-	Given I open hyperlink "e1cib/list/Catalog.Items"
-	And I go to line in "List" table
-			| 'Description' |
-			| 'Dress' |
-	And I select current line in "List" table
-	And In this window I click command interface button "Item keys"
-	And I click "Configure list..." button
-	And I move to "Order" tab
-	And I go to line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
-		| 'Available fields' |
-		| 'Item key'         |
-	And I select current line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
-	And I activate "Sort direction" field in "SettingsComposerUserSettingsItem1Order" table
-	And I select current line in "SettingsComposerUserSettingsItem1Order" table
-	And I select "Ascending" exact value from "Sort direction" drop-down list in "SettingsComposerUserSettingsItem1Order" table
-	And I finish line editing in "SettingsComposerUserSettingsItem1Order" table
-	And I click "Finish editing" button
-	And "List" table became equal
-		| 'Item key'  | 'Specification' |
-		| 'Dress/A-8' | 'A-8'           |
-		| 'L/Green'   | ''              |
-		| 'M/Brown'   | ''              |
-		| 'M/White'   | ''              |
-		| 'S/Yellow'  | ''              |
-		| 'XL/Green'  | ''              |
-		| 'XS/Blue'   | ''              |
-		| 'XXL/Red'   | ''              |
-	And I close all client application windows
+# Scenario: _012020 check sorting of item keys
+# 	Given I open hyperlink "e1cib/list/Catalog.Items"
+# 	And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Dress' |
+# 	And I select current line in "List" table
+# 	And In this window I click command interface button "Item keys"
+# 	And I click "Configure list..." button
+# 	And I move to "Order" tab
+# 	And I go to line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
+# 		| 'Available fields' |
+# 		| 'Item key'         |
+# 	And I select current line in "SettingsComposerUserSettingsItem1AvailableFieldsTable" table
+# 	And I activate "Sort direction" field in "SettingsComposerUserSettingsItem1Order" table
+# 	And I select current line in "SettingsComposerUserSettingsItem1Order" table
+# 	And I select "Ascending" exact value from "Sort direction" drop-down list in "SettingsComposerUserSettingsItem1Order" table
+# 	And I finish line editing in "SettingsComposerUserSettingsItem1Order" table
+# 	And I click "Finish editing" button
+# 	And "List" table became equal
+# 		| 'Item key'  | 'Specification' |
+# 		| 'Dress/A-8' | 'A-8'           |
+# 		| 'L/Green'   | ''              |
+# 		| 'M/Brown'   | ''              |
+# 		| 'M/White'   | ''              |
+# 		| 'S/Yellow'  | ''              |
+# 		| 'XL/Green'  | ''              |
+# 		| 'XS/Blue'   | ''              |
+# 		| 'XXL/Red'   | ''              |
+# 	And I close all client application windows
 	
 
 Scenario: _012025 check box Show item in item key it the Registrations report

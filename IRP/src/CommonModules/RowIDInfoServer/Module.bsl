@@ -1262,6 +1262,7 @@ Function FindOrCreateRowIDRef(RowID)
 	Query = New Query();
 	Query.Text =
 	"SELECT
+	|	RowIDs.RowID,
 	|	RowIDs.Ref
 	|FROM
 	|	Catalog.RowIDs AS RowIDs
@@ -1271,7 +1272,10 @@ Function FindOrCreateRowIDRef(RowID)
 	Query.SetParameter("RowID", RowID);
 	QueryResult = Query.Execute().Select();
 
-	If QueryResult.Next() Then
+	If QueryResult.Next() Then 
+		If QueryResult.RowID = RowID Then
+			Return QueryResult.Ref;
+		EndIf;
 		RowRefObject = QueryResult.Ref.GetObject();
 	Else
 		RowRefObject = Catalogs.RowIDs.CreateItem();
@@ -1284,27 +1288,34 @@ Function FindOrCreateRowIDRef(RowID)
 	Return RowRefObject.Ref;
 EndFunction
 
+Function GetMD5RowIDs(RowID)
+	AllAttributes = New Structure;
+	For Each Attr In Metadata.Catalogs.RowIDs.Attributes Do
+		If Not StrCompare(Attr.Name, "Hash") Then
+			Continue;
+		EndIf;
+		CurrentValue = RowID[Attr.Name];
+		AllAttributes.Insert(Attr.Name, CurrentValue);
+	EndDo;
+	Return CommonFunctionsServer.GetMD5(AllAttributes);
+EndFunction
+
+// Write row IDCatalog.
+// 
+// Parameters:
+//  Obj - CatalogObject.RowIDs - Obj
 Procedure WriteRowIDCatalog(Obj)
-	If Not ValueIsFilled(Obj.Ref) Then
+	If Obj.Ref.isEmpty() Then
 		// first write
+		Obj.Hash = GetMD5RowIDs(Obj);
 		Obj.Write();
 		Return;
 	EndIf;
 	
-	IsEqual = True;
-	For Each Attr In Metadata.Catalogs.RowIDs.Attributes Do
-		CurrentValue = Obj.Ref[Attr.Name];
-		NewValue = Obj[Attr.Name];
-		If Not ValueIsFilled(CurrentValue) And Not ValueIsFilled(NewValue) Then
-			Continue;
-		EndIf;
-		If CurrentValue <> NewValue Then
-			IsEqual = False;
-			Break;
-		EndIf;
-	EndDo;
+	Hash = GetMD5RowIDs(Obj);
 	
-	If Not IsEqual Then
+	If Not Obj.Hash = Hash Then
+		Obj.Hash = Hash;
 		Obj.Write();
 	EndIf;
 EndProcedure
@@ -1313,7 +1324,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	FieldsForCheckRowRef = Undefined;
 	CachedObjectBefore   = Undefined;
 	CachedObjectAfter    = Undefined;
-	If ValueIsFilled(Source.Ref) Then
+	If Source.Ref.isEmpty() Then
 		FieldsForCheckRowRef = GetFieldsForCheckRowRef(Source, RowRefObject, RecordersByRowRef);
 		CachedObjectBefore   = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
 	EndIf;
@@ -8428,7 +8439,7 @@ EndFunction
 #Region LockLinkedRows
 
 Function LinkedRowsIntegrityIsEnable()
-	Return Constants.EnableLinkedRowsIntegrity.Get();
+	Return RowIDInfoServerReuse.LinkedRowsIntegrityIsEnable();
 EndFunction
 
 #Region EventHandlers

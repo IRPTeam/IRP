@@ -12,6 +12,7 @@
     <types>String</types>
     <stringQualifiers>
       <length>36</length>
+      <fixed>true</fixed>
     </stringQualifiers>
   </type>
 </mdclass:DefinedType>

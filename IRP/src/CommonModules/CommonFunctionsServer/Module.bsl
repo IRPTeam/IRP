@@ -138,6 +138,19 @@ Function GetStyleByName(Name) Export
 	Return StyleColors[Name];
 EndFunction
 
+Function GetMD5(Object) Export
+	DataToString = ValueToStringInternal(Object);
+	DataHashing = New DataHashing(HashFunction.MD5);
+	DataHashing.Append(DataToString);
+	HashSumString = StrReplace(String(DataHashing.HashSum), " ", "");
+	HashSumStringUUID = Left(HashSumString, 8) 	  + "-" + 
+						Mid(HashSumString, 9, 4)  + "-" + 
+						Mid(HashSumString, 15, 4) + "-" + 
+						Mid(HashSumString, 18, 4) + "-" + 
+						Right(HashSumString, 12);
+	Return Upper(HashSumStringUUID);
+EndFunction
+
 #Region QueryBuilder
 
 Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export

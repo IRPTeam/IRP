@@ -6,7 +6,38 @@
     <value>Before write information registers lock data modification</value>
   </synonym>
   <source>
-    <types>InformationRegisterRecordSet</types>
+    <types>InformationRegisterRecordSet.AttachedFiles</types>
+    <types>InformationRegisterRecordSet.AddProperties</types>
+    <types>InformationRegisterRecordSet.Barcodes</types>
+    <types>InformationRegisterRecordSet.BranchBankTerms</types>
+    <types>InformationRegisterRecordSet.BundleContents</types>
+    <types>InformationRegisterRecordSet.CashAccountTBAccounts</types>
+    <types>InformationRegisterRecordSet.CompanyLedgerTypes</types>
+    <types>InformationRegisterRecordSet.CurrencyRates</types>
+    <types>InformationRegisterRecordSet.IDInfo</types>
+    <types>InformationRegisterRecordSet.IntegrationInfo</types>
+    <types>InformationRegisterRecordSet.ItemSegments</types>
+    <types>InformationRegisterRecordSet.LedgerTypeOperations</types>
+    <types>InformationRegisterRecordSet.ObjectStatuses</types>
+    <types>InformationRegisterRecordSet.PartnerSegments</types>
+    <types>InformationRegisterRecordSet.PartnerTBAccounts</types>
+    <types>InformationRegisterRecordSet.RetailWorkers</types>
+    <types>InformationRegisterRecordSet.SharedReportOptions</types>
+    <types>InformationRegisterRecordSet.T1010S_ScannedBarcode</types>
+    <types>InformationRegisterRecordSet.T2010S_OffsetOfAdvances</types>
+    <types>InformationRegisterRecordSet.T2013S_OffsetOfAging</types>
+    <types>InformationRegisterRecordSet.T2014S_AdvancesInfo</types>
+    <types>InformationRegisterRecordSet.T2015S_TransactionsInfo</types>
+    <types>InformationRegisterRecordSet.T2016S_VendorsAdvancesRelevance</types>
+    <types>InformationRegisterRecordSet.T2017S_CustomersAdvancesRelevance</types>
+    <types>InformationRegisterRecordSet.T6040S_BundleAmountValues</types>
+    <types>InformationRegisterRecordSet.T6050S_ManualBundleAmountValues</types>
+    <types>InformationRegisterRecordSet.T6060S_BatchCostAllocationInfo</types>
+    <types>InformationRegisterRecordSet.T6070S_BatchRevenueAllocationInfo</types>
+    <types>InformationRegisterRecordSet.TaxSettings</types>
+    <types>InformationRegisterRecordSet.TaxTBAccounts</types>
+    <types>InformationRegisterRecordSet.Taxes</types>
+    <types>InformationRegisterRecordSet.UserSettings</types>
   </source>
   <event>BeforeWrite</event>
   <handler>CommonModule.LockDataModificationPrivileged.BeforeWrite_InformationRegistersLockDataModification</handler>

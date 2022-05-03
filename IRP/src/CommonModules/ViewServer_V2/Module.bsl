@@ -1,10 +1,18 @@
 
 Procedure OnCreateAtServer(Object, Form, TableNames) Export
+	ArrayOfNewAttribute = New Array();
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, "CacheBeforeChange") Then
-		ArrayOfNewAttribute = New Array();
 		ArrayOfNewAttribute.Add(New FormAttribute("CacheBeforeChange", New TypeDescription("String")));
+	EndIf;
+	If Not CommonFunctionsServer.FormHaveAttribute(Form, "IsCopyingInteractive") Then
+		ArrayOfNewAttribute.Add(New FormAttribute("IsCopyingInteractive", New TypeDescription("Boolean")));
+	EndIf;
+	
+	If ArrayOfNewAttribute.Count() Then
 		Form.ChangeAttributes(ArrayOfNewAttribute);
 	EndIf;
+	// Copying document on client
+	Form.IsCopyingInteractive =  ValueIsFilled(Form.Parameters.CopyingValue);
 	
 	For Each TableName In StrSplit(TableNames, ",") Do
 		FormParameters = ControllerClientServer_V2.GetFormParameters(Form);

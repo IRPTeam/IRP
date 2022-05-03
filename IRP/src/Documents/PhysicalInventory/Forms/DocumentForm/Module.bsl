@@ -50,10 +50,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
 	
-	If EventName = "CreatedPhysicalCountByLocations" And Source = Object.Ref Then
-		UpdatePhysicalCountByLocationsAtServer();
-	EndIf;
-	
 	If EventName = "LockLinkedRows" Then
 		If Source <> ThisObject Then
 			LockLinkedRows();
@@ -78,24 +74,6 @@ EndProcedure
 &AtClient
 Procedure StoreOnChange(Item)
 	DocPhysicalInventoryClient.StoreOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-#Region PHYSICAL_COUNT_BY_LOCATION
-
-&AtClient
-Procedure PhysicalCountByLocationListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure PhysicalCountByLocationListOnChange(Item)
-	UpdatePhysicalCountsByLocations();
-EndProcedure
-
-&AtServer
-Procedure UpdatePhysicalCountByLocationsAtServer()
-	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -282,12 +260,6 @@ EndProcedure
 &AtClient
 Procedure UpdatePhysCount(Command)
 	DocPhysicalInventoryClient.UpdatePhysCount(Object, ThisObject);
-	UpdatePhysicalCountsByLocations();
-EndProcedure
-
-&AtServer
-Procedure UpdatePhysicalCountsByLocations()
-	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
 EndProcedure
 
 &AtClient

@@ -56,23 +56,21 @@ Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefi
 	Query = New Query();
 	Query.Text =
 	"SELECT
-	|	PhysicalCountByLocationItemList.Key,
-	|	PhysicalCountByLocationItemList.Ref,
-	|	PhysicalCountByLocationItemList.Ref.Number AS Number,
-	|	PhysicalCountByLocationItemList.Ref.Date AS Date
+	|	Doc.Ref,
+	|	Doc.Number AS Number,
+	|	Doc.Date AS Date
 	|FROM
-	|	Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
+	|	Document.PhysicalCountByLocation AS Doc
 	|WHERE
-	|	PhysicalCountByLocationItemList.Ref.PhysicalInventory = &PhysicalInventoryRef
-	|	AND NOT PhysicalCountByLocationItemList.Ref.DeletionMark";
+	|	Doc.PhysicalInventory = &PhysicalInventoryRef
+	|	AND NOT Doc.DeletionMark";
 	Query.SetParameter("PhysicalInventoryRef", PhysicalInventoryRef);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	Result = New Array();
 	While QuerySelection.Next() Do
-		Row = New Structure("Key, Ref, Number, Date");
+		Row = New Structure("Ref, Number, Date");
 		FillPropertyValues(Row, QuerySelection);
-
 		Result.Add(Row);
 	EndDo;
 	Return Result;

@@ -99,6 +99,11 @@ Procedure CreatePhysicalCountEnd(CountDocsToCreate, AdditionalParameters) Export
 	EndIf;
 EndProcedure
 
+// Fill exp count.
+// 
+// Parameters:
+//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
+//  Form - See Document.PhysicalInventory.Form
 Procedure FillExpCount(Object, Form) Export
 	If DocPhysicalInventoryServer.HavePhysicalCountByLocation(Object.Ref) Then
 		ShowMessageBox(Undefined, R().InfoMessage_006);
@@ -108,6 +113,7 @@ Procedure FillExpCount(Object, Form) Export
 	ItemCounts = DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store);
 	
 	FillItemList(Object, Form, ItemCounts);
+	Object.RowIDInfo.Clear();
 EndProcedure
 
 Procedure UpdateExpCount(Object, Form) Export

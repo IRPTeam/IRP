@@ -7657,6 +7657,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseDeliveryDate</functionalOptions>
   </attributes>
   <attributes>
     <name>CurrentDeliveryDate</name>

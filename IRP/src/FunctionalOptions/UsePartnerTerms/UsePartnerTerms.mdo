@@ -64,4 +64,5 @@
   <content>Document.OpeningEntry.TabularSection.AccountReceivableByAgreements.Attribute.LegalNameContract</content>
   <content>Document.PurchaseReturn.Attribute.LegalNameContract</content>
   <content>Document.OpeningEntry.TabularSection.AdvanceToSuppliers.Attribute.LegalNameContract</content>
+  <content>Catalog.LegalNameContracts</content>
 </mdclass:FunctionalOption>

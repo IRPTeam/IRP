@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:HTTPService xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="26c5c52e-e1c5-4f48-ada6-ac9f2accec9a">
+  <name>REST</name>
+  <synonym>
+    <key>en</key>
+    <value>REST</value>
+  </synonym>
+  <rootURL>integration</rootURL>
+  <reuseSessions>AutoUse</reuseSessions>
+  <sessionMaxAge>20</sessionMaxAge>
+  <urlTemplates uuid="ddd68464-5537-4907-9c8f-689f23e14549">
+    <name>EndPoint</name>
+    <synonym>
+      <key>en</key>
+      <value>End point</value>
+    </synonym>
+    <template>/{endpoint}/*</template>
+    <methods uuid="28b0f99f-dae9-40ea-9a65-9b1cceaee17d">
+      <name>POST</name>
+      <synonym>
+        <key>en</key>
+        <value>POST</value>
+      </synonym>
+      <httpMethod>POST</httpMethod>
+      <handler>EndPointPOST</handler>
+    </methods>
+  </urlTemplates>
+</mdclass:HTTPService>

@@ -1,12 +1,10 @@
 
 Function CreateDocument(DocMetadata) Export
-	//DocMetadata = Metadata.Documents.ShipmentConfirmation;
-	//DocMetadata.TabularSections.ItemList.Attributes.
 	DocObject = Documents[DocMetadata.Name].CreateDocument();
 	DocObject.Fill(Undefined);
 	Wrapper = New Structure("Object", New Structure());
-	Wrapper.Insert("_DocumentMetadata_" , DocMetadata);
-	Wrapper.Insert("_DocumentObject_"   , DocObject);
+//	Wrapper.Insert("_DocumentMetadata_" , DocMetadata);
+//	Wrapper.Insert("_DocumentObject_"   , DocObject);
 	Wrapper.Insert("Attr"    , New Structure());
 	Wrapper.Insert("Tables" , New Structure());
 	For Each Attr In DocMetadata.StandardAttributes Do
@@ -73,10 +71,15 @@ Procedure SetRowProperty(Wrapper, Row, Property, Value) Export
 	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
 EndProcedure
 
-Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
-	Doc = Wrapper._DocumentObject_;
+Function Write(Wrapper, DocMetadata, WriteMode = Undefined, PostingMode = Undefined) Export
+	//Doc = Wrapper._DocumentObject_;
+	Doc = Documents[DocMetadata.Name].CreateDocument();
 	FillPropertyValues(Doc, Wrapper.Object, , "Number");
-	For Each Table In Wrapper._DocumentMetadata_.TabularSections Do
+	If Not ValueIsFilled(Doc.Date) Then
+		Doc.Date = CurrentSessionDate();
+	EndIf;
+	//For Each Table In Wrapper._DocumentMetadata_.TabularSections Do
+	For Each Table In DocMetadata.TabularSections Do
 		Doc[Table.Name].Load(Wrapper.Object[Table.Name]);
 	EndDo;
 	Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),

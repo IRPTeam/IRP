@@ -104,7 +104,10 @@ Procedure FillExpCount(Object, Form) Export
 		ShowMessageBox(Undefined, R().InfoMessage_006);
 		Return;
 	EndIf;
-	FillItemList(Object, Form, DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store));
+	
+	ItemCounts = DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store);
+	
+	FillItemList(Object, Form, ItemCounts);
 EndProcedure
 
 Procedure UpdateExpCount(Object, Form) Export

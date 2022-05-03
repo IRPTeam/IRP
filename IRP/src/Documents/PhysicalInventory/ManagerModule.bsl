@@ -110,178 +110,7 @@ EndProcedure
 
 #EndRegion
 
-Function GetItemListWithFillingPhysCount(Ref) Export
-	Query = New Query();
-	Query.Text = GetQueryTextFillPhysCount_ByItemList();
-
-	Query.SetParameter("Ref", Ref);
-
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	Return QueryTable;
-EndFunction
-
-Function GetQueryTextFillPhysCount_ByItemList()
-	Return "SELECT
-		   |	NestedSelect.ItemKey.Item AS Item,
-		   |	NestedSelect.ItemKey AS ItemKey,
-		   |	NestedSelect.Unit AS Unit,
-		   |	SUM(NestedSelect.ExpCount) AS ExpCount,
-		   |	SUM(NestedSelect.PhysCount) AS PhysCount,
-		   |	SUM(NestedSelect.PhysCount) - SUM(NestedSelect.ExpCount) AS Difference
-		   |FROM
-		   |	(SELECT
-		   |		PhysicalInventoryItemList.ItemKey AS ItemKey,
-		   |		PhysicalInventoryItemList.Unit AS Unit,
-		   |		SUM(PhysicalInventoryItemList.ExpCount) AS ExpCount,
-		   |		0 AS PhysCount
-		   |	FROM
-		   |		Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
-		   |	WHERE
-		   |		PhysicalInventoryItemList.Ref = &Ref
-		   |	GROUP BY
-		   |		PhysicalInventoryItemList.ItemKey,
-		   |		PhysicalInventoryItemList.Unit
-		   |
-		   |	UNION ALL
-		   |
-		   |	SELECT
-		   |		PhysicalCountByLocationItemList.ItemKey,
-		   |		PhysicalCountByLocationItemList.Unit,
-		   |		0,
-		   |		SUM(PhysicalCountByLocationItemList.PhysCount)
-		   |	FROM
-		   |		Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
-		   |	WHERE
-		   |		PhysicalCountByLocationItemList.Ref.PhysicalInventory = &Ref
-		   |		AND NOT PhysicalCountByLocationItemList.Ref.DeletionMark
-		   |		AND PhysicalCountByLocationItemList.Ref.Status.Posting
-		   |	GROUP BY
-		   |		PhysicalCountByLocationItemList.ItemKey,
-		   |		PhysicalCountByLocationItemList.Unit) AS NestedSelect
-		   |GROUP BY
-		   |	NestedSelect.ItemKey.Item,
-		   |	NestedSelect.ItemKey,
-		   |	NestedSelect.Unit";
-EndFunction
-
-Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
-	Query = New Query();
-
-	If ItemList = Undefined Then
-		Query.Text = GetQueryTextFillExpCount();
-	Else
-		Query.Text = GetQueryTextFillExpCount_ByItemList();
-
-		AccReg = Metadata.AccumulationRegisters.R4010B_ActualStocks;
-
-		ItemListTyped = New ValueTable();
-		ItemListTyped.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-		ItemListTyped.Columns.Add("LineNumber", New TypeDescription("Number"));
-		ItemListTyped.Columns.Add("Store", AccReg.Dimensions.Store.Type);
-		ItemListTyped.Columns.Add("ItemKey", AccReg.Dimensions.ItemKey.Type);
-		ItemListTyped.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
-		ItemListTyped.Columns.Add("PhysCount", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
-		For Each Row In ItemList Do
-			FillPropertyValues(ItemListTyped.Add(), Row);
-		EndDo;
-
-		Query.SetParameter("ItemList", ItemListTyped);
-	EndIf;
-
-	If ValueIsFilled(Ref) Then
-		Query.SetParameter("Period", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
-	Else
-		Query.SetParameter("Period", Undefined);
-	EndIf;
-
-	Query.SetParameter("Store", Store);
-
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-
-	If QueryTable.Columns.Find("Key") = Undefined Then
-		QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-	EndIf;
-
-	If QueryTable.Columns.Find("LineNumber") <> Undefined Then
-		QueryTable.Columns.Delete("LineNumber");
-	EndIf;
-
-	For Each Row In QueryTable Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
-	Return QueryTable;
-EndFunction
-
-Function GetQueryTextFillExpCount()
-	Return "SELECT
-		   |	R4010B_ActualStocks.Store,
-		   |	R4010B_ActualStocks.ItemKey.Item AS Item,
-		   |	R4010B_ActualStocks.ItemKey,
-		   |	CASE
-		   |		WHEN R4010B_ActualStocks.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
-		   |			THEN R4010B_ActualStocks.ItemKey.Unit
-		   |		ELSE R4010B_ActualStocks.ItemKey.Item.Unit
-		   |	END AS Unit,
-		   |	R4010B_ActualStocks.QuantityBalance AS ExpCount,
-		   |	0 AS PhysCount
-		   |FROM
-		   |	AccumulationRegister.R4010B_ActualStocks.Balance(&Period, Store = &Store) AS R4010B_ActualStocks";
-EndFunction
-
-Function GetQueryTextFillExpCount_ByItemList()
-	Return "SELECT
-		   |	tmp.Key AS Key,
-		   |	tmp.LineNumber AS LineNumber,
-		   |	tmp.Store AS Store,
-		   |	tmp.ItemKey AS ItemKey,
-		   |	tmp.Unit AS Unit,
-		   |	tmp.PhysCount AS PhysCount
-		   |INTO ItemList
-		   |FROM
-		   |	&ItemList AS tmp
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	R4010B_ActualStocks.Store,
-		   |	R4010B_ActualStocks.ItemKey,
-		   |	CASE
-		   |		WHEN R4010B_ActualStocks.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
-		   |			THEN R4010B_ActualStocks.ItemKey.Unit
-		   |		ELSE R4010B_ActualStocks.ItemKey.Item.Unit
-		   |	END AS Unit,
-		   |	R4010B_ActualStocks.QuantityBalance AS ExpCount
-		   |INTO ActualStocks
-		   |FROM
-		   |	AccumulationRegister.R4010B_ActualStocks.Balance(&Period, Store IN
-		   |		(SELECT
-		   |			ItemList.Store
-		   |		FROM
-		   |			ItemList AS ItemList)) AS R4010B_ActualStocks
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	ItemList.Key,
-		   |	ISNULL(ItemList.Store, ActualStocks.Store) AS Store,
-		   |	ISNULL(ItemList.ItemKey, ActualStocks.ItemKey) AS ItemKey,
-		   |	ISNULL(ItemList.ItemKey.Item, ActualStocks.ItemKey.Item) AS Item,
-		   |	ISNULL(ItemList.Unit, ActualStocks.Unit) AS Unit,
-		   |	ISNULL(ItemList.PhysCount, 0) AS PhysCount,
-		   |	ISNULL(ActualStocks.ExpCount, 0) AS ExpCount,
-		   |	ISNULL(ItemList.LineNumber, -1) AS LineNumber
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		FULL JOIN ActualStocks AS ActualStocks
-		   |		ON ItemList.Store = ActualStocks.Store
-		   |		AND ItemList.ItemKey = ActualStocks.ItemKey
-		   |ORDER BY
-		   |	LineNumber";
-EndFunction
+#Region PostingService
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
@@ -431,3 +260,246 @@ Function T3010S_RowIDInfo()
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
+
+#EndRegion
+
+#Region Public
+
+Function GetItemListWithFillingPhysCount(Ref) Export
+	Query = New Query();
+	Query.Text = GetQueryTextFillPhysCount_ByItemList();
+
+	Query.SetParameter("Ref", Ref);
+
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+// Get item list with filling exp count.
+// 
+// Parameters:
+//  Ref - DocumentRef.PhysicalInventory - Ref
+//  Store - CatalogRef.Stores - Store
+//  ItemList - Undefined - Item list
+// 
+// Returns:
+//  ValueTable - Get item list with filling exp count
+Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
+	Query = New Query();
+
+	If ItemList = Undefined Then
+		Query.Text = GetQueryTextFillExpCount();
+	Else
+		Query.Text = GetQueryTextFillExpCount_ByItemList();
+
+		AccReg = Metadata.AccumulationRegisters.R4010B_ActualStocks;
+
+		ItemListTyped = New ValueTable();
+		ItemListTyped.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+		ItemListTyped.Columns.Add("LineNumber", New TypeDescription("Number"));
+		ItemListTyped.Columns.Add("Store", AccReg.Dimensions.Store.Type);
+		ItemListTyped.Columns.Add("ItemKey", AccReg.Dimensions.ItemKey.Type);
+		ItemListTyped.Columns.Add("SerialLotNumber", New TypeDescription("CatalogRef.SerialLotNumbers"));
+		ItemListTyped.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
+		ItemListTyped.Columns.Add("PhysCount", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
+		For Each Row In ItemList Do
+			FillPropertyValues(ItemListTyped.Add(), Row);
+		EndDo;
+
+		Query.SetParameter("ItemList", ItemListTyped);
+	EndIf;
+
+	If ValueIsFilled(Ref) Then
+		Query.SetParameter("Period", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		Query.SetParameter("Period", Undefined);
+	EndIf;
+
+	Query.SetParameter("Store", Store);
+	Query.SetParameter("useSerialLotNumber", Ref.UseSerialLot);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+
+	If QueryTable.Columns.Find("Key") = Undefined Then
+		QueryTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+	EndIf;
+
+	If QueryTable.Columns.Find("LineNumber") <> Undefined Then
+		QueryTable.Columns.Delete("LineNumber");
+	EndIf;
+
+	For Each Row In QueryTable Do
+		If Not ValueIsFilled(Row.Key) Then
+			Row.Key = New UUID();
+		EndIf;
+	EndDo;
+	Return QueryTable;
+EndFunction
+
+#EndRegion
+
+#Region Service
+
+Function GetQueryTextFillPhysCount_ByItemList()
+	Return "SELECT
+		   |	NestedSelect.ItemKey.Item AS Item,
+		   |	NestedSelect.ItemKey AS ItemKey,
+		   |	NestedSelect.Unit AS Unit,
+		   |	SUM(NestedSelect.ExpCount) AS ExpCount,
+		   |	SUM(NestedSelect.PhysCount) AS PhysCount,
+		   |	SUM(NestedSelect.PhysCount) - SUM(NestedSelect.ExpCount) AS Difference
+		   |FROM
+		   |	(SELECT
+		   |		PhysicalInventoryItemList.ItemKey AS ItemKey,
+		   |		PhysicalInventoryItemList.Unit AS Unit,
+		   |		SUM(PhysicalInventoryItemList.ExpCount) AS ExpCount,
+		   |		0 AS PhysCount
+		   |	FROM
+		   |		Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
+		   |	WHERE
+		   |		PhysicalInventoryItemList.Ref = &Ref
+		   |	GROUP BY
+		   |		PhysicalInventoryItemList.ItemKey,
+		   |		PhysicalInventoryItemList.Unit
+		   |
+		   |	UNION ALL
+		   |
+		   |	SELECT
+		   |		PhysicalCountByLocationItemList.ItemKey,
+		   |		PhysicalCountByLocationItemList.Unit,
+		   |		0,
+		   |		SUM(PhysicalCountByLocationItemList.PhysCount)
+		   |	FROM
+		   |		Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
+		   |	WHERE
+		   |		PhysicalCountByLocationItemList.Ref.PhysicalInventory = &Ref
+		   |		AND NOT PhysicalCountByLocationItemList.Ref.DeletionMark
+		   |		AND PhysicalCountByLocationItemList.Ref.Status.Posting
+		   |	GROUP BY
+		   |		PhysicalCountByLocationItemList.ItemKey,
+		   |		PhysicalCountByLocationItemList.Unit) AS NestedSelect
+		   |GROUP BY
+		   |	NestedSelect.ItemKey.Item,
+		   |	NestedSelect.ItemKey,
+		   |	NestedSelect.Unit";
+EndFunction
+
+Function GetQueryTextFillExpCount()
+	Return "SELECT
+	|	ActualStocks.Store,
+	|	ActualStocks.ItemKey.Item AS Item,
+	|	ActualStocks.ItemKey,
+	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
+	|	CASE
+	|		WHEN ActualStocks.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+	|			THEN ActualStocks.ItemKey.Unit
+	|		ELSE ActualStocks.ItemKey.Item.Unit
+	|	END AS Unit,
+	|	ActualStocks.QuantityBalance AS ExpCount,
+	|	0 AS PhysCount
+	|FROM
+	|	AccumulationRegister.R4010B_ActualStocks.Balance(&Period, Store = &Store
+	|	AND CASE
+	|		WHEN &useSerialLotNumber
+	|			THEN ItemKey.Item.ItemType.UseSerialLotNumber
+	|		ELSE TRUE
+	|	END) AS ActualStocks
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	SerialLotNumberBalance.Store,
+	|	SerialLotNumberBalance.ItemKey.Item,
+	|	SerialLotNumberBalance.ItemKey,
+	|	SerialLotNumberBalance.SerialLotNumber,
+	|	CASE
+	|		WHEN SerialLotNumberBalance.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+	|			THEN SerialLotNumberBalance.ItemKey.Unit
+	|		ELSE SerialLotNumberBalance.ItemKey.Item.Unit
+	|	END,
+	|	SerialLotNumberBalance.QuantityBalance,
+	|	0
+	|FROM
+	|	AccumulationRegister.R4014B_SerialLotNumber.Balance(&Period, Store = &Store
+	|	AND &useSerialLotNumber) AS SerialLotNumberBalance";
+EndFunction
+
+Function GetQueryTextFillExpCount_ByItemList()
+	Return "SELECT
+		   |	tmp.Key AS Key,
+		   |	tmp.LineNumber AS LineNumber,
+		   |	tmp.Store AS Store,
+		   |	tmp.ItemKey AS ItemKey,
+		   |	tmp.Unit AS Unit,
+		   |	tmp.SerialLotNumber AS SerialLotNumber,
+		   |	tmp.PhysCount AS PhysCount
+		   |INTO ItemList
+		   |FROM
+		   |	&ItemList AS tmp
+		   |;
+		   |
+		   |////////////////////////////////////////////////////////////////////////////////
+		   |SELECT
+		   |	ActualStocks.Store,
+		   |	ActualStocks.ItemKey.Item AS Item,
+		   |	ActualStocks.ItemKey,
+		   |	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
+		   |	CASE
+		   |		WHEN ActualStocks.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+		   |			THEN ActualStocks.ItemKey.Unit
+		   |		ELSE ActualStocks.ItemKey.Item.Unit
+		   |	END AS Unit,
+		   |	ActualStocks.QuantityBalance AS ExpCount,
+		   |	0 AS PhysCount
+		   |INTO ActualStocks
+		   |FROM
+		   |	AccumulationRegister.R4010B_ActualStocks.Balance(&Period, Store = &Store
+		   |	AND CASE
+		   |		WHEN &useSerialLotNumber
+		   |			THEN ItemKey.Item.ItemType.UseSerialLotNumber
+		   |		ELSE TRUE
+		   |	END) AS ActualStocks
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	SerialLotNumberBalance.Store,
+		   |	SerialLotNumberBalance.ItemKey.Item,
+		   |	SerialLotNumberBalance.ItemKey,
+		   |	SerialLotNumberBalance.SerialLotNumber,
+		   |	CASE
+		   |		WHEN SerialLotNumberBalance.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
+		   |			THEN SerialLotNumberBalance.ItemKey.Unit
+		   |		ELSE SerialLotNumberBalance.ItemKey.Item.Unit
+		   |	END,
+		   |	SerialLotNumberBalance.QuantityBalance,
+		   |	0
+		   |FROM
+		   |	AccumulationRegister.R4014B_SerialLotNumber.Balance(&Period, Store = &Store
+		   |	AND &useSerialLotNumber) AS SerialLotNumberBalance
+		   |;
+		   |
+		   |////////////////////////////////////////////////////////////////////////////////
+		   |SELECT
+		   |	ItemList.Key,
+		   |	ISNULL(ItemList.Store, ActualStocks.Store) AS Store,
+		   |	ISNULL(ItemList.ItemKey, ActualStocks.ItemKey) AS ItemKey,
+		   |	ISNULL(ItemList.ItemKey.Item, ActualStocks.ItemKey.Item) AS Item,
+		   |	ISNULL(ItemList.SerialLotNumber, ActualStocks.SerialLotNumber) AS SerialLotNumber,
+		   |	ISNULL(ItemList.Unit, ActualStocks.Unit) AS Unit,
+		   |	ISNULL(ItemList.PhysCount, 0) AS PhysCount,
+		   |	ISNULL(ActualStocks.ExpCount, 0) AS ExpCount,
+		   |	ISNULL(ItemList.LineNumber, -1) AS LineNumber
+		   |FROM
+		   |	ItemList AS ItemList
+		   |		FULL JOIN ActualStocks AS ActualStocks
+		   |		ON ItemList.Store = ActualStocks.Store
+		   |		AND ItemList.ItemKey = ActualStocks.ItemKey
+		   |		AND ItemList.SerialLotNumber = ActualStocks.SerialLotNumber
+		   |ORDER BY
+		   |	LineNumber";
+EndFunction
+
+#EndRegion

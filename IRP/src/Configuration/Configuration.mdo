@@ -463,6 +463,7 @@
   <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
   <functionalOptions>FunctionalOption.UseExpenseAndRevenueTypes</functionalOptions>
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
+  <functionalOptions>FunctionalOption.UseShipmentConfirmationAndGoodsReceipts</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -520,6 +521,7 @@
   <constants>Constant.UseLockDataModification</constants>
   <constants>Constant.UseSerialLotNumbers</constants>
   <constants>Constant.UseExpenseAndRevenueTypes</constants>
+  <constants>Constant.UseShipmentConfirmationAndGoodsReceipts</constants>
   <constants>Constant.UseStores</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

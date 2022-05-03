@@ -8,4 +8,11 @@
   <location>Constant.UseSerialLotNumbers</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Catalog.SerialLotNumbers</content>
+  <content>AccumulationRegister.R2050T_RetailSales.Dimension.SerialLotNumber</content>
+  <content>InformationRegister.Barcodes.Resource.SerialLotNumber</content>
+  <content>Enum.SerialNumberTypes</content>
+  <content>Enum.SerialNumbersOwner</content>
+  <content>AccumulationRegister.R4014B_SerialLotNumber.Dimension.SerialLotNumber</content>
+  <content>AccumulationRegister.R4014B_SerialLotNumber</content>
+  <content>Catalog.ItemTypes.Attribute.UseSerialLotNumber</content>
 </mdclass:FunctionalOption>

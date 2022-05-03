@@ -465,6 +465,7 @@
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseShipmentConfirmationAndGoodsReceipts</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAging</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -525,6 +526,7 @@
   <constants>Constant.UseShipmentConfirmationAndGoodsReceipts</constants>
   <constants>Constant.UseStores</constants>
   <constants>Constant.UsePartnerTerms</constants>
+  <constants>Constant.UseAging</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

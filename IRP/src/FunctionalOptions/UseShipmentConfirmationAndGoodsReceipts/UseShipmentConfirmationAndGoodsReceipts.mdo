@@ -9,8 +9,6 @@
   <privilegedGetMode>true</privilegedGetMode>
   <content>Catalog.Stores.Attribute.UseShipmentConfirmation</content>
   <content>Document.InventoryTransfer.Attribute.UseShipmentConfirmation</content>
-  <content>Document.PurchaseReturn.TabularSection.ShipmentConfirmations.Attribute.ShipmentConfirmation</content>
-  <content>Document.PurchaseReturn.TabularSection.ShipmentConfirmations.Attribute.QuantityInShipmentConfirmation</content>
   <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.UseShipmentConfirmation</content>
   <content>Document.ShipmentConfirmation</content>
   <content>Document.SalesInvoice.TabularSection.ShipmentConfirmations</content>
@@ -28,4 +26,5 @@
   <content>Document.PurchaseInvoice.TabularSection.GoodsReceipts.Attribute.QuantityInGoodsReceipt</content>
   <content>Document.SalesReturn.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
   <content>Enum.GoodsReceiptTransactionTypes</content>
+  <content>Document.PurchaseReturn.TabularSection.ShipmentConfirmations</content>
 </mdclass:FunctionalOption>

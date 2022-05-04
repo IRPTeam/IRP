@@ -65,4 +65,6 @@
   <content>Document.PurchaseReturn.Attribute.LegalNameContract</content>
   <content>Document.OpeningEntry.TabularSection.AdvanceToSuppliers.Attribute.LegalNameContract</content>
   <content>Catalog.LegalNameContracts</content>
+  <content>Catalog.PartnerSegments</content>
+  <content>InformationRegister.PartnerSegments</content>
 </mdclass:FunctionalOption>

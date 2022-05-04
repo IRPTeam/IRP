@@ -143,6 +143,7 @@ Function UseMultiLanguage(Val MetadataFullName, Val LangCode = "", AddInfo = Und
 	MetadataFullName = StrReplace(MetadataFullName, "Manager.", ".");
 	MetadataObject = Metadata.FindByFullName(MetadataFullName);
 	DescriptionAttr = Metadata.CommonAttributes["Description_" + LangCode];
+	//@skip-check invocation-parameter-type-intersect
 	Content = DescriptionAttr.Content.Find(MetadataObject);
 
 	If Not Content = Undefined Then

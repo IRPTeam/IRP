@@ -80,7 +80,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	Query.SetParameter("SearchString", Parameters.SearchString);
 	QueryTable = GetItemsBySearchString(Query);
 
-	ChoiceData = New ValueList();
+	ChoiceData = New ValueList(); // ValueList of CatalogRef.Items
 
 	For Each Row In QueryTable Do
 		If Not ChoiceData.FindByValue(Row.Ref) = Undefined Then
@@ -415,9 +415,9 @@ EndProcedure
 //
 // Returns:
 //  Structure - Custom search filter:
-// * FieldName - String
-// * Value - Undefined
-// * ComparisonType - ComparisonType -
+// * FieldName - String - 
+// * Value - Undefined - 
+// * ComparisonType - See ComparisonType
 // * DataCompositionComparisonType - Undefined
 Function NewCustomSearchFilter() Export
 	Structure = New Structure;
@@ -425,7 +425,6 @@ Function NewCustomSearchFilter() Export
 	Structure.Insert("Value", Undefined);
 	Structure.Insert("ComparisonType", ComparisonType.Equal);
 	Structure.Insert("DataCompositionComparisonType", Undefined);
-	// @skip-check constructor-function-return-section
 	Return Structure;
 EndFunction
 

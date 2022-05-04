@@ -18,5 +18,6 @@
     <subsystems>Subsystem.Reports</subsystems>
     <subsystems>Subsystem.Saas</subsystems>
     <subsystems>Subsystem.Retail</subsystems>
+    <subsystems>Subsystem.Accounting</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

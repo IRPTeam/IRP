@@ -6,7 +6,7 @@
 //  Lang - String - Lang
 // 
 // Returns:
-// Structure - Localization strings:
+// Structure:
 //	* Eq_001 - String - Installed
 //	* Eq_002 - String - Not installed
 //	* Eq_003 - String - There are no errors.
@@ -802,7 +802,6 @@ Function Strings(Lang) Export
 	Strings.Insert("R_004", NStr("en = 'Specification'", Lang) + " = ");
 #EndRegion
 
-	//@skip-check constructor-function-return-section
 	Return Strings;
 EndFunction
 

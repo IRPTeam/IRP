@@ -170,7 +170,7 @@ EndFunction
 // Fields list for descriptions.
 // 
 // Parameters:
-//  Source - CatalogManager - Source
+//  Source - String - Source
 // 
 // Returns:
 //  Array of String - Fields list for descriptions

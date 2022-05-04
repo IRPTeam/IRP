@@ -7,9 +7,11 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
+	//@skip-check property-return-type
 	ButtonsArray = Parameters.PayButtons; // Array of See POSClient.ButtonSettings
 	CreateFormElement(ButtonsArray);
 	
+	//@skip-warning
 	Items.BackToSelectGroup.Shortcut = New Shortcut(Key["Num0"]);
 	
 EndProcedure
@@ -34,6 +36,7 @@ Procedure CreateFormElement(ButtonsArray)
 			ButtonsList.Add(ButtonSettings);
 			PayButtonsParent.Insert(ButtonSettings.PaymentType.Parent, ButtonsList);
 		Else
+			//@skip-check dynamic-access-method-not-found
 			PayButtonsParent.Get(ButtonSettings.PaymentType.Parent).Add(ButtonSettings);
 		EndIf;
 	EndDo;
@@ -100,6 +103,7 @@ Procedure DrawButton(PaymentTypeGroup, ButtonName, Description, Page, Action)
 	NewDecoration.NonselectedPictureText = Description;
 	NewDecoration.ToolTip = Description;
 		
+	//@skip-check invocation-parameter-type-intersect
 	ThisObject[ButtonName] = GetURL(PaymentTypeGroup, "Icon");
 EndProcedure
 

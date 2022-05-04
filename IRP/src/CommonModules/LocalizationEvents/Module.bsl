@@ -425,6 +425,7 @@ Function NewCustomSearchFilter() Export
 	Structure.Insert("Value", Undefined);
 	Structure.Insert("ComparisonType", ComparisonType.Equal);
 	Structure.Insert("DataCompositionComparisonType", Undefined);
+	// @skip-check constructor-function-return-section
 	Return Structure;
 EndFunction
 

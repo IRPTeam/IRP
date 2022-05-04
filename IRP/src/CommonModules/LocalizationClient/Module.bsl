@@ -24,6 +24,7 @@ Procedure DescriptionOpening(Object, Form, Item, StandardProcessing) Export
 	AdditionalParameters.Insert("Object", Object);
 	AdditionalParameters.Insert("Form", Form);
 
+	//@skip-check invocation-parameter-type-intersect
 	OpenForm("CommonForm.EditDescriptions", OpenArgs, Form, , , , New NotifyDescription("DescriptionEditEnd",
 		ThisObject, AdditionalParameters));
 

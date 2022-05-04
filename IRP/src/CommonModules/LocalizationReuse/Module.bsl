@@ -79,7 +79,7 @@ EndFunction
 // Returns:
 //  Array of String - Fields list for descriptions
 Function FieldsListForDescriptions(Val SourceType) Export
-	Return LocalizationServer.FieldsListForDescriptions(SourceType);
+	Return LocalizationServer.FieldsListForDescriptions(String(SourceType));
 EndFunction
 
 // User language code.

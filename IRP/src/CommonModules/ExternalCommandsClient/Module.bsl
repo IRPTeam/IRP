@@ -23,5 +23,6 @@ Procedure GeneratedListChoiceFormCommandActionByName(SelectedRows, Form, Command
 EndProcedure
 
 Procedure CallMethodAddDataProc(Info)
+	//@skip-warning
 	AddDataProcServer.CallMethodAddDataProc(Info);
 EndProcedure

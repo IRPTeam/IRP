@@ -610,6 +610,7 @@ Function GetAddAttributeValueOfRefByID(UniqueID, ObjectRef) Export
 
 	ReturnValue = Undefined;
 
+	//@skip-warning
 	AddAttributeRef = ChartsOfCharacteristicTypes.AddAttributeAndProperty.FindByAttribute("UniqueID", UniqueID);
 	If Not AddAttributeRef.IsEmpty() Then
 
@@ -630,6 +631,7 @@ Function GetAddPropertyValueOfRefByID(UniqueID, ObjectRef) Export
 
 	ReturnValue = Undefined;
 
+	//@skip-warning
 	AddPropertyRef = ChartsOfCharacteristicTypes.AddAttributeAndProperty.FindByAttribute("UniqueID", UniqueID);
 	If Not AddPropertyRef.IsEmpty() Then
 

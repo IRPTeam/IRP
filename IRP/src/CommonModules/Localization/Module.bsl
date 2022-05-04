@@ -802,6 +802,7 @@ Function Strings(Lang) Export
 	Strings.Insert("R_004", NStr("en = 'Specification'", Lang) + " = ");
 #EndRegion
 
+	//@skip-check constructor-function-return-section
 	Return Strings;
 EndFunction
 

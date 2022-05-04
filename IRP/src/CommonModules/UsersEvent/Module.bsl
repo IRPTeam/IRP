@@ -51,6 +51,7 @@ Procedure UpdateUsersRoleOnWrite(Source, Cancel) Export
 	EndIf;
 	Result = UpdateUsersRole(Users);
 	If Source.AdditionalProperties.Property("UsersEventOnWriteResult") Then
+		//@skip-warning
 		Source.AdditionalProperties["UsersEventOnWriteResult"] = Result;
 	Else
 		Source.AdditionalProperties.Insert("UsersEventOnWriteResult", Result);

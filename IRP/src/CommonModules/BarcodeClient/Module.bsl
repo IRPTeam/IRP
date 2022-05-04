@@ -41,6 +41,7 @@ Function ProcessBarcodes(Barcodes, Parameters)
 	Parameters.Insert("FoundedItems", FoundedItems);
 	Parameters.Insert("Barcodes", Barcodes);
 
+	//@skip-warning
 	NotifyDescription = New NotifyDescription("SearchByBarcodeEnd", Parameters.ClientModule, Parameters);
 	ExecuteNotifyProcessing(NotifyDescription);
 	If FoundedItems.Count() Then
@@ -70,6 +71,7 @@ Procedure SearchByBarcode(Barcode, Object, Form, ClientModule, AddInfo = Undefin
 		EndIf;
 	EndIf;
 	NotifyDescription = New NotifyDescription("InputBarcodeEnd", BarcodeClient, NotifyParameters);
+	//@skip-warning
 	NotifyScan = New NotifyDescription("ScanBarcodeEndMobile", MobileBarcodeModule, NotifyParameters);
 	If IsBlankString(Barcode) Then
 		DescriptionField = R().SuggestionToUser_2;

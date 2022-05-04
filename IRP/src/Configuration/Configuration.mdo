@@ -468,6 +468,7 @@
   <functionalOptions>FunctionalOption.UseAging</functionalOptions>
   <functionalOptions>FunctionalOption.UseOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseDeliveryDate</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSpecialOffers</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -531,6 +532,7 @@
   <constants>Constant.UseAging</constants>
   <constants>Constant.UseOrders</constants>
   <constants>Constant.UseDeliveryDate</constants>
+  <constants>Constant.UseSpecialOffers</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

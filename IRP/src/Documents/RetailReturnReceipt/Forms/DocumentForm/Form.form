@@ -6855,6 +6855,7 @@
         <name>SetSpecialOffers</name>
       </handler>
     </action>
+    <functionalOptions>FunctionalOption.UseSpecialOffers</functionalOptions>
     <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

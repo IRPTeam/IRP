@@ -472,6 +472,7 @@
   <functionalOptions>FunctionalOption.UsePriceByProperties</functionalOptions>
   <functionalOptions>FunctionalOption.UseBankDocuments</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnerItems</functionalOptions>
+  <functionalOptions>FunctionalOption.UseContactInformation</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -539,6 +540,7 @@
   <constants>Constant.UsePriceByProperties</constants>
   <constants>Constant.UseBankDocuments</constants>
   <constants>Constant.UsePartnerItems</constants>
+  <constants>Constant.UseContactInformation</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

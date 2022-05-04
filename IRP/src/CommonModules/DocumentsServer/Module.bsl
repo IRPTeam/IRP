@@ -95,37 +95,15 @@ Procedure SetNewTableUUID(Table, LinkedTables) Export
 	EndDo;
 EndProcedure
 
-// Fill item list.
-// 
-// Parameters:
-//  Object - See Document.SalesOrder.Form.DocumentForm.Object
-//  Form - ClientApplicationForm - Form
 Procedure FillItemList(Object, Form = Undefined) Export
 
 	RowMap = New Map();
 
-	Query = New Query;
-	Query.Text =
-		"SELECT
-		|	ItemKeys.Ref AS ItemKey,
-		|	ItemKeys.Item AS Item,
-		|	ItemKeys.Item.ItemType AS ItemType
-		|FROM
-		|	Catalog.ItemKeys AS ItemKeys
-		|WHERE
-		|	ItemKeys.Ref IN (&ItemKeys)";
-	
-	Query.SetParameter("ItemKeys", Object.ItemList.Unload( , "ItemKey").UnloadColumn("ItemKey"));
-	
-	ItemKeysInfo = Query.Execute().Unload();
-	ItemKeysInfo.Indexes.Add("ItemKey");
-	
 	For Each Row In Object.ItemList Do
 		RowMap.Insert(Row.Key, Row);
-		ItemKeyInfo = ItemKeysInfo.FindRows(New Structure("ItemKey", Row.ItemKey))[0];
-		Row.Item = ItemKeyInfo.Item;
+		Row.Item = Row.ItemKey.Item;
 		If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Then
-			Row.ItemType = ItemKeyInfo.Type;
+			Row.ItemType = Row.Item.ItemType.Type;
 		EndIf;
 	EndDo;
 

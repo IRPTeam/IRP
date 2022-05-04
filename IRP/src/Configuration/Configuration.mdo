@@ -470,6 +470,7 @@
   <functionalOptions>FunctionalOption.UseDeliveryDate</functionalOptions>
   <functionalOptions>FunctionalOption.UseSpecialOffers</functionalOptions>
   <functionalOptions>FunctionalOption.UsePriceByProperties</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBankDocuments</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -535,6 +536,7 @@
   <constants>Constant.UseDeliveryDate</constants>
   <constants>Constant.UseSpecialOffers</constants>
   <constants>Constant.UsePriceByProperties</constants>
+  <constants>Constant.UseBankDocuments</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

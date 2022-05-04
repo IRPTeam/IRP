@@ -128,7 +128,8 @@ Procedure UpdateExpCount(Object, Form) Export
 EndProcedure
 
 Procedure UpdatePhysCount(Object, Form) Export
-	UpdateItemList(Object, Form, DocPhysicalInventoryServer.GetItemListWithFillingPhysCount(Object.Ref));
+	ArrayItemRowWithFillingPhysCount = DocPhysicalInventoryServer.GetItemListWithFillingPhysCount(Object.Ref); 
+	UpdateItemList(Object, Form, ArrayItemRowWithFillingPhysCount);
 EndProcedure
 
 Procedure FillItemList(Object, Form, Result)
@@ -140,6 +141,12 @@ Procedure FillItemList(Object, Form, Result)
 	EndDo;
 EndProcedure
 
+// Update item list.
+// 
+// Parameters:
+//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
+//  Form  - See Document.PhysicalInventory.Form.DocumentForm
+//  Result - Array of See DocPhysicalInventoryServer.GetItemRowWithFillingPhysCount - Result
 Procedure UpdateItemList(Object, Form, Result)
 	For Each ItemListRow In Object.ItemList Do
 		ItemListRow.PhysCount = 0;

@@ -254,7 +254,6 @@ EndProcedure
 &AtClient
 Procedure UpdateExpCount(Command)
 	DocPhysicalInventoryClient.UpdateExpCount(Object, ThisObject);
-	UpdatePhysicalCountsByLocations();
 EndProcedure
 
 &AtClient

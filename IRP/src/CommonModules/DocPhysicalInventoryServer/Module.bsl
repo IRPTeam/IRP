@@ -1,13 +1,21 @@
 #Region FORM
 
+// On create at server.
+// 
+// Parameters:
+//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
+//  Form  - See Document.PhysicalInventory.Form.DocumentForm
+//  Cancel - Boolean - Cancel
+//  StandardProcessing - Boolean - Standard processing
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
 		DocumentsServer.FillItemList(Object, Form);
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-		UpdatePhysicalCountByLocations(Object, Form);
+		Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
 	EndIf;
+	
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
@@ -16,7 +24,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	DocumentsServer.FillItemList(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
-	UpdatePhysicalCountByLocations(Object, Form);
+	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -26,7 +34,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
-	UpdatePhysicalCountByLocations(Object, Form);
+	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
 EndProcedure
 
 #EndRegion
@@ -92,15 +100,48 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	Return ArrayOfResult;
 EndFunction
 
+// Get item list with filling phys count.
+// 
+// Parameters:
+//  Ref - DocumentRef.PhysicalInventory - Ref
+// 
+// Returns:
+//  Array of See GetItemRowWithFillingPhysCount - Get item list with filling phys count
 Function GetItemListWithFillingPhysCount(Ref) Export
 	Result = Documents.PhysicalInventory.GetItemListWithFillingPhysCount(Ref);
 	ArrayOfResult = New Array();
 	For Each Row In Result Do
-		NewRow = New Structure("Item, ItemKey, SerialLotNumber, Unit, PhysCount, ExpCount");
+		NewRow = GetItemRowWithFillingPhysCount();
 		FillPropertyValues(NewRow, Row);
 		ArrayOfResult.Add(NewRow);
 	EndDo;
 	Return ArrayOfResult;
+EndFunction
+
+// Get item row with filling phys count.
+// 
+// Returns:
+//  Structure - Get item row with filling phys count:
+// * Key - String
+// * Item - CatalogRef.Items -
+// * ItemKey - CatalogRef.ItemKeys -
+// * SerialLotNumber - CatalogRef.SerialLotNumbers -
+// * Unit - CatalogRef.Units -
+// * PhysCount - Number -
+// * ExpCount - Number -
+Function GetItemRowWithFillingPhysCount() Export
+	
+	Structure = New Structure;
+	Structure.Insert("Key", "");
+	Structure.Insert("Item", Catalogs.Items.EmptyRef());
+	Structure.Insert("ItemKey", Catalogs.ItemKeys.EmptyRef());
+	Structure.Insert("SerialLotNumber", Catalogs.SerialLotNumbers.EmptyRef());
+	Structure.Insert("Unit", Catalogs.Units.EmptyRef());
+	Structure.Insert("PhysCount", 0);
+	Structure.Insert("ExpCount", 0);
+	
+	Return Structure;
+	
 EndFunction
 
 Function HavePhysicalCountByLocation(PhysicalInventoryRef) Export

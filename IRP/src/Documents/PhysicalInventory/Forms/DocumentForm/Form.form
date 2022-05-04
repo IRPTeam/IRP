@@ -522,6 +522,41 @@
           <placementArea>UserCmds</placementArea>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
+        <items xsi:type="form:Button">
+          <name>UpdatePhysCount</name>
+          <id>450</id>
+          <title>
+            <key>en</key>
+            <value>2. Fill from locations</value>
+          </title>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>UpdatePhysCountExtendedTooltip</name>
+            <id>451</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>UsualButton</type>
+          <commandName>Form.Command.UpdatePhysCount</commandName>
+          <representation>Auto</representation>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <placementArea>UserCmds</placementArea>
+          <representationInContextMenu>Auto</representationInContextMenu>
+        </items>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -1378,73 +1413,19 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListPhysicalCountByLocation</name>
-          <id>339</id>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.PhysicalCountByLocation</segments>
-          </dataPath>
-          <extendedTooltip>
-            <name>ItemListPhysicalCountByLocationExtendedTooltip</name>
-            <id>341</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>ItemListPhysicalCountByLocationContextMenu</name>
-            <id>340</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <readOnly>true</readOnly>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
-        </items>
-        <items xsi:type="form:FormField">
-          <name>ItemListPhysicalCountByLocationPresentation</name>
-          <id>342</id>
-          <title>
-            <key>en</key>
-            <value>Physical count</value>
-          </title>
+          <name>ItemListDescription</name>
+          <id>464</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.PhysicalCountByLocationPresentation</segments>
+            <segments>Object.ItemList.Description</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ItemListPhysicalCountByLocationPresentationExtendedTooltip</name>
-            <id>344</id>
+            <name>ItemListDescriptionExtendedTooltip</name>
+            <id>466</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1458,8 +1439,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListPhysicalCountByLocationPresentationContextMenu</name>
-            <id>343</id>
+            <name>ItemListDescriptionContextMenu</name>
+            <id>465</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1468,7 +1449,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
-          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -2048,9 +2028,7 @@
           </contextMenu>
           <type>PictureField</type>
           <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:ImageFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -2138,6 +2116,106 @@
           <contextMenu>
             <name>PhysicalCountByLocationListStatusContextMenu</name>
             <id>349</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>PhysicalCountByLocationListCountRows</name>
+          <id>458</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>PhysicalCountByLocationList.CountRows</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>PhysicalCountByLocationListCountRowsExtendedTooltip</name>
+            <id>460</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>PhysicalCountByLocationListCountRowsContextMenu</name>
+            <id>459</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>PhysicalCountByLocationListPhysCount</name>
+          <id>461</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>PhysicalCountByLocationList.PhysCount</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>PhysicalCountByLocationListPhysCountExtendedTooltip</name>
+            <id>463</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>PhysicalCountByLocationListPhysCountContextMenu</name>
+            <id>462</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2322,7 +2400,9 @@
         <autoMaxHeight>true</autoMaxHeight>
         <autoMaxRowsCount>true</autoMaxRowsCount>
         <selectionMode>MultiRow</selectionMode>
+        <header>true</header>
         <headerHeight>1</headerHeight>
+        <footer>true</footer>
         <footerHeight>1</footerHeight>
         <horizontalScrollBar>AutoUse</horizontalScrollBar>
         <verticalScrollBar>AutoUse</verticalScrollBar>
@@ -3628,14 +3708,20 @@
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
 	PhysicalCountByLocation.Ref,
-	PhysicalCountByLocation.Status
+	PhysicalCountByLocation.Status,
+	COUNT(PhysicalCountByLocationItemList.LineNumber) AS CountRows,
+	SUM(PhysicalCountByLocationItemList.PhysCount) AS PhysCount
 FROM
 	Document.PhysicalCountByLocation AS PhysicalCountByLocation
+		LEFT JOIN Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
+		ON PhysicalCountByLocationItemList.Ref = PhysicalCountByLocation.Ref
 WHERE
 	PhysicalCountByLocation.PhysicalInventory = &amp;PhysicalInventoryRef
-	AND
-	NOT PhysicalCountByLocation.DeletionMark</queryText>
+GROUP BY
+	PhysicalCountByLocation.Ref,
+	PhysicalCountByLocation.Status</queryText>
       <mainTable>Document.PhysicalCountByLocation</mainTable>
+      <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>

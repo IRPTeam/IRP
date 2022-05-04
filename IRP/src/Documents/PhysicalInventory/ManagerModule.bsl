@@ -265,6 +265,21 @@ EndFunction
 
 #Region Public
 
+// Get item list with filling phys count.
+// 
+// Parameters:
+//  Ref - DocumentRef.PhysicalInventory - Ref
+// 
+// Returns:
+//  ValueTable - Get item list with filling phys count:
+//  * Key - String
+//  * Item - CatalogRef.Items
+//  * ItemKey - CatalogRef.ItemKeys
+//  * SerialLotNumber - CatalogRef.SerialLotNumbers
+//  * Unit - CatalogRef.Units
+//  * ExpCount - Number
+//  * PhysCount - Number
+//  * Difference - Number
 Function GetItemListWithFillingPhysCount(Ref) Export
 	Query = New Query();
 	Query.Text = GetQueryTextFillPhysCount_ByItemList();
@@ -344,46 +359,95 @@ EndFunction
 
 Function GetQueryTextFillPhysCount_ByItemList()
 	Return "SELECT
-		   |	NestedSelect.ItemKey.Item AS Item,
-		   |	NestedSelect.ItemKey AS ItemKey,
-		   |	NestedSelect.Unit AS Unit,
-		   |	SUM(NestedSelect.ExpCount) AS ExpCount,
-		   |	SUM(NestedSelect.PhysCount) AS PhysCount,
-		   |	SUM(NestedSelect.PhysCount) - SUM(NestedSelect.ExpCount) AS Difference
-		   |FROM
-		   |	(SELECT
-		   |		PhysicalInventoryItemList.ItemKey AS ItemKey,
-		   |		PhysicalInventoryItemList.Unit AS Unit,
-		   |		SUM(PhysicalInventoryItemList.ExpCount) AS ExpCount,
-		   |		0 AS PhysCount
-		   |	FROM
-		   |		Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
-		   |	WHERE
-		   |		PhysicalInventoryItemList.Ref = &Ref
-		   |	GROUP BY
-		   |		PhysicalInventoryItemList.ItemKey,
-		   |		PhysicalInventoryItemList.Unit
-		   |
-		   |	UNION ALL
-		   |
-		   |	SELECT
-		   |		PhysicalCountByLocationItemList.ItemKey,
-		   |		PhysicalCountByLocationItemList.Unit,
-		   |		0,
-		   |		SUM(PhysicalCountByLocationItemList.PhysCount)
-		   |	FROM
-		   |		Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
-		   |	WHERE
-		   |		PhysicalCountByLocationItemList.Ref.PhysicalInventory = &Ref
-		   |		AND NOT PhysicalCountByLocationItemList.Ref.DeletionMark
-		   |		AND PhysicalCountByLocationItemList.Ref.Status.Posting
-		   |	GROUP BY
-		   |		PhysicalCountByLocationItemList.ItemKey,
-		   |		PhysicalCountByLocationItemList.Unit) AS NestedSelect
-		   |GROUP BY
-		   |	NestedSelect.ItemKey.Item,
-		   |	NestedSelect.ItemKey,
-		   |	NestedSelect.Unit";
+	|	PhysicalInventoryItemList.Key AS Key,
+	|	PhysicalInventoryItemList.ItemKey AS ItemKey,
+	|	PhysicalInventoryItemList.SerialLotNumber AS SerialLotNumber,
+	|	PhysicalInventoryItemList.Unit AS Unit,
+	|	SUM(PhysicalInventoryItemList.ExpCount) AS ExpCount
+	|INTO ExpectedItems
+	|FROM
+	|	Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
+	|WHERE
+	|	PhysicalInventoryItemList.Ref = &Ref
+	|
+	|GROUP BY
+	|	PhysicalInventoryItemList.Key,
+	|	PhysicalInventoryItemList.ItemKey,
+	|	PhysicalInventoryItemList.SerialLotNumber,
+	|	PhysicalInventoryItemList.Unit
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ExpectedItems.Key AS Key,
+	|	PhysicalCountByLocationItemList.ItemKey AS ItemKey,
+	|	PhysicalCountByLocationItemList.SerialLotNumber AS SerialLotNumber,
+	|	PhysicalCountByLocationItemList.Unit AS Unit,
+	|	SUM(PhysicalCountByLocationItemList.PhysCount) AS PhysCount
+	|INTO ItemsAtLocations
+	|FROM
+	|	Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
+	|		LEFT JOIN ExpectedItems AS ExpectedItems
+	|		ON (ExpectedItems.ItemKey = PhysicalCountByLocationItemList.ItemKey)
+	|			AND (ExpectedItems.SerialLotNumber = PhysicalCountByLocationItemList.SerialLotNumber)
+	|			AND (ExpectedItems.Unit = PhysicalCountByLocationItemList.Unit)
+	|WHERE
+	|	PhysicalCountByLocationItemList.Ref.PhysicalInventory = &Ref
+	|	AND NOT PhysicalCountByLocationItemList.Ref.DeletionMark
+	|	AND PhysicalCountByLocationItemList.Ref.Status.Posting
+	|
+	|GROUP BY
+	|	PhysicalCountByLocationItemList.ItemKey,
+	|	PhysicalCountByLocationItemList.SerialLotNumber,
+	|	PhysicalCountByLocationItemList.Unit,
+	|	ExpectedItems.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ExpectedItems.Key AS Key,
+	|	ExpectedItems.ItemKey AS ItemKey,
+	|	ExpectedItems.SerialLotNumber AS SerialLotNumber,
+	|	ExpectedItems.Unit AS Unit,
+	|	ExpectedItems.ExpCount AS ExpCount,
+	|	0 AS PhysCount
+	|INTO TotalItems
+	|FROM
+	|	ExpectedItems AS ExpectedItems
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ItemsAtLocations.Key,
+	|	ItemsAtLocations.ItemKey,
+	|	ItemsAtLocations.SerialLotNumber,
+	|	ItemsAtLocations.Unit,
+	|	0,
+	|	ItemsAtLocations.PhysCount
+	|FROM
+	|	ItemsAtLocations AS ItemsAtLocations
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TotalItems.Key AS Key,
+	|	TotalItems.ItemKey.Item AS Item,
+	|	TotalItems.ItemKey AS ItemKey,
+	|	TotalItems.SerialLotNumber AS SerialLotNumber,
+	|	TotalItems.Unit AS Unit,
+	|	SUM(TotalItems.ExpCount) AS ExpCount,
+	|	SUM(TotalItems.PhysCount) AS PhysCount,
+	|	SUM(TotalItems.ExpCount - TotalItems.PhysCount) AS Difference
+	|FROM
+	|	TotalItems AS TotalItems
+	|
+	|GROUP BY
+	|	TotalItems.Key,
+	|	TotalItems.ItemKey.Item,
+	|	TotalItems.ItemKey,
+	|	TotalItems.SerialLotNumber,
+	|	TotalItems.Unit
+	|";
 EndFunction
 
 Function GetQueryTextFillExpCount()

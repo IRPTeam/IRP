@@ -177,6 +177,9 @@ Scenario: 950405 create reasons for documents with different comparison type
 				| 'Number'         |
 				| '1' |
 			And in the table "List" I click the button named "ListContextMenuCopy"
+			Then "Update item list info" window is opened
+			And I change checkbox "Do you want to change tax rates according to the partner term?"
+			And I click "OK" button		
 			And I move to "Other" tab
 			And I input "07.10.2020 00:00:00" text in "Date" field
 			And I activate field named "ItemListLineNumber" in "ItemList" table
@@ -208,6 +211,9 @@ Scenario: 950405 create reasons for documents with different comparison type
 				| 'Number'         |
 				| '1' |
 			And in the table "List" I click the button named "ListContextMenuCopy"
+			Then "Update item list info" window is opened
+			And I change checkbox "Do you want to change tax rates according to the partner term?"
+			And I click "OK" button		
 			And I click "Save" button
 			And I click "Post and close" button
 			And "List" table contains lines
@@ -231,6 +237,9 @@ Scenario: 950405 create reasons for documents with different comparison type
 				| 'Number'         |
 				| '15' |
 			And in the table "List" I click the button named "ListContextMenuCopy"
+			Then "Update item list info" window is opened
+			And I change checkbox "Do you want to change tax rates according to the partner term?"
+			And I click "OK" button	
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -255,6 +264,9 @@ Scenario: 950405 create reasons for documents with different comparison type
 				| 'Number'         |
 				| '1' |
 			And in the table "List" I click the button named "ListContextMenuCopy"
+			Then "Update item list info" window is opened
+			And I change checkbox "Do you want to change tax rates according to the partner term?"
+			And I click "OK" button	
 			And I click "Save" button
 			And I click "Post and close" button
 			Then user message window does not contain messages
@@ -286,6 +298,9 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 					| 'Number'         |
 					| '15' |
 				And in the table "List" I click the button named "ListContextMenuCopy"
+				Then "Update item list info" window is opened
+				And I change checkbox "Do you want to change tax rates according to the partner term?"
+				And I click "OK" button	
 				And I move to "Other" tab
 				And I input "0" text in "Number" field
 				Then "1C:Enterprise" window is opened
@@ -572,6 +587,9 @@ Scenario: 950407 create rules for accumulation register
 				| 'Number'         |
 				| '1' |
 			And in the table "List" I click the button named "ListContextMenuCopy"
+			Then "Update item list info" window is opened
+			And I change checkbox "Do you want to change tax rates according to the partner term?"
+			And I click "OK" button	
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -615,6 +633,9 @@ Scenario: 950407 create rules for accumulation register
 				| 'Number'         |
 				| '15' |
 			And in the table "List" I click the button named "ListContextMenuCopy"
+			Then "Update item list info" window is opened
+			And I change checkbox "Do you want to change tax rates according to the partner term?"
+			And I click "OK" button	
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -718,6 +739,9 @@ Scenario: 950409 create rules for information register (with recorder)
 				| 'Number'         |
 				| '1' |
 			And in the table "List" I click the button named "ListContextMenuCopy"
+			Then "Update item list info" window is opened
+			And I change checkbox "Do you want to change tax rates according to the partner term?"
+			And I click "OK" button	
 			And I click "Post and close" button
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button

@@ -275,6 +275,10 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 			| 'Number'                     |
 			| '$$NumberPurchaseInvoice018001$$' |
 		And in the table "List" I click the button named "ListContextMenuCopy"
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button	
 	* Check copy info
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"

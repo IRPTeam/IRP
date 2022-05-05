@@ -476,6 +476,8 @@
   <functionalOptions>FunctionalOption.UseBusinessUnits</functionalOptions>
   <functionalOptions>FunctionalOption.UseManagersAndSalesPersons</functionalOptions>
   <functionalOptions>FunctionalOption.UseIntegrations</functionalOptions>
+  <functionalOptions>FunctionalOption.UseEquipments</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAddAttributesAndProperties</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -547,6 +549,8 @@
   <constants>Constant.UseBusinessUnits</constants>
   <constants>Constant.UseManagersAndSalesPersons</constants>
   <constants>Constant.UseIntegrations</constants>
+  <constants>Constant.UseEquipments</constants>
+  <constants>Constant.UseAddAttributesAndProperties</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

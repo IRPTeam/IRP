@@ -66,34 +66,25 @@ EndProcedure
 Procedure FillParamsOnCreate()
 	OwnerSelect = "Manual";
 
-	If Parameters.Property("ItemType") Then
+	If Not Parameters.ItemType.IsEmpty() Then
 		ItemType = Parameters.ItemType;
-	EndIf;
-	If Parameters.Property("Item") Then
-		Item = Parameters.Item;
-	EndIf;
-	If Parameters.Property("ItemKey") Then
-		ItemKey = Parameters.ItemKey;
-	EndIf;
-	If Parameters.Property("Barcode") Then
-		Barcode = Parameters.Barcode;
-	EndIf;
-	If Not ItemType.IsEmpty() Then
 		Items.OwnerSelect.ChoiceList.Add("ItemType", ItemType);
 		OwnerSelect = "ItemType";
 	EndIf;
-	If Not Item.IsEmpty() Then
+	If Not Parameters.Item.IsEmpty() Then
+		Item = Parameters.Item;
 		Items.OwnerSelect.ChoiceList.Add("Item", Item);
 		OwnerSelect = "Item";
 	EndIf;
-	If Not ItemKey.IsEmpty() Then
+	If Not Parameters.ItemKey.IsEmpty() Then
+		ItemKey = Parameters.ItemKey;
 		Items.OwnerSelect.ChoiceList.Add("ItemKey", ItemKey);
 		OwnerSelect = "ItemKey";
 	EndIf;
-	If Not IsBlankString(Barcode) Then
+	If Not IsBlankString(Parameters.Barcode) Then
+		Barcode = Parameters.Barcode;
 		Object.Description = Barcode;
 	EndIf;
-	
 	// delete manual, if have other types
 	If Items.OwnerSelect.ChoiceList.Count() > 1 Then
 		Items.OwnerSelect.ChoiceList.Delete(0);

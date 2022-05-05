@@ -26,40 +26,24 @@ EndProcedure
 
 &AtClient
 Procedure SerialLotNumbersSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", ThisObject.ItemType);
+	FormParameters.Insert("Item", ThisObject.Item);
+	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
 
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(
-		DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(
-		DocumentsClientServer.CreateFilterItem("Inactive", True, DataCompositionComparisonType.NotEqual));
-
-	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("ItemType", ThisObject.ItemType);
-	OpenSettings.FormParameters.Insert("Item", ThisObject.Item);
-	OpenSettings.FormParameters.Insert("ItemKey", ThisObject.ItemKey);
-
-	OpenSettings.FormParameters.Insert("FillingData", New Structure("SerialLotNumberOwner", ThisObject.ItemKey));
-
-	DocumentsClient.SerialLotNumberStartChoice(Undefined, ThisObject, Item, ChoiceData, StandardProcessing,
-		OpenSettings);
+	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
 EndProcedure
 
 &AtClient
 Procedure SerialLotNumbersSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(
-	DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(
-	DocumentsClientServer.CreateFilterItem("Inactive", True, ComparisonType.NotEqual));
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", ThisObject.ItemType);
+	FormParameters.Insert("Item", ThisObject.Item);
+	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
 
-	AdditionalParameters = New Structure();
-	AdditionalParameters.Insert("ItemType", ThisObject.ItemType);
-	AdditionalParameters.Insert("Item", ThisObject.Item);
-	AdditionalParameters.Insert("ItemKey", ThisObject.ItemKey);
-
-	DocumentsClient.SerialLotNumbersEditTextChange(Undefined, ThisObject, Item, Text, StandardProcessing,
-		ArrayOfFilters, AdditionalParameters);
+	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
 EndProcedure
 
 &AtClient

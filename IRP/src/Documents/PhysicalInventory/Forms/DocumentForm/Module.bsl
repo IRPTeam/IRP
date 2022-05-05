@@ -78,6 +78,15 @@ EndProcedure
 
 #EndRegion
 
+#Region USE_SERIAL_LOT_NUMBERS
+
+&AtClient
+Procedure UseSerialLotOnChange(Item)
+	DocPhysicalInventoryClient.UseSerialLotOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST
 
 &AtClient
@@ -287,5 +296,27 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item", Items.ItemList.CurrentData.Item);
+	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
+
+	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item", Items.ItemList.CurrentData.Item);
+	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
+
+	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+
 
 #EndRegion

@@ -3,10 +3,21 @@
 
 Procedure OnOpen(Object, Form, Cancel) Export
 	ViewClient_V2.OnOpen(Object, Form, "ItemList");
+	UpdateView(Object, Form);
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	SerialLotNumberClient.FillSerialLotNumbersUse(Object, AddInfo);
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
+EndProcedure
+
+// Update view.
+// 
+// Parameters:
+//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
+//  Form - See Document.PhysicalInventory.Form.DocumentForm
+Procedure UpdateView(Object, Form) Export
+	Form.Items.ItemListSerialLotNumber.Visible = Object.UseSerialLot; 
 EndProcedure
 
 #EndRegion
@@ -15,6 +26,14 @@ EndProcedure
 
 Procedure StoreOnChange(Object, Form, Item) Export
 	ViewClient_V2.StoreObjectAttrOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
+#Region USE_SERIAL_LOT_NUMBERS
+
+Procedure UseSerialLotOnChange(Object, Form, Item) Export
+	UpdateView(Object, Form);
 EndProcedure
 
 #EndRegion

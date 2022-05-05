@@ -446,6 +446,7 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("PurchaseReturn"            , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("SalesReturn"               , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("InventoryTransfer"         , "StepExtractDataItemKeysWithSerialLotNumbers");
+	Binding.Insert("PhysicalInventory"         , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
 	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
@@ -4419,7 +4420,7 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("PhysicalInventory"         , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("ItemStockAdjustment"       , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("Bundling"                  , "StepItemListChangeItemKeyByItem");
-	Binding.Insert("Unbundling"                  , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("Unbundling"                , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4584,10 +4585,13 @@ Function BindItemListItemKey(Parameters)
 	Binding.Insert("InternalSupplyRequest",
 		"StepChangeUnitByItemKey");
 	
-	Binding.Insert("PhysicalInventory"   , "StepChangeUnitByItemKey");
+	Binding.Insert("PhysicalInventory", 
+		"StepChangeUnitByItemKey,
+		|StepExtractDataItemKeysWithSerialLotNumbers");
+		
 	Binding.Insert("ItemStockAdjustment" , "StepChangeUnitByItemKey");
 	Binding.Insert("Bundling"            , "StepChangeUnitByItemKey");
-	Binding.Insert("Unbundling"            , "StepChangeUnitByItemKey");
+	Binding.Insert("Unbundling"          , "StepChangeUnitByItemKey");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

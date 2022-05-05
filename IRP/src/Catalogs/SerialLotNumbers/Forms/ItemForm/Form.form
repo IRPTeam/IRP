@@ -339,6 +339,37 @@
       <common>true</common>
     </edit>
   </attributes>
+  <parameters>
+    <name>ItemType</name>
+    <valueType>
+      <types>CatalogRef.ItemTypes</types>
+    </valueType>
+    <keyParameter>true</keyParameter>
+  </parameters>
+  <parameters>
+    <name>Item</name>
+    <valueType>
+      <types>CatalogRef.Items</types>
+    </valueType>
+    <keyParameter>true</keyParameter>
+  </parameters>
+  <parameters>
+    <name>ItemKey</name>
+    <valueType>
+      <types>CatalogRef.ItemKeys</types>
+    </valueType>
+    <keyParameter>true</keyParameter>
+  </parameters>
+  <parameters>
+    <name>Barcode</name>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers>
+        <length>100</length>
+      </stringQualifiers>
+    </valueType>
+    <keyParameter>true</keyParameter>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

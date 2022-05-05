@@ -727,6 +727,7 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 			
 			ServerData = Undefined;
@@ -735,8 +736,12 @@ Procedure OnOpenFormNotify(Parameters) Export
 				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
 			EndIf;
 			
-			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object, ServerData);
-			SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+			If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory" Then
+				SerialLotNumberClient.FillSerialLotNumbersUse(Parameters.Object, ServerData);
+			Else
+				SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object, ServerData);
+				SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+			EndIf;
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
@@ -907,6 +912,7 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then

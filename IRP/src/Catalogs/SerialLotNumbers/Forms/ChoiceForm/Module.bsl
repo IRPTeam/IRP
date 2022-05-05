@@ -4,16 +4,28 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.FillingData = CommonFunctionsServer.SerializeXMLUseXDTO(Parameters.FillingData);
 	EndIf;
 
-	If Parameters.Property("ItemType") And Parameters.Property("Item") And Parameters.Property("ItemKey") Then
-		ThisObject.List.Parameters.SetParameterValue("UseFilter", True);
-		ThisObject.List.Parameters.SetParameterValue("ItemType", Parameters.ItemType);
-		ThisObject.List.Parameters.SetParameterValue("Item", Parameters.Item);
-		ThisObject.List.Parameters.SetParameterValue("ItemKey", Parameters.ItemKey);
-	Else
+	If Parameters.ItemType.IsEmpty() And Parameters.Item.IsEmpty() And Parameters.ItemKey.IsEmpty() Then
 		ThisObject.List.Parameters.SetParameterValue("UseFilter", False);
 		ThisObject.List.Parameters.SetParameterValue("ItemType", Undefined);
 		ThisObject.List.Parameters.SetParameterValue("Item", Undefined);
 		ThisObject.List.Parameters.SetParameterValue("ItemKey", Undefined);
+	Else
+		If Parameters.ItemType.IsEmpty() AND Not Parameters.ItemKey.IsEmpty() Then
+			ItemType = Parameters.ItemKey.Item.ItemType;
+		Else
+			ItemType = Parameters.ItemType;
+		EndIf;
+		
+		If Parameters.Item.IsEmpty() AND Not Parameters.ItemKey.IsEmpty() Then
+			Item = Parameters.ItemKey.Item;
+		Else
+			Item = Parameters.Item;
+		EndIf;
+		
+		ThisObject.List.Parameters.SetParameterValue("UseFilter", True);
+		ThisObject.List.Parameters.SetParameterValue("ItemType", ItemType);
+		ThisObject.List.Parameters.SetParameterValue("Item", Item);
+		ThisObject.List.Parameters.SetParameterValue("ItemKey", Parameters.ItemKey);
 	EndIf;
 EndProcedure
 

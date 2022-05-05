@@ -14,7 +14,6 @@ EndProcedure
 &AtClient
 Procedure Save(Command)
 	SeveAtServer();
-	Close();
 EndProcedure
 
 &AtServer

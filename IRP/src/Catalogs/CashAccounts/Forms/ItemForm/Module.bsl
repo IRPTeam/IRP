@@ -27,12 +27,17 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	
 	If Not FOServer.IsUseBankDocuments() Then
-		Items.Type.ChoiceList.Clear();
-		CashAccountTypesCash = Enums.CashAccountTypes.Cash;
-		CashAccountTypesPOS = Enums.CashAccountTypes.POS;
-		
-		Items.Type.ChoiceList.Add(CashAccountTypesCash, String(CashAccountTypesCash));
-		Items.Type.ChoiceList.Add(CashAccountTypesPOS, String(CashAccountTypesPOS));
+		ArrayForDelete = New Array();
+		For Each ListItem In Items.Type.ChoiceList Do
+			If Not (Not ValueIsFilled(ListItem.Value) 
+				Or ListItem.Value = Enums.CashAccountTypes.Cash
+				Or ListItem.Value = Enums.CashAccountTypes.POS) Then
+				ArrayForDelete.Add(ListItem);
+			EndIf;
+		EndDo;
+		For Each ArrayItem In ArrayForDelete Do
+			Items.Type.ChoiceList.Delete(ArrayItem);
+		EndDo;
 	EndIf;
 EndProcedure
 

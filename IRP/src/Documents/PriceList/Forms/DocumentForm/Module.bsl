@@ -6,6 +6,23 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocumentsServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	BuildForm();
 	SetVisible();
+	
+	NotIsUseItemKey = Not FOServer.IsUseUseItemKey();
+	NotIsUsePriceByProperties = Not FOServer.IsUsePriceByProperties();
+	If NotIsUseItemKey Or NotIsUsePriceByProperties Then
+		ArrayForDelete = New Array();
+		For Each ListItem In Items.PriceListType.ChoiceList Do
+			If NotIsUseItemKey And ListItem.Value = Enums.PriceListTypes.PriceByItemKeys Then
+				ArrayForDelete.Add(ListItem);
+			EndIf;
+			If NotIsUsePriceByProperties And ListItem.Value = Enums.PriceListTypes.PriceByProperties Then
+				ArrayForDelete.Add(ListItem);
+			EndIf;
+		EndDo;
+		For Each ArrayItem In ArrayForDelete Do
+			Items.PriceListType.ChoiceList.Delete(ArrayItem);
+		EndDo;
+	EndIf;
 EndProcedure
 
 &AtClient

@@ -12,7 +12,7 @@ Procedure OnCreateAtServer(Object, Form, TableNames) Export
 		Form.ChangeAttributes(ArrayOfNewAttribute);
 	EndIf;
 	// Copying document on client
-	Form.IsCopyingInteractive =  ValueIsFilled(Form.Parameters.CopyingValue);
+	Form.IsCopyingInteractive =  ValueIsFilled(Form.Parameters.Property("CopyingValue") And Form.Parameters.CopyingValue);
 	
 	For Each TableName In StrSplit(TableNames, ",") Do
 		FormParameters = ControllerClientServer_V2.GetFormParameters(Form);

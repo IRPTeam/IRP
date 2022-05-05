@@ -7,7 +7,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	BuildForm();
 	SetVisible();
 	
-	NotIsUseItemKey = Not FOServer.IsUseUseItemKey();
+	NotIsUseItemKey = Not FOServer.IsUseItemKey();
 	NotIsUsePriceByProperties = Not FOServer.IsUsePriceByProperties();
 	If NotIsUseItemKey Or NotIsUsePriceByProperties Then
 		ArrayForDelete = New Array();

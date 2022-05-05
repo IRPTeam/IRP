@@ -3,7 +3,7 @@ Function IsUseBankDocuments() Export
 	Return GetFunctionalOption("UseBankDocuments");
 EndFunction
 
-Function IsUseUseItemKey() Export
+Function IsUseItemKey() Export
 	Return GetFunctionalOption("UseItemKey");
 EndFunction
 
@@ -11,11 +11,11 @@ Function IsUsePriceByProperties() Export
 	Return GetFunctionalOption("UsePriceByProperties");
 EndFunction
 
-Function IsUseUsePartnerTerms() Export
+Function IsUsePartnerTerms() Export
 	Return GetFunctionalOption("UsePartnerTerms");
 EndFunction
 
-Function IsUseUseCompanies() Export
+Function IsUseCompanies() Export
 	Return GetFunctionalOption("UseCompanies");
 EndFunction
 

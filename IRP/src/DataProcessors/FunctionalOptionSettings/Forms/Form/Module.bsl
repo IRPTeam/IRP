@@ -38,7 +38,19 @@ Procedure Cancel(Command)
 	Close();
 EndProcedure
 
+&AtClient
+Procedure CheckAll(Command)
+	ChangeChecked(True);
+EndProcedure
 
+&AtClient
+Procedure UncheckAll(Command)
+	ChangeChecked(False);
+EndProcedure
 
-
-
+&AtClient
+Procedure ChangeChecked(Value)
+	For Each Row In ThisObject.FunctionalOptions Do
+		Row.Use = Value;
+	EndDo;
+EndProcedure

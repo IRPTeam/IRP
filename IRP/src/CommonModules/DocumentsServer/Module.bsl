@@ -341,11 +341,11 @@ EndProcedure
 
 Procedure DeleteUnavailableTitleItemNames(ItemNames) Export
 	UnavailableNames = New Array();
-	If Not FOServer.IsUseUseCompanies() Then
+	If Not FOServer.IsUseCompanies() Then
 		UnavailableNames.Add("Company");
 		UnavailableNames.Add("LegalName");
 	EndIf;
-	If Not FOServer.IsUseUsePartnerTerms() Then
+	If Not FOServer.IsUsePartnerTerms() Then
 		UnavailableNames.Add("Agreement");
 	EndIf;
 	For Each Name In UnavailableNames Do

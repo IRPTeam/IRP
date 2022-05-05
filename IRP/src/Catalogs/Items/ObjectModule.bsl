@@ -10,7 +10,9 @@ Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	AutoCreateItemKey(ThisObject);
+	If Not FOServer.IsUseItemKey() Then
+		AutoCreateItemKey();
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -27,23 +29,29 @@ EndProcedure
 
 #Region Private
 
-Procedure AutoCreateItemKey(Object)
-	UseItemKey = GetFunctionalOption("UseItemKey");
-	If UseItemKey Then
-		Return;
-	EndIf;
-	Query = New Query("SELECT TOP 1
-					  |	Table.Ref
-					  |FROM 
-					  |	Catalog.ItemKeys AS Table
-					  |WHERE
-					  |	Table.Item = &Item");
-	Query.SetParameter("Item", Object.Ref);
-	If Query.Execute().IsEmpty() Then
+Procedure AutoCreateItemKey()
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	Table.Ref
+	|FROM 
+	|	Catalog.ItemKeys AS Table
+	|WHERE
+	|	Table.Item = &Item";
+	Query.SetParameter("Item", ThisObject.Ref);
+	QueryResult = Query.Execute();
+	If QueryResult.IsEmpty() Then
 		NewItem = Catalogs.ItemKeys.CreateItem();
-		FillPropertyValues(NewItem, Object, , "Parent, Owner, Ref, Unit");
-		NewItem.Item = Ref;
+		FillPropertyValues(NewItem, ThisObject, , "Parent, Owner, Ref, Unit, Code");
+		NewItem.Item = ThisObject.Ref;
 		NewItem.Write();
+	Else
+		QuerySelection = QueryResult.Select();
+		While QuerySelection.Next() Do
+			ExistsItem = QuerySelection.Ref.GetObject();
+			ExistsItem.DeletionMark = ThisObject.DeletionMark;
+			ExistsItem.Write();
+		EndDo;
 	EndIf;
 EndProcedure
 

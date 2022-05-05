@@ -1,4 +1,3 @@
-// @strict-types
 
 // Strings.
 // 
@@ -6,7 +5,7 @@
 //  LangCode - String - Lang code
 // 
 // Returns:
-// 	see Localization.Strings
+// 	See Localization.Strings
 Function Strings(LangCode) Export
 	Return LocalizationServer.LocalizationStrings(LangCode);
 EndFunction 

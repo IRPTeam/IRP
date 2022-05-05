@@ -103,7 +103,7 @@ EndProcedure
 // 
 // Parameters:
 //  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
-//  Form - See Document.PhysicalInventory.Form
+//  Form - See Document.PhysicalInventory.Form.DocumentForm
 Procedure FillExpCount(Object, Form) Export
 	If DocPhysicalInventoryServer.HavePhysicalCountByLocation(Object.Ref) Then
 		ShowMessageBox(Undefined, R().InfoMessage_006);

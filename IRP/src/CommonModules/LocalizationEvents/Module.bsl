@@ -1,4 +1,3 @@
-// @strict-types
 
 #Region Public
 

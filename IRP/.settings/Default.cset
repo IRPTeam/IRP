@@ -13,13 +13,7 @@
     "right-administration": {
       "enabled": false
     },
-    "doc-comment-procedure-return-section": {
-      "enabled": false
-    },
     "use-non-recommended-method": {
-      "enabled": false
-    },
-    "bsl-canonical-pragma": {
       "enabled": false
     },
     "module-region-empty": {
@@ -40,9 +34,6 @@
     "common-module-name-client-cached": {
       "enabled": false
     },
-    "module-empty-method": {
-      "enabled": false
-    },
     "right-interactive-delete": {
       "enabled": false
     },
@@ -52,19 +43,10 @@
     "event-heandler-boolean-param": {
       "enabled": false
     },
-    "change-and-validate-instead-of-around": {
-      "enabled": false
-    },
     "right-interactive-clear-deletion-mark-predefined-data": {
       "enabled": false
     },
-    "doc-comment-parameter-in-description-suggestion": {
-      "enabled": false
-    },
     "doc-comment-export-function-return-section": {
-      "enabled": false
-    },
-    "doc-comment-complex-type-with-link": {
       "enabled": false
     },
     "input-field-list-choice-mode": {
@@ -83,15 +65,6 @@
       "enabled": false
     },
     "form-module-missing-pragma": {
-      "enabled": false
-    },
-    "doc-comment-field-name": {
-      "enabled": false
-    },
-    "doc-comment-field-in-description-suggestion": {
-      "enabled": false
-    },
-    "doc-comment-ref-link": {
       "enabled": false
     },
     "doc-comment-return-section-type": {
@@ -160,9 +133,6 @@
     "common-module-type": {
       "enabled": false
     },
-    "doc-comment-type": {
-      "enabled": false
-    },
     "invocation-form-event-handler": {
       "enabled": false
     },
@@ -172,9 +142,6 @@
     "doc-comment-collection-item-type": {
       "enabled": false
     },
-    "module-unused-local-variable": {
-      "enabled": false
-    },
     "form-named-element-name": {
       "enabled": false
     },
@@ -182,9 +149,6 @@
       "enabled": false
     },
     "common-module-name-global": {
-      "enabled": false
-    },
-    "bsl-nstr-string-literal-format": {
       "enabled": false
     },
     "ql-cast-to-max-number": {
@@ -199,12 +163,6 @@
     "ql-using-for-update": {
       "enabled": false
     },
-    "notify-description-to-server-procedure": {
-      "enabled": false
-    },
-    "mdo-name-length": {
-      "enabled": false
-    },
     "export-method-in-command-form-module": {
       "enabled": false
     },
@@ -215,9 +173,6 @@
       "enabled": false
     },
     "form-module-pragma": {
-      "enabled": false
-    },
-    "doc-comment-use-minus": {
       "enabled": false
     },
     "right-interactive-delete-marked-predefined-data": {
@@ -236,9 +191,6 @@
       "enabled": false
     },
     "right-exclusive-mode": {
-      "enabled": false
-    },
-    "module-unused-method": {
       "enabled": false
     },
     "right-save-user-data": {

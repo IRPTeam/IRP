@@ -7,5 +7,7 @@
   </synonym>
   <location>Constant.UseAllFunctional</location>
   <privilegedGetMode>true</privilegedGetMode>
-  <content>DataProcessor.PointOfSale</content>
+  <content>Catalog.AddAttributeAndPropertySets</content>
+  <content>Catalog.AddAttributeAndPropertyValues</content>
+  <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
 </mdclass:FunctionalOption>

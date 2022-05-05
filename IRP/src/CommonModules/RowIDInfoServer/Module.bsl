@@ -1324,7 +1324,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	FieldsForCheckRowRef = Undefined;
 	CachedObjectBefore   = Undefined;
 	CachedObjectAfter    = Undefined;
-	If Source.Ref.isEmpty() Then
+	If Not Source.Ref.isEmpty() Then
 		FieldsForCheckRowRef = GetFieldsForCheckRowRef(Source, RowRefObject, RecordersByRowRef);
 		CachedObjectBefore   = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
 	EndIf;

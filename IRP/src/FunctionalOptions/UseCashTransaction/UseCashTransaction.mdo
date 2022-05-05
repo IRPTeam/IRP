@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5de1d5eb-3321-4630-9c11-4796dcd44406">
+  <name>UseCashTransaction</name>
+  <synonym>
+    <key>en</key>
+    <value>Use cash transaction</value>
+  </synonym>
+  <location>Constant.UseCashTransaction</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>Document.CashExpense</content>
+  <content>Document.VendorsAdvancesClosing</content>
+  <content>Document.MoneyTransfer</content>
+  <content>Document.CashTransferOrder</content>
+  <content>Document.CustomersAdvancesClosing</content>
+  <content>Document.CreditNote</content>
+  <content>Document.CashRevenue</content>
+  <content>Document.DebitNote</content>
+</mdclass:FunctionalOption>

@@ -25,6 +25,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		CurrencyType = Parameters.CurrencyType;
 	EndIf;
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	
+	If Not FOServer.IsUseBankDocuments() Then
+		Items.Type.ChoiceList.Clear();
+		CashAccountTypesCash = Enums.CashAccountTypes.Cash;
+		CashAccountTypesPOS = Enums.CashAccountTypes.POS;
+		
+		Items.Type.ChoiceList.Add(CashAccountTypesCash, String(CashAccountTypesCash));
+		Items.Type.ChoiceList.Add(CashAccountTypesPOS, String(CashAccountTypesPOS));
+	EndIf;
 EndProcedure
 
 &AtClient

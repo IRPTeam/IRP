@@ -30,19 +30,21 @@ Function Action_READ_CATALOG_ITEMS()
 	Elements = New Array();
 	While QuerySelection.Next() Do
 		Element = New Structure();
-		Element.Insert("Description",String(QuerySelection.Ref));
-		Element.Insert("Ref",String(QuerySelection.Ref.UUID()));
+		Element.Insert("Presentation",String(QuerySelection.Ref));
+		Element.Insert("Ref", String(QuerySelection.Ref.UUID()));
 		Elements.Add(Element);
 	EndDo;
 	//Result = New Structure("Elements", Elements);
-	Return CommonFunctionsServer.SerializeJSON(Elements);
+	json = CommonFunctionsServer.SerializeJSON(Elements);
+	Return json;
 EndFunction
 
 Function Action_READ_CATALOG_ITEM_KEYS(jsonFilter)
 	Query = New Query();
 	Query.Text =	
 	 "SELECT
-	 |	ItemKeys.Ref AS Ref
+	 |	ItemKeys.Ref AS Ref,
+	 |	ItemKeys.Item
 	 |FROM
 	 |	Catalog.ItemKeys AS ItemKeys
 	 |WHERE
@@ -55,11 +57,16 @@ Function Action_READ_CATALOG_ITEM_KEYS(jsonFilter)
 	Elements = New Array();
 	While QuerySelection.Next() Do
 		Element = New Structure();
-		Element.Insert("Description",String(QuerySelection.Ref));
+		Element.Insert("Presentation",String(QuerySelection.Ref));
 		Element.Insert("Ref",String(QuerySelection.Ref.UUID()));
+		
+		Item = New Structure();
+		Item.Insert("Presentation", String(QuerySelection.Item));
+		Item.Insert("Ref", String(QuerySelection.Item.UUID()));
+		
+		Element.Insert("Item", Item);
 		Elements.Add(Element);
 	EndDo;
-	//Result = New Structure("Elements", Elements);
 	Return CommonFunctionsServer.SerializeJSON(Elements);
 EndFunction	
 
@@ -69,8 +76,7 @@ Function Action_CREATE_DOCUMENT_RETAIL_SALES(Data)
 	Wrapper = Builder.CreateDocument(DocMetadata);
 	jsonDataContext = CommonFunctionsServer.SerializeJSONUseXDTO(Wrapper);
 	
-	DataPresentation = new Structure();
-	DataPresentation.Insert("TestPresentationProperty" , String(CurrentSessionDate()));
+	DataPresentation = GetTestDataPresentation();
 	jsonDataPresentation = CommonFunctionsServer.SerializeJSON(DataPresentation);
 	
 	json = CommonFunctionsServer.SerializeJSON(
@@ -94,6 +100,8 @@ Function Action_SET_PROPERTY(jsonData)
 	DocMetadata = Metadata.Documents.RetailSalesReceipt;
 	
 	Data = CommonFunctionsServer.DeserializeJSON(jsonData);
+	//Data.Context - document context
+	
 	Property = CommonFunctionsServer.DeserializeJSON(Data.Value);
 	//Property.Name - attribute name
 	//Property.Value - attribute value
@@ -104,13 +112,46 @@ Function Action_SET_PROPERTY(jsonData)
 	
 	jsonDataContext = CommonFunctionsServer.SerializeJSONUseXDTO(Wrapper);
 	
-	DataPresentation = new Structure();
-	DataPresentation.Insert("TestPresentationProperty" , "after set property");
+	DataPresentation = GetTestDataPresentation();
 	jsonDataPresentation = CommonFunctionsServer.SerializeJSON(DataPresentation);
 		
 	json = CommonFunctionsServer.SerializeJSON(
 		New Structure("DataContext, DataPresentation", jsonDataContext, jsonDataPresentation));
 		
 	Return json;
+EndFunction
+
+Function GetTestDataPresentation()
+	DataPresentation = new Structure();
+	DataPresentation.Insert("TestPresentationProperty" , String(CurrentSessionDate()));
+	
+	item1 = new Structure();
+	item1.Insert("Presentation",String(CurrentSessionDate()));
+	item1.Insert("Ref","001");
+		
+	item2 = new Structure();
+	item2.Insert("Presentation","item2");
+	item2.Insert("Ref","002");
+	
+	itemkey1 = new Structure();
+	itemkey1.Insert("Presentation","itemkey1");
+	itemkey1.Insert("Ref","003");
+	
+	itemkey2 = new Structure();
+	itemkey2.Insert("Presentation","itemkey2");
+	itemkey2.Insert("Ref","004");
+	
+	
+	row1 = New Structure("Price, Quantity, Item, ItemKey", 100, 2, item1, itemkey1);
+	row2 = New Structure("Price, Quantity, Item, ItemKey", 20.3, 4.002, item2, itemkey2);
+	
+//	DataPresentation.Insert("ItemList", new Structure("List", new Array()));
+//	DataPresentation.ItemList.List.add(row1);
+//	DataPresentation.ItemList.List.add(row2);
+	
+	DataPresentation.Insert("ItemList", new Array());
+	DataPresentation.ItemList.add(row1);
+	DataPresentation.ItemList.add(row2);
+	Return DataPresentation;
 EndFunction
 

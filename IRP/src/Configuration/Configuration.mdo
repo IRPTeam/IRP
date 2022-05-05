@@ -485,6 +485,7 @@
   <functionalOptions>FunctionalOption.UseRetail</functionalOptions>
   <functionalOptions>FunctionalOption.UseBundling</functionalOptions>
   <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePartnersHierarchy</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -565,6 +566,7 @@
   <constants>Constant.UseRetail</constants>
   <constants>Constant.UseBundling</constants>
   <constants>Constant.UseCashTransaction</constants>
+  <constants>Constant.UsePartnersHierarchy</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

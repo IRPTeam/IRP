@@ -1,7 +1,6 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
-	isUseCompanies = CatCompaniesServer.isUseCompanies();
-	If isUseCompanies Then
+	If FOServer.IsUseUseCompanies() Then
 		OpenForm("Catalog.Companies.ListForm", , , , , , , FormWindowOpeningMode.Independent);
 	Else
 		OurCompanies = SessionParametersServer.GetSessionParameter("OurCompanies");

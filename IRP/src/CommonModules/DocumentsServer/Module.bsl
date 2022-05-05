@@ -341,8 +341,12 @@ EndProcedure
 
 Procedure DeleteUnavailableTitleItemNames(ItemNames) Export
 	UnavailableNames = New Array();
-	If Not CatCompaniesServer.isUseCompanies() Then
+	If Not FOServer.IsUseUseCompanies() Then
 		UnavailableNames.Add("Company");
+		UnavailableNames.Add("LegalName");
+	EndIf;
+	If Not FOServer.IsUseUsePartnerTerms() Then
+		UnavailableNames.Add("Agreement");
 	EndIf;
 	For Each Name In UnavailableNames Do
 		FoundedName = ItemNames.Find(Name);

@@ -19,3 +19,6 @@ Function IsUseCompanies() Export
 	Return GetFunctionalOption("UseCompanies");
 EndFunction
 
+Function IsUsePartnersHierarchy() Export
+	Return GetFunctionalOption("UsePartnersHierarchy");
+EndFunction

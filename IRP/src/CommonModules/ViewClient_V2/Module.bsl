@@ -1239,7 +1239,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ITEM_LIST_TOTAL_AMOUNT
+#Region ITEM_LIST_PHYSICAL_COUNT
 
 // ItemList.PhysCount
 Procedure ItemListPhysCountOnChange(Object, Form, CurrentData = Undefined) Export

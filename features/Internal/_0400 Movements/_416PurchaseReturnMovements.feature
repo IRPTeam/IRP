@@ -306,12 +306,12 @@ Scenario: _041610 check Purchase return movements by the Register  "R4014 Serial
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 232 dated 14.03.2021 19:21:16' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Register  "R4014 Serial lot numbers"'          | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  |
-			| ''                                              | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Item key' | 'Serial lot number' |
-			| ''                                              | 'Expense'     | '14.03.2021 19:21:16' | '10'        | 'Main Company' | 'Front office' | 'S/Yellow' | '0512'              |
+			| 'Purchase return 232 dated 14.03.2021 19:21:16' | ''            | ''                    | ''          | ''             | ''             | ''         | ''         | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''             | ''         | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'          | ''            | ''                    | ''          | ''             | ''             | ''         | ''         | ''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''         | ''                  |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Item key' | 'Serial lot number' |
+			| ''                                              | 'Expense'     | '14.03.2021 19:21:16' | '10'        | 'Main Company' | 'Front office' | ''         | 'S/Yellow' | '0512'              |
 	And I close all client application windows
 
 Scenario: _041611 check Purchase return movements by the Register  "R4010 Actual stocks" (not use SC, PR)

@@ -61,11 +61,17 @@ Scenario: _1002000 preparation (vendors advances closing)
 		When Create document BankPayment objects (check movements, advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"  |
-			| "Documents.BankPayment.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |	
-			| "Documents.BankPayment.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.BankPayment.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 			| "Documents.BankPayment.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
 		* Load PO
 		When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
@@ -75,44 +81,64 @@ Scenario: _1002000 preparation (vendors advances closing)
 				| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
 		When Create document PurchaseOrder objects (check movements, PI before GR, not Use receipt sheduling)
 		And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
+				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 				| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
 		* Load GR
 		When Create document GoodsReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
-				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
+				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 				// | "Documents.GoodsReceipt.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 				| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |
 		* Load PI
 		When Create document PurchaseInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.PurchaseInvoice.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseInvoice.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |	
 		When Create document CashPayment objects (advance)
 		And I execute 1C:Enterprise script at server
-			| "Documents.CashPayment.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.CashPayment.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 			| "Documents.CashPayment.FindByNumber(22).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.CashPayment.FindByNumber(23).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashPayment.FindByNumber(23).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 			| "Documents.CashPayment.FindByNumber(24).GetObject().Write(DocumentWriteMode.Posting);" |	
 		When Create document PurchaseInvoice objects (advance)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(121).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(121).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseInvoice.FindByNumber(122).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.PurchaseInvoice.FindByNumber(123).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(123).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseInvoice.FindByNumber(124).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(126).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(127).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(120).GetObject().Write(DocumentWriteMode.Posting);" |	
 		When Create document PurchaseReturn objects (advance)
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseReturn.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseReturn.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document DebitNote objects (advance)
 		And I execute 1C:Enterprise script at server
@@ -123,6 +149,7 @@ Scenario: _1002000 preparation (vendors advances closing)
 		When Create document VendorsAdvancesClosing objects
 		And I execute 1C:Enterprise script at server
 			| "Documents.VendorsAdvancesClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.VendorsAdvancesClosing.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows			
 

@@ -233,6 +233,11 @@ Procedure OnChainComplete(Parameters) Export
 		__tmp_MoneyTransfer_OnChainComplete(Parameters);
 		Return;
 	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder" Then
+		__tmp_CashTransferOrder_OnChainComplete(Parameters);
+		Return;
+	EndIf;
 	 
 	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
@@ -423,6 +428,43 @@ Procedure __tmp_MoneyTransfer_CashTransferOrderOnUserChangeContinue(Answer, Noti
 EndProcedure
 
 Procedure __tmp_MoneyTransfer_CommitChanges(Parameters)
+	CommitChanges(Parameters);
+EndProcedure
+
+Procedure __tmp_CashTransferOrder_OnChainComplete(Parameters)
+	ArrayOfEventCallers = New Array();
+	ArrayOfEventCallers.Add("CompanyOnUserChange");
+	
+	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
+		__tmp_CashTransferOrder_CommitChanges(Parameters);
+		Return;
+	EndIf;
+	
+	// refill question Company
+	If Parameters.EventCaller = "CompanyOnUserChange" Then
+		
+		If (IsChangedProperty(Parameters, "Sender").IsChanged 
+			Or IsChangedProperty(Parameters, "Receiver").IsChanged) Then
+	
+			NotifyParameters = New Structure("Parameters", Parameters);
+			ShowQueryBox(New NotifyDescription("__tmp_CashTransferOrder_CompanyOnUserChangeContinue", ThisObject, NotifyParameters), 
+					R().QuestionToUser_015, QuestionDialogMode.OKCancel);
+		Else
+			__tmp_CashTransferOrder_CommitChanges(Parameters);
+		EndIf;		
+		
+	Else
+		__tmp_MoneyTransfer_CommitChanges(Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_CashTransferOrder_CompanyOnUserChangeContinue(Answer, NotifyParameters) Export
+	If Answer = DialogReturnCode.OK Then
+		__tmp_MoneyTransfer_CommitChanges(NotifyParameters.Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_CashTransferOrder_CommitChanges(Parameters)
 	CommitChanges(Parameters);
 EndProcedure
 
@@ -773,8 +815,10 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
 		Parameters.Form.UpdateTotalAmounts();
 	EndIf;
-	
-	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
+	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form); 
+	If Parameters.Form.IsCopyingInteractive Then
+		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CurrentDate());
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -1433,7 +1477,8 @@ Procedure AccountSenderOnChange(Object, Form) Export
 EndProcedure
 
 Procedure OnSetAccountSenderNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer"
+	Or Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
@@ -1451,7 +1496,8 @@ Procedure SendCurrencyOnChange(Object, Form) Export
 EndProcedure
 
 Procedure OnSetSendCurrencyNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer"
+	Or Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
@@ -1469,7 +1515,8 @@ Procedure SendAmountOnChange(Object, Form) Export
 EndProcedure
 
 Procedure OnSetSendAmountNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer"
+	Or Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 EndProcedure
@@ -1487,7 +1534,8 @@ Procedure AccountReceiverOnChange(Object, Form) Export
 EndProcedure
 
 Procedure OnSetAccountReceiverNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer"
+	Or Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
@@ -1505,7 +1553,8 @@ Procedure ReceiveCurrencyOnChange(Object, Form) Export
 EndProcedure
 
 Procedure OnSetReceiveCurrencyNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer"
+	Or Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
@@ -1523,7 +1572,8 @@ Procedure ReceiveAmountOnChange(Object, Form) Export
 EndProcedure
 
 Procedure OnSetReceiveAmountNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer"
+	Or Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 EndProcedure
@@ -1771,6 +1821,19 @@ EndProcedure
 #Region _DATE
 
 Procedure DateOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Date", FormParameters);
+	FormParameters.EventCaller = "DateOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.DateOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure SetDate(Object, Form, TableNames, Value) Export
+	Object.Date = Value;
 	FormParameters = GetFormParameters(Form);
 	ExtractValueBeforeChange_Object("Date", FormParameters);
 	FormParameters.EventCaller = "DateOnUserChange";

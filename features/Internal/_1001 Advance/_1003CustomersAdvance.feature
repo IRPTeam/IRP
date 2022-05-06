@@ -62,27 +62,36 @@ Scenario: _1003000 preparation (customers advances closing)
 		When Create document BankReceipt objects (advance, BR-SI)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"  |
-			| "Documents.BankReceipt.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |	
 		When Create document CashReceipt objects (advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"  |
 		* Load SO
 		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 		When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
 		When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 		And I execute 1C:Enterprise script at server
-				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
+				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server	
 				| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |	
 		* Load SC
 		When Create document ShipmentConfirmation objects (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesOrder objects (SI more than SO)
 		And I execute 1C:Enterprise script at server
@@ -91,21 +100,31 @@ Scenario: _1003000 preparation (customers advances closing)
 		When Create document SalesInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document BankReceipt objects (advance, customers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document CashReceipt objects (advance, customers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document CreditNote objects (advance, customers)
 		And I execute 1C:Enterprise script at server
@@ -113,6 +132,7 @@ Scenario: _1003000 preparation (customers advances closing)
 		When Create document DebitNote objects (advance, customers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.DebitNote.FindByNumber(22).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.DebitNote.FindByNumber(23).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesReturn objects (advance, customers)
 		And I execute 1C:Enterprise script at server
@@ -120,24 +140,40 @@ Scenario: _1003000 preparation (customers advances closing)
 		When Create document SalesInvoice objects (advance, customers)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesInvoice.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document CustomersAdvancesClosing objects
 		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"  |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"  |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"  |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"  |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);"  |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CustomersAdvancesClosing.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		

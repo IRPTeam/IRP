@@ -84,6 +84,7 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create document RetailSalesReceipt and RetailRetutnReceipt objects (with discount) 
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
 
 

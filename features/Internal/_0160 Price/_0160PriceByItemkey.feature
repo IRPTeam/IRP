@@ -315,6 +315,49 @@ Scenario: _016001 base price fill (incl. VAT)
 		| '$$NumberPriceListBasicPriceByItemKey016001$$' | 'Price by item keys' | 'Basic Price Types' | 'Basic price' |
 		And I close all client application windows
 
+Scenario: _016002 change item in Price list and check filling item key
+	* Opening  price list
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
+	* Filling in the details of the price list by item key
+		And I change "Set price" radio button value to "By Item keys"
+	* Select item
+		And in the table "ItemKeyList" I click the button named "ItemKeyListAdd"
+		And I click choice button of the attribute named "ItemKeyListItem" in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemKeyList" table
+		And I click choice button of "Item key" attribute in "ItemKeyList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemKeyList" table
+		And I move to the next attribute
+		And I activate field named "ItemKeyListPrice" in "ItemKeyList" table
+		And I select current line in "ItemKeyList" table
+		And I input "200,00" text in the field named "ItemKeyListPrice" of "ItemKeyList" table
+		And I finish line editing in "ItemKeyList" table
+		And I activate field named "ItemKeyListItem" in "ItemKeyList" table
+		And I select current line in "ItemKeyList" table
+		And I click choice button of the attribute named "ItemKeyListItem" in "ItemKeyList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Router'      |
+		And I select current line in "List" table
+		And I finish line editing in "ItemKeyList" table
+		And I move to the next attribute
+	* Check
+		And "ItemKeyList" table became equal
+			| 'Item'   | 'Item key' | 'Input unit' | 'Price' |
+			| 'Router' | 'Router'   | 'pcs'        | ''      |
+		And I close all client application windows
+		
+
 Scenario: _016005 check movements of the price list document by item key in register Prices by item keys
 	* Opening register Prices by item keys
 		Given I open hyperlink "e1cib/list/InformationRegister.PricesByItemKeys"

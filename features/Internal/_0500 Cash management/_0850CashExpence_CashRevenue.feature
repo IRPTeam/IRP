@@ -50,6 +50,7 @@ Scenario: _085000 preparation (Cash expence and Cash revenue)
 	* Post
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashExpense.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashRevenue.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 	

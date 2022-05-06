@@ -61,15 +61,19 @@ Scenario: _028900 preparation (Goods receipt)
 	When Create document PurchaseOrder and Purchase invoice objects (creation based on, PI >PO)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document SalesReturn objects (creation based on)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesReturn.FindByNumber(351).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.SalesReturn.FindByNumber(353).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.SalesReturn.FindByNumber(354).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document SalesReturnOrder objects (creation based on)
 	And I execute 1C:Enterprise script at server
@@ -80,6 +84,7 @@ Scenario: _028900 preparation (Goods receipt)
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table

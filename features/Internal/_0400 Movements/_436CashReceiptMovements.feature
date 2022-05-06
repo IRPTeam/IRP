@@ -81,6 +81,7 @@ Scenario: _043600 preparation (Cash receipt)
 			When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -91,6 +92,7 @@ Scenario: _043600 preparation (Cash receipt)
 			When Create document ShipmentConfirmation objects (check movements)
 			And I execute 1C:Enterprise script at server
 				| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		If "List" table does not contain lines Then
@@ -100,6 +102,7 @@ Scenario: _043600 preparation (Cash receipt)
 			When Create document SalesInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.SalesInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		If "List" table does not contain lines Then
@@ -117,16 +120,20 @@ Scenario: _043600 preparation (Cash receipt)
 			When Create document SalesReturn objects (check movements)
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+			And I execute 1C:Enterprise script at server
 				| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Cash receipt
 		When Create document CashReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document CashReceipt objects (advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load SO, SI, IPO
 		When Create document SalesOrder objects (with aging, prepaid)
@@ -144,14 +151,18 @@ Scenario: _043600 preparation (Cash receipt)
 		When Create document IncomingPaymentOrder objects (Cash planning)
 		And I execute 1C:Enterprise script at server
 			| "Documents.IncomingPaymentOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.IncomingPaymentOrder.FindByNumber(114).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Cash transfer order
 		When Create document CashTransferOrder objects
 		When Create document CashTransferOrder objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load PR
 		When Create document PurchaseReturn objects (advance)
@@ -161,11 +172,14 @@ Scenario: _043600 preparation (Cash receipt)
 		When Create document CashReceipt objects (cash planning)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(513).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(514).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(515).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document CashReceipt objects (return from vendor)
 	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(517).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document CashReceipt objects (with partner term by document, without basis)
 	And I execute 1C:Enterprise script at server

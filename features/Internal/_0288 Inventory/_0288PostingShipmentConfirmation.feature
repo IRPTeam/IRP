@@ -130,6 +130,10 @@ Scenario: _028800 preparation (Shipment confirmation)
 			| 'Number'                       |
 			| '15' |
 		And in the table "List" I click the button named "ListContextMenuCopy"
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button	
 		And I move to "Other" tab
 		And I input "16" text in "Number" field
 		Then "1C:Enterprise" window is opened
@@ -140,11 +144,14 @@ Scenario: _028800 preparation (Shipment confirmation)
 		When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)	
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document SalesInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Save SI numbers
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -178,6 +185,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 	When Create document Purchase order and PurchaseInvoice objects
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document PurchaseReturnOrder objects (creation based on 32)
 	And I execute 1C:Enterprise script at server
@@ -188,7 +196,9 @@ Scenario: _028800 preparation (Shipment confirmation)
 	When Create document PurchaseReturn objects (creation based on)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseReturn.FindByNumber(351).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseReturn.FindByNumber(352).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseReturn.FindByNumber(353).GetObject().Write(DocumentWriteMode.Posting);" |
 
 

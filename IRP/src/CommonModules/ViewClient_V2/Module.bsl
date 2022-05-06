@@ -810,8 +810,10 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
 		Parameters.Form.UpdateTotalAmounts();
 	EndIf;
-	
-	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
+	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form); 
+	If Parameters.Form.IsCopyingInteractive Then
+		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CurrentDate());
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -1790,6 +1792,19 @@ EndProcedure
 #Region _DATE
 
 Procedure DateOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Date", FormParameters);
+	FormParameters.EventCaller = "DateOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.DateOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure SetDate(Object, Form, TableNames, Value) Export
+	Object.Date = Value;
 	FormParameters = GetFormParameters(Form);
 	ExtractValueBeforeChange_Object("Date", FormParameters);
 	FormParameters.EventCaller = "DateOnUserChange";

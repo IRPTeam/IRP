@@ -130,6 +130,10 @@ Scenario: _028800 preparation (Shipment confirmation)
 			| 'Number'                       |
 			| '15' |
 		And in the table "List" I click the button named "ListContextMenuCopy"
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button	
 		And I move to "Other" tab
 		And I input "16" text in "Number" field
 		Then "1C:Enterprise" window is opened

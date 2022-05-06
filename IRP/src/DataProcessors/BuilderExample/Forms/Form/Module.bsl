@@ -65,10 +65,66 @@ Procedure CreateRetailSalesServer()
 	Builder = BuilderServer_V2;
 	DocMetadata = Metadata.Documents.RetailSalesReceipt;
 	Wrapper = Builder.CreateDocument(DocMetadata);
-	Json = CommonFunctionsServer.SerializeJSONUseXDTO(Wrapper);
+	Context = ValueToStringInternal(Wrapper);
+	Presentation = GetPresentation(Wrapper);
+		
+	Context2 = AddRow_ItemList(Context);
 	
-	Wrapper2 = CommonFunctionsServer.DeserializeJSONUseXDTO(Json);
+	Wrapper2 = ValueFromStringInternal(Context2);
+	
 	
 	Builder.Write(Wrapper2, DocMetadata, DocumentWriteMode.Write);
 EndProcedure
+
+Function AddRow_ItemList(Context)
+	Builder = BuilderServer_V2;
+	Wrapper = ValueFromStringInternal(Context);
+	ItemList = Wrapper.Tables.ItemList;
+	Row = Builder.AddRow(Wrapper, ItemList);
+	
+	Context = ValueToStringInternal(Wrapper);
+	Presentation = GetPresentation(Wrapper);
+	
+	Return Context;
+EndFunction
+
+Function GetPresentation(Wrapper)
+	Presentation = New Structure();
+	For Each KeyValue In Wrapper.Object Do
+		_Key = KeyValue.Key;
+		Value = KeyValue.Value;
+		Type = TypeOf(Value);
+		If Value = Undefined Then
+			Presentation.Insert(_Key, null);
+		ElsIf IsRefType(Type) Then
+			Presentation.Insert(_Key, GetRefPresentation(Value));
+		ElsIf Type = Type("ValueTable") Then
+			ValueArray = New Array();
+			For Each Row In Value Do
+				ValueRow = New Structure();
+				For Each Column In Value.Columns Do
+					CellValue = Row[Column.Name];
+					If IsRefType(TypeOf(CellValue)) Then
+						ValueRow.Insert(Column.Name, GetRefPresentation(CellValue));
+					Else
+						ValueRow.Insert(Column.Name, CellValue);
+					EndIf;
+				EndDo;
+				ValueArray.Add(ValueRow);
+			EndDo;
+			Presentation.Insert(_Key, ValueArray);
+		Else
+			Presentation.Insert(_Key, Value);
+		EndIf;
+	EndDo;
+	Return Presentation;
+EndFunction
+
+Function IsRefType(Type)
+	Return Catalogs.AllRefsType().ContainsType(Type) Or Documents.AllRefsType().ContainsType(Type);
+EndFunction
+
+Function GetRefPresentation(value)
+	Return New Structure("Ref, Presentation", String(value.UUID()), String(value));
+EndFunction
 

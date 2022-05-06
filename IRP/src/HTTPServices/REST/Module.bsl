@@ -3,18 +3,20 @@ Function EndPointPOST(Request)
 	Response = New HTTPServiceResponse(200);
 	
 	RequestData = CommonFunctionsServer.DeserializeJSON(Request.GetBodyAsString());
-	If RequestData.Action = "READ_CATALOG_ITEMS" Then
-	    Json = Action_READ_CATALOG_ITEMS();
-	ElsIf RequestData.Action = "READ_CATALOG_ITEM_KEYS" Then
-		Json = Action_READ_CATALOG_ITEM_KEYS(RequestData.Data);
-	ElsIf RequestData.Action = "CREATE_DOCUMENT_RETAIL_SALES" Then
-		Json = Action_CREATE_DOCUMENT_RETAIL_SALES(RequestData.Data);
-	ElsIf RequestData.Action = "WRITE_DOCUMENT_RETAIL_SALES" Then
-		Json = Action_WRITE_DOCUMENT_RETAIL_SALES(RequestData.Data);	
+	If RequestData.Action = "CREATE_OBJECT" Then
+		If RequestData.EntityName = "Document.RetailSalesReceipt" Then
+			Json = Action_CREATE_DOCUMENT_RETAIL_SALES(RequestData.Data);
+		EndIf;
 	ElsIf RequestData.Action = "SET_PROPERTY" Then
 		Json = Action_SET_PROPERTY(RequestData.Data);
+	ElsIf RequestData.Action = "READ_LIST" Then	
+		If RequestData.EntityName = "Catalog.Items" Then
+			Json = Action_READ_CATALOG_ITEMS();
+		ElsIf RequestData.EntityName = "Catalog.ItemKeys" Then
+			Json = Action_READ_CATALOG_ITEM_KEYS(RequestData.Data);
+		EndIf;
 	EndIf;
-	 
+				 
 	Response.SetBodyFromString(Json);	
 	Return Response;
 EndFunction
@@ -22,7 +24,7 @@ EndFunction
 Function Action_READ_CATALOG_ITEMS()
 	Query = New Query();
 	Query.Text =	
-	 "SELECT
+	 "SELECT top 10
 	 |	Items.Ref AS Ref
 	 |FROM
 	 |	Catalog.Items AS Items";
@@ -34,7 +36,6 @@ Function Action_READ_CATALOG_ITEMS()
 		Element.Insert("Ref", String(QuerySelection.Ref.UUID()));
 		Elements.Add(Element);
 	EndDo;
-	//Result = New Structure("Elements", Elements);
 	json = CommonFunctionsServer.SerializeJSON(Elements);
 	Return json;
 EndFunction
@@ -70,10 +71,13 @@ Function Action_READ_CATALOG_ITEM_KEYS(jsonFilter)
 	Return CommonFunctionsServer.SerializeJSON(Elements);
 EndFunction	
 
+// CREATE_OBJECT Document.RetailSalesReceipt
 Function Action_CREATE_DOCUMENT_RETAIL_SALES(Data)
 	Builder = BuilderServer_V2;
 	DocMetadata = Metadata.Documents.RetailSalesReceipt;
+	
 	Wrapper = Builder.CreateDocument(DocMetadata);
+	Context = ValueToStringInternal(Wrapper);
 	jsonDataContext = CommonFunctionsServer.SerializeJSONUseXDTO(Wrapper);
 	
 	DataPresentation = GetTestDataPresentation();
@@ -84,6 +88,35 @@ Function Action_CREATE_DOCUMENT_RETAIL_SALES(Data)
 	
 	Return Json;
 EndFunction
+
+#Region DATA_PRESENTATION
+
+Function GetPresentation(Wrapper)
+	res = New Structure();
+	For Each KeyValue In Wrapper Do
+		_key = KeyValue.Key;
+		_value = KeyValue.Value;
+		_type = TypeOf(_value);
+		
+		If IsRefType(_type) Then
+		
+		ElsIf _type = Type("Array") Then
+			
+		Else
+		
+		EndIf;
+	EndDo;
+EndFunction
+
+Function IsRefType(type)
+	Return Catalogs.AllRefsType().ContainsType(type) Or Documents.AllRefsType().ContainsType(type);
+EndFunction
+
+Function GetRefPresentation(value)
+	Return New Structure("Ref, Presentation", String(value.UUID()), String(value));
+EndFunction
+
+#EndRegion
 
 Function Action_WRITE_DOCUMENT_RETAIL_SALES(Data)
 	Builder = BuilderServer_V2;
@@ -138,17 +171,13 @@ Function GetTestDataPresentation()
 	itemkey1.Insert("Ref","003");
 	
 	itemkey2 = new Structure();
-	itemkey2.Insert("Presentation","itemkey2");
+	itemkey2.Insert("Presentation",String(CurrentSessionDate()));
 	itemkey2.Insert("Ref","004");
 	
 	
-	row1 = New Structure("Price, Quantity, Item, ItemKey", 100, 2, item1, itemkey1);
-	row2 = New Structure("Price, Quantity, Item, ItemKey", 20.3, 4.002, item2, itemkey2);
-	
-//	DataPresentation.Insert("ItemList", new Structure("List", new Array()));
-//	DataPresentation.ItemList.List.add(row1);
-//	DataPresentation.ItemList.List.add(row2);
-	
+	row1 = New Structure("Key, Price, Quantity, Item, ItemKey", "__key__01",  100,     2, item1, itemkey1);
+	row2 = New Structure("Key, Price, Quantity, Item, ItemKey", "__key__02", 20.3, 4.002, item2, itemkey2);
+		
 	DataPresentation.Insert("ItemList", new Array());
 	DataPresentation.ItemList.add(row1);
 	DataPresentation.ItemList.add(row2);

@@ -1195,6 +1195,29 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_TOTAL_AMOUNT
+
+// ItemList.PhysCount
+Procedure ItemListPhysCountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListPhysCountOnChange(Parameters);
+EndProcedure
+
+// ItemList.PhysCount.Set
+Procedure SetItemListPhysCount(Object, Form, Row, Value) Export
+	Row.PhysCount = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListPhysCountOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetItemListPhysCountNotify(Parameters) Export
+	Return;
+EndProcedure
+#EndRegion
+
 Procedure OnSetCalculationsNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"

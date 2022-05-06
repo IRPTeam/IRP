@@ -25,6 +25,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
+	SerialLotNumbersServer.FillSerialLotNumbersUse(Object);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export

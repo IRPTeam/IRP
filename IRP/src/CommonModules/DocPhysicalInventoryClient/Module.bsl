@@ -7,7 +7,6 @@ Procedure OnOpen(Object, Form, Cancel) Export
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
-	SerialLotNumberClient.FillSerialLotNumbersUse(Object, AddInfo);
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
@@ -180,8 +179,16 @@ Procedure UpdateItemList(Object, Form, Result)
 			ItemListRow = Object.ItemList.Add();
 		EndIf;
 		FillPropertyValues(ItemListRow, Row);
-		ItemListRow.Difference = ItemListRow.PhysCount - ItemListRow.ExpCount;
+		CalculateDiffCount(ItemListRow);
 	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region SERVICE
+
+Procedure CalculateDiffCount(CurrentRow) Export
+	CurrentRow.Difference = CurrentRow.PhysCount - CurrentRow.ExpCount + CurrentRow.ManualFixedCount;
 EndProcedure
 
 #EndRegion

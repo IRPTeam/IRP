@@ -253,6 +253,21 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="aceb3147-de71-432e-b2b3-191c933c119a">
+      <name>ManualFixedCount</name>
+      <synonym>
+        <key>en</key>
+        <value>Manual fixed count</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <markNegatives>true</markNegatives>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="0ebe481f-113c-4e61-8644-385586aba996">
       <name>Difference</name>
       <synonym>

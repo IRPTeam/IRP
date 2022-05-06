@@ -138,6 +138,29 @@ EndProcedure
 
 #EndRegion
 
+#Region SERIAL_LOT_NUMBERS
+&AtClient
+Procedure ItemListSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item", Items.ItemList.CurrentData.Item);
+	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
+
+	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item", Items.ItemList.CurrentData.Item);
+	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
+
+	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_KEY
 
 &AtClient
@@ -155,7 +178,21 @@ Procedure ItemListPhysCountOnChange(Item)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	CurrentRow.Difference = CurrentRow.PhysCount - CurrentRow.ExpCount;
+	DocPhysicalInventoryClient.CalculateDiffCount(CurrentRow);
+EndProcedure
+
+#EndRegion
+
+#Region MANUAL_COUNT
+
+
+&AtClient
+Procedure ItemListManualFixedCountOnChange(Item)
+	CurrentRow = Items.ItemList.CurrentData;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	DocPhysicalInventoryClient.CalculateDiffCount(CurrentRow);
 EndProcedure
 
 #EndRegion
@@ -296,27 +333,5 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
-
-&AtClient
-Procedure ItemListSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
-	FormParameters = New Structure();
-	FormParameters.Insert("ItemType", Undefined);
-	FormParameters.Insert("Item", Items.ItemList.CurrentData.Item);
-	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
-
-	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
-EndProcedure
-
-&AtClient
-Procedure ItemListSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
-	FormParameters = New Structure();
-	FormParameters.Insert("ItemType", Undefined);
-	FormParameters.Insert("Item", Items.ItemList.CurrentData.Item);
-	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
-
-	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
-EndProcedure
-
-
 
 #EndRegion

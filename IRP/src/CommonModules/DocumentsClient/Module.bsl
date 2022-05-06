@@ -1208,6 +1208,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	Form 	= AddInfo.Form;
 	
 	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
+	isSerialLotNumberAtRow = TypeOf(Object.Ref) = Type("DocumentRef.PhysicalInventory");
 	
 	Settings = New Structure();
 	Settings.Insert("Rows", New Array());
@@ -1218,6 +1219,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		CalculationSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 			AgreementInfo.PriceType));
 		FilterString = "Item, ItemKey, Unit, Price";
+	ElsIf isSerialLotNumberAtRow Then
+		FilterString = "Item, ItemKey, Unit, SerialLotNumber";
 	Else
 		FilterString = "Item, ItemKey, Unit";
 	EndIf;
@@ -1259,9 +1262,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			ExistingRows = Object.ItemList.FindRows(FilterStructure);
 			If ExistingRows.Count() Then
 				Row = ExistingRows[0];
-				If Row.Property("PhysCount") And Row.Property("Difference") Then
-					Row.PhysCount  = Row.PhysCount + ResultElement.Quantity;
-					Row.Difference = Row.PhysCount - Row.ExpCount;
+				If TypeOf(Object.Ref) = Type("DocumentRef.PhysicalInventory") Then
+					ViewClient_V2.SetItemListPhysCount(Object, Form, Row, Row.PhysCount + ResultElement.Quantity);
 				Else
 					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
 				EndIf;
@@ -1271,6 +1273,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 				FillingValues.Insert("ItemKey"  , ResultElement.ItemKey);
 				FillingValues.Insert("Unit"     , ResultElement.Unit);
 				FillingValues.Insert("Quantity" , ResultElement.Quantity);
+				FillingValues.Insert("SerialLotNumber" , ResultElement.SerialLotNumber);
 				
 				If ResultElement.Property("Price") Then
 					FillingValues.Insert("Price", ResultElement.Price);

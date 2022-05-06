@@ -5336,6 +5336,13 @@ EndProcedure
 
 #Region ITEM_LIST_PHYS_COUNT
 
+// ItemList.PhysCount.OnChange
+Procedure ItemListPhysCountOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListPhysCountNotify", Parameters);
+	Binding = BindItemListPhysCount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
 // ItemList.PhysCount.Set
 Procedure SetItemListPhysCount(Parameters, Results) Export
 	Binding = BindItemListPhysCount(Parameters);
@@ -5362,6 +5369,40 @@ EndProcedure
 // ItemList.Difference.Bind
 Function BindItemListDifference(Parameters)
 	DataPath = "ItemList.Difference";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_FIXED_COUNT
+
+// ItemList.ManualFixedCount.Set
+Procedure SetItemListManualFixedCount(Parameters, Results) Export
+	Binding = BindItemListManualFixedCount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ManualFixedCount.Bind
+Function BindItemListManualFixedCount(Parameters)
+	DataPath = "ItemList.ManualFixedCount";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_SERIAL_LOT_NUMBER
+
+// ItemList.SerialLotNumber.Set
+Procedure SetItemListSerialLotNumber(Parameters, Results) Export
+	Binding = BindItemListSerialLotNumber(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.SerialLotNumber.Bind
+Function BindItemListSerialLotNumber(Parameters)
+	DataPath = "ItemList.SerialLotNumber";
 	Binding = New Structure();	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

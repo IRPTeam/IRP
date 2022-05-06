@@ -688,12 +688,12 @@ Scenario: _0401315 check Sales invoice movements by the Register  "R4014 Serial 
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
-			| 'Register  "R4014 Serial lot numbers"'      | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                  |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Item key' | 'Serial lot number' |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Main Company' | 'Distribution department' | '36/Red'   | '0512'              |
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         | ''                  |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'      | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         | ''                  |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''         | ''                  |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Item key' | 'Serial lot number' |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Main Company' | 'Distribution department' | ''         | '36/Red'   | '0512'              |
 		And I close all client application windows 
 
 Scenario: _0401316 check Sales invoice movements by the Register  "R2022 Customers payment planning" (use Aging, Receipt)

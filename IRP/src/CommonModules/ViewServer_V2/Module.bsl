@@ -1,18 +1,10 @@
 
 Procedure OnCreateAtServer(Object, Form, TableNames) Export
-	ArrayOfNewAttribute = New Array();
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, "CacheBeforeChange") Then
+		ArrayOfNewAttribute = New Array();
 		ArrayOfNewAttribute.Add(New FormAttribute("CacheBeforeChange", New TypeDescription("String")));
-	EndIf;
-	If Not CommonFunctionsServer.FormHaveAttribute(Form, "IsCopyingInteractive") Then
-		ArrayOfNewAttribute.Add(New FormAttribute("IsCopyingInteractive", New TypeDescription("Boolean")));
-	EndIf;
-	
-	If ArrayOfNewAttribute.Count() Then
 		Form.ChangeAttributes(ArrayOfNewAttribute);
 	EndIf;
-	// Copying document on client
-	Form.IsCopyingInteractive =  Form.Parameters.Property("CopyingValue") And ValueIsFilled(Form.Parameters.CopyingValue);
 	
 	For Each TableName In StrSplit(TableNames, ",") Do
 		FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
@@ -93,7 +85,6 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	QuantityIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Quantity");
 	PriceIsPresent    = CommonFunctionsClientServer.ObjectHasProperty(Row, "Price");
 	PhysCountIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "PhysCount");
-	DifferenceIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Difference");
 	SerialLotNumberIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "SerialLotNumber");
 	
 	If FillingValues.Property("Item") And ItemIsPresent Then
@@ -112,7 +103,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 		ControllerClientServer_V2.SetItemListQuantity(Parameters, PrepareValue(FillingValues.Quantity, Row.Key));
 	EndIf;
 	
-	If FillingValues.Property("Quantity") And PhysCountIsPresent And DifferenceIsPresent Then
+	If FillingValues.Property("Quantity") And PhysCountIsPresent Then
 		ControllerClientServer_V2.SetItemListPhysCount(Parameters, PrepareValue(FillingValues.Quantity, Row.Key));
 	EndIf;
 	

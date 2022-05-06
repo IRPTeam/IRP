@@ -203,6 +203,8 @@ Function GetChain()
 	
 	Chain.Insert("CovertQuantityToQuantityInBaseUnit" , GetChainLink("CovertQuantityToQuantityInBaseUnitExecute"));
 	
+	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
+
 	// Extractors
 	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
 	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
@@ -815,6 +817,18 @@ Function ChangeReceiveAmountBySendAmountExecute(Options) Export
 	Else
 		Return Options.ReceiveAmount;
 	EndIf;
+EndFunction
+
+#EndRegion
+
+#Region CALCULATE_DIFFERENCE
+
+Function CalculateDifferenceCountOptions() Export
+	Return GetChainLinkOptions("PhysCount, ExpCount, ManualFixedCount");
+EndFunction
+
+Function CalculateDifferenceCountExecute(Options) Export
+	Return Options.PhysCount - Options.ExpCount + Options.ManualFixedCount;
 EndFunction
 
 #EndRegion

@@ -174,25 +174,16 @@ EndProcedure
 
 &AtClient
 Procedure ItemListPhysCountOnChange(Item)
-	CurrentRow = Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-	DocPhysicalInventoryClient.CalculateDiffCount(CurrentRow);
+	DocPhysicalInventoryClient.ItemListPhysCountOnChange(Object, ThisObject);
 EndProcedure
 
 #EndRegion
 
 #Region MANUAL_COUNT
 
-
 &AtClient
 Procedure ItemListManualFixedCountOnChange(Item)
-	CurrentRow = Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-	DocPhysicalInventoryClient.CalculateDiffCount(CurrentRow);
+	DocPhysicalInventoryClient.ItemListManualFixedCountOnChange(Object, ThisObject);
 EndProcedure
 
 #EndRegion

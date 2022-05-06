@@ -5373,10 +5373,66 @@ Procedure SetItemListPhysCount(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
+// ItemList.PhysCount.Get
+Function GetItemListPhysCount(Parameters, _Key)
+	Binding = BindItemListPhysCount(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
 // ItemList.PhysCount.Bind
 Function BindItemListPhysCount(Parameters)
 	DataPath = "ItemList.PhysCount";
-	Binding = New Structure();	
+	Binding = New Structure();
+	Binding.Insert("PhysicalInventory", "StepCalculateDifferenceCount");	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_FIXED_COUNT
+
+// ItemList.ManualFixedCount.OnChange
+Procedure ItemListManualFixedCountOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListPhysCountNotify", Parameters);
+	Binding = BindItemListManualFixedCount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.ManualFixedCount.Set
+Procedure SetItemListManualFixedCount(Parameters, Results) Export
+	Binding = BindItemListManualFixedCount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ManualFixedCount.Get
+Function GetItemListManualFixedCount(Parameters, _Key)
+	Binding = BindItemListManualFixedCount(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.ManualFixedCount.Bind
+Function BindItemListManualFixedCount(Parameters)
+	DataPath = "ItemList.ManualFixedCount";
+	Binding = New Structure();
+	Binding.Insert("PhysicalInventory", "StepCalculateDifferenceCount");	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_EXPECTED_COUNT
+
+// ItemList.ExpCount.Get
+Function GetItemListExpCount(Parameters, _Key)
+	Binding = BindItemListExpCount(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.ExpCount.Bind
+Function BindItemListExpCount(Parameters)
+	DataPath = "ItemList.ExpCount";
+	Binding = New Structure();
+	Binding.Insert("PhysicalInventory", "StepCalculateDifferenceCount");	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5397,23 +5453,35 @@ Function BindItemListDifference(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
-#EndRegion
-
-#Region ITEM_LIST_MANUAL_FIXED_COUNT
-
-// ItemList.ManualFixedCount.Set
-Procedure SetItemListManualFixedCount(Parameters, Results) Export
-	Binding = BindItemListManualFixedCount(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+// ItemList.Difference.CalculateDifferenceCount.Step
+Procedure StepCalculateDifferenceCount(Parameters, Chain) Export
+	Chain.CalculateDifferenceCount.Enable = True;
+	Chain.CalculateDifferenceCount.Setter = "SetItemListDifference";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options     = ModelClientServer_V2.CalculateDifferenceCountOptions();
+		Options.PhysCount = GetItemListPhysCount(Parameters, Row.Key);
+		Options.ExpCount = GetItemListExpCount(Parameters, Row.Key);
+		Options.ManualFixedCount = GetItemListManualFixedCount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepCalculateDifferenceCount";
+		Chain.CalculateDifferenceCount.Options.Add(Options);
+	EndDo;	
 EndProcedure
 
-// ItemList.ManualFixedCount.Bind
-Function BindItemListManualFixedCount(Parameters)
-	DataPath = "ItemList.ManualFixedCount";
-	Binding = New Structure();	
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
-EndFunction
-
+// ItemList.Difference.CalculateDifferenceCount.Fill
+Procedure FillCalculateDifferenceCount(Parameters, Chain) Export
+	Chain.CalculateDifferenceCountInItemList.Enable = True;
+	Chain.CalculateDifferenceCountInItemList.Setter = "FillItemListDifference";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options     = ModelClientServer_V2.CalculateDifferenceCountOptions();
+		Options.PhysCount = GetItemListPhysCount(Parameters, Row.Key);
+		Options.ExpCount = GetItemListExpCount(Parameters, Row.Key);
+		Options.ManualFixedCount = GetItemListManualFixedCount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepCalculateDifferenceCount";
+		Chain.CalculateDifferenceCountInItemList.Options.Add(Options);
+	EndDo;	
+EndProcedure
 #EndRegion
 
 #Region ITEM_LIST_SERIAL_LOT_NUMBER

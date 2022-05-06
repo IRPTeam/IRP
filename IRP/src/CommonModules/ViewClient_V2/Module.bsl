@@ -956,7 +956,6 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
@@ -1260,6 +1259,31 @@ EndProcedure
 Procedure OnSetItemListPhysCountNotify(Parameters) Export
 	Return;
 EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_FIXED_COUNT
+
+// ItemList.ManualFixedCount
+Procedure ItemListManualFixedCountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListManualFixedCountOnChange(Parameters);
+EndProcedure
+
+// ItemList.ManualFixedCount.Set
+Procedure SetItemListManualFixedCount(Object, Form, Row, Value) Export
+	Row.ManualFixedCount = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListManualFixedCountOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetItemListManualFixedCountNotify(Parameters) Export
+	Return;
+EndProcedure
+
 #EndRegion
 
 Procedure OnSetCalculationsNotify(Parameters) Export

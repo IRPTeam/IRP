@@ -93,7 +93,6 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	QuantityIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Quantity");
 	PriceIsPresent    = CommonFunctionsClientServer.ObjectHasProperty(Row, "Price");
 	PhysCountIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "PhysCount");
-	DifferenceIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Difference");
 	SerialLotNumberIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "SerialLotNumber");
 	
 	If FillingValues.Property("Item") And ItemIsPresent Then
@@ -112,7 +111,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 		ControllerClientServer_V2.SetItemListQuantity(Parameters, PrepareValue(FillingValues.Quantity, Row.Key));
 	EndIf;
 	
-	If FillingValues.Property("Quantity") And PhysCountIsPresent And DifferenceIsPresent Then
+	If FillingValues.Property("Quantity") And PhysCountIsPresent Then
 		ControllerClientServer_V2.SetItemListPhysCount(Parameters, PrepareValue(FillingValues.Quantity, Row.Key));
 	EndIf;
 	

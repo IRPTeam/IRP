@@ -94,6 +94,22 @@ EndProcedure
 
 #EndRegion
 
+#Region PHYS_COUNT
+
+Procedure ItemListPhysCountOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListPhysCountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region MANUAL_COUNT
+
+Procedure ItemListManualFixedCountOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListManualFixedCountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion
@@ -179,16 +195,8 @@ Procedure UpdateItemList(Object, Form, Result)
 			ItemListRow = Object.ItemList.Add();
 		EndIf;
 		FillPropertyValues(ItemListRow, Row);
-		CalculateDiffCount(ItemListRow);
 	EndDo;
 EndProcedure
 
 #EndRegion
 
-#Region SERVICE
-
-Procedure CalculateDiffCount(CurrentRow) Export
-	CurrentRow.Difference = CurrentRow.PhysCount - CurrentRow.ExpCount + CurrentRow.ManualFixedCount;
-EndProcedure
-
-#EndRegion

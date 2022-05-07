@@ -1,19 +1,58 @@
 
 Function EndPointPOST(Request)
+	Builder = BuilderServer_V2;
 	Response = New HTTPServiceResponse(200);
-	
 	RequestData = CommonFunctionsServer.DeserializeJSON(Request.GetBodyAsString());
+	
 	If RequestData.Action = "CREATE_OBJECT" Then
-		If RequestData.EntityName = "Document.RetailSalesReceipt" Then
-			Json = Action_CREATE_DOCUMENT_RETAIL_SALES(RequestData.Data);
+		
+		If Not StrStartsWith(RequestData.EntityName, "Document.") Then
+			Raise "Create supported only for documents";
 		EndIf;
+		EntityName = StrReplace(RequestData.EntityName, "Document.", "");
+		DocMetadata = Metadata.Documents[EntityName];
+		Wrapper = Builder.CreateDocument(DocMetadata);
+		
+		Json = WrapperToJson(Wrapper);
+	
 	ElsIf RequestData.Action = "SET_PROPERTY" Then
-		Json = Action_SET_PROPERTY(RequestData.Data);
+		
+		If Not StrStartsWith(RequestData.EntityName, "Document.") Then
+			Raise "Set property supported only for documents";
+		EndIf;
+		EntityName = StrReplace(RequestData.EntityName, "Document.", "");
+		Data = CommonFunctionsServer.DeserializeJSON(RequestData.Data);
+		Wrapper = ValueFromStringInternal(Data.LinkedContext);
+		Property = CommonFunctionsServer.DeserializeJSON(Data.Value);
+		
+		// Property.Name - attribute name
+		// Property.Value - attribute value
+		// Property.EntityName - attribute table
+		
+		If ValueIsFilled(Property.EntityName) Then
+			If StrStartsWith(Property.EntityName, "Catalog.") Then
+				Value = Catalogs[StrReplace(Property.EntityName, "Catalog.", "")]
+					.GetRef(New UUID(Property.Value.Ref));
+			Else
+				Raise "Ref as value supported only for catalogs";
+			EndIf;
+		Else
+			Value = Property.Value;
+		EndIf;
+		
+		Builder.SetProperty(Wrapper, Wrapper.Attr[Property.Name], Value);
+		
+		Json = WrapperToJson(Wrapper);
+				
 	ElsIf RequestData.Action = "READ_LIST" Then	
-		If RequestData.EntityName = "Catalog.Items" Then
-			Json = Action_READ_CATALOG_ITEMS();
-		ElsIf RequestData.EntityName = "Catalog.ItemKeys" Then
+		If Not StrStartsWith(RequestData.EntityName, "Catalog.") Then
+			Raise "Read list supported only for documents";
+		EndIf;
+		
+		If RequestData.EntityName = "Catalog.ItemKeys" Then
 			Json = Action_READ_CATALOG_ITEM_KEYS(RequestData.Data);
+		Else
+			Json = ReadList(RequestData.EntityName);
 		EndIf;
 	EndIf;
 				 
@@ -21,19 +60,77 @@ Function EndPointPOST(Request)
 	Return Response;
 EndFunction
 
-Function Action_READ_CATALOG_ITEMS()
+Function WrapperToJson(Wrapper)
+	LinkedContext = ValueToStringInternal(Wrapper);
+	ObjectPresentation = GetPresentation(Wrapper);
+	jsonObjectPresentation = CommonFunctionsServer.SerializeJSON(ObjectPresentation);
+	
+	SendingData = New Structure();
+	SendingData.Insert("LinkedContext", LinkedContext);
+	SendingData.Insert("ObjectPresentation", jsonObjectPresentation);
+			
+	Json = CommonFunctionsServer.SerializeJSON(SendingData);
+	Return Json;
+EndFunction
+
+Function GetPresentation(Wrapper)
+	Presentation = New Structure();
+	For Each KeyValue In Wrapper.Object Do
+		_Key = KeyValue.Key;
+		Value = KeyValue.Value;
+		Type = TypeOf(Value);
+		If Value = Undefined Then
+			Presentation.Insert(_Key, null);
+		ElsIf IsRefType(Type) Then
+			Presentation.Insert(_Key, GetRefPresentation(Value));
+		ElsIf Type = Type("ValueTable") Then
+			ValueArray = New Array();
+			For Each Row In Value Do
+				ValueRow = New Structure();
+				For Each Column In Value.Columns Do
+					CellValue = Row[Column.Name];
+					If CellValue = Undefined Then
+						ValueRow.Insert(Column.Name, null);
+					ElsIf IsRefType(TypeOf(CellValue)) Then
+						ValueRow.Insert(Column.Name, GetRefPresentation(CellValue));
+					Else
+						ValueRow.Insert(Column.Name, CellValue);
+					EndIf;
+				EndDo;
+				ValueArray.Add(ValueRow);
+			EndDo;
+			Presentation.Insert(_Key, ValueArray);
+		Else
+			Presentation.Insert(_Key, Value);
+		EndIf;
+	EndDo;
+	Return Presentation;
+EndFunction
+
+Function IsRefType(Type)
+	Return Catalogs.AllRefsType().ContainsType(Type) Or Documents.AllRefsType().ContainsType(Type);
+EndFunction
+
+Function GetRefPresentation(Value)
+	Return New Structure("Ref, Presentation", String(Value.UUID()), String(Value));
+EndFunction
+
+Function ReadList(EntityName)
 	Query = New Query();
 	Query.Text =	
-	 "SELECT top 10
-	 |	Items.Ref AS Ref
+	 "SELECT top 20
+	 |	t.Ref,
+	 |	t.Code 
 	 |FROM
-	 |	Catalog.Items AS Items";
+	 |	%1 AS t";
+	Query.Text = StrTemplate(Query.Text, EntityName);
 	QuerySelection = Query.Execute().Select();
 	Elements = New Array();
 	While QuerySelection.Next() Do
 		Element = New Structure();
 		Element.Insert("Presentation",String(QuerySelection.Ref));
 		Element.Insert("Ref", String(QuerySelection.Ref.UUID()));
+		Element.Insert("Code", QuerySelection.Code);
 		Elements.Add(Element);
 	EndDo;
 	json = CommonFunctionsServer.SerializeJSON(Elements);
@@ -88,35 +185,6 @@ Function Action_CREATE_DOCUMENT_RETAIL_SALES(Data)
 	
 	Return Json;
 EndFunction
-
-#Region DATA_PRESENTATION
-
-Function GetPresentation(Wrapper)
-	res = New Structure();
-	For Each KeyValue In Wrapper Do
-		_key = KeyValue.Key;
-		_value = KeyValue.Value;
-		_type = TypeOf(_value);
-		
-		If IsRefType(_type) Then
-		
-		ElsIf _type = Type("Array") Then
-			
-		Else
-		
-		EndIf;
-	EndDo;
-EndFunction
-
-Function IsRefType(type)
-	Return Catalogs.AllRefsType().ContainsType(type) Or Documents.AllRefsType().ContainsType(type);
-EndFunction
-
-Function GetRefPresentation(value)
-	Return New Structure("Ref, Presentation", String(value.UUID()), String(value));
-EndFunction
-
-#EndRegion
 
 Function Action_WRITE_DOCUMENT_RETAIL_SALES(Data)
 	Builder = BuilderServer_V2;

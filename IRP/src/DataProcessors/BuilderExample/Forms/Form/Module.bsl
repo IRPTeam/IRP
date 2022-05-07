@@ -63,30 +63,49 @@ EndProcedure
 &AtServer
 Procedure CreateRetailSalesServer()
 	Builder = BuilderServer_V2;
-	DocMetadata = Metadata.Documents.RetailSalesReceipt;
+	
+	
+	// create
+	DocumentName = "RetailSalesReceipt";
+	DocMetadata = Metadata.Documents[DocumentName];
 	Wrapper = Builder.CreateDocument(DocMetadata);
 	Context = ValueToStringInternal(Wrapper);
 	Presentation = GetPresentation(Wrapper);
-		
-	Context2 = AddRow_ItemList(Context);
 	
-	Wrapper2 = ValueFromStringInternal(Context2);
+	// add string
+	test_row_key = ""; // test
+	TableName = "ItemList";	
+	Wrapper2 = ValueFromStringInternal(Context);	
+	test_row = Builder.AddRow(Wrapper2, Wrapper2.Tables[TableName]); 
+	test_row_key = test_row.Key; // test
+	Context2 = ValueToStringInternal(Wrapper2);
+	Presentation2 = GetPresentation(Wrapper2);
 	
+	// set column value
+	TableName = "ItemList";
+	ColumnName = "ItemKey";
+	ColumnValue = Catalogs.ItemKeys.FindByCode(159);
+	RowKey = test_row_key;
+	Wrapper3 = ValueFromStringInternal(Context2);
 	
-	Builder.Write(Wrapper2, DocMetadata, DocumentWriteMode.Write);
+	WrapperRow = Undefined;
+	For Each Row In Wrapper3.Object[TableName] Do
+		If Row.Key = RowKey Then
+			WrapperRow = Row;
+			Break;
+		EndIf;
+	EndDo;
+	
+	Builder.SetRowProperty(Wrapper3, WrapperRow, Wrapper3.Tables[TableName][ColumnName], ColumnValue);
+	Context3 = ValueToStringInternal(Wrapper3);
+	Presentation3 = GetPresentation(Wrapper3);
+	
+	// write
+	DocumentName = "RetailSalesReceipt";
+	DocMetadata = Metadata.Documents[DocumentName];
+	Wrapper4 = ValueFromStringInternal(Context3);
+	Builder.Write(Wrapper4, DocMetadata, DocumentWriteMode.Write);
 EndProcedure
-
-Function AddRow_ItemList(Context)
-	Builder = BuilderServer_V2;
-	Wrapper = ValueFromStringInternal(Context);
-	ItemList = Wrapper.Tables.ItemList;
-	Row = Builder.AddRow(Wrapper, ItemList);
-	
-	Context = ValueToStringInternal(Wrapper);
-	Presentation = GetPresentation(Wrapper);
-	
-	Return Context;
-EndFunction
 
 Function GetPresentation(Wrapper)
 	Presentation = New Structure();
@@ -104,7 +123,9 @@ Function GetPresentation(Wrapper)
 				ValueRow = New Structure();
 				For Each Column In Value.Columns Do
 					CellValue = Row[Column.Name];
-					If IsRefType(TypeOf(CellValue)) Then
+					If CellValue = Undefined Then
+						ValueRow.Insert(Column.Name, null);
+					ElsIf IsRefType(TypeOf(CellValue)) Then
 						ValueRow.Insert(Column.Name, GetRefPresentation(CellValue));
 					Else
 						ValueRow.Insert(Column.Name, CellValue);
@@ -124,7 +145,7 @@ Function IsRefType(Type)
 	Return Catalogs.AllRefsType().ContainsType(Type) Or Documents.AllRefsType().ContainsType(Type);
 EndFunction
 
-Function GetRefPresentation(value)
-	Return New Structure("Ref, Presentation", String(value.UUID()), String(value));
+Function GetRefPresentation(Value)
+	Return New Structure("Ref, Presentation", String(Value.UUID()), String(Value));
 EndFunction
 

@@ -258,6 +258,9 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("ItemList.Store"              , "SetItemListStore");
 	SettersMap.Insert("ItemList.DeliveryDate"       , "SetItemListDeliveryDate");
 	SettersMap.Insert("ItemList.QuantityInBaseUnit" , "SetItemListQuantityInBaseUnit");
+	SettersMap.Insert("ItemList.PhysCount"          , "SetItemListPhysCount");
+	SettersMap.Insert("ItemList.ManualFixedCount"   , "SetItemListManualFixedCount");
+	SettersMap.Insert("ItemList.ExpCount"           , "SetItemListExpCount");
 	Return SettersMap.Get(DataPath);
 EndFunction
 
@@ -5421,6 +5424,12 @@ EndFunction
 #EndRegion
 
 #Region ITEM_LIST_EXPECTED_COUNT
+
+// ItemList.ExpCount.Set
+Procedure SetItemListExpCount(Parameters, Results) Export
+	Binding = BindItemListExpCount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
 
 // ItemList.ExpCount.Get
 Function GetItemListExpCount(Parameters, _Key)

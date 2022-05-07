@@ -71,6 +71,79 @@ EndProcedure
 
 #EndRegion
 
+// Fill exp count.
+// 
+// Parameters:
+//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
+Procedure FillExpCount(Object) Export
+	Object.RowIDInfo.Clear();
+	Object.ItemList.Clear();
+	ItemCounts = GetItemListWithFillingExpCount(Object.Ref, Object.Store);
+
+	If Not ItemCounts.Count() Then
+		Return;
+	EndIf;
+	
+	ArrayOfFillingRows = New Array();
+	For Each Row In ItemCounts Do
+		NewRow = Object.ItemList.Add();
+		ArrayOfFillingRows.Add(NewRow);
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	
+	ArrayOfFillingColumns = New Array();
+	For Each KeyValue In ItemCounts[0] Do
+		ArrayOfFillingColumns.Add("ItemList." + KeyValue.Key);
+	EndDo;
+	RecalculateItemList(Object, ArrayOfFillingRows, ArrayOfFillingColumns);
+EndProcedure	
+
+// Update exp count.
+// 
+// Parameters:
+//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
+Procedure UpdatePhysCount(Object) Export
+	ItemCounts = GetItemListWithFillingPhysCount(Object.Ref); 
+	
+	// ???
+	For Each ItemListRow In Object.ItemList Do
+		ItemListRow.PhysCount = 0;
+		ItemListRow.Difference = ItemListRow.PhysCount - ItemListRow.ExpCount;
+	EndDo;
+
+	ArrayOfFillingColumns = New Array();
+	For Each KeyValue In ItemCounts[0] Do
+		ArrayOfFillingColumns.Add("ItemList." + KeyValue.Key);
+	EndDo;
+	
+	ArrayOfFillingRows = New Array();
+	For Each Row In ItemCounts Do
+		ItemListFoundRows = Object.ItemList.FindRows(New Structure("Unit, ItemKey", Row.Unit, Row.ItemKey));
+		If ItemListFoundRows.Count() Then
+			ItemListRow = ItemListFoundRows[0];
+		Else
+			ItemListRow = Object.ItemList.Add();
+		EndIf;
+		FillPropertyValues(ItemListRow, Row);
+		ArrayOfFillingRows.Add(ItemListRow);
+	EndDo;
+	RecalculateItemList(Object, ArrayOfFillingRows, ArrayOfFillingColumns);
+EndProcedure
+
+Procedure RecalculateItemList(Object, ArrayOfFillingRows, ArrayOfFillingColumns)
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = "ItemList";
+	ServerParameters.IsBasedOn = True;
+	ServerParameters.ReadOnlyProperties = StrConcat(ArrayOfFillingColumns, ",");
+	ServerParameters.Rows = ArrayOfFillingRows;
+		
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	For Each PropertyName In StrSplit(ServerParameters.ReadOnlyProperties, ",") Do
+		Property = New Structure("DataPath", TrimAll(PropertyName));
+		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	EndDo;
+EndProcedure
+
 Function GetArrayOfInstance(GenerateParameters) Export
 	Result = New Array();
 	
@@ -94,7 +167,7 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	Result = Documents.PhysicalInventory.GetItemListWithFillingExpCount(Ref, Store, ItemList);
 	ArrayOfResult = New Array();
 	For Each Row In Result Do
-		NewRow = New Structure("Key, Store, Item, ItemKey, SerialLotNumber, Unit, ExpCount, PhysCount");
+		NewRow = New Structure("Key, Item, ItemKey, SerialLotNumber, Unit, ExpCount, PhysCount");
 		FillPropertyValues(NewRow, Row);
 		ArrayOfResult.Add(NewRow);
 	EndDo;

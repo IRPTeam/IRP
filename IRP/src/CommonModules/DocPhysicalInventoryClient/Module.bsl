@@ -133,23 +133,6 @@ Procedure CreatePhysicalCountEnd(CountDocsToCreate, AdditionalParameters) Export
 	EndIf;
 EndProcedure
 
-// Fill exp count.
-// 
-// Parameters:
-//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
-//  Form - See Document.PhysicalInventory.Form.DocumentForm
-Procedure FillExpCount(Object, Form) Export
-	If DocPhysicalInventoryServer.HavePhysicalCountByLocation(Object.Ref) Then
-		ShowMessageBox(Undefined, R().InfoMessage_006);
-		Return;
-	EndIf;
-	
-	ItemCounts = DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store);
-	
-	FillItemList(Object, Form, ItemCounts);
-	Object.RowIDInfo.Clear();
-EndProcedure
-
 Procedure UpdateExpCount(Object, Form) Export
 	ItemList = New Array();
 	For Each Row In Object.ItemList Do
@@ -161,40 +144,12 @@ Procedure UpdateExpCount(Object, Form) Export
 	FillItemList(Object, Form, DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store, ItemList));
 EndProcedure
 
-Procedure UpdatePhysCount(Object, Form) Export
-	ArrayItemRowWithFillingPhysCount = DocPhysicalInventoryServer.GetItemListWithFillingPhysCount(Object.Ref); 
-	UpdateItemList(Object, Form, ArrayItemRowWithFillingPhysCount);
-EndProcedure
-
 Procedure FillItemList(Object, Form, Result)
 	Object.ItemList.Clear();
 	For Each Row In Result Do
 		NewRow = Object.ItemList.Add();
 		FillPropertyValues(NewRow, Row);
 		NewRow.Difference = NewRow.PhysCount - NewRow.ExpCount;
-	EndDo;
-EndProcedure
-
-// Update item list.
-// 
-// Parameters:
-//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
-//  Form  - See Document.PhysicalInventory.Form.DocumentForm
-//  Result - Array of See DocPhysicalInventoryServer.GetItemRowWithFillingPhysCount - Result
-Procedure UpdateItemList(Object, Form, Result)
-	For Each ItemListRow In Object.ItemList Do
-		ItemListRow.PhysCount = 0;
-		ItemListRow.Difference = ItemListRow.PhysCount - ItemListRow.ExpCount;
-	EndDo;
-
-	For Each Row In Result Do
-		ItemListFoundRows = Object.ItemList.FindRows(New Structure("Unit, ItemKey", Row.Unit, Row.ItemKey));
-		If ItemListFoundRows.Count() Then
-			ItemListRow = ItemListFoundRows[0];
-		Else
-			ItemListRow = Object.ItemList.Add();
-		EndIf;
-		FillPropertyValues(ItemListRow, Row);
 	EndDo;
 EndProcedure
 

@@ -16,7 +16,7 @@ EndProcedure
 //  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
 //  Form - See Document.PhysicalInventory.Form.DocumentForm
 Procedure UpdateView(Object, Form) Export
-	Form.Items.ItemListSerialLotNumber.Visible = Object.UseSerialLot; 
+	Form.Items.ItemListSerialLotNumber.Visible = Object.UseSerialLot;
 EndProcedure
 
 #EndRegion

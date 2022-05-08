@@ -82,6 +82,10 @@ EndProcedure
 
 &AtClient
 Procedure UseSerialLotOnChange(Item)
+	If Object.ItemList.Count() Then
+		Object.UseSerialLot = Not Object.UseSerialLot;
+	EndIf;
+	
 	DocPhysicalInventoryClient.UseSerialLotOnChange(Object, ThisObject, Item);
 EndProcedure
 

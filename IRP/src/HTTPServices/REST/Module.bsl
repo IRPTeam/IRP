@@ -5,7 +5,6 @@ Function EndPointPOST(Request)
 	RequestData = CommonFunctionsServer.DeserializeJSON(Request.GetBodyAsString());
 	
 	If RequestData.Action = "CREATE_OBJECT" Then
-		
 		If Not StrStartsWith(RequestData.EntityName, "Document.") Then
 			Raise "Create supported only for documents";
 		EndIf;
@@ -16,7 +15,6 @@ Function EndPointPOST(Request)
 		Json = WrapperToJson(Wrapper);
 	
 	ElsIf RequestData.Action = "SET_PROPERTY" Then
-		
 		If Not StrStartsWith(RequestData.EntityName, "Document.") Then
 			Raise "Set property supported only for documents";
 		EndIf;
@@ -27,7 +25,7 @@ Function EndPointPOST(Request)
 		
 		// Property.Name - attribute name
 		// Property.Value - attribute value
-		// Property.EntityName - attribute table
+		// Property.EntityName - attribute table if value is ref
 		
 		If ValueIsFilled(Property.EntityName) Then
 			If StrStartsWith(Property.EntityName, "Catalog.") Then
@@ -43,13 +41,67 @@ Function EndPointPOST(Request)
 		Builder.SetProperty(Wrapper, Wrapper.Attr[Property.Name], Value);
 		
 		Json = WrapperToJson(Wrapper);
-				
+	
+	ElsIf RequestData.Action = "ADD_NEW_ROW" Then
+		If Not StrStartsWith(RequestData.EntityName, "Document.") Then
+			Raise "Add new row to tabular section supported only for documents";
+		EndIf;
+		// EntityName - Document.<name of document>.TabularSection.<name of tabular section>
+		Segments = StrSplit(RequestData.EntityName, ".");
+		TabularSectionName = Segments[3];
+		Data = CommonFunctionsServer.DeserializeJSON(RequestData.Data);
+		Wrapper = ValueFromStringInternal(Data.LinkedContext);
+			
+		Builder.AddRow(Wrapper, Wrapper.Tables[TabularSectionName]); 
+		
+		Json = WrapperToJson(Wrapper);
+		
+	ElsIf RequestData.Action = "SET_CELL" Then
+		If Not StrStartsWith(RequestData.EntityName, "Document.") Then
+			Raise "Set cell at row to tabular section supported only for documents";
+		EndIf;
+		// EntityName - Document.<name of document>.TabularSection.<name of tabular section>.Row
+		Segments = StrSplit(RequestData.EntityName, ".");
+		TabularSectionName = Segments[3];
+		Data = CommonFunctionsServer.DeserializeJSON(RequestData.Data);
+		Wrapper = ValueFromStringInternal(Data.LinkedContext);
+		Cell = CommonFunctionsServer.DeserializeJSON(Data.Value);
+		
+		// Cell.ColumnName - column name
+		// Cell.RowKey - row key
+		// Cell.Value - cell value
+		// Cell.EntityName - cell table if value is ref
+		
+		If ValueIsFilled(Cell.EntityName) Then
+			If StrStartsWith(Cell.EntityName, "Catalog.") Then
+				Value = Catalogs[StrReplace(Cell.EntityName, "Catalog.", "")]
+					.GetRef(New UUID(Cell.Value.Ref));
+			Else
+				Raise "Ref as value supported only for catalogs";
+			EndIf;
+		Else
+			Value = Cell.Value;
+		EndIf;
+		
+		WrapperRow = Undefined;
+		For Each Row In Wrapper.Object[TabularSectionName] Do
+			If Row.Key = Cell.RowKey Then
+				WrapperRow = Row;
+				Break;
+			EndIf;
+		EndDo;
+	
+		Builder.SetRowProperty(Wrapper, WrapperRow, 
+			Wrapper.Tables[TabularSectionName][Cell.ColumnName], Value);
+		
+		Json = WrapperToJson(Wrapper);
+		
 	ElsIf RequestData.Action = "READ_LIST" Then	
 		If Not StrStartsWith(RequestData.EntityName, "Catalog.") Then
 			Raise "Read list supported only for documents";
 		EndIf;
 		
-		If RequestData.EntityName = "Catalog.ItemKeys" Then
+		If RequestData.EntityName = "Catalog.ItemKeys" Then // for test with filters
 			Json = Action_READ_CATALOG_ITEM_KEYS(RequestData.Data);
 		Else
 			Json = ReadList(RequestData.EntityName);
@@ -80,7 +132,8 @@ Function GetPresentation(Wrapper)
 		Value = KeyValue.Value;
 		Type = TypeOf(Value);
 		If Value = Undefined Then
-			Presentation.Insert(_Key, null);
+			//Presentation.Insert(_Key, null);
+			Continue;
 		ElsIf IsRefType(Type) Then
 			Presentation.Insert(_Key, GetRefPresentation(Value));
 		ElsIf Type = Type("ValueTable") Then
@@ -90,7 +143,8 @@ Function GetPresentation(Wrapper)
 				For Each Column In Value.Columns Do
 					CellValue = Row[Column.Name];
 					If CellValue = Undefined Then
-						ValueRow.Insert(Column.Name, null);
+						//ValueRow.Insert(Column.Name, null);
+						Continue;
 					ElsIf IsRefType(TypeOf(CellValue)) Then
 						ValueRow.Insert(Column.Name, GetRefPresentation(CellValue));
 					Else
@@ -140,16 +194,25 @@ EndFunction
 Function Action_READ_CATALOG_ITEM_KEYS(jsonFilter)
 	Query = New Query();
 	Query.Text =	
-	 "SELECT
+	 "SELECT top 20
 	 |	ItemKeys.Ref AS Ref,
 	 |	ItemKeys.Item
 	 |FROM
 	 |	Catalog.ItemKeys AS ItemKeys
 	 |WHERE
-	 |	ItemKeys.Item = &Item";
+	 |	case
+	 |		when &UseFilterItem
+	 |			then ItemKeys.Item = &FilterItem
+	 |		else true
+	 |	end";
 	ArrayOfFilters = CommonFunctionsServer.DeserializeJSON(jsonFilter);
-	FilterItemUUID = ArrayOfFilters[0].Value.Ref;
-	Query.SetParameter("Item", Catalogs.Items.GetRef(New UUID(FilterItemUUID)));
+	FilterItem = Undefined;
+	If ValueIsFilled(ArrayOfFilters[0].Value) Then
+		FilterItemUUID = ArrayOfFilters[0].Value.Ref;
+		FilterItem = Catalogs.Items.GetRef(New UUID(FilterItemUUID));
+	EndIf;
+	Query.SetParameter("FilterItem", FilterItem);
+	Query.SetParameter("UseFilterItem", FilterItem <> Undefined);
 	
 	QuerySelection = Query.Execute().Select();
 	Elements = New Array();

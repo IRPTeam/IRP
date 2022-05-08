@@ -72,7 +72,7 @@ Procedure CreateRetailSalesServer()
 	Context = ValueToStringInternal(Wrapper);
 	Presentation = GetPresentation(Wrapper);
 	
-	// add string
+	// add row
 	test_row_key = ""; // test
 	TableName = "ItemList";	
 	Wrapper2 = ValueFromStringInternal(Context);	
@@ -81,7 +81,7 @@ Procedure CreateRetailSalesServer()
 	Context2 = ValueToStringInternal(Wrapper2);
 	Presentation2 = GetPresentation(Wrapper2);
 	
-	// set column value
+	// set cell value
 	TableName = "ItemList";
 	ColumnName = "ItemKey";
 	ColumnValue = Catalogs.ItemKeys.FindByCode(159);

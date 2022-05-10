@@ -5,7 +5,7 @@
     <key>en</key>
     <value>Use add attributes and properties</value>
   </synonym>
-  <location>Constant.UseAllFunctional</location>
+  <location>Constant.UseAddAttributesAndProperties</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Catalog.AddAttributeAndPropertySets</content>
   <content>Catalog.AddAttributeAndPropertyValues</content>

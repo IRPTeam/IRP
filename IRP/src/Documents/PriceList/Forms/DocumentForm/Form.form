@@ -669,6 +669,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemKeyList.Item</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemKeyListItemOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemKeyListItemExtendedTooltip</name>
             <id>69</id>

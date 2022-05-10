@@ -158,6 +158,20 @@ Procedure ItemKeyListItemEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure ItemKeyListItemOnChange(Item)
+	CurrentData = Items.ItemKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentItemKey = CurrentData.ItemKey;
+	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
+	If CurrentItemKey <> CurrentData.ItemKey Then
+		CurrentData.InputUnit = GetInputUnit(CurrentData.ItemKey);
+		CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
+	EndIf;
+EndProcedure
+
+&AtClient
 Procedure ItemKeyListItemKeyOnChange(Item)
 	CurrentData = Items.ItemKeyList.CurrentData;
 	If CurrentData = Undefined Then
@@ -764,3 +778,5 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+
+

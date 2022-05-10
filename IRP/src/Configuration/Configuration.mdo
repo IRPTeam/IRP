@@ -488,6 +488,7 @@
   <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnersHierarchy</functionalOptions>
   <functionalOptions>FunctionalOption.UseChequeBonds</functionalOptions>
+  <functionalOptions>FunctionalOption.UseMobile</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -571,6 +572,7 @@
   <constants>Constant.UsePartnersHierarchy</constants>
   <constants>Constant.UseChequeBonds</constants>
   <constants>Constant.UseSimpleMode</constants>
+  <constants>Constant.UseMobile</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

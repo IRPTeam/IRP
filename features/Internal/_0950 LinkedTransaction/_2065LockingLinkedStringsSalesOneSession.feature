@@ -550,9 +550,9 @@ Scenario: _2065010 change quantity in the linked string in the SO (one session)
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Procurement method' | 'Q'      |
 			| 'Shirt' | '36/Red'   | 'No reserve'         | '10,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "9,000" text in "Q" field of "ItemList" table
+		And I input "9,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
@@ -563,9 +563,9 @@ Scenario: _2065010 change quantity in the linked string in the SO (one session)
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Procurement method' | 'Q'      |
 			| 'Shirt' | '36/Red'   | 'No reserve'         | '9,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "11,000" text in "Q" field of "ItemList" table
+		And I input "11,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
@@ -584,9 +584,9 @@ Scenario: _2065011 change quantity in the linked string in the SI, SC after SI, 
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Q'      |
 			| 'Boots' | '37/18SD'  | '2,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
@@ -597,9 +597,9 @@ Scenario: _2065011 change quantity in the linked string in the SI, SC after SI, 
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Q'      |
 			| 'Boots' | '37/18SD'  | '1,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "3,000" text in "Q" field of "ItemList" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
@@ -617,9 +617,9 @@ Scenario: _2065012 change quantity in the linked string in the SI, SI after SC, 
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Q'      |
 			| 'Shirt' | '36/Red'  | '10,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "11,000" text in "Q" field of "ItemList" table
+		And I input "11,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then there are lines in TestClient message log
@@ -628,9 +628,9 @@ Scenario: _2065012 change quantity in the linked string in the SI, SI after SC, 
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Q'      |
 			| 'Shirt' | '36/Red'  | '11,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "9,000" text in "Q" field of "ItemList" table
+		And I input "9,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
@@ -1231,8 +1231,8 @@ Scenario: _2065039 change quantity in the linked string in the SRO (one session)
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '36/Red'   |
 		And I select current line in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -1242,9 +1242,9 @@ Scenario: _2065039 change quantity in the linked string in the SRO (one session)
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '36/Red'   |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
@@ -1264,8 +1264,8 @@ Scenario: _2065040 change quantity in the linked string in the SR (one session)
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '36/Red'   |
 		And I select current line in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -1275,9 +1275,9 @@ Scenario: _2065040 change quantity in the linked string in the SR (one session)
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '36/Red'   |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 		Then user message window does not contain messages

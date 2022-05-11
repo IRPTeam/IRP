@@ -92,8 +92,8 @@ Scenario: _3001000 preparation
 						| 'Item key' |
 						| 'XS/Blue'  |
 					And I select current line in "List" table
-					And I activate "Q" field in "ItemList" table
-					And I input "197,000" text in "Q" field of "ItemList" table
+					And I activate "Quantity" field in "ItemList" table
+					And I input "197,000" text in "Quantity" field of "ItemList" table
 					And I activate "Price" field in "ItemList" table
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I set "Use goods receipt" checkbox in "ItemList" table				
@@ -110,8 +110,8 @@ Scenario: _3001000 preparation
 						| 'Item key' |
 						| 'S/Yellow'  |
 					And I select current line in "List" table
-					And I activate "Q" field in "ItemList" table
-					And I input "134,000" text in "Q" field of "ItemList" table
+					And I activate "Quantity" field in "ItemList" table
+					And I input "134,000" text in "Quantity" field of "ItemList" table
 					And I activate "Price" field in "ItemList" table
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I set "Use goods receipt" checkbox in "ItemList" table	
@@ -128,8 +128,8 @@ Scenario: _3001000 preparation
 						| 'Item key' |
 						| '36/Red'  |
 					And I select current line in "List" table
-					And I activate "Q" field in "ItemList" table
-					And I input "7,000" text in "Q" field of "ItemList" table
+					And I activate "Quantity" field in "ItemList" table
+					And I input "7,000" text in "Quantity" field of "ItemList" table
 					And I activate "Price" field in "ItemList" table
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I set "Use goods receipt" checkbox in "ItemList" table	
@@ -146,8 +146,8 @@ Scenario: _3001000 preparation
 						| 'Item key' |
 						| '36/18SD'  |
 					And I select current line in "List" table
-					And I activate "Q" field in "ItemList" table
-					And I input "4,000" text in "Q" field of "ItemList" table
+					And I activate "Quantity" field in "ItemList" table
+					And I input "4,000" text in "Quantity" field of "ItemList" table
 					And I activate "Price" field in "ItemList" table
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I set "Use goods receipt" checkbox in "ItemList" table	
@@ -219,8 +219,8 @@ Scenario: _3001000 preparation
 						| 'Item key' |
 						| 'XS/Blue'  |
 					And I select current line in "List" table
-					And I activate "Q" field in "ItemList" table
-					And I input "398,000" text in "Q" field of "ItemList" table
+					And I activate "Quantity" field in "ItemList" table
+					And I input "398,000" text in "Quantity" field of "ItemList" table
 					And I activate "Price" field in "ItemList" table
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I finish line editing in "ItemList" table
@@ -236,8 +236,8 @@ Scenario: _3001000 preparation
 						| 'Item key' |
 						| '36/Yellow'  |
 					And I select current line in "List" table
-					And I activate "Q" field in "ItemList" table
-					And I input "405,000" text in "Q" field of "ItemList" table
+					And I activate "Quantity" field in "ItemList" table
+					And I input "405,000" text in "Quantity" field of "ItemList" table
 					And I activate "Price" field in "ItemList" table
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I finish line editing in "ItemList" table

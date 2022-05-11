@@ -733,8 +733,8 @@ Scenario: _016011 check price calculation in the documents
 			| 'Item key' |
 			| 'XS/Blue'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		* Basic price type
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
@@ -784,8 +784,8 @@ Scenario: _016011 check price calculation in the documents
 			| 'Item key' |
 			| 'XS/Blue'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		* Basic price type
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
@@ -834,8 +834,8 @@ Scenario: _016011 check price calculation in the documents
 			| 'Item key' |
 			| 'XS/Blue'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		* Basic price type
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
@@ -884,8 +884,8 @@ Scenario: _016011 check price calculation in the documents
 			| 'Item key' |
 			| 'XS/Blue'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		* Basic price type
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table

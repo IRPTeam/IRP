@@ -178,8 +178,8 @@ Scenario:_800005 check remaining stock control in the Sales order
 				| 'Dress' | 'XS/Blue'  |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -195,8 +195,8 @@ Scenario:_800005 check remaining stock control in the Sales order
 				| 'Dress' | 'Dress/A-8' |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "110,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "110,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -339,8 +339,8 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 				| 'Dress' | 'XS/Blue'  |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -356,8 +356,8 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 				| 'Dress' | 'Dress/A-8' |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "110,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "110,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -470,8 +470,8 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 				| 'Dress' | 'XS/Blue'  |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -487,8 +487,8 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 				| 'Dress' | 'Dress/A-8' |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "110,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "110,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -924,8 +924,8 @@ Scenario:_800020 check remaining stock control in the Purchase return
 				| 'Dress' | 'XS/Blue'  |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -941,8 +941,8 @@ Scenario:_800020 check remaining stock control in the Purchase return
 				| 'Dress' | 'Dress/A-8' |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "110,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "110,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -1169,8 +1169,8 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 			| 'Dress' | 'M/Brown'  |
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "20,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
@@ -1246,8 +1246,8 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 			| 'Dress' | 'M/Brown'  |
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "11,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "11,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
@@ -1273,9 +1273,9 @@ Scenario:_800036 check remaining stock control when unpost/change Sales return
 		And I go to line in "ItemList" table
 			| 'Item'       | 'Item key' |
 			| 'High shoes' | '39/19SD'  |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "6,000" text in "Q" field of "ItemList" table
+		And I input "6,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
@@ -1308,8 +1308,8 @@ Scenario:_800036 check remaining stock control when unpost/change Sales return
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '38/Black' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I close all client application windows
@@ -1495,9 +1495,9 @@ Scenario:_800044 check remaining stock control when unpost/change Retail return 
 		And I go to line in "ItemList" table
 			| 'Item'       | 'Item key' |
 			| 'High shoes' | '39/19SD'  |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "6,000" text in "Q" field of "ItemList" table
+		And I input "6,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Item list" tab
 		And I move to "Payments" tab
@@ -1543,8 +1543,8 @@ Scenario:_800044 check remaining stock control when unpost/change Retail return 
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '38/Black' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I move to "Payments" tab
 		And I activate "Amount" field in "Payments" table
 		And I select current line in "Payments" table
@@ -1641,8 +1641,8 @@ Scenario:_800046 check remaining stock control when post/change Inventory transf
 			| 'Shirt' | '38/Black' |
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
@@ -1922,8 +1922,8 @@ Scenario:_800080 set/remove checkbox Negative stock control from store and check
 			| 'Dress' | 'XS/Blue'  |
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "15000,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "15000,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then system warning window does not appear

@@ -214,7 +214,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
-		And I input "3,000" text in "Q" field of "ItemList" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
 		* Filling in payment tab
 			And I move to "Payments" tab
 			And I select current line in "Payments" table
@@ -415,7 +415,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '3,000' |
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [1] does not match the quantity [3] by serial/lot numbers" substring will appear in "30" seconds
 		* Delete 1 serial lot number
@@ -630,7 +630,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
-		And I input "3,000" text in "Q" field of "ItemList" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [3] does not match the quantity [1] by serial/lot numbers" substring will appear in "30" seconds
 		* Add one more serial lot number
@@ -799,7 +799,7 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '3,000' |
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [1] does not match the quantity [3] by serial/lot numbers" substring will appear in "30" seconds
 		* Delete 1 serial lot number
@@ -1091,7 +1091,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
-		And I input "3,000" text in "Q" field of "ItemList" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [3] does not match the quantity [1] by serial/lot numbers" substring will appear in "30" seconds
 		* Add one more serial lot number
@@ -1402,7 +1402,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
-		And I input "3,000" text in "Q" field of "ItemList" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [3] does not match the quantity [1] by serial/lot numbers" substring will appear in "30" seconds
 		* Add one more serial lot number

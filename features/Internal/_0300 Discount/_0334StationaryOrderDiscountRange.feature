@@ -267,7 +267,7 @@ Scenario: _033407 range discount recalculation when the quantity of items in the
 		And I go to line in "ItemList" table
 		| 'Item'      |
 		| 'Trousers' |
-		And I input "30,000" text in "Q" field of "ItemList" table
+		And I input "30,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Recalculation
 		And in the table "ItemList" I click "% Offers" button

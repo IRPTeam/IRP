@@ -90,8 +90,8 @@ Scenario: _060202 create Sales invoice with Ar details by Partner terms and chec
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
@@ -283,8 +283,8 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "550,00" text in "Price" field of "ItemList" table
 			And I move to "Other" tab

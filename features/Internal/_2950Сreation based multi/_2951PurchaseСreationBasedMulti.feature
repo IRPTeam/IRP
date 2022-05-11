@@ -919,8 +919,8 @@ Scenario: _090310 create Goods receipt for several Purchase invoice with differe
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "Store" became equal to "Store 02"
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
-		And I save number of "ItemList" table lines as "Q"
-		If "Q" variable is equal to 1 Then
+		And I save number of "ItemList" table lines as "Quantity"
+		If "Quantity" variable is equal to 1 Then
 			And I click the button named "FormPost"
 			And I delete "$$NumberGoodsReceipt0903N140$$" variable
 			And I delete "$$GoodsReceipt0903N140$$" variable
@@ -929,7 +929,7 @@ Scenario: _090310 create Goods receipt for several Purchase invoice with differe
 			And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'         |
 			| 'Dress' | '10,000'   | 'M/White'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice090302051$$' |
-		If "Q" variable is equal to 3 Then
+		If "Quantity" variable is equal to 3 Then
 			And I click the button named "FormPost"
 			And I delete "$$NumberGoodsReceipt0903N141$$" variable
 			And I delete "$$GoodsReceipt0903N141$$" variable

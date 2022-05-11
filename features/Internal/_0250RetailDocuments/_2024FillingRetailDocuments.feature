@@ -187,7 +187,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -207,7 +207,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -383,7 +383,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
 			| 'Shirt' | '38/Black' | '350,00' | '2,000' |
 		And I select current line in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
@@ -1562,7 +1562,7 @@ Scenario:  _0154149 create Cash statement
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -1643,7 +1643,7 @@ Scenario:  _0154149 create Cash statement
 				| 'Item'     | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -1709,7 +1709,7 @@ Scenario:  _0154149 create Cash statement
 				| 'Item'     | 'Item key'  |
 				| 'Shirt' | '38/Black' |
 			And I select current line in "List" table
-			And I input "4,000" text in "Q" field of "ItemList" table
+			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -1806,7 +1806,7 @@ Scenario:  _0154149 create Cash statement
 				| 'Item'     | 'Item key'  |
 				| 'Shirt' | '38/Black' |
 			And I select current line in "List" table
-			And I input "4,000" text in "Q" field of "ItemList" table
+			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -1903,7 +1903,7 @@ Scenario:  _0154149 create Cash statement
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -1963,9 +1963,9 @@ Scenario:  _0154149 create Cash statement
 		And I activate "Date" field in "List" table
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I click "Ok" button		
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Payments" tab
 		And I activate field named "PaymentsAmount" in "Payments" table
@@ -1989,9 +1989,9 @@ Scenario:  _0154149 create Cash statement
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I click "Ok" button	
 		Then "Retail return receipt (create)" window is opened
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I move to "Payments" tab
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I select current line in "Payments" table
@@ -2222,7 +2222,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -2255,7 +2255,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -2546,7 +2546,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -2579,7 +2579,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -2853,8 +2853,8 @@ Scenario: _0154156 check Retail sales receipt when changing date
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/Brown'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 		| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
@@ -2933,7 +2933,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"	
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -2947,7 +2947,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -3056,7 +3056,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -3126,7 +3126,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"	
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -3140,7 +3140,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -3231,7 +3231,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -3295,7 +3295,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -3309,7 +3309,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			| 'Item'  | 'Item key'  |
 			| 'Dress' | 'L/Green' |
 		And I select current line in "List" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -3333,7 +3333,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "3,000" text in "Q" field of "ItemList" table
+			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
@@ -3371,7 +3371,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
@@ -3421,7 +3421,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"	
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -3435,7 +3435,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			| 'Item'  | 'Item key'  |
 			| 'Dress' | 'L/Green' |
 		And I select current line in "List" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -3459,7 +3459,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "3,000" text in "Q" field of "ItemList" table
+			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
@@ -3497,7 +3497,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |

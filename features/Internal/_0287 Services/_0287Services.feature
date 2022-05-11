@@ -171,8 +171,8 @@ Scenario: _029103 create a Purchase order for service
 		| 'Description'              |
 		| 'Telephone communications' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -282,8 +282,8 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			| Description              |
 			| Telephone communications |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I select current line in "ItemList" table
@@ -316,8 +316,8 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 				| Description |
 				| Software    |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -370,8 +370,8 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 			| Item    | Item key |
 			| Service | Rent     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -396,8 +396,8 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 			| 'Item'  | 'Item key' |
 			| 'Table' | 'Table'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select current line in "ItemList" table

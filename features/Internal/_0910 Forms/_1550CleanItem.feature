@@ -95,8 +95,8 @@ Scenario: _155001 saving information about an Item without a completed item key 
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I select current line in "ItemList" table
@@ -156,8 +156,8 @@ Scenario: _155002 saving information about an Item without a completed item key 
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
 		And I click Select button of "Partner" field
@@ -213,8 +213,8 @@ Scenario: _155003 saving information about an Item without a completed item key 
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
 		And I click Select button of "Partner" field
@@ -270,8 +270,8 @@ Scenario: _155004 saving information about an Item without a completed item key 
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
 		And I click Select button of "Partner" field
@@ -328,8 +328,8 @@ Scenario: _155005 saving information about an Item without a completed item key 
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
 		And I click Select button of "Partner" field
@@ -396,8 +396,8 @@ Scenario: _155006 saving information about an Item without a completed item key 
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
 		And I click Select button of "Partner" field
@@ -464,8 +464,8 @@ Scenario: _155007 saving information about an Item without a completed item key 
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
 		And I click Select button of "Partner" field
@@ -532,8 +532,8 @@ Scenario: _155008 saving information about an Item without a completed item key 
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedLabel"
 		And I click Select button of "Partner" field

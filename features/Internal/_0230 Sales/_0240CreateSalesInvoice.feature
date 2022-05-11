@@ -244,9 +244,9 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '1' | 'Dress' | 'XS/Blue'  | '1,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "RowIDInfo" table contains lines
 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
@@ -258,9 +258,9 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '1' | 'Dress' | 'XS/Blue'  | '7,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Change checkbox Use Shipment confirmation and check RowIDInfo
 		And I move to "Item list" tab

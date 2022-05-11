@@ -100,9 +100,9 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 		And I select "Approved" exact value from "Status" drop-down list
 	And I select "Wait" exact value from "Status" drop-down list
 	And I move to "Item list" tab
-	And I activate "Q" field in "ItemList" table
+	And I activate "Quantity" field in "ItemList" table
 	And I select current line in "ItemList" table
-	And I input "2,000" text in "Q" field of "ItemList" table
+	And I input "2,000" text in "Quantity" field of "ItemList" table
 	And I input "40,00" text in "Price" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	* Check the addition of the store to the tabular partner
@@ -219,23 +219,23 @@ Scenario: _022009 create Purchase return order without bases document
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '1' | 'Dress' | 'M/White' | 'pcs' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "100" text in "Q" field of "ItemList" table
+		And I input "100" text in "Quantity" field of "ItemList" table
 		And I input "200" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200" text in "Q" field of "ItemList" table
+		And I input "200" text in "Quantity" field of "ItemList" table
 		And I input "210" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key' | 'Unit' |
 			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "300" text in "Q" field of "ItemList" table
+		And I input "300" text in "Quantity" field of "ItemList" table
 		And I input "250" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
@@ -334,9 +334,9 @@ Scenario: _022010 check filling in Row Id info table in the PRO
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
@@ -349,9 +349,9 @@ Scenario: _022010 check filling in Row Id info table in the PRO
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '2' | 'Dress' | 'L/Green'  | '7,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 		

@@ -89,7 +89,7 @@ Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one 
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -150,8 +150,8 @@ Scenario: _090502 create a purchase invoice based on Goods receipt (one to one)
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -199,7 +199,7 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -245,7 +245,7 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -296,7 +296,7 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -396,8 +396,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -454,8 +454,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "400,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -512,8 +512,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "350,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -604,7 +604,7 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -643,7 +643,7 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -750,8 +750,8 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -803,8 +803,8 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "400,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"

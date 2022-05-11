@@ -119,8 +119,8 @@ Scenario: _0205001 preparation (commands)
 					| 'Item'  | 'Item key' |
 					| 'Boots' | '37/18SD'  |
 				And I select current line in "List" table
-				And I activate "Q" field in "ItemList" table
-				And I input "15,000" text in "Q" field of "ItemList" table
+				And I activate "Quantity" field in "ItemList" table
+				And I input "15,000" text in "Quantity" field of "ItemList" table
 				And I input "210,000" text in "Price" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 				And I click "Add" button
@@ -135,8 +135,8 @@ Scenario: _0205001 preparation (commands)
 					| 'Item'  | 'Item key' |
 					| 'Dress' | 'L/Green'  |
 				And I select current line in "List" table
-				And I activate "Q" field in "ItemList" table
-				And I input "8,000" text in "Q" field of "ItemList" table
+				And I activate "Quantity" field in "ItemList" table
+				And I input "8,000" text in "Quantity" field of "ItemList" table
 				And I input "350,000" text in "Price" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 				And I click "Add" button
@@ -151,8 +151,8 @@ Scenario: _0205001 preparation (commands)
 					| 'Item'  | 'Item key' |
 					| 'Service' | 'Rent'  |
 				And I select current line in "List" table
-				And I activate "Q" field in "ItemList" table
-				And I input "1,000" text in "Q" field of "ItemList" table
+				And I activate "Quantity" field in "ItemList" table
+				And I input "1,000" text in "Quantity" field of "ItemList" table
 				And I input "100,000" text in "Price" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"

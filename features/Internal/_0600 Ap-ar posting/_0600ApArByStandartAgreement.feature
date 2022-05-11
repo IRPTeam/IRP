@@ -84,8 +84,8 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
@@ -235,8 +235,8 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "550,00" text in "Price" field of "ItemList" table
 		* Check filling in purchase invoice

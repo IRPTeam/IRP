@@ -228,9 +228,9 @@ Scenario: _018002 check filling in Row Id info table in the PI (PO-PI)
 		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key'  | 'Q'     |
 			| '3' | 'Trousers' | '36/Yellow' | '8,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
@@ -242,9 +242,9 @@ Scenario: _018002 check filling in Row Id info table in the PI (PO-PI)
 		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key'  | 'Q'     |
 			| '3' | 'Trousers' | '36/Yellow' | '7,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "8,000" text in "Q" field of "ItemList" table
+		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Change checkbox Use Goods receipt and check RowIDInfo
 		And I move to "Item list" tab
@@ -551,8 +551,8 @@ Scenario: _018012 Purchase invoice creation without PO
 			| 'Item key' |
 			| 'Dress/A-8'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -567,8 +567,8 @@ Scenario: _018012 Purchase invoice creation without PO
 			| Item  | Item key  |
 			| Boots | Boots/S-8 |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "20,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I input "250,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"

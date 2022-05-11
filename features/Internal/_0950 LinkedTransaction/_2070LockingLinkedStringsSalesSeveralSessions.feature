@@ -204,8 +204,8 @@ Scenario: _2070004 change quantity in the linked string in the SO (several sessi
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Q'     |
 			| 'Boots' | '37/18SD'  | '2,000' |
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened

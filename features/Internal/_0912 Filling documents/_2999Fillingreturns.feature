@@ -141,7 +141,7 @@ Scenario: _299901 check filling in and refilling Sales return order
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
 		* Check store and price refilling in the added line
@@ -179,7 +179,7 @@ Scenario: _299901 check filling in and refilling Sales return order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I close all client application windows
 
@@ -260,7 +260,7 @@ Scenario: _299902 check filling in and refilling Sales return
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
 	* Check refilling store when re-select partner term
@@ -307,7 +307,7 @@ Scenario: _299902 check filling in and refilling Sales return
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I close all client application windows
 
@@ -388,7 +388,7 @@ Scenario: _299903 check filling in and refilling Purchase return order
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
 	* Check refilling store when re-select partner term
@@ -435,7 +435,7 @@ Scenario: _299903 check filling in and refilling Purchase return order
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I close all client application windows
 
@@ -515,7 +515,7 @@ Scenario: _299904 check filling in and refilling Purchase return
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
 	* Check refilling store when re-select partner term
@@ -562,7 +562,7 @@ Scenario: _299904 check filling in and refilling Purchase return
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I close all client application windows
 

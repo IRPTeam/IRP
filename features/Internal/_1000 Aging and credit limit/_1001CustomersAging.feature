@@ -810,8 +810,8 @@ Scenario: _1000055 check Aging sum when delete row from SI
 					| 'Item key' |
 					| 'L/Green'  |
 			And I select current line in "List" table 
-			And I activate "Q" field in "ItemList" table 
-			And I input "1,000" text in "Q" field of "ItemList" table 
+			And I activate "Quantity" field in "ItemList" table 
+			And I input "1,000" text in "Quantity" field of "ItemList" table 
 			And I finish line editing in "ItemList" table 
 			And I activate field named "ItemListItemKey" in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListContextMenuCopy"

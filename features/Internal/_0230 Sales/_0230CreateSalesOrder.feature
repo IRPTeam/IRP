@@ -144,9 +144,9 @@ Scenario: _023002 check filling in Row Id info table in the SO
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '1' | 'Dress' | 'L/Green'  | '5,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
@@ -158,9 +158,9 @@ Scenario: _023002 check filling in Row Id info table in the SO
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '1' | 'Dress' | 'L/Green'  | '7,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 		
@@ -247,8 +247,8 @@ Scenario: _023007 check filling in Delivery date/Reservation date and Use items 
 				| 'Item key' |
 				| 'L/Green'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 	* Filling in delivery date
 		And I input current date in the field named "DeliveryDate"
@@ -311,8 +311,8 @@ Scenario: _023004 check filling in procurement method using the button Fill in S
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '38/Black' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -327,8 +327,8 @@ Scenario: _023004 check filling in procurement method using the button Fill in S
 			| 'Boots' | '38/18SD'  |
 		And I activate "Item" field in "List" table
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "8,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -344,8 +344,8 @@ Scenario: _023004 check filling in procurement method using the button Fill in S
 			| 'High shoes' | '37/19SD'  |
 		And I activate "Item" field in "List" table
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -360,8 +360,8 @@ Scenario: _023004 check filling in procurement method using the button Fill in S
 			| 'Trousers' | '38/Yellow' |
 		And I activate "Item" field in "List" table
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "3,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the button
 		And I go to line in "ItemList" table
@@ -522,8 +522,8 @@ Scenario: _0154037 check impossibility deleting of the store field by line with 
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
@@ -561,8 +561,8 @@ Scenario: _0154036 check the Deleting of the store field value by line with the 
 			| 'Item'    | 'Item key' |
 			| 'Service' | 'Rent'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |

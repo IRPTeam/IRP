@@ -56,8 +56,8 @@ Scenario: _032000 discount form
 			| 'Item key' |
 			| '38/Black'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "8,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check discount form
@@ -151,8 +151,8 @@ Scenario: _032001 discount calculation Discount 2 without Vat in the group Sum i
 			| 'Item key' |
 			| '38/Black'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "8,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -169,8 +169,8 @@ Scenario: _032001 discount calculation Discount 2 without Vat in the group Sum i
 			| 'Item key' |
 			| '36/Yellow'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "4,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "4,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And in the table "ItemList" I click "% Offers" button
@@ -259,8 +259,8 @@ Scenario: _032002 discount calculation Discount 2 without Vat in the group Sum i
 			| 'Item key' |
 			| '38/Black'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "8,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -277,8 +277,8 @@ Scenario: _032002 discount calculation Discount 2 without Vat in the group Sum i
 			| 'Item key' |
 			| '36/Yellow'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "4,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "4,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And in the table "ItemList" I click "% Offers" button
@@ -349,8 +349,8 @@ Scenario: _032003 discount calculation Discount 2 without Vat in the main group 
 			| 'Item key' |
 			| '38/Black'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "8,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -367,8 +367,8 @@ Scenario: _032003 discount calculation Discount 2 without Vat in the main group 
 			| 'Item key' |
 			| '36/Yellow'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "4,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "4,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And in the table "ItemList" I click "% Offers" button
@@ -443,8 +443,8 @@ Scenario: _032004 discount calculation Discount 1 without Vat in the main group 
 			| 'Item key' |
 			| '38/Black'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "8,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -461,8 +461,8 @@ Scenario: _032004 discount calculation Discount 1 without Vat in the main group 
 			| 'Item key' |
 			| '36/Yellow'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "4,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "4,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And in the table "ItemList" I click "% Offers" button

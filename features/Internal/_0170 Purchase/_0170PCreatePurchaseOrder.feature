@@ -137,9 +137,9 @@ Scenario: _017002 check filling in Row Id info table in the PO
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
@@ -152,9 +152,9 @@ Scenario: _017002 check filling in Row Id info table in the PO
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '2' | 'Dress' | 'L/Green'  | '7,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 		
@@ -285,23 +285,23 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '1' | 'Dress' | 'M/White' | 'pcs' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "20,000" text in "Q" field of "ItemList" table
+		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "20,000" text in "Q" field of "ItemList" table
+		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I input "210,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key' | 'Unit' |
 			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "30,000" text in "Q" field of "ItemList" table
+		And I input "30,000" text in "Quantity" field of "ItemList" table
 		And I input "210,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Post document
@@ -570,7 +570,7 @@ Scenario: _017101 check input item key by line in the Purchase order
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "S/Yellow" from "Item key" drop-down list by string in "ItemList" table
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 		| Item  | Item key |
@@ -730,7 +730,7 @@ Scenario: _019901 check changes in movements on a Purchase Order document when q
 			| 'Item'  | 'Item key' | 'Q'        | 'Unit' |
 			| 'Dress' | 'S/Yellow' | '200,000'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "250,000" text in "Q" field of "ItemList" table
+		And I input "250,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 	* Check registry entries (Order Balance)
@@ -788,7 +788,7 @@ Scenario: _019903 add line in Purchase order and chek movements changes
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '39/18SD'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "100,000" text in "Q" field of "ItemList" table
+		And I input "100,000" text in "Quantity" field of "ItemList" table
 		And I input "195,00" text in "Price" field of "ItemList" table
 		And I input "Store 03" text in "Store" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -809,7 +809,7 @@ Scenario: _019903 add line in Purchase order and chek movements changes
 			| 'Item'       | 'Item key' | 'Unit' |
 			| 'High shoes' | '39/19SD'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "50,000" text in "Q" field of "ItemList" table
+		And I input "50,000" text in "Quantity" field of "ItemList" table
 		And I input "190,00" text in "Price" field of "ItemList" table
 		And I input "Store 03" text in "Store" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -855,7 +855,7 @@ Scenario: _019904 add package in Purchase order and chek movements (conversion t
 			| 'Item'       | 'Item key' | 'Unit' |
 			| 'High shoes' | '39/19SD'  | 'High shoes box (8 pcs)' |
 		And I select current line in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I input "190,00" text in "Price" field of "ItemList" table
 		And I input "Store 03" text in "Store" field of "ItemList" table
 		And I finish line editing in "ItemList" table

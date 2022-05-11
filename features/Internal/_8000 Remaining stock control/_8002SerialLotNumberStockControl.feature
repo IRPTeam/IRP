@@ -221,8 +221,8 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 				| 'Phone A' | 'Brown'  |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "7,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "7,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I select current line in "ItemList" table

@@ -122,8 +122,8 @@ Scenario: create an order for MIO Basic Partner terms, without VAT (High shoes a
 			| 'Item key' |
 			| '39/19SD'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "8,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -140,8 +140,8 @@ Scenario: create an order for MIO Basic Partner terms, without VAT (High shoes a
 			| 'Item key' |
 			| '39/18SD'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "4,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "4,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
@@ -289,23 +289,23 @@ Scenario: create PurchaseOrder017001
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '1' | 'Dress' | 'M/White' | 'pcs' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "100" text in "Q" field of "ItemList" table
+		And I input "100" text in "Quantity" field of "ItemList" table
 		And I input "200" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200" text in "Q" field of "ItemList" table
+		And I input "200" text in "Quantity" field of "ItemList" table
 		And I input "210" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key' | 'Unit' |
 			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "300" text in "Q" field of "ItemList" table
+		And I input "300" text in "Quantity" field of "ItemList" table
 		And I input "250" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
@@ -372,7 +372,7 @@ Scenario: create PurchaseOrder017003
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "500,000" text in "Q" field of "ItemList" table
+			And I input "500,000" text in "Quantity" field of "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Post document
@@ -478,9 +478,9 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 		And I select current line in "List" table
 		And I select "Approved" exact value from "Status" drop-down list
 	And I move to "Item list" tab
-	And I activate "Q" field in "ItemList" table
+	And I activate "Quantity" field in "ItemList" table
 	And I select current line in "ItemList" table
-	And I input "2,000" text in "Q" field of "ItemList" table
+	And I input "2,000" text in "Quantity" field of "ItemList" table
 	And I input "40,00" text in "Price" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	* Check the addition of the store to the tabular partner
@@ -516,7 +516,7 @@ Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 		| 'Trousers'    | '36/Yellow'   | 'pcs' |
 	And I select current line in "ItemList" table
 	And Delay 2
-	And I input "3,000" text in "Q" field of "ItemList" table
+	And I input "3,000" text in "Quantity" field of "ItemList" table
 	And Delay 2
 	And I finish line editing in "ItemList" table
 	And I go to line in "ItemList" table
@@ -779,8 +779,8 @@ Scenario: create SalesOrder023001
 			| 'Item key' |
 			| 'L/Green'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I activate "Profit loss center" field in "ItemList" table
 		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
@@ -810,8 +810,8 @@ Scenario: create SalesOrder023001
 		And I move to the next attribute
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "4,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "4,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I activate "Profit loss center" field in "ItemList" table
 		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
@@ -881,8 +881,8 @@ Scenario: create SalesOrder023005
 		| 'Item key' |
 		| 'L/Green'  |
 	And I select current line in "List" table
-	And I activate "Q" field in "ItemList" table
-	And I input "10,000" text in "Q" field of "ItemList" table
+	And I activate "Quantity" field in "ItemList" table
+	And I input "10,000" text in "Quantity" field of "ItemList" table
 	And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 	And I activate "Profit loss center" field in "ItemList" table
 	And I click choice button of "Profit loss center" attribute in "ItemList" table
@@ -907,8 +907,8 @@ Scenario: create SalesOrder023005
 	And I move to the next attribute
 	And I click choice button of "Item key" attribute in "ItemList" table
 	And I select current line in "List" table
-	And I activate "Q" field in "ItemList" table
-	And I input "14,000" text in "Q" field of "ItemList" table
+	And I activate "Quantity" field in "ItemList" table
+	And I input "14,000" text in "Quantity" field of "ItemList" table
 	And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 	And I activate "Profit loss center" field in "ItemList" table
 	And I click choice button of "Profit loss center" attribute in "ItemList" table
@@ -1020,8 +1020,8 @@ Scenario: create SalesReturnOrder028004
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I input "550,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
@@ -1066,9 +1066,9 @@ Scenario: create SalesReturnOrder028001
 		| 'Item'     |
 		| 'Trousers' |
 	And I delete a line in "ItemList" table
-	And I activate "Q" field in "ItemList" table
+	And I activate "Quantity" field in "ItemList" table
 	And I select current line in "ItemList" table
-	And I input "1,000" text in "Q" field of "ItemList" table
+	And I input "1,000" text in "Quantity" field of "ItemList" table
 	And I input "466,10" text in "Price" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 		And I move to "Item list" tab
@@ -1120,8 +1120,8 @@ Scenario: create SalesInvoice024025
 			| 'Item key' |
 			| 'L/Green'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "20,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I set "Use shipment confirmation" checkbox in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
@@ -1234,8 +1234,8 @@ Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
@@ -1276,7 +1276,7 @@ Scenario: create SalesReturn30001
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -1321,7 +1321,7 @@ Scenario: create PurchaseReturn300301
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "500,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"

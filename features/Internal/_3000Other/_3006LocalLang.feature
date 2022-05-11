@@ -213,8 +213,8 @@ Scenario: _300604 Turkish description search in Sales order
 			| Item     | Item key    |
 			| Shirt TR | 38/Black TR |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| Item     |

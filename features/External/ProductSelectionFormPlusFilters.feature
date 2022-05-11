@@ -122,8 +122,8 @@ Scenario: check the product selection form with price information in Sales order
 			| Item  | Item key |
 			| Shirt | 36/Red   |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
@@ -276,8 +276,8 @@ Scenario: check the product selection form with price information in Sales invoi
 			| Item  | Item key |
 			| Shirt | 36/Red   |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
@@ -411,8 +411,8 @@ Scenario: check the product selection form with price information in Purchase in
 			| Item  | Item key |
 			| Shirt | 36/Red   |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
@@ -545,8 +545,8 @@ Scenario: check the product selection form with price information in Purchase or
 			| Item  | Item key |
 			| Shirt | 36/Red   |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines

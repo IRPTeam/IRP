@@ -105,9 +105,9 @@ Scenario: _028800 preparation (Shipment confirmation)
 					| 'Number'                          |
 					| "$$NumberPurchaseReturn022314$$"|
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPostAndClose"
 	* Check or create InventoryTransfer021030

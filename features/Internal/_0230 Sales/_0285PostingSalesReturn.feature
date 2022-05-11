@@ -197,9 +197,9 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 // 		And I go to line in "ItemList" table
 // 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 // 			| '1' | 'Dress' | 'XS/Blue'  | '1,000' |
-// 		And I activate "Q" field in "ItemList" table
+// 		And I activate "Quantity" field in "ItemList" table
 // 		And I select current line in "ItemList" table
-// 		And I input "7,000" text in "Q" field of "ItemList" table
+// 		And I input "7,000" text in "Quantity" field of "ItemList" table
 // 		And I finish line editing in "ItemList" table
 // 		And "RowIDInfo" table contains lines
 // 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
@@ -211,9 +211,9 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 // 		And I go to line in "ItemList" table
 // 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 // 			| '1' | 'Dress' | 'XS/Blue'  | '7,000' |
-// 		And I activate "Q" field in "ItemList" table
+// 		And I activate "Quantity" field in "ItemList" table
 // 		And I select current line in "ItemList" table
-// 		And I input "1,000" text in "Q" field of "ItemList" table
+// 		And I input "1,000" text in "Quantity" field of "ItemList" table
 // 		And I finish line editing in "ItemList" table
 // 	* Change checkbox Use Shipment confirmation and check RowIDInfo
 // 		And I move to "Item list" tab
@@ -351,23 +351,23 @@ Scenario: _028509 create Sales return without bases document
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '1' | 'Dress' | 'M/White' | 'pcs' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "100" text in "Q" field of "ItemList" table
+		And I input "100" text in "Quantity" field of "ItemList" table
 		And I input "200" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200" text in "Q" field of "ItemList" table
+		And I input "200" text in "Quantity" field of "ItemList" table
 		And I input "210" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key' | 'Unit' |
 			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "300" text in "Q" field of "ItemList" table
+		And I input "300" text in "Quantity" field of "ItemList" table
 		And I input "250" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
@@ -466,9 +466,9 @@ Scenario: _028510 check filling in Row Id info table in the SR
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
@@ -481,9 +481,9 @@ Scenario: _028510 check filling in Row Id info table in the SR
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Q'     |
 			| '2' | 'Dress' | 'L/Green'  | '7,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 		

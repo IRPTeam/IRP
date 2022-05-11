@@ -488,7 +488,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -523,7 +523,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -893,7 +893,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -926,7 +926,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -1148,8 +1148,8 @@ Scenario: _0154103 check Sales order when changing date
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/Brown'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -1216,8 +1216,8 @@ Scenario: _0154104 check Sales invoice when changing date
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/Brown'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'SalesTax' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -1346,7 +1346,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And Delay 2
 		* Check filling in prices
@@ -1381,7 +1381,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -1738,7 +1738,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -1771,7 +1771,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -4219,8 +4219,8 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 	* Check the selection by Planing transaction basis
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number'                                  | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
@@ -4236,8 +4236,8 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And I go to line in "List" table
 		| 'Number'                                  | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
@@ -4247,8 +4247,8 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And I go to line in "List" table
 		| 'Number'                                  | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
@@ -4260,8 +4260,8 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And I go to line in "List" table
 		| 'Number'                                  | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
@@ -4303,8 +4303,8 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
@@ -4317,8 +4317,8 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency'    | 'Company'      |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
@@ -4328,8 +4328,8 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number'                              | 'Sender'            | 'Send currency' | 'Company'      |
 		| '$$NumberCashTransferOrder01541003$$' | 'Bank account, TRY' | 'TRY'           | 'Main Company' |
@@ -4340,8 +4340,8 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		And in the table "PaymentList" I click "Delete" button
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
@@ -4386,8 +4386,8 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 	* Check the selection by Planing transaction basis
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
@@ -4400,8 +4400,8 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
@@ -4410,8 +4410,8 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
@@ -4421,8 +4421,8 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		And in the table "PaymentList" I click "Delete" button
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
@@ -4467,8 +4467,8 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 	* Check the selection by Planing transaction basis
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 			| 'Number'                              | 'Sender'       | 'Send currency' | 'Company'      |
 			| '$$NumberCashTransferOrder01541002$$' | 'Cash desk №2' | 'USD'           | 'Main Company' |
@@ -4481,8 +4481,8 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 			| 'Number'                              | 'Sender'       | 'Send currency' | 'Company'      |
 			| '$$NumberCashTransferOrder01541002$$' | 'Cash desk №2' | 'USD'           | 'Main Company' |
@@ -4491,8 +4491,8 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number'                              | 'Sender'       | 'Send currency' | 'Company'      |
 		| '$$NumberCashTransferOrder01541002$$' | 'Cash desk №2' | 'USD'           | 'Main Company' |
@@ -4502,8 +4502,8 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		And in the table "PaymentList" I click "Delete" button
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number'                              | 'Sender'       | 'Send currency' | 'Company'      |
 		| '$$NumberCashTransferOrder01541002$$' | 'Cash desk №2' | 'USD'           | 'Main Company' |
@@ -4542,8 +4542,8 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 	* Check the selection by Planing transaction basis
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 			| 'Number'                                  | 'Sender'              | 'Company'      | 'Send currency' |
 			| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
@@ -4556,8 +4556,8 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 			| 'Number'                                  | 'Sender'              | 'Company'      | 'Send currency' |
 			| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
@@ -4566,8 +4566,8 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 			| 'Number'                                  | 'Sender'              | 'Company'      | 'Send currency' |
 			| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
@@ -4577,8 +4577,8 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 		And in the table "PaymentList" I click "Delete" button
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 			| 'Number'                                  | 'Sender'              | 'Company'      | 'Send currency' |
 			| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
@@ -4617,8 +4617,8 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 	* Check the selection by Planing transaction basis
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
 		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
@@ -4631,8 +4631,8 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number'                              | 'Sender'              | 'Send currency' | 'Company'      |
 		| '$$NumberCashTransferOrder01541004$$' | 'Bank account 2, EUR' | 'EUR'           | 'Main Company' |
@@ -4641,8 +4641,8 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number'                              | 'Sender'              | 'Send currency' | 'Company'      |
 		| '$$NumberCashTransferOrder01541004$$' | 'Bank account 2, EUR' | 'EUR'           | 'Main Company' |
@@ -4652,8 +4652,8 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 		And in the table "PaymentList" I click "Delete" button
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
-		And I save number of "List" table lines as "Q"
-		Then "Q" variable is equal to 1
+		And I save number of "List" table lines as "Quantity"
+		Then "Quantity" variable is equal to 1
 		And "List" table contains lines
 		| 'Number'                              | 'Sender'              | 'Send currency' | 'Company'      |
 		| '$$NumberCashTransferOrder01541004$$' | 'Bank account 2, EUR' | 'EUR'           | 'Main Company' |
@@ -5128,7 +5128,7 @@ Scenario: _0154140 check filling in and refilling Sales order closing
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -5163,7 +5163,7 @@ Scenario: _0154140 check filling in and refilling Sales order closing
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -5509,7 +5509,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And Delay 2
 		* Check filling in prices
@@ -5544,7 +5544,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -5831,7 +5831,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -5845,7 +5845,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -5936,7 +5936,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -6009,7 +6009,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -6023,7 +6023,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -6114,7 +6114,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -6190,7 +6190,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -6204,7 +6204,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -6295,7 +6295,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -6356,7 +6356,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -6370,7 +6370,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -6461,7 +6461,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -6530,7 +6530,7 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"	
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -6544,7 +6544,7 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -6653,7 +6653,7 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -6722,7 +6722,7 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"	
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -6736,7 +6736,7 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -6845,7 +6845,7 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -6925,7 +6925,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -6939,7 +6939,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -7030,7 +7030,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -7094,7 +7094,7 @@ Scenario: _0154157 check function DontCalculateRow in the Sales return order
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"	
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7108,7 +7108,7 @@ Scenario: _0154157 check function DontCalculateRow in the Sales return order
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'L/Green' |
 			And I select current line in "List" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -7199,7 +7199,7 @@ Scenario: _0154157 check function DontCalculateRow in the Sales return order
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -7269,7 +7269,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7283,7 +7283,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			| 'Item'  | 'Item key'  |
 			| 'Dress' | 'L/Green' |
 		And I select current line in "List" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -7307,7 +7307,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "3,000" text in "Q" field of "ItemList" table
+			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
@@ -7346,7 +7346,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'en description is empty' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
@@ -7392,7 +7392,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7406,7 +7406,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 			| 'Item'  | 'Item key'  |
 			| 'Dress' | 'L/Green' |
 		And I select current line in "List" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -7430,7 +7430,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "3,000" text in "Q" field of "ItemList" table
+			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
@@ -7469,7 +7469,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
@@ -7515,7 +7515,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7529,7 +7529,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 			| 'Item'  | 'Item key'  |
 			| 'Dress' | 'L/Green' |
 		And I select current line in "List" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -7553,7 +7553,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "3,000" text in "Q" field of "ItemList" table
+			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
@@ -7591,7 +7591,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | ''              | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
@@ -7638,7 +7638,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7652,7 +7652,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 			| 'Item'  | 'Item key'  |
 			| 'Dress' | 'L/Green' |
 		And I select current line in "List" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -7676,7 +7676,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "3,000" text in "Q" field of "ItemList" table
+			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
@@ -7714,7 +7714,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
@@ -7764,7 +7764,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7778,7 +7778,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 			| 'Item'  | 'Item key'  |
 			| 'Dress' | 'L/Green' |
 		And I select current line in "List" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -7802,7 +7802,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "3,000" text in "Q" field of "ItemList" table
+			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
@@ -7840,7 +7840,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
@@ -7889,7 +7889,7 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -7903,7 +7903,7 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 			| 'Item'  | 'Item key'  |
 			| 'Dress' | 'L/Green' |
 		And I select current line in "List" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
@@ -7927,7 +7927,7 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "3,000" text in "Q" field of "ItemList" table
+			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
@@ -7965,7 +7965,7 @@ Scenario: _0154165 check tax and net amount calculation when change total amount
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |

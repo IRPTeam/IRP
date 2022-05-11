@@ -243,7 +243,7 @@ Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price includes t
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the calculation of VAT and Sales Tax
 		And "ItemList" table contains lines
@@ -266,7 +266,7 @@ Scenario: _090202 VAT and Sales Tax calculation in Sales order (Price includes t
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I move to the next attribute
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Net amount' | 'Total amount' |
@@ -323,7 +323,7 @@ Scenario: _090203 VAT and Sales Tax calculation in Sales order (Price includes t
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the calculation of VAT and Sales Tax
 		And "ItemList" table contains lines
@@ -346,7 +346,7 @@ Scenario: _090203 VAT and Sales Tax calculation in Sales order (Price includes t
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I move to the next attribute
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Q'     | 'Tax amount' | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
@@ -403,7 +403,7 @@ Scenario: _090204 manual tax correction in Sales order
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Manual tax correction and check display
 		And I activate "Tax amount" field in "ItemList" table
@@ -420,17 +420,17 @@ Scenario: _090204 manual tax correction in Sales order
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | '75,00'      | '1%'       | 'pcs'  | '400,00'     | '475,00'       |
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "75,00"
 	* Check deleting manual correction when quantity changes
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount'  | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | '152,00'      | '1%'       | 'pcs'   | '800,00'      | '952,00'     |
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "152,00"
 	* Check deleting manual correction when quantity changes
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount'  | 'SalesTax' | 'Unit' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | '152,00'      | '1%'       | 'pcs'   | '800,00'      | '952,00'     |
@@ -513,7 +513,7 @@ Scenario: _090205 check tax transfer in Sales invoice when it is created based o
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -530,7 +530,7 @@ Scenario: _090205 check tax transfer in Sales invoice when it is created based o
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I move to the next attribute
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Price type'        | 'Q'     | 'Unit' | 'SalesTax' | 'Tax amount' | 'Net amount' | 'Total amount' |

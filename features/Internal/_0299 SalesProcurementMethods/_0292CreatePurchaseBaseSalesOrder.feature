@@ -123,7 +123,7 @@ Scenario: _029201 create Purchase order based on Sales order
 			| 'Dress' | 'M/White'  | 'Vendor price, USD' | '8,000' |
 		And I select current line in "ItemList" table
 		And I input "21,00" text in "Price" field of "ItemList" table
-		And I input "15,00" text in "Q" field of "ItemList" table
+		And I input "15,00" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I select "Approved" exact value from "Status" drop-down list
 	* Add items from SO 503
@@ -161,7 +161,7 @@ Scenario: _029201 create Purchase order based on Sales order
 			| 'Trousers' | '38/Yellow' | '10,000' |
 		And I select current line in "ItemList" table
 		And I input "20,00" text in "Price" field of "ItemList" table
-		And I input "20,00" text in "Q" field of "ItemList" table
+		And I input "20,00" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Add one more item
 		And in the table "ItemList" I click the button named "ItemListAdd"

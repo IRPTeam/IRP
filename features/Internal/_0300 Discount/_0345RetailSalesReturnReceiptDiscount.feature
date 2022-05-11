@@ -51,7 +51,7 @@ Scenario: _034501 check discount in Retail sales receipt
 				| 'Item key' |
 				| 'M/White'  |
 			And I select current line in "List" table
-			And I input "100" text in "Q" field of "ItemList" table
+			And I input "100" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -65,7 +65,7 @@ Scenario: _034501 check discount in Retail sales receipt
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I input "10" text in "Q" field of "ItemList" table
+			And I input "10" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Discount price 1	
 			And in the table "ItemList" I click "% Offers" button
@@ -167,7 +167,7 @@ Scenario: _034502 check discount in Retail sales receipt 5+1
 				| 'Item key' |
 				| 'M/White'  |
 			And I select current line in "List" table
-			And I input "100" text in "Q" field of "ItemList" table
+			And I input "100" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -181,7 +181,7 @@ Scenario: _034502 check discount in Retail sales receipt 5+1
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I input "10" text in "Q" field of "ItemList" table
+			And I input "10" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Discount 5+1
 			And in the table "ItemList" I click "% Offers" button
@@ -241,13 +241,13 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 				| 'Item'  | 'Item key' | 'Q'       |
 				| 'Dress' | 'L/Green'  | '10,000' |
 			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' | 'Q'       |
 				| 'Dress' | 'M/White'  | '100,000' |
 			And I select current line in "ItemList" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "315,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "2 402,54"
@@ -261,7 +261,7 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 				| 'Item'  | 'Item key' | 'Q'       |
 				| 'Dress' | 'M/White'  | '5,000' |
 			And I select current line in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table		
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "575,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "4 385,59"
@@ -313,7 +313,7 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 				| 'Item'  | 'Item key' | 'Q'       |
 				| 'Dress' | 'M/White'  | '100,000' |
 			And I select current line in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table		
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |

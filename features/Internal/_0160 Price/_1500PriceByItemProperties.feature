@@ -341,8 +341,8 @@ Scenario: _150004 check the price calculation according to the specification (ba
 				| Item  | Item key  |
 				| Dress | Dress/A-8 |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
@@ -372,8 +372,8 @@ Scenario: _150004 check the price calculation according to the specification (ba
 				| Item  | Item key  |
 				| Dress | Dress/A-8 |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
@@ -403,8 +403,8 @@ Scenario: _150004 check the price calculation according to the specification (ba
 				| Item  | Item key  |
 				| Dress | Dress/A-8 |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
@@ -434,8 +434,8 @@ Scenario: _150004 check the price calculation according to the specification (ba
 				| Item  | Item key  |
 				| Dress | Dress/A-8 |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
@@ -474,8 +474,8 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 				| Item              | Item key  |
 				| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
@@ -504,8 +504,8 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 				| Item              | Item key  |
 				| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
@@ -534,8 +534,8 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 				| Item              | Item key  |
 				| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
@@ -564,8 +564,8 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 				| Item              | Item key  |
 				| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
@@ -596,8 +596,8 @@ Scenario: _150005 price check by properties
 				| Item     | Item key  |
 				| Dress    | L/Green |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
@@ -626,8 +626,8 @@ Scenario: _150005 price check by properties
 				| Item     | Item key  |
 				| Dress    | L/Green |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
@@ -656,8 +656,8 @@ Scenario: _150005 price check by properties
 				| Item     | Item key  |
 				| Dress    | L/Green |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table
@@ -686,8 +686,8 @@ Scenario: _150005 price check by properties
 				| Item     | Item key  |
 				| Dress    | L/Green |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price type" field in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
 			And I go to line in "List" table

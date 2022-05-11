@@ -71,7 +71,7 @@ Scenario: _034802 check discount recalculation when change quantity in the SaLes
 				| 'Item'  | 'Item key' | 'Q'       |
 				| 'Dress' | 'L/Green'  | '20,000' |
 			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "55,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "419,49"
@@ -103,7 +103,7 @@ Scenario: _034803 check discount recalculation when change quantity in the SaLes
 				| 'Item'  | 'Item key' | 'Q'       |
 				| 'Dress' | 'L/Green'  | '20,000' |
 			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "55,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "419,49"

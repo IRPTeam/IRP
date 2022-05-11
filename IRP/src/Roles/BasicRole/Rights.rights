@@ -648,4 +648,11 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>CommonForm.LoadDataFromTable</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

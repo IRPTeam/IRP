@@ -142,6 +142,10 @@ Procedure RecalculateItemList(Object, ArrayOfFillingRows, ArrayOfFillingColumns)
 		Property = New Structure("DataPath", TrimAll(PropertyName));
 		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
 	EndDo;
+	For Each RowItemList In Object.ItemList Do
+			RowItemList.UseSerialLotNumber = 
+				Parameters.ExtractedData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey) <> Undefined;
+	EndDo;
 EndProcedure
 
 Function GetArrayOfInstance(GenerateParameters) Export

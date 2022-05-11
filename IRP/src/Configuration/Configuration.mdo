@@ -539,6 +539,7 @@
   <commonForms>CommonForm.EditCurrencies</commonForms>
   <commonForms>CommonForm.EditHiddenTables</commonForms>
   <commonForms>CommonForm.EditTrialBalanceAccounts</commonForms>
+  <commonForms>CommonForm.LoadDataFromTable</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
@@ -712,6 +713,7 @@
   <enums>Enum.CalculationMode</enums>
   <enums>Enum.AllocationMode</enums>
   <enums>Enum.AllocationMethod</enums>
+  <enums>Enum.SearchDataOrder</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>

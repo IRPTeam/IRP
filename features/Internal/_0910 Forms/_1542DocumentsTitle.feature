@@ -332,7 +332,7 @@ Scenario: _02014 check the display of the header of the collapsible group in Phy
 		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Store: Store 01" text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
-        |'And I click Select button of  "Responsible person" field'|
+        |'And I click Select button of  "Status" field'|
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 

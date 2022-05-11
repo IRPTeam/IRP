@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="48c98b54-9e77-42fe-804d-d0c4afbfb4b7">
+  <producedTypes>
+    <refType typeId="7601f9ff-94e1-4676-8ce3-aced85fd75ee" valueTypeId="1955e960-2630-42ef-88b7-ddb77863f21d"/>
+    <listType typeId="5dfb1598-88ed-45a3-a7e1-5b2ba8aeaf14" valueTypeId="5c48217c-5aba-499f-b573-673a7fc6497d"/>
+    <managerType typeId="6143f60c-6ca4-4279-82b5-929b1848cb40" valueTypeId="ab4ddd6d-0325-4170-9aa0-328adc61add7"/>
+  </producedTypes>
+  <name>SearchDataOrder</name>
+  <synonym>
+    <key>en</key>
+    <value>Search data order</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>QuickChoice</choiceMode>
+  <enumValues uuid="35646389-9b3c-48e0-8668-a6f649bc83e0">
+    <name>OnlyCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Only code</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="39880074-de3d-404e-a254-5aa31297724d">
+    <name>OnlyDescription</name>
+    <synonym>
+      <key>en</key>
+      <value>Only description</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="7ff8873e-35ce-4859-b967-132f1f3eed33">
+    <name>CodeThenDescription</name>
+    <synonym>
+      <key>en</key>
+      <value>Code then description</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

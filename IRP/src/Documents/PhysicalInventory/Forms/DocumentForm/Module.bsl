@@ -288,6 +288,11 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
+Procedure LoadDataFromTable(Command)
+	OpenForm("CommonForm.LoadDataFromTable");
+EndProcedure
+
+&AtClient
 Procedure FillExpCount(Command)
 	If DocPhysicalInventoryServer.HavePhysicalCountByLocation(Object.Ref) Then
 		ShowMessageBox(Undefined, R().InfoMessage_006);

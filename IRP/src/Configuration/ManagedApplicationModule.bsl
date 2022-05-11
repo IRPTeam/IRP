@@ -33,6 +33,8 @@ Procedure OnStart()
 	ClientApplication.SetCaption(ServiceSystemClient.GetProgramTitle());
 	
 	AttachIdleHandler("ConnectAllEquipments", 0.1, True);
+	
+		OpenForm("CommonForm.LoadDataFromTable");
 EndProcedure
 
 // Before start.

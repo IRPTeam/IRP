@@ -2415,7 +2415,6 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
       <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
     </items>
@@ -2489,6 +2488,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>Object.RegisterRecords</segments>
     </notDefaultUseAlwaysAttributes>

@@ -67,4 +67,8 @@
   <content>Catalog.LegalNameContracts</content>
   <content>Catalog.PartnerSegments</content>
   <content>InformationRegister.PartnerSegments</content>
+  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.BasisDocument</content>
+  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.BasisDocument</content>
+  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.BasisDocument</content>
+  <content>Document.CashPayment.TabularSection.PaymentList.Attribute.BasisDocument</content>
 </mdclass:FunctionalOption>

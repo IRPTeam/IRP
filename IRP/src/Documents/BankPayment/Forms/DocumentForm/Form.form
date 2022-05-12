@@ -2684,7 +2684,6 @@
     <edit>
       <common>true</common>
     </edit>
-    <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
       <segments>Object.RegisterRecords</segments>
     </notDefaultUseAlwaysAttributes>

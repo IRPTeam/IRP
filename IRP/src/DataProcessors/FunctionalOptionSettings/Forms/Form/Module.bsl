@@ -14,6 +14,7 @@ EndProcedure
 &AtClient
 Procedure Save(Command)
 	SeveAtServer();
+	RefreshInterface();
 EndProcedure
 
 &AtServer
@@ -53,4 +54,14 @@ Procedure ChangeChecked(Value)
 	For Each Row In ThisObject.FunctionalOptions Do
 		Row.Use = Value;
 	EndDo;
+EndProcedure
+
+&AtClient
+Procedure UpdateDefaults(Command)
+	UpdateDefaultsAtServer();
+EndProcedure
+
+&AtServerNoContext
+Procedure UpdateDefaultsAtServer()
+	FOServer.UpdateDefaults();	
 EndProcedure

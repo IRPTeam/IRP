@@ -198,21 +198,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="9e8f5071-c507-4d74-ac75-09fb64d9c5e9">
-    <name>Opponent</name>
-    <synonym>
-      <key>en</key>
-      <value>Opponent</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="f8cf4d21-0e13-49e9-bd80-0146820323e2">
     <name>ManagerSegment</name>
     <synonym>

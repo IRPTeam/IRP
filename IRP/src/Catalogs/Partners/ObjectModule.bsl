@@ -8,9 +8,17 @@ Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	If Not FOServer.IsUseCompanies() Then
-		AutoCreateLegalName();
+	
+	AgreementTypes = New Array();
+	If ThisObject.Customer Then
+		AgreementTypes.Add(Enums.AgreementTypes.Customer);
 	EndIf;
+	If ThisObject.Vendor Then
+		AgreementTypes.Add(Enums.AgreementTypes.Vendor);
+	EndIf;
+	Parameters = New Structure("Partner, AgreementTypes", ThisObject, AgreementTypes);
+	FOServer.CreateDefault_LegalName(Parameters);
+	FOServer.CreateDefault_Agreement(Parameters);
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -19,29 +27,3 @@ Procedure BeforeDelete(Cancel)
 	EndIf;
 EndProcedure
 
-Procedure AutoCreateLegalName()
-	Query = New Query();
-	Query.Text = 
-	"SELECT TOP 1
-	|	Table.Ref
-	|FROM 
-	|	Catalog.Companies AS Table
-	|WHERE
-	|	Table.Partner = &Partner";
-	Query.SetParameter("Partner", ThisObject.Ref);
-	QueryResult = Query.Execute();
-	If QueryResult.IsEmpty() Then
-		NewItem = Catalogs.Companies.CreateItem();
-		FillPropertyValues(NewItem, ThisObject, , "Parent, Owner, Ref, Code");
-		NewItem.Type = Enums.CompanyLegalType.Company;
-		NewItem.Partner = ThisObject.Ref;
-		NewItem.Write();
-	Else
-		QuerySelection = QueryResult.Select();
-		While QuerySelection.Next() Do
-			ExistsItem = QuerySelection.Ref.GetObject();
-			ExistsItem.DeletionMark = ThisObject.DeletionMark;
-			ExistsItem.Write();
-		EndDo;
-	EndIf;
-EndProcedure

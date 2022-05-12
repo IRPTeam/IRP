@@ -1,3 +1,4 @@
+
 #Region PrintForm
 
 Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
@@ -681,3 +682,22 @@ Function T6020S_BatchKeysInfo()
 EndFunction
 
 #EndRegion
+
+Procedure FormGetProcessing(FormType, Parameters, SelectedForm, AdditionalInfo, StandardProcessing)
+	If FormType = "ListForm" And Constants.UseSimpleMode.Get() Then
+		Query = New Query();
+		Query.Text = 
+		"SELECT TOP 1
+		|	OpeningEntry.Ref
+		|FROM
+		|	Document.OpeningEntry AS OpeningEntry";
+		QueryResult = Query.Execute();
+		QuerySelection = QueryResult.Select();
+		If QuerySelection.Next() Then
+			Parameters.Insert("Key", QuerySelection.Ref);
+		EndIf;
+		StandardProcessing = False;
+		SelectedForm = Metadata.Documents.OpeningEntry.DefaultObjectForm;
+	EndIf;
+EndProcedure
+

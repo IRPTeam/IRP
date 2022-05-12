@@ -687,7 +687,7 @@ Procedure FormGetProcessing(FormType, Parameters, SelectedForm, AdditionalInfo, 
 	If FormType = "ListForm" And Constants.UseSimpleMode.Get() Then
 		Query = New Query();
 		Query.Text = 
-		"SELECT TOP 1
+		"SELECT TOP 1 ALLOWED
 		|	OpeningEntry.Ref
 		|FROM
 		|	Document.OpeningEntry AS OpeningEntry";

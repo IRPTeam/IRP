@@ -41,7 +41,7 @@ Scenario: _034801 preparation
 		And in the table "Offers" I click "OK" button
 	* Check the discount calculation
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
+			| 'Item'  | 'Price'  | 'Item key' | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
 			| 'Dress' | '550,00' | 'L/Green'  | '20,000' | '1 100,00'      | 'pcs'  | '9 900,00'     | '1 510,17'   | '8 389,83'   |
 		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "1 100,00"
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "8 389,83"
@@ -64,11 +64,11 @@ Scenario: _034802 check discount recalculation when change quantity in the SaLes
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "1 510,17"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "9 900,00"
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
+			| 'Item'  | 'Price'  | 'Item key' | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
 			| 'Dress' | '550,00' | 'L/Green'  | '20,000' | '1 100,00'      | 'pcs'  | '9 900,00'     | '1 510,17'   | '8 389,83'   |
 		* Change quantity and check discount recalculation
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
+				| 'Item'  | 'Item key' | 'Quantity'       |
 				| 'Dress' | 'L/Green'  | '20,000' |
 			And I select current line in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -78,7 +78,7 @@ Scenario: _034802 check discount recalculation when change quantity in the SaLes
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "75,51"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "495,00"
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
+				| 'Item'  | 'Price'  | 'Item key' | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
 				| 'Dress' | '550,00' | 'L/Green'  | '1,000' | '55,00'         | 'pcs'  | '495,00'       | '75,51'      | '419,49'     |
 			And I click the button named "FormPostAndClose"			
 
@@ -96,11 +96,11 @@ Scenario: _034803 check discount recalculation when change quantity in the SaLes
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "1 510,17"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "9 900,00"
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
+			| 'Item'  | 'Price'  | 'Item key' | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
 			| 'Dress' | '550,00' | 'L/Green'  | '20,000' | '1 100,00'      | 'pcs'  | '9 900,00'     | '1 510,17'   | '8 389,83'   |
 		* Change quantity and check discount recalculation
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
+				| 'Item'  | 'Item key' | 'Quantity'       |
 				| 'Dress' | 'L/Green'  | '20,000' |
 			And I select current line in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -110,6 +110,6 @@ Scenario: _034803 check discount recalculation when change quantity in the SaLes
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "75,51"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "495,00"
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
+				| 'Item'  | 'Price'  | 'Item key' | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
 				| 'Dress' | '550,00' | 'L/Green'  | '1,000' | '55,00'         | 'pcs'  | '495,00'       | '75,51'      | '419,49'     |
 			And I click the button named "FormPostAndClose"	

@@ -75,7 +75,7 @@ Scenario: _020002 check filling in Row Id info table in the ITO
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Q' | 'Basis key' | 'Current step' | 'Row ref'                              |
+			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref'                              |
 			| '$$Rov1InventoryTransferOrder020001$$' | ''      | '$$Rov1InventoryTransferOrder020001$$' | 'IT'        | '50,000'   | ''          | ''             | '$$Rov1InventoryTransferOrder020001$$' |
 			| '$$Rov2InventoryTransferOrder020001$$' | ''      | '$$Rov2InventoryTransferOrder020001$$' | 'IT'        | '10,000'   | ''          | ''             | '$$Rov2InventoryTransferOrder020001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -97,13 +97,13 @@ Scenario: _020002 check filling in Row Id info table in the ITO
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Q' | 'Basis key' | 'Current step' | 'Row ref'                              |
+			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref'                              |
 			| '$$Rov1InventoryTransferOrder020001$$' | ''      | '$$Rov1InventoryTransferOrder020001$$' | 'IT'        | '50,000'   | ''          | ''             | '$$Rov1InventoryTransferOrder020001$$' |
 			| '$$Rov2InventoryTransferOrder020001$$' | ''      | '$$Rov2InventoryTransferOrder020001$$' | 'IT'        | '10,000'   | ''          | ''             | '$$Rov2InventoryTransferOrder020001$$' |
 			| '$$Rov3InventoryTransferOrder020001$$' | ''      | '$$Rov3InventoryTransferOrder020001$$' | 'IT'        | '8,000'    | ''          | ''             | '$$Rov3InventoryTransferOrder020001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Q' | 'Basis key' | 'Current step' | 'Row ref'                              |
+			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref'                              |
 			| '$$Rov1InventoryTransferOrder020001$$' | ''      | '$$Rov1InventoryTransferOrder020001$$' | 'IT'        | '8,000'    | ''          | ''             | '$$Rov1InventoryTransferOrder020001$$' |
 	* Delete string and check Row ID Info tab
 		And I move to "Item list" tab
@@ -114,7 +114,7 @@ Scenario: _020002 check filling in Row Id info table in the ITO
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                              |
+			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key' | 'Current step' | 'Row ref'                              |
 			| '$$Rov1InventoryTransferOrder020001$$' | ''      | '$$Rov1InventoryTransferOrder020001$$' | 'IT'        | '50,000' | ''          | ''             | '$$Rov1InventoryTransferOrder020001$$' |
 			| '$$Rov2InventoryTransferOrder020001$$' | ''      | '$$Rov2InventoryTransferOrder020001$$' | 'IT'        | '10,000' | ''          | ''             | '$$Rov2InventoryTransferOrder020001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -129,7 +129,7 @@ Scenario: _020002 check filling in Row Id info table in the ITO
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Q' | 'Basis key' | 'Current step' | 'Row ref'                              |
+			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref'                              |
 			| '$$Rov1InventoryTransferOrder020001$$' | ''      | '$$Rov1InventoryTransferOrder020001$$' | 'IT'        | '7,000'    | ''          | ''             | '$$Rov1InventoryTransferOrder020001$$' |
 			| '$$Rov2InventoryTransferOrder020001$$' | ''      | '$$Rov2InventoryTransferOrder020001$$' | 'IT'        | '10,000'   | ''          | ''             | '$$Rov2InventoryTransferOrder020001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -165,7 +165,7 @@ Scenario: _020003 copy ITO and check filling in Row Id info table
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                              |
+			| 'Key'                                  | 'Basis' | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key' | 'Current step' | 'Row ref'                              |
 			| '$$Rov1InventoryTransferOrder020001$$' | ''      | '$$Rov1InventoryTransferOrder020001$$' | 'IT'        | '50,000' | ''          | ''             | '$$Rov1InventoryTransferOrder020001$$' |
 			| '$$Rov2InventoryTransferOrder020001$$' | ''      | '$$Rov2InventoryTransferOrder020001$$' | 'IT'        | '10,000' | ''          | ''             | '$$Rov2InventoryTransferOrder020001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -344,7 +344,7 @@ Scenario: _020014 create ITO based on Internal supply request
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '1' | '10,000'                | 'Dress' | 'S/Yellow' | '10,000'   | 'pcs'  | ''               |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '2' | '50,000'                | 'Dress' | 'XS/Blue'  | '50,000'   | 'pcs'  | ''               |
 			And "RowIDInfo" table contains lines
-				| 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+				| 'Basis'                                                 | 'Next step' | 'Quantity'      | 'Current step' |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'IT'          | '10,000' | 'ITO&PO&PI'    |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'IT'          | '50,000' | 'ITO&PO&PI'    |
 			Then the number of "RowIDInfo" table lines is "равно" "2"	
@@ -396,7 +396,7 @@ Scenario: _020014 create ITO based on Internal supply request
 		And I click "Save" button	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                                  | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                                  | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1InventoryTransferOrder020014$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | 'IT'        | '10,000' | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
 			| '2' | '$$Rov2InventoryTransferOrder020014$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'IT'        | '50,000' | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"			

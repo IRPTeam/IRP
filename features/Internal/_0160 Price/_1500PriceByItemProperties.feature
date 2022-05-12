@@ -353,7 +353,7 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  |  'Q'     | 'Unit' |
+			| 'Item'  | 'Price'    | 'Item key'  |  'Quantity'     | 'Unit' |
 			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000'  | 'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
@@ -384,7 +384,7 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  | 'Q'     | 'Unit' |
+			| 'Item'  | 'Price'    | 'Item key'  | 'Quantity'     | 'Unit' |
 			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000' | 'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase order
@@ -415,7 +415,7 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  | 'Q'     | 'Unit' |
+			| 'Item'  | 'Price'    | 'Item key'  | 'Quantity'     | 'Unit' |
 			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000' | 'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase invoice
@@ -446,7 +446,7 @@ Scenario: _150004 check the price calculation according to the specification (ba
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key'  | 'Q'     | 'Unit' |
+			| 'Item'  | 'Price'    | 'Item key'  | 'Quantity'     | 'Unit' |
 			| 'Dress' | '3 100,00' | 'Dress/A-8' | '1,000' | 'pcs'  |
 		And I close all client application windows
 
@@ -485,7 +485,7 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Q'     | 'Unit'  |
+			| 'Item'              | 'Price'    | 'Item key'                      | 'Quantity'     | 'Unit'  |
 			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
@@ -515,7 +515,7 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Q'     | 'Unit'  |
+			| 'Item'              | 'Price'    | 'Item key'                      | 'Quantity'     | 'Unit'  |
 			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase order
@@ -545,7 +545,7 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'              | 'Price'    | 'Item key'                      | 'Q'     | 'Unit'  |
+			| 'Item'              | 'Price'    | 'Item key'                      | 'Quantity'     | 'Unit'  |
 			| 'Bound Dress+Shirt' | '1 100,00' | 'Bound Dress+Shirt/Dress+Shirt' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase invoice
@@ -607,7 +607,7 @@ Scenario: _150005 price check by properties
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Q'     | 'Unit'  |
+			| 'Item'  | 'Price'  | 'Item key'| 'Quantity'     | 'Unit'  |
 			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Sales invoice
@@ -637,7 +637,7 @@ Scenario: _150005 price check by properties
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Q'     | 'Unit'  |
+			| 'Item'  | 'Price'  | 'Item key'| 'Quantity'     | 'Unit'  |
 			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase order
@@ -667,7 +667,7 @@ Scenario: _150005 price check by properties
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Q'     | 'Unit'  |
+			| 'Item'  | 'Price'  | 'Item key'| 'Quantity'     | 'Unit'  |
 			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
 		And I close all client application windows
 	* Price calculation in the Purchase invoice
@@ -697,7 +697,7 @@ Scenario: _150005 price check by properties
 			And I finish line editing in "ItemList" table
 		* Check price calculation
 			And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key'| 'Q'     | 'Unit'  |
+			| 'Item'  | 'Price'  | 'Item key'| 'Quantity'     | 'Unit'  |
 			| 'Dress' | '350,00' | 'L/Green' | '1,000' |  'pcs'  |
 		And I close all client application windows
 

@@ -101,25 +101,25 @@ Scenario: _029201 create Purchase order based on Sales order
 		And I input "10,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Price type'        | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Price type'        | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | 'Vendor price, USD' | '8,000' |
 		And I select current line in "ItemList" table
 		And I input "15,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price type'        | 'Q'     |
+			| 'Item'  | 'Item key' | 'Price type'        | 'Quantity'     |
 			| 'Shirt' | '38/Black' | 'Vendor price, USD' | '2,000' |
 		And I select current line in "ItemList" table
 		And I input "20,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price type'        | 'Q'      |
+			| 'Item'  | 'Item key' | 'Price type'        | 'Quantity'      |
 			| 'Shirt' | '38/Black' | 'Vendor price, USD' | '11,000' |
 		And I select current line in "ItemList" table
 		And I input "20,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price type'        | 'Q'     |
+			| 'Item'  | 'Item key' | 'Price type'        | 'Quantity'     |
 			| 'Dress' | 'M/White'  | 'Vendor price, USD' | '8,000' |
 		And I select current line in "ItemList" table
 		And I input "21,00" text in "Price" field of "ItemList" table
@@ -145,19 +145,19 @@ Scenario: _029201 create Purchase order based on Sales order
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Quantity'      |
 			| 'Dress' | 'XS/Blue'  | '10,000' |
 		And I select current line in "ItemList" table
 		And I input "17,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '36/Yellow' | '5,000' |
 		And I select current line in "ItemList" table
 		And I input "18,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'      |
+			| 'Item'     | 'Item key'  | 'Quantity'      |
 			| 'Trousers' | '38/Yellow' | '10,000' |
 		And I select current line in "ItemList" table
 		And I input "20,00" text in "Price" field of "ItemList" table
@@ -245,7 +245,7 @@ Scenario: _029201 create Purchase order based on Sales order
 	* Check Row ID tab
 		And I click the button named "FormPost"
 		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'  | 'Q'      | 'Unit'                   | 'Tax amount' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Sales order'                               | 'Purchase basis'                            |
+			| 'Item'       | 'Item key'  | 'Quantity'      | 'Unit'                   | 'Tax amount' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Sales order'                               | 'Purchase basis'                            |
 			| 'Trousers'   | '38/Yellow' | '5,000'  | 'pcs'                    | '7,63'       | '10,00' | '18%' | '42,37'      | '50,00'        | 'Sales order 501 dated 30.03.2021 11:56:21' | 'Sales order 501 dated 30.03.2021 11:56:21' |
 			| 'Trousers'   | '38/Yellow' | '8,000'  | 'pcs'                    | '18,31'      | '15,00' | '18%' | '101,69'     | '120,00'       | 'Sales order 502 dated 30.03.2021 11:56:28' | 'Sales order 502 dated 30.03.2021 11:56:28' |
 			| 'Shirt'      | '38/Black'  | '2,000'  | 'pcs'                    | '6,10'       | '20,00' | '18%' | '33,90'      | '40,00'        | 'Sales order 501 dated 30.03.2021 11:56:21' | 'Sales order 501 dated 30.03.2021 11:56:21' |
@@ -256,7 +256,7 @@ Scenario: _029201 create Purchase order based on Sales order
 			| 'Trousers'   | '38/Yellow' | '20,000' | 'pcs'                    | '61,02'      | '20,00' | '18%' | '338,98'     | '400,00'       | 'Sales order 503 dated 30.03.2021 11:57:06' | 'Sales order 503 dated 30.03.2021 11:57:06' |
 			| 'High shoes' | '37/19SD'   | '5,000'  | 'High shoes box (8 pcs)' | '85,42'      | '14,00' | '18%' | '474,58'     | '560,00'       | ''                                          | ''                                          |
 		And "RowIDInfo" table contains lines
-			| 'Key' | 'Basis'                                     | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key' | 'Basis'                                     | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '*'   | 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR'     | '5,000'  | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PO&PI'        | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
 			| '*'   | 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PI&GR'     | '8,000'  | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PO&PI'        | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' |
 			| '*'   | 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PI&GR'     | '2,000'  | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PO&PI'        | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' |
@@ -290,7 +290,7 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| '#' | 'Profit loss center' | 'Price type'              | 'Item'       | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'                   | 'Serial lot numbers' | 'Q'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                             | 'Detail' | 'Sales order'                               | 'Net amount' | 'Use goods receipt' |
+				| '#' | 'Profit loss center' | 'Price type'              | 'Item'       | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'                   | 'Serial lot numbers' | 'Quantity'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                             | 'Detail' | 'Sales order'                               | 'Net amount' | 'Use goods receipt' |
 				| '1' | ''              | 'en description is empty' | 'Trousers'   | '38/Yellow' | 'No'                 | '7,63'       | 'pcs'                    | ''                   | '5,000'  | '10,00' | '18%' | ''              | '50,00'        | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 501 dated 30.03.2021 11:56:21' | '42,37'      | 'Yes'               |
 				| '2' | ''              | 'en description is empty' | 'Trousers'   | '38/Yellow' | 'No'                 | '18,31'      | 'pcs'                    | ''                   | '8,000'  | '15,00' | '18%' | ''              | '120,00'       | ''                    | ''                        | 'Store 01' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | '101,69'     | 'No'                |
 				| '3' | ''              | 'en description is empty' | 'Shirt'      | '38/Black'  | 'No'                 | '6,10'       | 'pcs'                    | ''                   | '2,000'  | '20,00' | '18%' | ''              | '40,00'        | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 501 dated 30.03.2021 11:56:21' | '33,90'      | 'Yes'               |
@@ -300,25 +300,25 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 				| '7' | ''              | 'en description is empty' | 'Trousers'   | '36/Yellow' | 'No'                 | '13,73'      | 'pcs'                    | ''                   | '5,000'  | '18,00' | '18%' | ''              | '90,00'        | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 503 dated 30.03.2021 11:57:06' | '76,27'      | 'Yes'               |
 				| '8' | ''              | 'en description is empty' | 'High shoes' | '37/19SD'   | 'No'                 | '85,42'      | 'High shoes box (8 pcs)' | ''                   | '5,000'  | '14,00' | '18%' | ''              | '560,00'       | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | ''                                          | '474,58'     | 'Yes'               |
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Price' | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Price' | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '10,00' | '5,000' |
 			And I select current line in "ItemList" table
 			And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key'  | 'Price' | 'Q'     |
+				| 'Item'  | 'Item key'  | 'Price' | 'Quantity'     |
 				| 'Dress' | 'M/White' | '21,00' | '15,000' |
 			And I set "Use goods receipt" checkbox in "ItemList" table
 			And I finish line editing in "ItemList" table			
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Price' | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Price' | 'Quantity'     |
 				| 'Shirt' | '38/Black' | '20,00' | '2,000' |
 			And I select current line in "ItemList" table
 			And I input "3,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I click "Post" button
 			And I click "Show row key" button
 			And "RowIDInfo" table contains lines
-				| 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+				| 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
 				| '*'   | '$$PurchaseOrder029201$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'GR'        | '4,000'  | '$$Rov1PurchaseOrder029201$$' | 'PI&GR'        | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
 				| '*'   | '$$PurchaseOrder029201$$' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | ''          | '8,000'  | '$$Rov2PurchaseOrder029201$$' | 'PI&GR'        | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' |
 				| '*'   | '$$PurchaseOrder029201$$' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'GR'        | '3,000'  | '$$Rov3PurchaseOrder029201$$' | 'PI&GR'        | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' |
@@ -423,7 +423,7 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 			And I delete "$$Rov6GoodsReceipt0292021$$" variable
 			And I save the current field value as "$$Rov6GoodsReceipt0292021$$"	
 			And "RowIDInfo" table contains lines
-				| '#' | 'Key' | 'Basis'                      | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                      | 'Current step' | 'Row ref'                              |
+				| '#' | 'Key' | 'Basis'                      | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                      | 'Current step' | 'Row ref'                              |
 				| '1' | '*'   | '$$PurchaseInvoice0292021$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | ''          | '4,000'  | '$$Rov1PurchaseInvoice0292021$$' | 'GR'           | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
 				| '2' | '*'   | '$$PurchaseInvoice0292021$$' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | ''          | '3,000'  | '$$Rov3PurchaseInvoice0292021$$' | 'GR'           | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' |
 				| '3' | '*'   | '$$PurchaseInvoice0292021$$' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | ''          | '15,000' | '$$Rov5PurchaseInvoice0292021$$' | 'GR'           | '4a003d08-12af-4c34-98d5-5cdeb84616de' |
@@ -461,7 +461,7 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 				| '2' | 'Trousers' | ''                   | '38/Yellow' | 'Store 02' | ''                        | '20,000'   | ''              | 'pcs'  | '$$PurchaseOrder029201$$' | ''                 | 'USD'      | ''                   | 'Sales order 503 dated 30.03.2021 11:57:06' | '$$PurchaseOrder029201$$' | ''                         | ''             |
 			And I click "Show row key" button
 			And "RowIDInfo" table contains lines
-				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
 				| '1' | '*'   | '$$PurchaseOrder029201$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | ''          | '1,000'  | '$$Rov1PurchaseOrder029201$$' | 'PI&GR'        | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
 				| '2' | '*'   | '$$PurchaseOrder029201$$' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | ''          | '20,000' | '$$Rov8PurchaseOrder029201$$' | 'PI&GR'        | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' |
 			And I go to line in "ItemList" table
@@ -496,18 +496,18 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 			Then the number of "BasisesTree" table lines is "равно" "8"
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Q'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                             | 'Detail' | 'Sales order'                               | 'Net amount' | 'Use goods receipt' |
+				| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                             | 'Detail' | 'Sales order'                               | 'Net amount' | 'Use goods receipt' |
 				| '1' | ''              | 'en description is empty' | 'Trousers' | '38/Yellow' | 'No'                 | '1,53'       | 'pcs'  | ''                   | '1,000'  | '10,00' | '18%' | ''              | '10,00'        | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 501 dated 30.03.2021 11:56:21' | '8,47'       | 'Yes'               |
 				| '2' | ''              | 'en description is empty' | 'Trousers' | '38/Yellow' | 'No'                 | '61,02'      | 'pcs'  | ''                   | '20,000' | '20,00' | '18%' | ''              | '400,00'       | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 503 dated 30.03.2021 11:57:06' | '338,98'     | 'Yes'               |
 			And "GoodsReceiptsTree" table contains lines
-				| 'Item'     | 'Item key'  | 'Goods receipt'           | 'Invoice' | 'GR'     | 'Q'      |
+				| 'Item'     | 'Item key'  | 'Goods receipt'           | 'Invoice' | 'GR'     | 'Quantity'      |
 				| 'Trousers' | '38/Yellow' | ''                        | '1,000'   | '1,000'  | '1,000'  |
 				| ''         | ''          | '$$GoodsReceipt0292022$$' | ''        | '1,000'  | '1,000'  |
 				| 'Trousers' | '38/Yellow' | ''                        | '20,000'  | '20,000' | '20,000' |
 				| ''         | ''          | '$$GoodsReceipt0292022$$' | ''        | '20,000' | '20,000' |
 			And I click "Show row key" button
 			And "RowIDInfo" table contains lines
-				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
 				| '1' | '*'   | '$$GoodsReceipt0292022$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | ''          | '1,000'  | '$$Rov1GoodsReceipt0292022$$' | 'PI'           | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
 				| '2' | '*'   | '$$GoodsReceipt0292022$$' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | ''          | '20,000' | '$$Rov2GoodsReceipt0292022$$' | 'PI'           | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' |
 			And I click the button named "FormPost"
@@ -559,14 +559,14 @@ Scenario: _029203 create SI-SC based on SO (with procurement method - purchase)
 		And I click the button named "FormPost"
 		* Check ItemList tab
 			And "ItemList" table contains lines
-				| 'Key'                        | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
+				| 'Key'                        | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
 				| '$$Rov1SalesInvoice029203$$' | 'Store 01' | ''                    | '2,000'                 | '1' | ''              | 'en description is empty' | 'Service'  | 'Interner'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '30,51'      | '100,00' | '18%' | ''              | '169,49'     | '200,00'       | '31.03.2021'    | 'No'                        | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 				| '$$Rov2SalesInvoice029203$$' | 'Store 01' | ''                    | '8,000'                 | '2' | ''              | 'Basic Price Types'       | 'Trousers' | '38/Yellow' | 'No'                 | ''                   | '8,000'  | 'pcs'  | '488,14'     | '400,00' | '18%' | ''              | '2 711,86'   | '3 200,00'     | '31.03.2021'    | 'No'                        | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 				| '$$Rov3SalesInvoice029203$$' | 'Store 01' | ''                    | '11,000'                | '3' | ''              | 'Basic Price Types'       | 'Shirt'    | '38/Black'  | 'No'                 | ''                   | '11,000' | 'pcs'  | '587,29'     | '350,00' | '18%' | ''              | '3 262,71'   | '3 850,00'     | '31.03.2021'    | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 			Then the number of "ItemList" table lines is "равно" "3"
 		* Check RowIDInfo tab
 			And "RowIDInfo" table contains lines
-				| '#' | 'Key'                        | 'Basis'                                     | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+				| '#' | 'Key'                        | 'Basis'                                     | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 				| '1' | '$$Rov1SalesInvoice029203$$' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | ''          | '2,000'  | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI'           | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' |
 				| '2' | '$$Rov2SalesInvoice029203$$' | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | ''          | '8,000'  | '$$Rov2PurchaseInvoice0292021$$'       | 'SI&SC'        | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' |
 				| '3' | '$$Rov3SalesInvoice029203$$' | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'        | '11,000' | '$$Rov4PurchaseInvoice0292021$$'       | 'SI&SC'        | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' |
@@ -590,7 +590,7 @@ Scenario: _029203 create SI-SC based on SO (with procurement method - purchase)
 			| '$$Rov1ShipmentConfirmation029203$$' | 'Store 01' | '$$SalesInvoice029203$$' | '1' | '11,000'                | 'Shirt' | ''                   | '38/Black' | '11,000'   | '$$SalesInvoice029203$$' | 'pcs'  | 'Sales order 502 dated 30.03.2021 11:56:28' | ''                         | ''                      | ''                |
 		Then the number of "ItemList" table lines is "равно" "1"	
 		And "RowIDInfo" table became equal
-			| '#' | 'Key'                                | 'Basis'                  | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                  | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                                | 'Basis'                  | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                  | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1ShipmentConfirmation029203$$' | '$$SalesInvoice029203$$' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | ''          | '11,000' | '$$Rov3SalesInvoice029203$$' | 'SC'           | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I click the button named "FormPost"	
@@ -631,7 +631,7 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 			| '$$Rov1ShipmentConfirmation029204$$' | 'Store 01' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1' | '5,000'                 | 'Dress' | ''                   | 'M/White'  | '5,000'    | ''              | 'pcs'  | 'Sales order 502 dated 30.03.2021 11:56:28' | ''                         | ''                      | ''                |
 		Then the number of "ItemList" table lines is "равно" "1"
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                                | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                                | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Quantity'     | 'Basis key'                   | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1ShipmentConfirmation029204$$' | '$$GoodsReceipt0292021$$' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI'        | '5,000' | '$$Rov3GoodsReceipt0292021$$' | 'SI&SC'        | '4a003d08-12af-4c34-98d5-5cdeb84616de' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I delete "$$NumberShipmentConfirmation029204$$" variable
@@ -650,15 +650,15 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 		And I save the current field value as "$$Rov1SalesInvoice029204$$"	
 		And I click the button named "FormPost"	
 		And "ItemList" table contains lines
-			| 'Key'                                  | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
+			| 'Key'                                  | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
 			| '$$Rov1SalesInvoice029204$$' | 'Store 01' | ''                    | '5,000'                 | '1' | ''              | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '5,000' | 'pcs'  | '396,61'     | '520,00' | '18%' | ''              | '2 203,39'   | '2 600,00'     | '31.03.2021'    | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 		Then the number of "ItemList" table lines is "равно" "1"
 		And "ShipmentConfirmationsTree" table became equal
-			| 'Key'                        | 'Basis key'                          | 'Item'  | 'Shipment confirmation'          | 'Item key' | 'Invoice' | 'SC'    | 'Q'     |
+			| 'Key'                        | 'Basis key'                          | 'Item'  | 'Shipment confirmation'          | 'Item key' | 'Invoice' | 'SC'    | 'Quantity'     |
 			| '$$Rov1SalesInvoice029204$$' | ''                                   | 'Dress' | ''                               | 'M/White'  | '5,000'   | '5,000' | '5,000' |
 			| '$$Rov1SalesInvoice029204$$' | '$$Rov1ShipmentConfirmation029204$$' | ''      | '$$ShipmentConfirmation029204$$' | ''         | ''        | '5,000' | '5,000' |
 		And "RowIDInfo" table became equal
-			| '#' | 'Key'                        | 'Basis'                          | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                          | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                        | 'Basis'                          | 'Row ID'                               | 'Next step' | 'Quantity'     | 'Basis key'                          | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1SalesInvoice029204$$' | '$$ShipmentConfirmation029204$$' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | ''          | '5,000' | '$$Rov1ShipmentConfirmation029204$$' | 'SI'           | '4a003d08-12af-4c34-98d5-5cdeb84616de' |
 		And I close all client application windows
 

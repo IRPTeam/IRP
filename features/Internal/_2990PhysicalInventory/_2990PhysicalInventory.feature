@@ -419,7 +419,7 @@ Scenario: _2990004 create Physical inventory and check Row Id info tab
 	* Check row id info tab
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#' | 'Key'                              | 'Basis' | 'Row ID'                           | 'Next step'                     | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                          |
+			| '#' | 'Key'                              | 'Basis' | 'Row ID'                           | 'Next step'                     | 'Quantity'     | 'Basis key'                            | 'Current step' | 'Row ref'                          |
 			| '1' | '$$Rov1PhysicalInventory2990004$$' | ''      | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus'   | '5,000' | '                                    ' | ''             | '$$Rov1PhysicalInventory2990004$$' |
 			| '2' | '$$Rov2PhysicalInventory2990004$$' | ''      | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '2,000' | '                                    ' | ''             | '$$Rov2PhysicalInventory2990004$$' |
 		And I close all client application windows
@@ -524,7 +524,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			And I save the current field value as "$$Rov1StockAdjustmentAsSurplus2990006$$"
 			And I move to "Row ID Info" tab
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                     | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
+				| '#' | 'Key'                                     | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Quantity'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
 				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | '$$PhysicalInventory2990004$$' | '$$Rov1PhysicalInventory2990004$$' | ''          | '5,000' | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus' | '$$Rov1PhysicalInventory2990004$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Unlink line and check Row ID info tab
@@ -541,7 +541,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 				| 'Dress' | '5,000'    | 'S/Yellow' | 'Logistics department' | 'pcs'  | 'Revenue'      | ''               |
 			And I click the button named "FormPost"
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                     | 'Basis' | 'Row ID'                                  | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                                 |
+				| '#' | 'Key'                                     | 'Basis' | 'Row ID'                                  | 'Next step' | 'Quantity'     | 'Basis key'                            | 'Current step' | 'Row ref'                                 |
 				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | ''      | '$$Rov1StockAdjustmentAsSurplus2990006$$' | ''          | '5,000' | '                                    ' | ''             | '$$Rov1StockAdjustmentAsSurplus2990006$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Link line and check Row ID info tab
@@ -568,7 +568,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 				| 'Revenue'     |
 			And I select current line in "List" table
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                     | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
+				| '#' | 'Key'                                     | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Quantity'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
 				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | '$$PhysicalInventory2990004$$' | '$$Rov1PhysicalInventory2990004$$' | ''          | '5,000' | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus' | '$$Rov1PhysicalInventory2990004$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows
@@ -628,7 +628,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			And I save the current field value as "$$Rov1StockAdjustmentAsWriteOff2990007$$"
 			And I move to "Row ID Info" tab
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                      | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
+				| '#' | 'Key'                                      | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Quantity'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
 				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | '$$PhysicalInventory2990004$$' | '$$Rov2PhysicalInventory2990004$$' | ''          | '2,000' | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '$$Rov2PhysicalInventory2990004$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Unlink line and check Row ID info tab
@@ -645,7 +645,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 				| 'Dress' | '2,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Expense'      | ''               |
 			And I click the button named "FormPost"
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                      | 'Basis' | 'Row ID'                                   | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                                  |
+				| '#' | 'Key'                                      | 'Basis' | 'Row ID'                                   | 'Next step' | 'Quantity'     | 'Basis key'                            | 'Current step' | 'Row ref'                                  |
 				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | ''      | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | ''          | '2,000' | '                                    ' | ''             | '$$Rov1StockAdjustmentAsWriteOff2990007$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Link line and check Row ID info tab
@@ -672,7 +672,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 				| 'Expense'     |
 			And I select current line in "List" table
 			And "RowIDInfo" table became equal
-				| '#' | 'Key'                                      | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
+				| '#' | 'Key'                                      | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Quantity'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
 				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | '$$PhysicalInventory2990004$$' | '$$Rov2PhysicalInventory2990004$$' | ''          | '2,000' | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '$$Rov2PhysicalInventory2990004$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows

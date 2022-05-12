@@ -221,7 +221,7 @@ Scenario: _300604 Turkish description search in Sales order
 			| Candy Fruit |
 		And I delete a line in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'    | 'Q'     |
+			| 'Item'     | 'Item key'    | 'Quantity'     |
 			| 'Shirt TR' | '38/Black TR' | '1,000' |
 		And I close all client application windows
 

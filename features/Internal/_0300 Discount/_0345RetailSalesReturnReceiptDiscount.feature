@@ -76,7 +76,7 @@ Scenario: _034501 check discount in Retail sales receipt
 			And I select current line in "Offers" table
 			And in the table "Offers" I click "OK" button
 			And "ItemList" table contains lines
-				| 'Price'  | 'Detail' | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'       | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Detail' | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | ''       | 'Dress' | '18%' | 'M/White'  | '2 600,00'      | '100,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '7 535,59'   | '41 864,41'  | '49 400,00'    | 'Store 01' |
 				| '550,00' | ''       | 'Dress' | '18%' | 'L/Green'  | '275,00'        | '10,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '797,03'     | '4 427,97'   | '5 225,00'     | 'Store 01' |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "2 875,00"
@@ -105,7 +105,7 @@ Scenario: _034501 check discount in Retail sales receipt
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "7 894,06"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "51 750,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'       | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | 'Dress' | '18%' | 'M/White'  | '5 200,00'      | '100,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '7 138,98'   | '39 661,02'  | '46 800,00'    | 'Store 01' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
 			* Filling in payment tab
@@ -192,7 +192,7 @@ Scenario: _034502 check discount in Retail sales receipt 5+1
 			And I select current line in "Offers" table
 			And in the table "Offers" I click "OK" button
 			And "ItemList" table contains lines
-				| 'Price'  | 'Detail' | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'       | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Detail' | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | ''       | 'Dress' | '18%' | 'M/White'  | '8 320,00'      | '100,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '6 663,05'   | '37 016,95'  | '43 680,00'    | 'Store 01' |
 				| '550,00' | ''       | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "8 870,00"
@@ -233,18 +233,18 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "7 894,06"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "51 750,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | 'Dress' | '18%' | 'M/White'  | '5 200,00'      | '100,000' | 'pcs'  | 'No'                 | '7 138,98'   | '39 661,02'  | '46 800,00'    | 'Store 01' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
 		* Change quantity and check discount recalculation
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
+				| 'Item'  | 'Item key' | 'Quantity'       |
 				| 'Dress' | 'L/Green'  | '10,000' |
 			And I select current line in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
+				| 'Item'  | 'Item key' | 'Quantity'       |
 				| 'Dress' | 'M/White'  | '100,000' |
 			And I select current line in "ItemList" table
 			And I input "5,000" text in "Quantity" field of "ItemList" table
@@ -254,11 +254,11 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "432,46"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "2 835,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | 'Dress' | '18%' | 'M/White'  | '260,00'        | '5,000' | 'pcs'  | 'No'                 | '356,95'     | '1 983,05'   | '2 340,00'     | 'Store 01' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '55,00'         | '1,000' | 'pcs'  | 'No'                 | '75,51'      | '419,49'     | '495,00'       | 'Store 01' |
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
+				| 'Item'  | 'Item key' | 'Quantity'       |
 				| 'Dress' | 'M/White'  | '5,000' |
 			And I select current line in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
@@ -268,7 +268,7 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "789,41"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "5 175,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | 'Dress' | '18%' | 'M/White'  | '520,00'        | '10,000' | 'pcs'  | 'No'                 | '713,90'     | '3 966,10'   | '4 680,00'     | 'Store 01' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '55,00'         | '1,000' | 'pcs'  | 'No'                 | '75,51'      | '419,49'     | '495,00'       | 'Store 01' |	
 			And I click the button named "FormPost"
@@ -277,7 +277,7 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "789,41"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "5 175,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | 'Dress' | '18%' | 'M/White'  | '520,00'        | '10,000' | 'pcs'  | 'No'                 | '713,90'     | '3 966,10'   | '4 680,00'     | 'Store 01' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '55,00'         | '1,000' | 'pcs'  | 'No'                 | '75,51'      | '419,49'     | '495,00'       | 'Store 01' |	
 		* Filling in payment tab
@@ -301,7 +301,7 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 			And I click "Ok" button	
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | 'Dress' | '18%' | 'M/White'  | '8 320,00'      | '100,000' | 'pcs'  | 'No'                 | '6 663,05'   | '37 016,95'  | '43 680,00'    | 'Store 01' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "8 870,00"
@@ -310,13 +310,13 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "48 630,00"
 		* Change quantity and check discount recalculation	
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
+				| 'Item'  | 'Item key' | 'Quantity'       |
 				| 'Dress' | 'M/White'  | '100,000' |
 			And I select current line in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table		
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | 'Dress' | '18%' | 'M/White'  | '832,00'        | '10,000' | 'pcs'  | 'No'                 | '666,31'     | '3 701,69'   | '4 368,00'     | 'Store 01' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "1 382,00"
@@ -325,11 +325,11 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "9 318,00"
 		* Delete string and check discount recalculation
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
+				| 'Item'  | 'Item key' | 'Quantity'       |
 				| 'Dress' | 'M/White'  | '10,000' |
 			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "550,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "4 194,92"

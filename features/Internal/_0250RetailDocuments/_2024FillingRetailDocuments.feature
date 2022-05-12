@@ -191,7 +191,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
@@ -211,7 +211,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 01' |
 	* Check filling in prices and calculate taxes when adding items via barcode search
@@ -223,7 +223,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And Delay 4
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '61,02'      | '1,000' | 'pcs'  | '338,98'     | '400,00'       | 'Store 01' |
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '106,78'     | '2,000' | 'pcs'  | '593,22'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '83,90'      | '1,000' | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' |
@@ -242,7 +242,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I click "Transfer to document" button
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '61,02'      | '1,000' | 'pcs'  | '338,98'     | '400,00'       | 'Store 01' |
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '106,78'     | '2,000' | 'pcs'  | '593,22'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '83,90'      | '1,000' | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' |
@@ -263,7 +263,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 		* Tax recalculation check
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '126,00'     | '2,000' | 'pcs'  | '700,00'     | '826,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '99,00'      | '1,000' | 'pcs'  | '550,00'     | '649,00'       | 'Store 01' |
 				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '93,60'      | '1,000' | 'pcs'  | '520,00'     | '613,60'       | 'Store 01' |
@@ -273,7 +273,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '106,78'     | '2,000' | 'pcs'  | '593,22'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '83,90'      | '1,000' | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '79,32'      | '1,000' | 'pcs'  | '440,68'     | '520,00'       | 'Store 01' |
@@ -358,7 +358,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		Then the form attribute named "Store" became equal to "Store 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'         |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'         |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | ''              | '106,78'     | 'pcs'  | '593,22'     | '700,00'        | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | ''              | '83,90'      | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | ''              | '79,32'      | 'pcs'  | '440,68'     | '520,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
@@ -380,17 +380,17 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| 'Card 01'      | 'Payment terminal 01' | 'Transit Main' | '9,00'      | '900,00' | '1,00'    |
 	* Change quantity and post document
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity'     |
 			| 'Shirt' | '38/Black' | '350,00' | '2,000' |
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity'     |
 			| 'Dress' | 'XS/Blue'  | '520,00' | '1,000' |
 		And I delete a line in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'         |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'         |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '1,000' | ''              | '53,39'      | 'pcs'  | '296,61'     | '350,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | ''              | '83,90'      | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 	* Post Retail return receipt
@@ -476,7 +476,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
-			| 'Profit loss center' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
+			| 'Profit loss center' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
 			| 'Shop 01'            | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '251,69'     | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | ''                    | 'Store 01' | ''       |
 			| 'Shop 01'            | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '61,02'      | '400,00' | '18%' | ''              | '338,98'     | '400,00'       | ''                    | 'Store 01' | ''       |
 		And "Payments" table contains lines
@@ -560,7 +560,7 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
-			| 'Profit loss center' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
+			| 'Profit loss center' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
 			| 'Shop 01'       | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '251,69'     | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | ''                    | 'Store 01' | ''       |
 			| 'Shop 01'       | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '61,02'      | '400,00' | '18%' | ''              | '338,98'     | '400,00'       | ''                    | 'Store 01' | ''       |
 		And "Payments" table contains lines
@@ -1370,7 +1370,7 @@ Scenario:  _0154143 change payment term in POS
 		Then the form attribute named "LegalName" became equal to "Company Retail customer"
 		Then the form attribute named "Agreement" became equal to "Retail partner term 2"
 		And "ItemList" table contains lines
-			| 'Price type'           | 'Item'  | 'Profit loss center' | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price type'           | 'Item'  | 'Profit loss center' | 'Item key' | 'Dont calculate row' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
 			| 'Discount Price TRY 1' | 'Dress' | 'Shop 01'            | 'M/White'  | 'No'                 | '1,000' | 'pcs'  | '88,92'      | '494,00' | '18%' | '494,00'     | '582,92'       | 'Store 01' |	
 		Then the form attribute named "ItemListTotalTotalAmount" became equal to "582,92"		
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -1566,7 +1566,7 @@ Scenario:  _0154149 create Cash statement
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  |
 		* Filling in payment tab
 			And I move to "Payments" tab
@@ -1647,7 +1647,7 @@ Scenario:  _0154149 create Cash statement
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Unit' |
+				| 'Item'  | 'Price'  | 'Item key' | 'Quantity'     | 'Unit' |
 				| 'Dress' | '550,00' | 'L/Green'  | '2,000' | 'pcs'  |
 		* Filling in payment tab
 			And I move to "Payments" tab
@@ -1713,7 +1713,7 @@ Scenario:  _0154149 create Cash statement
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Unit' |
+				| 'Item'  | 'Price'  | 'Item key' | 'Quantity'     | 'Unit' |
 				| 'Shirt' | '350,00' | '38/Black'  | '4,000' | 'pcs'  |
 		* Filling in payment tab
 			And I move to "Payments" tab
@@ -1810,7 +1810,7 @@ Scenario:  _0154149 create Cash statement
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Unit' |
+				| 'Item'  | 'Price'  | 'Item key' | 'Quantity'     | 'Unit' |
 				| 'Shirt' | '350,00' | '38/Black'  | '4,000' | 'pcs'  |
 		* Filling in payment tab
 			And I move to "Payments" tab
@@ -1907,7 +1907,7 @@ Scenario:  _0154149 create Cash statement
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  |
 		* Filling in payment tab
 			And I move to "Payments" tab
@@ -2226,7 +2226,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
 	* Check refilling  price when reselection partner term
 		* Re-select partner term
@@ -2239,7 +2239,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			And I click "OK" button
 		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
@@ -2259,12 +2259,12 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 01' |
 	* Check the re-drawing of the form for taxes at company re-selection.
 			And "ItemList" table contains lines
-				| 'Serial lot numbers' | 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Offers amount' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Serial lot numbers' | 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Offers amount' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| ''                   | '400,00' | 'Trousers' | '18%' | '38/Yellow' | ''              | '1,000' | 'pcs'  | 'No'                 | '61,02'      | '338,98'     | '400,00'       | 'Store 01' |
 				| ''                   | '350,00' | 'Shirt'    | '18%' | '38/Black'  | ''              | '2,000' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' |
 			And I click Select button of "Company" field
@@ -2284,7 +2284,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			And I click "OK" button
 		* Tax calculation check
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'pcs'  | 'No'                 | '61,02'      | '338,98'     | '400,00'       | 'Store 01' |
 			| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' |
 	* Check filling in prices and calculate taxes when adding items via barcode search
@@ -2296,7 +2296,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			And Delay 4
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'pcs'  | '61,02'      | '338,98'     | '400,00'       | 'Store 01' |
 			| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | 'pcs'  | '106,78'     | '593,22'     | '700,00'       | 'Store 01' |
 			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | 'pcs'  | '83,90'      | '466,10'     | '550,00'       | 'Store 01' |
@@ -2315,7 +2315,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			And I click "Transfer to document" button
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'pcs'  | '61,02'      | '338,98'     | '400,00'       | 'Store 01' |
 			| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | 'pcs'  | '106,78'     | '593,22'     | '700,00'       | 'Store 01' |
 			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | 'pcs'  | '83,90'      | '466,10'     | '550,00'       | 'Store 01' |
@@ -2335,7 +2335,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 		* Tax recalculation check
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'pcs'  | 'No'                 | '126,00'     | '700,00'     | '826,00'       | 'Store 01' |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'pcs'  | 'No'                 | '99,00'      | '550,00'     | '649,00'       | 'Store 01' |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'pcs'  | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 01' |
@@ -2344,7 +2344,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 01' |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' |
@@ -2361,7 +2361,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			Then the form attribute named "PriceIncludeTax" became equal to "No"
 		* Check tax recalculation 
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '296,61' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 02' |
 			| '466,10' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 02' |
 			| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 02' |
@@ -2376,7 +2376,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		* Tax recalculation check
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 01' |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' |
@@ -2400,7 +2400,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
 				And I finish line editing in "ItemList" table
 				And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'pcs'  | '106,78'     | '593,22'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | '0%'  | 'L/Green'  | '1,000' | 'pcs'  | ''           | '550,00'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'pcs'  | '79,32'      | '440,68'     | '520,00'       | 'Store 01' |
@@ -2419,13 +2419,13 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				And I remove checkbox "Price includes tax"
 				And I move to "Item list" tab
 				And I go to line in "ItemList" table
-					| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
+					| 'Item'  | 'Item key' | 'Price'  | 'Quantity'     |
 					| 'Shirt' | '38/Black' | '350,00' | '2,000' |
 				And I select current line in "ItemList" table
 				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
 				And I finish line editing in "ItemList" table
 				And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '350,00' | 'Shirt' | '0%'  | '38/Black' | '2,000' | 'pcs'  | 'No'                 | ''           | '700,00'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'pcs'  | 'No'                 | '99,00'      | '550,00'     | '649,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'pcs'  | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 01' |
@@ -2435,7 +2435,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
 		* Change unit and check price re-calculation
 			And I go to line in "ItemList" table
-				| 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Q'     | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
+				| 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Quantity'     | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
 				| 'No'                 | 'Dress' | 'L/Green'  | '550,00'     | '550,00' | '1,000' | 'Store 01' | '99,00'      | '649,00'       | 'pcs'  | '18%' |
 			And I select current line in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
@@ -2452,7 +2452,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				| 'box Dress (8 pcs)' |
 			And I select current line in "List" table
 			And "ItemList" table contains lines
-				| 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit'        | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity'     | 'Unit'        | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'box Dress (8 pcs)' | '792,00'     | '4 400,00' | '18%' | '4 400,00'   | '5 192,00'     | 'Store 01' |
 			And I close all client application windows			
 
@@ -2550,7 +2550,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' |
 				| 'Trousers' | '338,98' | '38/Yellow' | '1,000' | 'pcs'  |
 	* Check refilling  price when reselection partner term
 		* Re-select partner term
@@ -2563,7 +2563,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I click "OK" button
 		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
@@ -2583,12 +2583,12 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 01' |
 	* Check the re-drawing of the form for taxes at company re-selection.
 			And "ItemList" table contains lines
-				| 'Serial lot numbers' | 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Offers amount' | 'Q'     | 'Price type'        | 'Unit' | 'Revenue type' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' | 'Additional analytic' |
+				| 'Serial lot numbers' | 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Offers amount' | 'Quantity'     | 'Price type'        | 'Unit' | 'Revenue type' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' | 'Additional analytic' |
 				| ''                   | '400,00' | ''       | 'Trousers' | '18%' | '38/Yellow' | ''              | '1,000' | 'Basic Price Types' | 'pcs'  | ''             | 'No'                 | '61,02'      | '338,98'     | '400,00'       | 'Store 01' | 'Shop 01'       | ''                    |
 				| ''                   | '350,00' | ''       | 'Shirt'    | '18%' | '38/Black'  | ''              | '2,000' | 'Basic Price Types' | 'pcs'  | ''             | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       | ''                    |
 			And I click Select button of "Company" field
@@ -2608,7 +2608,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			Then "Update item list info" window is opened
 			And I click "OK" button
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '61,02'      | '338,98'     | '400,00'       | 'Store 01' | 'Shop 01'       |
 			| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 	* Check filling in prices and calculate taxes when adding items via barcode search
@@ -2620,7 +2620,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And Delay 4
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'Basic Price Types' | 'pcs'  | '61,02'      | '338,98'     | '400,00'       | 'Store 01' | 'Shop 01'       |
 			| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | 'Basic Price Types' | 'pcs'  | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | 'Basic Price Types' | 'pcs'  | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
@@ -2639,7 +2639,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I click "Transfer to document" button
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'Basic Price Types' | 'pcs'  | '61,02'      | '338,98'     | '400,00'       | 'Store 01' | 'Shop 01'       |
 			| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | 'Basic Price Types' | 'pcs'  | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | 'Basic Price Types' | 'pcs'  | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
@@ -2660,7 +2660,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 		* Tax recalculation check
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '126,00'     | '700,00'     | '826,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '99,00'      | '550,00'     | '649,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 01' | 'Shop 01'       |
@@ -2670,7 +2670,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
@@ -2687,7 +2687,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			Then the form attribute named "PriceIncludeTax" became equal to "No"
 		* Check tax recalculation 
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '296,61' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price without VAT' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 02' | 'Shop 01'       |
 			| '466,10' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price without VAT' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 02' | 'Shop 01'       |
 			| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price without VAT' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 02' | 'Shop 01'       |
@@ -2702,7 +2702,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		* Tax recalculation check
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
@@ -2744,7 +2744,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
 				And I finish line editing in "ItemList" table
 				And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 				| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 				| '550,00' | 'Dress' | '0%'  | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | ''           | '550,00'     | '550,00'       | 'Store 01' | 'Shop 01'       |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
@@ -2763,13 +2763,13 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				And I remove checkbox "Price includes tax"
 				And I move to "Item list" tab
 				And I go to line in "ItemList" table
-					| 'Item'  | 'Item key' | 'Price'  | 'Q'     |
+					| 'Item'  | 'Item key' | 'Price'  | 'Quantity'     |
 					| 'Shirt' | '38/Black' | '350,00' | '2,000' |
 				And I select current line in "ItemList" table
 				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
 				And I finish line editing in "ItemList" table
 				And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 				| '350,00' | 'Shirt' | '0%'  | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | ''           | '700,00'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '99,00'      | '550,00'     | '649,00'       | 'Store 01' | 'Shop 01'       |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 01' | 'Shop 01'       |
@@ -2779,7 +2779,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
 		* Change price type
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Price'  | 'Price type'        | 'Q'     |
+				| 'Item'  | 'Item key' | 'Price'  | 'Price type'        | 'Quantity'     |
 				| 'Dress' | 'XS/Blue'  | '520,00' | 'Basic Price Types' | '1,000' |
 			And I select current line in "ItemList" table
 			And I click choice button of "Price type" attribute in "ItemList" table
@@ -2789,13 +2789,13 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Profit loss center' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Profit loss center' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Shop 01'       | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | '2,000' | 'pcs'  | ''           | '350,00' | '0%'  | '700,00'     | '700,00'       | 'Store 01' |
 				| 'Shop 01'       | 'Basic Price Types'       | 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'pcs'  | '99,00'      | '550,00' | '18%' | '550,00'     | '649,00'       | 'Store 01' |
 				| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'XS/Blue'  | 'No'                 | '1,000' | 'pcs'  | '79,32'      | '440,68' | '18%' | '440,68'     | '520,00'       | 'Store 01' |
 		* Change unit and check price re-calculation
 			And I go to line in "ItemList" table
-				| 'Profit loss center' | 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Price type'        | 'Q'     | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
+				| 'Profit loss center' | 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Price type'        | 'Quantity'     | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
 				| 'Shop 01'       | 'No'                 | 'Dress' | 'L/Green'  | '550,00'     | '550,00' | 'Basic Price Types' | '1,000' | 'Store 01' | '99,00'      | '649,00'       | 'pcs'  | '18%' |
 			And I select current line in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
@@ -2812,7 +2812,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'box Dress (8 pcs)' |
 			And I select current line in "List" table
 			And "ItemList" table contains lines
-				| 'Profit loss center' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit'        | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Profit loss center' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity'     | 'Unit'        | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Shop 01'       | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | '2,000' | 'pcs'         | ''           | '350,00'   | '0%'  | '700,00'     | '700,00'       | 'Store 01' |
 				| 'Shop 01'       | 'Basic Price Types'       | 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'box Dress (8 pcs)' | '792,00'     | '4 400,00' | '18%' | '4 400,00'   | '5 192,00'     | 'Store 01' |
 				| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'XS/Blue'  | 'No'                 | '1,000' | 'pcs'         | '79,32'      | '440,68'   | '18%' | '440,68'     | '520,00'       | 'Store 01' |
@@ -2857,7 +2857,7 @@ Scenario: _0154156 check Retail sales receipt when changing date
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
+		| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 		| '500,00' | 'Dress' | '18%' | 'M/Brown'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '76,27'      | '423,73'     | '500,00'       | 'Store 01' | 'Shop 01'       |
 	* Change of date and check of price and tax recalculation
 		And I move to "Other" tab
@@ -2867,7 +2867,7 @@ Scenario: _0154156 check Retail sales receipt when changing date
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Item'  | 'Price'    | 'Item key' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | 'pcs'  | '1 000,00'   | '1 000,00'     | 'Store 01' |
 	* Check the list of partner terms
 		And I click Select button of "Partner term" field
@@ -2951,12 +2951,12 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Check function DontCalculateRow 
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '2,000' |	
 			And I activate "Dont calculate row" field in "ItemList" table
 			And I set "Dont calculate row" checkbox in "ItemList" table			
@@ -2965,7 +2965,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And I select current line in "ItemList" table
 			And I select current line in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '2,000' |	
 			And I select current line in "ItemList" table
 			And I input "150,00" text in "Tax amount" field of "ItemList" table
@@ -2977,7 +2977,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And I input "951,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Filling in payment tab
@@ -3000,7 +3000,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And I input "4 196,00" text in "Amount" field of "Payments" table
 			And I click the button named "FormPost"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
@@ -3008,11 +3008,11 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
 		* Change tax amount
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '2,000' |
 			And I input "152,00" text in "Tax amount" field of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
@@ -3020,11 +3020,11 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"			
 		* Change net amount
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '2,000' |
 			And I input "800,00" text in the field named "ItemListNetAmount" of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
@@ -3032,12 +3032,12 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
 		* Change total amount
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '2,000' |
 			And I activate field named "ItemListTotalAmount" in "ItemList" table
 			And I input "954,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
@@ -3059,7 +3059,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     |
@@ -3068,7 +3068,7 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And I set checkbox "Price includes tax"		
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '158,64'     | '881,36'     | '1 040,00'     |
@@ -3144,12 +3144,12 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Check function DontCalculateRow 
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '2,000' |	
 			And I activate "Dont calculate row" field in "ItemList" table
 			And I set "Dont calculate row" checkbox in "ItemList" table			
@@ -3158,7 +3158,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			And I select current line in "ItemList" table
 			And I select current line in "ItemList" table
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '2,000' |	
 			And I select current line in "ItemList" table
 			And I input "150,00" text in "Tax amount" field of "ItemList" table
@@ -3170,12 +3170,12 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			And I input "951,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 			And I click the button named "FormPost"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
@@ -3183,11 +3183,11 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
 		* Change tax amount
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '2,000' |
 			And I input "152,00" text in "Tax amount" field of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 551,00"
@@ -3195,11 +3195,11 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"			
 		* Change net amount
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '2,000' |
 			And I input "800,00" text in the field named "ItemListNetAmount" of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
@@ -3207,12 +3207,12 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 196,00"
 		* Change total amount
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '2,000' |
 			And I activate field named "ItemListTotalAmount" in "ItemList" table
 			And I input "954,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 550,00"
@@ -3234,7 +3234,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     |
@@ -3243,7 +3243,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			And I set checkbox "Price includes tax"		
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'pcs'  | 'No'                 | '158,64'     | '881,36'     | '1 040,00'     |
@@ -3313,7 +3313,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 		And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Check tax and net amount calculation when change total amount (Price does not include tax)
@@ -3325,7 +3325,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			And I input "945,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
@@ -3335,7 +3335,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			And I select current line in "ItemList" table
 			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change total amount and check tax and net amount calculation (Price does not include tax)
@@ -3345,7 +3345,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			And I select current line in "ItemList" table
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price includes tax and check tax and net amount calculation when change total amount
@@ -3353,7 +3353,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,31'     | '1 018,37'   | '1 201,68'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I go to line in "ItemList" table
@@ -3363,7 +3363,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			And I input "1200,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '1 016,95'   | '1 200,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 		* Change quantity and check tax and net amount calculation 
@@ -3373,7 +3373,7 @@ Scenario: _0154171 check tax and net amount calculation when change total amount
 			And I select current line in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I close all client application windows	
@@ -3439,7 +3439,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 		And I finish line editing in "ItemList" table
 		* Check filling in prices
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,00'     | '800,00'     | '944,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Check tax and net amount calculation when change total amount (Price does not include tax)
@@ -3451,7 +3451,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			And I input "945,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '144,15'     | '800,85'     | '945,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change quantity and check tax and net amount calculation 
@@ -3461,7 +3461,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			And I select current line in "ItemList" table
 			And I input "3,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,43' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,23'     | '1 201,29'   | '1 417,52'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Change total amount and check tax and net amount calculation (Price does not include tax)
@@ -3471,7 +3471,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			And I select current line in "ItemList" table
 			And I input "1418,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '216,31'     | '1 201,69'   | '1 418,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		* Set checkbox Price includes tax and check tax and net amount calculation when change total amount
@@ -3479,7 +3479,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,56' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,31'     | '1 018,37'   | '1 201,68'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I go to line in "ItemList" table
@@ -3489,7 +3489,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			And I input "1200,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '1 016,95'   | '1 200,00'     |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 		* Change quantity and check tax and net amount calculation 
@@ -3499,7 +3499,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 			And I select current line in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'No'                 | '122,03'     | '677,97'     | '800,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     |
 			And I close all client application windows	
@@ -3550,7 +3550,7 @@ Scenario: _0154175 check change amount in POS
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
-			| 'Profit loss center' | 'Item'  | 'Price type'        | 'Item key' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    |
+			| 'Profit loss center' | 'Item'  | 'Price type'        | 'Item key' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    |
 			| 'Shop 01'       | 'Dress' | 'en description is empty' | 'L/Green'  | '1,000' | 'pcs'  | '76,27'      | '500,00' | '18%' | ''              | '423,73'     | '500,00'       | ''                    | 'Store 01' |
 			| 'Shop 01'       | 'Dress' | 'Basic Price Types' | 'S/Yellow' | '1,000' | 'pcs'  | '83,90'      | '550,00' | '18%' | ''              | '466,10'     | '550,00'       | ''                    | 'Store 01' |
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "889,83"
@@ -3601,7 +3601,7 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 		Then the form attribute named "UsePartnerTransactions" became equal to "Yes"
 		Then the form attribute named "RetailCustomer" became equal to "Name Retail customer Surname Retail customer"
 		And "ItemList" table contains lines
-			| 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
+			| 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
 			| 'Basic Price without VAT' | 'Dress' | 'M/White'  | 'Shop 01'            | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '440,68' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
 		And "Payments" table contains lines
 			| 'Amount' | 'Payment type' |
@@ -3631,7 +3631,7 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		Then the form attribute named "RetailCustomer" became equal to "Olga Olhovska"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
+			| 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
 			| 'Shop 01'            | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
 		And "Payments" table became equal
 			| 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' |

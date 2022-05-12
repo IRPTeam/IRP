@@ -318,7 +318,7 @@ Scenario: _028805 create document Shipment confirmation based on 2 SO
 	// * Check RowId info
 	// 	And I click "Show row key" button		
 	// 	And "RowIDInfo" table contains lines
-	// 		| '#' | 'Key' | 'Basis'                                    | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+	// 		| '#' | 'Key' | 'Basis'                                    | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 	// 		| '1' | '*'   | 'Sales order 15 dated 01.02.2021 19:50:45' | '63008c12-b682-4aff-b29f-e6927036b09a' | ''          | '1,000'  | '63008c12-b682-4aff-b29f-e6927036b09a' | 'SI&SC'        | '63008c12-b682-4aff-b29f-e6927036b09a' |
 	// 		| '2' | '*'   | 'Sales order 16 dated 10.03.2021 16:43:13' | '*'                                    | ''          | '1,000'  | '*'                                    | 'SI&SC'        | '*'                                    |
 	// 		| '3' | '*'   | 'Sales order 15 dated 01.02.2021 19:50:45' | 'e34f52ea-1fe2-47b2-9b37-63c093896682' | ''          | '10,000' | 'e34f52ea-1fe2-47b2-9b37-63c093896682' | 'SI&SC'        | 'e34f52ea-1fe2-47b2-9b37-63c093896682' |
@@ -360,7 +360,7 @@ Scenario: _028806 create document Shipment confirmation based on SI (with SO, SI
 	* Check RowId info
 		And I click "Show row key" button	
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key' | 'Basis'                                      | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key' | 'Basis'                                      | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '*'   | 'Sales invoice 32 dated 04.03.2021 16:32:23' | '498b47ae-dd97-473e-b00d-4b9d611f7413' | ''          | '1,000'  | '4f22f6a9-2f81-47bb-a8b8-f6089fb7ba21' | 'SC'           | '498b47ae-dd97-473e-b00d-4b9d611f7413' |
 			| '2' | '*'   | 'Sales invoice 32 dated 04.03.2021 16:32:23' | '706b55fe-a4a3-4d44-b648-2dc75c16b0db' | ''          | '12,000' | '3f40a72c-599e-4778-bfe8-56e6f33d5d8d' | 'SC'           | '706b55fe-a4a3-4d44-b648-2dc75c16b0db' |
 			| '3' | '*'   | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'c32fd20d-7e19-4d30-9cf6-2cef506c9bc5' | ''          | '24,000' | 'edddfff5-6850-4f96-a93a-abed1c5e6c84' | 'SC'           | 'c32fd20d-7e19-4d30-9cf6-2cef506c9bc5' |
@@ -403,7 +403,7 @@ Scenario: _028810 create document Shipment confirmation based on Inventory trans
 				| 'Store'    | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Shipment basis'                                  |
 				| 'Store 02' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | '$$InventoryTransfer021030$$' |
 			And "RowIDInfo" table contains lines
-				| 'Basis'                       | 'Next step' | 'Q'     | 'Current step'     |
+				| 'Basis'                       | 'Next step' | 'Quantity'     | 'Current step'     |
 				| '$$InventoryTransfer021030$$' | ''          | '3,000' | 'SC' |
 		And I close all client application windows
 	* Create SC based on Inventory transfer (Create button)
@@ -428,7 +428,7 @@ Scenario: _028810 create document Shipment confirmation based on Inventory trans
 		And I save the current field value as "$$Rov1ShipmentConfirmation028810$$"	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                                | 'Basis'                       | 'Row ID' | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref' |
+			| '#' | 'Key'                                | 'Basis'                       | 'Row ID' | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref' |
 			| '1' | '$$Rov1ShipmentConfirmation028810$$' | '$$InventoryTransfer021030$$' | '*'      | ''          | '3,000' | '*'         | 'SC'           | '*'       |	
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I click the button named "FormPost"
@@ -491,7 +491,7 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 				| 'Store'    | 'Shipment basis'                               | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Sales order' | 'Inventory transfer order' | 'Purchase return order'                              | 'Purchase return'                              |
 				| 'Store 02' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '1' | '1,000'                 | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'  | ''            | ''                         | 'Purchase return order 32 dated 24.03.2021 15:15:11' | 'Purchase return 32 dated 24.03.2021 15:15:22' |
 			And "RowIDInfo" table contains lines
-				| 'Basis'                                        | 'Next step' | 'Q'     | 'Current step' |
+				| 'Basis'                                        | 'Next step' | 'Quantity'     | 'Current step' |
 				| 'Purchase return 32 dated 24.03.2021 15:15:22' | ''          | '1,000' | 'SC'           |
 		And I close all client application windows
 	* Create SC based on Purchase return (Create button)
@@ -526,7 +526,7 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 		And I save the current field value as "$$Rov2ShipmentConfirmation028815$$"		
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                                | 'Basis'                                        | 'Row ID' | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref' |
+			| '#' | 'Key'                                | 'Basis'                                        | 'Row ID' | 'Next step' | 'Quantity'      | 'Basis key' | 'Current step' | 'Row ref' |
 			| '1' | '$$Rov1ShipmentConfirmation028815$$' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '*'      | ''          | '1,000'  | '*'         | 'SC'           | '*'       |
 			| '2' | '$$Rov2ShipmentConfirmation028815$$' | 'Purchase return 32 dated 24.03.2021 15:15:22' | '*'      | ''          | '24,000' | '*'         | 'SC'           | '*'       |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -604,7 +604,7 @@ Scenario: _028830 check link/unlink form in the SC
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+		| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 		| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
 		| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
 		| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '2,000' | 'SC'           |
@@ -638,7 +638,7 @@ Scenario: _028830 check link/unlink form in the SC
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
 			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '2,000' | 'SC'           |
@@ -676,7 +676,7 @@ Scenario: _028830 check link/unlink form in the SC
 			| 'Boots (12 pcs)' |
 		And I select current line in "List" table
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
 			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '24,000' | 'SC'           |
@@ -780,7 +780,7 @@ Scenario: _028832 cancel line in the SO and create SC
 			| '15' |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'      |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'      |
 			| '7' | 'Dress' | 'XS/Blue'  | '10,000' |
 		And I activate "Cancel" field in "ItemList" table
 		And I set "Cancel" checkbox in "ItemList" table

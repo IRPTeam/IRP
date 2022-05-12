@@ -143,7 +143,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 		And I delete "$$Rov2ShipmentConfirmation022501$$" variable
 		And I save the current field value as "$$Rov2ShipmentConfirmation022501$$"
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                                | 'Basis' | 'Row ID'                             | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                            |
+			| '#' | 'Key'                                | 'Basis' | 'Row ID'                             | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                            |
 			| '1' | '$$Rov1ShipmentConfirmation022501$$' | ''      | '$$Rov1ShipmentConfirmation022501$$' | 'PR'        | '5,000' | ''          | ''             | '$$Rov1ShipmentConfirmation022501$$' |
 			| '2' | '$$Rov2ShipmentConfirmation022501$$' | ''      | '$$Rov2ShipmentConfirmation022501$$' | 'PR'        | '5,000' | ''          | ''             | '$$Rov2ShipmentConfirmation022501$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -162,7 +162,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Q'     | 'Unit' |
+			| 'Item'     | 'Item key'  | 'Quantity'     | 'Unit' |
 			| 'Trousers' | '36/Yellow' | '5,000' | 'pcs'  |
 			| 'Dress'    | 'L/Green'   | '5,000' | 'pcs'  |
 		And I click Select button of "Partner term" field
@@ -174,7 +174,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 		And I click "OK" button
 		* Select PI
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'     | 'Store'    | 'Unit' |
+				| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    | 'Unit' |
 				| 'Dress' | 'L/Green'  | '5,000' | 'Store 02' | 'pcs'  |
 			And I click choice button of "Purchase invoice" attribute in "ItemList" table
 			And I go to line in "List" table
@@ -196,7 +196,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 			And I delete "$$Rov2PurchaseReturn022501$$" variable
 			And I save the current field value as "$$Rov2PurchaseReturn022501$$"
 			And "RowIDInfo" table contains lines
-				| '#' | 'Key'                          | 'Basis'                          | 'Row ID'                             | 'Next step' | 'Q'     | 'Basis key'                          | 'Current step' | 'Row ref'                            |
+				| '#' | 'Key'                          | 'Basis'                          | 'Row ID'                             | 'Next step' | 'Quantity'     | 'Basis key'                          | 'Current step' | 'Row ref'                            |
 				| '1' | '$$Rov1PurchaseReturn022501$$' | '$$ShipmentConfirmation022501$$' | '$$Rov1ShipmentConfirmation022501$$' | ''          | '5,000' | '$$Rov1ShipmentConfirmation022501$$' | 'PR'           | '$$Rov1ShipmentConfirmation022501$$' |
 				| '2' | '$$Rov2PurchaseReturn022501$$' | '$$ShipmentConfirmation022501$$' | '$$Rov2ShipmentConfirmation022501$$' | ''          | '5,000' | '$$Rov2ShipmentConfirmation022501$$' | 'PR'           | '$$Rov2ShipmentConfirmation022501$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "2"		
@@ -273,7 +273,7 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 		And I click "Save" button		
 		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Store'    |
 			| 'Dress' | 'S/Yellow'  | '4,000' | 'pcs'  | 'Store 02' |
 		Then the number of "ItemList" table lines is "равно" "1"
 		And I go to line in "ItemList" table
@@ -283,11 +283,11 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 		And I delete "$$Rov1PurchaseReturn28402$$" variable
 		And I save the current field value as "$$Rov1PurchaseReturn28402$$"
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                         | 'Basis'                                              | 'Row ID'                             | 'Next step' | 'Q'     | 'Basis key'                          | 'Current step' | 'Row ref'                            |
+			| '#' | 'Key'                         | 'Basis'                                              | 'Row ID'                             | 'Next step' | 'Quantity'     | 'Basis key'                          | 'Current step' | 'Row ref'                            |
 			| '1' | '$$Rov1PurchaseReturn28402$$' | 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | '$$Rov1ShipmentConfirmation022502$$' | ''          | '4,000' | '$$Rov1ShipmentConfirmation022502$$' | 'PR'           | '$$Rov1ShipmentConfirmation022502$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And "ShipmentConfirmationsTree" table contains lines
-			| 'Key'                         | 'Basis key'                          | 'Item'  | 'Item key' | 'Shipment confirmation'                              | 'Invoice' | 'SC'    | 'Q'     |
+			| 'Key'                         | 'Basis key'                          | 'Item'  | 'Item key' | 'Shipment confirmation'                              | 'Invoice' | 'SC'    | 'Quantity'     |
 			| '$$Rov1PurchaseReturn28402$$' | ''                                   | 'Dress' | 'S/Yellow' | ''                                                   | '4,000'   | '4,000' | '4,000' |
 			| '$$Rov1PurchaseReturn28402$$' | '$$Rov1ShipmentConfirmation022502$$' | ''      | ''         | 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | ''        | '4,000' | '4,000' |
 		Then the number of "ShipmentConfirmationsTree" table lines is "равно" "2"
@@ -306,7 +306,7 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 		Then the number of "ShipmentConfirmationsTree" table lines is "равно" "0"
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| '#' | 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                     |
 			| '1' | '$$Rov1PurchaseReturn28402$$' | ''      | '$$Rov1PurchaseReturn28402$$' | 'SC'        | '4,000' | ''          | ''             | '$$Rov1PurchaseReturn28402$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 	* Link line and check RowId tab
@@ -318,11 +318,11 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 		And I click "Link" button
 		And I click "Ok" button
 		And "ShipmentConfirmationsTree" table contains lines
-			| 'Key'                         | 'Basis key'                          | 'Item'  | 'Item key' | 'Shipment confirmation'                              | 'Invoice' | 'SC'    | 'Q'     |
+			| 'Key'                         | 'Basis key'                          | 'Item'  | 'Item key' | 'Shipment confirmation'                              | 'Invoice' | 'SC'    | 'Quantity'     |
 			| '$$Rov1PurchaseReturn28402$$' | ''                                   | 'Dress' | 'S/Yellow' | ''                                                   | '4,000'   | '4,000' | '4,000' |
 			| '$$Rov1PurchaseReturn28402$$' | '$$Rov1ShipmentConfirmation022502$$' | ''      | ''         | 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | ''        | '4,000' | '4,000' |
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                         | 'Basis'                                              | 'Row ID'                             | 'Next step' | 'Q'     | 'Basis key'                          | 'Current step' | 'Row ref'                            |
+			| '#' | 'Key'                         | 'Basis'                                              | 'Row ID'                             | 'Next step' | 'Quantity'     | 'Basis key'                          | 'Current step' | 'Row ref'                            |
 			| '1' | '$$Rov1PurchaseReturn28402$$' | 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | '$$Rov1ShipmentConfirmation022502$$' | ''          | '4,000' | '$$Rov1ShipmentConfirmation022502$$' | 'PR'           | '$$Rov1ShipmentConfirmation022502$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows

@@ -88,7 +88,7 @@ Scenario: _01202502 check current price in the Sales order
 		And Delay 4
 	* Check current price
 		And "ItemList" table contains lines
-		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Q'     |
+		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Quantity'     |
 		| 'High shoes' | '50,00' | '37/19SD'  | 'Current Price' | '1,000' |
 		And I close all client application windows
 		
@@ -118,7 +118,7 @@ Scenario: _01202503 check current price in the Sales invoice
 		And I select current line in "List" table
 	* Check current price
 		And "ItemList" table contains lines
-		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Q'     |
+		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Quantity'     |
 		| 'High shoes' | '50,00' | '37/19SD'  | 'Current Price' | '1,000' |
 		And I close all client application windows
 
@@ -148,7 +148,7 @@ Scenario: _01202504 check current price in the Purchase order
 		And I select current line in "List" table
 	* Check current price
 		And "ItemList" table contains lines
-		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Q'     |
+		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Quantity'     |
 		| 'High shoes' | '50,00' | '37/19SD'  | 'Current Price' | '1,000' |
 		And I close all client application windows
 
@@ -179,7 +179,7 @@ Scenario: _01202504 check current price in the Purchase invoice
 		And I select current line in "List" table
 	* Check current price
 		And "ItemList" table contains lines
-		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Q'     |
+		| 'Item'       | 'Price' | 'Item key' | 'Price type'    | 'Quantity'     |
 		| 'High shoes' | '50,00' | '37/19SD'  | 'Current Price' | '1,000' |
 		And I close all client application windows
 

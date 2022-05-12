@@ -62,7 +62,7 @@ Scenario: _033402 range discount calculation by line
 		And I click the button named "FormOk"
 		And I click the button named "FormOK"
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount'    |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount'    |
 		| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | '260,00'        | 'pcs'  | '4 940,00'        |
 		| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '120,00'        | 'pcs'  | '1 880,00'        |
 		And in the table "ItemList" I click "% Offers" button
@@ -105,7 +105,7 @@ Scenario: _033403 check of the minimum percentage of the range discount by lines
 			And I click the button named "FormOK"
 			And Delay 2
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'      | 'Offers amount' | 'Unit'| 'Total amount'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit'| 'Total amount'    |
 				| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | '156,00'        | 'pcs' | '5 044,00'        |
 				| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '100,00'        | 'pcs' | '1 900,00'        |
 			And in the table "ItemList" I click "% Offers" button
@@ -148,7 +148,7 @@ Scenario: _033404 check of the maximum percentage of the range discount by lines
 			And I click the button named "FormOK"
 			And Delay 2
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount'    |
 				| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | '520,00'        | 'pcs'  | '4 680,00'        |
 				| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '140,00'        | 'pcs'  | '1 860,00'        |
 			And in the table "ItemList" I click "% Offers" button
@@ -186,7 +186,7 @@ Scenario: _033405 Range discount and Special price discount calculation
 		And I click "OK" button
 	* Check that the calculation is correct
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount' |
 			| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | '260,00'        | 'pcs'  | '4 940,00'        |
 			| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '540,00'        | 'pcs'  | '1 460,00'        |
 		And in the table "ItemList" I click "% Offers" button
@@ -230,7 +230,7 @@ Scenario: _033406 check the discount order Range discount and crowding out 2 pri
 		And I click "OK" button
 	* Check that the calculation is correct
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount'    |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount'    |
 			| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | '1 310,00'      | 'pcs'  | '3 890,00'        |
 			| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '725,00'        | 'pcs'  | '1 275,00'        |
 		And in the table "ItemList" I click "% Offers" button
@@ -260,7 +260,7 @@ Scenario: _033407 range discount recalculation when the quantity of items in the
 		And Delay 2
 	* Recalculation
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'      | 'Offers amount' | 'Unit'| 'Total amount'    |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit'| 'Total amount'    |
 			| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | ''              | 'pcs' | '5 200,00'        |
 			| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '140,00'        | 'pcs' | '1 860,00'        |
 	* Change the quantity by Trousers by 30 pieces
@@ -274,7 +274,7 @@ Scenario: _033407 range discount recalculation when the quantity of items in the
 		And I click "OK" button
 	* Check recalculation
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'      | 'Offers amount' | 'Unit' | 'Total amount'    |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount'    |
 		| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | ''              | 'pcs'  | '5 200,00'        |
 		| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '30,000' | '140,00'        | 'pcs'  | '11 860,00'       |
 	And in the table "ItemList" I click "% Offers" button

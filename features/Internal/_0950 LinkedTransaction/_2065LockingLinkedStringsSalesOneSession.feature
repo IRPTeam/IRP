@@ -548,7 +548,7 @@ Scenario: _2065010 change quantity in the linked string in the SO (one session)
 		And I select current line in "List" table
 	* Change quantity (less then SI)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Procurement method' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Procurement method' | 'Quantity'      |
 			| 'Shirt' | '36/Red'   | 'No reserve'         | '10,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -561,7 +561,7 @@ Scenario: _2065010 change quantity in the linked string in the SO (one session)
 			|'Line No. [3] [Shirt 36/Red] RowID movements remaining: 10 . Required: 9 . Lacking: 1 .'|
 	* Change quantity (more then SI)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Procurement method' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Procurement method' | 'Quantity'      |
 			| 'Shirt' | '36/Red'   | 'No reserve'         | '9,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -582,7 +582,7 @@ Scenario: _2065011 change quantity in the linked string in the SI, SC after SI, 
 		And I select current line in "List" table
 	* Change quantity (less then SC, SC exist)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Quantity'      |
 			| 'Boots' | '37/18SD'  | '2,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -595,7 +595,7 @@ Scenario: _2065011 change quantity in the linked string in the SI, SC after SI, 
 			|'Line No. [1] [Boots 37/18SD] RowID movements remaining: 24 . Required: 12 . Lacking: 12 .'|
 	* Change quantity (more then SC, SC exist)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Quantity'      |
 			| 'Boots' | '37/18SD'  | '1,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -615,7 +615,7 @@ Scenario: _2065012 change quantity in the linked string in the SI, SI after SC, 
 		And I select current line in "List" table
 	* Change quantity (more then SC, SC exist)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Quantity'      |
 			| 'Shirt' | '36/Red'  | '10,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -626,7 +626,7 @@ Scenario: _2065012 change quantity in the linked string in the SI, SI after SC, 
 			|'In line 2 quantity by Shipment confirmation 36 dated 23.09.2021 10:20:59 11 greater than 10'|
 	* Change quantity (more then SC, SC exist)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Quantity'      |
 			| 'Shirt' | '36/Red'  | '11,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table

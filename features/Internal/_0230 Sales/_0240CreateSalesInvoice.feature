@@ -115,7 +115,7 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Revenue type' |
+			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Revenue type' |
 			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | 'Revenue'      |
 			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'            | '507,20'     | '350,00'   | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | 'Revenue'      |
 			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000'  | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | 'Revenue'      |
@@ -148,7 +148,7 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Change quantity
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Quantity'      |
 			| 'Shirt' | '36/Red'   | '10,000' |
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -195,7 +195,7 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
@@ -203,7 +203,7 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '1' | 'Dress' | 'XS/Blue'  | '1,000' |
 		And in the table "ItemList" I click "Copy" button
 		And I activate field named "ItemListQuantity" in "ItemList" table
@@ -217,24 +217,24 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step'   | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step'   | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'          | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'          | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
 			| '$$Rov4SalesInvoice023002$$' | ''                                        | '$$Rov4SalesInvoice023002$$'           | 'SC'          | '8,000'  | ''                                     | ''             | '$$Rov4SalesInvoice023002$$'           |
 		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                        | 'Q'     |
+			| 'Key'                        | 'Quantity'     |
 			| '$$Rov1SalesInvoice023002$$' | '8,000' |
 	* Delete string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '4' | 'Dress' | 'XS/Blue'  | '8,000' |
 		And in the table "ItemList" I click "Delete" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
@@ -242,21 +242,21 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '1' | 'Dress' | 'XS/Blue'  | '1,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "RowIDInfo" table contains lines
-			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '1' | 'Dress' | 'XS/Blue'  | '7,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -265,13 +265,13 @@ Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
 	* Change checkbox Use Shipment confirmation and check RowIDInfo
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     | 'Unit'           |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit'           |
 			| 'Boots' | '36/18SD'  | '5,000' | 'Boots (12 pcs)' |
 		And I remove "Use shipment confirmation" checkbox in "ItemList" table
 		And I move to the tab named "GroupRowIDInfo"
 		And I click "Post" button
 		And "RowIDInfo" table contains lines
-			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
@@ -298,7 +298,7 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
 			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '*'          | '520,00'   | '18%' | '*'          | '*'            | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
 			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '5,000' | 'pcs'            | '*'          | '350,00'   | '18%' | '*'          | '*'            | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
 			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000' | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | 'Revenue'      |
@@ -319,7 +319,7 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		And I click the button named "FormShowRowKey"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 			| '$$Rov2SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 			| '$$Rov3SalesInvoice023002$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
@@ -380,7 +380,7 @@ Scenario: _024004 create SI using form link/unlink
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#' | 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
+		| '#' | 'Basis'                                              | 'Next step' | 'Quantity'      | 'Current step' |
 		| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000' | 'SI&SC'        |
 		| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 		| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
@@ -399,7 +399,7 @@ Scenario: _024004 create SI using form link/unlink
 		And I click "Ok" button
 		And I click "Save" button	
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                              | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | 'SC'        | '10,000' | 'SI&SC'        |
 			| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 			| '3' | ''                                                   | 'SC'        | '7,000'  | ''             |
@@ -421,7 +421,7 @@ Scenario: _024004 create SI using form link/unlink
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                              | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000' | 'SI&SC'        |
 			| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 			| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
@@ -449,7 +449,7 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Dress' | 'S/Yellow' | ''                                         |
 			| 'Shirt' | '36/Red'   | 'Sales order 15 dated 01.02.2021 19:50:45' |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '10,000' | 'Store 02' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -459,7 +459,7 @@ Scenario: _024004 create SI using form link/unlink
 			| 'box Dress (8 pcs)' |
 		And I select current line in "List" table
 		And "RowIDInfo" table contains lines
-			| 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
+			| 'Basis'                                              | 'Next step' | 'Quantity'      | 'Current step' |
 			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '80,000' | 'SI&SC'        |
 			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
@@ -500,7 +500,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
-			| '#' | 'Profit loss center'      | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' | 'Sales person'    |
+			| '#' | 'Profit loss center'      | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' | 'Sales person'    |
 			| '1' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Alexander Orlov' |
 			| '2' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Anna Petrova'    |
 			| '3' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00' | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Alexander Orlov' |
@@ -514,7 +514,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| '#' | 'Profit loss center'      | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' | 'Sales person'    |
+			| '#' | 'Profit loss center'      | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' | 'Sales person'    |
 			| '1' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Alexander Orlov' |
 			| '2' | ''                        | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '10,000' | 'pcs'  | '793,22'     | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | ''             | ''                |
 			| '3' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Anna Petrova'    |
@@ -551,7 +551,7 @@ Scenario: _024006 create SI based on 2 SO with SC
 		And I click "Ok" button
 	* Create SI
 		And "ItemList" table contains lines
-			| '#' | 'Profit loss center'      | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
+			| '#' | 'Profit loss center'      | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
 			| '1' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '5,000'  | 'pcs'  | '253,60'     | '350,00' | '18%' | '87,50'         | '1 408,90'   | '1 662,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
 			| '2' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
 			| '3' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
@@ -562,7 +562,7 @@ Scenario: _024006 create SI based on 2 SO with SC
 		Then the number of "ItemList" table lines is "равно" "7"
 	* Change quantity and check Row ID
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price'  | 'Q'     | 'Unit' |
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity'     | 'Unit' |
 			| 'Dress' | 'XS/Blue'  | '500,00' | '2,000' | 'pcs'  |
 		And I select current line in "ItemList" table
 		And I click choice button of "Unit" attribute in "ItemList" table
@@ -572,7 +572,7 @@ Scenario: _024006 create SI based on 2 SO with SC
 		And I select current line in "List" table
 		And I click "Show row key" button
 		And "RowIDInfo" table became equal
-			| 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
+			| 'Basis'                                              | 'Next step' | 'Quantity'      | 'Current step' |
 			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '5,000'  | 'SI&SC'        |
 			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '1,000'  | 'SI'           |
 			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '1,000'  | 'SI'           |
@@ -600,7 +600,7 @@ Scenario: _024007 create SI based on SC	without SO
 		And I click "Ok" button
 	* Create SI
 		And "ItemList" table contains lines
-			| '#' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '#' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
 			| '1' | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | ''                   | '15,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            | ''             |
 			| '2' | ''              | ''           | 'Dress' | 'L/Green'  | 'No'                 | ''                   | '8,000'  | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            | ''             |
 		Then the number of "ItemList" table lines is "равно" "2"
@@ -609,7 +609,7 @@ Scenario: _024007 create SI based on SC	without SO
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ShipmentConfirmationsTree" table became equal
-			| 'Item'  | 'Shipment confirmation'                              | 'Item key' | 'Invoice' | 'SC'     | 'Q'      |
+			| 'Item'  | 'Shipment confirmation'                              | 'Item key' | 'Invoice' | 'SC'     | 'Quantity'      |
 			| 'Dress' | ''                                                   | 'S/Yellow' | '15,000'  | '15,000' | '15,000' |
 			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '10,000' | '10,000' |
 			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '5,000'  | '5,000'  |
@@ -636,7 +636,7 @@ Scenario: _024025 create document Sales Invoice without Sales order and check Ro
 		And I save the current field value as "$$Rov1SalesInvoice024025$$"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                        | 'Basis' | 'Row ID'                     | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                    |
+			| '#' | 'Key'                        | 'Basis' | 'Row ID'                     | 'Next step' | 'Quantity'      | 'Basis key' | 'Current step' | 'Row ref'                    |
 			| '1' | '$$Rov1SalesInvoice024025$$' | ''      | '$$Rov1SalesInvoice024025$$' | 'SC'        | '20,000' | ''          | ''             | '$$Rov1SalesInvoice024025$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows
@@ -649,7 +649,7 @@ Scenario: _024027 cancel line in the SO and create SI
 			| '15' |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'      |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'      |
 			| '7' | 'Dress' | 'XS/Blue'  | '10,000' |
 		And I activate "Cancel" field in "ItemList" table
 		And I set "Cancel" checkbox in "ItemList" table
@@ -691,7 +691,7 @@ Scenario: _024028 create SI based on SC with two same items (creation based on)
 		And I click "Ok" button
 	* Check
 		And "ItemList" table contains lines
-			| '#' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 | 'Revenue type' |
+			| '#' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 | 'Revenue type' |
 			| '1' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'Distribution department' | 'No'                 | '1 507,12'   | ''                   | '19,000' | 'pcs'  | '520,00' | '18%' | ''              | '8 372,88'   | '9 880,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
 			| '2' | 'Basic Price Types' | 'Dress' | 'M/White'  | 'Distribution department' | 'No'                 | '793,22'     | ''                   | '10,000' | 'pcs'  | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
 		And I close all client application windows
@@ -751,12 +751,12 @@ Scenario: _024029 create SI based on SC with two same items (link items)
 		And I click "Ok" button				
 	* Check
 		And "ItemList" table contains lines
-			| 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 | 'Revenue type' |
+			| 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 | 'Revenue type' |
 			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'Distribution department' | 'No'                 | '1 507,12'   | ''                   | '19,000' | 'pcs'  | '520,00' | '18%' | ''              | '8 372,88'   | '9 880,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| 'Key' | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key' | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '10,000' | '6c91e0f0-6936-4c02-8827-a74810daf826' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
 			| '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '9,000'  | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
 		And I close all client application windows
@@ -813,13 +813,13 @@ Scenario: _024030 create SI based on SC with two same items (add linked document
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
-			| 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 | 'Revenue type' |
+			| 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 | 'Revenue type' |
 			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'Distribution department' | 'No'                 | '1 507,12'   | ''                   | '19,000' | 'pcs'  | '520,00' | '18%' | ''              | '8 372,88'   | '9 880,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
 			| 'Basic Price Types' | 'Dress' | 'M/White'  | 'Distribution department' | 'No'                 | '396,61'     | ''                   | '5,000'  | 'pcs'  | '520,00' | '18%' | ''              | '2 203,39'   | '2 600,00'     | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 1 111 dated 15.02.2022 11:03:38' | 'Revenue'      |
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#' | 'Key' | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key' | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '10,000' | '6c91e0f0-6936-4c02-8827-a74810daf826' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
 			| '2' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '9,000'  | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
 			| '3' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '2d14e136-93bc-4968-b1a9-89e56be271cf' | ''          | '5,000'  | 'c2843939-e765-4207-81cf-1143a5137357' | 'SI'           | '2d14e136-93bc-4968-b1a9-89e56be271cf' |	

@@ -146,11 +146,11 @@ Scenario: _299901 check filling in and refilling Sales return order
 			And I input "500,00" text in "Price" field of "ItemList" table
 		* Check store and price refilling in the added line
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '500,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 02' |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '500,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 02' |
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -274,11 +274,11 @@ Scenario: _299902 check filling in and refilling Sales return
 			And I click "OK" button
 		* Check store overfill in the added string
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 01' |
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -402,11 +402,11 @@ Scenario: _299903 check filling in and refilling Purchase return order
 			And I click "OK" button
 		* Check store overfill in the added string
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -529,11 +529,11 @@ Scenario: _299904 check filling in and refilling Purchase return
 			And I click "OK" button
 		* Check store overfill in the added string
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Unit' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Unit' | 'Store'    |
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check the re-drawing of the form for taxes at company re-selection.
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'     | 'VAT'  | 'Item key'  | 'Tax amount'  | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '400,00' | 'Trousers' | '*'    | '38/Yellow' | '*'           | '1,000' | 'pcs'  | '*'          | '*'            | 'Store 03' |
 		And I click Select button of "Company" field
 		And I go to line in "List" table

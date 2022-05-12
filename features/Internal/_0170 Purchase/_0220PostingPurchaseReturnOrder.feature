@@ -108,7 +108,7 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 	* Check the addition of the store to the tabular partner
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
-		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Q'     |
+		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Quantity'     |
 		| 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'Store 02' | 'pcs' | '2,000' |
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseReturnOrder022001$$" variable
@@ -239,7 +239,7 @@ Scenario: _022009 create Purchase return order without bases document
 		And I input "250" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item'     | 'Q'       | 'Item key'  | 'Store'    | 'Unit' |
+			| 'Item'     | 'Quantity'       | 'Item key'  | 'Store'    | 'Unit' |
 			| 'Dress'    | '100,000' | 'M/White'   | 'Store 01' | 'pcs'  |
 			| 'Dress'    | '200,000' | 'L/Green'   | 'Store 01' | 'pcs'  |
 			| 'Trousers' | '300,000' | '36/Yellow' | 'Store 01' | 'pcs'  |
@@ -283,7 +283,7 @@ Scenario: _022010 check filling in Row Id info table in the PRO
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                           |
+			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                           |
 			| '$$Rov1PurchaseReturnOrder022009$$' | ''      | '$$Rov1PurchaseReturnOrder022009$$' | 'PR'        | '100,000' | ''          | ''             | '$$Rov1PurchaseReturnOrder022009$$' |
 			| '$$Rov2PurchaseReturnOrder022009$$' | ''      | '$$Rov2PurchaseReturnOrder022009$$' | 'PR'        | '200,000' | ''          | ''             | '$$Rov2PurchaseReturnOrder022009$$' |
 			| '$$Rov3PurchaseReturnOrder022009$$' | ''      | '$$Rov3PurchaseReturnOrder022009$$' | 'PR'        | '300,000' | ''          | ''             | '$$Rov3PurchaseReturnOrder022009$$' |
@@ -291,7 +291,7 @@ Scenario: _022010 check filling in Row Id info table in the PRO
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I activate field named "ItemListQuantity" in "ItemList" table
@@ -306,25 +306,25 @@ Scenario: _022010 check filling in Row Id info table in the PRO
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                           |
+			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                           |
 			| '$$Rov1PurchaseReturnOrder022009$$' | ''      | '$$Rov1PurchaseReturnOrder022009$$' | 'PR'          | '100,000' | ''          | ''             | '$$Rov1PurchaseReturnOrder022009$$' |
 			| '$$Rov2PurchaseReturnOrder022009$$' | ''      | '$$Rov2PurchaseReturnOrder022009$$' | 'PR'          | '200,000' | ''          | ''             | '$$Rov2PurchaseReturnOrder022009$$' |
 			| '$$Rov3PurchaseReturnOrder022009$$' | ''      | '$$Rov3PurchaseReturnOrder022009$$' | 'PR'          | '300,000' | ''          | ''             | '$$Rov3PurchaseReturnOrder022009$$' |
 			| '$$Rov4PurchaseReturnOrder022009$$' | ''      | '$$Rov4PurchaseReturnOrder022009$$' | 'PR'          | '208,000' | ''          | ''             | '$$Rov4PurchaseReturnOrder022009$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                           |
+			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                           |
 			| '$$Rov2PurchaseReturnOrder022009$$' | ''      | '$$Rov2PurchaseReturnOrder022009$$' | ''          | '208,000' | ''          | ''             | '$$Rov2PurchaseReturnOrder022009$$' |
 	* Delete string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'       |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'       |
 			| '4' | 'Dress' | 'L/Green'  | '208,000' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                           |
+			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                           |
 			| '$$Rov1PurchaseReturnOrder022009$$' | ''      | '$$Rov1PurchaseReturnOrder022009$$' | 'PR'        | '100,000' | ''          | ''             | '$$Rov1PurchaseReturnOrder022009$$' |
 			| '$$Rov2PurchaseReturnOrder022009$$' | ''      | '$$Rov2PurchaseReturnOrder022009$$' | 'PR'        | '200,000' | ''          | ''             | '$$Rov2PurchaseReturnOrder022009$$' |
 			| '$$Rov3PurchaseReturnOrder022009$$' | ''      | '$$Rov3PurchaseReturnOrder022009$$' | 'PR'        | '300,000' | ''          | ''             | '$$Rov3PurchaseReturnOrder022009$$' |
@@ -332,7 +332,7 @@ Scenario: _022010 check filling in Row Id info table in the PRO
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -340,14 +340,14 @@ Scenario: _022010 check filling in Row Id info table in the PRO
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                           |
+			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                           |
 			| '$$Rov1PurchaseReturnOrder022009$$' | ''      | '$$Rov1PurchaseReturnOrder022009$$' | 'PR'        | '100,000' | ''          | ''             | '$$Rov1PurchaseReturnOrder022009$$' |
 			| '$$Rov2PurchaseReturnOrder022009$$' | ''      | '$$Rov2PurchaseReturnOrder022009$$' | 'PR'        | '7,000'   | ''          | ''             | '$$Rov2PurchaseReturnOrder022009$$' |
 			| '$$Rov3PurchaseReturnOrder022009$$' | ''      | '$$Rov3PurchaseReturnOrder022009$$' | 'PR'        | '300,000' | ''          | ''             | '$$Rov3PurchaseReturnOrder022009$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '7,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -370,7 +370,7 @@ Scenario: _022011 copy PRO and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Q'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Expense type' | 'Net amount' | 'Purchase invoice' |
+			| '#' | 'Profit loss center' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Quantity'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Expense type' | 'Net amount' | 'Purchase invoice' |
 			| '1' | ''              | 'Dress'    | 'M/White'   | 'No'                 | '100,000' | 'pcs'  | '3 050,85'   | '200,00' | '18%' | ''              | '20 000,00'    | ''                    | 'Store 01' | ''             | '16 949,15'  | ''                 |
 			| '2' | ''              | 'Dress'    | 'L/Green'   | 'No'                 | '200,000' | 'pcs'  | '6 406,78'   | '210,00' | '18%' | ''              | '42 000,00'    | ''                    | 'Store 01' | ''             | '35 593,22'  | ''                 |
 			| '3' | ''              | 'Trousers' | '36/Yellow' | 'No'                 | '300,000' | 'pcs'  | '11 440,68'  | '250,00' | '18%' | ''              | '75 000,00'    | ''                    | 'Store 01' | ''             | '63 559,32'  | ''                 |
@@ -393,7 +393,7 @@ Scenario: _022011 copy PRO and check filling in Row Id info table
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                           |
+			| 'Key'                               | 'Basis' | 'Row ID'                            | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                           |
 			| '$$Rov1PurchaseReturnOrder022009$$' | ''      | '$$Rov1PurchaseReturnOrder022009$$' | 'PR'        | '100,000' | ''          | ''             | '$$Rov1PurchaseReturnOrder022009$$' |
 			| '$$Rov2PurchaseReturnOrder022009$$' | ''      | '$$Rov2PurchaseReturnOrder022009$$' | 'PR'        | '200,000' | ''          | ''             | '$$Rov2PurchaseReturnOrder022009$$' |
 			| '$$Rov3PurchaseReturnOrder022009$$' | ''      | '$$Rov3PurchaseReturnOrder022009$$' | 'PR'        | '300,000' | ''          | ''             | '$$Rov3PurchaseReturnOrder022009$$' |
@@ -449,7 +449,7 @@ Scenario: _022015 create PRO using form link/unlink
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#' | 'Basis'                         | 'Next step' | 'Q'      | 'Current step'  |
+		| '#' | 'Basis'                         | 'Next step' | 'Quantity'      | 'Current step'  |
 		| '1' | '$$PurchaseInvoice018001$$'     | ''          | '5,000'  | 'PRO&PR'        |
 		| '2' | '$$PurchaseInvoice018001$$'     | ''          | '60,000' | 'PRO&PR'        |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -464,7 +464,7 @@ Scenario: _022015 create PRO using form link/unlink
 		And I click "Ok" button
 		And I click "Save" button	
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                     | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                     | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | '$$PurchaseInvoice018001$$' | 'PR'        | '5,000'  | 'PRO&PR'       |
 			| '2' | ''                          | 'PR'        | '60,000' | ''             |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -484,7 +484,7 @@ Scenario: _022015 create PRO using form link/unlink
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                         | 'Next step' | 'Q'      | 'Current step'  |
+			| '#' | 'Basis'                         | 'Next step' | 'Quantity'      | 'Current step'  |
 			| '1' | '$$PurchaseInvoice018001$$'     | ''          | '5,000'  | 'PRO&PR'        |
 			| '2' | '$$PurchaseInvoice018001$$'     | ''          | '60,000' | 'PRO&PR'        |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -509,7 +509,7 @@ Scenario: _022015 create PRO using form link/unlink
 			| 'Boots' | '36/18SD'  | '$$PurchaseInvoice018001$$' |
 			| 'Dress' | 'S/Yellow' | '$$PurchaseInvoice018001$$' |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Store'    |
 			| 'Dress' | 'S/Yellow'  | '5,000' | 'Store 02' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -520,7 +520,7 @@ Scenario: _022015 create PRO using form link/unlink
 		And I select current line in "List" table
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                     | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                     | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | '$$PurchaseInvoice018001$$' | 'PR'        | '40,000' | 'PRO&PR'       |
 			| '2' | '$$PurchaseInvoice018001$$' | 'PR'        | '60,000' | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "2"

@@ -186,7 +186,7 @@ Scenario: _032001 discount calculation Discount 2 without Vat in the group Sum i
 	And I click "OK" button
 	And I click "Save" button
 	And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' |
 		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '474,56'        |
 		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '271,20'        |
 	And I click the button named "FormPostAndClose"
@@ -285,7 +285,7 @@ Scenario: _032002 discount calculation Discount 2 without Vat in the group Sum i
 	And I click "OK" button
 	And I click "Save" button
 	And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' |
 		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '474,56'        |
 		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '271,20'        |
 	And I click the button named "FormPostAndClose"
@@ -380,7 +380,7 @@ Scenario: _032003 discount calculation Discount 2 without Vat in the main group 
 	And I click "OK" button
 	And I click "Save" button
 	And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
 		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '716,88'        | 'pcs' |
 		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '395,92'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -474,7 +474,7 @@ Scenario: _032004 discount calculation Discount 1 without Vat in the main group 
 	And I click "OK" button
 	And I click "Save" button
 	And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' |
 		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '716,88'        |
 		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '395,92'        |
 	And I click the button named "FormPostAndClose"
@@ -519,7 +519,7 @@ Scenario: _032006 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -537,7 +537,7 @@ Scenario: _032007 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -561,7 +561,7 @@ Scenario: _032008 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -588,7 +588,7 @@ Scenario: _032009 check the discount order (same application rule), Discount Pri
 		And I click "OK" button
 		Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
+			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 			| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 		And I click the button named "FormPostAndClose"
@@ -612,7 +612,7 @@ Scenario: _032010 check the discount order (same application rule), Discount Pri
 		And I click "OK" button
 		Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
+			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 			| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 		And I click the button named "FormPostAndClose"
@@ -634,7 +634,7 @@ Scenario: _032011 check the discount order (same application rule), Discount Pri
 		And I click "OK" button
 		Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
+			| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 			| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 		And I click the button named "FormPostAndClose"
@@ -662,7 +662,7 @@ Scenario: _032012 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit' |
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit' |
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -692,7 +692,7 @@ Scenario: _032013 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -729,7 +729,7 @@ Scenario: _032014 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -764,7 +764,7 @@ Scenario: _032015 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -794,7 +794,7 @@ Scenario: _032016 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And Delay 2
@@ -821,7 +821,7 @@ Scenario: _032017 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -854,7 +854,7 @@ Scenario: _032018 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -894,7 +894,7 @@ Scenario: _032019 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -926,7 +926,7 @@ Scenario: _032020 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -958,7 +958,7 @@ Scenario: _032021 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -995,7 +995,7 @@ Scenario: _032022 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -1034,7 +1034,7 @@ Scenario: _032023 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -1079,7 +1079,7 @@ Scenario: _032024 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"
@@ -1124,7 +1124,7 @@ Scenario: _032025 check the discount order (same application rule), Discount Pri
 	And I click "OK" button
 	Then I wait that in user messages the "Message Notification" substring will appear in 10 seconds
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Q'     | 'Offers amount' | 'Unit'|
+		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'|
 		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs' |
 		| 'Boots' | '700,00' | '36/18SD'  | 'Store 01' | '1,000' | '100,00'        | 'pcs' |
 	And I click the button named "FormPostAndClose"

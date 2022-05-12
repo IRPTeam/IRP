@@ -3336,7 +3336,7 @@ Scenario: _010026 add test command to the list of documents Money transfer
 # 		And I input "2202283739" text in "InputFld" field
 # 		And I click "OK" button
 # 		And "PhysItemList" table contains lines
-# 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
+# 			| 'Item'  | 'Item key' | 'Unit' | 'Quantity'     |
 # 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
 # 			| 'Dress' | 'L/Green'  | 'pcs'  | '3,000' |
 # 	* Add items manually via the Add button
@@ -3361,7 +3361,7 @@ Scenario: _010026 add test command to the list of documents Money transfer
 # 		And I activate field named "PhysItemListCount" in "PhysItemList" table
 # 		And I input "1,000" text in the field named "PhysItemListCount" of "PhysItemList" table
 # 		And "PhysItemList" table contains lines
-# 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
+# 			| 'Item'  | 'Item key' | 'Unit' | 'Quantity'     |
 # 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
 # 			| 'Dress' | 'L/Green'  | 'pcs'  | '3,000' |
 # 			| 'Boots' | '38/18SD'  | 'pcs'  | '1,000' |
@@ -3382,7 +3382,7 @@ Scenario: _010026 add test command to the list of documents Money transfer
 # 		And I finish line editing in "ItemTableValue" table
 # 		And I click the button named "FormCommandSaveAndClose"
 # 		And "PhysItemList" table contains lines
-# 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
+# 			| 'Item'  | 'Item key' | 'Unit' | 'Quantity'     |
 # 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
 # 			| 'Dress' | 'L/Green'  | 'pcs'  | '4,000' |
 # 			| 'Boots' | '38/18SD'  | 'pcs'  | '1,000' |
@@ -3398,13 +3398,13 @@ Scenario: _010026 add test command to the list of documents Money transfer
 # 		And in the table "CompareItemList" I click the button named "CompareItemListSwitchItemLists"
 # 		And I activate field named "PhysItemListCount" in "PhysItemList" table
 # 		And I go to line in "PhysItemList" table
-# 			| 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+# 			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 # 			| 'Dress' | 'L/Green'  | '4,000' | 'pcs'  |
 # 		And I select current line in "PhysItemList" table
 # 		And I input "5,000" text in the field named "PhysItemListCount" of "PhysItemList" table
 # 		And I finish line editing in "PhysItemList" table
 # 		And "PhysItemList" table contains lines
-# 			| 'Item'  | 'Item key' | 'Unit' | 'Q'     |
+# 			| 'Item'  | 'Item key' | 'Unit' | 'Quantity'     |
 # 			| 'Boots' | '37/18SD'  | 'pcs'  | '2,000' |
 # 			| 'Dress' | 'L/Green'  | 'pcs'  | '5,000' |
 # 	* Check quantity changes manually on the comparison tab
@@ -3428,7 +3428,7 @@ Scenario: _010026 add test command to the list of documents Money transfer
 # 	* Delete lines in scan tab
 # 		And in the table "CompareItemList" I click the button named "CompareItemListSwitchItemLists"
 # 		And I go to line in "PhysItemList" table
-# 			| 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+# 			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 # 			| 'Dress' | 'L/Green'  | '5,000' | 'pcs'  |
 # 		And in the table "PhysItemList" I click the button named "PhysItemListDelete"
 # 		Then the number of "PhysItemList" table lines is "меньше или равно" 2
@@ -3487,7 +3487,7 @@ Scenario: _010026 add test command to the list of documents Money transfer
 # 		Then the number of "CompareItemList" table lines is "меньше или равно" 4
 # 	* Collapse of the tabular part with data on documents-bases
 # 		And "ExpItemList" table contains lines
-# 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
+# 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Quantity'      |
 # 			| 'Dress' | 'L/Green'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '8,000'  |
 # 			| 'Boots' | '37/18SD'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '15,000' |
 # 		* Check the ExpItemList table collapse 
@@ -3497,7 +3497,7 @@ Scenario: _010026 add test command to the list of documents Money transfer
 # 		* Check the ExpItemList table uncolapse
 # 			And I click "Show hide exp. item list" button
 # 			And "ExpItemList" table contains lines
-# 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Q'      |
+# 			| 'Item'  | 'Item key' | 'Base on'                 | 'Unit' | 'Quantity'      |
 # 			| 'Dress' | 'L/Green'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '8,000'  |
 # 			| 'Boots' | '37/18SD'  | '$$PurchaseInvoice0205001$$' | 'pcs'  | '15,000' |
 # 	* Check the transfer of filled items to Goods receipt

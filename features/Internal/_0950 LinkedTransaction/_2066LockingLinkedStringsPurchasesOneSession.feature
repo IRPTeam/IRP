@@ -648,7 +648,7 @@ Scenario: _2066010 change quantity in the linked string in the PO (one session)
 		And I select current line in "List" table
 	* Change quantity (less then PI)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Quantity'      |
 			| 'Shirt' | '36/Red'   | '11,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -661,7 +661,7 @@ Scenario: _2066010 change quantity in the linked string in the PO (one session)
 			|'Line No. [3] [Shirt 36/Red] RowID movements remaining: 10 . Required: 9 . Lacking: 1 .'|
 	* Change quantity (more then PI)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Quantity'      |
 			| 'Shirt' | '36/Red'   | '9,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -682,7 +682,7 @@ Scenario: _2066011 change quantity in the linked string in the PI, GR after PI, 
 		And I select current line in "List" table
 	* Change quantity (less then GR, GR exist)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Quantity'      |
 			| 'Boots' | '37/18SD'  | '2,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -702,7 +702,7 @@ Scenario: _2066011 change quantity in the linked string in the PI, GR after PI, 
 			|'Line No. [1] [Boots 37/18SD] RowID movements remaining: 12 . Required: 1 . Lacking: 11 .'|
 	* Change quantity (more then GR, GR exist)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Item'  | 'Item key' | 'Quantity'      |
 			| 'Boots' | '37/18SD'  | '1,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table

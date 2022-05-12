@@ -96,14 +96,14 @@ Scenario: _023002 check filling in Row Id info table in the SO
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                  |
+			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                  |
 			| '$$Rov1SalesOrder023001$$' | ''      | '$$Rov1SalesOrder023001$$' | 'SI&SC'     | '5,000' | ''          | ''             | '$$Rov1SalesOrder023001$$' |
 			| '$$Rov2SalesOrder023001$$' | ''      | '$$Rov2SalesOrder023001$$' | 'SI&SC'     | '4,000' | ''          | ''             | '$$Rov2SalesOrder023001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '1' | 'Dress' | 'L/Green'  | '5,000' |
 		And in the table "ItemList" I click "Copy" button
 		And I activate field named "ItemListQuantity" in "ItemList" table
@@ -118,31 +118,31 @@ Scenario: _023002 check filling in Row Id info table in the SO
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                  |
+			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                  |
 			| '$$Rov1SalesOrder023001$$' | ''      | '$$Rov1SalesOrder023001$$' | 'SI&SC'     | '5,000' | ''          | ''             | '$$Rov1SalesOrder023001$$' |
 			| '$$Rov2SalesOrder023001$$' | ''      | '$$Rov2SalesOrder023001$$' | 'SI&SC'     | '4,000' | ''          | ''             | '$$Rov2SalesOrder023001$$' |
 			| '$$Rov3SalesOrder023001$$' | ''      | '$$Rov3SalesOrder023001$$' | 'SI&SC'     | '8,000' | ''          | ''             | '$$Rov3SalesOrder023001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                  |
+			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                  |
 			| '$$Rov1SalesOrder023001$$' | ''      | '$$Rov1SalesOrder023001$$' | 'SI&SC'     | '8,000' | ''          | ''             | '$$Rov1SalesOrder023001$$' |
 	* Delete string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '3' | 'Dress' | 'L/Green'  | '8,000' |
 		And in the table "ItemList" I click "Delete" button
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                  |
+			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                  |
 			| '$$Rov1SalesOrder023001$$' | ''      | '$$Rov1SalesOrder023001$$' | 'SI&SC'     | '5,000' | ''          | ''             | '$$Rov1SalesOrder023001$$' |
 			| '$$Rov2SalesOrder023001$$' | ''      | '$$Rov2SalesOrder023001$$' | 'SI&SC'     | '4,000' | ''          | ''             | '$$Rov2SalesOrder023001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '1' | 'Dress' | 'L/Green'  | '5,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -150,13 +150,13 @@ Scenario: _023002 check filling in Row Id info table in the SO
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                  |
+			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                  |
 			| '$$Rov1SalesOrder023001$$' | ''      | '$$Rov1SalesOrder023001$$' | 'SI&SC'     | '7,000' | ''          | ''             | '$$Rov1SalesOrder023001$$' |
 			| '$$Rov2SalesOrder023001$$' | ''      | '$$Rov2SalesOrder023001$$' | 'SI&SC'     | '4,000' | ''          | ''             | '$$Rov2SalesOrder023001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '1' | 'Dress' | 'L/Green'  | '7,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -183,7 +183,7 @@ Scenario: _023003 copy SO and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'     | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key'  | 'Cancel' | 'Cancel reason' | 'Sales person'    |
+			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'     | 'Dont calculate row' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key'  | 'Cancel' | 'Cancel reason' | 'Sales person'    |
 			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress'    | 'No'                 | '5,000' | 'pcs'  | '419,49'     | '550,00' | '18%' | ''              | '2 330,51'   | '2 750,00'     | 'Store 01' | 'Revenue'      | '123'    | 'Stock'              | 'L/Green'   | 'No'     | ''              | 'Anna Petrova'    |
 			| '2' | 'Distribution department' | 'Basic Price Types' | 'Trousers' | 'No'                 | '4,000' | 'pcs'  | '244,07'     | '400,00' | '18%' | ''              | '1 355,93'   | '1 600,00'     | 'Store 01' | 'Revenue'      | ''       | 'Stock'              | '36/Yellow' | 'No'     | ''              | 'Alexander Orlov' |
 		And in the table "ItemList" I click "Edit currencies" button
@@ -208,7 +208,7 @@ Scenario: _023003 copy SO and check filling in Row Id info table
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                  |
+			| 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                  |
 			| '$$Rov1SalesOrder023001$$' | ''      | '$$Rov1SalesOrder023001$$' | 'SI&SC'     | '5,000' | ''          | ''             | '$$Rov1SalesOrder023001$$' |
 			| '$$Rov2SalesOrder023001$$' | ''      | '$$Rov2SalesOrder023001$$' | 'SI&SC'     | '4,000' | ''          | ''             | '$$Rov2SalesOrder023001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -257,14 +257,14 @@ Scenario: _023007 check filling in Delivery date/Reservation date and Use items 
 				| 'L/Green'  |
 		And I save the value of the field named "DeliveryDate" as "$$DeliveryDate023007$$"
 		And "ItemList" table contains lines
-			| '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key' | 'Cancel' | 'Delivery date'          | 'Cancel reason' |
+			| '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key' | 'Cancel' | 'Delivery date'          | 'Cancel reason' |
 			| '1' | ''                   | 'Basic Price Types' | 'Dress' | 'No'                 | '5,000' | 'pcs'  | '419,49'     | '550,00' | '18%' | ''              | '2 330,51'   | '2 750,00'     | 'Store 01' | ''             | ''       | 'Stock'              | 'L/Green'  | 'No'     | '$$DeliveryDate023007$$' | ''              |
 	* Filling in reservation date
 		And I save "Format((EndOfDay(CurrentDate()) + 432000), \"DF=dd.MM.yyyy\")" in "$$$$DateCurrentDayPluSFive$$$$" variable
 		And I input "$$$$DateCurrentDayPluSFive$$$$" text in "Reservation date" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key' | 'Cancel' | 'Reservation date'               | 'Cancel reason' |
+			| '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key' | 'Cancel' | 'Reservation date'               | 'Cancel reason' |
 			| '1' | ''                   | 'Basic Price Types' | 'Dress' | 'No'                 | '5,000' | 'pcs'  | '419,49'     | '550,00' | '18%' | ''              | '2 330,51'   | '2 750,00'     | 'Store 01' | ''             | ''       | 'Stock'              | 'L/Green'  | 'No'     | '$$$$DateCurrentDayPluSFive$$$$' | ''              |
 	* Use items shipment scheduling
 		And I move to "Other" tab
@@ -365,21 +365,21 @@ Scenario: _023004 check filling in procurement method using the button Fill in S
 		And I finish line editing in "ItemList" table
 	* Check the button
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     |
+			| 'Item'  | 'Item key' | 'Quantity'     |
 			| 'Shirt' | '38/Black' | '5,000' |
 		And I move one line down in "ItemList" table and select line
 		And in the table "ItemList" I click "Procurement" button
 		And I set checkbox "Stock"
 		And I click "OK" button
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' | 'Q'     |
+			| 'Item'       | 'Item key' | 'Quantity'     |
 			| 'High shoes' | '37/19SD'  | '2,000' |
 		And I move one line down in "ItemList" table and select line
 		And in the table "ItemList" I click "Procurement" button
 		And I change checkbox "Purchase"
 		And I click "OK" button
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     |
+			| 'Item'  | 'Item key' | 'Quantity'     |
 			| 'Boots' | '38/18SD'  | '8,000' |
 		And I move one line down in "ItemList" table and select line
 		And in the table "ItemList" I click "Procurement" button
@@ -387,7 +387,7 @@ Scenario: _023004 check filling in procurement method using the button Fill in S
 		And I click "OK" button
 	* Check filling in Procurement method in the Sales order
 		And "ItemList" table contains lines
-		| 'Item'       | 'Item key'  | 'Procurement method' | 'Q'     |
+		| 'Item'       | 'Item key'  | 'Procurement method' | 'Quantity'     |
 		| 'Shirt'      | '38/Black'  | 'Stock'              | '5,000' |
 		| 'Boots'      | '38/18SD'   | 'No reserve'         | '8,000' |
 		| 'High shoes' | '37/19SD'   | 'No reserve'         | '2,000' |
@@ -526,7 +526,7 @@ Scenario: _0154037 check impossibility deleting of the store field by line with 
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -535,7 +535,7 @@ Scenario: _0154037 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 
@@ -565,7 +565,7 @@ Scenario: _0154036 check the Deleting of the store field value by line with the 
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
 	* Deleting of the store field value by line with the service
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -574,7 +574,7 @@ Scenario: _0154036 check the Deleting of the store field value by line with the 
 		And I finish line editing in "ItemList" table
 	* Check that the store field has been cleared
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
 		And I close all client application windows
 

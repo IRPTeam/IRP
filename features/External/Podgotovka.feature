@@ -309,7 +309,7 @@ Scenario: create PurchaseOrder017001
 		And I input "250" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item'     | 'Q' | 'Item key'  | 'Store' | 'Unit' |
+			| 'Item'     | 'Quantity' | 'Item key'  | 'Store' | 'Unit' |
 			| 'Dress'    | '100,000'  | 'M/White'   | 'Store 01'      | 'pcs' |
 		And I input end of the current month date in "Delivery date" field
 	* Post document
@@ -401,20 +401,20 @@ Scenario: create PurchaseInvoice018001 based on PurchaseOrder017001
 		* Check filling items table
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Item'     | 'Purchase order'          | 'Item key'  | 'Unit' | 'Q'       |
+			| 'Item'     | 'Purchase order'          | 'Item key'  | 'Unit' | 'Quantity'       |
 			| 'Dress'    | '$$PurchaseOrder017001$$' | 'M/White'   | 'pcs'  | '100,000' |
 			| 'Dress'    | '$$PurchaseOrder017001$$' | 'L/Green'   | 'pcs'  | '200,000' |
 			| 'Trousers' | '$$PurchaseOrder017001$$' | '36/Yellow' | 'pcs'  | '300,000' |
 		* Check filling prices
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'Item key'  | 'Q'       | 'Price type'                         | 'Store'    |
+			| 'Price'  | 'Item'     | 'Item key'  | 'Quantity'       | 'Price type'                         | 'Store'    |
 			| '200,00' | 'Dress'    | 'M/White'   | '100,000' | 'en description is empty'           | 'Store 01' |
 			| '210,00' | 'Dress'    | 'L/Green'   | '200,000' | 'en description is empty'           | 'Store 01' |
 			| '250,00' | 'Trousers' | '36/Yellow' | '300,000' | 'en description is empty'           | 'Store 01' |
 		* Check addition of the store in tabular part
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Q'       |
+			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'       |
 			| 'Dress' | 'M/White'  | 'Store 01' | 'pcs'  | '100,000' |
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseInvoice018001$$" variable
@@ -439,11 +439,11 @@ Scenario: create PurchaseInvoice018006 based on PurchaseOrder017003
 		* Check filling items table
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Item'     | 'Purchase order'    | 'Item key' | 'Unit' | 'Q'       |
+			| 'Item'     | 'Purchase order'    | 'Item key' | 'Unit' | 'Quantity'       |
 			| 'Dress'    | '$$PurchaseOrder017003$$' | 'L/Green'  | 'pcs' | '500,000' |
 		* Filling prices
 			And "ItemList" table contains lines
-			| 'Price' | 'Item'  | 'Item key' | 'Q'       | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| 'Price' | 'Item'  | 'Item key' | 'Quantity'       | 'Price type'               | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| '40,00' | 'Dress' | 'L/Green'  | '500,000' | 'en description is empty' | 'pcs'  | '3 050,85'   | '16 949,15'  | '20 000,00'    |
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseInvoice018006$$" variable
@@ -486,7 +486,7 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 	* Check the addition of the store to the tabular partner
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
-		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Q'     |
+		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Quantity'     |
 		| 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'Store 02' | 'pcs' | '2,000' |
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseReturnOrder022001$$" variable
@@ -951,12 +951,12 @@ Scenario: create SalesInvoice024001
 	* Check adding Store
 		And I move to "Item list" tab
 		And "ItemList" table contains lines
-			| 'Item'     | Price | 'Item key'  | 'Store'    | 'Sales order'          | 'Unit' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| 'Item'     | Price | 'Item key'  | 'Store'    | 'Sales order'          | 'Unit' | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| 'Dress'    | '*'   | 'L/Green'   | 'Store 01' | '$$SalesOrder023001$$' | 'pcs'  | '5,000' | '*'             | '*'          | '*'          | '*'            |
 			| 'Trousers' | '*'   | '36/Yellow' | 'Store 01' | '$$SalesOrder023001$$' | 'pcs'  | '4,000' | '*'             | '*'          | '*'          | '*'            |
 	* Check prices and type of prices
 		And "ItemList" table contains lines
-		| 'Price'  | 'Item'     | 'Item key'  | 'Q'     | 'Price type'        |
+		| 'Price'  | 'Item'     | 'Item key'  | 'Quantity'     | 'Price type'        |
 		| '550,00' | 'Dress'    | 'L/Green'   | '5,000' | 'Basic Price Types' |
 		| '400,00' | 'Trousers' | '36/Yellow' | '4,000' | 'Basic Price Types' |	
 	And I click the button named "FormPost"
@@ -983,7 +983,7 @@ Scenario: create SalesInvoice024008
 		Then the form attribute named "Store" became equal to "Store 02"
 	* Check filling prices and type of prices
 		And "ItemList" table contains lines
-		| 'Price'  | 'Item'     | 'Item key'  | 'Price type'              | 'Q'      |
+		| 'Price'  | 'Item'     | 'Item key'  | 'Price type'              | 'Quantity'      |
 		| '466,10' | 'Dress'    | 'L/Green'   | 'Basic Price without VAT' | '10,000' |
 		| '338,98' | 'Trousers' | '36/Yellow' | 'Basic Price without VAT' | '14,000' |
 	And I click the button named "FormPost"

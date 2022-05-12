@@ -86,7 +86,7 @@ Scenario: _017002 check filling in Row Id info table in the PO
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                     |
 			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
 			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
 			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
@@ -94,7 +94,7 @@ Scenario: _017002 check filling in Row Id info table in the PO
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I activate field named "ItemListQuantity" in "ItemList" table
@@ -109,25 +109,25 @@ Scenario: _017002 check filling in Row Id info table in the PO
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                     |
 			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
 			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
 			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
 			| '$$Rov4PurchaseOrder017001$$' | ''      | '$$Rov4PurchaseOrder017001$$' | 'PI&GR'     | '208,000' | ''          | ''             | '$$Rov4PurchaseOrder017001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                     |
 			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '208,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
 	* Delete string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'       |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'       |
 			| '4' | 'Dress' | 'L/Green'  | '208,000' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                     |
 			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
 			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
 			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
@@ -135,7 +135,7 @@ Scenario: _017002 check filling in Row Id info table in the PO
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -143,14 +143,14 @@ Scenario: _017002 check filling in Row Id info table in the PO
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                     |
 			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
 			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '7,000'   | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
 			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '7,000' |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -179,7 +179,7 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Q'       | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Internal supply request' | 'Store'    | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Cancel reason' |
+			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Quantity'       | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Internal supply request' | 'Store'    | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Cancel reason' |
 			| '1' | ''                   | 'en description is empty' | 'Dress'    | 'M/White'   | 'No'                 | '3 050,85'   | '100,000' | 'pcs'  | '200,00' | '18%' | ''              | '16 949,15'  | '20 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
 			| '2' | ''                   | 'en description is empty' | 'Dress'    | 'L/Green'   | 'No'                 | '6 406,78'   | '200,000' | 'pcs'  | '210,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
 			| '3' | ''                   | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '11 440,68'  | '300,000' | 'pcs'  | '250,00' | '18%' | ''              | '63 559,32'  | '75 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
@@ -204,7 +204,7 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                     |
+			| 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                     |
 			| '$$Rov1PurchaseOrder017001$$' | ''      | '$$Rov1PurchaseOrder017001$$' | 'PI&GR'     | '100,000' | ''          | ''             | '$$Rov1PurchaseOrder017001$$' |
 			| '$$Rov2PurchaseOrder017001$$' | ''      | '$$Rov2PurchaseOrder017001$$' | 'PI&GR'     | '200,000' | ''          | ''             | '$$Rov2PurchaseOrder017001$$' |
 			| '$$Rov3PurchaseOrder017001$$' | ''      | '$$Rov3PurchaseOrder017001$$' | 'PI&GR'     | '300,000' | ''          | ''             | '$$Rov3PurchaseOrder017001$$' |
@@ -411,11 +411,11 @@ Scenario: _017006 create Purchase order based on Internal supply request
 			And I click "Save" button							
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
+				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''                   | 'Vendor price, TRY' | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''                   | 'Vendor price, TRY' | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
 			And "RowIDInfo" table contains lines
-				| 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+				| 'Basis'                                                 | 'Next step' | 'Quantity'      | 'Current step' |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'PI&GR'          | '10,000' | 'ITO&PO&PI'    |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'PI&GR'          | '50,000' | 'ITO&PO&PI'    |
 			Then the number of "RowIDInfo" table lines is "равно" "2"	
@@ -444,7 +444,7 @@ Scenario: _017006 create Purchase order based on Internal supply request
 		Then the form attribute named "Store" became equal to "Store 02"
 		And I click "Show row key" button	
 		And "ItemList" table contains lines
-			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
+			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
 			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''                   | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
 			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''                   | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
 		And I go to line in "ItemList" table
@@ -462,7 +462,7 @@ Scenario: _017006 create Purchase order based on Internal supply request
 		And I click "Save" button	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                         | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                         | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | 'PI&GR'     | '10,000' | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
 			| '2' | '$$Rov2PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'PI&GR'     | '50,000' | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -727,7 +727,7 @@ Scenario: _019901 check changes in movements on a Purchase Order document when q
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'        | 'Unit' |
+			| 'Item'  | 'Item key' | 'Quantity'        | 'Unit' |
 			| 'Dress' | 'S/Yellow' | '200,000'  | 'pcs' |
 		And I select current line in "ItemList" table
 		And I input "250,000" text in "Quantity" field of "ItemList" table

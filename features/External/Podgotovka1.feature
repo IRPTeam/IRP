@@ -1491,7 +1491,7 @@ Scenario: check filling revenue type (from Company)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Rent'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect Company
 		And I click Choice button of the field named "Company"
@@ -1501,7 +1501,7 @@ Scenario: check filling revenue type (from Company)
 		And I select current line in "List" table
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type'             | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Telephone communications' | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 
 
@@ -1533,7 +1533,7 @@ Scenario: check	filling expense type (from Company)
 		And I finish line editing in "ItemList" table		
 	* Check filling in Expense type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'    | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Rent'         | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
 	* Reselect Company
 		And I click Choice button of the field named "Company"
@@ -1543,7 +1543,7 @@ Scenario: check	filling expense type (from Company)
 		And I select current line in "List" table
 	* Check filling in Expense type
 		And "ItemList" table became equal
-			| 'Expense type'             | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type'             | 'Item'    | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Telephone communications' | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
 
 
@@ -1575,7 +1575,7 @@ Scenario: check filling revenue type (from item type)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Fuel'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1593,7 +1593,7 @@ Scenario: check filling revenue type (from item type)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type'             | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Telephone communications' | 'Boots' | '37/18SD'  | '1,000' | 'pcs'  |
 
 Scenario: check filling expense type (from item type)
@@ -1624,7 +1624,7 @@ Scenario: check filling expense type (from item type)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Fuel'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1642,7 +1642,7 @@ Scenario: check filling expense type (from item type)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type'             | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Telephone communications' | 'Boots' | '37/18SD'  | '1,000' | 'pcs'  |
 
 Scenario: check filling revenue type (item)
@@ -1673,7 +1673,7 @@ Scenario: check filling revenue type (item)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Software'     | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1691,7 +1691,7 @@ Scenario: check filling revenue type (item)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Rent'         | 'Boots' | '37/18SD'  | '1,000' | 'pcs'  |
 
 Scenario: check filling expense type (from item)
@@ -1722,7 +1722,7 @@ Scenario: check filling expense type (from item)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Software'     | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1740,7 +1740,7 @@ Scenario: check filling expense type (from item)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Rent'         | 'Boots' | '37/18SD'  | '1,000' | 'pcs'  |
 
 Scenario: check filling revenue type (item key)
@@ -1771,7 +1771,7 @@ Scenario: check filling revenue type (item key)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Software'     | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1784,7 +1784,7 @@ Scenario: check filling revenue type (item key)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Delivery'     | 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  |
 
 Scenario: check filling expense type (from item key)
@@ -1815,7 +1815,7 @@ Scenario: check filling expense type (from item key)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Software'     | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1827,5 +1827,5 @@ Scenario: check filling expense type (from item key)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Delivery'     | 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  |

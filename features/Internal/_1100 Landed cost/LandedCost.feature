@@ -2100,7 +2100,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			| '1'      |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' | 'Q'     |
+			| 'Item'       | 'Item key' | 'Quantity'     |
 			| 'High shoes' | '39/19SD'  | '2,000' |		
 		And I input "9,000" text in "Quantity" field of "ItemList" table
 		And I move to "Payments" tab

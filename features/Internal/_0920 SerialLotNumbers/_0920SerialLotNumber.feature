@@ -155,7 +155,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I select current line in "List" table
 	* Filling in serial lot number in the first string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -176,7 +176,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I click "Ok" button
 	* Check that the field Serial lot number is inactive in the second string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Boots'    | '38/18SD' | '1,000' |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -212,7 +212,7 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$RetailSalesReceipt092002$$" window
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I input "3,000" text in "Quantity" field of "ItemList" table
 		* Filling in payment tab
@@ -371,7 +371,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I click "Ok" button	
 	* Check filling in serial lot number
 		And "ItemList" table contains lines
-			| 'Serial lot numbers'             | 'Price'  | 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Retail sales receipt'         |
+			| 'Serial lot numbers'             | 'Price'  | 'Item'     | 'Item key'  | 'Quantity'     | 'Unit' | 'Retail sales receipt'         |
 			| '99098809009999; 99098809009998' | '400,00' | 'Trousers' | '38/Yellow' | '3,000' | 'pcs'  | '$$RetailSalesReceipt092002$$' |
 			| ''                               | '650,00' | 'Boots'    | '38/18SD'   | '1,000' | 'pcs'  | '$$RetailSalesReceipt092002$$' |
 			| ''                               | '700,00' | 'Boots'    | '37/18SD'   | '1,000' | 'pcs'  | '$$RetailSalesReceipt092002$$' |
@@ -382,7 +382,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| ''         | '2,000'    | ''          | '99098809009998'    | ''                  |
 	* Check that the field Serial lot number is inactive in the second string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Boots'    | '38/18SD' | '1,000' |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -413,7 +413,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$RetailReturnReceipt092003$$" window
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '3,000' |
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -582,7 +582,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I select current line in "List" table
 	* Filling in serial lot number in the first string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -603,7 +603,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I click "Ok" button
 	* Check that the field Serial lot number is inactive in the second string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Boots'    | '38/18SD' | '1,000' |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -628,7 +628,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$SalesInvoice092004$$" window
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -740,12 +740,12 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
 	* Copy line with serial lot number (serial lot number not copied)
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     | 'Serial lot numbers'             |
+			| 'Item'     | 'Item key'  | 'Quantity'     | 'Serial lot numbers'             |
 			| 'Trousers' | '38/Yellow' | '3,000' | '99098809009910; 99098809009911' |
 		And I activate "Item key" field in "ItemList" table
 		And in the table "ItemList" I click "Copy" button
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Serial lot numbers'             | 'Q'     |
+		| 'Item'     | 'Item key'  | 'Serial lot numbers'             | 'Quantity'     |
 		| 'Trousers' | '38/Yellow' | '99098809009910; 99098809009911' | '3,000' |
 		| 'Boots'    | '38/18SD'   | ''                               | '1,000' |
 		| 'Dress'    | 'M/White'   | ''                               | '1,000' |
@@ -762,7 +762,7 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I click "OK" button
 	* Check filling in serial lot number
 		And "ItemList" table contains lines
-			| 'Serial lot numbers'             | 'Price'  | 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Sales invoice'          |
+			| 'Serial lot numbers'             | 'Price'  | 'Item'     | 'Item key'  | 'Quantity'     | 'Unit' | 'Sales invoice'          |
 			| '99098809009910; 99098809009911' | '400,00' | 'Trousers' | '38/Yellow' | '3,000' | 'pcs'  | '$$SalesInvoice092004$$' |
 			| ''                               | '650,00' | 'Boots'    | '38/18SD'   | '1,000' | 'pcs'  | '$$SalesInvoice092004$$' |
 			| ''                               | '700,00' | 'Boots'    | '37/18SD'   | '1,000' | 'pcs'  | '$$SalesInvoice092004$$' |
@@ -773,7 +773,7 @@ Scenario: _092005 check serial lot number in the Sales return
 			| ''         | '2,000'    | ''          | '99098809009911'    | ''                  |
 	* Check that the field Serial lot number is inactive in the second string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Boots'    | '38/18SD' | '1,000' |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -797,7 +797,7 @@ Scenario: _092005 check serial lot number in the Sales return
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$SalesReturn092005$$" window
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '3,000' |
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -952,7 +952,7 @@ Scenario: _092006 check serial lot number in the PurchaseInvoice
 		And I input "700,00" text in "Price" field of "ItemList" table		
 	* Filling in serial lot number in the first string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -973,7 +973,7 @@ Scenario: _092006 check serial lot number in the PurchaseInvoice
 		And I click "Ok" button
 	* Check that the field Serial lot number is inactive in the second string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Boots'    | '38/18SD' | '1,000' |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -1059,7 +1059,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 		And I input "700,00" text in "Price" field of "ItemList" table		
 	* Filling in serial lot number in the first string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -1089,7 +1089,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$PurchaseInvoice0920061$$" window
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -1257,7 +1257,7 @@ Scenario: _092007 check serial lot number in the PurchaseReturn
 		And I input "700,00" text in "Price" field of "ItemList" table		
 	* Filling in serial lot number in the first string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -1278,7 +1278,7 @@ Scenario: _092007 check serial lot number in the PurchaseReturn
 		And I click "Ok" button
 	* Check that the field Serial lot number is inactive in the second string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Boots'    | '38/18SD' | '1,000' |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -1363,7 +1363,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 		And I input "700,00" text in "Price" field of "ItemList" table		
 	* Filling in serial lot number in the first string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
@@ -1384,7 +1384,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 		And I click "Ok" button
 	* Check that the field Serial lot number is inactive in the second string
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Boots'    | '38/18SD' | '1,000' |
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -1400,7 +1400,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$PurchaseReturn0920071$$" window
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -1520,11 +1520,11 @@ Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from
 		And I click "OK" button
 	* Check filling in serial lot number from Purchase invoice
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
 			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '400,00' | '18%' | ''              | '1 016,95'   | 'Purchase invoice 29 dated 25.01.2021 12:37:04' | ''                      | '1 200,00'     | 'Store 01' |
 		And I click the button named "FormPost"
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
 			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '400,00' | '18%' | ''              | '1 016,95'   | 'Purchase invoice 29 dated 25.01.2021 12:37:04' | ''                      | '1 200,00'     | 'Store 01' |
 		And I close all client application windows
 		
@@ -2799,7 +2799,7 @@ Scenario: _092020 check choice form Serial Lot number
 			And I select current line in "List" table
 		* Сheck choice form Serial lot number
 			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'  | 'Q'     |
+				| 'Item'     | 'Item key'  | 'Quantity'     |
 				| 'Trousers' | '38/Yellow' | '1,000' |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table	
@@ -3190,11 +3190,11 @@ Scenario: _092052 check filling in serial lot number in the SI from SC
 		And I click "OK" button
 	* Check filling in serial lot number from SC
 		And "ItemList" table became equal
-			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Store'    | 'Use shipment confirmation' |
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Store'    | 'Use shipment confirmation' |
 			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'Store 01' | 'Yes'                       |		
 		And I click the button named "FormPost"
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Store'    | 'Use shipment confirmation' |
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Store'    | 'Use shipment confirmation' |
 			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'Store 01' | 'Yes'                       |
 		And I close all client application windows
 
@@ -3211,7 +3211,7 @@ Scenario: _092053 check filling in serial lot number in the PI from GR
 		And I click "OK" button
 	* Check filling in serial lot number from GR
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Store'    | 'Use goods receipt' |
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Store'    | 'Use goods receipt' |
 			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'Store 01' | 'Yes'               |
 		And I close all client application windows
 

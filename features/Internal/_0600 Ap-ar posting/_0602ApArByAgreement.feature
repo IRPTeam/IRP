@@ -101,7 +101,7 @@ Scenario: _060202 create Sales invoice with Ar details by Partner terms and chec
 			And I save the window as "$$SalesInvoice060202$$"
 		* Check filling in sales invoice
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'Basic Price Types' | 'pcs'  | '*'          | '*'          | '11 000,00'    | 'Store 02' |
 			And I click the button named "FormPostAndClose"
 		* Check Sales invoice movements
@@ -293,7 +293,7 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 			And I move to "Item list" tab
 		* Check filling in purchase invoice
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'              | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Price type'              | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
 			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"

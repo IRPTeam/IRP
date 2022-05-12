@@ -15,4 +15,8 @@
   <content>Document.CreditNote</content>
   <content>Document.CashRevenue</content>
   <content>Document.DebitNote</content>
+  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
+  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
+  <content>Document.CashPayment.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
+  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
 </mdclass:FunctionalOption>

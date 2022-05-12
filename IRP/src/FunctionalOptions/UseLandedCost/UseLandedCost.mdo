@@ -29,4 +29,5 @@
   <content>InformationRegister.T6020S_BatchKeysInfo</content>
   <content>InformationRegister.T6060S_BatchCostAllocationInfo</content>
   <content>Document.AdditionalRevenueAllocation</content>
+  <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.Amount</content>
 </mdclass:FunctionalOption>

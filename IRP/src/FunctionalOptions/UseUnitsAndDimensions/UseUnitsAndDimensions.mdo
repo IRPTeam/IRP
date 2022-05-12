@@ -58,4 +58,7 @@
   <content>CommonAttribute.Weight</content>
   <content>CommonAttribute.Height</content>
   <content>Catalog.Items.Attribute.Vendor</content>
+  <content>Document.PriceList.TabularSection.ItemList.Attribute.InputPrice</content>
+  <content>Document.PriceList.TabularSection.DataPrice.Attribute.InputPrice</content>
+  <content>Document.PriceList.TabularSection.ItemKeyList.Attribute.InputPrice</content>
 </mdclass:FunctionalOption>

@@ -306,31 +306,17 @@ EndProcedure
 
 &AtClient
 Procedure FillExpCount(Command)
-	If DocPhysicalInventoryServer.HavePhysicalCountByLocation(Object.Ref) Then
-		ShowMessageBox(Undefined, R().InfoMessage_006);
-		Return;
-	EndIf;
-	FillExpCountAtServer();
-EndProcedure
-
-&AtServer
-Procedure FillExpCountAtServer()
-	DocPhysicalInventoryServer.FillExpCount(Object);
-EndProcedure
-
-&AtClient
-Procedure UpdateExpCount(Command)
-	DocPhysicalInventoryClient.UpdateExpCount(Object, ThisObject);
+	FillItemList(False);
 EndProcedure
 
 &AtClient
 Procedure UpdatePhysCount(Command)
-	UpdatePhysCountAtServer();
+	FillItemList(True);
 EndProcedure
 
 &AtServer
-Procedure UpdatePhysCountAtServer()
-	DocPhysicalInventoryServer.UpdatePhysCount(Object);
+Procedure FillItemList(UpdateExpCount)
+	DocPhysicalInventoryServer.FillItemList(Object, UpdateExpCount);
 EndProcedure
 
 &AtClient

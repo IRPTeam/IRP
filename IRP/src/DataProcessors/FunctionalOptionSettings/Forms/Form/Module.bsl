@@ -21,8 +21,18 @@ EndProcedure
 Procedure SeveAtServer()
 	For Each FunctionalOption In ThisObject.FunctionalOptions Do
 		Constants[FunctionalOption.OptionName].Set(FunctionalOption.Use);
-	EndDo;	
+	EndDo;
 EndProcedure	
+
+&AtClient
+Procedure UpdateAllUserSettings(Command)
+	UpdateAllUserSettingsAtServer();
+EndProcedure
+
+&AtServerNoContext
+Procedure UpdateAllUserSettingsAtServer()
+	UserSettingsServer.SetDefaultUserSettings();
+EndProcedure
 
 &AtClient
 Procedure FunctionalOptionsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)

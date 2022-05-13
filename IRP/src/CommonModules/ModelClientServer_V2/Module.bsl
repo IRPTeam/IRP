@@ -211,6 +211,9 @@ Function GetChain()
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
 	
+	// Loaders
+	Chain.Insert("LoadTable", GetChainLink("LoadTableExecute"));
+	
 	Return Chain;
 EndFunction
 
@@ -2150,6 +2153,18 @@ Function GenerateNewUUIDExecute(Options) Export
 		Return Options.CurrentUUID;
 	EndIf;
 	Return New UUID();
+EndFunction
+
+#EndRegion
+
+#Region LOAD_TABLE
+
+Function LoadTableOptions() Export
+	Return GetChainLinkOptions("TableAddress");
+EndFunction
+
+Function LoadTableExecute(Options) Export
+	Return Options.TableAddress;
 EndFunction
 
 #EndRegion

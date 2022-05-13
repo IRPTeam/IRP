@@ -892,6 +892,16 @@ Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
 	Return NewRow;
 EndFunction
 
+Procedure ItemListLoad(Object, Form, TableAddress, CountRows) Export
+	For i = 1 To CountRows Do
+		Object.ItemList.Add().Key = String(New UUID());
+	EndDo;
+	Parameters = GetSimpleParameters(Object, Form, "ItemList");
+	Parameters.TableAddress = TableAddress;
+	Parameters.CountRows = CountRows;
+	ControllerClientServer_V2.ItemListLoad(Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region _ITEM_LIST_COLUMNS

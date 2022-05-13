@@ -294,14 +294,9 @@ EndProcedure
 
 &AtClient
 Procedure LoadDataFromTableEnd(Result, AdditionalParameters) Export
-	If Not IsBlankString(Result) Then
-		TestResult(Result);
+	If Result <> Undefined And Not IsBlankString(Result.Address) And Result.CountRows > 0 Then
+		ViewClient_V2.ItemListLoad(Object, ThisObject, Result.Address, Result.CountRows);
 	EndIf;
-EndProcedure
-
-&AtServer
-Procedure TestResult(Result)
-	Table = GetFromTempStorage(Result);
 EndProcedure
 
 &AtClient

@@ -63,6 +63,8 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("TaxesCache"       , FormParameters.TaxesCache);
 	Parameters.Insert("ChangedData"      , New Map());
 	Parameters.Insert("ExtractedData"    , New Structure());
+	Parameters.Insert("TableAddress"     , "");
+	Parameters.Insert("CountRows"        , "");
 	
 	Parameters.Insert("PropertyBeforeChange", FormParameters.PropertyBeforeChange);
 	
@@ -6009,6 +6011,45 @@ EndProcedure
 
 #EndRegion
 
+#Region LOAD_DATA
+
+// ItemList.Load
+Procedure ItemListLoad(Parameters) Export
+	Binding = BindItemListLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.Load.Set
+#If Server Then
+	
+Procedure ServerTableLoaderItemList(Parameters, Results) Export
+	Binding = BindItemListLoad(Parameters);
+	LoaderTable(Binding.DataPath, Parameters, Results);
+EndProcedure
+
+#EndIf
+
+// ItemList.Load.Bind
+Function BindItemListLoad(Parameters)
+	DataPath = "ItemList";
+	Binding = New Structure();
+	
+	Binding.Insert("PhysicalInventory", "StepItemListLoadTable");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.LoadAtServer.Step
+Procedure StepItemListLoadTable(Parameters, Chain) Export
+	Chain.LoadTable.Enable = True;
+	Chain.LoadTable.Setter = "ServerTableLoaderItemList";
+	Options = ModelClientServer_V2.LoadTableOptions();
+	Options.TableAddress = Parameters.TableAddress;
+	Chain.LoadTable.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 // called when all chain steps is complete
@@ -6497,6 +6538,65 @@ Procedure SetReadOnlyProperties(Object, FillingData) Export
 	ReadOnlyProperties = StrConcat(HeaderProperties, ",") +","+StrConcat(TabularProperties, ",");
 	Object.AdditionalProperties.Insert("ReadOnlyProperties", ReadOnlyProperties);
 	Object.AdditionalProperties.Insert("IsBasedOn", True);
+EndProcedure
+
+Procedure LoaderTable(DataPath, Parameters, Result) Export
+	If Result.Count() <> 1 Then
+		Raise "load more than one table not implemented";
+	EndIf;
+	SourceTable = GetFromTempStorage(Result[0].Value);
+	
+	// only for physical inventory
+	If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory" Then
+		SourceTable.Columns.Quantity.Name = "ExpCount";
+	EndIf;
+	
+	TableName = Parameters.TableName;
+	Columns = Parameters.ObjectMetadataInfo.Tables[TableName].Columns;
+	
+	AllColumns = StrSplit(Columns, ",", False);
+	
+	If Not Parameters.Cache.Property(TableName) Then
+		Parameters.Cache.Insert(TableName, New Array());
+	EndIf;
+	
+	ArrayOfNewRows = New Array();
+	For Each Row In Parameters.Rows Do
+		ArrayOfNewRows.Add(Row);
+	EndDo;
+
+	RowIndex = ArrayOfNewRows.Count() - Parameters.CountRows;
+	For Each SourceRow In SourceTable Do
+		NewRow = ArrayOfNewRows[RowIndex];
+		Parameters.Cache[TableName].Add(NewRow);
+		
+		// fill new row default values from user settings
+		AddNewRow(TableName, Parameters);
+		// fill new row from source table
+		FillPropertyValues(NewRow, SourceRow,, "Key");
+		
+		// change parameters for each row
+		Parameters.ReadOnlyPropertiesMap.Clear();
+		Parameters.ProcessedReadOnlyPropertiesMap.Clear();
+		FilledColumns = New Array();
+		For Each Column In AllColumns Do
+			If ValueIsFilled(NewRow[Column]) Then
+				FullColumnName = TrimAll(StrTemplate("%1.%2", TableName, Column));
+				FilledColumns.Add(FullColumnName);
+				Parameters.ReadOnlyPropertiesMap.Insert(Upper(FullColumnName), True);
+			EndIf;
+		EndDo;
+			
+		// if columns filled from source, do not change value, even is vrong value
+		Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
+		Parameters.Rows.Clear();
+		Parameters.Rows.Add(NewRow);
+		For Each Column In FilledColumns Do
+			Property = New Structure("DataPath", Column);
+			API_SetProperty(Parameters, Property, Undefined);
+		EndDo;
+		RowIndex = RowIndex + 1;
+	EndDo;	
 EndProcedure
 
 #ENDIF

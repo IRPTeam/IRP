@@ -71,4 +71,8 @@
   <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.BasisDocument</content>
   <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.BasisDocument</content>
   <content>Document.CashPayment.TabularSection.PaymentList.Attribute.BasisDocument</content>
+  <content>Document.OpeningEntry.TabularSection.VendorsPaymentTerms</content>
+  <content>Document.OpeningEntry.TabularSection.CustomersPaymentTerms</content>
+  <content>Document.OpeningEntry.TabularSection.AccountReceivableByDocuments</content>
+  <content>Document.OpeningEntry.TabularSection.AccountPayableByDocuments</content>
 </mdclass:FunctionalOption>

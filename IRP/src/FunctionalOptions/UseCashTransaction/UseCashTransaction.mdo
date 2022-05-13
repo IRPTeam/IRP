@@ -9,7 +9,6 @@
   <privilegedGetMode>true</privilegedGetMode>
   <content>Document.CashExpense</content>
   <content>Document.VendorsAdvancesClosing</content>
-  <content>Document.MoneyTransfer</content>
   <content>Document.CashTransferOrder</content>
   <content>Document.CustomersAdvancesClosing</content>
   <content>Document.CreditNote</content>

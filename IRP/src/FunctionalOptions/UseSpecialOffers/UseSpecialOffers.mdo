@@ -30,4 +30,5 @@
   <content>Document.SalesOrder.TabularSection.SpecialOffers</content>
   <content>Document.SalesReturnOrder.TabularSection.SpecialOffers</content>
   <content>AccumulationRegister.R1005T_PurchaseSpecialOffers.Dimension.SpecialOffer</content>
+  <content>Document.PurchaseReturn.TabularSection.SpecialOffers</content>
 </mdclass:FunctionalOption>

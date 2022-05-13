@@ -33,6 +33,10 @@ Function IsUseStores() Export
 	Return GetFunctionalOption("UseStores");
 EndFunction
 
+Function IsUseCashTransaction() Export
+	Return GetFunctionalOption("UseCashTransaction");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

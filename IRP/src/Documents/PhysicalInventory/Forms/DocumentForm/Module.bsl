@@ -289,7 +289,19 @@ EndProcedure
 
 &AtClient
 Procedure LoadDataFromTable(Command)
-	OpenForm("CommonForm.LoadDataFromTable");
+	OpenForm("CommonForm.LoadDataFromTable", , ThisObject, , , , New NotifyDescription("LoadDataFromTableEnd", ThisObject));
+EndProcedure
+
+&AtClient
+Procedure LoadDataFromTableEnd(Result, AdditionalParameters) Export
+	If Not IsBlankString(Result) Then
+		TestResult(Result);
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure TestResult(Result)
+	Table = GetFromTempStorage(Result);
 EndProcedure
 
 &AtClient

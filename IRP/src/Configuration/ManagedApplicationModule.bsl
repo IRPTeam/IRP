@@ -34,7 +34,6 @@ Procedure OnStart()
 	
 	AttachIdleHandler("ConnectAllEquipments", 0.1, True);
 	
-		OpenForm("CommonForm.LoadDataFromTable");
 EndProcedure
 
 // Before start.

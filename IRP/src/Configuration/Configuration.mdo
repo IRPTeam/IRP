@@ -713,7 +713,6 @@
   <enums>Enum.CalculationMode</enums>
   <enums>Enum.AllocationMode</enums>
   <enums>Enum.AllocationMethod</enums>
-  <enums>Enum.SearchDataOrder</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>

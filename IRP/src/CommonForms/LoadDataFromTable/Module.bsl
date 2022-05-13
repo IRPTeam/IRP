@@ -3,9 +3,17 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
+	LoadType = "Barcode";
+	
 	HeadersRows = 2;
 	FillColumns();
 	
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	SetSettings();
+	OwnerUUID = FormOwner.UUID;
 EndProcedure
 
 #Region ItemsHandler
@@ -13,11 +21,6 @@ EndProcedure
 &AtClient
 Procedure TemplateOnChange(Item)
 	isTemplateChanged = True;
-EndProcedure
-
-&AtClient
-Procedure TemplateOnChangeAreaContent(Item, Area, AdditionalParameters)
-	//TODO: Insert the handler content
 EndProcedure
 
 &AtClient
@@ -29,13 +32,23 @@ EndProcedure
 
 &AtClient
 Procedure ResultSelection(Item, Area, StandardProcessing)
-	If Area.Top <= HeadersRows Then
+//	If Area.Top <= HeadersRows Then
 		StandardProcessing = False;
+		Area.Protection = True;
+//	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ShowImages(Command)
+	ShowOrHideImage = Not ShowOrHideImage;
+	If ShowOrHideImage Then
+		Items.FormShowImages.BackColor = CommonFunctionsServer.GetStyleByName("ActivityColor");
+	Else
+		Items.FormShowImages.BackColor = CommonFunctionsServer.GetStyleByName("ButtonBackColor");
 	EndIf;
 EndProcedure
 
 #EndRegion
-
 
 #Region Commands
 
@@ -52,6 +65,28 @@ EndProcedure
 &AtClient
 Procedure ClearTemplate(Command)
 	FillColumns();
+EndProcedure
+
+#EndRegion
+
+#Region SetType
+
+&AtClient
+Procedure LoadTypeOnChange(Item)
+	SetSettings();
+	FillColumns();
+EndProcedure
+
+&AtClient
+Procedure SetSettings()
+	If Not StrCompare("Barcode", LoadType) Then
+		SearchType = "";
+		Items.SearchType.Visible = False;
+	Else
+		If IsBlankString(SearchType) Then
+			SearchType = "Code";
+		EndIf;
+	EndIf; 
 EndProcedure
 
 #EndRegion
@@ -100,36 +135,25 @@ EndProcedure
 &AtServer
 Function GetColumnList()
 	Columns = New Structure;
-	
-//	Item = GetColumnInfo();
-//	Item.Type = New TypeDescription("CatalogRef.Items");
-//	Item.Name = Metadata.Catalogs.Items.Synonym;
-//	Item.Size = 20;
-//	Columns.Insert("Item", Item);
-//	
-//	ItemKey = GetColumnInfo();
-//	ItemKey.Type = New TypeDescription("CatalogRef.ItemKeys");
-//	ItemKey.Name = Metadata.Catalogs.ItemKeys.Synonym;
-//	ItemKey.Size = 20;
-//	Columns.Insert("ItemKey", ItemKey);
-//	
-//	SerialLotNumber = GetColumnInfo();
-//	SerialLotNumber.Type = New TypeDescription("CatalogRef.SerialLotNumbers");
-//	SerialLotNumber.Name = Metadata.Catalogs.SerialLotNumbers.Synonym;
-//	SerialLotNumber.Size = 20;
-//	Columns.Insert("SerialLotNumber", SerialLotNumber);
-//	
-//	Unit = GetColumnInfo();
-//	Unit.Type = New TypeDescription("CatalogRef.Units");
-//	Unit.Name = Metadata.Catalogs.Units.Synonym;
-//	Unit.Size = 20;
-//	Columns.Insert("Unit", Unit);
-	
-	Barcode = GetColumnInfo();
-	Barcode.Type = New TypeDescription(Metadata.DefinedTypes.typeBarcode.Type);
-	Barcode.Name = Metadata.InformationRegisters.Barcodes.Dimensions.Barcode.Synonym;
-	Barcode.Size = 20;
-	Columns.Insert("Barcode", Barcode);
+	If Not StrCompare("Item", LoadType) Then
+		Item = GetColumnInfo();
+		Item.Type = New TypeDescription("String");
+		Item.Name = Metadata.Catalogs.Items.Synonym;
+		Item.Size = 20;
+		Columns.Insert("Item", Item);
+	ElsIf Not StrCompare("ItemKey", LoadType) Then
+		ItemKey = GetColumnInfo();
+		ItemKey.Type = New TypeDescription("String");
+		ItemKey.Name = Metadata.Catalogs.ItemKeys.Synonym;
+		ItemKey.Size = 20;
+		Columns.Insert("ItemKey", ItemKey);
+	ElsIf Not StrCompare("Barcode", LoadType) Then
+		Barcode = GetColumnInfo();
+		Barcode.Type = New TypeDescription(Metadata.DefinedTypes.typeBarcode.Type);
+		Barcode.Name = Metadata.InformationRegisters.Barcodes.Dimensions.Barcode.Synonym;
+		Barcode.Size = 20;
+		Columns.Insert("Barcode", Barcode);
+	EndIf;
 	
 	Quantity = GetColumnInfo();
 	Quantity.Type = New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type);
@@ -165,7 +189,7 @@ Procedure FillResult()
 	If Not isTemplateChanged Then
 		Return;
 	EndIf;
-	
+	ErrorList.Clear();
 	FillResultTable();
 	
 EndProcedure
@@ -173,23 +197,8 @@ EndProcedure
 &AtServer
 Procedure FillResultTable()
 	
-	BarcodeNumber = GetColumnNumber("Barcode", Template);
-	BarcodeArray = GetColumnArray(BarcodeNumber, Template); // Array of String
-	
-	QuantityNumber = GetColumnNumber("Quantity", Template);
-	QuantityArray = GetColumnArray(QuantityNumber, Template); // Array of String
-	
-	BarcodeTable = BarcodeServer.GetBarcodeTable();
-	For Index = 0 To BarcodeArray.UBound() Do
-		NewRow = BarcodeTable.Add();
-		NewRow.Key = String(Index);
-		NewRow.Barcode = BarcodeArray[Index];
-		Quantity = QuantityArray[Index];
-		NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
-	EndDo;
-	
-	
-	ItemTable = GetItemInfo.ByBarcodeTable(BarcodeTable);
+	ItemTable = GetItemTable();
+	ResultStore = PutToTempStorage(ItemTable, OwnerUUID);
 	Index = 0;
 	
 	Result = New SpreadsheetDocument();
@@ -213,15 +222,30 @@ Procedure FillResultTable()
 		
 	EndDo;
 	Result.Area("R1").Visible = False;
-	Result.FixedTop = 1;
+	Result.FixedTop = HeadersRows;
+
+	ImageNumber = GetColumnNumber("Image", Result);
 
 	AreaToFill = GetResultRow(ItemTable);
+	PictureMap = New Map;
 	FillColor = False;
 	For Each Row In ItemTable Do
 		AreaToFill.Parameters.Fill(Row);
 		
 		AreaToFill.Area("R1").BackColor = ?(FillColor, WebColors.Azure, WebColors.White);
 		FillColor = Not FillColor;
+		
+		If Not Row.Image.IsEmpty() AND ShowOrHideImage Then
+			PictureData = PictureMap.Get(Row.Image);
+			If PictureData = Undefined Then
+				PictureFromRef = Row.Image.Preview.Get(); // BinaryData
+				PictureData = New Picture(PictureFromRef);
+				PictureMap.Insert(Row.Image, PictureData);
+			EndIf;
+			
+			AreaToFill.Area(1, ImageNumber).Picture = PictureData;
+			AreaToFill.Area(1, ImageNumber).PictureSize = PictureSize.Proportionally;
+		EndIf;
 		
 		Result.Put(AreaToFill);
 	EndDo;
@@ -231,6 +255,87 @@ Procedure FillResultTable()
 	CheckResultTable();
 	
 EndProcedure
+
+&AtServer
+Function GetItemTable()
+	
+	If Not StrCompare("Item", LoadType) Then
+		ItemNumber = GetColumnNumber("Item", Template);
+		ItemArray = GetColumnArray(ItemNumber, Template); // Array of String
+		
+		QuantityNumber = GetColumnNumber("Quantity", Template);
+		QuantityArray = GetColumnArray(QuantityNumber, Template); // Array of String
+		
+		If Not StrCompare("Code", SearchType) Then
+			DescriptionTable = GetItemInfo.GetDescriptionTable();
+			For Index = 0 To ItemArray.UBound() Do
+				NewRow = DescriptionTable.Add();
+				NewRow.Key = String(Index);
+				NewRow.Description = ItemArray[Index];
+				Quantity = QuantityArray[Index];
+				NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
+			EndDo;
+			ItemTable = GetItemInfo.SearchByItemDescription(DescriptionTable);
+		Else
+			CodeTable = GetItemInfo.GetCodeTable();
+			For Index = 0 To ItemArray.UBound() Do
+				NewRow = CodeTable.Add();
+				NewRow.Key = String(Index);
+				NewRow.Code = Number(ItemArray[Index]);
+				Quantity = QuantityArray[Index];
+				NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
+			EndDo;
+			ItemTable = GetItemInfo.SearchByItemCode(CodeTable);
+		EndIf;
+	ElsIf Not StrCompare("ItemKey", LoadType) Then
+		ItemKeyNumber = GetColumnNumber("ItemKey", Template);
+		ItemKeyArray = GetColumnArray(ItemKeyNumber, Template); // Array of String
+		
+		QuantityNumber = GetColumnNumber("Quantity", Template);
+		QuantityArray = GetColumnArray(QuantityNumber, Template); // Array of String
+		
+		If Not StrCompare("Code", SearchType) Then
+			DescriptionTable = GetItemInfo.GetDescriptionTable();
+			For Index = 0 To ItemKeyArray.UBound() Do
+				NewRow = DescriptionTable.Add();
+				NewRow.Key = String(Index);
+				NewRow.Description = ItemKeyArray[Index];
+				Quantity = QuantityArray[Index];
+				NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
+			EndDo;
+			ItemTable = GetItemInfo.SearchByItemKeyDescription(DescriptionTable);
+		Else
+			CodeTable = GetItemInfo.GetCodeTable();
+			For Index = 0 To ItemKeyArray.UBound() Do
+				NewRow = CodeTable.Add();
+				NewRow.Key = String(Index);
+				NewRow.Code = Number(ItemKeyArray[Index]);
+				Quantity = QuantityArray[Index];
+				NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
+			EndDo;
+			ItemTable = GetItemInfo.SearchByItemKeyCode(CodeTable);
+		EndIf;
+	ElsIf Not StrCompare("Barcode", LoadType) Then
+		BarcodeNumber = GetColumnNumber("Barcode", Template);
+		BarcodeArray = GetColumnArray(BarcodeNumber, Template); // Array of String
+		
+		QuantityNumber = GetColumnNumber("Quantity", Template);
+		QuantityArray = GetColumnArray(QuantityNumber, Template); // Array of String
+		
+		BarcodeTable = BarcodeServer.GetBarcodeTable();
+		For Index = 0 To BarcodeArray.UBound() Do
+			NewRow = BarcodeTable.Add();
+			NewRow.Key = String(Index);
+			NewRow.Barcode = BarcodeArray[Index];
+			Quantity = QuantityArray[Index];
+			NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
+		EndDo;
+		ItemTable = GetItemInfo.ByBarcodeTable(BarcodeTable);
+	EndIf;
+	
+	Return ItemTable;
+	
+EndFunction
 
 &AtServer
 Procedure HideResultColumn(ItemTable)
@@ -262,7 +367,7 @@ Procedure HideResultColumn(ItemTable)
 EndProcedure
 
 &AtServer
-Procedure CheckResultTable()
+Procedure CheckResultTable(Row = 0)
 	
 	BarcodeNumber = GetColumnNumber("Barcode", Result);
 	ItemNumber = GetColumnNumber("Item", Result);
@@ -272,30 +377,91 @@ Procedure CheckResultTable()
 	SerialLotNumber = GetColumnNumber("SerialLotNumber", Result);
 	
 	For Index = HeadersRows + 1 To Result.TableHeight Do
+		If Row Then
+			Index = Row;
+			ClearRowError(Row);
+		EndIf;
+		
 		Barcode = GetArea(Result, Index, BarcodeNumber).Value; // String
 		If Not IsBlankString(Barcode) Then
 			Item = GetArea(Result, Index, ItemNumber).Value; // CatalogRef.Items
 			If Item.IsEmpty() Then
-				GetArea(Result, Index, ItemNumber).Comment.Text = "Empty";
+				GetArea(Result, Index, ItemNumber).Comment.Text = R().S_027;
+				FillError(Index, ItemNumber, R().S_027);
 			EndIf;
 			
 			ItemKey = GetArea(Result, Index, ItemKeyNumber).Value; // CatalogRef.ItemKeys
 			If ItemKey.IsEmpty() Then
-				GetArea(Result, Index, ItemKeyNumber).Comment.Text = "Empty";
+				GetArea(Result, Index, ItemKeyNumber).Comment.Text = R().S_027;
+				FillError(Index, ItemKeyNumber, R().S_027);
 			EndIf;
 		EndIf;
 		
 		UseSerialLot = GetArea(Result, Index, UseSerialLotNumber).Value; // Boolean
 		SerialLot = GetArea(Result, Index, SerialLotNumber).Value; // CatalogRef.SerialLotNumbers
 		If UseSerialLot And SerialLot.IsEmpty() Then
-			GetArea(Result, Index, SerialLotNumber).Comment.Text = "Empty";
+			GetArea(Result, Index, SerialLotNumber).Comment.Text = R().S_027;
+			FillError(Index, SerialLotNumber, R().S_027);
 		ElsIf Not UseSerialLot And Not SerialLot.IsEmpty() Then
-			GetArea(Result, Index, SerialLotNumber).Comment.Text = "Have to be empty";
+			GetArea(Result, Index, SerialLotNumber).Comment.Text = R().Error_108;
+			FillError(Index, SerialLotNumber, R().Error_108);
 		EndIf;
 		
+		If Row Then
+			Break;
+		EndIf;
 	EndDo;
 	
 	
+EndProcedure
+
+&AtClient
+Procedure ErrorListOnActivateRow(Item)
+	
+	If Items.ErrorList.CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	Array = New Array;
+	Array.Add(Result.Area(Items.ErrorList.CurrentData.Row, Items.ErrorList.CurrentData.Column));
+	Items.Result.SetSelectedAreas(Array);
+	CurrentItem = Items.Result;
+EndProcedure
+
+// Fill error.
+// 
+// Parameters:
+//  Row - Number - Row
+//  Column - Number - Column
+//  Text - String - Text
+&AtServer
+Procedure FillError(Row, Column, Text)
+	
+	NewRow = ErrorList.Add();
+	NewRow.Row = Row;
+	NewRow.Column = Column;
+	NewRow.ErrorText = Text;
+	
+	ErrorList.Sort("Row, Column");
+EndProcedure
+
+&AtServer
+Procedure ClearRowError(Row)
+	
+	RowList = ErrorList.FindRows(New Structure("Row", Row));
+	For Each RowInList In RowList Do
+		ErrorList.Delete(RowInList);
+	EndDo;
+	
+	For Index = 1 To Result.TableWidth Do
+		GetArea(Result, Row, Index).Comment.Text = "";
+	EndDo;
+	
+EndProcedure
+
+&AtClient
+Procedure ResultOnChangeAreaContent(Item, Area, AdditionalParameters)
+	CheckResultTable(Area.Top);
 EndProcedure
 
 // Get area.
@@ -326,6 +492,7 @@ Function GetResultRow(ItemTable)
 		Area.ValueType = Column.ValueType;
 		Area.Parameter = Column.Name;
 		Area.FillType = SpreadsheetDocumentAreaFillType.Parameter;
+		Area.Indent = 1;
 	EndDo;
 	
 	//@skip-check invocation-parameter-type-intersect
@@ -347,7 +514,7 @@ Procedure SetPage(Index)
 	Items.FormBack.Visible = StepNumber > 0;
 	Items.ClearTemplate.Visible = StepNumber = 0;
 	
-	PageLimit = 1;
+	PageLimit = 2;
 	If StepNumber > PageLimit Then
 		StepNumber = PageLimit;
 	EndIf;
@@ -358,9 +525,9 @@ Procedure SetPage(Index)
 		Items.PagesMain.CurrentPage = Items.PageResult;
 		
 		FillResult();
-		isTemplateChanged = False;
-	Else
-		Return;
+		isTemplateChanged = False;		
+	ElsIf StepNumber = 2 Then
+		Close(ResultStore);
 	EndIf;
 	
 EndProcedure

@@ -101,6 +101,7 @@ EndFunction
 // * Barcode  - DefinedType.typeBarcode
 // * ItemType - CatalogRef.ItemTypes -
 // * UseSerialLotNumber - Boolean -
+// * Image - CatalogRef.Files -
 Function SearchByBarcodes_WithKey(BarcodeTable, AddInfo = Undefined) Export
 
 	Query = New Query();
@@ -127,10 +128,71 @@ Function SearchByBarcodes_WithKey(BarcodeTable, AddInfo = Undefined) Export
 	|	BarcodeTable.Key,
 	|	BarcodeTable.Barcode,
 	|	BarcodeTable.Quantity
+	|INTO MainData
 	|FROM
 	|	BarcodeTable AS BarcodeTable
 	|		LEFT JOIN InformationRegister.Barcodes AS Barcodes
-	|		ON BarcodeTable.Barcode = Barcodes.Barcode";
+	|		ON BarcodeTable.Barcode = Barcodes.Barcode
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AttachedFiles.Owner AS Item,
+	|	VALUE(Catalog.ItemKeys.EmptyRef) AS ItemKey,
+	|	MAX(AttachedFiles.File) AS File,
+	|	MIN(AttachedFiles.Priority) AS Priority
+	|INTO Images
+	|FROM
+	|	InformationRegister.AttachedFiles AS AttachedFiles
+	|		INNER JOIN MainData AS MainData
+	|		ON MainData.Item = AttachedFiles.Owner
+	|WHERE
+	|	AttachedFiles.Priority = 0
+	|GROUP BY
+	|	AttachedFiles.Owner,
+	|	VALUE(Catalog.ItemKeys.EmptyRef)
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	AttachedFiles.Owner.Item,
+	|	AttachedFiles.Owner AS Item,
+	|	MAX(AttachedFiles.File) AS File,
+	|	MIN(AttachedFiles.Priority) AS Priority
+	|FROM
+	|	InformationRegister.AttachedFiles AS AttachedFiles
+	|		INNER JOIN MainData AS MainData
+	|		ON MainData.ItemKey = AttachedFiles.Owner
+	|WHERE
+	|	AttachedFiles.Priority = 0
+	|GROUP BY
+	|	AttachedFiles.Owner.Item,
+	|	AttachedFiles.Owner
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	MainData.ItemKey,
+	|	MainData.Item,
+	|	MainData.SerialLotNumber,
+	|	MainData.Unit,
+	|	MainData.ItemKeyUnit,
+	|	MainData.ItemUnit,
+	|	MainData.hasSpecification,
+	|	MainData.ItemType,
+	|	MainData.UseSerialLotNumber,
+	|	MainData.Key,
+	|	MainData.Barcode,
+	|	MainData.Quantity,
+	|	Images.File AS Image
+	|FROM
+	|	MainData AS MainData
+	|		LEFT JOIN Images AS Images
+	|		ON CASE
+	|			WHEN Images.ItemKey = VALUE(Catalog.ItemKeys.EmptyRef)
+	|				THEN MainData.Item = Images.Item
+	|			ELSE MainData.ItemKey = Images.ItemKey
+	|		END";
 	Query.SetParameter("BarcodeTable", BarcodeTable);
 	QueryExecution = Query.Execute();
 	QueryUnload = QueryExecution.Unload();

@@ -637,6 +637,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_105", NStr("en = 'Document [%1] already have related documents'", Lang));
 	Strings.Insert("Error_106", NStr("en = 'Can not lock data'", Lang));
 	Strings.Insert("Error_107", NStr("en = 'You try to call deleted service %1.'", Lang));
+	Strings.Insert("Error_108", NStr("en = 'Field is filled, but it has to be empty.'", Lang));
 #EndRegion
 
 #Region InfoMessages

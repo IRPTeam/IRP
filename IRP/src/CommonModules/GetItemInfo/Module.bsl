@@ -624,10 +624,26 @@ Function ByBarcodeTable(Barcodes) Export
 	Return StandardItemTable;
 EndFunction
 
+// Get picture URL.
+// 
+// Parameters:
+//  ItemRef - CatalogRef.Items, CatalogRef.ItemKeys - Item ref
+// 
+// Returns:
+//  String - Get picture URL
+Function GetPictureURL(ItemRef) Export
+	PictureTable = PictureViewerServer.GetPicturesByObjectRef(ItemRef);
+	If PictureTable.Count() Then
+		Return PictureTable[0].Ref;
+	EndIf;
+	Return Catalogs.Files.EmptyRef();
+EndFunction
+
 // Get standard item table.
 // 
 // Returns:
 //  ValueTable - Get standard item table:
+// * Image  - CatalogRef.Files - URL to image
 // * Key - String -
 // * ItemType - CatalogRef.ItemTypes -
 // * Item - CatalogRef.Items -
@@ -640,8 +656,9 @@ EndFunction
 // * Barcode  - DefinedType.typeBarcode
 Function GetStandardItemTable() Export
 	Table = New ValueTable();
-	Table.Columns.Add("Key", New TypeDescription("String"), "Key", 15);
 	
+	Table.Columns.Add("Key", New TypeDescription("String"), "Key", 15);
+	Table.Columns.Add("Image", New TypeDescription("CatalogRef.Files"), "", 2);
 	Table.Columns.Add("ItemType", New TypeDescription("CatalogRef.ItemTypes"), Metadata.Catalogs.ItemTypes.Synonym, 15);
 	Table.Columns.Add("Item", New TypeDescription("CatalogRef.Items"), Metadata.Catalogs.Items.Synonym, 15);
 	Table.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"), Metadata.Catalogs.ItemKeys.Synonym, 15);
@@ -653,6 +670,80 @@ Function GetStandardItemTable() Export
 	Table.Columns.Add("Quantity", Metadata.DefinedTypes.typeQuantity.Type, Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym, 15);
 	Table.Columns.Add("Barcode", Metadata.DefinedTypes.typeBarcode.Type, Metadata.InformationRegisters.Barcodes.Dimensions.Barcode.Synonym, 20);
 	Return Table
+EndFunction
+
+// Search by item description.
+// 
+// Parameters:
+//  DescriptionTable - See GetDescriptionTable
+// 
+// Returns:
+//  See GetStandardItemTable
+Function SearchByItemDescription(DescriptionTable) Export
+	Return GetStandardItemTable();
+EndFunction
+
+// Search by item code.
+// 
+// Parameters:
+//  CodeTable - See GetCodeTable
+// 
+// Returns:
+//  See GetStandardItemTable
+Function SearchByItemCode(CodeTable) Export
+	Return GetStandardItemTable();
+EndFunction
+
+// Search by item key description.
+// 
+// Parameters:
+//  DescriptionTable - See GetDescriptionTable
+// 
+// Returns:
+//  See GetStandardItemTable
+Function SearchByItemKeyDescription(DescriptionTable) Export
+	Return GetStandardItemTable();
+EndFunction
+
+// Search by item key code.
+// 
+// Parameters:
+//  CodeTable - See GetCodeTable
+// 
+// Returns:
+//  See GetStandardItemTable
+Function SearchByItemKeyCode(CodeTable) Export
+	Return GetStandardItemTable();
+EndFunction
+
+// Get description table.
+// 
+// Returns:
+//  ValueTable - Get description table:
+// * Key - String
+// * Description - String
+// * Quantity - DefinedType.typeQuantity
+Function GetDescriptionTable() Export
+	Table = New ValueTable();
+	Table.Columns.Add("Key", New TypeDescription("String"), "Key", 15);
+	Table.Columns.Add("Description", Metadata.CommonAttributes.Description_en.Type, "Key", 15);
+	Table.Columns.Add("Quantity", Metadata.DefinedTypes.typeQuantity.Type, Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym, 15);
+	Return Table;
+EndFunction
+
+// Get code table.
+// 
+// Returns:
+//  ValueTable - Get code table:
+// * Key - String
+// * Code - Number
+// * Quantity - DefinedType.typeQuantity
+Function GetCodeTable() Export
+	Table = New ValueTable();
+	Table.Columns.Add("Key", New TypeDescription("String"), "Key", 15);
+	Table.Columns.Add("Code", Metadata.Catalogs.ItemKeys.StandardAttributes.Code.Type, "Key", 15);
+	Table.Columns.Add("Quantity", Metadata.DefinedTypes.typeQuantity.Type, Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym, 15);
+	Return Table;
 EndFunction
 
 #EndRegion

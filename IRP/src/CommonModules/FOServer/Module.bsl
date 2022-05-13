@@ -171,15 +171,15 @@ Function GetDefault_Currency(Value = Undefined, IsUpdateDefaults = False) Export
 	Return Catalogs.Currencies.Default;
 EndFunction
 
-Function GetDefault_Company(Value = Undefined) Export
-	If IsUseCompanies() Then
+Function GetDefault_Company(Value = Undefined, IsUpdateDefaults = False) Export
+	If IsUseCompanies() And Not IsUpdateDefaults Then
 		Return Value;
 	EndIf;
 	Return Catalogs.Companies.Default;
 EndFunction
 
-Function GetDefault_Store(Value = Undefined) Export
-	If IsUseStores() Then
+Function GetDefault_Store(Value = Undefined, IsUpdateDefaults = False) Export
+	If IsUseStores() And Not IsUpdateDefaults Then
 		Return Value;
 	EndIf;
 	Return Catalogs.Stores.Default;

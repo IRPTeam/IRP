@@ -125,7 +125,6 @@ Procedure FillItemList(Object, UpdateExpCount) Export
 	Else
 		ArrayOfFillingColumns.Add("ItemList.PhysCount");
 	EndIf;
-	ArrayOfFillingColumns.Add("ItemList.Difference");
 	RecalculateItemList(Object, ArrayOfFillingRows, ArrayOfFillingColumns);
 EndProcedure	
 

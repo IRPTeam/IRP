@@ -6639,18 +6639,18 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 		EndDo;
 		
 		// reset steps counter, infinity loop between different rows will not
-		ValidSteps = New Array();
 		If Parameters.Property("ModelEnvironment") 
 			And Parameters.ModelEnvironment.Property("AlreadyExecutedSteps") Then
+				ValidSteps = New Map();
 				For Each Step In Parameters.ModelEnvironment.AlreadyExecutedSteps Do
-					If Step.Key = Undefined Or ProcessedKeys.Find(Step.Key) <> Undefined Then
-						ValidSteps.Add(Step);
+					If Step.Value.Key = Undefined Or ProcessedKeys.Find(Step.Value.Key) <> Undefined Then
+						ValidSteps.Insert(Step.Value.Name + ":" + Step.Value.Key, Step.Value);
 					EndIf;
 				EndDo;
 				Parameters.ModelEnvironment.AlreadyExecutedSteps = ValidSteps;
 		EndIf;
 		
-		// if columns filled from source, do not change value, even is vrong value
+		// if columns filled from source, do not change value, even is wrong value
 		Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
 		For Each Column In FilledColumns Do
 			Property = New Structure("DataPath", Column);

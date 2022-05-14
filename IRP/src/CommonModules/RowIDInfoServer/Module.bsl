@@ -3070,13 +3070,29 @@ Function ExtractData_FromPhysicalInventory(BasisesTable, DataReceiver, AddInfo =
 	|		AND BasisesTable.BasisKey = ItemList.Key
 	|
 	|ORDER BY
-	|	ItemList.LineNumber";
+	|	ItemList.LineNumber
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	ItemList.SerialLotNumber,
+	|	case when ItemList.Difference < 0 Then -ItemList.Difference 
+	|	else ItemList.Difference end AS Quantity
+	|FROM
+	|	Document.PhysicalInventory.ItemList AS ItemList
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|WHERE
+	|	NOT ItemList.SerialLotNumber.Ref IS NULL";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
-	TableRowIDInfo     = QueryResults[1].Unload();
-	TableItemList      = QueryResults[2].Unload();
+	TableRowIDInfo        = QueryResults[1].Unload();
+	TableItemList         = QueryResults[2].Unload();
+	TableSerialLotNumbers = QueryResults[3].Unload();
 
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit,
@@ -3084,8 +3100,9 @@ Function ExtractData_FromPhysicalInventory(BasisesTable, DataReceiver, AddInfo =
 	EndDo;
 
 	Tables = New Structure();
-	Tables.Insert("ItemList", TableItemList);
-	Tables.Insert("RowIDInfo", TableRowIDInfo);
+	Tables.Insert("ItemList"        , TableItemList);
+	Tables.Insert("RowIDInfo"       , TableRowIDInfo);
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -7141,7 +7158,7 @@ Function GetFieldsToLock_ExternalLink_PhysicalInventory(ExternalDocAliase, Alias
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.StockAdjustmentAsSurplus 
 		Or ExternalDocAliase = Aliases.StockAdjustmentAsWriteOff Then
-		Result.Header   = "Store, Status, FillExpCount, UpdateExpCount, UpdatePhysCount";
+		Result.Header   = "Store, Status, FillExpCount, UpdatePhysCount";
 		Result.ItemList = "Item, ItemKey";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Store   , Store,

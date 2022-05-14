@@ -146,7 +146,8 @@ Function ItemList()
 		   |	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
 		   |	ItemList.PhysicalInventory AS PhysicalInventory,
 		   |	ItemList.Ref AS Basis,
-		   |	ItemList.QuantityInBaseUnit AS Quantity
+		   |	ItemList.QuantityInBaseUnit AS Quantity,
+		   |	ItemList.Key
 		   |INTO ItemList
 		   |FROM
 		   |	Document.StockAdjustmentAsWriteOff.ItemList AS ItemList

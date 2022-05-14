@@ -157,7 +157,8 @@ Function ItemList()
 	|	ItemList.PhysicalInventory AS PhysicalInventory,
 	|	ItemList.Ref AS Basis,
 	|	ItemList.QuantityInBaseUnit AS Quantity,
-	|	ItemList.Amount AS LandedCost
+	|	ItemList.Amount AS LandedCost,
+	|	ItemList.Key
 	|INTO ItemList
 	|FROM
 	|	Document.StockAdjustmentAsSurplus.ItemList AS ItemList

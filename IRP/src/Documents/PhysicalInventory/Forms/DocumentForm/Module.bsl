@@ -301,17 +301,18 @@ EndProcedure
 
 &AtServer
 Procedure TestResult(Result)
+	//@skip-check module-unused-local-variable
 	Table = GetFromTempStorage(Result);
 EndProcedure
 
 &AtClient
 Procedure FillExpCount(Command)
-	FillItemList(False);
+	FillItemList(True);
 EndProcedure
 
 &AtClient
 Procedure UpdatePhysCount(Command)
-	FillItemList(True);
+	FillItemList(False);
 EndProcedure
 
 &AtServer

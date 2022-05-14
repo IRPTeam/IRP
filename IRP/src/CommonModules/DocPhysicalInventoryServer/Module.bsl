@@ -78,22 +78,46 @@ EndProcedure
 //  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
 //  UpdateExpCount - Boolean
 Procedure FillItemList(Object, UpdateExpCount) Export
-	ItemCounts = GetRefilledItemTable(Object);
+	ItemTables = GetRefilledItemTable(Object);
 
-	If Not ItemCounts.Count() Then
+	// Have no any phys count by location
+	If Not UpdateExpCount And ItemTables.PhysicalCount.Count() = 0 Then
 		Return;
 	EndIf;
-	
-	Object.RowIDInfo.Clear();
-	Object.ItemList.Clear();
 
 	ArrayOfFillingRows = New Array();
-	For Each Row In ItemCounts Do
-		NewRow = Object.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-		ArrayOfFillingRows.Add(NewRow);
+	
+	CountName = ?(UpdateExpCount, "ExpCount", "PhysCount");
+	SearchTable = ?(UpdateExpCount, ItemTables.ActualStock, ItemTables.PhysicalCount);
+	
+	For Each Row In Object.ItemList Do
+		Row[CountName] = 0;
 	EndDo;
 	
+	StrFilter = New Structure("ItemKey, SerialLotNumber, Unit");
+	For Each Row In SearchTable Do
+		FillPropertyValues(StrFilter, Row);
+		FindRow = Object.ItemList.FindRows(StrFilter);	
+		NewRow = Undefined;
+		If FindRow.Count() Then
+			NewRow = FindRow[0];
+			NewRow[CountName] = Row[CountName];
+		Else
+			NewRow = Object.ItemList.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Key = New UUID;
+		EndIf;
+		
+		OldRows = ItemTables.ItemList.FindRows(New Structure("Key", NewRow.Key));
+		If OldRows.Count() = 0 OR OldRows.Count() AND OldRows[0][CountName] <> NewRow[CountName] Then
+			ArrayOfFillingRows.Add(NewRow);
+		EndIf;
+	EndDo;
+	OldRows = Object.ItemList.FindRows(New Structure(CountName, 0));
+	For Each OldRow In OldRows Do
+		ArrayOfFillingRows.Add(OldRow);
+	EndDo;
+			
 	ArrayOfFillingColumns = New Array();
 	ArrayOfFillingColumns.Add("ItemList.ItemKey");
 	If UpdateExpCount Then
@@ -105,9 +129,20 @@ Procedure FillItemList(Object, UpdateExpCount) Export
 	RecalculateItemList(Object, ArrayOfFillingRows, ArrayOfFillingColumns);
 EndProcedure	
 
+// Get refilled item table.
+// 
+// Parameters:
+//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
+// 
+// Returns:
+//  Structure - Get refilled item table:
+// * ItemList - ValueTable
+// * ActualStock - ValueTable
+// * PhysicalCount - ValueTable
 Function GetRefilledItemTable(Object)
 	
 	Query = New Query;
+	Query.TempTablesManager = New TempTablesManager();
 	Query.Text =
 		"SELECT
 		|	ItemList.Key,
@@ -116,9 +151,9 @@ Function GetRefilledItemTable(Object)
 		|	ItemList.UseSerialLotNumber,
 		|	ItemList.SerialLotNumber,
 		|	ItemList.Unit,
-		|	ItemList.ExpCount,
-		|	ItemList.PhysCount,
-		|	ItemList.ManualFixedCount,
+		|	ItemList.PhysCount AS PhysCount,
+		|	ItemList.ExpCount AS ExpCount,
+		|	ItemList.ManualFixedCount AS ManualFixedCount,
 		|	ItemList.Difference,
 		|	ItemList.Description
 		|INTO ItemList
@@ -128,34 +163,68 @@ Function GetRefilledItemTable(Object)
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	ItemList.Key,
-		|	ItemList.Item,
-		|	ItemList.ItemKey,
-		|	ItemList.UseSerialLotNumber,
-		|	ItemList.SerialLotNumber,
-		|	ItemList.Unit,
-		|	ItemList.ExpCount,
-		|	ItemList.PhysCount,
-		|	ItemList.ManualFixedCount,
-		|	ItemList.Difference,
-		|	ItemList.Description,
-		|	R4010B_ActualStocksBalance.QuantityBalance
+		|	"""" AS Key,
+		|	ActualStocksBalance.ItemKey.Item AS Item,
+		|	ActualStocksBalance.ItemKey,
+		|	ActualStocksBalance.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
+		|	ActualStocksBalance.SerialLotNumber,
+		|	CASE
+		|		WHEN ActualStocksBalance.ItemKey.Unit.Ref IS NULL
+		|			THEN ActualStocksBalance.ItemKey.Item.Unit
+		|		ELSE ActualStocksBalance.ItemKey.Unit
+		|	END AS Unit,
+		|	0 AS PhysCount,
+		|	ActualStocksBalance.QuantityBalance AS ExpCount,
+		|	0 AS ManualFixedCount,
+		|	0 AS Difference,
+		|	"""" AS Description
+		|INTO ActualStock
 		|FROM
-		|	ItemList AS ItemList
-		|		LEFT JOIN AccumulationRegister.R4010B_ActualStocks.Balance(, Store = &Store) AS R4010B_ActualStocksBalance
-		|		ON ItemList.ItemKey = R4010B_ActualStocksBalance.ItemKey
-		|		AND ItemList.SerialLotNumber = R4010B_ActualStocksBalance.SerialLotNumber";
+		|	AccumulationRegister.R4010B_ActualStocks.Balance(&Period, Store = &Store) AS ActualStocksBalance
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	PhysicalCountByLocationItemList.Key,
+		|	PhysicalCountByLocationItemList.ItemKey.Item AS Item,
+		|	PhysicalCountByLocationItemList.ItemKey,
+		|	PhysicalCountByLocationItemList.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
+		|	PhysicalCountByLocationItemList.SerialLotNumber,
+		|	PhysicalCountByLocationItemList.Unit,
+		|	PhysicalCountByLocationItemList.PhysCount,
+		|	PhysicalCountByLocationItemList.ExpCount,
+		|	0 AS ManualFixedCount,
+		|	PhysicalCountByLocationItemList.Difference,
+		|	"""" AS Description
+		|INTO PhysicalCount
+		|FROM
+		|	Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
+		|WHERE
+		|	PhysicalCountByLocationItemList.Ref.Status.Posting
+		|	AND NOT PhysicalCountByLocationItemList.Ref.DeletionMark
+		|	AND PhysicalCountByLocationItemList.Ref.PhysicalInventory = &PhysicalInventory";
 	Query.SetParameter("Store", Object.Store);
+	Query.SetParameter("PhysicalInventory", Object.Ref);
+	Query.SetParameter("Period", Object.Date);
 	Query.SetParameter("ItemList", Object.ItemList.Unload());
-	QueryResult = Query.Execute();
+	Query.Execute();
 	
-	Table = QueryResult.Unload();
+	Tables = New Structure;
 	
-	Return Table;
+	Tables.Insert("ItemList", Query.TempTablesManager.Tables.Find("ItemList").GetData().Unload());
+	Tables.Insert("ActualStock", Query.TempTablesManager.Tables.Find("ActualStock").GetData().Unload());
+	Tables.Insert("PhysicalCount", Query.TempTablesManager.Tables.Find("PhysicalCount").GetData().Unload());
+	
+	Return Tables;
 	
 EndFunction
 
 Procedure RecalculateItemList(Object, ArrayOfFillingRows, ArrayOfFillingColumns)
+	
+	If ArrayOfFillingRows.Count() = 0 Then
+		Return;
+	EndIf;		
+	
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
 	ServerParameters.TableName = "ItemList";
 	ServerParameters.IsBasedOn = True;

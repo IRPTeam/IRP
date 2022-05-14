@@ -286,7 +286,7 @@ Scenario: _0202203 print layout creation with using external data processors
 		| ''                      |
 		| '550'                   |
 		| ''                      |
-		| 'Нова цiна: 466,1 грн.' |
+		| 'Нова цiна: 522,5 грн.' |
 	And I close all client application windows
 	
 

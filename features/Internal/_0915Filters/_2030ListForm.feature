@@ -180,10 +180,6 @@ Scenario: _0203002 check filters in the partner catalog
 			| 'Anna Petrova'    |
 			| 'David Romanov'   |
 			| 'Arina Brown'     |
-		* Check the selection by opponent
-			And I set checkbox "Opponent"
-			And I remove checkbox "Employee"
-			Then the number of "List" table lines is "равно" 0
 		And I close all client application windows
 
 

@@ -35,4 +35,6 @@
   <content>Document.Bundling.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>InformationRegister.PricesByItemKeys.Dimension.ItemKey</content>
   <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.ItemKey</content>
+  <content>Catalog.ItemTypes.TabularSection.AvailableAttributes</content>
+  <content>Catalog.ItemTypes.TabularSection.AddAttributes</content>
 </mdclass:FunctionalOption>

@@ -9,7 +9,7 @@ Background:
 
 
 Scenario: _975001 preparation
-
+When set True value to the constant
 When Create catalog ExternalDataProc objects (test data base)
 * Add ExternalDataProc
 		* VAT

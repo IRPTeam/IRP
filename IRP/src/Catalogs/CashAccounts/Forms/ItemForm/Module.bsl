@@ -25,6 +25,20 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		CurrencyType = Parameters.CurrencyType;
 	EndIf;
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	
+	If Not FOServer.IsUseBankDocuments() Then
+		ArrayForDelete = New Array();
+		For Each ListItem In Items.Type.ChoiceList Do
+			If Not (Not ValueIsFilled(ListItem.Value) 
+				Or ListItem.Value = Enums.CashAccountTypes.Cash
+				Or ListItem.Value = Enums.CashAccountTypes.POS) Then
+				ArrayForDelete.Add(ListItem);
+			EndIf;
+		EndDo;
+		For Each ArrayItem In ArrayForDelete Do
+			Items.Type.ChoiceList.Delete(ArrayItem);
+		EndDo;
+	EndIf;
 EndProcedure
 
 &AtClient

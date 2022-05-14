@@ -10,8 +10,7 @@ I want to check opening registers, reports and data processor forms
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	And I set "True" value to the constant "UseItemKey"
-	And I set "True" value to the constant "UseCompanies"
+	When set True value to the constant
 
 Scenario: Open information register form "AddProperties" 
 

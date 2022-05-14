@@ -10,7 +10,7 @@ Background:
 
 
 Scenario: _970001 filling in test data base
-
+When set True value to the constant
 When Create catalog ExternalDataProc objects (test data base)
 * Add ExternalDataProc
 		* VAT

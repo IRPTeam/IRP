@@ -42,8 +42,10 @@ EndProcedure
 Procedure ShowImages(Command)
 	ShowOrHideImage = Not ShowOrHideImage;
 	If ShowOrHideImage Then
+		//@skip-warning
 		Items.FormShowImages.BackColor = CommonFunctionsServer.GetStyleByName("ActivityColor");
 	Else
+		//@skip-warning
 		Items.FormShowImages.BackColor = CommonFunctionsServer.GetStyleByName("ButtonBackColor");
 	EndIf;
 EndProcedure
@@ -243,7 +245,9 @@ Procedure FillResultTable()
 				PictureMap.Insert(Row.Image, PictureData);
 			EndIf;
 			
+			//@skip-check invocation-parameter-type-intersect
 			AreaToFill.Area(1, ImageNumber).Picture = PictureData;
+			//@skip-check invocation-parameter-type-intersect
 			AreaToFill.Area(1, ImageNumber).PictureSize = PictureSize.Proportionally;
 		EndIf;
 		
@@ -423,6 +427,7 @@ Procedure ErrorListOnActivateRow(Item)
 	EndIf;
 	
 	Array = New Array;
+	//@skip-check invocation-parameter-type-intersect
 	Array.Add(Result.Area(Items.ErrorList.CurrentData.Row, Items.ErrorList.CurrentData.Column));
 	Items.Result.SetSelectedAreas(Array);
 	CurrentItem = Items.Result;

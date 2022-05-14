@@ -9,6 +9,14 @@ Function GetSimpleParameters(Object, Form, TableName, Rows = Undefined)
 	Return GetParameters(ServerParameters, FormParameters);
 EndFunction
 
+Function GetLoadParameters(Object, Form, TableName, Address)
+	FormParameters   = GetFormParameters(Form);
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.TableName = TableName;
+	LoadParameters   = ControllerClientServer_V2.GetLoadParameters(Address);
+	Return GetParameters(ServerParameters, FormParameters, LoadParameters);	
+EndFunction
+
 Function GetFormParameters(Form)
 	FormParameters   = ControllerClientServer_V2.GetFormParameters(Form);
 	FormParameters.PropertyBeforeChange.Object.Names = GetObjectPropertyNamesBeforeChange();
@@ -21,8 +29,8 @@ Function GetServerParameters(Object)
 	Return ControllerClientServer_V2.GetServerParameters(Object);
 EndFunction
 
-Function GetParameters(ServerParameters, FormParameters = Undefined)
-	Return ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
+Function GetParameters(ServerParameters, FormParameters = Undefined, LoadParameters = Undefined)
+	Return ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters, LoadParameters);
 EndFunction
 
 Procedure ExtractValueBeforeChange_Object(DataPath, FormParameters)
@@ -892,13 +900,23 @@ Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
 	Return NewRow;
 EndFunction
 
-Procedure ItemListLoad(Object, Form, TableAddress, CountRows) Export
-	For i = 1 To CountRows Do
-		Object.ItemList.Add().Key = String(New UUID());
+Procedure ItemListLoad(Object, Form, Address) Export
+	Parameters = GetLoadParameters(Object, Form, "ItemList", Address);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.ItemList.Add();
+		NewRow.Key = String(New UUID());
+		NewRows.Add(NewRow);
 	EndDo;
-	Parameters = GetSimpleParameters(Object, Form, "ItemList");
-	Parameters.TableAddress = TableAddress;
-	Parameters.CountRows = CountRows;
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
 	ControllerClientServer_V2.ItemListLoad(Parameters);
 EndProcedure
 
@@ -966,14 +984,19 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory" Then
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
 				ServerData = New Structure("ServerData", New Structure());
 				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
 				ServerData.ServerData.Insert("Rows", Parameters.Rows);
 			EndIf;
-			SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form, ServerData);
+			If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory" Then
+				SerialLotNumberClient.FillSerialLotNumbersUse(Parameters.Object, ServerData);
+			Else
+				SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form, ServerData);
+			EndIf;
 	EndIf;
 EndProcedure
 

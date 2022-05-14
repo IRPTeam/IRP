@@ -40,14 +40,19 @@ Function GetFormParameters(Form) Export
 	Return Result;
 EndFunction
 
-Function GetParameters(ServerParameters, FormParameters = Undefined) Export
-	If FormParameters = Undefined Then
-		Return CreateParameters(ServerParameters, GetFormParameters(Undefined));
-	EndIf;
-	Return CreateParameters(ServerParameters, FormParameters);
+Function GetLoadParameters(Address) Export
+	Result = New Structure();
+	Result.Insert("Address", Address);
+	Return Result;
 EndFunction
 
-Function CreateParameters(ServerParameters, FormParameters)
+Function GetParameters(ServerParameters, FormParameters = Undefined, LoadParameters = Undefined) Export
+	_FormParameters = ?(FormParameters = Undefined, GetFormParameters(Undefined), FormParameters);
+	_LoadParameters = ?(LoadParameters = Undefined, GetLoadParameters(Undefined), LoadParameters);
+	Return CreateParameters(ServerParameters, _FormParameters, _LoadParameters);
+EndFunction
+
+Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters = New Structure();
 	// parameters for Client 
 	Parameters.Insert("Form"             , FormParameters.Form);
@@ -63,8 +68,12 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("TaxesCache"       , FormParameters.TaxesCache);
 	Parameters.Insert("ChangedData"      , New Map());
 	Parameters.Insert("ExtractedData"    , New Structure());
-	Parameters.Insert("TableAddress"     , "");
-	Parameters.Insert("CountRows"        , "");
+	Parameters.Insert("LoadData"         , New Structure());
+	
+	Parameters.LoadData.Insert("Address"                   , LoadParameters.Address);
+	Parameters.LoadData.Insert("ExecuteAllViewNotify"      , False);
+	Parameters.LoadData.Insert("CountRows"                 , 0);
+	Parameters.LoadData.Insert("SourceColumnsGroupBy"      , "");
 	
 	Parameters.Insert("PropertyBeforeChange", FormParameters.PropertyBeforeChange);
 	
@@ -94,6 +103,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 	ArrayOfTableNames.Add(ServerParameters.TableName);
 	ArrayOfTableNames.Add("TaxList");
 	ArrayOfTableNames.Add("SpecialOffers");
+	ArrayOfTableNames.Add("SerialLotNumbers");
 	
 	// MetadataName
 	// Tables.TableName.Columns
@@ -101,12 +111,17 @@ Function CreateParameters(ServerParameters, FormParameters)
 	ServerData = ControllerServer_V2.GetServerData(ServerParameters.Object, 
 												   ArrayOfTableNames,
 												   Parameters.FormTaxColumnsExists, 
-												   Parameters.TaxesCache);
+												   Parameters.TaxesCache,
+												   Parameters.LoadData.Address);
 		
-	Parameters.Insert("ObjectMetadataInfo"    , ServerData.ObjectMetadataInfo);
-	Parameters.Insert("TaxListIsExists"       , ServerData.ObjectMetadataInfo.Tables.Property("TaxList"));
-	Parameters.Insert("SpecialOffersIsExists" , ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers"));
-	Parameters.Insert("ArrayOfTaxInfo"        , ServerData.ArrayOfTaxInfo);
+	Parameters.Insert("ObjectMetadataInfo"     , ServerData.ObjectMetadataInfo);
+	Parameters.Insert("TaxListIsExists"        , ServerData.ObjectMetadataInfo.Tables.Property("TaxList"));
+	Parameters.Insert("SpecialOffersIsExists"  , ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers"));
+	Parameters.Insert("SerialLotNumbersExists" , ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers"));	
+	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
+	
+	Parameters.LoadData.CountRows                 = ServerData.LoadData.CountRows;
+	Parameters.LoadData.SourceColumnsGroupBy      = ServerData.LoadData.SourceColumnsGroupBy;
 	
 	// if specific rows are not passed, then we use everything that is in the table with the name TableName
 	If ServerParameters.Rows = Undefined Then 
@@ -119,17 +134,95 @@ Function CreateParameters(ServerParameters, FormParameters)
 	
 	// the table row cannot be transferred to the server, so we put the data in an array of structures
 	// Rows
+//	ArrayOfRows = New Array();
+//	For Each Row In ServerParameters.Rows Do
+//		NewRow = New Structure(ServerData.ObjectMetadataInfo.Tables[ServerParameters.TableName].Columns);
+//		FillPropertyValues(NewRow, Row);
+//		ArrayOfRows.Add(NewRow);
+//		
+//		// TaxList
+//		ArrayOfRowsTaxList = New Array();
+//		If Parameters.TaxListIsExists Then
+//			For Each TaxRow In ServerParameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
+//				NewRowTaxList = New Structure(ServerData.ObjectMetadataInfo.Tables.TaxList.Columns);
+//				FillPropertyValues(NewRowTaxList, TaxRow);
+//				ArrayOfRowsTaxList.Add(NewRowTaxList);
+//			EndDo;
+//		EndIf;
+//		
+//		// TaxRates
+//		TaxRates = New Structure();
+//		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+//			// when there is no form, then there is no column created programmatically
+//			If Parameters.FormTaxColumnsExists Then
+//				TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
+//			Else
+//			// create pseudo columns for tax rates
+//				NewRow.Insert(ItemOfTaxInfo.Name);
+//				
+//				// tax rates are taken from the TaxList table
+//				TaxRate = Undefined;
+//				For Each TaxRow In ArrayOfRowsTaxList Do
+//					If TaxRow.Tax = ItemOfTaxInfo.Tax Then
+//						TaxRate = TaxRow.TaxRate;
+//						Break;
+//					EndIf;
+//				EndDo;
+//				TaxRates.Insert(ItemOfTaxInfo.Name, TaxRate);
+//			EndIf;
+//		EndDo;
+//		
+//		// SpecialOffers
+//		ArrayOfRowsSpecialOffers = New Array();
+//		If Parameters.SpecialOffersIsExists Then
+//			For Each SpecialOfferRow In ServerParameters.Object.SpecialOffers.FindRows(New Structure("Key", Row.Key)) Do
+//				NewRowSpecialOffer = New Structure(ServerData.ObjectMetadataInfo.Tables.SpecialOffers.Columns);
+//				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
+//				ArrayOfRowsSpecialOffers.Add(NewRowSpecialOffer);
+//			EndDo;
+//		EndIf;
+//		
+//		// SpecialOffersCache
+//		ArrayOfRowsSpecialOffersCache = New Array();
+//		If Parameters.FormIsExists 
+//			And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "SpecialOffersCache") Then
+//			For Each SpecialOfferRow In Parameters.Form.SpecialOffersCache.FindRows(New Structure("Key", Row.Key)) Do
+//				NewRowSpecialOffer = New Structure("Key, Offer, Amount, Quantity");
+//				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
+//				ArrayOfRowsSpecialOffersCache.Add(NewRowSpecialOffer);
+//			EndDo;
+//		EndIf;
+//		
+//		NewRow.Insert("TaxIsAlreadyCalculated" , Parameters.IsBasedOn And ArrayOfRowsTaxList.Count());
+//		NewRow.Insert("TaxRates"               , TaxRates);
+//		NewRow.Insert("TaxList"                , ArrayOfRowsTaxList);
+//		NewRow.Insert("SpecialOffers"          , ArrayOfRowsSpecialOffers);
+//		NewRow.Insert("SpecialOffersCache"     , ArrayOfRowsSpecialOffersCache);
+//	EndDo;
+	
+//	If ArrayOfRows.Count() Then
+//		Parameters.Insert("Rows", ArrayOfRows);
+//	EndIf;
+
+	WrappedRows = WrapRows(Parameters, ServerParameters.Rows);
+	If WrappedRows.Count() Then
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	Return Parameters;
+EndFunction
+
+Function WrapRows(Parameters, Rows) Export
 	ArrayOfRows = New Array();
-	For Each Row In ServerParameters.Rows Do
-		NewRow = New Structure(ServerData.ObjectMetadataInfo.Tables[ServerParameters.TableName].Columns);
+	For Each Row In Rows Do
+		NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables[Parameters.TableName].Columns);
 		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
 		
 		// TaxList
 		ArrayOfRowsTaxList = New Array();
 		If Parameters.TaxListIsExists Then
-			For Each TaxRow In ServerParameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
-				NewRowTaxList = New Structure(ServerData.ObjectMetadataInfo.Tables.TaxList.Columns);
+			For Each TaxRow In Parameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
+				NewRowTaxList = New Structure(Parameters.ObjectMetadataInfo.Tables.TaxList.Columns);
 				FillPropertyValues(NewRowTaxList, TaxRow);
 				ArrayOfRowsTaxList.Add(NewRowTaxList);
 			EndDo;
@@ -160,8 +253,8 @@ Function CreateParameters(ServerParameters, FormParameters)
 		// SpecialOffers
 		ArrayOfRowsSpecialOffers = New Array();
 		If Parameters.SpecialOffersIsExists Then
-			For Each SpecialOfferRow In ServerParameters.Object.SpecialOffers.FindRows(New Structure("Key", Row.Key)) Do
-				NewRowSpecialOffer = New Structure(ServerData.ObjectMetadataInfo.Tables.SpecialOffers.Columns);
+			For Each SpecialOfferRow In Parameters.Object.SpecialOffers.FindRows(New Structure("Key", Row.Key)) Do
+				NewRowSpecialOffer = New Structure(Parameters.ObjectMetadataInfo.Tables.SpecialOffers.Columns);
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffers.Add(NewRowSpecialOffer);
 			EndDo;
@@ -184,12 +277,8 @@ Function CreateParameters(ServerParameters, FormParameters)
 		NewRow.Insert("SpecialOffers"          , ArrayOfRowsSpecialOffers);
 		NewRow.Insert("SpecialOffersCache"     , ArrayOfRowsSpecialOffersCache);
 	EndDo;
-	
-	If ArrayOfRows.Count() Then
-		Parameters.Insert("Rows", ArrayOfRows);
-	EndIf;
-	Return Parameters;
-EndFunction
+	Return ArrayOfRows;
+EndFunction	
 
 #EndRegion
 
@@ -6033,10 +6122,7 @@ EndProcedure
 Function BindItemListLoad(Parameters)
 	DataPath = "ItemList";
 	Binding = New Structure();
-	
-	Binding.Insert("PhysicalInventory", "StepItemListLoadTable");
-	
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+	Return BindSteps("StepItemListLoadTable", DataPath, Binding, Parameters);
 EndFunction
 
 // ItemList.LoadAtServer.Step
@@ -6044,7 +6130,7 @@ Procedure StepItemListLoadTable(Parameters, Chain) Export
 	Chain.LoadTable.Enable = True;
 	Chain.LoadTable.Setter = "ServerTableLoaderItemList";
 	Options = ModelClientServer_V2.LoadTableOptions();
-	Options.TableAddress = Parameters.TableAddress;
+	Options.TableAddress = Parameters.LoadData.Address;
 	Chain.LoadTable.Options.Add(Options);
 EndProcedure
 
@@ -6107,8 +6193,8 @@ Procedure _CommitChainChanges(Cache, Source)
 	For Each Property In Cache Do
 		PropertyName  = Property.Key;
 		PropertyValue = Property.Value;
-		If Upper(PropertyName) = Upper("TaxList") Then
-			// tabular part Taxex moved transferred completely
+		If Upper(PropertyName) = Upper("TaxList") Or Upper(PropertyName) = Upper("SerialLotNumbers") Then
+			// tabular part Taxex and Serial lot numbers moved transferred completely
 			ArrayOfKeys = New Array();
 			For Each Row In PropertyValue Do
 				If ArrayOfKeys.Find(Row.Key) = Undefined Then
@@ -6117,13 +6203,13 @@ Procedure _CommitChainChanges(Cache, Source)
 			EndDo;
 			
 			For Each ItemOfKeys In ArrayOfKeys Do
-				For Each Row In Source.TaxList.FindRows(New Structure("Key", ItemOfKeys)) Do
-					Source.TaxList.Delete(Row);
+				For Each Row In Source[PropertyName].FindRows(New Structure("Key", ItemOfKeys)) Do
+					Source[PropertyName].Delete(Row);
 				EndDo;
 			EndDo;
 			
 			For Each Row In PropertyValue Do
-				FillPropertyValues(Source.TaxList.Add(), Row);
+				FillPropertyValues(Source[PropertyName].Add(), Row);
 			EndDo;
 		
 		ElsIf TypeOf(PropertyValue) = Type("Array") Then // it is tabular part
@@ -6239,7 +6325,7 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 			IsChanged = True;
 		EndIf;
 	EndDo;
-	If IsChanged Or NotifyAnyWay Then
+	If IsChanged Or NotifyAnyWay Or Parameters.LoadData.ExecuteAllViewNotify Then
 		AddViewNotify(ViewNotify, Parameters);
 	EndIf;
 	If ValueIsFilled(StepNames) Then
@@ -6546,57 +6632,124 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	EndIf;
 	SourceTable = GetFromTempStorage(Result[0].Value);
 	
+	SourceColumnsGroupBy = Parameters.LoadData.SourceColumnsGroupBy;
+	
+	SourceTableExpanded = Undefined;
+	If Parameters.SerialLotNumbersExists Then
+		SourceTableExpanded = SourceTable.Copy();
+	EndIf;
+	SourceTable.GroupBy(SourceColumnsGroupBy, "Quantity");
+	
 	// only for physical inventory
 	If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory" Then
-		SourceTable.Columns.Quantity.Name = "ExpCount";
+		SourceTable.Columns.Quantity.Name = "PhysCount";
 	EndIf;
 	
 	TableName = Parameters.TableName;
 	Columns = Parameters.ObjectMetadataInfo.Tables[TableName].Columns;
-	
+		
 	AllColumns = StrSplit(Columns, ",", False);
 	
+	AllRows = New Array();
+	For Each Row In Parameters.Rows Do
+		AllRows.Add(Row);
+	EndDo;
+	
+	// initialize cache
 	If Not Parameters.Cache.Property(TableName) Then
 		Parameters.Cache.Insert(TableName, New Array());
 	EndIf;
+	If Parameters.SerialLotNumbersExists And Not Parameters.Cache.Property("SerialLotNumbers") Then
+		Parameters.Cache.Insert("SerialLotNumbers", New Array());
+	EndIf;
 	
-	ArrayOfNewRows = New Array();
-	For Each Row In Parameters.Rows Do
-		ArrayOfNewRows.Add(Row);
-	EndDo;
-
-	RowIndex = ArrayOfNewRows.Count() - Parameters.CountRows;
+	ProcessedKeys = New Array();
+	AllExtractedData = New Structure();
+	
+	RowIndex = Parameters.Rows.Count() - Parameters.LoadData.CountRows;
 	For Each SourceRow In SourceTable Do
-		NewRow = ArrayOfNewRows[RowIndex];
-		Parameters.Cache[TableName].Add(NewRow);
+		NewRow =  AllRows[RowIndex];
+		Parameters.Cache[TableName].Add(New Structure("Key", NewRow.Key));
+		Parameters.Rows.Clear();
+		Parameters.Rows.Add(NewRow);
+		
+		// add serial lot number to separated table
+		If Parameters.SerialLotNumbersExists Then
+			Filter = New Structure(SourceColumnsGroupBy);
+			FillPropertyValues(Filter, SourceRow);
+			For Each RowSN In SourceTableExpanded.FindRows(Filter) Do
+				If Not ValueIsFilled(RowSN) Then
+					Continue;
+				EndIf;
+				NewRowSN = New Structure(Parameters.ObjectMetadataInfo.Tables.SerialLotNumbers.Columns);
+				FillPropertyValues(NewRowSN, RowSN);
+				NewRowSN.Key = NewRow.Key;
+				Parameters.Cache.SerialLotNumbers.Add(NewRowSN);
+			EndDo;
+		EndIf;
 		
 		// fill new row default values from user settings
 		AddNewRow(TableName, Parameters);
 		// fill new row from source table
-		FillPropertyValues(NewRow, SourceRow,, "Key");
+		FillPropertyValues(NewRow, SourceRow);
 		
-		// change parameters for each row
+		// initialize parameters for each row
 		Parameters.ReadOnlyPropertiesMap.Clear();
 		Parameters.ProcessedReadOnlyPropertiesMap.Clear();
+		
 		FilledColumns = New Array();
 		For Each Column In AllColumns Do
-			If ValueIsFilled(NewRow[Column]) Then
+			If ?(TypeOf(NewRow[Column]) = Type("Boolean"), NewRow[Column], ValueIsFilled(NewRow[Column])) Then
 				FullColumnName = TrimAll(StrTemplate("%1.%2", TableName, Column));
 				FilledColumns.Add(FullColumnName);
 				Parameters.ReadOnlyPropertiesMap.Insert(Upper(FullColumnName), True);
+				// put to cache
+				Parameters.Cache[TableName][Parameters.Cache[TableName].Count() - 1]
+					.Insert(Column, NewRow[Column]);
 			EndIf;
 		EndDo;
-			
+		
+		// reset steps counter, infinity loop between different rows will not
+		ValidSteps = New Array();
+		If Parameters.Property("ModelEnvironment") 
+			And Parameters.ModelEnvironment.Property("AlreadyExecutedSteps") Then
+				For Each Step In Parameters.ModelEnvironment.AlreadyExecutedSteps Do
+					If Step.Key = Undefined Or ProcessedKeys.Find(Step.Key) <> Undefined Then
+						ValidSteps.Add(Step);
+					EndIf;
+				EndDo;
+				Parameters.ModelEnvironment.AlreadyExecutedSteps = ValidSteps;
+		EndIf;
+		
 		// if columns filled from source, do not change value, even is vrong value
 		Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
-		Parameters.Rows.Clear();
-		Parameters.Rows.Add(NewRow);
 		For Each Column In FilledColumns Do
 			Property = New Structure("DataPath", Column);
 			API_SetProperty(Parameters, Property, Undefined);
 		EndDo;
 		RowIndex = RowIndex + 1;
-	EndDo;	
+		ProcessedKeys.Add(NewRow.Key);
+		
+		For Each KeyValue In Parameters.ExtractedData Do
+			ExtractedDataName = KeyValue.Key;
+			If Not AllExtractedData.Property(ExtractedDataName) Then
+				AllExtractedData.Insert(ExtractedDataName, New Array());
+			EndIf;
+			For Each ExtractedPart In Parameters.ExtractedData[ExtractedDataName] Do
+				PutToAll = True;
+				If TypeOf(ExtractedPart) = Type("Structure") 
+					And ExtractedPart.Property("Key") 
+					And ExtractedPart.Key <> NewRow.Key Then
+					PutToAll = False;
+				EndIf;
+				If PutToAll Then
+					AllExtractedData[ExtractedDataName].Add(ExtractedPart);
+				EndIf;
+			EndDo;
+		EndDo;
+		
+	EndDo;
+	Parameters.ExtractedData = AllExtractedData;
 EndProcedure
 
 #ENDIF

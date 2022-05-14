@@ -198,8 +198,7 @@ EndProcedure
 Procedure FillResultTable()
 	
 	ItemTable = GetItemTable();
-	ResultStore = PutToTempStorage(ItemTable, OwnerUUID);
-	ThisObject.CountRowsInResultStore = ItemTable.Count();
+	ResultStore = PutToTempStorage(ItemTable, OwnerUUID);	
 	Index = 0;
 	
 	Result = New SpreadsheetDocument();
@@ -528,7 +527,7 @@ Procedure SetPage(Index)
 		FillResult();
 		isTemplateChanged = False;		
 	ElsIf StepNumber = 2 Then
-		Close(New Structure("Address, CountRows", ResultStore, ThisObject.CountRowsInResultStore));
+		Close(ResultStore);
 	EndIf;
 	
 EndProcedure

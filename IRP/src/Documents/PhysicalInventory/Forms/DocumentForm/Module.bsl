@@ -294,8 +294,8 @@ EndProcedure
 
 &AtClient
 Procedure LoadDataFromTableEnd(Result, AdditionalParameters) Export
-	If Result <> Undefined And Not IsBlankString(Result.Address) And Result.CountRows > 0 Then
-		ViewClient_V2.ItemListLoad(Object, ThisObject, Result.Address, Result.CountRows);
+	If Result <> Undefined And Not IsBlankString(Result) Then
+		ViewClient_V2.ItemListLoad(Object, ThisObject, Result);
 	EndIf;
 EndProcedure
 

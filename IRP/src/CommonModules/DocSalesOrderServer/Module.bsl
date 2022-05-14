@@ -52,7 +52,7 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Partner");
 	AttributesArray.Add("LegalName");
-	AttributesArray.Add("Agreement");
+	AttributesArray.Add("Agreement");	
 	AttributesArray.Add("Status");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do

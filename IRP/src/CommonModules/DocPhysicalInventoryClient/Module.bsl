@@ -40,17 +40,6 @@ EndProcedure
 #Region ITEM_LIST
 
 Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
-	If Upper(Field.Name) = Upper("ItemListPhysicalCountByLocationPresentation") Then
-		CurrentData = Form.Items.ItemList.CurrentData;
-		If CurrentData = Undefined Then
-			Return;
-		EndIf;
-		StandardProcessing = False;
-		If ValueIsFilled(CurrentData.PhysicalCountByLocation) Then
-			FormParameters = New Structure("Key", CurrentData.PhysicalCountByLocation);
-			OpenForm("Document.PhysicalCountByLocation.ObjectForm", FormParameters, Form);
-		EndIf;
-	EndIf;
 	ViewClient_V2.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
@@ -131,26 +120,6 @@ Procedure CreatePhysicalCountEnd(CountDocsToCreate, AdditionalParameters) Export
 		DocPhysicalInventoryServer.CreatePhysicalCount(AdditionalParameters.ObjectRef, AdditionalParameters);
 		Notify("CreatedPhysicalCountByLocations", , AdditionalParameters.ObjectRef);
 	EndIf;
-EndProcedure
-
-Procedure UpdateExpCount(Object, Form) Export
-	ItemList = New Array();
-	For Each Row In Object.ItemList Do
-		NewRow = New Structure("Key, LineNumber, Store, ItemKey, Unit, PhysCount");
-		FillPropertyValues(NewRow, Row);
-		NewRow.Store = Object.Store;
-		ItemList.Add(NewRow);
-	EndDo;
-	FillItemList(Object, Form, DocPhysicalInventoryServer.GetItemListWithFillingExpCount(Object.Ref, Object.Store, ItemList));
-EndProcedure
-
-Procedure FillItemList(Object, Form, Result)
-	Object.ItemList.Clear();
-	For Each Row In Result Do
-		NewRow = Object.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-		NewRow.Difference = NewRow.PhysCount - NewRow.ExpCount;
-	EndDo;
 EndProcedure
 
 #EndRegion

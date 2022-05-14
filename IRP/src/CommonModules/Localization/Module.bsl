@@ -16,6 +16,18 @@
 //  * Class_007 - String - Main manager
 //  * Class_008 - String - pcs
 //  * CLV_1 - String - All
+//  * Default_001 - String - pcs
+//  * Default_002 - String - Customer standard term
+//  * Default_003 - String - Vendor stabdard term
+//  * Default_004 - String - Customer price type
+//  * Default_005 - String - Vendor price type
+//  * Default_006 - String - Partner term currency type
+//  * Default_007 - String - Legal currency type
+//  * Default_008 - String - American dollar
+//  * Default_009 - String - USD
+//  * Default_010 - String - $
+//  * Default_011 - String - My Company
+//  * Default_012 - String - My Store
 //  * Eq_001 - String - Installed
 //  * Eq_002 - String - Not installed
 //  * Eq_003 - String - There are no errors.
@@ -64,7 +76,7 @@
 //  * Error_049 - String - Default picture storage volume is not set.
 //  * Error_050 - String - Currency exchange is available only for the same-type accounts (cash accounts or bank accounts).
 //  * Error_051 - String - There are no lines for which you can create a "%1" document, or all "%1" documents are already created.
-//  * Error_052 - String - Cannot clear the "Use shipment confirmation" check box. Documents "Shipment confirmation" from store %1 were already created.
+//  * Error_052 - String - Cannot clear the "Use shipment confirmation" check box. Documents "Shipment confirmation" from store %1 were already created. 
 //  * Error_053 - String - Cannot clear the "Use goods receipt" check box. Documents "Goods receipt" from store %1 were already created.
 //  * Error_054 - String - Cannot continue. The "%1"document has an incorrect status.
 //  * Error_055 - String - There are no lines with a correct procurement method.
@@ -113,6 +125,7 @@
 //  * Error_105 - String - Document [%1] already have related documents
 //  * Error_106 - String - Can not lock data
 //  * Error_107 - String - You try to call deleted service %1.
+//  * Error_108 - String - Field is filled, but it has to be empty.
 //  * Exc_001 - String - Unsupported object type.
 //  * Exc_002 - String - No conditions
 //  * Exc_003 - String - Method is not implemented: %1.
@@ -813,6 +826,21 @@ Function Strings(Lang) Export
 	Strings.Insert("R_002", NStr("en = 'Property'", Lang) + " = ");
 	Strings.Insert("R_003", NStr("en = 'Item'", Lang) + " = ");
 	Strings.Insert("R_004", NStr("en = 'Specification'", Lang) + " = ");
+#EndRegion
+
+#Region Defaults
+	Strings.Insert("Default_001", NStr("en = 'pcs'", Lang));
+	Strings.Insert("Default_002", NStr("en = 'Customer standard term'", Lang));
+	Strings.Insert("Default_003", NStr("en = 'Vendor stabdard term'", Lang));
+	Strings.Insert("Default_004", NStr("en = 'Customer price type'", Lang));
+	Strings.Insert("Default_005", NStr("en = 'Vendor price type'", Lang));
+	Strings.Insert("Default_006", NStr("en = 'Partner term currency type'", Lang));
+	Strings.Insert("Default_007", NStr("en = 'Legal currency type'", Lang));
+	Strings.Insert("Default_008", NStr("en = 'American dollar'", Lang));
+	Strings.Insert("Default_009", NStr("en = 'USD'", Lang));
+	Strings.Insert("Default_010", NStr("en = '$'", Lang));
+	Strings.Insert("Default_011", NStr("en = 'My Company'", Lang));
+	Strings.Insert("Default_012", NStr("en = 'My Store'", Lang));
 #EndRegion
 
 	Return Strings;

@@ -134,6 +134,13 @@ Function XSLTransformation(XML, XSLT) Export
 	Return XSLTransform.TransformFromString(XML);
 EndFunction
 
+// Get style by name.
+// 
+// Parameters:
+//  Name - String - Name
+// 
+// Returns:
+//  Color
 Function GetStyleByName(Name) Export
 	Return StyleColors[Name];
 EndFunction

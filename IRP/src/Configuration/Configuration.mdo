@@ -135,6 +135,7 @@
   <commonPictures>CommonPicture.Delivery</commonPictures>
   <commonPictures>CommonPicture.Dimensions</commonPictures>
   <commonPictures>CommonPicture.DocumentStatuses</commonPictures>
+  <commonPictures>CommonPicture.EditCurrencies</commonPictures>
   <commonPictures>CommonPicture.EmptyPicture</commonPictures>
   <commonPictures>CommonPicture.Finance</commonPictures>
   <commonPictures>CommonPicture.IconCollection1</commonPictures>
@@ -152,6 +153,7 @@
   <commonPictures>CommonPicture.Mobile</commonPictures>
   <commonPictures>CommonPicture.OtherGroup</commonPictures>
   <commonPictures>CommonPicture.Payment</commonPictures>
+  <commonPictures>CommonPicture.PersonCard</commonPictures>
   <commonPictures>CommonPicture.Price</commonPictures>
   <commonPictures>CommonPicture.Purchase</commonPictures>
   <commonPictures>CommonPicture.QRPicture</commonPictures>
@@ -170,8 +172,6 @@
   <commonPictures>CommonPicture.Store</commonPictures>
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.Unlock</commonPictures>
-  <commonPictures>CommonPicture.EditCurrencies</commonPictures>
-  <commonPictures>CommonPicture.PersonCard</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -195,26 +195,31 @@
   <roles>Role.RunThinClient</roles>
   <roles>Role.RunWebClient</roles>
   <roles>Role.SaveUserData</roles>
+  <roles>Role.SystemAdministrator</roles>
   <roles>Role.UseAllFunctionsMode</roles>
   <roles>Role.UseEventLog</roles>
   <roles>Role.UseExternalDataProcessors</roles>
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseOutput</roles>
-  <roles>Role.SystemAdministrator</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
   <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
+  <commonModules>CommonModule.AccountingClient</commonModules>
+  <commonModules>CommonModule.AccountingClientServer</commonModules>
+  <commonModules>CommonModule.AccountingServer</commonModules>
   <commonModules>CommonModule.AddAttributesAndPropertiesClient</commonModules>
   <commonModules>CommonModule.AddAttributesAndPropertiesServer</commonModules>
   <commonModules>CommonModule.AddDataProcClient</commonModules>
   <commonModules>CommonModule.AddDataProcServer</commonModules>
   <commonModules>CommonModule.AdminFunctionsPrivileged</commonModules>
+  <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
   <commonModules>CommonModule.BarcodeClient</commonModules>
   <commonModules>CommonModule.BarcodeReuse</commonModules>
   <commonModules>CommonModule.BarcodeServer</commonModules>
+  <commonModules>CommonModule.BuilderServer_V2</commonModules>
   <commonModules>CommonModule.CalculationServer</commonModules>
   <commonModules>CommonModule.CalculationStringsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsClient</commonModules>
@@ -237,9 +242,16 @@
   <commonModules>CommonModule.CommonFormActionsServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsServer</commonModules>
+  <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
+  <commonModules>CommonModule.ControllerServer_V2</commonModules>
+  <commonModules>CommonModule.CreditLimitsServer</commonModules>
   <commonModules>CommonModule.CurrenciesClient</commonModules>
   <commonModules>CommonModule.CurrenciesClientServer</commonModules>
   <commonModules>CommonModule.CurrenciesServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalRevenueAllocationClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalRevenueAllocationServer</commonModules>
   <commonModules>CommonModule.DocBankPaymentClient</commonModules>
   <commonModules>CommonModule.DocBankPaymentServer</commonModules>
   <commonModules>CommonModule.DocBankReceiptClient</commonModules>
@@ -270,10 +282,14 @@
   <commonModules>CommonModule.DocInventoryTransferServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
+  <commonModules>CommonModule.DocJournalEntryClient</commonModules>
+  <commonModules>CommonModule.DocJournalEntryServer</commonModules>
   <commonModules>CommonModule.DocLabelingClient</commonModules>
   <commonModules>CommonModule.DocLabelingServer</commonModules>
   <commonModules>CommonModule.DocManualRegisterEntryClient</commonModules>
   <commonModules>CommonModule.DocManualRegisterEntryServer</commonModules>
+  <commonModules>CommonModule.DocMoneyTransferClient</commonModules>
+  <commonModules>CommonModule.DocMoneyTransferServer</commonModules>
   <commonModules>CommonModule.DocOpeningEntryClient</commonModules>
   <commonModules>CommonModule.DocOpeningEntryServer</commonModules>
   <commonModules>CommonModule.DocOutgoingPaymentOrderClient</commonModules>
@@ -334,6 +350,7 @@
   <commonModules>CommonModule.FillingWithDefaultDataReuse</commonModules>
   <commonModules>CommonModule.FormItemsSize</commonModules>
   <commonModules>CommonModule.FormItemsSizeReuse</commonModules>
+  <commonModules>CommonModule.FOServer</commonModules>
   <commonModules>CommonModule.GetItemInfo</commonModules>
   <commonModules>CommonModule.HardwareClient</commonModules>
   <commonModules>CommonModule.HardwareServer</commonModules>
@@ -346,6 +363,7 @@
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
+  <commonModules>CommonModule.LandedCostServer</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
   <commonModules>CommonModule.LocalizationClientServer</commonModules>
@@ -356,20 +374,23 @@
   <commonModules>CommonModule.MetadataInfo</commonModules>
   <commonModules>CommonModule.MobileEvents</commonModules>
   <commonModules>CommonModule.MobileSubsystem</commonModules>
+  <commonModules>CommonModule.ModelClientServer_V2</commonModules>
+  <commonModules>CommonModule.ModelServer_V2</commonModules>
+  <commonModules>CommonModule.MoneyDocumentsServer</commonModules>
   <commonModules>CommonModule.ObjectStatusesClient</commonModules>
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
   <commonModules>CommonModule.OffersClient</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
-  <commonModules>CommonModule.CreditLimitsServer</commonModules>
   <commonModules>CommonModule.PickupItemsClient</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerServer</commonModules>
+  <commonModules>CommonModule.POSClient</commonModules>
   <commonModules>CommonModule.PostingServer</commonModules>
   <commonModules>CommonModule.RowIDInfoClient</commonModules>
+  <commonModules>CommonModule.RowIDInfoClientServer</commonModules>
   <commonModules>CommonModule.RowIDInfoServer</commonModules>
   <commonModules>CommonModule.RowIDInfoServerReuse</commonModules>
-  <commonModules>CommonModule.RowIDInfoClientServer</commonModules>
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
@@ -385,33 +406,13 @@
   <commonModules>CommonModule.UniqueID</commonModules>
   <commonModules>CommonModule.UniqueIDReuse</commonModules>
   <commonModules>CommonModule.UserSettingsClient</commonModules>
+  <commonModules>CommonModule.UserSettingsClientServer</commonModules>
   <commonModules>CommonModule.UserSettingsServer</commonModules>
   <commonModules>CommonModule.UsersEvent</commonModules>
+  <commonModules>CommonModule.ViewClient_V2</commonModules>
+  <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.MoneyDocumentsServer</commonModules>
-  <commonModules>CommonModule.BuilderServer_V2</commonModules>
-  <commonModules>CommonModule.ModelClientServer_V2</commonModules>
-  <commonModules>CommonModule.ViewClient_V2</commonModules>
-  <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
-  <commonModules>CommonModule.ModelServer_V2</commonModules>
-  <commonModules>CommonModule.ViewServer_V2</commonModules>
-  <commonModules>CommonModule.ControllerServer_V2</commonModules>
-  <commonModules>CommonModule.UserSettingsClientServer</commonModules>
-  <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
-  <commonModules>CommonModule.DocJournalEntryServer</commonModules>
-  <commonModules>CommonModule.DocJournalEntryClient</commonModules>
-  <commonModules>CommonModule.AccountingClient</commonModules>
-  <commonModules>CommonModule.AccountingClientServer</commonModules>
-  <commonModules>CommonModule.AccountingServer</commonModules>
-  <commonModules>CommonModule.LandedCostServer</commonModules>
-  <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
-  <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
-  <commonModules>CommonModule.DocAdditionalRevenueAllocationClient</commonModules>
-  <commonModules>CommonModule.DocAdditionalRevenueAllocationServer</commonModules>
-  <commonModules>CommonModule.DocMoneyTransferClient</commonModules>
-  <commonModules>CommonModule.DocMoneyTransferServer</commonModules>
-  <commonModules>CommonModule.POSClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -437,6 +438,7 @@
   <eventSubscriptions>EventSubscription.BeforeWrite_DocumentsLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RefreshReusableValues</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_RowID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.ChoiceDataGetProcessing_FindDataForInputString</eventSubscriptions>
   <eventSubscriptions>EventSubscription.FillCheckProcessing_DescriptionCheckFilling</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Filling_DocumentsWithDefaultData</eventSubscriptions>
@@ -445,21 +447,49 @@
   <eventSubscriptions>EventSubscription.OnCopy_ClearDocumentBasises</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnCopy_DocumentProcessing</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnCopy_RemoveUniqueID</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnWrite_RowID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnWrite_UpdateUsersRoleOnWrite</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.Posting_RowID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.Posting_RowID</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_RowID</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.OnWrite_RowID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.UndoPosting_RowID</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
   <functionalOptions>FunctionalOption.SaasMode</functionalOptions>
-  <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
-  <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
-  <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
   <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAddAttributesAndProperties</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAdditionalSettings</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAging</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAllFunctional</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBankDocuments</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBundling</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBusinessUnits</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
+  <functionalOptions>FunctionalOption.UseChequeBonds</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
+  <functionalOptions>FunctionalOption.UseContactInformation</functionalOptions>
+  <functionalOptions>FunctionalOption.UseDeliveryDate</functionalOptions>
+  <functionalOptions>FunctionalOption.UseEquipments</functionalOptions>
+  <functionalOptions>FunctionalOption.UseExpenseAndRevenueTypes</functionalOptions>
+  <functionalOptions>FunctionalOption.UseIntegrations</functionalOptions>
+  <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
+  <functionalOptions>FunctionalOption.UseLandedCost</functionalOptions>
+  <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
+  <functionalOptions>FunctionalOption.UseManagersAndSalesPersons</functionalOptions>
+  <functionalOptions>FunctionalOption.UseMobile</functionalOptions>
+  <functionalOptions>FunctionalOption.UseOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePartnerItems</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePartnersHierarchy</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePlannedReceiptReservation</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePriceByProperties</functionalOptions>
+  <functionalOptions>FunctionalOption.UseRetail</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
+  <functionalOptions>FunctionalOption.UseShipmentConfirmationAndGoodsReceipts</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSpecialOffers</functionalOptions>
+  <functionalOptions>FunctionalOption.UseStores</functionalOptions>
+  <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -467,6 +497,7 @@
   <definedTypes>DefinedType.typeArTransactionBasises</definedTypes>
   <definedTypes>DefinedType.typeBarcode</definedTypes>
   <definedTypes>DefinedType.typeBasisDocumentSalesInvoice</definedTypes>
+  <definedTypes>DefinedType.typeBatchDocuments</definedTypes>
   <definedTypes>DefinedType.typeCashAdvanceBasises</definedTypes>
   <definedTypes>DefinedType.typeCurrencyRate</definedTypes>
   <definedTypes>DefinedType.typeDescription</definedTypes>
@@ -493,8 +524,9 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
-  <definedTypes>DefinedType.typeBatchDocuments</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
+  <commonCommands>CommonCommand.AttachedFiles</commonCommands>
+  <commonCommands>CommonCommand.EditConstants</commonCommands>
   <commonCommands>CommonCommand.IDInfo</commonCommands>
   <commonCommands>CommonCommand.OpenCompanies</commonCommands>
   <commonCommands>CommonCommand.OpenCustomerAgreements</commonCommands>
@@ -502,25 +534,63 @@
   <commonCommands>CommonCommand.OpenPartnersVendor</commonCommands>
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
   <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
-  <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <constants>Constant.DefaultFilesStorageVolume</constants>
   <constants>Constant.DefaultPictureStorageVolume</constants>
-  <constants>Constant.SaasMode</constants>
-  <constants>Constant.UseCompanies</constants>
-  <constants>Constant.UseItemKey</constants>
-  <constants>Constant.UseLockDataModification</constants>
   <constants>Constant.EnableLinkedRowsIntegrity</constants>
+  <constants>Constant.SaasMode</constants>
   <constants>Constant.UseAccounting</constants>
+  <constants>Constant.UseAddAttributesAndProperties</constants>
+  <constants>Constant.UseAdditionalSettings</constants>
+  <constants>Constant.UseAging</constants>
+  <constants>Constant.UseAllFunctional</constants>
+  <constants>Constant.UseBankDocuments</constants>
+  <constants>Constant.UseBundling</constants>
+  <constants>Constant.UseBusinessUnits</constants>
+  <constants>Constant.UseCashTransaction</constants>
+  <constants>Constant.UseChequeBonds</constants>
+  <constants>Constant.UseCompanies</constants>
+  <constants>Constant.UseContactInformation</constants>
+  <constants>Constant.UseDeliveryDate</constants>
+  <constants>Constant.UseEquipments</constants>
+  <constants>Constant.UseExpenseAndRevenueTypes</constants>
+  <constants>Constant.UseIntegrations</constants>
+  <constants>Constant.UseItemKey</constants>
+  <constants>Constant.UseLandedCost</constants>
+  <constants>Constant.UseLockDataModification</constants>
+  <constants>Constant.UseManagersAndSalesPersons</constants>
+  <constants>Constant.UseMobile</constants>
+  <constants>Constant.UseOrders</constants>
+  <constants>Constant.UsePartnerItems</constants>
+  <constants>Constant.UsePartnersHierarchy</constants>
+  <constants>Constant.UsePartnerTerms</constants>
+  <constants>Constant.UsePlannedReceiptReservation</constants>
+  <constants>Constant.UsePriceByProperties</constants>
+  <constants>Constant.UseRetail</constants>
+  <constants>Constant.UseSerialLotNumbers</constants>
+  <constants>Constant.UseShipmentConfirmationAndGoodsReceipts</constants>
+  <constants>Constant.UseSimpleMode</constants>
+  <constants>Constant.UseSpecialOffers</constants>
+  <constants>Constant.UseStores</constants>
+  <constants>Constant.UseUnitsAndDimensions</constants>
+  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
+  <commonForms>CommonForm.AttachFile</commonForms>
+  <commonForms>CommonForm.ConstantsForm</commonForms>
   <commonForms>CommonForm.DataMappingForm</commonForms>
   <commonForms>CommonForm.EditAddProperties</commonForms>
+  <commonForms>CommonForm.EditCurrencies</commonForms>
   <commonForms>CommonForm.EditDescriptions</commonForms>
+  <commonForms>CommonForm.EditHiddenTables</commonForms>
   <commonForms>CommonForm.EditIDInfo</commonForms>
   <commonForms>CommonForm.EditMultilineText</commonForms>
   <commonForms>CommonForm.EditTax</commonForms>
+  <commonForms>CommonForm.EditTrialBalanceAccounts</commonForms>
   <commonForms>CommonForm.EditUserSettings</commonForms>
   <commonForms>CommonForm.HTMLField</commonForms>
+  <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
+  <commonForms>CommonForm.LinkUnlinkDocumentRows</commonForms>
+  <commonForms>CommonForm.LoadDataFromTable</commonForms>
   <commonForms>CommonForm.MainSettings</commonForms>
   <commonForms>CommonForm.PickupItems</commonForms>
   <commonForms>CommonForm.PickupSpecialOffers</commonForms>
@@ -532,20 +602,16 @@
   <commonForms>CommonForm.ReportForm</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
-  <commonForms>CommonForm.LinkUnlinkDocumentRows</commonForms>
-  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
-  <commonForms>CommonForm.AttachFile</commonForms>
-  <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
-  <commonForms>CommonForm.EditCurrencies</commonForms>
-  <commonForms>CommonForm.EditHiddenTables</commonForms>
-  <commonForms>CommonForm.EditTrialBalanceAccounts</commonForms>
-  <commonForms>CommonForm.LoadDataFromTable</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
+  <catalogs>Catalog.AccountingOperations</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertyValues</catalogs>
+  <catalogs>Catalog.AdvancesKeys</catalogs>
   <catalogs>Catalog.Agreements</catalogs>
   <catalogs>Catalog.BankTerms</catalogs>
+  <catalogs>Catalog.Batches</catalogs>
+  <catalogs>Catalog.BatchKeys</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
   <catalogs>Catalog.CancelReturnReasons</catalogs>
   <catalogs>Catalog.CashAccounts</catalogs>
@@ -575,6 +641,7 @@
   <catalogs>Catalog.Items</catalogs>
   <catalogs>Catalog.ItemSegments</catalogs>
   <catalogs>Catalog.ItemTypes</catalogs>
+  <catalogs>Catalog.LedgerTypes</catalogs>
   <catalogs>Catalog.LegalNameContracts</catalogs>
   <catalogs>Catalog.LockDataModificationReasons</catalogs>
   <catalogs>Catalog.MovementRules</catalogs>
@@ -602,20 +669,18 @@
   <catalogs>Catalog.TaxAnalytics</catalogs>
   <catalogs>Catalog.Taxes</catalogs>
   <catalogs>Catalog.TaxRates</catalogs>
+  <catalogs>Catalog.TransactionsKeys</catalogs>
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.UnitsOfMeasurement</catalogs>
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.AdvancesKeys</catalogs>
-  <catalogs>Catalog.TransactionsKeys</catalogs>
-  <catalogs>Catalog.LedgerTypes</catalogs>
-  <catalogs>Catalog.AccountingOperations</catalogs>
-  <catalogs>Catalog.Batches</catalogs>
-  <catalogs>Catalog.BatchKeys</catalogs>
+  <documents>Document.AdditionalCostAllocation</documents>
+  <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
+  <documents>Document.CalculationMovementCosts</documents>
   <documents>Document.CashExpense</documents>
   <documents>Document.CashPayment</documents>
   <documents>Document.CashReceipt</documents>
@@ -631,8 +696,10 @@
   <documents>Document.InventoryTransfer</documents>
   <documents>Document.InventoryTransferOrder</documents>
   <documents>Document.ItemStockAdjustment</documents>
+  <documents>Document.JournalEntry</documents>
   <documents>Document.Labeling</documents>
   <documents>Document.ManualRegisterEntry</documents>
+  <documents>Document.MoneyTransfer</documents>
   <documents>Document.OpeningEntry</documents>
   <documents>Document.OutgoingPaymentOrder</documents>
   <documents>Document.PhysicalCountByLocation</documents>
@@ -657,17 +724,18 @@
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.VendorsAdvancesClosing</documents>
-  <documents>Document.JournalEntry</documents>
-  <documents>Document.CalculationMovementCosts</documents>
-  <documents>Document.AdditionalCostAllocation</documents>
-  <documents>Document.AdditionalRevenueAllocation</documents>
-  <documents>Document.MoneyTransfer</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
+  <enums>Enum.AccountingAnalyticTypes</enums>
   <enums>Enum.AgreementKinds</enums>
   <enums>Enum.AgreementTypes</enums>
+  <enums>Enum.AllocationMethod</enums>
+  <enums>Enum.AllocationMode</enums>
   <enums>Enum.ApArPostingDetail</enums>
+  <enums>Enum.BatchDirection</enums>
+  <enums>Enum.BatchType</enums>
+  <enums>Enum.CalculationMode</enums>
   <enums>Enum.CalculationTypes</enums>
   <enums>Enum.CashAccountTypes</enums>
   <enums>Enum.CashFlowDirections</enums>
@@ -687,11 +755,13 @@
   <enums>Enum.InvoicingStatuses</enums>
   <enums>Enum.ItemTypes</enums>
   <enums>Enum.KindsOfAttributes</enums>
+  <enums>Enum.LedgerTypeVariants</enums>
   <enums>Enum.MetadataSubtype</enums>
   <enums>Enum.MetadataTypes</enums>
   <enums>Enum.OffersDocumentTypes</enums>
   <enums>Enum.OutgoingPaymentTransactionTypes</enums>
   <enums>Enum.PaymentTypes</enums>
+  <enums>Enum.PriceAssignment</enums>
   <enums>Enum.PriceListTypes</enums>
   <enums>Enum.PrintTemplateTypes</enums>
   <enums>Enum.ProcurementMethods</enums>
@@ -706,27 +776,22 @@
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
-  <enums>Enum.LedgerTypeVariants</enums>
-  <enums>Enum.AccountingAnalyticTypes</enums>
-  <enums>Enum.BatchDirection</enums>
-  <enums>Enum.BatchType</enums>
-  <enums>Enum.CalculationMode</enums>
-  <enums>Enum.AllocationMode</enums>
-  <enums>Enum.AllocationMethod</enums>
   <reports>Report.AllRegistersMovement</reports>
-  <reports>Report.DocumentRegistrationsReport</reports>
-  <reports>Report.PriceInfo</reports>
+  <reports>Report.BatchBalance</reports>
+  <reports>Report.BatchBalanceSimple</reports>
   <reports>Report.D0010_ItemsInfo</reports>
-  <reports>Report.D2001_Sales</reports>
   <reports>Report.D1001_Purchases</reports>
+  <reports>Report.D2001_Sales</reports>
   <reports>Report.D4010_ActualStocks</reports>
   <reports>Report.D4011_FreeStocks</reports>
   <reports>Report.D4012_StockReservation</reports>
+  <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.OffsetOfAdvances</reports>
-  <reports>Report.BatchBalance</reports>
-  <reports>Report.BatchBalanceSimple</reports>
+  <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
+  <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
+  <dataProcessors>DataProcessor.FunctionalOptionSettings</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
   <dataProcessors>DataProcessor.MobileInvent</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
@@ -734,7 +799,6 @@
   <dataProcessors>DataProcessor.Procurement</dataProcessors>
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
-  <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
@@ -816,6 +880,8 @@
   <accumulationRegisters>AccumulationRegister.R3016B_ChequeAndBonds</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3021B_CashInTransitIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3022B_CashInTransitOutgoing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3024B_SalesOrdersToBePaid</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3050T_RetailCash</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4010B_ActualStocks</accumulationRegisters>
@@ -834,6 +900,7 @@
   <accumulationRegisters>AccumulationRegister.R4034B_GoodsShipmentSchedule</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4035B_IncomingStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4036B_IncomingStocksRequested</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4050B_StockInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</accumulationRegisters>
@@ -843,15 +910,6 @@
   <accumulationRegisters>AccumulationRegister.R5021T_Revenues</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.TM1010B_RowIDMovements</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3024B_SalesOrdersToBePaid</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.T1040T_AccountingAmounts</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.T1050T_AccountingQuantities</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6010B_BatchWiseBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6020B_BatchBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6030T_BatchShortageOutgoing</accumulationRegisters>
@@ -860,10 +918,16 @@
   <accumulationRegisters>AccumulationRegister.R6060T_CostOfGoodsSold</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6070T_OtherPeriodsExpenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6080T_OtherPeriodsRevenues</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T1040T_AccountingAmounts</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T1050T_AccountingQuantities</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1010B_RowIDMovements</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
+  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>
-  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfAccounts>ChartOfAccounts.R6010C_Master</chartsOfAccounts>
   <accountingRegisters>AccountingRegister.R6010A_Master</accountingRegisters>

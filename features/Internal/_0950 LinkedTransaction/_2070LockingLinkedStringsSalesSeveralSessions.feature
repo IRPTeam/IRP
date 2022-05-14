@@ -81,20 +81,20 @@ Scenario: _2070002 check locking header in the SO with linked documents (several
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Choice button of the field named "Partner"
 		And I go to line in "List" table
-			| 'Code' | 'Description' |
-			| '2'    | 'Kalipso'     |
+			| 'Description' |
+			| 'Kalipso'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
-			| 'Code' | 'Description' |
-			| '3'    | 'Store 03'    |
+			| 'Description' |
+			| 'Store 03'    |
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Code' | 'Description'    |
-			| '1'    | 'Second Company' |
+			| 'Description'    |
+			| 'Second Company' |
 		And I select current line in "List" table
 		And I activate field named "ItemListLineNumber" in "ItemList" table
 	* Check locking
@@ -139,8 +139,8 @@ Scenario: _2070003 check locking item tab in the SO with linked documents (sever
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListStore" in "ItemList" table
 		And I go to line in "List" table
-			| 'Code' | 'Description' | 
-			| '3'    | 'Store 03'    |
+			| 'Description' | 
+			| 'Store 03'    |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Check locking
@@ -168,8 +168,8 @@ Scenario: _2070003 check locking item tab in the SO with linked documents (sever
 		And I select current line in "ItemList" table
 		And I click choice button of "Store" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Code' | 'Description' | 'Reference' |
-			| '2'    | 'Store 02'    | 'Store 02'  |
+			| 'Description' | 'Reference' |
+			| 'Store 02'    | 'Store 02'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 	* Cancel line and check locking

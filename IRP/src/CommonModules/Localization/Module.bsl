@@ -815,5 +815,20 @@ Function Strings(Lang) Export
 	Strings.Insert("R_004", NStr("en = 'Specification'", Lang) + " = ");
 #EndRegion
 
+#Region Defaults
+	Strings.Insert("Default_001", NStr("en = 'pcs'", Lang));
+	Strings.Insert("Default_002", NStr("en = 'Customer standard term'", Lang));
+	Strings.Insert("Default_003", NStr("en = 'Vendor stabdard term'", Lang));
+	Strings.Insert("Default_004", NStr("en = 'Customer price type'", Lang));
+	Strings.Insert("Default_005", NStr("en = 'Vendor price type'", Lang));
+	Strings.Insert("Default_006", NStr("en = 'Partner term currency type'", Lang));
+	Strings.Insert("Default_007", NStr("en = 'Legal currency type'", Lang));
+	Strings.Insert("Default_008", NStr("en = 'American dollar'", Lang));
+	Strings.Insert("Default_009", NStr("en = 'USD'", Lang));
+	Strings.Insert("Default_010", NStr("en = '$'", Lang));
+	Strings.Insert("Default_011", NStr("en = 'My Company'", Lang));
+	Strings.Insert("Default_012", NStr("en = 'My Store'", Lang));
+#EndRegion
+
 	Return Strings;
 EndFunction

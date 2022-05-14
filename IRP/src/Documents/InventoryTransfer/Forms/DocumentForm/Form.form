@@ -3665,6 +3665,7 @@
         <edit>
           <common>true</common>
         </edit>
+        <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
       </columns>
     </additionalColumns>
   </attributes>
@@ -3782,6 +3783,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
     <columns>
       <name>Key</name>
       <title>

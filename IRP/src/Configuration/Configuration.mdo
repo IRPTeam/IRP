@@ -412,6 +412,7 @@
   <commonModules>CommonModule.DocMoneyTransferClient</commonModules>
   <commonModules>CommonModule.DocMoneyTransferServer</commonModules>
   <commonModules>CommonModule.POSClient</commonModules>
+  <commonModules>CommonModule.FOServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -460,6 +461,35 @@
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
   <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAllFunctional</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
+  <functionalOptions>FunctionalOption.UseExpenseAndRevenueTypes</functionalOptions>
+  <functionalOptions>FunctionalOption.UseStores</functionalOptions>
+  <functionalOptions>FunctionalOption.UseShipmentConfirmationAndGoodsReceipts</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAging</functionalOptions>
+  <functionalOptions>FunctionalOption.UseOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UseDeliveryDate</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSpecialOffers</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePriceByProperties</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBankDocuments</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePartnerItems</functionalOptions>
+  <functionalOptions>FunctionalOption.UseContactInformation</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBusinessUnits</functionalOptions>
+  <functionalOptions>FunctionalOption.UseManagersAndSalesPersons</functionalOptions>
+  <functionalOptions>FunctionalOption.UseIntegrations</functionalOptions>
+  <functionalOptions>FunctionalOption.UseEquipments</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAddAttributesAndProperties</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAdditionalSettings</functionalOptions>
+  <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePlannedReceiptReservation</functionalOptions>
+  <functionalOptions>FunctionalOption.UseLandedCost</functionalOptions>
+  <functionalOptions>FunctionalOption.UseRetail</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBundling</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePartnersHierarchy</functionalOptions>
+  <functionalOptions>FunctionalOption.UseChequeBonds</functionalOptions>
+  <functionalOptions>FunctionalOption.UseMobile</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -503,24 +533,63 @@
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
   <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
+  <commonCommands>CommonCommand.EditConstants</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <constants>Constant.DefaultFilesStorageVolume</constants>
   <constants>Constant.DefaultPictureStorageVolume</constants>
+  <constants>Constant.EnableLinkedRowsIntegrity</constants>
   <constants>Constant.SaasMode</constants>
+  <constants>Constant.UseAccounting</constants>
+  <constants>Constant.UseAllFunctional</constants>
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>
   <constants>Constant.UseLockDataModification</constants>
-  <constants>Constant.EnableLinkedRowsIntegrity</constants>
-  <constants>Constant.UseAccounting</constants>
+  <constants>Constant.UseSerialLotNumbers</constants>
+  <constants>Constant.UseExpenseAndRevenueTypes</constants>
+  <constants>Constant.UseShipmentConfirmationAndGoodsReceipts</constants>
+  <constants>Constant.UseStores</constants>
+  <constants>Constant.UsePartnerTerms</constants>
+  <constants>Constant.UseAging</constants>
+  <constants>Constant.UseOrders</constants>
+  <constants>Constant.UseDeliveryDate</constants>
+  <constants>Constant.UseSpecialOffers</constants>
+  <constants>Constant.UsePriceByProperties</constants>
+  <constants>Constant.UseBankDocuments</constants>
+  <constants>Constant.UsePartnerItems</constants>
+  <constants>Constant.UseContactInformation</constants>
+  <constants>Constant.UseBusinessUnits</constants>
+  <constants>Constant.UseManagersAndSalesPersons</constants>
+  <constants>Constant.UseIntegrations</constants>
+  <constants>Constant.UseEquipments</constants>
+  <constants>Constant.UseAddAttributesAndProperties</constants>
+  <constants>Constant.UseAdditionalSettings</constants>
+  <constants>Constant.UseUnitsAndDimensions</constants>
+  <constants>Constant.UsePlannedReceiptReservation</constants>
+  <constants>Constant.UseLandedCost</constants>
+  <constants>Constant.UseRetail</constants>
+  <constants>Constant.UseBundling</constants>
+  <constants>Constant.UseCashTransaction</constants>
+  <constants>Constant.UsePartnersHierarchy</constants>
+  <constants>Constant.UseChequeBonds</constants>
+  <constants>Constant.UseSimpleMode</constants>
+  <constants>Constant.UseMobile</constants>
+  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
+  <commonForms>CommonForm.AttachFile</commonForms>
+  <commonForms>CommonForm.ConstantsForm</commonForms>
   <commonForms>CommonForm.DataMappingForm</commonForms>
   <commonForms>CommonForm.EditAddProperties</commonForms>
+  <commonForms>CommonForm.EditCurrencies</commonForms>
   <commonForms>CommonForm.EditDescriptions</commonForms>
+  <commonForms>CommonForm.EditHiddenTables</commonForms>
   <commonForms>CommonForm.EditIDInfo</commonForms>
   <commonForms>CommonForm.EditMultilineText</commonForms>
   <commonForms>CommonForm.EditTax</commonForms>
+  <commonForms>CommonForm.EditTrialBalanceAccounts</commonForms>
   <commonForms>CommonForm.EditUserSettings</commonForms>
   <commonForms>CommonForm.HTMLField</commonForms>
+  <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
+  <commonForms>CommonForm.LinkUnlinkDocumentRows</commonForms>
   <commonForms>CommonForm.MainSettings</commonForms>
   <commonForms>CommonForm.PickupItems</commonForms>
   <commonForms>CommonForm.PickupSpecialOffers</commonForms>
@@ -532,13 +601,6 @@
   <commonForms>CommonForm.ReportForm</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
-  <commonForms>CommonForm.LinkUnlinkDocumentRows</commonForms>
-  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
-  <commonForms>CommonForm.AttachFile</commonForms>
-  <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
-  <commonForms>CommonForm.EditCurrencies</commonForms>
-  <commonForms>CommonForm.EditHiddenTables</commonForms>
-  <commonForms>CommonForm.EditTrialBalanceAccounts</commonForms>
   <commonForms>CommonForm.LoadDataFromTable</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
@@ -713,6 +775,7 @@
   <enums>Enum.CalculationMode</enums>
   <enums>Enum.AllocationMode</enums>
   <enums>Enum.AllocationMethod</enums>
+  <enums>Enum.PriceAssignment</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
@@ -735,6 +798,7 @@
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
+  <dataProcessors>DataProcessor.FunctionalOptionSettings</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

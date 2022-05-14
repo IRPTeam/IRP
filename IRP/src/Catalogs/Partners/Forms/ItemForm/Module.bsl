@@ -36,6 +36,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SalesOrdersList.Parameters.SetParameterValue("Partner", Object.Ref);
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
+	
+	If Not FOServer.IsUsePartnersHierarchy() Then
+		Items.Parent.Visible = False;
+	EndIf;
 EndProcedure
 
 &AtClient

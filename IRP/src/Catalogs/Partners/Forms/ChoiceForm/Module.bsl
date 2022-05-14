@@ -16,21 +16,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			FilterEmployee = FilterItem.Value;
 			Items.FilterEmployee.Enabled = False;
 		EndIf;
-		If FilterItem.Key = "Opponent" Then
-			FilterOpponent = FilterItem.Value;
-			Items.FilterOpponent.Enabled = False;
-		EndIf;
 	EndDo;
 
 	SetBooleanListFilter(List.Filter.Items, "Customer", FilterCustomer);
 	SetBooleanListFilter(List.Filter.Items, "Vendor", FilterVendor);
 	SetBooleanListFilter(List.Filter.Items, "Employee", FilterEmployee);
-	SetBooleanListFilter(List.Filter.Items, "Opponent", FilterOpponent);
 
 	Items.FilterCustomer.TitleTextColor = ?(FilterCustomer, New Color(), WebColors.LightGray);
 	Items.FilterVendor.TitleTextColor = ?(FilterVendor, New Color(), WebColors.LightGray);
 	Items.FilterEmployee.TitleTextColor = ?(FilterEmployee, New Color(), WebColors.LightGray);
-	Items.FilterOpponent.TitleTextColor = ?(FilterOpponent, New Color(), WebColors.LightGray);
 EndProcedure
 
 &AtClient
@@ -55,12 +49,6 @@ EndProcedure
 Procedure FilterEmployeeOnChange(Item)
 	SetBooleanListFilter(List.Filter.Items, "Employee", FilterEmployee);
 	Item.TitleTextColor = ?(FilterEmployee, New Color(), WebColors.LightGray);
-EndProcedure
-
-&AtClient
-Procedure FilterOpponentOnChange(Item)
-	SetBooleanListFilter(List.Filter.Items, "Opponent", FilterOpponent);
-	Item.TitleTextColor = ?(FilterOpponent, New Color(), WebColors.LightGray);
 EndProcedure
 
 &AtClientAtServerNoContext

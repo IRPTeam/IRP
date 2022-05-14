@@ -2197,6 +2197,7 @@
       <edit>
         <common>true</common>
       </edit>
+      <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
     </columns>
     <columns>
       <name>QuantityInBaseUnit</name>

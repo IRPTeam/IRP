@@ -498,7 +498,7 @@ Scenario: _4000105 check add attributes from extensions
 		And I input "USD" text in the field named "SettingsFilterRightValue" of "SettingsFilter" table
 		And I finish line editing in "SettingsFilter" table
 		And in the table "ResultTable" I click "Verify" button
-		And "ResultTable" table became equal
+		And "ResultTable" table contains lines
 			| 'Ref' |
 			| 'USD' |
 		And I click "Ok" button			

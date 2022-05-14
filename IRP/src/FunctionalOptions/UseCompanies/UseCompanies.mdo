@@ -49,4 +49,6 @@
   <content>Document.GoodsReceipt.Attribute.LegalName</content>
   <content>Document.ShipmentConfirmation.Attribute.LegalName</content>
   <content>Catalog.Companies.Command.OpenCompanyList</content>
+  <content>Document.PurchaseInvoice.Attribute.LegalName</content>
+  <content>Document.PurchaseInvoice.Attribute.Company</content>
 </mdclass:FunctionalOption>

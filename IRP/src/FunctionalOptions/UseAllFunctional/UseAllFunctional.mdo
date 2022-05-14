@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="893633a2-f18f-4cfa-bc57-de18aa2e82dd">
+  <name>UseAllFunctional</name>
+  <synonym>
+    <key>en</key>
+    <value>Use all functional</value>
+  </synonym>
+  <location>Constant.UseAllFunctional</location>
+  <privilegedGetMode>true</privilegedGetMode>
+</mdclass:FunctionalOption>

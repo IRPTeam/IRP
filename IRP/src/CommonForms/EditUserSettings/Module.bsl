@@ -26,6 +26,17 @@ Procedure Ok(Command)
 EndProcedure
 
 &AtClient
+Procedure SetDefaultSettings(Command)
+	SetDefaultSettingsAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetDefaultSettingsAtServer()
+	UserSettingsServer.SetDefaultUserSettings_ByUser(ThisObject.UserOrGroup);
+	CreateMetadataTree();	
+EndProcedure
+
+&AtClient
 Procedure MetadataTreeOnActivateRow(Item)
 	CurrentRowID = Items.MetadataTree.CurrentRow;
 	If CurrentRowID = Undefined Then

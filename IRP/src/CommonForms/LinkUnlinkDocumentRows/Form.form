@@ -1722,7 +1722,6 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -1753,7 +1752,6 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <visible>true</visible>
@@ -2833,7 +2831,6 @@
           <commandName>Form.Command.Unlink</commandName>
           <representation>Auto</representation>
           <placementArea>UserCmds</placementArea>
-          <toolTipRepresentation>Auto</toolTipRepresentation>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <items xsi:type="form:Button">
@@ -2864,7 +2861,6 @@
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
-          <toolTipRepresentation>Auto</toolTipRepresentation>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <visible>true</visible>
@@ -3975,7 +3971,6 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
       <locationInCommandBar>InCommandBar</locationInCommandBar>
     </items>
@@ -4007,7 +4002,6 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
       <locationInCommandBar>InCommandBar</locationInCommandBar>
     </items>
@@ -4039,7 +4033,6 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
       <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
     </items>
@@ -5419,6 +5412,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   </attributes>
   <attributes>
     <name>ShowLinkedDocuments</name>

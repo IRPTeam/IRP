@@ -59,6 +59,20 @@
         <value>0</value>
       </code>
     </items>
+    <items id="cb160eef-a2f2-4a6e-90ff-7fe4619a537d">
+      <name>Default_Vendor</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>1</value>
+      </code>
+    </items>
+    <items id="95c122bd-d750-4c1b-b66f-24926a4e9c3c">
+      <name>Default_Customer</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>2</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
@@ -104,6 +118,21 @@
     </synonym>
     <type>
       <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="33946d6f-8b50-4fa8-a577-2904c4619e7e">
+    <name>Assignment</name>
+    <synonym>
+      <key>en</key>
+      <value>Assignment</value>
+    </synonym>
+    <type>
+      <types>EnumRef.PriceAssignment</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

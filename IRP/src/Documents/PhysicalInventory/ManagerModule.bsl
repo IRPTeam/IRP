@@ -148,28 +148,33 @@ EndFunction
 
 Function ItemList()
 	Return "SELECT
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref.Store AS Store,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.Ref AS Basis,
-		   |	CASE
-		   |		WHEN ItemList.Difference > 0
-		   |			THEN ItemList.Difference
-		   |		ELSE 0
-		   |	END AS SurplusQuantity,
-		   |	CASE
-		   |		WHEN ItemList.Difference < 0
-		   |			THEN -ItemList.Difference
-		   |		ELSE 0
-		   |	END AS WriteOffQuantity,
-		   |	&StatusInfoPosting AS StatusInfoPosting
-		   |INTO ItemList
-		   |FROM
-		   |	Document.PhysicalInventory.ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.Ref = &Ref
-		   |	AND ItemList.Difference <> 0
-		   |	AND &StatusInfoPosting";
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Store AS Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Ref AS Basis,
+	|	CASE
+	|		WHEN ItemList.Difference > 0
+	|			THEN ItemList.Difference
+	|		ELSE 0
+	|	END AS SurplusQuantity,
+	|	CASE
+	|		WHEN ItemList.Difference < 0
+	|			THEN -ItemList.Difference
+	|		ELSE 0
+	|	END AS WriteOffQuantity,
+	|	CASE
+	|		WHEN ItemList.Ref.UseSerialLot
+	|			THEN ItemList.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END AS SerialLotNumber,
+	|	&StatusInfoPosting AS StatusInfoPosting
+	|INTO ItemList
+	|FROM
+	|	Document.PhysicalInventory.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref
+	|	AND ItemList.Difference <> 0
+	|	AND &StatusInfoPosting";
 EndFunction
 
 Function R4011B_FreeStocks()

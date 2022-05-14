@@ -316,7 +316,8 @@ Function ItemList()
 	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
 	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ItemList.Key
 	|INTO ItemList
 	|FROM
 	|	Document.RetailReturnReceipt.ItemList AS ItemList
@@ -540,14 +541,25 @@ Function R4011B_FreeStocks()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService";
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	CASE
+	|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+	|			THEN ItemList.Quantity
+	|		ELSE SerialLotNumbers.Quantity
+	|	END AS Quantity
+	|INTO R4010B_ActualStocks
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Key = SerialLotNumbers.Key
+	|WHERE
+	|	NOT ItemList.IsService";
 EndFunction
 
 Function R3050T_RetailCash()

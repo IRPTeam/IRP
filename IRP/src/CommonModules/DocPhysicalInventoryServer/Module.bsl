@@ -205,7 +205,7 @@ Function GetRefilledItemTable(Object)
 		|	AND PhysicalCountByLocationItemList.Ref.PhysicalInventory = &PhysicalInventory";
 	Query.SetParameter("Store", Object.Store);
 	Query.SetParameter("PhysicalInventory", Object.Ref);
-	Query.SetParameter("Period", Object.Date);
+	Query.SetParameter("Period", CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date));
 	Query.SetParameter("ItemList", Object.ItemList.Unload());
 	Query.Execute();
 	
@@ -236,10 +236,7 @@ Procedure RecalculateItemList(Object, ArrayOfFillingRows, ArrayOfFillingColumns)
 		Property = New Structure("DataPath", TrimAll(PropertyName));
 		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
 	EndDo;
-	For Each RowItemList In Object.ItemList Do
-			RowItemList.UseSerialLotNumber = 
-				Parameters.ExtractedData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey) <> Undefined;
-	EndDo;
+
 EndProcedure
 
 #EndRegion

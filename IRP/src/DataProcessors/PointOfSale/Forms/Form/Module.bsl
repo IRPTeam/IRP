@@ -42,6 +42,8 @@ EndProcedure
 &AtClient
 Procedure AgreementOnChange(Item)
 	DocRetailSalesReceiptClient.AgreementOnChange(Object, ThisObject, Item);
+	CurrentData = Items.ItemList.CurrentData;
+	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
 EndProcedure
 
 &AtClient

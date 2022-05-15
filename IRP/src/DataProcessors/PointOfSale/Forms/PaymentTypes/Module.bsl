@@ -41,6 +41,17 @@ Procedure CreateFormElement(ButtonsArray)
 		EndIf;
 	EndDo;
 
+	MaxButtonPerPage = PayButtonsParent.Count();
+	For Each PayGroup In PayButtonsParent Do
+		
+		PayButtonsIntoGroup = PayGroup.Value; // Array of See POSClient.ButtonSettings
+		
+		If PayButtonsIntoGroup.UBound() > MaxButtonPerPage Then
+			MaxButtonPerPage = PayButtonsIntoGroup.UBound();
+		EndIf;
+
+	EndDo;
+
 	GroupIndex = 0;
 
 	For Each PayGroup In PayButtonsParent Do
@@ -54,7 +65,6 @@ Procedure CreateFormElement(ButtonsArray)
 		+ ?(PayButtonsIntoGroup.Count() > 1, " >", "");
 		
 		DrawButton(PaymentTypeGroup, ButtonName, Description, Items.PaymentGroup, "PayButtonGroup");
-		
 				
 		NewPageItem = Items.Add("ButtonPage_" + GroupIndex, Type("FormGroup"), Items.PaymentPages);
 		NewPageItem.Type = FormGroupType.Page;
@@ -75,7 +85,19 @@ Procedure CreateFormElement(ButtonsArray)
 			
 		EndDo;
 		
+		If Index > 1 Then
+			For Index = PayButtonsIntoGroup.Count() To MaxButtonPerPage - 1 Do
+				LableName = StrTemplate("PayButton_%1_%2", GroupIndex, Index);;
+				DrawLabel(LableName, NewPageItem);
+			EndDo;
+		EndIf;
+		
 		GroupIndex = GroupIndex + 1;
+	EndDo;
+	
+	For Index = GroupIndex + 1 To MaxButtonPerPage - 1 Do
+		LableName = StrTemplate("Page_%1", Index);
+		DrawLabel(LableName, Items.PaymentGroup);
 	EndDo;
 	
 	If GroupIndex = 1 Then
@@ -91,20 +113,35 @@ Procedure DrawButton(PaymentTypeGroup, ButtonName, Description, Page, Action)
 	NewAttributeArray.Add(New FormAttribute(ButtonName, New TypeDescription("String")));
 	ChangeAttributes(NewAttributeArray);	
 	
-	
 	NewDecoration = Items.Add(ButtonName, Type("FormField"), Page);
 	NewDecoration.Type = FormFieldType.PictureField;
 	NewDecoration.DataPath = ButtonName;
 	NewDecoration.SetAction("Click", Action);
 	NewDecoration.Hyperlink = True;
-	NewDecoration.TitleLocation = FormItemTitleLocation.None; 
+	NewDecoration.TitleLocation = FormItemTitleLocation.None;
 	NewDecoration.Height = 2;
 	NewDecoration.VerticalStretch = False;
 	NewDecoration.NonselectedPictureText = Description;
 	NewDecoration.ToolTip = Description;
-		
+	
 	//@skip-check invocation-parameter-type-intersect
 	ThisObject[ButtonName] = GetURL(PaymentTypeGroup, "Icon");
+EndProcedure
+
+&AtServer
+Procedure DrawLabel(LableName, Page)
+	NewAttributeArray = New Array;
+	NewAttributeArray.Add(New FormAttribute(LableName, New TypeDescription("String")));
+	ChangeAttributes(NewAttributeArray);
+
+	NewDecoration = Items.Add(LableName, Type("FormField"), Page);
+	NewDecoration.Type = FormFieldType.PictureField;
+	NewDecoration.DataPath = LableName;
+	NewDecoration.TitleLocation = FormItemTitleLocation.None;
+	NewDecoration.Height = 2;
+	NewDecoration.VerticalStretch = False;
+	NewDecoration.BorderColor = StyleColors.FormBackColor;
+
 EndProcedure
 
 #EndRegion

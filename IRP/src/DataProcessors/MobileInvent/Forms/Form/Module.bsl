@@ -33,6 +33,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
 	For Each Row In AdditionalParameters.FoundedItems Do
 		NewRow = DocumentObject.ItemList.Add();
+		NewRow.Key = New UUID;
 		FillPropertyValues(NewRow, Row);
 		NewRow.PhysCount = Row.Quantity;
 	EndDo;
@@ -77,6 +78,7 @@ Procedure StartEditQuantity(Val RowSelected, AutoMode = False)
 	ItemListRow = DocumentObject.ItemList.FindByID(RowSelected);
 	Structure.Insert("ItemRef", Undefined);
 	Structure.Insert("ItemKey", ItemListRow.ItemKey);
+	Structure.Insert("SerialLotNumber", ItemListRow.SerialLotNumber);
 	Structure.Insert("Quantity", ItemListRow.PhysCount);
 	Structure.Insert("RowID", RowSelected);
 	Structure.Insert("AutoMode", AutoMode);

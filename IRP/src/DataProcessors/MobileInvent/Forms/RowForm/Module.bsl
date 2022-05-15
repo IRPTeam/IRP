@@ -2,6 +2,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ItemRef = Parameters.ItemRef;
 	ItemKey = Parameters.ItemKey;
+	SerialLotNumber = Parameters.SerialLotNumber;
 	If ItemRef.IsEmpty() Then
 		ItemRef = ItemKey.Item;
 	EndIf;

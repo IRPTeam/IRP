@@ -778,6 +778,7 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 			
 			ServerData = Undefined;
@@ -786,7 +787,8 @@ Procedure OnOpenFormNotify(Parameters) Export
 				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
 			EndIf;
 			
-			If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory" Then
+			If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
+				Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation" Then
 				SerialLotNumberClient.FillSerialLotNumbersUse(Parameters.Object, ServerData);
 			Else
 				SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object, ServerData);
@@ -985,14 +987,16 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation" Then
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
 				ServerData = New Structure("ServerData", New Structure());
 				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
 				ServerData.ServerData.Insert("Rows", Parameters.Rows);
 			EndIf;
-			If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory" Then
+			If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
+				Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation" Then
 				SerialLotNumberClient.FillSerialLotNumbersUse(Parameters.Object, ServerData);
 			Else
 				SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form, ServerData);

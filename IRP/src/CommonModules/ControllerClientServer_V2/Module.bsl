@@ -484,6 +484,7 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("SalesReturn"               , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("InventoryTransfer"         , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("PhysicalInventory"         , "StepExtractDataItemKeysWithSerialLotNumbers");
+	Binding.Insert("PhysicalCountByLocation"   , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
 	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
@@ -4475,6 +4476,7 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("InventoryTransfer"         , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("InventoryTransferOrder"    , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("PhysicalInventory"         , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("PhysicalCountByLocation"   , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("ItemStockAdjustment"       , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("Bundling"                  , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("Unbundling"                , "StepItemListChangeItemKeyByItem");
@@ -4643,8 +4645,12 @@ Function BindItemListItemKey(Parameters)
 		"StepChangeUnitByItemKey");
 	
 	Binding.Insert("PhysicalInventory", 
-		"StepChangeUnitByItemKey,
-		|StepExtractDataItemKeysWithSerialLotNumbers");
+			"StepChangeUnitByItemKey,
+			|StepExtractDataItemKeysWithSerialLotNumbers");
+
+	Binding.Insert("PhysicalCountByLocation", 
+			"StepChangeUnitByItemKey,
+			|StepExtractDataItemKeysWithSerialLotNumbers");
 		
 	Binding.Insert("ItemStockAdjustment" , "StepChangeUnitByItemKey");
 	Binding.Insert("Bundling"            , "StepChangeUnitByItemKey");
@@ -4778,6 +4784,8 @@ Function BindItemListUnit(Parameters)
 		|StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("PhysicalInventory", "BindVoid");
+
+	Binding.Insert("PhysicalCountByLocation", "BindVoid");
 	
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
@@ -5417,6 +5425,7 @@ Function BindItemListPhysCount(Parameters)
 	DataPath = "ItemList.PhysCount";
 	Binding = New Structure();
 	Binding.Insert("PhysicalInventory", "StepCalculateDifferenceCount");	
+	Binding.Insert("PhysicalCountByLocation", "StepCalculateDifferenceCount");	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5448,6 +5457,7 @@ Function BindItemListManualFixedCount(Parameters)
 	DataPath = "ItemList.ManualFixedCount";
 	Binding = New Structure();
 	Binding.Insert("PhysicalInventory", "StepCalculateDifferenceCount");	
+	Binding.Insert("PhysicalCountByLocation", "StepCalculateDifferenceCount");	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5472,6 +5482,7 @@ Function BindItemListExpCount(Parameters)
 	DataPath = "ItemList.ExpCount";
 	Binding = New Structure();
 	Binding.Insert("PhysicalInventory", "StepCalculateDifferenceCount");	
+	Binding.Insert("PhysicalCountByLocation", "StepCalculateDifferenceCount");	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -6581,7 +6592,8 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	SourceTable.GroupBy(SourceColumnsGroupBy, "Quantity");
 	
 	// only for physical inventory
-	If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation" Then
 		SourceTable.Columns.Quantity.Name = "PhysCount";
 	EndIf;
 	

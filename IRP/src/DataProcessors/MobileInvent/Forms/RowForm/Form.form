@@ -95,6 +95,53 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
+    <name>SerialLotNumber</name>
+    <id>21</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>SerialLotNumber</segments>
+    </dataPath>
+    <titleLocation>None</titleLocation>
+    <extendedTooltip>
+      <name>SerialLotNumberExtendedTooltip</name>
+      <id>23</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>SerialLotNumberContextMenu</name>
+      <id>22</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>LabelField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:LabelFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
     <name>Quantity</name>
     <id>4</id>
     <visible>true</visible>
@@ -236,7 +283,6 @@
       <height>12.0</height>
       <bold>true</bold>
     </font>
-    <toolTipRepresentation>Auto</toolTipRepresentation>
     <representationInContextMenu>Auto</representationInContextMenu>
   </items>
   <autoCommandBar>
@@ -315,6 +361,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   </attributes>
   <attributes>
     <name>RowId</name>
@@ -371,6 +418,24 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>SerialLotNumber</name>
+    <title>
+      <key>en</key>
+      <value>Serial lot number</value>
+    </title>
+    <id>9</id>
+    <valueType>
+      <types>CatalogRef.SerialLotNumbers</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
+  </attributes>
   <formCommands>
     <name>OK</name>
     <title>
@@ -425,6 +490,13 @@
     <valueType>
       <types>Boolean</types>
     </valueType>
+  </parameters>
+  <parameters>
+    <name>SerialLotNumber</name>
+    <valueType>
+      <types>CatalogRef.SerialLotNumbers</types>
+    </valueType>
+    <keyParameter>true</keyParameter>
   </parameters>
   <commandInterface>
     <navigationPanel/>

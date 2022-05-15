@@ -91,4 +91,18 @@
     <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="35bc3a39-94b8-4441-b9ee-fd44b9285ee6">
+    <name>SerialLotNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot number</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SerialLotNumbers</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </dimensions>
 </mdclass:InformationRegister>

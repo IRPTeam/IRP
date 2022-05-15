@@ -104,7 +104,6 @@
           <height>1</height>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
-          <toolTipRepresentation>Auto</toolTipRepresentation>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <visible>true</visible>
@@ -152,37 +151,8 @@
           <segments>DocumentObject.ItemList</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
-        <items xsi:type="form:FormGroup">
-          <name>ItemListGroup1</name>
-          <id>43</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <extendedTooltip>
-            <name>ItemListGroup1ExtendedTooltip</name>
-            <id>44</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <type>ColumnGroup</type>
-          <extInfo xsi:type="form:ColumnGroupExtInfo">
-            <group>InCell</group>
-            <showTitle>true</showTitle>
-          </extInfo>
-        </items>
         <items xsi:type="form:FormField">
-          <name>DocumentObjectItemListItemKeyItem</name>
+          <name>ItemListItemKeyItem</name>
           <id>38</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -193,7 +163,7 @@
             <segments>DocumentObject.ItemList.ItemKey.Item</segments>
           </dataPath>
           <extendedTooltip>
-            <name>DocumentObjectItemListItemKeyItemExtendedTooltip</name>
+            <name>ItemListItemKeyItemExtendedTooltip</name>
             <id>40</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -208,7 +178,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>DocumentObjectItemListItemKeyItemContextMenu</name>
+            <name>ItemListItemKeyItemContextMenu</name>
             <id>39</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -233,7 +203,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>DocumentObjectItemListItemKey</name>
+          <name>ItemListItemKey</name>
           <id>23</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -244,7 +214,7 @@
             <segments>DocumentObject.ItemList.ItemKey</segments>
           </dataPath>
           <extendedTooltip>
-            <name>DocumentObjectItemListItemKeyExtendedTooltip</name>
+            <name>ItemListItemKeyExtendedTooltip</name>
             <id>25</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -259,8 +229,58 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>DocumentObjectItemListItemKeyContextMenu</name>
+            <name>ItemListItemKeyContextMenu</name>
             <id>24</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListSerialLotNumber</name>
+          <id>78</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>DocumentObject.ItemList.SerialLotNumber</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListSerialLotNumberExtendedTooltip</name>
+            <id>80</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListSerialLotNumberContextMenu</name>
+            <id>79</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -335,7 +355,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>DocumentObjectItemListUnit</name>
+          <name>ItemListItemListUnit</name>
           <id>26</id>
           <enabled>true</enabled>
           <userVisible>
@@ -345,7 +365,7 @@
             <segments>DocumentObject.ItemList.Unit</segments>
           </dataPath>
           <extendedTooltip>
-            <name>DocumentObjectItemListUnitExtendedTooltip</name>
+            <name>ItemListItemListUnitExtendedTooltip</name>
             <id>28</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -360,7 +380,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>DocumentObjectItemListUnitContextMenu</name>
+            <name>ItemListItemListUnitContextMenu</name>
             <id>27</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -587,7 +607,6 @@
         <autoMaxHeight>true</autoMaxHeight>
         <horizontalStretch>true</horizontalStretch>
         <placementArea>UserCmds</placementArea>
-        <toolTipRepresentation>Auto</toolTipRepresentation>
         <representationInContextMenu>Auto</representationInContextMenu>
       </items>
       <visible>true</visible>
@@ -757,7 +776,6 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:Button">
@@ -788,7 +806,6 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

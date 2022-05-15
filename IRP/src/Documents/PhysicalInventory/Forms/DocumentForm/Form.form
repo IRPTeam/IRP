@@ -1565,7 +1565,7 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>ItemListLoadDataFromTable</name>
+            <name>LoadDataFromTable</name>
             <id>480</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1573,7 +1573,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>ItemListLoadDataFromTableExtendedTooltip</name>
+              <name>LoadDataFromTableExtendedTooltip</name>
               <id>481</id>
               <visible>true</visible>
               <enabled>true</enabled>

@@ -119,6 +119,7 @@ Procedure CreatePhysicalCountEnd(CountDocsToCreate, AdditionalParameters) Export
 		AdditionalParameters.Insert("CountDocsToCreate", CountDocsToCreate);
 		DocPhysicalInventoryServer.CreatePhysicalCount(AdditionalParameters.ObjectRef, AdditionalParameters);
 		Notify("CreatedPhysicalCountByLocations", , AdditionalParameters.ObjectRef);
+		NotifyChanged(Type("DocumentRef.PhysicalCountByLocation"));
 	EndIf;
 EndProcedure
 

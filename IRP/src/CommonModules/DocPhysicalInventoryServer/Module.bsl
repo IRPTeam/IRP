@@ -209,10 +209,14 @@ Function GetRefilledItemTable(Object)
 	Query.Execute();
 	
 	Tables = New Structure;
+	ItemList = Query.TempTablesManager.Tables.Find("ItemList").GetData().Unload(); // ValueTable
+	Tables.Insert("ItemList", ItemList);
 	
-	Tables.Insert("ItemList", Query.TempTablesManager.Tables.Find("ItemList").GetData().Unload());
-	Tables.Insert("ActualStock", Query.TempTablesManager.Tables.Find("ActualStock").GetData().Unload());
-	Tables.Insert("PhysicalCount", Query.TempTablesManager.Tables.Find("PhysicalCount").GetData().Unload());
+	ActualStock = Query.TempTablesManager.Tables.Find("ActualStock").GetData().Unload(); // ValueTable
+	Tables.Insert("ActualStock", ActualStock);
+	
+	PhysicalCount = Query.TempTablesManager.Tables.Find("PhysicalCount").GetData().Unload(); // ValueTable
+	Tables.Insert("PhysicalCount", PhysicalCount);
 	
 	Return Tables;
 	

@@ -148,6 +148,7 @@ Procedure ShowStatus()
 	Reg = InformationRegisters.BarcodeScanInfoCheck.CreateRecordSet();
 	Reg.Filter.Item.Set(Item);
 	Reg.Filter.ItemKey.Set(ItemKey);
+	Reg.Filter.SerialLotNumber.Set(SerialLotNumber);
 	Reg.Read();
 	If Reg.Count() Then
 		Status = Reg[0].Status;
@@ -164,9 +165,11 @@ Procedure WriteReg(Status)
 	Reg = InformationRegisters.BarcodeScanInfoCheck.CreateRecordSet();
 	Reg.Filter.Item.Set(Item);
 	Reg.Filter.ItemKey.Set(ItemKey);
+	Reg.Filter.SerialLotNumber.Set(SerialLotNumber);
 	NewReg = Reg.Add();
 	NewReg.Item = Item;
 	NewReg.ItemKey = ItemKey;
+	NewReg.SerialLotNumber = SerialLotNumber;
 	NewReg.Status = Status;
 	NewReg.User = SessionParameters.CurrentUser;
 	Reg.Write(True);

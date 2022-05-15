@@ -22,6 +22,7 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 			PhysicalCountByLocationObject.Date = CurrentSessionDate();
 			PhysicalCountByLocationObject.PhysicalInventory = Parameters.PhysicalInventory;
 			PhysicalCountByLocationObject.Store = Parameters.Store;
+			PhysicalCountByLocationObject.UseSerialLot = Parameters.PhysicalInventory.UseSerialLot;
 			PhysicalCountByLocationObject.RuleEditQuantity = Parameters.PhysicalInventory.RuleEditQuantity;
 			PhysicalCountByLocationObject.ItemList.Clear();
 			For Each ItemListRow In Instance.ItemList Do

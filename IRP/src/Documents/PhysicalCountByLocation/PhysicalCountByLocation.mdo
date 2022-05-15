@@ -62,38 +62,6 @@
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="0a2b235a-cf47-41d9-87f4-a12e7d32c118">
-    <name>Barcode</name>
-    <synonym>
-      <key>en</key>
-      <value>Barcode</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeBarcode</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="c6410d44-1a5c-44ad-8a8f-17968de73e3c">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="0670f01e-a581-46af-b5d8-968db0acec20">
     <name>PhysicalInventory</name>
     <synonym>
@@ -173,6 +141,21 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="08044605-0ec8-4322-94e2-0166d7a215a3">
+    <name>UseSerialLot</name>
+    <synonym>
+      <key>en</key>
+      <value>Use serial lot</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -294,6 +277,21 @@
       <type>
         <types>DefinedType.typeQuantity</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b985a50c-e9d0-4a4e-b15e-347764ff6566">
+      <name>ManualFixedCount</name>
+      <synonym>
+        <key>en</key>
+        <value>Manual fixed count</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <markNegatives>true</markNegatives>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>

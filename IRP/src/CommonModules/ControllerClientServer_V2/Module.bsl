@@ -286,20 +286,30 @@ EndFunction
 
 Procedure API_SetProperty(Parameters, Property, Value) Export
 	SetterName = GetSetterNameByDataPath(Property.DataPath);
-	_Key = Undefined;
-	If StrSplit(Property.DataPath, ".").Count() = 2 Then
-		_Key = Parameters.Rows[0].Key;
-	EndIf;
+	IsColumn = StrSplit(Property.DataPath, ".").Count() = 2;
 	If SetterName <> Undefined Then
-		Results = New Array();
-		Results.Add(New Structure("Options, Value", 
-			New Structure("Key", _Key), Value));
+		_Key = ?(IsColumn, Parameters.Rows[0].Key, Undefined);
+		
+		//@skip-check module-unused-local-variable
+		Results = ResultArray(_Key, Value);
 		Execute StrTemplate("%1(Parameters, Results);", SetterName);
 	Else
-		SetPropertyObject(Parameters, Property.DataPath, _Key, Value);
+		If IsColumn Then
+			For Each Row In GetRows(Parameters, Parameters.TableName) Do
+				SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Row.Key, Value));
+			EndDo;
+		Else
+			SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Undefined, Value));
+		EndIf;
 		CommitChainChanges(Parameters);
 	EndIf;
 EndProcedure
+
+Function ResultArray(_Key, Value)
+	Results = New Array();
+	Results.Add(New Structure("Options, Value", New Structure("Key", _Key), Value));
+	Return Results;
+EndFunction	
 
 Function GetAllBindings(Parameters)
 	BindingMap = New Map();
@@ -6462,7 +6472,8 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 	MetadataBinding = New Map();
 	For Each KeyValue In Binding Do
 		MetadataName = KeyValue.Key;
-		MetadataBinding.Insert(StrTemplate("%1.%2", MetadataName, DataPath), Binding[MetadataName]);
+		//MetadataBinding.Insert(StrTemplate("%1.%2", MetadataName, DataPath), Binding[MetadataName]);
+		MetadataBinding.Insert(MetadataName + "." +DataPath, Binding[MetadataName]);
 	EndDo;
 	FullDataPath = StrTemplate("%1.%2", Parameters.ObjectMetadataInfo.MetadataName, DataPath);
 	StepsEnabler = MetadataBinding.Get(FullDataPath);

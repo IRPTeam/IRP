@@ -193,6 +193,8 @@
 //  * InfoMessage_022 - String - This order is closed by %1
 //  * InfoMessage_023 - String - Can not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled.
 //  * InfoMessage_024 - String - Will be available after save.
+//  * InfoMessage_025 - String - Before start to scan - choose location
+//  * InfoMessage_026 - String - Can not count Service item type
 //  * POS_s1 - String - Amount paid is less than amount of the document
 //  * POS_s2 - String - Card fees are more than the amount of the document
 //  * POS_s3 - String - There is no need to use cash, as card payments are sufficient to pay
@@ -715,6 +717,8 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_023", NStr(
 		"en = 'Can not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled.'", Lang));
 	Strings.Insert("InfoMessage_024", NStr("en = 'Will be available after save.'", Lang));
+	Strings.Insert("InfoMessage_025", NStr("en = 'Before start to scan - choose location'", Lang));
+	Strings.Insert("InfoMessage_026", NStr("en = 'Can not count Service item type'", Lang));
 #EndRegion
 
 #Region QuestionToUser

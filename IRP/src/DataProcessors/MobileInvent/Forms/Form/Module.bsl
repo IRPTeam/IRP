@@ -22,21 +22,43 @@ Procedure AddBarcodeAfterEnd(Number, AdditionalParameters) Export
 	If Not ValueIsFilled(Number) Then
 		Return;
 	EndIf;
-	SearchByBarcode(Undefined, Format(Number, "NG="));
+	Barcode = Format(Number, "NG=");
+	If DocumentObject.Ref.IsEmpty() Then
+		DocumentIsSet = False;
+		Message = FindAndSetDocument(Barcode, DocumentIsSet);
+		If Not DocumentIsSet Then
+			CommonFunctionsClientServer.ShowUsersMessage(Message);
+		EndIf;
+		Return;
+	EndIf;
+	SearchByBarcode(Undefined, Barcode);
 EndProcedure
+
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Form", ThisObject);
-	NotifyParameters.Insert("Object", DocumentObject);
-
+	If DocumentObject.Ref.IsEmpty() Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_025, "DocumentRef");
+	EndIf;
+	
 	For Each Row In AdditionalParameters.FoundedItems Do
+		
+		If Row.isService Then
+			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_026);
+			Return;
+		EndIf;
+		
 		NewRow = DocumentObject.ItemList.Add();
 		NewRow.Key = New UUID;
 		FillPropertyValues(NewRow, Row);
 		NewRow.PhysCount = Row.Quantity;
+		
+		If Row.UseSerialLotNumber And NewRow.SerialLotNumber.IsEmpty() Then
+			BarcodeClient.CloseMobileScanner();
+			
+		EndIf;
 	EndDo;
+	
 	If AdditionalParameters.FoundedItems.Count() Then
 		If RuleEditQuantity Then
 			BarcodeClient.CloseMobileScanner();
@@ -92,6 +114,7 @@ Procedure OnEditQuantityEnd(Result, AddInfo) Export
 		Return;
 	EndIf;
 	ItemListRow = DocumentObject.ItemList.FindByID(Result.RowID);
+	ItemListRow.SerialLotNumber = Result.SerialLotNumber;
 	ItemListRow.PhysCount = Result.Quantity;
 	Write();
 EndProcedure
@@ -192,6 +215,7 @@ Procedure FillDocumentObject(DocRef)
 
 		DocumentObject.ResponsibleUser = SessionParameters.CurrentUser;
 		Write();
+		Items.ItemListSerialLotNumber.Visible = DocRef.PhysicalInventory.UseSerialLot;
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_013, DocObj.Number));
 	EndIf;
 

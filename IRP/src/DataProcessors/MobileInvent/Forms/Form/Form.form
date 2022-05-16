@@ -896,6 +896,28 @@
       <common>true</common>
     </edit>
     <main>true</main>
+    <additionalColumns>
+      <tablePath xsi:type="form:DataPath">
+        <segments>DocumentObject.ItemList</segments>
+      </tablePath>
+      <columns>
+        <name>UseSerialLotNumber</name>
+        <title>
+          <key>en</key>
+          <value>Use serial lot number</value>
+        </title>
+        <id>7</id>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+    </additionalColumns>
   </attributes>
   <attributes>
     <name>DocumentRef</name>

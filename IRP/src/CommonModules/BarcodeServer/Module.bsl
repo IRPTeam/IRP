@@ -27,21 +27,22 @@ Function SearchByBarcodes(Val Barcodes, AddInfo) Export
 	ReturnValue = New Array();
 	Query = New Query();
 	Query.Text = "SELECT
-				 |	Barcodes.ItemKey AS ItemKey,
-				 |	Barcodes.ItemKey.Item AS Item,
-				 |	ISNULL(Barcodes.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
-				 |	Barcodes.Unit AS Unit,
-				 |	1 AS Quantity,
-				 |	Barcodes.ItemKey.Unit AS ItemKeyUnit,
-				 |	Barcodes.ItemKey.Item.Unit AS ItemUnit,
-				 |	NOT Barcodes.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
-				 |	Barcodes.Barcode AS Barcode,
-				 |	Barcodes.ItemKey.Item.ItemType AS ItemType,
-				 |	Barcodes.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber
-				 |FROM
-				 |	InformationRegister.Barcodes AS Barcodes
-				 |WHERE
-				 |	Barcodes.Barcode In (&Barcodes)";
+	|	Barcodes.ItemKey AS ItemKey,
+	|	Barcodes.ItemKey.Item AS Item,
+	|	ISNULL(Barcodes.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	|	Barcodes.Unit AS Unit,
+	|	1 AS Quantity,
+	|	Barcodes.ItemKey.Unit AS ItemKeyUnit,
+	|	Barcodes.ItemKey.Item.Unit AS ItemUnit,
+	|	NOT Barcodes.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
+	|	Barcodes.Barcode AS Barcode,
+	|	Barcodes.ItemKey.Item.ItemType AS ItemType,
+	|	Barcodes.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
+	|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
+	|FROM
+	|	InformationRegister.Barcodes AS Barcodes
+	|WHERE
+	|	Barcodes.Barcode In (&Barcodes)";
 	Query.SetParameter("Barcodes", Barcodes);
 	QueryExecution = Query.Execute();
 	If QueryExecution.IsEmpty() Then

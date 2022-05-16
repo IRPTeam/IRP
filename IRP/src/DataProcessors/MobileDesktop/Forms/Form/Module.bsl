@@ -22,7 +22,7 @@ Procedure ItemOnChangeAtServer()
 	|	ItemKeys.Item = &Item
 	|	AND NOT ItemKeys.DeletionMark";
 
-	Query.SetParameter("Item", Item);
+	Query.SetParameter("Item", ItemRef);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -36,7 +36,7 @@ EndProcedure
 
 &AtServer
 Procedure SetPictureView()
-	ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(Item);
+	ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(ItemRef);
 	If ArrayOfFiles.Count() Then
 		If ArrayOfFiles[0].isPreviewSet Then
 			PictureDecoration = GetURL(ArrayOfFiles[0], "Preview");
@@ -57,7 +57,7 @@ EndProcedure
 Procedure ItemOnChange(ItemData)
 	ItemOnChangeAtServer();
 	Row = New Structure();
-	Row.Insert("Item", Item);
+	Row.Insert("Item", ItemRef);
 	Row.Insert("ItemKey", ItemKey);
 	Row.Insert("Barcode", "");
 	Barcodes = BarcodeClient.GetBarcodesByItemKey(ItemKey);
@@ -70,7 +70,7 @@ EndProcedure
 &AtClient
 Procedure ItemKeyOnChange(ItemData)
 	Row = New Structure();
-	Row.Insert("Item", Item);
+	Row.Insert("Item", ItemRef);
 	Row.Insert("ItemKey", ItemKey);
 	Row.Insert("Barcode", "");
 	Barcodes = BarcodeClient.GetBarcodesByItemKey(ItemKey);
@@ -116,7 +116,7 @@ EndProcedure
 
 &AtClient
 Procedure FillData(Row)
-	Item =  Row.Item;
+	ItemRef =  Row.Item;
 	ItemKey =  Row.ItemKey;
 	If Not ValueIsFilled(ItemKey) Then
 		ItemOnChangeAtServer();
@@ -142,11 +142,11 @@ EndProcedure
 Procedure ShowStatus()
 	Items.OK.Representation = ButtonRepresentation.Text;
 	Items.NotOK.Representation = ButtonRepresentation.Text;
-	If Not ValueIsFilled(Item) Or Not ValueIsFilled(ItemKey) Then
+	If Not ValueIsFilled(ItemRef) Or Not ValueIsFilled(ItemKey) Then
 		Return;
 	EndIf;
 	Reg = InformationRegisters.BarcodeScanInfoCheck.CreateRecordSet();
-	Reg.Filter.Item.Set(Item);
+	Reg.Filter.Item.Set(ItemRef);
 	Reg.Filter.ItemKey.Set(ItemKey);
 	Reg.Filter.SerialLotNumber.Set(SerialLotNumber);
 	Reg.Read();
@@ -159,15 +159,15 @@ EndProcedure
 
 &AtServer
 Procedure WriteReg(Status)
-	If Not ValueIsFilled(Item) Or Not ValueIsFilled(ItemKey) Then
+	If Not ValueIsFilled(ItemRef) Or Not ValueIsFilled(ItemKey) Then
 		Return;
 	EndIf;
 	Reg = InformationRegisters.BarcodeScanInfoCheck.CreateRecordSet();
-	Reg.Filter.Item.Set(Item);
+	Reg.Filter.Item.Set(ItemRef);
 	Reg.Filter.ItemKey.Set(ItemKey);
 	Reg.Filter.SerialLotNumber.Set(SerialLotNumber);
 	NewReg = Reg.Add();
-	NewReg.Item = Item;
+	NewReg.Item = ItemRef;
 	NewReg.ItemKey = ItemKey;
 	NewReg.SerialLotNumber = SerialLotNumber;
 	NewReg.Status = Status;

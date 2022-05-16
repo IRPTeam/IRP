@@ -12,7 +12,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>Item</segments>
+        <segments>ItemRef</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
       <handlers>
@@ -125,7 +125,7 @@
         <choiceParameterLinks>
           <name>Filter.Item</name>
           <datapath xsi:type="form:DataPath">
-            <segments>Item</segments>
+            <segments>ItemRef</segments>
           </datapath>
         </choiceParameterLinks>
         <borderColor xsi:type="core:ColorRef">
@@ -341,7 +341,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Item.ItemType</segments>
+          <segments>ItemRef.ItemType</segments>
         </dataPath>
         <extendedTooltip>
           <name>ItemItemTypeExtendedTooltip</name>
@@ -391,7 +391,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Item.ItemID</segments>
+          <segments>ItemRef.ItemID</segments>
         </dataPath>
         <extendedTooltip>
           <name>ItemItemIDExtendedTooltip</name>
@@ -579,7 +579,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Item.AddAttributes</segments>
+          <segments>ItemRef.AddAttributes</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <excludedCommands>Add</excludedCommands>
@@ -609,7 +609,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Item.AddAttributes.Property</segments>
+            <segments>ItemRef.AddAttributes.Property</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemAddAttributesPropertyExtendedTooltip</name>
@@ -663,7 +663,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Item.AddAttributes.Value</segments>
+            <segments>ItemRef.AddAttributes.Value</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemAddAttributesValueExtendedTooltip</name>
@@ -1493,10 +1493,10 @@
     </edit>
   </attributes>
   <attributes>
-    <name>Item</name>
+    <name>ItemRef</name>
     <title>
       <key>en</key>
-      <value>Item</value>
+      <value>Item ref</value>
     </title>
     <id>3</id>
     <valueType>

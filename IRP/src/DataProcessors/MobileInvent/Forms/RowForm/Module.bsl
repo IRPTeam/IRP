@@ -7,9 +7,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If ItemRef.IsEmpty() Then
 		ItemRef = ItemKey.Item;
 	EndIf;
-	
-	If SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(ItemKey) Then
-		Items.SerialLotNumber.ReadOnly = Not SerialLotNumber.IsEmpty();
+	UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(ItemKey);
+	If UseSerialLotNumber Then
+		If SerialLotNumber.IsEmpty() Then
+			ActiveItem = "SerialLotNumber";
+		Else
+			Items.SerialLotNumber.ReadOnly = True;
+		EndIf;
 	Else
 		Items.SerialLotNumber.Visible = False;
 	EndIf;
@@ -37,7 +41,7 @@ EndProcedure
 Procedure SerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
 	FormParameters = New Structure();
 	FormParameters.Insert("ItemType", Undefined);
-	FormParameters.Insert("Item", Item);
+	FormParameters.Insert("Item", ItemRef);
 	FormParameters.Insert("ItemKey", ItemKey);
 
 	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
@@ -47,7 +51,7 @@ EndProcedure
 Procedure SerialLotNumberEditTextChange(Item, Text, StandardProcessing)
 	FormParameters = New Structure();
 	FormParameters.Insert("ItemType", Undefined);
-	FormParameters.Insert("Item", Item);
+	FormParameters.Insert("Item", ItemRef);
 	FormParameters.Insert("ItemKey", ItemKey);
 
 	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
@@ -59,8 +63,12 @@ EndProcedure
 Procedure OnOpen(Cancel)
 	CurrentItem = Items.Quantity;
 #If MobileClient Then
-	If AutoMode Then
-		BeginEditingItem();
+	If IsBlankString(ActiveItem) Then
+		If AutoMode Then
+			BeginEditingItem();
+		EndIf;
+	Else
+		CurrentItem = Items.Find(ActiveItem);
 	EndIf;
 #EndIf
 EndProcedure
@@ -74,6 +82,7 @@ EndProcedure
 Procedure OK()
 	Data = New Structure();
 	Data.Insert("Quantity", Quantity);
+	Data.Insert("SerialLotNumber", SerialLotNumber);
 	Data.Insert("RowId", RowId);
 	Close(Data);
 EndProcedure

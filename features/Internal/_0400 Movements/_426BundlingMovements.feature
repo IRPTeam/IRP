@@ -77,14 +77,14 @@ Scenario: _042601 check Bundling movements by the Register  "R4010 Actual stocks
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bundling 1 dated 07.09.2020 18:20:57' | ''            | ''                    | ''          | ''           | ''                              |
-			| 'Document registrations records'       | ''            | ''                    | ''          | ''           | ''                              |
-			| 'Register  "R4010 Actual stocks"'      | ''            | ''                    | ''          | ''           | ''                              |
-			| ''                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                              |
-			| ''                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'                      |
-			| ''                                     | 'Receipt'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
-			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'XS/Blue'                       |
-			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | '36/Red'                        |
+			| 'Bundling 1 dated 07.09.2020 18:20:57' | ''            | ''                    | ''          | ''           | ''                              | ''                              |
+			| 'Document registrations records'       | ''            | ''                    | ''          | ''           | ''                              | ''                              |
+			| 'Register  "R4010 Actual stocks"'      | ''            | ''                    | ''          | ''           | ''                              | ''                              |
+			| ''                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                              | ''                              |
+			| ''                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'                      | 'Serial lot number'                      |
+			| ''                                     | 'Receipt'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' | '' |
+			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'XS/Blue'                       | ''                       |
+			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | '36/Red'                        | ''                        |
 		And I close all client application windows
 
 Scenario: _042602 check Bundling movements by the Register  "R4011 Free stocks"

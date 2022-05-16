@@ -77,16 +77,16 @@ Scenario: _042701 check Unbundling movements by the Register  "R4010 Actual stoc
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'        | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'S/Yellow'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'XS/Blue'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'L/Green'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'M/Brown'   |
-			| ''                                       | 'Expense'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'Dress/A-8' |	
+			| 'Unbundling 1 dated 07.09.2020 18:23:12' | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| 'Register  "R4010 Actual stocks"'        | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''          |
+			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number'  |
+			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'S/Yellow'  | ''  |
+			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'XS/Blue'   | ''   |
+			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'L/Green'   | ''   |
+			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'M/Brown'   | ''   |
+			| ''                                       | 'Expense'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'Dress/A-8' | '' |	
 		And I close all client application windows
 
 Scenario: _042702 check Unbundling movements by the Register  "R4011 Free stocks"

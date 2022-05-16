@@ -654,9 +654,9 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 			| '$$Rov1SalesInvoice029204$$' | 'Store 01' | ''                    | '5,000'                 | '1' | ''              | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '5,000' | 'pcs'  | '396,61'     | '520,00' | '18%' | ''              | '2 203,39'   | '2 600,00'     | '31.03.2021'    | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 		Then the number of "ItemList" table lines is "равно" "1"
 		And "ShipmentConfirmationsTree" table became equal
-			| 'Key'                        | 'Basis key'                          | 'Item'  | 'Shipment confirmation'          | 'Item key' | 'Invoice' | 'SC'    | 'Quantity'     |
-			| '$$Rov1SalesInvoice029204$$' | ''                                   | 'Dress' | ''                               | 'M/White'  | '5,000'   | '5,000' | '5,000' |
-			| '$$Rov1SalesInvoice029204$$' | '$$Rov1ShipmentConfirmation029204$$' | ''      | '$$ShipmentConfirmation029204$$' | ''         | ''        | '5,000' | '5,000' |
+			| 'Key'                        | 'Basis key'                            | 'Item'  | 'Shipment confirmation'          | 'Item key' | 'Invoice' | 'SC'    | 'Quantity' |
+			| '$$Rov1SalesInvoice029204$$' | '                                    ' | 'Dress' | ''                               | 'M/White'  | '5,000'   | '5,000' | '5,000'    |
+			| '$$Rov1SalesInvoice029204$$' | '$$Rov1ShipmentConfirmation029204$$'   | ''      | '$$ShipmentConfirmation029204$$' | ''         | ''        | '5,000' | '5,000'    |		
 		And "RowIDInfo" table became equal
 			| '#' | 'Key'                        | 'Basis'                          | 'Row ID'                               | 'Next step' | 'Quantity'     | 'Basis key'                          | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1SalesInvoice029204$$' | '$$ShipmentConfirmation029204$$' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | ''          | '5,000' | '$$Rov1ShipmentConfirmation029204$$' | 'SI'           | '4a003d08-12af-4c34-98d5-5cdeb84616de' |

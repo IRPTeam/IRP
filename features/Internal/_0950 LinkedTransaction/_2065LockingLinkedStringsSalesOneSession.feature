@@ -138,10 +138,10 @@ Scenario: _20650011 Info linked documents row
 		And I activate current test client window
 		And I press keyboard shortcut "F9"
 		And "BasisesTree" table became equal
-			| 'Row presentation'                                   | 'Quantity in base unit' | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Doc ref'                                            | 'Basis'                                              | 'Key' | 'Row ID' | 'Basis key' | 'Current step' |
-			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | 'Sales order 35 dated 23.09.2021 10:19:43'           | ''    | ''       | ''          | ''             |
-			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''    | ''       | ''          | ''             |
-			| 'Shirt (36/Red)'                                     | '10,000'                | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | ''                                                   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'   | '*'      | '*'         | 'SI'           |
+			| 'Row presentation'                                   | 'Quantity in base unit' | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Doc ref'                                            | 'Basis'                                              | 'Key'                                     | 'Row ID' | 'Basis key' | 'Current step' |
+			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    '    | ''       | ''          | ''             |
+			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    '    | ''       | ''          | ''             |
+			| 'Shirt (36/Red)'                                     | '10,000'                | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | ''                                                   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                       | '*'      | '*'         | 'SI'           |
 		And I close all client application windows
 				
 						

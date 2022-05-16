@@ -147,7 +147,8 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function ItemList()
-	Return "SELECT
+	Return 
+	"SELECT
 	|	ItemList.Ref.Date AS Period,
 	|	ItemList.Ref.Store AS Store,
 	|	ItemList.ItemKey AS ItemKey,
@@ -201,26 +202,37 @@ Function R4011B_FreeStocks()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.SurplusQuantity AS Quantity,
-		   |	*
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.SurplusQuantity <> 0 
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.WriteOffQuantity AS Quantity,
-		   |	*
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.WriteOffQuantity <> 0";
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.SurplusQuantity AS Quantity,
+	|	CASE
+	|		WHEN ItemList.SerialLotNumber.StockBalanceDetail
+	|			THEN ItemList.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END SerialLotNumber,
+	|	*
+	|INTO R4010B_ActualStocks
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	ItemList.SurplusQuantity <> 0
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.WriteOffQuantity AS Quantity,
+	|	CASE
+	|		WHEN ItemList.SerialLotNumber.StockBalanceDetail
+	|			THEN ItemList.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END SerialLotNumber,
+	|	*
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	ItemList.WriteOffQuantity <> 0";
 EndFunction
 
 Function R4052T_StockAdjustmentAsSurplus()

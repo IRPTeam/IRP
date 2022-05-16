@@ -172,6 +172,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="9ca09d2d-e3d6-43b9-9461-44e14744bddd">
+    <name>StockBalanceDetail</name>
+    <synonym>
+      <key>en</key>
+      <value>Stock balance detail</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="ef605c80-fa78-4080-af6f-a89ca3452c86">
     <producedTypes>
       <objectType typeId="a069c6dd-b2ef-4730-94be-aa7292aaf35a" valueTypeId="d08be586-09e2-4600-baf1-9b7864cb7368"/>

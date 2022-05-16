@@ -342,7 +342,7 @@ Scenario: _041611 check Purchase return movements by the Register  "R4010 Actual
 			| 'Register  "R4010 Actual stocks"'               | ''            | ''                    | ''          | ''           | ''          | ''          |
 			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''          |
 			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number'  |
-			| ''                                              | 'Expense'     | '14.03.2021 18:53:34' | '1'         | 'Store 02'   | '36/Yellow' | '36/Yellow' |
+			| ''                                              | 'Expense'     | '14.03.2021 18:53:34' | '1'         | 'Store 02'   | '36/Yellow' | '' |
 	And I close all client application windows
 
 Scenario: _041612 check Purchase return movements by the Register  "R4010 Actual stocks" (SC - PR)

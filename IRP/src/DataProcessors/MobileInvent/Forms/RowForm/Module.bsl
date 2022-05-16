@@ -3,9 +3,17 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ItemRef = Parameters.ItemRef;
 	ItemKey = Parameters.ItemKey;
 	SerialLotNumber = Parameters.SerialLotNumber;
+	
 	If ItemRef.IsEmpty() Then
 		ItemRef = ItemKey.Item;
 	EndIf;
+	
+	If SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(ItemKey) Then
+		Items.SerialLotNumber.ReadOnly = Not SerialLotNumber.IsEmpty();
+	Else
+		Items.SerialLotNumber.Visible = False;
+	EndIf;
+	
 	Quantity = Parameters.Quantity;
 	RowId = Parameters.RowId;
 	AutoMode = Parameters.AutoMode;
@@ -23,6 +31,29 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Picture = GetURL(CurrentPicture, "Preview");
 	EndIf;
 EndProcedure
+
+#Region SERIAL_LOT_NUMBERS
+&AtClient
+Procedure SerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item", Item);
+	FormParameters.Insert("ItemKey", ItemKey);
+
+	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure SerialLotNumberEditTextChange(Item, Text, StandardProcessing)
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item", Item);
+	FormParameters.Insert("ItemKey", ItemKey);
+
+	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+#EndRegion
 
 &AtClient
 Procedure OnOpen(Cancel)

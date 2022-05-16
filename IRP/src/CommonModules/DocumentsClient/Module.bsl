@@ -1252,6 +1252,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	Or TypeOf(Object.Ref) = Type("DocumentRef.InventoryTransfer")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.InventoryTransferOrder")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.PhysicalInventory")
+	Or TypeOf(Object.Ref) = Type("DocumentRef.PhysicalCountByLocation")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.ItemStockAdjustment")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.Bundling")
 	Or TypeOf(Object.Ref) = Type("DocumentRef.Unbundling");
@@ -1262,7 +1263,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			ExistingRows = Object.ItemList.FindRows(FilterStructure);
 			If ExistingRows.Count() Then
 				Row = ExistingRows[0];
-				If TypeOf(Object.Ref) = Type("DocumentRef.PhysicalInventory") Then
+				If TypeOf(Object.Ref) = Type("DocumentRef.PhysicalInventory")
+					Or TypeOf(Object.Ref) = Type("DocumentRef.PhysicalCountByLocation") Then
 					ViewClient_V2.SetItemListPhysCount(Object, Form, Row, Row.PhysCount + ResultElement.Quantity);
 				Else
 					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);

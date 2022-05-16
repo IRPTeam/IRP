@@ -374,7 +374,7 @@ Scenario: _041310 check Sales return movements by the Register  "R4010 Actual st
 			| 'Register  "R4010 Actual stocks"'            | ''            | ''                    | ''          | ''           | ''         | ''                  |
 			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
 			| ''                                           | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '2'         | 'Store 02'   | '36/Red'   | '36/Red'            |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '2'         | 'Store 02'   | '36/Red'   | ''                  |
 		
 	And I close all client application windows
 

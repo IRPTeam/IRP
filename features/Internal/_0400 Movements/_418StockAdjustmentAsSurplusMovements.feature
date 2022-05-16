@@ -82,10 +82,10 @@ Scenario: _041801 check Stock adjustment as surplus movements by the Register  "
 			| 'Register  "R4010 Actual stocks"'                           | ''            | ''                    | ''          | ''           | ''         | ''         |
 			| ''                                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''         |
 			| ''                                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '4'         | 'Store 05'   | '36/18SD'  | '36/18SD'  |
-			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '7'         | 'Store 05'   | '36/Red'   | '36/Red'   |
-			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'XS/Blue'  | 'XS/Blue'  |
-			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'M/White'  | 'M/White'  |	
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '4'         | 'Store 05'   | '36/18SD'  | ''  |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '7'         | 'Store 05'   | '36/Red'   | ''   |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'XS/Blue'  | ''  |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'M/White'  | ''  |	
 		And I close all client application windows
 
 Scenario: _041802 check Stock adjustment as surplus movements by the Register  "R4011 Free stocks"

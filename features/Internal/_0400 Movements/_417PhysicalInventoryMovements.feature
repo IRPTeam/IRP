@@ -82,8 +82,8 @@ Scenario: _041701 check Physical inventory movements by the Register  "R4010 Act
 			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''          | ''          |
 			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''          |
 			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number'  |
-			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | '36/Yellow' | '36/Yellow' |
-			| ''                                                 | 'Expense'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | 'XS/Blue'   | 'XS/Blue'   |
+			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | '36/Yellow' | '' |
+			| ''                                                 | 'Expense'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | 'XS/Blue'   | ''   |
 		And I close all client application windows
 
 Scenario: _041702 check Physical inventory movements by the Register  "R4011 Free stocks"

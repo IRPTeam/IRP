@@ -1244,14 +1244,7 @@ Scenario: check the display of the header of the collapsible group in expence/re
 		And I select current line in "List" table
 
 
-Scenario: check the display of the header of the collapsible group in PhysicalCountByLocation
-	And I click the button named "FormCreate"
-	* Filling in the details of the document
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| Description |
-			| Store 01   |
-		And I select current line in "List" table
+
 
 Scenario: check the display of the header of the collapsible group in PhysicalInventory
 	And I click the button named "FormCreate"

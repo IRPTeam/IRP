@@ -1977,13 +1977,12 @@ Scenario: _015400671 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Location count (create)"
 		And field "Test" is present on the form
-		And I click Select button of "Store" field
-		And I select current line in "List" table	
-		And I click "Save" button
-		And I click "Add properties" button
-		And "Properties" table became equal
-			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+		# And I select current line in "List" table	
+		# And I click "Save" button
+		# And I click "Add properties" button
+		# And "Properties" table became equal
+		# 	| 'Property' | 'Value' |
+		# 	| 'Test'     | ''      |	
 	And I close all client application windows
 
 

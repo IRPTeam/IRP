@@ -572,18 +572,19 @@ Scenario: Create catalog ItemKeys objects
 Scenario: Create catalog ItemTypes objects
 
 	And I check or create catalog "ItemTypes" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Parent'                                                            | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47ee' | 'False'           | ''                                                                  | 'True'      | ''                       | ''                   | 'Accessories'    | ''                 | ''               | 'Accessories TR' | '_6da1532bef3f4f93b6c51881f2c0a6b2' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Clothes'        | ''                 | ''               | 'Clothes TR'     | '_73585f90e829490c95f07908375e6693' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f1' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Box'            | ''                 | ''               | 'Box TR'         | '_d54c3bde31644e0996c2520ebc76f51f' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f2' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Shoes'          | ''                 | ''               | 'Shoes TR'       | '_a6581c44d447493ca094d5ddc36f71b4' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf11c17ff4364' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Service' | 'False'                 | 'Service'        | ''                 | ''               | 'Service TR'     | '_a424fa9f74084f989d38cb397d5a646d' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf11c17ff436c' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Equipment'      | ''                 | ''               | ''               | '_a7581dc7c3a94e3da5e0cab46f2f0414' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf1277d18ed8a' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Bags'           | ''                 | ''               | 'Bags TR'        | '_452e2854d9bc4ed79cc2052cea443c76' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47d0' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | ''               | ''                 | ''               | 'Chewing gum'    | '_c603ce453a6b492293d2c159a694672e' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47df' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | ''               | ''                 | ''               | 'Candy TR'       | '_a301d667519347b5945a0e9841f7c1c7' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47e7' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Socks'          | ''                 | ''               | 'Warm Socks TR'  | '_f7d4462bc7914c2a99194bd68f5005b9' |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47ef' | 'False'           | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47ee' | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Earrings'       | ''                 | ''               | 'Earrings TR'    | '_a89189722e124d23bbcdca289485beb6' |
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent'                                                            | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47ee' | 'False'        | ''                                                                  | 'True'     | ''                       | ''                   | 'Accessories'             | ''                 | ''               | 'Accessories TR'             | '_6da1532bef3f4f93b6c51881f2c0a6b2' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | 'Clothes'                 | ''                 | ''               | 'Clothes TR'                 | '_73585f90e829490c95f07908375e6693' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f1' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | 'Box'                     | ''                 | ''               | 'Box TR'                     | '_d54c3bde31644e0996c2520ebc76f51f' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f2' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | 'Shoes'                   | ''                 | ''               | 'Shoes TR'                   | '_a6581c44d447493ca094d5ddc36f71b4' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf11c17ff4364' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Service' | 'False'              | 'Service'                 | ''                 | ''               | 'Service TR'                 | '_a424fa9f74084f989d38cb397d5a646d' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf11c17ff436c' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | 'Equipment'               | ''                 | ''               | ''                           | '_a7581dc7c3a94e3da5e0cab46f2f0414' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf1277d18ed8a' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | 'Bags'                    | ''                 | ''               | 'Bags TR'                    | '_452e2854d9bc4ed79cc2052cea443c76' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47d0' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | ''                        | ''                 | ''               | 'Chewing gum'                | '_c603ce453a6b492293d2c159a694672e' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47df' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | ''                        | ''                 | ''               | 'Candy TR'                   | '_a301d667519347b5945a0e9841f7c1c7' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47e7' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | 'Socks'                   | ''                 | ''               | 'Warm Socks TR'              | '_f7d4462bc7914c2a99194bd68f5005b9' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47ef' | 'False'        | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47ee' | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | 'Earrings'                | ''                 | ''               | 'Earrings TR'                | '_a89189722e124d23bbcdca289485beb6' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Product' | 'True'               | 'With serial lot numbers' | ''                 | ''               | 'With serial lot numbers TR' | '_a89189722e124d23bbcdca289485beb7' |
 
 	And I refill object tabular section "AvailableAttributes":
 		| 'Ref'                                                               | 'Attribute'                                                                                          | 'AffectPricing' | 'Required' | 'ShowInHTML' |
@@ -598,13 +599,57 @@ Scenario: Create catalog ItemTypes objects
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47df' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47de' | 'False'            | 'False'       | 'False'         |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47e7' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47e8' | 'False'            | 'False'       | 'False'         |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47e7' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47e9' | 'False'            | 'False'       | 'False'         |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'False'            | 'False'       | 'False'         |
+
+Scenario: Create catalog ItemTypes objects (serial lot numbers)
+
+	And I check or create catalog "ItemTypes" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'False'        | ''       | 'False'    | 'Enum.ItemTypes.Product' | 'True'               | 'With serial lot numbers' | ''                 | ''               | 'With serial lot numbers TR' | '_a89189722e124d23bbcdca289485beb7' |
+
+	And I refill object tabular section "AvailableAttributes":
+		| 'Ref'                                                               | 'Attribute'                                                                                          | 'AffectPricing' | 'Required' | 'ShowInHTML' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'False'         | 'False'    | 'False'      |
 
 Scenario: Create catalog ItemTypes objects (Furniture)
 
 	And I check or create catalog "ItemTypes" objects:
-		| 'Ref'                                                               | 'DeletionMark' | 'Parent'                                                            | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78178ed92fbced11eaf15dc8cb47ee' | 'False'           | ''                                                                  | 'False'      | ''                       | ''                   | 'Furniture'    | ''                 | ''                 | 'Furniture TR' | '_6da4444bef3f4f93b6c51881f2c0a6b9' |
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type' | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78178ed92fbced11eaf15dc8cb47ee' | 'False'        | ''       | 'False'    | ''     | ''                   | 'Furniture'      | ''                 | ''               | 'Furniture TR'   | '_6da4444bef3f4f93b6c51881f2c0a6b9' |
 
+Scenario: Create catalog Items objects (serial lot numbers)
+
+
+	And I check or create catalog "Items" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture'                          | 'Vendor' | 'ItemID' | 'PackageUnit' | 'Description_en'     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
+		| 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f' | 'False'        | 161    | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Product 1 with SLN' | ''                 | ''               | ''               |          |          |          |          |         |
+		| 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd51a0388f5a3' | 'False'        | 162    | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Product 2 with SLN' | ''                 | ''               | ''               |          |          |          |          |         |
+
+
+Scenario: Create catalog ItemKeys objects (serial lot numbers)
+
+	And I check or create catalog "ItemKeys" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Code' | 'Item'                                                          | 'Unit' | 'Specification' | 'AffectPricingMD5' | 'UniqueMD5'                                       | 'ItemKeyID' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72070' | 'False'        | 34     | 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f' | ''     | ''              | ''                 | '5F B3 11 4F F4 02 9C 7E 0F 6E CE 13 93 B7 7C C4' | ''          | 'ODS'            | 'ODS'              | 'ODS'            | 'ODS'            |          |          |          |          |         |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'        | 35     | 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f' | ''     | ''              | ''                 | '3F 17 40 9C F1 4B 70 2A 91 C6 B4 B4 6E E9 6F 52' | ''          | 'PZU'            | 'PZU'              | 'PZU'            | 'PZU'            |          |          |          |          |         |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd51a0388f5a4' | 'False'        | 36     | 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd51a0388f5a3' | ''     | ''              | ''                 | 'A7 7A 14 DC 65 37 D3 95 9A A8 E7 72 D5 E2 88 05' | ''          | 'UNIQ'           | 'UNIQ'             | 'UNIQ'           | 'UNIQ'           |          |          |          |          |         |
+
+	And I refill object tabular section "AddAttributes":
+		| 'Ref'                                                              | 'Property'                                                                                           | 'Value'                                                                                 | 'SearchLiteral' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72070' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5eb' | ''              |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5ea' | ''              |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd51a0388f5a4' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5e9' | ''              |
+
+Scenario: Create information register Barcodes records (serial lot numbers)
+
+	And I check or create information register "Barcodes" records:
+		| 'Barcode'           | 'ItemKey'                                                          | 'SerialLotNumber'                                                          | 'Unit'                                                          | 'Presentation' |
+		| '23455677788976667' | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b780c87413d4c65f11ecd519fda72072' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '67789997777899'    | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72070' | ''                                                                         | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '899007788'         | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd51a0388f5a4' | ''                                                                         | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '89908'             | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf11c17ff4369' | ''                                                                         | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+
+	
 Scenario: Create catalog Units objects
 
 	And I check or create catalog "Units" objects:
@@ -638,7 +683,7 @@ Scenario: Create catalog Items objects
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf13dc8cb47eb' | 'False'           |   15        | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47e7' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | 'D19001'       | ''                       | ''                 | ''               | 'Socks'                     |
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf114bcc9c5f9' | 'False'           |   16        | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | 'D20001'       | 'Scarf + Dress'          | ''                 | ''               | 'Scarf + Dress TR'          |
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc3c5f7' | 'False'           |   17        | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | 'D21001'       | 'Skittles + Chewing gum' | ''                 | ''               | 'Skittles + Chewing gum TR' |
-		| 'e1cib/data/Catalog.Items?ref=aa78121ed92fbced11eaf1277d18ed9b' | 'False'           |   1111111 | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | 'J22001'       | 'Jacket J22001'          | ''                 | 'Куртка J22001'  | 'Jacket J22001 TR'          |
+		| 'e1cib/data/Catalog.Items?ref=aa78121ed92fbced11eaf1277d18ed9b' | 'False'           |   1111111 | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | 'J22001'         | 'Jacket J22001'          | ''                 | 'Куртка J22001'  | 'Jacket J22001 TR'          |
 
 	And I refill object tabular section "AddAttributes":
 		| 'Ref'                                                           | 'Property'                                                                                           | 'Value'                                                                                 |
@@ -1383,6 +1428,13 @@ Scenario: Create catalog SerialLotNumbers objects
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=aa7d120ed92fbced11eb095a22e1d875' | 'False'           | '1'    | '12345456'    | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf1277d18ed8a' | 'False'       |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a015' | 'False'        | '11'   | '0512'           | ''                                                                 | 'False'    |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a016' | 'False'        | '12'   | '0514'           | ''                                                                 | 'False'    |
+
+Scenario: Create catalog SerialLotNumbers objects (serial lot numbers)
+
+	And I check or create catalog "SerialLotNumbers" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description' | 'SerialLotNumberOwner'                                              | 'Inactive' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b780c87413d4c65f11ecd519fda72072' | 'False'        | 13     | '8908899877'  | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72070'  | 'False'    |
+
 
 
 Scenario: Create catalog PaymentTerminals objects

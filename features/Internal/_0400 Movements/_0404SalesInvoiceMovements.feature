@@ -581,12 +581,12 @@ Scenario: _0401333 check Sales invoice movements by the Register  "R4010 Actual 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''            | ''                    | ''          | ''           | ''         |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''         |
-			| 'Register  "R4010 Actual stocks"'           | ''            | ''                    | ''          | ''           | ''         |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | '37/18SD'  |
+			| 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'           | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | '37/18SD'  | ''                  |
 			
 		And I close all client application windows
 		

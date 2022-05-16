@@ -379,7 +379,7 @@ Scenario: _2990004 create Physical inventory and check Row Id info tab
 			| 'Description' |
 			| 'Store 05'    |
 		And I select current line in "List" table
-		And I click "1. Fill expected count" button		
+		And I click "Fill expected count" button		
 		And Delay 2
 		Then the number of "ItemList" table lines is "меньше или равно" 2
 		And "ItemList" table contains lines
@@ -437,7 +437,7 @@ Scenario: _2990005 create Physical inventory (store does not use GR and SC)
 			| 'Description' |
 			| 'Store 06'    |
 		And I select current line in "List" table
-		And I click "1. Fill expected count" button
+		And I click "Fill expected count" button
 		And Delay 2
 		Then the number of "ItemList" table lines is "меньше или равно" 2
 		And "ItemList" table contains lines
@@ -792,7 +792,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 // 			| 'Description' |
 // 			| 'Store 06'    |
 // 		And I select current line in "List" table
-// 		And I click "1. Fill expected count" button
+// 		And I click "Fill expected count" button
 // 		And Delay 2
 // 		Then the number of "ItemList" table lines is "меньше или равно" 2
 // 		And "ItemList" table contains lines
@@ -847,7 +847,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location
 			| 'Description' |
 			| 'Store 05'    |
 		And I select current line in "List" table
-		And I click "1. Fill expected count" button
+		And I click "Fill expected count" button
 		And Delay 2
 		Then the number of "ItemList" table lines is "меньше или равно" 2
 		And I save "Format((EndOfDay(CurrentDate()) + 500), \"DF=dd.MM.yyyy\")" in "$$$$DateCurrentDay$$$$" variable
@@ -942,7 +942,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location
 			| 'Location count 2*' | 'Done'   | '2'          | '160,000'     |
 	* Check filling in Physical inventory from Physical count by location
 		And I move to "Items" tab
-		And I click "2. Fill from locations" button
+		And I click "Fill from locations" button
 		And "ItemList" table became equal
 			| '#' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
 			| '1' | '125,000'    | 'Dress' | 'S/Yellow' | 'pcs'  | '-15,000'    | '110,000'     | ''                   | ''            |
@@ -1036,7 +1036,7 @@ Scenario: _2990013 check the question of saving Physical inventory before creati
 			| 'Description' |
 			| 'Store 05'    |
 		And I select current line in "List" table
-		And I click "1. Fill expected count" button
+		And I click "Fill expected count" button
 	* Check message output
 		And I click "Physical count by location" button
 		Then the form attribute named "Message" became equal to

@@ -57,7 +57,7 @@ Scenario: _0299100 preparation
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I activate "Locked" field in "ItemList" table
-			And I click "1. Fill expected count" button
+			And I click "Fill expected count" button
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPhysicalInventory0299100$$"
 			And I save the window as "$$PhysicalInventory0299100$$"

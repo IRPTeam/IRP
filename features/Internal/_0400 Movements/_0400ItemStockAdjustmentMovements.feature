@@ -97,17 +97,17 @@ Scenario: _040002 check item stock adjustment movements by the Register  "R4010 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'                   | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                                  | 'Receipt'     | '27.01.2021 19:04:15' | '5'         | 'Store 02'   | '36/Yellow' |
-			| ''                                                  | 'Receipt'     | '27.01.2021 19:04:15' | '10'        | 'Store 02'   | '37/18SD'   |
-			| ''                                                  | 'Receipt'     | '27.01.2021 19:04:15' | '16'        | 'Store 02'   | 'XS/Blue'   |
-			| ''                                                  | 'Expense'     | '27.01.2021 19:04:15' | '5'         | 'Store 02'   | '38/Yellow' |
-			| ''                                                  | 'Expense'     | '27.01.2021 19:04:15' | '10'        | 'Store 02'   | '38/18SD'   |
-			| ''                                                  | 'Expense'     | '27.01.2021 19:04:15' | '16'        | 'Store 02'   | 'S/Yellow'  |
+			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15' | ''            | ''                    | ''          | ''           | ''          | ''                  |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''          | ''                  |
+			| 'Register  "R4010 Actual stocks"'                   | ''            | ''                    | ''          | ''           | ''          | ''                  |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''                  |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number' |
+			| ''                                                  | 'Receipt'     | '27.01.2021 19:04:15' | '5'         | 'Store 02'   | '36/Yellow' | ''                  |
+			| ''                                                  | 'Receipt'     | '27.01.2021 19:04:15' | '10'        | 'Store 02'   | '37/18SD'   | ''                  |
+			| ''                                                  | 'Receipt'     | '27.01.2021 19:04:15' | '16'        | 'Store 02'   | 'XS/Blue'   | ''                  |
+			| ''                                                  | 'Expense'     | '27.01.2021 19:04:15' | '5'         | 'Store 02'   | '38/Yellow' | ''                  |
+			| ''                                                  | 'Expense'     | '27.01.2021 19:04:15' | '10'        | 'Store 02'   | '38/18SD'   | ''                  |
+			| ''                                                  | 'Expense'     | '27.01.2021 19:04:15' | '16'        | 'Store 02'   | 'S/Yellow'  | ''                  |
 		And I close all client application windows
 
 		

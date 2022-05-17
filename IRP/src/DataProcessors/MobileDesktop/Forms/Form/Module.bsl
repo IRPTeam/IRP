@@ -82,19 +82,11 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	AddInfo = New Structure();
-#If MobileClient Then
-	AddInfo.Insert("MobileModule", ThisObject);
-#EndIf
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, , AddInfo);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
-
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Form", ThisObject);
-	NotifyParameters.Insert("Object", Object);
 
 	If Result.FoundedItems.Count() Then
 #If MobileClient Then

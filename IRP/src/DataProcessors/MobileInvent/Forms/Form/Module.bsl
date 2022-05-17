@@ -1,7 +1,6 @@
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	AddInfo = New Structure("MobileModule", ThisObject);
-	DocumentsClient.SearchByBarcode(Barcode, DocumentObject, ThisObject, ThisObject, , AddInfo);
+	DocumentsClient.SearchByBarcode(Barcode, DocumentObject, ThisObject, ThisObject);
 EndProcedure
 
 &AtClient

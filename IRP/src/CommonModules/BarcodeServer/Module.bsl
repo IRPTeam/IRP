@@ -49,12 +49,11 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 	QueryUnload = QueryExecution.Unload();
 	
 	// TODO: Refact by query
-	PriceType = Catalogs.PriceTypes.EmptyRef();
 	If Not Settings.PriceType = Undefined Then
 		QueryUnload.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);
 		PreviousPriceTable = QueryUnload.Copy( , "ItemKey, Unit, ItemKeyUnit, ItemUnit, hasSpecification");
 		PreviousPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
-		PreviousPriceTable.FillValues(PriceType, "PriceType");
+		PreviousPriceTable.FillValues(Settings.PriceType, "PriceType");
 		ItemsInfo = GetItemInfo.ItemPriceInfoByTable(PreviousPriceTable, Settings.PricePeriod);
 		For Each Row In ItemsInfo Do
 			Filter = New Structure();

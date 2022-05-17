@@ -1208,7 +1208,12 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	Form 	= AddInfo.Form;
 	
 	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
-	isSerialLotNumberAtRow = TypeOf(Object.Ref) = Type("DocumentRef.PhysicalInventory");
+	isSerialLotNumberAtRow = False;
+	
+	ObjectRefType = TypeOf(Object.Ref);
+	
+	isSerialLotNumberAtRow = ObjectRefType = Type("DocumentRef.PhysicalInventory")
+			Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation");
 	
 	Settings = New Structure();
 	Settings.Insert("Rows", New Array());
@@ -1231,31 +1236,31 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	
 	// documents use ViewClient module
 	IsUsedNewFunctionality =
-	   TypeOf(Object.Ref) = Type("DocumentRef.ShipmentConfirmation")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.GoodsReceipt")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.StockAdjustmentAsSurplus")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.StockAdjustmentAsWriteOff")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.InternalSupplyRequest")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesReturn")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseReturn")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.RetailReturnReceipt")
+	   ObjectRefType = Type("DocumentRef.ShipmentConfirmation")
+	Or ObjectRefType = Type("DocumentRef.GoodsReceipt")
+	Or ObjectRefType = Type("DocumentRef.StockAdjustmentAsSurplus")
+	Or ObjectRefType = Type("DocumentRef.StockAdjustmentAsWriteOff")
+	Or ObjectRefType = Type("DocumentRef.SalesInvoice")
+	Or ObjectRefType = Type("DocumentRef.PurchaseInvoice")
+	Or ObjectRefType = Type("DocumentRef.InternalSupplyRequest")
+	Or ObjectRefType = Type("DocumentRef.RetailSalesReceipt")
+	Or ObjectRefType = Type("DocumentRef.SalesReturn")
+	Or ObjectRefType = Type("DocumentRef.PurchaseReturn")
+	Or ObjectRefType = Type("DocumentRef.RetailReturnReceipt")
 	
-	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesOrderClosing")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrderClosing")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.SalesReturnOrder")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseReturnOrder")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.InventoryTransfer")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.InventoryTransferOrder")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.PhysicalInventory")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.PhysicalCountByLocation")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.ItemStockAdjustment")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.Bundling")
-	Or TypeOf(Object.Ref) = Type("DocumentRef.Unbundling");
+	Or ObjectRefType = Type("DocumentRef.SalesOrder")
+	Or ObjectRefType = Type("DocumentRef.SalesOrderClosing")
+	Or ObjectRefType = Type("DocumentRef.PurchaseOrder")
+	Or ObjectRefType = Type("DocumentRef.PurchaseOrderClosing")
+	Or ObjectRefType = Type("DocumentRef.SalesReturnOrder")
+	Or ObjectRefType = Type("DocumentRef.PurchaseReturnOrder")
+	Or ObjectRefType = Type("DocumentRef.InventoryTransfer")
+	Or ObjectRefType = Type("DocumentRef.InventoryTransferOrder")
+	Or ObjectRefType = Type("DocumentRef.PhysicalInventory")
+	Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation")
+	Or ObjectRefType = Type("DocumentRef.ItemStockAdjustment")
+	Or ObjectRefType = Type("DocumentRef.Bundling")
+	Or ObjectRefType = Type("DocumentRef.Unbundling");
 	
 	If IsUsedNewFunctionality Then	
 		For Each ResultElement In Result Do
@@ -1263,8 +1268,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			ExistingRows = Object.ItemList.FindRows(FilterStructure);
 			If ExistingRows.Count() Then
 				Row = ExistingRows[0];
-				If TypeOf(Object.Ref) = Type("DocumentRef.PhysicalInventory")
-					Or TypeOf(Object.Ref) = Type("DocumentRef.PhysicalCountByLocation") Then
+				If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+					Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
 					ViewClient_V2.SetItemListPhysCount(Object, Form, Row, Row.PhysCount + ResultElement.Quantity);
 				Else
 					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
@@ -1648,19 +1653,20 @@ EndProcedure
 //  Form - See Document.SalesInvoice.Form.DocumentForm
 //  ReturnCallToModule - Undefined - Document client module
 //  PriceType - Undefined, CatalogRef.PriceKeys - Price type
-//  AddInfo - Undefined - Add info
+//  Settings - See BarcodeClient.GetBarcodeSettings
 Procedure SearchByBarcode(Barcode, Object, Form, ReturnCallToModule = Undefined, PriceType = Undefined,
-	AddInfo = Undefined) Export
+	Settings = Undefined) Export
 	If Not Form.Items.Find("ItemList") = Undefined Then
 		Form.CurrentItem = Form.Items.ItemList;
 	EndIf;
-
-	Settings = BarcodeClient.GetBarcodeSettings();
+	
+	If Settings = Undefined Then
+		Settings = BarcodeClient.GetBarcodeSettings();
+	EndIf;
+	
 	Settings.Form = Form;
 	Settings.Object = Object;
-	If Not AddInfo = Undefined Then
-		Settings.AddInfo = AddInfo;
-	EndIf;
+
 	Settings.ServerSettings.PriceType = PriceType;
 	
 	// Check, if call from document, and document is new

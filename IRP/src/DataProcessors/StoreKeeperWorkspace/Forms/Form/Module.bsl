@@ -12,8 +12,7 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	AddInfo = New Structure("ClientModule", ThisObject);
-	DocumentsClient.SearchByBarcode(Barcode, ThisObject, ThisObject, ThisObject, , AddInfo);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject);
 EndProcedure
 
 &AtClient

@@ -96,19 +96,19 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	NotifyParameters.Insert("Form", ThisObject);
 	NotifyParameters.Insert("Object", Object);
 
-	If AdditionalParameters.FoundedItems.Count() Then
+	If Result.FoundedItems.Count() Then
 #If MobileClient Then
 		MultimediaTools.CloseBarcodeScanning();
 #EndIf
 	Else
 #If Not MobileClient Then
-		For Each Row In AdditionalParameters.Barcodes Do
+		For Each Row In Result.Barcodes Do
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, Row));
 		EndDo;
 #EndIf
 	EndIf;
 
-	For Each Row In AdditionalParameters.FoundedItems Do
+	For Each Row In Result.FoundedItems Do
 		FillData(Row);
 	EndDo;
 

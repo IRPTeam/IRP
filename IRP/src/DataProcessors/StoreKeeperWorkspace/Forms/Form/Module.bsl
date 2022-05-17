@@ -87,9 +87,9 @@ EndProcedure
 &AtClient
 Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
-	If Not AdditionalParameters.FoundedItems.Count()
-		And AdditionalParameters.Barcodes.Count() Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, AdditionalParameters.Barcodes[0]));
+	If Not Result.FoundedItems.Count()
+		And Result.Barcodes.Count() Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, Result.Barcodes[0]));
 		Return;
 	EndIf;
 
@@ -97,7 +97,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	NotifyParameters.Insert("Form", ThisObject);
 	NotifyParameters.Insert("Object", ThisObject);
 
-	For Each Row In AdditionalParameters.FoundedItems Do
+	For Each Row In Result.FoundedItems Do
 		Item = Row.Item;
 		ItemKey = Row.ItemKey;
 		Unit = Row.Unit;

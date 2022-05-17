@@ -41,7 +41,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_025, "DocumentRef");
 	EndIf;
 	
-	For Each Row In AdditionalParameters.FoundedItems Do
+	For Each Row In Result.FoundedItems Do
 		
 		If Row.isService Then
 			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_026);
@@ -59,7 +59,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		EndIf;
 	EndDo;
 	
-	If AdditionalParameters.FoundedItems.Count() Then
+	If Result.FoundedItems.Count() Then
 		If RuleEditQuantity Then
 			BarcodeClient.CloseMobileScanner();
 			StartEditQuantity(NewRow.GetID(), True);

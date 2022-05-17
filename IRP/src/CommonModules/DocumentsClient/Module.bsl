@@ -1640,38 +1640,49 @@ Procedure SearchByBarcodeWithPriceType(Barcode, Object, Form) Export
 	SearchByBarcode(Barcode, Object, Form, , PriceType);
 EndProcedure
 
-Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined,
+// Search by barcode.
+// 
+// Parameters:
+//  Barcode - String -Barcode
+//  Object - See Document.SalesInvoice.Form.DocumentForm.Object
+//  Form - See Document.SalesInvoice.Form.DocumentForm
+//  ReturnCallToModule - Undefined - Document client module
+//  PriceType - Undefined, CatalogRef.PriceKeys - Price type
+//  AddInfo - Undefined - Add info
+Procedure SearchByBarcode(Barcode, Object, Form, ReturnCallToModule = Undefined, PriceType = Undefined,
 	AddInfo = Undefined) Export
 	If Not Form.Items.Find("ItemList") = Undefined Then
 		Form.CurrentItem = Form.Items.ItemList;
 	EndIf;
 
-	If AddInfo = Undefined Then
-		AddInfo = New Structure();
+	Settings = BarcodeClient.GetBarcodeSettings();
+	Settings.Form = Form;
+	Settings.Object = Object;
+	If Not AddInfo = Undefined Then
+		Settings.AddInfo = AddInfo;
 	EndIf;
-	If DocumentClientModule = Undefined Then
-		ClientModule = ThisObject;
-	Else
-		ClientModule = DocumentClientModule;
+	Settings.ServerSettings.PriceType = PriceType;
+	
+	// Check, if call from document, and document is new
+	If Object.Property("Ref") And Not Object.Ref.IsEmpty() Then
+		Settings.ServerSettings.PricePeriod = Object.Date;
 	EndIf;
+	
+	Settings.ReturnCallToModule = ?(ReturnCallToModule = Undefined, ThisObject, ReturnCallToModule);
 
-	If PriceType <> Undefined Then
-		AddInfo.Insert("PriceType", PriceType);
-		If Object.Ref = Undefined Then
-			AddInfo.Insert("PricePeriod", CurrentDate());
-		Else
-			AddInfo.Insert("PricePeriod", Object.Date);
-		EndIf;
-	EndIf;
-	BarcodeClient.SearchByBarcode(Barcode, Object, Form, ClientModule, AddInfo);
+	BarcodeClient.SearchByBarcode(Barcode, Settings);
 EndProcedure
 
+// Search by barcode end.
+// 
+// Parameters:
+//  Result - Structure - Result
+//  Parameters - See BarcodeClient.GetBarcodeSettings
 Procedure SearchByBarcodeEnd(Result, Parameters) Export
-	If Parameters.FoundedItems.Count() Then
-		DocumentModule = Parameters.ClientModule;
-		DocumentModule.PickupItemsEnd(Parameters.FoundedItems, Parameters);
+	If Result.FoundedItems.Count() Then
+		Parameters.ReturnCallToModule.PickupItemsEnd(Result.FoundedItems, Parameters);
 	Else
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(Parameters.Barcodes, ",")));
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(Result.Barcodes, ",")));
 	EndIf;
 EndProcedure
 

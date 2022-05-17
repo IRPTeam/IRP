@@ -113,7 +113,7 @@
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>AccumulationRegister.R2002T_SalesReturns</registerRecords>
   <registerRecords>AccumulationRegister.R2050T_RetailSales</registerRecords>
-  <registerRecords>AccumulationRegister.R3050T_RetailCash</registerRecords>
+  <registerRecords>AccumulationRegister.R3050T_PosCashBalances</registerRecords>
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>

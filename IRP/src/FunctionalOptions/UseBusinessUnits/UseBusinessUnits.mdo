@@ -56,7 +56,7 @@
   <content>InformationRegister.T2013S_OffsetOfAging.Dimension.Branch</content>
   <content>AccumulationRegister.R1010T_PurchaseOrders.Dimension.Branch</content>
   <content>AccumulationRegister.R2005T_SalesSpecialOffers.Dimension.Branch</content>
-  <content>AccumulationRegister.R3050T_RetailCash.Dimension.Branch</content>
+  <content>AccumulationRegister.R3050T_PosCashBalances.Dimension.Branch</content>
   <content>AccumulationRegister.R6080T_OtherPeriodsRevenues.Dimension.Branch</content>
   <content>Catalog.PartnersBankAccounts.Attribute.Branch</content>
   <content>AccumulationRegister.R6070T_OtherPeriodsExpenses.Dimension.Branch</content>

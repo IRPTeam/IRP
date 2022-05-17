@@ -1253,6 +1253,58 @@ Scenario: check the display of the header of the collapsible group in Shipment c
 		| Store 03    |
 	And I select current line in "List" table
 
+Scenario: check the product selection form in PhysicalInventory
+	And I click "Pickup" button
+	* Check the display of remains by Item
+		And "ItemList" table contains lines
+		| 'Title'                | 'In stock' | 'Unit' | 'Picked out' |
+		| 'Dress'                | '331'      | 'pcs'  | ''           |
+		| 'Trousers'             | ''         | 'pcs'  | ''           |
+		| 'Shirt'                | '7'        | 'pcs'  | ''           |
+		| 'Boots'                | '4'        | 'pcs'  | ''           |
+		| 'High shoes'           | ''         | 'pcs'  | ''           |
+		| 'Bound Dress+Shirt'    | ''         | 'pcs'  | ''           |
+		| 'Bound Dress+Trousers' | ''         | 'pcs'  | ''           |
+		| 'Router'               | ''         | 'pcs'  | ''           |
+	* Check the display of remains by Item key
+		And I go to line in "ItemList" table
+			| 'In stock' | 'Title' |
+			| '331'      | 'Dress' |
+		And I select current line in "ItemList" table
+		And I go to line in "ItemKeyList" table
+			| 'In stock' | 'Title'   | 'Unit' |
+			| '197'      | 'XS/Blue' | 'pcs'  |
+		And I select current line in "ItemKeyList" table
+		And I go to line in "ItemKeyList" table
+			| 'In stock' | 'Title'    | 'Unit' |
+			| '134'      | 'S/Yellow' | 'pcs'  |
+		And I select current line in "ItemKeyList" table
+		And I go to line in "ItemTableValue" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Unit' |
+			| 'Dress' | 'S/Yellow' | '1,000'    | 'pcs'  |
+		And I activate "Quantity" field in "ItemTableValue" table
+		And I select current line in "ItemTableValue" table
+		And I input "4,000" text in "Quantity" field of "ItemTableValue" table
+		And I click "Transfer to document" button
+	* Check the transfer of remains to the document PhysicalInventory
+		And "ItemList" table contains lines
+			| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Unit' |
+			| '4,000'       | 'Dress' | '4,000'      | 'S/Yellow' | 'pcs'  |
+			| '1,000'       | 'Dress' | '1,000'      | 'XS/Blue'  | 'pcs'  |
+	* Check of remains change at re-selection of a store
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 06'    |
+		And I select current line in "List" table
+		And I click "Pickup" button
+		And "ItemList" table contains lines
+		| 'Title'                | 'In stock' | 'Unit' | 'Picked out' |
+		| 'Dress'                | '398'      | 'pcs'  | ''           |
+		| 'Trousers'             | '405'      | 'pcs'  | ''           |
+
+
+
 Scenario: check the display of the header of the collapsible group in bank payments documents
 	And I click the button named "FormCreate"
 	* Filling in the details of the document

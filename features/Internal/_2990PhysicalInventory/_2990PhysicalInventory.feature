@@ -375,6 +375,7 @@ Scenario: _2990004 create Physical inventory and check Row Id info tab
 			| '1' | '120,000'    | 'Dress' | 'S/Yellow' | 'pcs'  | '5,000'      | '125,000'     | ''                   | ''            |
 			| '2' | '200,000'    | 'Dress' | 'XS/Blue'  | 'pcs'  | '-2,000'     | '198,000'     | ''                   | ''            |					
 	* Posting the document Physical inventory
+		And I select "Done" exact value from the drop-down list named "Status"
 		And I click the button named "FormPost"
 		And I delete "$$NumberPhysicalInventory2990004$$" variable
 		And I delete "$$PhysicalInventory2990004$$" variable
@@ -1238,12 +1239,12 @@ Scenario: _2990030 check filling in Stock adjustment as surplus based on Physica
 		And I click "Ok" button
 	* Check filling
 		And "ItemList" table became equal
-			| '#' | 'Revenue type' | 'Amount' | 'Item'               | 'Basis document'                                 | 'Item key' | 'Profit loss center' | 'Physical inventory'                             | 'Serial lot numbers' | 'Unit' | 'Quantity' |
-			| '1' | ''             | ''       | 'Dress'              | 'Physical inventory 3 dated 17.05.2022 16:10:43' | 'XS/Blue'  | ''                   | 'Physical inventory 3 dated 17.05.2022 16:10:43' | ''                   | 'pcs'  | '103,000'  |
-			| '2' | ''             | ''       | 'Boots'              | 'Physical inventory 3 dated 17.05.2022 16:10:43' | '36/18SD'  | ''                   | 'Physical inventory 3 dated 17.05.2022 16:10:43' | ''                   | 'pcs'  | '3,000'    |
-			| '3' | ''             | ''       | 'Product 2 with SLN' | 'Physical inventory 3 dated 17.05.2022 16:10:43' | 'UNIQ'     | ''                   | 'Physical inventory 3 dated 17.05.2022 16:10:43' | '45678899'           | 'pcs'  | '1,000'    |
-			| '4' | ''             | ''       | 'Product 1 with SLN' | 'Physical inventory 3 dated 17.05.2022 16:10:43' | 'ODS'      | ''                   | 'Physical inventory 3 dated 17.05.2022 16:10:43' | '677899'             | 'pcs'  | '4,000'    |
-			| '5' | ''             | ''       | 'Dress'              | 'Physical inventory 3 dated 17.05.2022 16:10:43' | 'S/Yellow' | ''                   | 'Physical inventory 3 dated 17.05.2022 16:10:43' | ''                   | 'pcs'  | '110,000'  |
+			| '#' | 'Revenue type' | 'Amount' | 'Item'               | 'Basis document'         | 'Item key' | 'Profit loss center' | 'Physical inventory'     | 'Serial lot numbers' | 'Unit' | 'Quantity' |
+			| '1' | ''             | ''       | 'Dress'              | '$$PhysicalInventory3$$' | 'XS/Blue'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '103,000'  |
+			| '2' | ''             | ''       | 'Boots'              | '$$PhysicalInventory3$$' | '36/18SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '3,000'    |
+			| '3' | ''             | ''       | 'Product 2 with SLN' | '$$PhysicalInventory3$$' | 'UNIQ'     | ''                   | '$$PhysicalInventory3$$' | '45678899'           | 'pcs'  | '1,000'    |
+			| '4' | ''             | ''       | 'Product 1 with SLN' | '$$PhysicalInventory3$$' | 'ODS'      | ''                   | '$$PhysicalInventory3$$' | '677899'             | 'pcs'  | '4,000'    |
+			| '5' | ''             | ''       | 'Dress'              | '$$PhysicalInventory3$$' | 'S/Yellow' | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '110,000'  |
 	And I close all client application windows
 		
 Scenario: _2990032 check filling in Stock adjustment as write off based on Physical Inventory with Serial lot numbers
@@ -1260,10 +1261,10 @@ Scenario: _2990032 check filling in Stock adjustment as write off based on Physi
 		And I click "Ok" button
 	* Check filling		
 		And "ItemList" table became equal
-			| '#' | 'Item'               | 'Basis document'                                 | 'Item key' | 'Profit loss center' | 'Physical inventory'                             | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Expense type' |
-			| '1' | 'Boots'              | 'Physical inventory 3 dated 17.05.2022 16:10:43' | '37/18SD'  | ''                   | 'Physical inventory 3 dated 17.05.2022 16:10:43' | ''                   | 'pcs'  | '10,000'   | ''             |
-			| '2' | 'High shoes'         | 'Physical inventory 3 dated 17.05.2022 16:10:43' | '37/19SD'  | ''                   | 'Physical inventory 3 dated 17.05.2022 16:10:43' | ''                   | 'pcs'  | '2,000'    | ''             |
-			| '3' | 'Product 1 with SLN' | 'Physical inventory 3 dated 17.05.2022 16:10:43' | 'PZU'      | ''                   | 'Physical inventory 3 dated 17.05.2022 16:10:43' | '8908899877'         | 'pcs'  | '113,000'  | ''             |
+			| '#' | 'Item'               | 'Basis document'         | 'Item key' | 'Profit loss center' | 'Physical inventory'     | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Expense type' |
+			| '1' | 'Boots'              | '$$PhysicalInventory3$$' | '37/18SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '10,000'   | ''             |
+			| '2' | 'High shoes'         | '$$PhysicalInventory3$$' | '37/19SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '2,000'    | ''             |
+			| '3' | 'Product 1 with SLN' | '$$PhysicalInventory3$$' | 'PZU'      | ''                   | '$$PhysicalInventory3$$' | '8908899877'         | 'pcs'  | '113,000'  | ''             |
 	And I close all client application windows
 
 

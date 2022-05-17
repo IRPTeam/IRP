@@ -44,6 +44,7 @@ Scenario: _2990000 preparation (product inventory)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create catalog Users objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
 		When Create catalog Partners objects (Ferron BP)
@@ -336,7 +337,6 @@ Scenario: _2990004 create Physical inventory and check Row Id info tab
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"
-		And I select "Done" exact value from "Status" drop-down list
 	* Check filling in document with stock balances
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -370,27 +370,12 @@ Scenario: _2990004 create Physical inventory and check Row Id info tab
 		And I select current line in "ItemList" table
 		And I input "125,000" text in "Phys. count" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		* Try to add Service
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I activate "Item" field in "ItemList" table
-			And I click choice button of "Item" attribute in "ItemList" table
-			And "List" table does not contain lines
-				| 'Description' |
-				| 'Service' |
-			And I close "Items" window			
-			And I finish line editing in "ItemList" table
-			And I delete a line in "ItemList" table	
-			When in opened panel I select "Physical inventory (create) *"
-			Then "Physical inventory (create) *" window is opened
-			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
-			And I input "89908" text in the field named "InputFld"
-			And I click the button named "OK"
-			And "ItemList" table became equal
-				| '#' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
-				| '1' | '120,000'    | 'Dress' | 'S/Yellow' | 'pcs'  | '5,000'      | '125,000'     | ''                   | ''            |
-				| '2' | '200,000'    | 'Dress' | 'XS/Blue'  | 'pcs'  | '-2,000'     | '198,000'     | ''                   | ''            |					
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | '120,000'    | 'Dress' | 'S/Yellow' | 'pcs'  | '5,000'      | '125,000'     | ''                   | ''            |
+			| '2' | '200,000'    | 'Dress' | 'XS/Blue'  | 'pcs'  | '-2,000'     | '198,000'     | ''                   | ''            |					
 	* Posting the document Physical inventory
+		And I select "Done" exact value from the drop-down list named "Status"
 		And I click the button named "FormPost"
 		And I delete "$$NumberPhysicalInventory2990004$$" variable
 		And I delete "$$PhysicalInventory2990004$$" variable
@@ -415,8 +400,44 @@ Scenario: _2990004 create Physical inventory and check Row Id info tab
 			| '2' | '$$Rov2PhysicalInventory2990004$$' | ''      | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '2,000' | '                                    ' | ''             | '$$Rov2PhysicalInventory2990004$$' |
 		And I close all client application windows
 	
+Scenario: _2990005 try to add Service to the Physical inventory
+	And I close all client application windows
+	* Open document form
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click the button named "FormCreate"
+	* Check filling in document with stock balances
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 05'    |
+		And I select current line in "List" table
+		And I click "Fill expected count" button		
+		And Delay 2
+	* Try to add Service
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' |
+			| 'Service' |
+		And I close "Items" window			
+		And I finish line editing in "ItemList" table
+		And I delete a line in "ItemList" table	
+		When in opened panel I select "Physical inventory (create) *"
+		Then "Physical inventory (create) *" window is opened
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "89908" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check
+		And "ItemList" table does not contain lines
+			| 'Item'    |
+			| 'Service' |
+		And I close all client application windows
+		
 
 Scenario: _2990006 create Stock adjustment as surplus based on Physical inventory (link/unlink)
+	And I close all client application windows
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I click the button named "FormCreate"
@@ -782,6 +803,9 @@ Scenario: _2990016 filling Physical count by location (mobile form)
 		And I click "SearchByBarcode" button
 		And I input "4820024700016" text in "InputFld" field
 		And I click "OK" button
+		And I click "SearchByBarcode" button
+		And I input "4820024700016" text in "InputFld" field
+		And I click "OK" button
 	* Scan item with serial lot number and change quantity
 		And I click "SearchByBarcode" button
 		And I input "23455677788976667" text in "InputFld" field
@@ -798,12 +822,520 @@ Scenario: _2990016 filling Physical count by location (mobile form)
 		And I click "SearchByBarcode" button
 		And I input "89908" text in "InputFld" field
 		And I click "OK" button
+		Given Recent TestClient message contains "Can not count Service item type" string by template
 	* Check item tab
 		And "ItemList" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
 			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
 			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
-		Then the number of "ItemList" table lines is "равно" 2
+		Then the number of "ItemList" table lines is "равно" 3
+	* Add product without Serial lot number (item type use Serial lot numbers)
+		And I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "899007788" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Phys. count' |
+			| 'Product 2 with SLN' | 'UNIQ'     | '1,000'       |
+		And I activate "Serial lot number" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Row form" window is opened
+		And I click Choice button of the field named "SerialLotNumber"
+		Then the number of "List" table lines is "равно" 0
+		* Create Serial lot number
+			And I click "Create" button
+			Then "Item serial/lot number (create)" window is opened
+			And I input "45678899" text in "Serial number" field
+			And I click "Save and close" button
+			And I activate field named "Owner" in "List" table
+			And I click "Select" button
+			Then "Row form" window is opened
+			And I click the button named "OK"
+	* Check filling item tab
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
+			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
+			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '1,000'       |
+		And I click "Save" button		
+	* Change Phys. count (manual)
+		And I move to "Group settings" tab
+		And I set checkbox "Edit quantity"
+		And I move to "Group main" tab
+		And I activate "Phys. count" field in "ItemList" table
+		And I go to the first line in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Row form" window is opened
+		And I input "2,000" text in the field named "Quantity"
+		And I click the button named "OK"
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
+			| 'Boots'              | '36/18SD'  | ''                  | '2,000'       |
+			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
+			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '1,000'       |
+	* Close without save and check saving result
+		And I close "Location count * dated *" window
+	* Check Physical count by location
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Phys. count' |
+			| '1' | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'       |
+			| '2' | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '1,000'       |
+			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '2,000'       |
+			| '4' | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'       |
+		And I close all client application windows
+
+Scenario: _2990018 check the document Location count fixation for the user
+	And I close all client application windows
+	* Change responsible person in the Physical count by location
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Select button of "Responsible user" field
+		And I go to line in "List" table
+			| 'Description'                       |
+			| 'Anna Petrova (Commercial Agent 3)' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I wait "Location count * dated * *" window closing in 20 seconds
+	* Check fixation
+		And In the command interface I select "Mobile" "Mobile invent"
+		And I click the button named "InputBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "2" text in the field named "InputFld"
+		And I click the button named "OK"
+		Given Recent TestClient message contains "Current location #2 was started by another user. User: Anna Petrova (Commercial Agent 3)" string by template
+		And I close all client application windows
+
+Scenario: _2990019 rescan a previously created document Physical count by location in the mobile form
+	And I close all client application windows
+	And In the command interface I select "Mobile" "Mobile invent"
+	And I click the button named "InputBarcode"
+	Then "Enter a barcode" window is opened
+	And I input "1" text in the field named "InputFld"
+	And I click the button named "OK"
+	And "ItemList" table became equal
+		| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
+		| 'Boots'              | '36/18SD'  | ''                  | '2,000'       |
+		| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+		| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
+		| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '1,000'       |	
+	Given Recent TestClient message contains "Current location #* was linked to you. Other users will not be able to scan it." string by template
+	And I close all client application windows
+	
+	
+
+Scenario: _2990022 filling Physical inventory from Physical count by location	
+		And I close all client application windows
+	* Open Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberPhysicalInventory3$$'      |
+		And I select current line in "List" table
+		And "PhysicalCountByLocationList" table contains lines
+			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
+			| 'Location count 1*' | 'Prepared' | '4'          | '6,000'       |
+			| 'Location count 2*' | 'Prepared' | ''           | ''            |
+			| 'Location count 3*' | 'Prepared' | '5'          | '222,000'     |
+		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-500,000'   | ''            | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-120,000'   | ''            | ''                   | ''            |	
+	* Try to filling Physical inventory from Physical count by location (status prepared)
+		And in the table "ItemList" I click "Fill from locations" button
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-500,000'   | ''            | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-120,000'   | ''            | ''                   | ''            |	
+	* Change status and fill Physical inventory from first Physical count by location
+		And I move to "Physical count by location" tab
+		And I go to the first line in "PhysicalCountByLocationList" table
+		And I select current line in "PhysicalCountByLocationList" table
+		And I move to the next attribute
+		And I click "Decoration group title collapsed picture" hyperlink
+		And I select "Done" exact value from the drop-down list named "Status"
+		And I click "Save and close" button
+		And "PhysicalCountByLocationList" table contains lines
+			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
+			| 'Location count 1*' | 'Done'     | '4'          | '6,000'       |
+			| 'Location count 2*' | 'Prepared' | ''           | ''            |
+			| 'Location count 3*' | 'Prepared' | '5'          | '222,000'     |
+		And I move to "Items" tab
+		And in the table "ItemList" I click "Fill from locations" button
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-500,000'   | ''            | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-118,000'   | '2,000'       | ''                   | ''            |
+			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
+			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+	* Change status and fill Physical inventory from third Physical count by location	
+		And I move to "Physical count by location" tab
+		And I go to the last line in "PhysicalCountByLocationList" table
+		And I select current line in "PhysicalCountByLocationList" table
+		And I click "Decoration group title collapsed picture" hyperlink
+		And I select "Done" exact value from the drop-down list named "Status"
+		And I click "Save and close" button
+		And I move to "Items" tab
+		And in the table "ItemList" I click "Fill from locations" button
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-397,000'   | '103,000'     | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
+			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
+			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
+			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+	* Update exp count
+		And in the table "ItemList" I click "Fill expected count" button
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-397,000'   | '103,000'     | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
+			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
+			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
+			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+	* Mark for deletion Physical count by location and update physical count
+		And I move to "Physical count by location" tab
+		And I go to the first line in "PhysicalCountByLocationList" table
+		And I select current line in "PhysicalCountByLocationList" table
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I close "Location count * dated *" window
+		Then "Physical inventory * dated * *" window is opened
+		And I move to "Items" tab
+		And in the table "ItemList" I click "Fill from locations" button
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-397,000'   | '103,000'     | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-115,000'   | '5,000'       | ''                   | ''            |
+			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | ''           | ''            | ''                   | ''            |
+			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | ''           | ''            | ''                   | ''            |
+			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
+			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+	* Unmark Physical count by location and update physical count
+		And I move to "Physical count by location" tab
+		And I go to the first line in "PhysicalCountByLocationList" table
+		And I select current line in "PhysicalCountByLocationList" table
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "Location count * dated *" window is opened
+		And I click "Save and close" button
+		And I wait "Location count * dated *" window closing in 20 seconds
+		Then "Physical inventory * dated * *" window is opened
+		And I move to "Items" tab
+		And in the table "ItemList" I click "Fill from locations" button
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-397,000'   | '103,000'     | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
+			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
+			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
+			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+					
+	* Try to close invent (not all Physical count by location close)
+		And I click "Decoration group title collapsed picture" hyperlink
+		And I select "Done" exact value from the drop-down list named "Status"
+		And I click "Post" button
+		Given Recent TestClient message contains 'There are "Physical count by location" documents that are not closed.' string by template
+	* Change status back and save Physical inventory
+		And I select "In processing" exact value from the drop-down list named "Status"
+		And I click "Post and close" button
+		And I wait "Physical inventory * dated * *" window closing in 20 seconds
+		And I close all client application windows
+		
+		
+Scenario: _2990025 write off product and check update exp count
+	And I close all client application windows
+	* Create Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I click the button named "FormCreate"
+	* Create a document StockAdjustmentAsSurplus and check filling in
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Store 07' |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select "XS/Blue" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "500,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I activate "Profit loss center" field in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Accountants office' |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		And I activate "Expense type" field in "ItemList" table
+		And I click choice button of "Expense type" attribute in "ItemList" table
+		Then "Expense and revenue types" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Expense'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I input "16.05.2022 00:00:00" text in the field named "Date"
+		And I click "Post and close" button
+		And I wait "Stock adjustment as write-off * dated * *" window closing in 20 seconds
+	* Open Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberPhysicalInventory3$$' |
+		And I select current line in "List" table				
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | '500,000'    | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '-397,000'   | '103,000'     | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
+			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
+			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
+			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+		And in the table "ItemList" I click "Fill expected count" button
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '103,000'    | '103,000'     | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
+			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
+			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
+			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+		And I click "Post and close" button
+		And I wait "Physical inventory * dated * *" window closing in 20 seconds
+		And I close all client application windows
+		
+							
+Scenario: _2990027 filling in manual fixed count and check update phys count and expect count
+	* Open Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberPhysicalInventory3$$' |
+		And I select current line in "List" table
+	* Filling manual fixed count
+		And I go to line in "ItemList" table
+			| '#' | 'Difference' | 'Exp. count' | 'Item'       | 'Item key' | 'Unit' |
+			| '3' | '-20,000'    | '20,000'     | 'High shoes' | '37/19SD'  | 'pcs'  |
+		And I activate "Manual fixed count" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "18,000" text in "Manual fixed count" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' | 'Difference' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' |
+			| '2' | '-150,000'   | '150,000'    | 'Boots' | '37/18SD'  | 'pcs'  |
+		And I select current line in "ItemList" table
+		And I input "140,000" text in "Manual fixed count" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' | 'Difference' | 'Item'  | 'Item key' | 'Phys. count' | 'Unit' |
+			| '5' | '3,000'      | 'Boots' | '36/18SD'  | '3,000'       | 'pcs'  |
+	* Check tab
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '103,000'    | '103,000'     | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-10,000'    | ''            | '140,000'            | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-2,000'     | ''            | '18,000'             | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
+			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
+			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
+			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+	* Update exp count
+		And in the table "ItemList" I click "Fill expected count" button
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '103,000'    | '103,000'     | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-10,000'    | ''            | '140,000'            | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-2,000'     | ''            | '18,000'             | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
+			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
+			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
+			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
+	* Update phys count
+		And in the table "ItemList" I click "Fill from locations" button
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '103,000'    | '103,000'     | ''                   | ''            |
+			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-10,000'    | ''            | '140,000'            | ''            |
+			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-2,000'     | ''            | '18,000'             | ''            |
+			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
+			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
+			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
+			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |	
+		And I click "Post and close" button
+	* Post invent with status Done
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberPhysicalInventory3$$' |
+		And I select current line in "List" table
+		And I click "Decoration group title collapsed picture" hyperlink
+		And I select "Done" exact value from the drop-down list named "Status"
+		And I click "Post and close" button
+		And I wait "Physical inventory * dated * *" window closing in 20 seconds		
+		
+		
+Scenario: _2990030 check filling in Stock adjustment as surplus based on Physical Inventory	with Serial lot numbers
+	And I close all client application windows
+	* Select Physical Inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberPhysicalInventory3$$' |
+	* Create Stock adjustment as surplus
+		And I click "Stock adjustment as surplus" button
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click "Ok" button
+	* Check filling
+		And "ItemList" table became equal
+			| '#' | 'Revenue type' | 'Amount' | 'Item'               | 'Basis document'         | 'Item key' | 'Profit loss center' | 'Physical inventory'     | 'Serial lot numbers' | 'Unit' | 'Quantity' |
+			| '1' | ''             | ''       | 'Dress'              | '$$PhysicalInventory3$$' | 'XS/Blue'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '103,000'  |
+			| '2' | ''             | ''       | 'Boots'              | '$$PhysicalInventory3$$' | '36/18SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '3,000'    |
+			| '3' | ''             | ''       | 'Product 2 with SLN' | '$$PhysicalInventory3$$' | 'UNIQ'     | ''                   | '$$PhysicalInventory3$$' | '45678899'           | 'pcs'  | '1,000'    |
+			| '4' | ''             | ''       | 'Product 1 with SLN' | '$$PhysicalInventory3$$' | 'ODS'      | ''                   | '$$PhysicalInventory3$$' | '677899'             | 'pcs'  | '4,000'    |
+			| '5' | ''             | ''       | 'Dress'              | '$$PhysicalInventory3$$' | 'S/Yellow' | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '110,000'  |
+	And I close all client application windows
+		
+Scenario: _2990032 check filling in Stock adjustment as write off based on Physical Inventory with Serial lot numbers
+	And I close all client application windows
+	* Select Physical Inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberPhysicalInventory3$$' |
+	* Create Stock adjustment as write off
+		And I click "Stock adjustment as write-off" button
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click "Ok" button
+	* Check filling		
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Basis document'         | 'Item key' | 'Profit loss center' | 'Physical inventory'     | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Expense type' |
+			| '1' | 'Boots'              | '$$PhysicalInventory3$$' | '37/18SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '10,000'   | ''             |
+			| '2' | 'High shoes'         | '$$PhysicalInventory3$$' | '37/19SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '2,000'    | ''             |
+			| '3' | 'Product 1 with SLN' | '$$PhysicalInventory3$$' | 'PZU'      | ''                   | '$$PhysicalInventory3$$' | '8908899877'         | 'pcs'  | '113,000'  | ''             |
+	And I close all client application windows
+
+
+Scenario: _2990050 check label print for Physical count by location	
+	And I close all client application windows
+	* Select Physical count by location
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+	* Print label
+		And I click "PrintQR" button
+		Then "SpreadsheetDocument" spreadsheet document is equal
+			| '1' |
+	And I close all client application windows
+	
+		
+		
+				
+		
+				
+		
+						
+		
+				
+		
+				
+		
+		
+				
+
+				
+
+		
+				
+				
+		
+				
+				
+				
+		
+				
+				
+
+		
+				
+		
+		
+					
+				
+
+		
+		
+				
+				
+		
+				
+
+		
+				
+
+		
+					
+		
+				
+			
+						
+		
+				
+		
+					
 		
 		
 				

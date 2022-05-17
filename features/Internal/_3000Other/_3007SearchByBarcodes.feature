@@ -158,8 +158,8 @@ Scenario: _300721 barcode check in PhysicalCountByLocation
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	And "ItemList" table became equal
-		| '#' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' | 'Difference' | 'Phys. count' |
-		| '1' | ''           | 'Dress' | 'S/Yellow' | 'pcs'  | '2,000'      | '2,000'       |
+		| '#' | 'Item'  | 'Item key' | 'Unit' | 'Phys. count' |
+		| '1' | 'Dress' | 'S/Yellow' | 'pcs'  | '2,000'       |
 	And I close all client application windows
 
 

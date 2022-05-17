@@ -304,19 +304,7 @@ Scenario: 3001003 check the form of selection of items in the document PhysicalI
 		When check the product selection form in PhysicalInventory
 	And I close all client application windows
 
-Scenario: 3001004 check the form of selection of items in the document PhysicalCountByLocation
-	* Open document form
-		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
-		And I click the button named "FormCreate"
-	* Filling the document header
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 05'      |
-		And I select current line in "List" table
-	* Check the form of selection items
-		When check the product selection form in PhysicalInventory
-	And I close all client application windows
+
 
 
 

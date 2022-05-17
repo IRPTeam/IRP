@@ -187,23 +187,33 @@ Function ItemList()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	QueryTable.ItemKey AS ItemKey,
-		   |	*
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS QueryTable
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	QueryTable.ItemKeyWriteOff AS ItemKey,
-		   |	*
-		   |FROM
-		   |	ItemList AS QueryTable";
-
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.ItemKey AS ItemKey,
+	|	CASE
+	|		WHEN ItemList.SerialLotNumber.StockBalanceDetail
+	|			THEN ItemList.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END SerialLotNumber,
+	|	*
+	|INTO R4010B_ActualStocks
+	|FROM
+	|	ItemList AS ItemList
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	ItemList.ItemKeyWriteOff AS ItemKey,
+	|	CASE
+	|		WHEN ItemList.SerialLotNumberWriteOff.StockBalanceDetail
+	|			THEN ItemList.SerialLotNumberWriteOff
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END SerialLotNumber,
+	|	*
+	|FROM
+	|	ItemList AS ItemList";
 EndFunction
 
 Function R4011B_FreeStocks()

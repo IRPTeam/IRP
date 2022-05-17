@@ -196,6 +196,36 @@ Procedure InventoryItemEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure InventorySerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
+	CurrentData = Items.Inventory.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure InventorySerialLotNumberEditTextChange(Item, Text, StandardProcessing)
+	CurrentData = Items.Inventory.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
 Procedure AccountBalanceAccountOnChange(Item, AddInfo = Undefined) Export
 	CurrentData = Items.AccountBalance.CurrentData;
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "AccountBalance");

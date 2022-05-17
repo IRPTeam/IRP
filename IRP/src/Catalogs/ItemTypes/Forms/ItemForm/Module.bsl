@@ -25,6 +25,35 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure TypeOnChange(Item)
+	If Object.Type = PredefinedValue("Enum.ItemTypes.Service") Then
+		Object.UseSerialLotNumber = False;
+		Object.StockBalanceDetail = Undefined;
+	EndIf;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	VisibleOfSerialLotNumber = Object.Type = PredefinedValue("Enum.ItemTypes.Product");
+	Form.Item.UseSerialLotNumber.Visible = VisibleOfSerialLotNumber;
+	Form.Item.StockBalanceDetaill.Visible = VisibleOfSerialLotNumber;
 EndProcedure
 
 #EndRegion

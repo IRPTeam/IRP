@@ -101,8 +101,7 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	AddInfo = New Structure("ClientModule", ThisObject);
-	DocumentsClient.SearchByBarcode(Barcode, ThisObject, ThisObject, ThisObject, , AddInfo);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject);
 EndProcedure
 
 &AtClient
@@ -113,10 +112,6 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, Result.Barcodes[0]));
 		Return;
 	EndIf;
-
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Form", ThisObject);
-	NotifyParameters.Insert("Object", ThisObject);
 
 	For Each Row In Result.FoundedItems Do
 #If Not WebClient Then		

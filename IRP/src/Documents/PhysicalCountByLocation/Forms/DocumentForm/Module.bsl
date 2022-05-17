@@ -265,7 +265,9 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
+	Settings = BarcodeClient.GetBarcodeSettings();
+	Settings.Filter.DisableIfIsService = True;
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, , , Settings);
 EndProcedure
 
 &AtClient

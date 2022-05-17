@@ -14,7 +14,9 @@
 // ** PricePeriod - Date -
 // * Result - Structure:
 // ** FoundedItems - See BarcodeServer.SearchByBarcodes
-// ** Barcodes - Array of String -
+// ** Barcodes - Array of String
+// * Filter - Structure:
+// ** DisableIfIsService - Boolean
 Function GetBarcodeSettings() Export
 	Settings = New Structure();
 	Settings.Insert("Form", Undefined);
@@ -22,6 +24,10 @@ Function GetBarcodeSettings() Export
 	Settings.Insert("AddInfo", New Structure());
 	Settings.Insert("ReturnCallToModule", DocumentsClient);
 	Settings.Insert("MobileBarcodeModule", BarcodeClient);
+	
+	Filter = New Structure;
+	Filter.Insert("DisableIfIsService", False);
+	Settings.Insert("Filter", Filter);
 	
 	ServerSettings = New Structure;
 	ServerSettings.Insert("PriceType", Undefined);
@@ -131,8 +137,9 @@ EndFunction
 Function ProcessBarcodes(Barcodes, Settings)
 	ReturnResult = False;
 	ReturnCallToModule = Settings.ReturnCallToModule;
+	ServerSettings = Settings.ServerSettings;
 	
-	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, Settings.ServerSettings);
+	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, ServerSettings);
 
 	If FoundedItems = Undefined Then
 		Return False;

@@ -718,7 +718,7 @@ Function Strings(Lang) Export
 		"en = 'Can not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled.'", Lang));
 	Strings.Insert("InfoMessage_024", NStr("en = 'Will be available after save.'", Lang));
 	Strings.Insert("InfoMessage_025", NStr("en = 'Before start to scan - choose location'", Lang));
-	Strings.Insert("InfoMessage_026", NStr("en = 'Can not count Service item type'", Lang));
+	Strings.Insert("InfoMessage_026", NStr("en = 'Can not add Service item type: %1'", Lang));
 #EndRegion
 
 #Region QuestionToUser

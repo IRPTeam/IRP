@@ -822,7 +822,7 @@ Scenario: _2990016 filling Physical count by location (mobile form)
 		And I click "SearchByBarcode" button
 		And I input "89908" text in "InputFld" field
 		And I click "OK" button
-		Given Recent TestClient message contains "Can not count Service item type" string by template
+		Given Recent TestClient message contains "Can not add Service item type:*" string by template
 	* Check item tab
 		And "ItemList" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |

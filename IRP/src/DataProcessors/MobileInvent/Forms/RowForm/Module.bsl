@@ -13,9 +13,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			ActiveItem = "SerialLotNumber";
 		Else
 			Items.SerialLotNumber.ReadOnly = True;
+			Items.SearchByBarcode.Visible = False;
 		EndIf;
 	Else
 		Items.SerialLotNumber.Visible = False;
+		Items.SearchByBarcode.Visible = False;
 	EndIf;
 	
 	Quantity = Parameters.Quantity;
@@ -34,6 +36,51 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If CurrentPicture.isPreviewSet Then
 		Picture = GetURL(CurrentPicture, "Preview");
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SearchByBarcode(Command, Barcode = "")
+	Settings = BarcodeClient.GetBarcodeSettings();
+	Settings.MobileBarcodeModule = ThisObject;
+	DocumentsClient.SearchByBarcode(Barcode, New Structure(), ThisObject, ThisObject, , Settings);
+EndProcedure
+
+// Search by barcode end.
+// 
+// Parameters:
+//  Result - Structure - Result
+//  AdditionalParameters - See BarcodeClient.GetBarcodeSettings
+&AtClient
+Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+
+	BarcodeClient.CloseMobileScanner();		
+	For Each Row In Result.FoundedItems Do
+		
+		If Row.Item = ItemRef And Row.ItemKey = ItemKey Then
+			SerialLotNumber = Row.SerialLotNumber;
+		Else
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_027, 
+				Result.Barcodes[0], Row.Item, Row.ItemKey, Row.SerialLotNumber));
+		EndIf;
+		
+		Return;
+		
+	EndDo;
+	
+EndProcedure
+
+// Scan barcode end mobile.
+// 
+// Parameters:
+//  Barcode - String - Barcode
+//  Result - Boolean - Result
+//  Message - String - Message
+//  Parameters - See BarcodeClient.GetBarcodeSettings
+&AtClient
+Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
+
+	Barcodeclient.ProcessBarcode(Barcode, Parameters);
+	
 EndProcedure
 
 #Region SERIAL_LOT_NUMBERS

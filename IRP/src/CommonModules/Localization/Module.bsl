@@ -195,6 +195,7 @@
 //  * InfoMessage_024 - String - Will be available after save.
 //  * InfoMessage_025 - String - Before start to scan - choose location
 //  * InfoMessage_026 - String - Can not count Service item type
+//  * InfoMessage_027 - String - Barcode [%1] is exists for item: %2 [%3] %4
 //  * POS_s1 - String - Amount paid is less than amount of the document
 //  * POS_s2 - String - Card fees are more than the amount of the document
 //  * POS_s3 - String - There is no need to use cash, as card payments are sufficient to pay
@@ -719,6 +720,11 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_024", NStr("en = 'Will be available after save.'", Lang));
 	Strings.Insert("InfoMessage_025", NStr("en = 'Before start to scan - choose location'", Lang));
 	Strings.Insert("InfoMessage_026", NStr("en = 'Can not add Service item type: %1'", Lang));
+	// %1 - 123123123
+	// %2 - Item name
+	// %3 - Item key
+	// %4 - Serial lot number
+	Strings.Insert("InfoMessage_027", NStr("en = 'Barcode [%1] is exists for item: %2 [%3] %4'", Lang));
 #EndRegion
 
 #Region QuestionToUser

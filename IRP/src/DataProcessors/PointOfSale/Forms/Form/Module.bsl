@@ -229,16 +229,16 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
-	If AdditionalParameters.FoundedItems.Count() Then
+	If Result.FoundedItems.Count() Then
 		NotifyParameters = New Structure();
 		NotifyParameters.Insert("Form", ThisObject);
 		NotifyParameters.Insert("Object", Object);
 		Items.DetailedInformation.document.getElementById("text").innerHTML = "";
-		DocumentsClient.PickupItemsEnd(AdditionalParameters.FoundedItems, NotifyParameters);
+		DocumentsClient.PickupItemsEnd(Result.FoundedItems, NotifyParameters);
 		EnabledPaymentButton();
 	Else
 		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(
-			AdditionalParameters.Barcodes, ",")) + "</span>";
+			Result.Barcodes, ",")) + "</span>";
 		Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
 	EndIf;
 EndProcedure

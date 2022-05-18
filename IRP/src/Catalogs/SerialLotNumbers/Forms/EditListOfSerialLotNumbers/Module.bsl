@@ -102,7 +102,7 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, ThisObject, ThisObject, ThisObject);
+	DocumentsClient.SearchByBarcode(Barcode, New Structure(), ThisObject, ThisObject);
 EndProcedure
 
 &AtClient
@@ -110,11 +110,11 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	LastBarcode = "";
 	SerialLotNumberStatus = "";
 	Items.CreateSerialLotNumber.Visible = False;
-	If AdditionalParameters.FoundedItems.Count() Then
-		ScannedInfo = AdditionalParameters.FoundedItems[0];
-		Barcode = AdditionalParameters.Barcodes[0];
+	If Result.FoundedItems.Count() Then
+		ScannedInfo = Result.FoundedItems[0];
+		Barcode = Result.Barcodes[0];
 		If Not ValueIsFilled(ScannedInfo.SerialLotNumber) Then
-			CalculateStatus(StrTemplate(R().InfoMessage_017, AdditionalParameters.Barcodes[0]));
+			CalculateStatus(StrTemplate(R().InfoMessage_017, Result.Barcodes[0]));
 		ElsIf Not ScannedInfo.ItemKey.IsEmpty() And Not ScannedInfo.ItemKey = ItemKey Then
 			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.ItemKey));
 		ElsIf Not ScannedInfo.Item.IsEmpty() And Not ScannedInfo.Item = Item Then
@@ -128,7 +128,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			UpdateFooter();
 		EndIf;
 	Else
-		LastBarcode = AdditionalParameters.Barcodes[0];
+		LastBarcode = Result.Barcodes[0];
 		CalculateStatus(StrTemplate(R().InfoMessage_015, LastBarcode));
 		Items.CreateSerialLotNumber.Visible = True;
 	EndIf;

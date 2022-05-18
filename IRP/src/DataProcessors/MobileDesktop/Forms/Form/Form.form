@@ -1580,6 +1580,23 @@
     </edit>
     <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
   </attributes>
+  <attributes>
+    <name>UseSeriallotNumber</name>
+    <title>
+      <key>en</key>
+      <value>Use seriallot number</value>
+    </title>
+    <id>9</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>SearchByBarcode</name>
     <id>1</id>

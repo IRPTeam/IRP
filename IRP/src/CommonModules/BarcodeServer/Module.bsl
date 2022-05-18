@@ -5,9 +5,7 @@
 // 
 // Parameters:
 //  Barcodes - Array of DefinedType.typeBarcode - Barcodes
-//  AddInfo - Structure - Add info:
-//  * PriceType - CatalogRef.PriceTypes
-//  * PricePeriod - Date
+//  Settings - See BarcodeClient.GetBarcodeSettings
 // 
 // Returns:
 //  Array of Structure:
@@ -22,7 +20,7 @@
 // * Barcode  - DefinedType.typeBarcode
 // * ItemType - CatalogRef.ItemTypes -
 // * UseSerialLotNumber - Boolean -
-Function SearchByBarcodes(Val Barcodes, AddInfo) Export
+Function SearchByBarcodes(Val Barcodes, Settings) Export
 
 	ReturnValue = New Array();
 	Query = New Query();
@@ -51,15 +49,12 @@ Function SearchByBarcodes(Val Barcodes, AddInfo) Export
 	QueryUnload = QueryExecution.Unload();
 	
 	// TODO: Refact by query
-	PricePeriod = CurrentDate();
-	PriceType = Catalogs.PriceTypes.EmptyRef();
-	If AddInfo.Property("PriceType", PriceType) Then
-		AddInfo.Property("PricePeriod", PricePeriod);
+	If Not Settings.PriceType = Undefined Then
 		QueryUnload.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);
 		PreviousPriceTable = QueryUnload.Copy( , "ItemKey, Unit, ItemKeyUnit, ItemUnit, hasSpecification");
 		PreviousPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
-		PreviousPriceTable.FillValues(PriceType, "PriceType");
-		ItemsInfo = GetItemInfo.ItemPriceInfoByTable(PreviousPriceTable, PricePeriod);
+		PreviousPriceTable.FillValues(Settings.PriceType, "PriceType");
+		ItemsInfo = GetItemInfo.ItemPriceInfoByTable(PreviousPriceTable, Settings.PricePeriod);
 		For Each Row In ItemsInfo Do
 			Filter = New Structure();
 			Filter.Insert("ItemKey", Row.ItemKey);

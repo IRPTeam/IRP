@@ -101,7 +101,7 @@ Procedure FillItemList(Object, UpdateExpCount) Export
 		NewRow = Undefined;
 		If FindRow.Count() Then
 			NewRow = FindRow[0];
-			NewRow[CountName] = Row[CountName];
+			NewRow[CountName] = NewRow[CountName] + Row[CountName];
 		Else
 			NewRow = Object.ItemList.Add();
 			FillPropertyValues(NewRow, Row);

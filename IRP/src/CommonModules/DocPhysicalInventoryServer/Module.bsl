@@ -135,9 +135,9 @@ EndProcedure
 // 
 // Returns:
 //  Structure - Get refilled item table:
-// * ItemList - ValueTable
-// * ActualStock - ValueTable
-// * PhysicalCount - ValueTable
+// * ItemList - ValueTable, ValueTree - 
+// * ActualStock - ValueTable, ValueTree - 
+// * PhysicalCount - ValueTable, ValueTree - 
 Function GetRefilledItemTable(Object)
 	
 	Query = New Query;

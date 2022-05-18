@@ -12,6 +12,22 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Workstation.IsEmpty() Then
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_103, "Workstation"));
 	EndIf;
+	
+	If SessionParameters.isMobile Then
+		Items.HTMLDate.Visible = False;
+		Items.DetailedInformation.Visible = False;
+		
+		Items.GroupHeaderTop.Group = ChildFormItemsGroup.Vertical;
+		Items.Move(Items.GroupHeaderTop, Items.AdditionalPage);
+		
+		Items.Move(Items.PageButtons, ThisObject);
+		Items.Move(Items.GroupPicture, Items.GroupPaymentLeft);
+		Items.Move(Items.PagePayment, Items.PageButtons);
+		Items.PageButtons.PagesRepresentation = FormPagesRepresentation.TabsOnBottom;
+		Items.GroupPaymentRight.ShowTitle = False;
+
+	EndIf;
+	
 EndProcedure
 
 &AtClient
@@ -65,7 +81,7 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocRetailSalesReceiptClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	Items.DetailedInformation.document.getElementById("text").innerHTML = "";
+	SetDetailedInfo("");
 EndProcedure
 
 &AtClient
@@ -153,41 +169,28 @@ EndProcedure
 
 &AtClient
 Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
-	StandardProcessing = False;
+	
 	CurrentData = Items.ItemsPickup.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	If ThisObject.ItemKeysPickup.Count() = 1 Then
-		AddItemKeyToItemList(CurrentData.Item, ThisObject.ItemKeysPickup[0].Ref);
+
+	If Not CurrentData.Property("Ref") Then
+		Return;
 	EndIf;
+	StandardProcessing = False;
+	
+	AddItemKeyToItemList(CurrentData.Item, CurrentData.Ref);
 EndProcedure
 
 &AtClient
 Procedure ItemsPickupOnActivateRow(Item)
-	CurrentData = Items.ItemsPickup.CurrentData;
-	If CurrentData = Undefined Then
-		GetItemKeysByItem(Undefined);
-	Else
-		GetItemKeysByItem(CurrentData.Item);
-	EndIf;
-
 	UpdateHTMLPictures();
 EndProcedure
 
 #EndRegion
 
 #Region ItemkeyPickupList
-
-&AtClient
-Procedure ItemKeysPickupSelection(Item, SelectedRow, Field, StandardProcessing)
-	StandardProcessing = False;
-	CurrentData = Items.ItemKeysPickup.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	AddItemKeyToItemList(CurrentData.Item, CurrentData.Ref);
-EndProcedure
 
 &AtClient
 Procedure AddItemKeyToItemList(Item, ItemKey)
@@ -233,13 +236,13 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		NotifyParameters = New Structure();
 		NotifyParameters.Insert("Form", ThisObject);
 		NotifyParameters.Insert("Object", Object);
-		Items.DetailedInformation.document.getElementById("text").innerHTML = "";
+		SetDetailedInfo("");
 		DocumentsClient.PickupItemsEnd(Result.FoundedItems, NotifyParameters);
 		EnabledPaymentButton();
 	Else
 		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(
 			Result.Barcodes, ",")) + "</span>";
-		Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
+		SetDetailedInfo(DetailedInformation);
 	EndIf;
 EndProcedure
 
@@ -379,6 +382,17 @@ EndProcedure
 
 #Region Private
 
+#Region SetDetailedInfo
+
+&AtClient
+Procedure SetDetailedInfo(DetailedInformation)
+	If Items.DetailedInformation.Visible Then
+		Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
+	EndIf;
+EndProcedure
+
+#EndRegion
+
 #Region PictureViewer
 
 &AtClient
@@ -496,7 +510,7 @@ Procedure PaymentFormClose(Result, AdditionalData) Export
 	EndIf;
 	CashbackAmount = WriteTransaction(Result);
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
-	Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
+	SetDetailedInfo(DetailedInformation);
 
 	NewTransaction();
 	Modified = False;
@@ -573,47 +587,12 @@ EndProcedure
 
 &AtClient
 Procedure ShowItems()
-	Items.ItemListShowItems.Check = Not Items.ItemListShowItems.Check;
 	SetShowItems();
 EndProcedure
 
 &AtClient
 Procedure SetShowItems()
-	Items.GroupPickupItems.Visible = Items.ItemListShowItems.Check;
-	
-	CurrentData = Items.ItemsPickup.CurrentData;
-	If CurrentData = Undefined Then
-		GetItemKeysByItem(Undefined);
-	Else
-		GetItemKeysByItem(CurrentData.Item);
-	EndIf;
-EndProcedure
-
-&AtServer
-Procedure GetItemKeysByItem(Item)
-	ThisObject.ItemKeysPickup.Clear();
-	If Not ValueIsFilled(Item) Then
-		Return;
-	EndIf;
-
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	&Item AS Item,
-	|	CatalogItemKeys.Ref AS Ref,
-	|	CatalogItemKeys.Ref AS Presentation
-	|FROM
-	|	Catalog.ItemKeys AS CatalogItemKeys
-	|WHERE
-	|	CatalogItemKeys.Item = &Item
-	|	AND NOT CatalogItemKeys.DeletionMark
-	|ORDER BY
-	|	Ref";
-	Query.SetParameter("Item", Item);
-	QueryExecute = Query.Execute();
-	QueryUnload = QueryExecute.Unload();
-	
-	ThisObject.ItemKeysPickup.Load(QueryUnload);
+	Items.PageButtons.CurrentPage = Items.GroupItems;
 EndProcedure
 
 &AtClient
@@ -645,7 +624,8 @@ Procedure BuildDetailedInformation(ItemKey)
 	DetailedInformation = String(InfoItem) + ?(ValueIsFilled(ItemKey), " [" + String(ItemKey) + "]", "]") + " " + InfoQuantity
 		+ " x " + Format(InfoPrice, "NFD=2; NZ=0.00;") + ?(ValueIsFilled(InfoOffersAmount), "-" + Format(
 		InfoOffersAmount, "NFD=2; NZ=0.00;"), "") + " = " + Format(InfoTotalAmount, "NFD=2; NZ=0.00;");
-	Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
+	
+	SetDetailedInfo(DetailedInformation);
 EndProcedure
 
 &AtClient

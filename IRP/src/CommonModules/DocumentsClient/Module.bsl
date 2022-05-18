@@ -416,7 +416,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	If IsUsedNewFunctionality Then	
 		For Each ResultElement In Result Do
 			
-			If ResultElement.isService And AddInfo.Filter.DisableIfIsService Then
+			If ResultElement.isService And AddInfo.Property("Filter") And AddInfo.Filter.DisableIfIsService Then
 				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_026, ResultElement.Item));
 				Continue;
 			EndIf;

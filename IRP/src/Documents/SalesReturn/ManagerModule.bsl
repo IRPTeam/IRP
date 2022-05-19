@@ -263,7 +263,8 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function ItemList()
-	Return "SELECT
+	Return 
+	"SELECT
 	|	RowIDInfo.Ref AS Ref,
 	|	RowIDInfo.Key AS Key,
 	|	MAX(RowIDInfo.RowID) AS RowID
@@ -338,7 +339,8 @@ Function ItemList()
 	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
 	|	ItemList.OffersAmount,
 	|	ItemList.PriceType,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ItemList.Key
 	|INTO ItemList
 	|FROM
 	|	Document.SalesReturn.ItemList AS ItemList

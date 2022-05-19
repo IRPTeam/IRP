@@ -44,16 +44,27 @@ EndProcedure
 Procedure TypeOnChange(Item)
 	If Object.Type = PredefinedValue("Enum.ItemTypes.Service") Then
 		Object.UseSerialLotNumber = False;
-		Object.StockBalanceDetail = Undefined;
+		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.ByItemKey");
+	EndIf;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure UseSerialLotNumberOnChange(Item)
+	If Not Object.UseSerialLotNumber Then
+		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.ByItemKey");
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	VisibleOfSerialLotNumber = Object.Type = PredefinedValue("Enum.ItemTypes.Product");
-	Form.Item.UseSerialLotNumber.Visible = VisibleOfSerialLotNumber;
-	Form.Item.StockBalanceDetaill.Visible = VisibleOfSerialLotNumber;
+	VisibleOfSerialLotNumber = (Object.Type = PredefinedValue("Enum.ItemTypes.Product"));
+	Form.Items.UseSerialLotNumber.Visible  = VisibleOfSerialLotNumber;
+	Form.Items.StockBalanceDetail.Visible = VisibleOfSerialLotNumber;
+	If VisibleOfSerialLotNumber Then
+		Form.Items.StockBalanceDetail.ReadOnly = Not Object.UseSerialLotNumber;
+	EndIf;
 EndProcedure
 
 #EndRegion

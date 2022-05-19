@@ -255,6 +255,10 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Object.UseSerialLotNumber</segments>
       </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>UseSerialLotNumberOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>UseSerialLotNumberExtendedTooltip</name>
         <id>50</id>

@@ -23,8 +23,11 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
+		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create catalog ItemTypes objects
+		When Create catalog ItemTypes objects (serial lot numbers)
 		When Create catalog Units objects
+		When Create catalog Items objects (serial lot numbers)
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
@@ -48,6 +51,9 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
+		When Create information register Barcodes records
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -86,7 +92,6 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create document InternalSupplyRequest objects
 		When Create document PurchaseOrder objects
 		When Create document InventoryTransfer objects
-		
 		When Create document InventoryTransferOrder objects
 		When Create document GoodsReceipt objects (for stock remaining control)
 		When Create document PurchaseInvoice objects (for stock remaining control)

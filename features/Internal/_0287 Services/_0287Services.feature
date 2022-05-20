@@ -687,9 +687,9 @@ Scenario: _029150 create Retail return receipt for service and product
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "R3050 Pos cash balances"' | ''       | ''          | ''           | ''             | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                              		| 'Period' | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                              		| ''       | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
-			| ''                              		| '*'      | '-450'      | ''           | 'Main Company' | '*'       | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
+			| ''                                    | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
+			| ''                                    | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
+			| ''                                    | '*'      | '-450'      | ''           | 'Main Company' | '*'       | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
 	
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button

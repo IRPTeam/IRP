@@ -79,7 +79,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	BarcodeServer.UpdateBarcode(Result.Barcodes[0], Option);
 	
 	CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_028, 
-				Result.Barcodes[0], Row.Item, Row.ItemKey));
+				Result.Barcodes[0], ItemKey));
 				
 EndProcedure
 

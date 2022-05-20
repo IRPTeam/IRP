@@ -725,7 +725,7 @@ Function Strings(Lang) Export
 	// %3 - Item key
 	// %4 - Serial lot number
 	Strings.Insert("InfoMessage_027", NStr("en = 'Barcode [%1] is exists for item: %2 [%3] %4'", Lang));
-	Strings.Insert("InfoMessage_028", NStr("en = 'New serial was created [%1] for item: %2 [%3]'", Lang));
+	Strings.Insert("InfoMessage_028", NStr("en = 'New serial [ %1 ] created for item key [ %2 ]'", Lang));
 #EndRegion
 
 #Region QuestionToUser

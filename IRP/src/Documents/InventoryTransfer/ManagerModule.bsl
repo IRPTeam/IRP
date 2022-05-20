@@ -191,7 +191,8 @@ Function ItemList()
 		   |	InventoryTransferItemList.Ref AS Basis,
 		   |	InventoryTransferItemList.Ref.UseGoodsReceipt AS UseGoodsReceipt,
 		   |	InventoryTransferItemList.Ref.UseShipmentConfirmation AS UseShipmentConfirmation,
-		   |	InventoryTransferItemList.Ref.Branch AS Branch
+		   |	InventoryTransferItemList.Ref.Branch AS Branch,
+		   |	InventoryTransferItemList.Key AS Key
 		   |INTO ItemList
 		   |FROM
 		   |	Document.InventoryTransfer.ItemList AS InventoryTransferItemList

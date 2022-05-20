@@ -41,6 +41,7 @@ EndProcedure
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	Settings = BarcodeClient.GetBarcodeSettings();
+	//@skip-warning
 	Settings.MobileBarcodeModule = ThisObject;
 	DocumentsClient.SearchByBarcode(Barcode, New Structure(), ThisObject, ThisObject, , Settings);
 EndProcedure
@@ -66,7 +67,20 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		Return;
 		
 	EndDo;
+	Options = SerialLotNumbersServer.GetSeriallotNumerOptions();
+	Options.Barcode = Result.Barcodes[0];
+	Options.Owner = ItemKey;
+	Options.Description = Result.Barcodes[0];
+	SerialLotNumber = SerialLotNumbersServer.CreateNewSerialLotNumber(Options);
 	
+	Option = New Structure();
+	Option.Insert("ItemKey", ItemKey);
+	Option.Insert("SerialLotNumber", SerialLotNumber);
+	BarcodeServer.UpdateBarcode(Result.Barcodes[0], Option);
+	
+	CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_028, 
+				Result.Barcodes[0], Row.Item, Row.ItemKey));
+				
 EndProcedure
 
 // Scan barcode end mobile.

@@ -14,6 +14,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 	
 	If SessionParameters.isMobile Then
+		
 		Items.HTMLDate.Visible = False;
 		Items.DetailedInformation.Visible = False;
 		
@@ -180,7 +181,7 @@ Procedure ItemsPickupSelection(Item, SelectedRow, Field, StandardProcessing)
 	EndIf;
 	StandardProcessing = False;
 	
-	AddItemKeyToItemList(CurrentData.Item, CurrentData.Ref);
+	AddItemKeyToItemList(CurrentData.Ref);
 EndProcedure
 
 &AtClient
@@ -193,7 +194,8 @@ EndProcedure
 #Region ItemkeyPickupList
 
 &AtClient
-Procedure AddItemKeyToItemList(Item, ItemKey)
+Procedure AddItemKeyToItemList(ItemKey)
+	
 	Filter = New Structure("ItemKey", ItemKey);
 	ExistingRows = Object.ItemList.FindRows(Filter);
 	
@@ -201,12 +203,16 @@ Procedure AddItemKeyToItemList(Item, ItemKey)
 		Row = ExistingRows[0];
 		ViewClient_V2.SetItemListQuantity(Object, ThisObject, Row, Row.Quantity + 1);
 	Else
-		FillingValues = New Structure("Item, ItemKey", Item, ItemKey);
+		FillingValues = New Structure("ItemKey", ItemKey);
 		ViewClient_V2.ItemListAddFilledRow(Object, ThisObject, FillingValues);
 	EndIf;
+	
 	EnabledPaymentButton();
 	CurrentData = Items.ItemList.CurrentData;
 	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
+	
+	FillSalesPersonInItemList()
+	
 EndProcedure
 
 #EndRegion
@@ -233,16 +239,21 @@ EndProcedure
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	If Result.FoundedItems.Count() Then
+		
 		NotifyParameters = New Structure();
 		NotifyParameters.Insert("Form", ThisObject);
 		NotifyParameters.Insert("Object", Object);
 		SetDetailedInfo("");
 		DocumentsClient.PickupItemsEnd(Result.FoundedItems, NotifyParameters);
 		EnabledPaymentButton();
+		FillSalesPersonInItemList();
+		
 	Else
+		
 		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(
 			Result.Barcodes, ",")) + "</span>";
 		SetDetailedInfo(DetailedInformation);
+		
 	EndIf;
 EndProcedure
 
@@ -325,18 +336,8 @@ Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
 	StandardProcessing = False;
 	If DragParameters.Action = DragAction.Move And DragParameters.Value.Count() Then
 		Value = DragParameters.Value[0];
-		If TypeOf(Value) = Type("CatalogRef.Items") Then
-			If ThisObject.ItemKeysPickup.Count() = 1 Then
-				AddItemKeyToItemList(Value, ThisObject.ItemKeysPickup[0].Ref);
-			EndIf;
-		ElsIf TypeOf(Value) = Type("FormDataCollectionItem") Then
-			If CommonFunctionsClientServer.ObjectHasProperty(Value, "Ref") 
-				And CommonFunctionsClientServer.ObjectHasProperty(Value, "Item") Then
-				CurrentData = Items.ItemKeysPickup.CurrentData;
-				If CurrentData <> Undefined Then
-					AddItemKeyToItemList(CurrentData.Item, CurrentData.Ref);
-				EndIf;
-			EndIf;
+		If TypeOf(Value) = Type("CatalogRef.ItemKeys") Then
+			AddItemKeyToItemList(Value);
 		EndIf;
 	EndIf;
 EndProcedure

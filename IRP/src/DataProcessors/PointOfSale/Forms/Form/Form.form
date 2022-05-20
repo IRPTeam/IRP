@@ -109,6 +109,9 @@
               <key>en</key>
               <value>Sales person</value>
             </title>
+            <titleTextColor xsi:type="core:ColorRef">
+              <color>Style.AccentColor</color>
+            </titleTextColor>
             <titleFont xsi:type="core:FontRef">
               <font>Style.LargeTextFont</font>
             </titleFont>
@@ -312,6 +315,9 @@
             <group>AlwaysHorizontal</group>
             <showLeftMargin>true</showLeftMargin>
             <united>true</united>
+            <backColor xsi:type="core:ColorRef">
+              <color>Style.ToolTipBackColor</color>
+            </backColor>
             <throughAlign>Auto</throughAlign>
             <currentRowUse>Auto</currentRowUse>
           </extInfo>
@@ -3269,6 +3275,9 @@
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
               <textEdit>true</textEdit>
+              <borderColor xsi:type="core:ColorRef">
+                <color>Style.AccentColor</color>
+              </borderColor>
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
@@ -3344,7 +3353,7 @@
                 <color>Web.MidnightBlue</color>
               </textColor>
               <borderColor xsi:type="core:ColorRef">
-                <color>Style.FormBackColor</color>
+                <color>Style.AccentColor</color>
               </borderColor>
               <inputHint>
                 <key>en</key>
@@ -3739,13 +3748,13 @@
                 <groupVerticalAlign>Bottom</groupVerticalAlign>
                 <placementArea>UserCmds</placementArea>
                 <textColor xsi:type="core:ColorRef">
-                  <color>Web.Green</color>
+                  <color>Style.AccentColor</color>
                 </textColor>
                 <backColor xsi:type="core:ColorRef">
                   <color>Web.HoneyDew</color>
                 </backColor>
                 <borderColor xsi:type="core:ColorRef">
-                  <color>Style.FormBackColor</color>
+                  <color>Style.AccentColor</color>
                 </borderColor>
                 <font xsi:type="core:FontRef">
                   <font>Style.LargeTextFont</font>
@@ -3785,10 +3794,8 @@
               <type>UsualGroup</type>
               <extInfo xsi:type="form:UsualGroupExtInfo">
                 <group>Vertical</group>
-                <representation>WeakSeparation</representation>
                 <showLeftMargin>true</showLeftMargin>
                 <united>true</united>
-                <showTitle>true</showTitle>
                 <throughAlign>Auto</throughAlign>
                 <currentRowUse>Auto</currentRowUse>
               </extInfo>

@@ -2,6 +2,7 @@
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	Settings = BarcodeClient.GetBarcodeSettings();
+	//@skip-warning
 	Settings.MobileBarcodeModule = ThisObject;
 	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, , Settings);
 EndProcedure

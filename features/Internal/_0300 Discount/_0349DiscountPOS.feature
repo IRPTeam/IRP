@@ -29,9 +29,9 @@ Scenario: _034902 check discount price type calculation in POS
 			| 'Item'                |
 			| 'Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
-		And I go to line in "ItemKeysPickup" table
-			| 'Presentation' |
-			| 'M/White'      |
+		And I go to line in "ItemsPickup" table
+			| 'Item'  |
+			| 'Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |

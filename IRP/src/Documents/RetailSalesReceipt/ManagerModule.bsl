@@ -140,7 +140,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R3010B_CashOnHand());
-	QueryArray.Add(R3050T_RetailCash());
+	QueryArray.Add(R3050T_PosCashBalances());
 	QueryArray.Add(R2050T_RetailSales());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R2001T_Sales());
@@ -417,10 +417,10 @@ Function R4010B_ActualStocks()
 	|	NOT ItemList.IsService";
 EndFunction
 
-Function R3050T_RetailCash()
+Function R3050T_PosCashBalances()
 	Return "SELECT
 		   |	*
-		   |INTO R3050T_RetailCash
+		   |INTO R3050T_PosCashBalances
 		   |FROM
 		   |	Payments AS Payments
 		   |WHERE

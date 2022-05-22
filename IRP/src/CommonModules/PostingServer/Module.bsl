@@ -400,6 +400,8 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 	ArrayOfPostingErrorMessages = New Array();
 	QuantityColumnName = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "QuantityColumnName", "Quantity");
 	For Each Row In QueryTableCopy Do
+		SerialLotNumberIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "SerialLotNumber");
+		
 		Filter = New Structure(Parameters.FilterColumns);
 		FillPropertyValues(Filter, Row);
 		QueryTableFiltered = QueryTable.Copy(Filter);
@@ -428,7 +430,7 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 
 			If Row.Unposting Then
 				
-				If ValueIsFilled(Row.SerialLotNumber) Then
+				If SerialLotNumberIsPresent And ValueIsFilled(Row.SerialLotNumber) Then
 					MessageText = StrTemplate(R().Error_068_2, LineNumber, Row.Item, Row.ItemKey, Row.SerialLotNumber, 
 						Parameters.Operation, LackOfBalance, 0, LackOfBalance, BasisUnit);
 				Else
@@ -438,7 +440,7 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 				
 			Else // Posting
 				
-				If ValueIsFilled(Row.SerialLotNumber) Then
+				If SerialLotNumberIsPresent And ValueIsFilled(Row.SerialLotNumber) Then
 					MessageText = StrTemplate(R().Error_068_2, LineNumber, Row.Item, Row.ItemKey, Row.SerialLotNumber,
 						Parameters.Operation, RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
 				Else
@@ -460,7 +462,7 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 			If ValueIsFilled(ErrorQuantityField) Then
 				If Row.Unposting Then
 					
-					If ValueIsFilled(Row.SerialLotNumber) Then
+					If SerialLotNumberIsPresent And ValueIsFilled(Row.SerialLotNumber) Then
 						MessageText = StrTemplate(R().Error_090_2, Row.Item, Row.ItemKey, Row.SerialLotNumber, 
 							Parameters.Operation, LackOfBalance, 0, LackOfBalance, BasisUnit);
 					Else
@@ -470,7 +472,7 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 				
 				Else // Posting
 					
-					If ValueIsFilled(Row.SerialLotNumber) Then
+					If SerialLotNumberIsPresent And ValueIsFilled(Row.SerialLotNumber) Then
 						MessageText = StrTemplate(R().Error_090_2, Row.Item, Row.ItemKey, Row.SerialLotNumber,
 							Parameters.Operation, RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
 					Else
@@ -486,7 +488,7 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 				
 			Else // something else
 				
-				If ValueIsFilled(Row.SerialLotNumber) Then
+				If SerialLotNumberIsPresent And ValueIsFilled(Row.SerialLotNumber) Then
 					MessageText = StrTemplate(R().Error_068_2, LineNumbers, Row.Item, Row.ItemKey, Row.SerialLotNumber,
 						Parameters.Operation, LackOfBalance, 0, LackOfBalance, BasisUnit);
 				Else

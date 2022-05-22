@@ -11,7 +11,7 @@
   <name>R3050T_PosCashBalances</name>
   <synonym>
     <key>en</key>
-    <value>R3050 Retail cash</value>
+    <value>R3050 Pos cash balances</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <registerType>Turnovers</registerType>

@@ -23,9 +23,12 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
+		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create catalog ItemTypes objects
+		When Create catalog ItemTypes objects (serial lot numbers)
 		When Create catalog Units objects
 		When Create catalog Items objects
+		When Create catalog Items objects (serial lot numbers)
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
@@ -34,6 +37,8 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects (with remaining stock control)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
 		When Create information register PartnerSegments records
@@ -77,37 +82,52 @@ Scenario:_800000 preparation (remaining stock control)
 				| '1'   |
 			And in the table "List" I click "Post" button
 	* Load documents
+		When Create document OpeningEntry objects (stock control serial lot numbers)
 		When Create document Unbundling objects
 		When Create document StockAdjustmentAsSurplus objects
+		When Create document StockAdjustmentAsSurplus objects (stock control serial lot numbers)
 		When Create document PhysicalInventory objects
+		When Create document PhysicalInventory objects (stock control serial lot numbers)
 		When Create document GoodsReceipt objects
+		When Create document GoodsReceipt objects (stock control serial lot numbers)
 		When Create document SalesReturn objects
 		When Create document SalesReturnOrder objects
 		When Create document InternalSupplyRequest objects
 		When Create document PurchaseOrder objects
 		When Create document InventoryTransfer objects
-		
 		When Create document InventoryTransferOrder objects
 		When Create document GoodsReceipt objects (for stock remaining control)
 		When Create document PurchaseInvoice objects (for stock remaining control)
+		When Create document PurchaseInvoice objects (stock control serial lot numbers)
 		When Create document PurchaseInvoice objects (stock control)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document GoodsReceipt objects (stock control)
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.GoodsReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document InventoryTransfer objects (stock control)
+		When Create document InventoryTransfer objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.InventoryTransfer.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document ItemStockAdjustment objects (stock control)
+		When Create document ItemStockAdjustment objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.ItemStockAdjustment.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ItemStockAdjustment.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document PhysicalInventory objects (stock control)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PhysicalInventory.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PhysicalInventory.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailReturnReceipt objects (stock control)
+		When Create document RetailReturnReceipt objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesOrder objects (stock control)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -117,11 +137,14 @@ Scenario:_800000 preparation (remaining stock control)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrderClosing.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesReturn objects (stock control)
+		When Create document SalesReturn objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesReturn.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document StockAdjustmentAsSurplus objects (stock control)
 		And I execute 1C:Enterprise script at server
 			| "Documents.StockAdjustmentAsSurplus.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document SalesInvoice objects (stock control)
 		And I close all client application windows
 		And I execute 1C:Enterprise script at server

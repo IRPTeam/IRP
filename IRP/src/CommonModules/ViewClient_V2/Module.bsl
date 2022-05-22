@@ -9,6 +9,14 @@ Function GetSimpleParameters(Object, Form, TableName, Rows = Undefined)
 	Return GetParameters(ServerParameters, FormParameters);
 EndFunction
 
+Function GetLoadParameters(Object, Form, TableName, Address)
+	FormParameters   = GetFormParameters(Form);
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.TableName = TableName;
+	LoadParameters   = ControllerClientServer_V2.GetLoadParameters(Address);
+	Return GetParameters(ServerParameters, FormParameters, LoadParameters);	
+EndFunction
+
 Function GetFormParameters(Form)
 	FormParameters   = ControllerClientServer_V2.GetFormParameters(Form);
 	FormParameters.PropertyBeforeChange.Object.Names = GetObjectPropertyNamesBeforeChange();
@@ -21,8 +29,8 @@ Function GetServerParameters(Object)
 	Return ControllerClientServer_V2.GetServerParameters(Object);
 EndFunction
 
-Function GetParameters(ServerParameters, FormParameters = Undefined)
-	Return ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
+Function GetParameters(ServerParameters, FormParameters = Undefined, LoadParameters = Undefined)
+	Return ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters, LoadParameters);
 EndFunction
 
 Procedure ExtractValueBeforeChange_Object(DataPath, FormParameters)
@@ -769,6 +777,8 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 			
 			ServerData = Undefined;
@@ -777,8 +787,13 @@ Procedure OnOpenFormNotify(Parameters) Export
 				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
 			EndIf;
 			
-			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object, ServerData);
-			SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+			If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
+				Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation" Then
+				SerialLotNumberClient.FillSerialLotNumbersUse(Parameters.Object, ServerData);
+			Else
+				SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object, ServerData);
+				SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+			EndIf;
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
@@ -887,6 +902,26 @@ Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
 	Return NewRow;
 EndFunction
 
+Procedure ItemListLoad(Object, Form, Address) Export
+	Parameters = GetLoadParameters(Object, Form, "ItemList", Address);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.ItemList.Add();
+		NewRow.Key = String(New UUID());
+		NewRows.Add(NewRow);
+	EndDo;
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	ControllerClientServer_V2.ItemListLoad(Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region _ITEM_LIST_COLUMNS
@@ -951,14 +986,21 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation" Then
 			ServerData = Undefined;
 			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
 				ServerData = New Structure("ServerData", New Structure());
 				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
 				ServerData.ServerData.Insert("Rows", Parameters.Rows);
 			EndIf;
-			SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form, ServerData);
+			If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
+				Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation" Then
+				SerialLotNumberClient.FillSerialLotNumbersUse(Parameters.Object, ServerData);
+			Else
+				SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form, ServerData);
+			EndIf;
 	EndIf;
 EndProcedure
 
@@ -1229,6 +1271,54 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
 			"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
 	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_PHYSICAL_COUNT
+
+// ItemList.PhysCount
+Procedure ItemListPhysCountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListPhysCountOnChange(Parameters);
+EndProcedure
+
+// ItemList.PhysCount.Set
+Procedure SetItemListPhysCount(Object, Form, Row, Value) Export
+	Row.PhysCount = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListPhysCountOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetItemListPhysCountNotify(Parameters) Export
+	Return;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_FIXED_COUNT
+
+// ItemList.ManualFixedCount
+Procedure ItemListManualFixedCountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListManualFixedCountOnChange(Parameters);
+EndProcedure
+
+// ItemList.ManualFixedCount.Set
+Procedure SetItemListManualFixedCount(Object, Form, Row, Value) Export
+	Row.ManualFixedCount = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListManualFixedCountOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetItemListManualFixedCountNotify(Parameters) Export
+	Return;
 EndProcedure
 
 #EndRegion

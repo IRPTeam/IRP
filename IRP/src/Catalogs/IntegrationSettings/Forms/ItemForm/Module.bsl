@@ -50,6 +50,7 @@ Procedure TestConnectionCall()
 		eMail.Subject = "Test";
 		eMail.SenderName = ConnectionSetting.SenderName;
 		eMail.To.Add(ConnectionSetting.eMailForTest);
+		//@skip-warning
 		Answer = IntegrationClientServer.SendEmail(ConnectionSetting, eMail);
 		If Not Answer.Count() Then
 			CommonFunctionsClientServer.ShowUsersMessage(CommonFunctionsServer.SerializeJSON(Answer));

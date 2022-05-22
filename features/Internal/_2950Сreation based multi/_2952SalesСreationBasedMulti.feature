@@ -102,7 +102,7 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Sales order'      |
+			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'      | 'Sales order'      |
 			| 'Dress' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | 'Sales order 325*' |
 	Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 	* Change the document number to 325
@@ -122,7 +122,7 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Q'      |
+			| 'Item'     | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Quantity'      |
 			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 324*' | 'pcs'  | '20,000' |
 			| 'Dress'    | 'L/Green'   | 'Store 02' | 'Sales order 324*' | 'pcs'  | '20,000' |
 			| 'Trousers' | '36/Yellow' | 'Store 02' | 'Sales order 324*' | 'pcs'  | '30,000' |
@@ -181,7 +181,7 @@ Scenario: _090402 create Sales invoice for several Sales order with the same par
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Q'      |
+			| 'Item'     | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Quantity'      |
 			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 327*' | 'pcs'  | '10,000' |
 			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 326*' | 'pcs'  | '20,000' |
 			| 'Dress'    | 'L/Green'   | 'Store 02' | 'Sales order 326*' | 'pcs'  | '20,000' |
@@ -278,7 +278,7 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Q'     | 'Sales order'      |
+			| 'Item'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'     | 'Sales order'      |
 			| 'Dress'| 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | 'Sales order 329*' |
 	Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 	* Change the document number to 329
@@ -298,7 +298,7 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Q'      |
+			| 'Item'     | 'Item key'  | 'Store'    | 'Sales order'      | 'Unit' | 'Quantity'      |
 			| 'Dress'    | 'M/White'   | 'Store 02' | 'Sales order 328*' | 'pcs'  | '20,000' |
 			| 'Dress'    | 'L/Green'   | 'Store 02' | 'Sales order 328*' | 'pcs'  | '20,000' |
 			| 'Trousers' | '36/Yellow' | 'Store 02' | 'Sales order 328*' | 'pcs'  | '30,000' |
@@ -393,7 +393,7 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Store'    | 'Delivery date' | 'Sales order'      |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Unit' | 'Store'    | 'Delivery date' | 'Sales order'      |
 			| 'Dress' | 'M/White'  | '10,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 331*' |
 	Then the form attribute named "PriceIncludeTax" became equal to "No"
 	* Change the document number to 331
@@ -413,7 +413,7 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Delivery date' | 'Sales order'       |
+			| 'Item'     | 'Item key'  | 'Quantity'      | 'Unit' | 'Store'    | 'Delivery date' | 'Sales order'       |
 			| 'Trousers' | '36/Yellow' | '30,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 330*'  |
 			| 'Dress'    | 'M/White'   | '20,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 330*'  |
 			| 'Dress'    | 'L/Green'   | '20,000' | 'pcs'  | 'Store 02' | '*'             | 'Sales order 330*'  |
@@ -508,7 +508,7 @@ Scenario: _090405 create Sales invoice for several Sales order with different st
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 	Then the form attribute named "Company" became equal to "Main Company"
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Delivery date'| 'Sales order'      |
+			| 'Item'     | 'Item key'  | 'Quantity'      | 'Unit' | 'Store'    | 'Delivery date'| 'Sales order'      |
 			| 'Dress'    | 'L/Green'   | '20,000' | 'pcs'  | 'Store 02' | '*'            | 'Sales order 334*' |
 			| 'Trousers' | '36/Yellow' | '30,000' | 'pcs'  | 'Store 02' | '*'            | 'Sales order 334*' |
 			| 'Dress'    | 'M/White'   | '20,000' | 'pcs'  | 'Store 02' | '*'            | 'Sales order 334*' |
@@ -610,7 +610,7 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Store'    | 'Sales order'      |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Unit' | 'Store'    | 'Sales order'      |
 			| 'Dress' | 'M/White'  | '10,000' | 'pcs'  | 'Store 02' | 'Sales order 337*' |
 	* Change the document number to 337
 		And I move to "Other" tab
@@ -630,7 +630,7 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
 	And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Q'      | 'Unit' | 'Store'    | 'Sales order'      |
+			| 'Item'     | 'Item key'  | 'Quantity'      | 'Unit' | 'Store'    | 'Sales order'      |
 			| 'Dress'    | 'M/White'   | '20,000' | 'pcs'  | 'Store 02' | 'Sales order 336*' |
 			| 'Dress'    | 'L/Green'   | '20,000' | 'pcs'  | 'Store 02' | 'Sales order 336*' |
 			| 'Trousers' | '36/Yellow' | '30,000' | 'pcs'  | 'Store 02' | 'Sales order 336*' |
@@ -716,7 +716,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 					| 'not available' |
 			And I select current line in "List" table		
 			And I move to the next attribute
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Add items with procurement method purchase
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -751,7 +751,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I move to the next attribute
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Tick Shipment confirmation before Sales invoice and post an order
 			And I move to "Other" tab
@@ -814,7 +814,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 					| 'not available' |
 			And I select current line in "List" table
 			And I move to the next attribute
-			And I input "8,000" text in "Q" field of "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Add items with procurement method stock
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -832,7 +832,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I move to the next attribute
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Tick Shipment confirmation before Sales invoice and post an order
 			And I move to "Other" tab
@@ -851,7 +851,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 	And I click "Ok" button
 	* Check filling in tabular part
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Q'      |
+			| 'Item'     | 'Item key'  | 'Quantity'      |
 			| 'Service'  | 'Rent'      | '1,000'  |
 			| 'Trousers' | '38/Yellow' | '10,000' |
 			| 'Trousers' | '38/Yellow' | '2,000'  |
@@ -885,7 +885,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 	And I click "Ok" button
 	Then the number of "ItemList" table lines is "меньше или равно" 1
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Purchase basis'   |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Purchase basis'   |
 			| 'Shirt' | '38/Black' | '1,000' | 'Sales order 800*' |
 	And I close current window
 * Check filling in Purchase invoice (should get one string)
@@ -897,7 +897,7 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 	And I click "Ok" button
 	Then the number of "ItemList" table lines is "меньше или равно" 1
 	And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Sales order'      |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Sales order'      |
 			| 'Shirt' | '38/Black' | '1,000' | 'Sales order 800*' |
 	And I close all client application windows
 
@@ -1007,7 +1007,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-		| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'      | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'           |
+		| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Quantity'      | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'           |
 		| '18%' | 'Dress'    | '520,00' | 'M/White'   | '1 689,41'   | '1%'       | '20,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '8 710,59'   | '10 400,00'    | 'Store 02' | '$$SalesOrder090408$$'  |
 		| '18%' | 'Dress'    | '550,00' | 'L/Green'   | '1 786,88'   | '1%'       | '20,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '9 213,12'   | '11 000,00'    | 'Store 02' | '$$SalesOrder090408$$'  |
 		| '18%' | 'Trousers' | '400,00' | '36/Yellow' | '1 949,32'   | '1%'       | '30,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '10 050,68'  | '12 000,00'    | 'Store 02' | '$$SalesOrder090408$$'  |

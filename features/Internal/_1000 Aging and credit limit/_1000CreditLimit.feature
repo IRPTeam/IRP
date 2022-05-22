@@ -90,8 +90,8 @@ Scenario: _1000000 preparation (credit limit)
 				| 'Item'  | 'Item key' |
 				| 'Shirt' | '38/Black' |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -166,8 +166,8 @@ Scenario: _1000000 preparation (credit limit)
 				| 'Item'  | 'Item key' |
 				| 'Dress' | 'S/Yellow' |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "8,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -242,8 +242,8 @@ Scenario: _1000000 preparation (credit limit)
 				| 'Item'  | 'Item key' |
 				| 'Dress' | 'M/White' |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "8,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -517,8 +517,8 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 		And I click "OK" button
@@ -528,8 +528,8 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			| 'Item key' |
 			| 'L/Green'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
@@ -574,8 +574,8 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 		And I click the button named "FormPost"
@@ -659,8 +659,8 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 			And I click "OK" button

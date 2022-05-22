@@ -233,8 +233,8 @@ Function TablesIsEqual(Table1, Table2) Export
 	Query.SetParameter("VT2", Table2);
 	QueryResult = Query.ExecuteBatch();
 
-	MD5_1 = GetMD5(QueryResult[2].Unload());
-	MD5_2 = GetMD5(QueryResult[3].Unload());
+	MD5_1 = CommonFunctionsServer.GetMD5(QueryResult[2].Unload());
+	MD5_2 = CommonFunctionsServer.GetMD5(QueryResult[3].Unload());
 
 	Return MD5_1 = MD5_2;
 
@@ -245,17 +245,6 @@ Procedure DeleteColumn(Table, ColumnName)
 		Table.Columns.Delete(ColumnName);
 	EndIf;
 EndProcedure
-
-Function GetMD5(Table)
-	XMLWriter = New XMLWriter();
-	XMLWriter.SetString();
-	XDTOSerializer.WriteXML(XMLWriter, Table);
-	xml = XMLWriter.Close();
-
-	DataHashing = New DataHashing(HashFunction.MD5);
-	DataHashing.Append(xml);
-	Return DataHashing.HashSum;
-EndFunction
 
 Procedure CalculateQuantityByUnit(DataTable) Export
 	// Columns by default if Not set other:

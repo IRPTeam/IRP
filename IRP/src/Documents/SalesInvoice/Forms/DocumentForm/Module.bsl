@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -526,6 +527,18 @@ EndProcedure
 #EndRegion
 
 #Region COMMANDS
+
+&AtClient
+Procedure LoadDataFromTable(Command)
+	OpenForm("CommonForm.LoadDataFromTable", , ThisObject, , , , New NotifyDescription("LoadDataFromTableEnd", ThisObject));
+EndProcedure
+
+&AtClient
+Procedure LoadDataFromTableEnd(Result, AdditionalParameters) Export
+	If Result <> Undefined And Not IsBlankString(Result) Then
+		ViewClient_V2.ItemListLoad(Object, ThisObject, Result);
+	EndIf;
+EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)

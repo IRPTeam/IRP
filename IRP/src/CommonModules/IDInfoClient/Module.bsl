@@ -37,6 +37,7 @@ Procedure IDInfoOpeningNotify(Result, AddInfo = Undefined) Export
 		OpenFormArgs = New Structure();
 		OpenFormArgs.Insert("ArrayOfCountry", ArrayOfCountry);
 
+		//@skip-warning
 		Notify = New NotifyDescription("StartEditIDInfo", AddInfo.Form, Args);
 		OpenForm("ChartOfCharacteristicTypes.IDInfoTypes.Form.SelectCountryForm", OpenFormArgs, AddInfo.Form, , , ,
 			Notify);
@@ -67,6 +68,7 @@ Procedure StartEditIDInfo(Form, Result, Parameters) Export
 
 	Parameters.Insert("Country", Result.Country);
 
+	//@skip-warning
 	AddDataProcServer.CallMethodAddDataProc(OpenFormArgs, New Structure("ClientCall", True));
 
 	Notify = New NotifyDescription("EndEditIDInfo", Form, Parameters);

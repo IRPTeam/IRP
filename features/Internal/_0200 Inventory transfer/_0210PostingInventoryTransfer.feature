@@ -98,7 +98,7 @@ Scenario: _0201001 create IT based on ITO
 		And I click "Post" button
 		And I click "Show row key" button
 		And "RowIDInfo" table contains lines
-			| 'Basis'                                                 | 'Q'      |
+			| 'Basis'                                                 | 'Quantity'      |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '22,000' |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '24,000' |
 		And I click "Add" button
@@ -118,7 +118,7 @@ Scenario: _0201001 create IT based on ITO
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		And "RowIDInfo" table contains lines
-			| 'Basis'                                                 | 'Q'      |
+			| 'Basis'                                                 | 'Quantity'      |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '22,000' |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '24,000' |
 			| ''                                                      | '3,000' |
@@ -160,7 +160,7 @@ Scenario: _0201002 check filling in Row Id info table in the IT (ITO-IT)
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''          | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
 			| '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''          | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
 			| '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'SC'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
@@ -187,7 +187,7 @@ Scenario: _0201002 check filling in Row Id info table in the IT (ITO-IT)
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''          | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
 			| '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''          | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
 			| '$$Rov4InventoryTransfer0201001$$' | ''                                                      | '$$Rov4InventoryTransfer0201001$$'     | 'SC'        | '10,000' | ''                                     | ''             | '$$Rov4InventoryTransfer0201001$$'     |
@@ -200,7 +200,7 @@ Scenario: _0201002 check filling in Row Id info table in the IT (ITO-IT)
 			| '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'GR'        | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''             | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
 		Then the number of "RowIDInfo" table lines is "равно" "10"
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                              | 'Q'      |
+			| 'Key'                              | 'Quantity'      |
 			| '$$Rov1InventoryTransfer0201001$$' | '10,000' |
 	* Delete string and check Row ID Info tab
 		And I move to "Items" tab
@@ -210,7 +210,7 @@ Scenario: _0201002 check filling in Row Id info table in the IT (ITO-IT)
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''          | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
 			| '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''          | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
 			| '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'SC'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
@@ -224,7 +224,7 @@ Scenario: _0201002 check filling in Row Id info table in the IT (ITO-IT)
 		And I remove checkbox "Use shipment confirmation"
 		And I click "Post" button
 		And "RowIDInfo" table contains lines
-			| 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                              | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | ''          | '22,000' | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' | 'IT'           | 'a6fd4d98-157c-4fa4-946b-295c45d1c017' |
 			| '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '5165e259-51e5-4438-b7cb-ce848249e668' | ''          | '24,000' | '5165e259-51e5-4438-b7cb-ce848249e668' | 'IT'           | '5165e259-51e5-4438-b7cb-ce848249e668' |
 			| '$$Rov3InventoryTransfer0201001$$' | ''                                                      | '$$Rov3InventoryTransfer0201001$$'     | 'GR'        | '3,000'  | ''                                     | ''             | '$$Rov3InventoryTransfer0201001$$'     |
@@ -270,7 +270,7 @@ Scenario: _0201003 copy IT (based on ITO) and check filling in Row Id info table
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| '#' | 'Key'                              | 'Basis'                                                 | 'Row ID'                           | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref'                          |
+			| '#' | 'Key'                              | 'Basis'                                                 | 'Row ID'                           | 'Next step' | 'Quantity'      | 'Basis key' | 'Current step' | 'Row ref'                          |
 			| '1' | '$$Rov1InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '*'                                | 'GR'        | '22,000' | '*'         | 'IT'           | '*'                                |
 			| '2' | '$$Rov2InventoryTransfer0201001$$' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | '*'                                | 'GR'        | '24,000' | '*'         | 'IT'           | '*'                                |
 		Then the number of "RowIDInfo" table lines is "равно" "6"
@@ -439,7 +439,7 @@ Scenario: _02104809 create IT using form link/unlink
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#' | 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+		| '#' | 'Basis'                                                 | 'Next step' | 'Quantity'      | 'Current step' |
 		| '1' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | ''          | '20,000' | 'IT'        |
 		| '2' | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '36,000' | 'IT'           |
 		| '3' | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '5,000'  | 'IT'           |
@@ -457,7 +457,7 @@ Scenario: _02104809 create IT using form link/unlink
 		And I click "Ok" button
 		And I click "Save" button	
 		And "RowIDInfo" table became equal
-			| 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+			| 'Basis'                                                 | 'Next step' | 'Quantity'      | 'Current step' |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | ''          | '20,000' | 'IT'           |
 			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '36,000' | 'IT'           |
 			| ''                                                      | 'SC'        | '5,000'  | ''             |
@@ -484,7 +484,7 @@ Scenario: _02104809 create IT using form link/unlink
 		And I click "Ok" button
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+			| 'Basis'                                                 | 'Next step' | 'Quantity'      | 'Current step' |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | ''          | '20,000' | 'IT'           |
 			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '36,000' | 'IT'           |
 			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '5,000'  | 'IT'           |
@@ -529,7 +529,7 @@ Scenario: _02104809 create IT using form link/unlink
 		And I select current line in "List" table
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| 'Basis'                                                 | 'Next step' | 'Q'       | 'Current step' |
+			| 'Basis'                                                 | 'Next step' | 'Quantity'       | 'Current step' |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | ''          | '160,000' | 'IT'           |
 			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '36,000'  | 'IT'           |
 			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '5,000'   | 'IT'           |

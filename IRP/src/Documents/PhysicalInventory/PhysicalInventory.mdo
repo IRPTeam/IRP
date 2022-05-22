@@ -116,11 +116,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="d011b250-f20f-4e7e-9bbc-67cbc95fc56e">
-    <name>UseResponsiblePersonByRow</name>
+  <attributes uuid="e8ef9e40-19ee-43b3-aad9-0d2994240190">
+    <name>UseSerialLot</name>
     <synonym>
       <key>en</key>
-      <value>Use responsible person by row</value>
+      <value>Use serial lot</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -197,6 +197,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="d996850b-f1b1-4858-82ed-6b98722a6a01">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="e8f98dfd-60cb-45e4-a63e-36246f121ad0">
       <name>Unit</name>
       <synonym>
@@ -239,6 +253,21 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="aceb3147-de71-432e-b2b3-191c933c119a">
+      <name>ManualFixedCount</name>
+      <synonym>
+        <key>en</key>
+        <value>Manual fixed count</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <markNegatives>true</markNegatives>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="0ebe481f-113c-4e61-8644-385586aba996">
       <name>Difference</name>
       <synonym>
@@ -253,14 +282,15 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="c8bb103f-f054-469a-b798-fa6a619fd9cb">
-      <name>ResponsiblePerson</name>
+    <attributes uuid="ff4c05f5-e5d7-47b6-a48f-9da9324e1502">
+      <name>Description</name>
       <synonym>
         <key>en</key>
-        <value>Responsible person</value>
+        <value>Description</value>
       </synonym>
       <type>
-        <types>CatalogRef.Partners</types>
+        <types>String</types>
+        <stringQualifiers/>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -357,7 +387,7 @@
       <name>Quantity</name>
       <synonym>
         <key>en</key>
-        <value>Q</value>
+        <value>Quantity</value>
       </synonym>
       <type>
         <types>DefinedType.typeQuantity</types>

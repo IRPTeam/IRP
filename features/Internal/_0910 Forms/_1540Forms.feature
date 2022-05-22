@@ -338,11 +338,11 @@ Scenario: _0154038 check the Deleting of the store field value by line with the 
 			| 'Item'    | 'Item key' |
 			| 'Service' | 'Rent'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
 	* Deleting of the store field value by line with the service
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -351,7 +351,7 @@ Scenario: _0154038 check the Deleting of the store field value by line with the 
 		And I finish line editing in "ItemList" table
 	* Check that the store field has been cleared
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
 		And I close all client application windows
 
@@ -377,11 +377,11 @@ Scenario: _0154039 check impossibility deleting of the store field by line with 
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -390,7 +390,7 @@ Scenario: _0154039 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 	
@@ -416,11 +416,11 @@ Scenario: _0154040 check the Deleting of the store field value by line with the 
 			| 'Item'    | 'Item key' |
 			| 'Service' | 'Rent'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
 	* Deleting of the store field value by line with the service
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -429,7 +429,7 @@ Scenario: _0154040 check the Deleting of the store field value by line with the 
 		And I finish line editing in "ItemList" table
 	* Check that the store field has been cleared
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
 		And I close all client application windows
 
@@ -455,11 +455,11 @@ Scenario: _0154041 check impossibility deleting of the store field by line with 
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -468,7 +468,7 @@ Scenario: _0154041 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 		
@@ -494,11 +494,11 @@ Scenario: _0154042 check the Deleting of the store field value by line with the 
 			| 'Item'    | 'Item key' |
 			| 'Service' | 'Rent'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
 	* Deleting of the store field value by line with the service
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -507,7 +507,7 @@ Scenario: _0154042 check the Deleting of the store field value by line with the 
 		And I finish line editing in "ItemList" table
 	* Check that the store field has been cleared
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
 		| 'Service'  | 'Rent'      | '1,000' | ''         |
 		And I close all client application windows
 
@@ -533,11 +533,11 @@ Scenario: _0154043 check impossibility deleting of the store field by line with 
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -546,7 +546,7 @@ Scenario: _0154043 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 
@@ -572,11 +572,11 @@ Scenario: _0154044 check impossibility deleting of the store field by line with 
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -585,7 +585,7 @@ Scenario: _0154044 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 
@@ -611,11 +611,11 @@ Scenario: _0154045 check impossibility deleting of the store field by line with 
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -624,7 +624,7 @@ Scenario: _0154045 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 
@@ -650,11 +650,11 @@ Scenario: _0154046 check impossibility deleting of the store field by line with 
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -663,7 +663,7 @@ Scenario: _0154046 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 	
@@ -689,11 +689,11 @@ Scenario: _0154047 check impossibility deleting of the store field by line with 
 			| 'Item'    | 'Item key' |
 			| 'Dress'   | 'M/White'     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 	* Delete store field by product line 
 		And I activate field named "ItemListStore" in "ItemList" table
@@ -702,7 +702,7 @@ Scenario: _0154047 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'     | 'Q'     | 'Store'    |
+		| 'Item'     | 'Item key'     | 'Quantity'     | 'Store'    |
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 

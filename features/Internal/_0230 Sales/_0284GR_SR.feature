@@ -141,7 +141,7 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		And I delete "$$Rov2GoodsReceipt028401$$" variable
 		And I save the current field value as "$$Rov2GoodsReceipt028401$$"
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                        | 'Basis' | 'Row ID'                     | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                    |
+			| '#' | 'Key'                        | 'Basis' | 'Row ID'                     | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                    |
 			| '1' | '$$Rov1GoodsReceipt028401$$' | ''      | '$$Rov1GoodsReceipt028401$$' | 'SR'        | '1,000' | ''          | ''             | '$$Rov1GoodsReceipt028401$$' |
 			| '2' | '$$Rov2GoodsReceipt028401$$' | ''      | '$$Rov2GoodsReceipt028401$$' | 'SR'        | '1,000' | ''          | ''             | '$$Rov2GoodsReceipt028401$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -160,7 +160,7 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Q'     | 'Unit' |
+			| 'Item'     | 'Item key'  | 'Quantity'     | 'Unit' |
 			| 'Trousers' | '38/Yellow' | '2,000' | 'pcs'  |
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
@@ -190,7 +190,7 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 			And I delete "$$Rov1SalesReturn028401$$" variable
 			And I save the current field value as "$$Rov1SalesReturn028401$$"
 			And "RowIDInfo" table contains lines
-				| '#' | 'Key'                       | 'Basis'                  | 'Row ID'                     | 'Next step' | 'Q'     | 'Basis key'                  | 'Current step' | 'Row ref'                    |
+				| '#' | 'Key'                       | 'Basis'                  | 'Row ID'                     | 'Next step' | 'Quantity'     | 'Basis key'                  | 'Current step' | 'Row ref'                    |
 				| '1' | '$$Rov1SalesReturn028401$$' | '$$GoodsReceipt028401$$' | '$$Rov1GoodsReceipt028401$$' | ''          | '1,000' | '$$Rov1GoodsReceipt028401$$' | 'SR'           | '$$Rov1GoodsReceipt028401$$' |
 				| '2' | '$$Rov1SalesReturn028401$$' | '$$GoodsReceipt028401$$' | '$$Rov2GoodsReceipt028401$$' | ''          | '1,000' | '$$Rov2GoodsReceipt028401$$' | 'SR'           | '$$Rov2GoodsReceipt028401$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -264,7 +264,7 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		And I click "Save" button		
 		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'pcs'  | 'Store 02' |
 		Then the number of "ItemList" table lines is "равно" "1"
 		And I go to line in "ItemList" table
@@ -274,11 +274,11 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		And I delete "$$Rov1SalesReturn28402$$" variable
 		And I save the current field value as "$$Rov1SalesReturn28402$$"
 		And "GoodsReceiptsTree" table contains lines
-			| 'Key'                      | 'Basis key'                 | 'Item'  | 'Item key' | 'Goods receipt'                               | 'Invoice' | 'GR'    | 'Q'     |
+			| 'Key'                      | 'Basis key'                 | 'Item'  | 'Item key' | 'Goods receipt'                               | 'Invoice' | 'GR'    | 'Quantity'     |
 			| '$$Rov1SalesReturn28402$$' | ''                          | 'Dress' | 'XS/Blue'  | ''                                            | '2,000'   | '2,000' | '2,000' |
 			| '$$Rov1SalesReturn28402$$' | '$$Rov1GoodsReceipt28402$$' | ''      | ''         | 'Goods receipt 125 dated 12.03.2021 08:56:32' | ''        | '2,000' | '2,000' |
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                      | 'Basis'                                       | 'Row ID'                    | 'Next step' | 'Q'     | 'Basis key'                 | 'Current step' | 'Row ref'                   |
+			| '#' | 'Key'                      | 'Basis'                                       | 'Row ID'                    | 'Next step' | 'Quantity'     | 'Basis key'                 | 'Current step' | 'Row ref'                   |
 			| '1' | '$$Rov1SalesReturn28402$$' | 'Goods receipt 125 dated 12.03.2021 08:56:32' | '$$Rov1GoodsReceipt28402$$' | ''          | '2,000' | '$$Rov1GoodsReceipt28402$$' | 'SR'           | '$$Rov1GoodsReceipt28402$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 	* Unlink line and check RowId tab
@@ -292,7 +292,7 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		Then the number of "GoodsReceiptsTree" table lines is "равно" "0"
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                  |
+			| '#' | 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                  |
 			| '1' | '$$Rov1SalesReturn28402$$' | ''      | '$$Rov1SalesReturn28402$$' | 'GR'        | '2,000' | ''          | ''             | '$$Rov1SalesReturn28402$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 	* Link line and check RowId tab
@@ -304,11 +304,11 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		And I click "Link" button
 		And I click "Ok" button
 		And "GoodsReceiptsTree" table contains lines
-			| 'Key'                      | 'Basis key'                 | 'Item'  | 'Item key' | 'Goods receipt'                               | 'Invoice' | 'GR'    | 'Q'     |
+			| 'Key'                      | 'Basis key'                 | 'Item'  | 'Item key' | 'Goods receipt'                               | 'Invoice' | 'GR'    | 'Quantity'     |
 			| '$$Rov1SalesReturn28402$$' | ''                          | 'Dress' | 'XS/Blue'  | ''                                            | '2,000'   | '2,000' | '2,000' |
 			| '$$Rov1SalesReturn28402$$' | '$$Rov1GoodsReceipt28402$$' | ''      | ''         | 'Goods receipt 125 dated 12.03.2021 08:56:32' | ''        | '2,000' | '2,000' |
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                      | 'Basis'                                       | 'Row ID'                    | 'Next step' | 'Q'     | 'Basis key'                 | 'Current step' | 'Row ref'                   |
+			| '#' | 'Key'                      | 'Basis'                                       | 'Row ID'                    | 'Next step' | 'Quantity'     | 'Basis key'                 | 'Current step' | 'Row ref'                   |
 			| '1' | '$$Rov1SalesReturn28402$$' | 'Goods receipt 125 dated 12.03.2021 08:56:32' | '$$Rov1GoodsReceipt28402$$' | ''          | '2,000' | '$$Rov1GoodsReceipt28402$$' | 'SR'           | '$$Rov1GoodsReceipt28402$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows

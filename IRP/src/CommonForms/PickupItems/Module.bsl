@@ -137,7 +137,8 @@ Procedure ItemTypeAfterSelection()
 				|	Items.ItemKeyCount,
 				|	&PriceType AS PriceType,
 				|	0 AS Price,
-				|	Items.Item.Description_en AS ItemPresentation
+				|	Items.Item.Description_en AS ItemPresentation,
+				|	Items.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
 				|FROM
 				|	Items AS Items
 				|		LEFT JOIN ItemBalance AS ItemBalance
@@ -249,7 +250,8 @@ Procedure ItemTypeAfterSelection()
 						|	Items.QuantityPickedOut AS PickedOut,
 						|	Items.ItemKeyCount,
 						|	ISNULL(Prices.Price, 0) AS Price,
-						|	Items.Item.Description_en AS Title
+						|	Items.Item.Description_en AS Title,
+						|	Items.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
 						|FROM
 						|	Items AS Items
 						|		LEFT JOIN Prices AS Prices
@@ -361,7 +363,8 @@ Function ItemListSelectionAfter(ParametersStructure)
 				 |	ItemPickedOut.Quantity AS QuantityPickedOut,
 				 |	ItemKeyTempTable.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
 				 |	NULL AS SerialLotNumber,
-				 |	PricesResult.Price
+				 |	PricesResult.Price,
+				 |	ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
 				 |FROM
 				 |	ItemKeyTempTable AS ItemKeyTempTable
 				 |		LEFT JOIN AccumulationRegister.R4011B_FreeStocks.Balance(&EndPeriod, Store IN (&Stores)
@@ -396,6 +399,7 @@ Function ItemListSelectionAfter(ParametersStructure)
 			TransferParameters.Insert("Price", QuerySelection.Price);
 			TransferParameters.Insert("UseSerialLotNumber", QuerySelection.UseSerialLotNumber);
 			TransferParameters.Insert("SerialLotNumber", QuerySelection.SerialLotNumber);
+			TransferParameters.Insert("isService", QuerySelection.isService);
 			ItemKeyListSelectionAfter(TransferParameters);
 		Else
 			While QuerySelection.Next() Do
@@ -409,6 +413,7 @@ Function ItemListSelectionAfter(ParametersStructure)
 				NewRow.Unit = QuerySelection.Unit;
 				NewRow.UseSerialLotNumber = QuerySelection.UseSerialLotNumber;
 				NewRow.SerialLotNumber = QuerySelection.SerialLotNumber;
+				NewRow.isService = QuerySelection.isService;
 			EndDo;
 		EndIf;
 	EndIf;
@@ -444,6 +449,7 @@ Procedure ItemKeyListSelection(Item, RowSelected, Field, StandardProcessing)
 	TransferParameters.Insert("Unit", ItemKeyCurrentData.Unit);
 	TransferParameters.Insert("UseSerialLotNumber", ItemKeyCurrentData.UseSerialLotNumber);
 	TransferParameters.Insert("SerialLotNumber", ItemKeyCurrentData.SerialLotNumber);
+	TransferParameters.Insert("isService", ItemKeyCurrentData.isService);
 	ItemKeyListSelectionAfter(TransferParameters);
 EndProcedure
 
@@ -465,6 +471,7 @@ Procedure ItemKeyListSelectionAfter(ParametersStructure)
 		ItemRow = ItemTableValue.Add();
 		ItemRow.Item = ParametersStructure.Item;
 		ItemRow.ItemKey = ParametersStructure.ItemKey;
+		ItemRow.isService = ParametersStructure.isService;
 		ItemRow.Quantity = 1;
 		ItemRow.Price = ParametersStructure.Price;
 		ItemRow.Unit = ParametersStructure.Unit;

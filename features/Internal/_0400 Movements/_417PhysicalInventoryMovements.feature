@@ -77,13 +77,13 @@ Scenario: _041701 check Physical inventory movements by the Register  "R4010 Act
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | '36/Yellow' |
-			| ''                                                 | 'Expense'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | 'XS/Blue'   |
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''          |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number'  |
+			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | '36/Yellow' | '' |
+			| ''                                                 | 'Expense'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | 'XS/Blue'   | ''   |
 		And I close all client application windows
 
 Scenario: _041702 check Physical inventory movements by the Register  "R4011 Free stocks"

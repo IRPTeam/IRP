@@ -150,7 +150,7 @@ Scenario: _028901 create document Goods Receipt based on Purchase invoice (with 
 	* Check RowId info
 		And I click "Show row key" button		
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key' | 'Basis'                                          | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key' | 'Basis'                                          | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'c9b5514d-364e-4712-bc66-6530bb6a9ec6' | ''          | '1,000'  | '06d436b9-6ac6-493d-a81d-c1bef6c8597e' | 'GR'           | 'c9b5514d-364e-4712-bc66-6530bb6a9ec6' |
 			| '2' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | '216a343e-3f69-40e5-a386-381f2dc9ed5f' | ''          | '12,000' | '42409c7c-a984-4411-b165-752fe75fe0a8' | 'GR'           | '216a343e-3f69-40e5-a386-381f2dc9ed5f' |
 			| '3' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'cbb88d81-b47c-4350-a555-6ab883274a1a' | ''          | '24,000' | 'cd747541-4559-4543-ba36-1f5b79b24fef' | 'GR'           | 'cbb88d81-b47c-4350-a555-6ab883274a1a' |
@@ -186,7 +186,7 @@ Scenario: _028902 create document Goods Receipt based on Purchase order (with PI
 	* Check RowId info
 		And I click "Show row key" button		
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key' | 'Basis'                                          | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key' | 'Basis'                                          | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'c9b5514d-364e-4712-bc66-6530bb6a9ec6' | ''          | '1,000'  | '06d436b9-6ac6-493d-a81d-c1bef6c8597e' | 'GR'           | 'c9b5514d-364e-4712-bc66-6530bb6a9ec6' |
 			| '2' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | '216a343e-3f69-40e5-a386-381f2dc9ed5f' | ''          | '12,000' | '42409c7c-a984-4411-b165-752fe75fe0a8' | 'GR'           | '216a343e-3f69-40e5-a386-381f2dc9ed5f' |
 			| '3' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'cbb88d81-b47c-4350-a555-6ab883274a1a' | ''          | '24,000' | 'cd747541-4559-4543-ba36-1f5b79b24fef' | 'GR'           | 'cbb88d81-b47c-4350-a555-6ab883274a1a' |
@@ -236,7 +236,7 @@ Scenario: _028905 create document Goods Receipt based on Inventory transfer
 				| 'Store'    | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Receipt basis'                                  | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return' |
 				| 'Store 03' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | '$$InventoryTransfer021030$$' | ''                 | ''         | ''                   | ''            | ''               | ''                         | ''             |
 			And "RowIDInfo" table contains lines
-				| 'Basis'                       | 'Next step' | 'Q'     | 'Current step'     |
+				| 'Basis'                       | 'Next step' | 'Quantity'     | 'Current step'     |
 				| '$$InventoryTransfer021030$$' | ''          | '3,000' | 'GR' |
 		And I close all client application windows
 	* Create document Goods Receipt based on Inventory transfer (Create button)
@@ -261,7 +261,7 @@ Scenario: _028905 create document Goods Receipt based on Inventory transfer
 		And I save the current field value as "$$Rov1GoodsReceipt028905$$"	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                         | 'Basis'                       | 'Row ID' | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref' |
+			| '#' | 'Key'                         | 'Basis'                       | 'Row ID' | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref' |
 			| '1' | '$$Rov1GoodsReceipt028905$$' | '$$InventoryTransfer021030$$' | '*'      | ''          | '3,000' | '*'         | 'GR'           | '*'       |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I click the button named "FormPost"
@@ -322,7 +322,7 @@ Scenario: _028930 check link/unlink form in the GR
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+		| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
 		| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'GR'           |
 		| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '15,000' | 'GR'           |
 		| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'GR'           |
@@ -358,7 +358,7 @@ Scenario: _028930 check link/unlink form in the GR
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'GR'           |
 			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '15,000' | 'GR'           |
 			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'GR'           |
@@ -396,7 +396,7 @@ Scenario: _028930 check link/unlink form in the GR
 			| 'pcs' |
 		And I select current line in "List" table
 		And "RowIDInfo" table contains lines
-			| 'Basis'                                          | 'Next step' | 'Q'      |
+			| 'Basis'                                          | 'Next step' | 'Quantity'      |
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' |
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '15,000' |
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '2,000'  |
@@ -439,7 +439,7 @@ Scenario: _028903 create document Goods Receipt based on Sales return (Create bu
 		And I delete "$$Rov2GoodsReceipt028903$$" variable
 		And I save the current field value as "$$Rov2GoodsReceipt028903$$"		
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                        | 'Basis'                                     | 'Row ID' | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref' |
+			| '#' | 'Key'                        | 'Basis'                                     | 'Row ID' | 'Next step' | 'Quantity'      | 'Basis key' | 'Current step' | 'Row ref' |
 			| '1' | '$$Rov1GoodsReceipt028903$$' | 'Sales return 32 dated 24.03.2021 14:27:53' | '*'      | ''          | '1,000'  | '*'         | 'GR'           | '*'       |
 			| '2' | '$$Rov2GoodsReceipt028903$$' | 'Sales return 32 dated 24.03.2021 14:27:53' | '*'      | ''          | '24,000' | '*'         | 'GR'           | '*'       |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -554,7 +554,7 @@ Scenario: _028932 cancel line in the PO and create GR
 			| '217' |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'    | 'Item key' | 'Q'     |
+			| '#' | 'Item'    | 'Item key' | 'Quantity'     |
 			| '2' | 'Service' | 'Interner' | '2,000' |
 		And I activate "Cancel" field in "ItemList" table
 		And I set "Cancel" checkbox in "ItemList" table

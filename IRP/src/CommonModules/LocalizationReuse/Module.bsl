@@ -1,4 +1,3 @@
-// @strict-types
 
 // Strings.
 // 
@@ -6,7 +5,7 @@
 //  LangCode - String - Lang code
 // 
 // Returns:
-// 	see Localization.Strings
+// 	See Localization.Strings
 Function Strings(LangCode) Export
 	Return LocalizationServer.LocalizationStrings(LangCode);
 EndFunction 
@@ -57,7 +56,7 @@ EndFunction
 // Returns:
 //  Boolean - Use multi language
 Function UseMultiLanguage(Val MetadataFullName, AddInfo = Undefined) Export
-	Return LocalizationServer.UseMultiLanguage(MetadataFullName, AddInfo);
+	Return LocalizationServer.UseMultiLanguage(MetadataFullName, , AddInfo);
 EndFunction
 
 // Get localization code.
@@ -79,7 +78,7 @@ EndFunction
 // Returns:
 //  Array of String - Fields list for descriptions
 Function FieldsListForDescriptions(Val SourceType) Export
-	Return LocalizationServer.FieldsListForDescriptions(SourceType);
+	Return LocalizationServer.FieldsListForDescriptions(String(SourceType));
 EndFunction
 
 // User language code.

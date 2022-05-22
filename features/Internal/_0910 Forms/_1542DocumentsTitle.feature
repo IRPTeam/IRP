@@ -325,16 +325,7 @@ Scenario: _02013 check the display of the header of the collapsible group in Rec
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
-Scenario: _02014 check the display of the header of the collapsible group in PhysicalCountByLocation
-	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
-	* Check the display of the header of the collapsible group
-		When check the display of the header of the collapsible group in PhysicalCountByLocation
-		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Store: Store 01" text
-	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
-	When I Check the steps for Exception
-        |'And I click Select button of  "Responsible person" field'|
-	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-	And I close all client application windows
+
 
 Scenario: _020140 check the display of the header of the collapsible group in Physical Inventory
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"

@@ -110,13 +110,13 @@ Scenario: _04011 check Goods receipt movements by the Register  "R4010 Actual st
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 115 dated 12.02.2021 15:10:35' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'             | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '5'         | 'Store 02'   | '36/Yellow' |
-			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '10'        | 'Store 02'   | 'S/Yellow'  |	
+			| 'Goods receipt 115 dated 12.02.2021 15:10:35' | ''            | ''                    | ''          | ''           | ''          | ''                  |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''           | ''          | ''                  |
+			| 'Register  "R4010 Actual stocks"'             | ''            | ''                    | ''          | ''           | ''          | ''                  |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''                  |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number' |
+			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '5'         | 'Store 02'   | '36/Yellow' | ''                  |
+			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '10'        | 'Store 02'   | 'S/Yellow'  | ''                  |
 		And I close all client application windows
 		
 Scenario: _04012 check Goods receipt movements by the Register  "R4017 Procurement of internal supply requests" (without ISR)

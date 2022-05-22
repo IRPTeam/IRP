@@ -334,7 +334,7 @@ Scenario: _003 creating Purchase invoice and checking close Batch wise over bala
 				| 'Item'  | 'Item key'  |
 				| 'High shoes' | '39/19SD' |
 			And I select current line in "List" table
-			And I input "4,000" text in "Q" field of "ItemList" table
+			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I input "50,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Posting Purchase invoice 9 009
@@ -401,8 +401,8 @@ Scenario: _004 creating Sales invoice by last date and checking the mechanism fo
 				| 'Item'  | 'Item key'  |
 				| 'Boots' | 'Boots/S-8' |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "600,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "600,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I move to "Other" tab
 			And I input "13.08.2021 16:53:01" text in "Date" field
@@ -495,7 +495,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 				| 'Item'  | 'Item key'  |
 				| 'Boots' | 'Boots/S-8' |
 			And I select current line in "List" table
-			And I input "500,000" text in "Q" field of "ItemList" table
+			And I input "500,000" text in "Quantity" field of "ItemList" table
 			And I input "50,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Posting Purchase invoice 9 009
@@ -710,9 +710,9 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| '9 100'  |
 		And I activate "Date" field in "List" table
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "400,000" text in "Q" field of "ItemList" table
+		And I input "400,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 	* Checking that the invoice is displayed as not relevance in the register BatchRelevance 
@@ -2100,9 +2100,9 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			| '1'      |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key' | 'Q'     |
+			| 'Item'       | 'Item key' | 'Quantity'     |
 			| 'High shoes' | '39/19SD'  | '2,000' |		
-		And I input "9,000" text in "Q" field of "ItemList" table
+		And I input "9,000" text in "Quantity" field of "ItemList" table
 		And I move to "Payments" tab
 		And I activate "Amount" field in "Payments" table
 		And I select current line in "Payments" table
@@ -2114,7 +2114,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			| 'Number' |
 			| '1'      |
 		And I select current line in "List" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I move to "Payments" tab
 		And I activate "Amount" field in "Payments" table
 		And I select current line in "Payments" table
@@ -2182,8 +2182,8 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 				| 'Item'  | 'Item key'  |
 				| 'Dress' | 'M/Brown' |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I input "20,000" text in "Landed cost" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I move to "Payments" tab

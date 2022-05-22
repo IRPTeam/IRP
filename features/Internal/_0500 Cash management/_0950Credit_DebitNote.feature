@@ -83,8 +83,8 @@ Scenario: _095001 preparation
 				| 'Item'  | 'Item key' |
 				| 'Boots' | '37/18SD'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "15,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "15,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I move to "Other" tab
 			And I expand "More" group
@@ -128,8 +128,8 @@ Scenario: _095001 preparation
 					| 'Item key' |
 					| 'L/Green'  |
 				And I select current line in "List" table
-				And I activate "Q" field in "ItemList" table
-				And I input "20,000" text in "Q" field of "ItemList" table
+				And I activate "Quantity" field in "ItemList" table
+				And I input "20,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 				And I input "550,00" text in "Price" field of "ItemList" table
 			* Change of date in Purchase invoice
@@ -179,8 +179,8 @@ Scenario: _095001 preparation
 					| 'Item key' |
 					| 'L/Green'  |
 				And I select current line in "List" table
-				And I activate "Q" field in "ItemList" table
-				And I input "20,000" text in "Q" field of "ItemList" table
+				And I activate "Quantity" field in "ItemList" table
+				And I input "20,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 				And I input "500,00" text in "Price" field of "ItemList" table
 			* Change of date in Purchase invoice

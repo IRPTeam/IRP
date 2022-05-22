@@ -286,22 +286,20 @@ Procedure FillDataTable(DataTable, AddDataProc)
 EndProcedure
 
 Procedure SetDrawingPicture(Drawing, QuerySelection)
-	BarcodeParameters = New Structure();
+	BarcodeParameters = BarcodeServer.GetBarcodeDrawparameters();
 	If Drawing.Name = "BarcodePicture" Then
 		If ValueIsFilled(QuerySelection.Barcode) Then
-			BarcodeParameters.Insert("Width", Round(Drawing.Width / 0.1));
-			BarcodeParameters.Insert("Height", Round(Drawing.Height / 0.1));
-			BarcodeParameters.Insert("Barcode", QuerySelection.Barcode);
-			BarcodeParameters.Insert("CodeType", QuerySelection.BarcodeType);
-			BarcodeParameters.Insert("ShowText", True);
-			BarcodeParameters.Insert("SizeOfFont", 14);
+			BarcodeParameters.Width = Round(Drawing.Width / 0.1);
+			BarcodeParameters.Height = Round(Drawing.Height / 0.1);
+			BarcodeParameters.Barcode = QuerySelection.Barcode;
+			BarcodeParameters.CodeType = QuerySelection.BarcodeType;
 			Drawing.Picture = BarcodeServer.GetBarcodePicture(BarcodeParameters);
 		Else
 			Drawing.Picture = New Picture();
 		EndIf;
 	ElsIf Drawing.Name = "QRPicture" Then
 		If ValueIsFilled(QuerySelection.Barcode) Then
-			BarcodeParameters.Insert("Barcode", QuerySelection.Barcode);
+			BarcodeParameters.Barcode = QuerySelection.Barcode;
 			Drawing.Picture = BarcodeServer.GetQRPicture(BarcodeParameters);
 		Else
 			Drawing.Picture = New Picture();

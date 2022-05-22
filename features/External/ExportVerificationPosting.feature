@@ -56,7 +56,7 @@ Scenario: create a test SO for VerificationPosting
 			| 'Item key' |
 			| 'M/White'  |
 		And I select current line in "List" table
-		And I input "8,000" text in "Q" field of "ItemList" table
+		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -71,7 +71,7 @@ Scenario: create a test SO for VerificationPosting
 			| 'Item key' |
 			| 'L/Green'  |
 		And I select current line in "List" table
-		And I input "20,000" text in "Q" field of "ItemList" table
+		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
@@ -122,7 +122,7 @@ Scenario: create a test SO for VerificationPosting by package
 			| 'Item key' |
 			| 'M/White'  |
 		And I select current line in "List" table
-		And I input "15,000" text in "Q" field of "ItemList" table
+		And I input "15,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -142,7 +142,7 @@ Scenario: create a test SO for VerificationPosting by package
 			| 'Description'    |
 			| 'Boots (12 pcs)' |
 		And I select current line in "List" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -157,7 +157,7 @@ Scenario: create a test SO for VerificationPosting by package
 			| 'Item key' |
 			| 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I input "50,000" text in "Q" field of "ItemList" table
+		And I input "50,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"

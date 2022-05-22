@@ -77,6 +77,7 @@ Procedure AskForChangeIcon()
 	OpenFileDialog.Multiselect = False;
 	OpenFileDialog.Title = R().S_026;
 	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
+	//@skip-warning
 	BeginPuttingFiles(Notify, , OpenFileDialog, True, UUID);
 EndProcedure
 

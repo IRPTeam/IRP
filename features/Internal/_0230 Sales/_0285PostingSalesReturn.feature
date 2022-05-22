@@ -101,7 +101,7 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 		// Then the form attribute named "Branch" became equal to "Distribution department"
 	* Check items tab
 		And "ItemList" table contains lines
-		| '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Sales invoice'                               | 'Revenue type' |'Sales person'   |
+		| '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Sales invoice'                               | 'Revenue type' |'Sales person'   |
 		| '1' | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000' | 'pcs'            | '113,71'     | '350,00'   | '18%' | ''              | '586,29'     | 'No'                | '700,00'       | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |'Alexander Orlov'|
 		| '2' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '2,000' | 'Boots (12 pcs)' | '2 729,05'   | '8 400,00' | '18%' | ''              | '14 070,95'  | 'No'                | '16 800,00'    | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |'Alexander Orlov'|
 		| '3' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '2,000' | 'pcs'            | '227,42'     | '700,00'   | '18%' | ''              | '1 172,58'   | 'No'                | '1 400,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |''               |
@@ -148,7 +148,7 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 // 	* Check Row Id info table
 // 		And I move to "Row ID Info" tab
 // 		And "RowIDInfo" table contains lines
-// 			| 'Key'                       | 'Basis'                                       | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+// 			| 'Key'                       | 'Basis'                                       | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 // 			| '$$Rov1SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 // 			| '$$Rov2SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 // 			| '$$Rov3SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
@@ -156,7 +156,7 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 // 	* Copy string and check Row ID Info tab
 // 		And I move to "Item list" tab
 // 		And I go to line in "ItemList" table
-// 			| '#' | 'Item'  | 'Item key' | 'Q'     |
+// 			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 // 			| '1' | 'Dress' | 'XS/Blue'  | '1,000' |
 // 		And in the table "ItemList" I click "Copy" button
 // 		And I activate field named "ItemListQuantity" in "ItemList" table
@@ -170,24 +170,24 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 // 		And I move to "Row ID Info" tab
 // 		And I click the button named "FormPost"
 // 		And "RowIDInfo" table contains lines
-// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step'   | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step'   | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 // 			| '$$Rov1SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'          | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 // 			| '$$Rov2SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'          | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 // 			| '$$Rov3SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
 // 			| '$$Rov4SalesReturn028501$$' | ''                                        | '$$Rov4SalesReturn028501$$'           | 'SC'          | '8,000'  | ''                                     | ''             | '$$Rov4SalesReturn028501$$'           |
 // 		Then the number of "RowIDInfo" table lines is "равно" "4"
 // 		And "RowIDInfo" table does not contain lines
-// 			| 'Key'                        | 'Q'     |
+// 			| 'Key'                        | 'Quantity'     |
 // 			| '$$Rov1SalesReturn028501$$' | '8,000' |
 // 	* Delete string and check Row ID Info tab
 // 		And I move to "Item list" tab
 // 		And I go to line in "ItemList" table
-// 			| '#' | 'Item'  | 'Item key' | 'Q'     |
+// 			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 // 			| '4' | 'Dress' | 'XS/Blue'  | '8,000' |
 // 		And in the table "ItemList" I click "Delete" button
 // 		And I move to "Row ID Info" tab
 // 		And "RowIDInfo" table contains lines
-// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 // 			| '$$Rov1SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 // 			| '$$Rov2SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 // 			| '$$Rov3SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
@@ -195,36 +195,36 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 // 	* Change quantity and check  Row ID Info tab
 // 		And I move to "Item list" tab
 // 		And I go to line in "ItemList" table
-// 			| '#' | 'Item'  | 'Item key' | 'Q'     |
+// 			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 // 			| '1' | 'Dress' | 'XS/Blue'  | '1,000' |
-// 		And I activate "Q" field in "ItemList" table
+// 		And I activate "Quantity" field in "ItemList" table
 // 		And I select current line in "ItemList" table
-// 		And I input "7,000" text in "Q" field of "ItemList" table
+// 		And I input "7,000" text in "Quantity" field of "ItemList" table
 // 		And I finish line editing in "ItemList" table
 // 		And "RowIDInfo" table contains lines
-// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 // 			| '$$Rov1SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 // 			| '$$Rov2SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 // 			| '$$Rov3SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
 // 		Then the number of "RowIDInfo" table lines is "равно" "3"
 // 		And I move to "Item list" tab
 // 		And I go to line in "ItemList" table
-// 			| '#' | 'Item'  | 'Item key' | 'Q'     |
+// 			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 // 			| '1' | 'Dress' | 'XS/Blue'  | '7,000' |
-// 		And I activate "Q" field in "ItemList" table
+// 		And I activate "Quantity" field in "ItemList" table
 // 		And I select current line in "ItemList" table
-// 		And I input "1,000" text in "Q" field of "ItemList" table
+// 		And I input "1,000" text in "Quantity" field of "ItemList" table
 // 		And I finish line editing in "ItemList" table
 // 	* Change checkbox Use Shipment confirmation and check RowIDInfo
 // 		And I move to "Item list" tab
 // 		And I go to line in "ItemList" table
-// 			| 'Item'  | 'Item key' | 'Q'     | 'Unit'           |
+// 			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit'           |
 // 			| 'Boots' | '36/18SD'  | '5,000' | 'Boots (12 pcs)' |
 // 		And I remove "Use shipment confirmation" checkbox in "ItemList" table
 // 		And I move to the tab named "GroupRowIDInfo"
 // 		And I click "Post" button
 // 		And "RowIDInfo" table contains lines
-// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 // 			| '$$Rov1SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 // 			| '$$Rov2SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 // 			| '$$Rov3SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
@@ -251,7 +251,7 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 // 		Then the form attribute named "Company" became equal to "Main Company"
 // 		Then the form attribute named "Store" became equal to "Store 02"
 // 		And "ItemList" table became equal
-// 			| '#' | 'Profit loss center'           | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
+// 			| '#' | 'Profit loss center'           | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
 // 			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
 // 			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '5,000' | 'pcs'            | '240,25'     | '350,00'   | '18%' | '175,00'        | '1 334,75'   | '1 575,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
 // 			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000' | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | 'Revenue'      |
@@ -275,7 +275,7 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 // 		And I click the button named "FormShowRowKey"
 // 		And I move to "Row ID Info" tab
 // 		And "RowIDInfo" table does not contain lines
-// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 // 			| '$$Rov1SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
 // 			| '$$Rov2SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 // 			| '$$Rov3SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
@@ -351,27 +351,27 @@ Scenario: _028509 create Sales return without bases document
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '1' | 'Dress' | 'M/White' | 'pcs' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "100" text in "Q" field of "ItemList" table
+		And I input "100" text in "Quantity" field of "ItemList" table
 		And I input "200" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200" text in "Q" field of "ItemList" table
+		And I input "200" text in "Quantity" field of "ItemList" table
 		And I input "210" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key' | 'Unit' |
 			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "300" text in "Q" field of "ItemList" table
+		And I input "300" text in "Quantity" field of "ItemList" table
 		And I input "250" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item'     | 'Q'       | 'Item key'  | 'Store'    | 'Unit' |
+			| 'Item'     | 'Quantity'       | 'Item key'  | 'Store'    | 'Unit' |
 			| 'Dress'    | '100,000' | 'M/White'   | 'Store 01' | 'pcs'  |
 			| 'Dress'    | '200,000' | 'L/Green'   | 'Store 01' | 'pcs'  |
 			| 'Trousers' | '300,000' | '36/Yellow' | 'Store 01' | 'pcs'  |
@@ -415,7 +415,7 @@ Scenario: _028510 check filling in Row Id info table in the SR
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                   |
+			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                   |
 			| '$$Rov1SalesReturn028509$$' | ''      | '$$Rov1SalesReturn028509$$' | ''          | '100,000' | ''          | ''             | '$$Rov1SalesReturn028509$$' |
 			| '$$Rov2SalesReturn028509$$' | ''      | '$$Rov2SalesReturn028509$$' | ''          | '200,000' | ''          | ''             | '$$Rov2SalesReturn028509$$' |
 			| '$$Rov3SalesReturn028509$$' | ''      | '$$Rov3SalesReturn028509$$' | ''          | '300,000' | ''          | ''             | '$$Rov3SalesReturn028509$$' |
@@ -423,7 +423,7 @@ Scenario: _028510 check filling in Row Id info table in the SR
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I activate field named "ItemListQuantity" in "ItemList" table
@@ -438,25 +438,25 @@ Scenario: _028510 check filling in Row Id info table in the SR
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                   |
+			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                   |
 			| '$$Rov1SalesReturn028509$$' | ''      | '$$Rov1SalesReturn028509$$' | ''          | '100,000' | ''          | ''             | '$$Rov1SalesReturn028509$$' |
 			| '$$Rov2SalesReturn028509$$' | ''      | '$$Rov2SalesReturn028509$$' | ''          | '200,000' | ''          | ''             | '$$Rov2SalesReturn028509$$' |
 			| '$$Rov3SalesReturn028509$$' | ''      | '$$Rov3SalesReturn028509$$' | ''          | '300,000' | ''          | ''             | '$$Rov3SalesReturn028509$$' |
 			| '$$Rov4SalesReturn028509$$' | ''      | '$$Rov4SalesReturn028509$$' | ''          | '208,000' | ''          | ''             | '$$Rov4SalesReturn028509$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                   |
+			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                   |
 			| '$$Rov2SalesReturn028509$$' | ''      | '$$Rov2SalesReturn028509$$' | ''          | '208,000' | ''          | ''             | '$$Rov2SalesReturn028509$$' |
 	* Delete string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'       |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'       |
 			| '4' | 'Dress' | 'L/Green'  | '208,000' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                   |
+			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                   |
 			| '$$Rov1SalesReturn028509$$' | ''      | '$$Rov1SalesReturn028509$$' | ''          | '100,000' | ''          | ''             | '$$Rov1SalesReturn028509$$' |
 			| '$$Rov2SalesReturn028509$$' | ''      | '$$Rov2SalesReturn028509$$' | ''          | '200,000' | ''          | ''             | '$$Rov2SalesReturn028509$$' |
 			| '$$Rov3SalesReturn028509$$' | ''      | '$$Rov3SalesReturn028509$$' | ''          | '300,000' | ''          | ''             | '$$Rov3SalesReturn028509$$' |
@@ -464,26 +464,26 @@ Scenario: _028510 check filling in Row Id info table in the SR
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                   |
+			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                   |
 			| '$$Rov1SalesReturn028509$$' | ''      | '$$Rov1SalesReturn028509$$' | ''          | '100,000' | ''          | ''             | '$$Rov1SalesReturn028509$$' |
 			| '$$Rov2SalesReturn028509$$' | ''      | '$$Rov2SalesReturn028509$$' | ''          | '7,000'   | ''          | ''             | '$$Rov2SalesReturn028509$$' |
 			| '$$Rov3SalesReturn028509$$' | ''      | '$$Rov3SalesReturn028509$$' | ''          | '300,000' | ''          | ''             | '$$Rov3SalesReturn028509$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '7,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 		
@@ -502,7 +502,7 @@ Scenario: _028511 copy SR and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Q'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Net amount' |
+			| '#' | 'Profit loss center' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Quantity'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Net amount' |
 			| '1' | ''              | 'Dress'    | 'M/White'   | 'No'                 | '100,000' | 'pcs'  | '3 050,85'   | '200,00' | '18%' | ''              | '20 000,00'    | ''                    | 'Store 01' | ''             | '16 949,15'  |
 			| '2' | ''              | 'Dress'    | 'L/Green'   | 'No'                 | '200,000' | 'pcs'  | '6 406,78'   | '210,00' | '18%' | ''              | '42 000,00'    | ''                    | 'Store 01' | ''             | '35 593,22'  |
 			| '3' | ''              | 'Trousers' | '36/Yellow' | 'No'                 | '300,000' | 'pcs'  | '11 440,68'  | '250,00' | '18%' | ''              | '75 000,00'    | ''                    | 'Store 01' | ''             | '63 559,32'  |
@@ -525,7 +525,7 @@ Scenario: _028511 copy SR and check filling in Row Id info table
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                   |
+			| 'Key'                       | 'Basis' | 'Row ID'                    | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                   |
 			| '$$Rov1SalesReturn028509$$' | ''      | '$$Rov1SalesReturn028509$$' | ''        | '100,000' | ''          | ''             | '$$Rov1SalesReturn028509$$' |
 			| '$$Rov2SalesReturn028509$$' | ''      | '$$Rov2SalesReturn028509$$' | ''        | '200,000' | ''          | ''             | '$$Rov2SalesReturn028509$$' |
 			| '$$Rov3SalesReturn028509$$' | ''      | '$$Rov3SalesReturn028509$$' | ''        | '300,000' | ''          | ''             | '$$Rov3SalesReturn028509$$' |
@@ -645,11 +645,11 @@ Scenario: _028515 create document Sales return based on SRO
 			And I save the current field value as "$$Rov2SalesReturn028515$$"			
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Key'                       | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Revenue type' |
+				| 'Key'                       | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Revenue type' |
 				| '$$Rov1SalesReturn028515$$' | 'Store 02' | ''                    | '1,000'                 | '1' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
 				| '$$Rov2SalesReturn028515$$' | 'Store 02' | ''                    | '12,000'                | '2' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '12,000' | 'pcs'  | '951,86'     | '520,00' | '18%' | ''              | '5 288,14'   | 'No'                | '6 240,00'     | 'Sales return order 106 dated 25.03.2021 12:10:03' | ''              | ''             |
 			And "RowIDInfo" table contains lines
-				| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Q'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
+				| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Quantity'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
 				| '1' | '$$Rov1SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov1SalesReturnOrder028515$$' | ''          | '1,000'  | '$$Rov1SalesReturnOrder028515$$' | 'SR'           | '$$Rov1SalesReturnOrder028515$$' |
 				| '2' | '$$Rov2SalesReturn028515$$' | 'Sales return order 106 dated 25.03.2021 12:10:03' | '$$Rov3SalesReturnOrder028515$$' | ''          | '12,000' | '$$Rov3SalesReturnOrder028515$$' | 'SR'           | '$$Rov3SalesReturnOrder028515$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -663,7 +663,7 @@ Scenario: _028515 create document Sales return based on SRO
 				And I finish line editing in "ItemList" table
 				And I click "Save" button
 				And "RowIDInfo" table contains lines
-					| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Q'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
+					| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Quantity'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
 					| '1' | '$$Rov1SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov1SalesReturnOrder028515$$' | 'GR'        | '1,000'  | '$$Rov1SalesReturnOrder028515$$' | 'SR'           | '$$Rov1SalesReturnOrder028515$$' |
 					| '2' | '$$Rov2SalesReturn028515$$' | 'Sales return order 106 dated 25.03.2021 12:10:03' | '$$Rov3SalesReturnOrder028515$$' | ''          | '12,000' | '$$Rov3SalesReturnOrder028515$$' | 'SR'           | '$$Rov3SalesReturnOrder028515$$' |
 				Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -683,7 +683,7 @@ Scenario: _028515 create document Sales return based on SRO
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"		
 		And I click "Show row key" button	
 		And "ItemList" table contains lines
-			| 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Revenue type' |
+			| 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Revenue type' |
 			| 'Store 02' | ''                    | '1,000'                 | '1' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
 			| 'Store 02' | ''                    | '36,000'                | '2' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '3,000' | 'Boots (12 pcs)' | '3 844,07'   | '8 400,00' | '18%' | ''              | '21 355,93'  | 'No'                | '25 200,00'    | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
 		And I go to line in "ItemList" table
@@ -700,7 +700,7 @@ Scenario: _028515 create document Sales return based on SRO
 		And I save the current field value as "$$Rov2SalesReturn028515$$"	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Q'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
+			| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Quantity'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
 			| '1' | '$$Rov1SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov1SalesReturnOrder028515$$' | ''          | '1,000'  | '$$Rov1SalesReturnOrder028515$$' | 'SR'           | '$$Rov1SalesReturnOrder028515$$' |
 			| '2' | '$$Rov2SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov2SalesReturnOrder028515$$' | ''          | '36,000' | '$$Rov2SalesReturnOrder028515$$' | 'SR'           | '$$Rov2SalesReturnOrder028515$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"

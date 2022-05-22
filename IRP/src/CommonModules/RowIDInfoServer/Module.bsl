@@ -1262,6 +1262,7 @@ Function FindOrCreateRowIDRef(RowID)
 	Query = New Query();
 	Query.Text =
 	"SELECT
+	|	RowIDs.RowID,
 	|	RowIDs.Ref
 	|FROM
 	|	Catalog.RowIDs AS RowIDs
@@ -1271,7 +1272,10 @@ Function FindOrCreateRowIDRef(RowID)
 	Query.SetParameter("RowID", RowID);
 	QueryResult = Query.Execute().Select();
 
-	If QueryResult.Next() Then
+	If QueryResult.Next() Then 
+		If QueryResult.RowID = RowID Then
+			Return QueryResult.Ref;
+		EndIf;
 		RowRefObject = QueryResult.Ref.GetObject();
 	Else
 		RowRefObject = Catalogs.RowIDs.CreateItem();
@@ -1284,27 +1288,34 @@ Function FindOrCreateRowIDRef(RowID)
 	Return RowRefObject.Ref;
 EndFunction
 
+Function GetMD5RowIDs(RowID)
+	AllAttributes = New Structure;
+	For Each Attr In Metadata.Catalogs.RowIDs.Attributes Do
+		If Not StrCompare(Attr.Name, "Hash") Then
+			Continue;
+		EndIf;
+		CurrentValue = RowID[Attr.Name];
+		AllAttributes.Insert(Attr.Name, CurrentValue);
+	EndDo;
+	Return CommonFunctionsServer.GetMD5(AllAttributes);
+EndFunction
+
+// Write row IDCatalog.
+// 
+// Parameters:
+//  Obj - CatalogObject.RowIDs - Obj
 Procedure WriteRowIDCatalog(Obj)
-	If Not ValueIsFilled(Obj.Ref) Then
+	If Obj.Ref.isEmpty() Then
 		// first write
+		Obj.Hash = GetMD5RowIDs(Obj);
 		Obj.Write();
 		Return;
 	EndIf;
 	
-	IsEqual = True;
-	For Each Attr In Metadata.Catalogs.RowIDs.Attributes Do
-		CurrentValue = Obj.Ref[Attr.Name];
-		NewValue = Obj[Attr.Name];
-		If Not ValueIsFilled(CurrentValue) And Not ValueIsFilled(NewValue) Then
-			Continue;
-		EndIf;
-		If CurrentValue <> NewValue Then
-			IsEqual = False;
-			Break;
-		EndIf;
-	EndDo;
+	Hash = GetMD5RowIDs(Obj);
 	
-	If Not IsEqual Then
+	If Not Obj.Hash = Hash Then
+		Obj.Hash = Hash;
 		Obj.Write();
 	EndIf;
 EndProcedure
@@ -1313,7 +1324,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	FieldsForCheckRowRef = Undefined;
 	CachedObjectBefore   = Undefined;
 	CachedObjectAfter    = Undefined;
-	If ValueIsFilled(Source.Ref) Then
+	If Not Source.Ref.isEmpty() Then
 		FieldsForCheckRowRef = GetFieldsForCheckRowRef(Source, RowRefObject, RecordersByRowRef);
 		CachedObjectBefore   = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
 	EndIf;
@@ -3059,13 +3070,29 @@ Function ExtractData_FromPhysicalInventory(BasisesTable, DataReceiver, AddInfo =
 	|		AND BasisesTable.BasisKey = ItemList.Key
 	|
 	|ORDER BY
-	|	ItemList.LineNumber";
+	|	ItemList.LineNumber
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	ItemList.SerialLotNumber,
+	|	case when ItemList.Difference < 0 Then -ItemList.Difference 
+	|	else ItemList.Difference end AS Quantity
+	|FROM
+	|	Document.PhysicalInventory.ItemList AS ItemList
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|WHERE
+	|	NOT ItemList.SerialLotNumber.Ref IS NULL";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
-	TableRowIDInfo     = QueryResults[1].Unload();
-	TableItemList      = QueryResults[2].Unload();
+	TableRowIDInfo        = QueryResults[1].Unload();
+	TableItemList         = QueryResults[2].Unload();
+	TableSerialLotNumbers = QueryResults[3].Unload();
 
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit,
@@ -3073,8 +3100,9 @@ Function ExtractData_FromPhysicalInventory(BasisesTable, DataReceiver, AddInfo =
 	EndDo;
 
 	Tables = New Structure();
-	Tables.Insert("ItemList", TableItemList);
-	Tables.Insert("RowIDInfo", TableRowIDInfo);
+	Tables.Insert("ItemList"        , TableItemList);
+	Tables.Insert("RowIDInfo"       , TableRowIDInfo);
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -7130,7 +7158,7 @@ Function GetFieldsToLock_ExternalLink_PhysicalInventory(ExternalDocAliase, Alias
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.StockAdjustmentAsSurplus 
 		Or ExternalDocAliase = Aliases.StockAdjustmentAsWriteOff Then
-		Result.Header   = "Store, Status, FillExpCount, UpdateExpCount, UpdatePhysCount";
+		Result.Header   = "Store, Status, FillExpCount, UpdatePhysCount";
 		Result.ItemList = "Item, ItemKey";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Store   , Store,
@@ -8428,7 +8456,7 @@ EndFunction
 #Region LockLinkedRows
 
 Function LinkedRowsIntegrityIsEnable()
-	Return Constants.EnableLinkedRowsIntegrity.Get();
+	Return RowIDInfoServerReuse.LinkedRowsIntegrityIsEnable();
 EndFunction
 
 #Region EventHandlers

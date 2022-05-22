@@ -74,15 +74,15 @@ Scenario: _201001 check filling in Store field in the document Sales order
 		And I select "dre" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "xs" from "Item key" drop-down list by string in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "sh" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check filling in Sales order
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -96,7 +96,7 @@ Scenario: _201001 check filling in Store field in the document Sales order
 		Then the form attribute named "Status" became equal to "Approved"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 	* Change store on Store 03 (not specified in agreement or settings)
@@ -108,7 +108,7 @@ Scenario: _201001 check filling in Store field in the document Sales order
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
 	* Cleaning the store value
@@ -116,7 +116,7 @@ Scenario: _201001 check filling in Store field in the document Sales order
 		And I click "OK" button
 	* Check filling in store from agreement
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 	* Choosing an agreement with an empty store field
@@ -127,7 +127,7 @@ Scenario: _201001 check filling in Store field in the document Sales order
 		And I select current line in "List" table
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 		And I close all client application windows
@@ -149,15 +149,15 @@ Scenario: _201002 check filling in Store field in the document Sales invoice
 		And I select "dre" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "xs" from "Item key" drop-down list by string in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "sh" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check filling in Sales order
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -165,7 +165,7 @@ Scenario: _201002 check filling in Store field in the document Sales invoice
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 	* Change store on Store 03 (not specified in agreement or settings)
@@ -177,7 +177,7 @@ Scenario: _201002 check filling in Store field in the document Sales invoice
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
 	* Cleaning the store value
@@ -185,7 +185,7 @@ Scenario: _201002 check filling in Store field in the document Sales invoice
 		And I click "OK" button
 	* Check filling in store from agreement
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 	* Choosing an agreement with an empty store field
@@ -197,7 +197,7 @@ Scenario: _201002 check filling in Store field in the document Sales invoice
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
 		And I close all client application windows
@@ -228,15 +228,15 @@ Scenario: _201003 check filling in Store field in the document Purchase order
 		And I select "dre" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "xs" from "Item key" drop-down list by string in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "sh" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check filling in Purchase order
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -244,7 +244,7 @@ Scenario: _201003 check filling in Store field in the document Purchase order
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Store" became equal to "Store 03"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
 	* Changing store on Store 02 (not specified in the partner terms or in the settings)
@@ -256,7 +256,7 @@ Scenario: _201003 check filling in Store field in the document Purchase order
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
 	* Cleaning the store value
@@ -264,7 +264,7 @@ Scenario: _201003 check filling in Store field in the document Purchase order
 		And I click "OK" button
 	* Check filling in store from user settings (store not specified in agreement)
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
 	* Re-selecting a partner term with an empty store and check filling in the store from user settings
@@ -274,7 +274,7 @@ Scenario: _201003 check filling in Store field in the document Purchase order
 			| 'Vendor Ferron, TRY' |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 03' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 03' |
 		And I close all client application windows
@@ -306,15 +306,15 @@ Scenario: _201004 check filling in Store field in the document Purchase invoice
 		And I select "dre" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "xs" from "Item key" drop-down list by string in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "sh" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check filling in Purchase order
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -322,7 +322,7 @@ Scenario: _201004 check filling in Store field in the document Purchase invoice
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
 	* Change of store on Store 04 (not specified either in the partner terms or in the settings)
@@ -334,7 +334,7 @@ Scenario: _201004 check filling in Store field in the document Purchase invoice
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 04' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 04' |
 	* Cleaning the store value
@@ -342,7 +342,7 @@ Scenario: _201004 check filling in Store field in the document Purchase invoice
 		And I click "OK" button
 	* Check filling in store from user settings (store in partner term not specified)
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
 	* Re-selecting a partner term with an empty store and check filling in the store from user settings
@@ -352,7 +352,7 @@ Scenario: _201004 check filling in Store field in the document Purchase invoice
 			| 'Vendor Ferron, TRY' |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 02' |
 			| 'Shirt' | '36/Red'   | '1,000' | 'Store 02' |
 		And I close all client application windows

@@ -1,166 +1,19 @@
-
-// @deprecated
-//Function ItemsInfo(Parameters, AddInfo = Undefined) Export
-//	Query = ItemInfo_Query(Parameters, AddInfo);
-//
-//	QueryResult = Query.Execute().Unload();
-//
-//	Return QueryResult;
-//EndFunction
-
-// @deprecated
-//Function ItemInfo_Query(Parameters, AddInfo)
-//
-//	Var Query;
-//	Query = New Query();
-//	Query.Text =
-//	"SELECT
-//	|	Items.Ref AS Item,
-//	|	PRESENTATION(Items.Ref) AS ItemPresentation
-//	|INTO ItemVT
-//	|FROM
-//	|	Catalog.Items AS Items
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT
-//	|	ItemKeys.Ref AS ItemKey,
-//	|	&PriceType AS PriceType,
-//	|	ItemKeys.Item AS Item,
-//	|	ItemVT.ItemPresentation AS ItemPresentation,
-//	|	ItemKeys.Item.ItemType AS ItemType,
-//	|	0 AS Remaining,
-//	|	ISNULL(ItemKeys.Item.Unit, VALUE(Catalog.Units.EmptyRef)) AS Unit,
-//	|	ISNULL(PriceList.Price, 0) AS Price,
-//	|	0 AS Quantity,
-//	|	0 AS TotalAmount,
-//	|	0 AS NetAmount,
-//	|	0 AS TaxAmount,
-//	|	CAST("""" AS STRING(200)) AS Info,
-//	|	0 AS OffersAmount
-//	|FROM
-//	|	Catalog.ItemKeys AS ItemKeys
-//	|		LEFT JOIN (SELECT
-//	|			PricesSliceLast.ItemKey AS ItemKey,
-//	|			PricesSliceLast.Price AS Price,
-//	|			PricesSliceLast.Unit AS Unit
-//	|		FROM
-//	|			InformationRegister.PricesByItemKeys.SliceLast(&Period, PriceType = &PriceType
-//	|			AND ItemKey.Item IN
-//	|				(SELECT
-//	|					ItemVT.Item
-//	|				FROM
-//	|					ItemVT)) AS PricesSliceLast) AS PriceList
-//	|		ON ItemKeys.Ref = PriceList.ItemKey
-//	|		AND ItemKeys.Item.Unit = PriceList.Unit
-//	|		INNER JOIN ItemVT AS ItemVT
-//	|		ON ItemKeys.Item = ItemVT.Item
-//	|GROUP BY
-//	|	ItemKeys.Ref,
-//	|	ItemKeys.Item.ItemType,
-//	|	PriceList.Price,
-//	|	ItemVT.ItemPresentation,
-//	|	ItemKeys.Item,
-//	|	ISNULL(ItemKeys.Item.Unit, VALUE(Catalog.Units.EmptyRef))
-//	|ORDER BY
-//	|	ItemPresentation
-//	|AUTOORDER";
-//
-//	QueryScheme = New QuerySchema();
-//	QueryScheme.SetQueryText(Query.Text);
-//
-//	If ValueIsFilled(Parameters.ItemType) Then
-//
-//		ItemVT = QueryScheme.QueryBatch.Get(0);
-//		Filters = ItemVT.Operators[0].Filter;
-//
-//		Expression = "Items.%1 IN HIERARCHY(&%1)";
-//
-//		Filters.Add(New QuerySchemaExpression(StrTemplate(Expression, "ItemType")));
-//	EndIf;
-//
-//	If ValueIsFilled(Parameters.SearchString) Then
-//
-//		ItemVT = QueryScheme.QueryBatch.Get(0);
-//		Filters = ItemVT.Operators[0].Filter;
-//
-//		Expression = "Items.Description_" + SessionParameters.LocalizationCode + " LIKE " + Char(34) + "%"
-//			+ Parameters.SearchString + "%" + Char(34);
-//
-//		Filters.Add(New QuerySchemaExpression(Expression));
-//	EndIf;
-//
-//	For Each Parameter In Parameters Do
-//		Query.Parameters.Insert(Parameter.Key, Parameter.Value);
-//	EndDo;
-//
-//	If Not Query.Parameters.Property("Period") Then
-//		Query.Parameters.Insert("Period", CurrentUniversalDate());
-//	EndIf;
-//
-//	Query.Text = QueryScheme.GetQueryText();
-//
-//	Return Query;
-//EndFunction
-
-// @deprecated
-//Function SpecialOffersInfo(Parameters, AddInfo = Undefined) Export
-//	Query = SpecialOffersInfo_Query(Parameters, AddInfo);
-//
-//	QueryResult = Query.Execute().Unload(QueryResultIteration.ByGroups);
-//
-//	Return QueryResult;
-//EndFunction
-
-// @deprecated
-//Function SpecialOffersInfo_Query(Parameters, AddInfo)
-//	Query = New Query();
-//	Query.Text =
-//	"SELECT
-//	|	SpecialOffers.Ref AS SpecialOffers,
-//	|	SpecialOffers.IsFolder AS IsFolder
-//	|FROM
-//	|	Catalog.SpecialOffers AS SpecialOffers
-//	|WHERE
-//	|	NOT SpecialOffers.DeletionMark
-//	|	AND
-//	|	NOT SpecialOffers.IsFolder
-//	|ORDER BY
-//	|	SpecialOffers.IsFolder,
-//	|	SpecialOffers.Ref
-//	|TOTALS
-//	|BY
-//	|	SpecialOffers ONLY HIERARCHY";
-//
-//	Return Query;
-//EndFunction
+// @strict-types
 
 // Description
 // 
 // Parameters:
-// 	TableItemKeys
-// 	* ItemKey
-// 	* PriceType
-// 	* Unit
-// 	Period
+// 	TableItemKeys - ValueTable:
+// 	* ItemKey - CatalogRef.ItemKeys
+// 	* PriceType - CatalogRef.PriceTypes
+// 	* Unit - CatalogRef.Units
+// 	Period - Date
 // 	AddInfo - Undefined - Description
 // Returns:
-// 	ValueTable - Description:
-// * ItemKey - CatalogRef.ItemKeys -
-// * PriceType - CatalogRef.PriceTypes -
-// * Unit - CatalogRef.Units -
-// * Price 
-// * Price 
+// 	See GetTableofResults 
 Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 
-	TableOfResults = New ValueTable();
-	TableOfResults.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
-	TableOfResults.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
-	TableOfResults.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
-	TableOfResults.Columns.Add("ItemKeyUnit", New TypeDescription("CatalogRef.Units"));
-	TableOfResults.Columns.Add("ItemUnit", New TypeDescription("CatalogRef.Units"));
-	TableOfResults.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);
-	TableOfResults.Columns.Add("hasSpecification", New TypeDescription("Boolean"));
+	TableOfResults = GetTableofResults();
 	TableWithSpecification = TableOfResults.CopyColumns();
 
 	TableWithOutSpecification = TableOfResults.CopyColumns();
@@ -200,6 +53,35 @@ Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 	Return TableOfResults;
 EndFunction
 
+// Get tableof results.
+// 
+// Returns:
+//  ValueTable - Get tableof results:
+// * ItemKey - CatalogRef.ItemKeys -
+// * PriceType - CatalogRef.PriceTypes -
+// * Unit - CatalogRef.Units -
+// * ItemKeyUnit - CatalogRef.Units -
+// * ItemUnit - CatalogRef.Units -
+// * Price - DefinedType.typePrice -
+// * hasSpecification - Boolean -
+Function GetTableofResults()
+	TableOfResults = New ValueTable();
+	TableOfResults.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
+	TableOfResults.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
+	TableOfResults.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
+	TableOfResults.Columns.Add("ItemKeyUnit", New TypeDescription("CatalogRef.Units"));
+	TableOfResults.Columns.Add("ItemUnit", New TypeDescription("CatalogRef.Units"));
+	TableOfResults.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);
+	TableOfResults.Columns.Add("hasSpecification", New TypeDescription("Boolean"));
+	Return TableOfResults
+EndFunction
+
+// Fill table of results.
+// 
+// Parameters:
+//  QuerySelection - QueryResultSelection - Query selection
+//  Table - ValueTable - Table
+//  TableOfResults - See GetTableofResults
 Procedure FillTableOfResults(QuerySelection, Table, TableOfResults)
 	QuerySelection.Reset();
 	TempMap = New Map();
@@ -212,18 +94,20 @@ Procedure FillTableOfResults(QuerySelection, Table, TableOfResults)
 		FillPropertyValues(NewRow, Row);
 		Price = ?(ValueIsFilled(QuerySelection.Price), QuerySelection.Price, 0);
 		If ValueIsFilled(Row.Unit) Then
-			ToUnit = ?(ValueIsFilled(Row.ItemKeyUnit), Row.ItemKeyUnit, Row.ItemUnit);
+			ToUnit = ?(ValueIsFilled(Row.ItemKeyUnit), Row.ItemKeyUnit, Row.ItemUnit); // CatalogRef.Units
 			If ValueIsFilled(ToUnit) Then
-				If TempMap.Get(Row.Unit) = Undefined Then
+				UnitValue = TempMap.Get(Row.Unit); // Map
+				If UnitValue = Undefined Then
 					UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, ToUnit);
 					Tmp = New Map();
 					Tmp.Insert(ToUnit, UnitFactor);
 					TempMap.Insert(Row.Unit, Tmp);
-				ElsIf TempMap.Get(Row.Unit).Get(ToUnit) = Undefined Then
+				ElsIf UnitValue.Get(ToUnit) = Undefined Then
 					UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, ToUnit);
-					TempMap.Get(Row.Unit).Insert(ToUnit, UnitFactor);
+					UnitValue.Insert(ToUnit, UnitFactor);
 				Else
-					UnitFactor = TempMap.Get(Row.Unit).Get(ToUnit);
+					
+					UnitFactor = UnitValue.Get(ToUnit); // Number
 				EndIf;
 			Else
 				UnitFactor = 1;
@@ -236,6 +120,22 @@ Procedure FillTableOfResults(QuerySelection, Table, TableOfResults)
 
 EndProcedure
 
+// Item price info.
+// 
+// Parameters:
+//  Parameters - Structure:
+// 	* ItemKey - CatalogRef.ItemKeys -
+// 	* RowPriceType - CatalogRef.PriceTypes -
+// 	* PriceType - CatalogRef.PriceTypes -
+// 	* Period - Date -
+// 	* Unit - CatalogRef.Units -
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Structure - Item price info:
+// * Price - DefinedType.typePrice -
+// * ItemKey - CatalogRef.ItemKeys -
+// * PriceType - CatalogRef.PriceTypes -
 Function ItemPriceInfo(Parameters, AddInfo = Undefined) Export
 
 	ItemTable = New ValueTable();
@@ -664,6 +564,14 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	Return QuerySelection;
 EndFunction
 
+// Item unit info.
+// 
+// Parameters:
+//  ItemKeyOrItem - CatalogRef.ItemKeys, CatalogRef.Items -
+// 
+// Returns:
+//  Structure - Item unit info:
+// * Unit - CatalogRef.Units, Undefined -
 Function ItemUnitInfo(ItemKeyOrItem) Export
 	If ValueIsFilled(ItemKeyOrItem) Then
 		If TypeOf(ItemKeyOrItem) = Type("CatalogRef.Items") Then
@@ -682,6 +590,232 @@ Function ItemUnitInfo(ItemKeyOrItem) Export
 	Return New Structure("Unit", Undefined);
 EndFunction
 
+// Get unit factor.
+// 
+// Parameters:
+//  ItemKey - CatalogRef.ItemKeys
+//  Unit - CatalogRef.Units
+// 
+// Returns:
+//  Number - Get unit factor
 Function GetUnitFactor(ItemKey, Unit) Export
 	Return Catalogs.Units.GetUnitFactor(Unit, ItemKey.Item.Unit);
 EndFunction
+
+#Region GetInfo
+
+// Get info by Items key.
+//
+//	ItemsKey - CatalogRef.ItemKeys, Array of CatalogRef.ItemKeys -
+//	AddInfo - Structure -
+// 
+// Returns:
+//  Array of Structure:
+// * Item - CatalogRef.Items -
+// * ItemKey - CatalogRef.ItemKeys -
+// * SerialLotNumber - CatalogRef.SerialLotNumbers -
+// * Unit - CatalogRef.Units -
+// * Quantity - DefinedType.typeQuantity
+// * ItemKeyUnit - CatalogRef.Units -
+// * ItemUnit - CatalogRef.Units -
+// * hasSpecification - Boolean -
+// * Barcode  - DefinedType.typeBarcode
+// * ItemType - CatalogRef.ItemTypes -
+// * UseSerialLotNumber - Boolean -
+Function GetInfoByItemsKey(ItemsKey, AddInfo = Undefined) Export
+	ItemKeyArray = New Array;
+	If TypeOf(ItemsKey) = Type("Array") Then
+		ItemKeyArray = ItemsKey;
+	Else
+		ItemKeyArray.Add(ItemsKey);
+	EndIf;
+	
+	ReturnValue = New Array();
+	Query = New Query();
+	Query.Text = "SELECT
+	|	ItemKey.Ref AS ItemKey,
+	|	ItemKey.Item AS Item,
+	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
+	|	CASE WHEN ItemKey.Unit = VALUE(Catalog.Units.EmptyRef) THEN
+	|		ItemKey.Item.Unit
+	|	ELSE
+	|		ItemKey.Unit
+	|	END AS Unit,
+	|	1 AS Quantity,
+	|	ItemKey.Unit AS ItemKeyUnit,
+	|	ItemKey.Item.Unit AS ItemUnit,
+	|	NOT ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
+	|	"""" AS Barcode,
+	|	ItemKey.Item.ItemType AS ItemType,
+	|	ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
+	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
+	|FROM
+	|	Catalog.ItemKeys AS ItemKey
+	|WHERE
+	|	ItemKey.Ref In (&ItemKeyArray)";
+	Query.SetParameter("ItemKeyArray", ItemKeyArray);
+	QueryExecution = Query.Execute();
+	If QueryExecution.IsEmpty() Then
+		Return ReturnValue;
+	EndIf;
+	QueryUnload = QueryExecution.Unload();
+	
+	For Each Row In QueryUnload Do
+		ItemStructure = New Structure();
+		For Each Column In QueryUnload.Columns Do
+			ItemStructure.Insert(Column.Name, Row[Column.Name]);
+		EndDo;
+		ReturnValue.Add(ItemStructure);
+	EndDo;
+
+	Return ReturnValue;
+
+EndFunction
+
+#EndRegion
+
+#Region Search
+
+// By barcode.
+// 
+// Parameters:
+//  Barcodes - See BarcodeServer.GetBarcodeTable
+// 
+// Returns:
+//  ValueTable - See GetStandardItemTable
+Function ByBarcodeTable(Barcodes) Export
+	StandardItemTable = GetStandardItemTable();
+	
+	Result = BarcodeServer.SearchByBarcodes_WithKey(Barcodes);
+	
+	For Each Row In Result Do
+		NewRow = StandardItemTable.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	
+	Return StandardItemTable;
+EndFunction
+
+// Get picture URL.
+// 
+// Parameters:
+//  ItemRef - CatalogRef.Items, CatalogRef.ItemKeys - Item ref
+// 
+// Returns:
+//  String - Get picture URL
+Function GetPictureURL(ItemRef) Export
+	PictureTable = PictureViewerServer.GetPicturesByObjectRef(ItemRef);
+	If PictureTable.Count() Then
+		Return PictureTable[0].Ref;
+	EndIf;
+	Return Catalogs.Files.EmptyRef();
+EndFunction
+
+// Get standard item table.
+// 
+// Returns:
+//  ValueTable - Get standard item table:
+// * Image  - CatalogRef.Files - URL to image
+// * Key - String -
+// * ItemType - CatalogRef.ItemTypes -
+// * Item - CatalogRef.Items -
+// * ItemKey - CatalogRef.ItemKeys -
+// * SerialLotNumber - CatalogRef.SerialLotNumbers -
+// * Unit - CatalogRef.Units -
+// * hasSpecification - Boolean -
+// * UseSerialLotNumber - Boolean -
+// * Quantity - DefinedType.typeQuantity
+// * Barcode  - DefinedType.typeBarcode
+Function GetStandardItemTable() Export
+	Table = New ValueTable();
+	
+	Table.Columns.Add("Key", New TypeDescription("String"), "Key", 15);
+	Table.Columns.Add("Image", New TypeDescription("CatalogRef.Files"), "", 2);
+	Table.Columns.Add("ItemType", New TypeDescription("CatalogRef.ItemTypes"), Metadata.Catalogs.ItemTypes.Synonym, 15);
+	Table.Columns.Add("Item", New TypeDescription("CatalogRef.Items"), Metadata.Catalogs.Items.Synonym, 15);
+	Table.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"), Metadata.Catalogs.ItemKeys.Synonym, 15);
+	Table.Columns.Add("SerialLotNumber", New TypeDescription("CatalogRef.SerialLotNumbers"), Metadata.Catalogs.SerialLotNumbers.Synonym, 15);
+	Table.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"), Metadata.Catalogs.Units.Synonym, 10);
+	Table.Columns.Add("hasSpecification", New TypeDescription("Boolean"), Metadata.Catalogs.ItemTypes.Synonym, 5);
+	Table.Columns.Add("UseSerialLotNumber", New TypeDescription("Boolean"), Metadata.Catalogs.ItemTypes.Attributes.UseSerialLotNumber.Synonym, 5);
+	
+	Table.Columns.Add("Quantity", Metadata.DefinedTypes.typeQuantity.Type, Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym, 15);
+	Table.Columns.Add("Barcode", Metadata.DefinedTypes.typeBarcode.Type, Metadata.InformationRegisters.Barcodes.Dimensions.Barcode.Synonym, 20);
+	Return Table
+EndFunction
+
+// Search by item description.
+// 
+// Parameters:
+//  DescriptionTable - See GetDescriptionTable
+// 
+// Returns:
+//  See GetStandardItemTable
+Function SearchByItemDescription(DescriptionTable) Export
+	Return GetStandardItemTable();
+EndFunction
+
+// Search by item code.
+// 
+// Parameters:
+//  CodeTable - See GetCodeTable
+// 
+// Returns:
+//  See GetStandardItemTable
+Function SearchByItemCode(CodeTable) Export
+	Return GetStandardItemTable();
+EndFunction
+
+// Search by item key description.
+// 
+// Parameters:
+//  DescriptionTable - See GetDescriptionTable
+// 
+// Returns:
+//  See GetStandardItemTable
+Function SearchByItemKeyDescription(DescriptionTable) Export
+	Return GetStandardItemTable();
+EndFunction
+
+// Search by item key code.
+// 
+// Parameters:
+//  CodeTable - See GetCodeTable
+// 
+// Returns:
+//  See GetStandardItemTable
+Function SearchByItemKeyCode(CodeTable) Export
+	Return GetStandardItemTable();
+EndFunction
+
+// Get description table.
+// 
+// Returns:
+//  ValueTable - Get description table:
+// * Key - String
+// * Description - String
+// * Quantity - DefinedType.typeQuantity
+Function GetDescriptionTable() Export
+	Table = New ValueTable();
+	Table.Columns.Add("Key", New TypeDescription("String"), "Key", 15);
+	Table.Columns.Add("Description", Metadata.CommonAttributes.Description_en.Type, "Key", 15);
+	Table.Columns.Add("Quantity", Metadata.DefinedTypes.typeQuantity.Type, Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym, 15);
+	Return Table;
+EndFunction
+
+// Get code table.
+// 
+// Returns:
+//  ValueTable - Get code table:
+// * Key - String
+// * Code - Number
+// * Quantity - DefinedType.typeQuantity
+Function GetCodeTable() Export
+	Table = New ValueTable();
+	Table.Columns.Add("Key", New TypeDescription("String"), "Key", 15);
+	Table.Columns.Add("Code", Metadata.Catalogs.ItemKeys.StandardAttributes.Code.Type, "Key", 15);
+	Table.Columns.Add("Quantity", Metadata.DefinedTypes.typeQuantity.Type, Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym, 15);
+	Return Table;
+EndFunction
+
+#EndRegion

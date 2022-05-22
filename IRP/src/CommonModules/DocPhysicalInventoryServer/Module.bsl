@@ -1,13 +1,21 @@
 #Region FORM
 
+// On create at server.
+// 
+// Parameters:
+//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
+//  Form  - See Document.PhysicalInventory.Form.DocumentForm
+//  Cancel - Boolean - Cancel
+//  StandardProcessing - Boolean - Standard processing
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
 		DocumentsServer.FillItemList(Object, Form);
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-		UpdatePhysicalCountByLocations(Object, Form);
+		Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
 	EndIf;
+	
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
@@ -16,7 +24,8 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	DocumentsServer.FillItemList(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
-	UpdatePhysicalCountByLocations(Object, Form);
+	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
+	SerialLotNumbersServer.FillSerialLotNumbersUse(Object);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -26,7 +35,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
-	UpdatePhysicalCountByLocations(Object, Form);
+	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
 EndProcedure
 
 #EndRegion
@@ -62,84 +71,191 @@ EndProcedure
 
 #EndRegion
 
+#Region FillItemList
+// Fill Item list
+// 
+// Parameters:
+//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
+//  UpdateExpCount - Boolean
+Procedure FillItemList(Object, UpdateExpCount) Export
+	ItemTables = GetRefilledItemTable(Object);
+
+	// Have no any phys count by location
+	If Not UpdateExpCount And ItemTables.PhysicalCount.Count() = 0 Then
+		Return;
+	EndIf;
+
+	ArrayOfFillingRows = New Array();
+	
+	CountName = ?(UpdateExpCount, "ExpCount", "PhysCount");
+	SearchTable = ?(UpdateExpCount, ItemTables.ActualStock, ItemTables.PhysicalCount);
+	
+	For Each Row In Object.ItemList Do
+		Row[CountName] = 0;
+	EndDo;
+	
+	StrFilter = New Structure("ItemKey, SerialLotNumber, Unit");
+	For Each Row In SearchTable Do
+		FillPropertyValues(StrFilter, Row);
+		FindRow = Object.ItemList.FindRows(StrFilter);	
+		NewRow = Undefined;
+		If FindRow.Count() Then
+			NewRow = FindRow[0];
+			NewRow[CountName] = NewRow[CountName] + Row[CountName];
+		Else
+			NewRow = Object.ItemList.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Key = New UUID;
+		EndIf;
+		
+		OldRows = ItemTables.ItemList.FindRows(New Structure("Key", NewRow.Key));
+		If OldRows.Count() = 0 OR OldRows.Count() AND OldRows[0][CountName] <> NewRow[CountName] Then
+			ArrayOfFillingRows.Add(NewRow);
+		EndIf;
+	EndDo;
+	OldRows = Object.ItemList.FindRows(New Structure(CountName, 0));
+	For Each OldRow In OldRows Do
+		ArrayOfFillingRows.Add(OldRow);
+	EndDo;
+			
+	ArrayOfFillingColumns = New Array();
+	ArrayOfFillingColumns.Add("ItemList.ItemKey");
+	If UpdateExpCount Then
+		ArrayOfFillingColumns.Add("ItemList.ExpCount");
+	Else
+		ArrayOfFillingColumns.Add("ItemList.PhysCount");
+	EndIf;
+	RecalculateItemList(Object, ArrayOfFillingRows, ArrayOfFillingColumns);
+EndProcedure	
+
+// Get refilled item table.
+// 
+// Parameters:
+//  Object - See Document.PhysicalInventory.Form.DocumentForm.Object
+// 
+// Returns:
+//  Structure - Get refilled item table:
+// * ItemList - ValueTable, ValueTree - 
+// * ActualStock - ValueTable, ValueTree - 
+// * PhysicalCount - ValueTable, ValueTree - 
+Function GetRefilledItemTable(Object)
+	
+	Query = New Query;
+	Query.TempTablesManager = New TempTablesManager();
+	Query.Text =
+		"SELECT
+		|	ItemList.Key,
+		|	ItemList.Item AS Item,
+		|	ItemList.ItemKey,
+		|	ItemList.UseSerialLotNumber,
+		|	ItemList.SerialLotNumber,
+		|	ItemList.Unit,
+		|	ItemList.PhysCount AS PhysCount,
+		|	ItemList.ExpCount AS ExpCount,
+		|	ItemList.ManualFixedCount AS ManualFixedCount,
+		|	ItemList.Difference,
+		|	ItemList.Description
+		|INTO ItemList
+		|FROM
+		|	&ItemList AS ItemList
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	"""" AS Key,
+		|	ActualStocksBalance.ItemKey.Item AS Item,
+		|	ActualStocksBalance.ItemKey,
+		|	ActualStocksBalance.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
+		|	ActualStocksBalance.SerialLotNumber,
+		|	CASE
+		|		WHEN ActualStocksBalance.ItemKey.Unit.Ref IS NULL
+		|			THEN ActualStocksBalance.ItemKey.Item.Unit
+		|		ELSE ActualStocksBalance.ItemKey.Unit
+		|	END AS Unit,
+		|	0 AS PhysCount,
+		|	ActualStocksBalance.QuantityBalance AS ExpCount,
+		|	0 AS ManualFixedCount,
+		|	0 AS Difference,
+		|	"""" AS Description
+		|INTO ActualStock
+		|FROM
+		|	AccumulationRegister.R4010B_ActualStocks.Balance(&Period, Store = &Store) AS ActualStocksBalance
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	PhysicalCountByLocationItemList.Key,
+		|	PhysicalCountByLocationItemList.ItemKey.Item AS Item,
+		|	PhysicalCountByLocationItemList.ItemKey,
+		|	PhysicalCountByLocationItemList.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
+		|	PhysicalCountByLocationItemList.SerialLotNumber,
+		|	PhysicalCountByLocationItemList.Unit,
+		|	PhysicalCountByLocationItemList.PhysCount,
+		|	PhysicalCountByLocationItemList.ExpCount,
+		|	0 AS ManualFixedCount,
+		|	PhysicalCountByLocationItemList.Difference,
+		|	"""" AS Description
+		|INTO PhysicalCount
+		|FROM
+		|	Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
+		|WHERE
+		|	PhysicalCountByLocationItemList.Ref.Status.Posting
+		|	AND NOT PhysicalCountByLocationItemList.Ref.DeletionMark
+		|	AND PhysicalCountByLocationItemList.Ref.PhysicalInventory = &PhysicalInventory";
+	Query.SetParameter("Store", Object.Store);
+	Query.SetParameter("PhysicalInventory", Object.Ref);
+	Query.SetParameter("Period", CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date));
+	Query.SetParameter("ItemList", Object.ItemList.Unload());
+	Query.Execute();
+	
+	Tables = New Structure;
+	ItemList = Query.TempTablesManager.Tables.Find("ItemList").GetData().Unload(); // ValueTable
+	Tables.Insert("ItemList", ItemList);
+	
+	ActualStock = Query.TempTablesManager.Tables.Find("ActualStock").GetData().Unload(); // ValueTable
+	Tables.Insert("ActualStock", ActualStock);
+	
+	PhysicalCount = Query.TempTablesManager.Tables.Find("PhysicalCount").GetData().Unload(); // ValueTable
+	Tables.Insert("PhysicalCount", PhysicalCount);
+	
+	Return Tables;
+	
+EndFunction
+
+Procedure RecalculateItemList(Object, ArrayOfFillingRows, ArrayOfFillingColumns)
+	
+	If ArrayOfFillingRows.Count() = 0 Then
+		Return;
+	EndIf;		
+	
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = "ItemList";
+	ServerParameters.IsBasedOn = True;
+	ServerParameters.ReadOnlyProperties = StrConcat(ArrayOfFillingColumns, ",");
+	ServerParameters.Rows = ArrayOfFillingRows;
+		
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	For Each PropertyName In StrSplit(ServerParameters.ReadOnlyProperties, ",") Do
+		Property = New Structure("DataPath", TrimAll(PropertyName));
+		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	EndDo;
+
+EndProcedure
+
+#EndRegion
+
+#Region CreatePhysicalCount
+
 Function GetArrayOfInstance(GenerateParameters) Export
 	Result = New Array();
-	If GenerateParameters.UseResponsiblePersonByRow Then
-		Query = New Query();
-		Query.Text =
-		"SELECT
-		|	PhysicalInventoryItemList.Key AS Key,
-		|	PhysicalInventoryItemList.ItemKey AS ItemKey,
-		|	PhysicalInventoryItemList.Unit AS Unit,
-		|	PhysicalInventoryItemList.ExpCount AS ExpCount,
-		|	PhysicalInventoryItemList.PhysCount AS PhysCount,
-		|	PhysicalInventoryItemList.Difference AS Difference,
-		|	PhysicalInventoryItemList.ResponsiblePerson AS ResponsiblePerson
-		|FROM
-		|	Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
-		|		LEFT JOIN Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
-		|		ON PhysicalCountByLocationItemList.Ref.PhysicalInventory = PhysicalInventoryItemList.Ref
-		|		AND PhysicalCountByLocationItemList.Key = PhysicalInventoryItemList.Key
-		|		AND PhysicalCountByLocationItemList.ItemKey = PhysicalInventoryItemList.ItemKey
-		|		AND
-		|		NOT PhysicalCountByLocationItemList.Ref.DeletionMark
-		|WHERE
-		|	PhysicalInventoryItemList.Ref = &PhysicalInventoryRef
-		|	AND PhysicalInventoryItemList.ResponsiblePerson <> VALUE(Catalog.Partners.EmptyRef)
-		|	AND PhysicalCountByLocationItemList.Key IS NULL
-		|TOTALS
-		|BY
-		|	ResponsiblePerson";
-		Query.SetParameter("PhysicalInventoryRef", GenerateParameters.ObjectRef);
-		QueryResult = Query.Execute();
-		QuerySelection  = QueryResult.Select(QueryResultIteration.ByGroups);
-
-		While QuerySelection.Next() Do
-			Instance = New Structure("ResponsiblePerson, ItemList", QuerySelection.ResponsiblePerson, New Array());
-			QuerySelectionDetails = QuerySelection.Select();
-			While QuerySelectionDetails.Next() Do
-				ItemListRow = New Structure();
-				ItemListRow.Insert("Key", QuerySelectionDetails.Key);
-				ItemListRow.Insert("ItemKey", QuerySelectionDetails.ItemKey);
-				ItemListRow.Insert("Unit", QuerySelectionDetails.Unit);
-				ItemListRow.Insert("ExpCount", QuerySelectionDetails.ExpCount);
-				ItemListRow.Insert("PhysCount", QuerySelectionDetails.PhysCount);
-				ItemListRow.Insert("Difference", QuerySelectionDetails.Difference);
-				Instance.ItemList.Add(ItemListRow);
-			EndDo;
-			Result.Add(Instance);
-		EndDo;
-	Else
-		Instance = New Structure("ResponsiblePerson, ItemList", Undefined, New Array());
-		For Index = 1 To GenerateParameters.CountDocsToCreate Do
-			Result.Add(Instance);
-		EndDo;
-	EndIf;
+	
+	Instance = New Structure("ItemList", New Array());
+	For Index = 1 To GenerateParameters.CountDocsToCreate Do
+		Result.Add(Instance);
+	EndDo;
 
 	Return Result;
 EndFunction
-
-Procedure UpdatePhysicalCountByLocations(Object, Form) Export
-	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
-	LinkedPhysicalCountByLocation = Documents.PhysicalCountByLocation.GetLinkedPhysicalCountByLocation(Object.Ref);
-
-	For Each Row In Object.ItemList Do
-		Row.PhysicalCountByLocation = Undefined;
-		Row.PhysicalCountByLocationPresentation = Undefined;
-		Row.Locked = False;
-	EndDo;
-
-	For Each Row In LinkedPhysicalCountByLocation Do
-		For Each LinkedRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
-			LinkedRow.PhysicalCountByLocation = Row.Ref;
-			LinkedRow.PhysicalCountByLocationPresentation = StrTemplate(R().InfoMessage_007, Row.Number, Row.Date);
-			LinkedRow.Locked = True;
-		EndDo;
-	EndDo;
-
-	Form.Items.GroupPhysicalCountByLocation.Visible = LinkedPhysicalCountByLocation.Count() > 0;
-	Form.Items.ItemListPhysicalCountByLocationPresentation.Visible = LinkedPhysicalCountByLocation.Count() > 0;
-EndProcedure
 
 Procedure CreatePhysicalCount(ObjectRef, GenerateParameters) Export
 	GenerateParameters.Insert("PhysicalInventory", ObjectRef);
@@ -149,44 +265,4 @@ Procedure CreatePhysicalCount(ObjectRef, GenerateParameters) Export
 	Documents.PhysicalCountByLocation.GeneratePhysicalCountByLocation(GenerateParameters);
 EndProcedure
 
-Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
-	Result = Documents.PhysicalInventory.GetItemListWithFillingExpCount(Ref, Store, ItemList);
-	ArrayOfResult = New Array();
-	For Each Row In Result Do
-		NewRow = New Structure("Key, Store, Item, ItemKey, Unit, ExpCount, PhysCount, ResponsiblePerson");
-		FillPropertyValues(NewRow, Row);
-		ArrayOfResult.Add(NewRow);
-	EndDo;
-	Return ArrayOfResult;
-EndFunction
-
-Function GetItemListWithFillingPhysCount(Ref) Export
-	Result = Documents.PhysicalInventory.GetItemListWithFillingPhysCount(Ref);
-	ArrayOfResult = New Array();
-	For Each Row In Result Do
-		NewRow = New Structure("Item, ItemKey, Unit, PhysCount, ExpCount");
-		FillPropertyValues(NewRow, Row);
-		ArrayOfResult.Add(NewRow);
-	EndDo;
-	Return ArrayOfResult;
-EndFunction
-
-Function HavePhysicalCountByLocation(PhysicalInventoryRef) Export
-	If Not ValueIsFilled(PhysicalInventoryRef) Then
-		Return False;
-	EndIf;
-	Query = New Query();
-	Query.Text =
-	"SELECT TOP 1
-	|	PhysicalCountByLocation.Ref
-	|FROM
-	|	Document.PhysicalCountByLocation AS PhysicalCountByLocation
-	|WHERE
-	|	PhysicalCountByLocation.PhysicalInventory = &PhysicalInventoryRef
-	|	AND
-	|	NOT PhysicalCountByLocation.DeletionMark";
-	Query.SetParameter("PhysicalInventoryRef", PhysicalInventoryRef);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	Return QuerySelection.Next();
-EndFunction
+#EndRegion

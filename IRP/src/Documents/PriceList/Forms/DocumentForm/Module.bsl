@@ -331,9 +331,9 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
-	If AdditionalParameters.FoundedItems.Count() Then
+	If Result.FoundedItems.Count() Then
 		SetVisible();
-		ItemData = AdditionalParameters.FoundedItems[0];
+		ItemData = Result.FoundedItems[0];
 		If Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItemKeys") Then
 			SearchInItemKeyList = Object.ItemKeyList.FindRows(New Structure("ItemKey", ItemData.ItemKey));
 			If SearchInItemKeyList.Count() Then
@@ -362,7 +362,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			Return;
 		EndIf;
 	Else
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(AdditionalParameters.Barcodes, ",")));
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(Result.Barcodes, ",")));
 	EndIf;
 EndProcedure
 #EndRegion

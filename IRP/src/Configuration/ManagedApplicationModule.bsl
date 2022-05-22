@@ -12,8 +12,10 @@ Procedure OnStart()
 	ClientType = PredefinedValue("Enum.SystemClientType.Other");
 
 #If MobileAppClient Then
+	//@skip-warning
 	ClientType = PredefinedValue("Enum.SystemClientType.MobileAppClient");
 #ElsIf MobileClient Then
+	//@skip-warning
 	ClientType = PredefinedValue("Enum.SystemClientType.MobileClient");
 #ElsIf ThickClientManagedApplication Then
 	ClientType = PredefinedValue("Enum.SystemClientType.ThickClientManagedApplication");
@@ -31,6 +33,7 @@ Procedure OnStart()
 	ClientApplication.SetCaption(ServiceSystemClient.GetProgramTitle());
 	
 	AttachIdleHandler("ConnectAllEquipments", 0.1, True);
+	
 EndProcedure
 
 // Before start.

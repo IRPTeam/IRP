@@ -98,14 +98,14 @@ Scenario: _042401 check Retail sales receipt movements by the Register  "R4010 A
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                     | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'                    | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                                   | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                                   | 'Expense'     | '15.03.2021 16:01:04' | '1'         | 'Store 01'   | 'XS/Blue'   |
-			| ''                                                   | 'Expense'     | '15.03.2021 16:01:04' | '2'         | 'Store 01'   | '38/Yellow' |
-			| ''                                                   | 'Expense'     | '15.03.2021 16:01:04' | '12'        | 'Store 01'   | '36/18SD'   |
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| 'Register  "R4010 Actual stocks"'                    | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''          |
+			| ''                                                   | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number'  |
+			| ''                                                   | 'Expense'     | '15.03.2021 16:01:04' | '1'         | 'Store 01'   | 'XS/Blue'   | ''   |
+			| ''                                                   | 'Expense'     | '15.03.2021 16:01:04' | '2'         | 'Store 01'   | '38/Yellow' | '' |
+			| ''                                                   | 'Expense'     | '15.03.2021 16:01:04' | '12'        | 'Store 01'   | '36/18SD'   | ''   |
 		And I close all client application windows
 
 Scenario: _042402 check Retail sales receipt movements by the Register  "R4011 Free stocks"

@@ -104,7 +104,7 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'      | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                               | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Quantity'      | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                               | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | 'Front office'       | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '137,29'     | 'pcs'            | ''                   | '10,000' | '100,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
 			| '2' | 'Front office'       | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000'  | '200,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
 			| '3' | 'Front office'       | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000'  | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '1 423,73'   | 'Yes'               |
@@ -123,7 +123,7 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "15 480,00"
 	* Change quantity
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key'   | 'Q'      |
+			| 'Item'  | 'Item key'   | 'Quantity'      |
 			| 'Dress' | 'S/Yellow'   | '10,000' |
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -175,7 +175,7 @@ Scenario: _018002 check filling in Row Id info table in the PI (PO-PI)
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Quantity'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
 			| '2' | '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
 			| '3' | '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
@@ -185,7 +185,7 @@ Scenario: _018002 check filling in Row Id info table in the PI (PO-PI)
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '1' | 'Dress' | 'S/Yellow'  | '5,000' |		
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I activate field named "ItemListQuantity" in "ItemList" table
@@ -199,7 +199,7 @@ Scenario: _018002 check filling in Row Id info table in the PI (PO-PI)
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000'  | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
 			| '2' | '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000'  | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
 			| '3' | '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000'  | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
@@ -207,17 +207,17 @@ Scenario: _018002 check filling in Row Id info table in the PI (PO-PI)
 			| '5' | '$$Rov5PurchaseInvoice018001$$' | ''                                             | '$$Rov5PurchaseInvoice018001$$'        | 'GR'        | '10,000' | ''                                     | ''             | '$$Rov5PurchaseInvoice018001$$'        |
 		Then the number of "RowIDInfo" table lines is "равно" "5"
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                        | 'Q'     |
+			| 'Key'                        | 'Quantity'     |
 			| '$$Rov1PurchaseInvoice018001$$' | '10,000' |
 	* Delete string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '5' | 'Dress' | 'S/Yellow'  | '10,000' |	
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Quantity'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
 			| '2' | '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
 			| '3' | '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
@@ -226,36 +226,36 @@ Scenario: _018002 check filling in Row Id info table in the PI (PO-PI)
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'     | 'Item key'  | 'Q'     |
+			| '#' | 'Item'     | 'Item key'  | 'Quantity'     |
 			| '3' | 'Trousers' | '36/Yellow' | '8,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Quantity'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
 			| '2' | '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
 			| '3' | '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '7,000' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
 			| '4' | '$$Rov4PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'GR'        | '60,000'| '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'     | 'Item key'  | 'Q'     |
+			| '#' | 'Item'     | 'Item key'  | 'Quantity'     |
 			| '3' | 'Trousers' | '36/Yellow' | '7,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "8,000" text in "Q" field of "ItemList" table
+		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Change checkbox Use Goods receipt and check RowIDInfo
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     | 'Unit'           |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit'           |
 			| 'Boots' | '36/18SD'  | '5,000' | 'Boots (12 pcs)' |
 		And I remove "Use goods receipt" checkbox in "ItemList" table			
 		And I move to the tab named "GroupRowIDInfo"
 		And I click "Post" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Quantity'     | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
 			| '2' | '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
 			| '3' | '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
@@ -286,7 +286,7 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Quantity'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | 'Front office'  | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '61,02'      | 'pcs'            | ''                   | '5,000' | '100,00' | '18%' | '100,00'        | '400,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '338,98'     | 'Yes'               |
 			| '2' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000' | '200,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '762,71'     | 'Yes'               |
 			| '3' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000' | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '1 423,73'   | 'Yes'               |
@@ -311,7 +311,7 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000'  | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
 			| '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000'  | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
 			| '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000'  | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
@@ -337,7 +337,7 @@ Scenario: _018004 create PI based on GR without PO
 		And I click "Ok" button
 	* Create PI and check creation
 		And "ItemList" table contains lines
-			| '#' | 'Profit loss center' | 'Price type' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Profit loss center' | 'Price type' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Quantity'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | ''              | ''           | 'Dress'    | 'XS/Blue'   | 'No'                 | ''           | 'pcs'            | ''                   | '12,000' | ''      | ''    | ''              | ''             | ''                    | ''                        | 'Store 02' | ''              | ''             | ''               | ''       | ''            | ''           | 'Yes'               |
 			| '2' | ''              | ''           | 'Trousers' | '38/Yellow' | 'No'                 | ''           | 'pcs'            | ''                   | '20,000' | ''      | ''    | ''              | ''             | ''                    | ''                        | 'Store 02' | ''              | ''             | ''               | ''       | ''            | ''           | 'Yes'               |
 			| '3' | ''              | ''           | 'Boots'    | '39/18SD'   | 'No'                 | ''           | 'Boots (12 pcs)' | ''                   | '2,000'  | ''      | ''    | ''              | ''             | ''                    | ''                        | 'Store 02' | ''              | ''             | ''               | ''       | ''            | ''           | 'Yes'               |
@@ -347,7 +347,7 @@ Scenario: _018004 create PI based on GR without PO
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "GoodsReceiptsTree" table became equal
-			| 'Item'     | 'Item key'  | 'Goods receipt'                              | 'Invoice' | 'GR'     | 'Q'      |
+			| 'Item'     | 'Item key'  | 'Goods receipt'                              | 'Invoice' | 'GR'     | 'Quantity'      |
 			| 'Dress'    | 'XS/Blue'   | ''                                           | '12,000'  | '12,000' | '12,000' |
 			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '10,000' | '10,000' |
 			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '2,000'  | '2,000'  |
@@ -411,11 +411,11 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 			And I click "Save" button							
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
+				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''                   | 'Vendor price, TRY' | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''                   | 'Vendor price, TRY' | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 			And "RowIDInfo" table contains lines
-				| 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+				| 'Basis'                                                 | 'Next step' | 'Quantity'      | 'Current step' |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'GR'          | '10,000' | 'ITO&PO&PI'    |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'GR'          | '50,000' | 'ITO&PO&PI'    |
 			Then the number of "RowIDInfo" table lines is "равно" "2"	
@@ -444,7 +444,7 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 		Then the form attribute named "Store" became equal to "Store 02"
 		And I click "Show row key" button	
 		And "ItemList" table contains lines
-			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
+			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
 			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''                   | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''                   | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 		And I go to line in "ItemList" table
@@ -473,7 +473,7 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 		And I click "Save" button	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                         | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '#' | 'Key'                         | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1PurchaseInvoice018005$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | 'GR'     | '10,000' | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
 			| '2' | '$$Rov2PurchaseInvoice018005$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'GR'     | '50,000' | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -551,8 +551,8 @@ Scenario: _018012 Purchase invoice creation without PO
 			| 'Item key' |
 			| 'Dress/A-8'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -567,8 +567,8 @@ Scenario: _018012 Purchase invoice creation without PO
 			| Item  | Item key  |
 			| Boots | Boots/S-8 |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "20,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "20,000" text in "Quantity" field of "ItemList" table
 		And I input "250,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
@@ -632,7 +632,7 @@ Scenario: _018013 create PI using form link/unlink
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#' | 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
+		| '#' | 'Basis'                                        | 'Next step' | 'Quantity'      | 'Current step' |
 		| '1' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '5,000'  | 'PI&GR'        |
 		| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -647,7 +647,7 @@ Scenario: _018013 create PI using form link/unlink
 		And I click "Ok" button
 		And I click "Save" button	
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                        | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                        | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Purchase order 217 dated 12.02.2021 12:45:05' | 'GR'        | '5,000' | 'PI&GR'        |
 			| '2' | ''                                             | ''          | '2,000' | ''             |	
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -667,7 +667,7 @@ Scenario: _018013 create PI using form link/unlink
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                        | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '5,000'  | 'PI&GR'        |
 			| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -692,7 +692,7 @@ Scenario: _018013 create PI using form link/unlink
 			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
 			| 'Service' | 'Interner' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Store'    |
 			| 'Dress' | 'S/Yellow'  | '5,000' | 'Store 02' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -702,7 +702,7 @@ Scenario: _018013 create PI using form link/unlink
 			| 'box Dress (8 pcs)' |
 		And I select current line in "List" table
 		And "RowIDInfo" table contains lines
-			| 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
+			| 'Basis'                                        | 'Next step' | 'Quantity'      | 'Current step' |
 			| 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '40,000' | 'PI&GR'        |
 			| 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
@@ -717,7 +717,7 @@ Scenario: _018015 cancel line in the PO and create PI
 			| '217' |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'    | 'Item key' | 'Q'     |
+			| '#' | 'Item'    | 'Item key' | 'Quantity'     |
 			| '2' | 'Service' | 'Interner' | '2,000' |
 		And I activate "Cancel" field in "ItemList" table
 		And I set "Cancel" checkbox in "ItemList" table
@@ -759,7 +759,7 @@ Scenario: _018016 create PI based on GR with two same items (creation based on)
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
-			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Q'      | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Is additional item cost' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Quantity'      | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Is additional item cost' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | 'en description is empty' | 'Dress' | 'XS/Blue'  | ''                   | 'No'                 | '1 507,12'   | 'pcs'  | '19,000' | ''                   | '520,00' | '18%' | ''              | '9 880,00'     | ''                    | ''                        | 'Store 02' | ''              | 'No'                      | ''             | 'Purchase order 1 111 dated 15.02.2022 12:31:27' | ''       | ''            | '8 372,88'   | 'Yes'               |
 			| '2' | 'en description is empty' | 'Dress' | 'M/White'  | ''                   | 'No'                 | '793,22'     | 'pcs'  | '10,000' | ''                   | '520,00' | '18%' | ''              | '5 200,00'     | ''                    | ''                        | 'Store 02' | ''              | 'No'                      | ''             | 'Purchase order 1 111 dated 15.02.2022 12:31:27' | ''       | ''            | '4 406,78'   | 'Yes'               |
 		And I close all client application windows
@@ -815,12 +815,12 @@ Scenario: _018017 create PI based on GR with two same items (link items)
 		And I click "Ok" button	
 	* Check
 		And "ItemList" table became equal
-			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Q'      | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Is additional item cost' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Quantity'      | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Is additional item cost' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | 'en description is empty' | 'Dress' | 'XS/Blue'  | ''                   | 'No'                 | '1 507,12'   | 'pcs'  | '19,000' | ''                   | '520,00' | '18%' | ''              | '9 880,00'     | ''                    | ''                        | 'Store 02' | ''              | 'No'                      | ''             | 'Purchase order 1 111 dated 15.02.2022 12:31:27' | ''       | ''            | '8 372,88'   | 'Yes'               |
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
-			| 'Key' | 'Basis'                                         | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key' | 'Basis'                                         | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '10,000' | '17c1c453-6971-467e-96a5-baadd8496c38' | 'PI'           | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
 			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '9,000'  | '5848e9dc-c303-4dfe-afef-4b2853214cac' | 'PI'           | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
 		And I close all client application windows
@@ -882,13 +882,13 @@ Scenario: _018018 create PI based on GR with two same items (add linked document
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
-			| 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Q'      | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Is additional item cost' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Quantity'      | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Is additional item cost' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| 'en description is empty' | 'Dress' | 'XS/Blue'  | ''                   | 'No'                 | '1 507,12'   | 'pcs'  | '19,000' | ''                   | '520,00' | '18%' | ''              | '9 880,00'     | ''                    | ''                        | 'Store 02' | ''              | 'No'                      | ''             | 'Purchase order 1 111 dated 15.02.2022 12:31:27' | ''       | ''            | '8 372,88'   | 'Yes'               |
 			| 'en description is empty' | 'Dress' | 'M/White'  | ''                   | 'No'                 | '793,22'     | 'pcs'  | '10,000' | ''                   | '520,00' | '18%' | ''              | '5 200,00'     | ''                    | ''                        | 'Store 02' | ''              | 'No'                      | ''             | 'Purchase order 1 111 dated 15.02.2022 12:31:27' | ''       | ''            | '4 406,78'   | 'Yes'               |	
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
-			| 'Key' | 'Basis'                                         | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| 'Key' | 'Basis'                                         | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '10,000' | '17c1c453-6971-467e-96a5-baadd8496c38' | 'PI'           | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
 			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '9,000'  | '5848e9dc-c303-4dfe-afef-4b2853214cac' | 'PI'           | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
 			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | 'f5b7bbaf-7525-4d01-a472-687190c70d35' | ''          | '5,000'  | '6ff368ba-803b-4c49-a03a-9d0f4a05e5bf' | 'PI'           | 'f5b7bbaf-7525-4d01-a472-687190c70d35' |

@@ -581,12 +581,12 @@ Scenario: _0401069 check Purchase invoice movements by the Register  "R4014 Seri
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Register  "R4014 Serial lot numbers"'           | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  |
-			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Item key' | 'Serial lot number' |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:12:15' | '10'        | 'Main Company' | 'Front office' | 'S/Yellow' | '0512'              |
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''            | ''                    | ''          | ''             | ''             | ''         | ''         | ''                  |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''             | ''         | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'           | ''            | ''                    | ''          | ''             | ''             | ''         | ''         | ''                  |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''         | ''                  |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Item key' | 'Serial lot number' |
+			| ''                                               | 'Receipt'     | '12.02.2021 15:12:15' | '10'        | 'Main Company' | 'Front office' | ''         | 'S/Yellow' | '0512'              |
 		And I close all client application windows
 
 Scenario: _0401070 check Purchase invoice movements by the Register  "R5022 Expenses" (PO-PI)
@@ -658,19 +658,19 @@ Scenario: _0401014 check Purchase invoice movements by the Register  "R4010 Actu
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '118' |
+			| '117' |
 	* Check movements by the Register  "R4010 Actual stocks"
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 118 dated 12.02.2021 16:08:41' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'                | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                               | 'Receipt'     | '12.02.2021 16:08:41' | '5'         | 'Store 02'   | '36/Yellow' |
-			
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                               | 'Receipt'     | '12.02.2021 15:12:15' | '10'        | 'Store 02'   | 'S/Yellow' | '0512'              |
+			| ''                                               | 'Receipt'     | '12.02.2021 15:12:15' | '24'        | 'Store 02'   | '37/18SD'  | ''                  |	
 		And I close all client application windows
 
 Scenario: _0401015 check Purchase invoice movements by the Register  "R4031 Goods in transit (incoming)" (one string use GR, 2 string not use GR)

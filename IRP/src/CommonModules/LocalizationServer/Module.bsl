@@ -6,7 +6,7 @@
 //  LangCode - String - Lang code
 // 
 // Returns:
-//  see LocalizationStrings - Strings
+//  see Localization.Strings
 Function LocalizationStrings(Val LangCode = "") Export
 	If IsBlankString(LangCode) Then
 		LangCode = Metadata.DefaultLanguage.LanguageCode;
@@ -143,6 +143,7 @@ Function UseMultiLanguage(Val MetadataFullName, Val LangCode = "", AddInfo = Und
 	MetadataFullName = StrReplace(MetadataFullName, "Manager.", ".");
 	MetadataObject = Metadata.FindByFullName(MetadataFullName);
 	DescriptionAttr = Metadata.CommonAttributes["Description_" + LangCode];
+	//@skip-check invocation-parameter-type-intersect
 	Content = DescriptionAttr.Content.Find(MetadataObject);
 
 	If Not Content = Undefined Then
@@ -170,7 +171,7 @@ EndFunction
 // Fields list for descriptions.
 // 
 // Parameters:
-//  Source - CatalogManager - Source
+//  Source - String - Source
 // 
 // Returns:
 //  Array of String - Fields list for descriptions

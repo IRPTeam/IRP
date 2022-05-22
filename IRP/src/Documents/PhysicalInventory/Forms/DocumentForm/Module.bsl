@@ -50,10 +50,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
 	
-	If EventName = "CreatedPhysicalCountByLocations" And Source = Object.Ref Then
-		UpdatePhysicalCountByLocationsAtServer();
-	EndIf;
-	
 	If EventName = "LockLinkedRows" Then
 		If Source <> ThisObject Then
 			LockLinkedRows();
@@ -68,8 +64,7 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.SetResponsiblePerson.Visible = Object.UseResponsiblePersonByRow;
-	Form.Items.ItemListResponsiblePerson.Visible = Object.UseResponsiblePersonByRow;
+	Return;
 EndProcedure
 
 #EndRegion
@@ -83,56 +78,15 @@ EndProcedure
 
 #EndRegion
 
-#Region RESPONSIBLE_PERSON
+#Region USE_SERIAL_LOT_NUMBERS
 
 &AtClient
-Procedure SetResponsiblePerson(Command)
-	SelectedRows = Items.ItemList.SelectedRows;
-	If Not SelectedRows.Count() Then
-		Return;
+Procedure UseSerialLotOnChange(Item)
+	If Object.ItemList.Count() Then
+		Object.UseSerialLot = Not Object.UseSerialLot;
 	EndIf;
-	Filter = New Structure("Employee", True);
-	FormParameters = New Structure("ChoiceMode, CloseOnChoice, Filter", True, True, Filter);
-	NotifyParameters = New Structure("SelectedRows", SelectedRows);
-	Notify = New NotifyDescription("OnChoiceResponsiblePerson", ThisObject, NotifyParameters);
-	OpenForm("Catalog.Partners.ChoiceForm", FormParameters, ThisObject, , , , Notify);
-EndProcedure
-
-&AtClient
-Procedure OnChoiceResponsiblePerson(Result, AdditionalsParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	For Each RowID In AdditionalsParameters.SelectedRows Do
-		Row = Object.ItemList.FindByID(RowID);
-		If Not ValueIsFilled(Row.ResponsiblePerson) Then
-			Row.ResponsiblePerson = Result;
-		EndIf;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure UseResponsiblePersonByRowOnChange(Item)
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-#EndRegion
-
-#Region PHYSICAL_COUNT_BY_LOCATION
-
-&AtClient
-Procedure PhysicalCountByLocationListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure PhysicalCountByLocationListOnChange(Item)
-	UpdatePhysicalCountsByLocations();
-EndProcedure
-
-&AtServer
-Procedure UpdatePhysicalCountByLocationsAtServer()
-	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
+	
+	DocPhysicalInventoryClient.UseSerialLotOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -188,6 +142,29 @@ EndProcedure
 
 #EndRegion
 
+#Region SERIAL_LOT_NUMBERS
+&AtClient
+Procedure ItemListSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item", Items.ItemList.CurrentData.Item);
+	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
+
+	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item", Items.ItemList.CurrentData.Item);
+	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
+
+	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_KEY
 
 &AtClient
@@ -201,11 +178,16 @@ EndProcedure
 
 &AtClient
 Procedure ItemListPhysCountOnChange(Item)
-	CurrentRow = Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-	CurrentRow.Difference = CurrentRow.PhysCount - CurrentRow.ExpCount;
+	DocPhysicalInventoryClient.ItemListPhysCountOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region MANUAL_COUNT
+
+&AtClient
+Procedure ItemListManualFixedCountOnChange(Item)
+	DocPhysicalInventoryClient.ItemListManualFixedCountOnChange(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -306,25 +288,30 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
-Procedure FillExpCount(Command)
-	DocPhysicalInventoryClient.FillExpCount(Object, ThisObject);
+Procedure LoadDataFromTable(Command)
+	OpenForm("CommonForm.LoadDataFromTable", , ThisObject, , , , New NotifyDescription("LoadDataFromTableEnd", ThisObject));
 EndProcedure
 
 &AtClient
-Procedure UpdateExpCount(Command)
-	DocPhysicalInventoryClient.UpdateExpCount(Object, ThisObject);
-	UpdatePhysicalCountsByLocations();
+Procedure LoadDataFromTableEnd(Result, AdditionalParameters) Export
+	If Result <> Undefined And Not IsBlankString(Result) Then
+		ViewClient_V2.ItemListLoad(Object, ThisObject, Result);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure FillExpCount(Command)
+	FillItemList(True);
 EndProcedure
 
 &AtClient
 Procedure UpdatePhysCount(Command)
-	DocPhysicalInventoryClient.UpdatePhysCount(Object, ThisObject);
-	UpdatePhysicalCountsByLocations();
+	FillItemList(False);
 EndProcedure
 
 &AtServer
-Procedure UpdatePhysicalCountsByLocations()
-	DocPhysicalInventoryServer.UpdatePhysicalCountByLocations(Object, ThisObject);
+Procedure FillItemList(UpdateExpCount)
+	DocPhysicalInventoryServer.FillItemList(Object, UpdateExpCount);
 EndProcedure
 
 &AtClient
@@ -334,7 +321,9 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
+	Settings = BarcodeClient.GetBarcodeSettings();
+	Settings.Filter.DisableIfIsService = True;
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, , , Settings);
 EndProcedure
 
 &AtClient

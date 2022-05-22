@@ -33,17 +33,9 @@ Function CreateAddDataProc(Info, AddInfo)
 		DataProc = ExternalDataProcessors.Create(Info.ExternalDataProc.PathToExtDataProcForTest,
 			Info.ExternalDataProcName);
 	Else
-#If ThickClientOrdinaryApplication Then
-		TmpFile = GetTempFileName();
-		Info.ExternalDataProc.DataProcStorage.Get().Write(TmpFile);
-		DataProc = ExternalDataProcessors.Create(TmpFile);
-		DeleteFiles(TmpFile);
-#Else
-			ConnectedDataProc(Info, AddInfo);
-			DataProc = ExternalDataProcessors.Create(Info.ExternalDataProcName);
-#EndIf
-	EndIf
-	;
+		ConnectedDataProc(Info, AddInfo);
+		DataProc = ExternalDataProcessors.Create(Info.ExternalDataProcName);
+	EndIf;
 
 	Return DataProc;
 EndFunction

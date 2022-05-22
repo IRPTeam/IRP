@@ -835,11 +835,6 @@ Scenario: _2990016 filling Physical count by location (mobile form)
 		Then "Enter a barcode" window is opened
 		And I input "899007788" text in the field named "InputFld"
 		And I click the button named "OK"
-		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' | 'Phys. count' |
-			| 'Product 2 with SLN' | 'UNIQ'     | '1,000'       |
-		And I activate "Serial lot number" field in "ItemList" table
-		And I select current line in "ItemList" table
 		Then "Row form" window is opened
 		And I click Choice button of the field named "SerialLotNumber"
 		Then the number of "List" table lines is "равно" 0

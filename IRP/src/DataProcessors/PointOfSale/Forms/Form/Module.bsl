@@ -196,22 +196,8 @@ EndProcedure
 &AtClient
 Procedure AddItemKeyToItemList(ItemKey)
 	
-	Filter = New Structure("ItemKey", ItemKey);
-	ExistingRows = Object.ItemList.FindRows(Filter);
-	
-	If ExistingRows.Count() Then
-		Row = ExistingRows[0];
-		ViewClient_V2.SetItemListQuantity(Object, ThisObject, Row, Row.Quantity + 1);
-	Else
-		FillingValues = New Structure("ItemKey", ItemKey);
-		ViewClient_V2.ItemListAddFilledRow(Object, ThisObject, FillingValues);
-	EndIf;
-	
-	EnabledPaymentButton();
-	CurrentData = Items.ItemList.CurrentData;
-	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
-	
-	FillSalesPersonInItemList()
+	Result = New Structure("FoundedItems", GetItemInfo.GetInfoByItemsKey(ItemKey));
+	SearchByBarcodeEnd(Result, New Structure());
 	
 EndProcedure
 
@@ -239,6 +225,7 @@ EndProcedure
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	If Result.FoundedItems.Count() Then
+		FillSalesPersonInItemList();
 		
 		NotifyParameters = New Structure();
 		NotifyParameters.Insert("Form", ThisObject);
@@ -246,7 +233,6 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		SetDetailedInfo("");
 		DocumentsClient.PickupItemsEnd(Result.FoundedItems, NotifyParameters);
 		EnabledPaymentButton();
-		FillSalesPersonInItemList();
 		
 	Else
 		

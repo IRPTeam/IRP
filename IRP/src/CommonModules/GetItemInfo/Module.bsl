@@ -602,6 +602,74 @@ Function GetUnitFactor(ItemKey, Unit) Export
 	Return Catalogs.Units.GetUnitFactor(Unit, ItemKey.Item.Unit);
 EndFunction
 
+#Region GetInfo
+
+// Get info by Items key.
+//
+//	ItemsKey - CatalogRef.ItemKeys, Array of CatalogRef.ItemKeys -
+//	AddInfo - Structure -
+// 
+// Returns:
+//  Array of Structure:
+// * Item - CatalogRef.Items -
+// * ItemKey - CatalogRef.ItemKeys -
+// * SerialLotNumber - CatalogRef.SerialLotNumbers -
+// * Unit - CatalogRef.Units -
+// * Quantity - DefinedType.typeQuantity
+// * ItemKeyUnit - CatalogRef.Units -
+// * ItemUnit - CatalogRef.Units -
+// * hasSpecification - Boolean -
+// * Barcode  - DefinedType.typeBarcode
+// * ItemType - CatalogRef.ItemTypes -
+// * UseSerialLotNumber - Boolean -
+Function GetInfoByItemsKey(ItemsKey, AddInfo = Undefined) Export
+	ItemKeyArray = New Array;
+	If TypeOf(ItemsKey) = Type("Array") Then
+		ItemKeyArray = ItemsKey;
+	Else
+		ItemKeyArray.Add(ItemsKey);
+	EndIf;
+	
+	ReturnValue = New Array();
+	Query = New Query();
+	Query.Text = "SELECT
+	|	ItemKey.Ref AS ItemKey,
+	|	ItemKey.Item AS Item,
+	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
+	|	Unit AS Unit,
+	|	1 AS Quantity,
+	|	ItemKey.Unit AS ItemKeyUnit,
+	|	ItemKey.Item.Unit AS ItemUnit,
+	|	NOT ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
+	|	"""" AS Barcode,
+	|	ItemKey.Item.ItemType AS ItemType,
+	|	ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
+	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
+	|FROM
+	|	Catalog.ItemKeys AS ItemKey
+	|WHERE
+	|	ItemKey.Ref In (&ItemKeyArray)";
+	Query.SetParameter("ItemKeyArray", ItemKeyArray);
+	QueryExecution = Query.Execute();
+	If QueryExecution.IsEmpty() Then
+		Return ReturnValue;
+	EndIf;
+	QueryUnload = QueryExecution.Unload();
+	
+	For Each Row In QueryUnload Do
+		ItemStructure = New Structure();
+		For Each Column In QueryUnload.Columns Do
+			ItemStructure.Insert(Column.Name, Row[Column.Name]);
+		EndDo;
+		ReturnValue.Add(ItemStructure);
+	EndDo;
+
+	Return ReturnValue;
+
+EndFunction
+
+#EndRegion
+
 #Region Search
 
 // By barcode.

@@ -1,7 +1,9 @@
 
+#Region Barcode
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	Settings = BarcodeClient.GetBarcodeSettings();
+	//@skip-warning
 	Settings.MobileBarcodeModule = ThisObject;
 	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, , Settings);
 EndProcedure
@@ -74,13 +76,6 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
 EndProcedure
 
-&AtClient
-Procedure OpenRow(Command)
-	RowSelected = Items.ItemList.CurrentRow;
-	StartEditQuantity(RowSelected);
-EndProcedure
-
-
 // Scan barcode end mobile.
 // 
 // Parameters:
@@ -113,6 +108,14 @@ Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
 			Message = StrTemplate(R().S_019, Barcode);
 		EndIf;
 	EndIf;
+EndProcedure
+
+#EndRegion
+
+&AtClient
+Procedure OpenRow(Command)
+	RowSelected = Items.ItemList.CurrentRow;
+	StartEditQuantity(RowSelected);
 EndProcedure
 
 &AtClient

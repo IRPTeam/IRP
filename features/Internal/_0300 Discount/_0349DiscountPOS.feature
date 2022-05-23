@@ -24,14 +24,19 @@ Scenario: _034902 check discount price type calculation in POS
 		And I go to line in "ItemsPickup" table
 			| 'Item'  |
 			| 'Dress' |
-		And I go to line in "ItemKeysPickup" table
-			| 'Presentation' |
-			| 'XS/Blue'      |
-		And I select current line in "ItemKeysPickup" table
-		And I go to line in "ItemKeysPickup" table
-			| 'Presentation' |
-			| 'M/White'      |
-		And I select current line in "ItemKeysPickup" table
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'                |
+			| 'Dress, XS/Blue' |
+		And I select current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'  |
+			| 'Dress' |
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'                |
+			| 'Dress, M/White' |
+		And I select current line in "ItemsPickup" table
 	* Check calculation
 		And I click "Discount document" button
 		And I go to line in "Offers" table
@@ -48,10 +53,11 @@ Scenario: _034902 check discount price type calculation in POS
 		And I go to line in "ItemsPickup" table
 			| 'Item'  |
 			| 'Dress' |
-		And I go to line in "ItemKeysPickup" table
-			| 'Presentation' |
-			| 'L/Green'      |
-		And I select current line in "ItemKeysPickup" table
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'                |
+			| 'Dress, L/Green' |
+		And I select current line in "ItemsPickup" table
 		And I click "Discount document" button
 		And in the table "Offers" I click "OK" button
 		And "ItemList" table became equal

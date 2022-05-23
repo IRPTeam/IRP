@@ -41,3 +41,36 @@ Function CheckFilling(Object) Export
 	EndDo;
 	Return IsOk;
 EndFunction
+
+// Create new serial lot number.
+// 
+// Parameters:
+//  Options - See GetSeriallotNumerOptions
+// 
+// Returns:
+//  
+Function CreateNewSerialLotNumber(Options) Export
+	NewSerial = Catalogs.SerialLotNumbers.CreateItem();
+	NewSerial.Description = Options.Description;
+	NewSerial.SerialLotNumberOwner = Options.Owner;
+	NewSerial.Write();
+	
+	Return NewSerial.Ref;
+EndFunction
+
+
+// Get seriallot numer options.
+// 
+// Returns:
+//  Structure - Get seriallot numer options:
+// * Description - String -
+// * Owner - Undefined -
+// * Barcode - String -
+Function GetSeriallotNumerOptions() Export
+	Str = New Structure();
+	Str.Insert("Description", "");
+	Str.Insert("Owner", Undefined);
+	Str.Insert("Barcode", "");
+	
+	Return Str;
+EndFunction

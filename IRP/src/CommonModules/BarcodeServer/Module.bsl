@@ -84,7 +84,7 @@ EndFunction
 //  AddInfo - Structure
 // 
 // Returns:
-//  Array of Structure:
+//  ValueTable:
 // * Key - String
 // * Item - CatalogRef.Items -
 // * ItemKey - CatalogRef.ItemKeys -

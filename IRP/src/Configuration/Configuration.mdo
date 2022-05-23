@@ -800,6 +800,7 @@
   <dataProcessors>DataProcessor.Procurement</dataProcessors>
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
+  <dataProcessors>DataProcessor.CreateSerialLotNumbers</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
@@ -884,7 +885,7 @@
   <accumulationRegisters>AccumulationRegister.R3024B_SalesOrdersToBePaid</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3050T_RetailCash</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3050T_PosCashBalances</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4010B_ActualStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4011B_FreeStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4012B_StockReservation</accumulationRegisters>

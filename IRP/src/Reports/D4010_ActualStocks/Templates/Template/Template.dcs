@@ -371,9 +371,6 @@ FROM
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
 					<dcsset:field>ItemKey</dcsset:field>
 				</dcsset:item>
-				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>SerialLotNumber</dcsset:field>
-				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:field>Quantity</dcsset:field>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -480,6 +477,11 @@ FROM
 									<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
 									<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
 									<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+								</dcsset:item>
+								<dcsset:item xsi:type="dcsset:GroupItemField">
+									<dcsset:field>SerialLotNumber</dcsset:field>
+									<dcsset:groupType>Items</dcsset:groupType>
+									<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
 								</dcsset:item>
 							</dcsset:groupItems>
 							<dcsset:order>

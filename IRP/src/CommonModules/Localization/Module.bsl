@@ -90,6 +90,7 @@
 //  * Error_066 - String - Specification is not unique.
 //  * Error_067 - String - Fill Users or Group tables.
 //  * Error_068 - String - Line No. [%1] [%2 %3] %4 remaining: %5 %8. Required: %6 %8. Lacking: %7 %8.
+//  * Error_068_2 - String - Line No. [%1] [%2 %3] Serial lot number [%4] %5 remaining: %6 %9. Required: %7 %9. Lacking: %8 %9.
 //  * Error_071 - String - Plugin "%1" is not connected.
 //  * Error_072 - String - Specify a store in line %1.
 //  * Error_073 - String - All items in the "%1" document(s) are already received using the "%2" document(s).
@@ -108,6 +109,7 @@
 //  * Error_088 - String - Basis unit has to be filled, if item filter used.
 //  * Error_089 - String - Description%1 "%2" is already in use.
 //  * Error_090 - String - [%1 %2] %3 remaining: %4 %7. Required: %5 %7. Lacking: %6 %7.
+//  * Error_090_2 - String - [%1 %2] Serial lot number [%3] %4 remaining: %5 %8. Required: %6 %8. Lacking: %7 %8.
 //  * Error_091 - String - Only Administrator can create users.
 //  * Error_092 - String - Can not use %1 role in SaaS mode
 //  * Error_093 - String - Cancel reason has to be filled if string was canceled
@@ -534,6 +536,20 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_068", NStr(
 		"en = 'Line No. [%1] [%2 %3] %4 remaining: %5 %8. Required: %6 %8. Lacking: %7 %8.'", Lang));
 
+	// %1 - 12
+	// %2 - Boots
+	// %3 - Red XL
+	// %4 - 00001
+	// %5 - ordered
+	// %6 - 11
+	// %7 - 15
+	// %8 - 4
+	// %9 - pcs
+	Strings.Insert("Error_068_2", NStr(
+		"en = 'Line No. [%1] [%2 %3] Serial lot number [%4] %5 remaining: %6 %9. Required: %7 %9. Lacking: %8 %9.'", Lang));
+
+
+
 	// %1 - some extention name
 	Strings.Insert("Error_071", NStr("en = 'Plugin ""%1"" is not connected.'", Lang));
 	
@@ -610,6 +626,16 @@ Function Strings(Lang) Export
 	// %6 - 4
 	// %7 - pcs
 	Strings.Insert("Error_090", NStr("en = '[%1 %2] %3 remaining: %4 %7. Required: %5 %7. Lacking: %6 %7.'", Lang));
+
+	// %1 - Boots
+	// %2 - Red XL
+	// %3 - 0001
+	// %3 - ordered
+	// %4 - 11
+	// %5 - 15
+	// %6 - 4
+	// %7 - pcs
+	Strings.Insert("Error_090_2", NStr("en = '[%1 %2] Serial lot number [%3] %4 remaining: %5 %6. Required: %6 %8. Lacking: %7 %8.'", Lang));
 
 	Strings.Insert("Error_091", NStr("en = 'Only Administrator can create users.'", Lang));
 

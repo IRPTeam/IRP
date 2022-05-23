@@ -62,6 +62,7 @@ Procedure OwnerSelectChange()
 		Object.SerialLotNumberOwner = ThisObject[OwnerSelect];
 	EndIf;
 EndProcedure
+
 &AtServer
 Procedure FillParamsOnCreate()
 	OwnerSelect = "Manual";

@@ -258,11 +258,19 @@
 				</v8:item>
 			</title>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SerialLotNumber</dataPath>
+			<field>SerialLotNumber</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT ALLOWED
 	Table.Store,
 	Table.ItemKey AS ItemKey,
 	Table.ItemKey.Item AS Item,
+	Table.SerialLotNumber AS SerialLotNumber,
 	Table.QuantityClosingBalance,
 	Table.QuantityExpense,
 	Table.QuantityOpeningBalance,
@@ -469,6 +477,11 @@ FROM
 									<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
 									<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
 									<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+								</dcsset:item>
+								<dcsset:item xsi:type="dcsset:GroupItemField">
+									<dcsset:field>SerialLotNumber</dcsset:field>
+									<dcsset:groupType>Items</dcsset:groupType>
+									<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
 								</dcsset:item>
 							</dcsset:groupItems>
 							<dcsset:order>

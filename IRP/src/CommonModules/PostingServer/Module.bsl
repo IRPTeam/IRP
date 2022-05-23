@@ -400,6 +400,8 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 	ArrayOfPostingErrorMessages = New Array();
 	QuantityColumnName = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "QuantityColumnName", "Quantity");
 	For Each Row In QueryTableCopy Do
+		SerialLotNumberIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "SerialLotNumber");
+		
 		Filter = New Structure(Parameters.FilterColumns);
 		FillPropertyValues(Filter, Row);
 		QueryTableFiltered = QueryTable.Copy(Filter);
@@ -421,15 +423,31 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 				RemainsQuantity = Row.Quantity - LackOfBalance;
 			EndIf;
 		EndIf;
+		
+		// row is present in document
 		If ValueIsFilled(ArrayOfLineNumbers[0]) Then
 			LineNumber = ArrayOfLineNumbers[0];
 
 			If Row.Unposting Then
-				MessageText = StrTemplate(R().Error_068, LineNumber, Row.Item, Row.ItemKey, Parameters.Operation,
-					LackOfBalance, 0, LackOfBalance, BasisUnit);
-			Else
-				MessageText = StrTemplate(R().Error_068, LineNumber, Row.Item, Row.ItemKey, Parameters.Operation,
-					RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
+				
+				If SerialLotNumberIsPresent And ValueIsFilled(Row.SerialLotNumber) Then
+					MessageText = StrTemplate(R().Error_068_2, LineNumber, Row.Item, Row.ItemKey, Row.SerialLotNumber, 
+						Parameters.Operation, LackOfBalance, 0, LackOfBalance, BasisUnit);
+				Else
+					MessageText = StrTemplate(R().Error_068, LineNumber, Row.Item, Row.ItemKey,
+						Parameters.Operation, LackOfBalance, 0, LackOfBalance, BasisUnit);
+				EndIf;
+				
+			Else // Posting
+				
+				If SerialLotNumberIsPresent And ValueIsFilled(Row.SerialLotNumber) Then
+					MessageText = StrTemplate(R().Error_068_2, LineNumber, Row.Item, Row.ItemKey, Row.SerialLotNumber,
+						Parameters.Operation, RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
+				Else
+					MessageText = StrTemplate(R().Error_068, LineNumber, Row.Item, Row.ItemKey,
+						Parameters.Operation, RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
+				EndIf;
+				
 			EndIf;
 			
 			If CheckExpenseRecorders Then
@@ -438,24 +456,46 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 				CommonFunctionsClientServer.ShowUsersMessage(
 				MessageText, TableDataPath + "[" + (LineNumber - 1) + "]." + QuantityColumnName, "Object.ItemList");
 			EndIf;
-			// Delete row
-		Else
+		
+		Else // row is deleted
+			
 			If ValueIsFilled(ErrorQuantityField) Then
 				If Row.Unposting Then
-					MessageText = StrTemplate(R().Error_090, Row.Item, Row.ItemKey, Parameters.Operation,
-						LackOfBalance, 0, LackOfBalance, BasisUnit);
-				Else
-					MessageText = StrTemplate(R().Error_090, Row.Item, Row.ItemKey, Parameters.Operation,
-						RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
+					
+					If SerialLotNumberIsPresent And ValueIsFilled(Row.SerialLotNumber) Then
+						MessageText = StrTemplate(R().Error_090_2, Row.Item, Row.ItemKey, Row.SerialLotNumber, 
+							Parameters.Operation, LackOfBalance, 0, LackOfBalance, BasisUnit);
+					Else
+						MessageText = StrTemplate(R().Error_090, Row.Item, Row.ItemKey, 
+							Parameters.Operation, LackOfBalance, 0, LackOfBalance, BasisUnit);
+					EndIf;
+				
+				Else // Posting
+					
+					If SerialLotNumberIsPresent And ValueIsFilled(Row.SerialLotNumber) Then
+						MessageText = StrTemplate(R().Error_090_2, Row.Item, Row.ItemKey, Row.SerialLotNumber,
+							Parameters.Operation, RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
+					Else
+						MessageText = StrTemplate(R().Error_090, Row.Item, Row.ItemKey, 
+							Parameters.Operation, RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
+					EndIf;
 				EndIf;
 				If CheckExpenseRecorders Then
 					ArrayOfPostingErrorMessages.Add(MessageText);
 				Else
 					CommonFunctionsClientServer.ShowUsersMessage(MessageText, ErrorQuantityField);
 				EndIf;
-			Else
-				MessageText = StrTemplate(R().Error_068, LineNumbers, Row.Item, Row.ItemKey, Parameters.Operation,
-					LackOfBalance, 0, LackOfBalance, BasisUnit);
+				
+			Else // something else
+				
+				If SerialLotNumberIsPresent And ValueIsFilled(Row.SerialLotNumber) Then
+					MessageText = StrTemplate(R().Error_068_2, LineNumbers, Row.Item, Row.ItemKey, Row.SerialLotNumber,
+						Parameters.Operation, LackOfBalance, 0, LackOfBalance, BasisUnit);
+				Else
+					MessageText = StrTemplate(R().Error_068, LineNumbers, Row.Item, Row.ItemKey, 
+						Parameters.Operation, LackOfBalance, 0, LackOfBalance, BasisUnit);
+				EndIf;
+				
 				If CheckExpenseRecorders Then
 					ArrayOfPostingErrorMessages.Add(MessageText);
 				Else
@@ -724,7 +764,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		EndIf;
 
 		If Not Records_InDocument.Columns.Count() Then
-			Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4010B_ActualStocks);
+			Records_InDocument = CreateTable(Metadata.AccumulationRegisters.R4010B_ActualStocks);
 		EndIf;
 
 		Exists_R4010B_ActualStocks = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Exists_R4010B_ActualStocks");
@@ -859,96 +899,39 @@ Function CheckAllExpenses(Parameters)
 EndFunction
 
 Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
-	Query = New Query();
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text =
+	
+	QueryText_R4010B_ActualStocks =
 	"SELECT
-	|	ItemList.ItemKey,
-	|	ItemList.Store,
-	|	ItemList.LineNumber
-	|INTO ItemList
-	|FROM
-	|	&ItemList_InDocument AS ItemList
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Records.Store,
-	|	Records.ItemKey,
-	|	Records.Quantity
-	|INTO Records_Exists
-	|FROM
-	|	&Records_Exists AS Records
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Records.Store,
-	|	Records.ItemKey,
-	|	Records.Quantity
-	|INTO Records_InDocument
-	|FROM
-	|	&Records_InDocument AS Records
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Records_Exists.Store,
-	|	Records_Exists.ItemKey,
-	|	Records_Exists.Quantity
-	|INTO Records_All
-	|FROM
-	|	Records_Exists AS Records_Exists
-	|		LEFT JOIN Records_InDocument AS Records_InDocument
-	|		ON Records_Exists.Store = Records_InDocument.Store
-	|		AND Records_Exists.ItemKey = Records_InDocument.ItemKey
-	|WHERE
-	|	Records_InDocument.ItemKey IS NULL
-	|	AND NOT &Unposting
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	Records_InDocument.Store,
-	|	Records_InDocument.ItemKey,
-	|	Records_InDocument.Quantity
-	|FROM
-	|	Records_InDocument AS Records_InDocument
-	|WHERE
-	|	NOT &Unposting
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	Records_Exists.Store,
-	|	Records_Exists.ItemKey,
-	|	Records_Exists.Quantity
-	|FROM
-	|	Records_Exists AS Records_Exists
-	|WHERE
-	|	&Unposting
-	|
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Records_All.Store,
-	|	Records_All.ItemKey,
-	|	SUM(Records_All.Quantity) AS Quantity
-	|INTO Records_All_Grouped
-	|FROM
-	|	Records_All AS Records_All
-	|WHERE
-	|	Records_All.Store.NegativeStockControl
-	|GROUP BY
-	|	Records_All.Store,
-	|	Records_All.ItemKey
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
 	|	Records_All_Grouped.ItemKey.Item AS Item,
 	|	Records_All_Grouped.ItemKey,
+	|	Records_All_Grouped.SerialLotNumber,
+	|	Records_All_Grouped.Store,
+	|	ISNULL(BalanceRegister.QuantityBalance, 0) AS QuantityBalance,
+	|	Records_All_Grouped.Quantity AS Quantity,
+	|	-ISNULL(BalanceRegister.QuantityBalance, 0) AS LackOfBalance,
+	|	&Unposting AS Unposting
+	|INTO Lack
+	|FROM
+	|	Records_All_Grouped AS Records_All_Grouped
+	|		LEFT JOIN AccumulationRegister.%1.Balance(&Period, (Store, ItemKey, SerialLotNumber) IN
+	|			(SELECT
+	|				Records_All_Grouped.Store,
+	|				Records_All_Grouped.ItemKey,
+	|				Records_All_Grouped.SerialLotNumber
+	|			FROM
+	|				Records_All_Grouped AS Records_All_Grouped)) AS BalanceRegister
+	|		ON Records_All_Grouped.Store = BalanceRegister.Store
+	|		AND Records_All_Grouped.ItemKey = BalanceRegister.ItemKey
+	|		AND Records_All_Grouped.SerialLotNumber = BalanceRegister.SerialLotNumber
+	|WHERE
+	|	ISNULL(BalanceRegister.QuantityBalance, 0) < 0
+	|;";
+		
+	QueryText_R4011B_FreeStocks =
+	"SELECT
+	|	Records_All_Grouped.ItemKey.Item AS Item,
+	|	Records_All_Grouped.ItemKey,
+	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 	|	Records_All_Grouped.Store,
 	|	ISNULL(BalanceRegister.QuantityBalance, 0) AS QuantityBalance,
 	|	Records_All_Grouped.Quantity AS Quantity,
@@ -967,12 +950,111 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|		AND Records_All_Grouped.ItemKey = BalanceRegister.ItemKey
 	|WHERE
 	|	ISNULL(BalanceRegister.QuantityBalance, 0) < 0
+	|;";
+	
+	BalanceRegisterTable = 
+		?(Upper(Parameters.RegisterName) = Upper("R4010B_ActualStocks"),
+		QueryText_R4010B_ActualStocks, QueryText_R4011B_FreeStocks);
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.LineNumber
+	|INTO ItemList
+	|FROM
+	|	&ItemList_InDocument AS ItemList
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
+	|	Records.Store,
+	|	Records.ItemKey,
+	|   Records.SerialLotNumber,
+	|	Records.Quantity
+	|INTO Records_Exists
+	|FROM
+	|	&Records_Exists AS Records
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records.Store,
+	|	Records.ItemKey,
+	|	Records.SerialLotNumber,
+	|	Records.Quantity
+	|INTO Records_InDocument
+	|FROM
+	|	&Records_InDocument AS Records
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records_Exists.Store,
+	|	Records_Exists.ItemKey,
+	|	Records_Exists.SerialLotNumber,
+	|	Records_Exists.Quantity
+	|INTO Records_All
+	|FROM
+	|	Records_Exists AS Records_Exists
+	|		LEFT JOIN Records_InDocument AS Records_InDocument
+	|		ON Records_Exists.Store = Records_InDocument.Store
+	|		AND Records_Exists.ItemKey = Records_InDocument.ItemKey
+	|		AND Records_Exists.SerialLotNumber = Records_InDocument.SerialLotNumber
+	|WHERE
+	|	Records_InDocument.ItemKey IS NULL
+	|	AND NOT &Unposting
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Records_InDocument.Store,
+	|	Records_InDocument.ItemKey,
+	|	Records_InDocument.SerialLotNumber,
+	|	Records_InDocument.Quantity
+	|FROM
+	|	Records_InDocument AS Records_InDocument
+	|WHERE
+	|	NOT &Unposting
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Records_Exists.Store,
+	|	Records_Exists.ItemKey,
+	|	Records_Exists.SerialLotNumber,
+	|	Records_Exists.Quantity
+	|FROM
+	|	Records_Exists AS Records_Exists
+	|WHERE
+	|	&Unposting
+	|
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records_All.Store,
+	|	Records_All.ItemKey,
+	|	Records_All.SerialLotNumber,
+	|	SUM(Records_All.Quantity) AS Quantity
+	|INTO Records_All_Grouped
+	|FROM
+	|	Records_All AS Records_All
+	|WHERE
+	|	Records_All.Store.NegativeStockControl
+	|GROUP BY
+	|	Records_All.Store,
+	|	Records_All.ItemKey,
+	|	Records_All.SerialLotNumber
+	|;
+	|" + BalanceRegisterTable +
+	"////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	Lack.Item,
 	|	Lack.ItemKey,
+	|	Lack.SerialLotNumber,
 	|	Lack.QuantityBalance,
 	|	Lack.Quantity,
 	|	Lack.LackOfBalance,
@@ -991,17 +1073,29 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|GROUP BY
 	|	Lack.Item,
 	|	Lack.ItemKey,
+	|	Lack.SerialLotNumber,
 	|	Lack.QuantityBalance,
 	|	Lack.Quantity,
 	|	Lack.LackOfBalance,
 	|	Lack.Unposting";
+	
 	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
 
-	Query.SetParameter("Period", Parameters.BalancePeriod);
-	Query.SetParameter("ItemList_InDocument", Tables.ItemList_InDocument);
-	Query.SetParameter("Records_Exists", Tables.Records_Exists);
-	Query.SetParameter("Records_InDocument", Tables.Records_InDocument);
-	Query.SetParameter("Unposting", Unposting);
+	If Tables.Records_Exists.Columns.Find("SerialLotNumber") = Undefined Then
+		Tables.Records_Exists.Columns.Add("SerialLotNumber", New TypeDescription("CatalogRef.SerialLotNumbers"));
+		Tables.Records_Exists.FillValues(Catalogs.SerialLotNumbers.EmptyRef(), "SerialLotNumber");
+	EndIf;
+	
+	If Tables.Records_InDocument.Columns.Find("SerialLotNumber") = Undefined Then
+		Tables.Records_InDocument.Columns.Add("SerialLotNumber", New TypeDescription("CatalogRef.SerialLotNumbers"));
+		Tables.Records_InDocument.FillValues(Catalogs.SerialLotNumbers.EmptyRef(), "SerialLotNumber");
+	EndIf;
+	
+	Query.SetParameter("Period"              , Parameters.BalancePeriod);
+	Query.SetParameter("ItemList_InDocument" , Tables.ItemList_InDocument);
+	Query.SetParameter("Records_Exists"      , Tables.Records_Exists);
+	Query.SetParameter("Records_InDocument"  , Tables.Records_InDocument);
+	Query.SetParameter("Unposting"           , Unposting);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	
@@ -1010,9 +1104,9 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	If QueryTable.Count() Then
 		Result.IsOk = False;
 		ErrorParameters = New Structure();
-		ErrorParameters.Insert("GroupColumns"  , "ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("GroupColumns"  , "ItemKey, Item, LackOfBalance, SerialLotNumber");
 		ErrorParameters.Insert("SumColumns"    , "Quantity");
-		ErrorParameters.Insert("FilterColumns" , "ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("FilterColumns" , "ItemKey, Item, LackOfBalance, SerialLotNumber");
 		ErrorParameters.Insert("Operation"     , Parameters.Operation);
 		ErrorParameters.Insert("RecordType"    , RecordType);
 

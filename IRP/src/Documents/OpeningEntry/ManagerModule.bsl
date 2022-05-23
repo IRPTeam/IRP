@@ -457,14 +457,20 @@ Function R5011B_CustomersAging()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT 
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS QueryTable
-		   |WHERE 
-		   |	TRUE";
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	CASE
+	|		WHEN ItemList.SerialLotNumber.StockBalanceDetail
+	|			THEN ItemList.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END SerialLotNumber,
+	|	*
+	|INTO R4010B_ActualStocks
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE";
 EndFunction
 
 Function R4011B_FreeStocks()

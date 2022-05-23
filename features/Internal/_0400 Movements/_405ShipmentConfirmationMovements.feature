@@ -524,8 +524,7 @@ Scenario: _040190 check Shipment confirmation movements by the Register  "R4010 
 			| 'Register  "R4010 Actual stocks"'                   | ''            | ''                    | ''          | ''           | ''         | ''                  |
 			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
 			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '10'        | 'Store 02'   | 'XS/Blue'  | ''                  |
-			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '16'        | 'Store 02'   | 'XS/Blue'  | ''                  |
+			| ''                                                  | 'Expense'     | '18.02.2021 10:48:53' | '26'        | 'Store 02'   | 'XS/Blue'  | ''                  |
 		And I close all client application windows
 
 Scenario: _040191 check Shipment confirmation movements by the Register  "R4032 Goods in transit (outgoing)" (SO-SI-SC, SC>SI>SO)

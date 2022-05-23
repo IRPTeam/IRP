@@ -258,11 +258,19 @@
 				</v8:item>
 			</title>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SerialLotNumber</dataPath>
+			<field>SerialLotNumber</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT ALLOWED
 	Table.Store,
 	Table.ItemKey AS ItemKey,
 	Table.ItemKey.Item AS Item,
+	Table.SerialLotNumber AS SerialLotNumber,
 	Table.QuantityClosingBalance,
 	Table.QuantityExpense,
 	Table.QuantityOpeningBalance,
@@ -362,6 +370,9 @@ FROM
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
 					<dcsset:field>ItemKey</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>SerialLotNumber</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:field>Quantity</dcsset:field>

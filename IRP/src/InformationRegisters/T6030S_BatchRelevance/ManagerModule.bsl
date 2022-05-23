@@ -402,6 +402,7 @@ Procedure ClearRecordSet(Date, Company, Store, ItemKey)
 	RecordSet.Filter.Store.Set(Store);
 	RecordSet.Filter.ItemKey.Set(ItemKey);
 	RecordSet.Clear();
+	RecordSet.DataExchange.Load = True;
 	RecordSet.Write();
 EndProcedure
 
@@ -420,5 +421,6 @@ Procedure WriteRecordSet(DocumentRef, Date, Company, Store, ItemKey, IsRelevance
 	NewRecord.ItemKey = ItemKey;
 	NewRecord.Document = DocumentRef;
 	NewRecord.IsRelevance = IsRelevance;
+	RecordSet.DataExchange.Load = True;
 	RecordSet.Write();
 EndProcedure

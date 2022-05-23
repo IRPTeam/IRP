@@ -53,6 +53,7 @@ EndProcedure
 
 //Entry point
 Procedure Posting_BatchWiceBalance(CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod, AddInfo = Undefined) Export
+	CommonFunctionsClientServer.ShowUsersMessage("Start: " + CurrentDate());
 	LocksStorage = New Array();
 	If Not TransactionActive() Then
 		BeginTransaction(DataLockControlMode.Managed);
@@ -70,6 +71,7 @@ Procedure Posting_BatchWiceBalance(CalculationMovementCostRef, Company, Calculat
 	Else
 		BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod);
 	EndIf;
+	CommonFunctionsClientServer.ShowUsersMessage("End: " + CurrentDate());
 EndProcedure
 
 Procedure BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod)
@@ -153,7 +155,9 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 	//Bundle amount values
 	RecordSet = InformationRegisters.T6040S_BundleAmountValues.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
-
+	
+	BatchWiseBalanceTables.DataForBundleAmountValues.GroupBy("Batch, BatchKey, Company, Period, BatchKeyBundle", "AmountValue"); 
+	
 	For Each Row In BatchWiseBalanceTables.DataForBundleAmountValues Do	
 		NewRecord = RecordSet.Add();
 		FillPropertyValues(NewRecord, Row);
@@ -811,21 +815,36 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 			
 			For Each Row_Documents In Tree.Rows Do
 				If Stop Then
-					//Break;
+					Break; // Comment this line for postgre
 				EndIf;
-				
+					
 				For Each Row_Batch In Row_Documents.Rows Do
+					
 					If Row_Batch.Date > Row.Date Then
 						Stop = True;
 						Break;
 					EndIf;
-					If Not ValueIsFilled(Row_Batch.Batch) 
-						Or Row_Batch.Direction <> Enums.BatchDirection.Receipt
-						Or NeedExpense = 0 
-						Or Row_Batch.QuantityBalance = 0
-						Or Row.BatchKey <> Row_Batch.BatchKey Then 
+					
+					If Row_Batch.QuantityBalance = 0 Then
 						Continue;
 					EndIf;
+					
+					If NeedExpense = 0 Then
+						Continue;
+					EndIf;
+					
+					If Row.BatchKey <> Row_Batch.BatchKey Then
+						Continue;
+					EndIf;
+					
+					If Row_Batch.Direction <> Enums.BatchDirection.Receipt Then
+						Continue;
+					EndIf;
+					
+					If Not ValueIsFilled(Row_Batch.Batch) Then
+						Continue;
+					EndIf;
+					
 					ExpenseQuantity = Min(NeedExpense, Row_Batch.QuantityBalance);
 
 					ExpenseAmount = 0;
@@ -859,6 +878,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 							NewRow_SalesBatches.SalesInvoice = Row.Document;
 						EndIf;
 					EndIf;
+				
 				EndDo;
 			EndDo;
 			

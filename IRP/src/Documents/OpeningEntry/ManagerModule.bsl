@@ -643,15 +643,19 @@ EndFunction
 
 Function T6010S_BatchesInfo()
 	Return
-		"SELECT
-		|	OpeningEntry.Ref AS Document,
-		|	OpeningEntry.Company AS Company,
-		|	OpeningEntry.Ref.Date AS Period
-		|INTO T6010S_BatchesInfo
-		|FROM
-		|	Document.OpeningEntry AS OpeningEntry
-		|WHERE
-		|	OpeningEntry.Ref = &Ref";
+	"SELECT
+	|	ItemList.Ref AS Document,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Date AS Period
+	|INTO T6010S_BatchesInfo
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref
+	|GROUP BY
+	|	ItemList.Ref,
+	|	ItemList.Ref.Company,
+	|	ItemList.Ref.Date";
 EndFunction
 
 Function T6020S_BatchKeysInfo()

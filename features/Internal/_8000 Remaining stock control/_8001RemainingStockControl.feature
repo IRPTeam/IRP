@@ -2521,18 +2521,7 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 		Then I wait that in user messages the "Document [Sales invoice 1 112 dated 23.05.2022 16:25:33] have negative stock balance" substring will appear in 10 seconds
 		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 18 . Required: 23 . Lacking: 5 ." substring will appear in 10 seconds
 		And I close all client application windows
-	* Try unpost Retail return receipt
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
-		And I go to line in "List" table
-			| 'Number' |
-			| '1 112'   |
-		And I select current line in "List" table
-		And I click the button named "FormUndoPosting"
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		Then I wait that in user messages the "Document [Sales invoice 1 112 dated 23.05.2022 16:25:33] have negative stock balance" substring will appear in 10 seconds
-		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 18 . Required: 23 . Lacking: 5 ." substring will appear in 10 seconds
-		And I close all client application windows
+
 
 
 Scenario:_800080 set/remove checkbox Negative stock control from store and check posting document (Negative stock)

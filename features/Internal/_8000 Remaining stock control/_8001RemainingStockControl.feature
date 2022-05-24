@@ -29,7 +29,6 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create catalog Units objects
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog Items objects
-		When Create catalog Items objects (serial lot numbers)
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects

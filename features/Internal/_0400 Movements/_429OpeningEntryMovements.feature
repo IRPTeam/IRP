@@ -49,6 +49,13 @@ Scenario: _042900 preparation (Opening entry)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog LegalNameContracts objects
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
@@ -71,6 +78,7 @@ Scenario: _042900 preparation (Opening entry)
 			When Create catalog CancelReturnReasons objects
 	* Load documents
 		When Create document OpeningEntry objects
+		When Create document OpeningEntry objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -85,6 +93,10 @@ Scenario: _042900 preparation (Opening entry)
 			| "Documents.OpeningEntry.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
 
@@ -188,6 +200,29 @@ Scenario: _042903 check Opening entry movements by the Register  "R3010 Cash on 
 			
 		And I close all client application windows
 
+Scenario: _042904 check Opening entry with serial lot numbers movements by the Register  "R4010 Actual stocks"
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 112' |
+	* Check movements by the Register  "R4010 Actual stocks" 
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 1 112 dated 20.05.2022 17:07:07' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'               | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                              | 'Receipt'     | '20.05.2022 17:07:07' | '5'         | 'Store 02'   | 'PZU'      | '8908899877'        |
+			| ''                                              | 'Receipt'     | '20.05.2022 17:07:07' | '5'         | 'Store 02'   | 'PZU'      | '8908899879'        |
+			| ''                                              | 'Receipt'     | '20.05.2022 17:07:07' | '5'         | 'Store 02'   | 'UNIQ'     | ''                  |
+			| ''                                              | 'Receipt'     | '20.05.2022 17:07:07' | '5'         | 'Store 02'   | 'UNIQ'     | ''                  |
+			| ''                                              | 'Receipt'     | '20.05.2022 17:07:07' | '10'        | 'Store 02'   | 'XL/Green' | ''                  |	
+		And I close all client application windows
 
 Scenario: _042905 check Opening entry movements by the Register  "R1020 Advances to vendors" 
 	And I close all client application windows

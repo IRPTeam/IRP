@@ -50,6 +50,14 @@ Scenario: _04022 preparation (Inventory transfer)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create document ShipmentConfirmation (stock control serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -84,6 +92,7 @@ Scenario: _04022 preparation (Inventory transfer)
 			| "Documents.InventoryTransferOrder.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Inventory transfer document
 		When Create document InventoryTransfer objects (check movements)
+		When Create document InventoryTransfer objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
  			| "Documents.InventoryTransfer.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"  |
 		And I execute 1C:Enterprise script at server
@@ -94,6 +103,8 @@ Scenario: _04022 preparation (Inventory transfer)
 			| "Documents.InventoryTransfer.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(204).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
 
@@ -184,7 +195,35 @@ Scenario: _0402305 check Inventory transfer movements by the Register  "R4010 Ac
 			| ''                                                 | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'XS/Blue'   | ''                  |
 			| ''                                                 | 'Expense'     | '*'      | '15'        | 'Store 02'   | '36/Red'    | ''                  |
 		And I close all client application windows
-		
+
+Scenario: _0402306 check Inventory transfer movements by the Register  "R4010 Actual stocks" (not Use SC)
+	* Select Inventory transfer
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 112' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 1 112 dated 20.05.2022 18:11:23' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                    | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                   | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                   | 'Receipt'     | '20.05.2022 18:11:23' | '5'         | 'Store 02'   | 'PZU'      | '8908899877'        |
+			| ''                                                   | 'Receipt'     | '20.05.2022 18:11:23' | '5'         | 'Store 02'   | 'PZU'      | '8908899879'        |
+			| ''                                                   | 'Receipt'     | '20.05.2022 18:11:23' | '10'        | 'Store 02'   | 'XL/Green' | ''                  |
+			| ''                                                   | 'Receipt'     | '20.05.2022 18:11:23' | '10'        | 'Store 02'   | 'UNIQ'     | ''                  |
+			| ''                                                   | 'Expense'     | '20.05.2022 18:11:23' | '5'         | 'Store 03'   | 'PZU'      | '8908899877'        |
+			| ''                                                   | 'Expense'     | '20.05.2022 18:11:23' | '5'         | 'Store 03'   | 'PZU'      | '8908899879'        |
+			| ''                                                   | 'Expense'     | '20.05.2022 18:11:23' | '10'        | 'Store 03'   | 'XL/Green' | ''                  |
+			| ''                                                   | 'Expense'     | '20.05.2022 18:11:23' | '10'        | 'Store 03'   | 'UNIQ'     | ''                  |	
+		And I close all client application windows
+
+
+
 Scenario: _0402408 check Inventory transfer movements by the Register  "R4011 Free stocks" (Use SC and Use GR)
 	* Select Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"

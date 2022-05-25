@@ -50,6 +50,14 @@ Scenario: _041800 preparation (StockAdjustmentAsSurplus)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create document StockAdjustmentAsSurplus objects (stock control serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -64,6 +72,8 @@ Scenario: _041800 preparation (StockAdjustmentAsSurplus)
 		When Create document StockAdjustmentAsSurplus objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.StockAdjustmentAsSurplus.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 
 Scenario: _041801 check Stock adjustment as surplus movements by the Register  "R4010 Actual stocks"
@@ -131,6 +141,29 @@ Scenario: _041803 check Stock adjustment as surplus movements by the Register  "
 			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Main Company' | 'Front office' | 'Store 05' | 'XS/Blue'  |
 			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Main Company' | 'Front office' | 'Store 05' | 'M/White'  |
 		And I close all client application windows
+
+Scenario: _041804 check Stock adjustment as surplus movements by the Register  "R4010 Actual stocks"
+	* Select Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 112' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as surplus 1 112 dated 20.05.2022 17:19:31' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                              | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                             | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                            | 'Receipt'     | '20.05.2022 17:19:31' | '5'         | 'Store 02'   | 'PZU'      | '8908899877'        |
+			| ''                                                            | 'Receipt'     | '20.05.2022 17:19:31' | '5'         | 'Store 02'   | 'PZU'      | '8908899879'        |
+			| ''                                                            | 'Receipt'     | '20.05.2022 17:19:31' | '10'        | 'Store 02'   | 'XL/Green' | ''                  |
+			| ''                                                            | 'Receipt'     | '20.05.2022 17:19:31' | '10'        | 'Store 02'   | 'UNIQ'     | ''                  |	
+		And I close all client application windows
+
 
 Scenario: _041830 Stock adjustment as surplus clear posting/mark for deletion
 	And I close all client application windows

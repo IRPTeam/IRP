@@ -395,7 +395,28 @@ Scenario: _041614 check Purchase return movements by the Register  "R4011 Free s
 			| 'Register  "R4011 Free stocks"' |
 	And I close all client application windows
 
-
+Scenario: _041615 check Purchase return with serial lot numbers movements by the Register  "R4010 Actual stocks" (not use SC, PR)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '232' |
+	* Check movements by the Register  "R4010 Actual stocks" 
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 232 dated 14.03.2021 19:21:16' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'               | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                              | 'Expense'     | '14.03.2021 19:21:16' | '10'        | 'Store 02'   | 'S/Yellow' | '0512'              |
+			| ''                                              | 'Expense'     | '14.03.2021 19:21:16' | '12'        | 'Store 02'   | '37/18SD'  | ''                  |
+		And I close all client application windows
+		
+			
 
 Scenario: _041619 check Purchase return movements by the Register  "R4032 Goods in transit (outgoing) (use SC, PR)
 	And I close all client application windows

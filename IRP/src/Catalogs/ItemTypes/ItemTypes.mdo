@@ -226,6 +226,51 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="ddce3569-1431-4e3e-96bd-7988ad1748fe">
+    <producedTypes>
+      <objectType typeId="3bf1d7ee-b6f0-4445-aca9-c6ab2ea4a117" valueTypeId="451c08f0-876f-4609-aad2-6ead9bd69bd2"/>
+      <rowType typeId="e1fb8d6f-f2a6-4d2d-bb4a-6ecbea084d7d" valueTypeId="bd98ca57-249e-4d5a-a3b8-276bac590372"/>
+    </producedTypes>
+    <name>RegExpSerialLotNumbersRules</name>
+    <synonym>
+      <key>en</key>
+      <value>Reg exp serial lot numbers rules</value>
+    </synonym>
+    <attributes uuid="bf6df592-f6cc-4032-b41e-bc1320406908">
+      <name>RegExp</name>
+      <synonym>
+        <key>en</key>
+        <value>Reg exp</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>250</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="70c2b331-1469-439b-8d9b-e7f04ce555fc">
+      <name>Example</name>
+      <synonym>
+        <key>en</key>
+        <value>Example</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>250</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="4ce5a272-3836-468e-859a-4d8f5de19184">
     <name>ItemForm</name>
     <synonym>

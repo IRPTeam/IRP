@@ -240,3 +240,21 @@ Procedure SetFormPreviousValue(Object, Form, AttributeName) Export
 EndProcedure
 
 #EndRegion
+
+#Region Regexp
+
+// Regex.
+// 
+// Parameters:
+//  String - String - String
+//  Facet - String - RegExp
+// 
+// Returns:
+//  Boolean - is string match regexp
+Function Regex(String, Facet) Export
+	
+	Return True;
+
+EndFunction
+
+#EndRegion

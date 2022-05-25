@@ -680,6 +680,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_106", NStr("en = 'Can not lock data'", Lang));
 	Strings.Insert("Error_107", NStr("en = 'You try to call deleted service %1.'", Lang));
 	Strings.Insert("Error_108", NStr("en = 'Field is filled, but it has to be empty.'", Lang));
+	Strings.Insert("Error_109", NStr("en = 'Serial lot number name [ %1 ] is not match template: %2'", Lang) + Chars.LF);
 #EndRegion
 
 #Region InfoMessages

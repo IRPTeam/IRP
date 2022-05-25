@@ -371,6 +371,9 @@ FROM
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
 					<dcsset:field>ItemKey</dcsset:field>
 				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>SerialLotNumber</dcsset:field>
+				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:field>Quantity</dcsset:field>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">

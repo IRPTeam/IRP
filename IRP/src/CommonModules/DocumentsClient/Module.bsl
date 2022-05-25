@@ -385,131 +385,38 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 
 	FilterStructure = New Structure(FilterString);
 	
-	// documents use ViewClient module
-	IsUsedNewFunctionality =
-	   ObjectRefType = Type("DocumentRef.ShipmentConfirmation")
-	Or ObjectRefType = Type("DocumentRef.GoodsReceipt")
-	Or ObjectRefType = Type("DocumentRef.StockAdjustmentAsSurplus")
-	Or ObjectRefType = Type("DocumentRef.StockAdjustmentAsWriteOff")
-	Or ObjectRefType = Type("DocumentRef.SalesInvoice")
-	Or ObjectRefType = Type("DocumentRef.PurchaseInvoice")
-	Or ObjectRefType = Type("DocumentRef.InternalSupplyRequest")
-	Or ObjectRefType = Type("DocumentRef.RetailSalesReceipt")
-	Or ObjectRefType = Type("DocumentRef.SalesReturn")
-	Or ObjectRefType = Type("DocumentRef.PurchaseReturn")
-	Or ObjectRefType = Type("DocumentRef.RetailReturnReceipt")
-	
-	Or ObjectRefType = Type("DocumentRef.SalesOrder")
-	Or ObjectRefType = Type("DocumentRef.SalesOrderClosing")
-	Or ObjectRefType = Type("DocumentRef.PurchaseOrder")
-	Or ObjectRefType = Type("DocumentRef.PurchaseOrderClosing")
-	Or ObjectRefType = Type("DocumentRef.SalesReturnOrder")
-	Or ObjectRefType = Type("DocumentRef.PurchaseReturnOrder")
-	Or ObjectRefType = Type("DocumentRef.InventoryTransfer")
-	Or ObjectRefType = Type("DocumentRef.InventoryTransferOrder")
-	Or ObjectRefType = Type("DocumentRef.PhysicalInventory")
-	Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation")
-	Or ObjectRefType = Type("DocumentRef.ItemStockAdjustment")
-	Or ObjectRefType = Type("DocumentRef.Bundling")
-	Or ObjectRefType = Type("DocumentRef.Unbundling");
-	
-	If IsUsedNewFunctionality Then	
-		For Each ResultElement In Result Do
-			
-			If ResultElement.isService And AddInfo.Property("Filter") And AddInfo.Filter.DisableIfIsService Then
-				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_026, ResultElement.Item));
-				Continue;
-			EndIf;
-			
-			FillPropertyValues(FilterStructure, ResultElement);
-			ExistingRows = Object.ItemList.FindRows(FilterStructure);
-			If ExistingRows.Count() Then
-				Row = ExistingRows[0];
-				If ObjectRefType = Type("DocumentRef.PhysicalInventory")
-					Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-					ViewClient_V2.SetItemListPhysCount(Object, Form, Row, Row.PhysCount + ResultElement.Quantity);
-				Else
-					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
-				EndIf;
-			Else
-				FillingValues = New Structure();
-				FillingValues.Insert("Item"     , ResultElement.Item);
-				FillingValues.Insert("ItemKey"  , ResultElement.ItemKey);
-				FillingValues.Insert("Unit"     , ResultElement.Unit);
-				FillingValues.Insert("Quantity" , ResultElement.Quantity);
-				FillingValues.Insert("SerialLotNumber" , ResultElement.SerialLotNumber);
-				
-				If ResultElement.Property("Price") Then
-					FillingValues.Insert("Price", ResultElement.Price);
-				EndIf;
-				Row = ViewClient_V2.ItemListAddFilledRow(Object, Form, FillingValues);
-			EndIf;
-			
-			If UseSerialLotNumbers Then
-				If ValueIsFilled(ResultElement.SerialLotNumber) Then
-					SerialLotNumbersArray = New Array();
-					SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
-					SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
-					SerialLotNumbers.Quantity = 1;
-					SerialLotNumbersArray.Add(SerialLotNumbers);
-					SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
-
-					SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
-				ElsIf ResultElement.UseSerialLotNumber Then
-					Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
-				EndIf;
-				SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
-			EndIf;
-			
-		EndDo;
-		
-		Return;
-	EndIf;
-	//===
-	
-	
-
-	Row = Undefined;
 	For Each ResultElement In Result Do
+		
+		If ResultElement.isService And AddInfo.Property("Filter") And AddInfo.Filter.DisableIfIsService Then
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_026, ResultElement.Item));
+			Continue;
+		EndIf;
+		
 		FillPropertyValues(FilterStructure, ResultElement);
 		ExistingRows = Object.ItemList.FindRows(FilterStructure);
 		If ExistingRows.Count() Then
 			Row = ExistingRows[0];
+			If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+				Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+				ViewClient_V2.SetItemListPhysCount(Object, Form, Row, Row.PhysCount + ResultElement.Quantity);
+			Else
+				ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
+			EndIf;
 		Else
-			Row = Object.ItemList.Add();
-			If Row.Property("Key") Then
-				Row.Key = New UUID();
+			FillingValues = New Structure();
+			FillingValues.Insert("Item"     , ResultElement.Item);
+			FillingValues.Insert("ItemKey"  , ResultElement.ItemKey);
+			FillingValues.Insert("Unit"     , ResultElement.Unit);
+			FillingValues.Insert("Quantity" , ResultElement.Quantity);
+			FillingValues.Insert("SerialLotNumber" , ResultElement.SerialLotNumber);
+			
+			If ResultElement.Property("Price") Then
+				FillingValues.Insert("Price", ResultElement.Price);
 			EndIf;
-			FillPropertyValues(Row, ResultElement, FilterString);
-			If Row.Property("Store") Then
-				Row.Store = Form.CurrentStore;
-			EndIf;
-			If Row.Property("DeliveryDate") Then
-				Row.DeliveryDate = Form.DeliveryDate;
-			EndIf;
-			If Row.Property("PriceType") Then
-				Row.PriceType = Form.CurrentPriceType;
-			EndIf;
-			If Row.Property("ProcurementMethod") And CatItemsServer.StoreMustHave(Row.Item) Then
-				Row.ProcurementMethod = PredefinedValue("Enum.ProcurementMethods.Stock");
-			EndIf;
+			Row = ViewClient_V2.ItemListAddFilledRow(Object, Form, FillingValues);
 		EndIf;
-
-		If Row.Property("Quantity") Then
-			Row.Quantity = Row.Quantity + ResultElement.Quantity;
-			Actions = New Structure("CalculateQuantityInBaseUnit");
-			CalculationStringsClientServer.CalculateItemsRow(Object, Row, Actions);
-		ElsIf Row.Property("PhysCount") And Row.Property("Difference") Then
-			Row.PhysCount = Row.PhysCount + ResultElement.Quantity;
-			Row.Difference = Row.PhysCount - Row.ExpCount;
-		EndIf;
-
-		Settings.Rows.Add(Row);
-
-		Form.Items.ItemList.CurrentRow = Row.GetID();
-
+		
 		If UseSerialLotNumbers Then
-
 			If ValueIsFilled(ResultElement.SerialLotNumber) Then
 				SerialLotNumbersArray = New Array();
 				SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
@@ -524,16 +431,9 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			EndIf;
 			SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 		EndIf;
+		
 	EndDo;
-
-	If Not Row = Undefined Then
-		Form.Items.ItemList.CurrentRow = Row.GetID();
-	EndIf;
-
-	Form.ItemListOnChange(Form.Items.ItemList);
-	Form.Modified = True;
-	Notify("AddNewItemListRow", Settings.Rows, Form);
-
+	
 EndProcedure
 
 Procedure OpenPickupItems(Object, Form, Command) Export

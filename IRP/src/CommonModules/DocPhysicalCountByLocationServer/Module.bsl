@@ -21,7 +21,6 @@ EndProcedure
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsServer.FillItemList(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	SerialLotNumbersServer.FillSerialLotNumbersUse(Object);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export

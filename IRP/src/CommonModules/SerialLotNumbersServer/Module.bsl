@@ -8,7 +8,7 @@
 // Returns:
 //  Boolean - Check serial lot number name
 Function CheckSerialLotNumberName(Object, Cancel) Export
-	RegExpSettings = isSerialLotNumberNameMatchRegExp(Object.Description, Object.Owner);
+	RegExpSettings = isSerialLotNumberNameMatchRegExp(Object.Description, Object.SerialLotNumberOwner);
 	If Not RegExpSettings.isMatch Then
 		Cancel = True;
 	EndIf;
@@ -100,12 +100,13 @@ EndFunction
 //  Owner - Undefined, CatalogRef.ItemKeys, CatalogRef.Items, CatalogRef.ItemTypes - Serial lot number owner
 // 
 // Returns:
-//  Boolean
+//  See GetRegExpSettings
 Function isSerialLotNumberNameMatchRegExp(Value, Owner) Export
 	
-	Rules = GetSerialLotNumbersRegExpRules(Owner);
+	Str = GetSerialLotNumbersRegExpRules(Owner);
+	Str.isMatch = CommonFunctionsClientServer.Regex(Value, Str.RegExp);
 	
-	Return CommonFunctionsClientServer.Regex(Value, Rules);
+	Return Str;
 	
 EndFunction
 

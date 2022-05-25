@@ -2,6 +2,13 @@ Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	RegExpSettings = SerialLotNumbersServer.CheckSerialLotNumberName(ThisObject, Cancel); // See SerialLotNumbersServer.GetRegExpSettings
+	If RegExpSettings.isMatch Then
+		TextError = StrTemplate(R().Error_109, ThisObject.Description, StrConcat(RegExpSettings.Example, Chars.LF));
+		CommonFunctionsClientServer.ShowUsersMessage(TextError, "Description");
+	EndIf;
+	
 EndProcedure
 
 Procedure OnWrite(Cancel)

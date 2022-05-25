@@ -1,3 +1,20 @@
+
+// Check serial lot number name.
+// 
+// Parameters:
+//  Object - CatalogObject.SerialLotNumbers - Object
+//  Cancel - Boolean - Cancel
+// 
+// Returns:
+//  Boolean - Check serial lot number name
+Function CheckSerialLotNumberName(Object, Cancel) Export
+	RegExpSettings = isSerialLotNumberNameMatchRegExp(Object.Description, Object.Owner);
+	If Not RegExpSettings.isMatch Then
+		Cancel = True;
+	EndIf;
+	Return RegExpSettings;
+EndFunction
+
 Procedure FillSerialLotNumbersUse(Object, AddInfo = Undefined) Export
 	For Each RowItemList In Object.ItemList Do
 		RowItemList.UseSerialLotNumber = IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
@@ -67,10 +84,71 @@ EndFunction
 // * Owner - Undefined -
 // * Barcode - String -
 Function GetSeriallotNumerOptions() Export
+	
 	Str = New Structure();
 	Str.Insert("Description", "");
 	Str.Insert("Owner", Undefined);
 	Str.Insert("Barcode", "");
+	
+	Return Str;
+EndFunction
+
+// Is serial lot number name match reg exp.
+// 
+// Parameters:
+//  Value - String - Description or Barcode
+//  Owner - Undefined, CatalogRef.ItemKeys, CatalogRef.Items, CatalogRef.ItemTypes - Serial lot number owner
+// 
+// Returns:
+//  Boolean
+Function isSerialLotNumberNameMatchRegExp(Value, Owner) Export
+	
+	Rules = GetSerialLotNumbersRegExpRules(Owner);
+	
+	Return CommonFunctionsClientServer.Regex(Value, Rules);
+	
+EndFunction
+
+
+// Get serial lot numbers reg exp rules.
+// 
+// Parameters:
+//  Owner - Undefined, CatalogRef.ItemKeys, CatalogRef.Items, CatalogRef.ItemTypes - Owner
+// 
+// Returns:
+//  See GetRegExpSettings
+Function GetSerialLotNumbersRegExpRules(Owner)
+	Str = GetRegExpSettings();
+	ItemType = Owner;
+	If Owner = Undefined Then
+		Return Str;
+	ElsIf TypeOf(Owner) = Type("CatalogRef.ItemKeys") Then
+		ItemType = Owner.Item.ItemType;
+	ElsIf TypeOf(Owner) = Type("CatalogRef.Items") Then
+		ItemType = Owner.ItemType;
+	EndIf;
+	
+	Str.ItemType = ItemType;
+	Str.RegExp = ItemType.RegExpSerialLotNumbersRules.UnloadColumn("RegExp");
+	Str.Example = ItemType.RegExpSerialLotNumbersRules.UnloadColumn("Example");
+	Return Str;
+	
+EndFunction
+
+// Get reg exp settings.
+// 
+// Returns:
+//  Structure - Get reg exp settings:
+// * RegExp - Array of String -
+// * Example - Array of String -
+// * ItemType - CatalogRef.ItemTypes -
+// * isMatch - Boolean -
+Function GetRegExpSettings() Export
+	Str = New Structure;
+	Str.Insert("RegExp", New Array);
+	Str.Insert("Example", New Array);
+	Str.Insert("ItemType", Catalogs.ItemTypes.EmptyRef());
+	Str.Insert("isMatch", True);
 	
 	Return Str;
 EndFunction

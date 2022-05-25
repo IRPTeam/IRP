@@ -174,6 +174,7 @@ Function GetChain()
 	Chain.Insert("ChangePriceTypeAsManual"      , GetChainLink("ChangePriceTypeAsManualExecute"));
 
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
+	Chain.Insert("ChangeUseSerialLotNumberByItemKey", GetChainLink("ChangeUseSerialLotNumberByItemKeyExecute"));
 	
 	Chain.Insert("ChangePriceByPriceType"        , GetChainLink("ChangePriceByPriceTypeExecute"));
 	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
@@ -246,6 +247,18 @@ Function ChangeUnitByItemKeyExecute(Options) Export
 	EndIf;
 	UnitInfo = GetItemInfo.ItemUnitInfo(Options.ItemKey);
 	Return UnitInfo.Unit;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_USE_SERIAL_LOT_NUMBER_BY_ITEMKEY
+
+Function ChangeUseSerialLotNumberByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKey");
+EndFunction
+
+Function ChangeUseSerialLotNumberByItemKeyExecute(Options) Export
+	Return SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(Options.ItemKey);
 EndFunction
 
 #EndRegion

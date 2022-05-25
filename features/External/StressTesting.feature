@@ -11,7 +11,7 @@ Feature: export scenarios
 
 	Scenario: Create catalog ItemKeys objects (stress testing)
 
-		And I check or create catalog "ItemKeys" objects:
+		And I check or create for catalog "ItemKeys" objects with Data Exchange Load parameter set to true:
    | 'Ref'                                                              | 'DeletionMark' | 'Item'                                                          | 'Unit' | 'Description_en'      | 'Description_hash' | 'Description_ru'      | 'Description_tr'      |
    | 'e1cib/data/Catalog.ItemKeys?ref=b762b13668d0905011eba2897715649a' | 'False'        | 'e1cib/data/Catalog.Items?ref=b762b13668d0905011eb9de0b285d99c' | ''     | 'Item key 1'          | ''                 | 'Item key 1'          | 'Item key 1'          |
    | 'e1cib/data/Catalog.ItemKeys?ref=b762b13668d0905011eba2897715650a' | 'False'        | 'e1cib/data/Catalog.Items?ref=b762b13668d0905011eb9de0b285d98c' | ''     | 'Item key 2'          | ''                 | 'Item key 2'          | 'Item key 2'          |

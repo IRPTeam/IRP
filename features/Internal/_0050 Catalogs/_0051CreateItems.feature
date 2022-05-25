@@ -465,6 +465,9 @@ Scenario: _005116 filling in the "Items" catalog
 			| 'Description' |
 			| 'UNIQ'        |
 		And I select current line in "List" table
+		Then "Item (create) *" window is opened
+		And I expand "Purchase and production" group
+		And I move to "Purchase and production" tab		
 		And I click Select button of "Brand" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -1056,3 +1059,195 @@ Scenario: _005126 check Dimensions and weight information (item key)
 		And I click "Save" button
 		And the editing text of form attribute named "Weight" became equal to "10,000"
 		And I close all client application windows
+
+Scenario: _005127 check the filling of required additional attribute
+	And I close all client application windows
+	* Select Additional attribute
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Description' | 'Predefined data name' |
+			| 'Items'       | 'Catalog_Items'        |
+		And I select current line in "List" table
+		And I go to line in "Attributes" table
+			| '#' | 'Attribute' | 'UI group'                |
+			| '2' | 'Brand'     | 'Purchase and production' |
+		And I activate field named "AttributesRequired" in "Attributes" table
+		And I set checkbox named "AttributesRequired" in "Attributes" table
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+		And I close all client application windows
+	* Check required filling
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I input "Test2" text in the field named "Description_en"
+		And I click Choice button of the field named "ItemType"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Coat'       |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Unit"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		Then I wait that in user messages the "Field [Brand] is empty." substring will appear in "10" seconds
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And table "List" does not contain lines:
+			| 'Description' |
+			| 'Test2'       |
+		And I close all client application windows
+
+
+Scenario: _005128 check show add property in the html field
+	And I close all client application windows
+	* Select Additional attribute
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Description' | 'Predefined data name' |
+			| 'Items'       | 'Catalog_Items'        |
+		And I select current line in "List" table
+		And I move to "Properties" tab
+		And I activate field named "PropertiesShowInHTML" in "Properties" table
+		And I change checkbox named "PropertiesShowInHTML" in "Properties" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+		And I wait "Items (Additional attribute set) *" window closing in 20 seconds
+	* Check show in the html field
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click the button named "ViewAdditionalAttribute"
+		Then user message window does not contain messages
+		
+Scenario: _005129 add additional attribute for item type
+	And I close all client application windows
+	* Select Additional attribute
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Predefined data name' |
+			| 'Catalog_ItemTypes'        |
+		And I select current line in "List" table	
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Season'      |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+		And I wait "en description is empty (Additional attribute set) *" window closing in 10 seconds
+	* Check 
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Coat'        |
+		And I select current line in "List" table
+		And "Season" form attribute is available
+		And I close current window
+	* Change requered property and check
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Predefined data name' |
+			| 'Catalog_ItemTypes'        |
+		And I select current line in "List" table
+		Then "en description is empty (Additional attribute set)" window is opened
+		And I activate "Required" field in "Attributes" table
+		And I change "Required" checkbox in "Attributes" table
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+		And I wait "en description is empty (Additional attribute set) *" window closing in 20 seconds
+	* Check 
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Coat'        |
+		And I select current line in "List" table
+		And "Season" form attribute is available
+		And I click "Save and close" button	
+		Then I wait that in user messages the "Field [Season] is empty." substring will appear in "10" seconds
+		And I close all client application windows
+
+
+Scenario: _005130 add additional attribute with type boolean for item
+	And I close all client application windows
+	When Create chart of characteristic types AddAttributeAndProperty objects (boolean and string)
+	* Select Additional attribute
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| 'Predefined data name' |
+			| 'Catalog_Items'        |
+		And I select current line in "List" table	
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Add atribute Boolean'      |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+	* Check
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click the button named "FormCreate"
+		And "Add atribute Boolean" form attribute is available
+		And I set checkbox "Add atribute Boolean"
+		And I remove checkbox "Add atribute Boolean"
+	And I close all client application windows
+	
+Scenario: _005131 create specification with primitive type
+	And I close all client application windows
+	When Create chart of characteristic types AddAttributeAndProperty objects (boolean and string)
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I click the button named "FormCreate"
+		And I input "With one attribute" text in "ENG" field
+		And in the table "AvailableAttributes" I click the button named "AvailableAttributesAdd"
+		And I click choice button of "Attribute" attribute in "AvailableAttributes" table
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'Add atribute String' |
+		And I select current line in "List" table
+		And I finish line editing in "AvailableAttributes" table
+		And I click Select button of "Season" field
+		Then "Additional attribute values" window is opened
+		And I go to line in "List" table
+			| 'Additional attribute' | 'Additional attribute values' |
+			| 'Season'               | '19SD'                        |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Create specification
+		Given I open hyperlink "e1cib/list/Catalog.Specifications"
+		And I click the button named "FormCreate"
+		And I input "Primitive" text in "ENG" field
+		And I change the radio button named "Type" value to "Set"
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'With one attribute' |
+		And I select current line in "List" table
+		And in the table "FormTable*" I click "Add" button
+		And I input "String 1" text in "Add atribute String" field of "FormTable*" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And in the table "FormTable*" I click the button named "FormTable*Add"
+		And I input "String 2" text in "Add atribute String" field of "FormTable*" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "2,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And I click "Save and close" button
+		And table "List" contains lines:
+			| 'Description' |
+			| 'Primitive'       |
+		And I close all client application windows
+		
+				
+
+				
+
+
+
+		
+				
+	

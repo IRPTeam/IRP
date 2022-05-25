@@ -57,6 +57,14 @@ Scenario: _040170 preparation (Shipment confirmation)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create document ShipmentConfirmation (stock control serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -105,6 +113,8 @@ Scenario: _040170 preparation (Shipment confirmation)
 			| "Documents.ShipmentConfirmation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 	// * Check query for Shipment confirmation movements
 	// 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
 	// 	And in the table "Info" I click "Fill movements" button
@@ -234,7 +244,29 @@ Scenario: _040175 check Shipment confirmation movements by the Register  "R4012 
 // 			| 'Register  "R2013 Procurement of sales orders"' | '' | '' | '' | '' | '' |
 			
 // 		And I close all client application windows
-		
+
+Scenario: _040176 check Shipment confirmation with serial lot number movements by the Register  "R4010 Actual stocks"
+	* Select Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 112' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 1 112 dated 24.05.2022 11:01:23' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                        | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                       | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                      | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                      | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                      | 'Expense'     | '24.05.2022 11:01:23' | '5'         | 'Store 02'   | 'PZU'      | '8908899877'        |
+			| ''                                                      | 'Expense'     | '24.05.2022 11:01:23' | '5'         | 'Store 02'   | 'PZU'      | '8908899879'        |
+			| ''                                                      | 'Expense'     | '24.05.2022 11:01:23' | '5'         | 'Store 02'   | 'UNIQ'     | ''                  |
+		And I close all client application windows
+
+
 Scenario: _040177 check Shipment confirmation movements by the Register  "R4034 Scheduled goods shipments" (use sheduling, SO exists)
 	* Select Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"

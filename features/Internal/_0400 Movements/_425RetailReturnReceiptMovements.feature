@@ -50,6 +50,13 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -86,7 +93,9 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
-
+		When Create document RetailReturnReceipt objects (stock control serial lot numbers)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
 Scenario: _042501 check Retail return receipt movements by the Register  "R4010 Actual stocks"
@@ -183,7 +192,27 @@ Scenario: _042504 check Retail return receipt movements by the Register  "R2001 
 			| ''                                                    | '15.03.2021 16:01:25' | '-1'        | '-89,02'    | '-75,44'     | ''              | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'XS/Blue'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''             |
 		And I close all client application windows
 
-
+Scenario: _042505 check Retail return receipt movements by the Register  "R4010 Actual stocks"
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 112' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 1 112 dated 20.05.2022 18:28:10' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                        | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                       | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                      | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                      | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                      | 'Receipt'     | '20.05.2022 18:28:10' | '5'         | 'Store 01'   | 'PZU'      | '8908899877'        |
+			| ''                                                      | 'Receipt'     | '20.05.2022 18:28:10' | '5'         | 'Store 01'   | 'PZU'      | '8908899879'        |
+			| ''                                                      | 'Receipt'     | '20.05.2022 18:28:10' | '10'        | 'Store 01'   | 'XL/Green' | ''                  |
+			| ''                                                      | 'Receipt'     | '20.05.2022 18:28:10' | '10'        | 'Store 01'   | 'UNIQ'     | ''                  |	
+		And I close all client application windows
 
 Scenario: _042508 check Retail return receipt movements by the Register  "R2021 Customer transactions"
 	* Select Retail return receipt

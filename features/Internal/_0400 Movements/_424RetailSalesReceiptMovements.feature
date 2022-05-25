@@ -51,6 +51,13 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
 		When Create catalog BankTerms objects
 		When Create catalog PaymentTerminals objects
@@ -82,10 +89,12 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create document RetailSalesReceipt objects (with retail customer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
-		When Create document RetailSalesReceipt and RetailRetutnReceipt objects (with discount) 
+		When Create document RetailSalesReceipt and RetailRetutnReceipt objects (with discount)
+		When Create document RetailSalesReceipt (stock control serial lot numbers) 
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: _042401 check Retail sales receipt movements by the Register  "R4010 Actual stocks"
 	* Select Retail sales receipt
@@ -148,6 +157,27 @@ Scenario: _042403 check Retail sales receipt movements by the Register  "R3010 C
 			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '1 664,06'  | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		And I close all client application windows
+
+Scenario: _042404 check Retail sales receipt with serial lot number movements by the Register  "R4010 Actual stocks"
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 112' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 112 dated 24.05.2022 14:18:49' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                      | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                     | 'Expense'     | '24.05.2022 14:18:49' | '5'         | 'Store 03'   | 'PZU'      | '8908899877'        |
+			| ''                                                     | 'Expense'     | '24.05.2022 14:18:49' | '5'         | 'Store 03'   | 'PZU'      | '8908899879'        |
+			| ''                                                     | 'Expense'     | '24.05.2022 14:18:49' | '10'        | 'Store 03'   | 'UNIQ'     | ''                  |	
 		And I close all client application windows
 
 Scenario: _042408 check Retail sales receipt movements by the Register  "R2021 Customer transactions"

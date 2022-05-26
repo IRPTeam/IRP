@@ -166,7 +166,7 @@ Scenario: Create catalog ItemKeys objects
 
 Scenario: Create catalog ItemTypes objects
 
-	And I check or create catalog "ItemTypes" objects:
+	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Parent'                                                            | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47ee' | 'False'           | ''                                                                  | 'True'      | ''                       | ''                   | 'Accessories'    | ''                 | ''               | 'Accessories TR' | '_6da1532bef3f4f93b6c51881f2c0a6b2' |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Clothes'        | ''                 | ''               | 'Clothes TR'     | '_73585f90e829490c95f07908375e6693' |
@@ -208,7 +208,7 @@ Scenario: Create catalog Units objects
 
 Scenario: Create catalog Items objects
 
-	And I check or create catalog "Items" objects:
+	And I check or create for catalog "Items" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                           | 'DeletionMark'    | 'Code'         | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture' | 'Vendor' | 'ItemID' | 'Description_en'         | 'Description_hash' | 'Description_ru' | 'Description_tr'            |
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'False'           | 1            | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | ''       | 'Dress'                  | ''                 | ''               | 'Dress TR'                  |
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4' | 'False'           | 2            | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | ''       | 'Trousers'               | ''                 | ''               | 'Trousers TR'               |

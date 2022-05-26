@@ -140,7 +140,7 @@ Scenario: Create catalog CashAccounts objects
 
 Scenario: Create catalog Companies objects (Main company)
 
-	And I check or create catalog "Companies" objects:
+	And I check or create for catalog "Companies" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'False'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company' | 'True' | 'Main Company'             | ''                 | ''               | 'Main Company TR'             |
 
@@ -154,7 +154,7 @@ Scenario: Create catalog Companies objects (Main company)
 
 
 Scenario: Create catalog Companies objects (own Second company)
-	And I check or create catalog "Companies" objects:
+	And I check or create for catalog "Companies" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'False'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1853' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company' | 'True' | 'Second Company'           | ''                 | ''               | 'Second Company TR'           |
 
@@ -162,7 +162,7 @@ Scenario: Create catalog Companies objects (own Second company)
 Scenario: Create catalog Companies objects (partners company)
 
 	
-	And I check or create catalog "Companies" objects:
+	And I check or create for catalog "Companies" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'False'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'Enum.CompanyLegalType.Company' | 'False'  | 'Company Ferron BP'        | ''                 | ''               | 'Company Ferron BP TR'        |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a3' | 'False'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1853' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871' | 'Enum.CompanyLegalType.Company' | 'False'  | 'Company Kalipso'          | ''                 | ''               | 'Company Kalipso TR'          |
@@ -182,12 +182,12 @@ Scenario: Create catalog Companies objects (partners company)
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced12eaf13c5c2df439' | 'False'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf134a6a475a9' | 'Enum.CompanyLegalType.Company' | 'False'  | 'Company NDB'              | ''                 | ''               | ''                            |
 
 Scenario: Create catalog Companies objects (second company Ferron BP)
-	And I check or create catalog "Companies" objects:
+	And I check or create for catalog "Companies" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b1' | 'False'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'Enum.CompanyLegalType.Company' | 'False'  | 'Second Company Ferron BP' | ''                 | ''               | 'Second Company Ferron BP TR' |
 Scenario: Create catalog Companies objects (partners company Almo, Sovelie)
 
-	And I check or create catalog "Companies" objects:
+	And I check or create for catalog "Companies" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner' | 'Type'                          | 'OurCompany' | 'Description_en'  | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd8f1ea75951' | 'False'           | 'e1cib/data/Catalog.Countries?ref=86ffd69b4676df1211ea9f634beb7fe7' | ''            | ''        | 'Enum.CompanyLegalType.Company' | 'False'  | 'Company Almo'    | ''                 | ''               | 'Company Almo TR'     |
 		| 'e1cib/data/Catalog.Companies?ref=aa6b120ed92fbced11eacd8f1ea75952' | 'False'           | 'e1cib/data/Catalog.Countries?ref=86ffd69b4676df1211ea9f6341455c84' | ''            | ''        | 'Enum.CompanyLegalType.Company' | 'False'  | 'Company Sovelie' | ''                 | ''               | 'Company Sovelie TR' |
@@ -250,7 +250,7 @@ Scenario: Create catalog ItemSegments objects
 
 Scenario: Create catalog ItemTypes objects (Clothes, Shoes)
 
-	And I check or create catalog "ItemTypes" objects:
+	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Parent'                                                            | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Clothes'        | ''                 | ''               | 'Clothes TR'     | '_73585f90e829490c95f07908375e6693' |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f2' | 'False'           | ''                                                                  | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Shoes'          | ''                 | ''               | 'Shoes TR'       | '_a6581c44d447493ca094d5ddc36f71b4' |
@@ -270,7 +270,7 @@ Scenario: Create catalog ItemTypes objects (Clothes, Shoes)
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47e7' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47e9' | 'False'            | 'False'       | 'False'         |
 
 Scenario: Create catalog ItemTypes objects (Coat, Jeans)
-	And I check or create catalog "ItemTypes" objects:
+	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                         |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78170ed92fbced11eaf115bcc9c5f9' | 'False'           | ''       | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Coat'           | ''                 | ''               | 'Coat TR'        | '_73585f90e829490c95f07908375e777' |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa88170ed92fbced11eaf115bcc9c5f9' | 'False'           | ''       | 'False'       | 'Enum.ItemTypes.Product' | 'False'                 | 'Jeans'          | ''                 | ''               | 'Jeans TR'       | '_73585f90e829490c95f07908375e778' |
@@ -320,32 +320,32 @@ Scenario: Create catalog ObjectStatuses objects
 
 Scenario: Create catalog Partners objects (Ferron BP)
 
-	And I check or create catalog "Partners" objects:
+	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'False'           | ''                                                                 | 'True'      | 'True'    | 'False'       | 'False'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099b' | 'False'                                      | 'False'                                | 'Ferron BP'        | ''                 | ''               | 'Ferron BP TR'       |
 
 Scenario: Create catalog Partners objects (Partner 01)
 
-	And I check or create catalog "Partners" objects:
+	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8baf322dba' | 'False'           | ''                                                                 | 'True'      | 'True'    | 'False'       | 'False'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa6b120ed92fbced11eacd8f1ea7591c' | 'False'                                      | 'False'                                | 'Partner 01'        | ''                 | ''               | ''       |	
 		
 Scenario: Create catalog Partners objects (Kalipso)
 
-	And I check or create catalog "Partners" objects:
+	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871' | 'False'           | ''                                                                 | 'True'      | 'False'     | 'False'       | 'False'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099c' | 'True'                                     | 'False'                                | 'Kalipso'          | ''                 | ''               | 'Kalipso TR'         |
 
 Scenario: Create catalog Partners objects (Lomaniti)
 
-	And I check or create catalog "Partners" objects:
+	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1873' | 'False'           | ''                                                                 | 'True'      | 'False'     | 'False'       | 'False'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099c' | 'False'                                      | 'False'                                | 'Lomaniti'         | ''                 | ''               | 'Lomaniti TR'        |
 
 
 Scenario: Create catalog Partners objects (Employee)
 
-	And I check or create catalog "Partners" objects:		
+	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:		
 		| 'Ref'                                                              | 'DeletionMark' | 'Parent' | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'  | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8e2a104de9' | 'False'           | ''       | 'False'       | 'False'     | 'True'      | 'False'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa6b120ed92fbced11eacd8f1ea7591d' | 'False'                                      | 'False'                                | 'Daniel Smith'    | ''                 | ''               | 'Daniel Smith TR'    |
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8e2a104d11' | 'False'           | ''       | 'False'       | 'False'     | 'True'      | 'False'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa6b120ed92fbced11eacd8f1ea7591c' | 'False'                                      | 'False'                                | 'Olivia Williams' | ''                 | ''               | 'Olivia Williams TR' |
@@ -571,7 +571,7 @@ Scenario: Create catalog ItemKeys objects
 
 Scenario: Create catalog ItemTypes objects
 
-	And I check or create catalog "ItemTypes" objects:
+	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Parent'                                                            | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en'                                  | 'Description_hash' | 'Description_ru' | 'Description_tr'                                     | 'UniqueID'                          |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb47ee' | 'False'        | ''                                                                  | 'True'     | ''                       | ''                   | 'Accessories'                                     | ''                 | ''               | 'Accessories TR'                                     | '_6da1532bef3f4f93b6c51881f2c0a6b2' |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'False'        | ''                                                                  | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | 'Clothes'                                         | ''                 | ''               | 'Clothes TR'                                         | '_73585f90e829490c95f07908375e6693' |
@@ -603,7 +603,7 @@ Scenario: Create catalog ItemTypes objects
 
 Scenario: Create catalog ItemTypes objects (serial lot numbers)
 
-	And I check or create catalog "ItemTypes" objects:
+	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en'                                  | 'Description_hash' | 'Description_ru' | 'Description_tr'                                     | 'UniqueID'                          | 'StockBalanceDetail'                        |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'False'        | ''       | 'False'    | 'Enum.ItemTypes.Product' | 'True'               | 'With serial lot numbers (use stock control)'     | ''                 | ''               | 'With serial lot numbers TR'                         | '_a89189722e124d23bbcdca289485beb7' | 'Enum.StockBalanceDetail.BySerialLotNumber' |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb49ef' | 'False'        | ''       | 'False'    | 'Enum.ItemTypes.Product' | 'True'               | 'With serial lot numbers (without stock control)' | ''                 | ''               | 'With serial lot numbers (without stock control) TR' | '_a89189722e124d23bbcdca289485beb8' | 'Enum.StockBalanceDetail.ByItemKey'         |
@@ -615,14 +615,14 @@ Scenario: Create catalog ItemTypes objects (serial lot numbers)
 
 Scenario: Create catalog ItemTypes objects (Furniture)
 
-	And I check or create catalog "ItemTypes" objects:
+	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type' | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78178ed92fbced11eaf15dc8cb47ee' | 'False'        | ''       | 'False'    | ''     | ''                   | 'Furniture'      | ''                 | ''               | 'Furniture TR'   | '_6da4444bef3f4f93b6c51881f2c0a6b9' |
 
 Scenario: Create catalog Items objects (serial lot numbers)
 
 
-	And I check or create catalog "Items" objects:
+	And I check or create for catalog "Items" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture'                          | 'Vendor' | 'ItemID' | 'PackageUnit' | 'Description_en'     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
 		| 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f' | 'False'        | 161    | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Product 1 with SLN' | ''                 | ''               | ''               |          |          |          |          |         |
 		| 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd51a0388f5a3' | 'False'        | 162    | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Product 2 with SLN' | ''                 | ''               | ''               |          |          |          |          |         |
@@ -686,7 +686,7 @@ Scenario: Create catalog Units objects
 
 Scenario: Create catalog Items objects
 
-	And I check or create catalog "Items" objects:
+	And I check or create for catalog "Items" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                           | 'DeletionMark'    | 'Code'      | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture' | 'Vendor' | 'ItemID'       | 'Description_en'         | 'Description_hash' | 'Description_ru' | 'Description_tr'            |
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'False'           |   1         | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | '10001'        | 'Dress'                  | ''                 | ''               | 'Dress TR'                  |
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4' | 'False'           |   2         | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | '10002'        | 'Trousers'               | ''                 | ''               | 'Trousers TR'               |
@@ -715,7 +715,7 @@ Scenario: Create catalog Items objects
 
 Scenario: Create catalog Items objects (Boots)
 
-	And I check or create catalog "Items" objects:
+	And I check or create for catalog "Items" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                           | 'DeletionMark' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture' | 'Vendor' | 'ItemID' | 'Description_en'         | 'Description_hash' | 'Description_ru' | 'Description_tr'            |
 		| 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | 'False'           | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f2' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | ''       | 'Boots'                  | ''                 | ''               | 'Boots TR'                  |
 
@@ -732,7 +732,7 @@ Scenario: Create catalog PartnerSegments objects
 
 Scenario: Create catalog Partners objects
 
-	And I check or create catalog "Partners" objects:
+	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'False'           | ''                                                                 | 'True'      | 'True'    | 'False'       | 'False'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099b' | 'False'                                      | 'False'                                | 'Ferron BP'        | ''                 | ''               | 'Ferron BP TR'       |
 		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871' | 'False'           | ''                                                                 | 'True'      | 'False'     | 'False'       | 'False'       | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099c' | 'True'                                     | 'False'                                | 'Kalipso'          | ''                 | ''               | 'Kalipso TR'         |
@@ -1381,7 +1381,7 @@ Scenario: Create catalog ItemKeys objects (Table)
 
 Scenario: Create catalog Items objects (Table)
 
-	And I check or create catalog "Items" objects:
+	And I check or create for catalog "Items" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                           | 'DeletionMark' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture' | 'Vendor' | 'ItemID' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.Items?ref=aa7b120ed92fbced11eb055269b1319a' | 'False'           | 'e1cib/data/Catalog.ItemTypes?ref=aa78178ed92fbced11eaf15dc8cb47ee' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage' | ''       | ''       | 'Table'          | ''                 | ''               | ''               |
 
@@ -1828,10 +1828,10 @@ Scenario: Create catalog Agreements objects (Customer)
 
 Scenario: Create catalog Partners objects and Companies objects (Customer)
 
-	And I check or create catalog "Partners" objects:
+	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                              | 'DeletionMark' | 'Parent' | 'Code' | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment' | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebe9e1959cde75' | 'False'        | ''       | '1'    | 'True'     | 'False'  | 'False'    | 'False'    | ''               | 'False'                                   | 'False'                             | 'Customer'       | ''                 | ''               | ''               |
-	And I check or create catalog "Companies" objects:
+	And I check or create for catalog "Companies" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Country' | 'MainCompany' | 'Partner'                                                          | 'Type'                             | 'OurCompany' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebe9e1959cde76' | 'False'        | '1'    | ''        | ''            | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebe9e1959cde75' | 'Enum.CompanyLegalType.Individual' | 'False'      | 'Customer'       | ''                 | ''               | ''               |
 
@@ -1845,11 +1845,11 @@ Scenario: Create catalog RetailCustomers objects (check POS)
 
 Scenario: Create catalog Partners objects (Customer)
 
-		And I check or create catalog "Partners" objects:
+		And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:
 			| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Code' | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 			| 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebebbd152ab7f6' | 'False'        | ''                                                                 | '1'    | 'True'     | 'False'  | 'False'    | 'False'    | ''                                                                        | 'False'                                   | 'False'                             | 'Customer'         | ''                 | ''               | ''                   |
 							
-		And I check or create catalog "Companies" objects:
+		And I check or create for catalog "Companies" objects with Data Exchange Load parameter set to true:
 			| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                             | 'OurCompany' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'       |
 			| 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebebbd152ab7f7' | 'False'        | '1'    | ''                                                                  | ''            | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebebbd152ab7f6' | 'Enum.CompanyLegalType.Individual' | 'False'      | 'Customer'                | ''                 | ''               | ''                     |
 
@@ -1903,11 +1903,11 @@ Scenario: Create catalog SerialLotNumbers objects (for Phone)
 
 Scenario: Create Item with SerialLotNumbers (Phone)
 
-	And I check or create catalog "Items" objects:
+	And I check or create for catalog "Items" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture'                          | 'Vendor' | 'ItemID' | 'PackageUnit' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
 		| 'e1cib/data/Catalog.Items?ref=b76fba77ffd4077e11ec15161117f5e1' | 'False'        | 19     | 'e1cib/data/Catalog.ItemTypes?ref=b76fba77ffd4077e11ec15161117f5e0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Phone A'        | ''                 | ''               | ''               |          |          |          |          |         |
 
-	And I check or create catalog "ItemTypes" objects:
+	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Code' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
 		| 'e1cib/data/Catalog.ItemTypes?ref=b76fba77ffd4077e11ec15161117f5e0' | 'False'        | ''       | 'False'    | 14     | 'Enum.ItemTypes.Product' | 'True'               | 'Phones'         | ''                 | ''               | ''               | '_03b15d3fc19f499b924879810d0147ba' |
 

@@ -244,7 +244,7 @@ Scenario: Create catalog BusinessUnits objects (LC)
 
 Scenario: Create catalog Companies objects (LC)
 
-	And I check or create catalog "Companies" objects:
+	And I check or create for catalog "Companies" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                             | 'OurCompany' | 'LandedCostCurrencyMovementType'                                                                  | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
 		| 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'No'           | '0'    | 'e1cib/data/Catalog.Countries?ref=86ffd69b4676df1211ea9f6341455c84' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company'    | 'Yes'        | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e' | 'Main Company'             | ''                 | ''               | 'Main Company TR'             |
 		| 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f693615184a' | 'No'           | '0'    | 'e1cib/data/Catalog.Countries?ref=86ffd69b4676df1211ea9f6341455c84' | ''            | 'e1cib/data/Catalog.Partners?ref=86ffd69b4676df1211ea9f643f742c24' | ''                                 | 'No'         | ''                                                                                                | 'Company Ferron BP'        | ''                 | ''               | 'Company Ferron BP TR'        |
@@ -621,7 +621,7 @@ Scenario: Create catalog SerialLotNumbers objects (LC)
 
 Scenario: Create catalog ItemTypes objects (LC)
 
-	And I check or create catalog "ItemTypes" objects:
+	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                               | 'DeletionMark' | 'Parent'                                                            | 'IsFolder' | 'Code' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
 		| 'e1cib/data/Catalog.ItemTypes?ref=86ffd69b4676df1211ea9fddddc748b9' | 'No'           | ''                                                                  | 'Yes'      | '0'    | ''                       | ''                   | ''               | ''                 | ''               | 'Accessories TR' | ''                                  |
 		| 'e1cib/data/Catalog.ItemTypes?ref=86ffd69b4676df1211ea9f66bce7e209' | 'No'           | ''                                                                  | 'No'       | '0'    | 'Enum.ItemTypes.Product' | 'No'                 | 'Сlothes'        | ''                 | ''               | 'Сlothes TR'     | ''                                  |
@@ -664,7 +664,7 @@ Scenario: Create catalog Units objects (LC)
 
 Scenario: Create catalog Items objects (LC)
 
-	And I check or create catalog "Items" objects:
+	And I check or create for catalog "Items" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture' | 'Vendor' | 'ItemID' | 'Description_en'         | 'Description_hash' | 'Description_ru' | 'Description_tr'          | 'Length' | 'Width' | 'Height' | 'Volume' | 'Weight' |
 		| 'e1cib/data/Catalog.Items?ref=86ffd69b4676df1211ea9f66ea4bc26a' | 'No'           | '0'    | 'e1cib/data/Catalog.ItemTypes?ref=86ffd69b4676df1211ea9f66bce7e209' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 'ValueStorage' | ''       | ''       | 'Dress'                  | ''                 | ''               | 'Dress TR'                | '0'      | '0'     | '0'      | '0'      | '0,232'  |
 		| 'e1cib/data/Catalog.Items?ref=86ffd69b4676df1211ea9f66f09eb6c5' | 'No'           | '0'    | 'e1cib/data/Catalog.ItemTypes?ref=86ffd69b4676df1211ea9f66bce7e209' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 'ValueStorage' | ''       | ''       | 'Trousers'               | ''                 | ''               | 'Trousers TR'             | '0'      | '0'     | '0'      | '0'      | '0,350'  |
@@ -809,7 +809,7 @@ Scenario: Create catalog Agreements objects (LC)
 
 Scenario: Create catalog Partners objects (LC)
 
-	And I check or create catalog "Partners" objects:
+	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Code' | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
 		| 'e1cib/data/Catalog.Partners?ref=86ffd69b4676df1211ea9f643f742c24' | 'No'           | ''                                                                 | '0'    | 'Yes'      | 'Yes'    | 'No'       | 'No'       | 'e1cib/data/Catalog.PartnerSegments?ref=86ffd69b4676df1211ea9f68800cbfbc' | 'No'                                      | 'No'                                | 'Ferron BP'        | ''                 | ''               | 'Ferron BP TR'       |
 		| 'e1cib/data/Catalog.Partners?ref=86ffd69b4676df1211ea9f6446479bcb' | 'No'           | ''                                                                 | '0'    | 'Yes'      | 'No'     | 'No'       | 'No'       | 'e1cib/data/Catalog.PartnerSegments?ref=86ffd69b4676df1211ea9f6887cf1fc0' | 'Yes'                                     | 'No'                                | 'Kalipso'          | ''                 | ''               | 'Kalipso TR'         |

@@ -15,4 +15,6 @@
   <content>AccumulationRegister.R4014B_SerialLotNumber.Dimension.SerialLotNumber</content>
   <content>AccumulationRegister.R4014B_SerialLotNumber</content>
   <content>Catalog.ItemTypes.Attribute.UseSerialLotNumber</content>
+  <content>Catalog.ItemTypes.TabularSection.RegExpSerialLotNumbersRules</content>
+  <content>Catalog.ItemTypes.Attribute.StockBalanceDetail</content>
 </mdclass:FunctionalOption>

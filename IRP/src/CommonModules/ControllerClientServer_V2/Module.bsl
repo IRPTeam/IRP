@@ -484,7 +484,6 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("SalesReturn"               , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("InventoryTransfer"         , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("PhysicalInventory"         , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("PhysicalCountByLocation"   , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
 	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
@@ -4650,7 +4649,7 @@ Function BindItemListItemKey(Parameters)
 
 	Binding.Insert("PhysicalCountByLocation", 
 			"StepChangeUnitByItemKey,
-			|StepExtractDataItemKeysWithSerialLotNumbers");
+			|StepChangeUseSerialLotNumberByItemKey");
 		
 	Binding.Insert("ItemStockAdjustment" , "StepChangeUnitByItemKey");
 	Binding.Insert("Bundling"            , "StepChangeUnitByItemKey");
@@ -5548,6 +5547,36 @@ Function BindItemListSerialLotNumber(Parameters)
 	Binding = New Structure();	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_USE_SERIAL_LOT_NUMBER
+
+// ItemList.UseSerialLotNumber.Set
+Procedure SetItemListUseSerialLotNumber(Parameters, Results) Export
+	Binding = BindItemListUseSerialLotNumber(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.UseSerialLotNumber.Bind
+Function BindItemListUseSerialLotNumber(Parameters)
+	DataPath = "ItemList.UseSerialLotNumber";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.UseSerialLotNumber.ChangeUseSerialLotNumberByItemKey.Step
+Procedure StepChangeUseSerialLotNumberByItemKey(Parameters, Chain) Export
+	Chain.ChangeUseSerialLotNumberByItemKey.Enable = True;
+	Chain.ChangeUseSerialLotNumberByItemKey.Setter = "SetItemListUseSerialLotNumber";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeUseSerialLotNumberByItemKeyOptions();
+		Options.ItemKey  = GetItemListItemKey(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepChangeUseSerialLotNumberByItemKey";
+		Chain.ChangeUseSerialLotNumberByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 

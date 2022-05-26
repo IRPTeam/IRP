@@ -80,7 +80,7 @@ Scenario: Create catalog AccessProfiles objects
 
 Scenario: Create catalog Agreements objects
 
-	And I check or create catalog "Agreements" objects:
+	And I check or create for catalog "Agreements" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                | 'DeletionMark' | 'Number' | 'Date'                | 'PartnerSegment'                                                          | 'Partner'                                                          | 'Company'                                                           | 'PriceType'                                                          | 'ItemSegment'                                                          | 'StartUsing'          | 'EndOfUse'            | 'ManagerSegment' | 'PriceIncludeTax' | 'NumberDaysBeforeDelivery' | 'Store'                                                          | 'Type'                         | 'LegalName'                                                         | 'CurrencyMovementType'                                                                            | 'ApArPostingDetail'                          | 'StandardAgreement'                                                  | 'Kind'                         | 'Description_en'                             | 'Description_hash' | 'Description_ru' | 'Description_tr'                   |
 		| 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb73' | 'False'           | '20'     | '01.11.2018 00:00:00' | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf113ba6c1874' | ''                                                                 | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | ''                                                                     | '01.11.2018 00:00:00' | '01.01.0001 00:00:00' | ''               | 'True'             | '4'                        | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'Enum.AgreementTypes.Customer' | ''                                                                  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByDocuments'         | ''                                                                   | 'Enum.AgreementKinds.Regular'  | 'Basic Partner terms, TRY'                   | ''                 | ''               | 'Basic Partner terms, TRY'         |
 		| 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb74' | 'False'           | '21'     | '01.11.2018 00:00:00' | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf113ba6c1874' | ''                                                                 | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | ''                                                                     | '01.11.2018 00:00:00' | '02.11.2019 00:00:00' | ''               | 'False'              | '5'                        | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | 'Enum.AgreementTypes.Customer' | ''                                                                  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c1861' | 'Enum.ApArPostingDetail.ByDocuments'         | ''                                                                   | 'Enum.AgreementKinds.Regular'  | 'Basic Partner terms, $'                     | ''                 | ''               | 'Basic Partner terms, $'           |
@@ -1453,7 +1453,7 @@ Scenario: Create information register UserSettings records
 
 Scenario: Create catalog SerialLotNumbers objects
 
-	And I check or create catalog "SerialLotNumbers" objects:
+	And I check or create for catalog "SerialLotNumbers" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description'    | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=aa7d120ed92fbced11eb095a22e1d875' | 'False'        | '1'    | '12345456'       | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf1277d18ed8a'| 'False'    | 'False'    |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a015' | 'False'        | '11'   | '0512'           | ''                                                                 | 'False'    | 'True'     |
@@ -1461,7 +1461,7 @@ Scenario: Create catalog SerialLotNumbers objects
 
 Scenario: Create catalog SerialLotNumbers objects (serial lot numbers)
 
-	And I check or create catalog "SerialLotNumbers" objects:
+	And I check or create for catalog "SerialLotNumbers" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description'    | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b780c87413d4c65f11ecd519fda72072' | 'False'        | 13     | '8908899877'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'              |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | 'False'        | 14     | '09987897977889' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'False'              |
@@ -1520,7 +1520,7 @@ Scenario: Create catalog Hardware objects  (Test)
 
 Scenario: Create catalog Workstations objects  (Test)
 
-	And I check or create catalog "Workstations" objects:
+	And I check or create for catalog "Workstations" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Description' | 'CashAccount' | 'UniqueID' |
 		| 'e1cib/data/Catalog.Workstations?ref=aa7d120ed92fbced11eb096728fa8eee' | 'False'           | 'Test'        | ''            | ''         |
 
@@ -1794,7 +1794,7 @@ Scenario: Create catalog CancelReturnReasons objects
 
 Scenario: Create catalog Workstations objects
 
-	And I check or create catalog "Workstations" objects:
+	And I check or create for catalog "Workstations" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Code'         | 'Description'    | 'CashAccount'                                                          | 'PrintTemplate' | 'UniqueID'  |
 		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb97c8502ea899' | 'False'        | '000000000001' | 'Workstation 01' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1869' | ''              | 'TeamAgent' |
 
@@ -1822,7 +1822,7 @@ Scenario: Create catalog PlanningPeriods objects
 	
 Scenario: Create catalog Agreements objects (Customer)
 
-	And I check or create catalog "Agreements" objects:
+	And I check or create for catalog "Agreements" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                | 'DeletionMark' | 'Code' | 'Number' | 'Date'                | 'PartnerSegment' | 'Partner'                                                          | 'Company'                                                           | 'PriceType'                                                          | 'ItemSegment' | 'StartUsing'          | 'EndOfUse'            | 'ManagerSegment' | 'PriceIncludeTax' | 'DaysBeforeDelivery' | 'Store'                                                          | 'Type'                         | 'LegalName' | 'CurrencyMovementType'                                                                            | 'ApArPostingDetail'                  | 'StandardAgreement' | 'Kind'                        | 'UseCreditLimit' | 'CreditLimitAmount' | 'PaymentTerm' | 'Description_en'        | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebe9e1959cde77' | 'False'        | '1'    | ''       | '01.01.0001 00:00:00' | ''               | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebe9e1959cde75' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002' | ''            | '01.07.2021 00:00:00' | '01.01.0001 00:00:00' | ''               | 'False'           | '0'                  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | 'Enum.AgreementTypes.Customer' | ''          | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByDocuments' | ''                  | 'Enum.AgreementKinds.Regular' | 'False'          | '0'                 | ''            | 'Customer partner term' | ''                 | ''               | ''               |
 
@@ -1853,7 +1853,7 @@ Scenario: Create catalog Partners objects (Customer)
 			| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                             | 'OurCompany' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'       |
 			| 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebebbd152ab7f7' | 'False'        | '1'    | ''                                                                  | ''            | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebebbd152ab7f6' | 'Enum.CompanyLegalType.Individual' | 'False'      | 'Customer'                | ''                 | ''               | ''                     |
 
-		And I check or create catalog "Agreements" objects:
+		And I check or create for catalog "Agreements" objects with Data Exchange Load parameter set to true:
 			| 'Ref'                                                                | 'DeletionMark' | 'Code' | 'Number' | 'Date'                | 'PartnerSegment'                                                          | 'Partner'                                                          | 'Company'                                                           | 'PriceType'                                                          | 'ItemSegment'                                                          | 'StartUsing'          | 'EndOfUse'            | 'ManagerSegment' | 'PriceIncludeTax' | 'DaysBeforeDelivery' | 'Store'                                                          | 'Type'                         | 'LegalName'                                                         | 'CurrencyMovementType'                                                                            | 'ApArPostingDetail'                          | 'StandardAgreement'                                                  | 'Kind'                         | 'UseCreditLimit' | 'CreditLimitAmount' | 'PaymentTerm' | 'Description_en'                             | 'Description_hash' | 'Description_ru' | 'Description_tr'                   |
 			| 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebebbd152ab7f8' | 'False'        | '2'    | ''       | '01.01.0001 00:00:00' | ''                                                                        | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebebbd152ab7f6' | ''                                                                  | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002' | ''                                                                     | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | ''               | 'False'           | '0'                  | ''                                                               | 'Enum.AgreementTypes.Customer' | ''                                                                  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByDocuments'         | ''                                                                   | 'Enum.AgreementKinds.Regular'  | 'False'          | '0'                 | ''            | 'Customer partner term'                      | ''                 | ''               | ''                                 |
 		
@@ -1894,7 +1894,7 @@ Scenario: Create catalog PartnerItems objects
 
 Scenario: Create catalog SerialLotNumbers objects (for Phone)
 
-	And I check or create catalog "SerialLotNumbers" objects:
+	And I check or create for catalog "SerialLotNumbers" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description' | 'SerialLotNumberOwner'                                             | 'Inactive' |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5ea' | 'False'        | 1      | '12345678'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2' | 'False'    |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5eb' | 'False'        | 2      | '12345679'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e3' | 'False'    |
@@ -1927,7 +1927,7 @@ Scenario: Create Item with SerialLotNumbers (Phone)
 		| 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e3' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef034' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5dc' | ''              |
 		| 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e4' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef034' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5de' | ''              |
 
-	And I check or create catalog "SerialLotNumbers" objects:
+	And I check or create for catalog "SerialLotNumbers" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description' | 'SerialLotNumberOwner'                                             | 'Inactive' |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5ea' | 'False'        | ''     | '12345678'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2' | 'False'    |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5eb' | 'False'        | ''     | '12345679'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e3' | 'False'    |

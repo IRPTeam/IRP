@@ -497,7 +497,7 @@ Scenario: Create catalog PaymentTerminals objects (test data base)
 
 Scenario: Create catalog PaymentSchedules objects (test data base)
 
-	And I check or create catalog "PaymentSchedules" objects:
+	And I check or create for catalog "PaymentSchedules" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description_ru'  | 'Description_hash' | 'Description_en'      | 'Description_tr' |
 		| 'e1cib/data/Catalog.PaymentSchedules?ref=b762b13668d0905011eb76684b9f686c' | 'False'        | '1'    | 'Отсрочка 7 дней' | ''                 | 'Delay 7 days'        | ''               |
 		| 'e1cib/data/Catalog.PaymentSchedules?ref=b762b13668d0905011eb76684b9f686d' | 'False'        | '2'    | 'Оплата по факту' | ''                 | 'Payment by the fact' | ''               |

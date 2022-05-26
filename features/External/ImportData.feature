@@ -1801,7 +1801,7 @@ Scenario: Create catalog Workstations objects
 
 Scenario: Create catalog PaymentSchedules objects
 
-	And I check or create catalog "PaymentSchedules" objects:
+	And I check or create for catalog "PaymentSchedules" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.PaymentSchedules?ref=b768fb7fcb8cb62f11ebba1d08549f51' | 'False'        | '1'    | '7 days'         | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.PaymentSchedules?ref=b768fb7fcb8cb62f11ebba1d08549f52' | 'False'        | '2'    | '14 days'        | ''                 | ''               | ''               |

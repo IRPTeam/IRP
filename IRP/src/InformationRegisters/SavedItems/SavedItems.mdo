@@ -1,83 +1,139 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f2086ec4-3016-421a-b032-e8d96a8d6973">
-  <producedTypes>
-    <selectionType typeId="00d4e99f-de5a-49f2-9499-d647d640a88d" valueTypeId="7c80eeab-4558-4b9f-9537-91f8338cfab7"/>
-    <listType typeId="cb84a124-3b64-46e4-ad3a-01caf32be1ea" valueTypeId="a98398db-0888-4e3e-b489-f73a813656cf"/>
-    <managerType typeId="c6f5e7c8-3961-4e10-b8eb-203c61773844" valueTypeId="57b12bda-fbc0-4808-a766-54e287d34531"/>
-    <recordSetType typeId="c3e85b5a-2160-431d-b5eb-19287ac92f96" valueTypeId="af09ad8e-c2a0-411b-b210-eeb20003123f"/>
-    <recordKeyType typeId="020f97da-0e18-4951-a770-aca9d7446050" valueTypeId="c1243e56-222a-4b10-8969-3a0f76665e46"/>
-    <recordType typeId="0064ba18-d3bd-4a58-b606-529f36895cd0" valueTypeId="06d935fd-4bb3-44ad-8973-56fb412133cd"/>
-    <recordManagerType typeId="772e58af-8ee2-4d78-8151-d066d6862cf1" valueTypeId="9223e5d7-4018-4364-8b11-bcc53c2642ef"/>
-  </producedTypes>
-  <name>SavedItems</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f2086ec4-3016-421a-b032-e8d96a8d6973">
+ <producedTypes>
+  <selectionType typeId="00d4e99f-de5a-49f2-9499-d647d640a88d" valueTypeId="7c80eeab-4558-4b9f-9537-91f8338cfab7"/>
+  <listType typeId="cb84a124-3b64-46e4-ad3a-01caf32be1ea" valueTypeId="a98398db-0888-4e3e-b489-f73a813656cf"/>
+  <managerType typeId="c6f5e7c8-3961-4e10-b8eb-203c61773844" valueTypeId="57b12bda-fbc0-4808-a766-54e287d34531"/>
+  <recordSetType typeId="c3e85b5a-2160-431d-b5eb-19287ac92f96" valueTypeId="af09ad8e-c2a0-411b-b210-eeb20003123f"/>
+  <recordKeyType typeId="020f97da-0e18-4951-a770-aca9d7446050" valueTypeId="c1243e56-222a-4b10-8969-3a0f76665e46"/>
+  <recordType typeId="0064ba18-d3bd-4a58-b606-529f36895cd0" valueTypeId="06d935fd-4bb3-44ad-8973-56fb412133cd"/>
+  <recordManagerType typeId="772e58af-8ee2-4d78-8151-d066d6862cf1" valueTypeId="9223e5d7-4018-4364-8b11-bcc53c2642ef"/>
+ </producedTypes>
+ <name>SavedItems</name>
+ <synonym>
+  <key>ru</key>
+  <value>Временное хранилище настроек номенклатуры</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Saved items</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kaydedilmiş nesneler</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultListForm>InformationRegister.SavedItems.Form.ListForm</defaultListForm>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Временное хранилище настроек номенклатуры</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Saved item</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Kaydedilmiş nesne</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Временное хранилище настроек номенклатуры</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Saved items</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Kaydedilmiş nesneler</value>
+ </listPresentation>
+ <resources uuid="89ea664a-b951-40f4-8993-a3b455fe509b">
+  <name>Item</name>
   <synonym>
-    <key>en</key>
-    <value>Saved items</value>
+   <key>ru</key>
+   <value>Номенклатура</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultListForm>InformationRegister.SavedItems.Form.ListForm</defaultListForm>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Saved item</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Saved items</value>
-  </listPresentation>
-  <resources uuid="89ea664a-b951-40f4-8993-a3b455fe509b">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="31b759ee-27d5-4a38-90c3-13ea824c2e17">
-    <name>ObjectRef</name>
-    <synonym>
-      <key>en</key>
-      <value>Object ref</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeObjectWithItemList</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="134e6003-6252-4c2a-81c1-6455631f9221">
-    <name>Key</name>
-    <synonym>
-      <key>en</key>
-      <value>Key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="5f9cf64b-a03d-4c21-94d3-d38b0d4d9f94">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Item</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="31b759ee-27d5-4a38-90c3-13ea824c2e17">
+  <name>ObjectRef</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ссылка объекта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Object ref</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne ref</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeObjectWithItemList</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="134e6003-6252-4c2a-81c1-6455631f9221">
+  <name>Key</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Anahtar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="5f9cf64b-a03d-4c21-94d3-d38b0d4d9f94">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

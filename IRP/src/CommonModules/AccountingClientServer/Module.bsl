@@ -1,4 +1,4 @@
-
+﻿
 Procedure BeforeWriteAccountingDocument(Object, MainTableName, Filter_LedgerType = Undefined) Export
 	DeleteUnusedRowsFromAnalyticsTable(Object, MainTableName);
 	CompanyLedgerTypes = AccountingServer.GetLedgerTypesByCompany(Object.Ref, Object.Date, Object.Company);

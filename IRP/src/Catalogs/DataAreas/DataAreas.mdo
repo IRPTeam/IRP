@@ -1,292 +1,396 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="95e32ed1-2ea6-41a8-9906-d72ad936f2b2">
-  <producedTypes>
-    <objectType typeId="1e2e5a4e-a288-4ad5-ae30-15bc26858381" valueTypeId="7f16b394-91ee-4934-b764-ee5f13e4dad3"/>
-    <refType typeId="3e185944-5f92-4665-bd52-bbee914e2673" valueTypeId="c4e1fbe6-8e9e-4650-9a10-3aacc72fcc35"/>
-    <selectionType typeId="f38d84e6-b53d-4d1e-8df4-6a5f2949a9cb" valueTypeId="7717390d-7090-43a1-8dc1-0a326a346c3e"/>
-    <listType typeId="d86952d6-1d89-42bd-9446-66a51b862ee2" valueTypeId="aa30dee7-c611-46f4-8b03-c523c047d6a5"/>
-    <managerType typeId="f1167ddb-f243-4762-82fa-d03853d7f584" valueTypeId="85599879-e626-469d-973c-185a4a4290f0"/>
-  </producedTypes>
-  <name>DataAreas</name>
-  <synonym>
-    <key>en</key>
-    <value>Data areas</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.DataAreas.StandardAttribute.Description</inputByString>
-  <inputByString>Catalog.DataAreas.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="95e32ed1-2ea6-41a8-9906-d72ad936f2b2">
+ <producedTypes>
+  <objectType typeId="1e2e5a4e-a288-4ad5-ae30-15bc26858381" valueTypeId="7f16b394-91ee-4934-b764-ee5f13e4dad3"/>
+  <refType typeId="3e185944-5f92-4665-bd52-bbee914e2673" valueTypeId="c4e1fbe6-8e9e-4650-9a10-3aacc72fcc35"/>
+  <selectionType typeId="f38d84e6-b53d-4d1e-8df4-6a5f2949a9cb" valueTypeId="7717390d-7090-43a1-8dc1-0a326a346c3e"/>
+  <listType typeId="d86952d6-1d89-42bd-9446-66a51b862ee2" valueTypeId="aa30dee7-c611-46f4-8b03-c523c047d6a5"/>
+  <managerType typeId="f1167ddb-f243-4762-82fa-d03853d7f584" valueTypeId="85599879-e626-469d-973c-185a4a4290f0"/>
+ </producedTypes>
+ <name>DataAreas</name>
+ <synonym>
+  <key>ru</key>
+  <value>Рабочие области</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Data areas</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Veri alanları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.DataAreas.StandardAttribute.Description</inputByString>
+ <inputByString>Catalog.DataAreas.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Data area</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>6</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.DataAreas.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.DataAreas.Form.ListForm</defaultListForm>
-  <attributes uuid="2a3e108e-14e7-42e8-b359-5689cdb2ba3e">
-    <name>DataAreaStatus</name>
-    <synonym>
-      <key>en</key>
-      <value>Data area status</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DataAreaStatus</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.DataAreaStatus.EnumValue.AreaPreparation</value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="e5540f3b-b560-4de9-b6c0-7a96c84b25b1">
-    <name>AdminLogin</name>
-    <synonym>
-      <key>en</key>
-      <value>Login</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:StringValue">
-      <value>Admin</value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="6f0f5f5f-64f9-45f8-9ea5-30891f50ed3e">
-    <name>AdminPassword</name>
-    <synonym>
-      <key>en</key>
-      <value>Password</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>30</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="a48b3f93-474c-48b9-be43-88b3fab9a38d">
-    <name>AdminLocalization</name>
-    <synonym>
-      <key>en</key>
-      <value>Localization</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>2</length>
-        <fixed>true</fixed>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="eb5be1a5-fce6-49c0-b03b-ee5645a5f908">
-    <name>InterfaceLocalizationCode</name>
-    <synonym>
-      <key>en</key>
-      <value>Interface</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>5</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="473b65fe-b265-4e2f-b480-25411d176356">
-    <name>CompanyName</name>
-    <synonym>
-      <key>en</key>
-      <value>Company name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="4595f5e6-379f-4749-9857-2ee6be27244b">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="fcc5e3c4-4c39-4491-bdb8-51b55d59ba00">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <commands uuid="a1e22850-a1af-443a-bbfc-b967b2b11cb5">
-    <name>LoginToArea</name>
-    <synonym>
-      <key>en</key>
-      <value>Login to area</value>
-    </synonym>
-    <group>FormCommandBarImportant</group>
-    <commandParameterType>
-      <types>CatalogRef.DataAreas</types>
-    </commandParameterType>
-    <representation>Auto</representation>
-  </commands>
-  <commands uuid="efc483c9-9908-4b83-afd0-f8131e9002d6">
-    <name>LogOutFromArea</name>
-    <synonym>
-      <key>en</key>
-      <value>Log out from area</value>
-    </synonym>
-    <group>NavigationPanelOrdinary</group>
-    <commandParameterType/>
-    <representation>Auto</representation>
-  </commands>
-  <commands uuid="f11e090e-06b6-40ca-bf8b-4266cf467009">
-    <name>UpdateAreas</name>
-    <synonym>
-      <key>en</key>
-      <value>Update areas</value>
-    </synonym>
-    <group>ActionsPanelTools</group>
-    <commandParameterType/>
-    <representation>PictureAndText</representation>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.AppearanceFlagGreen</picture>
-    </picture>
-  </commands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Рабочая область</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Data area</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Veri bölümü</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>6</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.DataAreas.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.DataAreas.Form.ListForm</defaultListForm>
+ <attributes uuid="2a3e108e-14e7-42e8-b359-5689cdb2ba3e">
+  <name>DataAreaStatus</name>
+  <synonym>
+   <key>ru</key>
+   <value>Статус рабочей области</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Data area status</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Veri alanlar statüsü</value>
+  </synonym>
+  <type>
+   <types>EnumRef.DataAreaStatus</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:ReferenceValue">
+   <value>Enum.DataAreaStatus.EnumValue.AreaPreparation</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e5540f3b-b560-4de9-b6c0-7a96c84b25b1">
+  <name>AdminLogin</name>
+  <synonym>
+   <key>ru</key>
+   <value>Логин</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Login</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Login</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:StringValue">
+   <value>Admin</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="6f0f5f5f-64f9-45f8-9ea5-30891f50ed3e">
+  <name>AdminPassword</name>
+  <synonym>
+   <key>ru</key>
+   <value>Пароль</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Password</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Parola</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>30</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="a48b3f93-474c-48b9-be43-88b3fab9a38d">
+  <name>AdminLocalization</name>
+  <synonym>
+   <key>ru</key>
+   <value>Локализация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Localization</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Lokalizasyon</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>2</length>
+    <fixed>true</fixed>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="eb5be1a5-fce6-49c0-b03b-ee5645a5f908">
+  <name>InterfaceLocalizationCode</name>
+  <synonym>
+   <key>ru</key>
+   <value>Интерфейс</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Interface</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Arayüz</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>5</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="473b65fe-b265-4e2f-b480-25411d176356">
+  <name>CompanyName</name>
+  <synonym>
+   <key>ru</key>
+   <value>Наименование организации</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company name</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket ünvanı</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>100</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="4595f5e6-379f-4749-9857-2ee6be27244b">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="fcc5e3c4-4c39-4491-bdb8-51b55d59ba00">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <commands uuid="a1e22850-a1af-443a-bbfc-b967b2b11cb5">
+  <name>LoginToArea</name>
+  <synonym>
+   <key>ru</key>
+   <value>Авторизация в рабочей области</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Login to area</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alana login yap</value>
+  </synonym>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType>
+   <types>CatalogRef.DataAreas</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="efc483c9-9908-4b83-afd0-f8131e9002d6">
+  <name>LogOutFromArea</name>
+  <synonym>
+   <key>ru</key>
+   <value>Выход из рабочей области</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Log out from area</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alandan log out yap</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <commandParameterType/>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="f11e090e-06b6-40ca-bf8b-4266cf467009">
+  <name>UpdateAreas</name>
+  <synonym>
+   <key>ru</key>
+   <value>Обновить области</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Update areas</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bölgeleri güncelle</value>
+  </synonym>
+  <group>ActionsPanelTools</group>
+  <commandParameterType/>
+  <representation>PictureAndText</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.AppearanceFlagGreen</picture>
+  </picture>
+ </commands>
 </mdclass:Catalog>

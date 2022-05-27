@@ -1,61 +1,101 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4aabd59e-2234-4e10-813c-79d9d9534051">
-  <producedTypes>
-    <selectionType typeId="70f0a948-f513-4448-9758-92b482726464" valueTypeId="24ac3d54-ddce-4d2c-8336-68da1f2840c2"/>
-    <listType typeId="f2a40c67-bb90-48a4-8e1f-d422ee695134" valueTypeId="e0288e28-138e-4b87-9782-e4d0f6045d4e"/>
-    <managerType typeId="16d37ec3-c75a-4f78-9128-532a5d5fa748" valueTypeId="e339d848-3a68-47b8-a0b0-7bb52fdcfe0f"/>
-    <recordSetType typeId="279759b6-8e26-47bd-a6e0-ed945bee13d0" valueTypeId="9e7f70d0-2a4e-41ee-a4c4-f8e8724bb07e"/>
-    <recordKeyType typeId="57d3a136-8737-43f3-aec3-54e7da06b024" valueTypeId="f7ce12e3-25ff-4b68-92f8-ccadf76b6338"/>
-    <recordType typeId="d41b8372-1948-4e49-80e0-d9440677cf90" valueTypeId="8a9c981e-8650-4353-8b09-9b6948dc907a"/>
-    <recordManagerType typeId="bd4cca65-9eb7-4df2-854c-0e35240496a3" valueTypeId="69b24edb-4c81-4e6b-828b-c1b53b67a609"/>
-  </producedTypes>
-  <name>BranchBankTerms</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="4aabd59e-2234-4e10-813c-79d9d9534051">
+ <producedTypes>
+  <selectionType typeId="70f0a948-f513-4448-9758-92b482726464" valueTypeId="24ac3d54-ddce-4d2c-8336-68da1f2840c2"/>
+  <listType typeId="f2a40c67-bb90-48a4-8e1f-d422ee695134" valueTypeId="e0288e28-138e-4b87-9782-e4d0f6045d4e"/>
+  <managerType typeId="16d37ec3-c75a-4f78-9128-532a5d5fa748" valueTypeId="e339d848-3a68-47b8-a0b0-7bb52fdcfe0f"/>
+  <recordSetType typeId="279759b6-8e26-47bd-a6e0-ed945bee13d0" valueTypeId="9e7f70d0-2a4e-41ee-a4c4-f8e8724bb07e"/>
+  <recordKeyType typeId="57d3a136-8737-43f3-aec3-54e7da06b024" valueTypeId="f7ce12e3-25ff-4b68-92f8-ccadf76b6338"/>
+  <recordType typeId="d41b8372-1948-4e49-80e0-d9440677cf90" valueTypeId="8a9c981e-8650-4353-8b09-9b6948dc907a"/>
+  <recordManagerType typeId="bd4cca65-9eb7-4df2-854c-0e35240496a3" valueTypeId="69b24edb-4c81-4e6b-828b-c1b53b67a609"/>
+ </producedTypes>
+ <name>BranchBankTerms</name>
+ <synonym>
+  <key>ru</key>
+  <value>Соглашение с банком структурного подразделения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Branch bank terms</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Şube banka sözleşmesi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Соглашение с банком структурного подразделения</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Branch bank term</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Şube banka sözleşmesi</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Соглашения с банком структурного подразделения</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Branch bank terms</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Şube banka sözleşmeleri</value>
+ </listPresentation>
+ <dimensions uuid="495bc5fa-d746-44a1-8a3e-abd9d5bc7fb8">
+  <name>Branch</name>
   <synonym>
-    <key>en</key>
-    <value>Branch bank terms</value>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Branch bank term</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Branch bank terms</value>
-  </listPresentation>
-  <dimensions uuid="495bc5fa-d746-44a1-8a3e-abd9d5bc7fb8">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="45b0d38b-549e-40af-9673-82adaed1ae44">
-    <name>BankTerm</name>
-    <synonym>
-      <key>en</key>
-      <value>Bank term</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BankTerms</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="45b0d38b-549e-40af-9673-82adaed1ae44">
+  <name>BankTerm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение с банком</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Bank term</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Banka sözleşmesi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BankTerms</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

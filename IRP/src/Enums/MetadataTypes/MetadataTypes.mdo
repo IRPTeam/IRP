@@ -1,371 +1,503 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c56cbceb-d1e1-4bdb-94c0-4ca87a4a46c3">
-  <producedTypes>
-    <refType typeId="f156500b-7705-4783-a53b-e442fa60a608" valueTypeId="7b673e38-27bb-449b-90f3-e75e6c90e971"/>
-    <listType typeId="791eda14-8a74-4a31-b514-74480a35e133" valueTypeId="667b09e6-21f0-4f25-82f0-1b487cbcb6fc"/>
-    <managerType typeId="6e3462a1-a887-4753-893c-0fc0a3af399a" valueTypeId="b5570f6a-1517-4180-98ce-7268d8141c2d"/>
-  </producedTypes>
-  <name>MetadataTypes</name>
+ <producedTypes>
+  <refType typeId="f156500b-7705-4783-a53b-e442fa60a608" valueTypeId="7b673e38-27bb-449b-90f3-e75e6c90e971"/>
+  <listType typeId="791eda14-8a74-4a31-b514-74480a35e133" valueTypeId="667b09e6-21f0-4f25-82f0-1b487cbcb6fc"/>
+  <managerType typeId="6e3462a1-a887-4753-893c-0fc0a3af399a" valueTypeId="b5570f6a-1517-4180-98ce-7268d8141c2d"/>
+ </producedTypes>
+ <name>MetadataTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Типы метаданных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Metadata types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Üstveri tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="8d684019-6dfd-41bb-a0ea-5fd9a37a6f71">
+  <name>AccountingRegister</name>
   <synonym>
-    <key>en</key>
-    <value>Metadata types</value>
+   <key>ru</key>
+   <value>Регистр бухгалтерии</value>
   </synonym>
   <synonym>
-    <key>ru</key>
-    <value>Типы метаданных</value>
+   <key>en</key>
+   <value>Accounting register</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="8d684019-6dfd-41bb-a0ea-5fd9a37a6f71">
-    <name>AccountingRegister</name>
-    <synonym>
-      <key>en</key>
-      <value>Accounting register</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Бухгалтерский регистр</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f830f335-5a5e-44a4-ba41-8d4172893aaf">
-    <name>AccumulationRegister</name>
-    <synonym>
-      <key>en</key>
-      <value>Accumulation register</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Регистр накопления</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="38a2da98-2e4a-4e34-af61-3427006c773f">
-    <name>BusinessProcess</name>
-    <synonym>
-      <key>en</key>
-      <value>Business process</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Бизнес-процесс</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="1c570c74-c11b-4663-8663-1167a8aa0d4e">
-    <name>CalculationRegister</name>
-    <synonym>
-      <key>en</key>
-      <value>Calculation register</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Регистр расчета</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="4d53c9ca-be58-47c0-b57f-ce61e2b28a2a">
-    <name>Catalog</name>
-    <synonym>
-      <key>en</key>
-      <value>Catalog</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Справочник</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="d2a3f793-e96b-4df1-9dba-a4092644e4a1">
-    <name>ChartOfAccounts</name>
-    <synonym>
-      <key>en</key>
-      <value>Chart of accounts</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>План счетов</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="a1877195-b3b8-4dfa-a2e9-e0c17cc7c4ed">
-    <name>ChartOfCalculationTypes</name>
-    <synonym>
-      <key>en</key>
-      <value>Chart of calculation types</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>План видов расчета</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7accb34c-49a5-468e-be36-aa541d431752">
-    <name>ChartOfCharacteristicTypes</name>
-    <synonym>
-      <key>en</key>
-      <value>Chart of characteristic types</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>План видов характеристик</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="574400b2-2bcb-4be0-ac26-1b7c1403daaf">
-    <name>CommonAttribute</name>
-    <synonym>
-      <key>en</key>
-      <value>Common attribute</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Общий реквизит</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="af3f59cb-300b-4ac3-908d-2dcc60fad75b">
-    <name>CommonCommand</name>
-    <synonym>
-      <key>en</key>
-      <value>Common command</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Общая команда</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="a445607b-da81-4efd-9d1c-9e168bf25b06">
-    <name>CommonForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Common form</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Общая форма</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="02081f43-e1c4-49e4-84c4-d72a321cac26">
-    <name>Configuration</name>
-    <synonym>
-      <key>en</key>
-      <value>Configuration</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Конфигурация</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="a6f57925-8944-456c-a704-2ab67f4afe74">
-    <name>Constant</name>
-    <synonym>
-      <key>en</key>
-      <value>Constant</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Константа</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="1d8d9784-db72-4331-8188-a7641cf22265">
-    <name>DataProcessor</name>
-    <synonym>
-      <key>en</key>
-      <value>Data processor</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Обработка</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f40a3a5c-bdbd-4712-b98b-5e119a5ec062">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Документ</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="55bf632f-aec4-4c58-ba63-966ad0f0ea12">
-    <name>DocumentJournal</name>
-    <synonym>
-      <key>en</key>
-      <value>Document journal</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Журнал документов</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="df863fb6-2c4a-42df-99e7-b80e761b06c7">
-    <name>Enum</name>
-    <synonym>
-      <key>en</key>
-      <value>Enum</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Перечисление</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="4f443e79-c9ad-4de0-af20-9b6bb6592f68">
-    <name>ExchangePlan</name>
-    <synonym>
-      <key>en</key>
-      <value>Exchange plan</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>План обмена</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="aad646bd-313c-4d53-991e-1e0f3de39d35">
-    <name>ExternalDataSource</name>
-    <synonym>
-      <key>en</key>
-      <value>External data source</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Внешний источник данных</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="c8994e36-9fbe-4883-bdc8-56d5b19c193a">
-    <name>FilterCriterion</name>
-    <synonym>
-      <key>en</key>
-      <value>Filter criterion</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Критерий отбора</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="c915b507-d8e9-4e55-b2b1-bc943b47461e">
-    <name>HTTPService</name>
-    <synonym>
-      <key>en</key>
-      <value>HTTPService</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>HTTP сервис</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="8aa3668d-0a64-4f57-b2db-eea062d4b924">
-    <name>InformationRegister</name>
-    <synonym>
-      <key>en</key>
-      <value>Information register</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Регистр сведений</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="13361dd8-549b-434d-8401-2c2e375c56e9">
-    <name>IntegrationService</name>
-    <synonym>
-      <key>en</key>
-      <value>Integration service</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Интеграционный сервис</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="41259354-a61b-4431-998d-60e3645043df">
-    <name>Report</name>
-    <synonym>
-      <key>en</key>
-      <value>Report</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Отчет</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="9dfe5ef7-073d-4b8e-a100-9d8f9b146aff">
-    <name>Role</name>
-    <synonym>
-      <key>en</key>
-      <value>Role</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Роль</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="d8b63eb2-0e88-4ab3-8618-729e7f4c04dc">
-    <name>Sequence</name>
-    <synonym>
-      <key>en</key>
-      <value>Sequence</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Последовательность</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="733fe9fc-76e7-4d65-8386-71a11f970f09">
-    <name>SessionParameter</name>
-    <synonym>
-      <key>en</key>
-      <value>Session parameter</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Параметр сеанса</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="4804f7fb-4362-4b30-802b-6ada451a1dd3">
-    <name>Subsystem</name>
-    <synonym>
-      <key>en</key>
-      <value>Subsystem</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Подсистема</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="c61c2f59-4c2f-46e0-99ec-076f59f6f6d4">
-    <name>Task</name>
-    <synonym>
-      <key>en</key>
-      <value>Task</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Задача</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b117e9ba-a636-41fc-8040-3f32aa3d2d5c">
-    <name>WebService</name>
-    <synonym>
-      <key>en</key>
-      <value>Web service</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Web-сервис</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="de6d2289-356e-4385-992c-593a6ae321a4">
-    <name>Interface</name>
-    <synonym>
-      <key>en</key>
-      <value>Interface</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Интерфейс</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="92fe2ccb-717b-40cb-9d98-96465da10940">
-    <name>Language</name>
-    <synonym>
-      <key>en</key>
-      <value>Language</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Язык</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>tr</key>
+   <value>Muhasebe kayıt tablosu</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f830f335-5a5e-44a4-ba41-8d4172893aaf">
+  <name>AccumulationRegister</name>
+  <synonym>
+   <key>ru</key>
+   <value>Регистр накопления</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Accumulation register</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Birikim kayıt tablosu</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="38a2da98-2e4a-4e34-af61-3427006c773f">
+  <name>BusinessProcess</name>
+  <synonym>
+   <key>ru</key>
+   <value>Бизнес процесс</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Business process</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İş süreçleri</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="1c570c74-c11b-4663-8663-1167a8aa0d4e">
+  <name>CalculationRegister</name>
+  <synonym>
+   <key>ru</key>
+   <value>Рагистр расчета</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Calculation register</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hesaplama kayıt tablosu</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="4d53c9ca-be58-47c0-b57f-ce61e2b28a2a">
+  <name>Catalog</name>
+  <synonym>
+   <key>ru</key>
+   <value>Справочник</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Catalog</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kart listesi</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="d2a3f793-e96b-4df1-9dba-a4092644e4a1">
+  <name>ChartOfAccounts</name>
+  <synonym>
+   <key>ru</key>
+   <value>План счетов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Chart of accounts</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hesap planı</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="a1877195-b3b8-4dfa-a2e9-e0c17cc7c4ed">
+  <name>ChartOfCalculationTypes</name>
+  <synonym>
+   <key>ru</key>
+   <value>План видов расчета</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Chart of calculation types</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hesaplama tür planı</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="7accb34c-49a5-468e-be36-aa541d431752">
+  <name>ChartOfCharacteristicTypes</name>
+  <synonym>
+   <key>ru</key>
+   <value>План видов характеристик</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Chart of characteristic types</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Karakteristik tür planı</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="574400b2-2bcb-4be0-ac26-1b7c1403daaf">
+  <name>CommonAttribute</name>
+  <synonym>
+   <key>ru</key>
+   <value>Общий реквизит</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Common attribute</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Genel öznitellik</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="af3f59cb-300b-4ac3-908d-2dcc60fad75b">
+  <name>CommonCommand</name>
+  <synonym>
+   <key>ru</key>
+   <value>Обшия команда</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Common command</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Genel komut</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="a445607b-da81-4efd-9d1c-9e168bf25b06">
+  <name>CommonForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Общая форма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Common form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Genel form</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="02081f43-e1c4-49e4-84c4-d72a321cac26">
+  <name>Configuration</name>
+  <synonym>
+   <key>ru</key>
+   <value>Конфигурация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Configuration</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kongigürasyon</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="a6f57925-8944-456c-a704-2ab67f4afe74">
+  <name>Constant</name>
+  <synonym>
+   <key>ru</key>
+   <value>Константы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Constant</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sabit değer</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="1d8d9784-db72-4331-8188-a7641cf22265">
+  <name>DataProcessor</name>
+  <synonym>
+   <key>ru</key>
+   <value>Внешняя обработка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Data processor</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Veri işlemci</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f40a3a5c-bdbd-4712-b98b-5e119a5ec062">
+  <name>Document</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="55bf632f-aec4-4c58-ba63-966ad0f0ea12">
+  <name>DocumentJournal</name>
+  <synonym>
+   <key>ru</key>
+   <value>Журнал документов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document journal</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak klasörü</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="df863fb6-2c4a-42df-99e7-b80e761b06c7">
+  <name>Enum</name>
+  <synonym>
+   <key>ru</key>
+   <value>Перечисление</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Enum</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sayım</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="4f443e79-c9ad-4de0-af20-9b6bb6592f68">
+  <name>ExchangePlan</name>
+  <synonym>
+   <key>ru</key>
+   <value>План обмена</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Exchange plan</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Veri alış veriş planı</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="aad646bd-313c-4d53-991e-1e0f3de39d35">
+  <name>ExternalDataSource</name>
+  <synonym>
+   <key>ru</key>
+   <value>Внешний источник</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>External data source</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dış veri kaynağı</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="c8994e36-9fbe-4883-bdc8-56d5b19c193a">
+  <name>FilterCriterion</name>
+  <synonym>
+   <key>ru</key>
+   <value>Критерий отбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Filter criterion</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Filtreleme koşulu</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="c915b507-d8e9-4e55-b2b1-bc943b47461e">
+  <name>HTTPService</name>
+  <synonym>
+   <key>ru</key>
+   <value>HTTP сервис</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>HTTPService</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>HTTPS servisi</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="8aa3668d-0a64-4f57-b2db-eea062d4b924">
+  <name>InformationRegister</name>
+  <synonym>
+   <key>ru</key>
+   <value>Регистр сведений</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Information register</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bilgi kayıt tablosu</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="13361dd8-549b-434d-8401-2c2e375c56e9">
+  <name>IntegrationService</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сервисы интеграции</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Integration service</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Entegrasyon servisi</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="41259354-a61b-4431-998d-60e3645043df">
+  <name>Report</name>
+  <synonym>
+   <key>ru</key>
+   <value>Отчет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Report</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Rapor</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="9dfe5ef7-073d-4b8e-a100-9d8f9b146aff">
+  <name>Role</name>
+  <synonym>
+   <key>ru</key>
+   <value>Роль доступа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Role</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Rol</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="d8b63eb2-0e88-4ab3-8618-729e7f4c04dc">
+  <name>Sequence</name>
+  <synonym>
+   <key>ru</key>
+   <value>Последовательность</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Sequence</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sıralama</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="733fe9fc-76e7-4d65-8386-71a11f970f09">
+  <name>SessionParameter</name>
+  <synonym>
+   <key>ru</key>
+   <value>Параметр сеанса</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Session parameter</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seans parametresi</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="4804f7fb-4362-4b30-802b-6ada451a1dd3">
+  <name>Subsystem</name>
+  <synonym>
+   <key>ru</key>
+   <value>Подсистема</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Subsystem</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alt sistem</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="c61c2f59-4c2f-46e0-99ec-076f59f6f6d4">
+  <name>Task</name>
+  <synonym>
+   <key>ru</key>
+   <value>Задача</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Task</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Görev</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b117e9ba-a636-41fc-8040-3f32aa3d2d5c">
+  <name>WebService</name>
+  <synonym>
+   <key>ru</key>
+   <value>Web сервис</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Web service</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Web servis</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="de6d2289-356e-4385-992c-593a6ae321a4">
+  <name>Interface</name>
+  <synonym>
+   <key>ru</key>
+   <value>Интерфейс</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Interface</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Arayüz</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="92fe2ccb-717b-40cb-9d98-96465da10940">
+  <name>Language</name>
+  <synonym>
+   <key>ru</key>
+   <value>Язык</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Language</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dil</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

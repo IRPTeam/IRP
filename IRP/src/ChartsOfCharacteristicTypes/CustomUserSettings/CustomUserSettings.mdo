@@ -1,149 +1,237 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:ChartOfCharacteristicTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="67ea0c89-e3aa-475b-b3e8-8ff7dc943002">
-  <producedTypes>
-    <objectType typeId="4f9cac25-9966-448f-86f3-e28f7b81db81" valueTypeId="6936c760-dee2-45ac-9a56-e685133483c0"/>
-    <refType typeId="07eba5a5-0487-460b-8e1d-f8f79b007e83" valueTypeId="a58aadc2-f3df-47d3-ba44-8bc8dfa81f39"/>
-    <selectionType typeId="9deba872-0ab7-4d41-bd06-3006b29ed0e4" valueTypeId="a9db981f-8ead-4bb8-b9d8-11492f4770d8"/>
-    <listType typeId="f416a8a4-f790-475c-920d-26a9d9b4696c" valueTypeId="1a8b2d76-0fd4-419a-8a68-465fae9235e5"/>
-    <managerType typeId="377986ad-6a8b-443e-a767-29c699b7da19" valueTypeId="00d7ffa5-083b-4887-b07e-60e224bdb531"/>
-    <containerType typeId="c40182b2-bead-4918-a579-dc62f52f0ab6" valueTypeId="3b709d8c-aaee-47c4-bd1d-edd727de9fee"/>
-  </producedTypes>
-  <name>CustomUserSettings</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:ChartOfCharacteristicTypes xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="67ea0c89-e3aa-475b-b3e8-8ff7dc943002">
+ <producedTypes>
+  <objectType typeId="4f9cac25-9966-448f-86f3-e28f7b81db81" valueTypeId="6936c760-dee2-45ac-9a56-e685133483c0"/>
+  <refType typeId="07eba5a5-0487-460b-8e1d-f8f79b007e83" valueTypeId="a58aadc2-f3df-47d3-ba44-8bc8dfa81f39"/>
+  <selectionType typeId="9deba872-0ab7-4d41-bd06-3006b29ed0e4" valueTypeId="a9db981f-8ead-4bb8-b9d8-11492f4770d8"/>
+  <listType typeId="f416a8a4-f790-475c-920d-26a9d9b4696c" valueTypeId="1a8b2d76-0fd4-419a-8a68-465fae9235e5"/>
+  <managerType typeId="377986ad-6a8b-443e-a767-29c699b7da19" valueTypeId="00d7ffa5-083b-4887-b07e-60e224bdb531"/>
+  <containerType typeId="c40182b2-bead-4918-a579-dc62f52f0ab6" valueTypeId="3b709d8c-aaee-47c4-bd1d-edd727de9fee"/>
+ </producedTypes>
+ <name>CustomUserSettings</name>
+ <synonym>
+  <key>ru</key>
+  <value>Пользовательские настройки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Custom user settings</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanıcı özel ayarları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Пользовательская настройка</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Custom user setting</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Kullanıcı özel ayarı</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Пользовательские настройки</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Custom user settings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Kullanıcı özel ayarları</value>
+ </listPresentation>
+ <type>
+  <types>CatalogRef.Companies</types>
+  <types>Boolean</types>
+  <types>String</types>
+  <types>Date</types>
+  <types>Number</types>
+  <types>CatalogRef.Stores</types>
+  <numberQualifiers>
+   <precision>12</precision>
+   <scale>3</scale>
+  </numberQualifiers>
+  <stringQualifiers>
+   <length>100</length>
+  </stringQualifiers>
+  <dateQualifiers/>
+ </type>
+ <foldersOnTop>true</foldersOnTop>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>BothWays</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>ChartOfCharacteristicTypes.CustomUserSettings.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>ChartOfCharacteristicTypes.CustomUserSettings.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>ChartOfCharacteristicTypes.CustomUserSettings.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="742d8075-b4a2-446c-a29f-a9791ac72ac7">
+  <name>IsCommon</name>
   <synonym>
-    <key>en</key>
-    <value>Custom user settings</value>
+   <key>ru</key>
+   <value>Общие</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Custom user setting</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Custom user settings</value>
-  </listPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Is common</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ortak ayar</value>
+  </synonym>
   <type>
-    <types>CatalogRef.Companies</types>
-    <types>Boolean</types>
-    <types>String</types>
-    <types>Date</types>
-    <types>Number</types>
-    <types>CatalogRef.Stores</types>
-    <numberQualifiers>
-      <precision>12</precision>
-      <scale>3</scale>
-    </numberQualifiers>
-    <stringQualifiers>
-      <length>100</length>
-    </stringQualifiers>
-    <dateQualifiers/>
+   <types>Boolean</types>
   </type>
-  <foldersOnTop>true</foldersOnTop>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>BothWays</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>ChartOfCharacteristicTypes.CustomUserSettings.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>ChartOfCharacteristicTypes.CustomUserSettings.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>ChartOfCharacteristicTypes.CustomUserSettings.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="742d8075-b4a2-446c-a29f-a9791ac72ac7">
-    <name>IsCommon</name>
-    <synonym>
-      <key>en</key>
-      <value>Is common</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="be0a4b40-9179-4840-b887-cf23ed6742cc">
+  <producedTypes>
+   <objectType typeId="0a0c7e2b-0bbe-4957-abba-54d9a343b266" valueTypeId="b80a3483-1531-450a-8b31-d607ca950d5b"/>
+   <rowType typeId="75dff632-039d-4c66-9a39-3a12b53a963d" valueTypeId="0b959d1e-51bf-466b-b8a4-a51cad8d8900"/>
+  </producedTypes>
+  <name>RefersToObjects</name>
+  <synonym>
+   <key>ru</key>
+   <value>Объекты применения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Refers to objects</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesneler</value>
+  </synonym>
+  <attributes uuid="bfcf599e-4a9b-47a0-b422-d68c8174ad7f">
+   <name>FullName</name>
+   <synonym>
+    <key>ru</key>
+    <value>Полное наименование</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Full name</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tam isim</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="be0a4b40-9179-4840-b887-cf23ed6742cc">
-    <producedTypes>
-      <objectType typeId="0a0c7e2b-0bbe-4957-abba-54d9a343b266" valueTypeId="b80a3483-1531-450a-8b31-d607ca950d5b"/>
-      <rowType typeId="75dff632-039d-4c66-9a39-3a12b53a963d" valueTypeId="0b959d1e-51bf-466b-b8a4-a51cad8d8900"/>
-    </producedTypes>
-    <name>RefersToObjects</name>
-    <synonym>
-      <key>en</key>
-      <value>Refers to objects</value>
-    </synonym>
-    <attributes uuid="bfcf599e-4a9b-47a0-b422-d68c8174ad7f">
-      <name>FullName</name>
-      <synonym>
-        <key>en</key>
-        <value>Full name</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>100</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="da121987-abf6-48da-ac66-fdabb0f1600f">
-      <name>Synonym</name>
-      <synonym>
-        <key>en</key>
-        <value>Synonym</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>50</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="6625de4c-24f9-4b91-9a3a-ad4964713160">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="99fb2020-18df-47b1-a334-31a73b0fef8f">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="194a47a4-2c8f-4e15-a9db-5f6a83f27dd4">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="1c4c55ce-a7b4-4b42-be41-73934c106afc">
-    <name>SelectMetadataForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Select metadata</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="da121987-abf6-48da-ac66-fdabb0f1600f">
+   <name>Synonym</name>
+   <synonym>
+    <key>ru</key>
+    <value>Синоним</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Synonym</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Eşanlamlı</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>50</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="6625de4c-24f9-4b91-9a3a-ad4964713160">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="99fb2020-18df-47b1-a334-31a73b0fef8f">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="194a47a4-2c8f-4e15-a9db-5f6a83f27dd4">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="1c4c55ce-a7b4-4b42-be41-73934c106afc">
+  <name>SelectMetadataForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Выбор объектов применения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Select metadata</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Üstveri seç</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:ChartOfCharacteristicTypes>

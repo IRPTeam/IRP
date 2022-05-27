@@ -1,41 +1,73 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e84a930d-2bc0-4f17-ba3c-ef985c981fac">
-  <producedTypes>
-    <objectType typeId="42817543-272e-41a1-beb8-64f72d7ed0a3" valueTypeId="025c8a08-e279-4d07-91f0-78f633303c4a"/>
-    <managerType typeId="c2a9110d-2ec6-4a14-ae37-6de11606c31a" valueTypeId="87d9bfcd-adc3-4118-845b-fc55b2327ab0"/>
-  </producedTypes>
-  <name>Procurement</name>
+ <producedTypes>
+  <objectType typeId="42817543-272e-41a1-beb8-64f72d7ed0a3" valueTypeId="025c8a08-e279-4d07-91f0-78f633303c4a"/>
+  <managerType typeId="c2a9110d-2ec6-4a14-ae37-6de11606c31a" valueTypeId="87d9bfcd-adc3-4118-845b-fc55b2327ab0"/>
+ </producedTypes>
+ <name>Procurement</name>
+ <synonym>
+  <key>ru</key>
+  <value>Обеспечение</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Procurement</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tedarik şekli</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.Procurement.Form.Form</defaultForm>
+ <forms uuid="967b7891-91c8-4e5e-a038-49554bf53fb5">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Procurement</value>
+   <key>ru</key>
+   <value>Форма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.Procurement.Form.Form</defaultForm>
-  <forms uuid="967b7891-91c8-4e5e-a038-49554bf53fb5">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3409247c-15f1-4cbf-ba7e-a77d497553de">
-    <name>FormCreateOrders</name>
-    <synonym>
-      <key>en</key>
-      <value>Form create orders</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="1d9bcace-e258-4334-ba78-7b7730deb967">
-    <name>FormSelectInternalSupplyRequest</name>
-    <synonym>
-      <key>en</key>
-      <value>Select internal supply request</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3409247c-15f1-4cbf-ba7e-a77d497553de">
+  <name>FormCreateOrders</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма создания заказов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form create orders</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sipariş oluşturma formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="1d9bcace-e258-4334-ba78-7b7730deb967">
+  <name>FormSelectInternalSupplyRequest</name>
+  <synonym>
+   <key>ru</key>
+   <value>Выбрать заявку на обеспечение товаром</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Select internal supply request</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İç talep siparişi seç</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

@@ -1,16 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="365b4f18-dd0e-4200-a6cc-6c850d2d2a42">
-  <name>Integrations</name>
-  <synonym>
-    <key>en</key>
-    <value>Integrations</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.IntegrationSettings</content>
-  <content>Catalog.ExternalDataProc</content>
-  <content>InformationRegister.ExternalCommands</content>
-  <content>Catalog.DataMappingItems</content>
-  <content>InformationRegister.DataMappingTable</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>Integrations</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки интеграции</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Integrations</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Entegrasyonlar</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.IntegrationSettings</content>
+ <content>Catalog.ExternalDataProc</content>
+ <content>InformationRegister.ExternalCommands</content>
+ <content>Catalog.DataMappingItems</content>
+ <content>InformationRegister.DataMappingTable</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

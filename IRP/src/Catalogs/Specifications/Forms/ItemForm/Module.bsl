@@ -1,4 +1,4 @@
-#Region FormEvents
+﻿#Region FormEvents
 
 &AtClient
 Procedure AfterWrite(WriteParameters)

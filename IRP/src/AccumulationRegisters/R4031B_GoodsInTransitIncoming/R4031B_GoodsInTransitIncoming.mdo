@@ -1,74 +1,114 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9e97cfe0-e0ee-477c-bfb1-5b003b9dfe54">
-  <producedTypes>
-    <selectionType typeId="d6caa7cd-0a86-48f8-a01a-d9b1ccd09c8d" valueTypeId="ce872f1a-28c8-4b30-ab5c-9dbbf61ec98e"/>
-    <listType typeId="661a173b-0e7d-4bd3-b632-e553cb082cf8" valueTypeId="3a1be5ba-ea40-427d-948b-40e438a53b0b"/>
-    <managerType typeId="1c15de78-e6f9-4ebb-85c6-08880485ce86" valueTypeId="4b261929-6c2f-4ff4-a818-42b3d5687fa2"/>
-    <recordSetType typeId="d6391cfc-d3d9-4240-b31c-768552c712ad" valueTypeId="072fb36d-e4f1-4a59-82c0-76ac62f566db"/>
-    <recordKeyType typeId="f7312a6c-c7b4-4ab5-bd7d-3b26fd597926" valueTypeId="e2f3240d-7a6f-40d8-8ca4-8019aedf72e9"/>
-    <recordType typeId="6e4c3399-7156-4fdf-8da0-24668aa5f62e" valueTypeId="4cfaecdd-51cd-412f-b524-3c44ff60e96d"/>
-  </producedTypes>
-  <name>R4031B_GoodsInTransitIncoming</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="9e97cfe0-e0ee-477c-bfb1-5b003b9dfe54">
+ <producedTypes>
+  <selectionType typeId="d6caa7cd-0a86-48f8-a01a-d9b1ccd09c8d" valueTypeId="ce872f1a-28c8-4b30-ab5c-9dbbf61ec98e"/>
+  <listType typeId="661a173b-0e7d-4bd3-b632-e553cb082cf8" valueTypeId="3a1be5ba-ea40-427d-948b-40e438a53b0b"/>
+  <managerType typeId="1c15de78-e6f9-4ebb-85c6-08880485ce86" valueTypeId="4b261929-6c2f-4ff4-a818-42b3d5687fa2"/>
+  <recordSetType typeId="d6391cfc-d3d9-4240-b31c-768552c712ad" valueTypeId="072fb36d-e4f1-4a59-82c0-76ac62f566db"/>
+  <recordKeyType typeId="f7312a6c-c7b4-4ab5-bd7d-3b26fd597926" valueTypeId="e2f3240d-7a6f-40d8-8ca4-8019aedf72e9"/>
+  <recordType typeId="6e4c3399-7156-4fdf-8da0-24668aa5f62e" valueTypeId="4cfaecdd-51cd-412f-b524-3c44ff60e96d"/>
+ </producedTypes>
+ <name>R4031B_GoodsInTransitIncoming</name>
+ <synonym>
+  <key>ru</key>
+  <value>R4031 Товары в пути (к приходу)</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R4031 Goods in transit (incoming)</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R4031 Yoldaki ürünler (gelen)</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="cc28306a-5a1d-429b-ae0f-cef381b098ab">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R4031 Goods in transit (incoming)</value>
+   <key>ru</key>
+   <value>Количество</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="cc28306a-5a1d-429b-ae0f-cef381b098ab">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="8bbf8ce5-b5fd-4708-bde1-b1688885c856">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="0d0ae295-d93f-4b8c-b36d-8458a9515029">
-    <name>Basis</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeReceiptBasis</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="b2ab4a1e-2bc1-41eb-8d89-48e10ca89c95">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="8bbf8ce5-b5fd-4708-bde1-b1688885c856">
+  <name>Store</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="0d0ae295-d93f-4b8c-b36d-8458a9515029">
+  <name>Basis</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документ основание</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Basis</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeReceiptBasis</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="b2ab4a1e-2bc1-41eb-8d89-48e10ca89c95">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

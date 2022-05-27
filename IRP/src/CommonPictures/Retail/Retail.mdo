@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="537b2f35-6b76-4ae3-9dff-fe9f5a4f5dd6">
-  <name>Retail</name>
-  <synonym>
-    <key>en</key>
-    <value>Retail</value>
-  </synonym>
+ <name>Retail</name>
+ <synonym>
+  <key>ru</key>
+  <value>Розница</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Retail</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Perakende</value>
+ </synonym>
 </mdclass:CommonPicture>

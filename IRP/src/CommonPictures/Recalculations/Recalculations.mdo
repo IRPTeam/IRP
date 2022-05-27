@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="caa1a4dd-042a-49e6-9297-3c3e00d9cb10">
-  <name>Recalculations</name>
-  <synonym>
-    <key>en</key>
-    <value>Recalculations</value>
-  </synonym>
+ <name>Recalculations</name>
+ <synonym>
+  <key>ru</key>
+  <value>Перерасчеты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Recalculations</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Yeniden hesaplamalar</value>
+ </synonym>
 </mdclass:CommonPicture>

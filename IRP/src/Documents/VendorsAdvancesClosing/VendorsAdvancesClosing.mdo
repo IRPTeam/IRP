@@ -1,130 +1,202 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="056ebbd8-2cfd-417a-857b-2808bcad7f1e">
-  <producedTypes>
-    <objectType typeId="a6962a1a-60ad-471c-b47d-b86bf6d24e1b" valueTypeId="8344a30b-419b-451d-b727-3e9466fb7894"/>
-    <refType typeId="77084b63-8601-49ba-800f-266c8b28f9f0" valueTypeId="b6d9eaea-9ffa-42a5-bd9b-3afdb472a355"/>
-    <selectionType typeId="237e0aaf-c365-4f2a-a79f-f3a977e679e1" valueTypeId="cc1218a8-4d1a-4437-8d40-f098f07df8a4"/>
-    <listType typeId="a230cf68-b394-4da8-ad9d-b09d370be760" valueTypeId="637515a1-cb1f-47a1-bbbd-5f0bd04bb050"/>
-    <managerType typeId="ead75c26-56c2-4db5-b321-a2d1c111e363" valueTypeId="1fe36189-9120-447b-9a52-509b43647e62"/>
-  </producedTypes>
-  <name>VendorsAdvancesClosing</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="056ebbd8-2cfd-417a-857b-2808bcad7f1e">
+ <producedTypes>
+  <objectType typeId="a6962a1a-60ad-471c-b47d-b86bf6d24e1b" valueTypeId="8344a30b-419b-451d-b727-3e9466fb7894"/>
+  <refType typeId="77084b63-8601-49ba-800f-266c8b28f9f0" valueTypeId="b6d9eaea-9ffa-42a5-bd9b-3afdb472a355"/>
+  <selectionType typeId="237e0aaf-c365-4f2a-a79f-f3a977e679e1" valueTypeId="cc1218a8-4d1a-4437-8d40-f098f07df8a4"/>
+  <listType typeId="a230cf68-b394-4da8-ad9d-b09d370be760" valueTypeId="637515a1-cb1f-47a1-bbbd-5f0bd04bb050"/>
+  <managerType typeId="ead75c26-56c2-4db5-b321-a2d1c111e363" valueTypeId="1fe36189-9120-447b-9a52-509b43647e62"/>
+ </producedTypes>
+ <name>VendorsAdvancesClosing</name>
+ <synonym>
+  <key>ru</key>
+  <value>Закрытие авансов поставщиков</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Vendors advances closing</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tedarikçi avans kapatma</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.VendorsAdvancesClosing.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Закрытие авансов поставщиков</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Vendors advances closing</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Tedarikçi avans kapatma</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Закрытие авансов поставщиков</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Vendors advances closing</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Tedarikçi avans kapatma</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.VendorsAdvancesClosing.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.VendorsAdvancesClosing.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.VendorsAdvancesClosing.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.T2013S_OffsetOfAging</registerRecords>
+ <registerRecords>InformationRegister.T2010S_OffsetOfAdvances</registerRecords>
+ <registerRecords>AccumulationRegister.TM1020B_AdvancesKey</registerRecords>
+ <registerRecords>AccumulationRegister.TM1030B_TransactionsKey</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="28dec7af-9c7e-4bf4-83da-966d9918dc52">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Vendors advances closing</value>
+   <key>ru</key>
+   <value>Организация</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.VendorsAdvancesClosing.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Vendors advances closing</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Vendors advances closing</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.VendorsAdvancesClosing.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.VendorsAdvancesClosing.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.VendorsAdvancesClosing.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.T2013S_OffsetOfAging</registerRecords>
-  <registerRecords>InformationRegister.T2010S_OffsetOfAdvances</registerRecords>
-  <registerRecords>AccumulationRegister.TM1020B_AdvancesKey</registerRecords>
-  <registerRecords>AccumulationRegister.TM1030B_TransactionsKey</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <attributes uuid="28dec7af-9c7e-4bf4-83da-966d9918dc52">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.OurCompany</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="aaefeeac-2426-482b-a5e9-0f92b855e6d9">
-    <name>BeginOfPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>Begin of period</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="2a82e5c1-de73-4c99-bc11-2ba2a3eb558d">
-    <name>EndOfPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>End of period</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="154d828d-cbee-4ea5-9426-5763fd4e48d4">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="bdd49bda-5fd9-4870-929c-8c075cd48b32">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="5ce8f41c-dadb-4a28-ba93-6a8042092dba">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="aaefeeac-2426-482b-a5e9-0f92b855e6d9">
+  <name>BeginOfPeriod</name>
+  <synonym>
+   <key>ru</key>
+   <value>Начало периода</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Begin of period</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dönem başı</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2a82e5c1-de73-4c99-bc11-2ba2a3eb558d">
+  <name>EndOfPeriod</name>
+  <synonym>
+   <key>ru</key>
+   <value>Конец периода</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>End of period</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dönem sonu</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="154d828d-cbee-4ea5-9426-5763fd4e48d4">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="bdd49bda-5fd9-4870-929c-8c075cd48b32">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5ce8f41c-dadb-4a28-ba93-6a8042092dba">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Document>

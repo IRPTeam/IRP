@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8d585186-460c-42c0-ad4a-6ca95bfbd336">
-  <name>ConnectedAddDataProc</name>
-  <synonym>
-    <key>en</key>
-    <value>Connected add data proc</value>
-  </synonym>
-  <type>
-    <types>FixedStructure</types>
-  </type>
+ <name>ConnectedAddDataProc</name>
+ <synonym>
+  <key>ru</key>
+  <value>Подключенные внешние обработки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Connected add data proc</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek veri işlemci bağlı</value>
+ </synonym>
+ <type>
+  <types>FixedStructure</types>
+ </type>
 </mdclass:SessionParameter>

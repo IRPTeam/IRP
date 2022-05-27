@@ -1,17 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c109f339-842d-4835-95d9-307166224b49">
-  <name>SpecialOffers</name>
-  <synonym>
-    <key>en</key>
-    <value>Special offers</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.SpecialOffer</picture>
-  </picture>
-  <content>Catalog.SpecialOfferRules</content>
-  <content>Catalog.SpecialOfferTypes</content>
-  <content>Catalog.SpecialOffers</content>
-  <content>Catalog.ExternalDataProc</content>
-  <content>CommonModule.OffersServer</content>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c109f339-842d-4835-95d9-307166224b49">
+ <name>SpecialOffers</name>
+ <synonym>
+  <key>ru</key>
+  <value>Специальные предложения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Special offers</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kampanyalar</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.SpecialOffer</picture>
+ </picture>
+ <content>Catalog.SpecialOfferRules</content>
+ <content>Catalog.SpecialOfferTypes</content>
+ <content>Catalog.SpecialOffers</content>
+ <content>Catalog.ExternalDataProc</content>
+ <content>CommonModule.OffersServer</content>
 </mdclass:Subsystem>

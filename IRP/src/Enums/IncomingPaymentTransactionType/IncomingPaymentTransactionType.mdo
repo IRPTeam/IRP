@@ -1,50 +1,98 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="38c2a375-6002-4f42-b14d-7c1822169e66">
-  <producedTypes>
-    <refType typeId="8b9943a1-099f-407c-a407-a05789ea2d17" valueTypeId="06500f70-99a9-4b03-96dd-493934035e24"/>
-    <listType typeId="f399d8f0-ac25-462b-9ccb-f6dcd371760a" valueTypeId="5e3e31c1-f771-4381-a92b-f9c281d4756f"/>
-    <managerType typeId="eda0d151-67c7-4490-9acc-e64da53d36e8" valueTypeId="2870bfa9-5308-47cd-b461-a1f7e07749a4"/>
-  </producedTypes>
-  <name>IncomingPaymentTransactionType</name>
+ <producedTypes>
+  <refType typeId="8b9943a1-099f-407c-a407-a05789ea2d17" valueTypeId="06500f70-99a9-4b03-96dd-493934035e24"/>
+  <listType typeId="f399d8f0-ac25-462b-9ccb-f6dcd371760a" valueTypeId="5e3e31c1-f771-4381-a92b-f9c281d4756f"/>
+  <managerType typeId="eda0d151-67c7-4490-9acc-e64da53d36e8" valueTypeId="2870bfa9-5308-47cd-b461-a1f7e07749a4"/>
+ </producedTypes>
+ <name>IncomingPaymentTransactionType</name>
+ <synonym>
+  <key>ru</key>
+  <value>Операции входящих платежей</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Incoming payment transaction type</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tahsilat işlem tipi</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="c0be9b19-b924-48a9-bb9d-7a2a6888fc5d">
+  <name>PaymentFromCustomer</name>
   <synonym>
-    <key>en</key>
-    <value>Incoming payment transaction type</value>
+   <key>ru</key>
+   <value>Поступление оплаты от клиента</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="c0be9b19-b924-48a9-bb9d-7a2a6888fc5d">
-    <name>PaymentFromCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment from customer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="76619733-1859-4677-8cee-f3b3c1e70522">
-    <name>CurrencyExchange</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency exchange</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7738b52a-b329-4651-ba79-e6867814cf4c">
-    <name>CashTransferOrder</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash transfer order</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="4418b908-9fa3-4961-ae83-fcc8dd3d92f9">
-    <name>TransferFromPOS</name>
-    <synonym>
-      <key>en</key>
-      <value>Transfer from POS</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="1a1d3e1d-0f45-414d-81c8-1eefbe5a5c97">
-    <name>ReturnFromVendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Return from vendor</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Payment from customer</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Müşteriden gelen ödeme</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="76619733-1859-4677-8cee-f3b3c1e70522">
+  <name>CurrencyExchange</name>
+  <synonym>
+   <key>ru</key>
+   <value>Обмен валюты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency exchange</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bozdurma dövizi</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="7738b52a-b329-4651-ba79-e6867814cf4c">
+  <name>CashTransferOrder</name>
+  <synonym>
+   <key>ru</key>
+   <value>Заявка на перемещение денежных средств</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Cash transfer order</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Finansal transfer siparişi</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="4418b908-9fa3-4961-ae83-fcc8dd3d92f9">
+  <name>TransferFromPOS</name>
+  <synonym>
+   <key>ru</key>
+   <value>Перемещение с ККМ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Transfer from POS</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>POS'tan gelen para</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="1a1d3e1d-0f45-414d-81c8-1eefbe5a5c97">
+  <name>ReturnFromVendor</name>
+  <synonym>
+   <key>ru</key>
+   <value>Возврат от поставщика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Return from vendor</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tedarikçiden iade</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

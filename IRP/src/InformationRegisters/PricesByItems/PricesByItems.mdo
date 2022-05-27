@@ -1,101 +1,157 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="227bea08-8b1a-4726-960c-83218b517469">
-  <producedTypes>
-    <selectionType typeId="e0d56d38-9ac2-47c4-9ecb-7cc359eb97d2" valueTypeId="7f8cd88d-9253-492e-81e3-a298e1b00d3f"/>
-    <listType typeId="23a40f60-4741-415d-95d7-0afa7f425caa" valueTypeId="52f76d6c-9bb4-4201-bcfd-e97d0d6fddc7"/>
-    <managerType typeId="f30bd069-1f09-443b-8f1b-0fe73c4ecd00" valueTypeId="e0838a67-1a17-4190-ac59-2fd94e4c746e"/>
-    <recordSetType typeId="0d5d70df-dd4f-430d-8bad-83eaf81082c1" valueTypeId="cf04c431-35f5-468c-9fb7-16bb63aba02e"/>
-    <recordKeyType typeId="8a3d137f-c3b8-48ca-8c8d-f95839cae197" valueTypeId="9e31aeb9-74d9-4af7-aef6-49af03ec3b6d"/>
-    <recordType typeId="dafb1b30-0d0f-4d69-ade8-404f0c0bacb0" valueTypeId="4e786e78-2673-4163-b7ac-24a6666bda3c"/>
-    <recordManagerType typeId="9c2d99d8-9515-4d0a-a155-cc0d152695e7" valueTypeId="7022f88c-25ad-422e-b536-e72a9b036e87"/>
-  </producedTypes>
-  <name>PricesByItems</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="227bea08-8b1a-4726-960c-83218b517469">
+ <producedTypes>
+  <selectionType typeId="e0d56d38-9ac2-47c4-9ecb-7cc359eb97d2" valueTypeId="7f8cd88d-9253-492e-81e3-a298e1b00d3f"/>
+  <listType typeId="23a40f60-4741-415d-95d7-0afa7f425caa" valueTypeId="52f76d6c-9bb4-4201-bcfd-e97d0d6fddc7"/>
+  <managerType typeId="f30bd069-1f09-443b-8f1b-0fe73c4ecd00" valueTypeId="e0838a67-1a17-4190-ac59-2fd94e4c746e"/>
+  <recordSetType typeId="0d5d70df-dd4f-430d-8bad-83eaf81082c1" valueTypeId="cf04c431-35f5-468c-9fb7-16bb63aba02e"/>
+  <recordKeyType typeId="8a3d137f-c3b8-48ca-8c8d-f95839cae197" valueTypeId="9e31aeb9-74d9-4af7-aef6-49af03ec3b6d"/>
+  <recordType typeId="dafb1b30-0d0f-4d69-ade8-404f0c0bacb0" valueTypeId="4e786e78-2673-4163-b7ac-24a6666bda3c"/>
+  <recordManagerType typeId="9c2d99d8-9515-4d0a-a155-cc0d152695e7" valueTypeId="7022f88c-25ad-422e-b536-e72a9b036e87"/>
+ </producedTypes>
+ <name>PricesByItems</name>
+ <synonym>
+  <key>ru</key>
+  <value>Цены по номенклатуре</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Prices by items</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Fiyatlar - malzeme bazlı</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <listPresentation>
+  <key>ru</key>
+  <value>Цена по номенклатуре</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Price by item</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Fiyat - malzeme bazlı</value>
+ </listPresentation>
+ <resources uuid="d0df159a-c565-4481-896b-57b86d6f3e82">
+  <name>Price</name>
   <synonym>
-    <key>en</key>
-    <value>Prices by items</value>
+   <key>ru</key>
+   <value>Цена</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <listPresentation>
-    <key>en</key>
-    <value>Price by item</value>
-  </listPresentation>
-  <resources uuid="d0df159a-c565-4481-896b-57b86d6f3e82">
-    <name>Price</name>
-    <synonym>
-      <key>en</key>
-      <value>Price</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePrice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="8150cd31-7aa1-44ea-9fb9-50612a328335">
-    <name>InputUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Input unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </resources>
-  <resources uuid="26a39ca4-3241-4ef2-a8b8-07b6101558e0">
-    <name>InputPrice</name>
-    <synonym>
-      <key>en</key>
-      <value>Input price</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </resources>
-  <dimensions uuid="7ae8d1a1-689f-45d4-80e8-e79508e026a5">
-    <name>PriceType</name>
-    <synonym>
-      <key>en</key>
-      <value>Price type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PriceTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="00551b69-018d-4e89-bd84-0f2451dacf52">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeItem</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Price</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fiyat</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typePrice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="8150cd31-7aa1-44ea-9fb9-50612a328335">
+  <name>InputUnit</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ед. изм.</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Input unit</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Birim</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Units</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </resources>
+ <resources uuid="26a39ca4-3241-4ef2-a8b8-07b6101558e0">
+  <name>InputPrice</name>
+  <synonym>
+   <key>ru</key>
+   <value>Расчетная цена</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Input price</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hesaplama fiyatı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </resources>
+ <dimensions uuid="7ae8d1a1-689f-45d4-80e8-e79508e026a5">
+  <name>PriceType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид цены</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Price type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fiyat tipi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PriceTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="00551b69-018d-4e89-bd84-0f2451dacf52">
+  <name>Item</name>
+  <synonym>
+   <key>ru</key>
+   <value>Номенклатура</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeItem</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

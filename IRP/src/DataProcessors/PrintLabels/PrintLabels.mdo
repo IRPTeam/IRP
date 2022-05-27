@@ -1,37 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0a9e4bfd-79ca-448d-b995-6081da924a9b">
-  <producedTypes>
-    <objectType typeId="267e2fd9-db2b-4350-9b9d-895bba7b7ea3" valueTypeId="0e59639a-f053-4b3c-b967-9e6b5ef2d9c6"/>
-    <managerType typeId="07a8b7f9-691d-4814-ac27-434eea029b27" valueTypeId="4665d491-0a80-4012-8187-8ebcc83e7bbd"/>
-  </producedTypes>
-  <name>PrintLabels</name>
+ <producedTypes>
+  <objectType typeId="267e2fd9-db2b-4350-9b9d-895bba7b7ea3" valueTypeId="0e59639a-f053-4b3c-b967-9e6b5ef2d9c6"/>
+  <managerType typeId="07a8b7f9-691d-4814-ac27-434eea029b27" valueTypeId="4665d491-0a80-4012-8187-8ebcc83e7bbd"/>
+ </producedTypes>
+ <name>PrintLabels</name>
+ <synonym>
+  <key>ru</key>
+  <value>Печать этикеток</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Print labels</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Etiket yazdırma</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.PrintLabels.Form.Form</defaultForm>
+ <forms uuid="79bf9caa-da1e-4f49-bd78-798f2450b230">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Print labels</value>
+   <key>ru</key>
+   <value>Форма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.PrintLabels.Form.Form</defaultForm>
-  <forms uuid="79bf9caa-da1e-4f49-bd78-798f2450b230">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="ce77775f-3a4c-4673-aae5-cce538cb53f3">
-    <name>Default</name>
-    <synonym>
-      <key>en</key>
-      <value>Default</value>
-    </synonym>
-  </templates>
-  <templates uuid="0cea30e5-8902-44f2-abec-ae197d79faec">
-    <name>Prototype</name>
-    <synonym>
-      <key>en</key>
-      <value>Prototype</value>
-    </synonym>
-  </templates>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="ce77775f-3a4c-4673-aae5-cce538cb53f3">
+  <name>Default</name>
+  <synonym>
+   <key>ru</key>
+   <value>По умолчанию</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Default</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varsayılan</value>
+  </synonym>
+ </templates>
+ <templates uuid="0cea30e5-8902-44f2-abec-ae197d79faec">
+  <name>Prototype</name>
+  <synonym>
+   <key>ru</key>
+   <value>Прототип</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Prototype</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Deneme</value>
+  </synonym>
+ </templates>
 </mdclass:DataProcessor>

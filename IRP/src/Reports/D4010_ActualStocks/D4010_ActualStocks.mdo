@@ -1,22 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9f7e8e81-7d27-4e4a-97c2-e02e1679d596">
-  <producedTypes>
-    <objectType typeId="46f23e68-e34f-4798-8c9d-8325a90e558f" valueTypeId="524dd979-69da-4ce8-96da-4536152fc700"/>
-    <managerType typeId="f278e020-11dc-4c0f-b57d-2eb97ef8b9ce" valueTypeId="f392254a-9ed7-4349-bc9b-5706b3712ef3"/>
-  </producedTypes>
-  <name>D4010_ActualStocks</name>
+ <producedTypes>
+  <objectType typeId="46f23e68-e34f-4798-8c9d-8325a90e558f" valueTypeId="524dd979-69da-4ce8-96da-4536152fc700"/>
+  <managerType typeId="f278e020-11dc-4c0f-b57d-2eb97ef8b9ce" valueTypeId="f392254a-9ed7-4349-bc9b-5706b3712ef3"/>
+ </producedTypes>
+ <name>D4010_ActualStocks</name>
+ <synonym>
+  <key>ru</key>
+  <value>D4010 Остатки товара на складах</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>D4010  ActualStocks</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>D4010 Stoklar</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.D4010_ActualStocks.Template.Template</mainDataCompositionSchema>
+ <templates uuid="487ad470-68b8-48ae-b563-938881d3e3ec">
+  <name>Template</name>
   <synonym>
-    <key>en</key>
-    <value>D4010  ActualStocks</value>
+   <key>ru</key>
+   <value>Шаблон</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.D4010_ActualStocks.Template.Template</mainDataCompositionSchema>
-  <templates uuid="487ad470-68b8-48ae-b563-938881d3e3ec">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>en</key>
+   <value>Template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

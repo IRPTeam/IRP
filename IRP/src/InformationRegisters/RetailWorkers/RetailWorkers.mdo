@@ -1,65 +1,97 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="47e275f7-e49e-417d-be56-af13a5678697">
-  <producedTypes>
-    <selectionType typeId="56bc7f8a-3449-4076-ab66-b1653e04c533" valueTypeId="c5529284-2fed-4f3d-a4bc-fb8afb046ea6"/>
-    <listType typeId="9ff46a28-4ee2-4f7b-9282-8cad32978c37" valueTypeId="41995470-db0f-4ded-895b-5e6be4675f0d"/>
-    <managerType typeId="c9e1aabc-4bec-48c1-9076-29fa96721f99" valueTypeId="6658284f-7876-41d8-ab07-426e3133e77f"/>
-    <recordSetType typeId="caf0f365-863e-45f3-96aa-8dbffb82d235" valueTypeId="0c79cd71-c2c2-4f69-81cd-5fcb87a90b38"/>
-    <recordKeyType typeId="b7624d95-c43b-4e29-b5ec-fc42e0415a78" valueTypeId="21d2da8d-0a68-4009-be90-f0bf55ba1952"/>
-    <recordType typeId="af1fc798-6138-4d0c-b73b-a25d4a5ec391" valueTypeId="0b391cb1-9526-49a9-9c6c-803bf31a8d68"/>
-    <recordManagerType typeId="77aa1028-c66a-430a-ade5-a331c7ef3d50" valueTypeId="242cc778-6d1d-4f83-ba2e-4a6029904a39"/>
-  </producedTypes>
-  <name>RetailWorkers</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="47e275f7-e49e-417d-be56-af13a5678697">
+ <producedTypes>
+  <selectionType typeId="56bc7f8a-3449-4076-ab66-b1653e04c533" valueTypeId="c5529284-2fed-4f3d-a4bc-fb8afb046ea6"/>
+  <listType typeId="9ff46a28-4ee2-4f7b-9282-8cad32978c37" valueTypeId="41995470-db0f-4ded-895b-5e6be4675f0d"/>
+  <managerType typeId="c9e1aabc-4bec-48c1-9076-29fa96721f99" valueTypeId="6658284f-7876-41d8-ab07-426e3133e77f"/>
+  <recordSetType typeId="caf0f365-863e-45f3-96aa-8dbffb82d235" valueTypeId="0c79cd71-c2c2-4f69-81cd-5fcb87a90b38"/>
+  <recordKeyType typeId="b7624d95-c43b-4e29-b5ec-fc42e0415a78" valueTypeId="21d2da8d-0a68-4009-be90-f0bf55ba1952"/>
+  <recordType typeId="af1fc798-6138-4d0c-b73b-a25d4a5ec391" valueTypeId="0b391cb1-9526-49a9-9c6c-803bf31a8d68"/>
+  <recordManagerType typeId="77aa1028-c66a-430a-ade5-a331c7ef3d50" valueTypeId="242cc778-6d1d-4f83-ba2e-4a6029904a39"/>
+ </producedTypes>
+ <name>RetailWorkers</name>
+ <synonym>
+  <key>ru</key>
+  <value>Розничные сотрудники</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Retail workers</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Perakende çalışanları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Розничные сотрудники</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Retail workers</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Perakende çalışanları</value>
+ </recordPresentation>
+ <dimensions uuid="321bdc86-9ea1-43df-a7c6-dee15456fa0e">
+  <name>Store</name>
   <synonym>
-    <key>en</key>
-    <value>Retail workers</value>
+   <key>ru</key>
+   <value>Склад</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Retail workers</value>
-  </recordPresentation>
-  <dimensions uuid="321bdc86-9ea1-43df-a7c6-dee15456fa0e">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <createOnInput>DontUse</createOnInput>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="c693dde5-ac16-4825-979f-eae5f739a44b">
-    <name>Worker</name>
-    <synonym>
-      <key>en</key>
-      <value>Worker</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.Employee</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <createOnInput>DontUse</createOnInput>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="c693dde5-ac16-4825-979f-eae5f739a44b">
+  <name>Worker</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сотрудник</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Worker</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çalışan</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.Employee</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

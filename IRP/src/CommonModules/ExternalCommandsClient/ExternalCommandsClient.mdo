@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b95d4ded-9d85-4b89-a59b-eddf65d7ca40">
-  <name>ExternalCommandsClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Definable UI commands client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>ExternalCommandsClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Определяемые интерфейсные команды клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Definable UI commands client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tanımlanabilir kullanıcı arayüzü komutları istemci</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

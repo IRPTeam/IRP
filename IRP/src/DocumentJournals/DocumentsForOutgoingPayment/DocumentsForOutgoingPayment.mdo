@@ -1,28 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DocumentJournal xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4d96db09-be9d-45f0-949c-cfff80bfcb2f">
-  <producedTypes>
-    <selectionType typeId="adc04f3e-c9f4-4c45-8f82-e399d0d61c41" valueTypeId="e7fd2b5c-2ec8-4d24-9bb2-ae72d8fc753c"/>
-    <listType typeId="dc0dea6d-7044-4108-8308-3e817f277682" valueTypeId="9b8f2dff-47c4-41bd-bc91-74df057504fa"/>
-    <managerType typeId="cfeacbc0-a7f5-4e6f-aa2c-5da6bc15a839" valueTypeId="c7ce51e3-b57d-4ee9-b9cc-820c35e89efe"/>
-  </producedTypes>
-  <name>DocumentsForOutgoingPayment</name>
+ <producedTypes>
+  <selectionType typeId="adc04f3e-c9f4-4c45-8f82-e399d0d61c41" valueTypeId="e7fd2b5c-2ec8-4d24-9bb2-ae72d8fc753c"/>
+  <listType typeId="dc0dea6d-7044-4108-8308-3e817f277682" valueTypeId="9b8f2dff-47c4-41bd-bc91-74df057504fa"/>
+  <managerType typeId="cfeacbc0-a7f5-4e6f-aa2c-5da6bc15a839" valueTypeId="c7ce51e3-b57d-4ee9-b9cc-820c35e89efe"/>
+ </producedTypes>
+ <name>DocumentsForOutgoingPayment</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документы исходящих платежей</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Documents for outgoing payment</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Çıkan ödeme evrakları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registeredDocuments>Document.PurchaseInvoice</registeredDocuments>
+ <registeredDocuments>Document.SalesReturn</registeredDocuments>
+ <registeredDocuments>Document.CreditNote</registeredDocuments>
+ <registeredDocuments>Document.OpeningEntry</registeredDocuments>
+ <registeredDocuments>Document.PurchaseOrder</registeredDocuments>
+ <forms uuid="ee7ba466-99fc-4d4c-a348-04e885d0deab">
+  <name>ChoiceForm</name>
   <synonym>
-    <key>en</key>
-    <value>Documents for outgoing payment</value>
+   <key>ru</key>
+   <value>Форма выбора</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registeredDocuments>Document.PurchaseInvoice</registeredDocuments>
-  <registeredDocuments>Document.SalesReturn</registeredDocuments>
-  <registeredDocuments>Document.CreditNote</registeredDocuments>
-  <registeredDocuments>Document.OpeningEntry</registeredDocuments>
-  <registeredDocuments>Document.PurchaseOrder</registeredDocuments>
-  <forms uuid="ee7ba466-99fc-4d4c-a348-04e885d0deab">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DocumentJournal>

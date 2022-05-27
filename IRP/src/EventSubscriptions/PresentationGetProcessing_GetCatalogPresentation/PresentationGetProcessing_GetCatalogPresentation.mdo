@@ -1,15 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9eb0e814-fdfb-4b5f-a72c-0792cb6dd256">
-  <name>PresentationGetProcessing_GetCatalogPresentation</name>
-  <synonym>
-    <key>en</key>
-    <value>Presentation get processing get catalog presentation</value>
-  </synonym>
-  <source>
-    <types>ChartOfCharacteristicTypesManager</types>
-    <types>CatalogManager</types>
-    <types>ChartOfAccountsManager</types>
-  </source>
-  <event>PresentationGetProcessing</event>
-  <handler>CommonModule.LocalizationEvents.GetCatalogPresentation</handler>
+ <name>PresentationGetProcessing_GetCatalogPresentation</name>
+ <synonym>
+  <key>ru</key>
+  <value>Получение представления справочников</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Presentation get processing get catalog presentation</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Görünüm işleme kart liste görünüm alma</value>
+ </synonym>
+ <source>
+  <types>ChartOfCharacteristicTypesManager</types>
+  <types>CatalogManager</types>
+  <types>ChartOfAccountsManager</types>
+ </source>
+ <event>PresentationGetProcessing</event>
+ <handler>CommonModule.LocalizationEvents.GetCatalogPresentation</handler>
 </mdclass:EventSubscription>

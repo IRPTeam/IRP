@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="43a5a2ac-e5d7-444e-880b-fa395d32fcea">
-  <producedTypes>
-    <refType typeId="4fe3b9d7-bee2-4062-a06f-e922a12a1dd0" valueTypeId="823916de-5cf0-4717-8f05-3cfe5376033f"/>
-    <listType typeId="be9e6091-45fd-4d3a-8b9f-0c2719153c10" valueTypeId="ec73881f-48d1-4d89-8999-dbbe069954ac"/>
-    <managerType typeId="a017d22c-1da9-448d-9c31-7321dd4b2a92" valueTypeId="546a754e-b0db-4fc8-9ae1-80612612e010"/>
-  </producedTypes>
-  <name>AgreementKinds</name>
+ <producedTypes>
+  <refType typeId="4fe3b9d7-bee2-4062-a06f-e922a12a1dd0" valueTypeId="823916de-5cf0-4717-8f05-3cfe5376033f"/>
+  <listType typeId="be9e6091-45fd-4d3a-8b9f-0c2719153c10" valueTypeId="ec73881f-48d1-4d89-8999-dbbe069954ac"/>
+  <managerType typeId="a017d22c-1da9-448d-9c31-7321dd4b2a92" valueTypeId="546a754e-b0db-4fc8-9ae1-80612612e010"/>
+ </producedTypes>
+ <name>AgreementKinds</name>
+ <synonym>
+  <key>ru</key>
+  <value>Виды соглашений</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Partner term kinds</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Sözleşme türleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="85e06622-ad8c-4c22-b9d7-d669ae867684">
+  <name>Regular</name>
   <synonym>
-    <key>en</key>
-    <value>Partner term kinds</value>
+   <key>ru</key>
+   <value>Обычное</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="85e06622-ad8c-4c22-b9d7-d669ae867684">
-    <name>Regular</name>
-    <synonym>
-      <key>en</key>
-      <value>Regular</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="3ee710d5-f20a-4b3d-b2b3-fe39692a7ac8">
-    <name>Standard</name>
-    <synonym>
-      <key>en</key>
-      <value>Standard</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Regular</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Normal</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="3ee710d5-f20a-4b3d-b2b3-fe39692a7ac8">
+  <name>Standard</name>
+  <synonym>
+   <key>ru</key>
+   <value>Стандартное</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Standard</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Standart</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

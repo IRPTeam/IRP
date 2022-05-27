@@ -1,17 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="419df756-696b-4c16-b777-e85e08e5a7c1">
-  <name>Purchase</name>
-  <synonym>
-    <key>en</key>
-    <value>Purchase</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.PurchaseInvoice</content>
-  <content>Document.PurchaseOrder</content>
-  <content>Document.InternalSupplyRequest</content>
-  <content>Document.Labeling</content>
-  <content>Document.GoodsReceipt</content>
-  <content>Document.PurchaseOrderClosing</content>
-  <parentSubsystem>Subsystem.PurchaseAP</parentSubsystem>
+ <name>Purchase</name>
+ <synonym>
+  <key>ru</key>
+  <value>Закупки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Purchase</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Alımlar</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.PurchaseInvoice</content>
+ <content>Document.PurchaseOrder</content>
+ <content>Document.InternalSupplyRequest</content>
+ <content>Document.Labeling</content>
+ <content>Document.GoodsReceipt</content>
+ <content>Document.PurchaseOrderClosing</content>
+ <parentSubsystem>Subsystem.PurchaseAP</parentSubsystem>
 </mdclass:Subsystem>

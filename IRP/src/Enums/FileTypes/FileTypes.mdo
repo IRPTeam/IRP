@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a5e8d2bb-4626-467a-9615-163d0e722507">
-  <producedTypes>
-    <refType typeId="8e924b1a-4d73-433b-b8ce-f2b9c2f3ef41" valueTypeId="4eeea869-e4a1-4f16-9ab5-789de1e8579e"/>
-    <listType typeId="91ddcee4-e6f2-4bfd-b0f1-cea50c79d459" valueTypeId="80a1f8c7-a550-4bdc-b458-81663fa02dcc"/>
-    <managerType typeId="742903f9-7775-4dd5-b08e-cb5c1a53c76b" valueTypeId="7393c9e9-0e8d-4ee0-934d-3b757d4ed64d"/>
-  </producedTypes>
-  <name>FileTypes</name>
+ <producedTypes>
+  <refType typeId="8e924b1a-4d73-433b-b8ce-f2b9c2f3ef41" valueTypeId="4eeea869-e4a1-4f16-9ab5-789de1e8579e"/>
+  <listType typeId="91ddcee4-e6f2-4bfd-b0f1-cea50c79d459" valueTypeId="80a1f8c7-a550-4bdc-b458-81663fa02dcc"/>
+  <managerType typeId="742903f9-7775-4dd5-b08e-cb5c1a53c76b" valueTypeId="7393c9e9-0e8d-4ee0-934d-3b757d4ed64d"/>
+ </producedTypes>
+ <name>FileTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Типы файлов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>File types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dosya tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="6bcb92dd-9ffe-4709-a9c5-139534f3c6a5">
+  <name>Picture</name>
   <synonym>
-    <key>en</key>
-    <value>File types</value>
+   <key>ru</key>
+   <value>Картинка</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="6bcb92dd-9ffe-4709-a9c5-139534f3c6a5">
-    <name>Picture</name>
-    <synonym>
-      <key>en</key>
-      <value>Picture</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="e042a707-962f-42cb-bb06-9a71e171479a">
-    <name>Other</name>
-    <synonym>
-      <key>en</key>
-      <value>Other</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Picture</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Resim</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="e042a707-962f-42cb-bb06-9a71e171479a">
+  <name>Other</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительно</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Other</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Diğer</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

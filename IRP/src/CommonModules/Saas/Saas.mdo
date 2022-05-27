@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="66d24f37-b4c8-48bf-8abe-2550b2decc65">
-  <name>Saas</name>
-  <synonym>
-    <key>en</key>
-    <value>Saas</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>Saas</name>
+ <synonym>
+  <key>ru</key>
+  <value>SaaS</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Saas</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Saas</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

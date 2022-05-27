@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5ac6106c-a683-40b5-b382-81b9a7774ee4">
-  <name>BarcodeReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>Barcode reuse</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <returnValuesReuse>DuringSession</returnValuesReuse>
+ <name>BarcodeReuse</name>
+ <synonym>
+  <key>ru</key>
+  <value>Повторное использование штрихкода</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Barcode reuse</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Barkod reuse</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <returnValuesReuse>DuringSession</returnValuesReuse>
 </mdclass:CommonModule>

@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="08159e8a-8d24-42e7-aa71-4bd06f2f3ef1">
-  <producedTypes>
-    <refType typeId="26ad4074-d82a-4345-b96c-e7bd037ae45d" valueTypeId="473293f3-68b6-49e6-8a48-d41646c9fdfa"/>
-    <listType typeId="d2ce4cbe-2919-4825-92bd-9a934b2e475e" valueTypeId="be65df99-2adf-4368-bec6-3dd567692bb5"/>
-    <managerType typeId="6fb3ecd6-14b8-4f32-808b-4b7d56a9b5b8" valueTypeId="f31c0ad7-1a5c-4af1-bb3a-8d03e9d77c25"/>
-  </producedTypes>
-  <name>AccountingAnalyticTypes</name>
+ <producedTypes>
+  <refType typeId="26ad4074-d82a-4345-b96c-e7bd037ae45d" valueTypeId="473293f3-68b6-49e6-8a48-d41646c9fdfa"/>
+  <listType typeId="d2ce4cbe-2919-4825-92bd-9a934b2e475e" valueTypeId="be65df99-2adf-4368-bec6-3dd567692bb5"/>
+  <managerType typeId="6fb3ecd6-14b8-4f32-808b-4b7d56a9b5b8" valueTypeId="f31c0ad7-1a5c-4af1-bb3a-8d03e9d77c25"/>
+ </producedTypes>
+ <name>AccountingAnalyticTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Типы бухгалтерской аналитики</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Accounting analytic types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Muhasebe analitik tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="c96eced9-6bed-4612-aa0c-41e4d11b1864">
+  <name>Debit</name>
   <synonym>
-    <key>en</key>
-    <value>Accounting analytic types</value>
+   <key>ru</key>
+   <value>Дебит</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="c96eced9-6bed-4612-aa0c-41e4d11b1864">
-    <name>Debit</name>
-    <synonym>
-      <key>en</key>
-      <value>Debit</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="843926ee-bbb6-415a-bf1c-b994f5c69eea">
-    <name>Credit</name>
-    <synonym>
-      <key>en</key>
-      <value>Credit</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Debit</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Borç</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="843926ee-bbb6-415a-bf1c-b994f5c69eea">
+  <name>Credit</name>
+  <synonym>
+   <key>ru</key>
+   <value>Кредит</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Credit</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alacak</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

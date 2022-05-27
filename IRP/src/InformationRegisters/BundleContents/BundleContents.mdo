@@ -1,72 +1,112 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="53652bf7-6777-4f36-a640-4a89eb480999">
-  <producedTypes>
-    <selectionType typeId="f47fc025-132b-4e70-81ba-6328863317af" valueTypeId="e2c7dea0-72f6-4810-b04b-a8720a968435"/>
-    <listType typeId="e0a553da-2921-42ff-8165-74b536099b22" valueTypeId="5bfc38dc-8743-4773-a9f6-b61cf73e27b8"/>
-    <managerType typeId="273fbbc7-cd73-4f18-a728-e9cb50095187" valueTypeId="0dfbeab7-0521-40bf-8fdb-137f18b93990"/>
-    <recordSetType typeId="146d61e9-51aa-45fc-9ab1-4d764ef31bbd" valueTypeId="8607763a-763c-4b6c-a89c-8e99c8942dcd"/>
-    <recordKeyType typeId="5502dd5a-970a-42aa-8bd5-ff31bfd33ec4" valueTypeId="04e5bc81-357e-4e4f-b2de-2e864f079ae1"/>
-    <recordType typeId="0a724f0b-5765-492f-822a-d030dd0aa707" valueTypeId="4548f399-3053-482f-ade4-06b16925c194"/>
-    <recordManagerType typeId="fe24b4e6-012c-488a-9dad-2ecad0f5c170" valueTypeId="d7195c86-b2cb-4c0e-af42-af55bfb0f785"/>
-  </producedTypes>
-  <name>BundleContents</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="53652bf7-6777-4f36-a640-4a89eb480999">
+ <producedTypes>
+  <selectionType typeId="f47fc025-132b-4e70-81ba-6328863317af" valueTypeId="e2c7dea0-72f6-4810-b04b-a8720a968435"/>
+  <listType typeId="e0a553da-2921-42ff-8165-74b536099b22" valueTypeId="5bfc38dc-8743-4773-a9f6-b61cf73e27b8"/>
+  <managerType typeId="273fbbc7-cd73-4f18-a728-e9cb50095187" valueTypeId="0dfbeab7-0521-40bf-8fdb-137f18b93990"/>
+  <recordSetType typeId="146d61e9-51aa-45fc-9ab1-4d764ef31bbd" valueTypeId="8607763a-763c-4b6c-a89c-8e99c8942dcd"/>
+  <recordKeyType typeId="5502dd5a-970a-42aa-8bd5-ff31bfd33ec4" valueTypeId="04e5bc81-357e-4e4f-b2de-2e864f079ae1"/>
+  <recordType typeId="0a724f0b-5765-492f-822a-d030dd0aa707" valueTypeId="4548f399-3053-482f-ade4-06b16925c194"/>
+  <recordManagerType typeId="fe24b4e6-012c-488a-9dad-2ecad0f5c170" valueTypeId="d7195c86-b2cb-4c0e-af42-af55bfb0f785"/>
+ </producedTypes>
+ <name>BundleContents</name>
+ <synonym>
+  <key>ru</key>
+  <value>Содержимое наборов номенклатуры</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Bundles content</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Paket içeriği</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <listPresentation>
+  <key>ru</key>
+  <value>Содержимое наборов номенклатуры</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Bundles content</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Paket içeriği</value>
+ </listPresentation>
+ <resources uuid="619bc356-6709-4982-a405-5f6d402386f0">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>Bundles content</value>
+   <key>ru</key>
+   <value>Количество</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <listPresentation>
-    <key>en</key>
-    <value>Bundles content</value>
-  </listPresentation>
-  <resources uuid="619bc356-6709-4982-a405-5f6d402386f0">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="bb1aa1dd-5b75-484d-8983-1bc93df50d92">
-    <name>ItemKeyBundle</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key bundle</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="dcaf2058-e605-4077-852a-2bc66faabee3">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="bb1aa1dd-5b75-484d-8983-1bc93df50d92">
+  <name>ItemKeyBundle</name>
+  <synonym>
+   <key>ru</key>
+   <value>Набор характеристик</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key bundle</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant takımı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="dcaf2058-e605-4077-852a-2bc66faabee3">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

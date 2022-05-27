@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5004ec39-3e18-48e9-ae4b-79afd4f4aef7">
-  <name>Localization</name>
-  <synonym>
-    <key>en</key>
-    <value>Localization</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>Localization</name>
+ <synonym>
+  <key>ru</key>
+  <value>Локализация</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Localization</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Lokalizasyon</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

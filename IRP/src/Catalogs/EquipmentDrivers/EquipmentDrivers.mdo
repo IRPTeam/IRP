@@ -1,95 +1,143 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2c817433-77d8-4fa3-9468-20bfda64aa02">
-  <producedTypes>
-    <objectType typeId="c66ed7ab-2c91-453e-a20e-2418fa87114b" valueTypeId="f383b49c-0d74-45dc-a5c7-4e069756ccc8"/>
-    <refType typeId="555cdfc5-9640-499d-8533-c36b4bad4552" valueTypeId="1f47b03e-656d-4196-ae4d-afebf9ee752e"/>
-    <selectionType typeId="764ebe51-6650-4824-a3e8-7c29d4acac01" valueTypeId="a5f47e7f-a7eb-42cf-b577-74fdd3f1991f"/>
-    <listType typeId="d6a4a2b4-93f1-4768-a15a-193e98268818" valueTypeId="6b8db944-4c91-454a-89bd-ae982d7ddcab"/>
-    <managerType typeId="6d71b17f-1cfe-4899-91fb-feb4f67496e5" valueTypeId="65c329c8-e59c-4b53-8842-956206253ce9"/>
-  </producedTypes>
-  <name>EquipmentDrivers</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2c817433-77d8-4fa3-9468-20bfda64aa02">
+ <producedTypes>
+  <objectType typeId="c66ed7ab-2c91-453e-a20e-2418fa87114b" valueTypeId="f383b49c-0d74-45dc-a5c7-4e069756ccc8"/>
+  <refType typeId="555cdfc5-9640-499d-8533-c36b4bad4552" valueTypeId="1f47b03e-656d-4196-ae4d-afebf9ee752e"/>
+  <selectionType typeId="764ebe51-6650-4824-a3e8-7c29d4acac01" valueTypeId="a5f47e7f-a7eb-42cf-b577-74fdd3f1991f"/>
+  <listType typeId="d6a4a2b4-93f1-4768-a15a-193e98268818" valueTypeId="6b8db944-4c91-454a-89bd-ae982d7ddcab"/>
+  <managerType typeId="6d71b17f-1cfe-4899-91fb-feb4f67496e5" valueTypeId="65c329c8-e59c-4b53-8842-956206253ce9"/>
+ </producedTypes>
+ <name>EquipmentDrivers</name>
+ <synonym>
+  <key>ru</key>
+  <value>Драйвера оборудования</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Equipment drivers</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Donanım sürücüleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.EquipmentDrivers.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Драйвер оборудования</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Equipment driver</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Donanım sürücüsü</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.EquipmentDrivers.Form.ItemForm</defaultObjectForm>
+ <attributes uuid="5e34a05c-a1fe-4b19-aaea-22dc6988991e">
+  <name>Driver</name>
   <synonym>
-    <key>en</key>
-    <value>Equipment drivers</value>
+   <key>ru</key>
+   <value>Драйвер</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.EquipmentDrivers.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Driver</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sürücü</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Equipment driver</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.EquipmentDrivers.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="5e34a05c-a1fe-4b19-aaea-22dc6988991e">
-    <name>Driver</name>
-    <synonym>
-      <key>en</key>
-      <value>Driver</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="dbff0461-21c4-4233-9940-1565ec36ea25">
-    <name>AddInID</name>
-    <synonym>
-      <key>en</key>
-      <value>AddIn ID</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>200</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="202ee702-3571-4175-abc9-6fba1bbeee7a">
-    <name>DriverLoaded</name>
-    <synonym>
-      <key>en</key>
-      <value>Driver loaded</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="8c3e9760-3345-45d6-b985-d2722b97fe07">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="dbff0461-21c4-4233-9940-1565ec36ea25">
+  <name>AddInID</name>
+  <synonym>
+   <key>ru</key>
+   <value>AddIn ID</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>AddIn ID</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>AddIn ID</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>200</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="202ee702-3571-4175-abc9-6fba1bbeee7a">
+  <name>DriverLoaded</name>
+  <synonym>
+   <key>ru</key>
+   <value>Драйвер загружен</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Driver loaded</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sürücü yüklendi</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="8c3e9760-3345-45d6-b985-d2722b97fe07">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

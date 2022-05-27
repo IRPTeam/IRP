@@ -1,28 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e15c4450-e65c-4ede-a87e-d8dc20f9742c">
-  <producedTypes>
-    <containerType typeId="bb55dbec-f7ba-4ab5-b22f-89a976a92f1a" valueTypeId="e4468c2e-05bb-43af-a16f-ac1ec7ec8020"/>
-  </producedTypes>
-  <name>typePresentation</name>
-  <synonym>
-    <key>en</key>
-    <value>Type presentation</value>
-  </synonym>
-  <type>
-    <types>CatalogManager.ItemTypes</types>
-    <types>CatalogManager.PriceTypes</types>
-    <types>CatalogManager.AddAttributeAndPropertySets</types>
-    <types>CatalogManager.CashAccounts</types>
-    <types>CatalogManager.AddAttributeAndPropertyValues</types>
-    <types>CatalogManager.ItemSegments</types>
-    <types>CatalogManager.PaymentTypes</types>
-    <types>CatalogManager.TaxRates</types>
-    <types>CatalogManager.Items</types>
-    <types>CatalogManager.SpecialOffers</types>
-    <types>CatalogManager.Stores</types>
-    <types>CatalogManager.Countries</types>
-    <types>CatalogManager.Partners</types>
-    <types>CatalogManager.Companies</types>
-    <types>CatalogManager.Currencies</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="bb55dbec-f7ba-4ab5-b22f-89a976a92f1a" valueTypeId="e4468c2e-05bb-43af-a16f-ac1ec7ec8020"/>
+ </producedTypes>
+ <name>typePresentation</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип представление</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type presentation</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip görünüm</value>
+ </synonym>
+ <type>
+  <types>CatalogManager.ItemTypes</types>
+  <types>CatalogManager.PriceTypes</types>
+  <types>CatalogManager.AddAttributeAndPropertySets</types>
+  <types>CatalogManager.CashAccounts</types>
+  <types>CatalogManager.AddAttributeAndPropertyValues</types>
+  <types>CatalogManager.ItemSegments</types>
+  <types>CatalogManager.PaymentTypes</types>
+  <types>CatalogManager.TaxRates</types>
+  <types>CatalogManager.Items</types>
+  <types>CatalogManager.SpecialOffers</types>
+  <types>CatalogManager.Stores</types>
+  <types>CatalogManager.Countries</types>
+  <types>CatalogManager.Partners</types>
+  <types>CatalogManager.Companies</types>
+  <types>CatalogManager.Currencies</types>
+ </type>
 </mdclass:DefinedType>

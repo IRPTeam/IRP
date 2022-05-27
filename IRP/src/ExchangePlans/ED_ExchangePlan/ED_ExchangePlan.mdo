@@ -1,39 +1,63 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:ExchangePlan xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bf8dce52-a13d-49c2-9c41-0a69347ca555" thisNode="bf8dce52-a13d-49c2-9c41-0a69347ca555">
-  <producedTypes>
-    <objectType typeId="a512e478-0a86-4b5e-a038-380d89f0dcb1" valueTypeId="7c13b624-e858-43e0-b1c8-24a4ca247718"/>
-    <refType typeId="ecaa2df2-ec93-46e7-88cb-edaf574fa033" valueTypeId="df53392b-8278-425e-af31-606e8364e068"/>
-    <selectionType typeId="4a088f3f-a62d-408b-b983-77ba30b65d74" valueTypeId="fe075d1e-37a2-4523-9758-16c65d5c806a"/>
-    <listType typeId="fa061e33-2649-4a88-8179-5b0f5369d598" valueTypeId="a97cc523-cb86-424b-85c8-bf9720a44637"/>
-    <managerType typeId="1c832f94-7203-40b9-bfb8-d26a8f3a16ae" valueTypeId="e2aa0f8f-d4f7-4429-b787-92b18e8effb9"/>
-  </producedTypes>
-  <name>ED_ExchangePlan</name>
-  <synonym>
-    <key>en</key>
-    <value>Export Data Exchange plan</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>ExchangePlan.ED_ExchangePlan.StandardAttribute.Code</inputByString>
-  <inputByString>ExchangePlan.ED_ExchangePlan.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Export Data Exchange plan</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Export Data Exchange plans</value>
-  </listPresentation>
-  <codeLength>9</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <descriptionLength>25</descriptionLength>
-  <content>
-    <mdObject>Document.SalesOrder</mdObject>
-    <autoRecord>Allow</autoRecord>
-  </content>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <choiceMode>BothWays</choiceMode>
+ <producedTypes>
+  <objectType typeId="a512e478-0a86-4b5e-a038-380d89f0dcb1" valueTypeId="7c13b624-e858-43e0-b1c8-24a4ca247718"/>
+  <refType typeId="ecaa2df2-ec93-46e7-88cb-edaf574fa033" valueTypeId="df53392b-8278-425e-af31-606e8364e068"/>
+  <selectionType typeId="4a088f3f-a62d-408b-b983-77ba30b65d74" valueTypeId="fe075d1e-37a2-4523-9758-16c65d5c806a"/>
+  <listType typeId="fa061e33-2649-4a88-8179-5b0f5369d598" valueTypeId="a97cc523-cb86-424b-85c8-bf9720a44637"/>
+  <managerType typeId="1c832f94-7203-40b9-bfb8-d26a8f3a16ae" valueTypeId="e2aa0f8f-d4f7-4429-b787-92b18e8effb9"/>
+ </producedTypes>
+ <name>ED_ExchangePlan</name>
+ <synonym>
+  <key>ru</key>
+  <value>План обмена экспортными данными</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Export Data Exchange plan</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dışarı aktarma Veri alış veriş planı</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>ExchangePlan.ED_ExchangePlan.StandardAttribute.Code</inputByString>
+ <inputByString>ExchangePlan.ED_ExchangePlan.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>План обмена экспортными данными</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Export Data Exchange plan</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Dışarı aktarma Veri alış veriş planı</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Планы обмена экспортными данными</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Export Data Exchange plans</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Dışarı aktarma Veri alış veriş planları</value>
+ </listPresentation>
+ <codeLength>9</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <descriptionLength>25</descriptionLength>
+ <content>
+  <mdObject>Document.SalesOrder</mdObject>
+  <autoRecord>Allow</autoRecord>
+ </content>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <choiceMode>BothWays</choiceMode>
 </mdclass:ExchangePlan>

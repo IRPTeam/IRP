@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dc2fd1f7-4e54-4e35-9fd6-73c7ce53c6bb">
-  <name>CommonFormActionsServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Common form actions server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CommonFormActionsServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Действия в общих формах сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Common form actions server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Genel formlar işlemler server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

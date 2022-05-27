@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c39eb04b-6711-4c59-b2fb-abe7cfeefbb2">
-  <name>DocRetailReturnReceiptServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc retail return receipt server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocRetailReturnReceiptServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ возврат от розничного покупателя сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc retail return receipt server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Belge perakende iade fişi sunucu</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

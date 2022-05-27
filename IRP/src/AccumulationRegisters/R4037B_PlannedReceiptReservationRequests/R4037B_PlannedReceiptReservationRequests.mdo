@@ -1,74 +1,114 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2622d8d8-f711-4c64-aab9-e7f4ff6a732f">
-  <producedTypes>
-    <selectionType typeId="92c77af0-2315-4b88-992d-f02268fdd528" valueTypeId="f293f62a-2c57-4b5f-99cc-de44fdd5d127"/>
-    <listType typeId="712681d7-7a63-4c7e-aede-f14885fb63a7" valueTypeId="8fded290-e772-438b-b1a5-b857b028a8da"/>
-    <managerType typeId="cb3e711a-1e0b-4cb5-9f22-4474180fdc13" valueTypeId="8a48116c-350f-4068-aa58-aed8fc37ea55"/>
-    <recordSetType typeId="45261155-56c3-4e3f-931d-14c8b2af74a5" valueTypeId="abe001a0-46a3-490f-bde3-d2ba41f355d6"/>
-    <recordKeyType typeId="15794dcb-b131-4460-8497-66d7f124c1ca" valueTypeId="eea0c9dd-bcbe-4086-8179-b72a8dffbfe7"/>
-    <recordType typeId="dc9ac7e2-0d64-4f04-a1b8-e7efa1346d10" valueTypeId="617b80c4-e45a-4eda-a98d-bad3f2fd7db8"/>
-  </producedTypes>
-  <name>R4037B_PlannedReceiptReservationRequests</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2622d8d8-f711-4c64-aab9-e7f4ff6a732f">
+ <producedTypes>
+  <selectionType typeId="92c77af0-2315-4b88-992d-f02268fdd528" valueTypeId="f293f62a-2c57-4b5f-99cc-de44fdd5d127"/>
+  <listType typeId="712681d7-7a63-4c7e-aede-f14885fb63a7" valueTypeId="8fded290-e772-438b-b1a5-b857b028a8da"/>
+  <managerType typeId="cb3e711a-1e0b-4cb5-9f22-4474180fdc13" valueTypeId="8a48116c-350f-4068-aa58-aed8fc37ea55"/>
+  <recordSetType typeId="45261155-56c3-4e3f-931d-14c8b2af74a5" valueTypeId="abe001a0-46a3-490f-bde3-d2ba41f355d6"/>
+  <recordKeyType typeId="15794dcb-b131-4460-8497-66d7f124c1ca" valueTypeId="eea0c9dd-bcbe-4086-8179-b72a8dffbfe7"/>
+  <recordType typeId="dc9ac7e2-0d64-4f04-a1b8-e7efa1346d10" valueTypeId="617b80c4-e45a-4eda-a98d-bad3f2fd7db8"/>
+ </producedTypes>
+ <name>R4037B_PlannedReceiptReservationRequests</name>
+ <synonym>
+  <key>ru</key>
+  <value>R4037 Заявки на резервирование запланированного прихода товара</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R4037 Planned receipt reservation requests</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R4037 Planlanan stok giriş rezerv talepleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="8abddd02-ed81-405a-bf2c-0159dda7db3d">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R4037 Planned receipt reservation requests</value>
+   <key>ru</key>
+   <value>Количество</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="8abddd02-ed81-405a-bf2c-0159dda7db3d">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="7c3e278b-d910-4e4e-936b-e8fdb84ffcc8">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="a0a2adfc-6253-4faa-974f-6fcd7a114972">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="eb30da72-8ff0-41de-8fa6-aedadb6df2fc">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.SalesOrder</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="7c3e278b-d910-4e4e-936b-e8fdb84ffcc8">
+  <name>Store</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="a0a2adfc-6253-4faa-974f-6fcd7a114972">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="eb30da72-8ff0-41de-8fa6-aedadb6df2fc">
+  <name>Order</name>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Order</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satış sipariş adedi</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

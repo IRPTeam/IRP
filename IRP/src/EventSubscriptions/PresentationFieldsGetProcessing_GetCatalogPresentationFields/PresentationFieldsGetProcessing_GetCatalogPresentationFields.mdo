@@ -1,15 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f4933b72-dc76-482d-962f-8b8802b739a8">
-  <name>PresentationFieldsGetProcessing_GetCatalogPresentationFields</name>
-  <synonym>
-    <key>en</key>
-    <value>Presentation fields get processing get catalog presentation fields</value>
-  </synonym>
-  <source>
-    <types>ChartOfCharacteristicTypesManager</types>
-    <types>CatalogManager</types>
-    <types>ChartOfAccountsManager</types>
-  </source>
-  <event>PresentationFieldsGetProcessing</event>
-  <handler>CommonModule.LocalizationEvents.GetCatalogPresentationFieldsPresentationFieldsGetProcessing</handler>
+ <name>PresentationFieldsGetProcessing_GetCatalogPresentationFields</name>
+ <synonym>
+  <key>ru</key>
+  <value>Получить поля представления справочников</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Presentation fields get processing get catalog presentation fields</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Görünüm alanlar işleme kart liste görünüm alanları alma</value>
+ </synonym>
+ <source>
+  <types>ChartOfCharacteristicTypesManager</types>
+  <types>CatalogManager</types>
+  <types>ChartOfAccountsManager</types>
+ </source>
+ <event>PresentationFieldsGetProcessing</event>
+ <handler>CommonModule.LocalizationEvents.GetCatalogPresentationFieldsPresentationFieldsGetProcessing</handler>
 </mdclass:EventSubscription>

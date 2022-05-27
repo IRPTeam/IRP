@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1a565708-d639-4f11-8210-21a28c26df08">
-  <name>CatUserGroupsServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Catalog user groups server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CatUserGroupsServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Справочник группы пользователей сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Catalog user groups server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Katalog kullanıcı grupları sunucu</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

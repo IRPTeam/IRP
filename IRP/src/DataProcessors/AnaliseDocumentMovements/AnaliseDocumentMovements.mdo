@@ -1,176 +1,280 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d91e1fcb-9129-4b04-bde3-f6c7121d1f34">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="d91e1fcb-9129-4b04-bde3-f6c7121d1f34">
+ <producedTypes>
+  <objectType typeId="4592b99c-6516-45b1-9f18-609fb5e0e0f4" valueTypeId="28e2a3a6-1e40-4b5f-8391-ce2758419ae0"/>
+  <managerType typeId="bae4ac10-a85c-443b-9cd6-134f914fc4fd" valueTypeId="33417cc3-392d-422e-9793-33dda5865781"/>
+ </producedTypes>
+ <name>AnaliseDocumentMovements</name>
+ <synonym>
+  <key>ru</key>
+  <value>Проанализировать движения документа</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Analise document movements</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak hareketleri analiz et</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.AnaliseDocumentMovements.Form.Form</defaultForm>
+ <tabularSections uuid="79d99f07-9215-4e87-be40-44713d846dfc">
   <producedTypes>
-    <objectType typeId="4592b99c-6516-45b1-9f18-609fb5e0e0f4" valueTypeId="28e2a3a6-1e40-4b5f-8391-ce2758419ae0"/>
-    <managerType typeId="bae4ac10-a85c-443b-9cd6-134f914fc4fd" valueTypeId="33417cc3-392d-422e-9793-33dda5865781"/>
+   <objectType typeId="c50dbe64-1c9e-4500-ba93-94571de73217" valueTypeId="dff96c4b-5d1a-476e-a5b0-ff45778f001d"/>
+   <rowType typeId="cf6490b1-3b83-4384-8a4b-d1c6d78638fd" valueTypeId="4f230f17-4737-407e-90df-b0c3a90cd6d9"/>
   </producedTypes>
-  <name>AnaliseDocumentMovements</name>
+  <name>Info</name>
   <synonym>
-    <key>en</key>
-    <value>Analise document movements</value>
+   <key>ru</key>
+   <value>Контактная информация</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.AnaliseDocumentMovements.Form.Form</defaultForm>
-  <tabularSections uuid="79d99f07-9215-4e87-be40-44713d846dfc">
-    <producedTypes>
-      <objectType typeId="c50dbe64-1c9e-4500-ba93-94571de73217" valueTypeId="dff96c4b-5d1a-476e-a5b0-ff45778f001d"/>
-      <rowType typeId="cf6490b1-3b83-4384-8a4b-d1c6d78638fd" valueTypeId="4f230f17-4737-407e-90df-b0c3a90cd6d9"/>
-    </producedTypes>
-    <name>Info</name>
-    <synonym>
-      <key>en</key>
-      <value>Info</value>
-    </synonym>
-    <attributes uuid="04bb90dc-3a3d-4d68-9d4a-b3bc797db905">
-      <name>Document</name>
-      <synonym>
-        <key>en</key>
-        <value>Document</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>100</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
-    <attributes uuid="760abdcb-ee96-44a1-b1f5-85fa73cfcdb9">
-      <name>Register</name>
-      <synonym>
-        <key>en</key>
-        <value>Register</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>100</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
-    <attributes uuid="c02ff034-64f5-4c9d-857e-68ca1f346d34">
-      <name>Recorder</name>
-      <synonym>
-        <key>en</key>
-        <value>Recorder</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="be3fb2e0-0f79-4c7c-82ee-23fd0025c312">
-      <name>Conditions</name>
-      <synonym>
-        <key>en</key>
-        <value>Conditions</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <multiLine>true</multiLine>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
-    <attributes uuid="be055081-9a11-4c85-862b-8d458cc7327b">
-      <name>Query</name>
-      <synonym>
-        <key>en</key>
-        <value>Query</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <multiLine>true</multiLine>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
-    <attributes uuid="ecdea8c4-d90a-4795-9d80-f557bae8d5ee">
-      <name>Parameters</name>
-      <synonym>
-        <key>en</key>
-        <value>Parameters</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <multiLine>true</multiLine>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
-    <attributes uuid="ac02f4d2-8093-4b81-9e75-c32062b8b567">
-      <name>Receipt</name>
-      <synonym>
-        <key>en</key>
-        <value>Receipt</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="e9373a2d-c727-4d0e-a978-563a1dad5e33">
-      <name>Expense</name>
-      <synonym>
-        <key>en</key>
-        <value>Expense</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-  </tabularSections>
-  <forms uuid="0cdba87d-7d5d-4b0f-9136-2b28ee9772ef">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="89108f7c-2840-440e-85d3-3bcc959db5b6">
-    <name>FeatureTemplate</name>
-    <synonym>
-      <key>en</key>
-      <value>Feature template</value>
-    </synonym>
-    <templateType>TextDocument</templateType>
-  </templates>
-  <templates uuid="d9839a5b-b754-4255-a7df-3a7c593d505c">
-    <name>FeatureRowTemplate</name>
-    <synonym>
-      <key>en</key>
-      <value>Feature row template</value>
-    </synonym>
-    <templateType>TextDocument</templateType>
-  </templates>
+  <synonym>
+   <key>en</key>
+   <value>Info</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bilgi</value>
+  </synonym>
+  <attributes uuid="04bb90dc-3a3d-4d68-9d4a-b3bc797db905">
+   <name>Document</name>
+   <synonym>
+    <key>ru</key>
+    <value>Документ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Document</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Evrak</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:StringValue">
+    <value/>
+   </fillValue>
+  </attributes>
+  <attributes uuid="760abdcb-ee96-44a1-b1f5-85fa73cfcdb9">
+   <name>Register</name>
+   <synonym>
+    <key>ru</key>
+    <value>Регистр</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Register</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kayıt tablosu</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:StringValue">
+    <value/>
+   </fillValue>
+  </attributes>
+  <attributes uuid="c02ff034-64f5-4c9d-857e-68ca1f346d34">
+   <name>Recorder</name>
+   <synonym>
+    <key>ru</key>
+    <value>Регистратор</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Recorder</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>İşlem evrakı</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="be3fb2e0-0f79-4c7c-82ee-23fd0025c312">
+   <name>Conditions</name>
+   <synonym>
+    <key>ru</key>
+    <value>Условия</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Conditions</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Koşullar</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <multiLine>true</multiLine>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:StringValue">
+    <value/>
+   </fillValue>
+  </attributes>
+  <attributes uuid="be055081-9a11-4c85-862b-8d458cc7327b">
+   <name>Query</name>
+   <synonym>
+    <key>ru</key>
+    <value>Запрос</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Query</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sorgu</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <multiLine>true</multiLine>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:StringValue">
+    <value/>
+   </fillValue>
+  </attributes>
+  <attributes uuid="ecdea8c4-d90a-4795-9d80-f557bae8d5ee">
+   <name>Parameters</name>
+   <synonym>
+    <key>ru</key>
+    <value>Параметры</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Parameters</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Parametreler</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <multiLine>true</multiLine>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:StringValue">
+    <value/>
+   </fillValue>
+  </attributes>
+  <attributes uuid="ac02f4d2-8093-4b81-9e75-c32062b8b567">
+   <name>Receipt</name>
+   <synonym>
+    <key>ru</key>
+    <value>Приход</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Receipt</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Giriş</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="e9373a2d-c727-4d0e-a978-563a1dad5e33">
+   <name>Expense</name>
+   <synonym>
+    <key>ru</key>
+    <value>Расход</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Expense</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Gider</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+ </tabularSections>
+ <forms uuid="0cdba87d-7d5d-4b0f-9136-2b28ee9772ef">
+  <name>Form</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="89108f7c-2840-440e-85d3-3bcc959db5b6">
+  <name>FeatureTemplate</name>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон свойства</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Feature template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Özellik şablonu</value>
+  </synonym>
+  <templateType>TextDocument</templateType>
+ </templates>
+ <templates uuid="d9839a5b-b754-4255-a7df-3a7c593d505c">
+  <name>FeatureRowTemplate</name>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон строки свойства</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Feature row template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Özellik satır şablonu</value>
+  </synonym>
+  <templateType>TextDocument</templateType>
+ </templates>
 </mdclass:DataProcessor>

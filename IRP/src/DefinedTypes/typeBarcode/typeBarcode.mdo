@@ -1,17 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b30fffbf-e813-44ed-bf08-069ab8d3913f">
-  <producedTypes>
-    <containerType typeId="c23154ca-d846-4adb-b794-5385974f0ff4" valueTypeId="f70f12af-8f69-4727-a2aa-65666af105d7"/>
-  </producedTypes>
-  <name>typeBarcode</name>
-  <synonym>
-    <key>en</key>
-    <value>Type barcode</value>
-  </synonym>
-  <type>
-    <types>String</types>
-    <stringQualifiers>
-      <length>64</length>
-    </stringQualifiers>
-  </type>
+ <producedTypes>
+  <containerType typeId="c23154ca-d846-4adb-b794-5385974f0ff4" valueTypeId="f70f12af-8f69-4727-a2aa-65666af105d7"/>
+ </producedTypes>
+ <name>typeBarcode</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип штрихкода</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type barcode</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip barkod</value>
+ </synonym>
+ <type>
+  <types>String</types>
+  <stringQualifiers>
+   <length>64</length>
+  </stringQualifiers>
+ </type>
 </mdclass:DefinedType>

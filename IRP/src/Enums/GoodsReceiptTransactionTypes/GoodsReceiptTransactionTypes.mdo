@@ -1,36 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ad6e4da1-ccd7-4deb-9e7d-6b02c2dfded2">
-  <producedTypes>
-    <refType typeId="0441a901-d491-446c-a741-43e2df55e2a9" valueTypeId="24b33444-0b03-4449-9f7a-da7324626234"/>
-    <listType typeId="8c55e446-0d58-4dcd-a4f2-c5ed07e5c93e" valueTypeId="fa85ee7f-e9a4-4447-b7e4-fd38f6c6b38f"/>
-    <managerType typeId="0f1d5659-b0c9-4fb8-a974-9d6747c0583f" valueTypeId="6bd4fa0c-c8f5-4a82-a6a3-32c67104d7bf"/>
-  </producedTypes>
-  <name>GoodsReceiptTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="0441a901-d491-446c-a741-43e2df55e2a9" valueTypeId="24b33444-0b03-4449-9f7a-da7324626234"/>
+  <listType typeId="8c55e446-0d58-4dcd-a4f2-c5ed07e5c93e" valueTypeId="fa85ee7f-e9a4-4447-b7e4-fd38f6c6b38f"/>
+  <managerType typeId="0f1d5659-b0c9-4fb8-a974-9d6747c0583f" valueTypeId="6bd4fa0c-c8f5-4a82-a6a3-32c67104d7bf"/>
+ </producedTypes>
+ <name>GoodsReceiptTransactionTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Операции приходных товарных накладных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Goods receipt transaction types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>alım irsaliye işlem tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="92719e3c-e09b-4495-b985-8839ed4c6244">
+  <name>InventoryTransfer</name>
   <synonym>
-    <key>en</key>
-    <value>Goods receipt transaction types</value>
+   <key>ru</key>
+   <value>Перемещение товаров</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="92719e3c-e09b-4495-b985-8839ed4c6244">
-    <name>InventoryTransfer</name>
-    <synonym>
-      <key>en</key>
-      <value>Inventory transfer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="2706b4ed-b7d9-44d7-8c14-f5dc4f3dda97">
-    <name>Purchase</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchase</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="68c878be-c77b-48c3-80df-878110430bf3">
-    <name>ReturnFromCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Return from customer</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Inventory transfer</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo transfer fişi</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="2706b4ed-b7d9-44d7-8c14-f5dc4f3dda97">
+  <name>Purchase</name>
+  <synonym>
+   <key>ru</key>
+   <value>Закупки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Purchase</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alımlar</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="68c878be-c77b-48c3-80df-878110430bf3">
+  <name>ReturnFromCustomer</name>
+  <synonym>
+   <key>ru</key>
+   <value>Возврат покупателя</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Return from customer</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satış iadesi</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

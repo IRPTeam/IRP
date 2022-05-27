@@ -1,23 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e58f46ea-1f71-470f-8468-a490931711a0">
-  <producedTypes>
-    <objectType typeId="3b46a7bb-6025-4d2b-8296-1d62cc0d40fd" valueTypeId="9b307c97-922b-4c7d-833b-4c82279099f4"/>
-    <managerType typeId="ccc30478-334f-405e-b683-ea6626af36c3" valueTypeId="5d41a393-4344-44de-bab9-d46e85b25531"/>
-  </producedTypes>
-  <name>BuilderExample</name>
+ <producedTypes>
+  <objectType typeId="3b46a7bb-6025-4d2b-8296-1d62cc0d40fd" valueTypeId="9b307c97-922b-4c7d-833b-4c82279099f4"/>
+  <managerType typeId="ccc30478-334f-405e-b683-ea6626af36c3" valueTypeId="5d41a393-4344-44de-bab9-d46e85b25531"/>
+ </producedTypes>
+ <name>BuilderExample</name>
+ <synonym>
+  <key>ru</key>
+  <value>Пример построителя</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Builder example</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Oluşturucu örneği</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.BuilderExample.Form.Form</defaultForm>
+ <forms uuid="9744201a-740c-4db8-9a08-fc436e69034e">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Builder example</value>
+   <key>ru</key>
+   <value>Форма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.BuilderExample.Form.Form</defaultForm>
-  <forms uuid="9744201a-740c-4db8-9a08-fc436e69034e">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

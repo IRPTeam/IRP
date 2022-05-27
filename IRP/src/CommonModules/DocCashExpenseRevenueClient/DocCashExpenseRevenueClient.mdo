@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="885cbdac-306c-4ced-88d5-46d77feb315f">
-  <name>DocCashExpenseRevenueClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc cash expense revenue client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocCashExpenseRevenueClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ прочие наличные расходы и прочие наличные доходы клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc cash expense revenue client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak nakit gelir fişi client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

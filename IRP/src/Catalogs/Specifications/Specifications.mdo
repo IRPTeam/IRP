@@ -1,306 +1,466 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="888d8fb4-0ece-4d53-97ae-2cfd04699440">
-  <producedTypes>
-    <objectType typeId="a5b7c40f-2600-4cf1-94da-6a5f6a31badf" valueTypeId="0662b382-a687-4bff-8bb7-7231803428d0"/>
-    <refType typeId="c8a8f8bf-d64b-41fb-9a12-48d874c8cd8c" valueTypeId="84588c06-8acf-4a91-98d4-ad022c040000"/>
-    <selectionType typeId="b836e913-9359-4369-85f0-185868708bc9" valueTypeId="8ab737d9-fb19-40ab-a700-de1dd3d4faa1"/>
-    <listType typeId="bfd0eddc-d0c5-4d11-85c2-564bd8bc98e7" valueTypeId="a5c10059-fa89-4f16-a874-5111c34df411"/>
-    <managerType typeId="c3250fa8-268a-48b8-965e-8e779638d3ab" valueTypeId="1a3a1478-d8b6-406b-a2d7-81682ec51ae1"/>
-  </producedTypes>
-  <name>Specifications</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="888d8fb4-0ece-4d53-97ae-2cfd04699440">
+ <producedTypes>
+  <objectType typeId="a5b7c40f-2600-4cf1-94da-6a5f6a31badf" valueTypeId="0662b382-a687-4bff-8bb7-7231803428d0"/>
+  <refType typeId="c8a8f8bf-d64b-41fb-9a12-48d874c8cd8c" valueTypeId="84588c06-8acf-4a91-98d4-ad022c040000"/>
+  <selectionType typeId="b836e913-9359-4369-85f0-185868708bc9" valueTypeId="8ab737d9-fb19-40ab-a700-de1dd3d4faa1"/>
+  <listType typeId="bfd0eddc-d0c5-4d11-85c2-564bd8bc98e7" valueTypeId="a5c10059-fa89-4f16-a874-5111c34df411"/>
+  <managerType typeId="c3250fa8-268a-48b8-965e-8e779638d3ab" valueTypeId="1a3a1478-d8b6-406b-a2d7-81682ec51ae1"/>
+ </producedTypes>
+ <name>Specifications</name>
+ <synonym>
+  <key>ru</key>
+  <value>Спецификации товаров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Specifications</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Malzeme reçeteleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Specifications</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Specifications</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.Specifications.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.Specifications.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.Specifications.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.Specifications.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Спецификация товара</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Specification</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Ürün reçetesi</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.Specifications.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.Specifications.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.Specifications.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="3ab2e28d-23cc-4663-9278-95a988030745">
+  <name>Type</name>
   <synonym>
-    <key>en</key>
-    <value>Specifications</value>
+   <key>ru</key>
+   <value>Вид</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Specifications</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Specifications</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.Specifications.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.Specifications.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.Specifications.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.Specifications.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tip</value>
+  </synonym>
+  <type>
+   <types>EnumRef.SpecificationType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="758c3868-18e1-4102-b684-62676c7d7c57">
+  <name>ItemBundle</name>
+  <synonym>
+   <key>ru</key>
+   <value>Номенклатура набора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item bundle</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme takımı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f206459e-07da-4bbf-8def-0b1e6dca4c79">
+  <name>UniqueMD5</name>
+  <synonym>
+   <key>ru</key>
+   <value>Уникальный MD5</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Unique MD5</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Eşsiz MD5</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="a5d987ad-3b5e-454b-b53e-0398676c1a67">
+  <producedTypes>
+   <objectType typeId="72146f7d-6acd-4b5f-a7f3-dc6e355189e3" valueTypeId="72588d1b-631d-461d-8171-80964da92a9b"/>
+   <rowType typeId="43955f75-9ea9-4f54-80a9-9cf42eee1bc5" valueTypeId="b0389a0f-d8c3-4fb1-96e6-ce430e9b1f34"/>
+  </producedTypes>
+  <name>DataSet</name>
+  <synonym>
+   <key>ru</key>
+   <value>Набор данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Data set</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İçerik</value>
+  </synonym>
+  <attributes uuid="225c783b-ef06-4624-90db-f33aad0e7a36">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Specification</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Specifications.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.Specifications.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.Specifications.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="3ab2e28d-23cc-4663-9278-95a988030745">
-    <name>Type</name>
-    <synonym>
-      <key>en</key>
-      <value>Type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.SpecificationType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <indexing>IndexWithAdditionalOrder</indexing>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="758c3868-18e1-4102-b684-62676c7d7c57">
-    <name>ItemBundle</name>
-    <synonym>
-      <key>en</key>
-      <value>Item bundle</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="6161d092-06e2-4f8f-9937-12e385b3ff93">
+   <name>Item</name>
+   <synonym>
+    <key>ru</key>
+    <value>Номенклатура</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Item</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Malzeme</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+    <types>CatalogRef.ItemTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="f206459e-07da-4bbf-8def-0b1e6dca4c79">
-    <name>UniqueMD5</name>
-    <synonym>
-      <key>en</key>
-      <value>Unique MD5</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="87fd3728-7fca-4c94-a01e-c57381784548">
+   <name>Attribute</name>
+   <synonym>
+    <key>ru</key>
+    <value>Реквизит</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Attribute</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Alan</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="a5d987ad-3b5e-454b-b53e-0398676c1a67">
-    <producedTypes>
-      <objectType typeId="72146f7d-6acd-4b5f-a7f3-dc6e355189e3" valueTypeId="72588d1b-631d-461d-8171-80964da92a9b"/>
-      <rowType typeId="43955f75-9ea9-4f54-80a9-9cf42eee1bc5" valueTypeId="b0389a0f-d8c3-4fb1-96e6-ce430e9b1f34"/>
-    </producedTypes>
-    <name>DataSet</name>
-    <synonym>
-      <key>en</key>
-      <value>Data set</value>
-    </synonym>
-    <attributes uuid="225c783b-ef06-4624-90db-f33aad0e7a36">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <indexing>IndexWithAdditionalOrder</indexing>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6161d092-06e2-4f8f-9937-12e385b3ff93">
-      <name>Item</name>
-      <synonym>
-        <key>en</key>
-        <value>Item</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Items</types>
-        <types>CatalogRef.ItemTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="87fd3728-7fca-4c94-a01e-c57381784548">
-      <name>Attribute</name>
-      <synonym>
-        <key>en</key>
-        <value>Attribute</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="df014a9f-205a-4934-8a6f-781297c12559">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="e0ced2c3-8138-4b34-ad99-1efa0f12109f">
-    <producedTypes>
-      <objectType typeId="cb175017-90c3-4882-8d2f-bb46d7fe4e23" valueTypeId="39f6bd66-a5e0-4ffc-8094-ae8c68b5a320"/>
-      <rowType typeId="b0c1f1f5-d598-4543-bd9f-19a465ea1808" valueTypeId="5121b946-bf23-48d7-9f09-4d6be31e0f7f"/>
-    </producedTypes>
-    <name>DataQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Data quantity</value>
-    </synonym>
-    <attributes uuid="693f22f2-b706-4976-82f5-931e8be96e07">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <indexing>IndexWithAdditionalOrder</indexing>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="4fd4218b-614f-4c70-94e0-590d4bd8a855">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantityInSpecifications</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="5423a013-f335-4379-84e1-540d83e4a00e">
-    <producedTypes>
-      <objectType typeId="bb0b0349-5e67-4d79-b33b-39d910a89635" valueTypeId="a0869b6e-0897-46e5-9686-7e537550c1a4"/>
-      <rowType typeId="234d08bf-f6eb-45b6-af8f-78d43425e11f" valueTypeId="aa698e41-6696-4fa7-88a5-3b0fd3b51664"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="efb3de71-7745-4c2f-83f1-805bb336a9a6">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.Specifications.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d85592ed-2834-4413-8c5f-e35b30948cc0">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a6e7b415-471b-483f-b4fc-03c765346851">
-      <name>SearchLiteral</name>
-      <synonym>
-        <key>en</key>
-        <value>Search literal</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="d2bf8307-d4f9-4ae0-869c-24a56ff68c4a">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="b558f2fc-e742-4c45-a34a-1bb4d50b665f">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="30dfd148-e5bf-4808-a453-e1e922d08cc4">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="df014a9f-205a-4934-8a6f-781297c12559">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="e0ced2c3-8138-4b34-ad99-1efa0f12109f">
+  <producedTypes>
+   <objectType typeId="cb175017-90c3-4882-8d2f-bb46d7fe4e23" valueTypeId="39f6bd66-a5e0-4ffc-8094-ae8c68b5a320"/>
+   <rowType typeId="b0c1f1f5-d598-4543-bd9f-19a465ea1808" valueTypeId="5121b946-bf23-48d7-9f09-4d6be31e0f7f"/>
+  </producedTypes>
+  <name>DataQuantity</name>
+  <synonym>
+   <key>ru</key>
+   <value>Данные по количеству</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Data quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Veri miktarı</value>
+  </synonym>
+  <attributes uuid="693f22f2-b706-4976-82f5-931e8be96e07">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <indexing>IndexWithAdditionalOrder</indexing>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="4fd4218b-614f-4c70-94e0-590d4bd8a855">
+   <name>Quantity</name>
+   <synonym>
+    <key>ru</key>
+    <value>Количество</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Quantity</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Miktar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantityInSpecifications</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="5423a013-f335-4379-84e1-540d83e4a00e">
+  <producedTypes>
+   <objectType typeId="bb0b0349-5e67-4d79-b33b-39d910a89635" valueTypeId="a0869b6e-0897-46e5-9686-7e537550c1a4"/>
+   <rowType typeId="234d08bf-f6eb-45b6-af8f-78d43425e11f" valueTypeId="aa698e41-6696-4fa7-88a5-3b0fd3b51664"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="efb3de71-7745-4c2f-83f1-805bb336a9a6">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.Specifications.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d85592ed-2834-4413-8c5f-e35b30948cc0">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a6e7b415-471b-483f-b4fc-03c765346851">
+   <name>SearchLiteral</name>
+   <synonym>
+    <key>ru</key>
+    <value>Буквальный поиск</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Search literal</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Arama metni</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>500</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="d2bf8307-d4f9-4ae0-869c-24a56ff68c4a">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="b558f2fc-e742-4c45-a34a-1bb4d50b665f">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="30dfd148-e5bf-4808-a453-e1e922d08cc4">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

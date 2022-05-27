@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8e840e9b-5a91-4e31-aa93-0c1d34ffc940">
-  <name>UpdateItemListInfo</name>
-  <synonym>
-    <key>en</key>
-    <value>Update item list info</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>UpdateItemListInfo</name>
+ <synonym>
+  <key>ru</key>
+  <value>Табличная часть товаров будет обновлена</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Update item list info</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Malzeme liste bilgisi güncelleme</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

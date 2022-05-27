@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d21fce70-b134-4477-953b-4aa4a283002f">
-  <name>Contacts</name>
-  <synonym>
-    <key>en</key>
-    <value>Contacts</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.IDInfoSets</content>
-  <content>ChartOfCharacteristicTypes.IDInfoTypes</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>Contacts</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки контактной информации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Contacts</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Iletişim bilgileri</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.IDInfoSets</content>
+ <content>ChartOfCharacteristicTypes.IDInfoTypes</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

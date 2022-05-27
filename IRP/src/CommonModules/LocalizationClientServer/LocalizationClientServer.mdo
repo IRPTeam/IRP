@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="31da0319-6f81-430c-baed-a4c625a367ce">
-  <name>LocalizationClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Localization client server</value>
-  </synonym>
-  <global>true</global>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>LocalizationClientServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Локализация клиент сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Localization client server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Lokalizasyon istemci sunucu</value>
+ </synonym>
+ <global>true</global>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

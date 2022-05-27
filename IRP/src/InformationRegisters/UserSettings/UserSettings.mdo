@@ -1,131 +1,195 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ee46c0c7-1ec5-4b25-ad63-889eaf9522ea">
-  <producedTypes>
-    <selectionType typeId="cfb00920-a771-4da9-bc74-a12bbb316e89" valueTypeId="dbc9d060-c1e5-4f1f-aa24-6d759e57dad0"/>
-    <listType typeId="e101ed1d-8a59-4747-9fb5-74bca7f71eda" valueTypeId="ae9c5eb6-8c64-4e4e-b166-dc39f5a96cc9"/>
-    <managerType typeId="9648b491-2e1c-4efd-9fee-2416034c8309" valueTypeId="521c3d21-8c77-438e-8be2-bab608eccae1"/>
-    <recordSetType typeId="cf557ce4-51d1-47c1-855a-6e5f744cab30" valueTypeId="bfed5567-b8fb-462d-8d34-c2bc0db572bc"/>
-    <recordKeyType typeId="c075b0ee-0dbd-4fe7-938b-133a0be78468" valueTypeId="81f5fefb-263b-47e0-b802-daf9b7daa493"/>
-    <recordType typeId="82ce5502-e57a-4b38-a8c7-2dea097064ef" valueTypeId="b356f2af-62bc-4135-b08d-d0f30bd41d47"/>
-    <recordManagerType typeId="5000b6e4-6881-43b7-bd35-bed568967133" valueTypeId="dd05ab39-a0ac-4ad0-b62b-71fb5a6b2444"/>
-  </producedTypes>
-  <name>UserSettings</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ee46c0c7-1ec5-4b25-ad63-889eaf9522ea">
+ <producedTypes>
+  <selectionType typeId="cfb00920-a771-4da9-bc74-a12bbb316e89" valueTypeId="dbc9d060-c1e5-4f1f-aa24-6d759e57dad0"/>
+  <listType typeId="e101ed1d-8a59-4747-9fb5-74bca7f71eda" valueTypeId="ae9c5eb6-8c64-4e4e-b166-dc39f5a96cc9"/>
+  <managerType typeId="9648b491-2e1c-4efd-9fee-2416034c8309" valueTypeId="521c3d21-8c77-438e-8be2-bab608eccae1"/>
+  <recordSetType typeId="cf557ce4-51d1-47c1-855a-6e5f744cab30" valueTypeId="bfed5567-b8fb-462d-8d34-c2bc0db572bc"/>
+  <recordKeyType typeId="c075b0ee-0dbd-4fe7-938b-133a0be78468" valueTypeId="81f5fefb-263b-47e0-b802-daf9b7daa493"/>
+  <recordType typeId="82ce5502-e57a-4b38-a8c7-2dea097064ef" valueTypeId="b356f2af-62bc-4135-b08d-d0f30bd41d47"/>
+  <recordManagerType typeId="5000b6e4-6881-43b7-bd35-bed568967133" valueTypeId="dd05ab39-a0ac-4ad0-b62b-71fb5a6b2444"/>
+ </producedTypes>
+ <name>UserSettings</name>
+ <synonym>
+  <key>ru</key>
+  <value>Пользовательские настройки по умолчанию</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>User defaults settings</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanıcı varsayılan ayarları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Пользовательские настройки по умолчанию</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>User default settings</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Kullanıcı varsayılan ayarı</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Пользовательские настройки по умолчанию</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>User defaults settings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Kullanıcı varsayılan ayarları</value>
+ </listPresentation>
+ <resources uuid="67edf6ff-8a5a-403b-a302-278d9d6f3338">
+  <name>KindOfAttribute</name>
   <synonym>
-    <key>en</key>
-    <value>User defaults settings</value>
+   <key>ru</key>
+   <value>Вид реквизита</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>User default settings</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>User defaults settings</value>
-  </listPresentation>
-  <resources uuid="67edf6ff-8a5a-403b-a302-278d9d6f3338">
-    <name>KindOfAttribute</name>
-    <synonym>
-      <key>en</key>
-      <value>Kind of attribute</value>
-    </synonym>
-    <type>
-      <types>EnumRef.KindsOfAttributes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="b5c5bfb2-6b37-4783-9ef4-b0487f3aa19a">
-    <name>Value</name>
-    <synonym>
-      <key>en</key>
-      <value>Value</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-      <types>String</types>
-      <types>Date</types>
-      <types>Number</types>
-      <types>AnyRef</types>
-      <numberQualifiers>
-        <precision>12</precision>
-        <scale>3</scale>
-      </numberQualifiers>
-      <stringQualifiers>
-        <length>200</length>
-      </stringQualifiers>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-  </resources>
-  <dimensions uuid="294152d5-e325-4588-8b43-c7a9e643bcb0">
-    <name>UserOrGroup</name>
-    <synonym>
-      <key>en</key>
-      <value>User or group</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.UserGroups</types>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="439dca42-68f6-4b1b-81e8-0b869833b22e">
-    <name>MetadataObject</name>
-    <synonym>
-      <key>en</key>
-      <value>Metadata object</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="fa6d600a-4784-4609-a589-55d3b69b8c8e">
-    <name>AttributeName</name>
-    <synonym>
-      <key>en</key>
-      <value>Attribute name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Kind of attribute</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Öznitellik türü</value>
+  </synonym>
+  <type>
+   <types>EnumRef.KindsOfAttributes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="b5c5bfb2-6b37-4783-9ef4-b0487f3aa19a">
+  <name>Value</name>
+  <synonym>
+   <key>ru</key>
+   <value>Значение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Value</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Değer</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+   <types>String</types>
+   <types>Date</types>
+   <types>Number</types>
+   <types>AnyRef</types>
+   <numberQualifiers>
+    <precision>12</precision>
+    <scale>3</scale>
+   </numberQualifiers>
+   <stringQualifiers>
+    <length>200</length>
+   </stringQualifiers>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+ </resources>
+ <dimensions uuid="294152d5-e325-4588-8b43-c7a9e643bcb0">
+  <name>UserOrGroup</name>
+  <synonym>
+   <key>ru</key>
+   <value>Пользователь или группа пользователей</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>User or group</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcı veya grup</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.UserGroups</types>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="439dca42-68f6-4b1b-81e8-0b869833b22e">
+  <name>MetadataObject</name>
+  <synonym>
+   <key>ru</key>
+   <value>Объект метаданных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Metadata object</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Üstveri nesnesi</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>100</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="fa6d600a-4784-4609-a589-55d3b69b8c8e">
+  <name>AttributeName</name>
+  <synonym>
+   <key>ru</key>
+   <value>Наименование реквизита</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Attribute name</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alan ismi</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>100</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

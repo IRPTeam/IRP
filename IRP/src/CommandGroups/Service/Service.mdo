@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommandGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3a1b9444-4c26-461d-ab0b-9f0721713de9">
-  <name>Service</name>
-  <synonym>
-    <key>en</key>
-    <value>Service</value>
-  </synonym>
-  <representation>PictureAndText</representation>
-  <picture xsi:type="core:PictureRef">
-    <picture>StdPicture.ShowData</picture>
-  </picture>
-  <category>FormCommandBar</category>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommandGroup xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3a1b9444-4c26-461d-ab0b-9f0721713de9">
+ <name>Service</name>
+ <synonym>
+  <key>ru</key>
+  <value>Отчеты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Service</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Servis</value>
+ </synonym>
+ <representation>PictureAndText</representation>
+ <picture xsi:type="core:PictureRef">
+  <picture>StdPicture.ShowData</picture>
+ </picture>
+ <category>FormCommandBar</category>
 </mdclass:CommandGroup>

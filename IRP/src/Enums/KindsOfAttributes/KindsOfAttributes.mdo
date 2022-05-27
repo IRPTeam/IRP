@@ -1,64 +1,128 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b747710c-e111-45aa-9e9d-b852fff334f3">
-  <producedTypes>
-    <refType typeId="e8973421-d680-4b23-ac08-b01d14957f7d" valueTypeId="2c22ff40-2a15-40cb-ac6f-8b1e2a038902"/>
-    <listType typeId="8c957c9d-1f48-4498-bc39-197ac011c27f" valueTypeId="342ed369-8a3a-4fdb-8c86-ceec4468a1b4"/>
-    <managerType typeId="69c9cd8a-156f-4a0e-9171-7230655b2f1c" valueTypeId="b2679464-9da5-4c02-b0f9-38a37d2a26b5"/>
-  </producedTypes>
-  <name>KindsOfAttributes</name>
+ <producedTypes>
+  <refType typeId="e8973421-d680-4b23-ac08-b01d14957f7d" valueTypeId="2c22ff40-2a15-40cb-ac6f-8b1e2a038902"/>
+  <listType typeId="8c957c9d-1f48-4498-bc39-197ac011c27f" valueTypeId="342ed369-8a3a-4fdb-8c86-ceec4468a1b4"/>
+  <managerType typeId="69c9cd8a-156f-4a0e-9171-7230655b2f1c" valueTypeId="b2679464-9da5-4c02-b0f9-38a37d2a26b5"/>
+ </producedTypes>
+ <name>KindsOfAttributes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Вид реквизита</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Kinds of attributes</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek alan türleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="5b865806-3ada-401f-935a-8f1f7bf5704b">
+  <name>Standard</name>
   <synonym>
-    <key>en</key>
-    <value>Kinds of attributes</value>
+   <key>ru</key>
+   <value>Стандартное</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="5b865806-3ada-401f-935a-8f1f7bf5704b">
-    <name>Standard</name>
-    <synonym>
-      <key>en</key>
-      <value>Standard</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="e2836d2a-4254-458c-ad08-f41ab9a6f2b7">
-    <name>Regular</name>
-    <synonym>
-      <key>en</key>
-      <value>Regular</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ab49fb61-ea46-45be-8726-f4a6cae174ae">
-    <name>Common</name>
-    <synonym>
-      <key>en</key>
-      <value>Common</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="292ed029-6904-44ec-b34f-183399d2984f">
-    <name>Additional</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="35cffd8f-eec3-441b-b006-66f9ae2c91cf">
-    <name>TabularSection</name>
-    <synonym>
-      <key>en</key>
-      <value>Tabular section</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ba7383f8-8932-463f-90ce-5a1829f84b2d">
-    <name>Column</name>
-    <synonym>
-      <key>en</key>
-      <value>Column</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="12d82c9d-4d26-4491-b83a-059984733766">
-    <name>Custom</name>
-    <synonym>
-      <key>en</key>
-      <value>Custom</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Standard</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Standart</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="e2836d2a-4254-458c-ad08-f41ab9a6f2b7">
+  <name>Regular</name>
+  <synonym>
+   <key>ru</key>
+   <value>Обычное</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Regular</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Normal</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ab49fb61-ea46-45be-8726-f4a6cae174ae">
+  <name>Common</name>
+  <synonym>
+   <key>ru</key>
+   <value>Общий</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Common</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Genel</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="292ed029-6904-44ec-b34f-183399d2984f">
+  <name>Additional</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительный</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek detaylar</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="35cffd8f-eec3-441b-b006-66f9ae2c91cf">
+  <name>TabularSection</name>
+  <synonym>
+   <key>ru</key>
+   <value>Таблица</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tabular section</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tablo bölümü</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ba7383f8-8932-463f-90ce-5a1829f84b2d">
+  <name>Column</name>
+  <synonym>
+   <key>ru</key>
+   <value>Колонка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Column</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sütün</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="12d82c9d-4d26-4491-b83a-059984733766">
+  <name>Custom</name>
+  <synonym>
+   <key>ru</key>
+   <value>Пользовательский</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Custom</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Değişken</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

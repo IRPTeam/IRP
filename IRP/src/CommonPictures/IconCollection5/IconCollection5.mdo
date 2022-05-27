@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="479bc84a-c694-4414-aa0c-5641642976d0">
-  <name>IconCollection5</name>
-  <synonym>
-    <key>en</key>
-    <value>Icon collection5</value>
-  </synonym>
+ <name>IconCollection5</name>
+ <synonym>
+  <key>ru</key>
+  <value>Коллекция картинок 5</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Icon collection5</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Resim koleksiyonu 5</value>
+ </synonym>
 </mdclass:CommonPicture>

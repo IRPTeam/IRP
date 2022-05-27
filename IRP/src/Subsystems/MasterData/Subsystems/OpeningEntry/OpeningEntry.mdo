@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="abb30954-e6c1-4116-b105-f78758e2db01">
-  <name>OpeningEntry</name>
-  <synonym>
-    <key>en</key>
-    <value>Opening entry</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.OpeningEntry</content>
-  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+ <name>OpeningEntry</name>
+ <synonym>
+  <key>ru</key>
+  <value>Ввод начальных остатков</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Opening entry</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Açılış kayıt fişi</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.OpeningEntry</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

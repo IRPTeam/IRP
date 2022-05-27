@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5b55e6aa-fe26-418f-85ff-cf0308fed68c">
-  <name>Finance</name>
-  <synonym>
-    <key>en</key>
-    <value>Finance</value>
-  </synonym>
+ <name>Finance</name>
+ <synonym>
+  <key>ru</key>
+  <value>Финансы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Finance</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Finans</value>
+ </synonym>
 </mdclass:CommonPicture>

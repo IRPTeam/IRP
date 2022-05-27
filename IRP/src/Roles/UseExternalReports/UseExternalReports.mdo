@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="12be0290-11a3-46c2-b0f4-beccd9ada100">
-  <name>UseExternalReports</name>
-  <synonym>
-    <key>en</key>
-    <value>Use external reports</value>
-  </synonym>
+ <name>UseExternalReports</name>
+ <synonym>
+  <key>ru</key>
+  <value>Использование внешних отчетов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use external reports</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dış raporları kullanma</value>
+ </synonym>
 </mdclass:Role>

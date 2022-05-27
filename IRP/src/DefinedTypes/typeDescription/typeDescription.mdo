@@ -1,17 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4c36450e-e43f-4671-a66a-285d3a28f9c8">
-  <producedTypes>
-    <containerType typeId="af6ce391-01b3-4bed-9aeb-e933751cb9aa" valueTypeId="f7b92ff6-635f-4554-a6a3-391076661eff"/>
-  </producedTypes>
-  <name>typeDescription</name>
-  <synonym>
-    <key>en</key>
-    <value>Type description</value>
-  </synonym>
-  <type>
-    <types>String</types>
-    <stringQualifiers>
-      <length>250</length>
-    </stringQualifiers>
-  </type>
+ <producedTypes>
+  <containerType typeId="af6ce391-01b3-4bed-9aeb-e933751cb9aa" valueTypeId="f7b92ff6-635f-4554-a6a3-391076661eff"/>
+ </producedTypes>
+ <name>typeDescription</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип комментарий</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type description</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip tanım</value>
+ </synonym>
+ <type>
+  <types>String</types>
+  <stringQualifiers>
+   <length>250</length>
+  </stringQualifiers>
+ </type>
 </mdclass:DefinedType>

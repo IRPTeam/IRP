@@ -1,64 +1,104 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fd748162-5f5c-4329-985b-4d2336c2fb89">
-  <producedTypes>
-    <objectType typeId="0ad2cf0a-1368-4507-beaa-bd34f2f030a4" valueTypeId="fc8bb056-91e7-4d07-a4e3-ef946e67caf4"/>
-    <refType typeId="a440b82b-5b16-4e8e-a8f9-69f7a1890a91" valueTypeId="64d9a89d-42b9-42aa-8c31-3c8b0351df1b"/>
-    <selectionType typeId="a2f97584-8d8b-4bc7-8661-c5f4c788ba72" valueTypeId="375722c8-f230-43d7-a58c-1c5c4724a45c"/>
-    <listType typeId="b9e9458d-875c-481b-9005-05472cdf536e" valueTypeId="917ddb73-e6ff-4f57-82ad-c18535acdcfa"/>
-    <managerType typeId="6d739b37-7ca5-4e8d-be8a-1188f98ac9b6" valueTypeId="9b2ce4fc-bca2-4e2b-b0d8-240551d0b463"/>
-  </producedTypes>
-  <name>TaxAnalytics</name>
+ <producedTypes>
+  <objectType typeId="0ad2cf0a-1368-4507-beaa-bd34f2f030a4" valueTypeId="fc8bb056-91e7-4d07-a4e3-ef946e67caf4"/>
+  <refType typeId="a440b82b-5b16-4e8e-a8f9-69f7a1890a91" valueTypeId="64d9a89d-42b9-42aa-8c31-3c8b0351df1b"/>
+  <selectionType typeId="a2f97584-8d8b-4bc7-8661-c5f4c788ba72" valueTypeId="375722c8-f230-43d7-a58c-1c5c4724a45c"/>
+  <listType typeId="b9e9458d-875c-481b-9005-05472cdf536e" valueTypeId="917ddb73-e6ff-4f57-82ad-c18535acdcfa"/>
+  <managerType typeId="6d739b37-7ca5-4e8d-be8a-1188f98ac9b6" valueTypeId="9b2ce4fc-bca2-4e2b-b0d8-240551d0b463"/>
+ </producedTypes>
+ <name>TaxAnalytics</name>
+ <synonym>
+  <key>ru</key>
+  <value>Дополнительная налоговая аналитика</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Tax additional analytics</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Vergi ek kırılımları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Дополнительная налоговая аналитика</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Tax additional analytics</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Vergi ek kırılımları</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.TaxAnalytics.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.TaxAnalytics.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.TaxAnalytics.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <forms uuid="8523e502-3076-4ecb-9abf-d7cf54b6f49e">
+  <name>ItemForm</name>
   <synonym>
-    <key>en</key>
-    <value>Tax additional analytics</value>
+   <key>ru</key>
+   <value>Форма элемента</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Tax additional analytics</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.TaxAnalytics.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.TaxAnalytics.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.TaxAnalytics.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <forms uuid="8523e502-3076-4ecb-9abf-d7cf54b6f49e">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2f3e194b-70d3-4dd8-b83d-67a9aa2fa55a">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="a0fe1e73-b818-434b-b62a-56cbc42f881b">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2f3e194b-70d3-4dd8-b83d-67a9aa2fa55a">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="a0fe1e73-b818-434b-b62a-56cbc42f881b">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

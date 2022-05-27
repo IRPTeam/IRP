@@ -1,35 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d759c972-2b17-4617-9ca7-dc1ba35b1a17">
-  <producedTypes>
-    <containerType typeId="cfe1699d-ac39-434d-a86c-797c8a8c53da" valueTypeId="9734fcd5-ccf6-49b6-a4e7-8389acdc2b6b"/>
-  </producedTypes>
-  <name>typeObjectWithItemList</name>
-  <synonym>
-    <key>en</key>
-    <value>Type object with item list</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.SalesReturnOrder</types>
-    <types>DocumentRef.PurchaseInvoice</types>
-    <types>DocumentRef.PurchaseReturn</types>
-    <types>DocumentRef.PurchaseReturnOrder</types>
-    <types>DocumentRef.Labeling</types>
-    <types>DocumentRef.ShipmentConfirmation</types>
-    <types>DocumentRef.InternalSupplyRequest</types>
-    <types>DocumentRef.Unbundling</types>
-    <types>DocumentRef.PriceList</types>
-    <types>DocumentRef.PurchaseOrder</types>
-    <types>DocumentRef.OpeningEntry</types>
-    <types>DocumentRef.SalesOrder</types>
-    <types>DocumentRef.SalesReturn</types>
-    <types>DocumentRef.PhysicalCountByLocation</types>
-    <types>DocumentRef.Bundling</types>
-    <types>DocumentRef.PlannedReceiptReservation</types>
-    <types>DocumentRef.InventoryTransferOrder</types>
-    <types>DocumentRef.PurchaseOrderClosing</types>
-    <types>DocumentRef.SalesOrderClosing</types>
-    <types>DocumentRef.InventoryTransfer</types>
-    <types>DocumentRef.GoodsReceipt</types>
-    <types>DocumentRef.SalesInvoice</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="cfe1699d-ac39-434d-a86c-797c8a8c53da" valueTypeId="9734fcd5-ccf6-49b6-a4e7-8389acdc2b6b"/>
+ </producedTypes>
+ <name>typeObjectWithItemList</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип объект с таблицей товаров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type object with item list</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip malzemeler listesi içeren nesne</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.SalesReturnOrder</types>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.PurchaseReturn</types>
+  <types>DocumentRef.PurchaseReturnOrder</types>
+  <types>DocumentRef.Labeling</types>
+  <types>DocumentRef.ShipmentConfirmation</types>
+  <types>DocumentRef.InternalSupplyRequest</types>
+  <types>DocumentRef.Unbundling</types>
+  <types>DocumentRef.PriceList</types>
+  <types>DocumentRef.PurchaseOrder</types>
+  <types>DocumentRef.OpeningEntry</types>
+  <types>DocumentRef.SalesOrder</types>
+  <types>DocumentRef.SalesReturn</types>
+  <types>DocumentRef.PhysicalCountByLocation</types>
+  <types>DocumentRef.Bundling</types>
+  <types>DocumentRef.PlannedReceiptReservation</types>
+  <types>DocumentRef.InventoryTransferOrder</types>
+  <types>DocumentRef.PurchaseOrderClosing</types>
+  <types>DocumentRef.SalesOrderClosing</types>
+  <types>DocumentRef.InventoryTransfer</types>
+  <types>DocumentRef.GoodsReceipt</types>
+  <types>DocumentRef.SalesInvoice</types>
+ </type>
 </mdclass:DefinedType>

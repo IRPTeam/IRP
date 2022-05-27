@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0f50f5ee-8174-4bd2-ba09-832a6a5278f8">
-  <producedTypes>
-    <refType typeId="c6f4a90d-f3ad-4a5e-80bd-dd8d63196eac" valueTypeId="646bfd3b-9f48-4e39-8cf8-88d0e685a048"/>
-    <listType typeId="51bf708b-805c-4f4f-9aa8-0a8736ff16d5" valueTypeId="5daf9e2d-2af0-4f38-9a0b-e74999f84904"/>
-    <managerType typeId="09a308b9-eebe-4f99-b6e5-ef0cf06e2c40" valueTypeId="611f940c-a35a-4b7b-bfed-f4cbb6e39c9a"/>
-  </producedTypes>
-  <name>EquipmentTypes</name>
+ <producedTypes>
+  <refType typeId="c6f4a90d-f3ad-4a5e-80bd-dd8d63196eac" valueTypeId="646bfd3b-9f48-4e39-8cf8-88d0e685a048"/>
+  <listType typeId="51bf708b-805c-4f4f-9aa8-0a8736ff16d5" valueTypeId="5daf9e2d-2af0-4f38-9a0b-e74999f84904"/>
+  <managerType typeId="09a308b9-eebe-4f99-b6e5-ef0cf06e2c40" valueTypeId="611f940c-a35a-4b7b-bfed-f4cbb6e39c9a"/>
+ </producedTypes>
+ <name>EquipmentTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Виды оборудования</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Types of Equipment</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Donanım tipi</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="52ba21cc-77f4-49d1-bb3b-b32358f92728">
+  <name>InputDevice</name>
   <synonym>
-    <key>en</key>
-    <value>Types of Equipment</value>
+   <key>ru</key>
+   <value>Устройство ввода</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="52ba21cc-77f4-49d1-bb3b-b32358f92728">
-    <name>InputDevice</name>
-    <synonym>
-      <key>en</key>
-      <value>Input device</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="6e28e4d8-2707-43dd-93f3-30d0b69063a8">
-    <name>BarcodeScanner</name>
-    <synonym>
-      <key>en</key>
-      <value>Barcode scanner</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Input device</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bağlanan cihaz</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="6e28e4d8-2707-43dd-93f3-30d0b69063a8">
+  <name>BarcodeScanner</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сканер штрихкодов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Barcode scanner</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Barkod okuyucusu</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

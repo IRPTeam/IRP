@@ -1,20 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dfaebf40-476a-4cea-b65a-4882a3a270bd">
-  <producedTypes>
-    <managerType typeId="ad4048be-0bc4-44c6-82d6-902775c5b2d9" valueTypeId="54f445b0-5d16-4d49-a004-cab35b825e15"/>
-    <valueManagerType typeId="2b5b54ca-5688-4831-a749-e7e8993ca0cc" valueTypeId="df9b687d-f934-4263-8532-67d1bd208450"/>
-    <valueKeyType typeId="1409a628-dacc-4550-867a-e700eba2c36e" valueTypeId="5509f63b-56dc-4ce9-95e9-6ec408f7a827"/>
-  </producedTypes>
-  <name>SaasMode</name>
-  <synonym>
-    <key>en</key>
-    <value>Saas mode</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="dfaebf40-476a-4cea-b65a-4882a3a270bd">
+ <producedTypes>
+  <managerType typeId="ad4048be-0bc4-44c6-82d6-902775c5b2d9" valueTypeId="54f445b0-5d16-4d49-a004-cab35b825e15"/>
+  <valueManagerType typeId="2b5b54ca-5688-4831-a749-e7e8993ca0cc" valueTypeId="df9b687d-f934-4263-8532-67d1bd208450"/>
+  <valueKeyType typeId="1409a628-dacc-4550-867a-e700eba2c36e" valueTypeId="5509f63b-56dc-4ce9-95e9-6ec408f7a827"/>
+ </producedTypes>
+ <name>SaasMode</name>
+ <synonym>
+  <key>ru</key>
+  <value>SaaS режим</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Saas mode</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Saas biçimi</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

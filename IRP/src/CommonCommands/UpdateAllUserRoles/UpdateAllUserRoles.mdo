@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8d449e45-5773-48cd-8d65-c3b34c38aa42">
-  <name>UpdateAllUserRoles</name>
-  <synonym>
-    <key>en</key>
-    <value>Update all user roles</value>
-  </synonym>
-  <group>CommandGroup.Service</group>
-  <commandParameterType>
-    <types>CatalogRef.AccessGroups</types>
-  </commandParameterType>
-  <representation>Auto</representation>
+ <name>UpdateAllUserRoles</name>
+ <synonym>
+  <key>ru</key>
+  <value>Обновить роли всех пользователей</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Update all user roles</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tüm kullanıcı rolleri güncelle</value>
+ </synonym>
+ <group>CommandGroup.Service</group>
+ <commandParameterType>
+  <types>CatalogRef.AccessGroups</types>
+ </commandParameterType>
+ <representation>Auto</representation>
 </mdclass:CommonCommand>

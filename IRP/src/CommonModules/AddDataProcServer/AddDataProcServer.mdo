@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4c465156-3a89-4bed-837e-4630835265c1">
-  <name>AddDataProcServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Add data proc server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>AddDataProcServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Внешние обработки сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Add data proc server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek veri işlemci sunucu</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

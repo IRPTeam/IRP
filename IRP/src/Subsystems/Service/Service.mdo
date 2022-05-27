@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7d282331-a438-4f8f-8e90-f86b4662c63b">
-  <name>Service</name>
-  <synonym>
-    <key>en</key>
-    <value>Service</value>
-  </synonym>
-  <content>DocumentJournal.AllDocuments</content>
-  <content>DataProcessor.AnaliseDocumentMovements</content>
-  <subsystems>Catalogs</subsystems>
-  <subsystems>Documents</subsystems>
+ <name>Service</name>
+ <synonym>
+  <key>ru</key>
+  <value>Сервис</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Service</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Servis</value>
+ </synonym>
+ <content>DocumentJournal.AllDocuments</content>
+ <content>DataProcessor.AnaliseDocumentMovements</content>
+ <subsystems>Catalogs</subsystems>
+ <subsystems>Documents</subsystems>
 </mdclass:Subsystem>

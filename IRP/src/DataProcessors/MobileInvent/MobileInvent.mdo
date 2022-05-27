@@ -1,32 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="591072d8-557f-4c2c-a6b6-fac19422d3b6">
-  <producedTypes>
-    <objectType typeId="1ee00304-85f8-4a25-b3ed-2f2fe285ee7e" valueTypeId="a21fe9ea-f36b-47ab-bccb-19e41c8bc682"/>
-    <managerType typeId="b8db645b-3d5b-45ce-99d3-a92bfaa34ae3" valueTypeId="31a883f1-d161-4891-85e3-1c040eee693d"/>
-  </producedTypes>
-  <name>MobileInvent</name>
+ <producedTypes>
+  <objectType typeId="1ee00304-85f8-4a25-b3ed-2f2fe285ee7e" valueTypeId="a21fe9ea-f36b-47ab-bccb-19e41c8bc682"/>
+  <managerType typeId="b8db645b-3d5b-45ce-99d3-a92bfaa34ae3" valueTypeId="31a883f1-d161-4891-85e3-1c040eee693d"/>
+ </producedTypes>
+ <name>MobileInvent</name>
+ <synonym>
+  <key>ru</key>
+  <value>Мобильная инвентаризация</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Mobile invent</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Mobil sayım</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.MobileInvent.Form.Form</defaultForm>
+ <forms uuid="bf28c181-f1f4-48ae-ad8b-8b2c1c642596">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Mobile invent</value>
+   <key>ru</key>
+   <value>Форма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.MobileInvent.Form.Form</defaultForm>
-  <forms uuid="bf28c181-f1f4-48ae-ad8b-8b2c1c642596">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="68f4d239-f5bf-4ebb-873b-5b8640fae222">
-    <name>RowForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Row form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="68f4d239-f5bf-4ebb-873b-5b8640fae222">
+  <name>RowForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма строка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

@@ -1,63 +1,103 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4e3559fe-72b1-4ccf-b5be-820699ead04d">
-  <producedTypes>
-    <selectionType typeId="8c9a113b-fb7f-4a2c-9c2d-2e7d4c6c169d" valueTypeId="c832a482-aa04-4c24-89b2-cc7c051fc257"/>
-    <listType typeId="3f79874d-274e-48f0-8fd3-e8fd5722d280" valueTypeId="989df47d-b4ae-40cb-a70b-613b145cc13e"/>
-    <managerType typeId="60453318-4dc5-432b-aa36-4a57d5c16558" valueTypeId="a53ee5a0-664a-4a0b-8e08-52c24ebf6b47"/>
-    <recordSetType typeId="37ba1968-6641-4356-bbff-f1e41ef4a826" valueTypeId="7ace4d52-bdc6-45c8-a832-bd54342ba5d6"/>
-    <recordKeyType typeId="f5438e49-dd80-45ac-bff4-254c8761e1af" valueTypeId="cf42974b-5fef-435e-bfe6-b04018386e6e"/>
-    <recordType typeId="cd449878-b420-4b86-96cd-57fa627978e2" valueTypeId="4412c0da-a4c0-474b-95f5-208b43338127"/>
-    <recordManagerType typeId="62f79683-64a9-4715-9eb4-c81a68aabd47" valueTypeId="d61cf228-c028-452c-a1ff-5811654d70b5"/>
-  </producedTypes>
-  <name>PartnerSegments</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="4e3559fe-72b1-4ccf-b5be-820699ead04d">
+ <producedTypes>
+  <selectionType typeId="8c9a113b-fb7f-4a2c-9c2d-2e7d4c6c169d" valueTypeId="c832a482-aa04-4c24-89b2-cc7c051fc257"/>
+  <listType typeId="3f79874d-274e-48f0-8fd3-e8fd5722d280" valueTypeId="989df47d-b4ae-40cb-a70b-613b145cc13e"/>
+  <managerType typeId="60453318-4dc5-432b-aa36-4a57d5c16558" valueTypeId="a53ee5a0-664a-4a0b-8e08-52c24ebf6b47"/>
+  <recordSetType typeId="37ba1968-6641-4356-bbff-f1e41ef4a826" valueTypeId="7ace4d52-bdc6-45c8-a832-bd54342ba5d6"/>
+  <recordKeyType typeId="f5438e49-dd80-45ac-bff4-254c8761e1af" valueTypeId="cf42974b-5fef-435e-bfe6-b04018386e6e"/>
+  <recordType typeId="cd449878-b420-4b86-96cd-57fa627978e2" valueTypeId="4412c0da-a4c0-474b-95f5-208b43338127"/>
+  <recordManagerType typeId="62f79683-64a9-4715-9eb4-c81a68aabd47" valueTypeId="d61cf228-c028-452c-a1ff-5811654d70b5"/>
+ </producedTypes>
+ <name>PartnerSegments</name>
+ <synonym>
+  <key>ru</key>
+  <value>Сегменты партнеров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Partner segments content</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cari hesap segment içerikleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Сегмент партнеров</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Partner segment content</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Cari hesap segment içeriği</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Сегменты партнеров</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Partner segments content</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Cari hesap segment içerikleri</value>
+ </listPresentation>
+ <dimensions uuid="53831403-55b9-489e-840c-53c917b9803d">
+  <name>Segment</name>
   <synonym>
-    <key>en</key>
-    <value>Partner segments content</value>
+   <key>ru</key>
+   <value>Сегмент</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Partner segment content</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Partner segments content</value>
-  </listPresentation>
-  <dimensions uuid="53831403-55b9-489e-840c-53c917b9803d">
-    <name>Segment</name>
-    <synonym>
-      <key>en</key>
-      <value>Segment</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PartnerSegments</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="7cde4128-1ef8-44a7-81d1-de50e58abb58">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Segment</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Segment</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PartnerSegments</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="7cde4128-1ef8-44a7-81d1-de50e58abb58">
+  <name>Partner</name>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

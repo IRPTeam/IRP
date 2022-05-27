@@ -1,9 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="561eb9b1-0781-4766-bbf6-f9e5cec4bebb">
-  <name>ViewClient_V2</name>
-  <synonym>
-    <key>en</key>
-    <value>View client v2</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
+ <name>ViewClient_V2</name>
+ <synonym>
+  <key>ru</key>
+  <value>Просмотр клиент v2</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>View client v2</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>View client v2</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
 </mdclass:CommonModule>

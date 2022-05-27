@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:ScheduledJob xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="61449628-06e2-4b7e-bd9e-d2750fb0cca2">
-  <name>AreaUpdate</name>
-  <synonym>
-    <key>en</key>
-    <value>Area update</value>
-  </synonym>
-  <methodName>CommonModule.Saas.AreaUpdate</methodName>
-  <description>Area Update</description>
-  <key>AreaUpdate</key>
-  <restartCountOnFailure>1</restartCountOnFailure>
-  <restartIntervalOnFailure>10</restartIntervalOnFailure>
+ <name>AreaUpdate</name>
+ <synonym>
+  <key>ru</key>
+  <value>Обновление области</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Area update</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Bölüm güncelleme</value>
+ </synonym>
+ <methodName>CommonModule.Saas.AreaUpdate</methodName>
+ <description>Area Update</description>
+ <key>AreaUpdate</key>
+ <restartCountOnFailure>1</restartCountOnFailure>
+ <restartIntervalOnFailure>10</restartIntervalOnFailure>
 </mdclass:ScheduledJob>

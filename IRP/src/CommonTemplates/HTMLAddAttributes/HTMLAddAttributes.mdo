@@ -1,9 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonTemplate xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1d2da44d-155d-4099-97ba-1dd9e1371c93">
-  <name>HTMLAddAttributes</name>
-  <synonym>
-    <key>en</key>
-    <value>HTML additional attributes</value>
-  </synonym>
-  <templateType>TextDocument</templateType>
+ <name>HTMLAddAttributes</name>
+ <synonym>
+  <key>ru</key>
+  <value>HTML поле дополнительных реквизитов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>HTML additional attributes</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>HTML ek özellikleri</value>
+ </synonym>
+ <templateType>TextDocument</templateType>
 </mdclass:CommonTemplate>

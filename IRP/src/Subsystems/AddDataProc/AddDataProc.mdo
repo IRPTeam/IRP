@@ -1,16 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cf766665-880a-4cfe-bf8a-ff9d836ef1ef">
-  <name>AddDataProc</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional dataproc</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.AddDataProc</picture>
-  </picture>
-  <content>Catalog.ExternalDataProc</content>
-  <content>SessionParameter.ConnectedAddDataProc</content>
-  <content>CommonModule.AddDataProcClient</content>
-  <content>CommonModule.AddDataProcServer</content>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="cf766665-880a-4cfe-bf8a-ff9d836ef1ef">
+ <name>AddDataProc</name>
+ <synonym>
+  <key>ru</key>
+  <value>Внешние обработки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Additional dataproc</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek plugin</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.AddDataProc</picture>
+ </picture>
+ <content>Catalog.ExternalDataProc</content>
+ <content>SessionParameter.ConnectedAddDataProc</content>
+ <content>CommonModule.AddDataProcClient</content>
+ <content>CommonModule.AddDataProcServer</content>
 </mdclass:Subsystem>

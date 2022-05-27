@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6d47f216-3b12-4ab8-84ca-37e4b3ba11f6">
-  <name>UniqueIDReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>Unique ID reuse</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <returnValuesReuse>DuringSession</returnValuesReuse>
+ <name>UniqueIDReuse</name>
+ <synonym>
+  <key>ru</key>
+  <value>Повторное использование уникального ID</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Unique ID reuse</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Benzersiz kimliğin yeniden kullanımı</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <returnValuesReuse>DuringSession</returnValuesReuse>
 </mdclass:CommonModule>

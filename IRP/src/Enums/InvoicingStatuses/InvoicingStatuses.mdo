@@ -1,36 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9e762088-f043-48ec-8b37-5cb09d917cb7">
-  <producedTypes>
-    <refType typeId="b8acb7ce-31cf-43bd-b4a4-4d3415cfb024" valueTypeId="3f886cf9-2e97-42a2-96ee-058567f15f02"/>
-    <listType typeId="7a4e1d6b-9734-4451-8a9f-dd9a8e809a46" valueTypeId="d752794f-a702-4195-8c05-ea4a5d3d3652"/>
-    <managerType typeId="f268a8bc-65e1-4edb-8ad5-4f055e9d05fe" valueTypeId="31130c7e-3890-4340-bbd4-0342e246b92c"/>
-  </producedTypes>
-  <name>InvoicingStatuses</name>
+ <producedTypes>
+  <refType typeId="b8acb7ce-31cf-43bd-b4a4-4d3415cfb024" valueTypeId="3f886cf9-2e97-42a2-96ee-058567f15f02"/>
+  <listType typeId="7a4e1d6b-9734-4451-8a9f-dd9a8e809a46" valueTypeId="d752794f-a702-4195-8c05-ea4a5d3d3652"/>
+  <managerType typeId="f268a8bc-65e1-4edb-8ad5-4f055e9d05fe" valueTypeId="31130c7e-3890-4340-bbd4-0342e246b92c"/>
+ </producedTypes>
+ <name>InvoicingStatuses</name>
+ <synonym>
+  <key>ru</key>
+  <value>Статусы закрытия инвойсами</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Invoicing statuses</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Fatura kapatma statüleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="a08711be-1e46-4c15-914d-8243dd52bff8">
+  <name>Awaiting</name>
   <synonym>
-    <key>en</key>
-    <value>Invoicing statuses</value>
+   <key>ru</key>
+   <value>В ожидании</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="a08711be-1e46-4c15-914d-8243dd52bff8">
-    <name>Awaiting</name>
-    <synonym>
-      <key>en</key>
-      <value>Awaiting</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="a15ab1b3-b40d-4896-8d80-f4c1d33b6c84">
-    <name>Invoicing</name>
-    <synonym>
-      <key>en</key>
-      <value>Invoicing</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f7f39f0d-1d59-4ca0-864d-91ef4cc6dcdc">
-    <name>Closed</name>
-    <synonym>
-      <key>en</key>
-      <value>Closed</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Awaiting</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Beklemede</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="a15ab1b3-b40d-4896-8d80-f4c1d33b6c84">
+  <name>Invoicing</name>
+  <synonym>
+   <key>ru</key>
+   <value>В процессе</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Invoicing</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Faturalandırılıyor</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f7f39f0d-1d59-4ca0-864d-91ef4cc6dcdc">
+  <name>Closed</name>
+  <synonym>
+   <key>ru</key>
+   <value>Завершен</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Closed</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tamamlandı</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,226 +1,346 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="15802646-1457-4759-b1e7-b7df55ab910f">
-  <producedTypes>
-    <objectType typeId="d84e22ce-3fad-42c6-a1c0-fe4f5b2a1b15" valueTypeId="40f099c7-eeb6-4877-ba19-4c8b1f8f9aa4"/>
-    <refType typeId="4dd4563f-ceb7-4b48-80c9-230d0b4b9c6c" valueTypeId="8f4f62c8-25e2-4701-a46c-baeb6aee0259"/>
-    <selectionType typeId="a5547500-f66a-4aae-94ea-7a5716f27286" valueTypeId="c8012bd1-fcf2-453e-b7c2-2c598d467242"/>
-    <listType typeId="4ffac1ac-8b4d-4e00-bca2-e14d7493be29" valueTypeId="b91d8d2c-b478-462b-8e2d-e9a9249b401d"/>
-    <managerType typeId="5c661dbb-ef53-4030-9f06-b5a13be68254" valueTypeId="919337bd-3fbd-4382-8cfe-3e1b4ae2fc05"/>
-  </producedTypes>
-  <name>Labeling</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="15802646-1457-4759-b1e7-b7df55ab910f">
+ <producedTypes>
+  <objectType typeId="d84e22ce-3fad-42c6-a1c0-fe4f5b2a1b15" valueTypeId="40f099c7-eeb6-4877-ba19-4c8b1f8f9aa4"/>
+  <refType typeId="4dd4563f-ceb7-4b48-80c9-230d0b4b9c6c" valueTypeId="8f4f62c8-25e2-4701-a46c-baeb6aee0259"/>
+  <selectionType typeId="a5547500-f66a-4aae-94ea-7a5716f27286" valueTypeId="c8012bd1-fcf2-453e-b7c2-2c598d467242"/>
+  <listType typeId="4ffac1ac-8b4d-4e00-bca2-e14d7493be29" valueTypeId="b91d8d2c-b478-462b-8e2d-e9a9249b401d"/>
+  <managerType typeId="5c661dbb-ef53-4030-9f06-b5a13be68254" valueTypeId="919337bd-3fbd-4382-8cfe-3e1b4ae2fc05"/>
+ </producedTypes>
+ <name>Labeling</name>
+ <synonym>
+  <key>ru</key>
+  <value>Штрихкодирование товаров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Labeling</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Seri lot tanımlama fişi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.Labeling.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_Labeling</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_Labeling</value>
+  </typesFilterValue>
+  <characteristicValues>Document.Labeling.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.Labeling.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.Labeling.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.Labeling.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <listPresentation>
+  <key>ru</key>
+  <value>Документы штрихкодирования товаров</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Labeling list</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Seri lot tanımlama fişleri</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.Labeling.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.Labeling.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.Labeling.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <forms uuid="11702bf6-a43f-4d69-8fb3-039bfee037bf">
+  <name>DocumentForm</name>
   <synonym>
-    <key>en</key>
-    <value>Labeling</value>
+   <key>ru</key>
+   <value>Форма документа</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.Labeling.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_Labeling</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_Labeling</value>
-    </typesFilterValue>
-    <characteristicValues>Document.Labeling.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.Labeling.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.Labeling.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.Labeling.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <listPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="48d35278-5c96-4e0b-894a-dc515dbf21e0">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="60ffe9d9-2df9-4387-8582-c72a14759c32">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="be3bb248-605e-4626-a4dc-a1061fa15aa8">
+  <producedTypes>
+   <objectType typeId="bbdb2c40-4b94-47f4-82cd-ee5be36ac0f6" valueTypeId="460b8447-9e1e-4997-910a-e98d3c065534"/>
+   <rowType typeId="caf607d0-1732-4b9d-a3be-665bebaa6ada" valueTypeId="8e9af20d-0440-4c35-9537-b44dd049c066"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>ru</key>
+   <value>Товары</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item list</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
+  </synonym>
+  <attributes uuid="b79f3a6a-b0d9-4e6c-841c-b55221f8d776">
+   <name>ItemKey</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Labeling list</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.Labeling.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.Labeling.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.Labeling.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <forms uuid="11702bf6-a43f-4d69-8fb3-039bfee037bf">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="48d35278-5c96-4e0b-894a-dc515dbf21e0">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="60ffe9d9-2df9-4387-8582-c72a14759c32">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="be3bb248-605e-4626-a4dc-a1061fa15aa8">
-    <producedTypes>
-      <objectType typeId="bbdb2c40-4b94-47f4-82cd-ee5be36ac0f6" valueTypeId="460b8447-9e1e-4997-910a-e98d3c065534"/>
-      <rowType typeId="caf607d0-1732-4b9d-a3be-665bebaa6ada" valueTypeId="8e9af20d-0440-4c35-9537-b44dd049c066"/>
-    </producedTypes>
-    <name>ItemList</name>
-    <synonym>
-      <key>en</key>
-      <value>Item list</value>
-    </synonym>
-    <attributes uuid="b79f3a6a-b0d9-4e6c-841c-b55221f8d776">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Items</types>
-        <types>CatalogRef.ItemKeys</types>
-        <types>CatalogRef.ItemTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="c52a8178-e9b4-4948-bb32-0f7618cd4fe2">
-      <name>SerialLotNumber</name>
-      <synonym>
-        <key>en</key>
-        <value>Item serial/lot number</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SerialLotNumbers</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="2f43d1ff-ca82-4f7e-8e28-140d1d1ac8c3">
-      <name>Barcode</name>
-      <synonym>
-        <key>en</key>
-        <value>Barcode</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeBarcode</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <indexing>Index</indexing>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5b525886-6f77-4eea-b705-7d7ebf9661f0">
-      <name>PurchaseOrder</name>
-      <synonym>
-        <key>en</key>
-        <value>Purchase order</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.PurchaseOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="830c948f-9c23-4d44-ac75-0a2280a6bd73">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="8c81be8f-5203-4012-8c4d-75b695a38c0d">
-    <producedTypes>
-      <objectType typeId="8455bc44-c06c-43fe-9027-eb7c1441a89f" valueTypeId="c7938bd9-1b84-47eb-a895-f86f7bd7e446"/>
-      <rowType typeId="5b892769-c13c-481e-bc9d-75c260e3250c" valueTypeId="b186c86b-ee47-4709-a1c1-a8af70e43a70"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="506af94a-702b-44e8-8676-b48b10bee70c">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="1abd48b8-9db2-4523-bc7e-d4efa9728bb9">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.Labeling.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <commands uuid="7244e3b7-050d-47eb-b6ef-1b6153ee8801">
-    <name>GenerateLabeling</name>
-    <synonym>
-      <key>en</key>
-      <value>Labeling</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.PurchaseOrder</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-  </commands>
+    <value>Item key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Varyant</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+    <types>CatalogRef.ItemKeys</types>
+    <types>CatalogRef.ItemTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="c52a8178-e9b4-4948-bb32-0f7618cd4fe2">
+   <name>SerialLotNumber</name>
+   <synonym>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Item serial/lot number</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ürün seri/lot numarası</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SerialLotNumbers</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="2f43d1ff-ca82-4f7e-8e28-140d1d1ac8c3">
+   <name>Barcode</name>
+   <synonym>
+    <key>ru</key>
+    <value>Штрихкод</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Barcode</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Barkod</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeBarcode</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <indexing>Index</indexing>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5b525886-6f77-4eea-b705-7d7ebf9661f0">
+   <name>PurchaseOrder</name>
+   <synonym>
+    <key>ru</key>
+    <value>Заказ поставщику</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Purchase order</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Satın alma siparişi</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.PurchaseOrder</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="830c948f-9c23-4d44-ac75-0a2280a6bd73">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="8c81be8f-5203-4012-8c4d-75b695a38c0d">
+  <producedTypes>
+   <objectType typeId="8455bc44-c06c-43fe-9027-eb7c1441a89f" valueTypeId="c7938bd9-1b84-47eb-a895-f86f7bd7e446"/>
+   <rowType typeId="5b892769-c13c-481e-bc9d-75c260e3250c" valueTypeId="b186c86b-ee47-4709-a1c1-a8af70e43a70"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="506af94a-702b-44e8-8676-b48b10bee70c">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1abd48b8-9db2-4523-bc7e-d4efa9728bb9">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.Labeling.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <commands uuid="7244e3b7-050d-47eb-b6ef-1b6153ee8801">
+  <name>GenerateLabeling</name>
+  <synonym>
+   <key>ru</key>
+   <value>Штрихкодирование товаров</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Labeling</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seri lot tanımlama fişi</value>
+  </synonym>
+  <group>FormCommandBarCreateBasedOn</group>
+  <commandParameterType>
+   <types>DocumentRef.PurchaseOrder</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

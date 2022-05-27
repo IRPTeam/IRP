@@ -1,110 +1,174 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0bf3a5a6-df7d-440c-92d0-6491b76179d2">
-  <producedTypes>
-    <objectType typeId="c24a5b0d-3297-484d-bc4c-6f763d8629f0" valueTypeId="c4a8ad25-ba92-4351-a844-a7c324bdec2f"/>
-    <refType typeId="a4632c31-45bd-4797-9021-1c8d707ef812" valueTypeId="09a5bb33-1cc0-4b60-9d85-ece77b52a1c8"/>
-    <selectionType typeId="e9073c6b-e6ad-424f-b441-08f93b96f43f" valueTypeId="ffb1d86f-e6fb-4c3e-894c-1a39cb5eb46f"/>
-    <listType typeId="167927b8-013e-4c59-a59d-d662cf56ed0d" valueTypeId="c2f578a7-a0fa-4855-8a3b-1248616ce91a"/>
-    <managerType typeId="70b2f844-187d-441d-9c13-8590ed2f1dcc" valueTypeId="945c216d-c40d-4d23-bfcf-83c1ad24f45c"/>
-  </producedTypes>
-  <name>FileStorageVolumes</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0bf3a5a6-df7d-440c-92d0-6491b76179d2">
+ <producedTypes>
+  <objectType typeId="c24a5b0d-3297-484d-bc4c-6f763d8629f0" valueTypeId="c4a8ad25-ba92-4351-a844-a7c324bdec2f"/>
+  <refType typeId="a4632c31-45bd-4797-9021-1c8d707ef812" valueTypeId="09a5bb33-1cc0-4b60-9d85-ece77b52a1c8"/>
+  <selectionType typeId="e9073c6b-e6ad-424f-b441-08f93b96f43f" valueTypeId="ffb1d86f-e6fb-4c3e-894c-1a39cb5eb46f"/>
+  <listType typeId="167927b8-013e-4c59-a59d-d662cf56ed0d" valueTypeId="c2f578a7-a0fa-4855-8a3b-1248616ce91a"/>
+  <managerType typeId="70b2f844-187d-441d-9c13-8590ed2f1dcc" valueTypeId="945c216d-c40d-4d23-bfcf-83c1ad24f45c"/>
+ </producedTypes>
+ <name>FileStorageVolumes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тома хранения файлов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>File storage volumes</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dosya depolama boyutları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.FileStorageVolumes.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Тома хранения файлов</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>File storage volume</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Dosya depolama hacmi</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>50</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.FileStorageVolumes.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.FileStorageVolumes.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.FileStorageVolumes.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="7480283a-c370-40a7-a50b-2d39a8b91f5b">
+  <name>FilesType</name>
   <synonym>
-    <key>en</key>
-    <value>File storage volumes</value>
+   <key>ru</key>
+   <value>Тип файлов</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.FileStorageVolumes.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Files type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dosya tipi</value>
+  </synonym>
+  <type>
+   <types>EnumRef.FileTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>File storage volume</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>50</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.FileStorageVolumes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.FileStorageVolumes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.FileStorageVolumes.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="7480283a-c370-40a7-a50b-2d39a8b91f5b">
-    <name>FilesType</name>
-    <synonym>
-      <key>en</key>
-      <value>Files type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.FileTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="d6bbbff6-ae7f-48d4-997b-044c872b5194">
-    <name>POSTIntegrationSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>POST Integration settings</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="abbdb7b7-f388-4850-b213-664ac7513f2d">
-    <name>GETIntegrationSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>GET Integration settings</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="e833b5c6-7cf5-4de7-9b9a-b93f40e93134">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="91232f0d-e17c-4011-921c-4e8b8cc9bee4">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="5327ede5-2ef4-41f1-be5b-103fd137f381">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="d6bbbff6-ae7f-48d4-997b-044c872b5194">
+  <name>POSTIntegrationSettings</name>
+  <synonym>
+   <key>ru</key>
+   <value>POST интеграционные настройки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>POST Integration settings</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>POST Entegrasyon ayarları</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="abbdb7b7-f388-4850-b213-664ac7513f2d">
+  <name>GETIntegrationSettings</name>
+  <synonym>
+   <key>ru</key>
+   <value>GET интеграционные настройки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>GET Integration settings</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>GET Entegrasyon ayarları</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="e833b5c6-7cf5-4de7-9b9a-b93f40e93134">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="91232f0d-e17c-4011-921c-4e8b8cc9bee4">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5327ede5-2ef4-41f1-be5b-103fd137f381">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

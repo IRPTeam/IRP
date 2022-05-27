@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f6c2c3ba-c966-44dc-a48c-34fde59876be">
-  <name>Unlock</name>
-  <synonym>
-    <key>en</key>
-    <value>Unlock</value>
-  </synonym>
+ <name>Unlock</name>
+ <synonym>
+  <key>ru</key>
+  <value>Разблокировать</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Unlock</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kilit aç</value>
+ </synonym>
 </mdclass:CommonPicture>

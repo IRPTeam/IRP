@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f8739435-46db-496b-aadb-7ca156de2b02">
-  <producedTypes>
-    <containerType typeId="03fb5ff9-1202-4365-b0d1-808c8dc01ee8" valueTypeId="a0620df2-8f2c-440c-b9da-7def251e7a9e"/>
-  </producedTypes>
-  <name>typeStockAdjustmentAsWriteOffBasises</name>
-  <synonym>
-    <key>en</key>
-    <value>Type stock adjustment as write off basises</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.PhysicalInventory</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="03fb5ff9-1202-4365-b0d1-808c8dc01ee8" valueTypeId="a0620df2-8f2c-440c-b9da-7def251e7a9e"/>
+ </producedTypes>
+ <name>typeStockAdjustmentAsWriteOffBasises</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип основание списания товаров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type stock adjustment as write off basises</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip stok sayım çıkış fiş kaynak evrakı</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.PhysicalInventory</types>
+ </type>
 </mdclass:DefinedType>

@@ -1,28 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a8300fc3-ceaf-4a3e-a320-9bf7354a8aba">
-  <producedTypes>
-    <containerType typeId="bfe797e9-e07f-4965-b0b0-4e38e365062e" valueTypeId="3c3264e8-5e7b-420c-b91f-52ee73adc222"/>
-  </producedTypes>
-  <name>typeDescriptionsFillCheck</name>
-  <synonym>
-    <key>en</key>
-    <value>Type descriptions fill check</value>
-  </synonym>
-  <type>
-    <types>CatalogObject.TaxRates</types>
-    <types>CatalogObject.CashAccounts</types>
-    <types>CatalogObject.SpecialOffers</types>
-    <types>CatalogObject.AddAttributeAndPropertySets</types>
-    <types>CatalogObject.Currencies</types>
-    <types>CatalogObject.Companies</types>
-    <types>CatalogObject.PaymentTypes</types>
-    <types>CatalogObject.Stores</types>
-    <types>CatalogObject.ItemSegments</types>
-    <types>CatalogObject.ItemTypes</types>
-    <types>CatalogObject.AddAttributeAndPropertyValues</types>
-    <types>CatalogObject.Countries</types>
-    <types>CatalogObject.Items</types>
-    <types>CatalogObject.Partners</types>
-    <types>CatalogObject.PriceTypes</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="bfe797e9-e07f-4965-b0b0-4e38e365062e" valueTypeId="3c3264e8-5e7b-420c-b91f-52ee73adc222"/>
+ </producedTypes>
+ <name>typeDescriptionsFillCheck</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип проверка заполнения наименования</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type descriptions fill check</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip tanım doldurma kontrolü</value>
+ </synonym>
+ <type>
+  <types>CatalogObject.TaxRates</types>
+  <types>CatalogObject.CashAccounts</types>
+  <types>CatalogObject.SpecialOffers</types>
+  <types>CatalogObject.AddAttributeAndPropertySets</types>
+  <types>CatalogObject.Currencies</types>
+  <types>CatalogObject.Companies</types>
+  <types>CatalogObject.PaymentTypes</types>
+  <types>CatalogObject.Stores</types>
+  <types>CatalogObject.ItemSegments</types>
+  <types>CatalogObject.ItemTypes</types>
+  <types>CatalogObject.AddAttributeAndPropertyValues</types>
+  <types>CatalogObject.Countries</types>
+  <types>CatalogObject.Items</types>
+  <types>CatalogObject.Partners</types>
+  <types>CatalogObject.PriceTypes</types>
+ </type>
 </mdclass:DefinedType>

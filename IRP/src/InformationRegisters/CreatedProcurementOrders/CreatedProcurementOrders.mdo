@@ -1,47 +1,79 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3b63fab9-2082-412e-990c-969eb5b33c08">
-  <producedTypes>
-    <selectionType typeId="e5880627-44e2-4493-a5e1-5d0b133baafc" valueTypeId="568a8466-0aea-4336-88e7-bafea0a7227d"/>
-    <listType typeId="f31a4d71-e56c-45ca-9f1d-d2b1760e9434" valueTypeId="0c70a2bb-db65-4900-88ca-274eb3870df5"/>
-    <managerType typeId="1d3f09ff-513a-406d-8278-b9f5d1c32bee" valueTypeId="abdb3174-66bb-46e0-b463-9ef844fa0994"/>
-    <recordSetType typeId="bff73675-f6c9-4bde-ae35-fa197b173199" valueTypeId="37990362-843e-43c6-8b0c-955397c34c3b"/>
-    <recordKeyType typeId="e6091c44-b3fd-4b0b-bdc2-bcbc50efd6c1" valueTypeId="904568d1-8ed3-4060-b60c-c1aa005141bc"/>
-    <recordType typeId="500d5ce2-c1fd-483c-b7e8-70ad09220ede" valueTypeId="5bbbab52-297d-49a0-aa6a-c5dd13d218b1"/>
-    <recordManagerType typeId="04addcf7-b317-4ab0-a5e5-8071337ac72b" valueTypeId="cd362e69-c98a-4104-8141-d03bd3d5ad90"/>
-  </producedTypes>
-  <name>CreatedProcurementOrders</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3b63fab9-2082-412e-990c-969eb5b33c08">
+ <producedTypes>
+  <selectionType typeId="e5880627-44e2-4493-a5e1-5d0b133baafc" valueTypeId="568a8466-0aea-4336-88e7-bafea0a7227d"/>
+  <listType typeId="f31a4d71-e56c-45ca-9f1d-d2b1760e9434" valueTypeId="0c70a2bb-db65-4900-88ca-274eb3870df5"/>
+  <managerType typeId="1d3f09ff-513a-406d-8278-b9f5d1c32bee" valueTypeId="abdb3174-66bb-46e0-b463-9ef844fa0994"/>
+  <recordSetType typeId="bff73675-f6c9-4bde-ae35-fa197b173199" valueTypeId="37990362-843e-43c6-8b0c-955397c34c3b"/>
+  <recordKeyType typeId="e6091c44-b3fd-4b0b-bdc2-bcbc50efd6c1" valueTypeId="904568d1-8ed3-4060-b60c-c1aa005141bc"/>
+  <recordType typeId="500d5ce2-c1fd-483c-b7e8-70ad09220ede" valueTypeId="5bbbab52-297d-49a0-aa6a-c5dd13d218b1"/>
+  <recordManagerType typeId="04addcf7-b317-4ab0-a5e5-8071337ac72b" valueTypeId="cd362e69-c98a-4104-8141-d03bd3d5ad90"/>
+ </producedTypes>
+ <name>CreatedProcurementOrders</name>
+ <synonym>
+  <key>ru</key>
+  <value>Созданные заказы обеспечения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Created procurement orders</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Oluşturulan tedarik siparişleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Созданный заказ обеспечения</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Created procurement order</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Oluşturulan tedarik siparişi</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Созданные заказы обеспечения</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Created procurement orders</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Oluşturulan tedarik siparişleri</value>
+ </listPresentation>
+ <dimensions uuid="2839d916-f331-4c01-bce0-f77301d97ab9">
+  <name>Order</name>
   <synonym>
-    <key>en</key>
-    <value>Created procurement orders</value>
+   <key>ru</key>
+   <value>Заказ</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Created procurement order</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Created procurement orders</value>
-  </listPresentation>
-  <dimensions uuid="2839d916-f331-4c01-bce0-f77301d97ab9">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.PurchaseOrder</types>
-      <types>DocumentRef.InventoryTransferOrder</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Order</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satış sipariş adedi</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseOrder</types>
+   <types>DocumentRef.InventoryTransferOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

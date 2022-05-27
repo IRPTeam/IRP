@@ -1,66 +1,90 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9d023378-f958-488c-a599-bb44cda92fbf">
-  <producedTypes>
-    <selectionType typeId="e7cfb889-d2d8-4633-960d-1658381a9d29" valueTypeId="7fbfe2a9-993e-4e77-aa9e-2b9ae84851df"/>
-    <listType typeId="d10302ff-f3d6-4c95-8d4f-d89f33bc9d48" valueTypeId="3c000e45-7c2d-4d9f-8306-1a93a49c8283"/>
-    <managerType typeId="63da7a84-eb0e-4776-a46b-bf7943f9e539" valueTypeId="70153da9-8761-45b1-9617-aa521f008ac3"/>
-    <recordSetType typeId="c90e79ae-e0b6-4252-90f0-2d37af60e84f" valueTypeId="d6e5721b-b21b-4c75-af37-ad6ed91ac500"/>
-    <recordKeyType typeId="fd4e846d-0fae-4faf-a4c3-371673431eb9" valueTypeId="840b1d50-3b7f-45fc-bdca-5a58f7f091fe"/>
-    <recordType typeId="df85ce59-f101-48e7-a095-4133be281c95" valueTypeId="42e8cdbb-aecb-46a4-a1a9-4730f841120f"/>
-    <recordManagerType typeId="d36da2e9-3101-43b0-b6bd-2bca0bce76f1" valueTypeId="f973b070-4a62-4a89-85b1-3c99fea4e3d3"/>
-  </producedTypes>
-  <name>T6010S_BatchesInfo</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="9d023378-f958-488c-a599-bb44cda92fbf">
+ <producedTypes>
+  <selectionType typeId="e7cfb889-d2d8-4633-960d-1658381a9d29" valueTypeId="7fbfe2a9-993e-4e77-aa9e-2b9ae84851df"/>
+  <listType typeId="d10302ff-f3d6-4c95-8d4f-d89f33bc9d48" valueTypeId="3c000e45-7c2d-4d9f-8306-1a93a49c8283"/>
+  <managerType typeId="63da7a84-eb0e-4776-a46b-bf7943f9e539" valueTypeId="70153da9-8761-45b1-9617-aa521f008ac3"/>
+  <recordSetType typeId="c90e79ae-e0b6-4252-90f0-2d37af60e84f" valueTypeId="d6e5721b-b21b-4c75-af37-ad6ed91ac500"/>
+  <recordKeyType typeId="fd4e846d-0fae-4faf-a4c3-371673431eb9" valueTypeId="840b1d50-3b7f-45fc-bdca-5a58f7f091fe"/>
+  <recordType typeId="df85ce59-f101-48e7-a095-4133be281c95" valueTypeId="42e8cdbb-aecb-46a4-a1a9-4730f841120f"/>
+  <recordManagerType typeId="d36da2e9-3101-43b0-b6bd-2bca0bce76f1" valueTypeId="f973b070-4a62-4a89-85b1-3c99fea4e3d3"/>
+ </producedTypes>
+ <name>T6010S_BatchesInfo</name>
+ <synonym>
+  <key>ru</key>
+  <value>Е6010 Информация по партиям</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>T6010 Batches info</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T6010 Partiler bilgisi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <dimensions uuid="eece2ada-1969-49a0-bbe6-02b1c40bf59e">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>T6010 Batches info</value>
+   <key>ru</key>
+   <value>Организация</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <dimensions uuid="eece2ada-1969-49a0-bbe6-02b1c40bf59e">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="b447502f-5c19-4688-811f-f11fd499174a">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.Bundling</types>
-      <types>DocumentRef.InventoryTransfer</types>
-      <types>DocumentRef.ItemStockAdjustment</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.RetailReturnReceipt</types>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.StockAdjustmentAsSurplus</types>
-      <types>DocumentRef.StockAdjustmentAsWriteOff</types>
-      <types>DocumentRef.Unbundling</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="b447502f-5c19-4688-811f-f11fd499174a">
+  <name>Document</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.Bundling</types>
+   <types>DocumentRef.InventoryTransfer</types>
+   <types>DocumentRef.ItemStockAdjustment</types>
+   <types>DocumentRef.OpeningEntry</types>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.PurchaseReturn</types>
+   <types>DocumentRef.RetailReturnReceipt</types>
+   <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.SalesInvoice</types>
+   <types>DocumentRef.SalesReturn</types>
+   <types>DocumentRef.StockAdjustmentAsSurplus</types>
+   <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+   <types>DocumentRef.Unbundling</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

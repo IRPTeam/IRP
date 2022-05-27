@@ -1,15 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="70069200-59ee-47ce-b564-69c58ee9e763">
-  <producedTypes>
-    <containerType typeId="893c75de-7312-4160-9b68-3ee291dd85dd" valueTypeId="f95659e4-e9c8-41bd-b03e-4358c1359a16"/>
-  </producedTypes>
-  <name>typePurchaseBasis</name>
-  <synonym>
-    <key>en</key>
-    <value>Type purchase basis</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.InternalSupplyRequest</types>
-    <types>DocumentRef.SalesOrder</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="893c75de-7312-4160-9b68-3ee291dd85dd" valueTypeId="f95659e4-e9c8-41bd-b03e-4358c1359a16"/>
+ </producedTypes>
+ <name>typePurchaseBasis</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип основание закупки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type purchase basis</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>tip alım kaynak evrakı</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.InternalSupplyRequest</types>
+  <types>DocumentRef.SalesOrder</types>
+ </type>
 </mdclass:DefinedType>

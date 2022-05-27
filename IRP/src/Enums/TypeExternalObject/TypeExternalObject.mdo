@@ -1,36 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="805e3938-a299-4775-b1e2-370de5ce11f6">
-  <producedTypes>
-    <refType typeId="18480d77-4402-4e59-b8bd-aec5576fe245" valueTypeId="046aed1e-c061-4629-8710-e8d95be6ef1d"/>
-    <listType typeId="c633e38e-551b-4f34-82eb-b3774cc45fc2" valueTypeId="bdb759d0-2a34-4d13-9e78-44f9f4febb0f"/>
-    <managerType typeId="3b6bca70-986c-4e1c-95a7-b87d8e3fa0e2" valueTypeId="9a85538f-366e-478c-8709-27145451e077"/>
-  </producedTypes>
-  <name>TypeExternalObject</name>
+ <producedTypes>
+  <refType typeId="18480d77-4402-4e59-b8bd-aec5576fe245" valueTypeId="046aed1e-c061-4629-8710-e8d95be6ef1d"/>
+  <listType typeId="c633e38e-551b-4f34-82eb-b3774cc45fc2" valueTypeId="bdb759d0-2a34-4d13-9e78-44f9f4febb0f"/>
+  <managerType typeId="3b6bca70-986c-4e1c-95a7-b87d8e3fa0e2" valueTypeId="9a85538f-366e-478c-8709-27145451e077"/>
+ </producedTypes>
+ <name>TypeExternalObject</name>
+ <synonym>
+  <key>ru</key>
+  <value>Вид внешнего объекта</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type external object</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dış öbje tipi</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="401ac063-5a3f-4116-91fe-8817ced8947e">
+  <name>Extension</name>
   <synonym>
-    <key>en</key>
-    <value>Type external object</value>
+   <key>ru</key>
+   <value>Расширение</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="401ac063-5a3f-4116-91fe-8817ced8947e">
-    <name>Extension</name>
-    <synonym>
-      <key>en</key>
-      <value>Extension</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="2931f186-90f6-4b67-8994-b30b800ab7b2">
-    <name>DataProcessor</name>
-    <synonym>
-      <key>en</key>
-      <value>Data processor</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f0a63691-762e-45f7-a9aa-3a5b7378beb4">
-    <name>Report</name>
-    <synonym>
-      <key>en</key>
-      <value>Report</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Extension</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Uzantı</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="2931f186-90f6-4b67-8994-b30b800ab7b2">
+  <name>DataProcessor</name>
+  <synonym>
+   <key>ru</key>
+   <value>Внешняя обработка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Data processor</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Veri işlemci</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f0a63691-762e-45f7-a9aa-3a5b7378beb4">
+  <name>Report</name>
+  <synonym>
+   <key>ru</key>
+   <value>Отчет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Report</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Rapor</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

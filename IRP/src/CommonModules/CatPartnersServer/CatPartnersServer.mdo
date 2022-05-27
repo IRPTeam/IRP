@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c9516d15-78d3-4550-bf6d-41c971e75f11">
-  <name>CatPartnersServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Cat partners server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CatPartnersServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Справочник партнеры сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cat partners server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cat cari hesaplar server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

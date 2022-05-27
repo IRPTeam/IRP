@@ -1,4 +1,4 @@
-#Region PrintForm
+﻿#Region PrintForm
 
 Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;

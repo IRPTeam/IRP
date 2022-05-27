@@ -1,15 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6f13d177-40a5-492a-89e7-40b35155684a">
-  <name>BeforeWrite_DescriptionsCheckFilling</name>
-  <synonym>
-    <key>en</key>
-    <value>Before write descriptions check filling</value>
-  </synonym>
-  <source>
-    <types>ChartOfCharacteristicTypesObject</types>
-    <types>ExchangePlanObject</types>
-    <types>CatalogObject</types>
-  </source>
-  <event>BeforeWrite</event>
-  <handler>CommonModule.LocalizationEvents.BeforeWrite_DescriptionsCheckFilling</handler>
+ <name>BeforeWrite_DescriptionsCheckFilling</name>
+ <synonym>
+  <key>ru</key>
+  <value>Перед записью проверка заполнения наименования</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Before write descriptions check filling</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kaydetmeden önce tanım kontrolü</value>
+ </synonym>
+ <source>
+  <types>ChartOfCharacteristicTypesObject</types>
+  <types>ExchangePlanObject</types>
+  <types>CatalogObject</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.LocalizationEvents.BeforeWrite_DescriptionsCheckFilling</handler>
 </mdclass:EventSubscription>

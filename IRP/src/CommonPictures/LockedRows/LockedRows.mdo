@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f78a3fc8-20f4-45bf-9051-4e81daf7faaa">
-  <name>LockedRows</name>
-  <synonym>
-    <key>en</key>
-    <value>Locked rows</value>
-  </synonym>
+ <name>LockedRows</name>
+ <synonym>
+  <key>ru</key>
+  <value>Заблокированные строки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Locked rows</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kilitli satırlar</value>
+ </synonym>
 </mdclass:CommonPicture>

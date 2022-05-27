@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8bb2531c-2ecb-4295-a3fb-576202e40ba7">
-  <name>QRPicture</name>
-  <synonym>
-    <key>en</key>
-    <value>QR picture</value>
-  </synonym>
+ <name>QRPicture</name>
+ <synonym>
+  <key>ru</key>
+  <value>QR картинка</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>QR picture</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>QR resim</value>
+ </synonym>
 </mdclass:CommonPicture>

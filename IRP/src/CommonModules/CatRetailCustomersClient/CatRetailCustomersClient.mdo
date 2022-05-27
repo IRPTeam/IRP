@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a0ebc086-13dc-40be-9378-ba5ccc02d5e3">
-  <name>CatRetailCustomersClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Cat retail customers client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>CatRetailCustomersClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Cat розничный покупатель клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cat retail customers client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cat perakende müşterileri client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

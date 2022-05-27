@@ -1,121 +1,193 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="18f6ff64-bc1b-4188-89e7-67091de81f65">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="18f6ff64-bc1b-4188-89e7-67091de81f65">
+ <producedTypes>
+  <objectType typeId="c7e5e69d-5dc1-481c-80ec-0c0fb418c99c" valueTypeId="f0c2d3b1-79bc-4a02-b3ca-fdb1942e5194"/>
+  <refType typeId="7ecb2616-28e8-4049-b7a7-a395168e0f49" valueTypeId="554a458c-e09e-43a8-ad56-442b56bf13d9"/>
+  <selectionType typeId="ae38a0d4-060b-4452-b406-e0825636eee4" valueTypeId="2c4c00f1-c29e-4099-a8c7-a9cc9dc75da7"/>
+  <listType typeId="2c5e6c64-3772-492d-b5e6-f79925cec736" valueTypeId="745c6198-7758-4318-aa63-cdbe7341592c"/>
+  <managerType typeId="fda5852d-b642-4f5f-9f0e-f871820652dd" valueTypeId="d054a5ea-cd76-4bf5-be14-de15a1ec2ff6"/>
+ </producedTypes>
+ <name>PaymentSchedules</name>
+ <synonym>
+  <key>ru</key>
+  <value>Условия оплаты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Payment terms</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ödeme şartları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Условие оплаты</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Payment term</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Ödeme koşulu</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.PaymentSchedules.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.PaymentSchedules.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.PaymentSchedules.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <tabularSections uuid="3e0b0bb7-da35-4957-ae72-7d89a1f5de55">
   <producedTypes>
-    <objectType typeId="c7e5e69d-5dc1-481c-80ec-0c0fb418c99c" valueTypeId="f0c2d3b1-79bc-4a02-b3ca-fdb1942e5194"/>
-    <refType typeId="7ecb2616-28e8-4049-b7a7-a395168e0f49" valueTypeId="554a458c-e09e-43a8-ad56-442b56bf13d9"/>
-    <selectionType typeId="ae38a0d4-060b-4452-b406-e0825636eee4" valueTypeId="2c4c00f1-c29e-4099-a8c7-a9cc9dc75da7"/>
-    <listType typeId="2c5e6c64-3772-492d-b5e6-f79925cec736" valueTypeId="745c6198-7758-4318-aa63-cdbe7341592c"/>
-    <managerType typeId="fda5852d-b642-4f5f-9f0e-f871820652dd" valueTypeId="d054a5ea-cd76-4bf5-be14-de15a1ec2ff6"/>
+   <objectType typeId="f9a33ea2-35de-4369-ab0a-bc1f87483704" valueTypeId="5c78012e-7ef9-4999-a0e0-a981d550c0d4"/>
+   <rowType typeId="49666f85-6936-453b-8158-044c4f3e04f1" valueTypeId="2449faab-112a-4302-af71-9f35557e13a8"/>
   </producedTypes>
-  <name>PaymentSchedules</name>
+  <name>StagesOfPayment</name>
   <synonym>
-    <key>en</key>
-    <value>Payment terms</value>
+   <key>ru</key>
+   <value>Этапы оплаты</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Stages of payment</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme aşamaları</value>
+  </synonym>
+  <attributes uuid="8a3181e1-a185-4d68-908f-8bdfb84e4361">
+   <name>CalculationType</name>
+   <synonym>
+    <key>ru</key>
+    <value>Вариант оплаты</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Payment term</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.PaymentSchedules.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.PaymentSchedules.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.PaymentSchedules.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <tabularSections uuid="3e0b0bb7-da35-4957-ae72-7d89a1f5de55">
-    <producedTypes>
-      <objectType typeId="f9a33ea2-35de-4369-ab0a-bc1f87483704" valueTypeId="5c78012e-7ef9-4999-a0e0-a981d550c0d4"/>
-      <rowType typeId="49666f85-6936-453b-8158-044c4f3e04f1" valueTypeId="2449faab-112a-4302-af71-9f35557e13a8"/>
-    </producedTypes>
-    <name>StagesOfPayment</name>
-    <synonym>
-      <key>en</key>
-      <value>Stages of payment</value>
-    </synonym>
-    <attributes uuid="8a3181e1-a185-4d68-908f-8bdfb84e4361">
-      <name>CalculationType</name>
-      <synonym>
-        <key>en</key>
-        <value>Calculation type</value>
-      </synonym>
-      <type>
-        <types>EnumRef.CalculationTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="f3c27cba-2ad8-424b-bb05-231ef489a5bd">
-      <name>ProportionOfPayment</name>
-      <synonym>
-        <key>en</key>
-        <value>Proportion of payment</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>5</precision>
-          <scale>2</scale>
-          <nonNegative>true</nonNegative>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="812e60c1-19d3-4dad-bc45-e069d87fad5a">
-      <name>DuePeriod</name>
-      <synonym>
-        <key>en</key>
-        <value>Due period, days</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>3</precision>
-          <nonNegative>true</nonNegative>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <forms uuid="357c1110-0424-4d05-958e-4be76ea00d9d">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="debb4ef5-be96-4a23-a308-5dca3da5cf57">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f58d7da4-ecc8-456e-8566-8023f9f57873">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>Calculation type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hesaplama tipi</value>
+   </synonym>
+   <type>
+    <types>EnumRef.CalculationTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="f3c27cba-2ad8-424b-bb05-231ef489a5bd">
+   <name>ProportionOfPayment</name>
+   <synonym>
+    <key>ru</key>
+    <value>Процент платежа</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Proportion of payment</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ödeme oranı</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>5</precision>
+     <scale>2</scale>
+     <nonNegative>true</nonNegative>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="812e60c1-19d3-4dad-bc45-e069d87fad5a">
+   <name>DuePeriod</name>
+   <synonym>
+    <key>ru</key>
+    <value>Срок оплаты, дни</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Due period, days</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Vade tarihi, gün</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+     <nonNegative>true</nonNegative>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <forms uuid="357c1110-0424-4d05-958e-4be76ea00d9d">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="debb4ef5-be96-4a23-a308-5dca3da5cf57">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f58d7da4-ecc8-456e-8566-8023f9f57873">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

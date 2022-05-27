@@ -1,20 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="154c4582-29f8-4e98-9177-9736e8a03a0d">
-  <producedTypes>
-    <containerType typeId="adbe734d-0982-4eaf-a8b4-15a22a62eb17" valueTypeId="196b1e28-45c7-4ac2-9a9d-533c312197a4"/>
-  </producedTypes>
-  <name>typeShipmentBasis</name>
-  <synonym>
-    <key>en</key>
-    <value>Type shipment basis</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.PurchaseReturn</types>
-    <types>DocumentRef.ShipmentConfirmation</types>
-    <types>DocumentRef.Unbundling</types>
-    <types>DocumentRef.SalesOrder</types>
-    <types>DocumentRef.Bundling</types>
-    <types>DocumentRef.InventoryTransfer</types>
-    <types>DocumentRef.SalesInvoice</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="adbe734d-0982-4eaf-a8b4-15a22a62eb17" valueTypeId="196b1e28-45c7-4ac2-9a9d-533c312197a4"/>
+ </producedTypes>
+ <name>typeShipmentBasis</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип основание отгрузки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type shipment basis</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip sevkiyat kaynak evrakı</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.PurchaseReturn</types>
+  <types>DocumentRef.ShipmentConfirmation</types>
+  <types>DocumentRef.Unbundling</types>
+  <types>DocumentRef.SalesOrder</types>
+  <types>DocumentRef.Bundling</types>
+  <types>DocumentRef.InventoryTransfer</types>
+  <types>DocumentRef.SalesInvoice</types>
+ </type>
 </mdclass:DefinedType>

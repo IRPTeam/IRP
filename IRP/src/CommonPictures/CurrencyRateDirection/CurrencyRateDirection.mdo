@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="32f5e3a7-3b7f-4e35-b469-751a27be97e5">
-  <name>CurrencyRateDirection</name>
-  <synonym>
-    <key>en</key>
-    <value>Currency rate direction</value>
-  </synonym>
+ <name>CurrencyRateDirection</name>
+ <synonym>
+  <key>ru</key>
+  <value>Направление курса валюты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Currency rate direction</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Döviz kur yönü</value>
+ </synonym>
 </mdclass:CommonPicture>

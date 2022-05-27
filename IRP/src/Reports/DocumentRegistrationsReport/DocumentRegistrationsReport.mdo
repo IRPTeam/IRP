@@ -1,88 +1,120 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a343104b-0b88-4c85-a1e4-52d28ade5d72">
-  <producedTypes>
-    <objectType typeId="4d4101ff-61a2-4277-8899-0c56ed18d0f7" valueTypeId="8b6c4136-0e8f-48bb-8ce0-a5efdbc22ea1"/>
-    <managerType typeId="ec1e208f-4588-4ed0-ba24-58d5f9667c2e" valueTypeId="d5325556-4241-4b58-87c9-73b96d278a5c"/>
-  </producedTypes>
-  <name>DocumentRegistrationsReport</name>
+ <producedTypes>
+  <objectType typeId="4d4101ff-61a2-4277-8899-0c56ed18d0f7" valueTypeId="8b6c4136-0e8f-48bb-8ce0-a5efdbc22ea1"/>
+  <managerType typeId="ec1e208f-4588-4ed0-ba24-58d5f9667c2e" valueTypeId="d5325556-4241-4b58-87c9-73b96d278a5c"/>
+ </producedTypes>
+ <name>DocumentRegistrationsReport</name>
+ <synonym>
+  <key>ru</key>
+  <value>Движения документа</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Document registrations report</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak hareket raporu</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>Report.DocumentRegistrationsReport.Form.ReportForm</defaultForm>
+ <forms uuid="6dee31f1-d62d-48b5-b0e2-9ca62cec3a7f">
+  <name>ReportForm</name>
   <synonym>
-    <key>en</key>
-    <value>Document registrations report</value>
+   <key>ru</key>
+   <value>Форма отчета</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>Report.DocumentRegistrationsReport.Form.ReportForm</defaultForm>
-  <forms uuid="6dee31f1-d62d-48b5-b0e2-9ca62cec3a7f">
-    <name>ReportForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Report form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="d14a12c6-2345-42a5-a78d-7cdba85316a1">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-  </templates>
-  <commands uuid="a58a72b2-363c-46be-96aa-5ab5cd8f0cd3">
-    <name>RegistrationsReport</name>
-    <synonym>
-      <key>en</key>
-      <value>Registrations report</value>
-    </synonym>
-    <group>CommandGroup.Service</group>
-    <commandParameterType>
-      <types>DocumentRef.CashTransferOrder</types>
-      <types>DocumentRef.IncomingPaymentOrder</types>
-      <types>DocumentRef.SalesReturnOrder</types>
-      <types>DocumentRef.CashPayment</types>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.DebitNote</types>
-      <types>DocumentRef.CreditNote</types>
-      <types>DocumentRef.BankReceipt</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.ManualRegisterEntry</types>
-      <types>DocumentRef.PurchaseReturnOrder</types>
-      <types>DocumentRef.BankPayment</types>
-      <types>DocumentRef.ShipmentConfirmation</types>
-      <types>DocumentRef.InternalSupplyRequest</types>
-      <types>DocumentRef.Unbundling</types>
-      <types>DocumentRef.PriceList</types>
-      <types>DocumentRef.PurchaseOrder</types>
-      <types>DocumentRef.CashReceipt</types>
-      <types>DocumentRef.OutgoingPaymentOrder</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.RetailReturnReceipt</types>
-      <types>DocumentRef.SalesOrder</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.VendorsAdvancesClosing</types>
-      <types>DocumentRef.CashRevenue</types>
-      <types>DocumentRef.CashStatement</types>
-      <types>DocumentRef.PhysicalCountByLocation</types>
-      <types>DocumentRef.CustomersAdvancesClosing</types>
-      <types>DocumentRef.StockAdjustmentAsSurplus</types>
-      <types>DocumentRef.StockAdjustmentAsWriteOff</types>
-      <types>DocumentRef.Bundling</types>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.PlannedReceiptReservation</types>
-      <types>DocumentRef.ItemStockAdjustment</types>
-      <types>DocumentRef.InventoryTransferOrder</types>
-      <types>DocumentRef.PurchaseOrderClosing</types>
-      <types>DocumentRef.SalesOrderClosing</types>
-      <types>DocumentRef.InventoryTransfer</types>
-      <types>DocumentRef.ReconciliationStatement</types>
-      <types>DocumentRef.GoodsReceipt</types>
-      <types>DocumentRef.PhysicalInventory</types>
-      <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.CashExpense</types>
-      <types>DocumentRef.CalculationMovementCosts</types>
-      <types>DocumentRef.AdditionalCostAllocation</types>
-      <types>DocumentRef.AdditionalRevenueAllocation</types>
-      <types>DocumentRef.MoneyTransfer</types>
-    </commandParameterType>
-    <representation>Auto</representation>
-  </commands>
+  <synonym>
+   <key>en</key>
+   <value>Report form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Rapor formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="d14a12c6-2345-42a5-a78d-7cdba85316a1">
+  <name>Template</name>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
+  </synonym>
+ </templates>
+ <commands uuid="a58a72b2-363c-46be-96aa-5ab5cd8f0cd3">
+  <name>RegistrationsReport</name>
+  <synonym>
+   <key>ru</key>
+   <value>Движения документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Registrations report</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak hareket raporu</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>DocumentRef.CashTransferOrder</types>
+   <types>DocumentRef.IncomingPaymentOrder</types>
+   <types>DocumentRef.SalesReturnOrder</types>
+   <types>DocumentRef.CashPayment</types>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.DebitNote</types>
+   <types>DocumentRef.CreditNote</types>
+   <types>DocumentRef.BankReceipt</types>
+   <types>DocumentRef.PurchaseReturn</types>
+   <types>DocumentRef.ManualRegisterEntry</types>
+   <types>DocumentRef.PurchaseReturnOrder</types>
+   <types>DocumentRef.BankPayment</types>
+   <types>DocumentRef.ShipmentConfirmation</types>
+   <types>DocumentRef.InternalSupplyRequest</types>
+   <types>DocumentRef.Unbundling</types>
+   <types>DocumentRef.PriceList</types>
+   <types>DocumentRef.PurchaseOrder</types>
+   <types>DocumentRef.CashReceipt</types>
+   <types>DocumentRef.OutgoingPaymentOrder</types>
+   <types>DocumentRef.OpeningEntry</types>
+   <types>DocumentRef.RetailReturnReceipt</types>
+   <types>DocumentRef.SalesOrder</types>
+   <types>DocumentRef.SalesReturn</types>
+   <types>DocumentRef.VendorsAdvancesClosing</types>
+   <types>DocumentRef.CashRevenue</types>
+   <types>DocumentRef.CashStatement</types>
+   <types>DocumentRef.PhysicalCountByLocation</types>
+   <types>DocumentRef.CustomersAdvancesClosing</types>
+   <types>DocumentRef.StockAdjustmentAsSurplus</types>
+   <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+   <types>DocumentRef.Bundling</types>
+   <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.PlannedReceiptReservation</types>
+   <types>DocumentRef.ItemStockAdjustment</types>
+   <types>DocumentRef.InventoryTransferOrder</types>
+   <types>DocumentRef.PurchaseOrderClosing</types>
+   <types>DocumentRef.SalesOrderClosing</types>
+   <types>DocumentRef.InventoryTransfer</types>
+   <types>DocumentRef.ReconciliationStatement</types>
+   <types>DocumentRef.GoodsReceipt</types>
+   <types>DocumentRef.PhysicalInventory</types>
+   <types>DocumentRef.SalesInvoice</types>
+   <types>DocumentRef.CashExpense</types>
+   <types>DocumentRef.CalculationMovementCosts</types>
+   <types>DocumentRef.AdditionalCostAllocation</types>
+   <types>DocumentRef.AdditionalRevenueAllocation</types>
+   <types>DocumentRef.MoneyTransfer</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Report>

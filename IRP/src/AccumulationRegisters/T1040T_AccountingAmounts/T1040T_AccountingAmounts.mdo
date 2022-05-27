@@ -1,141 +1,221 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e47251b8-365a-49fa-ac30-08b3885c55ed">
-  <producedTypes>
-    <selectionType typeId="836cf6a5-52d8-488d-8f9b-94a9968782f0" valueTypeId="ec6d85e3-3e45-4656-ba64-a7ba3ff55e2a"/>
-    <listType typeId="0f629269-0d54-4516-a224-4821edb4bfe5" valueTypeId="770c10bf-e198-46d4-9efa-703b615ac29b"/>
-    <managerType typeId="ac57117d-531f-4397-b5d6-0036d321d8c4" valueTypeId="330a0679-c875-43a4-8d2d-34db406e9122"/>
-    <recordSetType typeId="9a88043d-1556-49a9-9101-a40ef965ebe7" valueTypeId="353e6913-6309-491f-b4b0-c52947fbb488"/>
-    <recordKeyType typeId="ba3e5c82-2e54-400d-9855-a91c96ad4061" valueTypeId="b7b99b4d-ea88-47ae-8ce7-4fcf1d7c694a"/>
-    <recordType typeId="4d8637f0-a63f-45f3-acdf-73b495ee7d1f" valueTypeId="70836f1a-2314-45f2-9440-69fbf43ddb6f"/>
-  </producedTypes>
-  <name>T1040T_AccountingAmounts</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e47251b8-365a-49fa-ac30-08b3885c55ed">
+ <producedTypes>
+  <selectionType typeId="836cf6a5-52d8-488d-8f9b-94a9968782f0" valueTypeId="ec6d85e3-3e45-4656-ba64-a7ba3ff55e2a"/>
+  <listType typeId="0f629269-0d54-4516-a224-4821edb4bfe5" valueTypeId="770c10bf-e198-46d4-9efa-703b615ac29b"/>
+  <managerType typeId="ac57117d-531f-4397-b5d6-0036d321d8c4" valueTypeId="330a0679-c875-43a4-8d2d-34db406e9122"/>
+  <recordSetType typeId="9a88043d-1556-49a9-9101-a40ef965ebe7" valueTypeId="353e6913-6309-491f-b4b0-c52947fbb488"/>
+  <recordKeyType typeId="ba3e5c82-2e54-400d-9855-a91c96ad4061" valueTypeId="b7b99b4d-ea88-47ae-8ce7-4fcf1d7c694a"/>
+  <recordType typeId="4d8637f0-a63f-45f3-acdf-73b495ee7d1f" valueTypeId="70836f1a-2314-45f2-9440-69fbf43ddb6f"/>
+ </producedTypes>
+ <name>T1040T_AccountingAmounts</name>
+ <synonym>
+  <key>ru</key>
+  <value>T1040 Бухгалтерские суммы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>T1040 Accounting amounts</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T1040 Muhasebe tutarlar</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="8e353ff0-2691-4d62-becd-0b69fd727960">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>T1040 Accounting amounts</value>
+   <key>ru</key>
+   <value>Сумма оплаты</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="8e353ff0-2691-4d62-becd-0b69fd727960">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="33b036e1-9c32-4167-9a93-f7e9a9d25933">
-    <name>NetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="f7c02917-f051-4956-b754-13117670740e">
-    <name>TaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="993d0d55-3bed-4827-9b07-70608ec7a544">
-    <name>DeferredCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Deferred calculation</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="6cfbf7eb-73f1-452a-8325-015f3d55427e">
-    <name>AdvancesClosing</name>
-    <synonym>
-      <key>en</key>
-      <value>Advances closing</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.VendorsAdvancesClosing</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="9093ee6d-cb6a-461c-b215-2ab1e8364f21">
-    <name>RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="62abf51f-e8b4-44d1-bea1-42604ed988e1">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Multi currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="47952fb3-5cef-409b-a504-c3964084edb6">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="77ef6b63-e887-4010-b7eb-5aecdb5539b1">
-    <name>IsAdvanceClosing</name>
-    <synonym>
-      <key>en</key>
-      <value>Is advance closing</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="33b036e1-9c32-4167-9a93-f7e9a9d25933">
+  <name>NetAmount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма без налогов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Net amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Net tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="f7c02917-f051-4956-b754-13117670740e">
+  <name>TaxAmount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налогов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi tutarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="993d0d55-3bed-4827-9b07-70608ec7a544">
+  <name>DeferredCalculation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Отложенный расчет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Deferred calculation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ertelenen hesaplama</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <attributes uuid="6cfbf7eb-73f1-452a-8325-015f3d55427e">
+  <name>AdvancesClosing</name>
+  <synonym>
+   <key>ru</key>
+   <value>Закрытие авансов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Advances closing</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap avans kapaması</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.VendorsAdvancesClosing</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="9093ee6d-cb6a-461c-b215-2ab1e8364f21">
+  <name>RowKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="62abf51f-e8b4-44d1-bea1-42604ed988e1">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Multi currency movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz hareket tipi</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="47952fb3-5cef-409b-a504-c3964084edb6">
+  <name>Currency</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="77ef6b63-e887-4010-b7eb-5aecdb5539b1">
+  <name>IsAdvanceClosing</name>
+  <synonym>
+   <key>ru</key>
+   <value>Это закрытие авансов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Is advance closing</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bu cari hesap avans kapama</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

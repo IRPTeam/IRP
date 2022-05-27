@@ -1,132 +1,196 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="29b89a56-fcfc-4c19-8cb1-529c1b6b9392">
-  <producedTypes>
-    <selectionType typeId="35db3245-983a-4967-bc6f-b6c7895fc9f1" valueTypeId="0b862ce8-d745-4716-b156-a9aa09303d8a"/>
-    <listType typeId="adb1880d-8033-4d80-8d73-a6294d7f5b73" valueTypeId="8cec83f8-a458-4ad5-9eb8-8734cc57f282"/>
-    <managerType typeId="e3f3e13c-0ebd-4432-828d-9269eef1d777" valueTypeId="f210940f-84a0-4951-bedd-e2d628abeb02"/>
-    <recordSetType typeId="bf7cccdb-615e-41d2-baa0-3108bc7a8cf4" valueTypeId="e02387e8-6af0-4465-b786-6cbdd66b391e"/>
-    <recordKeyType typeId="5f190671-fcfe-4ba2-8f48-7593a26888a7" valueTypeId="57723951-3805-4495-9112-8ae3b0ebf777"/>
-    <recordType typeId="f20cbcd8-7b91-423d-8b8f-e5d3dcf6bd28" valueTypeId="671f464c-c99e-4c0a-b8e8-4dc962685498"/>
-    <recordManagerType typeId="8857f0fb-b0a9-4ecb-b31c-19c19995d916" valueTypeId="29313c13-bcb4-4d53-a19b-34b568118178"/>
-  </producedTypes>
-  <name>IntegrationInfo</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="29b89a56-fcfc-4c19-8cb1-529c1b6b9392">
+ <producedTypes>
+  <selectionType typeId="35db3245-983a-4967-bc6f-b6c7895fc9f1" valueTypeId="0b862ce8-d745-4716-b156-a9aa09303d8a"/>
+  <listType typeId="adb1880d-8033-4d80-8d73-a6294d7f5b73" valueTypeId="8cec83f8-a458-4ad5-9eb8-8734cc57f282"/>
+  <managerType typeId="e3f3e13c-0ebd-4432-828d-9269eef1d777" valueTypeId="f210940f-84a0-4951-bedd-e2d628abeb02"/>
+  <recordSetType typeId="bf7cccdb-615e-41d2-baa0-3108bc7a8cf4" valueTypeId="e02387e8-6af0-4465-b786-6cbdd66b391e"/>
+  <recordKeyType typeId="5f190671-fcfe-4ba2-8f48-7593a26888a7" valueTypeId="57723951-3805-4495-9112-8ae3b0ebf777"/>
+  <recordType typeId="f20cbcd8-7b91-423d-8b8f-e5d3dcf6bd28" valueTypeId="671f464c-c99e-4c0a-b8e8-4dc962685498"/>
+  <recordManagerType typeId="8857f0fb-b0a9-4ecb-b31c-19c19995d916" valueTypeId="29313c13-bcb4-4d53-a19b-34b568118178"/>
+ </producedTypes>
+ <name>IntegrationInfo</name>
+ <synonym>
+  <key>ru</key>
+  <value>Дополнительные интеграционные настройки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Integration additional information</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Entegrasyon ek bilgileri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Дополнительные интеграционные настройки</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Integration additional information</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Entegrasyon ek bilgileri</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Дополнительные интеграционные настройки</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Integration additional informations</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Entegrasyon ek bilgileri</value>
+ </listPresentation>
+ <resources uuid="d2a5b90d-55df-4a3e-82cb-c3e52fa5f31f">
+  <name>Value</name>
   <synonym>
-    <key>en</key>
-    <value>Integration additional information</value>
+   <key>ru</key>
+   <value>Значение</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Integration additional information</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Integration additional informations</value>
-  </listPresentation>
-  <resources uuid="d2a5b90d-55df-4a3e-82cb-c3e52fa5f31f">
-    <name>Value</name>
-    <synonym>
-      <key>en</key>
-      <value>Value</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-  </resources>
-  <resources uuid="937b8196-d8f5-44c0-8828-6e42e7c64f7a">
-    <name>SecondValue</name>
-    <synonym>
-      <key>en</key>
-      <value>Second value</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-      <types>String</types>
-      <types>Date</types>
-      <types>Number</types>
-      <types>AnyRef</types>
-      <numberQualifiers>
-        <precision>15</precision>
-        <scale>5</scale>
-      </numberQualifiers>
-      <stringQualifiers>
-        <length>1024</length>
-      </stringQualifiers>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-  </resources>
-  <dimensions uuid="978efd38-0f6c-476e-97d4-4e6b0d21b7c3">
-    <name>isProduct</name>
-    <synonym>
-      <key>en</key>
-      <value>Is product</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="0fc7edc6-8ac0-4c81-95cc-3e616e62304f">
-    <name>IntegrationSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>Integration settings</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="ec938a94-f118-419f-bb75-e70992854f56">
-    <name>Key</name>
-    <synonym>
-      <key>en</key>
-      <value>Key</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Value</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Değer</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+ </resources>
+ <resources uuid="937b8196-d8f5-44c0-8828-6e42e7c64f7a">
+  <name>SecondValue</name>
+  <synonym>
+   <key>ru</key>
+   <value>Второе значение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Second value</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İkinci değer</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+   <types>String</types>
+   <types>Date</types>
+   <types>Number</types>
+   <types>AnyRef</types>
+   <numberQualifiers>
+    <precision>15</precision>
+    <scale>5</scale>
+   </numberQualifiers>
+   <stringQualifiers>
+    <length>1024</length>
+   </stringQualifiers>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+ </resources>
+ <dimensions uuid="978efd38-0f6c-476e-97d4-4e6b0d21b7c3">
+  <name>isProduct</name>
+  <synonym>
+   <key>ru</key>
+   <value>Это товар</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Is product</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Canlı ortam</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="0fc7edc6-8ac0-4c81-95cc-3e616e62304f">
+  <name>IntegrationSettings</name>
+  <synonym>
+   <key>ru</key>
+   <value>Настройка интеграции</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Integration settings</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Entegrasyon ayarları</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="ec938a94-f118-419f-bb75-e70992854f56">
+  <name>Key</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Anahtar</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

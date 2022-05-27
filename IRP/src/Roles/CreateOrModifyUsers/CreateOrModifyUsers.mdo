@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cc8dabed-0add-46d5-8f8d-0c742bf73f5e">
-  <name>CreateOrModifyUsers</name>
-  <synonym>
-    <key>en</key>
-    <value>Create or modify users</value>
-  </synonym>
+ <name>CreateOrModifyUsers</name>
+ <synonym>
+  <key>ru</key>
+  <value>Создание или изменение пользователей</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Create or modify users</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanıcıları oluştur veya değiştir</value>
+ </synonym>
 </mdclass:Role>

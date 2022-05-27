@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7eadd0fb-8b81-4c7c-b067-7a2348820294">
-  <name>IntegrationServerPrivileged</name>
-  <synonym>
-    <key>en</key>
-    <value>Integration server privileged</value>
-  </synonym>
-  <server>true</server>
-  <privileged>true</privileged>
+ <name>IntegrationServerPrivileged</name>
+ <synonym>
+  <key>ru</key>
+  <value>Привилегированные функции интеграции сервера</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Integration server privileged</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Entegrasyon server öncellikli</value>
+ </synonym>
+ <server>true</server>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

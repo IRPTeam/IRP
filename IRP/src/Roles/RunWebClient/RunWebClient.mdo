@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c0e1883f-497b-44c9-b9bf-e47bb1e35caf">
-  <name>RunWebClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Run web client</value>
-  </synonym>
+ <name>RunWebClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Запуск web клиента</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Run web client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Web istemci çalıştırma</value>
+ </synonym>
 </mdclass:Role>

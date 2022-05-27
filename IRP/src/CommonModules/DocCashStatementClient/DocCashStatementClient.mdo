@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a1986b0a-53dc-4c67-afe9-c0a8e1ef179e">
-  <name>DocCashStatementClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc cash statement client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocCashStatementClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Док Кассовая книга клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc cash statement client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc icmal client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

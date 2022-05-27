@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bfef917b-b5f0-459c-9c45-010fbdb7e837">
-  <name>Cloud</name>
-  <synonym>
-    <key>en</key>
-    <value>Cloud</value>
-  </synonym>
+ <name>Cloud</name>
+ <synonym>
+  <key>ru</key>
+  <value>Облако</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cloud</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cloud</value>
+ </synonym>
 </mdclass:CommonPicture>

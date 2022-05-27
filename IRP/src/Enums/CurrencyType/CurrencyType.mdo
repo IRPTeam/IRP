@@ -1,43 +1,83 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d2c9dd61-6e6a-4047-8f48-76ea4f177263">
-  <producedTypes>
-    <refType typeId="526079cb-9e4c-4d93-97ee-dbcd82712a6b" valueTypeId="6f528617-bbb5-434a-88a5-b0e69a55a2c0"/>
-    <listType typeId="45d2a060-a43a-47ff-8a5e-81dcb07167c8" valueTypeId="5b7f349b-0c87-478e-bb27-697401ea70e3"/>
-    <managerType typeId="010d1de6-3f9f-45bb-ba08-0eb6ea88215c" valueTypeId="8d14f865-ea2f-441f-b760-a29bde8e89f8"/>
-  </producedTypes>
-  <name>CurrencyType</name>
+ <producedTypes>
+  <refType typeId="526079cb-9e4c-4d93-97ee-dbcd82712a6b" valueTypeId="6f528617-bbb5-434a-88a5-b0e69a55a2c0"/>
+  <listType typeId="45d2a060-a43a-47ff-8a5e-81dcb07167c8" valueTypeId="5b7f349b-0c87-478e-bb27-697401ea70e3"/>
+  <managerType typeId="010d1de6-3f9f-45bb-ba08-0eb6ea88215c" valueTypeId="8d14f865-ea2f-441f-b760-a29bde8e89f8"/>
+ </producedTypes>
+ <name>CurrencyType</name>
+ <synonym>
+  <key>ru</key>
+  <value>Вид валюты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Currency type</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Döviz tipi</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="74a98b5f-09be-4378-b240-360fd3b85310">
+  <name>Reporting</name>
   <synonym>
-    <key>en</key>
-    <value>Currency type</value>
+   <key>ru</key>
+   <value>Валюта отчетности</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="74a98b5f-09be-4378-b240-360fd3b85310">
-    <name>Reporting</name>
-    <synonym>
-      <key>en</key>
-      <value>Reporting</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="c1add2a7-bcce-4236-a477-a89cf58a90da">
-    <name>Legal</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="1cca85a5-c8b2-435e-bbd0-4d3f3863d278">
-    <name>Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner term</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ba397fef-d6cb-401d-9f1e-264138a7ed80">
-    <name>Budgeting</name>
-    <synonym>
-      <key>en</key>
-      <value>Budgeting</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Reporting</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Raporlama</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="c1add2a7-bcce-4236-a477-a89cf58a90da">
+  <name>Legal</name>
+  <synonym>
+   <key>ru</key>
+   <value>Локальная валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Legal</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Yerel</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="1cca85a5-c8b2-435e-bbd0-4d3f3863d278">
+  <name>Agreement</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта соглашения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner term</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sözleşme</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ba397fef-d6cb-401d-9f1e-264138a7ed80">
+  <name>Budgeting</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта бюджетирования</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Budgeting</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bütçe</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

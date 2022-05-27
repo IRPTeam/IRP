@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9257d15e-f7b8-4f82-b4b6-4c18461015b7">
-  <name>SystemAdministrator</name>
-  <synonym>
-    <key>en</key>
-    <value>System administrator</value>
-  </synonym>
+ <name>SystemAdministrator</name>
+ <synonym>
+  <key>ru</key>
+  <value>Администратор системы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>System administrator</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Sistem yöneticisi</value>
+ </synonym>
 </mdclass:Role>

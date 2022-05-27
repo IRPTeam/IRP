@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b55e6ba2-e08f-45a4-9ea3-037f793b0e88">
-  <name>RowIDInfoClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Row IDInfo client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>RowIDInfoClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Row ID Инфо клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Row IDInfo client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satır ID Bilgisi client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

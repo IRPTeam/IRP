@@ -1,185 +1,289 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="18163302-dc8e-4307-a168-2db733581051">
-  <producedTypes>
-    <selectionType typeId="ba0ee69d-1a5a-48a0-a321-a7805a314c34" valueTypeId="cbee9d0f-4105-47a6-8791-f5062132f94b"/>
-    <listType typeId="1e7a0e4f-2573-4303-a529-2e668c5beffc" valueTypeId="1f0f0e3d-9ca9-4f54-9263-f20db02ece2f"/>
-    <managerType typeId="5692b629-bf9b-4f41-89a4-c338aca86dee" valueTypeId="ae90497a-89d4-4f62-80fe-43680643a94d"/>
-    <recordSetType typeId="f537d2a6-4fca-408e-97be-95a6e5651af3" valueTypeId="70ebeb22-c552-4104-8ba2-1c8038d4dbed"/>
-    <recordKeyType typeId="712045cb-8a29-4b30-b67d-f9be9466b635" valueTypeId="142571b3-ac89-484e-9466-215e914d968f"/>
-    <recordType typeId="b6fca654-fb40-4da9-af85-02b77f0e7e60" valueTypeId="0d6dfa6c-e752-44b8-91ec-ae5355c21b89"/>
-  </producedTypes>
-  <name>R2005T_SalesSpecialOffers</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="18163302-dc8e-4307-a168-2db733581051">
+ <producedTypes>
+  <selectionType typeId="ba0ee69d-1a5a-48a0-a321-a7805a314c34" valueTypeId="cbee9d0f-4105-47a6-8791-f5062132f94b"/>
+  <listType typeId="1e7a0e4f-2573-4303-a529-2e668c5beffc" valueTypeId="1f0f0e3d-9ca9-4f54-9263-f20db02ece2f"/>
+  <managerType typeId="5692b629-bf9b-4f41-89a4-c338aca86dee" valueTypeId="ae90497a-89d4-4f62-80fe-43680643a94d"/>
+  <recordSetType typeId="f537d2a6-4fca-408e-97be-95a6e5651af3" valueTypeId="70ebeb22-c552-4104-8ba2-1c8038d4dbed"/>
+  <recordKeyType typeId="712045cb-8a29-4b30-b67d-f9be9466b635" valueTypeId="142571b3-ac89-484e-9466-215e914d968f"/>
+  <recordType typeId="b6fca654-fb40-4da9-af85-02b77f0e7e60" valueTypeId="0d6dfa6c-e752-44b8-91ec-ae5355c21b89"/>
+ </producedTypes>
+ <name>R2005T_SalesSpecialOffers</name>
+ <synonym>
+  <key>ru</key>
+  <value>R2005 Специальные предложения продаж</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R2005 Sales special offers</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R2005 Satışlar iskontoları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="d657341f-caab-488f-bc74-4f7a85fd61d2">
+  <name>SalesAmount</name>
   <synonym>
-    <key>en</key>
-    <value>R2005 Sales special offers</value>
+   <key>ru</key>
+   <value>Сумма продаж</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="d657341f-caab-488f-bc74-4f7a85fd61d2">
-    <name>SalesAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="665014b9-fd02-42b0-8c7a-87a2704976a5">
-    <name>NetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="655195cb-121d-423f-bf17-77402c1fc0d1">
-    <name>OffersAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Offers amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="f0fae0a6-caa2-4c4a-a0f0-7ce01001585a">
-    <name>NetOfferAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Net offer amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="23e24540-8054-41df-b155-00e0c8c62d74">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="167d2194-6166-4a20-91b2-d60e909d3e18">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="8ee5717c-a1eb-4dfc-8b78-5d9bf950d6f1">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Multi currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="32f28889-ace4-4b49-989a-6ee65afce17a">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="77cad49f-0119-4c51-b96d-0bdd499b8875">
-    <name>Invoice</name>
-    <synonym>
-      <key>en</key>
-      <value>Invoice</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="beb0287d-f388-4887-a9d0-4be15671f930">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="7996715a-5b50-4885-8957-a07b29129862">
-    <name>RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="4e541823-76bd-4375-a8f2-176f71a1ec64">
-    <name>SpecialOffer</name>
-    <synonym>
-      <key>en</key>
-      <value>Special offer</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SpecialOffers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Sales amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="665014b9-fd02-42b0-8c7a-87a2704976a5">
+  <name>NetAmount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма без налогов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Net amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Net tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="655195cb-121d-423f-bf17-77402c1fc0d1">
+  <name>OffersAmount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма скидки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Offers amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Iskonto tutarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="f0fae0a6-caa2-4c4a-a0f0-7ce01001585a">
+  <name>NetOfferAmount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма скидки без налогов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Net offer amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Net iskonto tutarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="23e24540-8054-41df-b155-00e0c8c62d74">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="167d2194-6166-4a20-91b2-d60e909d3e18">
+  <name>Branch</name>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="8ee5717c-a1eb-4dfc-8b78-5d9bf950d6f1">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Multi currency movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz kırılım tipi</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="32f28889-ace4-4b49-989a-6ee65afce17a">
+  <name>Currency</name>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="77cad49f-0119-4c51-b96d-0bdd499b8875">
+  <name>Invoice</name>
+  <synonym>
+   <key>ru</key>
+   <value>Инвойс</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Invoice</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="beb0287d-f388-4887-a9d0-4be15671f930">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="7996715a-5b50-4885-8957-a07b29129862">
+  <name>RowKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="4e541823-76bd-4375-a8f2-176f71a1ec64">
+  <name>SpecialOffer</name>
+  <synonym>
+   <key>ru</key>
+   <value>Специальное предложение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Special offer</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kampanya</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SpecialOffers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

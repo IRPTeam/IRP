@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="78129448-2b0a-4659-90ae-847ee4978045">
-  <name>Inventory</name>
-  <synonym>
-    <key>en</key>
-    <value>Inventory</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Report.D4010_ActualStocks</content>
-  <content>Report.D4011_FreeStocks</content>
-  <content>Report.D4012_StockReservation</content>
-  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+ <name>Inventory</name>
+ <synonym>
+  <key>ru</key>
+  <value>Склад</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Inventory</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Stok</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Report.D4010_ActualStocks</content>
+ <content>Report.D4011_FreeStocks</content>
+ <content>Report.D4012_StockReservation</content>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

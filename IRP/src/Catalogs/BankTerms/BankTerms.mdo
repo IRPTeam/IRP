@@ -1,183 +1,279 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4ddccab2-2429-4bef-ade1-51fb67c1d7e0">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="4ddccab2-2429-4bef-ade1-51fb67c1d7e0">
+ <producedTypes>
+  <objectType typeId="6630df6b-eb3e-48e6-9e34-0d373e00d464" valueTypeId="ae78cabb-a00e-4384-99c2-d566eff9ec50"/>
+  <refType typeId="a69bf74b-5298-441f-82e9-0b62c1d5e5a9" valueTypeId="fd6cc1c4-03fa-4ec8-a38a-9d3198e531be"/>
+  <selectionType typeId="16a8099a-b6d7-44c1-9218-ecc5169cdf95" valueTypeId="f0a54fb4-9d94-4624-8919-1a7eb75525c4"/>
+  <listType typeId="39fd799d-bfb0-4984-b94e-e3a8b83e5639" valueTypeId="62c75bd0-58ee-4733-9c59-10f5cc7de2d2"/>
+  <managerType typeId="656fcd71-9716-4158-8b25-092445189dfc" valueTypeId="e5e9c90f-b732-4b65-93c9-9e38f4897fe4"/>
+ </producedTypes>
+ <name>BankTerms</name>
+ <synonym>
+  <key>ru</key>
+  <value>Соглашения с банком</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Bank terms</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Banka sözleşmesi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_BankTerms</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_BankTerms</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.BankTerms.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.BankTerms.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.BankTerms.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.BankTerms.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Соглашение с банком</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Bank term</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Banka terimi</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.BankTerms.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.BankTerms.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.BankTerms.Form.ChoiceForm</defaultChoiceForm>
+ <tabularSections uuid="a02a7569-9bd2-4203-8a91-cbfb6e902c90">
   <producedTypes>
-    <objectType typeId="6630df6b-eb3e-48e6-9e34-0d373e00d464" valueTypeId="ae78cabb-a00e-4384-99c2-d566eff9ec50"/>
-    <refType typeId="a69bf74b-5298-441f-82e9-0b62c1d5e5a9" valueTypeId="fd6cc1c4-03fa-4ec8-a38a-9d3198e531be"/>
-    <selectionType typeId="16a8099a-b6d7-44c1-9218-ecc5169cdf95" valueTypeId="f0a54fb4-9d94-4624-8919-1a7eb75525c4"/>
-    <listType typeId="39fd799d-bfb0-4984-b94e-e3a8b83e5639" valueTypeId="62c75bd0-58ee-4733-9c59-10f5cc7de2d2"/>
-    <managerType typeId="656fcd71-9716-4158-8b25-092445189dfc" valueTypeId="e5e9c90f-b732-4b65-93c9-9e38f4897fe4"/>
+   <objectType typeId="5b2d60d1-cb4c-4c56-bb66-cc9291835207" valueTypeId="27cf030d-46b7-4b62-b17e-ecc4607aec8f"/>
+   <rowType typeId="d41a3d1e-cfd7-4a5f-bc42-201dc6c07891" valueTypeId="db24c939-9fcc-493e-aaee-ec8144de10a0"/>
   </producedTypes>
-  <name>BankTerms</name>
+  <name>PaymentTypes</name>
   <synonym>
-    <key>en</key>
-    <value>Bank terms</value>
+   <key>ru</key>
+   <value>Виды оплаты</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_BankTerms</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_BankTerms</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.BankTerms.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.BankTerms.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.BankTerms.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.BankTerms.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Payment types</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme tipleri</value>
+  </synonym>
+  <attributes uuid="9b1be556-6dfd-403c-9cc7-32fe9703f5e0">
+   <name>PaymentType</name>
+   <synonym>
+    <key>ru</key>
+    <value>Вид оплаты</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Bank term</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.BankTerms.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.BankTerms.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.BankTerms.Form.ChoiceForm</defaultChoiceForm>
-  <tabularSections uuid="a02a7569-9bd2-4203-8a91-cbfb6e902c90">
-    <producedTypes>
-      <objectType typeId="5b2d60d1-cb4c-4c56-bb66-cc9291835207" valueTypeId="27cf030d-46b7-4b62-b17e-ecc4607aec8f"/>
-      <rowType typeId="d41a3d1e-cfd7-4a5f-bc42-201dc6c07891" valueTypeId="db24c939-9fcc-493e-aaee-ec8144de10a0"/>
-    </producedTypes>
-    <name>PaymentTypes</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment types</value>
-    </synonym>
-    <attributes uuid="9b1be556-6dfd-403c-9cc7-32fe9703f5e0">
-      <name>PaymentType</name>
-      <synonym>
-        <key>en</key>
-        <value>Payment type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.PaymentTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="78623f56-8170-45ab-a554-fa1264aedc41">
-      <name>Account</name>
-      <synonym>
-        <key>en</key>
-        <value>Account</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.CashAccounts</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="605e9138-cc11-49eb-b8ee-714774369177">
-      <name>Percent</name>
-      <synonym>
-        <key>en</key>
-        <value>Percent</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typePercent</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="4644057f-a7c5-403e-b1e5-504db7e5af89">
-    <producedTypes>
-      <objectType typeId="7029448c-0854-4631-a69a-41822efe82de" valueTypeId="4f5359f6-fd77-4f45-a24a-7ae46678057c"/>
-      <rowType typeId="69248718-21b5-4d71-b99f-854ee16dcb40" valueTypeId="56299c51-a8b7-448e-affb-f969d4804c48"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="037899f4-e070-4abb-9c0c-d6569b1a39c3">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="ea4615e7-b86a-48d5-8d2d-d30396d5df34">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.BankTerms.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="97a56386-ca18-47bd-b5d2-5c54ea6834ff">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="6418a24e-626b-427c-90dd-8b10d847e3ad">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="79a3f6cd-26c6-429f-856f-493f55a4f7b9">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>Payment type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ödeme tipi</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.PaymentTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="78623f56-8170-45ab-a554-fa1264aedc41">
+   <name>Account</name>
+   <synonym>
+    <key>ru</key>
+    <value>Касса/Банковский счет</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Account</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kasa/Banka</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.CashAccounts</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="605e9138-cc11-49eb-b8ee-714774369177">
+   <name>Percent</name>
+   <synonym>
+    <key>ru</key>
+    <value>Процент</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Percent</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Yüzde</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typePercent</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="4644057f-a7c5-403e-b1e5-504db7e5af89">
+  <producedTypes>
+   <objectType typeId="7029448c-0854-4631-a69a-41822efe82de" valueTypeId="4f5359f6-fd77-4f45-a24a-7ae46678057c"/>
+   <rowType typeId="69248718-21b5-4d71-b99f-854ee16dcb40" valueTypeId="56299c51-a8b7-448e-affb-f969d4804c48"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="037899f4-e070-4abb-9c0c-d6569b1a39c3">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ea4615e7-b86a-48d5-8d2d-d30396d5df34">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.BankTerms.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="97a56386-ca18-47bd-b5d2-5c54ea6834ff">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6418a24e-626b-427c-90dd-8b10d847e3ad">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="79a3f6cd-26c6-429f-856f-493f55a4f7b9">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

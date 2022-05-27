@@ -1,88 +1,136 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="65278199-8baf-416e-8b29-fda0e0803b3a">
-  <producedTypes>
-    <selectionType typeId="e220f1bc-5163-498f-8a18-dde7b04d1b60" valueTypeId="77712c7c-f34e-4c47-a4ca-1d89479ad639"/>
-    <listType typeId="390491ed-f3ad-4244-a119-183377b1cb55" valueTypeId="a537063e-3b19-4205-bbe8-9b9c89584ad2"/>
-    <managerType typeId="af3d3795-3f7d-42b1-89fd-578d029a8101" valueTypeId="b925a295-e1ad-4593-bd1f-458e02c5958b"/>
-    <recordSetType typeId="8e302409-487d-4ce9-9487-8fdc9cd746f3" valueTypeId="63b8ed93-4b59-4779-b03d-6e94db953f73"/>
-    <recordKeyType typeId="9fe83aa6-de1b-4eaa-b25a-c6fdd5220ce2" valueTypeId="fd5a3585-f4ae-4ec2-86ce-40096e60a513"/>
-    <recordType typeId="b6a5cf88-37e9-42d0-91fd-ef2faf611ba4" valueTypeId="3d6b81ee-ffd7-4ff7-981c-6886a675a623"/>
-  </producedTypes>
-  <name>R2011B_SalesOrdersShipment</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="65278199-8baf-416e-8b29-fda0e0803b3a">
+ <producedTypes>
+  <selectionType typeId="e220f1bc-5163-498f-8a18-dde7b04d1b60" valueTypeId="77712c7c-f34e-4c47-a4ca-1d89479ad639"/>
+  <listType typeId="390491ed-f3ad-4244-a119-183377b1cb55" valueTypeId="a537063e-3b19-4205-bbe8-9b9c89584ad2"/>
+  <managerType typeId="af3d3795-3f7d-42b1-89fd-578d029a8101" valueTypeId="b925a295-e1ad-4593-bd1f-458e02c5958b"/>
+  <recordSetType typeId="8e302409-487d-4ce9-9487-8fdc9cd746f3" valueTypeId="63b8ed93-4b59-4779-b03d-6e94db953f73"/>
+  <recordKeyType typeId="9fe83aa6-de1b-4eaa-b25a-c6fdd5220ce2" valueTypeId="fd5a3585-f4ae-4ec2-86ce-40096e60a513"/>
+  <recordType typeId="b6a5cf88-37e9-42d0-91fd-ef2faf611ba4" valueTypeId="3d6b81ee-ffd7-4ff7-981c-6886a675a623"/>
+ </producedTypes>
+ <name>R2011B_SalesOrdersShipment</name>
+ <synonym>
+  <key>ru</key>
+  <value>R2011 Отгрузка товаров по заказам покупателей</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R2011 Shipment of sales orders</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R2011 Satış sipariş tedariği</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="920543cc-f880-4116-b704-bf2ac44fcbc6">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R2011 Shipment of sales orders</value>
+   <key>ru</key>
+   <value>Количество</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="920543cc-f880-4116-b704-bf2ac44fcbc6">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="4b27077e-9dfd-4c79-8c7e-cf07c50f6d1f">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="804da9a2-534c-4507-80db-b17eef09a82d">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="adf8daec-5fe7-4714-ac3a-56541b528487">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.SalesOrder</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="7ca22f26-5f1d-4be8-905a-f78906bfd4fe">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="4b27077e-9dfd-4c79-8c7e-cf07c50f6d1f">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="804da9a2-534c-4507-80db-b17eef09a82d">
+  <name>Branch</name>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="adf8daec-5fe7-4714-ac3a-56541b528487">
+  <name>Order</name>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Order</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satış sipariş adedi</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="7ca22f26-5f1d-4be8-905a-f78906bfd4fe">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

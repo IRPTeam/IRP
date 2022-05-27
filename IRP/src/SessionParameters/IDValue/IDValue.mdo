@@ -1,16 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ad052163-5b1a-4d86-a903-5ff910f06820">
-  <name>IDValue</name>
-  <synonym>
-    <key>en</key>
-    <value>ID Value</value>
-  </synonym>
-  <comment>ID Value</comment>
-  <type>
-    <types>Number</types>
-    <numberQualifiers>
-      <precision>6</precision>
-      <nonNegative>true</nonNegative>
-    </numberQualifiers>
-  </type>
+ <name>IDValue</name>
+ <synonym>
+  <key>ru</key>
+  <value>Значение ID</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>ID Value</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>ID değer</value>
+ </synonym>
+ <comment>ID Value</comment>
+ <type>
+  <types>Number</types>
+  <numberQualifiers>
+   <precision>6</precision>
+   <nonNegative>true</nonNegative>
+  </numberQualifiers>
+ </type>
 </mdclass:SessionParameter>

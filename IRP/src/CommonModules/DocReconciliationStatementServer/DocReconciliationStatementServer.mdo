@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="377dd915-18ac-4b67-a23d-c0786ec3f9d2">
-  <name>DocReconciliationStatementServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc reconciliation statement server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocReconciliationStatementServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ взаиморасчеты с контрагентами сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc reconciliation statement server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc cari hesap mutabakat server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

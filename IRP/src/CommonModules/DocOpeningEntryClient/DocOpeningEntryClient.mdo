@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="324fb19e-d38d-4707-b369-7437a88622a0">
-  <name>DocOpeningEntryClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc opening entry client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocOpeningEntryClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ ввод начального остатка клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc opening entry client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak açılış fişi client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

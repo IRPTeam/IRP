@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9e86c93c-dfcf-4562-a372-ddf58aa11aa6">
-  <producedTypes>
-    <containerType typeId="4b3ebdb2-9411-4e2c-9d50-27ee3bcccb9a" valueTypeId="48a7b4db-7d58-4927-b34a-9fbd58964454"/>
-  </producedTypes>
-  <name>typeItem</name>
-  <synonym>
-    <key>en</key>
-    <value>Type item</value>
-  </synonym>
-  <type>
-    <types>CatalogRef.Items</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="4b3ebdb2-9411-4e2c-9d50-27ee3bcccb9a" valueTypeId="48a7b4db-7d58-4927-b34a-9fbd58964454"/>
+ </producedTypes>
+ <name>typeItem</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип номенклатура</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type item</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip malzeme</value>
+ </synonym>
+ <type>
+  <types>CatalogRef.Items</types>
+ </type>
 </mdclass:DefinedType>

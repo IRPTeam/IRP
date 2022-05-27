@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9d7b5e05-8a31-44ee-a3b1-2fe092e15b8f">
-  <name>Mobile</name>
-  <synonym>
-    <key>en</key>
-    <value>Mobile subsystem</value>
-  </synonym>
+ <name>Mobile</name>
+ <synonym>
+  <key>ru</key>
+  <value>Мобильная подсистема</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Mobile subsystem</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Mobil alt sistemi</value>
+ </synonym>
 </mdclass:CommonPicture>

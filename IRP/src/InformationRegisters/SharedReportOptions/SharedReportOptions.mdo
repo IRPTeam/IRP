@@ -1,62 +1,102 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1c913752-e2a0-4660-ba47-94a059bce0ab">
-  <producedTypes>
-    <selectionType typeId="91e36521-6042-4fc3-bc76-10623dec3d37" valueTypeId="eddaf243-67cc-4dfb-940f-0d5179bd7e74"/>
-    <listType typeId="36db19e6-cd65-44e5-a3ec-b8c6b9e05adb" valueTypeId="a824cb10-3609-4019-8ce5-94794b33f888"/>
-    <managerType typeId="7b8d39e5-1ee5-4443-90fa-6c398a50ba06" valueTypeId="2a666b20-d9b5-4b97-9730-68a8d87eda44"/>
-    <recordSetType typeId="e0be9f3f-5bb4-4062-b774-123d4176be8c" valueTypeId="66b4ef85-43da-4084-bf93-0fc03120a564"/>
-    <recordKeyType typeId="71e4d588-8bb5-4f38-8dea-1741ec93c69c" valueTypeId="7022af2f-6c39-4408-8e6c-b2fc68a4a759"/>
-    <recordType typeId="d43522d7-ae7c-4e44-bb7f-de3ea77ea708" valueTypeId="4253336d-8589-4287-83bb-a84185a9a065"/>
-    <recordManagerType typeId="62ebda83-15da-41db-9db7-99f53e86c9de" valueTypeId="a811eadc-2675-403d-86fc-143625d57a91"/>
-  </producedTypes>
-  <name>SharedReportOptions</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="1c913752-e2a0-4660-ba47-94a059bce0ab">
+ <producedTypes>
+  <selectionType typeId="91e36521-6042-4fc3-bc76-10623dec3d37" valueTypeId="eddaf243-67cc-4dfb-940f-0d5179bd7e74"/>
+  <listType typeId="36db19e6-cd65-44e5-a3ec-b8c6b9e05adb" valueTypeId="a824cb10-3609-4019-8ce5-94794b33f888"/>
+  <managerType typeId="7b8d39e5-1ee5-4443-90fa-6c398a50ba06" valueTypeId="2a666b20-d9b5-4b97-9730-68a8d87eda44"/>
+  <recordSetType typeId="e0be9f3f-5bb4-4062-b774-123d4176be8c" valueTypeId="66b4ef85-43da-4084-bf93-0fc03120a564"/>
+  <recordKeyType typeId="71e4d588-8bb5-4f38-8dea-1741ec93c69c" valueTypeId="7022af2f-6c39-4408-8e6c-b2fc68a4a759"/>
+  <recordType typeId="d43522d7-ae7c-4e44-bb7f-de3ea77ea708" valueTypeId="4253336d-8589-4287-83bb-a84185a9a065"/>
+  <recordManagerType typeId="62ebda83-15da-41db-9db7-99f53e86c9de" valueTypeId="a811eadc-2675-403d-86fc-143625d57a91"/>
+ </producedTypes>
+ <name>SharedReportOptions</name>
+ <synonym>
+  <key>ru</key>
+  <value>Параметры общих вариантов отчетов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Shared report options</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Paylaşılan rapor seçenekleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Параметры общего варианта отчета</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Shared report option</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Paylaşılan rapor seçeneği</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Параметры общих вариантов отчетов</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Shared report options</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Paylaşılan rapor seçenekleri</value>
+ </listPresentation>
+ <dimensions uuid="d2a85367-f829-4205-8703-2be39bef8ba2">
+  <name>User</name>
   <synonym>
-    <key>en</key>
-    <value>Shared report options</value>
+   <key>ru</key>
+   <value>Пользователь</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Shared report option</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Shared report options</value>
-  </listPresentation>
-  <dimensions uuid="d2a85367-f829-4205-8703-2be39bef8ba2">
-    <name>User</name>
-    <synonym>
-      <key>en</key>
-      <value>User</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="ca82cfe6-22db-48ab-bda9-5cfe58735697">
-    <name>ReportOption</name>
-    <synonym>
-      <key>en</key>
-      <value>Report option</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ReportOptions</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>User</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="ca82cfe6-22db-48ab-bda9-5cfe58735697">
+  <name>ReportOption</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вариант отчета</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Report option</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Rapor seçeneği</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ReportOptions</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

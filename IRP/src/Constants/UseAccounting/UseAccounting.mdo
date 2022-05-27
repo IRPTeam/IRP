@@ -1,20 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="688021c7-3367-4c30-9538-a71e3fcf5206">
-  <producedTypes>
-    <managerType typeId="2e74e538-2c9c-45cb-a049-b45a83f8e0b2" valueTypeId="09b5cb97-2289-45af-9605-61e7c10614bf"/>
-    <valueManagerType typeId="cd2caad7-76ab-4124-9cde-7e1421e0fbc4" valueTypeId="7f91653e-4408-4772-accd-3ec74a5a56e4"/>
-    <valueKeyType typeId="8967c019-9f94-4c39-9cee-f13b875b5b57" valueTypeId="c0d11c74-23f0-4dd8-8e81-7118f26dc633"/>
-  </producedTypes>
-  <name>UseAccounting</name>
-  <synonym>
-    <key>en</key>
-    <value>Use accounting</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="688021c7-3367-4c30-9538-a71e3fcf5206">
+ <producedTypes>
+  <managerType typeId="2e74e538-2c9c-45cb-a049-b45a83f8e0b2" valueTypeId="09b5cb97-2289-45af-9605-61e7c10614bf"/>
+  <valueManagerType typeId="cd2caad7-76ab-4124-9cde-7e1421e0fbc4" valueTypeId="7f91653e-4408-4772-accd-3ec74a5a56e4"/>
+  <valueKeyType typeId="8967c019-9f94-4c39-9cee-f13b875b5b57" valueTypeId="c0d11c74-23f0-4dd8-8e81-7118f26dc633"/>
+ </producedTypes>
+ <name>UseAccounting</name>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать бухгалтерию</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use accounting</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Muhasebe kullan</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

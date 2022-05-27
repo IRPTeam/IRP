@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f6ac09ba-7f57-458a-b69f-ae45f4f7ef60">
-  <producedTypes>
-    <refType typeId="d62178c1-869e-4834-8262-d70708a28903" valueTypeId="e34f5ef1-bd10-49d5-b0cf-3da66192b8bd"/>
-    <listType typeId="55212c51-745c-431f-a108-23f918b02f81" valueTypeId="e868ff03-3f43-428c-aebe-ebb9098cf734"/>
-    <managerType typeId="42f3ca44-5c0b-4835-b90d-9feea30920db" valueTypeId="8f352ff5-dd38-4df3-bfa6-740168982058"/>
-  </producedTypes>
-  <name>PrintTemplateTypes</name>
+ <producedTypes>
+  <refType typeId="d62178c1-869e-4834-8262-d70708a28903" valueTypeId="e34f5ef1-bd10-49d5-b0cf-3da66192b8bd"/>
+  <listType typeId="55212c51-745c-431f-a108-23f918b02f81" valueTypeId="e868ff03-3f43-428c-aebe-ebb9098cf734"/>
+  <managerType typeId="42f3ca44-5c0b-4835-b90d-9feea30920db" valueTypeId="8f352ff5-dd38-4df3-bfa6-740168982058"/>
+ </producedTypes>
+ <name>PrintTemplateTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Типы шаблонов для печати</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Print template types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Çıktı şablon tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="89ce3a78-64f2-48a9-8d93-a1a54023bfba">
+  <name>Label</name>
   <synonym>
-    <key>en</key>
-    <value>Print template types</value>
+   <key>ru</key>
+   <value>Этикетка</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="89ce3a78-64f2-48a9-8d93-a1a54023bfba">
-    <name>Label</name>
-    <synonym>
-      <key>en</key>
-      <value>Label</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="e795e9e5-9484-4f34-aeb6-84fa9a88a54d">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Label</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Etiket</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="e795e9e5-9484-4f34-aeb6-84fa9a88a54d">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

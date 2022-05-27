@@ -1,77 +1,117 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8df08e44-883f-4808-8519-292f7cb30ffe">
-  <producedTypes>
-    <objectType typeId="fda3e6e5-5cf5-47f8-8e39-8fb8d0424de9" valueTypeId="6635db55-90c9-4267-a20f-8767142e05b6"/>
-    <refType typeId="a9f8899d-89b6-43eb-8d59-e14d73be3c6c" valueTypeId="e3bf43ff-7bb6-4988-9231-35a7de43c703"/>
-    <selectionType typeId="0ab917b7-6dab-41fa-b982-c8201b7f0a49" valueTypeId="62dad86d-e74b-4196-92c2-e05ec59c8449"/>
-    <listType typeId="84bf4462-708f-43ef-9b43-807d67586bd5" valueTypeId="01212534-8b8d-4736-a2c2-7f10b8c5e380"/>
-    <managerType typeId="76e21a25-6da6-479c-b772-f86d501dac79" valueTypeId="17b152e2-5a48-4910-8d34-0ebb055c264d"/>
-  </producedTypes>
-  <name>ReportOptions</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="8df08e44-883f-4808-8519-292f7cb30ffe">
+ <producedTypes>
+  <objectType typeId="fda3e6e5-5cf5-47f8-8e39-8fb8d0424de9" valueTypeId="6635db55-90c9-4267-a20f-8767142e05b6"/>
+  <refType typeId="a9f8899d-89b6-43eb-8d59-e14d73be3c6c" valueTypeId="e3bf43ff-7bb6-4988-9231-35a7de43c703"/>
+  <selectionType typeId="0ab917b7-6dab-41fa-b982-c8201b7f0a49" valueTypeId="62dad86d-e74b-4196-92c2-e05ec59c8449"/>
+  <listType typeId="84bf4462-708f-43ef-9b43-807d67586bd5" valueTypeId="01212534-8b8d-4736-a2c2-7f10b8c5e380"/>
+  <managerType typeId="76e21a25-6da6-479c-b772-f86d501dac79" valueTypeId="17b152e2-5a48-4910-8d34-0ebb055c264d"/>
+ </producedTypes>
+ <name>ReportOptions</name>
+ <synonym>
+  <key>ru</key>
+  <value>Варианты отчета</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report options</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Rapor seçenekleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Вариант отчета</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Report option</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Rapor seçeneği</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>36</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeType>String</codeType>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.ReportOptions.Form.ItemForm</defaultObjectForm>
+ <attributes uuid="6ccd4096-7481-44ed-aff0-4dbf174d94c8">
+  <name>ObjectKey</name>
   <synonym>
-    <key>en</key>
-    <value>Report options</value>
+   <key>ru</key>
+   <value>Ключ объекта</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
-    <key>en</key>
-    <value>Report option</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>36</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeType>String</codeType>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.ReportOptions.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="6ccd4096-7481-44ed-aff0-4dbf174d94c8">
-    <name>ObjectKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Object key</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>1024</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="1852a63e-536c-4218-8bd2-374c73f4e4bf">
-    <name>Option</name>
-    <synonym>
-      <key>en</key>
-      <value>Option</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="e6c58e50-1134-4822-83f4-420a88051843">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Object key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne anahtarı</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>1024</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1852a63e-536c-4218-8bd2-374c73f4e4bf">
+  <name>Option</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вариант</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Option</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçenek</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="e6c58e50-1134-4822-83f4-420a88051843">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

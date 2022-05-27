@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4aab2b80-430a-44df-8fbb-8ec4223a931a">
-  <name>DataMappingForm</name>
-  <synonym>
-    <key>en</key>
-    <value>Data mapping form</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>DataMappingForm</name>
+ <synonym>
+  <key>ru</key>
+  <value>Форма сопоставления данных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Data mapping form</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Veri mapleme formu</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

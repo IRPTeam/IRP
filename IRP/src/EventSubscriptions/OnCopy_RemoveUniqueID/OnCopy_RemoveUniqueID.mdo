@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a326fe12-46b9-4ee1-91ad-d7ffbda626fa">
-  <name>OnCopy_RemoveUniqueID</name>
-  <synonym>
-    <key>en</key>
-    <value>On copy remove unique ID</value>
-  </synonym>
-  <source>
-    <types>DefinedType.UseUniqueID</types>
-  </source>
-  <event>OnCopy</event>
-  <handler>CommonModule.UniqueID.OnCopyRemoveUniqueIDOnCopy</handler>
+ <name>OnCopy_RemoveUniqueID</name>
+ <synonym>
+  <key>ru</key>
+  <value>Очистка уникального ID при копировании</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>On copy remove unique ID</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kopyalamada benzersiz kimliği kaldır</value>
+ </synonym>
+ <source>
+  <types>DefinedType.UseUniqueID</types>
+ </source>
+ <event>OnCopy</event>
+ <handler>CommonModule.UniqueID.OnCopyRemoveUniqueIDOnCopy</handler>
 </mdclass:EventSubscription>

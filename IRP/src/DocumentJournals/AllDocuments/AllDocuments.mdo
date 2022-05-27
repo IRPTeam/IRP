@@ -1,115 +1,139 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DocumentJournal xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="241b7692-bd98-4193-ad7d-03e037af6bd3">
-  <producedTypes>
-    <selectionType typeId="9eb77aa4-126d-4817-8231-5d5643d13055" valueTypeId="2ef41452-9d60-45a9-984a-33747d6f8f9a"/>
-    <listType typeId="092bfc69-3df0-4994-ac25-9b4e6a19ffcf" valueTypeId="643a84de-5775-4e61-99bc-e3148c811821"/>
-    <managerType typeId="99ff6f68-269b-497f-81ef-079326cb670d" valueTypeId="892332e2-9a10-42f3-a5cc-2806dd977a20"/>
-  </producedTypes>
-  <name>AllDocuments</name>
+ <producedTypes>
+  <selectionType typeId="9eb77aa4-126d-4817-8231-5d5643d13055" valueTypeId="2ef41452-9d60-45a9-984a-33747d6f8f9a"/>
+  <listType typeId="092bfc69-3df0-4994-ac25-9b4e6a19ffcf" valueTypeId="643a84de-5775-4e61-99bc-e3148c811821"/>
+  <managerType typeId="99ff6f68-269b-497f-81ef-079326cb670d" valueTypeId="892332e2-9a10-42f3-a5cc-2806dd977a20"/>
+ </producedTypes>
+ <name>AllDocuments</name>
+ <synonym>
+  <key>ru</key>
+  <value>Все документы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>All documents</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tüm evraklar</value>
+ </synonym>
+ <defaultForm>DocumentJournal.AllDocuments.Form.ListForm</defaultForm>
+ <useStandardCommands>true</useStandardCommands>
+ <registeredDocuments>Document.BankPayment</registeredDocuments>
+ <registeredDocuments>Document.BankReceipt</registeredDocuments>
+ <registeredDocuments>Document.Bundling</registeredDocuments>
+ <registeredDocuments>Document.CashExpense</registeredDocuments>
+ <registeredDocuments>Document.CashPayment</registeredDocuments>
+ <registeredDocuments>Document.CashReceipt</registeredDocuments>
+ <registeredDocuments>Document.CashRevenue</registeredDocuments>
+ <registeredDocuments>Document.CashTransferOrder</registeredDocuments>
+ <registeredDocuments>Document.GoodsReceipt</registeredDocuments>
+ <registeredDocuments>Document.IncomingPaymentOrder</registeredDocuments>
+ <registeredDocuments>Document.InternalSupplyRequest</registeredDocuments>
+ <registeredDocuments>Document.InventoryTransfer</registeredDocuments>
+ <registeredDocuments>Document.InventoryTransferOrder</registeredDocuments>
+ <registeredDocuments>Document.Labeling</registeredDocuments>
+ <registeredDocuments>Document.OpeningEntry</registeredDocuments>
+ <registeredDocuments>Document.OutgoingPaymentOrder</registeredDocuments>
+ <registeredDocuments>Document.PhysicalCountByLocation</registeredDocuments>
+ <registeredDocuments>Document.PhysicalInventory</registeredDocuments>
+ <registeredDocuments>Document.PriceList</registeredDocuments>
+ <registeredDocuments>Document.PurchaseInvoice</registeredDocuments>
+ <registeredDocuments>Document.PurchaseOrder</registeredDocuments>
+ <registeredDocuments>Document.PurchaseReturn</registeredDocuments>
+ <registeredDocuments>Document.PurchaseReturnOrder</registeredDocuments>
+ <registeredDocuments>Document.ReconciliationStatement</registeredDocuments>
+ <registeredDocuments>Document.SalesInvoice</registeredDocuments>
+ <registeredDocuments>Document.SalesOrder</registeredDocuments>
+ <registeredDocuments>Document.SalesReturn</registeredDocuments>
+ <registeredDocuments>Document.SalesReturnOrder</registeredDocuments>
+ <registeredDocuments>Document.StockAdjustmentAsSurplus</registeredDocuments>
+ <registeredDocuments>Document.ShipmentConfirmation</registeredDocuments>
+ <registeredDocuments>Document.StockAdjustmentAsWriteOff</registeredDocuments>
+ <registeredDocuments>Document.Unbundling</registeredDocuments>
+ <registeredDocuments>Document.RetailSalesReceipt</registeredDocuments>
+ <registeredDocuments>Document.RetailReturnReceipt</registeredDocuments>
+ <registeredDocuments>Document.CreditNote</registeredDocuments>
+ <registeredDocuments>Document.DebitNote</registeredDocuments>
+ <registeredDocuments>Document.CashStatement</registeredDocuments>
+ <registeredDocuments>Document.ItemStockAdjustment</registeredDocuments>
+ <registeredDocuments>Document.ManualRegisterEntry</registeredDocuments>
+ <registeredDocuments>Document.SalesOrderClosing</registeredDocuments>
+ <registeredDocuments>Document.PlannedReceiptReservation</registeredDocuments>
+ <registeredDocuments>Document.PurchaseOrderClosing</registeredDocuments>
+ <registeredDocuments>Document.VendorsAdvancesClosing</registeredDocuments>
+ <registeredDocuments>Document.CustomersAdvancesClosing</registeredDocuments>
+ <columns uuid="ef19537f-48b5-437d-a57d-75551c5c6d62">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>All documents</value>
+   <key>ru</key>
+   <value>Организация</value>
   </synonym>
-  <defaultForm>DocumentJournal.AllDocuments.Form.ListForm</defaultForm>
-  <useStandardCommands>true</useStandardCommands>
-  <registeredDocuments>Document.BankPayment</registeredDocuments>
-  <registeredDocuments>Document.BankReceipt</registeredDocuments>
-  <registeredDocuments>Document.Bundling</registeredDocuments>
-  <registeredDocuments>Document.CashExpense</registeredDocuments>
-  <registeredDocuments>Document.CashPayment</registeredDocuments>
-  <registeredDocuments>Document.CashReceipt</registeredDocuments>
-  <registeredDocuments>Document.CashRevenue</registeredDocuments>
-  <registeredDocuments>Document.CashTransferOrder</registeredDocuments>
-  <registeredDocuments>Document.GoodsReceipt</registeredDocuments>
-  <registeredDocuments>Document.IncomingPaymentOrder</registeredDocuments>
-  <registeredDocuments>Document.InternalSupplyRequest</registeredDocuments>
-  <registeredDocuments>Document.InventoryTransfer</registeredDocuments>
-  <registeredDocuments>Document.InventoryTransferOrder</registeredDocuments>
-  <registeredDocuments>Document.Labeling</registeredDocuments>
-  <registeredDocuments>Document.OpeningEntry</registeredDocuments>
-  <registeredDocuments>Document.OutgoingPaymentOrder</registeredDocuments>
-  <registeredDocuments>Document.PhysicalCountByLocation</registeredDocuments>
-  <registeredDocuments>Document.PhysicalInventory</registeredDocuments>
-  <registeredDocuments>Document.PriceList</registeredDocuments>
-  <registeredDocuments>Document.PurchaseInvoice</registeredDocuments>
-  <registeredDocuments>Document.PurchaseOrder</registeredDocuments>
-  <registeredDocuments>Document.PurchaseReturn</registeredDocuments>
-  <registeredDocuments>Document.PurchaseReturnOrder</registeredDocuments>
-  <registeredDocuments>Document.ReconciliationStatement</registeredDocuments>
-  <registeredDocuments>Document.SalesInvoice</registeredDocuments>
-  <registeredDocuments>Document.SalesOrder</registeredDocuments>
-  <registeredDocuments>Document.SalesReturn</registeredDocuments>
-  <registeredDocuments>Document.SalesReturnOrder</registeredDocuments>
-  <registeredDocuments>Document.StockAdjustmentAsSurplus</registeredDocuments>
-  <registeredDocuments>Document.ShipmentConfirmation</registeredDocuments>
-  <registeredDocuments>Document.StockAdjustmentAsWriteOff</registeredDocuments>
-  <registeredDocuments>Document.Unbundling</registeredDocuments>
-  <registeredDocuments>Document.RetailSalesReceipt</registeredDocuments>
-  <registeredDocuments>Document.RetailReturnReceipt</registeredDocuments>
-  <registeredDocuments>Document.CreditNote</registeredDocuments>
-  <registeredDocuments>Document.DebitNote</registeredDocuments>
-  <registeredDocuments>Document.CashStatement</registeredDocuments>
-  <registeredDocuments>Document.ItemStockAdjustment</registeredDocuments>
-  <registeredDocuments>Document.ManualRegisterEntry</registeredDocuments>
-  <registeredDocuments>Document.SalesOrderClosing</registeredDocuments>
-  <registeredDocuments>Document.PlannedReceiptReservation</registeredDocuments>
-  <registeredDocuments>Document.PurchaseOrderClosing</registeredDocuments>
-  <registeredDocuments>Document.VendorsAdvancesClosing</registeredDocuments>
-  <registeredDocuments>Document.CustomersAdvancesClosing</registeredDocuments>
-  <columns uuid="ef19537f-48b5-437d-a57d-75551c5c6d62">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <references>Document.BankPayment.Attribute.Company</references>
-    <references>Document.BankReceipt.Attribute.Company</references>
-    <references>Document.CashExpense.Attribute.Company</references>
-    <references>Document.Bundling.Attribute.Company</references>
-    <references>Document.CashPayment.Attribute.Company</references>
-    <references>Document.CashReceipt.Attribute.Company</references>
-    <references>Document.CashRevenue.Attribute.Company</references>
-    <references>Document.CashStatement.Attribute.Company</references>
-    <references>Document.CashTransferOrder.Attribute.Company</references>
-    <references>Document.CreditNote.Attribute.Company</references>
-    <references>Document.DebitNote.Attribute.Company</references>
-    <references>Document.GoodsReceipt.Attribute.Company</references>
-    <references>Document.IncomingPaymentOrder.Attribute.Company</references>
-    <references>Document.InternalSupplyRequest.Attribute.Company</references>
-    <references>Document.InventoryTransfer.Attribute.Company</references>
-    <references>Document.InventoryTransferOrder.Attribute.Company</references>
-    <references>Document.ItemStockAdjustment.Attribute.Company</references>
-    <references>Document.ManualRegisterEntry.Attribute.Company</references>
-    <references>Document.OutgoingPaymentOrder.Attribute.Company</references>
-    <references>Document.OpeningEntry.Attribute.Company</references>
-    <references>Document.PlannedReceiptReservation.Attribute.Company</references>
-    <references>Document.PurchaseInvoice.Attribute.Company</references>
-    <references>Document.PurchaseOrder.Attribute.Company</references>
-    <references>Document.PurchaseOrderClosing.Attribute.Company</references>
-    <references>Document.PurchaseReturn.Attribute.Company</references>
-    <references>Document.PurchaseReturnOrder.Attribute.Company</references>
-    <references>Document.ReconciliationStatement.Attribute.Company</references>
-    <references>Document.RetailReturnReceipt.Attribute.Company</references>
-    <references>Document.RetailSalesReceipt.Attribute.Company</references>
-    <references>Document.SalesInvoice.Attribute.Company</references>
-    <references>Document.SalesOrder.Attribute.Company</references>
-    <references>Document.SalesOrderClosing.Attribute.Company</references>
-    <references>Document.SalesReturn.Attribute.Company</references>
-    <references>Document.SalesReturnOrder.Attribute.Company</references>
-    <references>Document.ShipmentConfirmation.Attribute.Company</references>
-    <references>Document.StockAdjustmentAsSurplus.Attribute.Company</references>
-    <references>Document.StockAdjustmentAsWriteOff.Attribute.Company</references>
-    <references>Document.Unbundling.Attribute.Company</references>
-    <references>Document.VendorsAdvancesClosing.Attribute.Company</references>
-    <references>Document.CustomersAdvancesClosing.Attribute.Company</references>
-  </columns>
-  <forms uuid="23009b7b-ed27-4f36-bfa4-c1fe705a2940">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <references>Document.BankPayment.Attribute.Company</references>
+  <references>Document.BankReceipt.Attribute.Company</references>
+  <references>Document.CashExpense.Attribute.Company</references>
+  <references>Document.Bundling.Attribute.Company</references>
+  <references>Document.CashPayment.Attribute.Company</references>
+  <references>Document.CashReceipt.Attribute.Company</references>
+  <references>Document.CashRevenue.Attribute.Company</references>
+  <references>Document.CashStatement.Attribute.Company</references>
+  <references>Document.CashTransferOrder.Attribute.Company</references>
+  <references>Document.CreditNote.Attribute.Company</references>
+  <references>Document.DebitNote.Attribute.Company</references>
+  <references>Document.GoodsReceipt.Attribute.Company</references>
+  <references>Document.IncomingPaymentOrder.Attribute.Company</references>
+  <references>Document.InternalSupplyRequest.Attribute.Company</references>
+  <references>Document.InventoryTransfer.Attribute.Company</references>
+  <references>Document.InventoryTransferOrder.Attribute.Company</references>
+  <references>Document.ItemStockAdjustment.Attribute.Company</references>
+  <references>Document.ManualRegisterEntry.Attribute.Company</references>
+  <references>Document.OutgoingPaymentOrder.Attribute.Company</references>
+  <references>Document.OpeningEntry.Attribute.Company</references>
+  <references>Document.PlannedReceiptReservation.Attribute.Company</references>
+  <references>Document.PurchaseInvoice.Attribute.Company</references>
+  <references>Document.PurchaseOrder.Attribute.Company</references>
+  <references>Document.PurchaseOrderClosing.Attribute.Company</references>
+  <references>Document.PurchaseReturn.Attribute.Company</references>
+  <references>Document.PurchaseReturnOrder.Attribute.Company</references>
+  <references>Document.ReconciliationStatement.Attribute.Company</references>
+  <references>Document.RetailReturnReceipt.Attribute.Company</references>
+  <references>Document.RetailSalesReceipt.Attribute.Company</references>
+  <references>Document.SalesInvoice.Attribute.Company</references>
+  <references>Document.SalesOrder.Attribute.Company</references>
+  <references>Document.SalesOrderClosing.Attribute.Company</references>
+  <references>Document.SalesReturn.Attribute.Company</references>
+  <references>Document.SalesReturnOrder.Attribute.Company</references>
+  <references>Document.ShipmentConfirmation.Attribute.Company</references>
+  <references>Document.StockAdjustmentAsSurplus.Attribute.Company</references>
+  <references>Document.StockAdjustmentAsWriteOff.Attribute.Company</references>
+  <references>Document.Unbundling.Attribute.Company</references>
+  <references>Document.VendorsAdvancesClosing.Attribute.Company</references>
+  <references>Document.CustomersAdvancesClosing.Attribute.Company</references>
+ </columns>
+ <forms uuid="23009b7b-ed27-4f36-bfa4-c1fe705a2940">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DocumentJournal>

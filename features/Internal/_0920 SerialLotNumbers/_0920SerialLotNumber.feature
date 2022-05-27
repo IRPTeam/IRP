@@ -82,6 +82,12 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create document InventoryTransfer objects (use serial lot number)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Add test extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "AdditionalFunctionality" |
+			When add Additional Functionality extension
 	* Workstation
 		When create Workstation
 
@@ -3247,6 +3253,59 @@ Scenario: _092055 check filling in serial lot number in the GR from IT
 			| 'Trousers' | '36/Yellow' | '0512; 0514'         | '3,000'    | 'pcs'  | 'Store 03' |
 		And I close all client application windows
 
+Scenario: _092060 check serial lot number settings
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+	* Select item type
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bags'     |
+		And I select current line in "List" table
+	* Add reg exp
+		And I move to "Serial lot number settings" tab
+		And I set checkbox "Use serial lot number"	
+		And I select "By item key" exact value from "Stock balance detail" drop-down list
+		And in the table "RegExpSerialLotNumbersRules" I click the button named "RegExpSerialLotNumbersRulesAdd"
+		And I input "\d\d\d\w\/\d" text in "Reg exp" field of "RegExpSerialLotNumbersRules" table
+		And I activate "Example" field in "RegExpSerialLotNumbersRules" table
+		And I input "999X/9" text in "Example" field of "RegExpSerialLotNumbersRules" table
+		And I finish line editing in "RegExpSerialLotNumbersRules" table
+		And I click "Save and close" button
+		And I wait "Clothes (Item type) *" window closing in 20 seconds
+	* Check
+		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
+		* Save a previously created object
+			And I go to line in "List" table
+				| 'Owner' | 'Serial number' |
+				| 'Bags'  | '12345456'      |
+			And I select current line in "List" table
+			And I click "Save and close" button
+			And I wait "* (Item serial/lot number)" window closing in 20 seconds
+		* Create new object
+			And I click "Create" button
+			And I click Choice button of the field named "Owner"
+			Then "Select data type" window is opened
+			And I go to line in "" table
+				| ''         |
+				| 'Item key' |
+			And I select current line in "" table
+			And I go to line in "List" table
+				| 'Item' | 'Item key' |
+				| 'Bag'  | 'ODS'      |
+			And I select current line in "List" table
+			And I input "7898889" text in "Serial number" field
+			And I click "Save" button
+			Then I wait that in user messages the "Serial lot number name [ 7898889 ] is not match template: 999X/9" substring will appear in "30" seconds
+			And I input "156C\8" text in "Serial number" field			
+			And I click "Save" button
+			Then I wait that in user messages the "Serial lot number name [ 156C\8 ] is not match template: 999X/9" substring will appear in "30" seconds
+			And I input "156C/8" text in "Serial number" field			
+			And I click "Save" button	
+			Then user message window does not contain messages	
+			And I click "Save and close" button	
+		And I close all client application windows
+		
+	
 
 Scenario: _092090 uncheck checkbox Use serial lot number in the Item type
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"

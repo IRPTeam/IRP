@@ -1914,7 +1914,7 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 	Then the form attribute named "Decoration1" became equal to "Decoration1"
 	Then the form attribute named "DisableRule" became equal to "No"
 	And "RuleList" table contains lines
-		| '#' | 'Type'                              | 'Attribute'         | 'Comparison type' | 'Value'   | 'Disable rule' | 'Set value as code' |
+		| '#' | 'Type'                              | 'Attribute'         | 'ComparisonType' | 'Value'   | 'DisableRule' | 'SetValueAsCode' |
 		| '1' | 'InformationRegister.CurrencyRates' | 'Dimensions.Source' | '='               | 'Bank UA' | 'No'           | 'No'                |
 		| '2' | 'InformationRegister.Taxes'         | 'Dimensions.Tax'    | 'IN'              | 'VAT'     | 'Yes'          | 'No'                |
 	And I close TestClient session

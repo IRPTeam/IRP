@@ -70,11 +70,11 @@ Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	For Each RowItemList In Object.ItemList Do
 		ArrayOfSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", RowItemList.Key));
-		RowItemList.SerialLotNumbersPresentation.Clear();
-		RowItemList.SerialLotNumberIsFilling = False;
+		RowItemList.SerialLotNumbersPresentation.Clear();		
+		SerialCount = 0;
 		For Each RowSerialLotNumber In ArrayOfSerialLotNumbers Do
 			RowItemList.SerialLotNumbersPresentation.Add(RowSerialLotNumber.SerialLotNumber);
-			RowItemList.SerialLotNumberIsFilling = True;
+			SerialCount = SerialCount + RowSerialLotNumber.Quantity;
 		EndDo;
 		If ServerData = Undefined Then
 			RowItemList.UseSerialLotNumber = 
@@ -82,6 +82,10 @@ Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export
 		Else
 			RowItemList.UseSerialLotNumber = 
 				ServerData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey) <> Undefined;
+		EndIf;
+		
+		If RowItemList.UseSerialLotNumber Then
+			RowItemList.SerialLotNumberIsFilling = RowItemList.Quantity = SerialCount;
 		EndIf;
 	EndDo;
 EndProcedure

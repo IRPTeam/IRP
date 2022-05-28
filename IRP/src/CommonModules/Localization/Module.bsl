@@ -128,6 +128,8 @@
 //  * Error_106 - String - Can not lock data
 //  * Error_107 - String - You try to call deleted service %1.
 //  * Error_108 - String - Field is filled, but it has to be empty.
+//  * Error_109 - String - 
+//  * Error_110 - String - 
 //  * Exc_001 - String - Unsupported object type.
 //  * Exc_002 - String - No conditions
 //  * Exc_003 - String - Method is not implemented: %1.

@@ -1,3 +1,5 @@
+// @strict-types
+
 Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -16,6 +18,13 @@ Procedure BeforeDelete(Cancel)
 	EndIf;
 EndProcedure
 
+// Filling.
+// 
+// Parameters:
+//  FillingData - Structure:
+//  * SerialLotNumberOwner - Undefined, CatalogRef.ItemKeys, CatalogRef.Items, CatalogRef.ItemTypes - 
+//  FillingText - String, Undefined - Filling text
+//  StandardProcessing - Boolean - Standard processing
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If FillingData = Undefined Then
 		Return;

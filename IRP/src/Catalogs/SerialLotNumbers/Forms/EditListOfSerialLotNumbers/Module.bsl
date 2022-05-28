@@ -105,6 +105,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocumentsClient.SearchByBarcode(Barcode, New Structure(), ThisObject, ThisObject);
 EndProcedure
 
+// Search by barcode end.
+// 
+// Parameters:
+//  Result Result
+//  AdditionalParameters Additional parameters
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	LastBarcode = "";
@@ -122,31 +127,36 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		ElsIf Not ScannedInfo.ItemType.IsEmpty() And Not ScannedInfo.ItemType = ItemType Then
 			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.ItemType));
 		Else
-			Row = SerialLotNumbers.Add();
-			Row.SerialLotNumber = ScannedInfo.SerialLotNumber;
-			Row.Quantity = 1;
-			UpdateFooter();
+			AddNewSerialLotNumberRow(ScannedInfo.SerialLotNumber);
 		EndIf;
 	Else
-		LastBarcode = Result.Barcodes[0];
-		CalculateStatus(StrTemplate(R().InfoMessage_015, LastBarcode));
-		Items.CreateSerialLotNumber.Visible = True;
+		If AutoCreateNewSerialLotNumbers Then
+			SerialLotNumber = SerialLotNumbersServer.GetNewSerialLotNumber(Result.Barcodes[0], ItemKey);
+			AddNewSerialLotNumberRow(SerialLotNumber);
+		Else
+			LastBarcode = Result.Barcodes[0];
+			CalculateStatus(StrTemplate(R().InfoMessage_015, LastBarcode));
+			Items.CreateSerialLotNumber.Visible = True;
+		EndIf;
 	EndIf;
 EndProcedure
 
 &AtClient
+Procedure AddNewSerialLotNumberRow(SerialLotNumber)
+	Var Row;
+	Row = SerialLotNumbers.Add();
+	Row.SerialLotNumber = SerialLotNumber;
+	Row.Quantity = 1;
+	UpdateFooter();
+EndProcedure
+
+&AtClient
 Procedure CreateSerialLotNumber(Command)
-	Params = New Structure();
-	Params.Insert("ItemType", ItemType);
-	Params.Insert("Item", Item);
-	Params.Insert("ItemKey", ItemKey);
-	Params.Insert("Barcode", LastBarcode);
-	CloseNotifyDescription = New NotifyDescription("AfterCreateSerialLotNumber", ThisObject, Params);
-	OpenForm("Catalog.SerialLotNumbers.ObjectForm", Params, , , , , CloseNotifyDescription,
-		FormWindowOpeningMode.LockOwnerWindow);
+	SerialLotNumber = SerialLotNumbersServer.GetNewSerialLotNumber(LastBarcode, ItemKey);
 	LastBarcode = "";
 	SerialLotNumberStatus = "";
 	Items.CreateSerialLotNumber.Visible = False;
+	AddNewSerialLotNumberRow(SerialLotNumber);
 EndProcedure
 
 &AtClient

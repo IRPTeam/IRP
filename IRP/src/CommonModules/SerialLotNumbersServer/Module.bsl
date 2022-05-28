@@ -67,14 +67,15 @@ EndFunction
 // Returns:
 //  
 Function CreateNewSerialLotNumber(Options) Export
+	
 	NewSerial = Catalogs.SerialLotNumbers.CreateItem();
 	NewSerial.Description = Options.Description;
 	NewSerial.SerialLotNumberOwner = Options.Owner;
+	NewSerial.StockBalanceDetail = Catalogs.SerialLotNumbers.GetStockBalanceDetailByOwner(Options.Owner);
 	NewSerial.Write();
 	
 	Return NewSerial.Ref;
 EndFunction
-
 
 // Get seriallot numer options.
 // 
@@ -169,4 +170,27 @@ Function isAnyMovementBySerial(SerialLotNumberRef) Export
 	
 	Return Not Query.Execute().IsEmpty();
 	
+EndFunction
+
+// Get new serial lot number.
+// 
+// Parameters:
+//  Barcode - String - Barcode
+//  ItemKey - CatalogRef.ItemKeys - Item key
+// 
+// Returns:
+//  CatalogRef.SerialLotNumbers
+Function GetNewSerialLotNumber(Barcode, ItemKey) Export
+	Options = SerialLotNumbersServer.GetSeriallotNumerOptions();
+	Options.Barcode = Barcode;
+	Options.Owner = ItemKey;
+	Options.Description = Barcode;
+	SerialLotNumber = SerialLotNumbersServer.CreateNewSerialLotNumber(Options);
+	
+	Option = New Structure();
+	Option.Insert("ItemKey", ItemKey);
+	Option.Insert("SerialLotNumber", SerialLotNumber);
+	BarcodeServer.UpdateBarcode(Barcode, Option);
+	
+	Return SerialLotNumber;
 EndFunction

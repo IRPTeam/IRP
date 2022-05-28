@@ -37,6 +37,24 @@ Procedure OwnerSelectOnChange(Item)
 	OwnerSelectChange();
 EndProcedure
 
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	Items.CreateBarcodeWithSerialLotNumber.Visible = False;
+EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	Items.CreateBarcodeWithSerialLotNumber.Visible = False;
+	If CreateBarcodeWithSerialLotNumber And Not Parameters.ItemKey.IsEmpty() And OwnerSelect = "ItemKey" Then
+		Option = New Structure();
+		Option.Insert("ItemKey", ItemKey);
+		Option.Insert("SerialLotNumber", Object.Ref);
+		BarcodeServer.UpdateBarcode(TrimAll(Object.Description), Option);
+	EndIf;
+	CreateBarcodeWithSerialLotNumber = False;
+EndProcedure
+
+
 #EndRegion
 
 #Region AddAttributes
@@ -60,8 +78,14 @@ Procedure OwnerSelectChange()
 	Items.Owner.Visible = OwnerSelect = "Manual";
 	If Not OwnerSelect = "Manual" Then
 		Object.SerialLotNumberOwner = ThisObject[OwnerSelect];
+		Object.StockBalanceDetail = GetStockBalanceDetail();
 	EndIf;
 EndProcedure
+
+&AtServer
+Function GetStockBalanceDetail()
+	Return Catalogs.SerialLotNumbers.GetStockBalanceDetailByOwner(Object.SerialLotNumberOwner);
+EndFunction
 
 &AtServer
 Procedure FillParamsOnCreate()
@@ -86,9 +110,19 @@ Procedure FillParamsOnCreate()
 		Barcode = Parameters.Barcode;
 		Object.Description = Barcode;
 	EndIf;
+	If Not IsBlankString(Parameters.Description) Then
+		Object.Description = Parameters.Description;
+	EndIf;
+	
 	// delete manual, if have other types
 	If Items.OwnerSelect.ChoiceList.Count() > 1 Then
 		Items.OwnerSelect.ChoiceList.Delete(0);
 	EndIf;
 EndProcedure
+
+&AtClient
+Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
+	Close(Object.Ref);
+EndProcedure
+
 #EndRegion

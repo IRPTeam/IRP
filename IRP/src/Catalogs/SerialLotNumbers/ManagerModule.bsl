@@ -49,6 +49,13 @@ Function GetChoiceDataTable(Parameters) Export
 	Return Query.Execute().Unload();
 EndFunction
 
+// Get stock balance detail by owner.
+// 
+// Parameters:
+//  Owner - CatalogRef.ItemKeys, CatalogRef.Items, CatalogRef.ItemTypes - Owner
+// 
+// Returns:
+//  Boolean - Get stock balance detail by owner
 Function GetStockBalanceDetailByOwner(Owner) Export
 	StockBalanceDetail = False;
 	If Not ValueIsFilled(Owner) Then
@@ -62,6 +69,6 @@ Function GetStockBalanceDetailByOwner(Owner) Export
 	ElsIf TypeOf(Owner) = Type("CatalogRef.ItemTypes") Then
 		StockBalanceDetail = Owner.StockBalanceDetail;
 	EndIf;
-	Return StockBalanceDetail;
+	Return StockBalanceDetail = Enums.StockBalanceDetail.BySerialLotNumber;
 EndFunction
 

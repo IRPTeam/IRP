@@ -128,6 +128,8 @@
 //  * Error_106 - String - Can not lock data
 //  * Error_107 - String - You try to call deleted service %1.
 //  * Error_108 - String - Field is filled, but it has to be empty.
+//  * Error_109 - String - 
+//  * Error_110 - String - 
 //  * Exc_001 - String - Unsupported object type.
 //  * Exc_002 - String - No conditions
 //  * Exc_003 - String - Method is not implemented: %1.
@@ -681,6 +683,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_107", NStr("en = 'You try to call deleted service %1.'", Lang));
 	Strings.Insert("Error_108", NStr("en = 'Field is filled, but it has to be empty.'", Lang));
 	Strings.Insert("Error_109", NStr("en = 'Serial lot number name [ %1 ] is not match template: %2'", Lang) + Chars.LF);
+	Strings.Insert("Error_110", NStr("en = 'Current serial lot number already has movements, it can not disable stock detail option'", Lang) + Chars.LF);
 #EndRegion
 
 #Region InfoMessages

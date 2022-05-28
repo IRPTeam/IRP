@@ -67,14 +67,15 @@ EndFunction
 // Returns:
 //  
 Function CreateNewSerialLotNumber(Options) Export
+	
 	NewSerial = Catalogs.SerialLotNumbers.CreateItem();
 	NewSerial.Description = Options.Description;
 	NewSerial.SerialLotNumberOwner = Options.Owner;
+	NewSerial.StockBalanceDetail = Catalogs.SerialLotNumbers.GetStockBalanceDetailByOwner(Options.Owner);
 	NewSerial.Write();
 	
 	Return NewSerial.Ref;
 EndFunction
-
 
 // Get seriallot numer options.
 // 
@@ -152,4 +153,44 @@ Function GetRegExpSettings() Export
 	Str.Insert("isMatch", True);
 	
 	Return Str;
+EndFunction
+
+Function isAnyMovementBySerial(SerialLotNumberRef) Export
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT TOP 1
+		|	R4010B_ActualStocks.SerialLotNumber
+		|FROM
+		|	AccumulationRegister.R4010B_ActualStocks AS R4010B_ActualStocks
+		|WHERE
+		|	R4010B_ActualStocks.SerialLotNumber = &SerialLotNumber";
+	
+	Query.SetParameter("SerialLotNumber", SerialLotNumberRef);
+	
+	Return Not Query.Execute().IsEmpty();
+	
+EndFunction
+
+// Get new serial lot number.
+// 
+// Parameters:
+//  Barcode - String - Barcode
+//  ItemKey - CatalogRef.ItemKeys - Item key
+// 
+// Returns:
+//  CatalogRef.SerialLotNumbers
+Function GetNewSerialLotNumber(Barcode, ItemKey) Export
+	Options = SerialLotNumbersServer.GetSeriallotNumerOptions();
+	Options.Barcode = Barcode;
+	Options.Owner = ItemKey;
+	Options.Description = Barcode;
+	SerialLotNumber = SerialLotNumbersServer.CreateNewSerialLotNumber(Options);
+	
+	Option = New Structure();
+	Option.Insert("ItemKey", ItemKey);
+	Option.Insert("SerialLotNumber", SerialLotNumber);
+	BarcodeServer.UpdateBarcode(Barcode, Option);
+	
+	Return SerialLotNumber;
 EndFunction

@@ -25,6 +25,20 @@ Procedure SerialLotNumbersOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure SerialLotNumbersSerialLotNumberCreating(Item, StandardProcessing)
+	
+	StandardProcessing = False;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", ThisObject.ItemType);
+	FormParameters.Insert("Item", ThisObject.Item);
+	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
+	FormParameters.Insert("Description", Item.EditText);
+	
+	OpenForm("Catalog.SerialLotNumbers.ObjectForm", FormParameters, ThisObject, , , , New NotifyDescription("AfterCreateNewSerial", ThisObject));
+EndProcedure
+
+&AtClient
 Procedure SerialLotNumbersSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
 	
 	FormParameters = New Structure();
@@ -172,3 +186,13 @@ Procedure CalculateStatus(SetStatus = Undefined)
 	EndIf;
 
 EndProcedure
+
+Function AfterCreateNewSerial(Result, AddInfo) Export
+	
+	If ValueIsFilled(Result) Then
+		Row = SerialLotNumbers.FindByID(Items.SerialLotNumbers.CurrentRow);
+		Row.SerialLotNumber = Result;
+	EndIf;
+	ThisObject.CurrentItem = Items.SerialLotNumbersQuantity;
+	
+EndFunction

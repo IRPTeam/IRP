@@ -153,3 +153,20 @@ Function GetRegExpSettings() Export
 	
 	Return Str;
 EndFunction
+
+Function isAnyMovementBySerial(SerialLotNumberRef) Export
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT TOP 1
+		|	R4010B_ActualStocks.SerialLotNumber
+		|FROM
+		|	AccumulationRegister.R4010B_ActualStocks AS R4010B_ActualStocks
+		|WHERE
+		|	R4010B_ActualStocks.SerialLotNumber = &SerialLotNumber";
+	
+	Query.SetParameter("SerialLotNumber", SerialLotNumberRef);
+	
+	Return Not Query.Execute().IsEmpty();
+	
+EndFunction

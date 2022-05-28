@@ -36,4 +36,12 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			CommonFunctionsClientServer.ShowUsersMessage(TextError, "Description");
 		EndIf;
 	EndIf;
+	
+	If Not IsNew() And Ref.StockBalanceDetail And Not ThisObject.StockBalanceDetail Then
+		If SerialLotNumbersServer.isAnyMovementBySerial(Ref) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_110, "StockBalanceDetail");
+		EndIf;
+	EndIf;
+	
 EndProcedure

@@ -71,7 +71,8 @@ Function CreateNewSerialLotNumber(Options) Export
 	NewSerial = Catalogs.SerialLotNumbers.CreateItem();
 	NewSerial.Description = Options.Description;
 	NewSerial.SerialLotNumberOwner = Options.Owner;
-	NewSerial.StockBalanceDetail = Catalogs.SerialLotNumbers.GetStockBalanceDetailByOwner(Options.Owner);
+	NewSerial.StockBalanceDetail = GetStockBalanceDetailByOwner(Options.Owner);
+	NewSerial.EachSerialLotNumberIsUnique = GetItemTypeByOwner(Options.Owner).EachSerialLotNumberIsUnique;
 	NewSerial.Write();
 	
 	Return NewSerial.Ref;
@@ -185,7 +186,7 @@ Function GetNewSerialLotNumber(Barcode, ItemKey) Export
 	Options.Barcode = Barcode;
 	Options.Owner = ItemKey;
 	Options.Description = Barcode;
-	SerialLotNumber = SerialLotNumbersServer.CreateNewSerialLotNumber(Options);
+	SerialLotNumber = CreateNewSerialLotNumber(Options);
 	
 	Option = New Structure();
 	Option.Insert("ItemKey", ItemKey);
@@ -193,4 +194,49 @@ Function GetNewSerialLotNumber(Barcode, ItemKey) Export
 	BarcodeServer.UpdateBarcode(Barcode, Option);
 	
 	Return SerialLotNumber;
+EndFunction
+
+// Get stock balance detail by owner.
+// 
+// Parameters:
+//  Owner - See Catalog.SerialLotNumbers.SerialLotNumberOwner
+// 
+// Returns:
+//  Boolean - Get stock balance detail by owner
+Function GetStockBalanceDetailByOwner(Owner) Export
+	ItemType = GetItemTypeByOwner(Owner);
+	Return ItemType.StockBalanceDetail = Enums.StockBalanceDetail.BySerialLotNumber;
+EndFunction
+
+// Is each serial lot number is unique by owner.
+// 
+// Parameters:
+//  Owner - See Catalog.SerialLotNumbers.SerialLotNumberOwner
+// 
+// Returns:
+//  Boolean - Is each serial lot number is unique by owner
+Function isEachSerialLotNumberIsUniqueByOwner(Owner) Export
+	ItemType = GetItemTypeByOwner(Owner);
+	Return ItemType.EachSerialLotNumberIsUnique;
+EndFunction
+
+// Get item type by owner.
+// 
+// Parameters:
+//  Owner - See Catalog.SerialLotNumbers.SerialLotNumberOwner
+// 
+// Returns:
+//  CatalogRef.ItemTypes - Get item type by owner
+Function GetItemTypeByOwner(Owner) Export
+	ItemType = Catalogs.ItemTypes.EmptyRef(); 
+	If Not ValueIsFilled(Owner) Then
+		
+	ElsIf TypeOf(Owner) = Type("CatalogRef.ItemKeys") Then
+		ItemType = Owner.Item.ItemType;
+	ElsIf TypeOf(Owner) = Type("CatalogRef.Items") Then
+		ItemType = Owner.ItemType;
+	ElsIf TypeOf(Owner) = Type("CatalogRef.ItemTypes") Then
+		ItemType = Owner;
+	EndIf;
+	Return ItemType;
 EndFunction

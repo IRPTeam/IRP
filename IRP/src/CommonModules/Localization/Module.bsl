@@ -200,6 +200,7 @@
 //  * InfoMessage_025 - String - Before start to scan - choose location
 //  * InfoMessage_026 - String - Can not count Service item type
 //  * InfoMessage_027 - String - Barcode [%1] is exists for item: %2 [%3] %4
+//  * InfoMessage_028 - String - 
 //  * POS_s1 - String - Amount paid is less than amount of the document
 //  * POS_s2 - String - Card fees are more than the amount of the document
 //  * POS_s3 - String - There is no need to use cash, as card payments are sufficient to pay

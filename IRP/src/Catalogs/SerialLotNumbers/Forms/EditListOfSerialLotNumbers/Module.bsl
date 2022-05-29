@@ -187,7 +187,8 @@ Procedure CalculateStatus(SetStatus = Undefined)
 
 EndProcedure
 
-Function AfterCreateNewSerial(Result, AddInfo) Export
+&AtClient
+Procedure AfterCreateNewSerial(Result, AddInfo) Export
 	
 	If ValueIsFilled(Result) Then
 		Row = SerialLotNumbers.FindByID(Items.SerialLotNumbers.CurrentRow);
@@ -195,4 +196,4 @@ Function AfterCreateNewSerial(Result, AddInfo) Export
 	EndIf;
 	ThisObject.CurrentItem = Items.SerialLotNumbersQuantity;
 	
-EndFunction
+EndProcedure

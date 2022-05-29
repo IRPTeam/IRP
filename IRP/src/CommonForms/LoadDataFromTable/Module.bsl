@@ -390,12 +390,14 @@ Procedure CheckResultTable(Row = 0)
 		If Not IsBlankString(Barcode) Then
 			Item = GetArea(Result, Index, ItemNumber).Value; // CatalogRef.Items
 			If Item.IsEmpty() Then
+				//@skip-check statement-type-change
 				GetArea(Result, Index, ItemNumber).Comment.Text = R().S_027;
 				FillError(Index, ItemNumber, R().S_027);
 			EndIf;
 			
 			ItemKey = GetArea(Result, Index, ItemKeyNumber).Value; // CatalogRef.ItemKeys
 			If ItemKey.IsEmpty() Then
+				//@skip-check statement-type-change
 				GetArea(Result, Index, ItemKeyNumber).Comment.Text = R().S_027;
 				FillError(Index, ItemKeyNumber, R().S_027);
 			EndIf;
@@ -404,9 +406,11 @@ Procedure CheckResultTable(Row = 0)
 		UseSerialLot = GetArea(Result, Index, UseSerialLotNumber).Value; // Boolean
 		SerialLot = GetArea(Result, Index, SerialLotNumber).Value; // CatalogRef.SerialLotNumbers
 		If UseSerialLot And SerialLot.IsEmpty() Then
+			//@skip-check statement-type-change
 			GetArea(Result, Index, SerialLotNumber).Comment.Text = R().S_027;
 			FillError(Index, SerialLotNumber, R().S_027);
 		ElsIf Not UseSerialLot And Not SerialLot.IsEmpty() Then
+			//@skip-check statement-type-change
 			GetArea(Result, Index, SerialLotNumber).Comment.Text = R().Error_108;
 			FillError(Index, SerialLotNumber, R().Error_108);
 		EndIf;

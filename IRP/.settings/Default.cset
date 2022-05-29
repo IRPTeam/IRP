@@ -16,6 +16,9 @@
     "use-non-recommended-method": {
       "enabled": false
     },
+    "module-region-empty": {
+      "enabled": false
+    },
     "mdo-scheduled-job-description": {
       "enabled": false
     },

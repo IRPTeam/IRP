@@ -237,13 +237,13 @@ Scenario: _041606 check Purchase return movements by the Register  "R4050 Stock 
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''            | ''                    | ''          | ''             | ''             | ''         | ''          |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''             | ''         | ''          |
-			| 'Register  "R4050 Stock inventory"'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''          |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''          |
-			| ''                                              | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Item key'  |
-			| ''                                              | 'Expense'     | '14.03.2021 18:53:34' | '1'         | 'Main Company' | 'Front office' | 'Store 02' | '36/Yellow' |
-			| ''                                              | 'Expense'     | '14.03.2021 18:53:34' | '5'         | 'Main Company' | 'Front office' | 'Store 02' | 'S/Yellow'  |
+			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| 'Register  "R4050 Stock inventory"'             | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''          |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
+			| ''                                              | 'Expense'     | '14.03.2021 18:53:34' | '1'         | 'Main Company' | 'Store 02' | '36/Yellow' |
+			| ''                                              | 'Expense'     | '14.03.2021 18:53:34' | '5'         | 'Main Company' | 'Store 02' | 'S/Yellow'  |
 	And I close all client application windows
 
 Scenario: _041607 check Purchase return movements by the Register  "R1040 Taxes outgoing"

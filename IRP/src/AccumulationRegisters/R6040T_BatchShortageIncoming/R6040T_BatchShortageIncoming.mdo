@@ -30,6 +30,21 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <dimensions uuid="2a03bb0c-41c0-40f9-9936-30b561b918b3">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
   <dimensions uuid="899c4c88-62cc-4c8c-9bfb-cf6e766d4309">
     <name>Document</name>
     <synonym>
@@ -50,6 +65,8 @@
       <types>DocumentRef.StockAdjustmentAsSurplus</types>
       <types>DocumentRef.StockAdjustmentAsWriteOff</types>
       <types>DocumentRef.Unbundling</types>
+      <types>DocumentRef.BatchReallocateIncoming</types>
+      <types>DocumentRef.BatchReallocateOutgoing</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -64,20 +81,6 @@
     </synonym>
     <type>
       <types>CatalogRef.BatchKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="2a03bb0c-41c0-40f9-9936-30b561b918b3">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

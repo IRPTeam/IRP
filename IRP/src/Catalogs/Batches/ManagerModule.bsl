@@ -9,7 +9,7 @@ Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	Presentation = String(Data.Document);
 EndProcedure
 
-Procedure Create_Batches(Company, BeginPeriod, EndPeriod) Export
+Procedure Create_Batches(CalculationMovementCostRef, Company, BeginPeriod, EndPeriod) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -20,10 +20,25 @@ Procedure Create_Batches(Company, BeginPeriod, EndPeriod) Export
 	|FROM
 	|	InformationRegister.T6010S_BatchesInfo AS T6010S_BatchesInfo
 	|WHERE
-	|	T6010S_BatchesInfo.Company = &Company
+	|	case
+	|		when &FilterByCompany
+	|			then T6010S_BatchesInfo.Company = &Company
+	|		else true
+	|	end
 	|	AND T6010S_BatchesInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
-	|;
 	|
+	|union all
+	|
+	|select
+	|	ReallocateIncoming.Company,
+	|	ReallocateIncoming.Ref,
+	|	ReallocateIncoming.Date
+	|from
+	|	Document.BatchReallocateIncoming as ReallocateIncoming
+	|where
+	|	ReallocateIncoming.BatchReallocate = &CalculationMovementCostRef
+	|	AND NOT (ReallocateIncoming.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY))
+	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -41,6 +56,8 @@ Procedure Create_Batches(Company, BeginPeriod, EndPeriod) Export
 	|WHERE
 	|	Batches.Ref IS NULL
 	|	OR Batches.Date <> tmp.Date";
+	Query.SetParameter("FilterByCompany", ValueIsFilled(Company));
+	Query.SetParameter("CalculationMovementCostRef", CalculationMovementCostRef);
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("BeginPeriod", BeginPeriod);
 	Query.SetParameter("EndPeriod", EndPeriod);

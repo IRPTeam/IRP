@@ -161,6 +161,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -649,15 +650,32 @@ EndFunction
 
 Function T6010S_BatchesInfo()
 	Return
-		"SELECT
-		|	OpeningEntry.Ref AS Document,
-		|	OpeningEntry.Company AS Company,
-		|	OpeningEntry.Ref.Date AS Period
-		|INTO T6010S_BatchesInfo
-		|FROM
-		|	Document.OpeningEntry AS OpeningEntry
-		|WHERE
-		|	OpeningEntry.Ref = &Ref";
+	"SELECT
+	|	ItemList.Ref AS Document,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Date AS Period,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO tmp_T6010S_BatchesInfo
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	ItemList.Ref,
+	|	ItemList.Ref.Company,
+	|	ItemList.Ref.Date
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.Document,
+	|	Table.Company,
+	|	Table.Period
+	|INTO T6010S_BatchesInfo
+	|FROM
+	|	tmp_T6010S_BatchesInfo AS Table
+	|WHERE
+	|	Table.Quantity > 0";
 EndFunction
 
 Function T6020S_BatchKeysInfo()
@@ -672,7 +690,7 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Currency,
 	|	SUM(ItemList.Quantity) AS Quantity,
 	|	SUM(ItemList.Amount) AS Amount
-	|INTO T6020S_BatchKeysInfo
+	|INTO tmp_T6020S_BatchKeysInfo
 	|FROM
 	|	ItemList AS ItemList
 	|WHERE
@@ -684,7 +702,47 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.ItemKey,
 	|	ItemList.Period,
 	|	ItemList.Store,
-	|	VALUE(Enum.BatchDirection.Receipt)";
+	|	VALUE(Enum.BatchDirection.Receipt)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Store,
+	|	Table.ItemKey,
+	|	Table.Direction,
+	|	Table.CurrencyMovementType,
+	|	Table.Currency,
+	|	Table.Quantity,
+	|	Table.Amount
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	tmp_T6020S_BatchKeysInfo AS Table
+	|WHERE
+	|	Table.Quantity > 0"
+EndFunction
+
+Function R4050B_StockInventory()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO R4050B_StockInventory
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey";
 EndFunction
 
 #EndRegion

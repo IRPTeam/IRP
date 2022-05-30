@@ -263,13 +263,13 @@ Scenario: _041305 check Sales return movements by the Register  "R4050 Stock inv
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         |
-			| 'Register  "R4050 Stock inventory"'          | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''         |
-			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Item key' |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '1'         | 'Main Company' | 'Distribution department' | 'Store 02' | 'XS/Blue'  |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '2'         | 'Main Company' | 'Distribution department' | 'Store 02' | '36/Red'   |
+			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''             | ''         | ''         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'          | ''            | ''                    | ''          | ''             | ''         | ''         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''         |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key' |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '1'         | 'Main Company' | 'Store 02' | 'XS/Blue'  |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '2'         | 'Main Company' | 'Store 02' | '36/Red'   |
 	And I close all client application windows
 
 

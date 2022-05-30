@@ -55,6 +55,8 @@
       <types>DocumentRef.StockAdjustmentAsSurplus</types>
       <types>DocumentRef.StockAdjustmentAsWriteOff</types>
       <types>DocumentRef.Unbundling</types>
+      <types>DocumentRef.BatchReallocateIncoming</types>
+      <types>DocumentRef.BatchReallocateOutgoing</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

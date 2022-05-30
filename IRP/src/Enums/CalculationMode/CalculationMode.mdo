@@ -33,4 +33,11 @@
       <value>Additional item revenue</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="721900e9-3d68-49fc-8872-40ceb43b6ac1">
+    <name>LandedCostBatchReallocate</name>
+    <synonym>
+      <key>en</key>
+      <value>Landed cost (batch reallocate)</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

@@ -37,6 +37,24 @@ Procedure OwnerSelectOnChange(Item)
 	OwnerSelectChange();
 EndProcedure
 
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	Items.CreateBarcodeWithSerialLotNumber.Visible = False;
+EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	Items.CreateBarcodeWithSerialLotNumber.Visible = False;
+	If CreateBarcodeWithSerialLotNumber And Not Parameters.ItemKey.IsEmpty() And OwnerSelect = "ItemKey" Then
+		Option = New Structure();
+		Option.Insert("ItemKey", ItemKey);
+		Option.Insert("SerialLotNumber", Object.Ref);
+		BarcodeServer.UpdateBarcode(TrimAll(Object.Description), Option);
+	EndIf;
+	CreateBarcodeWithSerialLotNumber = False;
+EndProcedure
+
+
 #EndRegion
 
 #Region AddAttributes
@@ -60,38 +78,40 @@ Procedure OwnerSelectChange()
 	Items.Owner.Visible = OwnerSelect = "Manual";
 	If Not OwnerSelect = "Manual" Then
 		Object.SerialLotNumberOwner = ThisObject[OwnerSelect];
+		Object.StockBalanceDetail = GetStockBalanceDetail();
 	EndIf;
 EndProcedure
+
+&AtServer
+Function GetStockBalanceDetail()
+	Return Catalogs.SerialLotNumbers.GetStockBalanceDetailByOwner(Object.SerialLotNumberOwner);
+EndFunction
+
 &AtServer
 Procedure FillParamsOnCreate()
 	OwnerSelect = "Manual";
 
-	If Parameters.Property("ItemType") Then
+	If Not Parameters.ItemType.IsEmpty() Then
 		ItemType = Parameters.ItemType;
-	EndIf;
-	If Parameters.Property("Item") Then
-		Item = Parameters.Item;
-	EndIf;
-	If Parameters.Property("ItemKey") Then
-		ItemKey = Parameters.ItemKey;
-	EndIf;
-	If Parameters.Property("Barcode") Then
-		Barcode = Parameters.Barcode;
-	EndIf;
-	If Not ItemType.IsEmpty() Then
 		Items.OwnerSelect.ChoiceList.Add("ItemType", ItemType);
 		OwnerSelect = "ItemType";
 	EndIf;
-	If Not Item.IsEmpty() Then
+	If Not Parameters.Item.IsEmpty() Then
+		Item = Parameters.Item;
 		Items.OwnerSelect.ChoiceList.Add("Item", Item);
 		OwnerSelect = "Item";
 	EndIf;
-	If Not ItemKey.IsEmpty() Then
+	If Not Parameters.ItemKey.IsEmpty() Then
+		ItemKey = Parameters.ItemKey;
 		Items.OwnerSelect.ChoiceList.Add("ItemKey", ItemKey);
 		OwnerSelect = "ItemKey";
 	EndIf;
-	If Not IsBlankString(Barcode) Then
+	If Not IsBlankString(Parameters.Barcode) Then
+		Barcode = Parameters.Barcode;
 		Object.Description = Barcode;
+	EndIf;
+	If Not IsBlankString(Parameters.Description) Then
+		Object.Description = Parameters.Description;
 	EndIf;
 	
 	// delete manual, if have other types
@@ -99,4 +119,10 @@ Procedure FillParamsOnCreate()
 		Items.OwnerSelect.ChoiceList.Delete(0);
 	EndIf;
 EndProcedure
+
+&AtClient
+Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
+	Close(Object.Ref);
+EndProcedure
+
 #EndRegion

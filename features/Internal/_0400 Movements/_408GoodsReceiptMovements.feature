@@ -43,6 +43,13 @@ Scenario: _04010 preparation (Goods receipt)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -76,6 +83,7 @@ Scenario: _04010 preparation (Goods receipt)
 			| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load GR
 		When Create document GoodsReceipt objects (check movements)
+		When Create document GoodsReceipt objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server	
@@ -85,7 +93,9 @@ Scenario: _04010 preparation (Goods receipt)
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |		
+			| "Documents.GoodsReceipt.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |				
 	* Load PI
 		When create document PurchaseInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server
@@ -110,13 +120,13 @@ Scenario: _04011 check Goods receipt movements by the Register  "R4010 Actual st
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 115 dated 12.02.2021 15:10:35' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'             | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '5'         | 'Store 02'   | '36/Yellow' |
-			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '10'        | 'Store 02'   | 'S/Yellow'  |	
+			| 'Goods receipt 115 dated 12.02.2021 15:10:35' | ''            | ''                    | ''          | ''           | ''          | ''                  |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''           | ''          | ''                  |
+			| 'Register  "R4010 Actual stocks"'             | ''            | ''                    | ''          | ''           | ''          | ''                  |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''                  |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number' |
+			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '5'         | 'Store 02'   | '36/Yellow' | ''                  |
+			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '10'        | 'Store 02'   | 'S/Yellow'  | ''                  |
 		And I close all client application windows
 		
 Scenario: _04012 check Goods receipt movements by the Register  "R4017 Procurement of internal supply requests" (without ISR)
@@ -195,7 +205,27 @@ Scenario: _04015 check Goods receipt movements by the Register  "R4035 Incoming 
 			| ''                                            | 'Expense'     | '12.02.2021 15:10:35' | '10'        | 'Store 02'   | 'S/Yellow'  | 'Purchase order 115 dated 12.02.2021 12:44:43' |
 		And I close all client application windows
 		
-
+Scenario: _04016 check Goods receipt with serial lot numbers movements by the Register  "R4010 Actual stocks"
+	* Select Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 112' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 1 112 dated 20.05.2022 17:44:58' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'               | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                              | 'Receipt'     | '20.05.2022 17:44:58' | '5'         | 'Store 03'   | 'PZU'      | '8908899877'        |
+			| ''                                              | 'Receipt'     | '20.05.2022 17:44:58' | '5'         | 'Store 03'   | 'PZU'      | '8908899879'        |
+			| ''                                              | 'Receipt'     | '20.05.2022 17:44:58' | '10'        | 'Store 03'   | 'XL/Green' | ''                  |
+			| ''                                              | 'Receipt'     | '20.05.2022 17:44:58' | '10'        | 'Store 03'   | 'UNIQ'     | ''                  |	
+		And I close all client application windows
 		
 Scenario: _04017 check Goods receipt movements by the Register  "R2013 Procurement of sales orders"
 	* Select Goods receipt

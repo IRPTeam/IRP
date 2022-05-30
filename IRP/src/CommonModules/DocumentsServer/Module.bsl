@@ -225,12 +225,11 @@ EndFunction
 // Description
 // 
 // Parameters:
-// 	AgreementParameters Structure
-//		Keys:
-//		- Partner
-//		- Agreement
-//		- CurrentDate
-//		- ArrayOfFilters
+// 	AgreementParameters - Structure:
+//		* Partner - CatalogRef.Partners
+//		* Agreement - CatalogRef.Agreements
+//		* CurrentDate - Date
+//		* ArrayOfFilters - Array of Filter
 // Returns:
 // 	CatalogRef.Agreements - Description
 Function GetAgreementByPartner(AgreementParameters) Export

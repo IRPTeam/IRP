@@ -140,7 +140,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R3010B_CashOnHand());
-	QueryArray.Add(R3050T_RetailCash());
+	QueryArray.Add(R3050T_PosCashBalances());
 	QueryArray.Add(R2050T_RetailSales());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R2001T_Sales());
@@ -202,7 +202,8 @@ Function ItemList()
 	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
 	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ItemList.Key
 	|INTO ItemList
 	|FROM
 	|	Document.RetailSalesReceipt.ItemList AS ItemList
@@ -342,22 +343,23 @@ EndFunction
 
 Function SerialLotNumbers()
 	Return 
-		"SELECT
-		|	SerialLotNumbers.Ref.Date AS Period,
-		|	SerialLotNumbers.Ref.Company AS Company,
-		|	SerialLotNumbers.Ref.Branch AS Branch,
-		|	SerialLotNumbers.Key,
-		|	SerialLotNumbers.SerialLotNumber,
-		|	SerialLotNumbers.Quantity,
-		|	ItemList.ItemKey AS ItemKey
-		|INTO SerialLotNumbers
-		|FROM
-		|	Document.RetailSalesReceipt.SerialLotNumbers AS SerialLotNumbers
-		|		LEFT JOIN Document.RetailSalesReceipt.ItemList AS ItemList
-		|		ON SerialLotNumbers.Key = ItemList.Key
-		|		AND ItemList.Ref = &Ref
-		|WHERE
-		|	SerialLotNumbers.Ref = &Ref";
+	"SELECT
+	|	SerialLotNumbers.Ref.Date AS Period,
+	|	SerialLotNumbers.Ref.Company AS Company,
+	|	SerialLotNumbers.Ref.Branch AS Branch,
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
+	|	SerialLotNumbers.Quantity,
+	|	ItemList.ItemKey AS ItemKey
+	|INTO SerialLotNumbers
+	|FROM
+	|	Document.RetailSalesReceipt.SerialLotNumbers AS SerialLotNumbers
+	|		LEFT JOIN Document.RetailSalesReceipt.ItemList AS ItemList
+	|		ON SerialLotNumbers.Key = ItemList.Key
+	|		AND ItemList.Ref = &Ref
+	|WHERE
+	|	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -395,20 +397,45 @@ Function R4011B_FreeStocks()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	*
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService";
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END AS SerialLotNumber,
+	|	SUM(CASE
+	|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+	|			THEN ItemList.Quantity
+	|		ELSE SerialLotNumbers.Quantity
+	|	END) AS Quantity
+	|INTO R4010B_ActualStocks
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Key = SerialLotNumbers.Key
+	|WHERE
+	|	NOT ItemList.IsService
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Expense),
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END";
 EndFunction
 
-Function R3050T_RetailCash()
+Function R3050T_PosCashBalances()
 	Return "SELECT
 		   |	*
-		   |INTO R3050T_RetailCash
+		   |INTO R3050T_PosCashBalances
 		   |FROM
 		   |	Payments AS Payments
 		   |WHERE

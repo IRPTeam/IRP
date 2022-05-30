@@ -40,14 +40,19 @@ Function GetFormParameters(Form) Export
 	Return Result;
 EndFunction
 
-Function GetParameters(ServerParameters, FormParameters = Undefined) Export
-	If FormParameters = Undefined Then
-		Return CreateParameters(ServerParameters, GetFormParameters(Undefined));
-	EndIf;
-	Return CreateParameters(ServerParameters, FormParameters);
+Function GetLoadParameters(Address) Export
+	Result = New Structure();
+	Result.Insert("Address", Address);
+	Return Result;
 EndFunction
 
-Function CreateParameters(ServerParameters, FormParameters)
+Function GetParameters(ServerParameters, FormParameters = Undefined, LoadParameters = Undefined) Export
+	_FormParameters = ?(FormParameters = Undefined, GetFormParameters(Undefined), FormParameters);
+	_LoadParameters = ?(LoadParameters = Undefined, GetLoadParameters(Undefined), LoadParameters);
+	Return CreateParameters(ServerParameters, _FormParameters, _LoadParameters);
+EndFunction
+
+Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters = New Structure();
 	// parameters for Client 
 	Parameters.Insert("Form"             , FormParameters.Form);
@@ -63,6 +68,12 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("TaxesCache"       , FormParameters.TaxesCache);
 	Parameters.Insert("ChangedData"      , New Map());
 	Parameters.Insert("ExtractedData"    , New Structure());
+	Parameters.Insert("LoadData"         , New Structure());
+	
+	Parameters.LoadData.Insert("Address"                   , LoadParameters.Address);
+	Parameters.LoadData.Insert("ExecuteAllViewNotify"      , False);
+	Parameters.LoadData.Insert("CountRows"                 , 0);
+	Parameters.LoadData.Insert("SourceColumnsGroupBy"      , "");
 	
 	Parameters.Insert("PropertyBeforeChange", FormParameters.PropertyBeforeChange);
 	
@@ -92,6 +103,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 	ArrayOfTableNames.Add(ServerParameters.TableName);
 	ArrayOfTableNames.Add("TaxList");
 	ArrayOfTableNames.Add("SpecialOffers");
+	ArrayOfTableNames.Add("SerialLotNumbers");
 	
 	// MetadataName
 	// Tables.TableName.Columns
@@ -99,12 +111,17 @@ Function CreateParameters(ServerParameters, FormParameters)
 	ServerData = ControllerServer_V2.GetServerData(ServerParameters.Object, 
 												   ArrayOfTableNames,
 												   Parameters.FormTaxColumnsExists, 
-												   Parameters.TaxesCache);
+												   Parameters.TaxesCache,
+												   Parameters.LoadData.Address);
 		
-	Parameters.Insert("ObjectMetadataInfo"    , ServerData.ObjectMetadataInfo);
-	Parameters.Insert("TaxListIsExists"       , ServerData.ObjectMetadataInfo.Tables.Property("TaxList"));
-	Parameters.Insert("SpecialOffersIsExists" , ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers"));
-	Parameters.Insert("ArrayOfTaxInfo"        , ServerData.ArrayOfTaxInfo);
+	Parameters.Insert("ObjectMetadataInfo"     , ServerData.ObjectMetadataInfo);
+	Parameters.Insert("TaxListIsExists"        , ServerData.ObjectMetadataInfo.Tables.Property("TaxList"));
+	Parameters.Insert("SpecialOffersIsExists"  , ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers"));
+	Parameters.Insert("SerialLotNumbersExists" , ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers"));	
+	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
+	
+	Parameters.LoadData.CountRows                 = ServerData.LoadData.CountRows;
+	Parameters.LoadData.SourceColumnsGroupBy      = ServerData.LoadData.SourceColumnsGroupBy;
 	
 	// if specific rows are not passed, then we use everything that is in the table with the name TableName
 	If ServerParameters.Rows = Undefined Then 
@@ -116,18 +133,25 @@ Function CreateParameters(ServerParameters, FormParameters)
 	EndIf;
 	
 	// the table row cannot be transferred to the server, so we put the data in an array of structures
-	// Rows
+	WrappedRows = WrapRows(Parameters, ServerParameters.Rows);
+	If WrappedRows.Count() Then
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	Return Parameters;
+EndFunction
+
+Function WrapRows(Parameters, Rows) Export
 	ArrayOfRows = New Array();
-	For Each Row In ServerParameters.Rows Do
-		NewRow = New Structure(ServerData.ObjectMetadataInfo.Tables[ServerParameters.TableName].Columns);
+	For Each Row In Rows Do
+		NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables[Parameters.TableName].Columns);
 		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
 		
 		// TaxList
 		ArrayOfRowsTaxList = New Array();
 		If Parameters.TaxListIsExists Then
-			For Each TaxRow In ServerParameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
-				NewRowTaxList = New Structure(ServerData.ObjectMetadataInfo.Tables.TaxList.Columns);
+			For Each TaxRow In Parameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
+				NewRowTaxList = New Structure(Parameters.ObjectMetadataInfo.Tables.TaxList.Columns);
 				FillPropertyValues(NewRowTaxList, TaxRow);
 				ArrayOfRowsTaxList.Add(NewRowTaxList);
 			EndDo;
@@ -158,8 +182,8 @@ Function CreateParameters(ServerParameters, FormParameters)
 		// SpecialOffers
 		ArrayOfRowsSpecialOffers = New Array();
 		If Parameters.SpecialOffersIsExists Then
-			For Each SpecialOfferRow In ServerParameters.Object.SpecialOffers.FindRows(New Structure("Key", Row.Key)) Do
-				NewRowSpecialOffer = New Structure(ServerData.ObjectMetadataInfo.Tables.SpecialOffers.Columns);
+			For Each SpecialOfferRow In Parameters.Object.SpecialOffers.FindRows(New Structure("Key", Row.Key)) Do
+				NewRowSpecialOffer = New Structure(Parameters.ObjectMetadataInfo.Tables.SpecialOffers.Columns);
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffers.Add(NewRowSpecialOffer);
 			EndDo;
@@ -182,12 +206,8 @@ Function CreateParameters(ServerParameters, FormParameters)
 		NewRow.Insert("SpecialOffers"          , ArrayOfRowsSpecialOffers);
 		NewRow.Insert("SpecialOffersCache"     , ArrayOfRowsSpecialOffersCache);
 	EndDo;
-	
-	If ArrayOfRows.Count() Then
-		Parameters.Insert("Rows", ArrayOfRows);
-	EndIf;
-	Return Parameters;
-EndFunction
+	Return ArrayOfRows;
+EndFunction	
 
 #EndRegion
 
@@ -258,25 +278,38 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("ItemList.Store"              , "SetItemListStore");
 	SettersMap.Insert("ItemList.DeliveryDate"       , "SetItemListDeliveryDate");
 	SettersMap.Insert("ItemList.QuantityInBaseUnit" , "SetItemListQuantityInBaseUnit");
+	SettersMap.Insert("ItemList.PhysCount"          , "SetItemListPhysCount");
+	SettersMap.Insert("ItemList.ManualFixedCount"   , "SetItemListManualFixedCount");
+	SettersMap.Insert("ItemList.ExpCount"           , "SetItemListExpCount");
 	Return SettersMap.Get(DataPath);
 EndFunction
 
 Procedure API_SetProperty(Parameters, Property, Value) Export
 	SetterName = GetSetterNameByDataPath(Property.DataPath);
-	_Key = Undefined;
-	If StrSplit(Property.DataPath, ".").Count() = 2 Then
-		_Key = Parameters.Rows[0].Key;
-	EndIf;
+	IsColumn = StrSplit(Property.DataPath, ".").Count() = 2;
 	If SetterName <> Undefined Then
-		Results = New Array();
-		Results.Add(New Structure("Options, Value", 
-			New Structure("Key", _Key), Value));
+		_Key = ?(IsColumn, Parameters.Rows[0].Key, Undefined);
+		
+		//@skip-check module-unused-local-variable
+		Results = ResultArray(_Key, Value);
 		Execute StrTemplate("%1(Parameters, Results);", SetterName);
 	Else
-		SetPropertyObject(Parameters, Property.DataPath, _Key, Value);
+		If IsColumn Then
+			For Each Row In GetRows(Parameters, Parameters.TableName) Do
+				SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Row.Key, Value));
+			EndDo;
+		Else
+			SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Undefined, Value));
+		EndIf;
 		CommitChainChanges(Parameters);
 	EndIf;
 EndProcedure
+
+Function ResultArray(_Key, Value)
+	Results = New Array();
+	Results.Add(New Structure("Options, Value", New Structure("Key", _Key), Value));
+	Return Results;
+EndFunction	
 
 Function GetAllBindings(Parameters)
 	BindingMap = New Map();
@@ -450,6 +483,7 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("PurchaseReturn"            , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("SalesReturn"               , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("InventoryTransfer"         , "StepExtractDataItemKeysWithSerialLotNumbers");
+	Binding.Insert("PhysicalInventory"         , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
 	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
@@ -4441,9 +4475,10 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("InventoryTransfer"         , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("InventoryTransferOrder"    , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("PhysicalInventory"         , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("PhysicalCountByLocation"   , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("ItemStockAdjustment"       , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("Bundling"                  , "StepItemListChangeItemKeyByItem");
-	Binding.Insert("Unbundling"                  , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("Unbundling"                , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4608,10 +4643,17 @@ Function BindItemListItemKey(Parameters)
 	Binding.Insert("InternalSupplyRequest",
 		"StepChangeUnitByItemKey");
 	
-	Binding.Insert("PhysicalInventory"   , "StepChangeUnitByItemKey");
+	Binding.Insert("PhysicalInventory", 
+			"StepChangeUnitByItemKey,
+			|StepExtractDataItemKeysWithSerialLotNumbers");
+
+	Binding.Insert("PhysicalCountByLocation", 
+			"StepChangeUnitByItemKey,
+			|StepChangeUseSerialLotNumberByItemKey");
+		
 	Binding.Insert("ItemStockAdjustment" , "StepChangeUnitByItemKey");
 	Binding.Insert("Bundling"            , "StepChangeUnitByItemKey");
-	Binding.Insert("Unbundling"            , "StepChangeUnitByItemKey");
+	Binding.Insert("Unbundling"          , "StepChangeUnitByItemKey");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -4741,6 +4783,8 @@ Function BindItemListUnit(Parameters)
 		|StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("PhysicalInventory", "BindVoid");
+
+	Binding.Insert("PhysicalCountByLocation", "BindVoid");
 	
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
@@ -5356,16 +5400,88 @@ EndProcedure
 
 #Region ITEM_LIST_PHYS_COUNT
 
+// ItemList.PhysCount.OnChange
+Procedure ItemListPhysCountOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListPhysCountNotify", Parameters);
+	Binding = BindItemListPhysCount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
 // ItemList.PhysCount.Set
 Procedure SetItemListPhysCount(Parameters, Results) Export
 	Binding = BindItemListPhysCount(Parameters);
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
+// ItemList.PhysCount.Get
+Function GetItemListPhysCount(Parameters, _Key)
+	Binding = BindItemListPhysCount(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
 // ItemList.PhysCount.Bind
 Function BindItemListPhysCount(Parameters)
 	DataPath = "ItemList.PhysCount";
-	Binding = New Structure();	
+	Binding = New Structure();
+	Binding.Insert("PhysicalInventory", "StepCalculateDifferenceCount");	
+	Binding.Insert("PhysicalCountByLocation", "StepCalculateDifferenceCount");	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_FIXED_COUNT
+
+// ItemList.ManualFixedCount.OnChange
+Procedure ItemListManualFixedCountOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListPhysCountNotify", Parameters);
+	Binding = BindItemListManualFixedCount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.ManualFixedCount.Set
+Procedure SetItemListManualFixedCount(Parameters, Results) Export
+	Binding = BindItemListManualFixedCount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ManualFixedCount.Get
+Function GetItemListManualFixedCount(Parameters, _Key)
+	Binding = BindItemListManualFixedCount(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.ManualFixedCount.Bind
+Function BindItemListManualFixedCount(Parameters)
+	DataPath = "ItemList.ManualFixedCount";
+	Binding = New Structure();
+	Binding.Insert("PhysicalInventory", "StepCalculateDifferenceCount");	
+	Binding.Insert("PhysicalCountByLocation", "StepCalculateDifferenceCount");	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_EXPECTED_COUNT
+
+// ItemList.ExpCount.Set
+Procedure SetItemListExpCount(Parameters, Results) Export
+	Binding = BindItemListExpCount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ExpCount.Get
+Function GetItemListExpCount(Parameters, _Key)
+	Binding = BindItemListExpCount(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.ExpCount.Bind
+Function BindItemListExpCount(Parameters)
+	DataPath = "ItemList.ExpCount";
+	Binding = New Structure();
+	Binding.Insert("PhysicalInventory", "StepCalculateDifferenceCount");	
+	Binding.Insert("PhysicalCountByLocation", "StepCalculateDifferenceCount");	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5385,6 +5501,82 @@ Function BindItemListDifference(Parameters)
 	Binding = New Structure();	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+// ItemList.Difference.CalculateDifferenceCount.Step
+Procedure StepCalculateDifferenceCount(Parameters, Chain) Export
+	Chain.CalculateDifferenceCount.Enable = True;
+	Chain.CalculateDifferenceCount.Setter = "SetItemListDifference";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options     = ModelClientServer_V2.CalculateDifferenceCountOptions();
+		Options.PhysCount = GetItemListPhysCount(Parameters, Row.Key);
+		Options.ExpCount = GetItemListExpCount(Parameters, Row.Key);
+		Options.ManualFixedCount = GetItemListManualFixedCount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepCalculateDifferenceCount";
+		Chain.CalculateDifferenceCount.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+// ItemList.Difference.CalculateDifferenceCount.Fill
+Procedure FillCalculateDifferenceCount(Parameters, Chain) Export
+	Chain.CalculateDifferenceCountInItemList.Enable = True;
+	Chain.CalculateDifferenceCountInItemList.Setter = "FillItemListDifference";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options     = ModelClientServer_V2.CalculateDifferenceCountOptions();
+		Options.PhysCount = GetItemListPhysCount(Parameters, Row.Key);
+		Options.ExpCount = GetItemListExpCount(Parameters, Row.Key);
+		Options.ManualFixedCount = GetItemListManualFixedCount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepCalculateDifferenceCount";
+		Chain.CalculateDifferenceCountInItemList.Options.Add(Options);
+	EndDo;	
+EndProcedure
+#EndRegion
+
+#Region ITEM_LIST_SERIAL_LOT_NUMBER
+
+// ItemList.SerialLotNumber.Set
+Procedure SetItemListSerialLotNumber(Parameters, Results) Export
+	Binding = BindItemListSerialLotNumber(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.SerialLotNumber.Bind
+Function BindItemListSerialLotNumber(Parameters)
+	DataPath = "ItemList.SerialLotNumber";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_USE_SERIAL_LOT_NUMBER
+
+// ItemList.UseSerialLotNumber.Set
+Procedure SetItemListUseSerialLotNumber(Parameters, Results) Export
+	Binding = BindItemListUseSerialLotNumber(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.UseSerialLotNumber.Bind
+Function BindItemListUseSerialLotNumber(Parameters)
+	DataPath = "ItemList.UseSerialLotNumber";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.UseSerialLotNumber.ChangeUseSerialLotNumberByItemKey.Step
+Procedure StepChangeUseSerialLotNumberByItemKey(Parameters, Chain) Export
+	Chain.ChangeUseSerialLotNumberByItemKey.Enable = True;
+	Chain.ChangeUseSerialLotNumberByItemKey.Setter = "SetItemListUseSerialLotNumber";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeUseSerialLotNumberByItemKeyOptions();
+		Options.ItemKey  = GetItemListItemKey(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepChangeUseSerialLotNumberByItemKey";
+		Chain.ChangeUseSerialLotNumberByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 
@@ -5887,6 +6079,42 @@ EndProcedure
 
 #EndRegion
 
+#Region LOAD_DATA
+
+// ItemList.Load
+Procedure ItemListLoad(Parameters) Export
+	Binding = BindItemListLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.Load.Set
+#If Server Then
+	
+Procedure ServerTableLoaderItemList(Parameters, Results) Export
+	Binding = BindItemListLoad(Parameters);
+	LoaderTable(Binding.DataPath, Parameters, Results);
+EndProcedure
+
+#EndIf
+
+// ItemList.Load.Bind
+Function BindItemListLoad(Parameters)
+	DataPath = "ItemList";
+	Binding = New Structure();
+	Return BindSteps("StepItemListLoadTable", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.LoadAtServer.Step
+Procedure StepItemListLoadTable(Parameters, Chain) Export
+	Chain.LoadTable.Enable = True;
+	Chain.LoadTable.Setter = "ServerTableLoaderItemList";
+	Options = ModelClientServer_V2.LoadTableOptions();
+	Options.TableAddress = Parameters.LoadData.Address;
+	Chain.LoadTable.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 // called when all chain steps is complete
@@ -5944,8 +6172,8 @@ Procedure _CommitChainChanges(Cache, Source)
 	For Each Property In Cache Do
 		PropertyName  = Property.Key;
 		PropertyValue = Property.Value;
-		If Upper(PropertyName) = Upper("TaxList") Then
-			// tabular part Taxex moved transferred completely
+		If Upper(PropertyName) = Upper("TaxList") Or Upper(PropertyName) = Upper("SerialLotNumbers") Then
+			// tabular part Taxex and Serial lot numbers moved transferred completely
 			ArrayOfKeys = New Array();
 			For Each Row In PropertyValue Do
 				If ArrayOfKeys.Find(Row.Key) = Undefined Then
@@ -5954,13 +6182,13 @@ Procedure _CommitChainChanges(Cache, Source)
 			EndDo;
 			
 			For Each ItemOfKeys In ArrayOfKeys Do
-				For Each Row In Source.TaxList.FindRows(New Structure("Key", ItemOfKeys)) Do
-					Source.TaxList.Delete(Row);
+				For Each Row In Source[PropertyName].FindRows(New Structure("Key", ItemOfKeys)) Do
+					Source[PropertyName].Delete(Row);
 				EndDo;
 			EndDo;
 			
 			For Each Row In PropertyValue Do
-				FillPropertyValues(Source.TaxList.Add(), Row);
+				FillPropertyValues(Source[PropertyName].Add(), Row);
 			EndDo;
 		
 		ElsIf TypeOf(PropertyValue) = Type("Array") Then // it is tabular part
@@ -6076,7 +6304,7 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 			IsChanged = True;
 		EndIf;
 	EndDo;
-	If IsChanged Or NotifyAnyWay Then
+	If IsChanged Or NotifyAnyWay Or Parameters.LoadData.ExecuteAllViewNotify Then
 		AddViewNotify(ViewNotify, Parameters);
 	EndIf;
 	If ValueIsFilled(StepNames) Then
@@ -6284,7 +6512,8 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 	MetadataBinding = New Map();
 	For Each KeyValue In Binding Do
 		MetadataName = KeyValue.Key;
-		MetadataBinding.Insert(StrTemplate("%1.%2", MetadataName, DataPath), Binding[MetadataName]);
+		//MetadataBinding.Insert(StrTemplate("%1.%2", MetadataName, DataPath), Binding[MetadataName]);
+		MetadataBinding.Insert(MetadataName + "." +DataPath, Binding[MetadataName]);
 	EndDo;
 	FullDataPath = StrTemplate("%1.%2", Parameters.ObjectMetadataInfo.MetadataName, DataPath);
 	StepsEnabler = MetadataBinding.Get(FullDataPath);
@@ -6375,6 +6604,133 @@ Procedure SetReadOnlyProperties(Object, FillingData) Export
 	ReadOnlyProperties = StrConcat(HeaderProperties, ",") +","+StrConcat(TabularProperties, ",");
 	Object.AdditionalProperties.Insert("ReadOnlyProperties", ReadOnlyProperties);
 	Object.AdditionalProperties.Insert("IsBasedOn", True);
+EndProcedure
+
+Procedure LoaderTable(DataPath, Parameters, Result) Export
+	If Result.Count() <> 1 Then
+		Raise "load more than one table not implemented";
+	EndIf;
+	SourceTable = GetFromTempStorage(Result[0].Value);
+	
+	SourceColumnsGroupBy = Parameters.LoadData.SourceColumnsGroupBy;
+	
+	SourceTableExpanded = Undefined;
+	If Parameters.SerialLotNumbersExists Then
+		SourceTableExpanded = SourceTable.Copy();
+	EndIf;
+	SourceTable.GroupBy(SourceColumnsGroupBy, "Quantity");
+	
+	// only for physical inventory
+	If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PhysicalCountByLocation" Then
+		SourceTable.Columns.Quantity.Name = "PhysCount";
+	EndIf;
+	
+	TableName = Parameters.TableName;
+	Columns = Parameters.ObjectMetadataInfo.Tables[TableName].Columns;
+		
+	AllColumns = StrSplit(Columns, ",", False);
+	
+	AllRows = New Array();
+	For Each Row In Parameters.Rows Do
+		AllRows.Add(Row);
+	EndDo;
+	
+	// initialize cache
+	If Not Parameters.Cache.Property(TableName) Then
+		Parameters.Cache.Insert(TableName, New Array());
+	EndIf;
+	If Parameters.SerialLotNumbersExists And Not Parameters.Cache.Property("SerialLotNumbers") Then
+		Parameters.Cache.Insert("SerialLotNumbers", New Array());
+	EndIf;
+	
+	ProcessedKeys = New Array();
+	AllExtractedData = New Structure();
+	
+	RowIndex = Parameters.Rows.Count() - Parameters.LoadData.CountRows;
+	For Each SourceRow In SourceTable Do
+		NewRow =  AllRows[RowIndex];
+		Parameters.Cache[TableName].Add(New Structure("Key", NewRow.Key));
+		Parameters.Rows.Clear();
+		Parameters.Rows.Add(NewRow);
+		
+		// add serial lot number to separated table
+		If Parameters.SerialLotNumbersExists Then
+			Filter = New Structure(SourceColumnsGroupBy);
+			FillPropertyValues(Filter, SourceRow);
+			For Each RowSN In SourceTableExpanded.FindRows(Filter) Do
+				If Not ValueIsFilled(RowSN) Then
+					Continue;
+				EndIf;
+				NewRowSN = New Structure(Parameters.ObjectMetadataInfo.Tables.SerialLotNumbers.Columns);
+				FillPropertyValues(NewRowSN, RowSN);
+				NewRowSN.Key = NewRow.Key;
+				Parameters.Cache.SerialLotNumbers.Add(NewRowSN);
+			EndDo;
+		EndIf;
+		
+		// fill new row default values from user settings
+		AddNewRow(TableName, Parameters);
+		// fill new row from source table
+		FillPropertyValues(NewRow, SourceRow);
+		
+		// initialize parameters for each row
+		Parameters.ReadOnlyPropertiesMap.Clear();
+		Parameters.ProcessedReadOnlyPropertiesMap.Clear();
+		
+		FilledColumns = New Array();
+		For Each Column In AllColumns Do
+			If ?(TypeOf(NewRow[Column]) = Type("Boolean"), NewRow[Column], ValueIsFilled(NewRow[Column])) Then
+				FullColumnName = TrimAll(StrTemplate("%1.%2", TableName, Column));
+				FilledColumns.Add(FullColumnName);
+				Parameters.ReadOnlyPropertiesMap.Insert(Upper(FullColumnName), True);
+				// put to cache
+				Parameters.Cache[TableName][Parameters.Cache[TableName].Count() - 1]
+					.Insert(Column, NewRow[Column]);
+			EndIf;
+		EndDo;
+		
+		// reset steps counter, infinity loop between different rows will not
+		If Parameters.Property("ModelEnvironment") 
+			And Parameters.ModelEnvironment.Property("AlreadyExecutedSteps") Then
+				ValidSteps = New Map();
+				For Each Step In Parameters.ModelEnvironment.AlreadyExecutedSteps Do
+					If Step.Value.Key = Undefined Or ProcessedKeys.Find(Step.Value.Key) <> Undefined Then
+						ValidSteps.Insert(Step.Value.Name + ":" + Step.Value.Key, Step.Value);
+					EndIf;
+				EndDo;
+				Parameters.ModelEnvironment.AlreadyExecutedSteps = ValidSteps;
+		EndIf;
+		
+		// if columns filled from source, do not change value, even is wrong value
+		Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
+		For Each Column In FilledColumns Do
+			Property = New Structure("DataPath", Column);
+			API_SetProperty(Parameters, Property, Undefined);
+		EndDo;
+		RowIndex = RowIndex + 1;
+		ProcessedKeys.Add(NewRow.Key);
+		
+		For Each KeyValue In Parameters.ExtractedData Do
+			ExtractedDataName = KeyValue.Key;
+			If Not AllExtractedData.Property(ExtractedDataName) Then
+				AllExtractedData.Insert(ExtractedDataName, New Array());
+			EndIf;
+			For Each ExtractedPart In Parameters.ExtractedData[ExtractedDataName] Do
+				PutToAll = True;
+				If TypeOf(ExtractedPart) = Type("Structure") 
+					And ExtractedPart.Property("Key") 
+					And ExtractedPart.Key <> NewRow.Key Then
+					PutToAll = False;
+				EndIf;
+				If PutToAll Then
+					AllExtractedData[ExtractedDataName].Add(ExtractedPart);
+				EndIf;
+			EndDo;
+		EndDo;
+		
+	EndDo;
+	Parameters.ExtractedData = AllExtractedData;
 EndProcedure
 
 #ENDIF

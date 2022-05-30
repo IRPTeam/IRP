@@ -263,7 +263,8 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function ItemList()
-	Return "SELECT
+	Return 
+	"SELECT
 	|	RowIDInfo.Ref AS Ref,
 	|	RowIDInfo.Key AS Key,
 	|	MAX(RowIDInfo.RowID) AS RowID
@@ -338,7 +339,8 @@ Function ItemList()
 	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
 	|	ItemList.OffersAmount,
 	|	ItemList.PriceType,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ItemList.Key
 	|INTO ItemList
 	|FROM
 	|	Document.SalesReturn.ItemList AS ItemList
@@ -385,22 +387,24 @@ Function OffersInfo()
 EndFunction
 
 Function SerialLotNumbers()
-	Return "SELECT
-		   |	SerialLotNumbers.Ref.Date AS Period,
-		   |	SerialLotNumbers.Ref.Company AS Company,
-		   |	SerialLotNumbers.Ref.Branch AS Branch,
-		   |	SerialLotNumbers.Key,
-		   |	SerialLotNumbers.SerialLotNumber,
-		   |	SerialLotNumbers.Quantity,
-		   |	ItemList.ItemKey AS ItemKey
-		   |INTO SerialLotNumbers
-		   |FROM
-		   |	Document.SalesReturn.SerialLotNumbers AS SerialLotNumbers
-		   |		LEFT JOIN Document.SalesReturn.ItemList AS ItemList
-		   |		ON SerialLotNumbers.Key = ItemList.Key
-		   |		AND ItemList.Ref = &Ref
-		   |WHERE
-		   |	SerialLotNumbers.Ref = &Ref";
+	Return 
+	"SELECT
+	|	SerialLotNumbers.Ref.Date AS Period,
+	|	SerialLotNumbers.Ref.Company AS Company,
+	|	SerialLotNumbers.Ref.Branch AS Branch,
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
+	|	SerialLotNumbers.Quantity,
+	|	ItemList.ItemKey AS ItemKey
+	|INTO SerialLotNumbers
+	|FROM
+	|	Document.SalesReturn.SerialLotNumbers AS SerialLotNumbers
+	|		LEFT JOIN Document.SalesReturn.ItemList AS ItemList
+	|		ON SerialLotNumbers.Key = ItemList.Key
+	|		AND ItemList.Ref = &Ref
+	|WHERE
+	|	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function Taxes()
@@ -617,19 +621,41 @@ EndFunction
 #Region Stock
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Quantity
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.UseGoodsReceipt
-		   |	AND NOT ItemList.GoodsReceiptExists";
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END AS SerialLotNumber,
+	|	SUM(CASE
+	|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+	|			THEN ItemList.Quantity
+	|		ELSE SerialLotNumbers.Quantity
+	|	END) AS Quantity
+	|INTO R4010B_ActualStocks
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Key = SerialLotNumbers.Key
+	|WHERE
+	|	NOT ItemList.IsService
+	|	AND NOT ItemList.UseGoodsReceipt
+	|	AND NOT ItemList.GoodsReceiptExists
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END";
 EndFunction
 
 Function R4011B_FreeStocks()

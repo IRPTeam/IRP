@@ -12,6 +12,7 @@ EndProcedure
 &AtClient
 Procedure AddExtDataProc(Command)
 	NotifyEndPut = New NotifyDescription("AddExtDataProcEnd", ThisObject);
+	//@skip-warning
 	BeginPutFile(NotifyEndPut, , , True);
 EndProcedure
 

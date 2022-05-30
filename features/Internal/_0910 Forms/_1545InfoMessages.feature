@@ -91,8 +91,8 @@ Scenario: _154500 preparation (information messages)
 # 				| 'Item key' |
 # 				| 'L/Green'  |
 # 			And I select current line in "List" table
-# 			And I activate "Q" field in "ItemList" table
-# 			And I input "1,000" text in "Q" field of "ItemList" table
+# 			And I activate "Quantity" field in "ItemList" table
+# 			And I input "1,000" text in "Quantity" field of "ItemList" table
 # 			And I finish line editing in "ItemList" table
 # 			And I click the button named "FormPost"
 # 			And I delete "$$NumberSalesInvoice154501$$" variable
@@ -167,7 +167,7 @@ Scenario: _154500 preparation (information messages)
 # 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 # 				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
 # 			And I select current line in "ItemList" table
-# 			And I input "1,000" text in "Q" field of "ItemList" table
+# 			And I input "1,000" text in "Quantity" field of "ItemList" table
 # 			And I input "40,00" text in "Price" field of "ItemList" table
 # 			And I finish line editing in "ItemList" table
 # 			And I click the button named "FormPost"
@@ -268,8 +268,8 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesInvoice154504$$" variable
@@ -329,7 +329,7 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I move to "Other" tab
@@ -478,7 +478,7 @@ Scenario: _154514 message when trying to re-create Goods receipt based on Purcha
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I move to "Other" tab
@@ -623,8 +623,8 @@ Scenario: _154520 message when trying to re-create Shipment confirmation based o
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesInvoice154508$$" variable
@@ -679,8 +679,8 @@ Scenario: _154524 message when trying to create Shipment confirmation based on S
 				| 'Item key' |
 				| 'Rent'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
@@ -726,8 +726,8 @@ Scenario: _154526 message when trying to create Goods receipt based on Purchase 
 				| 'Item key' |
 				| 'Rent'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
@@ -773,7 +773,7 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "List" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And in the table "ItemList" I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
@@ -785,7 +785,7 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 				| 'Item'    | 'Item key' |
 				| 'Service' | 'Rent'     |
 			And I select current line in "List" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And in the table "ItemList" I click "Add" button
@@ -800,7 +800,7 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 				| 'Boots' | '37/18SD'  |
 			And I select current line in "List" table
 			And I select "No reserve" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder154512$$" variable
 		And I delete "$$SalesOrder154512$$" variable
@@ -921,7 +921,7 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 # 				| 'Trousers' | '38/Yellow' |
 # 			And I select current line in "List" table
 # 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-# 			And I input "2,000" text in "Q" field of "ItemList" table
+# 			And I input "2,000" text in "Quantity" field of "ItemList" table
 # 		And I click the button named "FormPost"
 # 		And I delete "$$NumberSalesOrder154514$$" variable
 # 		And I delete "$$SalesOrder154514$$" variable
@@ -931,7 +931,7 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 # 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 # 		And I click "OK" button
 # 		And I select current line in "ItemList" table
-# 		And I input "1,000" text in "Q" field of "ItemList" table
+# 		And I input "1,000" text in "Quantity" field of "ItemList" table
 # 		And I click the button named "FormPostAndClose"
 # 	* Create second Sales invoice
 # 		And I click the button named "FormDocumentSalesInvoiceGenerate"
@@ -978,7 +978,7 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 # 				| 'Item'     | 'Item key'  |
 # 				| 'Trousers' | '38/Yellow' |
 # 			And I select current line in "List" table
-# 			And I input "2,000" text in "Q" field of "ItemList" table
+# 			And I input "2,000" text in "Quantity" field of "ItemList" table
 # 			And I input "10,00" text in "Price" field of "ItemList" table
 # 			And I select "Approved" exact value from "Status" drop-down list
 # 		And I click the button named "FormPost"
@@ -990,7 +990,7 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 # 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 # 		And I click "OK" button
 # 		And I select current line in "ItemList" table
-# 		And I input "1,000" text in "Q" field of "ItemList" table
+# 		And I input "1,000" text in "Quantity" field of "ItemList" table
 # 		And I click the button named "FormPostAndClose"
 # 	* Create second Purchase invoice based on Purchase order
 # 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
@@ -1035,7 +1035,7 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I input "4,000" text in "Q" field of "ItemList" table
+			And I input "4,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -1051,7 +1051,7 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -1067,7 +1067,7 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I select current line in "List" table
 			And I activate "Procurement method" field in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Filling in Manager segment
 			And I move to "Other" tab
@@ -1130,9 +1130,9 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '36/Yellow' |
-			And I activate "Q" field in "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
@@ -1238,7 +1238,7 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 				And I select current line in "List" table
 				And I activate "Procurement method" field in "ItemList" table
 				And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-				And I input "4,000" text in "Q" field of "ItemList" table
+				And I input "4,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 				And I move to "Other" tab
 				And I click Select button of "Manager segment" field
@@ -1284,7 +1284,7 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 				And I select current line in "List" table
 				And I activate "Procurement method" field in "ItemList" table
 				And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-				And I input "4,000" text in "Q" field of "ItemList" table
+				And I input "4,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
 				And I select "Wait" exact value from "Status" drop-down list
 		* Fiiling in manager segment
@@ -1337,9 +1337,9 @@ Scenario: _015452 check message output when trying to create a subsequent order 
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
-			And I activate "Q" field in "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
@@ -1407,7 +1407,7 @@ Scenario: _015456 notification when trying to post a Sales order without filling
 			And I activate "Procurement method" field in "ItemList" table
 			And I click Clear button of "Procurement method" field
 			And I move to the next attribute
-			And I input "8,000" text in "Q" field of "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 	* Check message output
 		And I click the button named "FormPost"

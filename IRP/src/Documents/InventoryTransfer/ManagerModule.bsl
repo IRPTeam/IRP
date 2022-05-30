@@ -191,7 +191,8 @@ Function ItemList()
 		   |	InventoryTransferItemList.Ref AS Basis,
 		   |	InventoryTransferItemList.Ref.UseGoodsReceipt AS UseGoodsReceipt,
 		   |	InventoryTransferItemList.Ref.UseShipmentConfirmation AS UseShipmentConfirmation,
-		   |	InventoryTransferItemList.Ref.Branch AS Branch
+		   |	InventoryTransferItemList.Ref.Branch AS Branch,
+		   |	InventoryTransferItemList.Key AS Key
 		   |INTO ItemList
 		   |FROM
 		   |	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
@@ -200,12 +201,14 @@ Function ItemList()
 EndFunction
 
 Function SerialLotNumbers()
-	Return "SELECT
+	Return 
+	"SELECT
 	|	SerialLotNumbers.Ref.Date AS Period,
 	|	SerialLotNumbers.Ref.Company AS Company,
 	|	SerialLotNumbers.Ref.Branch AS Branch,
 	|	SerialLotNumbers.Key,
 	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
 	|	SerialLotNumbers.Quantity,
 	|	ItemList.ItemKey AS ItemKey,
 	|	SerialLotNumbers.Ref.UseGoodsReceipt AS UseGoodsReceipt,
@@ -221,30 +224,73 @@ Function SerialLotNumbers()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.StoreSender AS Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Quantity,
-		   |	ItemList.Period
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.UseShipmentConfirmation
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.StoreReceiver AS Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Quantity,
-		   |	ItemList.Period
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.UseGoodsReceipt";
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.StoreSender AS Store,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END AS SerialLotNumber,
+	|	SUM(CASE
+	|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+	|			THEN ItemList.Quantity
+	|		ELSE SerialLotNumbers.Quantity
+	|	END) AS Quantity
+	|INTO R4010B_ActualStocks
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Key = SerialLotNumbers.Key
+	|WHERE
+	|	NOT ItemList.UseShipmentConfirmation
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Expense),
+	|	ItemList.Period,
+	|	ItemList.StoreSender,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.StoreReceiver AS Store,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END AS SerialLotNumber,
+	|	SUM(CASE
+	|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+	|			THEN ItemList.Quantity
+	|		ELSE SerialLotNumbers.Quantity
+	|	END) AS Quantity
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Key = SerialLotNumbers.Key
+	|WHERE
+	|	NOT ItemList.UseGoodsReceipt
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.StoreReceiver,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END";
 EndFunction
 
 Function R4011B_FreeStocks()

@@ -314,6 +314,10 @@
       </userVisible>
       <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
+    <handlers>
+      <event>BeforeAddRow</event>
+      <name>ListBeforeAddRow</name>
+    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -558,6 +562,25 @@ WHERE
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>
+  </attributes>
+  <attributes>
+    <name>SerialLotNumberOwner</name>
+    <title>
+      <key>en</key>
+      <value>Serial lot number owner</value>
+    </title>
+    <id>2</id>
+    <valueType>
+      <types>CatalogRef.ItemKeys</types>
+      <types>CatalogRef.ItemTypes</types>
+      <types>CatalogRef.Items</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <commandInterface>
     <navigationPanel/>

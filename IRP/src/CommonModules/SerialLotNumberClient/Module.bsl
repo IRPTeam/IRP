@@ -70,12 +70,29 @@ Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	For Each RowItemList In Object.ItemList Do
 		ArrayOfSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", RowItemList.Key));
-		RowItemList.SerialLotNumbersPresentation.Clear();
-		RowItemList.SerialLotNumberIsFilling = False;
+		RowItemList.SerialLotNumbersPresentation.Clear();		
+		SerialCount = 0;
 		For Each RowSerialLotNumber In ArrayOfSerialLotNumbers Do
 			RowItemList.SerialLotNumbersPresentation.Add(RowSerialLotNumber.SerialLotNumber);
-			RowItemList.SerialLotNumberIsFilling = True;
+			SerialCount = SerialCount + RowSerialLotNumber.Quantity;
 		EndDo;
+		If ServerData = Undefined Then
+			RowItemList.UseSerialLotNumber = 
+				SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
+		Else
+			RowItemList.UseSerialLotNumber = 
+				ServerData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey) <> Undefined;
+		EndIf;
+		
+		If RowItemList.UseSerialLotNumber Then
+			RowItemList.SerialLotNumberIsFilling = RowItemList.Quantity = SerialCount;
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure FillSerialLotNumbersUse(Object, AddInfo = Undefined) Export
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	For Each RowItemList In Object.ItemList Do
 		If ServerData = Undefined Then
 			RowItemList.UseSerialLotNumber = 
 				SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
@@ -165,4 +182,59 @@ Procedure DeleteUnusedSerialLotNumbers(Object, KeyForDelete = Undefined) Export
 			Object.SerialLotNumbers.Delete(Row);
 		EndDo;
 	EndIf;
+EndProcedure
+
+// Start choice.
+// 
+// Parameters:
+//  Item - FormAllItems - Item
+//  ChoiceData - ValueList - Choice data
+//  StandardProcessing - Boolean - Standard processing
+//  Object - See Catalog.SerialLotNumbers.Form.ItemForm.Object
+//  Params - Structure:
+//  	* Item - CatalogRef.Items
+//  	* ItemKey - CatalogRef.ItemKeys
+//  	* ItemType - CatalogRef.ItemTypes
+Procedure StartChoice(Item, ChoiceData, StandardProcessing, Object, Params) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Inactive", True, DataCompositionComparisonType.NotEqual));
+
+	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("ItemType", Params.ItemType);
+	OpenSettings.FormParameters.Insert("Item", Params.Item);
+	OpenSettings.FormParameters.Insert("ItemKey", Params.ItemKey);
+
+	OpenSettings.FormParameters.Insert("FillingData", New Structure("SerialLotNumberOwner", Params.ItemKey));
+
+	DocumentsClient.SerialLotNumberStartChoice(Undefined, Object, Item, ChoiceData, StandardProcessing,
+		OpenSettings);
+EndProcedure
+
+// Edit text change.
+// 
+// Parameters:
+//  Item - FormAllItems - Item
+//  Text - String - Text
+//  StandardProcessing - Boolean - Standard processing
+//  Object - See Catalog.SerialLotNumbers.Form.ItemForm.Object
+//  Params - Structure:
+//  	* Item - CatalogRef.Items
+//  	* ItemKey - CatalogRef.ItemKeys
+//  	* ItemType - CatalogRef.ItemTypes
+&AtClient
+Procedure EditTextChange(Item, Text, StandardProcessing, Object, Params) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Inactive", True, ComparisonType.NotEqual));
+
+	AdditionalParameters = New Structure();
+	AdditionalParameters.Insert("ItemType", Params.ItemType);
+	AdditionalParameters.Insert("Item", Params.Item);
+	AdditionalParameters.Insert("ItemKey", Params.ItemKey);
+
+	DocumentsClient.SerialLotNumbersEditTextChange(Undefined, Object, Item, Text, StandardProcessing,
+		ArrayOfFilters, AdditionalParameters);
 EndProcedure

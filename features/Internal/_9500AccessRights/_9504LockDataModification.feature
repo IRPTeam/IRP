@@ -496,9 +496,9 @@ Scenario: 9504062 create rules for documents (number of days from the current da
 			| 'Number' |
 			| '1'    |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "9,000" text in "Q" field of "ItemList" table
+		And I input "9,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table		
 		And I click "Post and close" button
 		Then user message window does not contain messages
@@ -1914,7 +1914,7 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 	Then the form attribute named "Decoration1" became equal to "Decoration1"
 	Then the form attribute named "DisableRule" became equal to "No"
 	And "RuleList" table contains lines
-		| '#' | 'Type'                              | 'Attribute'         | 'Comparison type' | 'Value'   | 'Disable rule' | 'Set value as code' |
+		| '#' | 'Type'                              | 'Attribute'         | 'ComparisonType' | 'Value'   | 'DisableRule' | 'SetValueAsCode' |
 		| '1' | 'InformationRegister.CurrencyRates' | 'Dimensions.Source' | '='               | 'Bank UA' | 'No'           | 'No'                |
 		| '2' | 'InformationRegister.Taxes'         | 'Dimensions.Tax'    | 'IN'              | 'VAT'     | 'Yes'          | 'No'                |
 	And I close TestClient session

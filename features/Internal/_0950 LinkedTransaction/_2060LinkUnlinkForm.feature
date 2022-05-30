@@ -225,7 +225,7 @@ Scenario: _2060002 check link/unlink form in the SC
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+		| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 		| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
 		| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
 		| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '2,000' | 'SC'           |
@@ -267,7 +267,7 @@ Scenario: _2060002 check link/unlink form in the SC
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
 			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '2,000' | 'SC'           |
@@ -305,7 +305,7 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Boots (12 pcs)' |
 		And I select current line in "List" table
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
 			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '24,000' | 'SC'          |
@@ -454,7 +454,7 @@ Scenario: _2060003 check auto link button in the SI
 		And I click "Ok" button
 	* Check auto link
 		And "ItemList" table contains lines
-			| '#' | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'    | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             |
+			| '#' | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'    | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             |
 			| '1' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'Distribution department' | 'No'                 | ''                   | '2,000'  | 'pcs'  | '150,72'     | '520,00'   | '18%' | '52,00'         | '837,28'     | '988,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
 			| '2' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'Distribution department' | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00'   | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
 			| '3' | ''         | 'Revenue'      | 'en description is empty' | 'Service' | 'Interner' | 'Front office'            | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
@@ -589,7 +589,7 @@ Scenario: _20600031 check Link unlink basis documents form
 			And in the table "BasisesTree" I click the button named "Link"
 			And I click "Ok" button
 			And "ItemList" table became equal
-				| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Price'  | 'Sales order'                             |
+				| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Price'  | 'Sales order'                             |
 				| 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  | '520,00' | 'Sales order 3 dated 27.01.2021 19:50:45' |
 		And I close all client application windows
 		
@@ -656,7 +656,7 @@ Scenario: _2060004 check link/unlink form in the SRO
 		And I click "Save" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'SR'        | '1,000' | 'SRO&SR'       |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '2,000' | 'SRO&SR'       |
 			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '4,000' | 'SRO&SR'       |
@@ -675,7 +675,7 @@ Scenario: _2060004 check link/unlink form in the SRO
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Item'  | 'Quantity'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
 			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
 			| 'Boots' | '2,000' | 'pcs'  | ''                                            | '37/18SD'  |
 			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |	
@@ -693,19 +693,19 @@ Scenario: _2060004 check link/unlink form in the SRO
 		And I click "Ok" button
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'SR'        | '1,000' | 'SRO&SR'       |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '2,000' | 'SRO&SR'       |
 			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '4,000' | 'SRO&SR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Item'  | 'Quantity'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
 			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
 			| 'Boots' | '2,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '37/18SD'  |
 			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |
 	* Delete string, add it again, change unit
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q' | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
 			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 01' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And in the table "ItemList" I click "Add basis documents" button
@@ -716,12 +716,12 @@ Scenario: _2060004 check link/unlink form in the SRO
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Item'  | 'Quantity'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
 			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
 			| 'Boots' | '2,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '37/18SD'  |
 			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Boots' | '37/18SD'  | '2,000' | 'Store 01' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -732,7 +732,7 @@ Scenario: _2060004 check link/unlink form in the SRO
 		And I select current line in "List" table
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'SR'        | '1,000' | 'SRO&SR'       |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '4,000' | 'SRO&SR'       |
 			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '24,000' | 'SRO&SR'       |
@@ -749,7 +749,7 @@ Scenario: _2060004 check link/unlink form in the SRO
 			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
+			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
 			| 'Store 01' | '1,000'                 | 'Boots' | '1,000' | 'pcs'            | '113,71'     | '700,00'   | '18%' | '586,29'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
 			| 'Store 01' | '4,000'                 | 'Dress' | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | '1 742,12'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  | 'No'     | ''              |
 			| 'Store 01' | '24,000'                | 'Boots' | '2,000' | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
@@ -816,7 +816,7 @@ Scenario: _2060005 check link/unlink form in the SR
 		And I click "Save" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000' | 'SRO&SR'       |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SRO&SR'       |
 			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000' | 'SRO&SR'       |
@@ -835,7 +835,7 @@ Scenario: _2060005 check link/unlink form in the SR
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Item'  | 'Quantity'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
 			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
 			| 'Boots' | '2,000' | 'pcs'  | ''                                            | '37/18SD'  |
 			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |	
@@ -853,19 +853,19 @@ Scenario: _2060005 check link/unlink form in the SR
 		And I click "Ok" button
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000' | 'SRO&SR'       |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SRO&SR'       |
 			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000' | 'SRO&SR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Item'  | 'Quantity'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
 			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
 			| 'Boots' | '2,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '37/18SD'  |
 			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |
 	* Delete string, add it again, change unit
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q' | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
 			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 01' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click "Add basis documents" button
@@ -876,12 +876,12 @@ Scenario: _2060005 check link/unlink form in the SR
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Item'  | 'Quantity'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
 			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
 			| 'Boots' | '2,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '37/18SD'  |
 			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Boots' | '37/18SD'  | '2,000' | 'Store 01' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -892,7 +892,7 @@ Scenario: _2060005 check link/unlink form in the SR
 		And I select current line in "List" table
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000'  | 'SRO&SR'       |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000'  | 'SRO&SR'       |
 			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '24,000' | 'SRO&SR'       |
@@ -909,7 +909,7 @@ Scenario: _2060005 check link/unlink form in the SR
 			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' |
+			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' |
 			| 'Store 01' | '1,000'                 | 'Boots' | '1,000' | 'pcs'            | '113,71'     | '700,00'   | '18%' | '586,29'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  |
 			| 'Store 01' | '4,000'                 | 'Dress' | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | '1 742,12'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  |
 			| 'Store 01' | '24,000'                | 'Boots' | '2,000' | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  |
@@ -1023,7 +1023,7 @@ Scenario: _2060008 check link/unlink form in the PRO
 		And I click "Save" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '10,000' | 'PRO&PR'       |
 			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '3,000'  | 'PRO&PR'       |
 			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '24,000' | 'PRO&PR'       |
@@ -1039,7 +1039,7 @@ Scenario: _2060008 check link/unlink form in the PRO
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Unit'           | 'Purchase invoice'                               |
 			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | ''                                               |
 			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |				
@@ -1057,19 +1057,19 @@ Scenario: _2060008 check link/unlink form in the PRO
 		And I click "Ok" button
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '10,000' | 'PRO&PR'       |
 			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '3,000'  | 'PRO&PR'       |
 			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '24,000' | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Unit'           | 'Purchase invoice'                               |
 			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 	* Delete string, add it again, change unit
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'M/White'  | '3,000' | 'Store 02' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "AddBasisDocuments"
@@ -1080,12 +1080,12 @@ Scenario: _2060008 check link/unlink form in the PRO
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Unit'           | 'Purchase invoice'                               |
 			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Boots' | '36/18SD'  | '2,000' | 'Store 02' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -1096,7 +1096,7 @@ Scenario: _2060008 check link/unlink form in the PRO
 		And I select current line in "List" table
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '10,000' | 'PRO&PR'       |
 			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '2,000'  | 'PRO&PR'       |
 			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '3,000' | 'PRO&PR'       |
@@ -1112,7 +1112,7 @@ Scenario: _2060008 check link/unlink form in the PRO
 			| 'Dress (M/White)'                                | '3,000'    | 'pcs'  | '520,00' | 'TRY'      |			
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Cancel' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
+			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Cancel' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
 			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | 'No'     | '10,000' | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
 			| 'Store 02' | '2,000'                 | '2' | 'Boots' | '36/18SD'  | 'No'     | '2,000'  | 'pcs'  | '252,00'     | '700,00' | '18%' | ''                 | '1 400,00'   | '1 652,00'     | ''             |
 			| 'Store 02' | '3,000'                 | '3' | 'Dress' | 'M/White'  | 'No'     | '3,000'  | 'pcs'  | '280,80'     | '520,00' | '18%' | ''                 | '1 560,00'   | '1 840,80'     | ''             |		
@@ -1174,7 +1174,7 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I click "Save" button		
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
 			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
 			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '24,000' | 'PRO&PR'       |
@@ -1190,7 +1190,7 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Unit'           | 'Purchase invoice'                               |
 			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | ''                                               |
 			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |				
@@ -1208,19 +1208,19 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I click "Ok" button
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
 			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
 			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '24,000' | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Unit'           | 'Purchase invoice'                               |
 			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 	* Delete string, add it again, change unit
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Dress' | 'M/White'  | '3,000' | 'Store 02' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "AddBasisDocuments"
@@ -1231,12 +1231,12 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Unit'           | 'Purchase invoice'                               |
 			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
 			| 'Boots' | '36/18SD'  | '2,000' | 'Store 02' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -1247,7 +1247,7 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I select current line in "List" table
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
 			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
 			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '2,000'  | 'PRO&PR'       |
 			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
@@ -1263,7 +1263,7 @@ Scenario: _2060008 check link/unlink form in the PR
 			| 'Dress (M/White)'                                | '3,000'    | 'pcs'  | '520,00' | 'TRY'      |			
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
+			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
 			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | '10,000' | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
 			| 'Store 02' | '2,000'                 | '2' | 'Boots' | '36/18SD'  | '2,000'  | 'pcs'  | '252,00'     | '700,00' | '18%' | ''                 | '1 400,00'   | '1 652,00'     | ''             |
 			| 'Store 02' | '3,000'                 | '3' | 'Dress' | 'M/White'  | '3,000'  | 'pcs'  | '280,80'     | '520,00' | '18%' | ''                 | '1 560,00'   | '1 840,80'     | ''             |
@@ -1475,7 +1475,7 @@ Scenario: _2060015 check price in the SI when link document with different price
 		And I select current line in "List" table
 	* Change price
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price'  | 'Price type'        | 'Q'     |
+			| 'Item'  | 'Item key' | 'Price'  | 'Price type'        | 'Quantity'     |
 			| 'Dress' | 'XS/Blue'  | '520,00' | 'Basic Price Types' | '1,000' |
 		And I select current line in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
@@ -1509,7 +1509,7 @@ Scenario: _2060015 check price in the SI when link document with different price
 		And I click "Ok" button
 	* Check item tab
 		And "ItemList" table contains lines
-			| '#' | 'SalesTax' | 'Price type'              | 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
+			| '#' | 'SalesTax' | 'Price type'              | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
 			| '1' | '1%'       | 'en description is empty' | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  | '81,22'      | '500,00' | '18%' | '418,78'     | '500,00'       | 'Store 01' | 'No'                        | 'Sales order 1 051 dated 20.07.2021 10:44:11' |
 			| '2' | ''         | 'Basic Price Types'       | 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  | '83,90'      | '550,00' | '18%' | '466,10'     | '550,00'       | 'Store 01' | 'No'                        | 'Sales order 1 051 dated 20.07.2021 10:44:11' |
 		And I close all client application windows
@@ -1575,7 +1575,7 @@ Scenario: _2060016 check price in the PI when link document with different price
 		And I select current line in "List" table
 	* Change price
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Price'  | 'Price type'        | 'Q'     |
+			| 'Item'  | 'Item key' | 'Price'  | 'Price type'        | 'Quantity'     |
 			| 'Dress' | 'XS/Blue'  | '520,00' | 'Basic Price Types' | '1,000' |
 		And I select current line in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
@@ -1609,7 +1609,7 @@ Scenario: _2060016 check price in the PI when link document with different price
 		And I click "Ok" button
 	* Check item tab
 		And "ItemList" table contains lines
-			| 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Q'     | 'Price'  | 'VAT' | 'Total amount' | 'Store'    | 'Purchase order'                                 | 'Net amount' | 'Use goods receipt' |
+			| 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Quantity'     | 'Price'  | 'VAT' | 'Total amount' | 'Store'    | 'Purchase order'                                 | 'Net amount' | 'Use goods receipt' |
 			| 'en description is empty' | 'Dress' | 'XS/Blue'  | 'No'                 | '90,00'      | 'pcs'  | '1,000' | '500,00' | '18%' | '590,00'       | 'Store 03' | 'Purchase order 1 051 dated 20.07.2021 10:22:16' | '500,00'     | 'Yes'               |
 			| 'Basic Price Types'       | 'Dress' | 'S/Yellow' | 'No'                 | '99,00'      | 'pcs'  | '1,000' | '550,00' | '18%' | '649,00'       | 'Store 03' | 'Purchase order 1 051 dated 20.07.2021 10:22:16' | '550,00'     | 'Yes'               |		
 		And I close all client application windows
@@ -1733,7 +1733,7 @@ Scenario: _2060017 check link form in the SI with 3 lines with the same items
 			| 'Scarf (XS/Red)'                                     | '3,000'    | 'pcs'  | '100,00' | 'TRY'      |
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| '#' | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 |
+			| '#' | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 |
 			| '1' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '99,000' | 'pcs'  | '1 608,19'   | '100,00' | '18%' | ''              | '8 291,81'   | '9 900,00'     | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | 'Sales order 1 052 dated 07.09.2021 21:06:20' |
 			| '2' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '3,000'  | 'pcs'  | '48,73'      | '100,00' | '18%' | ''              | '251,27'     | '300,00'       | ''                    | 'Store 01' | ''              | 'No'                        | ''       | 'Sales order 1 053 dated 07.09.2021 10:00:00' |
 			| '3' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '1,000'  | 'pcs'  | '16,24'      | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | 'Sales order 1 052 dated 07.09.2021 21:06:20' |
@@ -1751,7 +1751,7 @@ Scenario: _2060017 check link form in the SI with 3 lines with the same items
 		And in the table "BasisesTree" I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| '#' | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' |
+			| '#' | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' |
 			| '1' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '99,000' | 'pcs'  | '1 608,19'   | '100,00' | '18%' | ''              | '8 291,81'   | '9 900,00'     | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            |
 			| '2' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '3,000'  | 'pcs'  | '48,73'      | '100,00' | '18%' | ''              | '251,27'     | '300,00'       | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            |
 			| '3' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '1,000'  | 'pcs'  | '16,24'      | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            |
@@ -1846,7 +1846,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 		And in the table "BasisesTree" I click the button named "Link"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | '137,29'     | 'pcs'  | ''                   | '9,000' | '100,00' | '18%' | ''              | '900,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 052 dated 07.09.2021 21:34:37' | ''       | ''            | '762,71'     | 'Yes'               |
 			| '2' | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | '15,25'      | 'pcs'  | ''                   | '1,000' | '100,00' | '18%' | ''              | '100,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 052 dated 07.09.2021 21:34:37' | ''       | ''            | '84,75'      | 'Yes'               |
 	* Autolink
@@ -1856,7 +1856,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 		And in the table "BasisesTree" I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | '137,29'     | 'pcs'  | ''                   | '9,000' | '100,00' | '18%' | ''              | '900,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 052 dated 07.09.2021 21:34:37' | ''       | ''            | '762,71'     | 'Yes'               |
 			| '2' | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | '15,25'      | 'pcs'  | ''                   | '1,000' | '100,00' | '18%' | ''              | '100,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 052 dated 07.09.2021 21:34:37' | ''       | ''            | '84,75'      | 'Yes'               |
 		And I close all client application windows
@@ -2013,7 +2013,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 		And I click "Ok" button
 	* Check tab
 		And "ItemList" table became equal
-			| '#' | 'Price type'              | 'Item'    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Price type'              | 'Item'    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | 'en description is empty' | 'Phone A' | 'Brown'    | ''                   | 'No'                 | '180,00'     | 'pcs'  | '13456778; 12345678' | '2,000' | '500,00' | '18%' | ''              | '1 180,00'     | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '1 000,00'   | 'Yes'               |
 			| '2' | 'en description is empty' | 'Phone A' | 'White'    | ''                   | 'No'                 | '100,80'     | 'pcs'  | '12345670'           | '1,000' | '560,00' | '18%' | ''              | '660,80'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '560,00'     | 'Yes'               |
 			| '3' | 'en description is empty' | 'Phone A' | 'Brown'    | ''                   | 'No'                 | '90,00'      | 'pcs'  | '13456778'           | '1,000' | '500,00' | '18%' | ''              | '590,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '500,00'     | 'Yes'               |

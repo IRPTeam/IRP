@@ -25,41 +25,39 @@ Procedure SerialLotNumbersOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure SerialLotNumbersSerialLotNumberCreating(Item, StandardProcessing)
+	
+	StandardProcessing = False;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", ThisObject.ItemType);
+	FormParameters.Insert("Item", ThisObject.Item);
+	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
+	FormParameters.Insert("Description", Item.EditText);
+	
+	OpenForm("Catalog.SerialLotNumbers.ObjectForm", FormParameters, ThisObject, , , , New NotifyDescription("AfterCreateNewSerial", ThisObject));
+EndProcedure
+
+&AtClient
 Procedure SerialLotNumbersSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", ThisObject.ItemType);
+	FormParameters.Insert("Item", ThisObject.Item);
+	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
 
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(
-		DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(
-		DocumentsClientServer.CreateFilterItem("Inactive", True, DataCompositionComparisonType.NotEqual));
-
-	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("ItemType", ThisObject.ItemType);
-	OpenSettings.FormParameters.Insert("Item", ThisObject.Item);
-	OpenSettings.FormParameters.Insert("ItemKey", ThisObject.ItemKey);
-
-	OpenSettings.FormParameters.Insert("FillingData", New Structure("SerialLotNumberOwner", ThisObject.ItemKey));
-
-	DocumentsClient.SerialLotNumberStartChoice(Undefined, ThisObject, Item, ChoiceData, StandardProcessing,
-		OpenSettings);
+	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
 EndProcedure
 
 &AtClient
 Procedure SerialLotNumbersSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(
-	DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(
-	DocumentsClientServer.CreateFilterItem("Inactive", True, ComparisonType.NotEqual));
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", ThisObject.ItemType);
+	FormParameters.Insert("Item", ThisObject.Item);
+	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
 
-	AdditionalParameters = New Structure();
-	AdditionalParameters.Insert("ItemType", ThisObject.ItemType);
-	AdditionalParameters.Insert("Item", ThisObject.Item);
-	AdditionalParameters.Insert("ItemKey", ThisObject.ItemKey);
-
-	DocumentsClient.SerialLotNumbersEditTextChange(Undefined, ThisObject, Item, Text, StandardProcessing,
-		ArrayOfFilters, AdditionalParameters);
+	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
 EndProcedure
 
 &AtClient
@@ -118,19 +116,24 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, ThisObject, ThisObject, ThisObject);
+	DocumentsClient.SearchByBarcode(Barcode, New Structure(), ThisObject, ThisObject);
 EndProcedure
 
+// Search by barcode end.
+// 
+// Parameters:
+//  Result Result
+//  AdditionalParameters Additional parameters
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	LastBarcode = "";
 	SerialLotNumberStatus = "";
 	Items.CreateSerialLotNumber.Visible = False;
-	If AdditionalParameters.FoundedItems.Count() Then
-		ScannedInfo = AdditionalParameters.FoundedItems[0];
-		Barcode = AdditionalParameters.Barcodes[0];
+	If Result.FoundedItems.Count() Then
+		ScannedInfo = Result.FoundedItems[0];
+		Barcode = Result.Barcodes[0];
 		If Not ValueIsFilled(ScannedInfo.SerialLotNumber) Then
-			CalculateStatus(StrTemplate(R().InfoMessage_017, AdditionalParameters.Barcodes[0]));
+			CalculateStatus(StrTemplate(R().InfoMessage_017, Result.Barcodes[0]));
 		ElsIf Not ScannedInfo.ItemKey.IsEmpty() And Not ScannedInfo.ItemKey = ItemKey Then
 			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.ItemKey));
 		ElsIf Not ScannedInfo.Item.IsEmpty() And Not ScannedInfo.Item = Item Then
@@ -138,31 +141,36 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		ElsIf Not ScannedInfo.ItemType.IsEmpty() And Not ScannedInfo.ItemType = ItemType Then
 			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.ItemType));
 		Else
-			Row = SerialLotNumbers.Add();
-			Row.SerialLotNumber = ScannedInfo.SerialLotNumber;
-			Row.Quantity = 1;
-			UpdateFooter();
+			AddNewSerialLotNumberRow(ScannedInfo.SerialLotNumber);
 		EndIf;
 	Else
-		LastBarcode = AdditionalParameters.Barcodes[0];
-		CalculateStatus(StrTemplate(R().InfoMessage_015, LastBarcode));
-		Items.CreateSerialLotNumber.Visible = True;
+		If AutoCreateNewSerialLotNumbers Then
+			SerialLotNumber = SerialLotNumbersServer.GetNewSerialLotNumber(Result.Barcodes[0], ItemKey);
+			AddNewSerialLotNumberRow(SerialLotNumber);
+		Else
+			LastBarcode = Result.Barcodes[0];
+			CalculateStatus(StrTemplate(R().InfoMessage_015, LastBarcode));
+			Items.CreateSerialLotNumber.Visible = True;
+		EndIf;
 	EndIf;
 EndProcedure
 
 &AtClient
+Procedure AddNewSerialLotNumberRow(SerialLotNumber)
+	Var Row;
+	Row = SerialLotNumbers.Add();
+	Row.SerialLotNumber = SerialLotNumber;
+	Row.Quantity = 1;
+	UpdateFooter();
+EndProcedure
+
+&AtClient
 Procedure CreateSerialLotNumber(Command)
-	Params = New Structure();
-	Params.Insert("ItemType", ItemType);
-	Params.Insert("Item", Item);
-	Params.Insert("ItemKey", ItemKey);
-	Params.Insert("Barcode", LastBarcode);
-	CloseNotifyDescription = New NotifyDescription("AfterCreateSerialLotNumber", ThisObject, Params);
-	OpenForm("Catalog.SerialLotNumbers.ObjectForm", Params, , , , , CloseNotifyDescription,
-		FormWindowOpeningMode.LockOwnerWindow);
+	SerialLotNumber = SerialLotNumbersServer.GetNewSerialLotNumber(LastBarcode, ItemKey);
 	LastBarcode = "";
 	SerialLotNumberStatus = "";
 	Items.CreateSerialLotNumber.Visible = False;
+	AddNewSerialLotNumberRow(SerialLotNumber);
 EndProcedure
 
 &AtClient
@@ -178,3 +186,13 @@ Procedure CalculateStatus(SetStatus = Undefined)
 	EndIf;
 
 EndProcedure
+
+Function AfterCreateNewSerial(Result, AddInfo) Export
+	
+	If ValueIsFilled(Result) Then
+		Row = SerialLotNumbers.FindByID(Items.SerialLotNumbers.CurrentRow);
+		Row.SerialLotNumber = Result;
+	EndIf;
+	ThisObject.CurrentItem = Items.SerialLotNumbersQuantity;
+	
+EndFunction

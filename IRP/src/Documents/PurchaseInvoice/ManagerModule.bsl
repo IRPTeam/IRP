@@ -141,7 +141,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
+//	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
 
 // @deprecated
@@ -477,22 +477,24 @@ Function ItemListLandedCost()
 EndFunction
 
 Function SerialLotNumbers()
-	Return "SELECT
-		   |	SerialLotNumbers.Ref.Date AS Period,
-		   |	SerialLotNumbers.Ref.Company AS Company,
-		   |	SerialLotNumbers.Ref.Branch AS Branch,
-		   |	SerialLotNumbers.Key,
-		   |	SerialLotNumbers.SerialLotNumber,
-		   |	SerialLotNumbers.Quantity,
-		   |	ItemList.ItemKey AS ItemKey
-		   |INTO SerialLotNumbers
-		   |FROM
-		   |	Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
-		   |		LEFT JOIN Document.PurchaseInvoice.ItemList AS ItemList
-		   |		ON SerialLotNumbers.Key = ItemList.Key
-		   |		AND ItemList.Ref = &Ref
-		   |WHERE
-		   |	SerialLotNumbers.Ref = &Ref";
+	Return 
+	"SELECT
+	|	SerialLotNumbers.Ref.Date AS Period,
+	|	SerialLotNumbers.Ref.Company AS Company,
+	|	SerialLotNumbers.Ref.Branch AS Branch,
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
+	|	SerialLotNumbers.Quantity,
+	|	ItemList.ItemKey AS ItemKey
+	|INTO SerialLotNumbers
+	|FROM
+	|	Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
+	|		LEFT JOIN Document.PurchaseInvoice.ItemList AS ItemList
+	|		ON SerialLotNumbers.Key = ItemList.Key
+	|		AND ItemList.Ref = &Ref
+	|WHERE
+	|	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function IncomingStocksReal()
@@ -739,17 +741,41 @@ Function R2013T_SalesOrdersProcurement()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.UseGoodsReceipt
-		   |	AND NOT ItemList.GoodsReceiptExists";
-
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END AS SerialLotNumber,
+	|	SUM(CASE
+	|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+	|			THEN ItemList.Quantity
+	|		ELSE SerialLotNumbers.Quantity
+	|	END) AS Quantity
+	|INTO R4010B_ActualStocks
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Key = SerialLotNumbers.Key
+	|WHERE
+	|	NOT ItemList.IsService
+	|	AND NOT ItemList.UseGoodsReceipt
+	|	AND NOT ItemList.GoodsReceiptExists
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END";
 EndFunction
 
 Function R4011B_FreeStocks()

@@ -171,8 +171,8 @@ Scenario: _029103 create a Purchase order for service
 		| 'Description'              |
 		| 'Telephone communications' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -203,7 +203,7 @@ Scenario: _029104 create a Purchase invoice for service
 	And I click "Ok" button
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
-		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Profit loss center' | 'Purchase order'      |
+		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Quantity'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Profit loss center' | 'Purchase order'      |
 		| '1 000,00' | 'Service' | '18%' | 'Interner' | '1,000' | '152,54'     | 'pcs'  | '847,46'     | '1 000,00'     | 'Telephone communications' | 'Front office'  | '$$PurchaseOrder029103$$' |
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseInvoice029104$$" variable
@@ -282,8 +282,8 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			| Description              |
 			| Telephone communications |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I select current line in "ItemList" table
@@ -316,8 +316,8 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 				| Description |
 				| Software    |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -370,15 +370,15 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 			| Item    | Item key |
 			| Service | Rent     |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Q'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Quantity'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000' | ''              | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | 'Store 01' |
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "84,75"
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "15,25"
@@ -396,8 +396,8 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 			| 'Item'  | 'Item key' |
 			| 'Table' | 'Table'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -408,7 +408,7 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "1 083,05"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "7 100,00"
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Q'      | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Quantity'      | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000'  | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | 'Store 01' |
 			| '700,00' | 'Table'   | '18%' | 'Table'    | 'Stock'              | 'en description is empty' | '10,000' | 'pcs'  | 'No'                 | '1 067,80'   | '5 932,20'   | '7 000,00'     | 'Store 01' |
 		And I input end of the current month date in "Delivery date" field
@@ -683,13 +683,13 @@ Scenario: _029150 create Retail return receipt for service and product
 			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Sales person'                 | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
 			| ''                               | '*'      | '-1'        | '50'     | '42,37'      | ''              | 'Main Company' | '*'       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
 			| ''                               | '*'      | '-1'        | '200'    | '169,49'     | ''              | 'Main Company' | '*'       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
-		And I select "R3050 Retail cash" exact value from "Register" drop-down list
+		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3050 Retail cash"' | ''       | ''          | ''           | ''             | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                              | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                              | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
-			| ''                              | '*'      | '-450'      | ''           | 'Main Company' | '*'       | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
+			| 'Register  "R3050 Pos cash balances"' | ''       | ''          | ''           | ''             | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
+			| ''                                    | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
+			| ''                                    | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
+			| ''                                    | '*'      | '-450'      | ''           | 'Main Company' | '*'       | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
 	
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button

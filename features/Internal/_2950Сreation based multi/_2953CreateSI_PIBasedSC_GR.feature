@@ -89,7 +89,7 @@ Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one 
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -109,7 +109,7 @@ Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one 
 		And I click "Ok" button
 	* Check filling in Sales invoice
 		And "ItemList" table contains lines
-		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount'  | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Sales order'                   |
+		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Offers amount'  | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Sales order'                   |
 		| '*'          | 'Trousers' | '*'      | '38/Yellow' | '5,000' | ''               | '*'          | 'pcs'  | '*'            | 'Store 02' | '*'             | '*'                             |
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
@@ -150,8 +150,8 @@ Scenario: _090502 create a purchase invoice based on Goods receipt (one to one)
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -168,7 +168,7 @@ Scenario: _090502 create a purchase invoice based on Goods receipt (one to one)
 		And I click "Ok" button
 	* Check filling in Purchase invoice
 		And "ItemList" table contains lines
-		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      |
+		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      |
 		| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   |
 		And I click the button named "FormPostAndClose"
 
@@ -199,7 +199,7 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -245,7 +245,7 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -296,7 +296,7 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -331,10 +331,10 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
-				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Q'      | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'                               |
+				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Quantity'      | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'                               |
 				| '18%' | 'Trousers' | '400,00' | '36/Yellow' | '649,77'     | '1%'       | '10,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '3 350,23'   | '4 000,00'     | 'Store 02' | '*' |
 		And "ShipmentConfirmationsTree" table contains lines
-			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'     | 'Q'      |
+			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'     | 'Quantity'      |
 			| 'Trousers' | '36/Yellow' | ''                           | '10,000'  | '10,000' | '10,000' |
 			| ''         | ''          | 'Shipment confirmation 460*' | ''        | '10,000' | '10,000' |
 		And I click the button named "FormPostAndClose"
@@ -347,11 +347,11 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
-			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |
+			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |
 			| '*'          | 'Trousers' | '*'      | '38/Yellow' | '5,000' | ''              | '*'          | 'pcs'  | '*'            | 'Store 02' | '*'             |
 			| '*'          | 'Trousers' | '*'      | '36/Yellow' | '5,000' | ''              | '*'          | 'pcs'  | '*'            | 'Store 02' | '*'             |
 		And "ShipmentConfirmationsTree" table contains lines
-			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
 			| ''         | ''          | 'Shipment confirmation 458*' | ''        | '5,000' | '5,000' |
 			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
@@ -396,8 +396,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -454,8 +454,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "400,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -512,8 +512,8 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "350,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -550,12 +550,12 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
 			And "ItemList" table contains lines
-			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
+			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
 			| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
 			| '677,97'     | 'Trousers' | '400,00' | '38/Yellow' | '2,000' | ''              | '122,03'     | 'pcs'  | '800,00'       | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
 		If the field named "LegalName" is equal to "Second Company Ferron BP" Then
 			And "ItemList" table contains lines
-			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
+			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
 			| '2 966,10'   | 'Trousers' | '350,00' | '38/Yellow' | '10,000' | ''              | '533,90'     | 'pcs'  | '3 500,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                  | ''            |
 		And I click the button named "FormPostAndClose"
 		When I click command interface button "Purchase invoice (create)"
@@ -566,12 +566,12 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
 			And "ItemList" table contains lines
-			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
+			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
 			| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
 			| '677,97'     | 'Trousers' | '400,00' | '38/Yellow' | '2,000' | ''              | '122,03'     | 'pcs'  | '800,00'       | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
 		If the field named "LegalName" is equal to "Second Company Ferron BP" Then
 			And "ItemList" table contains lines
-			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
+			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
 			| '2 966,10'   | 'Trousers' | '350,00' | '38/Yellow' | '10,000' | ''              | '533,90'     | 'pcs'  | '3 500,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
@@ -604,7 +604,7 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -643,7 +643,7 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
@@ -677,14 +677,14 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Agreement" is equal to "Personal Partner terms, $" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'        | 'Shipment confirmation'      |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'        | 'Shipment confirmation'      |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '5,000' | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*' | 'Shipment confirmation 465*' |
 		If the field named "Agreement" is equal to "Basic Partner terms, TRY" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
 			| '400,00' | 'Trousers' | '18%' | '36/Yellow' | '5,000' | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*'           |
 			And "ShipmentConfirmationsTree" table contains lines
-			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity'     |
 			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
 			| ''         | ''          | 'Shipment confirmation 466*' | ''        | '5,000' | '5,000' |
 		And I click the button named "FormPostAndClose"
@@ -696,18 +696,18 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Agreement" is equal to "Personal Partner terms, $" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '5,000' | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*'           |
 			And "ShipmentConfirmationsTree" table contains lines
-			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
 			| ''         | ''          | 'Shipment confirmation 465*' | ''        | '5,000' | '5,000' |
 		If the field named "Agreement" is equal to "Basic Partner terms, TRY" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
 			| '400,00' | 'Trousers' | '18%' | '36/Yellow' | '5,000' | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*'           |
 			And "ShipmentConfirmationsTree" table contains lines
-			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Q'     |
+			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity'     |
 			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
 			| ''         | ''          | 'Shipment confirmation 466*' | ''        | '5,000' | '5,000' |
 		And I click the button named "FormPostAndClose"
@@ -750,8 +750,8 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "500,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -803,8 +803,8 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "2,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input "400,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPost"
@@ -835,11 +835,11 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Agreement" is equal to "Vendor Ferron, USD" Then
 			And "ItemList" table contains lines
-				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
+				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
 				| '677,97'     | 'Trousers' | '400,00' | '38/Yellow' | '2,000'  | ''              | '122,03'     | 'pcs'  | '800,00'       | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
 		If the field named "Agreement" is equal to "Vendor Ferron, TRY" Then
 			And "ItemList" table contains lines
-				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
+				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
 				| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
 		And I click the button named "FormPostAndClose"
 		When I click command interface button "Purchase invoice (create)"
@@ -849,11 +849,11 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Agreement" is equal to "Vendor Ferron, USD" Then
 			And "ItemList" table contains lines
-				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
+				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'      | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
 				| '677,97'     | 'Trousers' | '400,00' | '38/Yellow' | '2,000'  | ''              | '122,03'     | 'pcs'  | '800,00'       | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
 		If the field named "Agreement" is equal to "Vendor Ferron, TRY" Then
 			And "ItemList" table contains lines
-				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
+				| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'      | 'Sales order' |
 				| '847,46'     | 'Trousers' | '500,00' | '38/Yellow' | '2,000' | ''              | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 02' | '*'             | ''             | ''              | '*'                   | ''            |
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows

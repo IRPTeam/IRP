@@ -275,9 +275,9 @@ Scenario: _2069006 check locking tab in the Retail return receipt with linked do
 // 		And I go to line in "ItemList" table
 // 			| 'Item'  | 'Item key' |
 // 			| 'Shirt' | '36/Red'   |
-// 		And I activate "Q" field in "ItemList" table
+// 		And I activate "Quantity" field in "ItemList" table
 // 		And I select current line in "ItemList" table
-// 		And I input "3,000" text in "Q" field of "ItemList" table
+// 		And I input "3,000" text in "Quantity" field of "ItemList" table
 // 		And I finish line editing in "ItemList" table
 // 		And I move to "Payments" tab
 // 		And I activate "Amount" field in "Payments" table
@@ -294,9 +294,9 @@ Scenario: _2069006 check locking tab in the Retail return receipt with linked do
 // 		And I go to line in "ItemList" table
 // 			| 'Item'  | 'Item key' |
 // 			| 'Shirt' | '36/Red'   |
-// 		And I activate "Q" field in "ItemList" table
+// 		And I activate "Quantity" field in "ItemList" table
 // 		And I select current line in "ItemList" table
-// 		And I input "6,000" text in "Q" field of "ItemList" table
+// 		And I input "6,000" text in "Quantity" field of "ItemList" table
 // 		And I finish line editing in "ItemList" table
 // 		And I move to "Payments" tab
 // 		And I activate "Amount" field in "Payments" table

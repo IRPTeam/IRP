@@ -99,7 +99,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 		Then the number of "ItemList" table lines is "меньше или равно" 3
 		If the field named "LegalName" is equal to "Second Company Ferron BP" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'             | 'Sales order' |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'             | 'Sales order' |
 			| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '305,08'     | '1 694,92'   | '2 000,00'     | 'Store 02' | '$$PurchaseOrder09030202$$ ' | ''            |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice09030202$$" variable
@@ -108,7 +108,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			And I save the window as "$$PurchaseInvoice09030202$$"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'            | 'Sales order' | 'Additional analytic' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'            | 'Sales order' | 'Additional analytic' |
 			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''            | ''                    |
 			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''            | ''                    |
 			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''            | ''                    |
@@ -126,7 +126,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 		Then the number of "ItemList" table lines is "меньше или равно" 3
 		If the field named "LegalName" is equal to "Second Company Ferron BP" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'             | 'Sales order' |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'             | 'Sales order' |
 			| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '305,08'     | '1 694,92'   | '2 000,00'     | 'Store 02' | '$$PurchaseOrder09030202$$ ' | ''            |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice09030202$$" variable
@@ -135,7 +135,7 @@ Scenario: _090302 create purchase invoice for several purchase orders with diffe
 			And I save the window as "$$PurchaseInvoice09030202$$"
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'            | 'Sales order' | 'Additional analytic' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'            | 'Sales order' | 'Additional analytic' |
 			| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''            | ''                    |
 			| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''            | ''                    |
 			| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '$$PurchaseOrder09030201$$' | ''            | ''                    |
@@ -202,7 +202,7 @@ Scenario: _090303 create Purchase invoice for several Purchase order with the sa
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
-			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'      |
+			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'      | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'      |
 			| '3 389,83'   | 'Dress'    | '200,00' | 'M/White'   | '20,000' | 'pcs'  | '4 000,00'     | 'Store 02' | '$$PurchaseOrder09030203$$' |
 			| '3 559,32'   | 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '$$PurchaseOrder09030203$$' |
 			| '5 338,98'   | 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '$$PurchaseOrder09030203$$' |
@@ -432,7 +432,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Agreement" is equal to "Vendor Ferron 1" Then
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 				| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '756,00'     | '4 200,00'   | '4 956,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 				| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '1 134,00'   | '6 300,00'   | '7 434,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
@@ -443,7 +443,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			And I save the window as "$$PurchaseInvoice090302052$$"
 		If the field named "Agreement" is equal to "Vendor Ferron Discount" Then
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | '$$PurchaseOrder090302052$$' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice090302051$$" variable
@@ -459,7 +459,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Agreement" is equal to "Vendor Ferron 1" Then
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 				| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '756,00'     | '4 200,00'   | '4 956,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
 				| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '1 134,00'   | '6 300,00'   | '7 434,00'     | 'Store 02' | '$$PurchaseOrder090302051$$' |
@@ -470,7 +470,7 @@ Scenario: _090305 create purchase invoice for several purchase order with differ
 			And I save the window as "$$PurchaseInvoice090302052$$"
 		If the field named "Agreement" is equal to "Vendor Ferron Discount" Then
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress' | '18%' | 'M/White'  | '10,000' | 'pcs'  | '360,00'     | '2 000,00'   | '2 360,00'     | 'Store 02' | '$$PurchaseOrder090302052$$' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice090302051$$" variable
@@ -579,7 +579,7 @@ Scenario: _090306 create Purchase invoice for several Purchase order with differ
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron Discount"
 		Then the form attribute named "Company" became equal to "Main Company"
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  |  'Store'    | 'Unit' | 'Q'      | 'Offers amount' | 'Net amount' | 'Total amount' | 'Purchase order'      |
+			| 'Item'     | 'Price'  | 'Item key'  |  'Store'    | 'Unit' | 'Quantity'      | 'Offers amount' | 'Net amount' | 'Total amount' | 'Purchase order'      |
 			| 'Dress'    | '200,00' | 'M/White'   |  'Store 01' | 'pcs'  | '20,000' | ''              | '4 000,00'   | '4 720,00'     | '$$PurchaseOrder090302061$$' |
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 01' | 'pcs'  | '20,000' | ''              | '4 200,00'   | '4 956,00'     | '$$PurchaseOrder090302061$$' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 01' | 'pcs'  | '30,000' | ''              | '6 300,00'   | '7 434,00'     | '$$PurchaseOrder090302061$$' |
@@ -700,7 +700,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Main Company" Then
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Net amount' | 'Total amount' | 'Purchase order'      |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'      | 'Net amount' | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'   | '2 360,00'     | '$$PurchaseOrder09030702$$' |
 			Then the form attribute named "PriceIncludeTax" became equal to "No"
 			And I click the button named "FormPost"
@@ -710,7 +710,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			And I save the window as "$$PurchaseInvoice09030702$$"
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  |  'Store'     | 'Unit' | 'Q'      | 'Net amount' | 'Total amount' | 'Purchase order'     |
+			| 'Item'     | 'Price'  | 'Item key'  |  'Store'     | 'Unit' | 'Quantity'      | 'Net amount' | 'Total amount' | 'Purchase order'     |
 			| 'Dress'    | '200,00' | 'M/White'   |  'Store 02'  | 'pcs'  | '20,000' | '4 000,00'   | '4 000,00'     | '$$PurchaseOrder09030701$$' |
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02'  | 'pcs'  | '20,000' | '4 200,00'   | '4 200,00'     | '$$PurchaseOrder09030701$$' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02'  | 'pcs'  | '30,000' | '6 300,00'   | '6 300,00'     | '$$PurchaseOrder09030701$$' |
@@ -727,7 +727,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Main Company" Then
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Net amount' | 'Total amount' | 'Purchase order'      |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'      | 'Net amount' | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'   | '2 360,00'     | '$$PurchaseOrder09030702$$' |
 			Then the form attribute named "PriceIncludeTax" became equal to "No"
 			And I click the button named "FormPost"
@@ -737,7 +737,7 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			And I save the window as "$$PurchaseInvoice09030702$$"
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  |  'Store'     | 'Unit' | 'Q'      | 'Net amount' | 'Total amount' | 'Purchase order'     |
+			| 'Item'     | 'Price'  | 'Item key'  |  'Store'     | 'Unit' | 'Quantity'      | 'Net amount' | 'Total amount' | 'Purchase order'     |
 			| 'Dress'    | '200,00' | 'M/White'   |  'Store 02'  | 'pcs'  | '20,000' | '4 000,00'   | '4 000,00'     | '$$PurchaseOrder09030701$$' |
 			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02'  | 'pcs'  | '20,000' | '4 200,00'   | '4 200,00'     | '$$PurchaseOrder09030701$$' |
 			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02'  | 'pcs'  | '30,000' | '6 300,00'   | '6 300,00'     | '$$PurchaseOrder09030701$$' |
@@ -919,8 +919,8 @@ Scenario: _090310 create Goods receipt for several Purchase invoice with differe
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "Store" became equal to "Store 02"
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
-		And I save number of "ItemList" table lines as "Q"
-		If "Q" variable is equal to 1 Then
+		And I save number of "ItemList" table lines as "Quantity"
+		If "Quantity" variable is equal to 1 Then
 			And I click the button named "FormPost"
 			And I delete "$$NumberGoodsReceipt0903N140$$" variable
 			And I delete "$$GoodsReceipt0903N140$$" variable
@@ -929,7 +929,7 @@ Scenario: _090310 create Goods receipt for several Purchase invoice with differe
 			And "ItemList" table contains lines
 			| 'Item'  | 'Quantity' | 'Item key' | 'Store'    | 'Unit' | 'Receipt basis'         |
 			| 'Dress' | '10,000'   | 'M/White'  | 'Store 02' | 'pcs'  | '$$PurchaseInvoice090302051$$' |
-		If "Q" variable is equal to 3 Then
+		If "Quantity" variable is equal to 3 Then
 			And I click the button named "FormPost"
 			And I delete "$$NumberGoodsReceipt0903N141$$" variable
 			And I delete "$$GoodsReceipt0903N141$$" variable
@@ -1702,7 +1702,7 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			And I save the window as "$$PurchaseInvoice0903N142$$"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'      | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'     | '$$PurchaseOrder0903N141$$' |
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
 			And I click the button named "FormPost"
@@ -1711,7 +1711,7 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice0903N143$$"
 			And I save the window as "$$PurchaseInvoice0903N143$$"
 			And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |'Purchase order'      |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'      | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |'Purchase order'      |
 			| 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '*'             |'$$PurchaseOrder0903N140$$' |
 			| 'Dress'    | '200,00' | 'M/White'   | '20,000' | 'pcs'  | '4 000,00'     | 'Store 02' | '*'             |'$$PurchaseOrder0903N140$$' |
 			| 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '*'             |'$$PurchaseOrder0903N140$$' |
@@ -1729,7 +1729,7 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice0903N142$$"
 			And I save the window as "$$PurchaseInvoice0903N142$$"
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'      | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 000,00'     | '$$PurchaseOrder0903N141$$' |
 		If the field named "LegalName" is equal to "Company Ferron BP" Then
 			And I click the button named "FormPost"
@@ -1738,7 +1738,7 @@ Scenario: _090318 create Purchase invoice for several Purchase order with differ
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice0903N143$$"
 			And I save the window as "$$PurchaseInvoice0903N143$$"
 			And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |'Purchase order'      |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'      | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |'Purchase order'      |
 			| 'Trousers' | '210,00' | '36/Yellow' | '30,000' | 'pcs'  | '6 300,00'     | 'Store 02' | '*'             |'$$PurchaseOrder0903N140$$' |
 			| 'Dress'    | '200,00' | 'M/White'   | '20,000' | 'pcs'  | '4 000,00'     | 'Store 02' | '*'             |'$$PurchaseOrder0903N140$$' |
 			| 'Dress'    | '210,00' | 'L/Green'   | '20,000' | 'pcs'  | '4 200,00'     | 'Store 02' | '*'             |'$$PurchaseOrder0903N140$$' |
@@ -1770,7 +1770,7 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron Partner 2"
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'      | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | '$$PurchaseOrder0903N143$$' |	
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0903N154$$" variable
@@ -1780,7 +1780,7 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 		If the field named "Partner" is equal to "Partner Ferron 1" Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron 1"
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  |  'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Item'     | 'Price'  | 'Item key'  |  'Store'    | 'Unit' | 'Quantity'      | 'Total amount' | 'Purchase order'      |
 				| 'Dress'    | '200,00' | 'M/White'   |  'Store 02' | 'pcs'  | '20,000' | '4 720,00'     | '$$PurchaseOrder0903N142$$' |
 				| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02' | 'pcs'  | '20,000' | '4 956,00'     | '$$PurchaseOrder0903N142$$' | 
 				| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02' | 'pcs'  | '30,000' | '7 434,00'     | '$$PurchaseOrder0903N142$$' |
@@ -1798,7 +1798,7 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 		If the field named "Partner" is equal to "Partner Ferron 2" Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron Partner 2"
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'      | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | '$$PurchaseOrder0903N143$$' |	
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0903N154$$" variable
@@ -1808,7 +1808,7 @@ Scenario: _090319 create Purchase invoice for several Purchase order with differ
 		If the field named "Partner" is equal to "Partner Ferron 1" Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron 1"
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  |  'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Item'     | 'Price'  | 'Item key'  |  'Store'    | 'Unit' | 'Quantity'      | 'Total amount' | 'Purchase order'      |
 				| 'Dress'    | '200,00' | 'M/White'   |  'Store 02' | 'pcs'  | '20,000' | '4 720,00'     | '$$PurchaseOrder0903N142$$' |
 				| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02' | 'pcs'  | '20,000' | '4 956,00'     | '$$PurchaseOrder0903N142$$' |
 				| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02' | 'pcs'  | '30,000' | '7 434,00'     | '$$PurchaseOrder0903N142$$' |
@@ -1845,7 +1845,7 @@ Scenario: _090320 create Purchase invoice for several Purchase order with differ
 		If "N" variable is equal to 1 Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron Discount"
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'      |
+			| 'Price'  | 'Item'  | 'Item key' | 'Quantity'      | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'      |
 			| '200,00' | 'Dress' | 'M/White'  | '10,000' | 'pcs'  | '2 360,00'     | 'Store 02' | '$$PurchaseOrder0903N145$$' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0903N148$$" variable
@@ -1855,7 +1855,7 @@ Scenario: _090320 create Purchase invoice for several Purchase order with differ
 		If "N" variable is equal to 3 Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron 1"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | '$$PurchaseOrder0903N144$$' |
 				| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '756,00'     | '4 200,00'   | '4 956,00'     | 'Store 02' | '$$PurchaseOrder0903N144$$' |
 				| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '1 134,00'   | '6 300,00'   | '7 434,00'     | 'Store 02' | '$$PurchaseOrder0903N144$$' |
@@ -1875,7 +1875,7 @@ Scenario: _090320 create Purchase invoice for several Purchase order with differ
 		If "N" variable is equal to 1 Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron Discount"
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'      | 'Goods receipt'      |
+			| 'Price'  | 'Item'  | 'Item key' | 'Quantity'      | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'      | 'Goods receipt'      |
 			| '200,00' | 'Dress' | 'M/White'  | '10,000' | 'pcs'  | '2 360,00'     | 'Store 02' | '$$PurchaseOrder0903N145$$' | '$$GoodsReceipt0903N145$$' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0903N148$$" variable
@@ -1885,7 +1885,7 @@ Scenario: _090320 create Purchase invoice for several Purchase order with differ
 		If "N" variable is equal to 3 Then
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron 1"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
+				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'      | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Purchase order'      |
 				| '200,00' | 'Dress'    | '18%' | 'M/White'   | '20,000' | 'pcs'  | '720,00'     | '4 000,00'   | '4 720,00'     | 'Store 02' | '$$PurchaseOrder0903N144$$' |
 				| '210,00' | 'Dress'    | '18%' | 'L/Green'   | '20,000' | 'pcs'  | '756,00'     | '4 200,00'   | '4 956,00'     | 'Store 02' | '$$PurchaseOrder0903N144$$' |
 				| '210,00' | 'Trousers' | '18%' | '36/Yellow' | '30,000' | 'pcs'  | '1 134,00'   | '6 300,00'   | '7 434,00'     | 'Store 02' | '$$PurchaseOrder0903N144$$' |
@@ -1922,7 +1922,7 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Main Company" Then
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'      | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | '$$PurchaseOrder0903N149$$' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0903N149$$" variable
@@ -1931,7 +1931,7 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 			And I save the window as "$$PurchaseInvoice0903N149$$"
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |'Offers amount'| 'Total amount' | 'Purchase order'      |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Quantity'      |'Offers amount'| 'Total amount' | 'Purchase order'      |
 				| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000' | ''            | '4 000,00'     | '$$PurchaseOrder0903N148$$' |
 				| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000' | ''            | '4 200,00'     | '$$PurchaseOrder0903N148$$' |
 				| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000' | ''            | '6 300,00'     | '$$PurchaseOrder0903N148$$' |
@@ -1949,7 +1949,7 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Company" is equal to "Main Company" Then
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Q'      | 'Total amount' | 'Purchase order'      |
+				| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Unit' | 'Quantity'      | 'Total amount' | 'Purchase order'      |
 				| 'Dress' | '200,00' | 'M/White'  | 'Store 02' | 'pcs'  | '10,000' | '2 360,00'     | '$$PurchaseOrder0903N149$$' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0903N149$$" variable
@@ -1958,7 +1958,7 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 			And I save the window as "$$PurchaseInvoice0903N149$$"
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |'Offers amount'| 'Total amount' | 'Purchase order'      |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Quantity'      |'Offers amount'| 'Total amount' | 'Purchase order'      |
 				| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000' | ''            | '4 000,00'     | '$$PurchaseOrder0903N148$$' |
 				| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000' | ''            | '4 200,00'     | '$$PurchaseOrder0903N148$$' |
 				| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000' | ''            | '6 300,00'     | '$$PurchaseOrder0903N148$$' |
@@ -2082,7 +2082,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Q'      | 'Offers amount' | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'          |
+			| 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'      | 'Offers amount' | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'          |
 			| '200,00' | ''       | 'Dress'    | '18%' | 'M/White'   | '20,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '610,17'     | '3 389,83'   | '4 000,00'     | 'Store 02' | '*'             | ''             | ''                   | '$$PurchaseOrder090323$$' |
 			| '210,00' | ''       | 'Dress'    | '18%' | 'L/Green'   | '20,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '640,68'     | '3 559,32'   | '4 200,00'     | 'Store 02' | '*'             | ''             | ''                   | '$$PurchaseOrder090323$$' |
 			| '210,00' | ''       | 'Trousers' | '18%' | '36/Yellow' | '30,000' | ''              | 'en description is empty' | 'pcs'  | 'No'                 | '961,02'     | '5 338,98'   | '6 300,00'     | 'Store 02' | '*'             | ''             | ''                   | '$$PurchaseOrder090323$$' |

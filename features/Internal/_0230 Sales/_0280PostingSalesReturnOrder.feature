@@ -90,7 +90,7 @@ Scenario: _028001 create document Sales return order based on SI (button Create)
 		And I select "Approved" exact value from "Status" drop-down list
 	* Check items tab
 		And "ItemList" table became equal
-			| 'Profit loss center'      | '#' | 'Item'    | 'Dont calculate row' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales invoice'                              | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' | 'Sales person' |
+			| 'Profit loss center'      | '#' | 'Item'    | 'Dont calculate row' | 'Quantity'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales invoice'                              | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' | 'Sales person' |
 			| 'Distribution department' | '1' | 'Dress'   | 'No'                 | '1,000'  | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | 'XS/Blue'  | 'No'     | ''              |'Alexander Orlov'|
 			| 'Distribution department' | '2' | 'Shirt'   | 'No'                 | '12,000' | 'pcs'            | '640,68'     | '350,00'   | '18%' | ''              | '3 559,32'   | '4 200,00'     | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '36/Red'   | 'No'     | ''              |'Alexander Orlov'|
 			| 'Distribution department' | '3' | 'Boots'   | 'No'                 | '2,000'  | 'Boots (12 pcs)' | '2 434,58'   | '8 400,00' | '18%' | '840,00'        | '13 525,42'  | '15 960,00'    | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '37/18SD'  | 'No'     | ''              |'Alexander Orlov'|
@@ -218,27 +218,27 @@ Scenario: _028009 create Sales return order without bases document
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '1' | 'Dress' | 'M/White' | 'pcs' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "100" text in "Q" field of "ItemList" table
+		And I input "100" text in "Quantity" field of "ItemList" table
 		And I input "200" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
 			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200" text in "Q" field of "ItemList" table
+		And I input "200" text in "Quantity" field of "ItemList" table
 		And I input "210" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key' | 'Unit' |
 			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "300" text in "Q" field of "ItemList" table
+		And I input "300" text in "Quantity" field of "ItemList" table
 		And I input "250" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item'     | 'Q'       | 'Item key'  | 'Store'    | 'Unit' |
+			| 'Item'     | 'Quantity'       | 'Item key'  | 'Store'    | 'Unit' |
 			| 'Dress'    | '100,000' | 'M/White'   | 'Store 01' | 'pcs'  |
 			| 'Dress'    | '200,000' | 'L/Green'   | 'Store 01' | 'pcs'  |
 			| 'Trousers' | '300,000' | '36/Yellow' | 'Store 01' | 'pcs'  |
@@ -283,7 +283,7 @@ Scenario: _028010 check filling in Row Id info table in the SRO
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                        |
 			| '$$Rov1SalesReturnOrder028009$$' | ''      | '$$Rov1SalesReturnOrder028009$$' | 'SR'        | '100,000' | ''          | ''             | '$$Rov1SalesReturnOrder028009$$' |
 			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | 'SR'        | '200,000' | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
 			| '$$Rov3SalesReturnOrder028009$$' | ''      | '$$Rov3SalesReturnOrder028009$$' | 'SR'        | '300,000' | ''          | ''             | '$$Rov3SalesReturnOrder028009$$' |
@@ -291,7 +291,7 @@ Scenario: _028010 check filling in Row Id info table in the SRO
 	* Copy string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
 		And I activate field named "ItemListQuantity" in "ItemList" table
@@ -306,25 +306,25 @@ Scenario: _028010 check filling in Row Id info table in the SRO
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                        |
 			| '$$Rov1SalesReturnOrder028009$$' | ''      | '$$Rov1SalesReturnOrder028009$$' | 'SR'        | '100,000' | ''          | ''             | '$$Rov1SalesReturnOrder028009$$' |
 			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | 'SR'        | '200,000' | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
 			| '$$Rov3SalesReturnOrder028009$$' | ''      | '$$Rov3SalesReturnOrder028009$$' | 'SR'        | '300,000' | ''          | ''             | '$$Rov3SalesReturnOrder028009$$' |
 			| '$$Rov4SalesReturnOrder028009$$' | ''      | '$$Rov4SalesReturnOrder028009$$' | 'SR'        | '208,000' | ''          | ''             | '$$Rov4SalesReturnOrder028009$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                        |
 			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | ''          | '208,000' | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
 	* Delete string and check Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'       |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'       |
 			| '4' | 'Dress' | 'L/Green'  | '208,000' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                        |
 			| '$$Rov1SalesReturnOrder028009$$' | ''      | '$$Rov1SalesReturnOrder028009$$' | 'SR'        | '100,000' | ''          | ''             | '$$Rov1SalesReturnOrder028009$$' |
 			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | 'SR'        | '200,000' | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
 			| '$$Rov3SalesReturnOrder028009$$' | ''      | '$$Rov3SalesReturnOrder028009$$' | 'SR'        | '300,000' | ''          | ''             | '$$Rov3SalesReturnOrder028009$$' |
@@ -332,26 +332,26 @@ Scenario: _028010 check filling in Row Id info table in the SRO
 	* Change quantity and check  Row ID Info tab
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '200,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "7,000" text in "Q" field of "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "RowIDInfo" table contains lines
-			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                        |
 			| '$$Rov1SalesReturnOrder028009$$' | ''      | '$$Rov1SalesReturnOrder028009$$' | 'SR'        | '100,000' | ''          | ''             | '$$Rov1SalesReturnOrder028009$$' |
 			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | 'SR'        | '7,000'   | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
 			| '$$Rov3SalesReturnOrder028009$$' | ''      | '$$Rov3SalesReturnOrder028009$$' | 'SR'        | '300,000' | ''          | ''             | '$$Rov3SalesReturnOrder028009$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I move to "Item list" tab
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
 			| '2' | 'Dress' | 'L/Green'  | '7,000' |
-		And I activate "Q" field in "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 		
@@ -370,7 +370,7 @@ Scenario: _028011 copy SRO and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Q'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Net amount' |
+			| '#' | 'Profit loss center' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Quantity'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Net amount' |
 			| '1' | ''              | 'Dress'    | 'M/White'   | 'No'                 | '100,000' | 'pcs'  | '3 050,85'   | '200,00' | '18%' | ''              | '20 000,00'    | ''                    | 'Store 01' | ''             | '16 949,15'  |
 			| '2' | ''              | 'Dress'    | 'L/Green'   | 'No'                 | '200,000' | 'pcs'  | '6 406,78'   | '210,00' | '18%' | ''              | '42 000,00'    | ''                    | 'Store 01' | ''             | '35 593,22'  |
 			| '3' | ''              | 'Trousers' | '36/Yellow' | 'No'                 | '300,000' | 'pcs'  | '11 440,68'  | '250,00' | '18%' | ''              | '75 000,00'    | ''                    | 'Store 01' | ''             | '63 559,32'  |
@@ -393,7 +393,7 @@ Scenario: _028011 copy SRO and check filling in Row Id info table
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Quantity'       | 'Basis key' | 'Current step' | 'Row ref'                        |
 			| '$$Rov1SalesReturnOrder028009$$' | ''      | '$$Rov1SalesReturnOrder028009$$' | 'SR'        | '100,000' | ''          | ''             | '$$Rov1SalesReturnOrder028009$$' |
 			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | 'SR'        | '200,000' | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
 			| '$$Rov3SalesReturnOrder028009$$' | ''      | '$$Rov3SalesReturnOrder028009$$' | 'SR'        | '300,000' | ''          | ''             | '$$Rov3SalesReturnOrder028009$$' |
@@ -472,7 +472,7 @@ Scenario: _028013 create SRO using form link/unlink
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+		| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 		| '1' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SRO&SR'       |
 		| '2' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000' | 'SRO&SR'       |
 		| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000' | 'SRO&SR'       |
@@ -491,7 +491,7 @@ Scenario: _028013 create SRO using form link/unlink
 		And I click "Ok" button
 		And I click "Save" button	
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'SR'        | '1,000' | 'SRO&SR'       |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '4,000' | 'SRO&SR'       |
 			| '3' | ''                                            | 'SR'        | '2,000' | ''             |
@@ -513,7 +513,7 @@ Scenario: _028013 create SRO using form link/unlink
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000' | 'SRO&SR'       |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SRO&SR'       |
 			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000' | 'SRO&SR'       |
@@ -541,7 +541,7 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'Dress' | 'M/White'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
 			| 'Boots' | '37/18SD'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'      | 'Store'    |
+			| 'Item'  | 'Item key' | 'Quantity'      | 'Store'    |
 			| 'Dress' | 'M/White'  | '4,000' | 'Store 01' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -551,7 +551,7 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'box Dress (8 pcs)' |
 		And I select current line in "List" table
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '#' | 'Basis'                                       | 'Next step' | 'Quantity'     | 'Current step' |
 			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000' | 'SRO&SR'       |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SRO&SR'       |
 			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '32,000' | 'SRO&SR'       |

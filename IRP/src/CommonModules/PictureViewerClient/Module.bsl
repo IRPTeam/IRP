@@ -357,8 +357,10 @@ Procedure HTMLViewControl(Form, CommandName) Export
 	Visible = CommandItem.Check;
 	
 	If Visible Then
+		//@skip-warning
 		CommandItem.BackColor = CommonFunctionsServer.GetStyleByName("ActivityColor");
 	Else
+		//@skip-warning
 		CommandItem.BackColor = CommonFunctionsServer.GetStyleByName("ButtonBackColor");
 	EndIf;
 	

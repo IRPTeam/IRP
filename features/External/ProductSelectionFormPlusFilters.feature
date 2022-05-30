@@ -105,7 +105,7 @@ Scenario: check the product selection form with price information in Sales order
 		And I click the button named "FormCommandSaveAndClose"
 		And Delay 2
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
 			| 'Dress'    | '550,00' | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '550*'          |
 			| 'Trousers' | '400,00' | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs'  | '800*'          |
 	* Add one more line to the order through the Add button
@@ -122,12 +122,12 @@ Scenario: check the product selection form with price information in Sales order
 			| Item  | Item key |
 			| Shirt | 36/Red   |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
 			| 'Dress'    | '550,00' | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '550,00'       |
 			| 'Trousers' | '400,00' | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs'  | '800,00'       |
 			| 'Shirt'    | '350,00' | '36/Red'    | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '350,00'       |
@@ -151,7 +151,7 @@ Scenario: check the product selection form with price information in Sales order
 		And I click the button named "FormCommandSaveAndClose"
 	* Check the filling of the tabular part
 		And "ItemList" table became equal
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
 			| 'Dress'    | '550,00' | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '550,00'       |
 			| 'Trousers' | '400,00' | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs'  | '800,00'       |
 			| 'Shirt'    | '350,00' | '36/Red'    | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '350,00'       |
@@ -259,7 +259,7 @@ Scenario: check the product selection form with price information in Sales invoi
 		And I click the button named "FormCommandSaveAndClose"
 		And Delay 2
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
 			| 'Dress'    | '550,00' | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '550*'          |
 			| 'Trousers' | '400,00' | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs'  | '800*'          |
 	* Add one more line to the order through the Add button
@@ -276,12 +276,12 @@ Scenario: check the product selection form with price information in Sales invoi
 			| Item  | Item key |
 			| Shirt | 36/Red   |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
 			| 'Dress'    | '550,00' | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '550,00'       |
 			| 'Trousers' | '400,00' | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs'  | '800,00'       |
 			| 'Shirt'    | '350,00' | '36/Red'    | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '350,00'       |
@@ -305,7 +305,7 @@ Scenario: check the product selection form with price information in Sales invoi
 		And I click the button named "FormCommandSaveAndClose"
 	* Check the filling of the tabular part
 		And "ItemList" table became equal
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' |
 			| 'Dress'    | '550,00' | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '550,00'       |
 			| 'Trousers' | '400,00' | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs'  | '800,00'       |
 			| 'Shirt'    | '350,00' | '36/Red'    | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '350,00'       |
@@ -394,7 +394,7 @@ Scenario: check the product selection form with price information in Purchase in
 		And I click the button named "FormCommandSaveAndClose"
 		And Delay 2
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
 			| 'Dress'    | '*'      | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 			| 'Trousers' | '*'      | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 	* Add one more line to the order through the Add button
@@ -411,12 +411,12 @@ Scenario: check the product selection form with price information in Purchase in
 			| Item  | Item key |
 			| Shirt | 36/Red   |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit'| 'Net amount' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit'| 'Net amount' | 'Total amount' |
 			| 'Dress'    | '*'      | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'          | '*'            |
 			| 'Trousers' | '*'      | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs' | '*'          | '*'            |
 			| 'Shirt'    | '*'      | '36/Red'    | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'          | '*'            |
@@ -440,7 +440,7 @@ Scenario: check the product selection form with price information in Purchase in
 		And I click the button named "FormCommandSaveAndClose"
 	* Check the filling of the tabular part
 		And "ItemList" table became equal
-			| 'Item'     | 'Price'       | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
+			| 'Item'     | 'Price'       | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
 			| 'Dress'    | '*'           | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '*'          | '*'            |
 			| 'Trousers' | '*'           | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs'  | '*'          | '*'            |
 			| 'Shirt'    | '*'           | '36/Red'    | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '*'          | '*'            |
@@ -528,7 +528,7 @@ Scenario: check the product selection form with price information in Purchase or
 		And I click the button named "FormCommandSaveAndClose"
 		And Delay 2
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
 			| 'Dress'    | '*'      | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 			| 'Trousers' | '*'      | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 	* Add one more line to the order through the Add button
@@ -545,12 +545,12 @@ Scenario: check the product selection form with price information in Purchase or
 			| Item  | Item key |
 			| Shirt | 36/Red   |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit'| 'Net amount' | 'Total amount' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit'| 'Net amount' | 'Total amount' |
 			| 'Dress'    | '*'      | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'          | '*'            |
 			| 'Trousers' | '*'      | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs' | '*'          | '*'            |
 			| 'Shirt'    | '*'      | '36/Red'    | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'          | '*'            |
@@ -574,7 +574,7 @@ Scenario: check the product selection form with price information in Purchase or
 		And I click the button named "FormCommandSaveAndClose"
 	* Check the filling of the tabular part
 		And "ItemList" table became equal
-			| 'Item'     | 'Price'       | 'Item key'  | 'Store'    | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
+			| 'Item'     | 'Price'       | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' |
 			| 'Dress'    | '*'           | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '*'          | '*'            |
 			| 'Trousers' | '*'           | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs'  | '*'          | '*'            |
 			| 'Shirt'    | '*'           | '36/Red'    | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs'  | '*'          | '*'            |
@@ -631,55 +631,6 @@ Scenario: check the product selection form in StockAdjustmentAsWriteOff/StockAdj
 		| 'Dress'                | '398'      | 'pcs'  | ''           |
 		| 'Trousers'             | '405'      | 'pcs'  | ''           |
 
-Scenario: check the product selection form in PhysicalInventory
-	And I click "Pickup" button
-	* Check the display of remains by Item
-		And "ItemList" table contains lines
-		| 'Title'                | 'In stock' | 'Unit' | 'Picked out' |
-		| 'Dress'                | '331'      | 'pcs'  | ''           |
-		| 'Trousers'             | ''         | 'pcs'  | ''           |
-		| 'Shirt'                | '7'        | 'pcs'  | ''           |
-		| 'Boots'                | '4'        | 'pcs'  | ''           |
-		| 'High shoes'           | ''         | 'pcs'  | ''           |
-		| 'Bound Dress+Shirt'    | ''         | 'pcs'  | ''           |
-		| 'Bound Dress+Trousers' | ''         | 'pcs'  | ''           |
-		| 'Router'               | ''         | 'pcs'  | ''           |
-	* Check the display of remains by Item key
-		And I go to line in "ItemList" table
-			| 'In stock' | 'Title' |
-			| '331'      | 'Dress' |
-		And I select current line in "ItemList" table
-		And I go to line in "ItemKeyList" table
-			| 'In stock' | 'Title'   | 'Unit' |
-			| '197'      | 'XS/Blue' | 'pcs'  |
-		And I select current line in "ItemKeyList" table
-		And I go to line in "ItemKeyList" table
-			| 'In stock' | 'Title'    | 'Unit' |
-			| '134'      | 'S/Yellow' | 'pcs'  |
-		And I select current line in "ItemKeyList" table
-		And I go to line in "ItemTableValue" table
-			| 'Item'  | 'Item key' | 'Quantity' | 'Unit' |
-			| 'Dress' | 'S/Yellow' | '1,000'    | 'pcs'  |
-		And I activate "Quantity" field in "ItemTableValue" table
-		And I select current line in "ItemTableValue" table
-		And I input "4,000" text in "Quantity" field of "ItemTableValue" table
-		And I click "Transfer to document" button
-	* Check the transfer of remains to the document PhysicalInventory
-		And "ItemList" table contains lines
-			| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Unit' |
-			| '4,000'       | 'Dress' | '4,000'      | 'S/Yellow' | 'pcs'  |
-			| '1,000'       | 'Dress' | '1,000'      | 'XS/Blue'  | 'pcs'  |
-	* Check of remains change at re-selection of a store
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 06'    |
-		And I select current line in "List" table
-		And I click "Pickup" button
-		And "ItemList" table contains lines
-		| 'Title'                | 'In stock' | 'Unit' | 'Picked out' |
-		| 'Dress'                | '398'      | 'pcs'  | ''           |
-		| 'Trousers'             | '405'      | 'pcs'  | ''           |
 
 Scenario: check the product selection form in InventoryTransferOrder/InventoryTransfer
 	And I click "Pickup" button
@@ -1244,19 +1195,7 @@ Scenario: check the display of the header of the collapsible group in expence/re
 		And I select current line in "List" table
 
 
-Scenario: check the display of the header of the collapsible group in PhysicalCountByLocation
-	And I click the button named "FormCreate"
-	* Filling in the details of the document
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| Description |
-			| Store 01   |
-		And I select current line in "List" table
-		And I click Select button of "Responsible person" field
-		And I go to line in "List" table
-			| Description       |
-			| Anna Petrova |
-		And I select current line in "List" table
+
 
 Scenario: check the display of the header of the collapsible group in PhysicalInventory
 	And I click the button named "FormCreate"
@@ -1313,6 +1252,58 @@ Scenario: check the display of the header of the collapsible group in Shipment c
 		| Description |
 		| Store 03    |
 	And I select current line in "List" table
+
+Scenario: check the product selection form in PhysicalInventory
+	And I click "Pickup" button
+	* Check the display of remains by Item
+		And "ItemList" table contains lines
+		| 'Title'                | 'In stock' | 'Unit' | 'Picked out' |
+		| 'Dress'                | '331'      | 'pcs'  | ''           |
+		| 'Trousers'             | ''         | 'pcs'  | ''           |
+		| 'Shirt'                | '7'        | 'pcs'  | ''           |
+		| 'Boots'                | '4'        | 'pcs'  | ''           |
+		| 'High shoes'           | ''         | 'pcs'  | ''           |
+		| 'Bound Dress+Shirt'    | ''         | 'pcs'  | ''           |
+		| 'Bound Dress+Trousers' | ''         | 'pcs'  | ''           |
+		| 'Router'               | ''         | 'pcs'  | ''           |
+	* Check the display of remains by Item key
+		And I go to line in "ItemList" table
+			| 'In stock' | 'Title' |
+			| '331'      | 'Dress' |
+		And I select current line in "ItemList" table
+		And I go to line in "ItemKeyList" table
+			| 'In stock' | 'Title'   | 'Unit' |
+			| '197'      | 'XS/Blue' | 'pcs'  |
+		And I select current line in "ItemKeyList" table
+		And I go to line in "ItemKeyList" table
+			| 'In stock' | 'Title'    | 'Unit' |
+			| '134'      | 'S/Yellow' | 'pcs'  |
+		And I select current line in "ItemKeyList" table
+		And I go to line in "ItemTableValue" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Unit' |
+			| 'Dress' | 'S/Yellow' | '1,000'    | 'pcs'  |
+		And I activate "Quantity" field in "ItemTableValue" table
+		And I select current line in "ItemTableValue" table
+		And I input "4,000" text in "Quantity" field of "ItemTableValue" table
+		And I click "Transfer to document" button
+	* Check the transfer of remains to the document PhysicalInventory
+		And "ItemList" table contains lines
+			| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Unit' |
+			| '4,000'       | 'Dress' | '4,000'      | 'S/Yellow' | 'pcs'  |
+			| '1,000'       | 'Dress' | '1,000'      | 'XS/Blue'  | 'pcs'  |
+	* Check of remains change at re-selection of a store
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 06'    |
+		And I select current line in "List" table
+		And I click "Pickup" button
+		And "ItemList" table contains lines
+		| 'Title'                | 'In stock' | 'Unit' | 'Picked out' |
+		| 'Dress'                | '398'      | 'pcs'  | ''           |
+		| 'Trousers'             | '405'      | 'pcs'  | ''           |
+
+
 
 Scenario: check the display of the header of the collapsible group in bank payments documents
 	And I click the button named "FormCreate"
@@ -1599,13 +1590,13 @@ Scenario: check the barcode search in the sales documents + price and tax fillin
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button		
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Unit' | 'Total amount' | 'Quantity in base unit' |
+			| 'Item'  | 'Price'  | 'Item key' | 'Quantity'     | 'Unit' | 'Total amount' | 'Quantity in base unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | '1,000' | 'pcs'  | '520,00'       | '1,000'                |
 		And in the table "ItemList" I click "SearchByBarcode" button
 		And I input "2202283705" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Unit' | 'Total amount' | 'Quantity in base unit' |
+			| 'Item'  | 'Price'  | 'Item key' | 'Quantity'     | 'Unit' | 'Total amount' | 'Quantity in base unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | '2,000' | 'pcs'  | '1 040,00'       | '2,000'                |
 	And I close all client application windows
 
@@ -1622,13 +1613,13 @@ Scenario: check the barcode search on the return documents
 	* Check the items adding
 		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Quantity in base unit' |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			| 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  | '1,000'                 |
 		And I click "SearchByBarcode" button
 		And I input "2202283705" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Quantity in base unit' |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			| 'Dress' | 'XS/Blue'  | '2,000' | 'pcs'  | '2,000'                 |
 	And I close all client application windows
 
@@ -1646,13 +1637,13 @@ Scenario: check the barcode search in the purchase/purchase returns
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'  |'Item key' |'Q'     | 'Unit' | 'Quantity in base unit' |
+			| 'Item'  |'Item key' |'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			|'Dress' |'S/Yellow'  |'1,000' | 'pcs'  | '1,000'                 |
 		And I click the button named "SearchByBarcode"
 		And I input "2202283713" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  |'Item key' |'Q'     | 'Unit' | 'Quantity in base unit' |
+			| 'Item'  |'Item key' |'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			|'Dress' |'S/Yellow'  |'2,000' | 'pcs'  | '2,000'                 |
 	And I close all client application windows
 

@@ -93,23 +93,23 @@ Scenario: _034001 check the Document discount in Purchase order
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			And I activate "Q" field in "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I input "100" text in "Q" field of "ItemList" table
+			And I input "100" text in "Quantity" field of "ItemList" table
 			And I input "200" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '2' | 'Dress' | 'L/Green'  | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "200" text in "Q" field of "ItemList" table
+			And I input "200" text in "Quantity" field of "ItemList" table
 			And I input "210" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| '#' | 'Item'     | 'Item key' | 'Unit' |
 				| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "300" text in "Q" field of "ItemList" table
+			And I input "300" text in "Quantity" field of "ItemList" table
 			And I input "250" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 	* Calculate Document discount for Purchase order
@@ -123,7 +123,7 @@ Scenario: _034001 check the Document discount in Purchase order
 		And in the table "Offers" I click "OK" button
 	* Check the discount calculation
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
 		| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
 		| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
 		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
@@ -132,7 +132,7 @@ Scenario: _034001 check the Document discount in Purchase order
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		And I click "Ok" button
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
 		| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
 		| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
 		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
@@ -215,23 +215,23 @@ Scenario: _034002 check the Document discount in Purchase invoice
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			And I activate "Q" field in "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I input "100" text in "Q" field of "ItemList" table
+			And I input "100" text in "Quantity" field of "ItemList" table
 			And I input "200" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '2' | 'Dress' | 'L/Green'  | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "200" text in "Q" field of "ItemList" table
+			And I input "200" text in "Quantity" field of "ItemList" table
 			And I input "210" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| '#' | 'Item'     | 'Item key' | 'Unit' |
 				| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "300" text in "Q" field of "ItemList" table
+			And I input "300" text in "Quantity" field of "ItemList" table
 			And I input "250" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 	* Calculate Document discount for Purchase invoice
@@ -245,7 +245,7 @@ Scenario: _034002 check the Document discount in Purchase invoice
 		And in the table "Offers" I click "OK" button
 	* Check the discount calculation
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
 		| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
 		| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
 		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
@@ -328,29 +328,29 @@ Scenario: _034030 check discount recalculation when change quantity in the Purch
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "18 808,47"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "123 300,00"
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
 				| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
 				| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
 				| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
 		* Change quantity and check discount recalculation
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
+				| 'Item'  | 'Item key' | 'Quantity'       |
 				| 'Dress' | 'L/Green'  | '200,000' |
 			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
 				| 'Trousers' | '36/Yellow'  |
 			And I select current line in "ItemList" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "2 146,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "16 367,80"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 946,20"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "19 314,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Dont calculate row' | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'     | 'VAT' | 'Dont calculate row' | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '200,00' | 'Dress'    | '18%' | 'No'                 | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '2 745,76'   | '15 254,24'  | '18 000,00'    | 'Store 01' |
 				| '210,00' | 'Dress'    | '18%' | 'No'                 | 'L/Green'   | '1,000'   | '21,00'         | 'pcs'  | '28,83'      | '160,17'     | '189,00'       | 'Store 01' |
 				| '250,00' | 'Trousers' | '18%' | 'No'                 | '36/Yellow' | '5,000'   | '125,00'        | 'pcs'  | '171,61'     | '953,39'     | '1 125,00'     | 'Store 01' |
@@ -370,29 +370,29 @@ Scenario: _034031 check discount recalculation when change quantity in the Purch
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "18 808,47"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "123 300,00"
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
 				| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
 				| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
 				| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
 		* Change quantity and check discount recalculation
 			And I go to line in "ItemList" table
-				| 'Item'  | 'Item key' | 'Q'       |
+				| 'Item'  | 'Item key' | 'Quantity'       |
 				| 'Dress' | 'L/Green'  | '200,000' |
 			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
+			And I input "1,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
 				| 'Trousers' | '36/Yellow'  |
 			And I select current line in "ItemList" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "2 146,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "16 367,80"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 946,20"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "19 314,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'     | 'VAT' | 'Dont calculate row' | 'Item key'  | 'Q'       | 'Offers amount' | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Price'  | 'Item'     | 'VAT' | 'Dont calculate row' | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '200,00' | 'Dress'    | '18%' | 'No'                 | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '2 745,76'   | '15 254,24'  | '18 000,00'    | 'Store 01' |
 				| '210,00' | 'Dress'    | '18%' | 'No'                 | 'L/Green'   | '1,000'   | '21,00'         | 'pcs'  | '28,83'      | '160,17'     | '189,00'       | 'Store 01' |
 				| '250,00' | 'Trousers' | '18%' | 'No'                 | '36/Yellow' | '5,000'   | '125,00'        | 'pcs'  | '171,61'     | '953,39'     | '1 125,00'     | 'Store 01' |

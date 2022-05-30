@@ -1382,7 +1382,7 @@
           <id>59</id>
           <title>
             <key>en</key>
-            <value>Q</value>
+            <value>Quantity</value>
           </title>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -4995,7 +4995,7 @@
             <id>562</id>
             <title>
               <key>en</key>
-              <value>Q</value>
+              <value>Quantity</value>
             </title>
             <visible>true</visible>
             <enabled>true</enabled>

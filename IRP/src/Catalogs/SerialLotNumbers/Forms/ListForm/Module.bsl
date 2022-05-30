@@ -7,7 +7,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	List.Parameters.SetParameterValue("ItemKeyRef", Catalogs.ItemKeys.EmptyRef());
 	List.Parameters.SetParameterValue("ItemRef", Catalogs.Items.EmptyRef());
 	List.Parameters.SetParameterValue("ItemType", Catalogs.ItemTypes.EmptyRef());
+	
 	If Parameters.Property("SerialLotNumberOwner") Then
+		SerialLotNumberOwner = Parameters.SerialLotNumberOwner;
 		If TypeOf(Parameters.SerialLotNumberOwner) = Type("CatalogRef.ItemKeys") Then
 			List.Parameters.SetParameterValue("isItemKey", True);
 			List.Parameters.SetParameterValue("ItemKeyRef", Parameters.SerialLotNumberOwner);
@@ -22,4 +24,14 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			List.Parameters.SetParameterValue("ItemType", Parameters.SerialLotNumberOwner);
 		EndIf;
 	EndIf;
+	
+EndProcedure
+&AtClient
+Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	
+	Cancel = True;
+	FormParameters = New Structure("SerialLotNumberOwner", ThisObject.SerialLotNumberOwner);
+	Filter = New Structure("FillingValues", FormParameters);
+	OpenForm("Catalog.SerialLotNumbers.ObjectForm", Filter);
+	
 EndProcedure

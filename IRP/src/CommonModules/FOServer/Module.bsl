@@ -304,7 +304,7 @@ Function CreateDefault_AgreementByType(Partner, AgreementType, Value)
 	EndIf;
 	
 	DefaultLegalNameData = GetDefault_LegalName(Parameters);
-	DafaultLegalNameRef = Undefined;
+	DefaultLegalNameRef = Undefined;
 	If DefaultLegalNameData <> Undefined Then
 		DefaultLegalNameRef = DefaultLegalNameData.Ref;
 	EndIf;

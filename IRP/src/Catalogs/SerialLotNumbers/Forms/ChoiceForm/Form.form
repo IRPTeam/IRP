@@ -527,6 +527,24 @@ WHERE
       <common>true</common>
     </edit>
   </attributes>
+  <parameters>
+    <name>ItemType</name>
+    <valueType>
+      <types>CatalogRef.ItemTypes</types>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>Item</name>
+    <valueType>
+      <types>CatalogRef.Items</types>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>ItemKey</name>
+    <valueType>
+      <types>CatalogRef.ItemKeys</types>
+    </valueType>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

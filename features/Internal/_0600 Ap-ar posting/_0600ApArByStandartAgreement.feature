@@ -84,8 +84,8 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"
@@ -95,7 +95,7 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			And I save the window as "$$SalesInvoice060002$$"
 		* Check filling in sales invoice
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'Basic Price Types' | 'pcs'  | '*'          | '*'          | '11 000,00'    | 'Store 01' |
 			And I click the button named "FormPostAndClose"
 		* Check Sales invoice movements
@@ -235,13 +235,13 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 				| 'Item key' |
 				| 'L/Green'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I input "550,00" text in "Price" field of "ItemList" table
 		* Check filling in purchase invoice
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'      | 'Price type'              | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Quantity'      | 'Price type'              | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '20,000' | 'en description is empty' | 'pcs'  | '1 677,97'   | '9 322,03'   | '11 000,00'    | 'Store 01' |
 			And I input end of the current month date in "Delivery date" field
 			And I click the button named "FormPost"

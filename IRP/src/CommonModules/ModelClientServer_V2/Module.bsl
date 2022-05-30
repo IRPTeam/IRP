@@ -83,28 +83,20 @@ Function GetChainLinkResult(Options, Value)
 	Return Result;
 EndFunction
 
-Function IsAlreadyExecutedStep(Parameters, Name, Key)
-	For Each Step In Parameters.ModelEnvironment.AlreadyExecutedSteps Do
-		If Upper(Step.Name) = Upper(Name) And Upper(Step.Key) = Upper(Key) Then
-			Return True;
-		EndIf;
-	EndDo;
-	Return False;
-EndFunction
-
 Procedure ExecuteChain(Parameters, Chain)
 	For Each ChainLink in Chain Do
 		Name = ChainLink.Key;
 		If Chain[Name].Enable Then
 			Results = New Array();
 			For Each Options In Chain[Name].Options Do
-				If Options.DontExecuteIfExecutedBefore And IsAlreadyExecutedStep(Parameters, Name, Options.Key) Then
-					Continue;
+				If Options.DontExecuteIfExecutedBefore 
+					And Not Parameters.ModelEnvironment.AlreadyExecutedSteps.Get(Name + ":" + Options.Key) = Undefined Then
+						Continue;
 				EndIf;
 				Result = Undefined;
 				Execute StrTemplate("Result = %1(Options)", Chain[Name].ExecutorName);
 				Results.Add(GetChainLinkResult(Options, Result));
-				Parameters.ModelEnvironment.AlreadyExecutedSteps.Add(New Structure("Name, Key", Name, Options.Key));
+				Parameters.ModelEnvironment.AlreadyExecutedSteps.Insert(Name + ":" + Options.Key, New Structure("Name, Key", Name, Options.Key));
 			EndDo;
 			Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
 		EndIf;
@@ -182,6 +174,7 @@ Function GetChain()
 	Chain.Insert("ChangePriceTypeAsManual"      , GetChainLink("ChangePriceTypeAsManualExecute"));
 
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
+	Chain.Insert("ChangeUseSerialLotNumberByItemKey", GetChainLink("ChangeUseSerialLotNumberByItemKeyExecute"));
 	
 	Chain.Insert("ChangePriceByPriceType"        , GetChainLink("ChangePriceByPriceTypeExecute"));
 	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
@@ -203,11 +196,16 @@ Function GetChain()
 	
 	Chain.Insert("CovertQuantityToQuantityInBaseUnit" , GetChainLink("CovertQuantityToQuantityInBaseUnitExecute"));
 	
+	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
+
 	// Extractors
 	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
 	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
+	
+	// Loaders
+	Chain.Insert("LoadTable", GetChainLink("LoadTableExecute"));
 	
 	Return Chain;
 EndFunction
@@ -249,6 +247,18 @@ Function ChangeUnitByItemKeyExecute(Options) Export
 	EndIf;
 	UnitInfo = GetItemInfo.ItemUnitInfo(Options.ItemKey);
 	Return UnitInfo.Unit;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_USE_SERIAL_LOT_NUMBER_BY_ITEMKEY
+
+Function ChangeUseSerialLotNumberByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKey");
+EndFunction
+
+Function ChangeUseSerialLotNumberByItemKeyExecute(Options) Export
+	Return SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(Options.ItemKey);
 EndFunction
 
 #EndRegion
@@ -815,6 +825,18 @@ Function ChangeReceiveAmountBySendAmountExecute(Options) Export
 	Else
 		Return Options.ReceiveAmount;
 	EndIf;
+EndFunction
+
+#EndRegion
+
+#Region CALCULATE_DIFFERENCE
+
+Function CalculateDifferenceCountOptions() Export
+	Return GetChainLinkOptions("PhysCount, ExpCount, ManualFixedCount");
+EndFunction
+
+Function CalculateDifferenceCountExecute(Options) Export
+	Return Options.PhysCount - Options.ExpCount + Options.ManualFixedCount;
 EndFunction
 
 #EndRegion
@@ -2140,13 +2162,25 @@ EndFunction
 
 #EndRegion
 
+#Region LOAD_TABLE
+
+Function LoadTableOptions() Export
+	Return GetChainLinkOptions("TableAddress");
+EndFunction
+
+Function LoadTableExecute(Options) Export
+	Return Options.TableAddress;
+EndFunction
+
+#EndRegion
+
 Procedure InitEntryPoint(StepNames, Parameters)
 	If Not Parameters.Property("ModelEnvironment") Then
 		Environment = New Structure();
-		Environment.Insert("FirstStepNames"  , StepNames);
-		Environment.Insert("StepNamesCounter", New Array());
-		Environment.Insert("AlreadyExecutedSteps"   , New Array());
-		Parameters.Insert("ModelEnvironment", Environment)
+		Environment.Insert("FirstStepNames"  		, StepNames);
+		Environment.Insert("StepNamesCounter"		, New Array());
+		Environment.Insert("AlreadyExecutedSteps"   , New Map());
+		Parameters.Insert("ModelEnvironment"		, Environment)
 	EndIf;
 EndProcedure
 

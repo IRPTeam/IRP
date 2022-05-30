@@ -156,7 +156,7 @@ Scenario:_800021 check serial lot number control in the Sales invoice
 			And I click "Post" button
 			Then "1C:Enterprise" window is opened
 			And I click "Ok" button
-			Then I wait that in user messages the "Line No. [1] [Phone A Brown] Serial lot number remaining: 5 . Required: 6 . Lacking: 1 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [1] [Phone A Brown] Serial lot number [12345678] Serial lot number remaining: 5 . Required: 6 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change quantity and post SI
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I select current line in "ItemList" table
@@ -221,8 +221,8 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 				| 'Phone A' | 'Brown'  |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "7,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "7,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I select current line in "ItemList" table
@@ -253,7 +253,7 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 			And I click "Post" button
 			And I click "Ok" button		
 		* Check serial lot numbers balance control
-			Then I wait that in user messages the "Line No. [1] [Phone A Brown] Serial lot number remaining: 0 . Required: 7 . Lacking: 7 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [1] [Phone A Brown] Serial lot number [12345678] Serial lot number remaining: 0 . Required: 7 . Lacking: 7 ." substring will appear in 10 seconds
 		* Change serial lot number and post Retail sales receipt
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I select current line in "ItemList" table

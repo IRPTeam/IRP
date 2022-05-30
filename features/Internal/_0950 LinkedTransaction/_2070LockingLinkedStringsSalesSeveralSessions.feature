@@ -124,7 +124,7 @@ Scenario: _2070003 check locking item tab in the SO with linked documents (sever
 			| "Documents.ShipmentConfirmation.FindByNumber(1055).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Change item key, store, procurement method
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'      |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'      |
 			| '3' | 'Shirt' | '36/Red'   | '11,000' |
 		And I select current line in "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
@@ -153,7 +153,7 @@ Scenario: _2070003 check locking item tab in the SO with linked documents (sever
 			|'Wrong linked row [3] for column [ProcurementMethod] used value [No reserve] wrong value [Stock]'|
 	* Change item key, store, procurement method back
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'      |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'      |
 			| '3' | 'Shirt' | '38/Black'   | '11,000' |
 		And I select current line in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -174,7 +174,7 @@ Scenario: _2070003 check locking item tab in the SO with linked documents (sever
 		And I finish line editing in "ItemList" table
 	* Cancel line and check locking
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'      |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'      |
 			| '3' | 'Shirt' | '36/Red'   | '11,000' |
 		And I select current line in "ItemList" table
 		And I activate "Cancel" field in "ItemList" table
@@ -202,10 +202,10 @@ Scenario: _2070004 change quantity in the linked string in the SO (several sessi
 			| "Documents.SalesInvoice.FindByNumber(1055).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Try to change quantity (less then SI)
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Q'     |
+			| 'Item'  | 'Item key' | 'Quantity'     |
 			| 'Boots' | '37/18SD'  | '2,000' |
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
@@ -230,7 +230,7 @@ Scenario: _2070005 delete linked string in the SO (several sessions)
 			| "Documents.SalesInvoice.FindByNumber(1055).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Try to change quantity (less then SI)
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Q'      |
+			| '#' | 'Item'  | 'Item key' | 'Quantity'      |
 			| '1' | 'Dress' | 'XS/Blue'   | '1,000' |
 		And I select current line in "ItemList" table
 		And in the table "ItemList" I click "Delete" button	

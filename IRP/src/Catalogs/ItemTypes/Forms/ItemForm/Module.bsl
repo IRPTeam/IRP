@@ -25,6 +25,46 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure TypeOnChange(Item)
+	If Object.Type = PredefinedValue("Enum.ItemTypes.Service") Then
+		Object.UseSerialLotNumber = False;
+		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.ByItemKey");
+	EndIf;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure UseSerialLotNumberOnChange(Item)
+	If Not Object.UseSerialLotNumber Then
+		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.ByItemKey");
+	EndIf;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	VisibleOfSerialLotNumber = (Object.Type = PredefinedValue("Enum.ItemTypes.Product"));
+	Form.Items.UseSerialLotNumber.Visible  = VisibleOfSerialLotNumber;
+	Form.Items.StockBalanceDetail.Visible = VisibleOfSerialLotNumber;
+	If VisibleOfSerialLotNumber Then
+		Form.Items.StockBalanceDetail.ReadOnly = Not Object.UseSerialLotNumber;
+	EndIf;
 EndProcedure
 
 #EndRegion

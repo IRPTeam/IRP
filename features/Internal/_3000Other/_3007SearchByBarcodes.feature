@@ -88,13 +88,13 @@ Scenario: _300706 barcode check in Purchase invoice
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Quantity in base unit' |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			| 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  | '1,000'                 |
 		And I click "SearchByBarcode" button
 		And I input "2202283713" text in "InputFld" field
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Quantity in base unit' |
+			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			| 'Dress' | 'S/Yellow' | '2,000' | 'pcs'  | '2,000'                 |
 	And I close all client application windows
 
@@ -158,8 +158,8 @@ Scenario: _300721 barcode check in PhysicalCountByLocation
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	And "ItemList" table became equal
-		| '#' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' | 'Difference' | 'Phys. count' |
-		| '1' | ''           | 'Dress' | 'S/Yellow' | 'pcs'  | '2,000'      | '2,000'       |
+		| '#' | 'Item'  | 'Item key' | 'Unit' | 'Phys. count' |
+		| '1' | 'Dress' | 'S/Yellow' | 'pcs'  | '2,000'       |
 	And I close all client application windows
 
 

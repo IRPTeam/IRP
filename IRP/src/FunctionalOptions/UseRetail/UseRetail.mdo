@@ -16,7 +16,7 @@
   <content>AccumulationRegister.R2050T_RetailSales</content>
   <content>Document.RetailSalesReceipt</content>
   <content>InformationRegister.RetailWorkers</content>
-  <content>AccumulationRegister.R3050T_RetailCash</content>
+  <content>AccumulationRegister.R3050T_PosCashBalances</content>
   <content>Catalog.BankTerms</content>
   <content>InformationRegister.BranchBankTerms</content>
   <content>Catalog.PaymentTypes</content>

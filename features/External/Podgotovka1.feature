@@ -41,8 +41,8 @@ Scenario: creating an order for Lomaniti Basic Agreements (Dress and Boots)
 				| 'Item key' |
 				| 'XS/Blue'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -58,8 +58,8 @@ Scenario: creating an order for Lomaniti Basic Agreements (Dress and Boots)
 				| 'Item key' |
 				| '36/18SD'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "5,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "5,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 
@@ -99,8 +99,8 @@ Scenario: create an order for Ferron BP Basic Agreements, TRY (Dress -10 and Tro
 			| 'Item key' |
 			| 'XS/Blue'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -117,8 +117,8 @@ Scenario: create an order for Ferron BP Basic Agreements, TRY (Dress -10 and Tro
 			| 'Item key' |
 			| '36/Yellow'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
@@ -176,7 +176,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'S/Yellow'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "205,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -196,7 +196,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'XS/Blue'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "205,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -216,7 +216,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'M/White'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "205,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -236,7 +236,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'XL/Green'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "205,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -256,7 +256,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Trousers' | '36/Yellow'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "220,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -276,7 +276,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Trousers' | '38/Yellow'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "220,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -296,7 +296,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Shirt' | '36/Red'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "250,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -316,7 +316,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Shirt' | '38/Black'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "240,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -336,7 +336,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '36/18SD'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "190,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -356,7 +356,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '37/18SD'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "190,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -376,7 +376,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '38/18SD'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "195,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -396,7 +396,7 @@ Scenario: creating a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '39/18SD'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "180,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	And I click the button named "FormPostAndClose"
@@ -466,8 +466,8 @@ Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 			| 'Item key' |
 			| 'Dress/A-8'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "100,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "100,000" text in "Quantity" field of "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I input "80,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -483,8 +483,8 @@ Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 			| 'Item key' |
 			| 'XS/Blue'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "50,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "50,000" text in "Quantity" field of "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I input "15,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -542,8 +542,8 @@ Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 			| 'Item key' |
 			| 'Dress/A-8'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "100,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "100,000" text in "Quantity" field of "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I input "40,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -595,8 +595,8 @@ Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 			| 'Item key' |
 			| 'Dress/A-8'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "100,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "100,000" text in "Quantity" field of "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I input "40,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -652,8 +652,8 @@ Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 				| 'Item key' |
 				| 'Dress/A-8'  |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "100,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "100,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I input "40,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -669,8 +669,8 @@ Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 				| Item  | Item key  |
 				| Boots | Boots/S-8 |
 			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "200,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "200,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I input "45,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -760,8 +760,8 @@ Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 				| Store 01  |
 			And I select current line in "List" table
 			And I activate "Sales order" field in "ItemList" table
-			And I activate "Q" field in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I input "20,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -794,8 +794,8 @@ Scenario: adding the items to the sales order (Dress and Trousers)
 		| 'Item key' |
 		| 'L/Green'  |
 	And I select current line in "List" table
-	And I activate "Q" field in "ItemList" table
-	And I input "10,000" text in "Q" field of "ItemList" table
+	And I activate "Quantity" field in "ItemList" table
+	And I input "10,000" text in "Quantity" field of "ItemList" table
 	And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 	And I finish line editing in "ItemList" table
 	And in the table "ItemList" I click the button named "ItemListAdd"
@@ -807,8 +807,8 @@ Scenario: adding the items to the sales order (Dress and Trousers)
 	And I move to the next attribute
 	And I click choice button of "Item key" attribute in "ItemList" table
 	And I select current line in "List" table
-	And I activate "Q" field in "ItemList" table
-	And I input "14,000" text in "Q" field of "ItemList" table
+	And I activate "Quantity" field in "ItemList" table
+	And I input "14,000" text in "Quantity" field of "ItemList" table
 	And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 	And I finish line editing in "ItemList" table
 
@@ -885,23 +885,23 @@ Scenario: create the first test PO for a test on the creation mechanism based on
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			And I activate "Q" field in "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
+			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '2' | 'Dress' | 'L/Green'  | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
+			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I input "210,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| '#' | 'Item'     | 'Item key' | 'Unit' |
 				| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "30,000" text in "Q" field of "ItemList" table
+			And I input "30,000" text in "Quantity" field of "ItemList" table
 			And I input "210,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
@@ -956,9 +956,9 @@ Scenario: create the second test PO for a test on the creation mechanism based o
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			And I activate "Q" field in "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
@@ -1037,23 +1037,23 @@ Scenario: create the first test SO for a test on the creation mechanism based on
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			And I activate "Q" field in "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
+			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '2' | 'Dress' | 'L/Green'  | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
+			And I input "20,000" text in "Quantity" field of "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
 				| '#' | 'Item'     | 'Item key' | 'Unit' |
 				| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
 			And I select current line in "ItemList" table
-			And I input "30,000" text in "Q" field of "ItemList" table
+			And I input "30,000" text in "Quantity" field of "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
@@ -1108,9 +1108,9 @@ Scenario: create the second test SO for a test on the creation mechanism based o
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Unit' |
 				| '1' | 'Dress' | 'M/White' | 'pcs' |
-			And I activate "Q" field in "ItemList" table
+			And I activate "Quantity" field in "ItemList" table
 			And I select current line in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
+			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
@@ -1148,8 +1148,8 @@ Scenario: create an order for Ferron BP Basic Partner term, TRY (Dress -10 and T
 			| 'Item key' |
 			| 'XS/Blue'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "10,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1166,8 +1166,8 @@ Scenario: create an order for Ferron BP Basic Partner term, TRY (Dress -10 and T
 			| 'Item key' |
 			| '36/Yellow'  |
 		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input end of the current month date in "Delivery date" field
@@ -1225,7 +1225,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'S/Yellow'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "205,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1245,7 +1245,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'XS/Blue'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "205,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1265,7 +1265,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'M/White'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "205,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1285,7 +1285,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Dress' | 'XL/Green'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "205,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1305,7 +1305,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Trousers' | '36/Yellow'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "220,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1325,7 +1325,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Trousers' | '38/Yellow'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "220,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1345,7 +1345,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Shirt' | '36/Red'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "250,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1365,7 +1365,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Shirt' | '38/Black'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "240,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1385,7 +1385,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '36/18SD'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "190,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1405,7 +1405,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '37/18SD'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "190,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1425,7 +1425,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '38/18SD'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "195,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1445,7 +1445,7 @@ Scenario: create a Purchase Order document
 			| 'Item'  | 'Item key' | 'Unit' |
 			| 'Boots' | '39/18SD'  | 'pcs' |
 		And I select current line in "ItemList" table
-		And I input "200,000" text in "Q" field of "ItemList" table
+		And I input "200,000" text in "Quantity" field of "ItemList" table
 		And I input "180,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I input end of the current month date in "Delivery date" field
@@ -1491,7 +1491,7 @@ Scenario: check filling revenue type (from Company)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Rent'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect Company
 		And I click Choice button of the field named "Company"
@@ -1501,7 +1501,7 @@ Scenario: check filling revenue type (from Company)
 		And I select current line in "List" table
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type'             | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Telephone communications' | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 
 
@@ -1533,7 +1533,7 @@ Scenario: check	filling expense type (from Company)
 		And I finish line editing in "ItemList" table		
 	* Check filling in Expense type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'    | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Rent'         | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
 	* Reselect Company
 		And I click Choice button of the field named "Company"
@@ -1543,7 +1543,7 @@ Scenario: check	filling expense type (from Company)
 		And I select current line in "List" table
 	* Check filling in Expense type
 		And "ItemList" table became equal
-			| 'Expense type'             | 'Item'    | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type'             | 'Item'    | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Telephone communications' | 'Service' | 'Rent'     | '1,000' | 'pcs'  |
 
 
@@ -1575,7 +1575,7 @@ Scenario: check filling revenue type (from item type)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Fuel'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1593,7 +1593,7 @@ Scenario: check filling revenue type (from item type)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type'             | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Telephone communications' | 'Boots' | '37/18SD'  | '1,000' | 'pcs'  |
 
 Scenario: check filling expense type (from item type)
@@ -1624,7 +1624,7 @@ Scenario: check filling expense type (from item type)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Fuel'         | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1642,7 +1642,7 @@ Scenario: check filling expense type (from item type)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type'             | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type'             | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Telephone communications' | 'Boots' | '37/18SD'  | '1,000' | 'pcs'  |
 
 Scenario: check filling revenue type (item)
@@ -1673,7 +1673,7 @@ Scenario: check filling revenue type (item)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Software'     | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1691,7 +1691,7 @@ Scenario: check filling revenue type (item)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Rent'         | 'Boots' | '37/18SD'  | '1,000' | 'pcs'  |
 
 Scenario: check filling expense type (from item)
@@ -1722,7 +1722,7 @@ Scenario: check filling expense type (from item)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Software'     | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1740,7 +1740,7 @@ Scenario: check filling expense type (from item)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Rent'         | 'Boots' | '37/18SD'  | '1,000' | 'pcs'  |
 
 Scenario: check filling revenue type (item key)
@@ -1771,7 +1771,7 @@ Scenario: check filling revenue type (item key)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Software'     | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1784,7 +1784,7 @@ Scenario: check filling revenue type (item key)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Revenue type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Revenue type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Delivery'     | 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  |
 
 Scenario: check filling expense type (from item key)
@@ -1815,7 +1815,7 @@ Scenario: check filling expense type (from item key)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Software'     | 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  |
 	* Reselect item
 		And I select current line in "ItemList" table
@@ -1827,5 +1827,5 @@ Scenario: check filling expense type (from item key)
 		And I finish line editing in "ItemList" table		
 	* Check filling in revenue type
 		And "ItemList" table became equal
-			| 'Expense type' | 'Item'  | 'Item key' | 'Q'     | 'Unit' |
+			| 'Expense type' | 'Item'  | 'Item key' | 'Quantity'     | 'Unit' |
 			| 'Delivery'     | 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  |

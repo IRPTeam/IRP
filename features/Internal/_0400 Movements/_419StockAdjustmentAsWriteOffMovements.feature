@@ -50,6 +50,13 @@ Scenario: _041900 preparation (StockAdjustmentAsWriteOff)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -62,8 +69,11 @@ Scenario: _041900 preparation (StockAdjustmentAsWriteOff)
 		When filling in Tax settings for company
 	* Load StockAdjustmentAsWriteOff
 		When Create document StockAdjustmentAsWriteOff objects (check movements)
+		When Create document StockAdjustmentAsWriteOff (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 
 Scenario: _041901 check Stock adjustment as write off movements by the Register  "R4010 Actual stocks"
@@ -77,13 +87,13 @@ Scenario: _041901 check Stock adjustment as write off movements by the Register 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                              | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'                             | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '2'         | 'Store 01'   | '38/Yellow' |
-			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Store 01'   | 'M/White'   |	
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| 'Document registrations records'                              | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| 'Register  "R4010 Actual stocks"'                             | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''          |
+			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number'  |
+			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '2'         | 'Store 01'   | '38/Yellow' | '' |
+			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Store 01'   | 'M/White'   | ''   |	
 		And I close all client application windows
 
 Scenario: _041902 check Stock adjustment as write off movements by the Register  "R4011 Free stocks"
@@ -126,6 +136,26 @@ Scenario: _041903 check Stock adjustment as write off movements by the Register 
 			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Second Company' | 'Front office' | 'Store 01' | 'M/White'   |
 		And I close all client application windows
 
+Scenario: _041904 check Stock adjustment as write off with serial lot number movements by the Register  "R4010 Actual stocks"
+	* Select Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 112' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as write-off 1 112 dated 24.05.2022 14:10:25' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                                | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                               | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                              | 'Expense'     | '24.05.2022 14:10:25' | '2'         | 'Store 01'   | 'UNIQ'     | ''                  |
+			| ''                                                              | 'Expense'     | '24.05.2022 14:10:25' | '5'         | 'Store 01'   | 'PZU'      | '8908899877'        |
+			| ''                                                              | 'Expense'     | '24.05.2022 14:10:25' | '5'         | 'Store 01'   | 'PZU'      | '8908899879'        |	
+		And I close all client application windows
 
 Scenario: _041930 Stock adjustment as write off clear posting/mark for deletion
 	And I close all client application windows

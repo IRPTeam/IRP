@@ -50,6 +50,14 @@ Scenario: _041300 preparation (Sales return)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create document ShipmentConfirmation (stock control serial lot numbers)
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
@@ -134,6 +142,7 @@ Scenario: _041300 preparation (Sales return)
  			| "Documents.BankReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Sales return
 		When Create document SalesReturn objects (check movements)
+		When Create document SalesReturn objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -142,6 +151,8 @@ Scenario: _041300 preparation (Sales return)
 			| "Documents.SalesReturn.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
 			| 'Number'  |
@@ -317,12 +328,12 @@ Scenario: _041308 check Sales return movements by the Register  "R4014 Serial lo
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 105 dated 12.03.2021 09:49:05' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
-			| 'Register  "R4014 Serial lot numbers"'       | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                  |
-			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Item key' | 'Serial lot number' |
-			| ''                                           | 'Receipt'     | '12.03.2021 09:49:05' | '10'        | 'Main Company' | 'Distribution department' | '36/Red'   | '0512'              |
+			| 'Sales return 105 dated 12.03.2021 09:49:05' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'       | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''         | ''                  |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Item key' | 'Serial lot number' |
+			| ''                                           | 'Receipt'     | '12.03.2021 09:49:05' | '10'        | 'Main Company' | 'Distribution department' | ''         | '36/Red'   | '0512'              |
 	And I close all client application windows
 
 Scenario: _041309 check Sales return movements by the Register  "R5021 Revenues"
@@ -369,12 +380,12 @@ Scenario: _041310 check Sales return movements by the Register  "R4010 Actual st
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''           | ''         |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''         |
-			| 'Register  "R4010 Actual stocks"'            | ''            | ''                    | ''          | ''           | ''         |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
-			| ''                                           | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '2'         | 'Store 02'   | '36/Red'   |
+			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'            | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '2'         | 'Store 02'   | '36/Red'   | ''                  |
 		
 	And I close all client application windows
 
@@ -568,7 +579,32 @@ Scenario: _041319 check Sales return movements by the Register  "R2012 Invoice c
 			| ''                                                  | 'Expense'     | '12.03.2021 09:20:35' | '24'        | '15 960' | '13 525,42'  | 'Main Company' | 'Distribution department' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | '37/18SD'  | 'f06154aa-5906-4824-9983-19e2bc9ccb96' |
 	And I close all client application windows
 
-
+Scenario: _041320 check Sales return with serial lot numbers movements by the Register  "R4010 Actual stocks" (not use GR)
+	And I close all client application windows
+	* Select Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 112' |
+		And I select current line in "List" table
+		And I activate "Use goods receipt" field in "ItemList" table
+		And for each line of "ItemList" table I do
+			And I remove "Use goods receipt" checkbox in "ItemList" table		
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 1 112 dated 20.05.2022 18:36:56' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'              | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                             | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                             | 'Receipt'     | '20.05.2022 18:36:56' | '5'         | 'Store 02'   | 'PZU'      | '8908899877'        |
+			| ''                                             | 'Receipt'     | '20.05.2022 18:36:56' | '5'         | 'Store 02'   | 'PZU'      | '8908899879'        |
+			| ''                                             | 'Receipt'     | '20.05.2022 18:36:56' | '10'        | 'Store 02'   | 'XL/Green' | ''                  |
+			| ''                                             | 'Receipt'     | '20.05.2022 18:36:56' | '10'        | 'Store 02'   | 'UNIQ'     | ''                  |		
+	And I close all client application windows
 
 Scenario: _041326 check Sales return movements by the Register  "T2015 Transactions info"
 	And I close all client application windows
@@ -582,12 +618,12 @@ Scenario: _041326 check Sales return movements by the Register  "T2015 Transacti
 		And I select "T2015 Transactions info" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 106 dated 21.04.2021 14:19:47' | ''          | ''       | ''        | ''                    | ''    | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           | ''                                           |
-			| 'Document registrations records'             | ''          | ''       | ''        | ''                    | ''    | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           | ''                                           |
-			| 'Register  "T2015 Transactions info"'        | ''          | ''       | ''        | ''                    | ''    | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           | ''                                           |
-			| ''                                           | 'Resources' | ''       | ''        | 'Dimensions'          | ''    | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           | ''                                           |
-			| ''                                           | 'Amount'    | 'Is due' | 'Is paid' | 'Date'                | 'Key' | 'Company'      | 'Branch'                  | 'Currency' | 'Partner' | 'Legal name'    | 'Agreement'                | 'Order' | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                          | 'Unique ID'                                  |
-			| ''                                           | '-9 360'    | 'Yes'    | 'No'      | '21.04.2021 14:19:47' | ''    | 'Main Company' | 'Distribution department' | 'TRY'      | 'Lunch'   | 'Company Lunch' | 'Basic Partner terms, TRY' | ''      | 'No'                    | 'Yes'                     | 'Sales return 106 dated 21.04.2021 14:19:47' | '*'                                          |		
+			| 'Sales return 106 dated 21.04.2021 14:19:47' | ''          | ''       | ''        | ''                    | ''                                     | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           | ''          |
+			| 'Document registrations records'             | ''          | ''       | ''        | ''                    | ''                                     | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           | ''          |
+			| 'Register  "T2015 Transactions info"'        | ''          | ''       | ''        | ''                    | ''                                     | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           | ''          |
+			| ''                                           | 'Resources' | ''       | ''        | 'Dimensions'          | ''                                     | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           | ''          |
+			| ''                                           | 'Amount'    | 'Is due' | 'Is paid' | 'Date'                | 'Key'                                  | 'Company'      | 'Branch'                  | 'Currency' | 'Partner' | 'Legal name'    | 'Agreement'                | 'Order' | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                          | 'Unique ID' |
+			| ''                                           | '-9 360'    | 'Yes'    | 'No'      | '21.04.2021 14:19:47' | '                                    ' | 'Main Company' | 'Distribution department' | 'TRY'      | 'Lunch'   | 'Company Lunch' | 'Basic Partner terms, TRY' | ''      | 'No'                    | 'Yes'                     | 'Sales return 106 dated 21.04.2021 14:19:47' | '*'         |		
 	And I close all client application windows
 
 

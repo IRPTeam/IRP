@@ -50,6 +50,14 @@ Scenario: _041700 preparation (Physical inventory)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create document ShipmentConfirmation (stock control serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -62,8 +70,11 @@ Scenario: _041700 preparation (Physical inventory)
 		When filling in Tax settings for company
 	* Load Physical inventory
 		When Create document PhysicalInventory objects (check movements)
+		When Create document PhysicalInventory objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PhysicalInventory.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PhysicalInventory.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 
 Scenario: _041701 check Physical inventory movements by the Register  "R4010 Actual stocks"
@@ -77,13 +88,13 @@ Scenario: _041701 check Physical inventory movements by the Register  "R4010 Act
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | '36/Yellow' |
-			| ''                                                 | 'Expense'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | 'XS/Blue'   |
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''          | ''          |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''          |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number'  |
+			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | '36/Yellow' | '' |
+			| ''                                                 | 'Expense'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | 'XS/Blue'   | ''   |
 		And I close all client application windows
 
 Scenario: _041702 check Physical inventory movements by the Register  "R4011 Free stocks"
@@ -104,6 +115,28 @@ Scenario: _041702 check Physical inventory movements by the Register  "R4011 Fre
 			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
 			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | '36/Yellow' |
 			| ''                                                 | 'Expense'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | 'XS/Blue'   |	
+		And I close all client application windows
+
+Scenario: _041703 check Physical inventory movements by the Register  "R4010 Actual stocks"
+	* Select Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 112' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Physical inventory 1 112 dated 20.05.2022 17:28:13' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                    | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                   | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                   | 'Receipt'     | '20.05.2022 17:28:13' | '5'         | 'Store 02'   | 'PZU'      | '8908899877'        |
+			| ''                                                   | 'Receipt'     | '20.05.2022 17:28:13' | '5'         | 'Store 02'   | 'PZU'      | '8908899879'        |
+			| ''                                                   | 'Receipt'     | '20.05.2022 17:28:13' | '10'        | 'Store 02'   | 'XL/Green' | ''                  |
+			| ''                                                   | 'Receipt'     | '20.05.2022 17:28:13' | '20'        | 'Store 02'   | 'UNIQ'     | ''                  |	
 		And I close all client application windows
 
 

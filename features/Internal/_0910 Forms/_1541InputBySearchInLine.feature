@@ -1234,19 +1234,6 @@ Scenario: _0154090 check company, account, currency input by search in line in O
 
 
 
-Scenario: _0154092 check store, responsible person input by search in line in PhysicalCountByLocation (in english)
-	And I close all client application windows
-	* Open a creation form PhysicalCountByLocation
-		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
-		And I click the button named "FormCreate"
-	* Store input by search in line
-		And I select from "Store" drop-down list by "02" string
-	* Responsible person input by search in line
-		And I select from "Responsible person" drop-down list by "Anna" string
-	* Check filling in
-		Then the form attribute named "Store" became equal to "Store 02"
-		Then the form attribute named "ResponsiblePerson" became equal to "Anna Petrova"
-		And I close all client application windows
 
 
 Scenario: _0154093 check store input by search in line in PhysicalInventory (in english)

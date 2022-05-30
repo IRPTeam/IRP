@@ -161,8 +161,7 @@ Scenario: _0242005 check reservation (SO-Planned reservation - PO - GR-PI/PI-GR)
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R4010B_ActualStocks"
 		And "List" table contains lines
 			| 'Period'              | 'Recorder'                                   | 'Line number' | 'Store'    | 'Item key' | 'Quantity' |
-			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02' | '1'           | 'Store 02' | '36/Red'   | '10,000'   |
-			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02' | '2'           | 'Store 02' | '36/Red'   | '5,000'    |
+			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02' | '1'           | 'Store 02' | '36/Red'   | '15,000'   |
 			| '14.09.2021 10:30:51' | 'Goods receipt 33 dated 14.09.2021 10:30:51' | '1'           | 'Store 02' | 'XS/Blue'  | '7,000'    |
 			| '14.09.2021 10:31:48' | 'Goods receipt 34 dated 14.09.2021 10:31:48' | '1'           | 'Store 02' | 'XS/Blue'  | '43,000'   |
 		

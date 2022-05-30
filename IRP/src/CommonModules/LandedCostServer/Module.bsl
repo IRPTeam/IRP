@@ -90,7 +90,6 @@ Procedure Posting_BatchReallocate(BatchReallocateRef, EndPeriod) Export
 EndProcedure
 
 Procedure Posting_BatchWiceBalance(CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod, AddInfo = Undefined) Export
-	CommonFunctionsClientServer.ShowUsersMessage("Start: " + CurrentDate());
 	LocksStorage = New Array();
 	If Not TransactionActive() Then
 		BeginTransaction(DataLockControlMode.Managed);
@@ -108,7 +107,6 @@ Procedure Posting_BatchWiceBalance(CalculationMovementCostRef, Company, Calculat
 	Else
 		BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod);
 	EndIf;
-	CommonFunctionsClientServer.ShowUsersMessage("End: " + CurrentDate());
 EndProcedure
 
 Procedure BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod)

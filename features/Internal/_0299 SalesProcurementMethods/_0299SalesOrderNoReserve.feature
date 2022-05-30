@@ -154,7 +154,7 @@ Scenario: _029901 create Sales order without reserve and check its movements (SO
 			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | 'Main Company' | ''                     | '$$SalesOrder029901$$' | '38/Yellow' |
 			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | 'Main Company' | ''                     | '$$SalesOrder029901$$' | '38/Black'  |
 
-	* Check SO movements Register  "Register  "R2012 Invoice closing of sales orders")
+	* Check SO movements Register  ("Register  "R2012 Invoice closing of sales orders")
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -224,13 +224,13 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'            | ''            | ''                           | ''          | ''             | ''             | ''         | ''          |
-		| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''             | ''         | ''          |
-		| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''             | ''         | ''          |
-		| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''             | ''         | ''          |
-		| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Item key'  |
-		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | ''             | 'Store 01' | '38/Yellow' |
-		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | ''             | 'Store 01' | '38/Black'  |
+		| '$$SalesInvoice029901$$'            | ''            | ''                           | ''          | ''             | ''         | ''          |
+		| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''         | ''          |
+		| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''         | ''          |
+		| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''         | ''          |
+		| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
+		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | 'Store 01' | '38/Yellow' |
+		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | 'Store 01' | '38/Black'  |
 
 	* Check SI movements (Register  "Register  "R2001 Sales")
 		And I select "R2001 Sales" exact value from "Register" drop-down list
@@ -278,13 +278,13 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'            | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
-		| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
-		| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
-		| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''          |
-		| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store'    | 'Item key'  |
-		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | ''       | 'Store 01' | '38/Yellow' |
-		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | ''       | 'Store 01' | '38/Black'  |
+		| '$$SalesInvoice029901$$'            | ''            | ''                           | ''          | ''             | ''         | ''          |
+		| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''         | ''          |
+		| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''         | ''          |
+		| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''         | ''          |
+		| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
+		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | 'Store 01' | '38/Yellow' |
+		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | 'Store 01' | '38/Black'  |
 	* Check SI movements (Register  "R2011 Shipment of sales orders")
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -538,13 +538,13 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$'            | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
-			| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
-			| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
-			| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''          |
-			| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store'    | 'Item key'  |
-			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | ''       | 'Store 02' | '38/Yellow' |
-			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | ''       | 'Store 02' | '38/Black'  |
+			| '$$SalesInvoice029903$$'            | ''            | ''                           | ''          | ''             | ''         | ''          |
+			| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''         | ''          |
+			| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''         | ''          |
+			| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''         | ''          |
+			| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
+			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | 'Store 02' | '38/Yellow' |
+			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | 'Store 02' | '38/Black'  |
 
 		* Check SI movements (Register  "Register  "R2001 Sales")
 			And I select "R2001 Sales" exact value from "Register" drop-down list
@@ -593,13 +593,13 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$'            | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
-			| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
-			| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
-			| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''          |
-			| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store'    | 'Item key'  |
-			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | ''       | 'Store 02' | '38/Yellow' |
-			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | ''       | 'Store 02' | '38/Black'  |
+			| '$$SalesInvoice029903$$'            | ''            | ''                           | ''          | ''             | ''         | ''          |
+			| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''         | ''          |
+			| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''         | ''          |
+			| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''         | ''          |
+			| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
+			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | 'Store 02' | '38/Yellow' |
+			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | 'Store 02' | '38/Black'  |
 		// * Check that there is no movements in the Register  "R2013 Procurement of sales orders"
 		// 	And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
 		// 	And I click "Generate report" button

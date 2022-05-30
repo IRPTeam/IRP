@@ -168,7 +168,11 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
 	|	R6010B_BatchWiseBalance.Period <= ENDOFPERIOD(&EndPeriod, DAY)
-	|	AND R6010B_BatchWiseBalance.Batch.Company = &Company
+	|	AND case
+	|		when &FilterByCompany
+	|			then R6010B_BatchWiseBalance.Batch.Company = &Company
+	|		else true
+	|	end
 	|
 	|UNION ALL
 	|
@@ -182,7 +186,11 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 	|	AccumulationRegister.R6030T_BatchShortageOutgoing AS R6030T_BatchShortageOutgoing
 	|WHERE
 	|	R6030T_BatchShortageOutgoing.Period <= ENDOFPERIOD(&EndPeriod, DAY)
-	|	AND R6030T_BatchShortageOutgoing.Company = &Company
+	|	AND case
+	|		when &FilterByCompany
+	|			then R6030T_BatchShortageOutgoing.Company = &Company
+	|		else true
+	|	end
 	|
 	|UNION ALL
 	|
@@ -196,7 +204,11 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 	|	AccumulationRegister.R6040T_BatchShortageIncoming AS R6040T_BatchShortageIncoming
 	|WHERE
 	|	R6040T_BatchShortageIncoming.Period <= ENDOFPERIOD(&EndPeriod, DAY)
-	|	AND R6040T_BatchShortageIncoming.Company = &Company
+	|	AND case
+	|		when &FilterByCompany
+	|			then R6040T_BatchShortageIncoming.Company = &Company
+	|		else true
+	|	end
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -234,6 +246,7 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 	|	tmp_Grouped.ItemKey,
 	|	tmp_Grouped.Store";
 	
+	Query.SetParameter("FilterByCompany", ValueIsFilled(Company));
 	Query.SetParameter("EndPeriod", EndPeriod);
 	Query.SetParameter("Company", Company);
 	
@@ -344,8 +357,13 @@ Procedure BatchRelevance_Clear(Company, EndPeriod) Export
 	|FROM
 	|	InformationRegister.T6030S_BatchRelevance AS T6030S_BatchRelevance
 	|WHERE
-	|	T6030S_BatchRelevance.Company = &Company
+	|	case
+	|		when &FilterByCompany
+	|			then T6030S_BatchRelevance.Company = &Company
+	|		else true
+	|	end
 	|	AND T6030S_BatchRelevance.Date <= ENDOFPERIOD(&EndPeriod, DAY)";
+	Query.SetParameter("FilterByCompany", ValueIsFilled(Company));
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("EndPeriod", EndPeriod);
 	QueryResults = Query.Execute();

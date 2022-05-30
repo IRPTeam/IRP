@@ -25,7 +25,6 @@
   <content>AccumulationRegister.R2020B_AdvancesFromCustomers.Dimension.Branch</content>
   <content>AccumulationRegister.R4017B_InternalSupplyRequestProcurement.Dimension.Branch</content>
   <content>AccumulationRegister.R4034B_GoodsShipmentSchedule.Dimension.Branch</content>
-  <content>AccumulationRegister.R4050B_StockInventory.Dimension.Branch</content>
   <content>AccumulationRegister.R2021B_CustomersTransactions.Dimension.Branch</content>
   <content>AccumulationRegister.R3010B_CashOnHand.Dimension.Branch</content>
   <content>AccumulationRegister.R5021T_Revenues.Dimension.Branch</content>

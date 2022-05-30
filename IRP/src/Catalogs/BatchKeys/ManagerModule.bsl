@@ -21,7 +21,11 @@ Procedure Create_BatchKeys(Company, BeginPeriod, EndPeriod) Export
 	|FROM
 	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
 	|WHERE
-	|	T6020S_BatchKeysInfo.Company = &Company
+	|	case
+	|		when &FilterByCompany
+	|			then T6020S_BatchKeysInfo.Company = &Company
+	|		else true
+	|	end
 	|	AND T6020S_BatchKeysInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
 	|GROUP BY
 	|	T6020S_BatchKeysInfo.Store,
@@ -40,6 +44,7 @@ Procedure Create_BatchKeys(Company, BeginPeriod, EndPeriod) Export
 	|		AND NOT BatchKeys.DeletionMark
 	|WHERE
 	|	BatchKeys.Ref IS NULL";
+	Query.SetParameter("FilterByCompany", ValueIsFilled(Company));
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("BeginPeriod", BeginPeriod);
 	Query.SetParameter("EndPeriod", EndPeriod);

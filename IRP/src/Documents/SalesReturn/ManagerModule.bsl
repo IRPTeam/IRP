@@ -40,14 +40,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	SalesReturnItemList.Key AS Key,
 	|	SalesReturnItemList.Ref.Currency AS Currency,
 	|	SUM(CASE
-	|		WHEN SalesReturnItemList.SalesInvoice.Date IS NULL
-	|			THEN SalesReturnItemList.LandedCost
-	|		ELSE SalesReturnItemList.TotalAmount
+	|		WHEN NOT SalesReturnItemList.SalesInvoice.Ref IS NULL
+	|		AND SalesReturnItemList.SalesInvoice REFS Document.SalesInvoice
+	|			THEN SalesReturnItemList.TotalAmount
+	|		ELSE SalesReturnItemList.LandedCost
 	|	END) AS Amount,
 	|	CASE
-	|		WHEN SalesReturnItemList.SalesInvoice.Date IS NULL
-	|			THEN FALSE
-	|		ELSE TRUE
+	|		WHEN NOT SalesReturnItemList.SalesInvoice.Ref IS NULL
+	|		AND SalesReturnItemList.SalesInvoice REFS Document.SalesInvoice
+	|			THEN TRUE
+	|		ELSE FALSE
 	|	END AS SalesInvoiceIsFilled,
 	|	SalesReturnItemList.SalesInvoice AS SalesInvoice
 	|FROM
@@ -62,12 +64,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	SalesReturnItemList.Ref.Date,
 	|	SalesReturnItemList.Key,
 	|	SalesReturnItemList.Ref.Currency,
-	|	CASE
-	|		WHEN SalesReturnItemList.SalesInvoice.Date IS NULL
-	|			THEN FALSE
-	|		ELSE TRUE
-	|	END,
 	|	SalesReturnItemList.SalesInvoice,
+	|	CASE
+	|		WHEN NOT SalesReturnItemList.SalesInvoice.Ref IS NULL
+	|		AND SalesReturnItemList.SalesInvoice REFS Document.SalesInvoice
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END,
 	|	VALUE(Enum.BatchDirection.Receipt)";
 	
 	Query.SetParameter("Ref", Ref);
@@ -705,15 +708,25 @@ Function R4031B_GoodsInTransitIncoming()
 EndFunction
 
 Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService";
-
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemLIst.Store,
+	|	ItemList.ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO R4050B_StockInventory
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	NOT ItemList.IsService
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemLIst.Store,
+	|	ItemList.ItemKey";
 EndFunction
 
 #EndRegion

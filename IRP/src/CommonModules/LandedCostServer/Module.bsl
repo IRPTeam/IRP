@@ -89,15 +89,13 @@ Procedure Posting_BatchReallocate(BatchReallocateRef, EndPeriod) Export
 	EndIf;
 EndProcedure
 
-Procedure Posting_BatchWiceBalance(CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod,
-	AddInfo = Undefined) Export
+Procedure Posting_BatchWiceBalance(CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod, AddInfo = Undefined) Export
 	CommonFunctionsClientServer.ShowUsersMessage("Start: " + CurrentDate());
 	LocksStorage = New Array();
 	If Not TransactionActive() Then
 		BeginTransaction(DataLockControlMode.Managed);
 		Try
-			BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode,
-				BeginPeriod, EndPeriod);
+			BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod);
 			If TransactionActive() Then
 				CommitTransaction();
 			EndIf;
@@ -108,27 +106,21 @@ Procedure Posting_BatchWiceBalance(CalculationMovementCostRef, Company, Calculat
 			Raise ErrorDescription();
 		EndTry;
 	Else
-		BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode,
-			BeginPeriod, EndPeriod);
+		BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod);
 	EndIf;
 	CommonFunctionsClientServer.ShowUsersMessage("End: " + CurrentDate());
 EndProcedure
 
-Procedure BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode,
-	BeginPeriod, EndPeriod)
+Procedure BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod)
 	If CalculationMode = Enums.CalculationMode.LandedCost Then
-		DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod,
-			EndPeriod);
+		DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod);
 	ElsIf CalculationMode = Enums.CalculationMode.LandedCostBatchReallocate Then
 		BatchReallocate(LocksStorage, CalculationMovementCostRef, EndPeriod);
-		DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMovementCostRef, Undefined, BeginPeriod,
-			EndPeriod);
+		DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMovementCostRef, Undefined, BeginPeriod, EndPeriod);
 	ElsIf CalculationMode = Enums.CalculationMode.AdditionalItemCost Then
-		DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationMovementCostRef, Company,
-			BeginPeriod, EndPeriod);
+		DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod);
 	ElsIf CalculationMode = Enums.CalculationMode.AdditionalItemRevenue Then
-		DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, CalculationMovementCostRef, Company,
-			BeginPeriod, EndPeriod);
+		DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod);
 	EndIf;
 EndProcedure
 
@@ -174,8 +166,7 @@ Procedure BatchReallocate(LocksStorage, BatchReallocateRef, EndPeriod)
 
 		ReallocatePeriod = NegativeStockBalanceSelection.Period - 2;
 
-		PositiveStockBalance = GetPositiveStockBalance(NegativeStockBalanceSelection.Company, ReallocatePeriod,
-			LackItemList);
+		PositiveStockBalance = GetPositiveStockBalance(NegativeStockBalanceSelection.Company, ReallocatePeriod, LackItemList);
 
 		ResultItemList = EmptyResultItemList.CopyColumns();
 		IsQuantityEnought = True;
@@ -216,14 +207,12 @@ Procedure BatchReallocate(LocksStorage, BatchReallocateRef, EndPeriod)
 
 		For Each Row In ResultItemListCopy Do
 			// outgoing reallocate
-			OutgoingDoc = GetReleasedBatchReallocateDocument("BatchReallocateOutgoing", BatchReallocateRef,
-				ReallocatePeriod);
+			OutgoingDoc = GetReleasedBatchReallocateDocument("BatchReallocateOutgoing", BatchReallocateRef, ReallocatePeriod);
 			OutgoingDoc.Document = NegativeStockBalanceSelection.Recorder;
 			OutgoingDoc.Company  = Row.CompanySender;
 			
 			// incoming reallocate
-			IncomingDoc = GetReleasedBatchReallocateDocument("BatchReallocateIncoming", BatchReallocateRef,
-				ReallocatePeriod + 1);
+			IncomingDoc = GetReleasedBatchReallocateDocument("BatchReallocateIncoming", BatchReallocateRef, ReallocatePeriod + 1);
 			IncomingDoc.Document = NegativeStockBalanceSelection.Recorder;
 			IncomingDoc.Company  = Row.CompanyReceiver;
 
@@ -384,8 +373,7 @@ Function GetPositiveStockBalance(Company, Period, ItemList)
 	Return QueryTable;
 EndFunction
 
-Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod,
-	EndPeriod)
+Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod)
 	LockCatalogs(LocksStorage);
 
 	Catalogs.Batches.Create_Batches(CalculationMovementCostRef, Company, BeginPeriod, EndPeriod);
@@ -509,8 +497,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Restore(Company, EndPeriod);
 EndProcedure
 
-Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationMovementCostRef, Company,
-	BeginPeriod, EndPeriod)
+Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod)
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -656,8 +643,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_LoadRecords(CalculationMovementCostRef);
 EndProcedure
 
-Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, CalculationMovementCostRef, Company,
-	BeginPeriod, EndPeriod)
+Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod)
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -836,18 +822,15 @@ Function GetBatchWiseBalance(CalculateMovementCostsRef, Company, BeginPeriod, En
 	Tables.DataForCompositeBatchesAmountValues.Columns.Add("Batch", RegMetadata.Dimensions.Batch.Type);
 	Tables.DataForCompositeBatchesAmountValues.Columns.Add("BatchKey", RegMetadata.Dimensions.BatchKey.Type);
 	Tables.DataForCompositeBatchesAmountValues.Columns.Add("BatchComposite", RegMetadata.Dimensions.BatchComposite.Type);
-	Tables.DataForCompositeBatchesAmountValues.Columns.Add("BatchKeyComposite",
-		RegMetadata.Dimensions.BatchKeyComposite.Type);
+	Tables.DataForCompositeBatchesAmountValues.Columns.Add("BatchKeyComposite", RegMetadata.Dimensions.BatchKeyComposite.Type);
 	Tables.DataForCompositeBatchesAmountValues.Columns.Add("Amount", RegMetadata.Resources.Amount.Type);
 	Tables.DataForCompositeBatchesAmountValues.Columns.Add("Quantity", RegMetadata.Resources.QUantity.Type);
 
 	Tables.Insert("DataForReallocatedBatchesAmountValues", New ValueTable());
 	RegMetadata = Metadata.InformationRegisters.T6080S_ReallocatedBatchesAmountValues;
 	Tables.DataForReallocatedBatchesAmountValues.Columns.Add("Period", RegMetadata.StandardAttributes.Period.Type);
-	Tables.DataForReallocatedBatchesAmountValues.Columns.Add("OutgoingDocument",
-		RegMetadata.Dimensions.OutgoingDocument.Type);
-	Tables.DataForReallocatedBatchesAmountValues.Columns.Add("IncomingDocument",
-		RegMetadata.Dimensions.IncomingDocument.Type);
+	Tables.DataForReallocatedBatchesAmountValues.Columns.Add("OutgoingDocument", RegMetadata.Dimensions.OutgoingDocument.Type);
+	Tables.DataForReallocatedBatchesAmountValues.Columns.Add("IncomingDocument", RegMetadata.Dimensions.IncomingDocument.Type);
 	Tables.DataForReallocatedBatchesAmountValues.Columns.Add("BatchKey", RegMetadata.Dimensions.BatchKey.Type);
 	Tables.DataForReallocatedBatchesAmountValues.Columns.Add("Amount", RegMetadata.Resources.Amount.Type);
 	Tables.DataForReallocatedBatchesAmountValues.Columns.Add("Quantity", RegMetadata.Resources.Quantity.Type);
@@ -1243,8 +1226,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRow.Amount    = Row.Amount;
 			
 			// simple receipt	
-			If IsNotMultiDirectionDocument(Document) And Not ValueIsFilled(Row.SalesInvoice) And TypeOf(Document)
-				<> Type("DocumentRef.BatchReallocateIncoming") Then
+			If IsNotMultiDirectionDocument(Document) And Not ValueIsFilled(Row.SalesInvoice) And TypeOf(Document) <> Type("DocumentRef.BatchReallocateIncoming") Then
 				FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);
 			EndIf;
 
@@ -1297,8 +1279,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				EndDo; // return by sales invoice
 
 				If NeedReceipt <> 0 Then
-					Message(StrTemplate("Can not receipt Batch key by sales return: %1 , Quantity: %2 , Doc: %3",
-						Row.BatchKey, NeedReceipt, Row.Document));
+					Message(StrTemplate("Can not receipt Batch key by sales return: %1 , Quantity: %2 , Doc: %3", Row.BatchKey, NeedReceipt, Row.Document));
 					NewRow = Tables.DataForBatchShortageIncoming.Add();
 					NewRow.BatchKey = Row.BatchKey;
 					NewRow.Document = Row.Document;
@@ -1360,8 +1341,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					ExpenseAmount = Row_Batch.AmountBalance;
 				Else
 					If Row_Batch.QuantityBalance <> 0 Then
-						ExpenseAmount = Round((Row_Batch.AmountBalance / Row_Batch.QuantityBalance) * ExpenseQuantity,
-							2);
+						ExpenseAmount = Round((Row_Batch.AmountBalance / Row_Batch.QuantityBalance) * ExpenseQuantity, 2);
 					EndIf;
 				EndIf;
 				Row_Batch.QuantityBalance = Row_Batch.QuantityBalance - ExpenseQuantity;
@@ -1406,8 +1386,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			EndIf;
 
 			If NeedExpense <> 0 Then
-				Message(StrTemplate("Can not expense Batch key: %1 , Quantity: %2 , Doc: %3", Row.BatchKey,
-					NeedExpense, Row.Document));
+				Message(StrTemplate("Can not expense Batch key: %1 , Quantity: %2 , Doc: %3", Row.BatchKey, NeedExpense, Row.Document));
 				NewRow = Tables.DataForBatchShortageOutgoing.Add();
 				NewRow.BatchKey = Row.BatchKey;
 				NewRow.Document = Row.Document;
@@ -1562,8 +1541,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 				EndIf;
 			EndDo;
 			If NeedReceipt <> 0 Then
-				Message(StrTemplate("Can not receipt Batch key: %1 , Quantity: %2 , Doc: %3", Row.BatchKey,
-					NeedReceipt, Row.Document));
+				Message(StrTemplate("Can not receipt Batch key: %1 , Quantity: %2 , Doc: %3", Row.BatchKey, NeedReceipt, Row.Document));
 				NewRow = Tables.DataForBatchShortageIncoming.Add();
 				NewRow.BatchKey = Row.BatchKey;
 				NewRow.Document = Row.Document;
@@ -1652,8 +1630,8 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 	For Each Row In TableOfNewReceivedBatches Do
 		If ValueIsFilled(Row.AmountBalance) Then
 			For Each Row2 In Rows Do
-				If Row.Batch = Row2.Batch And Row.BatchKey = Row2.BatchKey And Row.Direction = Row2.Direction
-					And Not ValueIsFilled(Row2.AmountBalance) And ArrayForDelete.Find(Row2) = Undefined Then
+				If Row.Batch = Row2.Batch And Row.BatchKey = Row2.BatchKey And Row.Direction = Row2.Direction And Not ValueIsFilled(Row2.AmountBalance) And ArrayForDelete.Find(
+					Row2) = Undefined Then
 
 					ArrayForDelete.Add(Row2);
 				EndIf;
@@ -1661,7 +1639,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		EndIf;
 		FillPropertyValues(Rows.Add(), Row);
 	EndDo;
-	
+
 	For Each Row In ArrayForDelete Do
 		Rows.Delete(Row);
 	EndDo;

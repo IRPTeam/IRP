@@ -9,7 +9,7 @@ Background:
 	Given I open new TestClient session or connect the existing one
 
 
-Scenario: _005 preparation
+Scenario: _0050 preparation
 	When set True value to the constant (LC)
 	* Checking the availability of catalogs and batches registers
 		Given I open hyperlink "e1cib/list/Catalog.BatchKeys"
@@ -118,4 +118,5 @@ Scenario: _005 preparation
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
-		
+	
+

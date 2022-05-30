@@ -2522,6 +2522,20 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 		And I close all client application windows
 
 
+Scenario:_800062 checkmark removal control Stock balance detail in the Serial lot number
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
+	And I go to line in "List" table
+		| 'Serial number' |
+		| '8908899877'   |
+	And I select current line in "List" table
+	And I remove checkbox "Stock balance detail"
+	And I click "Save and close" button
+	Then I wait that in user messages the "Current serial lot number already has movements, it can not disable stock detail option" substring will appear in 10 seconds
+	And I close all client application windows
+	
+
+
 
 Scenario:_800080 set/remove checkbox Negative stock control from store and check posting document (Negative stock)
 	* Remove checkbox

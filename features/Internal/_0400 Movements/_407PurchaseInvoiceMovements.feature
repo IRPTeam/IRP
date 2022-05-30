@@ -266,13 +266,13 @@ Scenario: _040104 check Purchase invoice movements by the Register  "R4050 Stock
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''            | ''                    | ''          | ''             | ''             | ''         | ''          |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''             | ''         | ''          |
-			| 'Register  "R4050 Stock inventory"'              | ''            | ''                    | ''          | ''             | ''             | ''         | ''          |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''          |
-			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Item key'  |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '5'         | 'Main Company' | 'Front office' | 'Store 02' | '36/Yellow' |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '10'        | 'Main Company' | 'Front office' | 'Store 02' | 'S/Yellow'  |
+			| 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| 'Register  "R4050 Stock inventory"'              | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''          |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
+			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '5'         | 'Main Company' | 'Store 02' | '36/Yellow' |
+			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '10'        | 'Main Company' | 'Store 02' | 'S/Yellow'  |
 		And I close all client application windows
 		
 Scenario: _040105 check Purchase invoice movements by the Register  "R4011 Free stocks"  (use GR)

@@ -127,13 +127,13 @@ Scenario: _041903 check Stock adjustment as write off movements by the Register 
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''            | ''                    | ''          | ''               | ''             | ''         | ''          |
-			| 'Document registrations records'                              | ''            | ''                    | ''          | ''               | ''             | ''         | ''          |
-			| 'Register  "R4050 Stock inventory"'                           | ''            | ''                    | ''          | ''               | ''             | ''         | ''          |
-			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'     | ''             | ''         | ''          |
-			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Company'        | 'Branch'       | 'Store'    | 'Item key'  |
-			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '2'         | 'Second Company' | 'Front office' | 'Store 01' | '38/Yellow' |
-			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Second Company' | 'Front office' | 'Store 01' | 'M/White'   |
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''            | ''                    | ''          | ''               | ''         | ''          |
+			| 'Document registrations records'                              | ''            | ''                    | ''          | ''               | ''         | ''          |
+			| 'Register  "R4050 Stock inventory"'                           | ''            | ''                    | ''          | ''               | ''         | ''          |
+			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'     | ''         | ''          |
+			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Company'        | 'Store'    | 'Item key'  |
+			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '2'         | 'Second Company' | 'Store 01' | '38/Yellow' |
+			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Second Company' | 'Store 01' | 'M/White'   |
 		And I close all client application windows
 
 Scenario: _041904 check Stock adjustment as write off with serial lot number movements by the Register  "R4010 Actual stocks"

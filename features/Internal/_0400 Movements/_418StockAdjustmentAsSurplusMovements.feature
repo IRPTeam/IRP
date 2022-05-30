@@ -131,15 +131,15 @@ Scenario: _041803 check Stock adjustment as surplus movements by the Register  "
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | ''            | ''                    | ''          | ''             | ''             | ''         | ''         |
-			| 'Document registrations records'                            | ''            | ''                    | ''          | ''             | ''             | ''         | ''         |
-			| 'Register  "R4050 Stock inventory"'                         | ''            | ''                    | ''          | ''             | ''             | ''         | ''         |
-			| ''                                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''         |
-			| ''                                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Item key' |
-			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '4'         | 'Main Company' | 'Front office' | 'Store 05' | '36/18SD'  |
-			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '7'         | 'Main Company' | 'Front office' | 'Store 05' | '36/Red'   |
-			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Main Company' | 'Front office' | 'Store 05' | 'XS/Blue'  |
-			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Main Company' | 'Front office' | 'Store 05' | 'M/White'  |
+			| 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | ''            | ''                    | ''          | ''             | ''         | ''         |
+			| 'Document registrations records'                            | ''            | ''                    | ''          | ''             | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'                         | ''            | ''                    | ''          | ''             | ''         | ''         |
+			| ''                                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''         |
+			| ''                                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key' |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '4'         | 'Main Company' | 'Store 05' | '36/18SD'  |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '7'         | 'Main Company' | 'Store 05' | '36/Red'   |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Main Company' | 'Store 05' | 'XS/Blue'  |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Main Company' | 'Store 05' | 'M/White'  |
 		And I close all client application windows
 
 Scenario: _041804 check Stock adjustment as surplus movements by the Register  "R4010 Actual stocks"

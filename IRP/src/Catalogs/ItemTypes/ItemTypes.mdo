@@ -117,6 +117,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="92c0dd0c-5c81-4ebc-968b-a08420814192">
+    <name>EachSerialLotNumberIsUnique</name>
+    <synonym>
+      <key>en</key>
+      <value>Each serial lot number is unique</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="a261a912-5869-49b5-8ab6-76ad86abeaba">
     <producedTypes>
       <objectType typeId="192f1da3-6058-4b27-b623-41f7c6cafedb" valueTypeId="dff3d6ac-2e62-4190-bda0-9908ffbe49bc"/>

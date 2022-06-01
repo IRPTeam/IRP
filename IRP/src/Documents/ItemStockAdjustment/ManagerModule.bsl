@@ -217,23 +217,41 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function R4011B_FreeStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	QueryTable.ItemKey AS ItemKey,
-		   |	*
-		   |INTO R4011B_FreeStocks
-		   |FROM
-		   |	ItemList AS QueryTable
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	QueryTable.ItemKeyWriteOff AS ItemKey,
-		   |	*
-		   |FROM
-		   |	ItemList AS QueryTable";
-
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO R4011B_FreeStocks
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKey
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKeyWriteOff AS ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Expense),
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.ItemKeyWriteOff";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -263,23 +281,45 @@ Function R4014B_SerialLotNumber()
 EndFunction
 
 Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	QueryTable.ItemKey AS ItemKey,
-		   |	*
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS QueryTable
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	QueryTable.ItemKeyWriteOff AS ItemKey,
-		   |	*
-		   |FROM
-		   |	ItemList AS QueryTable";
-
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO R4050B_StockInventory
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKeyWriteOff AS ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Expense),
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKeyWriteOff";
 EndFunction
 
 Function R4051T_StockAdjustmentAsWriteOff()

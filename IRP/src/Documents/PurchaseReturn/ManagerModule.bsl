@@ -604,15 +604,25 @@ Function R4032B_GoodsInTransitOutgoing()
 EndFunction
 
 Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	*
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService";
-
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO R4050B_StockInventory
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	NOT ItemList.IsService
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Expense),
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

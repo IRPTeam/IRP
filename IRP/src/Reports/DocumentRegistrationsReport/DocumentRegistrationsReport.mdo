@@ -82,6 +82,8 @@
       <types>DocumentRef.AdditionalCostAllocation</types>
       <types>DocumentRef.AdditionalRevenueAllocation</types>
       <types>DocumentRef.MoneyTransfer</types>
+      <types>DocumentRef.BatchReallocateIncoming</types>
+      <types>DocumentRef.BatchReallocateOutgoing</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

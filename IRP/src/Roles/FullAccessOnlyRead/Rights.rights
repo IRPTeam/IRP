@@ -6213,4 +6213,48 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.BatchReallocateOutgoing</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T6080S_ReallocatedBatchesAmountValues</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.BatchReallocateIncoming</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T6090S_CompositeBatchesAmountValues</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

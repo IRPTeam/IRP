@@ -11,6 +11,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewRow.Quantity = Row.Quantity;
 	EndDo;
 	SerialLotNumberStatus = R().InfoMessage_018;
+	Items.DecorationLegendInfo.Title = R().InfoMessage_029;
+	SerialLotNumbersServer.SetUnique(ThisObject);
 EndProcedure
 
 &AtClient
@@ -58,6 +60,16 @@ Procedure SerialLotNumbersSerialLotNumberEditTextChange(Item, Text, StandardProc
 	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
 
 	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure SerialLotNumbersSerialLotNumberOnChange(Item)
+	SerialLotNumberOnChangeAtServer();
+EndProcedure
+
+&AtServer
+Procedure SerialLotNumberOnChangeAtServer()
+	SerialLotNumbersServer.SetUnique(ThisObject);
 EndProcedure
 
 &AtClient
@@ -122,8 +134,8 @@ EndProcedure
 // Search by barcode end.
 // 
 // Parameters:
-//  Result Result
-//  AdditionalParameters Additional parameters
+//  Result - Structure - Result
+//  AdditionalParameters - Structure - Additional parameters
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	LastBarcode = "";

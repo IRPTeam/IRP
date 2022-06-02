@@ -137,7 +137,7 @@ Scenario: _0052 create Calculation movements cost (batch reallocate)
 		And I wait "Calculation movement costs (create) *" window closing in 20 seconds
 		Then the number of "List" table lines is "равно" "1"
 	* Check batch balance calculation
-		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click "Run report" button
 		Given "Result" spreadsheet document is equal to "BatchReallocate1"
 		And I close all client application windows

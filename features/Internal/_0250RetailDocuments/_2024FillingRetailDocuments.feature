@@ -3875,6 +3875,7 @@ Scenario: _0154195 set sales person from POS
 			And I go to line in "" table
 				| 'Column1'      |
 				| 'Anna Petrova' |
+			And I select current line in "" table
 			And I move to "Main" tab
 			And I click "Search by barcode (F7)" button
 			And I input "2202283739" text in the field named "InputFld"

@@ -53,7 +53,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		If Not Row.UseSerialLotNumber Then
 			Info = StrTemplate(R().InfoMessage_017, Row.Item);
 		ElsIf ItemRef.IsEmpty() And Not Row.SerialLotNumber.IsEmpty() Then
-			Info = R().InfoMessage_029;
+			Info = R().InfoMessage_030;
 		ElsIf ItemRef = Row.Item And ItemKey = Row.ItemKey And Not Row.SerialLotNumber.IsEmpty() Then
 			Info = StrTemplate(R().InfoMessage_027, Row.Barcode, Row.Item, Row.ItemKey, Row.SerialLotNumber);
 		ElsIf Row.SerialLotNumber.IsEmpty() Then
@@ -71,7 +71,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	For Each Row In Result.Barcodes Do
 
 		If ItemRef.IsEmpty() Or ItemKey.IsEmpty() Then
-			Info = R().InfoMessage_029;
+			Info = R().InfoMessage_030;
 			Return;
 		EndIf;
 	

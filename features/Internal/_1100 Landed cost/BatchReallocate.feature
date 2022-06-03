@@ -120,3 +120,26 @@ Scenario: _0050 preparation
 		And I close all client application windows
 	
 
+Scenario: _0052 create Calculation movements cost (batch reallocate)
+	And I close all client application windows
+	* Create Calculation movement costs
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
+		And I input "30.05.2022" text in "Begin date" field
+		And I input "30.05.2022" text in "End date" field
+		And I click "Post and close" button
+		And I wait "Calculation movement costs (create) *" window closing in 20 seconds
+		Then the number of "List" table lines is "равно" "1"
+	* Check batch balance calculation
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Run report" button
+		Given "Result" spreadsheet document is equal to "BatchReallocate1"
+		And I close all client application windows
+		
+		

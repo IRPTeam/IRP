@@ -130,6 +130,7 @@
 //  * Error_108 - String - Field is filled, but it has to be empty.
 //  * Error_109 - String - 
 //  * Error_110 - String - 
+//  * Error_111 - String -
 //  * Exc_001 - String - Unsupported object type.
 //  * Exc_002 - String - No conditions
 //  * Exc_003 - String - Method is not implemented: %1.
@@ -200,8 +201,8 @@
 //  * InfoMessage_025 - String - Before start to scan - choose location
 //  * InfoMessage_026 - String - Can not count Service item type
 //  * InfoMessage_027 - String - Barcode [%1] is exists for item: %2 [%3] %4
-//  * InfoMessage_028 - String - 
-//  * InfoMessage_029 - String - 
+//  * InfoMessage_028 - String -
+//  * InfoMessage_029 - String -  
 //  * POS_s1 - String - Amount paid is less than amount of the document
 //  * POS_s2 - String - Card fees are more than the amount of the document
 //  * POS_s3 - String - There is no need to use cash, as card payments are sufficient to pay
@@ -686,6 +687,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_108", NStr("en = 'Field is filled, but it has to be empty.'", Lang));
 	Strings.Insert("Error_109", NStr("en = 'Serial lot number name [ %1 ] is not match template: %2'", Lang) + Chars.LF);
 	Strings.Insert("Error_110", NStr("en = 'Current serial lot number already has movements, it can not disable stock detail option'", Lang) + Chars.LF);
+	Strings.Insert("Error_111", NStr("en = 'Serial lot number [ %1 ] has to be unique at the document'", Lang) + Chars.LF);
+	
 #EndRegion
 
 #Region InfoMessages
@@ -758,7 +761,8 @@ Function Strings(Lang) Export
 	// %4 - Serial lot number
 	Strings.Insert("InfoMessage_027", NStr("en = 'Barcode [%1] is exists for item: %2 [%3] %4'", Lang));
 	Strings.Insert("InfoMessage_028", NStr("en = 'New serial [ %1 ] created for item key [ %2 ]'", Lang));
-	Strings.Insert("InfoMessage_029", NStr("en = 'Scan barcode of Item, not serial lot numbers'", Lang));
+	Strings.Insert("InfoMessage_029", NStr("en = 'This is unique serial and it can be only one at the document'", Lang));
+	Strings.Insert("InfoMessage_030", NStr("en = 'Scan barcode of Item, not serial lot numbers'", Lang));
 #EndRegion
 
 #Region QuestionToUser

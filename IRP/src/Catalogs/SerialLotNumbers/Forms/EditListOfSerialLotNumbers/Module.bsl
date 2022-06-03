@@ -11,6 +11,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewRow.Quantity = Row.Quantity;
 	EndDo;
 	SerialLotNumberStatus = R().InfoMessage_018;
+	Items.DecorationLegendInfo.Title = R().InfoMessage_029;
+	SerialLotNumbersServer.SetUnique(ThisObject);
 EndProcedure
 
 &AtClient
@@ -58,6 +60,16 @@ Procedure SerialLotNumbersSerialLotNumberEditTextChange(Item, Text, StandardProc
 	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
 
 	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure SerialLotNumbersSerialLotNumberOnChange(Item)
+	SerialLotNumberOnChangeAtServer();
+EndProcedure
+
+&AtServer
+Procedure SerialLotNumberOnChangeAtServer()
+	SerialLotNumbersServer.SetUnique(ThisObject);
 EndProcedure
 
 &AtClient
@@ -190,7 +202,7 @@ Procedure CalculateStatus(SetStatus = Undefined)
 EndProcedure
 
 &AtClient
-Function AfterCreateNewSerial(Result, AddInfo) Export
+Procedure AfterCreateNewSerial(Result, AddInfo) Export
 	
 	If ValueIsFilled(Result) Then
 		Row = SerialLotNumbers.FindByID(Items.SerialLotNumbers.CurrentRow);
@@ -198,4 +210,4 @@ Function AfterCreateNewSerial(Result, AddInfo) Export
 	EndIf;
 	ThisObject.CurrentItem = Items.SerialLotNumbersQuantity;
 	
-EndFunction
+EndProcedure

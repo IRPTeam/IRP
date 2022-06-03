@@ -1,4 +1,14 @@
 
+#Region FormEvent
+
+&AtClient
+Procedure OnOpen(Cancel)
+	HideWhenMobileEmulatorBarcode();
+	BarcodeHasAnyCharactersOnChange(Undefined);
+EndProcedure
+
+#EndRegion
+
 #Region Barcode
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
@@ -22,25 +32,50 @@ Procedure InputBarcode(Command)
 EndProcedure
 
 &AtClient
+Procedure ScanEmulatorOnChange(Item)
+	HideWhenMobileEmulatorBarcode();
+EndProcedure
+
+&AtClient
+Procedure HideWhenMobileEmulatorBarcode()
+	Items.InputBarcode.Visible = Not ScanEmulator;
+	Items.SearchByBarcode.Visible = Not ScanEmulator;
+	Items.GroupInputBarcode.Visible = ScanEmulator;
+EndProcedure
+
+&AtClient
+Procedure BarcodeInputOnChange(Item)
+	ManualInputBarcode(BarcodeInput);
+EndProcedure
+
+&AtClient
 Procedure AddBarcodeAfterEnd(Number, AdditionalParameters) Export
 	If Not ValueIsFilled(Number) Then
 		Return;
 	EndIf;
 	Barcode = Format(Number, "NG=");
+	ManualInputBarcode(Barcode);
+EndProcedure
+
+&AtClient
+Procedure ManualInputBarcode(Barcode)
 	If Object.Ref.IsEmpty() Then
 		DocumentIsSet = False;
 		Message = FindAndSetDocument(Barcode, DocumentIsSet);
 		If Not DocumentIsSet Then
 			CommonFunctionsClientServer.ShowUsersMessage(Message);
 		EndIf;
+		BarcodeInput = "";
+		AttachIdleHandler("BeginEditBarcode", 0.1, True);
 		Return;
 	EndIf;
 	SearchByBarcode(Undefined, Barcode);
 EndProcedure
 
+
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
-
+	Info = "";
 	If Object.Ref.IsEmpty() Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_025, "DocumentRef");
 	EndIf;
@@ -49,11 +84,14 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		
 		If Row.isService Then
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_026, Row.Item));
-			BarcodeClient.CloseMobileScanner();	
+			BarcodeClient.CloseMobileScanner();
+			AttachIdleHandler("BeginEditBarcode", 0.1, True);
 			Return;
 		EndIf;
 		
-		NewRow = Object.ItemList.Add();
+		NewRow = Object.ItemList.Insert(0);
+		Items.ItemList.CurrentRow = Object.ItemList[0].GetID();
+
 		NewRow.Key = New UUID;
 		FillPropertyValues(NewRow, Row);
 		NewRow.PhysCount = Row.Quantity;
@@ -63,6 +101,10 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		If Row.UseSerialLotNumber And NewRow.SerialLotNumber.IsEmpty() Then
 			BarcodeClient.CloseMobileScanner();		
 			StartEditQuantity(NewRow.GetID(), True);	
+			If ScanEmulator Then
+				BarcodeInput = "";			
+				AttachIdleHandler("BeginEditBarcode", 0.1, True);	
+			EndIf;
 		EndIf;
 	EndDo;
 	
@@ -72,8 +114,37 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			StartEditQuantity(NewRow.GetID(), True);
 		EndIf;
 		Write();
+		If ScanEmulator Then
+			BarcodeInput = "";				
+			AttachIdleHandler("BeginEditBarcode", 0.1, True);
+		EndIf;
+	Else
+		If ScanEmulator Then
+			Info = StrTemplate(R().S_019, Result.Barcodes[0]);
+			BarcodeInput = "";
+			AttachIdleHandler("BeginEditBarcode", 0.1, True);
+		EndIf;
 	EndIf;
 
+EndProcedure
+
+&AtClient
+Procedure BarcodeHasAnyCharactersOnChange(Item)
+	#IF MobileClient THEN
+		If BarcodeHasAnyCharacters Then
+			Items.BarcodeInput.SpecialTextInputMode = SpecialTextInputMode.Auto;
+		Else
+			Items.BarcodeInput.SpecialTextInputMode = SpecialTextInputMode.Digits;
+		EndIf;
+	#ENDIF
+EndProcedure
+
+&AtClient
+Procedure BeginEditBarcode() Export
+	ThisObject.CurrentItem = Items.BarcodeInput;
+#If Not MobileClient Then
+	ThisObject.BeginEditingItem();
+#EndIf
 EndProcedure
 
 // Scan barcode end mobile.

@@ -67,20 +67,11 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		Return;
 		
 	EndDo;
-	Options = SerialLotNumbersServer.GetSeriallotNumerOptions();
-	Options.Barcode = Result.Barcodes[0];
-	Options.Owner = ItemKey;
-	Options.Description = Result.Barcodes[0];
-	SerialLotNumber = SerialLotNumbersServer.CreateNewSerialLotNumber(Options);
-	
-	Option = New Structure();
-	Option.Insert("ItemKey", ItemKey);
-	Option.Insert("SerialLotNumber", SerialLotNumber);
-	BarcodeServer.UpdateBarcode(Result.Barcodes[0], Option);
-	
-	CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_028, 
-				Result.Barcodes[0], ItemKey));
-				
+	SerialLotNumber = SerialLotNumbersServer.GetNewSerialLotNumber(Result.Barcodes[0], ItemKey);
+	If Not SerialLotNumber.IsEmpty() Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_028, 
+					Result.Barcodes[0], ItemKey));
+	EndIf;				
 EndProcedure
 
 // Scan barcode end mobile.
@@ -118,6 +109,21 @@ Procedure SerialLotNumberEditTextChange(Item, Text, StandardProcessing)
 	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
 EndProcedure
 
+&AtClient
+Procedure SerialLotNumberCreating(Item, StandardProcessing)
+	
+	StandardProcessing = False;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item", ItemRef);
+	FormParameters.Insert("ItemKey", ItemKey);
+	FormParameters.Insert("Description", Item.EditText);
+	
+	OpenForm("Catalog.SerialLotNumbers.ObjectForm", FormParameters, ThisObject);
+EndProcedure
+
+
 #EndRegion
 
 &AtClient
@@ -126,11 +132,18 @@ Procedure OnOpen(Cancel)
 #If MobileClient Then
 	If IsBlankString(ActiveItem) Then
 		If AutoMode Then
-			BeginEditingItem();
+			AttachIdleHandler("BeginEditBarcode", 0.1, True);
 		EndIf;
 	Else
 		CurrentItem = Items.Find(ActiveItem);
 	EndIf;
+#EndIf
+EndProcedure
+
+&AtClient
+Procedure BeginEditBarcode() Export
+#If Not MobileClient Then
+	ThisObject.BeginEditingItem();
 #EndIf
 EndProcedure
 

@@ -30,7 +30,7 @@ Procedure SerialLotNumbersSerialLotNumberCreating(Item, StandardProcessing)
 	StandardProcessing = False;
 	
 	FormParameters = New Structure();
-	FormParameters.Insert("ItemType", ThisObject.ItemType);
+	FormParameters.Insert("ItemType", Undefined);
 	FormParameters.Insert("Item", ThisObject.Item);
 	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
 	FormParameters.Insert("Description", Item.EditText);
@@ -122,8 +122,10 @@ EndProcedure
 // Search by barcode end.
 // 
 // Parameters:
-//  Result Result
-//  AdditionalParameters Additional parameters
+//  Result - Structure:
+//   * FoundedItems - See BarcodeServer.SearchByBarcodes
+//   * Barcodes - Array of String
+//  AdditionalParameters - Structure - Additional parameters
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	LastBarcode = "";
@@ -187,6 +189,7 @@ Procedure CalculateStatus(SetStatus = Undefined)
 
 EndProcedure
 
+&AtClient
 Function AfterCreateNewSerial(Result, AddInfo) Export
 	
 	If ValueIsFilled(Result) Then

@@ -29,6 +29,13 @@ Function IsItemKeyWithSerialLotNumbers(ItemKey, AddInfo = Undefined) Export
 	Return ItemKey.Item.ItemType.UseSerialLotNumber;
 EndFunction
 
+// Check filling.
+// 
+// Parameters:
+//  Object - DocumentObject.SalesInvoice
+// 
+// Returns:
+//  Boolean - Check filling
 Function CheckFilling(Object) Export
 	IsOk = True;
 	For Each Row In Object.ItemList Do
@@ -56,6 +63,29 @@ Function CheckFilling(Object) Export
 			EndIf;
 		EndIf;
 	EndDo;
+	
+	Serials = Object.SerialLotNumbers.Unload();
+	Serials.GroupBy("SerialLotNumber", "Quantity");
+	For Each Serial In Serials Do
+		
+		If Serial.Quantity = 1 Then
+			Continue;
+		EndIf;
+		
+		If Serial.SerialLotNumber.EachSerialLotNumberIsUnique Then
+			IsOk = False;
+			SerialsID = Object.SerialLotNumbers.FindRows(New Structure("SerialLotNumber", Serial.SerialLotNumber));
+			
+			For Each Row In SerialsID Do
+				For Each ItemRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
+					CommonFunctionsClientServer.ShowUsersMessage(
+						StrTemplate(R().Error_111, Serial.SerialLotNumber), "ItemList[" + Format(
+						(ItemRow.LineNumber - 1), "NZ=0; NG=0;") + "].SerialLotNumbersPresentation", Object);
+				EndDo;
+			EndDo;
+		EndIf;
+	EndDo;
+	
 	Return IsOk;
 EndFunction
 
@@ -67,14 +97,16 @@ EndFunction
 // Returns:
 //  
 Function CreateNewSerialLotNumber(Options) Export
+	
 	NewSerial = Catalogs.SerialLotNumbers.CreateItem();
 	NewSerial.Description = Options.Description;
 	NewSerial.SerialLotNumberOwner = Options.Owner;
+	NewSerial.StockBalanceDetail = GetStockBalanceDetailByOwner(Options.Owner);
+	NewSerial.EachSerialLotNumberIsUnique = GetItemTypeByOwner(Options.Owner).EachSerialLotNumberIsUnique;
 	NewSerial.Write();
 	
 	Return NewSerial.Ref;
 EndFunction
-
 
 // Get seriallot numer options.
 // 
@@ -153,3 +185,103 @@ Function GetRegExpSettings() Export
 	
 	Return Str;
 EndFunction
+
+Function isAnyMovementBySerial(SerialLotNumberRef) Export
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT TOP 1
+		|	R4010B_ActualStocks.SerialLotNumber
+		|FROM
+		|	AccumulationRegister.R4010B_ActualStocks AS R4010B_ActualStocks
+		|WHERE
+		|	R4010B_ActualStocks.SerialLotNumber = &SerialLotNumber";
+	
+	Query.SetParameter("SerialLotNumber", SerialLotNumberRef);
+	
+	Return Not Query.Execute().IsEmpty();
+	
+EndFunction
+
+// Get new serial lot number.
+// 
+// Parameters:
+//  Barcode - String - Barcode
+//  ItemKey - CatalogRef.ItemKeys - Item key
+// 
+// Returns:
+//  CatalogRef.SerialLotNumbers
+Function GetNewSerialLotNumber(Barcode, ItemKey) Export
+	Options = SerialLotNumbersServer.GetSeriallotNumerOptions();
+	Options.Barcode = Barcode;
+	Options.Owner = ItemKey;
+	Options.Description = Barcode;
+	SerialLotNumber = CreateNewSerialLotNumber(Options);
+	
+	Option = New Structure();
+	Option.Insert("ItemKey", ItemKey);
+	Option.Insert("SerialLotNumber", SerialLotNumber);
+	BarcodeServer.UpdateBarcode(Barcode, Option);
+	
+	Return SerialLotNumber;
+EndFunction
+
+// Get stock balance detail by owner.
+// 
+// Parameters:
+//  Owner - See Catalog.SerialLotNumbers.SerialLotNumberOwner
+// 
+// Returns:
+//  Boolean - Get stock balance detail by owner
+Function GetStockBalanceDetailByOwner(Owner) Export
+	ItemType = GetItemTypeByOwner(Owner);
+	Return ItemType.StockBalanceDetail = Enums.StockBalanceDetail.BySerialLotNumber;
+EndFunction
+
+// Is each serial lot number is unique by owner.
+// 
+// Parameters:
+//  Owner - See Catalog.SerialLotNumbers.SerialLotNumberOwner
+// 
+// Returns:
+//  Boolean - Is each serial lot number is unique by owner
+Function isEachSerialLotNumberIsUniqueByOwner(Owner) Export
+	ItemType = GetItemTypeByOwner(Owner);
+	Return ItemType.EachSerialLotNumberIsUnique;
+EndFunction
+
+// Get item type by owner.
+// 
+// Parameters:
+//  Owner - See Catalog.SerialLotNumbers.SerialLotNumberOwner
+// 
+// Returns:
+//  CatalogRef.ItemTypes - Get item type by owner
+Function GetItemTypeByOwner(Owner) Export
+	ItemType = Catalogs.ItemTypes.EmptyRef(); 
+	If Not ValueIsFilled(Owner) Then
+		
+	ElsIf TypeOf(Owner) = Type("CatalogRef.ItemKeys") Then
+		ItemType = Owner.Item.ItemType;
+	ElsIf TypeOf(Owner) = Type("CatalogRef.Items") Then
+		ItemType = Owner.ItemType;
+	ElsIf TypeOf(Owner) = Type("CatalogRef.ItemTypes") Then
+		ItemType = Owner;
+	EndIf;
+	Return ItemType;
+EndFunction
+
+// Set uniq.
+// 
+// Parameters:
+//  Object - See Catalog.SerialLotNumbers.Form.EditListOfSerialLotNumbers
+Procedure SetUnique(Object) Export
+	For Each Row In Object.SerialLotNumbers Do
+		Row.isUnique = Row.SerialLotNumber.EachSerialLotNumberIsUnique;
+		If Row.isUnique Then
+			Row.Locked = PutToTempStorage(PictureLib.LockedRows.GetBinaryData(), Object.UUID);
+		Else
+			Row.Locked = "";
+		EndIf;
+	EndDo;
+EndProcedure

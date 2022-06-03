@@ -7415,6 +7415,26 @@
           <common>true</common>
         </edit>
       </columns>
+      <columns>
+        <name>SerialLotNumberStatus</name>
+        <title>
+          <key>en</key>
+          <value>Serial lot number status</value>
+        </title>
+        <id>180</id>
+        <valueType>
+          <types>Number</types>
+          <numberQualifiers>
+            <precision>10</precision>
+          </numberQualifiers>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
     </additionalColumns>
   </attributes>
   <attributes>

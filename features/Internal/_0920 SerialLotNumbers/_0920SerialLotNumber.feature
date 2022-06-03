@@ -51,6 +51,9 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
 		When update ItemKeys
 		When Create document PurchaseInvoice objects (for stock remaining control)
 		When Create catalog SerialLotNumbers objects
@@ -3429,7 +3432,6 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		Then the form attribute named "StockBalanceDetail" became equal to "Yes"
 		Then the form attribute named "OwnerSelect" became equal to "Manual"
 		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"	
-	* Create serial lot number (button +)
 		And I close all client application windows
 	* Check serial lot number catalog
 		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"

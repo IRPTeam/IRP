@@ -1,3 +1,5 @@
+// @strict-types
+
 Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -16,6 +18,13 @@ Procedure BeforeDelete(Cancel)
 	EndIf;
 EndProcedure
 
+// Filling.
+// 
+// Parameters:
+//  FillingData - Structure:
+//  * SerialLotNumberOwner - Undefined, CatalogRef.ItemKeys, CatalogRef.Items, CatalogRef.ItemTypes - 
+//  FillingText - String, Undefined - Filling text
+//  StandardProcessing - Boolean - Standard processing
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If FillingData = Undefined Then
 		Return;
@@ -23,7 +32,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("SerialLotNumberOwner") Then
 		ThisObject.StockBalanceDetail = 
-			Catalogs.SerialLotNumbers.GetStockBalanceDetailByOwner(FillingData.SerialLotNumberOwner);
+			SerialLotNumbersServer.GetStockBalanceDetailByOwner(FillingData.SerialLotNumberOwner);
 	EndIf;
 EndProcedure
 
@@ -36,4 +45,12 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			CommonFunctionsClientServer.ShowUsersMessage(TextError, "Description");
 		EndIf;
 	EndIf;
+	
+	If Not IsNew() And Ref.StockBalanceDetail And Not ThisObject.StockBalanceDetail Then
+		If SerialLotNumbersServer.isAnyMovementBySerial(Ref) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_110, "StockBalanceDetail");
+		EndIf;
+	EndIf;
+	
 EndProcedure

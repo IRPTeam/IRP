@@ -48,20 +48,3 @@ Function GetChoiceDataTable(Parameters) Export
 
 	Return Query.Execute().Unload();
 EndFunction
-
-Function GetStockBalanceDetailByOwner(Owner) Export
-	StockBalanceDetail = False;
-	If Not ValueIsFilled(Owner) Then
-		Return StockBalanceDetail;
-	EndIf;
-	
-	If TypeOf(Owner) = Type("CatalogRef.ItemKeys") Then
-		StockBalanceDetail = Owner.Item.ItemType.StockBalanceDetail;
-	ElsIf TypeOf(Owner) = Type("CatalogRef.Items") Then
-		StockBalanceDetail = Owner.ItemType.StockBalanceDetail;
-	ElsIf TypeOf(Owner) = Type("CatalogRef.ItemTypes") Then
-		StockBalanceDetail = Owner.StockBalanceDetail;
-	EndIf;
-	Return StockBalanceDetail;
-EndFunction
-

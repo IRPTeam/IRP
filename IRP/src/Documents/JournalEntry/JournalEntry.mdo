@@ -54,7 +54,7 @@
   <defaultListForm>Document.JournalEntry.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.JournalEntry.Form.ChoiceForm</defaultChoiceForm>
   <posting>Deny</posting>
-  <registerRecords>AccountingRegister.R6010A_Master</registerRecords>
+  <registerRecords>AccountingRegister.Basic</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="6be09410-c60e-4f67-9a7a-796dffddd541">
@@ -103,6 +103,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -189,4 +190,20 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <commands uuid="3ff17cfd-55b1-44f3-afc7-73b16bb66d4a">
+    <name>JournalEntry</name>
+    <synonym>
+      <key>en</key>
+      <value>Journal entry</value>
+    </synonym>
+    <group>CommandGroup.Service</group>
+    <commandParameterType>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.BankPayment</types>
+    </commandParameterType>
+    <representation>PictureAndText</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.DebitCredit</picture>
+    </picture>
+  </commands>
 </mdclass:Document>

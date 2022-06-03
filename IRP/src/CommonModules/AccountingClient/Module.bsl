@@ -1,5 +1,14 @@
 
-Procedure EditTrialBalanceAccounts(Result, AdditionalParameters) Export
+Procedure OpenFormEditAccounting(Object, Form, CurrentData, TableName) Export	
+	FormParameters = AccountingClientServer.GetParametersEditAccounting(Object, CurrentData, TableName);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , Form);
+	Notify = New NotifyDescription("EditAccounting", ThisObject, NotifyParameters);
+	OpenForm("CommonForm.EditAccounting", FormParameters, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+Procedure EditAccounting(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
@@ -21,7 +30,7 @@ Procedure EditTrialBalanceAccounts(Result, AdditionalParameters) Export
 		NewRow = Object.AccountingRowAnalytics.Add();
 		NewRow.Key = Row.Key;
 		NewRow.IsFixed = Row.IsFixed;
-		NewRow.Identifier    = Row.Identifier;
+		NewRow.Operation     = Row.Operation;
 		NewRow.LedgerType    = Row.LedgerType;
 		NewRow.AccountDebit  = Row.AccountDebit;
 		NewRow.AccountCredit = Row.AccountCredit;
@@ -66,7 +75,7 @@ Procedure AddExtDimensionRow(Object, AnalyticRow, AnalyticType, ExtDimType, ExtD
 	EndIf;
 	NewRow = Object.AccountingExtDimensions.Add();
 	NewRow.Key = AnalyticRow.Key;
-	NewRow.Identifier   = AnalyticRow.Identifier;
+	NewRow.Operation    = AnalyticRow.Operation;
 	NewRow.LedgerType   = AnalyticRow.LedgerType;
 	NewRow.AnalyticType = AnalyticType;
 	NewRow.ExtDimensionType = ExtDimType;

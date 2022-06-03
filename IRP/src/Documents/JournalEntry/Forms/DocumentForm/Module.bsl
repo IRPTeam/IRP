@@ -4,11 +4,15 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocJournalEntryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocJournalEntryServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
@@ -19,6 +23,7 @@ EndProcedure
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocJournalEntryServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtClient
@@ -31,6 +36,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	Form.Items.DecorationSaveDocument.Visible = Not ValueIsFilled(Object.Ref);
 EndProcedure
 
 #EndRegion
@@ -83,7 +93,7 @@ EndProcedure
 
 &AtServer
 Procedure SwitchRecordsActivityAtServer()
-	Records = Object.RegisterRecords.R6010A_Master;
+	Records = Object.RegisterRecords.Basic;
 	For Each Record In Records Do
 		Record.Active = Not Record.Active;
 	EndDo;

@@ -1,6 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormGroup">
+    <name>GroupHead</name>
+    <id>173</id>
+    <items xsi:type="form:Decoration">
+      <name>DecorationSaveDocument</name>
+      <id>175</id>
+      <title>
+        <key>en</key>
+        <value>Save document to fill accounting records</value>
+      </title>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>DecorationSaveDocumentExtendedTooltip</name>
+        <id>177</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>DecorationSaveDocumentContextMenu</name>
+        <id>176</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <font xsi:type="core:FontRef">
+        <font>System.DefaultGUIFont</font>
+        <bold>true</bold>
+        <italic>false</italic>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+      </font>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </items>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <title>
+      <key>en</key>
+      <value>Group head</value>
+    </title>
+    <horizontalStretch>true</horizontalStretch>
+    <extendedTooltip>
+      <name>GroupHeadExtendedTooltip</name>
+      <id>174</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <type>UsualGroup</type>
+    <extInfo xsi:type="form:UsualGroupExtInfo">
+      <group>AlwaysHorizontal</group>
+      <showLeftMargin>true</showLeftMargin>
+      <united>true</united>
+      <backColor xsi:type="core:ColorRef">
+        <color>Web.Pink</color>
+      </backColor>
+      <throughAlign>Auto</throughAlign>
+      <currentRowUse>Auto</currentRowUse>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormGroup">
     <name>GroupTitle</name>
     <id>22</id>
     <items xsi:type="form:FormGroup">
@@ -757,7 +848,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.RegisterRecords.R6010A_Master</segments>
+          <segments>Object.RegisterRecords.Basic</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormGroup">
@@ -773,10 +864,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.Period</segments>
+                <segments>Object.RegisterRecords.Basic.Period</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.Период</segments>
+                <segments>Object.Движения.Basic.Период</segments>
               </paths>
             </dataPath>
             <extendedTooltip>
@@ -822,54 +913,6 @@
             <name>GroupActive</name>
             <id>144</id>
             <items xsi:type="form:FormField">
-              <name>RegisterRecordsActive</name>
-              <id>82</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.RegisterRecords.R6010A_Master.Active</segments>
-                </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.Движения.R6010A_Master.Активность</segments>
-                </paths>
-              </dataPath>
-              <extendedTooltip>
-                <name>RegisterRecordsActiveExtendedTooltip</name>
-                <id>84</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>RegisterRecordsActiveContextMenu</name>
-                <id>83</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>CheckBoxField</type>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-            </items>
-            <items xsi:type="form:FormField">
               <name>RegisterRecordsLineNumber</name>
               <id>76</id>
               <visible>true</visible>
@@ -879,10 +922,10 @@
               </userVisible>
               <dataPath xsi:type="form:MultiLanguageDataPath">
                 <paths xsi:type="form:DataPath">
-                  <segments>Object.RegisterRecords.R6010A_Master.LineNumber</segments>
+                  <segments>Object.RegisterRecords.Basic.LineNumber</segments>
                 </paths>
                 <paths xsi:type="form:DataPath">
-                  <segments>Object.Движения.R6010A_Master.НомерСтроки</segments>
+                  <segments>Object.Движения.Basic.НомерСтроки</segments>
                 </paths>
               </dataPath>
               <extendedTooltip>
@@ -922,6 +965,193 @@
                 <chooseType>true</chooseType>
                 <typeDomainEnabled>true</typeDomainEnabled>
                 <textEdit>true</textEdit>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>RegisterRecordsActive</name>
+              <id>82</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:MultiLanguageDataPath">
+                <paths xsi:type="form:DataPath">
+                  <segments>Object.RegisterRecords.Basic.Active</segments>
+                </paths>
+                <paths xsi:type="form:DataPath">
+                  <segments>Object.Движения.Basic.Активность</segments>
+                </paths>
+              </dataPath>
+              <extendedTooltip>
+                <name>RegisterRecordsActiveExtendedTooltip</name>
+                <id>84</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>RegisterRecordsActiveContextMenu</name>
+                <id>83</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>CheckBoxField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+            </items>
+            <items xsi:type="form:FormGroup">
+              <name>GroupIsFixed</name>
+              <id>171</id>
+              <items xsi:type="form:FormField">
+                <name>BasicIsByRow</name>
+                <id>165</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Object.RegisterRecords.Basic.IsByRow</segments>
+                </dataPath>
+                <titleLocation>None</titleLocation>
+                <extendedTooltip>
+                  <name>BasicIsByRowExtendedTooltip</name>
+                  <id>167</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>BasicIsByRowContextMenu</name>
+                  <id>166</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>PictureField</type>
+                <editMode>Enter</editMode>
+                <showInHeader>true</showInHeader>
+                <headerHorizontalAlign>Left</headerHorizontalAlign>
+                <showInFooter>true</showInFooter>
+                <extInfo xsi:type="form:ImageFieldExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <horizontalStretch>true</horizontalStretch>
+                  <verticalStretch>true</verticalStretch>
+                  <valuesPicture xsi:type="core:PictureRef">
+                    <picture>CommonPicture.IconCollection4</picture>
+                  </valuesPicture>
+                  <fileDragMode>AsFileRef</fileDragMode>
+                </extInfo>
+              </items>
+              <items xsi:type="form:FormField">
+                <name>BasicIsFixed</name>
+                <id>162</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Object.RegisterRecords.Basic.IsFixed</segments>
+                </dataPath>
+                <titleLocation>None</titleLocation>
+                <extendedTooltip>
+                  <name>BasicIsFixedExtendedTooltip</name>
+                  <id>164</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>BasicIsFixedContextMenu</name>
+                  <id>163</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>PictureField</type>
+                <editMode>Enter</editMode>
+                <showInHeader>true</showInHeader>
+                <headerHorizontalAlign>Left</headerHorizontalAlign>
+                <showInFooter>true</showInFooter>
+                <extInfo xsi:type="form:ImageFieldExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <horizontalStretch>true</horizontalStretch>
+                  <verticalStretch>true</verticalStretch>
+                  <valuesPicture xsi:type="core:PictureRef">
+                    <picture>CommonPicture.IconCollection7</picture>
+                  </valuesPicture>
+                  <fileDragMode>AsFileRef</fileDragMode>
+                </extInfo>
+              </items>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <title>
+                <key>en</key>
+                <value>Group is fixed</value>
+              </title>
+              <extendedTooltip>
+                <name>GroupIsFixedExtendedTooltip</name>
+                <id>172</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>ColumnGroup</type>
+              <extInfo xsi:type="form:ColumnGroupExtInfo">
+                <group>Vertical</group>
+                <showTitle>true</showTitle>
               </extInfo>
             </items>
             <visible>true</visible>
@@ -993,10 +1223,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.RegisterRecords.R6010A_Master.AccountDr</segments>
+              <segments>Object.RegisterRecords.Basic.AccountDr</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.Движения.R6010A_Master.СчетДт</segments>
+              <segments>Object.Движения.Basic.СчетДт</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -1055,10 +1285,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.ExtDimensionDr1</segments>
+                <segments>Object.RegisterRecords.Basic.ExtDimensionDr1</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.СубконтоДт1</segments>
+                <segments>Object.Движения.Basic.СубконтоДт1</segments>
               </paths>
             </dataPath>
             <extendedTooltip>
@@ -1110,10 +1340,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.ExtDimensionDr2</segments>
+                <segments>Object.RegisterRecords.Basic.ExtDimensionDr2</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.СубконтоДт2</segments>
+                <segments>Object.Движения.Basic.СубконтоДт2</segments>
               </paths>
             </dataPath>
             <titleLocation>None</titleLocation>
@@ -1166,10 +1396,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.ExtDimensionDr3</segments>
+                <segments>Object.RegisterRecords.Basic.ExtDimensionDr3</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.СубконтоДт3</segments>
+                <segments>Object.Движения.Basic.СубконтоДт3</segments>
               </paths>
             </dataPath>
             <titleLocation>None</titleLocation>
@@ -1259,10 +1489,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.CurrencyDr</segments>
+                <segments>Object.RegisterRecords.Basic.CurrencyDr</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.CurrencyДт</segments>
+                <segments>Object.Движения.Basic.CurrencyДт</segments>
               </paths>
             </dataPath>
             <extendedTooltip>
@@ -1318,10 +1548,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.CurrencyAmountDr</segments>
+                <segments>Object.RegisterRecords.Basic.CurrencyAmountDr</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.CurrencyAmountДт</segments>
+                <segments>Object.Движения.Basic.CurrencyAmountДт</segments>
               </paths>
             </dataPath>
             <extendedTooltip>
@@ -1377,10 +1607,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.QuantityDr</segments>
+                <segments>Object.RegisterRecords.Basic.QuantityDr</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.QuantityДт</segments>
+                <segments>Object.Движения.Basic.QuantityДт</segments>
               </paths>
             </dataPath>
             <extendedTooltip>
@@ -1462,10 +1692,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.RegisterRecords.R6010A_Master.AccountCr</segments>
+              <segments>Object.RegisterRecords.Basic.AccountCr</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.Движения.R6010A_Master.СчетКт</segments>
+              <segments>Object.Движения.Basic.СчетКт</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -1524,10 +1754,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.ExtDimensionCr1</segments>
+                <segments>Object.RegisterRecords.Basic.ExtDimensionCr1</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.СубконтоКт1</segments>
+                <segments>Object.Движения.Basic.СубконтоКт1</segments>
               </paths>
             </dataPath>
             <extendedTooltip>
@@ -1579,10 +1809,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.ExtDimensionCr2</segments>
+                <segments>Object.RegisterRecords.Basic.ExtDimensionCr2</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.СубконтоКт2</segments>
+                <segments>Object.Движения.Basic.СубконтоКт2</segments>
               </paths>
             </dataPath>
             <titleLocation>None</titleLocation>
@@ -1635,10 +1865,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.ExtDimensionCr3</segments>
+                <segments>Object.RegisterRecords.Basic.ExtDimensionCr3</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.СубконтоКт3</segments>
+                <segments>Object.Движения.Basic.СубконтоКт3</segments>
               </paths>
             </dataPath>
             <titleLocation>None</titleLocation>
@@ -1728,10 +1958,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.CurrencyCr</segments>
+                <segments>Object.RegisterRecords.Basic.CurrencyCr</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.CurrencyКт</segments>
+                <segments>Object.Движения.Basic.CurrencyКт</segments>
               </paths>
             </dataPath>
             <extendedTooltip>
@@ -1787,10 +2017,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.CurrencyAmountCr</segments>
+                <segments>Object.RegisterRecords.Basic.CurrencyAmountCr</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.CurrencyAmountКт</segments>
+                <segments>Object.Движения.Basic.CurrencyAmountКт</segments>
               </paths>
             </dataPath>
             <extendedTooltip>
@@ -1846,10 +2076,10 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.R6010A_Master.QuantityCr</segments>
+                <segments>Object.RegisterRecords.Basic.QuantityCr</segments>
               </paths>
               <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.R6010A_Master.QuantityКт</segments>
+                <segments>Object.Движения.Basic.QuantityКт</segments>
               </paths>
             </dataPath>
             <extendedTooltip>
@@ -1931,10 +2161,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.RegisterRecords.R6010A_Master.Amount</segments>
+              <segments>Object.RegisterRecords.Basic.Amount</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.Движения.R6010A_Master.Amount</segments>
+              <segments>Object.Движения.Basic.Amount</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -1955,6 +2185,56 @@
           <contextMenu>
             <name>RegisterRecordsAmountContextMenu</name>
             <id>125</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>RegisterRecordsOperation</name>
+          <id>168</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RegisterRecords.Basic.Operation</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>RegisterRecordsOperationExtendedTooltip</name>
+            <id>170</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>RegisterRecordsOperationContextMenu</name>
+            <id>169</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>

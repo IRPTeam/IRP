@@ -692,6 +692,10 @@ Function T2015S_TransactionsInfo()
 	|	AND NOT PaymentList.IsAdvance";
 EndFunction
 
+#EndRegion
+
+#Region Accounting
+
 Function T1040T_AccountingAmounts()
 	Return
 	"SELECT
@@ -722,33 +726,31 @@ Function T1040T_AccountingAmounts()
 	|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
-#EndRegion
-
-#Region Accounting
-
 Function GetAccountingAnalytics(Parameters) Export
-	If Parameters.Identifier = Catalogs.AccountingOperations.BankPayment_Dr_PartnerAccount_Cr_CashAccount Then
-		Return GetAnalytics_Dr_PartnerAccount_Cr_CashAccount(Parameters);
-	EndIf;
+	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1021B_CR_3010B Then
+		Return GetAnalytics_DR_R1021B_CR_3010B(Parameters); // Vendors transactions - Cash on hand
+	ElsIf Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_CR_3010B Then 
+		// Expenses - Cash on hand
+	EndIf;		
 	Return Undefined;
 EndFunction
 
 Function GetAccountingData(Parameters) Export
-	If Parameters.Identifier = Catalogs.AccountingOperations.BankPayment_Dr_PartnerAccount_Cr_CashAccount Then
-		Return GetData_Dr_PartnerAccount_Cr_CashAccount(Parameters);
+	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1021B_CR_3010B Then
+		Return GetData_DR_R1021B_CR_3010B(Parameters); // Vendors transactions - Cash on hand
 	EndIf;
 	Return Undefined;
 EndFunction
 
 #Region Accounting_Analytics
 
-Function GetAnalytics_Dr_PartnerAccount_Cr_CashAccount(Parameters)
+Function GetAnalytics_DR_R1021B_CR_3010B(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	
 	Period = 
 	CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.ObjectData.Ref, Parameters.ObjectData.Date);
 
-	Debit = AccountingServer.GetPartnerTBAccounts(Period, Parameters.ObjectData.Company, Parameters.RowData.Partner, Parameters.RowData.Agreement);
+	Debit = AccountingServer.GetT9012S_AccountsPartner(Period, Parameters.ObjectData.Company, Parameters.RowData.Partner, Parameters.RowData.Agreement);
 	IsAdvance = AccountingServer.IsAdvance(Parameters.RowData);
 	If IsAdvance Then
 		If ValueIsFilled(Debit.AccountAdvances) Then
@@ -762,7 +764,7 @@ Function GetAnalytics_Dr_PartnerAccount_Cr_CashAccount(Parameters)
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 		
-	Credit = AccountingServer.GetCashAccountTBAccounts(Period, Parameters.ObjectData.Company, Parameters.ObjectData.Account);
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(Period, Parameters.ObjectData.Company, Parameters.ObjectData.Account);
 	If ValueIsFilled(Credit.Account) Then
 		AccountingAnalytics.Credit = Credit.Account;
 	EndIf;
@@ -783,7 +785,7 @@ EndFunction
 
 #Region Accounting_Data
 
-Function GetData_Dr_PartnerAccount_Cr_CashAccount(Parameters)
+Function GetData_DR_R1021B_CR_3010B(Parameters)
 	Query = New Query();
 	Query.Text = 
 	"SELECT

@@ -3,14 +3,14 @@
 
 Function GetAccountingAnalyticsResult(Parameters) Export
 	AccountingAnalytics = New Structure();
-	AccountingAnalytics.Insert("Identifier", Parameters.Identifier);
+	AccountingAnalytics.Insert("Operation" , Parameters.Operation);
 	AccountingAnalytics.Insert("LedgerType", Parameters.LedgerType);
 	
-	// Debit - PartnerTBAccounts
+	// Debit
 	AccountingAnalytics.Insert("Debit", Undefined);
 	AccountingAnalytics.Insert("DebitExtDimensions", New Array());
 	
-	// Credit - CashAccountTBAccounts
+	// Credit
 	AccountingAnalytics.Insert("Credit", Undefined);
 	AccountingAnalytics.Insert("CreditExtDimensions", New Array());
 	Return AccountingAnalytics;
@@ -78,12 +78,23 @@ EndFunction
 Function GetDocumentData(Object, TableRow, MainTableName) Export
 	Result = New Structure("ObjectData, RowData", New Structure(), New Structure());
 	If TableRow <> Undefined Then
-		For Each Column In Object.Ref.Metadata().TabularSections[MainTableName].Attributes Do
-			Result.RowData.Insert(Column.Name, TableRow[Column.Name]);
+		TabularSections =  Object.Ref.Metadata().TabularSections;
+		For Each Column In TabularSections[MainTableName].Attributes Do
+			Result.RowData.Insert(Column.Name, TableRow[Column.Name]);	
 		EndDo;
+		
+		If TabularSections.Find("TaxList") <> Undefined Then
+			TaxListRows = Object.TaxList.FindRows(New Structure("Key", TableRow.Key));
+			TaxInfo = New Structure();
+			For Each Column In TabularSections["TaxList"].Attributes Do
+				TaxInfo.Insert(Column.Name, ?(TaxListRows.Count(), TaxListRows[0][Column.Name], Undefined));	
+			EndDo;
+			Result.RowData.Insert("TaxInfo", TaxInfo);
+		EndIf;
 	Else
 		Result.RowData.Insert("Key", "");
 	EndIf;
+	
 	For Each Attr In Object.Ref.Metadata().Attributes Do
 		Result.ObjectData.Insert(Attr.Name, Object[Attr.Name]);
 	EndDo;
@@ -96,58 +107,68 @@ EndFunction
 Function GetAccountingAnalytics(Parameters, MetadataName) Export
 	Result = Documents[MetadataName].GetAccountingAnalytics(Parameters);
 	If Result = Undefined Then
-		Raise StrTemplate("Document [%1] not supported accounting operation [%2]", MetadataName, Parameters.Identifier);
+		Raise StrTemplate("Document [%1] not supported accounting operation [%2]", MetadataName, Parameters.Operation);
 	EndIf;
 	Return Result;
 EndFunction
 
-Procedure SetDebitExtDimensions(Parameters, AccountingAnalytics) Export
+Procedure SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsValues = Undefined) Export
 	If ValueIsFilled(AccountingAnalytics.Debit) Then
 		For Each ExtDim In AccountingAnalytics.Debit.ExtDimensionTypes Do
 			ExtDimension = New Structure("ExtDimensionType, ExtDimension");
 			ExtDimension.ExtDimensionType  = ExtDim.ExtDimensionType;
 			ArrayOfTypes = ExtDim.ExtDimensionType.ValueType.Types();
-			ExtDimValue = ExtractValueByType(Parameters.ObjectData, Parameters.RowData, ArrayOfTypes);
+			ExtDimValue = ExtractValueByType(Parameters.ObjectData, Parameters.RowData, ArrayOfTypes, AdditionalAnalyticsValues);
 			ExtDimValue = Documents[Parameters.MetadataName].GetDebitExtDimension(Parameters, ExtDim.ExtDimensionType, ExtDimValue);
 			ExtDimension.ExtDimension = ExtDimValue;
 			ExtDimension.Insert("Key"          , Parameters.RowData.Key);
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Debit);
-			ExtDimension.Insert("Identifier"   , Parameters.Identifier);
+			ExtDimension.Insert("Operation"    , Parameters.Operation);
 			ExtDimension.Insert("LedgerType"   , Parameters.LedgerType);
 			AccountingAnalytics.DebitExtDimensions.Add(ExtDimension);
 		EndDo;
 	EndIf;
 EndProcedure
 
-Procedure SetCreditExtDimensions(Parameters, AccountingAnalytics) Export
+Procedure SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsValues = Undefined) Export
 	If ValueIsFilled(AccountingAnalytics.Credit) Then
 		For Each ExtDim In AccountingAnalytics.Credit.ExtDimensionTypes Do
 			ExtDimension = New Structure("ExtDimensionType, ExtDimension");
 			ExtDimension.ExtDimensionType  = ExtDim.ExtDimensionType;
 			ArrayOfTypes = ExtDim.ExtDimensionType.ValueType.Types();
-			ExtDimValue = ExtractValueByType(Parameters.ObjectData, Parameters.RowData, ArrayOfTypes);
+			ExtDimValue = ExtractValueByType(Parameters.ObjectData, Parameters.RowData, ArrayOfTypes, AdditionalAnalyticsValues);
 			ExtDimValue = Documents[Parameters.MetadataName].GetCreditExtDimension(Parameters, ExtDim.ExtDimensionType, ExtDimValue);
 			ExtDimension.ExtDimension = ExtDimValue;
 			ExtDimension.Insert("Key"          , Parameters.RowData.Key);
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Credit);
-			ExtDimension.Insert("Identifier"   , Parameters.Identifier);
+			ExtDimension.Insert("Operation"    , Parameters.Operation);
 			ExtDimension.Insert("LedgerType"   , Parameters.LedgerType);
 			AccountingAnalytics.CreditExtDimensions.Add(ExtDimension);
 		EndDo;
 	EndIf;
 EndProcedure
 
-Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes)
+Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes, AdditionalAnalyticsValues)
 	For Each KeyValue In RowData Do
 		If ArrayOfTypes.Find(TypeOf(RowData[KeyValue.Key])) <> Undefined Then
 			Return RowData[KeyValue.Key];
 		EndIf;
 	EndDo;
+	
 	For Each KeyValue In ObjectData Do
 		If ArrayOfTypes.Find(TypeOf(ObjectData[KeyValue.Key])) <> Undefined Then
 			Return ObjectData[KeyValue.Key];
 		EndIf;
 	EndDo;
+	
+	If AdditionalAnalyticsValues <> Undefined Then
+		For Each KeyValue In AdditionalAnalyticsValues Do
+			If ArrayOfTypes.Find(TypeOf(AdditionalAnalyticsValues[KeyValue.Key])) <> Undefined Then
+				Return AdditionalAnalyticsValues[KeyValue.Key];
+			EndIf;
+		EndDo;	
+	EndIf;
+	
 	Return Undefined;
 EndFunction
 
@@ -158,12 +179,12 @@ Function GetDataByAccountingAnalytics(BasisRef, RowData) Export
 	Parameters = New Structure();
 	Parameters.Insert("Recorder" , BasisRef);
 	Parameters.Insert("RowKey"   , RowData.Key);
-	Parameters.Insert("Identifier"   , RowData.Identifier);
+	Parameters.Insert("Operation", RowData.Operation);
 	Parameters.Insert("CurrencyMovementType", RowData.LedgerType.CurrencyMovementType);
 	MetadataName = BasisRef.Metadata().Name;
 	Data = Documents[MetadataName].GetAccountingData(Parameters);
 	If Data = Undefined Then
-		Raise StrTemplate("Document [%1] not supported accounting operation [%2]", MetadataName, Parameters.Identifier);
+		Raise StrTemplate("Document [%1] not supported accounting operation [%2]", MetadataName, Parameters.Operation);
 	EndIf;
 	Return FillAccountingDataResult(Data);
 EndFunction
@@ -192,9 +213,14 @@ EndFunction
 Function GetAccountingOperationsByLedgerType(Ref, Period, LedgerType) Export
 	Map = New Map();
 	AO = Catalogs.AccountingOperations;
-	Map.Insert(AO.BankPayment_Dr_PartnerAccount_Cr_CashAccount              , True);
-	Map.Insert(AO.PurchaseInvoice_Dr_ItemKeyAccount_Cr_PartnerAccount       , True);
-	Map.Insert(AO.PurchaseInvoice_Dr_PartnerAccountTrn_Cr_PartnerAccountAdv , False);
+	Map.Insert(AO.BankPayment_DR_R1021B_CR_3010B , True);
+	Map.Insert(AO.BankPayment_DR_R5022T_CR_3010B , True);
+	
+	Map.Insert(AO.BankReceipt_DR_3010B_CR_B2021B , True);
+	
+	Map.Insert(AO.PurchaseInvoice_DR_R4050B_CR_R1021B , True);
+	Map.Insert(AO.PurchaseInvoice_DR_R1021B_CR_R1020B , False);
+	Map.Insert(AO.PurchaseInvoice_DR_R1040B_CR_R1021B , True);
 	
 	MetadataName = Ref.Metadata().Name;
 	AccountingOperationGroup = Catalogs.AccountingOperations["Document_" + MetadataName];
@@ -217,7 +243,7 @@ Function GetAccountingOperationsByLedgerType(Ref, Period, LedgerType) Export
 	While QuerySelection.Next() Do
 		ByRow = Map.Get(QuerySelection.AccountingOperation);
 		ByRow = ?(ByRow = Undefined, False, ByRow);
-		ArrayOfAccountingOperations.Add(New Structure("Identifier, ByRow, MetadataName",
+		ArrayOfAccountingOperations.Add(New Structure("Operation, ByRow, MetadataName",
 			QuerySelection.AccountingOperation, ByRow, MetadataName));
 	EndDo;
 	Return ArrayOfAccountingOperations;
@@ -225,9 +251,94 @@ EndFunction
 
 #EndRegion
 
-#Region TBAccounts
+#Region Accounts
 
-Function GetCashAccountTBAccounts(Period, Company, CashAccount) Export
+Function GetT9010S_AccountsItemKey(Period, Company, ItemKey) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	ByItemKey.Account,
+	|	ByItemKey.Company,
+	|	ByItemKey.ItemKey,
+	|	ByItemKey.Item,
+	|	ByItemKey.ItemType,
+	|	1 AS Priority
+	|INTO Accounts
+	|FROM
+	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
+	|	AND ItemKey = &ItemKey
+	|	AND Item.Ref IS NULL
+	|	AND ItemType.Ref IS NULL) AS ByItemKey
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByItem.Account,
+	|	ByItem.Company,
+	|	ByItem.ItemKey,
+	|	ByItem.Item,
+	|	ByItem.ItemType,
+	|	2
+	|FROM
+	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
+	|	AND ItemKey.Ref IS NULL
+	|	AND Item = &Item
+	|	AND ItemType.Ref IS NULL) AS ByItem
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByItemType.Account,
+	|	ByItemType.Company,
+	|	ByItemType.ItemKey,
+	|	ByItemType.Item,
+	|	ByItemType.ItemType,
+	|	3
+	|FROM
+	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
+	|	AND ItemKey.Ref IS NULL
+	|	AND Item.Ref IS NULL
+	|	AND ItemType = &ItemType) AS ByItemType
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByItemType.Account,
+	|	ByItemType.Company,
+	|	ByItemType.ItemKey,
+	|	ByItemType.Item,
+	|	ByItemType.ItemType,
+	|	4
+	|FROM
+	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
+	|	AND ItemKey.Ref IS NULL
+	|	AND Item.Ref IS NULL
+	|	AND ItemType.Ref IS NULL) AS ByItemType
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Accounts.Account,
+	|	Accounts.Priority AS Priority
+	|FROM
+	|	Accounts AS Accounts
+	|ORDER BY
+	|	Priority";
+	Query.SetParameter("Period"   , Period);
+	Query.SetParameter("Company"  , Company);
+	Query.SetParameter("ItemKey"  , ItemKey);
+	Query.SetParameter("Item"     , ItemKey.Item);
+	Query.SetParameter("ItemType" , ItemKey.Item.ItemType);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	Result = New Structure("Account", Undefined);
+	If QuerySelection.Next() Then
+		Result.Account = QuerySelection.Account;
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetT9011S_AccountsCashAccount(Period, Company, CashAccount) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -237,7 +348,7 @@ Function GetCashAccountTBAccounts(Period, Company, CashAccount) Export
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
-	|	InformationRegister.CashAccountTBAccounts.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9011S_AccountsCashAccount.SliceLast(&Period, Company = &Company
 	|	AND CashAccount = &CashAccount) AS ByCashAccount
 	|
 	|UNION ALL
@@ -248,7 +359,7 @@ Function GetCashAccountTBAccounts(Period, Company, CashAccount) Export
 	|	ByCompany.Account,
 	|	2
 	|FROM
-	|	InformationRegister.CashAccountTBAccounts.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9011S_AccountsCashAccount.SliceLast(&Period, Company = &Company
 	|	AND CashAccount.Ref IS NULL) AS ByCompany
 	|;
 	|
@@ -274,7 +385,7 @@ Function GetCashAccountTBAccounts(Period, Company, CashAccount) Export
 	Return Result;
 EndFunction
 
-Function GetPartnerTBAccounts(Period, Company, Partner, Agreement) Export
+Function GetT9012S_AccountsPartner(Period, Company, Partner, Agreement) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -286,7 +397,7 @@ Function GetPartnerTBAccounts(Period, Company, Partner, Agreement) Export
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
-	|	InformationRegister.PartnerTBAccounts.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company
 	|	AND Agreement = &Agreement
 	|	AND Partner.Ref IS NULL) AS ByAgreement
 	|
@@ -300,7 +411,7 @@ Function GetPartnerTBAccounts(Period, Company, Partner, Agreement) Export
 	|	ByPartner.AccountTransactions,
 	|	2
 	|FROM
-	|	InformationRegister.PartnerTBAccounts.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company
 	|	AND Partner = &Partner
 	|	AND Agreement.Ref IS NULL) AS ByPartner
 	|
@@ -314,7 +425,7 @@ Function GetPartnerTBAccounts(Period, Company, Partner, Agreement) Export
 	|	ByCompany.AccountTransactions,
 	|	3
 	|FROM
-	|	InformationRegister.PartnerTBAccounts.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company
 	|	AND Partner.Ref IS NULL
 	|	AND Agreement.Ref IS NULL) AS ByCompany
 	|;
@@ -347,92 +458,8 @@ Function GetPartnerTBAccounts(Period, Company, Partner, Agreement) Export
 	Return Result;
 EndFunction
 
-Function GetItemKeyTBAccounts(Period, Company, ItemKey) Export
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	ByItemKey.Account,
-	|	ByItemKey.Company,
-	|	ByItemKey.ItemKey,
-	|	ByItemKey.Item,
-	|	ByItemKey.ItemType,
-	|	1 AS Priority
-	|INTO Accounts
-	|FROM
-	|	InformationRegister.ItemKeyTBAccounts.SliceLast(&Period, Company = &Company
-	|	AND ItemKey = &ItemKey
-	|	AND Item.Ref IS NULL
-	|	AND ItemType.Ref IS NULL) AS ByItemKey
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	ByItem.Account,
-	|	ByItem.Company,
-	|	ByItem.ItemKey,
-	|	ByItem.Item,
-	|	ByItem.ItemType,
-	|	2
-	|FROM
-	|	InformationRegister.ItemKeyTBAccounts.SliceLast(&Period, Company = &Company
-	|	AND ItemKey.Ref IS NULL
-	|	AND Item = &Item
-	|	AND ItemType.Ref IS NULL) AS ByItem
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	ByItemType.Account,
-	|	ByItemType.Company,
-	|	ByItemType.ItemKey,
-	|	ByItemType.Item,
-	|	ByItemType.ItemType,
-	|	3
-	|FROM
-	|	InformationRegister.ItemKeyTBAccounts.SliceLast(&Period, Company = &Company
-	|	AND ItemKey.Ref IS NULL
-	|	AND Item.Ref IS NULL
-	|	AND ItemType = &ItemType) AS ByItemType
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	ByItemType.Account,
-	|	ByItemType.Company,
-	|	ByItemType.ItemKey,
-	|	ByItemType.Item,
-	|	ByItemType.ItemType,
-	|	4
-	|FROM
-	|	InformationRegister.ItemKeyTBAccounts.SliceLast(&Period, Company = &Company
-	|	AND ItemKey.Ref IS NULL
-	|	AND Item.Ref IS NULL
-	|	AND ItemType.Ref IS NULL) AS ByItemType
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Accounts.Account,
-	|	Accounts.Priority AS Priority
-	|FROM
-	|	Accounts AS Accounts
-	|ORDER BY
-	|	Priority";
-	Query.SetParameter("Period"   , Period);
-	Query.SetParameter("Company"  , Company);
-	Query.SetParameter("ItemKey"  , ItemKey);
-	Query.SetParameter("Item"     , ItemKey.Item);
-	Query.SetParameter("ItemType" , ItemKey.Item.ItemType);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	Result = New Structure("Account", Undefined);
-	If QuerySelection.Next() Then
-		Result.Account = QuerySelection.Account;
-	EndIf;
-	Return Result;
-EndFunction
 
-Function GetTaxTBAccounts(Period, Company, Tax) Export
+Function GetT9013S_AccountsTax(Period, Company, Tax) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -442,7 +469,7 @@ Function GetTaxTBAccounts(Period, Company, Tax) Export
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
-	|	InformationRegister.TaxTBAccounts.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
 	|	AND Tax = &Tax) AS ByTax
 	|
 	|UNION ALL
@@ -453,7 +480,7 @@ Function GetTaxTBAccounts(Period, Company, Tax) Export
 	|	ByCompany.Account,
 	|	2
 	|FROM
-	|	InformationRegister.TaxTBAccounts.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
 	|	AND Tax.Ref IS NULL) AS ByCompany
 	|;
 	|
@@ -467,9 +494,9 @@ Function GetTaxTBAccounts(Period, Company, Tax) Export
 	|	Accounts AS Accounts
 	|ORDER BY
 	|	Priority";
-	Query.SetParameter("Period"      , Period);
-	Query.SetParameter("Company"     , Company);
-	Query.SetParameter("CashAccount" , Tax);
+	Query.SetParameter("Period"  , Period);
+	Query.SetParameter("Company" , Company);
+	Query.SetParameter("Tax"     , Tax);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	Result = New Structure("Account", Undefined);

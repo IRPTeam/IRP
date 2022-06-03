@@ -15,6 +15,18 @@ Procedure OnReadAtServer(CurrentObject)
 EndProcedure
 
 &AtServer
+Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
+	For Each Level1 In ThisObject.OperationsTree.GetItems() Do
+		For Each Level2 In Level1.GetItems() Do
+			If Level2.Use And Not ValueIsFilled(Level2.Period) Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_111, Level1.Document, Level2.AccountingOperation));
+			EndIf;
+		EndDo;
+	EndDo;
+EndProcedure
+
+&AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	For Each Level1 In ThisObject.OperationsTree.GetItems() Do
 		For Each Level2 In Level1.GetItems() Do
@@ -93,6 +105,9 @@ Function GetAccountingOperations(LedgerTypeRef)
 	|		ON AccountingOperations.Ref = tmp.AccountingOperation
 	|WHERE
 	|	NOT AccountingOperations.Parent.Ref IS NULL
+	|
+	|ORDER BY
+	|	AccountingOperations.Order
 	|TOTALS
 	|BY
 	|	Document";

@@ -5534,7 +5534,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccountingRegister.R6010A_Master</name>
+		<name>AccountingRegister.Basic</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -5622,7 +5622,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.ItemKeyTBAccounts</name>
+		<name>InformationRegister.T9010S_AccountsItemKey</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -5655,7 +5655,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.PartnerTBAccounts</name>
+		<name>InformationRegister.T9012S_AccountsPartner</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -5677,7 +5677,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.TaxTBAccounts</name>
+		<name>InformationRegister.T9013S_AccountsTax</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -5721,7 +5721,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.CashAccountTBAccounts</name>
+		<name>InformationRegister.T9011S_AccountsCashAccount</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -5732,7 +5732,7 @@
 		</right>
 	</object>
 	<object>
-		<name>ChartOfAccounts.R6010C_Master</name>
+		<name>ChartOfAccounts.Basic</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -5747,7 +5747,7 @@
 		</right>
 	</object>
 	<object>
-		<name>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</name>
+		<name>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -5832,14 +5832,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Accounting.Subsystem.TrialBalanceAccounts</name>
+		<name>Subsystem.Accounting.Subsystem.Accounts</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.EditTrialBalanceAccounts</name>
+		<name>CommonForm.EditAccounting</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

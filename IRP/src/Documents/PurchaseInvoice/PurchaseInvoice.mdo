@@ -1345,10 +1345,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="80cf4e0c-53d0-4e57-9e69-e4e6c707720e">
-      <name>Identifier</name>
+      <name>Operation</name>
       <synonym>
         <key>en</key>
-        <value>Identifier</value>
+        <value>Operation</value>
       </synonym>
       <type>
         <types>CatalogRef.AccountingOperations</types>
@@ -1379,7 +1379,7 @@
         <value>Debit</value>
       </synonym>
       <type>
-        <types>ChartOfAccountsRef.R6010C_Master</types>
+        <types>ChartOfAccountsRef.Basic</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -1394,7 +1394,7 @@
         <value>Account credit</value>
       </synonym>
       <type>
-        <types>ChartOfAccountsRef.R6010C_Master</types>
+        <types>ChartOfAccountsRef.Basic</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -1442,10 +1442,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="02e8bc64-0856-4607-82cd-59b6f829cf0e">
-      <name>Identifier</name>
+      <name>Operation</name>
       <synonym>
         <key>en</key>
-        <value>Identifier</value>
+        <value>Operation</value>
       </synonym>
       <type>
         <types>CatalogRef.AccountingOperations</types>
@@ -1490,7 +1490,7 @@
         <value>Ext. dim. type</value>
       </synonym>
       <type>
-        <types>ChartOfCharacteristicTypesRef.R6010D_MasterExtraDimensionTypes</types>
+        <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -1505,7 +1505,7 @@
         <value>Ext dimension</value>
       </synonym>
       <type>
-        <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
+        <types>Characteristic.AccountingExtraDimensionTypes</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

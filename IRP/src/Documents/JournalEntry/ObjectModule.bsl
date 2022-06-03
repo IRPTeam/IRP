@@ -9,20 +9,24 @@ Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	ThisObject.RegisterRecords.R6010A_Master.Clear();
+	ThisObject.RegisterRecords.Basic.Clear();
 	For Each Row In ThisObject.Basis.AccountingRowAnalytics Do
 		If Row.LedgerType <> ThisObject.LedgerType Then
 			Continue;
 		EndIf;
 		
-		Record = ThisObject.RegisterRecords.R6010A_Master.Add();
+		Record = ThisObject.RegisterRecords.Basic.Add();
 		Record.Period     = ThisObject.Date;
 		Record.Company    = ThisObject.Company;
 		Record.LedgerType = Row.LedgerType;
+		Record.Operation  = Row.Operation;
+		Record.IsFixed    = Row.IsFixed;
+		Record.IsByRow    = ValueIsFilled(Row.Key);
+		Record.Key        = Row.Key;
 		
 		Filter = New Structure();
 		Filter.Insert("Key"          , Row.Key);
-		Filter.Insert("Identifier"   , Row.Identifier);
+		Filter.Insert("Operation"    , Row.Operation);
 		Filter.Insert("LedgerType"   , Row.LedgerType);
 		Filter.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.EmptyRef());
 		
@@ -68,8 +72,8 @@ Procedure OnWrite(Cancel)
 		
 		Record.Amount = DataByAnalytics.Amount;
 	EndDo;
-	ThisObject.RegisterRecords.R6010A_Master.SetActive(True);
-	ThisObject.RegisterRecords.R6010A_Master.Write();
+	ThisObject.RegisterRecords.Basic.SetActive(True);
+	ThisObject.RegisterRecords.Basic.Write();
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -77,3 +81,14 @@ Procedure BeforeDelete(Cancel)
 		Return;
 	EndIf;
 EndProcedure
+
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If TypeOf(FillingData) = Type("Structure") Then
+		ThisObject.Basis = FillingData.Basis;
+		If CommonFunctionsClientServer.ObjectHasProperty(FillingData.Basis, "Company") Then
+			ThisObject.Company = FillingData.Basis.Company;
+		EndIf;
+	EndIf;
+EndProcedure
+
+

@@ -142,7 +142,7 @@ EndProcedure
 
 &AtClient
 Procedure BeginEditBarcode() Export
-#If Not MobileClient Then
+#If MobileClient Then
 	ThisObject.BeginEditingItem();
 #EndIf
 EndProcedure

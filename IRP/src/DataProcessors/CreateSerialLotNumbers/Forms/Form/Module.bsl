@@ -98,7 +98,7 @@ EndProcedure
 &AtClient
 Procedure BeginEditBarcode() Export
 	ThisObject.CurrentItem = Items.BarcodeInput;
-#If Not MobileClient Then
+#If MobileClient Then
 	ThisObject.BeginEditingItem();
 #EndIf
 

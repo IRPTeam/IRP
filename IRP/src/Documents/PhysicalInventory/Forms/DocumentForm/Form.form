@@ -1164,6 +1164,10 @@
               <event>EditTextChange</event>
               <name>ItemListSerialLotNumberEditTextChange</name>
             </handlers>
+            <handlers>
+              <event>Creating</event>
+              <name>SerialLotNumbersSerialLotNumberCreating</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>

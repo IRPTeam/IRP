@@ -685,6 +685,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
+          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -735,6 +736,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
+          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -919,6 +921,10 @@
             <handlers>
               <event>EditTextChange</event>
               <name>ItemListSerialLotNumberEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>Creating</event>
+              <name>SerialLotNumbersSerialLotNumberCreating</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>

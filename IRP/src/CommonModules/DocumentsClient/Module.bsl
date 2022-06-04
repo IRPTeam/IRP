@@ -430,6 +430,13 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 				Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
 			EndIf;
 			SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
+			
+		ElsIf ObjectRefType = Type("DocumentRef.PhysicalInventory")
+				Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+			
+			If Object.UseSerialLot And ResultElement.UseSerialLotNumber And Not ValueIsFilled(ResultElement.SerialLotNumber) Then
+				Form.ItemListSerialLotNumberStartChoice(Object.ItemList, Undefined, True);
+			EndIf;
 		EndIf;
 		
 	EndDo;

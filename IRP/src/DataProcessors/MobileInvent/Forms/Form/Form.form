@@ -312,7 +312,6 @@
         <excludedCommands>MoveUp</excludedCommands>
         <excludedCommands>MoveDown</excludedCommands>
         <excludedCommands>ShowRowRearrangement</excludedCommands>
-        <excludedCommands>Change</excludedCommands>
         <excludedCommands>EndEdit</excludedCommands>
         <excludedCommands>ShowMultipleSelection</excludedCommands>
         <excludedCommands>Add</excludedCommands>
@@ -362,7 +361,6 @@
             </contextMenu>
             <type>InputField</type>
             <editMode>Enter</editMode>
-            <fixingInTable>Left</fixingInTable>
             <showInHeader>true</showInHeader>
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
@@ -513,7 +511,6 @@
           <extInfo xsi:type="form:ColumnGroupExtInfo">
             <group>Vertical</group>
             <showTitle>true</showTitle>
-            <fixingInTable>Left</fixingInTable>
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
@@ -559,7 +556,6 @@
             </contextMenu>
             <type>InputField</type>
             <editMode>Enter</editMode>
-            <fixingInTable>Right</fixingInTable>
             <showInHeader>true</showInHeader>
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
@@ -619,7 +615,6 @@
             <type>InputField</type>
             <horizontalAlign>Right</horizontalAlign>
             <editMode>Enter</editMode>
-            <fixingInTable>Right</fixingInTable>
             <showInHeader>true</showInHeader>
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
@@ -671,7 +666,6 @@
           <extInfo xsi:type="form:ColumnGroupExtInfo">
             <group>Vertical</group>
             <showTitle>true</showTitle>
-            <fixingInTable>Right</fixingInTable>
           </extInfo>
         </items>
         <autoCommandBar>
@@ -687,6 +681,14 @@
         <handlers>
           <event>Selection</event>
           <name>ItemListSelection</name>
+        </handlers>
+        <handlers>
+          <event>OnStartEdit</event>
+          <name>ItemListOnStartEdit</name>
+        </handlers>
+        <handlers>
+          <event>BeforeRowChange</event>
+          <name>ItemListBeforeRowChange</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -819,12 +821,113 @@
         <contextMenu>
           <name>ItemListContextMenu</name>
           <id>6</id>
+          <items xsi:type="form:Button">
+            <name>ItemListContextMenuDelete</name>
+            <id>124</id>
+            <title>
+              <key>en</key>
+              <value>Delete</value>
+            </title>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ItemListContextMenuDeleteExtendedTooltip</name>
+              <id>125</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Item.ItemList.StandardCommand.Delete</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>ItemListContextMenuFind</name>
+            <id>128</id>
+            <title>
+              <key>en</key>
+              <value>Search</value>
+            </title>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ItemListContextMenuFindExtendedTooltip</name>
+              <id>129</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Item.ItemList.StandardCommand.Find</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>ItemListContextMenuChange</name>
+            <id>126</id>
+            <title>
+              <key>en</key>
+              <value>Edit</value>
+            </title>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ItemListContextMenuChangeExtendedTooltip</name>
+              <id>127</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Item.ItemList.StandardCommand.Change</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
-          <autoFill>true</autoFill>
         </contextMenu>
         <changeRowSet>true</changeRowSet>
         <changeRowOrder>true</changeRowOrder>
@@ -846,7 +949,7 @@
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
         <refreshRequest>PullFromTop</refreshRequest>
-        <currentRowUse>SelectionPresentationAndChoice</currentRowUse>
+        <currentRowUse>SelectionPresentation</currentRowUse>
         <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:Button">

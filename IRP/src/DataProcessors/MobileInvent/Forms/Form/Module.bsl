@@ -327,3 +327,9 @@ Procedure FillDocumentObject(DocRef)
 
 	RuleEditQuantity = Object.RuleEditQuantity;
 EndProcedure
+
+&AtClient
+Procedure ItemListBeforeRowChange(Item, Cancel)
+	Cancel = True;
+	StartEditQuantity(Items.ItemList.CurrentRow);
+EndProcedure

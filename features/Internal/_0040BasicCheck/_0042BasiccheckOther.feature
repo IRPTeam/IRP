@@ -12,6 +12,14 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 	When set True value to the constant
 
+Scenario: preparation
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "VAExtension" |
+			When add VAExtension
+
 Scenario: Open information register form "AddProperties" 
 
 	Given I open "AddProperties" information register default form 
@@ -752,3 +760,10 @@ Scenario: Open object form "All registers movement"
 	Then system warning window does not appear
 	And I close all client application windows
 	
+Scenario: Open choise form "CustomUserSettings"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("ChartOfCharacteristicTypes.CustomUserSettings.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open ChartsOfCharacteristicTypes choise form CustomUserSettings" exception
+	And I close current window

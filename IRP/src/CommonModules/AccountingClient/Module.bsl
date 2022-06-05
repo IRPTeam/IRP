@@ -8,6 +8,28 @@ Procedure OpenFormEditAccounting(Object, Form, CurrentData, TableName) Export
 	OpenForm("CommonForm.EditAccounting", FormParameters, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
+Procedure OpenFormSelectLedgerType(FormOwner, BasisRef, ArrayOfJournalEntrys) Export
+	FormParameters = New Structure();
+	FormParameters.Insert("ArrayOfJournalEntrys", ArrayOfJournalEntrys);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("FormOwner" , FormOwner);
+	NotifyParameters.Insert("BasisRef"  , BasisRef);
+	Notify = New NotifyDescription("SelectLedgerType", ThisObject, NotifyParameters);
+	OpenForm("Document.JournalEntry.Form.SelectLedgerType", FormParameters, FormOwner, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+Procedure OpenFormJournalEntry(FormOwner, BasisRef, JournalEntryRef, LedgerTypeRef) Export
+	FormParameters = New Structure();
+	FormParameters.Insert("Key", JournalEntryRef);
+	
+	FillingValues = New Structure();
+	FillingValues.Insert("Basis"      , BasisRef);
+	FillingValues.Insert("LedgerType" , LedgerTypeRef);
+	
+	FormParameters.Insert("FillingValues", FillingValues);
+	OpenForm("Document.JournalEntry.ObjectForm", FormParameters, FormOwner);
+EndProcedure
+
 Procedure EditAccounting(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
@@ -43,6 +65,16 @@ Procedure EditAccounting(Result, AdditionalParameters) Export
 		AddExtDimensionRow(Object, Row, CreditType, Row.ExtDimensionTypeCr2, Row.ExtDimensionCr2);
 		AddExtDimensionRow(Object, Row, CreditType, Row.ExtDimensionTypeCr3, Row.ExtDimensionCr3);
 	EndDo;
+EndProcedure
+
+Procedure SelectLedgerType(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	OpenFormJournalEntry(AdditionalParameters.FormOwner, 
+		AdditionalParameters.BasisRef, 
+		Result.JournalEntryRef, 
+		Result.LedgerTypeRef);
 EndProcedure
 
 Procedure DeleteAccountingRows(Object, KeyForDelete)

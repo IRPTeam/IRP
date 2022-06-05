@@ -506,6 +506,10 @@
           <segments>OperationsTree.Period</segments>
         </paths>
       </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>OperationsTreePeriodOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>OperationsTreePeriodExtendedTooltip</name>
         <id>33</id>

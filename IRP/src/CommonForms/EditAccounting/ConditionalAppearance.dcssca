@@ -32,6 +32,9 @@
 			<item>
 				<field>AccountingAnalyticsOperation</field>
 			</item>
+			<item>
+				<field>AccountingAnalyticsIsByRow</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">

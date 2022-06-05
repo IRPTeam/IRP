@@ -24,4 +24,6 @@
   <content>InformationRegister.T9013S_AccountsTax</content>
   <content>InformationRegister.T9010S_AccountsItemKey</content>
   <content>Subsystem.Accounting</content>
+  <content>InformationRegister.T9014S_AccountsExpenseRevenue</content>
+  <content>Catalog.LedgerTypeVariants</content>
 </mdclass:FunctionalOption>

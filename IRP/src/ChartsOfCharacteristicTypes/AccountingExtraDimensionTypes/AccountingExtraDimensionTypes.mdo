@@ -30,6 +30,8 @@
     <types>CatalogRef.Companies</types>
     <types>CatalogRef.Taxes</types>
     <types>CatalogRef.Items</types>
+    <types>CatalogRef.BusinessUnits</types>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
   </type>
   <foldersOnTop>true</foldersOnTop>
   <codeAllowedLength>Variable</codeAllowedLength>

@@ -9,9 +9,21 @@ Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	If ThisObject.UserDefined Then
+		ThisObject.RegisterRecords.Basic.Write();
+		Return;
+	EndIf;
+	
 	ThisObject.RegisterRecords.Basic.Clear();
 	For Each Row In ThisObject.Basis.AccountingRowAnalytics Do
 		If Row.LedgerType <> ThisObject.LedgerType Then
+			Continue;
+		EndIf;
+		
+		DataByAnalytics = AccountingClientServer.GetDataByAccountingAnalytics(ThisObject.Basis, Row);
+		
+		If Not ValueIsFilled(DataByAnalytics.Amount) Then
 			Continue;
 		EndIf;
 		
@@ -45,9 +57,7 @@ Procedure OnWrite(Cancel)
 		For Each ExtDim In AccountingExtDimensionRows Do
 			Record.ExtDimensionsCr[ExtDim.ExtDimensionType] = ExtDim.ExtDimension;
 		EndDo;
-		
-		DataByAnalytics = AccountingClientServer.GetDataByAccountingAnalytics(ThisObject.Basis, Row);
-		
+				
 		// Debit currency
 		If Row.AccountDebit.Currency Then
 			Record.CurrencyDr       = DataByAnalytics.CurrencyDr;
@@ -84,7 +94,8 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
-		ThisObject.Basis = FillingData.Basis;
+		ThisObject.Basis      = FillingData.Basis;
+		ThisObject.LedgerType = FillingData.LedgerType;
 		If CommonFunctionsClientServer.ObjectHasProperty(FillingData.Basis, "Company") Then
 			ThisObject.Company = FillingData.Basis.Company;
 		EndIf;

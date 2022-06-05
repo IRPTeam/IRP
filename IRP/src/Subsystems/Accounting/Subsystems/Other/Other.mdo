@@ -6,7 +6,6 @@
     <value>Other</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
   <content>InformationRegister.CompanyLedgerTypes</content>
   <content>InformationRegister.LedgerTypeOperations</content>
   <parentSubsystem>Subsystem.Accounting</parentSubsystem>

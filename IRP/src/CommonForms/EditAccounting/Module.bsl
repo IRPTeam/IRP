@@ -18,6 +18,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	SetVisibleByLedgerType();
+	SetCurrentRowAtAccountingAnalytics();
 	ClearColumnTitle();
 EndProcedure
 
@@ -42,6 +43,7 @@ Procedure SetByDefault(Command)
 	FillAccountingAnalytics(DefaultAnalytics.AccountingAnalytics);
 	
 	SetVisibleByLedgerType();
+	SetCurrentRowAtAccountingAnalytics();
 EndProcedure
 
 &AtClient
@@ -78,12 +80,27 @@ EndProcedure
 &AtClient
 Procedure LedgerTypeOnChange(Item)
 	SetVisibleByLedgerType();
+	SetCurrentRowAtAccountingAnalytics();
 EndProcedure
 
 &AtClient
 Procedure Cancel(Command)
 	Close(Undefined);
 EndProcedure
+
+&AtClient
+Procedure SetCurrentRowAtAccountingAnalytics()
+	FirstRowID = Undefined;
+	For Each Row In ThisObject.AccountingAnalytics Do
+		If Row.LedgerType = ThisObject.LedgerType Then
+			FirstRowID = Row.GetID();
+			Break;
+		EndIf;
+	EndDo;
+	If FirstRowID <> Undefined Then
+		Items.AccountingAnalytics.CurrentRow = FirstRowID;
+	EndIf;
+EndProcedure	
 
 &AtClient
 Procedure SetVisibleByLedgerType()

@@ -8,5 +8,6 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.LedgerTypes</content>
+  <content>Catalog.LedgerTypeVariants</content>
   <parentSubsystem>Subsystem.Accounting</parentSubsystem>
 </mdclass:Subsystem>

@@ -38,6 +38,55 @@
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
+  <items xsi:type="form:FormField">
+    <name>VariantFilter</name>
+    <id>55</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Variant</segments>
+    </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>VariantFilterOnChange</name>
+    </handlers>
+    <extendedTooltip>
+      <name>VariantFilterExtendedTooltip</name>
+      <id>57</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>VariantFilterContextMenu</name>
+      <id>56</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>RadioButtonField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+      <radioButtonsType>Tumbler</radioButtonsType>
+    </extInfo>
+  </items>
   <items xsi:type="form:Table">
     <name>List</name>
     <id>3</id>
@@ -98,6 +147,56 @@
       <extInfo xsi:type="form:LabelFieldExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>Order</name>
+      <id>52</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Order</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>OrderExtendedTooltip</name>
+        <id>54</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>OrderContextMenu</name>
+        <id>53</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -291,7 +390,7 @@
       <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
     </items>
     <items xsi:type="form:FormField">
-      <name>LedgerTypeVariant</name>
+      <name>Variant</name>
       <id>43</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -299,10 +398,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.LedgerTypeVariant</segments>
+        <segments>List.Variant</segments>
       </dataPath>
       <extendedTooltip>
-        <name>LedgerTypeVariantExtendedTooltip</name>
+        <name>VariantExtendedTooltip</name>
         <id>45</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -317,7 +416,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>LedgerTypeVariantContextMenu</name>
+        <name>VariantContextMenu</name>
         <id>44</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -747,6 +846,7 @@
       </userVisible>
       <autoFill>true</autoFill>
     </contextMenu>
+    <representation>Tree</representation>
     <changeRowSet>true</changeRowSet>
     <changeRowOrder>true</changeRowOrder>
     <autoMaxWidth>true</autoMaxWidth>
@@ -825,7 +925,7 @@
       <queryText>SELECT
 	Table.Ref AS Ref,
 	Table.Code AS Code,
-	Table.LedgerTypeVariant,
+	Table.Variant,
 	Table.Description_en AS Description,
 	CASE
 		WHEN Table.Type = VALUE(AccountType.Active)
@@ -840,6 +940,7 @@
 	Table.Currency AS Currency,
 	Table.Quantity AS Quantity,
 	Table.Parent AS Parent,
+	Table.Order AS Order,
 	ExtraDimension1.ExtraDimension AS ExtraDimension1,
 	ExtraDimension2.ExtraDimension AS ExtraDimension2,
 	ExtraDimension3.ExtraDimension AS ExtraDimension3
@@ -887,6 +988,23 @@ FROM
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>
+  </attributes>
+  <attributes>
+    <name>Variant</name>
+    <title>
+      <key>en</key>
+      <value>Variant</value>
+    </title>
+    <id>2</id>
+    <valueType>
+      <types>CatalogRef.LedgerTypeVariants</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <commandInterface>
     <navigationPanel/>

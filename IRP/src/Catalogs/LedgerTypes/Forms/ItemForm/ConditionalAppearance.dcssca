@@ -50,4 +50,26 @@
 			</dcscor:item>
 		</appearance>
 	</item>
+	<item>
+		<selection>
+			<item>
+				<field>OperationsTreeUse</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">OperationsTree.Period</left>
+				<comparisonType>NotFilled</comparisonType>
+				<right xsi:type="v8:StandardBeginningDate">
+					<v8:variant xsi:type="v8:StandardBeginningDateVariant">Custom</v8:variant>
+				</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>ReadOnly</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
 </ConditionalAppearance>

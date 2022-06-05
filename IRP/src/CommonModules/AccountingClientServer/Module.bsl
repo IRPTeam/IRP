@@ -1,30 +1,36 @@
 
 Procedure UpdateAccountingDataInDocument(Object, MainTableName, Filter_LedgerType = Undefined, IgnoreFixed = False) Export
-	DeleteUnusedRowsFromAnalyticsTable(Object, MainTableName);
-	CompanyLedgerTypes = AccountingServer.GetLedgerTypesByCompany(Object.Ref, Object.Date, Object.Company);
 	Period = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
-	For Each LedgerType In CompanyLedgerTypes Do
+	LedgerTypes = AccountingServer.GetLedgerTypesByCompany(Object.Ref, Period, Object.Company);
+	
+	DeleteUnusedRowsFromAnalyticsTable(Object, Period, LedgerTypes, MainTableName);
+	
+	For Each LedgerType In LedgerTypes Do
+		// filter by ledger type
 		If Filter_LedgerType <> Undefined Then
 			If LedgerType <> Filter_LedgerType Then
 				Continue;
 			EndIf;
 		EndIf;
-		LedgerTypeAccountingOperationsInfo = AccountingServer.GetAccountingOperationsByLedgerType(Object.Ref, Period, LedgerType);
-		For Each OperationInfo In LedgerTypeAccountingOperationsInfo Do
+		
+		OperationsInfo = AccountingServer.GetAccountingOperationsByLedgerType(Object.Ref, Period, LedgerType);
+		
+		For Each OperationInfo In OperationsInfo Do
 			If Not OperationInfo.ByRow Then
-				UpdateAccountingAnalytics(Object, Undefined, "", 
+				UpdateAccountingAnalyticsInDocument(Object, Undefined, "", 
 					OperationInfo.Operation, LedgerType, OperationInfo.MetadataName, MainTableName, IgnoreFixed);
 			Else
 				For Each Row In Object[MainTableName] Do
-					UpdateAccountingAnalytics(Object, Row, Row.Key, 
+					UpdateAccountingAnalyticsInDocument(Object, Row, Row.Key, 
 						OperationInfo.Operation, LedgerType, OperationInfo.MetadataName, MainTableName, IgnoreFixed);
 				EndDo;
 			EndIf;
 		EndDo;
+		
 	EndDo;
 EndProcedure
 
-Procedure UpdateAccountingAnalytics(Object, Row, RowKey, Operation, LedgerType, MetadataName, MainTableName, IgnoreFixed)
+Procedure UpdateAccountingAnalyticsInDocument(Object, Row, RowKey, Operation, LedgerType, MetadataName, MainTableName, IgnoreFixed)
 	AnalyticRow = Undefined;
 	Filter = New Structure();
 	If ValueIsFilled(RowKey) Then
@@ -33,7 +39,9 @@ Procedure UpdateAccountingAnalytics(Object, Row, RowKey, Operation, LedgerType, 
 	
 	Filter.Insert("Operation"  , Operation);
 	Filter.Insert("LedgerType" , LedgerType);
+	
 	AnalyticRows = Object.AccountingRowAnalytics.FindRows(Filter);
+	
 	If AnalyticRows.Count() > 1 Then
 		Raise StrTemplate("More than 1 analytic rows by filter: Key[%1] Operation[%2] LedgerType[%3]", Filter.Key, Filter.Operation, Filter.LedgerType);
 	ElsIf AnalyticRows.Count() = 1 Then
@@ -41,28 +49,24 @@ Procedure UpdateAccountingAnalytics(Object, Row, RowKey, Operation, LedgerType, 
 		If AnalyticRow.IsFixed And Not IgnoreFixed Then
 			Return;
 		EndIf;
-	EndIf;
-				
-	AnalyticData = GetAccountingAnalytics(Object, Row, Operation, LedgerType, MetadataName, MainTableName);
-
-	If AnalyticRow = Undefined Then
+	Else
 		AnalyticRow = Object.AccountingRowAnalytics.Add();
-		AnalyticRow.Key = RowKey;
+		AnalyticRow.Key = RowKey;		
 	EndIf;
-	AnalyticRow.IsFixed = False;
-	FillAccountingAnalytics(AnalyticRow, AnalyticData, Object.AccountingExtDimensions);
-EndProcedure
-
-Function GetAccountingAnalytics(Object, TableRow, Operation, LedgerType, MetadataName, MainTableName) Export
-	DocumentData = AccountingServer.GetDocumentData(Object, TableRow, MainTableName);
+	
+	DocumentData = AccountingServer.GetDocumentData(Object, Row, MainTableName);
 	Parameters = New Structure();
 	Parameters.Insert("ObjectData"   , DocumentData.ObjectData);
 	Parameters.Insert("RowData"      , DocumentData.RowData);
-	Parameters.Insert("Operation"   , Operation);
+	Parameters.Insert("Operation"    , Operation);
 	Parameters.Insert("LedgerType"   , LedgerType);
 	Parameters.Insert("MetadataName" , MetadataName);
-	Return AccountingServer.GetAccountingAnalytics(Parameters, MetadataName);
-EndFunction
+	
+	AnalyticData = AccountingServer.GetAccountingAnalytics(Parameters, MetadataName);
+
+	AnalyticRow.IsFixed = False;
+	FillAccountingAnalytics(AnalyticRow, AnalyticData, Object.AccountingExtDimensions);
+EndProcedure
 
 Procedure FillAccountingAnalytics(AnalyticRow, AnalyticData, AccountingExtDimensions) Export
 	AnalyticRow.Operation = AnalyticData.Operation;
@@ -103,10 +107,12 @@ EndProcedure
 
 Function GetColumnsAccountingRowAnalytics()
 	Return
-	"Operation, 
+	"Key,
+	|Operation, 
 	|LedgerType, 
 	|AccountDebit,
-	|AccountCredit";
+	|AccountCredit,
+	|IsFixed";
 EndFunction
 
 Function GetDataByAccountingAnalytics(BasisRef, AnalyticsRow) Export
@@ -116,10 +122,26 @@ Function GetDataByAccountingAnalytics(BasisRef, AnalyticsRow) Export
 	Return AccountingServer.GetDataByAccountingAnalytics(BasisRef, RowData);
 EndFunction
 
-Procedure DeleteUnusedRowsFromAnalyticsTable(Object, MainTableName) Export
+Procedure DeleteUnusedRowsFromAnalyticsTable(Object, Period, LedgerTypes, MainTableName) Export
+		
 	// AccountingRowAnalytics
 	ArrayForDelete = New Array();
 	For Each Row In Object.AccountingRowAnalytics Do
+		
+		If LedgerTypes.Find(Row.LedgerType) = Undefined Then
+			ArrayForDelete.Add(Row);
+			Continue;
+		EndIf;
+	
+		Operations = New Array();	
+		OperationsInfo = AccountingServer.GetAccountingOperationsByLedgerType(Object.Ref, Period, Row.LedgerType);
+		For Each OperationInfo In OperationsInfo Do
+			Operations.Add(OperationInfo.Operation);
+		EndDo;
+		If Operations.Find(Row.Operation) = Undefined Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+		
 		If Not ValueIsFilled(Row.Key) Then
 			Continue;
 		EndIf;
@@ -134,6 +156,21 @@ Procedure DeleteUnusedRowsFromAnalyticsTable(Object, MainTableName) Export
 	// AccountingExtDimensions
 	ArrayForDelete.Clear();
 	For Each Row In Object.AccountingExtDimensions Do
+		
+		If LedgerTypes.Find(Row.LedgerType) = Undefined Then
+			ArrayForDelete.Add(Row);
+			Continue;
+		EndIf;
+		
+		Operations = New Array();	
+		OperationsInfo = AccountingServer.GetAccountingOperationsByLedgerType(Object.Ref, Period, Row.LedgerType);
+		For Each OperationInfo In OperationsInfo Do
+			Operations.Add(OperationInfo.Operation);
+		EndDo;
+		If Operations.Find(Row.Operation) = Undefined Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+		
 		If Not ValueIsFilled(Row.Key) Then
 			Continue;
 		EndIf;

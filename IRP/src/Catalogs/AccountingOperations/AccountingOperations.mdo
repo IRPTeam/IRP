@@ -50,17 +50,24 @@
       </code>
       <isFolder>true</isFolder>
       <content id="0a5ed6e5-a6f6-4167-b3d9-198842f906e6">
-        <name>BankPayment_DR_R1021B_CR_3010B</name>
+        <name>BankPayment_DR_R1020B_R1021B_CR_R3010B</name>
         <description>Dr Partner account - Cr Cash account</description>
         <code xsi:type="core:NumberValue">
           <value>3</value>
         </code>
       </content>
       <content id="084c14d6-0bf2-4b3f-a728-f9be108187ca">
-        <name>BankPayment_DR_R5022T_CR_3010B</name>
+        <name>BankPayment_DR_R5022T_CR_R3010B</name>
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>9</value>
+        </code>
+      </content>
+      <content id="74335ed0-2922-43c2-85c5-27c87eb943ba">
+        <name>BankPayment_DR_R1021B_CR_R1020B</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>10</value>
         </code>
       </content>
     </items>
@@ -72,7 +79,7 @@
       </code>
       <isFolder>true</isFolder>
       <content id="84005d98-3b5e-4d01-9885-c136d7fa2202">
-        <name>BankReceipt_DR_3010B_CR_B2021B</name>
+        <name>BankReceipt_DR_R3010B_CR_R2021B</name>
         <description>Dr Cash account - Cr partner account</description>
         <code xsi:type="core:NumberValue">
           <value>4</value>
@@ -87,7 +94,7 @@
       </code>
       <isFolder>true</isFolder>
       <content id="436a2614-e716-45b0-b595-9b5dc7abd846">
-        <name>PurchaseInvoice_DR_R4050B_CR_R1021B</name>
+        <name>PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B</name>
         <description>Dr Item key account - Cr Partner account</description>
         <code xsi:type="core:NumberValue">
           <value>6</value>

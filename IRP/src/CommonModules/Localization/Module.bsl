@@ -686,6 +686,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_110", NStr("en = 'Current serial lot number already has movements, it can not disable stock detail option'", Lang) + Chars.LF);
 	
 	Strings.Insert("Error_111", NStr("en = 'Period is empty [%1] : [%2]'", Lang) + Chars.LF);
+	
+	Strings.Insert("Error_112", NStr("en = 'Not set ledger type by company [%1]'", Lang));
 #EndRegion
 
 #Region InfoMessages

@@ -181,11 +181,7 @@ Function GetDataByAccountingAnalytics(BasisRef, RowData) Export
 	Parameters.Insert("RowKey"   , RowData.Key);
 	Parameters.Insert("Operation", RowData.Operation);
 	Parameters.Insert("CurrencyMovementType", RowData.LedgerType.CurrencyMovementType);
-	MetadataName = BasisRef.Metadata().Name;
-	Data = Documents[MetadataName].GetAccountingData(Parameters);
-	If Data = Undefined Then
-		Raise StrTemplate("Document [%1] not supported accounting operation [%2]", MetadataName, Parameters.Operation);
-	EndIf;
+	Data = GetAccountingData(Parameters);
 	Return FillAccountingDataResult(Data);
 EndFunction
 
@@ -211,17 +207,7 @@ Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 EndFunction
 
 Function GetAccountingOperationsByLedgerType(Ref, Period, LedgerType) Export
-	Map = New Map();
-	AO = Catalogs.AccountingOperations;
-	Map.Insert(AO.BankPayment_DR_R1021B_CR_3010B , True);
-	Map.Insert(AO.BankPayment_DR_R5022T_CR_3010B , True);
-	
-	Map.Insert(AO.BankReceipt_DR_3010B_CR_B2021B , True);
-	
-	Map.Insert(AO.PurchaseInvoice_DR_R4050B_CR_R1021B , True);
-	Map.Insert(AO.PurchaseInvoice_DR_R1021B_CR_R1020B , False);
-	Map.Insert(AO.PurchaseInvoice_DR_R1040B_CR_R1021B , True);
-	
+	OperationsDefinition = GetOperationsDefinition();
 	MetadataName = Ref.Metadata().Name;
 	AccountingOperationGroup = Catalogs.AccountingOperations["Document_" + MetadataName];
 	Query = New Query();
@@ -241,31 +227,64 @@ Function GetAccountingOperationsByLedgerType(Ref, Period, LedgerType) Export
 	
 	ArrayOfAccountingOperations = New Array();
 	While QuerySelection.Next() Do
-		ByRow = Map.Get(QuerySelection.AccountingOperation);
-		ByRow = ?(ByRow = Undefined, False, ByRow);
+		Property = OperationsDefinition.Get(QuerySelection.AccountingOperation);
+		ByRow = ?(Property = Undefined, False, Property.ByRow);
 		ArrayOfAccountingOperations.Add(New Structure("Operation, ByRow, MetadataName",
 			QuerySelection.AccountingOperation, ByRow, MetadataName));
 	EndDo;
 	Return ArrayOfAccountingOperations;
 EndFunction
 
+Function GetLedgerTypeVariants() Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	LedgerTypeVariants.Ref
+	|FROM
+	|	Catalog.LedgerTypeVariants AS LedgerTypeVariants
+	|WHERE
+	|	NOT LedgerTypeVariants.DeletionMark";
+	QueryResult = Query.Execute();
+	Result = New Array();
+	QuerySelection = QueryResult.Select();
+	While QuerySelection.Next() Do
+		Result.Add(QuerySelection.Ref);
+	EndDo;
+	Return Result;
+EndFunction
+
 #EndRegion
 
 #Region Accounts
 
-Function GetT9010S_AccountsItemKey(Period, Company, ItemKey) Export
+Function GetAccountParameters(Parameters) Export
+	Period = 
+	CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.ObjectData.Ref, Parameters.ObjectData.Date);
+	AccountParameters = New Structure();
+	AccountParameters.Insert("Period", Period);
+	AccountParameters.Insert("Company", Parameters.ObjectData.Company);
+	AccountParameters.Insert("LedgerTypeVariant", Parameters.LedgerType.Variant);
+	Return AccountParameters;
+EndFunction
+
+Function GetT9010S_AccountsItemKey(AccountParameters, ItemKey) Export
+	Return AccountingServerReuse.GetT9010S_AccountsItemKey_Reuse(
+		AccountParameters.Period, 
+		AccountParameters.Company, 
+		AccountParameters.LedgerTypeVariant, 
+		ItemKey);
+EndFunction
+
+Function __GetT9010S_AccountsItemKey(Period, Company, LedgerTypeVariant, ItemKey) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
 	|	ByItemKey.Account,
-	|	ByItemKey.Company,
-	|	ByItemKey.ItemKey,
-	|	ByItemKey.Item,
-	|	ByItemKey.ItemType,
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
 	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
+	|	AND Variant = &Variant
 	|	AND ItemKey = &ItemKey
 	|	AND Item.Ref IS NULL
 	|	AND ItemType.Ref IS NULL) AS ByItemKey
@@ -274,13 +293,10 @@ Function GetT9010S_AccountsItemKey(Period, Company, ItemKey) Export
 	|
 	|SELECT
 	|	ByItem.Account,
-	|	ByItem.Company,
-	|	ByItem.ItemKey,
-	|	ByItem.Item,
-	|	ByItem.ItemType,
 	|	2
 	|FROM
 	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
+	|	AND Variant = &Variant
 	|	AND ItemKey.Ref IS NULL
 	|	AND Item = &Item
 	|	AND ItemType.Ref IS NULL) AS ByItem
@@ -289,13 +305,10 @@ Function GetT9010S_AccountsItemKey(Period, Company, ItemKey) Export
 	|
 	|SELECT
 	|	ByItemType.Account,
-	|	ByItemType.Company,
-	|	ByItemType.ItemKey,
-	|	ByItemType.Item,
-	|	ByItemType.ItemType,
 	|	3
 	|FROM
 	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
+	|	AND Variant = &Variant
 	|	AND ItemKey.Ref IS NULL
 	|	AND Item.Ref IS NULL
 	|	AND ItemType = &ItemType) AS ByItemType
@@ -303,17 +316,28 @@ Function GetT9010S_AccountsItemKey(Period, Company, ItemKey) Export
 	|UNION ALL
 	|
 	|SELECT
-	|	ByItemType.Account,
-	|	ByItemType.Company,
-	|	ByItemType.ItemKey,
-	|	ByItemType.Item,
-	|	ByItemType.ItemType,
+	|	ByType.Account,
 	|	4
 	|FROM
 	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
+	|	AND Variant = &Variant
 	|	AND ItemKey.Ref IS NULL
 	|	AND Item.Ref IS NULL
-	|	AND ItemType.Ref IS NULL) AS ByItemType
+	|	AND ItemType.Ref IS NULL
+	|	AND TypeOfItemType = &TypeOfItemType) AS ByType
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByCompany.Account,
+	|	5
+	|FROM
+	|	InformationRegister.T9010S_AccountsItemKey.SliceLast(&Period, Company = &Company
+	|	AND Variant = &Variant
+	|	AND ItemKey.Ref IS NULL
+	|	AND Item.Ref IS NULL
+	|	AND ItemType.Ref IS NULL
+	|	AND TypeOfItemType.Ref IS NULL) AS ByCompany
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -322,13 +346,16 @@ Function GetT9010S_AccountsItemKey(Period, Company, ItemKey) Export
 	|	Accounts.Priority AS Priority
 	|FROM
 	|	Accounts AS Accounts
+	|
 	|ORDER BY
 	|	Priority";
 	Query.SetParameter("Period"   , Period);
 	Query.SetParameter("Company"  , Company);
+	Query.SetParameter("Variant"  , LedgerTypeVariant);
 	Query.SetParameter("ItemKey"  , ItemKey);
 	Query.SetParameter("Item"     , ItemKey.Item);
 	Query.SetParameter("ItemType" , ItemKey.Item.ItemType);
+	Query.SetParameter("TypeOfItemType" , ItemKey.Item.ItemType.Type);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	Result = New Structure("Account", Undefined);
@@ -338,7 +365,14 @@ Function GetT9010S_AccountsItemKey(Period, Company, ItemKey) Export
 	Return Result;
 EndFunction
 
-Function GetT9011S_AccountsCashAccount(Period, Company, CashAccount) Export
+Function GetT9011S_AccountsCashAccount(AccountParameters, CashAccount) Export
+	Return AccountingServerReuse.GetT9011S_AccountsCashAccount_Reuse(AccountParameters.Period,
+		AccountParameters.Company,
+		AccountParameters.LedgerTypeVariant,
+		CashAccount);
+EndFunction
+
+Function __GetT9011S_AccountsCashAccount(Period, Company, LedgerTypeVariant, CashAccount) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -349,6 +383,7 @@ Function GetT9011S_AccountsCashAccount(Period, Company, CashAccount) Export
 	|INTO Accounts
 	|FROM
 	|	InformationRegister.T9011S_AccountsCashAccount.SliceLast(&Period, Company = &Company
+	|	AND Variant = &Variant
 	|	AND CashAccount = &CashAccount) AS ByCashAccount
 	|
 	|UNION ALL
@@ -360,6 +395,7 @@ Function GetT9011S_AccountsCashAccount(Period, Company, CashAccount) Export
 	|	2
 	|FROM
 	|	InformationRegister.T9011S_AccountsCashAccount.SliceLast(&Period, Company = &Company
+	|	AND Variant = &Variant
 	|	AND CashAccount.Ref IS NULL) AS ByCompany
 	|;
 	|
@@ -371,10 +407,12 @@ Function GetT9011S_AccountsCashAccount(Period, Company, CashAccount) Export
 	|	Accounts.Priority AS Priority
 	|FROM
 	|	Accounts AS Accounts
+	|
 	|ORDER BY
 	|	Priority";
 	Query.SetParameter("Period"      , Period);
 	Query.SetParameter("Company"     , Company);
+	Query.SetParameter("Variant"     , LedgerTypeVariant);
 	Query.SetParameter("CashAccount" , CashAccount);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -385,56 +423,52 @@ Function GetT9011S_AccountsCashAccount(Period, Company, CashAccount) Export
 	Return Result;
 EndFunction
 
-Function GetT9012S_AccountsPartner(Period, Company, Partner, Agreement) Export
+Function GetT9012S_AccountsPartner(AccountParameters, Partner, Agreement) Export
+	Return AccountingServerReuse.GetT9012S_AccountsPartner_Reuse(
+		AccountParameters.Period, 
+		AccountParameters.Company, 
+		AccountParameters.LedgerTypeVariant,
+		Partner, Agreement);
+EndFunction
+
+Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner, Agreement) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	ByAgreement.Company,
-	|	ByAgreement.Partner,
-	|	ByAgreement.Agreement,
 	|	ByAgreement.AccountAdvances,
 	|	ByAgreement.AccountTransactions,
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
-	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND Variant = &Variant
 	|	AND Agreement = &Agreement
 	|	AND Partner.Ref IS NULL) AS ByAgreement
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	ByPartner.Company,
-	|	ByPartner.Partner,
-	|	ByPartner.Agreement,
 	|	ByPartner.AccountAdvances,
 	|	ByPartner.AccountTransactions,
 	|	2
 	|FROM
-	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND Variant = &Variant
 	|	AND Partner = &Partner
 	|	AND Agreement.Ref IS NULL) AS ByPartner
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	ByCompany.Company,
-	|	ByCompany.Partner,
-	|	ByCompany.Agreement,
 	|	ByCompany.AccountAdvances,
 	|	ByCompany.AccountTransactions,
 	|	3
 	|FROM
-	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND Variant = &Variant
 	|	AND Partner.Ref IS NULL
 	|	AND Agreement.Ref IS NULL) AS ByCompany
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	Accounts.Company,
-	|	Accounts.Partner,
-	|	Accounts.Agreement,
 	|	Accounts.AccountAdvances,
 	|	Accounts.AccountTransactions,
 	|	Accounts.Priority AS Priority
@@ -444,6 +478,7 @@ Function GetT9012S_AccountsPartner(Period, Company, Partner, Agreement) Export
 	|	Priority";
 	Query.SetParameter("Period"    , Period);
 	Query.SetParameter("Company"   , Company);
+	Query.SetParameter("Variant"   , LedgerTypeVariant);
 	Query.SetParameter("Partner"   , Partner);
 	Query.SetParameter("Agreement" , Agreement);
 	QueryResult = Query.Execute();
@@ -458,8 +493,14 @@ Function GetT9012S_AccountsPartner(Period, Company, Partner, Agreement) Export
 	Return Result;
 EndFunction
 
+Function GetT9013S_AccountsTax(AccountParameters, Tax) Export
+	Return AccountingServerReuse.GetT9013S_AccountsTax_Reuse(AccountParameters.Period,
+		AccountParameters.Company,
+		AccountParameters.LedgerTypeVariant,
+		Tax);	
+EndFunction
 
-Function GetT9013S_AccountsTax(Period, Company, Tax) Export
+Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -469,7 +510,7 @@ Function GetT9013S_AccountsTax(Period, Company, Tax) Export
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
-	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company AND Variant = &Variant
 	|	AND Tax = &Tax) AS ByTax
 	|
 	|UNION ALL
@@ -480,7 +521,7 @@ Function GetT9013S_AccountsTax(Period, Company, Tax) Export
 	|	ByCompany.Account,
 	|	2
 	|FROM
-	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
+	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company AND Variant = &Variant
 	|	AND Tax.Ref IS NULL) AS ByCompany
 	|;
 	|
@@ -496,7 +537,59 @@ Function GetT9013S_AccountsTax(Period, Company, Tax) Export
 	|	Priority";
 	Query.SetParameter("Period"  , Period);
 	Query.SetParameter("Company" , Company);
+	Query.SetParameter("Variant" , LedgerTypeVariant);
 	Query.SetParameter("Tax"     , Tax);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	Result = New Structure("Account", Undefined);
+	If QuerySelection.Next() Then
+		Result.Account = QuerySelection.Account;
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetT9014S_AccountsExpenseRevenue(AccountParameters, ExpenseRevenue) Export
+	Return AccountingServerReuse.GetT9014S_AccountsExpenseRevenue_Reuse(
+		AccountParameters.Period, 
+		AccountParameters.Company, 
+		AccountParameters.LedgerTypeVariant, 
+		ExpenseRevenue);
+EndFunction
+
+Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, ExpenseRevenue) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ByExpenseRevenue.Account,
+	|	1 AS Priority
+	|INTO Accounts
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Company = &Company AND Variant = &Variant
+	|	AND ExpenseRevenue = &ExpenseRevenue) AS ByExpenseRevenue
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByCompany.Account,
+	|	2
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Company = &Company AND Variant = &Variant
+	|	AND ExpenseRevenue.Ref IS NULL) AS ByCompany
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Accounts.Account,
+	|	Accounts.Priority AS Priority
+	|FROM
+	|	Accounts AS Accounts
+	|
+	|ORDER BY
+	|	Priority";
+	Query.SetParameter("Period"  , Period);
+	Query.SetParameter("Company" , Company);
+	Query.SetParameter("Variant" , LedgerTypeVariant);
+	Query.SetParameter("ExpenseRevenue" , ExpenseRevenue);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	Result = New Structure("Account", Undefined);
@@ -508,3 +601,112 @@ EndFunction
 
 #EndRegion
 
+Function GetOperationsDefinition()
+	Map = New Map();
+	AO = Catalogs.AccountingOperations;
+	Map.Insert(AO.BankPayment_DR_R1020B_R1021B_CR_R3010B , New Structure("ByRow", True));
+	Map.Insert(AO.BankPayment_DR_R1021B_CR_R1020B , New Structure("ByRow", True));
+	Map.Insert(AO.BankPayment_DR_R5022T_CR_R3010B , New Structure("ByRow", True));
+	
+	Map.Insert(AO.BankReceipt_DR_R3010B_CR_R2021B , New Structure("ByRow", True));
+	
+	Map.Insert(AO.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B , New Structure("ByRow", True));
+	Map.Insert(AO.PurchaseInvoice_DR_R1021B_CR_R1020B , New Structure("ByRow", False));
+	Map.Insert(AO.PurchaseInvoice_DR_R1040B_CR_R1021B , New Structure("ByRow", True));
+
+	Return Map;
+EndFunction
+
+Function GetAccountingData(Parameters)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Amounts.Currency,
+	|	SUM(Amounts.Amount) AS Amount
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS Amounts
+	|WHERE
+	|	Amounts.Recorder = &Recorder
+	|	AND Amounts.Operation = &Operation
+	|	AND Amounts.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND case
+	|		when &FilterByRowKey
+	|			then Amounts.RowKey = &RowKey
+	|		else true
+	|	end
+	|GROUP BY
+	|	Amounts.Currency
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SUM(Amounts.Amount) AS Amount
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS Amounts
+	|WHERE
+	|	Amounts.Recorder = &Recorder
+	|	AND Amounts.Operation = &Operation
+	|	AND Amounts.CurrencyMovementType = &CurrencyMovementType
+	|	AND case
+	|		when &FilterByRowKey
+	|			then Amounts.RowKey = &RowKey
+	|		else true
+	|	end
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SUM(Quantities.Quantity) AS Quantity
+	|FROM
+	|	AccumulationRegister.T1050T_AccountingQuantities AS Quantities
+	|WHERE
+	|	Quantities.Recorder = &Recorder
+	|	AND case
+	|		when &FilterByRowKey
+	|			then Quantities.RowKey = &RowKey
+	|		else true
+	|	end";
+	
+	OperationsDefinition = GetOperationsDefinition();
+	Property = OperationsDefinition.Get(Parameters.Operation);
+	ByRow = ?(Property = Undefined, False, Property.ByRow);
+	
+	RowKey = "";
+	If ByRow Then
+		RowKey = Parameters.RowKey;
+	EndIf;
+	
+	Query.SetParameter("Recorder"             , Parameters.Recorder);
+	Query.SetParameter("CurrencyMovementType" , Parameters.CurrencyMovementType);
+	Query.SetParameter("Operation"            , Parameters.Operation);
+	Query.SetParameter("FilterByRowKey"       , ValueIsFilled(RowKey));
+	Query.SetParameter("RowKey"           	  , RowKey);
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	Result = AccountingServer.GetAccountingDataResult();
+	
+	// Currency amount
+	QuerySelection = QueryResults[0].Select();
+	If QuerySelection.Next() Then
+		Result.CurrencyDr       = QuerySelection.Currency;
+		Result.CurrencyAmountDr = QuerySelection.Amount;
+		Result.CurrencyCr       = QuerySelection.Currency;
+		Result.CurrencyAmountCr = QuerySelection.Amount;
+	Endif;
+	
+	// Amount
+	QuerySelection = QueryResults[1].Select();
+	If QuerySelection.Next() Then
+		Result.Amount = QuerySelection.Amount;
+	Endif;
+	
+	// Quantity
+	QuerySelection = QueryResults[2].Select();
+	If QuerySelection.Next() Then
+		Result.QuantityCr = QuerySelection.Quantity;
+		Result.QuantityDr = QuerySelection.Quantity;
+	Endif;
+	
+	Return Result;	
+EndFunction

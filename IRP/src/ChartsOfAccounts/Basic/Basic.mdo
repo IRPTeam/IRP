@@ -17,6 +17,21 @@
   <useStandardCommands>true</useStandardCommands>
   <inputByString>ChartOfAccounts.Basic.StandardAttribute.Code</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Order</name>
+    <fillChecking>ShowError</fillChecking>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Parent</name>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <choiceParameterLinks>
+      <name>Filter.Variant</name>
+      <field>ChartOfAccounts.Basic.Attribute.Variant</field>
+    </choiceParameterLinks>
+    <fullTextSearch>Use</fullTextSearch>
+  </standardAttributes>
   <createOnInput>DontUse</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
@@ -34,18 +49,20 @@
   <defaultObjectForm>ChartOfAccounts.Basic.Form.ItemForm</defaultObjectForm>
   <defaultListForm>ChartOfAccounts.Basic.Form.ListForm</defaultListForm>
   <defaultChoiceForm>ChartOfAccounts.Basic.Form.ChoiceForm</defaultChoiceForm>
+  <orderLength>3</orderLength>
   <attributes uuid="b37dad27-9ea5-4c9d-8d6d-bb9d13f202d7">
-    <name>LedgerTypeVariant</name>
+    <name>Variant</name>
     <synonym>
       <key>en</key>
-      <value>Ledger type variant</value>
+      <value>Variant</value>
     </synonym>
     <type>
-      <types>EnumRef.LedgerTypeVariants</types>
+      <types>CatalogRef.LedgerTypeVariants</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

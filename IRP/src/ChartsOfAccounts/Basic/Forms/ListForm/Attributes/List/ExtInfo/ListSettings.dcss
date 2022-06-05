@@ -5,6 +5,10 @@
 		<userSettingID>d5817dc1-dd3a-494e-832e-00a0315b6f22</userSettingID>
 	</filter>
 	<order>
+		<item xsi:type="OrderItemField">
+			<field>Order</field>
+			<orderType>Asc</orderType>
+		</item>
 		<viewMode>Normal</viewMode>
 		<userSettingID>bb338a7e-e3fe-4836-b56e-75dc36b4d56c</userSettingID>
 	</order>

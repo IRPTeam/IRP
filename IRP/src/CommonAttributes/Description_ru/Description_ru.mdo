@@ -240,6 +240,10 @@
     <metadata>Catalog.IDInfoAddresses</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Catalog.LedgerTypeVariants</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

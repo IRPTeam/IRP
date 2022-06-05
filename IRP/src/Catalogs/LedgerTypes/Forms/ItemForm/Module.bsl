@@ -65,6 +65,15 @@ Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure OperationsTreePeriodOnChange(Item)
+	CurrentData = Items.OperationsTree.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Use = ValueIsFilled(CurrentData.Period);
+EndProcedure
+
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	// Operations tree

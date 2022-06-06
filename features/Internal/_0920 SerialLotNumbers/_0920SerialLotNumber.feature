@@ -3431,8 +3431,31 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		Then the form attribute named "Inactive" became equal to "No"
 		Then the form attribute named "StockBalanceDetail" became equal to "Yes"
 		Then the form attribute named "OwnerSelect" became equal to "Manual"
-		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"	
-		And I close all client application windows
+		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"
+		And I click "Save and close" button
+		And I finish line editing in "SerialLotNumbers" table	
+	* Create serial lot number (button +)	
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I input "090989" text in "Serial lot number" field of "SerialLotNumbers" table
+		And I click Create button of "Serial lot number" field
+		Then the form attribute named "Owner" became equal to "ODS"
+		Then the form attribute named "Description" became equal to "090989"
+		Then the form attribute named "OwnerSelect" became equal to "ItemKey"
+		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"
+		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "No"
+		Then the form attribute named "StockBalanceDetail" became equal to "Yes"
+		Then the form attribute named "Inactive" became equal to "No"
+		And I change checkbox "Create barcode"
+		And I click "Save and close" button
+		And I wait "Item serial/lot number (create)" window closing in 20 seconds
+		Then "Select serial lot numbers *" window is opened
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And "SerialLotNumbers" table became equal
+			| 'Serial lot number' | 'Quantity' |
+			| '908'               | '1,000'    |
+			| '090989'            | '1,000'    |
+		And I close all client application windows		
 	* Check serial lot number catalog
 		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
 		And I go to line in "List" table

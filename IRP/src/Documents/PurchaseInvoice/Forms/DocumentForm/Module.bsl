@@ -655,7 +655,7 @@ EndProcedure
 
 &AtServer
 Procedure UpdateAccountingData()
-	AccountingClientServer.UpdateAccountingDataInDocument(Object, "ItemList");
+	AccountingClientServer.UpdateAccountingTables(Object, "ItemList");
 EndProcedure
 
 #EndRegion

@@ -11,7 +11,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndDo;
 	
 	If WriteMode = DocumentWriteMode.Posting Then
-		AccountingClientServer.UpdateAccountingDataInDocument(ThisObject, "PaymentList");
+		AccountingClientServer.UpdateAccountingTables(ThisObject, "PaymentList");
 	EndIf;
 	
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");

@@ -21,7 +21,7 @@ Procedure OnWrite(Cancel)
 			Continue;
 		EndIf;
 		
-		DataByAnalytics = AccountingClientServer.GetDataByAccountingAnalytics(ThisObject.Basis, Row);
+		DataByAnalytics = AccountingServer.GetDataByAccountingAnalytics(ThisObject.Basis, Row);
 		
 		If Not ValueIsFilled(DataByAnalytics.Amount) Then
 			Continue;

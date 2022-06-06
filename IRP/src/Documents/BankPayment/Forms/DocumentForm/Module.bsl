@@ -481,7 +481,7 @@ EndProcedure
 
 &AtServer
 Procedure UpdateAccountingData()
-	AccountingClientServer.UpdateAccountingDataInDocument(Object, "PaymentList");
+	AccountingClientServer.UpdateAccountingTables(Object, "PaymentList");
 EndProcedure
 
 &AtClient

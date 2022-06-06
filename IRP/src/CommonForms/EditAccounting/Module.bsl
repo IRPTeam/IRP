@@ -254,7 +254,7 @@ EndProcedure
 
 &AtServer
 Function GetDefaultAccountingAnalytics(Val Object, MainTableName, RowKey, Filter_LedgerType, IgnoreFixed)
-	AccountingClientServer.UpdateAccountingDataInDocument(Object, MainTableName, Filter_LedgerType, IgnoreFixed);
+	AccountingClientServer.UpdateAccountingTables(Object, MainTableName, Filter_LedgerType, IgnoreFixed);
 	CurrentData = New Structure("Key" , RowKey);
 	Result = AccountingClientServer.GetParametersEditAccounting(Object, CurrentData, MainTableName, Filter_LedgerType);
 	Return Result;

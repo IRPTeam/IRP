@@ -75,43 +75,6 @@ Function IsAdvance(RowData) Export
 	Return False; // IsTransaction
 EndFunction
 
-Function GetDocumentData(Object, TableRow, MainTableName) Export
-	Result = New Structure("ObjectData, RowData", New Structure(), New Structure());
-	If TableRow <> Undefined Then
-		TabularSections =  Object.Ref.Metadata().TabularSections;
-		For Each Column In TabularSections[MainTableName].Attributes Do
-			Result.RowData.Insert(Column.Name, TableRow[Column.Name]);	
-		EndDo;
-		
-		If TabularSections.Find("TaxList") <> Undefined Then
-			TaxListRows = Object.TaxList.FindRows(New Structure("Key", TableRow.Key));
-			TaxInfo = New Structure();
-			For Each Column In TabularSections["TaxList"].Attributes Do
-				TaxInfo.Insert(Column.Name, ?(TaxListRows.Count(), TaxListRows[0][Column.Name], Undefined));	
-			EndDo;
-			Result.RowData.Insert("TaxInfo", TaxInfo);
-		EndIf;
-	Else
-		Result.RowData.Insert("Key", "");
-	EndIf;
-	
-	For Each Attr In Object.Ref.Metadata().Attributes Do
-		Result.ObjectData.Insert(Attr.Name, Object[Attr.Name]);
-	EndDo;
-	For Each Attr In Object.Ref.Metadata().StandardAttributes Do
-		Result.ObjectData.Insert(Attr.Name, Object[Attr.Name]);
-	EndDo;
-	Return Result;
-EndFunction
-
-Function GetAccountingAnalytics(Parameters, MetadataName) Export
-	Result = Documents[MetadataName].GetAccountingAnalytics(Parameters);
-	If Result = Undefined Then
-		Raise StrTemplate("Document [%1] not supported accounting operation [%2]", MetadataName, Parameters.Operation);
-	EndIf;
-	Return Result;
-EndFunction
-
 Procedure SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsValues = Undefined) Export
 	If ValueIsFilled(AccountingAnalytics.Debit) Then
 		For Each ExtDim In AccountingAnalytics.Debit.ExtDimensionTypes Do
@@ -121,7 +84,7 @@ Procedure SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnaly
 			ExtDimValue = ExtractValueByType(Parameters.ObjectData, Parameters.RowData, ArrayOfTypes, AdditionalAnalyticsValues);
 			ExtDimValue = Documents[Parameters.MetadataName].GetDebitExtDimension(Parameters, ExtDim.ExtDimensionType, ExtDimValue);
 			ExtDimension.ExtDimension = ExtDimValue;
-			ExtDimension.Insert("Key"          , Parameters.RowData.Key);
+			ExtDimension.Insert("Key"          , ?(Parameters.RowData = Undefined, "", Parameters.RowData.Key));
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Debit);
 			ExtDimension.Insert("Operation"    , Parameters.Operation);
 			ExtDimension.Insert("LedgerType"   , Parameters.LedgerType);
@@ -139,7 +102,7 @@ Procedure SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnal
 			ExtDimValue = ExtractValueByType(Parameters.ObjectData, Parameters.RowData, ArrayOfTypes, AdditionalAnalyticsValues);
 			ExtDimValue = Documents[Parameters.MetadataName].GetCreditExtDimension(Parameters, ExtDim.ExtDimensionType, ExtDimValue);
 			ExtDimension.ExtDimension = ExtDimValue;
-			ExtDimension.Insert("Key"          , Parameters.RowData.Key);
+			ExtDimension.Insert("Key"          , ?(Parameters.RowData = Undefined, "", Parameters.RowData.Key));
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Credit);
 			ExtDimension.Insert("Operation"    , Parameters.Operation);
 			ExtDimension.Insert("LedgerType"   , Parameters.LedgerType);
@@ -149,18 +112,6 @@ Procedure SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnal
 EndProcedure
 
 Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes, AdditionalAnalyticsValues)
-	For Each KeyValue In RowData Do
-		If ArrayOfTypes.Find(TypeOf(RowData[KeyValue.Key])) <> Undefined Then
-			Return RowData[KeyValue.Key];
-		EndIf;
-	EndDo;
-	
-	For Each KeyValue In ObjectData Do
-		If ArrayOfTypes.Find(TypeOf(ObjectData[KeyValue.Key])) <> Undefined Then
-			Return ObjectData[KeyValue.Key];
-		EndIf;
-	EndDo;
-	
 	If AdditionalAnalyticsValues <> Undefined Then
 		For Each KeyValue In AdditionalAnalyticsValues Do
 			If ArrayOfTypes.Find(TypeOf(AdditionalAnalyticsValues[KeyValue.Key])) <> Undefined Then
@@ -168,6 +119,21 @@ Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes, AdditionalAnalyti
 			EndIf;
 		EndDo;	
 	EndIf;
+
+	If RowData <> Undefined Then
+		For Each KeyValue In RowData Do
+			If ArrayOfTypes.Find(TypeOf(RowData[KeyValue.Key])) <> Undefined Then
+				Return RowData[KeyValue.Key];
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	For Each KeyValue In ObjectData Do
+		If ArrayOfTypes.Find(TypeOf(ObjectData[KeyValue.Key])) <> Undefined Then
+			Return ObjectData[KeyValue.Key];
+		EndIf;
+	EndDo;
+	
 	
 	Return Undefined;
 EndFunction
@@ -601,6 +567,231 @@ EndFunction
 
 #EndRegion
 
+Procedure UpdateAccountingTables(Object, MainTableName, Filter_LedgerType = Undefined, IgnoreFixed = False) Export
+	Period = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
+	LedgerTypes = GetLedgerTypesByCompany(Object.Ref, Period, Object.Company);
+	
+	OperationsByLedgerType = New Array();
+	For Each LedgerType In LedgerTypes Do
+		// filter by ledger type
+		If Filter_LedgerType <> Undefined And Filter_LedgerType <> LedgerType Then
+			Continue;
+		EndIf;
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object.Ref, Period, LedgerType);
+		For Each OperationInfo In OperationsInfo Do
+			OperationsByLedgerType.Add(New Structure("LedgerType, OperationInfo", LedgerType, OperationInfo));
+		EndDo;
+	EndDo;
+			
+	ClearAccountingTables(Object, Period, LedgerTypes, MainTableName);
+	
+	ObjectData = GetDocumentData(Object, Undefined, Undefined).ObjectData;
+	
+	For Each Operation In OperationsByLedgerType Do
+		If Operation.OperationInfo.ByRow Then
+			Continue;
+		EndIf;
+		Parameters = New Structure();
+		Parameters.Insert("Object"        , Object);
+		Parameters.Insert("Operation"     , Operation.OperationInfo.Operation);
+		Parameters.Insert("LedgerType"    , Operation.LedgerType);
+		Parameters.Insert("MetadataName"  , Operation.OperationInfo.MetadataName);
+		Parameters.Insert("MainTableName" , MainTableName);
+		Parameters.Insert("IgnoreFixed"   , IgnoreFixed);
+		Parameters.Insert("ObjectData"    , ObjectData);
+		Parameters.Insert("RowData"       , Undefined);
+		FillAccountingRowAnalytics(Parameters);
+	EndDo;
+	
+	For Each Row In Object[MainTableName] Do
+		RowData = GetDocumentData(Object, Row, MainTableName).RowData;
+		For Each Operation In OperationsByLedgerType Do
+			If Not Operation.OperationInfo.ByRow Then
+				Continue;
+			EndIf;
+			Parameters = New Structure();
+			Parameters.Insert("Object"        , Object);
+			Parameters.Insert("Operation"     , Operation.OperationInfo.Operation);
+			Parameters.Insert("LedgerType"    , Operation.LedgerType);
+			Parameters.Insert("MetadataName"  , Operation.OperationInfo.MetadataName);
+			Parameters.Insert("MainTableName" , MainTableName);
+			Parameters.Insert("IgnoreFixed"   , IgnoreFixed);
+			Parameters.Insert("ObjectData"    , ObjectData);
+			Parameters.Insert("RowData"       , RowData);
+			FillAccountingRowAnalytics(Parameters, Row);
+		EndDo;
+	EndDo;	
+EndProcedure
+
+Function GetDocumentData(Object, TableRow, MainTableName)
+	Result = New Structure("ObjectData, RowData", New Structure(), New Structure());
+	// data from row
+	If TableRow <> Undefined Then
+		TabularSections =  Object.Ref.Metadata().TabularSections;
+		For Each Column In TabularSections[MainTableName].Attributes Do
+			Result.RowData.Insert(Column.Name, TableRow[Column.Name]);	
+		EndDo;
+		
+		If TabularSections.Find("TaxList") <> Undefined Then
+			TaxListRows = Object.TaxList.FindRows(New Structure("Key", TableRow.Key));
+			TaxInfo = New Structure();
+			For Each Column In TabularSections["TaxList"].Attributes Do
+				TaxInfo.Insert(Column.Name, ?(TaxListRows.Count(), TaxListRows[0][Column.Name], Undefined));	
+			EndDo;
+			Result.RowData.Insert("TaxInfo", TaxInfo);
+		EndIf;
+	Else
+		Result.RowData.Insert("Key", "");
+	EndIf;
+	
+	// data from object
+	If Object <> Undefined Then
+		For Each Attr In Object.Ref.Metadata().Attributes Do
+			Result.ObjectData.Insert(Attr.Name, Object[Attr.Name]);
+		EndDo;
+		For Each Attr In Object.Ref.Metadata().StandardAttributes Do
+			Result.ObjectData.Insert(Attr.Name, Object[Attr.Name]);
+		EndDo;
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+Procedure FillAccountingRowAnalytics(Parameters, Row = Undefined)
+	AnalyticRow = Undefined;
+	RowKey = "";
+	Filter = New Structure();
+	If Row <> Undefined Then
+		RowKey = Row.Key;
+		Filter.Insert("Key" , RowKey);
+	EndIf;
+	Filter.Insert("Operation"  , Parameters.Operation);
+	Filter.Insert("LedgerType" , Parameters.LedgerType);
+	
+	AnalyticRows = Parameters.Object.AccountingRowAnalytics.FindRows(Filter);
+	
+	If AnalyticRows.Count() > 1 Then
+		Raise StrTemplate("More than 1 analytic rows by filter: Key[%1] Operation[%2] LedgerType[%3]", Filter.Key, Filter.Operation, Filter.LedgerType);
+	ElsIf AnalyticRows.Count() = 1 Then
+		AnalyticRow = AnalyticRows[0];
+		If AnalyticRow.IsFixed And Not Parameters.IgnoreFixed Then
+			Return;
+		EndIf;
+	Else
+		AnalyticRow = Parameters.Object.AccountingRowAnalytics.Add();
+		AnalyticRow.Key = RowKey;		
+	EndIf;
+	AnalyticRow.IsFixed = False;
+	
+	AnalyticParameters = New Structure();
+	AnalyticParameters.Insert("ObjectData"   , Parameters.ObjectData);
+	AnalyticParameters.Insert("RowData"      , Parameters.RowData);
+	AnalyticParameters.Insert("Operation"    , Parameters.Operation);
+	AnalyticParameters.Insert("LedgerType"   , Parameters.LedgerType);
+	AnalyticParameters.Insert("MetadataName" , Parameters.MetadataName);
+	
+	AnalyticData = Documents[Parameters.MetadataName].GetAccountingAnalytics(AnalyticParameters);
+	If AnalyticData = Undefined Then
+		Raise StrTemplate("Document [%1] not supported accounting operation [%2]", 
+			Parameters.MetadataName, Parameters.Operation);
+	EndIf;
+		
+	AnalyticRow.Operation = AnalyticData.Operation;
+	AnalyticRow.LedgerType = AnalyticData.LedgerType;
+	
+	AnalyticRow.AccountDebit = AnalyticData.Debit;
+	FillAccountingExtDimensions(AnalyticData.DebitExtDimensions, Parameters.Object.AccountingExtDimensions);
+	
+	AnalyticRow.AccountCredit = AnalyticData.Credit;
+	FillAccountingExtDimensions(AnalyticData.CreditExtDimensions, Parameters.Object.AccountingExtDimensions);
+EndProcedure
+
+Procedure FillAccountingExtDimensions(ArrayOfData, AccountingExtDimensions)
+	For Each ExtDim In ArrayOfData Do
+		Filter = New Structure();
+		If ValueIsFilled(ExtDim.Key) Then
+			Filter.Insert("Key" , ExtDim.Key);
+		EndIf;
+		Filter.Insert("AnalyticType" , ExtDim.AnalyticType);
+		Filter.Insert("Operation"    , ExtDim.Operation);
+		Filter.Insert("LedgerType"   , ExtDim.LedgerType);
+		AccountingExtDimensionRows = AccountingExtDimensions.FindRows(Filter);
+		For Each RowForDelete In AccountingExtDimensionRows Do
+			AccountingExtDimensions.Delete(RowForDelete);
+		EndDo;
+	EndDo;
+	
+	For Each ExtDim In ArrayOfData Do
+		NewRow = AccountingExtDimensions.Add();
+		NewRow.Key              = ExtDim.Key;
+		NewRow.AnalyticType     = ExtDim.AnalyticType;
+		NewRow.Operation        = ExtDim.Operation;
+		NewRow.LedgerType       = ExtDim.LedgerType;
+		NewRow.ExtDimensionType = ExtDim.ExtDimensionType;
+		NewRow.ExtDimension     = ExtDim.ExtDimension;
+	EndDo;
+EndProcedure
+
+Procedure ClearAccountingTables(Object, Period, LedgerTypes, MainTableName)
+	// AccountingRowAnalytics
+	ArrayForDelete = New Array();
+	For Each Row In Object.AccountingRowAnalytics Do
+		
+		If LedgerTypes.Find(Row.LedgerType) = Undefined Then
+			ArrayForDelete.Add(Row);
+			Continue;
+		EndIf;
+	
+		Operations = New Array();	
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object.Ref, Period, Row.LedgerType);
+		For Each OperationInfo In OperationsInfo Do
+			Operations.Add(OperationInfo.Operation);
+		EndDo;
+		If Operations.Find(Row.Operation) = Undefined Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+		
+		If Not ValueIsFilled(Row.Key) Then
+			Continue;
+		EndIf;
+		If Not Object[MainTableName].FindRows(New Structure("Key", Row.Key)).Count() Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Object.AccountingRowAnalytics.Delete(ItemForDelete);
+	EndDo;
+	
+	// AccountingExtDimensions
+	ArrayForDelete.Clear();
+	For Each Row In Object.AccountingExtDimensions Do
+		
+		If LedgerTypes.Find(Row.LedgerType) = Undefined Then
+			ArrayForDelete.Add(Row);
+			Continue;
+		EndIf;
+		
+		Operations = New Array();	
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object.Ref, Period, Row.LedgerType);
+		For Each OperationInfo In OperationsInfo Do
+			Operations.Add(OperationInfo.Operation);
+		EndDo;
+		If Operations.Find(Row.Operation) = Undefined Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+		
+		If Not ValueIsFilled(Row.Key) Then
+			Continue;
+		EndIf;
+		If Not Object[MainTableName].FindRows(New Structure("Key", Row.Key)).Count() Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Object.AccountingExtDimensions.Delete(ItemForDelete);
+	EndDo;
+EndProcedure
+
 Function GetOperationsDefinition()
 	Map = New Map();
 	AO = Catalogs.AccountingOperations;
@@ -684,7 +875,7 @@ Function GetAccountingData(Parameters)
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	Result = AccountingServer.GetAccountingDataResult();
+	Result = GetAccountingDataResult();
 	
 	// Currency amount
 	QuerySelection = QueryResults[0].Select();

@@ -8,7 +8,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
 	If WriteMode = DocumentWriteMode.Posting Then
-		AccountingClientServer.UpdateAccountingDataInDocument(ThisObject, "ItemList");
+		AccountingClientServer.UpdateAccountingTables(ThisObject, "ItemList");
 	EndIf;
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");

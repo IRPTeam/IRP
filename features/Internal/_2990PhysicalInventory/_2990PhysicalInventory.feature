@@ -731,21 +731,18 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "67789997777899" text in the field named "InputFld"
 			And I click the button named "OK"
-			And I activate "Serial lot number" field in "ItemList" table
-			And I click choice button of "Serial lot number" attribute in "ItemList" table
-			And I activate field named "Owner" in "List" table
+			And I click "Search by barcode (F7)" button
+			Then "Enter a barcode" window is opened
+			And I input "677899" text in the field named "InputFld"
+			And I click the button named "OK"
 			And I click "Create" button
-			And I input "677899" text in "Serial number" field
-			And I click "Save and close" button
-			And I wait "Item serial/lot number (create) *" window closing in 20 seconds
-			Then "Item serial/lot numbers" window is opened
-			And I go to line in "List" table
-				| 'Owner' | 'Serial number' |
-				| 'ODS'   | '677899'        |
-			And I select current line in "List" table
-			And I activate "Phys. count" field in "ItemList" table
-			And I input "4,000" text in "Phys. count" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'               | 'Item key' | 'Phys. count' |
+				| 'Product 1 with SLN' | 'ODS'      | '1,000'       |
+			And I select current line in "ItemList" table
+			And I input "4,000" text in "Phys. count" field of "ItemList" table
+			And I finish line editing in "ItemList" table		
 		* Add item from Pickup form
 			And in the table "ItemList" I click "Pickup" button
 			And I go to line in "ItemList" table
@@ -826,9 +823,9 @@ Scenario: _2990016 filling Physical count by location (mobile form)
 	* Check item tab
 		And "ItemList" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
 			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
+			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
 		Then the number of "ItemList" table lines is "равно" 3
 	* Add product without Serial lot number (item type use Serial lot numbers)
 		And I click the button named "SearchByBarcode"
@@ -850,10 +847,10 @@ Scenario: _2990016 filling Physical count by location (mobile form)
 	* Check filling item tab
 		And "ItemList" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
-			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
 			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '1,000'       |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
+			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
 		And I click "Save" button		
 	* Change Phys. count (manual)
 		And I move to "Group settings" tab
@@ -867,10 +864,10 @@ Scenario: _2990016 filling Physical count by location (mobile form)
 		And I click the button named "OK"
 		And "ItemList" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
-			| 'Boots'              | '36/18SD'  | ''                  | '2,000'       |
-			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '2,000'       |
 			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
-			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '1,000'       |
+			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
 	* Close without save and check saving result
 		And I close "Location count * dated *" window
 	* Check Physical count by location
@@ -881,10 +878,10 @@ Scenario: _2990016 filling Physical count by location (mobile form)
 		And I select current line in "List" table
 		And "ItemList" table became equal
 			| '#' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Phys. count' |
-			| '1' | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'       |
-			| '2' | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '1,000'       |
-			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '2,000'       |
-			| '4' | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'       |
+			| '1' | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'       |
+			| '2' | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '2,000'       |
+			| '3' | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '1,000'       |
+			| '4' | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '1,000'       |
 		And I close all client application windows
 
 Scenario: _2990018 check the document Location count fixation for the user
@@ -921,10 +918,10 @@ Scenario: _2990019 rescan a previously created document Physical count by locati
 	And I click the button named "OK"
 	And "ItemList" table became equal
 		| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
-		| 'Boots'              | '36/18SD'  | ''                  | '2,000'       |
-		| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+		| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '2,000'       |	
 		| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '2,000'       |
-		| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | '1,000'       |	
+		| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
+		| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
 	Given Recent TestClient message contains "Current location #* was linked to you. Other users will not be able to scan it." string by template
 	And I close all client application windows
 	
@@ -979,8 +976,8 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
 			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
 			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-118,000'   | '2,000'       | ''                   | ''            |
-			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
-			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
+			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 	* Change status and fill Physical inventory from third Physical count by location	
 		And I move to "Physical count by location" tab
 		And I go to the last line in "PhysicalCountByLocationList" table
@@ -996,8 +993,8 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
 			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
 			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
-			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
+			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
 			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
 	* Update exp count
@@ -1008,8 +1005,8 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
 			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
 			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
-			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
+			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
 			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
 	* Mark for deletion Physical count by location and update physical count
@@ -1029,8 +1026,8 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
 			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
 			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-115,000'   | '5,000'       | ''                   | ''            |
-			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | ''           | ''            | ''                   | ''            |
-			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | ''           | ''            | ''                   | ''            |
+			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | ''           | ''            | ''                   | ''            |
+			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | ''           | ''            | ''                   | ''            |
 			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
 			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
 	* Unmark Physical count by location and update physical count
@@ -1052,8 +1049,8 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
 			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
 			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
-			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
+			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
 			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
 					
@@ -1121,8 +1118,8 @@ Scenario: _2990025 write off product and check update exp count
 			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
 			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
 			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
-			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
+			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
 			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
 		And in the table "ItemList" I click "Fill expected count" button
@@ -1132,8 +1129,8 @@ Scenario: _2990025 write off product and check update exp count
 			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-150,000'   | ''            | ''                   | ''            |
 			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-20,000'    | ''            | ''                   | ''            |
 			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
-			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
+			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
 			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
 		And I click "Post and close" button
@@ -1164,7 +1161,7 @@ Scenario: _2990027 filling in manual fixed count and check update phys count and
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Difference' | 'Item'  | 'Item key' | 'Phys. count' | 'Unit' |
-			| '5' | '3,000'      | 'Boots' | '36/18SD'  | '3,000'       | 'pcs'  |
+			| '6' | '2,000'      | 'Boots' | '36/18SD'  | '2,000'       | 'pcs'  |
 	* Check tab
 		And "ItemList" table became equal
 			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
@@ -1172,8 +1169,8 @@ Scenario: _2990027 filling in manual fixed count and check update phys count and
 			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-10,000'    | ''            | '140,000'            | ''            |
 			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-2,000'     | ''            | '18,000'             | ''            |
 			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
-			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
+			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
 			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
 	* Update exp count
@@ -1184,8 +1181,8 @@ Scenario: _2990027 filling in manual fixed count and check update phys count and
 			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-10,000'    | ''            | '140,000'            | ''            |
 			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-2,000'     | ''            | '18,000'             | ''            |
 			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
-			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
+			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
 			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |
 	* Update phys count
@@ -1196,8 +1193,8 @@ Scenario: _2990027 filling in manual fixed count and check update phys count and
 			| '2' | '150,000'    | 'Boots'              | '37/18SD'  | ''                  | 'pcs'  | '-10,000'    | ''            | '140,000'            | ''            |
 			| '3' | '20,000'     | 'High shoes'         | '37/19SD'  | ''                  | 'pcs'  | '-2,000'     | ''            | '18,000'             | ''            |
 			| '4' | '120,000'    | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '-113,000'   | '7,000'       | ''                   | ''            |
-			| '5' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |
-			| '6' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
+			| '5' | ''           | 'Product 2 with SLN' | 'UNIQ'     | '45678899'          | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
+			| '6' | ''           | 'Boots'              | '36/18SD'  | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 			| '7' | ''           | 'Product 1 with SLN' | 'ODS'      | '677899'            | 'pcs'  | '4,000'      | '4,000'       | ''                   | ''            |
 			| '8' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '110,000'    | '110,000'     | ''                   | ''            |	
 		And I click "Post and close" button
@@ -1236,8 +1233,8 @@ Scenario: _2990030 check filling in Stock adjustment as surplus based on Physica
 		And "ItemList" table became equal
 			| '#' | 'Revenue type' | 'Amount' | 'Item'               | 'Basis document'         | 'Item key' | 'Profit loss center' | 'Physical inventory'     | 'Serial lot numbers' | 'Unit' | 'Quantity' |
 			| '1' | ''             | ''       | 'Dress'              | '$$PhysicalInventory3$$' | 'XS/Blue'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '103,000'  |
-			| '2' | ''             | ''       | 'Boots'              | '$$PhysicalInventory3$$' | '36/18SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '3,000'    |
-			| '3' | ''             | ''       | 'Product 2 with SLN' | '$$PhysicalInventory3$$' | 'UNIQ'     | ''                   | '$$PhysicalInventory3$$' | '45678899'           | 'pcs'  | '1,000'    |
+			| '2' | ''             | ''       | 'Product 2 with SLN' | '$$PhysicalInventory3$$' | 'UNIQ'     | ''                   | '$$PhysicalInventory3$$' | '45678899'           | 'pcs'  | '2,000'    |
+			| '3' | ''             | ''       | 'Boots'              | '$$PhysicalInventory3$$' | '36/18SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '2,000'    |
 			| '4' | ''             | ''       | 'Product 1 with SLN' | '$$PhysicalInventory3$$' | 'ODS'      | ''                   | '$$PhysicalInventory3$$' | '677899'             | 'pcs'  | '4,000'    |
 			| '5' | ''             | ''       | 'Dress'              | '$$PhysicalInventory3$$' | 'S/Yellow' | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '110,000'  |
 	And I close all client application windows

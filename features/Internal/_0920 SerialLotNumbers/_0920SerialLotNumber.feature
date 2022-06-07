@@ -1529,12 +1529,12 @@ Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from
 		And I click "OK" button
 	* Check filling in serial lot number from Purchase invoice
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
-			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '400,00' | '18%' | ''              | '1 016,95'   | 'Purchase invoice 29 dated 25.01.2021 12:37:04' | ''                      | '1 200,00'     | 'Store 01' |
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000'    | 'pcs'  | 'No'                 | '183,05'     | '400,00' | '18%' | ''              | '1 016,95'   | 'Purchase invoice 29 dated 25.01.2021 12:37:04' | ''                      | '1 200,00'     | 'Store 01' |
 		And I click the button named "FormPost"
 		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
-			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000' | 'pcs'  | 'No'                 | '183,05'     | '400,00' | '18%' | ''              | '1 016,95'   | 'Purchase invoice 29 dated 25.01.2021 12:37:04' | ''                      | '1 200,00'     | 'Store 01' |
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '0512; 0514'         | '3,000'    | 'pcs'  | 'No'                 | '183,05'     | '400,00' | '18%' | ''              | '1 016,95'   | 'Purchase invoice 29 dated 25.01.2021 12:37:04' | ''                      | '1 200,00'     | 'Store 01' |
 		And I close all client application windows
 		
 					
@@ -3269,7 +3269,7 @@ Scenario: _092060 check serial lot number settings
 		And I set checkbox "Use serial lot number"	
 		And I select "By item key" exact value from "Stock balance detail" drop-down list
 		And in the table "RegExpSerialLotNumbersRules" I click the button named "RegExpSerialLotNumbersRulesAdd"
-		And I input "\d\d\d\w\/\d" text in "Reg exp" field of "RegExpSerialLotNumbersRules" table
+		And I input "^\d\d\d\w\/\d$" text in "Reg exp" field of "RegExpSerialLotNumbersRules" table
 		And I activate "Example" field in "RegExpSerialLotNumbersRules" table
 		And I input "999X/9" text in "Example" field of "RegExpSerialLotNumbersRules" table
 		And I finish line editing in "RegExpSerialLotNumbersRules" table
@@ -3308,7 +3308,7 @@ Scenario: _092060 check serial lot number settings
 			And I click "Save and close" button	
 		And I close all client application windows
 		
-Scenario: _092062 create new serial lot number from Serial lot number form selection
+Scenario: _092062 create new serial lot number from Serial lot number form selection (GR)
 	And I close all client application windows
 	* Open GR
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
@@ -3432,7 +3432,21 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		Then the form attribute named "StockBalanceDetail" became equal to "Yes"
 		Then the form attribute named "OwnerSelect" became equal to "Manual"
 		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"	
-		And I close all client application windows
+		And I close current window
+	* Input serial lot number and create new
+		And I finish line editing in "SerialLotNumbers" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I input "0999" text in the field named "SerialLotNumbersSerialLotNumber" of "SerialLotNumbers" table
+		And I click Create button of the field named "SerialLotNumbersSerialLotNumber"
+		Then the form attribute named "Owner" became equal to "ODS"
+		Then the form attribute named "Description" became equal to "0999"
+		Then the form attribute named "OwnerSelect" became equal to "ItemKey"
+		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"
+		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "No"
+		Then the form attribute named "StockBalanceDetail" became equal to "Yes"
+		Then the form attribute named "Inactive" became equal to "No"
+		And I click "Save and close" button
+		And I close all client application windows		
 	* Check serial lot number catalog
 		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
 		And I go to line in "List" table
@@ -3443,9 +3457,9 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		And I activate "Serial number" field in "List" table
 		Then the number of "List" table lines is "равно" "1"
 		And I close all client application windows
-				
+
 					
-Scenario: _092062 check unique serial lot number settings	
+Scenario: _092064 check unique serial lot number settings	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 	* Select item type and set checkbox "Use unique serial lot number"

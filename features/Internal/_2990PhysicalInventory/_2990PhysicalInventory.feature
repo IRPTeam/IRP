@@ -788,7 +788,82 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 		And I close all client application windows
 
-Scenario: _2990016 filling Physical count by location (mobile form)
+Scenario: _2990016 check Physical count by location (mobile form)
+	And I close all client application windows
+	And In the command interface I select "Mobile" "Mobile invent"
+	* Select Location count from choise form
+		And I click Select button of "DocumentRef" field
+		And I go to the first line in "List" table
+		And I select current line in "List" table
+		Given Recent TestClient message contains "Current location #* was linked to you. Other users will not be able to scan it." string by template	
+		Then "DocumentRef" form attribute became equal to "Location count 1*" template				
+		And I click Clear button of the field named "DocumentRef"
+		Then "DocumentRef" form attribute became equal to ""
+	* Select Location count by scan barcode (without scan emulator)
+		And I click the button named "InputBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "2" text in the field named "InputFld"
+		And I click the button named "OK"
+		Then "DocumentRef" form attribute became equal to "Location count 2*" template
+	* Scan barcode without serial lot number (with scan emulator)
+		And I move to "Group settings" tab
+		And I set checkbox "Scan emulator"
+		And I move to "Group main" tab		
+		And I input "67789997777805" text in the field named "BarcodeInput"
+		And I move to the next attribute
+		* Create unique serial from string
+			Then "Row form" window is opened
+			And I input "234567" text in the field named "SerialLotNumber"
+			And I click Create button of the field named "SerialLotNumber"
+			And I set checkbox "Unique"
+			Then the form attribute named "Owner" became equal to "ODS"
+			Then the form attribute named "Description" became equal to "234567"
+			Then the form attribute named "OwnerSelect" became equal to "ItemKey"
+			Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"
+			Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "Yes"
+			Then the form attribute named "StockBalanceDetail" became equal to "Yes"
+			Then the form attribute named "Inactive" became equal to "No"
+			And I click "Save and close" button
+			And I select "234567" exact value from the drop-down list named "SerialLotNumber"
+			And I move to the next attribute
+			And I click the button named "OK"
+	* Scan barcode with serial lot number
+		And I move to "Group settings" tab
+		And I set checkbox "Edit quantity"
+		And I move to "Group main" tab
+		And I input "23455677788976667" text in the field named "BarcodeInput"
+		And I move to the next attribute
+		And I input "3,000" text in the field named "Quantity"
+		And I click the button named "OK"
+	* Scan barcode with serial lot number (without scan emulator)
+		And I move to "Group settings" tab
+		And I remove checkbox "Scan emulator"
+		And I move to "Group main" tab
+		And I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "23455677788976667" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I input "1,000" text in the field named "Quantity"
+		And I click the button named "OK"
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' | 'Date' |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '1,000'       | '*'    |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '3,000'       | '*'    |
+			| 'Product 1 with SLN' | 'ODS'      | '234567'            | '1,000'       | '*'    |
+	* Delete string
+		And I move to "Group settings" tab
+		And I remove checkbox "Edit quantity"
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '3,000'       |	
+		And I delete a line in "ItemList" table
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' | 'Date' |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '1,000'       | '*'    |
+			| 'Product 1 with SLN' | 'ODS'      | '234567'            | '1,000'       | '*'    |
+		And I close all client application windows			
+
+Scenario: _2990016 filling Physical count by location (mobile form without scan emulator)
 	And I close all client application windows
 	And In the command interface I select "Mobile" "Mobile invent"
 	* Select Location count 
@@ -796,6 +871,7 @@ Scenario: _2990016 filling Physical count by location (mobile form)
 		And I go to the first line in "List" table
 		And I select current line in "List" table
 		Given Recent TestClient message contains "Current location #* was linked to you. Other users will not be able to scan it." string by template
+	* Select location number by scan
 	* Scan item without serial lot number
 		And I click "SearchByBarcode" button
 		And I input "4820024700016" text in "InputFld" field
@@ -938,7 +1014,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And "PhysicalCountByLocationList" table contains lines
 			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
 			| 'Location count 1*' | 'Prepared' | '4'          | '6,000'       |
-			| 'Location count 2*' | 'Prepared' | ''           | ''            |
+			| 'Location count 2*' | 'Prepared' | '*'          | '*'           |
 			| 'Location count 3*' | 'Prepared' | '5'          | '222,000'     |
 		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 		And "ItemList" table became equal
@@ -966,7 +1042,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And "PhysicalCountByLocationList" table contains lines
 			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
 			| 'Location count 1*' | 'Done'     | '4'          | '6,000'       |
-			| 'Location count 2*' | 'Prepared' | ''           | ''            |
+			| 'Location count 2*' | 'Prepared' | '*'          | '*'           |
 			| 'Location count 3*' | 'Prepared' | '5'          | '222,000'     |
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button

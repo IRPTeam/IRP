@@ -749,16 +749,30 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		Then I wait that in user messages the "Field [Item serial/lot numbers] is empty." substring will appear in "30" seconds
 	* Copy line with serial lot number (serial lot number not copied)
 		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Quantity'     | 'Serial lot numbers'             |
-			| 'Trousers' | '38/Yellow' | '3,000' | '99098809009910; 99098809009911' |
+			| 'Item'     | 'Item key'  | 'Quantity' | 'Serial lot numbers'             |
+			| 'Trousers' | '38/Yellow' | '3,000'    | '99098809009910; 99098809009911' |
 		And I activate "Item key" field in "ItemList" table
 		And in the table "ItemList" I click "Copy" button
 		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Serial lot numbers'             | 'Quantity'     |
-		| 'Trousers' | '38/Yellow' | '99098809009910; 99098809009911' | '3,000' |
-		| 'Boots'    | '38/18SD'   | ''                               | '1,000' |
-		| 'Dress'    | 'M/White'   | ''                               | '1,000' |
-		| 'Trousers' | '38/Yellow' | ''                               | '3,000' |	
+			| 'Item'     | 'Item key'  | 'Serial lot numbers'             | 'Quantity' |
+			| 'Trousers' | '38/Yellow' | '99098809009910; 99098809009911' | '3,000'    |
+			| 'Boots'    | '38/18SD'   | ''                               | '1,000'    |
+			| 'Dress'    | 'M/White'   | ''                               | '1,000'    |
+			| 'Trousers' | '38/Yellow' | ''                               | '3,000'    |
+	* Clean serial lot number
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Serial lot numbers'             |
+			| 'Trousers' | '38/Yellow' | '99098809009910; 99098809009911' |
+		And I activate "Serial lot numbers" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click Clear button of "Serial lot numbers" attribute in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' |
+			| 'Trousers' | '38/Yellow' | ''                   | '3,000'    |
+			| 'Boots'    | '38/18SD'   | ''                   | '1,000'    |
+			| 'Dress'    | 'M/White'   | ''                   | '1,000'    |
+			| 'Trousers' | '38/Yellow' | ''                   | '3,000'    |
 	And I close all client application windows
 
 Scenario: _092005 check serial lot number in the Sales return
@@ -3576,24 +3590,163 @@ Scenario: _092064 check unique serial lot number settings
 			And I click "Ok" button
 			And I click "Post" button
 			Then I wait that in user messages the "Serial lot number [ 00989789 ] has to be unique at the document" substring will appear in "30" seconds
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Quantity' | 'Serial lot numbers' |
+				| 'Trousers' | '38/Yellow' | '1,000'    | '00989789'           |
+			And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+			And I finish line editing in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click "Add" button
+			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Code' | 'Reference' | 'Serial number' |
+				| '11'   | '0512'      | '0512'          |
+			And I activate "Serial number" field in "List" table
+			And I go to line in "List" table
+				| 'Owner'     | 'Serial number' |
+				| '38/Yellow' | '00989789'      |
+			And I select current line in "List" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+		* Create one more unique serial lot number			
 			And I go to line in "ItemList" table
 				| '#' | 'Item'     | 'Item key'  | 'Serial lot numbers' |
 				| '2' | 'Trousers' | '38/Yellow' | '00989789'           |
-			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"		
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I select current line in "SerialLotNumbers" table
+			And I input "9890at" text in the field named "SerialLotNumbersSerialLotNumber" of "SerialLotNumbers" table
+			And I click Create button of the field named "SerialLotNumbersSerialLotNumber"
+			And I click "Save and close" button
+			And I activate field named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			And I close "Select serial lot numbers" window
+			And I finish line editing in "SerialLotNumbers" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I select current line in "SerialLotNumbers" table
+			And I select "9890at" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+		* Delete line with double unique serial lot number
+			And I go to line in "ItemList" table
+				| '#' | 'Item'     | 'Serial lot numbers' |
+				| '3' | 'Trousers' | '00989789'           |
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"				
 			And I move to "Payments" tab
 			And in the table "Payments" I click the button named "PaymentsAdd"
 			And I click choice button of "Payment type" attribute in "Payments" table
 			And I activate field named "Description" in "List" table
 			And I select current line in "List" table
 			And I activate field named "PaymentsAmount" in "Payments" table
-			And I input "400,00" text in the field named "PaymentsAmount" of "Payments" table
+			And I input "800,00" text in the field named "PaymentsAmount" of "Payments" table
 			And I finish line editing in "Payments" table
 			And I click "Post and close" button
 			And I wait "Retail sales receipt (create) *" window closing in 20 seconds
 			Then user message window does not contain messages
 			And I close all client application windows
 			
-							
+Scenario: _092080 create serial lot number from Create serial lot numbers data processor without scan emulator	
+	Given I open hyperlink "e1cib/app/DataProcessor.CreateSerialLotNumbers"	
+	* Scan barcode
+		And I input "2202283713" text in the field named "BarcodeInput"
+		And I move to the next attribute
+		Then the number of "SerialLotNumberList" table lines is "равно" 0
+		Then the form attribute named "Item" became equal to "Dress"
+		Then the form attribute named "ItemKey" became equal to "S/Yellow"
+		And the editing text of form attribute named "BarcodeInput" became equal to "2202283713"
+	* Create SLN
+		And I click the button named "FormSearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "56789" text in the field named "InputFld"
+		And I click the button named "OK"
+		And "SerialLotNumberList" table became equal
+			| 'Serial lot number' |
+			| '56789'             |
+		Then the form attribute named "Info" became equal to "New serial [ 56789 ] created for item key [ S/Yellow ]"
+	* Try to recreate SLN
+		And I click the button named "FormSearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "56789" text in the field named "InputFld"
+		And I click the button named "OK"
+		And "SerialLotNumberList" table became equal
+			| 'Serial lot number' |
+			| '56789'             |
+		Then the form attribute named "Info" became equal to "Barcode [56789] is exists for item: Dress [S/Yellow] 56789"
+	* Create one more SLN
+		And I click the button named "FormSearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "567890" text in the field named "InputFld"
+		And I click the button named "OK"
+		And "SerialLotNumberList" table became equal
+			| 'Serial lot number' |
+			| '567890'            |
+			| '56789'             |
+	* Change item
+		Then "Create serial lot numbers" window is opened
+		And I input "2202283705" text in the field named "BarcodeInput"
+		And I move to the next attribute
+		Then the number of "SerialLotNumberList" table lines is "равно" 0
+		Then the form attribute named "Item" became equal to "Dress"
+		Then the form attribute named "ItemKey" became equal to "XS/Blue"
+		And the editing text of form attribute named "BarcodeInput" became equal to "2202283705"
+	* Check SLN creation
+		And I close current window
+		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
+		And "List" table contains lines
+			| 'Serial number'     |
+			| '567890'            |
+			| '56789'             |
+		And I close all client application windows
+		
+Scenario: _092081 switch on scan emulator in the Create serial lot numbers data processor
+	And I close all client application windows
+	Given I open hyperlink "e1cib/app/DataProcessor.CreateSerialLotNumbers"	
+	* Switch on scan emulator 
+		And I move to "Settings" tab
+		And I set checkbox "Scan emulator"
+		And I move to "Main" tab
+	* Scan barcode
+		And I input "2202283705" text in the field named "BarcodeInput"
+		And I move to the next attribute
+		Then the number of "SerialLotNumberList" table lines is "равно" 0
+		Then the form attribute named "Item" became equal to "Dress"
+		Then the form attribute named "ItemKey" became equal to "XS/Blue"
+		And the editing text of form attribute named "BarcodeInput" became equal to "2202283705""
+		Then the form attribute named "ScanEmulator" became equal to "Yes"
+	* Scan another barcode 
+		And I input "2202283713" text in the field named "BarcodeInput"
+		And I move to the next attribute
+		Then the number of "SerialLotNumberList" table lines is "равно" 0
+		Then the form attribute named "Item" became equal to "Dress"
+		Then the form attribute named "ItemKey" became equal to "S/Yellow"
+		And the editing text of form attribute named "BarcodeInput" became equal to "2202283713""
+		Then the form attribute named "ScanEmulator" became equal to "Yes"
+	* Select another item and scan barcode
+		And I click Choice button of the field named "Item"
+		And I go to line in "List" table
+			| 'Description' | 'Reference' |
+			| 'Trousers'    | 'Trousers'  |
+		And I select current line in "List" table
+		And I click Choice button of the field named "ItemKey"
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And I input "2202283713" text in the field named "BarcodeInput"
+		And I move to the next attribute
+		Then the number of "SerialLotNumberList" table lines is "равно" 0
+		Then the form attribute named "Item" became equal to "Dress"
+		Then the form attribute named "ItemKey" became equal to "S/Yellow"
+		And the editing text of form attribute named "BarcodeInput" became equal to "2202283713""
+		Then the form attribute named "ScanEmulator" became equal to "Yes"		
+		And I close all client application windows
+
 
 Scenario: _092090 uncheck checkbox Use serial lot number in the Item type
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"

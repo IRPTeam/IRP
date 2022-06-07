@@ -3626,7 +3626,6 @@ Scenario: _092064 check unique serial lot number settings
 			And I click "Save and close" button
 			And I activate field named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 			And I close "Select serial lot numbers" window
-			And I finish line editing in "SerialLotNumbers" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I select current line in "SerialLotNumbers" table
 			And I select "9890at" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table

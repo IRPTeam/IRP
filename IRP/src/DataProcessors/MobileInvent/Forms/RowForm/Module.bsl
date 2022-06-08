@@ -39,6 +39,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+EndProcedure
+
+&AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	Settings = BarcodeClient.GetBarcodeSettings();
 	//@skip-warning

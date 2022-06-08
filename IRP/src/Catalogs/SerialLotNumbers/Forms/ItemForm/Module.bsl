@@ -78,9 +78,9 @@ Procedure OwnerSelectChange()
 	Items.Owner.Visible = OwnerSelect = "Manual";
 	If Not OwnerSelect = "Manual" Then
 		Object.SerialLotNumberOwner = ThisObject[OwnerSelect];
-		Object.StockBalanceDetail = SerialLotNumbersServer.GetStockBalanceDetailByOwner(Object.SerialLotNumberOwner);
-		Object.EachSerialLotNumberIsUnique = SerialLotNumbersServer.isEachSerialLotNumberIsUniqueByOwner(Object.SerialLotNumberOwner);
 	EndIf;
+	Object.StockBalanceDetail = SerialLotNumbersServer.GetStockBalanceDetailByOwner(Object.SerialLotNumberOwner);
+	Object.EachSerialLotNumberIsUnique = SerialLotNumbersServer.isEachSerialLotNumberIsUniqueByOwner(Object.SerialLotNumberOwner);
 EndProcedure
 
 &AtServer

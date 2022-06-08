@@ -187,7 +187,8 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		If Not ValueIsFilled(ScannedInfo.SerialLotNumber) Then
 			CalculateStatus(StrTemplate(R().InfoMessage_017, Result.Barcodes[0]));
 		ElsIf Not ScannedInfo.ItemKey.IsEmpty() And Not ScannedInfo.ItemKey = ItemKey Then
-			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.ItemKey));
+			StrTemp = "" + ScannedInfo.Item + " [ " + ScannedInfo.ItemKey + " ]";
+			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, StrTemp));
 		ElsIf Not ScannedInfo.Item.IsEmpty() And Not ScannedInfo.Item = Item Then
 			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.Item));
 		ElsIf Not ScannedInfo.ItemType.IsEmpty() And Not ScannedInfo.ItemType = ItemType Then

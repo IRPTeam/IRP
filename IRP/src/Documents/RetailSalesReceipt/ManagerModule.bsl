@@ -150,6 +150,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(T1050T_AccountingQuantities());
 	Return QueryArray;
 EndFunction
 
@@ -631,5 +632,126 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Period,
 	|	VALUE(Enum.BatchDirection.Expense)";
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+//Function T1040T_AccountingAmounts()
+//	Return
+//	"SELECT
+//	|	ItemList.Period,
+//	|	ItemList.Key AS RowKey,
+//	|	ItemList.Currency,
+//	|	ItemList.NetAmount AS Amount,
+//	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B) AS Operation,
+//	|	UNDEFINED AS AdvancesClosing
+//	|INTO T1040T_AccountingAmounts
+//	|FROM
+//	|	ItemList AS ItemList
+//	|
+//	|UNION ALL
+//	|
+//	|select
+//	|	ItemList.Period,
+//	|	ItemList.Key AS RowKey,
+//	|	ItemList.Currency,
+//	|	ItemList.TaxAmount,
+//	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
+//	|	undefined
+//	|from
+//	|	ItemList as ItemList
+//	|
+//	|union all
+//	|
+//	|SELECT
+//	|	T2010S_OffsetOfAdvances.Period,
+//	|	T2010S_OffsetOfAdvances.Key AS RowKey,
+//	|	T2010S_OffsetOfAdvances.Currency,
+//	|	T2010S_OffsetOfAdvances.Amount,
+//	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
+//	|	T2010S_OffsetOfAdvances.Recorder
+//	|FROM
+//	|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
+//	|WHERE
+//	|	T2010S_OffsetOfAdvances.Document = &Ref";
+//EndFunction
+
+Function T1050T_AccountingQuantities()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	ItemList.Key AS RowKey,
+	|	VALUE(Catalog.AccountingOperations.RetailSalesReceipt_DR_R5022T_CR_R4050B) AS Operation,
+	|	ItemList.Quantity
+	|INTO T1050T_AccountingQuantities
+	|FROM
+	|	ItemList AS ItemList";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	Operations = Catalogs.AccountingOperations;
+	If Parameters.Operation = Operations.RetailSalesReceipt_DR_R5022T_CR_R4050B Then
+		Return GetAnalytics_DR_R5022T_CR_R4050B(Parameters); // Expenses (landed cost) - Stock inventory
+//	ElsIf Parameters.Operation = Operations.RetailSalesReceipt_DR_R3010B_CR_R5021T Then
+		 // Cash on hand - Revenues
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Expenses (landed cost) - Stock inventory 
+Function GetAnalytics_DR_R5022T_CR_R4050B(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.ObjectData.Company.LandedCostExpenseType);
+	If ValueIsFilled(Debit.Account) Then
+		AccountingAnalytics.Debit = Debit.Account;
+	EndIf;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
+	If ValueIsFilled(Credit.Account) Then
+		AccountingAnalytics.Credit = Credit.Account;
+	EndIf;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Cash on hand - Revenues
+//Function GetAnalytics_DR_R3010B_CR_R5021T(Parameters)
+	
+//EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_CR_R4050B Then
+		
+	  	If ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
+	  		Return Parameters.ObjectData.Company.LandedCostExpenseType;
+	  	EndIf;
+	  	
+	  	If ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Items")) <> Undefined Then
+	  		Return Parameters.RowData.ItemKey.Item;
+	  	EndIf;
+	  	
+	  	Return Value;
+	EndIf;
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_CR_R4050B
+	  	And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Items")) <> Undefined Then
+	  		Return Parameters.RowData.ItemKey.Item;
+	EndIf;
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

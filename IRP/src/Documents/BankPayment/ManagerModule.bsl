@@ -764,12 +764,12 @@ Function GetAnalytics_DR_R1020B_R1021B_CR_3010B(Parameters)
 	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Parameters.RowData.Agreement);
 	IsAdvance = AccountingServer.IsAdvance(Parameters.RowData);
 	If IsAdvance Then
-		If ValueIsFilled(Debit.AccountAdvances) Then
-			AccountingAnalytics.Debit = Debit.AccountAdvances;
+		If ValueIsFilled(Debit.AccountAdvancesVendor) Then
+			AccountingAnalytics.Debit = Debit.AccountAdvancesVendor;
 		EndIf;
 	Else
-		If ValueIsFilled(Debit.AccountTransactions) Then
-			AccountingAnalytics.Debit = Debit.AccountTransactions;
+		If ValueIsFilled(Debit.AccountTransactionsVendor) Then
+			AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
 		EndIf;
 	EndIf;
 	// Debit - Analytics
@@ -790,14 +790,14 @@ Function GetAnalytics_DR_R1021B_CR_R1020B(Parameters)
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 	
 	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.RowData.Partner, Parameters.RowData.Agreement);
-	If ValueIsFilled(Accounts.AccountTransactions) Then
-		AccountingAnalytics.Debit = Accounts.AccountTransactions;
+	If ValueIsFilled(Accounts.AccountTransactionsVendor) Then
+		AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
 	EndIf;
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
-	If ValueIsFilled(Accounts.AccountAdvances) Then
-		AccountingAnalytics.Credit = Accounts.AccountAdvances;
+	If ValueIsFilled(Accounts.AccountAdvancesVendor) Then
+		AccountingAnalytics.Credit = Accounts.AccountAdvancesVendor;
 	EndIf;
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
@@ -826,7 +826,7 @@ Function GetAnalytics_DRr5022T_CR_3010B(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	If Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_CR_R3010B
 	  	And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 	  		Return Parameters.RowData.ExpenseType;
@@ -838,7 +838,7 @@ Function GetDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	Return Value;
 EndFunction
 
-Function GetCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
 	If (Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1020B_R1021B_CR_R3010B
 	  	Or Parameters.Operation = Catalogs.AccountingOperations.BankPayment_DR_R5022T_CR_R3010B)
 	  	And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then

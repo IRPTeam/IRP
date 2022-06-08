@@ -16,7 +16,7 @@ Function GetAccountingAnalyticsResult(Parameters) Export
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetAccountingDataResult() Export
+Function GetAccountingDataResult()
 	Result = New Structure();
 	Result.Insert("CurrencyDr", Undefined);
 	Result.Insert("CurrencyAmountDr", 0);
@@ -30,39 +30,39 @@ Function GetAccountingDataResult() Export
 	Return Result;
 EndFunction
 
-Function FillAccountingDataResult(Data)
-	Result = GetAccountingDataResult();
-	If Data <> Undefined Then
-		If Data.Property("CurrencyDr") Then
-			Result.CurrencyDr = Data.CurrencyDr;
-		EndIf;
-		
-		If Data.Property("CurrencyAmountDr") Then
-			Result.CurrencyAmountDr = Data.CurrencyAmountDr;
-		EndIf;
-		
-		If Data.Property("CurrencyCr") Then
-			Result.CurrencyCr = Data.CurrencyCr;
-		EndIf;
-		
-		If Data.Property("CurrencyAmountCr") Then
-			Result.CurrencyAmountCr = Data.CurrencyAmountCr;
-		EndIf;
-		
-		If Data.Property("QuantityDr") Then
-			Result.QuantityDr = Data.QuantityDr;
-		EndIf;
-		
-		If Data.Property("QuantityCr") Then
-			Result.QuantityCr = Data.QuantityCr;
-		EndIf;
-		
-		If Data.Property("Amount") Then
-			Result.Amount = Data.Amount;
-		EndIf;
-	EndIf;
-	Return Result;
-EndFunction
+//Function FillAccountingDataResult(Data)
+//	Result = GetAccountingDataResult();
+//	If Data <> Undefined Then
+//		If Data.Property("CurrencyDr") Then
+//			Result.CurrencyDr = Data.CurrencyDr;
+//		EndIf;
+//		
+//		If Data.Property("CurrencyAmountDr") Then
+//			Result.CurrencyAmountDr = Data.CurrencyAmountDr;
+//		EndIf;
+//		
+//		If Data.Property("CurrencyCr") Then
+//			Result.CurrencyCr = Data.CurrencyCr;
+//		EndIf;
+//		
+//		If Data.Property("CurrencyAmountCr") Then
+//			Result.CurrencyAmountCr = Data.CurrencyAmountCr;
+//		EndIf;
+//		
+//		If Data.Property("QuantityDr") Then
+//			Result.QuantityDr = Data.QuantityDr;
+//		EndIf;
+//		
+//		If Data.Property("QuantityCr") Then
+//			Result.QuantityCr = Data.QuantityCr;
+//		EndIf;
+//		
+//		If Data.Property("Amount") Then
+//			Result.Amount = Data.Amount;
+//		EndIf;
+//	EndIf;
+//	Return Result;
+//EndFunction
 
 Function IsAdvance(RowData) Export
 	If Not ValueIsFilled(RowData.Agreement) Then
@@ -82,7 +82,7 @@ Procedure SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnaly
 			ExtDimension.ExtDimensionType  = ExtDim.ExtDimensionType;
 			ArrayOfTypes = ExtDim.ExtDimensionType.ValueType.Types();
 			ExtDimValue = ExtractValueByType(Parameters.ObjectData, Parameters.RowData, ArrayOfTypes, AdditionalAnalyticsValues);
-			ExtDimValue = Documents[Parameters.MetadataName].GetDebitExtDimension(Parameters, ExtDim.ExtDimensionType, ExtDimValue);
+			ExtDimValue = Documents[Parameters.MetadataName].GetHintDebitExtDimension(Parameters, ExtDim.ExtDimensionType, ExtDimValue);
 			ExtDimension.ExtDimension = ExtDimValue;
 			ExtDimension.Insert("Key"          , ?(Parameters.RowData = Undefined, "", Parameters.RowData.Key));
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Debit);
@@ -100,7 +100,7 @@ Procedure SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnal
 			ExtDimension.ExtDimensionType  = ExtDim.ExtDimensionType;
 			ArrayOfTypes = ExtDim.ExtDimensionType.ValueType.Types();
 			ExtDimValue = ExtractValueByType(Parameters.ObjectData, Parameters.RowData, ArrayOfTypes, AdditionalAnalyticsValues);
-			ExtDimValue = Documents[Parameters.MetadataName].GetCreditExtDimension(Parameters, ExtDim.ExtDimensionType, ExtDimValue);
+			ExtDimValue = Documents[Parameters.MetadataName].GetHintCreditExtDimension(Parameters, ExtDim.ExtDimensionType, ExtDimValue);
 			ExtDimension.ExtDimension = ExtDimValue;
 			ExtDimension.Insert("Key"          , ?(Parameters.RowData = Undefined, "", Parameters.RowData.Key));
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Credit);
@@ -138,17 +138,51 @@ Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes, AdditionalAnalyti
 	Return Undefined;
 EndFunction
 
-Function GetDataByAccountingAnalytics(BasisRef, RowData) Export
-	If Not ValueIsFilled(RowData.AccountDebit) Or Not ValueIsFilled(RowData.AccountCredit) Then
+Function GetDataByAccountingAnalytics(BasisRef, AnalyticRow) Export
+	If Not ValueIsFilled(AnalyticRow.AccountDebit) Or Not ValueIsFilled(AnalyticRow.AccountCredit) Then
 		Return GetAccountingDataResult();
 	EndIf;
 	Parameters = New Structure();
 	Parameters.Insert("Recorder" , BasisRef);
-	Parameters.Insert("RowKey"   , RowData.Key);
-	Parameters.Insert("Operation", RowData.Operation);
-	Parameters.Insert("CurrencyMovementType", RowData.LedgerType.CurrencyMovementType);
+	Parameters.Insert("RowKey"   , AnalyticRow.Key);
+	Parameters.Insert("Operation", AnalyticRow.Operation);
+	Parameters.Insert("CurrencyMovementType", AnalyticRow.LedgerType.CurrencyMovementType);
 	Data = GetAccountingData(Parameters);
-	Return FillAccountingDataResult(Data);
+	
+	Result = GetAccountingDataResult();
+	
+	If Data = Undefined Then
+		Return Result;
+	EndIf;
+	
+	If Data.Property("CurrencyDr") Then
+		Result.CurrencyDr = Data.CurrencyDr;
+	EndIf;
+
+	If Data.Property("CurrencyAmountDr") Then
+		Result.CurrencyAmountDr = Data.CurrencyAmountDr;
+	EndIf;
+
+	If Data.Property("CurrencyCr") Then
+		Result.CurrencyCr = Data.CurrencyCr;
+	EndIf;
+
+	If Data.Property("CurrencyAmountCr") Then
+		Result.CurrencyAmountCr = Data.CurrencyAmountCr;
+	EndIf;
+
+	If Data.Property("QuantityDr") Then
+		Result.QuantityDr = Data.QuantityDr;
+	EndIf;
+
+	If Data.Property("QuantityCr") Then
+		Result.QuantityCr = Data.QuantityCr;
+	EndIf;
+
+	If Data.Property("Amount") Then
+		Result.Amount = Data.Amount;
+	EndIf;
+	Return Result;	
 EndFunction
 
 Function GetLedgerTypesByCompany(Ref, Date, Company) Export
@@ -401,8 +435,10 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	ByAgreement.AccountAdvances,
-	|	ByAgreement.AccountTransactions,
+	|	ByAgreement.AccountAdvancesVendor,
+	|	ByAgreement.AccountTransactionsVendor,
+	|	ByAgreement.AccountAdvancesCustomer,
+	|	ByAgreement.AccountTransactionsCustomer,
 	|	1 AS Priority
 	|INTO Accounts
 	|FROM
@@ -413,8 +449,10 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByPartner.AccountAdvances,
-	|	ByPartner.AccountTransactions,
+	|	ByPartner.AccountAdvancesVendor,
+	|	ByPartner.AccountTransactionsVendor,
+	|	ByPartner.AccountAdvancesCustomer,
+	|	ByPartner.AccountTransactionsCustomer,
 	|	2
 	|FROM
 	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND Variant = &Variant
@@ -424,8 +462,10 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByCompany.AccountAdvances,
-	|	ByCompany.AccountTransactions,
+	|	ByCompany.AccountAdvancesVendor,
+	|	ByCompany.AccountTransactionsVendor,
+	|	ByCompany.AccountAdvancesCustomer,
+	|	ByCompany.AccountTransactionsCustomer,
 	|	3
 	|FROM
 	|	InformationRegister.T9012S_AccountsPartner.SliceLast(&Period, Company = &Company AND Variant = &Variant
@@ -435,8 +475,10 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	Accounts.AccountAdvances,
-	|	Accounts.AccountTransactions,
+	|	Accounts.AccountAdvancesVendor,
+	|	Accounts.AccountTransactionsVendor,
+	|	Accounts.AccountAdvancesCustomer,
+	|	Accounts.AccountTransactionsCustomer,
 	|	Accounts.Priority AS Priority
 	|FROM
 	|	Accounts AS Accounts
@@ -450,11 +492,13 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	Result = New Structure();
-	Result.Insert("AccountAdvances"     , Undefined);
-	Result.Insert("AccountTransactions" , Undefined);
+	Result.Insert("AccountAdvancesVendor"        , Undefined);
+	Result.Insert("AccountTransactionsVendor"    , Undefined);
+	Result.Insert("AccountAdvancesCustomer"      , Undefined);
+	Result.Insert("AccountTransactionsCustomers" , Undefined);
+
 	If QuerySelection.Next() Then
-		Result.AccountAdvances     = QuerySelection.AccountAdvances;
-		Result.AccountTransactions = QuerySelection.AccountTransactions;
+		FillPropertyValues(Result, QuerySelection);
 	EndIf;
 	Return Result;
 EndFunction
@@ -795,20 +839,214 @@ EndProcedure
 Function GetOperationsDefinition()
 	Map = New Map();
 	AO = Catalogs.AccountingOperations;
+	// Bank payment
 	Map.Insert(AO.BankPayment_DR_R1020B_R1021B_CR_R3010B , New Structure("ByRow", True));
 	Map.Insert(AO.BankPayment_DR_R1021B_CR_R1020B , New Structure("ByRow", True));
 	Map.Insert(AO.BankPayment_DR_R5022T_CR_R3010B , New Structure("ByRow", True));
 	
+	// Bank receipt
 	Map.Insert(AO.BankReceipt_DR_R3010B_CR_R2021B , New Structure("ByRow", True));
 	
+	// Purchase invoice
 	Map.Insert(AO.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B , New Structure("ByRow", True));
 	Map.Insert(AO.PurchaseInvoice_DR_R1021B_CR_R1020B , New Structure("ByRow", False));
 	Map.Insert(AO.PurchaseInvoice_DR_R1040B_CR_R1021B , New Structure("ByRow", True));
+	
+	// Retail sales receipt
+	Map.Insert(AO.RetailSalesReceipt_DR_R5022T_CR_R4050B , New Structure("ByRow", True));
 
 	Return Map;
 EndFunction
 
+// временная функция для проверки landed cost
+Function GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemList.Ref,
+	|	ItemList.Key,
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.QuantityInBaseUnit
+	|INTO ItemList
+	|FROM
+	|	Document.RetailSalesReceipt.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Recorder and ItemList.Key = &RowKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Key,
+	|	R6020B_BatchBalance.Company.LandedCostCurrencyMovementType.Currency AS Currency,
+	|	ItemList.QuantityInBaseUnit AS Quantity,
+	|	sum(isnull(R6020B_BatchBalance.Quantity, 0)) AS QuantityBatchBalance,
+	|	sum(isnull(R6020B_BatchBalance.Amount, 0)) + sum(isnull(R6020B_BatchBalance.AmountCost, 0)) AS AmountBatchBalance,
+	|	0 AS Amount
+	|FROM
+	|	ItemList AS ItemList
+	|		INNER JOIN AccumulationRegister.R6020B_BatchBalance AS R6020B_BatchBalance
+	|		ON R6020B_BatchBalance.Store = ItemList.Store
+	|		AND R6020B_BatchBalance.ItemKey = ItemList.ItemKey
+	|		AND R6020B_BatchBalance.Recorder = ItemList.Ref
+	|GROUP BY
+	|	ItemList.Key,
+	|	R6020B_BatchBalance.Company.LandedCostCurrencyMovementType.Currency,
+	|	ItemList.QuantityInBaseUnit";
+	
+	OperationsDefinition = GetOperationsDefinition();
+	Property = OperationsDefinition.Get(Parameters.Operation);
+	ByRow = ?(Property = Undefined, False, Property.ByRow);
+	
+	RowKey = "";
+	If ByRow Then
+		RowKey = Parameters.RowKey;
+	EndIf;
+	
+	Query.SetParameter("Recorder" , Parameters.Recorder);
+	Query.SetParameter("RowKey"   , RowKey);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	TotalAmount   = 0;
+	TotalQuantity = 0;
+	If QueryTable.Count() Then
+		TotalAmount   = QueryTable[0].AmountBatchBalance;
+		TotalQuantity = QueryTable[0].QuantityBatchBalance;
+	EndIf;
+	
+	For Each Row In QueryTable Do
+		If Row.Quantity = TotalQuantity Then
+			Row.Amount = TotalAmount;
+		Else
+			Row.Amount = ?(Row.QuantityBatchBalance = 0, 0, (TotalAmount / TotalQuantity) * Row.Quantity);
+			TotalQuantity = TotalQuantity - Row.Quantity;
+			TotalAmount   = TotalAmount - Row.Amount;
+		EndIf;
+	EndDo;
+	
+	RecordSet_AccountingAmounts = AccumulationRegisters.T1040T_AccountingAmounts.CreateRecordSet();
+	
+	TableAccountingAmounts = RecordSet_AccountingAmounts.UnloadColumns();
+	TableAccountingAmounts.Columns.Delete(TableAccountingAmounts.Columns.PointInTime);
+	CalculatedTableAccountingAmounts = TableAccountingAmounts.Copy();
+		
+	For Each Row In QueryTable Do		
+		// Accounting amounts
+		NewRow_AccountingAmounts = TableAccountingAmounts.Add();
+		FillPropertyValues(NewRow_AccountingAmounts, Row);
+		NewRow_AccountingAmounts.Period = Parameters.Recorder.Date;
+		NewRow_AccountingAmounts.RowKey = Row.Key;
+		NewRow_AccountingAmounts.Operation = Parameters.Operation;
+	EndDo;
+	
+	// Currency calculation
+	CurrenciesParameters = New Structure();
+	PostingDataTables = New Map();
+	PostingDataTables.Insert(RecordSet_AccountingAmounts, New Structure("RecordSet", TableAccountingAmounts));
+	ArrayOfPostingInfo = New Array();
+	For Each DataTable In PostingDataTables Do
+		ArrayOfPostingInfo.Add(DataTable);
+	EndDo;
+	CurrenciesParameters.Insert("Object", Parameters.Recorder);
+	CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
+	CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, Undefined);
+	
+	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
+		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.T1040T_AccountingAmounts") Then
+			For Each RowPostingInfo In ItemOfPostingInfo.Value.RecordSet Do
+				FillPropertyValues(CalculatedTableAccountingAmounts.Add(), RowPostingInfo);
+			EndDo;
+		EndIf;
+	EndDo;
+	
+	Query = New Query();
+	Query.Text = 
+	"select
+	|	table.Currency,
+	|	table.Amount,
+	|	table.Operation,
+	|	table.CurrencyMovementType,
+	|	table.RowKey
+	|into table
+	|from
+	|	&table as table
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Amounts.Currency,
+	|	SUM(Amounts.Amount) AS Amount
+	|FROM
+	|	table AS Amounts
+	|WHERE
+	|	Amounts.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND Amounts.RowKey = &RowKey
+	|GROUP BY
+	|	Amounts.Currency
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SUM(Amounts.Amount) AS Amount
+	|FROM
+	|	table AS Amounts
+	|WHERE
+	|	Amounts.CurrencyMovementType = &CurrencyMovementType
+	|	AND Amounts.RowKey = &RowKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SUM(Quantities.Quantity) AS Quantity
+	|FROM
+	|	AccumulationRegister.T1050T_AccountingQuantities AS Quantities
+	|WHERE
+	|	Quantities.Recorder = &Recorder
+	|	AND Quantities.RowKey = &RowKey";
+	
+	Query.SetParameter("table"                , CalculatedTableAccountingAmounts);
+	Query.SetParameter("Recorder"             , Parameters.Recorder);
+	Query.SetParameter("CurrencyMovementType" , Parameters.CurrencyMovementType);
+	Query.SetParameter("Operation"            , Parameters.Operation);
+	Query.SetParameter("RowKey"           	  , RowKey);
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	Result = GetAccountingDataResult();
+	
+	// Currency amount
+	QuerySelection = QueryResults[1].Select();
+	If QuerySelection.Next() Then
+		Result.CurrencyDr       = QuerySelection.Currency;
+		Result.CurrencyAmountDr = QuerySelection.Amount;
+		Result.CurrencyCr       = QuerySelection.Currency;
+		Result.CurrencyAmountCr = QuerySelection.Amount;
+	Endif;
+	
+	// Amount
+	QuerySelection = QueryResults[2].Select();
+	If QuerySelection.Next() Then
+		Result.Amount = QuerySelection.Amount;
+	Endif;
+	
+	// Quantity
+	QuerySelection = QueryResults[3].Select();
+	If QuerySelection.Next() Then
+		Result.QuantityCr = QuerySelection.Quantity;
+		Result.QuantityDr = QuerySelection.Quantity;
+	Endif;
+	
+	Return Result;	
+EndFunction
+
 Function GetAccountingData(Parameters)
+	// временно для проверки landed cost
+	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_CR_R4050B Then
+		Return GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters);
+	EndIf;
+	
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT

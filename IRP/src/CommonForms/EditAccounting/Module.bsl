@@ -23,7 +23,7 @@ Procedure OnOpen(Cancel)
 EndProcedure
 
 &AtClient
-Procedure SetByDefault(Command)
+Procedure Refresh(Command)
 	 
 	DefaultAnalytics = GetDefaultAccountingAnalytics(ThisObject.FormOwner.Object,
 									  				 ThisObject.MainTableName,

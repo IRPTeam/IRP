@@ -544,4 +544,19 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure EditAccounting(Command)
+	CurrentData = ThisObject.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	UpdateAccountingData();
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "ItemList");
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData()
+	AccountingClientServer.UpdateAccountingTables(Object, "ItemList");
+EndProcedure
+
 #EndRegion

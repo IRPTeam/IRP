@@ -20,10 +20,10 @@
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="b58f6c66-64fe-41d2-9489-7fe9174b2795">
-    <name>AccountAdvances</name>
+    <name>AccountAdvancesVendor</name>
     <synonym>
       <key>en</key>
-      <value>Account (advances)</value>
+      <value>Account Vendor (advances)</value>
     </synonym>
     <type>
       <types>ChartOfAccountsRef.Basic</types>
@@ -40,10 +40,50 @@
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="b8166b89-b113-4e0b-acf0-16ca3d5e746e">
-    <name>AccountTransactions</name>
+    <name>AccountTransactionsVendor</name>
     <synonym>
       <key>en</key>
-      <value>Account (transactions)</value>
+      <value>Account Vendor (transactions)</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.Basic</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.Variant</name>
+      <field>InformationRegister.T9012S_AccountsPartner.Dimension.Variant</field>
+    </choiceParameterLinks>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="fde676d3-c449-48be-9611-9dab970a1523">
+    <name>AccountAdvancesCustomer</name>
+    <synonym>
+      <key>en</key>
+      <value>Account Customer (advances)</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.Basic</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.Variant</name>
+      <field>InformationRegister.T9012S_AccountsPartner.Dimension.Variant</field>
+    </choiceParameterLinks>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="bdba5000-f6ce-4fd1-8db0-35bc4dda9c60">
+    <name>AccountTransactionsCustomer</name>
+    <synonym>
+      <key>en</key>
+      <value>Account Customer (transactions)</value>
     </synonym>
     <type>
       <types>ChartOfAccountsRef.Basic</types>

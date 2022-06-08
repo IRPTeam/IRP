@@ -413,11 +413,7 @@ Procedure OffsetAdvancesToTransactions(Parameters, Records_AdvancesKey, Records_
 
 	NeedWriteAdvances = False;
 	RepeatThisAdvance = False;
-	While QuerySelection.Next() Do
-//		If QuerySelection.AdvanceAmount < 0 Then
-//			Raise StrTemplate("Advance < 0 ADV_KEY[%1]", QuerySelection.AdvanceKey);
-//		EndIf;
-		
+	While QuerySelection.Next() Do		
 		DistributeAdvanceToTransaction(Parameters, PointInTime, Document, QuerySelection.AdvanceKey, QuerySelection.AdvanceAmount,
 			Records_TransactionsKey, Records_AdvancesKey, Records_OffsetOfAdvances, 
 			Records_OffsetAging, NeedWriteAdvances, RepeatThisAdvance);
@@ -1589,7 +1585,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			If UseKeyForCurrency Then
 				NewRow_Advances.Key = RowOffset.Key;
 			EndIf;
-			
+							
 			If RowOffset.IsAdvanceRelease = True Then
 				Continue;
 			EndIf;
@@ -1610,16 +1606,15 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			FillPropertyValues(NewRow_AccountingAmounts, RowOffset);
 			NewRow_AccountingAmounts.AdvancesClosing = Parameters.Object.Ref;
 			NewRow_AccountingAmounts.RowKey = RowOffset.Key;
-			
 			If TypeOf(Row.Document) = Type("DocumentRef.BankPayment") Then
 				NewRow_AccountingAmounts.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1021B_CR_R1020B;
 			ElsIf TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice") Then
 				NewRow_AccountingAmounts.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_CR_R1020B;
 			EndIf;
-
 			If UseKeyForCurrency Then
 				NewRow_AccountingAmounts.Key = RowOffset.Key;
 			EndIf;
+			
 		EndDo;
 	
 		// Currency calculation

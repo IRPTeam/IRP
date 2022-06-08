@@ -1179,20 +1179,20 @@ Function GetAnalytics_DR_R4050B_CR_R1021B(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
+	// Debit
 	Debit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
 	If ValueIsFilled(Debit.Account) Then
 		AccountingAnalytics.Debit = Debit.Account;
 	EndIf;
-	// Debit - Analytics
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Item", Parameters.RowData.ItemKey.Item);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
+	// Credit
 	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
-	If ValueIsFilled(Credit.AccountTransactions) Then
-		AccountingAnalytics.Credit = Credit.AccountTransactions;
+	If ValueIsFilled(Credit.AccountTransactionsVendor) Then
+		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
 	EndIf;
-	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
 	Return AccountingAnalytics;
@@ -1203,17 +1203,17 @@ Function GetAnalytics_DR_R1021B_CR_R1020B(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
+	// Debit
 	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
-	If ValueIsFilled(Accounts.AccountTransactions) Then
-		AccountingAnalytics.Debit = Accounts.AccountTransactions;
+	If ValueIsFilled(Accounts.AccountTransactionsVendor) Then
+		AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
 	EndIf;
-	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
-	If ValueIsFilled(Accounts.AccountAdvances) Then
-		AccountingAnalytics.Credit = Accounts.AccountAdvances;
+	// Credit
+	If ValueIsFilled(Accounts.AccountAdvancesVendor) Then
+		AccountingAnalytics.Credit = Accounts.AccountAdvancesVendor;
 	EndIf;
-	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 		
 	Return AccountingAnalytics;
@@ -1224,24 +1224,24 @@ Function GetAnalytics_DR_R1040B_CR_R1021B(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 		
+	// Debit
 	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo.Tax);
 	If ValueIsFilled(Debit.Account) Then
 		AccountingAnalytics.Debit = Debit.Account;
 	EndIf;
-	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	
+	// Credit
 	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
-	If ValueIsFilled(Credit.AccountTransactions) Then
-		AccountingAnalytics.Credit = Credit.AccountTransactions;
+	If ValueIsFilled(Credit.AccountTransactionsVendor) Then
+		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
 	EndIf;
-	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	If Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_CR_R1020B
 	  	And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
 	  		Return Parameters.ObjectData.LegalName;
@@ -1249,7 +1249,7 @@ Function GetDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	Return Value;
 EndFunction
 
-Function GetCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
 	If (Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_CR_R1020B
 	  	Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B
 	  	Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B)

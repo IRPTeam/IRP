@@ -77,6 +77,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <balance>true</balance>
+    <extDimensionAccountingFlag>ChartOfAccounts.Basic.ExtDimensionAccountingFlag.Amount</extDimensionAccountingFlag>
   </resources>
   <resources uuid="80879adc-1e5f-4637-982a-f2545c9ab7c5">
     <name>Quantity</name>
@@ -90,6 +91,8 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <accountingFlag>ChartOfAccounts.Basic.AccountingFlag.Quantity</accountingFlag>
+    <extDimensionAccountingFlag>ChartOfAccounts.Basic.ExtDimensionAccountingFlag.Quantity</extDimensionAccountingFlag>
   </resources>
   <resources uuid="96bd6da8-59c8-40e4-a8ef-0469a92072de">
     <name>CurrencyAmount</name>
@@ -103,6 +106,8 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <accountingFlag>ChartOfAccounts.Basic.AccountingFlag.Currency</accountingFlag>
+    <extDimensionAccountingFlag>ChartOfAccounts.Basic.ExtDimensionAccountingFlag.Currency</extDimensionAccountingFlag>
   </resources>
   <attributes uuid="5e3041b8-351b-428e-a794-d324e2603055">
     <name>Operation</name>

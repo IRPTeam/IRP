@@ -1043,16 +1043,16 @@
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:Button">
-      <name>AccountingAnalyticsSetByDefault</name>
-      <id>83</id>
+      <name>FormRefresh</name>
+      <id>123</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <extendedTooltip>
-        <name>AccountingAnalyticsSetByDefaultExtendedTooltip</name>
-        <id>84</id>
+        <name>FormRefreshExtendedTooltip</name>
+        <id>124</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -1065,7 +1065,7 @@
           <horizontalAlign>Left</horizontalAlign>
         </extInfo>
       </extendedTooltip>
-      <commandName>Form.Command.SetByDefault</commandName>
+      <commandName>Form.Command.Refresh</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -1655,20 +1655,24 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>SetByDefault</name>
+    <name>Refresh</name>
     <title>
       <key>en</key>
-      <value>Set by default</value>
+      <value>Refresh</value>
     </title>
     <id>3</id>
     <use>
       <common>true</common>
     </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.Refresh</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>SetByDefault</name>
+        <name>Refresh</name>
       </handler>
     </action>
+    <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

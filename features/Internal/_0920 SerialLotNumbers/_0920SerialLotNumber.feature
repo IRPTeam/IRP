@@ -3454,6 +3454,15 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		And I click Create button of the field named "SerialLotNumbersSerialLotNumber"
 		Then the form attribute named "Owner" became equal to "ODS"
 		Then the form attribute named "Description" became equal to "0999"
+		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"
+		And I click "Save and close" button
+		And I finish line editing in "SerialLotNumbers" table	
+	* Create serial lot number (button +)	
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I input "090989" text in "Serial lot number" field of "SerialLotNumbers" table
+		And I click Create button of "Serial lot number" field
+		Then the form attribute named "Owner" became equal to "ODS"
+		Then the form attribute named "Description" became equal to "090989"
 		Then the form attribute named "OwnerSelect" became equal to "ItemKey"
 		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"
 		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "No"

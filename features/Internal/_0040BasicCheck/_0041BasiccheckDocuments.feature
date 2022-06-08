@@ -11,9 +11,14 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 	When set True value to the constant
 
-
+Scenario: preparation
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "VAExtension" |
+			When add VAExtension
 	
-
 	
 Scenario: Open list form "BankPayment" 
 	And I close all client application windows
@@ -751,12 +756,277 @@ Scenario: Open list form "CustomersAdvancesClosing"
 	And I close all client application windows
 	Given I open "CustomersAdvancesClosing" document default form
 	If the warning is displayed then
-		Then I raise "Failed to open document form CustomersAdvancesClosing" exception
+		Then I raise "Failed to open document list form CustomersAdvancesClosing" exception
 	And I close current window
 
 Scenario: Open object form "CustomersAdvancesClosing"
 	And I close all client application windows
 	Given I open "CustomersAdvancesClosing" document main form
 	If the warning is displayed then
-		Then I raise "Failed to open document form CustomersAdvancesClosing" exception
+		Then I raise "Failed to open document object form RetailReturnReceipt" exception
+	And I close current window
+
+Scenario: Open choise form "CashStatement"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.CashStatement.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form CashStatement" exception
+	And I close current window
+
+Scenario: Open choise form "ReconsiliationStatement"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.ReconciliationStatement.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form ReconsiliationStatement" exception
+	And I close current window
+
+Scenario: Open choise form "GoodsReceipt"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.GoodsReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form GoodsReceipt" exception
+	And I close current window
+
+Scenario: Open choise form "RetailReturnReceipt"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.RetailReturnReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form RetailReturnReceipt" exception
+	And I close current window
+
+Scenario: Open choise form "CreditNote"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.CreditNote.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form CreditNote" exception
+	And I close current window
+
+Scenario: Open choise form "DeditNote"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.DebitNote.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form DeditNote" exception
+	And I close current window
+
+Scenario: Open choise form "BankReceipt"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.BankReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form BankReceipt" exception
+	And I close current window
+
+Scenario: Open choise form "PurchaseReturn"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.PurchaseReturn.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form PurchaseReturn" exception
+	And I close current window
+
+Scenario: Open choise form "ShipmentConfirmation"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.ShipmentConfirmation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form ShipmentConfirmation" exception
+	And I close current window
+
+Scenario: Open choise form "CashReceipt"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.CashReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form CashReceipt" exception
+	And I close current window
+
+Scenario: Open choise form "BankPayment"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.BankPayment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form BankPayment" exception
+	And I close current window
+
+Scenario: Open choise form "Labeling"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.Labeling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form Labeling" exception
+	And I close current window
+
+Scenario: Open choise form "StockAdjustmentAsWriteOff"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.StockAdjustmentAsWriteOff.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form StockAdjustmentAsWriteOff" exception
+	And I close current window
+
+Scenario: Open choise form "StockAdjustmentAsSurplus"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.StockAdjustmentAsSurplus.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form StockAdjustmentAsSurplus" exception
+	And I close current window
+
+Scenario: Open choise form "OpeningEntry"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.OpeningEntry.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form OpeningEntry" exception
+	And I close current window
+
+Scenario: Open choise form "CashExpense"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.CashExpense.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form CashExpense" exception
+	And I close current window
+
+Scenario: Open choise form "IncomingPaymentOrder"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.IncomingPaymentOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form IncomingPaymentOrder" exception
+	And I close current window
+
+Scenario: Open choise form "OutgoingPaymentOrder"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.OutgoingPaymentOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form OutgoingPaymentOrder" exception
+	And I close current window
+
+Scenario: Open choise form "Bundling"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.Bundling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form Bundling" exception
+	And I close current window
+
+Scenario: Open choise form "CashPayment"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.CashPayment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form CashPayment" exception
+	And I close current window
+
+Scenario: Open choise form "PhysicalInventory"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.PhysicalInventory.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form PhysicalInventory" exception
+	And I close current window
+
+Scenario: Open choise form "Unbundling"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.Unbundling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form Unbundling" exception
+	And I close current window
+
+Scenario: Open choise form "CashRevenue"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.CashRevenue.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form CashRevenue" exception
+	And I close current window
+
+Scenario: Open choise form "ItemStockAdjustment"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.ItemStockAdjustment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form ItemStockAdjustment" exception
+	And I close current window
+
+Scenario: Open choise form "ManualRegisterEntry"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.ItemStockAdjustment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form ManualRegisterEntry" exception
+	And I close current window
+
+Scenario: Open choise form "SalesOrderClosing"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.SalesOrderClosing.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form SalesOrderClosing" exception
+	And I close current window
+
+Scenario: Open choise form "PlannedReceiptReservation"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.PlannedReceiptReservation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form PlannedReceiptReservation" exception
+	And I close current window
+
+Scenario: Open choise form "PurchaseOrderClosing"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.PurchaseOrderClosing.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form PurchaseOrderClosing" exception
+	And I close current window
+
+
+Scenario: Open choise form "JournalEntry"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.JournalEntry.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form JournalEntry" exception
+	And I close current window
+
+Scenario: Open choise form "MoneyTransfer"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.MoneyTransfer.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form MoneyTransfer" exception
+	And I close current window
+
+Scenario: Open choise form "RetailSalesReceipt"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.RetailSalesReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form RetailSalesReceipt" exception
+	And I close current window
+
+Scenario: Open choise form "SalesInvoice"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.SalesInvoice.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form SalesInvoice" exception
+	And I close current window
+
+Scenario: Open choise form "PurchaseOrder"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.PurchaseOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form PurchaseOrder" exception
 	And I close current window

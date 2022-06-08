@@ -112,6 +112,8 @@ Scenario: _0050 preparation
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.ItemStockAdjustment.FindByNumber(161).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |

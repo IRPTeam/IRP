@@ -727,6 +727,23 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			And I click the button named "OK"
 			And I input "5,000" text in "Phys. count" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+			* Create new serial lot number
+				And I activate "Serial lot number" field in "ItemList" table
+				And I input "8908898754" text in "Serial lot number" field of "ItemList" table
+				And I click Create button of "Serial lot number" field
+				Then "Item serial/lot number (create)" window is opened
+				And I click "Save and close" button
+				And "ItemList" table contains lines
+					| 'Item'               | 'Item key' | 'Serial lot number' |
+					| 'Dress'              | 'XS/Blue'  | ''                  |
+					| 'Product 1 with SLN' | 'PZU'      | '8908898754'        |
+			* Change serial lot number
+				And I select current line in "ItemList" table
+				And I select "8908899877" from "Serial lot number" drop-down list by string in "ItemList" table		
+				And "ItemList" table contains lines
+					| 'Item'               | 'Item key' | 'Serial lot number' |
+					| 'Dress'              | 'XS/Blue'  | ''                  |
+					| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |					
 		* Scan item without serial lot number (need to select serial lot number)
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "67789997777899" text in the field named "InputFld"
@@ -1350,7 +1367,54 @@ Scenario: _2990050 check label print for Physical count by location
 	And I close all client application windows
 	
 		
+Scenario: _2990053 create serial lot number from Physical inventory form
+		And I close all client application windows
+	* Create PhysicalInventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click "Create" button
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 07'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I move to "Rules" tab
+		And I change checkbox "Use serial lot"
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I change checkbox "User can edit quantity"
+		And I move to "Items" tab
+		And in the table "ItemList" I click "Fill expected count" button
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Serial lot number' |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |
+		And I activate "Serial lot number" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "89090098" text in "Serial lot number" field of "ItemList" table
+		And I click Create button of "Serial lot number" field
+		Then the form attribute named "Owner" became equal to "PZU"
+		Then the form attribute named "Description" became equal to "89090098"
+		Then the form attribute named "OwnerSelect" became equal to "ItemKey"
+		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"
+		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "No"
+		Then the form attribute named "StockBalanceDetail" became equal to "Yes"
+		Then the form attribute named "Inactive" became equal to "No"
+		And I click "Save and close" button
+		And I wait "Item serial/lot number (create)" window closing in 20 seconds
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Serial lot number' |
+			| 'Product 1 with SLN' | 'PZU'      | '89090098'          |
+		And I close all client application windows
 		
+				
+				
+		
+				
+		
+				
+		
+						
+
 				
 		
 				

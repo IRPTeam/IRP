@@ -86,7 +86,7 @@ Procedure CreateFormElement(ButtonsArray)
 		EndDo;
 		
 		If Index > 1 Then
-			For Index = PayButtonsIntoGroup.Count() To MaxButtonPerPage - 1 Do
+			For Index = PayButtonsIntoGroup.Count() To MaxButtonPerPage Do
 				LableName = StrTemplate("PayButton_%1_%2", GroupIndex, Index);;
 				DrawLabel(LableName, NewPageItem);
 			EndDo;

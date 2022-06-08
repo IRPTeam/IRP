@@ -18,7 +18,7 @@
       <dataPath xsi:type="form:DataPath">
         <segments>ItemType</segments>
       </dataPath>
-      <titleLocation>None</titleLocation>
+      <titleLocation>Left</titleLocation>
       <extendedTooltip>
         <name>ItemTypeExtendedTooltip</name>
         <id>49</id>
@@ -51,12 +51,14 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
+        <borderColor xsi:type="core:ColorRef">
+          <color>Style.FormBackColor</color>
+        </borderColor>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -70,7 +72,7 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Item</segments>
       </dataPath>
-      <titleLocation>None</titleLocation>
+      <titleLocation>Left</titleLocation>
       <extendedTooltip>
         <name>ItemExtendedTooltip</name>
         <id>43</id>
@@ -103,12 +105,14 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
+        <borderColor xsi:type="core:ColorRef">
+          <color>Style.FormBackColor</color>
+        </borderColor>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -122,7 +126,7 @@
       <dataPath xsi:type="form:DataPath">
         <segments>ItemKey</segments>
       </dataPath>
-      <titleLocation>None</titleLocation>
+      <titleLocation>Left</titleLocation>
       <extendedTooltip>
         <name>ItemKeyExtendedTooltip</name>
         <id>46</id>
@@ -155,12 +159,14 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
+        <borderColor xsi:type="core:ColorRef">
+          <color>Style.FormBackColor</color>
+        </borderColor>
       </extInfo>
     </items>
     <visible>true</visible>
@@ -172,6 +178,7 @@
       <key>en</key>
       <value>Group top</value>
     </title>
+    <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>
       <name>GroupTopExtendedTooltip</name>
       <id>80</id>
@@ -189,7 +196,7 @@
     </extendedTooltip>
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>HorizontalIfPossible</group>
+      <group>Vertical</group>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -423,6 +430,7 @@
         </borderColor>
         <font xsi:type="core:FontRef">
           <font>Style.LargeTextFont</font>
+          <bold>false</bold>
         </font>
       </extInfo>
     </items>
@@ -528,6 +536,7 @@
         </borderColor>
         <font xsi:type="core:FontRef">
           <font>Style.LargeTextFont</font>
+          <bold>false</bold>
         </font>
       </extInfo>
     </items>
@@ -610,6 +619,72 @@
       <united>true</united>
       <throughAlign>Auto</throughAlign>
       <currentRowUse>Auto</currentRowUse>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+    <name>SerialLotNumberSingle</name>
+    <id>106</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>SerialLotNumberSingle</segments>
+    </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>SerialLotNumberSingleOnChange</name>
+    </handlers>
+    <extendedTooltip>
+      <name>SerialLotNumberSingleExtendedTooltip</name>
+      <id>108</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>SerialLotNumberSingleContextMenu</name>
+      <id>107</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+      <handlers>
+        <event>Creating</event>
+        <name>SerialLotNumbersSerialLotNumberCreating</name>
+      </handlers>
+      <handlers>
+        <event>StartChoice</event>
+        <name>SerialLotNumbersSerialLotNumberStartChoice</name>
+      </handlers>
+      <handlers>
+        <event>EditTextChange</event>
+        <name>SerialLotNumbersSerialLotNumberEditTextChange</name>
+      </handlers>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
     </extInfo>
   </items>
   <items xsi:type="form:Table">
@@ -1225,6 +1300,36 @@
       <placementArea>UserCmds</placementArea>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
+    <items xsi:type="form:Button">
+      <name>FormSearchByBarcode</name>
+      <id>109</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>FormSearchByBarcodeExtendedTooltip</name>
+        <id>110</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.SearchByBarcode</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -1496,6 +1601,40 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>SingleMode</name>
+    <title>
+      <key>en</key>
+      <value>Single mode</value>
+    </title>
+    <id>16</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>SerialLotNumberSingle</name>
+    <title>
+      <key>en</key>
+      <value>Serial lot number</value>
+    </title>
+    <id>17</id>
+    <valueType>
+      <types>CatalogRef.SerialLotNumbers</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>Ok</name>
     <title>
@@ -1574,6 +1713,13 @@ barcode (F7)</value>
     <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <parameters>
+    <name>Single</name>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <keyParameter>true</keyParameter>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

@@ -224,7 +224,6 @@ EndProcedure
 //  	* Item - CatalogRef.Items
 //  	* ItemKey - CatalogRef.ItemKeys
 //  	* ItemType - CatalogRef.ItemTypes
-&AtClient
 Procedure EditTextChange(Item, Text, StandardProcessing, Object, Params) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
@@ -237,4 +236,47 @@ Procedure EditTextChange(Item, Text, StandardProcessing, Object, Params) Export
 
 	DocumentsClient.SerialLotNumbersEditTextChange(Undefined, Object, Item, Text, StandardProcessing,
 		ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+Procedure StartChoiceSingle(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
+	StandardProcessing = False;
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	Notify = New NotifyDescription("OnFinishEditSerialLotNumbersSingle", ThisObject, New Structure("Object, Form, AddInfo",
+		Object, Form, AddInfo));
+	OpeningParameters = New Structure();
+	OpeningParameters.Insert("Item", CurrentData.Item);
+	OpeningParameters.Insert("ItemKey", CurrentData.ItemKey);
+	OpeningParameters.Insert("RowKey", CurrentData.Key);
+	OpeningParameters.Insert("SerialLotNumbers", New Array());
+	OpeningParameters.Insert("Quantity", CurrentData.PhysCount);
+	OpeningParameters.Insert("Single", True);
+	If Not CurrentData.SerialLotNumber.isEmpty() Then
+		OpeningParameters.SerialLotNumbers.Add(
+		New Structure("SerialLotNumber, Quantity", CurrentData.SerialLotNumber, CurrentData.PhysCount));
+	EndIf;
+
+	OpenForm("Catalog.SerialLotNumbers.Form.EditListOfSerialLotNumbers", OpeningParameters, ThisObject, , , , Notify,
+		FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+Procedure AddNewSerialLotNumbersSingle(Result, Parameters, AddNewLot = False, AddInfo = Undefined) Export
+	If TypeOf(Result) <> Type("Structure") Then
+		Return;
+	EndIf;
+	If Not AddNewLot Then
+		ArrayOfItemsRows = Parameters.Object.ItemList.FindRows(New Structure("Key", Result.RowKey));
+		For Each ItemRow In ArrayOfItemsRows Do
+			For Each Row In Result.SerialLotNumbers Do
+				ItemRow.SerialLotNumber = Row.SerialLotNumber;
+			EndDo;	
+		EndDo;
+	EndIf;
+EndProcedure
+
+Procedure OnFinishEditSerialLotNumbersSingle(Result, Parameters) Export
+	AddNewSerialLotNumbersSingle(Result, Parameters, False, Parameters.AddInfo);
 EndProcedure

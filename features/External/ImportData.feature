@@ -670,6 +670,9 @@ Scenario: Create information register Barcodes records (serial lot numbers)
 		| '7889000090009'     | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535a' | ''                                                                         | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''              |
 		| '7889000090010'     | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585360' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''              |
 		| '89900779008908'    | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535d' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585361' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''              |
+		| '67789997777801'    | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72070' | ''                                                                         | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '67789997777805'    | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72070' | ''                                                                         | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '67789997777806'    | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72070' | ''                                                                         | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 
 	
 Scenario: Create catalog Units objects

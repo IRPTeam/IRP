@@ -13,4 +13,5 @@
   <content>DataProcessor.MobileInvent</content>
   <content>DataProcessor.MobileDesktop</content>
   <content>InformationRegister.BarcodeScanInfoCheck</content>
+  <content>DataProcessor.CreateSerialLotNumbers</content>
 </mdclass:Subsystem>

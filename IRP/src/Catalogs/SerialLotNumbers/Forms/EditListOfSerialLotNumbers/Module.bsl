@@ -5,14 +5,45 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.ItemKey = Parameters.ItemKey;
 	ThisObject.ItemType = Parameters.Item.ItemType;
 	ThisObject.ItemQuantity = Parameters.Quantity;
+
+	FillSingleMode();
+
+	SerialLotNumberStatus = R().InfoMessage_018;
+	Items.DecorationLegendInfo.Title = R().InfoMessage_029;
+	SerialLotNumbersServer.SetUnique(ThisObject);
+	
+	
+EndProcedure
+
+&AtServer
+Procedure FillSingleMode() Export
+	ThisObject.SingleMode = Parameters.Single;
+	
+	Items.SerialLotNumbers.Visible = Not SingleMode;
+	Items.GroupLegend.Visible = Not SingleMode;
+	
+	Items.SerialLotNumberSingle.Visible = SingleMode;
+	Items.FormSearchByBarcode.Visible = SingleMode;
+	
 	For Each Row In Parameters.SerialLotNumbers Do
+		If SingleMode Then
+			ThisObject.SerialLotNumberSingle = Row.SerialLotNumber;
+		EndIf;
 		NewRow = ThisObject.SerialLotNumbers.Add();
 		NewRow.SerialLotNumber = Row.SerialLotNumber;
 		NewRow.Quantity = Row.Quantity;
 	EndDo;
-	SerialLotNumberStatus = R().InfoMessage_018;
-	Items.DecorationLegendInfo.Title = R().InfoMessage_029;
-	SerialLotNumbersServer.SetUnique(ThisObject);
+	
+	If SingleMode And ThisObject.SerialLotNumbers.Count() = 0 Then
+		NewRow = ThisObject.SerialLotNumbers.Add();
+		NewRow.Quantity = 1;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SerialLotNumberSingleOnChange(Item)
+	ThisObject.SerialLotNumbers[0].SerialLotNumber = ThisObject.SerialLotNumberSingle;
+	SerialLotNumberOnChangeAtServer();
 EndProcedure
 
 &AtClient
@@ -32,7 +63,7 @@ Procedure SerialLotNumbersSerialLotNumberCreating(Item, StandardProcessing)
 	StandardProcessing = False;
 	
 	FormParameters = New Structure();
-	FormParameters.Insert("ItemType", ThisObject.ItemType);
+	FormParameters.Insert("ItemType", Undefined);
 	FormParameters.Insert("Item", ThisObject.Item);
 	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
 	FormParameters.Insert("Description", Item.EditText);
@@ -74,9 +105,16 @@ EndProcedure
 
 &AtClient
 Procedure Ok(Command)
+	CloseThisForm();
+EndProcedure
+
+&AtClient
+Procedure CloseThisForm()
+
 	If Not CheckFilling() Then
 		Return;
 	EndIf;
+
 	Result = New Structure();
 	Result.Insert("RowKey", ThisObject.RowKey);
 	Result.Insert("Item", ThisObject.Item);
@@ -134,7 +172,9 @@ EndProcedure
 // Search by barcode end.
 // 
 // Parameters:
-//  Result - Structure - Result
+//  Result - Structure:
+//   * FoundedItems - See BarcodeServer.SearchByBarcodes
+//   * Barcodes - Array of String
 //  AdditionalParameters - Structure - Additional parameters
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
@@ -147,7 +187,8 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		If Not ValueIsFilled(ScannedInfo.SerialLotNumber) Then
 			CalculateStatus(StrTemplate(R().InfoMessage_017, Result.Barcodes[0]));
 		ElsIf Not ScannedInfo.ItemKey.IsEmpty() And Not ScannedInfo.ItemKey = ItemKey Then
-			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.ItemKey));
+			StrTemp = "" + ScannedInfo.Item + " [ " + ScannedInfo.ItemKey + " ]";
+			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, StrTemp));
 		ElsIf Not ScannedInfo.Item.IsEmpty() And Not ScannedInfo.Item = Item Then
 			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.Item));
 		ElsIf Not ScannedInfo.ItemType.IsEmpty() And Not ScannedInfo.ItemType = ItemType Then
@@ -169,10 +210,17 @@ EndProcedure
 
 &AtClient
 Procedure AddNewSerialLotNumberRow(SerialLotNumber)
-	Var Row;
-	Row = SerialLotNumbers.Add();
-	Row.SerialLotNumber = SerialLotNumber;
-	Row.Quantity = 1;
+	
+	If SingleMode Then
+		SerialLotNumbers[0].SerialLotNumber = SerialLotNumber;
+		ThisObject.SerialLotNumberSingle = SerialLotNumber;
+		CloseThisForm();
+	Else
+		Row = SerialLotNumbers.Add();
+		Row.SerialLotNumber = SerialLotNumber;
+		Row.Quantity = 1;
+	EndIf;
+	
 	UpdateFooter();
 EndProcedure
 
@@ -205,6 +253,11 @@ Procedure AfterCreateNewSerial(Result, AddInfo) Export
 	If ValueIsFilled(Result) Then
 		Row = SerialLotNumbers.FindByID(Items.SerialLotNumbers.CurrentRow);
 		Row.SerialLotNumber = Result;
+		
+		If SingleMode Then
+			ThisObject.SerialLotNumberSingle = Result;
+			CloseThisForm();
+		EndIf;
 	EndIf;
 	ThisObject.CurrentItem = Items.SerialLotNumbersQuantity;
 	

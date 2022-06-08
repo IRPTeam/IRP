@@ -50,6 +50,16 @@ Function DeserializeJSONUseXDTO(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+Function SerializeJSONUseXDTOFactory(Value, AddInfo = Undefined) Export
+	Writer = New JSONWriter();
+	Writer.SetString();
+	XDTOFactory.WriteJSON(Writer, Value);
+	ResultTmp = Writer.Close();
+	Object = DeserializeJSON(ResultTmp, True, AddInfo);
+	Result = SerializeJSON(Object.Get("#value"), AddInfo);
+	Return Result;
+EndFunction
+
 Function SerializeXMLUseXDTOFactory(Value, LocalName = Undefined, URI = Undefined, AddInfo = Undefined,
 	WSName = Undefined) Export
 	Writer = New XMLWriter();
@@ -71,10 +81,21 @@ Function XDTOFactoryObject(WSName = Undefined) Export
 	EndIf;
 EndFunction
 
-Function DeserializeJSON(Value, AddInfo = Undefined) Export
+Function DeserializeJSON(Value, IsMap = False, AddInfo = Undefined) Export
 	Reader = New JSONReader();
 	Reader.SetString(Value);
-	Result = ReadJSON(Reader);
+	Result = ReadJSON(Reader, IsMap);
+	Reader.Close();
+	Return Result;
+EndFunction
+
+Function DeserializeJSONUseXDTOFactory(Value, Type = Undefined, AddInfo = Undefined, WSName = Undefined) Export
+	
+	ValueTmp = "{""#value"":" + Value + "}";
+	
+	Reader = New JSONReader();
+	Reader.SetString(ValueTmp);
+	Result = XDTOFactory.ReadJSON(Reader, Type);
 	Reader.Close();
 	Return Result;
 EndFunction

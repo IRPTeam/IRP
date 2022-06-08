@@ -148,12 +148,24 @@
           <event>EditTextChange</event>
           <name>SerialLotNumberEditTextChange</name>
         </handlers>
+        <handlers>
+          <event>Creating</event>
+          <name>SerialLotNumberCreating</name>
+        </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
+        <autoMarkIncomplete>true</autoMarkIncomplete>
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
+        <font xsi:type="core:FontRef">
+          <font>Style.LargeTextFont</font>
+          <bold>true</bold>
+          <italic>false</italic>
+          <underline>false</underline>
+          <strikeout>false</strikeout>
+        </font>
       </extInfo>
     </items>
     <items xsi:type="form:Button">
@@ -275,6 +287,9 @@
       <chooseType>true</chooseType>
       <typeDomainEnabled>true</typeDomainEnabled>
       <textEdit>true</textEdit>
+      <font xsi:type="core:FontRef">
+        <font>Style.LargeTextFont</font>
+      </font>
       <specialTextInputMode>Digits</specialTextInputMode>
       <onScreenKeyboardReturnKeyText>Next</onScreenKeyboardReturnKeyText>
     </extInfo>
@@ -329,17 +344,65 @@
       <fileDragMode>AsFileRef</fileDragMode>
     </extInfo>
   </items>
-  <items xsi:type="form:Button">
-    <name>OK</name>
-    <id>16</id>
+  <items xsi:type="form:FormGroup">
+    <name>GroupBottom</name>
+    <id>28</id>
+    <items xsi:type="form:Button">
+      <name>OK</name>
+      <id>16</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>OKExtendedTooltip</name>
+        <id>17</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <type>UsualButton</type>
+      <commandName>Form.Command.OK</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <height>2</height>
+      <autoMaxHeight>true</autoMaxHeight>
+      <horizontalStretch>true</horizontalStretch>
+      <groupHorizontalAlign>Center</groupHorizontalAlign>
+      <placementArea>UserCmds</placementArea>
+      <backColor xsi:type="core:ColorRef">
+        <color>Style.ActivityColor</color>
+      </backColor>
+      <font xsi:type="core:FontRef">
+        <font>Style.ExtraLargeTextFont</font>
+        <bold>true</bold>
+        <italic>false</italic>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+      </font>
+      <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
+    <title>
+      <key>en</key>
+      <value>Bottom</value>
+    </title>
     <extendedTooltip>
-      <name>OKExtendedTooltip</name>
-      <id>17</id>
+      <name>GroupBottomExtendedTooltip</name>
+      <id>29</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -352,21 +415,17 @@
         <horizontalAlign>Left</horizontalAlign>
       </extInfo>
     </extendedTooltip>
-    <type>UsualButton</type>
-    <commandName>Form.Command.OK</commandName>
-    <representation>Auto</representation>
-    <autoMaxWidth>true</autoMaxWidth>
-    <height>2</height>
-    <autoMaxHeight>true</autoMaxHeight>
-    <horizontalStretch>true</horizontalStretch>
-    <placementArea>UserCmds</placementArea>
-    <backColor xsi:type="core:ColorRef">
-      <color>Style.ActivityColor</color>
-    </backColor>
-    <font xsi:type="core:FontRef">
-      <font>Style.LargeTextFont</font>
-    </font>
-    <representationInContextMenu>Auto</representationInContextMenu>
+    <type>UsualGroup</type>
+    <extInfo xsi:type="form:UsualGroupExtInfo">
+      <group>HorizontalIfPossible</group>
+      <showLeftMargin>true</showLeftMargin>
+      <united>true</united>
+      <backColor xsi:type="core:ColorRef">
+        <color>Style.ActivityColor</color>
+      </backColor>
+      <throughAlign>Auto</throughAlign>
+      <currentRowUse>Auto</currentRowUse>
+    </extInfo>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>
@@ -385,6 +444,10 @@
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
+  </handlers>
+  <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

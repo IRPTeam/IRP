@@ -103,6 +103,9 @@ Function CreateNewSerialLotNumber(Options) Export
 	NewSerial.SerialLotNumberOwner = Options.Owner;
 	NewSerial.StockBalanceDetail = GetStockBalanceDetailByOwner(Options.Owner);
 	NewSerial.EachSerialLotNumberIsUnique = GetItemTypeByOwner(Options.Owner).EachSerialLotNumberIsUnique;
+	If NewSerial.CheckFilling() Then
+		NewSerial.Write();
+	EndIf;
 	NewSerial.Write();
 	
 	Return NewSerial.Ref;
@@ -216,13 +219,13 @@ Function GetNewSerialLotNumber(Barcode, ItemKey) Export
 	Options.Barcode = Barcode;
 	Options.Owner = ItemKey;
 	Options.Description = Barcode;
-	SerialLotNumber = CreateNewSerialLotNumber(Options);
-	
-	Option = New Structure();
-	Option.Insert("ItemKey", ItemKey);
-	Option.Insert("SerialLotNumber", SerialLotNumber);
-	BarcodeServer.UpdateBarcode(Barcode, Option);
-	
+	SerialLotNumber = SerialLotNumbersServer.CreateNewSerialLotNumber(Options);
+	If Not SerialLotNumber.IsEmpty() Then
+		Option = New Structure();
+		Option.Insert("ItemKey", ItemKey);
+		Option.Insert("SerialLotNumber", SerialLotNumber);
+		BarcodeServer.UpdateBarcode(Barcode, Option);
+	EndIf;
 	Return SerialLotNumber;
 EndFunction
 

@@ -738,8 +738,11 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 					| 'Dress'              | 'XS/Blue'  | ''                  |
 					| 'Product 1 with SLN' | 'PZU'      | '8908898754'        |
 			* Change serial lot number
+				And I go to line in "ItemList" table
+					| 'Item'               | 'Item key' | 'Serial lot number' |
+					| 'Product 1 with SLN' | 'PZU'      | '8908898754'        |
 				And I select current line in "ItemList" table
-				And I select "8908899877" from "Serial lot number" drop-down list by string in "ItemList" table		
+				And I input "8908899877" text in "Serial lot number" field of "ItemList" table
 				And "ItemList" table contains lines
 					| 'Item'               | 'Item key' | 'Serial lot number' |
 					| 'Dress'              | 'XS/Blue'  | ''                  |

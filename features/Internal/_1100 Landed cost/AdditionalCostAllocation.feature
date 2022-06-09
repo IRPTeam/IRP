@@ -117,10 +117,12 @@ Scenario: _041 test data
 		When Create document OpeningEntry objects (LC)
 		When Create document PriceList objects (LC)
 		When Create document AdditionalCostAllocation objects (by documents, amount, quantity, weight) (LC)
+		When Create document AdditionalRevenueAllocation objects (by documents, row, amount, quantity, weight) (LC)
 		When Create document PurchaseInvoice objects (LC)
 		When Create document PurchaseOrder objects (LC)
 		When Create document PurchaseReturn objects (LC)
 		When Create document PurchaseReturnOrder objects (LC)
+		When Create document SalesInvoice objects (Revenue cost allocation)
 		When Create document SalesInvoice objects (LC)
 		When Create document SalesReturn objects (LC)
 		When Create document SalesReturnOrder objects (LC)
@@ -134,6 +136,7 @@ Scenario: _041 test data
 		When Create document AdditionalCostAllocation objects (by rows, amount) (LC)
 		When Create document RetailReturnReceipt objects (LC)
 		When Create document CalculationMovementCosts objects (LC)
+		When Create document CalculationMovementCosts objects (LC, Additional item revenue)
 	* Posting Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		Then "Purchase orders" window is opened
@@ -151,7 +154,7 @@ Scenario: _041 test data
 		Then "Sales invoices" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
-		And Delay "10"
+		And Delay "15"
 	* Posting Sales return order
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		Then "Sales return orders" window is opened
@@ -243,6 +246,11 @@ Scenario: _041 test data
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"
+	* Posting Additional revenue allocation
+		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "5"
 	* Posting Calculation movement costs
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		Then I select all lines of "List" table
@@ -273,6 +281,16 @@ Scenario: _042 check additional cost allocation (documents, by quantity)
 	And I activate field named "Date" in "List" table
 	And I select current line in "List" table
 	And I finish line editing in "SettingsComposerSettingsFilter" table
+	And I move to "Parameters" tab
+	And I change checkbox named "SettingsComposerSettingsDataParametersUse" in "SettingsComposerSettingsDataParameters" table
+	And I select current line in "SettingsComposerSettingsDataParameters" table
+	And I input "01.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
+	And I finish line editing in "SettingsComposerSettingsDataParameters" table
+	And I go to line in "SettingsComposerSettingsDataParameters" table
+		| 'Parameter'     |
+		| 'End of period' |
+	And I input "31.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
+	And I finish line editing in "SettingsComposerSettingsDataParameters" table
 	And I click "Finish editing" button
 	And I click "Run report" button
 	And "Result" spreadsheet document contains "BathBalance_042_1" template lines by template
@@ -303,6 +321,16 @@ Scenario: _043 check additional cost allocation (documents, by amount)
 	And I activate field named "Date" in "List" table
 	And I select current line in "List" table
 	And I finish line editing in "SettingsComposerSettingsFilter" table
+	And I move to "Parameters" tab
+	And I change checkbox named "SettingsComposerSettingsDataParametersUse" in "SettingsComposerSettingsDataParameters" table
+	And I select current line in "SettingsComposerSettingsDataParameters" table
+	And I input "01.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
+	And I finish line editing in "SettingsComposerSettingsDataParameters" table
+	And I go to line in "SettingsComposerSettingsDataParameters" table
+		| 'Parameter'     |
+		| 'End of period' |
+	And I input "31.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
+	And I finish line editing in "SettingsComposerSettingsDataParameters" table
 	And I click "Finish editing" button
 	And I click "Run report" button
 	And "Result" spreadsheet document contains "BathBalance_043_1" template lines by template
@@ -332,6 +360,16 @@ Scenario: _044 check additional cost allocation (documents, by weight)
 	And I activate field named "Date" in "List" table
 	And I select current line in "List" table
 	And I finish line editing in "SettingsComposerSettingsFilter" table
+	And I move to "Parameters" tab
+	And I change checkbox named "SettingsComposerSettingsDataParametersUse" in "SettingsComposerSettingsDataParameters" table
+	And I select current line in "SettingsComposerSettingsDataParameters" table
+	And I input "01.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
+	And I finish line editing in "SettingsComposerSettingsDataParameters" table
+	And I go to line in "SettingsComposerSettingsDataParameters" table
+		| 'Parameter'     |
+		| 'End of period' |
+	And I input "31.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
+	And I finish line editing in "SettingsComposerSettingsDataParameters" table
 	And I click "Finish editing" button
 	And I click "Run report" button
 	And "Result" spreadsheet document contains "BathBalance_044_1" template lines by template
@@ -375,6 +413,16 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 	And I finish line editing in "ValueList" table
 	And I click the button named "OK"
 	And I finish line editing in "SettingsComposerSettingsFilter" table
+	And I move to "Parameters" tab
+	And I change checkbox named "SettingsComposerSettingsDataParametersUse" in "SettingsComposerSettingsDataParameters" table
+	And I select current line in "SettingsComposerSettingsDataParameters" table
+	And I input "01.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
+	And I finish line editing in "SettingsComposerSettingsDataParameters" table
+	And I go to line in "SettingsComposerSettingsDataParameters" table
+		| 'Parameter'     |
+		| 'End of period' |
+	And I input "31.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
+	And I finish line editing in "SettingsComposerSettingsDataParameters" table
 	And I click "Finish editing" button
 	And I click "Run report" button
 	And "Result" spreadsheet document contains "BathBalance_045_1" template lines by template
@@ -398,10 +446,10 @@ Scenario: _048 create additional cost allocation (documents, by quantity)
 		And "List" table became equal
 			| 'Basis'                                            | 'Company'      | 'Amount' | 'Currency' |
 			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | 'Main Company' | '350'    | 'TRY'      |
-			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | '400'    | 'TRY'      |
-			| 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' | 'Main Company' | '350'    | 'TRY'      |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | '350'    | 'TRY'      |
 			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | '650'    | 'TRY'      |
+			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | '400'    | 'TRY'      |
+			| 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' | 'Main Company' | '350'    | 'TRY'      |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | '550'    | 'TRY'      |
 		And I go to line in "List" table
 			| 'Basis'                                            | 'Company'      | 'Amount' | 'Currency' |
@@ -432,9 +480,9 @@ Scenario: _048 create additional cost allocation (documents, by quantity)
 		And "List" table became equal
 			| 'Basis'                                            | 'Company'      | 'Amount' | 'Currency' |
 			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | 'Main Company' | '350'    | 'TRY'      |
-			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | '400'    | 'TRY'      |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | '350'    | 'TRY'      |
 			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | '650'    | 'TRY'      |
+			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | '400'    | 'TRY'      |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | '550'    | 'TRY'      |
 		And I go to line in "List" table
 			| 'Amount' | 'Basis'                                            | 'Company'      | 'Currency' |
@@ -605,14 +653,14 @@ Scenario: _051 create additional cost allocation (row, by amount)
 				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'No'  | '400,00' | 'Service' | 'Interner' | 'TRY'      |
 				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'No'  | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
 			And I go to line in "CostRowsTree" table
-				| 'Amount' | 'Currency' | 'Document'                                         | 'Item'    | 'Item key' | 'Use' |
-				| '250,00' | 'TRY'      | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Service' | 'Rent'     | 'No'  |
+				| 'Amount' | 'Currency' | 'Item'    | 'Item key' | 'Use' |
+				| '250,00' | 'TRY'      | 'Service' | 'Rent'     | 'No'  |
 			And I activate "Item" field in "CostRowsTree" table
 			And I change "Use" checkbox in "CostRowsTree" table
 			And I finish line editing in "CostRowsTree" table
 			And I go to line in "CostRowsTree" table
-				| 'Amount' | 'Currency' | 'Document'                                         | 'Item'    | 'Item key' | 'Use' |
-				| '150,00' | 'TRY'      | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Service' | 'Rent'     | 'No'  |
+				| 'Amount' | 'Currency' | 'Item'    | 'Item key' | 'Use' |
+				| '150,00' | 'TRY'      | 'Service' | 'Rent'     | 'No'  |
 			And I change "Use" checkbox in "CostRowsTree" table
 			And I finish line editing in "CostRowsTree" table
 			And I click "Ok" button

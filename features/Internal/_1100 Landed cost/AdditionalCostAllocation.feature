@@ -762,8 +762,336 @@ Scenario: _051 create additional cost allocation (row, by amount)
 			| 'Number'                |
 			| '$$NumberAdditionalCostAllocationRowsByAmount$$' |
 		And I close all client application windows		
-						
+
+Scenario: _068 create additional revenue allocation (documents, by quantity)
+	* Open additional revenue allocation form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+		And I click the button named "FormCreate"
+	* Filling document
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "By documents" exact value from "Allocation mode" drop-down list
+		And I select "By quantity" exact value from "Allocation method" drop-down list
+		And in the table "RevenueDocuments" I click "Add" button
+		And I click choice button of "Document" attribute in "RevenueDocuments" table
+		And "List" table became equal
+			| 'Basis'                                         | 'Company'      | 'Amount' | 'Currency' |
+			| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | 'Main Company' | '750'    | 'TRY'      |
+			| 'Sales invoice 9 016 dated 09.06.2022 16:13:54' | 'Main Company' | '2 000'  | 'TRY'      |
+			| 'Sales invoice 9 015 dated 09.06.2022 16:13:43' | 'Main Company' | '100'    | 'TRY'      |
+			| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | 'Main Company' | '1 000'  | 'TRY'      |
+			| 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | 'Main Company' | '400'    | 'TRY'      |
+			| 'Sales invoice 9 018 dated 09.06.2022 16:14:23' | 'Main Company' | '300'    | 'TRY'      |
+			| 'Sales invoice 9 017 dated 09.06.2022 16:14:09' | 'Main Company' | '3 000'  | 'TRY'      |		
+		And I go to line in "List" table
+			| 'Basis'                                         | 'Company'      | 'Amount' | 'Currency' |
+			| 'Sales invoice 9 016 dated 09.06.2022 16:13:54' | 'Main Company' | '2 000'    | 'TRY'      |
+		And I select current line in "List" table
+		And I finish line editing in "RevenueDocuments" table
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I go to line in "List" table
+			| 'Basis'                                        | 'Company'      |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "AllocationDocuments" table
+	* Check filling
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "AllocationMode" became equal to "By documents"
+		Then the form attribute named "AllocationMethod" became equal to "By quantity"
+		And "RevenueDocuments" table became equal
+			| '#' | 'Document'                                      | 'Amount'    | 'Currency' |
+			| '1' | 'Sales invoice 9 016 dated 09.06.2022 16:13:54' | '2 000,00'  | 'TRY'      |
+		And "AllocationDocuments" table became equal
+			| 'Document'                                     |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
+	* Add one more cost document
+		And in the table "RevenueDocuments" I click "Add" button
+		And I click choice button of "Document" attribute in "RevenueDocuments" table
+		And "List" table became equal
+			| 'Basis'                                         | 'Company'      | 'Amount' | 'Currency' |
+			| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | 'Main Company' | '750'    | 'TRY'      |
+			| 'Sales invoice 9 015 dated 09.06.2022 16:13:43' | 'Main Company' | '100'    | 'TRY'      |
+			| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | 'Main Company' | '1 000'  | 'TRY'      |
+			| 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | 'Main Company' | '400'    | 'TRY'      |
+			| 'Sales invoice 9 018 dated 09.06.2022 16:14:23' | 'Main Company' | '300'    | 'TRY'      |
+			| 'Sales invoice 9 017 dated 09.06.2022 16:14:09' | 'Main Company' | '3 000'  | 'TRY'      |
+		And I go to line in "List" table
+			| 'Amount' | 'Basis'                                         | 'Company'      | 'Currency' |
+			| '100'    | 'Sales invoice 9 015 dated 09.06.2022 16:13:43' | 'Main Company' | 'TRY'      |
+		And I select current line in "List" table
+		And I finish line editing in "RevenueDocuments" table
+	* Add one more allocation document
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I go to line in "List" table
+			| 'Basis'                                        | 'Company'      |
+			| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "AllocationDocuments" table
+	* Delete string
+		And I go to line in "RevenueDocuments" table
+			| '#' | 'Amount'   | 'Currency' | 'Document'                                      |
+			| '1' | '2 000,00' | 'TRY'      | 'Sales invoice 9 016 dated 09.06.2022 16:13:54' |
+		And I delete a line in "RevenueDocuments" table
+		And "RevenueDocuments" table became equal
+			| '#' | 'Document'                                      | 'Amount' | 'Currency' |
+			| '1' | 'Sales invoice 9 015 dated 09.06.2022 16:13:43' | '100,00' | 'TRY'      |
+		And "AllocationDocuments" table became equal
+			| 'Document'                                     |
+			| 'Purchase invoice 3 dated 13.08.2021 16:52:30' |
+		And I click the button named "FormPost"
+		And I delete "$$AdditionalRevenueAllocationDocumentsByQuantity$$" variable
+		And I delete "$$NumberAdditionalRevenueAllocationDocumentsByQuantity$$" variable
+		And I save the window as "$$AdditionalRevenueAllocationDocumentsByQuantity$$"
+		And I save the value of "Number" field as "$$NumberAdditionalRevenueAllocationDocumentsByQuantity$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberAdditionalRevenueAllocationDocumentsByQuantity$$' |
+		And I close all client application windows
 			
+Scenario: _069 create additional revenue allocation (documents, By amount)
+	* Open additional revenue allocation form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+		And I click the button named "FormCreate"
+	* Filling document
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "By documents" exact value from "Allocation mode" drop-down list
+		And I select "By amount" exact value from "Allocation method" drop-down list
+		And in the table "RevenueDocuments" I click "Add" button
+		And I click choice button of "Document" attribute in "RevenueDocuments" table	
+		And I go to line in "List" table
+			| 'Basis'                                         | 'Company'      | 'Amount'      | 'Currency' |
+			| 'Sales invoice 9 016 dated 09.06.2022 16:13:54' | 'Main Company' | '2 000'       | 'TRY'      |
+		And I select current line in "List" table
+		And I finish line editing in "RevenueDocuments" table
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I go to line in "List" table
+			| 'Basis'                                        | 'Company'      |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "AllocationDocuments" table
+	* Check filling
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "AllocationMode" became equal to "By documents"
+		Then the form attribute named "AllocationMethod" became equal to "By amount"
+		And "RevenueDocuments" table became equal
+			| '#' | 'Document'                                      | 'Amount'   | 'Currency' |
+			| '1' | 'Sales invoice 9 016 dated 09.06.2022 16:13:54' | '2 000,00' | 'TRY'      |
+		And "AllocationDocuments" table became equal
+			| 'Document'                                     |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' |		
+		And I click the button named "FormPost"
+		And I delete "$$AdditionalRevenueAllocationDocumentsByAmount$$" variable
+		And I delete "$$NumberAdditionalRevenueAllocationDocumentsByAmount$$" variable
+		And I save the window as "$$AdditionalRevenueAllocationDocumentsByAmount$$"
+		And I save the value of "Number" field as "$$NumberAdditionalRevenueAllocationDocumentsByAmount$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberAdditionalRevenueAllocationDocumentsByAmount$$' |
+		And I close all client application windows
+		
+Scenario: _070 create additional revenue allocation (documents, By weight)
+	* Open additional revenue allocation form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+		And I click the button named "FormCreate"
+	* Filling document
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "By documents" exact value from "Allocation mode" drop-down list
+		And I select "By weight" exact value from "Allocation method" drop-down list
+		And in the table "RevenueDocuments" I click "Add" button
+		And I click choice button of "Document" attribute in "RevenueDocuments" table	
+		And I go to line in "List" table
+			| 'Basis'                                         | 'Company'      | 'Amount' | 'Currency' |
+			| 'Sales invoice 9 017 dated 09.06.2022 16:14:09' | 'Main Company' | '3 000'    | 'TRY'      |
+		And I select current line in "List" table
+		And I finish line editing in "RevenueDocuments" table
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I go to line in "List" table
+			| 'Basis'                                        | 'Company'      |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "AllocationDocuments" table
+	* Check filling
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "AllocationMode" became equal to "By documents"
+		Then the form attribute named "AllocationMethod" became equal to "By weight"
+		And "RevenueDocuments" table became equal
+			| '#' | 'Document'                                      | 'Amount'   | 'Currency' |
+			| '1' | 'Sales invoice 9 017 dated 09.06.2022 16:14:09' | '3 000,00' | 'TRY'      |
+		And "AllocationDocuments" table became equal
+			| 'Document'                                     |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' |		
+		And I click the button named "FormPost"
+		And I delete "$$AdditionalRevenueAllocationDocumentsByWeight$$" variable
+		And I delete "$$NumberAdditionalRevenueAllocationDocumentsByWeight$$" variable
+		And I save the window as "$$AdditionalRevenueAllocationDocumentsByWeight$$"
+		And I save the value of "Number" field as "$$NumberAdditionalRevenueAllocationDocumentsByWeight$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberAdditionalRevenueAllocationDocumentsByWeight$$' |
+		And I close all client application windows		
+				
+Scenario: _071 create additional revenue allocation (row, by amount)
+	* Open additional revenue allocation form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+		And I click the button named "FormCreate"
+	* Filling document
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "By rows" exact value from "Allocation mode" drop-down list
+		And I select "By amount" exact value from "Allocation method" drop-down list
+		* Select cost
+			And in the table "RevenueRows" I click "Select revenues" button
+			Then "Select revenue rows" window is opened
+			And "RevenueRowsTree" table became equal
+				| 'Document'                                      | 'Use' | 'Amount'   | 'Item'    | 'Item key' | 'Currency' |
+				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | 'No'  | ''         | ''        | ''         | ''         |
+				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | 'No'  | '750,00'   | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | 'No'  | ''         | ''        | ''         | ''         |
+				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | 'No'  | '1 000,00' | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | 'No'  | ''         | ''        | ''         | ''         |
+				| 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | 'No'  | '100,00'   | 'Service' | 'Interner' | 'TRY'      |
+				| 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | 'No'  | '300,00'   | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Sales invoice 9 018 dated 09.06.2022 16:14:23' | 'No'  | ''         | ''        | ''         | ''         |
+				| 'Sales invoice 9 018 dated 09.06.2022 16:14:23' | 'No'  | '300,00'   | 'Service' | 'Rent'     | 'TRY'      |		
+			And I go to line in "RevenueRowsTree" table
+				| 'Amount' | 'Currency' | 'Item'    | 'Item key' | 'Use' |
+				| '750,00' | 'TRY'      | 'Service' | 'Rent'     | 'No'  |
+			And I activate "Item" field in "RevenueRowsTree" table
+			And I change "Use" checkbox in "RevenueRowsTree" table
+			And I finish line editing in "RevenueRowsTree" table
+			And I go to line in "RevenueRowsTree" table
+				| 'Amount'   | 'Currency' | 'Item'    | 'Item key' | 'Use' |
+				| '1 000,00' | 'TRY'      | 'Service' | 'Rent'     | 'No'  |
+			And I change "Use" checkbox in "RevenueRowsTree" table
+			And I finish line editing in "RevenueRowsTree" table
+			And I click "Ok" button
+			And "RevenueRows" table became equal
+				| 'Document'                                      | 'Amount'   | 'Item'    | 'Item key' | 'Currency' |
+				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | ''         | ''        | ''         | ''         |
+				| ''                                              | '750,00'   | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | ''         | ''        | ''         | ''         |
+				| ''                                              | '1 000,00' | 'Service' | 'Rent'     | 'TRY'      |			
+		* Select allocation
+			And I go to line in "RevenueRows" table
+				| 'Amount' | 'Currency' | 'Item'    | 'Item key' |
+				| '750,00' | 'TRY'      | 'Service' | 'Rent'     |
+			And in the table "AllocationRows" I click "Select allocations" button
+			Then "Select allocation rows" window is opened
+			And I go to line in "List" table
+				| 'Company'      | 'Document'                                     |
+				| 'Main Company' | 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
+			And I select current line in "List" table
+			And I move to "Rows" tab
+			And I go to line in "DocumentRows" table
+				| 'Item'  | 'Item key' | 'Store'    | 'Use' |
+				| 'Boots' | '37/18SD'  | 'Store 02' | 'No'  |
+			And I set "Use" checkbox in "DocumentRows" table
+			And I finish line editing in "DocumentRows" table
+			And I go to line in "DocumentRows" table
+				| 'Item'  | 'Item key' | 'Store'    | 'Use' |
+				| 'Dress' | 'M/White'  | 'Store 02' | 'No'  |
+			And I set "Use" checkbox in "DocumentRows" table
+			And I finish line editing in "DocumentRows" table
+			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
+			And I move to "Results" tab
+			And "ResultTree" table became equal
+				| 'Document'                                     | 'Store'    | 'Item'  | 'Item key' |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         | ''      | ''         |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Dress' | 'M/White'  |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Boots' | '37/18SD'  |
+			And I move to the tab named "GroupPageRowEditor"
+			And I go to line in "List" table
+				| 'Company'      | 'Document'                                     |
+				| 'Main Company' | 'Purchase invoice 3 dated 13.08.2021 16:52:30' |
+			And I select current line in "List" table
+			And I move to "Rows" tab
+			And I go to line in "DocumentRows" table
+				| 'Item' | 'Item key' | 'Store'    | 'Use' |
+				| 'Bag'  | 'ODS'      | 'Store 02' | 'No'  |
+			And I set "Use" checkbox in "DocumentRows" table
+			And I finish line editing in "DocumentRows" table
+			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
+			And I move to "Results" tab
+			And "ResultTree" table became equal
+				| 'Document'                                     | 'Store'    | 'Item'  | 'Item key' |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         | ''      | ''         |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Dress' | 'M/White'  |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Boots' | '37/18SD'  |
+				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | ''         | ''      | ''         |
+				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | 'Store 02' | 'Bag'   | 'ODS'      |
+			And I click "Ok" button
+		* Check cancel when select allocation
+			And I go to line in "RevenueRows" table
+				| 'Amount' | 'Currency' | 'Item'    | 'Item key' |
+				| '750,00' | 'TRY'      | 'Service' | 'Rent'     |
+			And in the table "AllocationRows" I click "Select allocations" button
+			And I go to line in "List" table
+				| 'Company'      | 'Document'                                     |
+				| 'Main Company' | 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
+			And I select current line in "List" table
+			And I move to "Rows" tab
+			And I go to line in "DocumentRows" table
+				| 'Item'  | 'Item key' | 'Store'    | 'Use' |
+				| 'Boots' | '38/18SD'  | 'Store 02' | 'No'  |
+			And I change "Use" checkbox in "DocumentRows" table
+			And I finish line editing in "DocumentRows" table
+			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
+			And I click the button named "FormCancel"
+			And "RevenueRows" table became equal
+				| 'Document'                                      | 'Amount'   | 'Item'    | 'Item key' | 'Currency' |
+				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | ''         | ''        | ''         | ''         |
+				| ''                                              | '750,00'   | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | ''         | ''        | ''         | ''         |
+				| ''                                              | '1 000,00' | 'Service' | 'Rent'     | 'TRY'      |			
+		* Allocate revenue amount
+			And in the table "AllocationRows" I click "Allocate revenue Amount" button
+			And I click the button named "FormPost"
+			And I delete "$$AdditionalRevenueAllocationRowsByAmount$$" variable
+			And I delete "$$NumberAdditionalRevenueAllocationRowsByAmount$$" variable
+			And I save the window as "$$AdditionalRevenueAllocationRowsByAmount$$"
+			And I save the value of "Number" field as "$$NumberAdditionalRevenueAllocationRowsByAmount$$"
+			And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberAdditionalRevenueAllocationRowsByAmount$$' |
+		And I close all client application windows		
 						
 			
 			

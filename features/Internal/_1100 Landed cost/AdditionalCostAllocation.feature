@@ -379,3 +379,376 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 	And I click "Run report" button
 	And "Result" spreadsheet document contains "BathBalance_045_1" template lines by template
 	And I close all client application windows	
+
+Scenario: _048 create additional cost allocation (documents, by quantity)
+	* Open additional cost allocation form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And I click the button named "FormCreate"
+	* Filling document
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "By documents" exact value from "Allocation mode" drop-down list
+		And I select "By quantity" exact value from "Allocation method" drop-down list
+		And in the table "CostDocuments" I click "Add" button
+		And I click choice button of "Document" attribute in "CostDocuments" table
+		And "List" table became equal
+			| 'Basis'                                            | 'Company'      | 'Amount' | 'Currency' |
+			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | 'Main Company' | '350'    | 'TRY'      |
+			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | '400'    | 'TRY'      |
+			| 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' | 'Main Company' | '350'    | 'TRY'      |
+			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | '350'    | 'TRY'      |
+			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | '650'    | 'TRY'      |
+			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | '550'    | 'TRY'      |
+		And I go to line in "List" table
+			| 'Basis'                                            | 'Company'      | 'Amount' | 'Currency' |
+			| 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' | 'Main Company' | '350'    | 'TRY'      |
+		And I select current line in "List" table
+		And I finish line editing in "CostDocuments" table
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I go to line in "List" table
+			| 'Basis'                                        | 'Company'      |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "AllocationDocuments" table
+	* Check filling
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "AllocationMode" became equal to "By documents"
+		Then the form attribute named "AllocationMethod" became equal to "By quantity"
+		And "CostDocuments" table became equal
+			| '#' | 'Document'                                         | 'Amount' | 'Currency' |
+			| '1' | 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' | '350,00' | 'TRY'      |
+		And "AllocationDocuments" table became equal
+			| 'Document'                                     |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
+	* Add one more cost document
+		And in the table "CostDocuments" I click "Add" button
+		And I click choice button of "Document" attribute in "CostDocuments" table
+		And "List" table became equal
+			| 'Basis'                                            | 'Company'      | 'Amount' | 'Currency' |
+			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | 'Main Company' | '350'    | 'TRY'      |
+			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | '400'    | 'TRY'      |
+			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | '350'    | 'TRY'      |
+			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | '650'    | 'TRY'      |
+			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | '550'    | 'TRY'      |
+		And I go to line in "List" table
+			| 'Amount' | 'Basis'                                            | 'Company'      | 'Currency' |
+			| '400'    | 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | 'TRY'      |
+		And I select current line in "List" table
+		And I finish line editing in "CostDocuments" table
+	* Add one more allocation document
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I go to line in "List" table
+			| 'Basis'                                        | 'Company'      |
+			| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "AllocationDocuments" table
+	* Delete string
+		And I go to line in "CostDocuments" table
+			| '#' | 'Amount' | 'Currency' | 'Document'                                         |
+			| '1' | '350,00' | 'TRY'      | 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' |
+		And I delete a line in "CostDocuments" table
+		And "CostDocuments" table became equal
+			| '#' | 'Document'                                         | 'Amount' | 'Currency' |
+			| '1' | 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | '400,00' | 'TRY'      |
+		And "AllocationDocuments" table became equal
+			| 'Document'                                     |
+			| 'Purchase invoice 3 dated 13.08.2021 16:52:30' |
+		And I click the button named "FormPost"
+		And I delete "$$AdditionalCostAllocationDocumentsByQuantity$$" variable
+		And I delete "$$NumberAdditionalCostAllocationDocumentsByQuantity$$" variable
+		And I save the window as "$$AdditionalCostAllocationDocumentsByQuantity$$"
+		And I save the value of "Number" field as "$$NumberAdditionalCostAllocationDocumentsByQuantity$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberAdditionalCostAllocationDocumentsByQuantity$$' |
+		And I close all client application windows
+				
+
+Scenario: _049 create additional cost allocation (documents, By amount)
+	* Open additional cost allocation form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And I click the button named "FormCreate"
+	* Filling document
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "By documents" exact value from "Allocation mode" drop-down list
+		And I select "By amount" exact value from "Allocation method" drop-down list
+		And in the table "CostDocuments" I click "Add" button
+		And I click choice button of "Document" attribute in "CostDocuments" table	
+		And I go to line in "List" table
+			| 'Basis'                                            | 'Company'      | 'Amount' | 'Currency' |
+			| 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' | 'Main Company' | '350'    | 'TRY'      |
+		And I select current line in "List" table
+		And I finish line editing in "CostDocuments" table
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I go to line in "List" table
+			| 'Basis'                                        | 'Company'      |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "AllocationDocuments" table
+	* Check filling
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "AllocationMode" became equal to "By documents"
+		Then the form attribute named "AllocationMethod" became equal to "By amount"
+		And "CostDocuments" table became equal
+			| '#' | 'Document'                                         | 'Amount' | 'Currency' |
+			| '1' | 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' | '350,00' | 'TRY'      |
+		And "AllocationDocuments" table became equal
+			| 'Document'                                     |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' |		
+		And I click the button named "FormPost"
+		And I delete "$$AdditionalCostAllocationDocumentsByAmount$$" variable
+		And I delete "$$NumberAdditionalCostAllocationDocumentsByAmount$$" variable
+		And I save the window as "$$AdditionalCostAllocationDocumentsByAmount$$"
+		And I save the value of "Number" field as "$$NumberAdditionalCostAllocationDocumentsByAmount$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberAdditionalCostAllocationDocumentsByAmount$$' |
+		And I close all client application windows
+				
+Scenario: _050 create additional cost allocation (documents, By weight)
+	* Open additional cost allocation form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And I click the button named "FormCreate"
+	* Filling document
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "By documents" exact value from "Allocation mode" drop-down list
+		And I select "By weight" exact value from "Allocation method" drop-down list
+		And in the table "CostDocuments" I click "Add" button
+		And I click choice button of "Document" attribute in "CostDocuments" table	
+		And I go to line in "List" table
+			| 'Basis'                                            | 'Company'      | 'Amount' | 'Currency' |
+			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | 'Main Company' | '350'    | 'TRY'      |
+		And I select current line in "List" table
+		And I finish line editing in "CostDocuments" table
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I go to line in "List" table
+			| 'Basis'                                        | 'Company'      |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "AllocationDocuments" table
+	* Check filling
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "AllocationMode" became equal to "By documents"
+		Then the form attribute named "AllocationMethod" became equal to "By weight"
+		And "CostDocuments" table became equal
+			| '#' | 'Document'                                         | 'Amount' | 'Currency' |
+			| '1' | 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | '350,00' | 'TRY'      |
+		And "AllocationDocuments" table became equal
+			| 'Document'                                     |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00' |		
+		And I click the button named "FormPost"
+		And I delete "$$AdditionalCostAllocationDocumentsByWeight$$" variable
+		And I delete "$$NumberAdditionalCostAllocationDocumentsByWeight$$" variable
+		And I save the window as "$$AdditionalCostAllocationDocumentsByWeight$$"
+		And I save the value of "Number" field as "$$NumberAdditionalCostAllocationDocumentsByWeight$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberAdditionalCostAllocationDocumentsByWeight$$' |
+		And I close all client application windows		
+				
+Scenario: _051 create additional cost allocation (row, by amount)
+	* Open additional cost allocation form
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And I click the button named "FormCreate"
+	* Filling document
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "By rows" exact value from "Allocation mode" drop-down list
+		And I select "By amount" exact value from "Allocation method" drop-down list
+		* Select cost
+			And in the table "CostRows" I click "Select costs" button
+			Then "Select cost rows" window is opened
+			And "CostRowsTree" table became equal
+				| 'Document'                                         | 'Use' | 'Amount' | 'Item'    | 'Item key' | 'Currency' |
+				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'No'  | ''       | ''        | ''         | ''         |
+				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'No'  | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'No'  | '200,00' | 'Service' | 'Interner' | 'TRY'      |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'No'  | ''       | ''        | ''         | ''         |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'No'  | '250,00' | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'No'  | '400,00' | 'Service' | 'Interner' | 'TRY'      |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'No'  | ''       | ''        | ''         | ''         |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'No'  | '400,00' | 'Service' | 'Interner' | 'TRY'      |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'No'  | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
+			And I go to line in "CostRowsTree" table
+				| 'Amount' | 'Currency' | 'Document'                                         | 'Item'    | 'Item key' | 'Use' |
+				| '250,00' | 'TRY'      | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Service' | 'Rent'     | 'No'  |
+			And I activate "Item" field in "CostRowsTree" table
+			And I change "Use" checkbox in "CostRowsTree" table
+			And I finish line editing in "CostRowsTree" table
+			And I go to line in "CostRowsTree" table
+				| 'Amount' | 'Currency' | 'Document'                                         | 'Item'    | 'Item key' | 'Use' |
+				| '150,00' | 'TRY'      | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Service' | 'Rent'     | 'No'  |
+			And I change "Use" checkbox in "CostRowsTree" table
+			And I finish line editing in "CostRowsTree" table
+			And I click "Ok" button
+			And "CostRows" table became equal
+				| 'Document'                                         | 'Amount' | 'Item'    | 'Item key' | 'Currency' |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''       | ''        | ''         | ''         |
+				| ''                                                 | '250,00' | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''       | ''        | ''         | ''         |
+				| ''                                                 | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
+		* Select allocation
+			And I go to line in "CostRows" table
+				| 'Amount' | 'Currency' | 'Item'    | 'Item key' |
+				| '250,00' | 'TRY'      | 'Service' | 'Rent'     |
+			And in the table "AllocationRows" I click "Select allocations" button
+			Then "Select allocation rows" window is opened
+			And I go to line in "List" table
+				| 'Company'      | 'Document'                                     |
+				| 'Main Company' | 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
+			And I select current line in "List" table
+			And I move to "Rows" tab
+			And I go to line in "DocumentRows" table
+				| 'Item'  | 'Item key' | 'Store'    | 'Use' |
+				| 'Boots' | '37/18SD'  | 'Store 02' | 'No'  |
+			And I set "Use" checkbox in "DocumentRows" table
+			And I finish line editing in "DocumentRows" table
+			And I go to line in "DocumentRows" table
+				| 'Item'  | 'Item key' | 'Store'    | 'Use' |
+				| 'Dress' | 'M/White'  | 'Store 02' | 'No'  |
+			And I set "Use" checkbox in "DocumentRows" table
+			And I finish line editing in "DocumentRows" table
+			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
+			And I move to "Results" tab
+			And "ResultTree" table became equal
+				| 'Document'                                     | 'Store'    | 'Item'  | 'Item key' |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         | ''      | ''         |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Dress' | 'M/White'  |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Boots' | '37/18SD'  |
+			And I move to the tab named "GroupPageRowEditor"
+			And I go to line in "List" table
+				| 'Company'      | 'Document'                                     |
+				| 'Main Company' | 'Purchase invoice 3 dated 13.08.2021 16:52:30' |
+			And I select current line in "List" table
+			And I move to "Rows" tab
+			And I go to line in "DocumentRows" table
+				| 'Item' | 'Item key' | 'Store'    | 'Use' |
+				| 'Bag'  | 'ODS'      | 'Store 02' | 'No'  |
+			And I set "Use" checkbox in "DocumentRows" table
+			And I finish line editing in "DocumentRows" table
+			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
+			And I move to "Results" tab
+			And "ResultTree" table became equal
+				| 'Document'                                     | 'Store'    | 'Item'  | 'Item key' |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         | ''      | ''         |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Dress' | 'M/White'  |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Boots' | '37/18SD'  |
+				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | ''         | ''      | ''         |
+				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | 'Store 02' | 'Bag'   | 'ODS'      |
+			And I click "Ok" button
+			And "CostRows" table became equal
+				| 'Document'                                         | 'Amount' | 'Item'    | 'Item key' | 'Currency' |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''       | ''        | ''         | ''         |
+				| ''                                                 | '250,00' | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''       | ''        | ''         | ''         |
+				| ''                                                 | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
+		* Check cancel when select allocation
+			And I go to line in "CostRows" table
+				| 'Amount' | 'Currency' | 'Item'    | 'Item key' |
+				| '150,00' | 'TRY'      | 'Service' | 'Rent'     |
+			And in the table "AllocationRows" I click "Select allocations" button
+			And I go to line in "List" table
+				| 'Company'      | 'Document'                                     |
+				| 'Main Company' | 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
+			And I select current line in "List" table
+			And I move to "Rows" tab
+			And I go to line in "DocumentRows" table
+				| 'Item'  | 'Item key' | 'Store'    | 'Use' |
+				| 'Boots' | '38/18SD'  | 'Store 02' | 'No'  |
+			And I change "Use" checkbox in "DocumentRows" table
+			And I finish line editing in "DocumentRows" table
+			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
+			And I click the button named "FormCancel"
+			And "CostRows" table became equal
+				| 'Document'                                         | 'Amount' | 'Item'    | 'Item key' | 'Currency' |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''       | ''        | ''         | ''         |
+				| ''                                                 | '250,00' | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''       | ''        | ''         | ''         |
+				| ''                                                 | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
+		* Allocate cost amount
+			And in the table "AllocationRows" I click "Allocate cost Amount" button
+			And I click the button named "FormPost"
+			And I delete "$$AdditionalCostAllocationRowsByAmount$$" variable
+			And I delete "$$NumberAdditionalCostAllocationRowsByAmount$$" variable
+			And I save the window as "$$AdditionalCostAllocationRowsByAmount$$"
+			And I save the value of "Number" field as "$$NumberAdditionalCostAllocationRowsByAmount$$"
+			And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberAdditionalCostAllocationRowsByAmount$$' |
+		And I close all client application windows		
+						
+			
+						
+			
+			
+						
+						
+			
+						
+						
+			
+			
+						
+			
+							
+			
+						
+
+		
+				
+		
+				
+		
+				
+		
+					
+				
+		
+				
+		
+		
+				
+		
+				
+		
+				
+
+		

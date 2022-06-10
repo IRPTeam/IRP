@@ -48,10 +48,9 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 
-// временно отключено
-//	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
-//		//Cancel = True;
-//	EndIf;
+	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
+		Cancel = True;
+	EndIf;
 	For Each Row In ThisObject.ItemList Do
 		ItemKeyRow = New Structure();
 		ItemKeyRow.Insert("LineNumber", Row.LineNumber);
@@ -101,7 +100,4 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
-	
 EndProcedure
-
-

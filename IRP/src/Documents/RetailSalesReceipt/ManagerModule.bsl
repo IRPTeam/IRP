@@ -637,46 +637,6 @@ EndFunction
 
 #Region Accounting
 
-//Function T1040T_AccountingAmounts()
-//	Return
-//	"SELECT
-//	|	ItemList.Period,
-//	|	ItemList.Key AS RowKey,
-//	|	ItemList.Currency,
-//	|	ItemList.NetAmount AS Amount,
-//	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B) AS Operation,
-//	|	UNDEFINED AS AdvancesClosing
-//	|INTO T1040T_AccountingAmounts
-//	|FROM
-//	|	ItemList AS ItemList
-//	|
-//	|UNION ALL
-//	|
-//	|select
-//	|	ItemList.Period,
-//	|	ItemList.Key AS RowKey,
-//	|	ItemList.Currency,
-//	|	ItemList.TaxAmount,
-//	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
-//	|	undefined
-//	|from
-//	|	ItemList as ItemList
-//	|
-//	|union all
-//	|
-//	|SELECT
-//	|	T2010S_OffsetOfAdvances.Period,
-//	|	T2010S_OffsetOfAdvances.Key AS RowKey,
-//	|	T2010S_OffsetOfAdvances.Currency,
-//	|	T2010S_OffsetOfAdvances.Amount,
-//	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
-//	|	T2010S_OffsetOfAdvances.Recorder
-//	|FROM
-//	|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
-//	|WHERE
-//	|	T2010S_OffsetOfAdvances.Document = &Ref";
-//EndFunction
-
 Function T1050T_AccountingQuantities()
 	Return
 	"SELECT
@@ -693,8 +653,6 @@ Function GetAccountingAnalytics(Parameters) Export
 	Operations = Catalogs.AccountingOperations;
 	If Parameters.Operation = Operations.RetailSalesReceipt_DR_R5022T_CR_R4050B Then
 		Return GetAnalytics_DR_R5022T_CR_R4050B(Parameters); // Expenses (landed cost) - Stock inventory
-//	ElsIf Parameters.Operation = Operations.RetailSalesReceipt_DR_R3010B_CR_R5021T Then
-		 // Cash on hand - Revenues
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -722,11 +680,6 @@ Function GetAnalytics_DR_R5022T_CR_R4050B(Parameters)
 	
 	Return AccountingAnalytics;
 EndFunction
-
-// Cash on hand - Revenues
-//Function GetAnalytics_DR_R3010B_CR_R5021T(Parameters)
-	
-//EndFunction
 
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_CR_R4050B Then

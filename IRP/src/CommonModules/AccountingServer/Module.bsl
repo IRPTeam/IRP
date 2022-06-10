@@ -30,40 +30,6 @@ Function GetAccountingDataResult()
 	Return Result;
 EndFunction
 
-//Function FillAccountingDataResult(Data)
-//	Result = GetAccountingDataResult();
-//	If Data <> Undefined Then
-//		If Data.Property("CurrencyDr") Then
-//			Result.CurrencyDr = Data.CurrencyDr;
-//		EndIf;
-//		
-//		If Data.Property("CurrencyAmountDr") Then
-//			Result.CurrencyAmountDr = Data.CurrencyAmountDr;
-//		EndIf;
-//		
-//		If Data.Property("CurrencyCr") Then
-//			Result.CurrencyCr = Data.CurrencyCr;
-//		EndIf;
-//		
-//		If Data.Property("CurrencyAmountCr") Then
-//			Result.CurrencyAmountCr = Data.CurrencyAmountCr;
-//		EndIf;
-//		
-//		If Data.Property("QuantityDr") Then
-//			Result.QuantityDr = Data.QuantityDr;
-//		EndIf;
-//		
-//		If Data.Property("QuantityCr") Then
-//			Result.QuantityCr = Data.QuantityCr;
-//		EndIf;
-//		
-//		If Data.Property("Amount") Then
-//			Result.Amount = Data.Amount;
-//		EndIf;
-//	EndIf;
-//	Return Result;
-//EndFunction
-
 Function IsAdvance(RowData) Export
 	If Not ValueIsFilled(RowData.Agreement) Then
 		Return True;
@@ -858,7 +824,7 @@ Function GetOperationsDefinition()
 	Return Map;
 EndFunction
 
-// временная функция для проверки landed cost
+// test function landed cost
 Function GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters)
 	Query = New Query();
 	Query.Text = 
@@ -1041,11 +1007,10 @@ Function GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters)
 EndFunction
 
 Function GetAccountingData(Parameters)
-	// временно для проверки landed cost
+	// test function landed cost
 	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_CR_R4050B Then
 		Return GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters);
 	EndIf;
-	
 	
 	Query = New Query();
 	Query.Text = 

@@ -26,4 +26,5 @@
   <content>Subsystem.Accounting</content>
   <content>InformationRegister.T9014S_AccountsExpenseRevenue</content>
   <content>Catalog.LedgerTypeVariants</content>
+  <content>Catalog.Companies.Attribute.LandedCostExpenseType</content>
 </mdclass:FunctionalOption>

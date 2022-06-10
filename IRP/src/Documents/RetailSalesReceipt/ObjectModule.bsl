@@ -59,8 +59,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 
-// временно отключено
-//	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
-//		Cancel = True;
-//	EndIf;
+	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
+		Cancel = True;
+	EndIf;
 EndProcedure

@@ -129,34 +129,6 @@
           <value>12</value>
         </code>
       </content>
-      <content id="e0158ec5-9457-42ec-9b3b-4108d4f99fe5">
-        <name>RetailSalesReceipt_DR_R3010B_CR_R5021T</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>13</value>
-        </code>
-      </content>
-      <content id="6246c903-92da-4fa0-97b2-8f269de0f058">
-        <name>RetailSalesReceipt_DR_R5021T_CR_R2040B</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>14</value>
-        </code>
-      </content>
-      <content id="d9f008dc-0dc7-4519-aba3-1bed0e2f47ed">
-        <name>RetailSalesReceipt_DR_R5021T_CR_R9999T</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>15</value>
-        </code>
-      </content>
-      <content id="7f441bf6-d517-4578-92e5-059869e5cd31">
-        <name>RetailSalesReceipt_DR_R9999T_CR_R5022T</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>16</value>
-        </code>
-      </content>
     </items>
   </predefined>
   <editType>InDialog</editType>

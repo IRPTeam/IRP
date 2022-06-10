@@ -31,17 +31,27 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	While QuerySelection_Document.Next() Do
 		NewRow_TopLevel = ThisObject.CostRowsTree.GetItems().Add();
 		NewRow_TopLevel.Level = 1;
+		NewRow_TopLevel.Icon = 1;
 		NewRow_TopLevel.Document = QuerySelection_Document.Document;
+		NewRow_TopLevel.Presentation = String(QuerySelection_Document.Document);
 		QuerySelection_Details = QuerySelection_Document.Select();
+		TotalAmount = 0;
+		TotalCurrency = Undefined;
 		While QuerySelection_Details.Next() Do
 			NewRow_SecondLevel = NewRow_TopLevel.GetItems().Add();
 			NewRow_SecondLevel.Level = 2;
+			NewRow_SecondLevel.Icon = 0;
 			FillPropertyValues(NewRow_SecondLevel, QuerySelection_Details);
+			NewRow_SecondLevel.Presentation = String(NewRow_SecondLevel.ItemKey.Item) + ", " + String(NewRow_SecondLevel.ItemKey);
 			If DocumentsClientServer.FindRowInArrayOfStructures(Parameters.SelectedRows, "RowID, Basis", 
 				QuerySelection_Details.RowID, QuerySelection_Details.Document) <> Undefined Then
 				NewRow_SecondLevel.Use = True;
 			EndIf;
+			TotalAmount = TotalAmount + NewRow_SecondLevel.Amount;
+			TotalCurrency = NewRow_SecondLevel.Currency;
 		EndDo;
+		NewRow_TopLevel.Amount = TotalAmount;
+		NewRow_TopLevel.Currency = TotalCurrency;
 	EndDo;
 EndProcedure
 

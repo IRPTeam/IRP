@@ -11,6 +11,8 @@ I want to check opening registers, reports and data processor forms
 Background:
 	Given I launch TestClient opening script or connect the existing one
 	When set True value to the constant
+	And I set "True" value to the constant "UseAccounting"
+	
 
 Scenario: preparation
 	* Add VA extension
@@ -767,3 +769,11 @@ Scenario: Open choise form "CustomUserSettings"
 	If the warning is displayed then
 		Then I raise "Failed to open ChartsOfCharacteristicTypes choise form CustomUserSettings" exception
 	And I close current window
+
+Scenario: Open object form "R6010A_Master"
+
+	Given I open the list form of Accounting register "R6010A_Master"
+	If the warning is displayed then
+		Then I raise "Failed to open accounting register form R6010A_Master" exception
+	And I close current window
+

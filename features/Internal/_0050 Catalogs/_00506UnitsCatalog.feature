@@ -155,21 +155,32 @@ Scenario: _0050601 check Dimensions and weight information (item unit)
 		And I click "Save" button
 		And the editing text of form attribute named "Weight" became equal to "10,000"
 		And I close all client application windows
+
+Scenario: _0050602 filling in the "UnitsOfMeasurement" catalog
+		And I close all client application windows
+	* Opening the form for filling in "UnitsOfMeasurement"
+		Given I open hyperlink "e1cib/list/Catalog.UnitsOfMeasurement"
+		And I click the button named "FormCreate"
+	* Creating a unit of measurement 'UOM'
+		And I click Open button of the field named "Description_en"
+		And I input "test UOM" text in the field named "Description_en"
+		And I input "UOM" text in the field named "Description_tr"
+		And I input "UOM шт" text in the field named "Description_ru"
+		And I click "Ok" button	
+		And I input "A" text in the field named "Symbol"
+		And I click "Save and close" button
+	* Check creation
+		And "List" table contains lines
+			| 'Symbol' | 'Description' |
+			| 'A'      | 'test UOM'    |
+		And I close all client application windows
+		
+		
+				
 		
 				
 
 				
-		
-				
-				
-
 
 				
-
-		
-				
-
-		
-				
-
-		
+	

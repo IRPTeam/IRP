@@ -1,101 +1,149 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7628672e-4807-4328-bafa-ba04b9090f96">
-  <producedTypes>
-    <selectionType typeId="d478c1af-c127-4fc8-9a68-2722e97b6ff4" valueTypeId="fa94d115-1f7a-43a6-a140-16c3419d0855"/>
-    <listType typeId="e1bc2e74-beda-4648-99e2-df3f242aa9af" valueTypeId="0bc0d24f-56bf-4fc6-a8da-8da3fc5bfc50"/>
-    <managerType typeId="5c1cfa3f-ec52-4b37-9bc4-eceb80d5dbd5" valueTypeId="104e15f6-c708-48e3-af43-0a94dd6f9bba"/>
-    <recordSetType typeId="77ff776f-07ac-441f-93cd-1414ade218ac" valueTypeId="aef624c9-1d3c-4e89-a00b-c07f27be504e"/>
-    <recordKeyType typeId="ccdc2bec-5e9e-4134-bd1f-6f07679a1210" valueTypeId="1bbcb86d-e24b-412e-ab63-6757ed2c8391"/>
-    <recordType typeId="ee5bd15c-6710-4d26-998f-2f8b6e099e91" valueTypeId="9944597a-ae35-40fb-bbde-7cec8c01fdd8"/>
-    <recordManagerType typeId="db85990b-10df-4529-8f3c-2421453292d5" valueTypeId="67d62b3e-5b54-4580-b15d-6eeeca41c42e"/>
-  </producedTypes>
-  <name>T6050S_ManualBundleAmountValues</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7628672e-4807-4328-bafa-ba04b9090f96">
+ <producedTypes>
+  <selectionType typeId="d478c1af-c127-4fc8-9a68-2722e97b6ff4" valueTypeId="fa94d115-1f7a-43a6-a140-16c3419d0855"/>
+  <listType typeId="e1bc2e74-beda-4648-99e2-df3f242aa9af" valueTypeId="0bc0d24f-56bf-4fc6-a8da-8da3fc5bfc50"/>
+  <managerType typeId="5c1cfa3f-ec52-4b37-9bc4-eceb80d5dbd5" valueTypeId="104e15f6-c708-48e3-af43-0a94dd6f9bba"/>
+  <recordSetType typeId="77ff776f-07ac-441f-93cd-1414ade218ac" valueTypeId="aef624c9-1d3c-4e89-a00b-c07f27be504e"/>
+  <recordKeyType typeId="ccdc2bec-5e9e-4134-bd1f-6f07679a1210" valueTypeId="1bbcb86d-e24b-412e-ab63-6757ed2c8391"/>
+  <recordType typeId="ee5bd15c-6710-4d26-998f-2f8b6e099e91" valueTypeId="9944597a-ae35-40fb-bbde-7cec8c01fdd8"/>
+  <recordManagerType typeId="db85990b-10df-4529-8f3c-2421453292d5" valueTypeId="67d62b3e-5b54-4580-b15d-6eeeca41c42e"/>
+ </producedTypes>
+ <name>T6050S_ManualBundleAmountValues</name>
+ <synonym>
+  <key>ru</key>
+  <value>T6050 Ручные значения сумма наборов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>T6050 Manual bundle amount values</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T6050 Manuel takım tutar değerleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="3d4f6c6d-816c-42cc-8b1d-4cc6f67b52fa">
+  <name>AmountValue</name>
   <synonym>
-    <key>en</key>
-    <value>T6050 Manual bundle amount values</value>
+   <key>ru</key>
+   <value>Значение сумма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="3d4f6c6d-816c-42cc-8b1d-4cc6f67b52fa">
-    <name>AmountValue</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount value</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="0dbd6274-4133-43a0-85b8-ceba3406f732">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="4ad2daa6-d505-42bb-aab1-cb19e039b2ad">
-    <name>Bundle</name>
-    <synonym>
-      <key>en</key>
-      <value>Bundle</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="f3dadaf0-3248-40be-86d9-e13e2b963f31">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="4c1a7f53-6465-4ad8-95f6-9e4872b1cfdf">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Amount value</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar değeri</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="0dbd6274-4133-43a0-85b8-ceba3406f732">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="4ad2daa6-d505-42bb-aab1-cb19e039b2ad">
+  <name>Bundle</name>
+  <synonym>
+   <key>ru</key>
+   <value>Набор</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Bundle</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ürün takımı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f3dadaf0-3248-40be-86d9-e13e2b963f31">
+  <name>Store</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="4c1a7f53-6465-4ad8-95f6-9e4872b1cfdf">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

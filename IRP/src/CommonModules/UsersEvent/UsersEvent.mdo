@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="399c8a27-8dff-4eeb-a3b5-27f1b1a58c1f">
-  <name>UsersEvent</name>
-  <synonym>
-    <key>en</key>
-    <value>Users event</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>UsersEvent</name>
+ <synonym>
+  <key>ru</key>
+  <value>Пользовательские события</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Users event</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanıcılar olgu</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

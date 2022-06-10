@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="64b13ba2-4b28-401b-8b89-0a6ebbd309c7">
-  <name>UseExternalDataProcessors</name>
-  <synonym>
-    <key>en</key>
-    <value>Use external data processors</value>
-  </synonym>
+ <name>UseExternalDataProcessors</name>
+ <synonym>
+  <key>ru</key>
+  <value>Использование внешних обработок</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use external data processors</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dış veri işlemcileri kullanma</value>
+ </synonym>
 </mdclass:Role>

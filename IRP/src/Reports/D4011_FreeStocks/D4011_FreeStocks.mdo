@@ -1,22 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9d51b800-0e75-4bf6-8b45-5a271e0a9883">
-  <producedTypes>
-    <objectType typeId="54ed9019-ad33-467d-a09d-32563bfab261" valueTypeId="1f178df0-86de-43eb-bb62-1772758c6165"/>
-    <managerType typeId="4238dfc6-2e3f-4e59-89b4-5525ffa4839d" valueTypeId="4fae1dc6-a6ca-4129-ac47-fc9261bdd7bf"/>
-  </producedTypes>
-  <name>D4011_FreeStocks</name>
+ <producedTypes>
+  <objectType typeId="54ed9019-ad33-467d-a09d-32563bfab261" valueTypeId="1f178df0-86de-43eb-bb62-1772758c6165"/>
+  <managerType typeId="4238dfc6-2e3f-4e59-89b4-5525ffa4839d" valueTypeId="4fae1dc6-a6ca-4129-ac47-fc9261bdd7bf"/>
+ </producedTypes>
+ <name>D4011_FreeStocks</name>
+ <synonym>
+  <key>ru</key>
+  <value>D4011 Свободные остатки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>D4011 Free stocks</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>D4011 Serbest stoklar</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.D4011_FreeStocks.Template.Template</mainDataCompositionSchema>
+ <templates uuid="d08b8ad8-39c5-4d79-bdb5-651ba66bf88b">
+  <name>Template</name>
   <synonym>
-    <key>en</key>
-    <value>D4011 Free stocks</value>
+   <key>ru</key>
+   <value>Шаблон</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.D4011_FreeStocks.Template.Template</mainDataCompositionSchema>
-  <templates uuid="d08b8ad8-39c5-4d79-bdb5-651ba66bf88b">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>en</key>
+   <value>Template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

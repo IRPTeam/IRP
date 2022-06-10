@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="48d4d3de-e1fd-4dd1-9c00-7d0ccb03822a">
-  <name>DocAdditionalRevenueAllocationServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc additional revenue allocation server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocAdditionalRevenueAllocationServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ распределение доп. доходов на товары сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc additional revenue allocation server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak ek gelir datığım server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

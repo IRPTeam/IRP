@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2d829312-7dcc-4505-a657-c45007a3cd0d">
-  <name>ChequeBond</name>
-  <synonym>
-    <key>en</key>
-    <value>Cheque bond</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.ChequeBonds</content>
-  <parentSubsystem>Subsystem.Treasury</parentSubsystem>
+ <name>ChequeBond</name>
+ <synonym>
+  <key>ru</key>
+  <value>Банковский чек</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cheque bond</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Çek/Senet</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.ChequeBonds</content>
+ <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<dataSource>
 		<name>DataSource1</name>
@@ -30,7 +30,15 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
@@ -85,7 +93,15 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
@@ -117,7 +133,15 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
@@ -129,8 +153,16 @@
 			<field>Recorder</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Регистратор</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Recorder</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>İşlem evrakı</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -148,8 +180,16 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номенклатура</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -180,7 +220,15 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
@@ -272,8 +320,16 @@
 				<field>Item</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Номенклатура</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Item</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Malzeme</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -290,8 +346,16 @@
 				<field>Recorder</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Регистратор</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Recorder</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>İşlem evrakı</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -340,8 +404,16 @@
 				<field>IsRelevance</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Актуальный</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Is relevance</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Geçerli</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -388,8 +460,16 @@ ORDER BY
 				<field>IsRelevance</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Актуальный</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Is relevance</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Geçerli</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -398,8 +478,16 @@ ORDER BY
 				<field>Batch</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Партия</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Batch</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Parti</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -415,8 +503,16 @@ ORDER BY
 				<field>Item</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Номенклатура</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Item</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Malzeme</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -443,8 +539,16 @@ ORDER BY
 				<field>QuantityReceipt</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Количество расход</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Quantity receipt</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Miktar gelen</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -456,8 +560,16 @@ ORDER BY
 				<field>AmountReceipt</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Сумма приход</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Amount receipt</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Gelen tutar</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -469,8 +581,16 @@ ORDER BY
 				<field>QuantityExpense</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Количество расход</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Quantity expense</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Miktar çıkan</v8:content>
 					</v8:item>
 				</title>
 				<role>
@@ -566,8 +686,16 @@ WHERE
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Начало периода</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Begin of period</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem başı</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -585,8 +713,16 @@ WHERE
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Конец периода</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>End of period</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem sonu</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -604,8 +740,16 @@ WHERE
 		<name>ReportPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Период</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Period</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -625,16 +769,32 @@ WHERE
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:lwsTitle>
 						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Начальный остаток</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Opening balance</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açılış tutarı</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>QuantityOpeningBalance</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Количество</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Quantity</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Miktar</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -642,8 +802,16 @@ WHERE
 						<dcsset:field>AmountOpeningBalance</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Сумма</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Amount</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Tutar</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -651,8 +819,16 @@ WHERE
 						<dcsset:field>AmountCostOpeningBalance</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Себестоимость</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Cost</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Maliyet</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -661,16 +837,32 @@ WHERE
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:lwsTitle>
 						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Приход</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Receipt</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Giriş</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>QuantityReceipt</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Количество</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Quantity</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Miktar</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -678,8 +870,16 @@ WHERE
 						<dcsset:field>AmountReceipt</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Сумма</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Amount</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Tutar</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -687,8 +887,16 @@ WHERE
 						<dcsset:field>AmountCostReceipt</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Себестоимость</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Cost</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Maliyet</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -697,16 +905,32 @@ WHERE
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:lwsTitle>
 						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Расход</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Expense</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Çıkış</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>QuantityExpense</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Количество</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Quantity</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Miktar</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -714,8 +938,16 @@ WHERE
 						<dcsset:field>AmountExpense</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Сумма</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Amount</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Tutar</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -723,8 +955,16 @@ WHERE
 						<dcsset:field>AmountCostExpense</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Себестоимость</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Cost</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Maliyet</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -733,16 +973,32 @@ WHERE
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:lwsTitle>
 						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Конечный остаток</v8:content>
+						</v8:item>
+						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Closing balance</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapanış bakiyesi</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>QuantityClosingBalance</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Количество</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Quantity</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Miktar</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -750,8 +1006,16 @@ WHERE
 						<dcsset:field>AmountClosingBalance</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Сумма</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Amount</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Tutar</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -759,8 +1023,16 @@ WHERE
 						<dcsset:field>AmountCostClosingBalance</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Себестоимость</v8:content>
+							</v8:item>
+							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Cost</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Maliyet</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -792,7 +1064,20 @@ WHERE
 					<dcscor:parameter>ReportPeriod</dcscor:parameter>
 					<dcscor:value xsi:nil="true"/>
 					<dcsset:userSettingID>b6476ecc-b78a-40bd-a80c-e04c27d66ca3</dcsset:userSettingID>
-					<dcsset:userSettingPresentation xsi:type="xs:string">Period</dcsset:userSettingPresentation>
+					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Период</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Period</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem</v8:content>
+						</v8:item>
+					</dcsset:userSettingPresentation>
 				</dcscor:item>
 			</dcsset:dataParameters>
 			<dcsset:order>
@@ -850,7 +1135,20 @@ WHERE
 					<dcsset:appearance>
 						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 							<dcscor:parameter>Text</dcscor:parameter>
-							<dcscor:value xsi:type="xs:string">Over Batch balance</dcscor:value>
+							<dcscor:value xsi:type="v8:LocalStringType">
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Перерасход по партии</v8:content>
+								</v8:item>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Over Batch balance</v8:content>
+								</v8:item>
+								<v8:item>
+									<v8:lang>tr</v8:lang>
+									<v8:content>Fazla parti bakiyesi</v8:content>
+								</v8:item>
+							</dcscor:value>
 						</dcscor:item>
 					</dcsset:appearance>
 					<dcsset:useInOverall>DontUse</dcsset:useInOverall>

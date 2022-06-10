@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bf47fa08-6ceb-45ec-b38b-628663e2f719">
-  <name>SaasClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Saas client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>SaasClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>SaaS клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Saas client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Saas client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

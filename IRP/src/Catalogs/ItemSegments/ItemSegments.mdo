@@ -1,130 +1,194 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6650b44c-3cf7-4076-af1a-7b1745430f4f">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="6650b44c-3cf7-4076-af1a-7b1745430f4f">
+ <producedTypes>
+  <objectType typeId="b483d9b4-087a-47e1-894a-edf2fd4031cf" valueTypeId="46615f63-b005-42e7-a5c0-b4141249db57"/>
+  <refType typeId="4a0f15a4-7a06-4aea-8a40-a16e8456a998" valueTypeId="2cf09ea7-8097-4763-b0c9-f566ff3855e3"/>
+  <selectionType typeId="45e7a99b-f5ae-4a87-bb24-236a775b1e04" valueTypeId="0faa6a4d-14f5-4a89-9004-a36532fef934"/>
+  <listType typeId="e97e81ab-d3ec-40ff-bbf5-39b07b352113" valueTypeId="4fa20078-b533-4c1e-9dd9-0a4a6c0d3f3e"/>
+  <managerType typeId="4fbb907b-4dee-4f10-a2bf-b1ffb1f6fdaf" valueTypeId="b4d31282-0190-4180-afdb-8c907a274f6e"/>
+ </producedTypes>
+ <name>ItemSegments</name>
+ <synonym>
+  <key>ru</key>
+  <value>Сегменты номенклатуры</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Item segments</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ürün segment kartları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_ItemSegments</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_ItemSegments</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.ItemSegments.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.ItemSegments.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.ItemSegments.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.ItemSegments.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Сегмент номенклатуры</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Item segment</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Malzeme listesi</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.ItemSegments.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.ItemSegments.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.ItemSegments.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <tabularSections uuid="f91b815c-ee9c-4953-a16e-54d527c9e6c8">
   <producedTypes>
-    <objectType typeId="b483d9b4-087a-47e1-894a-edf2fd4031cf" valueTypeId="46615f63-b005-42e7-a5c0-b4141249db57"/>
-    <refType typeId="4a0f15a4-7a06-4aea-8a40-a16e8456a998" valueTypeId="2cf09ea7-8097-4763-b0c9-f566ff3855e3"/>
-    <selectionType typeId="45e7a99b-f5ae-4a87-bb24-236a775b1e04" valueTypeId="0faa6a4d-14f5-4a89-9004-a36532fef934"/>
-    <listType typeId="e97e81ab-d3ec-40ff-bbf5-39b07b352113" valueTypeId="4fa20078-b533-4c1e-9dd9-0a4a6c0d3f3e"/>
-    <managerType typeId="4fbb907b-4dee-4f10-a2bf-b1ffb1f6fdaf" valueTypeId="b4d31282-0190-4180-afdb-8c907a274f6e"/>
+   <objectType typeId="71c7934a-9b6e-468f-8c29-860e23ec833f" valueTypeId="16a9c0ff-17f1-4cea-a5e1-aad65200a415"/>
+   <rowType typeId="8e1c3c0a-fd2a-4a22-b7bc-09027077e0f8" valueTypeId="1774fde4-c721-4e56-ae8c-046eee72bcf0"/>
   </producedTypes>
-  <name>ItemSegments</name>
+  <name>AddAttributes</name>
   <synonym>
-    <key>en</key>
-    <value>Item segments</value>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_ItemSegments</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_ItemSegments</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.ItemSegments.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.ItemSegments.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.ItemSegments.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.ItemSegments.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="bdba2576-b13f-4fc8-a1d7-3eb1ea26e47a">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Item segment</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.ItemSegments.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.ItemSegments.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.ItemSegments.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <tabularSections uuid="f91b815c-ee9c-4953-a16e-54d527c9e6c8">
-    <producedTypes>
-      <objectType typeId="71c7934a-9b6e-468f-8c29-860e23ec833f" valueTypeId="16a9c0ff-17f1-4cea-a5e1-aad65200a415"/>
-      <rowType typeId="8e1c3c0a-fd2a-4a22-b7bc-09027077e0f8" valueTypeId="1774fde4-c721-4e56-ae8c-046eee72bcf0"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="bdba2576-b13f-4fc8-a1d7-3eb1ea26e47a">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="87215bdb-5f15-428e-ba54-eaea5641376f">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.ItemSegments.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="b8453217-35cb-4dee-b99d-a6fe2bcc3015">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="48ffdd45-43be-4659-a1a0-a2ac58cfa261">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="49e3c075-1396-44aa-83e4-2a1562712f0c">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="87215bdb-5f15-428e-ba54-eaea5641376f">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.ItemSegments.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="b8453217-35cb-4dee-b99d-a6fe2bcc3015">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="48ffdd45-43be-4659-a1a0-a2ac58cfa261">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="49e3c075-1396-44aa-83e4-2a1562712f0c">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

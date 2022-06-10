@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="45b2f6b7-de87-4836-bb23-86aa2204b5f5">
-  <name>Settings</name>
-  <synonym>
-    <key>en</key>
-    <value>Settings</value>
-  </synonym>
+ <name>Settings</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Settings</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ayarlar</value>
+ </synonym>
 </mdclass:CommonPicture>

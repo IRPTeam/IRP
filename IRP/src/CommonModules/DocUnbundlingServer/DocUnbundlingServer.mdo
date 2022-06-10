@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="75a191eb-b92f-4a3a-851d-97d55d058ab0">
-  <name>DocUnbundlingServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc unbundling server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocUnbundlingServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ разукомлектация набора сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc unbundling server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc takım bozma fişi server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

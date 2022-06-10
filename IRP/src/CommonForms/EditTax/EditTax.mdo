@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="367b0b8a-0367-45e7-9e87-961b5316f606">
-  <name>EditTax</name>
-  <synonym>
-    <key>en</key>
-    <value>Edit tax</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>EditTax</name>
+ <synonym>
+  <key>ru</key>
+  <value>Редактирование налога</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Edit tax</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Vergi değiştir</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

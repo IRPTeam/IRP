@@ -1,28 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ff252976-62d1-4c03-83ae-d2e0165ad3f7">
-  <name>PurchaseAP</name>
-  <synonym>
-    <key>en</key>
-    <value>Purchase  - A/P</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Purchase</picture>
-  </picture>
-  <content>CommonModule.DocPurchaseOrderClient</content>
-  <content>CommonModule.DocPurchaseOrderServer</content>
-  <content>CommonModule.DocPurchaseInvoiceClient</content>
-  <content>CommonModule.DocPurchaseInvoiceServer</content>
-  <content>CommonCommand.OpenPartnersVendor</content>
-  <content>Catalog.Items</content>
-  <content>Catalog.Agreements</content>
-  <content>CommonCommand.OpenVendorAgreements</content>
-  <content>Catalog.PartnersBankAccounts</content>
-  <content>Document.PurchaseOrderClosing</content>
-  <content>Catalog.LegalNameContracts</content>
-  <content>Catalog.PartnerItems</content>
-  <subsystems>Pricing</subsystems>
-  <subsystems>Purchase</subsystems>
-  <subsystems>PurchaseReturn</subsystems>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ff252976-62d1-4c03-83ae-d2e0165ad3f7">
+ <name>PurchaseAP</name>
+ <synonym>
+  <key>ru</key>
+  <value>Закупки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Purchase  - A/P</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Alımlar</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Purchase</picture>
+ </picture>
+ <content>CommonModule.DocPurchaseOrderClient</content>
+ <content>CommonModule.DocPurchaseOrderServer</content>
+ <content>CommonModule.DocPurchaseInvoiceClient</content>
+ <content>CommonModule.DocPurchaseInvoiceServer</content>
+ <content>CommonCommand.OpenPartnersVendor</content>
+ <content>Catalog.Items</content>
+ <content>Catalog.Agreements</content>
+ <content>CommonCommand.OpenVendorAgreements</content>
+ <content>Catalog.PartnersBankAccounts</content>
+ <content>Document.PurchaseOrderClosing</content>
+ <content>Catalog.LegalNameContracts</content>
+ <content>Catalog.PartnerItems</content>
+ <subsystems>Pricing</subsystems>
+ <subsystems>Purchase</subsystems>
+ <subsystems>PurchaseReturn</subsystems>
 </mdclass:Subsystem>

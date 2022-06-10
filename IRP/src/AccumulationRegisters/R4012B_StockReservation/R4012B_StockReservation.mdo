@@ -1,79 +1,119 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9c0c7a4f-5dd5-4403-8c84-98fdd1400665">
-  <producedTypes>
-    <selectionType typeId="cc253639-0362-4d1d-9ba0-b5ef458b3833" valueTypeId="a8c8a4e9-1196-46f5-b95a-9fa5a2c89ea9"/>
-    <listType typeId="9c841f01-0fcd-4d5b-9335-f2caa22a86b5" valueTypeId="29beb9ff-afcc-49b7-9201-fbaabe4bc7b2"/>
-    <managerType typeId="a601c8d6-01fb-480e-ba1a-f843c6e73451" valueTypeId="5540e099-1055-4456-807c-1554185d522b"/>
-    <recordSetType typeId="94b686b6-1e80-44c3-99f5-8af80cd39ef3" valueTypeId="fb42a6c9-6dda-49b2-b4be-50dc0994c414"/>
-    <recordKeyType typeId="34dd3cdb-2a5c-4290-92a8-70159ba4c0a3" valueTypeId="3fc44793-f718-4198-ba1c-ff8782937026"/>
-    <recordType typeId="305571f4-6bd6-4055-99df-e038059a297d" valueTypeId="48fa8827-c0bf-4f62-860b-445116c6f842"/>
-  </producedTypes>
-  <name>R4012B_StockReservation</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="9c0c7a4f-5dd5-4403-8c84-98fdd1400665">
+ <producedTypes>
+  <selectionType typeId="cc253639-0362-4d1d-9ba0-b5ef458b3833" valueTypeId="a8c8a4e9-1196-46f5-b95a-9fa5a2c89ea9"/>
+  <listType typeId="9c841f01-0fcd-4d5b-9335-f2caa22a86b5" valueTypeId="29beb9ff-afcc-49b7-9201-fbaabe4bc7b2"/>
+  <managerType typeId="a601c8d6-01fb-480e-ba1a-f843c6e73451" valueTypeId="5540e099-1055-4456-807c-1554185d522b"/>
+  <recordSetType typeId="94b686b6-1e80-44c3-99f5-8af80cd39ef3" valueTypeId="fb42a6c9-6dda-49b2-b4be-50dc0994c414"/>
+  <recordKeyType typeId="34dd3cdb-2a5c-4290-92a8-70159ba4c0a3" valueTypeId="3fc44793-f718-4198-ba1c-ff8782937026"/>
+  <recordType typeId="305571f4-6bd6-4055-99df-e038059a297d" valueTypeId="48fa8827-c0bf-4f62-860b-445116c6f842"/>
+ </producedTypes>
+ <name>R4012B_StockReservation</name>
+ <synonym>
+  <key>ru</key>
+  <value>R4012 Товары в резерве на складах</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R4012 Stock Reservation</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R4012 Stok rezervler</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="c6cdd703-088e-4bee-a9b5-59b1acc751f7">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R4012 Stock Reservation</value>
+   <key>ru</key>
+   <value>Количество</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="c6cdd703-088e-4bee-a9b5-59b1acc751f7">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="ff1fd87a-03fd-4455-9e4b-47c49608eabe">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="e4606b5c-72ff-4d37-847f-d94abb4469ff">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="49bbe1c9-aa57-40f5-9a33-8c24fde19bb2">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.PurchaseReturnOrder</types>
-      <types>DocumentRef.SalesOrder</types>
-      <types>DocumentRef.InventoryTransferOrder</types>
-      <types>DocumentRef.InventoryTransfer</types>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="ff1fd87a-03fd-4455-9e4b-47c49608eabe">
+  <name>Store</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="e4606b5c-72ff-4d37-847f-d94abb4469ff">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="49bbe1c9-aa57-40f5-9a33-8c24fde19bb2">
+  <name>Order</name>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Order</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satış sipariş adedi</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseReturn</types>
+   <types>DocumentRef.PurchaseReturnOrder</types>
+   <types>DocumentRef.SalesOrder</types>
+   <types>DocumentRef.InventoryTransferOrder</types>
+   <types>DocumentRef.InventoryTransfer</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

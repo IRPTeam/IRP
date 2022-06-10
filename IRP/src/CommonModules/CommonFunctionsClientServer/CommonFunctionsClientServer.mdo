@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="caa00c5c-9ef1-4c0f-81ce-e74ba2a2959a">
-  <name>CommonFunctionsClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Common functions client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>CommonFunctionsClientServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Общие функции клиент сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Common functions client server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ana fonksiyonlar istemci sunucu</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

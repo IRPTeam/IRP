@@ -1,199 +1,319 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:ChartOfCharacteristicTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ffd829e0-6f20-4935-a1df-2131b1e7162f">
-  <producedTypes>
-    <objectType typeId="42298251-a43c-4b7f-bb39-020804d184e1" valueTypeId="0ad39381-8574-424c-817c-f441e411f9c1"/>
-    <refType typeId="7876c684-bef8-4be7-886a-5d417b2f560c" valueTypeId="08a7b23f-eae3-42c8-8c7c-778e94898682"/>
-    <selectionType typeId="3189ef04-4ba5-42a2-8cc6-42d722649814" valueTypeId="39097787-158e-45b8-9774-59c32112adda"/>
-    <listType typeId="1701a177-39e2-4f2d-96cd-388de3b40edd" valueTypeId="a62f446e-7e2b-4935-9229-feabff4657b3"/>
-    <managerType typeId="31e7b5bb-5e22-4c2f-bf3f-c10f408b4e0a" valueTypeId="9f468186-3c9b-4dfb-bf74-a3b3b0f6d4b8"/>
-    <containerType typeId="93124dc3-b63b-43dc-94cc-3ff8b067bbaf" valueTypeId="311f94b7-2be4-4015-ba84-f6d136fbb09f"/>
-  </producedTypes>
-  <name>IDInfoTypes</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:ChartOfCharacteristicTypes xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ffd829e0-6f20-4935-a1df-2131b1e7162f">
+ <producedTypes>
+  <objectType typeId="42298251-a43c-4b7f-bb39-020804d184e1" valueTypeId="0ad39381-8574-424c-817c-f441e411f9c1"/>
+  <refType typeId="7876c684-bef8-4be7-886a-5d417b2f560c" valueTypeId="08a7b23f-eae3-42c8-8c7c-778e94898682"/>
+  <selectionType typeId="3189ef04-4ba5-42a2-8cc6-42d722649814" valueTypeId="39097787-158e-45b8-9774-59c32112adda"/>
+  <listType typeId="1701a177-39e2-4f2d-96cd-388de3b40edd" valueTypeId="a62f446e-7e2b-4935-9229-feabff4657b3"/>
+  <managerType typeId="31e7b5bb-5e22-4c2f-bf3f-c10f408b4e0a" valueTypeId="9f468186-3c9b-4dfb-bf74-a3b3b0f6d4b8"/>
+  <containerType typeId="93124dc3-b63b-43dc-94cc-3ff8b067bbaf" valueTypeId="311f94b7-2be4-4015-ba84-f6d136fbb09f"/>
+ </producedTypes>
+ <name>IDInfoTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Вид контактной информации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Contact info types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İletişim bilgi türleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Вид контактной информации</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Contact info type</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>İletişim bilgi türü</value>
+ </objectPresentation>
+ <characteristicExtValues>Catalog.IDInfoAddresses</characteristicExtValues>
+ <type>
+  <types>CatalogRef.IDInfoAddresses</types>
+  <types>String</types>
+  <stringQualifiers>
+   <length>512</length>
+  </stringQualifiers>
+ </type>
+ <foldersOnTop>true</foldersOnTop>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>BothWays</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="9e80b819-ee53-4f2d-884a-2a48390eeb09">
+  <name>Comment</name>
   <synonym>
-    <key>en</key>
-    <value>Contact info types</value>
+   <key>ru</key>
+   <value>Комментарий</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Comment</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Açıklama</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>512</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c9507572-811f-4bce-9ddb-bae460f63187">
+  <name>ShowOnForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Показывать на форме</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Show on form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Formda göster</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="05de6f05-29a5-49b9-9770-3699186b7080">
+  <name>ReadOnly</name>
+  <synonym>
+   <key>ru</key>
+   <value>Только чтение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Read only</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Salt okunur</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="060c9eed-e0be-44dc-acf0-47f055b5a6b5">
+  <producedTypes>
+   <objectType typeId="6b8bd8eb-1a94-4c91-8b0b-da553a34904b" valueTypeId="a2c05f04-1a4d-4822-a62b-344b19b92dc0"/>
+   <rowType typeId="ae0aca17-9fee-4963-a9b0-1d4e8c3e580d" valueTypeId="849a8035-9eb6-4e6c-811f-4a6ae2ca8766"/>
+  </producedTypes>
+  <name>ExternalDataProcess</name>
+  <synonym>
+   <key>ru</key>
+   <value>Внешние обработки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Plugins</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Eklentiler</value>
+  </synonym>
+  <attributes uuid="97042539-5fd3-4d0d-9edb-2f2308bb2bbc">
+   <name>Country</name>
+   <synonym>
+    <key>ru</key>
+    <value>Страна</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Country</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ülke</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Countries</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="1cf38532-4bc1-47ec-b32d-769d817b54cc">
+   <name>ExternalDataProc</name>
+   <synonym>
+    <key>ru</key>
+    <value>Внешняя обработка</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Plugins</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Eklentiler</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExternalDataProc</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="03ee1a47-cbc6-4069-85cf-4bb276377668">
+   <name>Settings</name>
+   <synonym>
+    <key>ru</key>
+    <value>Настройки</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Settings</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ayarlar</value>
+   </synonym>
+   <type>
+    <types>ValueStorage</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="f1e8ef1f-0621-4d98-a987-1e5352b76eae">
+  <producedTypes>
+   <objectType typeId="9d46e559-87cc-4330-a684-670107d14be9" valueTypeId="abae850a-ab0f-47a4-9249-5bf4223f77ac"/>
+   <rowType typeId="8978c935-d150-4a45-b8ce-3258511f219f" valueTypeId="430c1784-1c50-439a-a9d4-cb2d157dddef"/>
+  </producedTypes>
+  <name>RelatedValues</name>
+  <synonym>
+   <key>ru</key>
+   <value>Связанные виды контактной информации</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Related values</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bağlı değerler</value>
+  </synonym>
+  <attributes uuid="ffcf1a90-f99a-47b7-816f-34f62e89b44d">
+   <name>IDInfoType</name>
+   <synonym>
+    <key>ru</key>
+    <value>Вид контактной информации</value>
+   </synonym>
+   <synonym>
     <key>en</key>
     <value>Contact info type</value>
-  </objectPresentation>
-  <characteristicExtValues>Catalog.IDInfoAddresses</characteristicExtValues>
-  <type>
-    <types>CatalogRef.IDInfoAddresses</types>
-    <types>String</types>
-    <stringQualifiers>
-      <length>512</length>
-    </stringQualifiers>
-  </type>
-  <foldersOnTop>true</foldersOnTop>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>BothWays</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="9e80b819-ee53-4f2d-884a-2a48390eeb09">
-    <name>Comment</name>
-    <synonym>
-      <key>en</key>
-      <value>Comment</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>512</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>İletişim bilgi türü</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <attributes uuid="c9507572-811f-4bce-9ddb-bae460f63187">
-    <name>ShowOnForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Show on form</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="05de6f05-29a5-49b9-9770-3699186b7080">
-    <name>ReadOnly</name>
-    <synonym>
-      <key>en</key>
-      <value>Read only</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="060c9eed-e0be-44dc-acf0-47f055b5a6b5">
-    <producedTypes>
-      <objectType typeId="6b8bd8eb-1a94-4c91-8b0b-da553a34904b" valueTypeId="a2c05f04-1a4d-4822-a62b-344b19b92dc0"/>
-      <rowType typeId="ae0aca17-9fee-4963-a9b0-1d4e8c3e580d" valueTypeId="849a8035-9eb6-4e6c-811f-4a6ae2ca8766"/>
-    </producedTypes>
-    <name>ExternalDataProcess</name>
-    <synonym>
-      <key>en</key>
-      <value>Plugins</value>
-    </synonym>
-    <attributes uuid="97042539-5fd3-4d0d-9edb-2f2308bb2bbc">
-      <name>Country</name>
-      <synonym>
-        <key>en</key>
-        <value>Country</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Countries</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="1cf38532-4bc1-47ec-b32d-769d817b54cc">
-      <name>ExternalDataProc</name>
-      <synonym>
-        <key>en</key>
-        <value>Plugins</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExternalDataProc</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="03ee1a47-cbc6-4069-85cf-4bb276377668">
-      <name>Settings</name>
-      <synonym>
-        <key>en</key>
-        <value>Settings</value>
-      </synonym>
-      <type>
-        <types>ValueStorage</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="f1e8ef1f-0621-4d98-a987-1e5352b76eae">
-    <producedTypes>
-      <objectType typeId="9d46e559-87cc-4330-a684-670107d14be9" valueTypeId="abae850a-ab0f-47a4-9249-5bf4223f77ac"/>
-      <rowType typeId="8978c935-d150-4a45-b8ce-3258511f219f" valueTypeId="430c1784-1c50-439a-a9d4-cb2d157dddef"/>
-    </producedTypes>
-    <name>RelatedValues</name>
-    <synonym>
-      <key>en</key>
-      <value>Related values</value>
-    </synonym>
-    <attributes uuid="ffcf1a90-f99a-47b7-816f-34f62e89b44d">
-      <name>IDInfoType</name>
-      <synonym>
-        <key>en</key>
-        <value>Contact info type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-  </tabularSections>
-  <forms uuid="8e2a0489-4c4a-4b6a-92d9-b3c681455193">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="fd75f5ca-0369-412f-97ea-73d0d18620c0">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="24e8ad33-3d87-47e0-826e-32575174c328">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="6665f12b-d3a6-4ad7-bf34-eaa5895e0d4c">
-    <name>SelectCountryForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Select country form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="8e2a0489-4c4a-4b6a-92d9-b3c681455193">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="fd75f5ca-0369-412f-97ea-73d0d18620c0">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="24e8ad33-3d87-47e0-826e-32575174c328">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6665f12b-d3a6-4ad7-bf34-eaa5895e0d4c">
+  <name>SelectCountryForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора страны</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Select country form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ülke seçme formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:ChartOfCharacteristicTypes>

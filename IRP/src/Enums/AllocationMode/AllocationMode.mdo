@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d4d5c932-b0e0-4c03-929a-5bfd25297d6a">
-  <producedTypes>
-    <refType typeId="e1107d06-2a6a-4e96-9146-79df9cacdf71" valueTypeId="d1a88fb8-a041-4540-b6c4-5bc4a518f17a"/>
-    <listType typeId="56b499cf-dd31-460f-a4f3-196502250323" valueTypeId="159abc4b-de83-412f-9753-4661988d5215"/>
-    <managerType typeId="447c3375-6a54-4db6-8e7d-7070e922850d" valueTypeId="de58f58a-7a67-4e8c-bea3-0f666ef0648c"/>
-  </producedTypes>
-  <name>AllocationMode</name>
+ <producedTypes>
+  <refType typeId="e1107d06-2a6a-4e96-9146-79df9cacdf71" valueTypeId="d1a88fb8-a041-4540-b6c4-5bc4a518f17a"/>
+  <listType typeId="56b499cf-dd31-460f-a4f3-196502250323" valueTypeId="159abc4b-de83-412f-9753-4661988d5215"/>
+  <managerType typeId="447c3375-6a54-4db6-8e7d-7070e922850d" valueTypeId="de58f58a-7a67-4e8c-bea3-0f666ef0648c"/>
+ </producedTypes>
+ <name>AllocationMode</name>
+ <synonym>
+  <key>ru</key>
+  <value>Способ распределения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Allocation mode</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dağıtım tipi</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="2e135a87-f681-41fe-80fb-392dd88892fb">
+  <name>ByDocuments</name>
   <synonym>
-    <key>en</key>
-    <value>Allocation mode</value>
+   <key>ru</key>
+   <value>По документам</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="2e135a87-f681-41fe-80fb-392dd88892fb">
-    <name>ByDocuments</name>
-    <synonym>
-      <key>en</key>
-      <value>By documents</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="6d83acad-749c-4fdc-b47d-ec088c5f537a">
-    <name>ByRows</name>
-    <synonym>
-      <key>en</key>
-      <value>By rows</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>By documents</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evraklar</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="6d83acad-749c-4fdc-b47d-ec088c5f537a">
+  <name>ByRows</name>
+  <synonym>
+   <key>ru</key>
+   <value>По строкам</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>By rows</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satırlar</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

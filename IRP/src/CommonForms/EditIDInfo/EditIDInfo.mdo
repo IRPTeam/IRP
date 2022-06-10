@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="198da8f1-b7af-4295-b415-44e5bd31a4ac">
-  <name>EditIDInfo</name>
-  <synonym>
-    <key>en</key>
-    <value>Edit contact info</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>EditIDInfo</name>
+ <synonym>
+  <key>ru</key>
+  <value>Редактирование контактной информации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Edit contact info</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İletişim bilgilerini düzenleyin</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

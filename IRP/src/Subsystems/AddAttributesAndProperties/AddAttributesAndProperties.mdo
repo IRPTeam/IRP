@@ -1,20 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4e49ca66-c920-4833-8ead-b5894fcdb135">
-  <name>AddAttributesAndProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional attributes and properties</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <content>InformationRegister.AddProperties</content>
-  <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
-  <content>Catalog.AddAttributeAndPropertyValues</content>
-  <content>Catalog.AddAttributeAndPropertySets</content>
-  <content>CommonModule.AddAttributesAndPropertiesClient</content>
-  <content>CommonModule.AddAttributesAndPropertiesServer</content>
-  <content>DefinedType.typeAddPropertyOwners</content>
-  <content>CommonCommand.AddProperties</content>
-  <content>CommonPicture.AddProperties</content>
-  <content>CommonForm.EditAddProperties</content>
-  <content>CommonPicture.RadioButton</content>
+ <name>AddAttributesAndProperties</name>
+ <synonym>
+  <key>ru</key>
+  <value>Дополнительные реквизиты и сведения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Additional attributes and properties</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek alan ve özellikler</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <content>InformationRegister.AddProperties</content>
+ <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
+ <content>Catalog.AddAttributeAndPropertyValues</content>
+ <content>Catalog.AddAttributeAndPropertySets</content>
+ <content>CommonModule.AddAttributesAndPropertiesClient</content>
+ <content>CommonModule.AddAttributesAndPropertiesServer</content>
+ <content>DefinedType.typeAddPropertyOwners</content>
+ <content>CommonCommand.AddProperties</content>
+ <content>CommonPicture.AddProperties</content>
+ <content>CommonForm.EditAddProperties</content>
+ <content>CommonPicture.RadioButton</content>
 </mdclass:Subsystem>

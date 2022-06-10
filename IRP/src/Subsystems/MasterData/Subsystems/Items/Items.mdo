@@ -1,17 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e453503e-ee19-4426-954b-a1ae16d57415">
-  <name>Items</name>
-  <synonym>
-    <key>en</key>
-    <value>Items</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.ItemTypes</content>
-  <content>Catalog.Items</content>
-  <content>Catalog.ItemSegments</content>
-  <content>Catalog.Units</content>
-  <content>Catalog.Specifications</content>
-  <content>Catalog.PartnerItems</content>
-  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+ <name>Items</name>
+ <synonym>
+  <key>ru</key>
+  <value>Номенклатура</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Items</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Malzemeler</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.ItemTypes</content>
+ <content>Catalog.Items</content>
+ <content>Catalog.ItemSegments</content>
+ <content>Catalog.Units</content>
+ <content>Catalog.Specifications</content>
+ <content>Catalog.PartnerItems</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,27 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2ce62595-b207-4117-90ed-43d5d0455051">
-  <name>Settings</name>
-  <synonym>
-    <key>en</key>
-    <value>Settings</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Settings</picture>
-  </picture>
-  <content>CommonModule.IntegrationClientServer</content>
-  <content>Constant.DefaultPictureStorageVolume</content>
-  <content>CommonForm.MainSettings</content>
-  <content>DataProcessor.DataHistory</content>
-  <content>Catalog.DataBaseStatus</content>
-  <subsystems>AttributeAndProperty</subsystems>
-  <subsystems>Contacts</subsystems>
-  <subsystems>Equipment</subsystems>
-  <subsystems>Integrations</subsystems>
-  <subsystems>ItemsSettings</subsystems>
-  <subsystems>OrdersSettings</subsystems>
-  <subsystems>Users</subsystems>
-  <subsystems>LockDataModification</subsystems>
-  <subsystems>BaseSettings</subsystems>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2ce62595-b207-4117-90ed-43d5d0455051">
+ <name>Settings</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Settings</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ayarlar</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Settings</picture>
+ </picture>
+ <content>CommonModule.IntegrationClientServer</content>
+ <content>Constant.DefaultPictureStorageVolume</content>
+ <content>CommonForm.MainSettings</content>
+ <content>DataProcessor.DataHistory</content>
+ <content>Catalog.DataBaseStatus</content>
+ <subsystems>AttributeAndProperty</subsystems>
+ <subsystems>Contacts</subsystems>
+ <subsystems>Equipment</subsystems>
+ <subsystems>Integrations</subsystems>
+ <subsystems>ItemsSettings</subsystems>
+ <subsystems>OrdersSettings</subsystems>
+ <subsystems>Users</subsystems>
+ <subsystems>LockDataModification</subsystems>
+ <subsystems>BaseSettings</subsystems>
 </mdclass:Subsystem>

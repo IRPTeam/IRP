@@ -1,206 +1,262 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2f59e52d-c53d-4a16-bc76-14315902b613">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2f59e52d-c53d-4a16-bc76-14315902b613">
+ <producedTypes>
+  <objectType typeId="8a4e149c-e1d8-4ab2-88a0-59b583739852" valueTypeId="5c24134b-b0ce-4e27-ab72-32fa2e1fd02f"/>
+  <refType typeId="c1f07887-e046-4099-9683-fb4ff9681330" valueTypeId="7d1725e4-e245-40d9-88e5-7f35505f30aa"/>
+  <selectionType typeId="ddf62c30-4c18-421b-b2d3-3f2fca79c030" valueTypeId="3a492f7a-adc9-40c2-9608-ebd303318049"/>
+  <listType typeId="7417b71a-6f52-4100-b3c7-919da79fd767" valueTypeId="db27ed8c-f104-439d-a05b-e3b86effcb3e"/>
+  <managerType typeId="71635ee2-58ef-48db-8e0d-f9c947fc3b80" valueTypeId="a16df81b-d66a-43c8-b7d6-9f23d4c340c6"/>
+ </producedTypes>
+ <name>CurrencyMovementSets</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки вывода мультивалютной аналитики</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Multi currency movement sets</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Çoklu döviz kırılım görünüm tanımları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Настройки вывода мультивалютной аналитики</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Multi currency movement set</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Çoklu döviz kırılım görünüm tanımı</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="d50dbacb-cae9-4f65-8c2b-a2a5ebacda37">
+   <name>Document_SalesInvoice</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="25198824-1fc9-4749-b7fc-0dded1c3a3ab">
+   <name>Document_CashExpense</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="71c11cfc-caf7-4922-86df-b2e5e570cd65">
+   <name>Document_CashRevenue</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="8bb87871-4746-4dfa-8b52-8221dd7c9241">
+   <name>Document_IncomingPaymentOrder</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="bfa8102d-9b5f-497a-8a61-6f80bd884370">
+   <name>Document_OutgoingPaymentOrder</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="dbf502f5-8369-489e-b9e4-5209a8ca7dd9">
+   <name>Document_CashTransferOrder</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="0ec927ef-5791-4545-8e44-88b7fbe76143">
+   <name>Document_BankReceipt</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="33aa1781-da12-4df7-899a-95d9699b9768">
+   <name>Document_CashPayment</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="171747fe-dc8b-4bed-be8a-ee75f9281870">
+   <name>Document_BankPayment</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="d47ab430-94af-4ef0-8b8f-9ef4d9b63423">
+   <name>Document_CashReceipt</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="2a2008ac-52d6-4eb1-b809-b54bfe589b83">
+   <name>Document_SalesOrder</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="964c111d-f051-44dd-a6bc-5f7725ad659c">
+   <name>Document_PurchaseOrder</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="8c378aa3-53c5-4efe-be32-e4ed59dd6d9c">
+   <name>Document_PurchaseInvoice</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="6e928ee3-afac-4628-874c-e2cf5461f826">
+   <name>Document_SalesReturnOrder</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="dddee130-7c15-4654-9138-ac8abff3192e">
+   <name>Document_SalesReturn</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="1ac460c8-902b-4275-b831-ba70b97272fe">
+   <name>Document_PurchaseReturnOrder</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="5a246425-1bb6-4fe6-b41f-b8051364f750">
+   <name>Document_PurchaseReturn</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="3053745a-4309-44cc-b606-09e7dd62f74b">
+   <name>Document_CreditNote</name>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="de5fda38-0918-458a-9016-e51b46979277">
+   <name>Document_DebitNote</name>
+   <description>Document debit note</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.CurrencyMovementSets.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.CurrencyMovementSets.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.CurrencyMovementSets.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <tabularSections uuid="2f9a0d62-28cc-4f22-a05c-642279fd6410">
   <producedTypes>
-    <objectType typeId="8a4e149c-e1d8-4ab2-88a0-59b583739852" valueTypeId="5c24134b-b0ce-4e27-ab72-32fa2e1fd02f"/>
-    <refType typeId="c1f07887-e046-4099-9683-fb4ff9681330" valueTypeId="7d1725e4-e245-40d9-88e5-7f35505f30aa"/>
-    <selectionType typeId="ddf62c30-4c18-421b-b2d3-3f2fca79c030" valueTypeId="3a492f7a-adc9-40c2-9608-ebd303318049"/>
-    <listType typeId="7417b71a-6f52-4100-b3c7-919da79fd767" valueTypeId="db27ed8c-f104-439d-a05b-e3b86effcb3e"/>
-    <managerType typeId="71635ee2-58ef-48db-8e0d-f9c947fc3b80" valueTypeId="a16df81b-d66a-43c8-b7d6-9f23d4c340c6"/>
+   <objectType typeId="2d8114c4-56a3-4f1f-a0b8-8f1ce1d07132" valueTypeId="75e66731-30d0-455b-bbcf-89a4f203a06d"/>
+   <rowType typeId="927a8253-127a-4281-abfc-3c994523488d" valueTypeId="00293adc-19ca-4337-9282-7ea7c7253272"/>
   </producedTypes>
-  <name>CurrencyMovementSets</name>
+  <name>CurrencyMovements</name>
   <synonym>
-    <key>en</key>
-    <value>Multi currency movement sets</value>
+   <key>ru</key>
+   <value>Мультивалютная аналитика</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Multi currency movements</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz kırılımları</value>
+  </synonym>
+  <attributes uuid="909e88c1-cf12-4c03-9416-f0c0b1fb85d1">
+   <name>CurrencyMovementType</name>
+   <synonym>
+    <key>ru</key>
+    <value>Вид мультивалютной аналитики</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Multi currency movement set</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="d50dbacb-cae9-4f65-8c2b-a2a5ebacda37">
-      <name>Document_SalesInvoice</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="25198824-1fc9-4749-b7fc-0dded1c3a3ab">
-      <name>Document_CashExpense</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="71c11cfc-caf7-4922-86df-b2e5e570cd65">
-      <name>Document_CashRevenue</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="8bb87871-4746-4dfa-8b52-8221dd7c9241">
-      <name>Document_IncomingPaymentOrder</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="bfa8102d-9b5f-497a-8a61-6f80bd884370">
-      <name>Document_OutgoingPaymentOrder</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="dbf502f5-8369-489e-b9e4-5209a8ca7dd9">
-      <name>Document_CashTransferOrder</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="0ec927ef-5791-4545-8e44-88b7fbe76143">
-      <name>Document_BankReceipt</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="33aa1781-da12-4df7-899a-95d9699b9768">
-      <name>Document_CashPayment</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="171747fe-dc8b-4bed-be8a-ee75f9281870">
-      <name>Document_BankPayment</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="d47ab430-94af-4ef0-8b8f-9ef4d9b63423">
-      <name>Document_CashReceipt</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="2a2008ac-52d6-4eb1-b809-b54bfe589b83">
-      <name>Document_SalesOrder</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="964c111d-f051-44dd-a6bc-5f7725ad659c">
-      <name>Document_PurchaseOrder</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="8c378aa3-53c5-4efe-be32-e4ed59dd6d9c">
-      <name>Document_PurchaseInvoice</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="6e928ee3-afac-4628-874c-e2cf5461f826">
-      <name>Document_SalesReturnOrder</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="dddee130-7c15-4654-9138-ac8abff3192e">
-      <name>Document_SalesReturn</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="1ac460c8-902b-4275-b831-ba70b97272fe">
-      <name>Document_PurchaseReturnOrder</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="5a246425-1bb6-4fe6-b41f-b8051364f750">
-      <name>Document_PurchaseReturn</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="3053745a-4309-44cc-b606-09e7dd62f74b">
-      <name>Document_CreditNote</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="de5fda38-0918-458a-9016-e51b46979277">
-      <name>Document_DebitNote</name>
-      <description>Document debit note</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.CurrencyMovementSets.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.CurrencyMovementSets.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.CurrencyMovementSets.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <tabularSections uuid="2f9a0d62-28cc-4f22-a05c-642279fd6410">
-    <producedTypes>
-      <objectType typeId="2d8114c4-56a3-4f1f-a0b8-8f1ce1d07132" valueTypeId="75e66731-30d0-455b-bbcf-89a4f203a06d"/>
-      <rowType typeId="927a8253-127a-4281-abfc-3c994523488d" valueTypeId="00293adc-19ca-4337-9282-7ea7c7253272"/>
-    </producedTypes>
-    <name>CurrencyMovements</name>
-    <synonym>
-      <key>en</key>
-      <value>Multi currency movements</value>
-    </synonym>
-    <attributes uuid="909e88c1-cf12-4c03-9416-f0c0b1fb85d1">
-      <name>CurrencyMovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Multi currency movement type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="d20072bf-0c41-4003-9f07-fdee7afb447c">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2f64f964-0756-4a68-8a0c-a819e91b52fb">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="34622b7e-cf77-4d01-8f11-a05fb8a2f81f">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>Multi currency movement type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Çoklu döviz kırılım tipi</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="d20072bf-0c41-4003-9f07-fdee7afb447c">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2f64f964-0756-4a68-8a0c-a819e91b52fb">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="34622b7e-cf77-4d01-8f11-a05fb8a2f81f">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

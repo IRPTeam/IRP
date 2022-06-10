@@ -1,43 +1,75 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e1882b73-c92c-42f9-9f19-7af301c01a14">
-  <producedTypes>
-    <objectType typeId="d8b907b0-76ca-4041-aab4-ca83fae6f2b6" valueTypeId="3c9580c2-16ff-42a6-ab02-87ae95662f01"/>
-    <managerType typeId="69653862-defe-4876-bdcd-86663deeee4c" valueTypeId="523a77c9-4eb4-43eb-b95c-63a41b195f0f"/>
-  </producedTypes>
+ <producedTypes>
+  <objectType typeId="d8b907b0-76ca-4041-aab4-ca83fae6f2b6" valueTypeId="3c9580c2-16ff-42a6-ab02-87ae95662f01"/>
+  <managerType typeId="69653862-defe-4876-bdcd-86663deeee4c" valueTypeId="523a77c9-4eb4-43eb-b95c-63a41b195f0f"/>
+ </producedTypes>
+ <name>OffsetOfAdvances</name>
+ <synonym>
+  <key>ru</key>
+  <value>Зачет авансов партнеров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Offset of advances</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cari hesap avans kapaması</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>Report.OffsetOfAdvances.Form.ReportForm</defaultForm>
+ <forms uuid="7f4fade6-ff7a-4235-81b9-7ac3befe801f">
+  <name>ReportForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма отчета</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Report form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Rapor formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="21e00314-2f4f-498d-b03f-977819635890">
+  <name>Template</name>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
+  </synonym>
+ </templates>
+ <commands uuid="1709ab27-8e39-40f9-b769-ef262b69b6fe">
   <name>OffsetOfAdvances</name>
   <synonym>
-    <key>en</key>
-    <value>Offset of advances</value>
+   <key>ru</key>
+   <value>Зачет авансов партнеров</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>Report.OffsetOfAdvances.Form.ReportForm</defaultForm>
-  <forms uuid="7f4fade6-ff7a-4235-81b9-7ac3befe801f">
-    <name>ReportForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Report form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="21e00314-2f4f-498d-b03f-977819635890">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-  </templates>
-  <commands uuid="1709ab27-8e39-40f9-b769-ef262b69b6fe">
-    <name>OffsetOfAdvances</name>
-    <synonym>
-      <key>en</key>
-      <value>Offset of advances</value>
-    </synonym>
-    <group>CommandGroup.Service</group>
-    <commandParameterType>
-      <types>DocumentRef.VendorsAdvancesClosing</types>
-      <types>DocumentRef.CustomersAdvancesClosing</types>
-    </commandParameterType>
-    <representation>Auto</representation>
-  </commands>
+  <synonym>
+   <key>en</key>
+   <value>Offset of advances</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap avans kapaması</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>DocumentRef.VendorsAdvancesClosing</types>
+   <types>DocumentRef.CustomersAdvancesClosing</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Report>

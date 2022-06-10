@@ -1,4 +1,4 @@
-
+﻿
 Function GetArrayOfTaxInfo(Form) Export
 	TaxesCache = TaxesClientServer.GetTaxesCache(Form);
 	If TaxesCache.Property("ArrayOfTaxInfo") Then

@@ -1,36 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:HTTPService xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="07d367bd-2248-43c3-9ebd-9ca89b331434">
-  <name>FileTransferService</name>
+ <name>FileTransferService</name>
+ <synonym>
+  <key>ru</key>
+  <value>Сервис передачи файлов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>File transfer service</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dosya transfer servisi</value>
+ </synonym>
+ <rootURL>filetransfer</rootURL>
+ <reuseSessions>AutoUse</reuseSessions>
+ <sessionMaxAge>20</sessionMaxAge>
+ <urlTemplates uuid="aca3b8a7-f259-49e5-9685-82b2de67dab1">
+  <name>FileTransfer</name>
   <synonym>
-    <key>en</key>
-    <value>File transfer service</value>
+   <key>ru</key>
+   <value>Передача файлов</value>
   </synonym>
-  <rootURL>filetransfer</rootURL>
-  <reuseSessions>AutoUse</reuseSessions>
-  <sessionMaxAge>20</sessionMaxAge>
-  <urlTemplates uuid="aca3b8a7-f259-49e5-9685-82b2de67dab1">
-    <name>FileTransfer</name>
-    <synonym>
-      <key>en</key>
-      <value>File transfer</value>
-    </synonym>
-    <template>/{storage}/{filename}/*</template>
-    <methods uuid="7f666863-ca80-47a1-8bac-3a38217ca518">
-      <name>POST</name>
-      <synonym>
-        <key>en</key>
-        <value>POST</value>
-      </synonym>
-      <httpMethod>POST</httpMethod>
-      <handler>FileTransferPOST</handler>
-    </methods>
-    <methods uuid="1bf7e713-5834-446d-8f9b-3bfa469de3b4">
-      <name>GET</name>
-      <synonym>
-        <key>en</key>
-        <value>GET</value>
-      </synonym>
-      <handler>FileTransferGET</handler>
-    </methods>
-  </urlTemplates>
+  <synonym>
+   <key>en</key>
+   <value>File transfer</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dosya transfer</value>
+  </synonym>
+  <template>/{storage}/{filename}/*</template>
+  <methods uuid="7f666863-ca80-47a1-8bac-3a38217ca518">
+   <name>POST</name>
+   <synonym>
+    <key>ru</key>
+    <value>POST</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>POST</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>POST</value>
+   </synonym>
+   <httpMethod>POST</httpMethod>
+   <handler>FileTransferPOST</handler>
+  </methods>
+  <methods uuid="1bf7e713-5834-446d-8f9b-3bfa469de3b4">
+   <name>GET</name>
+   <synonym>
+    <key>ru</key>
+    <value>GET</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>GET</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>GET</value>
+   </synonym>
+   <handler>FileTransferGET</handler>
+  </methods>
+ </urlTemplates>
 </mdclass:HTTPService>

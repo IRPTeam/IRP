@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b301a04d-ad33-482e-9608-f12d8224eb24">
-  <producedTypes>
-    <refType typeId="651ab4a2-a111-455b-97cd-04a88ea7003f" valueTypeId="314f5252-2949-4aed-adcd-24e3e238d2dd"/>
-    <listType typeId="5ef42000-7eca-4177-8356-fc54f7a11b11" valueTypeId="ad17b611-9543-42a7-8c16-0ab2e1fd6947"/>
-    <managerType typeId="45797a11-71a7-4018-b369-5beaf916584a" valueTypeId="fed07f1a-5913-4554-893c-ae25cfd6706c"/>
-  </producedTypes>
-  <name>TaxType</name>
+ <producedTypes>
+  <refType typeId="651ab4a2-a111-455b-97cd-04a88ea7003f" valueTypeId="314f5252-2949-4aed-adcd-24e3e238d2dd"/>
+  <listType typeId="5ef42000-7eca-4177-8356-fc54f7a11b11" valueTypeId="ad17b611-9543-42a7-8c16-0ab2e1fd6947"/>
+  <managerType typeId="45797a11-71a7-4018-b369-5beaf916584a" valueTypeId="fed07f1a-5913-4554-893c-ae25cfd6706c"/>
+ </producedTypes>
+ <name>TaxType</name>
+ <synonym>
+  <key>ru</key>
+  <value>Вид налога</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Tax type</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Vergi türü</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="617ef3ad-7549-4bcc-875f-ec7cd2d60aab">
+  <name>Rate</name>
   <synonym>
-    <key>en</key>
-    <value>Tax type</value>
+   <key>ru</key>
+   <value>Ставка</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="617ef3ad-7549-4bcc-875f-ec7cd2d60aab">
-    <name>Rate</name>
-    <synonym>
-      <key>en</key>
-      <value>Rate</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="455cfb08-4b79-442d-a44b-92b8298c6a16">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Rate</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Oran</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="455cfb08-4b79-442d-a44b-92b8298c6a16">
+  <name>Amount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

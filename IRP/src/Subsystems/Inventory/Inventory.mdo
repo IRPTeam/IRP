@@ -1,29 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="68228508-02c9-480b-aafd-9ad2d28d0eee">
-  <name>Inventory</name>
-  <synonym>
-    <key>en</key>
-    <value>Inventory</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Store</picture>
-  </picture>
-  <content>Catalog.Stores</content>
-  <content>Document.ShipmentConfirmation</content>
-  <content>Document.GoodsReceipt</content>
-  <content>Document.PhysicalCountByLocation</content>
-  <content>Document.StockAdjustmentAsWriteOff</content>
-  <content>Document.StockAdjustmentAsSurplus</content>
-  <content>Document.PhysicalInventory</content>
-  <content>DataProcessor.MobileInvent</content>
-  <content>Document.CalculationMovementCosts</content>
-  <content>Document.AdditionalCostAllocation</content>
-  <content>Report.BatchBalance</content>
-  <content>Report.BatchBalanceSimple</content>
-  <content>Document.AdditionalRevenueAllocation</content>
-  <subsystems>ComposedItems</subsystems>
-  <subsystems>Items</subsystems>
-  <subsystems>Transfers</subsystems>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="68228508-02c9-480b-aafd-9ad2d28d0eee">
+ <name>Inventory</name>
+ <synonym>
+  <key>ru</key>
+  <value>Склад</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Inventory</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Stok</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Store</picture>
+ </picture>
+ <content>Catalog.Stores</content>
+ <content>Document.ShipmentConfirmation</content>
+ <content>Document.GoodsReceipt</content>
+ <content>Document.PhysicalCountByLocation</content>
+ <content>Document.StockAdjustmentAsWriteOff</content>
+ <content>Document.StockAdjustmentAsSurplus</content>
+ <content>Document.PhysicalInventory</content>
+ <content>DataProcessor.MobileInvent</content>
+ <content>Document.CalculationMovementCosts</content>
+ <content>Document.AdditionalCostAllocation</content>
+ <content>Report.BatchBalance</content>
+ <content>Report.BatchBalanceSimple</content>
+ <content>Document.AdditionalRevenueAllocation</content>
+ <subsystems>ComposedItems</subsystems>
+ <subsystems>Items</subsystems>
+ <subsystems>Transfers</subsystems>
 </mdclass:Subsystem>

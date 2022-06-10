@@ -1,23 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1b58a2a5-c2af-4c5c-9de8-cad5941b7a9b">
-  <producedTypes>
-    <objectType typeId="51908ab6-6546-455c-8fa3-603bff9f338d" valueTypeId="e0a58753-4217-4baa-992f-d92f718b637b"/>
-    <managerType typeId="fe0d713e-d05d-49e3-a01e-69801c073ad1" valueTypeId="47aa167f-e460-4b3b-b12c-28c95ea3575f"/>
-  </producedTypes>
-  <name>StoreKeeperWorkspace</name>
+ <producedTypes>
+  <objectType typeId="51908ab6-6546-455c-8fa3-603bff9f338d" valueTypeId="e0a58753-4217-4baa-992f-d92f718b637b"/>
+  <managerType typeId="fe0d713e-d05d-49e3-a01e-69801c073ad1" valueTypeId="47aa167f-e460-4b3b-b12c-28c95ea3575f"/>
+ </producedTypes>
+ <name>StoreKeeperWorkspace</name>
+ <synonym>
+  <key>ru</key>
+  <value>Рабочее место менеджера склада</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Store keeper workspace</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Depocu çalışma alanı</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.StoreKeeperWorkspace.Form.Form</defaultForm>
+ <forms uuid="97793506-8fa7-45bf-a81d-a34350987958">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Store keeper workspace</value>
+   <key>ru</key>
+   <value>Форма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.StoreKeeperWorkspace.Form.Form</defaultForm>
-  <forms uuid="97793506-8fa7-45bf-a81d-a34350987958">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

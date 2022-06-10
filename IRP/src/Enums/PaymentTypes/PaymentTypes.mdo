@@ -1,36 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cce91224-ddf4-41de-9ec1-96e3e7a4839a">
-  <producedTypes>
-    <refType typeId="dfaa5244-8a64-4586-b51b-07e5a205892a" valueTypeId="7dd0c7b4-3add-4799-a103-b8c9857c3ee0"/>
-    <listType typeId="ae13bf34-416d-41ee-bb3b-0727b962dd31" valueTypeId="63636581-e44a-4f07-b0fd-9e6c391b2379"/>
-    <managerType typeId="00ef7413-1a99-4860-8e31-77c831138c35" valueTypeId="5e9792b4-19ce-44b7-9cbb-c01a04688c70"/>
-  </producedTypes>
-  <name>PaymentTypes</name>
+ <producedTypes>
+  <refType typeId="dfaa5244-8a64-4586-b51b-07e5a205892a" valueTypeId="7dd0c7b4-3add-4799-a103-b8c9857c3ee0"/>
+  <listType typeId="ae13bf34-416d-41ee-bb3b-0727b962dd31" valueTypeId="63636581-e44a-4f07-b0fd-9e6c391b2379"/>
+  <managerType typeId="00ef7413-1a99-4860-8e31-77c831138c35" valueTypeId="5e9792b4-19ce-44b7-9cbb-c01a04688c70"/>
+ </producedTypes>
+ <name>PaymentTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Виды оплаты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Payment types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ödeme tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="d6587561-910d-4c85-af97-071be3270a45">
+  <name>Cash</name>
   <synonym>
-    <key>en</key>
-    <value>Payment types</value>
+   <key>ru</key>
+   <value>Касса</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="d6587561-910d-4c85-af97-071be3270a45">
-    <name>Cash</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ee294f6d-7a97-4756-877a-d07000d57c25">
-    <name>Card</name>
-    <synonym>
-      <key>en</key>
-      <value>Card</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="5bcccccf-fc1d-4df0-9f09-5c10340a7ee8">
-    <name>LoyalityPoint</name>
-    <synonym>
-      <key>en</key>
-      <value>Loyality point</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Cash</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kasa</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ee294f6d-7a97-4756-877a-d07000d57c25">
+  <name>Card</name>
+  <synonym>
+   <key>ru</key>
+   <value>Плат. карта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Card</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kart</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="5bcccccf-fc1d-4df0-9f09-5c10340a7ee8">
+  <name>LoyalityPoint</name>
+  <synonym>
+   <key>ru</key>
+   <value>Бонусные баллы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Loyality point</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sadakat puanı</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

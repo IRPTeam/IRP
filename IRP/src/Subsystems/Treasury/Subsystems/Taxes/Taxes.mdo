@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0670efea-3c08-4c32-8f66-6a2b1468f352">
-  <name>Taxes</name>
-  <synonym>
-    <key>en</key>
-    <value>Tax types</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>InformationRegister.TaxSettings</content>
-  <content>Catalog.TaxRates</content>
-  <parentSubsystem>Subsystem.Treasury</parentSubsystem>
+ <name>Taxes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Виды налогов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Tax types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Vergi tipleri</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>InformationRegister.TaxSettings</content>
+ <content>Catalog.TaxRates</content>
+ <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

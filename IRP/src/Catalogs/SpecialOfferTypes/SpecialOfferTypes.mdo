@@ -1,191 +1,287 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="11df083f-b5cd-43b4-990f-3b5d25bec34a">
-  <producedTypes>
-    <objectType typeId="4c0b0e75-e803-4cfd-a219-b501cd9b06ec" valueTypeId="0cd77126-f8d3-4fc9-8fd0-58fdd55ab542"/>
-    <refType typeId="ba50cd4f-6af0-4017-9eb0-73316f016a4e" valueTypeId="f0e6bc84-7423-43cd-924f-5b98766765d6"/>
-    <selectionType typeId="d30efaa0-e398-4c91-ab10-bcdbf9e12509" valueTypeId="7b98ae89-4cfb-4bdc-b991-edc903fb0397"/>
-    <listType typeId="bd1d9f02-8a60-492f-9993-e3ad2aaa1762" valueTypeId="b1b67a43-aae2-4124-889b-8d33743f2359"/>
-    <managerType typeId="848af744-80d7-4c5d-bc1a-b03328db49ed" valueTypeId="eaeb68f7-d8a9-4c7b-ab6f-853ae18a7449"/>
-  </producedTypes>
-  <name>SpecialOfferTypes</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="11df083f-b5cd-43b4-990f-3b5d25bec34a">
+ <producedTypes>
+  <objectType typeId="4c0b0e75-e803-4cfd-a219-b501cd9b06ec" valueTypeId="0cd77126-f8d3-4fc9-8fd0-58fdd55ab542"/>
+  <refType typeId="ba50cd4f-6af0-4017-9eb0-73316f016a4e" valueTypeId="f0e6bc84-7423-43cd-924f-5b98766765d6"/>
+  <selectionType typeId="d30efaa0-e398-4c91-ab10-bcdbf9e12509" valueTypeId="7b98ae89-4cfb-4bdc-b991-edc903fb0397"/>
+  <listType typeId="bd1d9f02-8a60-492f-9993-e3ad2aaa1762" valueTypeId="b1b67a43-aae2-4124-889b-8d33743f2359"/>
+  <managerType typeId="848af744-80d7-4c5d-bc1a-b03328db49ed" valueTypeId="eaeb68f7-d8a9-4c7b-ab6f-853ae18a7449"/>
+ </producedTypes>
+ <name>SpecialOfferTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Способы применения специальных предложений</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Special offer types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kapmanya tipleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_SpecialOfferTypes</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_SpecialOfferTypes</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.SpecialOfferTypes.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.SpecialOfferTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.SpecialOfferTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.SpecialOfferTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Способ применения специального предложения</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Special offer type</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Kampanya tipi</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.SpecialOfferTypes.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.SpecialOfferTypes.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.SpecialOfferTypes.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="d996a4a8-2bd9-4434-adeb-4da6e14e0c9a">
+  <name>Settings</name>
   <synonym>
-    <key>en</key>
-    <value>Special offer types</value>
+   <key>ru</key>
+   <value>Настройки</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_SpecialOfferTypes</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_SpecialOfferTypes</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.SpecialOfferTypes.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.SpecialOfferTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.SpecialOfferTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.SpecialOfferTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Settings</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ayarlar</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ddffb9c9-39f9-44c2-a794-fb4f7d2754af">
+  <name>ExternalDataProc</name>
+  <synonym>
+   <key>ru</key>
+   <value>Внешняя обработка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Plugins</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Eklentiler</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExternalDataProc</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3fc055dd-0704-414b-893b-ed0f1fafb674">
+  <name>TermsOfDiscountCalculation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Условия расчета специального предложения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Terms of discount calculation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Iskonto hesaplama terminleri</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="106f3214-eac0-4383-9ebf-8f7b3d6ab990">
+  <name>GroupTypes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Группа специальных предложений</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Group types</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup tipler</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="2282aac8-990d-4eb2-8377-284fb791c76c">
+  <producedTypes>
+   <objectType typeId="8e8a8fe3-fd4e-4a2c-8281-4d6e68b368e3" valueTypeId="8b23d580-1b1b-479a-916b-680f45e8c08f"/>
+   <rowType typeId="682db7d8-8c11-40f4-bd6b-05ea56db1ba2" valueTypeId="ec5de5f1-05ed-4fd5-8e0a-c1413b754e43"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="b97a4c96-6aba-4a42-8138-89439c97c200">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Special offer type</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.SpecialOfferTypes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.SpecialOfferTypes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.SpecialOfferTypes.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="d996a4a8-2bd9-4434-adeb-4da6e14e0c9a">
-    <name>Settings</name>
-    <synonym>
-      <key>en</key>
-      <value>Settings</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="ddffb9c9-39f9-44c2-a794-fb4f7d2754af">
-    <name>ExternalDataProc</name>
-    <synonym>
-      <key>en</key>
-      <value>Plugins</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExternalDataProc</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="d7e50128-be6b-4b0c-adae-41bd39fee45b">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.SpecialOfferTypes.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="3fc055dd-0704-414b-893b-ed0f1fafb674">
-    <name>TermsOfDiscountCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Terms of discount calculation</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="106f3214-eac0-4383-9ebf-8f7b3d6ab990">
-    <name>GroupTypes</name>
-    <synonym>
-      <key>en</key>
-      <value>Group types</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="2282aac8-990d-4eb2-8377-284fb791c76c">
-    <producedTypes>
-      <objectType typeId="8e8a8fe3-fd4e-4a2c-8281-4d6e68b368e3" valueTypeId="8b23d580-1b1b-479a-916b-680f45e8c08f"/>
-      <rowType typeId="682db7d8-8c11-40f4-bd6b-05ea56db1ba2" valueTypeId="ec5de5f1-05ed-4fd5-8e0a-c1413b754e43"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="b97a4c96-6aba-4a42-8138-89439c97c200">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d7e50128-be6b-4b0c-adae-41bd39fee45b">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.SpecialOfferTypes.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="dc46fa55-bb86-4295-b13e-0b1cfb8f2d68">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3217d845-1185-444e-96cd-84d4235674ff">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="9985bda0-771f-42cc-bac5-1d309fd936c0">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="dc46fa55-bb86-4295-b13e-0b1cfb8f2d68">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3217d845-1185-444e-96cd-84d4235674ff">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="9985bda0-771f-42cc-bac5-1d309fd936c0">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

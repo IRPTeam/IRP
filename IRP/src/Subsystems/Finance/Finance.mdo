@@ -1,15 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d0484e62-967e-42fc-a979-918a5e9fb2fe">
-  <name>Finance</name>
-  <synonym>
-    <key>en</key>
-    <value>Finance</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Finance</picture>
-  </picture>
-  <content>Catalog.PaymentSchedules</content>
-  <content>Catalog.Currencies</content>
-  <content>Catalog.PaymentTypes</content>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="d0484e62-967e-42fc-a979-918a5e9fb2fe">
+ <name>Finance</name>
+ <synonym>
+  <key>ru</key>
+  <value>Финансы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Finance</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Finans</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Finance</picture>
+ </picture>
+ <content>Catalog.PaymentSchedules</content>
+ <content>Catalog.Currencies</content>
+ <content>Catalog.PaymentTypes</content>
 </mdclass:Subsystem>

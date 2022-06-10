@@ -1,281 +1,305 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
-  <items xsi:type="form:FormGroup">
-    <name>Group1</name>
-    <id>13</id>
-    <items xsi:type="form:Button">
-      <name>FormGenerate</name>
-      <id>8</id>
-      <title>
-        <key>en</key>
-        <value>Refresh</value>
-      </title>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-        <name>FormGenerateExtendedTooltip</name>
-        <id>9</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <type>UsualButton</type>
-      <commandName>Form.StandardCommand.Generate</commandName>
-      <representation>PictureAndText</representation>
-      <defaultButton>true</defaultButton>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <placementArea>UserCmds</placementArea>
-      <picture xsi:type="core:PictureRef">
-        <picture>StdPicture.Reread</picture>
-      </picture>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
-      <representationInContextMenu>Auto</representationInContextMenu>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>PricePeriod</name>
-      <id>10</id>
-      <title>
-        <key>en</key>
-        <value>on date</value>
-      </title>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Report.PricePeriod</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>PricePeriodExtendedTooltip</name>
-        <id>12</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>PricePeriodContextMenu</name>
-        <id>11</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <items xsi:type="form:FormGroup">
+  <name>Group1</name>
+  <id>13</id>
+  <items xsi:type="form:Button">
+   <name>FormGenerate</name>
+   <id>8</id>
+   <title>
+    <key>ru</key>
+    <value>Обновить</value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>Refresh</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Yenile</value>
+   </title>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>FormGenerateExtendedTooltip</name>
+    <id>9</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
-      <common>true</common>
+     <common>true</common>
     </userVisible>
-    <extendedTooltip>
-      <name>Group1ExtendedTooltip</name>
-      <id>14</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <type>UsualGroup</type>
-    <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>AlwaysHorizontal</group>
-      <showLeftMargin>true</showLeftMargin>
-      <united>true</united>
-      <throughAlign>Auto</throughAlign>
-      <currentRowUse>Auto</currentRowUse>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
     </extInfo>
+   </extendedTooltip>
+   <type>UsualButton</type>
+   <commandName>Form.StandardCommand.Generate</commandName>
+   <representation>PictureAndText</representation>
+   <defaultButton>true</defaultButton>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <placementArea>UserCmds</placementArea>
+   <picture xsi:type="core:PictureRef">
+    <picture>StdPicture.Reread</picture>
+   </picture>
+   <toolTipRepresentation>Auto</toolTipRepresentation>
+   <representationInContextMenu>Auto</representationInContextMenu>
   </items>
   <items xsi:type="form:FormField">
-    <name>Result</name>
-    <id>5</id>
+   <name>PricePeriod</name>
+   <id>10</id>
+   <title>
+    <key>ru</key>
+    <value>на дату</value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>on date</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Geçerlilik tarihi</value>
+   </title>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>Report.PricePeriod</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>PricePeriodExtendedTooltip</name>
+    <id>12</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
-      <common>true</common>
+     <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Result</segments>
-    </dataPath>
-    <defaultItem>true</defaultItem>
-    <titleLocation>None</titleLocation>
-    <extendedTooltip>
-      <name>ResultExtendedTooltip</name>
-      <id>7</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <contextMenu>
-      <name>ResultContextMenu</name>
-      <id>6</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-    </contextMenu>
-    <type>SpreadsheetDocumentField</type>
-    <readOnly>true</readOnly>
-    <editMode>Enter</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:SpreadSheetDocFieldExtInfo">
-      <handlers>
-        <event>Selection</event>
-        <name>ResultSelection</name>
-      </handlers>
-      <width>100</width>
-      <autoMaxWidth>true</autoMaxWidth>
-      <height>10</height>
-      <autoMaxHeight>true</autoMaxHeight>
-      <horizontalStretch>true</horizontalStretch>
-      <verticalStretch>true</verticalStretch>
-      <pointerType>Special</pointerType>
-      <verticalScrollBar>ScrollAuto</verticalScrollBar>
-      <horizontalScrollBar>ScrollAuto</horizontalScrollBar>
-      <selectionShowMode>Always</selectionShowMode>
-      <drawingSelectionShowMode>Auto</drawingSelectionShowMode>
-      <showGroups>true</showGroups>
-      <enableStartDrag>true</enableStartDrag>
-      <enableDrag>true</enableDrag>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
     </extInfo>
-  </items>
-  <commandBarLocation>Top</commandBarLocation>
-  <autoCommandBar>
-    <name>FormCommandBar</name>
-    <id>-1</id>
+   </extendedTooltip>
+   <contextMenu>
+    <name>PricePeriodContextMenu</name>
+    <id>11</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
-      <common>true</common>
+     <common>true</common>
     </userVisible>
-    <horizontalAlign>Left</horizontalAlign>
-  </autoCommandBar>
-  <handlers>
-    <event>OnOpen</event>
-    <name>OnOpen</name>
-  </handlers>
-  <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <autoUrl>true</autoUrl>
-  <group>Vertical</group>
-  <autoFillCheck>true</autoFillCheck>
-  <allowFormCustomize>true</allowFormCustomize>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <visible>true</visible>
   <enabled>true</enabled>
-  <showCloseButton>true</showCloseButton>
-  <attributes>
-    <name>Report</name>
-    <id>1</id>
-    <valueType>
-      <types>ReportObject.PriceInfo</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-    <main>true</main>
-  </attributes>
-  <attributes>
-    <name>Result</name>
-    <title>
-      <key>en</key>
-      <value>Result</value>
-    </title>
-    <id>2</id>
-    <valueType>
-      <types>SpreadsheetDocument</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-    <extInfo xsi:type="form:SpreadsheetDocumentExtInfo"/>
-  </attributes>
-  <attributes>
-    <name>DetailsData</name>
-    <id>3</id>
-    <valueType>
-      <types>String</types>
-      <stringQualifiers/>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <parameters>
-    <name>PriceOwner</name>
-    <valueType>
-      <types>CatalogRef.Items</types>
-      <types>CatalogRef.ItemKeys</types>
-    </valueType>
-    <keyParameter>true</keyParameter>
-  </parameters>
-  <commandInterface>
-    <navigationPanel/>
-    <commandBar/>
-  </commandInterface>
-  <extInfo xsi:type="form:ReportFormExtInfo">
-    <reportResult>Result</reportResult>
-    <detailsInformation>DetailsData</detailsInformation>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <extendedTooltip>
+   <name>Group1ExtendedTooltip</name>
+   <id>14</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>AlwaysHorizontal</group>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
   </extInfo>
+ </items>
+ <items xsi:type="form:FormField">
+  <name>Result</name>
+  <id>5</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>Result</segments>
+  </dataPath>
+  <defaultItem>true</defaultItem>
+  <titleLocation>None</titleLocation>
+  <extendedTooltip>
+   <name>ResultExtendedTooltip</name>
+   <id>7</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>ResultContextMenu</name>
+   <id>6</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>SpreadsheetDocumentField</type>
+  <readOnly>true</readOnly>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:SpreadSheetDocFieldExtInfo">
+   <handlers>
+    <event>Selection</event>
+    <name>ResultSelection</name>
+   </handlers>
+   <width>100</width>
+   <autoMaxWidth>true</autoMaxWidth>
+   <height>10</height>
+   <autoMaxHeight>true</autoMaxHeight>
+   <horizontalStretch>true</horizontalStretch>
+   <verticalStretch>true</verticalStretch>
+   <pointerType>Special</pointerType>
+   <verticalScrollBar>ScrollAuto</verticalScrollBar>
+   <horizontalScrollBar>ScrollAuto</horizontalScrollBar>
+   <selectionShowMode>Always</selectionShowMode>
+   <drawingSelectionShowMode>Auto</drawingSelectionShowMode>
+   <showGroups>true</showGroups>
+   <enableStartDrag>true</enableStartDrag>
+   <enableDrag>true</enableDrag>
+  </extInfo>
+ </items>
+ <commandBarLocation>Top</commandBarLocation>
+ <autoCommandBar>
+  <name>FormCommandBar</name>
+  <id>-1</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <horizontalAlign>Left</horizontalAlign>
+ </autoCommandBar>
+ <handlers>
+  <event>OnOpen</event>
+  <name>OnOpen</name>
+ </handlers>
+ <handlers>
+  <event>OnCreateAtServer</event>
+  <name>OnCreateAtServer</name>
+ </handlers>
+ <autoUrl>true</autoUrl>
+ <group>Vertical</group>
+ <autoFillCheck>true</autoFillCheck>
+ <allowFormCustomize>true</allowFormCustomize>
+ <enabled>true</enabled>
+ <showCloseButton>true</showCloseButton>
+ <attributes>
+  <name>Report</name>
+  <id>1</id>
+  <valueType>
+   <types>ReportObject.PriceInfo</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+  <main>true</main>
+ </attributes>
+ <attributes>
+  <name>Result</name>
+  <title>
+   <key>ru</key>
+   <value>Результат</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Result</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Sonuç</value>
+  </title>
+  <id>2</id>
+  <valueType>
+   <types>SpreadsheetDocument</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+  <extInfo xsi:type="form:SpreadsheetDocumentExtInfo"/>
+ </attributes>
+ <attributes>
+  <name>DetailsData</name>
+  <id>3</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <parameters>
+  <name>PriceOwner</name>
+  <valueType>
+   <types>CatalogRef.Items</types>
+   <types>CatalogRef.ItemKeys</types>
+  </valueType>
+  <keyParameter>true</keyParameter>
+ </parameters>
+ <commandInterface>
+  <navigationPanel/>
+  <commandBar/>
+ </commandInterface>
+ <extInfo xsi:type="form:ReportFormExtInfo">
+  <reportResult>Result</reportResult>
+  <detailsInformation>DetailsData</detailsInformation>
+ </extInfo>
 </form:Form>

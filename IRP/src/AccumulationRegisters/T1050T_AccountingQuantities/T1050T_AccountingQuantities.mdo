@@ -1,47 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4f17223d-0e6d-4d25-9836-7b8bb020fd9b">
-  <producedTypes>
-    <selectionType typeId="5b69a14e-6426-45b4-9948-1c22ddc2a40e" valueTypeId="d478bc9d-c532-40f8-870f-9a9ca582fe0c"/>
-    <listType typeId="ce07435c-431f-4e07-a217-87d5cb84e36e" valueTypeId="27bc0808-5c87-4ef7-9099-51157e3afdd0"/>
-    <managerType typeId="3626af13-b134-4da9-8550-a94371e8119b" valueTypeId="ff725f40-a600-4f44-9744-eca93c3881e1"/>
-    <recordSetType typeId="1cd35997-c5e5-4842-bf6c-9b0e7f67c763" valueTypeId="3c8ae561-f037-4a9b-9418-f1b1728779f1"/>
-    <recordKeyType typeId="17684709-9158-45db-a702-4e0ca181ff47" valueTypeId="5bd32dbe-9dba-4318-b6d8-207157b989fa"/>
-    <recordType typeId="ea4ebbe5-769d-4b9b-b4f8-b587128d4acd" valueTypeId="24ce1bd3-0da5-44d9-87f0-bd6aa2340116"/>
-  </producedTypes>
-  <name>T1050T_AccountingQuantities</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="4f17223d-0e6d-4d25-9836-7b8bb020fd9b">
+ <producedTypes>
+  <selectionType typeId="5b69a14e-6426-45b4-9948-1c22ddc2a40e" valueTypeId="d478bc9d-c532-40f8-870f-9a9ca582fe0c"/>
+  <listType typeId="ce07435c-431f-4e07-a217-87d5cb84e36e" valueTypeId="27bc0808-5c87-4ef7-9099-51157e3afdd0"/>
+  <managerType typeId="3626af13-b134-4da9-8550-a94371e8119b" valueTypeId="ff725f40-a600-4f44-9744-eca93c3881e1"/>
+  <recordSetType typeId="1cd35997-c5e5-4842-bf6c-9b0e7f67c763" valueTypeId="3c8ae561-f037-4a9b-9418-f1b1728779f1"/>
+  <recordKeyType typeId="17684709-9158-45db-a702-4e0ca181ff47" valueTypeId="5bd32dbe-9dba-4318-b6d8-207157b989fa"/>
+  <recordType typeId="ea4ebbe5-769d-4b9b-b4f8-b587128d4acd" valueTypeId="24ce1bd3-0da5-44d9-87f0-bd6aa2340116"/>
+ </producedTypes>
+ <name>T1050T_AccountingQuantities</name>
+ <synonym>
+  <key>ru</key>
+  <value>T1050 Бухгалтерские количества</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>T1050 Accounting quantities</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T1050 Muhasebe miktarlar</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="38c943bd-6709-455d-a437-ae006f285767">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>T1050 Accounting quantities</value>
+   <key>ru</key>
+   <value>Количество</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="38c943bd-6709-455d-a437-ae006f285767">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="e246bf1a-8a41-4dcb-b48e-ad25f910e9d8">
-    <name>RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="e246bf1a-8a41-4dcb-b48e-ad25f910e9d8">
+  <name>RowKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

@@ -1,16 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonCommand xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="45ac205a-8237-408c-bca9-e0e49554d29b">
-  <name>AddProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Add properties</value>
-  </synonym>
-  <group>FormCommandBarImportant</group>
-  <commandParameterType>
-    <types>DefinedType.typeAddPropertyOwners</types>
-  </commandParameterType>
-  <representation>Picture</representation>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.AddProperties</picture>
-  </picture>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="45ac205a-8237-408c-bca9-e0e49554d29b">
+ <name>AddProperties</name>
+ <synonym>
+  <key>ru</key>
+  <value>Дополнительные свойства</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Add properties</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek özellikler</value>
+ </synonym>
+ <group>FormCommandBarImportant</group>
+ <commandParameterType>
+  <types>DefinedType.typeAddPropertyOwners</types>
+ </commandParameterType>
+ <representation>Picture</representation>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.AddProperties</picture>
+ </picture>
 </mdclass:CommonCommand>

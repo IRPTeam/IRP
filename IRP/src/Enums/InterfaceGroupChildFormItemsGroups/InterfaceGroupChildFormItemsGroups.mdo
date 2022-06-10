@@ -1,43 +1,83 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0efafea0-79fc-4949-81c6-3ecf223824e0">
-  <producedTypes>
-    <refType typeId="aa4f24c7-72bb-4185-99a9-5e4aba93df3c" valueTypeId="b3c6ed20-483b-4346-b5e5-d691683e39e3"/>
-    <listType typeId="6b17b6a6-4118-43f7-b035-53594a6c9a59" valueTypeId="23725ba1-4eaa-4120-a341-157f9cf7b49f"/>
-    <managerType typeId="5171c5fd-39e7-4018-abac-20996229246e" valueTypeId="fceae9f0-3ab6-4f25-b0ab-3e54bd2caf68"/>
-  </producedTypes>
-  <name>InterfaceGroupChildFormItemsGroups</name>
+ <producedTypes>
+  <refType typeId="aa4f24c7-72bb-4185-99a9-5e4aba93df3c" valueTypeId="b3c6ed20-483b-4346-b5e5-d691683e39e3"/>
+  <listType typeId="6b17b6a6-4118-43f7-b035-53594a6c9a59" valueTypeId="23725ba1-4eaa-4120-a341-157f9cf7b49f"/>
+  <managerType typeId="5171c5fd-39e7-4018-abac-20996229246e" valueTypeId="fceae9f0-3ab6-4f25-b0ab-3e54bd2caf68"/>
+ </producedTypes>
+ <name>InterfaceGroupChildFormItemsGroups</name>
+ <synonym>
+  <key>ru</key>
+  <value>Дочерняя группа групп элементов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Interface group child form items groups</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Arayüz grubu alt form malzeme grupları</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="0569148f-c7a2-43fd-a156-4acf8c1bf8fc">
+  <name>Vertical</name>
   <synonym>
-    <key>en</key>
-    <value>Interface group child form items groups</value>
+   <key>ru</key>
+   <value>Вертикально</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="0569148f-c7a2-43fd-a156-4acf8c1bf8fc">
-    <name>Vertical</name>
-    <synonym>
-      <key>en</key>
-      <value>Vertical</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="6afa1611-a6c8-4578-895c-d982c1e9aa3e">
-    <name>Horizontal</name>
-    <synonym>
-      <key>en</key>
-      <value>Horizontal</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ee23d582-4b36-4c9c-947e-849b897c5397">
-    <name>AlwaysHorizontal</name>
-    <synonym>
-      <key>en</key>
-      <value>Always horizontal</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="69d2b6a6-9601-4ff9-9b2e-109ded4f41ff">
-    <name>HorizontalIfPossible</name>
-    <synonym>
-      <key>en</key>
-      <value>Horizontal if possible</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Vertical</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dikey</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="6afa1611-a6c8-4578-895c-d982c1e9aa3e">
+  <name>Horizontal</name>
+  <synonym>
+   <key>ru</key>
+   <value>Горизонтально</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Horizontal</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Yatay</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ee23d582-4b36-4c9c-947e-849b897c5397">
+  <name>AlwaysHorizontal</name>
+  <synonym>
+   <key>ru</key>
+   <value>Всегда горизонтальная</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Always horizontal</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Her zaman yatay</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="69d2b6a6-9601-4ff9-9b2e-109ded4f41ff">
+  <name>HorizontalIfPossible</name>
+  <synonym>
+   <key>ru</key>
+   <value>Горизонтальная если возможно</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Horizontal if possible</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Mümkünse yatay</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

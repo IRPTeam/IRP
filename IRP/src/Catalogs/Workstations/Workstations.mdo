@@ -1,202 +1,306 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="52016cc9-453f-44d2-9a07-dae0b9c94e10">
-  <producedTypes>
-    <objectType typeId="a35075e9-1020-4581-99fb-bf1753b9c585" valueTypeId="23b87741-810e-4403-ae32-a1c90d9b982e"/>
-    <refType typeId="50f7560f-144f-4fe9-b87c-a72530c3569e" valueTypeId="acb84d64-b0a1-4a22-a456-e9a221fb367d"/>
-    <selectionType typeId="cddc0bae-89de-45ff-8536-32c1ab801362" valueTypeId="eafbb7e6-4a78-4b0e-85d2-b7cd03a4f2a3"/>
-    <listType typeId="0d360455-587e-4eae-a3c5-f8f8b716b670" valueTypeId="e9232678-c836-49ea-b385-71f4d4156021"/>
-    <managerType typeId="12ae1994-109c-415f-85f6-6678eaf826a5" valueTypeId="3c4e3ac7-947c-4cdf-8b58-2a094d95a6c6"/>
-  </producedTypes>
-  <name>Workstations</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="52016cc9-453f-44d2-9a07-dae0b9c94e10">
+ <producedTypes>
+  <objectType typeId="a35075e9-1020-4581-99fb-bf1753b9c585" valueTypeId="23b87741-810e-4403-ae32-a1c90d9b982e"/>
+  <refType typeId="50f7560f-144f-4fe9-b87c-a72530c3569e" valueTypeId="acb84d64-b0a1-4a22-a456-e9a221fb367d"/>
+  <selectionType typeId="cddc0bae-89de-45ff-8536-32c1ab801362" valueTypeId="eafbb7e6-4a78-4b0e-85d2-b7cd03a4f2a3"/>
+  <listType typeId="0d360455-587e-4eae-a3c5-f8f8b716b670" valueTypeId="e9232678-c836-49ea-b385-71f4d4156021"/>
+  <managerType typeId="12ae1994-109c-415f-85f6-6678eaf826a5" valueTypeId="3c4e3ac7-947c-4cdf-8b58-2a094d95a6c6"/>
+ </producedTypes>
+ <name>Workstations</name>
+ <synonym>
+  <key>ru</key>
+  <value>Рабочие места</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Workstations</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Çalışma yerleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.Workstations.StandardAttribute.Code</inputByString>
+ <inputByString>Catalog.Workstations.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Workstations</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Workstations</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.Workstations.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.Workstations.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Рабочее место</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Workstation</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Çalışma yeri</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>25</descriptionLength>
+ <codeType>String</codeType>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.Workstations.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.Workstations.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.Workstations.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="757286e6-1359-4443-8450-2781d00eded7">
+  <name>CashAccount</name>
   <synonym>
-    <key>en</key>
-    <value>Workstations</value>
+   <key>ru</key>
+   <value>Касса</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.Workstations.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.Workstations.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Workstations</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Workstations</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.Workstations.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.Workstations.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Cash account</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kasa/Banka</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3fcb5091-199a-479b-864a-c80c0880e742">
+  <name>PrintTemplate</name>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон печати</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Print template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon yazdır</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PrintTemplates</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="31aae4b9-cf91-4ffc-861f-348ec53883c9">
+  <producedTypes>
+   <objectType typeId="db70d75b-9ed3-4ca7-9b8e-7b1c0d5d1cfe" valueTypeId="dc6b2db3-466c-42fe-990f-bcd1bb236cad"/>
+   <rowType typeId="67b4e81b-57be-4660-8f3b-87ba24e063ce" valueTypeId="75cad41b-49b7-440f-b39b-ef7fbbcf2d6b"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="ee7a4501-03d2-4eba-8bae-5468e72319cf">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Workstation</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>25</descriptionLength>
-  <codeType>String</codeType>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Workstations.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.Workstations.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.Workstations.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="757286e6-1359-4443-8450-2781d00eded7">
-    <name>CashAccount</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="3fcb5091-199a-479b-864a-c80c0880e742">
-    <name>PrintTemplate</name>
-    <synonym>
-      <key>en</key>
-      <value>Print template</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PrintTemplates</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="d620c266-d54a-4063-b34d-d52bf2859ffb">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="31aae4b9-cf91-4ffc-861f-348ec53883c9">
-    <producedTypes>
-      <objectType typeId="db70d75b-9ed3-4ca7-9b8e-7b1c0d5d1cfe" valueTypeId="dc6b2db3-466c-42fe-990f-bcd1bb236cad"/>
-      <rowType typeId="67b4e81b-57be-4660-8f3b-87ba24e063ce" valueTypeId="75cad41b-49b7-440f-b39b-ef7fbbcf2d6b"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="ee7a4501-03d2-4eba-8bae-5468e72319cf">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d620c266-d54a-4063-b34d-d52bf2859ffb">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="e0bffc68-3ffe-4e5a-8c78-b315c5f50bb8">
-    <producedTypes>
-      <objectType typeId="2f371810-18ed-4f71-8a3c-feb41095e89f" valueTypeId="876d2017-18d6-4c04-917a-fcef858f9467"/>
-      <rowType typeId="719f8885-ac16-4bbe-ae0b-8ca130f38be6" valueTypeId="0bb938ef-6d95-4541-8056-f32a1b571ee4"/>
-    </producedTypes>
-    <name>HardwareList</name>
-    <synonym>
-      <key>en</key>
-      <value>Hardware list</value>
-    </synonym>
-    <attributes uuid="c0d471b2-b430-4a4c-9129-4ac443c1fe75">
-      <name>Enable</name>
-      <synonym>
-        <key>en</key>
-        <value>Enable</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="e9a80a0d-c063-4f98-8b5f-a0f395724d7a">
-      <name>Hardware</name>
-      <synonym>
-        <key>en</key>
-        <value>Hardware</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Hardware</types>
-      </type>
-      <createOnInput>Use</createOnInput>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="be6907cb-f1a0-4a12-bd73-1d703dca564f">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="9378dd86-666f-42b8-9d6b-42607e974020">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3789fe9d-01a1-476a-9ec5-fefcf41da73b">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <tabularSections uuid="e0bffc68-3ffe-4e5a-8c78-b315c5f50bb8">
+  <producedTypes>
+   <objectType typeId="2f371810-18ed-4f71-8a3c-feb41095e89f" valueTypeId="876d2017-18d6-4c04-917a-fcef858f9467"/>
+   <rowType typeId="719f8885-ac16-4bbe-ae0b-8ca130f38be6" valueTypeId="0bb938ef-6d95-4541-8056-f32a1b571ee4"/>
+  </producedTypes>
+  <name>HardwareList</name>
+  <synonym>
+   <key>ru</key>
+   <value>Список оборудования</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Hardware list</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Donanım listesi</value>
+  </synonym>
+  <attributes uuid="c0d471b2-b430-4a4c-9129-4ac443c1fe75">
+   <name>Enable</name>
+   <synonym>
+    <key>ru</key>
+    <value>Включить</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Enable</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Çalıştır</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="e9a80a0d-c063-4f98-8b5f-a0f395724d7a">
+   <name>Hardware</name>
+   <synonym>
+    <key>ru</key>
+    <value>Оборудование</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Hardware</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Donanım</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Hardware</types>
+   </type>
+   <createOnInput>Use</createOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="be6907cb-f1a0-4a12-bd73-1d703dca564f">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="9378dd86-666f-42b8-9d6b-42607e974020">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3789fe9d-01a1-476a-9ec5-fefcf41da73b">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="27fb6a05-6d90-44a3-a511-4ea1b3189f35">
-  <name>ItemsSettings</name>
-  <synonym>
-    <key>en</key>
-    <value>Items settings</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.InterfaceGroups</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>ItemsSettings</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки номенклатуры</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Items settings</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Stok kart ayarları</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.InterfaceGroups</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,36 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="96278240-3831-4073-8ec5-b633ee082649">
-  <producedTypes>
-    <refType typeId="6805c2c5-26fc-499b-b750-93a9a26ec12a" valueTypeId="f3e53842-d947-40c8-8ae9-a9a8c4064397"/>
-    <listType typeId="a947ed7d-5728-429f-ab90-e5ac3c078f7a" valueTypeId="c3ef4786-a1ac-41f0-a82e-17ea562e6813"/>
-    <managerType typeId="b7660af0-536b-4e04-8dca-0ede3d172e4d" valueTypeId="6ce90d69-a041-4b6e-b1b2-3f67c6b31081"/>
-  </producedTypes>
-  <name>FormTypes</name>
+ <producedTypes>
+  <refType typeId="6805c2c5-26fc-499b-b750-93a9a26ec12a" valueTypeId="f3e53842-d947-40c8-8ae9-a9a8c4064397"/>
+  <listType typeId="a947ed7d-5728-429f-ab90-e5ac3c078f7a" valueTypeId="c3ef4786-a1ac-41f0-a82e-17ea562e6813"/>
+  <managerType typeId="b7660af0-536b-4e04-8dca-0ede3d172e4d" valueTypeId="6ce90d69-a041-4b6e-b1b2-3f67c6b31081"/>
+ </producedTypes>
+ <name>FormTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Типы форм</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Form types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Form tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="5dc54e60-3025-4c6d-9ed5-bd009404dce6">
+  <name>ObjectForm</name>
   <synonym>
-    <key>en</key>
-    <value>Form types</value>
+   <key>ru</key>
+   <value>Форма объекта</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="5dc54e60-3025-4c6d-9ed5-bd009404dce6">
-    <name>ObjectForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Object form</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ddbf1c25-5127-40d8-851b-456ae7fe8186">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="4a79a2a6-6549-46de-9d65-cbbb728abfe9">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Object form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ddbf1c25-5127-40d8-851b-456ae7fe8186">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="4a79a2a6-6549-46de-9d65-cbbb728abfe9">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

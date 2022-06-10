@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f71f656a-2ca3-4b80-86a3-683139705166">
-  <name>SessionParameter</name>
-  <synonym>
-    <key>en</key>
-    <value>Session parameter</value>
-  </synonym>
+ <name>SessionParameter</name>
+ <synonym>
+  <key>ru</key>
+  <value>Параметр сеанса</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Session parameter</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Seans parametresi</value>
+ </synonym>
 </mdclass:CommonPicture>

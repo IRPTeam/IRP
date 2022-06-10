@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5aaece36-0619-4d8a-859b-311312d285ec">
-  <name>DocumentsClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Documents client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocumentsClientServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документы клиент сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Documents client server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evraklar client server</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

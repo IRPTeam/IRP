@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="50f2fb1e-5063-4eb2-a25b-c4599f8ef66c">
-  <name>IDInfo</name>
-  <synonym>
-    <key>en</key>
-    <value>Contact info</value>
-  </synonym>
+ <name>IDInfo</name>
+ <synonym>
+  <key>ru</key>
+  <value>Контактная информация</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Contact info</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İletişim bilgi</value>
+ </synonym>
 </mdclass:CommonPicture>

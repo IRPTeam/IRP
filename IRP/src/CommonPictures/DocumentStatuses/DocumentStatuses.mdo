@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8026ca81-e126-47e0-b551-63bf1a8cf870">
-  <name>DocumentStatuses</name>
-  <synonym>
-    <key>en</key>
-    <value>Document statuses</value>
-  </synonym>
+ <name>DocumentStatuses</name>
+ <synonym>
+  <key>ru</key>
+  <value>Статусы документа</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Document statuses</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak statüleri</value>
+ </synonym>
 </mdclass:CommonPicture>

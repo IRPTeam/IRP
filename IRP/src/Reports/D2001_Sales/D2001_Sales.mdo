@@ -1,22 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c7950f06-d028-4e9f-aafe-d5423729455d">
-  <producedTypes>
-    <objectType typeId="f5ff131c-9288-4d5e-af3b-1125ea4f4638" valueTypeId="4036d234-5a64-455f-b54e-6f5d86ccee9f"/>
-    <managerType typeId="94dfb9b0-b26c-49ee-833c-020028425b6a" valueTypeId="fe0ad68c-7e18-48cd-884f-5d0b26a9b9a9"/>
-  </producedTypes>
-  <name>D2001_Sales</name>
+ <producedTypes>
+  <objectType typeId="f5ff131c-9288-4d5e-af3b-1125ea4f4638" valueTypeId="4036d234-5a64-455f-b54e-6f5d86ccee9f"/>
+  <managerType typeId="94dfb9b0-b26c-49ee-833c-020028425b6a" valueTypeId="fe0ad68c-7e18-48cd-884f-5d0b26a9b9a9"/>
+ </producedTypes>
+ <name>D2001_Sales</name>
+ <synonym>
+  <key>ru</key>
+  <value>D2001 Продажи</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>D2001 Sales</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>D2001 Satışlar</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.D2001_Sales.Template.Template</mainDataCompositionSchema>
+ <templates uuid="2b2bab3a-f4af-47aa-ab1f-c8c08548021f">
+  <name>Template</name>
   <synonym>
-    <key>en</key>
-    <value>D2001 Sales</value>
+   <key>ru</key>
+   <value>Шаблон</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.D2001_Sales.Template.Template</mainDataCompositionSchema>
-  <templates uuid="2b2bab3a-f4af-47aa-ab1f-c8c08548021f">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>en</key>
+   <value>Template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

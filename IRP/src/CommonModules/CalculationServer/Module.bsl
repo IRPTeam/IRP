@@ -1,4 +1,4 @@
-Function OfferHaveManualInputValue(OfferRef) Export
+﻿Function OfferHaveManualInputValue(OfferRef) Export
 	Return OffersServer.OfferHaveManualInputValue(OfferRef);
 EndFunction
 

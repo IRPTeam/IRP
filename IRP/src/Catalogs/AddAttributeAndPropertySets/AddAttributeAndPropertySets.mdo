@@ -1,953 +1,1177 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2c755e80-7d8b-4bfd-9abf-de328b6fdd1c">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2c755e80-7d8b-4bfd-9abf-de328b6fdd1c">
+ <producedTypes>
+  <objectType typeId="7df5b34f-f616-4375-b506-cf4bf90e39c0" valueTypeId="5b53d0ba-f1b4-424e-9aa9-b05621234c86"/>
+  <refType typeId="5bf67cf9-39ac-4f5b-aa8b-0c2b81aa28c4" valueTypeId="58feab8d-c65f-428d-ac61-3bd62b861906"/>
+  <selectionType typeId="7afe3b83-dfb5-4a9e-880c-e5b4ce99440a" valueTypeId="d1019aeb-07aa-4a21-ba5e-f65aec32ae31"/>
+  <listType typeId="0a8f988d-0eaf-422a-b079-dc3dc4102127" valueTypeId="3727d1c5-f216-4a26-9d86-6e2bc958e75d"/>
+  <managerType typeId="3057dbe5-28fe-4362-9f64-6d7f9ca0af44" valueTypeId="47f9565e-9c3f-4510-a3f0-91bd08c5d4bd"/>
+ </producedTypes>
+ <name>AddAttributeAndPropertySets</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки дополнительных реквизитов и сведений</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Additional attribute sets</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek özellik ayarları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Настройка дополнительных реквизитов и сведений</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Additional attribute set</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Ek öznitelik grubu</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="759d2809-0696-4f6c-befd-bd93aaf90e60">
+   <name>Catalog_ItemKeys</name>
+   <description>Catalog Item keys</description>
+   <code xsi:type="core:NumberValue">
+    <value>15</value>
+   </code>
+  </items>
+  <items id="18357eb8-bf37-45d4-b02d-349d9b6347dc">
+   <name>Catalog_Items</name>
+   <description>Catalog Items</description>
+   <code xsi:type="core:NumberValue">
+    <value>16</value>
+   </code>
+  </items>
+  <items id="a3975cab-9db4-4c45-9ad2-6682721cbdc5">
+   <name>Catalog_ItemTypes</name>
+   <description>Catalog Item types</description>
+   <code xsi:type="core:NumberValue">
+    <value>18</value>
+   </code>
+  </items>
+  <items id="c02f2c5d-9c88-4433-b318-bcc39d844c69">
+   <name>Document_SalesInvoice</name>
+   <description>Document Sales invoice</description>
+   <code xsi:type="core:NumberValue">
+    <value>69</value>
+   </code>
+  </items>
+  <items id="8846cea1-3716-4606-bdc5-f47a7aa533ce">
+   <name>Catalog_Partners</name>
+   <description>Catalog Partners</description>
+   <code xsi:type="core:NumberValue">
+    <value>19</value>
+   </code>
+  </items>
+  <items id="28287f24-dca3-4f41-ae30-4cb503cc38ca">
+   <name>Catalog_ExpenseAndRevenueTypes</name>
+   <description>Catalog Expense and revenue types</description>
+   <code xsi:type="core:NumberValue">
+    <value>12</value>
+   </code>
+  </items>
+  <items id="5a7a7a54-2c7a-46cf-ac83-c55cca798a08">
+   <name>Catalog_BusinessUnits</name>
+   <description>Catalog Business units</description>
+   <code xsi:type="core:NumberValue">
+    <value>4</value>
+   </code>
+  </items>
+  <items id="eab4813e-9ad8-48e4-aa2e-e95eb15725c7">
+   <name>Catalog_PriceKeys</name>
+   <description>Catalog Price keys</description>
+   <code xsi:type="core:NumberValue">
+    <value>23</value>
+   </code>
+  </items>
+  <items id="69ba322c-2a19-4125-b7e0-a3123897bd99">
+   <name>Document_SalesOrder</name>
+   <description>Document Sales order</description>
+   <code xsi:type="core:NumberValue">
+    <value>70</value>
+   </code>
+  </items>
+  <items id="dd8f4747-410a-4bf3-8599-40a05cb32058">
+   <name>Catalog_ChequeBonds</name>
+   <description>Catalog Cheque bonds</description>
+   <code xsi:type="core:NumberValue">
+    <value>7</value>
+   </code>
+  </items>
+  <items id="9cd4810f-e450-4719-9620-8a6d3960b834">
+   <name>Catalog_Specifications</name>
+   <description>Catalog Specifications</description>
+   <code xsi:type="core:NumberValue">
+    <value>30</value>
+   </code>
+  </items>
+  <items id="41f02ae3-551e-41ee-a0f7-cbb4825a290e">
+   <name>Document_PurchaseInvoice</name>
+   <description>Document Purchase invoice</description>
+   <code xsi:type="core:NumberValue">
+    <value>62</value>
+   </code>
+  </items>
+  <items id="888eb86f-c74e-45fa-bee5-bf3e7baa99d1">
+   <name>Document_PurchaseOrder</name>
+   <description>Document Purchase order</description>
+   <code xsi:type="core:NumberValue">
+    <value>63</value>
+   </code>
+  </items>
+  <items id="8bbe12f5-44d2-4a75-85e2-32bcb48692a7">
+   <name>Catalog_Agreements</name>
+   <description>Catalog Agreements</description>
+   <code xsi:type="core:NumberValue">
+    <value>2</value>
+   </code>
+  </items>
+  <items id="328f6f83-a86a-4b9d-bd6b-ffead46c0953">
+   <name>Catalog_CashAccounts</name>
+   <description>Catalog Cash accounts</description>
+   <code xsi:type="core:NumberValue">
+    <value>5</value>
+   </code>
+  </items>
+  <items id="9ed15691-1df1-4020-a825-4989f860a90e">
+   <name>Catalog_Companies</name>
+   <description>Catalog Companies</description>
+   <code xsi:type="core:NumberValue">
+    <value>8</value>
+   </code>
+  </items>
+  <items id="49d5fa3f-515b-4d80-8b1c-307112a4158a">
+   <name>Catalog_CompanyTypes</name>
+   <description>Catalog Company types</description>
+   <code xsi:type="core:NumberValue">
+    <value>9</value>
+   </code>
+  </items>
+  <items id="60670f4a-f08a-4ca4-a6d3-05236f383207">
+   <name>Catalog_Countries</name>
+   <description>Catalog Countries</description>
+   <code xsi:type="core:NumberValue">
+    <value>10</value>
+   </code>
+  </items>
+  <items id="7908e42a-a00e-4866-8ea2-7221edb32a1b">
+   <name>Catalog_Currencies</name>
+   <description>Catalog Currencies</description>
+   <code xsi:type="core:NumberValue">
+    <value>11</value>
+   </code>
+  </items>
+  <items id="7fffca8e-8a3f-4fbf-af29-37de18151417">
+   <name>Catalog_PriceTypes</name>
+   <description>Catalog Price types</description>
+   <code xsi:type="core:NumberValue">
+    <value>24</value>
+   </code>
+  </items>
+  <items id="632e8c44-ec2d-403c-af75-10ea3a0b99a3">
+   <name>Catalog_SerialLotNumbers</name>
+   <description>Catalog Serial lot numbers</description>
+   <code xsi:type="core:NumberValue">
+    <value>26</value>
+   </code>
+  </items>
+  <items id="95c158df-fb51-4bbf-9f83-44f6f333861f">
+   <name>Catalog_Stores</name>
+   <description>Catalog Stores</description>
+   <code xsi:type="core:NumberValue">
+    <value>31</value>
+   </code>
+  </items>
+  <items id="1bfd69ac-1570-431e-80e6-5b393b1688d3">
+   <name>Catalog_Taxes</name>
+   <description>Catalog Taxes</description>
+   <code xsi:type="core:NumberValue">
+    <value>32</value>
+   </code>
+  </items>
+  <items id="612953b5-4272-4603-9467-f51deca79a3a">
+   <name>Catalog_Units</name>
+   <description>Catalog Units</description>
+   <code xsi:type="core:NumberValue">
+    <value>34</value>
+   </code>
+  </items>
+  <items id="e602c645-ae74-4566-8b79-b902ab223c46">
+   <name>Catalog_Users</name>
+   <description>Catalog Users</description>
+   <code xsi:type="core:NumberValue">
+    <value>36</value>
+   </code>
+  </items>
+  <items id="b51b4fc3-9af0-49be-bc0f-1f50629c4951">
+   <name>Document_BankPayment</name>
+   <description>Document Bank payment</description>
+   <code xsi:type="core:NumberValue">
+    <value>38</value>
+   </code>
+  </items>
+  <items id="5e98ef39-7a7f-4e2e-ac27-ef61c75418a4">
+   <name>Document_BankReceipt</name>
+   <description>Document Bank receipt</description>
+   <code xsi:type="core:NumberValue">
+    <value>39</value>
+   </code>
+  </items>
+  <items id="dbc9ff5e-39a5-4968-a585-dad9f87c15a4">
+   <name>Document_Bundling</name>
+   <description>Document Bundling</description>
+   <code xsi:type="core:NumberValue">
+    <value>40</value>
+   </code>
+  </items>
+  <items id="1ea8bd75-b87f-48b4-af96-1b7d6dfdd4b0">
+   <name>Document_CashExpense</name>
+   <description>Document Cash expense</description>
+   <code xsi:type="core:NumberValue">
+    <value>41</value>
+   </code>
+  </items>
+  <items id="4a3c08bd-dd13-4e82-92f9-a0002041d98c">
+   <name>Document_CashPayment</name>
+   <description>Document Cash payment</description>
+   <code xsi:type="core:NumberValue">
+    <value>42</value>
+   </code>
+  </items>
+  <items id="59e6837a-c968-415c-81c5-454ed7728831">
+   <name>Document_CashReceipt</name>
+   <description>Document Cash receipt</description>
+   <code xsi:type="core:NumberValue">
+    <value>43</value>
+   </code>
+  </items>
+  <items id="0b05d183-3aef-4b78-9897-0beebfb766ae">
+   <name>Document_CashRevenue</name>
+   <description>Document Cash revenue</description>
+   <code xsi:type="core:NumberValue">
+    <value>44</value>
+   </code>
+  </items>
+  <items id="a1216e62-2d10-48b2-9c15-7c7632e37c9f">
+   <name>Document_CashTransferOrder</name>
+   <description>Document Cash transfer order</description>
+   <code xsi:type="core:NumberValue">
+    <value>46</value>
+   </code>
+  </items>
+  <items id="d165f449-9d6e-49bb-aac3-2d86efda2eae">
+   <name>Document_GoodsReceipt</name>
+   <description>Document Goods receipt</description>
+   <code xsi:type="core:NumberValue">
+    <value>50</value>
+   </code>
+  </items>
+  <items id="ef6ee0a7-b975-4ed0-9efc-4737f1890c54">
+   <name>Document_IncomingPaymentOrder</name>
+   <description>Document Incoming payment order</description>
+   <code xsi:type="core:NumberValue">
+    <value>51</value>
+   </code>
+  </items>
+  <items id="70839530-948e-4961-bdd6-17632148e6a9">
+   <name>Document_InventoryTransfer</name>
+   <description>Document Inventory transfer</description>
+   <code xsi:type="core:NumberValue">
+    <value>53</value>
+   </code>
+  </items>
+  <items id="74d7ecaa-6ac0-45ca-93ba-6be5806c5f7a">
+   <name>Document_InventoryTransferOrder</name>
+   <description>Document Inventory transfer order</description>
+   <code xsi:type="core:NumberValue">
+    <value>54</value>
+   </code>
+  </items>
+  <items id="027d2fc5-5f0b-4955-9d72-599fca2c241d">
+   <name>Document_Labeling</name>
+   <description>Document Labeling</description>
+   <code xsi:type="core:NumberValue">
+    <value>56</value>
+   </code>
+  </items>
+  <items id="250546bc-ecf2-4173-933a-dcd17d2c8fd7">
+   <name>Document_OpeningEntry</name>
+   <description>Document Opening entry</description>
+   <code xsi:type="core:NumberValue">
+    <value>57</value>
+   </code>
+  </items>
+  <items id="ae211661-bece-46b7-8946-c29d131b45fc">
+   <name>Document_OutgoingPaymentOrder</name>
+   <description>Document Outgoing payment order</description>
+   <code xsi:type="core:NumberValue">
+    <value>58</value>
+   </code>
+  </items>
+  <items id="b07e942f-58ef-4049-b954-37ab8f4d6820">
+   <name>Document_PhysicalCountByLocation</name>
+   <description>Document Physical count by location</description>
+   <code xsi:type="core:NumberValue">
+    <value>59</value>
+   </code>
+  </items>
+  <items id="b90b3451-a811-4a27-b15d-1a8fd6827de8">
+   <name>Document_PhysicalInventory</name>
+   <description>Document Physical inventory</description>
+   <code xsi:type="core:NumberValue">
+    <value>60</value>
+   </code>
+  </items>
+  <items id="edde0b2e-e4c3-435d-8f04-61a431134d32">
+   <name>Document_PriceList</name>
+   <description>Document Price list</description>
+   <code xsi:type="core:NumberValue">
+    <value>61</value>
+   </code>
+  </items>
+  <items id="9bad61d7-11f0-483c-9ab0-da72bb315745">
+   <name>Document_PurchaseReturn</name>
+   <description>Document Purchase return</description>
+   <code xsi:type="core:NumberValue">
+    <value>64</value>
+   </code>
+  </items>
+  <items id="6c9873c1-9449-40b1-bd65-02a7648dc9f4">
+   <name>Document_PurchaseReturnOrder</name>
+   <description>Document Purchase return order</description>
+   <code xsi:type="core:NumberValue">
+    <value>65</value>
+   </code>
+  </items>
+  <items id="50d761b3-30ae-4bb0-afd5-3e011e8083c0">
+   <name>Document_ReconciliationStatement</name>
+   <description>Document Reconciliation statement</description>
+   <code xsi:type="core:NumberValue">
+    <value>66</value>
+   </code>
+  </items>
+  <items id="906608c9-2fa7-421e-9b37-b1dea20ae04e">
+   <name>Document_SalesReturn</name>
+   <description>Document Sales return</description>
+   <code xsi:type="core:NumberValue">
+    <value>71</value>
+   </code>
+  </items>
+  <items id="c7ba1218-4713-4028-b9e7-35514690620c">
+   <name>Document_SalesReturnOrder</name>
+   <description>Document Sales return order</description>
+   <code xsi:type="core:NumberValue">
+    <value>72</value>
+   </code>
+  </items>
+  <items id="de357601-3033-45a8-b7c3-2e46ac141890">
+   <name>Document_ShipmentConfirmation</name>
+   <description>Document Shipment confirmation</description>
+   <code xsi:type="core:NumberValue">
+    <value>73</value>
+   </code>
+  </items>
+  <items id="07e4eae5-710d-4c5b-9ad8-28013e48abe9">
+   <name>Document_StockAdjustmentAsSurplus</name>
+   <description>Document Stock adjustment as surplus</description>
+   <code xsi:type="core:NumberValue">
+    <value>74</value>
+   </code>
+  </items>
+  <items id="eae67cef-3488-4f12-afb0-d130932ad37c">
+   <name>Document_StockAdjustmentAsWriteOff</name>
+   <description>Document Stock adjustment as write off</description>
+   <code xsi:type="core:NumberValue">
+    <value>75</value>
+   </code>
+  </items>
+  <items id="b8ae16fc-14a3-4f14-a1f2-11d01097bcec">
+   <name>Document_Unbundling</name>
+   <description>Document Unbundling</description>
+   <code xsi:type="core:NumberValue">
+    <value>76</value>
+   </code>
+  </items>
+  <items id="cce02b56-5a53-4cee-af83-062f1d468981">
+   <name>Catalog_Files</name>
+   <description>Catalog Files</description>
+   <code xsi:type="core:NumberValue">
+    <value>13</value>
+   </code>
+  </items>
+  <items id="36ae80a0-5960-4a6d-9f2b-ae2ade0e6cb1">
+   <name>Document_RetailSalesReceipt</name>
+   <description>Document Retail sales receipt</description>
+   <code xsi:type="core:NumberValue">
+    <value>68</value>
+   </code>
+  </items>
+  <items id="0acebd7b-ff65-452a-b032-85a1295e1d94">
+   <name>Catalog_PaymentTerminals</name>
+   <description>Catalog Payment terminals</description>
+   <code xsi:type="core:NumberValue">
+    <value>21</value>
+   </code>
+  </items>
+  <items id="5fb73bc8-57cf-4f02-87f4-fc35e6c5657c">
+   <name>Document_RetailReturnReceipt</name>
+   <description>Document Retail return receipt</description>
+   <code xsi:type="core:NumberValue">
+    <value>67</value>
+   </code>
+  </items>
+  <items id="6a361b94-41b0-4947-9777-628809f62438">
+   <name>Catalog_BankTerms</name>
+   <description>Catalog Bank terms</description>
+   <code xsi:type="core:NumberValue">
+    <value>3</value>
+   </code>
+  </items>
+  <items id="41535f14-894a-4704-be4d-e8a4534502a4">
+   <name>Catalog_RetailCustomers</name>
+   <description>Catalog Retail customers</description>
+   <code xsi:type="core:NumberValue">
+    <value>25</value>
+   </code>
+  </items>
+  <items id="d68eb658-0bb7-4e59-904e-0e0d161f977a">
+   <name>Document_CashStatement</name>
+   <description>Document Cash statement</description>
+   <code xsi:type="core:NumberValue">
+    <value>45</value>
+   </code>
+  </items>
+  <items id="9fc76d05-8a26-4010-993e-b9d2e703710e">
+   <name>Catalog_CashStatementStatuses</name>
+   <description>Catalog Cash statement statuses</description>
+   <code xsi:type="core:NumberValue">
+    <value>6</value>
+   </code>
+  </items>
+  <items id="8cbe4612-d477-4a19-af48-24a98318667d">
+   <name>Document_CreditNote</name>
+   <description>Document Credit note</description>
+   <code xsi:type="core:NumberValue">
+    <value>48</value>
+   </code>
+  </items>
+  <items id="819c80cf-0def-402c-900c-7faf4b52fda1">
+   <name>Document_DebitNote</name>
+   <description>Document Debit note</description>
+   <code xsi:type="core:NumberValue">
+    <value>49</value>
+   </code>
+  </items>
+  <items id="af639881-4729-4a33-a46e-0d7a22ef12dd">
+   <name>Catalog_Workstations</name>
+   <description>Catalog Workstations</description>
+   <code xsi:type="core:NumberValue">
+    <value>37</value>
+   </code>
+  </items>
+  <items id="6e0be277-489c-449e-8b22-a6f1147a926a">
+   <name>Catalog_Hardware</name>
+   <description>Catalog Hardware</description>
+   <code xsi:type="core:NumberValue">
+    <value>14</value>
+   </code>
+  </items>
+  <items id="cf8ce39f-f480-435f-beb8-b7f92e53cc96">
+   <name>Catalog_ItemSegments</name>
+   <description>Catalog Item segments</description>
+   <code xsi:type="core:NumberValue">
+    <value>17</value>
+   </code>
+  </items>
+  <items id="23ded746-24f8-457e-9aaa-a0760fd13eb3">
+   <name>Catalog_PartnerSegments</name>
+   <description>Catalog Partner segments</description>
+   <code xsi:type="core:NumberValue">
+    <value>20</value>
+   </code>
+  </items>
+  <items id="b0fd5802-3afd-4ff6-a0bc-9402657ac361">
+   <name>Catalog_PaymentTypes</name>
+   <description>Catalog Payment types</description>
+   <code xsi:type="core:NumberValue">
+    <value>22</value>
+   </code>
+  </items>
+  <items id="e1104706-a199-4d45-aba5-303060f6f9e5">
+   <name>Catalog_SpecialOfferRules</name>
+   <description>Catalog Special offer rules</description>
+   <code xsi:type="core:NumberValue">
+    <value>27</value>
+   </code>
+  </items>
+  <items id="4ce4a7f7-4bb4-4690-8793-b3176318d913">
+   <name>Catalog_SpecialOffers</name>
+   <description>Catalog Special offers</description>
+   <code xsi:type="core:NumberValue">
+    <value>28</value>
+   </code>
+  </items>
+  <items id="2b524deb-877c-4ef3-8d71-7272830f18f5">
+   <name>Catalog_SpecialOfferTypes</name>
+   <description>Catalog Special offer types</description>
+   <code xsi:type="core:NumberValue">
+    <value>29</value>
+   </code>
+  </items>
+  <items id="78e6b1f2-9dd6-460a-aa72-2fd5aab023d5">
+   <name>Catalog_TaxRates</name>
+   <description>Catalog Tax rates</description>
+   <code xsi:type="core:NumberValue">
+    <value>33</value>
+   </code>
+  </items>
+  <items id="4ef678cb-b68c-4d35-a918-2b0873128a94">
+   <name>Catalog_UserGroups</name>
+   <description>Catalog User groups</description>
+   <code xsi:type="core:NumberValue">
+    <value>35</value>
+   </code>
+  </items>
+  <items id="3a38d2cb-1b63-48aa-a4e1-8cfd219f69c6">
+   <name>Document_InternalSupplyRequest</name>
+   <description>Document Internal supply request</description>
+   <code xsi:type="core:NumberValue">
+    <value>52</value>
+   </code>
+  </items>
+  <items id="2c781412-a4ea-4fb2-b9fc-fb021c5c2bdb">
+   <name>Catalog_PartnersBankAccounts</name>
+   <description>Catalog Partners bank accounts</description>
+   <code xsi:type="core:NumberValue">
+    <value>1</value>
+   </code>
+  </items>
+  <items id="1c954b8b-b64e-4b82-a964-f78318a74e17">
+   <name>Catalog_LockDataModificationReasons</name>
+   <description>Catalog Lock data modification reasons</description>
+   <code xsi:type="core:NumberValue">
+    <value>77</value>
+   </code>
+  </items>
+  <items id="6fee8f30-c6a3-4cba-81c4-14e0c3e111db">
+   <name>Document_ItemStockAdjustment</name>
+   <description>Document Item stock adjustment</description>
+   <code xsi:type="core:NumberValue">
+    <value>78</value>
+   </code>
+  </items>
+  <items id="8a4cc1a3-e127-4c82-82b2-99af25bccff2">
+   <name>Document_ManualRegisterEntry</name>
+   <description>Document Manual register entry</description>
+   <code xsi:type="core:NumberValue">
+    <value>79</value>
+   </code>
+  </items>
+  <items id="a98a551d-17dc-45db-aac6-fa95fb59a46b">
+   <name>Document_SalesOrderClosing</name>
+   <description>Document Sales order closing</description>
+   <code xsi:type="core:NumberValue">
+    <value>80</value>
+   </code>
+  </items>
+  <items id="302d65dc-1ddb-4dc6-8bf1-e6f6c9edb40b">
+   <name>Document_PlannedReceiptReservation</name>
+   <code xsi:type="core:NumberValue">
+    <value>81</value>
+   </code>
+  </items>
+  <items id="055d95f2-231c-4c1b-b4a1-94ed0a06ef67">
+   <name>Document_PurchaseOrderClosing</name>
+   <description>Document Purchase order closing</description>
+   <code xsi:type="core:NumberValue">
+    <value>82</value>
+   </code>
+  </items>
+  <items id="c8b31d5b-c7f6-4b7b-99f8-647c86352975">
+   <name>Catalog_PartnerItems</name>
+   <description>Catalog partner items</description>
+   <code xsi:type="core:NumberValue">
+    <value>83</value>
+   </code>
+  </items>
+  <items id="48f4affc-67fd-4cdc-90a4-9540ef4cf989">
+   <name>Document_JournalEntry</name>
+   <description>Document journal entry</description>
+   <code xsi:type="core:NumberValue">
+    <value>84</value>
+   </code>
+  </items>
+  <items id="d5c6b9c5-5c08-4b68-938c-e177ac303e2d">
+   <name>Catalog_LedgerTypes</name>
+   <description>Catalog Ledger types</description>
+   <code xsi:type="core:NumberValue">
+    <value>85</value>
+   </code>
+  </items>
+  <items id="3b171d98-0069-4860-9c06-5aa41d3f4218">
+   <name>Document_MoneyTransfer</name>
+   <description>Document money transfer</description>
+   <code xsi:type="core:NumberValue">
+    <value>86</value>
+   </code>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.AddAttributeAndPropertySets.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.AddAttributeAndPropertySets.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.AddAttributeAndPropertySets.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <tabularSections uuid="099ccca7-3624-470b-8fa0-c61ef9fe8699">
   <producedTypes>
-    <objectType typeId="7df5b34f-f616-4375-b506-cf4bf90e39c0" valueTypeId="5b53d0ba-f1b4-424e-9aa9-b05621234c86"/>
-    <refType typeId="5bf67cf9-39ac-4f5b-aa8b-0c2b81aa28c4" valueTypeId="58feab8d-c65f-428d-ac61-3bd62b861906"/>
-    <selectionType typeId="7afe3b83-dfb5-4a9e-880c-e5b4ce99440a" valueTypeId="d1019aeb-07aa-4a21-ba5e-f65aec32ae31"/>
-    <listType typeId="0a8f988d-0eaf-422a-b079-dc3dc4102127" valueTypeId="3727d1c5-f216-4a26-9d86-6e2bc958e75d"/>
-    <managerType typeId="3057dbe5-28fe-4362-9f64-6d7f9ca0af44" valueTypeId="47f9565e-9c3f-4510-a3f0-91bd08c5d4bd"/>
+   <objectType typeId="29fa0760-f75c-46e1-b9fc-e3b0959cc8f1" valueTypeId="fe3aef49-d912-49bc-a118-1c65ed62a991"/>
+   <rowType typeId="0ee1f4a0-f844-4031-b450-33765fdb3dc9" valueTypeId="4f791557-fd94-4210-9ad2-837fbe4ec108"/>
   </producedTypes>
-  <name>AddAttributeAndPropertySets</name>
+  <name>Attributes</name>
   <synonym>
-    <key>en</key>
-    <value>Additional attribute sets</value>
+   <key>ru</key>
+   <value>Реквизиты</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek alanlar</value>
+  </synonym>
+  <attributes uuid="80c4cfb8-465c-47b9-956d-60dad6cc77e4">
+   <name>Attribute</name>
+   <synonym>
+    <key>ru</key>
+    <value>Реквизит</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Additional attribute set</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="759d2809-0696-4f6c-befd-bd93aaf90e60">
-      <name>Catalog_ItemKeys</name>
-      <description>Catalog Item keys</description>
-      <code xsi:type="core:NumberValue">
-        <value>15</value>
-      </code>
-    </items>
-    <items id="18357eb8-bf37-45d4-b02d-349d9b6347dc">
-      <name>Catalog_Items</name>
-      <description>Catalog Items</description>
-      <code xsi:type="core:NumberValue">
-        <value>16</value>
-      </code>
-    </items>
-    <items id="a3975cab-9db4-4c45-9ad2-6682721cbdc5">
-      <name>Catalog_ItemTypes</name>
-      <description>Catalog Item types</description>
-      <code xsi:type="core:NumberValue">
-        <value>18</value>
-      </code>
-    </items>
-    <items id="c02f2c5d-9c88-4433-b318-bcc39d844c69">
-      <name>Document_SalesInvoice</name>
-      <description>Document Sales invoice</description>
-      <code xsi:type="core:NumberValue">
-        <value>69</value>
-      </code>
-    </items>
-    <items id="8846cea1-3716-4606-bdc5-f47a7aa533ce">
-      <name>Catalog_Partners</name>
-      <description>Catalog Partners</description>
-      <code xsi:type="core:NumberValue">
-        <value>19</value>
-      </code>
-    </items>
-    <items id="28287f24-dca3-4f41-ae30-4cb503cc38ca">
-      <name>Catalog_ExpenseAndRevenueTypes</name>
-      <description>Catalog Expense and revenue types</description>
-      <code xsi:type="core:NumberValue">
-        <value>12</value>
-      </code>
-    </items>
-    <items id="5a7a7a54-2c7a-46cf-ac83-c55cca798a08">
-      <name>Catalog_BusinessUnits</name>
-      <description>Catalog Business units</description>
-      <code xsi:type="core:NumberValue">
-        <value>4</value>
-      </code>
-    </items>
-    <items id="eab4813e-9ad8-48e4-aa2e-e95eb15725c7">
-      <name>Catalog_PriceKeys</name>
-      <description>Catalog Price keys</description>
-      <code xsi:type="core:NumberValue">
-        <value>23</value>
-      </code>
-    </items>
-    <items id="69ba322c-2a19-4125-b7e0-a3123897bd99">
-      <name>Document_SalesOrder</name>
-      <description>Document Sales order</description>
-      <code xsi:type="core:NumberValue">
-        <value>70</value>
-      </code>
-    </items>
-    <items id="dd8f4747-410a-4bf3-8599-40a05cb32058">
-      <name>Catalog_ChequeBonds</name>
-      <description>Catalog Cheque bonds</description>
-      <code xsi:type="core:NumberValue">
-        <value>7</value>
-      </code>
-    </items>
-    <items id="9cd4810f-e450-4719-9620-8a6d3960b834">
-      <name>Catalog_Specifications</name>
-      <description>Catalog Specifications</description>
-      <code xsi:type="core:NumberValue">
-        <value>30</value>
-      </code>
-    </items>
-    <items id="41f02ae3-551e-41ee-a0f7-cbb4825a290e">
-      <name>Document_PurchaseInvoice</name>
-      <description>Document Purchase invoice</description>
-      <code xsi:type="core:NumberValue">
-        <value>62</value>
-      </code>
-    </items>
-    <items id="888eb86f-c74e-45fa-bee5-bf3e7baa99d1">
-      <name>Document_PurchaseOrder</name>
-      <description>Document Purchase order</description>
-      <code xsi:type="core:NumberValue">
-        <value>63</value>
-      </code>
-    </items>
-    <items id="8bbe12f5-44d2-4a75-85e2-32bcb48692a7">
-      <name>Catalog_Agreements</name>
-      <description>Catalog Agreements</description>
-      <code xsi:type="core:NumberValue">
-        <value>2</value>
-      </code>
-    </items>
-    <items id="328f6f83-a86a-4b9d-bd6b-ffead46c0953">
-      <name>Catalog_CashAccounts</name>
-      <description>Catalog Cash accounts</description>
-      <code xsi:type="core:NumberValue">
-        <value>5</value>
-      </code>
-    </items>
-    <items id="9ed15691-1df1-4020-a825-4989f860a90e">
-      <name>Catalog_Companies</name>
-      <description>Catalog Companies</description>
-      <code xsi:type="core:NumberValue">
-        <value>8</value>
-      </code>
-    </items>
-    <items id="49d5fa3f-515b-4d80-8b1c-307112a4158a">
-      <name>Catalog_CompanyTypes</name>
-      <description>Catalog Company types</description>
-      <code xsi:type="core:NumberValue">
-        <value>9</value>
-      </code>
-    </items>
-    <items id="60670f4a-f08a-4ca4-a6d3-05236f383207">
-      <name>Catalog_Countries</name>
-      <description>Catalog Countries</description>
-      <code xsi:type="core:NumberValue">
-        <value>10</value>
-      </code>
-    </items>
-    <items id="7908e42a-a00e-4866-8ea2-7221edb32a1b">
-      <name>Catalog_Currencies</name>
-      <description>Catalog Currencies</description>
-      <code xsi:type="core:NumberValue">
-        <value>11</value>
-      </code>
-    </items>
-    <items id="7fffca8e-8a3f-4fbf-af29-37de18151417">
-      <name>Catalog_PriceTypes</name>
-      <description>Catalog Price types</description>
-      <code xsi:type="core:NumberValue">
-        <value>24</value>
-      </code>
-    </items>
-    <items id="632e8c44-ec2d-403c-af75-10ea3a0b99a3">
-      <name>Catalog_SerialLotNumbers</name>
-      <description>Catalog Serial lot numbers</description>
-      <code xsi:type="core:NumberValue">
-        <value>26</value>
-      </code>
-    </items>
-    <items id="95c158df-fb51-4bbf-9f83-44f6f333861f">
-      <name>Catalog_Stores</name>
-      <description>Catalog Stores</description>
-      <code xsi:type="core:NumberValue">
-        <value>31</value>
-      </code>
-    </items>
-    <items id="1bfd69ac-1570-431e-80e6-5b393b1688d3">
-      <name>Catalog_Taxes</name>
-      <description>Catalog Taxes</description>
-      <code xsi:type="core:NumberValue">
-        <value>32</value>
-      </code>
-    </items>
-    <items id="612953b5-4272-4603-9467-f51deca79a3a">
-      <name>Catalog_Units</name>
-      <description>Catalog Units</description>
-      <code xsi:type="core:NumberValue">
-        <value>34</value>
-      </code>
-    </items>
-    <items id="e602c645-ae74-4566-8b79-b902ab223c46">
-      <name>Catalog_Users</name>
-      <description>Catalog Users</description>
-      <code xsi:type="core:NumberValue">
-        <value>36</value>
-      </code>
-    </items>
-    <items id="b51b4fc3-9af0-49be-bc0f-1f50629c4951">
-      <name>Document_BankPayment</name>
-      <description>Document Bank payment</description>
-      <code xsi:type="core:NumberValue">
-        <value>38</value>
-      </code>
-    </items>
-    <items id="5e98ef39-7a7f-4e2e-ac27-ef61c75418a4">
-      <name>Document_BankReceipt</name>
-      <description>Document Bank receipt</description>
-      <code xsi:type="core:NumberValue">
-        <value>39</value>
-      </code>
-    </items>
-    <items id="dbc9ff5e-39a5-4968-a585-dad9f87c15a4">
-      <name>Document_Bundling</name>
-      <description>Document Bundling</description>
-      <code xsi:type="core:NumberValue">
-        <value>40</value>
-      </code>
-    </items>
-    <items id="1ea8bd75-b87f-48b4-af96-1b7d6dfdd4b0">
-      <name>Document_CashExpense</name>
-      <description>Document Cash expense</description>
-      <code xsi:type="core:NumberValue">
-        <value>41</value>
-      </code>
-    </items>
-    <items id="4a3c08bd-dd13-4e82-92f9-a0002041d98c">
-      <name>Document_CashPayment</name>
-      <description>Document Cash payment</description>
-      <code xsi:type="core:NumberValue">
-        <value>42</value>
-      </code>
-    </items>
-    <items id="59e6837a-c968-415c-81c5-454ed7728831">
-      <name>Document_CashReceipt</name>
-      <description>Document Cash receipt</description>
-      <code xsi:type="core:NumberValue">
-        <value>43</value>
-      </code>
-    </items>
-    <items id="0b05d183-3aef-4b78-9897-0beebfb766ae">
-      <name>Document_CashRevenue</name>
-      <description>Document Cash revenue</description>
-      <code xsi:type="core:NumberValue">
-        <value>44</value>
-      </code>
-    </items>
-    <items id="a1216e62-2d10-48b2-9c15-7c7632e37c9f">
-      <name>Document_CashTransferOrder</name>
-      <description>Document Cash transfer order</description>
-      <code xsi:type="core:NumberValue">
-        <value>46</value>
-      </code>
-    </items>
-    <items id="d165f449-9d6e-49bb-aac3-2d86efda2eae">
-      <name>Document_GoodsReceipt</name>
-      <description>Document Goods receipt</description>
-      <code xsi:type="core:NumberValue">
-        <value>50</value>
-      </code>
-    </items>
-    <items id="ef6ee0a7-b975-4ed0-9efc-4737f1890c54">
-      <name>Document_IncomingPaymentOrder</name>
-      <description>Document Incoming payment order</description>
-      <code xsi:type="core:NumberValue">
-        <value>51</value>
-      </code>
-    </items>
-    <items id="70839530-948e-4961-bdd6-17632148e6a9">
-      <name>Document_InventoryTransfer</name>
-      <description>Document Inventory transfer</description>
-      <code xsi:type="core:NumberValue">
-        <value>53</value>
-      </code>
-    </items>
-    <items id="74d7ecaa-6ac0-45ca-93ba-6be5806c5f7a">
-      <name>Document_InventoryTransferOrder</name>
-      <description>Document Inventory transfer order</description>
-      <code xsi:type="core:NumberValue">
-        <value>54</value>
-      </code>
-    </items>
-    <items id="027d2fc5-5f0b-4955-9d72-599fca2c241d">
-      <name>Document_Labeling</name>
-      <description>Document Labeling</description>
-      <code xsi:type="core:NumberValue">
-        <value>56</value>
-      </code>
-    </items>
-    <items id="250546bc-ecf2-4173-933a-dcd17d2c8fd7">
-      <name>Document_OpeningEntry</name>
-      <description>Document Opening entry</description>
-      <code xsi:type="core:NumberValue">
-        <value>57</value>
-      </code>
-    </items>
-    <items id="ae211661-bece-46b7-8946-c29d131b45fc">
-      <name>Document_OutgoingPaymentOrder</name>
-      <description>Document Outgoing payment order</description>
-      <code xsi:type="core:NumberValue">
-        <value>58</value>
-      </code>
-    </items>
-    <items id="b07e942f-58ef-4049-b954-37ab8f4d6820">
-      <name>Document_PhysicalCountByLocation</name>
-      <description>Document Physical count by location</description>
-      <code xsi:type="core:NumberValue">
-        <value>59</value>
-      </code>
-    </items>
-    <items id="b90b3451-a811-4a27-b15d-1a8fd6827de8">
-      <name>Document_PhysicalInventory</name>
-      <description>Document Physical inventory</description>
-      <code xsi:type="core:NumberValue">
-        <value>60</value>
-      </code>
-    </items>
-    <items id="edde0b2e-e4c3-435d-8f04-61a431134d32">
-      <name>Document_PriceList</name>
-      <description>Document Price list</description>
-      <code xsi:type="core:NumberValue">
-        <value>61</value>
-      </code>
-    </items>
-    <items id="9bad61d7-11f0-483c-9ab0-da72bb315745">
-      <name>Document_PurchaseReturn</name>
-      <description>Document Purchase return</description>
-      <code xsi:type="core:NumberValue">
-        <value>64</value>
-      </code>
-    </items>
-    <items id="6c9873c1-9449-40b1-bd65-02a7648dc9f4">
-      <name>Document_PurchaseReturnOrder</name>
-      <description>Document Purchase return order</description>
-      <code xsi:type="core:NumberValue">
-        <value>65</value>
-      </code>
-    </items>
-    <items id="50d761b3-30ae-4bb0-afd5-3e011e8083c0">
-      <name>Document_ReconciliationStatement</name>
-      <description>Document Reconciliation statement</description>
-      <code xsi:type="core:NumberValue">
-        <value>66</value>
-      </code>
-    </items>
-    <items id="906608c9-2fa7-421e-9b37-b1dea20ae04e">
-      <name>Document_SalesReturn</name>
-      <description>Document Sales return</description>
-      <code xsi:type="core:NumberValue">
-        <value>71</value>
-      </code>
-    </items>
-    <items id="c7ba1218-4713-4028-b9e7-35514690620c">
-      <name>Document_SalesReturnOrder</name>
-      <description>Document Sales return order</description>
-      <code xsi:type="core:NumberValue">
-        <value>72</value>
-      </code>
-    </items>
-    <items id="de357601-3033-45a8-b7c3-2e46ac141890">
-      <name>Document_ShipmentConfirmation</name>
-      <description>Document Shipment confirmation</description>
-      <code xsi:type="core:NumberValue">
-        <value>73</value>
-      </code>
-    </items>
-    <items id="07e4eae5-710d-4c5b-9ad8-28013e48abe9">
-      <name>Document_StockAdjustmentAsSurplus</name>
-      <description>Document Stock adjustment as surplus</description>
-      <code xsi:type="core:NumberValue">
-        <value>74</value>
-      </code>
-    </items>
-    <items id="eae67cef-3488-4f12-afb0-d130932ad37c">
-      <name>Document_StockAdjustmentAsWriteOff</name>
-      <description>Document Stock adjustment as write off</description>
-      <code xsi:type="core:NumberValue">
-        <value>75</value>
-      </code>
-    </items>
-    <items id="b8ae16fc-14a3-4f14-a1f2-11d01097bcec">
-      <name>Document_Unbundling</name>
-      <description>Document Unbundling</description>
-      <code xsi:type="core:NumberValue">
-        <value>76</value>
-      </code>
-    </items>
-    <items id="cce02b56-5a53-4cee-af83-062f1d468981">
-      <name>Catalog_Files</name>
-      <description>Catalog Files</description>
-      <code xsi:type="core:NumberValue">
-        <value>13</value>
-      </code>
-    </items>
-    <items id="36ae80a0-5960-4a6d-9f2b-ae2ade0e6cb1">
-      <name>Document_RetailSalesReceipt</name>
-      <description>Document Retail sales receipt</description>
-      <code xsi:type="core:NumberValue">
-        <value>68</value>
-      </code>
-    </items>
-    <items id="0acebd7b-ff65-452a-b032-85a1295e1d94">
-      <name>Catalog_PaymentTerminals</name>
-      <description>Catalog Payment terminals</description>
-      <code xsi:type="core:NumberValue">
-        <value>21</value>
-      </code>
-    </items>
-    <items id="5fb73bc8-57cf-4f02-87f4-fc35e6c5657c">
-      <name>Document_RetailReturnReceipt</name>
-      <description>Document Retail return receipt</description>
-      <code xsi:type="core:NumberValue">
-        <value>67</value>
-      </code>
-    </items>
-    <items id="6a361b94-41b0-4947-9777-628809f62438">
-      <name>Catalog_BankTerms</name>
-      <description>Catalog Bank terms</description>
-      <code xsi:type="core:NumberValue">
-        <value>3</value>
-      </code>
-    </items>
-    <items id="41535f14-894a-4704-be4d-e8a4534502a4">
-      <name>Catalog_RetailCustomers</name>
-      <description>Catalog Retail customers</description>
-      <code xsi:type="core:NumberValue">
-        <value>25</value>
-      </code>
-    </items>
-    <items id="d68eb658-0bb7-4e59-904e-0e0d161f977a">
-      <name>Document_CashStatement</name>
-      <description>Document Cash statement</description>
-      <code xsi:type="core:NumberValue">
-        <value>45</value>
-      </code>
-    </items>
-    <items id="9fc76d05-8a26-4010-993e-b9d2e703710e">
-      <name>Catalog_CashStatementStatuses</name>
-      <description>Catalog Cash statement statuses</description>
-      <code xsi:type="core:NumberValue">
-        <value>6</value>
-      </code>
-    </items>
-    <items id="8cbe4612-d477-4a19-af48-24a98318667d">
-      <name>Document_CreditNote</name>
-      <description>Document Credit note</description>
-      <code xsi:type="core:NumberValue">
-        <value>48</value>
-      </code>
-    </items>
-    <items id="819c80cf-0def-402c-900c-7faf4b52fda1">
-      <name>Document_DebitNote</name>
-      <description>Document Debit note</description>
-      <code xsi:type="core:NumberValue">
-        <value>49</value>
-      </code>
-    </items>
-    <items id="af639881-4729-4a33-a46e-0d7a22ef12dd">
-      <name>Catalog_Workstations</name>
-      <description>Catalog Workstations</description>
-      <code xsi:type="core:NumberValue">
-        <value>37</value>
-      </code>
-    </items>
-    <items id="6e0be277-489c-449e-8b22-a6f1147a926a">
-      <name>Catalog_Hardware</name>
-      <description>Catalog Hardware</description>
-      <code xsi:type="core:NumberValue">
-        <value>14</value>
-      </code>
-    </items>
-    <items id="cf8ce39f-f480-435f-beb8-b7f92e53cc96">
-      <name>Catalog_ItemSegments</name>
-      <description>Catalog Item segments</description>
-      <code xsi:type="core:NumberValue">
-        <value>17</value>
-      </code>
-    </items>
-    <items id="23ded746-24f8-457e-9aaa-a0760fd13eb3">
-      <name>Catalog_PartnerSegments</name>
-      <description>Catalog Partner segments</description>
-      <code xsi:type="core:NumberValue">
-        <value>20</value>
-      </code>
-    </items>
-    <items id="b0fd5802-3afd-4ff6-a0bc-9402657ac361">
-      <name>Catalog_PaymentTypes</name>
-      <description>Catalog Payment types</description>
-      <code xsi:type="core:NumberValue">
-        <value>22</value>
-      </code>
-    </items>
-    <items id="e1104706-a199-4d45-aba5-303060f6f9e5">
-      <name>Catalog_SpecialOfferRules</name>
-      <description>Catalog Special offer rules</description>
-      <code xsi:type="core:NumberValue">
-        <value>27</value>
-      </code>
-    </items>
-    <items id="4ce4a7f7-4bb4-4690-8793-b3176318d913">
-      <name>Catalog_SpecialOffers</name>
-      <description>Catalog Special offers</description>
-      <code xsi:type="core:NumberValue">
-        <value>28</value>
-      </code>
-    </items>
-    <items id="2b524deb-877c-4ef3-8d71-7272830f18f5">
-      <name>Catalog_SpecialOfferTypes</name>
-      <description>Catalog Special offer types</description>
-      <code xsi:type="core:NumberValue">
-        <value>29</value>
-      </code>
-    </items>
-    <items id="78e6b1f2-9dd6-460a-aa72-2fd5aab023d5">
-      <name>Catalog_TaxRates</name>
-      <description>Catalog Tax rates</description>
-      <code xsi:type="core:NumberValue">
-        <value>33</value>
-      </code>
-    </items>
-    <items id="4ef678cb-b68c-4d35-a918-2b0873128a94">
-      <name>Catalog_UserGroups</name>
-      <description>Catalog User groups</description>
-      <code xsi:type="core:NumberValue">
-        <value>35</value>
-      </code>
-    </items>
-    <items id="3a38d2cb-1b63-48aa-a4e1-8cfd219f69c6">
-      <name>Document_InternalSupplyRequest</name>
-      <description>Document Internal supply request</description>
-      <code xsi:type="core:NumberValue">
-        <value>52</value>
-      </code>
-    </items>
-    <items id="2c781412-a4ea-4fb2-b9fc-fb021c5c2bdb">
-      <name>Catalog_PartnersBankAccounts</name>
-      <description>Catalog Partners bank accounts</description>
-      <code xsi:type="core:NumberValue">
-        <value>1</value>
-      </code>
-    </items>
-    <items id="1c954b8b-b64e-4b82-a964-f78318a74e17">
-      <name>Catalog_LockDataModificationReasons</name>
-      <description>Catalog Lock data modification reasons</description>
-      <code xsi:type="core:NumberValue">
-        <value>77</value>
-      </code>
-    </items>
-    <items id="6fee8f30-c6a3-4cba-81c4-14e0c3e111db">
-      <name>Document_ItemStockAdjustment</name>
-      <description>Document Item stock adjustment</description>
-      <code xsi:type="core:NumberValue">
-        <value>78</value>
-      </code>
-    </items>
-    <items id="8a4cc1a3-e127-4c82-82b2-99af25bccff2">
-      <name>Document_ManualRegisterEntry</name>
-      <description>Document Manual register entry</description>
-      <code xsi:type="core:NumberValue">
-        <value>79</value>
-      </code>
-    </items>
-    <items id="a98a551d-17dc-45db-aac6-fa95fb59a46b">
-      <name>Document_SalesOrderClosing</name>
-      <description>Document Sales order closing</description>
-      <code xsi:type="core:NumberValue">
-        <value>80</value>
-      </code>
-    </items>
-    <items id="302d65dc-1ddb-4dc6-8bf1-e6f6c9edb40b">
-      <name>Document_PlannedReceiptReservation</name>
-      <code xsi:type="core:NumberValue">
-        <value>81</value>
-      </code>
-    </items>
-    <items id="055d95f2-231c-4c1b-b4a1-94ed0a06ef67">
-      <name>Document_PurchaseOrderClosing</name>
-      <description>Document Purchase order closing</description>
-      <code xsi:type="core:NumberValue">
-        <value>82</value>
-      </code>
-    </items>
-    <items id="c8b31d5b-c7f6-4b7b-99f8-647c86352975">
-      <name>Catalog_PartnerItems</name>
-      <description>Catalog partner items</description>
-      <code xsi:type="core:NumberValue">
-        <value>83</value>
-      </code>
-    </items>
-    <items id="48f4affc-67fd-4cdc-90a4-9540ef4cf989">
-      <name>Document_JournalEntry</name>
-      <description>Document journal entry</description>
-      <code xsi:type="core:NumberValue">
-        <value>84</value>
-      </code>
-    </items>
-    <items id="d5c6b9c5-5c08-4b68-938c-e177ac303e2d">
-      <name>Catalog_LedgerTypes</name>
-      <description>Catalog Ledger types</description>
-      <code xsi:type="core:NumberValue">
-        <value>85</value>
-      </code>
-    </items>
-    <items id="3b171d98-0069-4860-9c06-5aa41d3f4218">
-      <name>Document_MoneyTransfer</name>
-      <description>Document money transfer</description>
-      <code xsi:type="core:NumberValue">
-        <value>86</value>
-      </code>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.AddAttributeAndPropertySets.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.AddAttributeAndPropertySets.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.AddAttributeAndPropertySets.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <tabularSections uuid="099ccca7-3624-470b-8fa0-c61ef9fe8699">
-    <producedTypes>
-      <objectType typeId="29fa0760-f75c-46e1-b9fc-e3b0959cc8f1" valueTypeId="fe3aef49-d912-49bc-a118-1c65ed62a991"/>
-      <rowType typeId="0ee1f4a0-f844-4031-b450-33765fdb3dc9" valueTypeId="4f791557-fd94-4210-9ad2-837fbe4ec108"/>
-    </producedTypes>
-    <name>Attributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Attributes</value>
-    </synonym>
-    <attributes uuid="80c4cfb8-465c-47b9-956d-60dad6cc77e4">
-      <name>Attribute</name>
-      <synonym>
-        <key>en</key>
-        <value>Attribute</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="a5ed841f-c7ca-455f-a862-2d1c9175493b">
-      <name>Condition</name>
-      <synonym>
-        <key>en</key>
-        <value>Condition</value>
-      </synonym>
-      <type>
-        <types>ValueStorage</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="41b0e27f-df2c-49f4-846e-ac8fdc7d8ad4">
-      <name>IsConditionSet</name>
-      <synonym>
-        <key>en</key>
-        <value>Is condition set</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="e90ab08a-d83c-4d9d-bd32-2a3a48d03587">
-      <name>InterfaceGroup</name>
-      <synonym>
-        <key>en</key>
-        <value>UI group</value>
-      </synonym>
-      <comment>Name of group for attribute</comment>
-      <type>
-        <types>CatalogRef.InterfaceGroups</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7ad65860-4869-4104-96f2-6f7d4e74e542">
-      <name>Required</name>
-      <synonym>
-        <key>en</key>
-        <value>Required</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="71b4625a-8e0a-41a1-b6e0-1ab83ed78d93">
-      <name>ShowInHTML</name>
-      <synonym>
-        <key>en</key>
-        <value>Show in HTML</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="63d25f08-66d6-4386-bb3e-221989d0bc8e">
-    <producedTypes>
-      <objectType typeId="8d59c13f-477c-44a6-ada6-965fd34b33b6" valueTypeId="398cd1d2-b53c-4680-b793-cb1c50c5b526"/>
-      <rowType typeId="4af89b6f-39bd-4099-b384-ffae14d674d3" valueTypeId="896b12ec-c96d-400b-81ad-c1c7fcc611db"/>
-    </producedTypes>
-    <name>Properties</name>
-    <synonym>
-      <key>en</key>
-      <value>Properties</value>
-    </synonym>
-    <attributes uuid="b9140641-608f-4582-8a42-2dfd3e257d41">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="c4664993-2b71-4723-a9db-9ef5a5a2a5c6">
-      <name>Condition</name>
-      <synonym>
-        <key>en</key>
-        <value>Condition</value>
-      </synonym>
-      <type>
-        <types>ValueStorage</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="678ece06-d283-4b04-b6b1-40a1668fa140">
-      <name>IsConditionSet</name>
-      <synonym>
-        <key>en</key>
-        <value>Is condition set</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="d57788a9-75b9-4593-836f-d865423c2412">
-      <name>ShowInHTML</name>
-      <synonym>
-        <key>en</key>
-        <value>Show in HTML</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="50db93fe-b52b-439b-a1f0-ee85def25385">
-    <producedTypes>
-      <objectType typeId="f04c6803-6dac-4170-a47e-9fb610342fcb" valueTypeId="3ff21d87-36cf-4340-befc-c1a7fb71e1e3"/>
-      <rowType typeId="aba69b67-d8e8-4fdd-9c47-d379f7d41e9f" valueTypeId="3ae9b7f8-d10e-4072-8f20-7024f44407d6"/>
-    </producedTypes>
-    <name>ExtensionAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Extension attributes</value>
-    </synonym>
-    <attributes uuid="cc91d81e-d42c-4e33-b97a-e31dfe9433a4">
-      <name>Attribute</name>
-      <synonym>
-        <key>en</key>
-        <value>Attribute</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>128</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="459ea82b-eda8-406b-bf96-e808bc73d004">
-      <name>Condition</name>
-      <synonym>
-        <key>en</key>
-        <value>Condition</value>
-      </synonym>
-      <type>
-        <types>ValueStorage</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="b0e89822-73e0-4299-9eb8-96e0f293ddb3">
-      <name>IsConditionSet</name>
-      <synonym>
-        <key>en</key>
-        <value>Is condition set</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="ec630a45-e714-4875-b9cb-b1d97ee41fd9">
-      <name>InterfaceGroup</name>
-      <synonym>
-        <key>en</key>
-        <value>UI group</value>
-      </synonym>
-      <comment>Name of group for attribute</comment>
-      <type>
-        <types>CatalogRef.InterfaceGroups</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a9b27c61-2808-425a-8afe-15a6dd7caabb">
-      <name>Required</name>
-      <synonym>
-        <key>en</key>
-        <value>Required</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="616a32e8-0418-4f30-91f8-4a55b78bdb6e">
-      <name>ShowInHTML</name>
-      <synonym>
-        <key>en</key>
-        <value>Show in HTML</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="f187379b-1551-4e3d-a832-be0d79967ca4">
-      <name>Show</name>
-      <synonym>
-        <key>en</key>
-        <value>Show</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="333dfaea-30f0-4b62-a4f2-ec34b2892f28">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="c2447e7a-2ea5-4e27-9d50-1b2c5cb709ad">
-    <name>EditCondition</name>
-    <synonym>
-      <key>en</key>
-      <value>Edit condition</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f18418ea-d0b2-487c-9397-d88335f33e2e">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="8d999616-7ec1-4449-84d3-2d2d11fabae0">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="f2f206a0-f85d-44cd-a5f6-d3560c17bce1">
-    <name>DCS_Catalog</name>
-    <synonym>
-      <key>en</key>
-      <value>DCS catalog</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
-  <templates uuid="e550ab2e-fb52-4923-86ef-30b0b9ef15bd">
-    <name>DCS_Document</name>
-    <synonym>
-      <key>en</key>
-      <value>DCS document</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+    <value>Attribute</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Alan</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a5ed841f-c7ca-455f-a862-2d1c9175493b">
+   <name>Condition</name>
+   <synonym>
+    <key>ru</key>
+    <value>Условие</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Condition</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Koşul</value>
+   </synonym>
+   <type>
+    <types>ValueStorage</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="41b0e27f-df2c-49f4-846e-ac8fdc7d8ad4">
+   <name>IsConditionSet</name>
+   <synonym>
+    <key>ru</key>
+    <value>Условие</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Is condition set</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Koşul belirlendi</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e90ab08a-d83c-4d9d-bd32-2a3a48d03587">
+   <name>InterfaceGroup</name>
+   <synonym>
+    <key>ru</key>
+    <value>Интерфейсная группа</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>UI group</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kullanıcı arayüzü grubu</value>
+   </synonym>
+   <comment>Name of group for attribute</comment>
+   <type>
+    <types>CatalogRef.InterfaceGroups</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7ad65860-4869-4104-96f2-6f7d4e74e542">
+   <name>Required</name>
+   <synonym>
+    <key>ru</key>
+    <value>Обязательный для заполнения</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Required</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Zorunlu</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="71b4625a-8e0a-41a1-b6e0-1ab83ed78d93">
+   <name>ShowInHTML</name>
+   <synonym>
+    <key>ru</key>
+    <value>Отображается в HTML</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Show in HTML</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>HTML olarak göster</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="63d25f08-66d6-4386-bb3e-221989d0bc8e">
+  <producedTypes>
+   <objectType typeId="8d59c13f-477c-44a6-ada6-965fd34b33b6" valueTypeId="398cd1d2-b53c-4680-b793-cb1c50c5b526"/>
+   <rowType typeId="4af89b6f-39bd-4099-b384-ffae14d674d3" valueTypeId="896b12ec-c96d-400b-81ad-c1c7fcc611db"/>
+  </producedTypes>
+  <name>Properties</name>
+  <synonym>
+   <key>ru</key>
+   <value>Свойства</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Properties</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="b9140641-608f-4582-8a42-2dfd3e257d41">
+   <name>Property</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c4664993-2b71-4723-a9db-9ef5a5a2a5c6">
+   <name>Condition</name>
+   <synonym>
+    <key>ru</key>
+    <value>Условие</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Condition</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Koşul</value>
+   </synonym>
+   <type>
+    <types>ValueStorage</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="678ece06-d283-4b04-b6b1-40a1668fa140">
+   <name>IsConditionSet</name>
+   <synonym>
+    <key>ru</key>
+    <value>Условие</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Is condition set</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Koşul belirlendi</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d57788a9-75b9-4593-836f-d865423c2412">
+   <name>ShowInHTML</name>
+   <synonym>
+    <key>ru</key>
+    <value>Отображается в HTML</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Show in HTML</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>HTML olarak göster</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="50db93fe-b52b-439b-a1f0-ee85def25385">
+  <producedTypes>
+   <objectType typeId="f04c6803-6dac-4170-a47e-9fb610342fcb" valueTypeId="3ff21d87-36cf-4340-befc-c1a7fb71e1e3"/>
+   <rowType typeId="aba69b67-d8e8-4fdd-9c47-d379f7d41e9f" valueTypeId="3ae9b7f8-d10e-4072-8f20-7024f44407d6"/>
+  </producedTypes>
+  <name>ExtensionAttributes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Реквизиты расширения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Extension attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Uzantı ek alanlar</value>
+  </synonym>
+  <attributes uuid="cc91d81e-d42c-4e33-b97a-e31dfe9433a4">
+   <name>Attribute</name>
+   <synonym>
+    <key>ru</key>
+    <value>Реквизит</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Attribute</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Alan</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>128</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="459ea82b-eda8-406b-bf96-e808bc73d004">
+   <name>Condition</name>
+   <synonym>
+    <key>ru</key>
+    <value>Условие</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Condition</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Koşul</value>
+   </synonym>
+   <type>
+    <types>ValueStorage</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b0e89822-73e0-4299-9eb8-96e0f293ddb3">
+   <name>IsConditionSet</name>
+   <synonym>
+    <key>ru</key>
+    <value>Условие</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Is condition set</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Koşul belirlendi</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ec630a45-e714-4875-b9cb-b1d97ee41fd9">
+   <name>InterfaceGroup</name>
+   <synonym>
+    <key>ru</key>
+    <value>Интерфейсная группа</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>UI group</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kullanıcı arayüzü grubu</value>
+   </synonym>
+   <comment>Name of group for attribute</comment>
+   <type>
+    <types>CatalogRef.InterfaceGroups</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a9b27c61-2808-425a-8afe-15a6dd7caabb">
+   <name>Required</name>
+   <synonym>
+    <key>ru</key>
+    <value>Обязательный для заполнения</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Required</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Zorunlu</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="616a32e8-0418-4f30-91f8-4a55b78bdb6e">
+   <name>ShowInHTML</name>
+   <synonym>
+    <key>ru</key>
+    <value>Отображается в HTML</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Show in HTML</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>HTML olarak göster</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f187379b-1551-4e3d-a832-be0d79967ca4">
+   <name>Show</name>
+   <synonym>
+    <key>ru</key>
+    <value>Отображать</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Show</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Göster</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="333dfaea-30f0-4b62-a4f2-ec34b2892f28">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="c2447e7a-2ea5-4e27-9d50-1b2c5cb709ad">
+  <name>EditCondition</name>
+  <synonym>
+   <key>ru</key>
+   <value>Редактировать условие</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Edit condition</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Koşul değiştir</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f18418ea-d0b2-487c-9397-d88335f33e2e">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="8d999616-7ec1-4449-84d3-2d2d11fabae0">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="f2f206a0-f85d-44cd-a5f6-d3560c17bce1">
+  <name>DCS_Catalog</name>
+  <synonym>
+   <key>ru</key>
+   <value>Справочник DCS</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>DCS catalog</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>DCS kart listesi</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+ <templates uuid="e550ab2e-fb52-4923-86ef-30b0b9ef15bd">
+  <name>DCS_Document</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документ DCS</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>DCS document</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>DCS evrak</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Catalog>

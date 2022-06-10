@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="143ba5e1-f0d9-4825-b0f0-d8c948fa0103">
-  <name>DocInventoryTransferOrderServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc inventory transfer order server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocInventoryTransferOrderServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ заказ на перемещение товаров сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc inventory transfer order server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc depo transfer siparişi server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

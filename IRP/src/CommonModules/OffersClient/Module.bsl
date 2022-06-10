@@ -1,4 +1,4 @@
-Procedure OpenFormPickupSpecialOffers_ForDocument(Object, Form, NotifyEditFinish, AddInfo = Undefined,
+﻿Procedure OpenFormPickupSpecialOffers_ForDocument(Object, Form, NotifyEditFinish, AddInfo = Undefined,
 	isAutoProcess = False) Export
 	OpenFormArgs = GetOpenFormArgsPickupSpecialOffers_ForDocument(Object, isAutoProcess);
 

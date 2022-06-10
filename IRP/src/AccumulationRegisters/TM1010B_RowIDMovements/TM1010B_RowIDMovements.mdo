@@ -1,144 +1,200 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="20de531d-d2be-48f2-98b4-bdde28e9d814">
-  <producedTypes>
-    <selectionType typeId="e3f0ae3d-ec43-4384-a967-4830fb1b887f" valueTypeId="c41b5496-dd46-454a-bd00-0cb9085ef99d"/>
-    <listType typeId="767c447d-0c1a-4b41-86f9-4139bfa29669" valueTypeId="0676543f-059d-4781-8010-51b47d5b0425"/>
-    <managerType typeId="b664d0e6-25ee-4ead-abe0-c0d8e2190c5e" valueTypeId="5bdc3e48-feaf-4fed-8449-46939687e4f6"/>
-    <recordSetType typeId="4455a88c-1288-4c33-b1d4-d044d52edfd4" valueTypeId="d91700e3-e412-453f-a573-e88f87f00d62"/>
-    <recordKeyType typeId="968a13d7-0317-4f9f-b135-7f0a3dcb5add" valueTypeId="dbacb6e6-acb5-46f3-8f8a-9ac15d2fca18"/>
-    <recordType typeId="888fa803-d20a-47e9-91ca-fcad7d8e4bdd" valueTypeId="efff49d8-40fe-4bee-8db1-edf72f7eeac8"/>
-  </producedTypes>
-  <name>TM1010B_RowIDMovements</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="20de531d-d2be-48f2-98b4-bdde28e9d814">
+ <producedTypes>
+  <selectionType typeId="e3f0ae3d-ec43-4384-a967-4830fb1b887f" valueTypeId="c41b5496-dd46-454a-bd00-0cb9085ef99d"/>
+  <listType typeId="767c447d-0c1a-4b41-86f9-4139bfa29669" valueTypeId="0676543f-059d-4781-8010-51b47d5b0425"/>
+  <managerType typeId="b664d0e6-25ee-4ead-abe0-c0d8e2190c5e" valueTypeId="5bdc3e48-feaf-4fed-8449-46939687e4f6"/>
+  <recordSetType typeId="4455a88c-1288-4c33-b1d4-d044d52edfd4" valueTypeId="d91700e3-e412-453f-a573-e88f87f00d62"/>
+  <recordKeyType typeId="968a13d7-0317-4f9f-b135-7f0a3dcb5add" valueTypeId="dbacb6e6-acb5-46f3-8f8a-9ac15d2fca18"/>
+  <recordType typeId="888fa803-d20a-47e9-91ca-fcad7d8e4bdd" valueTypeId="efff49d8-40fe-4bee-8db1-edf72f7eeac8"/>
+ </producedTypes>
+ <name>TM1010B_RowIDMovements</name>
+ <synonym>
+  <key>ru</key>
+  <value>TM1010B Движения по ID строк</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>TM1010B Row ID movements</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>TM1010B Satır ID hareketleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>RecordType</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Active</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>LineNumber</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Recorder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Period</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="585d1909-1640-4c1b-a2f2-966127c3f558">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>TM1010B Row ID movements</value>
+   <key>ru</key>
+   <value>Количество</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>RecordType</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Active</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>LineNumber</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Recorder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Period</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="585d1909-1640-4c1b-a2f2-966127c3f558">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="cefc45a7-b4f7-44a5-bb26-b0b40185d01a">
-    <name>RowRef</name>
-    <synonym>
-      <key>en</key>
-      <value>Row ref</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.RowIDs</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="e900edae-101b-41db-9c86-5f44983b503a">
-    <name>RowID</name>
-    <synonym>
-      <key>en</key>
-      <value>Row ID</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="cc75d49a-8031-4148-af8b-9914e0d9283f">
-    <name>Step</name>
-    <synonym>
-      <key>en</key>
-      <value>Step</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.MovementRules</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="6cc5d87a-e36d-46d8-a8bb-4bceb808ae75">
-    <name>Basis</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis</value>
-    </synonym>
-    <type>
-      <types>DocumentRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="4808a6a4-7a0c-4049-8f19-cdc2d1cc5dee">
-    <name>BasisKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="cefc45a7-b4f7-44a5-bb26-b0b40185d01a">
+  <name>RowRef</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ссылка строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row ref</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır Ref</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.RowIDs</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="e900edae-101b-41db-9c86-5f44983b503a">
+  <name>RowID</name>
+  <synonym>
+   <key>ru</key>
+   <value>ID Строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row ID</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır ID</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="cc75d49a-8031-4148-af8b-9914e0d9283f">
+  <name>Step</name>
+  <synonym>
+   <key>ru</key>
+   <value>Шаг</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Step</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Adım</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.MovementRules</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="6cc5d87a-e36d-46d8-a8bb-4bceb808ae75">
+  <name>Basis</name>
+  <synonym>
+   <key>ru</key>
+   <value>Документ основание</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Basis</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="4808a6a4-7a0c-4049-8f19-cdc2d1cc5dee">
+  <name>BasisKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ документа основания</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Basis key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak anahtar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

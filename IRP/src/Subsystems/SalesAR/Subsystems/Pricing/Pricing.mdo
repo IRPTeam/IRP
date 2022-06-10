@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0cca9343-c8e1-4ca2-8b82-44401adcf874">
-  <name>Pricing</name>
-  <synonym>
-    <key>en</key>
-    <value>Pricing</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.PriceTypes</content>
-  <content>Document.PriceList</content>
-  <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
+ <name>Pricing</name>
+ <synonym>
+  <key>ru</key>
+  <value>Ценообразование</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Pricing</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Fiyat politikası</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.PriceTypes</content>
+ <content>Document.PriceList</content>
+ <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

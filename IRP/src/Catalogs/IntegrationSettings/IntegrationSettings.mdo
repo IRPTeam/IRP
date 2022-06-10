@@ -1,206 +1,318 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6b671e75-331a-4f1c-8dc6-3cef45e97d8a">
-  <producedTypes>
-    <objectType typeId="885b9a99-15bc-4896-9084-d64f526e56f2" valueTypeId="52a8b9c2-f589-44f0-acd3-4af530de8306"/>
-    <refType typeId="477bee49-8c7e-425f-a30a-1610f0b17e2b" valueTypeId="80cd43de-84ed-4c0e-9326-9cb5c6dd3d85"/>
-    <selectionType typeId="40882224-f3ac-4525-93b5-438c8b031037" valueTypeId="e83162dc-d1a3-4ae2-be0a-c5fe9a919788"/>
-    <listType typeId="49a9587d-f801-4944-a7e4-b776473b6a46" valueTypeId="edb4a3ac-b085-4bc8-acb8-5e7181c1bdb0"/>
-    <managerType typeId="985fbfc4-d4f5-4582-9448-d9bebf440eab" valueTypeId="4a1e8a43-d7ab-4b89-b8ff-f89fd41a6cf4"/>
-  </producedTypes>
-  <name>IntegrationSettings</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="6b671e75-331a-4f1c-8dc6-3cef45e97d8a">
+ <producedTypes>
+  <objectType typeId="885b9a99-15bc-4896-9084-d64f526e56f2" valueTypeId="52a8b9c2-f589-44f0-acd3-4af530de8306"/>
+  <refType typeId="477bee49-8c7e-425f-a30a-1610f0b17e2b" valueTypeId="80cd43de-84ed-4c0e-9326-9cb5c6dd3d85"/>
+  <selectionType typeId="40882224-f3ac-4525-93b5-438c8b031037" valueTypeId="e83162dc-d1a3-4ae2-be0a-c5fe9a919788"/>
+  <listType typeId="49a9587d-f801-4944-a7e4-b776473b6a46" valueTypeId="edb4a3ac-b085-4bc8-acb8-5e7181c1bdb0"/>
+  <managerType typeId="985fbfc4-d4f5-4582-9448-d9bebf440eab" valueTypeId="4a1e8a43-d7ab-4b89-b8ff-f89fd41a6cf4"/>
+ </producedTypes>
+ <name>IntegrationSettings</name>
+ <synonym>
+  <key>ru</key>
+  <value>Настройка интеграции</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Integration settings</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Entegrasyon ayarları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.IntegrationSettings.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Настройка интеграции</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Integration setting</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Entegrasyon ayarları</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>100</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.IntegrationSettings.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.IntegrationSettings.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.IntegrationSettings.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="ac3d2f81-a9a7-41c7-a0af-a599320de4a2">
+  <name>ExternalDataProc</name>
   <synonym>
-    <key>en</key>
-    <value>Integration settings</value>
+   <key>ru</key>
+   <value>Внешние обработки</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.IntegrationSettings.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <synonym>
+   <key>en</key>
+   <value>Plugins</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Eklentiler</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExternalDataProc</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1ec86a86-9804-414c-96f9-68ce428fc58c">
+  <name>IntegrationType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Тип интеграции</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Integration type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Entegrasyon tipi</value>
+  </synonym>
+  <type>
+   <types>EnumRef.IntegrationType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5185b3d9-aed5-4032-9d1d-e6b72e9584b6">
+  <name>ExternalDataProcSettings</name>
+  <synonym>
+   <key>ru</key>
+   <value>Настройки внешней обработки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Plugin settings</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Eklentiler ayarları</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="5b224009-82f8-4d79-947d-5a22dd71b9b6">
+  <producedTypes>
+   <objectType typeId="c26e0dde-5702-4f03-81b7-eb06aa51f748" valueTypeId="b3605617-4c7d-4ca7-bc7c-bd455e271f2f"/>
+   <rowType typeId="f0a55bd1-e7e5-45c0-891e-b8582e48f575" valueTypeId="7bb78585-24c1-48a0-b6c9-6cf041a85e70"/>
+  </producedTypes>
+  <name>ConnectionSetting</name>
+  <synonym>
+   <key>ru</key>
+   <value>Настройка соединения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Connection setting</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bağlantı ayarları</value>
+  </synonym>
+  <attributes uuid="57d75846-ee2d-4fad-af0a-bdb4d8b08721">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Integration setting</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>100</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.IntegrationSettings.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.IntegrationSettings.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.IntegrationSettings.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="ac3d2f81-a9a7-41c7-a0af-a599320de4a2">
-    <name>ExternalDataProc</name>
-    <synonym>
-      <key>en</key>
-      <value>Plugins</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExternalDataProc</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>50</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="1ec86a86-9804-414c-96f9-68ce428fc58c">
-    <name>IntegrationType</name>
-    <synonym>
-      <key>en</key>
-      <value>Integration type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.IntegrationType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="9fb103a4-9529-49ef-8233-0af93e10f924">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+    <types>String</types>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+    <stringQualifiers>
+     <length>512</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="5185b3d9-aed5-4032-9d1d-e6b72e9584b6">
-    <name>ExternalDataProcSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>Plugin settings</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="350a3939-a316-4034-a9f0-715663067e98">
+  <producedTypes>
+   <objectType typeId="f5b89d64-56c6-4051-99d1-95285c31826b" valueTypeId="05b986f5-a016-483b-acca-e3ca699ed9c0"/>
+   <rowType typeId="a17ed796-9d67-4838-a1e2-86aea1ef033c" valueTypeId="96f28872-7568-49ed-89fd-95ee19327fa9"/>
+  </producedTypes>
+  <name>ConnectionSettingTest</name>
+  <synonym>
+   <key>ru</key>
+   <value>Тестовые настройки подключения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Connection setting test</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bağlantı ayarlar testi</value>
+  </synonym>
+  <attributes uuid="71f413d5-dd65-43f3-ab91-b3e51c267641">
+   <name>Key</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>50</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <tabularSections uuid="5b224009-82f8-4d79-947d-5a22dd71b9b6">
-    <producedTypes>
-      <objectType typeId="c26e0dde-5702-4f03-81b7-eb06aa51f748" valueTypeId="b3605617-4c7d-4ca7-bc7c-bd455e271f2f"/>
-      <rowType typeId="f0a55bd1-e7e5-45c0-891e-b8582e48f575" valueTypeId="7bb78585-24c1-48a0-b6c9-6cf041a85e70"/>
-    </producedTypes>
-    <name>ConnectionSetting</name>
-    <synonym>
-      <key>en</key>
-      <value>Connection setting</value>
-    </synonym>
-    <attributes uuid="57d75846-ee2d-4fad-af0a-bdb4d8b08721">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>50</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="9fb103a4-9529-49ef-8233-0af93e10f924">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-        <types>String</types>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-        <stringQualifiers>
-          <length>512</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="350a3939-a316-4034-a9f0-715663067e98">
-    <producedTypes>
-      <objectType typeId="f5b89d64-56c6-4051-99d1-95285c31826b" valueTypeId="05b986f5-a016-483b-acca-e3ca699ed9c0"/>
-      <rowType typeId="a17ed796-9d67-4838-a1e2-86aea1ef033c" valueTypeId="96f28872-7568-49ed-89fd-95ee19327fa9"/>
-    </producedTypes>
-    <name>ConnectionSettingTest</name>
-    <synonym>
-      <key>en</key>
-      <value>Connection setting test</value>
-    </synonym>
-    <attributes uuid="71f413d5-dd65-43f3-ab91-b3e51c267641">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>50</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="2a0867a4-48f0-425e-86f9-3e45d48bb2cb">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-        <types>String</types>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-        <stringQualifiers>
-          <length>512</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <forms uuid="e749d2bf-5157-4d93-a33e-4f0203e35727">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2372430b-0f7a-4193-adf8-1a7b85c24a60">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="68a5298f-8922-45e6-b773-65267493f547">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="2a0867a4-48f0-425e-86f9-3e45d48bb2cb">
+   <name>Value</name>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+    <types>String</types>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+    <stringQualifiers>
+     <length>512</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <forms uuid="e749d2bf-5157-4d93-a33e-4f0203e35727">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2372430b-0f7a-4193-adf8-1a7b85c24a60">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="68a5298f-8922-45e6-b773-65267493f547">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

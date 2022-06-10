@@ -1,121 +1,201 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1b1ce655-f99c-4e95-a620-33055a7af711">
-  <producedTypes>
-    <objectType typeId="7fc06e3f-7bb5-4167-ae70-a53ff594fb44" valueTypeId="08c4ffcb-1322-4ed3-a5a6-f47313b538be"/>
-    <managerType typeId="f1ef40d0-a72a-4725-94e7-72f493d44f39" valueTypeId="e061336a-4e13-4f4e-ac95-d9eefa1d8bac"/>
-  </producedTypes>
-  <name>ScanBarcode</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="1b1ce655-f99c-4e95-a620-33055a7af711">
+ <producedTypes>
+  <objectType typeId="7fc06e3f-7bb5-4167-ae70-a53ff594fb44" valueTypeId="08c4ffcb-1322-4ed3-a5a6-f47313b538be"/>
+  <managerType typeId="f1ef40d0-a72a-4725-94e7-72f493d44f39" valueTypeId="e061336a-4e13-4f4e-ac95-d9eefa1d8bac"/>
+ </producedTypes>
+ <name>ScanBarcode</name>
+ <synonym>
+  <key>ru</key>
+  <value>Сканирование штрихкода</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Scan barcode</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Barkod okut</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.ScanBarcode.Form.Form</defaultForm>
+ <attributes uuid="72468f78-2375-4869-ad40-b0afc5e1f4ba">
+  <name>Basis</name>
   <synonym>
-    <key>en</key>
-    <value>Scan barcode</value>
+   <key>ru</key>
+   <value>Документ основание</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.ScanBarcode.Form.Form</defaultForm>
-  <attributes uuid="72468f78-2375-4869-ad40-b0afc5e1f4ba">
-    <name>Basis</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis</value>
-    </synonym>
-    <type>
-      <types>DocumentRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
+  <synonym>
+   <key>en</key>
+   <value>Basis</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <tabularSections uuid="d628a454-d336-439c-a3c8-053946c995eb">
+  <producedTypes>
+   <objectType typeId="04968ba7-ba96-49d4-9529-a48e0f581787" valueTypeId="9e49e85b-c4d7-41e3-b123-1fa5aa1f3b89"/>
+   <rowType typeId="23d75c69-56f4-4035-9967-28c98cbd08a3" valueTypeId="330e4c41-42f3-4a46-b2ba-7d9b8f6eb163"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>ru</key>
+   <value>Товары</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item list</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
+  </synonym>
+  <attributes uuid="a4e9b360-ca8d-4976-bf4b-213d82096b33">
+   <name>Item</name>
+   <synonym>
+    <key>ru</key>
+    <value>Номенклатура</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Item</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Malzeme</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <tabularSections uuid="d628a454-d336-439c-a3c8-053946c995eb">
-    <producedTypes>
-      <objectType typeId="04968ba7-ba96-49d4-9529-a48e0f581787" valueTypeId="9e49e85b-c4d7-41e3-b123-1fa5aa1f3b89"/>
-      <rowType typeId="23d75c69-56f4-4035-9967-28c98cbd08a3" valueTypeId="330e4c41-42f3-4a46-b2ba-7d9b8f6eb163"/>
-    </producedTypes>
-    <name>ItemList</name>
-    <synonym>
-      <key>en</key>
-      <value>Item list</value>
-    </synonym>
-    <attributes uuid="a4e9b360-ca8d-4976-bf4b-213d82096b33">
-      <name>Item</name>
-      <synonym>
-        <key>en</key>
-        <value>Item</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Items</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="2dee50a0-fa19-4d5e-9aa2-e77b18767708">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="0c940dc0-1154-421d-8778-2981c9b2e3d3">
-      <name>Unit</name>
-      <synonym>
-        <key>en</key>
-        <value>Unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Units</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="1ca49b3e-f959-45a2-8c9d-d08352d4ebcd">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="8edb82e4-1177-4938-adcf-964f2e03ab53">
-      <name>ScannedQuantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Scanned</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-  </tabularSections>
-  <forms uuid="2c533795-bfcc-4d37-b4c7-055e4d38192e">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="5888f1d9-2318-47b4-a37a-e4b37214bb73">
-    <name>RowForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Row form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="2dee50a0-fa19-4d5e-9aa2-e77b18767708">
+   <name>ItemKey</name>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Item key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Varyant</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="0c940dc0-1154-421d-8778-2981c9b2e3d3">
+   <name>Unit</name>
+   <synonym>
+    <key>ru</key>
+    <value>Ед. изм.</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Unit</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Birim</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="1ca49b3e-f959-45a2-8c9d-d08352d4ebcd">
+   <name>Quantity</name>
+   <synonym>
+    <key>ru</key>
+    <value>Количество</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Quantity</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Miktar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="8edb82e4-1177-4938-adcf-964f2e03ab53">
+   <name>ScannedQuantity</name>
+   <synonym>
+    <key>ru</key>
+    <value>Просканировано</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Scanned</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Okutulan</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+ </tabularSections>
+ <forms uuid="2c533795-bfcc-4d37-b4c7-055e4d38192e">
+  <name>Form</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5888f1d9-2318-47b4-a37a-e4b37214bb73">
+  <name>RowForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма строка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

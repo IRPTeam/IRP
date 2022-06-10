@@ -1,29 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="db15e63b-d07a-4b79-9c53-b75169b80a5d">
-  <producedTypes>
-    <refType typeId="b349b360-9555-420a-8566-28d0e19980e2" valueTypeId="e6517f9c-5dcf-4096-a0eb-5060d5d97bcf"/>
-    <listType typeId="5bd12447-07b9-4268-89f5-df5a68698ee6" valueTypeId="bc0d5088-3948-4fd3-b228-bd897ee63cd5"/>
-    <managerType typeId="1434671b-3e2b-4bdb-a31e-3f47099ff1b7" valueTypeId="69a353f3-d262-41d7-9c4d-5236050ed39c"/>
-  </producedTypes>
-  <name>SpecialOfferTypes</name>
+ <producedTypes>
+  <refType typeId="b349b360-9555-420a-8566-28d0e19980e2" valueTypeId="e6517f9c-5dcf-4096-a0eb-5060d5d97bcf"/>
+  <listType typeId="5bd12447-07b9-4268-89f5-df5a68698ee6" valueTypeId="bc0d5088-3948-4fd3-b228-bd897ee63cd5"/>
+  <managerType typeId="1434671b-3e2b-4bdb-a31e-3f47099ff1b7" valueTypeId="69a353f3-d262-41d7-9c4d-5236050ed39c"/>
+ </producedTypes>
+ <name>SpecialOfferTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Способы применения специальных предложений</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Special offer types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kapmanya tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="bbff86dd-33a9-4b54-a326-2003197fedd9">
+  <name>ForDocument</name>
   <synonym>
-    <key>en</key>
-    <value>Special offer types</value>
+   <key>ru</key>
+   <value>На документ</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="bbff86dd-33a9-4b54-a326-2003197fedd9">
-    <name>ForDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>For document</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="e690ace0-77c5-4b03-a6e8-7fa08d5c31dc">
-    <name>ForRow</name>
-    <synonym>
-      <key>en</key>
-      <value>For row</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>For document</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evraka uygula</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="e690ace0-77c5-4b03-a6e8-7fa08d5c31dc">
+  <name>ForRow</name>
+  <synonym>
+   <key>ru</key>
+   <value>На строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>For row</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satıra uygula</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

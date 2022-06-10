@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="25acc4bc-5a73-4d05-903f-31a3b20e032b">
-  <name>UndoPosting_RowID</name>
-  <synonym>
-    <key>en</key>
-    <value>Undo posting row ID</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>UndoPosting</event>
-  <handler>CommonModule.RowIDInfoServer.UndoPosting_RowIDUndoPosting</handler>
+ <name>UndoPosting_RowID</name>
+ <synonym>
+  <key>ru</key>
+  <value>Отмена проведения row ID</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Undo posting row ID</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satır ID kaydetme iptal</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>UndoPosting</event>
+ <handler>CommonModule.RowIDInfoServer.UndoPosting_RowIDUndoPosting</handler>
 </mdclass:EventSubscription>

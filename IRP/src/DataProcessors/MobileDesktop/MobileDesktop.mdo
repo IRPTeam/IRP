@@ -1,23 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="698217a1-c124-4d27-93f2-4e9f04468546">
-  <producedTypes>
-    <objectType typeId="e159fb19-ceaf-4d24-9a1a-37a1f86de518" valueTypeId="0c94f97b-0693-49e9-a0c9-125fb012690a"/>
-    <managerType typeId="0869c70f-150b-4eaa-a14b-b0be1f38f725" valueTypeId="bbd2ac4d-a634-4b67-9463-63cc083e004b"/>
-  </producedTypes>
-  <name>MobileDesktop</name>
+ <producedTypes>
+  <objectType typeId="e159fb19-ceaf-4d24-9a1a-37a1f86de518" valueTypeId="0c94f97b-0693-49e9-a0c9-125fb012690a"/>
+  <managerType typeId="0869c70f-150b-4eaa-a14b-b0be1f38f725" valueTypeId="bbd2ac4d-a634-4b67-9463-63cc083e004b"/>
+ </producedTypes>
+ <name>MobileDesktop</name>
+ <synonym>
+  <key>ru</key>
+  <value>Мобильный стол</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Desktop</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Masaüstü</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.MobileDesktop.Form.Form</defaultForm>
+ <forms uuid="87f1cb68-1da7-47f3-8d01-dbe6f1abff8a">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Desktop</value>
+   <key>ru</key>
+   <value>Форма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.MobileDesktop.Form.Form</defaultForm>
-  <forms uuid="87f1cb68-1da7-47f3-8d01-dbe6f1abff8a">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

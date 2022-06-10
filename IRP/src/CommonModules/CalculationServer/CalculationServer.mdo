@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4e390859-3939-416d-a6bd-9e5f12d17917">
-  <name>CalculationServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Calculation server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CalculationServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Вычисление сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Calculation server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Hesaplamalar sunucu</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

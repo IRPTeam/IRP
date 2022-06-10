@@ -1,228 +1,308 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ed633f48-a492-4c9c-813a-498e1888714a">
-  <producedTypes>
-    <refType typeId="ce6d0b5c-e919-420c-9e3e-6c06c955c30b" valueTypeId="6c2b6e89-3dcf-4233-9e60-def289d972bd"/>
-    <listType typeId="8f8460f1-7ad3-46d4-9194-7c42b15f5cd4" valueTypeId="e2919718-9204-4e70-83fb-8155ee4780ea"/>
-    <managerType typeId="691cee2c-c712-4343-8ab3-9db221ba9432" valueTypeId="70ac29cf-78b3-4708-81fb-ce86cbfd7917"/>
-  </producedTypes>
-  <name>MetadataSubtype</name>
+ <producedTypes>
+  <refType typeId="ce6d0b5c-e919-420c-9e3e-6c06c955c30b" valueTypeId="6c2b6e89-3dcf-4233-9e60-def289d972bd"/>
+  <listType typeId="8f8460f1-7ad3-46d4-9194-7c42b15f5cd4" valueTypeId="e2919718-9204-4e70-83fb-8155ee4780ea"/>
+  <managerType typeId="691cee2c-c712-4343-8ab3-9db221ba9432" valueTypeId="70ac29cf-78b3-4708-81fb-ce86cbfd7917"/>
+ </producedTypes>
+ <name>MetadataSubtype</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип метаданных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Metadata type</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Üstveri tipi</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="93b29a6c-35da-4bdb-b3af-f75e593df0e8">
+  <name>Attribute</name>
   <synonym>
-    <key>en</key>
-    <value>Metadata type</value>
+   <key>ru</key>
+   <value>Реквизит</value>
   </synonym>
   <synonym>
-    <key>ru</key>
-    <value>Тип метаданных</value>
+   <key>en</key>
+   <value>Attribute</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="93b29a6c-35da-4bdb-b3af-f75e593df0e8">
-    <name>Attribute</name>
-    <synonym>
-      <key>en</key>
-      <value>Attribute</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Реквизит</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="059f7b3b-fa73-45d7-bd4a-2c0beccd4829">
-    <name>Dimension</name>
-    <synonym>
-      <key>en</key>
-      <value>Dimension</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Измерение</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="55cbc23b-8dc6-4cac-8dfe-76c639d275d8">
-    <name>Resource</name>
-    <synonym>
-      <key>en</key>
-      <value>Resource</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Ресурс</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="bcd50b46-c358-4838-ae33-b54486fc5cf6">
-    <name>StandardAttribute</name>
-    <synonym>
-      <key>en</key>
-      <value>Standard attribute</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Стандартные реквизиты</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ddbdb85c-ec10-4a42-beb4-0f8a65ba8871">
-    <name>Command</name>
-    <synonym>
-      <key>en</key>
-      <value>Command</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Команда</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="1f48ad41-a5cb-4ffd-9a04-680aa8318cc2">
-    <name>Recalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Recalculation</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Перерасчет</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="aecdc6aa-67f1-4c35-b144-54e750e58da1">
-    <name>AccountingFlag</name>
-    <synonym>
-      <key>en</key>
-      <value>Accounting flag</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Флаг учета</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="cb071e84-f8a4-4c67-be6f-6a90bf21203b">
-    <name>ExtDimensionAccountingFlag</name>
-    <synonym>
-      <key>en</key>
-      <value>Ext dimension accounting flag</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Признак учета субконто</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="c434c197-b7b9-445d-96ed-b26513eb615c">
-    <name>AddressingAttribute</name>
-    <synonym>
-      <key>en</key>
-      <value>Addressing attribute</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Реквизит адресации</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="52829a50-152a-46c5-94bc-830eb63e1bf2">
-    <name>TabularSection</name>
-    <synonym>
-      <key>en</key>
-      <value>Tabular section</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Таблица секции</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="9d4fb946-7d64-42be-ba1d-3bba4083b632">
-    <name>StandardTabularSection</name>
-    <synonym>
-      <key>en</key>
-      <value>Standard tabular section</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Стандартный табличный раздел</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b9fed723-9a4f-490d-9190-33097e794407">
-    <name>Operation</name>
-    <synonym>
-      <key>en</key>
-      <value>Operation</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Операция</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="0750c035-4392-46a3-9014-aa4112167c34">
-    <name>URLTemplate</name>
-    <synonym>
-      <key>en</key>
-      <value>URLTemplate</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>URL шаблоны</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7b871189-bb21-4842-81c3-961bcb601d9e">
-    <name>Method</name>
-    <synonym>
-      <key>en</key>
-      <value>Method</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Метод</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="87b31ee5-7527-4034-8a41-099ab49042c4">
-    <name>Cube</name>
-    <synonym>
-      <key>en</key>
-      <value>Cube</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Куб</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="04233e2e-e306-4f70-93af-458da79357a0">
-    <name>Table</name>
-    <synonym>
-      <key>en</key>
-      <value>Table</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Таблица</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="772e74f3-a37b-495d-88e3-78575a628b89">
-    <name>DimensionTable</name>
-    <synonym>
-      <key>en</key>
-      <value>Dimension table</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Таблица измерений</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="bb7a214b-eea2-405f-b915-e2d7dd1e5d4f">
-    <name>Function</name>
-    <synonym>
-      <key>en</key>
-      <value>Function</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Функция</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b0f5ed3c-6dc2-412d-8ee1-4da752828491">
-    <name>Field</name>
-    <synonym>
-      <key>en</key>
-      <value>Field</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Поле</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>tr</key>
+   <value>Alan</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="059f7b3b-fa73-45d7-bd4a-2c0beccd4829">
+  <name>Dimension</name>
+  <synonym>
+   <key>ru</key>
+   <value>Измерение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Dimension</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kırılım</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="55cbc23b-8dc6-4cac-8dfe-76c639d275d8">
+  <name>Resource</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ресурс</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Resource</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="bcd50b46-c358-4838-ae33-b54486fc5cf6">
+  <name>StandardAttribute</name>
+  <synonym>
+   <key>ru</key>
+   <value>Стандартный реквизит</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Standard attribute</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Standart öznitellik</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ddbdb85c-ec10-4a42-beb4-0f8a65ba8871">
+  <name>Command</name>
+  <synonym>
+   <key>ru</key>
+   <value>Команда</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Command</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Komut</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="1f48ad41-a5cb-4ffd-9a04-680aa8318cc2">
+  <name>Recalculation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Пересчет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Recalculation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Yeniden hesaplama</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="aecdc6aa-67f1-4c35-b144-54e750e58da1">
+  <name>AccountingFlag</name>
+  <synonym>
+   <key>ru</key>
+   <value>Принак учета</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Accounting flag</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Muhasebe işareti</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="cb071e84-f8a4-4c67-be6f-6a90bf21203b">
+  <name>ExtDimensionAccountingFlag</name>
+  <synonym>
+   <key>ru</key>
+   <value>Признак учета субконто</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Ext dimension accounting flag</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dış uzantı muhasebe işareti</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="c434c197-b7b9-445d-96ed-b26513eb615c">
+  <name>AddressingAttribute</name>
+  <synonym>
+   <key>ru</key>
+   <value>Реквизит адресации</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Addressing attribute</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Adres alanı</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="52829a50-152a-46c5-94bc-830eb63e1bf2">
+  <name>TabularSection</name>
+  <synonym>
+   <key>ru</key>
+   <value>Таблица</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tabular section</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tablo bölümü</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="9d4fb946-7d64-42be-ba1d-3bba4083b632">
+  <name>StandardTabularSection</name>
+  <synonym>
+   <key>ru</key>
+   <value>Стантартная табличная часть</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Standard tabular section</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Standart tablo bölümü</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b9fed723-9a4f-490d-9190-33097e794407">
+  <name>Operation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Операция</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Operation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="0750c035-4392-46a3-9014-aa4112167c34">
+  <name>URLTemplate</name>
+  <synonym>
+   <key>ru</key>
+   <value>URL шаблон</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>URLTemplate</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>URL Şablonu</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="7b871189-bb21-4842-81c3-961bcb601d9e">
+  <name>Method</name>
+  <synonym>
+   <key>ru</key>
+   <value>Метод</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Method</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Metod</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="87b31ee5-7527-4034-8a41-099ab49042c4">
+  <name>Cube</name>
+  <synonym>
+   <key>ru</key>
+   <value>Куб</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Cube</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Küp</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="04233e2e-e306-4f70-93af-458da79357a0">
+  <name>Table</name>
+  <synonym>
+   <key>ru</key>
+   <value>Таблица</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Table</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tablo</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="772e74f3-a37b-495d-88e3-78575a628b89">
+  <name>DimensionTable</name>
+  <synonym>
+   <key>ru</key>
+   <value>Таблица измерений</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Dimension table</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kırılım tablsou</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="bb7a214b-eea2-405f-b915-e2d7dd1e5d4f">
+  <name>Function</name>
+  <synonym>
+   <key>ru</key>
+   <value>Функция</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Function</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fonksiyon</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b0f5ed3c-6dc2-412d-8ee1-4da752828491">
+  <name>Field</name>
+  <synonym>
+   <key>ru</key>
+   <value>Поле</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Field</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alan</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

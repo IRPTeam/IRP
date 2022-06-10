@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="38d873a0-b889-4b32-b64c-c3fde68f6553">
-  <name>Equipment</name>
-  <synonym>
-    <key>en</key>
-    <value>Equipment</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.Hardware</content>
-  <content>Catalog.EquipmentDrivers</content>
-  <content>Catalog.Workstations</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>Equipment</name>
+ <synonym>
+  <key>ru</key>
+  <value>Оборудование</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Equipment</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Donanımlar</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.Hardware</content>
+ <content>Catalog.EquipmentDrivers</content>
+ <content>Catalog.Workstations</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

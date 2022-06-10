@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="30e7819c-5ce3-4e98-9141-c1bace5fb77b">
-  <name>DocIncomingPaymentOrderServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc incoming payment order server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocIncomingPaymentOrderServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ заявка на поступление денежных средств сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc incoming payment order server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc tahsilat emri server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

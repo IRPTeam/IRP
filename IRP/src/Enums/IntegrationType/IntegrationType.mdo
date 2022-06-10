@@ -1,50 +1,98 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0a7db1dd-cb35-45f2-b376-63ea12051807">
-  <producedTypes>
-    <refType typeId="eae0dd6a-10ac-48f4-b382-9f5d71176f43" valueTypeId="44b4edaa-cd6d-49e0-9a5b-01fe2ca7e05a"/>
-    <listType typeId="29c7191a-f6ff-4007-beeb-8b3c4a81dfc5" valueTypeId="816aea1f-ab9f-40b9-8c86-5a68808c46ff"/>
-    <managerType typeId="b4b52cfd-5280-4a3d-9865-540152aed1db" valueTypeId="16a25d9c-56dd-47ca-9c73-857e94e02093"/>
-  </producedTypes>
-  <name>IntegrationType</name>
+ <producedTypes>
+  <refType typeId="eae0dd6a-10ac-48f4-b382-9f5d71176f43" valueTypeId="44b4edaa-cd6d-49e0-9a5b-01fe2ca7e05a"/>
+  <listType typeId="29c7191a-f6ff-4007-beeb-8b3c4a81dfc5" valueTypeId="816aea1f-ab9f-40b9-8c86-5a68808c46ff"/>
+  <managerType typeId="b4b52cfd-5280-4a3d-9865-540152aed1db" valueTypeId="16a25d9c-56dd-47ca-9c73-857e94e02093"/>
+ </producedTypes>
+ <name>IntegrationType</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип интеграции</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Integration type</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Entegrasyon tipi</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="674271c9-6555-4945-a116-81627a9b7321">
+  <name>Other</name>
   <synonym>
-    <key>en</key>
-    <value>Integration type</value>
+   <key>ru</key>
+   <value>Дополнительно</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="674271c9-6555-4945-a116-81627a9b7321">
-    <name>Other</name>
-    <synonym>
-      <key>en</key>
-      <value>Other</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b42a3939-5881-4535-a85d-0d8406134e0b">
-    <name>CurrencyRates</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency rates</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f154ff0d-7105-422b-bf50-054de6238e83">
-    <name>FileStorage</name>
-    <synonym>
-      <key>en</key>
-      <value>File storage</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ca0d76ed-ccb7-4f3f-ac27-fff09e19facb">
-    <name>LocalFileStorage</name>
-    <synonym>
-      <key>en</key>
-      <value>Local file storage</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="01d8ba4c-e1e7-4c4b-8f88-49dd92b8029b">
-    <name>Email</name>
-    <synonym>
-      <key>en</key>
-      <value>Email</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Other</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Diğer</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b42a3939-5881-4535-a85d-0d8406134e0b">
+  <name>CurrencyRates</name>
+  <synonym>
+   <key>ru</key>
+   <value>Курсы валюты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency rates</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz kurları</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f154ff0d-7105-422b-bf50-054de6238e83">
+  <name>FileStorage</name>
+  <synonym>
+   <key>ru</key>
+   <value>Файловое хранилище</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>File storage</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dosya depolama</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ca0d76ed-ccb7-4f3f-ac27-fff09e19facb">
+  <name>LocalFileStorage</name>
+  <synonym>
+   <key>ru</key>
+   <value>Локальное файловое хранилище</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Local file storage</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Lokal dosya depolama yeri</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="01d8ba4c-e1e7-4c4b-8f88-49dd92b8029b">
+  <name>Email</name>
+  <synonym>
+   <key>ru</key>
+   <value>Email</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Email</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>E-posta</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

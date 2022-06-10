@@ -1,161 +1,209 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7880eb99-ed77-4ca4-a22f-06ca832ab69d">
-  <producedTypes>
-    <objectType typeId="d6165770-f988-4bb2-b379-94e56dc615a2" valueTypeId="3852b1a1-7ccd-4478-a2fd-654ec51f45a0"/>
-    <refType typeId="3df56dad-74a7-4a38-8968-0c8c6be7d088" valueTypeId="44d31ead-9ba8-46ec-85a2-643d4803ba3a"/>
-    <selectionType typeId="be30c9dc-770d-4be8-b2bc-c66f282a183f" valueTypeId="d639029d-f877-4477-aa90-ae60c6fe668d"/>
-    <listType typeId="118e8441-02fd-4480-9a53-5dd5ec50ea8d" valueTypeId="47a6e59d-bba0-42c8-89bf-171e873a6e58"/>
-    <managerType typeId="faf415da-fafc-4066-a402-c6c28fe28971" valueTypeId="c03f6a81-1aee-4cdf-8697-66f4630620db"/>
-  </producedTypes>
-  <name>Extensions</name>
-  <synonym>
-    <key>en</key>
-    <value>Extensions</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.Extensions.StandardAttribute.Description</inputByString>
-  <inputByString>Catalog.Extensions.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7880eb99-ed77-4ca4-a22f-06ca832ab69d">
+ <producedTypes>
+  <objectType typeId="d6165770-f988-4bb2-b379-94e56dc615a2" valueTypeId="3852b1a1-7ccd-4478-a2fd-654ec51f45a0"/>
+  <refType typeId="3df56dad-74a7-4a38-8968-0c8c6be7d088" valueTypeId="44d31ead-9ba8-46ec-85a2-643d4803ba3a"/>
+  <selectionType typeId="be30c9dc-770d-4be8-b2bc-c66f282a183f" valueTypeId="d639029d-f877-4477-aa90-ae60c6fe668d"/>
+  <listType typeId="118e8441-02fd-4480-9a53-5dd5ec50ea8d" valueTypeId="47a6e59d-bba0-42c8-89bf-171e873a6e58"/>
+  <managerType typeId="faf415da-fafc-4066-a402-c6c28fe28971" valueTypeId="c03f6a81-1aee-4cdf-8697-66f4630620db"/>
+ </producedTypes>
+ <name>Extensions</name>
+ <synonym>
+  <key>ru</key>
+  <value>Расширения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Extensions</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Uzantılar</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.Extensions.StandardAttribute.Description</inputByString>
+ <inputByString>Catalog.Extensions.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Extension</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>9</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <codeSeries>WithinSubordination</codeSeries>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Extensions.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.Extensions.Form.ListForm</defaultListForm>
-  <attributes uuid="2978f167-c7d0-48a6-9ceb-937d3dbfd055">
-    <name>FileData</name>
-    <synonym>
-      <key>en</key>
-      <value>File data</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="efce5045-b2ce-4278-adfa-bc2ef3eae50c">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ccfb64e5-8563-46c0-ac7e-7bb15ca6795c">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <commands uuid="3da73594-4ca9-43a3-bb6b-920a6567ac9d">
-    <name>SetupExtentionsInCurrentArea</name>
-    <synonym>
-      <key>en</key>
-      <value>Setup extension in current area</value>
-    </synonym>
-    <group>FormCommandBarImportant</group>
-    <commandParameterType>
-      <types>CatalogRef.Extensions</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-  </commands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Расширение</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Extension</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Uzantı</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>9</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <codeSeries>WithinSubordination</codeSeries>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.Extensions.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.Extensions.Form.ListForm</defaultListForm>
+ <attributes uuid="2978f167-c7d0-48a6-9ceb-937d3dbfd055">
+  <name>FileData</name>
+  <synonym>
+   <key>ru</key>
+   <value>Данные о файле</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>File data</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dosya verisi</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="efce5045-b2ce-4278-adfa-bc2ef3eae50c">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ccfb64e5-8563-46c0-ac7e-7bb15ca6795c">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <commands uuid="3da73594-4ca9-43a3-bb6b-920a6567ac9d">
+  <name>SetupExtentionsInCurrentArea</name>
+  <synonym>
+   <key>ru</key>
+   <value>Установить расширение в текущую рабочую область</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Setup extension in current area</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Mevcut alanda kurulum uzantısı</value>
+  </synonym>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType>
+   <types>CatalogRef.Extensions</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Catalog>

@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="62abaf3c-043d-4dcb-bc63-c6796ff0e382">
-  <name>IDInfoClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Contact info client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>IDInfoClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Контактная информация клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Contact info client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İletişim bilgileri istemci</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

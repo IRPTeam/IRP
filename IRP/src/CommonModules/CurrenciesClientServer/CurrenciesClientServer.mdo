@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3dec13f0-63ab-4155-908d-a6348313b106">
-  <name>CurrenciesClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Currencies client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>CurrenciesClientServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Валюты клиент сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Currencies client server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dövizler client server</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

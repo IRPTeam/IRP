@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="596573b0-c473-4cbf-acb9-93cf6cf3e4eb">
-  <name>GetItemInfo</name>
-  <synonym>
-    <key>en</key>
-    <value>Get item info</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>GetItemInfo</name>
+ <synonym>
+  <key>ru</key>
+  <value>Свойства товара</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Get item info</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Malzeme bilgi almak</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

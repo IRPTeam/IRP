@@ -1,43 +1,83 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9d669e94-5924-42d2-8d18-bd92c3022340">
-  <producedTypes>
-    <refType typeId="c245b15c-d483-4696-974e-e4a65e9302a2" valueTypeId="9cc8d6af-3770-4c96-a9e7-4a0bb6cfd6fb"/>
-    <listType typeId="0edb2818-6f51-48e5-accd-2fe5db46c595" valueTypeId="9acfe314-016f-4d76-a3fc-46ff0ab41534"/>
-    <managerType typeId="0e27a99f-3da7-4643-a0d4-c66ee6a2e7df" valueTypeId="244f8288-1edf-4340-8a97-1a7a0cb6f5b0"/>
-  </producedTypes>
-  <name>DocumentPostingTypes</name>
+ <producedTypes>
+  <refType typeId="c245b15c-d483-4696-974e-e4a65e9302a2" valueTypeId="9cc8d6af-3770-4c96-a9e7-4a0bb6cfd6fb"/>
+  <listType typeId="0edb2818-6f51-48e5-accd-2fe5db46c595" valueTypeId="9acfe314-016f-4d76-a3fc-46ff0ab41534"/>
+  <managerType typeId="0e27a99f-3da7-4643-a0d4-c66ee6a2e7df" valueTypeId="244f8288-1edf-4340-8a97-1a7a0cb6f5b0"/>
+ </producedTypes>
+ <name>DocumentPostingTypes</name>
+ <synonym>
+  <key>ru</key>
+  <value>Типы проводок документа</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Document posting types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak hareket tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="733ab7f4-b9d9-4098-bf25-1e89b7a8cd8e">
+  <name>Posting</name>
   <synonym>
-    <key>en</key>
-    <value>Document posting types</value>
+   <key>ru</key>
+   <value>Делает проводки</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="733ab7f4-b9d9-4098-bf25-1e89b7a8cd8e">
-    <name>Posting</name>
-    <synonym>
-      <key>en</key>
-      <value>Posting</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="2d394447-f5a5-475b-8276-e98186ccb811">
-    <name>Reversal</name>
-    <synonym>
-      <key>en</key>
-      <value>Reversal</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="15519572-6e5c-4d7e-b0d6-5f92e9a31bdb">
-    <name>Nothing</name>
-    <synonym>
-      <key>en</key>
-      <value>Nothing</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="a1f36681-4511-40bc-ba50-fe18bdf5b5a4">
-    <name>Correction</name>
-    <synonym>
-      <key>en</key>
-      <value>Correction</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>Posting</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="2d394447-f5a5-475b-8276-e98186ccb811">
+  <name>Reversal</name>
+  <synonym>
+   <key>ru</key>
+   <value>Отменяет проводки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Reversal</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ters kayıt</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="15519572-6e5c-4d7e-b0d6-5f92e9a31bdb">
+  <name>Nothing</name>
+  <synonym>
+   <key>ru</key>
+   <value>Без изменений</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Nothing</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt yok</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="a1f36681-4511-40bc-ba50-fe18bdf5b5a4">
+  <name>Correction</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сторно</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Correction</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Düzeltme kaydı</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

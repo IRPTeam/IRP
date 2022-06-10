@@ -1,65 +1,105 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8cb37f8e-17b3-4aef-8474-1d6f13e35370">
-  <producedTypes>
-    <objectType typeId="04b0d7e4-73ff-4a30-a1dc-da1d92d20b02" valueTypeId="152872c4-3d2e-408f-b157-cba724f4d11a"/>
-    <refType typeId="1178f313-275b-495d-a2c9-7f96198f84c5" valueTypeId="d37f8d06-e0a5-407a-a704-7f940bf4209e"/>
-    <selectionType typeId="3e9d2233-ad11-404c-8993-fbb684b7f3c8" valueTypeId="69101d83-956f-44c7-a761-d7b289a0ecb9"/>
-    <listType typeId="b8ba6bca-d4ea-4401-b5d2-ad5b3296c2dd" valueTypeId="b83c4e81-4982-4bd4-a322-beaf4047b6da"/>
-    <managerType typeId="3c5b4d5c-8c2d-4c67-a1a6-26814e311f58" valueTypeId="b2f4aff4-f3e7-45ad-8f7e-ddca7a6e1d83"/>
-  </producedTypes>
-  <name>CancelReturnReasons</name>
+ <producedTypes>
+  <objectType typeId="04b0d7e4-73ff-4a30-a1dc-da1d92d20b02" valueTypeId="152872c4-3d2e-408f-b157-cba724f4d11a"/>
+  <refType typeId="1178f313-275b-495d-a2c9-7f96198f84c5" valueTypeId="d37f8d06-e0a5-407a-a704-7f940bf4209e"/>
+  <selectionType typeId="3e9d2233-ad11-404c-8993-fbb684b7f3c8" valueTypeId="69101d83-956f-44c7-a761-d7b289a0ecb9"/>
+  <listType typeId="b8ba6bca-d4ea-4401-b5d2-ad5b3296c2dd" valueTypeId="b83c4e81-4982-4bd4-a322-beaf4047b6da"/>
+  <managerType typeId="3c5b4d5c-8c2d-4c67-a1a6-26814e311f58" valueTypeId="b2f4aff4-f3e7-45ad-8f7e-ddca7a6e1d83"/>
+ </producedTypes>
+ <name>CancelReturnReasons</name>
+ <synonym>
+  <key>ru</key>
+  <value>Причины отмены/возврата</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cancel/Return reasons</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İptal/İade sebebi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.CancelReturnReasons.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Причины отмены/возврата</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Cancel/Return reason</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>İptal/İade sebebi</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeType>String</codeType>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.CancelReturnReasons.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.CancelReturnReasons.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.CancelReturnReasons.Form.ChoiceForm</defaultChoiceForm>
+ <forms uuid="e810c5d2-ad92-4231-a4e8-e57ede69f39d">
+  <name>ItemForm</name>
   <synonym>
-    <key>en</key>
-    <value>Cancel/Return reasons</value>
+   <key>ru</key>
+   <value>Форма элемента</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.CancelReturnReasons.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Cancel/Return reason</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeType>String</codeType>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.CancelReturnReasons.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.CancelReturnReasons.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.CancelReturnReasons.Form.ChoiceForm</defaultChoiceForm>
-  <forms uuid="e810c5d2-ad92-4231-a4e8-e57ede69f39d">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="7013cfec-0872-4e46-adf8-1261471ed510">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="98ade9a8-0683-4a43-9d95-d05a19963128">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="7013cfec-0872-4e46-adf8-1261471ed510">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="98ade9a8-0683-4a43-9d95-d05a19963128">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

@@ -1,4 +1,4 @@
-// @strict-types
+﻿// @strict-types
 
 // Strings.
 // 

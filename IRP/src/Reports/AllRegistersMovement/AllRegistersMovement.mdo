@@ -1,22 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="59976c2b-ed04-4958-a9f1-e5ad4e8f2a18">
-  <producedTypes>
-    <objectType typeId="a87fea85-3414-454d-8a64-39fe0d118a99" valueTypeId="97187630-7581-4a0e-8e12-29758a962099"/>
-    <managerType typeId="1fe28c4f-fbc4-4069-b96b-551578c1bce2" valueTypeId="97547f2f-4528-4db7-82ce-a380d68f72c2"/>
-  </producedTypes>
-  <name>AllRegistersMovement</name>
+ <producedTypes>
+  <objectType typeId="a87fea85-3414-454d-8a64-39fe0d118a99" valueTypeId="97187630-7581-4a0e-8e12-29758a962099"/>
+  <managerType typeId="1fe28c4f-fbc4-4069-b96b-551578c1bce2" valueTypeId="97547f2f-4528-4db7-82ce-a380d68f72c2"/>
+ </producedTypes>
+ <name>AllRegistersMovement</name>
+ <synonym>
+  <key>ru</key>
+  <value>Движения по всем регистрам</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>All registers movement</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tüm kayıt tablo hareketleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.AllRegistersMovement.Template.Template</mainDataCompositionSchema>
+ <templates uuid="777e7b06-dae0-4f4e-a03e-d8322924c8f5">
+  <name>Template</name>
   <synonym>
-    <key>en</key>
-    <value>All registers movement</value>
+   <key>ru</key>
+   <value>Шаблон</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.AllRegistersMovement.Template.Template</mainDataCompositionSchema>
-  <templates uuid="777e7b06-dae0-4f4e-a03e-d8322924c8f5">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>en</key>
+   <value>Template</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

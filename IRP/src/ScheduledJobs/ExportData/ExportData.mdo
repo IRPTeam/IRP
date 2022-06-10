@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:ScheduledJob xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6d727c60-7d4e-4841-9b73-495d841a0c2d">
-  <name>ExportData</name>
-  <synonym>
-    <key>en</key>
-    <value>Export data</value>
-  </synonym>
-  <methodName>CommonModule.ScheduledJobsForExtentions.ScheduledJobExportData</methodName>
-  <restartCountOnFailure>3</restartCountOnFailure>
-  <restartIntervalOnFailure>25</restartIntervalOnFailure>
+ <name>ExportData</name>
+ <synonym>
+  <key>ru</key>
+  <value>Экспорт данных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Export data</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Veri dışarı aktarma</value>
+ </synonym>
+ <methodName>CommonModule.ScheduledJobsForExtentions.ScheduledJobExportData</methodName>
+ <restartCountOnFailure>3</restartCountOnFailure>
+ <restartIntervalOnFailure>25</restartIntervalOnFailure>
 </mdclass:ScheduledJob>

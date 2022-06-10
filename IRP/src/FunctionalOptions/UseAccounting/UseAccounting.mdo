@@ -1,27 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7cdaa57b-6d33-4186-b94c-a520d139d580">
-  <name>UseAccounting</name>
-  <synonym>
-    <key>en</key>
-    <value>Use accounting</value>
-  </synonym>
-  <location>Constant.UseAccounting</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>ChartOfAccounts.R6010C_Master</content>
-  <content>CommonForm.EditTrialBalanceAccounts</content>
-  <content>InformationRegister.CashAccountTBAccounts</content>
-  <content>InformationRegister.LedgerTypeOperations</content>
-  <content>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</content>
-  <content>InformationRegister.PartnerTBAccounts</content>
-  <content>AccumulationRegister.T1050T_AccountingQuantities</content>
-  <content>AccountingRegister.R6010A_Master</content>
-  <content>Subsystem.Accounting.Subsystem.TrialBalanceAccounts</content>
-  <content>Catalog.LedgerTypes</content>
-  <content>Catalog.AccountingOperations</content>
-  <content>Document.JournalEntry</content>
-  <content>AccumulationRegister.T1040T_AccountingAmounts</content>
-  <content>InformationRegister.CompanyLedgerTypes</content>
-  <content>InformationRegister.TaxTBAccounts</content>
-  <content>InformationRegister.ItemKeyTBAccounts</content>
-  <content>Subsystem.Accounting</content>
+ <name>UseAccounting</name>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать бухгалтерию</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use accounting</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Muhasebe kullan</value>
+ </synonym>
+ <location>Constant.UseAccounting</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>ChartOfAccounts.R6010C_Master</content>
+ <content>CommonForm.EditTrialBalanceAccounts</content>
+ <content>InformationRegister.CashAccountTBAccounts</content>
+ <content>InformationRegister.LedgerTypeOperations</content>
+ <content>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</content>
+ <content>InformationRegister.PartnerTBAccounts</content>
+ <content>AccumulationRegister.T1050T_AccountingQuantities</content>
+ <content>AccountingRegister.R6010A_Master</content>
+ <content>Subsystem.Accounting.Subsystem.TrialBalanceAccounts</content>
+ <content>Catalog.LedgerTypes</content>
+ <content>Catalog.AccountingOperations</content>
+ <content>Document.JournalEntry</content>
+ <content>AccumulationRegister.T1040T_AccountingAmounts</content>
+ <content>InformationRegister.CompanyLedgerTypes</content>
+ <content>InformationRegister.TaxTBAccounts</content>
+ <content>InformationRegister.ItemKeyTBAccounts</content>
+ <content>Subsystem.Accounting</content>
 </mdclass:FunctionalOption>

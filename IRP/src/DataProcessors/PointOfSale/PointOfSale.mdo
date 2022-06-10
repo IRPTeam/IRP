@@ -1,113 +1,193 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="58b1a23d-3bfc-4775-8360-b12d1bda6e1c">
-  <producedTypes>
-    <objectType typeId="e5fcad66-7768-4d3a-b385-a8ce6b4a3cdf" valueTypeId="62f03e06-dc7f-4016-b845-5f6b80514249"/>
-    <managerType typeId="5faa6790-23fb-4cfc-81ab-8c8d144a6281" valueTypeId="71dd6469-cde5-477c-a415-303a6b104b1b"/>
-  </producedTypes>
-  <name>PointOfSale</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="58b1a23d-3bfc-4775-8360-b12d1bda6e1c">
+ <producedTypes>
+  <objectType typeId="e5fcad66-7768-4d3a-b385-a8ce6b4a3cdf" valueTypeId="62f03e06-dc7f-4016-b845-5f6b80514249"/>
+  <managerType typeId="5faa6790-23fb-4cfc-81ab-8c8d144a6281" valueTypeId="71dd6469-cde5-477c-a415-303a6b104b1b"/>
+ </producedTypes>
+ <name>PointOfSale</name>
+ <synonym>
+  <key>ru</key>
+  <value>Рабочее место кассира</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Point of sale</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satış ekranı</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.PointOfSale.Form.Form</defaultForm>
+ <attributes uuid="a569aba7-c821-4877-8f3a-6b44d7cae57f">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>Point of sale</value>
+   <key>ru</key>
+   <value>Сумма</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.PointOfSale.Form.Form</defaultForm>
-  <attributes uuid="a569aba7-c821-4877-8f3a-6b44d7cae57f">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="691cb651-dbb4-492f-8417-9655a1705d0d">
-    <name>Discount</name>
-    <synonym>
-      <key>en</key>
-      <value>Discount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="819cdf46-4204-4684-bbf4-58f53d95f194">
-    <name>Cashback</name>
-    <synonym>
-      <key>en</key>
-      <value>Cashback</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="a9f12336-8a92-4eee-9b66-29ee982bd135">
-    <name>CustomerCash</name>
-    <synonym>
-      <key>en</key>
-      <value>Customer cash</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="7fd5393a-ed15-4de7-955c-be5d3715b311">
-    <name>Workstation</name>
-    <synonym>
-      <key>en</key>
-      <value>Workstation</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Workstations</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="6f075ed4-8717-425d-a8f2-f3596b403efa">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <forms uuid="6e29de76-f7b4-42c8-a2b7-9df2359eb2f3">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="757bb849-077b-44b3-a4de-7853e891ca13">
-    <name>Payment</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e0163b39-c31e-4412-8c14-58fdd43c4cc4">
-    <name>PaymentTypes</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment types</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="691cb651-dbb4-492f-8417-9655a1705d0d">
+  <name>Discount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Скидка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Discount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İndirim</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="819cdf46-4204-4684-bbf4-58f53d95f194">
+  <name>Cashback</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сдача</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Cashback</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Para üstü</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="a9f12336-8a92-4eee-9b66-29ee982bd135">
+  <name>CustomerCash</name>
+  <synonym>
+   <key>ru</key>
+   <value>Оплата клиента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Customer cash</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Müşteri nakit</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="7fd5393a-ed15-4de7-955c-be5d3715b311">
+  <name>Workstation</name>
+  <synonym>
+   <key>ru</key>
+   <value>Рабочее место</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Workstation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çalışma yeri</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Workstations</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="6f075ed4-8717-425d-a8f2-f3596b403efa">
+  <name>Branch</name>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <forms uuid="6e29de76-f7b4-42c8-a2b7-9df2359eb2f3">
+  <name>Form</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="757bb849-077b-44b3-a4de-7853e891ca13">
+  <name>Payment</name>
+  <synonym>
+   <key>ru</key>
+   <value>Оплата</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Payment</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e0163b39-c31e-4412-8c14-58fdd43c4cc4">
+  <name>PaymentTypes</name>
+  <synonym>
+   <key>ru</key>
+   <value>Виды оплаты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Payment types</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme tipleri</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

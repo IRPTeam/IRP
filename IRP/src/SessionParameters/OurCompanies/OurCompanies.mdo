@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c13e2243-fa53-4151-8aaf-be0c47674276">
-  <name>OurCompanies</name>
-  <synonym>
-    <key>en</key>
-    <value>OurCompany companies</value>
-  </synonym>
-  <type>
-    <types>FixedArray</types>
-  </type>
+ <name>OurCompanies</name>
+ <synonym>
+  <key>ru</key>
+  <value>Наша компания</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>OurCompany companies</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kendi şirketimi şirketleri</value>
+ </synonym>
+ <type>
+  <types>FixedArray</types>
+ </type>
 </mdclass:SessionParameter>

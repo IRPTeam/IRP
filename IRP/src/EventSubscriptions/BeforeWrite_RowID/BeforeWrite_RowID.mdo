@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5ffff1fa-2be0-49c7-9fda-a37d5daf7d89">
-  <name>BeforeWrite_RowID</name>
-  <synonym>
-    <key>en</key>
-    <value>Before write row ID</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>BeforeWrite</event>
-  <handler>CommonModule.RowIDInfoServer.BeforeWrite_RowID</handler>
+ <name>BeforeWrite_RowID</name>
+ <synonym>
+  <key>ru</key>
+  <value>Перед записью row ID</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Before write row ID</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satır ID saklamadan önce</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.RowIDInfoServer.BeforeWrite_RowID</handler>
 </mdclass:EventSubscription>

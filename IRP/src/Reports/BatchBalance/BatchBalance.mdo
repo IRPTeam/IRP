@@ -1,22 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="009304f6-decd-491b-89b8-8f91d6d16910">
-  <producedTypes>
-    <objectType typeId="6f14f7dd-b65e-4e0c-9580-c663f9927b6b" valueTypeId="854f75a1-b28b-4e69-bafa-5110b87db30b"/>
-    <managerType typeId="0fdeb0ba-f108-4555-b113-5dc590aa2cf6" valueTypeId="f0cdf1b0-dccd-4680-bd5c-ea7199114e82"/>
-  </producedTypes>
-  <name>BatchBalance</name>
+ <producedTypes>
+  <objectType typeId="6f14f7dd-b65e-4e0c-9580-c663f9927b6b" valueTypeId="854f75a1-b28b-4e69-bafa-5110b87db30b"/>
+  <managerType typeId="0fdeb0ba-f108-4555-b113-5dc590aa2cf6" valueTypeId="f0cdf1b0-dccd-4680-bd5c-ea7199114e82"/>
+ </producedTypes>
+ <name>BatchBalance</name>
+ <synonym>
+  <key>ru</key>
+  <value>Остаток партии</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Batch balance</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Parti bakiyesi</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.BatchBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="5b663984-045d-4a65-bd98-972c21763d84">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>Batch balance</value>
+   <key>ru</key>
+   <value>Основная схема компоновки</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.BatchBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="5b663984-045d-4a65-bd98-972c21763d84">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

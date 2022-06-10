@@ -1,21 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="068d9cfa-93c5-4a06-accb-51f461f2509d">
-  <producedTypes>
-    <containerType typeId="0a78914a-3f12-44e0-9d24-6466a62f54bd" valueTypeId="2a997fbd-e50a-4afd-a283-ae708d5923f9"/>
-  </producedTypes>
-  <name>typePlaningTransactionBasises</name>
-  <synonym>
-    <key>en</key>
-    <value>Type planning transaction basises</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.CashTransferOrder</types>
-    <types>DocumentRef.IncomingPaymentOrder</types>
-    <types>DocumentRef.PurchaseInvoice</types>
-    <types>DocumentRef.PurchaseOrder</types>
-    <types>DocumentRef.OutgoingPaymentOrder</types>
-    <types>DocumentRef.SalesOrder</types>
-    <types>DocumentRef.CashStatement</types>
-    <types>DocumentRef.SalesInvoice</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="0a78914a-3f12-44e0-9d24-6466a62f54bd" valueTypeId="2a997fbd-e50a-4afd-a283-ae708d5923f9"/>
+ </producedTypes>
+ <name>typePlaningTransactionBasises</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип плановый документ-основание</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type planning transaction basises</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İşlem temeli planlama türü</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.CashTransferOrder</types>
+  <types>DocumentRef.IncomingPaymentOrder</types>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.PurchaseOrder</types>
+  <types>DocumentRef.OutgoingPaymentOrder</types>
+  <types>DocumentRef.SalesOrder</types>
+  <types>DocumentRef.CashStatement</types>
+  <types>DocumentRef.SalesInvoice</types>
+ </type>
 </mdclass:DefinedType>

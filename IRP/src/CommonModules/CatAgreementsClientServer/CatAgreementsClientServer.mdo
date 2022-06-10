@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b07a47e1-2891-45d9-b8a4-d16ddd321122">
-  <name>CatAgreementsClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Cat agreements client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>CatAgreementsClientServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Спр соглашения клиент сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Cat agreements client server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Cat sözleşemler client server</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

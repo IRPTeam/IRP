@@ -1,142 +1,222 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c814b758-83a6-41f1-8b88-2a89c9b259e0">
-  <producedTypes>
-    <selectionType typeId="58dcec5d-61b2-4386-8772-0f91b9223d83" valueTypeId="db74b26e-0cc5-4d9f-aae4-d4ca51c1ce2a"/>
-    <listType typeId="8f28a0b9-ec12-483c-9ba9-5066651f0e11" valueTypeId="56ed9a57-f5ec-4591-9913-7c422f854637"/>
-    <managerType typeId="a16a1537-0868-47a4-b37c-ae11f10d0aba" valueTypeId="8db4fcfc-5ab2-4a75-95c8-5e02ae90f8b4"/>
-    <recordSetType typeId="43ec0ca5-d551-414f-8cba-ffc9945c3e3a" valueTypeId="33b04447-383e-4fd1-a770-2eb101c6511d"/>
-    <recordKeyType typeId="fa6dd317-b721-4023-8877-bac49b960e1e" valueTypeId="5ac89b4a-6c4a-44a7-9538-f2b59fb102ea"/>
-    <recordType typeId="e3cf414b-4fff-4e26-9aba-d98ec2df3da3" valueTypeId="a59525f9-b56c-4f89-b0a5-f207716b7b1e"/>
-  </producedTypes>
-  <name>R6020B_BatchBalance</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c814b758-83a6-41f1-8b88-2a89c9b259e0">
+ <producedTypes>
+  <selectionType typeId="58dcec5d-61b2-4386-8772-0f91b9223d83" valueTypeId="db74b26e-0cc5-4d9f-aae4-d4ca51c1ce2a"/>
+  <listType typeId="8f28a0b9-ec12-483c-9ba9-5066651f0e11" valueTypeId="56ed9a57-f5ec-4591-9913-7c422f854637"/>
+  <managerType typeId="a16a1537-0868-47a4-b37c-ae11f10d0aba" valueTypeId="8db4fcfc-5ab2-4a75-95c8-5e02ae90f8b4"/>
+  <recordSetType typeId="43ec0ca5-d551-414f-8cba-ffc9945c3e3a" valueTypeId="33b04447-383e-4fd1-a770-2eb101c6511d"/>
+  <recordKeyType typeId="fa6dd317-b721-4023-8877-bac49b960e1e" valueTypeId="5ac89b4a-6c4a-44a7-9538-f2b59fb102ea"/>
+  <recordType typeId="e3cf414b-4fff-4e26-9aba-d98ec2df3da3" valueTypeId="a59525f9-b56c-4f89-b0a5-f207716b7b1e"/>
+ </producedTypes>
+ <name>R6020B_BatchBalance</name>
+ <synonym>
+  <key>ru</key>
+  <value>R6020 Остатки партий товаров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R6020 Batch balance</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R6020 Party envanter bakiyeleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="081c86aa-412d-4ea0-bb04-83fca03151ab">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R6020 Batch balance</value>
+   <key>ru</key>
+   <value>Количество</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="081c86aa-412d-4ea0-bb04-83fca03151ab">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="6f5cc2a7-05c7-4d5c-b410-58c898dee672">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="56b0cf04-89e5-4cea-ba36-4e9201eee698">
-    <name>AmountCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount cost</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="828b931a-610f-45d5-a460-f22bae3a326d">
-    <name>CalculationMovementCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Calculation movement cost</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CalculationMovementCosts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="c5d6a6b7-73db-4edb-9738-a2c47d9f215e">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="6176e91e-59d5-4731-ab26-37dedabad76a">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="8346a720-94ad-4c35-a943-db7197425f91">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="27279218-8e8d-4ffa-9f34-8c5a554bec9e">
-    <name>Batch</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Batches</types>
-      <types>EnumRef.BatchType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="aeb7f38c-c1f1-4377-813b-f4baab7206e9">
-    <name>BatchKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BatchKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="6f5cc2a7-05c7-4d5c-b410-58c898dee672">
+  <name>Amount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="56b0cf04-89e5-4cea-ba36-4e9201eee698">
+  <name>AmountCost</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма доп. расходов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Amount cost</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek maliyet tutarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="828b931a-610f-45d5-a460-f22bae3a326d">
+  <name>CalculationMovementCost</name>
+  <synonym>
+   <key>ru</key>
+   <value>Расчет себестоимости товаров</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Calculation movement cost</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Maliyet hesaplama fişi</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.CalculationMovementCosts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="c5d6a6b7-73db-4edb-9738-a2c47d9f215e">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="6176e91e-59d5-4731-ab26-37dedabad76a">
+  <name>Store</name>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="8346a720-94ad-4c35-a943-db7197425f91">
+  <name>ItemKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="27279218-8e8d-4ffa-9f34-8c5a554bec9e">
+  <name>Batch</name>
+  <synonym>
+   <key>ru</key>
+   <value>Партия</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Batch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Parti</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Batches</types>
+   <types>EnumRef.BatchType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="aeb7f38c-c1f1-4377-813b-f4baab7206e9">
+  <name>BatchKey</name>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ партии</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Batch key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Parti anahtarı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BatchKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

@@ -1,20 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b340b7de-4946-4601-b339-3f96716a402c">
-  <producedTypes>
-    <managerType typeId="6ce13487-acb3-4058-806e-9b7c987ca443" valueTypeId="92fd893c-0397-4d94-a58c-9ce4237d870c"/>
-    <valueManagerType typeId="3cbf3bcf-bddc-4dce-9fbe-a7c188ebe4cd" valueTypeId="33218b6b-cc86-4c0c-8896-ffef8a3a02bc"/>
-    <valueKeyType typeId="15707c4d-f38e-4148-9ce8-bd0f782e5bc9" valueTypeId="2c616309-4579-451e-8fa9-486919897b65"/>
-  </producedTypes>
-  <name>DefaultFilesStorageVolume</name>
-  <synonym>
-    <key>en</key>
-    <value>Default files storage volume</value>
-  </synonym>
-  <type>
-    <types>CatalogRef.FileStorageVolumes</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="b340b7de-4946-4601-b339-3f96716a402c">
+ <producedTypes>
+  <managerType typeId="6ce13487-acb3-4058-806e-9b7c987ca443" valueTypeId="92fd893c-0397-4d94-a58c-9ce4237d870c"/>
+  <valueManagerType typeId="3cbf3bcf-bddc-4dce-9fbe-a7c188ebe4cd" valueTypeId="33218b6b-cc86-4c0c-8896-ffef8a3a02bc"/>
+  <valueKeyType typeId="15707c4d-f38e-4148-9ce8-bd0f782e5bc9" valueTypeId="2c616309-4579-451e-8fa9-486919897b65"/>
+ </producedTypes>
+ <name>DefaultFilesStorageVolume</name>
+ <synonym>
+  <key>ru</key>
+  <value>Том хранения файлов по умолчанию</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Default files storage volume</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Varsayılan dosya depolama yeri</value>
+ </synonym>
+ <type>
+  <types>CatalogRef.FileStorageVolumes</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

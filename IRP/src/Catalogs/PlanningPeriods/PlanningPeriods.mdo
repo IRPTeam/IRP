@@ -1,102 +1,158 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="60846e6d-fcfa-4f40-bb38-f2ff5c8be528">
-  <producedTypes>
-    <objectType typeId="29db5ca5-4ec3-440b-9515-76b0b8039459" valueTypeId="dd06eede-f1ec-4621-a8e3-8eceef527ce9"/>
-    <refType typeId="481265e3-be0d-4b40-8d1f-e7a51995deb4" valueTypeId="cc9eb750-3966-402a-a4d5-315e0dd5094b"/>
-    <selectionType typeId="4800ea16-a6cb-4d29-892a-903c884f18b9" valueTypeId="cfe4a2cd-523c-42f7-b518-34b7a29505a6"/>
-    <listType typeId="5b0df9c1-4310-4acb-b18f-7e4ea1042536" valueTypeId="4ffded18-9649-4ede-b16e-b85ed6d290cd"/>
-    <managerType typeId="239e2a80-7b55-4e5a-9d6b-461a0d73fda0" valueTypeId="64301550-4655-4809-83c3-3aef0b764194"/>
-  </producedTypes>
-  <name>PlanningPeriods</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="60846e6d-fcfa-4f40-bb38-f2ff5c8be528">
+ <producedTypes>
+  <objectType typeId="29db5ca5-4ec3-440b-9515-76b0b8039459" valueTypeId="dd06eede-f1ec-4621-a8e3-8eceef527ce9"/>
+  <refType typeId="481265e3-be0d-4b40-8d1f-e7a51995deb4" valueTypeId="cc9eb750-3966-402a-a4d5-315e0dd5094b"/>
+  <selectionType typeId="4800ea16-a6cb-4d29-892a-903c884f18b9" valueTypeId="cfe4a2cd-523c-42f7-b518-34b7a29505a6"/>
+  <listType typeId="5b0df9c1-4310-4acb-b18f-7e4ea1042536" valueTypeId="4ffded18-9649-4ede-b16e-b85ed6d290cd"/>
+  <managerType typeId="239e2a80-7b55-4e5a-9d6b-461a0d73fda0" valueTypeId="64301550-4655-4809-83c3-3aef0b764194"/>
+ </producedTypes>
+ <name>PlanningPeriods</name>
+ <synonym>
+  <key>ru</key>
+  <value>Периоды планирования</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Planning periods</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Planlama dönemleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.PlanningPeriods.StandardAttribute.Code</inputByString>
+ <inputByString>Catalog.PlanningPeriods.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Период планирования</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Planning period</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Planlama dönemi</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>25</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.PlanningPeriods.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.PlanningPeriods.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.PlanningPeriods.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="91cc0df3-c756-4573-8f0c-4f9f844fb721">
+  <name>BeginDate</name>
   <synonym>
-    <key>en</key>
-    <value>Planning periods</value>
+   <key>ru</key>
+   <value>Начало периода</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.PlanningPeriods.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.PlanningPeriods.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>en</key>
+   <value>Begin date</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Başlangıç tarihi</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Planning period</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>25</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.PlanningPeriods.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.PlanningPeriods.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.PlanningPeriods.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="91cc0df3-c756-4573-8f0c-4f9f844fb721">
-    <name>BeginDate</name>
-    <synonym>
-      <key>en</key>
-      <value>Begin date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="c3b271fa-56af-48c8-8dcb-6bef1ee113d2">
-    <name>EndDate</name>
-    <synonym>
-      <key>en</key>
-      <value>End date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="e893d468-79d6-4537-8695-257b2a028b67">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e652e5d2-dad9-4ca4-bdd8-e113b3626128">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ce6092d3-c988-4407-971c-2ff205a9aaa8">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c3b271fa-56af-48c8-8dcb-6bef1ee113d2">
+  <name>EndDate</name>
+  <synonym>
+   <key>ru</key>
+   <value>Конец периода</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>End date</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bitiş tarih</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="e893d468-79d6-4537-8695-257b2a028b67">
+  <name>ItemForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e652e5d2-dad9-4ca4-bdd8-e113b3626128">
+  <name>ListForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ce6092d3-c988-4407-971c-2ff205a9aaa8">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

@@ -1,118 +1,182 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="94401b1d-8f09-4f45-84d2-5234fe14023e">
-  <producedTypes>
-    <selectionType typeId="8cdf5315-b97e-46e1-b5c5-ac944024a07a" valueTypeId="ea087641-9696-4b7d-9c27-2d1c60aef26e"/>
-    <listType typeId="ebad6128-978d-417c-a811-4021559e1184" valueTypeId="aa794c44-9e5c-48aa-ac84-6337d9ae6b54"/>
-    <managerType typeId="420234b5-bd54-4706-a338-070d945ad45c" valueTypeId="1da26702-fe61-4042-ae47-bfb94c903610"/>
-    <recordSetType typeId="d1e88a78-7d8a-463e-a24f-ec9b0c2de378" valueTypeId="790af60b-a968-4a66-8d0d-db6ae1718b5b"/>
-    <recordKeyType typeId="8e49465b-1274-4562-b13e-0b5b2dc32f8b" valueTypeId="179b3876-9933-4530-a885-ab43e6c4a45d"/>
-    <recordType typeId="1e68cbda-3fac-40bd-a19e-73721b90613c" valueTypeId="a6f8e70c-fe8b-4e1c-8ebd-31612dd16f50"/>
-  </producedTypes>
-  <name>R1040B_TaxesOutgoing</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="94401b1d-8f09-4f45-84d2-5234fe14023e">
+ <producedTypes>
+  <selectionType typeId="8cdf5315-b97e-46e1-b5c5-ac944024a07a" valueTypeId="ea087641-9696-4b7d-9c27-2d1c60aef26e"/>
+  <listType typeId="ebad6128-978d-417c-a811-4021559e1184" valueTypeId="aa794c44-9e5c-48aa-ac84-6337d9ae6b54"/>
+  <managerType typeId="420234b5-bd54-4706-a338-070d945ad45c" valueTypeId="1da26702-fe61-4042-ae47-bfb94c903610"/>
+  <recordSetType typeId="d1e88a78-7d8a-463e-a24f-ec9b0c2de378" valueTypeId="790af60b-a968-4a66-8d0d-db6ae1718b5b"/>
+  <recordKeyType typeId="8e49465b-1274-4562-b13e-0b5b2dc32f8b" valueTypeId="179b3876-9933-4530-a885-ab43e6c4a45d"/>
+  <recordType typeId="1e68cbda-3fac-40bd-a19e-73721b90613c" valueTypeId="a6f8e70c-fe8b-4e1c-8ebd-31612dd16f50"/>
+ </producedTypes>
+ <name>R1040B_TaxesOutgoing</name>
+ <synonym>
+  <key>ru</key>
+  <value>R1040 Налоги к зачету</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R1040 Taxes outgoing</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R1040 İndirilecek vergiler</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="0e86e4c7-5edc-4ad6-a7ce-d5ce9274a057">
+  <name>TaxableAmount</name>
   <synonym>
-    <key>en</key>
-    <value>R1040 Taxes outgoing</value>
+   <key>ru</key>
+   <value>Сумма оборота</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="0e86e4c7-5edc-4ad6-a7ce-d5ce9274a057">
-    <name>TaxableAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Taxable amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="210f094c-6ece-4fdb-99a6-1cd9570db0e1">
-    <name>TaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="c3d480cd-4c1b-4bc8-87bf-61b3e66aea8f">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="c26f26dd-50ff-47ee-afc3-f8cdded0ca92">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="ce0d9c4a-a659-43c4-953d-1069199a2047">
-    <name>Tax</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Taxes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="eb12ea71-fdae-4db4-9553-08828bcd1a00">
-    <name>TaxRate</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax rate</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.TaxRates</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="af359c9f-ec14-4b29-a247-560f377ebf45">
-    <name>TaxMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax movement type</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Taxable amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>KDV Matrahı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="210f094c-6ece-4fdb-99a6-1cd9570db0e1">
+  <name>TaxAmount</name>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма налогов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi tutarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="c3d480cd-4c1b-4bc8-87bf-61b3e66aea8f">
+  <name>Company</name>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="c26f26dd-50ff-47ee-afc3-f8cdded0ca92">
+  <name>Branch</name>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="ce0d9c4a-a659-43c4-953d-1069199a2047">
+  <name>Tax</name>
+  <synonym>
+   <key>ru</key>
+   <value>Налог</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Taxes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="eb12ea71-fdae-4db4-9553-08828bcd1a00">
+  <name>TaxRate</name>
+  <synonym>
+   <key>ru</key>
+   <value>Налоговая ставка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax rate</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi oranı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.TaxRates</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="af359c9f-ec14-4b29-a247-560f377ebf45">
+  <name>TaxMovementType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Вид поступления</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergiler hareket tipi</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>10</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

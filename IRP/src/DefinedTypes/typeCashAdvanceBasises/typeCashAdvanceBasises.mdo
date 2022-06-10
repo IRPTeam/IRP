@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="83893f87-59fd-42c8-a44f-74b86f0523a6">
-  <producedTypes>
-    <containerType typeId="c8ca1157-6225-443f-8f41-a95ec7751080" valueTypeId="89d0a320-66bf-4b8f-be83-311a284fa6e0"/>
-  </producedTypes>
-  <name>typeCashAdvanceBasises</name>
-  <synonym>
-    <key>en</key>
-    <value>Type cash advance basises</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.CashTransferOrder</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="c8ca1157-6225-443f-8f41-a95ec7751080" valueTypeId="89d0a320-66bf-4b8f-be83-311a284fa6e0"/>
+ </producedTypes>
+ <name>typeCashAdvanceBasises</name>
+ <synonym>
+  <key>ru</key>
+  <value>Тип основание аванса</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type cash advance basises</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tip İş avans kaynağı</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.CashTransferOrder</types>
+ </type>
 </mdclass:DefinedType>

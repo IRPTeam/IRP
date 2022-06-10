@@ -1,77 +1,125 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9f947a10-3b8c-44f6-88ec-fd5c291b18f1">
-  <producedTypes>
-    <selectionType typeId="47ec74fb-3259-4723-98fe-bb09b4baeda5" valueTypeId="5da48d0d-003b-4af8-b0d6-2a11da33aff0"/>
-    <listType typeId="02d2a6f2-9baa-4a15-864e-6bb38d7c2b61" valueTypeId="d02dc97c-4c13-4f9f-9cba-ac3ba47f8c58"/>
-    <managerType typeId="60138fab-9faa-444e-b3f7-df0c559bfe23" valueTypeId="f5dcab17-fc1a-4b09-a4bb-b19d5d64e812"/>
-    <recordSetType typeId="427b14f3-6acc-4e61-a506-3f471168b936" valueTypeId="4c57146d-a18d-4755-bb8f-d827a9f310d7"/>
-    <recordKeyType typeId="9b0aae47-6334-41e6-a5a0-2388f2bcaa62" valueTypeId="55da9a39-afa9-4311-968f-3aa4df0d158a"/>
-    <recordType typeId="f8a14278-ca58-4193-8d1b-c40078fe00f5" valueTypeId="6c4a1234-1885-48af-ad4f-a034dd7f360a"/>
-    <recordManagerType typeId="81eb4276-b603-4dd8-b77f-c79ee973997b" valueTypeId="cac89558-cc56-468a-93b8-5fdcdc792fa7"/>
-  </producedTypes>
-  <name>AddProperties</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="9f947a10-3b8c-44f6-88ec-fd5c291b18f1">
+ <producedTypes>
+  <selectionType typeId="47ec74fb-3259-4723-98fe-bb09b4baeda5" valueTypeId="5da48d0d-003b-4af8-b0d6-2a11da33aff0"/>
+  <listType typeId="02d2a6f2-9baa-4a15-864e-6bb38d7c2b61" valueTypeId="d02dc97c-4c13-4f9f-9cba-ac3ba47f8c58"/>
+  <managerType typeId="60138fab-9faa-444e-b3f7-df0c559bfe23" valueTypeId="f5dcab17-fc1a-4b09-a4bb-b19d5d64e812"/>
+  <recordSetType typeId="427b14f3-6acc-4e61-a506-3f471168b936" valueTypeId="4c57146d-a18d-4755-bb8f-d827a9f310d7"/>
+  <recordKeyType typeId="9b0aae47-6334-41e6-a5a0-2388f2bcaa62" valueTypeId="55da9a39-afa9-4311-968f-3aa4df0d158a"/>
+  <recordType typeId="f8a14278-ca58-4193-8d1b-c40078fe00f5" valueTypeId="6c4a1234-1885-48af-ad4f-a034dd7f360a"/>
+  <recordManagerType typeId="81eb4276-b603-4dd8-b77f-c79ee973997b" valueTypeId="cac89558-cc56-468a-93b8-5fdcdc792fa7"/>
+ </producedTypes>
+ <name>AddProperties</name>
+ <synonym>
+  <key>ru</key>
+  <value>Дополнительные свойства</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Add properties</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ek özellikler</value>
+ </synonym>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Дополнительное свойство</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Add property</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Ek özellik</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Дополнительные свойства</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Add properties</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Ek özellikler</value>
+ </listPresentation>
+ <resources uuid="1eb0cbdc-acff-4879-b2c7-5c801d7b2483">
+  <name>Value</name>
   <synonym>
-    <key>en</key>
-    <value>Add properties</value>
+   <key>ru</key>
+   <value>Значение</value>
   </synonym>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Add property</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Add properties</value>
-  </listPresentation>
-  <resources uuid="1eb0cbdc-acff-4879-b2c7-5c801d7b2483">
-    <name>Value</name>
-    <synonym>
-      <key>en</key>
-      <value>Value</value>
-    </synonym>
-    <type>
-      <types>Characteristic.AddAttributeAndProperty</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="8e919f69-0697-44bc-8331-eb26934b7c28">
-    <name>Object</name>
-    <synonym>
-      <key>en</key>
-      <value>Object</value>
-    </synonym>
-    <type>
-      <types>DocumentRef</types>
-      <types>CatalogRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="8a064a95-81a7-4e99-9c5f-90289333a3bd">
-    <name>Property</name>
-    <synonym>
-      <key>en</key>
-      <value>Property</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Value</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Değer</value>
+  </synonym>
+  <type>
+   <types>Characteristic.AddAttributeAndProperty</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="8e919f69-0697-44bc-8331-eb26934b7c28">
+  <name>Object</name>
+  <synonym>
+   <key>ru</key>
+   <value>Объект</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Object</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Obje</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+   <types>CatalogRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="8a064a95-81a7-4e99-9c5f-90289333a3bd">
+  <name>Property</name>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Property</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Özellik</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

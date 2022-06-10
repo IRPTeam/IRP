@@ -1,289 +1,321 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="efc0a2bf-b0d5-42fe-b3d1-19ed89675dc2">
-  <producedTypes>
-    <objectType typeId="3e384d56-ff93-4343-819c-c0f0dc428104" valueTypeId="2df78e58-2d76-4625-918b-39ef082f9f24"/>
-    <refType typeId="4bf70905-ee39-49f7-ad14-ae6dab8da824" valueTypeId="baa6ba1a-ed9b-42f5-be1b-6a75f5206cd7"/>
-    <selectionType typeId="1c8ab5bd-22f6-4c67-acc8-6dbe66ac5919" valueTypeId="2f65d0fc-fdc9-4972-aaf9-ff9fa850f80a"/>
-    <listType typeId="fae91471-6f48-4eff-a140-cbc4d4200437" valueTypeId="4251daf2-0b6c-4777-b167-839a245cbc8f"/>
-    <managerType typeId="105f5636-49f1-41e7-a89e-156c8714f20c" valueTypeId="cd38b90c-1b1f-4570-b2ae-34bc680858c9"/>
-  </producedTypes>
-  <name>MovementRules</name>
-  <synonym>
-    <key>en</key>
-    <value>Movement rules</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.MovementRules.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.MovementRules.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="efc0a2bf-b0d5-42fe-b3d1-19ed89675dc2">
+ <producedTypes>
+  <objectType typeId="3e384d56-ff93-4343-819c-c0f0dc428104" valueTypeId="2df78e58-2d76-4625-918b-39ef082f9f24"/>
+  <refType typeId="4bf70905-ee39-49f7-ad14-ae6dab8da824" valueTypeId="baa6ba1a-ed9b-42f5-be1b-6a75f5206cd7"/>
+  <selectionType typeId="1c8ab5bd-22f6-4c67-acc8-6dbe66ac5919" valueTypeId="2f65d0fc-fdc9-4972-aaf9-ff9fa850f80a"/>
+  <listType typeId="fae91471-6f48-4eff-a140-cbc4d4200437" valueTypeId="4251daf2-0b6c-4777-b167-839a245cbc8f"/>
+  <managerType typeId="105f5636-49f1-41e7-a89e-156c8714f20c" valueTypeId="cd38b90c-1b1f-4570-b2ae-34bc680858c9"/>
+ </producedTypes>
+ <name>MovementRules</name>
+ <synonym>
+  <key>ru</key>
+  <value>Правила движений</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Movement rules</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Hareket kuralları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.MovementRules.StandardAttribute.Code</inputByString>
+ <inputByString>Catalog.MovementRules.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Правило движений</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Movement rule</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Hareket kuralı</value>
+ </objectPresentation>
+ <hierarchyType>HierarchyOfItems</hierarchyType>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>9</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeType>String</codeType>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="30b313b8-e751-4b31-a0cc-98eb6e6e372e">
+   <name>SI_SC</name>
+   <description>SI&amp;SC</description>
+   <code xsi:type="core:StringValue">
+    <value>7</value>
+   </code>
+  </items>
+  <items id="ee105b2b-3ce2-4d08-bdea-7f05f1c67682">
+   <name>SI</name>
+   <description>SI</description>
+   <code xsi:type="core:StringValue">
+    <value>8</value>
+   </code>
+  </items>
+  <items id="19caaff5-3370-4880-b5a2-365f3835053a">
+   <name>SC</name>
+   <description>SC</description>
+   <code xsi:type="core:StringValue">
+    <value>9</value>
+   </code>
+  </items>
+  <items id="62d169df-0f34-4698-baf4-dfb776e4cb5a">
+   <name>PO</name>
+   <description>PO</description>
+   <code xsi:type="core:StringValue">
+    <value>10</value>
+   </code>
+  </items>
+  <items id="d2e0adcc-d1b1-46aa-b3bf-5b1a28d8399f">
+   <name>PI</name>
+   <description>PI</description>
+   <code xsi:type="core:StringValue">
+    <value>11</value>
+   </code>
+  </items>
+  <items id="c05dfc8d-3f3c-46c4-ad14-4af85cb42f32">
+   <name>PI_GR</name>
+   <description>PI&amp;GR</description>
+   <code xsi:type="core:StringValue">
+    <value>12</value>
+   </code>
+  </items>
+  <items id="ad857082-59dd-463c-8415-5bb39e8f758e">
+   <name>GR</name>
+   <description>GR</description>
+   <code xsi:type="core:StringValue">
+    <value>13</value>
+   </code>
+  </items>
+  <items id="4f9f3816-134c-40f4-896a-1d806ed54892">
+   <name>PO_PI</name>
+   <description>PO&amp;PI</description>
+   <code xsi:type="core:StringValue">
+    <value>14</value>
+   </code>
+  </items>
+  <items id="3953836b-262d-4b77-ace4-a4ddbfe7e814">
+   <name>IT</name>
+   <description>IT</description>
+   <code xsi:type="core:StringValue">
+    <value>15</value>
+   </code>
+  </items>
+  <items id="b670d18b-c997-4049-94f2-33851e6a918e">
+   <name>ITO_PO_PI</name>
+   <description>ITO&amp;PO&amp;PI</description>
+   <code xsi:type="core:StringValue">
+    <value>16</value>
+   </code>
+  </items>
+  <items id="101bc9f0-3351-4061-a6f9-b404d5e75d27">
+   <name>StockAdjustmentAsSurplus</name>
+   <description>Stock adjustment as surplus</description>
+   <code xsi:type="core:StringValue">
+    <value>17</value>
+   </code>
+  </items>
+  <items id="30450097-4814-4e8b-b480-b8a235c42f33">
+   <name>StockAdjustmentAsWriteOff</name>
+   <description>Stock adjustment as write off</description>
+   <code xsi:type="core:StringValue">
+    <value>18</value>
+   </code>
+  </items>
+  <items id="aae53970-400b-4533-b40f-ce66a6d9e48d">
+   <name>SR</name>
+   <description>SR</description>
+   <code xsi:type="core:StringValue">
+    <value>19</value>
+   </code>
+  </items>
+  <items id="f252d2bd-c4ea-408b-83aa-7dee67b04282">
+   <name>PR</name>
+   <description>PR</description>
+   <code xsi:type="core:StringValue">
+    <value>20</value>
+   </code>
+  </items>
+  <items id="57b04b53-76e2-4376-a2ae-9106de03f610">
+   <name>PRO</name>
+   <description>PRO</description>
+   <code xsi:type="core:StringValue">
+    <value>21</value>
+   </code>
+  </items>
+  <items id="ffffa50f-3fd7-4e6e-a34c-baa83d15bbce">
+   <name>SRO</name>
+   <description>SRO</description>
+   <code xsi:type="core:StringValue">
+    <value>22</value>
+   </code>
+  </items>
+  <items id="438e0e7b-84d6-440e-8cce-b983e23a6c34">
+   <name>SRO_SR</name>
+   <description>SRO&amp;SR</description>
+   <code xsi:type="core:StringValue">
+    <value>23</value>
+   </code>
+  </items>
+  <items id="824369d2-ae80-4dfd-90e1-051bea3f6424">
+   <name>PRO_PR</name>
+   <description>PRO&amp;PR</description>
+   <code xsi:type="core:StringValue">
+    <value>24</value>
+   </code>
+  </items>
+  <items id="73dcc0a6-7e33-4c52-a35b-0c5801d1c465">
+   <name>RRR</name>
+   <description>RRR</description>
+   <code xsi:type="core:StringValue">
+    <value>25</value>
+   </code>
+  </items>
+  <items id="e4f75f5c-c671-4711-83a7-773795b71b1e">
+   <name>PRR</name>
+   <description>PRR</description>
+   <code xsi:type="core:StringValue">
+    <value>26</value>
+   </code>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <tabularSections uuid="9a6a2624-25bf-444e-9aaf-fc7530c72718">
+  <producedTypes>
+   <objectType typeId="7d9b27b8-4ff9-4a83-b237-854e0f61c152" valueTypeId="d223852b-31c2-44de-b391-9c361136a12d"/>
+   <rowType typeId="7b541731-e011-41aa-b3c2-f599df517143" valueTypeId="2dea9ded-5fe9-45c9-b279-dbf66d3d4677"/>
+  </producedTypes>
+  <name>NextSteps</name>
+  <synonym>
+   <key>ru</key>
+   <value>Следующий шаг</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Next steps</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sonraki adımlar</value>
+  </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <attributes uuid="991c7d26-70e4-4919-82bc-8dd996ae988c">
+   <name>Step</name>
+   <synonym>
+    <key>ru</key>
+    <value>Шаг</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Movement rule</value>
-  </objectPresentation>
-  <hierarchyType>HierarchyOfItems</hierarchyType>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>9</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeType>String</codeType>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="30b313b8-e751-4b31-a0cc-98eb6e6e372e">
-      <name>SI_SC</name>
-      <description>SI&amp;SC</description>
-      <code xsi:type="core:StringValue">
-        <value>7</value>
-      </code>
-    </items>
-    <items id="ee105b2b-3ce2-4d08-bdea-7f05f1c67682">
-      <name>SI</name>
-      <description>SI</description>
-      <code xsi:type="core:StringValue">
-        <value>8</value>
-      </code>
-    </items>
-    <items id="19caaff5-3370-4880-b5a2-365f3835053a">
-      <name>SC</name>
-      <description>SC</description>
-      <code xsi:type="core:StringValue">
-        <value>9</value>
-      </code>
-    </items>
-    <items id="62d169df-0f34-4698-baf4-dfb776e4cb5a">
-      <name>PO</name>
-      <description>PO</description>
-      <code xsi:type="core:StringValue">
-        <value>10</value>
-      </code>
-    </items>
-    <items id="d2e0adcc-d1b1-46aa-b3bf-5b1a28d8399f">
-      <name>PI</name>
-      <description>PI</description>
-      <code xsi:type="core:StringValue">
-        <value>11</value>
-      </code>
-    </items>
-    <items id="c05dfc8d-3f3c-46c4-ad14-4af85cb42f32">
-      <name>PI_GR</name>
-      <description>PI&amp;GR</description>
-      <code xsi:type="core:StringValue">
-        <value>12</value>
-      </code>
-    </items>
-    <items id="ad857082-59dd-463c-8415-5bb39e8f758e">
-      <name>GR</name>
-      <description>GR</description>
-      <code xsi:type="core:StringValue">
-        <value>13</value>
-      </code>
-    </items>
-    <items id="4f9f3816-134c-40f4-896a-1d806ed54892">
-      <name>PO_PI</name>
-      <description>PO&amp;PI</description>
-      <code xsi:type="core:StringValue">
-        <value>14</value>
-      </code>
-    </items>
-    <items id="3953836b-262d-4b77-ace4-a4ddbfe7e814">
-      <name>IT</name>
-      <description>IT</description>
-      <code xsi:type="core:StringValue">
-        <value>15</value>
-      </code>
-    </items>
-    <items id="b670d18b-c997-4049-94f2-33851e6a918e">
-      <name>ITO_PO_PI</name>
-      <description>ITO&amp;PO&amp;PI</description>
-      <code xsi:type="core:StringValue">
-        <value>16</value>
-      </code>
-    </items>
-    <items id="101bc9f0-3351-4061-a6f9-b404d5e75d27">
-      <name>StockAdjustmentAsSurplus</name>
-      <description>Stock adjustment as surplus</description>
-      <code xsi:type="core:StringValue">
-        <value>17</value>
-      </code>
-    </items>
-    <items id="30450097-4814-4e8b-b480-b8a235c42f33">
-      <name>StockAdjustmentAsWriteOff</name>
-      <description>Stock adjustment as write off</description>
-      <code xsi:type="core:StringValue">
-        <value>18</value>
-      </code>
-    </items>
-    <items id="aae53970-400b-4533-b40f-ce66a6d9e48d">
-      <name>SR</name>
-      <description>SR</description>
-      <code xsi:type="core:StringValue">
-        <value>19</value>
-      </code>
-    </items>
-    <items id="f252d2bd-c4ea-408b-83aa-7dee67b04282">
-      <name>PR</name>
-      <description>PR</description>
-      <code xsi:type="core:StringValue">
-        <value>20</value>
-      </code>
-    </items>
-    <items id="57b04b53-76e2-4376-a2ae-9106de03f610">
-      <name>PRO</name>
-      <description>PRO</description>
-      <code xsi:type="core:StringValue">
-        <value>21</value>
-      </code>
-    </items>
-    <items id="ffffa50f-3fd7-4e6e-a34c-baa83d15bbce">
-      <name>SRO</name>
-      <description>SRO</description>
-      <code xsi:type="core:StringValue">
-        <value>22</value>
-      </code>
-    </items>
-    <items id="438e0e7b-84d6-440e-8cce-b983e23a6c34">
-      <name>SRO_SR</name>
-      <description>SRO&amp;SR</description>
-      <code xsi:type="core:StringValue">
-        <value>23</value>
-      </code>
-    </items>
-    <items id="824369d2-ae80-4dfd-90e1-051bea3f6424">
-      <name>PRO_PR</name>
-      <description>PRO&amp;PR</description>
-      <code xsi:type="core:StringValue">
-        <value>24</value>
-      </code>
-    </items>
-    <items id="73dcc0a6-7e33-4c52-a35b-0c5801d1c465">
-      <name>RRR</name>
-      <description>RRR</description>
-      <code xsi:type="core:StringValue">
-        <value>25</value>
-      </code>
-    </items>
-    <items id="e4f75f5c-c671-4711-83a7-773795b71b1e">
-      <name>PRR</name>
-      <description>PRR</description>
-      <code xsi:type="core:StringValue">
-        <value>26</value>
-      </code>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <tabularSections uuid="9a6a2624-25bf-444e-9aaf-fc7530c72718">
-    <producedTypes>
-      <objectType typeId="7d9b27b8-4ff9-4a83-b237-854e0f61c152" valueTypeId="d223852b-31c2-44de-b391-9c361136a12d"/>
-      <rowType typeId="7b541731-e011-41aa-b3c2-f599df517143" valueTypeId="2dea9ded-5fe9-45c9-b279-dbf66d3d4677"/>
-    </producedTypes>
-    <name>NextSteps</name>
-    <synonym>
-      <key>en</key>
-      <value>Next steps</value>
-    </synonym>
-    <standardAttributes>
-      <dataHistory>Use</dataHistory>
-      <name>LineNumber</name>
-      <fillValue xsi:type="core:UndefinedValue"/>
-      <fullTextSearch>Use</fullTextSearch>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </standardAttributes>
-    <attributes uuid="991c7d26-70e4-4919-82bc-8dd996ae988c">
-      <name>Step</name>
-      <synonym>
-        <key>en</key>
-        <value>Step</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.MovementRules</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+    <value>Step</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Adım</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.MovementRules</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
 </mdclass:Catalog>

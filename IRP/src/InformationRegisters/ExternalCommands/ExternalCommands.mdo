@@ -1,94 +1,150 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="61c78855-b01f-4ef4-bf23-1f0648a351ea">
-  <producedTypes>
-    <selectionType typeId="f122d9eb-39ea-4d4c-a89d-d482b1ae8d27" valueTypeId="3f99aa35-e983-4f30-9667-2d568f319620"/>
-    <listType typeId="cbdd400c-96a1-4ad6-b776-645955a54602" valueTypeId="88b5999b-429c-4755-ae4d-f30e1461f581"/>
-    <managerType typeId="39076bf8-b588-4da0-9acf-9362df7a467b" valueTypeId="aa217fa5-dbac-489a-af06-2877a7330831"/>
-    <recordSetType typeId="2ddd0b72-e52f-4cf0-aefc-db450a9550d9" valueTypeId="14052d47-609d-4b70-98da-e73bdb0875bd"/>
-    <recordKeyType typeId="991f8672-ceaf-4dae-8b4a-a0007ce8e382" valueTypeId="2021fe79-0f2c-4b42-b7a9-31316422ac5c"/>
-    <recordType typeId="dbf25271-6e2b-4ae9-94ca-9c75f0232433" valueTypeId="3df57bc2-2eff-4b39-8369-349cade39ffe"/>
-    <recordManagerType typeId="b5f762e8-7f1b-4cb5-83b9-00adec948491" valueTypeId="724c3b5d-7988-4bbc-b960-3ab441ccc29e"/>
-  </producedTypes>
-  <name>ExternalCommands</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="61c78855-b01f-4ef4-bf23-1f0648a351ea">
+ <producedTypes>
+  <selectionType typeId="f122d9eb-39ea-4d4c-a89d-d482b1ae8d27" valueTypeId="3f99aa35-e983-4f30-9667-2d568f319620"/>
+  <listType typeId="cbdd400c-96a1-4ad6-b776-645955a54602" valueTypeId="88b5999b-429c-4755-ae4d-f30e1461f581"/>
+  <managerType typeId="39076bf8-b588-4da0-9acf-9362df7a467b" valueTypeId="aa217fa5-dbac-489a-af06-2877a7330831"/>
+  <recordSetType typeId="2ddd0b72-e52f-4cf0-aefc-db450a9550d9" valueTypeId="14052d47-609d-4b70-98da-e73bdb0875bd"/>
+  <recordKeyType typeId="991f8672-ceaf-4dae-8b4a-a0007ce8e382" valueTypeId="2021fe79-0f2c-4b42-b7a9-31316422ac5c"/>
+  <recordType typeId="dbf25271-6e2b-4ae9-94ca-9c75f0232433" valueTypeId="3df57bc2-2eff-4b39-8369-349cade39ffe"/>
+  <recordManagerType typeId="b5f762e8-7f1b-4cb5-83b9-00adec948491" valueTypeId="724c3b5d-7988-4bbc-b960-3ab441ccc29e"/>
+ </producedTypes>
+ <name>ExternalCommands</name>
+ <synonym>
+  <key>ru</key>
+  <value>Определяемые интерфейсные команды</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Definable UI commands</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Tanımlanabilir kullanıcı arayüz komutları</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Определяемая интерфейсная команда</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>en</key>
+  <value>Definable UI command</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Tanımlanabilir kullanıcı arayüz komutu</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Определяемые интерфейсные команды</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Definable UI commands</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Tanımlanabilir kullanıcı arayüz komutları</value>
+ </listPresentation>
+ <attributes uuid="92cefc83-a142-48d0-86c8-043db20fe599">
+  <name>InterfaceGroup</name>
   <synonym>
-    <key>en</key>
-    <value>Definable UI commands</value>
+   <key>ru</key>
+   <value>Интерфейсная группа</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Definable UI command</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Definable UI commands</value>
-  </listPresentation>
-  <attributes uuid="92cefc83-a142-48d0-86c8-043db20fe599">
-    <name>InterfaceGroup</name>
-    <synonym>
-      <key>en</key>
-      <value>UI group</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.InterfaceGroups</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <dimensions uuid="2b90e7ef-49a5-406a-b7fc-4138a96c0073">
-    <name>ConfigurationMetadata</name>
-    <synonym>
-      <key>en</key>
-      <value>Configuration metadata</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ConfigurationMetadata</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="d6b1f3be-56cb-4814-b415-2cb76b669e63">
-    <name>ExternalDataProc</name>
-    <synonym>
-      <key>en</key>
-      <value>Plugins</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExternalDataProc</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="f335d9fa-da17-426d-a51c-1b468ba3a8f7">
-    <name>FormType</name>
-    <synonym>
-      <key>en</key>
-      <value>Form type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.FormTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>UI group</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcı arayüzü grubu</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.InterfaceGroups</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <dimensions uuid="2b90e7ef-49a5-406a-b7fc-4138a96c0073">
+  <name>ConfigurationMetadata</name>
+  <synonym>
+   <key>ru</key>
+   <value>Метаданное конфигурации</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Configuration metadata</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konfigürasyon anaverisi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ConfigurationMetadata</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="d6b1f3be-56cb-4814-b415-2cb76b669e63">
+  <name>ExternalDataProc</name>
+  <synonym>
+   <key>ru</key>
+   <value>Внешняя обработка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Plugins</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Eklentiler</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExternalDataProc</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f335d9fa-da17-426d-a51c-1b468ba3a8f7">
+  <name>FormType</name>
+  <synonym>
+   <key>ru</key>
+   <value>Тип формы</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form tipi</value>
+  </synonym>
+  <type>
+   <types>EnumRef.FormTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

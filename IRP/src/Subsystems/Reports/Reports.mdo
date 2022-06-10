@@ -1,22 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="51decc4f-0bfb-4857-8b07-221caee1cafc">
-  <name>Reports</name>
-  <synonym>
-    <key>en</key>
-    <value>Reports</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Reports</picture>
-  </picture>
-  <content>Report.D0010_ItemsInfo</content>
-  <content>Report.D2001_Sales</content>
-  <content>Report.D1001_Purchases</content>
-  <content>Report.D4010_ActualStocks</content>
-  <content>Report.D4011_FreeStocks</content>
-  <subsystems>Sales</subsystems>
-  <subsystems>Purchase</subsystems>
-  <subsystems>Inventory</subsystems>
-  <subsystems>Finance</subsystems>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="51decc4f-0bfb-4857-8b07-221caee1cafc">
+ <name>Reports</name>
+ <synonym>
+  <key>ru</key>
+  <value>Отчеты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Reports</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Raporlar</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Reports</picture>
+ </picture>
+ <content>Report.D0010_ItemsInfo</content>
+ <content>Report.D2001_Sales</content>
+ <content>Report.D1001_Purchases</content>
+ <content>Report.D4010_ActualStocks</content>
+ <content>Report.D4011_FreeStocks</content>
+ <subsystems>Sales</subsystems>
+ <subsystems>Purchase</subsystems>
+ <subsystems>Inventory</subsystems>
+ <subsystems>Finance</subsystems>
 </mdclass:Subsystem>

@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8088e811-238e-43db-b5a7-5e5cd668357c">
-  <name>SalesReturn</name>
-  <synonym>
-    <key>en</key>
-    <value>Sales return</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.SalesReturnOrder</content>
-  <content>Document.SalesReturn</content>
-  <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
+ <name>SalesReturn</name>
+ <synonym>
+  <key>ru</key>
+  <value>Возврат товаров от покупателя</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Sales return</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satış iadesi</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.SalesReturnOrder</content>
+ <content>Document.SalesReturn</content>
+ <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

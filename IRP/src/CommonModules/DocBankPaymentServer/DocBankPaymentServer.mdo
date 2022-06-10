@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8a6a9396-bd4d-4301-a0d9-d0ab10644917">
-  <name>DocBankPaymentServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc bank payment server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocBankPaymentServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ платежное поручение исходящие сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc bank payment server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc banka ödeme fişi server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

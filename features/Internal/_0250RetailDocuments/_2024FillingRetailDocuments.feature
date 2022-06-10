@@ -3817,7 +3817,81 @@ Scenario: _0154193 check print last receipt from POS
 		Then user message window does not contain messages
 		And I close all client application windows
 
-							
+
+Scenario: _0154195 set sales person from POS
+	* Filling RetailWorkers register
+		Given I open hyperlink "e1cib/list/InformationRegister.RetailWorkers"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Worker"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Arina Brown' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Worker"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Anna Petrova' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Worker"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'David Romanov' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Filling RetailPerson from POS
+		* Open Point of sale
+			And In the command interface I select "Retail" "Point of sale"
+		* Add item and select Retail person
+			And I expand a line in "ItemsPickup" table
+				| 'Item'  |
+				| 'Shirt' |
+			And I go to line in "ItemsPickup" table
+				| 'Item'            |
+				| 'Shirt, 38/Black' |
+			And I select current line in "ItemsPickup" table
+			And "Table1" table became equal
+				| 'Column1'       |
+				| 'Anna Petrova'  |
+				| 'David Romanov' |
+			And I go to line in "" table
+				| 'Column1'      |
+				| 'Anna Petrova' |
+			And I select current line in "" table
+			And I move to "Main" tab
+			And I click "Search by barcode (F7)" button
+			And I input "2202283739" text in the field named "InputFld"
+			And I click the button named "OK"
+			And I click "Set sales person" button
+			And I go to line in "" table
+				| 'Column1'       |
+				| 'David Romanov' |
+			And I select current line in "" table
+		* Check 
+			And "ItemList" table became equal
+				| 'Item'  | 'Sales person'  | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+				| 'Shirt' | 'Anna Petrova'  | '38/Black' | ''        | '350,00' | '1,000'    | ''       | '350,00' |
+				| 'Dress' | 'David Romanov' | 'L/Green'  | ''        | '550,00' | '1,000'    | ''       | '550,00' |
+			And I close all client application windows
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

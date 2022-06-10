@@ -32,7 +32,7 @@ Function CreateTable_BatchWiseBalance()
 	Table.Columns.Add("Company", New TypeDescription("CatalogRef.Companies"));
 	Table.Columns.Add("Period", Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.StandardAttributes.Period.Type);
 	Table.Columns.Add("Quantity", Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.Resources.Quantity.Type);
-	Table.Columns.Add("Amount", Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.Resources.Quantity.Type);
+	Table.Columns.Add("Amount", Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.Resources.Amount.Type);
 	Return Table;
 EndFunction
 

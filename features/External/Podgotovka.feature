@@ -1395,6 +1395,18 @@ Scenario: add Additional Functionality extension
 	And I install the "AdditionalFunctionality" extension
 	Given I open new TestClient session or connect the existing one	
 
+Scenario: add VAExtension
+	Given I open hyperlink "e1cib/list/Catalog.Extensions"
+	And I click the button named "FormCreate"
+	And I select external file "C:/ForAgent/VAExtension.cfe"
+	And I click "Add file" button
+	And Delay 2
+	And I input "VAExtension" text in "Description" field
+	And I click the button named "FormWriteAndClose"
+	And I close TestClient session
+	And I install the "VAExtension" extension
+	Given I open new TestClient session or connect the existing one
+
 Scenario: create Workstation
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
 		And I click the button named "FormCreate"

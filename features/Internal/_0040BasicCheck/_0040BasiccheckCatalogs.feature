@@ -12,6 +12,13 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 	When set True value to the constant
 
+Scenario: preparation
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "VAExtension" |
+			When add VAExtension
 
 	
 Scenario: Open list form "AccessGroups" 
@@ -946,7 +953,7 @@ Scenario: Open object form "PartnersBankAccounts"
 
 
 Scenario: Open list form "CancelReturnReasons (Catalogs)" 
-
+	And I close all client application windows
 	Given I open "CancelReturnReasons" catalog default form
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form CancelReturnReasons" exception
@@ -972,3 +979,108 @@ Scenario: Open object form "PartnerItems"
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form PartnerItems" exception
 	And I close current window
+
+Scenario: Open choise form "SpecialOffers"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.SpecialOffers.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PartnerItems" exception
+	And I close current window
+
+Scenario: Open choise form "AddAttributeAndPropertySets"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.AddAttributeAndPropertySets.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form AddAttributeAndPropertySets" exception
+	And I close current window
+
+Scenario: Open choise form "IdInfoSets"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.IdInfoSets.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form IdInfoSets" exception
+	And I close current window
+
+Scenario: Open choise form "ObjectStatuses"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.ObjectStatuses.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form ObjectStatuses" exception
+	And I close current window
+
+Scenario: Open choise form "ItemTypes"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.ItemTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form ItemTypes" exception
+	And I close current window
+
+Scenario: Open choise form "TaxAnalytics"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.TaxAnalytics.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form TaxAnalytics" exception
+	And I close current window
+
+Scenario: Open choise form "WorkStations"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.WorkStations.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form WorkStations" exception
+	And I close current window
+
+Scenario: Open choise form "Currencies"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.Currencies.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form Currencies" exception
+	And I close current window
+
+Scenario: Open choise form "CurrencyMovementSets"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.CurrencyMovementSets.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form CurrencyMovementSets" exception
+	And I close current window
+
+Scenario: Open choise form "UnitsOfMeasurement"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.UnitsOfMeasurement.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form UnitsOfMeasurement" exception
+	And I close current window
+
+Scenario: Open choise form "AccountingOperations"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.AccountingOperations.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form AccountingOperations" exception
+	And I close current window
+
+Scenario: Open choise form "LedgerTypes"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.LedgerTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form LedgerTypes" exception
+	And I close current window
+
+Scenario: Open choise form "IdInfoAddresses"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.IdInfoAddresses.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form IdInfoAddresses" exception
+	And I close current window
+

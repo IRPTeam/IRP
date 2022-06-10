@@ -137,13 +137,8 @@ EndProcedure
 
 #Region SERIAL_LOT_NUMBERS
 &AtClient
-Procedure ItemListSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
-	FormParameters = New Structure();
-	FormParameters.Insert("ItemType", Undefined);
-	FormParameters.Insert("Item", Items.ItemList.CurrentData.Item);
-	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
-
-	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
+Procedure ItemListSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing) Export
+	SerialLotNumberClient.StartChoiceSingle(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -154,6 +149,20 @@ Procedure ItemListSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
 	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
 
 	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure SerialLotNumbersSerialLotNumberCreating(Item, StandardProcessing)
+	
+	StandardProcessing = False;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item", Items.ItemList.CurrentData.Item);
+	FormParameters.Insert("ItemKey", Items.ItemList.CurrentData.ItemKey);
+	FormParameters.Insert("Description", Item.EditText);
+	
+	OpenForm("Catalog.SerialLotNumbers.ObjectForm", FormParameters, ThisObject);
 EndProcedure
 
 #EndRegion

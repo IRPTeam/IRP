@@ -3,6 +3,17 @@ Function RequestResultIsOk(RequestResult) Export
 	Return RequestResult.Success And RequestResult.StatusCode = OkStatusCode;
 EndFunction
 
+// Server response.
+// 
+// Parameters:
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Structure - Server response:
+// * Success - Boolean -
+// * Message - String -
+// * ResponseBody - String -
+// * StatusCode - Undefined -
 Function ServerResponse(AddInfo = Undefined) Export
 	ServerResponse = New Structure();
 	ServerResponse.Insert("Success", False);
@@ -26,6 +37,22 @@ EndFunction
 
 #If Not WebClient Then
 
+// Send request client server.
+// 
+// Parameters:
+//  ConnectionSetting - See IntegrationServerReuse.ConnectionSettingTemplate
+//  ResourceParameters - Undefined - Resource parameters
+//  RequestParameters - Undefined - Request parameters
+//  RequestBody - String - Request body
+//  EndPoint - Undefined - End point
+//  AddInfo - Structure - Add info
+// 
+// Returns:
+//  Structure - Send request client server:
+// * Success - Boolean -
+// * Message - String -
+// * ResponseBody - String -
+// * StatusCode - Number -
 Function SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint,
 	AddInfo = Undefined)
 

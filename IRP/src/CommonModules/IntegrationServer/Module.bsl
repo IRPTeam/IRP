@@ -1,3 +1,14 @@
+// Connection setting.
+// 
+// Parameters:
+//  IntegrationSettingName - String - Integration setting name
+//  AddInfo - Structure
+// 
+// Returns:
+//  Structure - Connection setting:
+// * Success - Boolean -
+// * Value - See ConnectionSettingTemplate
+// * Message - String -
 Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 	Result = New Structure("Success, Value, Message", False, Undefined, "");
 
@@ -21,6 +32,26 @@ Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+// Connection setting template.
+// 
+// Parameters:
+//  IntegrationType - EnumRef.IntegrationType - Integration type
+//  AddInfo - Structure - Add info
+// 
+// Returns:
+//  Structure - Connection setting template:
+// * IntegrationSettingsRef - CatalogRef.IntegrationSettings -
+// * QueryType - String -
+// * ResourceAddress - String -
+// * Ip - String -
+// * Port - Number -
+// * User - String -
+// * Password - String -
+// * Proxy - Undefined -
+// * TimeOut - Number -
+// * SecureConnection - Undefined -
+// * UseOSAuthentication - Boolean -
+// * Headers - Map -
 Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefined) Export
 	Return IntegrationServerReuse.ConnectionSettingTemplate(IntegrationType, AddInfo);
 EndFunction

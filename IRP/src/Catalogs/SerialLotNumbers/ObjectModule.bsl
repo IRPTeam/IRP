@@ -32,7 +32,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("SerialLotNumberOwner") Then
 		ThisObject.StockBalanceDetail = 
-			Catalogs.SerialLotNumbers.GetStockBalanceDetailByOwner(FillingData.SerialLotNumberOwner);
+			SerialLotNumbersServer.GetStockBalanceDetailByOwner(FillingData.SerialLotNumberOwner);
 	EndIf;
 EndProcedure
 

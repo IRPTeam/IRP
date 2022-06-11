@@ -6734,7 +6734,7 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 			Filter = New Structure(SourceColumnsGroupBy);
 			FillPropertyValues(Filter, SourceRow);
 			For Each RowSN In SourceTableExpanded.FindRows(Filter) Do
-				If Not ValueIsFilled(RowSN) Then
+				If Not ValueIsFilled(RowSN.SerialLotNumber) Then
 					Continue;
 				EndIf;
 				NewRowSN = New Structure(Parameters.ObjectMetadataInfo.Tables.SerialLotNumbers.Columns);

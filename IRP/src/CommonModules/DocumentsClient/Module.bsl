@@ -1213,7 +1213,8 @@ Procedure ShowRowKey(Form) Export
 				|InventoryKey, AccountBalanceKey, AdvanceFromCustomersKey, AdvanceToSuppliersKey,
 				|AccountPayableByAgreementsKey, AccountPayableByDocumentsKey, VendorsPaymentTermsKey,
 				|AccountReceivableByAgreementsKey, AccountReceivableByDocumentsKey, CustomersPaymentTermsKey,
-				|SendUUID, ReceiveUUID";
+				|SendUUID, ReceiveUUID,
+				|ItemListUseSerialLotNumber";
 
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do

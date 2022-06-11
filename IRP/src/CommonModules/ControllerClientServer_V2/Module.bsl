@@ -4517,6 +4517,11 @@ Function GetItemListItemKey(Parameters, _Key)
 	Return GetPropertyObject(Parameters, BindItemListItemKey(Parameters).DataPath, _Key);
 EndFunction
 
+// ItemList.ItemKey.Get.IsChanged
+Function GetItemListItemKey_IsChanged(Parameters, _Key)
+	Return IsChangedProperty(Parameters, BindItemListItemKey(Parameters).DataPath).IsChanged;
+EndFunction
+
 // ItemList.ItemKey.Bind
 Function BindItemListItemKey(Parameters)
 	DataPath = "ItemList.ItemKey";
@@ -4649,7 +4654,9 @@ Function BindItemListItemKey(Parameters)
 
 	Binding.Insert("PhysicalCountByLocation", 
 			"StepChangeUnitByItemKey,
-			|StepChangeUseSerialLotNumberByItemKey");
+			|StepChangeUseSerialLotNumberByItemKey,
+			|StepClearSerialLotNumberByItemKey,
+			|StepClearBarcodeByItemKey");
 		
 	Binding.Insert("ItemStockAdjustment" , "StepChangeUnitByItemKey");
 	Binding.Insert("Bundling"            , "StepChangeUnitByItemKey");
@@ -5531,6 +5538,44 @@ Procedure FillCalculateDifferenceCount(Parameters, Chain) Export
 		Chain.CalculateDifferenceCountInItemList.Options.Add(Options);
 	EndDo;	
 EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_BARCODE
+
+// ItemList.Barcoder.Set
+Procedure SetItemListBarcode(Parameters, Results) Export
+	Binding = BindItemListBarcode(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.Barcode.Get
+Function GetItemListBarcode(Parameters, _Key)
+	Binding = BindItemListBarcode(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.Barcode.Bind
+Function BindItemListBarcode(Parameters)
+	DataPath = "ItemList.Barcode";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.Barcode.ClearBarcodeByItemKey.Step
+Procedure StepClearBarcodeByItemKey(Parameters, Chain) Export
+	Chain.ClearBarcodeByItemKey.Enable = True;
+	Chain.ClearBarcodeByItemKey.Setter = "SetItemListBarcode";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ClearBarcodeByItemKeyOptions();
+		Options.ItemKeyIsChanged  = GetItemListItemKey_IsChanged(Parameters, Row.Key);
+		Options.CurrentBarcode = GetItemListBarcode(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepBarcodeByItemKey";
+		Chain.ClearBarcodeByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
 #EndRegion
 
 #Region ITEM_LIST_SERIAL_LOT_NUMBER
@@ -5541,12 +5586,32 @@ Procedure SetItemListSerialLotNumber(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
+// ItemList.SerialLotNumber.Get
+Function GetItemListSerialLotNumber(Parameters, _Key)
+	Binding = BindItemListSerialLotNumber(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
 // ItemList.SerialLotNumber.Bind
 Function BindItemListSerialLotNumber(Parameters)
 	DataPath = "ItemList.SerialLotNumber";
 	Binding = New Structure();	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+// ItemList.SeriaLotNumber.ClearSerialLotNumberByItemKey.Step
+Procedure StepClearSerialLotNumberByItemKey(Parameters, Chain) Export
+	Chain.ClearSerialLotNumberByItemKey.Enable = True;
+	Chain.ClearSerialLotNumberByItemKey.Setter = "SetItemListSerialLotNumber";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ClearSerialLotNumberByItemKeyOptions();
+		Options.ItemKeyIsChanged  = GetItemListItemKey_IsChanged(Parameters, Row.Key);
+		Options.CurrentSerialLotNumber = GetItemListSerialLotNumber(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepClearSerialLotNumberByItemKey";
+		Chain.ClearSerialLotNumberByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 
@@ -6456,6 +6521,16 @@ Procedure PutToChangedData(Parameters, DataPath, OldValue, NewValue, _Key)
 	ChangedData.Insert("Key"     , _Key);
 	Parameters.ChangedData.Get(DataPath).Add(ChangedData);
 EndProcedure
+
+Function IsChangedProperty(Parameters, DataPath) Export
+	Result = New Structure("IsChanged, OldValue, NewValue", False, Undefined, Undefined);
+	Changes = Parameters.ChangedData.Get(DataPath);
+	If  Changes <> Undefined Then
+		Result.IsChanged = True;
+		Result.NewValue  = Changes[0].NewValue;
+	EndIf;
+	Return Result;
+EndFunction
 
 // sets properties on the passed DataPath, such as ItemList.PriceType or Company
 Function SetProperty(Cache, DataPath, _Key, _Value)

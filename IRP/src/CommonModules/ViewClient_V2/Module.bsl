@@ -655,13 +655,7 @@ Procedure RemoveFromCacheTaxRates(Parameters)
 EndProcedure
 
 Function IsChangedProperty(Parameters, DataPath)
-	Result = New Structure("IsChanged, OldValue, NewValue", False, Undefined, Undefined);
-	Changes = Parameters.ChangedData.Get(DataPath);
-	If  Changes <> Undefined Then
-		Result.IsChanged = True;
-		Result.NewValue  = Changes[0].NewValue;
-	EndIf;
-	Return Result;
+	Return	ControllerClientServer_V2.IsChangedProperty(Parameters, DataPath);
 EndFunction
 
 Procedure RemoveFromCache(DataPaths, Parameters)

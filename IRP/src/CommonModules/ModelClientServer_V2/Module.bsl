@@ -175,6 +175,8 @@ Function GetChain()
 
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
 	Chain.Insert("ChangeUseSerialLotNumberByItemKey", GetChainLink("ChangeUseSerialLotNumberByItemKeyExecute"));
+	Chain.Insert("ClearSerialLotNumberByItemKey"    , GetChainLink("ClearSerialLotNumberByItemKeyExecute"));
+	Chain.Insert("ClearBarcodeByItemKey"            , GetChainLink("ClearBarcodeByItemKeyExecute"));
 	
 	Chain.Insert("ChangePriceByPriceType"        , GetChainLink("ChangePriceByPriceTypeExecute"));
 	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
@@ -247,6 +249,38 @@ Function ChangeUnitByItemKeyExecute(Options) Export
 	EndIf;
 	UnitInfo = GetItemInfo.ItemUnitInfo(Options.ItemKey);
 	Return UnitInfo.Unit;
+EndFunction
+
+#EndRegion
+
+#Region CLEAR_BARCODE_BY_ITEMKEY
+
+Function ClearBarcodeByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKeyIsChanged, CurrentBarcode");
+EndFunction
+
+Function ClearBarcodeByItemKeyExecute(Options) Export
+	If Options.ItemKeyIsChanged Then
+		Return Undefined;
+	Else
+		Return Options.CurrentBarcode;
+	EndIf;
+EndFunction
+
+#EndRegion
+
+#Region CLEAR_SERIAL_LOT_NUMBER_BY_ITEMKEY
+
+Function ClearSerialLotNumberByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKeyIsChanged, CurrentSerialLotNumber");
+EndFunction
+
+Function ClearSerialLotNumberByItemKeyExecute(Options) Export
+	If Options.ItemKeyIsChanged Then
+		Return Undefined;
+	Else
+		Return Options.CurrentSerialLotNumber;
+	EndIf;
 EndFunction
 
 #EndRegion

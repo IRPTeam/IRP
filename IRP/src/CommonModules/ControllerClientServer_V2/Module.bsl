@@ -4519,7 +4519,7 @@ EndFunction
 
 // ItemList.ItemKey.Get.IsChanged
 Function GetItemListItemKey_IsChanged(Parameters, _Key)
-	Return IsChangedProperty(Parameters, BindItemListItemKey(Parameters).DataPath).IsChanged;
+	Return IsChangedProperty(Parameters, BindItemListItemKey(Parameters).DataPath, _Key).IsChanged;
 EndFunction
 
 // ItemList.ItemKey.Bind
@@ -6523,12 +6523,21 @@ Procedure PutToChangedData(Parameters, DataPath, OldValue, NewValue, _Key)
 	Parameters.ChangedData.Get(DataPath).Add(ChangedData);
 EndProcedure
 
-Function IsChangedProperty(Parameters, DataPath) Export
+Function IsChangedProperty(Parameters, DataPath, _Key = Undefined) Export
 	Result = New Structure("IsChanged, OldValue, NewValue", False, Undefined, Undefined);
 	Changes = Parameters.ChangedData.Get(DataPath);
 	If  Changes <> Undefined Then
-		Result.IsChanged = True;
-		Result.NewValue  = Changes[0].NewValue;
+		If _Key = Undefined Then
+			Result.IsChanged = True;
+			Result.NewValue  = Changes[0].NewValue;
+		Else
+			For Each Row In Changes Do
+				If Row.Key = _Key Then
+					Result.IsChanged = True;
+					Result.NewValue  = Row.NewValue;
+				EndIf;
+			EndDo;
+		EndIf;
 	EndIf;
 	Return Result;
 EndFunction

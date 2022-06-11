@@ -64,7 +64,7 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Return;
+	Form.Items.ItemListSerialLotNumber.Visible = Object.UseSerialLot;
 EndProcedure
 
 #EndRegion
@@ -85,8 +85,7 @@ Procedure UseSerialLotOnChange(Item)
 	If Object.ItemList.Count() Then
 		Object.UseSerialLot = Not Object.UseSerialLot;
 	EndIf;
-	
-	DocPhysicalInventoryClient.UseSerialLotOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion

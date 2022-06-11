@@ -4650,7 +4650,8 @@ Function BindItemListItemKey(Parameters)
 	
 	Binding.Insert("PhysicalInventory", 
 			"StepChangeUnitByItemKey,
-			|StepExtractDataItemKeysWithSerialLotNumbers");
+			|StepChangeUseSerialLotNumberByItemKey,
+			|StepClearSerialLotNumberByItemKey");
 
 	Binding.Insert("PhysicalCountByLocation", 
 			"StepChangeUnitByItemKey,

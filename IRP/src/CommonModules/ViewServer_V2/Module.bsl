@@ -2,7 +2,7 @@
 Procedure OnCreateAtServer(Object, Form, TableNames) Export
 	ArrayOfNewAttribute = New Array();
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, "CacheBeforeChange") Then
-		ArrayOfNewAttribute.Add(New FormAttribute("CacheBeforeChange", New TypeDescription("String")));
+		ArrayOfNewAttribute.Add(New FormAttribute("CacheBeforeChange", New TypeDescription()));
 	EndIf;
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, "IsCopyingInteractive") Then
 		ArrayOfNewAttribute.Add(New FormAttribute("IsCopyingInteractive", New TypeDescription("Boolean")));

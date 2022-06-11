@@ -33,28 +33,28 @@ Function GetParameters(ServerParameters, FormParameters = Undefined, LoadParamet
 	Return ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters, LoadParameters);
 EndFunction
 
-Procedure ExtractValueBeforeChange_Object(DataPath, FormParameters)
+Procedure FetchFromCacheBeforeChange_Object(DataPath, FormParameters)
 	FormParameters.PropertyBeforeChange.Object.DataPath = DataPath;
-	ExtractValueBeforeChange(FormParameters, Undefined);
+	FetchFromCacheBeforeChange(FormParameters, Undefined);
 EndProcedure
 
-Procedure ExtractValueBeforeChange_Form(DataPath, FormParameters)
+Procedure FetchFromCacheBeforeChange_Form(DataPath, FormParameters)
 	FormParameters.PropertyBeforeChange.Form.DataPath = DataPath;
-	ExtractValueBeforeChange(FormParameters, Undefined);
+	FetchFromCacheBeforeChange(FormParameters, Undefined);
 EndProcedure
 
-Procedure ExtractValueBeforeChange_List(DataPath, FormParameters, Rows)
+Procedure FetchFromCacheBeforeChange_List(DataPath, FormParameters, Rows)
 	FormParameters.PropertyBeforeChange.List.DataPath = DataPath;
-	ExtractValueBeforeChange(FormParameters, Rows);
+	FetchFromCacheBeforeChange(FormParameters, Rows);
 EndProcedure
 
-Procedure ExtractValueBeforeChange(FormParameters, Rows)
+Procedure FetchFromCacheBeforeChange(FormParameters, Rows)
 
 	If ValueIsFilled(FormParameters.PropertyBeforeChange.Object.DataPath) 
 		Or ValueIsFilled(FormParameters.PropertyBeforeChange.Form.DataPath)
 		Or ValueIsFilled(FormParameters.PropertyBeforeChange.List.DataPath) Then
 		
-		CacheBeforeChange = CommonFunctionsServer.DeserializeXMLUseXDTO(FormParameters.Form.CacheBeforeChange);
+		CacheBeforeChange = FormParameters.Form.CacheBeforeChange;
 		
 		If ValueIsFilled(FormParameters.PropertyBeforeChange.Object.DataPath) Then
 			FormParameters.PropertyBeforeChange.Object.Value = 
@@ -162,7 +162,7 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 	CacheBeforeChange.Insert("CacheObject", CacheObject);
 	CacheBeforeChange.Insert("CacheForm"  , CacheForm);
 	CacheBeforeChange.Insert("CacheList"  , CacheList);
-	Form.CacheBeforeChange = CommonFunctionsServer.SerializeXMLUseXDTO(CacheBeforeChange);
+	Form.CacheBeforeChange = CacheBeforeChange;	
 EndProcedure
 
 // returns list of Object attributes for get value before the change
@@ -184,7 +184,7 @@ EndFunction
 
 // returns list of Table attributes for get value before the change
 Function GetListPropertyNamesBeforeChange()
-	Return "ItemList.Store, ItemList.DeliveryDate";
+	Return "ItemList.Store, ItemList.DeliveryDate, ItemList.ItemKey";
 EndFunction
 
 // returns list of Form attributes for get value before the change
@@ -950,7 +950,14 @@ EndProcedure
 // ItemList.ItemKey
 Procedure ItemListItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_List("ItemList.ItemKey", FormParameters, Rows);
+	
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "ItemList";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
 	ControllerClientServer_V2.ItemListItemKeyOnChange(Parameters);
 EndProcedure
 
@@ -1140,7 +1147,7 @@ Procedure ItemListStoreOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_List("ItemList.Store", FormParameters, Rows);
+	FetchFromCacheBeforeChange_List("ItemList.Store", FormParameters, Rows);
 	FormParameters.EventCaller = "ItemListStoreOnUserChange";
 
 	ServerParameters = GetServerParameters(Object);
@@ -1160,7 +1167,7 @@ Procedure ItemListDeliveryDateOnChange(Object, Form, CurrentData = Undefined) Ex
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_List("ItemList.DeliveryDate", FormParameters, Rows);
+	FetchFromCacheBeforeChange_List("ItemList.DeliveryDate", FormParameters, Rows);
 	FormParameters.EventCaller = "ItemListDeliveryDateOnUserChange";
 
 	ServerParameters = GetServerParameters(Object);
@@ -1513,7 +1520,7 @@ EndProcedure
 
 Procedure AccountSenderOnChange(Object, Form) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("Sender", FormParameters);
+	FetchFromCacheBeforeChange_Object("Sender", FormParameters);
 	ServerParameters = GetServerParameters(Object);
 	Parameters = GetParameters(ServerParameters, FormParameters);
 	ControllerClientServer_V2.AccountSenderOnChange(Parameters);
@@ -1570,7 +1577,7 @@ EndProcedure
 
 Procedure AccountReceiverOnChange(Object, Form) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("Sender", FormParameters);
+	FetchFromCacheBeforeChange_Object("Sender", FormParameters);
 	ServerParameters = GetServerParameters(Object);
 	Parameters = GetParameters(ServerParameters, FormParameters);
 	ControllerClientServer_V2.AccountReceiverOnChange(Parameters);
@@ -1627,7 +1634,7 @@ EndProcedure
 
 Procedure CashTransferOrderOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("CashTransferOrder", FormParameters);
+	FetchFromCacheBeforeChange_Object("CashTransferOrder", FormParameters);
 	FormParameters.EventCaller = "CashTransferOrderOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
@@ -1651,7 +1658,7 @@ EndProcedure
 
 Procedure StoreObjectAttrOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("Store", FormParameters);
+	FetchFromCacheBeforeChange_Object("Store", FormParameters);
 	FormParameters.EventCaller = "StoreObjectAttrOnUserChange";
 
 	For Each TableName In StrSplit(TableNames, ",") Do
@@ -1671,7 +1678,7 @@ EndProcedure
 Procedure StoreOnChange(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do
 		FormParameters = GetFormParameters(Form);
-		ExtractValueBeforeChange_Form("Store", FormParameters);
+		FetchFromCacheBeforeChange_Form("Store", FormParameters);
 		FormParameters.EventCaller = "StoreOnUserChange";
 		
 		ServerParameters = GetServerParameters(Object);
@@ -1829,7 +1836,7 @@ EndProcedure
 Procedure DeliveryDateOnChange(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do
 		FormParameters = GetFormParameters(Form);
-		ExtractValueBeforeChange_Form("DeliveryDate", FormParameters);
+		FetchFromCacheBeforeChange_Form("DeliveryDate", FormParameters);
 		FormParameters.EventCaller = "DeliveryDateOnUserChange";
 		
 		ServerParameters = GetServerParameters(Object);
@@ -1865,7 +1872,7 @@ EndProcedure
 
 Procedure DateOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("Date", FormParameters);
+	FetchFromCacheBeforeChange_Object("Date", FormParameters);
 	FormParameters.EventCaller = "DateOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
@@ -1878,7 +1885,7 @@ EndProcedure
 Procedure SetDate(Object, Form, TableNames, Value) Export
 	Object.Date = Value;
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("Date", FormParameters);
+	FetchFromCacheBeforeChange_Object("Date", FormParameters);
 	FormParameters.EventCaller = "DateOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
@@ -1894,7 +1901,7 @@ EndProcedure
 
 Procedure CompanyOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("Company", FormParameters);
+	FetchFromCacheBeforeChange_Object("Company", FormParameters);
 	FormParameters.EventCaller = "CompanyOnUserChange";
 
 	For Each TableName In StrSplit(TableNames, ",") Do
@@ -1915,7 +1922,7 @@ EndProcedure
 
 Procedure AccountOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("Account", FormParameters);
+	FetchFromCacheBeforeChange_Object("Account", FormParameters);
 	FormParameters.EventCaller = "AccountOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
@@ -1943,7 +1950,7 @@ EndProcedure
 
 Procedure CashAccountOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("CashAccount", FormParameters);
+	FetchFromCacheBeforeChange_Object("CashAccount", FormParameters);
 	FormParameters.EventCaller = "AccountOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
@@ -1963,7 +1970,7 @@ EndProcedure
 
 Procedure TransactionTypeOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("TransactionType", FormParameters);
+	FetchFromCacheBeforeChange_Object("TransactionType", FormParameters);
 	FormParameters.EventCaller = "TransactionTypeOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
@@ -1989,7 +1996,7 @@ EndProcedure
 
 Procedure CurrencyOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("Currency", FormParameters);
+	FetchFromCacheBeforeChange_Object("Currency", FormParameters);
 	FormParameters.EventCaller = "CurrencyOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
@@ -2009,7 +2016,7 @@ EndProcedure
 
 Procedure PartnerOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("Partner", FormParameters);
+	FetchFromCacheBeforeChange_Object("Partner", FormParameters);
 	FormParameters.EventCaller = "PartnerOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
@@ -2091,7 +2098,7 @@ EndProcedure
 
 Procedure AgreementOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("Agreement", FormParameters);
+	FetchFromCacheBeforeChange_Object("Agreement", FormParameters);
 	FormParameters.EventCaller = "AgreementOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
@@ -2111,7 +2118,7 @@ EndProcedure
 
 Procedure RetailCustomerOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_Object("RetailCustomer", FormParameters);
+	FetchFromCacheBeforeChange_Object("RetailCustomer", FormParameters);
 	FormParameters.EventCaller = "RetailCustomerOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);

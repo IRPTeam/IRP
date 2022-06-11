@@ -792,7 +792,7 @@ EndFunction
 
 // Account.OnChange
 Procedure AccountOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetAccountNotify", Parameters);
 	Binding = BindAccount(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -891,7 +891,7 @@ EndProcedure
 
 // AccountSender.OnChange
 Procedure AccountSenderOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetAccountSenderNotify", Parameters);
 	Binding = BindAccountSender(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -933,7 +933,7 @@ EndProcedure
 
 // AccountReceiver.OnChange
 Procedure AccountReceiverOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetAccountReceiverNotify", Parameters);
 	Binding = BindAccountReceiver(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -1081,7 +1081,7 @@ EndProcedure
 
 // TransactionType.OnChange
 Procedure TransactionTypeOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetTransactionTypeNotify", Parameters);
 	Binding = BindTransactionType(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -1268,7 +1268,7 @@ EndProcedure
 
 // Currency.OnChange
 Procedure CurrencyOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetCurrencyNotify", Parameters);
 	Binding = BindCurrency(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -1576,7 +1576,7 @@ EndFunction
 
 // CashTransferOrder.OnChange
 Procedure CashTransferOrderOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetCashTransferOrderNotify", Parameters);
 	Binding = BindCashTransferOrder(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -1647,7 +1647,7 @@ EndProcedure
 
 // Date.OnChange
 Procedure DateOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	Binding = BindDate(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -1784,7 +1784,7 @@ EndFunction
 
 // Company.OnChange
 Procedure CompanyOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetCompanyNotify", Parameters);
 	Binding = BindCompany(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -1948,7 +1948,7 @@ EndFunction
 
 // Partner.OnChange
 Procedure PartnerOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetPartnerNotify", Parameters);
 	Binding = BindPartner(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -2141,7 +2141,7 @@ EndFunction
 
 // RetailCustomer.OnChange
 Procedure RetailCustomerOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	Binding = BindRetailCustomer(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -2203,7 +2203,7 @@ EndProcedure
 
 // DeliveryDate.OnChange
 Procedure DeliveryDateOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Form(Parameters);
+	RollbackPropertyToValueBeforeChange_Form(Parameters);
 	AddViewNotify("OnSetDeliveryDateNotify", Parameters);
 	Binding = BindDeliveryDate(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -2289,7 +2289,7 @@ EndProcedure
 
 // StoreObjectAttr.OnChange
 Procedure StoreObjectAttrOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Form(Parameters);
+	RollbackPropertyToValueBeforeChange_Form(Parameters);
 	AddViewNotify("OnSetStoreObjectAttrNotify", Parameters);
 	Binding = BindStoreObjectAttr(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -2312,7 +2312,7 @@ EndFunction
 
 // Store.OnChange
 Procedure StoreOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Form(Parameters);
+	RollbackPropertyToValueBeforeChange_Form(Parameters);
 	AddViewNotify("OnSetStoreNotify", Parameters);
 	If ValueIsFilled(GetStore(Parameters)) Then
 		Binding = BindStore(Parameters);
@@ -2666,7 +2666,7 @@ EndProcedure
 
 // Agreement.OnChange
 Procedure AgreementOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_Object(Parameters);
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetPartnerNotify", Parameters);
 	Binding = BindAgreement(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -4519,7 +4519,8 @@ EndFunction
 
 // ItemList.ItemKey.Get.IsChanged
 Function GetItemListItemKey_IsChanged(Parameters, _Key)
-	Return IsChangedProperty(Parameters, BindItemListItemKey(Parameters).DataPath, _Key).IsChanged;
+	Return IsChangedProperty(Parameters, BindItemListItemKey(Parameters).DataPath, _Key).IsChanged
+		Or IsChangedPropertyDirectly_List(Parameters, _Key).IsChanged;
 EndFunction
 
 // ItemList.ItemKey.Bind
@@ -4816,7 +4817,7 @@ EndProcedure
 
 // ItemList.DeliveryDate.OnChange
 Procedure ItemListDeliveryDateOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_List(Parameters);
+	RollbackPropertyToValueBeforeChange_List(Parameters);
 	Binding = BindItemListDeliveryDate(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -4893,7 +4894,7 @@ EndProcedure
 
 // ItemList.Store.OnChange
 Procedure ItemListStoreOnChange(Parameters) Export
-	ProceedPropertyBeforeChange_List(Parameters);
+	RollbackPropertyToValueBeforeChange_List(Parameters);
 	Binding = BindItemListStore(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -6277,7 +6278,7 @@ Procedure _CommitChainChanges(Cache, Source)
 	EndDo;
 EndProcedure
 
-Procedure ProceedPropertyBeforeChange_Object(Parameters)
+Procedure RollbackPropertyToValueBeforeChange_Object(Parameters)
 	If Parameters.PropertyBeforeChange.Object.Value <> Undefined Then
 		DataPath          = Parameters.PropertyBeforeChange.Object.Value.DataPath;
 		ValueBeforeChange = Parameters.PropertyBeforeChange.Object.Value.ValueBeforeChange;
@@ -6287,7 +6288,7 @@ Procedure ProceedPropertyBeforeChange_Object(Parameters)
 	EndIf;
 EndProcedure
 
-Procedure ProceedPropertyBeforeChange_Form(Parameters)
+Procedure RollbackPropertyToValueBeforeChange_Form(Parameters)
 	If Parameters.PropertyBeforeChange.Form.Value <> Undefined Then
 		DataPath          = Parameters.PropertyBeforeChange.Form.Value.DataPath;
 		ValueBeforeChange = Parameters.PropertyBeforeChange.Form.Value.ValueBeforeChange;
@@ -6297,7 +6298,7 @@ Procedure ProceedPropertyBeforeChange_Form(Parameters)
 	EndIf;
 EndProcedure
 
-Procedure ProceedPropertyBeforeChange_List(Parameters)
+Procedure RollbackPropertyToValueBeforeChange_List(Parameters)
 	If Parameters.PropertyBeforeChange.List.Value = Undefined Then
 		Return;
 	EndIf;
@@ -6539,6 +6540,28 @@ Function IsChangedProperty(Parameters, DataPath, _Key = Undefined) Export
 			EndDo;
 		EndIf;
 	EndIf;
+	Return Result;
+EndFunction
+
+Function IsChangedPropertyDirectly_List(Parameters, _Key)
+	Result = New Structure("IsChanged, OldValue, NewValue", False, Undefined, Undefined);
+	If Parameters.PropertyBeforeChange.List.Value = Undefined Then
+		Return Result;
+	EndIf;
+	DataPath   = Parameters.PropertyBeforeChange.List.Value.DataPath;
+	ColumnName = Parameters.PropertyBeforeChange.List.Value.ColumnName;
+	ArrayOfValuesBeforeChange = Parameters.PropertyBeforeChange.List.Value.ArrayOfValuesBeforeChange;
+	OldValue = Undefined;
+	For Each Row In ArrayOfValuesBeforeChange Do
+		If Row.Key = _Key Then
+			OldValue = Row[ColumnName];
+			Break;
+		EndIf;
+	EndDo;
+	CurrentValue = GetPropertyObject(Parameters, DataPath, _Key);
+	Result.IsChanged = (CurrentValue <> OldValue);
+	Result.NewValue = CurrentValue;
+	Result.OldValue = OldValue;
 	Return Result;
 EndFunction
 

@@ -106,3 +106,6 @@ DocumentTables.Insert("DataSet"                 , False);
 DocumentTables.Insert("DataPrice"               , False);
 DocumentTables.Insert("AccountingRowAnalytics"  , False);
 DocumentTables.Insert("AccountingExtDimensions" , False);
+DocumentTables.Insert("CostList"                , False);
+DocumentTables.Insert("RevenueList"             , False);
+DocumentTables.Insert("AllocationList"          , False);

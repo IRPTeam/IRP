@@ -3,15 +3,15 @@
 	<item>
 		<selection>
 			<item>
-				<field>RevenueRowsCurrency</field>
+				<field>CostRowsCurrency</field>
 			</item>
 			<item>
-				<field>RevenueRowsAmount</field>
+				<field>CostRowsAmount</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">RevenueRows.Level</left>
+				<left xsi:type="dcscor:Field">CostRows.Level</left>
 				<comparisonType>Equal</comparisonType>
 				<right xsi:type="xs:decimal">1</right>
 			</item>

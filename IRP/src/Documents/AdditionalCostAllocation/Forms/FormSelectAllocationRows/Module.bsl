@@ -149,7 +149,9 @@ Procedure SaveRowsToResultTree(Document, RowsForSave)
 	If Not DocumentFound Then
 		Row_TopLevel = ThisObject.ResultTree.GetItems().Add();
 		Row_TopLevel.Level = 1;
+		Row_TopLevel.Icon = 1;
 		Row_TopLevel.Document = Document;
+		Row_TopLevel.Presentation = String(Document);
 	Else
 		Row_TopLevel.GetItems().Clear();
 	EndIf;
@@ -159,7 +161,9 @@ Procedure SaveRowsToResultTree(Document, RowsForSave)
 		EndIf;
 		NewRow_SecondLevel = Row_TopLevel.GetItems().Add();
 		NewRow_SecondLevel.Level = 2;
+		NewRow_SecondLevel.Icon = 0;
 		FillPropertyValues(NewRow_SecondLevel, Row);
+		NewRow_SecondLevel.Presentation = String(NewRow_SecondLevel.ItemKey.Item) + " ," + String(NewRow_SecondLevel.ItemKey);
 	EndDo;
 EndProcedure
 
@@ -173,6 +177,23 @@ Procedure ClearDocumentsWithOutRows();
 	EndDo;
 	For Each ItemForDelete In ArrayForDelete Do
 		ThisObject.ResultTree.GetItems().Delete(ItemForDelete);
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure CheckAll(Command)
+	SetCheck(True);	
+EndProcedure
+
+&AtClient
+Procedure UncheckAll(Command)
+	SetCheck(False);
+EndProcedure
+
+&AtClient
+Procedure SetCheck(Value)
+	For Each Row In ThisObject.DocumentRows Do
+		Row.Use = Value;
 	EndDo;
 EndProcedure
 

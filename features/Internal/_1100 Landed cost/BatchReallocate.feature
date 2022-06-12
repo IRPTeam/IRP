@@ -82,12 +82,13 @@ Scenario: _0050 preparation
 			| 'Main Company' |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
-		And I move to "External attributes" tab
-		And I click Select button of "Landed cost currency movement type" field
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
 			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
 			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
 		And I select current line in "List" table
+		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 		And I wait "Main Company (Company) *" window closing in 20 seconds
 		Then "Companies" window is opened
@@ -96,15 +97,13 @@ Scenario: _0050 preparation
 			| 'Second Company' |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
-		And I move to "External attributes" tab
-		And I click Select button of "Landed cost currency movement type" field
-		And I go to line in "List" table
-			| 'Currency' | 'Deferred calculation' | 'Description'        | 'Reference'          | 'Source'       | 'Type'      |
-			| 'USD'      | 'No'                   | 'Reporting currency' | 'Reporting currency' | 'Forex Seling' | 'Reporting' |
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
 			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
 			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
 		And I select current line in "List" table
+		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 		And I wait "Second Company (Company) *" window closing in 20 seconds
 	* Load documents

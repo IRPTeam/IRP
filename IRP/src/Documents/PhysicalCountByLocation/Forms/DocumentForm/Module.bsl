@@ -61,7 +61,7 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Return;
+	Form.Items.ItemListSerialLotNumber.Visible = Object.UseSerialLot;
 EndProcedure
 
 #EndRegion
@@ -82,8 +82,7 @@ Procedure UseSerialLotOnChange(Item)
 	If Object.ItemList.Count() Then
 		Object.UseSerialLot = Not Object.UseSerialLot;
 	EndIf;
-	
-	DocPhysicalCountByLocationClient.UseSerialLotOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -282,6 +281,11 @@ EndProcedure
 &AtClient
 Procedure OpenPickupItems(Command)
 	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
 #EndRegion

@@ -1066,6 +1066,7 @@
             <textEdit>true</textEdit>
             <choiceParameterLinks>
               <name>Filter.Item</name>
+              <changeMode>DontChange</changeMode>
               <datapath xsi:type="form:DataPath">
                 <segments>Items.ItemList.CurrentData.Item</segments>
               </datapath>
@@ -1227,6 +1228,7 @@
             <textEdit>true</textEdit>
             <choiceParameterLinks>
               <name>Filter.Item</name>
+              <changeMode>DontChange</changeMode>
               <datapath xsi:type="form:DataPath">
                 <segments>Items.ItemList.CurrentData.Item</segments>
               </datapath>
@@ -3873,23 +3875,6 @@
         <valueType>
           <types>String</types>
           <stringQualifiers/>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
-      </columns>
-      <columns>
-        <name>UseSerialLotNumber</name>
-        <title>
-          <key>en</key>
-          <value>Use serial lot number</value>
-        </title>
-        <id>17</id>
-        <valueType>
-          <types>Boolean</types>
         </valueType>
         <view>
           <common>true</common>

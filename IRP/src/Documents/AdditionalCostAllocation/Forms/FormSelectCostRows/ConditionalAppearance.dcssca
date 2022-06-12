@@ -3,12 +3,12 @@
 	<item>
 		<selection>
 			<item>
-				<field>RevenueRowsTreeUse</field>
+				<field>CostRowsTreeUse</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">RevenueRowsTree.Level</left>
+				<left xsi:type="dcscor:Field">CostRowsTree.Level</left>
 				<comparisonType>Equal</comparisonType>
 				<right xsi:type="xs:decimal">1</right>
 			</item>
@@ -28,15 +28,15 @@
 	<item>
 		<selection>
 			<item>
-				<field>RevenueRowsTreeCurrency</field>
+				<field>CostRowsTreeCurrency</field>
 			</item>
 			<item>
-				<field>RevenueRowsTreeAmount</field>
+				<field>CostRowsTreeAmount</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">RevenueRowsTree.Level</left>
+				<left xsi:type="dcscor:Field">CostRowsTree.Level</left>
 				<comparisonType>Equal</comparisonType>
 				<right xsi:type="xs:decimal">1</right>
 			</item>

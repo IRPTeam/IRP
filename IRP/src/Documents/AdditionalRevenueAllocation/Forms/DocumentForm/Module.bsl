@@ -15,6 +15,7 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocAdditionalRevenueAllocationServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
+		Object.AllocationMode = Enums.AllocationMode.ByRows;
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
@@ -90,6 +91,7 @@ Procedure RefreshRowsAllocationTreesAtClient()
 		Return;
 	EndIf;
 	RefreshRowsAllocationTreesAtServer();
+	UpdateAllocatedStatus();
 	
 	RowIDInfoClient.ExpandTree(Items.RevenueRows, ThisObject.RevenueRows.GetItems());
 	RowIDInfoClient.ExpandTree(Items.AllocationRows, ThisObject.AllocationRows.GetItems());
@@ -102,32 +104,55 @@ Procedure RefreshRowsAllocationTreesAtServer()
 	
 	BasisTable = Object.RevenueList.Unload();
 	BasisTable.GroupBy("Basis");
+	FooterTotalAmount = 0;
 	For Each RowBasis In BasisTable Do
 		NewRow_TopLevel = ThisObject.RevenueRows.GetItems().Add();
 		NewRow_TopLevel.Level = 1;
+		NewRow_TopLevel.Icon = 1;
 		NewRow_TopLevel.Document = RowBasis.Basis;
+		NewRow_TopLevel.Presentation = String(RowBasis.Basis);
+		TotalAmount = 0;
+		TotalCurrency = Undefined;
 		For Each RowDetail In Object.RevenueList.FindRows(New Structure("Basis", RowBasis.Basis)) Do
 			NewRow_SecondLevel = NewRow_TopLevel.GetItems().Add();
 			NewRow_SecondLevel.Level = 2;
+			NewRow_SecondLevel.Icon = 0;
 			FillPropertyValues(NewRow_SecondLevel, RowDetail);
+			NewRow_SecondLevel.Presentation = String(RowDetail.ItemKey.Item) + ", " + String(RowDetail.ItemKey);
+			TotalAmount = TotalAmount + NewRow_SecondLevel.Amount;
+			TotalCurrency = NewRow_SecondLevel.Currency;
+			FooterTotalAmount = FooterTotalAmount + NewRow_SecondLevel.Amount;
 		EndDo;
+		NewRow_TopLevel.Amount = TotalAmount;
+		NewRow_TopLevel.Currency = TotalCurrency;
 	EndDo;
+	Items.RevenueRowsAmount.FooterText = Format(FooterTotalAmount, "NFD=2;");
 	
 	// Allocation rows
 	ThisObject.AllocationRows.GetItems().Clear();
 	
 	BasisTable = Object.AllocationList.Unload();
 	BasisTable.GroupBy("Document");
+	FooterTotalAmount = 0;
 	For Each RowBasis In BasisTable Do
 		NewRow_TopLevel = ThisObject.AllocationRows.GetItems().Add();
 		NewRow_TopLevel.Level = 1;
+		NewRow_TopLevel.Icon = 1;
 		NewRow_TopLevel.Document = RowBasis.Document;
+		NewRow_TopLevel.Presentation = String(RowBasis.Document);
+		TotalAmount = 0;
 		For Each RowDetail In Object.AllocationList.FindRows(New Structure("Document", RowBasis.Document)) Do
 			NewRow_SecondLevel = NewRow_TopLevel.GetItems().Add();
 			NewRow_SecondLevel.Level = 2;
+			NewRow_SecondLevel.Icon = 0;
 			FillPropertyValues(NewRow_SecondLevel, RowDetail);
+			NewRow_SecondLevel.Presentation = String(NewRow_SecondLevel.ItemKey.Item) + ", " + String(NewRow_SecondLevel.ItemKey);
+			TotalAmount = TotalAmount + NewRow_SecondLevel.Amount;
+			FooterTotalAmount = FooterTotalAmount + NewRow_SecondLevel.Amount;
 		EndDo;
+		NewRow_TopLevel.Amount = TotalAmount;
 	EndDo;
+	Items.AllocationRowsAmount.FooterText = Format(FooterTotalAmount, "NFD=2;");
 EndProcedure
 
 &AtClient
@@ -215,7 +240,6 @@ EndProcedure
 
 &AtClient
 Procedure RevenueRowsOnActivateRow(Item)
-	ThisObject.TotalAllocationRows = 0;
 	CurrentData = Items.RevenueRows.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
@@ -223,21 +247,32 @@ Procedure RevenueRowsOnActivateRow(Item)
 	IsSecondLevel = CurrentData.Level = 2;
 	Items.AllocationRowsAdd.Enabled = IsSecondLevel;
 	
-	// Set visible
+	// Set visible and recalculate totals  amount
+	FooterTotalAmount = 0;
+	CurrentRowID = Undefined;
 	For Each Row_TopLevel In ThisObject.AllocationRows.GetItems() Do
+		TotalAmount = 0;
 		SecondLevelIsVisible = False;
 		For Each Row_SecondLevel In Row_TopLevel.GetItems() Do
 			If Row_SecondLevel.BasisRowID = CurrentData.RowID Then
 				SecondLevelIsVisible = True;
 				Row_SecondLevel.Visible = True;
-				ThisObject.TotalAllocationRows = ThisObject.TotalAllocationRows +
-				Row_SecondLevel.Amount;
+				TotalAmount = TotalAmount + Row_SecondLevel.Amount;
+				FooterTotalAmount = FooterTotalAmount + Row_SecondLevel.Amount;
 			Else
 				Row_SecondLevel.Visible = False;
 			EndIf;
 		EndDo;
 		Row_TopLevel.Visible = SecondLevelIsVisible;
+		Row_TopLevel.Amount = TotalAmount;
+		If CurrentRowID = Undefined And Row_TopLevel.Visible Then
+			CurrentRowID = Row_TopLevel.GetID();
+		EndIf;
 	EndDo;
+	If CurrentRowID <> Undefined Then
+		Items.AllocationRows.CurrentRow = CurrentRowID;
+	EndIf;
+	Items.AllocationRowsAmount.FooterText = Format(FooterTotalAmount, "NFD=2;");
 EndProcedure
 
 &AtClient
@@ -369,15 +404,51 @@ Procedure AllocateRevenueAmount(Command)
 		Return;
 	EndIf;
 	Result = AllocateRevenueAmountAtServer();
+	FooterTotalAmount = 0;
+	CurrentRowID = Undefined;
 	For Each Row_TopLevel In ThisObject.AllocationRows.GetItems() Do
+		If CurrentRowID = Undefined And Row_TopLevel.Visible Then
+			CurrentRowID = Row_TopLevel.GetID();
+		EndIf;
+		TotalAmount = 0;
 		For Each Row_SecondLevel In Row_TopLevel.GetItems() Do
 			For Each Row In Result.ArrayOfAllocatedAmounts Do
 				If Row_SecondLevel.BasisRowID = Row.BasisRowID
 				 	And Row_SecondLevel.RowID = Row.RowID Then
 						Row_SecondLevel.Amount = Row.Amount;
+						TotalAmount = TotalAmount + Row.Amount;
+						FooterTotalAmount = FooterTotalAmount + Row.Amount;
 					Break;
 				EndIf;
 			EndDo;
+		EndDo; // Second level
+		Row_TopLevel.Amount = TotalAmount;
+	EndDo; // Top level
+	If CurrentRowID <> Undefined Then
+		Items.AllocationRows.CurrentRow = CurrentRowID;
+	EndIf;
+	Items.AllocationRowsAmount.FooterText = Format(FooterTotalAmount, "NFD=2;");
+	UpdateAllocatedStatus();
+EndProcedure
+
+&AtClient
+Procedure UpdateAllocatedStatus()
+	For Each Rowlv1 In ThisObject.RevenueRows.GetItems() Do
+		For Each Rowlv2 In Rowlv1.GetItems() Do
+			
+			AmountByRows = 0;
+			For Each RowAlloclv1 In ThisObject.AllocationRows.GetItems() Do
+				For Each RowAlloclv2 In RowAlloclv1.GetItems() Do
+					If Rowlv2.RowID = RowAlloclv2.BasisRowID Then
+						AmountByRows = AmountByRows + RowAlloclv2.Amount;
+					EndIf;
+				EndDo;	
+			EndDo;
+			
+			If AmountByRows = Rowlv2.Amount Then
+				Rowlv2.Icon = 2;
+			EndIf;
+			
 		EndDo;
 	EndDo;
 EndProcedure
@@ -572,6 +643,11 @@ EndProcedure
 &AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);	
 EndProcedure
 
 #Region ItemCompany

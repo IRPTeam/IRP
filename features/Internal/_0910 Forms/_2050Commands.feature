@@ -14,6 +14,7 @@ Background:
 	
 Scenario: _0205001 preparation (commands)
 	When set True value to the constant
+	And I set "True" value to the constant "UseAccounting"
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -196,6 +197,12 @@ Scenario: _0205001 preparation (commands)
 			And I input "Document.GoodReceipt1" text in "Object full name" field	
 			And I click "Save and close" button
 	When auto filling Configuration metadata catalog
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "VAExtension" |
+			When add VAExtension
 
 Scenario: _0205002 add test command to the list of documents Sales return
 	* Open Command register
@@ -277,6 +284,12 @@ Scenario: _0205002 add test command to the list of documents Sales return
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.SalesReturn.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205003 add test command to the list of documents Sales invoice
@@ -358,6 +371,12 @@ Scenario: _0205003 add test command to the list of documents Sales invoice
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.SalesInvoice.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205004 add test command to the list of documents Purchase order
@@ -439,6 +458,12 @@ Scenario: _0205004 add test command to the list of documents Purchase order
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.PurchaseOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205005 add test command to the list of documents Sales order
@@ -521,6 +546,12 @@ Scenario: _0205005 add test command to the list of documents Sales order
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.SalesOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205006 add test command to the list of documents Purchase invoice
@@ -603,6 +634,12 @@ Scenario: _0205006 add test command to the list of documents Purchase invoice
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.PurchaseInvoice.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -686,6 +723,12 @@ Scenario: _0205007 add test command to the list of documents Cash transfer order
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.CashTransferOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -769,6 +812,12 @@ Scenario: _0205008 add test command to the list of documents Shipment confirmati
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.ShipmentConfirmation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -851,6 +900,12 @@ Scenario: _0205009 add test command to the list of documents Goods receipt
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.GoodsReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205010 add test command to the list of documents Sales return order
@@ -933,6 +988,12 @@ Scenario: _0205010 add test command to the list of documents Sales return order
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.SalesReturnOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -1016,6 +1077,12 @@ Scenario: _0205011 add test command to the list of documents Purchase return ord
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.PurchaseReturnOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205012 add test command to the list of documents ReconciliationStatement
@@ -1098,6 +1165,12 @@ Scenario: _0205012 add test command to the list of documents ReconciliationState
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.ReconciliationStatement.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -1181,6 +1254,12 @@ Scenario: _0205013 add test command to the list of documents BankPayment
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.BankPayment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205014 add test command to the list of documents BankReceipt
@@ -1263,6 +1342,12 @@ Scenario: _0205014 add test command to the list of documents BankReceipt
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.BankReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -1346,6 +1431,12 @@ Scenario: _0205016 add test command to the list of documents Bundling
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.Bundling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205017 add test command to the list of documents CashExpense
@@ -1428,6 +1519,12 @@ Scenario: _0205017 add test command to the list of documents CashExpense
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.CashExpense.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -1511,6 +1608,12 @@ Scenario: _0205018 add test command to the list of documents CashPayment
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.CashPayment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205019 add test command to the list of documents Cash Receipt
@@ -1593,6 +1696,12 @@ Scenario: _0205019 add test command to the list of documents Cash Receipt
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.CashReceipt.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205020 add test command to the list of documents Cash Revenue
@@ -1675,6 +1784,12 @@ Scenario: _0205020 add test command to the list of documents Cash Revenue
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.CashRevenue.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -1760,6 +1875,12 @@ Scenario: _0205023 add test command to the list of documents Credit Note
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.CreditNote.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -1844,6 +1965,12 @@ Scenario: _0205041 add test command to the list of documents Dedit Note
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.DebitNote.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205024 add test command to the list of documents Incoming Payment Order
@@ -1926,6 +2053,12 @@ Scenario: _0205024 add test command to the list of documents Incoming Payment Or
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.IncomingPaymentOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205025 add test command to the list of documents Internal Supply Request
@@ -2008,6 +2141,12 @@ Scenario: _0205025 add test command to the list of documents Internal Supply Req
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.InternalSupplyRequest.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205026 add test command to the list of documents Inventory Transfer
@@ -2090,6 +2229,12 @@ Scenario: _0205026 add test command to the list of documents Inventory Transfer
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.InventoryTransfer.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205027 add test command to the list of documents Inventory Transfer Order
@@ -2172,6 +2317,12 @@ Scenario: _0205027 add test command to the list of documents Inventory Transfer 
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.InventoryTransferOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -2256,6 +2407,12 @@ Scenario: _0205029 add test command to the list of documents Labeling
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.Labeling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205030 add test command to the list of documents Opening Entry
@@ -2338,6 +2495,12 @@ Scenario: _0205030 add test command to the list of documents Opening Entry
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.OpeningEntry.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -2421,6 +2584,12 @@ Scenario: _0205031 add test command to the list of documents Outgoing Payment Or
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.OutgoingPaymentOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205032 add test command to the list of documents Physical Count By Location
@@ -2503,6 +2672,12 @@ Scenario: _0205032 add test command to the list of documents Physical Count By L
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.PhysicalCountByLocation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205033 add test command to the list of documents Price List
@@ -2669,6 +2844,12 @@ Scenario: _0205035 add test command to the list of documents PurchaseReturn
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.PurchaseReturn.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -2753,6 +2934,12 @@ Scenario: _0205037 add test command to the list of documents Unbundling
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.Unbundling.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205038 add test command to the list of documents Stock Adjustment As Write Off
@@ -2834,6 +3021,12 @@ Scenario: _0205038 add test command to the list of documents Stock Adjustment As
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.StockAdjustmentAsWriteOff.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205039 add test command to the list of documents Stock Adjustment As Surplus
@@ -2916,6 +3109,12 @@ Scenario: _0205039 add test command to the list of documents Stock Adjustment As
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.StockAdjustmentAsSurplus.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 Scenario: _0205040 add test command to the list of documents Physical Inventory
@@ -2998,6 +3197,12 @@ Scenario: _0205040 add test command to the list of documents Physical Inventory
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.PhysicalInventory.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -3081,6 +3286,12 @@ Scenario: _0205041 add test command to the list of documents Sales order closing
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.SalesOrderClosing.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -3164,6 +3375,12 @@ Scenario: _0205042 add test command to the list of documents Planned receipt res
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.PlannedReceiptReservation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
 
@@ -3282,7 +3499,195 @@ Scenario: _010026 add test command to the list of documents Money transfer
 			And I select current line in "List" table
 			And I select "Choice form" exact value from "Form type" drop-down list
 			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.MoneyTransfer.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows				
+
+
+Scenario: _010027 add test command to the list of documents Journal entry
+	And I close all client application windows
+	* Open Command register
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+	* Filling test command data for  JournalEntry
+		* Create metadata for JournalEntry and select it for the command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Journal entry'  |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			Then "Plugins" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "List form" exact value from "Form type" drop-down list
+	* Save command
+		And I click "Save and close" button
+	* Check command save
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
+		| 'Configuration metadata'  | 'Plugins' |
+		| 'Journal entry'             | 'Test command'       |
+	* Check the command from the document list JournalEntry
+		Given I open hyperlink "e1cib/list/Document.JournalEntry"
+		And I go to the last line in "List" table
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+	* Check that the command is not displayed in the document
+		And I click "Create" button
+		When I Check the steps for Exception
+			|'And I click "Test command" button'|
+		And I close all client application windows
+	* Connect a command to a document form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Journal entry' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Object form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+	* Check that the command is displayed in the document
+		Given I open hyperlink "e1cib/list/Document.JournalEntry"
+		And I click "Create" button
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+	* Connect the command to the document selection form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Journal entry' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Choice form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.JournalEntry.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows	
+
+
+Scenario: _010028 add test command to the list of documents Item stock adjustment
+	And I close all client application windows
+	* Open Command register
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+	* Filling test command data for  Item stock adjustment
+		* Create metadata for Item stock adjustment and select it for the command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Item stock adjustment'  |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			Then "Plugins" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "List form" exact value from "Form type" drop-down list
+	* Save command
+		And I click "Save and close" button
+	* Check command save
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
+		| 'Configuration metadata'            | 'Plugins' |
+		| 'Item stock adjustment'             | 'Test command'       |
+	* Check the command from the document list Item stock adjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I go to the last line in "List" table
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+	* Check that the command is not displayed in the document
+		And I click "Create" button
+		When I Check the steps for Exception
+			|'And I click "Test command" button'|
+		And I close all client application windows
+	* Connect a command to a document form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Item stock adjustment' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Object form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+	* Check that the command is displayed in the document
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I click "Create" button
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+	* Connect the command to the document selection form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Item stock adjustment' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Choice form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.ItemStockAdjustment.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows	
+		And I execute the built-in language code (Extension)
+				| 'OpenForm("Catalog.ObjectStatuses.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
 
 # Scenario: _010020 check the operation of Quantity Compare plugin (comparison of the plan / fact in Goods receipt)
 # 	* Add Command

@@ -197,6 +197,12 @@ Scenario: _0205001 preparation (commands)
 			And I input "Document.GoodReceipt1" text in "Object full name" field	
 			And I click "Save and close" button
 	When auto filling Configuration metadata catalog
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "VAExtension" |
+			When add VAExtension
 
 Scenario: _0205002 add test command to the list of documents Sales return
 	* Open Command register

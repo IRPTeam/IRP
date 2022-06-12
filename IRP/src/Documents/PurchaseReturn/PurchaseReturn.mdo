@@ -652,6 +652,20 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="91a3f60a-9252-4c51-b085-e04b0d937f8b">
+      <name>UseSerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Use serial lot number</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="1d898fed-9ccf-41c7-8b18-f57fb34706f0">
     <producedTypes>

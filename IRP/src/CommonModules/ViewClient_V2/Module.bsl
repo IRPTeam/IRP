@@ -761,27 +761,9 @@ Procedure OnOpen(Object, Form, TableNames) Export
 EndProcedure
 
 Procedure OnOpenFormNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
-			
-			ServerData = Undefined;
-			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
-				ServerData = New Structure("ServerData", New Structure());
-				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
-			EndIf;
-			
-			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object, ServerData);
-			SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
-			
+	If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
+		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
+		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);	
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
@@ -856,17 +838,8 @@ Procedure ItemListAfterDeleteRow(Object, Form) Export
 EndProcedure
 
 Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
+	
+	If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
@@ -971,25 +944,10 @@ Procedure SetItemListItemKey(Object, Form, Row, Value) Export
 EndProcedure
 
 Procedure OnSetItemListItemKey(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
-			ServerData = Undefined;
-			If Parameters.ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
-				ServerData = New Structure("ServerData", New Structure());
-				ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", Parameters.ExtractedData.ItemKeysWithSerialLotNumbers);
-				ServerData.ServerData.Insert("Rows", Parameters.Rows);
-			EndIf;
-				
-			SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form, ServerData);
+	If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
+		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
+		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
+		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 EndProcedure
 
@@ -1215,16 +1173,7 @@ EndProcedure
 
 Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	// Update -> SrialLotNubersTree
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
-		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
+	If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 	
@@ -1716,24 +1665,9 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 			OnSetStoreNotify(Parameters);
 		EndIf;
 		
-		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
-				
-				ServerData = Undefined;
-				If ExtractedData.Property("ItemKeysWithSerialLotNumbers") Then
-					ServerData = New Structure("ServerData", New Structure());
-					ServerData.ServerData.Insert("ItemKeysWithSerialLotNumbers", ExtractedData.ItemKeysWithSerialLotNumbers);
-				EndIf;
-				
-				SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
-				SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+		If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
+			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
+			SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 		EndIf;
 		
 		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"

@@ -7,7 +7,7 @@ EndProcedure
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
 	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);
 	DocumentsClient.FillDeliveryDates(Object, Form);
-	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "ShipmentConfirmations");
 	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "ShipmentConfirmations", "ShipmentConfirmationsTree",
 		"QuantityInShipmentConfirmation");

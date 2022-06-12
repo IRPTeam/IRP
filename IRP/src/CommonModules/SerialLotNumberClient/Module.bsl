@@ -5,8 +5,8 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 		Return;
 	EndIf;
 
-	Notify = New NotifyDescription("OnFinishEditSerialLotNumbers", ThisObject, New Structure("Object, Form, AddInfo",
-		Object, Form, AddInfo));
+	Notify = New NotifyDescription("OnFinishEditSerialLotNumbers", ThisObject, 
+		New Structure("Object, Form, AddInfo", Object, Form, AddInfo));
 	OpeningParameters = New Structure();
 	OpeningParameters.Insert("Item", CurrentData.Item);
 	OpeningParameters.Insert("ItemKey", CurrentData.ItemKey);
@@ -15,8 +15,7 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	OpeningParameters.Insert("Quantity", CurrentData.Quantity);
 	ArrayOfSelectedSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
 	For Each Row In ArrayOfSelectedSerialLotNumbers Do
-		OpeningParameters.SerialLotNumbers.Add(
-		New Structure("SerialLotNumber, Quantity", Row.SerialLotNumber, Row.Quantity));
+		OpeningParameters.SerialLotNumbers.Add(New Structure("SerialLotNumber, Quantity", Row.SerialLotNumber, Row.Quantity));
 	EndDo;
 
 	OpenForm("Catalog.SerialLotNumbers.Form.EditListOfSerialLotNumbers", OpeningParameters, ThisObject, , , , Notify,
@@ -39,7 +38,7 @@ Procedure AddNewSerialLotNumbers(Result, Parameters, AddNewLot = False, AddInfo 
 		NewRow.SerialLotNumber = Row.SerialLotNumber;
 		NewRow.Quantity = Row.Quantity;
 	EndDo;
-	UpdateSerialLotNumbersPresentation(Parameters.Object, AddInfo);
+	UpdateSerialLotNumbersPresentation(Parameters.Object);
 	UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 EndProcedure
 
@@ -66,8 +65,7 @@ Procedure PresentationClearingOnCopy(Object, Form, Item, AddInfo = Undefined) Ex
 	CurrentData.SerialLotNumbersPresentation.Clear();
 EndProcedure
 
-Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+Procedure UpdateSerialLotNumbersPresentation(Object) Export
 	For Each RowItemList In Object.ItemList Do
 		ArrayOfSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", RowItemList.Key));
 		RowItemList.SerialLotNumbersPresentation.Clear();		
@@ -76,29 +74,8 @@ Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export
 			RowItemList.SerialLotNumbersPresentation.Add(RowSerialLotNumber.SerialLotNumber);
 			SerialCount = SerialCount + RowSerialLotNumber.Quantity;
 		EndDo;
-		If ServerData = Undefined Then
-			RowItemList.UseSerialLotNumber = 
-				SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
-		Else
-			RowItemList.UseSerialLotNumber = 
-				ServerData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey) <> Undefined;
-		EndIf;
-		
 		If RowItemList.UseSerialLotNumber Then
 			RowItemList.SerialLotNumberIsFilling = RowItemList.Quantity = SerialCount;
-		EndIf;
-	EndDo;
-EndProcedure
-
-Procedure FillSerialLotNumbersUse(Object, AddInfo = Undefined) Export
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	For Each RowItemList In Object.ItemList Do
-		If ServerData = Undefined Then
-			RowItemList.UseSerialLotNumber = 
-				SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
-		Else
-			RowItemList.UseSerialLotNumber = 
-				ServerData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey) <> Undefined;
 		EndIf;
 	EndDo;
 EndProcedure
@@ -130,38 +107,6 @@ Procedure UpdateSerialLotNumbersTree(Object, Form) Export
 		For Each ItemTreeRows In Form.SerialLotNumbersTree.GetItems() Do
 			Form.Items.SerialLotNumbersTree.Expand(ItemTreeRows.GetID());
 		EndDo;
-	EndIf;
-EndProcedure
-
-Procedure UpdateUseSerialLotNumber(Object, Form, AddInfo = Undefined) Export
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	
-	CurrentData = Form.Items.ItemList.CurrentData;
-	
-	// if current data is not set restore current data by key
-	If CurrentData = Undefined And ServerData <> Undefined And ServerData.Rows.Count() Then
-		ObjectRows = Object.ItemList.FindRows(New Structure("Key", ServerData.Rows[0].Key));
-		If ObjectRows.Count() Then
-			CurrentData = ObjectRows[0];
-		EndIf;
-	EndIf;
-	
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	If ServerData = Undefined Then
-		CurrentData.UseSerialLotNumber = 
-			SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(CurrentData.ItemKey);
-	Else
-		CurrentData.UseSerialLotNumber = 
-			ServerData.ItemKeysWithSerialLotNumbers.Find(CurrentData.ItemKey) <> Undefined;
-	EndIf;
-
-	If Not CurrentData.UseSerialLotNumber Then
-		DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
-		UpdateSerialLotNumbersPresentation(Object, AddInfo);
-		UpdateSerialLotNumbersTree(Object, Form);
 	EndIf;
 EndProcedure
 

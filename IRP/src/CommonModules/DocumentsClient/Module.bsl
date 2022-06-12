@@ -429,7 +429,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			ElsIf ResultElement.UseSerialLotNumber Then
 				Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
 			EndIf;
-			SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
+			//SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 			
 		ElsIf ObjectRefType = Type("DocumentRef.PhysicalInventory")
 				Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then

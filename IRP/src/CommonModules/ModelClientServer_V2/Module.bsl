@@ -202,7 +202,6 @@ Function GetChain()
 
 	// Extractors
 	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
-	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
 	
@@ -1676,14 +1675,6 @@ Function ExtractDataItemKeyIsServiceExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	Return ModelServer_V2.ExtractDataItemKeyIsServiceServerImp(Options.Itemkey);
-EndFunction
-
-Function ExtractDataItemKeysWithSerialLotNumbersOptions() Export
-	Return GetChainLinkOptions("ItemKey");
-EndFunction
-
-Function ExtractDataItemKeysWithSerialLotNumbersExecute(Options) Export
-	Return ModelServer_V2.ExtractDataItemKeysWithSerialLotNumbersImp(Options.Itemkey);
 EndFunction
 
 Function ExtractDataAgreementApArPostingDetailOptions() Export

@@ -15,12 +15,6 @@ Function CheckSerialLotNumberName(Object, Cancel) Export
 	Return RegExpSettings;
 EndFunction
 
-Procedure FillSerialLotNumbersUse(Object, AddInfo = Undefined) Export
-	For Each RowItemList In Object.ItemList Do
-		RowItemList.UseSerialLotNumber = IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
-	EndDo;
-EndProcedure
-
 Function IsItemKeyWithSerialLotNumbers(ItemKey, AddInfo = Undefined) Export
 	If Not ValueIsFilled(ItemKey) Then
 		Return False;

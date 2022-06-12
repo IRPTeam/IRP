@@ -472,18 +472,6 @@ EndProcedure
 Function BindFormOnOpen(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation"      , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("GoodsReceipt"              , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("StockAdjustmentAsSurplus"  , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("StockAdjustmentAsWriteOff" , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("SalesInvoice"              , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("RetailSalesReceipt"        , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("PurchaseInvoice"           , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("RetailReturnReceipt"       , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("PurchaseReturn"            , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("SalesReturn"               , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("InventoryTransfer"         , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("PhysicalInventory"         , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
 	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
@@ -673,30 +661,6 @@ Procedure StepExtractDataItemKeyIsService(Parameters, Chain) Export
 		Options.IsUserChange = IsUserChange(Parameters);
 		Options.Key = Row.Key;
 		Chain.ExtractDataItemKeyIsService.Options.Add(Options);
-	EndDo;
-EndProcedure
-
-// ExtractDataItemKeysWithSerialLotNumbers.Set
-Procedure SetExtractDataItemKeysWithSerialLotNumbers(Parameters, Results) Export
-	Parameters.ExtractedData.Insert("ItemKeysWithSerialLotNumbers", New Array());
-	For Each Result In Results Do
-		If Result.Value Then // have serial lot numbers
-			Parameters.ExtractedData.ItemKeysWithSerialLotNumbers.Add(Result.Options.ItemKey);
-		EndIf;
-	EndDo;
-EndProcedure
-
-// ExtractDataItemKeysWithSerialLotNumbers.Step
-Procedure StepExtractDataItemKeysWithSerialLotNumbers(Parameters, Chain) Export
-	Chain.ExtractDataItemKeysWithSerialLotNumbers.Enable = True;
-	Chain.ExtractDataItemKeysWithSerialLotNumbers.Setter = "SetExtractDataItemKeysWithSerialLotNumbers";
-	For Each Row In Parameters.Object.ItemList Do
-		Options = ModelClientServer_V2.ExtractDataItemKeysWithSerialLotNumbersOptions();
-		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
-		Options.Key = Row.Key;
-		Options.StepName = "StepExtractDataItemKeysWithSerialLotNumbers";
-		Options.DontExecuteIfExecutedBefore = True;
-		Chain.ExtractDataItemKeysWithSerialLotNumbers.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -4528,23 +4492,23 @@ Function BindItemListItemKey(Parameters)
 	DataPath = "ItemList.ItemKey";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation",
-		"StepExtractDataItemKeysWithSerialLotNumbers,
+		"StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey");
 		
 	Binding.Insert("GoodsReceipt",
-		"StepExtractDataItemKeysWithSerialLotNumbers,
+		"StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey");
 		
 	Binding.Insert("StockAdjustmentAsSurplus",
-		"StepExtractDataItemKeysWithSerialLotNumbers,
+		"StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey");
 		
 	Binding.Insert("StockAdjustmentAsWriteOff",
-		"StepExtractDataItemKeysWithSerialLotNumbers,
+		"StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey");
 
 	Binding.Insert("InventoryTransfer",
-		"StepExtractDataItemKeysWithSerialLotNumbers,
+		"StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey");
 	
 	Binding.Insert("InventoryTransferOrder",
@@ -4571,7 +4535,7 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey");
 
@@ -4587,7 +4551,7 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
 		|StepItemListChangeExpenseTypeByItemKey");
 
@@ -4595,7 +4559,7 @@ Function BindItemListItemKey(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
@@ -4603,7 +4567,7 @@ Function BindItemListItemKey(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
@@ -4626,7 +4590,7 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
@@ -4642,7 +4606,7 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey");
 	

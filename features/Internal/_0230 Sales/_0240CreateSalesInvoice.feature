@@ -600,9 +600,9 @@ Scenario: _024007 create SI based on SC	without SO
 		And I click "Ok" button
 	* Create SI
 		And "ItemList" table contains lines
-			| '#' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
-			| '1' | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | ''                   | '15,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            | ''             |
-			| '2' | ''              | ''           | 'Dress' | 'L/Green'  | 'No'                 | ''                   | '8,000'  | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            | ''             |
+			| '#' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '1' | ''                   | ''           | 'Dress' | 'S/Yellow' | 'No'                 | ''                   | '15,000'   | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            | ''             |
+			| '2' | ''                   | ''           | 'Dress' | 'L/Green'  | 'No'                 | ''                   | '8,000'    | 'pcs'  | ''           | ''      | '18%' | ''              | ''           | ''             | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            | ''             |
 		Then the number of "ItemList" table lines is "равно" "2"
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"

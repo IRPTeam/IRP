@@ -173,8 +173,10 @@ Function GetChain()
 	Chain.Insert("ChangePriceTypeByAgreement"   , GetChainLink("ChangePriceTypeByAgreementExecute"));
 	Chain.Insert("ChangePriceTypeAsManual"      , GetChainLink("ChangePriceTypeAsManualExecute"));
 
-	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
-	Chain.Insert("ChangeUseSerialLotNumberByItemKey", GetChainLink("ChangeUseSerialLotNumberByItemKeyExecute"));
+	Chain.Insert("ChangeUnitByItemKey"               , GetChainLink("ChangeUnitByItemKeyExecute"));
+	Chain.Insert("ChangeUseSerialLotNumberByItemKey" , GetChainLink("ChangeUseSerialLotNumberByItemKeyExecute"));
+	Chain.Insert("ChangeIsServiceByItemKey"          , GetChainLink("ChangeIsServiceByItemKeyExecute"));
+	
 	Chain.Insert("ClearSerialLotNumberByItemKey"    , GetChainLink("ClearSerialLotNumberByItemKeyExecute"));
 	Chain.Insert("ClearBarcodeByItemKey"            , GetChainLink("ClearBarcodeByItemKeyExecute"));
 	
@@ -201,8 +203,6 @@ Function GetChain()
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
 
 	// Extractors
-	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
-	Chain.Insert("ExtractDataItemKeysWithSerialLotNumbers" , GetChainLink("ExtractDataItemKeysWithSerialLotNumbersExecute"));
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
 	
@@ -281,6 +281,22 @@ Function ClearSerialLotNumberByItemKeyExecute(Options) Export
 	Else
 		Return Options.CurrentSerialLotNumber;
 	EndIf;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_IS_SERVICE_BY_ITEMKEY
+
+Function ChangeIsServiceByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKey");
+EndFunction
+
+Function ChangeIsServiceByItemKeyExecute(Options) Export
+	Result = GetItemInfo.GetInfoByItemsKey(Options.ItemKey);
+	If Result.Count() Then
+		Return Result[0].IsService;
+	EndIf;	
+	Return False;
 EndFunction
 
 #EndRegion
@@ -1126,10 +1142,10 @@ Function ChangeStoreInHeaderByStoresInListExecute(Options) Export
 	// create array of stores with unique values
 	ArrayOfStoresUnique = New Array();
 	For Each Row In Options.ArrayOfStoresInList Do
-		IsService = ModelServer_V2.ExtractDataItemKeyIsServiceServerImp(Row.ItemKey);
-		If IsService Then
+		If Row.IsService Then
 			Continue;
 		EndIf;
+		
 		If ArrayOfStoresUnique.Find(Row.Store) = Undefined Then
 			ArrayOfStoresUnique.Add(Row.Store);
 		EndIf;
@@ -1208,8 +1224,7 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, Ref, 
-		|ChangeOnlyWhenAgreementIsFilled, IsBasedOn, TaxList");
+	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
@@ -1244,11 +1259,7 @@ Function ChangeTaxRateExecute(Options) Export
 		EndDo;
 		Return Result;
 	EndIf;
-	
-	If Options.ChangeOnlyWhenAgreementIsFilled = True And Not ValueIsFilled(Options.Agreement) Then
-		Return Result;
-	EndIf;
-	
+		
 	// taxes when have in company by document date
 	DocumentName = Options.Ref.Metadata().Name;
 	AllTaxes = TaxesServer.GetTaxesByCompany(Options.Date, Options.Company);
@@ -1666,25 +1677,6 @@ EndProcedure
 #EndRegion
 
 #Region _EXTRACT_DATA_
-
-Function ExtractDataItemKeyIsServiceOptions() Export
-	Return GetChainLinkOptions("ItemKey, IsUserChange");
-EndFunction
-
-Function ExtractDataItemKeyIsServiceExecute(Options) Export
-	If Not Options.IsUserChange = True Then
-		Return Undefined;
-	EndIf;
-	Return ModelServer_V2.ExtractDataItemKeyIsServiceServerImp(Options.Itemkey);
-EndFunction
-
-Function ExtractDataItemKeysWithSerialLotNumbersOptions() Export
-	Return GetChainLinkOptions("ItemKey");
-EndFunction
-
-Function ExtractDataItemKeysWithSerialLotNumbersExecute(Options) Export
-	Return ModelServer_V2.ExtractDataItemKeysWithSerialLotNumbersImp(Options.Itemkey);
-EndFunction
 
 Function ExtractDataAgreementApArPostingDetailOptions() Export
 	Return GetChainLinkOptions("Agreement");

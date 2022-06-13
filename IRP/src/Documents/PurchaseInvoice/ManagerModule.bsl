@@ -141,15 +141,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-//	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-
-// @deprecated
-//#Region NewRegistersPosting
-//	PostingServer.SetLockDataSource(DataMapWithLockFields, AccumulationRegisters.R1020B_AdvancesToVendors,
-//		DocumentDataTables.VendorsTransactions);
-//#EndRegion
-
 	Return DataMapWithLockFields;
 EndFunction
 

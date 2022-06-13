@@ -109,15 +109,12 @@ IsUsedNewFunctionality =
 			ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
 			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 			
-			For Each PropertyName In ArrayOfBasisDocumentProperties Do
-				If Not ValueIsFilled(PropertyName) Then
+			For Each DataPath In ArrayOfBasisDocumentProperties Do
+				If Not ValueIsFilled(DataPath) Then
 					Continue;
 				EndIf;
-				DataPath = StrSplit(PropertyName, ".");
-				If DataPath.Count() = 1 Then
-					Property = New Structure("DataPath", TrimAll(DataPath[0]));
-					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Source[Property.DataPath]);
-				EndIf;
+				Property = New Structure("DataPath", TrimAll(DataPath));
+				ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
 			EndDo;
 			
 			// UserSetting
@@ -148,7 +145,10 @@ IsUsedNewFunctionality =
 				EndIf;
 			EndDo;
 			
-		EndDo;
+		EndDo; // ArrayOfMainTables
+		
+		
+		
 		
 	EndIf; // IsUsedNewFunctionality 
 	

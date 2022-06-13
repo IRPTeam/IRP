@@ -288,11 +288,17 @@ Procedure API_SetProperty(Parameters, Property, Value) Export
 	SetterName = GetSetterNameByDataPath(Property.DataPath);
 	IsColumn = StrSplit(Property.DataPath, ".").Count() = 2;
 	If SetterName <> Undefined Then
-		_Key = ?(IsColumn, Parameters.Rows[0].Key, Undefined);
-		
-		//@skip-check module-unused-local-variable
-		Results = ResultArray(_Key, Value);
-		Execute StrTemplate("%1(Parameters, Results);", SetterName);
+		If IsColumn Then
+			For Each Row In GetRows(Parameters, Parameters.TableName) Do
+				//@skip-check module-unused-local-variable
+				Results = ResultArray(Row.Key, Value);
+				Execute StrTemplate("%1(Parameters, Results);", SetterName);
+			EndDo;
+		Else
+			//@skip-check module-unused-local-variable
+			Results = ResultArray(Undefined, Value);
+			Execute StrTemplate("%1(Parameters, Results);", SetterName);
+		EndIf;
 	Else
 		If IsColumn Then
 			For Each Row In GetRows(Parameters, Parameters.TableName) Do
@@ -472,18 +478,6 @@ EndProcedure
 Function BindFormOnOpen(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation"      , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("GoodsReceipt"              , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("StockAdjustmentAsSurplus"  , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("StockAdjustmentAsWriteOff" , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("SalesInvoice"              , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("RetailSalesReceipt"        , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("PurchaseInvoice"           , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("RetailReturnReceipt"       , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("PurchaseReturn"            , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("SalesReturn"               , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("InventoryTransfer"         , "StepExtractDataItemKeysWithSerialLotNumbers");
-	Binding.Insert("PhysicalInventory"         , "StepExtractDataItemKeysWithSerialLotNumbers");
 	Binding.Insert("CashExpense"               , "StepExtractDataCurrencyFromAccount");
 	Binding.Insert("CashRevenue"               , "StepExtractDataCurrencyFromAccount");
 	Return BindSteps("BindVoid"       , DataPath, Binding, Parameters);
@@ -651,54 +645,6 @@ EndFunction
 #EndRegion
 
 #Region _EXTRACT_DATA_
-
-// ExtractDataItemKeyIsService.Set
-Procedure SetExtractDataItemKeyIsService(Parameters, Results) Export
-	Parameters.ExtractedData.Insert("DataItemKeyIsService", New Array());
-	For Each Result In Results Do
-		NewRow = New Structure();
-		NewRow.Insert("Key"       , Result.Options.Key);
-		NewRow.Insert("IsService" , Result.Value);
-		Parameters.ExtractedData.DataItemKeyIsService.Add(NewRow);
-	EndDo;
-EndProcedure
-
-// ExtractDataItemKeyIsService.Step
-Procedure StepExtractDataItemKeyIsService(Parameters, Chain) Export
-	Chain.ExtractDataItemKeyIsService.Enable = True;
-	Chain.ExtractDataItemKeyIsService.Setter = "SetExtractDataItemKeyIsService";
-	For Each Row In GetRows(Parameters, Parameters.TableName) Do
-		Options = ModelClientServer_V2.ExtractDataItemKeyIsServiceOptions();
-		Options.ItemKey      = GetItemListItemKey(Parameters, Row.Key);
-		Options.IsUserChange = IsUserChange(Parameters);
-		Options.Key = Row.Key;
-		Chain.ExtractDataItemKeyIsService.Options.Add(Options);
-	EndDo;
-EndProcedure
-
-// ExtractDataItemKeysWithSerialLotNumbers.Set
-Procedure SetExtractDataItemKeysWithSerialLotNumbers(Parameters, Results) Export
-	Parameters.ExtractedData.Insert("ItemKeysWithSerialLotNumbers", New Array());
-	For Each Result In Results Do
-		If Result.Value Then // have serial lot numbers
-			Parameters.ExtractedData.ItemKeysWithSerialLotNumbers.Add(Result.Options.ItemKey);
-		EndIf;
-	EndDo;
-EndProcedure
-
-// ExtractDataItemKeysWithSerialLotNumbers.Step
-Procedure StepExtractDataItemKeysWithSerialLotNumbers(Parameters, Chain) Export
-	Chain.ExtractDataItemKeysWithSerialLotNumbers.Enable = True;
-	Chain.ExtractDataItemKeysWithSerialLotNumbers.Setter = "SetExtractDataItemKeysWithSerialLotNumbers";
-	For Each Row In Parameters.Object.ItemList Do
-		Options = ModelClientServer_V2.ExtractDataItemKeysWithSerialLotNumbersOptions();
-		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
-		Options.Key = Row.Key;
-		Options.StepName = "StepExtractDataItemKeysWithSerialLotNumbers";
-		Options.DontExecuteIfExecutedBefore = True;
-		Chain.ExtractDataItemKeysWithSerialLotNumbers.Options.Add(Options);
-	EndDo;
-EndProcedure
 
 // ExtractDataAgreementApArPostingDetail.Set
 Procedure SetExtractDataAgreementApArPostingDetail(Parameters, Results) Export
@@ -1807,62 +1753,62 @@ Function BindCompany(Parameters)
 	Binding = New Structure();
 	Binding.Insert("SalesOrder",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("SalesOrderClosing",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("SalesInvoice",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 
 	Binding.Insert("RetailSalesReceipt",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 
 	Binding.Insert("PurchaseOrder",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("PurchaseOrderClosing",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("SalesReturnOrder",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("SalesReturn",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("PurchaseReturnOrder",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("PurchaseReturn",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
@@ -2460,9 +2406,15 @@ Procedure StepChangeStoreInHeaderByStoresInList(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeStoreInHeaderByStoresInListOptions();
 	ArrayOfStoresInList = New Array();
 	For Each Row In Parameters.Object.ItemList Do
+		IsService = False;
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, "IsService") Then
+			IsService = GetItemListIsService(Parameters, Row.Key);
+		EndIf;
+		
 		NewRow = New Structure();
-		NewRow.Insert("Store"   , GetItemListStore(Parameters, Row.Key));
-		NewRow.Insert("ItemKey" , GetItemListItemKey(Parameters, Row.Key));
+		NewRow.Insert("Store"     , GetItemListStore(Parameters, Row.Key));
+		NewRow.Insert("ItemKey"   , GetItemListItemKey(Parameters, Row.Key));
+		NewRow.Insert("IsService" , IsService);
 		ArrayOfStoresInList.Add(NewRow);
 	EndDo;
 	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
@@ -3247,21 +3199,13 @@ Procedure StepChangeTaxRate_AgreementInList(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain, , True);
 EndProcedure
 
-// <List>.ChangeTaxRate.[OnlyWhenAgreementIsFilled].Step
-Procedure StepChangeTaxRate_OnlyWhenAgreementIsFilled(Parameters, Chain) Export
-	StepChangeTaxRate(Parameters, Chain, True, , True);
-EndProcedure
-
 // <List>.ChangeTaxRate.[WithoutAgreement].Step
 Procedure StepChangeTaxRate_WithoutAgreement(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain);
 EndProcedure
 
 // <List>.ChangeTaxRate.Step
-Procedure StepChangeTaxRate(Parameters, Chain,
-			AgreementInHeader = False,
-			AgreementInList = False, 
-			OnlyWhenAgreementIsFilled = False)
+Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, AgreementInList = False)
 	
 	Options_Date      = GetDate(Parameters);
 	Options_Company   = GetCompany(Parameters);
@@ -3288,7 +3232,6 @@ Procedure StepChangeTaxRate(Parameters, Chain,
 		If AgreementInList Then
 			Options.Agreement = GetPropertyObject(Parameters, Parameters.TableName + "." + "Agreement", Row.Key);
 		EndIf;
-		Options.ChangeOnlyWhenAgreementIsFilled = OnlyWhenAgreementIsFilled;
 		
 		Options.Date           = Options_Date;
 		Options.Company        = Options_Company;
@@ -4528,23 +4471,23 @@ Function BindItemListItemKey(Parameters)
 	DataPath = "ItemList.ItemKey";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation",
-		"StepExtractDataItemKeysWithSerialLotNumbers,
+		"StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey");
 		
 	Binding.Insert("GoodsReceipt",
-		"StepExtractDataItemKeysWithSerialLotNumbers,
+		"StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey");
 		
 	Binding.Insert("StockAdjustmentAsSurplus",
-		"StepExtractDataItemKeysWithSerialLotNumbers,
+		"StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey");
 		
 	Binding.Insert("StockAdjustmentAsWriteOff",
-		"StepExtractDataItemKeysWithSerialLotNumbers,
+		"StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey");
 
 	Binding.Insert("InventoryTransfer",
-		"StepExtractDataItemKeysWithSerialLotNumbers,
+		"StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey");
 	
 	Binding.Insert("InventoryTransferOrder",
@@ -4556,7 +4499,8 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey,
-		|StepItemListChangeProcurementMethodByItemKey");
+		|StepItemListChangeProcurementMethodByItemKey,
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("SalesOrderClosing",
 		"StepItemListChangePriceTypeByAgreement,
@@ -4564,87 +4508,98 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey,
-		|StepItemListChangeProcurementMethodByItemKey");
+		|StepItemListChangeProcurementMethodByItemKey,
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("SalesInvoice",
 		"StepItemListChangeUseShipmentConfirmationByStore,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeRevenueTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
 
 	Binding.Insert("PurchaseReturnOrder",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeExpenseTypeByItemKey");
+		|StepItemListChangeExpenseTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
 
 	Binding.Insert("PurchaseReturn",
 		"StepItemListChangeUseShipmentConfirmationByStore,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeExpenseTypeByItemKey");
+		|StepItemListChangeExpenseTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
 
 	Binding.Insert("RetailSalesReceipt",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeRevenueTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeRevenueTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("PurchaseOrder",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeExpenseTypeByItemKey");
+		|StepItemListChangeExpenseTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("PurchaseOrderClosing",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeExpenseTypeByItemKey");
+		|StepItemListChangeExpenseTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangeUseGoodsReceiptByStore,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeExpenseTypeByItemKey");
+		|StepItemListChangeExpenseTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("SalesReturnOrder",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeRevenueTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("SalesReturn",
 		"StepItemListChangeUseGoodsReceiptByStore,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepExtractDataItemKeysWithSerialLotNumbers,
+		|StepChangeUseSerialLotNumberByItemKey,
 		|StepChangeUnitByItemKey,
-		|StepItemListChangeRevenueTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("InternalSupplyRequest",
 		"StepChangeUnitByItemKey");
@@ -4941,55 +4896,43 @@ Function BindItemListStore(Parameters)
 	Binding.Insert("GoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("SalesOrder",
-		"StepExtractDataItemKeyIsService,
-		|StepChangeStoreInHeaderByStoresInList");
+		"StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("SalesOrderClosing",
-		"StepExtractDataItemKeyIsService,
-		|StepChangeStoreInHeaderByStoresInList");
+		"StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("SalesInvoice",
 		"StepItemListChangeUseShipmentConfirmationByStore,
-		|StepExtractDataItemKeyIsService,
 		|StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("PurchaseReturnOrder",
-		"StepExtractDataItemKeyIsService,
-		|StepChangeStoreInHeaderByStoresInList");
+		"StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("PurchaseReturn",
 		"StepItemListChangeUseShipmentConfirmationByStore,
-		|StepExtractDataItemKeyIsService,
 		|StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("RetailSalesReceipt",
-		"StepExtractDataItemKeyIsService,
-		|StepChangeStoreInHeaderByStoresInList");
+		"StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("RetailReturnReceipt",
-		"StepExtractDataItemKeyIsService,
-		|StepChangeStoreInHeaderByStoresInList");
+		"StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("PurchaseOrder",
-		"StepExtractDataItemKeyIsService,
-		|StepChangeStoreInHeaderByStoresInList");
+		"StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("PurchaseOrderClosing",
-		"StepExtractDataItemKeyIsService,
-		|StepChangeStoreInHeaderByStoresInList");
+		"StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangeUseGoodsReceiptByStore,
-		|StepExtractDataItemKeyIsService,
 		|StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("SalesReturnOrder",
-		"StepExtractDataItemKeyIsService,
-		|StepChangeStoreInHeaderByStoresInList");
+		"StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("SalesReturn",
 		"StepItemListChangeUseGoodsReceiptByStore,
-		|StepExtractDataItemKeyIsService,
 		|StepChangeStoreInHeaderByStoresInList");
 	
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
@@ -5612,6 +5555,42 @@ Procedure StepClearSerialLotNumberByItemKey(Parameters, Chain) Export
 		Options.Key      = Row.Key;
 		Options.StepName = "StepClearSerialLotNumberByItemKey";
 		Chain.ClearSerialLotNumberByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_IS_SERVICE
+
+// ItemList.IsService.Set
+Procedure SetItemListIsService(Parameters, Results) Export
+	Binding = BindItemListIsService(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.IsService.Get
+Function GetItemListIsService(Parameters, _Key)
+	Binding = BindItemListIsService(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.IsService.Bind
+Function BindItemListIsService(Parameters)
+	DataPath = "ItemList.IsService";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.IsService.ChangeIsServiceByItemKey.Step
+Procedure StepChangeIsServiceByItemKey(Parameters, Chain) Export
+	Chain.ChangeIsServiceByItemKey.Enable = True;
+	Chain.ChangeIsServiceByItemKey.Setter = "SetItemListIsService";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeIsServiceByItemKeyOptions();
+		Options.ItemKey  = GetItemListItemKey(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepChangeIsServiceByItemKey";
+		Chain.ChangeIsServiceByItemKey.Options.Add(Options);
 	EndDo;	
 EndProcedure
 

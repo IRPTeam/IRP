@@ -173,8 +173,10 @@ Function GetChain()
 	Chain.Insert("ChangePriceTypeByAgreement"   , GetChainLink("ChangePriceTypeByAgreementExecute"));
 	Chain.Insert("ChangePriceTypeAsManual"      , GetChainLink("ChangePriceTypeAsManualExecute"));
 
-	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
-	Chain.Insert("ChangeUseSerialLotNumberByItemKey", GetChainLink("ChangeUseSerialLotNumberByItemKeyExecute"));
+	Chain.Insert("ChangeUnitByItemKey"               , GetChainLink("ChangeUnitByItemKeyExecute"));
+	Chain.Insert("ChangeUseSerialLotNumberByItemKey" , GetChainLink("ChangeUseSerialLotNumberByItemKeyExecute"));
+	Chain.Insert("ChangeIsServiceByItemKey"          , GetChainLink("ChangeIsServiceByItemKeyExecute"));
+	
 	Chain.Insert("ClearSerialLotNumberByItemKey"    , GetChainLink("ClearSerialLotNumberByItemKeyExecute"));
 	Chain.Insert("ClearBarcodeByItemKey"            , GetChainLink("ClearBarcodeByItemKeyExecute"));
 	
@@ -201,7 +203,6 @@ Function GetChain()
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
 
 	// Extractors
-	Chain.Insert("ExtractDataItemKeyIsService"             , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
 	
@@ -280,6 +281,22 @@ Function ClearSerialLotNumberByItemKeyExecute(Options) Export
 	Else
 		Return Options.CurrentSerialLotNumber;
 	EndIf;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_IS_SERVICE_BY_ITEMKEY
+
+Function ChangeIsServiceByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKey");
+EndFunction
+
+Function ChangeIsServiceByItemKeyExecute(Options) Export
+	Result = GetItemInfo.GetInfoByItemsKey(Options.ItemKey);
+	If Result.Count() Then
+		Return Result[0].IsService;
+	EndIf;	
+	Return False;
 EndFunction
 
 #EndRegion
@@ -1125,10 +1142,10 @@ Function ChangeStoreInHeaderByStoresInListExecute(Options) Export
 	// create array of stores with unique values
 	ArrayOfStoresUnique = New Array();
 	For Each Row In Options.ArrayOfStoresInList Do
-		IsService = ModelServer_V2.ExtractDataItemKeyIsServiceServerImp(Row.ItemKey);
-		If IsService Then
+		If Row.IsService Then
 			Continue;
 		EndIf;
+		
 		If ArrayOfStoresUnique.Find(Row.Store) = Undefined Then
 			ArrayOfStoresUnique.Add(Row.Store);
 		EndIf;
@@ -1665,17 +1682,6 @@ EndProcedure
 #EndRegion
 
 #Region _EXTRACT_DATA_
-
-Function ExtractDataItemKeyIsServiceOptions() Export
-	Return GetChainLinkOptions("ItemKey, IsUserChange");
-EndFunction
-
-Function ExtractDataItemKeyIsServiceExecute(Options) Export
-	If Not Options.IsUserChange = True Then
-		Return Undefined;
-	EndIf;
-	Return ModelServer_V2.ExtractDataItemKeyIsServiceServerImp(Options.Itemkey);
-EndFunction
 
 Function ExtractDataAgreementApArPostingDetailOptions() Export
 	Return GetChainLinkOptions("Agreement");

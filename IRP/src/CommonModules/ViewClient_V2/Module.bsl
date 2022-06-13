@@ -284,15 +284,17 @@ Function NeedCommitChangesItemListStoreOnUserChange(Parameters)
 		For Each Row In Parameters.Cache.ItemList Do
 			
 			IsService = False;
-			If Parameters.ExtractedData.Property("DataItemKeyIsService") Then
-				For Each RowData In Parameters.ExtractedData.DataItemKeyIsService Do
-					If RowData.Key = Row.Key Then
-						IsService = RowData.IsService;
-						Break;
-					EndIf;
-				EndDo;
-			EndIf;
 			
+			For Each RowItemList In Parameters.Object.ItemList Do
+				If RowItemList.Key <> Row.Key Then
+					Continue;
+				EndIf;
+				If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "IsService") Then
+					IsService = RowItemList.IsService;
+				EndIf;
+				Break;
+			EndDo;
+						
 			If Row.Property("Store") And Not ValueIsFilled(Row.Store) And Not IsService Then
 				Return False; // clear ItemList.Store impossible
 			EndIf;

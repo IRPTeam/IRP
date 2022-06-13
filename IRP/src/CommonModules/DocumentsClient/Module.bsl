@@ -1216,7 +1216,7 @@ Procedure ShowRowKey(Form) Export
 				|AccountPayableByAgreementsKey, AccountPayableByDocumentsKey, VendorsPaymentTermsKey,
 				|AccountReceivableByAgreementsKey, AccountReceivableByDocumentsKey, CustomersPaymentTermsKey,
 				|SendUUID, ReceiveUUID,
-				|ItemListUseSerialLotNumber";
+				|ItemListUseSerialLotNumber, ItemListIsService";
 
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do

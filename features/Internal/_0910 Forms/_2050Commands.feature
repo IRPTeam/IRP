@@ -3328,10 +3328,6 @@ Scenario: _0205042 add test command to the list of documents Planned receipt res
 		And I click "Test command" button
 		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
-	* Check that the command is not displayed in the document
-		And I click "Create" button
-		And I click "Test command" button
-		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register
 			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"

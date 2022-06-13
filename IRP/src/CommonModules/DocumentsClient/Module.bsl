@@ -557,15 +557,6 @@ Procedure FillDeliveryDates(Object, Form) Export
 	EndIf;
 EndProcedure
 
-// @deprecated
-//Procedure FillUnfilledDeliveryDatesInRow(Object, Item, DeliveryDate) Export
-//	If Not ValueIsFilled(Item.CurrentData.DeliveryDate) Then
-//		IdentifyRow = Item.CurrentRow;
-//		RowItemList = Object.ItemList.FindByID(IdentifyRow);
-//		RowItemList.DeliveryDate = DeliveryDate;
-//	EndIf;
-//EndProcedure
-
 #EndRegion
 
 #Region Item
@@ -746,13 +737,6 @@ EndProcedure
 #EndRegion
 
 #Region Common
-
-// @deprecated
-//Function CreateCurrentValuesStructure(Object, StringKeys, CunditionalKeys = "") Export
-//	CurrentValuesStructure = New Structure(StringKeys + ", " + CunditionalKeys);
-//	FillPropertyValues(CurrentValuesStructure, Object, StringKeys);
-//	Return CurrentValuesStructure;
-//EndFunction
 
 Function CreateFilterItem(FieldName, Value, ComparisonType) Export
 	FilterStructure = New Structure();

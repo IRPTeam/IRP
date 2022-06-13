@@ -288,11 +288,17 @@ Procedure API_SetProperty(Parameters, Property, Value) Export
 	SetterName = GetSetterNameByDataPath(Property.DataPath);
 	IsColumn = StrSplit(Property.DataPath, ".").Count() = 2;
 	If SetterName <> Undefined Then
-		_Key = ?(IsColumn, Parameters.Rows[0].Key, Undefined);
-		
-		//@skip-check module-unused-local-variable
-		Results = ResultArray(_Key, Value);
-		Execute StrTemplate("%1(Parameters, Results);", SetterName);
+		If IsColumn Then
+			For Each Row In GetRows(Parameters, Parameters.TableName) Do
+				//@skip-check module-unused-local-variable
+				Results = ResultArray(Row.Key, Value);
+				Execute StrTemplate("%1(Parameters, Results);", SetterName);
+			EndDo;
+		Else
+			//@skip-check module-unused-local-variable
+			Results = ResultArray(Undefined, Value);
+			Execute StrTemplate("%1(Parameters, Results);", SetterName);
+		EndIf;
 	Else
 		If IsColumn Then
 			For Each Row In GetRows(Parameters, Parameters.TableName) Do

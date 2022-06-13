@@ -130,7 +130,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndIf;
 	Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
-	Form.Items.EditTrialBalanceAccounts.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
@@ -470,17 +470,18 @@ Procedure EditCurrencies(Command)
 EndProcedure
 
 &AtClient
-Procedure EditTrialBalanceAccounts(Command)
+Procedure EditAccounting(Command)
 	CurrentData = ThisObject.Items.PaymentList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = AccountingClientServer.GetParametersEditTrialBalanceAccounts(Object, CurrentData, "PaymentList");
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditTrialBalanceAccounts", AccountingClient, NotifyParameters);
-	OpenForm("CommonForm.EditTrialBalanceAccounts", FormParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+	UpdateAccountingData();
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "PaymentList");
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData()
+	AccountingClientServer.UpdateAccountingTables(Object, "PaymentList");
 EndProcedure
 
 &AtClient

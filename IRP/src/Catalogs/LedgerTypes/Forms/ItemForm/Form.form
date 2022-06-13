@@ -398,6 +398,7 @@
           <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>
+        <readOnly>true</readOnly>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -505,6 +506,10 @@
           <segments>OperationsTree.Period</segments>
         </paths>
       </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>OperationsTreePeriodOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>OperationsTreePeriodExtendedTooltip</name>
         <id>33</id>
@@ -739,6 +744,10 @@
   <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>FillCheckProcessingAtServer</event>
+    <name>FillCheckProcessingAtServer</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>

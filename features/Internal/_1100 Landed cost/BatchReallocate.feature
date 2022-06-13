@@ -82,12 +82,13 @@ Scenario: _0050 preparation
 			| 'Main Company' |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
-		And I move to "External attributes" tab
-		And I click Select button of "Landed cost currency movement type" field
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
 			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
 			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
 		And I select current line in "List" table
+		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 		And I wait "Main Company (Company) *" window closing in 20 seconds
 		Then "Companies" window is opened
@@ -96,15 +97,13 @@ Scenario: _0050 preparation
 			| 'Second Company' |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
-		And I move to "External attributes" tab
-		And I click Select button of "Landed cost currency movement type" field
-		And I go to line in "List" table
-			| 'Currency' | 'Deferred calculation' | 'Description'        | 'Reference'          | 'Source'       | 'Type'      |
-			| 'USD'      | 'No'                   | 'Reporting currency' | 'Reporting currency' | 'Forex Seling' | 'Reporting' |
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
 			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
 			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
 		And I select current line in "List" table
+		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 		And I wait "Second Company (Company) *" window closing in 20 seconds
 	* Load documents
@@ -144,4 +143,77 @@ Scenario: _0052 create Calculation movements cost (batch reallocate)
 		Given "Result" spreadsheet document is equal to "BatchReallocate1"
 		And I close all client application windows
 		
+
+Scenario: _0053 clear posting CalculationMovementCosts and check BatchReallocateIncoming and BatchReallocateOutgoing unpost
+	* Unpost CalculationMovementCosts
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to the first line in "List" table
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+	* Check unpost BatchReallocateIncoming and BatchReallocateOutgoing
+		Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
+		And "List" table became equal
+			| 'Number' | 'Batch reallocate' | 'Date' | 'Company' | 'Document' | 'Outgoing' |
+			| '1'      | ''                 | '*'    | ''        | ''         | ''         |
+			| '2'      | ''                 | '*'    | ''        | ''         | ''         |
+			| '3'      | ''                 | '*'    | ''        | ''         | ''         |
+		Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
+		And "List" table became equal
+			| 'Number' | 'Batch reallocate' | 'Date' | 'Company' | 'Document' | 'Incoming' |
+			| '1'      | ''                 | '*'    | ''        | ''         | ''         |
+			| '2'      | ''                 | '*'    | ''        | ''         | ''         |
+			| '3'      | ''                 | '*'    | ''        | ''         | ''         |
+	* Post CalculationMovementCosts
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to the first line in "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* Check post BatchReallocateIncoming and BatchReallocateOutgoing
+		Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
+		And "List" table contains lines
+			| 'Number' | 'Batch reallocate'              | 'Date' | 'Company'        | 'Document'                   | 'Outgoing'                     |
+			| '1'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Item stock adjustment 161*' | 'Batch reallocate outgoing 1*' |
+			| '2'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Sales invoice 1 011*'       | 'Batch reallocate outgoing 2*' |
+			| '3'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Sales invoice 1 012*'       | 'Batch reallocate outgoing 3*' |
+		Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
+		And "List" table contains lines
+			| 'Number' | 'Batch reallocate'              | 'Date' | 'Company'      | 'Document'                   | 'Incoming'                     |
+			| '1'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Item stock adjustment 161*' | 'Batch reallocate incoming 1*' |
+			| '2'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Sales invoice 1 011*'       | 'Batch reallocate incoming 2*' |
+			| '3'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Sales invoice 1 012*'       | 'Batch reallocate incoming 3*' |
+	* Mark for daletion CalculationMovementCosts
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to the first line in "List" table
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	* Check unpost BatchReallocateIncoming and BatchReallocateOutgoing
+		Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
+		And "List" table became equal
+			| 'Number' | 'Batch reallocate' | 'Date' | 'Company' | 'Document' | 'Outgoing' |
+			| '1'      | ''                 | '*'    | ''        | ''         | ''         |
+			| '2'      | ''                 | '*'    | ''        | ''         | ''         |
+			| '3'      | ''                 | '*'    | ''        | ''         | ''         |
+		Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
+		And "List" table became equal
+			| 'Number' | 'Batch reallocate' | 'Date' | 'Company' | 'Document' | 'Incoming' |
+			| '1'      | ''                 | '*'    | ''        | ''         | ''         |
+			| '2'      | ''                 | '*'    | ''        | ''         | ''         |
+			| '3'      | ''                 | '*'    | ''        | ''         | ''         |
+		And I close all client application windows
 		
+		
+					
+		
+				
+		
+				
+
+		
+		
+				
+
+		
+				
+	

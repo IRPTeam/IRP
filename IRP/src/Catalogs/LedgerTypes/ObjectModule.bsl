@@ -1,3 +1,4 @@
+
 Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;

@@ -8,7 +8,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
 	If WriteMode = DocumentWriteMode.Posting Then
-		AccountingClientServer.BeforeWriteAccountingDocument(ThisObject, "ItemList");
+		AccountingClientServer.UpdateAccountingTables(ThisObject, "ItemList");
 	EndIf;
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
@@ -100,5 +100,4 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
-	
 EndProcedure

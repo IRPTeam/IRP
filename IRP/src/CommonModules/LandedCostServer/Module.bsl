@@ -382,7 +382,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 	RecordSet = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
-	//Batch wise balance
+	// Batch wise balance
 	For Each Row In BatchWiseBalanceTables.DataForReceipt Do
 		NewRecord = RecordSet.Add();
 		FillPropertyValues(NewRecord, Row);
@@ -400,7 +400,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 
 	RecordSet.Write();
 	
-	//Batch shortage outgoing
+	// Batch shortage outgoing
 	RecordSet = AccumulationRegisters.R6030T_BatchShortageOutgoing.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
@@ -413,7 +413,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 
 	RecordSet.Write();
 	
-	//Batch shortage incoming
+	// Batch shortage incoming
 	RecordSet = AccumulationRegisters.R6040T_BatchShortageIncoming.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
@@ -426,7 +426,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 
 	RecordSet.Write();
 	
-	//Sales batches
+	// Sales batches
 	RecordSet = AccumulationRegisters.R6050T_SalesBatches.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
@@ -484,15 +484,15 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 
 	RecordSet.Write();
 	
-	//Batch balance
+	// Batch balance
 	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_LoadRecords(CalculationMovementCostRef);
 	
-	//Cost of goods sold
+	// Cost of goods sold
 	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_LoadRecords(CalculationMovementCostRef);
 	
-	//Relevance
+	// Relevance
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Clear(Company, EndPeriod);
-	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Restore(Company, EndPeriod);
+	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Restore(Company, EndPeriod);	
 EndProcedure
 
 Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod)

@@ -413,11 +413,7 @@ Procedure OffsetAdvancesToTransactions(Parameters, Records_AdvancesKey, Records_
 
 	NeedWriteAdvances = False;
 	RepeatThisAdvance = False;
-	While QuerySelection.Next() Do
-//		If QuerySelection.AdvanceAmount < 0 Then
-//			Raise StrTemplate("Advance < 0 ADV_KEY[%1]", QuerySelection.AdvanceKey);
-//		EndIf;
-		
+	While QuerySelection.Next() Do		
 		DistributeAdvanceToTransaction(Parameters, PointInTime, Document, QuerySelection.AdvanceKey, QuerySelection.AdvanceAmount,
 			Records_TransactionsKey, Records_AdvancesKey, Records_OffsetOfAdvances, 
 			Records_OffsetAging, NeedWriteAdvances, RepeatThisAdvance);
@@ -1552,7 +1548,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 		Or TypeOf(Row.Document) = Type("DocumentRef.DebitNote")
 		Or TypeOf(Row.Document) = Type("DocumentRef.OpeningEntry");
 		
-		// Accounting amounts (advances)
+		// Accounting amounts
 		RecordSet_AccountingAmounts = AccumulationRegisters.T1040T_AccountingAmounts.CreateRecordSet();
 		RecordSet_AccountingAmounts.Filter.Recorder.Set(Row.Document);
 		TableAccountingAmounts = RecordSet_AccountingAmounts.UnloadColumns();
@@ -1571,9 +1567,9 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 		OffsetInfoByDocument = Records_OffsetOfAdvances.Copy(New Structure("Document", Row.Document));
 				
 		If UseKeyForCurrency Then
-			TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-			TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-			TableAccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+			TableAdvances.Columns.Add("Key"          , Metadata.DefinedTypes.typeRowID.Type);
+			TableTransactions.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
+			TableAccountingAmounts.Columns.Add("Key" , Metadata.DefinedTypes.typeRowID.Type);
 		EndIf;
 		
 		OffsetInfoByDocument = Records_OffsetOfAdvances.Copy(New Structure("Document", Row.Document));
@@ -1589,7 +1585,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			If UseKeyForCurrency Then
 				NewRow_Advances.Key = RowOffset.Key;
 			EndIf;
-			
+							
 			If RowOffset.IsAdvanceRelease = True Then
 				Continue;
 			EndIf;
@@ -1605,15 +1601,20 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 				NewRow_Transactions.Key = RowOffset.Key;
 			EndIf;
 			
-			// Accounting amounts (advances)
+			// Accounting amounts
 			NewRow_AccountingAmounts = TableAccountingAmounts.Add();
 			FillPropertyValues(NewRow_AccountingAmounts, RowOffset);
 			NewRow_AccountingAmounts.AdvancesClosing = Parameters.Object.Ref;
 			NewRow_AccountingAmounts.RowKey = RowOffset.Key;
-			NewRow_AccountingAmounts.IsAdvanceClosing = True;
+			If TypeOf(Row.Document) = Type("DocumentRef.BankPayment") Then
+				NewRow_AccountingAmounts.Operation = Catalogs.AccountingOperations.BankPayment_DR_R1021B_CR_R1020B;
+			ElsIf TypeOf(Row.Document) = Type("DocumentRef.PurchaseInvoice") Then
+				NewRow_AccountingAmounts.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_CR_R1020B;
+			EndIf;
 			If UseKeyForCurrency Then
 				NewRow_AccountingAmounts.Key = RowOffset.Key;
 			EndIf;
+			
 		EndDo;
 	
 		// Currency calculation

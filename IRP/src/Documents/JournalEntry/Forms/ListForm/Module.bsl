@@ -1,3 +1,4 @@
+
 #Region FormEvents
 
 &AtServer
@@ -19,6 +20,11 @@ EndProcedure
 &AtServer
 Procedure GeneratedFormCommandActionByNameServer(CommandName, SelectedRows) Export
 	ExternalCommandsServer.GeneratedListChoiceFormCommandActionByName(SelectedRows, ThisObject, CommandName);
+EndProcedure
+
+&AtClient
+Procedure CreateDocuments(Command)
+	OpenForm("Document.JournalEntry.Form.CreateDocuments",, ThisObject,,,,, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 #EndRegion

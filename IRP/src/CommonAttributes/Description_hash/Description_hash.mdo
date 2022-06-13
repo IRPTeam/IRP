@@ -221,11 +221,11 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</metadata>
+    <metadata>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</metadata>
     <use>Use</use>
   </content>
   <content>
-    <metadata>ChartOfAccounts.R6010C_Master</metadata>
+    <metadata>ChartOfAccounts.Basic</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -234,6 +234,10 @@
   </content>
   <content>
     <metadata>Catalog.IDInfoAddresses</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.LedgerTypeVariants</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

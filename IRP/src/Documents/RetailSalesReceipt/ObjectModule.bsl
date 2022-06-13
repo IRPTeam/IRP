@@ -18,6 +18,10 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
+	If WriteMode = DocumentWriteMode.Posting Then
+		AccountingClientServer.UpdateAccountingTables(ThisObject, "ItemList");
+	EndIf;
+
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
 

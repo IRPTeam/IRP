@@ -11,7 +11,7 @@
     <types>InformationRegisterRecordSet.Barcodes</types>
     <types>InformationRegisterRecordSet.BranchBankTerms</types>
     <types>InformationRegisterRecordSet.BundleContents</types>
-    <types>InformationRegisterRecordSet.CashAccountTBAccounts</types>
+    <types>InformationRegisterRecordSet.T9011S_AccountsCashAccount</types>
     <types>InformationRegisterRecordSet.CompanyLedgerTypes</types>
     <types>InformationRegisterRecordSet.CurrencyRates</types>
     <types>InformationRegisterRecordSet.IDInfo</types>
@@ -20,10 +20,10 @@
     <types>InformationRegisterRecordSet.LedgerTypeOperations</types>
     <types>InformationRegisterRecordSet.ObjectStatuses</types>
     <types>InformationRegisterRecordSet.PartnerSegments</types>
-    <types>InformationRegisterRecordSet.PartnerTBAccounts</types>
+    <types>InformationRegisterRecordSet.T9012S_AccountsPartner</types>
     <types>InformationRegisterRecordSet.RetailWorkers</types>
     <types>InformationRegisterRecordSet.TaxSettings</types>
-    <types>InformationRegisterRecordSet.TaxTBAccounts</types>
+    <types>InformationRegisterRecordSet.T9013S_AccountsTax</types>
     <types>InformationRegisterRecordSet.Taxes</types>
     <types>InformationRegisterRecordSet.UserSettings</types>
     <types>InformationRegisterRecordSet.ExpenseRevenueTypeSettings</types>

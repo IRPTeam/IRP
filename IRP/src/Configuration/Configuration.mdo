@@ -173,6 +173,8 @@
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.Unlock</commonPictures>
   <commonPictures>CommonPicture.Bookkeeping</commonPictures>
+  <commonPictures>CommonPicture.IconCollection7</commonPictures>
+  <commonPictures>CommonPicture.IconCollection8</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -211,6 +213,7 @@
   <commonModules>CommonModule.AccountingClient</commonModules>
   <commonModules>CommonModule.AccountingClientServer</commonModules>
   <commonModules>CommonModule.AccountingServer</commonModules>
+  <commonModules>CommonModule.AccountingServerReuse</commonModules>
   <commonModules>CommonModule.AddAttributesAndPropertiesClient</commonModules>
   <commonModules>CommonModule.AddAttributesAndPropertiesServer</commonModules>
   <commonModules>CommonModule.AddDataProcClient</commonModules>
@@ -586,7 +589,7 @@
   <commonForms>CommonForm.EditIDInfo</commonForms>
   <commonForms>CommonForm.EditMultilineText</commonForms>
   <commonForms>CommonForm.EditTax</commonForms>
-  <commonForms>CommonForm.EditTrialBalanceAccounts</commonForms>
+  <commonForms>CommonForm.EditAccounting</commonForms>
   <commonForms>CommonForm.EditUserSettings</commonForms>
   <commonForms>CommonForm.HTMLField</commonForms>
   <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
@@ -676,6 +679,7 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.LedgerTypeVariants</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
@@ -758,7 +762,6 @@
   <enums>Enum.InvoicingStatuses</enums>
   <enums>Enum.ItemTypes</enums>
   <enums>Enum.KindsOfAttributes</enums>
-  <enums>Enum.LedgerTypeVariants</enums>
   <enums>Enum.MetadataSubtype</enums>
   <enums>Enum.MetadataTypes</enums>
   <enums>Enum.OffersDocumentTypes</enums>
@@ -810,7 +813,6 @@
   <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
   <informationRegisters>InformationRegister.BranchBankTerms</informationRegisters>
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
-  <informationRegisters>InformationRegister.CashAccountTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.CompanyLedgerTypes</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
@@ -819,13 +821,11 @@
   <informationRegisters>InformationRegister.ExternalCommands</informationRegisters>
   <informationRegisters>InformationRegister.IDInfo</informationRegisters>
   <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>
-  <informationRegisters>InformationRegister.ItemKeyTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.ItemSegments</informationRegisters>
   <informationRegisters>InformationRegister.LedgerTypeOperations</informationRegisters>
   <informationRegisters>InformationRegister.LockDataModificationRules</informationRegisters>
   <informationRegisters>InformationRegister.ObjectStatuses</informationRegisters>
   <informationRegisters>InformationRegister.PartnerSegments</informationRegisters>
-  <informationRegisters>InformationRegister.PartnerTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.PricesByItemKeys</informationRegisters>
   <informationRegisters>InformationRegister.PricesByItems</informationRegisters>
   <informationRegisters>InformationRegister.PricesByProperties</informationRegisters>
@@ -850,10 +850,14 @@
   <informationRegisters>InformationRegister.T6070S_BatchRevenueAllocationInfo</informationRegisters>
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
-  <informationRegisters>InformationRegister.TaxTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.T6080S_ReallocatedBatchesAmountValues</informationRegisters>
   <informationRegisters>InformationRegister.T6090S_CompositeBatchesAmountValues</informationRegisters>
+  <informationRegisters>InformationRegister.T9010S_AccountsItemKey</informationRegisters>
+  <informationRegisters>InformationRegister.T9011S_AccountsCashAccount</informationRegisters>
+  <informationRegisters>InformationRegister.T9012S_AccountsPartner</informationRegisters>
+  <informationRegisters>InformationRegister.T9013S_AccountsTax</informationRegisters>
+  <informationRegisters>InformationRegister.T9014S_AccountsExpenseRevenue</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -935,7 +939,7 @@
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>
-  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</chartsOfCharacteristicTypes>
-  <chartsOfAccounts>ChartOfAccounts.R6010C_Master</chartsOfAccounts>
-  <accountingRegisters>AccountingRegister.R6010A_Master</accountingRegisters>
+  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
+  <chartsOfAccounts>ChartOfAccounts.Basic</chartsOfAccounts>
+  <accountingRegisters>AccountingRegister.Basic</accountingRegisters>
 </mdclass:Configuration>

@@ -2684,7 +2684,7 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>EditTrialBalanceAccounts</name>
+            <name>EditAccounting</name>
             <id>974</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2692,7 +2692,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>EditTrialBalanceAccountsExtendedTooltip</name>
+              <name>EditAccountingExtendedTooltip</name>
               <id>975</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2706,7 +2706,7 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <commandName>Form.Command.EditTrialBalanceAccounts</commandName>
+            <commandName>Form.Command.EditAccounting</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -8400,21 +8400,21 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>EditTrialBalanceAccounts</name>
+    <name>EditAccounting</name>
     <title>
       <key>en</key>
-      <value>Edit trial Balance accounts</value>
+      <value>Edit accounting</value>
     </title>
     <id>17</id>
     <use>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.DebitCredit</picture>
+      <picture>StdPicture.ChartOfAccounts</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>EditTrialBalanceAccounts</name>
+        <name>EditAccounting</name>
       </handler>
     </action>
     <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>

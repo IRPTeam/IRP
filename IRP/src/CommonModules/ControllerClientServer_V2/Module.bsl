@@ -1753,62 +1753,62 @@ Function BindCompany(Parameters)
 	Binding = New Structure();
 	Binding.Insert("SalesOrder",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("SalesOrderClosing",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("SalesInvoice",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 
 	Binding.Insert("RetailSalesReceipt",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 
 	Binding.Insert("PurchaseOrder",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("PurchaseOrderClosing",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("SalesReturnOrder",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("SalesReturn",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("PurchaseReturnOrder",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("PurchaseReturn",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_OnlyWhenAgreementIsFilled,
+		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
@@ -3191,18 +3191,12 @@ EndFunction
 
 // <List>.ChangeTaxRate.[AgreementInHeader].Step
 Procedure StepChangeTaxRate_AgreementInHeader(Parameters, Chain) Export
-	//StepChangeTaxRate(Parameters, Chain, True);
-	StepChangeTaxRate(Parameters, Chain, True, , True); // for test
+	StepChangeTaxRate(Parameters, Chain, True);
 EndProcedure
 
 // <List>.ChangeTaxRate.[AgreementInList].Step
 Procedure StepChangeTaxRate_AgreementInList(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain, , True);
-EndProcedure
-
-// <List>.ChangeTaxRate.[OnlyWhenAgreementIsFilled].Step
-Procedure StepChangeTaxRate_OnlyWhenAgreementIsFilled(Parameters, Chain) Export
-	StepChangeTaxRate(Parameters, Chain, True, , True);
 EndProcedure
 
 // <List>.ChangeTaxRate.[WithoutAgreement].Step
@@ -3211,10 +3205,7 @@ Procedure StepChangeTaxRate_WithoutAgreement(Parameters, Chain) Export
 EndProcedure
 
 // <List>.ChangeTaxRate.Step
-Procedure StepChangeTaxRate(Parameters, Chain,
-			AgreementInHeader = False,
-			AgreementInList = False, 
-			OnlyWhenAgreementIsFilled = False)
+Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, AgreementInList = False)
 	
 	Options_Date      = GetDate(Parameters);
 	Options_Company   = GetCompany(Parameters);
@@ -3241,7 +3232,6 @@ Procedure StepChangeTaxRate(Parameters, Chain,
 		If AgreementInList Then
 			Options.Agreement = GetPropertyObject(Parameters, Parameters.TableName + "." + "Agreement", Row.Key);
 		EndIf;
-		Options.ChangeOnlyWhenAgreementIsFilled = OnlyWhenAgreementIsFilled;
 		
 		Options.Date           = Options_Date;
 		Options.Company        = Options_Company;

@@ -1224,8 +1224,7 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, Ref, 
-		|ChangeOnlyWhenAgreementIsFilled, IsBasedOn, TaxList");
+	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
@@ -1260,11 +1259,7 @@ Function ChangeTaxRateExecute(Options) Export
 		EndDo;
 		Return Result;
 	EndIf;
-	
-	If Options.ChangeOnlyWhenAgreementIsFilled = True And Not ValueIsFilled(Options.Agreement) Then
-		Return Result;
-	EndIf;
-	
+		
 	// taxes when have in company by document date
 	DocumentName = Options.Ref.Metadata().Name;
 	AllTaxes = TaxesServer.GetTaxesByCompany(Options.Date, Options.Company);

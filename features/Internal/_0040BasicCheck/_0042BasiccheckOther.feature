@@ -10,11 +10,12 @@ I want to check opening registers, reports and data processor forms
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
-	And I set "True" value to the constant "UseAccounting"
+	
 	
 
 Scenario: preparation
+	When set True value to the constant
+	And I set "True" value to the constant "UseAccounting"
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
@@ -770,10 +771,17 @@ Scenario: Open choise form "CustomUserSettings"
 		Then I raise "Failed to open ChartsOfCharacteristicTypes choise form CustomUserSettings" exception
 	And I close current window
 
-Scenario: Open object form "R6010A_Master"
+Scenario: Open object form "T1040 Accounting amounts"
 
-	Given I open the list form of Accounting register "R6010A_Master"
+	Given I open "T1040T_AccountingAmounts" accumulation register default form
 	If the warning is displayed then
-		Then I raise "Failed to open accounting register form R6010A_Master" exception
+		Then I raise "Failed to open accounting register form T1040 Accounting amounts" exception
 	And I close current window
 
+
+Scenario: Open object form "T1050 Accounting quantities"
+
+	Given I open "T1050T_AccountingQuantities" accumulation register default form
+	If the warning is displayed then
+		Then I raise "Failed to open accounting register form T1050 Accounting quantities" exception
+	And I close current window

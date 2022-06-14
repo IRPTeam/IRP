@@ -3658,7 +3658,58 @@ Scenario: _092064 check unique serial lot number settings
 			And I wait "Retail sales receipt (create) *" window closing in 20 seconds
 			Then user message window does not contain messages
 			And I close all client application windows
-			
+
+Scenario: _092065 create unique serial lot number in the Serial lot number catalog
+	And I close all client application windows
+	* Open creation form
+		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
+		And I click "Create" button
+	* Filling new object
+		Then "Item serial/lot number (create)" window is opened
+		And I click Choice button of the field named "Owner"
+		Then "Select data type" window is opened
+		And I go to line in "" table
+			| ''         |
+			| 'Item key' |
+		And I select current line in "" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '36/Yellow' |
+		And I activate field named "Item" in "List" table
+		And I select current line in "List" table
+		And I input "0099009009" text in "Serial number" field			
+	* Check filling
+		Then the form attribute named "Owner" became equal to "36/Yellow"
+		Then the form attribute named "OwnerSelect" became equal to "Manual"
+		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"
+		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "Yes"
+		Then the form attribute named "StockBalanceDetail" became equal to "No"
+		Then the form attribute named "Inactive" became equal to "No"
+		And the editing text of form attribute named "Description" became equal to "0099009009"
+	* Check creation
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Serial number'  |
+			| '0099009009'     |
+	* Сhange in the sign of Unique
+		And I go to line in "List" table
+			| 'Serial number'  |
+			| '0099009009'     |
+		And I select current line in "List" table
+		And I remove checkbox named "EachSerialLotNumberIsUnique"
+		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "No"
+		And I click "Save and close" button
+	* Check saving
+		And I go to line in "List" table
+			| 'Serial number'  |
+			| '0099009009'     |
+		And I select current line in "List" table
+		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "No"
+		And I close all client application windows
+		
+		
+
 Scenario: _092080 create serial lot number from Create serial lot numbers data processor without scan emulator	
 	Given I open hyperlink "e1cib/app/DataProcessor.CreateSerialLotNumbers"	
 	* Scan barcode

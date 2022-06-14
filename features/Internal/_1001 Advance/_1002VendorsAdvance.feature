@@ -619,8 +619,24 @@ Scenario: _1002052 check VendorsAdvancesClosing movements when unpost document a
 			| 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 		And I close all client application windows
 		
-		
 
+Scenario: _1002062 generate Offset of advance report based on VendorsAdvancesClosing
+	And I close all client application windows
+	* Select VendorsAdvancesClosing
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+	* Generate report
+		And I click "Offset of advances" button
+		Then "Offset of advances" window is opened
+		And I click "Run" button
+	* Check
+		And "Doc" spreadsheet document contains "OffsetOfAdvanceVendor" template lines by template
+		And I close all client application windows
+		
+				
+				
 		
 							
 	

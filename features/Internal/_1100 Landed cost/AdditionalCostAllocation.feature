@@ -82,12 +82,13 @@ Scenario: _041 test data
 			| 'Main Company' |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
-		And I move to "External attributes" tab
-		And I click Select button of "Landed cost currency movement type" field
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
 			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
 			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
 		And I select current line in "List" table
+		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"		
 		And I click "Save and close" button
 		And I wait "Main Company (Company) *" window closing in 20 seconds
 		Then "Companies" window is opened
@@ -96,15 +97,13 @@ Scenario: _041 test data
 			| 'Second Company' |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
-		And I move to "External attributes" tab
-		And I click Select button of "Landed cost currency movement type" field
-		And I go to line in "List" table
-			| 'Currency' | 'Deferred calculation' | 'Description'        | 'Reference'          | 'Source'       | 'Type'      |
-			| 'USD'      | 'No'                   | 'Reporting currency' | 'Reporting currency' | 'Forex Seling' | 'Reporting' |
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
 		And I go to line in "List" table
 			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
 			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
 		And I select current line in "List" table
+		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"		
 		And I click "Save and close" button
 		And I wait "Second Company (Company) *" window closing in 20 seconds
 	* Load documents
@@ -642,43 +641,42 @@ Scenario: _051 create additional cost allocation (row, by amount)
 			And in the table "CostRows" I click "Select costs" button
 			Then "Select cost rows" window is opened
 			And "CostRowsTree" table became equal
-				| 'Document'                                         | 'Use' | 'Amount' | 'Item'    | 'Item key' | 'Currency' |
-				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'No'  | ''       | ''        | ''         | ''         |
-				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'No'  | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
-				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'No'  | '200,00' | 'Service' | 'Interner' | 'TRY'      |
-				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'No'  | ''       | ''        | ''         | ''         |
-				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'No'  | '250,00' | 'Service' | 'Rent'     | 'TRY'      |
-				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'No'  | '400,00' | 'Service' | 'Interner' | 'TRY'      |
-				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'No'  | ''       | ''        | ''         | ''         |
-				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'No'  | '400,00' | 'Service' | 'Interner' | 'TRY'      |
-				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'No'  | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Presentation'                                     | 'Use'                                              | 'Amount' | 'Currency' |
+				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | '350,00' | 'TRY'      |
+				| 'Service, Rent'                                    | 'No'                                               | '150,00' | 'TRY'      |
+				| 'Service, Interner'                                | 'No'                                               | '200,00' | 'TRY'      |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | '650,00' | 'TRY'      |
+				| 'Service, Rent'                                    | 'No'                                               | '250,00' | 'TRY'      |
+				| 'Service, Interner'                                | 'No'                                               | '400,00' | 'TRY'      |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | '550,00' | 'TRY'      |
+				| 'Service, Interner'                                | 'No'                                               | '400,00' | 'TRY'      |
+				| 'Service, Rent'                                    | 'No'                                               | '150,00' | 'TRY'      |			
 			And I go to line in "CostRowsTree" table
-				| 'Amount' | 'Currency' | 'Item'    | 'Item key' | 'Use' |
-				| '250,00' | 'TRY'      | 'Service' | 'Rent'     | 'No'  |
-			And I activate "Item" field in "CostRowsTree" table
-			And I change "Use" checkbox in "CostRowsTree" table
-			And I finish line editing in "CostRowsTree" table
+				| 'Presentation'                                     | 'Use'                                              | 'Amount' | 'Currency' |
+				| 'Service, Rent'                                    | 'No'                                               | '250,00' | 'TRY'      |
+			And I set "Use" checkbox in "CostRowsTree" table
+			And I finish line editing in "CostRowsTree" table		
 			And I go to line in "CostRowsTree" table
-				| 'Amount' | 'Currency' | 'Item'    | 'Item key' | 'Use' |
-				| '150,00' | 'TRY'      | 'Service' | 'Rent'     | 'No'  |
+				| 'Presentation'                                     | 'Use'                                              | 'Amount' | 'Currency' |
+				| 'Service, Rent'                                    | 'No'                                               | '150,00' | 'TRY'      |			
 			And I change "Use" checkbox in "CostRowsTree" table
 			And I finish line editing in "CostRowsTree" table
 			And I click "Ok" button
 			And "CostRows" table became equal
-				| 'Document'                                         | 'Amount' | 'Item'    | 'Item key' | 'Currency' |
-				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''       | ''        | ''         | ''         |
-				| ''                                                 | '250,00' | 'Service' | 'Rent'     | 'TRY'      |
-				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''       | ''        | ''         | ''         |
-				| ''                                                 | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Presentation'                                     | 'Currency' | 'Amount' |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'TRY'      | '250,00' |
+				| 'Service, Rent'                                    | 'TRY'      | '250,00' |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'TRY'      | '150,00' |
+				| 'Service, Rent'                                    | 'TRY'      | '150,00' |	
 		* Select allocation
 			And I go to line in "CostRows" table
-				| 'Amount' | 'Currency' | 'Item'    | 'Item key' |
-				| '250,00' | 'TRY'      | 'Service' | 'Rent'     |
+				| 'Amount' | 'Currency' | 'Presentation' |
+				| '250,00' | 'TRY'      | 'Service, Rent' |
 			And in the table "AllocationRows" I click "Select allocations" button
 			Then "Select allocation rows" window is opened
 			And I go to line in "List" table
-				| 'Company'      | 'Document'                                     |
-				| 'Main Company' | 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
+				| 'Document'                                     |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
 			And I select current line in "List" table
 			And I move to "Rows" tab
 			And I go to line in "DocumentRows" table
@@ -694,14 +692,14 @@ Scenario: _051 create additional cost allocation (row, by amount)
 			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
 			And I move to "Results" tab
 			And "ResultTree" table became equal
-				| 'Document'                                     | 'Store'    | 'Item'  | 'Item key' |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         | ''      | ''         |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Dress' | 'M/White'  |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Boots' | '37/18SD'  |
+				| 'Presentation'                                 | 'Store'    |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         |
+				| 'Dress ,M/White'                               | 'Store 02' |
+				| 'Boots ,37/18SD'                               | 'Store 02' |
 			And I move to the tab named "GroupPageRowEditor"
 			And I go to line in "List" table
-				| 'Company'      | 'Document'                                     |
-				| 'Main Company' | 'Purchase invoice 3 dated 13.08.2021 16:52:30' |
+				| 'Document'                                     |
+				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' |
 			And I select current line in "List" table
 			And I move to "Rows" tab
 			And I go to line in "DocumentRows" table
@@ -712,27 +710,27 @@ Scenario: _051 create additional cost allocation (row, by amount)
 			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
 			And I move to "Results" tab
 			And "ResultTree" table became equal
-				| 'Document'                                     | 'Store'    | 'Item'  | 'Item key' |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         | ''      | ''         |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Dress' | 'M/White'  |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Boots' | '37/18SD'  |
-				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | ''         | ''      | ''         |
-				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | 'Store 02' | 'Bag'   | 'ODS'      |
+				| 'Presentation'                                 | 'Store'    |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         |
+				| 'Dress ,M/White'                               | 'Store 02' |
+				| 'Boots ,37/18SD'                               | 'Store 02' |
+				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | ''         |
+				| 'Bag ,ODS'                                     | 'Store 02' |		
 			And I click "Ok" button
 			And "CostRows" table became equal
-				| 'Document'                                         | 'Amount' | 'Item'    | 'Item key' | 'Currency' |
-				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''       | ''        | ''         | ''         |
-				| ''                                                 | '250,00' | 'Service' | 'Rent'     | 'TRY'      |
-				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''       | ''        | ''         | ''         |
-				| ''                                                 | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Presentation'                                     | 'Currency' | 'Amount' |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'TRY'      | '250,00' |
+				| 'Service, Rent'                                    | 'TRY'      | '250,00' |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'TRY'      | '150,00' |
+				| 'Service, Rent'                                    | 'TRY'      | '150,00' |			
 		* Check cancel when select allocation
 			And I go to line in "CostRows" table
-				| 'Amount' | 'Currency' | 'Item'    | 'Item key' |
-				| '150,00' | 'TRY'      | 'Service' | 'Rent'     |
+				| 'Amount' | 'Currency' | 'Presentation'  |
+				| '150,00' | 'TRY'      | 'Service, Rent' |
 			And in the table "AllocationRows" I click "Select allocations" button
 			And I go to line in "List" table
-				| 'Company'      | 'Document'                                     |
-				| 'Main Company' | 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
+				| 'Document'                                     |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
 			And I select current line in "List" table
 			And I move to "Rows" tab
 			And I go to line in "DocumentRows" table
@@ -743,11 +741,11 @@ Scenario: _051 create additional cost allocation (row, by amount)
 			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
 			And I click the button named "FormCancel"
 			And "CostRows" table became equal
-				| 'Document'                                         | 'Amount' | 'Item'    | 'Item key' | 'Currency' |
-				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''       | ''        | ''         | ''         |
-				| ''                                                 | '250,00' | 'Service' | 'Rent'     | 'TRY'      |
-				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''       | ''        | ''         | ''         |
-				| ''                                                 | '150,00' | 'Service' | 'Rent'     | 'TRY'      |
+				| 'Presentation'                                     | 'Currency' | 'Amount' |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'TRY'      | '250,00' |
+				| 'Service, Rent'                                    | 'TRY'      | '250,00' |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'TRY'      | '150,00' |
+				| 'Service, Rent'                                    | 'TRY'      | '150,00' |	
 		* Allocate cost amount
 			And in the table "AllocationRows" I click "Allocate cost Amount" button
 			And I click the button named "FormPost"
@@ -978,43 +976,43 @@ Scenario: _071 create additional revenue allocation (row, by amount)
 			And in the table "RevenueRows" I click "Select revenues" button
 			Then "Select revenue rows" window is opened
 			And "RevenueRowsTree" table became equal
-				| 'Document'                                      | 'Use' | 'Amount'   | 'Item'    | 'Item key' | 'Currency' |
-				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | 'No'  | ''         | ''        | ''         | ''         |
-				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | 'No'  | '750,00'   | 'Service' | 'Rent'     | 'TRY'      |
-				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | 'No'  | ''         | ''        | ''         | ''         |
-				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | 'No'  | '1 000,00' | 'Service' | 'Rent'     | 'TRY'      |
-				| 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | 'No'  | ''         | ''        | ''         | ''         |
-				| 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | 'No'  | '100,00'   | 'Service' | 'Interner' | 'TRY'      |
-				| 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | 'No'  | '300,00'   | 'Service' | 'Rent'     | 'TRY'      |
-				| 'Sales invoice 9 018 dated 09.06.2022 16:14:23' | 'No'  | ''         | ''        | ''         | ''         |
-				| 'Sales invoice 9 018 dated 09.06.2022 16:14:23' | 'No'  | '300,00'   | 'Service' | 'Rent'     | 'TRY'      |		
+				| 'Presentation'                                  | 'Use'                                           | 'Amount'   | 'Currency' |
+				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | '750,00'   | 'TRY'      |
+				| 'Service, Rent'                                 | 'No'                                            | '750,00'   | 'TRY'      |
+				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | '1 000,00' | 'TRY'      |
+				| 'Service, Rent'                                 | 'No'                                            | '1 000,00' | 'TRY'      |
+				| 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | '400,00'   | 'TRY'      |
+				| 'Service, Interner'                             | 'No'                                            | '100,00'   | 'TRY'      |
+				| 'Service, Rent'                                 | 'No'                                            | '300,00'   | 'TRY'      |
+				| 'Sales invoice 9 018 dated 09.06.2022 16:14:23' | 'Sales invoice 9 018 dated 09.06.2022 16:14:23' | '300,00'   | 'TRY'      |
+				| 'Service, Rent'                                 | 'No'                                            | '300,00'   | 'TRY'      |		
+			Then "Select revenue rows" window is opened
 			And I go to line in "RevenueRowsTree" table
-				| 'Amount' | 'Currency' | 'Item'    | 'Item key' | 'Use' |
-				| '750,00' | 'TRY'      | 'Service' | 'Rent'     | 'No'  |
-			And I activate "Item" field in "RevenueRowsTree" table
-			And I change "Use" checkbox in "RevenueRowsTree" table
-			And I finish line editing in "RevenueRowsTree" table
+				| 'Amount' | 'Currency' | 'Presentation'  | 'Use' |
+				| '750,00' | 'TRY'      | 'Service, Rent' | 'No'  |	
+			And I set "Use" checkbox in "RevenueRowsTree" table
+			And I finish line editing in "RevenueRowsTree" table	
 			And I go to line in "RevenueRowsTree" table
-				| 'Amount'   | 'Currency' | 'Item'    | 'Item key' | 'Use' |
-				| '1 000,00' | 'TRY'      | 'Service' | 'Rent'     | 'No'  |
+				| 'Amount'   | 'Currency' | 'Presentation'  | 'Use' |
+				| '1 000,00' | 'TRY'      | 'Service, Rent' | 'No'  |	
 			And I change "Use" checkbox in "RevenueRowsTree" table
 			And I finish line editing in "RevenueRowsTree" table
 			And I click "Ok" button
 			And "RevenueRows" table became equal
-				| 'Document'                                      | 'Amount'   | 'Item'    | 'Item key' | 'Currency' |
-				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | ''         | ''        | ''         | ''         |
-				| ''                                              | '750,00'   | 'Service' | 'Rent'     | 'TRY'      |
-				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | ''         | ''        | ''         | ''         |
-				| ''                                              | '1 000,00' | 'Service' | 'Rent'     | 'TRY'      |			
+				| 'Presentation'                                  | 'Currency' | 'Amount'   |
+				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | 'TRY'      | '750,00'   |
+				| 'Service, Rent'                                 | 'TRY'      | '750,00'   |
+				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | 'TRY'      | '1 000,00' |
+				| 'Service, Rent'                                 | 'TRY'      | '1 000,00' |						
 		* Select allocation
 			And I go to line in "RevenueRows" table
-				| 'Amount' | 'Currency' | 'Item'    | 'Item key' |
-				| '750,00' | 'TRY'      | 'Service' | 'Rent'     |
+				| 'Amount' | 'Currency' | 'Presentation'  |
+				| '750,00' | 'TRY'      | 'Service, Rent' |
 			And in the table "AllocationRows" I click "Select allocations" button
 			Then "Select allocation rows" window is opened
 			And I go to line in "List" table
-				| 'Company'      | 'Document'                                     |
-				| 'Main Company' | 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
+				| 'Document'                                     |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
 			And I select current line in "List" table
 			And I move to "Rows" tab
 			And I go to line in "DocumentRows" table
@@ -1030,14 +1028,14 @@ Scenario: _071 create additional revenue allocation (row, by amount)
 			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
 			And I move to "Results" tab
 			And "ResultTree" table became equal
-				| 'Document'                                     | 'Store'    | 'Item'  | 'Item key' |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         | ''      | ''         |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Dress' | 'M/White'  |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Boots' | '37/18SD'  |
+				| 'Presentation'                                 | 'Store'    |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         |
+				| 'Dress ,M/White'                               | 'Store 02' |
+				| 'Boots ,37/18SD'                               | 'Store 02' |		
 			And I move to the tab named "GroupPageRowEditor"
 			And I go to line in "List" table
-				| 'Company'      | 'Document'                                     |
-				| 'Main Company' | 'Purchase invoice 3 dated 13.08.2021 16:52:30' |
+				| 'Document'                                     |
+				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' |
 			And I select current line in "List" table
 			And I move to "Rows" tab
 			And I go to line in "DocumentRows" table
@@ -1048,21 +1046,21 @@ Scenario: _071 create additional revenue allocation (row, by amount)
 			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
 			And I move to "Results" tab
 			And "ResultTree" table became equal
-				| 'Document'                                     | 'Store'    | 'Item'  | 'Item key' |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         | ''      | ''         |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Dress' | 'M/White'  |
-				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | 'Store 02' | 'Boots' | '37/18SD'  |
-				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | ''         | ''      | ''         |
-				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | 'Store 02' | 'Bag'   | 'ODS'      |
+				| 'Presentation'                                 | 'Store'    |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' | ''         |
+				| 'Dress ,M/White'                               | 'Store 02' |
+				| 'Boots ,37/18SD'                               | 'Store 02' |
+				| 'Purchase invoice 3 dated 13.08.2021 16:52:30' | ''         |
+				| 'Bag ,ODS'                                     | 'Store 02' |		
 			And I click "Ok" button
 		* Check cancel when select allocation
 			And I go to line in "RevenueRows" table
-				| 'Amount' | 'Currency' | 'Item'    | 'Item key' |
-				| '750,00' | 'TRY'      | 'Service' | 'Rent'     |
+				| 'Amount' | 'Currency' | 'Presentation'  |
+				| '750,00' | 'TRY'      | 'Service, Rent' |
 			And in the table "AllocationRows" I click "Select allocations" button
 			And I go to line in "List" table
-				| 'Company'      | 'Document'                                     |
-				| 'Main Company' | 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
+				| 'Document'                                     |
+				| 'Purchase invoice 2 dated 14.08.2021 12:00:00' |
 			And I select current line in "List" table
 			And I move to "Rows" tab
 			And I go to line in "DocumentRows" table
@@ -1073,11 +1071,11 @@ Scenario: _071 create additional revenue allocation (row, by amount)
 			And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
 			And I click the button named "FormCancel"
 			And "RevenueRows" table became equal
-				| 'Document'                                      | 'Amount'   | 'Item'    | 'Item key' | 'Currency' |
-				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | ''         | ''        | ''         | ''         |
-				| ''                                              | '750,00'   | 'Service' | 'Rent'     | 'TRY'      |
-				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | ''         | ''        | ''         | ''         |
-				| ''                                              | '1 000,00' | 'Service' | 'Rent'     | 'TRY'      |			
+				| 'Presentation'                                  | 'Currency' | 'Amount'   |
+				| 'Sales invoice 9 019 dated 09.06.2022 16:14:43' | 'TRY'      | '750,00'   |
+				| 'Service, Rent'                                 | 'TRY'      | '750,00'   |
+				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | 'TRY'      | '1 000,00' |
+				| 'Service, Rent'                                 | 'TRY'      | '1 000,00' |					
 		* Allocate revenue amount
 			And in the table "AllocationRows" I click "Allocate revenue Amount" button
 			And I click the button named "FormPost"

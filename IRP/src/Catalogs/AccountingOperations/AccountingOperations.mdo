@@ -50,10 +50,24 @@
       </code>
       <isFolder>true</isFolder>
       <content id="0a5ed6e5-a6f6-4167-b3d9-198842f906e6">
-        <name>BankPayment_Dr_PartnerAccount_Cr_CashAccount</name>
+        <name>BankPayment_DR_R1020B_R1021B_CR_R3010B</name>
         <description>Dr Partner account - Cr Cash account</description>
         <code xsi:type="core:NumberValue">
           <value>3</value>
+        </code>
+      </content>
+      <content id="084c14d6-0bf2-4b3f-a728-f9be108187ca">
+        <name>BankPayment_DR_R5022T_CR_R3010B</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>9</value>
+        </code>
+      </content>
+      <content id="74335ed0-2922-43c2-85c5-27c87eb943ba">
+        <name>BankPayment_DR_R1021B_CR_R1020B</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>10</value>
         </code>
       </content>
     </items>
@@ -65,7 +79,7 @@
       </code>
       <isFolder>true</isFolder>
       <content id="84005d98-3b5e-4d01-9885-c136d7fa2202">
-        <name>BankReceipt_Dr_CashAccount_Cr_PartnerAccount</name>
+        <name>BankReceipt_DR_R3010B_CR_R2021B</name>
         <description>Dr Cash account - Cr partner account</description>
         <code xsi:type="core:NumberValue">
           <value>4</value>
@@ -80,24 +94,39 @@
       </code>
       <isFolder>true</isFolder>
       <content id="436a2614-e716-45b0-b595-9b5dc7abd846">
-        <name>PurchaseInvoice_Dr_ItemKeyAccount_Cr_PartnerAccount</name>
+        <name>PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B</name>
         <description>Dr Item key account - Cr Partner account</description>
         <code xsi:type="core:NumberValue">
           <value>6</value>
         </code>
       </content>
       <content id="d758c87d-587a-4d4a-a0dd-fdb979084274">
-        <name>PurchaseInvoice_Dr_PartnerAccountTrn_Cr_PartnerAccountAdv</name>
+        <name>PurchaseInvoice_DR_R1021B_CR_R1020B</name>
         <description>Dr Partner account trn - Cr Partner account adv</description>
         <code xsi:type="core:NumberValue">
           <value>7</value>
         </code>
       </content>
       <content id="d75b04c3-eee9-4726-821b-2984b3e3d799">
-        <name>PurchaseInvoice_Dr_TaxAccount_Cr_PartnerAccount</name>
+        <name>PurchaseInvoice_DR_R1040B_CR_R1021B</name>
         <description>Dr Tax account - Cr Partner account</description>
         <code xsi:type="core:NumberValue">
           <value>8</value>
+        </code>
+      </content>
+    </items>
+    <items id="2629786b-a1c8-4e5f-819b-76ffc472e4eb">
+      <name>Document_RetailSalesReceipt</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>11</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="f2fd559e-6f20-450c-9dcc-5585777939b7">
+        <name>RetailSalesReceipt_DR_R5022T_CR_R4050B</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>12</value>
         </code>
       </content>
     </items>
@@ -110,6 +139,24 @@
   <defaultChoiceForm>Catalog.AccountingOperations.Form.ChoiceForm</defaultChoiceForm>
   <defaultFolderChoiceForm>Catalog.AccountingOperations.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="327cc162-7389-4392-bd17-275963a184c7">
+    <name>Order</name>
+    <synonym>
+      <key>en</key>
+      <value>Order</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>3</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="246f6fca-52db-4e34-8f5c-f33d4b2fec75">
     <name>ItemForm</name>
     <synonym>

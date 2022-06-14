@@ -133,9 +133,10 @@ EndProcedure
 
 &AtServer
 Procedure SetVisible()
-	Items.GroupCurrencies.Visible = Object.OurCompany;
-	Items.GroupTaxes.Visible = Object.OurCompany;
+	Items.GroupCurrencies.Visible  = Object.OurCompany;
+	Items.GroupTaxes.Visible       = Object.OurCompany;
 	Items.GroupLedgerTypes.Visible = Object.OurCompany;
+	Items.GroupLandedCost.Visible  = Object.OurCompany;
 EndProcedure
 
 &AtClient

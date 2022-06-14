@@ -546,6 +546,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 	* Check remaining stock control
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
+		And I activate "1C:Enterprise" window		
 		And I click the button named "OK"
 		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 23 . Required: 25 . Lacking: 2 ." substring will appear in 10 seconds
 	* Change quantity and post document
@@ -824,6 +825,7 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 	* Check remaining stock control
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
+		And I activate "1C:Enterprise" window		
 		And I click the button named "OK"
 		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 5 . Required: 6 . Lacking: 1 ." substring will appear in 10 seconds
 	* Change quantity and post document
@@ -1218,10 +1220,12 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 			And I finish line editing in "ItemList" table
 			And I click "Post" button
 			Then "1C:Enterprise" window is opened
+			And I activate "1C:Enterprise" window		
 			And I click the button named "OK"
 	* Check remaining stock control
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
+		And I activate "1C:Enterprise" window		
 		And I click the button named "OK"
 		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 5 . Required: 6 . Lacking: 1 ." substring will appear in 10 seconds
 	* Change quantity and post document
@@ -1432,6 +1436,7 @@ Scenario:_800021 check remaining stock control in the Purchase return
 	* Check remaining stock control
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
+		And I activate "1C:Enterprise" window		
 		And I click the button named "OK"
 		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 5 . Required: 6 . Lacking: 1 ." substring will appear in 10 seconds
 	* Change quantity and post document
@@ -1645,6 +1650,7 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 	* Check remaining stock control
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
+		And I activate "1C:Enterprise" window		
 		And I click the button named "OK"
 		Then I wait that in user messages the "Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010B_ActualStocks remaining: 5 . Required: 6 . Lacking: 1 ." substring will appear in 10 seconds
 	* Change quantity and post document

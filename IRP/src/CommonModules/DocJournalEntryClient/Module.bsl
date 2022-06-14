@@ -51,6 +51,13 @@ EndProcedure
 #Region ItemBasis
 
 Procedure BasisOnChange(Object, Form, Item) Export
+	If ValueIsFilled(Object.Basis) Then
+	 	If CommonFunctionsClientServer.ObjectHasProperty(Object.Basis, "Company") Then
+			Object.Company = Object.Basis.Company;
+		EndIf;
+	Else
+		Object.Company = Undefined;
+	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 

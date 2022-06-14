@@ -5,17 +5,33 @@
 			<item>
 				<field>RevenueRowsTreeUse</field>
 			</item>
-			<item>
-				<field>RevenueRowsTreeItemKey</field>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">RevenueRowsTree.Level</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:decimal">1</right>
 			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:use>false</dcscor:use>
+				<dcscor:parameter>Visible</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>Show</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
 			<item>
 				<field>RevenueRowsTreeCurrency</field>
 			</item>
 			<item>
 				<field>RevenueRowsTreeAmount</field>
-			</item>
-			<item>
-				<field>RevenueRowsTreeItemKeyItem</field>
 			</item>
 		</selection>
 		<filter>
@@ -27,28 +43,8 @@
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>RevenueRowsTreeDocument</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">RevenueRowsTree.Level</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">2</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+				<dcscor:parameter>Font</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Font" faceName="MS Shell Dlg" height="8" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 			</dcscor:item>
 		</appearance>
 	</item>

@@ -3,17 +3,11 @@
 	<item>
 		<selection>
 			<item>
-				<field>RevenueRowsItemKey</field>
-			</item>
-			<item>
 				<field>RevenueRowsCurrency</field>
 			</item>
 			<item>
 				<field>RevenueRowsAmount</field>
 			</item>
-			<item>
-				<field>RevenueRowsItemKeyItem</field>
-			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
@@ -24,44 +18,15 @@
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+				<dcscor:parameter>Font</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Font" faceName="MS Shell Dlg" height="8" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 			</dcscor:item>
 		</appearance>
 	</item>
 	<item>
 		<selection>
-			<item>
-				<field>RevenueRowsDocument</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">RevenueRows.Level</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">2</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>AllocationRowsStore</field>
-			</item>
-			<item>
-				<field>AllocationRowsItemKey</field>
-			</item>
 			<item>
 				<field>AllocationRowsAmount</field>
-			</item>
-			<item>
-				<field>AllocationRowsItemKeyItem</field>
 			</item>
 		</selection>
 		<filter>
@@ -73,53 +38,24 @@
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+				<dcscor:parameter>Font</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Font" faceName="MS Shell Dlg" height="8" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 			</dcscor:item>
 		</appearance>
 	</item>
 	<item>
 		<selection>
 			<item>
-				<field>AllocationRowsDocument</field>
+				<field>AllocationRowsIcon</field>
 			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">AllocationRows.Level</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">2</right>
+			<item>
+				<field>AllocationRowsPresentation</field>
 			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
 			<item>
 				<field>AllocationRowsStore</field>
 			</item>
 			<item>
-				<field>AllocationRowsItemKey</field>
-			</item>
-			<item>
 				<field>AllocationRowsAmount</field>
-			</item>
-			<item>
-				<field>AllocationRowsDocument</field>
-			</item>
-			<item>
-				<field>AllocationRowsBasisRowID</field>
-			</item>
-			<item>
-				<field>AllocationRowsRowID</field>
-			</item>
-			<item>
-				<field>AllocationRowsItemKeyItem</field>
 			</item>
 		</selection>
 		<filter>
@@ -132,30 +68,6 @@
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>AllocationDocumentsDocument</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.AllocationDocuments.Visible</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">false</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Show</dcscor:parameter>
 				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
 			</dcscor:item>
 		</appearance>

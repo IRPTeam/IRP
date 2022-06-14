@@ -82,7 +82,7 @@
       <value>Variant</value>
     </synonym>
     <type>
-      <types>EnumRef.LedgerTypeVariants</types>
+      <types>CatalogRef.LedgerTypeVariants</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

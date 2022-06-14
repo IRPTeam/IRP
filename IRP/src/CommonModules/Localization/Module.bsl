@@ -687,7 +687,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_108", NStr("en = 'Field is filled, but it has to be empty.'", Lang));
 	Strings.Insert("Error_109", NStr("en = 'Serial lot number name [ %1 ] is not match template: %2'", Lang) + Chars.LF);
 	Strings.Insert("Error_110", NStr("en = 'Current serial lot number already has movements, it can not disable stock detail option'", Lang) + Chars.LF);
-	Strings.Insert("Error_111", NStr("en = 'Serial lot number [ %1 ] has to be unique at the document'", Lang) + Chars.LF);
+	Strings.Insert("Error_111", NStr("en = 'Period is empty [%1] : [%2]'", Lang) + Chars.LF);
+	Strings.Insert("Error_112", NStr("en = 'Not set ledger type by company [%1]'", Lang));
+	Strings.Insert("Error_113", NStr("en = 'Serial lot number [ %1 ] has to be unique at the document'", Lang) + Chars.LF);
 	
 #EndRegion
 

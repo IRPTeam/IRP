@@ -141,15 +141,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-//	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-
-// @deprecated
-//#Region NewRegistersPosting
-//	PostingServer.SetLockDataSource(DataMapWithLockFields, AccumulationRegisters.R1020B_AdvancesToVendors,
-//		DocumentDataTables.VendorsTransactions);
-//#EndRegion
-
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -401,6 +393,7 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		   |	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
 		   |	PurchaseInvoiceItemList.NetAmount AS NetAmount,
+		   |	PurchaseInvoiceItemList.TaxAmount AS TaxAmount,
 		   |	PurchaseInvoiceItemList.Key,
 		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
 		   |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
@@ -1068,47 +1061,6 @@ Function T2015S_TransactionsInfo()
 	|	ItemList.BasisDocument";
 EndFunction
 
-Function T1040T_AccountingAmounts()
-	Return
-	"SELECT
-	|	ItemList.Period,
-	|	ItemList.Key AS RowKey,
-	|	ItemList.Currency,
-	|	ItemList.Amount,
-	|	ItemList.NetAmount,
-	|	FALSE AS IsAdvanceClosing,
-	|	UNDEFINED AS AdvancesClosing
-	|INTO T1040T_AccountingAmounts
-	|FROM
-	|	ItemList AS ItemList
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	OffsetOfAdvances.Period,
-	|	OffsetOfAdvances.Key AS RowKey,
-	|	OffsetOfAdvances.Currency,
-	|	OffsetOfAdvances.Amount,
-	|	0,
-	|	TRUE,
-	|	OffsetOfAdvances.Recorder
-	|FROM
-	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-	|WHERE
-	|	OffsetOfAdvances.Document = &Ref";
-EndFunction
-
-Function T1050T_AccountingQuantities()
-	Return
-	"SELECT
-	|	ItemList.Period,
-	|	ItemList.Key AS RowKey,
-	|	ItemList.Quantity
-	|INTO T1050T_AccountingQuantities
-	|FROM
-	|	ItemList AS ItemList";
-EndFunction
-
 Function R6070T_OtherPeriodsExpenses()
 	Return
 	"SELECT
@@ -1148,198 +1100,155 @@ EndFunction
 
 #Region Accounting
 
-Function GetAccountingAnalytics(Parameters) Export
-	If Parameters.Identifier = Catalogs.AccountingOperations.PurchaseInvoice_Dr_ItemKeyAccount_Cr_PartnerAccount Then
-		Return GetAnalytics_Dr_ItemKeyAccount_Cr_PartnerAccount(Parameters);
-	ElsIf Parameters.Identifier = Catalogs.AccountingOperations.PurchaseInvoice_Dr_PartnerAccountTrn_Cr_PartnerAccountAdv Then
-		Return GetAnalytics_Dr_PartnerAccountTrn_Cr_PartnerAccountAdv(Parameters);
-	EndIf;
-	Return Undefined;
+Function T1040T_AccountingAmounts()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	ItemList.Key AS RowKey,
+	|	ItemList.Currency,
+	|	ItemList.NetAmount AS Amount,
+	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B) AS Operation,
+	|	UNDEFINED AS AdvancesClosing
+	|INTO T1040T_AccountingAmounts
+	|FROM
+	|	ItemList AS ItemList
+	|
+	|UNION ALL
+	|
+	|select
+	|	ItemList.Period,
+	|	ItemList.Key AS RowKey,
+	|	ItemList.Currency,
+	|	ItemList.TaxAmount,
+	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
+	|	undefined
+	|from
+	|	ItemList as ItemList
+	|
+	|union all
+	|
+	|SELECT
+	|	T2010S_OffsetOfAdvances.Period,
+	|	T2010S_OffsetOfAdvances.Key AS RowKey,
+	|	T2010S_OffsetOfAdvances.Currency,
+	|	T2010S_OffsetOfAdvances.Amount,
+	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
+	|	T2010S_OffsetOfAdvances.Recorder
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
+	|WHERE
+	|	T2010S_OffsetOfAdvances.Document = &Ref";
 EndFunction
 
-Function GetAccountingData(Parameters) Export
-	If Parameters.Identifier = Catalogs.AccountingOperations.PurchaseInvoice_Dr_ItemKeyAccount_Cr_PartnerAccount Then
-		Return GetData_Dr_ItemKeyAccount_Cr_PartnerAccount(Parameters);
-	ElsIf Parameters.Identifier = Catalogs.AccountingOperations.PurchaseInvoice_Dr_PartnerAccountTrn_Cr_PartnerAccountAdv Then
-		Return GetData_Dr_PartnerAccountTrn_Cr_PartnerAccountAdv(Parameters);
+Function T1050T_AccountingQuantities()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	ItemList.Key AS RowKey,
+	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B) AS Operation,
+	|	ItemList.Quantity
+	|INTO T1050T_AccountingQuantities
+	|FROM
+	|	ItemList AS ItemList";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	Operations = Catalogs.AccountingOperations;
+	If Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B Then
+		Return GetAnalytics_DR_R4050B_CR_R1021B(Parameters); // Stock inventory - Vendors transactions
+	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_CR_R1020B Then
+		Return GetAnalytics_DR_R1021B_CR_R1020B(Parameters); // Vendors transactions - Advances to vendors
+	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1040B_CR_R1021B Then
+		Return GetAnalytics_DR_R1040B_CR_R1021B(Parameters); // Taxes outgoing - Vendors transactions
 	EndIf;
 	Return Undefined;
 EndFunction
 
 #Region Accounting_Analytics
 
-Function GetAnalytics_Dr_ItemKeyAccount_Cr_PartnerAccount(Parameters)
+// Stock inventory - Vendors transactions
+Function GetAnalytics_DR_R4050B_CR_R1021B(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-	
-	Period = 
-	CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.ObjectData.Ref, Parameters.ObjectData.Date);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
-	Debit = AccountingServer.GetItemKeyTBAccounts(Period, Parameters.ObjectData.Company, Parameters.RowData.ItemKey);
+	// Debit
+	Debit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
 	If ValueIsFilled(Debit.Account) Then
 		AccountingAnalytics.Debit = Debit.Account;
 	EndIf;
-	// Debit - Analytics
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Item", Parameters.RowData.ItemKey.Item);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
-	Credit = AccountingServer.GetPartnerTBAccounts(Period, Parameters.ObjectData.Company, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
-	If ValueIsFilled(Credit.AccountTransactions) Then
-		AccountingAnalytics.Credit = Credit.AccountTransactions;
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
+	If ValueIsFilled(Credit.AccountTransactionsVendor) Then
+		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
 	EndIf;
-	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetAnalytics_Dr_PartnerAccountTrn_Cr_PartnerAccountAdv(Parameters)
+// Vendors transactions - Advances to vendors
+Function GetAnalytics_DR_R1021B_CR_R1020B(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-	
-	Period = 
-	CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.ObjectData.Ref, Parameters.ObjectData.Date);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
-	Accounts = AccountingServer.GetPartnerTBAccounts(Period, Parameters.ObjectData.Company, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
-	If ValueIsFilled(Accounts.AccountTransactions) Then
-		AccountingAnalytics.Debit = Accounts.AccountTransactions;
+	// Debit
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
+	If ValueIsFilled(Accounts.AccountTransactionsVendor) Then
+		AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
 	EndIf;
-	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
-	If ValueIsFilled(Accounts.AccountAdvances) Then
-		AccountingAnalytics.Credit = Accounts.AccountAdvances;
+	// Credit
+	If ValueIsFilled(Accounts.AccountAdvancesVendor) Then
+		AccountingAnalytics.Credit = Accounts.AccountAdvancesVendor;
 	EndIf;
-	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 		
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+// Taxes outgoing - Vendors transactions
+Function GetAnalytics_DR_R1040B_CR_R1021B(Parameters)	
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+		
+	// Debit
+	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo.Tax);
+	If ValueIsFilled(Debit.Account) Then
+		AccountingAnalytics.Debit = Debit.Account;
+	EndIf;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
+	
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
+	If ValueIsFilled(Credit.AccountTransactionsVendor) Then
+		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
+	EndIf;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	If Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_CR_R1020B
+	  	And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
+	  		Return Parameters.ObjectData.LegalName;
+	EndIf;
 	Return Value;
 EndFunction
 
-Function GetCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	If (Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_CR_R1020B
+	  	Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B
+	  	Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B)
+	  	And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
+	  		Return Parameters.ObjectData.LegalName;
+	EndIf;
 	Return Value;
-EndFunction
-
-#EndRegion
-
-#Region Accounting_Data
-
-Function GetData_Dr_ItemKeyAccount_Cr_PartnerAccount(Parameters)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	T1040T_AccountingAmounts.Currency,
-	|	SUM(T1040T_AccountingAmounts.NetAmount) AS Amount
-	|FROM
-	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
-	|WHERE
-	|	T1040T_AccountingAmounts.Recorder = &Recorder
-	|	AND T1040T_AccountingAmounts.RowKey = &RowKey
-	|	AND
-	|		T1040T_AccountingAmounts.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|GROUP BY
-	|	T1040T_AccountingAmounts.Currency
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SUM(T1040T_AccountingAmounts.NetAmount) AS Amount
-	|FROM
-	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
-	|WHERE
-	|	T1040T_AccountingAmounts.Recorder = &Recorder
-	|	AND T1040T_AccountingAmounts.RowKey = &RowKey
-	|	AND T1040T_AccountingAmounts.CurrencyMovementType = &CurrencyMovementType
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SUM(T1050T_AccountingQuantities.Quantity) AS Quantity
-	|FROM
-	|	AccumulationRegister.T1050T_AccountingQuantities AS T1050T_AccountingQuantities
-	|WHERE
-	|	T1050T_AccountingQuantities.Recorder = &Recorder
-	|	AND T1050T_AccountingQuantities.RowKey = &RowKey";
-	
-	Query.SetParameter("Recorder"             , Parameters.Recorder);
-	Query.SetParameter("RowKey"               , Parameters.RowKey);
-	Query.SetParameter("CurrencyMovementType" , Parameters.CurrencyMovementType);
-	
-	QueryResults = Query.ExecuteBatch();
-	
-	Result = AccountingServer.GetAccountingDataResult();
-	
-	QuerySelection = QueryResults[0].Select();
-	If QuerySelection.Next() Then
-		Result.CurrencyDr       = QuerySelection.Currency;
-		Result.CurrencyAmountDr = QuerySelection.Amount;
-		Result.CurrencyCr       = QuerySelection.Currency;
-		Result.CurrencyAmountCr = QuerySelection.Amount;
-	Endif;
-	
-	QuerySelection = QueryResults[1].Select();
-	If QuerySelection.Next() Then
-		Result.Amount = QuerySelection.Amount;
-	Endif;
-	
-	QuerySelection = QueryResults[2].Select();
-	If QuerySelection.Next() Then
-		Result.QuantityCr = QuerySelection.Quantity;
-		Result.QuantityDr = QuerySelection.Quantity;
-	Endif;
-	
-	Return Result;
-EndFunction
-
-Function GetData_Dr_PartnerAccountTrn_Cr_PartnerAccountAdv(Parameters)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	T1040T_AccountingAmounts.Currency,
-	|	SUM(T1040T_AccountingAmounts.Amount) AS Amount
-	|FROM
-	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
-	|WHERE
-	|	T1040T_AccountingAmounts.Recorder = &Recorder
-	|	AND T1040T_AccountingAmounts.IsAdvanceClosing
-	|	AND
-	|		T1040T_AccountingAmounts.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|GROUP BY
-	|	T1040T_AccountingAmounts.Currency
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SUM(T1040T_AccountingAmounts.Amount) AS Amount
-	|FROM
-	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
-	|WHERE
-	|	T1040T_AccountingAmounts.Recorder = &Recorder
-	|	AND T1040T_AccountingAmounts.IsAdvanceClosing
-	|	AND T1040T_AccountingAmounts.CurrencyMovementType = &CurrencyMovementType";
-	
-	Query.SetParameter("Recorder"             , Parameters.Recorder);
-	Query.SetParameter("CurrencyMovementType" , Parameters.CurrencyMovementType);
-	
-	QueryResults = Query.ExecuteBatch();
-	
-	Result = AccountingServer.GetAccountingDataResult();
-	
-	QuerySelection = QueryResults[0].Select();
-	If QuerySelection.Next() Then
-		Result.CurrencyDr       = QuerySelection.Currency;
-		Result.CurrencyAmountDr = QuerySelection.Amount;
-		Result.CurrencyCr       = QuerySelection.Currency;
-		Result.CurrencyAmountCr = QuerySelection.Amount;
-	Endif;
-	
-	QuerySelection = QueryResults[1].Select();
-	If QuerySelection.Next() Then
-		Result.Amount = QuerySelection.Amount;
-	Endif;
-	
-	Return Result;
 EndFunction
 
 #EndRegion

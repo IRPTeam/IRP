@@ -429,7 +429,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			ElsIf ResultElement.UseSerialLotNumber Then
 				Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
 			EndIf;
-			SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
+			//SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 			
 		ElsIf ObjectRefType = Type("DocumentRef.PhysicalInventory")
 				Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
@@ -556,15 +556,6 @@ Procedure FillDeliveryDates(Object, Form) Export
 		Form.Items.DeliveryDate.Tooltip = StrConcat(DeliveryDatesFormattedArray, "; ");
 	EndIf;
 EndProcedure
-
-// @deprecated
-//Procedure FillUnfilledDeliveryDatesInRow(Object, Item, DeliveryDate) Export
-//	If Not ValueIsFilled(Item.CurrentData.DeliveryDate) Then
-//		IdentifyRow = Item.CurrentRow;
-//		RowItemList = Object.ItemList.FindByID(IdentifyRow);
-//		RowItemList.DeliveryDate = DeliveryDate;
-//	EndIf;
-//EndProcedure
 
 #EndRegion
 
@@ -746,13 +737,6 @@ EndProcedure
 #EndRegion
 
 #Region Common
-
-// @deprecated
-//Function CreateCurrentValuesStructure(Object, StringKeys, CunditionalKeys = "") Export
-//	CurrentValuesStructure = New Structure(StringKeys + ", " + CunditionalKeys);
-//	FillPropertyValues(CurrentValuesStructure, Object, StringKeys);
-//	Return CurrentValuesStructure;
-//EndFunction
 
 Function CreateFilterItem(FieldName, Value, ComparisonType) Export
 	FilterStructure = New Structure();
@@ -1204,8 +1188,10 @@ Procedure ShowRowKey(Form) Export
 				|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
 				|LinkedBasises,
 				|ItemListQuantityInBaseUnit, QuantityInBaseUnit,
-				|GroupCostAllocationDetail, CostRowsRowID, AllocationRowsBasisRowID, AllocationRowsRowID, CostDocumentsKey,
-				|AllocationDocumentsKey, CostRowsTreeRowID, DocumentRowsBasisRowID, DocumentRowsRowID, ResultTreeRowID,
+				|CostList, RevenueList, AllocationList, CostRowsRowID, RevenueRowsRowID, 
+				|AllocationRowsBasisRowID, AllocationRowsRowID, 
+				|CostDocumentsKey, RevenueDocumentsKey, CostRowsTreeRowID, RevenueRowsTreeRowID,
+				|AllocationDocumentsKey, DocumentRowsBasisRowID, DocumentRowsRowID, ResultTreeRowID,
 				|PaymentListKey,
 				|TaxList,
 				|ItemListInternalLinks, ItemListExternalLinks, InternalLinkedDocs, ExternalLinkedDocs,
@@ -1213,7 +1199,8 @@ Procedure ShowRowKey(Form) Export
 				|InventoryKey, AccountBalanceKey, AdvanceFromCustomersKey, AdvanceToSuppliersKey,
 				|AccountPayableByAgreementsKey, AccountPayableByDocumentsKey, VendorsPaymentTermsKey,
 				|AccountReceivableByAgreementsKey, AccountReceivableByDocumentsKey, CustomersPaymentTermsKey,
-				|SendUUID, ReceiveUUID";
+				|SendUUID, ReceiveUUID,
+				|ItemListUseSerialLotNumber, ItemListIsService";
 
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do

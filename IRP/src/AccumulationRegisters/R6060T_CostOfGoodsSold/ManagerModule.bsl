@@ -223,7 +223,7 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 			NewRecord = RecordSet.Add();
 			FillPropertyValues(NewRecord, QuerySelectionDetails);
 			NewRecord.Recorder = QuerySelection.Document;
-			NewRecord.Period = QuerySelectionDetails.Period;
+			NewRecord.Period   = QuerySelectionDetails.Period;
 			NewRecord.CalculationMovementCost = QuerySelectionDetails.CalculationMovementCosts;
 		EndDo;
 		RecordSet.Write();

@@ -532,7 +532,25 @@ Scenario: _1003052 check CustomersAdvancesClosing movements when unpost document
 		And I close all client application windows
 		
 		
-				
+Scenario: _1003062 generate Offset of advance report based on CustomersAdvancesClosing
+	And I close all client application windows
+	* Select CustomersAdvancesClosing
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Generate report
+		And I click "Offset of advances" button
+		Then "Offset of advances" window is opened
+		And I click "Run" button
+	* Check
+		And "Doc" spreadsheet document contains "OffsetOfAdvanceCustomer" template lines by template
+	* Change type and generate report
+		And I change "Report type" radio button value to "Vendors"
+		And I click "Run" button	
+		Then user message window does not contain messages
+		And I close all client application windows
+						
 	
 
 

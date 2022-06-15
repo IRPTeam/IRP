@@ -263,7 +263,7 @@ Scenario: _099103 create account charts
 		And I input "4050" text in the field named "Code"
 		And I input "10" text in the field named "Order"
 		And I input "Stock inventory" text in "ENG" field
-		And I select "Active" exact value from the drop-down list named "Type"
+		And I select "Assets" exact value from the drop-down list named "Type"
 		And I click Choice button of the field named "Variant"
 		And I go to line in "List" table
 				| 'Description'          |
@@ -305,7 +305,7 @@ Scenario: _099103 create account charts
 		And I input "5022" text in the field named "Code"
 		And I input "70" text in the field named "Order"
 		And I input "Service (expense)" text in "ENG" field
-		And I select "Passive" exact value from the drop-down list named "Type"
+		And I select "Liabilities" exact value from the drop-down list named "Type"
 		And I set checkbox named "Currency"
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
@@ -338,7 +338,7 @@ Scenario: _099103 create account charts
 		And I input "1021" text in the field named "Code"
 		And I input "30" text in the field named "Order"
 		And I input "Due to vendors" text in "ENG" field
-		And I select "Passive" exact value from the drop-down list named "Type"
+		And I select "Liabilities" exact value from the drop-down list named "Type"
 		And I set checkbox named "Currency"
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
@@ -371,7 +371,7 @@ Scenario: _099103 create account charts
 		And I input "1020" text in the field named "Code"
 		And I input "31" text in the field named "Order"
 		And I input "Vendors advances" text in "ENG" field
-		And I select "Passive" exact value from the drop-down list named "Type"
+		And I select "Liabilities" exact value from the drop-down list named "Type"
 		And I set checkbox named "Currency"
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
@@ -396,7 +396,7 @@ Scenario: _099103 create account charts
 		And I input "2021" text in the field named "Code"
 		And I input "40" text in the field named "Order"
 		And I input "Customers due" text in "ENG" field
-		And I select "Passive" exact value from the drop-down list named "Type"
+		And I select "Liabilities" exact value from the drop-down list named "Type"
 		And I set checkbox named "Currency"
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
@@ -429,7 +429,7 @@ Scenario: _099103 create account charts
 		And I input "2020" text in the field named "Code"
 		And I input "41" text in the field named "Order"
 		And I input "Customers advances" text in "ENG" field
-		And I select "Passive" exact value from the drop-down list named "Type"
+		And I select "Liabilities" exact value from the drop-down list named "Type"
 		And I set checkbox named "Currency"
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table
@@ -454,7 +454,7 @@ Scenario: _099103 create account charts
 		And I input "1040" text in the field named "Code"
 		And I input "50" text in the field named "Order"
 		And I input "Tax outgoing" text in "ENG" field
-		And I select "Passive" exact value from the drop-down list named "Type"
+		And I select "Liabilities" exact value from the drop-down list named "Type"
 		And I set checkbox named "Currency"
 		And in the table "ExtDimensionTypes" I click the button named "ExtDimensionTypesAdd"
 		And I click choice button of "Extra dimension type" attribute in "ExtDimensionTypes" table

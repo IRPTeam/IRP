@@ -1976,3 +1976,19 @@ Scenario: Create information register ExpenseRevenueTypeSettings records (item k
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''         | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' |
 
 
+Scenario: Create chart of characteristic types AccountingExtraDimensionTypes objects
+
+	And I check or create chart of characteristic types "AccountingExtraDimensionTypes" objects:
+		| 'Ref'                                                                                                      | 'DeletionMark' | 'Description_en'    | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'ValueType'                                                   |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6032' | 'False'        | 'Item'              | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.Items")}'                  |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6033' | 'False'        | 'Item key'          | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.ItemKeys")}'               |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6034' | 'False'        | 'Legal name'        | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.Companies")}'              |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6035' | 'False'        | 'Partner'           | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.Partners")}'               |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6036' | 'False'        | 'Store'             | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.Stores")}'                 |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6037' | 'False'        | 'Business unit'     | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.BusinessUnits")}'          |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6038' | 'False'        | 'Cash/Bank account' | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.CashAccounts")}'           |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa6039' | 'False'        | 'Expense type'      | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.ExpenseAndRevenueTypes")}' |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa603a' | 'False'        | 'Partner term'      | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.Agreements")}'             |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa603b' | 'False'        | 'Tax type'          | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.Taxes")}'                  |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b782df363ef64fb511ecebce91aa603c' | 'False'        | 'Revenue type'      | ''                 | ''               | ''               | '{!New TypeDescription("CatalogRef.ExpenseAndRevenueTypes")}' |
+

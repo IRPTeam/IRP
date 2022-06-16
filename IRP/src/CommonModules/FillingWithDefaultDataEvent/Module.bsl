@@ -3,49 +3,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		Force = False;
 	EndIf;
 
-IsUsedNewFunctionality =
-	   TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
-	Or TypeOf(Source) = Type("DocumentObject.OutgoingPaymentOrder")
-	
-	Or TypeOf(Source) = Type("DocumentObject.MoneyTransfer")
-	   
-	Or TypeOf(Source) = Type("DocumentObject.BankPayment")
-	Or TypeOf(Source) = Type("DocumentObject.BankReceipt")
-	Or TypeOf(Source) = Type("DocumentObject.CashPayment")
-	Or TypeOf(Source) = Type("DocumentObject.CashReceipt")
-	
-	Or TypeOf(Source) = Type("DocumentObject.CashExpense")
-	Or TypeOf(Source) = Type("DocumentObject.CashRevenue")
-	Or TypeOf(Source) = Type("DocumentObject.CreditNote")
-	Or TypeOf(Source) = Type("DocumentObject.DebitNote")
-	
-	Or TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation")
-	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
-	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsSurplus")
-	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsWriteOff")
-	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice")
-	Or TypeOf(Source) = Type("DocumentObject.PurchaseInvoice")
-	Or TypeOf(Source) = Type("DocumentObject.InternalSupplyRequest")
-	Or TypeOf(Source) = Type("DocumentObject.RetailSalesReceipt")
-	
-	Or TypeOf(Source) = Type("DocumentObject.SalesReturn")
-	Or TypeOf(Source) = Type("DocumentObject.PurchaseReturn")
-	Or TypeOf(Source) = Type("DocumentObject.RetailReturnReceipt")
-
-	Or TypeOf(Source) = Type("DocumentObject.SalesOrder")
-	Or TypeOf(Source) = Type("DocumentObject.SalesOrderClosing")
-	Or TypeOf(Source) = Type("DocumentObject.PurchaseOrder")
-	Or TypeOf(Source) = Type("DocumentObject.PurchaseOrderClosing")
-	Or TypeOf(Source) = Type("DocumentObject.SalesReturnOrder")
-	Or TypeOf(Source) = Type("DocumentObject.PurchaseReturnOrder")
-	Or TypeOf(Source) = Type("DocumentObject.InventoryTransfer")
-	Or TypeOf(Source) = Type("DocumentObject.InventoryTransferOrder")
-	Or TypeOf(Source) = Type("DocumentObject.PhysicalInventory")
-	Or TypeOf(Source) = Type("DocumentObject.ItemStockAdjustment")
-	Or TypeOf(Source) = Type("DocumentObject.Bundling")
-	Or TypeOf(Source) = Type("DocumentObject.Unbundling")
-	
-	Or TypeOf(Source) = Type("DocumentObject.CashTransferOrder");
+	IsUsedNewFunctionality = UsedNewFunctionality(Source);
 
 	Data = New Structure();
 
@@ -76,6 +34,9 @@ IsUsedNewFunctionality =
 				ArrayOfMainTables.Add(TableName);
 			EndIf;
 		EndDo;
+		If Not ArrayOfMainTables.Count() Then
+			ArrayOfMainTables.Add("");
+		EndIf;
 		
 		// properties from UserSettings
 		ArrayOfUserSettingsProperties = New Array();
@@ -251,3 +212,51 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 		DocumentsServer.SetNewTableUUID(Source.ItemList, LinkedTables);
 	EndIf;
 EndProcedure
+
+Function UsedNewFunctionality(Source)
+	IsUsedNewFunctionality =
+	   TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
+	Or TypeOf(Source) = Type("DocumentObject.OutgoingPaymentOrder")
+	
+	Or TypeOf(Source) = Type("DocumentObject.MoneyTransfer")
+	   
+	Or TypeOf(Source) = Type("DocumentObject.BankPayment")
+	Or TypeOf(Source) = Type("DocumentObject.BankReceipt")
+	Or TypeOf(Source) = Type("DocumentObject.CashPayment")
+	Or TypeOf(Source) = Type("DocumentObject.CashReceipt")
+	
+	Or TypeOf(Source) = Type("DocumentObject.CashExpense")
+	Or TypeOf(Source) = Type("DocumentObject.CashRevenue")
+	Or TypeOf(Source) = Type("DocumentObject.CreditNote")
+	Or TypeOf(Source) = Type("DocumentObject.DebitNote")
+	
+	Or TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation")
+	Or TypeOf(Source) = Type("DocumentObject.GoodsReceipt")
+	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsSurplus")
+	Or TypeOf(Source) = Type("DocumentObject.StockAdjustmentAsWriteOff")
+	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice")
+	Or TypeOf(Source) = Type("DocumentObject.PurchaseInvoice")
+	Or TypeOf(Source) = Type("DocumentObject.InternalSupplyRequest")
+	Or TypeOf(Source) = Type("DocumentObject.RetailSalesReceipt")
+	
+	Or TypeOf(Source) = Type("DocumentObject.SalesReturn")
+	Or TypeOf(Source) = Type("DocumentObject.PurchaseReturn")
+	Or TypeOf(Source) = Type("DocumentObject.RetailReturnReceipt")
+
+	Or TypeOf(Source) = Type("DocumentObject.SalesOrder")
+	Or TypeOf(Source) = Type("DocumentObject.SalesOrderClosing")
+	Or TypeOf(Source) = Type("DocumentObject.PurchaseOrder")
+	Or TypeOf(Source) = Type("DocumentObject.PurchaseOrderClosing")
+	Or TypeOf(Source) = Type("DocumentObject.SalesReturnOrder")
+	Or TypeOf(Source) = Type("DocumentObject.PurchaseReturnOrder")
+	Or TypeOf(Source) = Type("DocumentObject.InventoryTransfer")
+	Or TypeOf(Source) = Type("DocumentObject.InventoryTransferOrder")
+	Or TypeOf(Source) = Type("DocumentObject.PhysicalInventory")
+	Or TypeOf(Source) = Type("DocumentObject.ItemStockAdjustment")
+	Or TypeOf(Source) = Type("DocumentObject.Bundling")
+	Or TypeOf(Source) = Type("DocumentObject.Unbundling")
+	
+	Or TypeOf(Source) = Type("DocumentObject.CashTransferOrder");
+	
+	Return IsUsedNewFunctionality;
+EndFunction

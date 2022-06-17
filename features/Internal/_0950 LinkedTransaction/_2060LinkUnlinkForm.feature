@@ -46,6 +46,8 @@ Scenario: _2060001 preparation
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog Partners objects and Companies objects (Customer)
+		When Create catalog Agreements objects (Customer)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -132,6 +134,8 @@ Scenario: _2060001 preparation
 		And I save the window as "$$SalesInvoice20400021$$"
 		And I save the value of "Number" field as "$$NumberSalesInvoice20400021$$"
 		And I close all client application windows
+	When Create catalog PaymentTypes objects
+	When Create catalog RetailCustomers objects (check POS)
 	When create GoodsReceipt and PurchaseOrder objects (select from basis in the PI)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);"|
@@ -153,6 +157,9 @@ Scenario: _2060001 preparation
 			| "Documents.SalesOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document RetailSalesReceipt objects (with retail customer)
+	And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);"|
 	When Create PO and GR for link
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);"|
@@ -917,7 +924,136 @@ Scenario: _2060005 check link/unlink form in the SR
 		And I close all client application windows
 
 
+
+Scenario: _2060006 check link/unlink form in the RRR
+	* Open form for create RRR
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 03  |
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Customer'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Customer'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Customer partner term'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Shop 01' |
+		And I select current line in "List" table		
+	* Select items from basis documents
+		And I click "Add basis documents" button
+		Then "Add linked document rows" window is opened
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
+			| 'TRY'      | '7 777,80' | '1,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)' | 'No'  |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '440,68' | '1,000'    | 'Dress (XS/Blue)'  | 'pcs'  | 'No'  |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table	
+		And I click "Ok" button
+		And I click "Show row key" button
+		And I click "Save" button		
+	* Check RowIDInfo
+		And "RowIDInfo" table became equal
+			| '#' | 'Key' | 'Basis'                                              | 'Row ID' | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref' |
+			| '1' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '1,000'    | '*'         | 'RRR'          | '*'       |
+			| '2' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '12,000'   | '*'         | 'RRR'          | '*'       |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+	* Unlink line
+		And I click "Link unlink basis documents" button		
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit'           |
+			| '2' | '1,000'    | 'Boots (36/18SD)'  | 'Store 03' | 'Boots (12 pcs)' |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "ResultsTree" table
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           |
+			| 'TRY'      | '7 777,80' | '1,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)' |
+		And I click "Unlink" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Store'    | 'Retail sales receipt'                               | 'Item'  | 'Unit'           | 'Item key' | 'Quantity' |
+			| 'Store 03' | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'Dress' | 'pcs'            | 'XS/Blue'  | '1,000'    |
+			| 'Store 03' | ''                                                   | 'Boots' | 'Boots (12 pcs)' | '36/18SD'  | '1,000'    |				
+	* Link line
+		And I click "Link unlink basis documents" button
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit'            |
+			| '2' | '1,000'    | 'Boots (36/18SD)'  | 'Store 03' | 'Boots (12 pcs)'  |
+		And I set checkbox "Linked documents"
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           |
+			| 'TRY'      | '7 777,80' | '1,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)' |
+		And I click "Link" button
+		And I click "Ok" button
+		And I click "Save" button
+		And "RowIDInfo" table became equal
+			| '#' | 'Key' | 'Basis'                                              | 'Row ID' | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref' |
+			| '1' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '1,000'    | '*'         | 'RRR'          | '*'       |
+			| '2' | '*'   | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | '*'      | ''          | '12,000'   | '*'         | 'RRR'          | '*'       |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+		And "ItemList" table contains lines
+			| 'Retail sales receipt'                               | 'Item'  | 'Item key' | 'Quantity' | 'Price'    |
+			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'Dress' | 'XS/Blue'  | '1,000'    | '440,68'   |
+			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'Boots' | '36/18SD'  | '1,000'    | '7 777,80' |		
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '36/18SD'  | '1,000'    | 'Store 03' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
+			| 'TRY'      | '7 777,80' | '1,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)' | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Retail sales receipt'                               | 'Item'  | 'Item key' | 'Quantity' | 'Price'    |
+			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'Dress' | 'XS/Blue'  | '1,000'    | '440,68'   |
+			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'Boots' | '36/18SD'  | '1,000'    | '7 777,80' |
+	* Unlink all lines
+		And I click "Link unlink basis documents" button
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Retail sales receipt' | 'Item'  | 'Unit'           | 'Item key' | 'Quantity' | 'Price'    |
+			| ''                     | 'Dress' | 'pcs'            | 'XS/Blue'  | '1,000'    | '440,68'   |
+			| ''                     | 'Boots' | 'Boots (12 pcs)' | '36/18SD'  | '1,000'    | '7 777,80' |
+		Then the number of "ItemList" table lines is "равно" "2"					
+		And I close all client application windows
+
 Scenario: _2060007 select items from basis documents in the PI
+		And I close all client application windows
 	* Open form for create PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"

@@ -688,7 +688,54 @@ Scenario: _0991020 check Purchase invoice accounting movements
 		And I close all client application windows
 		
 		
+Scenario: _0991025 create JournalEntry for PI
+		And I close all client application windows
+	* Create JournalEntry
+		Given I open hyperlink "e1cib/list/Document.JournalEntry"	
+		And I click "Create documents" button
+		And I click Choice button of the field named "Period"
+		Then "Select period" window is opened
+		And I input begin of the current month date in "DateBegin" field
+		And I input end of the current month date in "DateEnd" field
+		And I click the button named "Select"	
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I click Select button of "Ledger type" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Management'    |
+		And I select current line in "List" table
+		And I activate "Presentation" field in "TableDocuments" table
+		And I go to line in "TableDocuments" table
+			| 'Presentation'     |
+			| 'Purchase invoice' |
+		And I set "Use" checkbox in "TableDocuments" table
+		And I finish line editing in "TableDocuments" table		
+		And I click "Create documents" button
+		And I close "Create documents" window
+	* Check
+		And I click "Refresh" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I select current line in "List" table
+		And "RegisterRecords" table became equal
+			| 'Period' | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                                    | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '*'      | '4050'       | '1' | '423,73' | '1'             | 'Yes'      | 'TRY'             | 'Dress'           | ''             | 'XS/Blue'             | ''                | 'Store 02'            | ''               | '1021'       | 'Ferron BP'        | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)' | 'Vendor Ferron, TRY'  | '423,73'        | 'Company Ferron BP'   |
+			| '*'      | '1040'       | '2' | '76,27'  | ''              | 'Yes'      | 'TRY'             | 'VAT'             | '76,27'        | ''                    | ''                | ''                    | 'TRY'            | '1021'       | 'Ferron BP'        | 'PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)'                  | 'Vendor Ferron, TRY'  | '76,27'         | 'Company Ferron BP'   |
+		And I close all client application windows
+		
+		
 				
+		
+				
+		
+				
+		
+					
 		
 				
 		

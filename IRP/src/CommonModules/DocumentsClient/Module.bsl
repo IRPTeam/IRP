@@ -1175,7 +1175,7 @@ Procedure ShowHiddenTables(Object, Form) Export
 	OpenForm("CommonForm.EditHiddenTables", FormParameters, Form, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-Procedure ShowRowKey(Form) Export
+Function GetFormItemNames()
 	ItemNames = "ItemListKey, SpecialOffersKey, TransactionsKey,
 				|ItemListRowsKey,
 				|ResultsTable,
@@ -1202,6 +1202,12 @@ Procedure ShowRowKey(Form) Export
 				|SendUUID, ReceiveUUID,
 				|ItemListUseSerialLotNumber, ItemListIsService";
 
+	Return ItemNames;
+EndFunction	
+
+
+Procedure ShowRowKey(Form) Export
+	ItemNames = GetFormItemNames();
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do
 		ItemName = TrimAll(ItemName);

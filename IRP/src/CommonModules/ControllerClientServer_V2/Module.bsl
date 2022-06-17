@@ -290,14 +290,12 @@ Procedure API_SetProperty(Parameters, Property, Value) Export
 	If SetterName <> Undefined Then
 		If IsColumn Then
 			For Each Row In GetRows(Parameters, Parameters.TableName) Do
-				//@skip-check module-unused-local-variable
 				Results = ResultArray(Row.Key, Value);
-				Execute StrTemplate("%1(Parameters, Results);", SetterName);
+				ExecuteSetterByName(Parameters, Results, SetterName);
 			EndDo;
 		Else
-			//@skip-check module-unused-local-variable
 			Results = ResultArray(Undefined, Value);
-			Execute StrTemplate("%1(Parameters, Results);", SetterName);
+			ExecuteSetterByName(Parameters, Results, SetterName);
 		EndIf;
 	Else
 		If IsColumn Then
@@ -309,6 +307,10 @@ Procedure API_SetProperty(Parameters, Property, Value) Export
 		EndIf;
 		CommitChainChanges(Parameters);
 	EndIf;
+EndProcedure
+
+Procedure ExecuteSetterByName(Parameters, Results, SetterName)
+	Execute StrTemplate("%1(Parameters, Results);", SetterName);
 EndProcedure
 
 Function ResultArray(_Key, Value)
@@ -6522,7 +6524,7 @@ Function IsChangedProperty(Parameters, DataPath, _Key = Undefined) Export
 	Return Result;
 EndFunction
 
-Function IsChangedPropertyDirectly_List(Parameters, _Key)
+Function IsChangedPropertyDirectly_List(Parameters, _Key) Export
 	Result = New Structure("IsChanged, OldValue, NewValue", False, Undefined, Undefined);
 	If Parameters.PropertyBeforeChange.List.Value = Undefined Then
 		Return Result;
@@ -6543,6 +6545,21 @@ Function IsChangedPropertyDirectly_List(Parameters, _Key)
 	Result.OldValue = OldValue;
 	Return Result;
 EndFunction
+
+Function IsChangedPropertyDirectly_Object(Parameters) Export
+	Result = New Structure("IsChanged, OldValue, NewValue", False, Undefined, Undefined);
+	If Parameters.PropertyBeforeChange.Object.Value = Undefined Then
+		Return Result;
+	EndIf;
+	
+	DataPath         = Parameters.PropertyBeforeChange.Object.Value.DataPath;
+	OldValue         = Parameters.PropertyBeforeChange.Object.Value.ValueBeforeChange;
+	CurrentValue     = GetPropertyObject(Parameters, DataPath);
+	Result.IsChanged = (CurrentValue <> OldValue);
+	Result.NewValue  = CurrentValue;
+	Result.OldValue  = OldValue;
+	Return Result;
+EndFunction	
 
 // sets properties on the passed DataPath, such as ItemList.PriceType or Company
 Function SetProperty(Cache, DataPath, _Key, _Value)

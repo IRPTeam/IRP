@@ -25,8 +25,10 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
-	FillParamsOnCreate();
-	SetVisibilityAvailability(Object, ThisObject);
+	If Parameters.Key.IsEmpty() Then
+		FillParamsOnCreate();
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
 EndProcedure
 
 &AtClientAtServerNoContext
@@ -37,6 +39,7 @@ EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
+	ThisObject.OwnerSelect = "Manual";
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -110,26 +113,37 @@ Procedure FillParamsOnCreate()
 
 	If Not Parameters.ItemType.IsEmpty() Then
 		ThisObject.ItemType = Parameters.ItemType;
+		Object.SerialLotNumberOwner = Parameters.ItemType;
 		Items.OwnerSelect.ChoiceList.Add("ItemType", ItemType);
 		ThisObject.OwnerSelect = "ItemType";
 	EndIf;
+	
 	If Not Parameters.Item.IsEmpty() Then
 		ThisObject.Item = Parameters.Item;
+		Object.SerialLotNumberOwner = Parameters.Item;
 		Items.OwnerSelect.ChoiceList.Add("Item", Item);
 		ThisObject.OwnerSelect = "Item";
 	EndIf;
+	
 	If Not Parameters.ItemKey.IsEmpty() Then
 		ThisObject.ItemKey = Parameters.ItemKey;
+		Object.SerialLotNumberOwner = Parameters.ItemKey;
 		Items.OwnerSelect.ChoiceList.Add("ItemKey", ItemKey);
 		ThisObject.OwnerSelect = "ItemKey";
 	EndIf;
+	
 	If Not IsBlankString(Parameters.Barcode) Then
 		ThisObject.Barcode = Parameters.Barcode;
 		Object.Description = ThisObject.Barcode;
 	EndIf;
+	
 	If Not IsBlankString(Parameters.Description) Then
 		Object.Description = Parameters.Description;
 	EndIf;
+	
+	OwnerInfo = GetOwnerInfo(Object.SerialLotNumberOwner);
+	Object.StockBalanceDetail          = OwnerInfo.StockBalanceDetail;
+	Object.EachSerialLotNumberIsUnique = OwnerInfo.EachSerialLotNumberIsUnique;
 	
 	// delete manual, if have other types
 	If Items.OwnerSelect.ChoiceList.Count() > 1 Then

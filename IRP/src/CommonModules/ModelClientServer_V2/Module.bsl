@@ -2200,6 +2200,18 @@ EndFunction
 
 #EndRegion
 
+#Region CALCULATE_COMMISSION
+
+Function CalculateCommissionOptions() Export
+	Return GetChainLinkOptions("Amount, Percent");
+EndFunction
+
+Function CalculateCommissionExecute(Options) Export
+	Return Options.Amount * Options.Percent;
+EndFunction
+
+#EndRegion
+
 Procedure InitEntryPoint(StepNames, Parameters)
 	If Not Parameters.Property("ModelEnvironment") Then
 		Environment = New Structure();

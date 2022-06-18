@@ -6165,6 +6165,193 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYMENTS
+
+#Region PAYMENTS_PAYMENT_TYPE
+
+// Payments.PaymentType.OnChange
+Procedure PaymentsPaymentTypeOnChange(Parameters) Export
+	Binding = BindPaymentsPaymentType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.PaymentType.Set
+Procedure SetPaymentsPaymentType(Parameters, Results) Export
+	Binding = BindPaymentsPaymentType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.PaymentType.Get
+Function GetPaymentsPaymentType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsPaymentType(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.PaymentType.Bind
+Function BindPaymentsPaymentType(Parameters)
+	DataPath = "Payments.PaymentType";
+	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENTS_BANK_TERM
+
+// Payments.BankTerm.OnChange
+Procedure PaymentsBankTermOnChange(Parameters) Export
+	Binding = BindPaymentsBankTerm(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.BankTerm.Set
+Procedure SetPaymentsBankTerm(Parameters, Results) Export
+	Binding = BindPaymentsBankTerm(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.BankTerm.Get
+Function GetPaymentsBankTerm(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsBankTerm(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.BankTerm.Bind
+Function BindPaymentsBankTerm(Parameters)
+	DataPath = "Payments.BankTerm";
+	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENTS_AMOUNT
+
+// Payments.Amount.OnChange
+Procedure PaymentsAmountOnChange(Parameters) Export
+	Binding = BindPaymentsAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.Amount.Set
+Procedure SetPaymentsAmount(Parameters, Results) Export
+	Binding = BindPaymentsAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.Amount.Get
+Function GetPaymentsAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.Amount.Bind
+Function BindPaymentsAmount(Parameters)
+	DataPath = "Payments.Amount";
+	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENTS_COMMISSION
+
+// Payments.Commission.OnChange
+Procedure PaymentsCommissionOnChange(Parameters) Export
+	Binding = BindPaymentsCommission(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.Commission.Set
+Procedure SetPaymentsCommission(Parameters, Results) Export
+	Binding = BindPaymentsCommission(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.Commission.Get
+Function GetPaymentsCommission(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsCommission(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.Commission.Bind
+Function BindPaymentsCommission(Parameters)
+	DataPath = "Payments.Commission";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Payments.Commission.CalculateCommission.Step
+Procedure StepPaymentsCalculateCommission(Parameters, Chain) Export
+	Chain.CalculateCommission.Enable = True;
+	Chain.CalculateCommission.Setter = "SetPaymentsCommission";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.CalculateCommissionOptions();
+		Options.Amount = GetPaymentsAmount(Parameters, Row.Key);
+		Options.Percent = GetPaymentsPercent(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentsCalculateCommission";
+		Chain.CalculateCommission.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_PERCENT
+
+// Payments.Percent.OnChange
+Procedure PaymentsPercentOnChange(Parameters) Export
+	Binding = BindPaymentsPercent(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.Percent.Set
+Procedure SetPaymentsPercent(Parameters, Results) Export
+	Binding = BindPaymentsPercent(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.Percent.Get
+Function GetPaymentsPercent(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsPercent(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.Percent.Bind
+Function BindPaymentsPercent(Parameters)
+	DataPath = "Payments.Percent";
+	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+
+#EndRegion
+
 // called when all chain steps is complete
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN

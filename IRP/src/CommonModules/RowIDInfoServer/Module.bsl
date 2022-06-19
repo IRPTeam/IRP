@@ -7569,19 +7569,21 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 			Continue;
 		EndIf;
 		If Object.Property(TableName) Then
-			For Each DeletionRow In Object[TableName].FindRows(New Structure("Key", LinkRow.Key)) Do
-				If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
-					If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
+			If Object[TableName].Count() And CommonFunctionsClientServer.ObjectHasProperty(Object[TableName][0], "Key") Then
+				For Each DeletionRow In Object[TableName].FindRows(New Structure("Key", LinkRow.Key)) Do
+					If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
+						If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
+							Object[TableName].Delete(DeletionRow);
+						EndIf;
+					ElsIf Upper(TableName) = Upper("SerialLotNumbers") Then
+						If FillingValue.Property(TableName) And FillingValue[TableName].Count() Then
+							Object[TableName].Delete(DeletionRow);
+						EndIf;
+					Else
 						Object[TableName].Delete(DeletionRow);
 					EndIf;
-				ElsIf Upper(TableName) = Upper("SerialLotNumbers") Then
-					If FillingValue.Property(TableName) And FillingValue[TableName].Count() Then
-						Object[TableName].Delete(DeletionRow);
-					EndIf;
-				Else
-					Object[TableName].Delete(DeletionRow);
-				EndIf;
-			EndDo;
+				EndDo;
+			EndIf;
 		Else
 			Continue;
 		EndIf;
@@ -7591,6 +7593,9 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 		EndIf;
 
 		For Each Row In FillingValue[TableName] Do
+			If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "Key") Then
+				Continue;
+			EndIf;
 			If Row.Key <> LinkRow.Key Then
 				Continue;
 			EndIf;

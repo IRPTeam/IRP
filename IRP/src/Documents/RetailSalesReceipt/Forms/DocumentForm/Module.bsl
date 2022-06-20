@@ -410,7 +410,12 @@ EndProcedure
 #EndRegion
 
 #Region PAYMENT_TYPE
- 
+
+&AtClient
+Procedure PaymentsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocRetailSalesReceiptClient.PaymentsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
 &AtClient
 Procedure PaymentsPaymentTypeOnChange(Item)
 	DocRetailSalesReceiptClient.PaymentsPaymentTypeOnChange(Object, ThisObject, Item);

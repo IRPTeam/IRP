@@ -348,7 +348,11 @@ EndProcedure
 #EndRegion
 
 #Region PAYMENT_TYPE
- 
+
+Procedure PaymentsBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.PaymentsBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
 Procedure PaymentsPaymentTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.PaymentsPaymentTypeOnChange(Object, Form, CurrentData);
 EndProcedure

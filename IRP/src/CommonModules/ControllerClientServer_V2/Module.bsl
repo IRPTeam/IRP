@@ -113,11 +113,17 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 												   Parameters.FormTaxColumnsExists, 
 												   Parameters.TaxesCache,
 												   Parameters.LoadData.Address);
+	
+	IsItemList    = Upper("ItemList")    = Upper(ServerParameters.TableName);
+	IsPaymentList = Upper("PaymentList") = Upper(ServerParameters.TableName);
 		
 	Parameters.Insert("ObjectMetadataInfo"     , ServerData.ObjectMetadataInfo);
-	Parameters.Insert("TaxListIsExists"        , ServerData.ObjectMetadataInfo.Tables.Property("TaxList"));
-	Parameters.Insert("SpecialOffersIsExists"  , ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers"));
-	Parameters.Insert("SerialLotNumbersExists" , ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers"));	
+	Parameters.Insert("TaxListIsExists"        , 
+		ServerData.ObjectMetadataInfo.Tables.Property("TaxList") And (IsItemList Or IsPaymentList));
+	Parameters.Insert("SpecialOffersIsExists"  , 
+		ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers") And IsItemList);
+	Parameters.Insert("SerialLotNumbersExists" , 
+		ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") And IsItemList);	
 	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
 	
 	Parameters.LoadData.CountRows                 = ServerData.LoadData.CountRows;
@@ -147,37 +153,40 @@ Function WrapRows(Parameters, Rows) Export
 		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
 		
-		// TaxList
 		ArrayOfRowsTaxList = New Array();
+		TaxRates = New Structure();
+		
+		
 		If Parameters.TaxListIsExists Then
+			// TaxList
 			For Each TaxRow In Parameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
 				NewRowTaxList = New Structure(Parameters.ObjectMetadataInfo.Tables.TaxList.Columns);
 				FillPropertyValues(NewRowTaxList, TaxRow);
 				ArrayOfRowsTaxList.Add(NewRowTaxList);
 			EndDo;
-		EndIf;
 		
-		// TaxRates
-		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			// when there is no form, then there is no column created programmatically
-			If Parameters.FormTaxColumnsExists Then
-				TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
-			Else
-			// create pseudo columns for tax rates
-				NewRow.Insert(ItemOfTaxInfo.Name);
+			// TaxRates
+		
+			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+				// when there is no form, then there is no column created programmatically
+				If Parameters.FormTaxColumnsExists Then
+					TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
+				Else
+					// create pseudo columns for tax rates
+					NewRow.Insert(ItemOfTaxInfo.Name);
 				
-				// tax rates are taken from the TaxList table
-				TaxRate = Undefined;
-				For Each TaxRow In ArrayOfRowsTaxList Do
-					If TaxRow.Tax = ItemOfTaxInfo.Tax Then
-						TaxRate = TaxRow.TaxRate;
-						Break;
-					EndIf;
-				EndDo;
-				TaxRates.Insert(ItemOfTaxInfo.Name, TaxRate);
-			EndIf;
-		EndDo;
+					// tax rates are taken from the TaxList table
+					TaxRate = Undefined;
+					For Each TaxRow In ArrayOfRowsTaxList Do
+						If TaxRow.Tax = ItemOfTaxInfo.Tax Then
+							TaxRate = TaxRow.TaxRate;
+							Break;
+						EndIf;
+					EndDo;
+					TaxRates.Insert(ItemOfTaxInfo.Name, TaxRate);
+				EndIf;
+			EndDo;
+		EndIf; // TaxListIsExists
 		
 		// SpecialOffers
 		ArrayOfRowsSpecialOffers = New Array();
@@ -6190,12 +6199,6 @@ EndFunction
 Function BindPaymentsPaymentType(Parameters)
 	DataPath = "Payments.PaymentType";
 	Binding = New Structure();
-
-	Binding.Insert("RetailSalesReceipt", 
-		"StepPaymentsCalculateCommission");
-	
-	Binding.Insert("RetailReturnReceipt", 
-		"StepPaymentsCalculateCommission");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -6225,12 +6228,6 @@ EndFunction
 Function BindPaymentsBankTerm(Parameters)
 	DataPath = "Payments.BankTerm";
 	Binding = New Structure();
-
-	Binding.Insert("RetailSalesReceipt", 
-		"StepPaymentsCalculateCommission");
-	
-	Binding.Insert("RetailReturnReceipt", 
-		"StepPaymentsCalculateCommission");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -6348,7 +6345,6 @@ Function BindPaymentsPercent(Parameters)
 EndFunction
 
 #EndRegion
-
 
 #EndRegion
 

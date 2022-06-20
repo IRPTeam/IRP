@@ -2144,6 +2144,23 @@ EndProcedure
 	
 #EndRegion
 
+#Region PAYMENTS
+
+Procedure PaymentsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Payments", Cancel, Clone, CurrentData,
+		"PaymentsOnAddRowFormNotify", "PaymentsOnCopyRowFormNotify");
+	Form.Items.Payments.CurrentRow = NewRow.GetID();
+	Form.Items.Payments.ChangeRow();
+EndProcedure
+
+Procedure PaymentsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure PaymentsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
 #Region PAYMENTS_PAYMENT_TYPE
 
 // Payments.PaymentType
@@ -2244,3 +2261,4 @@ EndProcedure
 
 #EndRegion
 
+#EndRegion

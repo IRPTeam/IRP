@@ -201,7 +201,8 @@ Function GetChain()
 	Chain.Insert("CovertQuantityToQuantityInBaseUnit" , GetChainLink("CovertQuantityToQuantityInBaseUnitExecute"));
 	
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
-
+	Chain.Insert("CalculateCommission"      , GetChainLink("CalculateCommissionExecute"));
+		
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));

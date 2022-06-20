@@ -8,7 +8,7 @@ EndFunction
 
 Function GetUserSettingsForClientModule(Ref) Export
 	FilterParameters = New Structure();
-	FilterParameters.Insert("MetadataObject", Ref.Metadata());
+	FilterParameters.Insert("MetadataObject", Ref.Metadata().FullName());
 	Return GetUserSettings(SessionParameters.CurrentUser, FilterParameters, True);
 EndFunction
 

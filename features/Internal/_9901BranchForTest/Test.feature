@@ -6,25 +6,23 @@
 Функционал: тестовые сценарии
 
 Контекст:
-		Дано Я открыл новый сеанс TestClient или подключил уже существующий
+	Дано Я открыл новый сеанс TestClient или подключил уже существующий
 
 Сценарий: Подготовка данных
 
+	// ПланВидовХарактеристик.AddAttributeAndProperty
+
+	И я проверяю или создаю для плана видов характеристик "AddAttributeAndProperty" объекты:
+		| 'Ref'                                                                                                | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Icon'                                  | 'isIconSet' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb766bf96b275d' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'Бренд'          | ''                 | ''               | ''               | '_4355827b63dc41b8b540f65790e07f5d' |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb76684b9f6872' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'Размер'         | ''                 | ''               | ''               | '_aa59a52a77bd48d5af340a2ff98411a9' |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb76684b9f6877' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'Цвет'           | ''                 | ''               | ''               | '_453185245f214e42a64fd25b1daf8614' |
+	
 	// Справочник.AddAttributeAndPropertyValues
 
 	И я проверяю или создаю для справочника "AddAttributeAndPropertyValues" объекты:
 		| 'Ref'                                                                                   | 'DeletionMark' | 'Owner'                                                                                              | 'Code' | 'AdditionalID' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=b762b13668d0905011eb766bf96b2760' | 'False'        | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb766bf96b275d' | 8      | ''             | 'Бренд 1'        | ''                 | ''               | ''               | '_31bf0db18f0840a5b67fc9b7f6c2df25' |
-
-	// Справочник.Items
-
-	И я проверяю или создаю для справочника "Items" объекты:
-		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture'                          | 'Vendor'                                                           | 'ItemID' | 'PackageUnit' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
-		| 'e1cib/data/Catalog.Items?ref=b762b13668d0905011eb76684b9f687d' | 'False'        | 1      | 'e1cib/data/Catalog.ItemTypes?ref=b762b13668d0905011eb76684b9f6878' | 'e1cib/data/Catalog.Units?ref=b762b13668d0905011eb76684b9f687b' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'e1cib/data/Catalog.Partners?ref=b762b13668d0905011eb7663e35d794d' | '58791'  | ''            | 'Товар с характеристиками' | ''                 | ''               | ''               |          |          |          | 0.21     |         |
-
-	И я перезаполняю для объекта табличную часть "AddAttributes":
-		| 'Ref'                                                           | 'Property'                                                                                           | 'Value'                                                                                 |
-		| 'e1cib/data/Catalog.Items?ref=b762b13668d0905011eb76684b9f687d' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb766bf96b275d' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=b762b13668d0905011eb766bf96b2760' |
 
 	// Справочник.ItemTypes
 
@@ -49,41 +47,79 @@
 		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'Item' | 'Quantity' | 'BasisUnit' | 'UOM' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
 		| 'e1cib/data/Catalog.Units?ref=b762b13668d0905011eb76684b9f687b' | 'False'        | 1      | ''     | 1          | ''          | ''    | 'шт'             | ''                 | ''               | ''               |          |          |          |          |         |
 
-	// ПланВидовХарактеристик.AddAttributeAndProperty
+	// Справочник.Items
 
-	И я проверяю или создаю для плана видов характеристик "AddAttributeAndProperty" объекты:
-		| 'Ref'                                                                                                | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Icon'                                  | 'isIconSet' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb766bf96b275d' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'Бренд'          | ''                 | ''               | ''               | '_4355827b63dc41b8b540f65790e07f5d' |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb76684b9f6872' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'Размер'         | ''                 | ''               | ''               | '_aa59a52a77bd48d5af340a2ff98411a9' |
-		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb76684b9f6877' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'Цвет'           | ''                 | ''               | ''               | '_453185245f214e42a64fd25b1daf8614' |
+	И я проверяю или создаю для справочника "Items" объекты:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture'                          | 'Vendor'                                                           | 'ItemID' | 'PackageUnit' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
+		| 'e1cib/data/Catalog.Items?ref=b762b13668d0905011eb76684b9f687d' | 'False'        | 1      | 'e1cib/data/Catalog.ItemTypes?ref=b762b13668d0905011eb76684b9f6878' | 'e1cib/data/Catalog.Units?ref=b762b13668d0905011eb76684b9f687b' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'e1cib/data/Catalog.Partners?ref=b762b13668d0905011eb7663e35d794d' | '58791'  | ''            | 'Товар с характеристиками' | ''                 | ''               | ''               |          |          |          | 0.21     |         |
 
-	Сценарий: Открытие формы списка "Items" 
+	И я перезаполняю для объекта табличную часть "AddAttributes":
+		| 'Ref'                                                           | 'Property'                                                                                           | 'Value'                                                                                 |
+		| 'e1cib/data/Catalog.Items?ref=b762b13668d0905011eb76684b9f687d' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb766bf96b275d' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=b762b13668d0905011eb766bf96b2760' |
+
+Сценарий: Открытие формы списка "Items" 
 
 	Дано Я открываю основную форму списка справочника "Items"
 	Если появилось предупреждение тогда
 		Тогда я вызываю исключение "Не удалось открыть форму справочника Items"
 	И Я закрываю текущее окно
 
-	Сценарий: Открытие формы объекта "Items"
+Сценарий: Открытие формы объекта "Items"
 
 	Дано Я открываю основную форму справочника "Items"
 	Если появилось предупреждение тогда
 		Тогда я вызываю исключение "Не удалось открыть форму справочника Items"
 	И Я закрываю текущее окно
 
-	Сценарий: заполнение справочника Items
-	* Создание справочника
-		И В командном интерфейсе я выбираю 'Inventory' 'Items'
-		И я нажимаю на кнопку с именем 'FormCreate'
-	* Заполнение реквизитов
-		И я нажимаю на кнопку открытия поля с именем "Description_en"
-		И в поле с именем 'Description_en' я ввожу текст 'Товар с цветом'
-		И я нажимаю на кнопку с именем 'FormOk'
-		И в поле с именем 'ItemID' я ввожу текст '47890'
-		И я нажимаю кнопку выбора у поля с именем "ItemType"
-		И я нажимаю на кнопку с именем 'FormList'
-		И в таблице "List" я перехожу к строке:
-			| 'Description'                |
-			| 'Товар (есть размер и цвет)' |
-		И в таблице "List" я выбираю текущую строку
-		И я закрываю все окна клиентского приложения
+Сценарий: заполнение справочника Items
+* Создание справочника
+	И В командном интерфейсе я выбираю 'Inventory' 'Items'
+	И я нажимаю на кнопку с именем 'FormCreate'
+* Заполнение Description
+	И я нажимаю на кнопку открытия поля с именем "Description_en"
+	И в поле с именем 'Description_en' я ввожу текст 'Товар с характеристиками'
+	И я нажимаю на кнопку с именем 'FormOk'
+* Заполнение ItemID	
+	И в поле с именем 'ItemID' я ввожу текст '77851'
+	И я нажимаю кнопку выбора у поля с именем "ItemType"
+	И я нажимаю на кнопку с именем 'FormList'
+	И в таблице "List" я перехожу к строке:
+		| 'Description'                |
+		| 'Товар (есть размер и цвет)' |
+	И в таблице "List" я выбираю текущую строку			
+* Заполнение Unit	
+	И я нажимаю кнопку выбора у поля с именем "Unit"
+	И в таблице "List" я перехожу к строке:
+		| 'Description' |
+		| 'шт'          |
+	И в таблице "List" я выбираю текущую строку
+	И я нажимаю на кнопку с именем 'FormWrite'
+* Заполнение PackageUnit
+	И я нажимаю кнопку выбора у поля с именем "PackageUnit"
+	И в таблице "List" я перехожу к строке:
+		| 'Description' |
+		| 'шт'          |
+	И в таблице "List" я выбираю текущую строку	
+* Заполнение Vendor
+	И я нажимаю кнопку выбора у поля с именем "Vendor"
+	И я нажимаю на кнопку с именем 'FormList'
+	И в таблице "List" я перехожу к строке:
+		| 'Description'                |
+		| 'Поставщик 1 (1 соглашение)' |
+	И в таблице "List" я выбираю текущую строку
+* Заполнение GroupDimensions
+	И я разворачиваю группу с именем "GroupDimensions"
+	И я перехожу к закладке с именем "GroupDimensions"
+	И в поле с именем 'Length' я ввожу текст '4,000'
+	И я перехожу к следующему реквизиту
+	И в поле с именем 'Width' я ввожу текст '5,000'
+	И я перехожу к следующему реквизиту
+	И в поле с именем 'Height' я ввожу текст '6,000'
+	И я перехожу к следующему реквизиту
+	И в поле с именем 'Volume' я ввожу текст '7,000'
+* Заполнение GroupWeightInformation
+	И я разворачиваю группу с именем "GroupWeightInformation"
+	И я перехожу к закладке с именем "GroupWeightInformation"
+	И в поле с именем 'Weight' я ввожу текст '34,000'
+	И я нажимаю на кнопку с именем 'FormWrite'
+	И я закрываю все окна клиентского приложения					

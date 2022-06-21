@@ -6342,7 +6342,9 @@ EndFunction
 Function BindAccountBalanceAccount(Parameters)
 	DataPath = "AccountBalance.Account";
 	Binding = New Structure();
-	Binding.Insert("OpeningEntry", "");
+	Binding.Insert("OpeningEntry", 
+		"StepAccountBalanceChangeCurrencyByAccount,
+		|StepAccountBalanceChangeIsFixedCurrencyByAccount");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

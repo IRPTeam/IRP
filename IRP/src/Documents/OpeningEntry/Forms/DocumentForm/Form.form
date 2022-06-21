@@ -744,6 +744,48 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>InventoryUseSerialLotNumber</name>
+          <id>1165</id>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Inventory.UseSerialLotNumber</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>InventoryUseSerialLotNumberExtendedTooltip</name>
+            <id>1167</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>InventoryUseSerialLotNumberContextMenu</name>
+            <id>1166</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>CheckBoxField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+        </items>
+        <items xsi:type="form:FormField">
           <name>InventoryStore</name>
           <id>326</id>
           <visible>true</visible>
@@ -963,12 +1005,12 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>OnStartEdit</event>
-          <name>InventoryOnStartEdit</name>
+          <event>BeforeAddRow</event>
+          <name>InventoryBeforeAddRow</name>
         </handlers>
         <handlers>
-          <event>OnChange</event>
-          <name>MainTableOnChange</name>
+          <event>AfterDeleteRow</event>
+          <name>InventoryAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1384,6 +1426,48 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>AccountBalanceIsFixedCurrency</name>
+          <id>1168</id>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.AccountBalance.IsFixedCurrency</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>AccountBalanceIsFixedCurrencyExtendedTooltip</name>
+            <id>1170</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>AccountBalanceIsFixedCurrencyContextMenu</name>
+            <id>1169</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>CheckBoxField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+        </items>
+        <items xsi:type="form:FormField">
           <name>AccountBalanceAmount</name>
           <id>362</id>
           <visible>true</visible>
@@ -1475,12 +1559,12 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>OnActivateCell</event>
-          <name>AccountBalanceOnActivateCell</name>
+          <event>BeforeAddRow</event>
+          <name>AccountBalanceBeforeAddRow</name>
         </handlers>
         <handlers>
-          <event>OnChange</event>
-          <name>MainTableOnChange</name>
+          <event>AfterDeleteRow</event>
+          <name>AccountBalanceAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -2953,10 +3037,6 @@
         </extendedTooltip>
         <type>Pages</type>
         <extInfo xsi:type="form:PagesGroupExtInfo">
-          <handlers>
-            <event>OnCurrentPageChange</event>
-            <name>GroupAdvanceFromCustomersAndToSuppliersOnCurrentPageChange</name>
-          </handlers>
           <pagesRepresentation>TabsOnTop</pagesRepresentation>
           <currentRowUse>Auto</currentRowUse>
         </extInfo>
@@ -4783,10 +4863,6 @@
         </extendedTooltip>
         <type>Pages</type>
         <extInfo xsi:type="form:PagesGroupExtInfo">
-          <handlers>
-            <event>OnCurrentPageChange</event>
-            <name>GroupAccountPayableByAgreementsAndByDocumentsOnCurrentPageChange</name>
-          </handlers>
           <pagesRepresentation>TabsOnTop</pagesRepresentation>
           <currentRowUse>Auto</currentRowUse>
         </extInfo>
@@ -6614,10 +6690,6 @@
         </extendedTooltip>
         <type>Pages</type>
         <extInfo xsi:type="form:PagesGroupExtInfo">
-          <handlers>
-            <event>OnCurrentPageChange</event>
-            <name>GroupAccountReceivableByAgreementsAndByDocumentsOnCurrentPageChange</name>
-          </handlers>
           <pagesRepresentation>TabsOnTop</pagesRepresentation>
           <currentRowUse>Auto</currentRowUse>
         </extInfo>
@@ -6915,10 +6987,6 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <handlers>
-        <event>OnCurrentPageChange</event>
-        <name>GroupPagesOnCurrentPageChange</name>
-      </handlers>
       <pagesRepresentation>TabsOnLeftHorizontal</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>

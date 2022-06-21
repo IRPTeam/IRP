@@ -1,23 +1,24 @@
-#Region FormEvents
+#Region FORM
+
+&AtClient
+Var MainTables;
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	DocOpeningEntryServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	FillItemList();
+Procedure OnReadAtServer(CurrentObject) Export
+	DocOpeningEntryServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibleCustomersPaymentTerms(Object, ThisObject);
+	SetVisibleVendorsPaymentTerms(Object, ThisObject);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
-&AtClient
-Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	CurrentData =  Items.AccountReceivableByDocuments.CurrentData;
-	If CurrentData <> Undefined Then
-		SetVisibleCustomersPaymentTerms(Object, ThisObject, CurrentData);
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	If Parameters.Key.IsEmpty() Then
+		SetVisibleCustomersPaymentTerms(Object, ThisObject);
+		SetVisibleVendorsPaymentTerms(Object, ThisObject);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-
-	CurrentData =  Items.AccountPayableByDocuments.CurrentData;
-	If CurrentData <> Undefined Then
-		SetVisibleVendorsPaymentTerms(Object, ThisObject, CurrentData);
-	EndIf;
+	DocOpeningEntryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 &AtServer
@@ -25,25 +26,26 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(Object, ThisObject);
+	DocOpeningEntryServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
+Procedure OnOpen(Cancel)
+	DocOpeningEntryClient.OnOpen(Object, ThisObject, Cancel, MainTables);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
 
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocOpeningEntryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-	If Parameters.Key.IsEmpty() Then
-		SetVisibleCustomersPaymentTerms(Object, ThisObject);
-		SetVisibleVendorsPaymentTerms(Object, ThisObject);
-		SetVisibilityAvailability(Object, ThisObject);
-	EndIf;
-EndProcedure
-
-&AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters) // remove
 	ItemList = Object.Inventory.Unload().Copy(New Structure("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef")));
 	ObjectRef = Object.Ref;
 
@@ -64,73 +66,64 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	RecordSet.Write(True);
 EndProcedure
 
-#EndRegion
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	CurrentData =  Items.AccountReceivableByDocuments.CurrentData;
+	If CurrentData <> Undefined Then
+		SetVisibleCustomersPaymentTerms(Object, ThisObject, CurrentData);
+	EndIf;
 
-&AtServer
-Procedure FillItemList()
-	RowMap = New Map();
-	For Each Row In Object.Inventory Do
-		RowMap.Insert(Row.Key, Row);
-		Row.Item = Row.ItemKey.Item;
-	EndDo;
-
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	SavedItems.Key,
-	|	SavedItems.Item
-	|FROM
-	|	InformationRegister.SavedItems AS SavedItems
-	|WHERE
-	|	SavedItems.ObjectRef = &ObjectRef";
-
-	Query.SetParameter("ObjectRef", Object.Ref);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-
-	While QuerySelection.Next() Do
-		RowMap[QuerySelection.Key].Item = QuerySelection.Item;
-	EndDo;
+	CurrentData =  Items.AccountPayableByDocuments.CurrentData;
+	If CurrentData <> Undefined Then
+		SetVisibleVendorsPaymentTerms(Object, ThisObject, CurrentData);
+	EndIf;
 EndProcedure
 
 &AtClient
-Procedure MainTableOnChange(Item)
-	For Each Row In Object[Item.Name] Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	Form.Items.EditCurrenciesAccountBalance.Enabled                = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAdvanceFromCustomers.Enabled          = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAdvanceToSuppliers.Enabled            = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountReceivableByAgreements.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountReceivableByDocuments.Enabled  = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountPayableByAgreements.Enabled    = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountPayableByDocuments.Enabled     = Not Form.ReadOnly;
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibleCustomersPaymentTerms(Object, Form, CurrentData = Undefined)
+	For Each Row In Object.CustomersPaymentTerms Do
+		If CurrentData = Undefined Then
+			Row.IsVisible = False;
+		Else
+			Row.IsVisible = True;
 		EndIf;
 	EndDo;
 EndProcedure
 
-&AtClient
-Procedure AccountBalanceOnActivateCell(Item)
-	CurrentData = Items.AccountBalance.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CashAccountInfo = CatCashAccountsServer.GetCashAccountInfo(CurrentData.Account);
-
-	Items.AccountBalanceCurrency.ReadOnly = Item.CurrentItem.Name = "AccountBalanceCurrency" And ValueIsFilled(
-		CashAccountInfo.Currency);
+&AtClientAtServerNoContext
+Procedure SetVisibleVendorsPaymentTerms(Object, Form, CurrentData = Undefined)
+	For Each Row In Object.VendorsPaymentTerms Do
+		If CurrentData = Undefined Then
+			Row.IsVisible = False;
+		Else
+			Row.IsVisible = True;
+		EndIf;
+	EndDo;
 EndProcedure
 
-&AtServer
-Procedure OnReadAtServer(CurrentObject) Export
-	DocOpeningEntryServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	FillItemList();
-	SetVisibleCustomersPaymentTerms(Object, ThisObject);
-	SetVisibleVendorsPaymentTerms(Object, ThisObject);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
+#EndRegion
+
+#Region COMPANY
 
 &AtClient
-Procedure OnOpen(Cancel, AddInfo = Undefined) Export
-	DocOpeningEntryClient.OnOpen(Object, ThisObject, Cancel);
-EndProcedure
-
-&AtClient
-Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
-	DocOpeningEntryClient.CompanyOnChange(Object, ThisObject, Item);
+Procedure CompanyOnChange(Item)
+	DocOpeningEntryClient.CompanyOnChange(Object, ThisObject, Item, MainTables);
 EndProcedure
 
 &AtClient
@@ -143,57 +136,60 @@ Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocOpeningEntryClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+#EndRegion
+
+#Region _DATE
+
 &AtClient
-Procedure DateOnChange(Item, AddInfo = Undefined) Export
+Procedure DateOnChange(Item)
 	DocOpeningEntryClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#Region INVENTORY
+
 &AtClient
-Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+Procedure InventoryBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOpeningEntryClient.InventoryBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
-Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+Procedure InventoryAfterDeleteRow(Item)
+	DocOpeningEntryClient.InventoryAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
-EndProcedure
+#Region INVENTORY_COLUMNS
+
+#Region _ITEM
 
 &AtClient
-Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
-EndProcedure
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+Procedure InventoryItemOnChange(Item)
+	DocOpeningEntryClient.InventoryItemOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure InventoryItemStartChoice(Item, ChoiceData, StandardProcessing)
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-		DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", PredefinedValue(
-		"Enum.ItemTypes.Service"), DataCompositionComparisonType.NotEqual));
-
-	DocumentsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
+	DocOpeningEntryClient.InventoryItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure InventoryItemEditTextChange(Item, Text, StandardProcessing)
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", PredefinedValue(
-		"Enum.ItemTypes.Service"), ComparisonType.NotEqual));
-	DocumentsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters);
+	DocOpeningEntryClient.InventiryItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure InventoryItemKeyOnChange(Item)
+	DocOpeningEntryClient.InventoryItemKeyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region SERIAL_LOT_NUMBERS
 
 &AtClient
 Procedure InventorySerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
@@ -225,35 +221,46 @@ Procedure InventorySerialLotNumberEditTextChange(Item, Text, StandardProcessing)
 	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
 EndProcedure
 
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region ACCOUNT_BALANCE
+
 &AtClient
-Procedure AccountBalanceAccountOnChange(Item, AddInfo = Undefined) Export
-	CurrentData = Items.AccountBalance.CurrentData;
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "AccountBalance");
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CashAccountInfo = CatCashAccountsServer.GetCashAccountInfo(CurrentData.Account);
-	CurrentData.Currency = CashAccountInfo.Currency;
+Procedure AccountBalanceBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOpeningEntryClient.AccountBalanceBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter)	
 EndProcedure
 
 &AtClient
-Procedure GroupPagesOnCurrentPageChange(Item, CurrentPage)
-	Return;
+Procedure AccountBalanceAfterDeleteRow(Item)
+	DocOpeningEntryClient.AccountBalanceAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure GroupAdvanceFromCustomersAndToSuppliersOnCurrentPageChange(Item, CurrentPage)
-	Return;
-EndProcedure
+#Region ACCOUNT_BALANCE_COLUMNS
+
+#Region ACCOUNT
 
 &AtClient
-Procedure GroupAccountPayableByAgreementsAndByDocumentsOnCurrentPageChange(Item, CurrentPage)
-	Return;
+Procedure AccountBalanceAccountOnChange(Item)
+	DocOpeningEntryClient.AccountBalanceAccountOnChange(Object, ThisObject, Item);
 EndProcedure
 
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
 &AtClient
-Procedure GroupAccountReceivableByAgreementsAndByDocumentsOnCurrentPageChange(Item, CurrentPage)
-	Return;
+Procedure MainTableOnChange(Item)
+	For Each Row In Object[Item.Name] Do
+		If Not ValueIsFilled(Row.Key) Then
+			Row.Key = New UUID();
+		EndIf;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -582,54 +589,6 @@ Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
 	CurrentData.Currency = AgreementInfo.Currency;
 EndProcedure
 
-#Region AddAttributes
-
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure AddAttributesCreateFormControl()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
-EndProcedure
-
-#EndRegion
-
-#Region InventoryItemsEvents
-
-&AtClient
-Procedure InventoryItemOnChange(Item, AddInfo = Undefined) Export
-	DocOpeningEntryClient.InventoryItemOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure InventoryItemKeyOnChange(Item, AddInfo = Undefined) Export
-	DocOpeningEntryClient.InventoryItemKeyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure InventoryOnStartEdit(Item, NewRow, Clone)
-	UserSettingsClient.TableOnStartEdit(Object, ThisObject, "Object.Inventory", Item, NewRow, Clone);
-EndProcedure
-
-#EndRegion
-
-#Region ExternalCommands
-
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);
-EndProcedure
-
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-#EndRegion
-
 &AtClient
 Procedure CustomersPaymentTermsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Cancel = True;
@@ -698,48 +657,78 @@ Procedure AccountPayableByDocumentsOnActivateRow(Item, AddInfo = Undefined) Expo
 	SetVisibleVendorsPaymentTerms(Object, ThisObject, CurrentData);
 EndProcedure
 
-&AtClientAtServerNoContext
-Procedure SetVisibleCustomersPaymentTerms(Object, Form, CurrentData = Undefined)
-	For Each Row In Object.CustomersPaymentTerms Do
-		If CurrentData = Undefined Then
-			Row.IsVisible = False;
-		Else
-			Row.IsVisible = True;
-		EndIf;
-	EndDo;
+#Region SERVICE
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
 EndProcedure
 
-&AtClientAtServerNoContext
-Procedure SetVisibleVendorsPaymentTerms(Object, Form, CurrentData = Undefined)
-	For Each Row In Object.VendorsPaymentTerms Do
-		If CurrentData = Undefined Then
-			Row.IsVisible = False;
-		Else
-			Row.IsVisible = True;//Row.Key = CurrentData.Key;
-		EndIf;
-	EndDo;
+#EndRegion
+
+#Region TITLE_DECORATIONS
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
 &AtClient
-Procedure FormSetVisibilityAvailability() Export
-	SetVisibilityAvailability(Object, ThisObject);
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
-&AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.EditCurrenciesAccountBalance.Enabled                = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAdvanceFromCustomers.Enabled          = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAdvanceToSuppliers.Enabled            = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAccountReceivableByAgreements.Enabled = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAccountReceivableByDocuments.Enabled  = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAccountPayableByAgreements.Enabled    = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAccountPayableByDocuments.Enabled     = Not Form.ReadOnly;
+&AtClient
+Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+#EndRegion
+
+#Region ADD_ATTRIBUTES
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
 
 &AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
+
+#EndRegion
 
 &AtClient
 Procedure EditCurrenciesAccountBalance(Command)
@@ -843,3 +832,11 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+
+#EndRegion
+
+MainTables = "AccountBalance, AdvanceFromCustomers, AdvanceToSuppliers,
+		|AccountPayableByAgreements, AccountPayableByDocuments,
+		|AccountReceivableByDocuments, AccountReceivableByAgreements,
+		|Inventory";
+

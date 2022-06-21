@@ -45,25 +45,27 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 EndProcedure
 
 &AtServer
-Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters) // remove
-	ItemList = Object.Inventory.Unload().Copy(New Structure("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef")));
-	ObjectRef = Object.Ref;
-
-	If ItemList.Count() = 0 Then
-		RecordSet = InformationRegisters.SavedItems.CreateRecordSet();
-		RecordSet.Filter.ObjectRef.Set(Object.Ref);
-		RecordSet.Write(True);
-		Return;
-	EndIf;
-
-	ItemList.Columns.Add("ObjectRef");
-	ItemList.FillValues(Object.Ref, "ObjectRef");
-
-	RecordSet = InformationRegisters.SavedItems.CreateRecordSet();
-	RecordSet.Filter.ObjectRef.Set(ObjectRef);
-
-	RecordSet.Load(ItemList);
-	RecordSet.Write(True);
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	
+//	ItemList = Object.Inventory.Unload().Copy(New Structure("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef")));
+//	ObjectRef = Object.Ref;
+//
+//	If ItemList.Count() = 0 Then
+//		RecordSet = InformationRegisters.SavedItems.CreateRecordSet();
+//		RecordSet.Filter.ObjectRef.Set(Object.Ref);
+//		RecordSet.Write(True);
+//		Return;
+//	EndIf;
+//
+//	ItemList.Columns.Add("ObjectRef");
+//	ItemList.FillValues(Object.Ref, "ObjectRef");
+//
+//	RecordSet = InformationRegisters.SavedItems.CreateRecordSet();
+//	RecordSet.Filter.ObjectRef.Set(ObjectRef);
+//
+//	RecordSet.Load(ItemList);
+//	RecordSet.Write(True);
 EndProcedure
 
 &AtClient

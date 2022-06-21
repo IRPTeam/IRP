@@ -51,10 +51,15 @@ Procedure SetNewTableUUID(Table, LinkedTables) Export
 EndProcedure
 
 Procedure FillItemList(Object, Form = Undefined) Export
-
+	
+	TableName = "ItemList";
+	If TypeOf(Object.Ref) = Type("DocumentRef.OpeningEntry") Then
+		TableName = "Inventory";
+	EndIf;
+	
 	RowMap = New Map();
 
-	For Each Row In Object.ItemList Do
+	For Each Row In Object[TableName] Do
 		RowMap.Insert(Row.Key, Row);
 		Row.Item = Row.ItemKey.Item;
 		If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Then
@@ -90,7 +95,13 @@ EndProcedure
 Procedure WriteSavedItems(Object, CurrentObject)
 
 	ObjectRef = CurrentObject.Ref;
-	ItemList = Object.ItemList.Unload().Copy(New Structure("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef")));
+	
+	TableName = "ItemList";
+	If TypeOf(ObjectRef) = Type("DocumentRef.OpeningEntry") Then
+		TableName = "Inventory";
+	EndIf;
+	
+	ItemList = Object[TableName].Unload().Copy(New Structure("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef")));
 
 	If ItemList.Count() = 0 Then
 		RecordSet = InformationRegisters.SavedItems.CreateRecordSet();

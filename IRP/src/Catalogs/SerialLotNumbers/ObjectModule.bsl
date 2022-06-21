@@ -18,25 +18,6 @@ Procedure BeforeDelete(Cancel)
 	EndIf;
 EndProcedure
 
-// Filling.
-// 
-// Parameters:
-//  FillingData - Structure:
-//  * SerialLotNumberOwner - Undefined, CatalogRef.ItemKeys, CatalogRef.Items, CatalogRef.ItemTypes - 
-//  FillingText - String, Undefined - Filling text
-//  StandardProcessing - Boolean - Standard processing
-Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If FillingData = Undefined Then
-		Return;
-	EndIf;
-	
-	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("SerialLotNumberOwner") Then
-		ThisObject.StockBalanceDetail = 
-			SerialLotNumbersServer.GetStockBalanceDetailByOwner(FillingData.SerialLotNumberOwner);
-	EndIf;
-EndProcedure
-
-
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If IsNew() Then
 		RegExpSettings = SerialLotNumbersServer.CheckSerialLotNumberName(ThisObject, Cancel); // See SerialLotNumbersServer.GetRegExpSettings
@@ -52,5 +33,4 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_110, "StockBalanceDetail");
 		EndIf;
 	EndIf;
-	
 EndProcedure

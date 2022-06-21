@@ -159,6 +159,10 @@
     <dataPath xsi:type="form:DataPath">
       <segments>Object.SerialLotNumberOwner</segments>
     </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>OwnerOnChange</name>
+    </handlers>
     <extendedTooltip>
       <name>OwnerExtendedTooltip</name>
       <id>3</id>
@@ -433,10 +437,6 @@
   <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
-  </handlers>
-  <handlers>
-    <event>OnOpen</event>
-    <name>OnOpen</name>
   </handlers>
   <handlers>
     <event>OnCreateAtServer</event>

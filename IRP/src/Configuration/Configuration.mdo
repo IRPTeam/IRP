@@ -409,7 +409,6 @@
   <commonModules>CommonModule.UndopostingServer</commonModules>
   <commonModules>CommonModule.UniqueID</commonModules>
   <commonModules>CommonModule.UniqueIDReuse</commonModules>
-  <commonModules>CommonModule.UserSettingsClient</commonModules>
   <commonModules>CommonModule.UserSettingsClientServer</commonModules>
   <commonModules>CommonModule.UserSettingsServer</commonModules>
   <commonModules>CommonModule.UsersEvent</commonModules>

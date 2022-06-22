@@ -653,15 +653,8 @@ Function GetArrayOfTaxInfo(Object, Form)
 	TaxesCache.Insert("Date"    , Object.Date);
 	TaxesCache.Insert("Company" , Object.Company);
 
-	// @deprecated
-//	ParametersToServer = New Structure("TaxesCache", TaxesCache);
-//	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	
 	Parameters = New Structure("TaxesCache", TaxesCache);
 	Result = GetFromTaxesCache(Parameters);
-	
-	// @deprecated
-//	Return ServerData.ArrayOfTaxInfo;	
 	
 	Return Result.ArrayOfTaxInfo;
 EndFunction

@@ -1,7 +1,3 @@
-// @deprecated
-//Function OfferHaveManualInputValue(OfferRef) Export
-//	Return OffersServer.OfferHaveManualInputValue(OfferRef);
-//EndFunction
 
 Function CalculateDocumentAmount(ItemList) Export
 	TotalAmount = ItemList.Total("TotalAmount");

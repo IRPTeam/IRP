@@ -5,8 +5,6 @@ Procedure OnOpen(Object, Form, Cancel) Export
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	// @deprecated
-	//DocumentsClient.FillDeliveryDates(Object, Form);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "ShipmentConfirmations");
 	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "ShipmentConfirmations", "ShipmentConfirmationsTree",

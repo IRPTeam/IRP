@@ -192,20 +192,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemLegalName
-
-// @deprecated
-//Procedure LegalNameOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
-//EndProcedure
-
-// @deprecated
-//Procedure LegalNameContractOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
-//EndProcedure
-
-#EndRegion
-
 #Region ItemCompany
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
@@ -368,22 +354,13 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	isSerialLotNumberAtRow = ObjectRefType = Type("DocumentRef.PhysicalInventory")
 			Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation");
 	
-//	Settings = New Structure();
-//	Settings.Insert("Rows", New Array());
-//	CalculationSettings = New Structure();
 	If Object.Property("Agreement") Then
-//		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
-//		PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
-//		CalculationSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
-//			AgreementInfo.PriceType));
 		FilterString = "Item, ItemKey, Unit, Price";
 	ElsIf isSerialLotNumberAtRow Then
 		FilterString = "Item, ItemKey, Unit, SerialLotNumber";
 	Else
 		FilterString = "Item, ItemKey, Unit";
 	EndIf;
-//	Settings.Insert("CalculateSettings", CalculationSettings);
-//	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
 
 	FilterStructure = New Structure(FilterString);
 	
@@ -511,57 +488,6 @@ Function PickupItemsParameters(Object, Form)
 EndFunction
 
 #EndRegion
-
-//#Region DeliveryDate
-
-// @deprecated
-//Procedure DeliveryDateOnChange(Object, Form, Item = Undefined) Export
-//	SetCurrentDeliveryDate(Form, Form.DeliveryDate);
-//	ChangeItemListDeliveryDate(Object.ItemList, Form.DeliveryDate);
-//	FillDeliveryDates(Object, Form);
-//EndProcedure
-
-// @deprecated
-//Procedure SetCurrentDeliveryDate(Form, DeliveryDate) Export
-//	Form.CurrentDeliveryDate = DeliveryDate;
-//EndProcedure
-
-// @deprecated
-//Procedure ChangeItemListDeliveryDate(ItemList, DeliveryDate) Export
-//	For Each Row In ItemList Do
-//		If Row.DeliveryDate <> DeliveryDate Then
-//			Row.DeliveryDate = DeliveryDate;
-//		EndIf;
-//	EndDo;
-//EndProcedure
-
-// @deprecated
-//Procedure FillDeliveryDates(Object, Form) Export
-//	DeliveryDatesArray = New Array();
-//	For Each Row In Object.ItemList Do
-//		If ValueIsFilled(Row.DeliveryDate) Then
-//			If DeliveryDatesArray.Find(Row.DeliveryDate) = Undefined Then
-//				DeliveryDatesArray.Add(Row.DeliveryDate);
-//			EndIf;
-//		EndIf;
-//	EndDo;
-//	If DeliveryDatesArray.Count() = 0 Then
-//		Form.Items.DeliveryDate.Tooltip = "";
-//		Form.DeliveryDate = Form.CurrentDeliveryDate;
-//	ElsIf DeliveryDatesArray.Count() = 1 Then
-//		Form.Items.DeliveryDate.Tooltip = "";
-//		Form.DeliveryDate = DeliveryDatesArray[0];
-//	Else
-//		DeliveryDatesFormattedArray = New Array();
-//		For Each Row In DeliveryDatesArray Do
-//			DeliveryDatesFormattedArray.Add(Format(Row, "DF=dd.MM.yy;"));
-//		EndDo;
-//		Form.DeliveryDate = Date(1, 1, 1);
-//		Form.Items.DeliveryDate.Tooltip = StrConcat(DeliveryDatesFormattedArray, "; ");
-//	EndIf;
-//EndProcedure
-
-//#EndRegion
 
 #Region Item
 
@@ -900,97 +826,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemListItemsEvents
-
-// @deprecated
-//Procedure ItemListItemOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
-//
-//	ItemListName = "ItemList";
-//	If Settings <> Undefined And Settings.Property("ItemListName") Then
-//		ItemListName = Settings.ItemListName;
-//	EndIf;
-//	CurrentRow = Form.Items[ItemListName].CurrentData;
-//	If CurrentRow = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
-//	ItemListItemSettings = Module.ItemListItemSettings(Object, Form);
-//	If ItemListItemSettings.Property("PutServerDataToAddInfo") And ItemListItemSettings.PutServerDataToAddInfo Then
-//		Module.ItemListItemOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, AddInfo);
-//	EndIf;
-//	ItemListItemSettings = Module.ItemListItemSettings(Object, Form, AddInfo);
-//
-//	If Settings = Undefined Then
-//		Settings = GetSettingsStructure(Module);
-//	EndIf;
-//
-//	Settings.Insert("ObjectAttributes", ItemListItemSettings.ObjectAttributes);
-//	Settings.Insert("CurrentRow", CurrentRow);
-//
-//	Settings.Insert("Rows", New Array());
-//	Settings.Rows.Add(CurrentRow);
-//
-//	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
-//
-//	CalculationStringsClientServer.DoTableActions(Object, Form, Settings, ItemListItemSettings.Actions, AddInfo);
-//
-//	If Item = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	For Each AfterActionsCalculateSettingsItem In ItemListItemSettings.AfterActionsCalculateSettings Do
-//		Settings.CalculateSettings.Insert(AfterActionsCalculateSettingsItem.Key,
-//			AfterActionsCalculateSettingsItem.Value);
-//	EndDo;
-//
-//	//ItemListCalculateRowsAmounts(Object, Form, Settings, Undefined, AddInfo);
-//EndProcedure
-
-// @deprecated
-//Procedure ItemListItemKeyOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
-//
-//	ItemListName = "ItemList";
-//	If Settings <> Undefined And Settings.Property("ItemListName") Then
-//		ItemListName = Settings.ItemListName;
-//	EndIf;
-//	CurrentRow = Form.Items[ItemListName].CurrentData;
-//	If CurrentRow = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
-//	ItemListItemKeySettings = Module.ItemListItemKeySettings(Object, Form);
-//	If ItemListItemKeySettings.Property("PutServerDataToAddInfo") And ItemListItemKeySettings.PutServerDataToAddInfo Then
-//		Module.ItemListItemKeyOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, AddInfo);
-//	EndIf;
-//	ItemListItemKeySettings = Module.ItemListItemKeySettings(Object, Form, AddInfo);
-//
-//	If Settings = Undefined Then
-//		Settings = GetSettingsStructure(Module);
-//	EndIf;
-//
-//	Settings.Insert("ObjectAttributes", ItemListItemKeySettings.ObjectAttributes);
-//
-//	Settings.Insert("Rows", New Array());
-//	Settings.Rows.Add(CurrentRow);
-//	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
-//
-//	CalculationStringsClientServer.DoTableActions(Object, Form, Settings, ItemListItemKeySettings.Actions, AddInfo);
-//
-//	If Item = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	For Each AfterActionsCalculateSettingsItem In ItemListItemKeySettings.AfterActionsCalculateSettings Do
-//		Settings.CalculateSettings.Insert(AfterActionsCalculateSettingsItem.Key,
-//			AfterActionsCalculateSettingsItem.Value);
-//	EndDo;
-//
-//EndProcedure
-
-#EndRegion
-
 #Region PaymentListItemsEvents
 
 Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
@@ -1026,76 +861,6 @@ EndProcedure
 
 #EndRegion
 
-#Region PrepareServerData
-
-// @depreacted
-//Procedure CommonParametersToServer(Object, Form, ParametersToServer, AddInfo = Undefined)
-//	If Object.Property("ItemList") Then
-//		GetItemKeysWithSerialLotNumbers(Object, ParametersToServer);
-//	EndIf;
-//	TaxesCacheParameters = New Structure();
-//	TaxesCacheParameters.Insert("Cache", Form.TaxesCache);
-//	TaxesCacheParameters.Insert("Ref", Object.Ref);
-//	TaxesCacheParameters.Insert("Date", Object.Date);
-//	TaxesCacheParameters.Insert("Company", Object.Company);
-//	ParametersToServer.Insert("TaxesCache", TaxesCacheParameters);/
-//
-//	ParametersToServer.Insert("GetAgreementTypes_Vendor");
-//	ParametersToServer.Insert("GetPurchaseOrder_EmptyRef");
-//	ParametersToServer.Insert("GetAgreementTypes_Customer");
-//	ParametersToServer.Insert("GetSalesOrder_EmptyRef");
-//	ParametersToServer.Insert("GetPriceTypes_ManualPriceType");
-//	ParametersToServer.Insert("GetPurchaseReturnOrder_EmptyRef");
-//	ParametersToServer.Insert("GetSalesReturnOrder_EmptyRef");
-//EndProcedure
-
-// @depreacted
-//Procedure GetItemKeysWithSerialLotNumbers(Object, ParametersToServer) Export
-//	ArrayOfItemKeys = New Array();
-//	For Each Row In Object.ItemList Do
-//		ArrayOfItemKeys.Add(Row.ItemKey);
-//	EndDo;
-//	ParametersToServer.Insert("GetItemKeysWithSerialLotNumbers", ArrayOfItemKeys);
-//EndProcedure
-
-//#Region FormEvents
-
-// @deprecated
-//Procedure AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-//	OnChangeItemName = "AfterWrite";
-//	ParametersToServer = New Structure();
-//	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-//
-//	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-//	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-//	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-//EndProcedure
-
-//#EndRegion
-
-#Region ItemListItemsEvents
-
-// @deprecated
-//Procedure ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-//	OnChangeItemName = "ItemListSelection";
-//	ParametersToServer = New Structure();
-//	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-//
-//	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-//	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-//	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-//EndProcedure
-
-// @deprecated
-//Procedure ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-//	OnChangeItemName = "ItemListSerialLotNumbersPresentation";
-//	ParametersToServer = New Structure();
-//	GetItemKeysWithSerialLotNumbers(Object, ParametersToServer);
-//
-//	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-//	ServerData.Insert("OnChangeItemName", OnChangeItemName);
-//	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
-//EndProcedure
 
 #Region ExpenseAndRevenue
 
@@ -1152,33 +917,6 @@ Procedure ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, Standard
 EndProcedure
 
 #EndRegion
-
-#EndRegion
-
-#EndRegion
-
-//#Region SpecialOffersInReturns
-
-// @deprecated
-//Procedure RecalculateSpecialOffersOnChangeQuantity(Object, Form, CurrentData, AddInfo = Undefined) Export
-//	ArrayOfSpecialOffersInCache = Form.SpecialOffersCache.FindRows(New Structure("Key", CurrentData.Key));
-//	For Each ItemOfSpecialOffersInCache In ArrayOfSpecialOffersInCache Do
-//		SpecialOfferAmount = 0;
-//		If CurrentData.Quantity = ItemOfSpecialOffersInCache.Quantity Then
-//			SpecialOfferAmount = ItemOfSpecialOffersInCache.Amount;
-//		Else
-//			SpecialOfferAmount = (ItemOfSpecialOffersInCache.Amount / ItemOfSpecialOffersInCache.Quantity)
-//				* CurrentData.Quantity;
-//		EndIf;
-//		ArrayOfSpecialOffers = Object.SpecialOffers.FindRows(New Structure("Key, Offer", CurrentData.Key,
-//			ItemOfSpecialOffersInCache.Offer));
-//		For Each ItemOfSpecialOffers In ArrayOfSpecialOffers Do
-//			ItemOfSpecialOffers.Amount = SpecialOfferAmount;
-//		EndDo;
-//	EndDo;
-//EndProcedure
-
-//#EndRegion
 
 #Region Utility
 

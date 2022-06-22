@@ -31,14 +31,14 @@ Procedure SpecialOffersEditFinish_ForDocument(OffersInfo, Object, Form, AddInfo 
 
 	CalculationStringsClientServer.RecalculateAppliedOffers_ForRow(Object);
 	
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
+//	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
+//		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
 		ViewClient_V2.OffersOnChange(Object, Form);
 	// @deprecated
 //	Else
 //		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
 //			CalculationStringsClientServer.GetCalculationSettings(), TaxesClient.GetArrayOfTaxInfo(Form));
-	EndIf;
+//	EndIf;
 	
 	Form.Modified = True;
 	Form.TaxAndOffersCalculated = True;
@@ -67,14 +67,14 @@ Procedure SpecialOffersEditFinish_ForRow(OffersInfo, Object, Form, AddInfo = Und
 	EndIf;
 	CalculationStringsClientServer.CalculateAndLoadOffers_ForRow(Object, OffersInfo.OffersAddress, OffersInfo.ItemListRowKey);
 	
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") 
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
+//	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") 
+//		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
 		ViewClient_V2.OffersOnChange(Object, Form);
 	// @deprecated
 //	Else
 //		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
 //			CalculationStringsClientServer.GetCalculationSettings(), TaxesClient.GetArrayOfTaxInfo(Form));
-	EndIf;
+//	EndIf;
 	
 	Form.Modified = True;
 	ExecuteCallback(AddInfo);

@@ -97,7 +97,10 @@ Procedure RecalculateTaxAndOffers(Object, Form) Export
 	
 	ArrayForDelete = New Array();
 	For Each Row In Object.SpecialOffers Do
-		If ValueIsFilled(Row.Offer) And CalculationServer.OfferHaveManualInputValue(Row.Offer)
+		// @deprecated
+		//If ValueIsFilled(Row.Offer) And CalculationServer.OfferHaveManualInputValue(Row.Offer)
+		If ValueIsFilled(Row.Offer) And OffersServer.OfferHaveManualInputValue(Row.Offer)
+		
 			And Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
 			Continue;
 		EndIf;

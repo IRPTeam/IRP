@@ -261,16 +261,4 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <commands uuid="41af0067-74a4-403b-ad6a-8ad2c6f25161">
-    <name>OpenPriceKeysList</name>
-    <synonym>
-      <key>en</key>
-      <value>Price keys</value>
-    </synonym>
-    <group>FormNavigationPanelGoTo</group>
-    <commandParameterType>
-      <types>CatalogRef.Items</types>
-    </commandParameterType>
-    <representation>Auto</representation>
-  </commands>
 </mdclass:Catalog>

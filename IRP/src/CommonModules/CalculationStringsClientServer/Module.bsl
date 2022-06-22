@@ -1,97 +1,100 @@
-Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
-	If Actions = Undefined Then
-		Actions = New Structure();
-	EndIf;
-	Actions.Insert("CalculateQuantityInBaseUnit");
-	Actions.Insert("CalculateSpecialOffers");
-	Actions.Insert("CalculateNetAmount");
-	Actions.Insert("CalculateTax");
-	Actions.Insert("CalculateTotalAmount");
+// @deprecated
+//Function GetCalculationSettings(Actions = Undefined, AddInfo = Undefined) Export
+//	If Actions = Undefined Then
+//		Actions = New Structure();
+//	EndIf;
+//	Actions.Insert("CalculateQuantityInBaseUnit");
+//	Actions.Insert("CalculateSpecialOffers");
+//	Actions.Insert("CalculateNetAmount");
+//	Actions.Insert("CalculateTax");
+//	Actions.Insert("CalculateTotalAmount");
+//
+//#If MobileClient Then
+//	Actions.Insert("UpdateInfoString");
+//#EndIf
+//
+//	Return Actions;
+//EndFunction
 
-#If MobileClient Then
-	Actions.Insert("UpdateInfoString");
-#EndIf
+// @deprecated
+//Procedure ClearDependentData(Object, AddInfo = Undefined) Export
+//	If AddInfo = Undefined Or Not AddInfo.Property("TableParent") Then
+//		TableName = "ItemList";
+//	Else
+//		TableName = AddInfo.TableParent;
+//	EndIf;
+//
+//	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
+//		ArrayForDelete = New Array();
+//
+//		For Each Row In Object.TaxList Do
+//			If Object[TableName].FindRows(New Structure("Key", Row.Key)).Count() Then
+//				Continue;
+//			EndIf;
+//			ArrayForDelete.Add(Row);
+//		EndDo;
+//		For Each Row In ArrayForDelete Do
+//			Object.TaxList.Delete(Row);
+//		EndDo;
+//	EndIf;
+//
+//	If CommonFunctionsClientServer.ObjectHasProperty(Object, "SpecialOffers") Then
+//		ArrayForDelete = New Array();
+//		For Each Row In Object.SpecialOffers Do
+//			If ValueIsFilled(Row.Offer) And CalculationServer.OfferHaveManualInputValue(Row.Offer)
+//				And Object[TableName].FindRows(New Structure("Key", Row.Key)).Count() Then
+//				Continue;
+//			EndIf;
+//			ArrayForDelete.Add(Row);
+//		EndDo;
+//		For Each Row In ArrayForDelete Do
+//			Object.SpecialOffers.Delete(Row);
+//		EndDo;
+//	EndIf;
+//EndProcedure
 
-	Return Actions;
-EndFunction
-
-Procedure ClearDependentData(Object, AddInfo = Undefined) Export
-	If AddInfo = Undefined Or Not AddInfo.Property("TableParent") Then
-		TableName = "ItemList";
-	Else
-		TableName = AddInfo.TableParent;
-	EndIf;
-
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
-		ArrayForDelete = New Array();
-
-		For Each Row In Object.TaxList Do
-			If Object[TableName].FindRows(New Structure("Key", Row.Key)).Count() Then
-				Continue;
-			EndIf;
-			ArrayForDelete.Add(Row);
-		EndDo;
-		For Each Row In ArrayForDelete Do
-			Object.TaxList.Delete(Row);
-		EndDo;
-	EndIf;
-
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "SpecialOffers") Then
-		ArrayForDelete = New Array();
-		For Each Row In Object.SpecialOffers Do
-			If ValueIsFilled(Row.Offer) And CalculationServer.OfferHaveManualInputValue(Row.Offer)
-				And Object[TableName].FindRows(New Structure("Key", Row.Key)).Count() Then
-				Continue;
-			EndIf;
-			ArrayForDelete.Add(Row);
-		EndDo;
-		For Each Row In ArrayForDelete Do
-			Object.SpecialOffers.Delete(Row);
-		EndDo;
-	EndIf;
-EndProcedure
-
-Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
-	Result = New Structure("ItemList, PaymentList, TaxList, SpecialOffers");
-	If Not Actions.Count() Then
-		Return Result;
-	EndIf;
-
-	For Each ItemRow In ItemRows Do
-		CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
-	EndDo;
-	If Object.Property("ItemList") Then
-		Result.ItemList = Object.ItemList;
-	EndIf;
-	If Object.Property("PaymentList") Then
-		Result.PaymentList = Object.PaymentList;
-	EndIf;
-	If Object.Property("TaxList") Then
-		Result.TaxList = Object.TaxList;
-	EndIf;
-	If Object.Property("SpecialOffers") Then
-		Result.SpecialOffers = Object.SpecialOffers;
-	EndIf;
-
-
-#If ThinClient Then
-
-	For Each Action In Actions Do
-		NotifyStructure = New Structure();
-		NotifyStructure.Insert("Object", Object);
-		NotifyStructure.Insert("ItemRow", Undefined);
-		NotifyStructure.Insert("Actions", Actions);
-		NotifyStructure.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
-		NotifyStructure.Insert("AddInfo", AddInfo);
-
-		Notify(Action.Key, NotifyStructure, Form);
-	EndDo;
-
-	Notify("CalculationStringsComplete", New Structure("AddInfo", AddInfo), Form);
-
-#EndIf
-	Return Result;
-EndFunction
+// @deprecated
+//Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
+//	Result = New Structure("ItemList, PaymentList, TaxList, SpecialOffers");
+//	If Not Actions.Count() Then
+//		Return Result;
+//	EndIf;
+//
+//	For Each ItemRow In ItemRows Do
+//		CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
+//	EndDo;
+//	If Object.Property("ItemList") Then
+//		Result.ItemList = Object.ItemList;
+//	EndIf;
+//	If Object.Property("PaymentList") Then
+//		Result.PaymentList = Object.PaymentList;
+//	EndIf;
+//	If Object.Property("TaxList") Then
+//		Result.TaxList = Object.TaxList;
+//	EndIf;
+//	If Object.Property("SpecialOffers") Then
+//		Result.SpecialOffers = Object.SpecialOffers;
+//	EndIf;
+//
+//
+//#If ThinClient Then
+//
+//	For Each Action In Actions Do
+//		NotifyStructure = New Structure();
+//		NotifyStructure.Insert("Object", Object);
+//		NotifyStructure.Insert("ItemRow", Undefined);
+//		NotifyStructure.Insert("Actions", Actions);
+//		NotifyStructure.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
+//		NotifyStructure.Insert("AddInfo", AddInfo);
+//
+//		Notify(Action.Key, NotifyStructure, Form);
+//	EndDo;
+//
+//	Notify("CalculationStringsComplete", New Structure("AddInfo", AddInfo), Form);
+//
+//#EndIf
+//	Return Result;
+//EndFunction
 
 Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
 	IsCalculatedRow = True;
@@ -554,51 +557,54 @@ Function UpdateBarcode(Object, ItemRow, AddInfo = Undefined)
 	Return ReturnValue;
 EndFunction
 
-#Region NewForms
+//#Region NewForms
 
-Procedure CalculateRow(Object, Form, Settings, Actions) Export
+// @deprecated
+//Procedure CalculateRow(Object, Form, Settings, Actions) Export
+//
+//	DoTableActions(Object, Form, Settings, Actions);
+//
+//EndProcedure
 
-	DoTableActions(Object, Form, Settings, Actions);
+// @deprecated
+//Procedure DoTableActions(Object, Form, Settings, Actions, AddInfo = Undefined) Export
+//
+//	For Each Action In Actions Do
+//
+//		If Action.Key = "UpdateItemKey" Then
+//			UpdateItemKey(Object, Form, Settings, AddInfo);
+//		EndIf;
+//		
+//	EndDo;
+//
+//EndProcedure
 
-EndProcedure
-
-Procedure DoTableActions(Object, Form, Settings, Actions, AddInfo = Undefined) Export
-
-	For Each Action In Actions Do
-
-		If Action.Key = "UpdateItemKey" Then
-			UpdateItemKey(Object, Form, Settings, AddInfo);
-		EndIf;
-		
-	EndDo;
-
-EndProcedure
-
-#EndRegion
+//#EndRegion
 
 #Region TableItemsChanges
 
-Procedure UpdateItemKey(Object, Form, Settings, AddInfo = Undefined) Export
-	CurrentRow = Settings.CurrentRow;
-	CurrentItemKey = CurrentRow.ItemKey;
-
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	If ServerData = Undefined Then
-		CurrentRow.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentRow.Item);
-	Else
-		CurrentRow.ItemKey = ServerData.ItemKeyByItem;
-	EndIf;
-
-	If ValueIsFilled(CurrentRow.ItemKey) Then
-#If AtClient Then
-		If CurrentRow.ItemKey <> CurrentItemKey Then
-			DocumentsClient.ItemListItemKeyOnChange(Object, Form, Settings.Module, , Settings);
-		EndIf;
-#EndIf
-	Else
-		Settings.CalculateSettings.Insert("ClearRow", "ClearRow");
-	EndIf;
-EndProcedure
+// @deprecated
+//Procedure UpdateItemKey(Object, Form, Settings, AddInfo = Undefined) Export
+//	CurrentRow = Settings.CurrentRow;
+//	CurrentItemKey = CurrentRow.ItemKey;
+//
+//	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+//	If ServerData = Undefined Then
+//		CurrentRow.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentRow.Item);
+//	Else
+//		CurrentRow.ItemKey = ServerData.ItemKeyByItem;
+//	EndIf;
+//
+//	If ValueIsFilled(CurrentRow.ItemKey) Then
+//#If AtClient Then
+//		If CurrentRow.ItemKey <> CurrentItemKey Then
+//			DocumentsClient.ItemListItemKeyOnChange(Object, Form, Settings.Module, , Settings);
+//		EndIf;
+//#EndIf
+//	Else
+//		Settings.CalculateSettings.Insert("ClearRow", "ClearRow");
+//	EndIf;
+//EndProcedure
 
 Function UpdateUnit(Object, ItemRow, AddInfo = Undefined)
 	UnitInfo = GetItemInfo.ItemUnitInfo(ItemRow.ItemKey);

@@ -58,7 +58,11 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.Payer,
 	|PaymentList.AmountExchange,
 	|PaymentList.POSAccount,
-	|PaymentList.Order";
+	|PaymentList.Order,
+	|PaymentList.PaymentType,
+	|PaymentList.PaymentTerminal,
+	|PaymentList.BankTerm,
+	|PaymentList.CommissionIsSeparate";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -70,6 +74,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
 	ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
 	TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
+	PaymentFromCustomerByPOS = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -78,7 +83,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "TransitAccount, CurrencyExchange,
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.AmountExchange";
-	ElsIf TransactionType = PaymentFromCustomer Or TransactionType = ReturnFromVendor Then
+	ElsIf TransactionType = PaymentFromCustomer 
+		Or TransactionType = ReturnFromVendor 
+		Or TransactionType = PaymentFromCustomerByPOS Then
+		
 		StrByType = "
 		|PaymentList.BasisDocument,
 		|PaymentList.Partner,
@@ -88,6 +96,14 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.LegalNameContract";
 		If TransactionType = PaymentFromCustomer Then
 			StrByType = StrByType + ", PaymentList.Order";
+		EndIf;
+		
+		If TransactionType = PaymentFromCustomerByPOS Then
+			StrByType = StrByType + ", 
+			|PaymentList.PaymentType,
+			|PaymentList.PaymentTerminal,
+			|PaymentList.BankTerm,
+			|PaymentList.CommissionIsSeparate";
 		EndIf;
 	ElsIf TransactionType = TransferFromPOS Then
 		StrByType = "

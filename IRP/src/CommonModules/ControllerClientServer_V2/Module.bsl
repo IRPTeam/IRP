@@ -1092,6 +1092,10 @@ Procedure FillTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("POSAccount"               , BindPaymentListPOSAccount(Parameters));
 	ResourceToBinding.Insert("TransitAccount"           , BindTransitAccount(Parameters));
 	ResourceToBinding.Insert("CurrencyExchange"         , BindCurrencyExchange(Parameters));
+	ResourceToBinding.Insert("PaymentType"              , BindPaymentListPaymentType(Parameters));
+	ResourceToBinding.Insert("PaymentTerminal"          , BindPaymentListPaymentTerminal(Parameters));
+	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
+	ResourceToBinding.Insert("CommissionIsSeparate"     , BindPaymentListCommissionIsSeparate(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1162,6 +1166,10 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.AmountExchange           = GetPaymentListAmountExchange(Parameters, Row.Key);
 		Options.POSAccount               = GetPaymentListPOSAccount(Parameters, Row.Key);
+		Options.PaymentType              = GetPaymentListPaymentType(Parameters, Row.Key);
+		Options.PaymentTerminal          = GetPaymentListPaymentTerminal(Parameters, Row.Key);
+		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
+		Options.CommissionIsSeparate     = GetPaymentListCommissionIsSeparate(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
 		Chain.ClearByTransactionTypeBankReceipt.Options.Add(Options);
@@ -4338,6 +4346,94 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 		Chain.Calculations.Options.Add(Options);
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_PAYMENT_TYPE
+
+// PaymentList.PaymentType.Set
+Procedure SetPaymentListPaymentType(Parameters, Results) Export
+	Binding = BindPaymentListPaymentType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.PaymentType.Get
+Function GetPaymentListPaymentType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListPaymentType(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.PaymentType.Bind
+Function BindPaymentListPaymentType(Parameters)
+	DataPath = "PaymentList.PaymentType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_PAYMENT_TERMINAL
+
+// PaymentList.PaymentTerminal.Set
+Procedure SetPaymentListPaymentTerminal(Parameters, Results) Export
+	Binding = BindPaymentListPaymentTerminal(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.PaymentTerminal.Get
+Function GetPaymentListPaymentTerminal(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListPaymentTerminal(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.PaymentTerminal.Bind
+Function BindPaymentListPaymentTerminal(Parameters)
+	DataPath = "PaymentList.PaymentTerminal";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_BANK_TERM
+
+// PaymentList.BankTerm.Set
+Procedure SetPaymentListBankTerm(Parameters, Results) Export
+	Binding = BindPaymentListBankTerm(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.BankTerm.Get
+Function GetPaymentListBankTerm(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListBankTerm(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.BankTerm.Bind
+Function BindPaymentListBankTerm(Parameters)
+	DataPath = "PaymentList.BankTerm";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_COMMISSION_IS_SEPARATE
+
+// PaymentList.CommissionIsSeparate.Set
+Procedure SetPaymentListCommissionIsSeparate(Parameters, Results) Export
+	Binding = BindPaymentListCommissionIsSeparate(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.CommissionIsSeparate.Get
+Function GetPaymentListCommissionIsSeparate(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListCommissionIsSeparate(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.CommissionIsSeparate.Bind
+Function BindPaymentListCommissionIsSeparate(Parameters)
+	DataPath = "PaymentList.CommissionIsSeparate";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 

@@ -81,6 +81,7 @@
   <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>AccumulationRegister.R3050T_PosCashBalances</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -158,6 +159,10 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Ref</name>
+      <field>Document.BankReceipt.StandardAttribute.Ref</field>
+    </choiceParameterLinks>
     <fillValue xsi:type="core:ReferenceValue">
       <value>Enum.IncomingPaymentTransactionType.EnumValue.PaymentFromCustomer</value>
     </fillValue>
@@ -483,6 +488,62 @@
       </synonym>
       <type>
         <types>DocumentRef.SalesOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="390a27f0-f601-45c6-947b-acb6e5d11063">
+      <name>PaymentType</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PaymentTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="731fc1c4-7a83-421e-bd32-b83f058004b5">
+      <name>PaymentTerminal</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment terminal</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PaymentTerminals</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e8da7c0f-c678-4415-acf2-4e4c44f483fe">
+      <name>BankTerm</name>
+      <synonym>
+        <key>en</key>
+        <value>Bank term</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BankTerms</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1704ff55-abe1-49ad-aac9-a5c4c7f37595">
+      <name>CommissionIsSeparate</name>
+      <synonym>
+        <key>en</key>
+        <value>Commission is separate</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

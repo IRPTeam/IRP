@@ -1987,7 +1987,11 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|PlanningTransactionBasis,
 		|Order,
 		|AmountExchange,
-		|POSAccount");
+		|POSAccount,
+		|PaymentType,
+		|PaymentTerminal,
+		|BankTerm,
+		|CommissionIsSeparate");
 EndFunction
 
 Function ClearByTransactionTypeBankReceiptExecute(Options) Export
@@ -2003,12 +2007,17 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("Order"                    , Options.Order);
 	Result.Insert("AmountExchange"           , Options.AmountExchange);
 	Result.Insert("POSAccount"               , Options.POSAccount);
+	Result.Insert("PaymentType"              , Options.PaymentType);
+	Result.Insert("PaymentTerminal"          , Options.PaymentTerminal);
+	Result.Insert("BankTerm"                 , Options.BankTerm);
+	Result.Insert("CommissionIsSeparate"     , Options.CommissionIsSeparate);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
 	Incoming_PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
 	Incoming_ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
 	Incoming_TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
+	Incoming_PaymentFromCustomerByPOS = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -2019,12 +2028,23 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|TransitAccount, 
 		|CurrencyExchange,
 		|AmountExchange";
-	ElsIf Options.TransactionType = Incoming_PaymentFromCustomer Or Options.TransactionType = Incoming_ReturnFromVendor Then
+	ElsIf Options.TransactionType = Incoming_PaymentFromCustomer 
+		Or Options.TransactionType = Incoming_ReturnFromVendor 
+		Or Options.TransactionType = Incoming_PaymentFromCustomerByPOS Then
+		
 		StrByType = "
 		|Partner,
 		|Agreement,
 		|Payer,
 		|LegalNameContract";
+		
+		If Options.TransactionType = Incoming_PaymentFromCustomerByPOS Then
+			StrByType = StrByType + ", 
+			|PaymentType,
+			|PaymentTerminal,
+			|BankTerm,
+			|CommissionIsSeparate";
+		EndIf;
 	ElsIf Options.TransactionType = Incoming_TransferFromPOS Then
 		StrByType = "
 		|PaymentList.POSAccount";

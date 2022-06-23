@@ -47,4 +47,11 @@
       <value>Return from vendor</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="389a53e9-c6da-4dd8-acfd-f3cc12c4f33d">
+    <name>PaymentFromCustomerByPOS</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment from customer by POS</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

@@ -1183,13 +1183,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.PriceKeys.Command.OpenPriceKeysList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>SessionParameter.Workstation</name>
 		<right>
 			<name>Get</name>

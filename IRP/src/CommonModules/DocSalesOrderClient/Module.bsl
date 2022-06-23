@@ -4,16 +4,15 @@ Procedure OnOpen(Object, Form, Cancel) Export
 	ViewClient_V2.OnOpen(Object, Form, "ItemList");
 EndProcedure
 
-Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
-	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);
-
+Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
+#If Not MobileClient And Not MobileAppClient Then
 	MessageText = DocSalesOrderServer.CheckItemList(Object.Ref);
 	If Not MessageText = "" Then
-#If Not MobileClient And Not MobileAppClient Then
 		Status(Object.Ref, , MessageText);
-#EndIf
 	EndIf;
-	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
+#EndIf
+
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 
 #EndRegion
@@ -184,6 +183,14 @@ EndProcedure
 
 Procedure StoreOnChange(Object, Form, Item) Export
 	ViewClient_V2.StoreOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
+#Region DELIVERY_DATE
+
+Procedure DeliveryDateOnChange(Object, Form, Item) Export
+	ViewClient_V2.DeliveryDateOnChange(Object, Form, "ItemList");
 EndProcedure
 
 #EndRegion

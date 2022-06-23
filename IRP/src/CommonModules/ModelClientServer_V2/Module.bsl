@@ -161,6 +161,7 @@ Function GetChain()
 	Chain.Insert("ChangeProcurementMethodByItemKey" , GetChainLink("ChangeProcurementMethodByItemKeyExecute"));
 	
 	Chain.Insert("ChangeCurrencyByAccount", GetChainLink("ChangeCurrencyByAccountExecute"));
+	Chain.Insert("ChangeIsFixedCurrencyByAccount", GetChainLink("ChangeIsFixedCurrencyByAccountExecute"));
 	Chain.Insert("ChangePlanningTransactionBasisByCurrency", GetChainLink("ChangePlanningTransactionBasisByCurrencyExecute"));
 	Chain.Insert("FillStoresInList"       , GetChainLink("FillStoresInListExecute"));
 	Chain.Insert("FillDeliveryDateInList" , GetChainLink("FillDeliveryDateInListExecute"));
@@ -637,6 +638,22 @@ Function ChangeCurrencyByAgreementExecute(Options) Export
 		Return AgreementInfo.Currency;
 	EndIf;
 	Return Options.CurrentCurrency;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_IS_FEXED_CURRENCY_BY_ACCOUNT
+
+Function ChangeIsFixedCurrencyByAccountOptions() Export
+	Return GetChainLinkOptions("Account");
+EndFunction
+
+Function ChangeIsFixedCurrencyByAccountExecute(Options) Export
+	If Not ValueIsFilled(Options.Account) Then
+		Return False;
+	EndIf;
+	Currency = ServiceSystemServer.GetObjectAttribute(Options.Account, "Currency");
+	Return ValueIsFilled(Currency);
 EndFunction
 
 #EndRegion

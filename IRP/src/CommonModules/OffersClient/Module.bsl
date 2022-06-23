@@ -26,18 +26,12 @@ Procedure SpecialOffersEditFinish_ForDocument(OffersInfo, Object, Form, AddInfo 
 	If OffersInfo = Undefined Then
 		Return;
 	EndIf;
-	OffersClient.RecalculateTaxAndOffers(Object, Form);
+	RecalculateTaxAndOffers(Object, Form);
 	CalculationStringsClientServer.CalculateAndLoadOffers_ForDocument(Object, OffersInfo.OffersAddress);
 
 	CalculationStringsClientServer.RecalculateAppliedOffers_ForRow(Object);
 	
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
-		ViewClient_V2.OffersOnChange(Object, Form);
-	Else
-		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
-			CalculationStringsClientServer.GetCalculationSettings(), TaxesClient.GetArrayOfTaxInfo(Form));
-	EndIf;
+	ViewClient_V2.OffersOnChange(Object, Form);
 	
 	Form.Modified = True;
 	Form.TaxAndOffersCalculated = True;
@@ -66,13 +60,7 @@ Procedure SpecialOffersEditFinish_ForRow(OffersInfo, Object, Form, AddInfo = Und
 	EndIf;
 	CalculationStringsClientServer.CalculateAndLoadOffers_ForRow(Object, OffersInfo.OffersAddress, OffersInfo.ItemListRowKey);
 	
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") 
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
-		ViewClient_V2.OffersOnChange(Object, Form);
-	Else
-		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
-			CalculationStringsClientServer.GetCalculationSettings(), TaxesClient.GetArrayOfTaxInfo(Form));
-	EndIf;
+	ViewClient_V2.OffersOnChange(Object, Form);
 	
 	Form.Modified = True;
 	ExecuteCallback(AddInfo);
@@ -90,5 +78,17 @@ Procedure RecalculateTaxAndOffers(Object, Form) Export
 	If Form.TaxAndOffersCalculated Then
 		Form.TaxAndOffersCalculated = False;
 	EndIf;
-	CalculationStringsClientServer.ClearDependentData(Object);
+	
+	ArrayForDelete = New Array();
+	For Each Row In Object.SpecialOffers Do
+		If ValueIsFilled(Row.Offer) And OffersServer.OfferHaveManualInputValue(Row.Offer)
+		
+			And Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
+			Continue;
+		EndIf;
+		ArrayForDelete.Add(Row);
+	EndDo;
+	For Each Row In ArrayForDelete Do
+		Object.SpecialOffers.Delete(Row);
+	EndDo;
 EndProcedure

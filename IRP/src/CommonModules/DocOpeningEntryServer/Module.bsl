@@ -1,20 +1,25 @@
-#Region FormEvents
+#Region FORM
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
-
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
+		DocumentsServer.FillItemList(Object);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-
+	ViewServer_V2.OnCreateAtServer(Object, Form, "AccountBalance, AdvanceFromCustomers, AdvanceToSuppliers,
+		|AccountPayableByAgreements, AccountPayableByDocuments,
+		|AccountReceivableByDocuments, AccountReceivableByAgreements,
+		|Inventory");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
+	DocumentsServer.FillItemList(Object);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
+	DocumentsServer.FillItemList(Object);
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;

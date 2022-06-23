@@ -240,7 +240,7 @@ EndProcedure
 
 &AtClient
 Procedure DeliveryDateOnChange(Item)
-	DocumentsClient.DeliveryDateOnChange(Object, ThisObject, Item);
+	DocSalesOrderClient.DeliveryDateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

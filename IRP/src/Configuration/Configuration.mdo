@@ -234,14 +234,11 @@
   <commonModules>CommonModule.CatCompaniesClient</commonModules>
   <commonModules>CommonModule.CatCompaniesServer</commonModules>
   <commonModules>CommonModule.CatConfigurationMetadataServer</commonModules>
-  <commonModules>CommonModule.CatCurrenciesServer</commonModules>
   <commonModules>CommonModule.CatExpenseAndRevenueTypesServer</commonModules>
-  <commonModules>CommonModule.CatItemsClient</commonModules>
   <commonModules>CommonModule.CatItemsServer</commonModules>
   <commonModules>CommonModule.CatPartnersServer</commonModules>
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
   <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
-  <commonModules>CommonModule.CatUserGroupsServer</commonModules>
   <commonModules>CommonModule.CommonFormActions</commonModules>
   <commonModules>CommonModule.CommonFormActionsServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
@@ -305,7 +302,6 @@
   <commonModules>CommonModule.DocPlannedReceiptReservationClient</commonModules>
   <commonModules>CommonModule.DocPlannedReceiptReservationServer</commonModules>
   <commonModules>CommonModule.DocPriceListClient</commonModules>
-  <commonModules>CommonModule.DocPriceListServer</commonModules>
   <commonModules>CommonModule.DocPurchaseInvoiceClient</commonModules>
   <commonModules>CommonModule.DocPurchaseInvoiceServer</commonModules>
   <commonModules>CommonModule.DocPurchaseOrderClient</commonModules>
@@ -385,7 +381,6 @@
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
   <commonModules>CommonModule.OffersClient</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
-  <commonModules>CommonModule.PickupItemsClient</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerServer</commonModules>
@@ -409,7 +404,6 @@
   <commonModules>CommonModule.UndopostingServer</commonModules>
   <commonModules>CommonModule.UniqueID</commonModules>
   <commonModules>CommonModule.UniqueIDReuse</commonModules>
-  <commonModules>CommonModule.UserSettingsClient</commonModules>
   <commonModules>CommonModule.UserSettingsClientServer</commonModules>
   <commonModules>CommonModule.UserSettingsServer</commonModules>
   <commonModules>CommonModule.UsersEvent</commonModules>

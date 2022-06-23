@@ -20,33 +20,6 @@ EndProcedure
 
 #EndRegion
 
-Procedure SetItemsBehavior(Object, Form) Export
-	If Object.Type = PredefinedValue("Enum.CashAccountTypes.Bank") Then
-		Form.Items.BankName.Visible = True;
-		Form.Items.Number.Visible = True;
-		Form.Items.TransitAccount.Visible = True;
-		Form.Items.CurrencyType.ReadOnly = True;
-	ElsIf Object.Type = PredefinedValue("Enum.CashAccountTypes.Cash") Then
-		Form.Items.BankName.Visible = False;
-		Form.Items.Number.Visible = False;
-		Form.Items.TransitAccount.Visible = False;
-		Form.Items.CurrencyType.ReadOnly = False;
-	ElsIf Object.Type = PredefinedValue("Enum.CashAccountTypes.Transit") Then
-		Form.Items.BankName.Visible = False;
-		Form.Items.Number.Visible = False;
-		Form.Items.TransitAccount.Visible = False;
-		Form.Items.CurrencyType.ReadOnly = True;
-	EndIf;
-
-	If Form.CurrencyType = "Fixed" Then
-		Form.Items.Currency.Visible = True;
-		Form.Items.Currency.AutoMarkIncomplete = True;
-	Else
-		Form.Items.Currency.Visible = False;
-		Form.Items.Currency.AutoMarkIncomplete = False;
-	EndIf;
-EndProcedure
-
 #Region StartChoiceAndEditText
 
 // TODO: Move to common

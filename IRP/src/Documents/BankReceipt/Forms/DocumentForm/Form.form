@@ -100,6 +100,7 @@
           <type>Label</type>
           <maxWidth>100</maxWidth>
           <autoMaxHeight>true</autoMaxHeight>
+          <horizontalStretch>true</horizontalStretch>
           <extInfo xsi:type="form:LabelDecorationExtInfo">
             <handlers>
               <event>Click</event>
@@ -114,6 +115,7 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <horizontalStretch>true</horizontalStretch>
         <extendedTooltip>
           <name>GroupTitleCollapsedExtendedTooltip</name>
           <id>6</id>
@@ -243,6 +245,7 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <horizontalStretch>true</horizontalStretch>
         <extendedTooltip>
           <name>GroupTitleUncollapsedExtendedTooltip</name>
           <id>14</id>
@@ -272,6 +275,7 @@
       <userVisible>
         <common>true</common>
       </userVisible>
+      <horizontalStretch>true</horizontalStretch>
       <extendedTooltip>
         <name>GroupTitleDecorationsExtendedTooltip</name>
         <id>4</id>

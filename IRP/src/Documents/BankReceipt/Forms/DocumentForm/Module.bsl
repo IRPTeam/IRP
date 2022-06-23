@@ -102,13 +102,13 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 			StrByType = StrByType + ", 
 			|PaymentList.PaymentType,
 			|PaymentList.PaymentTerminal,
-			|PaymentList.BankTerm,
-			|PaymentList.CommissionIsSeparate";
+			|PaymentList.BankTerm";
 		EndIf;
 	ElsIf TransactionType = TransferFromPOS Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.POSAccount";
+		|PaymentList.POSAccount,
+		|PaymentList.CommissionIsSeparate";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();

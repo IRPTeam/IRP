@@ -1075,6 +1075,9 @@ Procedure FillTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("PlanningTransactionBasis" , BindPaymentListPlanningTransactionBasis(Parameters));
 	ResourceToBinding.Insert("Order"                    , BindPaymentListOrder(Parameters));
 	ResourceToBinding.Insert("TransitAccount"           , BindTransitAccount(Parameters));
+	ResourceToBinding.Insert("PaymentType"              , BindPaymentListPaymentType(Parameters));
+	ResourceToBinding.Insert("PaymentTerminal"          , BindPaymentListPaymentTerminal(Parameters));
+	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1142,6 +1145,9 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.BasisDocument            = GetPaymentListBasisDocument(Parameters, Row.Key);
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
+		Options.PaymentType              = GetPaymentListPaymentType(Parameters, Row.Key);
+		Options.PaymentTerminal          = GetPaymentListPaymentTerminal(Parameters, Row.Key);
+		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
 		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);

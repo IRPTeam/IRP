@@ -9,7 +9,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		
 			If FilterItem.ComparisonType = DataCompositionComparisonType.Equal Then
 				ThisObject.CashAccountTypeFilter = FilterItem.RightValue;
-				Items.CashAccountTypeFilter.Visible = False;
+				Items.CashAccountTypeFilter.ReadOnly = True;
 			ElsIf FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual Then
 				DeleteFilterItemFromCashAccountTypeFilter(FilterItem.RightValue);
 			ElsIf FilterItem.ComparisonType = DataCompositionComparisonType.NotInList Then

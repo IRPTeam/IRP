@@ -345,10 +345,7 @@ Function PaymentList()
 	|	PaymentList.Payer AS Payer,
 	|	PaymentList.Ref.Date AS Period,
 	|
-	|	CASE WHEN PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS) THEN
-	|	 	CASE WHEN PaymentList.CommissionIsSeparate THEN PaymentList.TotalAmount 
-	|		ELSE PaymentList.TotalAmount - PaymentList.Commission END
-	|	ELSE PaymentList.TotalAmount END AS Amount,
+	|	PaymentList.TotalAmount AS Amount,
 	|	PaymentList.TotalAmount AS TotalAmount,
 	|
 	|	PaymentList.AmountExchange AS AmountExchange,
@@ -602,36 +599,12 @@ Function R3010B_CashOnHand()
 	|	PaymentList.Branch,
 	|	PaymentList.Account,
 	|	PaymentList.Currency,
-	|	case
-	|		when PaymentList.IsPaymentFromCustomerByPOS
-	|			then case
-	|				when not PaymentList.CommissionIsSeparate
-	|					then PaymentList.TotalAmount
-	|				else PaymentList.Amount
-	|			end
-	|		else PaymentList.Amount
-	|	end as Amount
+	|	PaymentList.Amount
 	|INTO R3010B_CashOnHand
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	TRUE
-	|
-	|union all
-	|
-	|select
-	|	VALUE(AccumulationRecordType.Expense),
-	|	PaymentList.Period,
-	|	PaymentList.Company,
-	|	PaymentList.Branch,
-	|	PaymentList.Account,
-	|	PaymentList.Currency,
-	|	PaymentList.Commission
-	|from
-	|	PaymentList as PaymentList
-	|where
-	|	PaymentList.IsPaymentFromCustomerByPOS
-	|	AND PaymentList.CommissionIsSeparate";
+	|	TRUE";
 EndFunction
 
 Function R3035T_CashPlanning()

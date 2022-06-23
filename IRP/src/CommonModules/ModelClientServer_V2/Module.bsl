@@ -1923,7 +1923,10 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|LegalNameContract,
 		|BasisDocument,
 		|PlanningTransactionBasis,
-		|Order");
+		|Order,
+		|PaymentType,
+		|PaymentTerminal,
+		|BankTerm");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
@@ -1936,11 +1939,15 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("BasisDocument"            , Options.BasisDocument);
 	Result.Insert("PlanningTransactionBasis" , Options.PlanningTransactionBasis);
 	Result.Insert("Order"                    , Options.Order);
+	Result.Insert("PaymentType"              , Options.PaymentType);
+	Result.Insert("PaymentTerminal"          , Options.PaymentTerminal);
+	Result.Insert("BankTerm"                 , Options.BankTerm);
 	
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
 	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
+	Outgoing_ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -1949,12 +1956,22 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
 		StrByType = "
 		|TransitAccount"; 
-	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
+	ElsIf Options.TransactionType = Outgoing_PaymentToVendor 
+		Or Options.TransactionType = Outgoing_ReturnToCustomer
+		Or Options.TransactionType = Outgoing_ReturnToCustomerByPOS Then
+		
 		StrByType = "
 		|Partner,
 		|Agreement,
 		|Payee,
 		|LegalNameContract";
+		
+		If Options.TransactionType = Outgoing_ReturnToCustomerByPOS Then
+			StrByType = StrByType + ", 
+			|PaymentType,
+			|PaymentTerminal,
+			|BankTerm";
+		EndIf;
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -2042,12 +2059,12 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 			StrByType = StrByType + ", 
 			|PaymentType,
 			|PaymentTerminal,
-			|BankTerm,
-			|CommissionIsSeparate";
+			|BankTerm";
 		EndIf;
 	ElsIf Options.TransactionType = Incoming_TransferFromPOS Then
 		StrByType = "
-		|PaymentList.POSAccount";
+		|POSAccount,
+		|CommissionIsSeparate";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();

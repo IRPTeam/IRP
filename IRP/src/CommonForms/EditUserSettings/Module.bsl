@@ -82,6 +82,8 @@ Procedure SaveMetadataTree()
 	RecordSet.Filter.UserOrGroup.Set(ThisObject.UserOrGroup);
 	RecordSet.Load(TableOfSettings);
 	RecordSet.Write();
+	
+	RefreshReusableValues();
 EndProcedure
 
 &AtServer

@@ -1409,8 +1409,130 @@ Scenario: _2990053 create serial lot number from Physical inventory form
 			| 'Product 1 with SLN' | 'PZU'      | '89090098'          |
 		And I close all client application windows
 		
-				
-				
+Scenario: _2990054 check item change in the Physical Inventory
+	And I close all client application windows
+	* Create PhysicalInventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click "Create" button
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 07'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I move to "Rules" tab
+		And I change checkbox "Use serial lot"				
+		And in the table "ItemList" I click "Fill expected count" button
+	* Change item with serial lot number on item without serial lot number
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Serial lot number' |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And "ItemList" table does not contain lines
+			| 'Item'               | 'Item key' | 'Serial lot number' |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |
+		And "ItemList" table contains lines	
+			| 'Item'  | 'Item key' | 'Serial lot number' |
+			| 'Dress' | ''         | ''                  |
+	* Change item with serial lot number on item with serial lot number
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Serial lot number' |
+			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Product 1 with SLN'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		And I select current line in "List" table		
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Serial lot number' |
+			| 'Product 1 with SLN' | 'PZU'      | ''                  |
+		And I close all client application windows
+		
+	
+Scenario: _2990054 check item change in the Physical count by location
+	And I close all client application windows
+	* Create PhysicalCountByLocation
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I click "Create" button
+		And I move to "Rules" tab
+		And I set checkbox "Use serial lot"
+		And I activate "Item" field in "ItemList" table
+		And I move to "Items" tab
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Product 1 with SLN' |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		And I select current line in "List" table
+		And I activate "Serial lot number" field in "ItemList" table
+		And I click choice button of "Serial lot number" attribute in "ItemList" table
+		And I select from the drop-down list named "SerialLotNumberSingle" by "877" string
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Product 2 with SLN' |
+		And I select current line in "List" table
+		And I activate "Serial lot number" field in "ItemList" table
+		And I select "899" from "Serial lot number" drop-down list by string in "ItemList" table
+	* Change item with serial lot number on item without serial lot number
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Serial lot number' |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And "ItemList" table does not contain lines
+			| 'Item'               | 'Item key' | 'Serial lot number' |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |
+		And "ItemList" table contains lines	
+			| 'Item'  | 'Item key' | 'Serial lot number' |
+			| 'Dress' | ''         | ''                  |
+	* Change item with serial lot number on item with serial lot number
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Serial lot number' |
+			| 'Product 2 with SLN' | 'UNIQ'     | '45678899'          |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Product 1 with SLN'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		And I select current line in "List" table		
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Serial lot number' |
+			| 'Product 1 with SLN' | 'PZU'      | ''                  |
+		And I close all client application windows
+		
+					
+
 		
 				
 		

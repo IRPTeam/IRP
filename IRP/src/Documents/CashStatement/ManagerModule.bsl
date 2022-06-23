@@ -67,6 +67,14 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
+	
+	Tables.R1021B_VendorsTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1020B_AdvancesToVendors.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	*Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	*Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	*Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 EndProcedure
@@ -136,12 +144,15 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
 	QueryArray.Add(R3010B_CashOnHand());
 	QueryArray.Add(R3035T_CashPlanning());
+	QueryArray.Add(R3050T_PosCashBalances());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
 	Return QueryArray;
 EndFunction
 
 Function PaymentList()
 	Return "SELECT
 		   |	PaymentList.Ref.Date AS Period,
+		   |	PaymentList.Key,
 		   |	PaymentList.Ref AS Ref,
 		   |	PaymentList.Ref.Company AS Company,
 		   |	PaymentList.Ref.CashAccount AS CashAccount,
@@ -150,7 +161,10 @@ Function PaymentList()
 		   |	PaymentList.FinancialMovementType,
 		   |	PaymentList.Amount,
 		   |	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS,
-		   |	PaymentList.Ref.Branch AS Branch
+		   |	PaymentList.Ref.Branch AS Branch,
+		   |	PaymentList.PaymentType,
+		   |	PaymentList.PaymentTerminal,
+		   |	PaymentList.ReceiptingAccount
 		   |INTO PaymentList
 		   |FROM
 		   |	Document.CashStatement.PaymentList AS PaymentList
@@ -172,6 +186,7 @@ EndFunction
 Function R3035T_CashPlanning()
 	Return "SELECT
 		   |	PaymentList.Period,
+		   |	PaymentList.Key,
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
 		   |	PaymentList.Ref AS BasisDocument,
@@ -185,6 +200,43 @@ Function R3035T_CashPlanning()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	PaymentList.IsAccountPOS";
+EndFunction
+
+Function R3050T_PosCashBalances()
+	Return
+	"SELECT
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.PaymentType,
+	|	PaymentList.Account,
+	|	PaymentList.PaymentTerminal,
+	|	-PaymentList.Amount AS Amount,
+	|	-PaymentList.Commission AS Commission
+	|INTO R3050T_PosCashBalances
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	TRUE";
+EndFunction
+
+Function R3021B_CashInTransitIncoming()
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Currency,
+	|	PaymentList.Account,
+	|	PaymentList.ReceiptingAccount,
+	|	PaymentList.Ref AS Basis,
+	|	PaymentList.Amount
+	|INTO R3021B_CashInTransitIncoming
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	TRUE";
 EndFunction
 
 #EndRegion

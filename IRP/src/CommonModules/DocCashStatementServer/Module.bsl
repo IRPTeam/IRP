@@ -93,10 +93,11 @@ Procedure FillTransactions(Object) Export
 	|	R3050T_PosCashBalances.Account AS Account,
 	|	R3050T_PosCashBalances.AmountTurnover AS Amount,
 	|	R3050T_PosCashBalances.CommissionTurnover AS Commission,
-	|	R3050T_PosCashBalances.Account.Currency AS Currency
+	|	R3050T_PosCashBalances.Account.Currency AS Currency,
+	|	R3050T_PosCashBalances.PaymentTerminal
 	|FROM
-	|	AccumulationRegister.R3050T_PosCashBalances.Turnovers(BEGINOFPERIOD(&BegOfPeriod, DAY), ENDOFPERIOD(&EndOfPeriod, DAY), ,
-	|		Company = &Company
+	|	AccumulationRegister.R3050T_PosCashBalances.Turnovers(BEGINOFPERIOD(&BegOfPeriod, DAY), ENDOFPERIOD(&EndOfPeriod,
+	|		DAY),, Company = &Company
 	|	AND Branch = &Branch) AS R3050T_PosCashBalances";
 
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
@@ -117,6 +118,7 @@ Procedure FillTransactions(Object) Export
 		
 	ArrayOfFillingColumns = New Array();
 	ArrayOfFillingColumns.Add("PaymentList.PaymentType");
+	ArrayOfFillingColumns.Add("PaymentList.PaymentTerminal");
 	ArrayOfFillingColumns.Add("PaymentList.Account");
 	ArrayOfFillingColumns.Add("PaymentList.Amount");
 	ArrayOfFillingColumns.Add("PaymentList.Commission");

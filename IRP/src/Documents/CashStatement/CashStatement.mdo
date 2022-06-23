@@ -57,6 +57,8 @@
   <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
+  <registerRecords>AccumulationRegister.R3050T_PosCashBalances</registerRecords>
+  <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -367,6 +369,20 @@
       </synonym>
       <type>
         <types>CatalogRef.PaymentTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7bd2520a-4545-4356-b8ad-bd0db4a0e06c">
+      <name>PaymentTerminal</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment terminal</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PaymentTerminals</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

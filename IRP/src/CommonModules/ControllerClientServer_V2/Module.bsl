@@ -267,6 +267,7 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
 	SettersMap.Insert("PaymentList.Payer"   , "SetPaymentListLegalName");
 	SettersMap.Insert("PaymentList.Payee"   , "SetPaymentListLegalName");
+	SettersMap.Insert("PaymentList.Account" , "SetPaymentListAccount");
 	
 	// ItemList
 	SettersMap.Insert("ItemList.ItemKey"            , "SetItemListItemKey");
@@ -762,12 +763,13 @@ Function BindAccount(Parameters)
 	DataPath = New Map();
 	DataPath.Insert("IncomingPaymentOrder", "Account");
 	DataPath.Insert("OutgoingPaymentOrder", "Account");
-	DataPath.Insert("BankPayment", "Account");
-	DataPath.Insert("BankReceipt", "Account");
-	DataPath.Insert("CashPayment", "CashAccount");
-	DataPath.Insert("CashReceipt", "CashAccount");
-	DataPath.Insert("CashExpense", "Account");
-	DataPath.Insert("CashRevenue", "Account");
+	DataPath.Insert("BankPayment"   , "Account");
+	DataPath.Insert("BankReceipt"   , "Account");
+	DataPath.Insert("CashPayment"   , "CashAccount");
+	DataPath.Insert("CashReceipt"   , "CashAccount");
+	DataPath.Insert("CashExpense"   , "Account");
+	DataPath.Insert("CashRevenue"   , "Account");
+	DataPath.Insert("CashStatement" , "CashAccount");
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCurrencyByAccount");

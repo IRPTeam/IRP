@@ -262,64 +262,7 @@ EndProcedure
 
 &AtServer
 Function GetItemTable()
-	
-	If Not StrCompare("Item", LoadType) Then
-		ItemNumber = GetColumnNumber("Item", Template);
-		ItemArray = GetColumnArray(ItemNumber, Template); // Array of String
-		
-		QuantityNumber = GetColumnNumber("Quantity", Template);
-		QuantityArray = GetColumnArray(QuantityNumber, Template); // Array of String
-		
-		If Not StrCompare("Code", SearchType) Then
-			DescriptionTable = GetItemInfo.GetDescriptionTable();
-			For Index = 0 To ItemArray.UBound() Do
-				NewRow = DescriptionTable.Add();
-				NewRow.Key = String(Index);
-				NewRow.Description = ItemArray[Index];
-				Quantity = QuantityArray[Index];
-				NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
-			EndDo;
-			ItemTable = GetItemInfo.SearchByItemDescription(DescriptionTable);
-		Else
-			CodeTable = GetItemInfo.GetCodeTable();
-			For Index = 0 To ItemArray.UBound() Do
-				NewRow = CodeTable.Add();
-				NewRow.Key = String(Index);
-				NewRow.Code = Number(ItemArray[Index]);
-				Quantity = QuantityArray[Index];
-				NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
-			EndDo;
-			ItemTable = GetItemInfo.SearchByItemCode(CodeTable);
-		EndIf;
-	ElsIf Not StrCompare("ItemKey", LoadType) Then
-		ItemKeyNumber = GetColumnNumber("ItemKey", Template);
-		ItemKeyArray = GetColumnArray(ItemKeyNumber, Template); // Array of String
-		
-		QuantityNumber = GetColumnNumber("Quantity", Template);
-		QuantityArray = GetColumnArray(QuantityNumber, Template); // Array of String
-		
-		If Not StrCompare("Code", SearchType) Then
-			DescriptionTable = GetItemInfo.GetDescriptionTable();
-			For Index = 0 To ItemKeyArray.UBound() Do
-				NewRow = DescriptionTable.Add();
-				NewRow.Key = String(Index);
-				NewRow.Description = ItemKeyArray[Index];
-				Quantity = QuantityArray[Index];
-				NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
-			EndDo;
-			ItemTable = GetItemInfo.SearchByItemKeyDescription(DescriptionTable);
-		Else
-			CodeTable = GetItemInfo.GetCodeTable();
-			For Index = 0 To ItemKeyArray.UBound() Do
-				NewRow = CodeTable.Add();
-				NewRow.Key = String(Index);
-				NewRow.Code = Number(ItemKeyArray[Index]);
-				Quantity = QuantityArray[Index];
-				NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
-			EndDo;
-			ItemTable = GetItemInfo.SearchByItemKeyCode(CodeTable);
-		EndIf;
-	ElsIf Not StrCompare("Barcode", LoadType) Then
+	If Not StrCompare("Barcode", LoadType) Then
 		BarcodeNumber = GetColumnNumber("Barcode", Template);
 		BarcodeArray = GetColumnArray(BarcodeNumber, Template); // Array of String
 		
@@ -338,7 +281,6 @@ Function GetItemTable()
 	EndIf;
 	
 	Return ItemTable;
-	
 EndFunction
 
 &AtServer

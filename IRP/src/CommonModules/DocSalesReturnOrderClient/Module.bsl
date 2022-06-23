@@ -4,9 +4,8 @@ Procedure OnOpen(Object, Form, Cancel) Export
 	ViewClient_V2.OnOpen(Object, Form, "ItemList");
 EndProcedure
 
-Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
-	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);
-	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
+Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 
 #EndRegion

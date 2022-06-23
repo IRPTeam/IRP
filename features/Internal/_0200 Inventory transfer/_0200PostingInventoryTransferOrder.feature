@@ -288,10 +288,10 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And I click the button named "FormPost"
 			And I click "History" hyperlink
 			And "List" table contains lines
-				| 'Object'                         | 'Status'   |
-				| '$$InventoryTransferOrder020013$$' | 'Wait' |
-				| '$$InventoryTransferOrder020013$$' | 'Approved'     |
-				| '$$InventoryTransferOrder020013$$' | 'Receive'  |
+				| 'Status'   |
+				| 'Wait'     |
+				| 'Approved' |
+				| 'Receive'  |
 			And I close current window
 			And I click the button named "FormPostAndClose"
 			Given I open hyperlink "e1cib/list/AccumulationRegister.R4020T_StockTransferOrders"

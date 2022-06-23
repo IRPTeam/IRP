@@ -1,15 +1,15 @@
-#Region FormEvents
+#Region FORM
 
-Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+Procedure OnOpen(Object, Form, Cancel, MainTables) Export
+	ViewClient_V2.OnOpen(Object, Form, "");
 EndProcedure
 
 #EndRegion
 
-#Region ItemCompany
+#Region COMPANY
 
-Procedure CompanyOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+Procedure CompanyOnChange(Object, Form, Item, MainTables) Export
+	ViewClient_V2.CompanyOnChange(Object, Form, "");
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -34,63 +34,86 @@ EndProcedure
 
 #EndRegion
 
+#Region _DATE
+
 Procedure DateOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-#Region InventoryItemsEvents
+#EndRegion
 
-Procedure InventoryItemOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
-	TransferSettings = DocumentsClient.GetSettingsStructure(ThisObject);
-	TransferSettings.Insert("ItemListName", "Inventory");
-	DocumentsClient.ItemListItemOnChange(Object, Form, ThisObject, Item, TransferSettings);
+#Region INVENTORY
+
+Procedure InventoryBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.InventoryBeforeAddRow(Object, Form, Cancel, Clone);
 EndProcedure
 
-Function ItemListItemSettings(Object, Form, AddInfo = Undefined) Export
-	Return InventoryItemSettings(Form);
-EndFunction
-
-Function InventoryItemSettings(Form)
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
-
-	Actions = New Structure();
-	Actions.Insert("UpdateItemKey", "UpdateItemKey");
-
-	AfterActionsCalculateSettings = New Structure();
-
-	Settings.Actions = Actions;
-	Settings.ObjectAttributes = "ItemKey";
-	Settings.FormAttributes = "";
-	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
-	Return Settings;
-EndFunction
-
-Procedure InventoryItemKeyOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
-	TransferSettings = DocumentsClient.GetSettingsStructure(ThisObject);
-	TransferSettings.Insert("ItemListName", "Inventory");
-	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item, TransferSettings);
+Procedure InventoryAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.InventoryAfterDeleteRow(Object, Form);
 EndProcedure
 
-Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
-	Return InventoryItemKeySettings(Form);
-EndFunction
+#Region INVENTORY_COLUMNS
 
-Function InventoryItemKeySettings(Form)
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
+#Region _ITEM
 
-	Actions = New Structure();
+Procedure InventoryItemOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.InventoryItemOnChange(Object, Form, CurrentData);
+EndProcedure
 
-	AfterActionsCalculateSettings = New Structure();
+Procedure InventoryItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 
-	Settings.Actions = Actions;
-	Settings.ObjectAttributes = "ItemKey";
-	Settings.FormAttributes = "";
-	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
-	Return Settings;
-EndFunction
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
+		PredefinedValue("Enum.ItemTypes.Service"), DataCompositionComparisonType.NotEqual));
 
-Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
-	Return New Structure();
-EndFunction
+	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure InventiryItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
+		PredefinedValue("Enum.ItemTypes.Service"), ComparisonType.NotEqual));
+	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+Procedure InventoryItemKeyOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.InventoryItemKeyOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region ACCOUNT_BALANCE
+
+Procedure AccountBalanceBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.AccountBalanceBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+Procedure AccountBalanceAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.AccountBalanceAfterDeleteRow(Object, Form);
+EndProcedure
+
+#Region ACCOUNT_BALANCE_COLUMNS
+
+#Region ACCOUNT
+
+Procedure AccountBalanceAccountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.AccountBalanceAccountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
 
 #EndRegion

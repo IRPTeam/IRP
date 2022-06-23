@@ -5,8 +5,8 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
-Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
-	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
+Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 
 #EndRegion

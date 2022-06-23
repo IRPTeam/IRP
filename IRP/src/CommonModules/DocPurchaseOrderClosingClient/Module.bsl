@@ -175,6 +175,14 @@ EndProcedure
 
 #EndRegion
 
+#Region DELIVERY_DATE
+
+Procedure DeliveryDateOnChange(Object, Form, Item) Export
+	ViewClient_V2.DeliveryDateOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region PRICE_INCLUDE_TAX
 
 Procedure PriceIncludeTaxOnChange(Object, Form, Item) Export

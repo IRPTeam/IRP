@@ -31,30 +31,22 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 EndFunction
 
 Function GetQueryText_CashStatement_CashInTransit()
-	Return "SELECT
-		   |	Table.Ref.Company AS Company,
-		   |	&Ref AS BasisDocument,
-		   |	Table.Account AS FromAccount,
-		   |	(&Ref).CashAccount AS ToAccount,
-		   |	(&Ref).CashAccount.Currency AS Currency,
-		   |	SUM(Table.Amount) AS Amount,
-		   |	Table.Ref.Date AS Period,
-		   |	Table.Key,
-		   |	Table.Ref.Branch AS Branch
-		   |FROM
-		   |	Document.CashStatement.PaymentList AS Table
-		   |WHERE
-		   |	Table.Ref = &Ref
-		   |	AND Table.Account.Type = VALUE(Enum.CashAccountTypes.POS)
-		   |GROUP BY
-		   |	Table.Ref.Company,
-		   |	Table.Account.Currency,
-		   |	Table.Account,
-		   |	Table.Ref.Date,
-		   |	Table.Key,
-		   |	(&Ref).CashAccount,
-		   |	(&Ref).CashAccount.Currency,
-		   |	Table.Ref.Branch";
+	Return 
+	"SELECT
+	|	Table.Ref.Company AS Company,
+	|	Table.Ref AS BasisDocument,
+	|	Table.Account AS FromAccount,
+	|	Table.ReceiptingAccount AS ToAccount,
+	|	Table.Currency AS Currency,
+	|	Table.Amount AS Amount,
+	|	Table.Ref.Date AS Period,
+	|	Table.Key,
+	|	Table.Ref.Branch AS Branch
+	|FROM
+	|	Document.CashStatement.PaymentList AS Table
+	|WHERE
+	|	Table.Ref = &Ref
+	|	AND Table.Account.Type = VALUE(Enum.CashAccountTypes.POS)";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -147,26 +139,28 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function PaymentList()
-	Return "SELECT
-		   |	PaymentList.Ref.Date AS Period,
-		   |	PaymentList.Key,
-		   |	PaymentList.Ref AS Ref,
-		   |	PaymentList.Ref.Company AS Company,
-		   |	PaymentList.Ref.CashAccount AS CashAccount,
-		   |	PaymentList.Account,
-		   |	PaymentList.Currency,
-		   |	PaymentList.FinancialMovementType,
-		   |	PaymentList.Amount,
-		   |	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS,
-		   |	PaymentList.Ref.Branch AS Branch,
-		   |	PaymentList.PaymentType,
-		   |	PaymentList.PaymentTerminal,
-		   |	PaymentList.ReceiptingAccount
-		   |INTO PaymentList
-		   |FROM
-		   |	Document.CashStatement.PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.Ref = &Ref"
+	Return 
+	"SELECT
+	|	PaymentList.Ref.Date AS Period,
+	|	PaymentList.Key,
+	|	PaymentList.Ref AS Ref,
+	|	PaymentList.Ref.Company AS Company,
+	|	PaymentList.Ref.CashAccount AS CashAccount,
+	|	PaymentList.Account,
+	|	PaymentList.Currency,
+	|	PaymentList.FinancialMovementType,
+	|	PaymentList.Amount,
+	|	PaymentList.Commission,
+	|	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS,
+	|	PaymentList.Ref.Branch AS Branch,
+	|	PaymentList.PaymentType,
+	|	PaymentList.PaymentTerminal,
+	|	PaymentList.ReceiptingAccount
+	|INTO PaymentList
+	|FROM
+	|	Document.CashStatement.PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.Ref = &Ref"
 EndFunction
 
 Function R3010B_CashOnHand()
@@ -222,6 +216,7 @@ Function R3021B_CashInTransitIncoming()
 	"SELECT
 	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 	|	PaymentList.Period,
+	|	PaymentList.Key,
 	|	PaymentList.Company,
 	|	PaymentList.Branch,
 	|	PaymentList.Currency,

@@ -797,10 +797,12 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
 		Parameters.Form.UpdateTotalAmounts();
 	EndIf;
-	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form); 
+	 
 	If Parameters.Form.IsCopyingInteractive Then
 		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CurrentDate());
 	EndIf;
+	
+	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 EndProcedure
 
 #EndRegion
@@ -1322,6 +1324,13 @@ Procedure PaymentListLegalNameOnChange(Object, Form, CurrentData = Undefined) Ex
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	ControllerClientServer_V2.PaymentListLegalNameOnChange(Parameters);
+EndProcedure
+
+// PaymentList.Account
+Procedure PaymentListAccountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListAccountOnChange(Parameters);
 EndProcedure
 
 // PaymentList.BasisDocument

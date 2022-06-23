@@ -145,9 +145,10 @@ Function GetChain()
 	Chain.Insert("ChangeAccountSenderByCompany"  , GetChainLink("ChangeCashAccountByCompanyExecute"));
 	Chain.Insert("ChangeAccountReceiverByCompany", GetChainLink("ChangeCashAccountByCompanyExecute"));
 	
-	Chain.Insert("ChangeTransitAccountByAccount", GetChainLink("ChangeTransitAccountByAccountExecute"));
-	Chain.Insert("ChangeCashAccountByCurrency"  , GetChainLink("ChangeCashAccountByCurrencyExecute"));
-	Chain.Insert("ChangeCashAccountByPartner"   , GetChainLink("ChangeCashAccountByPartnerExecute"));
+	Chain.Insert("ChangeTransitAccountByAccount"    , GetChainLink("ChangeTransitAccountByAccountExecute"));
+	Chain.Insert("ChangeReceiptingAccountByAccount" , GetChainLink("ChangeReceiptingAccountByAccountExecute"));
+	Chain.Insert("ChangeCashAccountByCurrency"      , GetChainLink("ChangeCashAccountByCurrencyExecute"));
+	Chain.Insert("ChangeCashAccountByPartner"       , GetChainLink("ChangeCashAccountByPartnerExecute"));
 	
 	Chain.Insert("FillByPTBBankReceipt" , GetChainLink("FillByPTBBankReceiptExecute"));
 	Chain.Insert("FillByPTBCashReceipt" , GetChainLink("FillByPTBCashReceiptExecute"));
@@ -334,6 +335,23 @@ Function ChangeTransitAccountByAccountExecute(Options) Export
 		Return TransitAccount;
 	EndIf;
 	Return Options.CurrentTransitAccount;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_RECEIPTING_ACCOUNT_BY_ACCOUNT
+
+Function ChangeReceiptingAccountByAccountOptions() Export
+	Return GetChainLinkOptions("Account, CurrentReceiptingAccount");
+EndFunction
+
+Function ChangeReceiptingAccountByAccountExecute(Options) Export
+	ReceiptingAccount = ServiceSystemServer.GetObjectAttribute(Options.Account, "ReceiptingAccount");
+	
+	If ValueIsFilled(ReceiptingAccount) Then
+		Return ReceiptingAccount;
+	EndIf;
+	Return Options.CurrentReceiptingAccount;
 EndFunction
 
 #EndRegion

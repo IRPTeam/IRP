@@ -345,6 +345,20 @@
       <key>en</key>
       <value>Payment list</value>
     </synonym>
+    <attributes uuid="23279794-6181-4d94-bb97-a07059972953">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="7ead24cf-8440-4ee4-9791-c754818aea0c">
       <name>PaymentType</name>
       <synonym>
@@ -364,6 +378,20 @@
       <synonym>
         <key>en</key>
         <value>Account</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CashAccounts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f6455cd2-32a8-4f9b-9010-2cf10443f391">
+      <name>ReceiptingAccount</name>
+      <synonym>
+        <key>en</key>
+        <value>Receipting account</value>
       </synonym>
       <type>
         <types>CatalogRef.CashAccounts</types>
@@ -395,20 +423,6 @@
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="23279794-6181-4d94-bb97-a07059972953">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

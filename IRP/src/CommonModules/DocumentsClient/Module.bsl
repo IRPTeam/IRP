@@ -1200,7 +1200,8 @@ Function GetFormItemNames()
 				|AccountPayableByAgreementsKey, AccountPayableByDocumentsKey, VendorsPaymentTermsKey,
 				|AccountReceivableByAgreementsKey, AccountReceivableByDocumentsKey, CustomersPaymentTermsKey,
 				|SendUUID, ReceiveUUID,
-				|ItemListUseSerialLotNumber, ItemListIsService";
+				|ItemListUseSerialLotNumber, ItemListIsService,
+				|PaymentListApArPostingDetail";
 
 	Return ItemNames;
 EndFunction	

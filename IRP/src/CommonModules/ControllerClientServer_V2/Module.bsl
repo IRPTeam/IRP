@@ -3755,6 +3755,78 @@ EndFunction
 
 #EndRegion
 
+#Region PAYMENT_LIST_ACCOUNT
+
+// PaymentList.Account.OnChange
+Procedure PaymentListAccountOnChange(Parameters) Export
+	Binding = BindPaymentListAccount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.Account.Set
+Procedure SetPaymentListAccount(Parameters, Results) Export
+	Binding = BindPaymentListAccount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.Account.Get
+Function GetPaymentListAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListAccount(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.Account.Bind
+Function BindPaymentListAccount(Parameters)
+	DataPath = "PaymentList.Account";
+	Binding = New Structure();
+	Binding.Insert("CashStatement", "StepPaymentListChangeReceiptingAccountByAccount");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_RECEIPTING_ACCOUNT
+
+// PaymentList.ReceiptingAccount.OnChange
+Procedure PaymentListReceiptingAccountOnChange(Parameters) Export
+	Binding = BindPaymentListReceiptingAccount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.ReceiptingAccount.Set
+Procedure SetPaymentListReceiptingAccount(Parameters, Results) Export
+	Binding = BindPaymentListReceiptingAccount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.ReceiptingAccount.Get
+Function GetPaymentListReceiptingAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListReceiptingAccount(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.ReceiptingAccount.Bind
+Function BindPaymentListReceiptingAccount(Parameters)
+	DataPath = "PaymentList.ReceiptingAccount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// PaymentList.ReceiptingAccount.ChangeReceiptingAccountByAccount.Step
+Procedure StepPaymentListChangeReceiptingAccountByAccount(Parameters, Chain) Export
+	Chain.ChangeReceiptingAccountByAccount.Enable = True;
+	Chain.ChangeReceiptingAccountByAccount.Setter = "SetPaymentListReceiptingAccount";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeReceiptingAccountByAccountOptions();
+		Options.Account                  = GetPaymentListAccount(Parameters, Row.Key);
+		Options.CurrentReceiptingAccount = GetPaymentListReceiptingAccount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentListChangeReceiptingAccountByAccount";
+		Chain.ChangeReceiptingAccountByAccount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region PAYMENT_LIST_POS_ACCOUNT
 
 // PaymentList.POSAccount.OnChange

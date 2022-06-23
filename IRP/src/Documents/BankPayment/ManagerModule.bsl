@@ -541,6 +541,7 @@ Function R3010B_CashOnHand()
 	Return 
 	"SELECT
 	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	PaymentList.Key,
 	|	PaymentList.Period,
 	|	PaymentList.Company,
 	|	PaymentList.Branch,

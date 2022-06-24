@@ -524,7 +524,7 @@ Scenario: _043324 check Bank payment movements by the Register "R3050 Pos cash b
 			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
-			| ''                                             | '24.06.2022 18:06:56' | '-50'       | '5'          | 'Main Company' | 'Distribution department' | ''             | 'POS account, Comission separate, TRY' | 'Test01'           |		
+			| ''                                             | '24.06.2022 18:06:56' | '-50'       | '-5'         | 'Main Company' | 'Distribution department' | ''             | 'POS account, Comission separate, TRY' | 'Test01'           |		
 	And I close all client application windows
 
 Scenario: _043325 check Bank payment movements by the Register "R3050 Pos cash balances" (Return to customer by POS, with basis document)

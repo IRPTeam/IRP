@@ -53,6 +53,9 @@ Scenario: _043300 preparation (Bank payment)
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
 		When Create catalog PlanningPeriods objects
+		When Create catalog BankTerms objects
+		When Create catalog PaymentTerminals objects
+		When Create catalog PaymentTypes objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -149,11 +152,18 @@ Scenario: _043300 preparation (Bank payment)
 		When Create document BankPayment objects (return to customer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document BankPayment objects (return to customer by POS)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(1329).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(1330).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document BankPayment objects (with partner term by document, without basis)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(328).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
-		
+		When Create document SalesReturn objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 		
 Scenario: _043301 check Bank payment movements by the Register "R3010 Cash on hand"
 	* Select Bank payment
@@ -475,6 +485,111 @@ Scenario: _043322 check Bank payment movements by the Register "R1020 Advances t
 			| ''                                           | 'Receipt'     | '08.02.2022 13:43:58' | '50'        | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                         |	
 	And I close all client application windows
 
+Scenario: _043323 check Bank payment movements by the Register "R3010 Cash on hand" (Return to customer by POS, with basis document)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 329' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 329 dated 24.06.2022 18:06:56' | ''            | ''                    | ''          | ''             | ''                        | ''                                     | ''         | ''                             | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                                     | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''            | ''                    | ''          | ''             | ''                        | ''                                     | ''         | ''                             | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                     | ''         | ''                             | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'                              | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '24.06.2022 18:06:56' | '8,56'      | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Expense'     | '24.06.2022 18:06:56' | '50'        | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Expense'     | '24.06.2022 18:06:56' | '50'        | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+	And I close all client application windows
+
+Scenario: _043324 check Bank payment movements by the Register "R3050 Pos cash balances" (Return to customer by POS, with basis document)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 329' |
+	* Check movements by the Register  "R3050 Pos cash balances" 
+		And I click "Registrations report" button
+		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 329 dated 24.06.2022 18:06:56' | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
+			| 'Document registrations records'               | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
+			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
+			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
+			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
+			| ''                                             | '24.06.2022 18:06:56' | '-50'       | '5'          | 'Main Company' | 'Distribution department' | ''             | 'POS account, Comission separate, TRY' | 'Test01'           |		
+	And I close all client application windows
+
+Scenario: _043325 check Bank payment movements by the Register "R3050 Pos cash balances" (Return to customer by POS, with basis document)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 329' |
+	* Check movements by the Register  "R3050 Pos cash balances" 
+		And I click "Registrations report" button
+		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 329 dated 24.06.2022 18:06:56' | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
+			| 'Document registrations records'               | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
+			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
+			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
+			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
+			| ''                                             | '24.06.2022 18:06:56' | '-50'       | '5'          | 'Main Company' | 'Distribution department' | ''             | 'POS account, Comission separate, TRY' | 'Test01'           |
+		And I close all client application windows
+		
+
+Scenario: _043328 check Bank payment movements by the Register "R3010 Cash on hand" (Return to customer by POS, without basis document)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 330' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 330 dated 24.06.2022 18:07:02' | ''            | ''                    | ''          | ''             | ''                        | ''                                     | ''         | ''                             | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                                     | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''            | ''                    | ''          | ''             | ''                        | ''                                     | ''         | ''                             | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                     | ''         | ''                             | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'                              | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                             | 'Expense'     | '24.06.2022 18:07:02' | '8,56'      | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Expense'     | '24.06.2022 18:07:02' | '50'        | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Expense'     | '24.06.2022 18:07:02' | '50'        | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+Scenario: _043329 check Bank payment movements by the Register "R3050 Pos cash balances" (Return to customer by POS, without basis document)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 330' |
+	* Check movements by the Register  "R3050 Pos cash balances" 
+		And I click "Registrations report" button
+		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 330 dated 24.06.2022 18:07:02' | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
+			| 'Document registrations records'               | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
+			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
+			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
+			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
+			| ''                                             | '24.06.2022 18:07:02' | '-50'       | '5'          | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |
+		And I close all client application windows
+				
 
 Scenario: _043330 Bank payment clear posting/mark for deletion
 	And I close all client application windows

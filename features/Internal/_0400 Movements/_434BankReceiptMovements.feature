@@ -599,27 +599,7 @@ Scenario: _0434282 check Bank receipt movements by the Register "R3010 Cash on h
 			| ''                                             | 'Receipt'     | '23.06.2022 19:41:15' | '100'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 	And I close all client application windows		
 			
-Scenario: _0434283 check Bank receipt movements by the Register "R3021 Cash in transit (incoming)" (Payment from customer by POS, without bases)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1 520' |
-	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
-		And I click "Registrations report" button
-		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
-		And I click "Generate report" button	
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 520 dated 23.06.2022 19:41:15' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''        | ''                                     | ''      | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''        | ''                                     | ''      | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''        | ''                                     | ''      | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''        | ''                                     | ''      | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Account' | 'Receipting account'                   | 'Basis' | 'Deferred calculation' |
-			| ''                                             | 'Expense'     | '23.06.2022 19:41:15' | '17,12'     | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | ''        | 'POS account, Comission separate, TRY' | ''      | 'No'                   |
-			| ''                                             | 'Expense'     | '23.06.2022 19:41:15' | '100'       | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | ''        | 'POS account, Comission separate, TRY' | ''      | 'No'                   |
-			| ''                                             | 'Expense'     | '23.06.2022 19:41:15' | '100'       | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | ''        | 'POS account, Comission separate, TRY' | ''      | 'No'                   |
-		And I close all client application windows
+
 
 Scenario: _0434284 check Bank receipt movements by the Register "R3050 Pos cash balances" (Payment from customer by POS, without bases)
 	And I close all client application windows
@@ -641,27 +621,7 @@ Scenario: _0434284 check Bank receipt movements by the Register "R3050 Pos cash 
 			| ''                                             | '23.06.2022 19:41:15' | '100'       | '10'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |
 		And I close all client application windows
 
-Scenario: _0434284 check Bank receipt movements by the Register "R5022 Expensess" (Payment from customer by POS, without bases)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1 520' |
-	* Check movements by the Register  "R5022 Expenses" 
-		And I click "Registrations report" button
-		And I select "R5022 Expenses" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 520 dated 23.06.2022 19:41:15' | ''                    | ''          | ''                  | ''             | ''                        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'               | ''                    | ''          | ''                  | ''             | ''                        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5022 Expenses"'                   | ''                    | ''          | ''                  | ''             | ''                        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                             | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''                        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                             | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'                  | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                             | '23.06.2022 19:41:15' | '1,71'      | '1,71'              | 'Main Company' | 'Distribution department' | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
-			| ''                                             | '23.06.2022 19:41:15' | '10'        | '10'                | 'Main Company' | 'Distribution department' | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                             | '23.06.2022 19:41:15' | '10'        | '10'                | 'Main Company' | 'Distribution department' | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
-		And I close all client application windows
+
 
 Scenario: _0434285 check Bank receipt movements by the Register "R5010 Reconciliation statement" (Payment from customer by POS, without bases)
 	And I close all client application windows
@@ -728,28 +688,6 @@ Scenario: _0434287 check Bank receipt movements by the Register "R3010 Cash on h
 			| ''                                             | 'Receipt'     | '23.06.2022 17:50:08' | '100'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I close all client application windows
 		
-Scenario: _0434288 check Bank receipt movements by the Register "R3021 Cash in transit (incoming)" (Payment from customer by POS, with bases)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1 519' |
-	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
-		And I click "Registrations report" button
-		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 519 dated 23.06.2022 17:50:08' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''        | ''                                     | ''      | ''                     |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''        | ''                                     | ''      | ''                     |
-			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''        | ''                                     | ''      | ''                     |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''        | ''                                     | ''      | 'Attributes'           |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Account' | 'Receipting account'                   | 'Basis' | 'Deferred calculation' |
-			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '17,12'     | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | ''        | 'POS account, Comission separate, TRY' | ''      | 'No'                   |
-			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '100'       | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | ''        | 'POS account, Comission separate, TRY' | ''      | 'No'                   |
-			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '100'       | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | ''        | 'POS account, Comission separate, TRY' | ''      | 'No'                   |
-			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '100'       | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | ''        | 'POS account, Comission separate, TRY' | ''      | 'No'                   |
-		And I close all client application windows
 
 Scenario: _0434289 check Bank receipt movements by the Register "R3050 Pos cash balances" (Payment from customer by POS, with bases)
 	And I close all client application windows
@@ -792,28 +730,6 @@ Scenario: _0434290 check Bank receipt movements by the Register "R5010 Reconcili
 		And I close all client application windows
 
 		
-Scenario: _0434290 check Bank receipt movements by the Register "R5022 Expenses" (Payment from customer by POS, with bases)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1 519' |
-	* Check movements by the Register  "R5022 Expenses" 
-		And I click "Registrations report" button
-		And I select "R5022 Expenses" exact value from "Register" drop-down list
-		And I click "Generate report" button	
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 519 dated 23.06.2022 17:50:08' | ''                    | ''          | ''                  | ''             | ''                        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'               | ''                    | ''          | ''                  | ''             | ''                        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5022 Expenses"'                   | ''                    | ''          | ''                  | ''             | ''                        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                             | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''                        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                             | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'                  | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                             | '23.06.2022 17:50:08' | '1,71'      | '1,71'              | 'Main Company' | 'Distribution department' | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
-			| ''                                             | '23.06.2022 17:50:08' | '10'        | '10'                | 'Main Company' | 'Distribution department' | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                             | '23.06.2022 17:50:08' | '10'        | '10'                | 'Main Company' | 'Distribution department' | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'TRY'                          |
-			| ''                                             | '23.06.2022 17:50:08' | '10'        | '10'                | 'Main Company' | 'Distribution department' | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
-	And I close all client application windows	
 		
 					
 Scenario: _0434291 check Bank receipt movements by the Register "R3010 Cash on hand" (Transfer from POS, comission is separate)

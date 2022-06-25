@@ -655,15 +655,16 @@ Function R3035T_CashPlanning()
 EndFunction
 
 Function R5022T_Expenses()
-	Return "SELECT
-		   |	PaymentList.Commission AS Amount,
-		   |	PaymentList.Commission AS AmountWithTaxes,
-		   |	*
-		   |INTO R5022T_Expenses
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.Commission <> 0";
+	Return 
+	"SELECT
+	|	PaymentList.Commission AS Amount,
+	|	PaymentList.Commission AS AmountWithTaxes,
+	|	*
+	|INTO R5022T_Expenses
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.Commission <> 0 AND NOT PaymentList.IsPaymentFromCustomerByPOS";
 EndFunction
 
 Function R3024B_SalesOrdersToBePaid()
@@ -805,12 +806,13 @@ Function R3021B_CashInTransitIncoming()
 	|	PaymentList.FromAccount_POS AS Account,
 	|	PaymentList.Account AS ReceiptingAccount,
 	|	PaymentList.PlaningTransactionBasis AS Basis,
-	|	PaymentList.Amount
+	|	PaymentList.Amount,
+	|	PaymentList.Commission
 	|INTO R3021B_CashInTransitIncoming
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	TRUE";
+	|	PaymentList.IsTransferFromPOS";
 EndFunction
 
 #EndRegion

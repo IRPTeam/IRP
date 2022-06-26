@@ -524,29 +524,53 @@ Scenario: _043324 check Bank payment movements by the Register "R3050 Pos cash b
 			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
-			| ''                                             | '24.06.2022 18:06:56' | '-50'       | '-5'         | 'Main Company' | 'Distribution department' | ''             | 'POS account, Comission separate, TRY' | 'Test01'           |		
+			| ''                                             | '24.06.2022 18:06:56' | '-50'       | '-5'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |
 	And I close all client application windows
 
-Scenario: _043325 check Bank payment movements by the Register "R3050 Pos cash balances" (Return to customer by POS, with basis document)
+Scenario: _043325 check Bank payment movements by the Register "R2021 Customer transactions" (Return to customer by POS, with basis document)
 		And I close all client application windows
 	* Select Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1 329' |
-	* Check movements by the Register  "R3050 Pos cash balances" 
+	* Check movements by the Register  "R2021 Customer transactions" 
 		And I click "Registrations report" button
-		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 1 329 dated 24.06.2022 18:06:56' | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
-			| 'Document registrations records'               | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
-			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
-			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
-			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
-			| ''                                             | '24.06.2022 18:06:56' | '-50'       | '5'          | 'Main Company' | 'Distribution department' | ''             | 'POS account, Comission separate, TRY' | 'Test01'           |
+			| 'Bank payment 1 329 dated 24.06.2022 18:06:56' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''      | ''                     | ''                           |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''      | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'      | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''      | ''                     | ''                           |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''      | 'Attributes'           | ''                           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                      | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                             | 'Expense'     | '24.06.2022 18:06:56' | '-50'       | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 103 dated 12.03.2021 08:59:52' | ''      | 'No'                   | ''                           |
+			| ''                                             | 'Expense'     | '24.06.2022 18:06:56' | '-50'       | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 103 dated 12.03.2021 08:59:52' | ''      | 'No'                   | ''                           |
+			| ''                                             | 'Expense'     | '24.06.2022 18:06:56' | '-50'       | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 103 dated 12.03.2021 08:59:52' | ''      | 'No'                   | ''                           |
+			| ''                                             | 'Expense'     | '24.06.2022 18:06:56' | '-8,56'     | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 103 dated 12.03.2021 08:59:52' | ''      | 'No'                   | ''                           |		
 		And I close all client application windows
-		
+
+Scenario: _043327 check Bank payment movements by the Register "R2020 Advances from customer" (Return to customer by POS, without basis document)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 330' |
+	* Check movements by the Register  "R2020 Advances from customer" 
+		And I click "Registrations report" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 330 dated 24.06.2022 18:07:02' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                           |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"'     | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                           |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''      | 'Attributes'           | ''                           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                             | 'Receipt'     | '24.06.2022 18:07:02' | '-50'       | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                           |
+			| ''                                             | 'Receipt'     | '24.06.2022 18:07:02' | '-50'       | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                           |
+			| ''                                             | 'Receipt'     | '24.06.2022 18:07:02' | '-8,56'     | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                           |	
+	And I close all client application windows
 
 Scenario: _043328 check Bank payment movements by the Register "R3010 Cash on hand" (Return to customer by POS, without basis document)
 		And I close all client application windows
@@ -587,9 +611,24 @@ Scenario: _043329 check Bank payment movements by the Register "R3050 Pos cash b
 			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
-			| ''                                             | '24.06.2022 18:07:02' | '-50'       | '5'          | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |
+			| ''                                             | '24.06.2022 18:07:02' | '-50'       | '-5'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |
 		And I close all client application windows
-				
+
+Scenario: _0433291 check absence Bank payment movements by the Register R5022 Expenses" (Return to customer by POS)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 330'  |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'R5022 Expenses'   | 
+	And I close all client application windows
+
 
 Scenario: _043330 Bank payment clear posting/mark for deletion
 	And I close all client application windows

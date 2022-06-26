@@ -9,7 +9,28 @@ EndFunction
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
+	Tables.Insert("CashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
+	QueryPayments = New Query();
+	QueryPayments.Text = 	
+	"SELECT
+	|	Payments.Ref.Date AS Period,
+	|	Payments.Ref.Company AS Company,
+	|	Payments.Ref.Branch AS Branch,
+	|	Payments.Ref.Currency AS Currency,
+	|	Payments.Account AS FromAccount,
+	|	Payments.Ref AS BasisDocument,
+	|	Payments.Amount,
+	|	Payments.Commission
+	|
+	|FROM
+	|	Document.RetailReturnReceipt.Payments AS Payments
+	|WHERE
+	|	Payments.Ref = &Ref AND Payments.PostponedPayment";
+	QueryPayments.SetParameter("Ref", Ref);
+	Tables.CashInTransit = QueryPayments.Execute().Unload();
+	
 	Parameters.IsReposting = False;
 
 #Region NewRegistersPosting
@@ -147,7 +168,11 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-
+	
+	// CashInTransit
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, New Structure("RecordType, RecordSet",
+		AccumulationRecordType.Expense, Parameters.DocumentDataTables.CashInTransit));
+	
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion
@@ -254,6 +279,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R3022B_CashInTransitOutgoing());
 	Return QueryArray;
 EndFunction
 
@@ -326,22 +352,30 @@ Function ItemList()
 EndFunction
 
 Function Payments()
-	Return "SELECT
-		   |	Payments.Ref.Date AS Period,
-		   |	Payments.Ref.Company AS Company,
-		   |	Payments.Account AS Account,
-		   |	Payments.Ref.Currency AS Currency,
-		   |	Payments.Amount AS Amount,
-		   |	Payments.Ref.Branch AS Branch,
-		   |	Payments.PaymentType AS PaymentType,
-		   |	Payments.PaymentTerminal AS PaymentTerminal,
-		   |	Payments.Percent AS Percent,
-		   |	Payments.Commission AS Commission
-		   |INTO Payments
-		   |FROM
-		   |	Document.RetailReturnReceipt.Payments AS Payments
-		   |WHERE
-		   |	Payments.Ref = &Ref";
+	Return 
+	"SELECT
+	|	Payments.Ref.Date AS Period,
+	|	Payments.Ref.Company AS Company,
+	|	Payments.Ref AS Basis,
+	|	Payments.Account AS Account,
+	|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.Bank) AS IsBankAccount,
+	|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.Cash) AS IsCashAccount,
+	|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsPOSAccount,
+	|	Payments.PostponedPayment AS IsPostponedPayment,
+	|	Payments.Ref.Currency AS Currency,
+	|	Payments.Amount AS Amount,
+	|	Payments.Ref.Branch AS Branch,
+	|	Payments.PaymentType AS PaymentType,
+	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) AS IsCardPayment,
+	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Cash) AS IsCashPayment,
+	|	Payments.PaymentTerminal AS PaymentTerminal,
+	|	Payments.Percent AS Percent,
+	|	Payments.Commission AS Commission
+	|INTO Payments
+	|FROM
+	|	Document.RetailReturnReceipt.Payments AS Payments
+	|WHERE
+	|	Payments.Ref = &Ref";
 EndFunction
 
 Function OffersInfo()
@@ -520,14 +554,15 @@ Function R2005T_SalesSpecialOffers()
 EndFunction
 
 Function R3010B_CashOnHand()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	*
-		   |INTO R3010B_CashOnHand
-		   |FROM
-		   |	Payments AS Payments
-		   |WHERE
-		   |	TRUE";
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	*
+	|INTO R3010B_CashOnHand
+	|FROM
+	|	Payments AS Payments
+	|WHERE
+	|	NOT Payments.IsPostponedPayment";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -578,14 +613,16 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function R3050T_PosCashBalances()
-	Return "SELECT
-		   |	- Payments.Amount AS Amount,
-		   |	*
-		   |INTO R3050T_PosCashBalances
-		   |FROM
-		   |	Payments AS Payments
-		   |WHERE
-		   |	TRUE";
+	Return 
+	"SELECT
+	|	- Payments.Amount AS Amount,
+	|	- Payments.Commission AS Commission,
+	|	*
+	|INTO R3050T_PosCashBalances
+	|FROM
+	|	Payments AS Payments
+	|WHERE
+	|	Payments.IsCardPayment AND Payments.IsPOSAccount";
 EndFunction
 
 Function R2050T_RetailSales()
@@ -767,6 +804,25 @@ Function T6020S_BatchKeysInfo()
 	|	BatchKeysInfo
 	|WHERE
 	|	TRUE";
+EndFunction
+
+Function R3022B_CashInTransitOutgoing()
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	Payments.Period,
+	|	Payments.Company,
+	|	Payments.Branch,
+	|	Payments.Currency,
+	|	Payments.Account,
+	|	Payments.Basis,
+	|	Payments.Amount,
+	|	Payments.Commission
+	|INTO R3022B_CashInTransitOutgoing
+	|FROM
+	|	Payments AS Payments
+	|WHERE
+	|	Payments.IsPostponedPayment";
 EndFunction
 
 #EndRegion

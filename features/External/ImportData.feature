@@ -1495,6 +1495,17 @@ Scenario: Create catalog RetailCustomers objects
 		| 'Ref'                                                                     | 'DeletionMark' | 'Code'   | 'Description'   | 'Name'   | 'Surname' |
 		| 'e1cib/data/Catalog.RetailCustomers?ref=aa7d120ed92fbced11eb095a22e1d877' | 'False'        | 'Test01' | 'Test01 Test01' | 'Test01' | 'Test01'  |
 
+
+Scenario: Create catalog CashAccounts objects (POS)
+
+
+	And I check or create catalog "CashAccounts" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Currency'                                                           | 'Type'                      | 'BankName' | 'Company'                                                           | 'Number' | 'TransitAccount' | 'Branch' | 'CommissionIsSeparate' | 'ReceiptingAccount'                                                    | 'Description_en'                       | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.CashAccounts?ref=b782df363ef64fb511ecf3b7a6dc6ba8' | 'False'        | 15     | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'Enum.CashAccountTypes.POS' | ''         | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''       | ''               | ''       | 'True'                 | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186b' | 'POS account, Comission separate, TRY' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.CashAccounts?ref=b782df363ef64fb511ecf3b7a6dc6bab' | 'False'        | 16     | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'Enum.CashAccountTypes.POS' | ''         | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''       | ''               | ''       | 'False'                | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186b' | 'POS Account, Comission include, TRY'  | ''                 | ''               | ''               |
+
+
+
 Scenario: Create catalog BankTerms objects
 
 	And I check or create catalog "BankTerms" objects:

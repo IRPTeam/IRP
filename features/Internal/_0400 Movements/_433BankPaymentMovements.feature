@@ -56,6 +56,7 @@ Scenario: _043300 preparation (Bank payment)
 		When Create catalog BankTerms objects
 		When Create catalog PaymentTerminals objects
 		When Create catalog PaymentTypes objects
+		When Create catalog CashAccounts objects (POS)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

@@ -2076,9 +2076,9 @@ Scenario:  _0154149 create Cash statement
 				| '$$RetailSalesReceipt01541493$$'  | '1 200,00' | ''        |
 			Then the number of "CashTransactionList" table lines is "меньше или равно" 4
 			And "PaymentList" table contains lines
-				| 'Payment type' | 'Account'      | 'Commission' | 'Amount'   |'Currency'   |
-				| 'Cash'         | 'Cash desk №4' | ''           | '1 450,00' |'TRY'        |
-				| 'Card 01'      | 'Transit Main' | '64,50'      | '400,00'   |'TRY'        |
+				| 'Payment type' | 'Account'      | 'Commission' | 'Amount'   | 'Currency' |
+				| 'Cash'         | 'Cash desk №4' | ''           | '1 450,00' | 'TRY'      |
+				| 'Card 01'      | 'Transit Main' | '12,90'      | '400,00'   | 'TRY'      |
 			Then the number of "PaymentList" table lines is "меньше или равно" 2 
 		* Filling in movement type
 			And I go to line in "PaymentList" table
@@ -2094,7 +2094,7 @@ Scenario:  _0154149 create Cash statement
 			And I finish line editing in "PaymentList" table
 			And I go to line in "PaymentList" table
 				| '#' | 'Account'      | 'Amount' | 'Commission' | 'Currency' | 'Payment type' |
-				| '1' | 'Transit Main' | '400,00' | '64,50'      | 'TRY'      | 'Card 01'      |
+				| '1' | 'Transit Main' | '400,00' | '12,90'      | 'TRY'      | 'Card 01'      |
 			And I select current line in "PaymentList" table
 			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
@@ -2127,15 +2127,6 @@ Scenario:  _0154149 create Cash statement
 			| ''                                | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | ''                | 'No'                   |
-		And I select "Cash in transit" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Cash in transit"' | ''            | ''                              | ''          | ''             | ''        | ''                          | ''             | ''                  | ''         | ''                             | ''                     | '' |
-			| ''                            | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''                          | ''             | ''                  | ''         | ''                             | 'Attributes'           | '' |
-			| ''                            | ''            | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Basis document'            | 'From account' | 'To account'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' |
-			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' |
-			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' |
-			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' |
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal

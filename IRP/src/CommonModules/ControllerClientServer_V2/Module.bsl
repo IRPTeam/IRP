@@ -6341,6 +6341,260 @@ EndProcedure
 
 #EndRegion
 
+#Region INVENTORY
+
+#Region INVENTORY_ITEM
+
+// Inventory.Item.OnChange
+Procedure InventoryItemOnChange(Parameters) Export
+	Binding = BindInventoryItem(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Inventory.Item.Set
+Procedure SetInventoryItem(Parameters, Results) Export
+	Binding = BindInventoryItem(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Inventory.Item.Get
+Function GetInventoryItem(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindInventoryItem(Parameters).DataPath, _Key);
+EndFunction
+
+// Inventory.Item.Bind
+Function BindInventoryItem(Parameters)
+	DataPath = "Inventory.Item";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepInventoryChangeItemKeyByItem");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region INVENTORY_ITEMKEY
+
+// Inventory.ItemKey.OnChange
+Procedure InventoryItemKeyOnChange(Parameters) Export
+	Binding = BindInventoryItemKey(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Inventory.ItemKey.Set
+Procedure SetInventoryItemKey(Parameters, Results) Export
+	Binding = BindInventoryItemKey(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Inventory.ItemKey.Get
+Function GetInventoryItemKey(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindInventoryItemKey(Parameters).DataPath, _Key);
+EndFunction
+
+// Inventory.ItemKey.Get.IsChanged
+Function GetInventoryItemKey_IsChanged(Parameters, _Key)
+	Return IsChangedProperty(Parameters, BindInventoryItemKey(Parameters).DataPath, _Key).IsChanged
+		Or IsChangedPropertyDirectly_List(Parameters, _Key).IsChanged;
+EndFunction
+
+// Inventory.ItemKey.Bind
+Function BindInventoryItemKey(Parameters)
+	DataPath = "Inventory.ItemKey";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", 
+		"StepInventoryChangeUseSerialLotNumberByItemKey,
+		|StepInventoryClearSerialLotNumberByItemKey");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Inventory.ItemKey.ChangeItemKeyByItem.Step
+Procedure StepInventoryChangeItemKeyByItem(Parameters, Chain) Export
+	Chain.ChangeItemKeyByItem.Enable = True;
+	Chain.ChangeItemKeyByItem.Setter = "SetInventoryItemKey";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeItemKeyByItemOptions();
+		Options.Item    = GetInventoryItem(Parameters, Row.Key);
+		Options.ItemKey = GetInventoryItemKey(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepInventoryChangeItemKeyByItem";
+		Chain.ChangeItemKeyByItem.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_SERIAL_LOT_NUMBER
+
+// Inventory.SerialLotNumber.Set
+Procedure SetInventorySerialLotNumber(Parameters, Results) Export
+	Binding = BindInventorySerialLotNumber(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Inventory.SerialLotNumber.Get
+Function GetInventorySerialLotNumber(Parameters, _Key)
+	Binding = BindInventorySerialLotNumber(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// Inventory.SerialLotNumber.Bind
+Function BindInventorySerialLotNumber(Parameters)
+	DataPath = "Inventory.SerialLotNumber";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Inventory.SeriaLotNumber.ClearInventorySerialLotNumberByItemKey.Step
+Procedure StepInventoryClearSerialLotNumberByItemKey(Parameters, Chain) Export
+	Chain.ClearSerialLotNumberByItemKey.Enable = True;
+	Chain.ClearSerialLotNumberByItemKey.Setter = "SetInventorySerialLotNumber";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ClearSerialLotNumberByItemKeyOptions();
+		Options.ItemKeyIsChanged  = GetInventoryItemKey_IsChanged(Parameters, Row.Key);
+		Options.CurrentSerialLotNumber = GetInventorySerialLotNumber(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepInventoryClearSerialLotNumberByItemKey";
+		Chain.ClearSerialLotNumberByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_USE_SERIAL_LOT_NUMBER
+
+// Inventory.UseSerialLotNumber.Set
+Procedure SetInventoryUseSerialLotNumber(Parameters, Results) Export
+	Binding = BindInventoryUseSerialLotNumber(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Inventory.UseSerialLotNumber.Bind
+Function BindInventoryUseSerialLotNumber(Parameters)
+	DataPath = "Inventory.UseSerialLotNumber";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Inventory.UseSerialLotNumber.InventoryChangeUseSerialLotNumberByItemKey.Step
+Procedure StepInventoryChangeUseSerialLotNumberByItemKey(Parameters, Chain) Export
+	Chain.ChangeUseSerialLotNumberByItemKey.Enable = True;
+	Chain.ChangeUseSerialLotNumberByItemKey.Setter = "SetInventoryUseSerialLotNumber";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeUseSerialLotNumberByItemKeyOptions();
+		Options.ItemKey  = GetInventoryItemKey(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepInventoryChangeUseSerialLotNumberByItemKey";
+		Chain.ChangeUseSerialLotNumberByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region ACCOUNT_BALANCE
+
+#Region ACCOUNT_BALANCE_ACCOUNT
+
+// AccountBalance.Account.OnChange
+Procedure AccountBalanceAccountOnChange(Parameters) Export
+	Binding = BindAccountBalanceAccount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// AccountBalance.Account.Set
+Procedure SetAccountBalanceAccount(Parameters, Results) Export
+	Binding = BindAccountBalanceAccount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// AccountBalance.Account.Get
+Function GetAccountBalanceAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindAccountBalanceAccount(Parameters).DataPath, _Key);
+EndFunction
+
+// AccountBalance.Account.Bind
+Function BindAccountBalanceAccount(Parameters)
+	DataPath = "AccountBalance.Account";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", 
+		"StepAccountBalanceChangeCurrencyByAccount,
+		|StepAccountBalanceChangeIsFixedCurrencyByAccount");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ACCOUNT_BALANCE_CURRENCY
+
+// AccountBalance.Currency.Set
+Procedure SetAccountBalanceCurrency(Parameters, Results) Export
+	Binding = BindAccountBalanceCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// AccountBalance.Currency.Get
+Function GetAccountBalanceCurrency(Parameters, _Key)
+	Binding = BindAccountBalanceCurrency(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// AccountBalance.Currency.Bind
+Function BindAccountBalanceCurrency(Parameters)
+	DataPath = "AccountBalance.Currency";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// AccountBalance.Currency.ChangeCurrencyByAccount.Step
+Procedure StepAccountBalanceChangeCurrencyByAccount(Parameters, Chain) Export
+	Chain.ChangeCurrencyByAccount.Enable = True;
+	Chain.ChangeCurrencyByAccount.Setter = "SetAccountBalanceCurrency";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
+		Options.Account         = GetAccountBalanceAccount(Parameters, Row.Key);
+		Options.CurrentCurrency = GetAccountBalanceCurrency(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepAccountBalanceChangeCurrencyByAccount";
+		Chain.ChangeCurrencyByAccount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ACCOUNT_BALANCE_IS_FIXED_CURRENCY
+
+// AccountBalance.IsFixedCurrency.Set
+Procedure SetAccountBalanceIsFixedCurrency(Parameters, Results) Export
+	Binding = BindAccountBalanceIsFixedCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// AccountBalance.IsFixedCurrency.Bind
+Function BindAccountBalanceIsFixedCurrency(Parameters)
+	DataPath = "AccountBalance.IsFixedCurrency";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// AccountBalance.IsFixedCurrency.ChangeIsFixedCurrencyByAccount.Step
+Procedure StepAccountBalanceChangeIsFixedCurrencyByAccount(Parameters, Chain) Export
+	Chain.ChangeIsFixedCurrencyByAccount.Enable = True;
+	Chain.ChangeIsFixedCurrencyByAccount.Setter = "SetAccountBalanceIsFixedCurrency";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeIsFixedCurrencyByAccountOptions();
+		Options.Account         = GetAccountBalanceAccount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepAccountBalanceChangeIsFixedCurrencyByAccount";
+		Chain.ChangeIsFixedCurrencyByAccount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 // called when all chain steps is complete
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN

@@ -221,7 +221,7 @@ EndProcedure
 
 &AtClient
 Procedure DeliveryDateOnChange(Item)
-	DocumentsClient.DeliveryDateOnChange(Object, ThisObject, Item);
+	DocPurchaseOrderClient.DeliveryDateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

@@ -304,7 +304,7 @@ EndProcedure
 &AtClient
 Procedure SearchCustomer(Command)
 	Notify = New NotifyDescription("SetRetailCustomer", ThisObject);
-	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), , , ,
+	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), ThisObject, , ,
 		, Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

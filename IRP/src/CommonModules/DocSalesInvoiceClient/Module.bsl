@@ -4,14 +4,12 @@ Procedure OnOpen(Object, Form, Cancel) Export
 	ViewClient_V2.OnOpen(Object, Form, "ItemList");
 EndProcedure
 
-Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
-	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);
-	DocumentsClient.FillDeliveryDates(Object, Form);
+Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "ShipmentConfirmations");
 	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "ShipmentConfirmations", "ShipmentConfirmationsTree",
 		"QuantityInShipmentConfirmation");
-	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 
 #EndRegion

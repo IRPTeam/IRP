@@ -40,8 +40,8 @@ Function GetChoiceDataTable(Parameters) Export
 		For Each Filter In ArrayOfFilters Do
 			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.FieldName);
 			NewFilter.Use = True;
-			NewFilter.ComparisonType = CommonFunctionsClientServer.CompositionComparisonTypeToComparisonType(
-				Filter.ComparisonType);
+			NewFilter.ComparisonType = 
+				CommonFunctionsClientServer.CompositionComparisonTypeToComparisonType(Filter.ComparisonType);
 			NewFilter.Value = Filter.Value;
 		EndDo;
 	EndIf;

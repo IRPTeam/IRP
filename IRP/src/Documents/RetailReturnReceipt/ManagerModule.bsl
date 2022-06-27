@@ -622,7 +622,8 @@ Function R3050T_PosCashBalances()
 	|FROM
 	|	Payments AS Payments
 	|WHERE
-	|	Payments.IsCardPayment AND Payments.IsPOSAccount";
+	|	TRUE";
+//	|	Payments.IsCardPayment AND Payments.IsPOSAccount";
 EndFunction
 
 Function R2050T_RetailSales()

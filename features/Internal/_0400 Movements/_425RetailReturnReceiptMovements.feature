@@ -96,7 +96,13 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create document RetailReturnReceipt objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
-
+		When Create document RSR and RRR (payment by POS)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(1204).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(1204).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(1205).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: _042501 check Retail return receipt movements by the Register  "R4010 Actual stocks"
 	* Select Retail return receipt
@@ -326,6 +332,100 @@ Scenario: _042512 check Retail return receipt movements by the Register  "R5021 
 			| ''                                                    | '09.08.2021 11:41:58' | '-396,61'   | '-468'              | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'TRY'                          |
 			| ''                                                    | '09.08.2021 11:41:58' | '-396,61'   | '-468'              | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'en description is empty'      |
 			| ''                                                    | '09.08.2021 11:41:58' | '-67,9'     | '-80,12'            | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'  | 'USD'      | ''                    | 'Reporting currency'           |		
+		And I close all client application windows
+
+Scenario: _042513 check Retail return receipt movements by the Register  "R3050 Pos cash balances" (payment by POS, not PostponedPayment) 
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 204' |
+	* Check movements by the Register  "R3050 Pos cash balances"
+		And I click "Registrations report" button
+		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 1 204 dated 27.06.2022 16:10:43' | ''                    | ''          | ''           | ''             | ''        | ''             | ''                                     | ''                 |
+			| 'Document registrations records'                        | ''                    | ''          | ''           | ''             | ''        | ''             | ''                                     | ''                 |
+			| 'Register  "R3050 Pos cash balances"'                   | ''                    | ''          | ''           | ''             | ''        | ''             | ''                                     | ''                 |
+			| ''                                                      | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''                                     | ''                 |
+			| ''                                                      | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'                              | 'Payment terminal' |
+			| ''                                                      | '27.06.2022 16:10:43' | '-468'      | '-4,68'      | 'Main Company' | 'Shop 01' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |	
+		And I close all client application windows
+
+Scenario: _042514 check Retail return receipt movements by the Register  "R3010 Cash on hand" (payment by POS, not PostponedPayment) 
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 204' |
+	* Check movements by the Register  "R3010 Cash on hand"
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 1 204 dated 27.06.2022 16:10:43' | ''            | ''                    | ''          | ''             | ''        | ''                                     | ''         | ''                             | ''                     |
+			| 'Document registrations records'                        | ''            | ''                    | ''          | ''             | ''        | ''                                     | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'                        | ''            | ''                    | ''          | ''             | ''        | ''                                     | ''         | ''                             | ''                     |
+			| ''                                                      | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                                     | ''         | ''                             | 'Attributes'           |
+			| ''                                                      | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'                              | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                                      | 'Expense'     | '27.06.2022 16:10:43' | '80,12'     | 'Main Company' | 'Shop 01' | 'POS account, Comission separate, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                                      | 'Expense'     | '27.06.2022 16:10:43' | '468'       | 'Main Company' | 'Shop 01' | 'POS account, Comission separate, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                                      | 'Expense'     | '27.06.2022 16:10:43' | '468'       | 'Main Company' | 'Shop 01' | 'POS account, Comission separate, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
+		And I close all client application windows
+
+
+Scenario: _042515 check Retail return receipt movements by the Register  "R3022 Cash in transit (outgoing)" (payment by POS, not PostponedPayment) 
+	And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 204' |
+	* Check movements by the Register  "R3022 Cash in transit (outgoing)"
+		And I click "Registrations report" button
+		And I select "R3022 Cash in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R3022 Cash in transit (outgoing)" |
+		And I close all client application windows
+
+Scenario: _042516 check Retail return receipt movements by the Register  "R3022 Cash in transit (outgoing)" (payment by POS, PostponedPayment) 
+		And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 205' |
+	* Check movements by the Register  "R3022 Cash in transit (outgoing)"
+		And I click "Registrations report" button
+		And I select "R3022 Cash in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 1 205 dated 27.06.2022 16:11:19' | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''                                     | ''                                                      | ''                     |
+			| 'Document registrations records'                        | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''                                     | ''                                                      | ''                     |
+			| 'Register  "R3022 Cash in transit (outgoing)"'          | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''                                     | ''                                                      | ''                     |
+			| ''                                                      | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''                             | ''         | ''                                     | ''                                                      | 'Attributes'           |
+			| ''                                                      | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Account'                              | 'Basis'                                                 | 'Deferred calculation' |
+			| ''                                                      | 'Receipt'     | '27.06.2022 16:11:19' | '123,26'    | '1,23'       | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'POS account, Comission separate, TRY' | 'Retail return receipt 1 205 dated 27.06.2022 16:11:19' | 'No'                   |
+			| ''                                                      | 'Receipt'     | '27.06.2022 16:11:19' | '719,99'    | '7,2'        | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'POS account, Comission separate, TRY' | 'Retail return receipt 1 205 dated 27.06.2022 16:11:19' | 'No'                   |
+			| ''                                                      | 'Receipt'     | '27.06.2022 16:11:19' | '719,99'    | '7,2'        | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'POS account, Comission separate, TRY' | 'Retail return receipt 1 205 dated 27.06.2022 16:11:19' | 'No'                   |
+			| ''                                                      | 'Receipt'     | '27.06.2022 16:11:19' | '719,99'    | '7,2'        | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'POS account, Comission separate, TRY' | 'Retail return receipt 1 205 dated 27.06.2022 16:11:19' | 'No'                   |	
+		And I close all client application windows
+
+Scenario: _042517 check Retail return receipt movements by the Register  "R3010 Cash on hand" (payment by POS, PostponedPayment) 
+	And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 205' |
+	* Check movements by the Register  "R3010 Cash on hand"
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R3010 Cash on hand" |
 		And I close all client application windows
 
 Scenario: _042530 Retail return receipt clear posting/mark for deletion

@@ -1529,7 +1529,6 @@ Scenario:  _0154149 create Cash statement
 			| 'Description'  |
 			| 'Transit Main' |
 		And I select current line in "List" table
-		And I change "Currency" radio button value to "Fixed"
 		And I click Choice button of the field named "Currency"
 		And I go to line in "List" table
 			| 'Description'  |

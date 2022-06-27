@@ -2077,7 +2077,7 @@ Scenario:  _0154149 create Cash statement
 			Then the number of "CashTransactionList" table lines is "меньше или равно" 4
 			And "PaymentList" table contains lines
 				| 'Payment type' | 'Account'      | 'Commission' | 'Amount'   |'Currency'   |
-				| 'Cash'         | 'Cash desk №4' | ''           | '1 450,00' |'TRY'        |
+				| 'Cash'         | 'Cash desk №4' | '12,90'      | '1 450,00' |'TRY'        |
 				| 'Card 01'      | 'Transit Main' | '64,50'      | '400,00'   |'TRY'        |
 			Then the number of "PaymentList" table lines is "меньше или равно" 2 
 		* Filling in movement type

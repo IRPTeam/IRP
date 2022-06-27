@@ -495,10 +495,13 @@ Procedure PaymentFormClose(Result, AdditionalData) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	
 	CashbackAmount = WriteTransaction(Result);
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
-
+	
+	DPPointOfSaleClient.BeforeStartNewTransaction(Object, ThisObject, DocRef);
+	
 	NewTransaction();
 	Modified = False;
 EndProcedure

@@ -143,6 +143,9 @@ Scenario: _043300 preparation (Bank payment)
 			| "Documents.BankPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document SalesReturn objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document BankPayment objects (check cash planning, cash transfer order and OPO)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |

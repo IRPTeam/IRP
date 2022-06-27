@@ -57,6 +57,8 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog CashAccounts objects (POS)
+		When Create catalog CashAccounts objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"

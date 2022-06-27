@@ -951,6 +951,7 @@ Function GetFormItemNames()
 				|AccountReceivableByAgreementsKey, AccountReceivableByDocumentsKey, CustomersPaymentTermsKey,
 				|SendUUID, ReceiveUUID,
 				|ItemListUseSerialLotNumber, ItemListIsService,
+				|PaymentListApArPostingDetail,
 				|InventoryUseSerialLotNumber, AccountBalanceIsFixedCurrency";
 
 	Return ItemNames;

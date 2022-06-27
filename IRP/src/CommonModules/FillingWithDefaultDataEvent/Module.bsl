@@ -255,6 +255,7 @@ Function UsedNewFunctionality(Source)
 	Or TypeOf(Source) = Type("DocumentObject.ItemStockAdjustment")
 	Or TypeOf(Source) = Type("DocumentObject.Bundling")
 	Or TypeOf(Source) = Type("DocumentObject.Unbundling")
+	Or TypeOf(Source) = Type("DocumentObject.CashStatement")
 	
 	Or TypeOf(Source) = Type("DocumentObject.CashTransferOrder");
 	

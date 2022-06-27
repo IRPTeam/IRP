@@ -1422,6 +1422,13 @@ Procedure PaymentListLegalNameOnChange(Object, Form, CurrentData = Undefined) Ex
 	ControllerClientServer_V2.PaymentListLegalNameOnChange(Parameters);
 EndProcedure
 
+// PaymentList.Account
+Procedure PaymentListAccountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListAccountOnChange(Parameters);
+EndProcedure
+
 // PaymentList.BasisDocument
 Procedure PaymentListBasisDocumentOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);

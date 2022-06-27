@@ -40,4 +40,11 @@
       <value>Return to customer</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="149af390-b2c5-497b-87ef-c4a5e3f6067d">
+    <name>ReturnToCustomerByPOS</name>
+    <synonym>
+      <key>en</key>
+      <value>Return to customer by POS</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

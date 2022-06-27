@@ -207,6 +207,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
@@ -300,6 +301,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3024B_SalesOrdersToBePaid());
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(R3050T_PosCashBalances());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
 	Return QueryArray;
 EndFunction
 
@@ -378,6 +381,8 @@ Function PaymentList()
 	|	PaymentList.FinancialMovementType AS FinancialMovementType,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS
 	|		IsPaymentFromCustomer,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS) AS
+	|		IsPaymentFromCustomerByPOS,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS
 	|		IsCashTransferOrder,
@@ -385,7 +390,10 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
 	|	PaymentList.Ref.Branch AS Branch,
 	|	PaymentList.LegalNameContract AS LegalNameContract,
-	|	PaymentList.Order
+	|	PaymentList.Order,
+	|	PaymentList.PaymentType,
+	|	PaymentList.PaymentTerminal,
+	|	PaymentList.CommissionIsSeparate
 	|INTO PaymentList
 	|FROM
 	|	Document.BankReceipt.PaymentList AS PaymentList
@@ -411,7 +419,7 @@ Function R2021B_CustomersTransactions()
 		   |INTO R2021B_CustomersTransactions
 		   |	FROM PaymentList AS PaymentList
 		   |WHERE
-		   |	PaymentList.IsPaymentFromCustomer
+		   |	(PaymentList.IsPaymentFromCustomer OR PaymentList.IsPaymentFromCustomerByPOS)
 		   |	AND NOT PaymentList.IsAdvance
 		   |
 		   |UNION ALL
@@ -494,7 +502,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
-		   |	PaymentList.IsPaymentFromCustomer
+		   |	(PaymentList.IsPaymentFromCustomer OR PaymentList.IsPaymentFromCustomerByPOS)
 		   |	AND PaymentList.IsAdvance
 		   |
 		   |UNION ALL
@@ -570,7 +578,7 @@ Function R5010B_ReconciliationStatement()
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
-		   |	PaymentList.IsPaymentFromCustomer
+		   |	(PaymentList.IsPaymentFromCustomer OR PaymentList.IsPaymentFromCustomerByPOS)
 		   |	OR PaymentList.IsReturnFromVendor
 		   |GROUP BY
 		   |	PaymentList.Company,
@@ -582,14 +590,38 @@ Function R5010B_ReconciliationStatement()
 EndFunction
 
 Function R3010B_CashOnHand()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R3010B_CashOnHand
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	TRUE";
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	PaymentList.Key,
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Account,
+	|	PaymentList.Currency,
+	|	PaymentList.Amount
+	|INTO R3010B_CashOnHand
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	TRUE
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	PaymentList.Key,
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Account,
+	|	PaymentList.Currency,
+	|	PaymentList.Commission AS Amount
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.IsTransferFromPOS
+	|	AND NOT PaymentList.CommissionIsSeparate";
 EndFunction
 
 Function R3035T_CashPlanning()
@@ -623,15 +655,16 @@ Function R3035T_CashPlanning()
 EndFunction
 
 Function R5022T_Expenses()
-	Return "SELECT
-		   |	PaymentList.Commission AS Amount,
-		   |	PaymentList.Commission AS AmountWithTaxes,
-		   |	*
-		   |INTO R5022T_Expenses
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.Commission <> 0";
+	Return 
+	"SELECT
+	|	PaymentList.Commission AS Amount,
+	|	PaymentList.Commission AS AmountWithTaxes,
+	|	*
+	|INTO R5022T_Expenses
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.Commission <> 0 AND NOT PaymentList.IsPaymentFromCustomerByPOS";
 EndFunction
 
 Function R3024B_SalesOrdersToBePaid()
@@ -671,7 +704,7 @@ Function T2014S_AdvancesInfo()
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	PaymentList.IsPaymentFromCustomer
+	|	(PaymentList.IsPaymentFromCustomer OR PaymentList.IsPaymentFromCustomerByPOS)
 	|	AND PaymentList.IsAdvance
 	|
 	|UNION ALL
@@ -716,7 +749,7 @@ Function T2015S_TransactionsInfo()
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	PaymentList.IsPaymentFromCustomer
+	|	(PaymentList.IsPaymentFromCustomer OR PaymentList.IsPaymentFromCustomerByPOS)
 	|	AND NOT PaymentList.IsAdvance
 	|
 	|UNION ALL
@@ -741,6 +774,45 @@ Function T2015S_TransactionsInfo()
 	|WHERE
 	|	PaymentList.IsReturnFromVendor
 	|	AND NOT PaymentList.IsAdvance";
+EndFunction
+
+Function R3050T_PosCashBalances()
+	Return
+	"SELECT
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.PaymentType,
+	|	PaymentList.Account,
+	|	PaymentList.PaymentTerminal,
+	|	PaymentList.Amount,
+	|	PaymentList.Commission
+	|INTO R3050T_PosCashBalances
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.IsPaymentFromCustomerByPOS";
+EndFunction
+
+Function R3021B_CashInTransitIncoming()
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	PaymentList.Period,
+	|	PaymentList.Key,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Currency,
+	|	PaymentList.FromAccount_POS AS Account,
+	|	PaymentList.Account AS ReceiptingAccount,
+	|	PaymentList.PlaningTransactionBasis AS Basis,
+	|	PaymentList.Amount,
+	|	PaymentList.Commission
+	|INTO R3021B_CashInTransitIncoming
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.IsTransferFromPOS";
 EndFunction
 
 #EndRegion

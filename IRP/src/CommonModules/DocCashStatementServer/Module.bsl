@@ -1,13 +1,24 @@
 #Region FormEvents
 
-Procedure AfterWriteAtServer(Object, CurrentObject, WriteParameters) Export
-	Return;
-EndProcedure
-
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
-	DocLabelingServer.CreateCommandsAndItems(Object);
-	SetGroupItemsList(Object, Form);
+	If Form.Parameters.Key.IsEmpty() Then
+		SetGroupItemsList(Object, Form);
+		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	EndIf;	
+	SetGroupItemsList(Object, Form);	
+	ViewServer_V2.OnCreateAtServer(Object, Form, "");
+EndProcedure
+
+Procedure OnReadAtServer(Object, Form, CurrentObject) Export
+	If Not Form.GroupItems.Count() Then
+		SetGroupItemsList(Object, Form);
+	EndIf;
+	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+EndProcedure
+
+Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
 #EndRegion
@@ -45,8 +56,9 @@ EndProcedure
 
 #Region ItemFormEvents
 
-Procedure FillTransactions(Object, AddInfo = Undefined) Export
+Procedure FillTransactions(Object) Export
 
+	// CashTransactionList
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -73,6 +85,7 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	CashTransactionList = Query.Execute().Unload();
 	Object.CashTransactionList.Load(CashTransactionList);
 
+	// PaymentList
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -80,19 +93,49 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	|	R3050T_PosCashBalances.Account AS Account,
 	|	R3050T_PosCashBalances.AmountTurnover AS Amount,
 	|	R3050T_PosCashBalances.CommissionTurnover AS Commission,
-	|	R3050T_PosCashBalances.Account.Currency AS Currency
+	|	R3050T_PosCashBalances.Account.Currency AS Currency,
+	|	R3050T_PosCashBalances.PaymentTerminal
 	|FROM
-	|	AccumulationRegister.R3050T_PosCashBalances.Turnovers(BEGINOFPERIOD(&BegOfPeriod, DAY), ENDOFPERIOD(&EndOfPeriod, DAY), ,
-	|		Company = &Company
+	|	AccumulationRegister.R3050T_PosCashBalances.Turnovers(BEGINOFPERIOD(&BegOfPeriod, DAY), ENDOFPERIOD(&EndOfPeriod,
+	|		DAY),, Company = &Company
 	|	AND Branch = &Branch) AS R3050T_PosCashBalances";
 
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);
 	Query.SetParameter("Branch", Object.Branch);
 	Query.SetParameter("Company", Object.Company);
-	QueryResult = Query.Execute().Unload();
-	Object.PaymentList.Load(QueryResult);
-
+	
+	QueryTable = Query.Execute().Unload();
+	ArrayOfFillingRows = New Array();
+	Object.PaymentList.Clear();
+	
+	For Each Row In QueryTable Do
+		NewRow = Object.PaymentList.Add();
+		NewRow.Key = New UUID();
+		FillPropertyValues(NewRow, Row);
+		ArrayOfFillingRows.Add(NewRow);
+	EndDo;
+		
+	ArrayOfFillingColumns = New Array();
+	ArrayOfFillingColumns.Add("PaymentList.PaymentType");
+	ArrayOfFillingColumns.Add("PaymentList.PaymentTerminal");
+	ArrayOfFillingColumns.Add("PaymentList.Account");
+	ArrayOfFillingColumns.Add("PaymentList.Amount");
+	ArrayOfFillingColumns.Add("PaymentList.Commission");
+	ArrayOfFillingColumns.Add("PaymentList.Currency");
+	
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = "PaymentList";
+	ServerParameters.IsBasedOn = True;
+	ServerParameters.ReadOnlyProperties = StrConcat(ArrayOfFillingColumns, ",");
+	ServerParameters.Rows = ArrayOfFillingRows;
+		
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	For Each PropertyName In StrSplit(ServerParameters.ReadOnlyProperties, ",") Do
+		Property = New Structure("DataPath", TrimAll(PropertyName));
+		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	EndDo;
+	
 	RecalculateClosingBalance(Object);
 EndProcedure
 
@@ -101,9 +144,9 @@ Procedure RecalculateClosingBalance(Object)
 		- Object.CashTransactionList.Total("Expense");
 EndProcedure
 
-Procedure FillOnBasisDocument(Object, AddInfo = Undefined) Export
-
+Procedure FillOnBasisDocument(Object) Export
 	Object.OpeningBalance = Object.BasisDocument.ClosingBalance;
 	RecalculateClosingBalance(Object);
 EndProcedure
+
 #EndRegion

@@ -60,17 +60,31 @@ Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing)
 	StandardProcessing = False;
 	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
 	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
-		"Enum.CashAccountTypes.Bank"), , DataCompositionComparisonType.Equal));
-	StartChoiceParameters.FillingData.Insert("Type", PredefinedValue("Enum.CashAccountTypes.Bank"));
+	
+	CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
+	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS") Then
+		CashAccountType = PredefinedValue("Enum.CashAccountTypes.POS");
+	EndIf;
+	
+	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
+		CashAccountType, , DataCompositionComparisonType.Equal));
+	StartChoiceParameters.FillingData.Insert("Type", CashAccountType);
+	
 	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
 EndProcedure
 
 Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	DefaultEditTextParameters = New Structure("Company", Object.Company);
 	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
-		"Enum.CashAccountTypes.Bank"), ComparisonType.Equal));
+	
+	CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
+	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS") Then
+		CashAccountType = PredefinedValue("Enum.CashAccountTypes.POS");
+	EndIf;
+	
+	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
+		CashAccountType, ComparisonType.Equal));
+	
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 

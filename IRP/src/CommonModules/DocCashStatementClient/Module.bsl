@@ -1,43 +1,75 @@
-#Region FormEvents
+#Region FORM
 
-Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-
-	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-
-	Form.DataPeriod.StartDate = Object.BegOfPeriod;
-	Form.DataPeriod.EndDate = Object.EndOfPeriod;
+Procedure OnOpen(Object, Form, Cancel) Export
+	ViewClient_V2.OnOpen(Object, Form, "");
 EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST
+
+Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.PaymentListBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+#Region PAYMENT_LIST_COLUMNS
+
+Procedure PaymentListAccountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListAccountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 
 #Region ItemFormEvents
 
-Procedure DataPeriodOnChange(Object, Period, AddInfo = Undefined) Export
+#Region COMPANY
 
+Procedure CompanyOnChange(Object) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
+EndProcedure
+
+Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
+	OpenSettings.FillingData = New Structure("OurCompany", True);
+
+	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
+EndProcedure
+
+#EndRegion
+
+Procedure DataPeriodOnChange(Object, Period) Export
 	Object.BegOfPeriod = Period.StartDate;
 	Object.EndOfPeriod = Period.EndDate;
-
 EndProcedure
 
-Procedure StatusOnChange(Object, AddInfo = Undefined) Export
+Procedure StatusOnChange(Object) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
 EndProcedure
 
-Procedure BranchOnChange(Object, AddInfo = Undefined) Export
+Procedure BranchOnChange(Object) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
 EndProcedure
 
-Procedure CompanyOnChange(Object, AddInfo = Undefined) Export
+Procedure DateOnChange(Object) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
 EndProcedure
 
-Procedure DateOnChange(Object, AddInfo = Undefined) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
-EndProcedure
-
-Procedure NumberOnChange(Object, AddInfo = Undefined) Export
+Procedure NumberOnChange(Object) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
 EndProcedure
 

@@ -683,14 +683,6 @@ Scenario: _029150 create Retail return receipt for service and product
 			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Sales person'                 | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
 			| ''                               | '*'      | '-1'        | '50'     | '42,37'      | ''              | 'Main Company' | '*'       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
 			| ''                               | '*'      | '-1'        | '200'    | '169,49'     | ''              | 'Main Company' | '*'       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
-		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3050 Pos cash balances"' | ''       | ''          | ''           | ''             | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                                    | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                                    | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
-			| ''                                    | '*'      | '-450'      | ''           | 'Main Company' | '*'       | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
-	
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

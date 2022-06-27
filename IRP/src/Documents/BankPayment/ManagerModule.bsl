@@ -259,6 +259,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(R3050T_PosCashBalances());
 	Return QueryArray;
 EndFunction
 
@@ -300,7 +301,10 @@ Function PaymentList()
 	|	PaymentList.Partner AS Partner,
 	|	PaymentList.Payee AS Payee,
 	|	PaymentList.Ref.Date AS Period,
+	|
 	|	PaymentList.TotalAmount AS Amount,
+	|	PaymentList.TotalAmount AS TotalAmount,
+	|
 	|	CASE
 	|		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
 	|		AND NOT PaymentList.PlaningTransactionBasis.Date IS NULL
@@ -329,9 +333,12 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
 	|		IsCashTransferOrder,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS) AS IsReturnToCustomerByPOS,
 	|	PaymentList.Ref.Branch AS Branch,
 	|	PaymentList.LegalNameContract AS LegalNameContract,
-	|	PaymentList.Order
+	|	PaymentList.Order,
+	|	PaymentList.PaymentType,
+	|	PaymentList.PaymentTerminal
 	|INTO PaymentList
 	|FROM
 	|	Document.BankPayment.PaymentList AS PaymentList
@@ -401,7 +408,7 @@ Function R2021B_CustomersTransactions()
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
-		   |	PaymentList.IsReturnToCustomer
+		   |	(PaymentList.IsReturnToCustomer OR PaymentList.IsReturnToCustomerByPOS)
 		   |	AND NOT PaymentList.IsAdvance
 		   |
 		   |UNION ALL
@@ -480,7 +487,7 @@ Function R2020B_AdvancesFromCustomers()
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
-		   |	PaymentList.IsReturnToCustomer
+		   |	(PaymentList.IsReturnToCustomer OR PaymentList.IsReturnToCustomerByPOS)
 		   |	AND PaymentList.IsAdvance";
 EndFunction
 
@@ -519,7 +526,7 @@ Function R5010B_ReconciliationStatement()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	PaymentList.IsPaymentToVendor
-		   |	OR PaymentList.IsReturnToCustomer
+		   |	OR PaymentList.IsReturnToCustomer OR PaymentList.IsReturnToCustomerByPOS
 		   |GROUP BY
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
@@ -531,14 +538,21 @@ Function R5010B_ReconciliationStatement()
 EndFunction
 
 Function R3010B_CashOnHand()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	*
-		   |INTO R3010B_CashOnHand
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	TRUE";
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	PaymentList.Key,
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Account,
+	|	PaymentList.Currency,
+	|	PaymentList.Amount
+	|INTO R3010B_CashOnHand
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	TRUE";
 EndFunction
 
 Function R3035T_CashPlanning()
@@ -572,15 +586,16 @@ Function R3035T_CashPlanning()
 EndFunction
 
 Function R5022T_Expenses()
-	Return "SELECT
-		   |	PaymentList.Commission AS Amount,
-		   |	PaymentList.Commission AS AmountWithTaxes,
-		   |	*
-		   |INTO R5022T_Expenses
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.Commission <> 0";
+	Return 
+	"SELECT
+	|	PaymentList.Commission AS Amount,
+	|	PaymentList.Commission AS AmountWithTaxes,
+	|	*
+	|INTO R5022T_Expenses
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.Commission <> 0 AND NOT PaymentList.IsReturnToCustomerByPOS";
 EndFunction
 
 Function R3025B_PurchaseOrdersToBePaid()
@@ -640,7 +655,7 @@ Function T2014S_AdvancesInfo()
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	PaymentList.IsReturnToCustomer
+	|	(PaymentList.IsReturnToCustomer OR PaymentList.IsReturnToCustomerByPOS)
 	|	AND PaymentList.IsAdvance";
 EndFunction
 
@@ -688,8 +703,26 @@ Function T2015S_TransactionsInfo()
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	PaymentList.IsReturnToCustomer
+	|	(PaymentList.IsReturnToCustomer OR PaymentList.IsReturnToCustomerByPOS)
 	|	AND NOT PaymentList.IsAdvance";
+EndFunction
+
+Function R3050T_PosCashBalances()
+	Return
+	"SELECT
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.PaymentType,
+	|	PaymentList.Account,
+	|	PaymentList.PaymentTerminal,
+	|	- PaymentList.Amount AS Amount,
+	|	- PaymentList.Commission AS Commission
+	|INTO R3050T_PosCashBalances
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.IsReturnToCustomerByPOS";
 EndFunction
 
 #EndRegion

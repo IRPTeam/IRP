@@ -1,132 +1,196 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c62110bf-9353-42fa-b222-cd7186223b24">
-  <producedTypes>
-    <selectionType typeId="4c04c237-0bb6-4465-b538-20e51dc128ee" valueTypeId="60818d76-6708-481c-8717-05e0950bf8eb"/>
-    <listType typeId="53d35d00-4184-46e8-ad5e-b989b9b16387" valueTypeId="a8d884c5-bd2d-46bc-b12c-811e77191cb4"/>
-    <managerType typeId="0186bbb7-78b9-4e3a-9b41-f8a9bb17effd" valueTypeId="21fd9cdd-23d3-4d9e-9803-f5829700d08c"/>
-    <recordSetType typeId="687619b9-12cb-433d-aac2-bf7b786996b8" valueTypeId="32260708-7873-4adf-ab5e-c0b24a571e21"/>
-    <recordKeyType typeId="55dd680c-1670-4fbf-bc98-35ae5005597c" valueTypeId="15f462c1-91e9-4eeb-9a76-8c08662af3d6"/>
-    <recordType typeId="c4d27692-7141-441f-a19e-24c689b6e607" valueTypeId="ecc0884a-2fae-43aa-8aa3-fdb7164f80ee"/>
-    <recordManagerType typeId="28a52af3-e618-471e-a804-45c0f43dba0a" valueTypeId="01502219-c7ee-41be-8b79-dc7c836e757f"/>
-  </producedTypes>
-  <name>T6090S_CompositeBatchesAmountValues</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c62110bf-9353-42fa-b222-cd7186223b24">
+ <producedTypes>
+  <selectionType typeId="4c04c237-0bb6-4465-b538-20e51dc128ee" valueTypeId="60818d76-6708-481c-8717-05e0950bf8eb"/>
+  <listType typeId="53d35d00-4184-46e8-ad5e-b989b9b16387" valueTypeId="a8d884c5-bd2d-46bc-b12c-811e77191cb4"/>
+  <managerType typeId="0186bbb7-78b9-4e3a-9b41-f8a9bb17effd" valueTypeId="21fd9cdd-23d3-4d9e-9803-f5829700d08c"/>
+  <recordSetType typeId="687619b9-12cb-433d-aac2-bf7b786996b8" valueTypeId="32260708-7873-4adf-ab5e-c0b24a571e21"/>
+  <recordKeyType typeId="55dd680c-1670-4fbf-bc98-35ae5005597c" valueTypeId="15f462c1-91e9-4eeb-9a76-8c08662af3d6"/>
+  <recordType typeId="c4d27692-7141-441f-a19e-24c689b6e607" valueTypeId="ecc0884a-2fae-43aa-8aa3-fdb7164f80ee"/>
+  <recordManagerType typeId="28a52af3-e618-471e-a804-45c0f43dba0a" valueTypeId="01502219-c7ee-41be-8b79-dc7c836e757f"/>
+ </producedTypes>
+ <name>T6090S_CompositeBatchesAmountValues</name>
+ <synonym>
+  <key>tr</key>
+  <value>T6090 Transfer edilen içerik parti tutar değerleri</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>T6090 Composite batches amount values</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T6090 Значения сумм композитных партий</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="1181ffb8-d668-471f-82c9-b902ae4111bb">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>T6090 Composite batches amount values</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="1181ffb8-d668-471f-82c9-b902ae4111bb">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="bd71d269-555e-4a13-81e7-24d4481bcb2a">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="d5a9f86c-7983-4e38-b28e-10d344581d62">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="ea7114a9-5196-4a9b-b785-c1b9f4ac4dd7">
-    <name>BatchComposite</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch composite</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Batches</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="3e6787c5-6e6a-4fc0-b999-0ffa4f34f947">
-    <name>BatchKeyComposite</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch key composite</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BatchKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="069f6b57-8f59-46c9-b694-4e9bc0a784a6">
-    <name>Batch</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Batches</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="9ba54ee3-99ca-43bd-b810-9b719aa191ca">
-    <name>BatchKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BatchKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма оплаты</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="bd71d269-555e-4a13-81e7-24d4481bcb2a">
+  <name>Quantity</name>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Количество</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="d5a9f86c-7983-4e38-b28e-10d344581d62">
+  <name>Company</name>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="ea7114a9-5196-4a9b-b785-c1b9f4ac4dd7">
+  <name>BatchComposite</name>
+  <synonym>
+   <key>tr</key>
+   <value>Parti içeriği</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Batch composite</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Композит партии</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Batches</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="3e6787c5-6e6a-4fc0-b999-0ffa4f34f947">
+  <name>BatchKeyComposite</name>
+  <synonym>
+   <key>tr</key>
+   <value>Karmaşık parti anahtarı</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Batch key composite</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Композит ключа партии</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BatchKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="069f6b57-8f59-46c9-b694-4e9bc0a784a6">
+  <name>Batch</name>
+  <synonym>
+   <key>tr</key>
+   <value>Parti</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Batch</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Партия</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Batches</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="9ba54ee3-99ca-43bd-b810-9b719aa191ca">
+  <name>BatchKey</name>
+  <synonym>
+   <key>tr</key>
+   <value>Parti anahtarı</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Batch key</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ партии</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BatchKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

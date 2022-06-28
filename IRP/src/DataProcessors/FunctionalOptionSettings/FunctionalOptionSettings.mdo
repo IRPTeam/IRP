@@ -1,23 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="68af440f-d1d4-4587-b01e-b7e790eb0bd7">
-  <producedTypes>
-    <objectType typeId="875bd833-6c77-4abf-ba8a-0b4812913b58" valueTypeId="44931a77-dd40-47a2-beb0-54335dd5abc2"/>
-    <managerType typeId="53c3ddd9-65b5-4a32-8560-be0434f65a0e" valueTypeId="f1e636ea-8541-45c1-b144-1d8b5df6f5a5"/>
-  </producedTypes>
-  <name>FunctionalOptionSettings</name>
+ <producedTypes>
+  <objectType typeId="875bd833-6c77-4abf-ba8a-0b4812913b58" valueTypeId="44931a77-dd40-47a2-beb0-54335dd5abc2"/>
+  <managerType typeId="53c3ddd9-65b5-4a32-8560-be0434f65a0e" valueTypeId="f1e636ea-8541-45c1-b144-1d8b5df6f5a5"/>
+ </producedTypes>
+ <name>FunctionalOptionSettings</name>
+ <synonym>
+  <key>tr</key>
+  <value>İşlevsel seçenekler ayarları</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Functional option settings</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки функциональных опций</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.FunctionalOptionSettings.Form.Form</defaultForm>
+ <forms uuid="fc0e81fc-90ec-415d-9d9d-eaa43b0de9f1">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Functional option settings</value>
+   <key>tr</key>
+   <value>Form</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.FunctionalOptionSettings.Form.Form</defaultForm>
-  <forms uuid="fc0e81fc-90ec-415d-9d9d-eaa43b0de9f1">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

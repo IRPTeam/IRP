@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f4b9432e-3d51-4a3e-b784-d538df6697db">
-  <name>FOServer</name>
-  <synonym>
-    <key>en</key>
-    <value>FOServer</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>FOServer</name>
+ <synonym>
+  <key>tr</key>
+  <value>İşlevsel seçenekler server</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>FOServer</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Функциональные опции сервер</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

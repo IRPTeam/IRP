@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e936e0c7-60a7-4a0f-8f2a-ca790ac325f2">
-  <name>ConstantsForm</name>
-  <synonym>
-    <key>en</key>
-    <value>Constants form</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
-  <useStandardCommands>true</useStandardCommands>
+ <name>ConstantsForm</name>
+ <synonym>
+  <key>tr</key>
+  <value>Sabit değerler formu</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Constants form</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Форма констант</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
+ <useStandardCommands>true</useStandardCommands>
 </mdclass:CommonForm>

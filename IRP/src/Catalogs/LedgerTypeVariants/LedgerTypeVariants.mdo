@@ -1,61 +1,93 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ddd4ea48-6033-4577-873d-ca8fa548ee44">
-  <producedTypes>
-    <objectType typeId="6aeeb6ef-8d4e-4558-a400-8b2e626d7347" valueTypeId="91f5e792-ee50-4594-a869-84a8e9ff75cc"/>
-    <refType typeId="7353d138-3276-443c-ae08-61103792f292" valueTypeId="1e80cea5-af8e-4844-b5e1-c0b3cc948306"/>
-    <selectionType typeId="4c89cf2e-5498-4020-8446-208a1a20cc43" valueTypeId="218bb272-3a90-4eb8-8d3c-0dfc0c7f6fa0"/>
-    <listType typeId="bfcdf92a-b887-4007-8cc3-0bbbccdd53ce" valueTypeId="31d1507c-cb40-49c5-b4ac-e805faad6646"/>
-    <managerType typeId="e5877f90-1610-441d-aaaf-8f391430fdfa" valueTypeId="30582630-a3db-4911-8191-e3120e969bbc"/>
-  </producedTypes>
-  <name>LedgerTypeVariants</name>
+ <producedTypes>
+  <objectType typeId="6aeeb6ef-8d4e-4558-a400-8b2e626d7347" valueTypeId="91f5e792-ee50-4594-a869-84a8e9ff75cc"/>
+  <refType typeId="7353d138-3276-443c-ae08-61103792f292" valueTypeId="1e80cea5-af8e-4844-b5e1-c0b3cc948306"/>
+  <selectionType typeId="4c89cf2e-5498-4020-8446-208a1a20cc43" valueTypeId="218bb272-3a90-4eb8-8d3c-0dfc0c7f6fa0"/>
+  <listType typeId="bfcdf92a-b887-4007-8cc3-0bbbccdd53ce" valueTypeId="31d1507c-cb40-49c5-b4ac-e805faad6646"/>
+  <managerType typeId="e5877f90-1610-441d-aaaf-8f391430fdfa" valueTypeId="30582630-a3db-4911-8191-e3120e969bbc"/>
+ </producedTypes>
+ <name>LedgerTypeVariants</name>
+ <synonym>
+  <key>tr</key>
+  <value>Defter tip seçenekleri</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Ledger type variants</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Варианты типа учета</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.LedgerTypeVariants.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.LedgerTypeVariants.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.LedgerTypeVariants.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.LedgerTypeVariants.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <forms uuid="f5fe639f-468d-44e9-bf31-85adc60f82bb">
+  <name>ItemForm</name>
   <synonym>
-    <key>en</key>
-    <value>Ledger type variants</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.LedgerTypeVariants.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.LedgerTypeVariants.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.LedgerTypeVariants.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.LedgerTypeVariants.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <forms uuid="f5fe639f-468d-44e9-bf31-85adc60f82bb">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="bea52eaf-362d-4463-adf8-299b47bb637e">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="43b08e37-175d-4e27-8999-e3d45a8aa633">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="bea52eaf-362d-4463-adf8-299b47bb637e">
+  <name>ListForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="43b08e37-175d-4e27-8999-e3d45a8aa633">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

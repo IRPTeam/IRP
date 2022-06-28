@@ -1,23 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="74f031af-e39c-41b8-8316-b22eebcf4c1c">
-  <producedTypes>
-    <objectType typeId="8698fd5d-a7ef-484a-99b2-96f84e06c380" valueTypeId="1a76c360-02f5-42d9-a06c-2813b18912b9"/>
-    <managerType typeId="d8e1102f-4a17-47fa-9530-00f1529e7db0" valueTypeId="41cf8819-75c3-4d57-8645-27206d9f0255"/>
-  </producedTypes>
-  <name>CreateSerialLotNumbers</name>
+ <producedTypes>
+  <objectType typeId="8698fd5d-a7ef-484a-99b2-96f84e06c380" valueTypeId="1a76c360-02f5-42d9-a06c-2813b18912b9"/>
+  <managerType typeId="d8e1102f-4a17-47fa-9530-00f1529e7db0" valueTypeId="41cf8819-75c3-4d57-8645-27206d9f0255"/>
+ </producedTypes>
+ <name>CreateSerialLotNumbers</name>
+ <synonym>
+  <key>tr</key>
+  <value>Seri lotları oluştur</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Create serial lot numbers</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Создать серийные номера номенклатуры</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.CreateSerialLotNumbers.Form.Form</defaultForm>
+ <forms uuid="9b9f7bb7-9f9f-4a5a-85b4-1deff573be54">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Create serial lot numbers</value>
+   <key>tr</key>
+   <value>Form</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.CreateSerialLotNumbers.Form.Form</defaultForm>
-  <forms uuid="9b9f7bb7-9f9f-4a5a-85b4-1deff573be54">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

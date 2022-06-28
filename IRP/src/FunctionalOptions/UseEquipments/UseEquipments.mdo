@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="681c7feb-14cb-46fa-8481-c57cde0c62e7">
-  <name>UseEquipments</name>
-  <synonym>
-    <key>en</key>
-    <value>Use equipments</value>
-  </synonym>
-  <location>Constant.UseEquipments</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.EquipmentDrivers</content>
-  <content>Catalog.Workstations</content>
-  <content>Catalog.Hardware</content>
+ <name>UseEquipments</name>
+ <synonym>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Ticari donanım</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use equipments</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать торговое оборудование</value>
+ </synonym>
+ <location>Constant.UseEquipments</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.EquipmentDrivers</content>
+ <content>Catalog.Workstations</content>
+ <content>Catalog.Hardware</content>
 </mdclass:FunctionalOption>

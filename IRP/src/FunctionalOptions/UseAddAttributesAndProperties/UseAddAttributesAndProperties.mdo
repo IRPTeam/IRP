@@ -1,14 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="22dff310-ac6b-489f-ab81-5f47e9804a81">
-  <name>UseAddAttributesAndProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Use add attributes and properties</value>
-  </synonym>
-  <location>Constant.UseAddAttributesAndProperties</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.AddAttributeAndPropertySets</content>
-  <content>Catalog.AddAttributeAndPropertyValues</content>
-  <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
-  <content>CommonCommand.AddProperties</content>
+ <name>UseAddAttributesAndProperties</name>
+ <synonym>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Ek alan ve özellikler</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use add attributes and properties</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать дополнительные реквизиты и свойства</value>
+ </synonym>
+ <location>Constant.UseAddAttributesAndProperties</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.AddAttributeAndPropertySets</content>
+ <content>Catalog.AddAttributeAndPropertyValues</content>
+ <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
+ <content>CommonCommand.AddProperties</content>
 </mdclass:FunctionalOption>

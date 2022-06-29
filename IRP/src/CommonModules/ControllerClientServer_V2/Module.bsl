@@ -6532,8 +6532,6 @@ Procedure StepPaymentsCalculateCommission(Parameters, Chain) Export
 		Options     = ModelClientServer_V2.CalculateCommissionOptions();
 		Options.Amount = GetPaymentsAmount(Parameters, Row.Key);
 		Options.Percent = GetPaymentsPercent(Parameters, Row.Key);
-		Options.IsUserChange = IsUserChange(Parameters);
-		Options.CurrentCommission = GetPaymentsCommission(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentsCalculateCommission";
 		Chain.CalculateCommission.Options.Add(Options);
@@ -6598,6 +6596,7 @@ Procedure StepChangePercentByAmount(Parameters, Chain) Export
 		Options     = ModelClientServer_V2.CalculatePercentByAmountOptions();
 		Options.Commission = GetPaymentsCommission(Parameters, Row.Key);
 		Options.Amount = GetPaymentsAmount(Parameters, Row.Key);
+		Options.DisableNextSteps = True;
 		Options.Key = Row.Key;
 		Options.StepName = "StepChangePercentByAmount";
 		Chain.ChangePercentByAmount.Options.Add(Options);
@@ -7035,12 +7034,16 @@ EndProcedure
 
 Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache)
 	IsChanged = False;
+	DisableNextSteps = False;
 	For Each Result In Results Do
 		_Key   = Result.Options.Key;
 		If ValueIsFilled(ValueDataPath) Then
 			_Value = ?(Result.Value = Undefined, Undefined, Result.Value[ValueDataPath]);
 		Else
 			_Value = Result.Value;
+		EndIf;
+		If Result.Options.DisableNextSteps = True Then
+			DisableNextSteps = True;
 		EndIf;
 		If Source = "Object" And SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Then
 			IsChanged = True;
@@ -7052,7 +7055,7 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 	If IsChanged Or NotifyAnyWay Or Parameters.LoadData.ExecuteAllViewNotify Then
 		AddViewNotify(ViewNotify, Parameters);
 	EndIf;
-	If ValueIsFilled(StepNames) Then
+	If ValueIsFilled(StepNames) And Not DisableNextSteps Then
 		// property is changed and have next steps
 		// or property is ReadInly, call next steps
 		If IsChanged Then

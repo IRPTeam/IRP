@@ -67,6 +67,7 @@ Function GetChainLinkOptions(StrOptions)
 	Options.Insert("Key");
 	Options.Insert("StepName"); // for debug only
 	Options.Insert("DontExecuteIfExecutedBefore", False);
+	Options.Insert("DisableNextSteps", False);
 	Segments = StrSplit(StrOptions, ",");
 	For Each Segment In Segments Do
 		If ValueIsFilled(Segment) Then
@@ -2279,14 +2280,10 @@ EndFunction
 #Region CALCULATE_COMMISSION
 
 Function CalculateCommissionOptions() Export
-	Return GetChainLinkOptions("Amount, Percent, IsUserChange, CurrentCommission");
+	Return GetChainLinkOptions("Amount, Percent");
 EndFunction
 
 Function CalculateCommissionExecute(Options) Export
-	If Options.IsUserChange = True Then
-		Return Options.CurrentCommission;
-	EndIf;
-	
 	Return Options.Amount * Options.Percent / 100;
 EndFunction
 

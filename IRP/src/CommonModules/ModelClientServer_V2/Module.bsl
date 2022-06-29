@@ -203,8 +203,11 @@ Function GetChain()
 	Chain.Insert("CovertQuantityToQuantityInBaseUnit" , GetChainLink("CovertQuantityToQuantityInBaseUnitExecute"));
 	
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
+
+	Chain.Insert("GetCommissionPercent"		, GetChainLink("GetCommissionPercentExecute"));
 	Chain.Insert("CalculateCommission"      , GetChainLink("CalculateCommissionExecute"));
-		
+	Chain.Insert("ChangePercentByAmount"      , GetChainLink("CalculatePercentByAmountExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -2276,11 +2279,39 @@ EndFunction
 #Region CALCULATE_COMMISSION
 
 Function CalculateCommissionOptions() Export
-	Return GetChainLinkOptions("Amount, Percent");
+	Return GetChainLinkOptions("Amount, Percent, IsUserChange, CurrentCommission");
 EndFunction
 
 Function CalculateCommissionExecute(Options) Export
-	Return Options.Amount * Options.Percent;
+	If Options.IsUserChange = True Then
+		Return Options.CurrentCommission;
+	EndIf;
+	
+	Return Options.Amount * Options.Percent / 100;
+EndFunction
+
+#EndRegion
+
+#Region GET_COMMISSION_PERCENT
+
+Function GetCommissionPercentOptions() Export
+	Return GetChainLinkOptions("PaymentType, Account, BankTerm");
+EndFunction
+
+Function GetCommissionPercentExecute(Options) Export
+	Return ModelServer_V2.GetCommissionPercentExecute(Options);
+EndFunction
+
+#EndRegion
+
+#Region CALCULATE_PERCENT_BY_AMOUNT
+
+Function CalculatePercentByAmountOptions() Export
+	Return GetChainLinkOptions("Amount, Commission");
+EndFunction
+
+Function CalculatePercentByAmountExecute(Options) Export
+	Return 100 * Options.Commission / Options.Amount;
 EndFunction
 
 #EndRegion

@@ -3192,6 +3192,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Payments.Account</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>PaymentsAccountOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>PaymentsAccountExtendedTooltip</name>
             <id>801</id>

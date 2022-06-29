@@ -372,4 +372,8 @@ Procedure PaymentsCommissionOnChange(Object, Form, Item, CurrentData = Undefined
 	ViewClient_V2.PaymentsCommissionOnChange(Object, Form, CurrentData);
 EndProcedure
 
+Procedure PaymentsAccountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentsAccountOnChange(Object, Form, CurrentData);
+EndProcedure
+
 #EndRegion

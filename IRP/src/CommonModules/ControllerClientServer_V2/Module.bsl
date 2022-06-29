@@ -6375,6 +6375,12 @@ EndFunction
 Function BindPaymentsPaymentType(Parameters)
 	DataPath = "Payments.PaymentType";
 	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsGetPercent");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsGetPercent");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -6404,6 +6410,47 @@ EndFunction
 Function BindPaymentsBankTerm(Parameters)
 	DataPath = "Payments.BankTerm";
 	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsGetPercent");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsGetPercent");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENTS_ACCOUNT
+
+// Payments.Account.OnChange
+Procedure PaymentsAccountOnChange(Parameters) Export
+	Binding = BindPaymentsAccount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.Account.Set
+Procedure SetPaymentsAccount(Parameters, Results) Export
+	Binding = BindPaymentsAccount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.Account.Get
+Function GetPaymentsAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsAccount(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.Account.Bind
+Function BindPaymentsAccount(Parameters)
+	DataPath = "Payments.Account";
+	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsGetPercent");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsGetPercent");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -6468,6 +6515,12 @@ EndFunction
 Function BindPaymentsCommission(Parameters)
 	DataPath = "Payments.Commission";
 	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepChangePercentByAmount");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepChangePercentByAmount");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -6479,6 +6532,8 @@ Procedure StepPaymentsCalculateCommission(Parameters, Chain) Export
 		Options     = ModelClientServer_V2.CalculateCommissionOptions();
 		Options.Amount = GetPaymentsAmount(Parameters, Row.Key);
 		Options.Percent = GetPaymentsPercent(Parameters, Row.Key);
+		Options.IsUserChange = IsUserChange(Parameters);
+		Options.CurrentCommission = GetPaymentsCommission(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentsCalculateCommission";
 		Chain.CalculateCommission.Options.Add(Options);
@@ -6519,6 +6574,35 @@ Function BindPaymentsPercent(Parameters)
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+// Payments.Percent.GetPercent.Step
+Procedure StepPaymentsGetPercent(Parameters, Chain) Export
+	Chain.GetCommissionPercent.Enable = True;
+	Chain.GetCommissionPercent.Setter = "SetPaymentsPercent";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.GetCommissionPercentOptions();
+		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.Account = GetPaymentsAccount(Parameters, Row.Key);
+		Options.BankTerm = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentsGetPercent";
+		Chain.GetCommissionPercent.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+// Payments.Percent.ChangePercentByAmount.Step
+Procedure StepChangePercentByAmount(Parameters, Chain) Export
+	Chain.ChangePercentByAmount.Enable = True;
+	Chain.ChangePercentByAmount.Setter = "SetPaymentsPercent";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.CalculatePercentByAmountOptions();
+		Options.Commission = GetPaymentsCommission(Parameters, Row.Key);
+		Options.Amount = GetPaymentsAmount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangePercentByAmount";
+		Chain.ChangePercentByAmount.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 

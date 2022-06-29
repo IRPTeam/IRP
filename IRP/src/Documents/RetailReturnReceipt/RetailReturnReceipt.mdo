@@ -1167,6 +1167,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="40bbfe33-81be-40ec-8d3c-d20d709d9bb6">
+      <name>BankTerm</name>
+      <synonym>
+        <key>en</key>
+        <value>Bank term</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BankTerms</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="644488bc-e231-458a-9cca-7f62474c809d">
     <producedTypes>

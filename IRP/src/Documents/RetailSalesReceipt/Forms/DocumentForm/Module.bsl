@@ -441,6 +441,11 @@ Procedure PaymentsCommissionOnChange(Item)
 	DocRetailSalesReceiptClient.PaymentsCommissionOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure PaymentsAccountOnChange(Item)
+	DocRetailSalesReceiptClient.PaymentsAccountOnChange(Object, ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #Region SERVICE

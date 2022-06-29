@@ -2277,11 +2277,31 @@ EndProcedure
 
 // Payments.PaymentType.Set
 Procedure SetPaymentsPaymentType(Object, Form, Row, Value) Export
-	Row.Unit = Value;
+	Row.PaymentType = Value;
 	Rows = GetRowsByCurrentData(Form, "Payments", Row);
 	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
 	Parameters.Insert("IsProgramChange", True);
 	ControllerClientServer_V2.PaymentsPaymentTypeOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_ACCOUNT
+
+// Payments.Account
+Procedure PaymentsAccountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	ControllerClientServer_V2.PaymentsAccountOnChange(Parameters);
+EndProcedure
+
+// Payments.Account.Set
+Procedure SetPaymentsAccount(Object, Form, Row, Value) Export
+	Row.Account = Value;
+	Rows = GetRowsByCurrentData(Form, "Payments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.PaymentsAccountOnChange(Parameters);
 EndProcedure
 
 #EndRegion

@@ -113,11 +113,17 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 												   Parameters.FormTaxColumnsExists, 
 												   Parameters.TaxesCache,
 												   Parameters.LoadData.Address);
+	
+	IsItemList    = Upper("ItemList")    = Upper(ServerParameters.TableName);
+	IsPaymentList = Upper("PaymentList") = Upper(ServerParameters.TableName);
 		
 	Parameters.Insert("ObjectMetadataInfo"     , ServerData.ObjectMetadataInfo);
-	Parameters.Insert("TaxListIsExists"        , ServerData.ObjectMetadataInfo.Tables.Property("TaxList"));
-	Parameters.Insert("SpecialOffersIsExists"  , ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers"));
-	Parameters.Insert("SerialLotNumbersExists" , ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers"));	
+	Parameters.Insert("TaxListIsExists"        , 
+		ServerData.ObjectMetadataInfo.Tables.Property("TaxList") And (IsItemList Or IsPaymentList));
+	Parameters.Insert("SpecialOffersIsExists"  , 
+		ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers") And IsItemList);
+	Parameters.Insert("SerialLotNumbersExists" , 
+		ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") And IsItemList);	
 	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
 	
 	Parameters.LoadData.CountRows                 = ServerData.LoadData.CountRows;
@@ -147,37 +153,40 @@ Function WrapRows(Parameters, Rows) Export
 		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
 		
-		// TaxList
 		ArrayOfRowsTaxList = New Array();
+		TaxRates = New Structure();
+		
+		
 		If Parameters.TaxListIsExists Then
+			// TaxList
 			For Each TaxRow In Parameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
 				NewRowTaxList = New Structure(Parameters.ObjectMetadataInfo.Tables.TaxList.Columns);
 				FillPropertyValues(NewRowTaxList, TaxRow);
 				ArrayOfRowsTaxList.Add(NewRowTaxList);
 			EndDo;
-		EndIf;
 		
-		// TaxRates
-		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			// when there is no form, then there is no column created programmatically
-			If Parameters.FormTaxColumnsExists Then
-				TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
-			Else
-			// create pseudo columns for tax rates
-				NewRow.Insert(ItemOfTaxInfo.Name);
+			// TaxRates
+		
+			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
+				// when there is no form, then there is no column created programmatically
+				If Parameters.FormTaxColumnsExists Then
+					TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
+				Else
+					// create pseudo columns for tax rates
+					NewRow.Insert(ItemOfTaxInfo.Name);
 				
-				// tax rates are taken from the TaxList table
-				TaxRate = Undefined;
-				For Each TaxRow In ArrayOfRowsTaxList Do
-					If TaxRow.Tax = ItemOfTaxInfo.Tax Then
-						TaxRate = TaxRow.TaxRate;
-						Break;
-					EndIf;
-				EndDo;
-				TaxRates.Insert(ItemOfTaxInfo.Name, TaxRate);
-			EndIf;
-		EndDo;
+					// tax rates are taken from the TaxList table
+					TaxRate = Undefined;
+					For Each TaxRow In ArrayOfRowsTaxList Do
+						If TaxRow.Tax = ItemOfTaxInfo.Tax Then
+							TaxRate = TaxRow.TaxRate;
+							Break;
+						EndIf;
+					EndDo;
+					TaxRates.Insert(ItemOfTaxInfo.Name, TaxRate);
+				EndIf;
+			EndDo;
+		EndIf; // TaxListIsExists
 		
 		// SpecialOffers
 		ArrayOfRowsSpecialOffers = New Array();
@@ -5738,6 +5747,23 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_DATE
+
+// ItemList.Date.Set
+Procedure SetItemListDate(Parameters, Results) Export
+	Binding = BindItemListDate(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.Date.Bind
+Function BindItemListDate(Parameters)
+	DataPath = "ItemList.Date";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region ITEM_LIST_IS_SERVICE
 
 // ItemList.IsService.Set
@@ -6341,6 +6367,255 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYMENTS
+
+#Region PAYMENTS_PAYMENT_TYPE
+
+// Payments.PaymentType.OnChange
+Procedure PaymentsPaymentTypeOnChange(Parameters) Export
+	Binding = BindPaymentsPaymentType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.PaymentType.Set
+Procedure SetPaymentsPaymentType(Parameters, Results) Export
+	Binding = BindPaymentsPaymentType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.PaymentType.Get
+Function GetPaymentsPaymentType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsPaymentType(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.PaymentType.Bind
+Function BindPaymentsPaymentType(Parameters)
+	DataPath = "Payments.PaymentType";
+	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsGetPercent");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsGetPercent");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENTS_BANK_TERM
+
+// Payments.BankTerm.OnChange
+Procedure PaymentsBankTermOnChange(Parameters) Export
+	Binding = BindPaymentsBankTerm(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.BankTerm.Set
+Procedure SetPaymentsBankTerm(Parameters, Results) Export
+	Binding = BindPaymentsBankTerm(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.BankTerm.Get
+Function GetPaymentsBankTerm(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsBankTerm(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.BankTerm.Bind
+Function BindPaymentsBankTerm(Parameters)
+	DataPath = "Payments.BankTerm";
+	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsGetPercent");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsGetPercent");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENTS_ACCOUNT
+
+// Payments.Account.OnChange
+Procedure PaymentsAccountOnChange(Parameters) Export
+	Binding = BindPaymentsAccount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.Account.Set
+Procedure SetPaymentsAccount(Parameters, Results) Export
+	Binding = BindPaymentsAccount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.Account.Get
+Function GetPaymentsAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsAccount(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.Account.Bind
+Function BindPaymentsAccount(Parameters)
+	DataPath = "Payments.Account";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENTS_AMOUNT
+
+// Payments.Amount.OnChange
+Procedure PaymentsAmountOnChange(Parameters) Export
+	Binding = BindPaymentsAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.Amount.Set
+Procedure SetPaymentsAmount(Parameters, Results) Export
+	Binding = BindPaymentsAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.Amount.Get
+Function GetPaymentsAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.Amount.Bind
+Function BindPaymentsAmount(Parameters)
+	DataPath = "Payments.Amount";
+	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENTS_COMMISSION
+
+// Payments.Commission.OnChange
+Procedure PaymentsCommissionOnChange(Parameters) Export
+	Binding = BindPaymentsCommission(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.Commission.Set
+Procedure SetPaymentsCommission(Parameters, Results) Export
+	Binding = BindPaymentsCommission(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.Commission.Get
+Function GetPaymentsCommission(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsCommission(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.Commission.Bind
+Function BindPaymentsCommission(Parameters)
+	DataPath = "Payments.Commission";
+	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepChangePercentByAmount");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepChangePercentByAmount");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Payments.Commission.CalculateCommission.Step
+Procedure StepPaymentsCalculateCommission(Parameters, Chain) Export
+	Chain.CalculateCommission.Enable = True;
+	Chain.CalculateCommission.Setter = "SetPaymentsCommission";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.CalculateCommissionOptions();
+		Options.Amount = GetPaymentsAmount(Parameters, Row.Key);
+		Options.Percent = GetPaymentsPercent(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentsCalculateCommission";
+		Chain.CalculateCommission.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_PERCENT
+
+// Payments.Percent.OnChange
+Procedure PaymentsPercentOnChange(Parameters) Export
+	Binding = BindPaymentsPercent(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Payments.Percent.Set
+Procedure SetPaymentsPercent(Parameters, Results) Export
+	Binding = BindPaymentsPercent(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Payments.Percent.Get
+Function GetPaymentsPercent(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentsPercent(Parameters).DataPath, _Key);
+EndFunction
+
+// Payments.Percent.Bind
+Function BindPaymentsPercent(Parameters)
+	DataPath = "Payments.Percent";
+	Binding = New Structure();
+
+	Binding.Insert("RetailSalesReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsCalculateCommission");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Payments.Percent.GetPercent.Step
+Procedure StepPaymentsGetPercent(Parameters, Chain) Export
+	Chain.GetCommissionPercent.Enable = True;
+	Chain.GetCommissionPercent.Setter = "SetPaymentsPercent";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.GetCommissionPercentOptions();
+		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
+		Options.BankTerm = GetPaymentsBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentsGetPercent";
+		Chain.GetCommissionPercent.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+// Payments.Percent.ChangePercentByAmount.Step
+Procedure StepChangePercentByAmount(Parameters, Chain) Export
+	Chain.ChangePercentByAmount.Enable = True;
+	Chain.ChangePercentByAmount.Setter = "SetPaymentsPercent";
+	For Each Row In GetRows(Parameters, "Payments") Do
+		Options     = ModelClientServer_V2.CalculatePercentByAmountOptions();
+		Options.Commission = GetPaymentsCommission(Parameters, Row.Key);
+		Options.Amount = GetPaymentsAmount(Parameters, Row.Key);
+		Options.DisableNextSteps = True;
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangePercentByAmount";
+		Chain.ChangePercentByAmount.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 #Region INVENTORY
 
 #Region INVENTORY_ITEM
@@ -6768,12 +7043,16 @@ EndProcedure
 
 Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache)
 	IsChanged = False;
+	DisableNextSteps = False;
 	For Each Result In Results Do
 		_Key   = Result.Options.Key;
 		If ValueIsFilled(ValueDataPath) Then
 			_Value = ?(Result.Value = Undefined, Undefined, Result.Value[ValueDataPath]);
 		Else
 			_Value = Result.Value;
+		EndIf;
+		If Result.Options.Property("DisableNextSteps") And Result.Options.DisableNextSteps = True Then
+			DisableNextSteps = True;
 		EndIf;
 		If Source = "Object" And SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Then
 			IsChanged = True;
@@ -6785,7 +7064,7 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 	If IsChanged Or NotifyAnyWay Or Parameters.LoadData.ExecuteAllViewNotify Then
 		AddViewNotify(ViewNotify, Parameters);
 	EndIf;
-	If ValueIsFilled(StepNames) Then
+	If ValueIsFilled(StepNames) And Not DisableNextSteps Then
 		// property is changed and have next steps
 		// or property is ReadInly, call next steps
 		If IsChanged Then

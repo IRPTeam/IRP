@@ -67,6 +67,7 @@ Function GetChainLinkOptions(StrOptions)
 	Options.Insert("Key");
 	Options.Insert("StepName"); // for debug only
 	Options.Insert("DontExecuteIfExecutedBefore", False);
+	Options.Insert("DisableNextSteps", False);
 	Segments = StrSplit(StrOptions, ",");
 	For Each Segment In Segments Do
 		If ValueIsFilled(Segment) Then
@@ -204,6 +205,10 @@ Function GetChain()
 	
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
 
+	Chain.Insert("GetCommissionPercent"		, GetChainLink("GetCommissionPercentExecute"));
+	Chain.Insert("CalculateCommission"      , GetChainLink("CalculateCommissionExecute"));
+	Chain.Insert("ChangePercentByAmount"      , GetChainLink("CalculatePercentByAmountExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -2268,6 +2273,42 @@ EndFunction
 
 Function LoadTableExecute(Options) Export
 	Return Options.TableAddress;
+EndFunction
+
+#EndRegion
+
+#Region CALCULATE_COMMISSION
+
+Function CalculateCommissionOptions() Export
+	Return GetChainLinkOptions("Amount, Percent");
+EndFunction
+
+Function CalculateCommissionExecute(Options) Export
+	Return Options.Amount * Options.Percent / 100;
+EndFunction
+
+#EndRegion
+
+#Region GET_COMMISSION_PERCENT
+
+Function GetCommissionPercentOptions() Export
+	Return GetChainLinkOptions("PaymentType, BankTerm");
+EndFunction
+
+Function GetCommissionPercentExecute(Options) Export
+	Return ModelServer_V2.GetCommissionPercentExecute(Options);
+EndFunction
+
+#EndRegion
+
+#Region CALCULATE_PERCENT_BY_AMOUNT
+
+Function CalculatePercentByAmountOptions() Export
+	Return GetChainLinkOptions("Amount, Commission");
+EndFunction
+
+Function CalculatePercentByAmountExecute(Options) Export
+	Return 100 * Options.Commission / Options.Amount;
 EndFunction
 
 #EndRegion

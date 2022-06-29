@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -405,6 +406,45 @@ Procedure SpecialOffersEditFinish_ForRow(Result, AdditionalParameters) Export
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region PAYMENT_TYPE
+
+&AtClient
+Procedure PaymentsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocRetailSalesReceiptClient.PaymentsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure PaymentsPaymentTypeOnChange(Item)
+	DocRetailSalesReceiptClient.PaymentsPaymentTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentsBankTermOnChange(Item)
+	DocRetailSalesReceiptClient.PaymentsBankTermOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentsAmountOnChange(Item)
+	DocRetailSalesReceiptClient.PaymentsAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentsPercentOnChange(Item)
+	DocRetailSalesReceiptClient.PaymentsPercentOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentsCommissionOnChange(Item)
+	DocRetailSalesReceiptClient.PaymentsCommissionOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentsAccountOnChange(Item)
+	DocRetailSalesReceiptClient.PaymentsAccountOnChange(Object, ThisObject, Item);
+EndProcedure
 
 #EndRegion
 

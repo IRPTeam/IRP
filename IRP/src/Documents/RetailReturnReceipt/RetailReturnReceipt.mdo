@@ -1069,6 +1069,19 @@
       <key>en</key>
       <value>Payments</value>
     </synonym>
+    <attributes uuid="d784e488-f54d-443f-95c7-354dc93e6271">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
     <attributes uuid="3901ed25-3556-46ec-8584-ff3205d455a8">
       <name>PaymentType</name>
       <synonym>

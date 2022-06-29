@@ -42,12 +42,10 @@ Function GetCommissionPercentExecute(Options) Export
 		|	Catalog.BankTerms.PaymentTypes AS BankTermsPaymentTypes
 		|WHERE
 		|	BankTermsPaymentTypes.Ref = &Ref
-		|	AND BankTermsPaymentTypes.PaymentType = &PaymentType
-		|	AND BankTermsPaymentTypes.Account = &Account";
+		|	AND BankTermsPaymentTypes.PaymentType = &PaymentType";
 	
 	Query.SetParameter("Ref", Options.BankTerm);
 	Query.SetParameter("PaymentType", Options.PaymentType);
-	Query.SetParameter("Account", Options.Account);
 	
 	QueryResult = Query.Execute();
 	

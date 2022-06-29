@@ -2292,7 +2292,7 @@ EndFunction
 #Region GET_COMMISSION_PERCENT
 
 Function GetCommissionPercentOptions() Export
-	Return GetChainLinkOptions("PaymentType, Account, BankTerm");
+	Return GetChainLinkOptions("PaymentType, BankTerm");
 EndFunction
 
 Function GetCommissionPercentExecute(Options) Export

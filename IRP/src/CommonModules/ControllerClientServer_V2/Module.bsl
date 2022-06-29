@@ -6445,13 +6445,6 @@ EndFunction
 Function BindPaymentsAccount(Parameters)
 	DataPath = "Payments.Account";
 	Binding = New Structure();
-
-	Binding.Insert("RetailSalesReceipt", 
-		"StepPaymentsGetPercent");
-	
-	Binding.Insert("RetailReturnReceipt", 
-		"StepPaymentsGetPercent");
-	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -6580,7 +6573,6 @@ Procedure StepPaymentsGetPercent(Parameters, Chain) Export
 	For Each Row In GetRows(Parameters, "Payments") Do
 		Options     = ModelClientServer_V2.GetCommissionPercentOptions();
 		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
-		Options.Account = GetPaymentsAccount(Parameters, Row.Key);
 		Options.BankTerm = GetPaymentsBankTerm(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentsGetPercent";

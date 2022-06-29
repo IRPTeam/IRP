@@ -4823,6 +4823,24 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>DocRef</name>
+    <title>
+      <key>en</key>
+      <value>Doc ref</value>
+    </title>
+    <id>177</id>
+    <valueType>
+      <types>DocumentRef.RetailReturnReceipt</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>qPayment</name>
     <title>

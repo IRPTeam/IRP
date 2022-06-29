@@ -191,7 +191,7 @@ EndProcedure
 
 #Region EventHandlers
 
-Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
 	Notify("LockLinkedRows", WriteParameters, Form);	
 EndProcedure
 

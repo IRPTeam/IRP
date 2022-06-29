@@ -145,9 +145,10 @@ Function GetChain()
 	Chain.Insert("ChangeAccountSenderByCompany"  , GetChainLink("ChangeCashAccountByCompanyExecute"));
 	Chain.Insert("ChangeAccountReceiverByCompany", GetChainLink("ChangeCashAccountByCompanyExecute"));
 	
-	Chain.Insert("ChangeTransitAccountByAccount", GetChainLink("ChangeTransitAccountByAccountExecute"));
-	Chain.Insert("ChangeCashAccountByCurrency"  , GetChainLink("ChangeCashAccountByCurrencyExecute"));
-	Chain.Insert("ChangeCashAccountByPartner"   , GetChainLink("ChangeCashAccountByPartnerExecute"));
+	Chain.Insert("ChangeTransitAccountByAccount"    , GetChainLink("ChangeTransitAccountByAccountExecute"));
+	Chain.Insert("ChangeReceiptingAccountByAccount" , GetChainLink("ChangeReceiptingAccountByAccountExecute"));
+	Chain.Insert("ChangeCashAccountByCurrency"      , GetChainLink("ChangeCashAccountByCurrencyExecute"));
+	Chain.Insert("ChangeCashAccountByPartner"       , GetChainLink("ChangeCashAccountByPartnerExecute"));
 	
 	Chain.Insert("FillByPTBBankReceipt" , GetChainLink("FillByPTBBankReceiptExecute"));
 	Chain.Insert("FillByPTBCashReceipt" , GetChainLink("FillByPTBCashReceiptExecute"));
@@ -161,6 +162,7 @@ Function GetChain()
 	Chain.Insert("ChangeProcurementMethodByItemKey" , GetChainLink("ChangeProcurementMethodByItemKeyExecute"));
 	
 	Chain.Insert("ChangeCurrencyByAccount", GetChainLink("ChangeCurrencyByAccountExecute"));
+	Chain.Insert("ChangeIsFixedCurrencyByAccount", GetChainLink("ChangeIsFixedCurrencyByAccountExecute"));
 	Chain.Insert("ChangePlanningTransactionBasisByCurrency", GetChainLink("ChangePlanningTransactionBasisByCurrencyExecute"));
 	Chain.Insert("FillStoresInList"       , GetChainLink("FillStoresInListExecute"));
 	Chain.Insert("FillDeliveryDateInList" , GetChainLink("FillDeliveryDateInListExecute"));
@@ -335,6 +337,23 @@ Function ChangeTransitAccountByAccountExecute(Options) Export
 		Return TransitAccount;
 	EndIf;
 	Return Options.CurrentTransitAccount;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_RECEIPTING_ACCOUNT_BY_ACCOUNT
+
+Function ChangeReceiptingAccountByAccountOptions() Export
+	Return GetChainLinkOptions("Account, CurrentReceiptingAccount");
+EndFunction
+
+Function ChangeReceiptingAccountByAccountExecute(Options) Export
+	ReceiptingAccount = ServiceSystemServer.GetObjectAttribute(Options.Account, "ReceiptingAccount");
+	
+	If ValueIsFilled(ReceiptingAccount) Then
+		Return ReceiptingAccount;
+	EndIf;
+	Return Options.CurrentReceiptingAccount;
 EndFunction
 
 #EndRegion
@@ -638,6 +657,22 @@ Function ChangeCurrencyByAgreementExecute(Options) Export
 		Return AgreementInfo.Currency;
 	EndIf;
 	Return Options.CurrentCurrency;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_IS_FEXED_CURRENCY_BY_ACCOUNT
+
+Function ChangeIsFixedCurrencyByAccountOptions() Export
+	Return GetChainLinkOptions("Account");
+EndFunction
+
+Function ChangeIsFixedCurrencyByAccountExecute(Options) Export
+	If Not ValueIsFilled(Options.Account) Then
+		Return False;
+	EndIf;
+	Currency = ServiceSystemServer.GetObjectAttribute(Options.Account, "Currency");
+	Return ValueIsFilled(Currency);
 EndFunction
 
 #EndRegion
@@ -1924,7 +1959,10 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|LegalNameContract,
 		|BasisDocument,
 		|PlanningTransactionBasis,
-		|Order");
+		|Order,
+		|PaymentType,
+		|PaymentTerminal,
+		|BankTerm");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
@@ -1937,11 +1975,15 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("BasisDocument"            , Options.BasisDocument);
 	Result.Insert("PlanningTransactionBasis" , Options.PlanningTransactionBasis);
 	Result.Insert("Order"                    , Options.Order);
+	Result.Insert("PaymentType"              , Options.PaymentType);
+	Result.Insert("PaymentTerminal"          , Options.PaymentTerminal);
+	Result.Insert("BankTerm"                 , Options.BankTerm);
 	
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
 	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
+	Outgoing_ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -1950,12 +1992,22 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
 		StrByType = "
 		|TransitAccount"; 
-	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
+	ElsIf Options.TransactionType = Outgoing_PaymentToVendor 
+		Or Options.TransactionType = Outgoing_ReturnToCustomer
+		Or Options.TransactionType = Outgoing_ReturnToCustomerByPOS Then
+		
 		StrByType = "
 		|Partner,
 		|Agreement,
 		|Payee,
 		|LegalNameContract";
+		
+		If Options.TransactionType = Outgoing_ReturnToCustomerByPOS Then
+			StrByType = StrByType + ", 
+			|PaymentType,
+			|PaymentTerminal,
+			|BankTerm";
+		EndIf;
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -1988,7 +2040,11 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|PlanningTransactionBasis,
 		|Order,
 		|AmountExchange,
-		|POSAccount");
+		|POSAccount,
+		|PaymentType,
+		|PaymentTerminal,
+		|BankTerm,
+		|CommissionIsSeparate");
 EndFunction
 
 Function ClearByTransactionTypeBankReceiptExecute(Options) Export
@@ -2004,12 +2060,17 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("Order"                    , Options.Order);
 	Result.Insert("AmountExchange"           , Options.AmountExchange);
 	Result.Insert("POSAccount"               , Options.POSAccount);
+	Result.Insert("PaymentType"              , Options.PaymentType);
+	Result.Insert("PaymentTerminal"          , Options.PaymentTerminal);
+	Result.Insert("BankTerm"                 , Options.BankTerm);
+	Result.Insert("CommissionIsSeparate"     , Options.CommissionIsSeparate);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
 	Incoming_PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
 	Incoming_ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
 	Incoming_TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
+	Incoming_PaymentFromCustomerByPOS = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -2020,15 +2081,26 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|TransitAccount, 
 		|CurrencyExchange,
 		|AmountExchange";
-	ElsIf Options.TransactionType = Incoming_PaymentFromCustomer Or Options.TransactionType = Incoming_ReturnFromVendor Then
+	ElsIf Options.TransactionType = Incoming_PaymentFromCustomer 
+		Or Options.TransactionType = Incoming_ReturnFromVendor 
+		Or Options.TransactionType = Incoming_PaymentFromCustomerByPOS Then
+		
 		StrByType = "
 		|Partner,
 		|Agreement,
 		|Payer,
 		|LegalNameContract";
+		
+		If Options.TransactionType = Incoming_PaymentFromCustomerByPOS Then
+			StrByType = StrByType + ", 
+			|PaymentType,
+			|PaymentTerminal,
+			|BankTerm";
+		EndIf;
 	ElsIf Options.TransactionType = Incoming_TransferFromPOS Then
 		StrByType = "
-		|PaymentList.POSAccount";
+		|POSAccount,
+		|CommissionIsSeparate";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();

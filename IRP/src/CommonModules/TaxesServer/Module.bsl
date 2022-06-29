@@ -653,9 +653,50 @@ Function GetArrayOfTaxInfo(Object, Form)
 	TaxesCache.Insert("Date"    , Object.Date);
 	TaxesCache.Insert("Company" , Object.Company);
 
-	ParametersToServer = New Structure("TaxesCache", TaxesCache);
-	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	Return ServerData.ArrayOfTaxInfo;	
+	Parameters = New Structure("TaxesCache", TaxesCache);
+	Result = GetFromTaxesCache(Parameters);
+	
+	Return Result.ArrayOfTaxInfo;
+EndFunction
+
+Function GetFromTaxesCache(Parameters)
+	Result = New Structure();
+	ArrayOfTaxInfo = New Array();
+
+	If ValueIsFilled(Parameters.TaxesCache.Cache) Then
+
+		ArrayOfTaxesInCache = New Array();
+
+		ArrayOfTaxes = New Array();
+
+		DocumentName = Parameters.TaxesCache.Ref.Metadata().Name;
+		ArrayOfAllTaxes = TaxesServer.GetTaxesByCompany(Parameters.TaxesCache.Date, Parameters.TaxesCache.Company);
+		For Each ItemOfAllTaxes In ArrayOfAllTaxes Do
+			If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
+				ArrayOfTaxes.Add(ItemOfAllTaxes.Tax);
+			EndIf;
+		EndDo;
+
+		AllTaxesInCache = True;
+		For Each ItemOfTaxes In ArrayOfTaxes Do
+			If ArrayOfTaxesInCache.Find(ItemOfTaxes) = Undefined Then
+				AllTaxesInCache = False;
+				Break;
+			EndIf;
+		EndDo;
+		If AllTaxesInCache Then
+			For Each ItemOfTaxesInCache In ArrayOfTaxesInCache Do
+				If ArrayOfTaxes.Find(ItemOfTaxesInCache) = Undefined Then
+					AllTaxesInCache = False;
+					Break;
+				EndIf;
+			EndDo;
+		EndIf;
+
+	EndIf;
+
+	Result.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
+	Return Result;
 EndFunction
 
 Function GetCreateFormControlsParameters() Export

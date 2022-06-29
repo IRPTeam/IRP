@@ -29,7 +29,7 @@ EndProcedure
 #Region ItemLegalName
 
 Procedure LegalNameOnChange(Object, Form, Item = Undefined) Export
-	DocumentsClient.LegalNameOnChange(Object, Form, ThisObject, Item);
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

@@ -1,13 +1,14 @@
-#Region FormEvents
+#Region FORM
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	DocCashStatementServer.AfterWriteAtServer(Object, CurrentObject, WriteParameters);
+	DocCashStatementServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
+	DocCashStatementServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -49,6 +50,102 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.DataPeriod.StartDate = Object.BegOfPeriod;
+	Form.DataPeriod.EndDate = Object.EndOfPeriod;
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST
+
+&AtClient
+Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocCashStatementClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);	
+EndProcedure
+
+#Region PAYMENT_LIST_COLUMNS
+
+&AtClient
+Procedure PaymentsAccountOnChange(Item)
+	DocCashStatementClient.PaymentListAccountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region ItemFormEvents
+
+&AtClient
+Procedure DataPeriodOnChange(Item)
+	DocCashStatementClient.DataPeriodOnChange(Object, DataPeriod);
+EndProcedure
+
+&AtClient
+Procedure StatusOnChange(Item)
+	DocCashStatementClient.StatusOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	DocCashStatementClient.CompanyOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashStatementClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocCashStatementClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure BranchOnChange(Item)
+	DocCashStatementClient.BranchOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocCashStatementClient.DateOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure NumberOnChange(Item)
+	DocCashStatementClient.NumberOnChange(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure FillTransactions(Command)
+	FillTransactionsAtServer();
+EndProcedure
+
+&AtServer
+Procedure FillTransactionsAtServer()
+	DocCashStatementServer.FillTransactions(Object);
+EndProcedure
+
+&AtClient
+Procedure BasisDocumentOnChange(Item)
+	BasisDocumentOnChangeAtServer();
+EndProcedure
+
+&AtServer
+Procedure BasisDocumentOnChangeAtServer()
+	DocCashStatementServer.FillOnBasisDocument(Object);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashStatementClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashStatementClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
+		StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -111,77 +208,6 @@ EndProcedure
 &AtServer
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-#EndRegion
-
-#Region ItemFormEvents
-
-&AtClient
-Procedure DataPeriodOnChange(Item)
-	DocCashStatementClient.DataPeriodOnChange(Object, DataPeriod);
-EndProcedure
-
-&AtClient
-Procedure StatusOnChange(Item)
-	DocCashStatementClient.StatusOnChange(ThisObject);
-EndProcedure
-
-&AtClient
-Procedure CompanyOnChange(Item)
-	DocCashStatementClient.CompanyOnChange(ThisObject);
-EndProcedure
-
-&AtClient
-Procedure BranchOnChange(Item)
-	DocCashStatementClient.BranchOnChange(ThisObject);
-EndProcedure
-
-&AtClient
-Procedure DateOnChange(Item)
-	DocCashStatementClient.DateOnChange(ThisObject);
-EndProcedure
-
-&AtClient
-Procedure NumberOnChange(Item)
-	DocCashStatementClient.NumberOnChange(ThisObject);
-EndProcedure
-
-&AtClient
-Procedure FillTransactions(Command)
-	FillTransactionsAtServer();
-EndProcedure
-
-&AtServer
-Procedure FillTransactionsAtServer()
-	DocCashStatementServer.FillTransactions(Object);
-EndProcedure
-
-&AtClient
-Procedure BasisDocumentOnChange(Item)
-	BasisDocumentOnChangeAtServer();
-EndProcedure
-
-&AtServer
-Procedure BasisDocumentOnChangeAtServer()
-	DocCashStatementServer.FillOnBasisDocument(Object);
-EndProcedure
-
-&AtClient
-Procedure PaymentListOnChange(Item, AddInfo = Undefined) Export
-	Return;
-EndProcedure
-
-&AtClient
-Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashStatementClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocCashStatementClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
-		StandardProcessing);
 EndProcedure
 
 #EndRegion

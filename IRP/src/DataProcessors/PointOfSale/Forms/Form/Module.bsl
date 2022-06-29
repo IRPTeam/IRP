@@ -304,7 +304,7 @@ EndProcedure
 &AtClient
 Procedure SearchCustomer(Command)
 	Notify = New NotifyDescription("SetRetailCustomer", ThisObject);
-	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), , , ,
+	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), ThisObject, , ,
 		, Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -495,10 +495,13 @@ Procedure PaymentFormClose(Result, AdditionalData) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	
 	CashbackAmount = WriteTransaction(Result);
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
-
+	
+	DPPointOfSaleClient.BeforeStartNewTransaction(Object, ThisObject, DocRef);
+	
 	NewTransaction();
 	Modified = False;
 EndProcedure

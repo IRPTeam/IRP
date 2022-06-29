@@ -36,4 +36,8 @@ Procedure PrintLastReceipt(Object, Cancel, AddInfo = Undefined) Export
 
 EndProcedure
 
+Procedure BeforeStartNewTransaction(Object, Form, DocRef) Export
+	Return;
+EndProcedure
+
 #EndRegion

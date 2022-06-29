@@ -184,7 +184,7 @@ EndFunction
 
 // returns list of Table attributes for get value before the change
 Function GetListPropertyNamesBeforeChange()
-	Return "ItemList.Store, ItemList.DeliveryDate, ItemList.ItemKey";
+	Return "ItemList.Store, ItemList.DeliveryDate, ItemList.ItemKey, Inventory.ItemKey";
 EndFunction
 
 // returns list of Form attributes for get value before the change
@@ -797,10 +797,12 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
 		Parameters.Form.UpdateTotalAmounts();
 	EndIf;
-	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form); 
+	 
 	If Parameters.Form.IsCopyingInteractive Then
 		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CurrentDate());
 	EndIf;
+	
+	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 EndProcedure
 
 #EndRegion
@@ -810,6 +812,102 @@ EndProcedure
 Procedure FormModificator_CreateTaxesFormControls(Parameters) Export
 	Parameters.Form.Taxes_CreateFormControls();
 EndProcedure
+
+#EndRegion
+
+#Region INVENTORY
+
+Function InventoryBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Inventory", Cancel, Clone, CurrentData,
+		"InventoryOnAddRowFormNotify", "InventoryOnCopyRowFormNotify");
+	Form.Items.Inventory.CurrentRow = NewRow.GetID();
+	Form.Items.Inventory.ChangeRow();
+	Return NewRow;
+EndFunction
+
+Procedure InventoryOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure InventoryOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure InventoryAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "Inventory");
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_COLUMNS
+
+#Region INVENTORY_ITEM
+
+// Inventory.Item
+Procedure InventoryItemOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Inventory", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Inventory", Rows);
+	ControllerClientServer_V2.InventoryItemOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_ITEM_KEY
+
+// Inventory.ItemKey
+Procedure InventoryItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Inventory", CurrentData);
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_List("Inventory.ItemKey", FormParameters, Rows);
+	
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "Inventory";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.InventoryItemKeyOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region ACCOUNT_BALANCE
+
+Function AccountBalanceBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "AccountBalance", Cancel, Clone, CurrentData,
+		"AccountBalanceOnAddRowFormNotify", "AccountBalanceOnCopyRowFormNotify");
+	Form.Items.AccountBalance.CurrentRow = NewRow.GetID();
+	Form.Items.AccountBalance.ChangeRow();
+	Return NewRow;
+EndFunction
+
+Procedure AccountBalanceOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure AccountBalanceOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure AccountBalanceAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "Inventory");
+EndProcedure
+
+#EndRegion
+
+#Region ACCOUNT_BALANCE_COLUMNS
+
+#Region ACCOUNT_BALANCE_ACCOUNT
+
+// AccountBalance.Account
+Procedure AccountBalanceAccountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "AccountBalance", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "AccountBalance", Rows);
+	ControllerClientServer_V2.AccountBalanceAccountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 
@@ -1322,6 +1420,13 @@ Procedure PaymentListLegalNameOnChange(Object, Form, CurrentData = Undefined) Ex
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	ControllerClientServer_V2.PaymentListLegalNameOnChange(Parameters);
+EndProcedure
+
+// PaymentList.Account
+Procedure PaymentListAccountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListAccountOnChange(Parameters);
 EndProcedure
 
 // PaymentList.BasisDocument

@@ -179,8 +179,15 @@ Scenario: _207001 copy additional attribute values when create catalog element
 		Then the form attribute named "Description_en" became equal to "Partner 01 (clone2)"
 		And I click "Save and close" button
 	And I close all client application windows
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "VAExtension" |
+			When add VAExtension
 
 Scenario: _207002 copy additional attribute values when create document
+	And I close all client application windows
 	* Additional attributes settings
 		* Opening the form for adding additional attributes for BankReceipt
 			Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
@@ -208,6 +215,8 @@ Scenario: _207002 copy additional attribute values when create document
 			And I finish line editing in "Attributes" table
 			And I input "Bank receipt" text in the field named "Description_en"
 			And I click "Save and close" button
+			And I execute the built-in language code (Extension)
+ 				| "RefreshReusableValues()" |
 	* Create test Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
@@ -289,6 +298,8 @@ Scenario: _207002 copy additional attribute values when create document
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I click "Save and close" button
+		And I execute the built-in language code (Extension)
+ 			| "RefreshReusableValues()" |
 	* Check filling in additional attributes from user settings when clone document
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table

@@ -56,7 +56,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.LegalNameContract,
 	|PaymentList.BasisDocument,
 	|PaymentList.PlaningTransactionBasis,
-	|PaymentList.Order";
+	|PaymentList.Order,
+	|PaymentList.PaymentType,
+	|PaymentList.PaymentTerminal,
+	|PaymentList.BankTerm";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -67,6 +70,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
 	PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
+	ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -74,7 +78,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ElsIf TransactionType = CurrencyExchange Then
 		StrByType = "TransitAccount, 
 		|PaymentList.PlaningTransactionBasis";
-	ElsIf TransactionType = PaymentToVendor Or TransactionType = ReturnToCustomer Then
+	ElsIf TransactionType = PaymentToVendor 
+		Or TransactionType = ReturnToCustomer
+		Or TransactionType = ReturnToCustomerByPOS Then
 		StrByType = "
 		|PaymentList.BasisDocument,
 		|PaymentList.Partner,
@@ -85,6 +91,13 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		If TransactionType = PaymentToVendor Then
 			StrByType = StrByType + ", PaymentList.Order";
 		EndIf;
+		
+		If TransactionType = ReturnToCustomerByPOS Then
+			StrByType = StrByType + ", 
+			|PaymentList.PaymentType,
+			|PaymentList.PaymentTerminal,
+			|PaymentList.BankTerm";
+		EndIf;		
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();

@@ -16,14 +16,17 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	If ValueIsFilled(Object.Currency) Or Object.Type = Enums.CashAccountTypes.Bank Then
+	
+	If Parameters.Property("CurrencyType") Then
+		ThisObject.CurrencyType = Parameters.CurrencyType;
+	ElsIf ValueIsFilled(Object.Currency) 
+		Or Object.Type = Enums.CashAccountTypes.Bank
+		Or Object.Type = Enums.CashAccountTypes.POS Then
 		ThisObject.CurrencyType = "Fixed";
 	Else
 		ThisObject.CurrencyType = "Multi";
 	EndIf;
-	If Parameters.Property("CurrencyType") Then
-		CurrencyType = Parameters.CurrencyType;
-	EndIf;
+	
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	
 	If Not FOServer.IsUseBankDocuments() Then
@@ -39,11 +42,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			Items.Type.ChoiceList.Delete(ArrayItem);
 		EndDo;
 	EndIf;
-EndProcedure
-
-&AtClient
-Procedure OnOpen(Cancel)
-	CatCashAccountsClient.SetItemsBehavior(Object, ThisObject);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -58,11 +57,38 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	EndIf;
 EndProcedure
 
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	IsBankAccount    = Object.Type = PredefinedValue("Enum.CashAccountTypes.Bank");
+	IsPOSAccount     = Object.Type = PredefinedValue("Enum.CashAccountTypes.POS");		
+	IsTransitAccount = Object.Type = PredefinedValue("Enum.CashAccountTypes.Transit");
+	
+	Form.Items.BankName.Visible       = IsBankAccount Or IsPOSAccount;
+	Form.Items.Number.Visible         = IsBankAccount Or IsPOSAccount;
+	Form.Items.TransitAccount.Visible = IsBankAccount;
+	Form.Items.CurrencyType.ReadOnly  = IsBankAccount Or IsPOSAccount Or IsTransitAccount;
+	Form.Items.ReceiptingAccount.Visible    = IsPOSAccount;
+	Form.Items.CommissionIsSeparate.Visible = IsBankAccount;
+	
+	If Form.CurrencyType = "Fixed" Then
+		Form.Items.Currency.Visible = True;
+		Form.Items.Currency.AutoMarkIncomplete = True;
+	Else
+		Form.Items.Currency.Visible = False;
+		Form.Items.Currency.AutoMarkIncomplete = False;
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 #EndRegion
 
 &AtClient
 Procedure CurrencyTypeOnChange(Item)
-	CatCashAccountsClient.SetItemsBehavior(Object, ThisObject);
+	SetVisibilityAvailability(Object, ThisObject);
 	If Not ThisObject.CurrencyType = "Fixed" Then
 		Object.Currency = Undefined;
 	EndIf;
@@ -91,6 +117,28 @@ Procedure TransitAccountEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure ReceiptingAccountStartChoice(Item, ChoiceData, StandardProcessing)
+	StandardProcessing = False;
+	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
+	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
+	Filter = DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Bank"), ,
+		DataCompositionComparisonType.Equal);
+	StartChoiceParameters.CustomParameters.Filters.Add(Filter);
+	StartChoiceParameters.FillingData.Insert("Type", PredefinedValue("Enum.CashAccountTypes.Bank"));
+	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, ThisObject.UUID, , ThisObject.URL);
+EndProcedure
+
+&AtClient
+Procedure ReceiptingAccountEditTextChange(Item, Text, StandardProcessing)
+	DefaultEditTextParameters = New Structure("Company", Object.Company);
+	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
+	Filter = DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Bank"),
+		ComparisonType.Equal);
+	EditTextParameters.Filters.Add(Filter);
+	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
+EndProcedure
+
+&AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
@@ -98,7 +146,7 @@ EndProcedure
 &AtClient
 Procedure TypeOnChange(Item)
 	CatCashAccountsClient.TypeOnChange(Object, ThisObject, Item);
-	CatCashAccountsClient.SetItemsBehavior(Object, ThisObject);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #Region AddAttributes

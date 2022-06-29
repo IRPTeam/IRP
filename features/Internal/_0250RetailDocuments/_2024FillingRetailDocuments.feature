@@ -1685,7 +1685,7 @@ Scenario:  _0154149 create Cash statement
 			And I select current line in "List" table
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
-			And I input "01.09.2020 12:50:00" text in "Date" field
+			And I input "01.09.2020 23:59:59" text in "Date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberRetailSalesReceipt01541492$$" variable
 			And I delete "$$RetailSalesReceipt01541492$$" variable
@@ -1960,7 +1960,7 @@ Scenario:  _0154149 create Cash statement
 			And I input "12,90" text in "Commission" field of "Payments" table
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
-			And I input "01.09.2020 00:00:00" text in "Date" field
+			And I input "01.09.2020 23:59:59" text in "Date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberRetailSalesReceipt01541495$$" variable
 			And I delete "$$RetailSalesReceipt01541495$$" variable

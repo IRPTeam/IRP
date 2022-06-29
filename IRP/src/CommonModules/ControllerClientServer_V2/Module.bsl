@@ -5747,6 +5747,23 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_DATE
+
+// ItemList.Date.Set
+Procedure SetItemListDate(Parameters, Results) Export
+	Binding = BindItemListDate(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.Date.Bind
+Function BindItemListDate(Parameters)
+	DataPath = "ItemList.Date";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region ITEM_LIST_IS_SERVICE
 
 // ItemList.IsService.Set
@@ -7034,7 +7051,7 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 		Else
 			_Value = Result.Value;
 		EndIf;
-		If Result.Options.DisableNextSteps = True Then
+		If Result.Options.Property("DisableNextSteps") And Result.Options.DisableNextSteps = True Then
 			DisableNextSteps = True;
 		EndIf;
 		If Source = "Object" And SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Then

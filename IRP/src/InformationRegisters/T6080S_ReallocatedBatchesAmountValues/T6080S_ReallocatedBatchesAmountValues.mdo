@@ -1,102 +1,150 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="62f55529-bae4-4e6c-aad6-03ef9ae38939">
-  <producedTypes>
-    <selectionType typeId="07f092e6-27fd-40b0-bdb3-109673730cd1" valueTypeId="880d959d-d80c-49a5-a03c-82d1e8cffd36"/>
-    <listType typeId="917d8477-1f7a-4a21-a07c-79ebcac69001" valueTypeId="98e13219-2cd6-4d4e-b440-ce8261a409dc"/>
-    <managerType typeId="aebc6dd2-2f19-403e-aa09-b08f5c189f2b" valueTypeId="db14b44e-fea2-4fb5-9dfb-884fca6af3a5"/>
-    <recordSetType typeId="7381577e-8600-4c04-8b3b-b5a17c80301b" valueTypeId="2311c53f-2143-4050-ae23-215d1bbfa548"/>
-    <recordKeyType typeId="132b76bc-b0d0-41f4-af24-84193fb85471" valueTypeId="1243784f-3ed9-4131-9957-ad3fe0673ce0"/>
-    <recordType typeId="0eb3a9c9-0b24-4a6b-aa23-d0ec258fbc54" valueTypeId="ef32987b-f5ae-45bb-8275-2389f002a785"/>
-    <recordManagerType typeId="023d1214-501c-44ce-89ed-b7e0ea3b0fa1" valueTypeId="cb94dc37-385f-4c53-95d2-7c05ddf8a1d8"/>
-  </producedTypes>
-  <name>T6080S_ReallocatedBatchesAmountValues</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="62f55529-bae4-4e6c-aad6-03ef9ae38939">
+ <producedTypes>
+  <selectionType typeId="07f092e6-27fd-40b0-bdb3-109673730cd1" valueTypeId="880d959d-d80c-49a5-a03c-82d1e8cffd36"/>
+  <listType typeId="917d8477-1f7a-4a21-a07c-79ebcac69001" valueTypeId="98e13219-2cd6-4d4e-b440-ce8261a409dc"/>
+  <managerType typeId="aebc6dd2-2f19-403e-aa09-b08f5c189f2b" valueTypeId="db14b44e-fea2-4fb5-9dfb-884fca6af3a5"/>
+  <recordSetType typeId="7381577e-8600-4c04-8b3b-b5a17c80301b" valueTypeId="2311c53f-2143-4050-ae23-215d1bbfa548"/>
+  <recordKeyType typeId="132b76bc-b0d0-41f4-af24-84193fb85471" valueTypeId="1243784f-3ed9-4131-9957-ad3fe0673ce0"/>
+  <recordType typeId="0eb3a9c9-0b24-4a6b-aa23-d0ec258fbc54" valueTypeId="ef32987b-f5ae-45bb-8275-2389f002a785"/>
+  <recordManagerType typeId="023d1214-501c-44ce-89ed-b7e0ea3b0fa1" valueTypeId="cb94dc37-385f-4c53-95d2-7c05ddf8a1d8"/>
+ </producedTypes>
+ <name>T6080S_ReallocatedBatchesAmountValues</name>
+ <synonym>
+  <key>tr</key>
+  <value>T6080 Tranfer edilen malzeme partilerin tutar değerleri</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>T6080 Reallocated batches amount values</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T6080 Значения сумм перемещенных партий товаров</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="a3175003-5d67-4333-b65e-54612d9f684d">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>T6080 Reallocated batches amount values</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="a3175003-5d67-4333-b65e-54612d9f684d">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="e3f0555f-181c-4db5-bf98-288829598617">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="5cd8efa9-c3a5-4d58-a217-89b3ce627e4f">
-    <name>OutgoingDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Outgoing document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.BatchReallocateOutgoing</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="9597e956-d3f5-4669-8f17-853cf7554755">
-    <name>IncomingDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Incoming document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.BatchReallocateIncoming</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="7216dd47-3b77-4051-a393-5cd735e090bb">
-    <name>BatchKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BatchKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма оплаты</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="e3f0555f-181c-4db5-bf98-288829598617">
+  <name>Quantity</name>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Количество</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="5cd8efa9-c3a5-4d58-a217-89b3ce627e4f">
+  <name>OutgoingDocument</name>
+  <synonym>
+   <key>tr</key>
+   <value>Çıkış evrakı</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Outgoing document</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Исходящий документ</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.BatchReallocateOutgoing</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="9597e956-d3f5-4669-8f17-853cf7554755">
+  <name>IncomingDocument</name>
+  <synonym>
+   <key>tr</key>
+   <value>Gelen evrak</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Incoming document</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Входящий документ</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.BatchReallocateIncoming</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="7216dd47-3b77-4051-a393-5cd735e090bb">
+  <name>BatchKey</name>
+  <synonym>
+   <key>tr</key>
+   <value>Parti anahtarı</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Batch key</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ партии</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BatchKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

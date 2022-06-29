@@ -1,24 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7431c75c-3571-4986-8a9b-a9e296aea714">
-  <name>UseRetail</name>
-  <synonym>
-    <key>en</key>
-    <value>Use retail</value>
-  </synonym>
-  <location>Constant.UseRetail</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>DataProcessor.PointOfSale</content>
-  <content>Document.CashStatement</content>
-  <content>Catalog.CashStatementStatuses</content>
-  <content>Catalog.PaymentTerminals</content>
-  <content>Catalog.RetailCustomers</content>
-  <content>Document.RetailReturnReceipt</content>
-  <content>AccumulationRegister.R2050T_RetailSales</content>
-  <content>Document.RetailSalesReceipt</content>
-  <content>InformationRegister.RetailWorkers</content>
-  <content>AccumulationRegister.R3050T_PosCashBalances</content>
-  <content>Catalog.BankTerms</content>
-  <content>InformationRegister.BranchBankTerms</content>
-  <content>Catalog.PaymentTypes</content>
-  <content>Enum.PaymentTypes</content>
+ <name>UseRetail</name>
+ <synonym>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Perakende</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use retail</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать розничный модуль</value>
+ </synonym>
+ <location>Constant.UseRetail</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>DataProcessor.PointOfSale</content>
+ <content>Document.CashStatement</content>
+ <content>Catalog.CashStatementStatuses</content>
+ <content>Catalog.PaymentTerminals</content>
+ <content>Catalog.RetailCustomers</content>
+ <content>Document.RetailReturnReceipt</content>
+ <content>AccumulationRegister.R2050T_RetailSales</content>
+ <content>Document.RetailSalesReceipt</content>
+ <content>InformationRegister.RetailWorkers</content>
+ <content>AccumulationRegister.R3050T_PosCashBalances</content>
+ <content>Catalog.BankTerms</content>
+ <content>InformationRegister.BranchBankTerms</content>
+ <content>Catalog.PaymentTypes</content>
+ <content>Enum.PaymentTypes</content>
 </mdclass:FunctionalOption>

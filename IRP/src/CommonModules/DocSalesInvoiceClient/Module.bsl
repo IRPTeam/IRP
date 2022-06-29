@@ -1,4 +1,4 @@
-#Region FORM
+﻿#Region FORM
 
 Procedure OnOpen(Object, Form, Cancel) Export
 	ViewClient_V2.OnOpen(Object, Form, "ItemList");

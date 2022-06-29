@@ -1,4 +1,4 @@
-
+﻿
 #Region Service
 
 Function GetAccountingAnalyticsResult(Parameters) Export

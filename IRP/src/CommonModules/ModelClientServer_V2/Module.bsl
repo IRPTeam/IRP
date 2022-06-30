@@ -95,13 +95,24 @@ Procedure ExecuteChain(Parameters, Chain)
 						Continue;
 				EndIf;
 				Result = Undefined;
-				Execute StrTemplate("Result = %1(Options)", Chain[Name].ExecutorName);
+				ExecutorName = Chain[Name].ExecutorName;
+				// procedure with prefix XX_ placed in extension
+				If Mid(ExecutorName, 3, 1) = "_" Then
+					ExecuteInExtension(Result, Options, ExecutorName);
+				Else
+					Execute StrTemplate("Result = %1(Options)", ExecutorName);
+				EndIf;
 				Results.Add(GetChainLinkResult(Options, Result));
 				Parameters.ModelEnvironment.AlreadyExecutedSteps.Insert(Name + ":" + Options.Key, New Structure("Name, Key", Name, Options.Key));
 			EndDo;
 			Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
 		EndIf;
 	EndDo;
+EndProcedure
+
+// used in extensions
+Procedure ExecuteInExtension(Result, Options, ExecutorName)
+	Return;
 EndProcedure
 
 Function GetChain()

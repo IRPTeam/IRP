@@ -1180,6 +1180,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.PaymentList.PaymentType</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>PaymentListPaymentTypeOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>PaymentListPaymentTypeExtendedTooltip</name>
             <id>340</id>
@@ -1280,6 +1284,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.PaymentList.BankTerm</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>PaymentListBankTermOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>PaymentListBankTermExtendedTooltip</name>
             <id>346</id>
@@ -1748,6 +1756,60 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>PaymentListCommissionPercent</name>
+          <id>353</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.CommissionPercent</segments>
+          </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>PaymentListCommissionPercentOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>PaymentListCommissionPercentExtendedTooltip</name>
+            <id>355</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>PaymentListCommissionPercentContextMenu</name>
+            <id>354</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>PaymentListCommission</name>
           <id>241</id>
           <visible>true</visible>
@@ -1758,6 +1820,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.PaymentList.Commission</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>PaymentListCommissionOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>PaymentListCommissionExtendedTooltip</name>
             <id>243</id>

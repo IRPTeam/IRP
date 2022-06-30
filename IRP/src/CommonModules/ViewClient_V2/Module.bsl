@@ -1562,6 +1562,34 @@ Procedure SetPaymentListTotalAmount(Object, Form, Row, Value) Export
 	ControllerClientServer_V2.PaymentListTotalAmountOnChange(Parameters);
 EndProcedure
 
+// PaymentList.Commission
+Procedure PaymentListCommissionOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListCommissionOnChange(Parameters);
+EndProcedure
+
+// PaymentList.PaymentType
+Procedure PaymentListPaymentTypeOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListPaymentTypeOnChange(Parameters);
+EndProcedure
+
+// PaymentList.BankTerm
+Procedure PaymentListBankTermOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListBankTermOnChange(Parameters);
+EndProcedure
+
+// PaymentList.CommissionPercent
+Procedure PaymentListCommissionPercentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListCommissionPercentOnChange(Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region _TRANSACTIONS_LIST

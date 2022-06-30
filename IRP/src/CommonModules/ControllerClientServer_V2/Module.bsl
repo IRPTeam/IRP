@@ -4312,7 +4312,7 @@ EndFunction
 Function BindPaymentListTotalAmount(Parameters)
 	DataPath = "PaymentList.TotalAmount";
 	Binding = New Structure();
-	Steps = "StepPaymentListCalculations_IsTotalAmountChanged";
+	Steps = "StepPaymentListCalculations_IsTotalAmountChanged, StepPaymentListCalculateCommission";
 	Return BindSteps(Steps, DataPath, Binding, Parameters);
 EndFunction
 
@@ -4457,6 +4457,12 @@ EndProcedure
 
 #Region PAYMENT_LIST_PAYMENT_TYPE
 
+// PaymentList.PaymentType.OnChange
+Procedure PaymentListPaymentTypeOnChange(Parameters) Export
+	Binding = BindPaymentListPaymentType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
 // PaymentList.PaymentType.Set
 Procedure SetPaymentListPaymentType(Parameters, Results) Export
 	Binding = BindPaymentListPaymentType(Parameters);
@@ -4472,6 +4478,12 @@ EndFunction
 Function BindPaymentListPaymentType(Parameters)
 	DataPath = "PaymentList.PaymentType";
 	Binding = New Structure();
+
+	Binding.Insert("BankPayment", 
+		"StepPaymentListGetCommissionPercent");
+	
+	Binding.Insert("BankReceipt", 
+		"StepPaymentListGetCommissionPercent");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4501,6 +4513,12 @@ EndFunction
 
 #Region PAYMENT_LIST_BANK_TERM
 
+// PaymentList.BankTerm.OnChange
+Procedure PaymentListBankTermOnChange(Parameters) Export
+	Binding = BindPaymentListBankTerm(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
 // PaymentList.BankTerm.Set
 Procedure SetPaymentListBankTerm(Parameters, Results) Export
 	Binding = BindPaymentListBankTerm(Parameters);
@@ -4516,6 +4534,13 @@ EndFunction
 Function BindPaymentListBankTerm(Parameters)
 	DataPath = "PaymentList.BankTerm";
 	Binding = New Structure();
+	
+	Binding.Insert("BankPayment", 
+		"StepPaymentListGetCommissionPercent");
+	
+	Binding.Insert("BankReceipt", 
+		"StepPaymentListGetCommissionPercent");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4540,6 +4565,118 @@ Function BindPaymentListCommissionIsSeparate(Parameters)
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_COMMISSION
+
+// PaymentList.Commission.OnChange
+Procedure PaymentListCommissionOnChange(Parameters) Export
+	Binding = BindPaymentListCommission(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.Commission.Set
+Procedure SetPaymentListCommission(Parameters, Results) Export
+	Binding = BindPaymentListCommission(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.Commission.Get
+Function GetPaymentListCommission(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListCommission(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.Commission.Bind
+Function BindPaymentListCommission(Parameters)
+	DataPath = "PaymentList.Commission";
+	Binding = New Structure();
+
+	Binding.Insert("BankPayment", 
+		"StepChangeCommissionPercentByAmount");
+	
+	Binding.Insert("BankReceipt", 
+		"StepChangeCommissionPercentByAmount");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// PaymentList.Commission.CalculateCommission.Step
+Procedure StepPaymentListCalculateCommission(Parameters, Chain) Export
+	Chain.PaymentListCalculateCommission.Enable = True;
+	Chain.PaymentListCalculateCommission.Setter = "SetPaymentListCommission";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options     = ModelClientServer_V2.CalculatePaymentListCommissionOptions();
+		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
+		Options.CommissionPercent = GetPaymentListCommissionPercent(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentListCalculateCommission";
+		Chain.PaymentListCalculateCommission.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_PERCENT
+
+// PaymentList.CommissionPercent.OnChange
+Procedure PaymentListCommissionPercentOnChange(Parameters) Export
+	Binding = BindPaymentListCommissionPercent(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.CommissionPercent.Set
+Procedure SetPaymentListCommissionPercent(Parameters, Results) Export
+	Binding = BindPaymentListCommissionPercent(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.CommissionPercent.Get
+Function GetPaymentListCommissionPercent(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListCommissionPercent(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.CommissionPercent.Bind
+Function BindPaymentListCommissionPercent(Parameters)
+	DataPath = "PaymentList.CommissionPercent";
+	Binding = New Structure();
+
+	Binding.Insert("BankPayment", 
+		"StepPaymentListCalculateCommission");
+	
+	Binding.Insert("BankReceipt", 
+		"StepPaymentListCalculateCommission");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// PaymentList.CommissionPercent.GetCommissionPercent.Step
+Procedure StepPaymentListGetCommissionPercent(Parameters, Chain) Export
+	Chain.GetCommissionPercent.Enable = True;
+	Chain.GetCommissionPercent.Setter = "SetPaymentListCommissionPercent";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options     = ModelClientServer_V2.GetCommissionPercentOptions();
+		Options.PaymentType = GetPaymentListPaymentType(Parameters, Row.Key);
+		Options.BankTerm = GetPaymentListBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentListGetCommissionPercent";
+		Chain.GetCommissionPercent.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+// PaymentList.CommissionPercent.ChangePercentByAmount.Step
+Procedure StepChangeCommissionPercentByAmount(Parameters, Chain) Export
+	Chain.ChangeCommissionPercentByAmount.Enable = True;
+	Chain.ChangeCommissionPercentByAmount.Setter = "SetPaymentListCommissionPercent";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options     = ModelClientServer_V2.CalculateCommisionPercentByAmountOptions();
+		Options.Commission = GetPaymentListCommission(Parameters, Row.Key);
+		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
+		Options.DisableNextSteps = True;
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeCommissionPercentByAmount";
+		Chain.ChangeCommissionPercentByAmount.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 

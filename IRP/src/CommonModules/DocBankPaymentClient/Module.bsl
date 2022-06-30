@@ -480,4 +480,40 @@ EndProcedure
 
 #EndRegion
 
+#Region COMMISSION
+
+&AtClient
+Procedure PaymentListCommissionOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListCommissionOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_TYPE
+
+&AtClient
+Procedure PaymentListPaymentTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListPaymentTypeOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region BANK_TERM
+
+&AtClient
+Procedure PaymentListBankTermOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListBankTermOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region COMMISSION_PERCENT
+
+&AtClient
+Procedure PaymentListCommissionPercentOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListCommissionPercentOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #EndRegion

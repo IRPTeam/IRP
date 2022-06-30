@@ -209,6 +209,9 @@ Function GetChain()
 	Chain.Insert("CalculateCommission"      , GetChainLink("CalculateCommissionExecute"));
 	Chain.Insert("ChangePercentByAmount"      , GetChainLink("CalculatePercentByAmountExecute"));
 	
+	Chain.Insert("PaymentListCalculateCommission"      , GetChainLink("CalculatePaymentListCommissionExecute"));
+	Chain.Insert("ChangeCommissionPercentByAmount"      , GetChainLink("CalculateCommisionPercentByAmountExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -2289,6 +2292,18 @@ EndFunction
 
 #EndRegion
 
+#Region CALCULATE_PAYMENT_LIST_COMMISSION
+
+Function CalculatePaymentListCommissionOptions() Export
+	Return GetChainLinkOptions("TotalAmount, CommissionPercent");
+EndFunction
+
+Function CalculatePaymentListCommissionExecute(Options) Export
+	Return Options.TotalAmount * Options.CommissionPercent / 100;
+EndFunction
+
+#EndRegion
+
 #Region GET_COMMISSION_PERCENT
 
 Function GetCommissionPercentOptions() Export
@@ -2309,6 +2324,18 @@ EndFunction
 
 Function CalculatePercentByAmountExecute(Options) Export
 	Return 100 * Options.Commission / Options.Amount;
+EndFunction
+
+#EndRegion
+
+#Region CALCULATE_PERCENT_COMMISSION_BY_AMOUNT
+
+Function CalculateCommisionPercentByAmountOptions() Export
+	Return GetChainLinkOptions("TotalAmount, Commission");
+EndFunction
+
+Function CalculateCommisionPercentByAmountExecute(Options) Export
+	Return 100 * Options.Commission / Options.TotalAmount;
 EndFunction
 
 #EndRegion

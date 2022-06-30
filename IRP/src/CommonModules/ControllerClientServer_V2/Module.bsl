@@ -652,6 +652,23 @@ Function BindListOnCopy(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
+Procedure CopyRowSimpleTable(TableName, Parameters, ViewNotify = Undefined) Export
+	If ViewNotify <> Undefined Then
+		AddViewNotify(ViewNotify, Parameters);
+	EndIf;
+	// execute handlers after copy row
+	Binding = BindListOnCopySimpleTable(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// <TableName>.OnCopy.Bind
+Function BindListOnCopySimpleTable(Parameters)
+	DataPath = "";
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
 #EndRegion
 
 #EndRegion

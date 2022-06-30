@@ -94,6 +94,8 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	PriceIsPresent    = CommonFunctionsClientServer.ObjectHasProperty(Row, "Price");
 	PhysCountIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "PhysCount");
 	SerialLotNumberIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "SerialLotNumber");
+	BarcodePresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Barcode");
+	DatePresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Date");
 	
 	If FillingValues.Property("Item") And ItemIsPresent Then
 		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
@@ -121,6 +123,14 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	
 	If FillingValues.Property("SerialLotNumber") And SerialLotNumberIsPresent Then
 		ControllerClientServer_V2.SetItemListSerialLotNumber(Parameters, PrepareValue(FillingValues.SerialLotNumber, Row.Key));
+	EndIf;
+	
+	If FillingValues.Property("Barcode") And BarcodePresent Then
+		ControllerClientServer_V2.SetItemListBarcode(Parameters, PrepareValue(FillingValues.Barcode, Row.Key));
+	EndIf;
+		
+	If FillingValues.Property("Date") And DatePresent Then
+		ControllerClientServer_V2.SetItemListDate(Parameters, PrepareValue(FillingValues.Date, Row.Key));
 	EndIf;
 		
 EndProcedure

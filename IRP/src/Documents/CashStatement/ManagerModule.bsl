@@ -229,7 +229,7 @@ Function R3021B_CashInTransitIncoming()
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	TRUE";
+	|	PaymentList.IsAccountPOS";
 EndFunction
 
 #EndRegion

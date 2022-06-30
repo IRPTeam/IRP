@@ -1685,7 +1685,7 @@ Scenario:  _0154149 create Cash statement
 			And I select current line in "List" table
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
-			And I input "01.09.2020 12:50:00" text in "Date" field
+			And I input "01.09.2020 23:59:59" text in "Date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberRetailSalesReceipt01541492$$" variable
 			And I delete "$$RetailSalesReceipt01541492$$" variable
@@ -1960,7 +1960,7 @@ Scenario:  _0154149 create Cash statement
 			And I input "12,90" text in "Commission" field of "Payments" table
 			And I finish line editing in "Payments" table
 		* Post Retail sales receipt
-			And I input "01.09.2020 00:00:00" text in "Date" field
+			And I input "01.09.2020 23:59:59" text in "Date" field
 			And I click the button named "FormPost"
 			And I delete "$$NumberRetailSalesReceipt01541495$$" variable
 			And I delete "$$RetailSalesReceipt01541495$$" variable
@@ -2120,13 +2120,13 @@ Scenario:  _0154149 create Cash statement
 		And I select "R3035 Cash planning" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Document registrations records'  | ''                              | ''          | ''             | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
-			| 'Register  "R3035 Cash planning"' | ''                              | ''          | ''             | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
-			| ''                                | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type'   | 'Planning period' | 'Deferred calculation' |
-			| ''                                | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | ''                | 'No'                   |
-			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | ''                | 'No'                   |
-			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | ''                | 'No'                   |
+			| 'Document registrations records'  | ''                              | ''          | ''             | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
+			| 'Register  "R3035 Cash planning"' | ''                              | ''          | ''             | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | ''                     |
+			| ''                                | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                        | ''                | 'Attributes'           |
+			| ''                                | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type' | 'Planning period' | 'Deferred calculation' |
+			| ''                                | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1'         | ''                | 'No'                   |
+			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1'         | ''                | 'No'                   |
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
@@ -2138,6 +2138,28 @@ Scenario:  _0154149 create Cash statement
 			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | 'Transit Main' | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | 'Transit Main' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | 'Transit Main' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$CashStatement01541491$$'                    | ''            | ''                              | ''          | ''           | ''             | ''        | ''                             | ''         | ''             | ''                   | ''                          | ''                     |
+			| 'Document registrations records'               | ''            | ''                              | ''          | ''           | ''             | ''        | ''                             | ''         | ''             | ''                   | ''                          | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                              | ''          | ''           | ''             | ''        | ''                             | ''         | ''             | ''                   | ''                          | ''                     |
+			| ''                                             | 'Record type' | 'Period'                        | 'Resources' | ''           | 'Dimensions'   | ''        | ''                             | ''         | ''             | ''                   | ''                          | 'Attributes'           |
+			| ''                                             | ''            | ''                              | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Account'      | 'Receipting account' | 'Basis'                     | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | '2,21'       | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Transit Main' | ''                   | '$$CashStatement01541491$$' | 'No'                   |
+			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | '12,9'       | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Transit Main' | ''                   | '$$CashStatement01541491$$' | 'No'                   |
+			| ''                                             | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | '12,9'       | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Transit Main' | ''                   | '$$CashStatement01541491$$' | 'No'                   |
+		And I select "Cash in transit" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$CashStatement01541491$$'      | ''            | ''                              | ''          | ''             | ''        | ''                          | ''             | ''           | ''         | ''                             | ''                     |
+			| 'Document registrations records' | ''            | ''                              | ''          | ''             | ''        | ''                          | ''             | ''           | ''         | ''                             | ''                     |
+			| 'Register  "Cash in transit"'    | ''            | ''                              | ''          | ''             | ''        | ''                          | ''             | ''           | ''         | ''                             | ''                     |
+			| ''                               | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''                          | ''             | ''           | ''         | ''                             | 'Attributes'           |
+			| ''                               | ''            | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Basis document'            | 'From account' | 'To account' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                               | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Transit Main' | ''           | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                               | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Transit Main' | ''           | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                               | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Transit Main' | ''           | 'TRY'      | 'en description is empty'      | 'No'                   |	
 		And I close all client application windows
 		
 		

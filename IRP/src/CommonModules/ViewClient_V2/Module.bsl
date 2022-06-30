@@ -2248,3 +2248,142 @@ Procedure OffersOnChange(Object, Form) Export
 EndProcedure
 	
 #EndRegion
+
+#Region PAYMENTS
+
+Procedure PaymentsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Payments", Cancel, Clone, CurrentData,
+		"PaymentsOnAddRowFormNotify", "PaymentsOnCopyRowFormNotify");
+	Form.Items.Payments.CurrentRow = NewRow.GetID();
+	Form.Items.Payments.ChangeRow();
+EndProcedure
+
+Procedure PaymentsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure PaymentsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+#Region PAYMENTS_PAYMENT_TYPE
+
+// Payments.PaymentType
+Procedure PaymentsPaymentTypeOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	ControllerClientServer_V2.PaymentsPaymentTypeOnChange(Parameters);
+EndProcedure
+
+// Payments.PaymentType.Set
+Procedure SetPaymentsPaymentType(Object, Form, Row, Value) Export
+	Row.PaymentType = Value;
+	Rows = GetRowsByCurrentData(Form, "Payments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.PaymentsPaymentTypeOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_ACCOUNT
+
+// Payments.Account
+Procedure PaymentsAccountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	ControllerClientServer_V2.PaymentsAccountOnChange(Parameters);
+EndProcedure
+
+// Payments.Account.Set
+Procedure SetPaymentsAccount(Object, Form, Row, Value) Export
+	Row.Account = Value;
+	Rows = GetRowsByCurrentData(Form, "Payments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.PaymentsAccountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_BANK_TERM
+
+// Payments.BankTerm
+Procedure PaymentsBankTermOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	ControllerClientServer_V2.PaymentsBankTermOnChange(Parameters);
+EndProcedure
+
+// Payments.BankTerm.Set
+Procedure SetPaymentsBankTerm(Object, Form, Row, Value) Export
+	Row.BankTerm = Value;
+	Rows = GetRowsByCurrentData(Form, "Payments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.PaymentsBankTermOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_AMOUNT
+
+// Payments.Amount
+Procedure PaymentsAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	ControllerClientServer_V2.PaymentsAmountOnChange(Parameters);
+EndProcedure
+
+// Payments.Amount.Set
+Procedure SetPaymentsAmount(Object, Form, Row, Value) Export
+	Row.Amount = Value;
+	Rows = GetRowsByCurrentData(Form, "Payments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.PaymentsAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_PERCENT
+
+// Payments.Percent
+Procedure PaymentsPercentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	ControllerClientServer_V2.PaymentsPercentOnChange(Parameters);
+EndProcedure
+
+// Payments.Percent.Set
+Procedure SetPaymentsPercent(Object, Form, Row, Value) Export
+	Row.Percent = Value;
+	Rows = GetRowsByCurrentData(Form, "Payments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.PaymentsPercentOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENTS_COMMISSION
+
+// Payments.Commission
+Procedure PaymentsCommissionOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Payments", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	ControllerClientServer_V2.PaymentsCommissionOnChange(Parameters);
+EndProcedure
+
+// Payments.Commission.Set
+Procedure SetPaymentsCommission(Object, Form, Row, Value) Export
+	Row.Commission = Value;
+	Rows = GetRowsByCurrentData(Form, "Payments", Row);
+	Parameters = GetSimpleParameters(Object, Form, "Payments", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.PaymentsCommissionOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion

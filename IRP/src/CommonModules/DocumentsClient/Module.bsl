@@ -362,6 +362,10 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		FilterString = "Item, ItemKey, Unit";
 	EndIf;
 
+	If ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+		FilterString = FilterString + ", Barcode, Date";
+	EndIf;
+	
 	FilterStructure = New Structure(FilterString);
 	
 	For Each ResultElement In Result Do
@@ -388,6 +392,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			FillingValues.Insert("Unit"     , ResultElement.Unit);
 			FillingValues.Insert("Quantity" , ResultElement.Quantity);
 			FillingValues.Insert("SerialLotNumber" , ResultElement.SerialLotNumber);
+			FillingValues.Insert("Barcode" , ?(ResultElement.Property("Barcode"), ResultElement.Barcode, ""));
+			FillingValues.Insert("Date" , CurrentDate());
 			
 			If ResultElement.Property("Price") Then
 				FillingValues.Insert("Price", ResultElement.Price);

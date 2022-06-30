@@ -1,6 +1,6 @@
 #Region FormEvents
 
-Procedure OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings)
+Procedure OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings) Export
 	If OpenSettings = Undefined Then
 		OpenSettings = GetOpenSettingsStructure();
 	EndIf;

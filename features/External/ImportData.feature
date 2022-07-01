@@ -1510,7 +1510,13 @@ Scenario: Create catalog BankTerms objects
 
 	And I check or create catalog "BankTerms" objects:
 		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.BankTerms?ref=aa7d120ed92fbced11eb096728fa8ee7' | 'False'           | '1'    | 'Test01'         | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.BankTerms?ref=aa7d120ed92fbced11eb096728fa8ee7' | 'False'        | 1      | 'Test01'         | ''                 | ''               | ''               |
+
+	And I refill object tabular section "PaymentTypes":
+		| 'Ref'                                                               | 'PaymentType'                                                          | 'Account'                                                              | 'Percent' |
+		| 'e1cib/data/Catalog.BankTerms?ref=aa7d120ed92fbced11eb096728fa8ee7' | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd0' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186e' | 1         |
+		| 'e1cib/data/Catalog.BankTerms?ref=aa7d120ed92fbced11eb096728fa8ee7' | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd1' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186f' | 2         |
+
 
 Scenario: Create catalog SpecialOfferRules objects (Test)
 

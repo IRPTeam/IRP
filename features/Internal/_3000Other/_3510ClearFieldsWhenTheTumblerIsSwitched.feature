@@ -6,6 +6,8 @@
 Feature: check the cleaning of fields in forms of directories with switches (the drawing of the form depends on the switch)
 
 
+Variables:
+import "Variables.feature"
 
 Background:
         Given I launch TestClient opening script or connect the existing one

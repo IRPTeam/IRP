@@ -8,6 +8,8 @@ Feature: check filling in and refilling returns
 As a QA
 I want to check the filling and refilling of returns
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

@@ -6,7 +6,8 @@
 
 Functionality: check Purchase invoice movements
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _04096 preparation (Purchase invoice)
 	When set True value to the constant

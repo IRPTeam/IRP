@@ -4,6 +4,10 @@
 
 Functionality: filling in test data base
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 		Given I open new TestClient session or connect the existing one
 

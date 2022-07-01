@@ -9,6 +9,9 @@ As a procurement manager
 I want to create a Sales return document
 To track a product that returned from customer
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

@@ -9,6 +9,10 @@ As a developer
 I want to create a processing to download currency rates from external resources.
 To upload currency rates to the base
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

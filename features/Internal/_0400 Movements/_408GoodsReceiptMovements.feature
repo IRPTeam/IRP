@@ -6,6 +6,8 @@
 
 Functionality: check Goods receipt movements
 
+Variables:
+import "Variables.feature"
 
 Scenario: _04010 preparation (Goods receipt)
 	When set True value to the constant

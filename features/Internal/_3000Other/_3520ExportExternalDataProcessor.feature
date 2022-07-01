@@ -7,6 +7,9 @@ Feature: check saving of plugin to a folder on the computer
 
 
 
+Variables:
+import "Variables.feature"
+
 Background:
     Given I launch TestClient opening script or connect the existing one
 

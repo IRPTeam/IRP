@@ -5,7 +5,8 @@
 
 Feature: check filling in and refilling in documents forms + currency form connection
 
-
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

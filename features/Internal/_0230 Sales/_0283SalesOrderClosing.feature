@@ -5,7 +5,8 @@
 
 Functionality: sales order closing
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _0230000 preparation (Sales order closing)
 	When set True value to the constant

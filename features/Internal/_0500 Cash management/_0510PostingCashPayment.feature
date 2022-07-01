@@ -9,6 +9,10 @@ As a cashier
 //I want to pay cash
 //In order to record the fact of payment
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

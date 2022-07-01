@@ -11,6 +11,9 @@ I want there to be a mechanism for entering customer contact information
 To specify: address, phone, e-mail, gps coordinate on the map
 
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I open new TestClient session or connect the existing one
 

@@ -6,6 +6,9 @@
 
 Feature: check remaining stock control
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

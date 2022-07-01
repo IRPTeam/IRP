@@ -10,6 +10,10 @@ As an accountant
 I want to fill out the exchange rate
 To use multi-currency accounting
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

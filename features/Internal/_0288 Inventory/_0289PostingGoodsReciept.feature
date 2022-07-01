@@ -9,6 +9,8 @@ As a storekeeper
 I want to create a Goods receipt
 To take products to the store
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

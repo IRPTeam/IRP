@@ -11,6 +11,10 @@ I want to fill in the prices
 To sell and purchase goods and services
 
 
+Variables:
+import "Variables.feature"
+
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

@@ -6,6 +6,8 @@
 
 Feature: add items to documents by barcode
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

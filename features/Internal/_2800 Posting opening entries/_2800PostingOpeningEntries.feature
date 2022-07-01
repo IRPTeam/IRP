@@ -9,6 +9,9 @@ As a developer
 I want to create a document to enter the opening balance
 To input the client's balance when you start working with the base
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

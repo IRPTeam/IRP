@@ -10,6 +10,10 @@ I want to create a product labeling document
 To assign a unique barcode (series) to products
 
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

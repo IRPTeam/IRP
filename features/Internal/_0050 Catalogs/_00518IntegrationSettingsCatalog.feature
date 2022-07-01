@@ -9,6 +9,10 @@ As an owner
 I want to fill out information on the company
 To further use it when reflecting in the program of business processes
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I open new TestClient session or connect the existing one
 	

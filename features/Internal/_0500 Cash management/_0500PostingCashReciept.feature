@@ -8,7 +8,8 @@ As a cashier
 I want to accept the cash in hand.
 For Cash/Bank accountsing
 
-
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

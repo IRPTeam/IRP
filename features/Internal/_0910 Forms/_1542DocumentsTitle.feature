@@ -6,6 +6,8 @@
 Feature: check the display of the header of the collapsible group in documents
 
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

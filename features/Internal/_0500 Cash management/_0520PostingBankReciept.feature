@@ -9,6 +9,10 @@ As an accountant
 I want to display the incoming bank payments
 To close partners debts
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

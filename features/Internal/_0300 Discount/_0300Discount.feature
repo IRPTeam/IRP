@@ -10,6 +10,10 @@ As a sales manager
 I want to create a basic system of discounts: price type discount, 5+1 type discount, range discount (manually selected), information message.
 For calculating special offers in documents
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

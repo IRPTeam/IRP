@@ -23,7 +23,7 @@ When Create catalog ExternalDataProc objects (test data base)
 						| 'Description'    |
 						| 'TaxCalculation' |
 				And I select current line in "List" table
-				And I select external file "#workingDir#/DataProcessor/TaxCalculateVAT_TR.epf"
+				And I select external file "$Path$/DataProcessor/TaxCalculateVAT_TR.epf"
 				And I click the button named "FormAddExtDataProc"
 				And I input "" text in "Path to plugin for test" field
 				And I click "Save and close" button
@@ -34,7 +34,7 @@ When Create catalog ExternalDataProc objects (test data base)
 						| 'Description'    |
 						| 'DocumentDiscount' |
 				And I select current line in "List" table
-				And I select external file "#workingDir#/DataProcessor/DocumentDiscount.epf"
+				And I select external file "$Path$/DataProcessor/DocumentDiscount.epf"
 				And I click the button named "FormAddExtDataProc"
 				And I input "" text in "Path to plugin for test" field
 				And I click "Save and close" button
@@ -45,7 +45,7 @@ When Create catalog ExternalDataProc objects (test data base)
 						| 'Description'    |
 						| 'Address' |
 				And I select current line in "List" table
-				And I select external file "#workingDir#/DataProcessor/InputAddress.epf"
+				And I select external file "$Path$/DataProcessor/InputAddress.epf"
 				And I click the button named "FormAddExtDataProc"
 				And I input "" text in "Path to plugin for test" field
 				And I click "Save and close" button

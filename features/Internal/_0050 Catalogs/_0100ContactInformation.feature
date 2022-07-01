@@ -31,7 +31,7 @@ Scenario: _010004 create Contact info Type - Addresses
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
 		* Adding Plugin sessing 
-			And I select external file "#workingDir#/DataProcessor/ShippingAddress.epf"
+			And I select external file "$Path$/DataProcessor/ShippingAddress.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "ExternaShippingAddress" text in "Name" field
@@ -98,7 +98,7 @@ Scenario: _010009 adding phones to Contact info type
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
 		* Filling in the 'External Input Phone Ukraine' and adding it to the database
-			And I select external file "#workingDir#/DataProcessor/InputPhoneUkraine.epf"
+			And I select external file "$Path$/DataProcessor/InputPhoneUkraine.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "ExternalInputPhoneUkraine" text in "Name" field
@@ -112,7 +112,7 @@ Scenario: _010009 adding phones to Contact info type
 		* Add processing Phone TR
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
-			And I select external file "#workingDir#/DataProcessor/InputPhoneUkraine.epf"
+			And I select external file "$Path$/DataProcessor/InputPhoneUkraine.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "PhoneTR" text in "Name" field
@@ -334,7 +334,7 @@ Scenario: _010011 adding gps to a Contact info type
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
 		* Adding Plugin sessing 
-			And I select external file "#workingDir#/DataProcessor/Coordinates.epf"
+			And I select external file "$Path$/DataProcessor/Coordinates.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "ExternalCoordinates" text in "Name" field

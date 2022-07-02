@@ -417,6 +417,42 @@ EndProcedure
 
 #EndRegion
 
+#Region COMMISSION
+
+&AtClient
+Procedure PaymentListCommissionOnChange(Item)
+	DocBankReceiptClient.PaymentListCommissionOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_TYPE
+
+&AtClient
+Procedure PaymentListPaymentTypeOnChange(Item)
+	DocBankReceiptClient.PaymentListPaymentTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region BANK_TERM
+
+&AtClient
+Procedure PaymentListBankTermOnChange(Item)
+	DocBankReceiptClient.PaymentListBankTermOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region COMMISSION_PERCENT
+
+&AtClient
+Procedure PaymentListCommissionPercentOnChange(Item)
+	DocBankReceiptClient.PaymentListCommissionPercentOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region SERVICE

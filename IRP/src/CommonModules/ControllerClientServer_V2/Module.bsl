@@ -4313,10 +4313,12 @@ Function BindPaymentListTotalAmount(Parameters)
 	DataPath = "PaymentList.TotalAmount";
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
-		"StepPaymentListCalculateCommission");
+		"StepPaymentListCalculateCommission,
+		|StepPaymentListCalculations_IsTotalAmountChanged");
 	
 	Binding.Insert("BankReceipt", 
-		"StepPaymentListCalculateCommission");
+		"StepPaymentListCalculateCommission,
+		|StepPaymentListCalculations_IsTotalAmountChanged");
 		
 	Steps = "StepPaymentListCalculations_IsTotalAmountChanged";
 	Return BindSteps(Steps, DataPath, Binding, Parameters);

@@ -219,6 +219,22 @@ Scenario: add Plugin for tax calculation
 			And I click "Save and close" button
 		And I close all client application windows
 
+
+Scenario: add Plugin for print label
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
+		And I select external file "$Path$/DataProcessor/PromotionalAndOldPricesPrintLabel.epf"
+		And I click the button named "FormAddExtDataProc"
+		And I input "" text in "Path to plugin for test" field
+		And I input "PrintLabel" text in "Name" field
+		And I click Open button of the field named "Description_en"
+		And I input "PrintLabel" text in the field named "Description_en"
+		And I input "PrintLabel" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click "Save and close" button
+		And I wait "Plugins (create)" window closing in 10 seconds
+		Then I check for the "ExternalDataProc" catalog element with the "Description_en" "PrintLabel"
+
 Scenario: create PurchaseOrder017001
 	* Opening a form to create Purchase Order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"

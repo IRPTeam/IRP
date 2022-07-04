@@ -78,8 +78,8 @@ Scenario: _010005 verification of UNIQ ID uniqueness control in IDInfoTypes
 		Try
 			And the previous scenario executed successfully
 		Except
+			And I log the error "Skipped" by exception data
 			Then I stop all scripts execution
-			Then I stop script execution "Skipped"
 	* Create one more item with ID Adr_10
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 		And I click the button named "FormCreate"

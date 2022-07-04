@@ -34,8 +34,7 @@ Scenario: _0202200 preparation (label processing)
 		* Add external data processors for print layout creation
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
-			And Delay 5
-			And I select external file "$Path$/DataProcessor/PromotionalAndOldPricesPrintLabel.epf"
+			And I select external file "$$Path$$/DataProcessor/PromotionalAndOldPricesPrintLabel.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "PrintLabel" text in "Name" field

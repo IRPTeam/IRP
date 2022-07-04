@@ -71,9 +71,14 @@ Scenario: _010004 create Contact info Type - Addresses
 		And Delay 5
 		And "List" table contains lines
 		| 'Description' |
-		| 'Google Addreses'  |
+		| 'Google Addreses5'  |
 
 Scenario: _010005 verification of UNIQ ID uniqueness control in IDInfoTypes
+	* Check preparation
+		Try
+			And the previous scenario executed successfully
+		Except
+			Then I stop all scripts execution
 	* Create one more item with ID Adr_10
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 		And I click the button named "FormCreate"

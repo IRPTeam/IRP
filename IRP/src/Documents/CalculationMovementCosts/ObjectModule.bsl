@@ -2,6 +2,7 @@
 Procedure Posting(Cancel, PostingMode)
 	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_Clear(ThisObject.Ref, Cancel);
+	AccumulationRegisters.R5022T_Expenses.Expenses_Clear(ThisObject.Ref, Cancel);
 	LandedCostServer.Posting_BatchWiceBalance(ThisObject.Ref,
 	                                       ThisObject.Company,
 	                                       ThisObject.CalculationMode, 

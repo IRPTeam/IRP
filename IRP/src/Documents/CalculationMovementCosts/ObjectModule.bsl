@@ -15,6 +15,7 @@ EndProcedure
 Procedure UndoPosting(Cancel)
 	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_Clear(ThisObject.Ref, Cancel);
+	AccumulationRegisters.R5022T_Expenses.Expenses_Clear(ThisObject.Ref, Cancel);
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Reset(ThisObject.Company, ThisObject.BeginDate);
 	LandedCostServer.ReleaseBatchReallocateDocuments(ThisObject.Ref);
 EndProcedure

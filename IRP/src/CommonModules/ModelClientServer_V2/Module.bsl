@@ -153,9 +153,10 @@ Function GetChain()
 	Chain.Insert("ChangeBasisDocumentByAgreement", GetChainLink("ChangeBasisDocumentByAgreementExecute"));
 	Chain.Insert("ChangeOrderByAgreement"        , GetChainLink("ChangeOrderByAgreementExecute"));
 	
-	Chain.Insert("ChangeCashAccountByCompany"    , GetChainLink("ChangeCashAccountByCompanyExecute"));
-	Chain.Insert("ChangeAccountSenderByCompany"  , GetChainLink("ChangeCashAccountByCompanyExecute"));
-	Chain.Insert("ChangeAccountReceiverByCompany", GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeCashAccountByCompany"        , GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeAccountSenderByCompany"      , GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeAccountReceiverByCompany"    , GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeLandedCostCurrencyByCompany" , GetChainLink("ChangeLandedCostCurrencyByCompanyExecute"));
 	
 	Chain.Insert("ChangeTransitAccountByAccount"    , GetChainLink("ChangeTransitAccountByAccountExecute"));
 	Chain.Insert("ChangeReceiptingAccountByAccount" , GetChainLink("ChangeReceiptingAccountByAccountExecute"));
@@ -672,6 +673,25 @@ Function ChangeCurrencyByAgreementExecute(Options) Export
 		Return AgreementInfo.Currency;
 	EndIf;
 	Return Options.CurrentCurrency;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_LANDEDCOST_CURRENCY_BY_COMPANY
+
+Function ChangeLandedCostCurrencyByCompanyOptions() Export
+	Return GetChainLinkOptions("Company, CurrentCurrency");
+EndFunction
+
+Function ChangeLandedCostCurrencyByCompanyExecute(Options) Export
+	If Not ValueIsFilled(Options.Company) Then
+		Return Options.CurrentCurrency;
+	EndIf;
+	Currency = ModelServer_V2.GetLandedCostCurrencyByCompany(Options.Company);
+	If Not ValueIsFilled(Currency) Then
+		Return Options.CurrentCurrency;
+	EndIf;
+	Return Currency;
 EndFunction
 
 #EndRegion

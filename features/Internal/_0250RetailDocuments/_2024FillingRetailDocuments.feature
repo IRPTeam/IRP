@@ -1989,7 +1989,7 @@ Scenario:  _0154149 create Cash statement
 		And I finish line editing in "Payments" table
 		And I go to line in "Payments" table
 			| '#' | 'Account'      | 'Amount' | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
-			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
+			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '6,45'    |
 		And I input "01.09.2020 13:40:04" text in "Date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberRetailReturnReceipt01541494$$" variable
@@ -2014,7 +2014,7 @@ Scenario:  _0154149 create Cash statement
 		And I finish line editing in "Payments" table
 		And I go to line in "Payments" table
 			| '#' | 'Account'      | 'Amount' | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
-			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
+			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '6,45'    |
 		And I delete a line in "Payments" table
 		And I input "01.09.2020 17:31:04" text in "Date" field
 		And I click the button named "FormPost"
@@ -3902,6 +3902,281 @@ Scenario: _0154195 set sales person from POS
 				| 'Shirt' | 'Anna Petrova'  | '38/Black' | ''        | '350,00' | '1,000'    | ''       | '350,00' |
 				| 'Dress' | 'David Romanov' | 'L/Green'  | ''        | '550,00' | '1,000'    | ''       | '550,00' |
 			And I close all client application windows
+
+Scenario: _0154196 check comission calculation in the Retail sales receipt
+		And I close all client application windows
+	* Open RSR form
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Filling payments tab
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I activate "Bank term" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Bank term" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Bank term 01' |
+		And I select current line in "List" table
+		And I activate "Payment type" field in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I activate "Payment terminal" field in "Payments" table
+		And I click choice button of "Payment terminal" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Payment terminal 01'     |
+		And I select current line in "List" table
+		And I activate "Account" field in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+		And I finish line editing in "Payments" table	
+	* Check comission calculation (sum and commision percent)
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I select current line in "Payments" table
+		And I input "333,33" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '333,33' | '3,33'       | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '1,00'    |
+	* Change comission percent
+		And I activate "Percent" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "5,00" text in "Percent" field of "Payments" table
+		And I finish line editing in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '333,33' | '16,67'      | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '5,00'    |
+	* Change comission sum
+		And I activate "Commission" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "22,52" text in "Commission" field of "Payments" table
+		And I finish line editing in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '333,33' | '22,52'      | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '6,76'    |
+	* Change payment type
+		And I activate "Payment type" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 02'     |
+		And I select current line in "List" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '333,33' | '6,67'       | 'Card 02'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '2,00'    |
+	* Change sum
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I select current line in "Payments" table
+		And I input "999,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '999,00' | '19,98'      | 'Card 02'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '2,00'    |
+		And I close all client application windows
+		
+		
+
+Scenario: _0154197 check comission calculation in the Retail return receipt
+		And I close all client application windows
+	* Open RRR form
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+	* Filling payments tab
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I activate "Bank term" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Bank term" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Bank term 01' |
+		And I select current line in "List" table
+		And I activate "Payment type" field in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I activate "Payment terminal" field in "Payments" table
+		And I click choice button of "Payment terminal" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Payment terminal 01'     |
+		And I select current line in "List" table
+		And I activate "Account" field in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+		And I finish line editing in "Payments" table	
+	* Check comission calculation (sum and commision percent)
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I select current line in "Payments" table
+		And I input "333,33" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '333,33' | '3,33'       | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '1,00'    |
+	* Change comission percent
+		And I activate "Percent" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "5,00" text in "Percent" field of "Payments" table
+		And I finish line editing in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '333,33' | '16,67'      | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '5,00'    |
+	* Change comission sum
+		And I activate "Commission" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "22,52" text in "Commission" field of "Payments" table
+		And I finish line editing in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '333,33' | '22,52'      | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '6,76'    |
+	* Change payment type
+		And I activate "Payment type" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 02'     |
+		And I select current line in "List" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '333,33' | '6,67'       | 'Card 02'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '2,00'    |
+	* Change sum
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I select current line in "Payments" table
+		And I input "999,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Postponed payment' | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '999,00' | '19,98'      | 'Card 02'      | 'Payment terminal 01' | 'No'                | 'Bank term 01' | 'Bank account, TRY' | '2,00'    |			
+		And I close all client application windows				
+		
+Scenario: _0154198 copy line in Payment tab in the Retail return receipt	
+	And I close all client application windows
+	* Open RRR form
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+	* Filling payments tab
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I activate "Bank term" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Bank term" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Bank term 01' |
+		And I select current line in "List" table
+		And I activate "Payment type" field in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I activate "Payment terminal" field in "Payments" table
+		And I click choice button of "Payment terminal" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Payment terminal 01'     |
+		And I select current line in "List" table
+		And I activate "Account" field in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+		And I finish line editing in "Payments" table	
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I select current line in "Payments" table
+		And I input "100,33" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table	
+	* Check line copy
+		And I activate "Bank term" field in "Payments" table
+		And in the table "Payments" I click the button named "PaymentsContextMenuCopy"
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Postponed payment' | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '100,33' | '1,00'       | 'Card 01'      | 'Payment terminal 01' | 'No'                | 'Bank term 01' | 'Bank account, TRY' | '1,00'    |
+			| '2' | '100,33' | '1,00'       | 'Card 01'      | 'Payment terminal 01' | 'No'                | 'Bank term 01' | 'Bank account, TRY' | '1,00'    |
+	* Delete line
+		And I go to line in "Payments" table
+			| '#' | 'Account'           | 'Amount' | 'Bank term'    | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
+			| '2' | 'Bank account, TRY' | '100,33' | 'Bank term 01' | '1,00'       | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
+		And I delete a line in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '100,33' | '1,00'       | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '1,00'    |	
+		And I close all client application windows
+		
+
+Scenario: _0154199 copy line in Payment tab in the Retail sales receipt	
+	And I close all client application windows
+	* Open RSR form
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Filling payments tab
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I activate "Bank term" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Bank term" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Bank term 01' |
+		And I select current line in "List" table
+		And I activate "Payment type" field in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I activate "Payment terminal" field in "Payments" table
+		And I click choice button of "Payment terminal" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Payment terminal 01'     |
+		And I select current line in "List" table
+		And I activate "Account" field in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+		And I finish line editing in "Payments" table	
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I select current line in "Payments" table
+		And I input "100,33" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table	
+	* Check line copy
+		And I activate "Bank term" field in "Payments" table
+		And in the table "Payments" I click the button named "PaymentsContextMenuCopy"
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '100,33' | '1,00'       | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '1,00'    |
+			| '2' | '100,33' | '1,00'       | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '1,00'    |
+	* Delete line
+		And I go to line in "Payments" table
+			| '#' | 'Account'           | 'Amount' | 'Bank term'    | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
+			| '2' | 'Bank account, TRY' | '100,33' | 'Bank term 01' | '1,00'       | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
+		And I delete a line in "Payments" table
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
+			| '1' | '100,33' | '1,00'       | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '1,00'    |	
+		And I close all client application windows		
+				
+		
+				
+
 
 
 Scenario: _999999 close TestClient session

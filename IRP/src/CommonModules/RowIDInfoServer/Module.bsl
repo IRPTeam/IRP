@@ -3617,12 +3617,14 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Payments.Amount,
 	|	Payments.Percent,
 	|	Payments.Commission,
-	|	Payments.BankTerm
+	|	Payments.BankTerm,
+	|	Payments.Key
 	|FROM
 	|	Document.RetailSalesReceipt.Payments AS Payments
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = Payments.Ref
 	|GROUP BY
+	|	Payments.Key,
 	|	Payments.Account,
 	|	Payments.Amount,
 	|	Payments.BankTerm,
@@ -7384,7 +7386,6 @@ Function AddLinkedDocumentRows(Object, FillingValues) Export
 						PutToUpdatedProperties(PropertyName, TableName, NewRow, UpdatedProperties);
 					EndDo;
 				EndIf;
-				
 			EndDo;
 		EndIf;
 	EndDo;
@@ -7840,6 +7841,11 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 				FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
 			EndDo;
 		EndDo;
+		
+		For Each Payment In Tables.Payments Do
+			FillingValues.Payments.Add(ValueTableRowToStructure(Tables.Payments.Columns, Payment));
+		EndDo;
+		
 		FillingValues.Insert("BasedOn", True);
 		ArrayOfFillingValues.Add(FillingValues);
 	EndDo;
@@ -8098,7 +8104,7 @@ EndFunction
 #Region EmptyTables_Payments
 
 Function GetColumnNames_Payments()
-	Return "Ref, PaymentType, PaymentTerminal, Account, Percent, BankTerm";
+	Return "Key, Ref, PaymentType, PaymentTerminal, Account, Percent, BankTerm";
 EndFunction
 
 Function GetColumnNamesSum_Payments()

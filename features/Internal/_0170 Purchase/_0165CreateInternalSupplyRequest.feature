@@ -9,6 +9,9 @@ As a sales manager
 I want to create an Internal supply request 
 For ordering items to the planning department (purchasing or transfer from the store)
 
+Variables:
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

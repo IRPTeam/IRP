@@ -71,15 +71,16 @@ Scenario: _010004 create Contact info Type - Addresses
 		And Delay 5
 		And "List" table contains lines
 		| 'Description' |
-		| 'Google Addreses5'  |
+		| 'Google Addreses'  |
 
-Scenario: _010005 verification of UNIQ ID uniqueness control in IDInfoTypes
+Scenario: check preparation
 	* Check preparation
 		Try
 			And the previous scenario executed successfully
 		Except
-			And I log the error "Skipped" by exception data
 			Then I stop all scripts execution
+
+Scenario: _010005 verification of UNIQ ID uniqueness control in IDInfoTypes
 	* Create one more item with ID Adr_10
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
 		And I click the button named "FormCreate"

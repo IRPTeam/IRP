@@ -804,7 +804,7 @@ EndFunction
 #Region CHANGE_PRICE_BY_PRICE_TYPE
 
 Function ChangePriceByPriceTypeOptions() Export
-	Return GetChainLinkOptions("Ref, Date, PriceType, CurrentPrice, ItemKey, Unit");
+	Return GetChainLinkOptions("Ref, Date, PriceType, CurrentPrice, ItemKey, Unit, Currency");
 EndFunction
 
 Function ChangePriceByPriceTypeExecute(Options) Export
@@ -819,7 +819,13 @@ Function ChangePriceByPriceTypeExecute(Options) Export
 	PriceParameters.Insert("ItemKey"      , Options.ItemKey);
 	PriceParameters.Insert("Unit"         , Options.Unit);
 	PriceInfo = GetItemInfo.ItemPriceInfo(PriceParameters);
-	Return ?(PriceInfo = Undefined, 0, PriceInfo.Price);
+	If PriceInfo = Undefined Then
+		Return 0;
+	EndIf;
+	
+	Price = ModelServer_V2.ConvertPriceByCurrency(Period, Options.PriceType, Options.Currency, PriceInfo.Price);
+	
+	Return Price;
 EndFunction
 
 #EndRegion

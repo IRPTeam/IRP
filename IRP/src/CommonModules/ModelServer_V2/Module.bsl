@@ -57,3 +57,17 @@ Function GetCommissionPercentExecute(Options) Export
 
 	Return 0;
 EndFunction
+
+Function ConvertPriceByCurrency(Period, PriceType, CurrencyTo, Price) Export
+	CurrencyFrom = PriceType.Currency;
+	If CurrencyFrom = CurrencyTo Then
+		Return Price;
+	EndIf;
+	
+	CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(Period, 
+			CurrencyFrom, 
+			CurrencyTo,
+			PriceType.Source);
+	PriceRecalculated = (Price * CurrencyInfo.Rate) / CurrencyInfo.Multiplicity;
+	Return PriceRecalculated;
+EndFunction

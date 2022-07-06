@@ -8661,14 +8661,7 @@ Scenario: _0154186 check price recalculaton in the RSR (depend of currency)
 		And I close all client application windows					
 		
 				
-		
-				
-		
-		
-				
-		
-				
-
+	
 
 
 Scenario: _999999 close TestClient session

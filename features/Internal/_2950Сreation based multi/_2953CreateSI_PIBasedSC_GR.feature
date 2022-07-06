@@ -677,16 +677,16 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Agreement" is equal to "Personal Partner terms, $" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'        | 'Shipment confirmation'      |
-			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '5,000' | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*' | 'Shipment confirmation 465*' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' | 'Shipment confirmation'      |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '5,000'    | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*'           | 'Shipment confirmation 465*' |
 		If the field named "Agreement" is equal to "Basic Partner terms, TRY" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
-			| '400,00' | 'Trousers' | '18%' | '36/Yellow' | '5,000' | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*'           |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
+			| '400,00' | 'Trousers' | '18%' | '36/Yellow' | '5,000'    | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*'           |
 			And "ShipmentConfirmationsTree" table contains lines
-			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity'     |
-			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
-			| ''         | ''          | 'Shipment confirmation 466*' | ''        | '5,000' | '5,000' |
+			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity' |
+			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000'    |
+			| ''         | ''          | 'Shipment confirmation 466*' | ''        | '5,000' | '5,000'    |
 		And I click the button named "FormPostAndClose"
 		When I click command interface button "Sales invoice (create)"
 		And Delay 2
@@ -696,16 +696,16 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		Then the form attribute named "Store" became equal to "Store 02"
 		If the field named "Agreement" is equal to "Personal Partner terms, $" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
-			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '5,000' | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*'           |
+			| 'Price' | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
+			| '68,48' | 'Trousers' | '18%' | '38/Yellow' | '5,000'    | '55,62'      | '1%'       | 'Basic Price Types' | 'pcs'  | '286,78'     | '342,40'       | 'Store 02' | '*'           |
 			And "ShipmentConfirmationsTree" table contains lines
 			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity'     |
 			| 'Trousers' | '38/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
 			| ''         | ''          | 'Shipment confirmation 465*' | ''        | '5,000' | '5,000' |
 		If the field named "Agreement" is equal to "Basic Partner terms, TRY" Then
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
-			| '400,00' | 'Trousers' | '18%' | '36/Yellow' | '5,000' | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*'           |
+			| 'Price' | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
+			| '68,48' | 'Trousers' | '18%' | '36/Yellow' | '5,000'    | '55,62'      | '1%'       | 'Basic Price Types' | 'pcs'  | '286,78'     | '342,40'       | 'Store 02' | '*'           |
 			And "ShipmentConfirmationsTree" table contains lines
 			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity'     |
 			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |

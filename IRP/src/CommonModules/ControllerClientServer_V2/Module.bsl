@@ -1334,6 +1334,17 @@ Procedure StepChangeCurrencyByAgreement(Parameters, Chain) Export
 	Chain.ChangeCurrencyByAgreement.Options.Add(Options);
 EndProcedure
 
+// Currency.ChangeLandedCostCurrencyByCompany.Step
+Procedure StepChangeLandedCostCurrencyByCompany(Parameters, Chain) Export
+	Chain.ChangeLandedCostCurrencyByCompany.Enable = True;
+	Chain.ChangeLandedCostCurrencyByCompany.Setter = "SetCurrency";
+	Options = ModelClientServer_V2.ChangeLandedCostCurrencyByCompanyOptions();
+	Options.Company         = GetCompany(Parameters);
+	Options.CurrentCurrency = GetCurrency(Parameters);
+	Options.StepName = "StepChangeLandedCostCurrencyByCompany";
+	Chain.ChangeLandedCostCurrencyByCompany.Options.Add(Options);
+EndProcedure
+
 #EndRegion
 
 #Region CURRENCY_RECEIVE
@@ -1895,6 +1906,12 @@ Function BindCompany(Parameters)
 	Binding.Insert("CashTransferOrder",
 		"StepChangeAccountSenderByCompany,
 		|StepChangeAccountReceiverByCompany");
+	
+	Binding.Insert("StockAdjustmentAsSurplus",
+		"StepChangeLandedCostCurrencyByCompany");
+	
+	Binding.Insert("StockAdjustmentAsWriteOff",
+		"StepChangeLandedCostCurrencyByCompany");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

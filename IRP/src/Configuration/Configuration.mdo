@@ -853,6 +853,7 @@
   <informationRegisters>InformationRegister.T9012S_AccountsPartner</informationRegisters>
   <informationRegisters>InformationRegister.T9013S_AccountsTax</informationRegisters>
   <informationRegisters>InformationRegister.T9014S_AccountsExpenseRevenue</informationRegisters>
+  <informationRegisters>InformationRegister.T6095S_WriteOffBatchesInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

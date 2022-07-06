@@ -33,7 +33,6 @@ Function ConvertQuantityToQuantityInBaseUnit(Bundle, Unit, Quantity) Export
 EndFunction
 
 Function GetCommissionPercentExecute(Options) Export
-	
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -57,3 +56,24 @@ Function GetCommissionPercentExecute(Options) Export
 
 	Return 0;
 EndFunction
+
+Function GetLandedCostCurrencyByCompany(Company) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Companies.LandedCostCurrencyMovementType.Currency AS Currency
+	|FROM
+	|	Catalog.Companies AS Companies
+	|WHERE
+	|	Companies.Ref = &Ref";
+	Query.SetParameter("Ref", Company);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Currency;
+	Else
+		Return Undefined;
+	EndIf;
+EndFunction
+
+

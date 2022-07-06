@@ -59,6 +59,10 @@ Function GetCommissionPercentExecute(Options) Export
 EndFunction
 
 Function ConvertPriceByCurrency(Period, PriceType, CurrencyTo, Price) Export
+	If Not ValueIsFilled(PriceType) Then
+		Return Price;
+	EndIf;
+	
 	CurrencyFrom = PriceType.Currency;
 	If Not ValueIsFilled(CurrencyFrom) 
 		Or Not ValueIsFilled(CurrencyTo) 

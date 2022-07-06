@@ -916,11 +916,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice,
 	//--
-	|	T6020S_BatchKeysInfo.ProfitLossCenter AS ProfitLossCenter,
-	|	T6020S_BatchKeysInfo.ExpenseType AS ExpenseType,
-	|	T6020S_BatchKeysInfo.RowID AS RowID,
-	|	T6020S_BatchKeysInfo.Branch AS Branch,
-	|	T6020S_BatchKeysInfo.Currency AS Currency,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end AS ProfitLossCenter,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end AS ExpenseType,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end AS RowID,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
 	//--
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
@@ -943,11 +943,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	T6020S_BatchKeysInfo.BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice,
 	//--
-	|	T6020S_BatchKeysInfo.ProfitLossCenter,
-	|	T6020S_BatchKeysInfo.ExpenseType,
-	|	T6020S_BatchKeysInfo.RowID,
-	|	T6020S_BatchKeysInfo.Branch,
-	|	T6020S_BatchKeysInfo.Currency,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end,
 	//--
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.ItemKey
@@ -998,11 +998,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice,
 	//--
-	|	T6020S_BatchKeysInfo.ProfitLossCenter AS ProfitLossCenter,
-	|	T6020S_BatchKeysInfo.ExpenseType AS ExpenseType,
-	|	T6020S_BatchKeysInfo.RowID AS RowID,
-	|	T6020S_BatchKeysInfo.Branch AS Branch,
-	|	T6020S_BatchKeysInfo.Currency AS Currency,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end AS ProfitLossCenter,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end AS ExpenseType,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end AS RowID,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
 	//--
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
@@ -1020,11 +1020,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	T6020S_BatchKeysInfo.BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice,
 	//--
-	|	T6020S_BatchKeysInfo.ProfitLossCenter,
-	|	T6020S_BatchKeysInfo.ExpenseType,
-	|	T6020S_BatchKeysInfo.RowID,
-	|	T6020S_BatchKeysInfo.Branch,
-	|	T6020S_BatchKeysInfo.Currency,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end,
 	//--
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.ItemKey

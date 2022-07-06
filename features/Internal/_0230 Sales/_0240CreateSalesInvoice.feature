@@ -9,6 +9,9 @@ As a sales manager
 I want to create a Sales invoice document
 To sell a product to a customer
 
+Variables:
+import "Variables.feature"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

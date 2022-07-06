@@ -6,7 +6,8 @@
 
 Functionality: locking linked strings (ISR,ITO,IT)
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _2067001 preparation (locking linked strings)
 	When set True value to the constant

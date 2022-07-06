@@ -9,6 +9,9 @@ As a financier
 I want to fill out the information on the services I received and which I provided
 For cost analysis
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

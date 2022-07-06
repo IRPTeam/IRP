@@ -9,6 +9,9 @@ As a sales manager
 I want to create an Internal supply request 
 For ordering items to the planning department (purchasing or transfer from the store)
 
+Variables:
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -55,7 +58,7 @@ Scenario: _016500 preparation
 					Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 				* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
 					And I click the button named "FormCreate"
-					And I select external file "#workingDir#/DataProcessor/TaxCalculateVAT_TR.epf"
+					And I select external file "$Path$/DataProcessor/TaxCalculateVAT_TR.epf"
 					And I click the button named "FormAddExtDataProc"
 					And I input "" text in "Path to plugin for test" field
 					And I input "TaxCalculateVAT_TR" text in "Name" field

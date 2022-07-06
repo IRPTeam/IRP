@@ -10,6 +10,9 @@ I want to create Purchase order based on a Sales order
 To implement a sales-for-purchase scheme
 
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

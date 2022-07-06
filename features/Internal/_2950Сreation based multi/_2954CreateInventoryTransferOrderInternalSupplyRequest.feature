@@ -5,6 +5,8 @@
 
 Feature: create Inventory transfer order based on several Internal supply request
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

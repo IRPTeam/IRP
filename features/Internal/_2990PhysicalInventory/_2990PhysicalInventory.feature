@@ -10,6 +10,9 @@ I'd like to add functionality to write off shortages and recover surplus goods.
 To work with the products
 
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

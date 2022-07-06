@@ -5,7 +5,8 @@
 
 Functionality: purchase order closing
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _0224000 preparation (Purchase order closing)
 	When set True value to the constant

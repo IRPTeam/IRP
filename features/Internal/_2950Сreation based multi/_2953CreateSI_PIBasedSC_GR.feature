@@ -5,6 +5,8 @@
 
 Feature: create Purchase invoices and Sales invoices based on Goods receipt and Shipment confirmation
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

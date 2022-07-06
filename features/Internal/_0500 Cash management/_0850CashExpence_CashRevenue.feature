@@ -9,6 +9,9 @@ As an accountant
 I want to create Cash revenue and Cash expence documents
 For write off expenses and record income directly to/from the account
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

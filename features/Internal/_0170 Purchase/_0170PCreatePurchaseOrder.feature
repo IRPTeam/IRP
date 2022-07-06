@@ -9,6 +9,9 @@ As a procurement manager
 I want to create a Purchase order document
 For tracking an item that has been ordered from a vendor
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

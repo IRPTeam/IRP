@@ -10,6 +10,10 @@ I want to create a product labeling document
 To assign a unique barcode (series) to products
 
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
@@ -70,7 +74,7 @@ Scenario: _300000 user check for Turkish data
 Scenario: _300201 add-on plugin to generate unique barcodes
 	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 	And I click the button named "FormCreate"
-	And I select external file "#workingDir#/DataProcessor/GenerateBarcode.epf"
+	And I select external file "$Path$/DataProcessor/GenerateBarcode.epf"
 	And I click the button named "FormAddExtDataProc"
 	And I input "" text in "Path to plugin for test" field
 	And I input "GenerateBarcode" text in "Name" field

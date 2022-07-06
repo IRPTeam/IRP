@@ -7,7 +7,8 @@ Feature: creation mechanism based on for sales documents
 
 # Sales order - Sales invoice - Shipment confirmation - Bank receipt/Cash receipt
 
-
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

@@ -7,6 +7,8 @@
 
 Functionality: locking linked strings several sessions (SO,SI,SC,SRO,SR, Planned receipt reservetion)
 
+Variables:
+import "Variables.feature"
 
 Scenario: _2070001 preparation (locking linked strings)
 	When set True value to the constant

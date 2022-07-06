@@ -6,7 +6,8 @@
 
 Functionality: locking linked strings (PO,PI,GR,PRO,PR)
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _2066001 preparation (locking linked strings)
 	When set True value to the constant

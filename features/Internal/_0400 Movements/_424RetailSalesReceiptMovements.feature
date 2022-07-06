@@ -7,7 +7,8 @@
 
 Feature: check Retail sales receipt movements
 
-
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

@@ -6,7 +6,8 @@
 
 Functionality: locking linked strings (RSR, RRR)
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _2069001 preparation (locking linked strings)
 	When set True value to the constant

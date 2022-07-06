@@ -60,7 +60,9 @@ EndFunction
 
 Function ConvertPriceByCurrency(Period, PriceType, CurrencyTo, Price) Export
 	CurrencyFrom = PriceType.Currency;
-	If CurrencyFrom = CurrencyTo Then
+	If Not ValueIsFilled(CurrencyFrom) 
+		Or Not ValueIsFilled(CurrencyTo) 
+		Or CurrencyFrom = CurrencyTo Then
 		Return Price;
 	EndIf;
 	
@@ -68,6 +70,13 @@ Function ConvertPriceByCurrency(Period, PriceType, CurrencyTo, Price) Export
 			CurrencyFrom, 
 			CurrencyTo,
 			PriceType.Source);
-	PriceRecalculated = (Price * CurrencyInfo.Rate) / CurrencyInfo.Multiplicity;
+	Rate = ?(ValueIsFilled(CurrencyInfo.Rate), CurrencyInfo.Rate, 0);
+	Multiplicity = ?(ValueIsFilled(CurrencyInfo.Multiplicity), CurrencyInfo.Multiplicity, 0);
+	
+	If Rate = 0 Or Multiplicity = 0 Then
+		Return Price;
+	EndIf;
+	
+	PriceRecalculated = (Price * Rate) / Multiplicity;
 	Return PriceRecalculated;
 EndFunction

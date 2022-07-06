@@ -8248,6 +8248,428 @@ Scenario: _0154181 additional tables
 			| ''          |
 		And I close all client application windows
 
+Scenario: _0154182 check price recalculaton in the PO (depend of currency)
+	* Create PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"	
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor DFC'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+	* Check price
+		And "ItemList" table contains lines
+			| 'Item key' | 'Price type'        | 'Item'  | 'Price'  |
+			| 'XS/Blue'  | 'Basic Price Types' | 'Dress' | '520,00' |
+	* Change document currency and check price recalculaton
+		And I move to "Other" tab
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'     |
+			| 'USD'  | 'American dollar' |
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And "ItemList" table contains lines
+			| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'  | 'Basic Price Types' | 'Dress' | '1,000'    | 'pcs'  | '16,02'      | '89,02' | '18%' | ''              | '89,02'      | '105,04'       | 'Store 03' |
+	* Add nes item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '16,02'      | '89,02' | '18%' | ''              | '89,02'      | '105,04'       | 'Store 03' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '12,33'      | '68,48' | '18%' | ''              | '68,48'      | '80,81'        | 'Store 03' |
+	* Chenge date and check price recalculation
+		And I move to "Other" tab
+		And I input "20.06.2019 00:00:00" text in the field named "Date"
+		And I move to "Item list" tab
+		And I click "OK" button
+		And "ItemList" table became equal
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'     | '104,00'       | 'Store 03' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'      | '80,00'        | 'Store 03' |
+		And I close all client application windows
+		
+Scenario: _0154183 check price recalculaton in the PI (depend of currency)
+		And I close all client application windows
+	* Create PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"	
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor DFC'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+	* Check price
+		And "ItemList" table contains lines
+			| 'Item key' | 'Price type'        | 'Item'  | 'Price'  |
+			| 'XS/Blue'  | 'Basic Price Types' | 'Dress' | '520,00' |
+	* Change document currency and check price recalculaton
+		And I move to "Other" tab
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'     |
+			| 'USD'  | 'American dollar' |
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And "ItemList" table contains lines
+			| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'  | 'Basic Price Types' | 'Dress' | '1,000'    | 'pcs'  | '16,02'      | '89,02' | '18%' | ''              | '89,02'      | '105,04'       | 'Store 03' |
+	* Add nes item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '16,02'      | '89,02' | '18%' | ''              | '89,02'      | '105,04'       | 'Store 03' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '12,33'      | '68,48' | '18%' | ''              | '68,48'      | '80,81'        | 'Store 03' |
+	* Chenge date and check price recalculation
+		And I move to "Other" tab
+		And I input "20.06.2019 00:00:00" text in the field named "Date"
+		And I move to "Item list" tab
+		And I click "OK" button
+		And "ItemList" table became equal
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'     | '104,00'       | 'Store 03' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'      | '80,00'        | 'Store 03' |
+		And I close all client application windows	
+				
+	
+Scenario: _0154184 check price recalculaton in the SO (depend of currency)
+		And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"	
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+	* Check price
+		And "ItemList" table contains lines
+			| 'Item key' | 'Price type'        | 'Item'  | 'Price'  |
+			| 'XS/Blue'  | 'Basic Price Types' | 'Dress' | '520,00' |
+	* Change document currency and check price recalculaton
+		And I move to "Other" tab
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'     |
+			| 'USD'  | 'American dollar' |
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And "ItemList" table contains lines
+			| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'  | 'Basic Price Types' | 'Dress' | '1,000'    | 'pcs'  | '14,46'      | '89,02' | '18%' | ''              | '74,56'      | '89,02'        | 'Store 01' |
+	* Add nes item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '14,46'      | '89,02' | '18%' | ''              | '74,56'      | '89,02'       | 'Store 01' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '11,13'      | '68,48' | '18%' | ''              | '57,35'      | '68,48'        | 'Store 01' |
+	* Chenge date and check price recalculation
+		And I move to "Other" tab
+		And I input "20.06.2019 00:00:00" text in the field named "Date"
+		And I move to "Item list" tab
+		And I click "OK" button
+		And "ItemList" table became equal
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'     | '104,00'       | 'Store 01' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'      | '80,00'        | 'Store 01' |
+		And I close all client application windows		
+					
+	
+Scenario: _0154185 check price recalculaton in the SI (depend of currency)
+		And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+	* Check price
+		And "ItemList" table contains lines
+			| 'Item key' | 'Price type'        | 'Item'  | 'Price'  |
+			| 'XS/Blue'  | 'Basic Price Types' | 'Dress' | '520,00' |
+	* Change document currency and check price recalculaton
+		And I move to "Other" tab
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'     |
+			| 'USD'  | 'American dollar' |
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And "ItemList" table contains lines
+			| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'  | 'Basic Price Types' | 'Dress' | '1,000'    | 'pcs'  | '14,46'      | '89,02' | '18%' | ''              | '74,56'      | '89,02'        | 'Store 01' |
+	* Add nes item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '14,46'      | '89,02' | '18%' | ''              | '74,56'      | '89,02'       | 'Store 01' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '11,13'      | '68,48' | '18%' | ''              | '57,35'      | '68,48'        | 'Store 01' |
+	* Chenge date and check price recalculation
+		And I move to "Other" tab
+		And I input "20.06.2019 00:00:00" text in the field named "Date"
+		And I move to "Item list" tab
+		And I click "OK" button
+		And "ItemList" table became equal
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'     | '104,00'       | 'Store 01' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'      | '80,00'        | 'Store 01' |
+		And I close all client application windows						
+		
+
+Scenario: _0154186 check price recalculaton in the RSR (depend of currency)
+		And I close all client application windows
+	* Create RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+	* Check price
+		And "ItemList" table contains lines
+			| 'Item key' | 'Price type'        | 'Item'  | 'Price'  |
+			| 'XS/Blue'  | 'Basic Price Types' | 'Dress' | '520,00' |
+	* Change document currency and check price recalculaton
+		And I move to "Other" tab
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'     |
+			| 'USD'  | 'American dollar' |
+		And I select current line in "List" table
+		And I move to "Item list" tab
+		And "ItemList" table contains lines
+			| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'  | 'Basic Price Types' | 'Dress' | '1,000'    | 'pcs'  | '13,58'      | '89,02' | '18%' | ''              | '75,44'      | '89,02'        | 'Store 01' |
+	* Add new item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'     | 'Item key'  |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '13,58'      | '89,02' | '18%' | ''              | '75,44'      | '89,02'       | 'Store 01' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '10,45'      | '68,48' | '18%' | ''              | '58,03'      | '68,48'        | 'Store 01' |
+	* Chenge date and check price recalculation
+		And I move to "Other" tab
+		And I input "20.06.2019 00:00:00" text in the field named "Date"
+		And I move to "Item list" tab
+		And I click "OK" button
+		And "ItemList" table became equal
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'     | '104,00'       | 'Store 01' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'      | '80,00'        | 'Store 01' |
+		And I close all client application windows					
+		
+				
+		
+				
+		
+		
+				
+		
+				
+
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

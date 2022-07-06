@@ -8014,8 +8014,8 @@ Scenario: _0154167 check tax rate recalculation when change partner term (Purcha
 			| 'Dress' | 'XS/Blue'  |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| 'Price type'        | 'Item'  | 'Item key' | 'Tax amount' | 'Quantity'     | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' |
-			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | ''           | '1,000' | 'pcs'  | '520,00' | '0%'  | ''              | '520,00'     | '520,00'       |
+			| 'Price type'        | 'Item'  | 'Item key' | 'Tax amount' | 'Quantity' | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | ''           | '1,000'    | 'pcs'  | '89,02' | '0%'  | ''              | '89,02'      | '89,02'        |
 		* Change partner term and update tax
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -8026,8 +8026,8 @@ Scenario: _0154167 check tax rate recalculation when change partner term (Purcha
 			Then "Update item list info" window is opened
 			And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Tax amount' | 'Quantity'     | 'Unit' | 'VAT' | 'Net amount' | 'Total amount' |
-			| 'Dress' | 'XS/Blue'  | '93,60'      | '1,000' | 'pcs'  | '18%' | '520,00'     | '613,60'       |
+			| 'Item'  | 'Item key' | 'Tax amount' | 'Quantity' | 'Unit' | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'Dress' | 'XS/Blue'  | '93,60'      | '1,000'    | 'pcs'  | '18%' | '520,00'     | '613,60'       |
 		* Change partner term and not update tax
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -8038,8 +8038,8 @@ Scenario: _0154167 check tax rate recalculation when change partner term (Purcha
 			And I change checkbox "Do you want to change tax rates according to the partner term?"
 			And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Tax amount' | 'Quantity'     | 'Unit' | 'VAT' | 'Net amount' | 'Total amount' |
-			| 'Dress' | 'XS/Blue'  | '93,60'      | '1,000' | 'pcs'  | '18%' | '520,00'     | '613,60'       |
+			| 'Item'  | 'Item key' | 'Tax amount' | 'Quantity' | 'Unit' | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'Dress' | 'XS/Blue'  | '16,02'      | '1,000'    | 'pcs'  | '18%' | '89,02'      | '105,04'       |
 		And I close all client application windows
 
 
@@ -8084,8 +8084,8 @@ Scenario: _0154168 check tax rate recalculation when change partner term (Purcha
 			| 'Dress' | 'XS/Blue'  |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| 'Price type'        | 'Item'  | 'Item key' | 'Tax amount' | 'Quantity'     | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' |
-			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | ''           | '1,000' | 'pcs'  | '520,00' | '0%'  | ''              | '520,00'     | '520,00'       |
+			| 'Price type'        | 'Item'  | 'Item key' | 'Tax amount' | 'Quantity' | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' |
+			| 'Basic Price Types' | 'Dress' | 'XS/Blue'  | ''           | '1,000'    | 'pcs'  | '89,02' | '0%'  | ''              | '89,02'      | '89,02'        |
 		* Change partner term and update tax
 			And I click Select button of "Partner term" field
 			And I go to line in "List" table
@@ -8108,8 +8108,8 @@ Scenario: _0154168 check tax rate recalculation when change partner term (Purcha
 			And I change checkbox "Do you want to change tax rates according to the partner term?"
 			And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Tax amount' | 'Quantity'     | 'Unit' | 'VAT' | 'Net amount' | 'Total amount' |
-			| 'Dress' | 'XS/Blue'  | '93,60'      | '1,000' | 'pcs'  | '18%' | '520,00'     | '613,60'       |
+			| 'Item'  | 'Item key' | 'Tax amount' | 'Quantity' | 'Unit' | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'Dress' | 'XS/Blue'  | '16,02'      | '1,000'    | 'pcs'  | '18%' | '89,02'      | '105,04'       |
 		And I close all client application windows		
 
 

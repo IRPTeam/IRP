@@ -22,6 +22,7 @@ Scenario: _005028 filling in the "Price types" catalog
 	Given I open new TestClient session or connect the existing one
 	* Preparation
 		When Create catalog Currencies objects
+		When Create catalog IntegrationSettings objects
 	* Opening a form and creating customer prices Basic Price Types
 		Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
 		And I click the button named "FormCreate"
@@ -37,6 +38,14 @@ Scenario: _005028 filling in the "Price types" catalog
 			| TRY  |
 		And I select current line in "List" table
 		And I click the button named "FormWrite"
+		When TestClient log message contains '"Source" is a required field.' string
+		* Filling Source
+			And I click Choice button of the field named "Source"
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Forex Buying' |
+			And I select current line in "List" table	
+			And I click the button named "FormWrite"		
 		* Check data save
 			Then the form attribute named "Currency" became equal to "TRY"
 			Then the form attribute named "Description_en" became equal to "Basic Price Types"

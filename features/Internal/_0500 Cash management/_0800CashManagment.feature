@@ -10,7 +10,8 @@ As a financier
 I want to create documents Incoming payment order and Outgoing payment order
 For expense and income planning
 
-
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

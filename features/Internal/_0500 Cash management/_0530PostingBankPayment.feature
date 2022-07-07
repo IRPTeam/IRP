@@ -10,6 +10,10 @@ As an accountant
 I want to pay by bank payment.
 To close debts to partners
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

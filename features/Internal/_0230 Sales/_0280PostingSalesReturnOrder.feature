@@ -9,6 +9,9 @@ As a sales manager
 I want to create a Sales return order document
 To track a product that needs to be returned from customer
 
+Variables:
+import "Variables.feature"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

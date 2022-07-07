@@ -6,6 +6,8 @@
 Functionality: Shipment confirmation - Purchase return
 
 
+Variables:
+import "Variables.feature"
 
 Scenario: _022500 preparation (SC-PR)
 	When set True value to the constant

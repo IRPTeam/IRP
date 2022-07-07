@@ -5,7 +5,8 @@
 
 Feature: creation mechanism based on for purchase documents
 
-
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

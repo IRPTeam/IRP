@@ -6,7 +6,8 @@
 
 Functionality: check Purchase return order movements
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _041500 preparation (Purchase return order)
 	When set True value to the constant

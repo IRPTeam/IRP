@@ -7,7 +7,8 @@
 
 Functionality: locking linked strings (SO,SI,SC,SRO,SR)
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _2065001 preparation (locking linked strings)
 	When set True value to the constant

@@ -8,6 +8,8 @@ Feature: check that the item is not cleared when saving the document
 As a QA
 I want to check that Item (without item key) is not cleared when saving a document
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

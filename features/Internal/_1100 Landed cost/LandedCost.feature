@@ -4,6 +4,8 @@
 
 Feature: Landed cost
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I open new TestClient session or connect the existing one

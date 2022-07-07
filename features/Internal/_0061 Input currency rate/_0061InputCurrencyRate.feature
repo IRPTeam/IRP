@@ -10,6 +10,10 @@ As an accountant
 I want to fill out the exchange rate
 To use multi-currency accounting
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
@@ -22,7 +26,7 @@ Scenario: _006100 preparation (filling in currency rates)
 	* Add Plugin ExternalBankUa
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
-		And I select external file "#workingDir#/DataProcessor/bank_gov_ua.epf"
+		And I select external file "$Path$/DataProcessor/bank_gov_ua.epf"
 		And I click the button named "FormAddExtDataProc"
 		And I input "" text in "Path to plugin for test" field
 		And I input "ExternalBankUa" text in "Name" field
@@ -37,7 +41,7 @@ Scenario: _006100 preparation (filling in currency rates)
 	* Add Plugin ExternalTCMBGovTr
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		And I click the button named "FormCreate"
-		And I select external file "#workingDir#/DataProcessor/tcmb_gov_tr.epf"
+		And I select external file "$Path$/DataProcessor/tcmb_gov_tr.epf"
 		And I click the button named "FormAddExtDataProc"
 		And I input "" text in "Path to plugin for test" field
 		And I input "ExternalTCMBGovTr" text in "Name" field

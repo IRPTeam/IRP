@@ -5,6 +5,8 @@
 
 Feature: check the cleaning of fields in forms of directories with switches (the drawing of the form depends on the switch)
 
+Variables:
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
 
 
 Background:

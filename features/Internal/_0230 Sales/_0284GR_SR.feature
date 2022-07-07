@@ -5,6 +5,9 @@
 
 Functionality: Goods receipt - Sales return
 
+Variables:
+import "Variables.feature"
+
 Scenario: _028400 preparation (GR-SR)
 	When set True value to the constant
 	And I close TestClient session

@@ -6,6 +6,8 @@
 
 Feature: check Bank payment movements
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -415,14 +417,14 @@ Scenario: _043319 check Bank payment movements by the Register "R5022 Expenses" 
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 323 dated 03.06.2021 17:01:44' | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'             | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5022 Expenses"'                 | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                           | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                           | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                           | '03.06.2021 17:01:44' | '2,57'      | '2,57'              | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
-			| ''                                           | '03.06.2021 17:01:44' | '15'        | '15'                | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                           | '03.06.2021 17:01:44' | '15'        | '15'                | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+			| 'Bank payment 323 dated 03.06.2021 17:01:44' | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Document registrations records'             | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Register  "R5022 Expenses"'                 | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| ''                                           | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'                |
+			| ''                                           | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Calculation movement cost' |
+			| ''                                           | '03.06.2021 17:01:44' | '2,57'      | '2,57'              | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
+			| ''                                           | '03.06.2021 17:01:44' | '15'        | '15'                | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                           | '03.06.2021 17:01:44' | '15'        | '15'                | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |		
 	And I close all client application windows
 
 Scenario: _043320 check Bank payment movements by the Register "R3010 Cash on hand" (Return to customer, without basis)

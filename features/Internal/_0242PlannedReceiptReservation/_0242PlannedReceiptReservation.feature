@@ -5,7 +5,8 @@
 
 Functionality: planned receipt reservation
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _0242000 preparation (planned receipt reservation)
 	When set True value to the constant

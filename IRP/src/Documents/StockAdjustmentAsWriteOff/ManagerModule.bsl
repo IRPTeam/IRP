@@ -17,6 +17,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+	
 	Return Tables;
 EndFunction
 
@@ -30,6 +39,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
+	
+	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 EndProcedure
@@ -133,26 +145,31 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5022T_Expenses());
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
-	Return "SELECT
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref.Company AS Company,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Ref.Store AS Store,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
-		   |	ItemList.PhysicalInventory AS PhysicalInventory,
-		   |	ItemList.Ref AS Basis,
-		   |	ItemList.QuantityInBaseUnit AS Quantity,
-		   |	ItemList.Key
-		   |INTO ItemList
-		   |FROM
-		   |	Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.Ref = &Ref";
+	Return 
+	"SELECT
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.Store AS Store,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.ItemKey AS ItemKey,
+	|	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
+	|	ItemList.PhysicalInventory AS PhysicalInventory,
+	|	ItemList.Ref AS Basis,
+	|	ItemList.QuantityInBaseUnit AS Quantity,
+	|	ItemList.Key,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+	|	ItemList.ExpenseType AS ExpenseType
+	|INTO ItemList
+	|FROM
+	|	Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -296,6 +313,11 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Company,
 	|	ItemList.Store,
 	|	ItemList.ItemKey,
+	|	ItemList.ProfitLossCenter,
+	|	ItemList.ExpenseType,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Key AS RowID,
 	|	SUM(ItemList.Quantity) AS Quantity
 	|INTO T6020S_BatchKeysInfo
 	|FROM
@@ -307,7 +329,32 @@ Function T6020S_BatchKeysInfo()
 	|	VALUE(Enum.BatchDirection.Expense),
 	|	ItemList.Company,
 	|	ItemList.Store,
-	|	ItemList.ItemKey";
+	|	ItemList.ItemKey,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Key,
+	|	ItemList.ProfitLossCenter,
+	|	ItemList.ExpenseType";
+EndFunction
+
+Function R5022T_Expenses()
+	Return
+	"SELECT
+	|	WriteOffBatchesInfo.Period,
+	|	WriteOffBatchesInfo.Company,
+	|	WriteOffBatchesInfo.Branch,
+	|	WriteOffBatchesInfo.ProfitLossCenter,
+	|	WriteOffBatchesInfo.ExpenseType,
+	|	WriteOffBatchesInfo.ItemKey,
+	|	WriteOffBatchesInfo.Currency,
+	|	WriteOffBatchesInfo.RowID AS Key,
+	|	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
+	|	WriteOffBatchesInfo.Amount
+	|INTO R5022T_Expenses
+	|FROM
+	|	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo
+	|WHERE
+	|	WriteOffBatchesInfo.Document = &Ref";
 EndFunction
 
 #EndRegion

@@ -9,6 +9,9 @@ As an accountant
 I want to create a Credit_DebitNote document.
 For write-off of accounts receivable and payable
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

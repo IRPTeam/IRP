@@ -5,7 +5,8 @@
 
 Feature: check the display of lists of catalogs elements for which there are selections
 
-
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

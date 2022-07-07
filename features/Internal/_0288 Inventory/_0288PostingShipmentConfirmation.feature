@@ -12,6 +12,8 @@ As a storekeeper
 I want to create a Shipment confirmation
 For shipment of products from store
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

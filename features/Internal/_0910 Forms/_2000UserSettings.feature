@@ -11,6 +11,9 @@ I want to create a system of custom settings
 For ease of filling in documents
 
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

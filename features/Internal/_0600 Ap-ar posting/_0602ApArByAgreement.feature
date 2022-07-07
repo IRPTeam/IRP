@@ -8,6 +8,8 @@ Feature: accounting of receivables / payables by Partner terms
 As an accountant
 I want to settle general Partner terms for partners group
 
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

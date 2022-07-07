@@ -326,7 +326,7 @@ EndProcedure
 #Region SALES_INVOICE
 
 Procedure ItemListSalesInvoiceOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListSalesInvoiceOnChange(Object, Form, CurrentData);
+	ViewClient_V2.ItemListSalesDocumentOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

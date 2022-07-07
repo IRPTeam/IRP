@@ -283,6 +283,15 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="88bb196c-f2e9-4a64-9bb7-3424da5f7c76">
+    <name>ChoiceWIthBalancesForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice w ith balances form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <tabularSections uuid="9155c2ba-e918-4c05-9314-0707195f9ada">
     <producedTypes>
       <objectType typeId="1dde9633-f392-4747-9a54-0cf26129d86e" valueTypeId="07878e3f-06cd-4a3b-a071-78bd2264581d"/>

@@ -57,11 +57,18 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 	
+	For Each Row In ThisObject.ItemList Do
+		If Not ValueIsFilled(Row.SalesInvoice) And Not ValueIsFilled(Row.LandedCost) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_114,
+			"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].LandedCost", ThisObject);
+		EndIf;
+	EndDo;
+	
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_SR(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
 		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
-	
 EndProcedure

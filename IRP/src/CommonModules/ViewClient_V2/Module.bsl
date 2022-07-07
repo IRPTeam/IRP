@@ -1401,6 +1401,17 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_SALES_DOCUMENT
+
+// ItemList.SalesInvoice
+Procedure ItemListSalesDocumentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListSalesDocumentOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 Procedure OnSetCalculationsNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"

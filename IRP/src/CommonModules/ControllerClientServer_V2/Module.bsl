@@ -291,6 +291,8 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("ItemList.PhysCount"          , "SetItemListPhysCount");
 	SettersMap.Insert("ItemList.ManualFixedCount"   , "SetItemListManualFixedCount");
 	SettersMap.Insert("ItemList.ExpCount"           , "SetItemListExpCount");
+	SettersMap.Insert("ItemList.SalesInvoice"       , "SetItemListSalesDocument");
+	SettersMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");	
 	Return SettersMap.Get(DataPath);
 EndFunction
 
@@ -5071,6 +5073,81 @@ Procedure StepItemListChangeProcurementMethodByItemKey(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListChangeProcurementMethodByItemKey";
 		Chain.ChangeProcurementMethodByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_SALES_DOCUMENT
+
+// ItemList.SalesDocument.OnChange
+Procedure ItemListSalesDocumentOnChange(Parameters) Export
+	Binding = BindItemListSalesDocument(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.SalesDocument.Set
+Procedure SetItemListSalesDocument(Parameters, Results) Export
+	Binding = BindItemListSalesDocument(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.SalesDocument.Get
+Function GetItemListSalesDocument(Parameters, _Key)
+	Binding = BindItemListSalesDocument(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.SalesDocument.Bind
+Function BindItemListSalesDocument(Parameters)
+	DataPath = New Map();
+	DataPath.Insert("SalesReturn", "ItemList.SalesInvoice");
+	DataPath.Insert("RetailReturnReceipt", "ItemList.RetailSalesReceipt");
+	
+	Binding = New Structure();
+	Return BindSteps("StepChangeLandedCostBySalesDocument", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_LANDEDCOST
+
+// ItemList.LandedCost.OnChange
+Procedure ItemListLandedCostOnChange(Parameters) Export
+	Binding = BindItemListLandedCost(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.LandedCost.Set
+Procedure SetItemListLandedCost(Parameters, Results) Export
+	Binding = BindItemListLandedCost(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.LandedCost.Get
+Function GetItemListLandedCost(Parameters, _Key)
+	Binding = BindItemListLandedCost(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.LandedCost.Bind
+Function BindItemListLandedCost(Parameters)
+	DataPath = "ItemList.LandedCost";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.LandedCost.StepChangeLandedCostBySalesDocument.Step
+Procedure StepChangeLandedCostBySalesDocument(Parameters, Chain) Export
+	Chain.ChangeLandedCostBySalesDocument.Enable = True;
+	Chain.ChangeLandedCostBySalesDocument.Setter = "SetItemListLandedCost";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeLandedCostBySalesDocumentOptions();
+		Options.SalesDocument     = GetItemListSalesDocument(Parameters, Row.Key);
+		Options.CurrentLandedCost = GetItemListLandedCost(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeLandedCostBySalesDocument";
+		Chain.ChangeLandedCostBySalesDocument.Options.Add(Options);
 	EndDo;
 EndProcedure
 

@@ -33,7 +33,6 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	SalesOrdersList.Parameters.SetParameterValue("Partner", Object.Ref);
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
 	

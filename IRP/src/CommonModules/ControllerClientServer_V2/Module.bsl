@@ -5101,11 +5101,17 @@ EndFunction
 // ItemList.SalesDocument.Bind
 Function BindItemListSalesDocument(Parameters)
 	DataPath = New Map();
-	DataPath.Insert("SalesReturn", "ItemList.SalesInvoice");
-	DataPath.Insert("RetailReturnReceipt", "ItemList.RetailSalesReceipt");
+	DataPath.Insert("GoodsReceipt"         , "ItemList.SalesInvoice");
+	DataPath.Insert("SalesReturn"          , "ItemList.SalesInvoice");
+	DataPath.Insert("SalesReturnOrder"     , "ItemList.SalesInvoice");
+	DataPath.Insert("ShipmentConfirmation" , "ItemList.SalesInvoice");
+	DataPath.Insert("RetailReturnReceipt"  , "ItemList.RetailSalesReceipt");
 	
 	Binding = New Structure();
-	Return BindSteps("StepChangeLandedCostBySalesDocument", DataPath, Binding, Parameters);
+	Binding.Insert("SalesReturn"         , "StepChangeLandedCostBySalesDocument");
+	Binding.Insert("RetailReturnReceipt" , "StepChangeLandedCostBySalesDocument");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
 #EndRegion

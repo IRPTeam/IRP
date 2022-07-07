@@ -57,6 +57,33 @@ Function GetCommissionPercentExecute(Options) Export
 	Return 0;
 EndFunction
 
+Function ConvertPriceByCurrency(Period, PriceType, CurrencyTo, Price) Export
+	If Not ValueIsFilled(PriceType) Then
+		Return Price;
+	EndIf;
+	
+	CurrencyFrom = PriceType.Currency;
+	If Not ValueIsFilled(CurrencyFrom) 
+		Or Not ValueIsFilled(CurrencyTo) 
+		Or CurrencyFrom = CurrencyTo Then
+		Return Price;
+	EndIf;
+	
+	CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(Period, 
+			CurrencyFrom, 
+			CurrencyTo,
+			PriceType.Source);
+	Rate = ?(ValueIsFilled(CurrencyInfo.Rate), CurrencyInfo.Rate, 0);
+	Multiplicity = ?(ValueIsFilled(CurrencyInfo.Multiplicity), CurrencyInfo.Multiplicity, 0);
+	
+	If Rate = 0 Or Multiplicity = 0 Then
+		Return Price;
+	EndIf;
+	
+	PriceRecalculated = (Price * Rate) / Multiplicity;
+	Return PriceRecalculated;
+EndFunction
+
 Function GetLandedCostCurrencyByCompany(Company) Export
 	Query = New Query();
 	Query.Text = 
@@ -75,5 +102,3 @@ Function GetLandedCostCurrencyByCompany(Company) Export
 		Return Undefined;
 	EndIf;
 EndFunction
-
-

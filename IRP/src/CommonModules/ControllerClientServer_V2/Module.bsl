@@ -1295,6 +1295,42 @@ Function BindCurrency(Parameters)
 		"StepChangeCashAccountByCurrency,
 		|StepChangePlanningTransactionBasisByCurrency");
 	
+	Binding.Insert("SalesOrder",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesOrderClosing",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesInvoice",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseReturnOrder",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseReturn",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("RetailSalesReceipt",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("RetailReturnReceipt",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseOrder",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseOrderClosing",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesReturnOrder",
+		"StepItemListChangePriceByPriceType");
+
+	Binding.Insert("SalesReturn",
+		"StepItemListChangePriceByPriceType");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5580,6 +5616,7 @@ Procedure StepItemListChangePriceByPriceType(Parameters, Chain) Export
 		Options.PriceType    = GetItemListPriceType(Parameters, Row.Key);
 		Options.ItemKey      = GetItemListItemKey(Parameters, Row.Key);
 		Options.Unit         = GetItemListUnit(Parameters, Row.Key);
+		Options.Currency     = GetCurrency(Parameters);		
 		Options.Key          = Row.Key;
 		Options.StepName = "StepItemListChangePriceByPriceType";
 		Options.DontExecuteIfExecutedBefore = True;
@@ -6633,9 +6670,9 @@ Procedure SetPaymentsAccount(Parameters, Results) Export
 EndProcedure
 
 // Payments.Account.Get
-Function GetPaymentsAccount(Parameters, _Key)
-	Return GetPropertyObject(Parameters, BindPaymentsAccount(Parameters).DataPath, _Key);
-EndFunction
+//Function GetPaymentsAccount(Parameters, _Key)
+//	Return GetPropertyObject(Parameters, BindPaymentsAccount(Parameters).DataPath, _Key);
+//EndFunction
 
 // Payments.Account.Bind
 Function BindPaymentsAccount(Parameters)

@@ -1552,13 +1552,6 @@ Scenario: create payment terminal
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTerminals"
 		And I click the button named "FormCreate"
 		And I input "Payment terminal 01" text in the field named "Description_en"
-		And I click Select button of "Account" field
-		Then "Cash/Bank accounts" window is opened
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Transit Main' |
-		And I select current line in "List" table
-		And I input "1,00" text in "Percent" field
 		And I click "Save and close" button
 
 Scenario: create PaymentTypes

@@ -656,6 +656,7 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 	* Check planing transaction basis selection form
 		And I activate "Planning transaction basis" field in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I activate "Cash statements" window
 		And "List" table became equal
 			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' | 'Reference'                                    |
 			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               | 'Cash statement 104 dated 07.07.2022 16:33:55' |
@@ -725,6 +726,7 @@ Scenario: _052017 create Bank receipt (Transfer from POS)
 	* Check planing transaction basis selection form
 		And I activate "Planning transaction basis" field in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I activate "Cash statements" window
 		And "List" table became equal
 			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' | 'Reference'                                    |
 			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '100,00'         | '2,00'               | 'Cash statement 104 dated 07.07.2022 16:33:55' |

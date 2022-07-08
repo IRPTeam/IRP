@@ -1903,6 +1903,7 @@ Scenario:_800036 check remaining stock control when unpost/change Sales return
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
+		And I input "100" text in "Landed cost" field of "ItemList" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
 		And I close all client application windows
@@ -2101,6 +2102,7 @@ Scenario:_800044 check remaining stock control when unpost/change Retail return 
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "6,000" text in "Quantity" field of "ItemList" table
+		And I input "100" text in "Landed cost" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Item list" tab
 		And I move to "Payments" tab

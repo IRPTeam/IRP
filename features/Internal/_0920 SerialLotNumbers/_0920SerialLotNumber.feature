@@ -507,6 +507,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
 		And I select current line in "List" table
+		And I input "1 450,00" text in "Landed cost" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Payments" tab
 		And I activate "Amount" field in "Payments" table
@@ -897,6 +898,7 @@ Scenario: _092005 check serial lot number in the Sales return
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
 		And I select current line in "List" table
+		And I input "100" text in "Landed cost" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages

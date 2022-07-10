@@ -71,13 +71,6 @@ Scenario: _0154100 preparation ( filling documents)
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTerminals"
 		And I click the button named "FormCreate"
 		And I input "Payment terminal 01" text in the field named "Description_en"
-		And I click Select button of "Account" field
-		Then "Cash/Bank accounts" window is opened
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Transit Main' |
-		And I select current line in "List" table
-		And I input "1,00" text in "Percent" field
 		And I click "Save and close" button
 	* Create PaymentTypes
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTypes"
@@ -1476,9 +1469,14 @@ Scenario:  _0154148 check that the Retail return receipt amount and the amount o
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
+		And I input "100,00" text in "Landed cost" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Payment amount [720,00] and return amount [900,00] not match" substring will appear in 10 seconds
+		And I input "100,00" text in "Landed cost" field of "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Total amount'  |
+			| 'Trousers' | '38/Yellow' | '200,00'        |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Payment amount [720,00] and return amount [700,00] not match" substring will appear in 10 seconds

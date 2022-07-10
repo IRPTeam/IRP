@@ -331,6 +331,14 @@ EndProcedure
 
 #EndRegion
 
+#Region RETAIL_SALES_RECEIPT
+
+Procedure ItemListRetailSalesReceiptOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListSalesDocumentOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

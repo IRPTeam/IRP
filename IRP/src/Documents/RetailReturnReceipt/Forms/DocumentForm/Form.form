@@ -2346,6 +2346,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.RetailSalesReceipt</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListRetailSalesReceiptOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListRetailSalesReceiptExtendedTooltip</name>
             <id>309</id>

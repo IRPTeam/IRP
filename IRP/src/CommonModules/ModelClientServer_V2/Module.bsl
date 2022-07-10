@@ -217,12 +217,14 @@ Function GetChain()
 	
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
 
-	Chain.Insert("GetCommissionPercent"		, GetChainLink("GetCommissionPercentExecute"));
-	Chain.Insert("CalculateCommission"      , GetChainLink("CalculateCommissionExecute"));
-	Chain.Insert("ChangePercentByAmount"      , GetChainLink("CalculatePercentByAmountExecute"));
+	Chain.Insert("GetCommissionPercent"	 , GetChainLink("GetCommissionPercentExecute"));
+	Chain.Insert("CalculateCommission"   , GetChainLink("CalculateCommissionExecute"));
+	Chain.Insert("ChangePercentByAmount" , GetChainLink("CalculatePercentByAmountExecute"));
 	
-	Chain.Insert("PaymentListCalculateCommission"      , GetChainLink("CalculatePaymentListCommissionExecute"));
-	Chain.Insert("ChangeCommissionPercentByAmount"      , GetChainLink("CalculateCommisionPercentByAmountExecute"));
+	Chain.Insert("PaymentListCalculateCommission"  , GetChainLink("CalculatePaymentListCommissionExecute"));
+	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommisionPercentByAmountExecute"));
+	
+	Chain.Insert("ChangeLandedCostBySalesDocument" , GetChainLink("ChangeLandedCostBySalesDocumentExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -271,6 +273,21 @@ Function ChangeUnitByItemKeyExecute(Options) Export
 	EndIf;
 	UnitInfo = GetItemInfo.ItemUnitInfo(Options.ItemKey);
 	Return UnitInfo.Unit;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_LANDEDCOST_BY_SALES_DOCUMENT
+
+Function ChangeLandedCostBySalesDocumentOptions() Export
+	Return GetChainLinkOptions("SalesDocument, CurrentLandedCost");
+EndFunction
+
+Function ChangeLandedCostBySalesDocumentExecute(Options) Export
+	If ValueIsFilled(Options.SalesDocument) Then
+		Return Undefined;
+	EndIf;
+	Return Options.CurrentLandedCost;
 EndFunction
 
 #EndRegion

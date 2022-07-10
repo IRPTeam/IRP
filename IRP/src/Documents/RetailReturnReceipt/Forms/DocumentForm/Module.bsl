@@ -366,6 +366,15 @@ EndProcedure
 
 #EndRegion
 
+#Region RETAIL_SALES_RECEIPT
+
+&AtClient
+Procedure ItemListRetailSalesReceiptOnChange(Item)
+	DocRetailReturnReceiptClient.ItemListRetailSalesReceiptOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

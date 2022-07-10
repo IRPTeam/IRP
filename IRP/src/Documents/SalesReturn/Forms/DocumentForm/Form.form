@@ -2080,6 +2080,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.SalesInvoice</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListSalesInvoiceOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListSalesInvoiceExtendedTooltip</name>
             <id>309</id>

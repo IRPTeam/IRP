@@ -1402,7 +1402,7 @@ Scenario: add sales tax settings
 Scenario: add Additional Functionality extension
 	Given I open hyperlink "e1cib/list/Catalog.Extensions"
 	And I click the button named "FormCreate"
-	And I select external file "#workingDir#/DataProcessor/AdditionalFunctionality.cfe"
+	And I select external file "$Path$/DataProcessor/AdditionalFunctionality.cfe"
 	And I click "Add file" button
 	And Delay 2
 	And I input "AdditionalFunctionality" text in "Description" field
@@ -1552,13 +1552,6 @@ Scenario: create payment terminal
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTerminals"
 		And I click the button named "FormCreate"
 		And I input "Payment terminal 01" text in the field named "Description_en"
-		And I click Select button of "Account" field
-		Then "Cash/Bank accounts" window is opened
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Transit Main' |
-		And I select current line in "List" table
-		And I input "1,00" text in "Percent" field
 		And I click "Save and close" button
 
 Scenario: create PaymentTypes
@@ -1635,7 +1628,7 @@ Scenario: add Plugin for document discount
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
 			And I click the button named "FormCreate"
-			And I select external file "#workingDir#/DataProcessor/DocumentDiscount.epf"
+			And I select external file "$Path$/DataProcessor/DocumentDiscount.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "DocumentDiscount" text in "Name" field

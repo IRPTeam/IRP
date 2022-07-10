@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -351,6 +352,15 @@ EndProcedure
 &AtClient
 Procedure ItemListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
 	DocSalesReturnClient.ItemListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region SALES_INVOICE
+
+&AtClient
+Procedure ItemListSalesInvoiceOnChange(Item)
+	DocSalesReturnClient.ItemListSalesInvoiceOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

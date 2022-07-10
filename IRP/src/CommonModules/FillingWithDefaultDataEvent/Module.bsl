@@ -168,6 +168,10 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 EndProcedure
 
 Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
+	If TypeOf(Source) = Type("DocumentObject.PriceList") Then
+		Return;
+	EndIf;
+	
 	SourceMetadata = Source.Metadata();
 	For Each AttributeMetadata In SourceMetadata.Attributes Do
 		If CommonFunctionsServer.IsDocumentRef(Source[AttributeMetadata.Name]) Then

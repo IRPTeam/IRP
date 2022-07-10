@@ -58,36 +58,6 @@
   <defaultListForm>Catalog.PaymentTerminals.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.PaymentTerminals.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="e37a24d6-5078-4228-92b2-4e7a5e2d6ee3">
-    <name>Account</name>
-    <synonym>
-      <key>en</key>
-      <value>Account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="d7d7c1a1-4908-42a7-ad5e-4bef783f138d">
-    <name>Percent</name>
-    <synonym>
-      <key>en</key>
-      <value>Percent</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePercent</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <tabularSections uuid="b14595cf-2efd-477c-9cf2-2805a8a0533a">
     <producedTypes>
       <objectType typeId="e48e1555-1a91-4460-ac93-559b258a65bb" valueTypeId="2b2f5fd7-6e96-496b-914a-5c143ef319b1"/>

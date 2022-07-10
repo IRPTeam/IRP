@@ -2150,6 +2150,7 @@ Scenario:_800044 check remaining stock control when unpost/change Retail return 
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
+		And I input "1,000" text in "Landed cost" field of "ItemList" table
 		And I move to "Payments" tab
 		And I activate "Amount" field in "Payments" table
 		And I select current line in "Payments" table

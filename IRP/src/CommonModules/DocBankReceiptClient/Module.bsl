@@ -370,6 +370,13 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 			DataCompositionComparisonType.Equal));
 			
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
+		StandardProcessing = False;
+		FormParameters = New Structure();
+		FormParameters.Insert("Company"    , Object.Company);
+		FormParameters.Insert("Branch"     , Object.Branch);
+		FormParameters.Insert("POSAccount" , CurrentData.POSAccount);
+		OpenForm("Document.CashStatement.Form.ChoiceWIthBalancesForm", FormParameters, Item, , , , , FormWindowOpeningMode.LockOwnerWindow);
 	EndIf;
 EndProcedure
 

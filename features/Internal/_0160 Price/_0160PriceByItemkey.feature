@@ -360,7 +360,23 @@ Scenario: _016002 change item in Price list and check filling item key
 			| 'Item'   | 'Item key' | 'Input unit' | 'Price' |
 			| 'Router' | 'Router'   | 'pcs'        | ''      |
 		And I close all client application windows
-		
+
+Scenario: _016003 copy price list
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PriceList"	
+	And I go to line in "List" table
+		| 'Number' |
+		| '$$NumberPriceListBasicPriceByItemKey016001$$'  |
+	And in the table "List" I click "Copy" button
+	And "ItemKeyList" table contains lines
+		| '#'  | 'Input price' | 'Item'       | 'Item key'  | 'Input unit' | 'Price'    |
+		| '1'  | ''            | 'Dress'      | 'S/Yellow'  | 'pcs'        | '550,00'   |
+		| '2'  | ''            | 'Dress'      | 'XS/Blue'   | 'pcs'        | '520,00'   |
+		| '3'  | ''            | 'Dress'      | 'M/White'   | 'pcs'        | '520,00'   |
+		| '4'  | ''            | 'Dress'      | 'L/Green'   | 'pcs'        | '550,00'   |
+		| '5'  | ''            | 'Dress'      | 'XL/Green'  | 'pcs'        | '550,00'   |
+	And I close all client application windows	
+	
 
 Scenario: _016005 check movements of the price list document by item key in register Prices by item keys
 	* Opening register Prices by item keys
@@ -387,7 +403,7 @@ Scenario: _016005 check movements of the price list document by item key in regi
 		| '5 000,00' | '$$PriceListBasicPriceByItemKey016001$$' | 'Basic Price Types' | 'Boots/S-8' |
 
 
-Scenario: _016002 base price fill and special price fill (not incl. VAT)
+Scenario: _016006 base price fill and special price fill (not incl. VAT)
 	* Opening  price list
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I click the button named "FormCreate"

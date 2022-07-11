@@ -2234,6 +2234,58 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			And "Result" spreadsheet document contains "BathBalance_012_7" template lines by template
 			And I close all client application windows
 		
-
+Scenario: _023 check Stock adjustment as write off movements by register R5022 Expenses
+	And I close all client application windows
+	* Select Stock adjustment as write off
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I click "Registrations report" button
+		Then "Document registrations report" window is opened
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+	* Check movements
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as write-off 1 dated 10.08.2021 16:47:25' | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                                                       |
+			| 'Document registrations records'                            | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                                                       |
+			| 'Register  "R5022 Expenses"'                                | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                                                       |
+			| ''                                                          | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'                                             |
+			| ''                                                          | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Calculation movement cost'                              |
+			| ''                                                          | '10.08.2021 16:47:25' | '17,12'     | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| ''                                                          | '10.08.2021 16:47:25' | '100'       | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| ''                                                          | '10.08.2021 16:47:25' | '100'       | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| ''                                                          | '10.08.2021 16:47:25' | '171,2'     | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| ''                                                          | '10.08.2021 16:47:25' | '1 000'     | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| ''                                                          | '10.08.2021 16:47:25' | '1 000'     | ''                  | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+		And I close all client application windows
+		
+Scenario: _024 check Stock adjustment as surplus movements by register R5021 Revenues		
+		And I close all client application windows
+	* Select Stock adjustment as surplus
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I click "Registrations report" button
+		Then "Document registrations report" window is opened
+		And in "ResultTable" spreadsheet document I move to "R1C1" cell
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+	* Check movements
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as surplus 1 dated 01.08.2021 09:42:37' | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'                          | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5021 Revenues"'                              | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                                        | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                                        | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch' | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                                        | '01.08.2021 09:42:37' | '154,08'    | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | '39/18SD'  | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                                        | '01.08.2021 09:42:37' | '900'       | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | '39/18SD'  | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                                        | '01.08.2021 09:42:37' | '900'       | ''                  | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | '39/18SD'  | 'TRY'      | ''                    | 'en description is empty'      |
+		And I close all client application windows
+		
+						
+		
+				
+	
 
 

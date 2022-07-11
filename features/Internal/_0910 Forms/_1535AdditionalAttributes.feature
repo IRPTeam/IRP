@@ -352,11 +352,31 @@ Scenario: _01540051 check that additional attributes and properties are displaye
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Internal supply request (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |
 	And I close all client application windows
 
 Scenario: _01540052 check that additional attributes and properties are displayed on the form without reopening (document DebitNote)
@@ -392,11 +412,31 @@ Scenario: _01540052 check that additional attributes and properties are displaye
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Debit note (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 Scenario: _01540053 check that additional attributes and properties are displayed on the form without reopening (document CreditNote)
@@ -432,11 +472,31 @@ Scenario: _01540053 check that additional attributes and properties are displaye
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Credit note (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 Scenario: _01540054 check that additional attributes and properties are displayed on the form without reopening (Catalog_Workstations)
@@ -603,11 +663,31 @@ Scenario: _0154006 check that additional attributes and properties are displayed
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Sales invoice (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 Scenario: _01540060 check that additional attributes and properties are displayed on the form without reopening (document PurchaseInvoice)
@@ -643,11 +723,31 @@ Scenario: _01540060 check that additional attributes and properties are displaye
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Purchase invoice (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
 			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |
 	And I close all client application windows
 
 Scenario: _01540061 check that additional attributes and properties are displayed on the form without reopening (document SalesOrder)
@@ -683,11 +783,31 @@ Scenario: _01540061 check that additional attributes and properties are displaye
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Sales order (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 Scenario: _01540062 check that additional attributes and properties are displayed on the form without reopening (document Purchase Order)
@@ -723,11 +843,31 @@ Scenario: _01540062 check that additional attributes and properties are displaye
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Purchase order (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1359,11 +1499,31 @@ Scenario: _015400652 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Bank payment (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1400,11 +1560,31 @@ Scenario: _015400653 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Bank receipt (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
 			| 'Test'     | ''      |	
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |
 	And I close all client application windows
 
 
@@ -1441,11 +1621,31 @@ Scenario: _015400655 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Bundling (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1482,11 +1682,31 @@ Scenario: _015400656 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash expense (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1523,11 +1743,31 @@ Scenario: _015400657 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash payment (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1565,11 +1805,31 @@ Scenario: _015400658 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash receipt (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1608,11 +1868,31 @@ Scenario: _015400659 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash revenue (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1649,11 +1929,31 @@ Scenario: _015400660 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash transfer order (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1690,11 +1990,31 @@ Scenario: _015400662 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Goods receipt (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
 			| 'Test'     | ''      |	
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |
 	And I close all client application windows
 
 
@@ -1732,11 +2052,31 @@ Scenario: _015400663 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Incoming payment order (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1773,11 +2113,31 @@ Scenario: _015400664 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Inventory transfer (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1814,11 +2174,31 @@ Scenario: _015400665 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Inventory transfer order (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1857,11 +2237,31 @@ Scenario: _015400668 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Labeling (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1898,11 +2298,31 @@ Scenario: _015400669 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Opening entry (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 Scenario: _015400670 check that additional attributes and properties are displayed on the form without reopening (document Outgoing payment order)
@@ -1938,11 +2358,31 @@ Scenario: _015400670 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Outgoing payment order (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -1979,6 +2419,12 @@ Scenario: _015400671 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Location count (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		# And I select current line in "List" table	
 		# And I click "Save" button
 		# And I click "Add properties" button
@@ -2021,6 +2467,12 @@ Scenario: _015400672 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Physical inventory (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
@@ -2061,11 +2513,31 @@ Scenario: _015400673 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Price list (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -2103,11 +2575,31 @@ Scenario: _015400674 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Purchase return (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -2145,11 +2637,31 @@ Scenario: _015400675 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Purchase return order (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -2188,11 +2700,31 @@ Scenario: _015400676 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Reconciliation statement (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -2230,11 +2762,31 @@ Scenario: _015400677 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Sales return (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -2271,11 +2823,31 @@ Scenario: _015400678 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Sales return order (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
 			| 'Test'     | ''      |	
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |
 	And I close all client application windows
 
 
@@ -2313,11 +2885,31 @@ Scenario: _015400679 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Shipment confirmation (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -2354,11 +2946,31 @@ Scenario: _015400680 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Stock adjustment as surplus (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 Scenario: _015400681 check that additional attributes and properties are displayed on the form without reopening (document Stock adjustment as write-off)
@@ -2394,11 +3006,31 @@ Scenario: _015400681 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Stock adjustment as write-off (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -2435,11 +3067,31 @@ Scenario: _015400683 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Unbundling (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 Scenario: _015400684 check that additional attributes and properties are displayed on the form without reopening (document Retail sales receipt)
@@ -2475,11 +3127,31 @@ Scenario: _015400684 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Retail sales receipt (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 
@@ -2516,11 +3188,31 @@ Scenario: _015400685 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Retail return receipt (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 Scenario: _015400687 check that additional attributes and properties are displayed on the form without reopening (document Cash statement)
@@ -2556,11 +3248,31 @@ Scenario: _015400687 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Cash statement (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
 	And I close all client application windows
 
 Scenario: _015400688 check that additional attributes and properties are displayed on the form without reopening (Catalog_PaymentTerminals)
@@ -2595,6 +3307,12 @@ Scenario: _015400688 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When in opened panel I select "Payment terminals"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I close current window
 		And I go to line in "List" table
 			| 'Description'              |
@@ -3031,11 +3749,31 @@ Scenario: _015400699 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Planned receipt reservation (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
 			| 'Test'     | ''      |	
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |
 	And I close all client application windows
 
 
@@ -3072,9 +3810,176 @@ Scenario: _015400700 check that additional attributes and properties are display
 	* Check that the additional Test attribute has been displayed on the form
 		When I click command interface button "Sales order closing (create)"
 		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
-			| 'Test'     | ''      |	
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
+	And I close all client application windows
+
+
+Scenario: _015400701 check that additional attributes and properties are displayed on the form without reopening (document ItemStockAdjustment)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create ItemStockAdjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Document_ItemStockAdjustment             |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Item stock adjustment" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Item stock adjustment (create)"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Save" button
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |
+		And I activate "Value" field in "Properties" table
+		And I select current line in "Properties" table
+		And I click choice button of "Value" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save" button
+		And I close "Edit add properties" window
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value'   |
+			| 'Test'     | 'Test 1'  |	
+	And I close all client application windows
+
+
+Scenario: _015400702 check that additional attributes and properties are displayed on the form without reopening (document Money transfer)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create MoneyTransfer
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Document_MoneyTransfer             |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Money transfer" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Money transfer (create)"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Save" button
+	And I close all client application windows
+
+
+Scenario: _015400703 check that additional attributes and properties are displayed on the form without reopening (document Manual register entries)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create ManualRegisterEntry
+		Given I open hyperlink "e1cib/list/Document.ManualRegisterEntry"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Document_ManualRegisterEntry             |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Manual register entry" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Manual register entry (create)"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'        |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Save" button
 	And I close all client application windows

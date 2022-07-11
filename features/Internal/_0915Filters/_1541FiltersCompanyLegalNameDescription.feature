@@ -362,7 +362,15 @@ Scenario: _029729 check the filter for Company in the document StockAdjustmentAs
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 	When check the filter by Company  in the Shipment cinfirmation and Goods receipt
 
+Scenario: _029730 check Description in the document StockAdjustmentAsSurplus
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+	When check Description
 
+Scenario: _029731 check Description in the document StockAdjustmentAsWriteOff
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+	When check Description
 
 Scenario: _029816 check Description in the document PhysicalCountByLocation
 	And I close all client application windows

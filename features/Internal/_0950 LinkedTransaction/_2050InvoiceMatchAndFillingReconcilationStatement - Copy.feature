@@ -6,7 +6,8 @@
 
 Feature: buttons for selecting base documents
 
-
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

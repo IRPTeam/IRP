@@ -11,6 +11,9 @@ As a sales manager
 I want to create a Sales order document
 To track the items ordered by the customer
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

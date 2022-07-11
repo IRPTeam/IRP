@@ -291,6 +291,8 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("ItemList.PhysCount"          , "SetItemListPhysCount");
 	SettersMap.Insert("ItemList.ManualFixedCount"   , "SetItemListManualFixedCount");
 	SettersMap.Insert("ItemList.ExpCount"           , "SetItemListExpCount");
+	SettersMap.Insert("ItemList.SalesInvoice"       , "SetItemListSalesDocument");
+	SettersMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");	
 	Return SettersMap.Get(DataPath);
 EndFunction
 
@@ -649,6 +651,23 @@ Function BindListOnCopy(Parameters)
 	Binding.Insert("CashReceipt"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashExpense"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashRevenue"  , "StepPaymentListCalculations_IsCopyRow");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure CopyRowSimpleTable(TableName, Parameters, ViewNotify = Undefined) Export
+	If ViewNotify <> Undefined Then
+		AddViewNotify(ViewNotify, Parameters);
+	EndIf;
+	// execute handlers after copy row
+	Binding = BindListOnCopySimpleTable(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// <TableName>.OnCopy.Bind
+Function BindListOnCopySimpleTable(Parameters)
+	DataPath = "";
+	Binding = New Structure();
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1278,6 +1297,42 @@ Function BindCurrency(Parameters)
 		"StepChangeCashAccountByCurrency,
 		|StepChangePlanningTransactionBasisByCurrency");
 	
+	Binding.Insert("SalesOrder",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesOrderClosing",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesInvoice",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseReturnOrder",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseReturn",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("RetailSalesReceipt",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("RetailReturnReceipt",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseOrder",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseOrderClosing",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesReturnOrder",
+		"StepItemListChangePriceByPriceType");
+
+	Binding.Insert("SalesReturn",
+		"StepItemListChangePriceByPriceType");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -1315,6 +1370,17 @@ Procedure StepChangeCurrencyByAgreement(Parameters, Chain) Export
 	Options.CurrentCurrency = GetCurrency(Parameters);
 	Options.StepName = "StepChangeCurrencyByAgreement";
 	Chain.ChangeCurrencyByAgreement.Options.Add(Options);
+EndProcedure
+
+// Currency.ChangeLandedCostCurrencyByCompany.Step
+Procedure StepChangeLandedCostCurrencyByCompany(Parameters, Chain) Export
+	Chain.ChangeLandedCostCurrencyByCompany.Enable = True;
+	Chain.ChangeLandedCostCurrencyByCompany.Setter = "SetCurrency";
+	Options = ModelClientServer_V2.ChangeLandedCostCurrencyByCompanyOptions();
+	Options.Company         = GetCompany(Parameters);
+	Options.CurrentCurrency = GetCurrency(Parameters);
+	Options.StepName = "StepChangeLandedCostCurrencyByCompany";
+	Chain.ChangeLandedCostCurrencyByCompany.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -1878,6 +1944,12 @@ Function BindCompany(Parameters)
 	Binding.Insert("CashTransferOrder",
 		"StepChangeAccountSenderByCompany,
 		|StepChangeAccountReceiverByCompany");
+	
+	Binding.Insert("StockAdjustmentAsSurplus",
+		"StepChangeLandedCostCurrencyByCompany");
+	
+	Binding.Insert("StockAdjustmentAsWriteOff",
+		"StepChangeLandedCostCurrencyByCompany");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -4295,6 +4367,14 @@ EndFunction
 Function BindPaymentListTotalAmount(Parameters)
 	DataPath = "PaymentList.TotalAmount";
 	Binding = New Structure();
+	Binding.Insert("BankPayment",
+		"StepPaymentListCalculateCommission,
+		|StepPaymentListCalculations_IsTotalAmountChanged");
+	
+	Binding.Insert("BankReceipt", 
+		"StepPaymentListCalculateCommission,
+		|StepPaymentListCalculations_IsTotalAmountChanged");
+		
 	Steps = "StepPaymentListCalculations_IsTotalAmountChanged";
 	Return BindSteps(Steps, DataPath, Binding, Parameters);
 EndFunction
@@ -4440,6 +4520,12 @@ EndProcedure
 
 #Region PAYMENT_LIST_PAYMENT_TYPE
 
+// PaymentList.PaymentType.OnChange
+Procedure PaymentListPaymentTypeOnChange(Parameters) Export
+	Binding = BindPaymentListPaymentType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
 // PaymentList.PaymentType.Set
 Procedure SetPaymentListPaymentType(Parameters, Results) Export
 	Binding = BindPaymentListPaymentType(Parameters);
@@ -4455,6 +4541,12 @@ EndFunction
 Function BindPaymentListPaymentType(Parameters)
 	DataPath = "PaymentList.PaymentType";
 	Binding = New Structure();
+
+	Binding.Insert("BankPayment", 
+		"StepPaymentListGetCommissionPercent");
+	
+	Binding.Insert("BankReceipt", 
+		"StepPaymentListGetCommissionPercent");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4484,6 +4576,12 @@ EndFunction
 
 #Region PAYMENT_LIST_BANK_TERM
 
+// PaymentList.BankTerm.OnChange
+Procedure PaymentListBankTermOnChange(Parameters) Export
+	Binding = BindPaymentListBankTerm(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
 // PaymentList.BankTerm.Set
 Procedure SetPaymentListBankTerm(Parameters, Results) Export
 	Binding = BindPaymentListBankTerm(Parameters);
@@ -4499,6 +4597,13 @@ EndFunction
 Function BindPaymentListBankTerm(Parameters)
 	DataPath = "PaymentList.BankTerm";
 	Binding = New Structure();
+	
+	Binding.Insert("BankPayment", 
+		"StepPaymentListGetCommissionPercent");
+	
+	Binding.Insert("BankReceipt", 
+		"StepPaymentListGetCommissionPercent");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -4523,6 +4628,118 @@ Function BindPaymentListCommissionIsSeparate(Parameters)
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_COMMISSION
+
+// PaymentList.Commission.OnChange
+Procedure PaymentListCommissionOnChange(Parameters) Export
+	Binding = BindPaymentListCommission(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.Commission.Set
+Procedure SetPaymentListCommission(Parameters, Results) Export
+	Binding = BindPaymentListCommission(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.Commission.Get
+Function GetPaymentListCommission(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListCommission(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.Commission.Bind
+Function BindPaymentListCommission(Parameters)
+	DataPath = "PaymentList.Commission";
+	Binding = New Structure();
+
+	Binding.Insert("BankPayment", 
+		"StepChangeCommissionPercentByAmount");
+	
+	Binding.Insert("BankReceipt", 
+		"StepChangeCommissionPercentByAmount");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// PaymentList.Commission.CalculateCommission.Step
+Procedure StepPaymentListCalculateCommission(Parameters, Chain) Export
+	Chain.PaymentListCalculateCommission.Enable = True;
+	Chain.PaymentListCalculateCommission.Setter = "SetPaymentListCommission";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options     = ModelClientServer_V2.CalculatePaymentListCommissionOptions();
+		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
+		Options.CommissionPercent = GetPaymentListCommissionPercent(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentListCalculateCommission";
+		Chain.PaymentListCalculateCommission.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_PERCENT
+
+// PaymentList.CommissionPercent.OnChange
+Procedure PaymentListCommissionPercentOnChange(Parameters) Export
+	Binding = BindPaymentListCommissionPercent(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.CommissionPercent.Set
+Procedure SetPaymentListCommissionPercent(Parameters, Results) Export
+	Binding = BindPaymentListCommissionPercent(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.CommissionPercent.Get
+Function GetPaymentListCommissionPercent(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListCommissionPercent(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.CommissionPercent.Bind
+Function BindPaymentListCommissionPercent(Parameters)
+	DataPath = "PaymentList.CommissionPercent";
+	Binding = New Structure();
+
+	Binding.Insert("BankPayment", 
+		"StepPaymentListCalculateCommission");
+	
+	Binding.Insert("BankReceipt", 
+		"StepPaymentListCalculateCommission");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// PaymentList.CommissionPercent.GetCommissionPercent.Step
+Procedure StepPaymentListGetCommissionPercent(Parameters, Chain) Export
+	Chain.GetCommissionPercent.Enable = True;
+	Chain.GetCommissionPercent.Setter = "SetPaymentListCommissionPercent";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options     = ModelClientServer_V2.GetCommissionPercentOptions();
+		Options.PaymentType = GetPaymentListPaymentType(Parameters, Row.Key);
+		Options.BankTerm = GetPaymentListBankTerm(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentListGetCommissionPercent";
+		Chain.GetCommissionPercent.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+// PaymentList.CommissionPercent.ChangePercentByAmount.Step
+Procedure StepChangeCommissionPercentByAmount(Parameters, Chain) Export
+	Chain.ChangeCommissionPercentByAmount.Enable = True;
+	Chain.ChangeCommissionPercentByAmount.Setter = "SetPaymentListCommissionPercent";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options     = ModelClientServer_V2.CalculateCommisionPercentByAmountOptions();
+		Options.Commission = GetPaymentListCommission(Parameters, Row.Key);
+		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
+		Options.DisableNextSteps = True;
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeCommissionPercentByAmount";
+		Chain.ChangeCommissionPercentByAmount.Options.Add(Options);
+	EndDo;	
+EndProcedure
 
 #EndRegion
 
@@ -4856,6 +5073,87 @@ Procedure StepItemListChangeProcurementMethodByItemKey(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListChangeProcurementMethodByItemKey";
 		Chain.ChangeProcurementMethodByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_SALES_DOCUMENT
+
+// ItemList.SalesDocument.OnChange
+Procedure ItemListSalesDocumentOnChange(Parameters) Export
+	Binding = BindItemListSalesDocument(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.SalesDocument.Set
+Procedure SetItemListSalesDocument(Parameters, Results) Export
+	Binding = BindItemListSalesDocument(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.SalesDocument.Get
+Function GetItemListSalesDocument(Parameters, _Key)
+	Binding = BindItemListSalesDocument(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.SalesDocument.Bind
+Function BindItemListSalesDocument(Parameters)
+	DataPath = New Map();
+	DataPath.Insert("GoodsReceipt"         , "ItemList.SalesInvoice");
+	DataPath.Insert("SalesReturn"          , "ItemList.SalesInvoice");
+	DataPath.Insert("SalesReturnOrder"     , "ItemList.SalesInvoice");
+	DataPath.Insert("ShipmentConfirmation" , "ItemList.SalesInvoice");
+	DataPath.Insert("RetailReturnReceipt"  , "ItemList.RetailSalesReceipt");
+	
+	Binding = New Structure();
+	Binding.Insert("SalesReturn"         , "StepChangeLandedCostBySalesDocument");
+	Binding.Insert("RetailReturnReceipt" , "StepChangeLandedCostBySalesDocument");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_LANDEDCOST
+
+// ItemList.LandedCost.OnChange
+Procedure ItemListLandedCostOnChange(Parameters) Export
+	Binding = BindItemListLandedCost(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.LandedCost.Set
+Procedure SetItemListLandedCost(Parameters, Results) Export
+	Binding = BindItemListLandedCost(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.LandedCost.Get
+Function GetItemListLandedCost(Parameters, _Key)
+	Binding = BindItemListLandedCost(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.LandedCost.Bind
+Function BindItemListLandedCost(Parameters)
+	DataPath = "ItemList.LandedCost";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.LandedCost.StepChangeLandedCostBySalesDocument.Step
+Procedure StepChangeLandedCostBySalesDocument(Parameters, Chain) Export
+	Chain.ChangeLandedCostBySalesDocument.Enable = True;
+	Chain.ChangeLandedCostBySalesDocument.Setter = "SetItemListLandedCost";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeLandedCostBySalesDocumentOptions();
+		Options.SalesDocument     = GetItemListSalesDocument(Parameters, Row.Key);
+		Options.CurrentLandedCost = GetItemListLandedCost(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeLandedCostBySalesDocument";
+		Chain.ChangeLandedCostBySalesDocument.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -5401,6 +5699,7 @@ Procedure StepItemListChangePriceByPriceType(Parameters, Chain) Export
 		Options.PriceType    = GetItemListPriceType(Parameters, Row.Key);
 		Options.ItemKey      = GetItemListItemKey(Parameters, Row.Key);
 		Options.Unit         = GetItemListUnit(Parameters, Row.Key);
+		Options.Currency     = GetCurrency(Parameters);		
 		Options.Key          = Row.Key;
 		Options.StepName = "StepItemListChangePriceByPriceType";
 		Options.DontExecuteIfExecutedBefore = True;
@@ -6454,9 +6753,9 @@ Procedure SetPaymentsAccount(Parameters, Results) Export
 EndProcedure
 
 // Payments.Account.Get
-Function GetPaymentsAccount(Parameters, _Key)
-	Return GetPropertyObject(Parameters, BindPaymentsAccount(Parameters).DataPath, _Key);
-EndFunction
+//Function GetPaymentsAccount(Parameters, _Key)
+//	Return GetPropertyObject(Parameters, BindPaymentsAccount(Parameters).DataPath, _Key);
+//EndFunction
 
 // Payments.Account.Bind
 Function BindPaymentsAccount(Parameters)

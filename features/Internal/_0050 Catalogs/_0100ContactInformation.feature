@@ -11,6 +11,9 @@ I want there to be a mechanism for entering customer contact information
 To specify: address, phone, e-mail, gps coordinate on the map
 
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I open new TestClient session or connect the existing one
 
@@ -28,7 +31,7 @@ Scenario: _010004 create Contact info Type - Addresses
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
 		* Adding Plugin sessing 
-			And I select external file "#workingDir#/DataProcessor/ShippingAddress.epf"
+			And I select external file "$Path$/DataProcessor/ShippingAddress.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "ExternaShippingAddress" text in "Name" field
@@ -70,6 +73,13 @@ Scenario: _010004 create Contact info Type - Addresses
 		| 'Description' |
 		| 'Google Addreses'  |
 
+Scenario: check preparation
+	* Check preparation
+		Try
+			And the previous scenario executed successfully
+		Except
+			Then I stop all scripts execution
+
 Scenario: _010005 verification of UNIQ ID uniqueness control in IDInfoTypes
 	* Create one more item with ID Adr_10
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.IDInfoTypes"
@@ -95,7 +105,7 @@ Scenario: _010009 adding phones to Contact info type
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
 		* Filling in the 'External Input Phone Ukraine' and adding it to the database
-			And I select external file "#workingDir#/DataProcessor/InputPhoneUkraine.epf"
+			And I select external file "$Path$/DataProcessor/InputPhoneUkraine.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "ExternalInputPhoneUkraine" text in "Name" field
@@ -109,7 +119,7 @@ Scenario: _010009 adding phones to Contact info type
 		* Add processing Phone TR
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
-			And I select external file "#workingDir#/DataProcessor/InputPhoneUkraine.epf"
+			And I select external file "$Path$/DataProcessor/InputPhoneUkraine.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "PhoneTR" text in "Name" field
@@ -331,7 +341,7 @@ Scenario: _010011 adding gps to a Contact info type
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
 		* Adding Plugin sessing 
-			And I select external file "#workingDir#/DataProcessor/Coordinates.epf"
+			And I select external file "$Path$/DataProcessor/Coordinates.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "ExternalCoordinates" text in "Name" field

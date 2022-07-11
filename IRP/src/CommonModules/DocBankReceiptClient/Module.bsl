@@ -370,6 +370,13 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 			DataCompositionComparisonType.Equal));
 			
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
+		StandardProcessing = False;
+		FormParameters = New Structure();
+		FormParameters.Insert("Company"    , Object.Company);
+		FormParameters.Insert("Branch"     , Object.Branch);
+		FormParameters.Insert("POSAccount" , CurrentData.POSAccount);
+		OpenForm("Document.CashStatement.Form.ChoiceWIthBalancesForm", FormParameters, Item, , , , , FormWindowOpeningMode.LockOwnerWindow);
 	EndIf;
 EndProcedure
 
@@ -481,6 +488,42 @@ EndProcedure
 
 Procedure ItemListTaxValueOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.PaymentListTaxRateOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region COMMISSION
+
+&AtClient
+Procedure PaymentListCommissionOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListCommissionOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_TYPE
+
+&AtClient
+Procedure PaymentListPaymentTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListPaymentTypeOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region BANK_TERM
+
+&AtClient
+Procedure PaymentListBankTermOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListBankTermOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region COMMISSION_PERCENT
+
+&AtClient
+Procedure PaymentListCommissionPercentOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListCommissionPercentOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

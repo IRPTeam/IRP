@@ -6,6 +6,9 @@
 
 Feature: add items to documents by barcode
 
+Variables:
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -158,9 +161,9 @@ Scenario: _300721 barcode check in PhysicalCountByLocation
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	And "ItemList" table became equal
-		| '#' | 'Item'  | 'Item key' | 'Unit' | 'Phys. count' | 'Date' |
-		| '1' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'       | '*'    |
-		| '2' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'       | '*'    |
+		| '#' | 'Item'  | 'Item key' | 'Unit' | 'Phys. count' | 'Date'|
+		| '1' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'       |  '*'  |
+		| '2' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'       |  '*'  |
 	And I close all client application windows
 
 

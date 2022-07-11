@@ -10,6 +10,9 @@ As a developer
 I want to hide the items marked for deletion from the product selection form.
 So the user can't select it in the sales and purchase documents
 
+Variables:
+import "Variables.feature"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -504,6 +507,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
 		And I select current line in "List" table
+		And I input "1 450,00" text in "Landed cost" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Payments" tab
 		And I activate "Amount" field in "Payments" table
@@ -894,6 +898,7 @@ Scenario: _092005 check serial lot number in the Sales return
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '37/18SD'  |
 		And I select current line in "List" table
+		And I input "100" text in "Landed cost" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages
@@ -1783,6 +1788,11 @@ Scenario: _092009 check serial lot number in the Stock adjustment as surplus
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
 	* Post Stock adjustment as surplus and check movements in the register Register  "R4014 Serial lot numbers"
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  | 'Reference' |
+			| 'TRY'  | 'Turkish lira' | 'TRY'       |
+		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsSurplus092009$$" variable
 		And I delete "$$NumberStockAdjustmentAsSurplus092009$$" variable
@@ -1881,6 +1891,11 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
 		And I finish line editing in "SerialLotNumbers" table
 		And I click "Ok" button
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  | 'Reference' |
+			| 'TRY'  | 'Turkish lira' | 'TRY'       |
+		And I select current line in "List" table
 	* Post Stock adjustment as surplus and check movements in the register Register  "R4014 Serial lot numbers"
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsSurplus0920091$$" variable
@@ -2095,6 +2110,11 @@ Scenario: _092010 check serial lot number in the Stock adjustment as write off
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
 	* Post Stock adjustment as surplus and check movements in the register Register  "R4014 Serial lot numbers"
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  | 'Reference' |
+			| 'TRY'  | 'Turkish lira' | 'TRY'       |
+		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsWriteOff092010$$" variable
 		And I delete "$$NumberStockAdjustmentAsWriteOff092010$$" variable
@@ -2194,6 +2214,11 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 		And I finish line editing in "SerialLotNumbers" table
 		And I click "Ok" button
 	* Post Stock adjustment as write off and check movements in the register Register  "R4014 Serial lot numbers"
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  | 'Reference' |
+			| 'TRY'  | 'Turkish lira' | 'TRY'       |
+		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$StockAdjustmentAsWriteOff09200101$$" variable
 		And I delete "$$NumberStockAdjustmentAsWriteOff09200101$$" variable

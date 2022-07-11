@@ -33,7 +33,7 @@ EndFunction
 Function CheckFilling(Object) Export
 	IsOk = True;
 	For Each Row In Object.ItemList Do
-		If Not IsItemKeyWithSerialLotNumbers(Row.ItemKey) Then
+		If Not Row.UseSerialLotNumber Then
 			Continue;
 		EndIf;
 

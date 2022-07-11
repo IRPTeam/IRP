@@ -7,7 +7,8 @@
 
 Functionality: locking linked strings (SO,SI,SC,SRO,SR)
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _2065001 preparation (locking linked strings)
 	When set True value to the constant
@@ -1266,6 +1267,10 @@ Scenario: _2065040 change quantity in the linked string in the SR (one session)
 		And I select current line in "ItemList" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "5,000" text in "Quantity" field of "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key' |
+			| 'Trousers' | '38/Yellow'   |
+		And I input "50,000" text in "Landed cost" field of "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button

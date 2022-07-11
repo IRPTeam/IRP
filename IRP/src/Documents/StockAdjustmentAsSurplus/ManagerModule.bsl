@@ -38,6 +38,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
+	
+	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 EndProcedure
@@ -141,6 +144,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5021T_Revenues());
 	Return QueryArray;
 EndFunction
 
@@ -150,6 +154,7 @@ Function ItemList()
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.Ref.Store AS Store,
+	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	ItemList.RevenueType AS RevenueType,
@@ -158,6 +163,7 @@ Function ItemList()
 	|	ItemList.Ref AS Basis,
 	|	ItemList.QuantityInBaseUnit AS Quantity,
 	|	ItemList.Amount AS LandedCost,
+	|	ItemList.Amount AS Amount,
 	|	ItemList.Key
 	|INTO ItemList
 	|FROM
@@ -340,6 +346,23 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Company.LandedCostCurrencyMovementType.Currency,
 	|	ItemList.Period,
 	|	VALUE(Enum.BatchDirection.Receipt)";
+EndFunction
+
+Function R5021T_Revenues()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.ProfitLossCenter,
+	|	ItemList.RevenueType,
+	|	ItemList.ItemKey,
+	|	ItemList.Currency,
+	|	ItemList.Amount,
+	|	ItemList.Key
+	|INTO R5021T_Revenues
+	|FROM
+	|	ItemList AS ItemList";
 EndFunction
 
 #EndRegion

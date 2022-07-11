@@ -9,6 +9,9 @@ As a financier
 I want to fill out the information on the services I received and which I provided
 For cost analysis
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
@@ -717,6 +720,7 @@ Scenario: _029150 create Retail return receipt for service and product
 			And I activate "Price" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
+			And I input "20,00" text in "Landed cost" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -733,6 +737,7 @@ Scenario: _029150 create Retail return receipt for service and product
 			And I select current line in "List" table
 			And I activate "Price" field in "ItemList" table
 			And I input "50,00" text in "Price" field of "ItemList" table
+			And I input "20,00" text in "Landed cost" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I move to "Payments" tab
 			And in the table "Payments" I click "Add" button
@@ -762,9 +767,6 @@ Scenario: _029150 create Retail return receipt for service and product
 				| '$$NumberRetailReturnReceipt029150$$'       |	
 			And I close all client application windows
 		
-
-
-
 
 
 

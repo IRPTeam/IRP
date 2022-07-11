@@ -6,7 +6,8 @@
 
 Functionality: locking linked strings (Physical inventory, Stock adjustment as surplus, Stock adjustment as write-off )
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _2068001 preparation (locking linked strings)
 	When set True value to the constant

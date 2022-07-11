@@ -33,7 +33,6 @@ Function ConvertQuantityToQuantityInBaseUnit(Bundle, Unit, Quantity) Export
 EndFunction
 
 Function GetCommissionPercentExecute(Options) Export
-	
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -56,4 +55,50 @@ Function GetCommissionPercentExecute(Options) Export
 	EndDo;
 
 	Return 0;
+EndFunction
+
+Function ConvertPriceByCurrency(Period, PriceType, CurrencyTo, Price) Export
+	If Not ValueIsFilled(PriceType) Then
+		Return Price;
+	EndIf;
+	
+	CurrencyFrom = PriceType.Currency;
+	If Not ValueIsFilled(CurrencyFrom) 
+		Or Not ValueIsFilled(CurrencyTo) 
+		Or CurrencyFrom = CurrencyTo Then
+		Return Price;
+	EndIf;
+	
+	CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(Period, 
+			CurrencyFrom, 
+			CurrencyTo,
+			PriceType.Source);
+	Rate = ?(ValueIsFilled(CurrencyInfo.Rate), CurrencyInfo.Rate, 0);
+	Multiplicity = ?(ValueIsFilled(CurrencyInfo.Multiplicity), CurrencyInfo.Multiplicity, 0);
+	
+	If Rate = 0 Or Multiplicity = 0 Then
+		Return Price;
+	EndIf;
+	
+	PriceRecalculated = (Price * Rate) / Multiplicity;
+	Return PriceRecalculated;
+EndFunction
+
+Function GetLandedCostCurrencyByCompany(Company) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Companies.LandedCostCurrencyMovementType.Currency AS Currency
+	|FROM
+	|	Catalog.Companies AS Companies
+	|WHERE
+	|	Companies.Ref = &Ref";
+	Query.SetParameter("Ref", Company);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Currency;
+	Else
+		Return Undefined;
+	EndIf;
 EndFunction

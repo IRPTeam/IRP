@@ -9,6 +9,10 @@ As an accountant
 I want to display the incoming bank payments
 To close partners debts
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
@@ -51,6 +55,12 @@ Scenario:  _052001 preparation (Bank receipt)
 		When Create catalog CashAccounts objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When update ItemKeys
+		When Create catalog BankTerms objects
+		When Create catalog PaymentTerminals objects
+		When Create catalog PaymentTypes objects
+		When Create catalog CashAccounts objects (POS)
+		When Create catalog CashStatementStatuses objects (Test)
+		When Create document BR and CS (payment by POS)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -86,7 +96,15 @@ Scenario:  _052001 preparation (Bank receipt)
 			When create SalesInvoice024008	
 	When Create document PurchaseReturn objects (creation based on)
 	And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseReturn.FindByNumber(351).GetObject().Write(DocumentWriteMode.Posting);" |
+ 		| "Documents.PurchaseReturn.FindByNumber(351).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+ 		| "Documents.BankReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server		 
+		| "Documents.BankReceipt.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server		 
+		| "Documents.CashStatement.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server		 
+		| "Documents.CashStatement.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 
 
@@ -516,7 +534,250 @@ Scenario: _052015 check the display of details on the form Bank receipt with the
 			| '#' | 'Total amount' | 'Planning transaction basis' |
 			| '1' | '100,00' | ''                          |
 
-
+Scenario: _052016 check Commission calculation in the Bank receipt (Payment from customer by POS)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	And I click the button named "FormCreate"
+	And I select "Payment from customer by POS" exact value from "Transaction type" drop-down list
+	* Filling PaymentList tab
+		And in the table "PaymentList" I click "Add" button
+		And I activate "Bank term" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Bank term" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Test01' |
+		And I select current line in "List" table
+		And I activate "Payment type" field in "PaymentList" table
+		And I click choice button of "Payment type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I activate "Payment terminal" field in "PaymentList" table
+		And I click choice button of "Payment terminal" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test01'     |
+		And I select current line in "List" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "100,33" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+	* Check Commission
+		And "PaymentList" table contains lines
+			| 'Commission' | 'Payment terminal' | 'Payment type' | 'Commission percent' | 'Bank term' | 'Total amount' |
+			| '1,00'       | 'Test01'           | 'Card 01'      | '1,00'               | 'Test01'    | '100,33'       |
+	* Check Commission calculation (sum and commision percent)
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "333,33" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table contains lines
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
+			| '1' | '333,33'       | '3,33'       | 'Card 01'      | 'Test01'           | 'Test01'    | '1,00'               |
+	* Change Commission percent
+		And I activate "Commission percent" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "5,00" text in "Commission percent" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
+			| '1' | '333,33'       | '16,67'      | 'Card 01'      | 'Test01'           | 'Test01'    | '5,00'               |
+	* Change Commission sum
+		And I activate "Commission" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "22,52" text in "Commission" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
+			| '1' | '333,33'       | '22,52'      | 'Card 01'      | 'Test01'           | 'Test01'    | '6,76'               |
+	* Change payment type
+		And I activate "Payment type" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Payment type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 02'     |
+		And I select current line in "List" table
+		And "PaymentList" table became equal
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
+			| '1' | '333,33'       | '6,67'       | 'Card 02'      | 'Test01'           | 'Test01'    | '2,00'               |
+	* Change sum
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "999,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
+			| '1' | '999,00'       | '19,98'      | 'Card 02'      | 'Test01'           | 'Test01'    | '2,00'               |
+		And I close all client application windows		
+		
+Scenario: _052017 create Bank receipt (Transfer from POS)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	And I click the button named "FormCreate"
+	And I select "Transfer from POS" exact value from "Transaction type" drop-down list
+	* Filling in the details of the document
+		And I click Select button of "Currency" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
+			| Code |
+			| TRY  |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company |
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| Description    |
+			| Bank account, TRY |
+		And I select current line in "List" table
+	* Filling PaymentList tab
+		And in the table "PaymentList" I click "Add" button
+		And I set "Commission is separate" checkbox in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I activate "POS account" field in "PaymentList" table
+		And I click choice button of "POS account" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I select current line in "List" table
+	* Check planing transaction basis selection form
+		And I activate "Planning transaction basis" field in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I activate "Cash statements" window
+		And "List" table became equal
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' | 'Reference'                                    |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               | 'Cash statement 104 dated 07.07.2022 16:33:55' |
+			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | '1,50'       | ''       | '150,00'         | '1,50'               | 'Cash statement 105 dated 08.07.2022 10:47:16' |
+		And in the table "List" I click the button named "ListSetDateInterval"
+		Then "Select period" window is opened
+		And I input "07.07.2022" text in the field named "DateBegin"
+		And I input "07.07.2022" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And "List" table became equal
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' | 'Reference'                                    |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '200,00'         | '2,00'               | 'Cash statement 104 dated 07.07.2022 16:33:55' |
+		And in the table "List" I click the button named "ListChoose"
+		And I finish line editing in "PaymentList" table
+	* Check creation
+		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt0520014$$" variable
+		And I delete "$$BankReceipt0520014$$" variable
+		And I save the value of "Number" field as "$$NumberBankReceipt0520014$$"
+		And I save the window as "$$BankReceipt0520014$$"
+		And I click the button named "FormPostAndClose"
+		* Check creation a Bank receipt
+			And "List" table contains lines
+			| 'Number' |
+			| '$$NumberBankReceipt0520014$$'    |	
+	* Create one more bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		And I select "Transfer from POS" exact value from "Transaction type" drop-down list
+	* Filling in the details of the document
+		And I click Select button of "Currency" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
+			| Code |
+			| TRY  |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company |
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| Description    |
+			| Bank account, TRY |
+		And I select current line in "List" table
+	* Filling PaymentList tab
+		And in the table "PaymentList" I click "Add" button
+		And I set "Commission is separate" checkbox in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I activate "POS account" field in "PaymentList" table
+		And I click choice button of "POS account" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I select current line in "List" table
+	* Check planing transaction basis selection form
+		And I activate "Planning transaction basis" field in "PaymentList" table
+		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
+		And I activate "Cash statements" window
+		And "List" table became equal
+			| 'Number' | 'Date'                | 'Company'      | 'Amount' | 'Commission' | 'Branch' | 'Amount Balance' | 'Commission Balance' | 'Reference'                                    |
+			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | '2,00'       | ''       | '100,00'         | '2,00'               | 'Cash statement 104 dated 07.07.2022 16:33:55' |
+			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | '1,50'       | ''       | '150,00'         | '1,50'               | 'Cash statement 105 dated 08.07.2022 10:47:16' |
+		And I go to line in "List" table
+			| 'Amount' | 'Amount Balance' | 'Commission' | 'Commission Balance' | 'Company'      | 'Date'                | 'Number' | 'Reference'                                    |
+			| '200,00' | '100,00'         | '2,00'       | '2,00'               | 'Main Company' | '07.07.2022 16:33:55' | '104'    | 'Cash statement 104 dated 07.07.2022 16:33:55' |
+		And I select current line in "List" table
+	* Filling other attribute
+		And I activate "Commission percent" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "2,00" text in "Commission percent" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Profit loss center" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Profit loss center" attribute in "PaymentList" table
+		Then "Business units" window is opened
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+		And I activate "Expense type" field in "PaymentList" table
+		And I click choice button of "Expense type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Expense'     |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Commission is separate" field in "PaymentList" table
+		And I remove "Commission is separate" checkbox in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+	* Check filling
+		And "PaymentList" table became equal
+			| '#' | 'Commission' | 'Commission is separate' | 'POS account'  | 'Total amount' | 'Financial movement type' | 'Profit loss center'      | 'Planning transaction basis'                   | 'Commission percent' | 'Additional analytic' | 'Expense type' |
+			| '1' | '2,00'       | 'No'                     | 'Transit Main' | '100,00'       | 'Movement type 1'         | 'Distribution department' | 'Cash statement 104 dated 07.07.2022 16:33:55' | '2,00'               | ''                    | 'Expense'      |
+	* Check creation
+		And I click the button named "FormPost"
+		And I delete "$$NumberBankReceipt0520015$$" variable
+		And I delete "$$BankReceipt0520015$$" variable
+		And I save the value of "Number" field as "$$NumberBankReceipt0520015$$"
+		And I save the window as "$$BankReceipt0520015$$"
+		And I click the button named "FormPostAndClose"
+		And "List" table contains lines
+			| 'Number' |
+			| '$$NumberBankReceipt0520015$$'    |
+		And I close all client application windows
+			
+			
+				
 
 Scenario: _300515 check connection to BankReceipt report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"

@@ -11,6 +11,10 @@ I want to fill in the prices
 To sell and purchase goods and services
 
 
+Variables:
+import "Variables.feature"
+
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
@@ -637,7 +641,7 @@ Scenario: _016010 check dependent prices calculation
 				| "Description" |
 				| "SalesPriceCalculation" |
 			And I click the button named "FormCreate"
-			And I select external file "#workingDir#/DataProcessor/SalesPriceCalculation.epf"
+			And I select external file "$Path$/DataProcessor/SalesPriceCalculation.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "SalesPriceCalculation" text in "Name" field

@@ -744,6 +744,46 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 	Return NewRow;
 EndFunction
 
+Function AddOrCopyRowSimpleTable(Object, Form, TableName, Cancel, Clone, OriginRow, 
+															OnAddViewNotify = Undefined, 
+															OnCopyViewNotify = Undefined,
+															FillingValues = Undefined)
+	Cancel = True;
+	NewRow = Object[TableName].Add();
+	If Clone Then // Copy()
+		OriginRows = GetRowsByCurrentData(Form, TableName, OriginRow);
+		If Not OriginRows.Count() Then
+			Raise "Not found origin row for clone";
+		EndIf;
+		NewRow.Key = String(New UUID());
+		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
+		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+		
+		// columns that do not need to be copied
+		ArrayOfExcludeProperties = New Array();
+		If NewRow.Property("Key") Then
+			ArrayOfExcludeProperties.Add("Key");
+		EndIf;
+		
+		FillPropertyValues(NewRow, OriginRows[0], ,StrConcat(ArrayOfExcludeProperties, ","));
+		
+		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
+		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+		ControllerClientServer_V2.CopyRowSimpleTable(TableName, Parameters, OnCopyViewNotify);
+	Else // Add()
+		NewRow.Key = String(New UUID());
+		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
+		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+		
+		Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
+		ModelClientServer_V2.TransferFormToStructure(Transfer, Parameters);
+		ViewServer_V2.AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValues);
+		ModelClientServer_V2.TransferStructureToForm(Transfer, Parameters);
+		ControllerClientServer_V2.CommitChainChanges(Parameters);
+	EndIf;
+	Return NewRow;
+EndFunction
+
 Procedure DeleteRows(Object, Form, TableName, ViewNotify = Undefined)
 	Parameters = GetSimpleParameters(Object, Form, TableName);
 	ControllerClientServer_V2.DeleteRows(TableName, Parameters, ViewNotify);
@@ -1361,6 +1401,17 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_SALES_DOCUMENT
+
+// ItemList.SalesInvoice
+Procedure ItemListSalesDocumentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListSalesDocumentOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 Procedure OnSetCalculationsNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
@@ -1520,6 +1571,34 @@ Procedure SetPaymentListTotalAmount(Object, Form, Row, Value) Export
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	Parameters.Insert("IsProgramChange", True);
 	ControllerClientServer_V2.PaymentListTotalAmountOnChange(Parameters);
+EndProcedure
+
+// PaymentList.Commission
+Procedure PaymentListCommissionOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListCommissionOnChange(Parameters);
+EndProcedure
+
+// PaymentList.PaymentType
+Procedure PaymentListPaymentTypeOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListPaymentTypeOnChange(Parameters);
+EndProcedure
+
+// PaymentList.BankTerm
+Procedure PaymentListBankTermOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListBankTermOnChange(Parameters);
+EndProcedure
+
+// PaymentList.CommissionPercent
+Procedure PaymentListCommissionPercentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListCommissionPercentOnChange(Parameters);
 EndProcedure
 
 #EndRegion
@@ -2252,7 +2331,7 @@ EndProcedure
 #Region PAYMENTS
 
 Procedure PaymentsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
-	NewRow = AddOrCopyRow(Object, Form, "Payments", Cancel, Clone, CurrentData,
+	NewRow = AddOrCopyRowSimpleTable(Object, Form, "Payments", Cancel, Clone, CurrentData,
 		"PaymentsOnAddRowFormNotify", "PaymentsOnCopyRowFormNotify");
 	Form.Items.Payments.CurrentRow = NewRow.GetID();
 	Form.Items.Payments.ChangeRow();

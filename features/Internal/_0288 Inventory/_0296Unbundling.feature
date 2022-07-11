@@ -9,6 +9,9 @@ As a sales manager
 I want to create Unbundling
 For sale of products from a Bundle separately
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

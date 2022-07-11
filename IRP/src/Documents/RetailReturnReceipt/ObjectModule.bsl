@@ -65,6 +65,14 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			Format(ItemList_TotalAmount, "NFD=2; NN=;")));
 	EndIf;
 
+	For Each Row In ThisObject.ItemList Do
+		If Not ValueIsFilled(Row.RetailSalesReceipt) And Not ValueIsFilled(Row.LandedCost) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_114,
+			"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].LandedCost", ThisObject);
+		EndIf;
+	EndDo;
+	
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_RRR(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();

@@ -10,6 +10,9 @@ As a procurement manager
 I want to create a Inventory transfer order
 To coordinate the transfer of items from one store to another
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

@@ -43,6 +43,32 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="870fbda8-1ad0-4ccc-8895-a80ddce3417b">
+    <name>AmountCost</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount cost</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <attributes uuid="71be2539-a508-4fdb-a622-f9e145da0e62">
+    <name>CalculationMovementCost</name>
+    <synonym>
+      <key>en</key>
+      <value>Calculation movement cost</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.CalculationMovementCosts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
   <dimensions uuid="cf230907-0f51-447c-9786-e93f5355ad79">
     <name>Company</name>
     <synonym>

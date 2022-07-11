@@ -10,6 +10,10 @@ As an accountant
 I want to pay by bank payment.
 To close debts to partners
 
+
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
@@ -51,6 +55,10 @@ Scenario: _053000 preparation (Bank payment)
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When update ItemKeys
+		When Create catalog BankTerms objects
+		When Create catalog PaymentTerminals objects
+		When Create catalog PaymentTypes objects
+		When Create catalog CashAccounts objects (POS)
 		When Create catalog ExpenseAndRevenueTypes objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -473,7 +481,86 @@ Scenario: _053015 check the display of details on the form Bank payment with the
 		If "PaymentList" table does not contain column named "Partner" Then
 		And "PaymentList" table contains lines
 			| '#' | 'Total amount' | 'Planning transaction basis' |
-			| '1' | '100,00' | ''                          |
+			| '1' | '100,00'       | ''                           |
+
+Scenario: _052017 check Commission calculation in the Bank payment (Payment from customer by POS)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	And I click the button named "FormCreate"
+	And I select "Return to customer by POS" exact value from "Transaction type" drop-down list
+	* Filling PaymentList tab
+		And in the table "PaymentList" I click "Add" button
+		And I activate "Bank term" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Bank term" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Test01' |
+		And I select current line in "List" table
+		And I activate "Payment type" field in "PaymentList" table
+		And I click choice button of "Payment type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I activate "Payment terminal" field in "PaymentList" table
+		And I click choice button of "Payment terminal" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test01'     |
+		And I select current line in "List" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "100,33" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+	* Check Commission
+		And "PaymentList" table contains lines
+			| 'Commission' | 'Payment terminal' | 'Payment type' | 'Commission percent' | 'Bank term' | 'Total amount' |
+			| '1,00'       | 'Test01'           | 'Card 01'      | '1,00'               | 'Test01'    | '100,33'       |
+	* Check Commission calculation (sum and commision percent)
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "333,33" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table contains lines
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
+			| '1' | '333,33'       | '3,33'       | 'Card 01'      | 'Test01'           | 'Test01'    | '1,00'               |
+	* Change Commission percent
+		And I activate "Commission percent" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "5,00" text in "Commission percent" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
+			| '1' | '333,33'       | '16,67'      | 'Card 01'      | 'Test01'           | 'Test01'    | '5,00'               |
+	* Change Commission sum
+		And I activate "Commission" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "22,52" text in "Commission" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
+			| '1' | '333,33'       | '22,52'      | 'Card 01'      | 'Test01'           | 'Test01'    | '6,76'               |
+	* Change payment type
+		And I activate "Payment type" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Payment type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 02'     |
+		And I select current line in "List" table
+		And "PaymentList" table became equal
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
+			| '1' | '333,33'       | '6,67'       | 'Card 02'      | 'Test01'           | 'Test01'    | '2,00'               |
+	* Change sum
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "999,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
+			| '1' | '999,00'       | '19,98'      | 'Card 02'      | 'Test01'           | 'Test01'    | '2,00'               |
+		And I close all client application windows
 
 
 Scenario: _300514 check connection to BankPayment report "Related documents"

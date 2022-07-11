@@ -9,6 +9,9 @@ As a procurement manager
 I want to create a Purchase return order document
 To track a product that needs to be returned to the vendor
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 

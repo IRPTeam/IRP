@@ -6,7 +6,8 @@
 
 Functionality: check Purchase invoice movements
 
-
+Variables:
+import "Variables.feature"
 
 Scenario: _04096 preparation (Purchase invoice)
 	When set True value to the constant
@@ -600,15 +601,15 @@ Scenario: _0401070 check Purchase invoice movements by the Register  "R5022 Expe
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'                 | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5022 Expenses"'                     | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                               | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                               | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                               | '12.02.2021 15:12:15' | '39,17'     | '46,22'             | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           |
-			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | '270'               | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | '270'               | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          |
-			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | '270'               | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      |		
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Document registrations records'                 | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Register  "R5022 Expenses"'                     | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| ''                                               | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'                |
+			| ''                                               | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Calculation movement cost' |
+			| ''                                               | '12.02.2021 15:12:15' | '39,17'     | '46,22'             | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
+			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | '270'               | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | '270'               | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          | ''                          |
+			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | '270'               | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      | ''                          |
 		And I close all client application windows
 
 //PI (without GR)

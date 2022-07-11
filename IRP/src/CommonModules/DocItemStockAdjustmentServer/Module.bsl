@@ -2,6 +2,7 @@
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Not Form.GroupItems.Count() Then
+		DocumentsServer.FillItemList(Object, Form);
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);

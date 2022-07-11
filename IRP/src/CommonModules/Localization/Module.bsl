@@ -690,6 +690,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_111", NStr("en = 'Period is empty [%1] : [%2]'", Lang) + Chars.LF);
 	Strings.Insert("Error_112", NStr("en = 'Not set ledger type by company [%1]'", Lang));
 	Strings.Insert("Error_113", NStr("en = 'Serial lot number [ %1 ] has to be unique at the document'", Lang) + Chars.LF);
+	Strings.Insert("Error_114", NStr("en = '""Landed cost"" is a required field.'", Lang) + Chars.LF);
 	
 #EndRegion
 

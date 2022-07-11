@@ -95,13 +95,24 @@ Procedure ExecuteChain(Parameters, Chain)
 						Continue;
 				EndIf;
 				Result = Undefined;
-				Execute StrTemplate("Result = %1(Options)", Chain[Name].ExecutorName);
+				ExecutorName = Chain[Name].ExecutorName;
+				// procedure with prefix XX_ placed in extension
+				If Mid(ExecutorName, 3, 1) = "_" Then
+					ExecuteInExtension(Result, Options, ExecutorName);
+				Else
+					Execute StrTemplate("Result = %1(Options)", ExecutorName);
+				EndIf;
 				Results.Add(GetChainLinkResult(Options, Result));
 				Parameters.ModelEnvironment.AlreadyExecutedSteps.Insert(Name + ":" + Options.Key, New Structure("Name, Key", Name, Options.Key));
 			EndDo;
 			Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
 		EndIf;
 	EndDo;
+EndProcedure
+
+// used in extensions
+Procedure ExecuteInExtension(Result, Options, ExecutorName)
+	Return;
 EndProcedure
 
 Function GetChain()
@@ -142,9 +153,10 @@ Function GetChain()
 	Chain.Insert("ChangeBasisDocumentByAgreement", GetChainLink("ChangeBasisDocumentByAgreementExecute"));
 	Chain.Insert("ChangeOrderByAgreement"        , GetChainLink("ChangeOrderByAgreementExecute"));
 	
-	Chain.Insert("ChangeCashAccountByCompany"    , GetChainLink("ChangeCashAccountByCompanyExecute"));
-	Chain.Insert("ChangeAccountSenderByCompany"  , GetChainLink("ChangeCashAccountByCompanyExecute"));
-	Chain.Insert("ChangeAccountReceiverByCompany", GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeCashAccountByCompany"        , GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeAccountSenderByCompany"      , GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeAccountReceiverByCompany"    , GetChainLink("ChangeCashAccountByCompanyExecute"));
+	Chain.Insert("ChangeLandedCostCurrencyByCompany" , GetChainLink("ChangeLandedCostCurrencyByCompanyExecute"));
 	
 	Chain.Insert("ChangeTransitAccountByAccount"    , GetChainLink("ChangeTransitAccountByAccountExecute"));
 	Chain.Insert("ChangeReceiptingAccountByAccount" , GetChainLink("ChangeReceiptingAccountByAccountExecute"));
@@ -205,9 +217,14 @@ Function GetChain()
 	
 	Chain.Insert("CalculateDifferenceCount" , GetChainLink("CalculateDifferenceCountExecute"));
 
-	Chain.Insert("GetCommissionPercent"		, GetChainLink("GetCommissionPercentExecute"));
-	Chain.Insert("CalculateCommission"      , GetChainLink("CalculateCommissionExecute"));
-	Chain.Insert("ChangePercentByAmount"      , GetChainLink("CalculatePercentByAmountExecute"));
+	Chain.Insert("GetCommissionPercent"	 , GetChainLink("GetCommissionPercentExecute"));
+	Chain.Insert("CalculateCommission"   , GetChainLink("CalculateCommissionExecute"));
+	Chain.Insert("ChangePercentByAmount" , GetChainLink("CalculatePercentByAmountExecute"));
+	
+	Chain.Insert("PaymentListCalculateCommission"  , GetChainLink("CalculatePaymentListCommissionExecute"));
+	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommisionPercentByAmountExecute"));
+	
+	Chain.Insert("ChangeLandedCostBySalesDocument" , GetChainLink("ChangeLandedCostBySalesDocumentExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -256,6 +273,21 @@ Function ChangeUnitByItemKeyExecute(Options) Export
 	EndIf;
 	UnitInfo = GetItemInfo.ItemUnitInfo(Options.ItemKey);
 	Return UnitInfo.Unit;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_LANDEDCOST_BY_SALES_DOCUMENT
+
+Function ChangeLandedCostBySalesDocumentOptions() Export
+	Return GetChainLinkOptions("SalesDocument, CurrentLandedCost");
+EndFunction
+
+Function ChangeLandedCostBySalesDocumentExecute(Options) Export
+	If ValueIsFilled(Options.SalesDocument) Then
+		Return Undefined;
+	EndIf;
+	Return Options.CurrentLandedCost;
 EndFunction
 
 #EndRegion
@@ -665,6 +697,25 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_LANDEDCOST_CURRENCY_BY_COMPANY
+
+Function ChangeLandedCostCurrencyByCompanyOptions() Export
+	Return GetChainLinkOptions("Company, CurrentCurrency");
+EndFunction
+
+Function ChangeLandedCostCurrencyByCompanyExecute(Options) Export
+	If Not ValueIsFilled(Options.Company) Then
+		Return Options.CurrentCurrency;
+	EndIf;
+	Currency = ModelServer_V2.GetLandedCostCurrencyByCompany(Options.Company);
+	If Not ValueIsFilled(Currency) Then
+		Return Options.CurrentCurrency;
+	EndIf;
+	Return Currency;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_IS_FEXED_CURRENCY_BY_ACCOUNT
 
 Function ChangeIsFixedCurrencyByAccountOptions() Export
@@ -790,7 +841,7 @@ EndFunction
 #Region CHANGE_PRICE_BY_PRICE_TYPE
 
 Function ChangePriceByPriceTypeOptions() Export
-	Return GetChainLinkOptions("Ref, Date, PriceType, CurrentPrice, ItemKey, Unit");
+	Return GetChainLinkOptions("Ref, Date, PriceType, CurrentPrice, ItemKey, Unit, Currency");
 EndFunction
 
 Function ChangePriceByPriceTypeExecute(Options) Export
@@ -805,7 +856,13 @@ Function ChangePriceByPriceTypeExecute(Options) Export
 	PriceParameters.Insert("ItemKey"      , Options.ItemKey);
 	PriceParameters.Insert("Unit"         , Options.Unit);
 	PriceInfo = GetItemInfo.ItemPriceInfo(PriceParameters);
-	Return ?(PriceInfo = Undefined, 0, PriceInfo.Price);
+	If PriceInfo = Undefined Then
+		Return 0;
+	EndIf;
+	
+	Price = ModelServer_V2.ConvertPriceByCurrency(Period, Options.PriceType, Options.Currency, PriceInfo.Price);
+	
+	Return Price;
 EndFunction
 
 #EndRegion
@@ -2289,6 +2346,18 @@ EndFunction
 
 #EndRegion
 
+#Region CALCULATE_PAYMENT_LIST_COMMISSION
+
+Function CalculatePaymentListCommissionOptions() Export
+	Return GetChainLinkOptions("TotalAmount, CommissionPercent");
+EndFunction
+
+Function CalculatePaymentListCommissionExecute(Options) Export
+	Return Options.TotalAmount * Options.CommissionPercent / 100;
+EndFunction
+
+#EndRegion
+
 #Region GET_COMMISSION_PERCENT
 
 Function GetCommissionPercentOptions() Export
@@ -2309,6 +2378,18 @@ EndFunction
 
 Function CalculatePercentByAmountExecute(Options) Export
 	Return 100 * Options.Commission / Options.Amount;
+EndFunction
+
+#EndRegion
+
+#Region CALCULATE_PERCENT_COMMISSION_BY_AMOUNT
+
+Function CalculateCommisionPercentByAmountOptions() Export
+	Return GetChainLinkOptions("TotalAmount, Commission");
+EndFunction
+
+Function CalculateCommisionPercentByAmountExecute(Options) Export
+	Return 100 * Options.Commission / Options.TotalAmount;
 EndFunction
 
 #EndRegion

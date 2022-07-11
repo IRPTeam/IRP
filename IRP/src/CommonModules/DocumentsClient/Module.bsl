@@ -1,6 +1,6 @@
 #Region FormEvents
 
-Procedure OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings)
+Procedure OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings) Export
 	If OpenSettings = Undefined Then
 		OpenSettings = GetOpenSettingsStructure();
 	EndIf;
@@ -948,7 +948,7 @@ Function GetFormItemNames()
 				|AllocationRowsBasisRowID, AllocationRowsRowID, 
 				|CostDocumentsKey, RevenueDocumentsKey, CostRowsTreeRowID, RevenueRowsTreeRowID,
 				|AllocationDocumentsKey, DocumentRowsBasisRowID, DocumentRowsRowID, ResultTreeRowID,
-				|PaymentListKey,
+				|PaymentListKey, PaymentsKey,
 				|TaxList,
 				|ItemListInternalLinks, ItemListExternalLinks, InternalLinkedDocs, ExternalLinkedDocs,
 				|Currencies, CurrenciesTableKey,

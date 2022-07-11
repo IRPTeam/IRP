@@ -9,6 +9,9 @@ As a procurement manager
 I want to create a Sales return document
 To track a product that returned from customer
 
+Variables:
+import "Variables.feature"
+
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
@@ -355,6 +358,7 @@ Scenario: _028509 create Sales return without bases document
 		And I select current line in "ItemList" table
 		And I input "100" text in "Quantity" field of "ItemList" table
 		And I input "200" text in "Price" field of "ItemList" table
+		And I input "100" text in "Landed cost" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'  | 'Item key' | 'Unit' |
@@ -362,6 +366,7 @@ Scenario: _028509 create Sales return without bases document
 		And I select current line in "ItemList" table
 		And I input "200" text in "Quantity" field of "ItemList" table
 		And I input "210" text in "Price" field of "ItemList" table
+		And I input "100" text in "Landed cost" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'     | 'Item key' | 'Unit' |
@@ -369,6 +374,7 @@ Scenario: _028509 create Sales return without bases document
 		And I select current line in "ItemList" table
 		And I input "300" text in "Quantity" field of "ItemList" table
 		And I input "250" text in "Price" field of "ItemList" table
+		And I input "100" text in "Landed cost" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
 			| 'Item'     | 'Quantity'       | 'Item key'  | 'Store'    | 'Unit' |
@@ -691,19 +697,22 @@ Scenario: _028515 create document Sales return based on SRO
 			| '1' |
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov1SalesReturn028515$$" variable
-		And I save the current field value as "$$Rov1SalesReturn028515$$"	
+		And I save the current field value as "$$Rov1SalesReturn028515$$"
+		And I input "100" text in "Landed cost" field of "ItemList" table	
 		And I go to line in "ItemList" table
 			| '#' |
 			| '2' |
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov2SalesReturn028515$$" variable
-		And I save the current field value as "$$Rov2SalesReturn028515$$"	
+		And I save the current field value as "$$Rov2SalesReturn028515$$"
+		And I input "100" text in "Landed cost" field of "ItemList" table	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Quantity'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
 			| '1' | '$$Rov1SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov1SalesReturnOrder028515$$' | ''          | '1,000'  | '$$Rov1SalesReturnOrder028515$$' | 'SR'           | '$$Rov1SalesReturnOrder028515$$' |
 			| '2' | '$$Rov2SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov2SalesReturnOrder028515$$' | ''          | '36,000' | '$$Rov2SalesReturnOrder028515$$' | 'SR'           | '$$Rov2SalesReturnOrder028515$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
+
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesReturn028515$$" variable
 		And I delete "$$SalesReturn028515$$" variable

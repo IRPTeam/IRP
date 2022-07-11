@@ -94,6 +94,20 @@
       <key>en</key>
       <value>Item list</value>
     </synonym>
+    <attributes uuid="cf81c048-5697-4b10-aac3-79e1a29d534a">
+      <name>Item</name>
+      <synonym>
+        <key>en</key>
+        <value>Item</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Items</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="b79f3a6a-b0d9-4e6c-841c-b55221f8d776">
       <name>ItemKey</name>
       <synonym>

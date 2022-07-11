@@ -7,19 +7,16 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	EndIf;
 	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
-		DocumentsServer.FillItemList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
-	DocumentsServer.FillItemList(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-	DocumentsServer.FillItemList(Object, Form);
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;

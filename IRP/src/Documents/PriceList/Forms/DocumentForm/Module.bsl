@@ -32,14 +32,12 @@ EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	WriteSavedItems(Object, CurrentObject);
+	Return;
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	If Object.PriceListType = Enums.PriceListTypes.PriceByItemKeys Then
-		FillItemKeyList();
-	EndIf;
+	Return;
 EndProcedure
 
 &AtClient
@@ -278,52 +276,6 @@ Procedure FillByRules(Command)
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription);
 EndProcedure
 
-&AtServer
-Procedure FillItemKeyList()
-	For Each Row In Object.ItemKeyList Do
-		Row.Item = Row.ItemKey.Item;
-	EndDo;
-
-	RowMap = New Map();
-
-	For Each Row In Object.ItemKeyList Do
-		RowMap.Insert(Row.Key, Row);
-		Row.Item = Row.ItemKey.Item;
-
-		If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Then
-			Row.ItemType = Row.Item.ItemType.Type;
-		EndIf;
-	EndDo;
-
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	SavedItems.Key,
-	|	SavedItems.Item
-	|FROM
-	|	InformationRegister.SavedItems AS SavedItems
-	|WHERE
-	|	SavedItems.ObjectRef = &ObjectRef";
-
-	Query.SetParameter("ObjectRef", Object.Ref);
-
-	QueryResult = Query.Execute();
-
-	SelectionDetailRecords = QueryResult.Select();
-
-	While SelectionDetailRecords.Next() Do
-		If RowMap[SelectionDetailRecords.Key] = Undefined Then
-			Continue;
-		EndIf;
-
-		RowMap[SelectionDetailRecords.Key].Item = SelectionDetailRecords.Item;
-			//
-		If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Then
-			RowMap[SelectionDetailRecords.Key].ItemType = RowMap[SelectionDetailRecords.Key].Item.ItemType.Type;
-		EndIf;
-	EndDo;
-EndProcedure
-
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, Object.PriceType);
@@ -371,10 +323,6 @@ EndProcedure
 
 &AtServer
 Procedure BuildForm()
-	If Object.PriceListType = Enums.PriceListTypes.PriceByItemKeys Then
-		FillItemKeyList();
-	EndIf;
-
 	If Object.PriceListType = Enums.PriceListTypes.PriceByProperties Then
 		DrawFormTablePriceKeyList();
 	EndIf;
@@ -713,34 +661,6 @@ Procedure SetVisible()
 	Items.GroupItemKeyList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItemKeys;
 	Items.GroupItemList.Visible = Object.PriceListType = Enums.PriceListTypes.PriceByItems;
 	Items.FillByRules.Visible = ValueIsFilled(Object.PriceType.ExternalDataProc);
-EndProcedure
-#EndRegion
-
-#Region FormEvents
-
-&AtServerNoContext
-Procedure WriteSavedItems(Object, CurrentObject) Export
-
-	ObjectRef = CurrentObject.Ref;
-	ItemKeyListTmp = Object.ItemKeyList.Unload();
-	ItemKeyListTmpFilter = New Structure("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
-	ItemKeyList = ItemKeyListTmp.Copy(ItemKeyListTmpFilter);
-	If ItemKeyList.Count() = 0 Then
-		RecordSet = InformationRegisters.SavedItems.CreateRecordSet();
-		RecordSet.Filter.ObjectRef.Set(ObjectRef);
-		RecordSet.Write(True);
-		Return;
-	EndIf;
-
-	ItemKeyList.Columns.Add("ObjectRef");
-	ItemKeyList.FillValues(ObjectRef, "ObjectRef");
-
-	RecordSet = InformationRegisters.SavedItems.CreateRecordSet();
-	RecordSet.Filter.ObjectRef.Set(ObjectRef);
-
-	RecordSet.Load(ItemKeyList);
-	RecordSet.Write(True);
-
 EndProcedure
 
 #EndRegion

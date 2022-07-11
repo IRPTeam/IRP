@@ -220,6 +220,82 @@ Scenario: _2068007 check locking tab in the StockAdjustmentAsWriteOff with linke
 				|'And I click choice button of "Physical inventory" attribute in "ItemList" table'|
 	And I close all client application windows
 
+
+Scenario: _2067008 check unlock linked rows in the Physical inventory
+	And I close all client application windows
+	* Open Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key'  |
+			| 'Dress' | 'XS/Blue'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| 'M/White'  | 'Dress' |
+		And I close all client application windows
+
+Scenario: _2067009 check unlock linked rows in the Stock adjustment as surplus
+	And I close all client application windows
+	* Open StockAdjustmentAsSurplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key'  |
+			| 'Dress' | 'XS/Blue'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| 'M/White'  | 'Dress' |
+		And I close all client application windows
+
+Scenario: _20670091 check unlock linked rows in the Stock adjustment as write off
+	And I close all client application windows
+	* Open StockAdjustmentAsWriteOff
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key'    |
+			| 'Dress' | 'Dress/A-8'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| 'M/White'  | 'Dress' |
+		And I close all client application windows
+
 Scenario: _2068010 change quantity in the linked string in the Physical inventory (one session)
 	* Open Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"

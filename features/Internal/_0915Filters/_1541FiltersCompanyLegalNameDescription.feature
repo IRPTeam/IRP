@@ -612,6 +612,17 @@ Scenario: _028073 check filter by own companies in the document Customers advanc
 		When check the filter by my own company in Opening entry/Item stock adjustment
 
 
+Scenario: _028074 check Description in the document Retail sales receipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	When check Description
+
+Scenario: _028075 check Description in the document Retail return receipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	When check Description
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session
 

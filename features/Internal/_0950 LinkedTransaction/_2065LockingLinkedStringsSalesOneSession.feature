@@ -540,6 +540,82 @@ Scenario: _2065007 check locking tab in the SC with linked documents (one sessio
 			And I close current window
 		And I close all client application windows
 		
+Scenario: 2065008 check unlock linked rows in the SO
+	And I close all client application windows
+	* Open SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '36'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
+		
+	
+Scenario: 2065009 check unlock linked rows in the SI
+	And I close all client application windows
+	* Open SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '36'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows	
+
+Scenario: 20650091 check unlock linked rows in the SC
+	And I close all client application windows
+	* Open SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '36'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows			
+
 Scenario: _2065010 change quantity in the linked string in the SO (one session)
 	* Open SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -876,7 +952,33 @@ Scenario: _2065029 check locking header in the SRO with linked documents (one se
 		And "Currency" attribute is read-only
 		And "Branch" attribute is read-only
 	And I close all client application windows
-		
+
+
+Scenario: _20650291 check unlock linked rows in the SRO
+	And I close all client application windows
+	* Open SRO
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '32'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows	
+
 Scenario: _2065030 check locking header in the SR with linked documents (one session)
 	And I close all client application windows
 	* Open SR
@@ -898,6 +1000,30 @@ Scenario: _2065030 check locking header in the SR with linked documents (one ses
 		And "Branch" attribute is read-only
 	And I close all client application windows					
 
+Scenario: _2065031 check unlock linked rows in the SR
+	And I close all client application windows
+	* Open SR
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number' |
+			| '32'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
 
 Scenario: _2065031 check locking tab in the SRO with linked documents (one session)
 	And I close all client application windows
@@ -1349,6 +1475,31 @@ Scenario: _2065051 check locking tab in the Planned receipt reservation with lin
 				|'And I click choice button of "Store (requester)" attribute in "ItemList" table'|
 		And I close all client application windows	
 
+Scenario: _2065052 check unlock linked rows in the Planned receipt reservation
+	And I close all client application windows
+	* Open Planned receipt reservation
+		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '36'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
+
 
 Scenario: _2065071 open link info
 	And I close all client application windows	
@@ -1371,36 +1522,7 @@ Scenario: _2065071 open link info
 			| 'Sales invoice 36 dated 23.09.2021 10:21:37'         | ''         | ''     | ''       | ''         | 'Sales invoice 36 dated 23.09.2021 10:21:37'         |
 		And I close all client application windows
 		
-Scenario: _2065072 unlock linked rows
-	And I close all client application windows	
-	* Select SO
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '35'     |
-		And I select current line in "List" table
-	* Unlock linked rows
-		And I click "Unlock linked rows" button
-		And I activate "Item" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Trousers'    |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I activate field named "ItemKey" in "List" table
-		And I go to line in "List" table
-			| 'Item key' |
-			| '36/Yellow'    |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-			| 'Item'     | 'Item key'  |
-			| 'Trousers' | '36/Yellow' |
-		And I close all client application windows
-		
+
 Scenario: _2065073 try unlink all rows in the SC (SO-SC-SI)
 	And I close all client application windows	
 	* Select SС

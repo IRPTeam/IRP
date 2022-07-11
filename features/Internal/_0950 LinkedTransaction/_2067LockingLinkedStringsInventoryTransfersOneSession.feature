@@ -343,6 +343,83 @@ Scenario: _2067007 check locking tab in the IT with linked documents (one sessio
 			Then user message window does not contain messages			
 		And I close all client application windows
 
+Scenario: _2067008 check unlock linked rows in the ISR
+	And I close all client application windows
+	* Open ISR
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
+
+
+Scenario: _2067009 check unlock linked rows in the ITO
+	And I close all client application windows
+	* Open ITO
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
+
+
+Scenario: _2067009 check unlock linked rows in the IT
+	And I close all client application windows
+	* Open IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
+
 Scenario: _2067013 change quantity in the linked string in the ISR (one session)
 	* Open ISR
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"

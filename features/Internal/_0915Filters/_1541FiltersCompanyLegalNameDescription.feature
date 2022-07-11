@@ -90,7 +90,10 @@ Scenario: _017010 check the filter for Vendors partner terms in the document Pur
 		And I click the button named "FormCreate"
 	When check the filter by vendor partner terms in the purchase documents
 
-
+Scenario: _017011 check Description in the document Additional cost allocation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+	When check Description
 
 Scenario: _018013 check the filter for Legal name in the document Purchase Invoice
 	And I close all client application windows

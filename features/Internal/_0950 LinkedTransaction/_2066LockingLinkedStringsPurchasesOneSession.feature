@@ -640,6 +640,57 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I close current window
 		And I close all client application windows
 		
+
+Scenario: _2066008 check unlock linked rows in the Purchase order
+	And I close all client application windows
+	* Open Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '35'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
+
+Scenario: _2066009 check unlock linked rows in the Purchase invoice
+	And I close all client application windows
+	* Open Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '32'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
+
 Scenario: _2066010 change quantity in the linked string in the PO (one session)
 	* Open PO
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -868,6 +919,30 @@ Scenario: _2066021 unpost GR with linked strings (one session)
 			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|		
 	And I close all client application windows		
 				
+Scenario: _2066022 check unlock linked rows in the Goods receipt
+	And I close all client application windows
+	* Open Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '36'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
 
 Scenario: _2066023 delete PO with linked strings (one session)
 	And I close all client application windows
@@ -1360,4 +1435,54 @@ Scenario: _2066040 change quantity in the linked string in the PR (one session)
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Purchase returns" window is opened
+		And I close all client application windows
+
+Scenario: _2066041 check unlock linked rows in the PR
+	And I close all client application windows
+	* Open PR
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number' |
+			| '32'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
+
+Scenario: _2066042 check unlock linked rows in the PRO
+	And I close all client application windows
+	* Open PRO
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '32'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
 		And I close all client application windows

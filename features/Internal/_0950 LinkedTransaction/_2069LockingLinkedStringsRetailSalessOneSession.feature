@@ -117,6 +117,30 @@ Scenario: _2069003 check locking header in the Retail return receipt with linked
 		And "Branch" attribute is read-only
 	And I close all client application windows
 
+Scenario: _2069004 check unlock linked rows in the Retail sales receipt
+	And I close all client application windows
+	* Open Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
 
 Scenario: _2069005 check locking tab in the Retail sales receipt with linked documents (one session)
 	And I close all client application windows
@@ -264,7 +288,33 @@ Scenario: _2069006 check locking tab in the Retail return receipt with linked do
 			And I click choice button of "Retail sales receipt" attribute in "ItemList" table
 			And I close current window
 		And I close all client application windows
-		
+
+Scenario: _2069007 check unlock linked rows in the Retail return receipt
+	And I close all client application windows
+	* Open Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key' | 'Item'  |
+			| '38/Black' | 'Shirt' |
+		And I close all client application windows
+
+
 // Scenario: _2068010 change quantity in the linked string in the Retail sales receipt (one session)
 // 	* Open RSR
 // 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"

@@ -8662,7 +8662,175 @@ Scenario: _0154186 check price recalculaton in the RSR (depend of currency)
 		And I close all client application windows					
 		
 				
-	
+Scenario: _0154187 check edit currency in the StockAdjustmentAsSurplus
+	And I close all client application windows
+	* Create StockAdjustmentAsSurplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"	
+		And I click the button named "FormCreate"	
+	* Filling
+		And I click Choice button of the field named "Company"
+		Then "Companies" window is opened
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate "Profit loss center" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Distribution department'    |
+		And I select current line in "List" table
+		And I activate "Revenue type" field in "ItemList" table
+		And I click choice button of "Revenue type" attribute in "ItemList" table
+		Then "Expense and revenue types" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Revenue'     |
+		And I select current line in "List" table
+		And I activate "Amount" field in "ItemList" table
+		And I input "100,00" text in "Amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Change unit
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'box Dress (8 pcs)' |
+		And I select current line in "List" table
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Revenue type' | 'Amount' | 'Item'  | 'Basis document' | 'Item key' | 'Profit loss center'      | 'Physical inventory' | 'Serial lot numbers' | 'Unit'              | 'Quantity' |
+			| '1' | 'Revenue'      | '100,00' | 'Dress' | ''               | 'XS/Blue'  | 'Distribution department' | ''                   | ''                   | 'box Dress (8 pcs)' | '1,000'    |
+	* Edit currency
+		And in the table "ItemList" I click "Edit currencies" button
+		Then "Edit currencies" window is opened
+		And I activate "Rate" field in "CurrenciesTable" table
+		And I select current line in "CurrenciesTable" table
+		And I input "0,2000" text in "Rate" field of "CurrenciesTable" table
+		And I finish line editing in "CurrenciesTable" table
+		And I go to line in "CurrenciesTable" table
+			| 'Movement type'         | 'Multiplicity' | 'To'  | 'Type'      |
+			| 'Reporting currency UA' | '1'            | 'EUR' | 'Reporting' |
+		And I select current line in "CurrenciesTable" table
+		And I input "0,3000" text in "Rate" field of "CurrenciesTable" table
+		And I finish line editing in "CurrenciesTable" table
+	* Check
+		And "CurrenciesTable" table became equal
+			| 'Movement type'         | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency UA'     | 'Legal'     | 'UAH' | ''     | '1'            | '0,2000' | '20,00'  |
+			| 'Reporting currency UA' | 'Reporting' | 'EUR' | ''     | '1'            | '0,3000' | '30,00'  |
+		And I click "Ok" button
+		And I close all client application windows
+		
+
+Scenario: _0154188 check edit currency in the StockAdjustmentAsWriteOff
+	And I close all client application windows
+	* Create StockAdjustmentAsWriteOff
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"	
+		And I click the button named "FormCreate"	
+	* Filling
+		And I click Choice button of the field named "Company"
+		Then "Companies" window is opened
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate "Profit loss center" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Distribution department'    |
+		And I select current line in "List" table
+		And I activate "Expense type" field in "ItemList" table
+		And I click choice button of "Expense type" attribute in "ItemList" table
+		Then "Expense and revenue types" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Expense'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Change unit
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'box Dress (8 pcs)' |
+		And I select current line in "List" table
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Expense type' | 'Item'  | 'Basis document' | 'Item key' | 'Profit loss center'      | 'Physical inventory' | 'Serial lot numbers' | 'Unit'              | 'Quantity' |
+			| '1' | 'Expense'      | 'Dress' | ''               | 'XS/Blue'  | 'Distribution department' | ''                   | ''                   | 'box Dress (8 pcs)' | '1,000'    |
+	* Edit currency
+		And in the table "ItemList" I click "Edit currencies" button
+		Then "Edit currencies" window is opened
+		And I activate "Rate" field in "CurrenciesTable" table
+		And I select current line in "CurrenciesTable" table
+		And I input "0,2000" text in "Rate" field of "CurrenciesTable" table
+		And I finish line editing in "CurrenciesTable" table
+		And I go to line in "CurrenciesTable" table
+			| 'Movement type'         | 'Multiplicity' | 'To'  | 'Type'      |
+			| 'Reporting currency UA' | '1'            | 'EUR' | 'Reporting' |
+		And I select current line in "CurrenciesTable" table
+		And I input "0,3000" text in "Rate" field of "CurrenciesTable" table
+		And I finish line editing in "CurrenciesTable" table
+	* Check
+		And "CurrenciesTable" table became equal
+			| 'Movement type'         | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency UA'     | 'Legal'     | 'UAH' | ''     | '1'            | '0,2000' | ''       |
+			| 'Reporting currency UA' | 'Reporting' | 'EUR' | ''     | '1'            | '0,3000' | ''       |
+		And I click "Ok" button
+		And I close all client application windows				
+		
+				
+		
+					
+		
+				
+		
+				
+		
+				
+
 
 
 Scenario: _999999 close TestClient session

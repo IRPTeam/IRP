@@ -4061,6 +4061,7 @@ Scenario: _0154197 check comission calculation in the Retail return receipt
 			| '1' | '999,00' | '19,98'      | 'Card 02'      | 'Payment terminal 01' | 'No'                | 'Bank term 01' | 'Bank account, TRY' | '2,00'    |			
 		And I close all client application windows				
 		
+					
 Scenario: _0154198 copy line in Payment tab in the Retail return receipt	
 	And I close all client application windows
 	* Open RRR form

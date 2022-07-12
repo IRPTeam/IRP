@@ -995,6 +995,8 @@ Scenario: Create catalog AddAttributeAndPropertyValues objects
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf13dc8cb47d3' | 'False'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47ce' | ''             | 'Mango'          | ''                 | ''               | 'Mango'          | '_b234e9f0f22340c0b7051871a81696dc' |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf13dc8cb47d4' | 'False'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47cf' | ''             | 'Mint'           | ''                 | ''               | 'Mint'           | '_ecbd380a5e8d4f1a927c52d1b59cc956' |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa79120ed92fbced11eafcb72c775d77' | 'False'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf13dc8cb47de' | ''             | 'Fruit'          | ''                 | ''               | ''               | '_7ad0648a2f6e46cfa6f3f7d2d0440bd9' |
+		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa79120ed92fbced11eafcb72c775d78' | 'False'           | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf128cde918b7' | ''             | 'Test 1'         | ''                 | ''               | ''               | '_8ad0648a2f6e46cfa6f3f7d2d0440bd9' |
+
 Scenario: Create catalog AddAttributeAndPropertySets objects
 
 	And I check or create catalog "AddAttributeAndPropertySets" objects:

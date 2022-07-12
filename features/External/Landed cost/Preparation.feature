@@ -68,7 +68,7 @@ Scenario: add Plugin for tax calculation (LC)
 			| 'Description' |
 			| 'TaxCalculateVAT_TR'         |
 		And I select current line in "List" table
-		And I select external file "#workingDir#/DataProcessor/TaxCalculateVAT_TR.epf"
+		And I select external file "$Path$/DataProcessor/TaxCalculateVAT_TR.epf"
 		And I click the button named "FormAddExtDataProc"
 		And I input "" text in "Path to plugin for test" field
 		And I input "TaxCalculateVAT_TR" text in "Name" field

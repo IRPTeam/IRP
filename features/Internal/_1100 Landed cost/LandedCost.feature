@@ -2236,6 +2236,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 		
 Scenario: _023 check Stock adjustment as write off movements by register R5022 Expenses
 	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 	* Select Stock adjustment as write off
 		And I go to line in "List" table
 			| 'Number' |
@@ -2262,6 +2263,7 @@ Scenario: _023 check Stock adjustment as write off movements by register R5022 E
 		
 Scenario: _024 check Stock adjustment as surplus movements by register R5021 Revenues		
 		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 	* Select Stock adjustment as surplus
 		And I go to line in "List" table
 			| 'Number' |

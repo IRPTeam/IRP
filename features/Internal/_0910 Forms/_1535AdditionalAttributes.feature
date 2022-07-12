@@ -3313,12 +3313,8 @@ Scenario: _015400688 check that additional attributes and properties are display
 			| 'Test 1'        |
 		And I select current line in "List" table
 		Then "Test" form attribute became equal to "Test 1"
-		And I close current window
-		And I go to line in "List" table
-			| 'Description'              |
-			| 'Test01' |
-		And I select current line in "List" table
-		And I click "Add properties" button
+		And I click "Save" button
+		And I click "Add properties" button	
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
 			| 'Test'     | ''      |	

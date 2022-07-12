@@ -4,7 +4,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Object.Item = Parameters.Item;
 		Items.Item.ReadOnly = True;
 	EndIf;
-
+	
+	If ValueIsFilled(Object.Ref) Then
+		Items.Item.ReadOnly = True;
+	EndIf;
+	
 	If Not ValueIsFilled(Object.Specification) Then
 		AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject, "GroupAttributes");
 	EndIf;

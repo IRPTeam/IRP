@@ -90,7 +90,10 @@ Scenario: _017010 check the filter for Vendors partner terms in the document Pur
 		And I click the button named "FormCreate"
 	When check the filter by vendor partner terms in the purchase documents
 
-
+Scenario: _017011 check Description in the document Additional cost allocation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+	When check Description
 
 Scenario: _018013 check the filter for Legal name in the document Purchase Invoice
 	And I close all client application windows
@@ -362,7 +365,15 @@ Scenario: _029729 check the filter for Company in the document StockAdjustmentAs
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 	When check the filter by Company  in the Shipment cinfirmation and Goods receipt
 
+Scenario: _029730 check Description in the document StockAdjustmentAsSurplus
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+	When check Description
 
+Scenario: _029731 check Description in the document StockAdjustmentAsWriteOff
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+	When check Description
 
 Scenario: _029816 check Description in the document PhysicalCountByLocation
 	And I close all client application windows
@@ -602,6 +613,17 @@ Scenario: _028073 check filter by own companies in the document Customers advanc
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 	* Check the filter for Own Company
 		When check the filter by my own company in Opening entry/Item stock adjustment
+
+
+Scenario: _028074 check Description in the document Retail sales receipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	When check Description
+
+Scenario: _028075 check Description in the document Retail return receipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	When check Description
 
 
 Scenario: _999999 close TestClient session

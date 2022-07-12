@@ -192,6 +192,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -207,6 +208,11 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="7abee603-a33c-4cd4-8688-04f64f6127b4">
@@ -235,6 +241,11 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="34625cf2-83b5-444d-96ea-141cbae7c759">

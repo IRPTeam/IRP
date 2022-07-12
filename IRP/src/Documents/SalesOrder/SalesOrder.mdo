@@ -334,6 +334,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -349,6 +350,11 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.SalesOrder.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="04aa5b56-5b6e-4ed0-95c1-785c24e294b2">
@@ -469,6 +475,11 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.SalesOrder.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
       <createOnInput>DontUse</createOnInput>
     </attributes>
     <attributes uuid="8650489f-d008-4667-a48d-29cf0653de40">

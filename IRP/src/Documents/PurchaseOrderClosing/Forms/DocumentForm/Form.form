@@ -1129,12 +1129,6 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
-            <choiceParameterLinks>
-              <name>Filter.Item</name>
-              <datapath xsi:type="form:DataPath">
-                <segments>Items.ItemList.CurrentData.Item</segments>
-              </datapath>
-            </choiceParameterLinks>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
@@ -1392,12 +1386,6 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
-            <choiceParameterLinks>
-              <name>Filter.Item</name>
-              <datapath xsi:type="form:DataPath">
-                <segments>Items.ItemList.CurrentData.Item</segments>
-              </datapath>
-            </choiceParameterLinks>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">

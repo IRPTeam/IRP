@@ -4823,7 +4823,8 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("InventoryTransferOrder"    , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("PhysicalInventory"         , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("PhysicalCountByLocation"   , "StepItemListChangeItemKeyByItem");
-	Binding.Insert("ItemStockAdjustment"       , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("ItemStockAdjustment"       , "StepItemListChangeItemKeyByItem, 
+												 |StepItemListChangeItemKeyWriteOffByItem");
 	Binding.Insert("Bundling"                  , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("Unbundling"                , "StepItemListChangeItemKeyByItem");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
@@ -5037,6 +5038,42 @@ Procedure StepItemListChangeItemKeyByItem(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListChangeItemKeyByItem";
 		Chain.ChangeItemKeyByItem.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_ITEMKEY_WRITEOFF
+
+// ItemList.ItemKeyWriteOff.Set
+Procedure SetItemListItemKeyWriteOff(Parameters, Results) Export
+	Binding = BindItemListItemKeyWriteOff(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ItemKeyWriteOff.Get
+Function GetItemListItemKeyWriteOff(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListItemKeyWriteOff(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.ItemKey.Bind
+Function BindItemListItemKeyWriteOff(Parameters)
+	DataPath = "ItemList.ItemKeyWriteOff";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.ItemKey.ChangeItemKeyWriteOffByItem.Step
+Procedure StepItemListChangeItemKeyWriteOffByItem(Parameters, Chain) Export
+	Chain.ChangeItemKeyWriteOffByItem.Enable = True;
+	Chain.ChangeItemKeyWriteOffByItem.Setter = "SetItemListItemKeyWriteOff";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeItemKeyWriteOffByItemOptions();
+		Options.Item            = GetItemListItem(Parameters, Row.Key);
+		Options.ItemKeyWriteOff = GetItemListItemKeyWriteOff(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeItemKeyWriteOffByItem";
+		Chain.ChangeItemKeyWriteOffByItem.Options.Add(Options);
 	EndDo;
 EndProcedure
 

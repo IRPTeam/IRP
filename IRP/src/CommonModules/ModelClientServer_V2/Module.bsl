@@ -172,6 +172,7 @@ Function GetChain()
 	
 	Chain.Insert("ChangeItemByPartnerItem" , GetChainLink("ChangeItemByPartnerItemExecute"));
 	Chain.Insert("ChangeItemKeyByItem"     , GetChainLink("ChangeItemKeyByItemExecute"));
+	Chain.Insert("ChangeItemKeyWriteOffByItem"      , GetChainLink("ChangeItemKeyWriteOffByItemExecute"));
 	Chain.Insert("ChangeProcurementMethodByItemKey" , GetChainLink("ChangeProcurementMethodByItemKeyExecute"));
 	
 	Chain.Insert("ChangeCurrencyByAccount", GetChainLink("ChangeCurrencyByAccountExecute"));
@@ -260,7 +261,25 @@ Function ChangeItemKeyByItemExecute(Options) Export
 	If ValueIsFilled(Options.ItemKey) And Options.ItemKey.Item = Options.Item Then
 		Return Options.ItemKey;
 	EndIf;
-	Return CatItemsServer.GetItemKeyByItem(Options.Item);
+	
+	ItemKey = CatItemsServer.GetItemKeyByItem(Options.Item); 
+	Return ItemKey;
+EndFunction
+
+Function ChangeItemKeyWriteOffByItemOptions() Export
+	Return GetChainLinkOptions("Item, ItemKeyWriteOff");
+EndFunction
+
+Function ChangeItemKeyWriteOffByItemExecute(Options) Export
+	If Not ValueIsFilled(Options.Item) Then
+		Return Undefined;
+	EndIf;
+	If ValueIsFilled(Options.ItemKeyWriteOff) And Options.ItemKeyWriteOff.Item = Options.Item Then
+		Return Options.ItemKeyWriteOff;
+	EndIf;
+	
+	ItemKeyWriteOff = CatItemsServer.GetItemKeyByItem(Options.Item);	
+	Return ItemKeyWriteOff;
 EndFunction
 
 Function ChangeUnitByItemKeyOptions() Export

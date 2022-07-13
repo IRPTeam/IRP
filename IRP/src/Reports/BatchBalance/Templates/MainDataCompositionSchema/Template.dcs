@@ -289,6 +289,54 @@
 				</dcscor:item>
 			</appearance>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountTaxOpeningBalance</dataPath>
+			<field>AmountTaxOpeningBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Group4</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountTaxReceipt</dataPath>
+			<field>AmountTaxReceipt</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountTaxExpense</dataPath>
+			<field>AmountTaxExpense</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountTaxClosingBalance</dataPath>
+			<field>AmountTaxClosingBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Group4</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
 		<item xsi:type="DataSetQuery">
 			<name>BatchBalance</name>
 			<field xsi:type="DataSetFieldField">
@@ -443,6 +491,32 @@
 					</v8:item>
 				</title>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountTaxOpeningBalance</dataPath>
+				<field>AmountTaxOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AmountTax</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountTaxReceipt</dataPath>
+				<field>AmountTaxReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountTaxExpense</dataPath>
+				<field>AmountTaxExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountTaxClosingBalance</dataPath>
+				<field>AmountTaxClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AmountTax</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
 	R6020B_BatchBalanceBalanceAndTurnovers.Company,
@@ -461,6 +535,10 @@
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxOpeningBalance AS AmountTaxOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxClosingBalance,
 	CASE
 		WHEN R6020B_BatchBalanceBalanceAndTurnovers.Recorder = UNDEFINED
 			THEN NULL
@@ -476,6 +554,7 @@ FROM
 		AND T6030S_BatchRelevance.Store = R6020B_BatchBalanceBalanceAndTurnovers.Store
 		AND T6030S_BatchRelevance.ItemKey = R6020B_BatchBalanceBalanceAndTurnovers.ItemKey
 		AND R6020B_BatchBalanceBalanceAndTurnovers.SecondPeriod &gt;= T6030S_BatchRelevance.Date
+
 ORDER BY
 	R6020B_BatchBalanceBalanceAndTurnovers.Recorder.Date</query>
 		</item>
@@ -660,6 +739,22 @@ WHERE
 		<dataPath>AmountCostReceipt</dataPath>
 		<expression>Sum(AmountCostReceipt)</expression>
 	</totalField>
+	<totalField>
+		<dataPath>AmountTaxClosingBalance</dataPath>
+		<expression>Sum(AmountTaxClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>AmountTaxExpense</dataPath>
+		<expression>Sum(AmountTaxExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>AmountTaxOpeningBalance</dataPath>
+		<expression>Sum(AmountTaxOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>AmountTaxReceipt</dataPath>
+		<expression>Sum(AmountTaxReceipt)</expression>
+	</totalField>
 	<parameter>
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
@@ -746,6 +841,15 @@ WHERE
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>AmountTaxOpeningBalance</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Tax</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>AmountCostOpeningBalance</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
@@ -778,6 +882,15 @@ WHERE
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Amount</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>AmountTaxReceipt</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Tax</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -818,6 +931,15 @@ WHERE
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>AmountTaxExpense</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Tax</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>AmountCostExpense</dcsset:field>
 						<dcsset:lwsTitle>
 							<v8:item>
@@ -850,6 +972,15 @@ WHERE
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Amount</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>AmountTaxClosingBalance</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Tax</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>

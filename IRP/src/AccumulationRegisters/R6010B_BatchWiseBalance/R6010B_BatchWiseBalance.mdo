@@ -55,6 +55,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="dead53bb-6bd0-4867-b989-04c8cffec2ba">
+    <name>AmountTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount tax</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <attributes uuid="51729166-c0ca-4937-a8ab-2b8b560c18ba">
     <name>Document</name>
     <synonym>

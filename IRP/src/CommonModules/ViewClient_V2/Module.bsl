@@ -626,9 +626,15 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		NeedRecalculate = True;
 	EndIf;
 	
+	If Not Answer.Count() Then
+		RemoveFromCache("ItemList.NetAmount"   , Parameters);
+		RemoveFromCache("ItemList.TaxAmount"   , Parameters);
+		RemoveFromCache("ItemList.TotalAmount" , Parameters);
+	EndIf;
+	
 	CommitChanges(Parameters);
 	
-	If NeedRecalculate Then
+	If NeedRecalculate And Answer.Count() Then
 		FormParameters = GetFormParameters(Parameters.Form);
 		FormParameters.EventCaller = "RecalculationsAfterQuestionToUser";
 		ServerParameters = GetServerParameters(Parameters.Object);

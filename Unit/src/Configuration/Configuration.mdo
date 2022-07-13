@@ -48,6 +48,7 @@
   <commonPictures>CommonPicture.Unit_Autotest</commonPictures>
   <roles>Role.FullAccess</roles>
   <roles>Role.Unit_MainRole</roles>
+  <commonModules>CommonModule.Unit_AddAttributeAndPropertySets</commonModules>
   <commonModules>CommonModule.Unit_ExpenseAndRevenueTypes</commonModules>
   <commonModules>CommonModule.Unit_Service</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
@@ -70,6 +71,7 @@
   <definedTypes>DefinedType.typeFilesOwner</definedTypes>
   <constants>Constant.SaasMode</constants>
   <commonForms>CommonForm.AttachFile</commonForms>
+  <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
   <catalogs>Catalog.Currencies</catalogs>
   <catalogs>Catalog.FileStoragesInfo</catalogs>

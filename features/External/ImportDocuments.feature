@@ -515,7 +515,7 @@ Scenario: Create document InventoryTransferOrder objects
 
 Scenario: Create document OpeningEntry objects
 
-	And I check or create document "OpeningEntry" objects with data exchange load true:
+	And I check or create for document "OpeningEntry" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                   | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
 		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d9226e' | 'False'        | 1        | '07.09.2020 21:26:04' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
 		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d9226f' | 'False'        | 2        | '07.09.2020 21:26:35' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |

@@ -1624,6 +1624,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfNewReceivedBatches.Columns.Add("AmountTax");
 	TableOfNewReceivedBatches.Columns.Add("QuantityBalance");
 	TableOfNewReceivedBatches.Columns.Add("AmountBalance");
+	TableOfNewReceivedBatches.Columns.Add("AmountTaxBalance");
 	TableOfNewReceivedBatches.Columns.Add("IsOpeningBalance");
 	TableOfNewReceivedBatches.Columns.Add("Direction");
 

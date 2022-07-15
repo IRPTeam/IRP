@@ -59,6 +59,21 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="2fd43b13-548f-4fde-80f0-4dbd45bc4d33">
+    <name>IncludeToLandedCost</name>
+    <synonym>
+      <key>en</key>
+      <value>Include to landed cost</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="ea15a6c3-3598-4685-abe5-9fa75df0f291">
     <name>Company</name>
     <synonym>

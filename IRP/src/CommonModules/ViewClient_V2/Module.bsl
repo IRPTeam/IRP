@@ -616,9 +616,12 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		NeedRecalculate = True;
 	EndIf;
 	
+	NeedUpdatePaymentTerms = False;
 	If Not Answer.Property("UpdatePaymentTerm") And ChangedPoints.Property("IsChangedPaymentTerms") Then
 		RemoveFromCache("PaymentTerms", Parameters);
 		NeedRecalculate = True;
+	Else
+		NeedUpdatePaymentTerms = True;
 	EndIf;
 	
 	If Not Answer.Property("UpdateTaxRates") And ChangedPoints.Property("IsChangedTaxRates") Then
@@ -626,7 +629,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		NeedRecalculate = True;
 	EndIf;
 	
-	If Not Answer.Count() Then
+	If (Not Answer.Count()) Or (Answer.Count() = 1 And NeedUpdatePaymentTerms) Then
 		RemoveFromCache("ItemList.NetAmount"   , Parameters);
 		RemoveFromCache("ItemList.TaxAmount"   , Parameters);
 		RemoveFromCache("ItemList.TotalAmount" , Parameters);
@@ -637,10 +640,18 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	If NeedRecalculate And Answer.Count() Then
 		FormParameters = GetFormParameters(Parameters.Form);
 		FormParameters.EventCaller = "RecalculationsAfterQuestionToUser";
+		FormParameters.NeedUpdatePaymentTerms = NeedUpdatePaymentTerms;
 		ServerParameters = GetServerParameters(Parameters.Object);
 		ServerParameters.TableName = "ItemList";
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.RecalculationsAfterQuestionToUser(Parameters);
+	Else
+		If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
+			Parameters.Form.UpdateTotalAmounts();
+		EndIf;
 	EndIf;
 EndProcedure
 

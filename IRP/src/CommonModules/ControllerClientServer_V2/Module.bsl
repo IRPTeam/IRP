@@ -19,6 +19,7 @@ Function GetFormParameters(Form) Export
 	Result.Insert("ViewServerModuleName", "ViewServer_V2");
 	Result.Insert("EventCaller", "");
 	Result.Insert("TaxesCache", "");
+	Result.Insert("NeedUpdatePaymentTerms", False);
 	
 	If Form <> Undefined And CommonFunctionsClientServer.ObjectHasProperty(Form, "TaxesCache") Then
 		Result.TaxesCache = Form.TaxesCache;
@@ -74,6 +75,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.LoadData.Insert("ExecuteAllViewNotify"      , False);
 	Parameters.LoadData.Insert("CountRows"                 , 0);
 	Parameters.LoadData.Insert("SourceColumnsGroupBy"      , "");
+	
+	Parameters.Insert("NeedUpdatePaymentTerms", FormParameters.NeedUpdatePaymentTerms);
 	
 	Parameters.Insert("PropertyBeforeChange", FormParameters.PropertyBeforeChange);
 	
@@ -733,33 +736,41 @@ EndProcedure
 Function BindRecalculationsAfterQuestionToUser(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("SalesOrder", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
-		|StepUpdatePaymentTerms");
+	If Parameters.NeedUpdatePaymentTerms Then
+		Binding.Insert("SalesOrder"      , "StepUpdatePaymentTerms");
+		Binding.Insert("SalesInvoice"    , "StepUpdatePaymentTerms");
+		Binding.Insert("PurchaseOrder"   , "StepUpdatePaymentTerms");
+		Binding.Insert("PurchaseInvoice" , "StepUpdatePaymentTerms");
 	
-	Binding.Insert("SalesOrderClosing", "StepItemListCalculations_RecalculationsAfterQuestionToUser");
+	Else
+		Binding.Insert("SalesOrder", 
+			"StepItemListCalculations_RecalculationsAfterQuestionToUser,
+			|StepUpdatePaymentTerms");
 	
-	Binding.Insert("SalesInvoice", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
-		|StepUpdatePaymentTerms");
+		Binding.Insert("SalesOrderClosing", "StepItemListCalculations_RecalculationsAfterQuestionToUser");
+	
+		Binding.Insert("SalesInvoice", 
+			"StepItemListCalculations_RecalculationsAfterQuestionToUser,
+			|StepUpdatePaymentTerms");
 
-	Binding.Insert("RetailSalesReceipt"  , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	Binding.Insert("SalesReturnOrder"    , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	Binding.Insert("SalesReturn"         , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	Binding.Insert("PurchaseReturnOrder" , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	Binding.Insert("PurchaseReturn"      , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	Binding.Insert("RetailReturnReceipt" , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
+		Binding.Insert("RetailSalesReceipt"  , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
+		Binding.Insert("SalesReturnOrder"    , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
+		Binding.Insert("SalesReturn"         , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
+		Binding.Insert("PurchaseReturnOrder" , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
+		Binding.Insert("PurchaseReturn"      , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
+		Binding.Insert("RetailReturnReceipt" , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
 
-	Binding.Insert("PurchaseOrder", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
-		|StepUpdatePaymentTerms");
+		Binding.Insert("PurchaseOrder", 
+			"StepItemListCalculations_RecalculationsAfterQuestionToUser,
+			|StepUpdatePaymentTerms");
 	
-	Binding.Insert("PurchaseOrderClosing", "StepItemListCalculations_RecalculationsAfterQuestionToUser");
+		Binding.Insert("PurchaseOrderClosing", "StepItemListCalculations_RecalculationsAfterQuestionToUser");
 	
-	Binding.Insert("PurchaseInvoice", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
-		|StepUpdatePaymentTerms");
-		
+		Binding.Insert("PurchaseInvoice", 
+			"StepItemListCalculations_RecalculationsAfterQuestionToUser,
+			|StepUpdatePaymentTerms");
+	
+	EndIf;	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

@@ -312,7 +312,6 @@ Procedure FillItemListBySpecificationAtServer()
 		NewRow.Key = New UUID();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
-	DocumentsServer.FillItemList(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -329,7 +328,6 @@ Procedure FillItemListByBundleContentAtServer()
 		NewRow.Key = New UUID();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
-	DocumentsServer.FillItemList(Object, ThisObject);
 EndProcedure
 
 #EndRegion

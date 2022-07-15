@@ -13,7 +13,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	SetConditionalAppearance();
 EndProcedure
 
 &AtServer
@@ -83,27 +82,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
-EndProcedure
-
-&AtServer
-Procedure SetConditionalAppearance()
-	AppearanceElement = ConditionalAppearance.Items.Add();
-	FieldElement = AppearanceElement.Fields.Items.Add();
-	FieldElement.Field = New DataCompositionField(Items.ItemListProcurementMethod.Name);
-
-	FilterElementGroup = AppearanceElement.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
-	FilterElementGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
-
-	FilterElement = FilterElementGroup.Items.Add(Type("DataCompositionFilterItem"));
-	FilterElement.LeftValue = New DataCompositionField("Object.ItemList.ItemType");
-	FilterElement.ComparisonType = DataCompositionComparisonType.Equal;
-	FilterElement.RightValue = Enums.ItemTypes.Product;
-
-	FilterElement = FilterElementGroup.Items.Add(Type("DataCompositionFilterItem"));
-	FilterElement.LeftValue = New DataCompositionField("Object.ItemList.ProcurementMethod");
-	FilterElement.ComparisonType = DataCompositionComparisonType.NotFilled;
-
-	AppearanceElement.Appearance.SetParameterValue("MarkIncomplete", True);
 EndProcedure
 
 &AtClient

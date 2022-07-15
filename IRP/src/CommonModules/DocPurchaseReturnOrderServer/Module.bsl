@@ -4,7 +4,6 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
-		DocumentsServer.FillItemList(Object);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 		DocumentsServer.FillSpecialOffersCache(Object, Form, "PurchaseInvoice");
 	EndIf;
@@ -13,7 +12,6 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
-	DocumentsServer.FillItemList(Object);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	Form.Taxes_CreateFormControls();
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "PurchaseInvoice");
@@ -21,7 +19,6 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-	DocumentsServer.FillItemList(Object);
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;

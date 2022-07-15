@@ -1021,12 +1021,6 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
-            <choiceParameterLinks>
-              <name>Filter.Item</name>
-              <datapath xsi:type="form:DataPath">
-                <segments>Items.ItemList.CurrentData.Item</segments>
-              </datapath>
-            </choiceParameterLinks>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
@@ -1184,12 +1178,6 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
-            <choiceParameterLinks>
-              <name>Filter.Item</name>
-              <datapath xsi:type="form:DataPath">
-                <segments>Items.ItemList.CurrentData.Item</segments>
-              </datapath>
-            </choiceParameterLinks>
           </extInfo>
         </items>
         <autoCommandBar>
@@ -1223,7 +1211,6 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -1255,7 +1242,6 @@
             <height>1</height>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -1287,7 +1273,6 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <visible>true</visible>
@@ -2612,7 +2597,6 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
     </items>
     <items xsi:type="form:Button">
@@ -2724,23 +2708,6 @@
       <tablePath xsi:type="form:DataPath">
         <segments>Object.ItemList</segments>
       </tablePath>
-      <columns>
-        <name>Item</name>
-        <title>
-          <key>en</key>
-          <value>Item</value>
-        </title>
-        <id>2</id>
-        <valueType>
-          <types>CatalogRef.Items</types>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
-      </columns>
       <columns>
         <name>IsExternalLinked</name>
         <title>

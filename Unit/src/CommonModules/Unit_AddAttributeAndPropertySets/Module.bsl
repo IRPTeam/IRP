@@ -42,11 +42,63 @@ EndFunction
 
 Function GetExclude_AddAttributes()
 	ArrayOfExcluded = New Array();
+	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertySets");
+	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertyValues");
+	ArrayOfExcluded.Add("Catalog.AdvancesKeys");
+	ArrayOfExcluded.Add("Catalog.Batches");
+	ArrayOfExcluded.Add("Catalog.BatchKeys");
+	ArrayOfExcluded.Add("Catalog.ConfigurationMetadata");
+	ArrayOfExcluded.Add("Catalog.CurrencyMovementSets");
+	ArrayOfExcluded.Add("Catalog.DataAreas");
+	ArrayOfExcluded.Add("Catalog.DataBaseStatus");
+	ArrayOfExcluded.Add("Catalog.DataMappingItems");
+	ArrayOfExcluded.Add("Catalog.Extensions");
+	ArrayOfExcluded.Add("Catalog.IDInfoAddresses");
+	ArrayOfExcluded.Add("Catalog.IDInfoSets");
+	ArrayOfExcluded.Add("Catalog.MovementRules");
+	ArrayOfExcluded.Add("Catalog.PrintTemplates");
+	ArrayOfExcluded.Add("Catalog.ReportOptions");
+	ArrayOfExcluded.Add("Catalog.RowIDs");
+	ArrayOfExcluded.Add("Catalog.TransactionsKeys");
+
+	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
+	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");
+	ArrayOfExcluded.Add("Document.CalculationMovementCosts");
+	ArrayOfExcluded.Add("Document.CustomersAdvancesClosing");
+	ArrayOfExcluded.Add("Document.VendorsAdvancesClosing");
+	ArrayOfExcluded.Add("Document.BatchReallocateIncoming");
+	ArrayOfExcluded.Add("Document.BatchReallocateOutgoing");
 	Return ArrayOfExcluded;
 EndFunction
 
 Function GetExclude_Properties()
 	ArrayOfExcluded = New Array();
+	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertySets");
+	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertyValues");
+	ArrayOfExcluded.Add("Catalog.AdvancesKeys");
+	ArrayOfExcluded.Add("Catalog.Batches");
+	ArrayOfExcluded.Add("Catalog.BatchKeys");
+	ArrayOfExcluded.Add("Catalog.ConfigurationMetadata");
+	ArrayOfExcluded.Add("Catalog.CurrencyMovementSets");
+	ArrayOfExcluded.Add("Catalog.DataAreas");
+	ArrayOfExcluded.Add("Catalog.DataBaseStatus");
+	ArrayOfExcluded.Add("Catalog.DataMappingItems");
+	ArrayOfExcluded.Add("Catalog.Extensions");
+	ArrayOfExcluded.Add("Catalog.IDInfoAddresses");
+	ArrayOfExcluded.Add("Catalog.IDInfoSets");
+	ArrayOfExcluded.Add("Catalog.MovementRules");
+	ArrayOfExcluded.Add("Catalog.PrintTemplates");
+	ArrayOfExcluded.Add("Catalog.ReportOptions");
+	ArrayOfExcluded.Add("Catalog.RowIDs");
+	ArrayOfExcluded.Add("Catalog.TransactionsKeys");
+
+	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
+	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");
+	ArrayOfExcluded.Add("Document.CalculationMovementCosts");
+	ArrayOfExcluded.Add("Document.CustomersAdvancesClosing");
+	ArrayOfExcluded.Add("Document.VendorsAdvancesClosing");
+	ArrayOfExcluded.Add("Document.BatchReallocateIncoming");
+	ArrayOfExcluded.Add("Document.BatchReallocateOutgoing");
 	Return ArrayOfExcluded;
 EndFunction
 

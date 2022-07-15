@@ -179,6 +179,7 @@ Function ItemList()
 	|	OpeningEntryInventory.Ref.Company AS Company,
 	|	OpeningEntryInventory.Ref.Branch AS Branch,
 	|	OpeningEntryInventory.Amount AS Amount,
+	|	OpeningEntryInventory.AmountTax AS AmountTax,
 	|	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
 	|	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency
 	|INTO ItemList
@@ -689,7 +690,8 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.CurrencyMovementType,
 	|	ItemList.Currency,
 	|	SUM(ItemList.Quantity) AS Quantity,
-	|	SUM(ItemList.Amount) AS Amount
+	|	SUM(ItemList.Amount) AS Amount,
+	|	SUM(ItemList.AmountTax) AS AmountTax
 	|INTO tmp_T6020S_BatchKeysInfo
 	|FROM
 	|	ItemList AS ItemList
@@ -715,7 +717,8 @@ Function T6020S_BatchKeysInfo()
 	|	Table.CurrencyMovementType,
 	|	Table.Currency,
 	|	Table.Quantity,
-	|	Table.Amount
+	|	Table.Amount,
+	|	Table.AmountTax
 	|INTO T6020S_BatchKeysInfo
 	|FROM
 	|	tmp_T6020S_BatchKeysInfo AS Table

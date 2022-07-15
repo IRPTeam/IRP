@@ -19,6 +19,21 @@
   <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="e3f0555f-181c-4db5-bf98-288829598617">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <resources uuid="a3175003-5d67-4333-b65e-54612d9f684d">
     <name>Amount</name>
     <synonym>
@@ -34,14 +49,14 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <resources uuid="e3f0555f-181c-4db5-bf98-288829598617">
-    <name>Quantity</name>
+  <resources uuid="71546a51-546f-47fd-88a1-92ccf2a98366">
+    <name>AmountTax</name>
     <synonym>
       <key>en</key>
-      <value>Quantity</value>
+      <value>Amount tax</value>
     </synonym>
     <type>
-      <types>DefinedType.typeQuantity</types>
+      <types>DefinedType.typeAmount</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

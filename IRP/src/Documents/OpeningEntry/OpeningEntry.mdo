@@ -1001,6 +1001,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="5fde8ca3-c7de-4e54-9956-41dba3cae7e2">
+      <name>AmountTax</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount tax</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="b000646d-478e-415c-8715-c0e773f31662">
       <name>UseSerialLotNumber</name>
       <synonym>

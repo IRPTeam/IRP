@@ -44,6 +44,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	R6010B_BatchWiseBalance.Batch.Company AS Company,
 	|	R6010B_BatchWiseBalance.Recorder AS CalculationMovementCost,
 	|	R6010B_BatchWiseBalance.Amount AS Amount,
+	|	R6010B_BatchWiseBalance.AmountTax AS AmountTax,
 	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
@@ -63,6 +64,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	R6030T_BatchShortageOutgoing.Company,
 	|	R6030T_BatchShortageOutgoing.Recorder,
 	|	0,
+	|	0,
 	|	0
 	|FROM
 	|	AccumulationRegister.R6030T_BatchShortageOutgoing AS R6030T_BatchShortageOutgoing
@@ -81,6 +83,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	R6040T_BatchShortageIncoming.BatchKey.Store,
 	|	R6040T_BatchShortageIncoming.Company,
 	|	R6040T_BatchShortageIncoming.Recorder,
+	|	0,
 	|	0,
 	|	0
 	|FROM
@@ -135,6 +138,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	R6010B_BatchWiseBalance.Document AS Document,
 	|	R6010B_BatchWiseBalance.Quantity AS Quantity,
 	|	R6010B_BatchWiseBalance.Amount AS Amount,
+	|	R6010B_BatchWiseBalance.AmountTax AS AmountTax,
 	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost,
 	|	R6010B_BatchWiseBalance.Batch AS Batch,
 	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
@@ -157,6 +161,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	R6030T_BatchShortageOutgoing.Quantity,
 	|	0,
 	|	0,
+	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageOutgoing),
 	|	R6030T_BatchShortageOutgoing.BatchKey,
 	|	R6030T_BatchShortageOutgoing.BatchKey.ItemKey,
@@ -175,6 +180,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	VALUE(AccumulationRecordType.Receipt),
 	|	R6040T_BatchShortageIncoming.Document,
 	|	R6040T_BatchShortageIncoming.Quantity,
+	|	0,
 	|	0,
 	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageIncoming),
@@ -196,6 +202,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchBalance.Document AS Document,
 	|	BatchBalance.Quantity AS Quantity,
 	|	BatchBalance.Amount AS Amount,
+	|	BatchBalance.AmountTax AS AmountTax,
 	|	BatchBalance.AmountCost AS AmountCost,
 	|	BatchBalance.Batch AS Batch,
 	|	BatchBalance.BatchKey AS BatchKey,

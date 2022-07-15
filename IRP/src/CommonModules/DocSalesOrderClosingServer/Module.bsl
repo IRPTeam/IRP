@@ -165,6 +165,7 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 	|	ItemList.LineNumber AS LineNumber,
 	|	ItemList.Key AS Key,
 	|	ItemList.Cancel AS Cancel1,
+	|	ItemList.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.Store AS Store,
 	|	ItemList.Price AS Price,

@@ -16,6 +16,30 @@
   <inputByString>Catalog.PlanningPeriods.StandardAttribute.Code</inputByString>
   <inputByString>Catalog.PlanningPeriods.StandardAttribute.Description</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_PlanningPeriods</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_PlanningPeriods</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.PlanningPeriods.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.PlanningPeriods.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
@@ -72,6 +96,49 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <tabularSections uuid="984b5575-28eb-4080-bfff-97c565271753">
+    <producedTypes>
+      <objectType typeId="0ba57d68-b94f-4f6f-b6be-c1bd19710512" valueTypeId="b093870f-6785-4c8d-9ed1-b320fcf930b4"/>
+      <rowType typeId="0592f971-7739-427e-b6f2-17c6665edd52" valueTypeId="14c8c2c0-15a1-42aa-871d-71ff2e0a0ba7"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="33cc600a-0761-4898-8e0a-fff142eaf9f0">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5d65d604-f8e9-41af-9e9f-1cea97100aea">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="e893d468-79d6-4537-8695-257b2a028b67">
     <name>ItemForm</name>
     <synonym>

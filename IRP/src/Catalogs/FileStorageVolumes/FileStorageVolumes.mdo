@@ -15,6 +15,30 @@
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Catalog.FileStorageVolumes.StandardAttribute.Description</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_FileStorageVolumes</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_FileStorageVolumes</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.FileStorageVolumes.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
@@ -80,6 +104,49 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <tabularSections uuid="2fb87184-2a8a-464a-a1df-fa1e0afc4e3f">
+    <producedTypes>
+      <objectType typeId="d61c39b4-1fa9-42c4-a414-3ffbe4e8750e" valueTypeId="9aade3f4-a043-4da7-8a34-f34df328ad1b"/>
+      <rowType typeId="82d2841e-656e-4f46-a33b-086d5c6c675e" valueTypeId="08f912a9-3c86-436c-bb08-0b5fa3697897"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="3ac33011-e5fc-423a-a209-7fdb8499ce1f">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c44cba3b-65c9-4b85-abf7-661d6027ce90">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.FileStorageVolumes.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="e833b5c6-7cf5-4de7-9b9a-b93f40e93134">
     <name>ItemForm</name>
     <synonym>

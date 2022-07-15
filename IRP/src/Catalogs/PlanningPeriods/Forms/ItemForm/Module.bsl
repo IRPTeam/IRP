@@ -1,6 +1,6 @@
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 EndProcedure
 
@@ -16,11 +16,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure DescriptionOpening(Item, StandardProcessing) Export
-	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
 #Region AddAttributes
 
 &AtClient
@@ -34,3 +29,5 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 #EndRegion
+
+

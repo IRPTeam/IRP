@@ -94,3 +94,12 @@ Procedure isEqual(weWait, weGot) Export
 	EndIf;
 	
 EndProcedure
+
+// assert false.
+// 
+// Parameters:
+//  ErrorMessage - String
+Procedure assertFalse(ErrorMessage) Export
+	Raise ErrorMessage;
+EndProcedure
+

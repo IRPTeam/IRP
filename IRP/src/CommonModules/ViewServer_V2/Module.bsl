@@ -36,6 +36,7 @@ Procedure API_CallbackAtServer(Object, Form, TableName, ArrayOfDataPaths) Export
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
 	ServerParameters.TableName = TableName;
 	ServerParameters.ReadOnlyProperties = StrConcat(ArrayOfDataPaths, ",");
+	ServerParameters.StepEnableFlags.PriceChanged_AfterQuestionToUser = True;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
 	For Each PropertyName In StrSplit(ServerParameters.ReadOnlyProperties, ",") Do
 		If StrStartsWith(TrimAll(PropertyName), TableName + "._") Then

@@ -9,6 +9,11 @@ Function GetServerParameters(Object) Export
 	Result.Insert("Rows", Undefined);
 	Result.Insert("ReadOnlyProperties", "");
 	Result.Insert("IsBasedOn", False);
+	
+	StepEnableFlags = New Structure();
+	StepEnableFlags.Insert("PriceChanged_AfterQuestionToUser", False);
+	
+	Result.Insert("StepEnableFlags", StepEnableFlags);
 	Return Result;
 EndFunction
 
@@ -88,6 +93,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.Insert("Object" , ServerParameters.Object);
 	Parameters.Insert("Cache"  , New Structure());
 	Parameters.Insert("ControllerModuleName", ServerParameters.ControllerModuleName);
+	Parameters.Insert("StepEnableFlags", ServerParameters.StepEnableFlags);
 	
 	Parameters.Insert("IsBasedOn"             , ServerParameters.IsBasedOn);
 	Parameters.Insert("ReadOnlyProperties"    , ServerParameters.ReadOnlyProperties);
@@ -5603,54 +5609,68 @@ EndFunction
 Function BindItemListPrice(Parameters)
 	DataPath = "ItemList.Price";
 	Binding = New Structure();
-	Binding.Insert("SalesOrder",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+	If Parameters.StepEnableFlags.PriceChanged_AfterQuestionToUser Then
+		Binding.Insert("SalesOrder"           ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("SalesOrderClosing"    ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("SalesInvoice"         ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("RetailSalesReceipt"   ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("PurchaseOrder"        ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("PurchaseOrderClosing" ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("PurchaseInvoice"      ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("RetailReturnReceipt"  ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("PurchaseReturnOrder"  ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("PurchaseReturn"       ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("SalesReturnOrder"     ,"StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("SalesReturn"          ,"StepItemListCalculations_IsPriceChanged");	
+	Else
+		Binding.Insert("SalesOrder",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 	
-	Binding.Insert("SalesOrderClosing",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("SalesOrderClosing",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 	
-	Binding.Insert("SalesInvoice",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("SalesInvoice",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 
-	Binding.Insert("RetailSalesReceipt",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("RetailSalesReceipt",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 
-	Binding.Insert("PurchaseOrder",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("PurchaseOrder",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 	
-	Binding.Insert("PurchaseOrderClosing",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("PurchaseOrderClosing",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 	
-	Binding.Insert("PurchaseInvoice",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("PurchaseInvoice",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 	
-	Binding.Insert("RetailReturnReceipt",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("RetailReturnReceipt",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 	
-	Binding.Insert("PurchaseReturnOrder",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("PurchaseReturnOrder",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 	
-	Binding.Insert("PurchaseReturn",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("PurchaseReturn",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 	
-	Binding.Insert("SalesReturnOrder",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("SalesReturnOrder",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
 	
-	Binding.Insert("SalesReturn",
-		"StepItemListChangePriceTypeAsManual_IsUserChange,
-		|StepItemListCalculations_IsPriceChanged");
-		
+		Binding.Insert("SalesReturn",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged");
+	EndIf;
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

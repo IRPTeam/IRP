@@ -292,22 +292,29 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("ItemList.ManualFixedCount"   , "SetItemListManualFixedCount");
 	SettersMap.Insert("ItemList.ExpCount"           , "SetItemListExpCount");
 	SettersMap.Insert("ItemList.SalesInvoice"       , "SetItemListSalesDocument");
-	SettersMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");	
+	SettersMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");
+	SettersMap.Insert("ItemList.TotalAmount"        , "StepItemListCalculations_IsTotalAmountChanged");
+	SettersMap.Insert("ItemList.<tax_rate>"         , "StepChangeTaxRate_AgreementInHeader");
+	
 	Return SettersMap.Get(DataPath);
 EndFunction
 
 Procedure API_SetProperty(Parameters, Property, Value) Export
-	SetterName = GetSetterNameByDataPath(Property.DataPath);
+	SetterNameOrStepsEnabler = GetSetterNameByDataPath(Property.DataPath);
 	IsColumn = StrSplit(Property.DataPath, ".").Count() = 2;
-	If SetterName <> Undefined Then
+	If SetterNameOrStepsEnabler <> Undefined Then
 		If IsColumn Then
 			For Each Row In GetRows(Parameters, Parameters.TableName) Do
-				Results = ResultArray(Row.Key, Value);
-				ExecuteSetterByName(Parameters, Results, SetterName);
+				If StrStartsWith(SetterNameOrStepsEnabler, "Step") Then // steps enabler
+					ModelClientServer_V2.EntryPoint(SetterNameOrStepsEnabler, Parameters);
+				Else // setter
+					Results = ResultArray(Row.Key, Value);
+					ExecuteSetterByName(Parameters, Results, SetterNameOrStepsEnabler);
+				EndIf;
 			EndDo;
 		Else
 			Results = ResultArray(Undefined, Value);
-			ExecuteSetterByName(Parameters, Results, SetterName);
+			ExecuteSetterByName(Parameters, Results, SetterNameOrStepsEnabler);
 		EndIf;
 	Else
 		If IsColumn Then
@@ -377,53 +384,20 @@ Function BindFormOnCreateAtServer(Parameters)
 	DataPath = "";
 	Binding = New Structure();
 	
-	Binding.Insert("SalesOrder",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("SalesOrder"        , "StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("SalesOrderClosing" , "StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("SalesInvoice"      , "StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("SalesReturnOrder"  , "StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("SalesReturn"       , "StepRequireCallCreateTaxesFormControls");
 	
-	Binding.Insert("SalesOrderClosing",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("PurchaseOrder"        , "StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("PurchaseOrderClosing" , "StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("PurchaseInvoice"      , "StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("PurchaseReturnOrder"  , "StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("PurchaseReturn"       , "StepRequireCallCreateTaxesFormControls");
 	
-	Binding.Insert("SalesInvoice",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
-
-	Binding.Insert("RetailSalesReceipt",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
-	
-	Binding.Insert("PurchaseOrder",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
-	
-	Binding.Insert("PurchaseOrderClosing",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
-	
-	Binding.Insert("PurchaseInvoice",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
-	
-	Binding.Insert("SalesReturnOrder",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
-	
-	Binding.Insert("SalesReturn",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
-	
-	Binding.Insert("PurchaseReturnOrder",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
-	
-	Binding.Insert("PurchaseReturn",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
-	
-	Binding.Insert("RetailReturnReceipt",
-		"StepItemListCalculations_RecalculationsOnCopy,
-		|StepRequireCallCreateTaxesFormControls");
+	Binding.Insert("RetailSalesReceipt"   , "StepRequireCallCreateTaxesFormControls");	
+	Binding.Insert("RetailReturnReceipt"  , "StepRequireCallCreateTaxesFormControls");
 									
 	Binding.Insert("BankPayment",
 		"StepPaymentListCalculations_RecalculationsOnCopy,
@@ -718,50 +692,6 @@ Procedure StepExtractDataCurrencyFromAccount(Parameters, Chain) Export
 	Options.StepName = "StepExtractDataCurrencyFromAccount";
 	Chain.ExtractDataCurrencyFromAccount.Options.Add(Options);
 EndProcedure
-
-#EndRegion
-
-#Region RECALCULATION_AFTER_QUESTIONS_TO_USER
-
-// RecalculationsAfterQuestionToUser.Call
-Procedure RecalculationsAfterQuestionToUser(Parameters) Export
-	Binding = BindRecalculationsAfterQuestionToUser(Parameters);
-	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
-
-// RecalculationsAfterQuestionToUser.Bind
-Function BindRecalculationsAfterQuestionToUser(Parameters)
-	DataPath = "";
-	Binding = New Structure();
-	Binding.Insert("SalesOrder", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
-		|StepUpdatePaymentTerms");
-	
-	Binding.Insert("SalesOrderClosing", "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	
-	Binding.Insert("SalesInvoice", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
-		|StepUpdatePaymentTerms");
-
-	Binding.Insert("RetailSalesReceipt"  , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	Binding.Insert("SalesReturnOrder"    , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	Binding.Insert("SalesReturn"         , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	Binding.Insert("PurchaseReturnOrder" , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	Binding.Insert("PurchaseReturn"      , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	Binding.Insert("RetailReturnReceipt" , "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-
-	Binding.Insert("PurchaseOrder", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
-		|StepUpdatePaymentTerms");
-	
-	Binding.Insert("PurchaseOrderClosing", "StepItemListCalculations_RecalculationsAfterQuestionToUser");
-	
-	Binding.Insert("PurchaseInvoice", 
-		"StepItemListCalculations_RecalculationsAfterQuestionToUser,
-		|StepUpdatePaymentTerms");
-		
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
-EndFunction
 
 #EndRegion
 
@@ -6475,11 +6405,6 @@ Procedure StepItemListCalculations_IsCopyRow(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsCopyRow");
 EndProcedure
 
-// ItemList.Calculations.[RecalculationsAfterQuestionToUser].Step
-Procedure StepItemListCalculations_RecalculationsAfterQuestionToUser(Parameters, Chain) Export
-	StepItemListCalculations(Parameters, Chain, "RecalculationsAfterQuestionToUser");
-EndProcedure
-
 // ItemList.Calculations.[IsPriceIncludeTaxChanged].Step
 Procedure StepItemListCalculations_IsPriceIncludeTaxChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsPriceIncludeTaxChanged");
@@ -6541,7 +6466,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "IsOffersChanged"
 			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsTaxAmountUserFormChanged"
-			Or WhoIsChanged = "RecalculationsAfterQuestionToUser" Or WhoIsChanged = "RecalculationsOnCopy" Then
+			Or WhoIsChanged = "RecalculationsOnCopy" Then
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;
 			Options.CalculateTaxAmount.Enable     = True;
@@ -7661,7 +7586,6 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 	MetadataBinding = New Map();
 	For Each KeyValue In Binding Do
 		MetadataName = KeyValue.Key;
-		//MetadataBinding.Insert(StrTemplate("%1.%2", MetadataName, DataPath), Binding[MetadataName]);
 		MetadataBinding.Insert(MetadataName + "." +DataPath, Binding[MetadataName]);
 	EndDo;
 	FullDataPath = StrTemplate("%1.%2", Parameters.ObjectMetadataInfo.MetadataName, DataPath);
@@ -7704,7 +7628,7 @@ Function AddLinkedDocumentRows(Object, Form, LinkedResult, TableName) Export
 		
 	Parameters = GetParameters(ServerParameters, FormParameters);
 	For Each PropertyName In StrSplit(ServerParameters.ReadOnlyProperties, ",") Do
-		If StrStartsWith(PropertyName, TableName) Then
+		If StrStartsWith(TrimAll(PropertyName), TableName) Then
 			Property = New Structure("DataPath", TrimAll(PropertyName));
 			API_SetProperty(Parameters, Property, Undefined);
 		EndIf;

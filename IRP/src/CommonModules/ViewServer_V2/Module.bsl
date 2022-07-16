@@ -31,6 +31,27 @@ EndProcedure
 
 #EndRegion
 
+Procedure API_CallbackAtServer(Object, Form, TableName, ArrayOfDataPaths) Export
+	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = TableName;
+	ServerParameters.ReadOnlyProperties = StrConcat(ArrayOfDataPaths, ",");
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
+	For Each PropertyName In StrSplit(ServerParameters.ReadOnlyProperties, ",") Do
+		If StrStartsWith(TrimAll(PropertyName), TableName + "._") Then
+			Continue;
+		EndIf;
+		If StrStartsWith(TrimAll(PropertyName), TableName) Then
+			Property = New Structure("DataPath", TrimAll(PropertyName));
+			ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+		EndIf;
+	EndDo;
+	If StrFind(Parameters.ReadOnlyProperties, ".TotalAmount") = 0 Then
+		Property = New Structure("DataPath", "ItemList.<tax_rate>");
+		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	EndIf;
+EndProcedure
+
 Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	Result = New Structure();
 	Result.Insert("MetadataName", Object.Ref.Metadata().Name);

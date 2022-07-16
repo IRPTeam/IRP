@@ -659,7 +659,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	If Not (IsPriceCheked Or IsTaxRateCheked) Then
 		DataPaths = "ItemList.NetAmount, ItemList.TaxAmount, ItemList.TotalAmount";
 		ArrayOfDataPaths.Add(DataPaths);
-		RemoveFromCache(DataPaths, Parameters);
+		RemoveFromCache(DataPaths, Parameters, False);
 	EndIf;
 	
 	If ArrayOfDataPaths.Count() Then
@@ -694,7 +694,7 @@ Function IsChangedProperty(Parameters, DataPath)
 	Return	ControllerClientServer_V2.IsChangedProperty(Parameters, DataPath);
 EndFunction
 
-Procedure RemoveFromCache(DataPaths, Parameters)
+Procedure RemoveFromCache(DataPaths, Parameters, RaiseException = True)
 	For Each DataPath In StrSplit(DataPaths, ",") Do
 		Segments = StrSplit(DataPath, ".");
 		If Segments.Count() = 1 Then
@@ -705,6 +705,9 @@ Procedure RemoveFromCache(DataPaths, Parameters)
 			TableName  = TrimAll(Segments[0]);
 			ColumnName = TrimAll(Segments[1]);
 			If Not Parameters.Cache.Property(TableName) Then
+				If Not RaiseException Then
+					Return;
+				EndIf;
 				Raise StrTemplate("Not found property in cache for delete [%1]", DataPath);
 			EndIf;
 			For Each Row In Parameters.Cache[TableName] Do

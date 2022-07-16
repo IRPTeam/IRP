@@ -42,8 +42,17 @@ Procedure API_CallbackAtServer(Object, Form, TableName, ArrayOfDataPaths) Export
 			Continue;
 		EndIf;
 		If StrStartsWith(TrimAll(PropertyName), TableName) Then
-			Property = New Structure("DataPath", TrimAll(PropertyName));
-			ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+			PropertyIsPresent = False;
+			If Object[TableName].Count() Then
+				Segments = StrSplit(PropertyName, ".");
+				If Segments.Count() = 2 And CommonFunctionsClientServer.ObjectHasProperty(Object[TableName][0], TrimAll(Segments[1])) Then
+					PropertyIsPresent = True;
+				EndIf;
+			EndIf;
+			If PropertyIsPresent Then
+				Property = New Structure("DataPath", TrimAll(PropertyName));
+				ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+			EndIf;
 		EndIf;
 	EndDo;
 	If StrFind(Parameters.ReadOnlyProperties, ".TotalAmount") = 0 Then

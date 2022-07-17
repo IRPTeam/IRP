@@ -1,6 +1,5 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-
 	Items.Stores.Enabled = False;
 	Items.PriceTypes.Enabled = False;
 	Items.Prices.Enabled = False;
@@ -12,13 +11,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items[Question.Action].Enabled = True;
 		Items[Question.Action].Title = Question.QuestionText;
 	EndDo;
-
-	If PriceTypes Then
-		Items.Prices.Enabled = True;
-		Prices = True;
-		Items.Prices.Title = R().QuestionToUser_013;
-	EndIf;
-
 EndProcedure
 
 &AtClient

@@ -31,6 +31,37 @@ EndProcedure
 
 #EndRegion
 
+Procedure API_CallbackAtServer(Object, Form, TableName, ArrayOfDataPaths) Export
+	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = TableName;
+	ServerParameters.ReadOnlyProperties = StrConcat(ArrayOfDataPaths, ",");
+	ServerParameters.StepEnableFlags.PriceChanged_AfterQuestionToUser = True;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
+	For Each PropertyName In StrSplit(ServerParameters.ReadOnlyProperties, ",") Do
+		If StrStartsWith(TrimAll(PropertyName), TableName + "._") Then
+			Continue;
+		EndIf;
+		If StrStartsWith(TrimAll(PropertyName), TableName) Then
+			PropertyIsPresent = False;
+			If Object[TableName].Count() Then
+				Segments = StrSplit(PropertyName, ".");
+				If Segments.Count() = 2 And CommonFunctionsClientServer.ObjectHasProperty(Object[TableName][0], TrimAll(Segments[1])) Then
+					PropertyIsPresent = True;
+				EndIf;
+			EndIf;
+			If PropertyIsPresent Then
+				Property = New Structure("DataPath", TrimAll(PropertyName));
+				ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+			EndIf;
+		EndIf;
+	EndDo;
+	If StrFind(Parameters.ReadOnlyProperties, ".TotalAmount") = 0 Then
+		Property = New Structure("DataPath", "ItemList.<tax_rate>");
+		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	EndIf;
+EndProcedure
+
 Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	Result = New Structure();
 	Result.Insert("MetadataName", Object.Ref.Metadata().Name);

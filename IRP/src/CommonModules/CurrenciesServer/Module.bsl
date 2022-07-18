@@ -193,6 +193,7 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	AddAmountsColumns(RecordSet, "NetOfferAmount");
 	AddAmountsColumns(RecordSet, "AmountWithTaxes");
 	AddAmountsColumns(RecordSet, "Commission");
+	AddAmountsColumns(RecordSet, "AmountTax");
 
 	If RecordSet.Columns.Find("SalesAmount") = Undefined Then
 		RecordSet.Columns.Add("SalesAmount", New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
@@ -263,6 +264,12 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|			THEN 0
 	|		ELSE (RecordSet.Commission * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
 	|	END AS Commission,
+	|	CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.AmountTax * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END AS AmountTax,
 	|	CurrencyTable.MovementType.DeferredCalculation AS DeferredCalculation,
 	|	CurrencyTable.MovementType.Currency AS Currency
 	|FROM
@@ -296,6 +303,7 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|	RecordSet.OffersAmount,
 	|	RecordSet.AmountWithTaxes,
 	|	RecordSet.Commission,
+	|	RecordSet.AmountTax,
 	|	FALSE,
 	|	RecordSet.Currency
 	|FROM

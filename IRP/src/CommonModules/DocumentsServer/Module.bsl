@@ -25,9 +25,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Procedure OnWriteAtServer(Object, Form, Cancel, CurrentObject, WriteParameters) Export
-	If Not Object.Ref.Metadata().TabularSections.Find("ItemList") = Undefined Then
-		WriteSavedItems(Object, CurrentObject);
-	EndIf;
+	Return;
 EndProcedure
 
 #EndRegion
@@ -48,77 +46,6 @@ Procedure SetNewTableUUID(Table, LinkedTables) Export
 		EndDo;
 
 	EndDo;
-EndProcedure
-
-Procedure FillItemList(Object, Form = Undefined) Export
-	
-	TableName = "ItemList";
-	If TypeOf(Object.Ref) = Type("DocumentRef.OpeningEntry") Then
-		TableName = "Inventory";
-	EndIf;
-	
-	RowMap = New Map();
-
-	For Each Row In Object[TableName] Do
-		RowMap.Insert(Row.Key, Row);
-		Row.Item = Row.ItemKey.Item;
-		If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Then
-			Row.ItemType = Row.Item.ItemType.Type;
-		EndIf;
-	EndDo;
-
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	SavedItems.Key,
-	|	SavedItems.Item
-	|FROM
-	|	InformationRegister.SavedItems AS SavedItems
-	|WHERE
-	|	SavedItems.ObjectRef = &ObjectRef";
-
-	Query.SetParameter("ObjectRef", Object.Ref);
-
-	QueryResult = Query.Execute();
-
-	SelectionDetailRecords = QueryResult.Select();
-
-	While SelectionDetailRecords.Next() Do
-		RowMap[SelectionDetailRecords.Key].Item = SelectionDetailRecords.Item;
-		If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Then
-			RowMap[SelectionDetailRecords.Key].ItemType = RowMap[SelectionDetailRecords.Key].Item.ItemType.Type;
-		EndIf;
-	EndDo;
-
-EndProcedure
-
-Procedure WriteSavedItems(Object, CurrentObject)
-
-	ObjectRef = CurrentObject.Ref;
-	
-	TableName = "ItemList";
-	If TypeOf(ObjectRef) = Type("DocumentRef.OpeningEntry") Then
-		TableName = "Inventory";
-	EndIf;
-	
-	ItemList = Object[TableName].Unload().Copy(New Structure("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef")));
-
-	If ItemList.Count() = 0 Then
-		RecordSet = InformationRegisters.SavedItems.CreateRecordSet();
-		RecordSet.Filter.ObjectRef.Set(ObjectRef);
-		RecordSet.Write(True);
-		Return;
-	EndIf;
-
-	ItemList.Columns.Add("ObjectRef");
-	ItemList.FillValues(ObjectRef, "ObjectRef");
-
-	RecordSet = InformationRegisters.SavedItems.CreateRecordSet();
-	RecordSet.Filter.ObjectRef.Set(ObjectRef);
-
-	RecordSet.Load(ItemList);
-	RecordSet.Write(True);
-
 EndProcedure
 
 Function CheckItemListStores(Object) Export

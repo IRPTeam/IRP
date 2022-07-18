@@ -2,7 +2,6 @@
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Not Form.GroupItems.Count() Then
-		DocumentsServer.FillItemList(Object, Form);
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
@@ -10,12 +9,10 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
-	DocumentsServer.FillItemList(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-	DocumentsServer.FillItemList(Object, Form);
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;

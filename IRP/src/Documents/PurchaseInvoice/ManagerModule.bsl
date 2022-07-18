@@ -87,6 +87,67 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		BatchesInfo.Clear();
 	EndIf;
 	
+	// AmountTax to T6020S_BatchKeysInfo
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	TaxList.Key,
+	|	TaxList.Ref.Company,
+	|	TaxList.Tax,
+	|	TaxList.ManualAmount AS AmountTax
+	|INTO TaxList
+	|FROM
+	|	Document.PurchaseInvoice.TaxList AS TaxList
+	|WHERE
+	|	TaxList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TaxList.Key,
+	|	SUM(TaxList.AmountTax) AS AmountTax
+	|INTO TaxListAmounts
+	|FROM
+	|	TaxList AS TaxList
+	|		INNER JOIN InformationRegister.Taxes.SliceLast(&Period, (Company, Tax) IN
+	|			(SELECT
+	|				TaxList.Company,
+	|				TaxList.Tax
+	|			FROM
+	|				TaxList AS TaxList)) AS TaxesSliceLast
+	|		ON TaxesSliceLast.Company = TaxList.Company
+	|		AND TaxesSliceLast.Tax = TaxList.Tax
+	|WHERE
+	|	TaxesSliceLast.Use
+	|	AND TaxesSliceLast.IncludeToLandedCost
+	|GROUP BY
+	|	TaxList.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	BatchKeysInfo.Key,
+	|	*
+	|INTO BatchKeysInfo
+	|FROM
+	|	&BatchKeysInfo AS BatchKeysInfo
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	BatchKeysInfo.Key,
+	|	ISNULL(TaxListAmounts.AmountTax, 0) AS AmountTax,
+	|	BatchKeysInfo.*
+	|FROM
+	|	BatchKeysInfo AS BatchKeysInfo
+	|		LEFT JOIN TaxListAmounts AS TaxListAmounts
+	|		ON BatchKeysInfo.Key = TaxListAmounts.Key";
+	Query.SetParameter("Ref", Ref);
+	Query.SetParameter("Period", Ref.Date);
+	Query.SetParameter("BatchKeysInfo", BatchKeysInfo);
+	QueryResult = Query.Execute();
+	BatchKeysInfo = QueryResult.Unload();
+	
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
 	For Each Row In BatchKeysInfo Do
@@ -114,7 +175,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	If BatchKeysInfo_DataTable.Count() Then
 		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
 		BatchKeysInfo_DataTableGrouped.GroupBy("Period, RowID, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType", 
-		"Quantity, Amount");	
+		"Quantity, Amount, AmountTax");	
 	EndIf;
 	
 	Query = New Query();

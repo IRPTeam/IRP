@@ -165,13 +165,6 @@ Scenario: Open information register form "RemainingItemsInfo"
 
 
 	
-Scenario: Open information register form "SavedItems" 
-
-	Given I open "SavedItems" information register default form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form  SavedItems" exception
-	And I close current window
-
 
 	
 Scenario: Open information register form "Taxes" 

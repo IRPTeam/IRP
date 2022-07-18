@@ -62,6 +62,16 @@ Procedure AfterWrite(WriteParameters)
 	DocRetailSalesReceiptClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
+&AtClient
+Procedure API_Callback(TableName, ArrayOfDataPaths) Export
+	API_CallbackAtServer(TableName, ArrayOfDataPaths);
+EndProcedure
+
+&AtServer
+Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
+	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
+EndProcedure
+
 &AtServer
 Function Taxes_CreateFormControls() Export
 	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject);

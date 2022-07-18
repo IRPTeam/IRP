@@ -6,7 +6,14 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	PutSettingsToTempStorage();
 	SetVisible();
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
 
 &AtClient
 Procedure CopyFromProd(Command)
@@ -25,7 +32,9 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	Return;
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControl();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -192,6 +201,20 @@ Procedure OpenFormProcSettingsEndServer(Result)
 	Obj.Write();
 	PutToTempStorage(Result, ThisObject.AddressResult);
 	ValueToFormAttribute(Obj, "Object");
+EndProcedure
+
+#EndRegion
+
+#Region AddAttributes
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
 
 #EndRegion

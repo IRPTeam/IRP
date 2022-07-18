@@ -349,6 +349,21 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
+    <attributes uuid="25a0eb24-f4dd-4640-a935-38d6ab194f63">
+      <name>Item</name>
+      <synonym>
+        <key>en</key>
+        <value>Item</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Items</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="d4846f6d-3a34-4244-ab7b-6c4b6268cd77">
       <name>ItemKey</name>
       <synonym>
@@ -361,6 +376,11 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="58ae414b-6577-4d5d-99da-4511ff21dbad">
@@ -479,6 +499,11 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
       <createOnInput>DontUse</createOnInput>
     </attributes>
     <attributes uuid="d47d3733-7105-46fb-8f22-43a82c9d12c9">

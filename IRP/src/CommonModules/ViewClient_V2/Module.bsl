@@ -601,40 +601,82 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	Parameters    = NotifyParameters.Parameters;
 	ChangedPoints = NotifyParameters.ChangedPoints;
 	
-	NeedRecalculate = False;
-	If Not Answer.Property("UpdateStores") And ChangedPoints.Property("IsChangedItemListStore") Then
-		RemoveFromCache("Store, ItemList.Store, ItemList.UseShipmentConfirmation, ItemList.UseGoodsReceipt", Parameters);
+	// affect to amounts
+	IsPriceChecked = False;
+	IsTaxRateChecked = False;
+	
+	ArrayOfDataPaths = New Array();
+	
+	If ChangedPoints.Property("IsChangedItemListStore") Then
+		DataPaths = "Store, ItemList.Store, ItemList.UseShipmentConfirmation, ItemList.UseGoodsReceipt";
+		ArrayOfDataPaths.Add(DataPaths);
+		If Not Answer.Property("UpdateStores") Then
+			RemoveFromCache(DataPaths, Parameters);
+		EndIf;
 	EndIf;
 	
-	If Not Answer.Property("UpdatePriceTypes") And ChangedPoints.Property("IsChangedItemListPriceType") Then
-		RemoveFromCache("ItemList.PriceType", Parameters);
-		NeedRecalculate = True;
+	If ChangedPoints.Property("IsChangedItemListPriceType") Then
+		DataPaths = "ItemList.PriceType";
+		ArrayOfDataPaths.Add(DataPaths);	
+		If Not Answer.Property("UpdatePriceTypes") Then
+			RemoveFromCache(DataPaths, Parameters);
+		EndIf;
 	EndIf;
 	
-	If Not Answer.Property("UpdatePrices") And ChangedPoints.Property("IsChangedItemListPrice") Then
-		RemoveFromCache("ItemList.Price", Parameters);
-		NeedRecalculate = True;
+	If ChangedPoints.Property("IsChangedItemListPrice") Then
+		DataPaths = "ItemList.Price";
+		ArrayOfDataPaths.Add(DataPaths);
+		If Not Answer.Property("UpdatePrices") Then
+			RemoveFromCache(DataPaths, Parameters);
+		Else
+			IsPriceChecked = True;
+		EndIf;
+	EndIf;
+
+	If ChangedPoints.Property("IsChangedPaymentTerms") Then
+		DataPaths = "PaymentTerms";
+		ArrayOfDataPaths.Add(DataPaths);
+		If Not Answer.Property("UpdatePaymentTerm") Then
+			RemoveFromCache(DataPaths, Parameters);
+		EndIf;
 	EndIf;
 	
-	If Not Answer.Property("UpdatePaymentTerm") And ChangedPoints.Property("IsChangedPaymentTerms") Then
-		RemoveFromCache("PaymentTerms", Parameters);
-		NeedRecalculate = True;
+	If ChangedPoints.Property("IsChangedTaxRates") Then
+		DynamicDataPaths = New Array();
+		For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
+			DynamicDataPaths.Add("ItemList." + TaxInfo.Name);
+		EndDo;
+		DataPaths = StrConcat(DynamicDataPaths, ",");
+		ArrayOfDataPaths.Add(DataPaths);
+		If Not Answer.Property("UpdateTaxRates") Then
+			RemoveFromCache(DataPaths, Parameters);
+		Else
+			IsTaxRateChecked = True;
+		EndIf;
 	EndIf;
 	
-	If Not Answer.Property("UpdateTaxRates") And ChangedPoints.Property("IsChangedTaxRates") Then
-		RemoveFromCacheTaxRates(Parameters);
-		NeedRecalculate = True;
+	// not affect amounts
+	If Not (IsPriceChecked Or IsTaxRateChecked) Then
+		DataPaths = "ItemList.NetAmount, ItemList.TaxAmount, ItemList.TotalAmount";
+		ArrayOfDataPaths.Add(DataPaths);
+		RemoveFromCache(DataPaths, Parameters, False);
+	EndIf;
+	
+	If ArrayOfDataPaths.Count() Then
+		RemoveFromCache("TaxList", Parameters);
 	EndIf;
 	
 	CommitChanges(Parameters);
 	
-	If NeedRecalculate Then
-		FormParameters = GetFormParameters(Parameters.Form);
-		FormParameters.EventCaller = "RecalculationsAfterQuestionToUser";
-		ServerParameters = GetServerParameters(Parameters.Object);
-		ServerParameters.TableName = "ItemList";
-		Parameters = GetParameters(ServerParameters, FormParameters);
-		ControllerClientServer_V2.RecalculationsAfterQuestionToUser(Parameters);
+	If ArrayOfDataPaths.Count() Then
+		Parameters.Form.API_Callback(Parameters.TableName, ArrayOfDataPaths);
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
+		Parameters.Form.UpdateTotalAmounts();
 	EndIf;
 EndProcedure
 
@@ -648,19 +690,11 @@ Function IsChangedTaxRates(Parameters)
 	Return New Structure("IsChanged", False);
 EndFunction
 
-Procedure RemoveFromCacheTaxRates(Parameters)
-	ArrayOfDataPaths = New Array();
-	For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
-		ArrayOfDataPaths.Add("ItemList." + TaxInfo.Name);
-	EndDo;
-	RemoveFromCache(StrConcat(ArrayOfDataPaths, ","), Parameters);
-EndProcedure
-
 Function IsChangedProperty(Parameters, DataPath)
 	Return	ControllerClientServer_V2.IsChangedProperty(Parameters, DataPath);
 EndFunction
 
-Procedure RemoveFromCache(DataPaths, Parameters)
+Procedure RemoveFromCache(DataPaths, Parameters, RaiseException = True)
 	For Each DataPath In StrSplit(DataPaths, ",") Do
 		Segments = StrSplit(DataPath, ".");
 		If Segments.Count() = 1 Then
@@ -671,6 +705,9 @@ Procedure RemoveFromCache(DataPaths, Parameters)
 			TableName  = TrimAll(Segments[0]);
 			ColumnName = TrimAll(Segments[1]);
 			If Not Parameters.Cache.Property(TableName) Then
+				If Not RaiseException Then
+					Return;
+				EndIf;
 				Raise StrTemplate("Not found property in cache for delete [%1]", DataPath);
 			EndIf;
 			For Each Row In Parameters.Cache[TableName] Do

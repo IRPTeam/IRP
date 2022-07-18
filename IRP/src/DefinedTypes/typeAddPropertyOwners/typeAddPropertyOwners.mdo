@@ -89,5 +89,25 @@
     <types>DocumentRef.CashExpense</types>
     <types>DocumentRef.JournalEntry</types>
     <types>CatalogRef.LedgerTypes</types>
+    <types>CatalogRef.AccessGroups</types>
+    <types>CatalogRef.AccessProfiles</types>
+    <types>CatalogRef.AccountingOperations</types>
+    <types>CatalogRef.CancelReturnReasons</types>
+    <types>CatalogRef.EquipmentDrivers</types>
+    <types>CatalogRef.ExternalDataProc</types>
+    <types>CatalogRef.FileStorageVolumes</types>
+    <types>CatalogRef.FileStoragesInfo</types>
+    <types>CatalogRef.IntegrationSettings</types>
+    <types>CatalogRef.InterfaceGroups</types>
+    <types>CatalogRef.LegalNameContracts</types>
+    <types>CatalogRef.ObjectStatuses</types>
+    <types>CatalogRef.PaymentSchedules</types>
+    <types>CatalogRef.PlanningPeriods</types>
+    <types>CatalogRef.TaxAnalytics</types>
+    <types>CatalogRef.UnitsOfMeasurement</types>
+    <types>CatalogRef.LedgerTypeVariants</types>
+    <types>DocumentRef.MoneyTransfer</types>
+    <types>CatalogRef.LockDataModificationReasons</types>
+    <types>CatalogRef.PartnersBankAccounts</types>
   </type>
 </mdclass:DefinedType>

@@ -116,10 +116,6 @@ Scenario: _155001 saving information about an Item without a completed item key 
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'    | 'Item'  |
-			| 'Sales order*'  | 'Dress' |
 		And I close all client application windows
 
 Scenario: _155002 saving information about an Item without a completed item key in a document Sales invoice
@@ -174,10 +170,6 @@ Scenario: _155002 saving information about an Item without a completed item key 
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'      | 'Item'  |
-			| 'Sales invoice*'  | 'Dress' |
 		And I close all client application windows
 
 Scenario: _155003 saving information about an Item without a completed item key in a document SalesReturn
@@ -231,10 +223,6 @@ Scenario: _155003 saving information about an Item without a completed item key 
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'     | 'Item'  |
-			| 'Sales return*'  | 'Dress' |
 		And I close all client application windows
 
 Scenario: _155004 saving information about an Item without a completed item key in a document SalesReturnOrder
@@ -288,10 +276,6 @@ Scenario: _155004 saving information about an Item without a completed item key 
 		And I select current line in "List" table
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'           | 'Item'  |
-			| 'Sales return order*'  | 'Dress' |
 		And I close all client application windows
 	
 Scenario: _155005 saving information about an Item without a completed item key in a document PurchaseOrder
@@ -357,10 +341,6 @@ Scenario: _155005 saving information about an Item without a completed item key 
 		And I select current line in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'       | 'Item'  |
-			| 'Purchase order*'  | 'Dress' |
 		And I close all client application windows
 
 Scenario: _155006 saving information about an Item without a completed item key in a document PurchaseInvoice
@@ -425,10 +405,6 @@ Scenario: _155006 saving information about an Item without a completed item key 
 		And I select current line in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'         | 'Item'  |
-			| 'Purchase invoice*'  | 'Dress' |
 		And I close all client application windows
 
 Scenario: _155007 saving information about an Item without a completed item key in a document PurchaseReturn
@@ -493,10 +469,6 @@ Scenario: _155007 saving information about an Item without a completed item key 
 		And I select current line in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'        | 'Item'  |
-			| 'Purchase return*'  | 'Dress' |
 		And I close all client application windows
 
 Scenario: _155008 saving information about an Item without a completed item key in a document PurchaseReturnOrder
@@ -561,10 +533,6 @@ Scenario: _155008 saving information about an Item without a completed item key 
 		And I select current line in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'              | 'Item'  |
-			| 'Purchase return order*'  | 'Dress' |
 		And I close all client application windows
 
 
@@ -626,10 +594,6 @@ Scenario: _155009 saving information about an Item without a completed item key 
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'   | 'Item'  |
-			| 'Bundling*'    | 'Dress' |
 		And I close all client application windows
 
 Scenario: _155010 saving information about an Item without a completed item key in a document Unbundling
@@ -702,10 +666,6 @@ Scenario: _155010 saving information about an Item without a completed item key 
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'     | 'Item'  |
-			| 'Unbundling*'    | 'Dress' |
 		And I close all client application windows
 
 
@@ -758,10 +718,6 @@ Scenario: _155011 saving information about an Item without a completed item key 
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'     | 'Item'  |
-			| 'GoodsReceipt*'  | 'Dress' |
 		And I close all client application windows
 
 Scenario: _155012 saving information about an Item without a completed item key in a document ShipmentConfirmation
@@ -813,10 +769,6 @@ Scenario: _155012 saving information about an Item without a completed item key 
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'             | 'Item'  |
-			| 'ShipmentConfirmation*'  | 'Dress' |
 		And I close all client application windows
 
 Scenario: _155013 saving information about an Item without a completed item key in a document InternalSupplyRequest
@@ -868,10 +820,6 @@ Scenario: _155013 saving information about an Item without a completed item key 
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'              | 'Item'  |
-			| 'InternalSupplyRequest*'  | 'Dress' |
 		And I close all client application windows
 
 Scenario: _155014 saving information about an Item without a completed item key in a document InventoryTransfer
@@ -928,10 +876,6 @@ Scenario: _155014 saving information about an Item without a completed item key 
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'          | 'Item'  |
-			| 'InventoryTransfer*'  | 'Dress' |
 		And I close all client application windows
 
 
@@ -989,10 +933,6 @@ Scenario: _155015 saving information about an Item without a completed item key 
 		And I input "2,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
-		Given I open hyperlink "e1cib/list/InformationRegister.SavedItems"
-		And "List" table does not contain lines
-			| 'Object ref'               | 'Item'  |
-			| 'InventoryTransferOrder*'  | 'Dress' |
 		And I close all client application windows
 
 Scenario: _999999 close TestClient session

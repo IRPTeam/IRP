@@ -162,8 +162,8 @@ Function ItemList()
 	|	ItemList.PhysicalInventory AS PhysicalInventory,
 	|	ItemList.Ref AS Basis,
 	|	ItemList.QuantityInBaseUnit AS Quantity,
-	|	ItemList.Amount AS LandedCost,
 	|	ItemList.Amount AS Amount,
+	|	ItemList.AmountTax AS AmountTax,
 	|	ItemList.Key
 	|INTO ItemList
 	|FROM
@@ -330,7 +330,8 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
 	|	ItemList.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 	|	SUM(ItemList.Quantity) AS Quantity,
-	|	SUM(ItemList.LandedCost) AS Amount,
+	|	SUM(ItemList.Amount) AS Amount,
+	|	SUM(ItemList.AmountTax) AS AmountTax,
 	|	ItemList.Period,
 	|	VALUE(Enum.BatchDirection.Receipt) AS Direction
 	|INTO T6020S_BatchKeysInfo

@@ -341,6 +341,7 @@ Function GetTableByBundleContent(ItemKeyBundle, AddInfo = Undefined) Export
 	Query.Text =
 	"SELECT
 	|	BundleContentsSliceLast.ItemKeyBundle,
+	|	BundleContentsSliceLast.ItemKey.Item AS Item,
 	|	BundleContentsSliceLast.ItemKey,
 	|	BundleContentsSliceLast.Quantity,
 	|	BundleContentsSliceLast.Quantity AS QuantityInBaseUnit,
@@ -359,11 +360,12 @@ EndFunction
 
 Function GetTableBySpecification(ItemKeyBundle, AddInfo = Undefined) Export
 	ResultTable = New ValueTable();
-	ResultTable.Columns.Add("ItemKeyBundle", New TypeDescription("CatalogRef.ItemKeys"));
-	ResultTable.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
-	ResultTable.Columns.Add("Quantity", New TypeDescription("Number"));
-	ResultTable.Columns.Add("QuantityInBaseUnit", New TypeDescription("Number"));
-	ResultTable.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
+	ResultTable.Columns.Add("ItemKeyBundle"      , New TypeDescription("CatalogRef.ItemKeys"));
+	ResultTable.Columns.Add("Item"               , New TypeDescription("CatalogRef.Items"));
+	ResultTable.Columns.Add("ItemKey"            , New TypeDescription("CatalogRef.ItemKeys"));
+	ResultTable.Columns.Add("Quantity"           , New TypeDescription("Number"));
+	ResultTable.Columns.Add("QuantityInBaseUnit" , New TypeDescription("Number"));
+	ResultTable.Columns.Add("Unit"               , New TypeDescription("CatalogRef.Units"));
 
 	Query = New Query();
 	Query.Text =
@@ -412,6 +414,7 @@ Function GetTableBySpecification(ItemKeyBundle, AddInfo = Undefined) Export
 
 		NewRowResultTable = ResultTable.Add();
 		NewRowResultTable.ItemKeyBundle      = ItemKeyBundle;
+		NewRowResultTable.Item               = ItemKey.Item;
 		NewRowResultTable.ItemKey            = ItemKey;
 		NewRowResultTable.Quantity           = Quantity;
 		NewRowResultTable.QuantityInBaseUnit = Quantity;

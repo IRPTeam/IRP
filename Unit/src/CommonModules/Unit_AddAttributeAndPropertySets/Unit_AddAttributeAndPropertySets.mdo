@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b844be1c-ff7a-4bb3-8f48-57fa145f2857">
+  <name>Unit_AddAttributeAndPropertySets</name>
+  <synonym>
+    <key>en</key>
+    <value>Add attribute and property sets</value>
+  </synonym>
+  <server>true</server>
+  <externalConnection>true</externalConnection>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

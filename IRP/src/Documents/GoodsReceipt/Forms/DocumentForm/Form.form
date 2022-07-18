@@ -1251,12 +1251,6 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
-            <choiceParameterLinks>
-              <name>Filter.Item</name>
-              <datapath xsi:type="form:DataPath">
-                <segments>Items.ItemList.CurrentData.Item</segments>
-              </datapath>
-            </choiceParameterLinks>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
@@ -1583,12 +1577,6 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
-            <choiceParameterLinks>
-              <name>Filter.Item</name>
-              <datapath xsi:type="form:DataPath">
-                <segments>Items.ItemList.CurrentData.Item</segments>
-              </datapath>
-            </choiceParameterLinks>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
@@ -4148,23 +4136,6 @@
       <tablePath xsi:type="form:DataPath">
         <segments>Object.ItemList</segments>
       </tablePath>
-      <columns>
-        <name>Item</name>
-        <title>
-          <key>en</key>
-          <value>Item</value>
-        </title>
-        <id>2</id>
-        <valueType>
-          <types>CatalogRef.Items</types>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
-      </columns>
       <columns>
         <name>Barcode</name>
         <title>

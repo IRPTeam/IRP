@@ -103,6 +103,10 @@
             <segments>Object.Customer</segments>
           </dataPath>
           <titleLocation>Right</titleLocation>
+          <handlers>
+            <event>OnChange</event>
+            <name>CustomerOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>CustomerExtendedTooltip</name>
             <id>3</id>
@@ -147,6 +151,10 @@
             <segments>Object.Vendor</segments>
           </dataPath>
           <titleLocation>Right</titleLocation>
+          <handlers>
+            <event>OnChange</event>
+            <name>VendorOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>VendorExtendedTooltip</name>
             <id>6</id>
@@ -191,6 +199,10 @@
             <segments>Object.Employee</segments>
           </dataPath>
           <titleLocation>Right</titleLocation>
+          <handlers>
+            <event>OnChange</event>
+            <name>EmployeeOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>EmployeeExtendedTooltip</name>
             <id>9</id>
@@ -679,6 +691,10 @@ WHERE
     <handlers>
       <event>AfterWrite</event>
       <name>AfterWrite</name>
+    </handlers>
+    <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

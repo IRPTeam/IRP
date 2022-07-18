@@ -59,7 +59,18 @@
     <dataHistory>Use</dataHistory>
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <commands uuid="c85eeec0-da25-4dbb-92bf-d8d9a496df82">
+    <name>RetailWorkers</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail workers</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>CatalogRef.Partners</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:InformationRegister>

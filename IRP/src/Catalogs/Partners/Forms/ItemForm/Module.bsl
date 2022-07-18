@@ -11,6 +11,7 @@ EndProcedure
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	IDInfoServer.AfterWriteAtServer(ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
@@ -31,6 +32,10 @@ EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+	
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
@@ -41,9 +46,40 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 EndProcedure
 
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+
 &AtClient
 Procedure OnOpen(Cancel)
 	ThisIsNew = Parameters.Key.IsEmpty();
+EndProcedure
+
+&AtClient
+Procedure CustomerOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure VendorOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EmployeeOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	Form.CommandBar.ChildItems.FormInformationRegisterRetailWorkersRetailWorkers.Visible = Object.Employee;
 EndProcedure
 
 #EndRegion

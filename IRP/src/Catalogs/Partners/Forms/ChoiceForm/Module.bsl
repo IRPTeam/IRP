@@ -25,6 +25,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.FilterCustomer.TitleTextColor = ?(FilterCustomer, New Color(), WebColors.LightGray);
 	Items.FilterVendor.TitleTextColor = ?(FilterVendor, New Color(), WebColors.LightGray);
 	Items.FilterEmployee.TitleTextColor = ?(FilterEmployee, New Color(), WebColors.LightGray);
+	ThisObject.CommandBar.ChildItems.FormInformationRegisterRetailWorkersRetailWorkers.Visible = False;
 EndProcedure
 
 &AtClient

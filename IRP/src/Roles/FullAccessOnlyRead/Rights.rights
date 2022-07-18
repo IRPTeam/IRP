@@ -6227,4 +6227,11 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>InformationRegister.RetailWorkers.Command.RetailWorkers</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

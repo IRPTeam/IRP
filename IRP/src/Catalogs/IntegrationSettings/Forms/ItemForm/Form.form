@@ -848,7 +848,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Production</value>
+        <value>Main settings</value>
       </title>
       <extendedTooltip>
         <name>GroupProductionExtendedTooltip</name>
@@ -1242,7 +1242,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Test</value>
+        <value>Test settings</value>
       </title>
       <extendedTooltip>
         <name>GroupTestExtendedTooltip</name>

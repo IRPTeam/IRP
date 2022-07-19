@@ -17,6 +17,7 @@ Background:
 
 Scenario: _0153500 preparation
 	When set True value to the constant
+	And I set "True" value to the constant "UseAccounting"
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -3978,4 +3979,888 @@ Scenario: _015400703 check that additional attributes and properties are display
 		And I select current line in "List" table
 		Then "Test" form attribute became equal to "Test 1"
 		And I click "Save" button
+	And I close all client application windows
+
+Scenario: _015400704 check that additional attributes and properties are displayed on the form without reopening (catalog LegalNameContracts)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create LegalNameContracts
+		Given I open hyperlink "e1cib/list/Catalog.LegalNameContracts"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description"
+		And I click "Save and close" button
+	* Open LegalNameContracts form
+		Given I open hyperlink "e1cib/list/Catalog.LegalNameContracts"
+		And I go to line in "List" table
+			| Contract number |
+			| Test            |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected LegalNameContracts additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_LegalNameContracts              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Legal name contracts"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400705 check that additional attributes and properties are displayed on the form without reopening (catalog CancelReturnReasons)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create CancelReturnReasons
+		Given I open hyperlink "e1cib/list/Catalog.CancelReturnReasons"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Open CancelReturnReasons form
+		Given I open hyperlink "e1cib/list/Catalog.CancelReturnReasons"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected CancelReturnReasons additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_CancelReturnReasons              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Cancel/Return reasons"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400706 check that additional attributes and properties are displayed on the form without reopening (catalog ExternalDataProc)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create ExternalDataProc
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I input "Test" text in the field named "Name"
+		And I click "Save and close" button
+	* Open ExternalDataProc form
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected ExternalDataProc additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_ExternalDataProc              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Plugins"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400707 check that additional attributes and properties are displayed on the form without reopening (catalog AccessProfiles)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create AccessProfiles
+		Given I open hyperlink "e1cib/list/Catalog.AccessProfiles"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Open AccessProfiles form
+		Given I open hyperlink "e1cib/list/Catalog.AccessProfiles"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected AccessProfiles additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_AccessProfiles              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "User access profiles"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400708 check that additional attributes and properties are displayed on the form without reopening (catalog FileStorageVolumes)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create FileStorageVolumes
+		Given I open hyperlink "e1cib/list/Catalog.FileStorageVolumes"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description"
+		And I click "Save and close" button
+	* Open FileStorageVolumes form
+		Given I open hyperlink "e1cib/list/Catalog.FileStorageVolumes"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected FileStorageVolumes additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_FileStorageVolumes              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "File storage volumes"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400709 check that additional attributes and properties are displayed on the form without reopening (catalog FileStoragesInfo)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create FileStoragesInfo
+		Given I open hyperlink "e1cib/list/Catalog.FileStoragesInfo"
+		And I click the button named "FormCreate"
+		And I input "Test" text in "Path to catalog at server" field
+		And I click "Save and close" button
+	* Open FileStoragesInfo form
+		Given I open hyperlink "e1cib/list/Catalog.FileStoragesInfo"
+		And I go to line in "List" table
+			| Path to catalog at server |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected FileStoragesInfo additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_FileStoragesInfo              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "File storages info"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400710 check that additional attributes and properties are displayed on the form without reopening (catalog LedgerTypeVariants)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create LedgerTypeVariants
+		Given I open hyperlink "e1cib/list/Catalog.LedgerTypeVariants"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Open LedgerTypeVariants form
+		Given I open hyperlink "e1cib/list/Catalog.LedgerTypeVariants"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected LedgerTypeVariants additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_LedgerTypeVariants              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Ledger type variants"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400711 check that additional attributes and properties are displayed on the form without reopening (catalog IntegrationSettings)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create IntegrationSettings
+		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description"
+		And I click "Save and close" button
+	* Open IntegrationSettings form
+		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+	* Adding by selected IntegrationSettings additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name        |
+			| Catalog_IntegrationSettings |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Integration settings"
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400712 check that additional attributes and properties are displayed on the form without reopening (catalog EquipmentDrivers)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create EquipmentDrivers
+		Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description"
+		And I input "11.2" text in "AddIn ID" field	
+		And I click "Save and close" button
+	* Open EquipmentDrivers form
+		Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected EquipmentDrivers additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_EquipmentDrivers              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Equipment drivers"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400713 check that additional attributes and properties are displayed on the form without reopening (catalog PlanningPeriods)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create PlanningPeriods
+		Given I open hyperlink "e1cib/list/Catalog.PlanningPeriods"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description"
+		And I click "Save and close" button
+	* Open PlanningPeriods form
+		Given I open hyperlink "e1cib/list/Catalog.PlanningPeriods"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected PlanningPeriods additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_PlanningPeriods              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Planning periods"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400714 check that additional attributes and properties are displayed on the form without reopening (catalog PaymentSchedules)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create PaymentSchedules
+		Given I open hyperlink "e1cib/list/Catalog.PaymentSchedules"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Open PaymentSchedules form
+		Given I open hyperlink "e1cib/list/Catalog.PaymentSchedules"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected PaymentSchedules additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_PaymentSchedules              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Payment terms"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400715 check that additional attributes and properties are displayed on the form without reopening (catalog ObjectStatuses)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create ObjectStatuses
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
+		And I expand current line in "List" table
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'IncomingPaymentOrder' |
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Open ObjectStatuses form
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected ObjectStatuses additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_ObjectStatuses              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Objects statuses"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400717 check that additional attributes and properties are displayed on the form without reopening (catalog AccessGroups)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create AccessGroups
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Open AccessGroups form
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected AccessGroups additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_AccessGroups              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "User access groups"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+Scenario: _015400718 check that additional attributes and properties are displayed on the form without reopening (catalog TaxAnalytics)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create TaxAnalytics
+		Given I open hyperlink "e1cib/list/Catalog.TaxAnalytics"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Open TaxAnalytics form
+		Given I open hyperlink "e1cib/list/Catalog.TaxAnalytics"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected TaxAnalytics additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_TaxAnalytics              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Tax additional analytics"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+Scenario: _015400719 check that additional attributes and properties are displayed on the form without reopening (catalog UnitsOfMeasurement)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create UnitsOfMeasurement
+		Given I open hyperlink "e1cib/list/Catalog.UnitsOfMeasurement"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Open UnitsOfMeasurement form
+		Given I open hyperlink "e1cib/list/Catalog.UnitsOfMeasurement"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected UnitsOfMeasurement additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_UnitsOfMeasurement              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Units of measurement"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+Scenario: _015400720 check that additional attributes and properties are displayed on the form without reopening (catalog AccountingOperations)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create AccountingOperations
+		Given I open hyperlink "e1cib/list/Catalog.AccountingOperations"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Open AccountingOperations form
+		Given I open hyperlink "e1cib/list/Catalog.AccountingOperations"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected AccountingOperations additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_AccountingOperations              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Accounting operations"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400721 check that additional attributes and properties are displayed on the form without reopening (catalog InterfaceGroups)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create InterfaceGroups
+		Given I open hyperlink "e1cib/list/Catalog.InterfaceGroups"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Open InterfaceGroups form
+		Given I open hyperlink "e1cib/list/Catalog.InterfaceGroups"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected InterfaceGroups additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_InterfaceGroups              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "UI groups"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
 	And I close all client application windows

@@ -613,15 +613,47 @@ Scenario: _0991025 create JournalEntry for PI (with advance)
 		
 Scenario: _0991025 create JournalEntry for BP (advance)
 	And I close all client application windows
+	* Preparation (temporarily)
+		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"
+		And I go to line in "List" table
+			| 'Variant'              |
+			| 'Management analitics' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Code' | 'Currency' | 'Description'        | 'Off-balance' | 'Order' | 'Quantity' | 'Reference' | 'Type' | 'Variant'              |
+			| '2020' | 'Yes'      | 'Customers advances' | 'No'          | '41'    | 'No'       | '2020'      | 'P'    | 'Management analitics' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"
+		And I go to line in "List" table
+			| 'Variant'              |
+			| 'Management analitics' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Code' | 'Currency' | 'Description'       | 'Off-balance' | 'Order' | 'Quantity' | 'Reference' | 'Type' | 'Variant'              |
+			| '5022' | 'Yes'      | 'Service (expense)' | 'No'          | '70'    | 'No'       | '5022'      | 'P'    | 'Management analitics' |
+		And I select current line in "List" table
+		And I click "Save and close" button
 	* Select BP
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   |
 			| '133'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
 	* Create JournalEntry
 		And I click "Journal entry" button
 		Then "Journal entry (create)" window is opened
 		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                                           | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '12.07.2022 17:01:09' | '1020'       | '1' | '100,00' | ''              | 'Yes'      | 'TRY'             | 'Ferron BP'       | '100'          | ''                    | ''                | ''                    | 'TRY'            | '2020'       | 'Ferron BP'        | 'BankPayment_DR_R1020B (Advances to vendors) _R1021B (Vendors transaction) _CR_R3010B (Cash on hand)' | 'Company Ferron BP'   | '100'           | ''                    |
+			| '12.07.2022 17:01:09' | '5022'       | '2' | '10,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '10'           | 'Expense'             | ''                | 'Front office'        | 'TRY'            | '2020'       | 'Ferron BP'        | 'BankPayment_DR_R5022T (Expenses)_CR_R3010B (cash on hand)'                                           | 'Company Ferron BP'   | '10'            | ''                    |
+		And I close all client application windows
+		
+		
+				
 		
 				
 

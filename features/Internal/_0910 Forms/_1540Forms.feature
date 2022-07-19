@@ -1471,7 +1471,32 @@ Scenario: _012026 check Partners selection form (SO)
 			| 'Test Partner' |
 		And I close all client application windows
 		
-		
-	
+Scenario: _012027 try change item from item key
+		And I close all client application windows
+	* Open item key from item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |		
+		And I select current line in "List" table
+		And In this window I click command interface button "Item keys"
+		And I activate field named "Code" in "List" table
+		And I go to line in "List" table
+			| 'Item key'  |
+			| '38/Yellow' |
+		And I select current line in "List" table
+		And "Item" attribute is read-only
+		And I close all client application windows
+	* Open item key from catalog
+		Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
+		And I go to line in "List" table
+			| 'Item key'  |
+			| '38/Yellow' |	
+		And I select current line in "List" table
+		And "Item" attribute is read-only
+		And I close all client application windows
+				
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

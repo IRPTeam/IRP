@@ -2059,11 +2059,11 @@ Scenario: Create information register T9011S_AccountsCashAccount records
 
 	And I check or create information register "T9011S_AccountsCashAccount" records:
 		| 'Period'             | 'Company'                                                           | 'Variant'                                                                    | 'CashAccount' | 'Account'                                                               |
-		| '01.07.2022 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01e9dc954ffb' | ''            | 'e1cib/data/ChartOfAccounts.Basic?ref=b78386a1ced23f4711ed01e9dc954ffe' |
+		| '01.07.2022 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c' | ''            | 'e1cib/data/ChartOfAccounts.Basic?ref=b78386a1ced23f4711ed01e9dc954ffe' |
 
 Scenario: Create information register T9014S_AccountsExpenseRevenue records
 
 	And I check or create information register "T9014S_AccountsExpenseRevenue" records:
 		| 'Period'             | 'Company'                                                           | 'Variant'                                                                    | 'ExpenseRevenue'                                                                 | 'Account'                                                               |
-		| '01.07.2022 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01e9dc954ffb' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'e1cib/data/ChartOfAccounts.Basic?ref=b78386a1ced23f4711ed01e9dc954ffe' |
+		| '01.07.2022 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'e1cib/data/ChartOfAccounts.Basic?ref=b78386a1ced23f4711ed01e9dc954ffe' |
 

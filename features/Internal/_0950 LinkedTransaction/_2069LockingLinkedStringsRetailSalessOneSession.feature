@@ -287,6 +287,39 @@ Scenario: _2069006 check locking tab in the Retail return receipt with linked do
 				| 'Boots' | '36/18SD'  |
 			And I click choice button of "Retail sales receipt" attribute in "ItemList" table
 			And I close current window
+		* Try return more than sold
+			And I activate "Landed cost" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "10,00" text in "Landed cost" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Quantity' | 'Retail sales receipt'                              | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
+				| 'No'                 | 'Dress' | 'XS/Blue'  | '3 525,42'   | '520,00' | '8,000'    | 'Retail sales receipt 51 dated 05.10.2021 10:08:07' | 'Store 01' | '634,58'     | '4 160,00'     | 'pcs'  | '18%' |
+			And I activate "Quantity" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "15,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Quantity' | 'Retail sales receipt'                              | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
+				| 'No'                 | 'Shirt' | '36/Red'   | '1 186,44'   | '350,00' | '4,000'    | 'Retail sales receipt 51 dated 05.10.2021 10:08:07' | 'Store 01' | '213,56'     | '1 400,00'     | 'pcs'  | '18%' |
+			And I select current line in "ItemList" table
+			And I input "8,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Dont calculate row' | 'Item'  | 'Item key' | 'Landed cost' | 'Net amount' | 'Price'  | 'Quantity' | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
+				| 'No'                 | 'Boots' | '36/18SD'  | '10,00'       | '593,22'     | '700,00' | '1,000'    | 'Store 01' | '106,78'     | '700,00'       | 'pcs'  | '18%' |
+			And I move to "Payments" tab
+			And I activate "Amount" field in "Payments" table
+			And I select current line in "Payments" table
+			And I input "11 300,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
+			And I move to "Item list" tab
+			And I click "Post" button
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Line No. [1] [Dress XS/Blue] Return remaining: 10 . Required: 15 . Lacking: 5 .'|
+ 				|'Line No. [2] [Shirt 36/Red] Return remaining: 5 . Required: 8 . Lacking: 3 .'|					
 		And I close all client application windows
 
 Scenario: _2069007 check unlock linked rows in the Retail return receipt
@@ -315,50 +348,50 @@ Scenario: _2069007 check unlock linked rows in the Retail return receipt
 		And I close all client application windows
 
 
-// Scenario: _2068010 change quantity in the linked string in the Retail sales receipt (one session)
-// 	* Open RSR
-// 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '51'     |
-// 		And I select current line in "List" table
-// 	* Change quantity (less then RRR)
-// 		And I go to line in "ItemList" table
-// 			| 'Item'  | 'Item key' |
-// 			| 'Shirt' | '36/Red'   |
-// 		And I activate "Quantity" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I input "3,000" text in "Quantity" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And I move to "Payments" tab
-// 		And I activate "Amount" field in "Payments" table
-// 		And I select current line in "Payments" table
-// 		And I input "7 650,00" text in "Amount" field of "Payments" table
-// 		And I finish line editing in "Payments" table
-// 		And I move to "Item list" tab		
-// 		And I click "Post" button
-// 		Then "1C:Enterprise" window is opened
-// 		And I click "OK" button
-// 		Then there are lines in TestClient message log
-// 			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 4 . Required: 3 . Lacking: 1 .'|
-// 	* Change quantity (more then RRR)
-// 		And I go to line in "ItemList" table
-// 			| 'Item'  | 'Item key' |
-// 			| 'Shirt' | '36/Red'   |
-// 		And I activate "Quantity" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I input "6,000" text in "Quantity" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And I move to "Payments" tab
-// 		And I activate "Amount" field in "Payments" table
-// 		And I select current line in "Payments" table
-// 		And I input "8 700,00" text in "Amount" field of "Payments" table
-// 		And I finish line editing in "Payments" table
-// 		And I move to "Item list" tab		
-// 		And I click "Post and close" button
-// 		Then user message window does not contain messages
-// 		Then "Retail sales receipts" window is opened
-// 		And I close all client application windows
+Scenario: _2068010 change quantity in the linked string in the Retail sales receipt (one session)
+	* Open RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+		And I select current line in "List" table
+	* Change quantity (less then RRR)
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "3,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Payments" tab
+		And I activate "Amount" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "7 650,00" text in "Amount" field of "Payments" table
+		And I finish line editing in "Payments" table
+		And I move to "Item list" tab		
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then there are lines in TestClient message log
+			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 4 . Required: 3 . Lacking: 1 .'|
+	* Change quantity (more then RRR)
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '36/Red'   |
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "6,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Payments" tab
+		And I activate "Amount" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "8 700,00" text in "Amount" field of "Payments" table
+		And I finish line editing in "Payments" table
+		And I move to "Item list" tab		
+		And I click "Post and close" button
+		Then user message window does not contain messages
+		Then "Retail sales receipts" window is opened
+		And I close all client application windows
 
 Scenario: _2069015 delete linked string in the Retail sales receipt (one session)
 	And I close all client application windows
@@ -383,40 +416,40 @@ Scenario: _2069015 delete linked string in the Retail sales receipt (one session
 		And I close all client application windows
 
 
-// Scenario: _2069019 unpost Retail sales receipt with linked strings (one session)
-// 	And I close all client application windows
-// 	* Select Retail sales receipt
-// 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '51'     |
-// 	* Try unpost Retail sales receipt
-// 		And I activate field named "Date" in "List" table
-// 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-// 		Then "1C:Enterprise" window is opened
-// 		And I click "OK" button
-// 	* Check message
-// 		Then there are lines in TestClient message log
-// 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 8 . Required: 0 . Lacking: 8 .'|
-// 			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 4 . Required: 0 . Lacking: 4 .'|		
-// 		And I close all client application windows
+Scenario: _2069019 unpost Retail sales receipt with linked strings (one session)
+	And I close all client application windows
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+	* Try unpost Retail sales receipt
+		And I activate field named "Date" in "List" table
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check message
+		Then there are lines in TestClient message log
+			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 8 . Required: 0 . Lacking: 8 .'|
+			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 4 . Required: 0 . Lacking: 4 .'|		
+		And I close all client application windows
 
-// Scenario: _2069020 delete Retail sales receipt with linked strings (one session)
-// 	And I close all client application windows
-// 	* Select Retail sales receipt
-// 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '51'     |
-// 	* Try delete Retail sales receipt
-// 		And I activate field named "Date" in "List" table
-// 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
-// 		Then "1C:Enterprise" window is opened
-// 		And I click "Yes" button
-// 		Then "1C:Enterprise" window is opened
-// 		And I click "OK" button
-// 	* Check message
-// 		Then there are lines in TestClient message log
-// 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 8 . Required: 0 . Lacking: 8 .'|
-// 			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 4 . Required: 0 . Lacking: 4 .'|		
-// 		And I close all client application windows
+Scenario: _2069020 delete Retail sales receipt with linked strings (one session)
+	And I close all client application windows
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '51'     |
+	* Try delete Retail sales receipt
+		And I activate field named "Date" in "List" table
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check message
+		Then there are lines in TestClient message log
+			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 8 . Required: 0 . Lacking: 8 .'|
+			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 4 . Required: 0 . Lacking: 4 .'|		
+		And I close all client application windows

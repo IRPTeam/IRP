@@ -1348,7 +1348,9 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRow.AmountTax = Row.AmountTax;
 			
 			// simple receipt	
-			If IsNotMultiDirectionDocument(Document) And Not ValueIsFilled(Row.SalesInvoice) And TypeOf(Document) <> Type("DocumentRef.BatchReallocateIncoming") Then
+			If IsNotMultiDirectionDocument(Document) // is not transfer, produce, bundling or unbundling
+				And Not ValueIsFilled(Row.SalesInvoice) // is not return by sales invoice
+				And TypeOf(Document) <> Type("DocumentRef.BatchReallocateIncoming") Then // is not receipt by btach reallocation
 				FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);
 			EndIf;
 
@@ -1389,6 +1391,17 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					
 					NeedReceipt = NeedReceipt - ReceiptQuantity;
 					
+					_BatchBySales_Document = BatchBySales.Document;
+					_BatchBySales_Company  = BatchBySales.Company;
+					_BatchBySales_Batch    = BatchBySales.Batch;
+					
+					// determine batch when returned by another company
+					If ValueIsFilled(Row.Batch) And Row.Company <> _BatchBySales_Company Then
+						_BatchBySales_Document = Row.Batch.Document;
+						_BatchBySales_Company  = Row.Company;
+						_BatchBySales_Batch    = Row.Batch;
+					EndIf;
+					
 					// Table of returned batches
 					NewRow_ReturnedBatches = TableOfReturnedBatches.Add();
 					NewRow_ReturnedBatches.IsOpeningBalance = False;
@@ -1399,9 +1412,9 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow_ReturnedBatches.Amount           = ReceiptAmount;
 					NewRow_ReturnedBatches.AmountTax        = ReceiptAmountTax;
 					
-					NewRow_ReturnedBatches.Document         = BatchBySales.Document;
-					NewRow_ReturnedBatches.Company          = BatchBySales.Company;
-					NewRow_ReturnedBatches.Batch            = BatchBySales.Batch;
+					NewRow_ReturnedBatches.Document         = _BatchBySales_Document;
+					NewRow_ReturnedBatches.Company          = _BatchBySales_Company;
+					NewRow_ReturnedBatches.Batch            = _BatchBySales_Batch;
 					
 					NewRow_ReturnedBatches.Date             = Row.Date;
 					NewRow_ReturnedBatches.Direction        = Enums.BatchDirection.Receipt;
@@ -1411,8 +1424,9 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					
 					// Data for receipt
 					NewRow_DataForReceipt = Tables.DataForReceipt.Add();
-					NewRow_DataForReceipt.Company   = BatchBySales.Company;
-					NewRow_DataForReceipt.Batch     = BatchBySales.Batch;
+					
+					NewRow_DataForReceipt.Company   = _BatchBySales_Company;
+					NewRow_DataForReceipt.Batch     = _BatchBySales_Batch;
 					
 					NewRow_DataForReceipt.BatchKey  = Row.BatchKey;
 					NewRow_DataForReceipt.Document  = Row.Document;

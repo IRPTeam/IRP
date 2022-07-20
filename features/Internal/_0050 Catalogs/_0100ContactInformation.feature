@@ -71,14 +71,14 @@ Scenario: _010004 create Contact info Type - Addresses
 		And Delay 5
 		And "List" table contains lines
 		| 'Description' |
-		| 'Google Addreses'  |
+		| 'Google Addreses1'  |
 
 Scenario: check preparation
 	* Check preparation
 		Try
 			And the previous scenario executed successfully
 		Except
-			Then I stop all scripts execution
+			Then I stop the execution of scripts for this feature
 
 Scenario: _010005 verification of UNIQ ID uniqueness control in IDInfoTypes
 	* Create one more item with ID Adr_10

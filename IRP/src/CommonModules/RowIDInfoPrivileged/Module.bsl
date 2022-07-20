@@ -27,9 +27,9 @@ Function GetBasisesInfo(Ref, Key1, Key2) Export
 	Return RowIDInfoServer.GetBasisesInfo(Ref, Key1, Key2);
 EndFunction
 
-Function CreateChildrenTree(Ref, Key, RowID, TreeRows) Export
-	Return RowIDInfoServer.CreateChildrenTree(Ref, Key, RowID, TreeRows);
-EndFunction
+Procedure CreateChildrenTree(Ref, Key, RowID, TreeRows) Export
+	RowIDInfoServer.CreateChildrenTree(Ref, Key, RowID, TreeRows);
+EndProcedure
 
 Procedure FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable) Export
 	RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);

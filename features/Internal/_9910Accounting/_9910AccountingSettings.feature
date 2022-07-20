@@ -45,6 +45,16 @@ Scenario: _099100 preparation
 		When Create information register TaxSettings records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog CashAccounts objects
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create information register T9011S_AccountsCashAccount records
+		When Create information register T9014S_AccountsExpenseRevenue records
+		When Create document BankPayment objects (Accounting)
+		When Create document VendorsAdvancesClosing objects (Accounting)
+		When Create catalog AccountingOperations objects
+		When Create catalog LedgerTypes objects
+		When Create catalog LedgerTypeVariants objects
+		When Create information register LedgerTypeOperations records
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -81,94 +91,10 @@ Scenario: _099101 filling accounting operation
 			And I select current line in "List" table
 			And I input "PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)" text in "ENG" field
 			And I click "Save and close" button
-			Then "Accounting operations" window is opened
-			And I go to line in "List" table
-				| 'Code' | 'Predefined data item name'           |
-				| '7'    | 'PurchaseInvoice_DR_R1021B_CR_R1020B' |
-			And I select current line in "List" table
-			And I input "PurchaseInvoice_DR_R1021B (Vendors transaction)_CR_R1020B (Advances to vendors)" text in "ENG" field
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Code' | 'Predefined data item name'           |
-				| '8'    | 'PurchaseInvoice_DR_R1040B_CR_R1021B' |
-			And I select current line in "List" table
-			And I input "PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)" text in "ENG" field
-			And I click "Save and close" button
-			Then "Accounting operations" window is opened
-		* Retail sales receipt
-			And I go to line in "List" table
-				| 'Code' | 'Predefined data item name'   |
-				| '11'   | 'Document_RetailSalesReceipt' |
-			And I select current line in "List" table
-			And I input "Retail sales receipt" text in "ENG" field
-			And I click "Save and close" button
-			And I expand current line in "List" table
-			And I go to line in "List" table
-				| 'Code' | 'Predefined data item name'              |
-				| '12'   | 'RetailSalesReceipt_DR_R5022T_CR_R4050B' |
-			And I select current line in "List" table
-			And I input "RetailSalesReceipt_DR_R5022T (Expenses) _CR_R4050B (Stock inventory)" text in "ENG" field
-			And I click "Save and close" button
-		* Bank payment
-			And I go to line in "List" table
-				| 'Code' | 'Predefined data item name' |
-				| '1'    | 'Document_BankPayment'      |
-			And I select current line in "List" table
-			And I input "Bank payment" text in "ENG" field
-			And I click "Save and close" button
-			And I expand current line in "List" table
-			And I go to line in "List" table
-				| 'Code' | 'Predefined data item name'              |
-				| '3'    | 'BankPayment_DR_R1020B_R1021B_CR_R3010B' |
-			And I select current line in "List" table
-			And I input "BankPayment_DR_R1020B (Advances to vendors) _R1021B (Vendors transaction) _CR_R3010B (Cash on hand)" text in "ENG" field
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Code' | 'Predefined data item name'       |
-				| '9'    | 'BankPayment_DR_R5022T_CR_R3010B' |
-			And I select current line in "List" table
-			And I input "BankPayment_DR_R5022T (Expenses)_CR_R3010B (cash on hand)" text in "ENG" field
-			And I click "Save and close" button
-			And I go to line in "List" table
-				| 'Code' | 'Predefined data item name'       |
-				| '10'   | 'BankPayment_DR_R1021B_CR_R1020B' |
-			And I select current line in "List" table
-			And I input "BankPayment_DR_R1021B (Vendors transaction) _CR_R1020B (Advances to vendors)" text in "ENG" field
-			And I click "Save and close" button
-		* Bank receipt
-			And I expand a line in "List" table
-				| 'Code' | 'Predefined data item name' | 'Reference'               |
-				| '2'    | 'Document_BankReceipt'      | 'en description is empty' |
-			And I go to line in "List" table
-				| 'Code' | 'Predefined data item name' | 'Reference'               |
-				| '2'    | 'Document_BankReceipt'      | 'en description is empty' |
-			And I select current line in "List" table
-			And I input "Bank receipt" text in "ENG" field
-			And I click "Save and close" button
-			And I wait "en description is empty (Accounting operations) *" window closing in 20 seconds
-			Then "Accounting operations" window is opened
-			And I go to line in "List" table
-				| 'Code' | 'Predefined data item name'       |
-				| '4'    | 'BankReceipt_DR_R3010B_CR_R2021B' |
-			And I select current line in "List" table
-			And I input "BankReceipt_DR_R3010B (Cash on hand) _CR_R2021B (Customer transaction)" text in "ENG" field
-			And I click "Save and close" button
 	* Check 
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Code'                  | 'Order' | 'Predefined data item name'                  | 'Description'                                                                                         | 'Reference'                                                                                           |
-			| 'Accounting operations' | ''      | ''                                           | ''                                                                                                    | ''                                                                                                    |
-			| '1'                     | ''      | 'Document_BankPayment'                       | 'Bank payment'                                                                                        | 'Bank payment'                                                                                        |
-			| '3'                     | ''      | 'BankPayment_DR_R1020B_R1021B_CR_R3010B'     | 'BankPayment_DR_R1020B (Advances to vendors) _R1021B (Vendors transaction) _CR_R3010B (Cash on hand)' | 'BankPayment_DR_R1020B (Advances to vendors) _R1021B (Vendors transaction) _CR_R3010B (Cash on hand)' |
-			| '9'                     | ''      | 'BankPayment_DR_R5022T_CR_R3010B'            | 'BankPayment_DR_R5022T (Expenses)_CR_R3010B (cash on hand)'                                           | 'BankPayment_DR_R5022T (Expenses)_CR_R3010B (cash on hand)'                                           |
-			| '10'                    | ''      | 'BankPayment_DR_R1021B_CR_R1020B'            | 'BankPayment_DR_R1021B (Vendors transaction) _CR_R1020B (Advances to vendors)'                        | 'BankPayment_DR_R1021B (Vendors transaction) _CR_R1020B (Advances to vendors)'                        |
-			| '2'                     | ''      | 'Document_BankReceipt'                       | 'Bank receipt'                                                                                        | 'Bank receipt'                                                                                        |
-			| '4'                     | ''      | 'BankReceipt_DR_R3010B_CR_R2021B'            | 'BankReceipt_DR_R3010B (Cash on hand) _CR_R2021B (Customer transaction)'                              | 'BankReceipt_DR_R3010B (Cash on hand) _CR_R2021B (Customer transaction)'                              |
-			| '5'                     | ''      | 'Document_PurchaseInvoice'                   | 'Purchase invoice'                                                                                    | 'Purchase invoice'                                                                                    |
 			| '6'                     | ''      | 'PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B' | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)'        | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)'        |
-			| '7'                     | ''      | 'PurchaseInvoice_DR_R1021B_CR_R1020B'        | 'PurchaseInvoice_DR_R1021B (Vendors transaction)_CR_R1020B (Advances to vendors)'                     | 'PurchaseInvoice_DR_R1021B (Vendors transaction)_CR_R1020B (Advances to vendors)'                     |
-			| '8'                     | ''      | 'PurchaseInvoice_DR_R1040B_CR_R1021B'        | 'PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)'                         | 'PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)'                         |
-			| '11'                    | ''      | 'Document_RetailSalesReceipt'                | 'Retail sales receipt'                                                                                | 'Retail sales receipt'                                                                                |
-			| '12'                    | ''      | 'RetailSalesReceipt_DR_R5022T_CR_R4050B'     | 'RetailSalesReceipt_DR_R5022T (Expenses) _CR_R4050B (Stock inventory)'                                | 'RetailSalesReceipt_DR_R5022T (Expenses) _CR_R4050B (Stock inventory)'                                |		
 		And I close all client application windows
 		
 		
@@ -178,7 +104,7 @@ Scenario: _099102 create ledger type
 		Given I open hyperlink "e1cib/list/Catalog.LedgerTypes"	
 	* Create new element			
 		And I click the button named "FormCreate"
-		And I input "Management" text in "ENG" field
+		And I input "Test" text in "ENG" field
 		And I click Select button of "Currency movement type" field
 		Then "Multi currency movement types" window is opened
 		And I go to line in "List" table
@@ -187,7 +113,7 @@ Scenario: _099102 create ledger type
 		And I select current line in "List" table
 		And I click Choice button of the field named "Variant"
 		And I click "Create" button
-		And I input "Management analitics" text in "ENG" field
+		And I input "Test analitics" text in "ENG" field
 		And I click "Save and close" button
 		And I wait "Ledger type variants (create) *" window closing in 20 seconds
 		Then "Ledger type variants" window is opened
@@ -199,60 +125,11 @@ Scenario: _099102 create ledger type
 			And I activate "Period" field in "OperationsTree" table
 			And I select current line in "OperationsTree" table
 			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I finish line editing in "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'                                              | 'Use' |
-				| 'BankPayment_DR_R5022T (Expenses)_CR_R3010B (cash on hand)' | 'No'  |
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I finish line editing in "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                                 | 'Use' |
-				| 'BankPayment_DR_R1021B (Vendors transaction) _CR_R1020B (Advances to vendors)' | 'No'  |
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I finish line editing in "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                           | 'Use' |
-				| 'BankReceipt_DR_R3010B (Cash on hand) _CR_R2021B (Customer transaction)' | 'No'  |
-			And I select current line in "OperationsTree" table
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I finish line editing in "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'     | 'Use' |
-				| 'Purchase invoice' | 'No'  |
-			And I activate "Presentation" field in "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                                                 | 'Use' |
-				| 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)' | 'No'  |
-			And I activate "Period" field in "OperationsTree" table
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I finish line editing in "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                                    | 'Use' |
-				| 'PurchaseInvoice_DR_R1021B (Vendors transaction)_CR_R1020B (Advances to vendors)' | 'No'  |
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I finish line editing in "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                                | 'Use' |
-				| 'PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)' | 'No'  |
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I finish line editing in "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                         | 'Use' |
-				| 'RetailSalesReceipt_DR_R5022T (Expenses) _CR_R4050B (Stock inventory)' | 'No'  |
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I finish line editing in "OperationsTree" table
 			And I click "Save and close" button
 		* Check creation
-			And "List" table became equal
-				| 'Description' | 'Currency movement type' | 'Currency' | 'Type'  | 'Variant'              | 'Reference'  |
-				| 'Management'  | 'Local currency'         | 'TRY'      | 'Legal' | 'Management analitics' | 'Management' |
+			And "List" table contains lines
+				| 'Description' | 'Currency movement type' | 'Currency' | 'Type'  | 'Variant'        | 'Reference' |
+				| 'Test'        | 'Local currency'         | 'TRY'      | 'Legal' | 'Test analitics' | 'Test'      |
 			And I close all client application windows
 			
 Scenario: _099103 create account charts
@@ -690,8 +567,12 @@ Scenario: _0991020 check Purchase invoice accounting movements
 		And I close all client application windows
 		
 		
-Scenario: _0991025 create JournalEntry for PI
+Scenario: _0991025 create JournalEntry for PI (with advance)
 		And I close all client application windows
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(133).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.VendorsAdvancesClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Create JournalEntry
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"	
 		And I click "Create documents" button
@@ -725,12 +606,58 @@ Scenario: _0991025 create JournalEntry for PI
 			| '1'      |
 		And I select current line in "List" table
 		And "RegisterRecords" table became equal
-			| 'Period' | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                                    | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '*'      | '4050'       | '1' | '423,73' | '1'             | 'Yes'      | 'TRY'             | 'Dress'           | ''             | 'XS/Blue'             | ''                | 'Store 02'            | ''               | '1021'       | 'Ferron BP'        | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)' | 'Vendor Ferron, TRY'  | '423,73'        | 'Company Ferron BP'   |
-			| '*'      | '1040'       | '2' | '76,27'  | ''              | 'Yes'      | 'TRY'             | 'VAT'             | '76,27'        | ''                    | ''                | ''                    | 'TRY'            | '1021'       | 'Ferron BP'        | 'PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)'                  | 'Vendor Ferron, TRY'  | '76,27'         | 'Company Ferron BP'   |
+			| 'Period' | 'Account Dr' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                                    | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '*'      | '4050'       | '423,73' | '1'             | 'Yes'      | 'TRY'             | 'Dress'           | ''             | 'XS/Blue'             | ''                | 'Store 02'            | ''               | '1021'       | 'Ferron BP'        | 'PurchaseInvoice_DR_R4050B (Stock inventory)_R5022T(Expenses)_CR_R1021B (Vendors transaction)' | 'Vendor Ferron, TRY'  | '423,73'        | 'Company Ferron BP'   |
+			| '*'      | '1040'       | '76,27'  | ''              | 'Yes'      | 'TRY'             | 'VAT'             | '76,27'        | ''                    | ''                | ''                    | 'TRY'            | '1021'       | 'Ferron BP'        | 'PurchaseInvoice_DR_R1040B (Taxes outgoing) _CR_R1021B (Vendors transaction)'                  | 'Vendor Ferron, TRY'  | '76,27'         | 'Company Ferron BP'   |
+		And I close all client application windows
+		
+Scenario: _0991025 create JournalEntry for BP (advance)
+	And I close all client application windows
+	* Preparation (temporarily)
+		Given I open hyperlink "e1cib/list/InformationRegister.T9011S_AccountsCashAccount"
+		And I go to line in "List" table
+			| 'Variant'              |
+			| 'Management analitics' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Code' | 'Currency' | 'Description'        | 'Off-balance' | 'Order' | 'Quantity' | 'Reference' | 'Type' | 'Variant'              |
+			| '2020' | 'Yes'      | 'Customers advances' | 'No'          | '41'    | 'No'       | '2020'      | 'P'    | 'Management analitics' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.T9014S_AccountsExpenseRevenue"
+		And I go to line in "List" table
+			| 'Variant'              |
+			| 'Management analitics' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Code' | 'Currency' | 'Description'       | 'Off-balance' | 'Order' | 'Quantity' | 'Reference' | 'Type' | 'Variant'              |
+			| '5022' | 'Yes'      | 'Service (expense)' | 'No'          | '70'    | 'No'       | '5022'      | 'P'    | 'Management analitics' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Select BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'   |
+			| '133'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+	* Create JournalEntry
+		And I click "Journal entry" button
+		Then "Journal entry (create)" window is opened
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                                           | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '12.07.2022 17:01:09' | '1020'       | '1' | '100,00' | ''              | 'Yes'      | 'TRY'             | 'Ferron BP'       | '100'          | ''                    | ''                | ''                    | 'TRY'            | '2020'       | 'Ferron BP'        | 'BankPayment_DR_R1020B (Advances to vendors) _R1021B (Vendors transaction) _CR_R3010B (Cash on hand)' | 'Company Ferron BP'   | '100'           | ''                    |
+			| '12.07.2022 17:01:09' | '5022'       | '2' | '10,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '10'           | 'Expense'             | ''                | 'Front office'        | 'TRY'            | '2020'       | 'Ferron BP'        | 'BankPayment_DR_R5022T (Expenses)_CR_R3010B (cash on hand)'                                           | 'Company Ferron BP'   | '10'            | ''                    |
 		And I close all client application windows
 		
 		
+				
+		
+				
+
+				
 				
 		
 				

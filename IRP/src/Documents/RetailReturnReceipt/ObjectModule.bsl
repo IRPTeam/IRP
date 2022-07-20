@@ -57,13 +57,14 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 
-	ItemList_TotalAmount = ThisObject.ItemList.Total("TotalAmount");
-	Payments_Amount = ThisObject.Payments.Total("Amount");
-	If ItemList_TotalAmount <> Payments_Amount Then
-		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_079, Format(Payments_Amount, "NFD=2; NN=;"),
-			Format(ItemList_TotalAmount, "NFD=2; NN=;")));
-	EndIf;
+//#1296 temp
+//	ItemList_TotalAmount = ThisObject.ItemList.Total("TotalAmount");
+//	Payments_Amount = ThisObject.Payments.Total("Amount");
+//	If ItemList_TotalAmount <> Payments_Amount Then
+//		Cancel = True;
+//		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_079, Format(Payments_Amount, "NFD=2; NN=;"),
+//			Format(ItemList_TotalAmount, "NFD=2; NN=;")));
+//	EndIf;
 
 	For Each Row In ThisObject.ItemList Do
 		If Not ValueIsFilled(Row.RetailSalesReceipt) And Not ValueIsFilled(Row.LandedCost) Then
@@ -77,6 +78,8 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_RRR(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
 		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey, Store");
-		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
+		//#1296
+		//RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
+		RowIDInfoPrivileged.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 EndProcedure

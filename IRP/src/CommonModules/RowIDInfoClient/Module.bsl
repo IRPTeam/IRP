@@ -55,7 +55,7 @@ Procedure UpdateQuantity(Object, Form) Export
 	EndDo;	
 EndProcedure
 
-Function GetSelectedRowInfo(CurrentData) Export
+Function GetSelectedRowInfo(CurrentData, ArrayOfFilterExcludeFields = Undefined) Export
 	Result = New Structure("SelectedRow, FilterBySelectedRow", Undefined, Undefined);
 	If CurrentData = Undefined Then
 		Return Result;
@@ -87,6 +87,20 @@ Function GetSelectedRowInfo(CurrentData) Export
 	Result.FilterBySelectedRow = New Structure();
 	Result.FilterBySelectedRow.Insert("ItemKey", CurrentData.ItemKey);
 	Result.FilterBySelectedRow.Insert("Store", Store);
+	//#1296
+	If ArrayOfFilterExcludeFields <> Undefined Then
+		Result.Insert("ArrayOfFilterExcludeFields", ArrayOfFilterExcludeFields);
+		For Each FilterField In ArrayOfFilterExcludeFields Do
+			FieldName = TrimAll(FilterField);
+			If Not ValueIsFilled(FieldName) Then
+				Continue;
+			EndIf;
+			If Result.FilterBySelectedRow.Property(FieldName) Then
+				Result.FilterBySelectedRow.Delete(FieldName);
+			EndIf;
+		EndDo;
+	EndIf;
+	
 	Return Result;
 EndFunction
 

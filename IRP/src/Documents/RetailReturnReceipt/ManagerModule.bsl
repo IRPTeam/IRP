@@ -287,6 +287,15 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
+	
+	//#1296
+//	If Not Cancel And Not AccReg.TM1010T_RowIDMovements.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
+//		PostingServer.GetQueryTableByName("RowIDInfo", Parameters), 
+//		PostingServer.GetQueryTableByName("Exists_TM1010T_RowIDMovements", Parameters),
+//		AccumulationRecordType.Expense, Unposting, AddInfo) Then
+//		Cancel = True;
+//	EndIf;
+	
 EndProcedure
 
 Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -320,6 +329,9 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	//#1296
+//	QueryArray.Add(PostingServer.Exists_TM1010T_RowIDMovements());
+//	QueryArray.Add(RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -886,5 +898,18 @@ Function R3022B_CashInTransitOutgoing()
 	|WHERE
 	|	Payments.IsPostponedPayment";
 EndFunction
+
+//#1296
+//Function RowIDInfo()
+//	Return
+//	"SELECT
+//	|	RowIDInfo.CurrentStep AS Step,
+//	|	*
+//	|INTO RowIDInfo
+//	|FROM
+//	|	Document.RetailReturnReceipt.RowIDInfo AS RowIDInfo
+//	|WHERE
+//	|	RowIDInfo.Ref = &Ref";
+//EndFunction
 
 #EndRegion

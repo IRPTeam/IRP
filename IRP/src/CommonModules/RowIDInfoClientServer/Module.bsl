@@ -167,13 +167,29 @@ EndFunction
 
 Function GetLinkedDocumentsFilter_RRR(Object) Export
 	Filter = New Structure();
-	Filter.Insert("Company"              , Object.Company);
-	Filter.Insert("Branch"               , Object.Branch);
+	//#1296
+	//Filter.Insert("Company"              , Object.Company);
+	//Filter.Insert("Branch"               , Object.Branch);
 	Filter.Insert("PartnerSales"         , Object.Partner);
 	Filter.Insert("LegalNameSales"       , Object.LegalName);
 	Filter.Insert("AgreementSales"       , Object.Agreement);
 	Filter.Insert("CurrencySales"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
 	Filter.Insert("Ref"                  , Object.Ref);
+	//#1296
+	VisibleFields = New Structure();
+	VisibleFields.Insert("Company");
+	VisibleFields.Insert("Branch");
+	Filter.Insert("VisibleFields", VisibleFields);
 	Return Filter;
 EndFunction
+
+Procedure FillVisibleFields(BasisesTree, VisibleFields) Export
+	For Each Field In VisibleFields Do
+		For Each TopLevel In BasisesTree.GetItems() Do
+			TopLevel[Field.Key + "Presentation"] = TopLevel.Basis[Field.Key];
+		EndDo;
+	EndDo;
+EndProcedure
+
+

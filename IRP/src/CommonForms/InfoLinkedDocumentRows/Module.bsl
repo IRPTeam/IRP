@@ -47,15 +47,20 @@ Procedure FillBasisesTree(SelectedRowInfo)
 			FillPropertyValues(BasisesTable.Add(), Row);
 		EndIf;
 	EndDo;
-	TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
-
-	RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
+	//#1296
+	//TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
+	TreeReverseInfo = RowIDInfoPrivileged.CreateBasisesTreeReverse(BasisesTable);
+	//RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
+	//	ThisObject.BasisesTree.GetItems());
+	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
 		ThisObject.BasisesTree.GetItems());
+		
 	LastRow = Undefined;
 	GetLastRowRecursive(ThisObject.BasisesTree.GetItems(), LastRow);
 	If LastRow = Undefined Then
-		BasisesInfo = RowIDInfoServer.GetBasisesInfo(ThisObject.Ref, SelectedRowInfo.SelectedRow.Key, 
-			SelectedRowInfo.SelectedRow.Key);
+		//#1296
+		//BasisesInfo = RowIDInfoServer.GetBasisesInfo(ThisObject.Ref, SelectedRowInfo.SelectedRow.Key, SelectedRowInfo.SelectedRow.Key);
+		BasisesInfo = RowIDInfoPrivileged.GetBasisesInfo(ThisObject.Ref, SelectedRowInfo.SelectedRow.Key, SelectedRowInfo.SelectedRow.Key);
 		LastRow = ThisObject.BasisesTree.GetItems().Add();
 		
 		FillPropertyValues(LastRow, SelectedRowInfo.SelectedRow);
@@ -63,7 +68,9 @@ Procedure FillBasisesTree(SelectedRowInfo)
 		LastRow.RowPresentation = String(LastRow.Item) + " (" + String(LastRow.ItemKey) + ")";
 	EndIf;
 	
-	RowIDInfoServer.CreateChildrenTree(ThisObject.Ref, SelectedRowInfo.SelectedRow.Key, LastRow.RowID, LastRow.GetItems());
+	//#1296
+	//RowIDInfoServer.CreateChildrenTree(ThisObject.Ref, SelectedRowInfo.SelectedRow.Key, LastRow.RowID, LastRow.GetItems());
+	RowIDInfoPrivileged.CreateChildrenTree(ThisObject.Ref, SelectedRowInfo.SelectedRow.Key, LastRow.RowID, LastRow.GetItems());
 EndProcedure
 
 &AtClient

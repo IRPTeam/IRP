@@ -57,14 +57,13 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 
-//#1296 temp
-//	ItemList_TotalAmount = ThisObject.ItemList.Total("TotalAmount");
-//	Payments_Amount = ThisObject.Payments.Total("Amount");
-//	If ItemList_TotalAmount <> Payments_Amount Then
-//		Cancel = True;
-//		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_079, Format(Payments_Amount, "NFD=2; NN=;"),
-//			Format(ItemList_TotalAmount, "NFD=2; NN=;")));
-//	EndIf;
+	ItemList_TotalAmount = ThisObject.ItemList.Total("TotalAmount");
+	Payments_Amount = ThisObject.Payments.Total("Amount");
+	If ItemList_TotalAmount <> Payments_Amount Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_079, Format(Payments_Amount, "NFD=2; NN=;"),
+			Format(ItemList_TotalAmount, "NFD=2; NN=;")));
+	EndIf;
 
 	For Each Row In ThisObject.ItemList Do
 		If Not ValueIsFilled(Row.RetailSalesReceipt) And Not ValueIsFilled(Row.LandedCost) Then

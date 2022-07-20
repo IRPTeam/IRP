@@ -168,7 +168,8 @@ Scenario: _2060001 preparation
 			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |	
 	When Create catalog CancelReturnReasons objects
 		
-
+Scenario: _20600011 check preparation
+	When check preparation
 			
 	
 Scenario: _2060002 check link/unlink form in the SC

@@ -67,7 +67,9 @@ Scenario: _2070001 preparation (locking linked strings)
 	When create SO,SI,SC,SRO,SR, Planned receipt reservetion for check locking linked strings several sessions
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(1055).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+
+Scenario: _20700011 check preparation
+	When check preparation	
 
 Scenario: _2070002 check locking header in the SO with linked documents (several sessions)
 	* Open SO

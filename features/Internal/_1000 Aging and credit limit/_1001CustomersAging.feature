@@ -91,7 +91,9 @@ Scenario: _1000000 preparation (payment terms)
 		When Create document BankReceipt objects (aging, Opening entry)
 		And I close all client application windows
 		
-
+Scenario: _10000001 check preparation
+	When check preparation
+	
 Scenario: _1000001 filling in payment terms
 	Given I open hyperlink "e1cib/list/Catalog.PaymentSchedules"
 	* Post-shipment credit (7 days)

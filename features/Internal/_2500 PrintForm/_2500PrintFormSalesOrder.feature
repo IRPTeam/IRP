@@ -61,6 +61,10 @@ Scenario: _092001 preparation (PrintFormSalesOrder)
 		When add sales tax settings 
 		When auto filling Configuration metadata catalog
 
+Scenario: _0920011 check preparation
+	When check preparation
+
+
 Scenario: _25001 adding print plugin for sales order
 	* Open form to add plugin
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"

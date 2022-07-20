@@ -129,7 +129,8 @@ Scenario: _045000 preparation (Outgoing payment order)
 		And I execute 1C:Enterprise script at server
 			| "Documents.OutgoingPaymentOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
 	
-
+Scenario: _0450001 check preparation
+	When check preparation
 
 Scenario: _045002 check Outgoing payment order movements by the Register "R1022 Vendors payment planning" (lines with basis)
 	* Select Outgoing payment order

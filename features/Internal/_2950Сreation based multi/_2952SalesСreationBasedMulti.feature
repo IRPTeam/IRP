@@ -67,6 +67,10 @@ Scenario: _0295200 preparation (creation mechanism based on for sales documents)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 
+Scenario: _02952001 check preparation
+	When check preparation
+
+
 Scenario: _090401 create Sales invoice for several Sales order with different legal names
 # should be created 2 Sales invoice
 * Create test Sales order 324

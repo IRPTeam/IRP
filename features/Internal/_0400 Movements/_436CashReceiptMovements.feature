@@ -188,7 +188,8 @@ Scenario: _043600 preparation (Cash receipt)
 		| "Documents.CashReceipt.FindByNumber(518).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I close all client application windows
 		
-
+Scenario: _0436001 check preparation
+	When check preparation
 
 Scenario: _043601 check Cash receipt movements by the Register "R3010 Cash on hand"
 	* Select Cash receipt

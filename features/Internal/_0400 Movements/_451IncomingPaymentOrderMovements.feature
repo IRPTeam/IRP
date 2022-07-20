@@ -87,7 +87,9 @@ Scenario: _045100 preparation (Incoming payment order)
 		When Create document IncomingPaymentOrder objects (Cash planning)
 		And I execute 1C:Enterprise script at server
 			| "Documents.IncomingPaymentOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+
+Scenario: _0451001 check preparation
+	When check preparation	
 
 
 Scenario: _045102 check Incoming payment order movements by the Register "R2022 Customers payment planning" (lines with basis)

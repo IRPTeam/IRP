@@ -76,6 +76,8 @@ Scenario: _018000 preparation
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);" |
 
+Scenario: _0180001 check preparation
+	When check preparation
 
 Scenario: _018001 create document Purchase Invoice based on order (partial quantity, PO-PI)
 	* Select PO

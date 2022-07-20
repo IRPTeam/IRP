@@ -8,6 +8,9 @@ Functionality: sales order closing
 Variables:
 import "Variables.feature"
 
+Background:
+	Given I launch TestClient opening script or connect the existing one
+
 Scenario: _0230000 preparation (Sales order closing)
 	When set True value to the constant
 	And I close TestClient session
@@ -58,6 +61,9 @@ Scenario: _0230000 preparation (Sales order closing)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 		
+Scenario: _0230001 check preparation
+	When check preparation
+
 
 Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 	* Create Sales order closing 

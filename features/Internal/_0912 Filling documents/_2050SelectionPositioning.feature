@@ -56,6 +56,8 @@ Scenario: _0205000 preparation ( selection positiong)
 	* Tax settings
 		When filling in Tax settings for company
 
+Scenario: _02050001 check preparation
+	When check preparation
 
 Scenario: _0205002 partner selection positiong in the Sales order
 	* Open SO form

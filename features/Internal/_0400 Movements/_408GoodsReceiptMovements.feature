@@ -9,6 +9,8 @@ Functionality: check Goods receipt movements
 Variables:
 import "Variables.feature"
 
+
+
 Scenario: _04010 preparation (Goods receipt)
 	When set True value to the constant
 	And I close TestClient session
@@ -108,6 +110,9 @@ Scenario: _04010 preparation (Goods receipt)
 			| "Documents.PurchaseInvoice.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |	
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |	
+
+Scenario: _040101 check preparation
+	When check preparation
 
 //PO-GR-PI (use sheduling)
 

@@ -119,7 +119,8 @@ Scenario: _040158 preparation (Sales order closing)
 	// 	And I close all client application windows
 		
 				
-
+Scenario: _0401581 check preparation
+	When check preparation
 
 
 Scenario: _040159 check Sales order closing movements by the Register  "R2010 Sales orders"

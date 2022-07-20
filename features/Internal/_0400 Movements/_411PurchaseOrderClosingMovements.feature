@@ -128,7 +128,8 @@ Scenario: _041158 preparation (Purchase order closing)
 		// And in the table "List" I click the button named "ListContextMenuPost"
 		And I close all client application windows
 		
-		
+Scenario: _0411581 check preparation
+	When check preparation		
 				
 
 

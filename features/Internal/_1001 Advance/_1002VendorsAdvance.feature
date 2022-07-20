@@ -154,6 +154,9 @@ Scenario: _1002000 preparation (vendors advances closing)
 			| "Documents.VendorsAdvancesClosing.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows			
 
+Scenario: _10020001 check preparation
+	When check preparation
+
 Scenario: _1002002 create VendorsAdvancesClosing
 	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 	And I click the button named "FormCreate"

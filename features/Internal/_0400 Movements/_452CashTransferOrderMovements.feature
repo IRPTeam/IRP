@@ -75,6 +75,9 @@ Scenario: _045200 preparation (Cash transfer order)
 			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
+Scenario: _0452001 check preparation
+	When check preparation
+
 Scenario: _045203 check Cash transfer order movements by the Register "R3035 Cash planning"
 	* Select Cash transfer order
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"

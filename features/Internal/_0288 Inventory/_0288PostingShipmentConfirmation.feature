@@ -204,7 +204,8 @@ Scenario: _028800 preparation (Shipment confirmation)
 		| "Documents.PurchaseReturn.FindByNumber(353).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
-
+Scenario: _0288001 check preparation
+	When check preparation
 
 
 Scenario: _028801 create document Shipment confirmation based on SI (with SO)

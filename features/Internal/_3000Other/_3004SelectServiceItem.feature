@@ -44,6 +44,8 @@ Scenario: _300400 preparation (product / service selection filter)
 		When Create information register CurrencyRates records
 		When update ItemKeys
 
+Scenario: _3004001 check preparation
+	When check preparation
 
 
 

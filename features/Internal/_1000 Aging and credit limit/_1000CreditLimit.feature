@@ -337,7 +337,8 @@ Scenario: _1000000 preparation (credit limit)
 		And I click "Post and close" button
 		And I close all client application windows
 		
-
+Scenario: _10000001 check preparation
+	When check preparation
 			
 						
 

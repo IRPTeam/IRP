@@ -67,7 +67,8 @@ Scenario: _023000 preparation (Sales order)
 		When filling in Tax settings for company
 
 
-
+Scenario: _0230001 check preparation
+	When check preparation
 
 
 Scenario: _023001 create document Sales order

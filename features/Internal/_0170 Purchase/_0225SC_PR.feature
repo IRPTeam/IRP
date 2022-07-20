@@ -58,7 +58,8 @@ Scenario: _022500 preparation (SC-PR)
 		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);" |
 
-
+Scenario: _0225001 check preparation
+	When check preparation
 
 Scenario: _022501 create SC with transaction type return to vendor and create Purchase return
 	* Open form SC

@@ -80,7 +80,8 @@ Scenario: _350000 preparation for check a bunch of additional details in item ty
         And I click "Save" button
     And I close all client application windows
 
-
+Scenario: _3500001 check preparation
+	When check preparation
 
 Scenario: _350001 check the connection between adding additional details to item type and displaying them in the set for item key
     * Open item type Stockings

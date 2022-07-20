@@ -57,6 +57,8 @@ Scenario: _201000 preparation ( filling stores)
 	* Tax settings
 		When filling in Tax settings for company
 	
+Scenario: _2010001 check preparation
+	When check preparation
 
 Scenario: _201001 check filling in Store field in the document Sales order
 	* Open document form Sales order

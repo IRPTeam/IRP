@@ -34,6 +34,8 @@ Scenario: _0202200 preparation (label processing)
 		When update ItemKeys
 		When add Plugin for print label
 
+Scenario: _02022001 check preparation
+	When check preparation
 
 Scenario: _0202201 print layout creation
 	* Opening the constructor

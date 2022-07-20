@@ -170,7 +170,10 @@ Scenario: _043300 preparation (Bank payment)
 		When Create document SalesReturn objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
-		
+
+Scenario: _0433001 check preparation
+	When check preparation
+
 Scenario: _043301 check Bank payment movements by the Register "R3010 Cash on hand"
 	* Select Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"

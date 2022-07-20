@@ -107,6 +107,8 @@ Scenario: _043100 preparation (Credit note)
 				| "Documents.CreditNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
+Scenario: _0431001 check preparation
+	When check preparation
 	
 Scenario: _043101 check Credit note movements by the Register "R5010 Reconciliation statement"
 	* Select Credit note

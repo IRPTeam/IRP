@@ -37,7 +37,8 @@ Scenario: _016000 preparation
 		When  Create catalog Currencies objects
 		When update ItemKeys
 
-
+Scenario: _0160001 check preparation
+	When check preparation
 
 Scenario: _016001 base price fill (incl. VAT)
 	

@@ -113,6 +113,9 @@ Scenario: _041500 preparation (Purchase return order)
 	// 	And in the table "Info" I click "Fill movements" button
 	And I close all client application windows
 
+Scenario: _0415001 check preparation
+	When check preparation
+
 Scenario: _041501 check Purchase return order movements by the Register "R1010 Purchase orders"
 	* Select Purchase return order
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"

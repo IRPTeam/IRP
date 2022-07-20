@@ -62,6 +62,8 @@ Scenario: _060000 preparation
 	* Tax settings
 		When filling in Tax settings for company
 
+Scenario: _0600001 check preparation
+	When check preparation
 
 Scenario: _060002 create Sales invoice with the type of settlements under standard Partner terms
 	* Create Sales invoice

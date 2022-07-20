@@ -130,6 +130,10 @@ Scenario: _300301 preparation (creation item key when create Unbundling)
 		And Delay 10
 		And I close all client application windows
 
+Scenario: _3003011 check preparation
+	When check preparation
+
+
 Scenario: _300302 create Unbundling and check creation item key
 	* Filling the document header Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"

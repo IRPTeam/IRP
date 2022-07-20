@@ -97,6 +97,9 @@ Scenario: _092000 preparation (SerialLotNumbers)
 	* Workstation
 		When create Workstation
 
+Scenario: _0920001 check preparation
+	When check preparation
+
 Scenario: _092001 checkbox Use serial lot number in the Item type
 	When checkbox Use serial lot number in the Item type Clothes
 	* Check saving

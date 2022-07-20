@@ -136,7 +136,9 @@ Scenario: _0154100 preparation ( filling documents)
 	* Workstation
 		When create Workstation
 	
-	
+Scenario: _01541001 check preparation
+	When check preparation	
+
 
 Scenario: _0154135 create document Retail Sales Receipt
 	And I close all client application windows
@@ -563,6 +565,8 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 050,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I close all client application windows
+
+
 
 Scenario: _0154139 check payments form in the Point of sale
 		And I close all client application windows

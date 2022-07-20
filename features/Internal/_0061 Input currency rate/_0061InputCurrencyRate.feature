@@ -60,6 +60,8 @@ Scenario: _006100 preparation (filling in currency rates)
 		| "Forex Seling" |
 		When create setting to download the course (Forex Seling)
 
+Scenario: _0061001 check preparation
+	When check preparation
 
 Scenario: _006101 filling in exchange rates in registers
 	* Opening of register CurrencyRates

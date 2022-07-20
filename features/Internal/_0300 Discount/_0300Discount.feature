@@ -63,6 +63,8 @@ Scenario: _03000 preparation (Discount)
 	* Tax settings
 		When filling in Tax settings for company
 	
+Scenario: _0300001 check preparation
+	When check preparation
 
 Scenario: _030001 add Plugin SpecialMessage
 	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"

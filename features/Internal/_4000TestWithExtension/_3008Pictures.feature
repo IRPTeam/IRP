@@ -46,6 +46,8 @@ Scenario: _300100 preparation (image setting)
 		When Create catalog InterfaceGroups objects
 		When Create catalog Currencies objects
 
+Scenario: _3001001 check preparation
+	When check preparation 
 
 Scenario: _300101 image setting
 	* Filling in settings in  File storages info

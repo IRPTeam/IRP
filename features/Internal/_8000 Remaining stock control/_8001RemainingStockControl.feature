@@ -163,7 +163,9 @@ Scenario:_800000 preparation (remaining stock control)
 	* Workstation
 		When create Workstation
 
-		
+Scenario:_8000001 check preparation
+	When check preparation 
+
 // expense documents
 
 Scenario:_800005 check remaining stock control in the Sales order

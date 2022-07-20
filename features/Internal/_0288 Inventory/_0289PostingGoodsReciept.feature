@@ -121,7 +121,8 @@ Scenario: _028900 preparation (Goods receipt)
 			When create InventoryTransfer021030
 		And I close all client application windows
 		
-
+Scenario: _0289001 check preparation
+	When check preparation
 
 Scenario: _028901 create document Goods Receipt based on Purchase invoice (with PO, PI>PO)
 	* Select PI

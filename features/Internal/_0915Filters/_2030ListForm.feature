@@ -62,6 +62,9 @@ Scenario: _203000 preparation (List forms)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 
+Scenario: _2030001 check preparation
+	When check preparation
+
 Scenario: _0203001 check filters in the partner term catalog
 	* Check for data availability
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"

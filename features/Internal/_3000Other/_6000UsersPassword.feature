@@ -19,7 +19,8 @@ Scenario: _351000 preparation
         When Create catalog AccessProfiles objects
         When Create catalog AccessGroups objects
         
-        
+Scenario: _3510001 check preparation
+	When check preparation        
                                         
 
 Scenario: _351001 check user password setting from enterprise mode

@@ -85,7 +85,8 @@ Scenario:_800020 preparation (remaining stock control)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(1252).GetObject().Write(DocumentWriteMode.Posting);" |
 
-
+Scenario:_8000201 check preparation
+	When check preparation 
 
 Scenario:_800021 check serial lot number control in the Sales invoice 
 		And I close all client application windows

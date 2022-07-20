@@ -76,6 +76,8 @@ Scenario: _044100 preparation (Cash revenue)
 			| "Documents.CashRevenue.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
+Scenario: _0441001 check preparation
+	When check preparation
 
 Scenario: _044101 check Cash revenue movements by the Register "R3010 Cash on hand"
 	* Select Cash revenue

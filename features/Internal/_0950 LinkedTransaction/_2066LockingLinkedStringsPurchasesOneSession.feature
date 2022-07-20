@@ -85,7 +85,8 @@ Scenario: _2066001 preparation (locking linked strings)
 	And I execute 1C:Enterprise script at server
 		| "Documents.ShipmentConfirmation.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 		
-		
+Scenario: _20660011 check preparation
+	When check preparation		
 
 Scenario: _2066002 check locking header in the PO with linked documents (one session)
 	* Open PO

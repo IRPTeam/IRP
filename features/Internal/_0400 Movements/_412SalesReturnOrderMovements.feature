@@ -120,6 +120,9 @@ Scenario: _041200 preparation (Sales return order)
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I close all client application windows
 
+Scenario: _0412001 check preparation
+	When check preparation
+
 Scenario: _041201 check Sales return order movements by the Register  "R2010 Sales orders"
 	And I close all client application windows
 	* Select Sales return order

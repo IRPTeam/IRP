@@ -80,7 +80,8 @@ Scenario: _022000 preparation
 				| "$$NumberPurchaseInvoice018006$$" |
 			When create PurchaseInvoice018006 based on PurchaseOrder017003
 		
-	
+Scenario: _0220001 check preparation
+	When check preparation	
 	
 
 

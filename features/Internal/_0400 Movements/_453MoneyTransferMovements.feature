@@ -77,6 +77,8 @@ Scenario: _045300 preparation (Cash transfer order)
 			| "Documents.MoneyTransfer.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
+Scenario: _0453001 check preparation
+	When check preparation
 
 Scenario: _045301 check Money transfer movements by the Register "R3035 Cash planning" (based on CTO)
 	* Select Money transfer

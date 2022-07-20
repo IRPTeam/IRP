@@ -79,6 +79,8 @@ Scenario: _0154000 preparation
 		When filling in Tax settings for company
 		And Delay 10
 
+Scenario: _01540001 check preparation
+	When check preparation
 
 Scenario: _0154008 check autofilling the Partner term field in Purchase order
 	When create a test partner with one vendor partner term and one customer partner term

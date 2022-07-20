@@ -373,7 +373,7 @@ Scenario: _2068010 change quantity in the linked string in the Retail sales rece
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then there are lines in TestClient message log
-			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 4 . Required: 3 . Lacking: 1 .'|
+			|'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 3 . Lacking: 1 .'|
 	* Change quantity (more then RRR)
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
@@ -430,8 +430,8 @@ Scenario: _2069019 unpost Retail sales receipt with linked strings (one session)
 		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
-			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 8 . Required: 0 . Lacking: 8 .'|
-			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 4 . Required: 0 . Lacking: 4 .'|		
+			|'Line No. [1] [Dress XS/Blue] Return remaining: 8 . Required: 0 . Lacking: 8 .'|
+			|'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 0 . Lacking: 4 .' |		
 		And I close all client application windows
 
 Scenario: _2069020 delete Retail sales receipt with linked strings (one session)
@@ -450,6 +450,6 @@ Scenario: _2069020 delete Retail sales receipt with linked strings (one session)
 		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
-			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 8 . Required: 0 . Lacking: 8 .'|
-			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 4 . Required: 0 . Lacking: 4 .'|		
+			|'Line No. [1] [Dress XS/Blue] Return remaining: 8 . Required: 0 . Lacking: 8 .'|
+			|'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 0 . Lacking: 4 .' |		
 		And I close all client application windows

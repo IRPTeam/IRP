@@ -70,6 +70,7 @@ Scenario: _0050 preparation
 		When Create information register PricesByProperties records (LC)
 		When Create information register TaxSettings records (LC)
 		When Create information register UserSettings records (LC)
+		When Create catalog PaymentTypes objects
 		And Delay 10
 		When update ItemKeys (LC)
 	* Add plugin for taxes calculation
@@ -120,6 +121,10 @@ Scenario: _0050 preparation
 			| "Documents.SalesInvoice.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 	
 

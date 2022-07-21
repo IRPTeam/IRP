@@ -588,7 +588,7 @@ Scenario: _985003 test objects removel
 			| "Ob.GetObject().Delete();"|
 	* PlanningPeriods
 		And I execute 1C:Enterprise script at server
-			| "Ob = Catalogs.Workstations.Select();"|
+			| "Ob = Catalogs.PlanningPeriods.Select();"|
 			| "Ob.Next();"|
 			| "Ob.GetObject().Delete();"|
 	* PartnerItems
@@ -598,7 +598,7 @@ Scenario: _985003 test objects removel
 			| "Ob.GetObject().Delete();"|
 	* BankPayment
 		And I execute 1C:Enterprise script at server
-			| "Ob = Documents.PartnerItems.Select();"|
+			| "Ob = Documents.BankPayment.Select();"|
 			| "Ob.Next();"|
 			| "Ob.GetObject().Delete();"|
 	* BankReceipt
@@ -793,22 +793,22 @@ Scenario: _985003 test objects removel
 			| "Ob.GetObject().Delete();"|
 	* AddAttributeAndProperty
 		And I execute 1C:Enterprise script at server
-			| "Ob = ChartOfCharacteristicTypes.AddAttributeAndProperty.Select();"|
+			| "Ob = ChartsOfCharacteristicTypes.AddAttributeAndProperty.Select();"|
 			| "Ob.Next();"|
 			| "Ob.GetObject().Delete();"|
 	* IDInfoTypes
 		And I execute 1C:Enterprise script at server
-			| "Ob = ChartOfCharacteristicTypes.IDInfoTypes.Select();"|
+			| "Ob = ChartsOfCharacteristicTypes.IDInfoTypes.Select();"|
 			| "Ob.Next();"|
 			| "Ob.GetObject().Delete();"|
 	* CustomUserSettings
 		And I execute 1C:Enterprise script at server
-			| "Ob = ChartOfCharacteristicTypes.CustomUserSettings.Select();"|
+			| "Ob = ChartsOfCharacteristicTypes.CustomUserSettings.Select();"|
 			| "Ob.Next();"|
 			| "Ob.GetObject().Delete();"|
 	* CurrencyMovementType
 		And I execute 1C:Enterprise script at server
-			| "Ob = ChartOfCharacteristicTypes.CurrencyMovementType.Select();"|
+			| "Ob = ChartsOfCharacteristicTypes.CurrencyMovementType.Select();"|
 			| "Ob.Next();"|
 			| "Ob.GetObject().Delete();"|
 	

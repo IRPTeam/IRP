@@ -71,7 +71,7 @@ Scenario: _010004 create Contact info Type - Addresses
 		And Delay 5
 		And "List" table contains lines
 		| 'Description' |
-		| 'Google Addreses1'  |
+		| 'Google Addreses'  |
 
 Scenario: _0100041 check preparation
 	When check preparation

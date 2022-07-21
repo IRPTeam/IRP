@@ -4,9 +4,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		FillByDefaultAtServer();
 	EndIf;
 	PutSettingsToTempStorage();
-	SetVisible();
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
+	SetVisible();
 EndProcedure
 
 &AtServer
@@ -69,8 +69,7 @@ Procedure TestConnectionCall()
 #Else
 			CommonFunctionsClientServer.ShowUsersMessage(R().S_029);
 #EndIf
-	ElsIf
-	Not ExtensionCall_TestConnectionCall() Then
+	ElsIf Not ExtensionCall_TestConnectionCall() Then
 		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate();
 
 		For Each Str In Object.ConnectionSetting Do

@@ -179,6 +179,25 @@ Function GetMD5(Object) Export
 	Return Upper(HashSumStringUUID);
 EndFunction
 
+Procedure Pause(Time) Export
+
+    If Number(Time) < 1 Then
+    	Return;
+    EndIf;
+
+    Job = GetCurrentInfoBaseSession().GetBackgroundJob();
+
+    If Job = Undefined Then
+        Params = New Array;
+        Params.Add(Time);
+        MethodName = "CommonFunctionsServer.Pause";
+        Job = ConfigurationExtensions.ExecuteBackgroundJobWithoutExtensions(MethodName, Params);
+    EndIf;
+
+    Job.WaitForExecutionCompletion(Time);
+
+EndProcedure
+
 #Region QueryBuilder
 
 Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export

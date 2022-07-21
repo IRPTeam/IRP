@@ -51,7 +51,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|			THEN TRUE
 	|		ELSE FALSE
 	|	END AS SalesInvoiceIsFilled,
-	|	SalesReturnItemList.SalesInvoice AS SalesInvoice
+	|	SalesReturnItemList.SalesInvoice AS SalesInvoice,
+	|	SalesReturnItemList.SalesInvoice.Company AS SalesInvoice_Company
 	|FROM
 	|	Document.SalesReturn.ItemList AS SalesReturnItemList
 	|WHERE
@@ -65,6 +66,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	SalesReturnItemList.Key,
 	|	SalesReturnItemList.Ref.Currency,
 	|	SalesReturnItemList.SalesInvoice,
+	|	SalesReturnItemList.SalesInvoice.Company,
 	|	CASE
 	|		WHEN NOT SalesReturnItemList.SalesInvoice.Ref IS NULL
 	|		AND SalesReturnItemList.SalesInvoice REFS Document.SalesInvoice
@@ -78,8 +80,19 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	BatchesInfo   = QueryResults[0].Unload();
 	BatchKeysInfo = QueryResults[1].Unload();
-		
-	If Not BatchKeysInfo.FindRows(New Structure("SalesInvoiceIsFilled", False)).Count() Then
+	
+	DontCreateBatch = True;
+	For Each BatchKey In BatchKeysInfo Do
+		If Not BatchKey.SalesInvoiceIsFilled Then
+			DontCreateBatch = False; // need create batch, invoice is empty
+			Break;
+		EndIf;
+		If BatchKey.Company <> BatchKey.SalesInvoice_Company Then 
+			DontCreateBatch = False; // need create batch, company in invoice and in return not match
+			Break;
+		EndIf; 
+	EndDo;
+	If DontCreateBatch Then
 		BatchesInfo.Clear();
 	EndIf;
 	

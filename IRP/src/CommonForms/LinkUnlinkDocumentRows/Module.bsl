@@ -4,7 +4,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.SelectedRowInfo.SelectedRow <> Undefined Then
 		ThisObject.CurrentLineNumber = Parameters.SelectedRowInfo.SelectedRow.LineNumber;
 	EndIf;
-	//#1296
+	
 	If Parameters.SelectedRowInfo.Property("ArrayOfFilterExcludeFields") Then
 		ThisObject.ArrayOfFilterExcludeFields = StrConcat(Parameters.SelectedRowInfo.ArrayOfFilterExcludeFields, ",");
 	EndIf;
@@ -189,13 +189,8 @@ Procedure FillResultsTree(SelectedRow)
 			FillPropertyValues(BasisesTable.Add(), Row);
 		EndIf;
 	EndDo;
-	//#1296
-	//TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
 	TreeReverseInfo = RowIDInfoPrivileged.CreateBasisesTreeReverse(BasisesTable);
 
-	//#1296
-	//RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
-	//	ThisObject.ResultsTree.GetItems());
 	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
 		ThisObject.ResultsTree.GetItems());
 
@@ -204,7 +199,6 @@ Procedure FillResultsTree(SelectedRow)
 	ThisObject.ShippingReceipt = False;
 
 	SetAlreadyLinkedInfo(ThisObject.ResultsTree.GetItems(), SelectedRow.Key);
-	//#1296
 	FillVisibleFields(ThisObject.ResultsTree, "ResultsTree");
 EndProcedure
 
@@ -213,22 +207,12 @@ Procedure FillBasisesTree(SelectedRowInfo)
 	ThisObject.BasisesTree.GetItems().Clear();
 
 	BasisesTable = CreateBasisesTable(SelectedRowInfo);
-	
-	//#1296
-	//TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
 	TreeReverseInfo = RowIDInfoPrivileged.CreateBasisesTreeReverse(BasisesTable);
-
-	//#1296
-	//RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
-	//	ThisObject.BasisesTree.GetItems());
 	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
 		ThisObject.BasisesTree.GetItems());
-		
-	//#1296
 	FillVisibleFields(ThisObject.BasisesTree, "BasisesTree");
 EndProcedure
 
-//#1296
 &AtServer
 Procedure FillVisibleFields(Tree, TreeName)
 	If ThisObject.VisibleFields <> Undefined Then
@@ -250,12 +234,8 @@ Function GetFillingValues()
 	BasisesTable = ThisObject.ResultsTable.Unload();
 	AddInfo = New Structure();
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "IsLinkRows", True);
-	//#1296
-	//ExtractedData = RowIDInfoServer.ExtractData(BasisesTable, ThisObject.MainFilter.Ref, AddInfo);
-	//FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);	
 	ExtractedData = RowIDInfoPrivileged.ExtractData(BasisesTable, ThisObject.MainFilter.Ref, AddInfo);
-	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);
-	
+	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);	
 	Return FillingValues;
 EndFunction
 
@@ -466,8 +446,6 @@ Function CreateBasisesTable(SelectedRowInfo)
 		EndDo;
 	EndIf;
 
-	//#1296
-	//BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
 	BasisesTable = RowIDInfoPrivileged.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
 
 	AlreadyLinkedRows = ThisObject.ResultsTable.FindRows(New Structure("Key", SelectedRowInfo.SelectedRow.Key));

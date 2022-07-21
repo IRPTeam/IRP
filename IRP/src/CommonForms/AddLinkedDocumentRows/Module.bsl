@@ -6,7 +6,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.SetAllCheckedOnOpen = Parameters.SetAllCheckedOnOpen;
 	EndIf;
 	
-	//#1296
 	If Parameters.Filter.Property("VisibleFields") Then
 		ThisObject.VisibleFields = Parameters.Filter.VisibleFields;	
 	EndIf;
@@ -43,19 +42,11 @@ EndProcedure
 &AtServer
 Procedure FillBasisesTree()
 	ThisObject.BasisesTree.GetItems().Clear();
-	//#1296
-	//BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, ThisObject.MainFilter);
 	BasisesTable = RowIDInfoPrivileged.GetBasises(ThisObject.MainFilter.Ref, ThisObject.MainFilter);
-
-	//#1296
-	//TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
-	//RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
-	//	ThisObject.BasisesTree.GetItems());		
 	TreeReverseInfo = RowIDInfoPrivileged.CreateBasisesTreeReverse(BasisesTable);
 	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
 		ThisObject.BasisesTree.GetItems());
 		
-	//#1296
 	If ThisObject.VisibleFields <> Undefined Then
 		RowIDInfoPrivileged.FillVisibleFields(ThisObject.BasisesTree, ThisObject.VisibleFields); 
 		For Each Field In ThisObject.VisibleFields Do
@@ -86,12 +77,8 @@ EndProcedure
 Function GetFillingValues()
 	ThisObject.ResultsTable.Clear();
 	CollectResultTableRecursive(ThisObject.BasisesTree.GetItems());
-	//#1296
-	//ExtractedData = RowIDInfoServer.ExtractData(ThisObject.ResultsTable.Unload(), ThisObject.MainFilter.Ref);
-	//FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);
 	ExtractedData = RowIDInfoPrivileged.ExtractData(ThisObject.ResultsTable.Unload(), ThisObject.MainFilter.Ref);
-	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);
-	
+	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);	
 	Return FillingValues;
 EndFunction
 

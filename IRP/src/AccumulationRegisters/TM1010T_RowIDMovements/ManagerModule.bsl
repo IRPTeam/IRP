@@ -1,19 +1,6 @@
 
-//#1296
-//Function GetLockFieldNames() Export
-//	Return "RowRef, RowID, Step, Basis, BasisKey";
-//EndFunction
-
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
-
-//	If Not RowIDInfoServer.LinkedRowsIntegrityIsEnable() Then
-//		Return True;
-//	EndIf;
-	
-//	TempTablesManager = New TempTablesManager();
-	
 	Query = New Query();
-//	Query.TempTablesManager = TempTablesManager;
 	Query.Text = 
 	"SELECT
 	|	Records.RowRef,
@@ -21,7 +8,6 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	Records.Step,
 	|	Records.Basis,
 	|	Records.BasisKey,
-//	|	Records.RowRef.ItemKey AS ItemKey,
 	|	Records.Quantity
 	|INTO Records_InDocument
 	|FROM
@@ -44,7 +30,6 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	Records.Step,
 	|	Records.Basis,
 	|	Records.BasisKey,
-//	|	Records.RowRef.ItemKey AS ItemKey,
 	|	Records.Quantity
 	|INTO Records_Exists
 	|FROM
@@ -182,7 +167,6 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	Query.SetParameter("Records_Exists", Records_Exists);
 	Query.SetParameter("Unposting", Unposting);
 
-//	Query.SetParameter("Unposting", Unposting);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 

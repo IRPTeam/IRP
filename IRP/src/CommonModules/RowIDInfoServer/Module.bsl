@@ -36,23 +36,34 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		Is = Is(Source);
 		If Is.SI Or Is.PI Or Is.RSR Then
 			Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
-			//#1296
 			If Is.RSR Then
 				Records_InDocument = GetRecordsInDocument_TM1010T_RSR(Source);
 				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Receipt);
 				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);
 			EndIf;
+			
+			If Is.SI Then
+				Records_InDocument = GetRecordsInDocument_TM1010T_SR_RRR(Source);
+				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Receipt);
+				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);				
+			EndIf;
 		EndIf;
 
 		If Is.SR Or Is.SRO Or Is.PR Or Is.PRO Or Is.RRR Then
 			Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode);
-			//#1296
 			If Is.RRR Then
-				Records_InDocument = GetRecordsInDocument_TM1010T_RRR(Source);
-				ItemList_InDocument = GetItemListInDocument_RRR(Source);
+				Records_InDocument = GetRecordsInDocument_TM1010T_SR_RRR(Source);
+				ItemList_InDocument = GetItemListInDocument_SR_RRR(Source);
 				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
 				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
 			EndIf;
+			
+			If Is.SR Then
+				Records_InDocument = GetRecordsInDocument_TM1010T_SR_RRR(Source);
+				ItemList_InDocument = GetItemListInDocument_SR_RRR(Source);
+				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
+				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
+			EndIf;			
 		EndIf;
 	EndIf;
 EndProcedure
@@ -72,9 +83,8 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	
 	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);
 	
-	//#1296
 	Is = Is(Source);
-	If Not Cancel And (Is.RSR Or Is.RRR) Then
+	If Not Cancel And (Is.RSR Or Is.RRR Or Is.SI Or Is.SR) Then
 		Source.RegisterRecords.TM1010T_RowIDMovements.Clear();
 		Source.RegisterRecords.TM1010T_RowIDMovements.Write();
 	
@@ -85,11 +95,25 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 		EndIf;
 
 		If Is.RRR Then
-			Records_InDocument = GetRecordsInDocument_TM1010T_RRR(Source);
-			ItemList_InDocument = GetItemListInDocument_RRR(Source);
+			Records_InDocument = GetRecordsInDocument_TM1010T_SR_RRR(Source);
+			ItemList_InDocument = GetItemListInDocument_SR_RRR(Source);
 			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
 			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
 		EndIf;
+
+		If Is.SI Then
+			Records_InDocument = GetRecordsInDocument_TM1010T_SI(Source);
+			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Receipt);
+			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);
+		EndIf;
+
+		If Is.SR Then
+			Records_InDocument = GetRecordsInDocument_TM1010T_SR_RRR(Source);
+			ItemList_InDocument = GetItemListInDocument_SR_RRR(Source);
+			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
+			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
+		EndIf;
+		
 	EndIf;
 EndProcedure
 
@@ -310,20 +334,17 @@ Procedure CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocumen
 	EndIf;
 EndProcedure
 
-//#1296
 Procedure CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting)
 	If Not LinkedRowsIntegrityIsEnable() Then
 		Return;
 	EndIf;
 	
 	If Not Cancel And Not AccumulationRegisters.TM1010T_RowIDMovements.CheckBalance(Source.Ref, ItemList_InDocument,
-		Records_InDocument, Records_Exists, RecordType, Unposting) Then
-																	
+		Records_InDocument, Records_Exists, RecordType, Unposting) Then											
 		Cancel = True;
 	EndIf;
 EndProcedure
 
-//#1296
 Function GetRecordsExists_TM1010T(Source, RecordType)
 	Query = New Query();
 	Query.Text = 
@@ -349,8 +370,7 @@ Function GetRecordsExists_TM1010T(Source, RecordType)
 	Return QueryTable;
 EndFunction
 
-//#1296
-Function GetRecordsInDocument_TM1010T_RRR(Source)
+Function GetRecordsInDocument_TM1010T_SR_RRR(Source)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -367,7 +387,6 @@ Function GetRecordsInDocument_TM1010T_RRR(Source)
 	Return QueryTable;
 EndFunction
 
-//#1296
 Function GetRecordsInDocument_TM1010T_RSR(Source)
 	Query = New Query();
 	Query.Text = 
@@ -386,8 +405,25 @@ Function GetRecordsInDocument_TM1010T_RSR(Source)
 	Return QueryTable;
 EndFunction
 
-//#1296
-Function GetItemListInDocument_RRR(Source)
+Function GetRecordsInDocument_TM1010T_SI(Source)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	VALUE(Catalog.MovementRules.SR) AS Step,
+	|	RowIDInfo.Key AS BasisKey,
+	|	RowIDInfo.Ref AS Basis,
+	|	*
+	|FROM
+	|	Document.%1.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref";
+	Query.Text = StrTemplate(Query.Text, Source.Metadata().Name);
+	Query.SetParameter("Ref", Source.Ref);
+	QueryTable = Query.Execute().Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetItemListInDocument_SR_RRR(Source)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -1467,15 +1503,14 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	Is = Is(Source);
 	If Is.SC And Is(RowRefObject.Basis).ISR Then
 		FillPropertyValues(RowRefObject, RowItemList, , "Store");
-	ElsIf Is.RRR Then //#1296
+	ElsIf Is.RRR Or Is.SR Then
 		FillPropertyValues(RowRefObject, RowItemList, , "Store");
 		RowRefObject.StoreReturn = RowItemList.Store;
 	Else
 		FillPropertyValues(RowRefObject, RowItemList);
 	EndIf;
 	
-	//#1296
-	If Is.RRR Then
+	If Is.RRR Or Is.SR Then
 		FillPropertyValues(RowRefObject, Source, , "Company, Branch");
 	Else
 		FillPropertyValues(RowRefObject, Source);
@@ -1484,8 +1519,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	RowRefObject.RowID       = Row.RowID;
 	RowRefObject.Description = Row.RowID;
 	
-	//#1296
-	If Is.RRR Then
+	If Is.RRR Or Is.SR Then
 		RowRefObject.CompanyReturn = Source.Company;
 		RowRefObject.BranchReturn = Source.Branch;
 	EndIf;
@@ -4418,7 +4452,7 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	EndIf;
 
 	If FilterSets.RSR_ForRRR Then
-		ApplyFilterSet_RSR_ForRRR(Query); //#1296 ???
+		ApplyFilterSet_RSR_ForRRR(Query);
 		QueryArray.Add(GetDataByFilterSet_RSR_ForRRR());
 	EndIf;
 EndProcedure
@@ -5026,12 +5060,15 @@ Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
+	//|				ELSE FALSE
+	|				ELSE TRUE
+	|
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Branch
 	|					THEN RowRef.Branch = &Branch
-	|				ELSE FALSE
+	//|				ELSE FALSE
+	|				ELSE TRUE
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_PartnerSales
@@ -7164,19 +7201,13 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
-	//#1296
-	//|				ELSE FALSE
 	|				ELSE TRUE
-	//
 	|
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Branch
 	|					THEN RowRef.Branch = &Branch
-	//#1296
-	//|				ELSE FALSE
 	|				ELSE TRUE
-	//
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_PartnerSales
@@ -7839,10 +7870,13 @@ Function GetNotRefilingColumns(ObjectType)
 	ArrayOfColumns.Add(Upper("ItemList.ExpenseType"));
 	Map.Insert(Type("DocumentRef.StockAdjustmentAsWriteOff"), ArrayOfColumns);
 	
-	//#1296
 	ArrayOfColumns = New Array();
 	ArrayOfColumns.Add(Upper("ItemList.Store"));
 	Map.Insert(Type("DocumentRef.RetailReturnReceipt"), ArrayOfColumns);
+	
+	ArrayOfColumns = New Array();
+	ArrayOfColumns.Add(Upper("ItemList.Store"));
+	Map.Insert(Type("DocumentRef.SalesReturn"), ArrayOfColumns);
 	
 	Return Map.Get(ObjectType);
 EndFunction
@@ -8765,8 +8799,13 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	Query.SetParameter("BasisesTable", BasisesTable);
 	Query.SetParameter("RowIDInfo", RowIDInfoTable);
 	Query.SetParameter("ItemList", ItemListTable);
-	//#1296
-	Query.SetParameter("Filter_Store", Not Is(Object).RRR);
+
+	Is = Is(Object);
+	If Is.RRR Or Is.SR Then
+		Query.SetParameter("Filter_Store", False);
+	Else
+		Query.SetParameter("Filter_Store", True);
+	EndIf;
 	
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();

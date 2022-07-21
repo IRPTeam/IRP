@@ -565,7 +565,6 @@ EndProcedure
 
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
-	//#1296
 	ArrayOfFilterExcludeFields = New Array();
 	ArrayOfFilterExcludeFields.Add("Store");
 	FormParameters = New Structure();

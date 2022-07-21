@@ -71,9 +71,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|		ELSE FALSE
 	|	END AS SalesInvoiceIsFilled,
 	|	RetailReturnReceiptItemList.RetailSalesReceipt AS SalesInvoice,
-	//#1296
 	|	RetailReturnReceiptItemList.RetailSalesReceipt.Company AS SalesInvoice_Company
-	//#1296
 	|FROM
 	|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
 	|WHERE
@@ -92,9 +90,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|		ELSE FALSE
 	|	END,
 	|	RetailReturnReceiptItemList.RetailSalesReceipt,
-	//#1296
 	|	RetailReturnReceiptItemList.RetailSalesReceipt.Company,
-	//#1296
 	|	VALUE(Enum.BatchDirection.Receipt)";
 	
 	Query.SetParameter("Ref", Ref);
@@ -102,7 +98,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	BatchesInfo   = QueryResults[0].Unload();
 	BatchKeysInfo = QueryResults[1].Unload();
-	//#1296
+
 	DontCreateBatch = True;
 	For Each BatchKey In BatchKeysInfo Do
 		If Not BatchKey.SalesInvoiceIsFilled Then
@@ -117,10 +113,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	If DontCreateBatch Then
 		BatchesInfo.Clear();
 	EndIf;
-	
-//	If Not BatchKeysInfo.FindRows(New Structure("SalesInvoiceIsFilled", False)).Count() Then
-//		BatchesInfo.Clear();
-//	EndIf;
 	
 	// AmountTax to T6020S_BatchKeysInfo
 	Query = New Query();

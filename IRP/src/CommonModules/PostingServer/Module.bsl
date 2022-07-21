@@ -1212,16 +1212,5 @@ Function Exists_R4014B_SerialLotNumber() Export
 		|WHERE
 		|	R4014B_SerialLotNumber.Recorder = &Ref";
 EndFunction
-
-//#1296
-//Function Exists_TM1010T_RowIDMovements() Export
-//	Return
-//		"SELECT *
-//		|	INTO Exists_TM1010T_RowIDMovements
-//		|FROM
-//		|	AccumulationRegister.TM1010T_RowIDMovements AS TM1010T_RowIDMovements
-//		|WHERE
-//		|	TM1010T_RowIDMovements.Recorder = &Ref";
-//EndFunction	
 	
 #EndRegion

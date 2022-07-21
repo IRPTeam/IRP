@@ -74,7 +74,8 @@ Scenario: _300600 preparation (data multi-language)
 					And I click "Save and close" button
 				And I close TestClient session
 
-
+Scenario: _3006001 check preparation
+	When check preparation
 
 Scenario: _300601 display check Description tr
 	Given I open hyperlink "e1cib/list/Catalog.Items"

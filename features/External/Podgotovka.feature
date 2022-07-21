@@ -1653,3 +1653,10 @@ Scenario: add Plugin for document discount
 			And I select current line in "List" table
 			And I click "Save and close" button
 		And I close all client application windows
+
+Scenario: check preparation
+	* Check preparation
+		Try
+			And the previous scenario executed successfully
+		Except
+			Then I stop the execution of scripts for this feature

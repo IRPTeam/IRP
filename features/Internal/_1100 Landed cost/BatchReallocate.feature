@@ -122,6 +122,8 @@ Scenario: _0050 preparation
 			| "Documents.SalesInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 	
+Scenario: _00501 check preparation
+	When check preparation
 
 Scenario: _0052 create Calculation movements cost (batch reallocate)
 	And I close all client application windows

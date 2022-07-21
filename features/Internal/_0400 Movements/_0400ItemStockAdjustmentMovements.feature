@@ -88,10 +88,8 @@ Scenario: _040001 preparation (item stock adjustment movements)
 		And I close all client application windows
 		
 
-		
-				
-				
-		
+Scenario: _0400011 check preparation
+	When check preparation		
 				
 
 

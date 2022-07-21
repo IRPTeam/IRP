@@ -90,7 +90,9 @@ Scenario: _050000 preparation (Cash receipt)
 	When Create document PurchaseReturn objects (creation based on)
 	And I execute 1C:Enterprise script at server
  			| "Documents.PurchaseReturn.FindByNumber(351).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+
+Scenario: _0500001 check preparation
+	When check preparation	
 
 Scenario: _050001 create Cash receipt based on Sales invoice
 	* Open list form Sales invoice and select SI №1

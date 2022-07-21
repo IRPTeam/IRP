@@ -207,6 +207,9 @@ Scenario: _0205001 preparation (commands)
 				| "VAExtension" |
 			When add VAExtension
 
+Scenario: _02050011 check preparation
+	When check preparation
+
 Scenario: _0205002 add test command to the list of documents Sales return
 	* Open Command register
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"

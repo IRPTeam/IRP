@@ -57,6 +57,9 @@ Scenario: _300700 preparation (add items to documents by barcode)
 	* Tax settings
 		When filling in Tax settings for company
 
+Scenario: _3007001 check preparation
+	When check preparation
+
 Scenario: _300701 barcode check in Sales order + price and tax filling
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	When check the barcode search in the sales documents + price and tax filling in

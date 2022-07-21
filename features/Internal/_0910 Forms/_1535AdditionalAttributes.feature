@@ -82,7 +82,8 @@ Scenario: _0153500 preparation
 	* Tax settings
 		When filling in Tax settings for company
 
-
+Scenario: _01535001 check preparation
+	When check preparation
 
 
 Scenario: _0154001 check that additional attributes and properties are displayed on the form without reopening (catalog Item key)

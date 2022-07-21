@@ -84,7 +84,8 @@ Scenario: _024000 preparation (Sales invoice)
 		| "Documents.ShipmentConfirmation.FindByNumber(1111).GetObject().Write(DocumentWriteMode.Posting);" |
 
 	
-
+Scenario: _0240001 check preparation
+	When check preparation
 
 
 

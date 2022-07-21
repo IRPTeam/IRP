@@ -259,6 +259,9 @@ Scenario: _041 test data
 		And Delay "5"
 	And I close all client application windows
 
+Scenario: _0411 check preparation
+	When check preparation
+
 Scenario: _042 check additional cost allocation (documents, by quantity)
 	Given I open hyperlink "e1cib/app/Report.BatchBalance"
 	And I click "Change option..." button

@@ -170,7 +170,9 @@ Scenario: _041300 preparation (Sales return)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(109).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
-	
+
+Scenario: _0413001 check preparation
+	When check preparation	
 
 Scenario: _041301 check Sales return movements by the Register "R5010 Reconciliation statement"
 	* Select Sales return

@@ -67,6 +67,9 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(503).GetObject().Write(DocumentWriteMode.Posting);" |
 
+Scenario: _0292001 check preparation
+	When check preparation
+
 Scenario: _029201 create Purchase order based on Sales order
 	* Create Purchase order based on Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"

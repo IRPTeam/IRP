@@ -248,7 +248,8 @@ Scenario: _3001000 preparation
 					And I save the window as "$$PurchaseInvoice30010002$$"
 					And I click the button named "FormPostAndClose"
 
-
+Scenario: _30010001 check preparation
+	When check preparation
 
 
 Scenario: _3001001 check the form of selection of items in the document StockAdjustmentAsWriteOff

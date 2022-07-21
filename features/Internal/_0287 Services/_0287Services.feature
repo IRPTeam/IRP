@@ -57,6 +57,10 @@ Scenario: _029100 preparation
 	* Tax settings
 		When filling in Tax settings for company
 
+Scenario: _0291001 check preparation
+	When check preparation	
+
+
 Scenario: _029101 create item type for services
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
 	And I click the button named "FormCreate"

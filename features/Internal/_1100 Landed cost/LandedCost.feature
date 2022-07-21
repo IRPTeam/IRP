@@ -237,6 +237,8 @@ Scenario: _001 test data
 		And Delay "5"
 	And I close all client application windows
 
+Scenario: _0011 check preparation
+	When check preparation
 
 Scenario: _002 creating Calculation movement costs
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"

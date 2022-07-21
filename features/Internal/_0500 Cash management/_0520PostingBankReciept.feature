@@ -106,7 +106,8 @@ Scenario:  _052001 preparation (Bank receipt)
 	And I execute 1C:Enterprise script at server		 
 		| "Documents.CashStatement.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
 	
-
+Scenario: _0520011 check preparation
+	When check preparation
 
 Scenario: _052001 create Bank receipt based on Sales invoice
 	* Open list form Sales invoice and select SI №1

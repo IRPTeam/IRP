@@ -60,6 +60,8 @@ Scenario: _054100 preparation (Money transfer)
 			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
+Scenario: _0541001 check preparation
+	When check preparation
 
 Scenario: _054101 filling Money transfer (same currency and account type)
 	And I close all client application windows

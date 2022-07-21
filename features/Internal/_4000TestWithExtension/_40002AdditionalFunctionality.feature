@@ -42,6 +42,8 @@ Scenario: _4000200 preparation
 			When add Additional Functionality extension
 	When create Workstation				
 
+Scenario: _40002001 check preparation
+	When check preparation 
 
 Scenario: _4000201 driver install
 	Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"

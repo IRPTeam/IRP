@@ -178,7 +178,8 @@ Scenario: _1003000 preparation (customers advances closing)
 			| "Documents.CustomersAdvancesClosing.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
-
+Scenario: _10030001 check preparation
+	When check preparation
 
 
 Scenario: _1003002 create CustomersAdvancesClosing

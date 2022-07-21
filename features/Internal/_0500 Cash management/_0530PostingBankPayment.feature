@@ -91,6 +91,8 @@ Scenario: _053000 preparation (Bank payment)
 	And I execute 1C:Enterprise script at server
  			| "Documents.SalesReturn.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
 
+Scenario: _0530001 check preparation
+	When check preparation
 
 Scenario: _053001 create Bank payment based on Purchase invoice
 	* Open list form Purchase invoice and select PI №1

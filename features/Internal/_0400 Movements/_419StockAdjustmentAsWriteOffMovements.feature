@@ -76,7 +76,9 @@ Scenario: _041900 preparation (StockAdjustmentAsWriteOff)
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+
+Scenario: _0419001 check preparation
+	When check preparation	
 
 Scenario: _041901 check Stock adjustment as write off movements by the Register  "R4010 Actual stocks"
 	* Select Stock adjustment as write off

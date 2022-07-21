@@ -94,6 +94,8 @@ Scenario: _2065001 preparation (locking linked strings)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PlannedReceiptReservation.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);" |
 
+Scenario: _20650011 check preparation
+	When check preparation
 
 Scenario: _20650011 Info linked documents row
 	And I close all client application windows

@@ -79,7 +79,8 @@ Scenario: _0154000 preparation
 	* Tax settings
 		When filling in Tax settings for company
 
-
+Scenario: _01540001 check preparation
+	When check preparation
 
 		
 Scenario: _0154050 check item and item key input by search in line in a document Sales order (in english)

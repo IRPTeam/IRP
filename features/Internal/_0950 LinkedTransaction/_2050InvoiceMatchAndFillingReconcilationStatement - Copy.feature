@@ -302,6 +302,8 @@ Scenario: _2050001 preparation
 				| "$$NumberSalesReturn30001$$" |
 			When create SalesReturn30001
 	
+Scenario: _20500011 check preparation
+	When check preparation
 
 Scenario: 2050002 check filling in Reconcilation statement
 	* Open a creation form Reconcilation statement

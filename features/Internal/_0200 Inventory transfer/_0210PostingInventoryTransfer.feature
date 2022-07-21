@@ -58,6 +58,9 @@ Scenario: _0201000 preparation
 			| "Documents.InventoryTransferOrder.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
+Scenario: _02010001 check preparation
+	When check preparation
+
 Scenario: _0201001 create IT based on ITO
 	* Select ITO
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"

@@ -108,6 +108,9 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(1205).GetObject().Write(DocumentWriteMode.Posting);" |
 
+Scenario: _0425001 check preparation
+	When check preparation
+
 Scenario: _042501 check Retail return receipt movements by the Register  "R4010 Actual stocks"
 	* Select Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"

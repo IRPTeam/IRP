@@ -63,7 +63,8 @@ Scenario: _080000 preparation (Incoming payment order and Outgoing payment order
 			| 'Begin of the next month' |
 		And I close all client application windows
 
-		
+Scenario: _0800001 check preparation
+	When check preparation		
 		
 
 Scenario: _080001 create Incoming payment order

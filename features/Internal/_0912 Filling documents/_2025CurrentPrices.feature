@@ -61,6 +61,9 @@ Scenario: _01202501 preparation
 		And I finish line editing in "ItemKeyList" table
 		And I click the button named "FormPostAndClose"
 
+Scenario: _012025011 check preparation
+	When check preparation
+
 Scenario: _01202502 check current price in the Sales order
 	* Open Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"

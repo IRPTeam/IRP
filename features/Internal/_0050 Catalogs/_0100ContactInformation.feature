@@ -73,12 +73,8 @@ Scenario: _010004 create Contact info Type - Addresses
 		| 'Description' |
 		| 'Google Addreses'  |
 
-Scenario: check preparation
-	* Check preparation
-		Try
-			And the previous scenario executed successfully
-		Except
-			Then I stop all scripts execution
+Scenario: _0100041 check preparation
+	When check preparation
 
 Scenario: _010005 verification of UNIQ ID uniqueness control in IDInfoTypes
 	* Create one more item with ID Adr_10

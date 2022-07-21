@@ -8,6 +8,9 @@ Functionality: Goods receipt - Sales return
 Variables:
 import "Variables.feature"
 
+Background:
+	Given I launch TestClient opening script or connect the existing one
+
 Scenario: _028400 preparation (GR-SR)
 	When set True value to the constant
 	And I close TestClient session
@@ -59,6 +62,10 @@ Scenario: _028400 preparation (GR-SR)
 		| "Documents.GoodsReceipt.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 		| "Documents.GoodsReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"  |
+
+Scenario: _0284001 check preparation
+	When check preparation
+
 
 Scenario: _028401 create GR with transaction type return from customer and create Sales return
 	* Open form Goods receipt

@@ -72,7 +72,8 @@ Scenario: _2068001 preparation (locking linked strings)
 	And I execute 1C:Enterprise script at server
 		| "Documents.StockAdjustmentAsWriteOff.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
 	
-
+Scenario: _20680011 check preparation
+	When check preparation
 
 Scenario: _2068002 check locking header in the PhysicalInventory with linked documents (one session)
 	* Open PhysicalInventory

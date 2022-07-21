@@ -47,6 +47,8 @@ Scenario: _206200 preparation
 				| 'Test02'  |
 		And I close all client application windows
 		
+Scenario: _2062001 check preparation
+	When check preparation
 
 Scenario: _206201 duplicate check (multi language catalog)
 	* Add settings for duplicate check

@@ -107,7 +107,8 @@ Scenario: _04022 preparation (Inventory transfer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 
-
+Scenario: _040221 check preparation
+	When check preparation
 
 Scenario: _0402301 check Inventory transfer movements by the Register  "R4050 Stock inventory"
 	* Select Inventory transfer

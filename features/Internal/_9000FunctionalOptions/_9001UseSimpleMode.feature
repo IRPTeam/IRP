@@ -32,6 +32,8 @@ Scenario: _900000 preparation
 		Then the number of "CompanyTaxes" table lines is "равно" 0
 	And I close all client application windows
 		
+Scenario: _900001 check preparation
+	When check preparation
 
 Scenario: _900001 create items
 	* Create Product 1

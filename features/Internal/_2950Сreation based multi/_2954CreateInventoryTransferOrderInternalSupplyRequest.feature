@@ -269,7 +269,10 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 			And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 
+Scenario: _0905001 check preparation
+	When check preparation
 
+	
 Scenario: _295401 check filling in Inventory transfer order when creating based on two Internal supply requests with the same warehouse
 	* Select InternalSupplyRequest
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"

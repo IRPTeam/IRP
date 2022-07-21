@@ -53,7 +53,8 @@ Scenario: _054000 preparation (Cash transfer order)
 		When filling in Tax settings for company
 	
 	
-	
+Scenario: _0540001 check preparation
+	When check preparation	
 
 
 Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Bank accounts in the same currency)

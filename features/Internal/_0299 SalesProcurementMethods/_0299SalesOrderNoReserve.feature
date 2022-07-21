@@ -56,6 +56,10 @@ Scenario: _029900 preparation (create Sales order without reserve)
 	* Tax settings
 		When filling in Tax settings for company
 
+
+Scenario: _0299001 check preparation
+	When check preparation
+
 Scenario: _029901 create Sales order without reserve and check its movements (SO-SI)
 	And I close all client application windows
 	* Open form for create order

@@ -29,6 +29,9 @@ Scenario: _0297000 preparation
 		When Create catalog Companies objects (own Second company)
 		When update ItemKeys
 
+Scenario: _02970001 check preparation
+	When check preparation
+
 Scenario: _0297001 create Item stock adjustment
 	Given I open hyperlink 'e1cib/list/Document.ItemStockAdjustment'
 	And I click the button named "FormCreate"

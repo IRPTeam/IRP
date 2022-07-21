@@ -55,6 +55,10 @@ Scenario: _029600 preparation (Unbundling)
 	* Tax settings
 		When filling in Tax settings for company
 
+Scenario: _0296001 check preparation
+	When check preparation
+
+
 Scenario: _029601 create Unbundling on a product with a specification (specification created in advance, Store does not use Shipment confirmation and Goods receipt)
 # the fill button on the specification. The specification specifies all additional properties
 	Given I open hyperlink "e1cib/list/Document.Unbundling"

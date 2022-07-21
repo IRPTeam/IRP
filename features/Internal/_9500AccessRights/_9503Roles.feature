@@ -30,7 +30,8 @@ Scenario: 950300 preparation
 		And I click "Save and close" button
 		And I close all client application windows
 		
-
+Scenario: 9503001 check preparation
+	When check preparation
 
 Scenario: 950303 check adding user in the access group with several profiles (role combination)
 	* Add test user to the Run client AccessGroup

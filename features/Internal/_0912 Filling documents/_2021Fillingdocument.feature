@@ -398,6 +398,8 @@ Scenario: _0154100 preparation ( filling documents)
 				| "$$NumberPurchaseInvoice30004$$" |
 			When create purchase invoice without order (Vendor Ferron, USD)
 
+Scenario: _01541001 check preparation
+	When check preparation
 
 Scenario: _0154101 check filling in and refilling Sales order
 	And I close all client application windows

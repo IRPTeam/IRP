@@ -65,7 +65,8 @@ Scenario: _042700 preparation (Unbundling)
 		And I execute 1C:Enterprise script at server
 			| "Documents.Unbundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 
-	
+Scenario: _0427001 check preparation
+	When check preparation	
 
 Scenario: _042701 check Unbundling movements by the Register  "R4010 Actual stocks"
 	* Select Unbundling

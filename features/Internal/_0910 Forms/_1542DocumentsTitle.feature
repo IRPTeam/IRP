@@ -72,6 +72,9 @@ Scenario: _020200 preparation
 			| "$$NumberSalesInvoice024016$$" |
 			When create SalesInvoice024016 (Shipment confirmation does not used)
 
+Scenario: _0202001 check preparation
+	When check preparation
+
 Scenario: _018025 check the display of the header of the collapsible group in Purchase Order
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	When check the display of the header of the collapsible group in sales, purchase and return documents

@@ -67,6 +67,8 @@ Scenario: _099100 preparation
 		When filling in Tax settings for company
 	When Create chart of characteristic types AccountingExtraDimensionTypes objects
 	
+Scenario: _0991001 check preparation
+	When check preparation
 
 Scenario: _099101 filling accounting operation
 		And I close all client application windows

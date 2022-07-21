@@ -165,6 +165,10 @@ Scenario:_700000 preparation (procurement data proccessor)
 		And I click "Post and close" button
 		And I close all client application windows
 
+Scenario:_7000001 check preparation
+	When check preparation 
+
+
 Scenario:_700001 procurement data proccessor form
 	Given I open hyperlink "e1cib/app/DataProcessor.Procurement"
 	Then the form attribute named "Company" became equal to ""

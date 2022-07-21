@@ -119,7 +119,8 @@ Scenario: _045400 preparation (CashStatement)
 			| "Documents.CashStatement.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
-
+Scenario: _0454001 check preparation
+	When check preparation
 
 Scenario: _045401 check CashStatement movements by the Register  "R3010 Cash on hand"
 		And I close all client application windows

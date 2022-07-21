@@ -58,7 +58,9 @@ Scenario: _017000 preparation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	
+
+Scenario: _0170001 check preparation
+	When check preparation	
 
 Scenario: _017001 create document Purchase order
 	When create PurchaseOrder017001

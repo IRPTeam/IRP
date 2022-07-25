@@ -50,6 +50,7 @@ Scenario: _028500 preparation (create document Sales return)
 		When Create catalog IntegrationSettings objects
 		When Create catalog ExpenseAndRevenueTypes objects 
 		When Create information register CurrencyRates records
+		When Create catalog Companies objects (own Second company)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -125,165 +126,205 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 
 
 
-// Scenario: _028502 check filling in Row Id info table in the SR (SI-SR)
-// 	* Select SR
-// 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-// 		And I go to line in "List" table
-// 			| 'Number'                     |
-// 			| '$$NumberSalesReturn028501$$' |
-// 		And I select current line in "List" table
-// 		And I click "Show row key" button
-// 		And I go to line in "ItemList" table
-// 			| '#' |
-// 			| '1' |
-// 		And I activate "Key" field in "ItemList" table
-// 		And I save the current field value as "$$Rov1SalesReturn028501$$"
-// 		And I go to line in "ItemList" table
-// 			| '#' |
-// 			| '2' |
-// 		And I activate "Key" field in "ItemList" table
-// 		And I save the current field value as "$$Rov2SalesReturn028501$$"
-// 		And I go to line in "ItemList" table
-// 			| '#' |
-// 			| '3' |
-// 		And I activate "Key" field in "ItemList" table
-// 		And I save the current field value as "$$Rov3SalesReturn028501$$"
-// 	* Check Row Id info table
-// 		And I move to "Row ID Info" tab
-// 		And "RowIDInfo" table contains lines
-// 			| 'Key'                       | 'Basis'                                       | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-// 			| '$$Rov1SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-// 			| '$$Rov2SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-// 			| '$$Rov3SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
-// 		Then the number of "RowIDInfo" table lines is "равно" "3"
-// 	* Copy string and check Row ID Info tab
-// 		And I move to "Item list" tab
-// 		And I go to line in "ItemList" table
-// 			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
-// 			| '1' | 'Dress' | 'XS/Blue'  | '1,000' |
-// 		And in the table "ItemList" I click "Copy" button
-// 		And I activate field named "ItemListQuantity" in "ItemList" table
-// 		And I input "8,000" text in the field named "ItemListQuantity" of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And I go to line in "ItemList" table
-// 			| '#' |
-// 			| '4' |
-// 		And I activate "Key" field in "ItemList" table
-// 		And I save the current field value as "$$Rov4SalesReturn028501$$"
-// 		And I move to "Row ID Info" tab
-// 		And I click the button named "FormPost"
-// 		And "RowIDInfo" table contains lines
-// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step'   | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-// 			| '$$Rov1SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'          | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-// 			| '$$Rov2SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'          | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-// 			| '$$Rov3SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
-// 			| '$$Rov4SalesReturn028501$$' | ''                                        | '$$Rov4SalesReturn028501$$'           | 'SC'          | '8,000'  | ''                                     | ''             | '$$Rov4SalesReturn028501$$'           |
-// 		Then the number of "RowIDInfo" table lines is "равно" "4"
-// 		And "RowIDInfo" table does not contain lines
-// 			| 'Key'                        | 'Quantity'     |
-// 			| '$$Rov1SalesReturn028501$$' | '8,000' |
-// 	* Delete string and check Row ID Info tab
-// 		And I move to "Item list" tab
-// 		And I go to line in "ItemList" table
-// 			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
-// 			| '4' | 'Dress' | 'XS/Blue'  | '8,000' |
-// 		And in the table "ItemList" I click "Delete" button
-// 		And I move to "Row ID Info" tab
-// 		And "RowIDInfo" table contains lines
-// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-// 			| '$$Rov1SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-// 			| '$$Rov2SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-// 			| '$$Rov3SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
-// 		Then the number of "RowIDInfo" table lines is "равно" "3"
-// 	* Change quantity and check  Row ID Info tab
-// 		And I move to "Item list" tab
-// 		And I go to line in "ItemList" table
-// 			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
-// 			| '1' | 'Dress' | 'XS/Blue'  | '1,000' |
-// 		And I activate "Quantity" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I input "7,000" text in "Quantity" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 		And "RowIDInfo" table contains lines
-// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-// 			| '$$Rov1SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-// 			| '$$Rov2SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-// 			| '$$Rov3SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SC'        | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
-// 		Then the number of "RowIDInfo" table lines is "равно" "3"
-// 		And I move to "Item list" tab
-// 		And I go to line in "ItemList" table
-// 			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
-// 			| '1' | 'Dress' | 'XS/Blue'  | '7,000' |
-// 		And I activate "Quantity" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I input "1,000" text in "Quantity" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 	* Change checkbox Use Shipment confirmation and check RowIDInfo
-// 		And I move to "Item list" tab
-// 		And I go to line in "ItemList" table
-// 			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit'           |
-// 			| 'Boots' | '36/18SD'  | '5,000' | 'Boots (12 pcs)' |
-// 		And I remove "Use shipment confirmation" checkbox in "ItemList" table
-// 		And I move to the tab named "GroupRowIDInfo"
-// 		And I click "Post" button
-// 		And "RowIDInfo" table contains lines
-// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-// 			| '$$Rov1SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '1,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-// 			| '$$Rov2SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-// 			| '$$Rov3SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
-// 		Then the number of "RowIDInfo" table lines is "равно" "3"	
-// 		And I click the button named "FormPostAndClose"
+Scenario: _028502 check filling in Row Id info table in the SR (SI-SR)
+		And I close all client application windows
+	* Select SR
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '$$NumberSalesReturn028501$$' |
+		And I select current line in "List" table
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov1SalesReturn028501$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov2SalesReturn028501$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '3' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov3SalesReturn028501$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '4' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov4SalesReturn028501$$"
+	* Check Row Id info table
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table became equal
+			| '#' | 'Key'                       | 'Basis'                                       | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '72d99733-14eb-4cc2-b463-1782405cd408' | ''          | '2,000'    | '72d99733-14eb-4cc2-b463-1782405cd408' | 'SRO&SR'       | '72d99733-14eb-4cc2-b463-1782405cd408' |
+			| '2' | '$$Rov2SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' | ''          | '24,000'   | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' | 'SRO&SR'       | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' |
+			| '3' | '$$Rov3SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'c6605104-b141-4358-ab1d-9355d75d21c6' | ''          | '2,000'    | 'c6605104-b141-4358-ab1d-9355d75d21c6' | 'SRO&SR'       | 'c6605104-b141-4358-ab1d-9355d75d21c6' |
+			| '4' | '$$Rov4SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' | ''          | '4,000'    | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' | 'SRO&SR'       | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' |
+		Then the number of "RowIDInfo" table lines is "равно" "4"
+	* Copy string and check Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key'  | 'Quantity'     |
+			| '1' | 'Shirt' | '38/Black'  | '2,000'        |
+		And in the table "ItemList" I click "Copy" button
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "8,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' |
+			| '5' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov5SalesReturn028501$$"
+		And I move to "Row ID Info" tab
+		And I click the button named "FormPost"
+		And "RowIDInfo" table became equal
+			| '#' | 'Key'                       | 'Basis'                                       | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '72d99733-14eb-4cc2-b463-1782405cd408' | ''          | '2,000'    | '72d99733-14eb-4cc2-b463-1782405cd408' | 'SRO&SR'       | '72d99733-14eb-4cc2-b463-1782405cd408' |
+			| '2' | '$$Rov2SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' | ''          | '24,000'   | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' | 'SRO&SR'       | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' |
+			| '3' | '$$Rov3SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'c6605104-b141-4358-ab1d-9355d75d21c6' | ''          | '2,000'    | 'c6605104-b141-4358-ab1d-9355d75d21c6' | 'SRO&SR'       | 'c6605104-b141-4358-ab1d-9355d75d21c6' |
+			| '4' | '$$Rov4SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' | ''          | '4,000'    | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' | 'SRO&SR'       | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' |
+			| '5' | '$$Rov5SalesReturn028501$$' | ''                                            | '$$Rov5SalesReturn028501$$'            | ''          | '8,000'    | '                                    ' | ''             | '$$Rov5SalesReturn028501$$'            |
+		Then the number of "RowIDInfo" table lines is "равно" "5"
+		And "RowIDInfo" table does not contain lines
+			| 'Key'                        | 'Quantity'     |
+			| '$$Rov1SalesReturn028501$$' | '8,000' |
+	* Delete string and check Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Quantity' |
+			| '5' | 'Shirt' | '38/Black' | '8,000'    |
+		And in the table "ItemList" I click "Delete" button
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table became equal
+			| '#' | 'Key'                       | 'Basis'                                       | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '72d99733-14eb-4cc2-b463-1782405cd408' | ''          | '2,000'    | '72d99733-14eb-4cc2-b463-1782405cd408' | 'SRO&SR'       | '72d99733-14eb-4cc2-b463-1782405cd408' |
+			| '2' | '$$Rov2SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' | ''          | '24,000'   | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' | 'SRO&SR'       | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' |
+			| '3' | '$$Rov3SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'c6605104-b141-4358-ab1d-9355d75d21c6' | ''          | '2,000'    | 'c6605104-b141-4358-ab1d-9355d75d21c6' | 'SRO&SR'       | 'c6605104-b141-4358-ab1d-9355d75d21c6' |
+			| '4' | '$$Rov4SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' | ''          | '4,000'    | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' | 'SRO&SR'       | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' |
+		Then the number of "RowIDInfo" table lines is "равно" "4"
+	* Change quantity and check  Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key'  | 'Quantity'     |
+			| '1' | 'Shirt' | '38/Black'  | '2,000' |
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "7,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                       | 'Basis'                                       | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '72d99733-14eb-4cc2-b463-1782405cd408' | ''          | '7,000'    | '72d99733-14eb-4cc2-b463-1782405cd408' | 'SRO&SR'       | '72d99733-14eb-4cc2-b463-1782405cd408' |
+			| '2' | '$$Rov2SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' | ''          | '24,000'   | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' | 'SRO&SR'       | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' |
+			| '3' | '$$Rov3SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'c6605104-b141-4358-ab1d-9355d75d21c6' | ''          | '2,000'    | 'c6605104-b141-4358-ab1d-9355d75d21c6' | 'SRO&SR'       | 'c6605104-b141-4358-ab1d-9355d75d21c6' |
+			| '4' | '$$Rov4SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' | ''          | '4,000'    | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' | 'SRO&SR'       | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' |
+		Then the number of "RowIDInfo" table lines is "равно" "4"
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key'  | 'Quantity'     |
+			| '1' | 'Shirt' | '38/Black'  | '7,000'        |
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Change checkbox Use Goods receipt and check RowIDInfo
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Unit'           |
+			| 'Boots' | '36/18SD'  | '2,000'    | 'Boots (12 pcs)' |
+		And I set "Use Goods receipt" checkbox in "ItemList" table
+		And I move to the tab named "GroupRowIDInfo"
+		And I click "Post" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                       | 'Basis'                                       | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '72d99733-14eb-4cc2-b463-1782405cd408' | ''          | '2,000'    | '72d99733-14eb-4cc2-b463-1782405cd408' | 'SRO&SR'       | '72d99733-14eb-4cc2-b463-1782405cd408' |
+			| '2' | '$$Rov2SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' | 'GR'        | '24,000'   | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' | 'SRO&SR'       | '60f79f2b-f0c4-42d9-8175-bc4b346e419d' |
+			| '3' | '$$Rov3SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'c6605104-b141-4358-ab1d-9355d75d21c6' | ''          | '2,000'    | 'c6605104-b141-4358-ab1d-9355d75d21c6' | 'SRO&SR'       | 'c6605104-b141-4358-ab1d-9355d75d21c6' |
+			| '4' | '$$Rov4SalesReturn028501$$' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' | ''          | '4,000'    | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' | 'SRO&SR'       | '9ea0981e-11cc-4dd3-a57c-a226b4a7e405' |
+		Then the number of "RowIDInfo" table lines is "равно" "4"	
+		And I click the button named "FormPostAndClose"
 
 
-
-
-
-	
-// Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (SI)
-// 	* Copy SI
-// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-// 		And I go to line in "List" table
-// 			| 'Number'                     |
-// 			| '$$NumberSalesInvoice024008$$' |
-// 		And in the table "List" I click the button named "ListContextMenuCopy"
-// 	* Check copy info
-// 		Then the form attribute named "Partner" became equal to "Ferron BP"
-// 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-// 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-// 		Then the form attribute named "Description" became equal to "Click to enter description"
-// 		Then the form attribute named "Company" became equal to "Main Company"
-// 		Then the form attribute named "Store" became equal to "Store 02"
-// 		And "ItemList" table became equal
-// 			| '#' | 'Profit loss center'           | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
-// 			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
-// 			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '5,000' | 'pcs'            | '240,25'     | '350,00'   | '18%' | '175,00'        | '1 334,75'   | '1 575,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
-// 			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000' | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | 'Revenue'      |
-
-// 		And "CurrenciesTable" table became equal
-// 			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount'   |
-// 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '44 095'   |
-// 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '44 095'   |
-// 			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '7 549,06' |
-
-// 		Then the form attribute named "Branch" became equal to ""
-// 		Then the form attribute named "Author" became equal to "en description is empty"
-// 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-// 		Then the form attribute named "Currency" became equal to "TRY"
-// 		Then the form attribute named "ItemListTotalNetAmount" became equal to "37 368,65"
-// 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "6 726,35"
-// 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "44 095,00"
-// 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
-// 	* Post SI and check Row ID Info tab
-// 		And I click the button named "FormPost"
-// 		And I click the button named "FormShowRowKey"
-// 		And I move to "Row ID Info" tab
-// 		And "RowIDInfo" table does not contain lines
-// 			| 'Key'                        | 'Basis'                                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-// 			| '$$Rov1SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SC'        | '7,000'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'SI&SC'        | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-// 			| '$$Rov2SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SC'        | '5,000'  | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'SI&SC'        | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-// 			| '$$Rov3SalesReturn028501$$' | 'Sales order 3 dated 27.01.2021 19:50:45' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | ''          | '60,000' | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' | 'SI&SC'        | 'db32e58d-ac68-45b6-b0b5-b90d6c02fbff' |
-// 		Then the number of "RowIDInfo" table lines is "равно" "3"
-// 		And I close all client application windows	
+Scenario: _028503 create SR based on SI (different company, branch, store)
+		And I close all client application windows
+	* Open a form to create Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
+	* Filling in vendor information
+		And I click Select button of "Partner" field
+		And I click "List" button	
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Company Adel' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Second Company' |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'  |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+	* Select items
+		And I move to "Item list" tab
+		And in the table "ItemList" I click "Add basis documents" button
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And "BasisesTree" table became equal
+			| 'Row presentation'                            | 'Use' | 'Company'      | 'Branch'                  | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'No'  | 'Main Company' | 'Distribution department' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                             | 'No'  | ''             | ''                        | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |
+			| 'Dress (M/White)'                             | 'No'  | ''             | ''                        | '2,000'    | 'pcs'  | '520,00' | 'TRY'      |
+		And I go to line in "BasisesTree" table
+			| 'Row presentation' |
+			| 'Dress (M/White)'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Item'  | 'Profit loss center'      | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Price'  | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Return reason' | 'Revenue type' | 'Offers amount' | 'Landed cost' | 'Sales person' |
+			| '1' | 'Dress' | 'Distribution department' | 'M/White'  | 'pcs'  | ''                   | 'No'                 | '2,000'    | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '520,00' | '871,06'     | 'No'                | '1 040,00'     | ''                    | 'Store 01' | ''                   | ''              | 'Revenue'      | ''              | ''            | ''             |
+	* Show row key
+		And I click "Show row key" button
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key' | 'Basis'                                       | 'Row ID' | 'Next step' | 'Quantity' | 'Basis key' | 'Current step' | 'Row ref' |
+			| '1' | '*'   | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '*'      | ''          | '2,000'    | '*'         | 'SRO&SR'       | '*'       |
+	* Post document
+		And I click the button named "FormPost"
+		And I delete "$$NumberSalesReturn028503$$" variable
+		And I delete "$$SalesReturn028503$$" variable
+		And I save the value of "Number" field as "$$NumberSalesReturn028503$$"
+		And I save the window as "$$SalesReturn028503$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberSalesReturn028503$$' |
+		And I close all client application windows	
+			
 
 
 Scenario: _028509 create Sales return without bases document

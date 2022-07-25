@@ -533,11 +533,15 @@ EndProcedure
 
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
 	ArrayOfFilterExcludeFields = New Array();
 	ArrayOfFilterExcludeFields.Add("Store");
 	FormParameters = New Structure();
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_SR(Object));
-	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData, ArrayOfFilterExcludeFields));
+	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(CurrentData, ArrayOfFilterExcludeFields));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);

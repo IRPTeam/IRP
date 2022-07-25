@@ -51,6 +51,9 @@ Function GetLinkedDocumentsFilter_SR(Object) Export
 	Filter.Insert("TransactionType"      , PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer"));
 	Filter.Insert("Ref"                  , Object.Ref);
 	
+	Filter.Insert("CompanyReturn" , Object.Company);
+	Filter.Insert("BranchReturn"  , Object.Branch);
+	
 	VisibleFields = New Structure();
 	VisibleFields.Insert("Company");
 	VisibleFields.Insert("Branch");

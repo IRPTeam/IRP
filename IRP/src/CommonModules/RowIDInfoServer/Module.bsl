@@ -5060,14 +5060,12 @@ Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
-	//|				ELSE FALSE
 	|				ELSE TRUE
 	|
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Branch
 	|					THEN RowRef.Branch = &Branch
-	//|				ELSE FALSE
 	|				ELSE TRUE
 	|			END
 	|			AND CASE
@@ -5453,13 +5451,13 @@ Procedure ApplyFilterSet_SRO_ForSR(Query)
 	|			Catalog.RowIDs AS RowRef
 	|		WHERE
 	|			CASE
-	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
+	|				WHEN &Filter_Company OR &Filter_CompanyReturn
+	|					THEN RowRef.Company = &Company OR RowRef.Company = &CompanyReturn
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
+	|				WHEN &Filter_Branch OR &Filter_BranchReturn
+	|					THEN RowRef.Branch = &Branch OR RowRef.Branch = &BranchReturn
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -5493,8 +5491,8 @@ Procedure ApplyFilterSet_SRO_ForSR(Query)
 	|				ELSE TRUE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|				WHEN &Filter_Store OR &Filter_StoreReturn
+	|					THEN RowRef.Store = &Store OR RowRef.Store = &StoreReturn
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -5936,13 +5934,13 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|			Catalog.RowIDs AS RowRef
 	|		WHERE
 	|			CASE
-	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
+	|				WHEN &Filter_Company OR &Filter_CompanyReturn
+	|					THEN RowRef.Company = &Company OR RowRef.Company = &CompanyReturn
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
+	|				WHEN &Filter_Branch OR &Filter_BranchReturn
+	|					THEN RowRef.Branch = &Branch OR RowRef.Branch = &BranchReturn
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -5966,8 +5964,8 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|				ELSE TRUE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|				WHEN &Filter_Store OR &Filter_StoreReturn
+	|					THEN RowRef.Store = &Store OR RowRef.Store = &StoreReturn
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6957,12 +6955,12 @@ Procedure ApplyFilterSet_SR_ForGR(Query)
 	|		WHERE
 	|			CASE
 	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
+	|					THEN RowRef.Company = &Company OR RowRef.CompanyReturn = &Company
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
+	|					THEN RowRef.Branch = &Branch OR RowRef.BranchReturn = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -6987,7 +6985,7 @@ Procedure ApplyFilterSet_SR_ForGR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreReturn = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7508,7 +7506,8 @@ Procedure FillQueryParameters(Query, FilterValues)
 		Value = Undefined;
 		Use = False;
 		If FilterValues.Property(Attribute.Name) Then
-			If TrimAll(Upper(Attribute.Name)) = TrimAll(Upper("Branch")) Then
+			If TrimAll(Upper(Attribute.Name)) = TrimAll(Upper("Branch"))
+				Or TrimAll(Upper(Attribute.Name)) = TrimAll(Upper("BranchReturn")) Then
 				If ValueIsFilled(FilterValues[Attribute.Name]) Then
 					Value = FilterValues[Attribute.Name];
 					Use = True;

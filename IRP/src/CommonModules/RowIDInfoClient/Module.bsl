@@ -87,6 +87,7 @@ Function GetSelectedRowInfo(CurrentData, ArrayOfFilterExcludeFields = Undefined)
 	Result.FilterBySelectedRow = New Structure();
 	Result.FilterBySelectedRow.Insert("ItemKey", CurrentData.ItemKey);
 	Result.FilterBySelectedRow.Insert("Store", Store);
+	Result.FilterBySelectedRow.Insert("StoreReturn", Store);
 	
 	If ArrayOfFilterExcludeFields <> Undefined Then
 		Result.Insert("ArrayOfFilterExcludeFields", ArrayOfFilterExcludeFields);

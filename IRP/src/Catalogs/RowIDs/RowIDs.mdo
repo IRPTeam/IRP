@@ -171,11 +171,43 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="437a7f60-9b25-482e-a346-2acca6aa3068">
+    <name>BranchReturn</name>
+    <synonym>
+      <key>en</key>
+      <value>Branch (return)</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="de644888-2881-4ae5-adc6-5c20999278fb">
     <name>Company</name>
     <synonym>
       <key>en</key>
       <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="640d8a6a-8fdc-4a8a-ad36-2715d8029de8">
+    <name>CompanyReturn</name>
+    <synonym>
+      <key>en</key>
+      <value>Company (return)</value>
     </synonym>
     <type>
       <types>CatalogRef.Companies</types>
@@ -401,6 +433,22 @@
     <synonym>
       <key>en</key>
       <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1ee9fd84-c1fa-4d35-928d-cbd898930522">
+    <name>StoreReturn</name>
+    <synonym>
+      <key>en</key>
+      <value>Store (return)</value>
     </synonym>
     <type>
       <types>CatalogRef.Stores</types>

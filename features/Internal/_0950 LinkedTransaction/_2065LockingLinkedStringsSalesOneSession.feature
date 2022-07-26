@@ -115,9 +115,11 @@ Scenario: _20650011 Info linked documents row
 		And I select current line in "ItemList" table
 		Then "Info linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
-		And I expand a line in "BasisesTree" table
-			| 'Doc ref'                                            | 'Row presentation'                                   |
-			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' |
+		And "BasisesTree" table became equal
+			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''         | ''     | ''       | ''         |
+			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''         | ''     | ''       | ''         |
+			| 'Shirt (36/Red)'                                     | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |	
 	* Show row key
 		And I click "Show row key" button
 		And "ResultsTable" table became equal
@@ -130,10 +132,10 @@ Scenario: _20650011 Info linked documents row
 		And I activate current test client window
 		And I press keyboard shortcut "Delete"
 		And "BasisesTree" table became equal
-			| 'Row presentation'                                   | 'Quantity in base unit' | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Doc ref'                                            | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
-			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    ' | '                                    ' | '                                    ' | ''             |
-			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    ' | '                                    ' | '                                    ' | ''             |
-			| 'Shirt (36/Red)'                                     | '10,000'                | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | ''                                                   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI'           |
+			| 'Row presentation'                                   | 'Quantity in base unit' | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
+			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    ' | '                                    ' | '                                    ' | ''             |
+			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    ' | '                                    ' | '                                    ' | ''             |
+			| 'Shirt (36/Red)'                                     | '10,000'                | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI'           |
 	* Try copy row
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' |
@@ -141,10 +143,10 @@ Scenario: _20650011 Info linked documents row
 		And I activate current test client window
 		And I press keyboard shortcut "F9"
 		And "BasisesTree" table became equal
-			| 'Row presentation'                                   | 'Quantity in base unit' | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Doc ref'                                            | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
-			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    ' | '                                    ' | '                                    ' | ''             |
-			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    ' | '                                    ' | '                                    ' | ''             |
-			| 'Shirt (36/Red)'                                     | '10,000'                | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | ''                                                   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI'           |
+			| 'Row presentation'                                   | 'Quantity in base unit' | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
+			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    ' | '                                    ' | '                                    ' | ''             |
+			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''                      | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    ' | '                                    ' | '                                    ' | ''             |
+			| 'Shirt (36/Red)'                                     | '10,000'                | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI'           |
 		And I close all client application windows
 				
 						
@@ -1193,6 +1195,23 @@ Scenario: _2065032 check locking tab in the SR with linked documents (one sessio
 				| 'Trousers' | '38/Yellow' |
 			And I set "Use goods receipt" checkbox in "ItemList" table
 			And I finish line editing
+		* Quantity
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '37/18SD'  |
+			And I activate "Quantity" field in "ItemList" table
+			And I input "30,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Line No. [2] [Boots 37/18SD] Return remaining: 24 . Required: 30 . Lacking: 6 .'|	
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '37/18SD'  |
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table			
 		* Sales invoice
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
@@ -1518,10 +1537,10 @@ Scenario: _2065071 open link info
 			| 'Dress'     |
 		And I select current line in "ItemList" table
 		And "BasisesTree" table became equal
-			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Currency' | 'Doc ref'                                            |
-			| 'Dress (XS/Blue)'                                    | '1,000'    | 'pcs'  | '520,00' | 'TRY'      | ''                                                   |
-			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''         | ''     | ''       | ''         | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' |
-			| 'Sales invoice 36 dated 23.09.2021 10:21:37'         | ''         | ''     | ''       | ''         | 'Sales invoice 36 dated 23.09.2021 10:21:37'         |
+			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Dress (XS/Blue)'                                    | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''         | ''     | ''       | ''         |
+			| 'Sales invoice 36 dated 23.09.2021 10:21:37'         | ''         | ''     | ''       | ''         |
 		And I close all client application windows
 		
 

@@ -1212,5 +1212,15 @@ Function Exists_R4014B_SerialLotNumber() Export
 		|WHERE
 		|	R4014B_SerialLotNumber.Recorder = &Ref";
 EndFunction
-	
+
+Function Exists_R2001T_Sales() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R2001T_Sales
+		|FROM
+		|	AccumulationRegister.R2001T_Sales AS R2001T_Sales
+		|WHERE
+		|	R2001T_Sales.Recorder = &Ref";
+EndFunction
+
 #EndRegion

@@ -36,34 +36,22 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		Is = Is(Source);
 		If Is.SI Or Is.PI Or Is.RSR Then
 			Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
+			
 			If Is.RSR Then
 				Records_InDocument = GetRecordsInDocument_TM1010T_RSR(Source);
 				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Receipt);
 				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);
-			EndIf;
-			
-			If Is.SI Then
-				Records_InDocument = GetRecordsInDocument_TM1010T_SR_RRR(Source);
-				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Receipt);
-				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);				
 			EndIf;
 		EndIf;
 
 		If Is.SR Or Is.SRO Or Is.PR Or Is.PRO Or Is.RRR Then
 			Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode);
 			If Is.RRR Then
-				Records_InDocument = GetRecordsInDocument_TM1010T_SR_RRR(Source);
-				ItemList_InDocument = GetItemListInDocument_SR_RRR(Source);
+				Records_InDocument = GetRecordsInDocument_TM1010T_RRR(Source);
+				ItemList_InDocument = GetItemListInDocument_RRR(Source);
 				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
 				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
 			EndIf;
-			
-			If Is.SR Then
-				Records_InDocument = GetRecordsInDocument_TM1010T_SR_RRR(Source);
-				ItemList_InDocument = GetItemListInDocument_SR_RRR(Source);
-				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
-				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
-			EndIf;			
 		EndIf;
 	EndIf;
 EndProcedure
@@ -95,25 +83,11 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 		EndIf;
 
 		If Is.RRR Then
-			Records_InDocument = GetRecordsInDocument_TM1010T_SR_RRR(Source);
-			ItemList_InDocument = GetItemListInDocument_SR_RRR(Source);
+			Records_InDocument = GetRecordsInDocument_TM1010T_RRR(Source);
+			ItemList_InDocument = GetItemListInDocument_RRR(Source);
 			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
 			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
-		EndIf;
-
-		If Is.SI Then
-			Records_InDocument = GetRecordsInDocument_TM1010T_SI(Source);
-			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Receipt);
-			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);
-		EndIf;
-
-		If Is.SR Then
-			Records_InDocument = GetRecordsInDocument_TM1010T_SR_RRR(Source);
-			ItemList_InDocument = GetItemListInDocument_SR_RRR(Source);
-			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
-			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
-		EndIf;
-		
+		EndIf;		
 	EndIf;
 EndProcedure
 
@@ -370,7 +344,7 @@ Function GetRecordsExists_TM1010T(Source, RecordType)
 	Return QueryTable;
 EndFunction
 
-Function GetRecordsInDocument_TM1010T_SR_RRR(Source)
+Function GetRecordsInDocument_TM1010T_RRR(Source)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -405,25 +379,7 @@ Function GetRecordsInDocument_TM1010T_RSR(Source)
 	Return QueryTable;
 EndFunction
 
-Function GetRecordsInDocument_TM1010T_SI(Source)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	VALUE(Catalog.MovementRules.SR) AS Step,
-	|	RowIDInfo.Key AS BasisKey,
-	|	RowIDInfo.Ref AS Basis,
-	|	*
-	|FROM
-	|	Document.%1.RowIDInfo AS RowIDInfo
-	|WHERE
-	|	RowIDInfo.Ref = &Ref";
-	Query.Text = StrTemplate(Query.Text, Source.Metadata().Name);
-	Query.SetParameter("Ref", Source.Ref);
-	QueryTable = Query.Execute().Unload();
-	Return QueryTable;
-EndFunction
-
-Function GetItemListInDocument_SR_RRR(Source)
+Function GetItemListInDocument_RRR(Source)
 	Query = New Query();
 	Query.Text = 
 	"SELECT

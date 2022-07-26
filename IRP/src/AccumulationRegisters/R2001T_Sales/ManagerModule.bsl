@@ -25,6 +25,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	Records_InDocument_NotFiltered AS Records
 	|WHERE
 	|	NOT Records.Invoice.Ref IS NULL
+	|	AND Records.Invoice.Ref REFS Document.SalesInvoice
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -58,6 +59,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|WHERE
 	|	Records.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND NOT Records.Invoice.Ref IS NULL
+	|	AND Records.Invoice.Ref REFS Document.SalesInvoice
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -138,7 +140,11 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	Sales.ItemKey AS ItemKey,
 	|	Sales.Invoice,
 	|	SalesBalance.QuantityBalance AS QuantityBalance,
-	|	case when Sales.Quantity < 0 then -Sales.Quantity else Sales.Quantity end AS Quantity,
+	|	case
+	|		when Sales.Quantity < 0
+	|			then -Sales.Quantity
+	|		else Sales.Quantity
+	|	end AS Quantity,
 	|	-SalesBalance.QuantityBalance AS LackOfBalance,
 	|	Sales.LineNumber AS LineNumber,
 	|	&Unposting AS Unposting

@@ -68,7 +68,10 @@ Scenario: _0202100 preparation (filling expence, revenue)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 		When Create catalog CancelReturnReasons objects
-	
+
+Scenario: _02021001 check preparation
+	When check preparation
+
 Scenario: _0202101 filling revenue type in the SI (from Company)
 	And I close all client application windows
 	* Load registers settings

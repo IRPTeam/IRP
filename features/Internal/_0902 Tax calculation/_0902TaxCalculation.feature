@@ -130,6 +130,8 @@ Scenario: _0902000 preparation
 		And I click "Save and close" button
 	And I close all client application windows
 
+Scenario: _09020001 check preparation
+	When check preparation
 
 Scenario: _090201 activating Sales Tax calculation in the Sales order and Sales invoice documents
 	* Opening a tax creation form

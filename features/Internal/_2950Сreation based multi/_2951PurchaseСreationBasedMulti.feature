@@ -67,6 +67,10 @@ Scenario: _090300 preparation (creation mechanism based on for purchase document
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 
+Scenario: _0903001 check preparation
+	When check preparation
+
+
 Scenario: _090302 create purchase invoice for several purchase orders with different legal name
 	# should be created 2 Purchase invoice
 	* Create Purchase order

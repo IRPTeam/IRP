@@ -74,7 +74,8 @@ Scenario: _044000 preparation (Cash expense)
 			| "Documents.CashExpense.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
-
+Scenario: _0440001 check preparation
+	When check preparation
 
 Scenario: _044001 check Cash expense movements by the Register "R3010 Cash on hand"
 	* Select Cash expense

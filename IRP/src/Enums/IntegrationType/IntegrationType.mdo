@@ -47,4 +47,11 @@
       <value>Email</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="2705b4b5-f98b-4274-9ab6-0145c1d50a8d">
+    <name>ClientBank</name>
+    <synonym>
+      <key>en</key>
+      <value>Client bank</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

@@ -175,6 +175,7 @@
   <commonPictures>CommonPicture.Bookkeeping</commonPictures>
   <commonPictures>CommonPicture.IconCollection7</commonPictures>
   <commonPictures>CommonPicture.IconCollection8</commonPictures>
+  <commonPictures>CommonPicture.Waiting</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>

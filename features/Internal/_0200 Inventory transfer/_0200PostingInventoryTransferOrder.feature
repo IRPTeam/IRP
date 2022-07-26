@@ -53,6 +53,9 @@ Scenario: _020000 preparation
 		When filling in Tax settings for company
 
 
+Scenario: _0200001 check preparation
+	When check preparation
+
 # 1
 Scenario: _020001 create document Inventory Transfer Order - Store sender does not use Shipment confirmation, Store receiver use Goods receipt
 	When create InventoryTransferOrder020001

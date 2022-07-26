@@ -43,7 +43,8 @@ Scenario: _4000100 preparation
 			And I click "Save and close" button
 		And I close all client application windows
 
-						
+Scenario: _40001001 check preparation
+	When check preparation 						
 
 	
 Scenario: _4000120 check reports option save

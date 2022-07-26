@@ -58,7 +58,8 @@ Scenario: _155000 preparation (check that the item is not cleared)
 	* Tax settings
 		When filling in Tax settings for company
 	
-
+Scenario: _1550001 check preparation
+	When check preparation
 
 
 Scenario: _155001 saving information about an Item without a completed item key in a document Sales order

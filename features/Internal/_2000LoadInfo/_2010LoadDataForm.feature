@@ -69,6 +69,8 @@ Scenario: _020100 preparation (LoadDataForm)
 	* Tax settings
 		When filling in Tax settings for company
 
+Scenario: _0201001 check preparation
+	When check preparation
 
 Scenario: _020110 load data in the SI
 		And I close all client application windows

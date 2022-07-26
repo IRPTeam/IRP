@@ -30,7 +30,9 @@ Scenario: _090200 preparation (display of items marked for deletion)
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When update ItemKeys
-	
+
+Scenario: _0902001 check preparation
+	When check preparation	
 
 Scenario: _090201 check that the items marked for deletion is not displayed in the PurchaseOrder
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"

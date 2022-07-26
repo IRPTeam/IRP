@@ -68,6 +68,9 @@ Scenario: _1002000 preparation (vendors aging)
 		Then user message window does not contain messages
 		And I close all client application windows
 
+Scenario: _10020001 check preparation
+	When check preparation
+
 Scenario: _1002002 filling in payment terms in the Partner term
 	Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Vendor Ferron, TRY (7 days)

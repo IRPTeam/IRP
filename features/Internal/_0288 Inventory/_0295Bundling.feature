@@ -31,7 +31,8 @@ Scenario: _029500 preparation (Bundling)
 		When Create catalog Companies objects (Main company)
 		When update ItemKeys
 	
-
+Scenario: _0295001 check preparation
+	When check preparation
 
 Scenario: _029501 create Bundling (Store does not use Shipment confirmation and Goods receipt)
 	And I close all client application windows

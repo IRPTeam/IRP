@@ -65,6 +65,9 @@ Scenario: _150000 preparation
 			And Delay 5
 		And I close all client application windows
 
+Scenario: _1500001 check preparation
+	When check preparation
+
 Scenario: _150001 basic price entry by properties (including VAT)
 	* Create price list by property for item type Clothes
 		Given I open hyperlink "e1cib/list/Document.PriceList"

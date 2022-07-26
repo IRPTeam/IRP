@@ -124,7 +124,10 @@ Scenario: _041600 preparation (Purchase return)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseReturn.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I close all client application windows
-	
+
+Scenario: _0416001 check preparation
+	When check preparation
+
 Scenario: _041601 check Purchase return movements by the Register  "R1002 Purchase returns"
 	And I close all client application windows
 	* Select Purchase return

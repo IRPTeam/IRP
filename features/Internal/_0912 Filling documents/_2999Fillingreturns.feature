@@ -66,6 +66,9 @@ Scenario: _0299900 preparation (check filling in and refilling returns)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 
+Scenario: _02999001 check preparation
+	When check preparation
+
 Scenario: _299901 check filling in and refilling Sales return order
 	* Open form  Sales return order
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"

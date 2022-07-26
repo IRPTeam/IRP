@@ -75,7 +75,8 @@ Scenario: _2067001 preparation (locking linked strings)
 	And I execute 1C:Enterprise script at server
 		| "Documents.GoodsReceipt.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
 
-
+Scenario: _20670011 check preparation
+	When check preparation
 
 Scenario: _2067002 check locking header in the ISR with linked documents (one session)
 	* Open ISR

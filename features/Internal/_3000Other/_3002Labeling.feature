@@ -57,6 +57,9 @@ Scenario: _3001002 preparation
 				When create PurchaseOrder017001
 		When auto filling Configuration metadata catalog
 
+Scenario: _30010021 check preparation
+	When check preparation
+
 Scenario: _300000 user check for Turkish data
 	* Open users list
 		Given I open hyperlink "e1cib/list/Catalog.Users"

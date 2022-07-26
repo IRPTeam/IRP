@@ -82,7 +82,9 @@ Scenario: _016500 preparation
 					And I select current line in "List" table
 					And I click "Save and close" button
 				And I close all client application windows
-		
+
+Scenario: _0165001 check preparation
+	When check preparation		
 			
 Scenario: _016501 create document Internal Supply Request
 	* Opening the creation form Internal Supply Request

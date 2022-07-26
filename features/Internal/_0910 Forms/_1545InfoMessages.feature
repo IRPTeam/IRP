@@ -57,7 +57,8 @@ Scenario: _154500 preparation (information messages)
 	* Tax settings
 		When filling in Tax settings for company
 	
-
+Scenario: _1545001 check preparation
+	When check preparation
 
 
 

@@ -8,6 +8,9 @@ Functionality: planned receipt reservation
 Variables:
 import "Variables.feature"
 
+Background:
+	Given I launch TestClient opening script or connect the existing one
+
 Scenario: _0242000 preparation (planned receipt reservation)
 	When set True value to the constant
 	And I close TestClient session
@@ -64,7 +67,10 @@ Scenario: _0242000 preparation (planned receipt reservation)
 	When Create document PurchaseOrder, PurchaseInvoice, GoodsReceipt objects (check reservation)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
-			
+
+
+Scenario: _02420001 check preparation
+	When check preparation
 
 Scenario: _0242001 create planned receipt reservation based on SO
 	* Select SO

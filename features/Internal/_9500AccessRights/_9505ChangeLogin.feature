@@ -28,7 +28,8 @@ Scenario: 950500 preparation
 			| 'Full access only read' |
 		And I close all client application windows
 		
-
+Scenario: 9505001 check preparation
+	When check preparation
 	
 
 Scenario: 950503 change login and check access

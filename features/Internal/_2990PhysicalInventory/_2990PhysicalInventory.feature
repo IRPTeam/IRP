@@ -139,6 +139,8 @@ Scenario: _2990000 preparation (product inventory)
 			And I save the window as "$$OpeningEntry2990000$$"
 			And I click the button named "FormPostAndClose"
 
+Scenario: _29900001 check preparation
+	When check preparation
 
 Scenario: _2990001 filling in the status guide for PhysicalInventory and PhysicalCountByLocation
 	* Open a creation form Object Statuses

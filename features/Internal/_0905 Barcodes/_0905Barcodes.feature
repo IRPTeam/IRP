@@ -30,6 +30,8 @@ Scenario: _090500 preparation (Barcodes)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When update ItemKeys
 	
+Scenario: _0905001 check preparation
+	When check preparation
 
 Scenario: _090501 barcode registry entry
 	* Adding barcode entries for Dress

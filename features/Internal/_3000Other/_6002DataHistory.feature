@@ -58,6 +58,8 @@ Scenario: _602700 preparation (data history)
 		When filling in Tax settings for company
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
 
+Scenario: _6027001 check preparation
+	When check preparation 
 
 Scenario: _602701 check data history for catalog (Partners)
 	* Data history settings

@@ -67,7 +67,8 @@ Scenario: _400000 preparation (Opening entries)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 	
-
+Scenario: _4000001 check preparation
+	When check preparation
 
 Scenario: _400001 opening entry account balance
 	* Open document form for opening entry

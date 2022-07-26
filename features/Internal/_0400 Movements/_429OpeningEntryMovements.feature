@@ -101,7 +101,8 @@ Scenario: _042900 preparation (Opening entry)
 			| "Documents.OpeningEntry.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
-
+Scenario: _0429001 check preparation
+	When check preparation
 
 Scenario: _042901 check Opening entry movements by the Register  "R4010 Actual stocks"
 	And I close all client application windows

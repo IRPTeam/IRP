@@ -117,6 +117,9 @@ Scenario: _04096 preparation (Purchase invoice)
 		| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |	
 	And I close all client application windows
 
+Scenario: _040961 check preparation
+	When check preparation
+
 // 115
 Scenario: _04097 check Purchase invoice movements by the Register  "R1021 Vendors transactions"
 	* Select Purchase invoice

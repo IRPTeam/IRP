@@ -225,6 +225,9 @@ Scenario: _043400 preparation (Bank receipt)
 			| "Documents.BankReceipt.FindByNumber(518).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
+Scenario: _0434001 check preparation
+	When check preparation
+
 Scenario: _043401 check Bank receipt movements by the Register "R3010 Cash on hand"
 	* Select Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"

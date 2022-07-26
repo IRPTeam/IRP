@@ -152,7 +152,8 @@ Scenario: _043500 preparation (Cash payment)
 			| "Documents.CashPayment.FindByNumber(328).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
-
+Scenario: _0435001 check preparation
+	When check preparation
 
 
 Scenario: _043501 check Cash payment movements by the Register "R3010 Cash on hand"

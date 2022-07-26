@@ -100,6 +100,8 @@ Scenario: _0156000 preparation
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(204).GetObject().Write(DocumentWriteMode.Posting);" |
 
+Scenario: _01560001 check preparation
+	When check preparation
 
 Scenario: _0156010 Store keeper workspace (create GR)
 	Given I open hyperlink "e1cib/app/DataProcessor.StoreKeeperWorkspace"

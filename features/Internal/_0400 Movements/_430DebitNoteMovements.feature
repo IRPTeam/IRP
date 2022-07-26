@@ -128,7 +128,10 @@ Scenario: _043000 preparation (Debit note)
 		And I execute 1C:Enterprise script at server
 			| "Documents.DebitNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
-		
+
+Scenario: _043000 check preparation
+	When check preparation
+
 Scenario: _043001 check Debit note movements by the Register "R5010 Reconciliation statement"
 	* Select Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"

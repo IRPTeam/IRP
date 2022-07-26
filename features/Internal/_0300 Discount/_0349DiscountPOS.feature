@@ -15,6 +15,9 @@ Scenario: _034901 preparation (discounts in POS)
 	When Create catalog BusinessUnits objects
 	When Create catalog PaymentTypes objects
 	When Create information register UserSettings records (Retail document)
+
+Scenario: _0349011 check preparation
+	When check preparation
 	
 Scenario: _034902 check discount price type calculation in POS
 	* Open POS and add items

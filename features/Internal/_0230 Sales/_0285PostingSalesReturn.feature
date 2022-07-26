@@ -85,6 +85,9 @@ Scenario: _028500 preparation (create document Sales return)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturnOrder.FindByNumber(107).GetObject().Write(DocumentWriteMode.Posting);" |
 
+Scenario: _0285001 check preparation
+	When check preparation
+
 
 Scenario: _028501 create document Sales return based on SI (without SRO)
 	And I close all client application windows

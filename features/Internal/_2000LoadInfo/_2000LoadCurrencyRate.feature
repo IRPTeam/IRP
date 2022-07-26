@@ -135,7 +135,9 @@ Scenario: _020000 preparation (Loadinfo)
 			// Given Recent TestClient message contains "Received response from bank.gov.ua:443 Status code: 200" string			
 		And I close all client application windows
 		
-			
+Scenario: _0200001 check preparation
+	When check preparation
+
 Scenario: _020001 check load currency rate from tcmb.gov.tr
 	And I turn on asynchronous execution mode with interval "1"
 	* Open catalog currency

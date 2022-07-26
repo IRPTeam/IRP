@@ -63,6 +63,9 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 
+Scenario: _0905001 check preparation
+	When check preparation
+
 # Sales order - Purchase order - Goods receipt - Purchase invoice - Shipment confirmation - Sales invoice
 Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one to one)
 	* Create test Sales order and Shipment confirmation

@@ -54,6 +54,9 @@ Scenario: _3510000 preparation (check the cleaning of fields in forms)
         * Tax settings
                 When filling in Tax settings for company
 
+Scenario: _35100001 check preparation
+	When check preparation
+
 Scenario: _3510001 check the clearing of values ​​when changing the type of account in the Cash / Bank accounts catalog
 * Open Cash account form
         Given I open hyperlink "e1cib/list/Catalog.CashAccounts"

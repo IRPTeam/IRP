@@ -50,6 +50,9 @@ Scenario: _034801 preparation
 		And I click the button named "FormPostAndClose"			
 		And I close all client application windows
 	
+Scenario: _0348011 check preparation
+	When check preparation
+
 Scenario: _034802 check discount recalculation when change quantity in the SaLes return order
 	* Document discount
 		* Create Purchase return based on $$SalesInvoice024025$$

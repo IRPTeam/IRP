@@ -60,6 +60,9 @@ Scenario: _206000 preparation (specification)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 
+Scenario: _2060001 check preparation
+	When check preparation
+
 Scenario: _206001 check message output when creating a Bundle with empty item
 	* Open the list of specifications
 		Given I open hyperlink "e1cib/list/Catalog.Specifications"

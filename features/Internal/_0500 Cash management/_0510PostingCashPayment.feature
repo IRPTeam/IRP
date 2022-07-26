@@ -86,7 +86,8 @@ Scenario: _051001 preparation (Cash payment)
 	And I execute 1C:Enterprise script at server
  			| "Documents.SalesReturn.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
 
-
+Scenario: _0510011 check preparation
+	When check preparation
 
 Scenario: _051001 create Cash payment based on Purchase invoice
 	* Open list form Purchase invoice and select PI №1

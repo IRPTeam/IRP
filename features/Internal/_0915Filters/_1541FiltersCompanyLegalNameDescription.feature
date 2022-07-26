@@ -56,7 +56,8 @@ Scenario: _0154000 preparation
 		When Create catalog CashAccounts objects
 		When update ItemKeys
 	
-
+Scenario: _01540001 check preparation
+	When check preparation
 
 
 Scenario: _017006 check the filter for Legal name in the document Purchase Order

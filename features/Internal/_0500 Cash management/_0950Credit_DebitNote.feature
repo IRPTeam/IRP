@@ -203,6 +203,8 @@ Scenario: _095001 preparation
 				And I save the window as "$$PurchaseInvoice0950011$$"
 				And I click the button named "FormPostAndClose"
 	
+Scenario: _0950011 check preparation
+	When check preparation
 
 Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 	* Create document

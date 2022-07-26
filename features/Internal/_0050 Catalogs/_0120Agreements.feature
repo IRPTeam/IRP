@@ -27,7 +27,8 @@ Scenario: _012000 preparation (partners term)
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog ItemSegments objects
 
-
+Scenario: _0120001 check preparation
+	When check preparation
 
 Scenario: _012001 adding partners (customers) to a segment (register)
 	* Opening a register for Partner segments content

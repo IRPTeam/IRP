@@ -63,6 +63,9 @@ Scenario: _203100 preparation (expence and revenue type filter)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
 
+Scenario: _2031001 check preparation
+	When check preparation
+
 Scenario: _0203101 check filters in the Sales order
 	Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 	And I click the button named "FormCreate"

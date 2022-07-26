@@ -113,7 +113,8 @@ Scenario: 950400 preparation
 		When Create document PurchaseOrder objects
 		And I close all client application windows
 		
-		
+Scenario: 9504001 check preparation
+	When check preparation		
 
 Scenario: 950403 check function option UseLockDataModification
 	When in sections panel I select "Settings"

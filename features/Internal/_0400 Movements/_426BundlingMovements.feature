@@ -65,7 +65,8 @@ Scenario: _042600 preparation (Bundling)
 		And I execute 1C:Enterprise script at server
 			| "Documents.Bundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 
-	
+Scenario: _0426001 check preparation
+	When check preparation	
 
 Scenario: _042601 check Bundling movements by the Register  "R4010 Actual stocks"
 	* Select Bundling

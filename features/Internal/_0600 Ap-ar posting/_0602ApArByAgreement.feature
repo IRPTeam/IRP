@@ -62,6 +62,8 @@ Scenario: _060200 preparation
 	* Tax settings
 		When filling in Tax settings for company
 
+Scenario: _0602001 check preparation
+	When check preparation
 
 Scenario: _060202 create Sales invoice with Ar details by Partner terms and check its movements
 	* Create Sales invoice

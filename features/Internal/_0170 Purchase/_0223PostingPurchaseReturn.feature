@@ -88,7 +88,10 @@ Scenario: _022300 preparation
 				| "Number" |
 				| "$$NumberPurchaseReturnOrder022006$$" |
 			When create PurchaseReturnOrder022006 based on PurchaseInvoice018001
-	
+
+Scenario: _0223001 check preparation
+	When check preparation
+
 Scenario: _022301 create Purchase return without bases document
 	* Opening a form to create Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"

@@ -57,7 +57,8 @@ Scenario: _085000 preparation (Cash expence and Cash revenue)
 			| "Documents.CashRevenue.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 	
-
+Scenario: _0850001 check preparation
+	When check preparation	
 
 Scenario: _085001 check tax calculation in the document Cash revenue
 	* Open document form

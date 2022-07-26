@@ -67,7 +67,8 @@ Scenario: _200000 preparation (user settings)
 	* Tax settings
 		When filling in Tax settings for company
 	
-
+Scenario: _2000001 check preparation
+	When check preparation
 
 Scenario: _200001 customize the CI user settings
 	Given I open hyperlink "e1cib/list/Catalog.Users"

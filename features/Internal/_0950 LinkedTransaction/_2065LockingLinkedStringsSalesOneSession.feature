@@ -1195,6 +1195,23 @@ Scenario: _2065032 check locking tab in the SR with linked documents (one sessio
 				| 'Trousers' | '38/Yellow' |
 			And I set "Use goods receipt" checkbox in "ItemList" table
 			And I finish line editing
+		* Quantity
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '37/18SD'  |
+			And I activate "Quantity" field in "ItemList" table
+			And I input "30,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post" button
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Line No. [2] [Boots 37/18SD] Return remaining: 24 . Required: 30 . Lacking: 6 .'|	
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '37/18SD'  |
+			And I activate "Quantity" field in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table			
 		* Sales invoice
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |

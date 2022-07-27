@@ -1255,7 +1255,6 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>
@@ -1526,6 +1525,23 @@ FROM
       <numberQualifiers>
         <precision>10</precision>
       </numberQualifiers>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>Source</name>
+    <title>
+      <key>en</key>
+      <value>Source</value>
+    </title>
+    <id>13</id>
+    <valueType>
+      <types>DocumentRef.ChequeBondTransaction</types>
     </valueType>
     <view>
       <common>true</common>

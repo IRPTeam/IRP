@@ -277,7 +277,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormGroup">
-    <name>GroupPagesCheque</name>
+    <name>GroupPages</name>
     <id>33</id>
     <items xsi:type="form:FormGroup">
       <name>GroupNextPossibleStatuses</name>
@@ -940,10 +940,10 @@
     </userVisible>
     <title>
       <key>en</key>
-      <value>Group pages cheque</value>
+      <value>Pages</value>
     </title>
     <extendedTooltip>
-      <name>GroupPagesChequeExtendedTooltip</name>
+      <name>GroupPagesExtendedTooltip</name>
       <id>34</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1014,6 +1014,14 @@
     <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>AfterWriteAtServer</event>
+      <name>AfterWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

@@ -223,6 +223,30 @@
       </code>
       <isFolder>true</isFolder>
     </items>
+    <items id="faf693e3-fdc9-4a9a-adc6-0a0587fc1fe1">
+      <name>ChequeBondTransaction</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>2</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="0dfc1880-03ff-45a5-b8dd-a854fdfc404b">
+        <name>ChequeBondIncoming</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>3</value>
+        </code>
+        <isFolder>true</isFolder>
+      </content>
+      <content id="6f439a66-f031-44d3-bbc6-03e70ac9630d">
+        <name>ChequeBondOutgoing</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>4</value>
+        </code>
+        <isFolder>true</isFolder>
+      </content>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <quickChoice>true</quickChoice>

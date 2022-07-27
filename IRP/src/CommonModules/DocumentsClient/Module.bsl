@@ -958,7 +958,8 @@ Function GetFormItemNames()
 				|SendUUID, ReceiveUUID,
 				|ItemListUseSerialLotNumber, ItemListIsService,
 				|PaymentListApArPostingDetail,
-				|InventoryUseSerialLotNumber, AccountBalanceIsFixedCurrency";
+				|InventoryUseSerialLotNumber, AccountBalanceIsFixedCurrency,
+				|ChequeBondsKey";
 
 	Return ItemNames;
 EndFunction	

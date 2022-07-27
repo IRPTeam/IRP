@@ -937,6 +937,7 @@
   <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6010B_ChequeBond</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>

@@ -424,6 +424,15 @@ Scenario: Create catalog Units objects (pcs)
 		| 'Ref'                                                           | 'DeletionMark' | 'Item'                                                          | 'Quantity' | 'BasisUnit'                                                     | 'UOM' | 'Description_en'         | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
 		| 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'False'           | ''                                                              | '1'        | ''                                                              | ''    | 'pcs'                    | ''                 | ''               | 'adet'                       |
 
+Scenario: Create catalog ChequeBonds objects
+
+	And I check or create catalog "ChequeBonds" objects:
+		| 'Ref'                                                                 | 'DeletionMark' | 'Description'        | 'Type'                               | 'DueDate'             | 'Currency'                                                           | 'Amount' | 'ChequeSerialNo' |
+		| 'e1cib/data/Catalog.ChequeBonds?ref=aa78120ed92fbced11eaf124a9ba0869' | 'False'           | 'Own cheque 1'       | 'Enum.ChequeBondTypes.OwnCheque'     | '30.09.2020 00:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '5 000'  | 'BB'             |
+		| 'e1cib/data/Catalog.ChequeBonds?ref=aa78120ed92fbced11eaf12effe70fb7' | 'False'           | 'Own cheque 2'       | 'Enum.ChequeBondTypes.OwnCheque'     | '30.09.2020 00:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '10 000' | 'AL'             |
+		| 'e1cib/data/Catalog.ChequeBonds?ref=aa78120ed92fbced11eaf124a9ba0868' | 'False'           | 'Partner cheque 1'   | 'Enum.ChequeBondTypes.PartnerCheque' | '30.09.2020 00:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '2 000'  | 'AA'             |
+		| 'e1cib/data/Catalog.ChequeBonds?ref=aa78120ed92fbced11eaf12effe70fb3' | 'True'          | 'Partner cheque 101' | 'Enum.ChequeBondTypes.PartnerCheque' | '30.09.2020 00:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '10 000' | 'AN'             |
+		| 'e1cib/data/Catalog.ChequeBonds?ref=aa78120ed92fbced11eaf12effe70fb4' | 'False'           | 'Partner cheque 102' | 'Enum.ChequeBondTypes.PartnerCheque' | '30.09.2020 00:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '15 000' | 'AN'             |
 
 
 

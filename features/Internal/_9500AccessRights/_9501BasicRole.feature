@@ -23,6 +23,7 @@ Scenario: 950100 Basic role
 	When Create catalog Companies objects (Main company)
 	When Create catalog Companies objects (partners company)
 	When Create catalog Countries objects
+	When Create catalog ChequeBonds objects
 	When Create catalog ExpenseAndRevenueTypes objects
 	When Create catalog FileStorageVolumes objects
 	When Create catalog InterfaceGroups objects

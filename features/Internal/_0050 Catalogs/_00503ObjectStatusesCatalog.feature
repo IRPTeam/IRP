@@ -282,3 +282,168 @@ Scenario: _005045 check for clearing the UniqueID field when copying the status
 		Then the form attribute named "UniqueID" became equal to ""
 		Then the form attribute named "Description_en" became equal to "Wait"
 	And I close all client application windows
+
+
+Scenario: _005046 create statuses for Cheque bond
+	* Opening of the catalog Objects status historyes and renaming of predefined elements for Cheque bond
+		Given I open hyperlink "e1cib/list/Catalog.ObjectStatuses"
+		And I expand current line in "List" table
+		And I expand a line in "List" table
+			| 'Predefined data name' |
+			| 'ChequeBondTransaction'     |
+		And I go to line in "List" table
+			| 'Predefined data name' |
+			| 'ChequeBondIncoming'     |
+		And I activate "Predefined data name" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuChange"
+		And I input "ChequeBondIncoming" text in the field named "Description_en"
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Predefined data name' |
+			| 'ChequeBondOutgoing'     |
+		And I activate "Predefined data name" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuChange"
+		And I input "ChequeBondOutgoing" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Create statuses for Cheque bond incoming
+		* Create status Taken from partner
+			And I go to line in "List" table
+			| 'Description'        |
+			| 'ChequeBondIncoming' |
+			And I click the button named "FormCreate"
+			And I input "01. TakenFromPartner" text in the field named "Description_en"
+			And I set checkbox "Set by default"
+			And I move to the tab named "GroupPosting"
+			And I change "Cheque bond balance" radio button value to "Posting"
+			And I change "Advanced" radio button value to "Posting"
+			And I change "Partner account transactions" radio button value to "Posting"
+			And I change "Reconciliation statement" radio button value to "Posting"
+			And I change "Planning cash transactions" radio button value to "Posting"
+			And I click "Save and close" button
+		* Create status Payment received
+			And I go to line in "List" table
+			| 'Description'        |
+			| 'ChequeBondIncoming' |
+			And I click the button named "FormCreate"
+			And I input "03. PaymentReceived" text in the field named "Description_en"
+			And I move to the tab named "GroupPosting"
+			And I change "Account balance" radio button value to "Posting"
+			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I click "Save and close" button
+		* Create status Protested
+			And I go to line in "List" table
+			| 'Description'        |
+			| 'ChequeBondIncoming' |
+			And I click the button named "FormCreate"
+			And I input "04. Protested" text in the field named "Description_en"
+			And I move to the tab named "GroupPosting"
+			And I change "Cheque bond balance" radio button value to "Reversal"
+			And I change "Advanced" radio button value to "Reversal"
+			And I change "Partner account transactions" radio button value to "Reversal"
+			And I change "Reconciliation statement" radio button value to "Reversal"
+			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I click "Save and close" button
+		* Create status Give to bank as assurance
+			And I go to line in "List" table
+			| 'Description'        |
+			| 'ChequeBondIncoming' |
+			And I click the button named "FormCreate"
+			And I input "02. GiveToBankAsAssurance" text in the field named "Description_en"
+			And I click "Save and close" button
+	* Create statuses for Cheque bond outgoing
+		* Create status Given to partner
+			And I go to line in "List" table
+				| 'Description'        |
+				| 'ChequeBondOutgoing' |
+			And I click the button named "FormCreate"
+			And I input "01. GivenToPartner" text in the field named "Description_en"
+			And I set checkbox "Set by default"
+			And I move to the tab named "GroupPosting"
+			And I change "Cheque bond balance" radio button value to "Posting"
+			And I change "Advanced" radio button value to "Posting"
+			And I change "Partner account transactions" radio button value to "Posting"
+			And I change "Reconciliation statement" radio button value to "Posting"
+			And I change "Planning cash transactions" radio button value to "Posting"
+			And I click "Save and close" button
+		* Create status Payed
+			And I go to line in "List" table
+				| 'Description'        |
+				| 'ChequeBondOutgoing' |
+			And I click the button named "FormCreate"
+			And I input "02. Payed" text in the field named "Description_en"
+			And I move to the tab named "GroupPosting"
+			And I change "Account balance" radio button value to "Posting"
+			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I click "Save and close" button
+		* Create status Protested
+			And I go to line in "List" table
+				| 'Description'        |
+				| 'ChequeBondOutgoing' |
+			And I click the button named "FormCreate"
+			And I input "03. Protested" text in the field named "Description_en"
+			And I move to the tab named "GroupPosting"
+			And I change "Cheque bond balance" radio button value to "Reversal"
+			And I change "Advanced" radio button value to "Reversal"
+			And I change "Partner account transactions" radio button value to "Reversal"
+			And I change "Reconciliation statement" radio button value to "Reversal"
+			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I click "Save and close" button
+	* Setting the order of statuses for incoming cheques
+		And I go to line in "List" table
+			| 'Description'          |
+			| '01. TakenFromPartner' |
+		And I select current line in "List" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And Delay 2
+		And I go to line in "List" table
+			| 'Description'               |
+			| '02. GiveToBankAsAssurance' |
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And I go to line in "List" table
+			| 'Description'   |
+			| '04. Protested' |
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And I click "Save and close" button
+		And I wait "01. TakenFromPartner (Order status) *" window closing in 20 seconds
+		And I go to line in "List" table
+			| 'Description'               |
+			| '02. GiveToBankAsAssurance' |
+		And I select current line in "List" table
+		And in the table "NextPossibleStatuses" I click "Add" button
+		And I go to line in "List" table
+			| 'Description'         |
+			| '03. PaymentReceived' |
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And in the table "NextPossibleStatuses" I click "Add" button
+		And I go to line in "List" table
+			| 'Description'   |
+			| '04. Protested' |
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And I click "Save and close" button
+	* Setting the order of statuses for outgoing cheques
+		And I go to line in "List" table
+			| 'Description'          |
+			| '01. GivenToPartner' |
+		And I select current line in "List" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And Delay 2
+		And I go to line in "List" table
+			| 'Description'               |
+			| '02. Payed' |
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And in the table "NextPossibleStatuses" I click "Add" button
+		And I go to line in "List" table
+			| 'Description'   |
+			| '03. Protested' |
+		And I select current line in "List" table
+		And I finish line editing in "NextPossibleStatuses" table
+		And I click "Save and close" button

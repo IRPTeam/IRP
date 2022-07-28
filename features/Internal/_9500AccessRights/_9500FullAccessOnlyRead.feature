@@ -19,6 +19,7 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create catalog Agreements objects
 	When Create catalog BusinessUnits objects
 	When Create catalog CashAccounts objects
+	When Create catalog ChequeBonds objects
 	When Create catalog Companies objects (Main company)
 	When Create catalog Companies objects (partners company)
 	When Create catalog Countries objects
@@ -1079,7 +1080,17 @@ Scenario: 950082 check role Full access only read (Customers advances closing)
 			Then I raise "Failed to open" exception
 		And I close all client application windows
 
-
+Scenario: 950035 check role Full access only read (Cheque bonds)
+		And I close all client application windows
+		And In the command interface I select "Treasury" "Cheque bonds"		
+		And I go to line in "List" table
+			| 'Cheque No' |
+			| 'Own cheque 2'     |
+		And I select current line in "List" table
+		If the warning is displayed then 
+			Then I raise "Failed to open" exception
+		And I close all client application windows
+		
 Scenario: _999999 close TestClient session
 		And I close TestClient session
 		Then I connect launched Test client "Этот клиент"

@@ -1504,30 +1504,7 @@ FROM
   </formCommands>
   <commandInterface>
     <navigationPanel/>
-    <commandBar>
-      <cmiFragmentRecord>
-        <command>CommonCommand.AddProperties</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Items.List.CurrentData</segments>
-        </commandParameter>
-        <group>FormCommandBarImportant</group>
-        <index>0</index>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-      </cmiFragmentRecord>
-      <cmiFragmentRecord>
-        <command>CommonCommand.AttachedFiles</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Items.List.CurrentData</segments>
-        </commandParameter>
-        <group>FormCommandBarImportant</group>
-        <index>1</index>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-      </cmiFragmentRecord>
-    </commandBar>
+    <commandBar/>
   </commandInterface>
   <extInfo xsi:type="form:DynamicListFormExtInfo"/>
 </form:Form>

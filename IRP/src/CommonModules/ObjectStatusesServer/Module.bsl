@@ -163,6 +163,23 @@ EndFunction
 
 #Region CHEQUE
 
+Function GetAvailableStatusesByCheque(ChequeBondTransactionRef, ChequeRef) Export
+	PointInTime = New Boundary(ChequeBondTransactionRef.Date, BoundaryType.Excluding);
+	ArrayOfStatuses = New Array();
+	StatusInfo = GetLastStatusInfoByCheque(PointInTime, ChequeRef);
+	If Not ValueIsFilled(StatusInfo.Status) Then
+		ArrayOfStatuses.Add(GetStatusByDefaultForCheque(ChequeRef));
+	Else
+		For Each Status In GetNextPossibleStatuses(StatusInfo.Status) Do
+			If ArrayOfStatuses.Find(Status) = Undefined Then
+				ArrayOfStatuses.Add(Status);
+			EndIf;
+		EndDo;
+		Return ArrayOfStatuses;
+	EndIf;
+	Return ArrayOfStatuses;
+EndFunction
+
 Function GetLastStatusInfoByCheque(PointInTime, ChequeRef) Export
 	Query = New Query();
 	If PointInTime <> Undefined Then
@@ -202,6 +219,23 @@ Function GetStatusByDefaultForCheque(ChequeRef) Export
 	Else
 		Return Undefined;
 	EndIf;
+EndFunction
+
+Function GetNextPossibleStatuses(Status) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ObjectStatusesNextPossibleStatuses.Status AS Status
+	|FROM
+	|	Catalog.ObjectStatuses.NextPossibleStatuses AS ObjectStatusesNextPossibleStatuses
+	|WHERE
+	|	ObjectStatusesNextPossibleStatuses.Ref = &Ref
+	|GROUP BY
+	|	ObjectStatusesNextPossibleStatuses.Status";
+	Query.SetParameter("Ref", Status);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable.UnloadColumn("Status");
 EndFunction
 
 #EndRegion

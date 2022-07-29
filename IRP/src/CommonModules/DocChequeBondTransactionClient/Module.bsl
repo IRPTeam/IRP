@@ -218,6 +218,53 @@ EndProcedure
 
 #EndRegion
 
+#Region NEW_STATUS
+
+Procedure ChequeBondsNewStatusOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ChequeBondsNewStatusOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure ChequeBondsNewStatusStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	ChoiceData = New ValueList();
+	For Each StatusRef In ObjectStatusesServer.GetAvailableStatusesByCheque(Object.Ref, CurrentData.Cheque) Do
+		ChoiceData.Add(StatusRef, String(StatusRef));
+	EndDo;
+EndProcedure
+
+Procedure ChequeBondsNewStatusEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	StandardProcessing = False;
+	
+	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If Not ValueIsFilled(Text) Then
+		Return;
+	EndIf;
+	
+	ArrayOfFilters = New Array();
+	
+	AdditionalParameters = New Structure();
+	AdditionalParameters.Insert("Filter_RefInList", True);
+	AdditionalParameters.Insert("RefList", ObjectStatusesServer.GetAvailableStatusesByCheque(Object.Ref, CurrentData.Cheque));
+	
+	ArrayOfFilteredStatusRefs = ObjectStatusesServer.GetObjectStatusesChoiceDataTable(Text, ArrayOfFilters, AdditionalParameters);
+	If Not ArrayOfFilteredStatusRefs.Count() Then
+		Return;
+	EndIf;
+	
+	ObjectStatusesClient.StatusEditTextChange(Form, Object, ArrayOfFilters, AdditionalParameters, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

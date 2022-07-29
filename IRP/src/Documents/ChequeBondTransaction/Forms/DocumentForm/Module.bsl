@@ -124,6 +124,25 @@ EndProcedure
 
 #EndRegion
 
+#Region NEW_STATUS
+
+&AtClient
+Procedure ChequeBondsNewStatusOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsNewStatusOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsNewStatusStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsNewStatusStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure 
+
+&AtClient
+Procedure ChequeBondsNewStatusEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsNewStatusEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);	
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

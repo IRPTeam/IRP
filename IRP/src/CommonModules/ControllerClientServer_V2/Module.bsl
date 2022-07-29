@@ -4756,6 +4756,12 @@ EndFunction
 
 #Region CHEQUE_BONDS_NEW_STATUS
 
+// ChequeBonds.NewStatus.OnChange
+Procedure ChequeBondsNewStatusOnChange(Parameters) Export
+	Binding = BindChequeBondsCheque(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
 // ChequeBonds.NewStatus.Set
 Procedure SetChequeBondsNewStatus(Parameters, Results) Export
 	Binding = BindChequeBondsNewStatus(Parameters);

@@ -1035,6 +1035,17 @@ EndProcedure
 
 #EndRegion
 
+#Region CHEQUE_BONDS_NEW_STATUS
+
+// ChequeBonds.NewStatus
+Procedure ChequeBondsNewStatusOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsNewStatusOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region _ITEM_LIST_

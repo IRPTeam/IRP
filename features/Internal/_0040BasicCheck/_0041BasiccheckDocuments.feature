@@ -766,6 +766,28 @@ Scenario: Open object form "CustomersAdvancesClosing"
 		Then I raise "Failed to open document object form RetailReturnReceipt" exception
 	And I close current window
 
+Scenario: Open list form "ChequeBondTransaction" 
+	And I close all client application windows
+	Given I open "ChequeBondTransaction" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ChequeBondTransaction" exception
+	And I close current window
+
+Scenario: Open object form "ChequeBondTransaction"
+	And I close all client application windows
+	Given I open "ChequeBondTransaction" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ChequeBondTransaction" exception
+	And I close current window
+
+Scenario: Open choise form "ChequeBondTransaction"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.ChequeBondTransaction.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form ChequeBondTransaction" exception
+	And I close current window
+
 Scenario: Open choise form "CashStatement"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)

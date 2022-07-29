@@ -160,3 +160,48 @@ Function GetObjectStatusesChoiceDataTable(SearchString, ArrayOfFilters, Addition
 	TableOfResult = Catalogs.ObjectStatuses.GetChoiceDataTable(Parameters);
 	Return TableOfResult.UnloadColumn("Ref");
 EndFunction
+
+#Region CHEQUE
+
+Function GetLastStatusInfoByCheque(PointInTime, ChequeRef) Export
+	Query = New Query();
+	If PointInTime <> Undefined Then
+		Query.Text = "SELECT
+			|	ChequeBondStatusesSliceLast.Period,
+			|	ChequeBondStatusesSliceLast.Cheque AS Object,
+			|	ChequeBondStatusesSliceLast.Status,
+			|	ChequeBondStatusesSliceLast.Author
+			|FROM
+			|	InformationRegister.ChequeBondStatuses.SliceLast(&PointInTime, Cheque = &Cheque) AS ChequeBondStatusesSliceLast";
+		
+	Else
+		Query.Text = "SELECT
+			|	ChequeBondStatusesSliceLast.Period,
+			|	ChequeBondStatusesSliceLast.Cheque AS Object,
+			|	ChequeBondStatusesSliceLast.Status,
+			|	ChequeBondStatusesSliceLast.Author
+			|FROM
+			|	InformationRegister.ChequeBondStatuses.SliceLast(, Cheque = &Cheque) AS ChequeBondStatusesSliceLast";
+	EndIf;
+	Query.SetParameter("Cheque"      , ChequeRef);
+	Query.SetParameter("PointInTime" , PointInTime);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return PutStatusInfoToStructure(QuerySelection);
+	Else
+		Return PutStatusInfoToStructure();
+	EndIf;
+EndFunction
+
+Function GetStatusByDefaultForCheque(ChequeRef) Export
+	If ChequeRef.Type = Enums.ChequeBondTypes.PartnerCheque Then
+		Return GetStatusByDefault(ChequeRef, "ChequeBondIncoming");
+	ElsIf ChequeRef.Type = Enums.ChequeBondTypes.OwnCheque Then
+		Return GetStatusByDefault(ChequeRef, "ChequeBondOutgoing");
+	Else
+		Return Undefined;
+	EndIf;
+EndFunction
+
+#EndRegion

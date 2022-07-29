@@ -95,15 +95,34 @@ EndProcedure
 
 &AtClient
 Procedure ChequeBondsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocChequeBondTransactionClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+	DocChequeBondTransactionClient.ChequeBondsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
 Procedure ChequeBondsAfterDeleteRow(Item)
-	DocChequeBondTransactionClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	DocChequeBondTransactionClient.ChequeBondsAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
 #Region CHEQUE_BONDS_COLUMNS
+
+#Region CHEQUE
+
+&AtClient
+Procedure ChequeBondsChequeOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsChequeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsChequeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsChequeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsChequeEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsChequeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 

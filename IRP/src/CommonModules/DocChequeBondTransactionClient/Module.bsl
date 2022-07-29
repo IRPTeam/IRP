@@ -50,60 +50,173 @@ EndProcedure
 
 #EndRegion
 
-#Region STATUS
-	
-Procedure StatusStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	StandardProcessing = False;
-	
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
-	OpenSettings.FormName = "Catalog.ObjectStatuses.Form.ChoiceForm";
-	OpenSettings.ArrayOfFilters = New Array;
-	
-	If Form.ChequeBondType = PredefinedValue("Enum.ChequeBondTypes.OwnCheque") Then
-		Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondOutgoing");
-	Else
-		Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondIncoming");
-	EndIf;
-	
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Parent", 
-																Parent, DataCompositionComparisonType.InHierarchy));
-	
-	DocumentsClient.StatusStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);																																
-EndProcedure						
-
-Procedure StatusEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	EditSettings = DocumentsClient.GetOpenSettingsStructure();
-
-	If Form.ChequeBondType = PredefinedValue("Enum.ChequeBondTypes.OwnCheque") Then
-		Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondOutgoing");
-	Else
-		Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondIncoming");
-	EndIf;
-	
-	EditSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
-	EditSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Parent", 
-																Parent, DataCompositionComparisonType.InHierarchy));	
-	
-	DocumentsClient.StatusEditTextChange(Object, Form, Item, Text, StandardProcessing, EditSettings);
-EndProcedure
-
-#EndRegion
+//#Region STATUS
+//	
+//Procedure StatusStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+//	StandardProcessing = False;
+//	
+//	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+//	
+//	OpenSettings.FormName = "Catalog.ObjectStatuses.Form.ChoiceForm";
+//	OpenSettings.ArrayOfFilters = New Array;
+//	
+//	If Form.ChequeBondType = PredefinedValue("Enum.ChequeBondTypes.OwnCheque") Then
+//		Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondOutgoing");
+//	Else
+//		Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondIncoming");
+//	EndIf;
+//	
+//	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
+//																	True, DataCompositionComparisonType.NotEqual));
+//	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Parent", 
+//																Parent, DataCompositionComparisonType.InHierarchy));
+//	
+//	DocumentsClient.StatusStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);																																
+//EndProcedure						
+//
+//Procedure StatusEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+//	EditSettings = DocumentsClient.GetOpenSettingsStructure();
+//
+//	If Form.ChequeBondType = PredefinedValue("Enum.ChequeBondTypes.OwnCheque") Then
+//		Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondOutgoing");
+//	Else
+//		Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondIncoming");
+//	EndIf;
+//	
+//	EditSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
+//																		True, DataCompositionComparisonType.NotEqual));
+//	EditSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Parent", 
+//																Parent, DataCompositionComparisonType.InHierarchy));	
+//	
+//	DocumentsClient.StatusEditTextChange(Object, Form, Item, Text, StandardProcessing, EditSettings);
+//EndProcedure
+//
+//#EndRegion
 
 #Region CHEQUE_BONDS
 
-Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+Procedure ChequeBondsBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
 	ViewClient_V2.ChequeBondsBeforeAddRow(Object, Form, Cancel, Clone);
 EndProcedure
 
-Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
+Procedure ChequeBondsAfterDeleteRow(Object, Form, Item) Export
 	ViewClient_V2.ChequeBondsAfterDeleteRow(Object, Form);
 EndProcedure
 
 #Region CHEQUE_BONDS_COLUMNS
+
+#Region CHEQUE
+
+Procedure ChequeBondsChequeOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ChequeBondsChequeOnChange(Object, Form, CurrentData);
+	
+	//Status, Amount, NewStatus, Currency
+	//FillPropertyValues(CurrentData, DocChequeBondTransactionServer.GetChequeInfo(Object.Ref, CurrentData.Cheque));
+	// CleanPaymentList()
+EndProcedure
+
+//Procedure CleanPaymentList(Object, Form) Export
+//	CurrentData = Form.Items.ChequeBonds.CurrentData;
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	
+//	DependentLines = Object.PaymentList.FindRows(New Structure("Key", CurrentData.Key));
+//	
+//	If CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement).Type = PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
+//		For Each DependentLine In DependentLines Do
+//			Object.PaymentList.Delete(DependentLine);
+//			Return;
+//		EndDo;
+//	EndIf;
+//	
+//	ChequeType = ServiceSystemServer.GetObjectAttribute(CurrentData.Cheque, "Type");
+//	If ChequeType = PredefinedValue("Enum.ChequeBondTypes.PartnerCheque") Then
+//		ColumnName = "PartnerArBasisDocument";
+//	ElsIf ChequeType = PredefinedValue("Enum.ChequeBondTypes.OwnCheque") Then
+//		ColumnName = "PartnerApBasisDocument"; 
+//	Else
+//		For Each DependentLine In DependentLines Do
+//			Object.PaymentList.Delete(DependentLine);
+//			Return;
+//		EndDo;
+//	EndIf;
+//	
+//	ControlDocuments = New Array();
+//	For Each DependentLine In DependentLines Do
+//		If ValueIsFilled(DependentLine[ColumnName]) Then
+//			ControlDocuments.Add(DependentLine[ColumnName]);
+//		Else
+//			Object.PaymentList.Delete(DependentLine);
+//		EndIf;
+//	EndDo;
+//	
+//	If ControlDocuments.Count() = 0 Then
+//		Return;
+//	EndIf;
+//	
+//	ControlStructure = New Structure(, );
+//	ControlStructure.Insert("Company", Object.Company);
+//	ControlStructure.Insert("Partner", Form.CurrentPartner);
+//	ControlStructure.Insert("LegalName", Form.CurrentLegalName);
+//	ControlStructure.Insert("Agreement", Form.CurrentAgreement);
+//	ControlStructure.Insert("ControlDocument", ControlDocuments);
+//	ControlStructure.Insert("EndDate", Object.Date - 1);
+//	ControlStructure.Insert("UseCurrencyFilter", ValueIsFilled(Object.Currency));
+//	ControlStructure.Insert("Currency", Object.Currency);
+//	
+//	InvalidDocuments = DocChequeBondTransactionServer.InvalidDocuments(ControlStructure);
+//	
+//	For Each DependentLine In DependentLines Do
+//		If InvalidDocuments.Find(DependentLine[ColumnName]) = Undefined Then
+//			Continue;
+//		Else
+//			Object.PaymentList.Delete(DependentLine);
+//		EndIf;
+//	EndDo;
+//
+//EndProcedure
+
+Procedure ChequeBondsChequeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+		
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Currency", Object.Currency, DataCompositionComparisonType.Equal));
+	
+	OpenSettings.FormParameters = New Structure();
+	If ValueIsFilled(Object.Currency) Then
+		OpenSettings.FormParameters.Insert("Currency", Object.Currency);
+		OpenSettings.FormParameters.Insert("FilterByCurrency", True);
+	EndIf;
+	
+	OpenSettings.FillingData = New Structure("Currency", Object.Currency);
+	OpenSettings.FormName = "Catalog.ChequeBonds.ChoiceForm";
+	
+	DocumentsClient.OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure ChequeBondsChequeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	StandardProcessing = False;
+	
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	
+	AdditionalParameters = New Structure();
+	If ValueIsFilled(Object.Currency) Then
+		AdditionalParameters.Insert("Currency", Object.Currency);
+		AdditionalParameters.Insert("FilterByCurrency", True);
+	EndIf;
+	
+	ArrayOfChoiceParameters = New Array();
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
+	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 

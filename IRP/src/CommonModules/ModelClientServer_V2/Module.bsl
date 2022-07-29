@@ -227,6 +227,8 @@ Function GetChain()
 	
 	Chain.Insert("ChangeLandedCostBySalesDocument" , GetChainLink("ChangeLandedCostBySalesDocumentExecute"));
 	
+	Chain.Insert("ChangeStatusByCheque" , GetChainLink("ChangeStatusByChequeExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -991,6 +993,18 @@ Function ChangeReceiveAmountBySendAmountExecute(Options) Export
 	Else
 		Return Options.ReceiveAmount;
 	EndIf;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_STATUS_BY_CHEQUE
+
+Function ChangeStatusByChequeOptions() Export
+	Return GetChainLinkOptions("Ref, Cheque");
+EndFunction
+
+Function ChangeStatusByChequeExecute(Options) Export
+	Return DocChequeBondTransactionServer.GetChequeInfo(Options.Ref, Options.Cheque);
 EndFunction
 
 #EndRegion

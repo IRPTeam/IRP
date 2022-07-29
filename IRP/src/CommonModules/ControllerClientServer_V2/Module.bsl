@@ -4681,6 +4681,132 @@ EndProcedure
 
 #EndRegion
 
+#Region CHEQUE_BONDS
+
+#Region CHEQUE_BONDS_CHEQUE
+
+// ChequeBonds.Cheque.OnChange
+Procedure ChequeBondsChequeOnChange(Parameters) Export
+	AddViewNotify("OnSetChequeBondsChequeNotify", Parameters);
+	Binding = BindChequeBondsCheque(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ChequeBonds.Cheque.Set
+Procedure SetChequeBondsCheque(Parameters, Results) Export
+	Binding = BindChequeBondsCheque(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetChequeBondsChequeNotify");
+EndProcedure
+
+// ChequeBonds.Cheque.MultiSet
+Procedure MultiSetChequeBondsCheque(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Status"    , BindChequeBondsStatus(Parameters));
+	ResourceToBinding.Insert("NewStatus" , BindChequeBondsNewStatus(Parameters));
+	ResourceToBinding.Insert("Currency"  , BindChequeBondsCurrency(Parameters));
+	ResourceToBinding.Insert("Amount"    , BindChequeBondsAmount(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// ChequeBonds.Cheque.Get
+Function GetChequeBondsCheque(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindChequeBondsCheque(Parameters).DataPath, _Key);
+EndFunction
+
+// ChequeBonds.Cheque.Bind
+Function BindChequeBondsCheque(Parameters)
+	DataPath = "ChequeBonds.Cheque";
+	Binding = New Structure();
+	Binding.Insert("ChequeBondTransaction"     , "Step__ByCheque");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ChequeBonds.Cheque.StepChangeStatusByCheque.Step
+Procedure StepChangeStatusByCheque(Parameters, Chain) Export
+	Chain.ChangeStatusByCheque.Enable = True;
+	Chain.ChangeStatusByCheque.Setter = "MultiSetChequeBondsCheque";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeStatusByChequeOptions();
+		Options.Ref = Parameters.Object.Ref;
+		Options.Cheque = GetChequeBondsCheque(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeStatusByCheque";
+		Chain.ChangeStatusByCheque.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region CHEQUE_BONDS_STATUS
+
+// ChequeBonds.Status.Set
+Procedure SetChequeBondsStatus(Parameters, Results) Export
+	Binding = BindChequeBondsStatus(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ChequeBonds.Status.Bind
+Function BindChequeBondsStatus(Parameters)
+	DataPath = "ChequeBonds.Status";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region CHEQUE_BONDS_NEW_STATUS
+
+// ChequeBonds.NewStatus.Set
+Procedure SetChequeBondsNewStatus(Parameters, Results) Export
+	Binding = BindChequeBondsNewStatus(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ChequeBonds.NewStatus.Bind
+Function BindChequeBondsNewStatus(Parameters)
+	DataPath = "ChequeBonds.NewStatus";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region CHEQUE_BONDS_CURRENCY
+
+// ChequeBonds.Currency.Set
+Procedure SetChequeBondsCurrency(Parameters, Results) Export
+	Binding = BindChequeBondsCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ChequeBonds.Currency.Bind
+Function BindChequeBondsCurrency(Parameters)
+	DataPath = "ChequeBonds.Currency";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region CHEQUE_BONDS_AMOUNT
+
+// ChequeBonds.Amount.Set
+Procedure SetChequeBondsAmount(Parameters, Results) Export
+	Binding = BindChequeBondsAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ChequeBonds.Amount.Bind
+Function BindChequeBondsAmount(Parameters)
+	DataPath = "ChequeBonds.Amount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#EndRegion
+
 #Region ITEM_LIST
 
 #Region ITEM_LIST_PARTNER_ITEM

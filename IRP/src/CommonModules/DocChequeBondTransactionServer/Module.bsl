@@ -52,3 +52,22 @@ Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
+
+#Region Service
+
+Function GetChequeInfo(ChequeBondTransactionRef, ChequeRef) Export
+	StatusDate = New Boundary(ChequeBondTransactionRef.Date, BoundaryType.Excluding);
+	 
+	Info = New Structure("Status, Amount, NewStatus, Currency");
+	Info.Status = ObjectStatusesServer.GetLastStatusInfoByCheque(StatusDate, ChequeRef).Status;
+	If Not ValueIsFilled(Info.Status) Then
+		Info.NewStatus = ObjectStatusesServer.GetStatusByDefaultForCheque(ChequeRef);
+	EndIf;
+		
+	Info.Amount = ChequeRef.Amount;
+	Info.Currency = ChequeRef.Currency;
+	Return Info;
+EndFunction
+
+#EndRegion
+

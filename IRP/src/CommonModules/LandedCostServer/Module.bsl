@@ -915,9 +915,7 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	"SELECT
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
 	|	SUM(T6020S_BatchKeysInfo.Amount) AS Amount,
-	//--/
 	|	SUM(T6020S_BatchKeysInfo.AmountTax) AS AmountTax,
-	//--/
 	|	T6020S_BatchKeysInfo.Recorder AS Document,
 	|	T6020S_BatchKeysInfo.Recorder.PointInTime AS PointInTime,
 	|	T6020S_BatchKeysInfo.Period AS Date,
@@ -925,13 +923,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	T6020S_BatchKeysInfo.Direction AS Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice,
-	//--
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end AS ProfitLossCenter,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end AS ExpenseType,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end AS RowID,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
-	//--
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
 	|INTO BatchKeysRegister
@@ -952,13 +948,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	T6020S_BatchKeysInfo.Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice,
-	//--
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end,
-	//--
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.ItemKey
 	|;
@@ -1000,9 +994,7 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|SELECT
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
 	|	SUM(T6020S_BatchKeysInfo.Amount) AS Amount,
-	//--/
 	|	SUM(T6020S_BatchKeysInfo.AmountTax) AS AmountTax,
-	//-/
 	|	T6020S_BatchKeysInfo.Recorder AS Document,
 	|	T6020S_BatchKeysInfo.Recorder.PointInTime AS PointInTime,
 	|	T6020S_BatchKeysInfo.Period AS Date,
@@ -1010,13 +1002,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	T6020S_BatchKeysInfo.Direction AS Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice,
-	//--
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end AS ProfitLossCenter,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end AS ExpenseType,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end AS RowID,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
-	//--
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
 	|INTO BatchKeysRegisterOutPeriod
@@ -1032,13 +1022,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	T6020S_BatchKeysInfo.Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice,
-	//--
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end,
-	//--
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.ItemKey
 	|;
@@ -1047,9 +1035,7 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|SELECT
 	|	BatchKeysRegister.Quantity AS Quantity,
 	|	BatchKeysRegister.Amount AS Amount,
-	//--/
 	|	BatchKeysRegister.AmountTax AS AmountTax,
-	//--/
 	|	BatchKeysRegister.Document AS Document,
 	|	BatchKeysRegister.PointInTime AS PointInTime,
 	|	BatchKeysRegister.Date AS Date,
@@ -1057,13 +1043,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	BatchKeysRegister.Direction AS Direction,
 	|	BatchKeysRegister.BatchDocument AS BatchDocument,
 	|	BatchKeysRegister.SalesInvoice AS SalesInvoice,
-	//--
 	|	BatchKeysRegister.ProfitLossCenter AS ProfitLossCenter,
 	|	BatchKeysRegister.ExpenseType AS ExpenseType,
 	|	BatchKeysRegister.RowID AS RowID,
 	|	BatchKeysRegister.Branch AS Branch,
 	|	BatchKeysRegister.Currency AS Currency,
-	//--
 	|	BatchKeysRegister.Store AS Store,
 	|	BatchKeysRegister.ItemKey AS ItemKey
 	|INTO BatchKeysInfo
@@ -1075,9 +1059,7 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|SELECT
 	|	BatchKeysRegisterOutPeriod.Quantity,
 	|	BatchKeysRegisterOutPeriod.Amount,
-	//--/
 	|	BatchKeysRegisterOutPeriod.AmountTax,
-	//--/
 	|	BatchKeysRegisterOutPeriod.Document,
 	|	BatchKeysRegisterOutPeriod.PointInTime,
 	|	BatchKeysRegisterOutPeriod.Date,
@@ -1085,13 +1067,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	BatchKeysRegisterOutPeriod.Direction,
 	|	BatchKeysRegisterOutPeriod.BatchDocument,
 	|	BatchKeysRegisterOutPeriod.SalesInvoice,
-	//--
 	|	BatchKeysRegisterOutPeriod.ProfitLossCenter,
 	|	BatchKeysRegisterOutPeriod.ExpenseType,
 	|	BatchKeysRegisterOutPeriod.RowID,
 	|	BatchKeysRegisterOutPeriod.Branch,
 	|	BatchKeysRegisterOutPeriod.Currency,
-	//--
 	|	BatchKeysRegisterOutPeriod.Store,
 	|	BatchKeysRegisterOutPeriod.ItemKey
 	|FROM
@@ -1103,9 +1083,7 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	BatchKeys.Ref AS BatchKey,
 	|	SUM(BatchKeysInfo.Quantity) AS Quantity,
 	|	SUM(BatchKeysInfo.Amount) AS Amount,
-	//--/
 	|	SUM(BatchKeysInfo.AmountTax) AS AmountTax,
-	//--/
 	|	BatchKeysInfo.Document AS Document,
 	|	BatchKeysInfo.PointInTime AS PointInTime,
 	|	BatchKeysInfo.Date AS Date,
@@ -1113,13 +1091,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	BatchKeysInfo.Direction AS Direction,
 	|	BatchKeysInfo.BatchDocument AS BatchDocument,
 	|	BatchKeysInfo.SalesInvoice AS SalesInvoice,
-	//--
 	|	BatchKeysInfo.ProfitLossCenter AS ProfitLossCenter,
 	|	BatchKeysInfo.ExpenseType AS ExpenseType,
 	|	BatchKeysInfo.RowID AS RowID,
 	|	BatchKeysInfo.Branch AS Branch,
 	|	BatchKeysInfo.Currency AS Currency
-	//--
 	|INTO BatchKeys
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -1136,13 +1112,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	BatchKeysInfo.Direction,
 	|	BatchKeysInfo.BatchDocument,
 	|	BatchKeysInfo.SalesInvoice,
-	//--
 	|	BatchKeysInfo.ProfitLossCenter,
 	|	BatchKeysInfo.ExpenseType,
 	|	BatchKeysInfo.RowID,
 	|	BatchKeysInfo.Branch,
 	|	BatchKeysInfo.Currency
-	//--
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////
@@ -1151,9 +1125,7 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	BatchKeys.BatchKey AS BatchKey,
 	|	BatchKeys.Quantity AS Quantity,
 	|	BatchKeys.Amount AS Amount,
-	//--/
 	|	BatchKeys.AmountTax AS AmountTax,
-	//--/
 	|	BatchKeys.Document AS Document,
 	|	BatchKeys.PointInTime AS PointInTime,
 	|	BatchKeys.Date AS Date,
@@ -1172,23 +1144,19 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|			THEN 0
 	|		ELSE BatchKeys.Amount
 	|	END AS AmountBalance,
-	//--/
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.AmountTax
 	|	END AS AmountTaxBalance,
-	//--/
 	|	BatchKeys.BatchDocument AS BatchDocument,
 	|	BatchKeys.SalesInvoice AS SalesInvoice,
-	//--
 	|	BatchKeys.ProfitLossCenter AS ProfitLossCenter,
 	|	BatchKeys.ExpenseType AS ExpenseType,
 	|	BatchKeys.RowID AS RowID,
 	|	BatchKeys.Branch AS Branch,
 	|	BatchKeys.Currency AS Currency
-	//--
 	|INTO AllData
 	|FROM
 	|	BatchKeys AS BatchKeys
@@ -1205,9 +1173,7 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	R6010B_BatchWiseBalance.BatchKey,
 	|	0,
 	|	0,
-	//--/
 	|	0,
-	//--/
 	|	R6010B_BatchWiseBalance.Batch.Document,
 	|	R6010B_BatchWiseBalance.Batch.Document.PointInTime,
 	|	R6010B_BatchWiseBalance.Batch.Date,
@@ -1216,18 +1182,14 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	R6010B_BatchWiseBalance.Batch,
 	|	R6010B_BatchWiseBalance.QuantityBalance,
 	|	R6010B_BatchWiseBalance.AmountBalance,
-	//--/
 	|	R6010B_BatchWiseBalance.AmountTaxBalance,
-	//--/
 	|	UNDEFINED,
 	|	UNDEFINED,
-	//--
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED
-	//--
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(ENDOFPERIOD(&EndPeriod, DAY), (BatchKey, Batch.Company) IN
 	|		(SELECT
@@ -1243,9 +1205,7 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	AllData.BatchKey AS BatchKey,
 	|	SUM(AllData.Quantity) AS Quantity,
 	|	SUM(AllData.Amount) AS Amount,
-	//--/
 	|	SUM(AllData.AmountTax) AS AmountTax,
-	//--/
 	|	AllData.Document AS Document,
 	|	AllData.Document.PointInTime AS PointInTime,
 	|	AllData.Date AS Date,
@@ -1254,18 +1214,14 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	AllData.Batch AS Batch,
 	|	SUM(AllData.QuantityBalance) AS QuantityBalance,
 	|	SUM(AllData.AmountBalance) AS AmountBalance,
-	//--/
 	|	SUM(AllData.AmountTaxBalance) AS AmountTaxBalance,
-	//--/
 	|	AllData.BatchDocument AS BatchDocument,
 	|	AllData.SalesInvoice AS SalesInvoice,
-	//--
 	|	AllData.ProfitLossCenter AS ProfitLossCenter,
 	|	AllData.ExpenseType AS ExpenseType,
 	|	AllData.RowID AS RowID,
 	|	AllData.Branch AS Branch,
 	|	AllData.Currency AS Currency
-	//--
 	|INTO AllDataGrouped
 	|FROM
 	|	AllData AS AllData
@@ -1280,13 +1236,11 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	AllData.Batch,
 	|	AllData.BatchDocument,
 	|	AllData.SalesInvoice,
-	//--
 	|	AllData.ProfitLossCenter,
 	|	AllData.ExpenseType,
 	|	AllData.RowID,
 	|	AllData.Branch,
 	|	AllData.Currency
-	//--
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////
@@ -1295,9 +1249,7 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	AllDataGrouped.BatchKey AS BatchKey,
 	|	AllDataGrouped.Quantity AS Quantity,
 	|	AllDataGrouped.Amount AS Amount,
-	//--/
 	|	AllDataGrouped.AmountTax AS AmountTax,
-	//--/
 	|	AllDataGrouped.Document AS Document,
 	|	AllDataGrouped.Date AS Date,
 	|	AllDataGrouped.Company AS Company,
@@ -1305,18 +1257,14 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|	AllDataGrouped.Batch AS Batch,
 	|	AllDataGrouped.QuantityBalance AS QuantityBalance,
 	|	AllDataGrouped.AmountBalance AS AmountBalance,
-	//--/
 	|	AllDataGrouped.AmountTaxBalance AS AmountTaxBalance,
-	//--/
 	|	AllDataGrouped.BatchDocument AS BatchDocument,
 	|	AllDataGrouped.SalesInvoice AS SalesInvoice,
-	//--
 	|	AllDataGrouped.ProfitLossCenter AS ProfitLossCenter,
 	|	AllDataGrouped.ExpenseType AS ExpenseType,
 	|	AllDataGrouped.RowID AS RowID,
 	|	AllDataGrouped.Branch AS Branch,
 	|	AllDataGrouped.Currency AS Currency,
-	//--
 	|	FALSE AS Skip,
 	|	0 AS Priority
 	|FROM
@@ -1348,9 +1296,10 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|DROP AllData;
 	|DROP AllDataGrouped";
 	QueryDrop.Execute();
+	
 	ArrayOfReturnedSalesInvoices = New Array();
-	For Each Row In Tree.Rows Do
-		For Each RowDetails In Row.Rows Do
+	For Each Row In Tree.Rows Do // document level
+		For Each RowDetails In Row.Rows Do // row level
 			If ValueIsFilled(RowDetails.SalesInvoice) Then
 				ArrayOfReturnedSalesInvoices.Add(RowDetails.SalesInvoice);
 			EndIf;
@@ -1366,10 +1315,10 @@ Function GetBatchTree(TempTablesManager, CalculateMovementCostsRef, Company, Beg
 	|GROUP BY
 	|	R6050T_SalesBatchesTurnovers.Batch.Document";
 	Query.SetParameter("ArrayOfReturnedSalesInvoices", ArrayOfReturnedSalesInvoices);
-	TableOfBatchDocuments = Query.Execute().Unload();
-	For Each RowBatchDocument In TableOfBatchDocuments Do
-		If Not Tree.Rows.FindRows(New Structure("Document", RowBatchDocument.BatchDocument)).Count() Then
-			Tree.Rows.Add().Document = RowBatchDocument.BatchDocument;
+	TableOfReturnedBatches = Query.Execute().Unload();
+	For Each ReturnedBatch In TableOfReturnedBatches Do
+		If Not Tree.Rows.FindRows(New Structure("Document", ReturnedBatch.BatchDocument)).Count() Then
+			Tree.Rows.Add().Document = ReturnedBatch.BatchDocument;
 		EndIf;
 	EndDo;
 
@@ -1399,47 +1348,61 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRow.AmountTax = Row.AmountTax;
 			
 			// simple receipt	
-			If IsNotMultiDirectionDocument(Document) And Not ValueIsFilled(Row.SalesInvoice) And TypeOf(Document) <> Type("DocumentRef.BatchReallocateIncoming") Then
+			If IsNotMultiDirectionDocument(Document) // is not transfer, produce, bundling or unbundling
+				And Not ValueIsFilled(Row.SalesInvoice) // is not return by sales invoice
+				And TypeOf(Document) <> Type("DocumentRef.BatchReallocateIncoming") Then // is not receipt by btach reallocation
 				FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);
 			EndIf;
 
 			If ValueIsFilled(Row.SalesInvoice) Then // return by sales invoice
 
-				Table_SalesBatches = GetSalesBatches(Row.SalesInvoice, Tables.DataForSalesBatches, Row.BatchKey.ItemKey);
+				TableOfBatchBySales = GetSalesBatches(Row.SalesInvoice, Tables.DataForSalesBatches, Row.BatchKey.ItemKey);
 
-				NeedReceipt = Row.Quantity;
+				NeedReceipt = Row.Quantity; // how many returned (quantity)
 
-				For Each Row_SalesBatches In Table_SalesBatches Do
+				For Each BatchBySales In TableOfBatchBySales Do
 					If NeedReceipt = 0 Then
 						Break;
 					EndIf;
-					ReceiptQuantity = Min(NeedReceipt, Row_SalesBatches.Quantity);
+					ReceiptQuantity = Min(NeedReceipt, BatchBySales.Quantity); // how many can receipt (quantity)
 					// receipt amount
 					ReceiptAmount = 0;
-					If Row_SalesBatches.Quantity - ReceiptQuantity = 0 Then
-						ReceiptAmount = Row_SalesBatches.Amount;
+					If BatchBySales.Quantity - ReceiptQuantity = 0 Then
+						ReceiptAmount = BatchBySales.Amount;
 					Else
-						If Row_SalesBatches.Quantity <> 0 Then
-							ReceiptAmount = (Row_SalesBatches.Amount / Row_SalesBatches.Quantity) * ReceiptQuantity;
+						If BatchBySales.Quantity <> 0 Then
+							ReceiptAmount = (BatchBySales.Amount / BatchBySales.Quantity) * ReceiptQuantity;
 						EndIf;
 					EndIf;
 					
 					// receipt amount tax
 					ReceiptAmountTax = 0;
-					If Row_SalesBatches.Quantity - ReceiptQuantity = 0 Then
-						ReceiptAmountTax = Row_SalesBatches.AmountTax;
+					If BatchBySales.Quantity - ReceiptQuantity = 0 Then
+						ReceiptAmountTax = BatchBySales.AmountTax;
 					Else
-						If Row_SalesBatches.Quantity <> 0 Then
-							ReceiptAmountTax = (Row_SalesBatches.AmountTax / Row_SalesBatches.Quantity) * ReceiptQuantity;
+						If BatchBySales.Quantity <> 0 Then
+							ReceiptAmountTax = (BatchBySales.AmountTax / BatchBySales.Quantity) * ReceiptQuantity;
 						EndIf;
 					EndIf;
 					
-					Row_SalesBatches.Quantity  = Row_SalesBatches.Quantity  - ReceiptQuantity;
-					Row_SalesBatches.Amount    = Row_SalesBatches.Amount    - ReceiptAmount;
-					Row_SalesBatches.AmountTax = Row_SalesBatches.AmountTax - ReceiptAmountTax;
+					BatchBySales.Quantity  = BatchBySales.Quantity  - ReceiptQuantity;
+					BatchBySales.Amount    = BatchBySales.Amount    - ReceiptAmount;
+					BatchBySales.AmountTax = BatchBySales.AmountTax - ReceiptAmountTax;
 					
 					NeedReceipt = NeedReceipt - ReceiptQuantity;
-
+					
+					_BatchBySales_Document = BatchBySales.Document;
+					_BatchBySales_Company  = BatchBySales.Company;
+					_BatchBySales_Batch    = BatchBySales.Batch;
+					
+					// determine batch when returned by another company
+					If ValueIsFilled(Row.Batch) And Row.Company <> _BatchBySales_Company Then
+						_BatchBySales_Document = Row.Batch.Document;
+						_BatchBySales_Company  = Row.Company;
+						_BatchBySales_Batch    = Row.Batch;
+					EndIf;
+					
+					// Table of returned batches
 					NewRow_ReturnedBatches = TableOfReturnedBatches.Add();
 					NewRow_ReturnedBatches.IsOpeningBalance = False;
 					NewRow_ReturnedBatches.Skip             = True;
@@ -1448,20 +1411,25 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow_ReturnedBatches.Quantity         = ReceiptQuantity;
 					NewRow_ReturnedBatches.Amount           = ReceiptAmount;
 					NewRow_ReturnedBatches.AmountTax        = ReceiptAmountTax;
-					NewRow_ReturnedBatches.Document         = Row_SalesBatches.Document;
+					
+					NewRow_ReturnedBatches.Document         = _BatchBySales_Document;
+					NewRow_ReturnedBatches.Company          = _BatchBySales_Company;
+					NewRow_ReturnedBatches.Batch            = _BatchBySales_Batch;
+					
 					NewRow_ReturnedBatches.Date             = Row.Date;
-					NewRow_ReturnedBatches.Company          = Row_SalesBatches.Company;
 					NewRow_ReturnedBatches.Direction        = Enums.BatchDirection.Receipt;
-					NewRow_ReturnedBatches.Batch            = Row_SalesBatches.Batch;
 					NewRow_ReturnedBatches.QuantityBalance  = ReceiptQuantity;
 					NewRow_ReturnedBatches.AmountBalance    = ReceiptAmount;
 					NewRow_ReturnedBatches.AmountTaxBalance = ReceiptAmountTax;
-
+					
+					// Data for receipt
 					NewRow_DataForReceipt = Tables.DataForReceipt.Add();
-					NewRow_DataForReceipt.Batch     = Row_SalesBatches.Batch;
+					
+					NewRow_DataForReceipt.Company   = _BatchBySales_Company;
+					NewRow_DataForReceipt.Batch     = _BatchBySales_Batch;
+					
 					NewRow_DataForReceipt.BatchKey  = Row.BatchKey;
 					NewRow_DataForReceipt.Document  = Row.Document;
-					NewRow_DataForReceipt.Company   = Row_SalesBatches.Company;
 					NewRow_DataForReceipt.Period    = Row.Date;
 					NewRow_DataForReceipt.Quantity  = ReceiptQuantity;
 					NewRow_DataForReceipt.Amount    = ReceiptAmount;

@@ -43,8 +43,6 @@ EndFunction
 
 Function GetLinkedDocumentsFilter_SR(Object) Export
 	Filter = New Structure();
-	Filter.Insert("Company"              , Object.Company);
-	Filter.Insert("Branch"               , Object.Branch);
 	Filter.Insert("PartnerSales"         , Object.Partner);
 	Filter.Insert("LegalNameSales"       , Object.LegalName);
 	Filter.Insert("AgreementSales"       , Object.Agreement);
@@ -52,6 +50,14 @@ Function GetLinkedDocumentsFilter_SR(Object) Export
 	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
 	Filter.Insert("TransactionType"      , PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer"));
 	Filter.Insert("Ref"                  , Object.Ref);
+	
+	Filter.Insert("CompanyReturn" , Object.Company);
+	Filter.Insert("BranchReturn"  , Object.Branch);
+	
+	VisibleFields = New Structure();
+	VisibleFields.Insert("Company");
+	VisibleFields.Insert("Branch");
+	Filter.Insert("VisibleFields", VisibleFields);
 	Return Filter;
 EndFunction
 
@@ -167,13 +173,26 @@ EndFunction
 
 Function GetLinkedDocumentsFilter_RRR(Object) Export
 	Filter = New Structure();
-	Filter.Insert("Company"              , Object.Company);
-	Filter.Insert("Branch"               , Object.Branch);
 	Filter.Insert("PartnerSales"         , Object.Partner);
 	Filter.Insert("LegalNameSales"       , Object.LegalName);
 	Filter.Insert("AgreementSales"       , Object.Agreement);
 	Filter.Insert("CurrencySales"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
 	Filter.Insert("Ref"                  , Object.Ref);
+
+	VisibleFields = New Structure();
+	VisibleFields.Insert("Company");
+	VisibleFields.Insert("Branch");
+	Filter.Insert("VisibleFields", VisibleFields);
 	Return Filter;
 EndFunction
+
+Procedure FillVisibleFields(BasisesTree, VisibleFields) Export
+	For Each Field In VisibleFields Do
+		For Each TopLevel In BasisesTree.GetItems() Do
+			TopLevel[Field.Key + "Presentation"] = TopLevel.Basis[Field.Key];
+		EndDo;
+	EndDo;
+EndProcedure
+
+

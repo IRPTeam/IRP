@@ -70,7 +70,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|			THEN TRUE
 	|		ELSE FALSE
 	|	END AS SalesInvoiceIsFilled,
-	|	RetailReturnReceiptItemList.RetailSalesReceipt AS SalesInvoice
+	|	RetailReturnReceiptItemList.RetailSalesReceipt AS SalesInvoice,
+	|	RetailReturnReceiptItemList.RetailSalesReceipt.Company AS SalesInvoice_Company
 	|FROM
 	|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
 	|WHERE
@@ -89,6 +90,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|		ELSE FALSE
 	|	END,
 	|	RetailReturnReceiptItemList.RetailSalesReceipt,
+	|	RetailReturnReceiptItemList.RetailSalesReceipt.Company,
 	|	VALUE(Enum.BatchDirection.Receipt)";
 	
 	Query.SetParameter("Ref", Ref);
@@ -96,11 +98,23 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	BatchesInfo   = QueryResults[0].Unload();
 	BatchKeysInfo = QueryResults[1].Unload();
-	If Not BatchKeysInfo.FindRows(New Structure("SalesInvoiceIsFilled", False)).Count() Then
+
+	DontCreateBatch = True;
+	For Each BatchKey In BatchKeysInfo Do
+		If Not BatchKey.SalesInvoiceIsFilled Then
+			DontCreateBatch = False; // need create batch, invoice is empty
+			Break;
+		EndIf;
+		If BatchKey.Company <> BatchKey.SalesInvoice_Company Then 
+			DontCreateBatch = False; // need create batch, company in invoice and in return not match
+			Break;
+		EndIf; 
+	EndDo;
+	If DontCreateBatch Then
 		BatchesInfo.Clear();
 	EndIf;
 	
-		// AmountTax to T6020S_BatchKeysInfo
+	// AmountTax to T6020S_BatchKeysInfo
 	Query = New Query();
 	Query.Text = 
 	"SELECT

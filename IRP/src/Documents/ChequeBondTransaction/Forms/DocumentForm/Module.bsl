@@ -86,7 +86,7 @@ EndProcedure
 
 &AtClient
 Procedure CurrencyOnChange(Item)
-	DocSalesOrderClient.CurrencyOnChange(Object, ThisObject, Item);
+	DocChequeBondTransactionClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -222,11 +222,10 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
-Procedure FillCheques(Command)
+Procedure PickupCheques(Command)
 	FormParameters = New Structure();
 	Filter = New Structure();
-	Filter.Insert("Currency"     , Object.Currency);
-	Filter.Insert("DeletionMark" , False);
+	Filter.Insert("Currency", Object.Currency);
 	FormParameters.Insert("Filter", Filter);
 	
 	NotifyParameters = New Structure();
@@ -244,18 +243,12 @@ Procedure FillChequesContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-//	If NOT ValueIsFilled(Result)
-//		OR Not AdditionalParameters.Property("Object")
-//		OR Not AdditionalParameters.Property("Form") Then
-//		Return;
-//	EndIf;
-//	 
-//	For Each ResultElement In Result Do
-//		NewChequeBondRow = AdditionalParameters.Object.ChequeBonds.Add();
-//		NewChequeBondRow.Key = New UUID();
-//		NewChequeBondRow.Cheque = ResultElement.ChequeBond;
-//		FillChequeBondsRow(NewChequeBondRow, AdditionalParameters.Object);
-//	EndDo;
+	
+	For Each Row In Result Do
+		FillingValues = New Structure();
+		FillingValues.Insert("Cheque" , Row.ChequeBond);
+		ViewClient_V2.ChequeBondsAddFilledRow(Object, ThisObject, FillingValues);
+	EndDo;
 EndProcedure
 
 &AtClient

@@ -899,6 +899,36 @@
         <autoCommandBar>
           <name>ChequeBondsCommandBar</name>
           <id>79</id>
+          <items xsi:type="form:Button">
+            <name>ChequeBondsFillCheques</name>
+            <id>112</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ChequeBondsFillChequesExtendedTooltip</name>
+              <id>113</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.PickupCheques</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1613,10 +1643,10 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>FillCheques</name>
+    <name>PickupCheques</name>
     <title>
       <key>en</key>
-      <value>Fill cheques</value>
+      <value>Pickup cheques</value>
     </title>
     <id>3</id>
     <use>
@@ -1624,7 +1654,7 @@
     </use>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>FillCheques</name>
+        <name>PickupCheques</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

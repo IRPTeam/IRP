@@ -1014,6 +1014,17 @@ Procedure ChequeBondsAfterDeleteRowFormNotify(Parameters) Export
 	Return;
 EndProcedure
 
+Function ChequeBondsAddFilledRow(Object, Form,  FillingValues) Export
+	Cancel      = False;
+	Clone       = False;
+	CurrentData = Undefined;
+	NewRow = AddOrCopyRow(Object, Form, "ChequeBonds", Cancel, Clone, CurrentData,
+		"ChequeBondsOnAddRowFormNotify", "ChequeBondsOnCopyRowFormNotify", FillingValues);
+	Form.Items.ChequeBonds.CurrentRow = NewRow.GetID();
+	Form.Items.ChequeBonds.ChangeRow();
+	Return NewRow;
+EndFunction
+
 #EndRegion
 
 #Region CHEQUE_BONDS_COLUMNS

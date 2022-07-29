@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormGroup">
     <name>ListSettingsComposerUserSettings</name>
     <id>1</id>
@@ -1263,7 +1263,6 @@
       <common>true</common>
     </userVisible>
     <horizontalAlign>Left</horizontalAlign>
-    <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
     <event>OnOpen</event>
@@ -1312,83 +1311,15 @@
 	ChequeBonds.Currency,
 	ChequeBonds.Amount,
 	ChequeBonds.ChequeSerialNo,
-	ChequeBonds.AddAttributes.*,
-	ChequeBonds.Predefined,
-	ChequeBonds.PredefinedDataName
+	ISNULL(ChequeBondStatusesSliceLast.Status, VALUE(Catalog.ObjectStatuses.EmptyRef)) AS Status
 FROM
-	Catalog.ChequeBonds AS ChequeBonds</queryText>
+	Catalog.ChequeBonds AS ChequeBonds
+		LEFT JOIN InformationRegister.ChequeBondStatuses.SliceLast AS ChequeBondStatusesSliceLast
+		ON ChequeBonds.Ref = ChequeBondStatusesSliceLast.Cheque</queryText>
       <mainTable>Catalog.ChequeBonds</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ChequeBond</dataPath>
-        <field>ChequeBond</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Cheque bond</value>
-            </content>
-          </localValue>
-        </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>DeletionMark</dataPath>
-        <field>DeletionMark</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Description</dataPath>
-        <field>Description</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Type</dataPath>
-        <field>Type</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>DueDate</dataPath>
-        <field>DueDate</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Currency</dataPath>
-        <field>Currency</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Amount</dataPath>
-        <field>Amount</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ChequeSerialNo</dataPath>
-        <field>ChequeSerialNo</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AddAttributes.Ref</dataPath>
-        <field>AddAttributes.Ref</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AddAttributes.LineNumber</dataPath>
-        <field>AddAttributes.LineNumber</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AddAttributes.Property</dataPath>
-        <field>AddAttributes.Property</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AddAttributes.Value</dataPath>
-        <field>AddAttributes.Value</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
-        <dataPath>AddAttributes</dataPath>
-        <field>AddAttributes</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Predefined</dataPath>
-        <field>Predefined</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PredefinedDataName</dataPath>
-        <field>PredefinedDataName</field>
-      </fields>
     </extInfo>
   </attributes>
   <attributes>
@@ -1573,7 +1504,30 @@ FROM
   </formCommands>
   <commandInterface>
     <navigationPanel/>
-    <commandBar/>
+    <commandBar>
+      <cmiFragmentRecord>
+        <command>CommonCommand.AddProperties</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Items.List.CurrentData</segments>
+        </commandParameter>
+        <group>FormCommandBarImportant</group>
+        <index>0</index>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+      </cmiFragmentRecord>
+      <cmiFragmentRecord>
+        <command>CommonCommand.AttachedFiles</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Items.List.CurrentData</segments>
+        </commandParameter>
+        <group>FormCommandBarImportant</group>
+        <index>1</index>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+      </cmiFragmentRecord>
+    </commandBar>
   </commandInterface>
   <extInfo xsi:type="form:DynamicListFormExtInfo"/>
 </form:Form>

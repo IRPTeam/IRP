@@ -4717,7 +4717,7 @@ EndFunction
 Function BindChequeBondsCheque(Parameters)
 	DataPath = "ChequeBonds.Cheque";
 	Binding = New Structure();
-	Binding.Insert("ChequeBondTransaction"     , "Step__ByCheque");
+	Binding.Insert("ChequeBondTransaction", "StepChangeStatusByCheque");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

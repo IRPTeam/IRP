@@ -50,7 +50,6 @@
   <defaultListForm>Document.ChequeBondTransaction.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.ChequeBondTransaction.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.ObjectStatuses</registerRecords>
   <registerRecords>InformationRegister.ChequeBondStatuses</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

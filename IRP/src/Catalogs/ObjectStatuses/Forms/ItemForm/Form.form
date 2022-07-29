@@ -614,16 +614,15 @@
       <items xsi:type="form:FormField">
         <name>PostingChequeBondBalance</name>
         <id>63</id>
-        <title>
-          <key>en</key>
-          <value>Cheque bond balance</value>
-        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
-        <titleLocation>Right</titleLocation>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.PostingChequeBondBalance</segments>
+        </dataPath>
+        <titleLocation>Left</titleLocation>
         <extendedTooltip>
           <name>PostingChequeBondBalanceExtendedTooltip</name>
           <id>65</id>
@@ -649,32 +648,66 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>InputField</type>
+        <type>RadioButtonField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
+        <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+          <radioButtonsType>Tumbler</radioButtonsType>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Posting</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Correction</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Reversal</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Nothing</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
+            </value>
+          </choiceList>
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>PostingAdvanced</name>
-        <id>39</id>
+        <name>PostingCashPlanning</name>
+        <id>72</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
-        <titleLocation>Right</titleLocation>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.PostingCashPlanning</segments>
+        </dataPath>
+        <titleLocation>Left</titleLocation>
         <extendedTooltip>
-          <name>PostingAdvancedExtendedTooltip</name>
-          <id>41</id>
+          <name>PostingCashPlanningExtendedTooltip</name>
+          <id>74</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -688,8 +721,8 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>PostingAdvancedContextMenu</name>
-          <id>40</id>
+          <name>PostingCashPlanningContextMenu</name>
+          <id>73</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -697,32 +730,66 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>InputField</type>
+        <type>RadioButtonField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
+        <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+          <radioButtonsType>Tumbler</radioButtonsType>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Posting</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Correction</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Reversal</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Nothing</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
+            </value>
+          </choiceList>
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>PostingPartnerAccountTransactions</name>
-        <id>42</id>
+        <name>PostingCustomerTransactions</name>
+        <id>75</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
-        <titleLocation>Right</titleLocation>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.PostingCustomerTransactions</segments>
+        </dataPath>
+        <titleLocation>Left</titleLocation>
         <extendedTooltip>
-          <name>PostingPartnerAccountTransactionsExtendedTooltip</name>
-          <id>44</id>
+          <name>PostingCustomerTransactionsExtendedTooltip</name>
+          <id>77</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -736,8 +803,8 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>PostingPartnerAccountTransactionsContextMenu</name>
-          <id>43</id>
+          <name>PostingCustomerTransactionsContextMenu</name>
+          <id>76</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -745,32 +812,66 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>InputField</type>
+        <type>RadioButtonField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
+        <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+          <radioButtonsType>Tumbler</radioButtonsType>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Posting</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Correction</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Reversal</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Nothing</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
+            </value>
+          </choiceList>
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>PostingReconciliationStatement</name>
-        <id>45</id>
+        <name>PostingVendorTransactions</name>
+        <id>78</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
-        <titleLocation>Right</titleLocation>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.PostingVendorTransactions</segments>
+        </dataPath>
+        <titleLocation>Left</titleLocation>
         <extendedTooltip>
-          <name>PostingReconciliationStatementExtendedTooltip</name>
-          <id>47</id>
+          <name>PostingVendorTransactionsExtendedTooltip</name>
+          <id>80</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -784,8 +885,8 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>PostingReconciliationStatementContextMenu</name>
-          <id>46</id>
+          <name>PostingVendorTransactionsContextMenu</name>
+          <id>79</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -793,114 +894,49 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>InputField</type>
+        <type>RadioButtonField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>PostingAccountBalance</name>
-        <id>48</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <titleLocation>Right</titleLocation>
-        <extendedTooltip>
-          <name>PostingAccountBalanceExtendedTooltip</name>
-          <id>50</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>PostingAccountBalanceContextMenu</name>
-          <id>49</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>PostingPlaningCashTransactions</name>
-        <id>60</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <titleLocation>Right</titleLocation>
-        <extendedTooltip>
-          <name>PostingPlaningCashTransactionsExtendedTooltip</name>
-          <id>62</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>PostingPlaningCashTransactionsContextMenu</name>
-          <id>61</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
+        <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+          <radioButtonsType>Tumbler</radioButtonsType>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Posting</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Correction</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Reversal</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
+            </value>
+          </choiceList>
+          <choiceList>
+            <presentation>
+              <key>en</key>
+              <value>Nothing</value>
+            </presentation>
+            <value xsi:type="core:ReferenceValue">
+              <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
+            </value>
+          </choiceList>
         </extInfo>
       </items>
       <visible>true</visible>

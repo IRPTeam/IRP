@@ -343,27 +343,28 @@ Function GetChequeInfo(ChequeRef, ChequeBondTransactionRef)
 	
 	// Currencies
 	
-//	Query = New Query();
-//	Query.Text =
-//		"SELECT
-//		|	ChequeBondTransactionCurrencies.CurrencyFrom,
-//		|	ChequeBondTransactionCurrencies.Rate,
-//		|	ChequeBondTransactionCurrencies.ReverseRate,
-//		|	ChequeBondTransactionCurrencies.ShowReverseRate,
-//		|	ChequeBondTransactionCurrencies.Multiplicity,
-//		|	ChequeBondTransactionCurrencies.MovementType,
-//		|	ChequeBondTransactionCurrencies.Amount,
-//		|	ChequeBondTransactionCurrencies.Key
-//		|FROM
-//		|	Document.ChequeBondTransaction.Currencies AS ChequeBondTransactionCurrencies
-//		|WHERE
-//		|	ChequeBondTransactionCurrencies.Ref = &ChequeBondTransactionRef
-//		|	AND ChequeBondTransactionCurrencies.Key = &Key";
-//	
-//	Query.SetParameter("Key", MainRowKey);
-//	Query.SetParameter("ChequeBondTransactionRef", ChequeBondTransactionRef);
-//	QueryResult = Query.Execute();
-//	QuerySelection = QueryResult.Select();
+	Query = New Query();
+	Query.Text =
+		"SELECT *
+		|FROM
+		|	Document.ChequeBondTransaction.Currencies AS ChequeBondTransactionCurrencies
+		|WHERE
+		|	ChequeBondTransactionCurrencies.Ref = &ChequeBondTransactionRef
+		|	AND ChequeBondTransactionCurrencies.Key = &Key";
+	
+	Query.SetParameter("Key", MainRowKey);
+	Query.SetParameter("ChequeBondTransactionRef", ChequeBondTransactionRef);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	For Each Row In QueryTable Do
+		NewRow = New Structure();
+		For Each Column In QueryTable.Columns Do
+			NewRow.Insert(Column.Name, Row[Column.Name]);
+		EndDo;
+		ChequeInfo.Currencies.Add(NewRow);
+	EndDo;
+	
+	//QuerySelection = QueryResult.Select();
 //	While QuerySelection.Next() Do
 //		CurrenciesRow = New Structure();
 //		CurrenciesRow.Insert("CurrencyFrom", QuerySelection.CurrencyFrom);
@@ -402,10 +403,10 @@ Procedure FillDocument(DocumentObject, ChequeInfo)
 	
 	// Currencies
 	
-//	DocumentObject.Currencies.Clear();
-//	For Each Row In ChequeInfo.Currencies Do
-//		FillPropertyValues(DocumentObject.Currencies.Add(), Row);
-//	EndDo;
+	DocumentObject.Currencies.Clear();
+	For Each Row In ChequeInfo.Currencies Do
+		FillPropertyValues(DocumentObject.Currencies.Add(), Row);
+	EndDo;
 EndProcedure
 
 Procedure SetDataLock(DataLock, TableOfDocuments)

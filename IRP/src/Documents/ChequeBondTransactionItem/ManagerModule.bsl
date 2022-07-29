@@ -76,7 +76,7 @@ Function GetQueryTextsMasterTables()
 	Return QueryArray;
 EndFunction
 
-#Region Synchronization
+#Region SYNCHRONIZATION
 
 Function Sync_Post(DataLock, ArrayOfCheque, ChequeBondTransactionRef) Export
 	TableOfDocuments = FindDocuments(ArrayOfCheque, ChequeBondTransactionRef);
@@ -279,6 +279,7 @@ Function GetChequeInfo(ChequeRef, ChequeBondTransactionRef)
 	ChequeInfo.Insert("Cheque"      , Undefined);
 	ChequeInfo.Insert("Agreement"   , Undefined);
 	ChequeInfo.Insert("Partner"     , Undefined);
+	ChequeInfo.Insert("Author"      , Undefined);
 	
 	Query = New Query();
 	Query.Text =
@@ -293,7 +294,8 @@ Function GetChequeInfo(ChequeRef, ChequeBondTransactionRef)
 		|	ChequeBonds.Ref.Branch AS Branch,
 		|	ChequeBonds.Key,
 		|	ChequeBonds.Agreement AS Agreement,
-		|	ChequeBonds.Partner AS Partner
+		|	ChequeBonds.Partner AS Partner,
+		|	ChequeBonds.Ref.Author AS Author
 		|FROM
 		|	Document.ChequeBondTransaction.ChequeBonds AS ChequeBonds
 		|WHERE
@@ -389,6 +391,7 @@ Procedure FillDocument(DocumentObject, ChequeInfo)
 	DocumentObject.Cheque    = ChequeInfo.Cheque;
 	DocumentObject.Agreement = ChequeInfo.Agreement;
 	DocumentObject.Partner   = ChequeInfo.Partner;
+	DocumentObject.Author    = ChequeInfo.Author;
 	
 	// PaymentList
 	

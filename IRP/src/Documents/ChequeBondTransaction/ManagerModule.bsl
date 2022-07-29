@@ -15,13 +15,13 @@ EndFunction
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.SetRegisters(Tables, Ref);	
+	PostingServer.SetRegisters(Tables, Ref, True);	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters, True);
 	Return PostingDataTables;
 EndFunction
 
@@ -79,13 +79,13 @@ EndFunction
 Function ChequeBondStatuses()
 	Return
 	"SELECT
-	|	ChequeBondTransactionChequeBonds.Cheque AS Cheque,
-	|	ChequeBondTransactionChequeBonds.NewStatus AS Status,
-	|	ChequeBondTransactionChequeBonds.Ref.Date AS Date
-	|	INTO ChequeBondStatuses
+	|	Transaction.Ref.Date AS Period,
+	|	Transaction.Cheque AS Cheque,
+	|	Transaction.NewStatus AS Status
+	|INTO ChequeBondStatuses
 	|FROM
-	|	Document.ChequeBondTransaction.ChequeBonds AS ChequeBondTransactionChequeBonds
+	|	Document.ChequeBondTransaction.ChequeBonds AS Transaction
 	|WHERE
-	|	ChequeBondTransactionChequeBonds.Ref = &Ref";
+	|	Transaction.Ref = &Ref";
 EndFunction
 	

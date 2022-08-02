@@ -14,130 +14,66 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.Text = ChequeBondTransactionItem();
 	Query.Execute();
 	
- 	// R3016B_ChequeAndBonds
+ 	// ChequeBondBalance
 	
-	// Incoming cheque
-	Query.Text = R3016B_ChequeAndBonds_IncomingCheque_Posting(); // [20] Receipt (offset index 2)
+	Query.Text = ChequeBondBalance_Posting();
 	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "ChequeBondBalance", "Posting"));
 	Query.Execute();
 	
-	Query.Text = R3016B_ChequeAndBonds_IncomingCheque_Reversal(); // [20] Expense (offset index 2)
+	Query.Text = ChequeBondBalance_Reversal();
 	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "ChequeBondBalance", "Reversal"));
 	Query.Execute();
 	
-	Query.Text = R3016B_ChequeAndBonds_IncomingCheque_Correction(); // [21] -Receipt (offset index 2)
+	Query.Text = ChequeBondBalance_Correction();
 	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "ChequeBondBalance", "Correction"));
 	Query.Execute();
 	
-	// Outgoing cheque
-	Query.Text = R3016B_ChequeAndBonds_OutgoingCheque_Posting(); // [22] Receipt (offset index 2)
-	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "ChequeBondBalance", "Posting"));
+	// CustomerTransaction
+
+	Query.Text = CustomerTransaction_Posting();
+	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "CustomerTransaction", "Posting"));
 	Query.Execute();
 	
-	Query.Text = R3016B_ChequeAndBonds_OutgoingCheque_Reversal(); // [22] Expense (offset index 2)
-	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "ChequeBondBalance", "Reversal"));
+	Query.Text = CustomerTransaction_Reversal();
+	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "CustomerTransaction", "Reversal"));
+	Query.Execute();
+	
+	Query.Text = CustomerTransaction_Correction();
+	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "CustomerTransaction", "Correction"));
+	Query.Execute();
+	
+	// VendorTransaction
+
+	Query.Text = VendorTransaction_Posting();
+	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "VendorTransaction", "Posting"));
+	Query.Execute();
+	
+	Query.Text = VendorTransaction_Reversal();
+	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "VendorTransaction", "Reversal"));
+	Query.Execute();
+	
+	Query.Text = VendorTransaction_Correction();
+	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "VendorTransaction", "Correction"));
 	Query.Execute();
 		
-	Query.Text = R3016B_ChequeAndBonds_OutgoingCheque_Correction(); // [23] -Receipt (offset index 2)
-	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "ChequeBondBalance", "Correction"));
-	Query.Execute();
-
-	// R2020B_AdvancesFromCustomers
-	
-	// Incoming cheque
-//	Query.Text = R2020B_AdvancesFromCustomers_Incoming_Posting() // [4] Receipt
-//	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "CustomerTransaction", "Posting"));
-//	Query.Execute();
-	
-//	Query.Text = R2020B_AdvancesFromCustomers_Incoming_Reversal() // [4] Expense
-//	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "CustomerTransaction", "Reversal"));
-//	Query.Execute();
-	
-//	Query.Text = R2020B_AdvancesFromCustomers_Incoming_Correction() // [10] -Receipt
-//	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "CustomerTransaction", "Correction"));
-//	Query.Execute();
-	
-	
-	// R1020B_AdvancesToVendors
-	
-	// Outgoing cheque
-//	Query.Text = R1020B_AdvancesToVendors_Outgoing_Posting() // [5] Receipt
-//	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "VendorTransaction", "Posting"));
-//	Query.Execute();
-	
-//	Query.Text = R1020B_AdvancesToVendors_Outgoing_Reversal() // [5] Expense
-//	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "VendorTransaction", "Reversal"));
-//	Query.Execute();
-	
-//	Query.Text = R1020B_AdvancesToVendors_Outgoing_Correction() // [10] -Receipt
-//	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "VendorTransaction", "Correction"));
-//	Query.Execute();
-	
-	
-
-//=================================DRAFT====================================================================
-	
-// POSTING	
-//	Tables.AdvanceFromCustomers_IncomingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[2].Unload(), "Advanced", "Posting");	
-//	Tables.AdvanceToSuppliers_OutgoingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[3].Unload(), "Advanced", "Posting");
-	
-// CORRECTION
-//	Tables.AdvanceFromCustomers_Correction_IncomingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[8].Unload(), "Advanced", "Correction");
-//	Tables.AdvanceToSuppliers_Correction_OutgoingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[9].Unload(), "Advanced", "Correction");
-
-// REVERSAL
-//	Tables.AdvanceFromCustomers_Reversal_IncomingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[2].Unload(), "Advanced", "Reversal");
-//	Tables.AdvanceToSuppliers_Reversal_OutgoingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[3].Unload(), "Advanced", "Reversal");
-
-
-	
-// R3016_ChequeAndBonds
-// POSTING
-//	Tables.ChequeBondBalance_IncomingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[18].Unload(), "ChequeBondBalance", "Posting");
-//	Tables.ChequeBondBalance_OutgoingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[20].Unload(), "ChequeBondBalance", "Posting");
-	
-// CORRECTION
-//	Tables.ChequeBondBalance_Correction_IncomingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[19].Unload(), "ChequeBondBalance", "Correction");
-//	Tables.ChequeBondBalance_Correction_OutgoingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[21].Unload(), "ChequeBondBalance", "Correction");
-
-// REVERSAL
-//	Tables.ChequeBondBalance_Reversal_IncomingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[18].Unload(), "ChequeBondBalance", "Reversal");
-//	Tables.ChequeBondBalance_Reversal_OutgoingCheque = 
-//		NeedPosting(StatusInfo, QueryResults[20].Unload(), "ChequeBondBalance", "Reversal");
-
-	
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
 
-//Function NeedPosting(StatusInfo, PostingTable, SettingName, PostingType)
+
 Function NeedPosting(StatusInfo, SettingName, PostingType)
 	// SettingName:
-	// ChequeBondBalance +
+	// ChequeBondBalance
 	// VendorTransaction
 	// CustomerTransaction
 	// CashPlanning
 	
 	If PostingType = "Posting" Then
-		//Return ?(StatusInfo.Posting[SettingName] = Enums.DocumentPostingTypes.Posting, PostingTable, New ValueTable());
 		Return ?(StatusInfo.Posting[SettingName] = Enums.DocumentPostingTypes.Posting, True, False);
 	ElsIf PostingType = "Reversal" Then
-		//Return ?(StatusInfo.Posting[SettingName] = Enums.DocumentPostingTypes.Reversal, PostingTable, New ValueTable());
 		Return ?(StatusInfo.Posting[SettingName] = Enums.DocumentPostingTypes.Reversal, True, False);
 	ElsIf PostingType = "Correction" Then
-		//Return ?(StatusInfo.Posting[SettingName] = Enums.DocumentPostingTypes.Correction, PostingTable, New ValueTable());
 		Return ?(StatusInfo.Posting[SettingName] = Enums.DocumentPostingTypes.Correction, True, False);
 	EndIf;
 EndFunction
@@ -209,87 +145,67 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
 	QueryArray.Add(R3016B_ChequeAndBonds());
 	
-//	QueryArray.Add(R2021B_CustomersTransactions());
-//	QueryArray.Add(R2020B_AdvancesFromCustomers());
-//	QueryArray.Add(R1021B_VendorsTransactions());
-//	QueryArray.Add(R1020B_AdvancesToVendors());
-//	QueryArray.Add(R5010B_ReconciliationStatement());
-	
-//	QueryArray.Add(R5011B_CustomersAging());
-	
-//	QueryArray.Add(T2014S_AdvancesInfo());
-//	QueryArray.Add(T2015S_TransactionsInfo());
-	
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R1020B_AdvancesToVendors());	
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(T2014S_AdvancesInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());	
 	Return QueryArray;
 EndFunction
 
 Function ChequeBondTransactionItem()
 	Return
 	"SELECT
-	|	ChequeBondTransactionItem.Ref AS ReceiptDocument,
-	|	ChequeBondTransactionItem.Ref AS PaymentDocument,
-	//+
-	|	ChequeBondTransactionItem.Date AS Period,
-	|	ChequeBondTransactionItem.Company,
-	|	ChequeBondTransactionItem.Branch,
-	|	ChequeBondTransactionItem.Cheque,
-	|	ChequeBondTransactionItem.Cheque.Currency AS Currency,
-	|	ChequeBondTransactionItem.Account,
-	|	ChequeBondTransactionItem.Partner,
-	|	ChequeBondTransactionItem.LegalName,
-	|	ChequeBondTransactionItem.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque) AS IsIncomingCheque,
-	|	ChequeBondTransactionItem.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque) AS IsOutgoingCheque,
-	|	ChequeBondTransactionItem.Cheque.Amount AS Amount,
+	|	Doc.Ref AS ReceiptDocument,
+	|	Doc.Ref AS PaymentDocument,
 	|
-	//===
+	|	Doc.Date AS Period,
+	|	Doc.Company,
+	|	Doc.Branch,
+	|	Doc.Cheque,
+	|	Doc.Cheque.Currency AS Currency,
+	|	Doc.Account,
+	|	Doc.Partner,
+	|	Doc.LegalName,
+	|	Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque) AS IsIncomingCheque,
+	|	Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque) AS IsOutgoingCheque,
+	|	Doc.Cheque.Amount AS Amount,
+	|	Doc.Cheque.DueDate AS DueDate,
+	|	Doc.BasisDocument,
+	|	Doc.Order,
+	|
 	|	CASE
-	|		WHEN ChequeBondTransactionItem.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-	|		AND ChequeBondTransactionItem.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-	|			THEN ChequeBondTransactionItem.Agreement.StandardAgreement
-	|		ELSE ChequeBondTransactionItem.Agreement
+	|		WHEN Doc.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN Doc.Agreement.StandardAgreement
+	|		ELSE Doc.Agreement
 	|	END AS Agreement,
-//	|	CASE
-//	|		WHEN ChequeBondTransactionItem.Cheque = VALUE(Catalog.ChequeBonds.EmptyRef)
-//	|			THEN VALUE(Catalog.Currencies.EmptyRef)
-//	|		ELSE ChequeBondTransactionItem.Cheque.Currency
-//	|	END AS Currency,
+	|
 	|	CASE
-	|		WHEN ChequeBondTransactionItem.Cheque = VALUE(Catalog.ChequeBonds.EmptyRef)
-	|			THEN DATETIME(1, 1, 1)
-	|		ELSE ChequeBondTransactionItem.Cheque.DueDate
-	|	END AS DueDate,
-//	|	CASE
-//	|		WHEN ChequeBondTransactionItem.Cheque = VALUE(Catalog.ChequeBonds.EmptyRef)
-//	|			THEN 0
-//	|		ELSE ChequeBondTransactionItem.Cheque.Amount
-//	|	END AS Amount,
-//	|	CASE
-//	|		WHEN ChequeBondTransactionItem.Cheque = VALUE(Catalog.ChequeBonds.EmptyRef)
-//	|			THEN FALSE
-//	|		ELSE ChequeBondTransactionItem.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque)
-//	|	END AS OutgoingCheque,
-//	|	CASE
-//	|		WHEN ChequeBondTransactionItem.Cheque = VALUE(Catalog.ChequeBonds.EmptyRef)
-//	|			THEN FALSE
-//	|		ELSE ChequeBondTransactionItem.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque)
-//	|	END AS IncomingCheque,
-	|	
-	|	CASE
-	|		WHEN NOT (ChequeBondTransactionItem.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-	|		AND ChequeBondTransactionItem.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments))
-	|			THEN FALSE
-	|		ELSE TRUE
+	|		WHEN Doc.Agreement.Ref IS NULL
+	|			THEN TRUE
+	|		ELSE CASE
+	|			WHEN Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			AND Doc.BasisDocument.Ref IS NULL
+	|				THEN TRUE
+	|			ELSE FALSE
+	|		END
 	|	END AS IsAdvance
+	|
 	|INTO ChequeBondTransactionItem
 	|FROM
-	|	Document.ChequeBondTransactionItem AS ChequeBondTransactionItem
+	|	Document.ChequeBondTransactionItem AS Doc
 	|WHERE
-	|	ChequeBondTransactionItem.Ref = &Ref";
+	|	Doc.Ref = &Ref";
 EndFunction
 
-#Region R3016B_ChequeAndBonds
+#Region ChequeBondBalance
 
-Function R3016B_ChequeAndBonds_IncomingCheque_Posting() //[20]
+Function ChequeBondBalance_Posting()
 	Return
 	"SELECT
 	|	Table.Period,
@@ -299,15 +215,17 @@ Function R3016B_ChequeAndBonds_IncomingCheque_Posting() //[20]
 	|	Table.Cheque,
 	|	Table.Partner,
 	|	Table.LegalName,
-	|	Table.Amount
-	|INTO R3016B_ChequeAndBonds_IncomingCheque_Posting
+	|	Table.Amount,
+	|	Table.IsIncomingCheque,
+	|	Table.IsOutgoingCheque
+	|INTO ChequeBondBalance_Posting
 	|FROM 
 	|	ChequeBondTransactionItem AS Table
 	|WHERE
-	|	Table.IsIncomingCheque AND &IsPosting";
+	|	&IsPosting";
 EndFunction
 
-Function R3016B_ChequeAndBonds_IncomingCheque_Reversal() //[20]
+Function ChequeBondBalance_Reversal()
 	Return
 	"SELECT
 	|	Table.Period,
@@ -317,15 +235,17 @@ Function R3016B_ChequeAndBonds_IncomingCheque_Reversal() //[20]
 	|	Table.Cheque,
 	|	Table.Partner,
 	|	Table.LegalName,
-	|	Table.Amount
-	|INTO R3016B_ChequeAndBonds_IncomingCheque_Reversal
+	|	Table.Amount,
+	|	Table.IsIncomingCheque,
+	|	Table.IsOutgoingCheque
+	|INTO ChequeBondBalance_Reversal
 	|FROM 
 	|	ChequeBondTransactionItem AS Table
 	|WHERE
-	|	Table.IsIncomingCheque AND &IsReversal";
+	|	&IsReversal";
 EndFunction
 
-Function R3016B_ChequeAndBonds_IncomingCheque_Correction() //[21]
+Function ChequeBondBalance_Correction()
 	Return
 	"SELECT
 	|	Table.Period,
@@ -335,66 +255,14 @@ Function R3016B_ChequeAndBonds_IncomingCheque_Correction() //[21]
 	|	Table.Cheque,
 	|	Table.Partner,
 	|	Table.LegalName,
-	|	-Table.Amount AS Amount
-	|INTO R3016B_ChequeAndBonds_IncomingCheque_Correction
+	|	-Table.Amount AS Amount,
+	|	Table.IsIncomingCheque,
+	|	Table.IsOutgoingCheque
+	|INTO ChequeBondBalance_Correction
 	|FROM 
 	|	ChequeBondTransactionItem AS Table
 	|WHERE
-	|	Table.IsIncomingCheque AND &IsCorrection";
-EndFunction
-
-Function R3016B_ChequeAndBonds_OutgoingCheque_Posting() //[22]
-	Return
-	"SELECT
-	|	Table.Period,
-	|	Table.Company,
-	|	Table.Branch,
-	|	Table.Currency,
-	|	Table.Cheque,
-	|	Table.Partner,
-	|	Table.LegalName,
-	|	Table.Amount
-	|INTO R3016B_ChequeAndBonds_OutgoingCheque_Posting
-	|FROM 
-	|	ChequeBondTransactionItem AS Table
-	|WHERE
-	|	Table.IsOutgoingCheque AND &IsPosting";
-EndFunction
-
-Function R3016B_ChequeAndBonds_OutgoingCheque_Reversal() //[22]
-	Return
-	"SELECT
-	|	Table.Period,
-	|	Table.Company,
-	|	Table.Branch,
-	|	Table.Currency,
-	|	Table.Cheque,
-	|	Table.Partner,
-	|	Table.LegalName,
-	|	Table.Amount
-	|INTO R3016B_ChequeAndBonds_OutgoingCheque_Reversal
-	|FROM 
-	|	ChequeBondTransactionItem AS Table
-	|WHERE
-	|	Table.IsOutgoingCheque AND &IsReversal";
-EndFunction
-
-Function R3016B_ChequeAndBonds_OutgoingCheque_Correction() //[23]
-	Return
-	"SELECT
-	|	Table.Period,
-	|	Table.Company,
-	|	Table.Branch,
-	|	Table.Currency,
-	|	Table.Cheque,
-	|	Table.Partner,
-	|	Table.LegalName,
-	|	-Table.Amount AS Amount
-	|INTO R3016B_ChequeAndBonds_OutgoingCheque_Correction
-	|FROM 
-	|	ChequeBondTransactionItem AS Table
-	|WHERE
-	|	Table.IsOutgoingCheque AND &IsCorrection";	
+	|	&IsCorrection";
 EndFunction
 
 #EndRegion
@@ -414,9 +282,9 @@ Function R3016B_ChequeAndBonds()
 //	|	Table.Amount
 	|INTO R3016B_ChequeAndBonds
 	|FROM
-	|	R3016B_ChequeAndBonds_IncomingCheque_Posting AS Table
+	|	ChequeBondBalance_Posting AS Table
 	|WHERE
-	|	TRUE
+	|	Table.IsIncomingCheque
 	|
 	|UNION ALL
 	|
@@ -424,9 +292,9 @@ Function R3016B_ChequeAndBonds()
 	|	VALUE(AccumulationRecordType.Receipt),
 	|	*
 	|FROM
-	|	R3016B_ChequeAndBonds_OutgoingCheque_Posting AS Table
+	|	ChequeBondBalance_Posting AS Table
 	|WHERE
-	|	TRUE
+	|	Table.IsOutgoingCheque
 	|
 	|UNION ALL
 	|
@@ -434,9 +302,9 @@ Function R3016B_ChequeAndBonds()
 	|	VALUE(AccumulationRecordType.Receipt),
 	|	*
 	|FROM
-	|	R3016B_ChequeAndBonds_IncomingCheque_Correction AS Table
+	|	ChequeBondBalance_Correction AS Table
 	|WHERE
-	|	TRUE
+	|	Table.IsIncomingCheque
 	|
 	|UNION ALL
 	|
@@ -444,9 +312,9 @@ Function R3016B_ChequeAndBonds()
 	|	VALUE(AccumulationRecordType.Receipt),
 	|	*
 	|FROM
-	|	R3016B_ChequeAndBonds_OutgoingCheque_Correction AS Table
+	|	ChequeBondBalance_Correction AS Table
 	|WHERE
-	|	TRUE
+	|	Table.IsOutgoingCheque
 	|
 	|UNION ALL
 	|
@@ -454,9 +322,9 @@ Function R3016B_ChequeAndBonds()
 	|	VALUE(AccumulationRecordType.Expense),
 	|	*
 	|FROM
-	|	R3016B_ChequeAndBonds_IncomingCheque_Reversal AS Table
+	|	ChequeBondBalance_Reversal AS Table
 	|WHERE
-	|	TRUE
+	|	Table.IsIncomingCheque
 	|
 	|UNION ALL
 	|
@@ -464,518 +332,865 @@ Function R3016B_ChequeAndBonds()
 	|	VALUE(AccumulationRecordType.Expense),
 	|	*
 	|FROM
-	|	R3016B_ChequeAndBonds_OutgoingCheque_Reversal AS Table
+	|	ChequeBondBalance_Reversal AS Table
 	|WHERE
-	|	TRUE
+	|	Table.IsOutgoingCheque
 	|";
 EndFunction
 
+#Region CustomerTransaction
 
-//		"SELECT
-//		|	QueryTable.ReceiptDocument AS ReceiptDocument,
-//		|	QueryTable.PaymentDocument AS PaymentDocument,
-//		|	QueryTable.Cheque AS Cheque,
-//		|	QueryTable.Period AS Period,
-//		|	QueryTable.DueDate AS DueDate,
-//		|	QueryTable.Company AS Company,
-//		|	QueryTable.LegalName AS LegalName,
-//		|	QueryTable.Partner AS Partner,
-//		|	QueryTable.Currency AS Currency,
-//		|	QueryTable.Account AS Account,
-//		|	QueryTable.Amount AS Amount,
-//		|	QueryTable.IncomingCheque AS IncomingCheque,
-//		|	QueryTable.OutgoingCheque AS OutgoingCheque,
-//		|	QueryTable.IsAdvance AS IsAdvance,
-//		|	QueryTable.Agreement AS Agreement
-//		|INTO tmp
-//		|FROM
-//		|	&QueryTable AS QueryTable
-//		|;
-//		|
-//		|//[1]//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	QueryTable_PaymentList.Company,
-//		|	QueryTable_PaymentList.Period AS Period,
-//		|	QueryTable_PaymentList.PartnerArBasisDocument,
-//		|	QueryTable_PaymentList.PartnerApBasisDocument,
-//		|	QueryTable_PaymentList.Partner,
-//		|	QueryTable_PaymentList.LegalName,
-//		|	QueryTable_PaymentList.Agreement,
-//		|	QueryTable_PaymentList.Currency,
-//		|	QueryTable_PaymentList.Amount,
-//		|	QueryTable_PaymentList.IncomingCheque AS IncomingCheque,
-//		|	QueryTable_PaymentList.OutgoingCheque AS OutgoingCheque
-//		|INTO tmp_paymentlist
-//		|FROM
-//		|	&QueryTable_PaymentList AS QueryTable_PaymentList
-//		|;
-//		|
-//		|//[2] AdvanceFromCustomers_IncomingCheque //////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Currency,
-//		|	tmp.ReceiptDocument,
-//		|	tmp.Period AS Period,
-//		|	MAX(tmp.Amount) - SUM(ISNULL(tmp_paymentlist.Amount, 0)) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|		LEFT JOIN tmp_paymentlist AS tmp_paymentlist
-//		|		ON TRUE
-//		|WHERE
-//		|	tmp.IncomingCheque AND tmp.IsAdvance
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Currency,
-//		|	tmp.ReceiptDocument,
-//		|	tmp.Period
-//		|HAVING
-//		|	MAX(tmp.Amount) - SUM(ISNULL(tmp_paymentlist.Amount, 0)) <> 0
-//		|;
-//		|//////////////////////////////////////////////////
-//		|//[3] AdvanceToSuppliers_OutgoingCheque
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Currency,
-//		|	tmp.PaymentDocument,
-//		|	tmp.Period AS Period,
-//		|	MAX(tmp.Amount) - SUM(ISNULL(tmp_paymentlist.Amount, 0)) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|		LEFT JOIN tmp_paymentlist AS tmp_paymentlist
-//		|		ON TRUE
-//		|WHERE
-//		|	tmp.OutgoingCheque AND tmp.IsAdvance
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Currency,
-//		|	tmp.PaymentDocument,
-//		|	tmp.Period
-//		|HAVING
-//		|	MAX(tmp.Amount) - SUM(ISNULL(tmp_paymentlist.Amount, 0)) <> 0
-//		|;
-//		|
-//		|
-//		|//[4] AccountBalance_IncomingCheque//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.Period AS Period,
-//		|	SUM(tmp.Amount) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.IncomingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.Period
-//		|;
-//		|
-//		|//////////////////////////////////////////////////////
-//		|//[5] AccountBalance_OutgoingCheque
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.Period AS Period,
-//		|	SUM(tmp.Amount) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.OutgoingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.Period
-//		|;
-//		|//[6] PartnerArTransactions_IncomingCheque//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp_paymentlist.PartnerArBasisDocument AS BasisDocument,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Agreement,
-//		|	tmp.Currency,
-//		|	tmp.Period AS Period,
-//		|	CASE WHEN NOT tmp.IsAdvance THEN SUM(tmp.Amount) ELSE SUM(tmp_paymentlist.Amount) END AS Amount
-//		|FROM
-//		|	tmp_paymentlist AS tmp_paymentlist FULL JOIN tmp AS tmp ON TRUE
-//		|WHERE
-//		|	tmp.IncomingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp_paymentlist.PartnerArBasisDocument,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Agreement,
-//		|	tmp.Currency,
-//		|	tmp.Period,
-//		|	tmp.IsAdvance
-//		|HAVING CASE WHEN NOT tmp.IsAdvance THEN SUM(tmp.Amount) ELSE SUM(tmp_paymentlist.Amount) END <> 0
-//		|;
-//		|/////////////////////////////////////////////////////////////////////////////////////////
-//		|//[7] PartnerApTransactions_OutgoingCheque
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp_paymentlist.PartnerApBasisDocument AS BasisDocument,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Agreement,
-//		|	tmp.Currency,
-//		|	tmp.Period AS Period,
-//		|	CASE WHEN NOT tmp.IsAdvance THEN SUM(tmp.Amount) ELSE SUM(tmp_paymentlist.Amount) END AS Amount
-//		|FROM
-//		|	tmp_paymentlist AS tmp_paymentlist FULL JOIN tmp AS tmp ON TRUE
-//		|WHERE
-//		|	tmp.OutgoingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp_paymentlist.PartnerApBasisDocument,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Agreement,
-//		|	tmp.Currency,
-//		|	tmp.Period,
-//		|	tmp.IsAdvance
-//		|HAVING CASE WHEN NOT tmp.IsAdvance THEN SUM(tmp.Amount) ELSE SUM(tmp_paymentlist.Amount) END <> 0
-//		|;	
-//		|
-//		|//[8] AdvanceFromCustomers_Correction_IncomingCheque //////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Currency,
-//		|	tmp.ReceiptDocument,
-//		|	tmp.Period AS Period,
-//		|	-(MAX(tmp.Amount) - SUM(ISNULL(tmp_paymentlist.Amount, 0))) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|		LEFT JOIN tmp_paymentlist AS tmp_paymentlist
-//		|		ON TRUE
-//		|WHERE
-//		|	tmp.IncomingCheque AND tmp.IsAdvance
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Currency,
-//		|	tmp.ReceiptDocument,
-//		|	tmp.Period
-//		|;
-//		|//////////////////////////////////////////////////////////////////////////
-//		|//[9] AdvanceToSuppliers_Correction_OutgoingCheque
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Currency,
-//		|	tmp.PaymentDocument,
-//		|	tmp.Period AS Period,
-//		|	-(MAX(tmp.Amount) - SUM(ISNULL(tmp_paymentlist.Amount, 0))) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|		LEFT JOIN tmp_paymentlist AS tmp_paymentlist
-//		|		ON TRUE
-//		|WHERE
-//		|	tmp.OutgoingCheque AND tmp.IsAdvance
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Currency,
-//		|	tmp.PaymentDocument,
-//		|	tmp.Period
-//		|;	
-//		|
-//		|
-//		|
-//		|
-//		|//[12] AccountBalance_Correction_IncomingCheque//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.Period AS Period,
-//		|	-SUM(tmp.Amount) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.IncomingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.Period
-//		|;
-//		|///////////////////////////////////////////////////////////////////
-//		|//[13] AccountBalance_Correction_OutgoingCheque
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.Period AS Period,
-//		|	-SUM(tmp.Amount) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.OutgoingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.Period
-//		|;
-//		|
-//		|//[14] PartnerArTransactions_Correction_IncomingCheque//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp_paymentlist.PartnerArBasisDocument AS BasisDocument,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Agreement,
-//		|	tmp.Currency,
-//		|	tmp.Period AS Period,
-//		|	CASE WHEN NOT tmp.IsAdvance THEN -SUM(tmp.Amount) ELSE -SUM(tmp_paymentlist.Amount) END AS Amount
-//		|FROM
-//		|	tmp_paymentlist AS tmp_paymentlist FULL JOIN tmp AS tmp ON TRUE
-//		|WHERE
-//		|	tmp.IncomingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp_paymentlist.PartnerArBasisDocument,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Agreement,
-//		|	tmp.Currency,
-//		|	tmp.Period,
-//		|	tmp.IsAdvance
-//		|HAVING CASE WHEN NOT tmp.IsAdvance THEN -SUM(tmp.Amount) ELSE -SUM(tmp_paymentlist.Amount) END <> 0
-//		|;
-//		|///////////////////////////////////////////////////////////////////////////
-//		|//[15] PartnerApTransactions_Correction_OutgoingCheque
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp_paymentlist.PartnerApBasisDocument AS BasisDocument,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Agreement,
-//		|	tmp.Currency,
-//		|	tmp.Period AS Period,
-//		|	CASE WHEN NOT tmp.IsAdvance THEN -SUM(tmp.Amount) ELSE -SUM(tmp_paymentlist.Amount) END AS Amount
-//		|FROM
-//		|	tmp_paymentlist AS tmp_paymentlist FULL JOIN tmp AS tmp ON TRUE
-//		|WHERE
-//		|	tmp.OutgoingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp_paymentlist.PartnerApBasisDocument,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Agreement,
-//		|	tmp.Currency,
-//		|	tmp.Period,
-//		|	tmp.IsAdvance
-//		|HAVING CASE WHEN NOT tmp.IsAdvance THEN -SUM(tmp.Amount) ELSE -SUM(tmp_paymentlist.Amount) END <> 0
-//		|;
-//		|
-//		|//[16] PlaningCashTransactions_IncomingCheque//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.ReceiptDocument AS BasisDocument,
-//		|	tmp.DueDate AS Period,
-//		|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
-//		|	SUM(tmp.Amount) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.IncomingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.ReceiptDocument,
-//		|	tmp.DueDate,
-//		|	VALUE(Enum.CashFlowDirections.Incoming)
-//		|;
-//		|///////////////////////////////////////////////////////////////////////////////
-//		|//[17] PlaningCashTransactions_OutgoingCheque
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.PaymentDocument AS BasisDocument,
-//		|	tmp.DueDate AS Period,
-//		|	VALUE(Enum.CashFlowDirections.Outgoing) AS CashFlowDirection,
-//		|	SUM(tmp.Amount) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.OutgoingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.PaymentDocument,
-//		|	tmp.DueDate,
-//		|	VALUE(Enum.CashFlowDirections.Outgoing)
-//		|;
-//		|
-//		|//[18] PlaningCashTransactions_Correction_IncomingCheque//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.ReceiptDocument AS BasisDocument,
-//		|	tmp.Period AS Period,
-//		|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
-//		|	-SUM(tmp.Amount) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.IncomingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.ReceiptDocument,
-//		|	tmp.Period,
-//		|	VALUE(Enum.CashFlowDirections.Incoming)
-//		|;
-//		|/////////////////////////////////////////////////////////////////////
-//		|//[19] PlaningCashTransactions_Correction_OutgoingCheque
-//		|
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.PaymentDocument AS BasisDocument,
-//		|	tmp.Period AS Period,
-//		|	VALUE(Enum.CashFlowDirections.Outgoing) AS CashFlowDirection,
-//		|	-SUM(tmp.Amount) AS Amount
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.OutgoingCheque
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Partner,
-//		|	tmp.LegalName,
-//		|	tmp.Account,
-//		|	tmp.Currency,
-//		|	tmp.PaymentDocument,
-//		|	tmp.Period,
-//		|	VALUE(Enum.CashFlowDirections.Outgoing);
-////		|//[20] ChequeBondBalance_Incoming
-////		|SELECT
-////		|	tmp.Company,
-////		|	tmp.Cheque,
-////		|	tmp.Partner,
-////		|	tmp.LegalName,
-////		|	tmp.Currency,
-////		|	tmp.Period,
-////		|	SUM(tmp.Amount) AS Amount
-////		|FROM 
-////		|	tmp AS tmp
-////		|WHERE
-////		|	tmp.IncomingCheque
-////		|GROUP BY
-////		|	tmp.Company,
-////		|	tmp.Cheque,
-////		|	tmp.Partner,
-////		|	tmp.LegalName,
-////		|	tmp.Currency,
-////		|	tmp.Period;
-////		|//[21] ChequeBondBalance_Correction_Incoming
-////		|SELECT
-////		|	tmp.Company,
-////		|	tmp.Cheque,
-////		|	tmp.Partner,
-////		|	tmp.LegalName,
-////		|	tmp.Currency,
-////		|	tmp.Period,
-////		|	-SUM(tmp.Amount) AS Amount
-////		|FROM 
-////		|	tmp AS tmp
-////		|WHERE
-////		|	tmp.IncomingCheque
-////		|GROUP BY
-////		|	tmp.Company,
-////		|	tmp.Cheque,
-////		|	tmp.Partner,
-////		|	tmp.LegalName,
-////		|	tmp.Currency,
-////		|	tmp.Period;
-////		|//[22] ChequeBondBalance_Outgoing
-////		|SELECT
-////		|	tmp.Company,
-////		|	tmp.Cheque,
-////		|	tmp.Partner,
-////		|	tmp.LegalName,
-////		|	tmp.Currency,
-////		|	tmp.Period,
-////		|	SUM(tmp.Amount) AS Amount
-////		|FROM 
-////		|	tmp AS tmp
-////		|WHERE
-////		|	tmp.OutgoingCheque
-////		|GROUP BY
-////		|	tmp.Company,
-////		|	tmp.Cheque,
-////		|	tmp.Partner,
-////		|	tmp.LegalName,
-////		|	tmp.Currency,
-////		|	tmp.Period;
-////		|//[23] ChequeBondBalance_Correction_Outgoing
-////		|SELECT
-////		|	tmp.Company,
-////		|	tmp.Cheque,
-////		|	tmp.Partner,
-////		|	tmp.LegalName,
-////		|	tmp.Currency,
-////		|	tmp.Period,
-////		|	-SUM(tmp.Amount) AS Amount
-////		|FROM 
-////		|	tmp AS tmp
-////		|WHERE
-////		|	tmp.OutgoingCheque
-////		|GROUP BY
-////		|	tmp.Company,
-////		|	tmp.Cheque,
-////		|	tmp.Partner,
-////		|	tmp.LegalName,
-////		|	tmp.Currency,
-////		|	tmp.Period;
-////		|";
-	
+Function CustomerTransaction_Posting()
+	Return
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	TAble.Agreement
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.BasisDocument,
+	|	Table.Amount,
+	|	Table.IsAdvance,
+	|	Table.IsIncomingCheque,
+	|	Table.IsOutgoingCheque
+	|INTO CustomerTransaction_Posting
+	|FROM
+	|	ChequeBondTransactionItem AS Table
+	|WHERE
+	|	&IsPosting";
+EndFunction
 
+Function CustomerTransaction_Reversal()
+	Return
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.BasisDocument,
+	|	Table.Amount,
+	|	Table.IsAdvance,
+	|	Table.IsIncomingCheque,
+	|	Table.IsOutgoingCheque
+	|INTO CustomerTransaction_Reversal
+	|FROM
+	|	ChequeBondTransactionItem AS Table
+	|WHERE
+	|	&IsReversal";
+EndFunction
+
+Function CustomerTransaction_Correction()
+	Return
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.BasisDocument,
+	|	-Table.Amount AS Amount,
+	|	Table.IsAdvance,
+	|	Table.IsIncomingCheque,
+	|	Table.IsOutgoingCheque
+	|INRO CustomerTransaction_Correction
+	|FROM
+	|	ChequeBondTransactionItem AS Table
+	|WHERE
+	|	&IsCorrection";
+EndFunction
+
+#EndRegion
+
+Function R2020B_AdvancesFromCustomers()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED AS CustomersAdvancesClosing
+	|INTO R2020B_AdvancesFromCustomers
+	|FROM
+	|	CustomerTransaction_Posting AS Table
+	|WHERE
+	|	Table.IsIncomingCheque AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED
+	|FROM
+	|	CustomerTransaction_Reversal AS Table
+	|WHERE
+	|	Table.IsIncomingCheque AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED
+	|FROM
+	|	CustomerTransaction_Correction AS Table
+	|WHERE
+	|	Table.IsIncomingCheque AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	OffsetOfAdvances.Period,
+	|	OffsetOfAdvances.Company,
+	|	OffsetOfAdvances.Branch,
+	|	OffsetOfAdvances.Partner,
+	|	OffsetOfAdvances.LegalName,
+	|	OffsetOfAdvances.Currency,
+	|	OffsetOfAdvances.AdvancesOrder,
+	|	OffsetOfAdvances.Amount,
+	|	OffsetOfAdvances.Recorder
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+	|WHERE
+	|	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function R2021B_CustomersTransactions()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Agreement,
+	|	Table.BasisDocument AS Basis,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED AS CustomersAdvancesClosing
+	|INTO R2021B_CustomersTransactions
+	|FROM
+	|	CustomerTransaction_Posting AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Agreement,
+	|	Table.BasisDocument,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED
+	|FROM
+	|	CustomerTransaction_Reversal AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Agreement,
+	|	Table.BasisDocument,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED
+	|FROM
+	|	CustomerTransaction_Correction AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	OffsetOfAdvances.Period,
+	|	OffsetOfAdvances.Company,
+	|	OffsetOfAdvances.Branch,
+	|	OffsetOfAdvances.Partner,
+	|	OffsetOfAdvances.LegalName,
+	|	OffsetOfAdvances.Currency,
+	|	OffsetOfAdvances.Agreement,
+	|	OffsetOfAdvances.TransactionDocument,
+	|	OffsetOfAdvances.TransactionOrder,
+	|	OffsetOfAdvances.Amount,
+	|	OffsetOfAdvances.Recorder
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+	|WHERE
+	|	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function R5011B_CustomersAging()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	OffsetOfAging.Period,
+	|	OffsetOfAging.Company,
+	|	OffsetOfAging.Branch,
+	|	OffsetOfAging.Partner,
+	|	OffsetOfAging.Agreement,
+	|	OffsetOfAging.Currency,
+	|	OffsetOfAging.Invoice,
+	|	OffsetOfAging.PaymentDate,
+	|	OffsetOfAging.Amount,
+	|	OffsetOfAging.Recorder AS AgingClosing
+	|INTO R5011B_CustomersAging
+	|FROM
+	|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
+	|WHERE
+	|	OffsetOfAging.Document = &Ref";
+EndFunction
+
+#Region VendorTransaction
+
+Function VendorTransaction_Posting()
+	Return
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.BasisDocument,
+	|	Table.Amount,
+	|	Table.IsAdvance,
+	|	Table.IsIncomingCheque,
+	|	Table.IsOutgoingCheque
+	|INTO VendorTransaction_Posting
+	|FROM
+	|	ChequeBondTransactionItem AS Table
+	|WHERE
+	|	&IsPosting";
+EndFunction
+
+Function VendorTransaction_Reversal()
+	Return
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.BasisDocument,
+	|	Table.Amount,
+	|	Table.IsAdvance,
+	|	Table.IsIncomingCheque,
+	|	Table.IsOutgoingCheque
+	|INTO VendorTransaction_Reversal
+	|FROM
+	|	ChequeBondTransactionItem AS Table
+	|WHERE
+	|	&IsReversal";
+EndFunction
+
+Function VendorTransaction_Correction()
+	Return
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.BasisDocument,
+	|	-Table.Amount AS Ammount,
+	|	Table.IsAdvance,
+	|	Table.IsIncomingCheque,
+	|	Table.IsOutgoingCheque
+	|INTO VendorTransaction_Correction
+	|FROM
+	|	ChequeBondTransactionItem AS Table
+	|WHERE
+	|	&IsCorrection";
+EndFunction
+
+#EndRegion
+
+Function R1020B_AdvancesToVendors()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED AS VendorsAdvancesClosing
+	|INTO R1020B_AdvancesToVendors
+	|FROM
+	|	VendorTransaction_Posting AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED
+	|FROM
+	|	VendorTransaction_Reversal AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED
+	|FROM
+	|	VendorTransaction_Correction AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	OffsetOfAdvances.Period,
+	|	OffsetOfAdvances.Company,
+	|	OffsetOfAdvances.Branch,
+	|	OffsetOfAdvances.Partner,
+	|	OffsetOfAdvances.LegalName,
+	|	OffsetOfAdvances.Currency,
+	|	OffsetOfAdvances.AdvancesOrder,
+	|	OffsetOfAdvances.Amount,
+	|	OffsetOfAdvances.Recorder
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+	|WHERE
+	|	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function R1021B_VendorsTransactions()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Agreement,
+	|	Table.BasisDocument AS Basis,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED AS VendorsAdvancesClosing
+	|INTO R1021B_VendorsTransactions
+	|FROM
+	|	VendorTransaction_Posting AS Table
+	|WHERE
+	|	Table.OutgoingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Agreement,
+	|	Table.BasisDocument,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED
+	|FROM
+	|	VendorTransaction_Reversal AS Table
+	|WHERE
+	|	Table.OutgoingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Currency,
+	|	Table.Agreement,
+	|	Table.BasisDocument,
+	|	Table.Order,
+	|	Table.Amount,
+	|	UNDEFINED
+	|FROM
+	|	VendorTransaction_Correction AS Table
+	|WHERE
+	|	Table.OutgoingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	OffsetOfAdvances.Period,
+	|	OffsetOfAdvances.Company,
+	|	OffsetOfAdvances.Branch,
+	|	OffsetOfAdvances.Partner,
+	|	OffsetOfAdvances.LegalName,
+	|	OffsetOfAdvances.Currency,
+	|	OffsetOfAdvances.Agreement,
+	|	OffsetOfAdvances.TransactionDocument,
+	|	OffsetOfAdvances.TransactionOrder,
+	|	OffsetOfAdvances.Amount,
+	|	OffsetOfAdvances.Recorder
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+	|WHERE
+	|	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function R5012B_VendorsAging()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	OffsetOfAging.Period,
+	|	OffsetOfAging.Company,
+	|	OffsetOfAging.Branch,
+	|	OffsetOfAging.Partner,
+	|	OffsetOfAging.Agreement,
+	|	OffsetOfAging.Currency,
+	|	OffsetOfAging.Invoice,
+	|	OffsetOfAging.PaymentDate,
+	|	OffsetOfAging.Amount,
+	|	OffsetOfAging.Recorder AS AgingClosing
+	|INTO R5012B_VendorsAging
+	|FROM
+	|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
+	|WHERE
+	|	OffsetOfAging.Document = &Ref";
+EndFunction
+
+Function R5010B_ReconciliationStatement()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.LegalName,
+	|	Table.LegalNameContract,
+	|	Table.Currency,
+	|	Table.Amount
+	|INTO R5010B_ReconciliationStatement
+	|FROM
+	|	CustomerTransaction_Posting AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.LegalName,
+	|	Table.LegalNameContract,
+	|	Table.Currency,
+	|	Table.Amount
+	|FROM
+	|	CustomerTransaction_Reversal AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.LegalName,
+	|	Table.LegalNameContract,
+	|	Table.Currency,
+	|	Table.Amount
+	|FROM
+	|	CustomerTransaction_Correction AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.LegalName,
+	|	Table.LegalNameContract,
+	|	Table.Currency,
+	|	Table.Amount
+	|FROM
+	|	VendorTransaction_Posting AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.LegalName,
+	|	Table.LegalNameContract,
+	|	Table.Currency,
+	|	Table.Amount
+	|FROM
+	|	VendorTransaction_Reversal AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.LegalName,
+	|	Table.LegalNameContract,
+	|	Table.Currency,
+	|	Table.Amount
+	|FROM
+	|	VendorTransaction_Correction AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque";
+EndFunction
+
+Function T2014S_AdvancesInfo()
+	Return 
+	"SELECT
+	|	Table.Period AS Date,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Order,
+	|	TRUE AS IsCustomerAdvance,
+	|	FALSE AS IsVendorAdvance,
+	|	Table.Amount
+	|INTO T2014S_AdvancesInfo
+	|FROM
+	|	CustomerTransaction_Posting AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|	AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Order,
+	|	TRUE,
+	|	FALSE,
+	|	-Table.Amount
+	|FROM
+	|	CustomerTransaction_Reversal AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|	AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Order,
+	|	TRUE,
+	|	FALSE,
+	|	-Table.Amount
+	|FROM
+	|	CustomerTransaction_Correction AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|	AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Order,
+	|	FALSE,
+	|	TRUE,
+	|	Table.Amount
+	|FROM
+	|	VendorTransaction_Posting AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque
+	|	AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Order,
+	|	FALSE,
+	|	TRUE,
+	|	-Table.Amount
+	|FROM
+	|	VendorTransaction_Reversal AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque
+	|	AND Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Order,
+	|	FALSE,
+	|	TRUE,
+	|	-Table.Amount
+	|FROM
+	|	VendorTransaction_Correction AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque
+	|	AND Table.IsAdvance";
+EndFunction
+
+Function T2015S_TransactionsInfo()
+	Return 
+	"SELECT
+	|	Table.Period AS Date,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Order,
+	|	TRUE AS IsCustomerTransaction,
+	|	FALSE AS IsVendorTransaction,
+	|	Table.BasisDocument AS TransactionBasis,
+	|	Table.Amount,
+	|	TRUE AS IsPaid
+	|INTO T2015S_TransactionsInfo
+	|FROM
+	|	CustomerTransaction_Posting AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Order,
+	|	TRUE,
+	|	FALSE,
+	|	Table.BasisDocument,
+	|	-Table.Amount,
+	|	TRUE
+	|FROM
+	|	CustomerTransaction_Reversal AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Order,
+	|	TRUE,
+	|	FALSE,
+	|	Table.BasisDocument,
+	|	-Table.Amount,
+	|	TRUE
+	|FROM
+	|	CustomerTransaction_Correction AS Table
+	|WHERE
+	|	Table.IsIncomingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Order,
+	|	FALSE,
+	|	TRUE,
+	|	Table.BasisDocument,
+	|	Table.Amount,
+	|	TRUE
+	|FROM
+	|	VendorTransaction_Posting AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Order,
+	|	FALSE,
+	|	TRUE,
+	|	Table.BasisDocument,
+	|	-Table.Amount,
+	|	TRUE
+	|FROM
+	|	VendorTransaction_Reversal AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque
+	|	AND NOT Table.IsAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Agreement,
+	|	Table.Order,
+	|	FALSE,
+	|	TRUE,
+	|	Table.BasisDocument,
+	|	-Table.Amount,
+	|	TRUE
+	|FROM
+	|	VendorTransaction_Correction AS Table
+	|WHERE
+	|	Table.IsOutgoingCheque
+	|	AND NOT Table.IsAdvance";
+EndFunction
 
 #Region SYNCHRONIZATION
 

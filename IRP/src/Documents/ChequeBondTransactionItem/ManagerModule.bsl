@@ -1391,6 +1391,9 @@ Function GetChequeInfo(ChequeRef, ChequeBondTransactionRef)
 	ChequeInfo.Insert("Company"     , Undefined);
 	ChequeInfo.Insert("Branch"      , Undefined);
 	ChequeInfo.Insert("LegalName"   , Undefined);
+	ChequeInfo.Insert("LegalNameContract" , Undefined);
+	ChequeInfo.Insert("BasisDocument" , Undefined);
+	ChequeInfo.Insert("Order"       , Undefined);
 	ChequeInfo.Insert("Account"     , Undefined);
 	ChequeInfo.Insert("Cheque"      , Undefined);
 	ChequeInfo.Insert("Agreement"   , Undefined);
@@ -1410,6 +1413,9 @@ Function GetChequeInfo(ChequeRef, ChequeBondTransactionRef)
 		|	ChequeBonds.Ref.Branch AS Branch,
 		|	ChequeBonds.Key,
 		|	ChequeBonds.Agreement AS Agreement,
+		|	ChequeBonds.LegalNameContract AS LegalNameContract,
+		|	ChequeBonds.BasisDocument AS BasisDocument,
+		|	ChequeBonds.Order AS Order,
 		|	ChequeBonds.Partner AS Partner,
 		|	ChequeBonds.Ref.Author AS Author
 		|FROM
@@ -1429,34 +1435,7 @@ Function GetChequeInfo(ChequeRef, ChequeBondTransactionRef)
 	MainRowKey = QuerySelection.Key;
 	
 	FillPropertyValues(ChequeInfo, QuerySelection);
-	
-	
-	// PaymentList
-	
-//	Query = New Query();
-//	Query.Text =
-//		"SELECT
-//		|	ChequeBondTransactionPaymentList.PartnerArBasisDocument,
-//		|	ChequeBondTransactionPaymentList.PartnerApBasisDocument,
-//		|	ChequeBondTransactionPaymentList.Amount
-//		|FROM
-//		|	Document.ChequeBondTransaction.PaymentList AS ChequeBondTransactionPaymentList
-//		|WHERE
-//		|	ChequeBondTransactionPaymentList.Ref = &ChequeBondTransactionRef
-//		|	AND ChequeBondTransactionPaymentList.Key = &Key";
-//	Query.SetParameter("Key", MainRowKey);
-//	Query.SetParameter("ChequeBondTransactionRef", ChequeBondTransactionRef);
-//	QueryResult = Query.Execute();
-//	QuerySelection = QueryResult.Select();
-//	While QuerySelection.Next() Do
-//		PaymentListRow = New Structure();
-//		PaymentListRow.Insert("PartnerArBasisDocument", QuerySelection.PartnerArBasisDocument);
-//		PaymentListRow.Insert("PartnerApBasisDocument", QuerySelection.PartnerApBasisDocument);
-//		PaymentListRow.Insert("Amount", QuerySelection.Amount);
-//		ChequeInfo.PaymentList.Add(PaymentListRow);
-//	EndDo;
-	
-	
+		
 	// Currencies
 	
 	Query = New Query();
@@ -1479,21 +1458,7 @@ Function GetChequeInfo(ChequeRef, ChequeBondTransactionRef)
 		EndDo;
 		ChequeInfo.Currencies.Add(NewRow);
 	EndDo;
-	
-	//QuerySelection = QueryResult.Select();
-//	While QuerySelection.Next() Do
-//		CurrenciesRow = New Structure();
-//		CurrenciesRow.Insert("CurrencyFrom", QuerySelection.CurrencyFrom);
-//		CurrenciesRow.Insert("Rate", QuerySelection.Rate);
-//		CurrenciesRow.Insert("ReverseRate", QuerySelection.ReverseRate);
-//		CurrenciesRow.Insert("ShowReverseRate", QuerySelection.ShowReverseRate);
-//		CurrenciesRow.Insert("Multiplicity", QuerySelection.Multiplicity);
-//		CurrenciesRow.Insert("MovementType", QuerySelection.MovementType);
-//		CurrenciesRow.Insert("Amount", QuerySelection.Amount);
-//		CurrenciesRow.Insert("Key", QuerySelection.Key);
-//		ChequeInfo.Currencies.Add(CurrenciesRow);
-//	EndDo;
-	
+		
 	Return ChequeInfo;
 EndFunction
 
@@ -1507,16 +1472,12 @@ Procedure FillDocument(DocumentObject, ChequeInfo)
 	DocumentObject.Account   = ChequeInfo.Account;
 	DocumentObject.Cheque    = ChequeInfo.Cheque;
 	DocumentObject.Agreement = ChequeInfo.Agreement;
+	DocumentObject.LegalNameContract = ChequeInfo.LegalNameContract;
+	DocumentObject.BasisDocument = ChequeInfo.BasisDocument;
+	DocumentObject.Order     = ChequeInfo.Agreement;
 	DocumentObject.Partner   = ChequeInfo.Partner;
 	DocumentObject.Author    = ChequeInfo.Author;
-	
-	// PaymentList
-	
-//	DocumentObject.PaymentList.Clear();
-//	For Each Row In ChequeInfo.PaymentList Do
-//		FillPropertyValues(DocumentObject.PaymentList.Add(), Row);
-//	EndDo;
-	
+		
 	// Currencies
 	
 	DocumentObject.Currencies.Clear();

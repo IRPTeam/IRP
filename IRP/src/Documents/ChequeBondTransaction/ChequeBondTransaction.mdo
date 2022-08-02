@@ -207,6 +207,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="3c6c80b3-7752-4858-b959-346182166374">
+      <name>Agreement</name>
+      <synonym>
+        <key>en</key>
+        <value>Agreement</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Agreements</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="55bda245-02ed-4583-8730-15f8a696f383">
       <name>LegalNameContract</name>
       <synonym>
@@ -222,20 +236,6 @@
         <name>Filter.Company</name>
         <field>Document.ChequeBondTransaction.TabularSection.ChequeBonds.Attribute.LegalName</field>
       </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3c6c80b3-7752-4858-b959-346182166374">
-      <name>Agreement</name>
-      <synonym>
-        <key>en</key>
-        <value>Agreement</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Agreements</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

@@ -31,29 +31,29 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	// CustomerTransaction
 
 	Query.Text = CustomerTransaction_Posting();
-	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "CustomerTransaction", "Posting"));
+	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "CustomerTransactions", "Posting"));
 	Query.Execute();
 	
 	Query.Text = CustomerTransaction_Reversal();
-	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "CustomerTransaction", "Reversal"));
+	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "CustomerTransactions", "Reversal"));
 	Query.Execute();
 	
 	Query.Text = CustomerTransaction_Correction();
-	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "CustomerTransaction", "Correction"));
+	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "CustomerTransactions", "Correction"));
 	Query.Execute();
 	
 	// VendorTransaction
 
 	Query.Text = VendorTransaction_Posting();
-	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "VendorTransaction", "Posting"));
+	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "VendorTransactions", "Posting"));
 	Query.Execute();
 	
 	Query.Text = VendorTransaction_Reversal();
-	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "VendorTransaction", "Reversal"));
+	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "VendorTransactions", "Reversal"));
 	Query.Execute();
 	
 	Query.Text = VendorTransaction_Correction();
-	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "VendorTransaction", "Correction"));
+	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "VendorTransactions", "Correction"));
 	Query.Execute();
 		
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -177,6 +177,7 @@ Function ChequeBondTransactionItem()
 	|	Doc.Cheque.DueDate AS DueDate,
 	|	Doc.BasisDocument,
 	|	Doc.Order,
+	|	Doc.LegalNameContract,
 	|
 	|	CASE
 	|		WHEN Doc.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
@@ -348,7 +349,8 @@ Function CustomerTransaction_Posting()
 	|	Table.Branch,
 	|	Table.Partner,
 	|	Table.LegalName,
-	|	TAble.Agreement
+	|	Table.Agreement,
+	|	Table.LegalNameContract,
 	|	Table.Currency,
 	|	Table.Order,
 	|	Table.BasisDocument,
@@ -372,6 +374,7 @@ Function CustomerTransaction_Reversal()
 	|	Table.Partner,
 	|	Table.LegalName,
 	|	Table.Agreement,
+	|	Table.LegalNameContract,
 	|	Table.Currency,
 	|	Table.Order,
 	|	Table.BasisDocument,
@@ -395,6 +398,7 @@ Function CustomerTransaction_Correction()
 	|	Table.Partner,
 	|	Table.LegalName,
 	|	Table.Agreement,
+	|	Table.LegalNameContract,
 	|	Table.Currency,
 	|	Table.Order,
 	|	Table.BasisDocument,
@@ -402,7 +406,7 @@ Function CustomerTransaction_Correction()
 	|	Table.IsAdvance,
 	|	Table.IsIncomingCheque,
 	|	Table.IsOutgoingCheque
-	|INRO CustomerTransaction_Correction
+	|INTO CustomerTransaction_Correction
 	|FROM
 	|	ChequeBondTransactionItem AS Table
 	|WHERE
@@ -602,6 +606,7 @@ Function VendorTransaction_Posting()
 	|	Table.Partner,
 	|	Table.LegalName,
 	|	Table.Agreement,
+	|	Table.LegalNameContract,
 	|	Table.Currency,
 	|	Table.Order,
 	|	Table.BasisDocument,
@@ -625,6 +630,7 @@ Function VendorTransaction_Reversal()
 	|	Table.Partner,
 	|	Table.LegalName,
 	|	Table.Agreement,
+	|	Table.LegalNameContract,
 	|	Table.Currency,
 	|	Table.Order,
 	|	Table.BasisDocument,
@@ -648,10 +654,11 @@ Function VendorTransaction_Correction()
 	|	Table.Partner,
 	|	Table.LegalName,
 	|	Table.Agreement,
+	|	Table.LegalNameContract,
 	|	Table.Currency,
 	|	Table.Order,
 	|	Table.BasisDocument,
-	|	-Table.Amount AS Ammount,
+	|	-Table.Amount AS Amount,
 	|	Table.IsAdvance,
 	|	Table.IsIncomingCheque,
 	|	Table.IsOutgoingCheque
@@ -757,7 +764,7 @@ Function R1021B_VendorsTransactions()
 	|FROM
 	|	VendorTransaction_Posting AS Table
 	|WHERE
-	|	Table.OutgoingCheque
+	|	Table.IsOutgoingCheque
 	|	AND NOT Table.IsAdvance
 	|
 	|UNION ALL
@@ -778,7 +785,7 @@ Function R1021B_VendorsTransactions()
 	|FROM
 	|	VendorTransaction_Reversal AS Table
 	|WHERE
-	|	Table.OutgoingCheque
+	|	Table.IsOutgoingCheque
 	|	AND NOT Table.IsAdvance
 	|
 	|UNION ALL
@@ -799,7 +806,7 @@ Function R1021B_VendorsTransactions()
 	|FROM
 	|	VendorTransaction_Correction AS Table
 	|WHERE
-	|	Table.OutgoingCheque
+	|	Table.IsOutgoingCheque
 	|	AND NOT Table.IsAdvance
 	|
 	|UNION ALL

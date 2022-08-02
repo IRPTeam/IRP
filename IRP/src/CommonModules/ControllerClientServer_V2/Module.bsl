@@ -4884,7 +4884,7 @@ Function BindChequeBondsAgreement(Parameters)
 //		|StepExtractDataAgreementApArPostingDetail,
 //		|StepChangeTaxRate_AgreementInList");
 	
-	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
 // ChequeBonds.Agreement.ChangeAgreementByPartner.Step

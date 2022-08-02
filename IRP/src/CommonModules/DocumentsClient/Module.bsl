@@ -749,6 +749,17 @@ Function GetSettingsStructure(Module) Export
 	Return Settings;
 EndFunction
 
+// Get open settings structure.
+// 
+// Returns:
+//  Structure - Get open settings structure:
+// * FormName - String -
+// * ArrayOfFilters - Array of Structure -
+// * FormParameters - Structure -
+// * FillingData - Structure -
+// * FormFilters - Structure -
+// * ArrayOfChoiceParameters - Array Of Structure -
+// * AdditionalParameters - Structure -
 Function GetOpenSettingsStructure() Export
 	Settings = New Structure();
 	Settings.Insert("FormName");

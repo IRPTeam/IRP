@@ -238,4 +238,37 @@ Function GetNextPossibleStatuses(Status) Export
 	Return QueryTable.UnloadColumn("Status");
 EndFunction
 
+Function PutStatusPostingToStructure(Status) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ObjectStatuses.PostingChequeBondBalance AS ChequeBondBalance,
+	|	ObjectStatuses.PostingVendorTransactions AS VendorTransactions,
+	|	ObjectStatuses.PostingCustomerTransactions AS CustomerTransactions,
+	|	ObjectStatuses.PostingCashPlanning AS CashPlanning
+	|FROM
+	|	Catalog.ObjectStatuses AS ObjectStatuses
+	|WHERE
+	|	ObjectStatuses.Ref = &Ref";
+	Query.SetParameter("Ref", Status);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	Posting = CreatePostingStructure();
+	
+	If QuerySelection.Next() Then
+		FillPropertyValues(Posting, QuerySelection);
+	EndIf;
+	Return Posting;
+EndFunction
+
+Function CreatePostingStructure()
+	Result = New Structure();
+	Result.Insert("ChequeBondBalance"    , Enums.DocumentPostingTypes.Nothing);
+	Result.Insert("VendorTransactions"   , Enums.DocumentPostingTypes.Nothing);
+	Result.Insert("CustomerTransactions" , Enums.DocumentPostingTypes.Nothing);
+	Result.Insert("CashPlanning"         , Enums.DocumentPostingTypes.Nothing);
+	Return Result;
+EndFunction
+
 #EndRegion

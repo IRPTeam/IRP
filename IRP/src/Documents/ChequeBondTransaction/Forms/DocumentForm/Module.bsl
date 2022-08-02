@@ -143,6 +143,18 @@ EndProcedure
 
 #EndRegion
 
+#Region ACCOUNT
+// #
+#EndRegion
+
+#Region PARTNER
+// #
+#EndRegion
+
+#Region LEGAL_NAME
+// #
+#EndRegion
+
 #EndRegion
 
 #EndRegion

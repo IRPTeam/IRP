@@ -24,7 +24,7 @@
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.ChequeBondTransactionItem.Form.DocumentForm</defaultObjectForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R6010B_ChequeBond</registerRecords>
+  <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="da8acded-b807-4f2b-a5c4-befb6c5c88c4">

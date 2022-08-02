@@ -261,6 +261,128 @@ EndProcedure
 
 #EndRegion
 
+#Region PARTNER
+
+Procedure ChequeBondsPartnerOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ChequeBondsPartnerOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure ChequeBondsPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.FormParameters = New Structure();
+	If ValueIsFilled(Form.Items.ChequeBonds.CurrentData.LegalName) Then
+		OpenSettings.FormParameters.Insert("Company", Form.Items.ChequeBonds.CurrentData.LegalName);
+		OpenSettings.FormParameters.Insert("FilterPartnersByCompanies", True);
+	EndIf;
+	OpenSettings.FillingData = New Structure("Company", Form.Items.ChequeBonds.CurrentData.LegalName);
+	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure ChequeBondsPartnerEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	AdditionalParameters = New Structure();
+	If ValueIsFilled(Form.Items.ChequeBonds.CurrentData.LegalName) Then
+		AdditionalParameters.Insert("Company", Form.Items.ChequeBonds.CurrentData.LegalName);
+		AdditionalParameters.Insert("FilterPartnersByCompanies", True);
+	EndIf;
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME
+
+Procedure ChequeBondsLegalNameOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ChequeBondsLegalNameOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure ChequeBondsLegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.FormParameters = New Structure();
+	If ValueIsFilled(Form.Items.ChequeBonds.CurrentData.Partner) Then
+		OpenSettings.FormParameters.Insert("Partner", Form.Items.ChequeBonds.CurrentData.Partner);
+		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	OpenSettings.FillingData = New Structure("Partner", Form.Items.ChequeBonds.CurrentData.Partner);
+
+	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure ChequeBondsLegalNameEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	AdditionalParameters = New Structure();
+	If ValueIsFilled(Form.Items.ChequeBonds.CurrentData.Partner) Then
+		AdditionalParameters.Insert("Partner", Form.Items.ChequeBonds.CurrentData.Partner);
+		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT
+
+Procedure ChequeBondsAgreementOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ChequeBondsAgreementOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure ChequeBondsAgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue(
+		"Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
+	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("Partner", CurrentData.Partner);
+	OpenSettings.FormParameters.Insert("IncludeFilterByPartner", True);
+	OpenSettings.FormParameters.Insert("IncludePartnerSegments", True);
+	OpenSettings.FormParameters.Insert("EndOfUseDate", Object.Date);
+	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate", True);
+	OpenSettings.FillingData = New Structure();
+	OpenSettings.FillingData.Insert("Partner", CurrentData.Partner);
+	OpenSettings.FillingData.Insert("LegalName", CurrentData.LegalName);
+	OpenSettings.FillingData.Insert("Company", Object.Company);
+
+	DocumentsClient.AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure ChequeBondsAgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"),
+		ComparisonType.NotEqual));
+
+	AdditionalParameters = New Structure();
+	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
+	AdditionalParameters.Insert("IncludeFilterByPartner", True);
+	AdditionalParameters.Insert("IncludePartnerSegments", True);
+	AdditionalParameters.Insert("EndOfUseDate", Object.Date);
+	AdditionalParameters.Insert("Partner", CurrentData.Partner);
+	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

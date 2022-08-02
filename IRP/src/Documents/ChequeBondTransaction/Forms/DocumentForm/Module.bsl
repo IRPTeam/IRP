@@ -148,11 +148,60 @@ EndProcedure
 #EndRegion
 
 #Region PARTNER
-// #
+
+&AtClient
+Procedure ChequeBondsPartnerOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsPartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsPartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsPartnerEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #Region LEGAL_NAME
-// #
+
+&AtClient
+Procedure ChequeBondsLegalNameOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsLegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT
+
+&AtClient
+Procedure ChequeBondsAgreementOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsAgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsAgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsAgreementEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsAgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #EndRegion

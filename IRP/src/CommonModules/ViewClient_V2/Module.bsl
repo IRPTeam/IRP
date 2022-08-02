@@ -1029,8 +1029,6 @@ EndFunction
 
 #Region CHEQUE_BONDS_COLUMNS
 
-#Region CHEQUE_BONDS_CHEQUE
-
 // ChequeBonds.Cheque
 Procedure ChequeBondsChequeOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
@@ -1044,10 +1042,6 @@ Procedure OnSetChequeBondsChequeNotify(Parameters) Export
 	EndIf;
 EndProcedure
 
-#EndRegion
-
-#Region CHEQUE_BONDS_NEW_STATUS
-
 // ChequeBonds.NewStatus
 Procedure ChequeBondsNewStatusOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
@@ -1055,7 +1049,26 @@ Procedure ChequeBondsNewStatusOnChange(Object, Form, CurrentData = Undefined) Ex
 	ControllerClientServer_V2.ChequeBondsNewStatusOnChange(Parameters);
 EndProcedure
 
-#EndRegion
+// ChequeBonds.Partner
+Procedure ChequeBondsPartnerOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsPartnerOnChange(Parameters);
+EndProcedure
+
+// ChequeBonds.Agreement
+Procedure ChequeBondsAgreementOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsAgreementOnChange(Parameters);
+EndProcedure
+
+// ChequeBonds.LegalName
+Procedure ChequeBondsLegalNameOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsLegalNameOnChange(Parameters);
+EndProcedure
 
 #EndRegion
 

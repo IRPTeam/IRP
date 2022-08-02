@@ -208,6 +208,18 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
 	QueryArray.Add(R3016B_ChequeAndBonds());
+	
+//	QueryArray.Add(R2021B_CustomersTransactions());
+//	QueryArray.Add(R2020B_AdvancesFromCustomers());
+//	QueryArray.Add(R1021B_VendorsTransactions());
+//	QueryArray.Add(R1020B_AdvancesToVendors());
+//	QueryArray.Add(R5010B_ReconciliationStatement());
+	
+//	QueryArray.Add(R5011B_CustomersAging());
+	
+//	QueryArray.Add(T2014S_AdvancesInfo());
+//	QueryArray.Add(T2015S_TransactionsInfo());
+	
 	Return QueryArray;
 EndFunction
 

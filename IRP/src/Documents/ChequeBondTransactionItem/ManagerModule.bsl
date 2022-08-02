@@ -287,7 +287,7 @@ Function R3016B_ChequeAndBonds_IncomingCheque_Posting() //[20]
 	|	Table.Cheque,
 	|	Table.Partner,
 	|	Table.LegalName,
-	|	SUM(Table.Amount) AS Amount
+	|	Table.Amount
 	|INTO R3016B_ChequeAndBonds_IncomingCheque_Posting
 	|FROM 
 	|	ChequeBondTransactionItem AS Table
@@ -305,7 +305,7 @@ Function R3016B_ChequeAndBonds_IncomingCheque_Reversal() //[20]
 	|	Table.Cheque,
 	|	Table.Partner,
 	|	Table.LegalName,
-	|	SUM(Table.Amount) AS Amount
+	|	Table.Amount
 	|INTO R3016B_ChequeAndBonds_IncomingCheque_Reversal
 	|FROM 
 	|	ChequeBondTransactionItem AS Table
@@ -323,7 +323,7 @@ Function R3016B_ChequeAndBonds_IncomingCheque_Correction() //[21]
 	|	Table.Cheque,
 	|	Table.Partner,
 	|	Table.LegalName,
-	|	-SUM(Table.Amount) AS Amount
+	|	-Table.Amount AS Amount
 	|INTO R3016B_ChequeAndBonds_IncomingCheque_Correction
 	|FROM 
 	|	ChequeBondTransactionItem AS Table
@@ -341,8 +341,8 @@ Function R3016B_ChequeAndBonds_OutgoingCheque_Posting() //[22]
 	|	Table.Cheque,
 	|	Table.Partner,
 	|	Table.LegalName,
-	|	SUM(Table.Amount) AS Amount
-	|INTO R3016B_ChequeAndBonds_OutgoingCheque_Posting_Reversal
+	|	Table.Amount
+	|INTO R3016B_ChequeAndBonds_OutgoingCheque_Posting
 	|FROM 
 	|	ChequeBondTransactionItem AS Table
 	|WHERE
@@ -359,8 +359,8 @@ Function R3016B_ChequeAndBonds_OutgoingCheque_Reversal() //[22]
 	|	Table.Cheque,
 	|	Table.Partner,
 	|	Table.LegalName,
-	|	SUM(Table.Amount) AS Amount
-	|INTO R3016B_ChequeAndBonds_OutgoingCheque_Posting_Reversal
+	|	Table.Amount
+	|INTO R3016B_ChequeAndBonds_OutgoingCheque_Reversal
 	|FROM 
 	|	ChequeBondTransactionItem AS Table
 	|WHERE
@@ -377,7 +377,7 @@ Function R3016B_ChequeAndBonds_OutgoingCheque_Correction() //[23]
 	|	Table.Cheque,
 	|	Table.Partner,
 	|	Table.LegalName,
-	|	-SUM(Table.Amount) AS Amount
+	|	-Table.Amount AS Amount
 	|INTO R3016B_ChequeAndBonds_OutgoingCheque_Correction
 	|FROM 
 	|	ChequeBondTransactionItem AS Table

@@ -988,6 +988,90 @@ EndProcedure
 
 #EndRegion
 
+#Region CHEQUE_BONDS
+
+Function ChequeBondsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "ChequeBonds", Cancel, Clone, CurrentData,
+		"ChequeBondsOnAddRowFormNotify", "ChequeBondsOnCopyRowFormNotify");
+	Form.Items.ChequeBonds.CurrentRow = NewRow.GetID();
+	Form.Items.ChequeBonds.ChangeRow();
+	Return NewRow;
+EndFunction
+
+Procedure ChequeBondsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ChequeBondsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ChequeBondsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "ChequeBonds", "ChequeBondsAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure ChequeBondsAfterDeleteRowFormNotify(Parameters) Export
+	Return;
+EndProcedure
+
+Function ChequeBondsAddFilledRow(Object, Form,  FillingValues) Export
+	Cancel      = False;
+	Clone       = False;
+	CurrentData = Undefined;
+	NewRow = AddOrCopyRow(Object, Form, "ChequeBonds", Cancel, Clone, CurrentData,
+		"ChequeBondsOnAddRowFormNotify", "ChequeBondsOnCopyRowFormNotify", FillingValues);
+	Form.Items.ChequeBonds.CurrentRow = NewRow.GetID();
+	Form.Items.ChequeBonds.ChangeRow();
+	Return NewRow;
+EndFunction
+
+#EndRegion
+
+#Region CHEQUE_BONDS_COLUMNS
+
+// ChequeBonds.Cheque
+Procedure ChequeBondsChequeOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsChequeOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetChequeBondsChequeNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "ChequeBondTransaction" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+EndProcedure
+
+// ChequeBonds.NewStatus
+Procedure ChequeBondsNewStatusOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsNewStatusOnChange(Parameters);
+EndProcedure
+
+// ChequeBonds.Partner
+Procedure ChequeBondsPartnerOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsPartnerOnChange(Parameters);
+EndProcedure
+
+// ChequeBonds.Agreement
+Procedure ChequeBondsAgreementOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsAgreementOnChange(Parameters);
+EndProcedure
+
+// ChequeBonds.LegalName
+Procedure ChequeBondsLegalNameOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsLegalNameOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region _ITEM_LIST_
 
 Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export

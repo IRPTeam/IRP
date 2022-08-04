@@ -86,7 +86,7 @@ EndProcedure
 
 &AtClient
 Procedure CurrencyOnChange(Item)
-	DocSalesOrderClient.CurrencyOnChange(Object, ThisObject, Item);
+	DocChequeBondTransactionClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -95,15 +95,114 @@ EndProcedure
 
 &AtClient
 Procedure ChequeBondsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocChequeBondTransactionClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+	DocChequeBondTransactionClient.ChequeBondsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
 Procedure ChequeBondsAfterDeleteRow(Item)
-	DocChequeBondTransactionClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	DocChequeBondTransactionClient.ChequeBondsAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
 #Region CHEQUE_BONDS_COLUMNS
+
+#Region CHEQUE
+
+&AtClient
+Procedure ChequeBondsChequeOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsChequeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsChequeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsChequeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsChequeEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsChequeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region NEW_STATUS
+
+&AtClient
+Procedure ChequeBondsNewStatusOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsNewStatusOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsNewStatusStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsNewStatusStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure 
+
+&AtClient
+Procedure ChequeBondsNewStatusEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsNewStatusEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);	
+EndProcedure
+
+#EndRegion
+
+#Region ACCOUNT
+// #
+#EndRegion
+
+#Region PARTNER
+
+&AtClient
+Procedure ChequeBondsPartnerOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsPartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsPartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsPartnerEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME
+
+&AtClient
+Procedure ChequeBondsLegalNameOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsLegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT
+
+&AtClient
+Procedure ChequeBondsAgreementOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsAgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsAgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsAgreementEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsAgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 
@@ -184,11 +283,10 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
-Procedure FillCheques(Command)
+Procedure PickupCheques(Command)
 	FormParameters = New Structure();
 	Filter = New Structure();
-	Filter.Insert("Currency"     , Object.Currency);
-	Filter.Insert("DeletionMark" , False);
+	Filter.Insert("Currency", Object.Currency);
 	FormParameters.Insert("Filter", Filter);
 	
 	NotifyParameters = New Structure();
@@ -206,18 +304,12 @@ Procedure FillChequesContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-//	If NOT ValueIsFilled(Result)
-//		OR Not AdditionalParameters.Property("Object")
-//		OR Not AdditionalParameters.Property("Form") Then
-//		Return;
-//	EndIf;
-//	 
-//	For Each ResultElement In Result Do
-//		NewChequeBondRow = AdditionalParameters.Object.ChequeBonds.Add();
-//		NewChequeBondRow.Key = New UUID();
-//		NewChequeBondRow.Cheque = ResultElement.ChequeBond;
-//		FillChequeBondsRow(NewChequeBondRow, AdditionalParameters.Object);
-//	EndDo;
+	
+	For Each Row In Result Do
+		FillingValues = New Structure();
+		FillingValues.Insert("Cheque" , Row.ChequeBond);
+		ViewClient_V2.ChequeBondsAddFilledRow(Object, ThisObject, FillingValues);
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -227,15 +319,19 @@ EndProcedure
 
 #EndRegion
 
-//&AtClient
-//Procedure EditCurrencies(Command)
-//	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
-//	NotifyParameters = New Structure();
-//	NotifyParameters.Insert("Object", Object);
-//	NotifyParameters.Insert("Form"  , ThisObject);
-//	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
-//	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
-//EndProcedure
+&AtClient
+Procedure EditCurrencies(Command)
+	CurrentData = ThisObject.Items.ChequeBonds.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V4(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
 
 &AtClient
 Procedure ShowHiddenTables(Command)

@@ -68,6 +68,7 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Document.VendorsAdvancesClosing");
 	ArrayOfExcluded.Add("Document.BatchReallocateIncoming");
 	ArrayOfExcluded.Add("Document.BatchReallocateOutgoing");
+	ArrayOfExcluded.Add("Document.ChequeBondTransactionItem");
 	Return ArrayOfExcluded;
 EndFunction
 
@@ -99,6 +100,7 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Document.VendorsAdvancesClosing");
 	ArrayOfExcluded.Add("Document.BatchReallocateIncoming");
 	ArrayOfExcluded.Add("Document.BatchReallocateOutgoing");
+	ArrayOfExcluded.Add("Document.ChequeBondTransactionItem");
 	Return ArrayOfExcluded;
 EndFunction
 

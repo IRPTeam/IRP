@@ -90,6 +90,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>InputField</type>
+      <readOnly>true</readOnly>
       <editMode>EnterOnInput</editMode>
       <showInHeader>true</showInHeader>
       <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -835,6 +836,7 @@
         <key>en</key>
         <value>Account</value>
       </title>
+      <readOnly>true</readOnly>
       <extendedTooltip>
         <name>PageAccountInfoExtendedTooltip</name>
         <id>67</id>
@@ -1168,6 +1170,7 @@
         <key>en</key>
         <value>Partner</value>
       </title>
+      <readOnly>true</readOnly>
       <extendedTooltip>
         <name>PagePartnerInfoExtendedTooltip</name>
         <id>75</id>

@@ -514,7 +514,7 @@ Procedure ChequeBondsOrderStartChoiceEnd(Result, AdditionalParameters) Export
 	Object = AdditionalParameters.Object;
 	CurrentData = Form.Items.ChequeBonds.CurrentData;
 	If CurrentData <> Undefined Then
-		ViewClient_V2.SetPaymentListOrder(Object, Form, CurrentData, Result.BasisDocument);
+		ViewClient_V2.SetChequeBondsOrder(Object, Form, CurrentData, Result.BasisDocument);
 	EndIf;
 EndProcedure
 

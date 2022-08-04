@@ -2125,7 +2125,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
 	If Options.TransactionType = Outgoing_CashTransferOrder Then
 		StrByType = "";
-	If Options.TransactionType = Outgoing_PaymentByCheque Then
+	ElsIf Options.TransactionType = Outgoing_PaymentByCheque Then
 		StrByType = "";
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
 		StrByType = "

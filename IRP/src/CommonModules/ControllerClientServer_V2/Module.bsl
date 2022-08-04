@@ -4834,7 +4834,9 @@ EndFunction
 Function BindChequeBondsPartner(Parameters)
 	DataPath = "ChequeBonds.Partner";
 	Binding = New Structure();
-	Binding.Insert("ChequeBondTransaction", "StepChequeBondsChangeLegalNameByPartner");
+	Binding.Insert("ChequeBondTransaction", 
+		"StepChequeBondsChangeLegalNameByPartner,
+		|StepChequeBondsChangeAgreementByPartner");
 		
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction

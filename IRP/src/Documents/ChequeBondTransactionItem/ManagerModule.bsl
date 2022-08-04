@@ -197,7 +197,7 @@ Function ChequeBondTransactionItem()
 	|	CASE 
 	|		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque) THEN VALUE(Enum.CashFlowDirections.Incoming)
 	|		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque) THEN VALUE(Enum.CashFlowDirections.Outgoing)
-	|	END AS CashFlowDirection
+	|	END AS CashFlowDirection,
 	|
 	|	CASE
 	|		WHEN Doc.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
@@ -1546,8 +1546,8 @@ Function GetChequeInfo(ChequeRef, ChequeBondTransactionRef)
 		|	ChequeBonds.Order AS Order,
 		|	ChequeBonds.Partner AS Partner,
 		|	ChequeBonds.Ref.Author AS Author,
-		|	ChequeBonds.Ref.FinancialMovementType AS FinancialMovementType,
-		|	ChequeBonds.Ref.PlanningPeriod AS PlanningPeriod
+		|	ChequeBonds.FinancialMovementType AS FinancialMovementType,
+		|	ChequeBonds.PlanningPeriod AS PlanningPeriod
 		|FROM
 		|	Document.ChequeBondTransaction.ChequeBonds AS ChequeBonds
 		|WHERE

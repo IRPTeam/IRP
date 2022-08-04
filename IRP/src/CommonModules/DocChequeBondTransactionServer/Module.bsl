@@ -71,3 +71,24 @@ EndFunction
 
 #EndRegion
 
+Function GetInfoForFillingBankDocument(ChequeRef) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Doc.Account,
+	|	Doc.Company,
+	|	Doc.Cheque.Amount AS Amount,
+	|	Doc.Cheque.Currency AS Currency
+	|FROM
+	|	Document.ChequeBondTransactionItem AS Doc
+	|WHERE
+	|	Doc.Ref = &Ref";
+	Query.SetParameter("Ref", ChequeRef);
+	
+	Result = New Structure("Company, Account, Currency, Amount");
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	Return Result;
+EndFunction

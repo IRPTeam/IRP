@@ -262,7 +262,7 @@ Function CashPlanning_Correction()
 	|	Table.LegalName,
 	|	Table.FinancialMovementType,
 	|	Table.PlanningPeriod,
-	|	Table.Amount
+	|	-Table.Amount AS Amount
 	|INTO CashPlanning_Correction
 	|FROM 
 	|	ChequeBondTransactionItem AS Table
@@ -284,7 +284,7 @@ Function CashPlanning_Reversal()
 	|	Table.LegalName,
 	|	Table.FinancialMovementType,
 	|	Table.PlanningPeriod,
-	|	Table.Amount
+	|	-Table.Amount AS Amount
 	|INTO CashPlanning_Reversal
 	|FROM 
 	|	ChequeBondTransactionItem AS Table

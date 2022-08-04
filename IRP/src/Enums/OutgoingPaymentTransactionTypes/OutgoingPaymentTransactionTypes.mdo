@@ -47,4 +47,11 @@
       <value>Return to customer by POS</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="b10102b8-896f-469a-bbe6-4737963807f6">
+    <name>PaymentByCheque</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment by cheque</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

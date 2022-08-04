@@ -4878,11 +4878,10 @@ EndFunction
 Function BindChequeBondsAgreement(Parameters)
 	DataPath = "ChequeBonds.Agreement";
 	Binding = New Structure();
-//	Binding.Insert("BankPayment",
-//		"StepPaymentListChangeBasisDocumentByAgreement,
-//		|StepPaymentListChangeOrderByAgreement,
-//		|StepExtractDataAgreementApArPostingDetail,
-//		|StepChangeTaxRate_AgreementInList");
+	Binding.Insert("ChequeBondTransaction",
+		"StepChequeBondsChangeBasisDocumentByAgreement,
+		|StepChequeBondsChangeOrderByAgreement,
+		|StepChequeBondsChangeApArPostingDetailByAgreement");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -4944,6 +4943,120 @@ Procedure StepChequeBondsChangeLegalNameByPartner(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepChequeBondsChangeLegalNameByPartner";
 		Chain.ChangeLegalNameByPartner.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region CHEQUE_BONDS_BASIS_DOCUMENT
+
+// ChequeBonds.BasisDocument.OnChange
+Procedure ChequeBondsBasisDocumentOnChange(Parameters) Export
+	Binding = BindChequeBondsBasisDocument(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ChequeBonds.BasisDocument.Set
+Procedure SetChequeBondsBasisDocument(Parameters, Results) Export
+	Binding = BindChequeBondsBasisDocument(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ChequeBonds.BasisDocument.Get
+Function GetChequeBondsBasisDocument(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindChequeBondsBasisDocument(Parameters).DataPath , _Key);
+EndFunction
+
+// ChequeBonds.BasisDocument.Bind
+Function BindChequeBondsBasisDocument(Parameters)
+	DataPath = "ChequeBonds.BasisDocument";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ChequeBonds.BasisDocument.ChangeBasisDocumentByAgreement.Step
+Procedure StepChequeBondsChangeBasisDocumentByAgreement(Parameters, Chain) Export
+	Chain.ChangeBasisDocumentByAgreement.Enable = True;
+	Chain.ChangeBasisDocumentByAgreement.Setter = "SetChequeBondsBasisDocument";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeBasisDocumentByAgreementOptions();
+		Options.Agreement            = GetChequeBondsAgreement(Parameters, Row.Key);
+		Options.CurrentBasisDocument = GetChequeBondsBasisDocument(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChequeBondsChangeBasisDocumentByAgreement";
+		Chain.ChangeBasisDocumentByAgreement.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region CHEQUE_BONDS_ORDER
+
+// ChequeBonds.Order.OnChange
+Procedure ChequeBondsOrderOnChange(Parameters) Export
+	Binding = BindChequeBondsOrder(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ChequeBonds.Order.Set
+Procedure SetChequeBondsOrder(Parameters, Results) Export
+	Binding = BindChequeBondsOrder(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ChequeBonds.Order.Get
+Function GetChequeBondsOrder(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindChequeBondsOrder(Parameters).DataPath , _Key);
+EndFunction
+
+// ChequeBonds.Order.Bind
+Function BindChequeBondsOrder(Parameters)
+	DataPath = "ChequeBonds.Order";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ChequeBonds.Order.ChangeOrderByAgreement.Step
+Procedure StepChequeBondsChangeOrderByAgreement(Parameters, Chain) Export
+	Chain.ChangeOrderByAgreement.Enable = True;
+	Chain.ChangeOrderByAgreement.Setter = "SetChequeBondsOrder";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeOrderByAgreementOptions();
+		Options.Agreement    = GetChequeBondsAgreement(Parameters, Row.Key);
+		Options.CurrentOrder = GetChequeBondsOrder(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChequeBondsChangeOrderByAgreement";
+		Chain.ChangeOrderByAgreement.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region CHEQUE_BONDS_AP_AR_POSTING_DETAILS
+
+// ChequeBonds.ApArPostingDetail.Set
+Procedure SetChequeBondsApArPostingDetail(Parameters, Results) Export
+	Binding = BindChequeBondsApArPostingDetail(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ChequeBonds.ApArPostingDetail.Bind
+Function BindChequeBondsApArPostingDetail(Parameters)
+	DataPath = "ChequeBonds.ApArPostingDetail";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ChequeBonds.ApArPOstingDetail.ChangeApArPostingDetailByAgreement.Step
+Procedure StepChequeBondsChangeApArPostingDetailByAgreement(Parameters, Chain) Export
+	Chain.ChangeApArPostingDetailByAgreement.Enable = True;
+	Chain.ChangeApArPostingDetailByAgreement.Setter = "SetChequeBondsApArPostingDetail";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeApArPostingDetailByAgreementOptions();
+		Options.Agreement = GetChequeBondsAgreement(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChequeBondsChangeApArPostingDetailByAgreement";
+		Chain.ChangeApArPostingDetailByAgreement.Options.Add(Options);
 	EndDo;
 EndProcedure
 

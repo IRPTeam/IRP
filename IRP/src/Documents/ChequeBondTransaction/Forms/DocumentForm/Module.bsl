@@ -144,7 +144,17 @@ EndProcedure
 #EndRegion
 
 #Region ACCOUNT
-// #
+
+&AtClient
+Procedure ChequeBondsAccountStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsAccountStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsAccountEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsAccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #Region PARTNER
@@ -200,6 +210,34 @@ EndProcedure
 &AtClient
 Procedure ChequeBondsAgreementEditTextChange(Item, Text, StandardProcessing)
 	DocChequeBondTransactionClient.ChequeBondsAgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region BASIS_DOCUMENT
+
+&AtClient
+Procedure ChequeBondsBasisDocumentOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsBasisDocumentOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsBasisDocumentStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region _ORDER
+
+&AtClient
+Procedure ChequeBondsOrderOnChange(Item)
+	DocChequeBondTransactionClient.ChequeBondsOrderOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsOrderStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsOrderStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 #EndRegion

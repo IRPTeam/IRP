@@ -954,7 +954,7 @@ Function GetFormItemNames()
 				|ItemListUseSerialLotNumber, ItemListIsService,
 				|PaymentListApArPostingDetail,
 				|InventoryUseSerialLotNumber, AccountBalanceIsFixedCurrency,
-				|ChequeBondsKey";
+				|ChequeBondsKey, ChequeBondsApArPostingDetail";
 
 	Return ItemNames;
 EndFunction	

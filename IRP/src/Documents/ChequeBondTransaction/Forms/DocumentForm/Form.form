@@ -970,6 +970,55 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>ChequeBondsApArPostingDetail</name>
+          <id>137</id>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ChequeBonds.ApArPostingDetail</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ChequeBondsApArPostingDetailExtendedTooltip</name>
+            <id>139</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ChequeBondsApArPostingDetailContextMenu</name>
+            <id>138</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>ChequeBondsAgreement</name>
           <id>125</id>
           <visible>true</visible>
@@ -1092,6 +1141,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ChequeBonds.BasisDocument</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ChequeBondsBasisDocumentOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ChequeBondsBasisDocumentExtendedTooltip</name>
             <id>133</id>
@@ -1123,6 +1176,10 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>ChequeBondsBasisDocumentStartChoice</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -1142,6 +1199,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ChequeBonds.Order</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ChequeBondsOrderOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ChequeBondsOrderExtendedTooltip</name>
             <id>136</id>
@@ -1173,6 +1234,10 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>EditTextChange</event>
+              <name>ChequeBondsOrderStartChoice</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -1223,6 +1288,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>ChequeBondsAccountStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>ChequeBondsAccountEditTextChange</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>

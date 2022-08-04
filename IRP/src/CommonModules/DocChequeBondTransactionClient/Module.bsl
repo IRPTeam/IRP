@@ -383,6 +383,183 @@ EndProcedure
 
 #EndRegion
 
+#Region BASIS_DOCUMENT
+
+Procedure ChequeBondsBasisDocumentOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ChequeBondsBasisDocumentOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure ChequeBondsBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+
+	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	Parameters = New Structure();
+	Parameters.Insert("Filter", New Structure());
+	If ValueIsFilled(CurrentData.LegalName) Then
+		Parameters.Filter.Insert("LegalName", CurrentData.LegalName);
+	EndIf;
+	Parameters.Filter.Insert("Company", Object.Company);
+
+	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
+	
+	NotifyParameters = New Structure("Object, Form", Object, Form);
+	Notify = New NotifyDescription("ChequeBondsBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
+	Parameters.Insert("Notify", Notify);
+	
+	IsPartnerCheque = ServiceSystemServer.GetObjectAttribute(CurrentData.Cheque, "Type")
+		= PredefinedValue("Enum.ChequeBondTypes.PartnerCheque");
+		
+	If IsPartnerCheque Then
+		// partner cheque
+		Parameters.Insert("TableName", "DocumentsForIncomingPayment");
+		Parameters.Insert("OpeningEntryTableName1", "AccountPayableByDocuments");
+		Parameters.Insert("OpeningEntryTableName2", "AccountReceivableByDocuments");
+		Parameters.Insert("DebitNoteTableName", "Transactions");
+	Else
+		// own cheque
+		Parameters.Insert("TableName", "DocumentsForOutgoingPayment");
+		Parameters.Insert("OpeningEntryTableName1", "AccountPayableByDocuments");
+		Parameters.Insert("OpeningEntryTableName2", "AccountReceivableByDocuments");
+		Parameters.Insert("CreditNoteTableName", "Transactions");
+	EndIf;
+	
+	Parameters.Insert("Ref", Object.Ref);
+	Parameters.Insert("IsReturnTransactionType", False);
+	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
+EndProcedure
+
+Procedure ChequeBondsBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	Form = AdditionalParameters.Form;
+	Object = AdditionalParameters.Object;
+	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	If CurrentData <> Undefined Then
+		ViewClient_V2.SetChequeBondsBasisDocument(Object, Form, CurrentData, Result.BasisDocument);
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region _ORDER
+
+Procedure ChequeBondsOrderOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ChequeBondsOrderOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure ChequeBondsOrderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+
+	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	Parameters = New Structure();
+	Parameters.Insert("Filter", New Structure());
+	If ValueIsFilled(CurrentData.LegalName) Then
+		Parameters.Filter.Insert("LegalName", CurrentData.LegalName);
+	EndIf;
+	Parameters.Filter.Insert("Company", Object.Company);
+	
+	IsPartnerCheque = ServiceSystemServer.GetObjectAttribute(CurrentData.Cheque, "Type")
+		= PredefinedValue("Enum.ChequeBondTypes.PartnerCheque");
+	
+	If IsPartnerCheque Then
+		// partner cheque
+		Parameters.Filter.Insert("Type", Type("DocumentRef.SalesOrder"));
+		If ValueIsFilled(CurrentData.BasisDocument) 
+			And TypeOf(CurrentData.BasisDocument) = Type("DocumentRef.SalesInvoice") Then
+			Parameters.Filter.Insert("RefInList",
+			DocumentsServer.GetArrayOfSalesOrdersBySalesInvoice(CurrentData.BasisDocument));
+		EndIf;
+	Else
+		// own cheque
+		Parameters.Filter.Insert("Type", Type("DocumentRef.PurchaseOrder"));
+		If ValueIsFilled(CurrentData.BasisDocument) 
+			And TypeOf(CurrentData.BasisDocument) = Type("DocumentRef.PurchaseInvoice") Then
+			Parameters.Filter.Insert("RefInList",
+			DocumentsServer.GetArrayOfPurchaseOrdersByPurchaseInvoice(CurrentData.BasisDocument));
+		EndIf;
+	EndIf;
+	
+	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
+	
+	NotifyParameters = New Structure("Object, Form", Object, Form);
+	Notify = New NotifyDescription("ChequeBondsOrderStartChoiceEnd", ThisObject, NotifyParameters);
+	Parameters.Insert("Notify"    , Notify);
+	
+	If IsPartnerCheque Then
+		Parameters.Insert("TableName" , "DocumentsForIncomingPayment");	
+	Else
+		Parameters.Insert("TableName" , "DocumentsForOutgoingPayment");	
+	EndIf;
+	
+	Parameters.Insert("Ref"       , Object.Ref);
+	Parameters.Insert("IsReturnTransactionType", False);
+	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
+EndProcedure
+
+Procedure ChequeBondsOrderStartChoiceEnd(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	Form = AdditionalParameters.Form;
+	Object = AdditionalParameters.Object;
+	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	If CurrentData <> Undefined Then
+		ViewClient_V2.SetPaymentListOrder(Object, Form, CurrentData, Result.BasisDocument);
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region ACCOUNT
+
+Procedure ChequeBondsAccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
+	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
+	
+	CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
+
+	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
+		CashAccountType, , DataCompositionComparisonType.Equal));
+	
+	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Currency", 
+		CurrentData.Currency, , DataCompositionComparisonType.Equal));
+		
+	StartChoiceParameters.FillingData.Insert("Type", CashAccountType);
+	StartChoiceParameters.FillingData.Insert("Currency", CurrentData.Currency);
+	
+	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
+EndProcedure
+
+Procedure ChequeBondsAccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DefaultEditTextParameters = New Structure("Company", Object.Company);
+	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
+	
+	CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
+	
+	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
+		CashAccountType, ComparisonType.Equal));
+	
+	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

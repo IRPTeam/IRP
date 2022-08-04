@@ -1070,6 +1070,38 @@ Procedure ChequeBondsLegalNameOnChange(Object, Form, CurrentData = Undefined) Ex
 	ControllerClientServer_V2.ChequeBondsLegalNameOnChange(Parameters);
 EndProcedure
 
+// ChequeBonds.BasisDocument
+Procedure ChequeBondsBasisDocumentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsBasisDocumentOnChange(Parameters);
+EndProcedure
+
+// ChequeBonds.BasisDocument.Set
+Procedure SetChequeBondsBasisDocument(Object, Form, Row, Value) Export
+	Row.BasisDocument = Value;
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ChequeBondsBasisDocumentOnChange(Parameters);
+EndProcedure
+
+// ChequeBonds.Order
+Procedure ChequeBondsOrderOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	ControllerClientServer_V2.ChequeBondsOrderOnChange(Parameters);
+EndProcedure
+
+// ChequeBonds.Order.Set
+Procedure SetChequeBondsOrder(Object, Form, Row, Value) Export
+	Row.Order = Value;
+	Rows = GetRowsByCurrentData(Form, "ChequeBonds", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ChequeBonds", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ChequeBondsOrderOnChange(Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region _ITEM_LIST_

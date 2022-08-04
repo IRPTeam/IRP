@@ -145,13 +145,14 @@ Function GetChain()
 	Chain.Insert("ChangePartnerByLegalName"     , GetChainLink("ChangePartnerByLegalNameExecute"));
 	Chain.Insert("ChangeAgreementByPartner"     , GetChainLink("ChangeAgreementByPartnerExecute"));
 	
-	Chain.Insert("ChangeCompanyByAgreement"     , GetChainLink("ChangeCompanyByAgreementExecute"));
-	Chain.Insert("ChangeCurrencyByAgreement"    , GetChainLink("ChangeCurrencyByAgreementExecute"));
-	Chain.Insert("ChangeStoreByAgreement"       , GetChainLink("ChangeStoreByAgreementExecute"));
-	Chain.Insert("ChangeDeliveryDateByAgreement"       , GetChainLink("ChangeDeliveryDateByAgreementExecute"));
-	Chain.Insert("ChangePriceIncludeTaxByAgreement"    , GetChainLink("ChangePriceIncludeTaxByAgreementExecute"));
-	Chain.Insert("ChangeBasisDocumentByAgreement", GetChainLink("ChangeBasisDocumentByAgreementExecute"));
-	Chain.Insert("ChangeOrderByAgreement"        , GetChainLink("ChangeOrderByAgreementExecute"));
+	Chain.Insert("ChangeCompanyByAgreement"           , GetChainLink("ChangeCompanyByAgreementExecute"));
+	Chain.Insert("ChangeCurrencyByAgreement"          , GetChainLink("ChangeCurrencyByAgreementExecute"));
+	Chain.Insert("ChangeStoreByAgreement"             , GetChainLink("ChangeStoreByAgreementExecute"));
+	Chain.Insert("ChangeDeliveryDateByAgreement"      , GetChainLink("ChangeDeliveryDateByAgreementExecute"));
+	Chain.Insert("ChangePriceIncludeTaxByAgreement"   , GetChainLink("ChangePriceIncludeTaxByAgreementExecute"));
+	Chain.Insert("ChangeBasisDocumentByAgreement"     , GetChainLink("ChangeBasisDocumentByAgreementExecute"));
+	Chain.Insert("ChangeOrderByAgreement"             , GetChainLink("ChangeOrderByAgreementExecute"));
+	Chain.Insert("ChangeApArPostingDetailByAgreement" , GetChainLink("ChangeApArPostingDetailByAgreementExecute"));
 	
 	Chain.Insert("ChangeCashAccountByCompany"        , GetChainLink("ChangeCashAccountByCompanyExecute"));
 	Chain.Insert("ChangeAccountSenderByCompany"      , GetChainLink("ChangeCashAccountByCompanyExecute"));
@@ -1005,6 +1006,21 @@ EndFunction
 
 Function ChangeStatusByChequeExecute(Options) Export
 	Return DocChequeBondTransactionServer.GetChequeInfo(Options.Ref, Options.Cheque);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_AP_AR_POSTING_DETAIL_BY_AGREEMENT 
+
+Function ChangeApArPostingDetailByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement");
+EndFunction
+
+Function ChangeApArPostingDetailByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Undefined;
+	EndIf;
+	Return ServiceSystemServer.GetObjectAttribute(Options.Agreement, "ApArPostingDetail");
 EndFunction
 
 #EndRegion

@@ -319,6 +319,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="fceba833-bbad-4125-84f9-221ebf7e7a3f">
+      <name>ApArPostingDetail</name>
+      <synonym>
+        <key>en</key>
+        <value>AP/AR posting detail</value>
+      </synonym>
+      <type>
+        <types>EnumRef.ApArPostingDetail</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="218a9149-6b75-43e8-b06e-ac7e43985d22">
     <producedTypes>

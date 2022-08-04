@@ -1880,8 +1880,6 @@ Function FillByPTBBankPaymentExecute(Options) Export
 			Result.Company     = OrderInfo.Company;
 			Result.Currency    = OrderInfo.Currency;
 			Result.TotalAmount = OrderInfo.Amount;
-			Result.AmountExchange   = Undefined;
-			Result.CurrencyExchange = Undefined;
 			Return Result;
 		EndIf;
 		Return Result;

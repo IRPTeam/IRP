@@ -45,16 +45,16 @@ Scenario: _005232 create an outgoing check in the Cheque bonds catalog
 		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"
 		And I click the button named "FormCreate"
 	* Create an outgoing check
-		And I input "Partner cheque 1" text in "Cheque No" field
-		And I input "AA" text in "Cheque serial No" field
-		And I select "Partner cheque" exact value from "Type" drop-down list
+		And I input "Own cheque 1" text in "Cheque No" field
+		And I input "BB" text in "Cheque serial No" field
+		And I select "Own cheque" exact value from "Type" drop-down list
 		And I input end of the current month date in "Due date" field
 		And I click Select button of "Currency" field
 		And I go to line in "List" table
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
 		And I select current line in "List" table
-		And I input "2 000,00" text in "Amount" field
+		And I input "5 000,00" text in "Amount" field
 		And I click "Save and close" button
 	* Check creation
 		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"

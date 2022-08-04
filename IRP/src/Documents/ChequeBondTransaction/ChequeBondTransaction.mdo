@@ -333,6 +333,34 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="ad4228b4-b2d8-4d99-bac3-2378e58b91c4">
+      <name>FinancialMovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Financial movement type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="38dcfbed-6fcd-4e4d-af86-f93d80193b30">
+      <name>PlanningPeriod</name>
+      <synonym>
+        <key>en</key>
+        <value>Planning period</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PlanningPeriods</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="218a9149-6b75-43e8-b06e-ac7e43985d22">
     <producedTypes>

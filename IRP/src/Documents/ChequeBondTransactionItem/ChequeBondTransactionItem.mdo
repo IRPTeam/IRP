@@ -34,6 +34,7 @@
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="da8acded-b807-4f2b-a5c4-befb6c5c88c4">
@@ -205,6 +206,34 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ef72f26f-1c8e-4116-a3b7-47d75fa7b3af">
+    <name>FinancialMovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Financial movement type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="99c56bda-d5bd-44e4-8d05-07f821b52d0f">
+    <name>PlanningPeriod</name>
+    <synonym>
+      <key>en</key>
+      <value>Planning period</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PlanningPeriods</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

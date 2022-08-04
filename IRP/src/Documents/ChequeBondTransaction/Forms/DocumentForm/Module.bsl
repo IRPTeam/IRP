@@ -242,6 +242,20 @@ EndProcedure
 
 #EndRegion
 
+#Region FINANCIAL_MOVEMENT_TYPE
+
+&AtClient
+Procedure ChequeBondsFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ChequeBondsFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocChequeBondTransactionClient.ChequeBondsFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

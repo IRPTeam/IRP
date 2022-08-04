@@ -846,6 +846,57 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>ChequeBondsAmount</name>
+          <id>109</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ChequeBonds.Amount</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ChequeBondsAmountExtendedTooltip</name>
+            <id>111</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ChequeBondsAmountContextMenu</name>
+            <id>110</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <readOnly>true</readOnly>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>ChequeBondsPartner</name>
           <id>119</id>
           <visible>true</visible>
@@ -1305,19 +1356,19 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ChequeBondsAmount</name>
-          <id>109</id>
+          <name>ChequeBondsFinancialMovementType</name>
+          <id>140</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ChequeBonds.Amount</segments>
+            <segments>Object.ChequeBonds.FinancialMovementType</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ChequeBondsAmountExtendedTooltip</name>
-            <id>111</id>
+            <name>ChequeBondsFinancialMovementTypeExtendedTooltip</name>
+            <id>142</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1331,8 +1382,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ChequeBondsAmountContextMenu</name>
-            <id>110</id>
+            <name>ChequeBondsFinancialMovementTypeContextMenu</name>
+            <id>141</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1341,7 +1392,64 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
-          <readOnly>true</readOnly>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>ChequeBondsFinancialMovementTypeStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>ChequeBondsFinancialMovementTypeEditTextChange</name>
+            </handlers>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ChequeBondsPlanningPeriod</name>
+          <id>143</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ChequeBonds.PlanningPeriod</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ChequeBondsPlanningPeriodExtendedTooltip</name>
+            <id>145</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ChequeBondsPlanningPeriodContextMenu</name>
+            <id>144</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>

@@ -56,6 +56,19 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "VendorTransactions", "Correction"));
 	Query.Execute();
 		
+	// CashPlanning
+	Query.Text = CashPlanning_Posting();
+	Query.SetParameter("IsPosting", NeedPosting(StatusInfo, "CashPlanning", "Posting"));
+	Query.Execute();
+	
+	Query.Text = CashPlanning_Reversal();
+	Query.SetParameter("IsReversal", NeedPosting(StatusInfo, "CashPlanning", "Reversal"));
+	Query.Execute();
+	
+	Query.Text = CashPlanning_Correction();
+	Query.SetParameter("IsCorrection", NeedPosting(StatusInfo, "CashPlanning", "Correction"));
+	Query.Execute();
+		
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
@@ -153,16 +166,15 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(T2014S_AdvancesInfo());
-	QueryArray.Add(T2015S_TransactionsInfo());	
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(R3035T_CashPlanning());
+	
 	Return QueryArray;
 EndFunction
 
 Function ChequeBondTransactionItem()
 	Return
 	"SELECT
-	|	Doc.Ref AS ReceiptDocument,
-	|	Doc.Ref AS PaymentDocument,
-	|
 	|	Doc.Date AS Period,
 	|	Doc.Company,
 	|	Doc.Branch,
@@ -178,6 +190,14 @@ Function ChequeBondTransactionItem()
 	|	Doc.BasisDocument,
 	|	Doc.Order,
 	|	Doc.LegalNameContract,
+	|
+	|	Doc.FinancialMovementType,
+	|	Doc.PlanningPeriod,
+	|	Doc.Ref AS CashPlanningBasis,
+	|	CASE 
+	|		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque) THEN VALUE(Enum.CashFlowDirections.Incoming)
+	|		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque) THEN VALUE(Enum.CashFlowDirections.Outgoing)
+	|	END AS CashFlowDirection
 	|
 	|	CASE
 	|		WHEN Doc.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
@@ -202,6 +222,105 @@ Function ChequeBondTransactionItem()
 	|	Document.ChequeBondTransactionItem AS Doc
 	|WHERE
 	|	Doc.Ref = &Ref";
+EndFunction
+
+#Region CashPlanning
+
+Function CashPlanning_Posting()
+	Return
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.CashPlanningBasis AS BasisDocument,
+	|	Table.Account,
+	|	Table.Currency,
+	|	Table.CashFlowDirection,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.FinancialMovementType,
+	|	Table.PlanningPeriod,
+	|	Table.Amount
+	|INTO CashPlanning_Posting
+	|FROM 
+	|	ChequeBondTransactionItem AS Table
+	|WHERE
+	|	&IsPosting";	
+EndFunction
+
+Function CashPlanning_Correction()
+	Return
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.CashPlanningBasis AS BasisDocument,
+	|	Table.Account,
+	|	Table.Currency,
+	|	Table.CashFlowDirection,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.FinancialMovementType,
+	|	Table.PlanningPeriod,
+	|	Table.Amount
+	|INTO CashPlanning_Correction
+	|FROM 
+	|	ChequeBondTransactionItem AS Table
+	|WHERE
+	|	&IsCorrection";	
+EndFunction
+
+Function CashPlanning_Reversal()
+	Return
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.CashPlanningBasis AS BasisDocument,
+	|	Table.Account,
+	|	Table.Currency,
+	|	Table.CashFlowDirection,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.FinancialMovementType,
+	|	Table.PlanningPeriod,
+	|	Table.Amount
+	|INTO CashPlanning_Reversal
+	|FROM 
+	|	ChequeBondTransactionItem AS Table
+	|WHERE
+	|	&IsReversal";	
+EndFunction
+
+#EndRegion
+
+Function R3035T_CashPlanning()
+	Return
+	"SELECT
+	|	*
+	|INTO R3035T_CashPlanning
+	|FROM
+	|	CashPlanning_Posting AS Table
+	|WHERE
+	|	TRUE
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	*
+	|FROM
+	|	CashPlanning_Correction AS Table
+	|WHERE
+	|	TRUE
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	*
+	|FROM
+	|	CashPlanning_Reversal AS Table
+	|WHERE
+	|	TRUE";
 EndFunction
 
 #Region ChequeBondBalance
@@ -1406,6 +1525,8 @@ Function GetChequeInfo(ChequeRef, ChequeBondTransactionRef)
 	ChequeInfo.Insert("Agreement"   , Undefined);
 	ChequeInfo.Insert("Partner"     , Undefined);
 	ChequeInfo.Insert("Author"      , Undefined);
+	ChequeInfo.Insert("FinancialMovementType" , Undefined);
+	ChequeInfo.Insert("PlanningPeriod"        , Undefined);
 	
 	Query = New Query();
 	Query.Text =
@@ -1424,7 +1545,9 @@ Function GetChequeInfo(ChequeRef, ChequeBondTransactionRef)
 		|	ChequeBonds.BasisDocument AS BasisDocument,
 		|	ChequeBonds.Order AS Order,
 		|	ChequeBonds.Partner AS Partner,
-		|	ChequeBonds.Ref.Author AS Author
+		|	ChequeBonds.Ref.Author AS Author,
+		|	ChequeBonds.Ref.FinancialMovementType AS FinancialMovementType,
+		|	ChequeBonds.Ref.PlanningPeriod AS PlanningPeriod
 		|FROM
 		|	Document.ChequeBondTransaction.ChequeBonds AS ChequeBonds
 		|WHERE
@@ -1484,7 +1607,9 @@ Procedure FillDocument(DocumentObject, ChequeInfo)
 	DocumentObject.Order     = ChequeInfo.Agreement;
 	DocumentObject.Partner   = ChequeInfo.Partner;
 	DocumentObject.Author    = ChequeInfo.Author;
-		
+	DocumentObject.FinancialMovementType = ChequeInfo.FinancialMovementType;
+	DocumentObject.PlanningPeriod        = ChequeInfo.PlanningPeriod;
+	
 	// Currencies
 	
 	DocumentObject.Currencies.Clear();

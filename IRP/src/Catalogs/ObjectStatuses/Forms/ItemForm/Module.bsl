@@ -3,6 +3,19 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
@@ -18,35 +31,45 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 EndProcedure
 
 &AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	IsCheque = 
+	Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondIncoming")
+	Or Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondOutgoing");
+	
+	Form.Items.GroupPosting.Visible = IsCheque;
+EndProcedure
+
+&AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ParentOnChange(Item)
-	Return;
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure NextPossibleStatusesStatusStartChoice(Item, ChoiceData, StandardProcessing)
-	ObjectStatusesClient.StatusStartChoice(Object, ThisObject, GetArrayOfFilters(), Item, ChoiceData,
-		StandardProcessing);
+	ObjectStatusesClient.StatusStartChoice(Object, ThisObject, GetArrayOfFilters(), Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure NextPossibleStatusesStatusEditTextChange(Item, Text, StandardProcessing)
-	ObjectStatusesClient.StatusEditTextChange(Object, ThisObject, GetArrayOfFilters(), New Structure(), Item, Text,
-		StandardProcessing);
+	ObjectStatusesClient.StatusEditTextChange(Object, ThisObject, GetArrayOfFilters(), New Structure(), Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
 Function GetArrayOfFilters()
 	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Parent", Object.Parent,
-		DataCompositionComparisonType.Equal));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", Object.Ref,
-		DataCompositionComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsFolder", False, DataCompositionComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Parent"   , Object.Parent,DataCompositionComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref"      , Object.Ref,DataCompositionComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsFolder" , False, DataCompositionComparisonType.Equal));
 	Return ArrayOfFilters;
 EndFunction
 

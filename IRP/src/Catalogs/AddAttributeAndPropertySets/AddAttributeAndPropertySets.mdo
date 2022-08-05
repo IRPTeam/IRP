@@ -734,6 +734,13 @@
         <value>103</value>
       </code>
     </items>
+    <items id="61224a38-366d-4269-935a-38df58ea3dcf">
+      <name>Document_ChequeBondTransaction</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>104</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

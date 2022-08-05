@@ -109,5 +109,6 @@
     <types>DocumentRef.MoneyTransfer</types>
     <types>CatalogRef.LockDataModificationReasons</types>
     <types>CatalogRef.PartnersBankAccounts</types>
+    <types>DocumentRef.ChequeBondTransaction</types>
   </type>
 </mdclass:DefinedType>

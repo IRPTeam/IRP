@@ -223,6 +223,30 @@
       </code>
       <isFolder>true</isFolder>
     </items>
+    <items id="faf693e3-fdc9-4a9a-adc6-0a0587fc1fe1">
+      <name>ChequeBondTransaction</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>2</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="0dfc1880-03ff-45a5-b8dd-a854fdfc404b">
+        <name>ChequeBondIncoming</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>3</value>
+        </code>
+        <isFolder>true</isFolder>
+      </content>
+      <content id="6f439a66-f031-44d3-bbc6-03e70ac9630d">
+        <name>ChequeBondOutgoing</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>4</value>
+        </code>
+        <isFolder>true</isFolder>
+      </content>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <quickChoice>true</quickChoice>
@@ -255,6 +279,66 @@
     </synonym>
     <type>
       <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7fbe4cc5-58e8-4b32-95c8-1dfd400b9951">
+    <name>PostingChequeBondBalance</name>
+    <synonym>
+      <key>en</key>
+      <value>Cheque bond balance</value>
+    </synonym>
+    <type>
+      <types>EnumRef.DocumentPostingTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="463dfb00-3550-4d9e-925a-a18d4f68f05e">
+    <name>PostingVendorTransactions</name>
+    <synonym>
+      <key>en</key>
+      <value>Vendor transactions</value>
+    </synonym>
+    <type>
+      <types>EnumRef.DocumentPostingTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c42a76cb-644c-469a-a964-fc8fddfc5fdc">
+    <name>PostingCustomerTransactions</name>
+    <synonym>
+      <key>en</key>
+      <value>Customer transactions</value>
+    </synonym>
+    <type>
+      <types>EnumRef.DocumentPostingTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="06f5beeb-e052-4592-9c2f-72c71096775d">
+    <name>PostingCashPlanning</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash planning</value>
+    </synonym>
+    <type>
+      <types>EnumRef.DocumentPostingTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

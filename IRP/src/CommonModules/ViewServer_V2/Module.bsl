@@ -118,15 +118,16 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	Row = Parameters.Rows[0];
 	
 	
-	ItemIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Item");
-	ItemKeyIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "ItemKey");
-	UnitIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Unit");
-	QuantityIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Quantity");
-	PriceIsPresent    = CommonFunctionsClientServer.ObjectHasProperty(Row, "Price");
-	PhysCountIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "PhysCount");
+	ItemIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Item");
+	ItemKeyIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "ItemKey");
+	UnitIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Unit");
+	QuantityIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Quantity");
+	PriceIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Price");
+	PhysCountIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "PhysCount");
 	SerialLotNumberIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "SerialLotNumber");
-	BarcodePresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Barcode");
-	DatePresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Date");
+	BarcodeIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Barcode");
+	DateIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Date");
+	ChequeIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "Cheque");
 	
 	If FillingValues.Property("Item") And ItemIsPresent Then
 		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
@@ -156,12 +157,16 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 		ControllerClientServer_V2.SetItemListSerialLotNumber(Parameters, PrepareValue(FillingValues.SerialLotNumber, Row.Key));
 	EndIf;
 	
-	If FillingValues.Property("Barcode") And BarcodePresent Then
+	If FillingValues.Property("Barcode") And BarcodeIsPresent Then
 		ControllerClientServer_V2.SetItemListBarcode(Parameters, PrepareValue(FillingValues.Barcode, Row.Key));
 	EndIf;
 		
-	If FillingValues.Property("Date") And DatePresent Then
+	If FillingValues.Property("Date") And DateIsPresent Then
 		ControllerClientServer_V2.SetItemListDate(Parameters, PrepareValue(FillingValues.Date, Row.Key));
+	EndIf;
+	
+	If FillingValues.Property("Cheque") And ChequeIsPresent Then
+		ControllerClientServer_V2.SetChequeBondsCheque(Parameters, PrepareValue(FillingValues.Cheque, Row.Key));
 	EndIf;
 		
 EndProcedure

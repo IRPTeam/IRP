@@ -30,6 +30,7 @@ Scenario: _0153500 preparation
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog InterfaceGroups objects (Purchase and production,  Main information)
 		When Create catalog ObjectStatuses objects
+		When Create catalog ObjectStatuses objects (cheque bond)
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
@@ -55,6 +56,7 @@ Scenario: _0153500 preparation
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog ChequeBonds objects
 		When Create catalog CashAccounts objects
 		When Create catalog SerialLotNumbers objects
 		When Create catalog PaymentTerminals objects
@@ -4860,6 +4862,105 @@ Scenario: _015400721 check that additional attributes and properties are display
 			| 'Test 1'      |
 		And I select current line in "List" table
 		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _01540064 check that additional attributes and properties are displayed on the form without reopening (Catalog_ChequeBonds)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Catalog_ChequeBonds
+		Given I open hyperlink "e1cib/list/Catalog.ChequeBonds"
+		And I click the button named "FormCreate"
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name          |
+			| Catalog_ChequeBonds     |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Cheque Bonds" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When in opened panel I select "Cheque bonds"
+		And field "Test" is present on the form
+		And I close current window
+		And I go to line in "List" table
+			| 'Cheque No'              |
+			| 'Own cheque 1' |
+		And I select current line in "List" table
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I input "100,00" text in the field named "Amount"
+		And I click "Save" button	
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400661 check that additional attributes and properties are displayed on the form without reopening (document Cheque bond transaction)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create ChequeBondTransaction
+		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Document_ChequeBondTransaction              |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Cheque bond transaction" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Cheque bond transaction (create)"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |

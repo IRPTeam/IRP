@@ -23,13 +23,7 @@ EndProcedure
 
 Procedure StatusEditTextChange(Object, Form, ArrayOfFilters, AdditionalParameters, Item, Text, StandardProcessing) Export
 	ArrayOfChoiceParameters = New Array();
-	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter",
-		DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
-	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters",
-		DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters" ,DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 EndProcedure
-
-//Function GetAvailableStatusesByCheque(ChequeBondTransactionRef, ChequeRef) Export
-//	Return ObjectStatusesServer.GetAvailableStatusesByCheque(ChequeBondTransactionRef, ChequeRef);
-//EndFunction

@@ -1084,3 +1084,24 @@ Scenario: Open choise form "IdInfoAddresses"
 		Then I raise "Failed to open catalog choise form IdInfoAddresses" exception
 	And I close current window
 
+Scenario: Open list form "ChequeBonds" 
+	And I close all client application windows
+	Given I open "ChequeBonds" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ChequeBonds" exception
+	And I close current window
+
+Scenario: Open object form "ChequeBonds"
+	And I close all client application windows
+	Given I open "ChequeBonds" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ChequeBonds" exception
+	And I close current window
+
+Scenario: Open choise form "ChequeBonds"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.ChequeBonds.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form IChequeBonds" exception
+	And I close current window

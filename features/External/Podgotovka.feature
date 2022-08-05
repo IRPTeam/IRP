@@ -1378,6 +1378,7 @@ Scenario: set True value to the constant
 		And I set "True" value to the constant "UseCashTransaction"
 		And I set "True" value to the constant "UsePartnersHierarchy"
 		And I set "True" value to the constant "UseMobile"
+		And I set "True" value to the constant "UseChequeBonds"
 
 
 Scenario: add sales tax settings 

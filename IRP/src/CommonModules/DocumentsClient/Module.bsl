@@ -228,9 +228,7 @@ Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined,
-	AdditionalParameters = Undefined) Export
-
+Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined, AdditionalParameters = Undefined) Export
 	If ArrayOfFilters = Undefined Then
 		ArrayOfFilters = New Array();
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
@@ -242,12 +240,9 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, Ar
 	EndIf;
 
 	ArrayOfChoiceParameters = New Array();
-	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter",
-		DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
-	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters",
-		DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
-
 EndProcedure
 
 Procedure SerialLotNumbersEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined,
@@ -264,17 +259,15 @@ Procedure SerialLotNumbersEditTextChange(Object, Form, Item, Text, StandardProce
 	EndIf;
 
 	ArrayOfChoiceParameters = New Array();
-	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter",
-		DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
-	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters",
-		DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
-
 EndProcedure
 
 #EndRegion
 
 #Region Status
+
 Procedure StatusStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
 	If OpenSettings = Undefined Then
 		OpenSettings = GetOpenSettingsStructure();
@@ -329,6 +322,7 @@ Procedure StatusEditTextChange(Object, Form, Item, Text, StandardProcessing, Edi
 		DocumentsServer.SerializeArrayOfFilters(EditSettings.AdditionalParameters)));
 	Item.ChoiceParameters = New FixedArray(EditSettings);
 EndProcedure
+
 #EndRegion
 
 #Region PickUpItems
@@ -555,7 +549,6 @@ Function GetArrayOfFiltersForSelectItemWithoutServiceFilter(AddInfo = Undefined)
 EndFunction
 
 Procedure ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined) Export
-
 	If ArrayOfFilters = Undefined Then
 		ArrayOfFilters = New Array();
 		DeletionMarkItem = DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual);
@@ -568,6 +561,7 @@ Procedure ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, Array
 	ArrayOfChoiceParameters.Add(CustomSearchFilter);
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 EndProcedure
+
 #EndRegion
 
 #Region GroupTitle
@@ -577,6 +571,7 @@ Procedure ChangeTitleCollapse(Object, Form, TitleVisible = True) Export
 	Form.Items.GroupTitleUncollapsed.Visible = TitleVisible;
 	Form.Items.GroupTitleItems.Visible = TitleVisible;
 EndProcedure
+
 #EndRegion
 
 #Region Commands
@@ -969,7 +964,8 @@ Function GetFormItemNames()
 				|SendUUID, ReceiveUUID,
 				|ItemListUseSerialLotNumber, ItemListIsService,
 				|PaymentListApArPostingDetail,
-				|InventoryUseSerialLotNumber, AccountBalanceIsFixedCurrency";
+				|InventoryUseSerialLotNumber, AccountBalanceIsFixedCurrency,
+				|ChequeBondsKey, ChequeBondsApArPostingDetail";
 
 	Return ItemNames;
 EndFunction	

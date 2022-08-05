@@ -326,6 +326,32 @@ Scenario: Create catalog ObjectStatuses objects
 		| 'e1cib/data/Catalog.ObjectStatuses?ref=b76bafe8d8921be311ebc44d41a46795' | 'False'        | 'e1cib/data/Catalog.ObjectStatuses?refName=IncomingPaymentOrder'    | 'False'    | 'True'         | 'True'    | 'Approved'                   | ''                 | ''               | ''                              | '_52af65cf7e95432f9414dd8a5f862e13' |
 
 
+
+Scenario: Create catalog ObjectStatuses objects (cheque bond)
+
+	And I check or create catalog "ObjectStatuses" objects:
+		| 'Ref'                                                                    | 'DeletionMark' | 'Parent'                                                            | 'IsFolder' | 'Code' | 'SetByDefault' | 'Posting' | 'PostingChequeBondBalance'           | 'PostingVendorTransactions'         | 'PostingCustomerTransactions'        | 'PostingCashPlanning'                  | 'Description_en'            | 'Description_hash' | 'Description_ru'                          | 'Description_tr'              | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondIncoming'           | 'False'        | 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondTransaction'   | 'True'     | 3      | ''             | ''        | ''                                   | ''                                  | ''                                   | ''                                     | 'ChequeBondIncoming'        | ''                 | ''                                        | ''                            | '_779b0e6fb07a426287cdea6396713687' |
+		| 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondOutgoing'           | 'False'        | 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondTransaction'   | 'True'     | 4      | ''             | ''        | ''                                   | ''                                  | ''                                   | ''                                     | 'ChequeBondOutgoing'        | ''                 | ''                                        | ''                            | '_27afc629b182468991d672cc52700010' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2c7' | 'False'        | 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondIncoming'      | 'False'    | 40     | 'True'         | 'False'   | 'Enum.DocumentPostingTypes.Posting'  | 'Enum.DocumentPostingTypes.Nothing' | 'Enum.DocumentPostingTypes.Posting'  | 'Enum.DocumentPostingTypes.Posting'    | '01. TakenFromPartner'      | ''                 | ''                                        | ''                            | '_b5f92e23a869456eaee8b552f0c2f4f7' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2c8' | 'False'        | 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondIncoming'      | 'False'    | 41     | 'False'        | 'False'   | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing' | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing'    | '03. PaymentReceived'       | ''                 | ''                                        | ''                            | '_4bd77e49fa2e4bca9e6d07cfac48d544' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2c9' | 'False'        | 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondIncoming'      | 'False'    | 42     | 'False'        | 'False'   | 'Enum.DocumentPostingTypes.Reversal' | 'Enum.DocumentPostingTypes.Nothing' | 'Enum.DocumentPostingTypes.Reversal' | 'Enum.DocumentPostingTypes.Correction' | '04. Protested'             | ''                 | ''                                        | ''                            | '_c71ac4e75d1d4760bf411d822f474308' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2ca' | 'False'        | 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondIncoming'      | 'False'    | 43     | 'False'        | 'False'   | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing' | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing'    | '02. GiveToBankAsAssurance' | ''                 | ''                                        | ''                            | '_1bc17b8dfc1449a78b5a877ebd6ddfc7' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2cb' | 'False'        | 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondOutgoing'      | 'False'    | 44     | 'True'         | 'False'   | 'Enum.DocumentPostingTypes.Posting'  | 'Enum.DocumentPostingTypes.Nothing' | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Posting'    | '01. GivenToPartner'        | ''                 | ''                                        | ''                            | '_e1cb759b8b434344bd17b4ba99b07d59' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2cc' | 'False'        | 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondOutgoing'      | 'False'    | 45     | 'False'        | 'False'   | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Posting' | 'Enum.DocumentPostingTypes.Nothing'  | 'Enum.DocumentPostingTypes.Nothing'    | '02. Payed'                 | ''                 | ''                                        | ''                            | '_1ac838acb9dc46f99e4dc7e166c9cd71' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2cd' | 'False'        | 'e1cib/data/Catalog.ObjectStatuses?refName=ChequeBondOutgoing'      | 'False'    | 46     | 'False'        | 'False'   | 'Enum.DocumentPostingTypes.Reversal' | 'Enum.DocumentPostingTypes.Nothing' | 'Enum.DocumentPostingTypes.Reversal' | 'Enum.DocumentPostingTypes.Reversal'   | '03. Protested'             | ''                 | ''                                        | ''                            | '_87f7b80386824dcba5383ab3b41d9343' |
+
+	And I refill object tabular section "NextPossibleStatuses":
+		| 'Ref'                                                                    | 'Status'                                                                 |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2c7' | 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2ca' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2c7' | 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2c8' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2c7' | 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2c9' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2ca' | 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2c8' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2ca' | 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2c9' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2cb' | 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2cc' |
+		| 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2cb' | 'e1cib/data/Catalog.ObjectStatuses?ref=b784ae4f9cb08e5e11ed14a68729d2cd' |
+
+
 	
 
 Scenario: Create catalog Partners objects (Ferron BP)
@@ -424,20 +450,16 @@ Scenario: Create catalog Units objects (pcs)
 		| 'Ref'                                                           | 'DeletionMark' | 'Item'                                                          | 'Quantity' | 'BasisUnit'                                                     | 'UOM' | 'Description_en'         | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
 		| 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'False'           | ''                                                              | '1'        | ''                                                              | ''    | 'pcs'                    | ''                 | ''               | 'adet'                       |
 
+Scenario: Create catalog ChequeBonds objects
 
+	And I check or create catalog "ChequeBonds" objects:
+		| 'Ref'                                                                 | 'DeletionMark' | 'Code' | 'Description'        | 'Type'                               | 'DueDate'            | 'Currency'                                                           | 'Amount' | 'ChequeSerialNo' |
+		| 'e1cib/data/Catalog.ChequeBonds?ref=aa78120ed92fbced11eaf124a9ba0869' | 'False'        | 1      | 'Own cheque 1'       | 'Enum.ChequeBondTypes.OwnCheque'     | '30.09.2024 0:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 10000    | 'BB'             |
+		| 'e1cib/data/Catalog.ChequeBonds?ref=aa78120ed92fbced11eaf12effe70fb7' | 'False'        | 2      | 'Own cheque 2'       | 'Enum.ChequeBondTypes.OwnCheque'     | '30.09.2023 0:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 5000     | 'AL'             |
+		| 'e1cib/data/Catalog.ChequeBonds?ref=aa78120ed92fbced11eaf124a9ba0868' | 'False'        | 3      | 'Partner cheque 1'   | 'Enum.ChequeBondTypes.PartnerCheque' | '30.09.2024 0:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 2000     | 'AA'             |
+		| 'e1cib/data/Catalog.ChequeBonds?ref=aa78120ed92fbced11eaf12effe70fb3' | 'True'         | 4      | 'Partner cheque 101' | 'Enum.ChequeBondTypes.PartnerCheque' | '30.09.2025 0:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 1500     | 'AN'             |
+		| 'e1cib/data/Catalog.ChequeBonds?ref=aa78120ed92fbced11eaf12effe70fb4' | 'False'        | 5      | 'Partner cheque 102' | 'Enum.ChequeBondTypes.PartnerCheque' | '30.09.2024 0:00:00' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 800      | 'AN'             |
 
-
-
-
-
-
-
-
-
-
-
-
-	
 
 
 

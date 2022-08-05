@@ -78,6 +78,11 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If ThisObject.IsFolder Then
 		Return;
 	EndIf;
+	
+	ThisObject.PostingChequeBondBalance    = Enums.DocumentPostingTypes.Nothing;
+	ThisObject.PostingVendorTransactions   = Enums.DocumentPostingTypes.Nothing;
+	ThisObject.PostingCustomerTransactions = Enums.DocumentPostingTypes.Nothing;
+	ThisObject.PostingCashPlanning         = Enums.DocumentPostingTypes.Nothing;
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

@@ -1315,7 +1315,9 @@
 FROM
 	Catalog.ChequeBonds AS ChequeBonds
 		LEFT JOIN InformationRegister.ChequeBondStatuses.SliceLast AS ChequeBondStatusesSliceLast
-		ON ChequeBonds.Ref = ChequeBondStatusesSliceLast.Cheque</queryText>
+		ON ChequeBonds.Ref = ChequeBondStatusesSliceLast.Cheque
+WHERE
+	NOT ChequeBonds.DeletionMark</queryText>
       <mainTable>Catalog.ChequeBonds</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>

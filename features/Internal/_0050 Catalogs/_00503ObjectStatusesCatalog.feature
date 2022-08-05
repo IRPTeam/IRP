@@ -315,10 +315,8 @@ Scenario: _005046 create statuses for Cheque bond
 			And I set checkbox "Set by default"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Posting"
-			And I change "Advanced" radio button value to "Posting"
-			And I change "Partner account transactions" radio button value to "Posting"
-			And I change "Reconciliation statement" radio button value to "Posting"
-			And I change "Planning cash transactions" radio button value to "Posting"
+			And I change "Customer transactions" radio button value to "Posting"
+			And I change "Cash planning" radio button value to "Posting"
 			And I click "Save and close" button
 		* Create status Payment received
 			And I go to line in "List" table
@@ -327,8 +325,6 @@ Scenario: _005046 create statuses for Cheque bond
 			And I click the button named "FormCreate"
 			And I input "03. PaymentReceived" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
-			And I change "Account balance" radio button value to "Posting"
-			And I change "Planning cash transactions" radio button value to "Reversal"
 			And I click "Save and close" button
 		* Create status Protested
 			And I go to line in "List" table
@@ -338,10 +334,8 @@ Scenario: _005046 create statuses for Cheque bond
 			And I input "04. Protested" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Reversal"
-			And I change "Advanced" radio button value to "Reversal"
-			And I change "Partner account transactions" radio button value to "Reversal"
-			And I change "Reconciliation statement" radio button value to "Reversal"
-			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I change "Customer transactions" radio button value to "Reversal"
+			And I change "Cash planning" radio button value to "Correction"
 			And I click "Save and close" button
 		* Create status Give to bank as assurance
 			And I go to line in "List" table
@@ -360,10 +354,7 @@ Scenario: _005046 create statuses for Cheque bond
 			And I set checkbox "Set by default"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Posting"
-			And I change "Advanced" radio button value to "Posting"
-			And I change "Partner account transactions" radio button value to "Posting"
-			And I change "Reconciliation statement" radio button value to "Posting"
-			And I change "Planning cash transactions" radio button value to "Posting"
+			And I change "Cash planning" radio button value to "Posting"
 			And I click "Save and close" button
 		* Create status Payed
 			And I go to line in "List" table
@@ -372,8 +363,7 @@ Scenario: _005046 create statuses for Cheque bond
 			And I click the button named "FormCreate"
 			And I input "02. Payed" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
-			And I change "Account balance" radio button value to "Posting"
-			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I change "Vendor transactions" radio button value to "Posting"
 			And I click "Save and close" button
 		* Create status Protested
 			And I go to line in "List" table
@@ -383,10 +373,8 @@ Scenario: _005046 create statuses for Cheque bond
 			And I input "03. Protested" text in the field named "Description_en"
 			And I move to the tab named "GroupPosting"
 			And I change "Cheque bond balance" radio button value to "Reversal"
-			And I change "Advanced" radio button value to "Reversal"
-			And I change "Partner account transactions" radio button value to "Reversal"
-			And I change "Reconciliation statement" radio button value to "Reversal"
-			And I change "Planning cash transactions" radio button value to "Reversal"
+			And I change "Customer transactions" radio button value to "Reversal"
+			And I change "Cash planning" radio button value to "Reversal"
 			And I click "Save and close" button
 	* Setting the order of statuses for incoming cheques
 		And I go to line in "List" table

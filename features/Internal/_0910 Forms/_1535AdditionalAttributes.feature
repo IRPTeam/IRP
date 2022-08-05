@@ -30,6 +30,7 @@ Scenario: _0153500 preparation
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog InterfaceGroups objects (Purchase and production,  Main information)
 		When Create catalog ObjectStatuses objects
+		When Create catalog ObjectStatuses objects (cheque bond)
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
@@ -4911,6 +4912,8 @@ Scenario: _01540064 check that additional attributes and properties are displaye
 			| 'Test 1'      |
 		And I select current line in "List" table
 		Then "Test" form attribute became equal to "Test 1"
+		And I input "100,00" text in the field named "Amount"
+		And I click "Save" button	
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |
@@ -4957,6 +4960,7 @@ Scenario: _015400661 check that additional attributes and properties are display
 			| 'Test 1'      |
 		And I select current line in "List" table
 		Then "Test" form attribute became equal to "Test 1"
+		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |

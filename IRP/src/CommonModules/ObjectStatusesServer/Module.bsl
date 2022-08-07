@@ -160,3 +160,115 @@ Function GetObjectStatusesChoiceDataTable(SearchString, ArrayOfFilters, Addition
 	TableOfResult = Catalogs.ObjectStatuses.GetChoiceDataTable(Parameters);
 	Return TableOfResult.UnloadColumn("Ref");
 EndFunction
+
+#Region CHEQUE
+
+Function GetAvailableStatusesByCheque(ChequeBondTransactionRef, ChequeRef) Export
+	PointInTime = New Boundary(ChequeBondTransactionRef.Date, BoundaryType.Excluding);
+	ArrayOfStatuses = New Array();
+	StatusInfo = GetLastStatusInfoByCheque(PointInTime, ChequeRef);
+	If Not ValueIsFilled(StatusInfo.Status) Then
+		ArrayOfStatuses.Add(GetStatusByDefaultForCheque(ChequeRef));
+	Else
+		For Each Status In GetNextPossibleStatuses(StatusInfo.Status) Do
+			If ArrayOfStatuses.Find(Status) = Undefined Then
+				ArrayOfStatuses.Add(Status);
+			EndIf;
+		EndDo;
+		Return ArrayOfStatuses;
+	EndIf;
+	Return ArrayOfStatuses;
+EndFunction
+
+Function GetLastStatusInfoByCheque(PointInTime, ChequeRef) Export
+	Query = New Query();
+	If PointInTime <> Undefined Then
+		Query.Text = "SELECT
+			|	ChequeBondStatusesSliceLast.Period,
+			|	ChequeBondStatusesSliceLast.Cheque AS Object,
+			|	ChequeBondStatusesSliceLast.Status,
+			|	ChequeBondStatusesSliceLast.Author
+			|FROM
+			|	InformationRegister.ChequeBondStatuses.SliceLast(&PointInTime, Cheque = &Cheque) AS ChequeBondStatusesSliceLast";
+		
+	Else
+		Query.Text = "SELECT
+			|	ChequeBondStatusesSliceLast.Period,
+			|	ChequeBondStatusesSliceLast.Cheque AS Object,
+			|	ChequeBondStatusesSliceLast.Status,
+			|	ChequeBondStatusesSliceLast.Author
+			|FROM
+			|	InformationRegister.ChequeBondStatuses.SliceLast(, Cheque = &Cheque) AS ChequeBondStatusesSliceLast";
+	EndIf;
+	Query.SetParameter("Cheque"      , ChequeRef);
+	Query.SetParameter("PointInTime" , PointInTime);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return PutStatusInfoToStructure(QuerySelection);
+	Else
+		Return PutStatusInfoToStructure();
+	EndIf;
+EndFunction
+
+Function GetStatusByDefaultForCheque(ChequeRef) Export
+	If ChequeRef.Type = Enums.ChequeBondTypes.PartnerCheque Then
+		Return GetStatusByDefault(ChequeRef, "ChequeBondIncoming");
+	ElsIf ChequeRef.Type = Enums.ChequeBondTypes.OwnCheque Then
+		Return GetStatusByDefault(ChequeRef, "ChequeBondOutgoing");
+	Else
+		Return Undefined;
+	EndIf;
+EndFunction
+
+Function GetNextPossibleStatuses(Status) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ObjectStatusesNextPossibleStatuses.Status AS Status
+	|FROM
+	|	Catalog.ObjectStatuses.NextPossibleStatuses AS ObjectStatusesNextPossibleStatuses
+	|WHERE
+	|	ObjectStatusesNextPossibleStatuses.Ref = &Ref
+	|GROUP BY
+	|	ObjectStatusesNextPossibleStatuses.Status";
+	Query.SetParameter("Ref", Status);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable.UnloadColumn("Status");
+EndFunction
+
+Function PutStatusPostingToStructure(Status) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ObjectStatuses.PostingChequeBondBalance AS ChequeBondBalance,
+	|	ObjectStatuses.PostingVendorTransactions AS VendorTransactions,
+	|	ObjectStatuses.PostingCustomerTransactions AS CustomerTransactions,
+	|	ObjectStatuses.PostingCashPlanning AS CashPlanning
+	|FROM
+	|	Catalog.ObjectStatuses AS ObjectStatuses
+	|WHERE
+	|	ObjectStatuses.Ref = &Ref";
+	Query.SetParameter("Ref", Status);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	Posting = CreatePostingStructure();
+	
+	If QuerySelection.Next() Then
+		FillPropertyValues(Posting, QuerySelection);
+	EndIf;
+	Return Posting;
+EndFunction
+
+Function CreatePostingStructure()
+	Result = New Structure();
+	Result.Insert("ChequeBondBalance"    , Enums.DocumentPostingTypes.Nothing);
+	Result.Insert("VendorTransactions"   , Enums.DocumentPostingTypes.Nothing);
+	Result.Insert("CustomerTransactions" , Enums.DocumentPostingTypes.Nothing);
+	Result.Insert("CashPlanning"         , Enums.DocumentPostingTypes.Nothing);
+	Return Result;
+EndFunction
+
+#EndRegion

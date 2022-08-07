@@ -4,6 +4,14 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.SelectedRowInfo.SelectedRow <> Undefined Then
 		ThisObject.CurrentLineNumber = Parameters.SelectedRowInfo.SelectedRow.LineNumber;
 	EndIf;
+	
+	If Parameters.SelectedRowInfo.Property("ArrayOfFilterExcludeFields") Then
+		ThisObject.ArrayOfFilterExcludeFields = StrConcat(Parameters.SelectedRowInfo.ArrayOfFilterExcludeFields, ",");
+	EndIf;
+	If Parameters.Filter.Property("VisibleFields") Then
+		ThisObject.VisibleFields = Parameters.Filter.VisibleFields;	
+	EndIf;
+	
 	ResultsTableTmp = ThisObject.ResultsTable.Unload().CopyColumns();
 	For Each RowIdInfo In Parameters.TablesInfo.RowIDInfoRows Do
 		If Not ValueIsFilled(RowIdInfo.CurrentStep) Then
@@ -77,7 +85,7 @@ EndProcedure
 
 &AtClient
 Procedure RefreshTrees()
-	SelectedRowInfo = RowIDInfoClient.GetSelectedRowInfo(Items.ItemListRows.CurrentData);
+	SelectedRowInfo = RowIDInfoClient.GetSelectedRowInfo(Items.ItemListRows.CurrentData, StrSplit(ThisObject.ArrayOfFilterExcludeFields, ","));
 	If SelectedRowInfo.SelectedRow = Undefined Then
 		Return;
 	EndIf;
@@ -181,15 +189,17 @@ Procedure FillResultsTree(SelectedRow)
 			FillPropertyValues(BasisesTable.Add(), Row);
 		EndIf;
 	EndDo;
-	TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
+	TreeReverseInfo = RowIDInfoPrivileged.CreateBasisesTreeReverse(BasisesTable);
 
-	RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
+	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
 		ThisObject.ResultsTree.GetItems());
+
 
 	ThisObject.LinkedRowID = "";
 	ThisObject.ShippingReceipt = False;
 
 	SetAlreadyLinkedInfo(ThisObject.ResultsTree.GetItems(), SelectedRow.Key);
+	FillVisibleFields(ThisObject.ResultsTree, "ResultsTree");
 EndProcedure
 
 &AtServer
@@ -197,10 +207,20 @@ Procedure FillBasisesTree(SelectedRowInfo)
 	ThisObject.BasisesTree.GetItems().Clear();
 
 	BasisesTable = CreateBasisesTable(SelectedRowInfo);
-	TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
-
-	RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
+	TreeReverseInfo = RowIDInfoPrivileged.CreateBasisesTreeReverse(BasisesTable);
+	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
 		ThisObject.BasisesTree.GetItems());
+	FillVisibleFields(ThisObject.BasisesTree, "BasisesTree");
+EndProcedure
+
+&AtServer
+Procedure FillVisibleFields(Tree, TreeName)
+	If ThisObject.VisibleFields <> Undefined Then
+		RowIDInfoPrivileged.FillVisibleFields(Tree, ThisObject.VisibleFields); 
+		For Each Field In ThisObject.VisibleFields Do
+			Items["" + TreeName + Field.Key + "Presentation"].Visible = True;
+		EndDo;
+	EndIf;	
 EndProcedure
 
 &AtClient
@@ -214,8 +234,8 @@ Function GetFillingValues()
 	BasisesTable = ThisObject.ResultsTable.Unload();
 	AddInfo = New Structure();
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "IsLinkRows", True);
-	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable, ThisObject.MainFilter.Ref, AddInfo);
-	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);
+	ExtractedData = RowIDInfoPrivileged.ExtractData(BasisesTable, ThisObject.MainFilter.Ref, AddInfo);
+	FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);	
 	Return FillingValues;
 EndFunction
 
@@ -426,7 +446,7 @@ Function CreateBasisesTable(SelectedRowInfo)
 		EndDo;
 	EndIf;
 
-	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
+	BasisesTable = RowIDInfoPrivileged.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
 
 	AlreadyLinkedRows = ThisObject.ResultsTable.FindRows(New Structure("Key", SelectedRowInfo.SelectedRow.Key));
 	
@@ -466,7 +486,7 @@ EndFunction
 &AtClient
 Procedure AutoLink(Command)
 	For Each ItemListRow In ThisObject.ItemListRows Do
-		RowInfo = RowIDInfoClient.GetSelectedRowInfo(ItemListRow);
+		RowInfo = RowIDInfoClient.GetSelectedRowInfo(ItemListRow, StrSplit(ThisObject.ArrayOfFilterExcludeFields, ","));
 		NeedAutoLink = NeedAutoLinkAtServer(RowInfo);
 		If NeedAutoLink.IsOk Then
 			LinkInfo = IsCanLink(ItemListRow, NeedAutoLink.BaseInfo);

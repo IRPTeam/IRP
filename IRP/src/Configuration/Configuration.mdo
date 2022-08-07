@@ -413,6 +413,9 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.RowIDInfoPrivileged</commonModules>
+  <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
+  <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -727,6 +730,8 @@
   <documents>Document.VendorsAdvancesClosing</documents>
   <documents>Document.BatchReallocateIncoming</documents>
   <documents>Document.BatchReallocateOutgoing</documents>
+  <documents>Document.ChequeBondTransaction</documents>
+  <documents>Document.ChequeBondTransactionItem</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -821,6 +826,7 @@
   <informationRegisters>InformationRegister.LedgerTypeOperations</informationRegisters>
   <informationRegisters>InformationRegister.LockDataModificationRules</informationRegisters>
   <informationRegisters>InformationRegister.ObjectStatuses</informationRegisters>
+  <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.PartnerSegments</informationRegisters>
   <informationRegisters>InformationRegister.PricesByItemKeys</informationRegisters>
   <informationRegisters>InformationRegister.PricesByItems</informationRegisters>

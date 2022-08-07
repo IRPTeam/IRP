@@ -18,5 +18,6 @@
     <types>DocumentRef.CashStatement</types>
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.RetailReturnReceipt</types>
+    <types>DocumentRef.ChequeBondTransactionItem</types>
   </type>
 </mdclass:DefinedType>

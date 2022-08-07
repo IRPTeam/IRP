@@ -54,4 +54,11 @@
       <value>Payment from customer by POS</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="957adb8f-676d-4389-a420-a314776e6ce7">
+    <name>ReceiptByCheque</name>
+    <synonym>
+      <key>en</key>
+      <value>Receipt by cheque</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

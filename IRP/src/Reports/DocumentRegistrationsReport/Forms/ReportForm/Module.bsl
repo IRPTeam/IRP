@@ -58,8 +58,33 @@ Procedure GenerateReportAtServer(Result)
 	Template = Reports.DocumentRegistrationsReport.GetTemplate("Template");
 	MainTitleArea = Template.GetArea("MainTitle");
 
-	GenerateReportForOneDocument(ThisObject.Document, Result, Template, MainTitleArea);
+	If TypeOf(ThisObject.Document) = Type("DocumentRef.ChequeBondTransaction") Then
+		GenerateReportForOneDocument(ThisObject.Document, Result, Template, MainTitleArea);
+		ArrayOfChequeBondTransactionItems = GetChequeBondTransactionItems(ThisObject.Document);
+		MainTitleAreaLowSelection = Template.GetArea("MainTitleLowSelection");
+		For Each ItemOfChequeBondTransactionItems In ArrayOfChequeBondTransactionItems Do
+			GenerateReportForOneDocument(ItemOfChequeBondTransactionItems, Result, Template, MainTitleAreaLowSelection);
+		EndDo;
+	Else
+		GenerateReportForOneDocument(ThisObject.Document, Result, Template, MainTitleArea);
+	EndIf;
 EndProcedure
+
+&AtServer
+Function GetChequeBondTransactionItems(DocumentRef)
+	Query = New Query();
+	Query.Text =
+		"SELECT
+		|	ChequeBondTransactionItem.Ref
+		|FROM
+		|	Document.ChequeBondTransactionItem AS ChequeBondTransactionItem
+		|WHERE
+		|	ChequeBondTransactionItem.ChequeBondTransaction = &ChequeBondTransaction
+		|	AND ChequeBondTransactionItem.Posted";
+	Query.SetParameter("ChequeBondTransaction", DocumentRef);
+	QueryResult = Query.Execute();
+	Return QueryResult.Unload().UnloadColumn("Ref");
+EndFunction
 
 &AtServer
 Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleArea)

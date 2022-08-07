@@ -51,6 +51,8 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create information register CurrencyRates records
 		When Create catalog Users objects
 		When update ItemKeys
+		When Create catalog Partners objects and Companies objects (Customer)
+		When Create catalog Agreements objects (Customer)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -136,6 +138,14 @@ Scenario: _0154100 preparation ( filling documents)
 		And I click "Save and close" button			
 	* Workstation
 		When create Workstation
+	* Load RSR
+		When Create document RetailSalesReceipt objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document RetailSalesReceipt objects (with retail customer)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
+	
 	
 Scenario: _01541001 check preparation
 	When check preparation	
@@ -397,13 +407,197 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		And I click the button named "FormPostAndClose"
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And "List" table contains lines
-		| 'Number' |
-		| '$$NumberRetailReturnReceipt0154136$$'      |
+			| 'Number' |
+			| '$$NumberRetailReturnReceipt0154136$$'      |
 		And I close all client application windows
+
+Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
+		And I close all client application windows
+	* Select Retail sales receipt for Retail Return Receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '201'    |
+	* Create Retail Return Receipt
+		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And "BasisesTree" table became equal
+			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'Yes' | ''         | ''               | ''         | ''         |
+			| 'Dress (XS/Blue)'                                    | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Trousers (38/Yellow)'                               | 'Yes' | '2,000'    | 'pcs'            | '400,00'   | 'TRY'      |
+			| 'Boots (36/18SD)'                                    | 'Yes' | '1,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |	
+		And I go to line in "BasisesTree" table
+			| 'Row presentation' |
+			| 'Boots (36/18SD)'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+	* Check filling in RRR
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| '#' | 'Retail sales receipt'                               | 'Item'     | 'Sales person' | 'Profit loss center' | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Return reason' | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' |
+			| '1' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'Dress'    | ''             | 'Shop 01'            | 'XS/Blue'   | 'No'                 | ''                   | 'pcs'  | '79,32'      | '1,000'    | '520,00' | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''              | 'Revenue'      | ''       | '18%' | ''              | ''            |
+			| '2' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'Trousers' | ''             | 'Shop 01'            | '38/Yellow' | 'No'                 | ''                   | 'pcs'  | '122,03'     | '2,000'    | '400,00' | '677,97'     | '800,00'       | ''                    | 'Store 01' | ''              | 'Revenue'      | ''       | '18%' | ''              | ''            |
+		Then the form attribute named "Branch" became equal to "Shop 01"
+	* Save row key
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1RetailReturnReceipt1$$" variable
+		And I save the current field value as "$$Rov1RetailReturnReceipt1$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov2RetailReturnReceipt1$$" variable
+		And I save the current field value as "$$Rov2RetailReturnReceipt1$$"
+	* Check Row Id info table
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table became equal
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR'          | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '2,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR'          | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+	* Copy string and check Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Quantity'     |
+			| '1' | 'Dress' | 'XS/Blue'  | '1,000' |
+		And in the table "ItemList" I click "Copy" button
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "8,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' |
+			| '3' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov3RetailReturnReceipt1$$" variable
+		And I save the current field value as "$$Rov3RetailReturnReceipt1$$"
+		And I click "Save" button	
+		And I move to "Row ID Info" tab	
+		And "RowIDInfo" table became equal
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR'          | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '2,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR'          | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
+			| '3' | '$$Rov3RetailReturnReceipt1$$' | ''                                                   | '$$Rov3RetailReturnReceipt1$$'         | ''          | '8,000'    | '                                    ' | ''             | '$$Rov3RetailReturnReceipt1$$'         |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And "RowIDInfo" table does not contain lines
+			| 'Key'                          | 'Quantity'     |
+			| '$$Rov1RetailReturnReceipt1$$' | '8,000'        |
+	* Delete string and check Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Quantity' |
+			| '3' | 'Dress' | 'XS/Blue'  | '8,000'    |
+		And in the table "ItemList" I click "Delete" button
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table became equal
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR'          | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '2,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR'          | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |		
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+	* Change quantity and check  Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'     | 'Item key'  | 'Quantity' |
+			| '2' | 'Trousers' | '38/Yellow' | '2,000'    |
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table			
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table became equal
+			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR'          | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '1,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR'          | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |		
+		And I close all client application windows
+
 	
-		
-
-
+Scenario: _01541362 create RSR using form link/unlink (different company, store, branch)
+		And I close all client application windows
+	* Open RSR form
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Store 02' |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table	
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I move to "Item list" tab		
+		And I click the button named "AddBasisDocuments"
+		And "BasisesTree" table became equal
+			| 'Row presentation'                                   | 'Use' | 'Company'      | 'Branch'  | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'No'  | 'Main Company' | 'Shop 01' | ''         | ''               | ''         | ''         |
+			| 'Dress (XS/Blue)'                                    | 'No'  | ''             | ''        | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Trousers (38/Yellow)'                               | 'No'  | ''             | ''        | '2,000'    | 'pcs'            | '400,00'   | 'TRY'      |
+			| 'Boots (36/18SD)'                                    | 'No'  | ''             | ''        | '1,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '1,000'    | 'Dress (XS/Blue)'  | 'pcs'  | 'No'  |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'     | 'Unit' | 'Use' |
+			| 'TRY'      | '400,00' | '2,000'    | 'Trousers (38/Yellow)' | 'pcs'  | 'No'  |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button				
+	* Check filling
+		And "ItemList" table became equal
+			| '#' | 'Retail sales receipt'                               | 'Revenue type' | 'Item'     | 'Sales person' | 'Item key'  | 'Profit loss center' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Return reason' | 'Detail' | 'Offers amount' | 'Landed cost' |
+			| '1' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'Revenue'      | 'Dress'    | ''             | 'XS/Blue'   | 'Shop 01'            | ''                   | 'pcs'  | 'No'                 | '1,000'    | '520,00' | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''              | ''       | ''              | ''            |
+			| '2' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'Revenue'      | 'Trousers' | ''             | '38/Yellow' | 'Shop 01'            | ''                   | 'pcs'  | 'No'                 | '2,000'    | '400,00' | '677,97'     | '800,00'       | ''                    | 'Store 01' | ''              | ''       | ''              | ''            |
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Second Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "Branch" became equal to "Distribution department"
+	* Check RowIDInfo
+		And I click "Show row key" button		
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+			| '1' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''          | '1,000'    | 'RRR'          |
+			| '2' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''          | '2,000'    | 'RRR'          |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+		And I click "Save" button
+		And I close all client application windows					
 
 
 Scenario: _0154137 create document Retail Sales Receipt from Point of sale (payment by cash)
@@ -1436,6 +1630,9 @@ Scenario:  _0154148 check that the Retail return receipt amount and the amount o
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I input "600,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Landed cost" field of "ItemList" table
+		And I finish line editing in "ItemList" table		
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Payment amount [600,00] and return amount [500,00] not match" substring will appear in 10 seconds
 		And I move to "Item list" tab
@@ -4208,6 +4405,3 @@ Scenario: _0154200 check filling settings from user group from workstation
 				
 
 
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

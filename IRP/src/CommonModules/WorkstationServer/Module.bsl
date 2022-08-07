@@ -1,6 +1,15 @@
+
+// @strict-types
+
 #Region Public
 
-//
+// Get workstation by unique ID.
+// 
+// Parameters:
+//  UniqueIDValue - String - Unique IDValue
+// 
+// Returns:
+//  CatalogRef.Workstations - Get workstation by unique ID
 Function GetWorkstationByUniqueID(UniqueIDValue) Export
 	If Not Saas.isAreaActive() Then
 		Return Catalogs.Workstations.EmptyRef();
@@ -20,9 +29,17 @@ Function GetWorkstationByUniqueID(UniqueIDValue) Export
 	Else
 		QuerySelection = QueryExecute.Select();
 		QuerySelection.Next();
-		ReturnValue = QuerySelection.Ref;
+		ReturnValue = QuerySelection.Ref; // CatalogRef.Workstations 
 	EndIf;
 	Return ReturnValue;
 EndFunction
 
+// Set workstation.
+// 
+// Parameters:
+//  Workstation - CatalogRef.Workstations
+Procedure SetWorkstation(Workstation) Export
+	SessionParameters.Workstation = Workstation;
+	RefreshReusableValues();
+EndProcedure
 #EndRegion

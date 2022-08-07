@@ -145,13 +145,14 @@ Function GetChain()
 	Chain.Insert("ChangePartnerByLegalName"     , GetChainLink("ChangePartnerByLegalNameExecute"));
 	Chain.Insert("ChangeAgreementByPartner"     , GetChainLink("ChangeAgreementByPartnerExecute"));
 	
-	Chain.Insert("ChangeCompanyByAgreement"     , GetChainLink("ChangeCompanyByAgreementExecute"));
-	Chain.Insert("ChangeCurrencyByAgreement"    , GetChainLink("ChangeCurrencyByAgreementExecute"));
-	Chain.Insert("ChangeStoreByAgreement"       , GetChainLink("ChangeStoreByAgreementExecute"));
-	Chain.Insert("ChangeDeliveryDateByAgreement"       , GetChainLink("ChangeDeliveryDateByAgreementExecute"));
-	Chain.Insert("ChangePriceIncludeTaxByAgreement"    , GetChainLink("ChangePriceIncludeTaxByAgreementExecute"));
-	Chain.Insert("ChangeBasisDocumentByAgreement", GetChainLink("ChangeBasisDocumentByAgreementExecute"));
-	Chain.Insert("ChangeOrderByAgreement"        , GetChainLink("ChangeOrderByAgreementExecute"));
+	Chain.Insert("ChangeCompanyByAgreement"           , GetChainLink("ChangeCompanyByAgreementExecute"));
+	Chain.Insert("ChangeCurrencyByAgreement"          , GetChainLink("ChangeCurrencyByAgreementExecute"));
+	Chain.Insert("ChangeStoreByAgreement"             , GetChainLink("ChangeStoreByAgreementExecute"));
+	Chain.Insert("ChangeDeliveryDateByAgreement"      , GetChainLink("ChangeDeliveryDateByAgreementExecute"));
+	Chain.Insert("ChangePriceIncludeTaxByAgreement"   , GetChainLink("ChangePriceIncludeTaxByAgreementExecute"));
+	Chain.Insert("ChangeBasisDocumentByAgreement"     , GetChainLink("ChangeBasisDocumentByAgreementExecute"));
+	Chain.Insert("ChangeOrderByAgreement"             , GetChainLink("ChangeOrderByAgreementExecute"));
+	Chain.Insert("ChangeApArPostingDetailByAgreement" , GetChainLink("ChangeApArPostingDetailByAgreementExecute"));
 	
 	Chain.Insert("ChangeCashAccountByCompany"        , GetChainLink("ChangeCashAccountByCompanyExecute"));
 	Chain.Insert("ChangeAccountSenderByCompany"      , GetChainLink("ChangeCashAccountByCompanyExecute"));
@@ -226,6 +227,8 @@ Function GetChain()
 	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommisionPercentByAmountExecute"));
 	
 	Chain.Insert("ChangeLandedCostBySalesDocument" , GetChainLink("ChangeLandedCostBySalesDocumentExecute"));
+	
+	Chain.Insert("ChangeStatusByCheque" , GetChainLink("ChangeStatusByChequeExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -991,6 +994,33 @@ Function ChangeReceiveAmountBySendAmountExecute(Options) Export
 	Else
 		Return Options.ReceiveAmount;
 	EndIf;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_STATUS_BY_CHEQUE
+
+Function ChangeStatusByChequeOptions() Export
+	Return GetChainLinkOptions("Ref, Cheque");
+EndFunction
+
+Function ChangeStatusByChequeExecute(Options) Export
+	Return DocChequeBondTransactionServer.GetChequeInfo(Options.Ref, Options.Cheque);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_AP_AR_POSTING_DETAIL_BY_AGREEMENT 
+
+Function ChangeApArPostingDetailByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement");
+EndFunction
+
+Function ChangeApArPostingDetailByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Undefined;
+	EndIf;
+	Return ServiceSystemServer.GetObjectAttribute(Options.Agreement, "ApArPostingDetail");
 EndFunction
 
 #EndRegion
@@ -1826,8 +1856,8 @@ Function FillByPTBBankPaymentExecute(Options) Export
 	Result.Insert("Currency"    , Options.Currency);
 	Result.Insert("TotalAmount" , Options.TotalAmount);
 	
-	If ValueIsFilled(Options.PlanningTransactionBasis)
-		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+	If ValueIsFilled(Options.PlanningTransactionBasis) Then
+		If TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
 			OrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankPayment(Options.PlanningTransactionBasis);
 			Result.Account  = OrderInfo.Account;
 			Result.Company  = OrderInfo.Company;
@@ -1842,6 +1872,17 @@ Function FillByPTBBankPaymentExecute(Options) Export
 			EndIf;
 			
 			Return Result;
+		EndIf;
+		
+		If TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.ChequeBondTransactionItem") Then
+			OrderInfo = DocChequeBondTransactionServer.GetInfoForFillingBankDocument(Options.PlanningTransactionBasis);
+			Result.Account     = OrderInfo.Account;
+			Result.Company     = OrderInfo.Company;
+			Result.Currency    = OrderInfo.Currency;
+			Result.TotalAmount = OrderInfo.Amount;
+			Return Result;
+		EndIf;
+		Return Result;
 	EndIf;
 	Return Result;
 EndFunction
@@ -1867,8 +1908,8 @@ Function FillByPTBBankReceiptExecute(Options) Export
 	Result.Insert("TotalAmount"     , Options.TotalAmount);
 	Result.Insert("AmountExchange"  , Options.AmountExchange);
 	
-	If ValueIsFilled(Options.PlanningTransactionBasis)
-		And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
+	If ValueIsFilled(Options.PlanningTransactionBasis) Then
+		If TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") Then
 			OrderInfo = DocCashTransferOrderServer.GetInfoForFillingBankReceipt(Options.PlanningTransactionBasis);
 			Result.Account  = OrderInfo.Account;
 			Result.Company  = OrderInfo.Company;
@@ -1883,8 +1924,20 @@ Function FillByPTBBankReceiptExecute(Options) Export
 				Result.TotalAmount     = ?(ValueIsFilled(BalanceRow.Amount), BalanceRow.Amount, 0);
 				Result.AmountExchange = ?(ValueIsFilled(BalanceRow.AmountExchange), BalanceRow.AmountExchange, 0);
 			EndIf;
-			
 			Return Result;
+		EndIf;
+		
+		If TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.ChequeBondTransactionItem") Then
+			OrderInfo = DocChequeBondTransactionServer.GetInfoForFillingBankDocument(Options.PlanningTransactionBasis);
+			Result.Account     = OrderInfo.Account;
+			Result.Company     = OrderInfo.Company;
+			Result.Currency    = OrderInfo.Currency;
+			Result.TotalAmount = OrderInfo.Amount;
+			Result.AmountExchange   = Undefined;
+			Result.CurrencyExchange = Undefined;
+			Return Result;
+		EndIf;
+		Return Result;
 	EndIf;
 	Return Result;
 EndFunction
@@ -2064,10 +2117,13 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	Outgoing_ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
+	Outgoing_PaymentByCheque   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
 	If Options.TransactionType = Outgoing_CashTransferOrder Then
+		StrByType = "";
+	ElsIf Options.TransactionType = Outgoing_PaymentByCheque Then
 		StrByType = "";
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
 		StrByType = "
@@ -2151,11 +2207,14 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Incoming_ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
 	Incoming_TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	Incoming_PaymentFromCustomerByPOS = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS");
+	Incoming_ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
 	If Options.TransactionType = Incoming_CashTransferOrder Then
 		StrByType = "";
+	ElsIf Options.TransactionType = Incoming_ReceiptByCheque Then
+		StrByType = "";	
 	ElsIf Options.TransactionType = Incoming_CurrencyExchange Then
 		StrByType = "
 		|TransitAccount, 

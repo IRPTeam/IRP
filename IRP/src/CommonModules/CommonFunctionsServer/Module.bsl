@@ -198,6 +198,28 @@ Procedure Pause(Time) Export
 
 EndProcedure
 
+Function GetURLFromNavigationLink(Link) Export
+	Five = 5;
+	Nine = 9;
+	Eleven = 11;
+    FirstDot = StrFind(Link, "e1cib/data/");
+    Predefined = StrFind(Link, "?refName=");
+    If Predefined Then
+		SecondDot = Predefined;
+	Else
+    	SecondDot = StrFind(Link, "?ref=");
+    EndIf;    
+    TypePresentation = Mid(Link, FirstDot + Eleven, SecondDot - FirstDot - Eleven);
+    If Predefined Then
+    	ValueTemplate = ValueToStringInternal(PredefinedValue(TypePresentation + "." + Mid(Link, SecondDot + Nine)));
+    	LinkValue = ValueTemplate;
+    Else
+    	ValueTemplate = ValueToStringInternal(PredefinedValue(TypePresentation + ".EmptyRef"));
+    	LinkValue = StrReplace(ValueTemplate, "00000000000000000000000000000000", Mid(Link, SecondDot + Five));
+    EndIf;
+    Return ValueFromStringInternal(LinkValue);    
+EndFunction
+
 #Region QueryBuilder
 
 Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export

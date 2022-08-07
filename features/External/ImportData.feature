@@ -2067,3 +2067,10 @@ Scenario: Create information register T9014S_AccountsExpenseRevenue records
 		| 'Period'             | 'Company'                                                           | 'Variant'                                                                    | 'ExpenseRevenue'                                                                 | 'Account'                                                               |
 		| '01.07.2022 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'e1cib/data/ChartOfAccounts.Basic?ref=b78386a1ced23f4711ed01e9dc954ffe' |
 
+
+Scenario: Create information register UserSettings records (for workstation)
+
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                        | 'MetadataObject'               | 'AttributeName'             | 'KindOfAttribute'                | 'Value'                                                                 |
+		| 'e1cib/data/Catalog.UserGroups?ref=aa78120ed92fbced11eaf12e233ba2b3' | 'Document.RetailSalesReceipt'  | 'Branch'                    | 'Enum.KindsOfAttributes.Common'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef026' |
+

@@ -57,6 +57,7 @@ Scenario: _200000 preparation (user settings)
 		When Create catalog BusinessUnits objects
 		When Create information register UserSettings records (Retail document)
 		When update ItemKeys
+		When Create catalog UserGroups objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -66,6 +67,8 @@ Scenario: _200000 preparation (user settings)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
+	* Workstation
+		When create Workstation
 	
 Scenario: _2000001 check preparation
 	When check preparation
@@ -1173,10 +1176,10 @@ Scenario:  _200028 create a custom display setting for entering in a row objects
 Scenario: _200029 filling in user settings for a user group
 	* Open catalog User Groups
 		Given I open hyperlink "e1cib/list/Catalog.UserGroups"
-	* create a new group and filling out a user preference for displaying objects marked for deletion
-		And I click the button named "FormCreate"
-		And I input "Admin" text in the field named "Description_en"
-		And I click "Save" button
+	* Select and filling out a user preference for displaying objects marked for deletion
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Admin'       |
 		And I click "Settings" button
 	* Filling in the settings for the display of Additional attribute values ​​marked for deletion when entering by line
 		And I go to line in "MetadataTree" table
@@ -1233,8 +1236,7 @@ Scenario: _200029 filling in user settings for a user group
 		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
 		And I finish line editing in "MetadataTree" table
 		And I click "Ok" button
-	* Saving the group
-		And I click "Save and close" button
+
 
 Scenario: _200030  adding a group of user settings for the user
 	* Open user catalog
@@ -1348,6 +1350,7 @@ Scenario:  _200036 check filling in field from custom user settings in Sales ord
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Branch" became equal to "Front office"
 	And I close all client application windows	
+
 
 
 Scenario: _999999 close TestClient session

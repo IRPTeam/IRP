@@ -107,8 +107,23 @@ Procedure PriceKeyListItemOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	CurrentData.InputUnit = GetInputUnit(CurrentData.Item);
+	Unit = GetInputUnit(CurrentData.Item);
+	CurrentData.InputUnit = Unit;
+	CurrentData.Unit = Unit;
 	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
+EndProcedure
+
+&AtServer
+Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
+	RowIndex = 0;
+	For Each Row In ThisObject.PriceKeyList Do
+		If Not ValueIsFilled(Row.Unit) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, "Unit"), 
+					"ItemList[" + Format(RowIndex,"NZ=0; NG=0;") + "].Unit", ThisObject);
+		EndIf;
+		RowIndex = RowIndex + 1;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -164,7 +179,9 @@ Procedure ItemKeyListItemOnChange(Item)
 	CurrentItemKey = CurrentData.ItemKey;
 	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
 	If CurrentItemKey <> CurrentData.ItemKey Then
-		CurrentData.InputUnit = GetInputUnit(CurrentData.ItemKey);
+		Unit = GetInputUnit(CurrentData.ItemKey);
+		CurrentData.InputUnit = Unit;
+		CurrentData.Unit = Unit;
 		CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
 	EndIf;
 EndProcedure
@@ -175,7 +192,9 @@ Procedure ItemKeyListItemKeyOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	CurrentData.InputUnit = GetInputUnit(CurrentData.ItemKey);
+	Unit = GetInputUnit(CurrentData.ItemKey);
+	CurrentData.InputUnit = Unit;
+	CurrentData.Unit = Unit;
 	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
 EndProcedure
 
@@ -217,7 +236,9 @@ Procedure ItemListItemOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	CurrentData.InputUnit = GetInputUnit(CurrentData.Item);
+	Unit = GetInputUnit(CurrentData.Item);
+	CurrentData.InputUnit = Unit;
+	CurrentData.Unit = Unit;
 	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);		
 EndProcedure
 

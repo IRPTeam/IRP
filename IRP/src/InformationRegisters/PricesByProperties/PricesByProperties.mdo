@@ -97,4 +97,20 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="0bd86b41-fa9a-4c07-bbdb-1dedb5ab69d1">
+    <name>Unit</name>
+    <synonym>
+      <key>en</key>
+      <value>Unit</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Units</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
 </mdclass:InformationRegister>

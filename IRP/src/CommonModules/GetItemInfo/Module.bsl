@@ -42,14 +42,43 @@ Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 	FillTableOfResults(QuerySelection, TableWithSpecification, TableOfResults);
 
 	TableWithOutSpecification.GroupBy("ItemKey, PriceType, Unit, ItemUnit, ItemKeyUnit");
-
+	
 	TableWithOutSpecificationCopy = TableWithOutSpecification.Copy();
-	TableWithOutSpecificationCopy.GroupBy("ItemKey, PriceType");
-
+	TableWithOutSpecificationCopy.GroupBy("ItemKey, PriceType, Unit");
 	QuerySelection = QueryByItemPriceInfo(TableWithOutSpecificationCopy, Period);
-
+    QuerySelection.Reset();
+    ArrayForDelete = New Array();
+    For Each Row In TableWithOutSpecification Do
+    	Filter = New Structure();
+    	Filter.Insert("ItemKey"   , Row.ItemKey);
+    	Filter.Insert("PriceType" , Row.PriceType);
+    	
+    	BasisUnit = ?(ValueIsFilled(Row.ItemKeyUnit), Row.ItemKeyUnit, Row.ItemUnit);
+    	
+    	If Not QuerySelection.FindNext(Filter) Then
+    		Row.Unit = BasisUnit;
+    		Continue;
+    	EndIf;
+    	Price = ?(ValueIsFilled(QuerySelection.Price), QuerySelection.Price, 0);
+    	If Not ValueIsFilled(Price) Then
+    		Row.Unit = BasisUnit;
+    		Continue;
+    	EndIf;
+    	NewRow = TableOfResults.Add();
+    	FillPropertyValues(NewRow, Row);
+    	NewRow.Price = Price;
+    	ArrayForDelete.Add(Row);
+    EndDo;
+    
+    For Each ItemForDelete In ArrayForDelete Do
+    	TableWithOutSpecification.Delete(ItemForDelete);
+    EndDo;
+    
+	TableWithOutSpecificationCopy = TableWithOutSpecification.Copy();
+	TableWithOutSpecificationCopy.GroupBy("ItemKey, PriceType, Unit");
+	QuerySelection = QueryByItemPriceInfo(TableWithOutSpecificationCopy, Period);    
 	FillTableOfResults(QuerySelection, TableWithOutSpecification, TableOfResults);
-
+	
 	Return TableOfResults;
 EndFunction
 
@@ -137,40 +166,63 @@ EndProcedure
 // * ItemKey - CatalogRef.ItemKeys -
 // * PriceType - CatalogRef.PriceTypes -
 Function ItemPriceInfo(Parameters, AddInfo = Undefined) Export
-
+	Result = New Structure("ItemKey, PriceType, Price");
+	
+	ItemKeyUnit = Parameters.ItemKey.Unit;
+	ItemUnit = Parameters.ItemKey.Item.Unit;
+	BasisUnit = ?(ValueIsFilled(ItemKeyUnit), ItemKeyUnit, ItemUnit);
+	
 	ItemTable = New ValueTable();
-	ItemTable.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
-	ItemTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
-
-	NewRowItemList = ItemTable.Add();
-	NewRowItemList.ItemKey = Parameters.ItemKey;
-	NewRowItemList.PriceType = ?(Parameters.Property("RowPriceType"), Parameters.RowPriceType, Parameters.PriceType);
-
-	QueryParameterPeriod = Parameters.Period;
-
+	ItemTable.Columns.Add("ItemKey"   , New TypeDescription("CatalogRef.ItemKeys"));
+	ItemTable.Columns.Add("PriceType" , New TypeDescription("CatalogRef.PriceTypes"));
+	
+	ItemTableRow = ItemTable.Add();
+	ItemTableRow.ItemKey   = Parameters.ItemKey;
+	ItemTableRow.PriceType = ?(Parameters.Property("RowPriceType"), Parameters.RowPriceType, Parameters.PriceType);
+	
+	Result.ItemKey   = ItemTableRow.ItemKey;
+	Result.PriceType = ItemTableRow.PriceType;
+	Result.Price     = 0;
+	
 	If ValueIsFilled(Parameters.ItemKey.Specification) Then
-		QuerySelection = QueryByItemPriceInfo_Specification(ItemTable, QueryParameterPeriod);
-	Else
-		QuerySelection = QueryByItemPriceInfo(ItemTable, QueryParameterPeriod);
-	EndIf;
-
-	If QuerySelection.Next() Then
-		Result = New Structure();
-		Price = ?(ValueIsFilled(QuerySelection.Price), QuerySelection.Price, 0);
-		If ValueIsFilled(Parameters.Unit) Then
-			ItemKeyUnit = Parameters.ItemKey.Unit;
-			ItemUnit = Parameters.ItemKey.Item.Unit;
-			ToUnit = ?(ValueIsFilled(ItemKeyUnit), ItemKeyUnit, ItemUnit);
-			UnitFactor = ?(ValueIsFilled(ToUnit), Catalogs.Units.GetUnitFactor(Parameters.Unit, ToUnit), 1);
-			Result.Insert("Price", Price * UnitFactor);
-		Else
-			Result.Insert("Price", Price);
+		QuerySelection = QueryByItemPriceInfo_Specification(ItemTable, Parameters.Period);
+		If QuerySelection.Next() Then
+			FillPropertyValues(Result, QuerySelection);
+			Return MultiplyPriceByUnitFactor(Result, Parameters.Unit, BasisUnit);
 		EndIf;
-
-		Result.Insert("ItemKey", QuerySelection.ItemKey);
-		Result.Insert("PriceType", QuerySelection.PriceType);
-		Return Result;
 	EndIf;
+
+	ItemTable.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
+	ItemTable[0].Unit = Parameters.Unit;
+		
+	QuerySelection = QueryByItemPriceInfo(ItemTable, Parameters.Period);
+	
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+		If ValueIsFilled(Result.Price) Then
+			Return Result;
+		EndIf;
+	EndIf;	
+			
+	ItemTable[0].Unit = BasisUnit;
+	QuerySelection = QueryByItemPriceInfo(ItemTable, Parameters.Period);
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+		Return MultiplyPriceByUnitFactor(Result, Parameters.Unit, BasisUnit);
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+Function MultiplyPriceByUnitFactor(Result, Unit, BasisUnit)
+	Price = ?(ValueIsFilled(Result.Price), Result.Price, 0);
+	If ValueIsFilled(Unit) Then
+		UnitFactor = ?(ValueIsFilled(BasisUnit), Catalogs.Units.GetUnitFactor(Unit, BasisUnit), 1);
+		Result.Price = Price * UnitFactor;
+	Else
+		Result.Price = Price;
+	EndIf;
+	Return Result;
 EndFunction
 
 Function QueryByItemPriceInfo_Specification(ItemList, Period, AddInfo = Undefined) Export
@@ -415,12 +467,13 @@ EndFunction
 Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 
 	Query = New Query();
-	Query.SetParameter("ItemList", ItemList);
-	Query.SetParameter("Period", Period);
+	Query.SetParameter("ItemList" , ItemList);
+	Query.SetParameter("Period"   , Period);
 
 	Query.Text =
 	"SELECT
 	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Unit AS Unit,
 	|	ItemList.PriceType AS PriceType
 	|INTO tmp
 	|FROM
@@ -433,6 +486,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|	ItemKeys.Specification AS Specification,
 	|	ItemKeys.AffectPricingMD5 AS AffectPricingMD5,
 	|	ItemKeys.Item AS Item,
+	|	tmp.Unit AS Unit,
 	|	tmp.PriceType AS PriceType
 	|INTO t_ItemKeys
 	|FROM
@@ -448,6 +502,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|	ItemKeys.Specification AS Specification,
 	|	ItemKeys.AffectPricingMD5 AS AffectPricingMD5,
 	|	ItemKeys.Item AS Item,
+	|	ItemKeys.Unit AS Unit,
 	|	ItemKeys.PriceType AS PriceType,
 	|	ISNULL(PricesByItemKeysSliceLast.Price, 0) AS Price
 	|INTO t_PricesByItemKeys
@@ -456,6 +511,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|		LEFT JOIN InformationRegister.PricesByItemKeys.SliceLast(&Period) AS PricesByItemKeysSliceLast
 	|		ON ItemKeys.ItemKey = PricesByItemKeysSliceLast.ItemKey
 	|		AND ItemKeys.PriceType = PricesByItemKeysSliceLast.PriceType
+	|		AND ItemKeys.Unit = PricesByItemKeysSliceLast.Unit
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -463,6 +519,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|	tmp2.ItemKey AS ItemKey,
 	|	tmp2.AffectPricingMD5 AS AffectPricingMD5,
 	|	tmp2.Item AS Item,
+	|	tmp2.Unit AS Unit,
 	|	tmp2.PriceType AS PriceType
 	|INTO tmp2
 	|FROM
@@ -477,6 +534,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|	tmp2.ItemKey AS ItemKey,
 	|	tmp2.AffectPricingMD5 AS AffectPricingMD5,
 	|	tmp2.Item AS Item,
+	|	tmp2.Unit AS Unit,
 	|	tmp2.PriceType AS PriceType
 	|INTO t_PriceKeys
 	|FROM
@@ -489,6 +547,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|SELECT ALLOWED
 	|	PriceKeys.ItemKey AS ItemKey,
 	|	PriceKeys.Item AS Item,
+	|	PriceKeys.Unit AS Unit,
 	|	PriceKeys.PriceType AS PriceType,
 	|	ISNULL(PricesByPropertiesSliceLast.Price, 0) AS Price
 	|INTO t_PricesByProperties
@@ -497,12 +556,14 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|		LEFT JOIN InformationRegister.PricesByProperties.SliceLast(&Period) AS PricesByPropertiesSliceLast
 	|		ON PriceKeys.PriceKey = PricesByPropertiesSliceLast.PriceKey
 	|		AND PriceKeys.PriceType = PricesByPropertiesSliceLast.PriceType
+	|		AND PriceKeys.Unit = PricesByPropertiesSliceLast.Unit
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT ALLOWED
 	|	tmp3.ItemKey AS ItemKey,
 	|	tmp3.Item AS Item,
+	|	tmp3.Unit AS Unit,
 	|	tmp3.PriceType AS PriceType
 	|INTO tmp3
 	|FROM
@@ -515,19 +576,22 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|SELECT ALLOWED
 	|	tmp3.ItemKey AS ItemKey,
 	|	tmp3.Item AS Item,
+	|	tmp3.Unit AS Unit,
 	|	tmp3.PriceType AS PriceType,
 	|	ISNULL(PricesByItemsSliceLast.Price, 0) AS Price
 	|INTO t_PricesByItems
 	|FROM
 	|	tmp3 AS tmp3
-	|		LEFT JOIN InformationRegister.PricesByItems.SliceLast(&Period, (PriceType, Item) IN
+	|		LEFT JOIN InformationRegister.PricesByItems.SliceLast(&Period, (PriceType, Item, Unit) IN
 	|			(SELECT
 	|				tmp.PriceType,
-	|				tmp.Item
+	|				tmp.Item,
+	|				tmp.Unit
 	|			FROM
 	|				tmp3 AS tmp)) AS PricesByItemsSliceLast
 	|		ON tmp3.Item = PricesByItemsSliceLast.Item
 	|		AND tmp3.PriceType = PricesByItemsSliceLast.PriceType
+	|		AND tmp3.Unit = PricesByItemsSliceLast.Unit
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -536,6 +600,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|	ItemKeys.Specification AS Specification,
 	|	ItemKeys.AffectPricingMD5 AS AffectPricingMD5,
 	|	ItemKeys.Item AS Item,
+	|	ItemKeys.Unit AS Unit,
 	|	ItemKeys.PriceType AS PriceType,
 	|	ISNULL(t_PricesByItemKeys.Price, 0) AS PriceByItemKeys,
 	|	ISNULL(t_PricesByProperties.Price, 0) AS PriceByProperties,
@@ -553,12 +618,15 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|		LEFT JOIN t_PricesByItemKeys AS t_PricesByItemKeys
 	|		ON ItemKeys.ItemKey = t_PricesByItemKeys.ItemKey
 	|		AND ItemKeys.PriceType = t_PricesByItemKeys.PriceType
+	|		AND ItemKeys.Unit = t_PricesByItemKeys.Unit
 	|		LEFT JOIN t_PricesByProperties AS t_PricesByProperties
 	|		ON ItemKeys.ItemKey = t_PricesByProperties.ItemKey
 	|		AND ItemKeys.PriceType = t_PricesByProperties.PriceType
+	|		AND ItemKeys.Unit = t_PricesByProperties.Unit
 	|		LEFT JOIN t_PricesByItems AS t_PricesByItems
 	|		ON ItemKeys.ItemKey = t_PricesByItems.ItemKey
-	|		AND ItemKeys.PriceType = t_PricesByItems.PriceType";
+	|		AND ItemKeys.PriceType = t_PricesByItems.PriceType
+	|		AND ItemKeys.Unit = t_PricesByItems.Unit";
 
 	QuerySelection = Query.Execute().Select();
 	Return QuerySelection;

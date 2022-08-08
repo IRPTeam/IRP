@@ -3,6 +3,7 @@ Function GetTableByPriceList(PriceListRef, AddInfo = Undefined) Export
 	ResultTable.Columns.Add("PriceList"  , New TypeDescription("DocumentRef.PriceList"));
 	ResultTable.Columns.Add("PriceKey"   , New TypeDescription("CatalogRef.PriceKeys"));
 	ResultTable.Columns.Add("Item"       , New TypeDescription("CatalogRef.Items"));
+	ResultTable.Columns.Add("Unit"       , New TypeDescription("CatalogRef.Units"));
 	ResultTable.Columns.Add("InputUnit"  , New TypeDescription("CatalogRef.Units"));
 	ResultTable.Columns.Add("Price"      , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
 	ResultTable.Columns.Add("InputPrice" , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
@@ -16,6 +17,7 @@ Function GetTableByPriceList(PriceListRef, AddInfo = Undefined) Export
 	|   PriceListDataSet.Ref AS PriceList,
 	|	PriceListDataPrice.Price,
 	|	PriceListDataPrice.Item,
+	|	PriceListDataPrice.Unit,
 	|	PriceListDataPrice.InputUnit,
 	|	PriceListDataPrice.InputPrice
 	|FROM
@@ -39,6 +41,7 @@ Function GetTableByPriceList(PriceListRef, AddInfo = Undefined) Export
 		TableOfProperties = QueryTable.Copy(Filter);
 		Price      = TableOfProperties[0].Price;
 		Item       = TableOfProperties[0].Item;
+		Unit       = TableOfProperties[0].Unit;
 		PriceList  = TableOfProperties[0].PriceList;
 		InputUnit  = TableOfProperties[0].InputUnit;
 		InputPrice = TableOfProperties[0].InputPrice;
@@ -58,6 +61,7 @@ Function GetTableByPriceList(PriceListRef, AddInfo = Undefined) Export
 		NewRowResultTable.PriceKey   = PriceKey;
 		NewRowResultTable.Price      = Price;
 		NewRowResultTable.Item       = Item;
+		NewRowResultTable.Unit       = Unit;
 		NewRowResultTable.PriceList  = PriceList;
 		NewRowResultTable.InputUnit  = InputUnit;
 		NewRowResultTable.InputPrice = InputPrice;		

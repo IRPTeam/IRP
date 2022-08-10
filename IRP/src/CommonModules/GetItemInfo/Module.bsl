@@ -42,6 +42,7 @@ Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 	FillTableOfResults(QuerySelection, TableWithSpecification, TableOfResults);
 
 	TableWithOutSpecification.GroupBy("ItemKey, PriceType, Unit, ItemUnit, ItemKeyUnit");
+	TableWithOutSpecification.Columns.Add("ToUnit");
 	
 	TableWithOutSpecificationCopy = TableWithOutSpecification.Copy();
 	TableWithOutSpecificationCopy.GroupBy("ItemKey, PriceType, Unit");
@@ -56,11 +57,13 @@ Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
     	BasisUnit = ?(ValueIsFilled(Row.ItemKeyUnit), Row.ItemKeyUnit, Row.ItemUnit);
     	
     	If Not QuerySelection.FindNext(Filter) Then
+    		Row.ToUnit = Row.Unit;
     		Row.Unit = BasisUnit;
     		Continue;
     	EndIf;
     	Price = ?(ValueIsFilled(QuerySelection.Price), QuerySelection.Price, 0);
     	If Not ValueIsFilled(Price) Then
+    		Row.ToUnit = Row.Unit;
     		Row.Unit = BasisUnit;
     		Continue;
     	EndIf;
@@ -114,6 +117,9 @@ EndFunction
 Procedure FillTableOfResults(QuerySelection, Table, TableOfResults)
 	QuerySelection.Reset();
 	TempMap = New Map();
+	
+	ToUnitIsPresent = Table.Columns.Find("ToUnit") <> Undefined;
+	
 	For Each Row In Table Do
 		If Not QuerySelection.FindNext(New Structure("ItemKey, PriceType", Row.ItemKey, Row.PriceType)) Then
 			Continue;
@@ -123,11 +129,18 @@ Procedure FillTableOfResults(QuerySelection, Table, TableOfResults)
 		FillPropertyValues(NewRow, Row);
 		Price = ?(ValueIsFilled(QuerySelection.Price), QuerySelection.Price, 0);
 		If ValueIsFilled(Row.Unit) Then
-			ToUnit = ?(ValueIsFilled(Row.ItemKeyUnit), Row.ItemKeyUnit, Row.ItemUnit); // CatalogRef.Units
+			
+			If ToUnitIsPresent And ValueIsFilled(Row.ToUnit) Then
+				ToUnit = Row.ToUnit;
+			Else
+				ToUnit = ?(ValueIsFilled(Row.ItemKeyUnit), Row.ItemKeyUnit, Row.ItemUnit); // CatalogRef.Units
+			EndIf;
+			
 			If ValueIsFilled(ToUnit) Then
 				UnitValue = TempMap.Get(Row.Unit); // Map
 				If UnitValue = Undefined Then
-					UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, ToUnit);
+					//UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, ToUnit);
+					UnitFactor = Catalogs.Units.GetUnitFactor(ToUnit, Row.Unit);
 					Tmp = New Map();
 					Tmp.Insert(ToUnit, UnitFactor);
 					TempMap.Insert(Row.Unit, Tmp);

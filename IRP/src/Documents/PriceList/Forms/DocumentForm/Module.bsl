@@ -453,6 +453,7 @@ Function GetDataPrice()
 	TableOfResult.Columns.Add("Price");
 	TableOfResult.Columns.Add("Key");
 	TableOfResult.Columns.Add("InputUnit");
+	TableOfResult.Columns.Add("Unit");
 	TableOfResult.Columns.Add("InputPrice");
 	
 	TableOfKeys = Object.DataSet.Unload();
@@ -460,12 +461,12 @@ Function GetDataPrice()
 
 	For Each Row In TableOfKeys Do
 		For Each RowPrice In Object.DataPrice.Unload(New Structure("Key", Row.Key), 
-			"Item, Price, Key, InputUnit, InputPrice") Do
+			"Item, Price, Key, InputUnit, Unit, InputPrice") Do
 			NewRow = TableOfResult.Add();
 			FillPropertyValues(NewRow, RowPrice);
 		EndDo;
 	EndDo;
-	TableOfResult.GroupBy("Item, Price, Key, InputUnit, InputPrice");
+	TableOfResult.GroupBy("Item, Price, Key, InputUnit, Unit, InputPrice");
 	Return TableOfResult;
 EndFunction
 
@@ -615,6 +616,7 @@ Procedure DrawFormTablePriceKeyList()
 		NewRow.Price      = Row.Price;
 		NewRow.Item       = Row.Item;
 		NewRow.InputUnit  = Row.InputUnit;
+		NewRow.Unit       = Row.Unit;
 		NewRow.InputPrice = Row.InputPrice;
 		
 		For Each Column In SavedDataStructure.Fields.Table.Columns Do
@@ -652,6 +654,7 @@ Procedure SaveTablePriceKeyList(Cancel, CurrentObject, WriteParameters)
 		NewRowPrice.Price      = Row.Price;
 		NewRowPrice.Item       = Row.Item;
 		NewRowPrice.InputUnit  = Row.InputUnit;
+		NewRowPrice.Unit       = Row.Unit;
 		NewRowPrice.InputPrice = Row.InputPrice;
 
 		If SavedDataStructure.Fields.Table.Columns.Count() <= 1 Then

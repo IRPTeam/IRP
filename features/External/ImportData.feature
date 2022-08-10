@@ -1758,9 +1758,9 @@ Scenario: Create document PriceList objects (for procurement)
 		| 'e1cib/data/Document.PriceList?ref=b75dad46e66c4c2c11eb38940abc2134' | 'False'           | '58'      | '07.12.2020 17:02:19' | 'True'    | ''         | 'Enum.PriceListTypes.PriceByItems' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef005' | '$$IdCI$$' | ''            | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' |
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                                | 'Item'                                                          | 'Price' |
-		| 'e1cib/data/Document.PriceList?ref=b75dad46e66c4c2c11eb38940abc2134' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | '100'   |
-		| 'e1cib/data/Document.PriceList?ref=b75dad46e66c4c2c11eb38940abc2134' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | '80'    |
+		| 'Ref'                                                                | 'Item'                                                          | 'Price' |'Unit' |
+		| 'e1cib/data/Document.PriceList?ref=b75dad46e66c4c2c11eb38940abc2134' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | '100'   |'e1cib/data/Catalog.Units?ref=b762b13668d0905011eb76684b9f687b'|
+		| 'e1cib/data/Document.PriceList?ref=b75dad46e66c4c2c11eb38940abc2134' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | '80'    |'e1cib/data/Catalog.Units?ref=b762b13668d0905011eb76684b9f687b'|
 
 
 Scenario: Create document PurchaseInvoice objects (for procurement)

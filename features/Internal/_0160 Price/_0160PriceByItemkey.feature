@@ -35,6 +35,7 @@ Scenario: _016000 preparation
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When  Create catalog Currencies objects
+		When Create catalog IntegrationSettings objects
 		When update ItemKeys
 
 Scenario: _0160001 check preparation
@@ -680,6 +681,12 @@ Scenario: _016010 check dependent prices calculation
 			| Code |
 			| TRY  |
 		And I select current line in "List" table
+		And I click Choice button of the field named "Source"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Forex Buying' |
+		And I select current line in "List" table	
+		And I click "Save" button
 	* Adding external processing to the price type and filling in the settings
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table

@@ -1420,12 +1420,13 @@ Scenario: Create information register CurrencyRates records
 Scenario: Create information register Barcodes records
 
 	And I check or create information register "Barcodes" records:
-		| 'Barcode'       | 'ItemKey'                                                          | 'SerialLotNumber' | 'Unit'                                                          | 'Presentation'  |
-		| '2202283705'    | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2202283705'    |
-		| '2202283713'    | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2202283713'    |
-		| '2202283739'    | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2202283739'    |
-		| '4820024700016' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '4820024700016' |
-		| '978020137962'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c605' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '978020137962'  |
+		| 'Barcode'        | 'ItemKey'                                                          | 'SerialLotNumber' | 'Unit'                                                          | 'Presentation'   |
+		| '2202283705'     | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2202283705'     |
+		| '2202283713'     | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2202283713'     |
+		| '2202283739'     | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2202283739'     |
+		| '4820024700016'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '4820024700016'  |
+		| '978020137962'   | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c605' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '978020137962'   |
+		| '89089988989989' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf115bcc9c60b' | '89089988989989' |
 
 
 

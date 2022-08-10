@@ -1,4 +1,4 @@
-Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefined) Export
+﻿Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefined) Export
 	ArrayOfPostingInfo = New Array();
 	If Parameters.Property("ArrayOfPostingInfo") Then
 		ArrayOfPostingInfo = Parameters.ArrayOfPostingInfo;

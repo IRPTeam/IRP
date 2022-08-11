@@ -397,6 +397,14 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
+            <format>
+              <key>en</key>
+              <value>DF=dd.MM.yyyy</value>
+            </format>
+            <editFormat>
+              <key>en</key>
+              <value>DF=dd.MM.yyyy</value>
+            </editFormat>
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>

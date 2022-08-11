@@ -4,6 +4,91 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction
 
+Function SalesOrderPrint(Ref) Export
+	
+	Template = GetTemplate("SalesOrderPrint");
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	SalesOrder.Number AS Number,
+		|	SalesOrder.Date AS Date,
+		|	SalesOrder.Company AS Company,
+		|	SalesOrder.Partner AS Partner,
+		|	SalesOrder.Author AS Author,
+		|	SalesOrder.Ref AS Ref,
+		|	SalesOrder.Currency AS Currency
+		|FROM
+		|	Document.SalesOrder AS SalesOrder
+		|WHERE
+		|	SalesOrder.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SalesOrderItemList.ItemKey.Item AS Item,
+		|	SalesOrderItemList.ItemKey AS ItemKey,
+		|	SalesOrderItemList.Quantity AS Quantity,
+		|	SalesOrderItemList.Unit AS Unit,
+		|	SalesOrderItemList.Price AS Price,
+		|	SalesOrderItemList.TaxAmount AS TaxAmount,
+		|	SalesOrderItemList.TotalAmount AS TotalAmount,
+		|	SalesOrderTaxList.TaxRate AS VAT,
+		|	SalesOrderItemList.Ref AS Ref
+		|FROM
+		|	Document.SalesOrder.ItemList AS SalesOrderItemList
+		|		LEFT JOIN Document.SalesOrder.TaxList AS SalesOrderTaxList
+		|		ON SalesOrderItemList.Ref = SalesOrderTaxList.Ref
+		|			AND SalesOrderItemList.Key = SalesOrderTaxList.Key
+		|WHERE
+		|	SalesOrderItemList.Ref = &Ref";
+	Query.Parameters.Insert("Ref", Ref);
+	Selection		= Query.ExecuteBatch();
+	SelectionHeader	= Selection[0].Select(); 
+	SelectionItems	= Selection[1].Unload();
+	SelectionItems.Indexes.Add("Ref");
+
+	AreaCaption			= Template.GetArea("Caption");
+	Header				= Template.GetArea("Header");
+	AreaItemListHeader	= Template.GetArea("ItemListHeader");
+	AreaItemList		= Template.GetArea("ItemList");
+	AreaFooter			= Template.GetArea("Footer");
+
+	Spreadsheet = New SpreadsheetDocument;
+	While SelectionHeader.Next() Do
+        AreaCaption.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaCaption);
+
+		Header.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(Header);
+		Spreadsheet.Put(AreaItemListHeader);
+		
+		Choice	= New Structure("Ref", SelectionHeader.Ref);
+		FindRow = SelectionItems.FindRows(Choice);
+		
+		Number		= 0;
+		TotalSum	= 0;
+		TotalTax	= 0;
+		For Each It In FindRow Do
+			Number = Number + 1;
+			AreaItemList.Parameters.Fill(It);	
+			AreaItemList.Parameters.Number = Number;
+			Spreadsheet.Put(AreaItemList);
+			TotalSum = TotalSum + It.TotalAmount;
+			TotalTax = TotalTax + It.TaxAmount;
+		EndDo;
+	EndDo;
+	
+	AreaFooter.Parameters.Number	= Number;
+	AreaFooter.Parameters.Total		= TotalSum;
+	AreaFooter.Parameters.Currency	= SelectionHeader.Currency;
+	AreaFooter.Parameters.Total		= TotalSum;
+	AreaFooter.Parameters.TotalTax	= TotalTax;
+	AreaFooter.Parameters.Manager	= SelectionHeader.Author;
+	Spreadsheet.Put(AreaFooter);
+	
+	Return Spreadsheet;
+EndFunction
+
 #EndRegion
 
 #Region Posting

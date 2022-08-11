@@ -21,9 +21,9 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 		UpdatePrice(Object, ItemRow, Actions.UpdatePrice, AddInfo);
 	EndIf;
 
-	If Actions.Property("RecalculateAppliedOffers") Then
-		RecalculateAppliedOffers(Object, ItemRow, AddInfo);
-	EndIf;
+//	If Actions.Property("RecalculateAppliedOffers") Then
+//		RecalculateAppliedOffers(Object, ItemRow, AddInfo);
+//	EndIf;
 
 	If Actions.Property("CalculateSpecialOffers") Then //
 		CalculateSpecialOffers(Object, ItemRow, AddInfo);
@@ -341,64 +341,64 @@ Function FindRowInCache(Cache, Filter, ArrayOfColumnNames)
 	Return Undefined;
 EndFunction
 
-Procedure RecalculateAppliedOffers(Object, ItemRow, AddInfo = Undefined)
-	ActiveOffers = OffersServer.GetAllActiveOffers_ForDocument(Object, AddInfo);
-	AppliedOffers = OffersServer.GetAllAppliedOffers(Object, AddInfo);
+//Procedure RecalculateAppliedOffers(Object, ItemRow, AddInfo = Undefined)
+//	ActiveOffers = OffersServer.GetAllActiveOffers_ForDocument(Object, AddInfo);
+//	AppliedOffers = OffersServer.GetAllAppliedOffers(Object, AddInfo);
+//
+//	RecalculateAppliedOffers_ForDocument(Object, ItemRow, ActiveOffers, AppliedOffers, AddInfo);
+//
+//	RecalculateAppliedOffers_ForRow(Object, AddInfo);
+//EndProcedure
 
-	RecalculateAppliedOffers_ForDocument(Object, ItemRow, ActiveOffers, AppliedOffers, AddInfo);
+//Procedure RecalculateAppliedOffers_ForDocument(Object, ItemRow, ActiveOffers, AppliedOffers, AddInfo = Undefined) Export
+//	OffersAddress = OffersServer.CreateOffersTreeAndPutToTmpStorage(Object, Object.ItemList, Object.SpecialOffers,
+//		ActiveOffers);
+//
+//	OffersAddress = OffersServer.SetIsSelectForAppliedOffers(OffersAddress, AppliedOffers);
+//
+//	CalculateAndLoadOffers_ForDocument(Object, OffersAddress);
+//
+//EndProcedure
 
-	RecalculateAppliedOffers_ForRow(Object, AddInfo);
-EndProcedure
+//Procedure RecalculateAppliedOffers_ForRow(Object, AddInfo = Undefined) Export
+//	For Each Row In Object.SpecialOffers Do
+//		isOfferRow = ValueIsFilled(Row.Offer) And OffersServer.IsOfferForRow(Row.Offer) And ValueIsFilled(Row.Percent)
+//			And ValueIsFilled(Row.Key);
+//		If isOfferRow Then
+//
+//			ArrayOfOffers = New Array();
+//			ArrayOfOffers.Add(Row.Offer);
+//
+//			TreeByOneOfferAddress = OffersServer.CreateOffersTreeAndPutToTmpStorage(Object, Object.ItemList,
+//				Object.SpecialOffers, ArrayOfOffers, Row.Key);
+//
+//			CalculateAndLoadOffers_ForRow(Object, TreeByOneOfferAddress, Row.Key);
+//
+//		EndIf;
+//	EndDo;
+//EndProcedure
 
-Procedure RecalculateAppliedOffers_ForDocument(Object, ItemRow, ActiveOffers, AppliedOffers, AddInfo = Undefined) Export
-	OffersAddress = OffersServer.CreateOffersTreeAndPutToTmpStorage(Object, Object.ItemList, Object.SpecialOffers,
-		ActiveOffers);
+//Procedure CalculateAndLoadOffers_ForDocument(Object, OffersAddress) Export
+//	OffersAddress = OffersServer.CalculateOffersTreeAndPutToTmpStorage_ForDocument(Object,
+//		New Structure("OffersAddress", OffersAddress));
+//
+//	ArrayOfOffers = OffersServer.GetArrayOfAllOffers_ForDocument(Object, OffersAddress);
+//	Object.SpecialOffers.Clear();
+//	For Each Row In ArrayOfOffers Do
+//		FillPropertyValues(Object.SpecialOffers.Add(), Row);
+//	EndDo;
+//EndProcedure
 
-	OffersAddress = OffersServer.SetIsSelectForAppliedOffers(OffersAddress, AppliedOffers);
-
-	CalculateAndLoadOffers_ForDocument(Object, OffersAddress);
-
-EndProcedure
-
-Procedure RecalculateAppliedOffers_ForRow(Object, AddInfo = Undefined) Export
-	For Each Row In Object.SpecialOffers Do
-		isOfferRow = ValueIsFilled(Row.Offer) And OffersServer.IsOfferForRow(Row.Offer) And ValueIsFilled(Row.Percent)
-			And ValueIsFilled(Row.Key);
-		If isOfferRow Then
-
-			ArrayOfOffers = New Array();
-			ArrayOfOffers.Add(Row.Offer);
-
-			TreeByOneOfferAddress = OffersServer.CreateOffersTreeAndPutToTmpStorage(Object, Object.ItemList,
-				Object.SpecialOffers, ArrayOfOffers, Row.Key);
-
-			CalculateAndLoadOffers_ForRow(Object, TreeByOneOfferAddress, Row.Key);
-
-		EndIf;
-	EndDo;
-EndProcedure
-
-Procedure CalculateAndLoadOffers_ForDocument(Object, OffersAddress) Export
-	OffersAddress = OffersServer.CalculateOffersTreeAndPutToTmpStorage_ForDocument(Object,
-		New Structure("OffersAddress", OffersAddress));
-
-	ArrayOfOffers = OffersServer.GetArrayOfAllOffers_ForDocument(Object, OffersAddress);
-	Object.SpecialOffers.Clear();
-	For Each Row In ArrayOfOffers Do
-		FillPropertyValues(Object.SpecialOffers.Add(), Row);
-	EndDo;
-EndProcedure
-
-Procedure CalculateAndLoadOffers_ForRow(Object, OffersAddress, ItemListRowKey) Export
-	TreeByOneOfferAddress = OffersServer.CalculateOffersTreeAndPutToTmpStorage_ForRow(Object,
-		New Structure("OffersAddress, ItemListRowKey", OffersAddress, ItemListRowKey));
-
-	ArrayOfOffers = OffersServer.GetArrayOfAllOffers_ForRow(Object, TreeByOneOfferAddress, ItemListRowKey);
-	Object.SpecialOffers.Clear();
-	For Each Row In ArrayOfOffers Do
-		FillPropertyValues(Object.SpecialOffers.Add(), Row);
-	EndDo;
-EndProcedure
+//Procedure CalculateAndLoadOffers_ForRow(Object, OffersAddress, ItemListRowKey) Export
+//	TreeByOneOfferAddress = OffersServer.CalculateOffersTreeAndPutToTmpStorage_ForRow(Object,
+//		New Structure("OffersAddress, ItemListRowKey", OffersAddress, ItemListRowKey));
+//
+//	ArrayOfOffers = OffersServer.GetArrayOfAllOffers_ForRow(Object, TreeByOneOfferAddress, ItemListRowKey);
+//	Object.SpecialOffers.Clear();
+//	For Each Row In ArrayOfOffers Do
+//		FillPropertyValues(Object.SpecialOffers.Add(), Row);
+//	EndDo;
+//EndProcedure
 
 Procedure CalculateSpecialOffers(Object, ItemRow, AddInfo = Undefined)
 	ItemRow.OffersAmount = GetTotalAmountByDependedTable(Object, "SpecialOffers", ItemRow.Key);
@@ -433,20 +433,20 @@ Function DeleteRowsInDependedTable(Object, DependedTableName, MainTableKey, Cach
 	Return Cache;
 EndFunction
 
-Function GetSliceLastDateByRefAndDate(Ref, Date) Export
-	If Not ValueIsFilled(Ref) Then
-		If Not ValueIsFilled(Date) Then
-			Return CurrentDate();
-		EndIf;
-		If BegOfDay(Date) = BegOfDay(CurrentDate()) Then
-			Return EndOfDay(Date);
-		Else
-			Return Date;
-		EndIf;
-	Else
-		Return Date;
-	EndIf;
-EndFunction
+//Function GetSliceLastDateByRefAndDate(Ref, Date) Export
+//	If Not ValueIsFilled(Ref) Then
+//		If Not ValueIsFilled(Date) Then
+//			Return CurrentDate();
+//		EndIf;
+//		If BegOfDay(Date) = BegOfDay(CurrentDate()) Then
+//			Return EndOfDay(Date);
+//		Else
+//			Return Date;
+//		EndIf;
+//	Else
+//		Return Date;
+//	EndIf;
+//EndFunction
 
 Function UpdateBarcode(Object, ItemRow, AddInfo = Undefined)
 	ReturnValue = "";

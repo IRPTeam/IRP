@@ -200,7 +200,7 @@ Function GetRefilledItemTable(Object)
 		|	AND PhysicalCountByLocationItemList.Ref.PhysicalInventory = &PhysicalInventory";
 	Query.SetParameter("Store", Object.Store);
 	Query.SetParameter("PhysicalInventory", Object.Ref);
-	Query.SetParameter("Period", CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date));
+	Query.SetParameter("Period", CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date));
 	Query.SetParameter("ItemList", Object.ItemList.Unload());
 	Query.Execute();
 	

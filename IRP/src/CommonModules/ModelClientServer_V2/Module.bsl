@@ -870,7 +870,7 @@ Function ChangePriceByPriceTypeExecute(Options) Export
 	If Options.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
 		Return Options.CurrentPrice;
 	EndIf;
-	Period = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Options.Ref, Options.Date);
+	Period = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Options.Ref, Options.Date);
 	PriceParameters = New Structure();
 	PriceParameters.Insert("Period"       , Period);
 	PriceParameters.Insert("PriceType"    , PredefinedValue("Catalog.PriceTypes.ManualPriceType"));

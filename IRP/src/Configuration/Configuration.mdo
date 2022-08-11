@@ -382,6 +382,7 @@
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
   <commonModules>CommonModule.OffersClient</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
+  <commonModules>CommonModule.OffersClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerServer</commonModules>

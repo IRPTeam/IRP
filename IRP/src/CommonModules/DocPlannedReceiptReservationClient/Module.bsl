@@ -91,9 +91,10 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 		CurrentRow.ItemKey = Undefined;
 	EndIf;
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	// #depreacted
+//	CalculationSettings = New Structure();
+//	CalculationSettings.Insert("UpdateUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -115,9 +116,10 @@ Procedure ItemListItemKeyOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	// #deprecated
+//	CalculationSettings = New Structure();
+//	CalculationSettings.Insert("UpdateUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 #EndRegion
 
@@ -128,9 +130,10 @@ Procedure ItemListQuantityOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	// #deprecated
+//	CalculationSettings = New Structure();
+//	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 #EndRegion
 
@@ -142,9 +145,10 @@ Procedure ItemListUnitOnChange(Object, Form, Item, AddInfo = Undefined) Export
 		Return;
 	EndIf;
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	// #deprecated
+//	CalculationSettings = New Structure();
+//	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 #EndRegion

@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c00b7bac-ee43-49eb-a492-490a62f18d01">
-  <name>LedgerTypes</name>
-  <synonym>
-    <key>en</key>
-    <value>Ledger types</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.LedgerTypes</content>
-  <content>Catalog.LedgerTypeVariants</content>
-  <parentSubsystem>Subsystem.Accounting</parentSubsystem>
+ <name>LedgerTypes</name>
+ <synonym>
+  <key>tr</key>
+  <value>Defter tipleri</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Ledger types</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Типы учета</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.LedgerTypes</content>
+ <content>Catalog.LedgerTypeVariants</content>
+ <parentSubsystem>Subsystem.Accounting</parentSubsystem>
 </mdclass:Subsystem>

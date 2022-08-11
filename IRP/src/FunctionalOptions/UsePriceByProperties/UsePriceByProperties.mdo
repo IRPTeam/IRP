@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8359852a-071b-496c-ae3a-832a68e6835a">
-  <name>UsePriceByProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Use price by properties</value>
-  </synonym>
-  <location>Constant.UsePriceByProperties</location>
-  <privilegedGetMode>true</privilegedGetMode>
+ <name>UsePriceByProperties</name>
+ <synonym>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Özelliklere göre fiyatlar</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use price by properties</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать установку цен по свойствам</value>
+ </synonym>
+ <location>Constant.UsePriceByProperties</location>
+ <privilegedGetMode>true</privilegedGetMode>
 </mdclass:FunctionalOption>

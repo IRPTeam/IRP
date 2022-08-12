@@ -4374,26 +4374,7 @@ Scenario: _0154199 copy line in Payment tab in the Retail sales receipt
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
 			| '1' | '100,33' | '1,00'       | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '1,00'    |	
 		And I close all client application windows		
-				
-Scenario: _0154200 check filling settings from user group from workstation
-		When Create information register UserSettings records (for workstation)
-	* Set user group in the workstation
-		Given I open hyperlink "e1cib/list/Catalog.Workstations"
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Workstation 01' |
-		And I select current line in "List" table
-		And I click Select button of "User group" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Admin'       |
-		And I select current line in "List" table
-		And I click "Save and close" button
-	* Check
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-		And I click the button named "FormCreate"
-		Then the form attribute named "Branch" became equal to "Logistics department"
-		And I close all client application windows
+			
 		
 				
 				

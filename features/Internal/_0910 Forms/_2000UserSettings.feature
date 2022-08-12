@@ -1351,6 +1351,60 @@ Scenario:  _200036 check filling in field from custom user settings in Sales ord
 		Then the form attribute named "Branch" became equal to "Front office"
 	And I close all client application windows	
 
+	
+Scenario: _0154200 check user settings priority
+		When Create information register UserSettings records (for workstation)
+		When Create second Workstation			
+	* Set user group in the workstation
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 02' |
+		And I select current line in "List" table
+		And I click Select button of "User group" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Manager'     |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Select workstation	
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 02' |
+		And I click "Set current workstation" button	
+	* Check filling branch from personal user settings
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		And I close all client application windows
+	* Delete Branch for RSR from personal user settings
+		Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
+		And I go to line in "List" table
+			| 'Attribute name' | 'Kind of attribute' | 'Metadata object'             | 'User or group' | 'Value'   |
+			| 'Branch'         | 'Common'            | 'Document.RetailSalesReceipt' | 'CI'            | 'Shop 01' |
+		And I delete a line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	* Check filling branch from workstation user group
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 02' |
+		And I click "Set current workstation" button
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		Then the form attribute named "Branch" became equal to "Distribution department"
+		And I close all client application windows
+	* Check filling branch from user group (workstation with empty user group)
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I click "Set current workstation" button
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		Then the form attribute named "Branch" became equal to "Logistics department"
+						
 
 
 Scenario: _999999 close TestClient session

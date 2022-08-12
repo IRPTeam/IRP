@@ -226,7 +226,6 @@
   <commonModules>CommonModule.BarcodeServer</commonModules>
   <commonModules>CommonModule.BuilderServer_V2</commonModules>
   <commonModules>CommonModule.CalculationServer</commonModules>
-  <commonModules>CommonModule.CalculationStringsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsClient</commonModules>
   <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsServer</commonModules>

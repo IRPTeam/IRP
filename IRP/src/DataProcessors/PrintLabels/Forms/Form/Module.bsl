@@ -210,18 +210,6 @@ Procedure ItemListItemKeyOnChange(Item)
 		CurrentData.Barcode = "";
 	EndIf;
 
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdateUnit");
-//	If Not ValueIsFilled(CurrentRow.PriceType) Then
-//		CalculationSettings.Insert("ChangePriceType");
-//		CalculationSettings.ChangePriceType = New Structure("Period, PriceType", CurrentDate(), ThisObject.PriceType);
-//	EndIf;
-//	CalculationSettings.Insert("UpdatePrice");
-//	CalculationSettings.UpdatePrice = New Structure("Period, PriceType", CurrentDate(), CurrentRow.PriceType);
-//	CalculationSettings.Insert("UpdateBarcode");
-//
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
-
 	If ValueIsFilled(CurrentData.Barcode) Then
 		If ValueIsFilled(ThisObject.BarcodeType) Then
 			CurrentData.BarcodeType = ThisObject.BarcodeType;
@@ -247,11 +235,6 @@ Procedure ItemListPriceTypeOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdatePrice");
-//	CalculationSettings.UpdatePrice = New Structure("Period, PriceType", CurrentDate(), CurrentRow.PriceType);
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 	
 	PriceParameters = New Structure();
 	PriceParameters.Insert("ItemKey"      , CurrentData.ItemKey);
@@ -298,18 +281,6 @@ Procedure ItemListItemOnChange(Item)
 		CurrentData.Barcode = "";
 	EndIf;
 	
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdateUnit");
-//	If Not ValueIsFilled(CurrentRow.PriceType) Then
-//		CalculationSettings.Insert("ChangePriceType");
-//		CalculationSettings.ChangePriceType = New Structure("Period, PriceType", CurrentDate(), ThisObject.PriceType);
-//	EndIf;
-//	CalculationSettings.Insert("UpdatePrice");
-//	CalculationSettings.UpdatePrice = New Structure("Period, PriceType", CurrentDate(), CurrentRow.PriceType);
-//	CalculationSettings.Insert("UpdateBarcode");
-//
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
-
 	If ValueIsFilled(CurrentData.Barcode) Then
 		If ValueIsFilled(ThisObject.BarcodeType) Then
 			CurrentData.BarcodeType = ThisObject.BarcodeType;

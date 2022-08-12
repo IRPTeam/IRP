@@ -1305,7 +1305,7 @@ EndFunction
 	
 #EndRegion
 
-#Region CONVERT_QUANTITY_IN_QUANTITY_IN_BASE_UNIT
+#Region CONVERT_QUANTITY_TO_QUANTITY_IN_BASE_UNIT
 
 Function CovertQuantityToQuantityInBaseUnitOptions() Export
 	Return GetChainLinkOptions("Bundle, Unit, Quantity");

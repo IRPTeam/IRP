@@ -6,13 +6,13 @@
 // 
 // Parameters:
 //  Item - FormTable - Item
-//  RowSelected - String
+//  RowSelected - 
 //  Field - FormField - Field
 //  StandardProcessing - Boolean - Standard processing
 &AtClient
 Procedure PrintFormConfigSelection(Item, RowSelected, Field, StandardProcessing)
-	//TODO testing
-	if Field.Name = "Presentation" OR Field.Name = "NameTemplate" Then
+	//TODO specify the correct type RowSelected
+	if Field.Name = "PrintFormConfigPresentation" OR Field.Name = "PrintFormConfigNameTemplate" Then
 		If Item.CurrentData <> Undefined and ValueIsFilled(Item.CurrentData.Ref) Then
 			StandardProcessing = False;
 			ShowValue(, Item.CurrentData.Ref);

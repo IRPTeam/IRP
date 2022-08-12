@@ -1246,12 +1246,8 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <templates uuid="a2d740ee-a741-49eb-902b-2349d247642c">
+  <templates uuid="3596bb39-522f-4f15-8e2b-82ce2cdea4fa">
     <name>SalesOrderPrint</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales order print</value>
-    </synonym>
   </templates>
   <commands uuid="34291d62-91e3-4f95-8ce2-3de95d4efd57">
     <name>SalesOrderPrint</name>

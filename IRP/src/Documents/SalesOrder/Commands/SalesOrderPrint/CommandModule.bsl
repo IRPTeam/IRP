@@ -7,9 +7,6 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 
-	Spreadsheet = New SpreadsheetDocument;
-	SalesOrderPrint(Spreadsheet, CommandParameter);
-	
 	For Each It In CommandParameter Do
 		Spreadsheet = New SpreadsheetDocument;	
 		SalesOrderPrint(Spreadsheet, It);
@@ -17,6 +14,7 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		Param.RefDocument = It;
 		Param.SpreadsheetDoc = Spreadsheet; 
 		Param.NameTemplate = "SalesOrderPrint";
+		OpenForm("CommonForm.PrintForm", , ,"UniqueOpeningOfTheCommonPrintingPlate");
 		Notify("AddTemplatePrintForm", Param)
 	EndDo;
 

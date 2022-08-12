@@ -186,31 +186,50 @@ EndProcedure
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
-	CurrentRow = ThisObject.Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
+	CurrentData = ThisObject.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	If Not ValueIsFilled(CurrentRow.PriceType) Then
-		CalculationSettings.Insert("ChangePriceType");
-		CalculationSettings.ChangePriceType = New Structure("Period, PriceType", CurrentDate(), ThisObject.PriceType);
+	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey);
+	CurrentData.Unit = UnitInfo.Unit;
+
+	PriceParameters = New Structure();
+	PriceParameters.Insert("ItemKey"      , CurrentData.ItemKey);
+	PriceParameters.Insert("RowPriceType" , CurrentData.PriceType);
+	PriceParameters.Insert("Unit"         , CurrentData.Unit);
+	PriceParameters.Insert("Period"       , CurrentDate());
+	PriceInfo = GetItemInfo.ItemPriceInfo(PriceParameters);
+	CurrentData.Price = PriceInfo.Price;
+	CurrentData.PriceType = PriceInfo.PriceType;
+	
+	BarcodesInfo = BarcodeServer.GetBarcodesByItemKey(CurrentData.ItemKey);
+	If BarcodesInfo.Count() Then
+		CurrentData.Barcode = BarcodesInfo[0];
+	Else
+		CurrentData.Barcode = "";
 	EndIf;
-	CalculationSettings.Insert("UpdatePrice");
-	CalculationSettings.UpdatePrice = New Structure("Period, PriceType", CurrentDate(), CurrentRow.PriceType);
-	CalculationSettings.Insert("UpdateBarcode");
 
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+//	CalculationSettings = New Structure();
+//	CalculationSettings.Insert("UpdateUnit");
+//	If Not ValueIsFilled(CurrentRow.PriceType) Then
+//		CalculationSettings.Insert("ChangePriceType");
+//		CalculationSettings.ChangePriceType = New Structure("Period, PriceType", CurrentDate(), ThisObject.PriceType);
+//	EndIf;
+//	CalculationSettings.Insert("UpdatePrice");
+//	CalculationSettings.UpdatePrice = New Structure("Period, PriceType", CurrentDate(), CurrentRow.PriceType);
+//	CalculationSettings.Insert("UpdateBarcode");
+//
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 
-	If ValueIsFilled(CurrentRow.Barcode) Then
+	If ValueIsFilled(CurrentData.Barcode) Then
 		If ValueIsFilled(ThisObject.BarcodeType) Then
-			CurrentRow.BarcodeType = ThisObject.BarcodeType;
+			CurrentData.BarcodeType = ThisObject.BarcodeType;
 		Else
-			CurrentRow.BarcodeType = "";
+			CurrentData.BarcodeType = "";
 		EndIf;
 	Else
-		CurrentRow.BarcodeType = "";
+		CurrentData.BarcodeType = "";
 	EndIf;
 
 EndProcedure

@@ -392,6 +392,7 @@
   <commonModules>CommonModule.RowIDInfoClientServer</commonModules>
   <commonModules>CommonModule.RowIDInfoServer</commonModules>
   <commonModules>CommonModule.RowIDInfoServerReuse</commonModules>
+  <commonModules>CommonModule.RowIDInfoPrivileged</commonModules>
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
@@ -414,7 +415,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.RowIDInfoPrivileged</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>

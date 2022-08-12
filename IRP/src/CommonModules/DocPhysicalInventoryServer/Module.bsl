@@ -90,7 +90,12 @@ Procedure FillItemList(Object, UpdateExpCount) Export
 		Row[CountName] = 0;
 	EndDo;
 	
-	StrFilter = New Structure("ItemKey, SerialLotNumber, Unit");
+	If Object.UseSerialLot Then
+		StrFilter = New Structure("ItemKey, SerialLotNumber, Unit");
+	Else
+		StrFilter = New Structure("ItemKey, Unit");
+	EndIf;
+	
 	For Each Row In SearchTable Do
 		FillPropertyValues(StrFilter, Row);
 		FindRow = Object.ItemList.FindRows(StrFilter);	

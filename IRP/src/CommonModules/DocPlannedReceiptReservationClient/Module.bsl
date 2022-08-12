@@ -119,11 +119,6 @@ Procedure ItemListItemKeyOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 
-	// #deprecated
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdateUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
-
 	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentRow.ItemKey);
 	CurrentRow.Unit = UnitInfo.Unit;
 EndProcedure
@@ -136,11 +131,6 @@ Procedure ItemListQuantityOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 
-	// #deprecated
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
-
 	CurrentRow.QuantityInBaseUnit = ModelServer_V2.ConvertQuantityToQuantityInBaseUnit(CurrentRow.ItemKey, CurrentRow.Unit, CurrentRow.Quantity);
 EndProcedure
 #EndRegion
@@ -152,11 +142,6 @@ Procedure ItemListUnitOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-
-	// #deprecated
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 
 	CurrentRow.QuantityInBaseUnit = ModelServer_V2.ConvertQuantityToQuantityInBaseUnit(CurrentRow.ItemKey, CurrentRow.Unit, CurrentRow.Quantity);
 EndProcedure

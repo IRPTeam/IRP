@@ -194,6 +194,10 @@ Procedure ItemListItemKeyOnChange(Item)
 	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey);
 	CurrentData.Unit = UnitInfo.Unit;
 
+	If Not ValueIsFilled(CurrentData.PriceType) Then
+		CurrentData.PriceType = ThisObject.PriceType;
+	EndIf;
+	
 	PriceParameters = New Structure();
 	PriceParameters.Insert("ItemKey"      , CurrentData.ItemKey);
 	PriceParameters.Insert("RowPriceType" , CurrentData.PriceType);
@@ -236,6 +240,10 @@ Procedure ItemListPriceTypeOnChange(Item)
 		Return;
 	EndIf;
 	
+	If Not ValueIsFilled(CurrentData.PriceType) Then
+		CurrentData.PriceType = ThisObject.PriceType;
+	EndIf;
+	
 	PriceParameters = New Structure();
 	PriceParameters.Insert("ItemKey"      , CurrentData.ItemKey);
 	PriceParameters.Insert("RowPriceType" , CurrentData.PriceType);
@@ -264,6 +272,10 @@ Procedure ItemListItemOnChange(Item)
 
 	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey);
 	CurrentData.Unit = UnitInfo.Unit;
+
+	If Not ValueIsFilled(CurrentData.PriceType) Then
+		CurrentData.PriceType = ThisObject.PriceType;
+	EndIf;
 
 	PriceParameters = New Structure();
 	PriceParameters.Insert("ItemKey"      , CurrentData.ItemKey);

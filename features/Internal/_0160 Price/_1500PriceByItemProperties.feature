@@ -180,7 +180,7 @@ Scenario: _150001 basic price entry by properties (including VAT)
 Scenario: _150002 basic price entry by items (including VAT)
 	Given I open hyperlink "e1cib/list/Document.PriceList"
 	And I click the button named "FormCreate"
-	* Filling in price list by item key
+	* Filling in price list by item
 		And I move to "Other" tab
 		And I input "Basic price" text in "Description" field
 		And I click Select button of "Price type" field
@@ -224,7 +224,13 @@ Scenario: _150002 basic price entry by items (including VAT)
 		| 'Boots'       |
 	And I select current line in "List" table
 	And I move to the next attribute
-	And I input "600,00" text in "Price" field of "ItemList" table
+	And I input "6000,00" text in "Price" field of "ItemList" table
+	And I select current line in "ItemList" table
+	And I click choice button of "Unit" attribute in "ItemList" table
+	And I go to line in "List" table
+		| 'Description'    |
+		| 'Boots (12 pcs)' |
+	And I select current line in "List" table	
 	And I finish line editing in "ItemList" table
 	And I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
@@ -234,6 +240,21 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I select current line in "List" table
 	And I move to the next attribute
 	And I input "400,00" text in "Price" field of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I click the button named "ItemListAdd"
+	And I click choice button of "Item" attribute in "ItemList" table
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Boots'       |
+	And I select current line in "List" table
+	And I move to the next attribute
+	And I input "700,00" text in "Price" field of "ItemList" table
+	And I select current line in "ItemList" table
+	And I click choice button of "Unit" attribute in "ItemList" table
+	And I go to line in "List" table
+		| 'Description'    |
+		| 'pcs' |
+	And I select current line in "List" table	
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPost"
 	And I delete "$$PriceListBasicPriceByItems150002$$" variable
@@ -454,7 +475,98 @@ Scenario: _150004 check the price calculation according to the specification (ba
 		And I close all client application windows
 
 
-Scenario: _150004 check the price calculation for the bandle (based on the properties price)
+Scenario: _1500041 check price calculation in the documents (price by item, unit, Add button)
+	* Unpost Basic Price list by item key
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I go to line in "List" table
+		| 'Description' | 'Number'                                          | 'Price list type'    |
+		| 'Basic price' | '$$NumberPriceListBasicPriceByItemKey016001$$'    | 'Price by item keys' |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I close all client application windows
+	* Price calculation in the Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And in the table "ItemList" I click "Add" button
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '36/18SD'  |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
+		* By pcs
+			And I activate "Price type" field in "ItemList" table
+			And I click choice button of "Price type" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Basic Price Types' |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity' |
+				| 'Boots' | '700,00' | '36/18SD'  | 'Basic Price Types' | '1,000'    |
+		* By box
+			And I activate "Unit" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of "Unit" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Boots (12 pcs)' |
+			And I select current line in "List" table
+			And "ItemList" table contains lines
+				| 'Item'  | 'Price'    | 'Item key' | 'Price type'        | 'Quantity' | 'Unit'           |
+				| 'Boots' | '6 000,00' | '36/18SD'  | 'Basic Price Types' | '1,000'    | 'Boots (12 pcs)' |
+			And I close all client application windows
+
+
+
+
+Scenario: _1500042 check price calculation in the documents (price by item, unit, scan barcode)
+	* Unpost Basic Price list by item key
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I go to line in "List" table
+		| 'Description' | 'Number'                                          | 'Price list type'    |
+		| 'Basic price' | '$$NumberPriceListBasicPriceByItemKey016001$$'    | 'Price by item keys' |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I close all client application windows
+	* Price calculation in the Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		* Filling partner and agreement
+			And I click Choice button of the field named "Partner"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Ferron BP'   |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'              |
+				| 'Basic Partner terms, TRY' |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+		* Add item by barcode
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "4820024700016" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "89089988989989" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Check
+			And "ItemList" table became equal
+				| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit'           | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' |
+				| '36/18SD'  | 'Basic Price Types' | 'Boots' | '1,000'    | 'pcs'            | '700,00'   | '18%' | '593,22'     | '700,00'       |
+				| '36/18SD'  | 'Basic Price Types' | 'Boots' | '1,000'    | 'Boots (12 pcs)' | '6 000,00' | '18%' | '5 084,75'   | '6 000,00'     |		
+			And I close all client application windows
+
+
+
+Scenario: _1500043 check the price calculation for the bandle (based on the properties price)
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
@@ -949,3 +1061,5 @@ Scenario: _150018 price calculation when change input price in the Price list (b
 			| 'Item'     | 'Input unit' | 'Size' | 'Color' | 'Input price' | 'Price'  |
 			| 'Trousers' | 'pcs'        | 'XS'   | 'Blue'  | '600,00'      | '600,00' |
 		And I close all client application windows
+
+		

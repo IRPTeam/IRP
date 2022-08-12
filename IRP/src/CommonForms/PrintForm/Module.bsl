@@ -2,11 +2,28 @@
 
 #Region FormEventHandlers
 
+// Print form config selection.
+// 
+// Parameters:
+//  Item - FormTable - Item
+//  RowSelected - String
+//  Field - FormField - Field
+//  StandardProcessing - Boolean - Standard processing
+&AtClient
+Procedure PrintFormConfigSelection(Item, RowSelected, Field, StandardProcessing)
+	//TODO testing
+	if Field.Name = "Presentation" OR Field.Name = "NameTemplate" Then
+		If Item.CurrentData <> Undefined and ValueIsFilled(Item.CurrentData.Ref) Then
+			StandardProcessing = False;
+			ShowValue(, Item.CurrentData.Ref);
+		EndIf;		
+	EndIf;
+EndProcedure
+
 &AtClient
 Procedure OnOpen(Cancel)
 	EditResultSwitch();
 EndProcedure
-
 
 // Notification processing.
 // 
@@ -93,9 +110,19 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Result = Parameters.Result;
 EndProcedure
 
+
 &AtClient
-Procedure LeftPanel(Command)
-	Items.PrintFormConfig.Visible = not Items.PrintFormConfig.Visible;
+Procedure Show(Command)
+	Items.PrintFormConfig.Visible = True;
+	Items.FormHide.Visible = True;
+	Items.FormShow.Visible = False;		
+EndProcedure
+
+&AtClient
+Procedure Hide(Command)
+	Items.PrintFormConfig.Visible = False;
+	Items.FormHide.Visible = False;
+	Items.FormShow.Visible = True;		
 EndProcedure
 
 #EndRegion

@@ -1246,11 +1246,11 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <templates uuid="e024af3e-e1bf-4389-8933-2d13e00e695e">
-    <name>Template</name>
+  <templates uuid="a2d740ee-a741-49eb-902b-2349d247642c">
+    <name>SalesOrderPrint</name>
     <synonym>
       <key>en</key>
-      <value>Template</value>
+      <value>Sales order print</value>
     </synonym>
   </templates>
   <commands uuid="34291d62-91e3-4f95-8ce2-3de95d4efd57">

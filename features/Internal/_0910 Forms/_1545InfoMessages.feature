@@ -1418,5 +1418,24 @@ Scenario: _015456 notification when trying to post a Sales order without filling
 		Then I wait that in user messages the "Field [Procurement method] is empty." substring will appear in 10 seconds
 		And I close all client application windows
 
+Scenario: __015457 message when trying to create Price list without unit
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PriceList"
+	And I click the button named "FormCreate"
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Dress'       |
+	And I select current line in "List" table
+	And I activate field named "ItemListUnit" in "ItemList" table
+	And I input "" text in the field named "ItemListUnit" of "ItemList" table
+	And I finish line editing in "ItemList" table
+	And I click "Post" button
+	Then I wait that in user messages the 'The "Unit" is required on line 1 of the "Item list" list.' substring will appear in 10 seconds
+	And I close all client application windows
+		
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

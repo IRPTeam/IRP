@@ -78,6 +78,7 @@ Function GetAdditionalQueryParameters(Ref)
 	PricesByProperties.Columns.Add("PriceList"  , New TypeDescription("DocumentRef.PriceList"));
 	PricesByProperties.Columns.Add("PriceKey"   , New TypeDescription("CatalogRef.PriceKeys"));
 	PricesByProperties.Columns.Add("Item"       , New TypeDescription("CatalogRef.Items"));
+	PricesByProperties.Columns.Add("Unit"       , New TypeDescription("CatalogRef.Units"));
 	PricesByProperties.Columns.Add("InputUnit"  , New TypeDescription("CatalogRef.Units"));
 	PricesByProperties.Columns.Add("InputPrice" , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
 	PricesByProperties.Columns.Add("Price"      , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
@@ -109,6 +110,7 @@ Function PricesByItemKeys()
 	|	PriceListItemKeyList.Ref.Date AS Period,
 	|	PriceListItemKeyList.Ref.PriceType AS PriceType,
 	|	PriceListItemKeyList.ItemKey,
+	|	PriceListItemKeyList.Unit,
 	|	PriceListItemKeyList.InputUnit,
 	|	PriceListItemKeyList.InputPrice,
 	|	PriceListItemKeyList.Price
@@ -125,6 +127,7 @@ Function PricesByItems()
 	|	PriceListItemList.Ref.Date AS Period,
 	|	PriceListItemList.Ref.PriceType AS PriceType,
 	|	PriceListItemList.Item,
+	|	PriceListItemList.Unit,
 	|	PriceListItemList.InputUnit,
 	|	PriceListItemList.InputPrice,
 	|	PriceListItemList.Price
@@ -141,6 +144,7 @@ Function PricesByProperties()
 	|	PricesByProperties.PriceList,
 	|	PricesByProperties.PriceKey,
 	|	PricesByProperties.Item,
+	|	PricesByProperties.Unit,
 	|	PricesByProperties.InputUnit,
 	|	PricesByProperties.InputPrice,
 	|	PricesByProperties.Price
@@ -153,6 +157,7 @@ Function PricesByProperties()
 	|	tmp.PriceList,
 	|	tmp.PriceKey,
 	|	tmp.Item,
+	|	tmp.Unit,
 	|	tmp.InputUnit,
 	|	tmp.InputPrice,
 	|	tmp.Price,

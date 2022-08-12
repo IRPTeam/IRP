@@ -108,9 +108,9 @@ Scenario: _033502 order creation discounted by price Discount Price 1 (price inc
 		And I select current line in "Offers" table
 		And I click "OK" button
 	And "ItemList" table contains lines
-		| 'Item'  | 'Price'  | 'Item key' | 'Store'    | 'Quantity'     | 'Offers amount' | 'Unit'           | 'Total amount'    |
-		| 'Dress' | '520,00' | 'XS/Blue'  | 'Store 01' | '5,000' | '130,00'        | 'pcs'            | '2 470,00'        |
-		| 'Boots' | '8 400,00' | '36/18SD'  | 'Store 01' | '2,000' | '2 400,00'    | 'Boots (12 pcs)' | '14 400,00'       |
+		| 'Item'  | 'Price'    | 'Item key' | 'Store'    | 'Quantity' | 'Offers amount' | 'Unit'           | 'Total amount' |
+		| 'Dress' | '520,00'   | 'XS/Blue'  | 'Store 01' | '5,000'    | '130,00'        | 'pcs'            | '2 470,00'     |
+		| 'Boots' | '8 400,00' | '36/18SD'  | 'Store 01' | '2,000'    | '2 400,00'      | 'Boots (12 pcs)' | '14 400,00'    |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines

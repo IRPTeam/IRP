@@ -71,6 +71,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
+	PaymentByCheque   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -97,7 +98,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 			|PaymentList.PaymentType,
 			|PaymentList.PaymentTerminal,
 			|PaymentList.BankTerm";
-		EndIf;		
+		EndIf;	
+	ElsIf TransactionType = PaymentByCheque Then
+		StrByType = "
+		|PaymentList.PlaningTransactionBasis";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();
@@ -134,6 +138,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 		ArrayTypes = New Array();
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	
+	ElsIf Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque") Then
+		
+		ArrayTypes = New Array();
+		ArrayTypes.Add(Type("DocumentRef.ChequeBondTransactionItem"));
+		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	
 	Else
 		ArrayTypes = New Array();
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));

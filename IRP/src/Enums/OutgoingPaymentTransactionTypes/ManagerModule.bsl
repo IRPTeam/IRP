@@ -8,6 +8,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 
 	If Parameters.Filter.Property("Ref") And TypeOf(Parameters.Filter.Ref) = Type("DocumentRef.BankPayment") Then
 		ChoiceData.Add(Enums.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS);
+		ChoiceData.Add(Enums.OutgoingPaymentTransactionTypes.PaymentByCheque);
 	EndIf;
 
 	If FOServer.IsUseCashTransaction() Then

@@ -107,8 +107,23 @@ Procedure PriceKeyListItemOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	CurrentData.InputUnit = GetInputUnit(CurrentData.Item);
+	Unit = GetInputUnit(CurrentData.Item);
+	CurrentData.InputUnit = Unit;
+	CurrentData.Unit = Unit;
 	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
+EndProcedure
+
+&AtServer
+Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
+	RowIndex = 0;
+	For Each Row In ThisObject.PriceKeyList Do
+		If Not ValueIsFilled(Row.Unit) Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, "Unit"), 
+					"ItemList[" + Format(RowIndex,"NZ=0; NG=0;") + "].Unit", ThisObject);
+		EndIf;
+		RowIndex = RowIndex + 1;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -164,7 +179,9 @@ Procedure ItemKeyListItemOnChange(Item)
 	CurrentItemKey = CurrentData.ItemKey;
 	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
 	If CurrentItemKey <> CurrentData.ItemKey Then
-		CurrentData.InputUnit = GetInputUnit(CurrentData.ItemKey);
+		Unit = GetInputUnit(CurrentData.ItemKey);
+		CurrentData.InputUnit = Unit;
+		CurrentData.Unit = Unit;
 		CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
 	EndIf;
 EndProcedure
@@ -175,7 +192,9 @@ Procedure ItemKeyListItemKeyOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	CurrentData.InputUnit = GetInputUnit(CurrentData.ItemKey);
+	Unit = GetInputUnit(CurrentData.ItemKey);
+	CurrentData.InputUnit = Unit;
+	CurrentData.Unit = Unit;
 	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
 EndProcedure
 
@@ -217,7 +236,9 @@ Procedure ItemListItemOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	CurrentData.InputUnit = GetInputUnit(CurrentData.Item);
+	Unit = GetInputUnit(CurrentData.Item);
+	CurrentData.InputUnit = Unit;
+	CurrentData.Unit = Unit;
 	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);		
 EndProcedure
 
@@ -432,6 +453,7 @@ Function GetDataPrice()
 	TableOfResult.Columns.Add("Price");
 	TableOfResult.Columns.Add("Key");
 	TableOfResult.Columns.Add("InputUnit");
+	TableOfResult.Columns.Add("Unit");
 	TableOfResult.Columns.Add("InputPrice");
 	
 	TableOfKeys = Object.DataSet.Unload();
@@ -439,12 +461,12 @@ Function GetDataPrice()
 
 	For Each Row In TableOfKeys Do
 		For Each RowPrice In Object.DataPrice.Unload(New Structure("Key", Row.Key), 
-			"Item, Price, Key, InputUnit, InputPrice") Do
+			"Item, Price, Key, InputUnit, Unit, InputPrice") Do
 			NewRow = TableOfResult.Add();
 			FillPropertyValues(NewRow, RowPrice);
 		EndDo;
 	EndDo;
-	TableOfResult.GroupBy("Item, Price, Key, InputUnit, InputPrice");
+	TableOfResult.GroupBy("Item, Price, Key, InputUnit, Unit, InputPrice");
 	Return TableOfResult;
 EndFunction
 
@@ -594,6 +616,7 @@ Procedure DrawFormTablePriceKeyList()
 		NewRow.Price      = Row.Price;
 		NewRow.Item       = Row.Item;
 		NewRow.InputUnit  = Row.InputUnit;
+		NewRow.Unit       = Row.Unit;
 		NewRow.InputPrice = Row.InputPrice;
 		
 		For Each Column In SavedDataStructure.Fields.Table.Columns Do
@@ -631,6 +654,7 @@ Procedure SaveTablePriceKeyList(Cancel, CurrentObject, WriteParameters)
 		NewRowPrice.Price      = Row.Price;
 		NewRowPrice.Item       = Row.Item;
 		NewRowPrice.InputUnit  = Row.InputUnit;
+		NewRowPrice.Unit       = Row.Unit;
 		NewRowPrice.InputPrice = Row.InputPrice;
 
 		If SavedDataStructure.Fields.Table.Columns.Count() <= 1 Then

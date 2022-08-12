@@ -35,7 +35,36 @@ Scenario: _016000 preparation
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When  Create catalog Currencies objects
+		When Create catalog Companies objects (Main company)
+		When Create catalog Stores objects
+		When Create catalog IntegrationSettings objects
+		When Create information register Barcodes records
 		When update ItemKeys
+		When Create catalog Partners objects (Ferron BP)
+		When Create catalog Companies objects (partners company)
+		When Create information register PartnerSegments records
+		When Create catalog PartnerSegments objects
+		When Create catalog Agreements objects
+		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog TaxRates objects
+		When Create catalog Taxes objects	
+		When Create information register TaxSettings records
+		When Create catalog IntegrationSettings objects
+		When Create information register CurrencyRates records
+		When Create catalog BusinessUnits objects
+		When Create catalog ExpenseAndRevenueTypes objects
+		When update ItemKeys
+		When Create catalog Partners objects
+	* Add plugin for taxes calculation
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "TaxCalculateVAT_TR" |
+			When add Plugin for tax calculation
+		When Create information register Taxes records (VAT)
+		When Create catalog Partners objects (Kalipso)
+	* Tax settings
+		When filling in Tax settings for company
 
 Scenario: _0160001 check preparation
 	When check preparation
@@ -304,6 +333,29 @@ Scenario: _016001 base price fill (incl. VAT)
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemKeyList" table
 		And I input "3 000,00" text in "Price" field of "ItemKeyList" table
+		And I finish line editing in "ItemKeyList" table
+
+		And I click the button named "ItemKeyListAdd"
+		And I click choice button of "Item" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'  |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemKeyList" table
+		And I click choice button of "Item key" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '36/18SD'  |
+		And I select current line in "List" table
+		And I activate "Unit" field in "ItemKeyList" table
+		And I select current line in "ItemKeyList" table
+		And I click choice button of "Unit" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Boots (12 pcs)' |
+		And I select current line in "List" table		
+		And I activate "Price" field in "ItemKeyList" table
+		And I input "7 000,00" text in "Price" field of "ItemKeyList" table
 		And I finish line editing in "ItemKeyList" table
 	* Posting document
 		And I click the button named "FormPost"
@@ -680,6 +732,12 @@ Scenario: _016010 check dependent prices calculation
 			| Code |
 			| TRY  |
 		And I select current line in "List" table
+		And I click Choice button of the field named "Source"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Forex Buying' |
+		And I select current line in "List" table	
+		And I click "Save" button
 	* Adding external processing to the price type and filling in the settings
 		And I click Select button of "Plugins" field
 		And I go to line in "List" table
@@ -940,7 +998,8 @@ Scenario: _016011 check price calculation in the documents
 			And "ItemList" table contains lines
 			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity'     |
 			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price New' | '1,000' |
-		
+
+
 Scenario: _016012 price calculation when change input price in the Price list (by item key)	
 	* Opening  price list
 		Given I open hyperlink "e1cib/list/Document.PriceList"
@@ -1010,7 +1069,91 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 			| '1' | '600,000'     | 'Dress' | 'XL/Green' | 'pcs'        | '600,00' |
 		And I close all client application windows
 		
+
+Scenario: _016013 check price calculation in the documents (price by unit, Add button)
+		And I close all client application windows
+	* Price calculation in the Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And in the table "ItemList" I click "Add" button
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| '36/18SD'  |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1,000" text in "Quantity" field of "ItemList" table
+		* By pcs
+			And I activate "Price type" field in "ItemList" table
+			And I click choice button of "Price type" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'       |
+				| 'Basic Price Types' |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And "ItemList" table contains lines
+				| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Quantity' |
+				| 'Boots' | '700,00' | '36/18SD'  | 'Basic Price Types' | '1,000'    |
+		* By box
+			And I activate "Unit" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of "Unit" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Boots (12 pcs)' |
+			And I select current line in "List" table
+			And "ItemList" table contains lines
+				| 'Item'  | 'Price'    | 'Item key' | 'Price type'        | 'Quantity' | 'Unit'           |
+				| 'Boots' | '7 000,00' | '36/18SD'  | 'Basic Price Types' | '1,000'    | 'Boots (12 pcs)' |
+			And I close all client application windows
+
+
+Scenario: _016014 check price calculation in the documents (price by unit, scan barcode)
+		And I close all client application windows
+	* Price calculation in the Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		* Filling partner and agreement
+			And I click Choice button of the field named "Partner"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Ferron BP'   |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'              |
+				| 'Basic Partner terms, TRY' |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+		* Add item by barcode
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "4820024700016" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			And I input "89089988989989" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Check
+			And "ItemList" table became equal
+				| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit'           | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' |
+				| '36/18SD'  | 'Basic Price Types' | 'Boots' | '1,000'    | 'pcs'            | '700,00'   | '18%' | '593,22'     | '700,00'       |
+				| '36/18SD'  | 'Basic Price Types' | 'Boots' | '1,000'    | 'Boots (12 pcs)' | '7 000,00' | '18%' | '5 932,20'   | '7 000,00'     |		
+			And I close all client application windows
+			
+			
+						
+			
+			
+						
 		
+			
+						
+						
 		
 		
 				

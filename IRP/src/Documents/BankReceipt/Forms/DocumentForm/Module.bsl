@@ -75,6 +75,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
 	TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	PaymentFromCustomerByPOS = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS");
+	ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -109,6 +110,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.POSAccount,
 		|PaymentList.CommissionIsSeparate";
+	ElsIf TransactionType = ReceiptByCheque Then
+		StrByType = "
+		|PaymentList.PlaningTransactionBasis";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();
@@ -132,8 +136,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Or Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
 		BasedOnCashTransferOrder = False;
 		For Each Row In Object.PaymentList Do
-			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") And ValueIsFilled(
-				Row.PlaningTransactionBasis) Then
+			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
+				And ValueIsFilled(Row.PlaningTransactionBasis) Then
 				BasedOnCashTransferOrder = True;
 				Break;
 			EndIf;
@@ -150,6 +154,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 			ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
 		EndIf;
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	
+	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque") Then
+		ArrayTypes = New Array();
+		ArrayTypes.Add(Type("DocumentRef.ChequeBondTransactionItem"));
+		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+		
 	Else
 		ArrayTypes = New Array();
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));

@@ -778,3 +778,11 @@ Scenario: Open object form "T1050 Accounting quantities"
 	If the warning is displayed then
 		Then I raise "Failed to open accounting register form T1050 Accounting quantities" exception
 	And I close current window
+	
+
+Scenario: Open information register form "ChequeBondStatuses" 
+
+	Given I open "ChequeBondStatuses" information register default form 
+	If the warning is displayed then
+		Then I raise "Failed to open information register form  ChequeBondStatuses" exception
+	And I close current window

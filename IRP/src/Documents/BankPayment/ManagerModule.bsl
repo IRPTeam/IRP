@@ -568,11 +568,15 @@ Function R3035T_CashPlanning()
 		   |	CASE
 		   |		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.OutgoingPaymentOrder)
 		   |			THEN PaymentList.Partner
+		   |		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.ChequeBondTransactionItem)
+		   |			THEN PaymentList.PlaningTransactionBasis.Partner
 		   |		ELSE VALUE(Catalog.Partners.EmptyRef)
 		   |	END AS Partner,
 		   |	CASE
 		   |		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.OutgoingPaymentOrder)
 		   |			THEN PaymentList.Payee
+		   |		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.ChequeBondTransactionItem)
+		   |			THEN PaymentList.PlaningTransactionBasis.Partner
 		   |		ELSE VALUE(Catalog.Companies.EmptyRef)
 		   |	END AS LegalName,
 		   |	PaymentList.FinancialMovementType,

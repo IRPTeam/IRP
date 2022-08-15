@@ -27,9 +27,9 @@ Procedure SpecialOffersEditFinish_ForDocument(OffersInfo, Object, Form, AddInfo 
 		Return;
 	EndIf;
 	RecalculateTaxAndOffers(Object, Form);
-	CalculationStringsClientServer.CalculateAndLoadOffers_ForDocument(Object, OffersInfo.OffersAddress);
+	OffersClientServer.CalculateAndLoadOffers_ForDocument(Object, OffersInfo.OffersAddress);
 
-	CalculationStringsClientServer.RecalculateAppliedOffers_ForRow(Object);
+	OffersClientServer.RecalculateAppliedOffers_ForRow(Object);
 	
 	ViewClient_V2.OffersOnChange(Object, Form);
 	
@@ -58,7 +58,8 @@ Procedure SpecialOffersEditFinish_ForRow(OffersInfo, Object, Form, AddInfo = Und
 	If OffersInfo = Undefined Then
 		Return;
 	EndIf;
-	CalculationStringsClientServer.CalculateAndLoadOffers_ForRow(Object, OffersInfo.OffersAddress, OffersInfo.ItemListRowKey);
+	
+	OffersClientServer.CalculateAndLoadOffers_ForRow(Object, OffersInfo.OffersAddress, OffersInfo.ItemListRowKey);
 	
 	ViewClient_V2.OffersOnChange(Object, Form);
 	

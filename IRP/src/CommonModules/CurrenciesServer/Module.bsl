@@ -340,7 +340,7 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	EmptyCurrenciesTable.Columns.Add("Amount"          , Columns.Amount.Type);
 
 	
-	RatePeriod    = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.Ref, Parameters.Date);
+	RatePeriod    = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Parameters.Ref, Parameters.Date);
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.Agreement);
 	
 	// Agreement currency

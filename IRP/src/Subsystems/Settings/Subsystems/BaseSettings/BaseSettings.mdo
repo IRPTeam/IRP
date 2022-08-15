@@ -9,5 +9,6 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.ConfigurationMetadata</content>
   <content>CommonCommand.EditConstants</content>
+  <content>DataProcessor.SystemSettings</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

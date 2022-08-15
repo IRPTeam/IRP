@@ -91,7 +91,7 @@ Procedure CalculateVolume(Object) Export
 	Object.Volume = Object.Length * Object.Width * Object.Height;
 EndProcedure
 
-Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "") Export
+Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", GetOnlyNumbers = False) Export
 
 	RejectSymbols = New Array;
 	For Index = 1 To StrLen(ReturnIfOnlyThisSymbolsPresent) Do
@@ -105,7 +105,7 @@ Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "") Ex
 		CharCode = CharCode(String, Index);
 		If CharCode >= 48 And CharCode <= 57 Then
 			NumberPart.Add(Symbol);
-		ElsIf RejectSymbols.Find(Symbol) = Undefined Then
+		ElsIf RejectSymbols.Find(Symbol) = Undefined And Not GetOnlyNumbers Then
 			NumberPart.Clear();
 			Break;
 		EndIf;

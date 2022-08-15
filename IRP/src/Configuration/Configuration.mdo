@@ -392,7 +392,6 @@
   <commonModules>CommonModule.PostingServer</commonModules>
   <commonModules>CommonModule.RowIDInfoClient</commonModules>
   <commonModules>CommonModule.RowIDInfoClientServer</commonModules>
-  <commonModules>CommonModule.RowIDInfoPrivileged</commonModules>
   <commonModules>CommonModule.RowIDInfoServer</commonModules>
   <commonModules>CommonModule.RowIDInfoServerReuse</commonModules>
   <commonModules>CommonModule.RowIDInfoPrivileged</commonModules>

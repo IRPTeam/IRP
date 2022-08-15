@@ -69,6 +69,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create information register TaxSettings (Sales tax)
 		When Create information register Taxes records (Sales tax)
 		When Create catalog RetailCustomers objects (check POS)
+		When Create catalog UserGroups objects
 	* Create payment terminal
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTerminals"
 		And I click the button named "FormCreate"
@@ -4373,8 +4374,15 @@ Scenario: _0154199 copy line in Payment tab in the Retail sales receipt
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Bank term'    | 'Account'           | 'Percent' |
 			| '1' | '100,33' | '1,00'       | 'Card 01'      | 'Payment terminal 01' | 'Bank term 01' | 'Bank account, TRY' | '1,00'    |	
 		And I close all client application windows		
+			
+		
+				
+				
+
+		
 				
 		
+						
 				
 
 

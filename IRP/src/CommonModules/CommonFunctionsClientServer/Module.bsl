@@ -136,3 +136,19 @@ Function Regex(String, Facet) Export
 EndFunction
 
 #EndRegion
+
+Function GetSliceLastDateByRefAndDate(Ref, Date) Export
+	If Not ValueIsFilled(Ref) Then
+		If Not ValueIsFilled(Date) Then
+			Return CurrentDate();
+		EndIf;
+		If BegOfDay(Date) = BegOfDay(CurrentDate()) Then
+			Return EndOfDay(Date);
+		Else
+			Return Date;
+		EndIf;
+	Else
+		Return Date;
+	EndIf;
+EndFunction
+

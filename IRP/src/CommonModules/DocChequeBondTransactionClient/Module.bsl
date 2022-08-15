@@ -105,73 +105,7 @@ EndProcedure
 
 Procedure ChequeBondsChequeOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ChequeBondsChequeOnChange(Object, Form, CurrentData);
-	
-	//Status, Amount, NewStatus, Currency
-	//FillPropertyValues(CurrentData, DocChequeBondTransactionServer.GetChequeInfo(Object.Ref, CurrentData.Cheque));
-	// CleanPaymentList()
 EndProcedure
-
-//Procedure CleanPaymentList(Object, Form) Export
-//	CurrentData = Form.Items.ChequeBonds.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	
-//	DependentLines = Object.PaymentList.FindRows(New Structure("Key", CurrentData.Key));
-//	
-//	If CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement).Type = PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
-//		For Each DependentLine In DependentLines Do
-//			Object.PaymentList.Delete(DependentLine);
-//			Return;
-//		EndDo;
-//	EndIf;
-//	
-//	ChequeType = ServiceSystemServer.GetObjectAttribute(CurrentData.Cheque, "Type");
-//	If ChequeType = PredefinedValue("Enum.ChequeBondTypes.PartnerCheque") Then
-//		ColumnName = "PartnerArBasisDocument";
-//	ElsIf ChequeType = PredefinedValue("Enum.ChequeBondTypes.OwnCheque") Then
-//		ColumnName = "PartnerApBasisDocument"; 
-//	Else
-//		For Each DependentLine In DependentLines Do
-//			Object.PaymentList.Delete(DependentLine);
-//			Return;
-//		EndDo;
-//	EndIf;
-//	
-//	ControlDocuments = New Array();
-//	For Each DependentLine In DependentLines Do
-//		If ValueIsFilled(DependentLine[ColumnName]) Then
-//			ControlDocuments.Add(DependentLine[ColumnName]);
-//		Else
-//			Object.PaymentList.Delete(DependentLine);
-//		EndIf;
-//	EndDo;
-//	
-//	If ControlDocuments.Count() = 0 Then
-//		Return;
-//	EndIf;
-//	
-//	ControlStructure = New Structure(, );
-//	ControlStructure.Insert("Company", Object.Company);
-//	ControlStructure.Insert("Partner", Form.CurrentPartner);
-//	ControlStructure.Insert("LegalName", Form.CurrentLegalName);
-//	ControlStructure.Insert("Agreement", Form.CurrentAgreement);
-//	ControlStructure.Insert("ControlDocument", ControlDocuments);
-//	ControlStructure.Insert("EndDate", Object.Date - 1);
-//	ControlStructure.Insert("UseCurrencyFilter", ValueIsFilled(Object.Currency));
-//	ControlStructure.Insert("Currency", Object.Currency);
-//	
-//	InvalidDocuments = DocChequeBondTransactionServer.InvalidDocuments(ControlStructure);
-//	
-//	For Each DependentLine In DependentLines Do
-//		If InvalidDocuments.Find(DependentLine[ColumnName]) = Undefined Then
-//			Continue;
-//		Else
-//			Object.PaymentList.Delete(DependentLine);
-//		EndIf;
-//	EndDo;
-//
-//EndProcedure
 
 Procedure ChequeBondsChequeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	StandardProcessing = False;

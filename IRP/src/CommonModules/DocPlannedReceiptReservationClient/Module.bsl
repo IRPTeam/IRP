@@ -91,9 +91,13 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 		CurrentRow.ItemKey = Undefined;
 	EndIf;
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	// #depreacted
+//	CalculationSettings = New Structure();
+//	CalculationSettings.Insert("UpdateUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+
+	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentRow.ItemKey);
+	CurrentRow.Unit = UnitInfo.Unit;
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -115,9 +119,8 @@ Procedure ItemListItemKeyOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentRow.ItemKey);
+	CurrentRow.Unit = UnitInfo.Unit;
 EndProcedure
 #EndRegion
 
@@ -128,9 +131,7 @@ Procedure ItemListQuantityOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	CurrentRow.QuantityInBaseUnit = ModelServer_V2.ConvertQuantityToQuantityInBaseUnit(CurrentRow.ItemKey, CurrentRow.Unit, CurrentRow.Quantity);
 EndProcedure
 #EndRegion
 
@@ -142,9 +143,7 @@ Procedure ItemListUnitOnChange(Object, Form, Item, AddInfo = Undefined) Export
 		Return;
 	EndIf;
 
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	CurrentRow.QuantityInBaseUnit = ModelServer_V2.ConvertQuantityToQuantityInBaseUnit(CurrentRow.ItemKey, CurrentRow.Unit, CurrentRow.Quantity);
 EndProcedure
 
 #EndRegion

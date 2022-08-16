@@ -88,15 +88,18 @@ EndFunction
 
 Function CreateDocument(Company, Branch, Workstation) Export
 	FiscalHardware = GetWorkstationFiscalHardware(Workstation);
+	
+	OpeningDateTime = CommonFunctionsServer.GetCurrentSessionDate();
+	
 	FillingValues = New Structure();
-	FillingValues.Insert("Date"           , CommonFunctionsServer.GetCurrentSessionDate());
 	FillingValues.Insert("Company"        , Company);
 	FillingValues.Insert("Branch"         , Branch);
 	FillingValues.Insert("FiscalHardware" , FiscalHardware);
-	FillingValues.Insert("OpeningDate"    , FillingValues.Date);
+	FillingValues.Insert("OpeningDate"    , OpeningDateTime);
 	FillingValues.Insert("Status"         , Enums.ConsolidatedRetailSalesStatuses.Open);
 	
 	Doc = Documents.ConsolidatedRetailSales.CreateDocument();
+	Doc.Date = OpeningDateTime;
 	Doc.Fill(FillingValues);
 	Doc.Write(DocumentWriteMode.Posting);
 	Return Doc.Ref;
@@ -125,7 +128,7 @@ Function GetWorkstationFiscalHardware(Workstation)
 	EndDo;
 	
 	If EnabledHardwares.Count() <> 1 Then
-		Raise StrTemplate("Workstation have hardvare %1 enabled hardware, can not separate fiscal hardvare from other",
+		Raise StrTemplate("Workstation have %1 enabled hardware, can not separate fiscal hardvare from other",
 			EnabledHardwares.Count());
 	EndIf;
 	Return EnabledHardwares[0];

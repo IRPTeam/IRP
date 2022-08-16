@@ -550,6 +550,7 @@ Procedure NewTransaction()
 	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
 	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 	EnabledPaymentButton();
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer

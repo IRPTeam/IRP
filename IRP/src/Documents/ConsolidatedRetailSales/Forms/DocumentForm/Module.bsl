@@ -49,8 +49,19 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Return;
+	Form.RetailSalesReceipts.Parameters.SetParameterValue("ConsolidatedRetailSales", Object.Ref);
 EndProcedure
+
+&AtClient
+Procedure RetailSalesReceiptsSelection(Item, RowSelected, Field, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Item.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	OpenForm("Document.RetailSalesReceipt.ObjectForm", New Structure("Key", CurrentData.Ref));
+EndProcedure
+
 
 #EndRegion
 

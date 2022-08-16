@@ -3447,6 +3447,57 @@
         <items xsi:type="form:FormGroup">
           <name>PageSession</name>
           <id>1074</id>
+          <items xsi:type="form:FormField">
+            <name>ConsolidatedRetailSalesRef</name>
+            <id>1082</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>ConsolidatedRetailSalesRef</segments>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <extendedTooltip>
+              <name>ConsolidatedRetailSalesRefExtendedTooltip</name>
+              <id>1084</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ConsolidatedRetailSalesRefContextMenu</name>
+              <id>1083</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
+            </extInfo>
+          </items>
           <items xsi:type="form:Button">
             <name>OpenSession</name>
             <id>1076</id>
@@ -4969,10 +5020,6 @@
   </attributes>
   <attributes>
     <name>ConsolidatedRetailSalesRef</name>
-    <title>
-      <key>en</key>
-      <value>Consolidated retail sales ref</value>
-    </title>
     <id>178</id>
     <valueType>
       <types>DocumentRef.ConsolidatedRetailSales</types>

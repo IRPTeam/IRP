@@ -23,3 +23,15 @@ EndProcedure
 Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
+
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If TypeOf(FillingData) = Type("Structure")  Then
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+		Filling_BasedOn(FillingData);
+	EndIf;
+EndProcedure
+
+Procedure Filling_BasedOn(FillingData)
+	FillPropertyValues(ThisObject, FillingData);
+EndProcedure
+

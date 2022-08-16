@@ -7297,6 +7297,7 @@
         <name>UnlockRetailSales</name>
       </handler>
     </action>
+    <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

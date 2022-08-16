@@ -5035,6 +5035,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
   </attributes>
   <formCommands>
     <name>qPayment</name>
@@ -5370,6 +5371,7 @@ person</value>
         <name>OpenSession</name>
       </handler>
     </action>
+    <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -5387,6 +5389,7 @@ person</value>
         <name>CloseSession</name>
       </handler>
     </action>
+    <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -5404,6 +5407,7 @@ person</value>
         <name>CancelSession</name>
       </handler>
     </action>
+    <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

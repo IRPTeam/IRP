@@ -37,6 +37,10 @@ Function IsUseCashTransaction() Export
 	Return GetFunctionalOption("UseCashTransaction");
 EndFunction
 
+Function IsUseConsolidatedRetailSales() Export
+	Return GetFunctionalOption("UseConsolidatedRetailSales");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

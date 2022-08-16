@@ -59,6 +59,9 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 	If RequiredParameters.Find("ConnectedAddDataProc") <> Undefined Then
 		SessionParameters.ConnectedAddDataProc = New FixedStructure();
 	EndIf;
+	If RequiredParameters.Find("RunBackgroundJobInDebugMode") <> Undefined Then
+		SessionParameters.RunBackgroundJobInDebugMode = False;
+	EndIf
 EndProcedure
 
 Function GetSessionParameter(ParameterName) Export

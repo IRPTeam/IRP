@@ -163,7 +163,7 @@ Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 	|	InformationRegister.CompanyLedgerTypes.SliceLast(&Period, Company = &Company) AS CompanyLedgerTypesSliceLast
 	|WHERE
 	|	CompanyLedgerTypesSliceLast.Use";
-	Period = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Ref, Date);
+	Period = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Ref, Date);
 	Query.SetParameter("Period" , Period);
 	Query.SetParameter("Company", Company);
 	QueryResult = Query.Execute();
@@ -224,8 +224,7 @@ EndFunction
 #Region Accounts
 
 Function GetAccountParameters(Parameters) Export
-	Period = 
-	CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.ObjectData.Ref, Parameters.ObjectData.Date);
+	Period = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Parameters.ObjectData.Ref, Parameters.ObjectData.Date);
 	AccountParameters = New Structure();
 	AccountParameters.Insert("Period", Period);
 	AccountParameters.Insert("Company", Parameters.ObjectData.Company);
@@ -578,7 +577,7 @@ EndFunction
 #EndRegion
 
 Procedure UpdateAccountingTables(Object, MainTableName, Filter_LedgerType = Undefined, IgnoreFixed = False) Export
-	Period = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
+	Period = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	LedgerTypes = GetLedgerTypesByCompany(Object.Ref, Period, Object.Company);
 	
 	OperationsByLedgerType = New Array();

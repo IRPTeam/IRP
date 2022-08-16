@@ -30,34 +30,68 @@ Procedure GoodsInTransitIncomingRefreshRequestProcessingAtServer()
 		Return;
 	EndIf;
 	
-	Query = New Query;
-	Query.Text =
-		"SELECT
-		|	R4031B_GoodsInTransitIncomingBalance.Basis AS Basis,
-		|	R4031B_GoodsInTransitIncomingBalance.QuantityBalance AS Quantity,
-		|	TM1010B_RowIDMovementsBalance.RowID AS RowID,
-		|	TM1010B_RowIDMovementsBalance.Step AS CurrentStep,
-		|	TM1010B_RowIDMovementsBalance.RowRef AS RowRef
-		|FROM
-		|	AccumulationRegister.R4031B_GoodsInTransitIncoming.Balance(, ItemKey = &ItemKey
-		|	AND CASE
-		|		WHEN &EmptyStore
-		|			THEN TRUE
-		|		ELSE Store = &Store
-		|	END) AS R4031B_GoodsInTransitIncomingBalance
-		|		LEFT JOIN AccumulationRegister.TM1010B_RowIDMovements.Balance AS TM1010B_RowIDMovementsBalance
-		|		ON (R4031B_GoodsInTransitIncomingBalance.Basis = TM1010B_RowIDMovementsBalance.Basis
-		|		AND R4031B_GoodsInTransitIncomingBalance.ItemKey = TM1010B_RowIDMovementsBalance.RowRef.ItemKey
-		|		AND R4031B_GoodsInTransitIncomingBalance.Store = TM1010B_RowIDMovementsBalance.RowRef.StoreReceiver
-		|		AND TM1010B_RowIDMovementsBalance.Step = VALUE(Catalog.MovementRules.GR))
-		|WHERE
-		|	R4031B_GoodsInTransitIncomingBalance.QuantityBalance > 0";
+	Query = New Query();
+	Query.Text = 
+	"SELECT DISTINCT
+	|	Incoming.Basis.Company AS Company,
+	|	Incoming.Basis.Branch AS Branch,
+	|	ISNULL(Incoming.Basis.Partner, VALUE(Catalog.Partners.EmptyRef)) AS Partner,
+	|	ISNULL(Incoming.Basis.LegalName, VALUE(Catalog.Companies.EmptyRef)) AS LegalName
+	|FROM
+	|	AccumulationRegister.R4031B_GoodsInTransitIncoming.Balance(, ItemKey = &ItemKey
+	|	AND CASE
+	|		WHEN &Filter_Store
+	|			THEN Store = &Store
+	|		ELSE TRUE
+	|	END) AS Incoming
+	|WHERE
+	|	Incoming.QuantityBalance > 0";
 	
-	Query.SetParameter("Store", Store);
-	Query.SetParameter("EmptyStore", Store.IsEmpty());
-	Query.SetParameter("ItemKey", ItemKey);
-	QueryResult = Query.Execute().Unload();
-	GoodsInTransitIncoming.Load(QueryResult);
+	Query.SetParameter("ItemKey", ThisObject.ItemKey);
+	Query.SetParameter("Filter_Store", ValueIsFilled(ThisObject.Store));
+	Query.SetParameter("Store", ThisObject.Store);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	GR_EmptyRef = Documents.GoodsReceipt.EmptyRef();
+	
+	ThisObject.GoodsInTransitIncoming.Clear();
+	BasisTableTotal = ThisObject.GoodsInTransitIncoming.Unload().CopyColumns();
+	
+	While QuerySelection.Next() Do
+		BasisDocData = New Structure();
+		BasisDocData.Insert("Company"   , QuerySelection.Company);
+		BasisDocData.Insert("Branch"    , QuerySelection.Branch);
+		BasisDocData.Insert("Partner"   , QuerySelection.Partner);
+		BasisDocData.Insert("LegalName" , QuerySelection.LegalName);
+		BasisDocData.Insert("Ref"       , GR_EmptyRef);
+		BasisDocData.Insert("TransactionType" , Enums.GoodsReceiptTransactionTypes.InventoryTransfer);
+
+		Filter = RowIDInfoClientServer.GetLinkedDocumentsFilter_GR(BasisDocData);
+		
+		Filter.Insert("ItemKey", ThisObject.ItemKey);
+		If ValueIsFilled(ThisObject.Store) Then
+			Filter.Insert("Store", ThisObject.Store);
+		EndIf;
+		
+		
+		BasisesTable = RowIDInfoPrivileged.GetBasises(GR_EmptyRef, Filter);
+		For Each Row In BasisesTable Do
+			NewRow = BasisTableTotal.Add();
+			FillPropertyValues(NewRow, Row);
+			BasisesInfo = RowIDInfoServer.GetBasisesInfo(Row.Basis, Row.BasisKey, Row.RowID);
+			NewRow.Unit = BasisesInfo.Unit;
+			NewRow.Quantity = Catalogs.Units.Convert(NewRow.BasisUnit, NewRow.Unit, NewRow.QuantityInBaseUnit);
+		EndDo;		
+	EndDo;	
+	
+	ArrayOfColumns = New Array();
+	For Each Column In BasisTableTotal.Columns Do
+		ArrayOfColumns.Add(Column.Name);
+	EndDo;
+	BasisTableTotal.GroupBy(StrConcat(ArrayOfColumns, ","));
+	ThisObject.GoodsInTransitIncoming.Load(BasisTableTotal);
 	
 	Items.PagesSettings.CurrentPage = Items.GroupGoodsReceipt;
 EndProcedure
@@ -118,13 +152,30 @@ EndProcedure
 
 &AtClient
 Procedure CreateDocumentGoodsReceipt(Command)
-	If Items.GoodsInTransitIncoming.CurrentData = Undefined Then
+	CurrentData = Items.GoodsInTransitIncoming.CurrentData;
+	If CurrentData = Undefined Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_101);
 		Return;
 	EndIf;
 	
-	StructureRow = New Structure("Basis, RowID, CurrentStep, RowRef");
-	FillPropertyValues(StructureRow, Items.GoodsInTransitIncoming.CurrentData);
+	ColumNames = "
+	|Basis,
+	|BasisKey,
+	|BasisUnit,
+	|CurrentStep,	
+	|Item,
+	|ItemKey,
+	|Key,
+	|ParentBasis,
+	|Quantity,
+	|QuantityInBaseUnit,
+	|RowID,
+	|RowRef,
+	|Store,
+	|Unit";
+	StructureRow = New Structure(ColumNames);
+	FillPropertyValues(StructureRow, CurrentData);
+	
 	CreateDocuments(StructureRow, True, False);
 EndProcedure
 
@@ -135,40 +186,35 @@ Procedure CreateDocuments(Val StructureRow, CreateGoodsReceipt, CreateInventoryT
 	CreationDate = CurrentSessionDate();
 	If CreateGoodsReceipt Then
 		
+		
+		If ValueIsFilled(ThisObject.Unit) Then
+			StructureRow.Unit = ThisObject.Unit;
+			StructureRow.QuantityInBaseUnit =
+			Catalogs.Units.Convert(StructureRow.Unit, StructureRow.BasisUnit, ThisObject.Quantity);
+		Else
+			StructureRow.QuantityInBaseUnit = ThisObject.Quantity;
+		EndIf; 
+		
+		ResultTable = ThisObject.GoodsInTransitIncoming.Unload().CopyColumns();
+		FillPropertyValues(ResultTable.Add(), StructureRow);
+		
 		GoodsReceipt = Documents.GoodsReceipt.CreateDocument();
-		GoodsReceipt.Branch = StructureRow.Basis.Branch;
 		GoodsReceipt.Date = CreationDate + 1;
-		GoodsReceipt.Author = SessionParameters.CurrentUser;
-		GoodsReceipt.Company = StructureRow.Basis.Company;
-		GoodsReceipt.TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer;
 		
-		NewRow = GoodsReceipt.ItemList.Add();
-		FillPropertyValues(NewRow, ThisObject);
-		Actions = New Structure("CalculateQuantityInBaseUnit");
-		CalculationStringsClientServer.CalculateItemsRow(Object, NewRow, Actions);
-		NewRow.InventoryTransfer = StructureRow.Basis;
-		NewRow.Store = StructureRow.Basis.StoreReceiver;
-		NewRow.Key = New UUID;
-		NewRow.ReceiptBasis = StructureRow.Basis;
-		
-		NewID = GoodsReceipt.RowIDInfo.Add();
-		NewID.Key = NewRow.Key;
-		NewID.RowID = StructureRow.RowID;
-		NewID.Quantity = NewRow.Quantity;
-		NewID.Basis = StructureRow.Basis;
-		NewID.CurrentStep = StructureRow.CurrentStep;
-		NewID.RowRef = StructureRow.RowRef;
-		NewID.BasisKey = StructureRow.RowID;
-
-		GoodsReceipt.Write(DocumentWriteMode.Posting);
-		
+		Data = RowIDInfoPrivileged.ExtractData(ResultTable, GoodsReceipt.Ref);
+		FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(GoodsReceipt.Ref.Metadata(), Data);
+		If Not FillingValues.Count() Then
+			Raise "Converting Data to Filling values failed";
+		EndIf;
+		GoodsReceipt.Fill(FillingValues[0]);
+		GoodsReceipt.Write(DocumentWriteMode.Posting);		
 	EndIf;
 	CommitTransaction();
 
 	Clear();
 
 	If CreateGoodsReceipt Then
-		DocGoodsReceipt = GoodsReceipt.Ref;
+		ThisObject.DocGoodsReceipt = GoodsReceipt.Ref;
 	EndIf;
 	Items.PagesSettings.CurrentPage = Items.PageSettings;
 EndProcedure

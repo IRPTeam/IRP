@@ -57,6 +57,7 @@ Scenario: _200000 preparation (user settings)
 		When Create catalog BusinessUnits objects
 		When Create information register UserSettings records (Retail document)
 		When update ItemKeys
+		When Create catalog UserGroups objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -66,6 +67,8 @@ Scenario: _200000 preparation (user settings)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
+	* Workstation
+		When create Workstation
 	
 Scenario: _2000001 check preparation
 	When check preparation
@@ -1173,10 +1176,10 @@ Scenario:  _200028 create a custom display setting for entering in a row objects
 Scenario: _200029 filling in user settings for a user group
 	* Open catalog User Groups
 		Given I open hyperlink "e1cib/list/Catalog.UserGroups"
-	* create a new group and filling out a user preference for displaying objects marked for deletion
-		And I click the button named "FormCreate"
-		And I input "Admin" text in the field named "Description_en"
-		And I click "Save" button
+	* Select and filling out a user preference for displaying objects marked for deletion
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Admin'       |
 		And I click "Settings" button
 	* Filling in the settings for the display of Additional attribute values ​​marked for deletion when entering by line
 		And I go to line in "MetadataTree" table
@@ -1233,8 +1236,7 @@ Scenario: _200029 filling in user settings for a user group
 		And I select "No" exact value from "Value" drop-down list in "MetadataTree" table
 		And I finish line editing in "MetadataTree" table
 		And I click "Ok" button
-	* Saving the group
-		And I click "Save and close" button
+
 
 Scenario: _200030  adding a group of user settings for the user
 	* Open user catalog
@@ -1348,6 +1350,61 @@ Scenario:  _200036 check filling in field from custom user settings in Sales ord
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Branch" became equal to "Front office"
 	And I close all client application windows	
+
+	
+Scenario: _0154200 check user settings priority
+		When Create information register UserSettings records (for workstation)
+		When Create second Workstation			
+	* Set user group in the workstation
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 02' |
+		And I select current line in "List" table
+		And I click Select button of "User group" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Manager'     |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Select workstation	
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 02' |
+		And I click "Set current workstation" button	
+	* Check filling branch from personal user settings
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		And I close all client application windows
+	* Delete Branch for RSR from personal user settings
+		Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
+		And I go to line in "List" table
+			| 'Attribute name' | 'Kind of attribute' | 'Metadata object'             | 'User or group' | 'Value'   |
+			| 'Branch'         | 'Common'            | 'Document.RetailSalesReceipt' | 'CI'            | 'Shop 01' |
+		And I delete a line in "List" table
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	* Check filling branch from workstation user group
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 02' |
+		And I click "Set current workstation" button
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		Then the form attribute named "Branch" became equal to "Distribution department"
+		And I close all client application windows
+	* Check filling branch from user group (workstation with empty user group)
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I click "Set current workstation" button
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		Then the form attribute named "Branch" became equal to "Logistics department"
+						
 
 
 Scenario: _999999 close TestClient session

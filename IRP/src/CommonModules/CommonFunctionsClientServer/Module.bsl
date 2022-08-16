@@ -91,7 +91,7 @@ Procedure CalculateVolume(Object) Export
 	Object.Volume = Object.Length * Object.Width * Object.Height;
 EndProcedure
 
-Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "") Export
+Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", GetOnlyNumbers = False) Export
 
 	RejectSymbols = New Array;
 	For Index = 1 To StrLen(ReturnIfOnlyThisSymbolsPresent) Do
@@ -105,7 +105,7 @@ Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "") Ex
 		CharCode = CharCode(String, Index);
 		If CharCode >= 48 And CharCode <= 57 Then
 			NumberPart.Add(Symbol);
-		ElsIf RejectSymbols.Find(Symbol) = Undefined Then
+		ElsIf RejectSymbols.Find(Symbol) = Undefined And Not GetOnlyNumbers Then
 			NumberPart.Clear();
 			Break;
 		EndIf;
@@ -136,3 +136,19 @@ Function Regex(String, Facet) Export
 EndFunction
 
 #EndRegion
+
+Function GetSliceLastDateByRefAndDate(Ref, Date) Export
+	If Not ValueIsFilled(Ref) Then
+		If Not ValueIsFilled(Date) Then
+			Return CurrentDate();
+		EndIf;
+		If BegOfDay(Date) = BegOfDay(CurrentDate()) Then
+			Return EndOfDay(Date);
+		Else
+			Return Date;
+		EndIf;
+	Else
+		Return Date;
+	EndIf;
+EndFunction
+

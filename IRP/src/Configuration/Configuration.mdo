@@ -188,6 +188,7 @@
   <sessionParameters>SessionParameter.LocalizationCode</sessionParameters>
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
+  <sessionParameters>SessionParameter.RunBackgroundJobInDebugMode</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.CreateOrModifyUsers</roles>
   <roles>Role.FilterForUserSettings</roles>
@@ -226,7 +227,6 @@
   <commonModules>CommonModule.BarcodeServer</commonModules>
   <commonModules>CommonModule.BuilderServer_V2</commonModules>
   <commonModules>CommonModule.CalculationServer</commonModules>
-  <commonModules>CommonModule.CalculationStringsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsClient</commonModules>
   <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsServer</commonModules>
@@ -270,6 +270,8 @@
   <commonModules>CommonModule.DocCashStatementServer</commonModules>
   <commonModules>CommonModule.DocCashTransferOrderClient</commonModules>
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
+  <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
+  <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
@@ -382,6 +384,7 @@
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
   <commonModules>CommonModule.OffersClient</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
+  <commonModules>CommonModule.OffersClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerServer</commonModules>
@@ -391,6 +394,7 @@
   <commonModules>CommonModule.RowIDInfoClientServer</commonModules>
   <commonModules>CommonModule.RowIDInfoServer</commonModules>
   <commonModules>CommonModule.RowIDInfoServerReuse</commonModules>
+  <commonModules>CommonModule.RowIDInfoPrivileged</commonModules>
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
@@ -809,6 +813,7 @@
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.CreateSerialLotNumbers</dataProcessors>
+  <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

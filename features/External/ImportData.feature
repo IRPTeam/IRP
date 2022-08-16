@@ -925,7 +925,8 @@ Scenario: Create catalog UserGroups objects
 
 	And I check or create catalog "UserGroups" objects:
 		| 'Ref'                                                                | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.UserGroups?ref=aa78120ed92fbced11eaf12e233ba2b3' | 'False'           | 'Admin'          | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.UserGroups?ref=aa78120ed92fbced11eaf12e233ba2b3' | 'False'        | 'Admin'          | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.UserGroups?ref=aa78120ed92fbced11eaf12e238ba2b4' | 'False'        | 'Manager'        | ''                 | ''               | ''               |
 
 Scenario: Create catalog Users objects
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
@@ -1434,24 +1435,24 @@ Scenario: Create information register Barcodes records
 Scenario: Create information register UserSettings records (Retail document)
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
 	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup' | 'MetadataObject'               | 'AttributeName'         | 'KindOfAttribute'                | 'Value'                                                                 |
-		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Agreement'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fcd'    |
-		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Branch'          | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
-		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Company'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
+		| 'UserOrGroup' | 'MetadataObject'               | 'AttributeName'             | 'KindOfAttribute'                | 'Value'                                                                 |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Agreement'                 | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fcd'    |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Branch'                    | 'Enum.KindsOfAttributes.Common'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Company'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
 		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'ItemList.ProfitLossCenter' | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
-		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'ItemList.Store'        | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'        |
-		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'LegalName'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf12effe70fcc'     |
-		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Partner'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf12effe70fcb'      |
-		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Agreement'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fcd'    |
-		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Branch'          | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
-		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Company'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'ItemList.Store'            | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'        |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'LegalName'                 | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf12effe70fcc'     |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Partner'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf12effe70fcb'      |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Agreement'                 | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fcd'    |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Branch'                    | 'Enum.KindsOfAttributes.Common'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Company'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
 		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'ItemList.ProfitLossCenter' | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
-		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'ItemList.Store'        | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'        |
-		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'LegalName'             | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf12effe70fcc'     |
-		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Partner'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf12effe70fcb'      |
-		| '$$IdCI$$'    | 'Document.CashStatement'       | 'Branch'          | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
-		| '$$IdCI$$'    | 'Document.CashStatement'       | 'Company'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
-		| '$$IdCI$$'    | 'Document.CashStatement'       | 'CashAccount'           | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf124a9ba0839'  |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'ItemList.Store'            | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'        |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'LegalName'                 | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf12effe70fcc'     |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Partner'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf12effe70fcb'      |
+		| '$$IdCI$$'    | 'Document.CashStatement'       | 'Branch'                    | 'Enum.KindsOfAttributes.Common'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
+		| '$$IdCI$$'    | 'Document.CashStatement'       | 'Company'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
+		| '$$IdCI$$'    | 'Document.CashStatement'       | 'CashAccount'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf124a9ba0839'  |
 
 Scenario: Create catalog ItemKeys objects (Table)
 
@@ -1470,67 +1471,67 @@ Scenario: Create catalog Items objects (Table)
 Scenario: Create information register UserSettings records
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
 	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup'                                                        | 'MetadataObject'                        | 'AttributeName'                 | 'KindOfAttribute'                   | 'Value'                                                                                 |
-		| '$$IdCI$$'      | 'Document.BankPayment'                  | 'Account'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186b'                  |
-		| '$$IdCI$$'      | 'Document.BankPayment'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.BankPayment'                  | 'Currency'                      | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'                    |
-		| '$$IdCI$$'      | 'Document.BankReceipt'                  | 'Account'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186c'                  |
-		| '$$IdCI$$'      | 'Document.BankReceipt'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.BankReceipt'                  | 'Currency'                      | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856'                    |
-		| '$$IdCI$$'      | 'Document.Bundling'                     | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.Bundling'                     | 'Store'                         | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'                        |
-		| '$$IdCI$$'      | 'Document.CashExpense'                  | 'Account'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a'                  |
-		| '$$IdCI$$'      | 'Document.CashExpense'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.CashPayment'                  | 'CashAccount'                   | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a'                  |
-		| '$$IdCI$$'      | 'Document.CashPayment'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.CashPayment'                  | 'Currency'                      | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1857'                    |
-		| '$$IdCI$$'      | 'Document.CashReceipt'                  | 'CashAccount'                   | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a'                  |
-		| '$$IdCI$$'      | 'Document.CashReceipt'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.CashReceipt'                  | 'Currency'                      | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856'                    |
-		| '$$IdCI$$'      | 'Document.CashRevenue'                  | 'Account'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a'                  |
-		| '$$IdCI$$'      | 'Document.CashRevenue'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.CashTransferOrder'            | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.CashTransferOrder'            | 'Receiver'                      | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186c'                  |
-		| '$$IdCI$$'      | 'Document.CashTransferOrder'            | 'Sender'                        | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a'                  |
-		| '$$IdCI$$'      | 'Document.GoodsReceipt'                 | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.IncomingPaymentOrder'         | 'Account'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1869'                  |
-		| '$$IdCI$$'      | 'Document.IncomingPaymentOrder'         | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'                     |
-		| '$$IdCI$$'      | 'Document.IncomingPaymentOrder'         | 'Currency'                      | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856'                    |
-		| '$$IdCI$$'      | 'Document.InternalSupplyRequest'        | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.InternalSupplyRequest'        | 'Store'                         | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'                        |
-		| '$$IdCI$$'      | 'Document.InventoryTransfer'            | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.InventoryTransfer'            | 'StoreReceiver'                 | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'                        |
-		| '$$IdCI$$'      | 'Document.InventoryTransfer'            | 'StoreSender'                   | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'                        |
-		| '$$IdCI$$'      | 'Document.InventoryTransfer'            | 'StoreTransit'                  | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'                        |
-		| '$$IdCI$$'      | 'Document.InventoryTransferOrder'       | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.InventoryTransferOrder'       | 'StoreReceiver'                 | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'                        |
-		| '$$IdCI$$'      | 'Document.InventoryTransferOrder'       | 'StoreSender'                   | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'                        |
-		| '$$IdCI$$'      | 'Document.OutgoingPaymentOrder'         | 'Account'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a'                  |
-		| '$$IdCI$$'      | 'Document.OutgoingPaymentOrder'         | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.OutgoingPaymentOrder'         | 'Currency'                      | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856'                    |
-		| '$$IdCI$$'      | 'Document.PurchaseInvoice'              | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'                     |
-		| '$$IdCI$$'      | 'Document.PurchaseInvoice'              | 'ItemList.Store'                | 'Enum.KindsOfAttributes.Column'     | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'                        |
-		| '$$IdCI$$'      | 'Document.PurchaseOrder'                | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'                     |
-		| '$$IdCI$$'      | 'Document.PurchaseOrder'                | 'ItemList.Store'                | 'Enum.KindsOfAttributes.Column'     | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'                        |
-		| '$$IdCI$$'      | 'Document.PurchaseReturn'               | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'                     |
-		| '$$IdCI$$'      | 'Document.PurchaseReturnOrder'          | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'                     |
-		| '$$IdCI$$'      | 'Document.ReconciliationStatement'      | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'                     |
-		| '$$IdCI$$'      | 'Document.SalesInvoice'                 | 'Agreement'                     | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb73'                    |
-		| '$$IdCI$$'      | 'Document.SalesInvoice'                 | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.SalesInvoice'                 | 'ItemList.Store'                | 'Enum.KindsOfAttributes.Column'     | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'                        |
-		| '$$IdCI$$'      | 'Document.SalesOrder'                   | 'Agreement'                     | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb73'                    |
-		| '$$IdCI$$'      | 'Document.SalesOrder'                   | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.SalesOrder'                   | 'ItemList.Store'                | 'Enum.KindsOfAttributes.Column'     | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'                        |
-		| '$$IdCI$$'      | 'Document.SalesReturn'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'                     |
-		| '$$IdCI$$'      | 'Document.SalesReturnOrder'             | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'                     |
-		| '$$IdCI$$'      | 'Document.ShipmentConfirmation'         | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.ShipmentConfirmation'         | 'ItemList.Store'                | 'Enum.KindsOfAttributes.Column'     | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'                        |
-		| '$$IdCI$$'      | 'Document.Unbundling'                   | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.PlannedReceiptReservation'    | 'Company'                       | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'                     |
-		| '$$IdCI$$'      | 'Document.Unbundling'                   | 'Store'                         | 'Enum.KindsOfAttributes.Regular'    | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'                        |
-		| 'e1cib/data/Catalog.UserGroups?ref=aa7c120ed92fbced11eb080cfa094a6b' | 'Catalog.AddAttributeAndPropertyValues' | 'Use_object_with_deletion_mark' | 'Enum.KindsOfAttributes.Custom'     | 'False'                                                                                    |
-		| 'e1cib/data/Catalog.UserGroups?ref=aa7c120ed92fbced11eb080cfa094a6b' | 'Catalog.Items'                         | 'Use_object_with_deletion_mark' | 'Enum.KindsOfAttributes.Custom'     | 'False'                                                                                    |
-		| 'e1cib/data/Catalog.UserGroups?ref=aa7c120ed92fbced11eb080cfa094a6b' | 'Catalog.Partners'                      | 'Use_object_with_deletion_mark' | 'Enum.KindsOfAttributes.Custom'     | 'False'                                                                                    |
+		| 'UserOrGroup'                                                        | 'MetadataObject'                        | 'AttributeName'                 | 'KindOfAttribute'                | 'Value'                                                                |
+		| '$$IdCI$$'                                                           | 'Document.BankPayment'                  | 'Account'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186b' |
+		| '$$IdCI$$'                                                           | 'Document.BankPayment'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.BankPayment'                  | 'Currency'                      | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855'   |
+		| '$$IdCI$$'                                                           | 'Document.BankReceipt'                  | 'Account'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186c' |
+		| '$$IdCI$$'                                                           | 'Document.BankReceipt'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.BankReceipt'                  | 'Currency'                      | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856'   |
+		| '$$IdCI$$'                                                           | 'Document.Bundling'                     | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.Bundling'                     | 'Store'                         | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'       |
+		| '$$IdCI$$'                                                           | 'Document.CashExpense'                  | 'Account'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a' |
+		| '$$IdCI$$'                                                           | 'Document.CashExpense'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.CashPayment'                  | 'CashAccount'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a' |
+		| '$$IdCI$$'                                                           | 'Document.CashPayment'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.CashPayment'                  | 'Currency'                      | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1857'   |
+		| '$$IdCI$$'                                                           | 'Document.CashReceipt'                  | 'CashAccount'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a' |
+		| '$$IdCI$$'                                                           | 'Document.CashReceipt'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.CashReceipt'                  | 'Currency'                      | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856'   |
+		| '$$IdCI$$'                                                           | 'Document.CashRevenue'                  | 'Account'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a' |
+		| '$$IdCI$$'                                                           | 'Document.CashRevenue'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.CashTransferOrder'            | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.CashTransferOrder'            | 'Receiver'                      | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186c' |
+		| '$$IdCI$$'                                                           | 'Document.CashTransferOrder'            | 'Sender'                        | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a' |
+		| '$$IdCI$$'                                                           | 'Document.GoodsReceipt'                 | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.IncomingPaymentOrder'         | 'Account'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1869' |
+		| '$$IdCI$$'                                                           | 'Document.IncomingPaymentOrder'         | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'    |
+		| '$$IdCI$$'                                                           | 'Document.IncomingPaymentOrder'         | 'Currency'                      | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856'   |
+		| '$$IdCI$$'                                                           | 'Document.InternalSupplyRequest'        | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.InternalSupplyRequest'        | 'Store'                         | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'       |
+		| '$$IdCI$$'                                                           | 'Document.InventoryTransfer'            | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.InventoryTransfer'            | 'StoreReceiver'                 | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'       |
+		| '$$IdCI$$'                                                           | 'Document.InventoryTransfer'            | 'StoreSender'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'       |
+		| '$$IdCI$$'                                                           | 'Document.InventoryTransfer'            | 'StoreTransit'                  | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'       |
+		| '$$IdCI$$'                                                           | 'Document.InventoryTransferOrder'       | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.InventoryTransferOrder'       | 'StoreReceiver'                 | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'       |
+		| '$$IdCI$$'                                                           | 'Document.InventoryTransferOrder'       | 'StoreSender'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'       |
+		| '$$IdCI$$'                                                           | 'Document.OutgoingPaymentOrder'         | 'Account'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a' |
+		| '$$IdCI$$'                                                           | 'Document.OutgoingPaymentOrder'         | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.OutgoingPaymentOrder'         | 'Currency'                      | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856'   |
+		| '$$IdCI$$'                                                           | 'Document.PurchaseInvoice'              | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'    |
+		| '$$IdCI$$'                                                           | 'Document.PurchaseInvoice'              | 'ItemList.Store'                | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'       |
+		| '$$IdCI$$'                                                           | 'Document.PurchaseOrder'                | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'    |
+		| '$$IdCI$$'                                                           | 'Document.PurchaseOrder'                | 'ItemList.Store'                | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'       |
+		| '$$IdCI$$'                                                           | 'Document.PurchaseReturn'               | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'    |
+		| '$$IdCI$$'                                                           | 'Document.PurchaseReturnOrder'          | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'    |
+		| '$$IdCI$$'                                                           | 'Document.ReconciliationStatement'      | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'    |
+		| '$$IdCI$$'                                                           | 'Document.SalesInvoice'                 | 'Agreement'                     | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb73'   |
+		| '$$IdCI$$'                                                           | 'Document.SalesInvoice'                 | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.SalesInvoice'                 | 'ItemList.Store'                | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'       |
+		| '$$IdCI$$'                                                           | 'Document.SalesOrder'                   | 'Agreement'                     | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb73'   |
+		| '$$IdCI$$'                                                           | 'Document.SalesOrder'                   | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.SalesOrder'                   | 'ItemList.Store'                | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'       |
+		| '$$IdCI$$'                                                           | 'Document.SalesReturn'                  | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'    |
+		| '$$IdCI$$'                                                           | 'Document.SalesReturnOrder'             | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4'    |
+		| '$$IdCI$$'                                                           | 'Document.ShipmentConfirmation'         | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.ShipmentConfirmation'         | 'ItemList.Store'                | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c'       |
+		| '$$IdCI$$'                                                           | 'Document.Unbundling'                   | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.PlannedReceiptReservation'    | 'Company'                       | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'    |
+		| '$$IdCI$$'                                                           | 'Document.Unbundling'                   | 'Store'                         | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d'       |
+		| 'e1cib/data/Catalog.UserGroups?ref=aa7c120ed92fbced11eb080cfa094a6b' | 'Catalog.AddAttributeAndPropertyValues' | 'Use_object_with_deletion_mark' | 'Enum.KindsOfAttributes.Custom'  | 'False'                                                                |
+		| 'e1cib/data/Catalog.UserGroups?ref=aa7c120ed92fbced11eb080cfa094a6b' | 'Catalog.Items'                         | 'Use_object_with_deletion_mark' | 'Enum.KindsOfAttributes.Custom'  | 'False'                                                                |
+		| 'e1cib/data/Catalog.UserGroups?ref=aa7c120ed92fbced11eb080cfa094a6b' | 'Catalog.Partners'                      | 'Use_object_with_deletion_mark' | 'Enum.KindsOfAttributes.Custom'  | 'False'                                                                |
 
 
 Scenario: Create catalog SerialLotNumbers objects
@@ -1626,34 +1627,34 @@ Scenario: Create catalog Workstations objects  (Test)
 Scenario: Create information register UserSettings records (check registers balance)
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
 	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup'                                                   | 'MetadataObject'                | 'AttributeName'                       | 'KindOfAttribute'               | 'Value' |
-		| '$$IdCI$$' | 'Document.GoodsReceipt'         | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.GoodsReceipt'         | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.GoodsReceipt'         | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseInvoice'      | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseInvoice'      | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseInvoice'      | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseInvoice'      | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseInvoice'      | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseOrder'        | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseOrder'        | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseOrder'        | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseOrder'        | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesInvoice'         | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesInvoice'         | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesOrder'           | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesOrder'           | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesOrder'           | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesOrder'           | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.ShipmentConfirmation' | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.ShipmentConfirmation' | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| 'UserOrGroup' | 'MetadataObject'                | 'AttributeName'                       | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | 'Document.GoodsReceipt'         | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.GoodsReceipt'         | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.GoodsReceipt'         | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseInvoice'      | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseInvoice'      | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseInvoice'      | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseInvoice'      | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseInvoice'      | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseOrder'        | 'CheckBalance_GoodsInTransitIncoming' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseOrder'        | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseOrder'        | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseOrder'        | 'CheckBalance_ReceiptOrders'          | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesInvoice'         | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesInvoice'         | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesOrder'           | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesOrder'           | 'CheckBalance_OrderBalance'           | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesOrder'           | 'CheckBalance_OrderProcurement'       | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesOrder'           | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.ShipmentConfirmation' | 'CheckBalance_GoodsInTransitOutgoing' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.ShipmentConfirmation' | 'CheckBalance_ShipmentOrders'         | 'Enum.KindsOfAttributes.Custom' | 'True'  |
 
 Scenario: Create information register UserSettings records (edit GR and SC)
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
 	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup'                                                   | 'MetadataObject'                | 'AttributeName'                       | 'KindOfAttribute'               | 'Value' |
-		| '$$IdCI$$' | 'Document.ShipmentConfirmation' | 'EditIfSalesInvoiceExists'            | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.GoodsReceipt'         | 'EditIfPurchaseInvoiceExists'         | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| 'UserOrGroup' | 'MetadataObject'                | 'AttributeName'               | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | 'Document.ShipmentConfirmation' | 'EditIfSalesInvoiceExists'    | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.GoodsReceipt'         | 'EditIfPurchaseInvoiceExists' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
 
 Scenario: Create catalog SpecialOfferRules objects
 
@@ -1820,45 +1821,45 @@ Scenario: Create document PurchaseOrder objects (for procurement)
 Scenario: Create information register UserSettings records (remaining stock control)
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
 	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup' | 'MetadataObject'                  | 'AttributeName'                 | 'KindOfAttribute'               | 'Value' |
-		| '$$IdCI$$' | 'Document.Bundling'                  | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.Bundling'                  | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.GoodsReceipt'              | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.GoodsReceipt'              | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.OpeningEntry'              | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.OpeningEntry'              | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PhysicalInventory'         | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PhysicalInventory'         | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseInvoice'           | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseInvoice'           | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseOrder'             | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseOrder'             | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseReturn'            | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseReturn'            | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.PurchaseReturnOrder'       | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.RetailReturnReceipt'       | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.RetailReturnReceipt'       | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.RetailSalesReceipt'        | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.RetailSalesReceipt'        | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesInvoice'              | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesInvoice'              | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesOrder'                | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesOrder'                | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.ShipmentConfirmation'      | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.ShipmentConfirmation'      | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.StockAdjustmentAsSurplus'  | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.StockAdjustmentAsSurplus'  | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_R4011B_FreeStocks | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.Unbundling'                | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.Unbundling'                | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.InventoryTransfer'         | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.InventoryTransfer'         | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.InventoryTransferOrder'    | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.InventoryTransferOrder'    | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesOrderClosing'         | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesReturn'               | 'CheckBalance_R4010B_ActualStocks'     | 'Enum.KindsOfAttributes.Custom' | 'True'   |
-		| '$$IdCI$$' | 'Document.SalesReturn'               | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'   |
+		| 'UserOrGroup' | 'MetadataObject'                     | 'AttributeName'                    | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | 'Document.Bundling'                  | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.Bundling'                  | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.GoodsReceipt'              | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.GoodsReceipt'              | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.OpeningEntry'              | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.OpeningEntry'              | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PhysicalInventory'         | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PhysicalInventory'         | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseInvoice'           | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseInvoice'           | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseOrder'             | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseOrder'             | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseReturn'            | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseReturn'            | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.PurchaseReturnOrder'       | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt'       | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt'       | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'        | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'        | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesInvoice'              | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesInvoice'              | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesOrder'                | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesOrder'                | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.ShipmentConfirmation'      | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.ShipmentConfirmation'      | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.StockAdjustmentAsSurplus'  | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.StockAdjustmentAsSurplus'  | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.StockAdjustmentAsWriteOff' | 'CheckBalance_R4011B_FreeStocks    | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.Unbundling'                | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.Unbundling'                | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.InventoryTransfer'         | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.InventoryTransfer'         | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.InventoryTransferOrder'    | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.InventoryTransferOrder'    | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesOrderClosing'         | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesReturn'               | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| '$$IdCI$$'    | 'Document.SalesReturn'               | 'CheckBalance_R4011B_FreeStocks'   | 'Enum.KindsOfAttributes.Custom' | 'True'  |
 
 
 
@@ -2089,4 +2090,18 @@ Scenario: Create information register T9014S_AccountsExpenseRevenue records
 	And I check or create information register "T9014S_AccountsExpenseRevenue" records:
 		| 'Period'             | 'Company'                                                           | 'Variant'                                                                    | 'ExpenseRevenue'                                                                 | 'Account'                                                               |
 		| '01.07.2022 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.LedgerTypeVariants?ref=b78386a1ced23f4711ed01ef43a5af0c' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'e1cib/data/ChartOfAccounts.Basic?ref=b78386a1ced23f4711ed01e9dc954ffe' |
+
+
+Scenario: Create information register UserSettings records (for workstation)
+
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                        | 'MetadataObject'               | 'AttributeName'             | 'KindOfAttribute'                | 'Value'                                                                 |
+		| 'e1cib/data/Catalog.UserGroups?ref=aa78120ed92fbced11eaf12e233ba2b3' | 'Document.RetailSalesReceipt'  | 'Branch'                    | 'Enum.KindsOfAttributes.Common'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef026' |
+		| 'e1cib/data/Catalog.UserGroups?ref=aa78120ed92fbced11eaf12e238ba2b4' | 'Document.RetailSalesReceipt'  | 'Branch'                    | 'Enum.KindsOfAttributes.Common'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' |
+
+Scenario: Create second Workstation
+
+	And I check or create catalog "Workstations" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code'         | 'Description'    | 'CashAccount'                                                          | 'PrintTemplate' | 'UserGroup' | 'UniqueID'  |
+		| 'e1cib/data/Catalog.Workstations?ref=b784ae4f9cb08e5e11ed1a17667e6bb4' | 'False'        | '000000000002' | 'Workstation 02' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a' | ''              | ''          | 'TeamAgent' |
 

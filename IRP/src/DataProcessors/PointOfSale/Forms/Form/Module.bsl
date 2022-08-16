@@ -639,9 +639,9 @@ EndProcedure
 &AtClient
 Procedure EnabledPaymentButton()
 	If FOServer.IsUseConsolidatedRetailSales() Then
-		Items.qPayment.Enabled = Object.ItemList.Count();	
+		Items.qPayment.Enabled = Object.ItemList.Count() And ValueIsFilled(ThisObject.ConsolidatedRetailSalesRef);	
 	Else
-		Items.qPayment.Enabled = Object.ItemList.Count() And ValueIsFilled(ThisObject.ConsolidatedRetailSalesRef);
+		Items.qPayment.Enabled = Object.ItemList.Count();
 	EndIf;
 EndProcedure
 

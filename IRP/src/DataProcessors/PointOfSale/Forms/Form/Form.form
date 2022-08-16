@@ -3450,6 +3450,7 @@
           <items xsi:type="form:FormField">
             <name>ConsolidatedRetailSalesRef</name>
             <id>1082</id>
+            <displayImportance>VeryLow</displayImportance>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -3458,6 +3459,7 @@
             <dataPath xsi:type="form:DataPath">
               <segments>ConsolidatedRetailSalesRef</segments>
             </dataPath>
+            <skipOnInput>true</skipOnInput>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
               <name>ConsolidatedRetailSalesRefExtendedTooltip</name>
@@ -3506,6 +3508,7 @@
             <userVisible>
               <common>true</common>
             </userVisible>
+            <skipOnInput>true</skipOnInput>
             <extendedTooltip>
               <name>OpenSessionExtendedTooltip</name>
               <id>1077</id>
@@ -3537,6 +3540,7 @@
             <userVisible>
               <common>true</common>
             </userVisible>
+            <skipOnInput>true</skipOnInput>
             <extendedTooltip>
               <name>CloseSessionExtendedTooltip</name>
               <id>1079</id>
@@ -3568,6 +3572,7 @@
             <userVisible>
               <common>true</common>
             </userVisible>
+            <skipOnInput>true</skipOnInput>
             <extendedTooltip>
               <name>CancelSessionExtendedTooltip</name>
               <id>1081</id>

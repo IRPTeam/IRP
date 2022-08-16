@@ -220,6 +220,15 @@ EndProcedure
 
 #EndRegion
 
+#Region CONSOLIDATED_RETAIL_SALES
+
+&AtClient
+Procedure ConsolidatedRetailSalesOnChange(Item)
+	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST
 
 &AtClient

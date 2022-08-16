@@ -206,6 +206,14 @@ EndProcedure
 
 #EndRegion
 
+#Region CONSOLIDATED_RETAIL_SALES
+
+Procedure ConsolidatedRetailSalesOnChange(Object, Form, Item) Export
+	ViewClient_V2.ConsolidatedRetailSalesOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST
 
 Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export

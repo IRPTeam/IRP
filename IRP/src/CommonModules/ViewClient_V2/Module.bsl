@@ -2337,6 +2337,17 @@ EndProcedure
 
 #EndRegion
 
+#Region CONSOLIDATED_RETAIL_SALES
+
+Procedure ConsolidatedRetailSalesOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.ConsolidatedRetailSalesOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region STATUS
 
 Procedure StatusOnChange(Object, Form, TableNames) Export

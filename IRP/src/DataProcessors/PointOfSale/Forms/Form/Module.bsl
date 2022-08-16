@@ -28,7 +28,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.GroupPaymentRight.ShowTitle = False;
 
 	EndIf;
-	
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -51,7 +51,10 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Return;
+	SessionIsOpened = ValueIsFilled(Form.ConsolidatedRetailSalesRef);
+	Form.Items.OpenSession.Enabled = Not SessionIsOpened;
+	Form.Items.CloseSession.Enabled = SessionIsOpened;
+	Form.Items.CancelSession.Enabled = SessionIsOpened;
 EndProcedure
 
 #Region AGREEMENT
@@ -73,6 +76,40 @@ Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
 	DocRetailSalesReceiptClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+#EndRegion
+
+#Region CONSOLIDATED_RETAIL_SALES
+
+&AtClient
+Procedure OpenSession(Command)
+	ThisObject.ConsolidatedRetailSalesRef = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+	Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSalesRef;
+	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
+	
+	SetVisibilityAvailability(Object, ThisObject);
+	EnabledPaymentButton();
+EndProcedure
+
+&AtClient
+Procedure CloseSession(Command)
+	DocConsolidatedRetailSalesServer.CloseDocument(ThisObject.ConsolidatedRetailSalesRef);
+	ThisObject.ConsolidatedRetailSalesRef = Undefined;
+	Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSalesRef;
+	
+	SetVisibilityAvailability(Object, ThisObject);
+	EnabledPaymentButton();
+EndProcedure
+
+&AtClient
+Procedure CancelSession(Command)
+	DocConsolidatedRetailSalesServer.CancelDocument(ThisObject.ConsolidatedRetailSalesRef);
+	ThisObject.ConsolidatedRetailSalesRef = Undefined;
+	Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSalesRef;
+	
+	SetVisibilityAvailability(Object, ThisObject);
+	EnabledPaymentButton();		
+EndProcedure
+			
 #EndRegion
 
 #Region FormTableItemsEventHandlers
@@ -511,6 +548,7 @@ Procedure NewTransaction()
 	NewTransactionAtServer();
 	Cancel = False;
 	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
+	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 	EnabledPaymentButton();
 EndProcedure
 
@@ -522,6 +560,10 @@ Procedure NewTransactionAtServer()
 	ValueToFormAttribute(ObjectValue, "Object");
 	Cancel = False;
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
+	
+	ThisObject.ConsolidatedRetailSalesRef = DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+	Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSalesRef;
+	
 	SalesPersonByDefault = Undefined;
 EndProcedure
 
@@ -587,7 +629,7 @@ EndProcedure
 
 &AtClient
 Procedure EnabledPaymentButton()
-	Items.qPayment.Enabled = Object.ItemList.Count();
+	Items.qPayment.Enabled = Object.ItemList.Count() And ValueIsFilled(ThisObject.ConsolidatedRetailSalesRef);
 EndProcedure
 
 &AtClient

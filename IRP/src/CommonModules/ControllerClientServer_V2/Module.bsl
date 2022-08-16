@@ -2070,6 +2070,29 @@ EndProcedure
 
 #EndRegion
 
+#Region CONSOLIDATED_RETAIL_SALES
+
+// ConsolidatedRetailSales.OnChange
+Procedure ConsolidatedRetailSalesOnChange(Parameters) Export
+	Binding = BindConsolidatedRetailSales(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ConsolidatedRetailSales.Set
+Procedure SetConsolidatedRetailSales(Parameters, Results) Export
+	Binding = BindConsolidatedRetailSales(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ConsolidatedRetailSales.Bind
+Function BindConsolidatedRetailSales(Parameters)
+	DataPath = "ConsolidatedRetailSales";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region STATUS
 
 // Status.OnChange

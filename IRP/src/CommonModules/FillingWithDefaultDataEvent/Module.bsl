@@ -262,7 +262,8 @@ Function UsedNewFunctionality(Source)
 	Or TypeOf(Source) = Type("DocumentObject.CashStatement")
 	
 	Or TypeOf(Source) = Type("DocumentObject.CashTransferOrder")
-	Or TypeOf(Source) = Type("DocumentObject.ChequeBondTransaction");
+	Or TypeOf(Source) = Type("DocumentObject.ChequeBondTransaction")
+	Or TypeOf(Source) = Type("DocumentObject.ConsolidatedRetailSales");
 	
 	Return IsUsedNewFunctionality;
 EndFunction

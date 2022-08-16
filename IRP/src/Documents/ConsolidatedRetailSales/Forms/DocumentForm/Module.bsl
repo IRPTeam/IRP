@@ -82,6 +82,42 @@ EndProcedure
 
 #EndRegion
 
+#Region FISCAL_HARDWARE
+
+&AtClient
+Procedure FiscalHardawareOnChange(Item)
+	DocConsolidatedRetailSalesClient.FiscalHardwareOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region STATUS
+
+&AtClient
+Procedure StatusOnChange(Item)
+	DocConsolidatedRetailSalesClient.StatusOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region OPENING_DATE
+
+&AtClient
+Procedure OpeningDateOnChange(Item)
+	DocConsolidatedRetailSalesClient.OpeningDateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region CLOSING_DATE
+
+&AtClient
+Procedure ClosingDateOnChange(Item)
+	DocConsolidatedRetailSalesClient.ClosingDateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region SERVICE
 
 &AtClient

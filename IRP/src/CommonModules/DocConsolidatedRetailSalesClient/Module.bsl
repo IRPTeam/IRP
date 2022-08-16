@@ -1,7 +1,7 @@
 #Region FORM
 
 Procedure OnOpen(Object, Form, Cancel) Export
-	ViewClient_V2.OnOpen(Object, Form, "ChequeBonds");
+	ViewClient_V2.OnOpen(Object, Form, "");
 EndProcedure
 
 #EndRegion
@@ -9,7 +9,7 @@ EndProcedure
 #Region _DATE
 
 Procedure DateOnChange(Object, Form, Item) Export
-	ViewClient_V2.DateOnChange(Object, Form, "ChequeBonds");
+	ViewClient_V2.DateOnChange(Object, Form, "");
 EndProcedure
 
 #EndRegion
@@ -17,7 +17,7 @@ EndProcedure
 #Region COMPANY
 
 Procedure CompanyOnChange(Object, Form, Item) Export
-	ViewClient_V2.CompanyOnChange(Object, Form, "ChequeBonds");
+	ViewClient_V2.CompanyOnChange(Object, Form, "");
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -38,6 +38,38 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
+EndProcedure
+
+#EndRegion
+
+#Region FISCAL_HARDWARE
+
+Procedure FiscalHardwareOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region STATUS
+
+Procedure StatusOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region OPENING_DATE
+
+Procedure OpeningDateOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region CLOSING_DATE
+
+Procedure ClosingDateOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 #EndRegion

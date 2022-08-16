@@ -6,7 +6,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-	ViewServer_V2.OnCreateAtServer(Object, Form, "ChequeBonds");
+	ViewServer_V2.OnCreateAtServer(Object, Form, "");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -27,6 +27,10 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");	
+	AttributesArray.Add("OpeningDate");	
+	AttributesArray.Add("ClosingDate");	
+	AttributesArray.Add("FiscalHardware");	
+	AttributesArray.Add("Status");	
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do
 		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,

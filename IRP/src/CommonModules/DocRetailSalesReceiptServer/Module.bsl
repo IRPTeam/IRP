@@ -63,3 +63,8 @@ Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
+
+Function IsClosedRetailSalesReceipt(DocRef) Export
+	Return ValueIsFilled(DocRef) And ValueIsFilled(DocRef.ConsolidatedRetailSales) 
+			And DocRef.ConsolidatedRetailSales.Status = Enums.ConsolidatedRetailSalesStatuses.Close;
+EndFunction

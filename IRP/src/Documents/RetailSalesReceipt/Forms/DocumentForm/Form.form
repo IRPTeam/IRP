@@ -6473,6 +6473,37 @@
       <placementArea>UserCmds</placementArea>
       <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
     </items>
+    <items xsi:type="form:Button">
+      <name>FormUnlockRetailSales</name>
+      <id>1076</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>FormUnlockRetailSalesExtendedTooltip</name>
+        <id>1077</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.UnlockRetailSales</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+      <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -6685,6 +6716,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <savedData>true</savedData>
   </attributes>
   <attributes>
     <name>Description</name>
@@ -7245,6 +7277,26 @@
     </action>
     <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
     <representation>Picture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>UnlockRetailSales</name>
+    <title>
+      <key>en</key>
+      <value>Unlock retail sales</value>
+    </title>
+    <id>11</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.Unlock</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UnlockRetailSales</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

@@ -84,8 +84,11 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+	Form.ReadOnly = DocRetailSalesReceiptServer.IsClosedRetailSalesReceipt(Object.Ref)
+		And Not Form.Items.FormUnlockRetailSales.Check;
+	
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 EndProcedure
 
 #EndRegion
@@ -559,6 +562,12 @@ EndProcedure
 &AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure UnlockRetailSales(Command)
+	Items.FormUnlockRetailSales.Check = Not Items.FormUnlockRetailSales.Check; 
+	SetVisibilityAvailability(Object, ThisObject);	
 EndProcedure
 
 #EndRegion

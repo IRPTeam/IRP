@@ -89,7 +89,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	
-	
 	UseConsolidatedRetailSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch);
 	
 	Form.Items.ConsolidatedRetailSales.ReadOnly = Not UseConsolidatedRetailSales;

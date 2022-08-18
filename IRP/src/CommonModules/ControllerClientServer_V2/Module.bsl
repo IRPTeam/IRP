@@ -1842,7 +1842,8 @@ Function BindCompany(Parameters)
 	Binding.Insert("RetailReturnReceipt",
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepItemListChangeRevenueTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey,
+		|StepChangeConsolidatedRetailSalesByWorkstation");
 	
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
 	Binding.Insert("OutgoingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
@@ -1932,6 +1933,7 @@ Function BindBranch(Parameters)
 	DataPath = "Branch";
 	Binding = New Structure();
 	Binding.Insert("RetailSalesReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
+	Binding.Insert("RetailReturnReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -2141,7 +2143,8 @@ EndFunction
 Function BindWorkstation(Parameters)
 	DataPath = "Workstation";
 	Binding = New Structure();
-	Binding.Insert("RetailSalesReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
+	Binding.Insert("RetailSalesReceipt"  , "StepChangeConsolidatedRetailSalesByWorkstation");
+	Binding.Insert("RetailReturnReceipt" , "StepChangeConsolidatedRetailSalesByWorkstation");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

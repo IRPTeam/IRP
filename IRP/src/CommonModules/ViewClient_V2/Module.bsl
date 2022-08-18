@@ -2347,7 +2347,8 @@ Procedure ConsolidatedRetailSalesOnChange(Object, Form, TableNames) Export
 EndProcedure
 
 Procedure OnSetConsolidatedRetailSalesNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 EndProcedure
@@ -2375,7 +2376,8 @@ Procedure BranchOnChange(Object, Form, TableNames) Export
 EndProcedure
 
 Procedure OnSetBranchNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 EndProcedure

@@ -316,6 +316,36 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="a2dd1f13-7744-402d-a9de-5f5d6d434c82">
+    <name>ConsolidatedRetailSales</name>
+    <synonym>
+      <key>en</key>
+      <value>Consolidated retail sales</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1d6024ee-5794-4bbb-9699-aa7ce9bd2ab0">
+    <name>Workstation</name>
+    <synonym>
+      <key>en</key>
+      <value>Workstation</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Workstations</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="e0f081d4-5d22-4460-ba59-2f55d8d61e66">
     <name>DocumentForm</name>
     <synonym>

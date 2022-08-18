@@ -28,6 +28,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.GroupPaymentRight.ShowTitle = False;
 
 	EndIf;
+	
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -51,11 +52,19 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	If FOServer.IsUseConsolidatedRetailSales() Then
-		SessionIsOpened = ValueIsFilled(Form.ConsolidatedRetailSalesRef);
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+		SessionIsOpened = ValueIsFilled(Object.ConsolidatedRetailSales);
 		Form.Items.OpenSession.Enabled = Not SessionIsOpened;
 		Form.Items.CloseSession.Enabled = SessionIsOpened;
 		Form.Items.CancelSession.Enabled = SessionIsOpened;
+		
+		If Not SessionIsOpened Then
+			Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage1;
+		Else
+			Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage2;
+		EndIf;
+	Else
+		Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage2;
 	EndIf;
 EndProcedure
 
@@ -84,8 +93,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenSession(Command)
-	ThisObject.ConsolidatedRetailSalesRef = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
-	Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSalesRef;
+	Object.ConsolidatedRetailSales = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
 	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 	
 	SetVisibilityAvailability(Object, ThisObject);
@@ -94,9 +102,8 @@ EndProcedure
 
 &AtClient
 Procedure CloseSession(Command)
-	DocConsolidatedRetailSalesServer.CloseDocument(ThisObject.ConsolidatedRetailSalesRef);
-	ThisObject.ConsolidatedRetailSalesRef = Undefined;
-	Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSalesRef;
+	DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales);
+	Object.ConsolidatedRetailSales = Undefined;
 	
 	SetVisibilityAvailability(Object, ThisObject);
 	EnabledPaymentButton();
@@ -104,9 +111,8 @@ EndProcedure
 
 &AtClient
 Procedure CancelSession(Command)
-	DocConsolidatedRetailSalesServer.CancelDocument(ThisObject.ConsolidatedRetailSalesRef);
-	ThisObject.ConsolidatedRetailSalesRef = Undefined;
-	Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSalesRef;
+	DocConsolidatedRetailSalesServer.CancelDocument(Object.ConsolidatedRetailSales);
+	Object.ConsolidatedRetailSales = Undefined;
 	
 	SetVisibilityAvailability(Object, ThisObject);
 	EnabledPaymentButton();		
@@ -551,7 +557,7 @@ Procedure NewTransaction()
 	Cancel = False;
 	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
 	
-	If FOServer.IsUseConsolidatedRetailSales() Then
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
 		DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 	EndIf;
 	
@@ -568,9 +574,8 @@ Procedure NewTransactionAtServer()
 	Cancel = False;
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
 	
-	If FOServer.IsUseConsolidatedRetailSales() Then
-		ThisObject.ConsolidatedRetailSalesRef = DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation);
-		Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSalesRef;
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+		Object.ConsolidatedRetailSales = DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation);
 	EndIf;
 	
 	SalesPersonByDefault = Undefined;
@@ -638,8 +643,8 @@ EndProcedure
 
 &AtClient
 Procedure EnabledPaymentButton()
-	If FOServer.IsUseConsolidatedRetailSales() Then
-		Items.qPayment.Enabled = Object.ItemList.Count() And ValueIsFilled(ThisObject.ConsolidatedRetailSalesRef);	
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+		Items.qPayment.Enabled = Object.ItemList.Count() And ValueIsFilled(Object.ConsolidatedRetailSales);	
 	Else
 		Items.qPayment.Enabled = Object.ItemList.Count();
 	EndIf;

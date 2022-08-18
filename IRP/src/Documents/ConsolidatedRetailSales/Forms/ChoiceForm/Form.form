@@ -237,19 +237,19 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>FiscalHardware</name>
-      <id>34</id>
+      <name>CashAccount</name>
+      <id>46</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.FiscalHardware</segments>
+        <segments>List.CashAccount</segments>
       </dataPath>
       <extendedTooltip>
-        <name>FiscalHardwareExtendedTooltip</name>
-        <id>36</id>
+        <name>CashAccountExtendedTooltip</name>
+        <id>48</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -263,8 +263,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>FiscalHardwareContextMenu</name>
-        <id>35</id>
+        <name>CashAccountContextMenu</name>
+        <id>47</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>

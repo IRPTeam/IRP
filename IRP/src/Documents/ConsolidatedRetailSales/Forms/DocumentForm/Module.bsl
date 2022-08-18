@@ -49,7 +49,7 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.RetailSalesReceipts.Parameters.SetParameterValue("ConsolidatedRetailSales", Object.Ref);
+	Form.Documents.Parameters.SetParameterValue("ConsolidatedRetailSales", Object.Ref);
 EndProcedure
 
 &AtClient

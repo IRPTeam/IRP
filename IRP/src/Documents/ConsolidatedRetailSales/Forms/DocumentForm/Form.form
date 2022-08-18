@@ -762,10 +762,10 @@
     <name>Pages</name>
     <id>62</id>
     <items xsi:type="form:FormGroup">
-      <name>GroupRetailSalesReceipts</name>
+      <name>GroupDocuments</name>
       <id>90</id>
       <items xsi:type="form:Table">
-        <name>RetailSalesReceipts</name>
+        <name>Documents</name>
         <id>92</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -773,11 +773,11 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>RetailSalesReceipts</segments>
+          <segments>Documents</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
-          <name>RetailSalesReceiptsIcon</name>
+          <name>DocumentsIcon</name>
           <id>162</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -785,11 +785,11 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>RetailSalesReceipts.Icon</segments>
+            <segments>Documents.Icon</segments>
           </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
-            <name>RetailSalesReceiptsIconExtendedTooltip</name>
+            <name>DocumentsIconExtendedTooltip</name>
             <id>164</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -804,7 +804,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>RetailSalesReceiptsIconContextMenu</name>
+            <name>DocumentsIconContextMenu</name>
             <id>163</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -830,19 +830,19 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>RetailSalesReceiptsNumber</name>
-          <id>105</id>
+          <name>DocumentsDocument</name>
+          <id>168</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>RetailSalesReceipts.Number</segments>
+            <segments>Documents.Document</segments>
           </dataPath>
           <extendedTooltip>
-            <name>RetailSalesReceiptsNumberExtendedTooltip</name>
-            <id>107</id>
+            <name>DocumentsDocumentExtendedTooltip</name>
+            <id>170</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -856,8 +856,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>RetailSalesReceiptsNumberContextMenu</name>
-            <id>106</id>
+            <name>DocumentsDocumentContextMenu</name>
+            <id>169</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -880,57 +880,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>RetailSalesReceiptsDate</name>
-          <id>108</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>RetailSalesReceipts.Date</segments>
-          </dataPath>
-          <extendedTooltip>
-            <name>RetailSalesReceiptsDateExtendedTooltip</name>
-            <id>110</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>RetailSalesReceiptsDateContextMenu</name>
-            <id>109</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>InputField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
-        </items>
-        <items xsi:type="form:FormField">
-          <name>RetailSalesReceiptsCompany</name>
+          <name>DocumentsCompany</name>
           <id>117</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -938,10 +888,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>RetailSalesReceipts.Company</segments>
+            <segments>Documents.Company</segments>
           </dataPath>
           <extendedTooltip>
-            <name>RetailSalesReceiptsCompanyExtendedTooltip</name>
+            <name>DocumentsCompanyExtendedTooltip</name>
             <id>119</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -956,7 +906,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>RetailSalesReceiptsCompanyContextMenu</name>
+            <name>DocumentsCompanyContextMenu</name>
             <id>118</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -980,7 +930,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>RetailSalesReceiptsBranch</name>
+          <name>DocumentsBranch</name>
           <id>156</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -988,10 +938,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>RetailSalesReceipts.Branch</segments>
+            <segments>Documents.Branch</segments>
           </dataPath>
           <extendedTooltip>
-            <name>RetailSalesReceiptsBranchExtendedTooltip</name>
+            <name>DocumentsBranchExtendedTooltip</name>
             <id>158</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1006,7 +956,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>RetailSalesReceiptsBranchContextMenu</name>
+            <name>DocumentsBranchContextMenu</name>
             <id>157</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1030,7 +980,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>RetailSalesReceiptsCurrency</name>
+          <name>DocumentsCurrency</name>
           <id>120</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1038,10 +988,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>RetailSalesReceipts.Currency</segments>
+            <segments>Documents.Currency</segments>
           </dataPath>
           <extendedTooltip>
-            <name>RetailSalesReceiptsCurrencyExtendedTooltip</name>
+            <name>DocumentsCurrencyExtendedTooltip</name>
             <id>122</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1056,7 +1006,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>RetailSalesReceiptsCurrencyContextMenu</name>
+            <name>DocumentsCurrencyContextMenu</name>
             <id>121</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1080,7 +1030,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>RetailSalesReceiptsDocumentAmount</name>
+          <name>DocumentsDocumentAmount</name>
           <id>159</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1088,10 +1038,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>RetailSalesReceipts.DocumentAmount</segments>
+            <segments>Documents.DocumentAmount</segments>
           </dataPath>
           <extendedTooltip>
-            <name>RetailSalesReceiptsDocumentAmountExtendedTooltip</name>
+            <name>DocumentsDocumentAmountExtendedTooltip</name>
             <id>161</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1106,7 +1056,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>RetailSalesReceiptsDocumentAmountContextMenu</name>
+            <name>DocumentsDocumentAmountContextMenu</name>
             <id>160</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1130,7 +1080,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>RetailSalesReceiptsAuthor</name>
+          <name>DocumentsAuthor</name>
           <id>153</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1138,10 +1088,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>RetailSalesReceipts.Author</segments>
+            <segments>Documents.Author</segments>
           </dataPath>
           <extendedTooltip>
-            <name>RetailSalesReceiptsAuthorExtendedTooltip</name>
+            <name>DocumentsAuthorExtendedTooltip</name>
             <id>155</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1156,7 +1106,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>RetailSalesReceiptsAuthorContextMenu</name>
+            <name>DocumentsAuthorContextMenu</name>
             <id>154</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1180,7 +1130,7 @@
           </extInfo>
         </items>
         <autoCommandBar>
-          <name>RetailSalesReceiptsCommandBar</name>
+          <name>DocumentsCommandBar</name>
           <id>93</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1200,10 +1150,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>RetailSalesReceiptsSearchString</name>
+          <name>DocumentsSearchString</name>
           <id>96</id>
           <extendedTooltip>
-            <name>RetailSalesReceiptsSearchStringExtendedTooltip</name>
+            <name>DocumentsSearchStringExtendedTooltip</name>
             <id>98</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1218,7 +1168,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>RetailSalesReceiptsSearchStringContextMenu</name>
+            <name>DocumentsSearchStringContextMenu</name>
             <id>97</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1237,10 +1187,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>RetailSalesReceiptsViewStatus</name>
+          <name>DocumentsViewStatus</name>
           <id>102</id>
           <extendedTooltip>
-            <name>RetailSalesReceiptsViewStatusExtendedTooltip</name>
+            <name>DocumentsViewStatusExtendedTooltip</name>
             <id>104</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1255,7 +1205,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>RetailSalesReceiptsViewStatusContextMenu</name>
+            <name>DocumentsViewStatusContextMenu</name>
             <id>103</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1275,10 +1225,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <name>RetailSalesReceiptsSearchControl</name>
+          <name>DocumentsSearchControl</name>
           <id>99</id>
           <extendedTooltip>
-            <name>RetailSalesReceiptsSearchControlExtendedTooltip</name>
+            <name>DocumentsSearchControlExtendedTooltip</name>
             <id>101</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1293,7 +1243,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>RetailSalesReceiptsSearchControlContextMenu</name>
+            <name>DocumentsSearchControlContextMenu</name>
             <id>100</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1308,7 +1258,7 @@
           </extInfo>
         </searchControlAddition>
         <extendedTooltip>
-          <name>RetailSalesReceiptsExtendedTooltip</name>
+          <name>DocumentsExtendedTooltip</name>
           <id>95</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1323,7 +1273,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>RetailSalesReceiptsContextMenu</name>
+          <name>DocumentsContextMenu</name>
           <id>94</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1368,10 +1318,10 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Retail sales receipts</value>
+        <value>Documents</value>
       </title>
       <extendedTooltip>
-        <name>GroupRetailSalesReceiptsExtendedTooltip</name>
+        <name>GroupDocumentsExtendedTooltip</name>
         <id>91</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1808,10 +1758,10 @@
     </extInfo>
   </attributes>
   <attributes>
-    <name>RetailSalesReceipts</name>
+    <name>Documents</name>
     <title>
       <key>en</key>
-      <value>Retail sales receipts</value>
+      <value>Documents</value>
     </title>
     <id>4</id>
     <valueType>
@@ -1824,7 +1774,7 @@
       <common>true</common>
     </edit>
     <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>RetailSalesReceipts.Ref</segments>
+      <segments>Documents.Ref</segments>
     </notDefaultUseAlwaysAttributes>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
@@ -1836,17 +1786,61 @@
 	RetailSalesReceipt.Author,
 	RetailSalesReceipt.Branch,
 	RetailSalesReceipt.DocumentAmount,
-	
-	CASE 
-	WHEN RetailSalesReceipt.Posted THEN 0
-	WHEN RetailSalesReceipt.DeletionMark THEN 1
-	ELSE 2 END AS Icon
-	
+	CASE
+		WHEN RetailSalesReceipt.Posted
+			THEN 0
+		WHEN RetailSalesReceipt.DeletionMark
+			THEN 1
+		ELSE 2
+	END AS Icon
+INTO Doc
 FROM
 	Document.RetailSalesReceipt AS RetailSalesReceipt
 WHERE
 	RetailSalesReceipt.ConsolidatedRetailSales = &amp;ConsolidatedRetailSales
-	AND NOT RetailSalesReceipt.ConsolidatedRetailSales.Ref IS NULL</queryText>
+	AND NOT RetailSalesReceipt.ConsolidatedRetailSales.Ref IS NULL
+
+UNION ALL
+
+SELECT
+	RetailReturnReceipt.Ref,
+	RetailReturnReceipt.Number,
+	RetailReturnReceipt.Date,
+	RetailReturnReceipt.Company,
+	RetailReturnReceipt.Currency,
+	RetailReturnReceipt.Author,
+	RetailReturnReceipt.Branch,
+	- RetailReturnReceipt.DocumentAmount,
+	CASE
+		WHEN RetailReturnReceipt.Posted
+			THEN 0
+		WHEN RetailReturnReceipt.DeletionMark
+			THEN 1
+		ELSE 2
+	END AS Icon
+FROM
+	Document.RetailReturnReceipt AS RetailReturnReceipt
+WHERE
+	RetailReturnReceipt.ConsolidatedRetailSales = &amp;ConsolidatedRetailSales
+	AND NOT RetailReturnReceipt.ConsolidatedRetailSales.Ref IS NULL
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	Doc.Ref AS Document,
+	Doc.Number,
+	Doc.Date AS Date,
+	Doc.Company,
+	Doc.Currency,
+	Doc.Author,
+	Doc.Branch,
+	Doc.DocumentAmount,
+	Doc.Icon
+FROM
+	Doc AS Doc
+
+ORDER BY
+	Date</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>

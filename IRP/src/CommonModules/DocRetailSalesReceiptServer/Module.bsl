@@ -64,11 +64,3 @@ EndProcedure
 
 #EndRegion
 
-Function IsClosedRetailSalesReceipt(DocRef) Export
-	If Not FOServer.IsUseConsolidatedRetailSales() Then
-		Return False;
-	EndIf;
-	
-	Return ValueIsFilled(DocRef) And ValueIsFilled(DocRef.ConsolidatedRetailSales) 
-			And DocRef.ConsolidatedRetailSales.Status = Enums.ConsolidatedRetailSalesStatuses.Close;
-EndFunction

@@ -16,6 +16,8 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 
 	Data = New Structure();
 	Data.Insert("ManagerSegment", SessionParameters.CurrentUserPartner);
+	Data.Insert("Workstation"   , SessionParameters.Workstation);
+	
 	For Each Row In UserSettings Do
 		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular 
 			Or Row.KindOfAttribute = Enums.KindsOfAttributes.Common Then

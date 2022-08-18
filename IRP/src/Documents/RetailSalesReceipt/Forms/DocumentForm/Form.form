@@ -4957,6 +4957,60 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
+        <name>Workstation</name>
+        <id>1078</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.Workstation</segments>
+        </dataPath>
+        <handlers>
+          <event>OnChange</event>
+          <name>WorkstationOnChange</name>
+        </handlers>
+        <extendedTooltip>
+          <name>WorkstationExtendedTooltip</name>
+          <id>1080</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>WorkstationContextMenu</name>
+          <id>1079</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormField">
         <name>Branch</name>
         <id>878</id>
         <visible>true</visible>
@@ -4967,6 +5021,10 @@
         <dataPath xsi:type="form:DataPath">
           <segments>Object.Branch</segments>
         </dataPath>
+        <handlers>
+          <event>OnChange</event>
+          <name>BranchOnChange</name>
+        </handlers>
         <extendedTooltip>
           <name>BranchExtendedTooltip</name>
           <id>880</id>
@@ -6473,37 +6531,6 @@
       <placementArea>UserCmds</placementArea>
       <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
     </items>
-    <items xsi:type="form:Button">
-      <name>FormUnlockRetailSales</name>
-      <id>1076</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-        <name>FormUnlockRetailSalesExtendedTooltip</name>
-        <id>1077</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <commandName>Form.Command.UnlockRetailSales</commandName>
-      <representation>Auto</representation>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <placementArea>UserCmds</placementArea>
-      <representationInContextMenu>Auto</representationInContextMenu>
-      <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
-    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -7277,27 +7304,6 @@
     </action>
     <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
     <representation>Picture</representation>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>UnlockRetailSales</name>
-    <title>
-      <key>en</key>
-      <value>Unlock retail sales</value>
-    </title>
-    <id>11</id>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.Unlock</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>UnlockRetailSales</name>
-      </handler>
-    </action>
-    <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

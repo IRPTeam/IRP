@@ -42,10 +42,28 @@ EndProcedure
 
 #EndRegion
 
-#Region FISCAL_HARDWARE
+#Region ACCOUNT
 
-Procedure FiscalHardwareOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+Procedure AccountOnChange(Object, Form, Item) Export
+	ViewClient_V2.CashAccountOnChange(Object, Form, "PaymentList");
+EndProcedure
+
+Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
+	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
+	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
+		PredefinedValue("Enum.CashAccountTypes.Cash"), , DataCompositionComparisonType.Equal));
+	StartChoiceParameters.FillingData.Insert("Type", PredefinedValue("Enum.CashAccountTypes.Cash"));
+	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
+EndProcedure
+
+Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DefaultEditTextParameters = New Structure("Company", Object.Company);
+	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
+	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
+		PredefinedValue("Enum.CashAccountTypes.Cash"), ComparisonType.Equal));
+	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
 #EndRegion

@@ -101,13 +101,13 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="2d4addfb-9ade-4752-b5bf-7d1067965326">
-    <name>FiscalHardware</name>
+    <name>CashAccount</name>
     <synonym>
       <key>en</key>
-      <value>Fiscal hardware</value>
+      <value>Cash account</value>
     </synonym>
     <type>
-      <types>CatalogRef.Hardware</types>
+      <types>CatalogRef.CashAccounts</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

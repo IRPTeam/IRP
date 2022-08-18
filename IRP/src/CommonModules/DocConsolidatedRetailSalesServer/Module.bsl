@@ -29,7 +29,7 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("Company");	
 	AttributesArray.Add("OpeningDate");	
 	AttributesArray.Add("ClosingDate");	
-	AttributesArray.Add("FiscalHardware");	
+	AttributesArray.Add("CashAccount");	
 	AttributesArray.Add("Status");	
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do
@@ -60,8 +60,14 @@ EndProcedure
 
 Function GetDocument(Company, Branch, Workstation) Export
 	
-	FiscalHardware = GetWorkstationFiscalHardware(Workstation);
+	If Not UseConsolidatedRetilaSales(Branch) Then
+		Return Undefined;
+	EndIf;
 	
+	If Not (ValueIsFilled(Workstation) And ValueIsFilled(Workstation.CashAccount)) Then
+		Return Undefined;
+	EndIf;
+		
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -73,11 +79,11 @@ Function GetDocument(Company, Branch, Workstation) Export
 	|	AND ConsolidatedRetailSales.Company = &Company
 	|	AND ConsolidatedRetailSales.Branch = &Branch
 	|	AND ConsolidatedRetailSales.Status = VALUE(Enum.ConsolidatedRetailSalesStatuses.Open)
-	|	AND ConsolidatedRetailSales.FiscalHardware = &FiscalHardware";
+	|	AND ConsolidatedRetailSales.CashAccount = &CashAccount";
 	
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("Branch", Branch);
-	Query.SetParameter("FiscalHardware", FiscalHardware);
+	Query.SetParameter("CashAccount", Workstation.CashAccount);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
@@ -87,14 +93,12 @@ Function GetDocument(Company, Branch, Workstation) Export
 EndFunction
 
 Function CreateDocument(Company, Branch, Workstation) Export
-	FiscalHardware = GetWorkstationFiscalHardware(Workstation);
-	
 	OpeningDateTime = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	FillingValues = New Structure();
 	FillingValues.Insert("Company"        , Company);
 	FillingValues.Insert("Branch"         , Branch);
-	FillingValues.Insert("FiscalHardware" , FiscalHardware);
+	FillingValues.Insert("CashAccount"    , Workstation.CashAccount);
 	FillingValues.Insert("OpeningDate"    , OpeningDateTime);
 	FillingValues.Insert("Status"         , Enums.ConsolidatedRetailSalesStatuses.Open);
 	
@@ -119,19 +123,19 @@ Procedure CancelDocument(DocRef) Export
 	DocObject.Write(DocumentWriteMode.Posting);
 EndProcedure
 
-Function GetWorkstationFiscalHardware(Workstation)
-	EnabledHardwares = New Array();
-	For Each Row In Workstation.HardwareList Do
-		If Row.Enable Then
-			EnabledHardwares.Add(Row.Hardware);
-		EndIf;
-	EndDo;
-	
-	If EnabledHardwares.Count() <> 1 Then
-		Raise StrTemplate("Workstation have %1 enabled hardware, can not separate fiscal hardvare from other",
-			EnabledHardwares.Count());
+Function IsClosedRetailDocument(DocRef) Export
+	If Not FOServer.IsUseConsolidatedRetailSales() Then
+		Return False;
 	EndIf;
-	Return EnabledHardwares[0];
+	
+	Return ValueIsFilled(DocRef) And ValueIsFilled(DocRef.ConsolidatedRetailSales) 
+			And DocRef.ConsolidatedRetailSales.Status = Enums.ConsolidatedRetailSalesStatuses.Close;
+EndFunction
+
+Function UseConsolidatedRetilaSales(Branch) Export
+	Return FOServer.IsUseConsolidatedRetailSales() 
+		And ValueIsFilled(Branch)
+		And Branch.UseConsolidatedRetailSales;
 EndFunction
 
 #EndRegion

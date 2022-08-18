@@ -365,7 +365,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>FiscalHardware</name>
+          <name>CashAccount</name>
           <id>78</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -373,14 +373,14 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.FiscalHardware</segments>
+            <segments>Object.CashAccount</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
-            <name>FiscalHardawareOnChange</name>
+            <name>AccountOnChange</name>
           </handlers>
           <extendedTooltip>
-            <name>FiscalHardwareExtendedTooltip</name>
+            <name>CashAccountExtendedTooltip</name>
             <id>80</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -395,7 +395,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>FiscalHardwareContextMenu</name>
+            <name>CashAccountContextMenu</name>
             <id>79</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -410,6 +410,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>AccountStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>AccountEditTextChange</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -768,6 +776,59 @@
           <segments>RetailSalesReceipts</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
+        <items xsi:type="form:FormField">
+          <name>RetailSalesReceiptsIcon</name>
+          <id>162</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>RetailSalesReceipts.Icon</segments>
+          </dataPath>
+          <titleLocation>None</titleLocation>
+          <extendedTooltip>
+            <name>RetailSalesReceiptsIconExtendedTooltip</name>
+            <id>164</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>RetailSalesReceiptsIconContextMenu</name>
+            <id>163</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>PictureField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:ImageFieldExtInfo">
+            <width>1</width>
+            <maxWidth>1</maxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <verticalStretch>true</verticalStretch>
+            <valuesPicture xsi:type="core:PictureRef">
+              <picture>CommonPicture.DocumentStatuses</picture>
+            </valuesPicture>
+            <fileDragMode>AsFileRef</fileDragMode>
+          </extInfo>
+        </items>
         <items xsi:type="form:FormField">
           <name>RetailSalesReceiptsNumber</name>
           <id>105</id>
@@ -1774,11 +1835,18 @@
 	RetailSalesReceipt.Currency,
 	RetailSalesReceipt.Author,
 	RetailSalesReceipt.Branch,
-	RetailSalesReceipt.DocumentAmount
+	RetailSalesReceipt.DocumentAmount,
+	
+	CASE 
+	WHEN RetailSalesReceipt.Posted THEN 0
+	WHEN RetailSalesReceipt.DeletionMark THEN 1
+	ELSE 2 END AS Icon
+	
 FROM
 	Document.RetailSalesReceipt AS RetailSalesReceipt
 WHERE
-	RetailSalesReceipt.ConsolidatedRetailSales = &amp;ConsolidatedRetailSales</queryText>
+	RetailSalesReceipt.ConsolidatedRetailSales = &amp;ConsolidatedRetailSales
+	AND NOT RetailSalesReceipt.ConsolidatedRetailSales.Ref IS NULL</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>

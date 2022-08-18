@@ -230,6 +230,8 @@ Function GetChain()
 	
 	Chain.Insert("ChangeStatusByCheque" , GetChainLink("ChangeStatusByChequeExecute"));
 	
+	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstation" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -1021,6 +1023,18 @@ Function ChangeApArPostingDetailByAgreementExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	Return ServiceSystemServer.GetObjectAttribute(Options.Agreement, "ApArPostingDetail");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CONSOLIDATED_RETAIL_SALES_BY_WORKSTATION
+
+Function ChangeConsolidatedRetailSalesByWorkstationOptions() Export
+	Return GetChainLinkOptions("Company, Branch, Workstation");
+EndFunction
+
+Function ChangeConsolidatedRetailSalesByWorkstationExecute(Options) Export
+	Return DocConsolidatedRetailSalesServer.GetDocument(Options.Company, Options.Branch, Options.Workstation);
 EndFunction
 
 #EndRegion

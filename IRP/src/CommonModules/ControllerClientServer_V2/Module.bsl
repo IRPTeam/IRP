@@ -270,6 +270,7 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("Currency"        , "SetCurrency");
 	SettersMap.Insert("Date"            , "SetDate");
 	SettersMap.Insert("Company"         , "SetCompany");
+	SettersMap.Insert("Branch"          , "SetBranch");
 	SettersMap.Insert("Partner"         , "SetPartner");
 	SettersMap.Insert("LegalName"       , "SetLegalName");
 	SettersMap.Insert("Agreement"       , "SetAgreement");
@@ -277,6 +278,7 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("PriceIncludeTax" , "SetPriceIncludeTax");
 	SettersMap.Insert("StoreSender"     , "SetStoreSender");
 	SettersMap.Insert("StoreReceiver"   , "SetStoreReceiver");
+	SettersMap.Insert("Workstation"     , "SetWorkstation");
 	
 	// PaymentList
 	SettersMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
@@ -734,6 +736,7 @@ Function BindAccount(Parameters)
 	DataPath.Insert("CashExpense"   , "Account");
 	DataPath.Insert("CashRevenue"   , "Account");
 	DataPath.Insert("CashStatement" , "CashAccount");
+	DataPath.Insert("ConsolidatedRetailSales" , "CashAccount");
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCurrencyByAccount");
@@ -1798,7 +1801,8 @@ Function BindCompany(Parameters)
 	Binding.Insert("RetailSalesReceipt",
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepItemListChangeRevenueTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey,
+		|StepChangeConsolidatedRetailSalesByWorkstation");
 
 	Binding.Insert("PurchaseOrder",
 		"StepRequireCallCreateTaxesFormControls,
@@ -1905,10 +1909,17 @@ EndProcedure
 
 #Region BRANCH
 
+// Branch.OnChange
+Procedure BranchOnChange(Parameters) Export
+	AddViewNotify("OnSetBranchNotify", Parameters);
+	Binding = BindPartner(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
 // Branch.Set
 Procedure SetBranch(Parameters, Results) Export
 	Binding = BindBranch(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetBranchNotify");
 EndProcedure
 
 // Branch.Get
@@ -1920,6 +1931,7 @@ EndFunction
 Function BindBranch(Parameters)
 	DataPath = "Branch";
 	Binding = New Structure();
+	Binding.Insert("RetailSalesReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -2074,6 +2086,7 @@ EndProcedure
 
 // ConsolidatedRetailSales.OnChange
 Procedure ConsolidatedRetailSalesOnChange(Parameters) Export
+	AddViewNotify("OnSetConsolidatedRetailSalesNotify", Parameters);
 	Binding = BindConsolidatedRetailSales(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -2081,13 +2094,54 @@ EndProcedure
 // ConsolidatedRetailSales.Set
 Procedure SetConsolidatedRetailSales(Parameters, Results) Export
 	Binding = BindConsolidatedRetailSales(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetConsolidatedRetailSalesNotify");
 EndProcedure
 
 // ConsolidatedRetailSales.Bind
 Function BindConsolidatedRetailSales(Parameters)
 	DataPath = "ConsolidatedRetailSales";
 	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ConsolidatedRetailSales.ChangeConsolidatedRetailSalesByWorkstation.Step
+Procedure StepChangeConsolidatedRetailSalesByWorkstation(Parameters, Chain) Export
+	Chain.ChangeConsolidatedRetailSalesByWorkstation.Enable = True;
+	Chain.ChangeConsolidatedRetailSalesByWorkstation.Setter = "SetConsolidatedRetailSales";
+	Options = ModelClientServer_V2.ChangeConsolidatedRetailSalesByWorkstationOptions();
+	Options.Company = GetCompany(Parameters);
+	Options.Branch = GetBranch(Parameters);
+	Options.Workstation = GetWorkstation(Parameters);
+	Options.StepName = "StepChangeConsolidatedRetailSalesByWorkstation";
+	Chain.ChangeConsolidatedRetailSalesByWorkstation.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region WORKSTATION
+
+// Workstation.OnChange
+Procedure WorkstationOnChange(Parameters) Export
+	Binding = BindWorkstation(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Workstation.Set
+Procedure SetWorkstation(Parameters, Results) Export
+	Binding = BindWorkstation(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Workstation.Get
+Function GetWorkstation(Parameters)
+	Return GetPropertyObject(Parameters, BindWorkstation(Parameters).DataPath);
+EndFunction
+
+// Workstation.Bind
+Function BindWorkstation(Parameters)
+	DataPath = "Workstation";
+	Binding = New Structure();
+	Binding.Insert("RetailSalesReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

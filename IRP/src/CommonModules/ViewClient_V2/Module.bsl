@@ -2346,6 +2346,40 @@ Procedure ConsolidatedRetailSalesOnChange(Object, Form, TableNames) Export
 	EndDo;
 EndProcedure
 
+Procedure OnSetConsolidatedRetailSalesNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region WORKSTATION
+
+Procedure WorkstationOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.WorkstationOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region BRANCH
+
+Procedure BranchOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.BranchOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetBranchNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region STATUS

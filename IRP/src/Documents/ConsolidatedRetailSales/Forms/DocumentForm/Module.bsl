@@ -93,11 +93,21 @@ EndProcedure
 
 #EndRegion
 
-#Region FISCAL_HARDWARE
+#Region ACCOUNT
 
 &AtClient
-Procedure FiscalHardawareOnChange(Item)
-	DocConsolidatedRetailSalesClient.FiscalHardwareOnChange(Object, ThisObject, Item);
+Procedure AccountOnChange(Item)
+	DocConsolidatedRetailSalesClient.AccountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AccountStartChoice(Item, ChoiceData, StandardProcessing)
+	DocConsolidatedRetailSalesClient.AccountStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AccountEditTextChange(Item, Text, StandardProcessing)
+	DocConsolidatedRetailSalesClient.AccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

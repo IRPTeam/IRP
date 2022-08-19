@@ -231,6 +231,7 @@ Function GetChain()
 	Chain.Insert("ChangeStatusByCheque" , GetChainLink("ChangeStatusByChequeExecute"));
 	
 	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstation" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationExecute"));
+	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstationForReturn" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationForReturnExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1034,6 +1035,25 @@ Function ChangeConsolidatedRetailSalesByWorkstationOptions() Export
 EndFunction
 
 Function ChangeConsolidatedRetailSalesByWorkstationExecute(Options) Export
+	Return DocConsolidatedRetailSalesServer.GetDocument(Options.Company, Options.Branch, Options.Workstation);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CONSOLIDATED_RETAIL_SALES_BY_WORKSTATION_FOR_RETURN
+
+Function ChangeConsolidatedRetailSalesByWorkstationForReturnOptions() Export
+	Return GetChainLinkOptions("Company, Branch, Workstation, Date, SalesDocuments");
+EndFunction
+
+Function ChangeConsolidatedRetailSalesByWorkstationForReturnExecute(Options) Export
+	SalesReturnData = New Structure();
+	SalesReturnData.Insert("Date", Options.Date);
+	SalesReturnData.Insert("ArrayOfSalesDocuments", Options.SalesDocuments);
+	UseConsolidatedSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Options.Branch, SalesReturnData);
+	If Not UseConsolidatedSales Then
+		Return Undefined;
+	EndIf;
 	Return DocConsolidatedRetailSalesServer.GetDocument(Options.Company, Options.Branch, Options.Workstation);
 EndFunction
 

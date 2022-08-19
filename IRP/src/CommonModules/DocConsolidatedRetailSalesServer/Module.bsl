@@ -132,10 +132,27 @@ Function IsClosedRetailDocument(DocRef) Export
 			And DocRef.ConsolidatedRetailSales.Status = Enums.ConsolidatedRetailSalesStatuses.Close;
 EndFunction
 
-Function UseConsolidatedRetilaSales(Branch) Export
-	Return FOServer.IsUseConsolidatedRetailSales() 
+Function UseConsolidatedRetilaSales(Branch, SalesReturnData = Undefined) Export
+	Result = FOServer.IsUseConsolidatedRetailSales() 
 		And ValueIsFilled(Branch)
 		And Branch.UseConsolidatedRetailSales;
+	If SalesReturnData = Undefined Then
+		Return Result;
+	EndIf;
+	
+	// for return document
+	If Not SalesReturnData.ArrayOfSalesDocuments.Count() Then
+		Return False;
+	EndIf;
+	
+	IsSameDay = False;
+	For Each SalesDocument In SalesReturnData.ArrayOfSalesDocuments Do
+		If BegOfDay(SalesDocument.Date) = BegOfDay(SalesReturnData.Date) Then
+			IsSameDay = True;
+			Break;
+		EndIf;
+	EndDo;
+	Return IsSameDay;
 EndFunction
 
 #EndRegion

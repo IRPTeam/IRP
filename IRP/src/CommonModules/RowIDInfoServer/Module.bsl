@@ -7535,8 +7535,13 @@ Function AddLinkedDocumentRows(Object, FillingValues) Export
 		StrConcat(UpdatedProperties, ","), ArrayOfNewRows);
 EndFunction
 
-Procedure PutToUpdatedProperties(PropertyName, TableName, Row, UpdatedProperties)
+Procedure PutToUpdatedProperties(PropertyName, TableName, Row, UpdatedProperties, IsUnlink = False)
 	If CommonFunctionsClientServer.ObjectHasProperty(Row, PropertyName) Then
+		// empty properties processed only for unlink
+		If Not IsUnlink And Not ValueIsFilled(Row[PropertyName]) Then
+			Return;
+		EndIf;
+		
 		DataPath = TrimAll(TableName) + "." + PropertyName;
 		If UpdatedProperties.Find(DataPath) = Undefined Then
 			UpdatedProperties.Add(DataPath);
@@ -7672,7 +7677,7 @@ Procedure UnlinkAttributes(LinkedRow, AttributeNames, UpdatedProperties)
 	For Each AttributeName In AttributeNames Do
 		If LinkedRow.Property(AttributeName) Then
 			LinkedRow[AttributeName] = Undefined;
-			PutToUpdatedProperties(AttributeName, "ItemList", LinkedRow, UpdatedProperties);
+			PutToUpdatedProperties(AttributeName, "ItemList", LinkedRow, UpdatedProperties, True);
 		EndIf;
 	EndDo;
 EndProcedure

@@ -72,7 +72,7 @@ EndFunction
 // 
 // Parameters:
 //  Context - String - Context
-//  Row - ValueTableRow - Row
+//  Row - Array of Structure - Row
 //  ColumnName - String - Column name
 //  Value - Arbitrary - Value
 //  TableName - String - Table name

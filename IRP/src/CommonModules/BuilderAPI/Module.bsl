@@ -186,6 +186,12 @@ Procedure FillInitData(Wrapper, InitialData)
 	EndDo;
 EndProcedure
 
+// Fill attr info.
+// 
+// Parameters:
+//  Wrapper - See CreateWrapper
+//  DocObject - DocumentObjectDocumentName - Doc object
+//  Attr - StandardAttributeDescription, MetadataObjectAttribute - Attr
 Procedure FillAttrInfo(Wrapper, DocObject, Attr)
 	Wrapper.Object.Insert(Attr.Name, DocObject[Attr.Name]);
 	AttrInfo = New Structure();

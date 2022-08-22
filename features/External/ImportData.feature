@@ -122,6 +122,11 @@ Scenario: Create catalog BusinessUnits objects
 		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef026' | 'False'           | 'Logistics department'    | ''                 | ''               | 'Logistics department TR'    |
 		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'False'           | 'Shop 01'                 | ''                 | ''               | ''                           |
 
+Scenario: Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
+	And I check or create catalog "BusinessUnits" objects:
+		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UseConsolidatedRetailSales' |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'        | 'Shop 02'        | ''                 | ''               | 'Shop 02 Tr'     | 'True'                       |
+
 Scenario: Create catalog CashAccounts objects
 
 	And I check or create catalog "CashAccounts" objects:
@@ -389,16 +394,29 @@ Scenario: Create catalog Partners objects (Employee)
 		| 'e1cib/data/Catalog.Partners?ref=aa6b120ed92fbced11eacd8e2a104d15' | 'False'           | ''       | 'False'       | 'False'     | 'True'      | 'False'       | ''                                                                        | 'False'                                      | 'False'                                | 'Sofia Borisova'  | ''                 | ''               | 'Sofia Borisova TR'  |
 
 
+Scenario: Create catalog BankTerms objects (for Shop 02)
 
+	And I check or create catalog "BankTerms" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b784ae4f9cb08e5e11ed224e1ee0a7fc' | 'False'        | 2      | 'Bank term 02'   | ''                 | ''               | ''               |
+
+	And I refill object tabular section "PaymentTypes":
+		| 'Ref'                                                               | 'PaymentType'                                                          | 'Account'                                                              | 'Percent' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b784ae4f9cb08e5e11ed224e1ee0a7fc' | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd0' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186e' | 1         |
+		| 'e1cib/data/Catalog.BankTerms?ref=b784ae4f9cb08e5e11ed224e1ee0a7fc' | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd1' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186f' | 2         |
+
+	And I check or create information register "BranchBankTerms" records:
+		| 'Branch'                                                                | 'BankTerm'                                                          |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'e1cib/data/Catalog.BankTerms?ref=b784ae4f9cb08e5e11ed224e1ee0a7fc' |
 
 
 
 Scenario: Create catalog PaymentTypes objects
 	And I check or create catalog "PaymentTypes" objects:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Type'                   | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fcf' | 'False'           | 'Enum.PaymentTypes.Cash' | 'Cash'           | ''                 | ''               | ''               |
-		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd0' | 'False'           | 'Enum.PaymentTypes.Card' | 'Card 01'        | ''                 | ''               | ''               |
-		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd1' | 'False'           | 'Enum.PaymentTypes.Card' | 'Card 02'        | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fcf' | 'False'        | 'Enum.PaymentTypes.Cash' | 'Cash'           | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd0' | 'False'        | 'Enum.PaymentTypes.Card' | 'Card 01'        | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd1' | 'False'        | 'Enum.PaymentTypes.Card' | 'Card 02'        | ''                 | ''               | ''               |
 
 
 
@@ -1453,6 +1471,30 @@ Scenario: Create information register UserSettings records (Retail document)
 		| '$$IdCI$$'    | 'Document.CashStatement'       | 'Branch'                    | 'Enum.KindsOfAttributes.Common'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' |
 		| '$$IdCI$$'    | 'Document.CashStatement'       | 'Company'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
 		| '$$IdCI$$'    | 'Document.CashStatement'       | 'CashAccount'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf124a9ba0839'  |
+
+
+Scenario: Create information register UserSettings records (Retail)
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject'               | 'AttributeName'             | 'KindOfAttribute'                | 'Value'                                                                 |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Agreement'                 | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fcd'    |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Branch'                    | 'Enum.KindsOfAttributes.Common'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Company'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'ItemList.ProfitLossCenter' | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'ItemList.Store'            | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'        |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'LegalName'                 | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf12effe70fcc'     |
+		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'  | 'Partner'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf12effe70fcb'      |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Agreement'                 | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fcd'    |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Branch'                    | 'Enum.KindsOfAttributes.Common'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Company'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'ItemList.ProfitLossCenter' | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'ItemList.Store'            | 'Enum.KindsOfAttributes.Column'  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b'        |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'LegalName'                 | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf12effe70fcc'     |
+		| '$$IdCI$$'    | 'Document.RetailReturnReceipt' | 'Partner'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf12effe70fcb'      |
+		| '$$IdCI$$'    | 'Document.CashStatement'       | 'Branch'                    | 'Enum.KindsOfAttributes.Common'  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' |
+		| '$$IdCI$$'    | 'Document.CashStatement'       | 'Company'                   | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'     |
+		| '$$IdCI$$'    | 'Document.CashStatement'       | 'CashAccount'               | 'Enum.KindsOfAttributes.Regular' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf124a9ba0839'  |
+
 
 Scenario: Create catalog ItemKeys objects (Table)
 

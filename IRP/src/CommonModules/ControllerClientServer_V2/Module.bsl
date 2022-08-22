@@ -404,6 +404,8 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");
 	SettersMap.Insert("ItemList.TotalAmount"        , "StepItemListCalculations_IsTotalAmountChanged");
 	SettersMap.Insert("ItemList.<tax_rate>"         , "StepChangeTaxRate_AgreementInHeader");
+	SettersMap.Insert("ItemList."                   , "StepItemListCalculations_IsTaxRateChanged");
+	SettersMap.Insert("ItemList.TaxAmount"          , "SetItemListTaxAmount");
 	
 	Return SettersMap.Get(DataPath);
 EndFunction

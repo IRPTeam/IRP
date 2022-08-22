@@ -86,10 +86,10 @@ EndFunction
 // 
 // Returns:
 //  See CreateWrapper
-Function Initialize(DocName, InitialData = Undefined) Export
+Function Initialize(DocName, InitialData = Undefined, FillingData = Undefined) Export
 	DocMetadata = Metadata.Documents[DocName];
 	DocObject = Documents[DocMetadata.Name].CreateDocument();
-	DocObject.Fill(Undefined);
+	DocObject.Fill(FillingData);
 	
 	Wrapper = CreateWrapper();
 	
@@ -107,6 +107,10 @@ Function Initialize(DocName, InitialData = Undefined) Export
 		EndDo;
 		For Each Column In Table.Attributes Do
 			FillColumnInfo(Wrapper, DocObject, Table, Column);
+		EndDo;
+		
+		For Each Row In DocObject[Table.Name] Do
+			FillPropertyValues(Wrapper.Object[Table.Name].Add(), Row);
 		EndDo;
 	EndDo;
 	
@@ -289,3 +293,57 @@ Procedure FillColumnInfo(Wrapper, DocObject, Table, Column)
 EndProcedure
 
 #EndRegion
+
+
+Function AddRow(Wrapper, TableName) Export
+	NewRow = Wrapper.Object[TableName].Add();
+	NewRow.Key = String(New UUID());
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
+	ServerParameters.TableName = TableName;
+	Rows = New Array();
+	Rows.Add(NewRow);
+	ServerParameters.Rows = Rows;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	ControllerClientServer_V2.AddNewRow(TableName, Parameters);
+	Return Wrapper.Object[TableName].FindRows(New Structure("Key", NewRow.Key))[0];
+EndFunction
+
+Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
+	Property = New Structure();
+	Property.Insert("DataPath", StrTemplate("%1.%2", TableName, ""));
+	Property.Insert("_TableName_", TableName);
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
+	ServerParameters.TableName = String(Property._TableName_);
+	Rows = New Array();
+	Rows.Add(Row);
+	ServerParameters.Rows = Rows;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	
+	TaxInfo = Undefined;
+	For Each Info In Parameters.ArrayOfTaxInfo Do
+		If Info.Tax = Tax Then
+			TaxInfo = Info;
+			Break;
+		EndIf;
+	EndDo;
+	
+	If TaxInfo = Undefined Then
+		Raise "Tax not allowed for document, check tax settings";
+	EndIf;
+	
+	Parameters.Rows[0][TaxInfo.Name] = TaxRate;
+	Parameters.FormTaxColumnsExists = True;
+	
+	Parameters.Cache.Insert(TableName, New Array());
+		
+	NewCacheRow = New Structure();
+	NewCacheRow.Insert("Key", Row.Key);
+	NewCacheRow.Insert(TaxInfo.Name, TaxRate);
+	Parameters.Cache[TableName].Add(NewCacheRow);
+	
+	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	Result = New Structure();
+	Result.Insert("Context", Wrapper);
+	Result.Insert("Cache", Parameters.Cache);
+	Return Result;
+EndFunction

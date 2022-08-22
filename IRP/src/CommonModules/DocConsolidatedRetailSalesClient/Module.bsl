@@ -45,7 +45,7 @@ EndProcedure
 #Region ACCOUNT
 
 Procedure AccountOnChange(Object, Form, Item) Export
-	ViewClient_V2.CashAccountOnChange(Object, Form, "PaymentList");
+	ViewClient_V2.CashAccountOnChange(Object, Form, "");
 EndProcedure
 
 Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

@@ -3693,7 +3693,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ItemList.Ref.Workstation AS Workstation
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.RetailSalesReceipt.ItemList AS ItemList
@@ -7878,7 +7879,7 @@ Function GetSeparatorColumns(DocReceiverMetadata) Export
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturnOrder Then
 		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailReturnReceipt Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions, Workstation";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PlannedReceiptReservation Then
 		Return "Company, Branch, Requester";
 	EndIf;
@@ -8153,7 +8154,8 @@ Function GetColumnNames_ItemList()
 		   |RetailCustomer,
 		   |UsePartnerTransactions,
 		   |LegalNameContract,
-		   |SalesPerson";
+		   |SalesPerson,
+		   |Workstation";
 EndFunction
 
 Function GetEmptyTable_ItemList()

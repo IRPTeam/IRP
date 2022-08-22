@@ -52,6 +52,7 @@
   <realTimePosting>Deny</realTimePosting>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="fa4a07dd-7dea-4c13-bb0c-4ed0a23f71ef">
     <name>Company</name>
     <synonym>

@@ -2,16 +2,91 @@
 
 #Region Public
 
-// Initialize.
+#Region ForClient
+// Initialize for client.
 // 
 // Parameters:
-//  DocName - String - Document name
+//  DocName - String - Document name ex. SalesOrder
 //  InitialData - Structure - First initial data
 // 
 // Returns:
 //  String - Initialize
+Function InitializeAtClient(DocName, InitialData = Undefined) Export
+	Wrapper = Initialize(DocName, InitialData);
+	Context = ValueToStringInternal(Wrapper);
+	Return Context;
+EndFunction
+
+// Set property from client.
+// 
+// Parameters:
+//  Context - String - See InitializeAtClient Wrapper
+//  PropertyName - String - Property name
+//  Value - Arbitrary - Value
+//  MainTableName - String - Main table name
+// 
+// Returns:
+//  Structure - Set property:
+// * Context - String -
+// * Cache - Structure -
+Function SetPropertyAtClient(Context, PropertyName, Value, MainTableName = Undefined) Export
+	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
+	Result = SetProperty(Wrapper, PropertyName, Value, MainTableName);
+	Result.Context = ValueToStringInternal(Result.Context);
+	Return Result;
+EndFunction
+
+// Set row property.
+// 
+// Parameters:
+//  Context - String - Context
+//  Row - Array of Structure - Row
+//  ColumnName - String - Column name
+//  Value - Arbitrary - Value
+//  TableName - String - Table name
+// 
+// Returns:
+//  Structure - Set row property:
+// * Context - String -
+// * Cache - Structure -
+Function SetRowPropertyAtClient(Context, Row, ColumnName, Value, TableName) Export
+	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
+	Result = SetRowProperty(Wrapper, Row, ColumnName, Value, TableName);
+	Result.Context = ValueToStringInternal(Result.Context);
+	Return Result;
+EndFunction
+
+// Write.
+// 
+// Parameters:
+//  Context - String - Context
+//  WriteMode - DocumentWriteMode - Write mode
+//  PostingMode - DocumentPostingMode - Posting mode
+// 
+// Returns:
+//  Structure - Write:
+// * Context - String -
+// * Ref - DocumentRefDocumentName -
+Function WriteAtClient(Context, WriteMode = Undefined, PostingMode = Undefined) Export
+	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
+	Result = Write(Wrapper, WriteMode, PostingMode);
+	Result.Context = ValueToStringInternal(Result.Context);
+	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region ForServer
+
+// Initialize for server.
+// 
+// Parameters:
+//  DocName - String - Document name ex. SalesOrder
+//  InitialData - Structure - First initial data
+// 
+// Returns:
+//  See CreateWrapper
 Function Initialize(DocName, InitialData = Undefined) Export
-	
 	DocMetadata = Metadata.Documents[DocName];
 	DocObject = Documents[DocMetadata.Name].CreateDocument();
 	DocObject.Fill(Undefined);
@@ -38,32 +113,29 @@ Function Initialize(DocName, InitialData = Undefined) Export
 	If InitialData <> Undefined Then
 		FillInitData(Wrapper, InitialData);
 	EndIf;
-	
-	Context = ValueToStringInternal(Wrapper);
-	Return Context;
+	Return Wrapper
 EndFunction
 
 // Set property.
 // 
 // Parameters:
-//  Context - String - Context
+//  Wrapper - See CreateWrapper
 //  PropertyName - String - Property name
 //  Value - Arbitrary - Value
 //  MainTableName - String - Main table name
 // 
 // Returns:
 //  Structure - Set property:
-// * Context - String -
+// * Context - See CreateWrapper
 // * Cache - Structure -
-Function SetProperty(Context, PropertyName, Value, MainTableName = "PaymentList") Export
-	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
+Function SetProperty(Wrapper, PropertyName, Value, MainTableName = Undefined) Export
 	Property = Wrapper.Attr[PropertyName]; // Arbitrary
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
 	ServerParameters.TableName = MainTableName;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
 	Result = New Structure();
-	Result.Insert("Context", ValueToStringInternal(Wrapper));
+	Result.Insert("Context", Wrapper);
 	Result.Insert("Cache", Parameters.Cache);
 	Return Result;
 EndFunction
@@ -71,7 +143,7 @@ EndFunction
 // Set row property.
 // 
 // Parameters:
-//  Context - String - Context
+//  Wrapper - See CreateWrapper
 //  Row - Array of Structure - Row
 //  ColumnName - String - Column name
 //  Value - Arbitrary - Value
@@ -79,10 +151,9 @@ EndFunction
 // 
 // Returns:
 //  Structure - Set row property:
-// * Context - String -
+// * Context - See CreateWrapper
 // * Cache - Structure -
-Function SetRowProperty(Context, Row, ColumnName, Value, TableName = "PaymentList") Export
-	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
+Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName) Export
 	Property = Wrapper.Tables[TableName][ColumnName]; // Structure
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object); // Structure
 	//@skip-check property-return-type
@@ -93,7 +164,7 @@ Function SetRowProperty(Context, Row, ColumnName, Value, TableName = "PaymentLis
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
 	Result = New Structure();
-	Result.Insert("Context", ValueToStringInternal(Wrapper));
+	Result.Insert("Context", Wrapper);
 	Result.Insert("Cache", Parameters.Cache);
 	Return Result;
 EndFunction
@@ -101,16 +172,15 @@ EndFunction
 // Write.
 // 
 // Parameters:
-//  Context - String - Context
+//  Wrapper - See CreateWrapper
 //  WriteMode - DocumentWriteMode - Write mode
 //  PostingMode - DocumentPostingMode - Posting mode
 // 
 // Returns:
 //  Structure - Write:
-// * Context - String -
+// * Context - See CreateWrapper
 // * Ref - DocumentRefDocumentName -
-Function Write(Context, WriteMode = Undefined, PostingMode = Undefined) Export
-	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
+Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
 	DocMetadata = Wrapper.Object.Ref.Metadata();
 	
 	If ValueIsFilled(Wrapper.Object.Ref) Then
@@ -133,10 +203,12 @@ Function Write(Context, WriteMode = Undefined, PostingMode = Undefined) Export
 		?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
 	Wrapper.Object.Ref = Doc.Ref;
 		Result = New Structure();
-	Result.Insert("Context", ValueToStringInternal(Wrapper));
+	Result.Insert("Context", Wrapper);
 	Result.Insert("Ref", Doc.Ref);
 	Return Result;
 EndFunction
+
+#EndRegion
 
 #EndRegion
 

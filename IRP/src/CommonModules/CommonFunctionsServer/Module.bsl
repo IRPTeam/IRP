@@ -108,6 +108,16 @@ Function DeserializeXMLUseXDTO(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+// Deserialize XMLUse XDTOFactory.
+// 
+// Parameters:
+//  Value - String - Value
+//  Type - XDTOValueType, XDTOObjectType, Undefined - XDTO Type
+//  AddInfo - Structure - Add info
+//  WSName - WSDefinitions, Undefined - WSName
+// 
+// Returns:
+//  XDTODataObject
 Function DeserializeXMLUseXDTOFactory(Value, Type = Undefined, AddInfo = Undefined, WSName = Undefined) Export
 	Reader = New XMLReader();
 	Reader.SetString(Value);

@@ -2,7 +2,8 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	For Each FunctionalOption In Metadata.FunctionalOptions Do
-		If StrStartsWith(FunctionalOption.Name, "Use") Then
+		NameParts = StrSplit(FunctionalOption.Name, "_");
+		If StrStartsWith(NameParts[NameParts.UBound()], "Use") Then
 			NewRow = ThisObject.FunctionalOptions.Add();
 			NewRow.OptionName = FunctionalOption.Name;
 			NewRow.OptionPresentation = FunctionalOption.Synonym;

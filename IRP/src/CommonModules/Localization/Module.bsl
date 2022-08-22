@@ -691,7 +691,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_112", NStr("en = 'Not set ledger type by company [%1]'", Lang));
 	Strings.Insert("Error_113", NStr("en = 'Serial lot number [ %1 ] has to be unique at the document'", Lang) + Chars.LF);
 	Strings.Insert("Error_114", NStr("en = '""Landed cost"" is a required field.'", Lang) + Chars.LF);
-	
+	Strings.Insert("Error_115", NStr("en = 'Error while test connection'", Lang) + Chars.LF);
 #EndRegion
 
 #Region InfoMessages

@@ -82,7 +82,12 @@ Scenario: _0260100 preparation (retail)
 	* Bank terms
 		When Create catalog BankTerms objects (for Shop 02)		
 	* Workstation
-		When create Workstation
+		When Create catalog Workstations objects
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I click "Set current workstation" button			
 	* Retail documents
 		When Create document RSR, RRR with ConsolidatedRetailSales
 		And I execute 1C:Enterprise script at server

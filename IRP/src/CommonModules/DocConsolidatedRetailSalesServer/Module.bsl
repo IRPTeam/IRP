@@ -129,7 +129,8 @@ Function IsClosedRetailDocument(DocRef) Export
 	EndIf;
 	
 	Return ValueIsFilled(DocRef) And ValueIsFilled(DocRef.ConsolidatedRetailSales) 
-			And DocRef.ConsolidatedRetailSales.Status = Enums.ConsolidatedRetailSalesStatuses.Close;
+			And DocRef.ConsolidatedRetailSales.Status = Enums.ConsolidatedRetailSalesStatuses.Close
+			And DocRef.ConsolidatedRetailSales.Posted;
 EndFunction
 
 Function UseConsolidatedRetilaSales(Branch, SalesReturnData = Undefined) Export

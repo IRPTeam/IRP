@@ -94,6 +94,15 @@
             <value>Enum.CashAccountTypes.EnumValue.POS</value>
           </value>
         </choiceList>
+        <choiceList>
+          <presentation>
+            <key>en</key>
+            <value>POS cash account</value>
+          </presentation>
+          <value xsi:type="core:ReferenceValue">
+            <value>Enum.CashAccountTypes.EnumValue.POSCashAccount</value>
+          </value>
+        </choiceList>
       </extInfo>
     </items>
     <visible>true</visible>

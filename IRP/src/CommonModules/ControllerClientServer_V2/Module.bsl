@@ -1458,7 +1458,8 @@ EndFunction
 Function BindSendAmount(Parameters)
 	DataPath = "SendAmount";
 	Binding = New Structure();
-	Binding.Insert("CashTransferOrder", "StepChangeReceiveAmountBySendAmount");
+	Binding.Insert("CashTransferOrder" , "StepChangeReceiveAmountBySendAmount");
+	Binding.Insert("MoneyTransfer"     , "StepChangeReceiveAmountBySendAmount");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

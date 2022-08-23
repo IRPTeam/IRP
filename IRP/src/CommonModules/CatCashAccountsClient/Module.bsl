@@ -8,8 +8,14 @@ Procedure BeforeWrite(Object, Form, Cancel, WriteParameters) Export
 EndProcedure
 
 Procedure TypeOnChange(Object, Form, Item) Export
-	If Object.Type = PredefinedValue("Enum.CashAccountTypes.Bank") Then
+	If Object.Type = PredefinedValue("Enum.CashAccountTypes.Bank")
+		Or Object.Type = PredefinedValue("Enum.CashAccountTypes.POS") Then
 		Form.CurrencyType = "Fixed";
+	ElsIf Object.Type = PredefinedValue("Enum.CashAccountTypes.POSCashAccount") Then
+		Form.CurrencyType = "Fixed";
+		Object.TransitAccount = PredefinedValue("Catalog.CashAccounts.EmptyRef");
+		Object.Number = "";
+		Object.BankName = "";
 	Else
 		Form.CurrencyType = "Multi";
 		Object.TransitAccount = PredefinedValue("Catalog.CashAccounts.EmptyRef");
@@ -22,7 +28,6 @@ EndProcedure
 
 #Region StartChoiceAndEditText
 
-// TODO: Move to common
 Function GetOpenSettingsStructure()
 	Settings = New Structure();
 	Settings.Insert("FormName", Undefined);
@@ -32,8 +37,6 @@ Function GetOpenSettingsStructure()
 	Return Settings;
 EndFunction
 
-// Parameters
-//	Company - company.
 Function GetDefaultStartChoiceParameters(Parameters) Export
 	OpenSettings = GetOpenSettingsStructure();
 	OpenSettings.FormName = "Catalog.CashAccounts.ChoiceForm";

@@ -40,4 +40,11 @@
       <value>POS</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="a62019c2-3b3c-4844-88c3-0bab04533f1d">
+    <name>POSCashAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>POS cash account</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

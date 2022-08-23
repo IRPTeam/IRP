@@ -21,7 +21,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.CurrencyType = Parameters.CurrencyType;
 	ElsIf ValueIsFilled(Object.Currency) 
 		Or Object.Type = Enums.CashAccountTypes.Bank
-		Or Object.Type = Enums.CashAccountTypes.POS Then
+		Or Object.Type = Enums.CashAccountTypes.POS 
+		Or Object.Type = Enums.CashAccountTypes.POSCashAccount Then
 		ThisObject.CurrencyType = "Fixed";
 	Else
 		ThisObject.CurrencyType = "Multi";
@@ -29,19 +30,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	
-	If Not FOServer.IsUseBankDocuments() Then
-		ArrayForDelete = New Array();
-		For Each ListItem In Items.Type.ChoiceList Do
-			If Not (Not ValueIsFilled(ListItem.Value) 
-				Or ListItem.Value = Enums.CashAccountTypes.Cash
-				Or ListItem.Value = Enums.CashAccountTypes.POS) Then
-				ArrayForDelete.Add(ListItem);
-			EndIf;
-		EndDo;
-		For Each ArrayItem In ArrayForDelete Do
-			Items.Type.ChoiceList.Delete(ArrayItem);
-		EndDo;
-	EndIf;
+	CatCashAccountsServer.RemoveUnusedAccountTypes(ThisObject, "Type");
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -62,11 +51,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsBankAccount    = Object.Type = PredefinedValue("Enum.CashAccountTypes.Bank");
 	IsPOSAccount     = Object.Type = PredefinedValue("Enum.CashAccountTypes.POS");		
 	IsTransitAccount = Object.Type = PredefinedValue("Enum.CashAccountTypes.Transit");
+	IsPOSCashAccount = Object.Type = PredefinedValue("Enum.CashAccountTypes.POSCashAccount");
 	
 	Form.Items.BankName.Visible       = IsBankAccount Or IsPOSAccount;
 	Form.Items.Number.Visible         = IsBankAccount Or IsPOSAccount;
 	Form.Items.TransitAccount.Visible = IsBankAccount;
-	Form.Items.CurrencyType.ReadOnly  = IsBankAccount Or IsPOSAccount Or IsTransitAccount;
+	Form.Items.CurrencyType.ReadOnly  = IsBankAccount Or IsPOSAccount Or IsTransitAccount Or IsPOSCashAccount;
 	Form.Items.ReceiptingAccount.Visible    = IsPOSAccount;
 	Form.Items.CommissionIsSeparate.Visible = IsBankAccount;
 	

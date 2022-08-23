@@ -82,7 +82,12 @@ Scenario: _0260100 preparation (retail)
 	* Bank terms
 		When Create catalog BankTerms objects (for Shop 02)		
 	* Workstation
-		When create Workstation
+		When Create catalog Workstations objects
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I click "Set current workstation" button			
 	* Retail documents
 		When Create document RSR, RRR with ConsolidatedRetailSales
 		And I execute 1C:Enterprise script at server
@@ -302,19 +307,342 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 		Then the form attribute named "Author" became equal to "CI"
 		And I close all client application windows		
 
-				
-				
-
-		
-				
-
+Scenario: _0260145 check block RSR form if Consolidated retail sales is closed
+	And I close all client application windows	
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Σ'        |
+			| '1 590,00' |	
+		And I select current line in "List" table 
+	* Check form
+		* Header	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Partner"'|	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "LegalName"'|	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Agreement"'|	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Company"'|	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "RetailCustomer"'|	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Partner"'|
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Workstation"'|
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Branch"'|
+		* ItemList
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			When I Check the steps for Exception
+				|'And I click choice button of "Item" attribute in "ItemList" table'|	
+			When I Check the steps for Exception
+				|'And I click choice button of "Item key" attribute in "ItemList" table'|
+			When I Check the steps for Exception
+				|'And I click choice button of "Quantity" attribute in "ItemList" table'|	
+			When I Check the steps for Exception
+				|'And I click choice button of "Price" attribute in "ItemList" table'|	
+			When I Check the steps for Exception
+				|'And I click choice button of "Unit" attribute in "ItemList" table'|
+			When I Check the steps for Exception
+				|'And I click choice button of "Price type" attribute in "ItemList" table'|	
+			When I Check the steps for Exception
+				|'And I click choice button of "Store" attribute in "ItemList" table'|	
+		And I close all client application windows
 			
+
+Scenario: _0260146 try unpost RSR if Consolidated retail sales is closed
+	And I close all client application windows	
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Σ'        |
+			| '1 590,00' |	
+	* Try unpost
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Cannot unpost, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
+		And I close all client application windows
+		
+Scenario: _0260147 try mark for deletion RSR if Consolidated retail sales is closed
+	And I close all client application windows	
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Σ'        |
+			| '1 590,00' |	
+	* Try mark for deletion
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Cannot set deletion makr, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
+		And I close all client application windows
+			
+Scenario: _0260148 post RSR if Consolidated retail sales is closed
+	And I close all client application windows	
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Σ'        |
+			| '1 590,00' |	
+	* Post
+		And in the table "List" I click the button named "ListContextMenuPost"
+		Then user message window does not contain messages
+		And I close all client application windows
+
+Scenario: _0260150 check block RRR form if Consolidated retail sales is closed
+	And I close all client application windows	
+	* Select RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount' |
+			| '550,00' |	
+		And I select current line in "List" table 
+	* Check form
+		* Header	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Partner"'|	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "LegalName"'|	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Agreement"'|	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Company"'|	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "RetailCustomer"'|	
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Partner"'|
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Workstation"'|
+			When I Check the steps for Exception
+				|'And I click Choice button of the field named "Branch"'|
+		* ItemList
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'L/Green'  |
+			When I Check the steps for Exception
+				|'And I click choice button of "Item" attribute in "ItemList" table'|	
+			When I Check the steps for Exception
+				|'And I click choice button of "Item key" attribute in "ItemList" table'|
+			When I Check the steps for Exception
+				|'And I click choice button of "Quantity" attribute in "ItemList" table'|	
+			When I Check the steps for Exception
+				|'And I click choice button of "Price" attribute in "ItemList" table'|	
+			When I Check the steps for Exception
+				|'And I click choice button of "Unit" attribute in "ItemList" table'|
+			When I Check the steps for Exception
+				|'And I click choice button of "Price type" attribute in "ItemList" table'|	
+			When I Check the steps for Exception
+				|'And I click choice button of "Store" attribute in "ItemList" table'|	
+		And I close all client application windows
+		
+
+Scenario: _0260152 try unpost RRR if Consolidated retail sales is closed
+	And I close all client application windows	
+	* Select RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount' |
+			| '550,00' |	
+	* Try unpost
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Cannot unpost, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
+		And I close all client application windows
+		
+Scenario: _0260153 try mark for deletion RRR if Consolidated retail sales is closed
+	And I close all client application windows	
+	* Select RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount' |
+			| '550,00' |	
+	* Try mark for deletion
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Cannot set deletion makr, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
+		And I close all client application windows					
+				
+Scenario: _0260154 post RRR if Consolidated retail sales is closed
+	And I close all client application windows	
+	* Select RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount' |
+			| '550,00' |
+	* Post
+		And in the table "List" I click the button named "ListContextMenuPost"
+		Then user message window does not contain messages
+		And I close all client application windows
+		
+				
+
+
+Scenario: _0260160 check RSR changing if Consolidated retail sales is unpost
+	And I close all client application windows	
+	* Unpost Consolidated retail sales
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I go to line in "List" table
+			| 'Cash account' | 'Status' | 'Opening date'    |
+			| 'Cash desk №2' | 'Close'  | '$$OpeningDate$$' |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+	* Try change RSR
+		* Select RSR
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+			And I go to line in "List" table
+				| 'Σ'        |
+				| '1 590,00' |	
+			And I select current line in "List" table 
+		* Header	
+			And I click "Decoration group title collapsed picture" hyperlink		
+			And I click Choice button of the field named "Partner"
+			And I close current window	
+			And I click Choice button of the field named "LegalName"	
+			And I close current window
+			And I click Choice button of the field named "Agreement"
+			And I close current window	
+			And I click Choice button of the field named "Company"
+			And I close current window
+			And I click Choice button of the field named "RetailCustomer"
+			And I close current window
+			And I click Choice button of the field named "Partner"
+			And I close current window
+			And I click Choice button of the field named "Workstation"
+			And I close current window
+			And I click Choice button of the field named "Branch"
+			And I close current window
+		* ItemList
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'L/Green'  |
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I close current window
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I close current window
+			And I click choice button of "Unit" attribute in "ItemList" table
+			And I close current window
+			And I click choice button of "Price type" attribute in "ItemList" table
+			And I close current window	
+			And I click choice button of "Store" attribute in "ItemList" table	
+			And I close current window	
+		
+
+Scenario: _0260162 check RRR changing if Consolidated retail sales is unpost
+	And I close all client application windows	
+	* Unpost Consolidated retail sales
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+		And I go to line in "List" table
+			| 'Cash account' | 'Status' | 'Opening date'    |
+			| 'Cash desk №2' | 'Close'  | '$$OpeningDate$$' |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+	* Try change RRR
+		* Select RRR
+			Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+			And I go to line in "List" table
+				| 'Amount' |
+				| '550,00' |	
+			And I select current line in "List" table 
+		* Header	
+			And I click "Decoration group title collapsed picture" hyperlink		
+			And I click Choice button of the field named "Partner"
+			And I close current window	
+			And I click Choice button of the field named "LegalName"	
+			And I close current window
+			And I click Choice button of the field named "Agreement"
+			And I close current window	
+			And I click Choice button of the field named "Company"
+			And I close current window
+			And I click Choice button of the field named "RetailCustomer"
+			And I close current window
+			And I click Choice button of the field named "Partner"
+			And I close current window
+			And I click Choice button of the field named "Workstation"
+			And I close current window
+			And I click Choice button of the field named "Branch"
+			And I close current window
+		* ItemList
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'L/Green'  |
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I close current window
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I close current window
+			And I click choice button of "Unit" attribute in "ItemList" table
+			And I close current window
+			And I click choice button of "Store" attribute in "ItemList" table	
+			And I close current window						
 					
-
-
-
+Scenario: _0260165 check RSR unpost and deletion mark if Consolidated retail sales is unpost
+		And I close all client application windows
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Σ'        |
+			| '1 590,00' |	
+	* Unpost
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I close all client application windows
+			
+Scenario: _0260166 check RSR deletion mark if Consolidated retail sales is unpost
+		And I close all client application windows
+	* Select RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Σ'        |
+			| '1 590,00' |	
+	* Unpost
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And the current row in "List" table is marked for deletion
+		And I close all client application windows
 		
-		
+			
+Scenario: _0260168 check RRR unpost and deletion mark if Consolidated retail sales is unpost
+		And I close all client application windows
+	* Select RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount' |
+			| '550,00' |	
+	* Unpost
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I close all client application windows
+			
+Scenario: _0260169 check RRR deletion mark if Consolidated retail sales is unpost
+		And I close all client application windows
+	* Select RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount' |
+			| '550,00' |
+	* Unpost
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And the current row in "List" table is marked for deletion
+		Then user message window does not contain messages
+		And I close all client application windows	
 				
 
 

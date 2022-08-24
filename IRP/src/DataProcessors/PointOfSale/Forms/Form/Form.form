@@ -208,6 +208,36 @@
           <name>CashInListCommandBar</name>
           <id>1092</id>
           <items xsi:type="form:Button">
+            <name>CashInListUpdateCashIn</name>
+            <id>1115</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CashInListUpdateCashInExtendedTooltip</name>
+              <id>1116</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.UpdateCashIn</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
             <name>CashInListCreateCashIn</name>
             <id>1113</id>
             <visible>true</visible>
@@ -5948,6 +5978,23 @@ person</value>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>CreateCashIn</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>UpdateCashIn</name>
+    <title>
+      <key>en</key>
+      <value>Update cash in</value>
+    </title>
+    <id>27</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UpdateCashIn</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

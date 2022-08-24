@@ -8,10 +8,12 @@
 // Parameters:
 //  DocName - String - Document name ex. SalesOrder
 //  InitialData - Structure - First initial data
-// 
+//  FillingData - Structure - Filling data
+//  DefaultTable - String - Default table name
+//  
 // Returns:
 //  String - Initialize
-Function InitializeAtClient(DocName, InitialData = Undefined) Export
+Function InitializeAtClient(DocName, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined) Export
 	Wrapper = Initialize(DocName, InitialData);
 	Context = ValueToStringInternal(Wrapper);
 	Return Context;
@@ -33,6 +35,7 @@ Function SetPropertyAtClient(Context, PropertyName, Value, MainTableName = Undef
 	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
 	Result = SetProperty(Wrapper, PropertyName, Value, MainTableName);
 	Result.Context = ValueToStringInternal(Result.Context);
+	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction
 
@@ -43,16 +46,17 @@ EndFunction
 //  Row - Array of Structure - Row
 //  ColumnName - String - Column name
 //  Value - Arbitrary - Value
-//  TableName - String - Table name
+//  TableName - Undefined, String - Table name
 // 
 // Returns:
 //  Structure - Set row property:
 // * Context - String -
 // * Cache - Structure -
-Function SetRowPropertyAtClient(Context, Row, ColumnName, Value, TableName) Export
+Function SetRowPropertyAtClient(Context, Row, ColumnName, Value, TableName = Undefined) Export
 	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
 	Result = SetRowProperty(Wrapper, Row, ColumnName, Value, TableName);
 	Result.Context = ValueToStringInternal(Result.Context);
+	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction
 
@@ -71,6 +75,7 @@ Function WriteAtClient(Context, WriteMode = Undefined, PostingMode = Undefined) 
 	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
 	Result = Write(Wrapper, WriteMode, PostingMode);
 	Result.Context = ValueToStringInternal(Result.Context);
+	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction
 
@@ -83,21 +88,28 @@ EndFunction
 // Parameters:
 //  DocName - String - Document name ex. SalesOrder
 //  InitialData - Structure - First initial data
+//  FillingData - Structure - Filling data
+//  DefaultTable - String - Default table name
 // 
 // Returns:
 //  See CreateWrapper
-Function Initialize(DocName, InitialData = Undefined, FillingData = Undefined) Export
+Function Initialize(DocName, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined) Export
 	DocMetadata = Metadata.Documents[DocName];
 	DocObject = Documents[DocMetadata.Name].CreateDocument();
 	DocObject.Fill(FillingData);
 	
-	Wrapper = CreateWrapper();
+	Wrapper = CreateWrapper(DefaultTable);
 	
 	For Each Attr In DocMetadata.StandardAttributes Do
 		FillAttrInfo(Wrapper, DocObject, Attr);
 	EndDo;
 	For Each Attr In DocMetadata.Attributes Do
 		FillAttrInfo(Wrapper, DocObject, Attr);
+	EndDo;
+	For Each Attr In Metadata.CommonAttributes Do
+		If CommonFunctionsServer.isCommonAttributeUseForMetadata(Attr.Name, DocMetadata) Then
+			FillAttrInfo(Wrapper, DocObject, Attr);
+		EndIf;
 	EndDo;
 	For Each Table In DocMetadata.TabularSections Do
 		Wrapper.Object.Insert(Table.Name, New ValueTable());
@@ -110,6 +122,7 @@ Function Initialize(DocName, InitialData = Undefined, FillingData = Undefined) E
 		EndDo;
 		
 		For Each Row In DocObject[Table.Name] Do
+			//@skip-check dynamic-access-method-not-found
 			FillPropertyValues(Wrapper.Object[Table.Name].Add(), Row);
 		EndDo;
 	EndDo;
@@ -135,12 +148,16 @@ EndFunction
 Function SetProperty(Wrapper, PropertyName, Value, MainTableName = Undefined) Export
 	Property = Wrapper.Attr[PropertyName]; // Arbitrary
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
+	If MainTableName = Undefined Then
+		MainTableName = Wrapper.DefaultTable;
+	EndIf;
 	ServerParameters.TableName = MainTableName;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Cache", Parameters.Cache);
+	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction
 
@@ -151,13 +168,16 @@ EndFunction
 //  Row - Array of Structure - Row
 //  ColumnName - String - Column name
 //  Value - Arbitrary - Value
-//  TableName - String - Table name
+//  TableName - Undefined, String - Table name. If empty - get from wrapper as defaul table
 // 
 // Returns:
 //  Structure - Set row property:
 // * Context - See CreateWrapper
 // * Cache - Structure -
-Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName) Export
+Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName = Undefined) Export
+	If TableName = Undefined Then
+		TableName = Wrapper.DefaultTable;
+	EndIf;
 	Property = Wrapper.Tables[TableName][ColumnName]; // Structure
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object); // Structure
 	//@skip-check property-return-type
@@ -170,6 +190,7 @@ Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName) Export
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Cache", Parameters.Cache);
+	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction
 
@@ -209,6 +230,93 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
 		Result = New Structure();
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Ref", Doc.Ref);
+	//@skip-check constructor-function-return-section
+	Return Result;
+EndFunction
+
+// Add row.
+// 
+// Parameters:
+//  Wrapper - See CreateWrapper
+//  TableName - String - Table name
+// 
+// Returns:
+//  ValueTableRow
+Function AddRow(Wrapper, TableName) Export
+	If TableName = Undefined Then
+		TableName = Wrapper.DefaultTable;
+	EndIf;
+	WrapperTable = Wrapper.Object[TableName]; // ValueTable
+	NewRow = WrapperTable.Add();
+	NewRow.Key = String(New UUID());
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
+	ServerParameters.TableName = TableName;
+	Rows = New Array();
+	Rows.Add(NewRow);
+	ServerParameters.Rows = Rows;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	ControllerClientServer_V2.AddNewRow(TableName, Parameters);
+	Return WrapperTable.FindRows(New Structure("Key", NewRow.Key))[0];
+EndFunction
+
+// Set row tax rate.
+// 
+// Parameters:
+//  Wrapper - See CreateWrapper
+//  Row - See AddRow
+//  Tax - CatalogRef.Taxes - Tax
+//  TaxRate - CatalogRef.TaxRates - Tax rate
+//  TableName - String - Table name
+// 
+// Returns:
+//  Structure - Set row tax rate:
+// * Context - See CreateWrapper
+// * Cache - Structure -
+Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
+	If TableName = Undefined Then
+		TableName = Wrapper.DefaultTable;
+	EndIf;
+	Property = New Structure();
+	Property.Insert("DataPath", StrTemplate("%1.%2", TableName, ""));
+	Property.Insert("_TableName_", TableName);
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
+	ServerParameters.TableName = String(Property._TableName_);
+	Rows = New Array();
+	Rows.Add(Row);
+	ServerParameters.Rows = Rows;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	
+	TaxInfo = Undefined; // Structure
+	For Each Info In Parameters.ArrayOfTaxInfo Do
+		//@skip-check property-return-type
+		If Info.Tax = Tax Then
+			TaxInfo = Info;
+			Break;
+		EndIf;
+	EndDo;
+	
+	If TaxInfo = Undefined Then
+		Raise "Tax not allowed for document, check tax settings";
+	EndIf;
+	
+	//@skip-check property-return-type
+	Parameters.Rows[0][TaxInfo.Name] = TaxRate;
+	Parameters.FormTaxColumnsExists = True;
+	
+	Parameters.Cache.Insert(TableName, New Array());
+		
+	NewCacheRow = New Structure();
+	NewCacheRow.Insert("Key", Row.Key);
+	//@skip-check property-return-type
+	//@skip-check invocation-parameter-type-intersect
+	NewCacheRow.Insert(TaxInfo.Name, TaxRate);
+	ArrayOfRows = Parameters.Cache[TableName]; // Array Of Structure
+	ArrayOfRows.Add(NewCacheRow);
+	
+	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	Result = New Structure();
+	Result.Insert("Context", Wrapper);
+	Result.Insert("Cache", Parameters.Cache);
 	Return Result;
 EndFunction
 
@@ -230,10 +338,12 @@ EndFunction
 // * Tables - Structure:
 // 	** Key - String - Table name
 // 	** Value - ValueTable - Table
-Function CreateWrapper()
+// * DefaultTable - Undefined, String - Default table name
+Function CreateWrapper(DefaultTable = Undefined)
 	Wrapper = New Structure("Object", New Structure());
 	Wrapper.Insert("Attr"    , New Structure());
 	Wrapper.Insert("Tables" , New Structure());
+	Wrapper.Insert("DefaultTable" , DefaultTable);
 	Return Wrapper
 EndFunction
 
@@ -267,7 +377,7 @@ EndProcedure
 // Parameters:
 //  Wrapper - See CreateWrapper
 //  DocObject - DocumentObjectDocumentName - Doc object
-//  Attr - StandardAttributeDescription, MetadataObjectAttribute - Attr
+//  Attr - StandardAttributeDescription, MetadataObjectAttribute, MetadataObjectCommonAttribute - Attr
 Procedure FillAttrInfo(Wrapper, DocObject, Attr)
 	Wrapper.Object.Insert(Attr.Name, DocObject[Attr.Name]);
 	AttrInfo = New Structure();
@@ -293,57 +403,3 @@ Procedure FillColumnInfo(Wrapper, DocObject, Table, Column)
 EndProcedure
 
 #EndRegion
-
-
-Function AddRow(Wrapper, TableName) Export
-	NewRow = Wrapper.Object[TableName].Add();
-	NewRow.Key = String(New UUID());
-	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
-	ServerParameters.TableName = TableName;
-	Rows = New Array();
-	Rows.Add(NewRow);
-	ServerParameters.Rows = Rows;
-	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-	ControllerClientServer_V2.AddNewRow(TableName, Parameters);
-	Return Wrapper.Object[TableName].FindRows(New Structure("Key", NewRow.Key))[0];
-EndFunction
-
-Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
-	Property = New Structure();
-	Property.Insert("DataPath", StrTemplate("%1.%2", TableName, ""));
-	Property.Insert("_TableName_", TableName);
-	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
-	ServerParameters.TableName = String(Property._TableName_);
-	Rows = New Array();
-	Rows.Add(Row);
-	ServerParameters.Rows = Rows;
-	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-	
-	TaxInfo = Undefined;
-	For Each Info In Parameters.ArrayOfTaxInfo Do
-		If Info.Tax = Tax Then
-			TaxInfo = Info;
-			Break;
-		EndIf;
-	EndDo;
-	
-	If TaxInfo = Undefined Then
-		Raise "Tax not allowed for document, check tax settings";
-	EndIf;
-	
-	Parameters.Rows[0][TaxInfo.Name] = TaxRate;
-	Parameters.FormTaxColumnsExists = True;
-	
-	Parameters.Cache.Insert(TableName, New Array());
-		
-	NewCacheRow = New Structure();
-	NewCacheRow.Insert("Key", Row.Key);
-	NewCacheRow.Insert(TaxInfo.Name, TaxRate);
-	Parameters.Cache[TableName].Add(NewCacheRow);
-	
-	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
-	Result = New Structure();
-	Result.Insert("Context", Wrapper);
-	Result.Insert("Cache", Parameters.Cache);
-	Return Result;
-EndFunction

@@ -58,6 +58,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_SalesInvoice = New Array();
 	ArrayOf_SalesOrder = New Array();
 	ArrayOf_PurchaseReturn = New Array();
+	ArrayOf_MoneyTransfer = New Array();
 	
 	For Each Row In ArrayOfBasisDocuments Do
 		If TypeOf(Row) = Type("DocumentRef.CashTransferOrder") Then
@@ -70,6 +71,8 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 			ArrayOf_SalesOrder.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.PurchaseReturn") Then
 			ArrayOf_PurchaseReturn.Add(Row);
+		ElsIf TypeOf(Row) = Type("DocumentRef.MoneyTransfer") Then
+			ArrayOf_MoneyTransfer.Add(Row);	
 		Else
 			Raise R().Error_043;
 		EndIf;
@@ -81,6 +84,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_SalesInvoice(ArrayOf_SalesInvoice));
 	ArrayOfTables.Add(GetDocumentTable_SalesOrder(ArrayOf_SalesOrder));
 	ArrayOfTables.Add(GetDocumentTable_PurchaseReturn(ArrayOf_PurchaseReturn));
+	ArrayOfTables.Add(GetDocumentTable_MoneyTransfer(ArrayOf_MoneyTransfer));
 	
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
@@ -106,6 +110,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		New TypeDescription(Metadata.DefinedTypes.typePlaningTransactionBasises.Type));
 	ValueTable.Columns.Add("FinancialMovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
 	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.SalesOrder"));
+	ValueTable.Columns.Add("MoneyTransfer", New TypeDescription("DocumentRef.MoneyTransfer"));
 	
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
@@ -150,6 +155,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("PlaningTransactionBasis" , RowPaymentList.PlaningTransactionBasis);
 			NewRow.Insert("FinancialMovementType"   , RowPaymentList.FinancialMovementType);
 			NewRow.Insert("Order"                   , RowPaymentList.Order);
+			NewRow.Insert("MoneyTransfer"           , RowPaymentList.MoneyTransfer);
 			Result.PaymentList.Add(NewRow);
 		EndDo;
 		ArrayOfResults.Add(Result);
@@ -199,6 +205,29 @@ Function GetDocumentTable_IncomingPaymentOrder(ArrayOfBasisDocuments)
 	|WHERE
 	|	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
 	|	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0";
+	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
+	QueryResult = Query.Execute();
+	Return QueryResult.Unload();
+EndFunction
+
+&AtServer
+Function GetDocumentTable_MoneyTransfer(ArrayOfBasisDocuments)
+	Query = New Query();
+	Query.Text =
+	"SELECT ALLOWED
+	|	""MoneyTransfer"" AS BasedOn,
+	|	VALUE(Enum.IncomingPaymentTransactionType.CashIn) AS TransactionType,
+	|	R3021B_CashInTransitIncoming.Company AS Company,
+	|	R3021B_CashInTransitIncoming.Branch AS Branch,
+	|	R3021B_CashInTransitIncoming.ReceiptingAccount AS CashAccount,
+	|	R3021B_CashInTransitIncoming.Currency AS Currency,
+	|	R3021B_CashInTransitIncoming.AmountBalance AS Amount,
+	|	R3021B_CashInTransitIncoming.Basis AS MoneyTransfer,
+	|	R3021B_CashInTransitIncoming.Basis.ReceiveFinancialMovementType AS FinancialMovementType
+	|FROM
+	|	AccumulationRegister.R3021B_CashInTransitIncoming.Balance(,
+	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND Basis IN (&ArrayOfBasisDocuments)) AS R3021B_CashInTransitIncoming";
 	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();

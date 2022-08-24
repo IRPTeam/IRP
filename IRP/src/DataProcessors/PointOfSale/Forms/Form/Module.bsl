@@ -29,6 +29,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	EndIf;
 	
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+		FillCashInList();
+	EndIf;
+		
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -64,6 +68,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 			Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage2;
 		EndIf;
 	Else
+		Form.Items.GroupMainPages.PagesRepresentation = FormPagesRepresentation.None;
 		Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage2;
 	EndIf;
 EndProcedure
@@ -741,3 +746,64 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+&AtClient
+Procedure CreateCashIn(Command)
+	CurrentData = Items.CashInList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CashInData = New Structure();
+	CashInData.Insert("MoneyTransfer" , CurrentData.MoneyTransfer);
+	CashInData.Insert("Currency"      , CurrentData.Currency);
+	CashInData.Insert("Amount"        , CurrentData.MoneyTransfer);
+	CreateCashInAtServer(CashInData);		
+EndProcedure
+
+&AtServer
+Procedure CreateCashInAtServer(CashInData)
+	FillingData = New Structure();
+	FillingData.Insert("BasedOn" , "MoneyTransfer");	
+	FillingData.Insert("Date"    , CommonFunctionsServer.GetCurrentSessionDate());	
+	FillingData.Insert("TransactionType", Enums.IncomingPaymentTransactionType.CashIn);	
+	FillingData.Insert("Company"        , CashInData.MoneyTransfer.Company);	
+	FillingData.Insert("Branch"         , CashInData.MoneyTransfer.Branch);	
+	FillingData.Insert("CashAccount"    , ThisObject.Workstation.CashAccount);	
+	FillingData.Insert("Currency"       , CashInData.Currency);	
+	FillingData.Insert("PaymentList"    , New Array());	
+	NewRow = New Structure();
+	NewRow.Insert("TotalAmount"           , CashInData.Amount);	
+	NewRow.Insert("MoneyTransfer"         , CashInData.MoneyTransfer);	
+	NewRow.Insert("FinancialMovementType" , CashInData.MoneyTransfer.ReceiveFinancialMovementType);
+	FillingData.PaymentList.Add(NewRow);
+	
+	CashReceipt = Documents.CashReceipt.CreateDocument();
+	CashReceipt.Fill(FillingData);
+	CashReceipt.Write(DocumentWriteMode.Posting);
+EndProcedure
+
+&AtServer
+Procedure FillCashInList()
+	ThisObject.CashInList.Clear();
+	If Not ValueIsFilled(ThisObject.Workstation) Then
+		Return;
+	EndIf;
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT ALLOWED
+	|	R3021B_CashInTransitIncoming.Basis AS MoneyTransfer,
+	|	R3021B_CashInTransitIncoming.Currency AS Currency,
+	|	R3021B_CashInTransitIncoming.AmountBalance AS Amount
+	|FROM
+	|	AccumulationRegister.R3021B_CashInTransitIncoming.Balance(,
+	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND ReceiptingAccount = &CashAccount) AS R3021B_CashInTransitIncoming";
+	Query.SetParameter("CashAccount", Workstation.CashAccount);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	While QuerySelection.Next() Do
+		FillPropertyValues(ThisObject.CashInList.Add(), QuerySelection);
+	EndDo;
+EndProcedure
+

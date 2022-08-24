@@ -1656,6 +1656,13 @@ Procedure PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData 
 	ControllerClientServer_V2.PaymentListPlanningTransactionBasisOnChange(Parameters);
 EndProcedure
 
+// PaymentList.MoneyTransfer
+Procedure PaymentListMoneyTransferOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListMoneyTransferOnChange(Parameters);
+EndProcedure
+
 // PaymentList.Order
 Procedure PaymentListOrderOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);

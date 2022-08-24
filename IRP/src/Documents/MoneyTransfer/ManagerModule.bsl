@@ -96,6 +96,7 @@ EndFunction
 Function MoneySender()
 	Return 
 	"SELECT
+	|	MoneyTransfer.Ref,
 	|	MoneyTransfer.Company AS Company,
 	|	MoneyTransfer.Ref.Branch AS Branch,
 	|	MoneyTransfer.Ref AS Ref,
@@ -120,6 +121,7 @@ EndFunction
 Function MoneyReceiver()
 	Return 
 	"SELECT
+	|	MoneyTransfer.Ref,
 	|	MoneyTransfer.Company AS Company,
 	|	MoneyTransfer.Ref.Branch AS Branch,
 	|	MoneyTransfer.Ref AS Ref,
@@ -151,6 +153,7 @@ Function R3021B_CashInTransitIncoming()
 	|	MoneyReceiver.Period,
 	|	MoneyReceiver.Company,
 	|	MoneyReceiver.Branch,
+	|	MoneyReceiver.Ref AS Basis,
 	|	MoneyReceiver.AccountFrom AS Account,
 	|	MoneyReceiver.AccountTo AS ReceiptingAccount,
 	|	MoneyReceiver.Amount,
@@ -169,6 +172,7 @@ Function R3021B_CashInTransitIncoming()
 	|	MoneySender.Period,
 	|	MoneySender.Company,
 	|	MoneySender.Branch,
+	|	MoneySender.Ref AS Basis,
 	|	MoneySender.AccountFrom AS Account,
 	|	MoneySender.AccountTo AS ReceiptiongAccount,
 	|	MoneySender.Amount,

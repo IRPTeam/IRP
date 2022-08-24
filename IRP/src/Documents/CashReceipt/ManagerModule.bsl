@@ -179,6 +179,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3015B_CashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
@@ -258,6 +259,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R3035T_CashPlanning());
 	QueryArray.Add(R3024B_SalesOrdersToBePaid());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	Return QueryArray;
@@ -307,6 +309,10 @@ Function PaymentList()
 	|		IsCashTransferOrder,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CashIn) AS IsCashIn,
+	|	PaymentList.MoneyTransfer AS MoneyTransfer,
+	|	PaymentList.MoneyTransfer.Sender AS AccountFrom,
+	|	PaymentList.MoneyTransfer.Receiver AS AccountTo,
 	|	PaymentList.Partner,
 	|	PaymentList.Ref.Branch AS Branch,
 	|	PaymentList.LegalNameContract AS LegalNameContract,
@@ -316,6 +322,26 @@ Function PaymentList()
 	|	Document.CashReceipt.PaymentList AS PaymentList
 	|WHERE
 	|	PaymentList.Ref = &Ref";
+EndFunction
+
+Function R3021B_CashInTransitIncoming()
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.MoneyTransfer AS Basis,
+	|	PaymentList.AccountFrom AS Account,
+	|	PaymentList.AccountTo AS ReceiptingAccount,
+	|	PaymentList.Amount,
+	|	PaymentList.Currency,
+	|	PaymentList.Key
+	|INTO R3021B_CashInTransitIncoming
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.IsCashIn";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

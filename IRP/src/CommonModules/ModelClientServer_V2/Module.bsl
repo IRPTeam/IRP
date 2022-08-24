@@ -158,11 +158,13 @@ Function GetChain()
 	Chain.Insert("ChangeAccountSenderByCompany"      , GetChainLink("ChangeCashAccountByCompanyExecute"));
 	Chain.Insert("ChangeAccountReceiverByCompany"    , GetChainLink("ChangeCashAccountByCompanyExecute"));
 	Chain.Insert("ChangeLandedCostCurrencyByCompany" , GetChainLink("ChangeLandedCostCurrencyByCompanyExecute"));
+	Chain.Insert("ChangeCashAccountByCompany_CashReceipt" , GetChainLink("ChangeCashAccountByCompany_CashReceiptExecute"));
 	
-	Chain.Insert("ChangeTransitAccountByAccount"    , GetChainLink("ChangeTransitAccountByAccountExecute"));
-	Chain.Insert("ChangeReceiptingAccountByAccount" , GetChainLink("ChangeReceiptingAccountByAccountExecute"));
-	Chain.Insert("ChangeCashAccountByCurrency"      , GetChainLink("ChangeCashAccountByCurrencyExecute"));
-	Chain.Insert("ChangeCashAccountByPartner"       , GetChainLink("ChangeCashAccountByPartnerExecute"));
+	Chain.Insert("ChangeTransitAccountByAccount"      , GetChainLink("ChangeTransitAccountByAccountExecute"));
+	Chain.Insert("ChangeReceiptingAccountByAccount"   , GetChainLink("ChangeReceiptingAccountByAccountExecute"));
+	Chain.Insert("ChangeCashAccountByCurrency"        , GetChainLink("ChangeCashAccountByCurrencyExecute"));
+	Chain.Insert("ChangeCashAccountByPartner"         , GetChainLink("ChangeCashAccountByPartnerExecute"));
+	Chain.Insert("ChangeCashAccountByTransactionType" , GetChainLink("ChangeCashAccountByTransactionTypeExecute"));
 	
 	Chain.Insert("FillByPTBBankReceipt" , GetChainLink("FillByPTBBankReceiptExecute"));
 	Chain.Insert("FillByPTBCashReceipt" , GetChainLink("FillByPTBCashReceiptExecute"));
@@ -170,6 +172,8 @@ Function GetChain()
 	Chain.Insert("FillByPTBCashPayment" , GetChainLink("FillByPTBCashPaymentExecute"));
 	
 	Chain.Insert("FillByCashTransferOrder" , GetChainLink("FillByCashTransferOrderExecute"));
+	
+	Chain.Insert("FillByMoneyTransferCashReceipt" , GetChainLink("FillByMoneyTransferCashReceiptExecute"));
 	
 	Chain.Insert("ChangeItemByPartnerItem" , GetChainLink("ChangeItemByPartnerItemExecute"));
 	Chain.Insert("ChangeItemKeyByItem"     , GetChainLink("ChangeItemKeyByItemExecute"));
@@ -421,6 +425,22 @@ EndFunction
 
 #Region CHANGE_CASH_ACCOUNT_BY_COMPANY
 
+Function ChangeCashAccountByCompany_CashReceiptOptions() Export
+	Return GetChainLinkOptions("Company, Account, TransactionType");
+EndFunction
+
+Function ChangeCashAccountByCompany_CashReceiptExecute(Options) Export
+	CashAccountType = PredefinedValue("Enum.CashAccountTypes.Cash");
+	If Options.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn") Then
+		CashAccountType = PredefinedValue("Enum.CashAccountTypes.POSCashAccount");
+	EndIf;
+	Parameters = New Structure();
+	Parameters.Insert("Company"     , Options.Company);
+	Parameters.Insert("Account"     , Options.Account);
+	Parameters.Insert("AccountType" , CashAccountType);
+	Return ChangeCashAccountByCompanyExecute(Parameters);
+EndFunction
+
 Function ChangeCashAccountByCompanyOptions() Export
 	Return GetChainLinkOptions("Company, Account, AccountType");
 EndFunction
@@ -463,6 +483,27 @@ Function ChangeCashAccountByCurrencyExecute(Options) Export
 	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Options.CurrentAccount, "Currency");
 	If Options.Currency <> AccountCurrency And ValueIsFilled(AccountCurrency) Then
 		Return Undefined;
+	EndIf;
+	Return Options.CurrentAccount;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CASH_ACCOUNT_BY_TRANSACTION_TYPE
+
+Function ChangeCashAccountByTransactionTypeOptions() Export
+	Return GetChainLinkOptions("TransactionType, CurrentAccount");
+EndFunction
+
+Function ChangeCashAccountByTransactionTypeExecute(Options) Export
+	CurrentCashAccountType = ServiceSystemServer.GetObjectAttribute(Options.CurrentAccount, "Type");
+	If CurrentCashAccountType = PredefinedValue("Enum.CashAccountTypes.Cash") 
+		And Options.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn") Then
+			Return Undefined;
+	EndIf;
+	If CurrentCashAccountType = PredefinedValue("Enum.CashAccountTypes.POSCashAccount")
+		And Options.TransactionType <> PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn") Then
+			Return Undefined;
 	EndIf;
 	Return Options.CurrentAccount;
 EndFunction
@@ -2064,6 +2105,43 @@ EndFunction
 
 #EndRegion
 
+#Region MONEY_TRANSFER
+
+Function FillByMoneyTransferCashReceiptOptions() Export
+	Return GetChainLinkOptions("MoneyTransfer, 
+		|Ref,
+		|Company, 
+		|Account, 
+		|Currency, 
+		|TotalAmount,
+		|FinancialMovementType");
+EndFunction
+
+Function FillByMoneyTransferCashReceiptExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Company"         , Options.Company);
+	Result.Insert("Account"         , Options.Account);
+	Result.Insert("Currency"        , Options.Currency);
+	Result.Insert("TotalAmount"     , Options.TotalAmount);
+	Result.Insert("FinancialMovementType" , Options.FinancialMovementType);
+	
+	If ValueIsFilled(Options.MoneyTransfer) Then
+		MoneyTransferInfo = DocMoneyTransferServer.GetInfoForFillingCashReceipt(Options.MoneyTransfer);
+		Result.Company  = MoneyTransferInfo.Company;
+		Result.Account  = MoneyTransferInfo.CashAccount;
+		Result.Currency = MoneyTransferInfo.Currency;
+		Result.FinancialMovementType = MoneyTransferInfo.FinancialMovementType;
+			
+		IncomingBalance = DocMoneyTransferServer.GetCashInTransitIncomingBalance(Options.MoneyTransfer, Options.Ref);
+		Result.TotalAmount = ?(ValueIsFilled(IncomingBalance), IncomingBalance, 0);
+		
+		Return Result;
+	EndIf;
+	Return Result;
+EndFunction
+
+#EndRegion
+
 #Region CASH_TRANSFER_ORDER
 
 Function FillByCashTransferOrderOptions() Export
@@ -2363,7 +2441,8 @@ Function ClearByTransactionTypeCashReceiptOptions() Export
 		|LegalNameContract,
 		|Payer,
 		|AmountExchange,
-		|Order");
+		|Order,
+		|MoneyTransfer");
 EndFunction
 
 Function ClearByTransactionTypeCashReceiptExecute(Options) Export
@@ -2377,15 +2456,19 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Result.Insert("Payer"                    , Options.Payer);
 	Result.Insert("AmountExchange"           , Options.AmountExchange);
 	Result.Insert("Order"                    , Options.Order);
+	Result.Insert("MoneyTransfer"            , Options.MoneyTransfer);
 
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
 	Incoming_PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
 	Incoming_ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
+	Incoming_CashIn              = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn");
 	
 	// list of properties which not needed clear
-	// PlanningTransactionBasis, BasisDocument, Order - clearing always
+	// PlanningTransactionBasis, BasisDocument, Order, MoneyTransfer - clearing always
 	If Options.TransactionType = Incoming_CashTransferOrder Then
+		StrByType = "";
+	ElsIf Options.TransactionType = Incoming_CashIn Then
 		StrByType = "";
 	ElsIf Options.TransactionType = Incoming_CurrencyExchange Then
 		StrByType = "

@@ -775,6 +775,17 @@ Procedure StepChangeCashAccountByCurrency(Parameters, Chain) Export
 	Chain.ChangeCashAccountByCurrency.Options.Add(Options);
 EndProcedure
 
+// Account.ChangeCashAccountByTransactionType.Step
+Procedure StepChangeCashAccountByTransactionType(Parameters, Chain) Export
+	Chain.ChangeCashAccountByTransactionType.Enable = True;
+	Chain.ChangeCashAccountByTransactionType.Setter = "SetAccount";
+	Options = ModelClientServer_V2.ChangeCashAccountByTransactionTypeOptions();
+	Options.CurrentAccount  = GetAccount(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
+	Options.StepName = "StepChangeCashAccountByTransactionType";
+	Chain.ChangeCashAccountByTransactionType.Options.Add(Options);
+EndProcedure
+
 // Account.ChangeCashAccountByCompany.[AccountTypeIsBank].Step
 Procedure StepChangeCashAccountByCompany_AccountTypeIsBank(Parameters, Chain) Export
 	StepChangeCashAccountByCompany(Parameters, Chain, PredefinedValue("Enum.CashAccountTypes.Bank"));
@@ -800,6 +811,18 @@ Procedure StepChangeCashAccountByCompany(Parameters, Chain, AccountType)
 	Options.AccountType = AccountType;
 	Options.StepName = "StepChangeCashAccountByCompany";
 	Chain.ChangeCashAccountByCompany.Options.Add(Options);
+EndProcedure
+
+// Account.ChangeCashAccountByCompany_CashReceipt.Step
+Procedure StepChangeCashAccountByCompany_CashReceipt(Parameters, Chain) Export
+	Chain.ChangeCashAccountByCompany_CashReceipt.Enable = True;
+	Chain.ChangeCashAccountByCompany_CashReceipt.Setter = "SetAccount";
+	Options = ModelClientServer_V2.ChangeCashAccountByCompany_CashReceiptOptions();
+	Options.Company = GetCompany(Parameters);
+	Options.Account = GetAccount(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
+	Options.StepName = "StepChangeCashAccountByCompany_CashReceipt";
+	Chain.ChangeCashAccountByCompany_CashReceipt.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -1028,13 +1051,15 @@ Function BindTransactionType(Parameters)
 		|StepClearByTransactionTypeBankReceipt");
 	
 	Binding.Insert("CashPayment" , "StepClearByTransactionTypeCashPayment");
-	Binding.Insert("CashReceipt" , "StepClearByTransactionTypeCashReceipt");
+	Binding.Insert("CashReceipt" , 
+		"StepClearByTransactionTypeCashReceipt,
+		|StepChangeCashAccountByTransactionType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
-// TransactionType.BankPayment.Fill
-Procedure FillTransactionType_BankPayment(Parameters, Results) Export
+// TransactionType.BankPayment.MultiSet
+Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("Payee"                    , BindPaymentListLegalName(Parameters));
@@ -1050,8 +1075,8 @@ Procedure FillTransactionType_BankPayment(Parameters, Results) Export
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
-// TransactionType.BankReceipt.Fill
-Procedure FillTransactionType_BankReceipt(Parameters, Results) Export
+// TransactionType.BankReceipt.MultiSet
+Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("Payer"                    , BindPaymentListLegalName(Parameters));
@@ -1071,8 +1096,8 @@ Procedure FillTransactionType_BankReceipt(Parameters, Results) Export
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
-// TransactionType.CashPayment.Fill
-Procedure FillTransactionType_CashPayment(Parameters, Results) Export
+// TransactionType.CashPayment.MultiSet
+Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("Payee"                    , BindPaymentListLegalName(Parameters));
@@ -1084,8 +1109,8 @@ Procedure FillTransactionType_CashPayment(Parameters, Results) Export
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
-// TransactionType.CashReceipt.Fill
-Procedure FillTransactionType_CashReceipt(Parameters, Results) Export
+// TransactionType.CashReceipt.MultiSet
+Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("Payer"                    , BindPaymentListLegalName(Parameters));
@@ -1096,13 +1121,14 @@ Procedure FillTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("Order"                    , BindPaymentListOrder(Parameters));
 	ResourceToBinding.Insert("AmountExchange"           , BindPaymentListAmountExchange(Parameters));
 	ResourceToBinding.Insert("CurrencyExchange"         , BindCurrencyExchange(Parameters));
+	ResourceToBinding.Insert("MoneyTransfer"            , BindPaymentListMoneyTransfer(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
 // TransactionType.ClearByTransactionTypeBankPayment.Step
 Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 	Chain.ClearByTransactionTypeBankPayment.Enable = True;
-	Chain.ClearByTransactionTypeBankPayment.Setter = "FillTransactionType_BankPayment";
+	Chain.ClearByTransactionTypeBankPayment.Setter = "MultiSetTransactionType_BankPayment";
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.ClearByTransactionTypeBankPaymentOptions();
 		Options.TransactionType          = GetTransactionType(Parameters);
@@ -1126,7 +1152,7 @@ EndProcedure
 // TransactionType.ClearByTransactionTypeBankReceipt.Step
 Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 	Chain.ClearByTransactionTypeBankReceipt.Enable = True;
-	Chain.ClearByTransactionTypeBankReceipt.Setter = "FillTransactionType_BankReceipt";
+	Chain.ClearByTransactionTypeBankReceipt.Setter = "MultiSetTransactionType_BankReceipt";
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.ClearByTransactionTypeBankReceiptOptions();
 		Options.TransactionType          = GetTransactionType(Parameters);
@@ -1154,7 +1180,7 @@ EndProcedure
 // TransactionType.ClearByTransactionTypeCashPayment.Step
 Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 	Chain.ClearByTransactionTypeCashPayment.Enable = True;
-	Chain.ClearByTransactionTypeCashPayment.Setter = "FillTransactionType_CashPayment";
+	Chain.ClearByTransactionTypeCashPayment.Setter = "MultiSetTransactionType_CashPayment";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		Options = ModelClientServer_V2.ClearByTransactionTypeCashPaymentOptions();
 		Options.TransactionType          = GetTransactionType(Parameters);
@@ -1174,7 +1200,7 @@ EndProcedure
 // TransactionType.ClearByTransactionTypeCashReceipt.Step
 Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 	Chain.ClearByTransactionTypeCashReceipt.Enable = True;
-	Chain.ClearByTransactionTypeCashReceipt.Setter = "FillTransactionType_CashReceipt";
+	Chain.ClearByTransactionTypeCashReceipt.Setter = "MultiSetTransactionType_CashReceipt";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
 		Options = ModelClientServer_V2.ClearByTransactionTypeCashReceiptOptions();
 		Options.TransactionType          = GetTransactionType(Parameters);
@@ -1187,6 +1213,7 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.AmountExchange           = GetPaymentListAmountExchange(Parameters, Row.Key);
+		Options.MoneyTransfer            = GetPaymentListMoneyTransfer(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
@@ -1580,8 +1607,8 @@ Function BindCashTransferOrder(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
-// CashTransferOrder.MoneyTransfer.Fill
-Procedure FillCashTransferOrder_MoneyTransfer(Parameters, Results) Export
+// CashTransferOrder.MoneyTransfer.MultiSet
+Procedure MultiSetCashTransferOrder_MoneyTransfer(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Company"                      , BindCompany(Parameters));
 	ResourceToBinding.Insert("Branch"                       , BindBranch(Parameters));
@@ -1594,15 +1621,13 @@ Procedure FillCashTransferOrder_MoneyTransfer(Parameters, Results) Export
 	ResourceToBinding.Insert("ReceiveCurrency"              , BindReceiveCurrency(Parameters));
 	ResourceToBinding.Insert("ReceiveFinancialMovementType" , BindReceiveFinancialMovementType(Parameters));
 	ResourceToBinding.Insert("ReceiveAmount"                , BindReceiveAmount(Parameters));
-	
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
 // CashTransferOrder.FillByCashTarnsferOrder.Step
 Procedure StepFillByCashTransferOrder(Parameters, Chain) Export
 	Chain.FillByCashTransferOrder.Enable = True;
-	Chain.FillByCashTransferOrder.Setter = "FillCashTransferOrder_MoneyTransfer";
-		
+	Chain.FillByCashTransferOrder.Setter = "MultiSetCashTransferOrder_MoneyTransfer";
 	Options = ModelClientServer_V2.FillByCashTransferOrderOptions();
 	Options.Company           = GetCompany(Parameters);
 	Options.Branch            = GetBranch(Parameters);
@@ -1868,7 +1893,7 @@ Function BindCompany(Parameters)
 	Binding.Insert("CashReceipt",
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_AgreementInList,
-		|StepChangeCashAccountByCompany_AccountTypeIsCash");
+		|StepChangeCashAccountByCompany_CashReceipt");
 	
 	Binding.Insert("CashExpense",
 		"StepRequireCallCreateTaxesFormControls, 
@@ -4063,8 +4088,8 @@ Procedure StepChangePlanningTransactionBasisByCurrency(Parameters, Chain) Export
 	EndDo;
 EndProcedure
 
-// PaymentList.PlanningTransactionBasis.BankPayment.Fill
-Procedure FIllPaymentListPlanningTransactionBasis_BankPayment(Parameters, Results) Export
+// PaymentList.PlanningTransactionBasis.BankPayment.MultiSet
+Procedure MultiSetPaymentListPlanningTransactionBasis_BankPayment(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Account"     , BindAccount(Parameters));
 	ResourceToBinding.Insert("Company"     , BindCompany(Parameters));
@@ -4073,8 +4098,8 @@ Procedure FIllPaymentListPlanningTransactionBasis_BankPayment(Parameters, Result
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
-// PaymentList.PlanningTransactionBasis.CashPayment.Fill
-Procedure FIllPaymentListPlanningTransactionBasis_CashPayment(Parameters, Results) Export
+// PaymentList.PlanningTransactionBasis.CashPayment.MultiSet
+Procedure MultiSetPaymentListPlanningTransactionBasis_CashPayment(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Account"     , BindAccount(Parameters));
 	ResourceToBinding.Insert("Company"     , BindCompany(Parameters));
@@ -4084,8 +4109,8 @@ Procedure FIllPaymentListPlanningTransactionBasis_CashPayment(Parameters, Result
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
-// PaymentList.PlanningTransactionBasis.BankReceipt.Fill
-Procedure FIllPaymentListPlanningTransactionBasis_BankReceipt(Parameters, Results) Export
+// PaymentList.PlanningTransactionBasis.BankReceipt.MultiSet
+Procedure MultiSetPaymentListPlanningTransactionBasis_BankReceipt(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Account"          , BindAccount(Parameters));
 	ResourceToBinding.Insert("Company"          , BindCompany(Parameters));
@@ -4096,8 +4121,8 @@ Procedure FIllPaymentListPlanningTransactionBasis_BankReceipt(Parameters, Result
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
-// PaymentList.PlanningTransactionBasis.CashReceipt.Fill
-Procedure FIllPaymentListPlanningTransactionBasis_CashReceipt(Parameters, Results) Export
+// PaymentList.PlanningTransactionBasis.CashReceipt.MultiSet
+Procedure MultiSetPaymentListPlanningTransactionBasis_CashReceipt(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Account"          , BindAccount(Parameters));
 	ResourceToBinding.Insert("Company"          , BindCompany(Parameters));
@@ -4112,7 +4137,7 @@ EndProcedure
 // PaymentList.PlanningTransactionBasis.FillByPTBBankPayment.Step
 Procedure StepPaymentListFillByPTBBankPayment(Parameters, Chain) Export
 	Chain.FillByPTBBankPayment.Enable = True;
-	Chain.FillByPTBBankPayment.Setter = "FIllPaymentListPlanningTransactionBasis_BankPayment";
+	Chain.FillByPTBBankPayment.Setter = "MultiSetPaymentListPlanningTransactionBasis_BankPayment";
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBBankPaymentOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
@@ -4130,7 +4155,7 @@ EndProcedure
 // PaymentList.PlanningTransactionBasis.FillByPTBCashPayment.Step
 Procedure StepPaymentListFillByPTBCashPayment(Parameters, Chain) Export
 	Chain.FillByPTBCashPayment.Enable = True;
-	Chain.FillByPTBCashPayment.Setter = "FIllPaymentListPlanningTransactionBasis_CashPayment";
+	Chain.FillByPTBCashPayment.Setter = "MultiSetPaymentListPlanningTransactionBasis_CashPayment";
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBCashPaymentOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
@@ -4149,7 +4174,7 @@ EndProcedure
 // PaymentList.PlanningTransactionBasis.FIllByPTBBankReceipt.Step
 Procedure StepPaymentListFIllByPTBBankReceipt(Parameters, Chain) Export
 	Chain.FIllByPTBBankReceipt.Enable = True;
-	Chain.FillByPTBBankReceipt.Setter = "FIllPaymentListPlanningTransactionBasis_BankReceipt";
+	Chain.FillByPTBBankReceipt.Setter = "MultiSetPaymentListPlanningTransactionBasis_BankReceipt";
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBBankReceiptOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
@@ -4169,7 +4194,7 @@ EndProcedure
 // PaymentList.PlanningTransactionBasis.FillByPTBCashReceipt.Step
 Procedure StepPaymentListFillByPTBCashReceipt(Parameters, Chain) Export
 	Chain.FillByPTBCashReceipt.Enable = True;
-	Chain.FillByPTBCashReceipt.Setter = "FIllPaymentListPlanningTransactionBasis_CashReceipt";
+	Chain.FillByPTBCashReceipt.Setter = "MultiSetPaymentListPlanningTransactionBasis_CashReceipt";
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.FillByPTBCashReceiptOptions();
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
@@ -4184,6 +4209,65 @@ Procedure StepPaymentListFillByPTBCashReceipt(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentListFillByPTBCashReceipt";
 		Chain.FillByPTBCashReceipt.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_MONEY_TRANSFER
+
+// PaymentList.MoneyTransfer.OnChange
+Procedure PaymentListMoneyTransferOnChange(Parameters) Export
+	Binding = BindPaymentListMoneyTransfer(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.MoneyTransfer.Set
+Procedure SetPaymentListMoneyTransfer(Parameters, Results) Export
+	Binding = BindPaymentListMoneyTransfer(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.MoneyTransfer.Get
+Function GetPaymentListMoneyTransfer(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListMoneyTransfer(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.MoneyTransfer.Bind
+Function BindPaymentListMoneyTransfer(Parameters)
+	DataPath = "PaymentList.MoneyTransfer";
+	Binding = New Structure();
+	Binding.Insert("CashReceipt" , "StepPaymentListFillByMoneyTransferCashReceipt");
+	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+EndFunction
+
+// PaymentList.MoneyTransfer.CashReceipt.MultiSet
+Procedure MultiSetPaymentListMoneyTransfer_CashReceipt(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Company"          , BindCompany(Parameters));
+	ResourceToBinding.Insert("Account"          , BindAccount(Parameters));
+	ResourceToBinding.Insert("Currency"         , BindCurrency(Parameters));
+	ResourceToBinding.Insert("TotalAmount"      , BindPaymentListTotalAmount(Parameters));
+	ResourceToBinding.Insert("FinancialMovementType" , BindPaymentListFinancialMovementType(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// PaymentList.MoneyTransfer.FillByMoneyTransferCashReceipt.Step
+Procedure StepPaymentListFillByMoneyTransferCashReceipt(Parameters, Chain) Export
+	Chain.FillByMoneyTransferCashReceipt.Enable = True;
+	Chain.FillByMoneyTransferCashReceipt.Setter = "MultiSetPaymentListMoneyTransfer_CashReceipt";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.FillByMoneyTransferCashReceiptOptions();
+		Options.MoneyTransfer         = GetPaymentListMoneyTransfer(Parameters, Row.Key);
+		Options.TotalAmount           = GetPaymentListTotalAmount(Parameters, Row.Key);
+		Options.FinancialMovementType = GetPaymentListFinancialMovementType(Parameters, Row.Key);
+		Options.Company  = GetCompany(Parameters);
+		Options.Account  = GetAccount(Parameters);
+		Options.Currency = GetCurrency(Parameters);
+		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentListFillByMoneyTransferCashReceipt";
+		Chain.FillByMoneyTransferCashReceipt.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -4779,6 +4863,28 @@ Procedure StepChangeCommissionPercentByAmount(Parameters, Chain) Export
 		Chain.ChangeCommissionPercentByAmount.Options.Add(Options);
 	EndDo;	
 EndProcedure
+
+#EndRegion
+
+#Region FINANCIAL_MOVEMENT_TYPE
+
+// PaymentList.FinancialMovementType.Set
+Procedure SetPaymentListFinancialMovementType(Parameters, Results) Export
+	Binding = BindPaymentListFinancialMovementType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.FinancialMovementType.Get
+Function GetPaymentListFinancialMovementType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListFinancialMovementType(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.FinancialMovementType.Bind
+Function BindPaymentListFinancialMovementType(Parameters)
+	DataPath = "PaymentList.FinancialMovementType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 
@@ -6430,21 +6536,6 @@ Procedure StepCalculateDifferenceCount(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepCalculateDifferenceCount";
 		Chain.CalculateDifferenceCount.Options.Add(Options);
-	EndDo;	
-EndProcedure
-
-// ItemList.Difference.CalculateDifferenceCount.Fill
-Procedure FillCalculateDifferenceCount(Parameters, Chain) Export
-	Chain.CalculateDifferenceCountInItemList.Enable = True;
-	Chain.CalculateDifferenceCountInItemList.Setter = "FillItemListDifference";
-	For Each Row In GetRows(Parameters, "ItemList") Do
-		Options     = ModelClientServer_V2.CalculateDifferenceCountOptions();
-		Options.PhysCount = GetItemListPhysCount(Parameters, Row.Key);
-		Options.ExpCount = GetItemListExpCount(Parameters, Row.Key);
-		Options.ManualFixedCount = GetItemListManualFixedCount(Parameters, Row.Key);
-		Options.Key = Row.Key;
-		Options.StepName = "StepCalculateDifferenceCount";
-		Chain.CalculateDifferenceCountInItemList.Options.Add(Options);
 	EndDo;	
 EndProcedure
 

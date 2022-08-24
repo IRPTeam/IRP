@@ -758,12 +758,23 @@ Procedure CreateCashIn(Command)
 	CashInData.Insert("Currency"      , CurrentData.Currency);
 	CashInData.Insert("Amount"        , CurrentData.MoneyTransfer);
 	
-	FillingDataMoneyTransfer = GetFillingDataMoneyTransfer(CashInData);
-	OpenForm("Document.CashReceipt.ObjectForm", New Structure("FillingValues", FillingDataMoneyTransfer), , New UUID());	
+	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
+	OpenForm("Document.CashReceipt.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());	
+EndProcedure
+
+
+&AtClient
+Procedure UpdateCashIn(Command)
+	FillCashInList();
+EndProcedure
+
+&AtClient
+Procedure CreateCashOut(Command)
+	
 EndProcedure
 
 &AtServer
-Function GetFillingDataMoneyTransfer(CashInData)
+Function GetFillingDataMoneyTransferForCashReceipt(CashInData)
 	FillingData = New Structure();
 	FillingData.Insert("BasedOn" , "MoneyTransfer");	
 	FillingData.Insert("Date"    , CommonFunctionsServer.GetCurrentSessionDate());	
@@ -781,11 +792,6 @@ Function GetFillingDataMoneyTransfer(CashInData)
 	
 	Return FillingData;	
 EndFunction
-
-&AtClient
-Procedure UpdateCashIn(Command)
-	FillCashInList();
-EndProcedure
 
 &AtServer
 Procedure FillCashInList()
@@ -811,4 +817,3 @@ Procedure FillCashInList()
 		FillPropertyValues(ThisObject.CashInList.Add(), QuerySelection);
 	EndDo;
 EndProcedure
-

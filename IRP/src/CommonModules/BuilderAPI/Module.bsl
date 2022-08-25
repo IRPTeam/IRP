@@ -153,7 +153,7 @@ Function SetProperty(Wrapper, PropertyName, Value, MainTableName = Undefined) Ex
 	EndIf;
 	ServerParameters.TableName = MainTableName;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
+	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value, True);
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Cache", Parameters.Cache);
@@ -186,7 +186,7 @@ Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName = Undefined) 
 	Rows.Add(Row);
 	ServerParameters.Rows = Rows;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
+	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value, True);
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Cache", Parameters.Cache);
@@ -313,7 +313,7 @@ Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
 	ArrayOfRows = Parameters.Cache[TableName]; // Array Of Structure
 	ArrayOfRows.Add(NewCacheRow);
 	
-	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined, True);
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Cache", Parameters.Cache);

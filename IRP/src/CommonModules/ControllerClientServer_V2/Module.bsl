@@ -362,7 +362,7 @@ EndProcedure
 #Region API
 
 // attributes that available through API
-Function GetSetterNameByDataPath(DataPath)
+Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap = New Map();
 	SettersMap.Insert("Sender"          , "SetAccountSender");
 	SettersMap.Insert("SendCurrency"    , "SetSendCurrency");
@@ -405,13 +405,14 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("ItemList.TotalAmount"        , "StepItemListCalculations_IsTotalAmountChanged");
 	SettersMap.Insert("ItemList.<tax_rate>"         , "StepChangeTaxRate_AgreementInHeader");
 	SettersMap.Insert("ItemList."                   , "StepItemListCalculations_IsTaxRateChanged");
-	SettersMap.Insert("ItemList.TaxAmount"          , "SetItemListTaxAmount");
-	
+	If IsBuilder Then
+		SettersMap.Insert("ItemList.TaxAmount"          , "SetItemListTaxAmount");
+	EndIf;
 	Return SettersMap.Get(DataPath);
 EndFunction
 
-Procedure API_SetProperty(Parameters, Property, Value) Export
-	SetterNameOrStepsEnabler = GetSetterNameByDataPath(Property.DataPath);
+Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = True) Export
+	SetterNameOrStepsEnabler = GetSetterNameByDataPath(Property.DataPath, IsBuilder);
 	IsColumn = StrSplit(Property.DataPath, ".").Count() = 2;
 	If SetterNameOrStepsEnabler <> Undefined Then
 		If IsColumn Then

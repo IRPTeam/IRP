@@ -411,7 +411,7 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	Return SettersMap.Get(DataPath);
 EndFunction
 
-Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = True) Export
+Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False) Export
 	SetterNameOrStepsEnabler = GetSetterNameByDataPath(Property.DataPath, IsBuilder);
 	IsColumn = StrSplit(Property.DataPath, ".").Count() = 2;
 	If SetterNameOrStepsEnabler <> Undefined Then

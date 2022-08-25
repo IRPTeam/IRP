@@ -59,6 +59,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.CurrencyType.ReadOnly  = IsBankAccount Or IsPOSAccount Or IsTransitAccount Or IsPOSCashAccount;
 	Form.Items.ReceiptingAccount.Visible    = IsPOSAccount;
 	Form.Items.CommissionIsSeparate.Visible = IsBankAccount;
+	Form.Items.CashAccount.Visible = IsPOSCashAccount;
+	Form.Items.FinancialMovementType.Visible = IsPOSCashAccount;
 	
 	If Form.CurrencyType = "Fixed" Then
 		Form.Items.Currency.Visible = True;
@@ -135,7 +137,24 @@ EndProcedure
 
 &AtClient
 Procedure TypeOnChange(Item)
-	CatCashAccountsClient.TypeOnChange(Object, ThisObject, Item);
+	If Object.Type = PredefinedValue("Enum.CashAccountTypes.Bank")
+		Or Object.Type = PredefinedValue("Enum.CashAccountTypes.POS") Then
+		ThisObject.CurrencyType = "Fixed";
+		Object.CashAccount = Undefined;
+		Object.FinancialMovementType = Undefined;
+	ElsIf Object.Type = PredefinedValue("Enum.CashAccountTypes.POSCashAccount") Then
+		ThisObject.CurrencyType = "Fixed";
+		Object.TransitAccount = PredefinedValue("Catalog.CashAccounts.EmptyRef");
+		Object.Number = "";
+		Object.BankName = "";
+	Else
+		ThisObject.CurrencyType = "Multi";
+		Object.TransitAccount = PredefinedValue("Catalog.CashAccounts.EmptyRef");
+		Object.Number = "";
+		Object.BankName = "";
+		Object.CashAccount = Undefined;
+		Object.FinancialMovementType = Undefined;
+	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 

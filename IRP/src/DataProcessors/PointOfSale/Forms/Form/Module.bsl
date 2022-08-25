@@ -769,9 +769,41 @@ Procedure UpdateCashIn(Command)
 EndProcedure
 
 &AtClient
-Procedure CreateCashOut(Command)
-	
+Async Procedure CreateCashOut(Command)
+	Result = Await InputNumberAsync(0, "CashOut amount", 10, 2);
+	If Result <> Undefined Then
+		FillingData = GetFillingDataMoneyTransfer(Result);
+		OpenForm("Document.MoneyTransfer.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());
+	EndIf;
 EndProcedure
+
+&AtServer
+Function GetFillingDataMoneyTransfer(CashOutAmount)
+	POSCashAccount = ThisObject.Workstation.CashAccount;
+	
+	FillingData = New Structure();
+	FillingData.Insert("BasedOn" , "PointOfSale");	
+	FillingData.Insert("Date"    , CommonFunctionsServer.GetCurrentSessionDate());	
+	FillingData.Insert("Company" , Object.Company);	
+	FillingData.Insert("Branch"  , Object.Branch);
+	
+	FillingData.Insert("Sender"  , POSCashAccount);
+	FillingData.Insert("Receiver"  , POSCashAccount.CashAccount);
+	
+	FillingData.Insert("SendCurrency"    , POSCashAccount.Currency);
+	FillingData.Insert("ReceiveCurrency" , POSCashAccount.Currency);
+	
+	FillingData.Insert("SendFinancialMovementType"     , POSCashAccount.FinancialMovementType);
+	FillingData.Insert("ReceiveFinancialMovementType"  , POSCashAccount.FinancialMovementType);
+	
+	FillingData.Insert("SendUUID"    , String(New UUID()));
+	FillingData.Insert("ReceiveUUID" , String(New UUID()));
+	
+	FillingData.Insert("SendAmount"    , CashOutAmount);
+	FillingData.Insert("ReceiveAmount" , CashOutAmount);
+	
+	Return FillingData;
+EndFunction
 
 &AtServer
 Function GetFillingDataMoneyTransferForCashReceipt(CashInData)

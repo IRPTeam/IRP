@@ -7,23 +7,6 @@ Procedure BeforeWrite(Object, Form, Cancel, WriteParameters) Export
 	EndIf;
 EndProcedure
 
-Procedure TypeOnChange(Object, Form, Item) Export
-	If Object.Type = PredefinedValue("Enum.CashAccountTypes.Bank")
-		Or Object.Type = PredefinedValue("Enum.CashAccountTypes.POS") Then
-		Form.CurrencyType = "Fixed";
-	ElsIf Object.Type = PredefinedValue("Enum.CashAccountTypes.POSCashAccount") Then
-		Form.CurrencyType = "Fixed";
-		Object.TransitAccount = PredefinedValue("Catalog.CashAccounts.EmptyRef");
-		Object.Number = "";
-		Object.BankName = "";
-	Else
-		Form.CurrencyType = "Multi";
-		Object.TransitAccount = PredefinedValue("Catalog.CashAccounts.EmptyRef");
-		Object.Number = "";
-		Object.BankName = "";
-	EndIf;
-EndProcedure
-
 #EndRegion
 
 #Region StartChoiceAndEditText

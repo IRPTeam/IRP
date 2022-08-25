@@ -756,7 +756,7 @@ Procedure CreateCashIn(Command)
 	CashInData = New Structure();
 	CashInData.Insert("MoneyTransfer" , CurrentData.MoneyTransfer);
 	CashInData.Insert("Currency"      , CurrentData.Currency);
-	CashInData.Insert("Amount"        , CurrentData.MoneyTransfer);
+	CashInData.Insert("Amount"        , CurrentData.Amount);
 	
 	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
 	OpenForm("Document.CashReceipt.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());	

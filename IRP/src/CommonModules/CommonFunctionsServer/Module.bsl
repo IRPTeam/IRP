@@ -230,6 +230,25 @@ Function GetURLFromNavigationLink(Link) Export
     Return ValueFromStringInternal(LinkValue);    
 EndFunction
 
+// Is common attribute use for metadata.
+// 
+// Parameters:
+//  Name - String - Name of common attribute
+//  MetadataFullName - MetadataObject - Metadata full name
+// 
+// Returns:
+//  Boolean - Is common attribute use for metadata
+Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
+	Attr = Metadata.CommonAttributes[Name];
+	Content = Attr.Content.Find(MetadataFullName);
+	UseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use;
+	AutoUseAndUseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Auto 
+		And Attr.AutoUse = Metadata.ObjectProperties.CommonAttributeAutoUse.Use;
+	NotSeparate = Attr.DataSeparation = Metadata.ObjectProperties.CommonAttributeDataSeparation.DontUse;
+		
+	Return (UseAtContent Or AutoUseAndUseAtContent) And NotSeparate;
+EndFunction
+
 #Region QueryBuilder
 
 Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export

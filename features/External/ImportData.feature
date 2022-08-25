@@ -1938,7 +1938,17 @@ Scenario: Create catalog Workstations objects
 
 	And I check or create for catalog "Workstations" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Code'         | 'Description'    | 'CashAccount'                                                          | 'PrintTemplate' | 'UniqueID'  |
-		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb97c8502ea899' | 'False'        | '000000000001' | 'Workstation 01' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1869' | ''              | 'TeamAgent' |
+		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb97c8502ea899' | 'False'        | '000000000001' | 'Workstation 01' | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3755' | ''              | 'TeamAgent' |
+
+
+Scenario: Create POS cash account objects
+
+	And I check or create catalog "CashAccounts" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Currency'                                                           | 'Type'                                 | 'BankName' | 'Company'                                                           | 'Number' | 'TransitAccount' | 'Branch'                                                                | 'CommissionIsSeparate' | 'ReceiptingAccount' | 'IntegrationSetting' | 'CashAccount'                                                          | 'FinancialMovementType'                                                          | 'Description_en'     | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3755' | 'False'        | 11     | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'Enum.CashAccountTypes.POSCashAccount' | ''         | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''       | ''               | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'                | ''                  | ''                   | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1869' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'Pos cash account 1' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3756' | 'False'        | 12     | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'Enum.CashAccountTypes.POSCashAccount' | ''         | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''       | ''               | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'                | ''                  | ''                   | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1869' | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'Pos cash account 2' | ''                 | ''               | ''               |
+
+
 
 
 Scenario: Create catalog PaymentSchedules objects

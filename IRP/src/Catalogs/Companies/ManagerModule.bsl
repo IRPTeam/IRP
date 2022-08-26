@@ -5,13 +5,10 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		Return;
 	EndIf;
 
-	StandardProcessing = False;
-
+	StandardProcessing = False;	
+	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
-	ChoiceData = New ValueList();
-	For Each Row In QueryTable Do
-		ChoiceData.Add(Row.Ref, Row.Presentation);
-	EndDo;
+	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
 EndProcedure
 
 Function GetChoiceDataTable(Parameters) Export
@@ -24,21 +21,11 @@ Function GetChoiceDataTable(Parameters) Export
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.Companies);
 	Settings.Insert("Filter", Filter);
-
+	// enable search by code
+	Settings.Insert("UseSearchByCode", True);
+	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
-
-	QueryBuilder = New QueryBuilder(QueryBuilderText);
-	QueryBuilder.FillSettings();
-	If TypeOf(Parameters) = Type("Structure") And Parameters.Filter.Property("CustomSearchFilter") Then
-		ArrayOfFilters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.CustomSearchFilter);
-		For Each Filter In ArrayOfFilters Do
-			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.FieldName);
-			NewFilter.Use = True;
-			NewFilter.ComparisonType = Filter.ComparisonType;
-			NewFilter.Value = Filter.Value;
-		EndDo;
-	EndIf;
-	Query = QueryBuilder.GetQuery();
+	Query = CommonFormActionsServer.SetCustomSearchFilter(QueryBuilderText, Parameters);
 
 	Query.SetParameter("SearchString", Parameters.SearchString);
 
@@ -53,6 +40,11 @@ Function GetChoiceDataTable(Parameters) Export
 	For Each QueryParameter In QueryParametersStr Do
 		Query.SetParameter(QueryParameter.Key, QueryParameter.Value);
 	EndDo;
+
+	// parameters search by code
+	AccessSymbols = ".,- ¶" + Chars.LF + Chars.NBSp + Chars.CR;
+	SearchStringNumber = CommonFunctionsClientServer.GetNumberPartFromString(Parameters.SearchString, AccessSymbols);
+	Query.SetParameter("SearchStringNumber", SearchStringNumber);
 
 	Return Query.Execute().Unload();
 EndFunction

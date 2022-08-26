@@ -5,14 +5,8 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	EndIf;
 
 	StandardProcessing = False;
-	
-	// Cut last symblos if it came from Excel
-	If StrEndsWith(Parameters.SearchString, "¶") Then 
-		Parameters.SearchString = Left(Parameters.SearchString, StrLen(Parameters.SearchString) - 1);
-	EndIf;
-	
+	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
-
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);
 EndProcedure
 
@@ -88,7 +82,6 @@ Function GetCompaniesForPartner(Partner) Export
 EndFunction
 
 Function GetChoiceDataTable(Parameters) Export
-
 	Filter = "
 			 |	AND CASE
 			 |		WHEN &FilterPartnersByCompanies
@@ -96,7 +89,6 @@ Function GetChoiceDataTable(Parameters) Export
 			 |		ELSE TRUE
 			 |	END
 			 |";
-
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.Partners);
 	Settings.Insert("Filter", Filter);
@@ -104,19 +96,8 @@ Function GetChoiceDataTable(Parameters) Export
 	Settings.Insert("UseSearchByCode", True);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
-	QueryBuilder = New QueryBuilder(QueryBuilderText);
-	QueryBuilder.FillSettings();
-	If TypeOf(Parameters) = Type("Structure") And Parameters.Filter.Property("CustomSearchFilter") Then
-		ArrayOfFilters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.CustomSearchFilter);
-		For Each Filter In ArrayOfFilters Do
-			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.FieldName);
-			NewFilter.Use = True;
-			NewFilter.ComparisonType = Filter.ComparisonType;
-			NewFilter.Value = Filter.Value;
-		EndDo;
-	EndIf;
-	Query = QueryBuilder.GetQuery();
-
+	Query = CommonFormActionsServer.SetCustomSearchFilter(QueryBuilderText, Parameters);
+	
 	Query.SetParameter("SearchString", Parameters.SearchString);
 
 	AdditionalParameters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.AdditionalParameters);

@@ -250,52 +250,52 @@ Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
 EndFunction
 
 #Region QueryBuilder
-
-Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export
-	QueryText = GetQueryText(ObjectName, CustomParameters.OptionsString, CustomParameters.Fields);
-	QueryBuilder = New QueryBuilder(QueryText);
-	QueryBuilder.FillSettings();
-	SetQueryBuilderFilters(QueryBuilder, CustomParameters.Filters);
-	Query = QueryBuilder.GetQuery();
-	ObjectServerModule.SetQueryComplexFilters(Query, CustomParameters.ComplexFilters);
-	QueryTable = Query.Execute().Unload();
-	Return QueryTable;
-EndFunction
-
-Function GetQueryText(ObjectName, QueryOptionsString, Fields) Export
-	QueryTextArray = New Array();
-	QueryTextArray.Add("SELECT " + QueryOptionsString);
-
-	QueryFieldsArray = New Array();
-	For Each Field In Fields Do
-		QueryFieldsArray.Add("Table." + Field.Value + ?(Field.Key <> Field.Value, " AS " + Field.Key, ""));
-	EndDo;
-	QueryFieldsString = StrConcat(QueryFieldsArray, "," + Chars.LF);
-
-	QueryFieldsString = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryFieldsString);
-	QueryTextArray.Add(QueryFieldsString);
-
-	QueryTextArray.Add("FROM " + ObjectName + " AS Table");
-	QueryTextArray.Add("WHERE");
-	QueryTextArray.Add("TRUE");
-	QueryText = StrConcat(QueryTextArray, Chars.LF);
-
-	Return QueryText;
-EndFunction
-
-Procedure SetQueryBuilderFilters(QueryBuilder, QueryFilters)
-	QueryBuilderFilter = QueryBuilder.Filter;
-	For Each QueryFilter In QueryFilters Do
-		FoundedFilter = QueryBuilderFilter.Find(QueryFilter.FieldName);
-		If FoundedFilter = Undefined Then
-			FilterItem = QueryBuilderFilter.Add("Ref." + QueryFilter.FieldName);
-		Else
-			FilterItem = FoundedFilter;
-		EndIf;
-		FilterItem.Use = True;
-		FilterItem.ComparisonType = QueryFilter.ComparisonType;
-		FilterItem.Value = QueryFilter.Value;
-	EndDo;
-EndProcedure
+// for remove
+//Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export
+//	QueryText = GetQueryText(ObjectName, CustomParameters.OptionsString, CustomParameters.Fields);
+//	QueryBuilder = New QueryBuilder(QueryText);
+//	QueryBuilder.FillSettings();
+//	SetQueryBuilderFilters(QueryBuilder, CustomParameters.Filters);
+//	Query = QueryBuilder.GetQuery();
+//	ObjectServerModule.SetQueryComplexFilters(Query, CustomParameters.ComplexFilters);
+//	QueryTable = Query.Execute().Unload();
+//	Return QueryTable;
+//EndFunction
+// for remove
+//Function GetQueryText(ObjectName, QueryOptionsString, Fields) Export
+//	QueryTextArray = New Array();
+//	QueryTextArray.Add("SELECT " + QueryOptionsString);
+//
+//	QueryFieldsArray = New Array();
+//	For Each Field In Fields Do
+//		QueryFieldsArray.Add("Table." + Field.Value + ?(Field.Key <> Field.Value, " AS " + Field.Key, ""));
+//	EndDo;
+//	QueryFieldsString = StrConcat(QueryFieldsArray, "," + Chars.LF);
+//
+//	QueryFieldsString = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryFieldsString);
+//	QueryTextArray.Add(QueryFieldsString);
+//
+//	QueryTextArray.Add("FROM " + ObjectName + " AS Table");
+//	QueryTextArray.Add("WHERE");
+//	QueryTextArray.Add("TRUE");
+//	QueryText = StrConcat(QueryTextArray, Chars.LF);
+//
+//	Return QueryText;
+//EndFunction
+// for remove
+//Procedure SetQueryBuilderFilters(QueryBuilder, QueryFilters)
+//	QueryBuilderFilter = QueryBuilder.Filter;
+//	For Each QueryFilter In QueryFilters Do
+//		FoundedFilter = QueryBuilderFilter.Find(QueryFilter.FieldName);
+//		If FoundedFilter = Undefined Then
+//			FilterItem = QueryBuilderFilter.Add("Ref." + QueryFilter.FieldName);
+//		Else
+//			FilterItem = FoundedFilter;
+//		EndIf;
+//		FilterItem.Use = True;
+//		FilterItem.ComparisonType = QueryFilter.ComparisonType;
+//		FilterItem.Value = QueryFilter.Value;
+//	EndDo;
+//EndProcedure
 
 #EndRegion

@@ -164,9 +164,8 @@ EndProcedure
 #EndRegion
 
 #Region Common
-
-Function CreateFilterItem(FieldName, Value = Undefined, ComparisonTypeValue = Undefined,
-	DataCompositionComparisonTypeValue = Undefined) Export
+// for remove
+Function CreateFilterItem(FieldName, Value = Undefined, ComparisonTypeValue = Undefined, DataCompositionComparisonTypeValue = Undefined) Export
 	FilterStructure = New Structure();
 	FilterStructure.Insert("FieldName", FieldName);
 	FilterStructure.Insert("Value", Value);

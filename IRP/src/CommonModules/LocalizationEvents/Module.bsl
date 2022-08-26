@@ -19,10 +19,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		Return;
 	EndIf;
 	
-	// Cut last symblos if it came from Excel
-	If StrEndsWith(Parameters.SearchString, "¶") Then 
-		Parameters.SearchString = Left(Parameters.SearchString, StrLen(Parameters.SearchString) - 1);
-	EndIf;
+	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
 
 	StandardProcessing = False;
 
@@ -30,6 +27,12 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", MetadataObject);
 	Settings.Insert("Filter", "");
+	
+	//=========================================================================================================
+	If MetadataObject.FullName() = "Catalog.CashAccounts" Then
+		Settings.Insert("UseSearchByCode", True);
+	EndIf;
+	//=========================================================================================================
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
@@ -77,23 +80,11 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	Query = QueryBuilder.GetQuery();
 	Query.SetParameter("SearchStringNumber", SearchStringNumber);
 	Query.SetParameter("SearchString", Parameters.SearchString);
-	QueryTable = GetItemsBySearchString(Query);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
 
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);
 EndProcedure
-
-// Get items by search string.
-//
-// Parameters:
-//  Query - Query - Query
-//
-// Returns:
-//  ValueTable - Get items by search string:
-//		* Ref - CatalogRef.Items
-//		* Presentation - String
-Function GetItemsBySearchString(Query)
-	Return Query.Execute().Unload();
-EndFunction
 
 // Replace description localization prefix.
 //

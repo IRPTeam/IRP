@@ -133,6 +133,28 @@ Function QuerySearchInputByString(Settings) Export
 	Return QueryText;
 EndFunction
 
+Procedure CutLastSymblosIfCameFromExcel(Parameters) Export
+	If StrEndsWith(Parameters.SearchString, "¶") Then 
+		Parameters.SearchString = Left(Parameters.SearchString, StrLen(Parameters.SearchString) - 1);
+	EndIf;
+EndProcedure
+
+Function SetCustomSearchFilter(QueryBuilderText, Parameters) Export
+	QueryBuilder = New QueryBuilder(QueryBuilderText);
+	QueryBuilder.FillSettings();
+	If TypeOf(Parameters) = Type("Structure") And Parameters.Filter.Property("CustomSearchFilter") Then
+		ArrayOfFilters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.CustomSearchFilter);
+		For Each Filter In ArrayOfFilters Do
+			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.FieldName);
+			NewFilter.Use = True;
+			NewFilter.ComparisonType = Filter.ComparisonType;
+			NewFilter.Value = Filter.Value;
+		EndDo;
+	EndIf;
+	Query = QueryBuilder.GetQuery();
+	Return Query;
+EndFunction
+
 Function QueryTableToChoiceData(QueryTable) Export
 	ChoiceData = New ValueList();
 
@@ -156,5 +178,3 @@ Function QueryTableToChoiceData(QueryTable) Export
 	
 	Return ChoiceData;
 EndFunction
-
-

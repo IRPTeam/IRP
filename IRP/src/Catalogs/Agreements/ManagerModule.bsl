@@ -1,29 +1,32 @@
 Function GetRefsArrayByPartner(Parameter) Export
 	Query = New Query();
-	Query.Text = "SELECT ALLOWED
-				 |	PartnerSegments.Segment
-				 |INTO PartnerSegmentsTable
-				 |FROM
-				 |	InformationRegister.PartnerSegments AS PartnerSegments
-				 |WHERE
-				 |	PartnerSegments.Partner = &Partner
-				 |;
-				 |////////////////////////////////////////////////////////////////////////////////
-				 |SELECT ALLOWED
-				 |	Agreements.Ref
-				 |FROM
-				 |	Catalog.Agreements AS Agreements
-				 |		LEFT JOIN PartnerSegmentsTable AS PartnerSegmentsTable
-				 |		ON Agreements.PartnerSegment = PartnerSegmentsTable.Segment
-				 |WHERE
-				 |	Agreements.Partner = &Partner
-				 |	OR ISNULL(PartnerSegmentsTable.Segment,
-				 |		VALUE(Catalog.PartnerSegments.EmptyRef)) <> VALUE(Catalog.PartnerSegments.EmptyRef)
-				 |GROUP BY
-				 |	Agreements.Ref
-				 |;
-				 |////////////////////////////////////////////////////////////////////////////////
-				 |DROP PartnerSegmentsTable";
+	Query.Text = 
+	"SELECT ALLOWED
+	|	PartnerSegments.Segment
+	|INTO PartnerSegmentsTable
+	|FROM
+	|	InformationRegister.PartnerSegments AS PartnerSegments
+	|WHERE
+	|	PartnerSegments.Partner = &Partner
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT ALLOWED
+	|	Agreements.Ref
+	|FROM
+	|	Catalog.Agreements AS Agreements
+	|		LEFT JOIN PartnerSegmentsTable AS PartnerSegmentsTable
+	|		ON Agreements.PartnerSegment = PartnerSegmentsTable.Segment
+	|WHERE
+	|	Agreements.Partner = &Partner
+	|	OR ISNULL(PartnerSegmentsTable.Segment,
+	|		VALUE(Catalog.PartnerSegments.EmptyRef)) <> VALUE(Catalog.PartnerSegments.EmptyRef)
+	|GROUP BY
+	|	Agreements.Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|DROP PartnerSegmentsTable";
 	Query.SetParameter("Partner", Parameter);
 	QueryExecute = Query.Execute();
 	If QueryExecute.IsEmpty() Then
@@ -37,28 +40,31 @@ EndFunction
 
 Function GetRefsArrayBySegment(Parameter) Export
 	Query = New Query();
-	Query.Text = "SELECT ALLOWED
-				 |	PartnerSegments.Segment
-				 |INTO PartnerSegmentsTable
-				 |FROM
-				 |	InformationRegister.PartnerSegments AS PartnerSegments
-				 |WHERE
-				 |	PartnerSegments.Segment = &Segment
-				 |;
-				 |////////////////////////////////////////////////////////////////////////////////
-				 |SELECT ALLOWED
-				 |	Agreements.Ref
-				 |FROM
-				 |	Catalog.Agreements AS Agreements
-				 |		INNER JOIN PartnerSegmentsTable AS PartnerSegmentsTable
-				 |		ON Agreements.PartnerSegment = PartnerSegmentsTable.Segment
-				 |WHERE
-				 |	ISNULL(Agreements.Ref, VALUE(Catalog.Agreements.EmptyRef)) <> VALUE(Catalog.Agreements.EmptyRef)
-				 |GROUP BY
-				 |	Agreements.Ref
-				 |;
-				 |////////////////////////////////////////////////////////////////////////////////
-				 |DROP PartnerSegmentsTable";
+	Query.Text = 
+	"SELECT ALLOWED
+	|	PartnerSegments.Segment
+	|INTO PartnerSegmentsTable
+	|FROM
+	|	InformationRegister.PartnerSegments AS PartnerSegments
+	|WHERE
+	|	PartnerSegments.Segment = &Segment
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT ALLOWED
+	|	Agreements.Ref
+	|FROM
+	|	Catalog.Agreements AS Agreements
+	|		INNER JOIN PartnerSegmentsTable AS PartnerSegmentsTable
+	|		ON Agreements.PartnerSegment = PartnerSegmentsTable.Segment
+	|WHERE
+	|	ISNULL(Agreements.Ref, VALUE(Catalog.Agreements.EmptyRef)) <> VALUE(Catalog.Agreements.EmptyRef)
+	|GROUP BY
+	|	Agreements.Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|DROP PartnerSegmentsTable";
 	Query.SetParameter("Segment", Parameter);
 	QueryExecute = Query.Execute();
 	If QueryExecute.IsEmpty() Then
@@ -71,23 +77,18 @@ Function GetRefsArrayBySegment(Parameter) Export
 EndFunction
 
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
-
 	If TypeOf(Parameters) <> Type("Structure") Or Not ValueIsFilled(Parameters.SearchString)
 		Or Not Parameters.Filter.Property("AdditionalParameters") Then
 		Return;
 	EndIf;
 
 	StandardProcessing = False;
-
+	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
-	ChoiceData = New ValueList();
-	For Each Row In QueryTable Do
-		ChoiceData.Add(Row.Ref, Row.Presentation);
-	EndDo;
+	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
 EndProcedure
 
 Function GetChoiceDataTable(Parameters) Export
-
 	Filter = "
 			 |	AND (CASE
 			 |		WHEN &IncludeFilterByPartner
@@ -106,22 +107,12 @@ Function GetChoiceDataTable(Parameters) Export
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.Agreements);
 	Settings.Insert("Filter", Filter);
-
+	// enable search by code
+	Settings.Insert("UseSearchByCode", True);
+	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
-
-	QueryBuilder = New QueryBuilder(QueryBuilderText);
-	QueryBuilder.FillSettings();
-	If TypeOf(Parameters) = Type("Structure") And Parameters.Filter.Property("CustomSearchFilter") Then
-		ArrayOfFilters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.CustomSearchFilter);
-		For Each Filter In ArrayOfFilters Do
-			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.FieldName);
-			NewFilter.Use = True;
-			NewFilter.ComparisonType = Filter.ComparisonType;
-			NewFilter.Value = Filter.Value;
-		EndDo;
-	EndIf;
-	Query = QueryBuilder.GetQuery();
-
+	Query = CommonFormActionsServer.SetCustomSearchFilter(QueryBuilderText, Parameters);
+	
 	Query.SetParameter("SearchString", Parameters.SearchString);
 
 	QueryParametersStr = New Structure();
@@ -134,15 +125,19 @@ Function GetChoiceDataTable(Parameters) Export
 
 	AdditionalParameters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.AdditionalParameters);
 	For Each QueryParameter In QueryParametersStr Do
-		KeyValue = ?(AdditionalParameters.Property(QueryParameter.Key), AdditionalParameters[QueryParameter.Key],
-			QueryParameter.Value);
+		KeyValue = ?(AdditionalParameters.Property(QueryParameter.Key), AdditionalParameters[QueryParameter.Key], QueryParameter.Value);
 		Query.SetParameter(QueryParameter.Key, KeyValue);
 	EndDo;
 	If Query.Parameters.IncludePartnerSegments Then
-		PartnersSegmentsArray = InformationRegisters.PartnerSegments.GetSegmentsRefArrayByPartner(
-			Query.Parameters.Partner);
+		PartnersSegmentsArray = InformationRegisters.PartnerSegments.GetSegmentsRefArrayByPartner(Query.Parameters.Partner);
 		Query.SetParameter("PartnerSegments", PartnersSegmentsArray);
 	EndIf;
+	
+	// parameters search by code
+	AccessSymbols = ".,- ¶" + Chars.LF + Chars.NBSp + Chars.CR;
+	SearchStringNumber = CommonFunctionsClientServer.GetNumberPartFromString(Parameters.SearchString, AccessSymbols);
+	Query.SetParameter("SearchStringNumber", SearchStringNumber);
+	
 	Return Query.Execute().Unload();
 EndFunction
 

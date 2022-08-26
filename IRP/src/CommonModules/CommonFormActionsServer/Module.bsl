@@ -116,7 +116,11 @@ Function QuerySearchInputByString(Settings) Export
 			NumberSearch = "Table.Ref.Code = &SearchStringNumber";
 		EndIf;
 	EndIf;
-
+	
+	If Settings.Property("UseSearchByCode") And Settings.UseSearchByCode Then
+		NumberSearch = "Table.Ref.Code = &SearchStringNumber";
+	EndIf;
+	
 	If Not Settings.MetadataObject.DescriptionLength Then
 		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "_" + "en", IDSearch, NumberSearch);
 		QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";
@@ -128,3 +132,29 @@ Function QuerySearchInputByString(Settings) Export
 
 	Return QueryText;
 EndFunction
+
+Function QueryTableToChoiceData(QueryTable) Export
+	ChoiceData = New ValueList();
+
+	For Each Row In QueryTable Do
+		If Not ChoiceData.FindByValue(Row.Ref) = Undefined Then
+			Continue;
+		EndIf;
+		
+		If Row.Sort = 0 Then
+			ChoiceData.Add(Row.Ref, "[" + Row.Ref.Code + "] " + Row.Presentation, False, PictureLib.AddToFavorites);
+		ElsIf Row.Sort = 1 Then
+			If IsBlankString(Row.Ref.ItemID) Then
+				ChoiceData.Add(Row.Ref, Row.Presentation, False, PictureLib.Price);
+			Else
+				ChoiceData.Add(Row.Ref, "(" + Row.Ref.ItemID + ") " + Row.Presentation, False, PictureLib.Price);
+			EndIf;
+		Else
+			ChoiceData.Add(Row.Ref, Row.Presentation);
+		EndIf;
+	EndDo;
+	
+	Return ChoiceData;
+EndFunction
+
+

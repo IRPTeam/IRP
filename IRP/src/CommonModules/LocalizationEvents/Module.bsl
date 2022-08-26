@@ -14,7 +14,7 @@
 //  	** Value - String - Value
 //  StandardProcessing - Boolean - Standard processing
 Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Parameters, StandardProcessing) Export
-
+	// do not change this condition, if get return see ChoiceDataGetProcessing() in catalog manager module
 	If Not StandardProcessing Or Not ValueIsFilled(Parameters.SearchString) Then
 		Return;
 	EndIf;
@@ -79,25 +79,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	Query.SetParameter("SearchString", Parameters.SearchString);
 	QueryTable = GetItemsBySearchString(Query);
 
-	ChoiceData = New ValueList(); // ValueList of CatalogRef.Items
-
-	For Each Row In QueryTable Do
-		If Not ChoiceData.FindByValue(Row.Ref) = Undefined Then
-			Continue;
-		EndIf;
-		
-		If Row.Sort = 0 Then
-			ChoiceData.Add(Row.Ref, "[" + Row.Ref.Code + "] " + Row.Presentation, False, PictureLib.AddToFavorites);
-		ElsIf Row.Sort = 1 Then
-			If IsBlankString(Row.Ref.ItemID) Then
-				ChoiceData.Add(Row.Ref, Row.Presentation, False, PictureLib.Price);
-			Else
-				ChoiceData.Add(Row.Ref, "(" + Row.Ref.ItemID + ") " + Row.Presentation, False, PictureLib.Price);
-			EndIf;
-		Else
-			ChoiceData.Add(Row.Ref, Row.Presentation);
-		EndIf;
-	EndDo;
+	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);
 EndProcedure
 
 // Get items by search string.

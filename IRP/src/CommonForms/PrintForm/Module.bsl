@@ -34,8 +34,6 @@ EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "AddTemplatePrintForm" Then
-		//Message("" + EventName + "" + Source);
-		//Result = Parameter.Result;
 		FillPrintFormConfig(Parameter)	
 	EndIf;
 EndProcedure
@@ -47,16 +45,24 @@ EndProcedure
 &AtClient
 Procedure FillPrintFormConfig(Parameter)
 	FindObj = New Structure();
-	FindObj.Insert("Ref", Parameter.RefDocument);
-	FindObj.Insert("NameTemplate", Parameter.NameTemplate);
+	RefDoc = Parameter.RefDocument;
+	NameTemplate = Parameter.NameTemplate;
+	FindObj.Insert("Ref", RefDoc);
+	FindObj.Insert("NameTemplate", NameTemplate);
 	If PrintFormConfig.FindRows(FindObj).Count() = 0 Then
 		NewStr = PrintFormConfig.Add();
 		NewStr.Print = True;
 		NewStr.Presentation = "" + Parameter.RefDocument;
-		NewStr.NameTemplate = Parameter.NameTemplate;
 		NewStr.CountCopy = Parameter.CountCopy;
-		//@skip-check property-return-type
-		NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;
+		NewStr.BuilderLayout = Parameter.BuilderLayout;
+		if Parameter.BuilderLayout then
+			//NewStr.SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(RefDoc, NameTemplate);		
+		else
+			//@skip-check property-return-type
+			NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;
+		EndIf;
+		
+		NewStr.NameTemplate = UniversalPrintServer.GetSynonymTemplate(RefDoc, NameTemplate);
 		NewStr.Ref = Parameter.RefDocument;
 	EndIf;
 EndProcedure

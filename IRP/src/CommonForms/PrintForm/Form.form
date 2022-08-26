@@ -1777,6 +1777,23 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>BuilderLayout</name>
+      <title>
+        <key>en</key>
+        <value>Builder layout</value>
+      </title>
+      <id>9</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <formCommands>
     <name>EditResult</name>

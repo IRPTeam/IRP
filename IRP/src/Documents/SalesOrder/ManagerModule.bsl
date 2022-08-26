@@ -4,7 +4,13 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction
 
-Function SalesOrderPrint(Ref) Export
+Function Print(Ref, NameTemplate) Export
+	if Upper(NameTemplate) = Upper("SalesOrderPrint") then
+		Return SalesOrderPrint(Ref);
+	EndIf; 
+EndFunction
+
+Function SalesOrderPrint(Ref)
 	
 	Template = GetTemplate("SalesOrderPrint");
 	Query = New Query;

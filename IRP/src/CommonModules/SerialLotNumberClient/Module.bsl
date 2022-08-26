@@ -32,14 +32,21 @@ Procedure AddNewSerialLotNumbers(Result, Parameters, AddNewLot = False, AddInfo 
 			Parameters.Object.SerialLotNumbers.Delete(Row);
 		EndDo;
 	EndIf;
-	TotalQuantity = 0;
+	
 	For Each Row In Result.SerialLotNumbers Do
 		NewRow = Parameters.Object.SerialLotNumbers.Add();
 		NewRow.Key = Result.RowKey;
 		NewRow.SerialLotNumber = Row.SerialLotNumber;
 		NewRow.Quantity = Row.Quantity;
-		TotalQuantity = TotalQuantity + Row.Quantity;
 	EndDo;
+	
+	TotalQuantity = 0;
+	For Each Row In Parameters.Object.SerialLotNumbers Do
+		If Row.Key = Result.RowKey Then
+			TotalQuantity = TotalQuantity + Row.Quantity;
+		EndIf;
+	EndDo;
+	
 	UpdateSerialLotNumbersPresentation(Parameters.Object);
 	UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	

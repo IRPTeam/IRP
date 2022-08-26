@@ -258,8 +258,10 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
-		And I click the button named "FormPost"
-		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
+		And "ItemList" table became equal
+			| '#' | 'Price type'        | 'Item'     | 'Sales person' | 'Profit loss center' | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers'             | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
+			| '1' | 'Basic Price Types' | 'Trousers' | ''             | ''                   | '38/Yellow' | 'No'                 | '99098809009999; 99098809009998' | 'pcs'  | '244,07'     | '4,000'    | '400,00' | '18%' | ''              | '1 355,93'   | '1 600,00'     | ''                    | 'Store 01' | ''             | ''       |
+			| '2' | 'Basic Price Types' | 'Boots'    | ''             | ''                   | '38/18SD'   | 'No'                 | ''                               | 'pcs'  | '99,15'      | '1,000'    | '650,00' | '18%' | ''              | '550,85'     | '650,00'       | ''                    | 'Store 01' | ''             | ''       |	
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -444,8 +446,11 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 				| '1,000'    | '99098809009999'    |
 			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersContextMenuDelete"
 			And I click "Ok" button
-		And I click the button named "FormPost"
-		Then I wait that in user messages the "Quantity [1] does not match the quantity [2] by serial/lot numbers" substring will appear in "30" seconds
+			And "ItemList" table became equal
+				| '#' | 'Retail sales receipt'         | 'Item'     | 'Sales person' | 'Profit loss center' | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Return reason' | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' |
+				| '1' | '$$RetailSalesReceipt092002$$' | 'Trousers' | ''             | ''                   | '38/Yellow' | 'No'                 | '99098809009998'     | 'pcs'  | '122,03'     | '2,000'    | '400,00' | '677,97'     | '800,00'       | ''                    | 'Store 01' | ''              | ''             | ''       | '18%' | ''              | ''            |
+				| '2' | '$$RetailSalesReceipt092002$$' | 'Boots'    | ''             | ''                   | '38/18SD'   | 'No'                 | ''                   | 'pcs'  | '99,15'      | '1,000'    | '650,00' | '550,85'     | '650,00'       | ''                    | 'Store 01' | ''              | ''             | ''       | '18%' | ''              | ''            |
+				| '3' | '$$RetailSalesReceipt092002$$' | 'Boots'    | ''             | ''                   | '37/18SD'   | 'No'                 | ''                   | 'pcs'  | '106,78'     | '1,000'    | '700,00' | '593,22'     | '700,00'       | ''                    | 'Store 01' | ''              | ''             | ''       | '18%' | ''              | ''            |	
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -672,8 +677,10 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			And the editing text of form attribute named "ItemQuantity" became equal to "3,000"
 			And the editing text of form attribute named "SelectedCount" became equal to "4,000"
 			And I click "Ok" button
-		And I click the button named "FormPost"
-		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
+			And "ItemList" table became equal
+				| '#' | 'SalesTax' | 'Revenue type' | 'Price type'        | 'Item'     | 'Item key'  | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers'             | 'Unit' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Sales person' |
+				| '1' | '1%'       | ''             | 'Basic Price Types' | 'Trousers' | '38/Yellow' | ''                   | 'No'                 | '259,91'     | '99098809009910; 99098809009911' | 'pcs'  | '4,000'    | '400,00' | '18%' | ''              | '1 340,09'   | '1 600,00'     | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             |
+				| '2' | '1%'       | ''             | 'Basic Price Types' | 'Boots'    | '38/18SD'   | ''                   | 'No'                 | '105,59'     | ''                               | 'pcs'  | '1,000'    | '650,00' | '18%' | ''              | '544,41'     | '650,00'       | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             |
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -687,7 +694,7 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			And I select current line in "SerialLotNumbers" table
 			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
-			And the editing text of form attribute named "ItemQuantity" became equal to "3,000"
+			And the editing text of form attribute named "ItemQuantity" became equal to "4,000"
 			And the editing text of form attribute named "SelectedCount" became equal to "3,000"
 			And I click "Ok" button
 	* Post Sales invoice and check movements in the register Sales turnovers
@@ -843,8 +850,11 @@ Scenario: _092005 check serial lot number in the Sales return
 				| '1,000'    | '99098809009910'    |
 			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersContextMenuDelete"
 			And I click "Ok" button
-		And I click the button named "FormPost"
-		Then I wait that in user messages the "Quantity [1] does not match the quantity [2] by serial/lot numbers" substring will appear in "30" seconds
+			And "ItemList" table became equal
+				| '#' | 'Item'     | 'Item key'  | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Sales invoice'          | 'Price'  | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Return reason' | 'Revenue type' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Sales person' |
+				| '1' | 'Trousers' | '38/Yellow' | ''                   | 'No'                 | '122,03'     | 'pcs'  | '99098809009911'     | '2,000'    | '$$SalesInvoice092004$$' | '400,00' | '677,97'     | 'No'                | '800,00'       | ''                    | 'Store 01' | ''                   | ''              | ''             | '18%' | ''              | ''            | ''             |
+				| '2' | 'Boots'    | '38/18SD'   | ''                   | 'No'                 | '105,59'     | 'pcs'  | ''                   | '1,000'    | '$$SalesInvoice092004$$' | '650,00' | '544,41'     | 'No'                | '650,00'       | ''                    | 'Store 01' | ''                   | ''              | ''             | '18%' | ''              | ''            | ''             |
+				| '3' | 'Boots'    | '37/18SD'   | ''                   | 'No'                 | '113,71'     | 'pcs'  | ''                   | '1,000'    | '$$SalesInvoice092004$$' | '700,00' | '586,29'     | 'No'                | '700,00'       | ''                    | 'Store 01' | ''                   | ''              | ''             | '18%' | ''              | ''            | ''             |	
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -1146,8 +1156,10 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
-		And I click the button named "FormPost"
-		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
+			And "ItemList" table became equal
+				| '#' | 'Price type'              | 'Item'     | 'Item key'  | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'             | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Quantity' | 'Is additional item cost' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+				| '1' | 'en description is empty' | 'Trousers' | '38/Yellow' | ''                   | 'No'                 | '244,07'     | 'pcs'  | '99098809009999; 99098809009908' | '400,00' | '18%' | ''              | '1 600,00'     | ''                    | ''                        | 'Store 01' | ''              | '4,000'    | 'No'                      | ''             | ''               | ''       | ''            | '1 355,93'   | 'No'                |
+				| '2' | 'en description is empty' | 'Boots'    | '38/18SD'   | ''                   | 'No'                 | '106,78'     | 'pcs'  | ''                               | '700,00' | '18%' | ''              | '700,00'       | ''                    | ''                        | 'Store 01' | ''              | '1,000'    | 'No'                      | ''             | ''               | ''       | ''            | '593,22'     | 'No'                |	
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -1457,8 +1469,10 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
-		And I click the button named "FormPost"
-		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
+			And "ItemList" table became equal
+				| '#' | 'Item'     | 'Item key'  | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers'             | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Quantity' | 'Expense type' | 'Use shipment confirmation' | 'Detail' | 'Return reason' | 'Net amount' | 'Purchase invoice' | 'Purchase return order' |
+				| '1' | 'Trousers' | '38/Yellow' | ''                   | 'No'                 | '244,07'     | '99098809009999; 99098809009008' | 'pcs'  | '400,00' | '18%' | ''              | '1 600,00'     | ''                    | 'Store 01' | '4,000'    | ''             | 'No'                        | ''       | ''              | '1 355,93'   | ''                 | ''                      |
+				| '2' | 'Boots'    | '38/18SD'   | ''                   | 'No'                 | '106,78'     | ''                               | 'pcs'  | '700,00' | '18%' | ''              | '700,00'       | ''                    | 'Store 01' | '1,000'    | ''             | 'No'                        | ''       | ''              | '593,22'     | ''                 | ''                      |
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -1932,8 +1946,10 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
-		And I click the button named "FormPost"
-		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
+			And "ItemList" table became equal
+				| '#' | 'Revenue type' | 'Amount' | 'Item'     | 'Basis document' | 'Item key'  | 'Profit loss center'      | 'Physical inventory' | 'Serial lot numbers'             | 'Unit' | 'Quantity' | 'Amount tax' |
+				| '1' | 'Revenue'      | ''       | 'Trousers' | ''               | '38/Yellow' | 'Distribution department' | ''                   | '99098809009999; 99098809009008' | 'pcs'  | '4,000'    | ''           |
+				| '2' | 'Revenue'      | ''       | 'Boots'    | ''               | '38/18SD'   | 'Distribution department' | ''                   | ''                               | 'pcs'  | '2,000'    | ''           |	
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -2254,8 +2270,10 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 			And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
-		And I click the button named "FormPost"
-		Then I wait that in user messages the "Quantity [3] does not match the quantity [4] by serial/lot numbers" substring will appear in "30" seconds
+			And "ItemList" table became equal
+				| '#' | 'Item'     | 'Basis document' | 'Item key'  | 'Profit loss center'      | 'Physical inventory' | 'Serial lot numbers'             | 'Unit' | 'Quantity' | 'Expense type' |
+				| '1' | 'Trousers' | ''               | '38/Yellow' | 'Distribution department' | ''                   | '99098809009999; 99098809009008' | 'pcs'  | '4,000'    | 'Expense'      |
+				| '2' | 'Boots'    | ''               | '38/18SD'   | 'Distribution department' | ''                   | ''                               | 'pcs'  | '2,000'    | 'Expense'      |		
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'  |
@@ -3425,7 +3443,7 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		And I select current line in "List" table
 		And I expand a line in "SerialLotNumbersTree" table
 			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 1 with SLN' | 'PZU'      | '1,000'             | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | '2,000'             | '2,000'    |
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I change checkbox "Auto create"

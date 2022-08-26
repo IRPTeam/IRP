@@ -1670,6 +1670,3 @@ Scenario: _0154091 check company, account, currency input by search in line in C
 		| 'Second Company Ferron BP' | 'Ferron BP' |
 		And I close all client application windows
 
-
-Scenario: _999999 close TestClient session
-	And I close TestClient session

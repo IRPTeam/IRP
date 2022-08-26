@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bf3c8666-cbf1-48cc-8d02-0b41a462fd3b">
+  <producedTypes>
+    <objectType typeId="9722093e-10ea-4031-be6c-9bd640c9536a" valueTypeId="4c0ba9bb-a19d-4afd-9728-39ed07f31258"/>
+    <refType typeId="1883a77c-4999-49bc-8f88-5d3b0c7e5d80" valueTypeId="4d91b356-1b61-4523-bbb3-24a7a8d4d885"/>
+    <selectionType typeId="47cf0439-f44e-4d94-8b19-9cad7574e3e1" valueTypeId="009bcd21-0c8d-4678-9a9c-25e096358c65"/>
+    <listType typeId="5cea5fda-9b1d-4f4f-8571-71016158493b" valueTypeId="0aaa1dca-1631-4902-b783-9aa3dc7e4ee6"/>
+    <managerType typeId="35632385-ae09-4bec-9050-d4b9888b70a9" valueTypeId="2ef2e598-35f1-47d5-a8b4-23eecb7ff8e7"/>
+  </producedTypes>
+  <name>ExternalFunctions</name>
+  <synonym>
+    <key>en</key>
+    <value>External functions</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.ExternalFunctions.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>External function</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>External functions</value>
+  </listPresentation>
+  <dataHistory>Use</dataHistory>
+  <hierarchical>true</hierarchical>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <descriptionLength>150</descriptionLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.ExternalFunctions.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.ExternalFunctions.Form.ListForm</defaultListForm>
+  <updateDataHistoryImmediatelyAfterWrite>true</updateDataHistoryImmediatelyAfterWrite>
+  <executeAfterWriteDataHistoryVersionProcessing>true</executeAfterWriteDataHistoryVersionProcessing>
+  <attributes uuid="fa2198be-48e9-4917-b3a1-72a363b63e55">
+    <name>ExternalFunctionType</name>
+    <synonym>
+      <key>en</key>
+      <value>External function type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.ExternalFunctionType</types>
+    </type>
+  </attributes>
+  <attributes uuid="b89ca813-78b7-4d49-9d34-e38d88f58381">
+    <name>Enable</name>
+    <synonym>
+      <key>en</key>
+      <value>Enable</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="28f09bd7-bfdd-447d-9d0e-9bbd8c93ec18">
+    <name>ExternalCode</name>
+    <synonym>
+      <key>en</key>
+      <value>External code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c7bf7b7a-a6bc-4e89-a637-c169eb88e12d">
+    <name>UseForSetDescription</name>
+    <synonym>
+      <key>en</key>
+      <value>Use for set description</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="588b7e31-7bb9-4822-8c0c-869fb9c570d9">
+    <name>SafeModeIsOn</name>
+    <synonym>
+      <key>en</key>
+      <value>Safe mode is on</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="66461f2c-9435-4e41-9867-5f80eb10acc2">
+    <producedTypes>
+      <objectType typeId="3717ba06-3797-4225-8757-37970637f40a" valueTypeId="07793604-6f9e-406f-ae2d-104ead5b1d08"/>
+      <rowType typeId="4519636d-6aab-4d9b-82aa-2a940535b205" valueTypeId="eebf8d63-d2d7-4046-b34b-186324973883"/>
+    </producedTypes>
+    <name>Parameters</name>
+    <synonym>
+      <key>en</key>
+      <value>Parameters</value>
+    </synonym>
+    <attributes uuid="985ab572-a12e-4acd-a488-6a585c596cc5">
+      <name>Name</name>
+      <synonym>
+        <key>en</key>
+        <value>Name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="087e804a-82be-42ed-8353-5f2200342b4a">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <types>String</types>
+        <types>Boolean</types>
+        <types>AnyRef</types>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>50</precision>
+          <scale>10</scale>
+        </numberQualifiers>
+        <stringQualifiers>
+          <length>1000</length>
+        </stringQualifiers>
+        <dateQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="56cbceda-ba36-442e-ab3d-68f25ba61af1">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a8f8a55d-c387-4d5e-a841-a9a96d1d9435">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

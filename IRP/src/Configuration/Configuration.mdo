@@ -112,22 +112,23 @@
   <subsystems>Subsystem.Saas</subsystems>
   <subsystems>Subsystem.SalesAR</subsystems>
   <subsystems>Subsystem.Service</subsystems>
-  <subsystems>Subsystem.Services</subsystems>
   <subsystems>Subsystem.Settings</subsystems>
   <subsystems>Subsystem.SpecialOffers</subsystems>
-  <subsystems>Subsystem.Temp</subsystems>
   <subsystems>Subsystem.Treasury</subsystems>
   <subsystems>Subsystem.UniqueID</subsystems>
   <subsystems>Subsystem.Retail</subsystems>
   <subsystems>Subsystem.Accounting</subsystems>
+  <subsystems>Subsystem.AdminFunctions</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
   <commonPictures>CommonPicture.AddProperties</commonPictures>
+  <commonPictures>CommonPicture.AdminFunction</commonPictures>
   <commonPictures>CommonPicture.Attributes</commonPictures>
   <commonPictures>CommonPicture.AutoTest</commonPictures>
   <commonPictures>CommonPicture.Barcode</commonPictures>
   <commonPictures>CommonPicture.BarcodePicture</commonPictures>
+  <commonPictures>CommonPicture.Bookkeeping</commonPictures>
   <commonPictures>CommonPicture.CashOk</commonPictures>
   <commonPictures>CommonPicture.Cloud</commonPictures>
   <commonPictures>CommonPicture.CommonAttributes</commonPictures>
@@ -144,6 +145,8 @@
   <commonPictures>CommonPicture.IconCollection4</commonPictures>
   <commonPictures>CommonPicture.IconCollection5</commonPictures>
   <commonPictures>CommonPicture.IconCollection6</commonPictures>
+  <commonPictures>CommonPicture.IconCollection7</commonPictures>
+  <commonPictures>CommonPicture.IconCollection8</commonPictures>
   <commonPictures>CommonPicture.IDInfo</commonPictures>
   <commonPictures>CommonPicture.Info</commonPictures>
   <commonPictures>CommonPicture.Integration</commonPictures>
@@ -172,9 +175,6 @@
   <commonPictures>CommonPicture.Store</commonPictures>
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.Unlock</commonPictures>
-  <commonPictures>CommonPicture.Bookkeeping</commonPictures>
-  <commonPictures>CommonPicture.IconCollection7</commonPictures>
-  <commonPictures>CommonPicture.IconCollection8</commonPictures>
   <commonPictures>CommonPicture.Waiting</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -634,6 +634,7 @@
   <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
   <catalogs>Catalog.Extensions</catalogs>
   <catalogs>Catalog.ExternalDataProc</catalogs>
+  <catalogs>Catalog.ExternalFunctions</catalogs>
   <catalogs>Catalog.Files</catalogs>
   <catalogs>Catalog.FileStoragesInfo</catalogs>
   <catalogs>Catalog.FileStorageVolumes</catalogs>
@@ -647,6 +648,7 @@
   <catalogs>Catalog.ItemSegments</catalogs>
   <catalogs>Catalog.ItemTypes</catalogs>
   <catalogs>Catalog.LedgerTypes</catalogs>
+  <catalogs>Catalog.LedgerTypeVariants</catalogs>
   <catalogs>Catalog.LegalNameContracts</catalogs>
   <catalogs>Catalog.LockDataModificationReasons</catalogs>
   <catalogs>Catalog.MovementRules</catalogs>
@@ -680,7 +682,6 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.LedgerTypeVariants</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
@@ -786,6 +787,7 @@
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.StockBalanceDetail</enums>
+  <enums>Enum.ExternalFunctionType</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

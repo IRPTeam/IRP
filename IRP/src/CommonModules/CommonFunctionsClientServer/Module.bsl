@@ -119,7 +119,7 @@ Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", Ge
 
 EndFunction
 
-#Region Regexp
+#Region RegExp
 
 // Regex.
 // 

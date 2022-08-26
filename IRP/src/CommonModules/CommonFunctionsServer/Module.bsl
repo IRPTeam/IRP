@@ -249,6 +249,80 @@ Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
 	Return (UseAtContent Or AutoUseAndUseAtContent) And NotSeparate;
 EndFunction
 
+#Region EvalExpression
+
+// Recalculate expression.
+// 
+// Parameters:
+//  Params - See GetRecalculateExpressionParams
+// 
+// Returns:
+//  See CommonFunctionsServer.RecalculateExpressionResult
+Function RecalculateExpression(Params) Export
+	
+	ResultInfo = RecalculateExpressionResult();
+	
+	Try
+		Result = Undefined;
+		If Params.SafeMode Then
+			SetSafeMode(True);
+		EndIf;
+		If Params.Eval Then
+			//@skip-check server-execution-safe-mode
+			Result = Eval(Params.Expression);
+		Else
+			//@skip-check server-execution-safe-mode
+			Execute(Params.Expression);
+		EndIf;
+		ResultInfo.Result = Result;
+	Except
+		ResultInfo.isError = True;
+		ResultInfo.Description = ErrorProcessing.DetailErrorDescription(ErrorInfo());
+	EndTry;
+	
+	Return ResultInfo;
+EndFunction
+
+// Recalculate expression params.
+// 
+// Returns:
+//  Structure - Recalculate expression params:
+// * Eval - Boolean -
+// * Expression - String -
+// * Result - Undefined -
+// * SafeMode - Boolean -
+Function GetRecalculateExpressionParams() Export
+	
+	Structure = New Structure;
+	Structure.Insert("Eval", True);
+	Structure.Insert("Expression", "");
+	Structure.Insert("Result", Undefined);
+	Structure.Insert("SafeMode", True);
+	
+	Return Structure;
+	
+EndFunction
+
+// Recalculate expression result.
+// 
+// Returns:
+//  Structure - Recalculate expression result:
+// * isError - Boolean -
+// * Description - String -
+// * Result - Undefined -
+Function RecalculateExpressionResult() Export
+	
+	Structure = New Structure;
+	Structure.Insert("isError", False);
+	Structure.Insert("Description", "");
+	Structure.Insert("Result", Undefined);
+	
+	Return Structure;
+	
+EndFunction
+
+#EndRegion
+
 #Region QueryBuilder
 
 Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export

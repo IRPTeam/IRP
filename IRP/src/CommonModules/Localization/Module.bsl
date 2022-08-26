@@ -692,6 +692,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_113", NStr("en = 'Serial lot number [ %1 ] has to be unique at the document'", Lang) + Chars.LF);
 	Strings.Insert("Error_114", NStr("en = '""Landed cost"" is a required field.'", Lang) + Chars.LF);
 	Strings.Insert("Error_115", NStr("en = 'Error while test connection'", Lang) + Chars.LF);
+	Strings.Insert("Error_116", NStr("en = 'Error Eval code'", Lang) + Chars.LF);
 #EndRegion
 
 #Region InfoMessages

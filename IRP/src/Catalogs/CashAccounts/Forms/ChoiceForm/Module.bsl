@@ -2,23 +2,6 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CatCashAccountsServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
-
-//	For Each FilterItem In List.Filter.Items Do
-//		If TypeOf(FilterItem) = Type("DataCompositionFilterItem") And FilterItem.LeftValue = New DataCompositionField("Type") Then
-//		
-//			If FilterItem.ComparisonType = DataCompositionComparisonType.Equal Then
-//				ThisObject.CashAccountTypeFilter = FilterItem.RightValue;
-//				Items.CashAccountTypeFilter.ReadOnly = True;
-//			ElsIf FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual Then
-//				DeleteFilterItemFromCashAccountTypeFilter(FilterItem.RightValue);
-//			ElsIf FilterItem.ComparisonType = DataCompositionComparisonType.NotInList Then
-//				For Each FilterValue In FilterItem.RightValue Do
-//					DeleteFilterItemFromCashAccountTypeFilter(FilterValue.Value);
-//				EndDo;
-//			EndIf;
-//			
-//		EndIf;
-//	EndDo;
 	
 	If Not FOServer.IsUseBankDocuments() Then
 		ArrayForDelete = New Array();
@@ -64,21 +47,6 @@ Procedure OnOpen(Cancel)
 					
 		EndIf;
 	EndDo;	
-EndProcedure
-
-//&AtServer
-//Procedure DeleteFilterItemFromCashAccountTypeFilter(FilterValue)
-//	FilterItem = Items.CashAccountTypeFilter.ChoiceList.FindByValue(FilterValue);
-//	If FilterItem <> Undefined Then
-//		Items.CashAccountTypeFilter.ChoiceList.Delete(FilterItem);
-//	EndIf;
-//EndProcedure
-
-&AtClient
-Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Return;
-	// for remove
-	//CommonFormActions.DynamicListBeforeAddRow(ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter, "Catalog.CashAccounts.ObjectForm");
 EndProcedure
 
 &AtClient

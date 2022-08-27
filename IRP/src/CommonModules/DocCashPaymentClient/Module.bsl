@@ -76,13 +76,6 @@ Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Cash"), ComparisonType.Equal));
 
 	CommonFormActions.AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	
-	// for remove
-//	DefaultEditTextParameters = New Structure("Company", Object.Company);
-//	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-//	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
-//		"Enum.CashAccountTypes.Cash"), ComparisonType.Equal));
-//	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
 #EndRegion

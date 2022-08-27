@@ -61,14 +61,6 @@ Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing)
 	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Cash"), DataCompositionComparisonType.Equal));
 	
 	CommonFormActions.AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFilters);
-
-//	StandardProcessing = False;
-//	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
-//	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-//	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
-//		"Enum.CashAccountTypes.Cash"), , DataCompositionComparisonType.Equal));
-//	StartChoiceParameters.FillingData.Insert("Type", PredefinedValue("Enum.CashAccountTypes.Cash"));
-//	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
 EndProcedure
 
 Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
@@ -76,13 +68,6 @@ Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Cash"), ComparisonType.Equal));
 
 	CommonFormActions.AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	
-	// for remove
-//	DefaultEditTextParameters = New Structure("Company", Object.Company);
-//	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-//	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
-//		"Enum.CashAccountTypes.Cash"), ComparisonType.Equal));
-//	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
 #EndRegion

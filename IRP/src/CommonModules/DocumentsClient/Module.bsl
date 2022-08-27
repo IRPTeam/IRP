@@ -1,5 +1,5 @@
 #Region FormEvents
-// for remove
+// for remove ??
 Procedure OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings) Export
 	If OpenSettings = Undefined Then
 		OpenSettings = GetOpenSettingsStructure();
@@ -981,7 +981,7 @@ Procedure ShowRowKey(Form) Export
 		EndIf;
 	EndDo;
 EndProcedure
-// for remove
+// for remove ??
 Procedure SetCurrentRow(Object, Form, Item, FormParameters, AttributeName) Export
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, Item.Name) Then
 		FormParameters.Insert("CurrentRow", Object[Item.Name]);

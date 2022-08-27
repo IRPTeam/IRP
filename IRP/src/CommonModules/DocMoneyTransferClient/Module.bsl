@@ -58,17 +58,6 @@ Procedure SenderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) 
 	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountTypes, DataCompositionComparisonType.InList));
 	
 	CommonFormActions.AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFilters);
-	
-	// for remove
-//	StandardProcessing = False;
-//	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
-//	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-//	AccountTypes = New ValueList();
-//	AccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.Transit"));
-//	AccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.POS"));
-//	FilterItem = DocumentsClientServer.CreateFilterItem("Type", AccountTypes, , DataCompositionComparisonType.NotInList);
-//	StartChoiceParameters.CustomParameters.Filters.Add(FilterItem);
-//	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
 EndProcedure
 
 Procedure SenderEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
@@ -81,16 +70,6 @@ Procedure SenderEditTextChange(Object, Form, Item, Text, StandardProcessing) Exp
 	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountTypes, ComparisonType.InList));
 	
 	CommonFormActions.AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	
-	// for remove
-//	DefaultEditTextParameters = New Structure("Company", Object.Company);
-//	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-//	AccountTypes = New ValueList();
-//	AccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.Transit"));
-//	AccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.POS"));
-//	FilterItem = DocumentsClientServer.CreateFilterItem("Type", AccountTypes, ComparisonType.NotInList);
-//	EditTextParameters.Filters.Add(FilterItem);
-//	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
 #EndRegion
@@ -127,17 +106,6 @@ Procedure ReceiverStartChoice(Object, Form, Item, ChoiceData, StandardProcessing
 	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountTypes, DataCompositionComparisonType.InList));
 	
 	CommonFormActions.AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFilters);
-	
-	// for remove
-//	StandardProcessing = False;
-//	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
-//	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-//	AccountTypes = New ValueList();
-//	AccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.Transit"));
-//	AccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.POS"));
-//	FilterItem = DocumentsClientServer.CreateFilterItem("Type", AccountTypes, , DataCompositionComparisonType.NotInList);
-//	StartChoiceParameters.CustomParameters.Filters.Add(FilterItem);
-//	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
 EndProcedure
 
 Procedure ReceiverEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
@@ -150,16 +118,6 @@ Procedure ReceiverEditTextChange(Object, Form, Item, Text, StandardProcessing) E
 	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountTypes, ComparisonType.InList));
 	
 	CommonFormActions.AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-	
-	// for remove
-//	DefaultEditTextParameters = New Structure("Company", Object.Company);
-//	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-//	AccountTypes = New ValueList();
-//	AccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.Transit"));
-//	AccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.POS"));
-//	FilterItem = DocumentsClientServer.CreateFilterItem("Type", AccountTypes, ComparisonType.NotInList);
-//	EditTextParameters.Filters.Add(FilterItem);
-//	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
 #EndRegion

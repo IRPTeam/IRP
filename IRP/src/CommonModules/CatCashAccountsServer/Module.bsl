@@ -22,35 +22,40 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 EndProcedure
 
 //Function GetCashAccountByCompany(Company, CustomParameters) Export
-Function GetCashAccountByCompany(Parameters) Export
-	If Parameters.Company.IsEmpty() Then
-		Return Catalogs.CashAccounts.EmptyRef();
-	EndIf;
-	Query = New Query();
-	Query.Text = 
-	"SELECT ALLOWED TOP 2
-	|	Table.Ref AS Ref
-	|FROM
-	|	Catalog.CashAccounts AS Table
-	|WHERE
-	|	NOT Table.Ref.DeletionMark
-	|	AND Table.Ref.Company = &Company
-	|	AND Table.Ref.Type = &CashAccountType";
-	Query.SetParameter("Company", Parameters.Company);
-	Query.SetParameter("CashAccountType", Parameters.CashAccountType);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Count() = 1 Then
-		QuerySelection.Next();
-		Return QuerySelection.Ref;
-	EndIf;
-	Return Catalogs.CashAccounts.EmptyRef();
-	
+//Function GetCashAccountByCompany(Parameters) Export
+//	If Parameters.Company.IsEmpty() Then
+//		Return Catalogs.CashAccounts.EmptyRef();
+//	EndIf;
+//	Query = New Query();
+//	Query.Text = 
+//	"SELECT ALLOWED TOP 2
+//	|	Table.Ref AS Ref
+//	|FROM
+//	|	Catalog.CashAccounts AS Table
+//	|WHERE
+//	|	NOT Table.Ref.DeletionMark
+//	|	AND Table.Ref.Company = &Company
+//	|	AND CASE
+//	|		WHEN &Filter_CashAccountType
+//	|			THEN Table.Ref.Type = &CashAccountType
+//	|		ELSE TRUE
+//	|	END";
+//	Query.SetParameter("Company"                , Parameters.Company);
+//	Query.SetParameter("CashAccountType"        , Parameters.CashAccountType);
+//	Query.SetParameter("Filter_CashAccountType" , ValueIsFilled(Parameters.CashAccountType));
+//	QueryResult = Query.Execute();
+//	QuerySelection = QueryResult.Select();
+//	If QuerySelection.Count() = 1 Then
+//		QuerySelection.Next();
+//		Return QuerySelection.Ref;
+//	EndIf;
+//	Return Catalogs.CashAccounts.EmptyRef();
+//	
 	
 	// ??????????????????????????????????????????????????
 	//Return Catalogs.CashAccounts.EmptyRef();
 	//Return GetDefaultChoiceRef(CustomParameters);
-EndFunction
+//EndFunction
 // ror remove
 //Function GetDefaultChoiceRef(Parameters) Export
 //	QueryTable = CommonFunctionsServer.QueryTable("Catalog.CashAccounts", CatCashAccountsServer, Parameters);

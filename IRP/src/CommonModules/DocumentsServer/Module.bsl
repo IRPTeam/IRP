@@ -139,8 +139,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 	Else
 		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 		If AgreementParameters.Property("AgreementType") And ValueIsFilled(AgreementParameters.AgreementType) Then
-			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementParameters.AgreementType,
-				ComparisonType.Equal));
+			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementParameters.AgreementType, ComparisonType.Equal));
 		EndIf;
 	EndIf;
 
@@ -157,28 +156,60 @@ Function GetAgreementByPartner(AgreementParameters) Export
 
 	AdditionalParameters.Insert("EndOfUseDate", CurrentDate);
 	AdditionalParameters.Insert("Partner", Partner);
-	Parameters = New Structure("CustomSearchFilter, AdditionalParameters, Agreement",
-		DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters), DocumentsServer.SerializeArrayOfFilters(
-		AdditionalParameters), AgreementParameters.Agreement);
-	Return Catalogs.Agreements.GetDefaultChoiceRef(Parameters);
+	
+	Parameters = New Structure();
+	Parameters.Insert("CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters));
+	Parameters.Insert("AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
+	Parameters.Insert("Agreement"            , AgreementParameters.Agreement);
 
+	Return Catalogs.Agreements.GetDefaultChoiceRef(Parameters);
 EndFunction
 
 Function GetLegalNameByPartner(Partner, LegalName) Export
-	If ValueIsFilled(Partner) Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		AdditionalParameters = New Structure();
-		If ValueIsFilled(Partner) Then
-			AdditionalParameters.Insert("Partner", Partner);
-			AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
-		EndIf;
-		Parameters = New Structure("CustomSearchFilter, AdditionalParameters, LegalName",
-			DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters), DocumentsServer.SerializeArrayOfFilters(
-			AdditionalParameters), LegalName);
-		Return Catalogs.Companies.GetDefaultChoiceRef(Parameters);
+	If Not ValueIsFilled(Partner) Then
+		Return Undefined;
 	EndIf;
-	Return Undefined;
+	
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	
+	AdditionalParameters = New Structure();
+	If ValueIsFilled(Partner) Then
+		AdditionalParameters.Insert("Partner", Partner);
+		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+		
+	Parameters = New Structure();
+	Parameters.Insert("CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters));
+	Parameters.Insert("AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
+	Parameters.Insert("LegalName"            , LegalName);
+		
+	Return Catalogs.Companies.GetDefaultChoiceRef(Parameters);
+EndFunction
+
+Function GetCashAccountByCompany(Company, CashAccount, CashAccountType) Export
+	If Not ValueIsFilled(Company) Then
+		Return Undefined;
+	EndIf;
+	
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True    , ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Company"     , Company , ComparisonType.Equal));
+		
+	If ValueIsFilled(CashAccountType) Then
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", CashAccountType, ComparisonType.Equal));
+	Else
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Transit"), ComparisonType.NotEqual));
+	EndIf;
+	
+	AdditionalParameters = New Structure();
+	
+	Parameters = New Structure();
+	Parameters.Insert("CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters));
+	Parameters.Insert("AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
+	Parameters.Insert("CashAccount"          , CashAccount);
+		
+	Return Catalogs.CashAccounts.GetDefaultChoiceRef(Parameters);
 EndFunction
 
 Function GetBankAccountByPartner(Partner, LegalName, Currency) Export

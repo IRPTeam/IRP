@@ -1,5 +1,4 @@
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
-
 	If TypeOf(Parameters) <> Type("Structure") Or Not ValueIsFilled(Parameters.SearchString)
 		Or Not Parameters.Filter.Property("AdditionalParameters") Then
 		Return;

@@ -115,68 +115,12 @@ Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, Ar
 		Filters.Add(Filter);
 	EndDo;
 	
+	AdditionalParameters = New Structure();
+	
 	ArrayOfChoiceParameters = New Array();
-	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter", DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter"  , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters", DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
+	
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 EndProcedure
 
-//Procedure OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpeningSettings)
-//	ChoiceForm = GetForm(OpeningSettings.FormName, OpeningSettings.FormParameters, Item, Form.UUID, , Form.URL);
-//	For Each Filter In OpeningSettings.ArrayOfFilters Do
-//		DocumentsClient.AddFilterToChoiceForm(ChoiceForm, Filter.FieldName, Filter.Value, Filter.ComparisonType);
-//	EndDo;
-//	ChoiceForm.Open();
-//EndProcedure
-//
-//Procedure SetCurrentRow(Object, Form, Item, FormParameters, AttributeName) Export
-//	If CommonFunctionsClientServer.ObjectHasProperty(Object, Item.Name) Then
-//		FormParameters.Insert("CurrentRow", Object[Item.Name]);
-//	Else // item placed in tabular section, for example ItemList.ItemKey
-//		TabularSection = Left(Item.Name, StrLen(Item.Name) - StrLen(AttributeName));
-//		If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, TabularSection) Then
-//			CurrentData = Form.Items[TabularSection].CurrentData;
-//			If CurrentData <> Undefined And CommonFunctionsClientServer.ObjectHasProperty(CurrentData, AttributeName) Then
-//				If Not ValueIsFilled(CurrentData[AttributeName]) 
-//					And CommonFunctionsClientServer.ObjectHasProperty(CurrentData, "LineNumber") Then
-//					RowIndex = CurrentData.LineNumber - 1;
-//					PreviousRow = ?(RowIndex > 0, Object[TabularSection][RowIndex - 1], CurrentData);
-//					FormParameters.Insert("CurrentRow", PreviousRow[AttributeName]);
-//				Else
-//					FormParameters.Insert("CurrentRow", CurrentData[AttributeName]);
-//				EndIf;
-//			EndIf;
-//		EndIf;
-//	EndIf;
-//EndProcedure
-
-//Function CreateFilterItem(FieldName, Value, ComparisonType)
-//	FilterStructure = New Structure();
-//	FilterStructure.Insert("FieldName", FieldName);
-//	FilterStructure.Insert("Value", Value);
-//	FilterStructure.Insert("ComparisonType", ComparisonType);
-//	Return FilterStructure;
-//EndFunction
-//
-//Procedure AddFilterToChoiceForm(ChoiceForm, PathToField, Value, ComparisonType)
-//	FilterItem = ChoiceForm.List.Filter.Items.Add(Type("DataCompositionFilterItem"));
-//	FilterItem.LeftValue = New DataCompositionField(PathToField);
-//	FilterItem.RightValue = Value;
-//	FilterItem.ComparisonType = ComparisonType;
-//EndProcedure
-//
-//Function CreateListByValues(Value1 = Undefined, Value2 = Undefined, Value3 = Undefined)
-//	ListOfValues = New ValueList();
-//	If Value1 <> Undefined Then
-//		ListOfValues.Add(Value1);
-//	EndIf;
-//	
-//	If Value2 <> Undefined Then
-//		ListOfValues.Add(Value2);
-//	EndIf;
-//	
-//	If Value3 <> Undefined Then
-//		ListOfValues.Add(Value3);
-//	EndIf;
-//	Return ListOfValues;
-//EndFunction	
-	

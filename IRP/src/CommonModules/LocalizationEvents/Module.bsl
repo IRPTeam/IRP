@@ -28,11 +28,6 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	Settings.Insert("MetadataObject", MetadataObject);
 	Settings.Insert("Filter", "");
 	
-	//=========================================================================================================
-	If MetadataObject.FullName() = "Catalog.CashAccounts" Then
-		Settings.Insert("UseSearchByCode", True);
-	EndIf;
-	//=========================================================================================================
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 
 	QueryBuilder = New QueryBuilder(QueryBuilderText);

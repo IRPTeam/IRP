@@ -133,7 +133,7 @@ EndFunction
 Function isSerialLotNumberNameMatchRegExp(Value, Owner) Export
 	
 	Str = GetSerialLotNumbersRegExpRules(Owner);
-	Str.isMatch = CommonFunctionsClientServer.Regex(Value, Str.RegExp);
+	Str.isMatch = CommonFunctionsServer.Regex(Value, Str.RegExp);
 	
 	Return Str;
 	

@@ -1,3 +1,22 @@
+
+#Region RegExp
+
+// Regex.
+// 
+// Parameters:
+//  String - String - String
+//  Facet - String - RegExp
+// 
+// Returns:
+//  Boolean - is string match regexp
+Function Regex(String, Facet) Export
+	
+	Return True;
+
+EndFunction
+
+#EndRegion
+	
 Function IsPrimitiveValue(Value) Export
 	Return Metadata.FindByType(TypeOf(Value)) = Undefined;
 EndFunction

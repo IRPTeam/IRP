@@ -225,6 +225,7 @@
   <commonModules>CommonModule.BarcodeClient</commonModules>
   <commonModules>CommonModule.BarcodeReuse</commonModules>
   <commonModules>CommonModule.BarcodeServer</commonModules>
+  <commonModules>CommonModule.BuilderAPI</commonModules>
   <commonModules>CommonModule.BuilderServer_V2</commonModules>
   <commonModules>CommonModule.CalculationServer</commonModules>
   <commonModules>CommonModule.CatAgreementsClient</commonModules>
@@ -242,6 +243,7 @@
   <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
   <commonModules>CommonModule.CommonFormActions</commonModules>
   <commonModules>CommonModule.CommonFormActionsServer</commonModules>
+  <commonModules>CommonModule.CommonFunctionsClient</commonModules>
   <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsServer</commonModules>
   <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
@@ -383,8 +385,8 @@
   <commonModules>CommonModule.ObjectStatusesClient</commonModules>
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
   <commonModules>CommonModule.OffersClient</commonModules>
-  <commonModules>CommonModule.OffersServer</commonModules>
   <commonModules>CommonModule.OffersClientServer</commonModules>
+  <commonModules>CommonModule.OffersServer</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerServer</commonModules>
@@ -392,9 +394,9 @@
   <commonModules>CommonModule.PostingServer</commonModules>
   <commonModules>CommonModule.RowIDInfoClient</commonModules>
   <commonModules>CommonModule.RowIDInfoClientServer</commonModules>
+  <commonModules>CommonModule.RowIDInfoPrivileged</commonModules>
   <commonModules>CommonModule.RowIDInfoServer</commonModules>
   <commonModules>CommonModule.RowIDInfoServerReuse</commonModules>
-  <commonModules>CommonModule.RowIDInfoPrivileged</commonModules>
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
@@ -417,7 +419,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.BuilderAPI</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

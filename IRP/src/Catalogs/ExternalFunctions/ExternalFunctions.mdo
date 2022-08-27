@@ -48,6 +48,11 @@
     <type>
       <types>EnumRef.ExternalFunctionType</types>
     </type>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.ExternalFunctionType.EnumValue.Eval</value>
+    </fillValue>
   </attributes>
   <attributes uuid="b89ca813-78b7-4d49-9d34-e38d88f58381">
     <name>Enable</name>
@@ -99,14 +104,17 @@
     <name>SafeModeIsOn</name>
     <synonym>
       <key>en</key>
-      <value>Safe mode is on</value>
+      <value>Safe mode</value>
     </synonym>
     <type>
       <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:BooleanValue">
+      <value>true</value>
+    </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -158,6 +166,32 @@
           <length>1000</length>
         </stringQualifiers>
         <dateQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="eafc4ccf-6912-4a2f-9a23-0167286f80f3">
+    <producedTypes>
+      <objectType typeId="52027155-d3d7-47a6-a348-2f1e3565fd52" valueTypeId="e76a5076-dca1-4422-9ce2-454a4575ed2a"/>
+      <rowType typeId="f8a36e25-564e-4738-9db5-b35559d2868a" valueTypeId="0dc93300-5ae9-459d-a612-54df85454761"/>
+    </producedTypes>
+    <name>TestRexExpStrings</name>
+    <synonym>
+      <key>en</key>
+      <value>Test rex exp strings</value>
+    </synonym>
+    <attributes uuid="ea8ac1ce-d8b8-4241-9520-7d3f89bc4487">
+      <name>Row</name>
+      <synonym>
+        <key>en</key>
+        <value>Row</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

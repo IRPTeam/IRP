@@ -96,8 +96,12 @@ Function GetChoiceDataTable(Parameters) Export
 	Settings.Insert("UseSearchByCode", True);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
-	Query = CommonFormActionsServer.SetCustomSearchFilter(QueryBuilderText, Parameters);
+	QueryBuilder = New QueryBuilder(QueryBuilderText);
+	QueryBuilder.FillSettings();
+	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
 	
+	Query = QueryBuilder.GetQuery();
+
 	Query.SetParameter("SearchString", Parameters.SearchString);
 
 	AdditionalParameters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.AdditionalParameters);
@@ -115,8 +119,7 @@ Function GetChoiceDataTable(Parameters) Export
 	EndDo;
 	
 	// parameters search by code
-	AccessSymbols = ".,- ¶" + Chars.LF + Chars.NBSp + Chars.CR;
-	SearchStringNumber = CommonFunctionsClientServer.GetNumberPartFromString(Parameters.SearchString, AccessSymbols);
+	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
 	Query.SetParameter("SearchStringNumber", SearchStringNumber);
 	
 	Return Query.Execute().Unload();

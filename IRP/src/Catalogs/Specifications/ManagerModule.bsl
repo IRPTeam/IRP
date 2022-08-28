@@ -1,26 +1,64 @@
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
-	StandardProcessing = False;
-	If Not Parameters.Filter.Property("CustomFilterByItem") Then
-		ChoiceData = New ValueList();
+	If TypeOf(Parameters) <> Type("Structure") Or Not ValueIsFilled(Parameters.SearchString)
+		Or Not Parameters.Filter.Property("CustomFilterByItem") Then
 		Return;
 	EndIf;
 
+	StandardProcessing = False;
+	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
+	QueryTable = GetChoiceDataTable(Parameters);
+	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
+	
+// for remove	
+//	StandardProcessing = False;
+//	If Not Parameters.Filter.Property("CustomFilterByItem") Then
+//		ChoiceData = New ValueList();
+//		Return;
+//	EndIf;
+//
+//	Filter = "
+//			 |	AND Specifications.Ref IN (&ArrayOfRef)
+//			 |";
+//
+//	Settings = New Structure();
+//	Settings.Insert("MetadataObject", Metadata.Catalogs.Specifications);
+//	Settings.Insert("Filter", Filter);
+//
+//	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+//	Query = New Query(QueryBuilderText);
+//	Query.SetParameter("ArrayOfRef", GetAvailableSpecificationsByItem(Parameters.Filter.CustomFilterByItem));
+//	Query.SetParameter("SearchString", Parameters.SearchString);
+//
+//	ChoiceData = New ValueList();
+//	ChoiceData.LoadValues(Query.Execute().Unload().UnloadColumn("Ref"));
+EndProcedure
+
+Function GetChoiceDataTable(Parameters) Export
 	Filter = "
-			 |	AND Specifications.Ref IN (&ArrayOfRef)
-			 |";
+		 	 |	AND Table.Ref IN (&ArrayOfRef)";
 
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.Specifications);
 	Settings.Insert("Filter", Filter);
-
+	// enable search by code
+	Settings.Insert("UseSearchByCode", True);
+	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
-	Query = New Query(QueryBuilderText);
-	Query.SetParameter("ArrayOfRef", GetAvailableSpecificationsByItem(Parameters.Filter.CustomFilterByItem));
-	Query.SetParameter("SearchString", Parameters.SearchString);
+	QueryBuilder = New QueryBuilder(QueryBuilderText);
+	QueryBuilder.FillSettings();
+	//CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
+	
+	Query = QueryBuilder.GetQuery();
 
-	ChoiceData = New ValueList();
-	ChoiceData.LoadValues(Query.Execute().Unload().UnloadColumn("Ref"));
-EndProcedure
+	Query.SetParameter("SearchString", Parameters.SearchString);
+	Query.SetParameter("ArrayOfRef", GetAvailableSpecificationsByItem(Parameters.Filter.CustomFilterByItem));
+	
+	// parameters search by code
+	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
+	Query.SetParameter("SearchStringNumber", SearchStringNumber);
+	
+	Return Query.Execute().Unload();
+EndFunction
 
 Function GetAvailableSpecificationsByItem(Item) Export
 	Query = New Query();

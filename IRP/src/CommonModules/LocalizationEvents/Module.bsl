@@ -69,8 +69,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 			NewFilter.Value = Filter.Value;
 		EndIf;
 	EndDo;
-	AccessSymbols = ".,- ¶" + Chars.LF + Chars.NBSp + Chars.CR;
-	SearchStringNumber = CommonFunctionsClientServer.GetNumberPartFromString(Parameters.SearchString, AccessSymbols);
+	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
 
 	Query = QueryBuilder.GetQuery();
 	Query.SetParameter("SearchStringNumber", SearchStringNumber);

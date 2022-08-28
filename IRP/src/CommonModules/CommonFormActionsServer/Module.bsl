@@ -36,7 +36,7 @@ Function QuerySearchInputByString(Settings) Export
 	|FROM
 	|	%1 AS Table
 	|WHERE
-	|	%5
+	|	%5 %2
 	|;
 	|
 	|SELECT ALLOWED TOP 10
@@ -139,9 +139,7 @@ Procedure CutLastSymblosIfCameFromExcel(Parameters) Export
 	EndIf;
 EndProcedure
 
-Function SetCustomSearchFilter(QueryBuilderText, Parameters) Export
-	QueryBuilder = New QueryBuilder(QueryBuilderText);
-	QueryBuilder.FillSettings();
+Procedure SetCustomSearchFilter(QueryBuilder, Parameters) Export
 	If TypeOf(Parameters) = Type("Structure") And Parameters.Filter.Property("CustomSearchFilter") Then
 		ArrayOfFilters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.CustomSearchFilter);
 		For Each Filter In ArrayOfFilters Do
@@ -151,9 +149,21 @@ Function SetCustomSearchFilter(QueryBuilderText, Parameters) Export
 			NewFilter.Value = Filter.Value;
 		EndDo;
 	EndIf;
-	Query = QueryBuilder.GetQuery();
-	Return Query;
-EndFunction
+EndProcedure
+
+Procedure SetStandardSearchFilter(QueryBuilder, Parameters) Export
+	If TypeOf(Parameters) = Type("Structure") Then
+		For Each Filter In Parameters.Filter Do
+			If Upper(Filter.Key) = Upper("CustomSearchFilter") Then
+				Continue;
+			EndIf;
+			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.Key);
+			NewFilter.Use = True;
+			NewFilter.ComparisonType = ComparisonType.Equal;
+			NewFilter.Value = Filter.Value;
+		EndDo;
+	EndIf;
+EndProcedure
 
 Function QueryTableToChoiceData(QueryTable) Export
 	ChoiceData = New ValueList();

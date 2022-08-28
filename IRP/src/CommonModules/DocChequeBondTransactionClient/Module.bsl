@@ -129,17 +129,11 @@ Procedure ChequeBondsChequeStartChoice(Object, Form, Item, ChoiceData, StandardP
 EndProcedure
 
 Procedure ChequeBondsChequeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	StandardProcessing = False;
-	
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Currency"    , Object.Currency, ComparisonType.Equal));
 	
 	AdditionalParameters = New Structure();
-	If ValueIsFilled(Object.Currency) Then
-		AdditionalParameters.Insert("Currency", Object.Currency);
-		AdditionalParameters.Insert("FilterByCurrency", True);
-	EndIf;
-	
 	ArrayOfChoiceParameters = New Array();
 	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
 	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));

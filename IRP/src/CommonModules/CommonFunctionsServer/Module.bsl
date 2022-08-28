@@ -15,6 +15,20 @@ Function Regex(String, Facet) Export
 
 EndFunction
 
+// Regex.
+// 
+// Parameters:
+//  String - String - String
+//  Facet - String - RegExp
+// 
+// Returns:
+//  Array of String - strings match regexp
+Function RegExpFindMatch(String, Facet) Export
+	
+	Return New Array;
+
+EndFunction
+
 #EndRegion
 	
 Function IsPrimitiveValue(Value) Export

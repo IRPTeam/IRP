@@ -217,4 +217,12 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <templates uuid="ba6f83fa-1386-45eb-b272-927c49fc3686">
+    <name>RegExpAnalyse</name>
+    <synonym>
+      <key>en</key>
+      <value>Reg exp analyse</value>
+    </synonym>
+    <templateType>TextDocument</templateType>
+  </templates>
 </mdclass:Catalog>

@@ -82,6 +82,9 @@
     "right-output-to-printer-file-clipboard": {
       "enabled": false
     },
+    "module-structure-event-regions": {
+      "enabled": false
+    },
     "right-start-thick-client": {
       "enabled": false
     },
@@ -89,6 +92,9 @@
       "enabled": false
     },
     "right-all-functions-mode": {
+      "enabled": false
+    },
+    "module-structure-var-in-region": {
       "enabled": false
     },
     "common-module-name-server-call": {
@@ -182,6 +188,9 @@
       "enabled": false
     },
     "right-start-thin-client": {
+      "enabled": false
+    },
+    "module-structure-form-event-regions": {
       "enabled": false
     },
     "query-in-loop": {

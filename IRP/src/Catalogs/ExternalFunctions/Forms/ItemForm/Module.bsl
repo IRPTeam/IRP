@@ -1,12 +1,17 @@
 
 // @strict-types
+
 &AtClient
-Var PicturesStr Export; // See GetPicturesStr
+Var HTMLRegExpTestRowsAnalyzeDocument Export; // AddInObject - HTML document
 
 &AtClient
 Procedure OnOpen(Cancel)
 	SetVisible();
-	PicturesStr = GetPicturesStr();
+EndProcedure
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	HTMLRegExpTestRowsAnalyze = Catalogs.ExternalFunctions.GetTemplate("RegExpAnalyse").GetText();
 EndProcedure
 
 #Region EvalAndExecute
@@ -43,22 +48,40 @@ EndProcedure
 
 &AtClient
 Procedure RunRegExp(Command)
-	CheckRegExp();
+	FindMatches();
+EndProcedure
+
+&AtClient
+Async Procedure FindMatches()
+	Array = New Array;
+	For Each TestRexExpString In Object.TestRexExpStrings Do
+		ResultArray = Await CommonFunctionsClient.RegExpFindMatch(TestRexExpString.Row, Object.ExternalCode); // Array of String
+		
+		If ResultArray.Count() = 0 Then
+			Continue;
+		EndIf;
+		
+		Array.Add(TestRexExpString.Row);
+		
+		For Each Row In ResultArray Do
+			Array.Add("	> " + Row);
+		EndDo;
+		Array.Add("");
+	EndDo;
+	RegExpResult = StrConcat(Array, Chars.LF);	
 EndProcedure
 
 &AtClient
 Async Procedure CheckRegExp(Text = Undefined)
+	
 	Facet = ?(Text = Undefined, Object.ExternalCode, Text);
-	SetHTMLPictureRegExpStatus(PicturesStr.Wait);
-	For Each TestRexExpString In Object.TestRexExpStrings Do
-		TestRexExpString.RegExpFailed = Not Await CommonFunctionsClient.Regex(TestRexExpString.Row, Facet);
-	EndDo;
-	SetHTMLPictureRegExpStatus(PicturesStr.Done);
+	//@skip-check dynamic-access-method-not-found
+	HTMLRegExpTestRowsAnalyzeDocument.displayMatches(Facet);
+	
 EndProcedure
 
 &AtClient
 Procedure RegExpEditTextChange(Item, Text, StandardProcessing)
-	StandardProcessing = False;
 	CheckRegExp(Text);
 EndProcedure
 
@@ -71,15 +94,23 @@ Procedure ExternalFunctionTypeOnChange(Item)
 	SetVisible();
 EndProcedure
 
+&AtClient
+Procedure HTMLRegExpTestRowsAnalyzeDocumentComplete(Item)
+	HTMLRegExpTestRowsAnalyzeDocument = PictureViewerClient.InfoDocumentComplete(Item); // AddInObject
+	FillRegExpTestData();
+	CheckRegExp();
+EndProcedure
+
+&AtClient
+Procedure TestRexExpStringsOnChange(Item)
+	FillRegExpTestData();
+EndProcedure
+
 #EndRegion
 
 #Region Service
 
-&AtClient
-Procedure SetHTMLPictureRegExpStatus(Image)
-	HTMLPictureRegExpStatus = "<!DOCTYPE html><html><body style='box-sizing:border-box; margin:0;'><img style='display:block; width:80%;height:80%;' src='data:image/jpeg;base64," + Image + "'/></body></html>"
-EndProcedure
-
+//@skip-check variable-value-type
 &AtClient
 Procedure SetVisible()
 	If Object.ExternalFunctionType = PredefinedValue("Enum.ExternalFunctionType.RegExp") Then
@@ -93,18 +124,15 @@ Procedure SetVisible()
 	EndIf;
 EndProcedure
 
-// Get pictures str.
-// 
-// Returns:
-//  Structure - Get pictures str:
-// * Wait - String - Base64
-// * Done - String - Base64
-&AtServer
-Function GetPicturesStr()
-	PicturesStr = New Structure;
-	PicturesStr.Insert("Wait", GetBase64StringFromBinaryData(PictureLib.Waiting.GetBinaryData()));
-	PicturesStr.Insert("Done", GetBase64StringFromBinaryData(PictureLib.CheckSyntax.GetBinaryData()));
-	Return PicturesStr;
-EndFunction
+&AtClient
+Procedure FillRegExpTestData()
+	Text = HTMLRegExpTestRowsAnalyzeDocument.document.getElementById("list");
+	Text.innerHTML = "";
+	For Each Row In Object.TestRexExpStrings Do
+		li = HTMLRegExpTestRowsAnalyzeDocument.document.createElement("li");
+		li.innerText = Row.Row;
+		Text.appendChild(li);
+	EndDo;
+EndProcedure
 
 #EndRegion

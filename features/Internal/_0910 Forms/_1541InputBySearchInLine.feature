@@ -68,6 +68,7 @@ Scenario: _0154000 preparation
 		When Create catalog Workstations objects  (Test)
 		When Create catalog ItemSegments objects
 		When Create catalog PaymentTypes objects
+		When Create catalog CancelReturnReasons objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -1637,7 +1638,19 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 	* Open a creation form Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
-	* Check entered values
+	* Partner
+		And I select from the drop-down list named "Partner" by "1" string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+	* Legal name
+		And I select from "Legal name" drop-down list by "2" string
+		Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
+	* Partner term
+		And I select from "Partner term" drop-down list by "9" string
+		Then the form attribute named "Agreement" became equal to "Ferron, USD"
+	* Company
+		And I select from "Company" drop-down list by "3" string
+		Then the form attribute named "Company" became equal to "Second Company"		
+	* Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "1 111 111., " text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
@@ -1646,7 +1659,75 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 		And "ItemList" table contains lines
 		| 'Item'     |
 		| 'Jacket J22001'    |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+	* Item key
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "4" from "Item" drop-down list by string in "ItemList" table
+		And I select "15" from "Item key" drop-down list by string in "ItemList" table
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Cancel' | 'Procurement method' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Reservation date' | 'Revenue type' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type' | 'Sales person' |
+			| '1' | ''             | 'No'     | 'Stock'              | '37/18SD'  | ''                   | '1,000'    | 'pcs'  | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''                 | ''             | ''       | ''              | ''              | 'Boots' | 'Price USD'  | ''             |
+	* Unit
+		And I select "7" from "Unit" drop-down list by string in "ItemList" table	
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Cancel' | 'Procurement method' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit'           | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Reservation date' | 'Revenue type' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type' | 'Sales person' |
+			| '1' | ''             | 'No'     | 'Stock'              | '37/18SD'  | ''                   | '1,000'    | 'Boots (12 pcs)' | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''                 | ''             | ''       | ''              | ''              | 'Boots' | 'Price USD'  | ''             |
+	* Revenue type
+		And I select "8" from "Revenue type" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Revenue type' |
+			| 'Revenue'      |
+	* Branch
+	* Price type
+	* Store
+	* Profit loss center
+	* Cancel reason
+	* Sales person
 		And I close all client application windows
+
+Scenario: _01540114 check item input by search in line by code in a document Bank payment
+	And I close all client application windows
+	* Open a creation form Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+	* Company
+		And I select from "Company" drop-down list by "4" string
+		Then the form attribute named "Company" became equal to "Main Company"
+	* Account
+		And I select from "Account" drop-down list by "5" string
+		Then the form attribute named "Account" became equal to "Bank account, USD"
+	* Partner
+		And in the table "PaymentList" I click the button named "PaymentListAdd"		
+		And I select "1" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner'   |
+			| 'Ferron BP' |
+	* Payee
+		And I select "5" from "Payee" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Payee'             |
+			| 'Company Ferron BP' |
+	* Partner term
+		And I select "3" from "Partner term" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner term'                     |
+			| 'Basic Partner terms, without VAT' |
+	* Financial movement type
+		And I select "10" from "Financial movement type" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Financial movement type' |
+			| 'Movement type 1'         |
+	* Expense type
+		And I select "9" from "Expense type" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Expense type' |
+			| 'Expense'      |
+	* Branch
+		And I close all client application windows
+		
+				
+		
+				
 
 Scenario: _0154091 check company, account, currency input by search in line in ChequeBondTransaction (in english)
 	And I close all client application windows

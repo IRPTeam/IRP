@@ -1889,7 +1889,8 @@ Scenario: Create catalog CancelReturnReasons objects
 
 	And I check or create catalog "CancelReturnReasons" objects:
 		| 'Ref'                                                                         | 'DeletionMark' | 'Code'         | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.CancelReturnReasons?ref=b76197e183b782dc11eb60d037e266d0' | 'False'           | '000000000001' | 'not available'  | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.CancelReturnReasons?ref=b76197e183b782dc11eb60d037e266d0' | 'False'        | '000000000001' | 'not available'  | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.CancelReturnReasons?ref=b76197e183b782dc11eb60d037e266d0' | 'False'        | '000000000002' | 'rejects'        | ''                 | ''               | ''               |
 
 
 Scenario: Create catalog Workstations objects

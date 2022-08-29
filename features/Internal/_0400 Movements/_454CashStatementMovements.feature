@@ -69,6 +69,9 @@ Scenario: _045400 preparation (CashStatement)
 		When Create catalog Agreements objects (Customer)
 		When Create Document discount
 		When Create catalog CashStatementStatuses objects (Test)
+		When Create POS cash account objects
+		When Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
+		When Create catalog CashAccounts objects (POS)
 		* Add plugin for discount
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			If "List" table does not contain lines Then

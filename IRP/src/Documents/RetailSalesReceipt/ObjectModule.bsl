@@ -43,7 +43,7 @@ Procedure OnWrite(Cancel)
 		
 		If IsDeletionMark Then
 			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_115, ThisObject.ConsolidatedRetailSales));
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_118, ThisObject.ConsolidatedRetailSales));
 		ElsIf IsUnposting Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_116, ThisObject.ConsolidatedRetailSales));

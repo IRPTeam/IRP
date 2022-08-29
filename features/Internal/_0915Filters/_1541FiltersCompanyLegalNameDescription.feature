@@ -16,6 +16,7 @@ Background:
 
 Scenario: _0154000 preparation
 	When set True value to the constant
+	When set True value to the constant Use consolidated retail sales
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -533,6 +534,9 @@ Scenario: _028062 check Description in the document Inventory transfer
 	And I close all client application windows
 
 
+Scenario: _028063 check Description in the document ConsolidatedRetailSales
+	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+	When check Description
 
 
 Scenario: _028064 check Description in the document ItemStockAdjustment
@@ -625,6 +629,12 @@ Scenario: _028075 check Description in the document Retail return receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 	When check Description
+
+Scenario: _028076 check filter by own companies in the document Consolidated retail sales
+	* Open document form
+		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+	* Check the filter for Own Company
+		When check the filter by my own company in Opening entry/Item stock adjustment
 
 
 Scenario: _999999 close TestClient session

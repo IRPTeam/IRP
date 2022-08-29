@@ -29,16 +29,13 @@
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.PurchaseOrder</content>
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.SalesOrder</content>
   <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.PurchaseBasis</content>
-  <content>Document.PurchaseReturn.Attribute.BaseDocument</content>
   <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.PurchaseReturnOrder</content>
   <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.PurchaseInvoice</content>
   <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.PurchaseInvoice</content>
   <content>Document.SalesInvoice.Attribute.BasisDocument</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.SalesOrder</content>
-  <content>Document.SalesReturn.Attribute.BaseDocument</content>
   <content>Document.SalesReturn.TabularSection.ItemList.Attribute.SalesReturnOrder</content>
   <content>Document.SalesReturn.TabularSection.ItemList.Attribute.SalesInvoice</content>
-  <content>Document.SalesReturnOrder.Attribute.BaseDocument</content>
   <content>Document.SalesReturnOrder.TabularSection.ItemList.Attribute.SalesInvoice</content>
   <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.ShipmentBasis</content>
   <content>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.BasisDocument</content>
@@ -93,6 +90,9 @@
   <content>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.Basis</content>
   <content>Document.IncomingPaymentOrder.TabularSection.PaymentList.Attribute.Basis</content>
   <content>Document.MoneyTransfer.Attribute.CashTransferOrder</content>
+  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.MoneyTransfer</content>
+  <content>Document.RetailReturnReceipt.Attribute.ConsolidatedRetailSales</content>
+  <content>Document.RetailSalesReceipt.Attribute.ConsolidatedRetailSales</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>
@@ -144,6 +144,7 @@
       <types>DocumentRef.AdditionalCostAllocation</types>
       <types>DocumentRef.AdditionalRevenueAllocation</types>
       <types>DocumentRef.MoneyTransfer</types>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

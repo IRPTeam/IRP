@@ -23,11 +23,31 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
+	
+	ValuesBeforeWrite = New Structure();
+	ValuesBeforeWrite.Insert("Posted", ThisObject.Ref.Posted);
+	ValuesBeforeWrite.Insert("DeletionMark", ThisObject.Ref.DeletionMark);
+	
+	ThisObject.AdditionalProperties.Insert("ValuesBeforeWrite", ValuesBeforeWrite);
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
+	EndIf;
+	
+	If DocConsolidatedRetailSalesServer.IsClosedRetailDocument(ThisObject.Ref) Then
+		ValuesBeforeWrite = ThisObject.AdditionalProperties.ValuesBeforeWrite;
+		IsDeletionMark = ThisObject.DeletionMark <> ValuesBeforeWrite.DeletionMark;
+		IsUnposting = Not ThisObject.Ref.Posted And ValuesBeforeWrite.Posted;
+		
+		If IsDeletionMark Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_118, ThisObject.ConsolidatedRetailSales));
+		ElsIf IsUnposting Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_116, ThisObject.ConsolidatedRetailSales));
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -61,5 +81,12 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 
 	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
 		Cancel = True;
+	EndIf;
+	
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(ThisObject.Branch) 
+		And Not ValueIsFilled(ThisObject.ConsolidatedRetailSales) Then
+		Cancel = True;
+		FieldName = ThisObject.Metadata().Attributes.ConsolidatedRetailSales.Synonym;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_047, FieldName), "ConsolidatedRetailSales", ThisObject);
 	EndIf;
 EndProcedure

@@ -61,4 +61,11 @@
       <value>Receipt by cheque</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="f662c6f5-c23e-418c-a59f-b914dc462a09">
+    <name>CashIn</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash in</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

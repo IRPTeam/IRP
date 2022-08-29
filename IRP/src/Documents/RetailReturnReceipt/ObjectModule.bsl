@@ -8,11 +8,31 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
+	
+	ValuesBeforeWrite = New Structure();
+	ValuesBeforeWrite.Insert("Posted", ThisObject.Ref.Posted);
+	ValuesBeforeWrite.Insert("DeletionMark", ThisObject.Ref.DeletionMark);
+	
+	ThisObject.AdditionalProperties.Insert("ValuesBeforeWrite", ValuesBeforeWrite);
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
+	EndIf;
+
+	If DocConsolidatedRetailSalesServer.IsClosedRetailDocument(ThisObject.Ref) Then
+		ValuesBeforeWrite = ThisObject.AdditionalProperties.ValuesBeforeWrite;
+		IsDeletionMark = ThisObject.DeletionMark <> ValuesBeforeWrite.DeletionMark;
+		IsUnposting = Not ThisObject.Ref.Posted And ValuesBeforeWrite.Posted;
+		
+		If IsDeletionMark Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_118, ThisObject.ConsolidatedRetailSales));
+		ElsIf IsUnposting Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_116, ThisObject.ConsolidatedRetailSales));
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -78,5 +98,41 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
 		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey, Store");
 		RowIDInfoPrivileged.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
+	EndIf;
+	
+	ArrayOfSalesDocuments = New Array();
+	For Each Row In ThisObject.ItemList Do
+		If ValueIsFilled(Row.RetailSalesReceipt) Then
+			ArrayOfSalesDocuments.Add(Row.RetailSalesReceipt);
+		EndIf;
+	EndDo;
+	
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(ThisObject.Branch) Then
+		SalesDocumentDates = New ValueTable();
+		SalesDocumentDates.Columns.Add("SalesDate");
+		
+		For Each Row In ThisObject.ItemList Do
+			If ValueIsFilled(Row.RetailSalesReceipt) Then
+				SalesDocumentDates.Add().SalesDate = Row.RetailSalesReceipt.Date;
+			Else
+				SalesDocumentDates.Add().SalesDate = Date(1,1,1);
+			EndIf;
+		EndDo;
+		SalesDocumentDates.GroupBy("SalesDate");
+		If SalesDocumentDates.Count() <> 1 Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_117);
+		EndIf;	
+		
+		SalesReturnData = DocumentsClientServer.GetSalesReturnData(ThisObject);
+		If Not Cancel And DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(ThisObject.Branch, SalesReturnData) Then
+		
+			If Not ValueIsFilled(ThisObject.ConsolidatedRetailSales) And Not Cancel Then
+				Cancel = True;
+				FieldName = ThisObject.Metadata().Attributes.ConsolidatedRetailSales.Synonym;
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_047, FieldName), "ConsolidatedRetailSales", ThisObject);
+			EndIf;
+		EndIf;
+		
 	EndIf;
 EndProcedure

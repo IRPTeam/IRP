@@ -20,4 +20,5 @@
   <content>AccumulationRegister.R3050T_PosCashBalances</content>
   <content>AccumulationRegister.R2050T_RetailSales</content>
   <content>InformationRegister.RetailWorkers</content>
+  <content>Document.ConsolidatedRetailSales</content>
 </mdclass:Subsystem>

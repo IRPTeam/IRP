@@ -17,6 +17,7 @@ Background:
 
 Scenario: _020200 preparation
 	When set True value to the constant
+	When set True value to the constant Use consolidated retail sales
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -474,6 +475,18 @@ Scenario: _023124 check the display of the header of the collapsible group in Sa
         |'And I click Select button of  "Partner" field'|
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
+
+Scenario: _023125 check the display of the header of the collapsible group in Consolidated retail sales
+	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+	When check the display of the header of the collapsible group in consolidated retail sales
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Cash account: Cash desk №2   Status: Open" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Cash account" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
+
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

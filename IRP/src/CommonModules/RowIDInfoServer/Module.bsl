@@ -3693,7 +3693,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
-	|	ItemList.SalesPerson
+	|	ItemList.SalesPerson,
+	|	ItemList.Ref.Workstation AS Workstation
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.RetailSalesReceipt.ItemList AS ItemList
@@ -7535,9 +7536,13 @@ Function AddLinkedDocumentRows(Object, FillingValues) Export
 		StrConcat(UpdatedProperties, ","), ArrayOfNewRows);
 EndFunction
 
-Procedure PutToUpdatedProperties(PropertyName, TableName, Row, UpdatedProperties)
-	If CommonFunctionsClientServer.ObjectHasProperty(Row, PropertyName)
-		And ValueIsFilled(Row[PropertyName]) Then
+Procedure PutToUpdatedProperties(PropertyName, TableName, Row, UpdatedProperties, IsUnlink = False)
+	If CommonFunctionsClientServer.ObjectHasProperty(Row, PropertyName) Then
+		// empty properties processed only for unlink
+		If Not IsUnlink And Not ValueIsFilled(Row[PropertyName]) Then
+			Return;
+		EndIf;
+		
 		DataPath = TrimAll(TableName) + "." + PropertyName;
 		If UpdatedProperties.Find(DataPath) = Undefined Then
 			UpdatedProperties.Add(DataPath);
@@ -7556,34 +7561,36 @@ Function LinkUnlinkDocumentRows(Object, FillingValues) Export
 	// Refreshable tables on unlink documents
 	TableNames_Refreshable = GetTableNames_Refreshable();
 
+	UpdatedProperties = New Array();
+	UpdatedRows = New Array();
+
 	FillingValue = GetFillingValue(FillingValues);
 	If FillingValue = Undefined Then
 		UnlinkRows = New Array();
 		For Each OldRow In Object.RowIDInfo Do
 			UnlinkRows.Add(OldRow);
 		EndDo;
-		Unlink(Object, UnlinkRows, TableNames_LinkedDocuments, AttributeNames_LinkedDocuments);
+		Unlink(Object, UnlinkRows, TableNames_LinkedDocuments, AttributeNames_LinkedDocuments, UpdatedProperties, UpdatedRows);
 		Object.RowIDInfo.Clear();
-		Return New Structure("UpdatedProperties, Rows", "", New Array());
+		
+	Else
+	
+		// Unlink
+		UnlinkRows = GetUnlinkRows(Object, FillingValue);
+		Unlink(Object, UnlinkRows, TableNames_LinkedDocuments, AttributeNames_LinkedDocuments, UpdatedProperties, UpdatedRows);
+		
+		// Link
+		LinkRows = GetLinkRows(Object, FillingValue);
+		Link(Object, FillingValue, LinkRows, TableNames_Refreshable, UpdatedProperties, UpdatedRows);
+
+		Object.RowIDInfo.Clear();
+		For Each Row In FillingValue.RowIDInfo Do
+			FillPropertyValues(Object.RowIDInfo.Add(), Row);
+		EndDo;
+	
 	EndIf;
 	
-	// Unlink
-	UnlinkRows = GetUnlinkRows(Object, FillingValue);
-	Unlink(Object, UnlinkRows, TableNames_LinkedDocuments, AttributeNames_LinkedDocuments);
-		
-	// Link
-	UpdatedProperties = New Array();
-	ArrayOfLinkedRows = New Array();
-	LinkRows = GetLinkRows(Object, FillingValue);
-	Link(Object, FillingValue, LinkRows, TableNames_Refreshable, UpdatedProperties, ArrayOfLinkedRows);
-
-	Object.RowIDInfo.Clear();
-	For Each Row In FillingValue.RowIDInfo Do
-		FillPropertyValues(Object.RowIDInfo.Add(), Row);
-	EndDo;
-	
-	Return New Structure("UpdatedProperties, Rows",
-		StrConcat(UpdatedProperties, ","), ArrayOfLinkedRows);
+	Return New Structure("UpdatedProperties, Rows", StrConcat(UpdatedProperties, ","), UpdatedRows);
 EndFunction
 
 Function GetFillingValue(FillingValues)
@@ -7597,7 +7604,7 @@ EndFunction
 
 #Region Unlink
 
-Procedure Unlink(Object, UnlinkRows, TableNames, AttributeNames)
+Procedure Unlink(Object, UnlinkRows, TableNames, AttributeNames, UpdatedProperties, UpdatedRows)
 	For Each UnlinkRow In UnlinkRows Do
 		UnlinkTables(Object, UnlinkRow, TableNames);
 		
@@ -7607,7 +7614,8 @@ Procedure Unlink(Object, UnlinkRows, TableNames, AttributeNames)
 			If Not IsCanUnlinkAttributes(Object, UnlinkRow, TableNames) Then
 				Continue;
 			EndIf;
-			UnlinkAttributes(LinkedRow, AttributeNames);
+			UnlinkAttributes(LinkedRow, AttributeNames, UpdatedProperties);
+			UpdatedRows.Add(LinkedRow);
 		EndDo;
 	EndDo;
 EndProcedure
@@ -7666,10 +7674,11 @@ Function IsCanUnlinkAttributes(Object, UnlinkRow, TableNames)
 	Return IsCanUnlink;
 EndFunction
 
-Procedure UnlinkAttributes(LinkedRow, AttributeNames)
+Procedure UnlinkAttributes(LinkedRow, AttributeNames, UpdatedProperties)
 	For Each AttributeName In AttributeNames Do
 		If LinkedRow.Property(AttributeName) Then
 			LinkedRow[AttributeName] = Undefined;
+			PutToUpdatedProperties(AttributeName, "ItemList", LinkedRow, UpdatedProperties, True);
 		EndIf;
 	EndDo;
 EndProcedure
@@ -7678,11 +7687,11 @@ EndProcedure
 
 #Region Link
 
-Procedure Link(Object, FillingValue, LinkRows, TableNames, UpdatedProperties, ArrayOfLinkedRows)
+Procedure Link(Object, FillingValue, LinkRows, TableNames, UpdatedProperties, UpdatedRows)
 	For Each LinkRow In LinkRows Do
 		ArrayOfExcludingKeys = New Array();
 		// Update ItemList row
-		LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, ArrayOfLinkedRows);
+		LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, UpdatedRows);
 		
 		// Update tables
 		LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcludingKeys);
@@ -7753,7 +7762,7 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 	EndDo;
 EndProcedure
 
-Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, ArrayOfLinkedRows)
+Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, UpdatedProperties, UpdatedRows)
 	ArrayOfRefillColumns = New Array();
 	ArrayOfRefillColumns.Add(Upper("TotalAmount"));
 	ArrayOfRefillColumns.Add(Upper("NetAmount"));
@@ -7806,7 +7815,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 			EndIf;
 			
 			If IsLinked Then
-				ArrayOfLinkedRows.Add(Row);
+				UpdatedRows.Add(Row);
 			EndIf;
 		EndDo;
 
@@ -7870,7 +7879,7 @@ Function GetSeparatorColumns(DocReceiverMetadata) Export
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturnOrder Then
 		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailReturnReceipt Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions, Workstation";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PlannedReceiptReservation Then
 		Return "Company, Branch, Requester";
 	EndIf;
@@ -8145,7 +8154,8 @@ Function GetColumnNames_ItemList()
 		   |RetailCustomer,
 		   |UsePartnerTransactions,
 		   |LegalNameContract,
-		   |SalesPerson";
+		   |SalesPerson,
+		   |Workstation";
 EndFunction
 
 Function GetEmptyTable_ItemList()

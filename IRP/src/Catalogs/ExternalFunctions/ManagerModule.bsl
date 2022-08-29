@@ -21,7 +21,7 @@ Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	
 	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
 	If ResultInfo.isError Then
-		Presentation = R().Error_116;
+		Presentation = R().Error_119;
 	Else
 		Presentation = String(ResultInfo.Result);
 	EndIf;

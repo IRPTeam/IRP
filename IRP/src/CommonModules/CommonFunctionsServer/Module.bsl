@@ -108,6 +108,16 @@ Function DeserializeXMLUseXDTO(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+// Deserialize XMLUse XDTOFactory.
+// 
+// Parameters:
+//  Value - String - Value
+//  Type - XDTOValueType, XDTOObjectType, Undefined - XDTO Type
+//  AddInfo - Structure - Add info
+//  WSName - WSDefinitions, Undefined - WSName
+// 
+// Returns:
+//  XDTODataObject
 Function DeserializeXMLUseXDTOFactory(Value, Type = Undefined, AddInfo = Undefined, WSName = Undefined) Export
 	Reader = New XMLReader();
 	Reader.SetString(Value);
@@ -218,6 +228,25 @@ Function GetURLFromNavigationLink(Link) Export
     	LinkValue = StrReplace(ValueTemplate, "00000000000000000000000000000000", Mid(Link, SecondDot + Five));
     EndIf;
     Return ValueFromStringInternal(LinkValue);    
+EndFunction
+
+// Is common attribute use for metadata.
+// 
+// Parameters:
+//  Name - String - Name of common attribute
+//  MetadataFullName - MetadataObject - Metadata full name
+// 
+// Returns:
+//  Boolean - Is common attribute use for metadata
+Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
+	Attr = Metadata.CommonAttributes[Name];
+	Content = Attr.Content.Find(MetadataFullName);
+	UseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use;
+	AutoUseAndUseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Auto 
+		And Attr.AutoUse = Metadata.ObjectProperties.CommonAttributeAutoUse.Use;
+	NotSeparate = Attr.DataSeparation = Metadata.ObjectProperties.CommonAttributeDataSeparation.DontUse;
+		
+	Return (UseAtContent Or AutoUseAndUseAtContent) And NotSeparate;
 EndFunction
 
 #Region QueryBuilder

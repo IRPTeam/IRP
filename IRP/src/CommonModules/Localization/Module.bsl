@@ -691,10 +691,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_112", NStr("en = 'Not set ledger type by company [%1]'", Lang));
 	Strings.Insert("Error_113", NStr("en = 'Serial lot number [ %1 ] has to be unique at the document'", Lang) + Chars.LF);
 	Strings.Insert("Error_114", NStr("en = '""Landed cost"" is a required field.'", Lang) + Chars.LF);
-	Strings.Insert("Error_115", NStr("en = 'Cannot set deletion makr, document is closed by [ %1 ]'", Lang) + Chars.LF);
+	Strings.Insert("Error_115", NStr("en = 'Error while test connection'", Lang) + Chars.LF);
+	Strings.Insert("Error_118", NStr("en = 'Cannot set deletion makr, document is closed by [ %1 ]'", Lang) + Chars.LF);
 	Strings.Insert("Error_116", NStr("en = 'Cannot unpost, document is closed by [ %1 ]'", Lang) + Chars.LF);
 	Strings.Insert("Error_117", NStr("en = 'Sales return when sales by different dates not support'", Lang) + Chars.LF);
-	
 #EndRegion
 
 #Region InfoMessages

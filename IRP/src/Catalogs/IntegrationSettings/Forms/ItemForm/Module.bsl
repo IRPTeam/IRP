@@ -69,7 +69,7 @@ Procedure TestConnectionCall()
 #Else
 			CommonFunctionsClientServer.ShowUsersMessage(R().S_029);
 #EndIf
-	ElsIf Not ExtensionCall_TestConnectionCall() Then
+	ElsIf ExtensionCall_TestConnectionCall() = Undefined Then
 		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate();
 
 		For Each Str In Object.ConnectionSetting Do
@@ -87,7 +87,7 @@ EndProcedure
 
 &AtClient
 Function ExtensionCall_TestConnectionCall()
-	Return False;
+	Return Undefined;
 EndFunction
 
 &AtClient

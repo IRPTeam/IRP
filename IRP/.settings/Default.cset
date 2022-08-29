@@ -100,13 +100,13 @@
     "ql-camel-case-string-literal": {
       "enabled": false
     },
-    "shceduled-job-periodicity-too-short": {
-      "enabled": false
-    },
     "right-interactive-open-external-data-processors": {
       "enabled": false
     },
     "module-accessibility-at-client": {
+      "enabled": false
+    },
+    "module-structure-method-in-regions": {
       "enabled": false
     },
     "doc-comment-field-type": {

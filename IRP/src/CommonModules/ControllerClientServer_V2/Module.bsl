@@ -1,6 +1,21 @@
 
 #Region PARAMETERS
 
+// Get server parameters.
+// 
+// Parameters:
+//  Object - Structure - Object
+// 
+// Returns:
+//  Structure - Get server parameters:
+// * Object - Structure - 
+// * ControllerModuleName - String -
+// * TableName - String -
+// * Rows - Undefined, ValueTableRow -
+// * ReadOnlyProperties - String -
+// * IsBasedOn - Boolean -
+// * StepEnableFlags - Structure:
+// ** PriceChanged_AfterQuestionToUser - Boolean -
 Function GetServerParameters(Object) Export
 	Result = New Structure();
 	Result.Insert("Object", Object);
@@ -17,6 +32,22 @@ Function GetServerParameters(Object) Export
 	Return Result;
 EndFunction
 
+// Get form parameters.
+// 
+// Parameters:
+//  Form - Undefined, Form - Form
+// 
+// Returns:
+//  Structure - Get form parameters:
+// * Form - Undefined, Form -
+// * ViewClientModuleName - String -
+// * ViewServerModuleName - String -
+// * EventCaller - String -
+// * TaxesCache - String -
+// * PropertyBeforeChange - Structure -:
+// ** Object - Structure -
+// ** Form - Structure -
+// ** List - Structure -
 Function GetFormParameters(Form) Export
 	Result = New Structure();
 	Result.Insert("Form", Form);
@@ -45,18 +76,82 @@ Function GetFormParameters(Form) Export
 	Return Result;
 EndFunction
 
+// Get load parameters.
+// 
+// Parameters:
+//  Address - Undefined, String - Address
+// 
+// Returns:
+//  Structure - Get load parameters:
+// * Address - Undefined, String -
 Function GetLoadParameters(Address) Export
 	Result = New Structure();
 	Result.Insert("Address", Address);
 	Return Result;
 EndFunction
 
+// Get parameters.
+// 
+// Parameters:
+//  ServerParameters - See GetServerParameters
+//  FormParameters - See GetFormParameters
+//  LoadParameters - See GetLoadParameters
+// 
+// Returns:
+//  See CreateParameters
 Function GetParameters(ServerParameters, FormParameters = Undefined, LoadParameters = Undefined) Export
 	_FormParameters = ?(FormParameters = Undefined, GetFormParameters(Undefined), FormParameters);
 	_LoadParameters = ?(LoadParameters = Undefined, GetLoadParameters(Undefined), LoadParameters);
 	Return CreateParameters(ServerParameters, _FormParameters, _LoadParameters);
 EndFunction
 
+// Create parameters.
+// 
+// Parameters:
+//  ServerParameters - See GetServerParameters
+//  FormParameters - See GetFormParameters
+//  LoadParameters - See GetLoadParameters
+// 
+// Returns:
+//  Structure - Create parameters:
+// * Form - Undefined, Form -
+// * FormIsExists - Boolean -
+// * FormTaxColumnsExists - Boolean -
+// * FormModificators - Array -
+// * CacheForm - Structure -
+// * ViewNotify - Array -
+// * ViewClientModuleName - String -
+// * ViewServerModuleName - String -
+// * EventCaller - String -
+// * TaxesCache - String -
+// * ChangedData - Map -
+// * ExtractedData - Structure -
+// * LoadData - Structure -
+// * PropertyBeforeChange - Structure -:
+// ** Object - Structure -
+// ** Form - Structure -
+// ** List - Structure -
+// * FormParameters - Structure -:
+// ** IsCopy - Boolean -
+// * Object - DocumentObjectDocumentName -
+// * Cache - Structure -
+// * ControllerModuleName - String -
+// * StepEnableFlags - Structure -:
+// ** PriceChanged_AfterQuestionToUser - Boolean -
+// * IsBasedOn - Boolean -
+// * ReadOnlyProperties - String -
+// * ReadOnlyPropertiesMap - Map -
+// * ProcessedReadOnlyPropertiesMap - Map -
+// * TableName - String -
+// * ObjectMetadataInfo - Structure -:
+// ** MetadataName - String - 
+// ** Tables - Structure -
+// ** DependencyTables - Array -
+// * TaxListIsExists - Boolean -
+// * SpecialOffersIsExists - Boolean -
+// * SerialLotNumbersExists - Boolean -
+// * ArrayOfTaxInfo - Array -
+// * Rows - Array of ValueTableRow -
 Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters = New Structure();
 	// parameters for Client 
@@ -152,6 +247,14 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Return Parameters;
 EndFunction
 
+// Wrap rows.
+// 
+// Parameters:
+//  Parameters - See CreateParameters
+//  Rows - Array of ValueTableRow - Rows
+// 
+// Returns:
+//  Array - Wrap rows
 Function WrapRows(Parameters, Rows) Export
 	ArrayOfRows = New Array();
 	For Each Row In Rows Do
@@ -259,7 +362,7 @@ EndProcedure
 #Region API
 
 // attributes that available through API
-Function GetSetterNameByDataPath(DataPath)
+Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap = New Map();
 	SettersMap.Insert("Sender"          , "SetAccountSender");
 	SettersMap.Insert("SendCurrency"    , "SetSendCurrency");
@@ -303,12 +406,15 @@ Function GetSetterNameByDataPath(DataPath)
 	SettersMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");
 	SettersMap.Insert("ItemList.TotalAmount"        , "StepItemListCalculations_IsTotalAmountChanged");
 	SettersMap.Insert("ItemList.<tax_rate>"         , "StepChangeTaxRate_AgreementInHeader");
-	
+	SettersMap.Insert("ItemList."                   , "StepItemListCalculations_IsTaxRateChanged");
+	If IsBuilder Then
+		SettersMap.Insert("ItemList.TaxAmount"          , "SetItemListTaxAmount");
+	EndIf;
 	Return SettersMap.Get(DataPath);
 EndFunction
 
-Procedure API_SetProperty(Parameters, Property, Value) Export
-	SetterNameOrStepsEnabler = GetSetterNameByDataPath(Property.DataPath);
+Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False) Export
+	SetterNameOrStepsEnabler = GetSetterNameByDataPath(Property.DataPath, IsBuilder);
 	IsColumn = StrSplit(Property.DataPath, ".").Count() = 2;
 	If SetterNameOrStepsEnabler <> Undefined Then
 		If IsColumn Then

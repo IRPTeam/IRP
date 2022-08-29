@@ -324,6 +324,8 @@ EndFunction
 // * Expression - String -
 // * Result - Undefined -
 // * SafeMode - Boolean -
+// * RegExpResult - Array of String -
+// * AddInfo - Structure -
 Function GetRecalculateExpressionParams() Export
 	
 	Structure = New Structure;
@@ -331,6 +333,8 @@ Function GetRecalculateExpressionParams() Export
 	Structure.Insert("Expression", "");
 	Structure.Insert("Result", Undefined);
 	Structure.Insert("SafeMode", True);
+	Structure.Insert("RegExpResult", New Array);
+	Structure.Insert("AddInfo", New Structure);
 	
 	Return Structure;
 	
@@ -342,7 +346,7 @@ EndFunction
 //  Structure - Recalculate expression result:
 // * isError - Boolean -
 // * Description - String -
-// * Result - Undefined -
+// * Result - Arbitrary, Undefined -
 Function RecalculateExpressionResult() Export
 	
 	Structure = New Structure;

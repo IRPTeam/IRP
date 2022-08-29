@@ -55,7 +55,7 @@ EndProcedure
 Async Procedure FindMatches()
 	Array = New Array;
 	For Each TestRexExpString In Object.TestRexExpStrings Do
-		ResultArray = Await CommonFunctionsClient.RegExpFindMatch(TestRexExpString.Row, Object.ExternalCode); // Array of String
+		ResultArray = Await CommonFunctionsClient.RegExpFindMatch(TestRexExpString.Row, Object.RegExp); // Array of String
 		
 		If ResultArray.Count() = 0 Then
 			Continue;
@@ -63,18 +63,52 @@ Async Procedure FindMatches()
 		
 		Array.Add(TestRexExpString.Row);
 		
-		For Each Row In ResultArray Do
-			Array.Add("	> " + Row);
+		For Index = 0 To ResultArray.UBound() Do
+			Array.Add("[" + Index + "]	> " + ResultArray[Index]);
 		EndDo;
 		Array.Add("");
+		If Not IsBlankString(Object.ExternalCode) Then
+			Array.Add("Result:");
+			
+			//@skip-check transfer-object-between-client-server
+			ResultInfo = RunRegExpExpressionAtServer(ResultArray);
+			Array.Add("[Value]	> " + ResultInfo.Result);
+			Array.Add("[Type]	> " + String(TypeOf(ResultInfo.Result)));
+		EndIf;
 	EndDo;
-	RegExpResult = StrConcat(Array, Chars.LF);	
+	RegExpResult = StrConcat(Array, Chars.LF);
 EndProcedure
+
+// Run reg exp expression at server.
+// 
+// Parameters:
+//  ResultArray - Array of String - Result array
+// 
+// Returns:
+//  See CommonFunctionsServer.RecalculateExpressionResult
+&AtServer
+Function RunRegExpExpressionAtServer(ResultArray)
+	
+	Params = CommonFunctionsServer.GetRecalculateExpressionParams();
+	Params.Eval = Object.ExternalFunctionType = Enums.ExternalFunctionType.Eval;
+	Params.SafeMode = Object.SafeModeIsOn;
+	Params.Expression = Object.ExternalCode;
+	Params.RegExpResult = ResultArray;
+	
+	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
+	
+	If ResultInfo.isError Then
+		CommonFunctionsClientServer.ShowUsersMessage(ResultInfo.Description);
+	EndIf;
+
+	Return ResultInfo;
+	
+EndFunction
 
 &AtClient
 Async Procedure CheckRegExp(Text = Undefined)
 	
-	Facet = ?(Text = Undefined, Object.ExternalCode, Text);
+	Facet = ?(Text = Undefined, Object.RegExp, Text);
 	//@skip-check dynamic-access-method-not-found
 	HTMLRegExpTestRowsAnalyzeDocument.displayMatches(Facet);
 	

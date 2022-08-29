@@ -417,6 +417,8 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.DocConsolidatedRetailSalesClient</commonModules>
+  <commonModules>CommonModule.DocConsolidatedRetailSalesServer</commonModules>
   <commonModules>CommonModule.BuilderAPI</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
@@ -495,6 +497,7 @@
   <functionalOptions>FunctionalOption.UseSpecialOffers</functionalOptions>
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
+  <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -579,6 +582,7 @@
   <constants>Constant.UseSpecialOffers</constants>
   <constants>Constant.UseStores</constants>
   <constants>Constant.UseUnitsAndDimensions</constants>
+  <constants>Constant.UseConsolidatedRetailSales</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -734,6 +738,7 @@
   <documents>Document.BatchReallocateOutgoing</documents>
   <documents>Document.ChequeBondTransaction</documents>
   <documents>Document.ChequeBondTransactionItem</documents>
+  <documents>Document.ConsolidatedRetailSales</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -786,6 +791,7 @@
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.StockBalanceDetail</enums>
+  <enums>Enum.ConsolidatedRetailSalesStatuses</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

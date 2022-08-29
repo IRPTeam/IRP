@@ -81,6 +81,7 @@
   <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
   <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -404,6 +405,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="282b0546-0cf7-4f80-ae9c-023d7e86f49c">
+      <name>MoneyTransfer</name>
+      <synonym>
+        <key>en</key>
+        <value>Money transfer</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.MoneyTransfer</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="1a288d2e-b06b-469b-aab9-59aa3bbc4d34">
     <producedTypes>
@@ -705,6 +720,7 @@
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.MoneyTransfer</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

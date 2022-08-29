@@ -3,19 +3,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CatCashAccountsServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
 	
-	If Not FOServer.IsUseBankDocuments() Then
-		ArrayForDelete = New Array();
-		For Each ListItem In Items.CashAccountTypeFilter.ChoiceList Do
-			If Not (Not ValueIsFilled(ListItem.Value) 
-				Or ListItem.Value = Enums.CashAccountTypes.Cash
-				Or ListItem.Value = Enums.CashAccountTypes.POS) Then
-				ArrayForDelete.Add(ListItem);
-			EndIf;
-		EndDo;
-		For Each ArrayItem In ArrayForDelete Do
-			Items.CashAccountTypeFilter.ChoiceList.Delete(ArrayItem);
-		EndDo;
-	EndIf;
+	CatCashAccountsServer.RemoveUnusedAccountTypes(ThisObject, "CashAccountTypeFilter");
 EndProcedure
 
 &AtClient

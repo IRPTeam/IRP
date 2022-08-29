@@ -868,11 +868,43 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	EndIf;
 
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-
 EndProcedure
 
 #EndRegion
 
+#Region MoneyTransfer
+
+Procedure MoneyTransferStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
+	CurrentData = Form.Items.PaymentList.CurrentData;
+
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	If OpenSettings = Undefined Then
+		OpenSettings = GetOpenSettingsStructure();
+	EndIf;
+
+	StandardProcessing = False;
+
+	If OpenSettings.FormName = Undefined Then
+		OpenSettings.FormName = "Document.MoneyTransfer.Form.ChoiceForm";
+	EndIf;
+
+	If OpenSettings.FormFilters = Undefined Then
+		OpenSettings.FormFilters = New Array();
+		OpenSettings.FormFilters.Add(CreateFilterItem("Posted", True, DataCompositionComparisonType.Equal));
+	EndIf;
+
+	If OpenSettings.FormParameters = Undefined Then
+		OpenSettings.FormParameters = New Structure();
+		OpenSettings.FormParameters.Insert("FillingData", New Structure());
+	EndIf;
+
+	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+#EndRegion
 
 #Region ExpenseAndRevenue
 

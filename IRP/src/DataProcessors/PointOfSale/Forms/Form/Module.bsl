@@ -29,6 +29,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	EndIf;
 	
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+		FillCashInList();
+	EndIf;
+		
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -51,7 +56,21 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Return;
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+		SessionIsOpened = ValueIsFilled(Object.ConsolidatedRetailSales);
+		Form.Items.OpenSession.Enabled = Not SessionIsOpened;
+		Form.Items.CloseSession.Enabled = SessionIsOpened;
+		Form.Items.CancelSession.Enabled = SessionIsOpened;
+		
+		If Not SessionIsOpened Then
+			Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage1;
+		Else
+			Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage2;
+		EndIf;
+	Else
+		Form.Items.GroupMainPages.PagesRepresentation = FormPagesRepresentation.None;
+		Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage2;
+	EndIf;
 EndProcedure
 
 #Region AGREEMENT
@@ -73,6 +92,37 @@ Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
 	DocRetailSalesReceiptClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+#EndRegion
+
+#Region CONSOLIDATED_RETAIL_SALES
+
+&AtClient
+Procedure OpenSession(Command)
+	Object.ConsolidatedRetailSales = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
+	
+	SetVisibilityAvailability(Object, ThisObject);
+	EnabledPaymentButton();
+EndProcedure
+
+&AtClient
+Procedure CloseSession(Command)
+	DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales);
+	Object.ConsolidatedRetailSales = Undefined;
+	
+	SetVisibilityAvailability(Object, ThisObject);
+	EnabledPaymentButton();
+EndProcedure
+
+&AtClient
+Procedure CancelSession(Command)
+	DocConsolidatedRetailSalesServer.CancelDocument(Object.ConsolidatedRetailSales);
+	Object.ConsolidatedRetailSales = Undefined;
+	
+	SetVisibilityAvailability(Object, ThisObject);
+	EnabledPaymentButton();		
+EndProcedure
+			
 #EndRegion
 
 #Region FormTableItemsEventHandlers
@@ -511,7 +561,13 @@ Procedure NewTransaction()
 	NewTransactionAtServer();
 	Cancel = False;
 	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
+	
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+		DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
+	EndIf;
+	
 	EnabledPaymentButton();
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
@@ -522,6 +578,11 @@ Procedure NewTransactionAtServer()
 	ValueToFormAttribute(ObjectValue, "Object");
 	Cancel = False;
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
+	
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+		Object.ConsolidatedRetailSales = DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+	EndIf;
+	
 	SalesPersonByDefault = Undefined;
 EndProcedure
 
@@ -587,7 +648,11 @@ EndProcedure
 
 &AtClient
 Procedure EnabledPaymentButton()
-	Items.qPayment.Enabled = Object.ItemList.Count();
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+		Items.qPayment.Enabled = Object.ItemList.Count() And ValueIsFilled(Object.ConsolidatedRetailSales);	
+	Else
+		Items.qPayment.Enabled = Object.ItemList.Count();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -681,3 +746,106 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+&AtClient
+Procedure CreateCashIn(Command)
+	CurrentData = Items.CashInList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CashInData = New Structure();
+	CashInData.Insert("MoneyTransfer" , CurrentData.MoneyTransfer);
+	CashInData.Insert("Currency"      , CurrentData.Currency);
+	CashInData.Insert("Amount"        , CurrentData.Amount);
+	
+	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
+	OpenForm("Document.CashReceipt.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());	
+EndProcedure
+
+
+&AtClient
+Procedure UpdateCashIn(Command)
+	FillCashInList();
+EndProcedure
+
+&AtClient
+Async Procedure CreateCashOut(Command)
+	Result = Await InputNumberAsync(0, "CashOut amount", 10, 2);
+	If Result <> Undefined Then
+		FillingData = GetFillingDataMoneyTransfer(Result);
+		OpenForm("Document.MoneyTransfer.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());
+	EndIf;
+EndProcedure
+
+&AtServer
+Function GetFillingDataMoneyTransfer(CashOutAmount)
+	POSCashAccount = ThisObject.Workstation.CashAccount;
+	
+	FillingData = New Structure();
+	FillingData.Insert("BasedOn" , "PointOfSale");	
+	FillingData.Insert("Date"    , CommonFunctionsServer.GetCurrentSessionDate());	
+	FillingData.Insert("Company" , Object.Company);	
+	FillingData.Insert("Branch"  , Object.Branch);
+	
+	FillingData.Insert("Sender"  , POSCashAccount);
+	FillingData.Insert("Receiver"  , POSCashAccount.CashAccount);
+	
+	FillingData.Insert("SendCurrency"    , POSCashAccount.Currency);
+	FillingData.Insert("ReceiveCurrency" , POSCashAccount.Currency);
+	
+	FillingData.Insert("SendFinancialMovementType"     , POSCashAccount.FinancialMovementType);
+	FillingData.Insert("ReceiveFinancialMovementType"  , POSCashAccount.FinancialMovementType);
+	
+	FillingData.Insert("SendUUID"    , String(New UUID()));
+	FillingData.Insert("ReceiveUUID" , String(New UUID()));
+	
+	FillingData.Insert("SendAmount"    , CashOutAmount);
+	FillingData.Insert("ReceiveAmount" , CashOutAmount);
+	
+	Return FillingData;
+EndFunction
+
+&AtServer
+Function GetFillingDataMoneyTransferForCashReceipt(CashInData)
+	FillingData = New Structure();
+	FillingData.Insert("BasedOn" , "MoneyTransfer");	
+	FillingData.Insert("Date"    , CommonFunctionsServer.GetCurrentSessionDate());	
+	FillingData.Insert("TransactionType", Enums.IncomingPaymentTransactionType.CashIn);	
+	FillingData.Insert("Company"        , CashInData.MoneyTransfer.Company);	
+	FillingData.Insert("Branch"         , CashInData.MoneyTransfer.Branch);	
+	FillingData.Insert("CashAccount"    , ThisObject.Workstation.CashAccount);	
+	FillingData.Insert("Currency"       , CashInData.Currency);	
+	FillingData.Insert("PaymentList"    , New Array());	
+	NewRow = New Structure();
+	NewRow.Insert("TotalAmount"           , CashInData.Amount);	
+	NewRow.Insert("MoneyTransfer"         , CashInData.MoneyTransfer);	
+	NewRow.Insert("FinancialMovementType" , CashInData.MoneyTransfer.ReceiveFinancialMovementType);
+	FillingData.PaymentList.Add(NewRow);
+	
+	Return FillingData;	
+EndFunction
+
+&AtServer
+Procedure FillCashInList()
+	ThisObject.CashInList.Clear();
+	If Not ValueIsFilled(ThisObject.Workstation) Then
+		Return;
+	EndIf;
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT ALLOWED
+	|	R3021B_CashInTransitIncoming.Basis AS MoneyTransfer,
+	|	R3021B_CashInTransitIncoming.Currency AS Currency,
+	|	R3021B_CashInTransitIncoming.AmountBalance AS Amount
+	|FROM
+	|	AccumulationRegister.R3021B_CashInTransitIncoming.Balance(,
+	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND ReceiptingAccount = &CashAccount) AS R3021B_CashInTransitIncoming";
+	Query.SetParameter("CashAccount", Workstation.CashAccount);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	While QuerySelection.Next() Do
+		FillPropertyValues(ThisObject.CashInList.Add(), QuerySelection);
+	EndDo;
+EndProcedure

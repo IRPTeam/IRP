@@ -130,21 +130,6 @@
     <createOnInput>DontUse</createOnInput>
     <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <attributes uuid="56a2629d-485a-4d23-b91e-937273a89891">
-    <name>BaseDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Base document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="5198f46b-2c9d-4543-b595-711780cc1084">
     <name>Company</name>
     <synonym>

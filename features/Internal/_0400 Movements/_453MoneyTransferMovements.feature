@@ -56,6 +56,7 @@ Scenario: _045300 preparation (Cash transfer order)
 		When Create catalog CashAccounts objects
 		When Create catalog CancelReturnReasons objects
 		When Create catalog PlanningPeriods objects
+		When Create POS cash account objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -76,6 +77,14 @@ Scenario: _045300 preparation (Cash transfer order)
 		And I execute 1C:Enterprise script at server
 			| "Documents.MoneyTransfer.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
+		When Create document MoneyTransfer and CashReceipt objects (for cash in, movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.MoneyTransfer.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.MoneyTransfer.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		
+		
+		
 
 Scenario: _0453001 check preparation
 	When check preparation
@@ -170,6 +179,8 @@ Scenario: _045304 check absence Money transfer movements by the Register "R3035 
 		Then "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R3035 Cash planning'   |     
 	And I close all client application windows
+
+
 		
 
 Scenario: _045305 Money transfer clear posting/mark for deletion
@@ -233,3 +244,92 @@ Scenario: _045305 Money transfer clear posting/mark for deletion
 			| 'R3035 Cash planning'   | 
 			| 'R3010 Cash on hand' |
 		And I close all client application windows				
+
+Scenario: _045306 check Money transfer movements by the Register "R3010 Cash on hand" (cash in)
+	* Select Money transfer
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '11' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Money transfer 11 dated 25.08.2022 16:45:16' | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'              | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''             | ''         | ''                             | 'Attributes'           |
+			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                            | 'Expense'     | '25.08.2022 16:45:16' | '171,2'     | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                            | 'Expense'     | '25.08.2022 16:45:16' | '1 000'     | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                            | 'Expense'     | '25.08.2022 16:45:16' | '1 000'     | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'TRY'      | 'en description is empty'      | 'No'                   |			
+		And I close all client application windows
+
+Scenario: _045307 check Money transfer movements by the Register "R3021 Cash in transit (incoming)" (cash in)
+	* Select Money transfer
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '11' |
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Money transfer 11 dated 25.08.2022 16:45:16'  | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''             | ''                   | ''                                            | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''             | ''                   | ''                                            | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''             | ''                   | ''                                            | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''                             | ''         | ''             | ''                   | ''                                            | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Account'      | 'Receipting account' | 'Basis'                                       | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '25.08.2022 16:45:16' | '171,2'     | ''           | 'Main Company' | 'Shop 02' | 'Reporting currency'           | 'USD'      | 'Cash desk №2' | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
+			| ''                                             | 'Receipt'     | '25.08.2022 16:45:16' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Local currency'               | 'TRY'      | 'Cash desk №2' | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |
+			| ''                                             | 'Receipt'     | '25.08.2022 16:45:16' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'en description is empty'      | 'TRY'      | 'Cash desk №2' | 'Pos cash account 1' | 'Money transfer 11 dated 25.08.2022 16:45:16' | 'No'                   |	
+		And I close all client application windows
+
+
+Scenario: _045308 check Money transfer movements by the Register "R3010 Cash on hand" (cash out)
+	* Select Money transfer
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '13' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Money transfer 13 dated 25.08.2022 16:46:25' | ''            | ''                    | ''          | ''             | ''        | ''                   | ''         | ''                             | ''                     |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''        | ''                   | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'              | ''            | ''                    | ''          | ''             | ''        | ''                   | ''         | ''                             | ''                     |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                   | ''         | ''                             | 'Attributes'           |
+			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'            | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                            | 'Expense'     | '25.08.2022 16:46:25' | '171,2'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                            | 'Expense'     | '25.08.2022 16:46:25' | '1 000'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                            | 'Expense'     | '25.08.2022 16:46:25' | '1 000'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		And I close all client application windows
+
+Scenario: _045309 check Money transfer movements by the Register "R3021 Cash in transit (incoming)" (cash out)
+	* Select Money transfer
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '13' |
+	* Check movements by the Register  "R3021 Cash in transit (incoming)" 
+		And I click "Registrations report" button
+		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Money transfer 13 dated 25.08.2022 16:46:25'  | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''                   | ''                   | ''                                            | ''                     |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''                   | ''                   | ''                                            | ''                     |
+			| 'Register  "R3021 Cash in transit (incoming)"' | ''            | ''                    | ''          | ''           | ''             | ''        | ''                             | ''         | ''                   | ''                   | ''                                            | ''                     |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''                             | ''         | ''                   | ''                   | ''                                            | 'Attributes'           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Account'            | 'Receipting account' | 'Basis'                                       | 'Deferred calculation' |
+			| ''                                             | 'Receipt'     | '25.08.2022 16:46:25' | '171,2'     | ''           | 'Main Company' | 'Shop 02' | 'Reporting currency'           | 'USD'      | 'Pos cash account 1' | 'Cash desk №2'       | 'Money transfer 13 dated 25.08.2022 16:46:25' | 'No'                   |
+			| ''                                             | 'Receipt'     | '25.08.2022 16:46:25' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'Local currency'               | 'TRY'      | 'Pos cash account 1' | 'Cash desk №2'       | 'Money transfer 13 dated 25.08.2022 16:46:25' | 'No'                   |
+			| ''                                             | 'Receipt'     | '25.08.2022 16:46:25' | '1 000'     | ''           | 'Main Company' | 'Shop 02' | 'en description is empty'      | 'TRY'      | 'Pos cash account 1' | 'Cash desk №2'       | 'Money transfer 13 dated 25.08.2022 16:46:25' | 'No'                   |	
+		And I close all client application windows

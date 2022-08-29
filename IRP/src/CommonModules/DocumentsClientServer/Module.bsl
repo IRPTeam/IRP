@@ -231,3 +231,17 @@ Function FindRowInArrayOfStructures(ArrayOfStructures, KeyNames,
 	EndDo;
 	Return EqualRow;
 EndFunction
+
+Function GetSalesReturnData(Object) Export
+	SalesReturnData = New Structure();
+	SalesReturnData.Insert("Date", Object.Date);
+	ArrayOfSalesDocuments = New Array();
+	For Each Row In Object.ItemList Do
+		If ValueIsFilled(Row.RetailSalesReceipt) Then
+			ArrayOfSalesDocuments.Add(Row.RetailSalesReceipt);
+		EndIf;
+	EndDo;
+	SalesReturnData.Insert("ArrayOfSalesDocuments", ArrayOfSalesDocuments);
+	Return SalesReturnData;
+EndFunction
+

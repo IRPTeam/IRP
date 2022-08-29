@@ -27,6 +27,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -88,23 +89,28 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
 	QueryArray.Add(R3010B_CashOnHand());
 	QueryArray.Add(R3035T_CashPlanning());
+	QueryArray.Add(R3021B_CashInTransitIncoming());
 	Return QueryArray;
 EndFunction
 
 Function MoneySender()
 	Return 
 	"SELECT
+	|	MoneyTransfer.Ref,
 	|	MoneyTransfer.Company AS Company,
 	|	MoneyTransfer.Ref.Branch AS Branch,
 	|	MoneyTransfer.Ref AS Ref,
 	|	MoneyTransfer.Sender AS Account,
+	|	MoneyTransfer.Sender AS AccountFrom,
+	|	MoneyTransfer.Receiver AS AccountTo,
 	|	MoneyTransfer.SendAmount AS Amount,
 	|	MoneyTransfer.SendCurrency AS Currency,
 	|	MoneyTransfer.SendUUID AS Key,
 	|	MoneyTransfer.Date AS Period,
 	|	MoneyTransfer.CashTransferOrder AS BasisDocument,
 	|	MoneyTransfer.CashTransferOrder.SendPeriod AS PlanningPeriod,
-	|	MoneyTransfer.SendFinancialMovementType AS FinancialMovementType
+	|	MoneyTransfer.SendFinancialMovementType AS FinancialMovementType,
+	|	MoneyTransfer.Sender.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS IsPOSCashAccount
 	|INTO MoneySender
 	|FROM
 	|	Document.MoneyTransfer AS MoneyTransfer
@@ -115,22 +121,67 @@ EndFunction
 Function MoneyReceiver()
 	Return 
 	"SELECT
+	|	MoneyTransfer.Ref,
 	|	MoneyTransfer.Company AS Company,
 	|	MoneyTransfer.Ref.Branch AS Branch,
 	|	MoneyTransfer.Ref AS Ref,
 	|	MoneyTransfer.Receiver AS Account,
+	|	MoneyTransfer.Sender AS AccountFrom,
+	|	MoneyTransfer.Receiver AS AccountTo,
 	|	MoneyTransfer.ReceiveAmount AS Amount,
 	|	MoneyTransfer.ReceiveCurrency AS Currency,
 	|	MoneyTransfer.ReceiveUUID AS Key,
 	|	MoneyTransfer.Date AS Period,
 	|	MoneyTransfer.CashTransferOrder AS BasisDocument,
 	|	MoneyTransfer.CashTransferOrder.SendPeriod AS PlanningPeriod,
-	|	MoneyTransfer.ReceiveFinancialMovementType AS FinancialMovementType
+	|	MoneyTransfer.ReceiveFinancialMovementType AS FinancialMovementType,
+	|	MoneyTransfer.Receiver.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS IsPOSCashAccount,
+	|
+	|	MoneyTransfer.Receiver.Type = VALUE(Enum.CashAccountTypes.POSCashAccount)
+	|	OR MoneyTransfer.Sender.Type = VALUE(Enum.CashAccountTypes.POSCashAccount) AS UseCashInTransit
 	|INTO MoneyReceiver
 	|FROM
 	|	Document.MoneyTransfer AS MoneyTransfer
 	|WHERE
 	|	MoneyTransfer.Ref = &Ref";
+EndFunction
+
+Function R3021B_CashInTransitIncoming()
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	MoneyReceiver.Period,
+	|	MoneyReceiver.Company,
+	|	MoneyReceiver.Branch,
+	|	MoneyReceiver.Ref AS Basis,
+	|	MoneyReceiver.AccountFrom AS Account,
+	|	MoneyReceiver.AccountTo AS ReceiptingAccount,
+	|	MoneyReceiver.Amount,
+	|	MoneyReceiver.Currency,
+	|	MoneyReceiver.Key
+	|INTO R3021B_CashInTransitIncoming
+	|FROM
+	|	MoneyReceiver AS MoneyReceiver
+	|WHERE
+	|	MoneyReceiver.IsPOSCashAccount
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	MoneySender.Period,
+	|	MoneySender.Company,
+	|	MoneySender.Branch,
+	|	MoneySender.Ref AS Basis,
+	|	MoneySender.AccountFrom AS Account,
+	|	MoneySender.AccountTo AS ReceiptiongAccount,
+	|	MoneySender.Amount,
+	|	MoneySender.Currency,
+	|	MoneySender.Key
+	|FROM
+	|	MoneySender AS MoneySender
+	|WHERE
+	|	MoneySender.IsPOSCashAccount";
 EndFunction
 
 Function R3010B_CashOnHand()
@@ -160,7 +211,9 @@ Function R3010B_CashOnHand()
 	|	MoneyReceiver.Currency,
 	|	MoneyReceiver.Key
 	|FROM
-	|	MoneyReceiver AS MoneyReceiver";
+	|	MoneyReceiver AS MoneyReceiver
+	|WHERE
+	|	NOT MoneyReceiver.UseCashInTransit";
 EndFunction
 
 Function R3035T_CashPlanning()

@@ -84,8 +84,18 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+	Form.ReadOnly = DocConsolidatedRetailSalesServer.IsClosedRetailDocument(Object.Ref);
+	
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+	
+	UseConsolidatedRetailSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch);
+	
+	Form.Items.ConsolidatedRetailSales.ReadOnly = Not UseConsolidatedRetailSales;
+	
+	Form.Items.ConsolidatedRetailSales.MarkIncomplete = 
+		Not ValueIsFilled(Object.ConsolidatedRetailSales)
+		And UseConsolidatedRetailSales;
 EndProcedure
 
 #EndRegion
@@ -102,7 +112,7 @@ EndProcedure
 #Region COMPANY
 
 &AtClient
-Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
+Procedure CompanyOnChange(Item)
 	DocRetailSalesReceiptClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -216,6 +226,33 @@ EndProcedure
 &AtClient
 Procedure RetailCustomerOnChange(Item)
 	DocRetailSalesReceiptClient.RetailCustomerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region CONSOLIDATED_RETAIL_SALES
+
+&AtClient
+Procedure ConsolidatedRetailSalesOnChange(Item)
+	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region WORKSTATION
+
+&AtClient
+Procedure WorkstationOnChange(Item)
+	DocRetailSalesReceiptClient.WorkstationOnChange(Object, ThisObject, Item);	
+EndProcedure
+
+#EndRegion
+
+#Region BRANCH
+
+&AtClient
+Procedure BranchOnChange(Item)
+	DocRetailSalesReceiptClient.BranchOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

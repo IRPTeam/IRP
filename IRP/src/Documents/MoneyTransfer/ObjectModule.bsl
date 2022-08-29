@@ -63,7 +63,7 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		If FillingData.BasedOn = "CashTransferOrder" Then
+		If FillingData.BasedOn = "CashTransferOrder" Or FillingData.BasedOn = "PointOfSale" Then
 			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 			Filling_BasedOn(FillingData);
 		EndIf;

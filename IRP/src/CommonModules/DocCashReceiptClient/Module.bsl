@@ -56,6 +56,14 @@ Procedure AccountOnChange(Object, Form, Item) Export
 	ViewClient_V2.CashAccountOnChange(Object, Form, "PaymentList");
 EndProcedure
 
+Function GetCashAccountTypeByTransaction(TransactionType)
+	CashAccountType = PredefinedValue("Enum.CashAccountTypes.Cash");
+	If TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn") Then
+		CashAccountType = PredefinedValue("Enum.CashAccountTypes.POSCashAccount");
+	EndIf;
+	Return CashAccountType;
+EndFunction
+
 Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Cash"), DataCompositionComparisonType.Equal));
@@ -257,8 +265,9 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Insert("OpeningEntryTableName2", "AccountReceivableByDocuments");
 	Parameters.Insert("DebitNoteTableName", "Transactions");
 	Parameters.Insert("Ref", Object.Ref);
-	Parameters.Insert("IsReturnTransactionType", 
-		Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor"));
+	
+	IsReturnTransactionType = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
+	Parameters.Insert("IsReturnTransactionType", IsReturnTransactionType);
 	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
 EndProcedure
 
@@ -283,7 +292,7 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item, Current
 	ViewClient_V2.PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData);
 EndProcedure
 
-Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+Procedure PaymentListTransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
@@ -300,47 +309,97 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	OpenSettings.FormParameters.Insert("ArrayOfSelectedDocuments", ArrayOfSelectedDocuments);
 
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Posted", True,
-		DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(
+		DocumentsClientServer.CreateFilterItem("Posted", True,DataCompositionComparisonType.Equal));
 	
 	// CashAccount
 	If ValueIsFilled(Object.CashAccount) Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Receiver", Object.CashAccount,
-			DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(
+			DocumentsClientServer.CreateFilterItem("Receiver", Object.CashAccount, DataCompositionComparisonType.Equal));
 	EndIf;
 
 	// Company
 	If ValueIsFilled(Object.Company) Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Company", Object.Company,
-			DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(
+			DocumentsClientServer.CreateFilterItem("Company", Object.Company, DataCompositionComparisonType.Equal));
 	EndIf;
 	
 	// Currency
 	If ValueIsFilled(Object.Currency) Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency,
-			DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(
+			DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency, DataCompositionComparisonType.Equal));
 	EndIf;
 
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange") Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", True,
-			DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(
+			DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", True, DataCompositionComparisonType.Equal));
 
 		If ValueIsFilled(Object.CurrencyExchange) Then
-			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("SendCurrency",
-				Object.CurrencyExchange, DataCompositionComparisonType.Equal));
+			OpenSettings.ArrayOfFilters.Add(
+				DocumentsClientServer.CreateFilterItem("SendCurrency", Object.CurrencyExchange, DataCompositionComparisonType.Equal));
 		EndIf;
 
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	ElsIf Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", False,
-			DataCompositionComparisonType.Equal));
+		OpenSettings.ArrayOfFilters.Add(
+			DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", False, DataCompositionComparisonType.Equal));
 
 		If ValueIsFilled(Object.Currency) Then
-			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency,
-				DataCompositionComparisonType.Equal));
+			OpenSettings.ArrayOfFilters.Add(
+				DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency, DataCompositionComparisonType.Equal));
 		EndIf;
+		
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region MONEY_TRANSFER
+
+Procedure PaymentListMoneyTransferOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListMoneyTransferOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure PaymentListMoneyTransferStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("OwnerRef", Object.Ref);
+	
+	ArrayOfSelectedDocuments = New Array();
+	For Each Row In Object.PaymentList Do
+		ArrayOfSelectedDocuments.Add(Row.MoneyTransfer);
+	EndDo;
+	OpenSettings.FormParameters.Insert("ArrayOfSelectedDocuments", ArrayOfSelectedDocuments);
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(
+		DocumentsClientServer.CreateFilterItem("Posted", True,DataCompositionComparisonType.Equal));
+	
+	// CashAccount
+	If ValueIsFilled(Object.CashAccount) Then
+		OpenSettings.ArrayOfFilters.Add(
+			DocumentsClientServer.CreateFilterItem("Receiver", Object.CashAccount, DataCompositionComparisonType.Equal));
+	EndIf;
+
+	// Company
+	If ValueIsFilled(Object.Company) Then
+		OpenSettings.ArrayOfFilters.Add(
+			DocumentsClientServer.CreateFilterItem("Company", Object.Company, DataCompositionComparisonType.Equal));
+	EndIf;
+	
+	// Currency
+	If ValueIsFilled(Object.Currency) Then
+		OpenSettings.ArrayOfFilters.Add(
+			DocumentsClientServer.CreateFilterItem("ReceiveCurrency", Object.Currency, DataCompositionComparisonType.Equal));
+	EndIf;
+	
+	DocumentsClient.MoneyTransferStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 #EndRegion

@@ -827,6 +827,72 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>ConsolidatedRetailSales</name>
+          <id>1073</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ConsolidatedRetailSales</segments>
+          </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ConsolidatedRetailSalesOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>ConsolidatedRetailSalesExtendedTooltip</name>
+            <id>1075</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ConsolidatedRetailSalesContextMenu</name>
+            <id>1074</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+            <choiceParameterLinks>
+              <name>Filter.Company</name>
+              <datapath xsi:type="form:DataPath">
+                <segments>Object.Company</segments>
+              </datapath>
+            </choiceParameterLinks>
+            <choiceParameterLinks>
+              <name>Filter.Branch</name>
+              <datapath xsi:type="form:DataPath">
+                <segments>Object.Branch</segments>
+              </datapath>
+            </choiceParameterLinks>
+          </extInfo>
+        </items>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -4891,6 +4957,60 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
+        <name>Workstation</name>
+        <id>1078</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.Workstation</segments>
+        </dataPath>
+        <handlers>
+          <event>OnChange</event>
+          <name>WorkstationOnChange</name>
+        </handlers>
+        <extendedTooltip>
+          <name>WorkstationExtendedTooltip</name>
+          <id>1080</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>WorkstationContextMenu</name>
+          <id>1079</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormField">
         <name>Branch</name>
         <id>878</id>
         <visible>true</visible>
@@ -4901,6 +5021,10 @@
         <dataPath xsi:type="form:DataPath">
           <segments>Object.Branch</segments>
         </dataPath>
+        <handlers>
+          <event>OnChange</event>
+          <name>BranchOnChange</name>
+        </handlers>
         <extendedTooltip>
           <name>BranchExtendedTooltip</name>
           <id>880</id>
@@ -6619,6 +6743,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <savedData>true</savedData>
   </attributes>
   <attributes>
     <name>Description</name>

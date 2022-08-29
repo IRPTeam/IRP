@@ -1380,6 +1380,8 @@ Scenario: set True value to the constant
 		And I set "True" value to the constant "UseMobile"
 		And I set "True" value to the constant "UseChequeBonds"
 
+Scenario: set True value to the constant Use consolidated retail sales
+		And I set "True" value to the constant "UseConsolidatedRetailSales"
 
 Scenario: add sales tax settings 
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"

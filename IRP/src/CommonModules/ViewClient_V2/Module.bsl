@@ -1656,6 +1656,13 @@ Procedure PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData 
 	ControllerClientServer_V2.PaymentListPlanningTransactionBasisOnChange(Parameters);
 EndProcedure
 
+// PaymentList.MoneyTransfer
+Procedure PaymentListMoneyTransferOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListMoneyTransferOnChange(Parameters);
+EndProcedure
+
 // PaymentList.Order
 Procedure PaymentListOrderOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
@@ -2333,6 +2340,53 @@ EndProcedure
 
 Procedure OnSetLegalNameNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region CONSOLIDATED_RETAIL_SALES
+
+Procedure ConsolidatedRetailSalesOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.ConsolidatedRetailSalesOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetConsolidatedRetailSalesNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region WORKSTATION
+
+Procedure WorkstationOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.WorkstationOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region BRANCH
+
+Procedure BranchOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.BranchOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetBranchNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
 EndProcedure
 
 #EndRegion

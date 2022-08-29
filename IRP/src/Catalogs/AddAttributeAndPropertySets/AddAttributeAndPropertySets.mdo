@@ -741,6 +741,13 @@
         <value>104</value>
       </code>
     </items>
+    <items id="81a39403-fce4-4432-b4e3-fc59ed05165a">
+      <name>Document_ConsolidatedRetailSales</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>105</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -1493,4 +1493,32 @@
 			<value>false</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.ConsolidatedRetailSales</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.AdditionalCostAllocation</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.AdditionalRevenueAllocation</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CalculationMovementCosts</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
 </Rights>

@@ -10,6 +10,7 @@ I want to check opening and closing of documents forms
 Background:
 	Given I launch TestClient opening script or connect the existing one
 	When set True value to the constant
+	When set True value to the constant Use consolidated retail sales
 
 Scenario: preparation
 	* Add VA extension
@@ -779,6 +780,22 @@ Scenario: Open object form "ChequeBondTransaction"
 	If the warning is displayed then
 		Then I raise "Failed to open document form ChequeBondTransaction" exception
 	And I close current window
+
+Scenario: Open list form "ConsolidatedRetailSales" 
+	And I close all client application windows
+	Given I open "ConsolidatedRetailSales" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ConsolidatedRetailSales" exception
+	And I close current window
+
+Scenario: Open object form "ConsolidatedRetailSales"
+	And I close all client application windows
+	Given I open "ConsolidatedRetailSales" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ConsolidatedRetailSales" exception
+	And I close current window
+
+
 
 Scenario: Open choise form "ChequeBondTransaction"
 	And I close all client application windows

@@ -47,6 +47,14 @@ EndProcedure
 
 #EndRegion
 
+#Region BRANCH
+
+Procedure BranchOnChange(Object, Form, Item) Export
+	ViewClient_V2.BranchOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER
 
 Procedure PartnerOnChange(Object, Form, Item) Export
@@ -201,6 +209,22 @@ EndProcedure
 
 Procedure RetailCustomerOnChange(Object, Form, Item) Export
 	ViewClient_V2.RetailCustomerOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
+#Region CONSOLIDATED_RETAIL_SALES
+
+Procedure ConsolidatedRetailSalesOnChange(Object, Form, Item) Export
+	ViewClient_V2.ConsolidatedRetailSalesOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
+#Region WORKSTATION
+
+Procedure WorkstationOnChange(Object, Form, Item) Export
+	ViewClient_V2.WorkstationOnChange(Object, Form, "ItemList");
 EndProcedure
 
 #EndRegion

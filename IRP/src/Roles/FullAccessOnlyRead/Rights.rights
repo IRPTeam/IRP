@@ -1082,6 +1082,10 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>Constant.UseItemKey</name>
@@ -6251,6 +6255,10 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>Catalog.LedgerTypeVariants</name>
@@ -6302,6 +6310,10 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.ChequeBondStatuses</name>
@@ -6311,6 +6323,21 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ConsolidatedRetailSales</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 	</object>

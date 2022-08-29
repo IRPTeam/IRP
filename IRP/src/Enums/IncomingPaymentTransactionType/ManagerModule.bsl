@@ -10,5 +10,9 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	If Parameters.Filter.Property("Ref") And TypeOf(Parameters.Filter.Ref) = Type("DocumentRef.BankReceipt") Then
 		ChoiceData.Add(Enums.IncomingPaymentTransactionType.PaymentFromCustomerByPOS);
 		ChoiceData.Add(Enums.IncomingPaymentTransactionType.ReceiptByCheque);
+	Else
+		If FOServer.IsUseConsolidatedRetailSales() Then
+			ChoiceData.Add(Enums.IncomingPaymentTransactionType.CashIn);
+		EndIf;	
 	EndIf;
 EndProcedure

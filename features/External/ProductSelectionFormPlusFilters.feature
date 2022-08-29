@@ -1362,6 +1362,21 @@ Scenario: check the display of the header of the collapsible group in cash payme
 		And I select current line in "List" table
 		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 
+Scenario: check the display of the header of the collapsible group in consolidated retail sales
+	And I click the button named "FormCreate"
+	* Filling in the details of the document
+		If "Company" attribute is present on the form Then
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company |
+		And I select current line in "List" table
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| Description  |
+			| Cash desk №2 |
+		And I select current line in "List" table
+		And I select "Open" exact value from the drop-down list named "Status"
 
 
 

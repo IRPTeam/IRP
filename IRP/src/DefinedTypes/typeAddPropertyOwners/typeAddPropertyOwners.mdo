@@ -110,5 +110,6 @@
     <types>CatalogRef.LockDataModificationReasons</types>
     <types>CatalogRef.PartnersBankAccounts</types>
     <types>DocumentRef.ChequeBondTransaction</types>
+    <types>DocumentRef.ConsolidatedRetailSales</types>
   </type>
 </mdclass:DefinedType>

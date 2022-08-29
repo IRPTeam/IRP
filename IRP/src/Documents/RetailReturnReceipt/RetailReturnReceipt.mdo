@@ -147,21 +147,6 @@
     <createOnInput>DontUse</createOnInput>
     <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <attributes uuid="a8be34d1-1e12-4a6e-a231-d2d9ba59cfca">
-    <name>BaseDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Base document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.RetailSalesReceipt</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="7b238112-17b5-4fda-a5f1-af40d05da9e2">
     <name>Company</name>
     <synonym>
@@ -312,6 +297,36 @@
       <name>Filter.Company</name>
       <field>Document.RetailReturnReceipt.Attribute.LegalName</field>
     </choiceParameterLinks>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a2dd1f13-7744-402d-a9de-5f5d6d434c82">
+    <name>ConsolidatedRetailSales</name>
+    <synonym>
+      <key>en</key>
+      <value>Consolidated retail sales</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1d6024ee-5794-4bbb-9699-aa7ce9bd2ab0">
+    <name>Workstation</name>
+    <synonym>
+      <key>en</key>
+      <value>Workstation</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Workstations</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

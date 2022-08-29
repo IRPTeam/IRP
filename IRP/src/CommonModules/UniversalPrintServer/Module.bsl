@@ -36,20 +36,42 @@ EndFunction
 // Returns:
 //  SpreadsheetDocument - SpreadsheetDocument
 Function BuildSpreadsheetDoc(RefDocument, NameTemplate) Export
-	Result = New SpreadsheetDocument;
+	Manager = ObjectManagerByLink(RefDocument);
+	Result = Manager.Print(RefDocument, NameTemplate);
 	Return Result;	
 EndFunction
 
+
+
+// Object manager by link.
+// 
+// Parameters:
+//  Ref - DocumentRef - Ref
+// 
+// Returns:
+//  DocumentManager.SalesOrder, Undefined - Object manager by link
+Function ObjectManagerByLink(Ref) Export
+	Return ServiceSystemServer.GetManagerByMetadata(Ref.Metadata());
+EndFunction
   
 // Get synonym template.
 // 
 // Parameters:
-//  Ref - DocumentRef
-//  NameTemplate - String
+//  Ref - DocumentRef -
+//  NameTemplate - String -
 // 
 // Returns:
-//	Result - String 
+//  Result -- String
 Function GetSynonymTemplate(Ref, NameTemplate) Export
-	Result = Ref.Metadata().Templates.Find(NameTemplate).Synonym; 
+	Try
+		Result = Ref.Metadata().Templates.Find(NameTemplate).Synonym;
+		If Not ValueIsFilled(Result) Then
+			Result = NameTemplate;	
+		EndIf;		
+	Except
+		Result = NameTemplate;
+	EndTry;
+	
 	Return Result;
+	
 EndFunction

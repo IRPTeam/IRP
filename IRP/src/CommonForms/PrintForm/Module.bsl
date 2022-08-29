@@ -6,17 +6,16 @@
 // 
 // Parameters:
 //  Item - FormTable - Item
-//  RowSelected - 
+//  RowSelected - See CommonForm.PrintForm.Items.PrintFormConfig
 //  Field - FormField - Field
 //  StandardProcessing - Boolean - Standard processing
 &AtClient
 Procedure PrintFormConfigSelection(Item, RowSelected, Field, StandardProcessing)
-	//TODO specify the correct type RowSelected
 	if Field.Name = "PrintFormConfigPresentation" OR Field.Name = "PrintFormConfigNameTemplate" Then
 		If Item.CurrentData <> Undefined and ValueIsFilled(Item.CurrentData.Ref) Then
 			StandardProcessing = False;
 			ShowValue(, Item.CurrentData.Ref);
-		EndIf;		
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -56,13 +55,14 @@ Procedure FillPrintFormConfig(Parameter)
 		NewStr.CountCopy = Parameter.CountCopy;
 		NewStr.BuilderLayout = Parameter.BuilderLayout;
 		if Parameter.BuilderLayout then
-			//NewStr.SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(RefDoc, NameTemplate);		
+			NewStr.SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(RefDoc, NameTemplate);
 		else
 			//@skip-check property-return-type
 			NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;
 		EndIf;
 		
-		NewStr.NameTemplate = UniversalPrintServer.GetSynonymTemplate(RefDoc, NameTemplate);
+		NewStr.NameTemplate = NameTemplate;
+		NewStr.Template = UniversalPrintServer.GetSynonymTemplate(RefDoc, NameTemplate);
 		NewStr.Ref = Parameter.RefDocument;
 	EndIf;
 EndProcedure
@@ -99,6 +99,8 @@ EndProcedure
 #EndRegion
 
 #Region Private
+
+
 
 &AtClient
 Procedure EditResultSwitch()

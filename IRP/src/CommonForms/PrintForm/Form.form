@@ -980,19 +980,19 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>PrintFormConfigNameTemplate</name>
-          <id>109</id>
+          <name>PrintFormConfigTemplate</name>
+          <id>181</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>PrintFormConfig.NameTemplate</segments>
+            <segments>PrintFormConfig.Template</segments>
           </dataPath>
           <extendedTooltip>
-            <name>PrintFormConfigNameTemplateExtendedTooltip</name>
-            <id>111</id>
+            <name>PrintFormConfigTemplateExtendedTooltip</name>
+            <id>183</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1006,8 +1006,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>PrintFormConfigNameTemplateContextMenu</name>
-            <id>110</id>
+            <name>PrintFormConfigTemplateContextMenu</name>
+            <id>182</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1016,7 +1016,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
-          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -1786,6 +1785,24 @@
       <id>9</id>
       <valueType>
         <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Template</name>
+      <title>
+        <key>en</key>
+        <value>Template</value>
+      </title>
+      <id>10</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers/>
       </valueType>
       <view>
         <common>true</common>

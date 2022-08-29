@@ -218,3 +218,45 @@ Procedure SetGroupItemsList(Object, Form)
 EndProcedure
 
 #EndRegion
+
+Function GetInfoForFillingCashReceipt(MoneyTransferRef) Export
+	Result = New Structure("Company, CashAccount, Currency, FinancialMovementType");
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	MoneyTransfer.Company,
+	|	MoneyTransfer.Receiver AS CashAccount,
+	|	MoneyTransfer.ReceiveCurrency AS Currency,
+	|	MoneyTransfer.ReceiveFinancialMovementType AS FinancialMovementType
+	|FROM
+	|	Document.MoneyTransfer AS MoneyTransfer
+	|WHERE
+	|	MoneyTransfer.Ref = &Ref";
+	Query.SetParameter("Ref", MoneyTransferRef);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetCashInTransitIncomingBalance(MoneyTransferRef, CashReceiptRef) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	R3021B_CashInTransitIncomingBalance.AmountBalance
+	|FROM
+	|	AccumulationRegister.R3021B_CashInTransitIncoming.Balance(&Boundary, Basis = &Basis
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+	|		R3021B_CashInTransitIncomingBalance";
+	Query.SetParameter("Boundary", New Boundary(CashReceiptRef.PointInTime(), BoundaryType.Excluding));
+	Query.SetParameter("Basis", MoneyTransferRef);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.AmountBalance;
+	EndIf;
+	Return 0;	
+EndFunction
+

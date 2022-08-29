@@ -57,7 +57,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.LegalNameContract,
 	|PaymentList.Payer,
 	|PaymentList.AmountExchange,
-	|PaymentList.Order";
+	|PaymentList.Order,
+	|PaymentList.MoneyTransfer";
 
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -69,10 +70,14 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	PaymentFromCustomer = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
 	ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
 	TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
+	CashIn              = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";
+	ElsIf TransactionType = CashIn Then
+		StrByType = "
+		|PaymentList.MoneyTransfer";		
 	ElsIf TransactionType = CurrencyExchange Then
 		StrByType = "CurrencyExchange,
 		|PaymentList.PlaningTransactionBasis,
@@ -114,8 +119,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Or Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
 		BasedOnCashTransferOrder = False;
 		For Each Row In Object.PaymentList Do
-			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") And ValueIsFilled(
-				Row.PlaningTransactionBasis) Then
+			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
+				And ValueIsFilled(Row.PlaningTransactionBasis) Then
 				BasedOnCashTransferOrder = True;
 				Break;
 			EndIf;
@@ -302,7 +307,21 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListPlaningTransactionBasisStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashReceiptClient.TransactionBasisStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocCashReceiptClient.PaymentListTransactionBasisStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region MONEY_TRANSFER
+
+&AtClient
+Procedure PaymentListMoneyTransferOnChange(Item)
+	DocCashReceiptClient.PaymentListMoneyTransferOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListMoneyTransferStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashReceiptClient.PaymentListMoneyTransferStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 #EndRegion

@@ -788,7 +788,7 @@ Scenario: _0154074 check partner, legal name, company, store input by search in 
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "02" string
+		And I select from the drop-down list named "Store" by "03" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -809,7 +809,7 @@ Scenario: _0154075 check partner, legal name, company, store input by search in 
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "02" string
+		And I select from the drop-down list named "Store" by "03" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -841,8 +841,8 @@ Scenario: _0154077 check partner, legal name, company, store input by search in 
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "StoreSender" by "01" string
-		And I select from the drop-down list named "StoreReceiver" by "02" string
+		And I select from the drop-down list named "StoreSender" by "02" string
+		And I select from the drop-down list named "StoreReceiver" by "03" string
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "StoreSender" became equal to "Store 01"
@@ -858,8 +858,8 @@ Scenario: _0154078 check company, store input by search in line in a InventoryTr
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "StoreSender" by "01" string
-		And I select from the drop-down list named "StoreReceiver" by "02" string
+		And I select from the drop-down list named "StoreSender" by "02" string
+		And I select from the drop-down list named "StoreReceiver" by "03" string
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "StoreSender" became equal to "Store 01"
@@ -1249,7 +1249,7 @@ Scenario: _0154093 check store input by search in line in PhysicalInventory (in 
 	* Store input by search in line
 		And I select from "Store" drop-down list by "02" string
 	* Check filling in
-		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Store" became equal to "Store 01"
 		And I close all client application windows
 
 
@@ -1263,7 +1263,7 @@ Scenario: _0154094 check store, company, tabular part input by search in line in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "Main" string
 	* Check filling in
-		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Store" became equal to "Store 01"
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Profit loss center, expence type input by search in line
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1294,7 +1294,7 @@ Scenario: _0154095 check store, company, tabular part input by search in line in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "Main" string
 	* Check filling in
-		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Store" became equal to "Store 01"
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Profit loss center, expence type input by search in line
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1329,7 +1329,7 @@ Scenario: _0154096 check company, account, currency input by search in line in O
 		And I activate "Item key" field in "Inventory" table
 		And I select "L" from "Item key" drop-down list by string in "Inventory" table
 		And I activate "Store" field in "Inventory" table
-		And I select "01" from "Store" drop-down list by string in "Inventory" table
+		And I select "02" from "Store" drop-down list by string in "Inventory" table
 		And I activate "Quantity" field in "Inventory" table
 		And I input "2,000" text in "Quantity" field of "Inventory" table
 	* Filling the tabular part by searching the value by line Account balance
@@ -1507,7 +1507,7 @@ Scenario: _01540108 check item and item key input by search in line in a documen
 		And I select "boo" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
-		And I select "01" from "Store (requester)" drop-down list by string in "ItemList" table			
+		And I select "02" from "Store (requester)" drop-down list by string in "ItemList" table			
 	* Check entered values
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Store (requester)'| 'Unit'|
@@ -1811,13 +1811,13 @@ Scenario: _01540115 check item input by search in line by code in a document Pur
 		And I select "4" from "Item" drop-down list by string in "ItemList" table
 		And I select "15" from "Item key" drop-down list by string in "ItemList" table
 		And "ItemList" table became equal
-			| '#' | 'Partner item' | 'Cancel' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Reservation date' | 'Revenue type' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type' | 'Sales person' |
-			| '1' | ''             | 'No'     | '37/18SD'  | ''                   | '1,000'    | 'pcs'  | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''                 | ''             | ''       | ''              | ''              | 'Boots' | 'Price USD'  | ''             |
+			| '#' | 'Partner item' | 'Cancel' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type'         |
+			| '1' | ''             | 'No'     | '37/18SD'  | ''                   | '1,000'    | 'pcs'  | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''       | ''              | ''              | 'Boots' | 'Vendor price, USD'  |
 	* Unit
 		And I select "7" from "Unit" drop-down list by string in "ItemList" table	
 		And "ItemList" table became equal
-			| '#' | 'Partner item' | 'Cancel' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit'           | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Reservation date' | 'Revenue type' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type' | 'Sales person' |
-			| '1' | ''             | 'No'     | '37/18SD'  | ''                   | '1,000'    | 'Boots (12 pcs)' | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''                 | ''             | ''       | ''              | ''              | 'Boots' | 'Price USD'  | ''             |
+			| '#' | 'Partner item' | 'Cancel' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit'           | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type'         |
+			| '1' | ''             | 'No'     | '37/18SD'  | ''                   | '1,000'    | 'Boots (12 pcs)' | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''       | ''              | ''              | 'Boots' | 'Vendor price, USD'  |
 	* Price type
 		And I select "4" from "Price type" drop-down list by string in "ItemList" table			
 		And "ItemList" table contains lines

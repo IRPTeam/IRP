@@ -446,28 +446,7 @@ Function ChangeCashAccountByCompanyOptions() Export
 EndFunction
 
 Function ChangeCashAccountByCompanyExecute(Options) Export
-	Filters = New Array();
-	Filters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False, 
-		ComparisonType.Equal, DataCompositionComparisonType.Equal));
-		
-	If ValueIsFilled(Options.AccountType) Then
-		Filters.Add(DocumentsClientServer.CreateFilterItem("Type", Options.AccountType,
-			ComparisonType.Equal, DataCompositionComparisonType.Equal));
-	Else
-		Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Transit"), 
-			ComparisonType.NotEqual, DataCompositionComparisonType.NotEqual));
-	EndIf;
-
-	ComplexFilters = New Array();
-	ComplexFilters.Add(DocumentsClientServer.CreateFilterItem("ByCompanyWithEmpty", Options.Company));
-
-	ChoiceParameters = New Structure();
-	ChoiceParameters.Insert("Filters"        , Filters);
-	ChoiceParameters.Insert("ComplexFilters" , ComplexFilters);
-	ChoiceParameters.Insert("Fields"         , New Structure("Ref", "Ref"));
-	ChoiceParameters.Insert("OptionsString"  , "");
-	ChoiceParameters.Insert("CashAccount"    , Options.Account);
-	CashAccount = CatCashAccountsServer.GetCashAccountByCompany(Options.Company, ChoiceParameters);
+	CashAccount = DocumentsServer.GetCashAccountByCompany(Options.Company, Options.Account, Options.AccountType);
 	Return CashAccount;
 EndFunction
 

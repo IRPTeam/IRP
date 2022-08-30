@@ -68,6 +68,7 @@ Scenario: _0154000 preparation
 		When Create catalog Workstations objects  (Test)
 		When Create catalog ItemSegments objects
 		When Create catalog PaymentTypes objects
+		When Create catalog CancelReturnReasons objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -552,7 +553,7 @@ Scenario: _0154066 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string			
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -595,7 +596,7 @@ Scenario: _0154067 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -618,7 +619,7 @@ Scenario: _0154068 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -641,7 +642,7 @@ Scenario: _0154069 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -664,7 +665,7 @@ Scenario: _0154070 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -703,7 +704,7 @@ Scenario: _0154071 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -742,7 +743,7 @@ Scenario: _0154072 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -765,7 +766,7 @@ Scenario: _0154073 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -787,7 +788,7 @@ Scenario: _0154074 check partner, legal name, company, store input by search in 
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "02" string
+		And I select from the drop-down list named "Store" by "03" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -808,7 +809,7 @@ Scenario: _0154075 check partner, legal name, company, store input by search in 
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "02" string
+		And I select from the drop-down list named "Store" by "03" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -824,7 +825,7 @@ Scenario: _0154076 check company, store input by search in line in a document In
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
@@ -840,8 +841,8 @@ Scenario: _0154077 check partner, legal name, company, store input by search in 
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "StoreSender" by "01" string
-		And I select from the drop-down list named "StoreReceiver" by "02" string
+		And I select from the drop-down list named "StoreSender" by "02" string
+		And I select from the drop-down list named "StoreReceiver" by "03" string
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "StoreSender" became equal to "Store 01"
@@ -857,8 +858,8 @@ Scenario: _0154078 check company, store input by search in line in a InventoryTr
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "StoreSender" by "01" string
-		And I select from the drop-down list named "StoreReceiver" by "02" string
+		And I select from the drop-down list named "StoreSender" by "02" string
+		And I select from the drop-down list named "StoreReceiver" by "03" string
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "StoreSender" became equal to "Store 01"
@@ -895,7 +896,7 @@ Scenario: _0154080 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -913,7 +914,7 @@ Scenario: _0154081 check company, store, item bundle input by search in line in 
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Input by string Item bundle
 		And I select from the drop-down list named "ItemBundle" by "Trousers" string
 	* Check entered values
@@ -930,7 +931,7 @@ Scenario: _0154082 check company, store, item box input by search in line in a U
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Item bundle input by search in line
 		And I select from "Item bundle" drop-down list by "Trousers" string
 	* Check entered values
@@ -1248,7 +1249,7 @@ Scenario: _0154093 check store input by search in line in PhysicalInventory (in 
 	* Store input by search in line
 		And I select from "Store" drop-down list by "02" string
 	* Check filling in
-		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Store" became equal to "Store 01"
 		And I close all client application windows
 
 
@@ -1262,7 +1263,7 @@ Scenario: _0154094 check store, company, tabular part input by search in line in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "Main" string
 	* Check filling in
-		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Store" became equal to "Store 01"
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Profit loss center, expence type input by search in line
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1293,7 +1294,7 @@ Scenario: _0154095 check store, company, tabular part input by search in line in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "Main" string
 	* Check filling in
-		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Store" became equal to "Store 01"
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Profit loss center, expence type input by search in line
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1328,7 +1329,7 @@ Scenario: _0154096 check company, account, currency input by search in line in O
 		And I activate "Item key" field in "Inventory" table
 		And I select "L" from "Item key" drop-down list by string in "Inventory" table
 		And I activate "Store" field in "Inventory" table
-		And I select "01" from "Store" drop-down list by string in "Inventory" table
+		And I select "02" from "Store" drop-down list by string in "Inventory" table
 		And I activate "Quantity" field in "Inventory" table
 		And I input "2,000" text in "Quantity" field of "Inventory" table
 	* Filling the tabular part by searching the value by line Account balance
@@ -1474,7 +1475,7 @@ Scenario: _01540106 check partner, legal name, Partner term, company and store i
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1490,7 +1491,7 @@ Scenario: _01540107 company, store input by search in line in a document Planned
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string		
+		And I select from the drop-down list named "Store" by "re 01" string		
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
@@ -1506,7 +1507,7 @@ Scenario: _01540108 check item and item key input by search in line in a documen
 		And I select "boo" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
-		And I select "01" from "Store (requester)" drop-down list by string in "ItemList" table			
+		And I select "02" from "Store (requester)" drop-down list by string in "ItemList" table			
 	* Check entered values
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  | 'Store (requester)'| 'Unit'|
@@ -1535,7 +1536,7 @@ Scenario: _01540109 check partner, legal name, Partner term, company and store i
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1582,7 +1583,7 @@ Scenario: _01540111 check partner, legal name, Partner term, company and store i
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1637,7 +1638,37 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 	* Open a creation form Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
-	* Check entered values
+	* Partner
+		And I select from the drop-down list named "Partner" by "1" string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by " 1" string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by "1." string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by "1.," string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+	* Legal name
+		And I select from "Legal name" drop-down list by "2" string
+		Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
+	* Partner term
+		And I select from "Partner term" drop-down list by "9" string
+		Then the form attribute named "Agreement" became equal to "Ferron, USD"
+	* Company
+		And I select from "Company" drop-down list by "3" string
+		Then the form attribute named "Company" became equal to "Second Company"
+	* Store
+		And I select from the drop-down list named "Store" by "2" string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by " 2" string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by "2." string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by "2.," string
+		Then the form attribute named "Store" became equal to "Store 01"
+	* Branch
+		And I select from the drop-down list named "Branch" by "3" string
+		Then the form attribute named "Branch" became equal to "Distribution department"	
+	* Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "1 111 111., " text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
@@ -1646,7 +1677,164 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 		And "ItemList" table contains lines
 		| 'Item'     |
 		| 'Jacket J22001'    |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+	* Item key
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "4" from "Item" drop-down list by string in "ItemList" table
+		And I select "15" from "Item key" drop-down list by string in "ItemList" table
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Cancel' | 'Procurement method' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Reservation date' | 'Revenue type' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type' | 'Sales person' |
+			| '1' | ''             | 'No'     | 'Stock'              | '37/18SD'  | ''                   | '1,000'    | 'pcs'  | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''                 | ''             | ''       | ''              | ''              | 'Boots' | 'Price USD'  | ''             |
+	* Unit
+		And I select "7" from "Unit" drop-down list by string in "ItemList" table	
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Cancel' | 'Procurement method' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit'           | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Reservation date' | 'Revenue type' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type' | 'Sales person' |
+			| '1' | ''             | 'No'     | 'Stock'              | '37/18SD'  | ''                   | '1,000'    | 'Boots (12 pcs)' | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''                 | ''             | ''       | ''              | ''              | 'Boots' | 'Price USD'  | ''             |
+	* Revenue type
+		And I select "8" from "Revenue type" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Revenue type' |
+			| 'Revenue'      |
+	* Price type
+		And I select "4" from "Price type" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Price type'        |
+			| 'Basic Price Types' |
+	* Profit loss center
+		And I select "4" from "Profit loss center" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Profit loss center'   |
+			| 'Logistics department' |
+	* Cancel reason
+		And I select "2" from "Cancel reason" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Cancel reason' |
+			| 'rejects'       |
+	* Sales person
+		And I select "5" from "Sales person" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Sales person'    |
+			| 'Alexander Orlov' |
 		And I close all client application windows
+
+Scenario: _01540114 check item input by search in line by code in a document Bank payment
+	And I close all client application windows
+	* Open a creation form Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+	* Company
+		And I select from "Company" drop-down list by "4" string
+		Then the form attribute named "Company" became equal to "Main Company"
+	* Account
+		And I select from "Account" drop-down list by "5" string
+		Then the form attribute named "Account" became equal to "Bank account, USD"
+	* Partner
+		And in the table "PaymentList" I click the button named "PaymentListAdd"		
+		And I select "1" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner'   |
+			| 'Ferron BP' |
+	* Payee
+		And I select "5" from "Payee" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Payee'             |
+			| 'Company Ferron BP' |
+	* Partner term
+		And I select "3" from "Partner term" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner term'                     |
+			| 'Basic Partner terms, without VAT' |
+	* Financial movement type
+		And I select "10" from "Financial movement type" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Financial movement type' |
+			| 'Movement type 1'         |
+	* Expense type
+		And I select "9" from "Expense type" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Expense type' |
+			| 'Expense'      |
+	* Branch
+		And I select from the drop-down list named "Branch" by "3" string
+		Then the form attribute named "Branch" became equal to "Distribution department"
+	And I close all client application windows
+		
+				
+
+Scenario: _01540115 check item input by search in line by code in a document Purchase order
+	And I close all client application windows
+	* Open a creation form Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+	* Partner
+		And I select from the drop-down list named "Partner" by "1" string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by " 1" string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by "1." string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by "1.," string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+	* Legal name
+		And I select from "Legal name" drop-down list by "2" string
+		Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
+	* Partner term
+		And I select from "Partner term" drop-down list by "6" string
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
+	* Company
+		And I select from "Company" drop-down list by "3" string
+		Then the form attribute named "Company" became equal to "Second Company"
+	* Store
+		And I select from the drop-down list named "Store" by "2" string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by " 2" string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by "2." string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by "2.," string
+		Then the form attribute named "Store" became equal to "Store 01"
+	* Branch
+		And I select from the drop-down list named "Branch" by "3" string
+		Then the form attribute named "Branch" became equal to "Distribution department"	
+	* Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I input "1 111 111., " text in "Item" field of "ItemList" table		
+		And drop-down list "Item" is equal to:
+		| [1 111 111] Jacket J22001 |
+		And I select "[1 111 111] Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+	* Item key
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "4" from "Item" drop-down list by string in "ItemList" table
+		And I select "15" from "Item key" drop-down list by string in "ItemList" table
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Cancel' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type'         |
+			| '1' | ''             | 'No'     | '37/18SD'  | ''                   | '1,000'    | 'pcs'  | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''       | ''              | ''              | 'Boots' | 'Vendor price, USD'  |
+	* Unit
+		And I select "7" from "Unit" drop-down list by string in "ItemList" table	
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Cancel' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit'           | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type'         |
+			| '1' | ''             | 'No'     | '37/18SD'  | ''                   | '1,000'    | 'Boots (12 pcs)' | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''       | ''              | ''              | 'Boots' | 'Vendor price, USD'  |
+	* Price type
+		And I select "4" from "Price type" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Price type'        |
+			| 'Basic Price Types' |
+	* Profit loss center
+		And I select "4" from "Profit loss center" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Profit loss center'   |
+			| 'Logistics department' |
+	* Cancel reason
+		And I select "2" from "Cancel reason" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Cancel reason' |
+			| 'rejects'       |
+		And I close all client application windows		
+				
 
 Scenario: _0154091 check company, account, currency input by search in line in ChequeBondTransaction (in english)
 	And I close all client application windows

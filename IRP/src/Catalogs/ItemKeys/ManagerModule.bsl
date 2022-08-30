@@ -1,83 +1,41 @@
+
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
-	StandardProcessing = False;
-	If Not Parameters.Filter.Property("Item") Then
-		ChoiceData = New ValueList();
+	If TypeOf(Parameters) <> Type("Structure") Or Not ValueIsFilled(Parameters.SearchString) Then
 		Return;
 	EndIf;
 
-	ChoiceData = New ValueList();
-	ChoiceData.LoadValues(GetRefsBySearchString(Parameters.Filter.Item, Parameters.SearchString));
+	StandardProcessing = False;
+	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
+	QueryTable = GetChoiceDataTable(Parameters);
+	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);		
 EndProcedure
 
-Function GetRefsBySearchString(Item, SearchString) Export
-	Query = New Query();
-	Query.Text =
-	"SELECT ALLOWED
-	|	ItemKeys.Ref AS Ref,
-	|	REFPRESENTATION(ItemKeys.Ref) AS Presentation
-	|FROM
-	|	Catalog.ItemKeys AS ItemKeys
-	|WHERE
-	|	ItemKeys.Item = &Item";
+Function GetChoiceDataTable(Parameters)
+	Filter = "";
+	Settings = New Structure();
+	Settings.Insert("MetadataObject", Metadata.Catalogs.ItemKeys);
+	Settings.Insert("Filter", Filter);
+	// enable search by code
+	Settings.Insert("UseSearchByCode", True);
+	
+	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+	QueryBuilder = New QueryBuilder(QueryBuilderText);
+	QueryBuilder.FillSettings();
+	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
+	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters);
+	
+	Query = QueryBuilder.GetQuery();
 
-	Query.SetParameter("Item", Item);
-	TmpTable = Query.Execute().Unload();
+	Query.SetParameter("SearchString", Parameters.SearchString);
+	For Each Filter in Parameters.Filter Do
+		Query.SetParameter(Filter.Key, Filter.Value);
+	EndDo;
+	
+	// parameters search by code
+	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
+	Query.SetParameter("SearchStringNumber", SearchStringNumber);
 
-	Query = New Query();
-	Query.Text =
-	"SELECT TOP 10
-	|	ItemKeys.Ref AS Ref,
-	|	CAST(ItemKeys.Presentation AS String(200)) AS Presentation,
-	|	0 AS Sort
-	|INTO VT
-	|FROM
-	|	&TmpTable AS ItemKeys
-	|WHERE
-	|	ItemKeys.Presentation LIKE &SearchString + ""%""
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT TOP 10
-	|	ItemKeys.Ref AS Ref,
-	|	CAST(ItemKeys.Presentation AS String(200)) AS Presentation,
-	|	1 AS Sort
-	|INTO VTFull
-	|FROM
-	|	&TmpTable AS ItemKeys
-	|WHERE
-	|	ItemKeys.Presentation LIKE ""%"" + &SearchString + ""%""
-	|	AND NOT ItemKeys.Ref IN
-	|				(SELECT
-	|					T.Ref
-	|				FROM
-	|					VT AS T)
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	VT.Ref AS Ref,
-	|	VT.Presentation AS Presentation,
-	|	VT.Sort AS Sort
-	|FROM
-	|	VT AS VT
-	|
-	|UNION
-	|
-	|SELECT
-	|	VTFull.Ref,
-	|	VTFull.Presentation,
-	|	VTFull.Sort
-	|FROM
-	|	VTFull AS VTFull
-	|
-	|ORDER BY
-	|	Sort,
-	|	Presentation";
-
-	Query.SetParameter("TmpTable", TmpTable);
-	Query.SetParameter("SearchString", SearchString);
-	Return Query.Execute().Unload().UnloadColumn("Ref");
-
+	Return Query.Execute().Unload();	
 EndFunction
 
 Function GetRefsByProperties(TableOfProperties, Item, AddInfo = Undefined) Export
@@ -159,47 +117,50 @@ Function GetRefsByPropertiesWithSpecifications(TableOfProperties, Item, AddInfo 
 EndFunction
 
 Function GetRefsByOnePropertyWithSpecifications(ArrayOfFoundedItemKeys, Item, Attribute, Value)
-	Query = New Query("SELECT
-					  |	Table.Ref,
-					  |	Table.Specification,
-					  |	CASE
-					  |		WHEN Table.Specification = VALUE(Catalog.Specifications.EmptyRef)
-					  |			THEN FALSE
-					  |		ELSE TRUE
-					  |	END AS IsSpecification
-					  |INTO tItemKeys
-					  |FROM
-					  |	Catalog.ItemKeys AS Table
-					  |WHERE
-					  |	&Item = Table.Item
-					  |	AND CASE
-					  |		WHEN &FilterByResults
-					  |			THEN Table.Ref IN (&ArrayOfResults)
-					  |		ELSE TRUE
-					  |	END
-					  |;
-					  |////////////////////////////////////////////////////////////////////////////////
-					  |SELECT
-					  |	tItemKeys.Ref
-					  |FROM
-					  |	tItemKeys AS tItemKeys
-					  |		INNER JOIN Catalog.ItemKeys.AddAttributes AS ItemKeysAddAttributes
-					  |		ON tItemKeys.Ref = ItemKeysAddAttributes.Ref
-					  |			AND NOT tItemKeys.IsSpecification
-					  |			AND &Attribute = ItemKeysAddAttributes.Property
-					  |			AND &Value = ItemKeysAddAttributes.Value
-					  |
-					  |UNION
-					  |
-					  |SELECT
-					  |	tItemKeys.Ref
-					  |FROM
-					  |	tItemKeys AS tItemKeys
-					  |		INNER JOIN Catalog.Specifications.DataSet AS SpecificationsDataSet
-					  |		ON tItemKeys.Specification = SpecificationsDataSet.Ref
-					  |			AND tItemKeys.IsSpecification
-					  |			AND &Attribute = SpecificationsDataSet.Attribute
-					  |			AND &Value = SpecificationsDataSet.Value");
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Table.Ref,
+	|	Table.Specification,
+	|	CASE
+	|		WHEN Table.Specification = VALUE(Catalog.Specifications.EmptyRef)
+	|			THEN FALSE
+	|		ELSE TRUE
+	|	END AS IsSpecification
+	|INTO tItemKeys
+	|FROM
+	|	Catalog.ItemKeys AS Table
+	|WHERE
+	|	&Item = Table.Item
+	|	AND CASE
+	|		WHEN &FilterByResults
+	|			THEN Table.Ref IN (&ArrayOfResults)
+	|		ELSE TRUE
+	|	END
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tItemKeys.Ref
+	|FROM
+	|	tItemKeys AS tItemKeys
+	|		INNER JOIN Catalog.ItemKeys.AddAttributes AS ItemKeysAddAttributes
+	|		ON tItemKeys.Ref = ItemKeysAddAttributes.Ref
+	|		AND NOT tItemKeys.IsSpecification
+	|		AND &Attribute = ItemKeysAddAttributes.Property
+	|		AND &Value = ItemKeysAddAttributes.Value
+	|
+	|UNION
+	|
+	|SELECT
+	|	tItemKeys.Ref
+	|FROM
+	|	tItemKeys AS tItemKeys
+	|		INNER JOIN Catalog.Specifications.DataSet AS SpecificationsDataSet
+	|		ON tItemKeys.Specification = SpecificationsDataSet.Ref
+	|		AND tItemKeys.IsSpecification
+	|		AND &Attribute = SpecificationsDataSet.Attribute
+	|		AND &Value = SpecificationsDataSet.Value";
 
 	Query.SetParameter("Attribute", Attribute);
 	Query.SetParameter("Value", Value);
@@ -211,13 +172,15 @@ Function GetRefsByOnePropertyWithSpecifications(ArrayOfFoundedItemKeys, Item, At
 EndFunction
 
 Function GetUniqueItemKeyByItem(Item) Export
-	Query = New Query("SELECT TOP 2
-					  |	Table.Ref
-					  |FROM
-					  |	Catalog.ItemKeys AS Table
-					  |WHERE
-					  |	&Item = Table.Item
-					  |	AND NOT Table.DeletionMark");
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 2
+	|	Table.Ref
+	|FROM
+	|	Catalog.ItemKeys AS Table
+	|WHERE
+	|	&Item = Table.Item
+	|	AND NOT Table.DeletionMark";
 	Query.SetParameter("Item", Item);
 
 	Selection = Query.Execute().Select();

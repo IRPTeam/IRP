@@ -1,35 +1,44 @@
-Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
-	StandardProcessing = False;
 
-	FilterItem = Undefined;
-	If Not Parameters.Filter.Property("Item", FilterItem) Then
-		If Not Parameters.Filter.Property("ItemKey") Then
-			ChoiceData = New ValueList();
-			Return;
-		Else
-			FilterItem = ?(TypeOf(Parameters.Filter.ItemKey) = Type("CatalogRef.ItemKeys"),
-				Parameters.Filter.ItemKey.Item, Undefined);
-		EndIf;
+Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
+	If TypeOf(Parameters) <> Type("Structure") Or Not ValueIsFilled(Parameters.SearchString) Then
+		Return;
 	EndIf;
 
+	StandardProcessing = False;
+	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
+	QueryTable = GetChoiceDataTable(Parameters);
+	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
+EndProcedure
+
+Function GetChoiceDataTable(Parameters)
 	Filter = "
 			 |	AND (Table.Item = &Item
 			 |	OR Table.Item = VALUE(Catalog.Items.EmptyRef))
 			 |";
-
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.Units);
 	Settings.Insert("Filter", Filter);
-
+	// enable search by code
+	Settings.Insert("UseSearchByCode", True);
+	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+	QueryBuilder = New QueryBuilder(QueryBuilderText);
+	QueryBuilder.FillSettings();
+	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
+	
+	Query = QueryBuilder.GetQuery();
 
-	Query = New Query(QueryBuilderText);
-	Query.SetParameter("Item", FilterItem);
-	Query.SetParameter("SearchString", "%" + Parameters.SearchString + "%");
+	Query.SetParameter("SearchString", Parameters.SearchString);
+	For Each Filter in Parameters.Filter Do
+		Query.SetParameter(Filter.Key, Filter.Value);
+	EndDo;
+	
+	// parameters search by code
+	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
+	Query.SetParameter("SearchStringNumber", SearchStringNumber);
 
-	ChoiceData = New ValueList();
-	ChoiceData.LoadValues(Query.Execute().Unload().UnloadColumn("Ref"));
-EndProcedure
+	Return Query.Execute().Unload();	
+EndFunction
 
 Function GetUnitFactor(FromUnit, ToUnit = Undefined) Export
 	If FromUnit = ToUnit Then

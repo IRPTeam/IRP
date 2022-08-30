@@ -60,6 +60,8 @@ Function SalesOrderPrint(Ref)
 	AreaFooter			= Template.GetArea("Footer");
 
 	Spreadsheet = New SpreadsheetDocument;
+	Spreadsheet.LanguageCode = SessionParameters.CurrentUser.LocalizationCode;
+		
 	While SelectionHeader.Next() Do
         AreaCaption.Parameters.Fill(SelectionHeader);
 		Spreadsheet.Put(AreaCaption);

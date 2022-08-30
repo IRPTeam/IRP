@@ -76,9 +76,18 @@ Procedure PrintFormConfigOnActivateRow(Item)
 		CodeLang = Item.CurrentData.LayoutLang;
 		if ValueIsFilled(CodeLang) Then
 			NameLang = UniversalPrintServer.LanguageNameByCode(CodeLang);
-			//Items.LayoutLang.
+			LayoutLang = Item.CurrentData.LayoutLang;
 		EndIf; 
 	EndIf;	
+EndProcedure
+
+&AtClient
+Procedure LayoutLangOnChange(Item)
+	CurrentData = Items.PrintFormConfig.CurrentData;
+	if CurrentData <> Undefined And CurrentData.LayoutLang <> LayoutLang Then
+		Result.LanguageCode = LayoutLang;
+		CurrentData.LayoutLang = LayoutLang			
+	EndIf;
 EndProcedure
 
 // Set result.
@@ -127,7 +136,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		If It.Name = "HASH" Then
 			Continue;			
 		EndIf; 
-		Items.LayoutLang.ChoiceList.Add(It.Name);				
+		Items.LayoutLang.ChoiceList.Add(It.LanguageCode, It.Name);				
 	EndDo; 
 	
 EndProcedure

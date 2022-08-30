@@ -15,6 +15,10 @@
     <dataPath xsi:type="form:DataPath">
       <segments>LayoutLang</segments>
     </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>LayoutLangOnChange</name>
+    </handlers>
     <extendedTooltip>
       <name>LayoutLangExtendedTooltip</name>
       <id>186</id>

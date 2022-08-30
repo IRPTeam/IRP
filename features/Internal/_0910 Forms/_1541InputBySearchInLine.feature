@@ -553,7 +553,7 @@ Scenario: _0154066 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string			
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -596,7 +596,7 @@ Scenario: _0154067 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -619,7 +619,7 @@ Scenario: _0154068 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -642,7 +642,7 @@ Scenario: _0154069 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -665,7 +665,7 @@ Scenario: _0154070 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -704,7 +704,7 @@ Scenario: _0154071 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -743,7 +743,7 @@ Scenario: _0154072 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -766,7 +766,7 @@ Scenario: _0154073 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -825,7 +825,7 @@ Scenario: _0154076 check company, store input by search in line in a document In
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
@@ -896,7 +896,7 @@ Scenario: _0154080 check partner, legal name, Partner term, company and store in
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -914,7 +914,7 @@ Scenario: _0154081 check company, store, item bundle input by search in line in 
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Input by string Item bundle
 		And I select from the drop-down list named "ItemBundle" by "Trousers" string
 	* Check entered values
@@ -931,7 +931,7 @@ Scenario: _0154082 check company, store, item box input by search in line in a U
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Item bundle input by search in line
 		And I select from "Item bundle" drop-down list by "Trousers" string
 	* Check entered values
@@ -1475,7 +1475,7 @@ Scenario: _01540106 check partner, legal name, Partner term, company and store i
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1491,7 +1491,7 @@ Scenario: _01540107 company, store input by search in line in a document Planned
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string		
+		And I select from the drop-down list named "Store" by "re 01" string		
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
@@ -1536,7 +1536,7 @@ Scenario: _01540109 check partner, legal name, Partner term, company and store i
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1583,7 +1583,7 @@ Scenario: _01540111 check partner, legal name, Partner term, company and store i
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Store input by search in line
-		And I select from the drop-down list named "Store" by "01" string
+		And I select from the drop-down list named "Store" by "re 01" string
 	* Check entered values
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"

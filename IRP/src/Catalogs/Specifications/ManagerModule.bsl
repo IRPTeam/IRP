@@ -8,29 +8,6 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
-	
-// for remove	
-//	StandardProcessing = False;
-//	If Not Parameters.Filter.Property("CustomFilterByItem") Then
-//		ChoiceData = New ValueList();
-//		Return;
-//	EndIf;
-//
-//	Filter = "
-//			 |	AND Specifications.Ref IN (&ArrayOfRef)
-//			 |";
-//
-//	Settings = New Structure();
-//	Settings.Insert("MetadataObject", Metadata.Catalogs.Specifications);
-//	Settings.Insert("Filter", Filter);
-//
-//	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
-//	Query = New Query(QueryBuilderText);
-//	Query.SetParameter("ArrayOfRef", GetAvailableSpecificationsByItem(Parameters.Filter.CustomFilterByItem));
-//	Query.SetParameter("SearchString", Parameters.SearchString);
-//
-//	ChoiceData = New ValueList();
-//	ChoiceData.LoadValues(Query.Execute().Unload().UnloadColumn("Ref"));
 EndProcedure
 
 Function GetChoiceDataTable(Parameters) Export

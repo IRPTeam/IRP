@@ -96,7 +96,6 @@ Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
 		OpeningSettings.ArrayOfFilters.Add(Filter);
 	EndDo;
 	
-	// ????
 	If FillingValues <> Undefined Then
 		OpeningSettings.FormParameters.Insert("FillingData", FillingValues);
 	EndIf;

@@ -27,6 +27,8 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", MetadataObject);
 	Settings.Insert("Filter", "");
+	// enable search by code for all
+	Settings.Insert("UseSearchByCode", True);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 
@@ -51,27 +53,19 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		NewFilter.ComparisonType = ComparisonType.NotEqual;
 		NewFilter.Value = True;
 	EndIf;
-
-	For Each Filter In Parameters.Filter Do
-		FilterKey = Filter.Key; // String
-		If Upper(FilterKey) = Upper("CustomSearchFilter") Then
-			ArrayOfFilters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.CustomSearchFilter); // Array of see NewCustomSearchFilter
-			For Each FilterRow In ArrayOfFilters Do
-				NewFilter = QueryBuilder.Filter.Add("Ref." + FilterRow.FieldName);
-				NewFilter.Use = True;
-				NewFilter.ComparisonType = FilterRow.ComparisonType;
-				NewFilter.Value = FilterRow.Value;
-			EndDo;
-		Else
-			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.Key);
-			NewFilter.Use = True;
-			NewFilter.ComparisonType = ComparisonType.Equal;
-			NewFilter.Value = Filter.Value;
-		EndIf;
-	EndDo;
+	
+	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
+	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters);
+			
 	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
 
 	Query = QueryBuilder.GetQuery();
+	For Each Filter in Parameters.Filter Do
+		If Upper(Filter.Key) = Upper("CustomSearchFilter") Then
+			Continue;
+		EndIf;
+		Query.SetParameter(Filter.Key, Filter.Value);
+	EndDo;
 	Query.SetParameter("SearchStringNumber", SearchStringNumber);
 	Query.SetParameter("SearchString", Parameters.SearchString);
 	QueryResult = Query.Execute();

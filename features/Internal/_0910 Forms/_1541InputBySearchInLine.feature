@@ -1641,6 +1641,12 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 	* Partner
 		And I select from the drop-down list named "Partner" by "1" string
 		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by " 1" string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by "1." string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by "1.," string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
 	* Legal name
 		And I select from "Legal name" drop-down list by "2" string
 		Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
@@ -1649,7 +1655,19 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 		Then the form attribute named "Agreement" became equal to "Ferron, USD"
 	* Company
 		And I select from "Company" drop-down list by "3" string
-		Then the form attribute named "Company" became equal to "Second Company"		
+		Then the form attribute named "Company" became equal to "Second Company"
+	* Store
+		And I select from the drop-down list named "Store" by "2" string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by " 2" string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by "2." string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by "2.," string
+		Then the form attribute named "Store" became equal to "Store 01"
+	* Branch
+		And I select from the drop-down list named "Branch" by "3" string
+		Then the form attribute named "Branch" became equal to "Distribution department"	
 	* Item
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "1 111 111., " text in "Item" field of "ItemList" table		
@@ -1677,12 +1695,26 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 		And "ItemList" table contains lines
 			| 'Revenue type' |
 			| 'Revenue'      |
-	* Branch
 	* Price type
-	* Store
+		And I select "4" from "Price type" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Price type'        |
+			| 'Basic Price Types' |
 	* Profit loss center
+		And I select "4" from "Profit loss center" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Profit loss center'   |
+			| 'Logistics department' |
 	* Cancel reason
+		And I select "2" from "Cancel reason" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Cancel reason' |
+			| 'rejects'       |
 	* Sales person
+		And I select "5" from "Sales person" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Sales person'    |
+			| 'Alexander Orlov' |
 		And I close all client application windows
 
 Scenario: _01540114 check item input by search in line by code in a document Bank payment
@@ -1723,10 +1755,85 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 			| 'Expense type' |
 			| 'Expense'      |
 	* Branch
-		And I close all client application windows
+		And I select from the drop-down list named "Branch" by "3" string
+		Then the form attribute named "Branch" became equal to "Distribution department"
+	And I close all client application windows
 		
 				
-		
+
+Scenario: _01540115 check item input by search in line by code in a document Purchase order
+	And I close all client application windows
+	* Open a creation form Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+	* Partner
+		And I select from the drop-down list named "Partner" by "1" string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by " 1" string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by "1." string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		And I select from the drop-down list named "Partner" by "1.," string
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+	* Legal name
+		And I select from "Legal name" drop-down list by "2" string
+		Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
+	* Partner term
+		And I select from "Partner term" drop-down list by "6" string
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
+	* Company
+		And I select from "Company" drop-down list by "3" string
+		Then the form attribute named "Company" became equal to "Second Company"
+	* Store
+		And I select from the drop-down list named "Store" by "2" string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by " 2" string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by "2." string
+		Then the form attribute named "Store" became equal to "Store 01"
+		And I select from the drop-down list named "Store" by "2.," string
+		Then the form attribute named "Store" became equal to "Store 01"
+	* Branch
+		And I select from the drop-down list named "Branch" by "3" string
+		Then the form attribute named "Branch" became equal to "Distribution department"	
+	* Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I input "1 111 111., " text in "Item" field of "ItemList" table		
+		And drop-down list "Item" is equal to:
+		| [1 111 111] Jacket J22001 |
+		And I select "[1 111 111] Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+	* Item key
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "4" from "Item" drop-down list by string in "ItemList" table
+		And I select "15" from "Item key" drop-down list by string in "ItemList" table
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Cancel' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Reservation date' | 'Revenue type' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type' | 'Sales person' |
+			| '1' | ''             | 'No'     | '37/18SD'  | ''                   | '1,000'    | 'pcs'  | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''                 | ''             | ''       | ''              | ''              | 'Boots' | 'Price USD'  | ''             |
+	* Unit
+		And I select "7" from "Unit" drop-down list by string in "ItemList" table	
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Cancel' | 'Item key' | 'Profit loss center' | 'Quantity' | 'Unit'           | 'Dont calculate row' | 'Price' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store' | 'Reservation date' | 'Revenue type' | 'Detail' | 'Delivery date' | 'Cancel reason' | 'Item'  | 'Price type' | 'Sales person' |
+			| '1' | ''             | 'No'     | '37/18SD'  | ''                   | '1,000'    | 'Boots (12 pcs)' | 'No'                 | ''      | ''              | ''           | ''             | ''      | ''                 | ''             | ''       | ''              | ''              | 'Boots' | 'Price USD'  | ''             |
+	* Price type
+		And I select "4" from "Price type" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Price type'        |
+			| 'Basic Price Types' |
+	* Profit loss center
+		And I select "4" from "Profit loss center" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Profit loss center'   |
+			| 'Logistics department' |
+	* Cancel reason
+		And I select "2" from "Cancel reason" drop-down list by string in "ItemList" table			
+		And "ItemList" table contains lines
+			| 'Cancel reason' |
+			| 'rejects'       |
+		And I close all client application windows		
 				
 
 Scenario: _0154091 check company, account, currency input by search in line in ChequeBondTransaction (in english)

@@ -81,7 +81,7 @@ Scenario: _045300 preparation (Cash transfer order)
 		And I execute 1C:Enterprise script at server
 			| "Documents.MoneyTransfer.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.MoneyTransfer.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.MoneyTransfer.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
 		
 		
 		

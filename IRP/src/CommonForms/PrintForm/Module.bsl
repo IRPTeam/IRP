@@ -60,7 +60,7 @@ Procedure FillPrintFormConfig(Parameter)
 			//@skip-check property-return-type
 			NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;
 		EndIf;
-		
+		NewStr.LayoutLang = Parameter.ModelLayout;
 		NewStr.NameTemplate = NameTemplate;
 		NewStr.Template = UniversalPrintServer.GetSynonymTemplate(RefDoc, NameTemplate);
 		NewStr.Ref = Parameter.RefDocument;
@@ -72,7 +72,12 @@ Procedure PrintFormConfigOnActivateRow(Item)
 	if Item.CurrentData <> Undefined Then
 		//@skip-check invocation-parameter-type-intersect
 		//@skip-check property-return-type
-		SetResult(Item.CurrentData.SpreadsheetDoc); 
+		SetResult(Item.CurrentData.SpreadsheetDoc);
+		CodeLang = Item.CurrentData.LayoutLang;
+		if ValueIsFilled(CodeLang) Then
+			NameLang = UniversalPrintServer.LanguageNameByCode(CodeLang);
+			//Items.LayoutLang.
+		EndIf; 
 	EndIf;	
 EndProcedure
 
@@ -116,6 +121,15 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	//@skip-check property-return-type
 	Result = Parameters.Result;
+	
+	Items.LayoutLang.ChoiceList.Clear();
+	For Each It In Metadata.Languages Do
+		If It.Name = "HASH" Then
+			Continue;			
+		EndIf; 
+		Items.LayoutLang.ChoiceList.Add(It.Name);				
+	EndDo; 
+	
 EndProcedure
 
 

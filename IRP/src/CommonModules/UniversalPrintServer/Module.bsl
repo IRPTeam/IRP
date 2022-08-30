@@ -15,7 +15,7 @@
 // * BuilderLayout - Boolean -
 // * ModelData - String -
 // * ModelLayout - String -
-Function InitPrintParam(Ref) Export
+Function InitPrintParam(Ref, ModelLayout = "") Export
 	Param = New Structure();
 	Param.Insert("SpreadsheetDoc", New SpreadsheetDocument);
 	Param.Insert("RefDocument", Ref);
@@ -23,7 +23,7 @@ Function InitPrintParam(Ref) Export
 	Param.Insert("NameTemplate", "");
 	Param.Insert("BuilderLayout", False);
 	Param.Insert("ModelData", "");
-	Param.Insert("ModelLayout", "");	
+	Param.Insert("ModelLayout", ModelLayout);	
 	Return  Param; 
 EndFunction
 
@@ -61,7 +61,7 @@ EndFunction
 //  NameTemplate - String -
 // 
 // Returns:
-//  Result -- String
+//  Result - String
 Function GetSynonymTemplate(Ref, NameTemplate) Export
 	Try
 		Result = Ref.Metadata().Templates.Find(NameTemplate).Synonym;
@@ -73,5 +73,38 @@ Function GetSynonymTemplate(Ref, NameTemplate) Export
 	EndTry;
 	
 	Return Result;
-	
+EndFunction
+
+
+// Language name by code.
+// 
+// Parameters:
+//  CodeL - String -
+// 
+// Returns:
+//  Undefined, String -- LanguageName By Code
+Function LanguageNameByCode(CodeL) Export
+	For Each It In Metadata.Languages Do
+		If Upper(CodeL) = Upper(It.LanguageCode) Then
+			Return It.Name;
+		EndIf;
+	EndDo;
+	Return Undefined;
+EndFunction
+
+
+// Code by language name.
+// 
+// Parameters:
+//  NameL - string
+// 
+// Returns:
+//  Undefined, String - Code by language name
+Function CodeByLanguageName(NameL) Export
+	For Each It In Metadata.Languages Do
+		If Upper(NameL) = Upper(It.Name) Then
+			Return It.LanguageCode;
+		EndIf;
+	EndDo;
+	Return Undefined;
 EndFunction

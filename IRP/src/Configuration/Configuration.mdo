@@ -463,6 +463,8 @@
   <eventSubscriptions>EventSubscription.UndoPosting_RowID</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
+  <scheduledJobs>ScheduledJob.RunExternalFunctions</scheduledJobs>
+  <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
   <functionalOptions>FunctionalOption.SaasMode</functionalOptions>
   <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
@@ -499,6 +501,7 @@
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
+  <functionalOptions>FunctionalOption.UseJobQueueForExternalFunctions</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -584,6 +587,8 @@
   <constants>Constant.UseStores</constants>
   <constants>Constant.UseUnitsAndDimensions</constants>
   <constants>Constant.UseConsolidatedRetailSales</constants>
+  <constants>Constant.MaximumServerDifficultLevel</constants>
+  <constants>Constant.UseJobQueueForExternalFunctions</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -795,6 +800,7 @@
   <enums>Enum.StockBalanceDetail</enums>
   <enums>Enum.ExternalFunctionType</enums>
   <enums>Enum.ConsolidatedRetailSalesStatuses</enums>
+  <enums>Enum.JobStatus</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -872,6 +878,7 @@
   <informationRegisters>InformationRegister.T9013S_AccountsTax</informationRegisters>
   <informationRegisters>InformationRegister.T9014S_AccountsExpenseRevenue</informationRegisters>
   <informationRegisters>InformationRegister.T6095S_WriteOffBatchesInfo</informationRegisters>
+  <informationRegisters>InformationRegister.JobQueue</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

@@ -2,7 +2,9 @@
 // @strict-types
 
 &AtClient
-Var HTMLRegExpTestRowsAnalyzeDocument Export; // AddInObject - HTML document
+Var HTMLRegExpTestRowsAnalyzeDocument Export; // Structure - HTML document
+
+#Region FormEventHandlers
 
 &AtClient
 Procedure OnOpen(Cancel)
@@ -14,6 +16,18 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	HTMLRegExpTestRowsAnalyze = Catalogs.ExternalFunctions.GetTemplate("RegExpAnalyse").GetText();
 EndProcedure
 
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	JobScheduleInfo = CurrentObject.JobSchedule.Get();
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	CurrentObject.JobSchedule = New ValueStorage(JobScheduleInfo);
+EndProcedure
+
+#EndRegion
+
 #Region EvalAndExecute
 
 &AtClient
@@ -24,10 +38,8 @@ EndProcedure
 &AtServer
 Procedure RunAtServer()
 	
-	Params = CommonFunctionsServer.GetRecalculateExpressionParams();
-	Params.Eval = Object.ExternalFunctionType = Enums.ExternalFunctionType.Eval;
-	Params.SafeMode = Object.SafeModeIsOn;
-	Params.Expression = Object.ExternalCode;
+	//@skip-check invocation-parameter-type-intersect
+	Params = CommonFunctionsServer.GetRecalculateExpressionParams(Object);
 	
 	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
 	
@@ -89,10 +101,8 @@ EndProcedure
 &AtServer
 Function RunRegExpExpressionAtServer(ResultArray)
 	
-	Params = CommonFunctionsServer.GetRecalculateExpressionParams();
-	Params.Eval = Object.ExternalFunctionType = Enums.ExternalFunctionType.Eval;
-	Params.SafeMode = Object.SafeModeIsOn;
-	Params.Expression = Object.ExternalCode;
+	//@skip-check invocation-parameter-type-intersect
+	Params = CommonFunctionsServer.GetRecalculateExpressionParams(Object);
 	Params.RegExpResult = ResultArray;
 	
 	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
@@ -130,7 +140,7 @@ EndProcedure
 
 &AtClient
 Procedure HTMLRegExpTestRowsAnalyzeDocumentComplete(Item)
-	HTMLRegExpTestRowsAnalyzeDocument = PictureViewerClient.InfoDocumentComplete(Item); // AddInObject
+	HTMLRegExpTestRowsAnalyzeDocument = PictureViewerClient.InfoDocumentComplete(Item); // Structure
 	FillRegExpTestData();
 	CheckRegExp();
 EndProcedure
@@ -138,6 +148,42 @@ EndProcedure
 &AtClient
 Procedure TestRexExpStringsOnChange(Item)
 	FillRegExpTestData();
+EndProcedure
+
+#EndRegion
+
+#Region Scheduler
+
+&AtClient
+Procedure Scheduler(Command)
+	If JobScheduleInfo = Undefined Then
+		ScheduledJob = New JobSchedule();
+	Else
+		ScheduledJob = JobScheduleInfo; // JobSchedule
+	EndIf;
+	EditSchedule = New ScheduledJobDialog(ScheduledJob);
+	EditSchedule.Show(New NotifyDescription("AfterSchedulerChange", ThisObject));
+EndProcedure
+
+// After scheduler change.
+// 
+// Parameters:
+//  Schedule - ScheduledJobDialog -
+//  AddInfo - Structure - Add info
+&AtClient
+Procedure AfterSchedulerChange(Schedule, AddInfo) Export
+
+	If Schedule = Undefined Then
+		Return;
+	EndIf;
+	
+	JobScheduleInfo = Schedule;
+
+EndProcedure
+
+&AtClient
+Procedure isSchedulerSetOnChange(Item)
+	SetVisible();
 EndProcedure
 
 #EndRegion
@@ -156,11 +202,13 @@ Procedure SetVisible()
 		Items.PageResult.Visible = True;
 		Items.PageRegExp.Visible = False;
 	EndIf;
+	Items.PageSheduler.Visible = Object.isSchedulerSet;
 EndProcedure
 
 &AtClient
+//@skip-check dynamic-access-method-not-found, property-return-type, variable-value-type
 Procedure FillRegExpTestData()
-	Text = HTMLRegExpTestRowsAnalyzeDocument.document.getElementById("list");
+	Text = HTMLRegExpTestRowsAnalyzeDocument.document.getElementById("list"); // Structure
 	Text.innerHTML = "";
 	For Each Row In Object.TestRexExpStrings Do
 		li = HTMLRegExpTestRowsAnalyzeDocument.document.createElement("li");

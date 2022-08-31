@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0f42242f-8fd7-4658-8668-49ce52bc6f0b">
+  <name>UseJobQueueForExternalFunctions</name>
+  <synonym>
+    <key>en</key>
+    <value>Use job queue for external functions</value>
+  </synonym>
+  <location>Constant.UseJobQueueForExternalFunctions</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>Catalog.ExternalFunctions.Attribute.DifficultLevel</content>
+  <content>InformationRegister.JobQueue</content>
+  <content>Catalog.ExternalFunctions.Attribute.isSchedulerSet</content>
+  <content>Constant.MaximumServerDifficultLevel</content>
+  <content>Catalog.ExternalFunctions.Attribute.JobSchedule</content>
+</mdclass:FunctionalOption>

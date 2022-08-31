@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:ScheduledJob xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3724640d-0ab9-48b4-8769-e0850a587145">
+  <name>RunExternalFunctions</name>
+  <synonym>
+    <key>en</key>
+    <value>Run external functions</value>
+  </synonym>
+  <methodName>CommonModule.ServiceSystemServer.RunExternalFunctions</methodName>
+  <description>Run external functions from job queue</description>
+  <key>RunExternalFunctions</key>
+  <use>true</use>
+  <predefined>true</predefined>
+</mdclass:ScheduledJob>

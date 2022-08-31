@@ -11,4 +11,6 @@
     <picture>CommonPicture.AdminFunction</picture>
   </picture>
   <content>Catalog.ExternalFunctions</content>
+  <content>InformationRegister.JobQueue</content>
+  <content>Constant.MaximumServerDifficultLevel</content>
 </mdclass:Subsystem>

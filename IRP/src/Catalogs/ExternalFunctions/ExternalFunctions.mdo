@@ -43,7 +43,7 @@
     <name>ExternalFunctionType</name>
     <synonym>
       <key>en</key>
-      <value>External function type</value>
+      <value>Type</value>
     </synonym>
     <type>
       <types>EnumRef.ExternalFunctionType</types>
@@ -131,6 +131,58 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="eebf46fa-6260-4da5-a77f-91bf55fbe3e4">
+    <name>isSchedulerSet</name>
+    <synonym>
+      <key>en</key>
+      <value>Use scheduler</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="89a60c17-6912-487b-8ad2-a6aca158c503">
+    <name>JobSchedule</name>
+    <synonym>
+      <key>en</key>
+      <value>Job schedule</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="54f72cef-35c8-4bfa-ab44-dcd5887735f8">
+    <name>DifficultLevel</name>
+    <synonym>
+      <key>en</key>
+      <value>Difficult level</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>2</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:NumberValue">
+      <value>1</value>
+    </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

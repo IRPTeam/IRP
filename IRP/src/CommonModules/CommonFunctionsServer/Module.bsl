@@ -1,4 +1,6 @@
 
+// @strict-types
+
 #Region RegExp
 
 // Regex.
@@ -31,14 +33,36 @@ EndFunction
 
 #EndRegion
 	
+// Is primitive value.
+// 
+// Parameters:
+//  Value - Arbitrary - Value
+// 
+// Returns:
+//  Boolean - Is primitive value
 Function IsPrimitiveValue(Value) Export
 	Return Metadata.FindByType(TypeOf(Value)) = Undefined;
 EndFunction
 
+// Is document ref.
+// 
+// Parameters:
+//  Value - Arbitrary -  Value
+// 
+// Returns:
+//  Boolean - Is document ref
 Function IsDocumentRef(Value) Export
 	Return Documents.AllRefsType().ContainsType(TypeOf(Value));
 EndFunction
 
+// Get common template by name.
+// 
+// Parameters:
+//  Name - String - Name
+//  GetFromStorage - Boolean - Get from storage
+// 
+// Returns:
+//  COMObject, DataCompositionParameterValue, DataCompositionSettingsParameterValue, SpreadsheetDocument, TextDocument, ActiveDocumentShell, HTMLDocumentShell, BinaryData, GeographicalSchema, GraphicalSchema, DataCompositionSchema, DataCompositionAppearanceTemplate - Get common template by name
 Function GetCommonTemplateByName(Name, GetFromStorage = False) Export
 	If GetFromStorage Then
 		Return GetCommonTemplate(Name).Get();
@@ -47,10 +71,26 @@ Function GetCommonTemplateByName(Name, GetFromStorage = False) Export
 	EndIf;
 EndFunction
 
+// Get ref attribute.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+//  Name - String - Name
+// 
+// Returns:
+//   Arbitrary
 Function GetRefAttribute(Ref, Name) Export
 	Return Ref[Name];
 EndFunction
 
+// Serialize JSON.
+// 
+// Parameters:
+//  Value  - Arbitrary - Value
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  String - Serialize JSON
 Function SerializeJSON(Value, AddInfo = Undefined) Export
 	Writer = New JSONWriter();
 	Writer.SetString();
@@ -59,6 +99,14 @@ Function SerializeJSON(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+// Serialize JSONUse XDTO.
+// 
+// Parameters:
+//  Value - Arbitrary -  Value
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  String - Serialize JSONUse XDTO
 Function SerializeJSONUseXDTO(Value, AddInfo = Undefined) Export
 	Writer = New JSONWriter();
 	Writer.SetString();
@@ -67,6 +115,14 @@ Function SerializeJSONUseXDTO(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+// Serialize XMLUse XDTO.
+// 
+// Parameters:
+//  Value - Arbitrary -  Value
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  String - Serialize XMLUse XDTO
 Function SerializeXMLUseXDTO(Value, AddInfo = Undefined) Export
 	Writer = New XMLWriter();
 	Writer.SetString();
@@ -75,6 +131,14 @@ Function SerializeXMLUseXDTO(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+// Deserialize JSONUse XDTO.
+// 
+// Parameters:
+//  Value - String - Value
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Arbitrary - Deserialize JSONUse XDTO
 Function DeserializeJSONUseXDTO(Value, AddInfo = Undefined) Export
 	Reader = New JSONReader();
 	Reader.SetString(Value);
@@ -83,16 +147,35 @@ Function DeserializeJSONUseXDTO(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+// Serialize JSONUse XDTOFactory.
+// 
+// Parameters:
+//  Value - Arbitrary - Value
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  String - Serialize JSONUse XDTOFactory
 Function SerializeJSONUseXDTOFactory(Value, AddInfo = Undefined) Export
 	Writer = New JSONWriter();
 	Writer.SetString();
 	XDTOFactory.WriteJSON(Writer, Value);
 	ResultTmp = Writer.Close();
-	Object = DeserializeJSON(ResultTmp, True, AddInfo);
+	Object = DeserializeJSON(ResultTmp, True, AddInfo); // Map
 	Result = SerializeJSON(Object.Get("#value"), AddInfo);
 	Return Result;
 EndFunction
 
+// Serialize XMLUse XDTOFactory.
+// 
+// Parameters:
+//  Value - Arbitrary - Value
+//  LocalName - String - Local name
+//  URI - String - URI
+//  AddInfo - Structure - Add info
+//  WSName - String, WSDefinitions - WSName
+// 
+// Returns:
+//  String - Serialize XMLUse XDTOFactory
 Function SerializeXMLUseXDTOFactory(Value, LocalName = Undefined, URI = Undefined, AddInfo = Undefined,
 	WSName = Undefined) Export
 	Writer = New XMLWriter();
@@ -102,6 +185,13 @@ Function SerializeXMLUseXDTOFactory(Value, LocalName = Undefined, URI = Undefine
 	Return Result;
 EndFunction
 
+// XDTOFactory object.
+// 
+// Parameters:
+//  WSName - Undefined, WSDefinitions, String - WSName
+// 
+// Returns:
+//  XDTOFactory - XDTOFactory object
 Function XDTOFactoryObject(WSName = Undefined) Export
 	If IsBlankString(WSName) Then
 		Return XDTOFactory;
@@ -114,6 +204,15 @@ Function XDTOFactoryObject(WSName = Undefined) Export
 	EndIf;
 EndFunction
 
+// Deserialize JSON.
+// 
+// Parameters:
+//  Value - String - Value
+//  IsMap - Boolean - Is map
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Arbitrary - Deserialize JSON
 Function DeserializeJSON(Value, IsMap = False, AddInfo = Undefined) Export
 	Reader = New JSONReader();
 	Reader.SetString(Value);
@@ -122,17 +221,35 @@ Function DeserializeJSON(Value, IsMap = False, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+// Deserialize JSONUse XDTOFactory.
+// 
+// Parameters:
+//  Value - Arbitrary - Value
+//  Type - XDTOObjectType, XDTOValueType - Type
+//  AddInfo - Undefined - Add info
+//  WSName - WSDefinitions, String - WSName
+// 
+// Returns:
+//  XDTODataObject
 Function DeserializeJSONUseXDTOFactory(Value, Type = Undefined, AddInfo = Undefined, WSName = Undefined) Export
 	
 	ValueTmp = "{""#value"":" + Value + "}";
 	
 	Reader = New JSONReader();
 	Reader.SetString(ValueTmp);
-	Result = XDTOFactory.ReadJSON(Reader, Type);
+	Result = XDTOFactory.ReadJSON(Reader, Type); // XDTODataObject
 	Reader.Close();
 	Return Result;
 EndFunction
 
+// Deserialize XMLUse XDTO.
+// 
+// Parameters:
+//  Value - String - Value
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  XDTODataObject - Deserialize XML use XDTO
 Function DeserializeXMLUseXDTO(Value, AddInfo = Undefined) Export
 	Reader = New XMLReader();
 	Reader.SetString(Value);
@@ -141,7 +258,7 @@ Function DeserializeXMLUseXDTO(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
-// Deserialize XMLUse XDTOFactory.
+// Deserialize XML use XDTOFactory.
 // 
 // Parameters:
 //  Value - String - Value
@@ -154,11 +271,19 @@ EndFunction
 Function DeserializeXMLUseXDTOFactory(Value, Type = Undefined, AddInfo = Undefined, WSName = Undefined) Export
 	Reader = New XMLReader();
 	Reader.SetString(Value);
-	Result = XDTOFactoryObject(WSName).ReadXML(Reader, Type);
+	Result = XDTOFactoryObject(WSName).ReadXML(Reader, Type); // XDTODataObject
 	Reader.Close();
 	Return Result;
 EndFunction
 
+// Serialize XML.
+// 
+// Parameters:
+//  Value - Arbitrary - Value
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  String - Serialize XML
 Function SerializeXML(Value, AddInfo = Undefined) Export
 	Writer = New XMLWriter();
 	Writer.SetString();
@@ -167,6 +292,14 @@ Function SerializeXML(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+// Deserialize XML.
+// 
+// Parameters:
+//  Value - String - Value
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Arbitrary - Deserialize XML
 Function DeserializeXML(Value, AddInfo = Undefined) Export
 	Reader = New XMLReader();
 	Reader.SetString(Value);
@@ -175,14 +308,30 @@ Function DeserializeXML(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
+// Get current universal date.
+// 
+// Returns:
+//  Date - Get current universal date
 Function GetCurrentUniversalDate() Export
 	Return CurrentUniversalDate();
 EndFunction
 
+// Get current session date.
+// 
+// Returns:
+//  Date - Get current session date
 Function GetCurrentSessionDate() Export
 	Return CurrentSessionDate();
 EndFunction
 
+// Form have attribute.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  AttributeName - String - Attribute name
+// 
+// Returns:
+//  Boolean - Form have attribute
 Function FormHaveAttribute(Form, AttributeName) Export
 	For Each FormAttribute In Form.GetAttributes() Do
 		If FormAttribute.Name = AttributeName Then
@@ -192,6 +341,14 @@ Function FormHaveAttribute(Form, AttributeName) Export
 	Return False;
 EndFunction
 
+// XSLTransformation.
+// 
+// Parameters:
+//  XML - String - XML
+//  XSLT - String - XSLT
+// 
+// Returns:
+//  String - XSLTransformation
 Function XSLTransformation(XML, XSLT) Export
 	XSLTransform = New XSLTransform();
 	XSLTransform.LoadFromString(XSLT);
@@ -209,6 +366,13 @@ Function GetStyleByName(Name) Export
 	Return StyleColors[Name];
 EndFunction
 
+// Get m d5.
+// 
+// Parameters:
+//  Object - Arbitrary - Object
+// 
+// Returns:
+//  String - Get MD5
 Function GetMD5(Object) Export
 	DataToString = ValueToStringInternal(Object);
 	DataHashing = New DataHashing(HashFunction.MD5);
@@ -222,9 +386,13 @@ Function GetMD5(Object) Export
 	Return Upper(HashSumStringUUID);
 EndFunction
 
+// Pause.
+// 
+// Parameters:
+//  Time - Number - Time in second
 Procedure Pause(Time) Export
 
-    If Number(Time) < 1 Then
+    If Time < 1 Then
     	Return;
     EndIf;
 
@@ -241,6 +409,13 @@ Procedure Pause(Time) Export
 
 EndProcedure
 
+// Get URLFrom navigation link.
+// 
+// Parameters:
+//  Link - String - Link
+// 
+// Returns:
+//  AnyRef - Get URLFrom navigation link
 Function GetURLFromNavigationLink(Link) Export
 	Five = 5;
 	Nine = 9;
@@ -301,11 +476,10 @@ Function RecalculateExpression(Params) Export
 			SetSafeMode(True);
 		EndIf;
 		If Params.Eval Then
-			//@skip-check server-execution-safe-mode
+			// @skip-check server-execution-safe-mode
 			Result = Eval(Params.Expression);
-		Else
-			//@skip-check server-execution-safe-mode
-			Execute(Params.Expression);
+		Else			
+			Result = ExecuteCode(Params.Expression, Params);
 		EndIf;
 		ResultInfo.Result = Result;
 	Except
@@ -316,17 +490,62 @@ Function RecalculateExpression(Params) Export
 	Return ResultInfo;
 EndFunction
 
-// Recalculate expression params.
+Function ExecuteCode(Expression, Params)
+	Result = Undefined;
+	// @skip-check server-execution-safe-mode
+	Execute(Expression);
+	Return Result;
+EndFunction
+
+// Create schedule.
+// 
+// Parameters:
+//  ExternalFunction - CatalogRef.ExternalFunctions - External function
+Procedure CreateScheduledJob(ExternalFunction) Export
+	
+	If Not ExternalFunction.isSchedulerSet Then
+		DeleteScheduledJob(ExternalFunction);
+	EndIf;
+
+	If Not ExternalFunction.ExternalFunctionType = Enums.ExternalFunctionType.Execute Then
+		Return;
+	EndIf;
+	
+	NewScheduledJobs = ScheduledJobs.CreateScheduledJob(Metadata.ScheduledJobs.AddExternalFunctionsToJobQueue);
+	NewScheduledJobs.Description = ExternalFunction.Description;
+	NewScheduledJobs.Key = String(ExternalFunction.UUID());
+	NewScheduledJobs.Use = ExternalFunction.isSchedulerSet;
+	JobSchedule = ExternalFunction.JobSchedule.Get(); // JobSchedule
+	NewScheduledJobs.Schedule = JobSchedule;
+	NewScheduledJobs.Parameters.Add(ExternalFunction);
+	NewScheduledJobs.Write();
+EndProcedure
+
+Procedure DeleteScheduledJob(ExternalFunction) Export
+	ScheduledJobsToDelete = ScheduledJobs.FindByUUID(ExternalFunction.UUID());
+	If ScheduledJobsToDelete = Undefined Then
+		Return;
+	EndIf;
+	
+	ScheduledJobsToDelete.Delete();
+EndProcedure
+
+
+// Get recalculate expression params.
+// 
+// Parameters:
+//  ExternalFunction - CatalogRef.ExternalFunctions, CatalogObject.ExternalFunctions - Ref
 // 
 // Returns:
-//  Structure - Recalculate expression params:
+//  Structure - Get recalculate expression params:
 // * Eval - Boolean -
 // * Expression - String -
 // * Result - Undefined -
 // * SafeMode - Boolean -
-// * RegExpResult - Array of String -
+// * RegExpResult - Array -
+// * Job - CatalogRef.ExternalFunctions -
 // * AddInfo - Structure -
-Function GetRecalculateExpressionParams() Export
+Function GetRecalculateExpressionParams(ExternalFunction = Undefined) Export
 	
 	Structure = New Structure;
 	Structure.Insert("Eval", True);
@@ -334,7 +553,15 @@ Function GetRecalculateExpressionParams() Export
 	Structure.Insert("Result", Undefined);
 	Structure.Insert("SafeMode", True);
 	Structure.Insert("RegExpResult", New Array);
+	Structure.Insert("Job", Catalogs.ExternalFunctions.EmptyRef());
 	Structure.Insert("AddInfo", New Structure);
+	
+	If Not ExternalFunction = Undefined Then
+		Structure.Eval = ExternalFunction.ExternalFunctionType = Enums.ExternalFunctionType.Eval;
+		Structure.SafeMode = ExternalFunction.SafeModeIsOn;
+		Structure.Expression = ExternalFunction.ExternalCode;
+		Structure.Job = ExternalFunction.Ref;
+	EndIf;
 	
 	Return Structure;
 	
@@ -347,12 +574,14 @@ EndFunction
 // * isError - Boolean -
 // * Description - String -
 // * Result - Arbitrary, Undefined -
+// * Log - Array of String - Log
 Function RecalculateExpressionResult() Export
 	
 	Structure = New Structure;
 	Structure.Insert("isError", False);
 	Structure.Insert("Description", "");
 	Structure.Insert("Result", Undefined);
+	Structure.Insert("Log", New Array);
 	
 	Return Structure;
 	
@@ -362,6 +591,19 @@ EndFunction
 
 #Region QueryBuilder
 
+// Query table.
+// 
+// Parameters:
+//  ObjectName - String -  Object name
+//  ObjectServerModule - CommonModule, CommonModule.CatCashAccountsServer - Object server module
+//  CustomParameters - Structure -  Custom parameters:
+//  * OptionsString - String
+//  * Fields - Array of KeyAndValue
+//  * Filters - Filter
+//  * ComplexFilters - Array of Structure
+// 
+// Returns:
+//  ValueTable - Query table
 Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export
 	QueryText = GetQueryText(ObjectName, CustomParameters.OptionsString, CustomParameters.Fields);
 	QueryBuilder = New QueryBuilder(QueryText);
@@ -373,6 +615,17 @@ Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export
 	Return QueryTable;
 EndFunction
 
+// Get query text.
+// 
+// Parameters:
+//  ObjectName - String - Object name
+//  QueryOptionsString - String - Query options string
+//  Fields - Array of KeyAndValue - Fields:
+//  * Key - String
+//  * Value - String 
+// 
+// Returns:
+//  String - Get query text
 Function GetQueryText(ObjectName, QueryOptionsString, Fields) Export
 	QueryTextArray = New Array();
 	QueryTextArray.Add("SELECT " + QueryOptionsString);
@@ -394,11 +647,19 @@ Function GetQueryText(ObjectName, QueryOptionsString, Fields) Export
 	Return QueryText;
 EndFunction
 
+// Set query builder filters.
+// 
+// Parameters:
+//  QueryBuilder - QueryBuilder - Query builder
+//  QueryFilters - Filter - Query filters
 Procedure SetQueryBuilderFilters(QueryBuilder, QueryFilters)
 	QueryBuilderFilter = QueryBuilder.Filter;
 	For Each QueryFilter In QueryFilters Do
+		//@skip-check property-return-type
+		//@skip-check invocation-parameter-type-intersect
 		FoundedFilter = QueryBuilderFilter.Find(QueryFilter.FieldName);
 		If FoundedFilter = Undefined Then
+			//@skip-check property-return-type
 			FilterItem = QueryBuilderFilter.Add("Ref." + QueryFilter.FieldName);
 		Else
 			FilterItem = FoundedFilter;

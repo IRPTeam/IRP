@@ -5,8 +5,8 @@ Procedure EntryPoint(StepNames, Parameters) Export
 	InitEntryPoint(StepNames, Parameters);
 	Parameters.ModelEnvironment.StepNamesCounter.Add(StepNames);
 
-// #optimization	
-//If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then 
+// #optimization 1	
+If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then 
 
 #IF Client THEN
 	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
@@ -19,7 +19,7 @@ Procedure EntryPoint(StepNames, Parameters) Export
 	TransferStructureToForm(Transfer, Parameters);
 #ENDIF
 	
-//EndIf;
+EndIf;
 
 	// if cache was initialized from this EntryPoint then ChainComplete
 	If Parameters.ModelEnvironment.FirstStepNames = StepNames Then

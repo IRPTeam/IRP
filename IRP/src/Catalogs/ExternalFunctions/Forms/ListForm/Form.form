@@ -715,7 +715,7 @@
       <name>GroupJobTime</name>
       <id>84</id>
       <items xsi:type="form:FormField">
-        <name>JobAddTime1</name>
+        <name>JobAddTimeBottom</name>
         <id>57</id>
         <title>
           <key>en</key>
@@ -730,7 +730,7 @@
           <segments>Items.List.CurrentData.JobAddTime</segments>
         </dataPath>
         <extendedTooltip>
-          <name>JobAddTime1ExtendedTooltip</name>
+          <name>JobAddTimeBottomExtendedTooltip</name>
           <id>59</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -745,7 +745,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>JobAddTime1ContextMenu</name>
+          <name>JobAddTimeBottomContextMenu</name>
           <id>58</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -769,7 +769,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>JobStartTime1</name>
+        <name>JobStartTimeBottom</name>
         <id>72</id>
         <title>
           <key>en</key>
@@ -784,7 +784,7 @@
           <segments>Items.List.CurrentData.JobStartTime</segments>
         </dataPath>
         <extendedTooltip>
-          <name>JobStartTime1ExtendedTooltip</name>
+          <name>JobStartTimeBottomExtendedTooltip</name>
           <id>74</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -799,7 +799,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>JobStartTime1ContextMenu</name>
+          <name>JobStartTimeBottomContextMenu</name>
           <id>73</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -823,7 +823,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>JobFinishTime1</name>
+        <name>JobFinishTimeBottom</name>
         <id>63</id>
         <title>
           <key>en</key>
@@ -838,7 +838,7 @@
           <segments>Items.List.CurrentData.JobFinishTime</segments>
         </dataPath>
         <extendedTooltip>
-          <name>JobFinishTime1ExtendedTooltip</name>
+          <name>JobFinishTimeBottomExtendedTooltip</name>
           <id>65</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -853,7 +853,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>JobFinishTime1ContextMenu</name>
+          <name>JobFinishTimeBottomContextMenu</name>
           <id>64</id>
           <visible>true</visible>
           <enabled>true</enabled>

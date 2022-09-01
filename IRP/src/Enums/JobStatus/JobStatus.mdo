@@ -47,4 +47,11 @@
       <value>Canceled</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="d8150dd1-afc8-4975-9545-e4bc74bc52b9">
+    <name>Pause</name>
+    <synonym>
+      <key>en</key>
+      <value>Pause</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

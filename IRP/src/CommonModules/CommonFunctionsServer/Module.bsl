@@ -479,7 +479,7 @@ Function RecalculateExpression(Params) Export
 			// @skip-check server-execution-safe-mode
 			Result = Eval(Params.Expression);
 		Else			
-			Result = ExecuteCode(Params.Expression, Params);
+			Result = ExecuteCode(Params.Expression, Params, ResultInfo);
 		EndIf;
 		ResultInfo.Result = Result;
 	Except
@@ -490,7 +490,7 @@ Function RecalculateExpression(Params) Export
 	Return ResultInfo;
 EndFunction
 
-Function ExecuteCode(Expression, Params)
+Function ExecuteCode(Expression, Params, ResultInfo)
 	Result = Undefined;
 	// @skip-check server-execution-safe-mode
 	Execute(Expression);
@@ -505,6 +505,7 @@ Procedure CreateScheduledJob(ExternalFunction) Export
 	
 	If Not ExternalFunction.isSchedulerSet Then
 		DeleteScheduledJob(ExternalFunction);
+		Return;
 	EndIf;
 
 	If Not ExternalFunction.ExternalFunctionType = Enums.ExternalFunctionType.Execute Then
@@ -522,12 +523,10 @@ Procedure CreateScheduledJob(ExternalFunction) Export
 EndProcedure
 
 Procedure DeleteScheduledJob(ExternalFunction) Export
-	ScheduledJobsToDelete = ScheduledJobs.FindByUUID(ExternalFunction.UUID());
-	If ScheduledJobsToDelete = Undefined Then
-		Return;
-	EndIf;
-	
-	ScheduledJobsToDelete.Delete();
+	ScheduledJobsToDelete = ScheduledJobs.GetScheduledJobs(New Structure("Key", ExternalFunction.UUID()));
+	For Each Job In ScheduledJobsToDelete Do
+		Job.Delete();
+	EndDo;
 EndProcedure
 
 

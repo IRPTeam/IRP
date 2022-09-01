@@ -293,4 +293,55 @@
     </synonym>
     <templateType>TextDocument</templateType>
   </templates>
+  <commands uuid="0bc3f199-b30f-48d8-aa6a-16b299bf954b">
+    <name>PauseJob</name>
+    <synonym>
+      <key>en</key>
+      <value>Pause</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>CatalogRef.ExternalFunctions</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <modifiesData>true</modifiesData>
+    <representation>PictureAndText</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleYellow</picture>
+    </picture>
+  </commands>
+  <commands uuid="b66f95f4-a979-4fb8-a84f-71cbb18a255f">
+    <name>ContinueJob</name>
+    <synonym>
+      <key>en</key>
+      <value>Continue</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>CatalogRef.ExternalFunctions</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <modifiesData>true</modifiesData>
+    <representation>PictureAndText</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleGreen</picture>
+    </picture>
+  </commands>
+  <commands uuid="b7ae1118-fd50-4c95-a924-f568fdcec808">
+    <name>StopJob</name>
+    <synonym>
+      <key>en</key>
+      <value>Stop</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>CatalogRef.ExternalFunctions</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <modifiesData>true</modifiesData>
+    <representation>PictureAndText</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCrossIcon</picture>
+    </picture>
+  </commands>
 </mdclass:Catalog>

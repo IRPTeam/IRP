@@ -12,4 +12,18 @@
   <content>Catalog.ExternalFunctions.Attribute.isSchedulerSet</content>
   <content>Constant.MaximumServerDifficultLevel</content>
   <content>Catalog.ExternalFunctions.Attribute.JobSchedule</content>
+  <content>Catalog.ExternalFunctions.Command.PauseJob</content>
+  <content>Catalog.ExternalFunctions.Command.StopJob</content>
+  <content>Catalog.ExternalFunctions.Command.ContinueJob</content>
+  <content>InformationRegister.JobQueue.Resource.Result</content>
+  <content>InformationRegister.JobQueue.Resource.JobID</content>
+  <content>InformationRegister.JobQueue.Resource.Status</content>
+  <content>InformationRegister.JobQueue.Resource.UserMessages</content>
+  <content>InformationRegister.JobQueue.Resource.Description</content>
+  <content>InformationRegister.JobQueue.Resource.Start</content>
+  <content>InformationRegister.JobQueue.Resource.DifficultLevel</content>
+  <content>InformationRegister.JobQueue.Resource.Finish</content>
+  <content>InformationRegister.JobQueue.Resource.Parameters</content>
+  <content>InformationRegister.JobQueue.Resource.Log</content>
+  <content>InformationRegister.JobQueue.Dimension.Job</content>
 </mdclass:FunctionalOption>

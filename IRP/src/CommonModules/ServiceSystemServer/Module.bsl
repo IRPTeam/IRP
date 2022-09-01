@@ -348,10 +348,7 @@ EndFunction
 //  * ExternalFunction - CatalogRef.ExternalFunctions - External function
 //  * Period - Date - Period
 Procedure RunJobExternalFunctions(JobStructure) Export
-	Params = CommonFunctionsServer.GetRecalculateExpressionParams();
-	Params.Eval = JobStructure.ExternalFunction.ExternalFunctionType = Enums.ExternalFunctionType.Eval;
-	Params.SafeMode = JobStructure.ExternalFunction.SafeModeIsOn;
-	Params.Expression = JobStructure.ExternalFunction.ExternalCode;
+	Params = CommonFunctionsServer.GetRecalculateExpressionParams(JobStructure.ExternalFunction);
 	
 	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
 	
@@ -384,7 +381,9 @@ EndProcedure
 Procedure AddExternalFunctionsToJobQueue(ExternalFunction) Export
 	
 	LastJob = InformationRegisters.JobQueue.GetLast(, New Structure("Job", ExternalFunction)); // InformationRegisterRecord.JobQueue
-	If LastJob.Status = Enums.JobStatus.Wait Then
+	If LastJob.Status = Enums.JobStatus.Wait
+		OR LastJob.Status = Enums.JobStatus.Pause
+		OR LastJob.Status = Enums.JobStatus.Active Then
 		Return;
 	EndIf;
 	
@@ -397,6 +396,78 @@ Procedure AddExternalFunctionsToJobQueue(ExternalFunction) Export
 	JobRecord.Period = Period;
 	JobRecord.Status = Enums.JobStatus.Wait;
 	Job.Write();
+EndProcedure
+
+// Stop sheduler job.
+// 
+// Parameters:
+//  ExternalFunction - CatalogRef.ExternalFunctions - Job ID
+// 
+Procedure StopShedulerJob(ExternalFunction) Export
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	JobQueueSliceLast.Period,
+		|	JobQueueSliceLast.Job
+		|FROM
+		|	InformationRegister.JobQueue.SliceLast(, Job = &Job) AS JobQueueSliceLast";
+	Query.SetParameter("Job", ExternalFunction);
+	LastJob = Query.Execute().Select();
+	If Not LastJob.Next() Then
+		Return;
+	EndIf;
+
+	JobStructure = New Structure;
+	JobStructure.Insert("ExternalFunction", ExternalFunction);
+	JobStructure.Insert("Period", LastJob.Period);
+	Job = GetJobRecordInQueue(JobStructure);
+	
+	JobRecord = Job[0];
+	
+	CurrentJob = BackgroundJobs.FindByUUID(JobRecord.JobID);
+	If CurrentJob.State = BackgroundJobState.Active Then
+		CurrentJob.Cancel();
+	EndIf;
+EndProcedure
+
+// Continue sheduler job.
+// 
+// Parameters:
+//  ExternalFunction - CatalogRef.ExternalFunctions - Job ID
+//  Pause - Boolean - Pause
+Procedure ContinueOrPauseShedulerJob(ExternalFunction, Pause = True) Export
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	JobQueueSliceLast.Period,
+		|	JobQueueSliceLast.Job,
+		|	JobQueueSliceLast.Job
+		|FROM
+		|	InformationRegister.JobQueue.SliceLast(, Job = &Job) AS JobQueueSliceLast";
+	Query.SetParameter("Job", ExternalFunction);
+	LastJob = Query.Execute().Select();
+	If Not LastJob.Next() Then
+		Return;
+	EndIf;
+	
+	JobStructure = New Structure;
+	JobStructure.Insert("ExternalFunction", ExternalFunction);
+	JobStructure.Insert("Period", LastJob.Period);
+	Job = GetJobRecordInQueue(JobStructure);
+	
+	JobRecord = Job[0];
+	
+	CurrentJob = BackgroundJobs.FindByUUID(JobRecord.JobID);
+	If CurrentJob.State = BackgroundJobState.Active 
+		And JobRecord.Status = Enums.JobStatus.Active And Pause Then
+		JobRecord.Status = Enums.JobStatus.Pause;
+		Job.Write();
+	ElsIf CurrentJob.State = BackgroundJobState.Active 
+		And JobRecord.Status = Enums.JobStatus.Pause And Not Pause Then
+		JobRecord.Status = Enums.JobStatus.Active;
+		Job.Write();
+	EndIf;
 EndProcedure
 
 #EndRegion

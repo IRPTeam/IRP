@@ -10,4 +10,6 @@
   <key>RunExternalFunctions</key>
   <use>true</use>
   <predefined>true</predefined>
+  <restartCountOnFailure>1</restartCountOnFailure>
+  <restartIntervalOnFailure>10</restartIntervalOnFailure>
 </mdclass:ScheduledJob>

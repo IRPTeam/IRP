@@ -150,7 +150,10 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 		ColumnNames = KeyValue.Value;
 		
 		CacheList.Insert(TableName, New Array());
-		For Each Row In Object[TableName] Do
+		// #optimization3
+		Object_Table = Object[TableName];
+		For Each Row In Object_Table Do
+		//For Each Row In Object[TableName] Do
 			NewRow = New Structure(StrConcat(ColumnNames, ","));
 			NewRow.Insert("Key");
 			FillPropertyValues(NewRow, Row);
@@ -834,7 +837,8 @@ Procedure OnOpen(Object, Form, TableNames) Export
 	UpdateCacheBeforeChange(Object, Form);
 	For Each TableName In StrSplit(TableNames, ",") Do
 		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
-		ControllerClientServer_V2.FillPropertyFormByDefault(Form, "Store, DeliveryDate", Parameters);
+		// #optimization 2 
+//		ControllerClientServer_V2.FillPropertyFormByDefault(Form, "Store, DeliveryDate", Parameters);
 		ControllerClientServer_V2.FormOnOpen(Parameters);
 	EndDo;
 EndProcedure

@@ -60,6 +60,7 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Catalog.ReportOptions");
 	ArrayOfExcluded.Add("Catalog.RowIDs");
 	ArrayOfExcluded.Add("Catalog.TransactionsKeys");
+	ArrayOfExcluded.Add("Catalog.ExternalFunctions");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
 	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");
@@ -92,6 +93,7 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Catalog.ReportOptions");
 	ArrayOfExcluded.Add("Catalog.RowIDs");
 	ArrayOfExcluded.Add("Catalog.TransactionsKeys");
+	ArrayOfExcluded.Add("Catalog.ExternalFunctions");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
 	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");

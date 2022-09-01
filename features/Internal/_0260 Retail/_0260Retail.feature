@@ -101,7 +101,15 @@ Scenario: _0260100 preparation (retail)
 			| "Documents.MoneyTransfer.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.MoneyTransfer.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
-
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |
+		And I select current line in "List" table
+		And I delete "$$MoneyTransfer11$$" variable
+		And I save the window as "$$MoneyTransfer11$$" 
+		And I close all client application windows
+		
 
 Scenario: _0260101 check preparation
 	When check preparation
@@ -661,8 +669,8 @@ Scenario: _0260180 create cash in
 	* Create cash in
 		Then the number of "CashInList" table lines is "равно" 1
 		And I go to line in "CashInList" table
-			| 'Money transfer'                              | 'Currency' | 'Amount'   |
-			| 'Money transfer 11 dated 24.08.2022 10:46:50' | 'TRY'      | '1 000,00' |
+			| 'Money transfer'      | 'Currency' | 'Amount'   |
+			| '$$MoneyTransfer11$$' | 'TRY'      | '1 000,00' |
 		And in the table "CashInList" I click "Create cash in" button
 	* Check Cash receipt
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -670,8 +678,8 @@ Scenario: _0260180 create cash in
 		Then the form attribute named "TransactionType" became equal to "Cash in"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'                              |
-			| '1' | '1 000,00'     | 'Movement type 1'         | 'Money transfer 11 dated 24.08.2022 10:46:50' |
+			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'      |
+			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer11$$' |
 		
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"

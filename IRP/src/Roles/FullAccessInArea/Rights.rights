@@ -8751,13 +8751,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Services</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.Unbundling</name>
 		<right>
 			<name>Read</name>
@@ -13522,13 +13515,6 @@
 		</right>
 		<right>
 			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Temp</name>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

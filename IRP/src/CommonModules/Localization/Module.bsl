@@ -692,9 +692,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_113", NStr("en = 'Serial lot number [ %1 ] has to be unique at the document'", Lang) + Chars.LF);
 	Strings.Insert("Error_114", NStr("en = '""Landed cost"" is a required field.'", Lang) + Chars.LF);
 	Strings.Insert("Error_115", NStr("en = 'Error while test connection'", Lang) + Chars.LF);
-	Strings.Insert("Error_118", NStr("en = 'Cannot set deletion makr, document is closed by [ %1 ]'", Lang) + Chars.LF);
 	Strings.Insert("Error_116", NStr("en = 'Cannot unpost, document is closed by [ %1 ]'", Lang) + Chars.LF);
 	Strings.Insert("Error_117", NStr("en = 'Sales return when sales by different dates not support'", Lang) + Chars.LF);
+	Strings.Insert("Error_118", NStr("en = 'Cannot set deletion makr, document is closed by [ %1 ]'", Lang) + Chars.LF);
+	Strings.Insert("Error_119", NStr("en = 'Error Eval code'", Lang) + Chars.LF);
 #EndRegion
 
 #Region InfoMessages
@@ -769,6 +770,9 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_028", NStr("en = 'New serial [ %1 ] created for item key [ %2 ]'", Lang));
 	Strings.Insert("InfoMessage_029", NStr("en = 'This is unique serial and it can be only one at the document'", Lang));
 	Strings.Insert("InfoMessage_030", NStr("en = 'Scan barcode of Item, not serial lot numbers'", Lang));
+	Strings.Insert("InfoMessage_031", NStr("en = 'Do you want to continue job?'", Lang));
+	Strings.Insert("InfoMessage_032", NStr("en = 'Do you want to pause job?'", Lang));
+	Strings.Insert("InfoMessage_033", NStr("en = 'Do you want to stop job?'", Lang));
 #EndRegion
 
 #Region QuestionToUser

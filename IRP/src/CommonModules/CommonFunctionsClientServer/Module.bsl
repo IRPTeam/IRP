@@ -124,24 +124,6 @@ Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", Ge
 
 EndFunction
 
-#Region Regexp
-
-// Regex.
-// 
-// Parameters:
-//  String - String - String
-//  Facet - String - RegExp
-// 
-// Returns:
-//  Boolean - is string match regexp
-Function Regex(String, Facet) Export
-	
-	Return True;
-
-EndFunction
-
-#EndRegion
-
 Function GetSliceLastDateByRefAndDate(Ref, Date) Export
 	If Not ValueIsFilled(Ref) Then
 		If Not ValueIsFilled(Date) Then

@@ -129,17 +129,11 @@ Procedure ChequeBondsChequeStartChoice(Object, Form, Item, ChoiceData, StandardP
 EndProcedure
 
 Procedure ChequeBondsChequeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	StandardProcessing = False;
-	
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Currency"    , Object.Currency, ComparisonType.Equal));
 	
 	AdditionalParameters = New Structure();
-	If ValueIsFilled(Object.Currency) Then
-		AdditionalParameters.Insert("Currency", Object.Currency);
-		AdditionalParameters.Insert("FilterByCurrency", True);
-	EndIf;
-	
 	ArrayOfChoiceParameters = New Array();
 	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
 	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
@@ -457,39 +451,29 @@ EndProcedure
 #Region ACCOUNT
 
 Procedure ChequeBondsAccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	StandardProcessing = False;
 	CurrentData = Form.Items.ChequeBonds.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 	
-	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
-	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type"    , PredefinedValue("Enum.CashAccountTypes.Bank"), DataCompositionComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Currency", CurrentData.Currency                         , DataCompositionComparisonType.Equal));
 	
-	CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
-
-	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-		CashAccountType, , DataCompositionComparisonType.Equal));
-	
-	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Currency", 
-		CurrentData.Currency, , DataCompositionComparisonType.Equal));
-		
-	StartChoiceParameters.FillingData.Insert("Type", CashAccountType);
-	StartChoiceParameters.FillingData.Insert("Currency", CurrentData.Currency);
-	
-	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
+	CommonFormActions.AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 Procedure ChequeBondsAccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	DefaultEditTextParameters = New Structure("Company", Object.Company);
-	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
+	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
 	
-	CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
-	
-	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-		CashAccountType, ComparisonType.Equal));
-	
-	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type"    , PredefinedValue("Enum.CashAccountTypes.Bank"), ComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Currency", CurrentData.Currency                         , ComparisonType.Equal));
+
+	CommonFormActions.AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 #EndRegion

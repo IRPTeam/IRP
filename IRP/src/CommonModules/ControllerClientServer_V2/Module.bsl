@@ -329,7 +329,8 @@ EndFunction
 
 #EndRegion
 
-#IF Client THEN
+// #optimization 2
+//#IF Client THEN
 
 Procedure FillPropertyFormByDefault(Form, DataPaths, Parameters) Export
 	ArrayOfDataPath = StrSplit(DataPaths, ",");
@@ -357,7 +358,8 @@ Procedure FillPropertyFormByDefault(Form, DataPaths, Parameters) Export
 	EndIf;
 EndProcedure
 
-#ENDIF
+// #optimization 2
+//#ENDIF
 
 #Region API
 

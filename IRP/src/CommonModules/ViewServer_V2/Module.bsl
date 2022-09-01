@@ -20,8 +20,74 @@ Procedure OnCreateAtServer(Object, Form, TableNames) Export
 		ServerParameters.TableName = TrimAll(TableName);
 		Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.FormOnCreateAtServer(Parameters);
+		// #optimization 2
+		// is context call
+		If Form <> Undefined And TypeOf(Form) = Type("ClientApplicationForm") Then
+			ArrayOfAttributes = New Array();
+			
+			FillStore = False;
+			If CommonFunctionsClientServer.ObjectHasProperty(Form, "Store") Then
+				ArrayOfAttributes.Add("Store");
+				FillStore = True;
+			EndIf;
+			
+			FillDeliveryDate = False;
+			If CommonFunctionsClientServer.ObjectHasProperty(Form, "DeliveryDate") Then
+				ArrayOfAttributes.Add("DeliveryDate");
+				FillDeliveryDate = True;
+			EndIf;
+			If ArrayOfAttributes.Count() Then
+				If Not ValueIsFilled(Form.Parameters.Key) Then
+					ControllerClientServer_V2.FillPropertyFormByDefault(Form, StrConcat(ArrayOfAttributes, ","), Parameters);
+				Else
+					
+					If FillStore Then
+						StoreArray = GetStoreFromItemList(Object);
+						If StoreArray.Count() > 1 Then
+							Form.Store = Undefined;
+							Form.Items.Store.InputHint = StrConcat(StoreArray, "; ");
+						Else
+							Form.Items.Store.InputHint = "";
+							If StoreArray.Count() = 1 Then
+								Form.Store = StoreArray[0];
+							EndIf;
+						EndIf;
+					EndIf;
+					
+					If FillDeliveryDate Then
+						Form.DeliveryDate = GetDeliveryDateFromItemList(Object);
+					EndIf;
+					
+				EndIf;
+			EndIf;
+		EndIf;
 	EndDo;
 EndProcedure
+
+Function GetStoreFromItemList(Object)
+	ArrayOfStoresUnique = New Array();
+	For Each Row In Object.ItemList Do
+		If ValueIsFilled(Row.Store) And ArrayOfStoresUnique.Find(Row.Store) = Undefined Then
+			ArrayOfStoresUnique.Add(Row.Store);
+		EndIf;
+	EndDo;
+	Return ArrayOfStoresUnique;
+EndFunction
+
+Function GetDeliveryDateFromItemList(Object)
+	// create array of DeliveryDate with unique values
+	ArrayOfDeliveryDateUnique = New Array();
+	For Each Row In Object.ItemList Do
+		If ArrayOfDeliveryDateUnique.Find(Row.DeliveryDate) = Undefined Then
+			ArrayOfDeliveryDateUnique.Add(Row.DeliveryDate);
+		EndIf;
+	EndDo;
+	If ArrayOfDeliveryDateUnique.Count() = 1 Then
+		Return ArrayOfDeliveryDateUnique[0];
+	Else
+		Return Undefined;
+	EndIf;
+EndFunction
 
 #Region FORM_MODIFICATOR
 

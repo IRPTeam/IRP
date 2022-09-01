@@ -49,21 +49,25 @@ Procedure AccountOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	StandardProcessing = False;
-	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
-	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-		PredefinedValue("Enum.CashAccountTypes.Cash"), , DataCompositionComparisonType.Equal));
-	StartChoiceParameters.FillingData.Insert("Type", PredefinedValue("Enum.CashAccountTypes.Cash"));
-	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
+	CashAccountTypes = New ValueList();
+	CashAccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.POSCashAccount"));
+	CashAccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.Cash"));
+	
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountTypes, DataCompositionComparisonType.InList));
+	
+	CommonFormActions.AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	DefaultEditTextParameters = New Structure("Company", Object.Company);
-	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-		PredefinedValue("Enum.CashAccountTypes.Cash"), ComparisonType.Equal));
-	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
+	CashAccountTypes = New ValueList();
+	CashAccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.POSCashAccount"));
+	CashAccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.Cash"));
+	
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountTypes, ComparisonType.InList));
+	
+	CommonFormActions.AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 #EndRegion

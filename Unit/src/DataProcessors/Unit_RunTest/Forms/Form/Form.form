@@ -664,20 +664,17 @@
       </userVisible>
       <autoFill>true</autoFill>
     </contextMenu>
-    <type>InputField</type>
+    <type>TextDocumentField</type>
     <editMode>Enter</editMode>
     <showInHeader>true</showInHeader>
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:InputFieldExtInfo">
-      <width>50</width>
+    <extInfo xsi:type="form:TextDocFieldExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
+      <height>10</height>
       <autoMaxHeight>true</autoMaxHeight>
-      <wrap>true</wrap>
-      <multiLine>true</multiLine>
-      <chooseType>true</chooseType>
-      <typeDomainEnabled>true</typeDomainEnabled>
-      <textEdit>true</textEdit>
+      <horizontalStretch>true</horizontalStretch>
+      <verticalStretch>true</verticalStretch>
     </extInfo>
   </items>
   <autoCommandBar>

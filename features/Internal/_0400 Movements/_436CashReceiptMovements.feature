@@ -55,6 +55,8 @@ Scenario: _043600 preparation (Cash receipt)
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
 		When Create catalog PlanningPeriods objects
+		When Create POS cash account objects
+		When Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

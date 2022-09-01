@@ -14,15 +14,12 @@
 //  	** Value - String - Value
 //  StandardProcessing - Boolean - Standard processing
 Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Parameters, StandardProcessing) Export
-
+	// do not change this condition, if get return see ChoiceDataGetProcessing() in catalog manager module
 	If Not StandardProcessing Or Not ValueIsFilled(Parameters.SearchString) Then
 		Return;
 	EndIf;
 	
-	// Cut last symblos if it came from Excel
-	If StrEndsWith(Parameters.SearchString, "¶") Then 
-		Parameters.SearchString = Left(Parameters.SearchString, StrLen(Parameters.SearchString) - 1);
-	EndIf;
+	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
 
 	StandardProcessing = False;
 
@@ -30,6 +27,9 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	Settings = New Structure();
 	Settings.Insert("MetadataObject", MetadataObject);
 	Settings.Insert("Filter", "");
+	// enable search by code for all
+	Settings.Insert("UseSearchByCode", True);
+	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
@@ -53,65 +53,26 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		NewFilter.ComparisonType = ComparisonType.NotEqual;
 		NewFilter.Value = True;
 	EndIf;
-
-	For Each Filter In Parameters.Filter Do
-		FilterKey = Filter.Key; // String
-		If Upper(FilterKey) = Upper("CustomSearchFilter") Then
-			ArrayOfFilters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.CustomSearchFilter); // Array of see NewCustomSearchFilter
-			For Each FilterRow In ArrayOfFilters Do
-				NewFilter = QueryBuilder.Filter.Add("Ref." + FilterRow.FieldName);
-				NewFilter.Use = True;
-				NewFilter.ComparisonType = FilterRow.ComparisonType;
-				NewFilter.Value = FilterRow.Value;
-			EndDo;
-		Else
-			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.Key);
-			NewFilter.Use = True;
-			NewFilter.ComparisonType = ComparisonType.Equal;
-			NewFilter.Value = Filter.Value;
-		EndIf;
-	EndDo;
-	AccessSymbols = ".,- ¶" + Chars.LF + Chars.NBSp + Chars.CR;
-	SearchStringNumber = CommonFunctionsClientServer.GetNumberPartFromString(Parameters.SearchString, AccessSymbols);
+	
+	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
+	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters);
+			
+	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
 
 	Query = QueryBuilder.GetQuery();
-	Query.SetParameter("SearchStringNumber", SearchStringNumber);
-	Query.SetParameter("SearchString", Parameters.SearchString);
-	QueryTable = GetItemsBySearchString(Query);
-
-	ChoiceData = New ValueList(); // ValueList of CatalogRef.Items
-
-	For Each Row In QueryTable Do
-		If Not ChoiceData.FindByValue(Row.Ref) = Undefined Then
+	For Each Filter in Parameters.Filter Do
+		If Upper(Filter.Key) = Upper("CustomSearchFilter") Then
 			Continue;
 		EndIf;
-		
-		If Row.Sort = 0 Then
-			ChoiceData.Add(Row.Ref, "[" + Row.Ref.Code + "] " + Row.Presentation, False, PictureLib.AddToFavorites);
-		ElsIf Row.Sort = 1 Then
-			If IsBlankString(Row.Ref.ItemID) Then
-				ChoiceData.Add(Row.Ref, Row.Presentation, False, PictureLib.Price);
-			Else
-				ChoiceData.Add(Row.Ref, "(" + Row.Ref.ItemID + ") " + Row.Presentation, False, PictureLib.Price);
-			EndIf;
-		Else
-			ChoiceData.Add(Row.Ref, Row.Presentation);
-		EndIf;
+		Query.SetParameter(Filter.Key, Filter.Value);
 	EndDo;
-EndProcedure
+	Query.SetParameter("SearchStringNumber", SearchStringNumber);
+	Query.SetParameter("SearchString", Parameters.SearchString);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
 
-// Get items by search string.
-//
-// Parameters:
-//  Query - Query - Query
-//
-// Returns:
-//  ValueTable - Get items by search string:
-//		* Ref - CatalogRef.Items
-//		* Presentation - String
-Function GetItemsBySearchString(Query)
-	Return Query.Execute().Unload();
-EndFunction
+	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);
+EndProcedure
 
 // Replace description localization prefix.
 //

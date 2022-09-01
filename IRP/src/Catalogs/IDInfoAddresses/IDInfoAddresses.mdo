@@ -48,8 +48,7 @@
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <owners>ChartOfCharacteristicTypes.IDInfoTypes</owners>
-  <codeLength>9</codeLength>
-  <codeType>String</codeType>
+  <codeLength>12</codeLength>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>

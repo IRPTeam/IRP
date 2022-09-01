@@ -36,8 +36,11 @@
   <limitLevelCount>true</limitLevelCount>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
   <descriptionLength>64</descriptionLength>
   <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
   <defaultPresentation>AsDescription</defaultPresentation>
   <predefined>
     <items id="e913d420-ffbd-4366-9f1b-2c2b42de0fb7">

@@ -1,5 +1,4 @@
 
-
 Function GetServerData(Object, ArrayOfTableNames, FormTaxColumnsExists, TaxesCache, LoadDataAddress) Export
 	ServerData = New Structure();
 	ObjectMetadataInfo = ViewServer_V2.GetObjectMetadataInfo(Object, StrConcat(ArrayOfTableNames, ","));

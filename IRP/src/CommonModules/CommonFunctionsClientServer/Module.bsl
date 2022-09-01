@@ -91,6 +91,11 @@ Procedure CalculateVolume(Object) Export
 	Object.Volume = Object.Length * Object.Width * Object.Height;
 EndProcedure
 
+Function GetSearchStringNumber(SearchString) Export
+	AccessSymbols = ".,- ¶" + Chars.LF + Chars.NBSp + Chars.CR;
+	Return GetNumberPartFromString(SearchString, AccessSymbols);
+EndFunction
+
 Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", GetOnlyNumbers = False) Export
 
 	RejectSymbols = New Array;

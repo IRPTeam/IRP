@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e3dfc863-6e0d-4cac-bf10-9edf45e25a2a">
+  <producedTypes>
+    <objectType typeId="6a1afa8b-9fac-4266-9026-c9e560082d95" valueTypeId="c9df1ba8-3882-4333-853a-d1974fde40a7"/>
+    <refType typeId="c6ed9f39-a164-4078-bdf9-3323c45b08be" valueTypeId="2265c43d-2bd5-4526-9288-ee14ca6c4150"/>
+    <selectionType typeId="b284c164-83fc-45e0-943e-b72b6c19f253" valueTypeId="57c40f3c-d3e1-4b02-a7d2-47fb8b1560db"/>
+    <listType typeId="4b603f82-5160-49c7-8919-26c9c863597c" valueTypeId="8e0987dc-3b8e-4806-81f5-c0626b7169a3"/>
+    <managerType typeId="88e5063a-2e59-499d-8171-9738e227ba04" valueTypeId="1b5db656-f5f6-4e32-9e31-6a6c8e39cda7"/>
+  </producedTypes>
+  <name>ServiceExchangeHistory</name>
+  <synonym>
+    <key>en</key>
+    <value>Service exchange history</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.ServiceExchangeHistory.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.ServiceExchangeHistory.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Service exchange history item</value>
+  </objectPresentation>
+  <hierarchical>true</hierarchical>
+  <hierarchyType>HierarchyOfItems</hierarchyType>
+  <limitLevelCount>true</limitLevelCount>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>9</codeLength>
+  <descriptionLength>150</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.ServiceExchangeHistory.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.ServiceExchangeHistory.Form.ListForm</defaultListForm>
+  <attributes uuid="b772dbb1-ad7c-4836-a62f-2658ee3ce5fc">
+    <name>Time</name>
+    <synonym>
+      <key>en</key>
+      <value>Time</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="26c551a2-bd33-419b-826a-5638d45180cf">
+    <name>QueryType</name>
+    <synonym>
+      <key>en</key>
+      <value>Query type</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9856f3b4-5d23-4a02-99df-1c84e720d5f9">
+    <name>StatusCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Status code</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>3</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="64dc8874-63e1-4da1-94ae-499534b6f423">
+    <name>ResourceAddress</name>
+    <synonym>
+      <key>en</key>
+      <value>Resource address</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4f09936f-2696-4080-9567-b2363856db5e">
+    <name>Headers</name>
+    <synonym>
+      <key>en</key>
+      <value>Headers</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9ae8179b-6d99-416f-ad87-31018bf00045">
+    <name>HeadersMD5</name>
+    <synonym>
+      <key>en</key>
+      <value>Headers (md5)</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>36</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="05204b6d-1856-4c52-86ff-2453ae1a53f5">
+    <name>Body</name>
+    <synonym>
+      <key>en</key>
+      <value>Body</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7f6bc906-3b8a-4894-a52d-6bf334539d0d">
+    <name>BodyMD5</name>
+    <synonym>
+      <key>en</key>
+      <value>Body (md5)</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>36</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="7ef46636-0c1c-4da8-aed8-32e8d64af0e5">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="4ccd6173-6942-48eb-b3be-c69eab029238">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

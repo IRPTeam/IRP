@@ -48,6 +48,8 @@
   <commonPictures>CommonPicture.Unit_Autotest</commonPictures>
   <roles>Role.FullAccess</roles>
   <roles>Role.Unit_MainRole</roles>
+  <commonModules>CommonModule.IntegrationClientServer</commonModules>
+  <commonModules>CommonModule.IntegrationServer</commonModules>
   <commonModules>CommonModule.Unit_AddAttributeAndPropertySets</commonModules>
   <commonModules>CommonModule.Unit_CatalogCode</commonModules>
   <commonModules>CommonModule.Unit_ExpenseAndRevenueTypes</commonModules>
@@ -82,6 +84,7 @@
   <catalogs>Catalog.Items</catalogs>
   <catalogs>Catalog.ItemTypes</catalogs>
   <catalogs>Catalog.Partners</catalogs>
+  <catalogs>Catalog.ServiceExchangeHistory</catalogs>
   <catalogs>Catalog.Specifications</catalogs>
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.Users</catalogs>

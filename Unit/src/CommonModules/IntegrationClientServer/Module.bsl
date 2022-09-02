@@ -1,0 +1,71 @@
+
+&Around("SendRequestClientServer")
+Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo)
+	
+	ServiceExchangeData = GetServiceExchangeDataTemplate();
+	ServiceExchangeData.StartTime = CurrentDate();
+	ServiceExchangeData.Headers = ConnectionSetting.Headers;
+	ServiceExchangeData.QueryType = ConnectionSetting.QueryType;
+	ServiceExchangeData.RequestBody = RequestBody;
+	
+	ServerResponse = ProceedWithCall(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo);
+//	If Not ServerResponse.Success Then 
+//		Return ServerResponse;
+//	EndIf;
+		
+	ServiceExchangeData.EndTime = CurrentDate();
+	ServiceExchangeData.ServerResponse = ServerResponse;
+	
+	If Not ValueIsFilled(EndPoint) Then
+		ResourceAddress = ConnectionSetting.ResourceAddress;
+	Else
+		ResourceAddress = ConnectionSetting.ResourceAddress + ?(StrStartsWith(EndPoint, "/"), EndPoint, "/" + EndPoint);
+	EndIf;
+	SetResourceParameters(ResourceAddress, ResourceParameters, AddInfo);
+	SetRequestParameters(ResourceAddress, RequestParameters, AddInfo);
+	ServiceExchangeData.ResourceAddress = ResourceAddress;
+	
+	Description = "http";
+	If TypeOf(ConnectionSetting.SecureConnection) = Type("Boolean") And ConnectionSetting.SecureConnection Then
+		Description = Description + "s";
+	EndIf;
+	Description = Description + "://" + ConnectionSetting.Ip;
+	If Number(ConnectionSetting.Port) > 0 Then
+		Description = Description + ":" + Format(Number(ConnectionSetting.Port), "NG=;");
+	EndIf;
+	If Left(ResourceAddress, 1) <> "/" Then
+		Description = Description + "/";
+	EndIf;
+	Description = Description + ResourceAddress;
+	ServiceExchangeData.Description = Description;
+	
+	IntegrationServer.SaveServiceExchangeData(ServiceExchangeData);
+	
+	Return ServerResponse;
+EndFunction
+
+
+// Get service exchange data template.
+// 
+// Returns:
+//  Structure - Get service exchange data template:
+// * Description - String -
+// * ResourceAddress - String -
+// * QueryType - String -
+// * Headers - Map -
+// * RequestBody - Undefined -
+// * ServerResponse - See IntegrationClientServer.ServerResponse
+// * StartTime - Date -
+// * EndTime - Date -
+Function GetServiceExchangeDataTemplate() Export
+	ServiceExchangeData = New Structure;
+	ServiceExchangeData.Insert("Description", "");
+	ServiceExchangeData.Insert("ResourceAddress", "");
+	ServiceExchangeData.Insert("QueryType", "");
+	ServiceExchangeData.Insert("Headers", New Map);
+	ServiceExchangeData.Insert("RequestBody", Undefined);
+	ServiceExchangeData.Insert("ServerResponse", Undefined);
+	ServiceExchangeData.Insert("StartTime", Date(1,1,1));
+	ServiceExchangeData.Insert("EndTime", Date(1,1,1));
+	Return ServiceExchangeData;
+EndFunction

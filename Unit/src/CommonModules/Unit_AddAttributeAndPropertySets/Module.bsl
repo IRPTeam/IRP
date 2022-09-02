@@ -59,6 +59,7 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Catalog.PrintTemplates");
 	ArrayOfExcluded.Add("Catalog.ReportOptions");
 	ArrayOfExcluded.Add("Catalog.RowIDs");
+	ArrayOfExcluded.Add("Catalog.ServiceExchangeHistory");
 	ArrayOfExcluded.Add("Catalog.TransactionsKeys");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
@@ -91,6 +92,7 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Catalog.PrintTemplates");
 	ArrayOfExcluded.Add("Catalog.ReportOptions");
 	ArrayOfExcluded.Add("Catalog.RowIDs");
+	ArrayOfExcluded.Add("Catalog.ServiceExchangeHistory");
 	ArrayOfExcluded.Add("Catalog.TransactionsKeys");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");

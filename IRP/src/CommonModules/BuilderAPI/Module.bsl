@@ -242,7 +242,7 @@ EndFunction
 // 
 // Returns:
 //  ValueTableRow
-Function AddRow(Wrapper, TableName) Export
+Function AddRow(Wrapper, TableName = Undefined) Export
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;
 	EndIf;

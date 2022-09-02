@@ -8,7 +8,7 @@ Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Exp
 
 	CustomizedSetting = New Structure();
 	SettingsSource = IntegrationSettingsRef.ConnectionSetting;
-	If Not SessionParameters.ConnectionSettings.isProduction And IntegrationSettingsRef.ConnectionSettingTest.Count() > 0 Then
+	If Not SessionParameters.ConnectionSettings.isProduction Then
 		SettingsSource = IntegrationSettingsRef.ConnectionSettingTest;
 	EndIf; 		  
 	For Each Str In SettingsSource Do

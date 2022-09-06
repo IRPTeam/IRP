@@ -231,11 +231,12 @@ Scenario: _300111 cleaning up the added picture to the additional details and ad
 		| 'Description' |
 		| 'Brand'     |
 		And I select current line in "List" table
+		And Delay 10
 		And I click "Icon" hyperlink
 		Then "1C:Enterprise" window is opened
-		And Delay 3
+		And Delay 10
 		And I click "Clear" button
-		And Delay 3
+		And Delay 10
 	* Check deletion picture
 		Then the field named "Icon" value does not contain "e1cib/tempstorage/" text
 		And I click "Save and close" button

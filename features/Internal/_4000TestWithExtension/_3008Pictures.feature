@@ -233,7 +233,9 @@ Scenario: _300111 cleaning up the added picture to the additional details and ad
 		And I select current line in "List" table
 		And I click "Icon" hyperlink
 		Then "1C:Enterprise" window is opened
+		And Delay 3
 		And I click "Clear" button
+		And Delay 3
 	* Check deletion picture
 		Then the field named "Icon" value does not contain "e1cib/tempstorage/" text
 		And I click "Save and close" button
@@ -260,6 +262,7 @@ Scenario: _300103 item pictures upload
 	* Add picture
 		And I select external file "$Path$/features/Internal/_4000TestWithExtension/reddress.png"
 		And I click "add_picture" button
+		And Delay 10
 	* Check adding picture 
 		And I click "Attached files" button	
 		And "FileList" table contains lines

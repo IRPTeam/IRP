@@ -16,7 +16,7 @@ Background:
 
 Scenario: _602700 preparation (data history)
 	When set True value to the constant
-	And I set "True" value to the constant "UseJobQueueForExternalFunctions"
+	When set True value to the constant Use job queue for external functions
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info

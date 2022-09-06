@@ -12,7 +12,7 @@ Background:
 
 	
 Scenario:_800001 create SaaS area
-	And I set "True" value to the constant "SaasMode"
+	When set True value to the constant SaasMode
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Create area Discount

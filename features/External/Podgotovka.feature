@@ -1415,7 +1415,56 @@ Scenario: set True value to the constant
 				
 
 Scenario: set True value to the constant Use consolidated retail sales
-		And I set "True" value to the constant "UseConsolidatedRetailSales"
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                        |
+			| 'Use consolidated retail sales' |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+		
+Scenario: set True value to the constant Use accounting
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'         |
+			| 'Use accounting' |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window				
+
+Scenario: set True value to the constant Use job queue for external functions
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'         |
+			| 'Use job queue for external functions' |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window	
+
+Scenario: set True value to the constant Use lock data modification
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'         |
+			| 'Use lock data modification' |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window	
+
+Scenario: set True value to the constant EnableLinkedRowsIntegrity
+		And I execute 1C:Enterprise script at server
+ 			| "Constants.EnableLinkedRowsIntegrity.Set(True);" |
+
+Scenario: set True value to the constant SaasMode
+		And I execute 1C:Enterprise script at server
+ 			| "Constants.SaasMode.Set(True);" |
+
+Scenario: set True value to the constant UseSimpleMode
+		And I execute 1C:Enterprise script at server
+ 			| "Constants.UseSimpleMode.Set(True);" |
 
 Scenario: add sales tax settings 
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"

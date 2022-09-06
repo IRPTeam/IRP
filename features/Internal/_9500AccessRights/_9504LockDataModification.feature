@@ -121,7 +121,7 @@ Scenario: 950403 check function option UseLockDataModification
 	And functions panel does not contain menu items
 		| "Lock data modification reasons" |
 		| "Lock data modification rules" |
-	And I set "True" value to the constant "UseLockDataModification"
+	When set True value to the constant Use lock data modification
 	And I close TestClient session
 	And I connect "Этот клиент" profile of TestClient
 
@@ -1934,7 +1934,7 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 			And I select current line in "List" table
 			And I click "Save and close" button
 			Then user message window does not contain messages
-			And I set "True" value to the constant "UseLockDataModification"
+			When set True value to the constant Use lock data modification
 			And I close TestClient session
 			And I connect "Этот клиент" profile of TestClient
 

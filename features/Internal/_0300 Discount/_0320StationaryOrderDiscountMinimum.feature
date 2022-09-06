@@ -77,7 +77,7 @@ Scenario: _032000 discount form
 			| 'Maximum'      |
 		And I activate current test client window
 		And I press keyboard shortcut "Enter"
-		And "Offers" table became equal
+		And "Offers" table contains lines
 			| 'Presentation'                                                               | 'Is select'  | '%' | '∑' |
 			| 'Special Offers'                                                             | ''           | ''  | ''  |
 			| 'Minimum'                                                                    | ''           | ''  | ''  |

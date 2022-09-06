@@ -121,7 +121,8 @@ Scenario: 950403 check function option UseLockDataModification
 	And functions panel does not contain menu items
 		| "Lock data modification reasons" |
 		| "Lock data modification rules" |
-	When set True value to the constant Use lock data modification
+	And I execute 1C:Enterprise script at server
+ 			| "Constants.UseLockDataModification.Set(True);" |
 	And I close TestClient session
 	And I connect "Этот клиент" profile of TestClient
 

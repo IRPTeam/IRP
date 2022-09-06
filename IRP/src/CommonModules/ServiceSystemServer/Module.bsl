@@ -84,7 +84,12 @@ Procedure UpdateScheduledJob(ScheduledJob, AddJob) Export
 
 	ScheduledJobsList = ScheduledJobs.GetScheduledJobs(New Structure("Key", ScheduledJob.Key));
 	For Each Job In ScheduledJobsList Do
-		Job.Delete();
+		If Job.Predefined Then
+			Job.Use = False;
+			Job.Write();
+		Else
+			Job.Delete();
+		EndIf;
 	EndDo;
 	If AddJob Then
 		Job = ScheduledJobs.CreateScheduledJob(ScheduledJob);
@@ -425,7 +430,14 @@ Procedure StopShedulerJob(ExternalFunction) Export
 	
 	JobRecord = Job[0];
 	
-	CurrentJob = BackgroundJobs.FindByUUID(JobRecord.JobID);
+	If Not ValueIsFilled(JobRecord.JobID) Then
+        Return;
+    EndIf;
+    CurrentJob = BackgroundJobs.FindByUUID(JobRecord.JobID);
+    If CurrentJob = Undefined Then
+        Return;
+    EndIf;
+    
 	If CurrentJob.State = BackgroundJobState.Active Then
 		CurrentJob.Cancel();
 	EndIf;
@@ -458,7 +470,14 @@ Procedure ContinueOrPauseShedulerJob(ExternalFunction, Pause = True) Export
 	
 	JobRecord = Job[0];
 	
-	CurrentJob = BackgroundJobs.FindByUUID(JobRecord.JobID);
+	If Not ValueIsFilled(JobRecord.JobID) Then
+        Return;
+    EndIf;
+    CurrentJob = BackgroundJobs.FindByUUID(JobRecord.JobID);
+    If CurrentJob = Undefined Then
+        Return;
+    EndIf;
+    
 	If CurrentJob.State = BackgroundJobState.Active 
 		And JobRecord.Status = Enums.JobStatus.Active And Pause Then
 		JobRecord.Status = Enums.JobStatus.Pause;

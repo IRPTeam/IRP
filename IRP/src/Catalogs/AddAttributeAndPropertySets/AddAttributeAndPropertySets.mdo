@@ -748,6 +748,27 @@
         <value>105</value>
       </code>
     </items>
+    <items id="ab95d52d-6a3f-4049-b178-3e5b3c6f3100">
+      <name>Document_WorkOrder</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>106</value>
+      </code>
+    </items>
+    <items id="b06e06bb-d4fe-4dab-942b-1d830d92d03f">
+      <name>Document_WorkOrderClosing</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>107</value>
+      </code>
+    </items>
+    <items id="f8ba27d3-5892-4805-ac31-faa93fa57e4d">
+      <name>Catalog_BillOfMaterials</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>108</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

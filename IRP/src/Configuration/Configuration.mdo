@@ -119,6 +119,7 @@
   <subsystems>Subsystem.Retail</subsystems>
   <subsystems>Subsystem.Accounting</subsystems>
   <subsystems>Subsystem.AdminFunctions</subsystems>
+  <subsystems>Subsystem.WorkOrders</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -421,6 +422,9 @@
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.DocConsolidatedRetailSalesClient</commonModules>
   <commonModules>CommonModule.DocConsolidatedRetailSalesServer</commonModules>
+  <commonModules>CommonModule.DocWorkOrderServer</commonModules>
+  <commonModules>CommonModule.DocWorkOrderClient</commonModules>
+  <commonModules>CommonModule.DocWorkOrderClosingServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -692,6 +696,7 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.BillOfMaterials</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
@@ -746,6 +751,9 @@
   <documents>Document.ChequeBondTransaction</documents>
   <documents>Document.ChequeBondTransactionItem</documents>
   <documents>Document.ConsolidatedRetailSales</documents>
+  <documents>Document.WorkOrder</documents>
+  <documents>Document.WorkOrderClosing</documents>
+  <documents>Document.WorkSheet</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -801,6 +809,9 @@
   <enums>Enum.ExternalFunctionType</enums>
   <enums>Enum.ConsolidatedRetailSalesStatuses</enums>
   <enums>Enum.JobStatus</enums>
+  <enums>Enum.MaterialOwners</enums>
+  <enums>Enum.BusinessUnitTypes</enums>
+  <enums>Enum.BillOfMaterialsTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

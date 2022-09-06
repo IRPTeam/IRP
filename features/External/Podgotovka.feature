@@ -1349,36 +1349,70 @@ Scenario: create PurchaseReturn300301
 
 
 Scenario: set True value to the constant
-		And I set "True" value to the constant "UseItemKey"
-		And I set "True" value to the constant "UseCompanies"
-		And I set "True" value to the constant "UseSerialLotNumbers"
-		And I set "True" value to the constant "UseExpenseAndRevenueTypes"
-		And I set "True" value to the constant "UseShipmentConfirmationAndGoodsReceipts"
-		And I set "True" value to the constant "UseStores"
-		And I set "True" value to the constant "UsePartnerTerms"
-		And I set "True" value to the constant "UseAging"
-		And I set "True" value to the constant "UseOrders"
-		And I set "True" value to the constant "UseDeliveryDate"
-		And I set "True" value to the constant "UseSpecialOffers"
-		And I set "True" value to the constant "UsePriceByProperties"
-		And I set "True" value to the constant "UseBankDocuments"
-		And I set "True" value to the constant "UsePartnerItems"
-		And I set "True" value to the constant "UseContactInformation"
-		And I set "True" value to the constant "UseBusinessUnits"
-		And I set "True" value to the constant "UseManagersAndSalesPersons"
-		And I set "True" value to the constant "UseIntegrations"
-		And I set "True" value to the constant "UseEquipments"
-		And I set "True" value to the constant "UseAddAttributesAndProperties"
-		And I set "True" value to the constant "UseAdditionalSettings"
-		And I set "True" value to the constant "UseUnitsAndDimensions"
-		And I set "True" value to the constant "UsePlannedReceiptReservation"
-		And I set "True" value to the constant "UseLandedCost"
-		And I set "True" value to the constant "UseRetail"
-		And I set "True" value to the constant "UseBundling"
-		And I set "True" value to the constant "UseCashTransaction"
-		And I set "True" value to the constant "UsePartnersHierarchy"
-		And I set "True" value to the constant "UseMobile"
-		And I set "True" value to the constant "UseChequeBonds"
+		// And I set "True" value to the constant "UseItemKey"
+		// And I set "True" value to the constant "UseCompanies"
+		// And I set "True" value to the constant "UseSerialLotNumbers"
+		// And I set "True" value to the constant "UseExpenseAndRevenueTypes"
+		// And I set "True" value to the constant "UseShipmentConfirmationAndGoodsReceipts"
+		// And I set "True" value to the constant "UseStores"
+		// And I set "True" value to the constant "UsePartnerTerms"
+		// And I set "True" value to the constant "UseAging"
+		// And I set "True" value to the constant "UseOrders"
+		// And I set "True" value to the constant "UseDeliveryDate"
+		// And I set "True" value to the constant "UseSpecialOffers"
+		// And I set "True" value to the constant "UsePriceByProperties"
+		// And I set "True" value to the constant "UseBankDocuments"
+		// And I set "True" value to the constant "UsePartnerItems"
+		// And I set "True" value to the constant "UseContactInformation"
+		// And I set "True" value to the constant "UseBusinessUnits"
+		// And I set "True" value to the constant "UseManagersAndSalesPersons"
+		// And I set "True" value to the constant "UseIntegrations"
+		// And I set "True" value to the constant "UseEquipments"
+		// And I set "True" value to the constant "UseAddAttributesAndProperties"
+		// And I set "True" value to the constant "UseAdditionalSettings"
+		// And I set "True" value to the constant "UseUnitsAndDimensions"
+		// And I set "True" value to the constant "UsePlannedReceiptReservation"
+		// And I set "True" value to the constant "UseLandedCost"
+		// And I set "True" value to the constant "UseRetail"
+		// And I set "True" value to the constant "UseBundling"
+		// And I set "True" value to the constant "UseCashTransaction"
+		// And I set "True" value to the constant "UsePartnersHierarchy"
+		// And I set "True" value to the constant "UseMobile"
+		// And I set "True" value to the constant "UseChequeBonds"
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I click "Check all" button
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                     | 'Use' |
+			| 'Use lock data modification' | 'Yes' |
+		And I activate "Use" field in "FunctionalOptions" table
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                        | 'Use' |
+			| 'Use consolidated retail sales' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                               | 'Use' |
+			| 'Use job queue for external functions' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'             | 'Use' |
+			| 'Use all functional' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'         | 'Use' |
+			| 'Use accounting' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+		
+		
+				
+				
 
 Scenario: set True value to the constant Use consolidated retail sales
 		And I set "True" value to the constant "UseConsolidatedRetailSales"

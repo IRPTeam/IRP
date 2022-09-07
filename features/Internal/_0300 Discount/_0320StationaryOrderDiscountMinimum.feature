@@ -78,10 +78,10 @@ Scenario: _032000 discount form
 		And I activate current test client window
 		And I press keyboard shortcut "Enter"
 		And "Offers" table contains lines
-			| 'Presentation'                                                               | 'Is select'  | '%' | '∑' |
+			| 'Presentation'                                                               | 'Is select'  | '%' | 'Amount' |
 			| 'Special Offers'                                                             | ''           | ''  | ''  |
 			| 'Minimum'                                                                    | ''           | ''  | ''  |
-			| 'Special Message DialogBox'                                                  | '✔'         | ''  | ''  |
+			| 'Special Message DialogBox'                                                  | '✔'          | ''  | ''  |
 			| 'Discount 1 without Vat'                                                     | '✔'         | ''  | ''  |
 			| 'Maximum'                                                                    | ''           | ''  | ''  |
 			| 'Discount Price 1'                                                           | '☐'         | ''  | ''  |
@@ -186,9 +186,9 @@ Scenario: _032001 discount calculation Discount 2 without Vat in the group Sum i
 	And I click "OK" button
 	And I click "Save" button
 	And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'     | 'Offers amount' |
-		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000' | '474,56'        |
-		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000' | '271,20'        |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity' | 'Offers amount' |
+		| 'Shirt'    | '296,61' | '38/Black'  | 'Store 02' | '8,000'    | '474,56'        |
+		| 'Trousers' | '338,98' | '36/Yellow' | 'Store 02' | '4,000'    | '271,20'        |
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines

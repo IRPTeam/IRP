@@ -1360,6 +1360,29 @@ Scenario: Create catalog IntegrationSettings objects
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e4' | 'AddressPath'      | '#workingDir#/Picture/Source' 							               |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e5' | 'AddressPath'      | '#workingDir#/Picture/Prewiev'                                          |
 
+Scenario: Create catalog IntegrationSettings objects (db connection)
+
+
+	And I check or create catalog "IntegrationSettings" objects:
+		| 'Ref'                                                                         | 'DeletionMark' | 'Code' | 'Description' | 'ExternalDataProc' | 'IntegrationType'            | 'ExternalDataProcSettings'              | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'False'        | 6      | 'Test'        | ''                 | 'Enum.IntegrationType.Other' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | '_536435dbf88f4d98875efa209108e8de' |
+
+	And I refill object tabular section "ConnectionSetting":
+		| 'Ref'                                                                         | 'Key'                    | 'Value'                     |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'IntegrationSettingsRef' | ''                          |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'QueryType'              | 'GET'                       |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'ResourceAddress'        | '/#Tag#/hs/connection/test' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'Ip'                     | 'localhost'                 |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'Port'                   | '#webPort#'                 |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'User'                   | 'CI'                        |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'Password'               | 'CI'                        |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'Proxy'                  | ''                          |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'TimeOut'                | 60                          |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'SecureConnection'       | 'False'                     |
+
+
+
+
 Scenario: Create catalog AccountingOperations objects
 
 	And I check or create catalog "AccountingOperations" objects:

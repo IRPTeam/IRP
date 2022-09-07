@@ -1311,13 +1311,6 @@
 		</right>
 	</object>
 	<object>
-		<name>HTTPService.FileTransferService.URLTemplate.FileTransfer.Method.GET</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.SharedReportOptions</name>
 		<right>
 			<name>Read</name>
@@ -6840,13 +6833,6 @@
 		</right>
 		<right>
 			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>HTTPService.FileTransferService.URLTemplate.FileTransfer.Method.POST</name>
-		<right>
-			<name>Use</name>
 			<value>true</value>
 		</right>
 	</object>

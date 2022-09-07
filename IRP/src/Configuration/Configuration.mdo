@@ -438,7 +438,7 @@
   <commonAttributes>CommonAttribute.Width</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
-  <httpServices>HTTPService.FileTransferService</httpServices>
+  <httpServices>HTTPService.TestConnection</httpServices>
   <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>

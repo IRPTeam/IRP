@@ -363,7 +363,7 @@ Scenario: _029518 creating a bundle of 2 different properties + one repeating of
 	* Check creation of an Item key on a bundle by Dress + Scarf
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table
-			| Description         | Item type |
+			| Description     | Item type |
 			| Scarf + Dress   | Clothes   |
 		And I select current line in "List" table
 		And In this window I click command interface button "Item keys"
@@ -374,7 +374,9 @@ Scenario: _029518 creating a bundle of 2 different properties + one repeating of
 		And I close all client application windows
 	* Check an auto-generated specification on Bundle
 		Given I open hyperlink "e1cib/list/Catalog.Specifications"
-		And I go to the last line in "List" table
+		And I go to line in "List" table
+			| 'Code' | 'Description' | 'Type'   |
+			| '11'   | 'Dress+Scarf' |  'Bundle'|
 		And I select current line in "List" table
 		Then the form attribute named "Description_en" became equal to "Dress+Scarf"
 		Then the form attribute named "Type" became equal to "Bundle"

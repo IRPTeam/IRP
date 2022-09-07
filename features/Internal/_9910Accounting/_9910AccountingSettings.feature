@@ -15,7 +15,7 @@ Background:
 
 Scenario: _099100 preparation
 	When set True value to the constant
-	And I set "True" value to the constant "UseAccounting"
+	When set True value to the constant Use accounting
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info

@@ -11,7 +11,7 @@ Background:
 
 
 Scenario: _900000 preparation
-	And I set "True" value to the constant "UseSimpleMode"
+	When set True value to the constant UseSimpleMode
 	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 	And I click "Update defaults" button
 	And I click "Update all user settings" button

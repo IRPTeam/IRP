@@ -264,8 +264,8 @@ Scenario: _034003 check that discounts with the Sales document type are not disp
 	* Check the discount tree
 		And I click "% Offers" button
 		And "Offers" table became equal
-		| 'Presentation'      | 'Is select' | '%' | '∑' |
-		| 'Document discount' | '☐'         | ''  | ''  |
+		| 'Presentation'      | 'Is select' | '%' | 'Amount' |
+		| 'Document discount' | '☐'         | ''  | ''       |
 		And I close all client application windows
 	* Open Purchase Order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -273,7 +273,7 @@ Scenario: _034003 check that discounts with the Sales document type are not disp
 	* Check the discount tree
 		And I click "% Offers" button
 		And "Offers" table became equal
-		| 'Presentation'      | 'Is select' | '%' | '∑' |
+		| 'Presentation'      | 'Is select' | '%' | 'Amount' |
 		| 'Document discount' | '☐'        | ''  | ''  |
 		And I close all client application windows
 
@@ -293,7 +293,7 @@ Scenario: _034004 check that discounts with the Purchase document type are not d
 		And I click the button named "FormCreate"
 		And I click "% Offers" button
 		And "Offers" table does not contain lines
-		| 'Presentation'      | 'Is select' | '%' | '∑' |
+		| 'Presentation'      | 'Is select' | '%' | 'Amount' |
 		| 'Document discount' | ' '         | ''  | ''  |
 		And I close all client application windows
 	* Check that the Document discount is not displayed in the Sales invoice document
@@ -301,7 +301,7 @@ Scenario: _034004 check that discounts with the Purchase document type are not d
 		And I click the button named "FormCreate"
 		And I click "% Offers" button
 		And "Offers" table does not contain lines
-		| 'Presentation'      | 'Is select' | '%' | '∑' |
+		| 'Presentation'      | 'Is select' | '%' | 'Amount' |
 		| 'Document discount' | ' '         | ''  | ''  |
 		And I close all client application windows
 	* Then I return the Document discount type back

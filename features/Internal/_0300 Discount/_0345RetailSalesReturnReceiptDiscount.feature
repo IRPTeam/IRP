@@ -87,7 +87,7 @@ Scenario: _034501 check discount in Retail sales receipt
 			And in the table "ItemList" I click "% Offers" button
 			Then "Pickup special offers" window is opened
 			And I go to line in "Offers" table
-				| '%'    | 'Is select' | 'Presentation'     | '∑'        |
+				| '%'    | 'Is select' | 'Presentation'     | 'Amount'        |
 				| '5,00' | '✔'         | 'Discount Price 1' | '2 875,00' |
 			And I activate "Is select" field in "Offers" table
 			And I select current line in "Offers" table
@@ -105,9 +105,9 @@ Scenario: _034501 check discount in Retail sales receipt
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "7 894,06"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "51 750,00"
 			And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity'       | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-				| '520,00' | 'Dress' | '18%' | 'M/White'  | '5 200,00'      | '100,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '7 138,98'   | '39 661,02'  | '46 800,00'    | 'Store 01' |
-				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Quantity' | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '520,00' | 'Dress' | '18%' | 'M/White'  | '5 200,00'      | '100,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '7 138,98'   | '39 661,02'  | '46 800,00'    | 'Store 01' |
+				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'   | 'Basic Price Types' | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
 			* Filling in payment tab
 				And I move to "Payments" tab
 				And in the table "Payments" I click "Add" button

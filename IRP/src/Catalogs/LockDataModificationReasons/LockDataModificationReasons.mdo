@@ -417,6 +417,31 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="870ee010-42d6-4f37-b47d-4cf638117b40">
+    <producedTypes>
+      <objectType typeId="35645f25-7d98-4c00-95c2-c7afe71741a5" valueTypeId="805aea9d-cdc9-4410-8b1d-bb5209e97c68"/>
+      <rowType typeId="20a053f3-5f95-4d2c-8652-723c825f1e3c" valueTypeId="678a377b-4290-4beb-a99f-5239a3af1889"/>
+    </producedTypes>
+    <name>ResponsibleUsers</name>
+    <synonym>
+      <key>en</key>
+      <value>Responsible users</value>
+    </synonym>
+    <attributes uuid="78da9692-71ba-4de5-9341-33e5dd4b0cf1">
+      <name>User</name>
+      <synonym>
+        <key>en</key>
+        <value>User</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Users</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="13f935b3-bff3-4144-a391-f5baf8875768">
     <name>ItemForm</name>
     <synonym>

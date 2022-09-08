@@ -80,7 +80,13 @@ EndFunction
 // Returns:
 //   Arbitrary
 Function GetRefAttribute(Ref, Name) Export
-	Return Ref[Name];
+	Parts = StrSplit(Name, ".");
+	Data = Ref;
+	For Each Attr In Parts Do
+		//@skip-check statement-type-change
+		Data = Data[Attr];
+	EndDo;
+	Return Data;
 EndFunction
 
 // Serialize JSON.

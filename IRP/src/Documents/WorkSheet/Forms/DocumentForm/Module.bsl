@@ -49,6 +49,7 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	DocWorkSheetClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+	SetVisibleRows_Materials();
 EndProcedure
 
 &AtClient

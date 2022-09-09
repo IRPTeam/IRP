@@ -47,6 +47,9 @@
 			<item>
 				<field>MaterialsIsVisible</field>
 			</item>
+			<item>
+				<field>MaterialsCostWriteOff</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">

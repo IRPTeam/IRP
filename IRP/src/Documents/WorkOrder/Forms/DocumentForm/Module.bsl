@@ -51,6 +51,7 @@ EndProcedure
 Procedure AfterWrite(WriteParameters)
 	DocWorkOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 	UpdateTotalAmounts();
+	SetVisibleRows_Materials();
 EndProcedure
 
 &AtClient

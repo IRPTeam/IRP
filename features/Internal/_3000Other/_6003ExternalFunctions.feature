@@ -177,7 +177,7 @@ Scenario: _602706 check user message
 Scenario: _602780 test data base connection
 	And I close all client application windows
 	* Сondition check
-		If "#Publication#" variable is equal to "False" Then
+		If "$Publication$" variable is equal to "false" Then
 			Then I stop script execution "Skipped"
 	* Select integration settings
 		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"

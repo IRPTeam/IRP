@@ -7896,7 +7896,9 @@ Procedure _CommitChainChanges(Cache, Source)
 	For Each Property In Cache Do
 		PropertyName  = Property.Key;
 		PropertyValue = Property.Value;
-		If Upper(PropertyName) = Upper("TaxList") Or Upper(PropertyName) = Upper("SerialLotNumbers") Then
+		If Upper(PropertyName) = Upper("TaxList") 
+			Or Upper(PropertyName) = Upper("SerialLotNumbers") 
+			Or Upper(PropertyName) = Upper("SpecialOffers") Then
 			// tabular part Taxex and Serial lot numbers moved transferred completely
 			ArrayOfKeys = New Array();
 			For Each Row In PropertyValue Do

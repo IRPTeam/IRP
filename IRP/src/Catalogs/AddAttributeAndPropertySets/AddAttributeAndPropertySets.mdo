@@ -769,6 +769,13 @@
         <value>108</value>
       </code>
     </items>
+    <items id="69f7e034-c3a9-4bba-8075-9da8eda7d4c1">
+      <name>Document_WorkSheet</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>109</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

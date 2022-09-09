@@ -12,7 +12,6 @@ EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	Form.Taxes_CreateFormControls();
 //	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
@@ -21,7 +20,6 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	Form.Taxes_CreateFormControls();
 //	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
@@ -34,8 +32,6 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Partner");
 	AttributesArray.Add("LegalName");
-	AttributesArray.Add("Agreement");	
-	AttributesArray.Add("Status");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do
 		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
@@ -69,9 +65,14 @@ Function GetMaterialsForWork(BillOfMaterialsRef, UUID) Export
 	|	BillOfMaterialsContent.ItemKey AS ItemKey,
 	|	BillOfMaterialsContent.Unit AS Unit,
 	|	BillOfMaterialsContent.Quantity AS Quantity,
+	
+	|	BillOfMaterialsContent.Item AS ItemBOM,
+	|	BillOfMaterialsContent.ItemKey AS ItemKeyBOM,
+	|	BillOfMaterialsContent.Unit AS UnitBOM,
+	|	BillOfMaterialsContent.Quantity AS QuantityBOM,
+	
 	|	BillOfMaterialsContent.Ref.BusinessUnit.MaterialStore AS Store,
-	|	VALUE(Enum.MaterialsCostWriteOff.IncludeToWorkCost) AS CostWriteOff,
-	|	VALUE(Enum.ProcurementMethods.Stock) AS ProcurementMethod
+	|	VALUE(Enum.MaterialsCostWriteOff.IncludeToWorkCost) AS CostWriteOff
 	|FROM
 	|	Catalog.BillOfMaterials.Content AS BillOfMaterialsContent
 	|WHERE
@@ -81,12 +82,10 @@ Function GetMaterialsForWork(BillOfMaterialsRef, UUID) Export
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	
-//	BillOfMaterials_UUID = String(Object.BillOfMaterials.UUID());
-//	For Each Row In QueryResults[1].Unload() Do
-//		RowUniqueID = String(Row.ItemKeyBOM.UUID()) + "-" + BillOfMaterials_UUID;
-	
 	Address = PutToTempStorage(QueryTable, UUID);
-	GroupColumns = "Item, ItemKey, Unit, Store, CostWriteOff, ProcurementMethod";
+	GroupColumns = "Item, ItemKey, Unit, ItemBOM, ItemKeyBOM, UnitBOM, Store, CostWriteOff";
+	SumColumns = "Quantity, QuantityBOM";
 	
-	Return New Structure("Address, GroupColumns", Address, GroupColumns);
+	Return New Structure("Address, GroupColumns, SumColumns", Address, GroupColumns, SumColumns);
 EndFunction
+

@@ -425,6 +425,8 @@
   <commonModules>CommonModule.DocWorkOrderServer</commonModules>
   <commonModules>CommonModule.DocWorkOrderClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderClosingServer</commonModules>
+  <commonModules>CommonModule.DocWorkSheetServer</commonModules>
+  <commonModules>CommonModule.DocWorkSheetClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -809,7 +811,7 @@
   <enums>Enum.ExternalFunctionType</enums>
   <enums>Enum.ConsolidatedRetailSalesStatuses</enums>
   <enums>Enum.JobStatus</enums>
-  <enums>Enum.MaterialOwners</enums>
+  <enums>Enum.MaterialsCostWriteOff</enums>
   <enums>Enum.BusinessUnitTypes</enums>
   <enums>Enum.BillOfMaterialsTypes</enums>
   <reports>Report.AllRegistersMovement</reports>

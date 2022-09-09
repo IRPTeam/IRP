@@ -105,6 +105,23 @@ Procedure UpdateTotalAmounts() Export
 	EndDo;
 EndProcedure
 
+&AtClient
+Procedure SetVisibleRows_Materials(ActivateRow = True)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	For Each Row In Object.Materials Do
+		Row.IsVisible = Row.KeyOwner = CurrentData.Key;
+	EndDo;
+	If ActivateRow Then
+		VisibleRows = Object.Materials.FindRows(New Structure("IsVisible", True));
+		If VisibleRows.Count() Then
+			Items.Materials.CurrentRow = VisibleRows[0].GetID();
+		EndIf;
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region _DATE
@@ -219,6 +236,75 @@ EndProcedure
 
 #EndRegion
 
+#Region MATERIALS
+
+&AtClient
+Procedure MaterialsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocWorkOrderClient.MaterialsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+	SetVisibleRows_Materials(False);
+EndProcedure
+
+#Region MATERIALS_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure MaterialsItemOnChange(Item)
+	DocWorkOrderClient.MaterialsItemOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure MaterialsItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocWorkOrderClient.MaterialsItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure MaterialsItemEditTextChange(Item, Text, StandardProcessing)
+	DocWorkOrderClient.MaterialsItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure MaterialsItemKeyOnChange(Item)
+	DocWorkOrderClient.MaterialsItemKeyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure MaterialsUnitOnChange(Item)
+	DocWorkOrderClient.MaterialsUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure MaterialsQuantityOnChange(Item)
+	DocWorkOrderClient.MaterialsQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region WORKERS
+
+&AtClient
+Procedure WorkersBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocWorkOrderClient.WorkersBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST
 
 &AtClient
@@ -239,6 +325,11 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocWorkOrderClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListOnActivateRow(Item)
+	SetVisibleRows_Materials();
 EndProcedure
 
 #Region ITEM_LIST_COLUMNS
@@ -267,6 +358,16 @@ EndProcedure
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocWorkOrderClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region BILL_OF_MATERIALS
+
+&AtClient
+Procedure ItemListBillOfMaterialsOnChange(Item)
+	DocWorkOrderClient.ItemListBillOfMaterialsOnChange(Object, ThisObject, Item);
+	SetVisibleRows_Materials();
 EndProcedure
 
 #EndRegion
@@ -490,25 +591,3 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 #EndRegion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

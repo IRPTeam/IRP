@@ -113,5 +113,6 @@
     <types>DocumentRef.ConsolidatedRetailSales</types>
     <types>DocumentRef.WorkOrder</types>
     <types>DocumentRef.WorkOrderClosing</types>
+    <types>DocumentRef.WorkSheet</types>
   </type>
 </mdclass:DefinedType>

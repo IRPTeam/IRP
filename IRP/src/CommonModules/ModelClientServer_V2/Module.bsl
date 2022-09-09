@@ -242,6 +242,8 @@ Function GetChain()
 	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstation" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationExecute"));
 	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstationForReturn" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationForReturnExecute"));
 	
+	Chain.Insert("ChangeIsManualChangedByItemKey" , GetChainLink("ChangeIsManualChangedByItemKeyExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -1084,6 +1086,22 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_IS_MANUAL_CHANGED_BY_ITEM_KEY
+
+Function ChangeIsManualChangedByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKeyBOM, ItemKey, QuantityInBaseUnitBOM, QuantityInBaseUnit");
+EndFunction
+
+Function ChangeIsManualChangedByItemKeyExecute(Options) Export
+	If Not ValueIsFilled(Options.ItemKeyBOM) Or Not ValueIsFilled(Options.ItemKey) Then
+		Return False;
+	EndIf;
+	
+	Return Options.ItemKey <> Options.ItemKeyBOM Or Options.QuantityInBaseUnit <> Options.QuantityInBaseUnitBOM; 
+EndFunction
+
+#EndRegion
+		
 #Region CALCULATE_DIFFERENCE
 
 Function CalculateDifferenceCountOptions() Export

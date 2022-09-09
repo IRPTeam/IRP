@@ -3,31 +3,8 @@
 	<item>
 		<selection>
 			<item>
-				<field>ItemListTaxAmount</field>
+				<field>MaterialsLineNumber</field>
 			</item>
-			<item>
-				<field>ItemListNetAmount</field>
-			</item>
-			<item>
-				<field>ItemListTotalAmount</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.ItemList.DontCalculateRow</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">true</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">#CCFFCC</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
 			<item>
 				<field>MaterialsKey</field>
 			</item>
@@ -44,25 +21,31 @@
 				<field>MaterialsUnit</field>
 			</item>
 			<item>
-				<field>MaterialsProcurementMethod</field>
-			</item>
-			<item>
-				<field>MaterialsStore</field>
-			</item>
-			<item>
 				<field>MaterialsQuantity</field>
 			</item>
 			<item>
 				<field>MaterialsQuantityInBaseUnit</field>
 			</item>
 			<item>
-				<field>MaterialsCostWriteOff</field>
+				<field>MaterialsItemBOM</field>
+			</item>
+			<item>
+				<field>MaterialsItemKeyBOM</field>
+			</item>
+			<item>
+				<field>MaterialsUnitBOM</field>
+			</item>
+			<item>
+				<field>MaterialsQuantityBOM</field>
+			</item>
+			<item>
+				<field>MaterialsQuantityInBaseUnitBOM</field>
+			</item>
+			<item>
+				<field>MaterialsIsManualChanged</field>
 			</item>
 			<item>
 				<field>MaterialsIsVisible</field>
-			</item>
-			<item>
-				<field>MaterialsLineNumber</field>
 			</item>
 		</selection>
 		<filter>
@@ -77,10 +60,39 @@
 				<dcscor:parameter>Visible</dcscor:parameter>
 				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
 			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>MaterialsItemBOM</field>
+			</item>
+			<item>
+				<field>MaterialsItemKeyBOM</field>
+			</item>
+			<item>
+				<field>MaterialsUnitBOM</field>
+			</item>
+			<item>
+				<field>MaterialsQuantityBOM</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Materials.IsManualChanged</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">true</right>
+			</item>
+		</filter>
+		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:use>false</dcscor:use>
-				<dcscor:parameter>Show</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+				<dcscor:parameter>BackColor</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Color">web:LightPink</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>TextColor</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Color">web:Crimson</dcscor:value>
 			</dcscor:item>
 		</appearance>
 	</item>

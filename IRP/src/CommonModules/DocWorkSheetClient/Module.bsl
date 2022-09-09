@@ -115,80 +115,6 @@ EndProcedure
 
 #EndRegion
 
-#Region AGREEMENT
-
-Procedure AgreementOnChange(Object, Form, Item) Export
-	ViewClient_V2.AgreementOnChange(Object, Form, "ItemList");
-EndProcedure
-
-Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-		DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
-		"Enum.AgreementTypes.Customer"), DataCompositionComparisonType.Equal));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue(
-		"Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
-	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Partner", Object.Partner);
-	OpenSettings.FormParameters.Insert("IncludeFilterByPartner", True);
-	OpenSettings.FormParameters.Insert("IncludePartnerSegments", True);
-	OpenSettings.FormParameters.Insert("EndOfUseDate", Object.Date);
-	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate", True);
-	OpenSettings.FillingData = New Structure();
-	OpenSettings.FillingData.Insert("Partner", Object.Partner);
-	OpenSettings.FillingData.Insert("LegalName", Object.LegalName);
-	OpenSettings.FillingData.Insert("Company", Object.Company);
-	OpenSettings.FillingData.Insert("Type", PredefinedValue("Enum.AgreementTypes.Customer"));
-
-	DocumentsClient.AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-EndProcedure
-
-Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.AgreementTypes.Customer"),
-		ComparisonType.Equal));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"),
-		ComparisonType.NotEqual));
-	AdditionalParameters = New Structure();
-	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
-	AdditionalParameters.Insert("IncludeFilterByPartner", True);
-	AdditionalParameters.Insert("IncludePartnerSegments", True);
-	AdditionalParameters.Insert("EndOfUseDate", Object.Date);
-	AdditionalParameters.Insert("Partner", Object.Partner);
-	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
-EndProcedure
-
-#EndRegion
-
-#Region CURRENCY
-
-Procedure CurrencyOnChange(Object, Form, Item) Export
-	ViewClient_V2.CurrencyOnChange(Object, Form, "ItemList");
-EndProcedure
-
-#EndRegion
-
-#Region PRICE_INCLUDE_TAX
-
-Procedure PriceIncludeTaxOnChange(Object, Form, Item) Export
-	ViewClient_V2.PriceIncludeTaxOnChange(Object, Form);
-EndProcedure
-
-#EndRegion
-
-#Region STATUS
-
-Procedure StatusOnChange(Object, Form, Item) Export
-	ViewClient_V2.StatusOnChange(Object, Form, "ItemList");
-EndProcedure
-
-#EndRegion
-
 #Region MATERIALS
 
 Procedure MaterialsBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
@@ -335,8 +261,8 @@ Procedure ItemListBillOfMaterialsOnChange(Object, Form, Item, CurrentData = Unde
 		CurrentData = Form.Items.ItemList.CurrentData;
 	EndIf;
 	
-	MaterialsData = DocWorkOrderServer.GetMaterialsForWork(CurrentData.BillOfMaterials, Form.UUID);
-	ViewClient_V2.MaterialsLoad(Object, Form, MaterialsData.Address, CurrentData.Key, MaterialsData.GroupColumns);
+	MaterialsData = DocWorkSheetServer.GetMaterialsForWork(CurrentData.BillOfMaterials, Form.UUID);
+	ViewClient_V2.MaterialsLoad(Object, Form, MaterialsData.Address, CurrentData.Key, MaterialsData.GroupColumns, MaterialsData.SumColumns);
 EndProcedure
 
 #EndRegion
@@ -353,62 +279,6 @@ EndProcedure
 
 Procedure ItemListQuantityOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListQuantityOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
-#Region PRICE_TYPE
-
-Procedure ItemListPriceTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListPriceTypeOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
-#Region PRICE
-
-Procedure ItemListPriceOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListPriceOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
-#Region NET_AMOUNT
-
-Procedure ItemListNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListNetAmountOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
-#Region TOTAL_AMOUNT
-
-Procedure ItemListTotalAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListTotalAmountOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
-#Region TAX_AMOUNT
-
-Procedure ItemListTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListTaxAmountOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
-#Region DONT_CALCULATE_ROW
-
-Procedure ItemListDontCalculateRowOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListDontCalculateRowOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
-#Region TAX_RATE
-
-Procedure ItemListTaxValueOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListTaxRateOnChange(Object, Form);
 EndProcedure
 
 #EndRegion

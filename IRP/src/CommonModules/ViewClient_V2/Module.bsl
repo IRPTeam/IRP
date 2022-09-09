@@ -9,11 +9,11 @@ Function GetSimpleParameters(Object, Form, TableName, Rows = Undefined)
 	Return GetParameters(ServerParameters, FormParameters);
 EndFunction
 
-Function GetLoadParameters(Object, Form, TableName, Address)
+Function GetLoadParameters(Object, Form, TableName, Address, GroupColumns = "", SumColumns = "")
 	FormParameters   = GetFormParameters(Form);
 	ServerParameters = GetServerParameters(Object);
 	ServerParameters.TableName = TableName;
-	LoadParameters   = ControllerClientServer_V2.GetLoadParameters(Address);
+	LoadParameters   = ControllerClientServer_V2.GetLoadParameters(Address, GroupColumns, SumColumns);
 	Return GetParameters(ServerParameters, FormParameters, LoadParameters);	
 EndFunction
 
@@ -738,7 +738,8 @@ EndProcedure
 Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow, 
 															OnAddViewNotify = Undefined, 
 															OnCopyViewNotify = Undefined,
-															FillingValues = Undefined)
+															FillingValues = Undefined,
+															KeyOwner = Undefined)
 	Cancel = True;
 	NewRow = Object[TableName].Add();
 	If Clone Then // Copy()
@@ -747,13 +748,18 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 			Raise "Not found origin row for clone";
 		EndIf;
 		NewRow.Key = String(New UUID());
+		
+		If KeyOwner <> Undefined Then
+			NewRow.KeyOwner = KeyOwner;
+		EndIf;
+		
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
 		
 		// columns that do not need to be copied
 		ArrayOfExcludeProperties = New Array();
 		ArrayOfExcludeProperties.Add("Key");
-		If Parameters.ObjectMetadataInfo.DependencyTables.Find("RowIDInfo") <> Undefined Then
+		If Parameters.ObjectMetadataInfo.DependentTables.Find("RowIDInfo") <> Undefined Then
 			// columns is form attributes
 			ArrayOfExcludeProperties.Add("IsExternalLinked");
 			ArrayOfExcludeProperties.Add("IsInternalLinked");
@@ -761,7 +767,7 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 			ArrayOfExcludeProperties.Add("InternalLinks");
 		EndIf;
 		
-		If Parameters.ObjectMetadataInfo.DependencyTables.Find("SerialLotNumbers") <> Undefined Then
+		If Parameters.ObjectMetadataInfo.DependentTables.Find("SerialLotNumbers") <> Undefined Then
 			// columns is form attributes
 			ArrayOfExcludeProperties.Add("SerialLotNumbersPresentation");
 			ArrayOfExcludeProperties.Add("SerialLotNumberIsFilling");
@@ -774,6 +780,11 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 		ControllerClientServer_V2.CopyRow(TableName, Parameters, OnCopyViewNotify);
 	Else // Add()
 		NewRow.Key = String(New UUID());
+		
+		If KeyOwner <> Undefined Then
+			NewRow.KeyOwner = KeyOwner;
+		EndIf;
+		
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
 		
@@ -1111,6 +1122,125 @@ EndProcedure
 
 #EndRegion
 
+#Region MATERIALS
+
+Function MaterialsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined, KeyOwner = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Materials", Cancel, Clone, CurrentData,
+		"MaterialsOnAddRowFormNotify", "MaterialsOnCopyRowFormNotify", Undefined, KeyOwner);
+	Form.Items.Materials.CurrentRow = NewRow.GetID();
+	Form.Items.Materials.ChangeRow();
+	Return NewRow;
+EndFunction
+
+Procedure MaterialsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure MaterialsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure MaterialsLoad(Object, Form, Address, KeyOwner = Undefined, GroupColumns = "", SumColumns = "") Export
+	Parameters = GetLoadParameters(Object, Form, "Materials", Address, GroupColumns, SumColumns);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	
+	If KeyOwner <> Undefined Then
+		ControllerClientServer_V2.DeleteRowsFromTableByKeyOwner(Parameters, "Materials", KeyOwner);
+	EndIf;
+	
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.Materials.Add();
+		NewRow.Key = String(New UUID());
+		
+		If KeyOwner <> Undefined Then
+			NewRow.KeyOwner = KeyOwner;
+		EndIf;
+		
+		NewRows.Add(NewRow);
+	EndDo;
+	
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	ControllerClientServer_V2.MaterialsLoad(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_COLUMNS
+
+#Region MATERIALS_ITEM
+
+// Materials.Item
+Procedure MaterialsItemOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsItemOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_ITEM_KEY
+
+// Materials.ItemKey
+Procedure MaterialsItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsItemKeyOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_UNIT
+
+// Materials.Unit
+Procedure MaterialsUnitOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsUnitOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_QUANTITY
+
+// Materials.Quantity
+Procedure MaterialsQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsQuantityOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region WORKERS
+
+Function WorkersBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Workers", Cancel, Clone, CurrentData,
+		"WorkersOnAddRowFormNotify", "WorkersOnCopyRowFormNotify");
+	Form.Items.Workers.CurrentRow = NewRow.GetID();
+	Form.Items.Workers.ChangeRow();
+	Return NewRow;
+EndFunction
+
+Procedure WorkersOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure WorkersOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+#EndRegion
+
 #Region _ITEM_LIST_
 
 Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
@@ -1250,6 +1380,23 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_BILL_OF_MATERIALS
+
+// ItemList.BillOfMaterials
+Procedure ItemListBillOfMaterialsOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	FormParameters = GetFormParameters(Form);
+	
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "ItemList";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.ItemListBillOfMaterialsOnChange(Parameters);
 EndProcedure
 
 #EndRegion
@@ -1493,6 +1640,7 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 //		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+//		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
@@ -2329,6 +2477,7 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing"

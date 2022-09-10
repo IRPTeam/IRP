@@ -30,8 +30,6 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		ArrayOfAllMainTables.Add("ItemList");
 		ArrayOfAllMainTables.Add("PaymentList");
 		ArrayOfAllMainTables.Add("Transactions");
-		// #1487
-		ArrayOfAllMainTables.Add("Materials");
 		
 		ArrayOfMainTables = New Array();
 		For Each TableName In ArrayOfAllMainTables Do
@@ -42,6 +40,17 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		If Not ArrayOfMainTables.Count() Then
 			ArrayOfMainTables.Add("");
 		EndIf;
+		
+		// #1487
+		ArrayOfAllSubordinateTables = New Array();
+		ArrayOfAllSubordinateTables.Add("Materials");
+		
+		ArrayOfSubordinateTables = New Array();
+		For Each TableName In ArrayOfAllSubordinateTables Do
+			If CommonFunctionsClientServer.ObjectHasProperty(Source, TableName) Then
+				ArrayOfSubordinateTables.Add(TableName);
+			EndIf;
+		EndDo;
 		
 		// properties from UserSettings
 		ArrayOfUserSettingsProperties = New Array();
@@ -67,63 +76,35 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	
 		ArrayOfBasisDocumentProperties = StrSplit(ReadOnlyProperties, ",");
 		ArrayOfUserSettingsProperties   = StrSplit(UserSettingsProperties, ",");
-		For Each TableName In ArrayOfMainTables Do
-			// BasisDocument
-			ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
-			ServerParameters.IsBasedOn          = IsBasedOn;
-			ServerParameters.TableName          = TableName;
-			ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
-			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-			
+		ArrayOfSubordinateTablesProperties = New Array();
+		
+		For Each SubordinateTableName In ArrayOfSubordinateTables Do
 			For Each DataPath In ArrayOfBasisDocumentProperties Do
 				_DataPath = TrimAll(DataPath);
-				If Not ValueIsFilled(_DataPath) Then
-					Continue;
-				EndIf;
-				
-				// #1487
 				Segments = StrSplit(_DataPath, ".");
-				If Segments.Count() = 2 And Not StrStartsWith(Segments[0], TableName ) Then
-					Continue;
-				EndIf;
-				
-				Property = New Structure("DataPath", _DataPath);
-				ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
-			EndDo;
-			
-			// UserSetting
-			ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
-			ServerParameters.IsBasedOn          = IsBasedOn;
-			ServerParameters.TableName          = TableName;
-			ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(ReadOnlyProperties), 
-				ReadOnlyProperties + ", " + UserSettingsProperties, UserSettingsProperties);;
-			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-			
-			For Each PropertyName In ArrayOfUserSettingsProperties Do
-				If Not ValueIsFilled(PropertyName) Then
-					Continue;
-				EndIf;
-				Value = Data[PropertyName];
-				If ValueIsFilled(Value) 
-					And Not ValueIsFilled(Source[PropertyName])
-					And ArrayOfBasisDocumentProperties.Find(PropertyName) = Undefined Then
-						Source[PropertyName] = Value;
-				Else
-						Continue;
-				EndIf;
-				
-				DataPath = StrSplit(PropertyName, ".");
-				If DataPath.Count() = 1 Then
-					Property = New Structure("DataPath", TrimAll(DataPath[0]));
-					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+				If Segments.Count() = 2 And StrStartsWith(Segments[0], SubordinateTableName) Then
+					ArrayOfSubordinateTablesProperties.Add(_DataPath);
 				EndIf;
 			EndDo;
-			
-		EndDo; // ArrayOfMainTables
+		EndDo;
 		
+		Info = New Structure();
+		Info.Insert("ReadOnlyProperties"     , ReadOnlyProperties);
+		Info.Insert("UserSettingsProperties" , UserSettingsProperties);
+		Info.Insert("Data"                   , Data);
 		
+		For Each TableName In ArrayOfMainTables Do
+			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfBasisDocumentProperties);
+		EndDo;
 		
+		For Each TableName In ArrayOfSubordinateTables Do
+			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfSubordinateTables);
+		EndDo;
 		
+		For Each TableName In ArrayOfMainTables Do
+			ProcessPropertiesByUserSettings(Info, Source, IsBasedOn, TableName, ArrayOfUserSettingsProperties, ArrayOfBasisDocumentProperties, ArrayOfSubordinateTables);
+		EndDo;
+				
 	EndIf; // IsUsedNewFunctionality 
 	
 	For Each KeyValue In Data Do
@@ -228,6 +209,55 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 		EndDo;
 		DocumentsServer.SetNewTableUUID(Source.ItemList, LinkedTables);
 	EndIf;
+EndProcedure
+
+Procedure ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfProperties)
+	// BasisDocument
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+	ServerParameters.IsBasedOn          = IsBasedOn;
+	ServerParameters.TableName          = TableName;
+	ServerParameters.ReadOnlyProperties = Info.ReadOnlyProperties;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+			
+	For Each DataPath In ArrayOfProperties Do
+		_DataPath = TrimAll(DataPath);
+		If Not ValueIsFilled(_DataPath) Then
+			Continue;
+		EndIf;
+				
+		Property = New Structure("DataPath", _DataPath);
+		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	EndDo;
+EndProcedure
+
+Procedure ProcessPropertiesByUserSettings(Info, Source, IsBasedOn, TableName, ArrayOfUserSettingsProperties, ArrayOfBasisDocumentProperties, ArrayOfSubordinateTablesProperties)
+	// UserSetting
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+	ServerParameters.IsBasedOn          = IsBasedOn;
+	ServerParameters.TableName          = TableName;
+	ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(Info.ReadOnlyProperties), 
+	Info.ReadOnlyProperties + ", " + Info.UserSettingsProperties, Info.UserSettingsProperties);
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+			
+	For Each PropertyName In ArrayOfUserSettingsProperties Do
+		If Not ValueIsFilled(PropertyName) Then
+			Continue;
+		EndIf;
+		Value = Info.Data[PropertyName];
+		If ValueIsFilled(Value) And Not ValueIsFilled(Source[PropertyName])
+			And ArrayOfBasisDocumentProperties.Find(PropertyName) = Undefined 
+			And ArrayOfSubordinateTablesProperties.Find(PropertyName) = Undefined Then
+				Source[PropertyName] = Value;
+		Else
+			Continue;
+		EndIf;
+				
+		DataPath = StrSplit(PropertyName, ".");
+		If DataPath.Count() = 1 Then
+			Property = New Structure("DataPath", TrimAll(DataPath[0]));
+			ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+		EndIf;
+	EndDo;
 EndProcedure
 
 Function UsedNewFunctionality(Source)

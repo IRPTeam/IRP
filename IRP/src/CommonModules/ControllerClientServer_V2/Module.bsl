@@ -6013,13 +6013,11 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeUnitByItemKey,
-		|StepChangeIsServiceByItemKey,
-		|StepItemListChangeBillOfMaterialsByItemKey");
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("WorkSheet", 
 		"StepItemListChangeUnitByItemKey, 
-		|StepChangeIsServiceByItemKey,
-		|StepItemListChangeBillOfMaterialsByItemKey");
+		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("SalesOrderClosing",
 		"StepItemListChangePriceTypeByAgreement,
@@ -6207,10 +6205,10 @@ Procedure SetItemListBillOfMaterials(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
-// ItemList.BillOfMaterials.Get
-Function GetItemListBillOfMaterials(Parameters, _Key)
-	Return GetPropertyObject(Parameters, BindItemListBillOfMaterials(Parameters).DataPath, _Key);
-EndFunction
+//// ItemList.BillOfMaterials.Get
+//Function GetItemListBillOfMaterials(Parameters, _Key)
+//	Return GetPropertyObject(Parameters, BindItemListBillOfMaterials(Parameters).DataPath, _Key);
+//EndFunction
 
 // ItemList.BillOfMaterials.Bind
 Function BindItemListBillOfMaterials(Parameters)
@@ -6219,20 +6217,20 @@ Function BindItemListBillOfMaterials(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
-// ItemList.BillOfMaterials.ChangeBillOfMaterialsByItemKey.Step
-Procedure StepItemListChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
-	Chain.ChangeBillOfMaterialsByItemKey.Enable = True;
-	Chain.ChangeBillOfMaterialsByItemKey.Setter = "SetItemListBillOfMaterials";
-	For Each Row In GetRows(Parameters, Parameters.TableName) Do
-		Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
-		Options.Item            = GetItemListItem(Parameters, Row.Key);
-		Options.ItemKey         = GetItemListItemKey(Parameters, Row.Key);
-		Options.BillOfMaterials = GetItemListBillOfMaterials(Parameters, Row.Key);
-		Options.Key = Row.Key;
-		Options.StepName = "StepItemListChangeBillOfMaterialsByItemKey";
-		Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
-	EndDo;
-EndProcedure
+//// ItemList.BillOfMaterials.ChangeBillOfMaterialsByItemKey.Step
+//Procedure StepItemListChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
+//	Chain.ChangeBillOfMaterialsByItemKey.Enable = True;
+//	Chain.ChangeBillOfMaterialsByItemKey.Setter = "SetItemListBillOfMaterials";
+//	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+//		Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
+//		Options.Item            = GetItemListItem(Parameters, Row.Key);
+//		Options.ItemKey         = GetItemListItemKey(Parameters, Row.Key);
+//		Options.BillOfMaterials = GetItemListBillOfMaterials(Parameters, Row.Key);
+//		Options.Key = Row.Key;
+//		Options.StepName = "StepItemListChangeBillOfMaterialsByItemKey";
+//		Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
+//	EndDo;
+//EndProcedure
 
 #EndRegion
 

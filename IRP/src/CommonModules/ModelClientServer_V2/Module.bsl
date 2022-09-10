@@ -243,7 +243,7 @@ Function GetChain()
 	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstationForReturn" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationForReturnExecute"));
 	
 	Chain.Insert("ChangeIsManualChangedByItemKey" , GetChainLink("ChangeIsManualChangedByItemKeyExecute"));
-	Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
+	//Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1103,21 +1103,21 @@ EndFunction
 
 #EndRegion
 
-#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
-
-Function ChangeBillOfMaterialsByItemKeyOptions() Export
-	Return GetChainLinkOptions("Item, ItemKey, BillOfMaterials");
-EndFunction
-
-Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
-	If ValueIsFilled(Options.BillOfMaterials) Then
-		Return Options.BillOfMaterials;
-	EndIf;
-	
-	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.Item, Options.ItemKey);
-EndFunction
-
-#EndRegion
+//#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
+//
+//Function ChangeBillOfMaterialsByItemKeyOptions() Export
+//	Return GetChainLinkOptions("Item, ItemKey, BillOfMaterials");
+//EndFunction
+//
+//Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
+//	If ValueIsFilled(Options.BillOfMaterials) Then
+//		Return Options.BillOfMaterials;
+//	EndIf;
+//	
+//	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.Item, Options.ItemKey);
+//EndFunction
+//
+//#EndRegion
 
 #Region CALCULATE_DIFFERENCE
 

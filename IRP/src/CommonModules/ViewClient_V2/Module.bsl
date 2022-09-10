@@ -2167,7 +2167,8 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		
 		If Not (Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
-			 Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder") Then
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder"
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder") Then
 			OnSetStoreNotify(Parameters);
 		EndIf;
 		

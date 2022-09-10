@@ -5,8 +5,7 @@ Procedure OnOpen(Object, Form, Cancel) Export
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	Return;
-//	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 
 #EndRegion
@@ -279,8 +278,7 @@ Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFold
 EndProcedure
 
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel) Export
-	Return;
-//	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel);
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel);
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export

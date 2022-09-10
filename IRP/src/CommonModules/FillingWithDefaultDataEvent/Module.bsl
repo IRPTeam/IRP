@@ -30,6 +30,9 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		ArrayOfAllMainTables.Add("ItemList");
 		ArrayOfAllMainTables.Add("PaymentList");
 		ArrayOfAllMainTables.Add("Transactions");
+		// #1487
+		ArrayOfAllMainTables.Add("Materials");
+		
 		ArrayOfMainTables = New Array();
 		For Each TableName In ArrayOfAllMainTables Do
 			If CommonFunctionsClientServer.ObjectHasProperty(Source, TableName) Then
@@ -73,10 +76,18 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 			
 			For Each DataPath In ArrayOfBasisDocumentProperties Do
-				If Not ValueIsFilled(DataPath) Then
+				_DataPath = TrimAll(DataPath);
+				If Not ValueIsFilled(_DataPath) Then
 					Continue;
 				EndIf;
-				Property = New Structure("DataPath", TrimAll(DataPath));
+				
+				// #1487
+				Segments = StrSplit(_DataPath, ".");
+				If Segments.Count() = 2 And Not StrStartsWith(Segments[0], TableName ) Then
+					Continue;
+				EndIf;
+				
+				Property = New Structure("DataPath", _DataPath);
 				ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
 			EndDo;
 			

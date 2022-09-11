@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5caff977-6628-46a1-afa9-a9186bf8662f">
-  <name>UseConsolidatedRetailSales</name>
-  <synonym>
-    <key>en</key>
-    <value>Use consolidated retail sales</value>
-  </synonym>
-  <location>Constant.UseConsolidatedRetailSales</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.ConsolidatedRetailSales</content>
+ <name>UseConsolidatedRetailSales</name>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanmak - Konsolide perakende satış fişleri</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use consolidated retail sales</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать - Отчеты о розничных продажах</value>
+ </synonym>
+ <location>Constant.UseConsolidatedRetailSales</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.ConsolidatedRetailSales</content>
 </mdclass:FunctionalOption>

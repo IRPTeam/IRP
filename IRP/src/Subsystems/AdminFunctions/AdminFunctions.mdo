@@ -1,16 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0ce14fa6-9e5a-43fe-943e-b1b8a0fdaae4">
-  <name>AdminFunctions</name>
-  <synonym>
-    <key>en</key>
-    <value>Admin functions</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.AdminFunction</picture>
-  </picture>
-  <content>Catalog.ExternalFunctions</content>
-  <content>InformationRegister.JobQueue</content>
-  <content>Constant.MaximumServerDifficultLevel</content>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0ce14fa6-9e5a-43fe-943e-b1b8a0fdaae4">
+ <name>AdminFunctions</name>
+ <synonym>
+  <key>tr</key>
+  <value>Sistem yönetici fonksiyonları</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Admin functions</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Функции администратора</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.AdminFunction</picture>
+ </picture>
+ <content>Catalog.ExternalFunctions</content>
+ <content>InformationRegister.JobQueue</content>
+ <content>Constant.MaximumServerDifficultLevel</content>
 </mdclass:Subsystem>

@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ce816639-f63f-4f12-8df1-32a1d79c5b12">
-  <name>UsePartnersHierarchy</name>
-  <synonym>
-    <key>en</key>
-    <value>Use partners hierarchy</value>
-  </synonym>
-  <location>Constant.UsePartnersHierarchy</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.Companies.Attribute.MainCompany</content>
+ <name>UsePartnersHierarchy</name>
+ <synonym>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Cari hesap hiyerarşi</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use partners hierarchy</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать иерархию партнеров</value>
+ </synonym>
+ <location>Constant.UsePartnersHierarchy</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.Companies.Attribute.MainCompany</content>
 </mdclass:FunctionalOption>

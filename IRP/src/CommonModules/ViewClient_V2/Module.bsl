@@ -1,4 +1,4 @@
-
+﻿
 #Region CACHE_BEFORE_CHANGE
 
 Function GetSimpleParameters(Object, Form, TableName, Rows = Undefined)

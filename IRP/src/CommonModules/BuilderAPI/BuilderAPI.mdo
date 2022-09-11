@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="18656696-983c-45f6-baf4-e4844cde2aaa">
-  <name>BuilderAPI</name>
-  <synonym>
-    <key>en</key>
-    <value>Builder API</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>BuilderAPI</name>
+ <synonym>
+  <key>tr</key>
+  <value>Oluşturucu API</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Builder API</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Построитель API</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

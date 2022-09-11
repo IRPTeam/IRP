@@ -1,113 +1,131 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://g5.1c.ru/v8/dt/form">
-  <items xsi:type="form:FormField">
-    <name>RunBackgroundJobInDebugMode</name>
-    <id>4</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>RunBackgroundJobInDebugMode</segments>
-    </dataPath>
-    <toolTip>
-      <key>en</key>
-      <value>For debug bacground jobs set this flag.
-After that - all jobs in CURRENT session will be start as common code, not like job.</value>
-    </toolTip>
-    <toolTipRepresentation>ShowBottom</toolTipRepresentation>
-    <handlers>
-      <event>OnChange</event>
-      <name>RunBackgroundJobInDebugModeOnChange</name>
-    </handlers>
-    <extendedTooltip>
-      <name>RunBackgroundJobInDebugModeExtendedTooltip</name>
-      <id>6</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <contextMenu>
-      <name>RunBackgroundJobInDebugModeContextMenu</name>
-      <id>5</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-    </contextMenu>
-    <type>CheckBoxField</type>
-    <editMode>Enter</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-      <checkBoxType>Switcher</checkBoxType>
-    </extInfo>
-  </items>
-  <autoCommandBar>
-    <name>FormCommandBar</name>
-    <id>-1</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <horizontalAlign>Left</horizontalAlign>
-    <autoFill>true</autoFill>
-  </autoCommandBar>
-  <autoTitle>true</autoTitle>
-  <autoUrl>true</autoUrl>
-  <group>Vertical</group>
-  <autoFillCheck>true</autoFillCheck>
-  <allowFormCustomize>true</allowFormCustomize>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<form:Form xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <items xsi:type="form:FormField">
+  <name>RunBackgroundJobInDebugMode</name>
+  <id>4</id>
+  <visible>true</visible>
   <enabled>true</enabled>
-  <showTitle>true</showTitle>
-  <showCloseButton>true</showCloseButton>
-  <attributes>
-    <name>Object</name>
-    <id>1</id>
-    <valueType>
-      <types>DataProcessorObject.SystemSettings</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-    <main>true</main>
-  </attributes>
-  <attributes>
-    <name>RunBackgroundJobInDebugMode</name>
-    <title>
-      <key>en</key>
-      <value>Run background job in debug mode</value>
-    </title>
-    <id>2</id>
-    <valueType>
-      <types>Boolean</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <commandInterface>
-    <navigationPanel/>
-    <commandBar/>
-  </commandInterface>
-  <extInfo xsi:type="form:ObjectFormExtInfo"/>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>RunBackgroundJobInDebugMode</segments>
+  </dataPath>
+  <toolTip>
+   <key>tr</key>
+   <value>Arka plan görevlerini hata ayıklaması için bu işareti işaretleyiniz.
+ Ondan sonra GEÇERLİ seansın tüm görevler arka plan olarak değil, normal kod olarak çalıştırılacak</value>
+  </toolTip>
+  <toolTip>
+   <key>en</key>
+   <value>For debug bacground jobs set this flag.
+After that - all jobs in CURRENT session will be start as common code, not like job.</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Для отладки фоновых заданий необходимо установить флажек.
+ После этого все задания в ТЕКУЩЕМ сеансе будут запускаться как обычный код, а не как фоновое задание.</value>
+  </toolTip>
+  <toolTipRepresentation>ShowBottom</toolTipRepresentation>
+  <handlers>
+   <event>OnChange</event>
+   <name>RunBackgroundJobInDebugModeOnChange</name>
+  </handlers>
+  <extendedTooltip>
+   <name>RunBackgroundJobInDebugModeExtendedTooltip</name>
+   <id>6</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>RunBackgroundJobInDebugModeContextMenu</name>
+   <id>5</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>CheckBoxField</type>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+   <checkBoxType>Switcher</checkBoxType>
+  </extInfo>
+ </items>
+ <autoCommandBar>
+  <name>FormCommandBar</name>
+  <id>-1</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <horizontalAlign>Left</horizontalAlign>
+  <autoFill>true</autoFill>
+ </autoCommandBar>
+ <autoTitle>true</autoTitle>
+ <autoUrl>true</autoUrl>
+ <group>Vertical</group>
+ <autoFillCheck>true</autoFillCheck>
+ <allowFormCustomize>true</allowFormCustomize>
+ <enabled>true</enabled>
+ <showTitle>true</showTitle>
+ <showCloseButton>true</showCloseButton>
+ <attributes>
+  <name>Object</name>
+  <id>1</id>
+  <valueType>
+   <types>DataProcessorObject.SystemSettings</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+  <main>true</main>
+ </attributes>
+ <attributes>
+  <name>RunBackgroundJobInDebugMode</name>
+  <title>
+   <key>tr</key>
+   <value>Arka plan görevleri debut modunda çalıştır</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Run background job in debug mode</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Запускать фоновые задания в режиме отладки</value>
+  </title>
+  <id>2</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <commandInterface>
+  <navigationPanel/>
+  <commandBar/>
+ </commandInterface>
+ <extInfo xsi:type="form:ObjectFormExtInfo"/>
 </form:Form>

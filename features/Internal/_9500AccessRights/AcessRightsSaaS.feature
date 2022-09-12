@@ -11,7 +11,7 @@
 
 
 # Scenario: preparation
-# 	And I set "True" value to the constant "SaasMode"
+# 	When set True value to the constant SaasMode
 # 	And I close TestClient session
 # 	Given I open new TestClient session or connect the existing one
 # 	* Create area 

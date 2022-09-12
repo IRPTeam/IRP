@@ -138,11 +138,12 @@ Scenario: _010006 create a structure of partners (partners), 1 main partner and 
 			| 'Description' |
 			| 'Seven Brand'  |
 		And I move one level down in "List" table
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Description' |
 			| 'Seven Brand' |
 			| 'Alians' |
 			| 'MIO' |
+		Then the number of "List" table lines is "равно" "3"
 
 		
 Scenario: _010008 create of a partner structure (Partners), 1 main partner, under which a 2nd level partner and under which 2 3rd level partners
@@ -173,8 +174,9 @@ Scenario: _010008 create of a partner structure (Partners), 1 main partner, unde
 			| 'Kalipso'  |
 		And I move one level down in "List" table
 		And I move one level down in "List" table
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Description' |
 			| 'Kalipso' |
 			| 'Alians' |
 			| 'MIO' |
+		Then the number of "List" table lines is "равно" "3"

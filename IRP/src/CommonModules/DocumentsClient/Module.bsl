@@ -1014,7 +1014,7 @@ Procedure ShowRowKey(Form) Export
 	EndDo;
 EndProcedure
 
-Procedure SetCurrentRow(Object, Form, Item, FormParameters, AttributeName)
+Procedure SetCurrentRow(Object, Form, Item, FormParameters, AttributeName) Export
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, Item.Name) Then
 		FormParameters.Insert("CurrentRow", Object[Item.Name]);
 	Else
@@ -1022,8 +1022,8 @@ Procedure SetCurrentRow(Object, Form, Item, FormParameters, AttributeName)
 		If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, TabularSection) Then
 			CurrentData = Form.Items[TabularSection].CurrentData;
 			If CurrentData <> Undefined And CommonFunctionsClientServer.ObjectHasProperty(CurrentData, AttributeName) Then
-				If Not ValueIsFilled(CurrentData[AttributeName]) And CommonFunctionsClientServer.ObjectHasProperty(
-					CurrentData, "LineNumber") Then
+				If Not ValueIsFilled(CurrentData[AttributeName]) 
+					And CommonFunctionsClientServer.ObjectHasProperty(CurrentData, "LineNumber") Then
 					RowIndex = CurrentData.LineNumber - 1;
 					PreviousRow = ?(RowIndex > 0, Object[TabularSection][RowIndex - 1], CurrentData);
 					FormParameters.Insert("CurrentRow", PreviousRow[AttributeName]);

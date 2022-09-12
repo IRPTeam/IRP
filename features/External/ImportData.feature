@@ -1360,6 +1360,29 @@ Scenario: Create catalog IntegrationSettings objects
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e4' | 'AddressPath'      | '#workingDir#/Picture/Source' 							               |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e5' | 'AddressPath'      | '#workingDir#/Picture/Prewiev'                                          |
 
+Scenario: Create catalog IntegrationSettings objects (db connection)
+
+
+	And I check or create catalog "IntegrationSettings" objects:
+		| 'Ref'                                                                         | 'DeletionMark' | 'Code' | 'Description' | 'ExternalDataProc' | 'IntegrationType'            | 'ExternalDataProcSettings'              | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'False'        | 6      | 'Test'        | ''                 | 'Enum.IntegrationType.Other' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | '_536435dbf88f4d98875efa209108e8de' |
+
+	And I refill object tabular section "ConnectionSetting":
+		| 'Ref'                                                                         | 'Key'                    | 'Value'                     |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'IntegrationSettingsRef' | ''                          |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'QueryType'              | 'GET'                       |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'ResourceAddress'        | '/#Tag#/hs/connection/test' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'Ip'                     | 'localhost'                 |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'Port'                   | '#webPort#'                 |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'User'                   | 'CI'                        |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'Password'               | 'CI'                        |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'Proxy'                  | ''                          |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'TimeOut'                | 60                          |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b785989306affb7a11ed2ea3af3b3aa1' | 'SecureConnection'       | 'False'                     |
+
+
+
+
 Scenario: Create catalog AccountingOperations objects
 
 	And I check or create catalog "AccountingOperations" objects:
@@ -1931,7 +1954,8 @@ Scenario: Create catalog CancelReturnReasons objects
 
 	And I check or create catalog "CancelReturnReasons" objects:
 		| 'Ref'                                                                         | 'DeletionMark' | 'Code'         | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.CancelReturnReasons?ref=b76197e183b782dc11eb60d037e266d0' | 'False'           | '000000000001' | 'not available'  | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.CancelReturnReasons?ref=b76197e183b782dc11eb60d037e266d0' | 'False'        | '000000000001' | 'not available'  | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.CancelReturnReasons?ref=b76197e183b782dc11eb60d037e266d2' | 'False'        | '000000000002' | 'rejects'        | ''                 | ''               | ''               |
 
 
 Scenario: Create catalog Workstations objects
@@ -2156,4 +2180,24 @@ Scenario: Create second Workstation
 	And I check or create catalog "Workstations" objects:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Code'         | 'Description'    | 'CashAccount'                                                          | 'PrintTemplate' | 'UserGroup' | 'UniqueID'  |
 		| 'e1cib/data/Catalog.Workstations?ref=b784ae4f9cb08e5e11ed1a17667e6bb4' | 'False'        | '000000000002' | 'Workstation 02' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a' | ''              | ''          | 'TeamAgent' |
+
+
+Scenario: Create catalog ExternalFunctions objects
+
+	And I check or create catalog "ExternalFunctions" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Description'    | 'ExternalFunctionType'              | 'Enable' | 'ExternalCode'                                                                     | 'UseForSetDescription' | 'SafeModeIsOn' | 'RegExp'     | 'isSchedulerSet' | 'JobSchedule'                                                                                                                                                                                                                                       | 'DifficultLevel' |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed29fab7c80d93' | 'False'        | ''       | 'False'    | 'Check log'      | 'Enum.ExternalFunctionType.Execute' | 'True'   | '\nResultInfo.Log.Add("1. Add some log");\nResultInfo.Log.Add("2. Add some log");' | 'False'                | 'True'         | ''           | 'False'          | 'ValueStorage:AQGgAAAAAAAAAO+7v3siIyIsMjgxOTNlM2UtYzZhMy00ZDMwLWI0ZTctOWY4ZmYyM2IzOTMxLA0KezAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAsNSwwLDcsMSwyLDMsNCw1LDYsNywwLDAsMCwxLDEsMH0NCn0=' | 1                |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed249b8d732a24' | 'False'        | ''       | 'False'    | 'Date as name'   | 'Enum.ExternalFunctionType.Eval'    | 'True'   | 'CurrentDate()'                                                                    | 'True'                 | 'True'         | ''           | 'False'          | 'ValueStorage:AQGgAAAAAAAAAO+7v3siIyIsMjgxOTNlM2UtYzZhMy00ZDMwLWI0ZTctOWY4ZmYyM2IzOTMxLA0KezAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAsMCwwLDcsMSwyLDMsNCw1LDYsNywwLDAsMCwxLDAsMH0NCn0=' |                  |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed2953c4fe70fd' | 'False'        | ''       | 'False'    | 'Erorr when run' | 'Enum.ExternalFunctionType.Execute' | 'True'   | 'Raise "Check error";'                                                             | 'False'                | 'True'         | ''           | 'False'          | 'ValueStorage:AQGhAAAAAAAAAO+7v3siIyIsMjgxOTNlM2UtYzZhMy00ZDMwLWI0ZTctOWY4ZmYyM2IzOTMxLA0KezAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAsMTAsMCw3LDEsMiwzLDQsNSw2LDcsMCwwLDAsMSwxLDB9DQp9' | 1                |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed288f826a9c65' | 'False'        | ''       | 'False'    | 'Normal test'    | 'Enum.ExternalFunctionType.Execute' | 'True'   | 'Test = 1;\nResult = Test;'                                                        | 'False'                | 'True'         | ''           | 'False'          | 'ValueStorage:AQGgAAAAAAAAAO+7v3siIyIsMjgxOTNlM2UtYzZhMy00ZDMwLWI0ZTctOWY4ZmYyM2IzOTMxLA0KezAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAsNSwwLDcsMSwyLDMsNCw1LDYsNywwLDAsMCwxLDEsMH0NCn0=' | 1                |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed2a05cb4f0b16' | 'False'        | ''       | 'False'    | 'Pause 100'      | 'Enum.ExternalFunctionType.Execute' | 'True'   | 'CommonFunctionsServer.Pause(100);'                                                | 'False'                | 'True'         | ''           | 'False'          | 'ValueStorage:AQGgAAAAAAAAAO+7v3siIyIsMjgxOTNlM2UtYzZhMy00ZDMwLWI0ZTctOWY4ZmYyM2IzOTMxLA0KezAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAsNSwwLDcsMSwyLDMsNCw1LDYsNywwLDAsMCwxLDEsMH0NCn0=' | 1                |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed255c197a27fb' | 'False'        | ''       | 'False'    | 'RegExp'         | 'Enum.ExternalFunctionType.RegExp'  | 'False'  | 'Commision = Params.RegExpResult[1];\nResult = Number(Commision);'                 | 'False'                | 'True'         | 'KS:(.*?)TL' | 'False'          | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9'                                                                                                                                                                                                             |                  |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed29f9702781aa' | 'False'        | ''       | 'False'    | 'User message'   | 'Enum.ExternalFunctionType.Execute' | 'True'   | 'CommonFunctionsClientServer.ShowUsersMessage("Some test");'                       | 'False'                | 'True'         | ''           | 'False'          | 'ValueStorage:AQGhAAAAAAAAAO+7v3siIyIsMjgxOTNlM2UtYzZhMy00ZDMwLWI0ZTctOWY4ZmYyM2IzOTMxLA0KezAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAsMTAsMCw3LDEsMiwzLDQsNSw2LDcsMCwwLDAsMSwxLDB9DQp9' | 1                |
+
+	And I refill object tabular section "TestRexExpStrings":
+		| 'Ref'                                                                       | 'Row'                                                  |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed255c197a27fb' | '002236258 AX-MC AKPOS FZS ISK ODE 20220815 KS:81.12TL |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed255c197a27fb' | '002236258 AX-MC AKPOS FZS ISK TOPLCP 20220815         |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed255c197a27fb' | 'VİRMAN 0069-0296571                                   |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed255c197a27fb' | 'VİRMAN 0069-0298213                                   |
 

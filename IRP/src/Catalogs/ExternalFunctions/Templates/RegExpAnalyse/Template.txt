@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<style>
+		* { 
+			box-sizing: border-box; margin: 0; 
+		}
+		html { 
+			font-family: 'tahoma'; 
+		}
+		ol {
+		  line-height: 1.8;
+		  margin-left: -20px;
+		  /* list-style-position: inside; */
+		}
+		ol li {
+		  list-style-type: none;
+		  counter-increment: item;
+		  margin-bottom: 10px;
+		}
+		ol li:before {
+		  content: counter(item);
+		  margin-right: 5px;
+		  font-size: 80%;
+		  background-color: #f9dd94;
+		  color: #7eb4e2;
+		  font-weight: bold;
+		  padding: 3px 8px;
+		  border-radius: 3px;
+		}
+		</style>
+	</head>
+	<body>
+		<ol class="step-list" id="list">
+		
+		</ol>
+		
+		<script>
+			function displayMatches(RegExpRow) { 
+				var list = document.getElementById("list").getElementsByTagName("li");
+				for (let item of list) {
+      				var regex = new RegExp(RegExpRow, 'gi');
+					var response = item.innerText.replace(regex, function(str) 
+					{ 
+						return "<span style='background-color: yellow;'>" + str + "</span>" 
+					});
+				item.innerHTML = response; 
+    			}
+			} 
+		</script>
+	</body>
+</html>

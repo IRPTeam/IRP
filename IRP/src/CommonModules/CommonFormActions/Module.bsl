@@ -73,6 +73,7 @@ Function SettingsAddRowAtObjectTable(AddInfo = Undefined) Export
 	Return NewSettings;
 EndFunction
 
+// for delete
 Procedure DynamicListBeforeAddRow(Form, Item, Cancel, Clone, Parent, IsFolder, Parameter, NewObjectFormName) Export
 	FillingValues = CommonFormActionsServer.RestoreFillingData(Form.FillingData);
 	If TypeOf(FillingValues) = Type("Structure") Then
@@ -80,3 +81,45 @@ Procedure DynamicListBeforeAddRow(Form, Item, Cancel, Clone, Parent, IsFolder, P
 		OpenForm(NewObjectFormName, New Structure("FillingValues", FillingValues));
 	EndIf;
 EndProcedure
+
+Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFIlters, FillingValues = Undefined) Export	
+	StandardProcessing = False;	
+	OpeningSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpeningSettings.FormName = "Catalog.CashAccounts.Form.ChoiceForm";
+	OpeningSettings.FormParameters = New Structure();
+	
+	OpeningSettings.ArrayOfFilters = New Array();
+	OpeningSettings.ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("DeletionMark", False          , DataCompositionComparisonType.Equal));
+	OpeningSettings.ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Company"     , Object.Company , DataCompositionComparisonType.Equal));
+	
+	For Each Filter In ArrayOfFIlters Do
+		OpeningSettings.ArrayOfFilters.Add(Filter);
+	EndDo;
+	
+	If FillingValues <> Undefined Then
+		OpeningSettings.FormParameters.Insert("FillingData", FillingValues);
+	EndIf;
+	
+	DocumentsClient.SetCurrentRow(Object, Form, Item, OpeningSettings.FormParameters, "Ref");
+	DocumentsClient.OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpeningSettings);
+EndProcedure
+
+
+Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters) Export
+	Filters = New Array();
+	Filters.Add(DocumentsClient.CreateFilterItem("DeletionMark" , True            , ComparisonType.NotEqual));
+	Filters.Add(DocumentsClient.CreateFilterItem("Company"      , Object.Company  , ComparisonType.Equal));
+	
+	For Each Filter In ArrayOfFilters Do
+		Filters.Add(Filter);
+	EndDo;
+	
+	AdditionalParameters = New Structure();
+	
+	ArrayOfChoiceParameters = New Array();
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter"  , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters", DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
+	
+	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
+EndProcedure
+

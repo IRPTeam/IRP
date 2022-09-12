@@ -44,7 +44,7 @@ Procedure CreateUser(UserObject) Export
 
 	Settings = SystemSettingsStorage.Load("Common/ClientSettings", , , UserObject.Description);
 
-	If Not Type(Settings) = TypeOf("ClientSettings") Then
+	If Not TypeOf(Settings) = Type("ClientSettings") Then
 		Settings = New ClientSettings();
 	EndIf;
 

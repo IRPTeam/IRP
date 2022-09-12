@@ -65,24 +65,17 @@ Function GetCashAccountTypeByTransaction(TransactionType)
 EndFunction
 
 Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	StandardProcessing = False;
-	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Cash"), DataCompositionComparisonType.Equal));
 	
-	CashAccountType = GetCashAccountTypeByTransaction(Object.TransactionType);	
-		
-	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-	StartChoiceParameters.CustomParameters.Filters.Add(
-		DocumentsClientServer.CreateFilterItem("Type", CashAccountType, , DataCompositionComparisonType.Equal));
-	StartChoiceParameters.FillingData.Insert("Type", CashAccountType);
-	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
+	CommonFormActions.AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	DefaultEditTextParameters = New Structure("Company", Object.Company);
-	CashAccountType = GetCashAccountTypeByTransaction(Object.TransactionType);
-	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", CashAccountType, ComparisonType.Equal));
-	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Cash"), ComparisonType.Equal));
+
+	CommonFormActions.AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 #EndRegion

@@ -1,0 +1,38 @@
+// @strict-types
+
+// Presentation get processing.
+// 
+// Parameters:
+//  Data - See CatalogRef.ExternalFunctions
+//  Presentation - String - Presentation
+//  StandardProcessing - Boolean - Standard processing
+Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
+	
+	If Not Data.UseForSetDescription Then
+		Return;
+	EndIf;
+	
+	StandardProcessing = False;
+
+	Params = CommonFunctionsServer.GetRecalculateExpressionParams();
+	Params.Eval = Data.ExternalFunctionType = Enums.ExternalFunctionType.Eval;
+	Params.SafeMode = Data.SafeModeIsOn;
+	Params.Expression = Data.ExternalCode;
+	
+	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
+	If ResultInfo.isError Then
+		Presentation = R().Error_119;
+	Else
+		Presentation = String(ResultInfo.Result);
+	EndIf;
+	
+EndProcedure
+
+Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
+	StandardProcessing = False;
+	Fields.Add("ExternalFunctionType");
+	Fields.Add("SafeModeIsOn");
+	Fields.Add("ExternalCode");
+	Fields.Add("UseForSetDescription");
+	Fields.Add("Description");
+EndProcedure

@@ -91,6 +91,11 @@ Procedure CalculateVolume(Object) Export
 	Object.Volume = Object.Length * Object.Width * Object.Height;
 EndProcedure
 
+Function GetSearchStringNumber(SearchString) Export
+	AccessSymbols = ".,- ¶" + Chars.LF + Chars.NBSp + Chars.CR;
+	Return GetNumberPartFromString(SearchString, AccessSymbols);
+EndFunction
+
 Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", GetOnlyNumbers = False) Export
 
 	RejectSymbols = New Array;
@@ -118,24 +123,6 @@ Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", Ge
 	Return Number(StrConcat(NumberPart));
 
 EndFunction
-
-#Region Regexp
-
-// Regex.
-// 
-// Parameters:
-//  String - String - String
-//  Facet - String - RegExp
-// 
-// Returns:
-//  Boolean - is string match regexp
-Function Regex(String, Facet) Export
-	
-	Return True;
-
-EndFunction
-
-#EndRegion
 
 Function GetSliceLastDateByRefAndDate(Ref, Date) Export
 	If Not ValueIsFilled(Ref) Then

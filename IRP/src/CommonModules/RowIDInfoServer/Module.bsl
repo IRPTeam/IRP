@@ -1815,9 +1815,122 @@ Function CreateTablesForExtractData(EmptyTable)
 	Tables.Insert("FromWO", EmptyTable.Copy());
 	Tables.Insert("FromWS", EmptyTable.Copy());
 	Tables.Insert("FromWS_ThenFromWO", EmptyTable.Copy());
+	Tables.Insert("FromWS_ThenFromSO", EmptyTable.Copy());
 	Tables.Insert("FromWS_ThenFromWO_ThenFromSO", EmptyTable.Copy());
 	
 	Return Tables;
+EndFunction
+
+Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
+	ExtractedData = New Array();
+
+	If Tables.FromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromSO(Tables.FromSO, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromSI.Count() Then
+		ExtractedData.Add(ExtractData_FromSI(Tables.FromSI, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromSC.Count() Then
+		ExtractedData.Add(ExtractData_FromSC(Tables.FromSC, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromSC_ThenFromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromSC_ThenFromSO(Tables.FromSC_ThenFromSO, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromPIGR_ThenFromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromPIGR_ThenFromSO(Tables.FromPIGR_ThenFromSO, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromSC_ThenFromPIGR_ThenFromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromSC_ThenFromPIGR_ThenFromSO(Tables.FromSC_ThenFromPIGR_ThenFromSO, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromSC_ThenFromSI.Count() Then
+		ExtractedData.Add(ExtractData_FromSC_ThenFromSI(Tables.FromSC_ThenFromSI, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromPO.Count() Then
+		ExtractedData.Add(ExtractData_FromPO(Tables.FromPO, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromPI.Count() Then
+		ExtractedData.Add(ExtractData_FromPI(Tables.FromPI, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromGR.Count() Then
+		ExtractedData.Add(ExtractData_FromGR(Tables.FromGR, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromGR_ThenFromPO.Count() Then
+		ExtractedData.Add(ExtractData_FromGR_ThenFromPO(Tables.FromGR_ThenFromPO, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromGR_ThenFromPI.Count() Then
+		ExtractedData.Add(ExtractData_FromGR_ThenFromPI(Tables.FromGR_ThenFromPI, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromITO.Count() Then
+		ExtractedData.Add(ExtractData_FromITO(Tables.FromITO, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromIT.Count() Then
+		ExtractedData.Add(ExtractData_FromIT(Tables.FromIT, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromISR.Count() Then
+		ExtractedData.Add(ExtractData_FromISR(Tables.FromISR, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromPhysicalInventory.Count() Then
+		ExtractedData.Add(ExtractData_FromPhysicalInventory(Tables.FromPhysicalInventory, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromPR.Count() Then
+		ExtractedData.Add(ExtractData_FromPR(Tables.FromPR, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromPRO.Count() Then
+		ExtractedData.Add(ExtractData_FromPRO(Tables.FromPRO, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromSR.Count() Then
+		ExtractedData.Add(ExtractData_FromSR(Tables.FromSR, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromSRO.Count() Then
+		ExtractedData.Add(ExtractData_FromSRO(Tables.FromSRO, DataReceiver, AddInfo));
+	EndIf;
+
+	If Tables.FromRSR.Count() Then
+		ExtractedData.Add(ExtractData_FromRSR(Tables.FromRSR, DataReceiver, AddInfo));
+	EndIf;
+
+	// #1487
+	If Tables.FromWO.Count() Then
+		ExtractedData.Add(ExtractData_FromWO(Tables.FromWO, DataReceiver, AddInfo));
+	EndIf;
+	
+	// WS
+	If Tables.FromWS.Count() Then
+		ExtractedData.Add(ExtractData_FromWS(Tables.FromWS, DataReceiver, AddInfo));
+	EndIf;
+	
+	If Tables.FromWS_ThenFromWO.Count() Then
+		ExtractedData.Add(ExtractData_FromWS_ThenFromWO(Tables.FromWS_ThenFromWO, DataReceiver, AddInfo));
+	EndIf;
+	
+	If Tables.FromWS_ThenFromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromWS_ThenFromSO(Tables.FromWS_ThenFromSO, DataReceiver, AddInfo));
+	EndIf;
+	
+	If Tables.FromWS_ThenFromWO_ThenFromSO.Count() Then
+//		ExtractedData.Add(ExtractData_FromWS_ThenFromWO_ThenFromSO(Tables.FromWS_ThenFromWO_ThenFromSO, DataReceiver, AddInfo));
+	EndIf;
+	
+	Return ExtractedData;
 EndFunction
 
 #Region FillTablesFrom
@@ -1939,9 +2052,6 @@ Procedure FillTablesFrom_WO(Tables, DataReceiver, RowBasisesTable)
 EndProcedure
 
 Procedure FillTablesFrom_WS(Tables, DataReceiver, RowBasisesTable)
-	// 3 levels
-	//ElsIf Is(BasisesInfo.RowRef.Basis).SO And (Is(BasisesInfo.ParentBasis).GR Or Is(BasisesInfo.ParentBasis).PI) Then
-	
 	BasisesInfo = GetBasisesInfo(RowBasisesTable.Basis, RowBasisesTable.BasisKey, RowBasisesTable.RowID);
 
 	If Is(BasisesInfo.ParentBasis).WO Then
@@ -1950,10 +2060,12 @@ Procedure FillTablesFrom_WS(Tables, DataReceiver, RowBasisesTable)
 		FillPropertyValues(NewRow, RowBasisesTable);
 		NewRow.ParentBasis = BasisesInfo.ParentBasis;
 	
-//	ElsIf Is(BasisesInfo.ParentBasis).SO Then
+	ElsIf Is(BasisesInfo.ParentBasis).SO Then
 		
-		
-	
+		NewRow = Tables.FromWS_ThenFromSO.Add();
+		FillPropertyValues(NewRow, RowBasisesTable);
+		NewRow.ParentBasis = BasisesInfo.ParentBasis;
+			
 	ElsIf Is(BasisesInfo.RowRef.Basis).SO And Is(BasisesInfo.ParentBasis).WO Then
 		
 		NewRow = Tables.FromWS_ThenFromWO_ThenFromSO.Add();
@@ -1968,114 +2080,6 @@ EndProcedure
 #EndRegion
 
 #Region ExtractDataFrom
-
-Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
-	ExtractedData = New Array();
-
-	If Tables.FromSO.Count() Then
-		ExtractedData.Add(ExtractData_FromSO(Tables.FromSO, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromSI.Count() Then
-		ExtractedData.Add(ExtractData_FromSI(Tables.FromSI, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromSC.Count() Then
-		ExtractedData.Add(ExtractData_FromSC(Tables.FromSC, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromSC_ThenFromSO.Count() Then
-		ExtractedData.Add(ExtractData_FromSC_ThenFromSO(Tables.FromSC_ThenFromSO, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromPIGR_ThenFromSO.Count() Then
-		ExtractedData.Add(ExtractData_FromPIGR_ThenFromSO(Tables.FromPIGR_ThenFromSO, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromSC_ThenFromPIGR_ThenFromSO.Count() Then
-		ExtractedData.Add(ExtractData_FromSC_ThenFromPIGR_ThenFromSO(Tables.FromSC_ThenFromPIGR_ThenFromSO, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromSC_ThenFromSI.Count() Then
-		ExtractedData.Add(ExtractData_FromSC_ThenFromSI(Tables.FromSC_ThenFromSI, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromPO.Count() Then
-		ExtractedData.Add(ExtractData_FromPO(Tables.FromPO, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromPI.Count() Then
-		ExtractedData.Add(ExtractData_FromPI(Tables.FromPI, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromGR.Count() Then
-		ExtractedData.Add(ExtractData_FromGR(Tables.FromGR, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromGR_ThenFromPO.Count() Then
-		ExtractedData.Add(ExtractData_FromGR_ThenFromPO(Tables.FromGR_ThenFromPO, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromGR_ThenFromPI.Count() Then
-		ExtractedData.Add(ExtractData_FromGR_ThenFromPI(Tables.FromGR_ThenFromPI, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromITO.Count() Then
-		ExtractedData.Add(ExtractData_FromITO(Tables.FromITO, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromIT.Count() Then
-		ExtractedData.Add(ExtractData_FromIT(Tables.FromIT, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromISR.Count() Then
-		ExtractedData.Add(ExtractData_FromISR(Tables.FromISR, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromPhysicalInventory.Count() Then
-		ExtractedData.Add(ExtractData_FromPhysicalInventory(Tables.FromPhysicalInventory, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromPR.Count() Then
-		ExtractedData.Add(ExtractData_FromPR(Tables.FromPR, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromPRO.Count() Then
-		ExtractedData.Add(ExtractData_FromPRO(Tables.FromPRO, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromSR.Count() Then
-		ExtractedData.Add(ExtractData_FromSR(Tables.FromSR, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromSRO.Count() Then
-		ExtractedData.Add(ExtractData_FromSRO(Tables.FromSRO, DataReceiver, AddInfo));
-	EndIf;
-
-	If Tables.FromRSR.Count() Then
-		ExtractedData.Add(ExtractData_FromRSR(Tables.FromRSR, DataReceiver, AddInfo));
-	EndIf;
-
-	// #1487
-	If Tables.FromWO.Count() Then
-		ExtractedData.Add(ExtractData_FromWO(Tables.FromWO, DataReceiver, AddInfo));
-	EndIf;
-	
-	// WS
-	If Tables.FromWS.Count() Then
-		ExtractedData.Add(ExtractData_FromWS(Tables.FromWS, DataReceiver, AddInfo));
-	EndIf;
-	
-	If Tables.FromWS_ThenFromWO.Count() Then
-		ExtractedData.Add(ExtractData_FromWS_ThenFromWO(Tables.FromWS_ThenFromWO, DataReceiver, AddInfo));
-	EndIf;
-	
-	If Tables.FromWS_ThenFromWO_ThenFromSO.Count() Then
-//		ExtractedData.Add(ExtractData_FromWS_ThenFromWO_ThenFromSO(Tables.FromWS_ThenFromWO_ThenFromSO, DataReceiver, AddInfo));
-	EndIf;
-	
-	Return ExtractedData;
-EndFunction
 
 Function GetQueryText_BasisesTable()
 	Return 
@@ -2486,12 +2490,12 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	TableSerialLotNumbers      = QueryResults[4].Unload();
 	
 	Tables = New Structure();
-	Tables.Insert("ItemList", TablesSO.ItemList);
-	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TablesSO.TaxList);
-	Tables.Insert("SpecialOffers", TablesSO.SpecialOffers);
-	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
-	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	Tables.Insert("ItemList"              , TablesSO.ItemList);
+	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
+	Tables.Insert("TaxList"               , TablesSO.TaxList);
+	Tables.Insert("SpecialOffers"         , TablesSO.SpecialOffers);
+	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -4200,6 +4204,67 @@ Function ExtractData_FromWS_ThenFromWO(BasisesTable, DataReceiver, AddInfo = Und
 	Return CollapseRepeatingItemListRows(Tables, "WorkOrderItemListKey", AddInfo);
 EndFunction
 
+Function ExtractData_FromWS_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text + 
+	//------------------------------------------------------------
+	"SELECT DISTINCT ALLOWED
+	|	BasisesTable.Key,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	BasisesTable.RowID,
+	|	BasisesTable.CurrentStep,
+	|	BasisesTable.RowRef,
+	|	VALUE(Document.SalesOrder.EmptyRef) AS ParentBasis,
+	|	BasisesTable.ParentBasis AS Basis,
+	|	BasisesTable.Unit,
+	|	BasisesTable.BasisUnit,
+	|	BasisesTable.QuantityInBaseUnit
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.WorkSheet.RowIDInfo AS RowIDInfo
+	|		ON BasisesTable.Basis = RowIDInfo.Ref
+	|		AND BasisesTable.BasisKey = RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.Key,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.Basis AS WorkSheet,
+	|	BasisesTable.QuantityInBaseUnit AS Quantity,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInWorkSheet
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.WorkSheet.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key";
+
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+
+	TablesSO = ExtractData_FromSO(QueryResults[2].Unload(), DataReceiver);
+
+	TableRowIDInfo   = QueryResults[1].Unload();
+	TableWorkSheets  = QueryResults[3].Unload();
+//	TableSerialLotNumbers      = QueryResults[4].Unload();
+	
+	Tables = New Structure();
+	Tables.Insert("ItemList"      , TablesSO.ItemList);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("TaxList"       , TablesSO.TaxList);
+	Tables.Insert("SpecialOffers" , TablesSO.SpecialOffers);
+	Tables.Insert("WorkSheets"    , TableWorkSheets);
+//	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+
+	AddTables(Tables);
+
+	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
+EndFunction
+
 //Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 //	Query = New Query(GetQueryText_BasisesTable());
 //	Query.Text = Query.Text + 
@@ -5126,6 +5191,18 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |ProcurementMethod    , ItemList.ProcurementMethod,
 							  |ItemKey              , ItemList.ItemKey,
 							  |Store                , ItemList.Store";
+							  
+	ElsIf ExternalDocAliase = Aliases.WS Then
+		Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods";
+		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company            , Company,
+							  |Branch             , Branch,
+							  |PartnerSales       , Partner,
+							  |LegalNameSales     , LegalName,
+							  |ProcurementMethod  , ItemList.ProcurementMethod,
+							  |Store              , ItemList.Store,
+							  |ItemKey            , ItemList.ItemKey";
 	
 	Else
 		Raise StrTemplate("Not supported External link for [SO] to [%1]", ExternalDocAliase);
@@ -8162,6 +8239,21 @@ Function GetFieldsToLock_ExternalLink_WO(ExternalDocAliase, Aliases)
 							  |LegalNameSales       , LegalName,
 							  |ItemKey              , ItemList.ItemKey,
 							  |Store                , ItemList.Store";
+	
+	ElsIf ExternalDocAliase = Aliases.SI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
+		Result.ItemList = "Item, ItemKey, Store";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company              , Company,
+							  |Branch               , Branch,
+							  |PartnerSales         , Partner,
+							  |LegalNameSales       , LegalName,
+							  |AgreementSales       , Agreement,
+							  |CurrencySales        , Currency,
+							  |PriceIncludeTaxSales , PriceIncludeTax,
+							  |ItemKey              , ItemList.ItemKey,
+							  |Store                , ItemList.Store";
+	
 	Else
 		Raise StrTemplate("Not supported External link for [WO] to [%1]", ExternalDocAliase);
 	EndIf;
@@ -8228,6 +8320,7 @@ Procedure ApplyFilterSet_WO_ForSI(Query)
 	|FROM
 	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
 	|			RowRef.Ref AS Ref
@@ -9915,8 +10008,11 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|		AND RowIDInfoFull.BasisKey = BasisesTable.BasisKey
 	|		AND RowIDInfoFull.CurrentStep = BasisesTable.CurrentStep
 	|		AND RowIDInfoFull.ItemKey = BasisesTable.ItemKey
-	|		AND CASE WHEN &Filter_Store THEN RowIDInfoFull.Store = BasisesTable.Store
-	|		    ELSE TRUE END
+	|		AND CASE
+	|			WHEN &Filter_Store
+	|				THEN RowIDInfoFull.Store = BasisesTable.Store
+	|			ELSE TRUE
+	|		END
 	|WHERE
 	|	BasisesTable.RowID IS NULL
 	|;
@@ -9936,7 +10032,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	Query.SetParameter("ItemList", ItemListTable);
 
 	Is = Is(Object);
-	If Is.RRR Or Is.SR Then
+	If Is.RRR Or Is.SR Or Is.WO Or Is.WS Then
 		Query.SetParameter("Filter_Store", False);
 	Else
 		Query.SetParameter("Filter_Store", True);
@@ -10281,6 +10377,7 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SC);
 		// #1487
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WO);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WS);
 	EndIf;
 	
 	If Is.SI Then
@@ -10353,6 +10450,7 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	// #1487
 	If Is.WO Then
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WO, DocAliases.WS);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WO, DocAliases.SI);
 	EndIf;
 	
 	Return Tables;
@@ -10374,6 +10472,9 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	If Is.SI Then
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SO);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SC);
+		// #1487
+		//FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WO);
+		//FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WS);
 	EndIf;
 	
 	If Is.SC Then 

@@ -505,6 +505,20 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
+    <attributes uuid="99cb68eb-c930-40ce-bfe6-1169c87516af">
+      <name>WorkOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Work order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.WorkOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="cc7c7b88-e297-47a2-a836-5688c163f118">
       <name>DeliveryDate</name>
       <synonym>
@@ -1384,6 +1398,85 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="ceff50a7-4013-4048-a366-b355920b6565">
+    <producedTypes>
+      <objectType typeId="5ceed157-e280-4017-8baa-e6e2a0081da6" valueTypeId="c3c176c3-f40c-43d6-829c-4fdf494cda41"/>
+      <rowType typeId="570eaa39-68af-4dc2-b7a6-4436c1bb6f96" valueTypeId="9407ec88-268d-4e0a-b449-4553adbe2ef1"/>
+    </producedTypes>
+    <name>WorkSheets</name>
+    <synonym>
+      <key>en</key>
+      <value>Work sheets</value>
+    </synonym>
+    <attributes uuid="ceb44f52-d292-44fb-80ac-14a583c45b6c">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="aeff6a0d-4e14-4b31-baae-b913a534a2cc">
+      <name>WorkSheet</name>
+      <synonym>
+        <key>en</key>
+        <value>Work sheet</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.WorkSheet</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d6e58f9c-e6bc-4cf1-b5dd-b859eb37b087">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="35a832a2-61b7-43dd-a5d7-79274578c3ef">
+      <name>QuantityInWorkSheet</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in work sheet</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="916ca5fb-feea-47bc-bb7c-3296cfab0e14">
+      <name>BasisKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <commands uuid="884ba46e-eebe-48ad-aaf4-2d1edd607970">
     <name>Generate</name>
     <synonym>
@@ -1394,6 +1487,8 @@
     <commandParameterType>
       <types>DocumentRef.ShipmentConfirmation</types>
       <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.WorkOrder</types>
+      <types>DocumentRef.WorkSheet</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

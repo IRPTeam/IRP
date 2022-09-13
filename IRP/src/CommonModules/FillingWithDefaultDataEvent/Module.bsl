@@ -74,18 +74,34 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		// list of completed attributes in ReadOnlyProperties
 		// need call handler OnChange for each already filled attribute
 	
-		ArrayOfBasisDocumentProperties = StrSplit(ReadOnlyProperties, ",");
+		ArrayOfAllProperties = StrSplit(ReadOnlyProperties, ",");
+		
 		ArrayOfUserSettingsProperties   = StrSplit(UserSettingsProperties, ",");
+		ArrayOfBasisDocumentProperties = New Array();
 		ArrayOfSubordinateTablesProperties = New Array();
 		
 		For Each SubordinateTableName In ArrayOfSubordinateTables Do
-			For Each DataPath In ArrayOfBasisDocumentProperties Do
+			For Each DataPath In ArrayOfAllProperties Do
 				_DataPath = TrimAll(DataPath);
 				Segments = StrSplit(_DataPath, ".");
 				If Segments.Count() = 2 And StrStartsWith(Segments[0], SubordinateTableName) Then
 					ArrayOfSubordinateTablesProperties.Add(_DataPath);
 				EndIf;
 			EndDo;
+		EndDo;
+		
+		For Each BasisProp In ArrayOfAllProperties Do
+			PropIsExists = False;
+			For Each SubProp In ArrayOfSubordinateTablesProperties Do
+				If TrimAll(Upper(BasisProp)) = TrimAll(Upper(SubProp)) Then
+					PropIsExists = True;
+					Break;
+				EndIf;
+			EndDo;
+			
+			If Not PropIsExists Then
+				ArrayOfBasisDocumentProperties.Add(BasisProp);
+			EndIf;
 		EndDo;
 		
 		Info = New Structure();
@@ -98,7 +114,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		EndDo;
 		
 		For Each TableName In ArrayOfSubordinateTables Do
-			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfSubordinateTables);
+			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfSubordinateTablesProperties);
 		EndDo;
 		
 		For Each TableName In ArrayOfMainTables Do
@@ -194,6 +210,10 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 
 	If CommonFunctionsClientServer.ObjectHasProperty(Source, "GoodsReceipts") Then
 		Source.GoodsReceipts.Clear();
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "WorkSheets") Then
+		Source.WorkSheets.Clear();
 	EndIf;
 	
 	// Update key in tabular sections

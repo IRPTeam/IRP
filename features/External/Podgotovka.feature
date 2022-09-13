@@ -1780,7 +1780,6 @@ Scenario: create Document discount2
 	And I input current date in "Start of" field
 	And I change checkbox "Manually"
 	And I change checkbox "Manual input value"
-	And I change the radio button named "Type" value to "For row"
 	And I set checkbox "Launch"
 	And I click "Save and close" button
 	And I wait "Special offer (create) *" window closing in 20 seconds

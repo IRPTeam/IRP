@@ -1746,3 +1746,42 @@ Scenario: check preparation
 			And the previous scenario executed successfully
 		Except
 			Then I stop the execution of scripts for this feature
+
+
+Scenario: create Document discount2
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click the button named "FormCreate"
+	And I input "Document discount 2" text in the field named "Description_en"
+	And I click Open button of "ENG" field
+	And I input "Document discount 2 TR" text in the field named "Description_tr"
+	And I click "Ok" button
+	And I select "Purchases and sales" exact value from "Document type" drop-down list
+	And I change checkbox "Launch"
+	And I click Select button of "Special offer type" field
+	And I click the button named "FormCreate"
+	And I input "Document discount 2" text in the field named "Description_en"
+	And I click Open button of "ENG" field
+	And I input "Document discount 2 TR" text in the field named "Description_tr"
+	And I click "Ok" button
+	And I click Select button of "Plugins" field
+	Then "Plugins" window is opened
+	And I go to line in "List" table
+		| Description               |
+		| ExternalSpecialOfferRules |
+	And I go to line in "List" table
+		| Description      |
+		| DocumentDiscount |
+	And I select current line in "List" table
+	And I click "Save and close" button
+	And I wait "Special offer type (create) *" window closing in 20 seconds
+	Then "Special offer types" window is opened
+	And I click the button named "FormChoose"
+	And I input "12" text in "Priority" field
+	And I input current date in "Start of" field
+	And I change checkbox "Manually"
+	And I change checkbox "Manual input value"
+	And I change the radio button named "Type" value to "For row"
+	And I set checkbox "Launch"
+	And I click "Save and close" button
+	And I wait "Special offer (create) *" window closing in 20 seconds
+

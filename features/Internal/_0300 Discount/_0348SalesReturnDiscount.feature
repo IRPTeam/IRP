@@ -21,6 +21,8 @@ Scenario: _034801 preparation
 		And I select current line in "List" table
 		And I set checkbox "Launch"
 		And I click "Save and close" button
+	* Create document discount 2
+		When Create document discount2
 	* Create test Sales invoice
 		When create SalesInvoice024025
 	* Calculate document discount for Sales invoice 024025
@@ -54,6 +56,7 @@ Scenario: _0348011 check preparation
 	When check preparation
 
 Scenario: _034802 check discount recalculation when change quantity in the SaLes return order
+	And I close all client application windows
 	* Document discount
 		* Create Purchase return based on $$SalesInvoice024025$$
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -116,3 +119,203 @@ Scenario: _034803 check discount recalculation when change quantity in the SaLes
 				| 'Item'  | 'Price'  | 'Item key' | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount' | 'Tax amount' | 'Net amount' |
 				| 'Dress' | '550,00' | 'L/Green'  | '1,000' | '55,00'         | 'pcs'  | '495,00'       | '75,51'      | '419,49'     |
 			And I click the button named "FormPostAndClose"	
+
+Scenario: _034804 check 2 Document Discount (percent)
+	And I close all client application windows
+	* Create SI (one line)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+	* Filling SI
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'   |
+		And I select current line in "List" table
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check 2 Document discount for one line
+		* First discount
+			And in the table "ItemList" I click "% Offers" button
+			Then "Pickup special offers" window is opened
+			And I go to line in "Offers" table
+				| 'Is select' | 'Presentation'      |
+				| '☐'        | 'Document discount' |
+			And I activate "Presentation" field in "Offers" table
+			And I select current line in "Offers" table
+			And I input "10,00" text in the field named "Percent"
+			And I click the button named "Ok"
+			And in the table "Offers" I click "OK" button
+			And "ItemList" table contains lines
+				| 'Item key' | 'Tax amount' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' |
+				| '37/18SD'  | '192,20'     | '700,00' | '140,00'        | '1 067,80'   | '1 260,00'     |
+		* Second discount
+			And in the table "ItemList" I click "% Offers" button
+			Then "Pickup special offers" window is opened
+			And I go to line in "Offers" table
+				| 'Is select' | 'Presentation'        |
+				| '☐'        | 'Document discount 2' |
+			And I activate "Presentation" field in "Offers" table
+			And I select current line in "Offers" table
+			And I input "15,00" text in the field named "Percent"
+			And I click the button named "Ok"
+			And in the table "Offers" I click "OK" button
+			And "ItemList" table contains lines
+				| 'Item key' | 'Tax amount' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' |
+				| '37/18SD'  | '160,17'     | '700,00' | '350,00'        | '889,83'     | '1 050,00'     |
+		* Check offers tab
+			And I move to "Special offers" tab
+			And "SpecialOffers" table contains lines
+				| 'Amount' | 'Special offer'       |
+				| '140,00' | 'Document discount'   |
+				| '210,00' | 'Document discount 2' |
+			Then the number of "SpecialOffers" table lines is "равно" "2"
+		* Post document
+			And I click "Post" button		
+			And I save the value of "Number" field as "NumberSI"
+			And I click "Post and close" button
+		* Reopen document and check discount
+			And I close all client application windows
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I go to line in "List" table
+				| 'Number'     |
+				| '$NumberSI$' |
+			And I select current line in "List" table
+			And "SpecialOffers" table contains lines
+				| 'Amount' | 'Special offer'       |
+				| '140,00' | 'Document discount'   |
+				| '210,00' | 'Document discount 2' |
+			Then the number of "SpecialOffers" table lines is "равно" "2"
+			And I close all client application windows
+
+
+Scenario: _034805 check 2 Document Discount (sum)
+	And I close all client application windows
+	* Create SI (one line)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+	* Filling SI
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'   |
+		And I select current line in "List" table
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check 2 Document discount for one line
+		* First discount
+			And in the table "ItemList" I click "% Offers" button
+			Then "Pickup special offers" window is opened
+			And I go to line in "Offers" table
+				| 'Is select' | 'Presentation'      |
+				| '☐'        | 'Document discount' |
+			And I activate "Presentation" field in "Offers" table
+			And I select current line in "Offers" table
+			And I change the radio button named "Type" value to "Amount"			
+			And I input "10,00" text in the field named "Amount"
+			And I click the button named "Ok"
+			And in the table "Offers" I click "OK" button
+			And "ItemList" table contains lines
+				| 'Item key' | 'Tax amount' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' |
+				| '37/18SD'  | '212,03'     | '700,00' | '10,00'         | '1 177,97'   | '1 390,00'     |
+		* Second discount
+			And in the table "ItemList" I click "% Offers" button
+			Then "Pickup special offers" window is opened
+			And I go to line in "Offers" table
+				| 'Is select' | 'Presentation'        |
+				| '☐'        | 'Document discount 2' |
+			And I activate "Presentation" field in "Offers" table
+			And I select current line in "Offers" table
+			And I change the radio button named "Type" value to "Amount"
+			And I input "20,00" text in the field named "Amount"
+			And I click the button named "Ok"
+			And in the table "Offers" I click "OK" button
+			And "ItemList" table contains lines
+				| 'Item key' | 'Tax amount' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' |
+				| '37/18SD'  | '208,98'     | '700,00' | '30,00'         | '1 161,02'   | '1 370,00'     |
+		* Check offers tab
+			And I move to "Special offers" tab
+			And "SpecialOffers" table contains lines
+				| 'Amount'| 'Special offer'       |
+				| '10,00' | 'Document discount'   |
+				| '20,00' | 'Document discount 2' |
+			Then the number of "SpecialOffers" table lines is "равно" "2"
+		* Post document
+			And I click "Post" button		
+			And I save the value of "Number" field as "NumberSI"
+			And I click "Post and close" button
+		* Reopen document and check discount
+			And I close all client application windows
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I go to line in "List" table
+				| 'Number'     |
+				| '$NumberSI$' |
+			And I select current line in "List" table
+			And "SpecialOffers" table contains lines
+				| 'Amount'| 'Special offer'       |
+				| '10,00' | 'Document discount'   |
+				| '20,00' | 'Document discount 2' |
+			Then the number of "SpecialOffers" table lines is "равно" "2"
+			And I close all client application windows
+			
+
+			
+			
+						
+						
+		
+				
+				
+
+				
+
+				

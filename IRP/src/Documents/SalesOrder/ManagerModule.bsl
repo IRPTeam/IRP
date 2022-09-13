@@ -38,6 +38,8 @@ Function SalesOrderPrint(Ref)
 		|	SalesOrderItemList.Price AS Price,
 		|	SalesOrderItemList.TaxAmount AS TaxAmount,
 		|	SalesOrderItemList.TotalAmount AS TotalAmount,
+		|	SalesOrderItemList.NetAmount AS NetAmount,	
+		|	SalesOrderItemList.OffersAmount AS OffersAmount,
 		|	SalesOrderItemList.Ref AS Ref,
 		|	SalesOrderItemList.Key AS Key
 		|FROM
@@ -125,6 +127,8 @@ Function SalesOrderPrint(Ref)
 		Number		= 0;
 		TotalSum	= 0;
 		TotalTax	= 0;
+		TotalNet	= 0;
+		TotalOffers	= 0;
 		For Each It In FindRow Do
 			Number = Number + 1;
 			AreaItemList.Parameters.Fill(It);	
@@ -140,19 +144,21 @@ Function SalesOrderPrint(Ref)
 					Spreadsheet.Join(AreaListTAX);
 				EndDo;
 			EndDo;
-			
-			
-			TotalSum = TotalSum + It.TotalAmount;
-			TotalTax = TotalTax + It.TaxAmount;
+			TotalSum	= TotalSum + It.TotalAmount;
+			TotalTax	= TotalTax + It.TaxAmount;
+			TotalOffers	= TotalOffers + It.OffersAmount;
+			TotalNet	= TotalNet + It.NetAmount
 		EndDo;
 	EndDo;
 	
-	AreaFooter.Parameters.Number	= Number;
-	AreaFooter.Parameters.Total		= TotalSum;
-	AreaFooter.Parameters.Currency	= SelectionHeader.Currency;
-	AreaFooter.Parameters.Total		= TotalSum;
-	AreaFooter.Parameters.TotalTax	= TotalTax;
-	AreaFooter.Parameters.Manager	= SelectionHeader.Author;
+	AreaFooter.Parameters.Number		= Number;
+	AreaFooter.Parameters.Total			= TotalSum;
+	AreaFooter.Parameters.Currency		= SelectionHeader.Currency;
+	AreaFooter.Parameters.Total			= TotalSum;
+	AreaFooter.Parameters.TotalTax		= TotalTax;
+	AreaFooter.Parameters.TotalNet		= TotalNet;
+	AreaFooter.Parameters.TotalOffers	= TotalOffers;
+	AreaFooter.Parameters.Manager		= SelectionHeader.Author;
 	Spreadsheet.Put(AreaFooter);
 	
 	Return Spreadsheet;

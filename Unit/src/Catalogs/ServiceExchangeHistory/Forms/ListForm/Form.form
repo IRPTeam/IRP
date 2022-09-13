@@ -98,6 +98,59 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>RowIcon</name>
+      <id>33</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.RowIcon</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <extendedTooltip>
+        <name>RowIconExtendedTooltip</name>
+        <id>35</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>RowIconContextMenu</name>
+        <id>34</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>PictureField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:ImageFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <horizontalStretch>true</horizontalStretch>
+        <verticalStretch>true</verticalStretch>
+        <valuesPicture xsi:type="core:PictureRef">
+          <picture>CommonPicture.IconCollection2</picture>
+        </valuesPicture>
+        <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Description</name>
       <id>19</id>
       <visible>true</visible>
@@ -546,29 +599,33 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT 
-       ServiceExchangeHistory.Ref, 
-       ServiceExchangeHistory.DeletionMark, 
-       ServiceExchangeHistory.Parent, 
-       ServiceExchangeHistory.Code, 
-       ServiceExchangeHistory.Description, 
-       ServiceExchangeHistory.Time, 
-       ServiceExchangeHistory.QueryType, 
-       ServiceExchangeHistory.StatusCode, 
-       ServiceExchangeHistory.ResourceAddress, 
-       ServiceExchangeHistory.Headers, 
-       ServiceExchangeHistory.HeadersMD5, 
-       ServiceExchangeHistory.Body, 
-       ServiceExchangeHistory.BodyMD5, 
-       ServiceExchangeHistory.Predefined, 
-       ServiceExchangeHistory.PredefinedDataName
- FROM 
-       Catalog.ServiceExchangeHistory
- AS 
-       ServiceExchangeHistory</queryText>
+      <queryText>SELECT
+	ServiceExchangeHistory.Ref,
+	ServiceExchangeHistory.DeletionMark,
+	ServiceExchangeHistory.Parent,
+	ServiceExchangeHistory.Code,
+	ServiceExchangeHistory.Description,
+	ServiceExchangeHistory.Time,
+	ServiceExchangeHistory.QueryType,
+	ServiceExchangeHistory.StatusCode,
+	ServiceExchangeHistory.ResourceAddress,
+	ServiceExchangeHistory.Headers,
+	ServiceExchangeHistory.HeadersMD5,
+	ServiceExchangeHistory.Body,
+	ServiceExchangeHistory.BodyMD5,
+	ServiceExchangeHistory.Predefined,
+	ServiceExchangeHistory.PredefinedDataName,
+	CASE
+		WHEN ServiceExchangeHistory.Parent = VALUE(Catalog.ServiceExchangeHistory.EmptyRef)
+			THEN 2
+		ELSE 1
+	END AS RowIcon
+FROM
+	Catalog.ServiceExchangeHistory AS ServiceExchangeHistory</queryText>
       <mainTable>Catalog.ServiceExchangeHistory</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

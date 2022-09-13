@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c4726c08-3dfd-4ee3-baf4-aadea16f46a4">
+  <producedTypes>
+    <managerType typeId="f53ed978-d8f8-46a4-98f7-41da0184d961" valueTypeId="d63885b3-f8a6-4e86-982a-da3b0ea2cb2a"/>
+    <valueManagerType typeId="fea86871-4a41-47a3-94ed-7240bd8ee91e" valueTypeId="69931f46-c31e-4199-8140-f2b06191012e"/>
+    <valueKeyType typeId="486141f5-a7f8-4986-9e28-a82f42f14c04" valueTypeId="e01c300b-731b-40b8-94bc-76aa3ec8f838"/>
+  </producedTypes>
+  <name>SaveServiceExchangeHistory</name>
+  <synonym>
+    <key>en</key>
+    <value>Save service exchange history</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

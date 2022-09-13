@@ -14,12 +14,14 @@ EndFunction
 // * Message - String -
 // * ResponseBody - String -
 // * StatusCode - Undefined -
+// * Headers - Map
 Function ServerResponse(AddInfo = Undefined) Export
 	ServerResponse = New Structure();
 	ServerResponse.Insert("Success", False);
 	ServerResponse.Insert("Message", "");
 	ServerResponse.Insert("ResponseBody", "");
 	ServerResponse.Insert("StatusCode", Undefined);
+	ServerResponse.Insert("Headers", New Map);
 	Return ServerResponse;
 EndFunction
 
@@ -53,6 +55,7 @@ EndFunction
 // * Message - String -
 // * ResponseBody - String -
 // * StatusCode - Number -
+// * Headers - Map
 Function SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint,
 	AddInfo = Undefined)
 
@@ -106,6 +109,7 @@ Function SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestP
 	ServerResponse.Success = True;
 	ServerResponse.Message = StrTemplate(R().S_003, ConnectionSetting.Ip, ConnectionSetting.Port);
 	ServerResponse.StatusCode = HTTPResponse.StatusCode;
+	ServerResponse.Headers = HTTPResponse.Headers;
 	ContentType = HTTPResponse.Headers.Get("Content-Type");
 	ContentTypeNotDefined = True;
 	If ContentType <> Undefined Then

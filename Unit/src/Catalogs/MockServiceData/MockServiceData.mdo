@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="df361877-ba81-416e-a6e9-9fd32becc6a6">
+  <producedTypes>
+    <objectType typeId="af71ad29-06e4-4b4c-9006-79b44485b269" valueTypeId="c9112b59-2a72-42d9-b9ef-8d3d41210c6a"/>
+    <refType typeId="0aa5cf5f-4625-4e61-bf8d-b85533f78423" valueTypeId="5f0137cc-e14b-426d-abc0-3a99ce1c715e"/>
+    <selectionType typeId="2bf33688-9c1d-4b28-9c5a-9508f9f3d1fc" valueTypeId="852cf255-2745-412e-b9e2-eb49f46c2665"/>
+    <listType typeId="062704a6-4bc8-42e2-9a21-90f27cb76d47" valueTypeId="c32061b1-32d7-4ae7-8f7b-8b934669ff7f"/>
+    <managerType typeId="3263966e-01db-4419-9148-7883b4d41adb" valueTypeId="20e5a4e2-58ed-4c21-8d87-2c2a0938a6aa"/>
+  </producedTypes>
+  <name>MockServiceData</name>
+  <synonym>
+    <key>en</key>
+    <value>Mock service data</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.MockServiceData.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.MockServiceData.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <basedOn>Catalog.ServiceExchangeHistory</basedOn>
+  <createOnInput>Use</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+  <hierarchical>true</hierarchical>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>9</codeLength>
+  <descriptionLength>150</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.MockServiceData.Form.ItemForm</defaultObjectForm>
+  <attributes uuid="4bbda007-7cca-4983-ba16-f163a792bb3b">
+    <name>Query_Type</name>
+    <synonym>
+      <key>en</key>
+      <value>Query type</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d269f6ba-a6cd-4d66-9fbb-c9612e705de9">
+    <name>Query_ResourceAddress</name>
+    <synonym>
+      <key>en</key>
+      <value>Resource address</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="55250bd0-bab0-460a-a338-6f91f0b08758">
+    <name>Query_Body</name>
+    <synonym>
+      <key>en</key>
+      <value>Query's body</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="8cbefcdf-47cc-4980-9174-c750783cc001">
+    <name>Query_BodyMD5</name>
+    <synonym>
+      <key>en</key>
+      <value>Query's body (md5)</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>36</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d16817f0-bed7-4fc7-9e91-7f5a39b2f5ee">
+    <name>Query_BodyAsFilter</name>
+    <synonym>
+      <key>en</key>
+      <value>Query body as filter</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5d1e2e8c-9327-4def-a243-a9513c57dcf4">
+    <name>Query_BodySize</name>
+    <synonym>
+      <key>en</key>
+      <value>Query body size</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>15</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b835b563-06b2-427b-a2f3-ba9c34e093ea">
+    <name>Query_BodyType</name>
+    <synonym>
+      <key>en</key>
+      <value>Query body type</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>20</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2b07b269-a9e6-4ec2-8547-e1dbd8956041">
+    <name>Answer_Message</name>
+    <synonym>
+      <key>en</key>
+      <value>Answer message</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="46abd238-8166-4133-bf7a-013353677dbb">
+    <name>Answer_StatusCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Answer status code</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>3</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="74528678-3b07-4835-9663-ec21948c387a">
+    <name>Answer_Body</name>
+    <synonym>
+      <key>en</key>
+      <value>Answer's body</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c49e8a38-e06f-426d-8fbb-ac2ca08615e0">
+    <name>Answer_BodySize</name>
+    <synonym>
+      <key>en</key>
+      <value>Answer body size</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>15</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="89f8f7aa-47a0-413d-8b7b-f591831f75e7">
+    <name>Answer_BodyType</name>
+    <synonym>
+      <key>en</key>
+      <value>Answer body type</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>20</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="02fabad1-3f73-429c-971c-e0188cf29e34">
+    <producedTypes>
+      <objectType typeId="f953a02c-8386-4fd5-8bc7-052e34c93d8b" valueTypeId="a4495e53-030a-4823-81c2-b01c30b2f95b"/>
+      <rowType typeId="24a0eaa9-bfbd-4e30-9681-e4070a73186e" valueTypeId="41c810bd-8afa-4606-8c4d-55aca60eb273"/>
+    </producedTypes>
+    <name>Query_Headers</name>
+    <synonym>
+      <key>en</key>
+      <value>Query headers</value>
+    </synonym>
+    <attributes uuid="83e2e42f-9e2c-4e7a-978c-c334818ef93e">
+      <name>VariableName</name>
+      <synonym>
+        <key>en</key>
+        <value>Variable name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d9247b23-afd9-46cb-89a6-112e5a96c4da">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c931df4a-c090-4756-9bf8-4b9fd6a3f2e1">
+      <name>ValueAsFilter</name>
+      <synonym>
+        <key>en</key>
+        <value>Value as filter</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="40555ce6-34ab-472d-a603-7f82810f3344">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="0bd9f4e4-9171-4bac-b91a-d95fdca9ee26">
+    <producedTypes>
+      <objectType typeId="efbad40b-85db-495c-9b0f-088754262de4" valueTypeId="328358cb-f875-446e-9768-f8d6066d6d6d"/>
+      <rowType typeId="938d29e6-5658-490e-b67e-a436f21004f1" valueTypeId="cb23c753-4160-4aef-b0ef-5164fa5af404"/>
+    </producedTypes>
+    <name>Query_Variables</name>
+    <synonym>
+      <key>en</key>
+      <value>Query variables</value>
+    </synonym>
+    <attributes uuid="2ec16f89-0d30-4aee-a8ca-24b3ada7b7e4">
+      <name>VariableName</name>
+      <synonym>
+        <key>en</key>
+        <value>Variable name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4efeb3b9-d8ba-4351-a3ab-d1cc8ab5448c">
+      <name>ValueAsFilter</name>
+      <synonym>
+        <key>en</key>
+        <value>Value as filter</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1ece1043-8e6a-42b2-8dff-3de309e311ad">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="b0301955-cf03-42a6-8d29-9372d1fad1f1">
+    <producedTypes>
+      <objectType typeId="4447f208-86d9-4a37-9b32-179ea47e9adb" valueTypeId="98078442-b043-4645-a7ce-d6984988afa2"/>
+      <rowType typeId="ba21b55f-a2ce-4c4c-a15b-639e067950ef" valueTypeId="2efbc1fe-a9c0-4e04-9473-4950a6f4bb19"/>
+    </producedTypes>
+    <name>Query_AddressParts</name>
+    <synonym>
+      <key>en</key>
+      <value>Query address parts</value>
+    </synonym>
+    <attributes uuid="cb484b15-2aa1-4e96-aaf5-52b3c9800ad5">
+      <name>VariableName</name>
+      <synonym>
+        <key>en</key>
+        <value>Variable name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="20a424bb-fb90-429e-88b1-2cd2e788830b">
+      <name>PartNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Part number</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>3</precision>
+          <nonNegative>true</nonNegative>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="eae10679-c2d2-4ffe-b30b-33d0e19a5a4a">
+    <producedTypes>
+      <objectType typeId="87b2878c-00a2-4522-aaf4-816b8a3bf70b" valueTypeId="9b38f925-3927-4645-aca2-eafe836c7985"/>
+      <rowType typeId="498ef143-845f-49b4-a807-6f95c3dd3f12" valueTypeId="f2f77f8e-229d-4ddb-bb50-3c13b53f5ad3"/>
+    </producedTypes>
+    <name>Query_BodyVariables</name>
+    <synonym>
+      <key>en</key>
+      <value>Query body variables</value>
+    </synonym>
+    <attributes uuid="cc71106a-9b9d-4d14-869e-3b86ab29c926">
+      <name>VariableName</name>
+      <synonym>
+        <key>en</key>
+        <value>Variable name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="04568369-775a-48ae-b39a-6c8511a4d419">
+      <name>PathToValue</name>
+      <synonym>
+        <key>en</key>
+        <value>Path to value</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="b760aca0-e20e-4486-9e40-78aeec6ab650">
+    <producedTypes>
+      <objectType typeId="30d3ca03-31a0-4234-b269-ae4c77c0d064" valueTypeId="067617f7-b337-42fe-b0e1-0fc88a21651f"/>
+      <rowType typeId="bb1a27a3-913f-4370-8c74-b2527e872029" valueTypeId="29510333-d549-45b4-b7a1-9af19505ed2b"/>
+    </producedTypes>
+    <name>Answer_Headers</name>
+    <synonym>
+      <key>en</key>
+      <value>Answer headers</value>
+    </synonym>
+    <attributes uuid="f4ffdef7-5150-49cd-8cd5-af03d7123795">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7118788d-0bfa-4169-8d8d-e8f5cec02839">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="4bc35bc6-d2da-4798-9057-59524fdcf233">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

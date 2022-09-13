@@ -2,16 +2,21 @@
 &Around("SendRequestClientServer")
 Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo)
 	
-	ServiceExchangeData = GetServiceExchangeDataTemplate();
-	ServiceExchangeData.StartTime = CurrentDate();
-	ServiceExchangeData.Headers = ConnectionSetting.Headers;
-	ServiceExchangeData.QueryType = ConnectionSetting.QueryType;
-	ServiceExchangeData.RequestBody = RequestBody;
+	NeedToSave = IntegrationServer.NeedToSaveServiceExchangeHistory();
+	
+	If NeedToSave Then 
+		ServiceExchangeData = GetServiceExchangeDataTemplate();
+		ServiceExchangeData.StartTime = CurrentDate();
+		ServiceExchangeData.Headers = ConnectionSetting.Headers;
+		ServiceExchangeData.QueryType = ConnectionSetting.QueryType;
+		ServiceExchangeData.RequestBody = RequestBody;
+	EndIf;
 	
 	ServerResponse = ProceedWithCall(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo);
-//	If Not ServerResponse.Success Then 
-//		Return ServerResponse;
-//	EndIf;
+	
+	If Not NeedToSave Then
+		Return ServerResponse;
+	EndIf;
 		
 	ServiceExchangeData.EndTime = CurrentDate();
 	ServiceExchangeData.ServerResponse = ServerResponse;
@@ -42,6 +47,7 @@ Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, Req
 	IntegrationServer.SaveServiceExchangeData(ServiceExchangeData);
 	
 	Return ServerResponse;
+	
 EndFunction
 
 

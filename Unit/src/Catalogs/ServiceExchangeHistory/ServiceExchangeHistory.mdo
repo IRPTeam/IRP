@@ -51,6 +51,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -165,6 +166,43 @@
       <types>String</types>
       <stringQualifiers>
         <length>36</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="def154f6-7200-4bff-9382-adf0c3311f0d">
+    <name>BodySize</name>
+    <synonym>
+      <key>en</key>
+      <value>Body size</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>15</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7a29ca80-faa9-45b1-9e59-61d457ed69b2">
+    <name>BodyType</name>
+    <synonym>
+      <key>en</key>
+      <value>Body type</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>20</length>
       </stringQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>

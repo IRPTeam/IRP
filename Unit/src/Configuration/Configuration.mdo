@@ -52,6 +52,7 @@
   <commonModules>CommonModule.IntegrationServer</commonModules>
   <commonModules>CommonModule.Unit_AddAttributeAndPropertySets</commonModules>
   <commonModules>CommonModule.Unit_CatalogCode</commonModules>
+  <commonModules>CommonModule.Unit_CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.Unit_ExpenseAndRevenueTypes</commonModules>
   <commonModules>CommonModule.Unit_Service</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
@@ -69,10 +70,12 @@
   <commonAttributes>CommonAttribute.Volume</commonAttributes>
   <commonAttributes>CommonAttribute.Weight</commonAttributes>
   <commonAttributes>CommonAttribute.Width</commonAttributes>
+  <httpServices>HTTPService.MockService</httpServices>
   <definedTypes>DefinedType.typeAmount</definedTypes>
   <definedTypes>DefinedType.typeDescription</definedTypes>
   <definedTypes>DefinedType.typeFilesOwner</definedTypes>
   <constants>Constant.SaasMode</constants>
+  <constants>Constant.SaveServiceExchangeHistory</constants>
   <commonForms>CommonForm.AttachFile</commonForms>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
@@ -83,6 +86,7 @@
   <catalogs>Catalog.ItemKeys</catalogs>
   <catalogs>Catalog.Items</catalogs>
   <catalogs>Catalog.ItemTypes</catalogs>
+  <catalogs>Catalog.MockServiceData</catalogs>
   <catalogs>Catalog.Partners</catalogs>
   <catalogs>Catalog.ServiceExchangeHistory</catalogs>
   <catalogs>Catalog.Specifications</catalogs>

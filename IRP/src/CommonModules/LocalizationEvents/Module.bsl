@@ -82,9 +82,12 @@ EndProcedure
 //
 // Returns:
 //  String - Replace description localization prefix
-Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table") Export
+Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table", LocalizationCode = Undefined) Export
+	If LocalizationCode = Undefined Then
+		LocalizationCode = LocalizationReuse.GetLocalizationCode()
+	EndIf;
 	QueryField = "CASE WHEN %1.Description_%2 = """" THEN %1.Description_en ELSE %1.Description_%2 END ";
-	QueryField = StrTemplate(QueryField, TableName, LocalizationReuse.GetLocalizationCode());
+	QueryField = StrTemplate(QueryField, TableName, LocalizationCode);
 	Return StrReplace(QueryText, StrTemplate("%1.Description_en", TableName), QueryField);
 EndFunction
 

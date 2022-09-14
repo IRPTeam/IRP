@@ -55,7 +55,7 @@ Procedure FillPrintFormConfig(Parameter)
 		NewStr.CountCopy = Parameter.CountCopy;
 		NewStr.BuilderLayout = Parameter.BuilderLayout;
 		if Parameter.BuilderLayout then
-			NewStr.SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(RefDoc, NameTemplate);
+			NewStr.SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(RefDoc, Parameter);
 		else
 			//@skip-check property-return-type
 			NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;

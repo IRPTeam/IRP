@@ -7,26 +7,20 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 
-	For Each It In CommandParameter Do
-		Spreadsheet = New SpreadsheetDocument;
-		Param = InitPrintParam(It);
-		Param.RefDocument = It;
-		Param.SpreadsheetDoc = Spreadsheet; 
+	For Each ItRef In CommandParameter Do
+		Param = InitPrintParam(ItRef);
+		Param.RefDocument = ItRef;
 		Param.NameTemplate = "SalesOrderPrint";
 		Param.BuilderLayout = True;
-		Param.ModelLayout = CurrentUserLocalizationCode();
-			
-		SalesOrderPrint(Spreadsheet, It, Param.NameTemplate);
+		//SpreadsheetDoc = SalesOrderPrintServer(ItRef, Param);
+		//Param.SpreadsheetDoc = SpreadsheetDoc; 			
+
 		OpenForm("CommonForm.PrintForm", , ,"UniqueOpeningOfTheCommonPrintingPlate");
 		Notify("AddTemplatePrintForm", Param)
 	EndDo;
 
 EndProcedure
 
-&AtServer
-Function CurrentUserLocalizationCode()
-	Return SessionParameters.CurrentUser.LocalizationCode;
-EndFunction
 
 &AtServer
 Function InitPrintParam(It)
@@ -35,12 +29,16 @@ EndFunction
 
 
 
-// Print command handler on the server.
-//
+// Sales order print server.
+// 
 // Parameters:
-//	Spreadsheet - SpreadsheetDocument - spreadsheet document to fill out and print.
-//	CommandParameter - Arbitrary - contains a reference to the object for which the print command was executed.
+//  Ref - DocumentRef.SalesOrder
+//  Param - See UniversalPrintServer.InitPrintParam
+// 
+// Returns:
+//  SpreadsheetDocument - Sales order print server
 &AtServer
-Procedure SalesOrderPrint(Spreadsheet, CommandParameter, NameTemplate)
-	Spreadsheet = Documents.SalesOrder.Print(CommandParameter, NameTemplate);
-EndProcedure
+Function SalesOrderPrintServer(Ref, Param)
+	Spreadsheet = Documents.SalesOrder.Print(Ref, Param);
+	Return Spreadsheet;
+EndFunction

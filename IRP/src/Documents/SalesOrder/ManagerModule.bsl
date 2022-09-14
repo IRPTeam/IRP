@@ -4,17 +4,25 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction
 
-Function Print(Ref, NameTemplate) Export
-	if Upper(NameTemplate) = Upper("SalesOrderPrint") then
-		Return SalesOrderPrint(Ref);
+Function Print(Ref, Param) Export
+	if Upper(Param.NameTemplate) = Upper("SalesOrderPrint") then
+		Return SalesOrderPrint(Ref, Param);
 	EndIf; 
 EndFunction
 
-Function SalesOrderPrint(Ref)
-	
+// Sales order print.
+// 
+// Parameters:
+//  Ref - DocumentRef.SalesOrder
+//  Param - See UniversalPrintServer.InitPrintParam
+// 
+// Returns:
+//  SpreadsheetDocument - Sales order print
+Function SalesOrderPrint(Ref, Param)
+		
 	Template = GetTemplate("SalesOrderPrint");
 	Query = New Query;
-	Query.Text =
+	Text =
 		"SELECT
 		|	SalesOrder.Number AS Number,
 		|	SalesOrder.Date AS Date,
@@ -88,6 +96,17 @@ Function SalesOrderPrint(Ref)
 		|	Document.SalesOrder.TaxList AS SalesOrderTaxList
 		|WHERE
 		|	SalesOrderTaxList.Ref = &Ref";
+
+	LCode = Param.ModelData;	
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrder.Company",LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrder.Partner",LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrder.Currency",LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.ItemKey.Item",LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.ItemKey",LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.Unit",LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderTaxList.Tax",LCode);
+	Query.Text = Text;
+		
 	Query.Parameters.Insert("Ref", Ref);
 	Selection			= Query.ExecuteBatch();
 	SelectionHeader		= Selection[0].Select(); 
@@ -105,7 +124,7 @@ Function SalesOrderPrint(Ref)
 	AreaListTAX			= Template.GetArea("ItemListTAX|ColumnTAX");
 
 	Spreadsheet = New SpreadsheetDocument;
-	Spreadsheet.LanguageCode = SessionParameters.CurrentUser.LocalizationCode;
+	Spreadsheet.LanguageCode = Param.ModelLayout;
 		
 	While SelectionHeader.Next() Do
         AreaCaption.Parameters.Fill(SelectionHeader);

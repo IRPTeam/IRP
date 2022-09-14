@@ -15,14 +15,20 @@
 // * BuilderLayout - Boolean -
 // * ModelData - String -
 // * ModelLayout - String -
-Function InitPrintParam(Ref, ModelLayout = "") Export
+Function InitPrintParam(Ref, ModelLayout = Undefined, ModelData = Undefined) Export
+	If ModelLayout = Undefined Then
+		ModelLayout = LocalizationReuse.GetLocalizationCode();
+	EndIf;
+	If ModelData = Undefined Then
+		ModelData = LocalizationReuse.GetLocalizationCode();
+	EndIf;
 	Param = New Structure();
 	Param.Insert("SpreadsheetDoc", New SpreadsheetDocument);
 	Param.Insert("RefDocument", Ref);
 	Param.Insert("CountCopy", 1);
 	Param.Insert("NameTemplate", "");
 	Param.Insert("BuilderLayout", False);
-	Param.Insert("ModelData", "");
+	Param.Insert("ModelData", ModelData);
 	Param.Insert("ModelLayout", ModelLayout);	
 	Return  Param; 
 EndFunction
@@ -31,13 +37,13 @@ EndFunction
 // 
 // Parameters:
 //  RefDocument - DocumentRef
-//  NameTemplate - String
+//  Param - See UniversalPrintServer.InitPrintParam
 // 
 // Returns:
 //  SpreadsheetDocument - SpreadsheetDocument
-Function BuildSpreadsheetDoc(RefDocument, NameTemplate) Export
+Function BuildSpreadsheetDoc(RefDocument, Param) Export
 	Manager = ObjectManagerByLink(RefDocument);
-	Result = Manager.Print(RefDocument, NameTemplate);
+	Result = Manager.Print(RefDocument, Param);
 	Return Result;	
 EndFunction
 

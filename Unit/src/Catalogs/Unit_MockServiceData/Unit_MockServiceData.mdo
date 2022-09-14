@@ -7,16 +7,16 @@
     <listType typeId="062704a6-4bc8-42e2-9a21-90f27cb76d47" valueTypeId="c32061b1-32d7-4ae7-8f7b-8b934669ff7f"/>
     <managerType typeId="3263966e-01db-4419-9148-7883b4d41adb" valueTypeId="20e5a4e2-58ed-4c21-8d87-2c2a0938a6aa"/>
   </producedTypes>
-  <name>MockServiceData</name>
+  <name>Unit_MockServiceData</name>
   <synonym>
     <key>en</key>
     <value>Mock service data</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.MockServiceData.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.MockServiceData.StandardAttribute.Description</inputByString>
+  <inputByString>Catalog.Unit_MockServiceData.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.Unit_MockServiceData.StandardAttribute.Description</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <basedOn>Catalog.ServiceExchangeHistory</basedOn>
+  <basedOn>Catalog.Unit_ServiceExchangeHistory</basedOn>
   <createOnInput>Use</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
   <hierarchical>true</hierarchical>
@@ -31,7 +31,7 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.MockServiceData.Form.ItemForm</defaultObjectForm>
+  <defaultObjectForm>Catalog.Unit_MockServiceData.Form.ItemForm</defaultObjectForm>
   <attributes uuid="4bbda007-7cca-4983-ba16-f163a792bb3b">
     <name>Query_Type</name>
     <synonym>
@@ -142,7 +142,7 @@
     <type>
       <types>String</types>
       <stringQualifiers>
-        <length>20</length>
+        <length>50</length>
       </stringQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
@@ -229,7 +229,7 @@
     <type>
       <types>String</types>
       <stringQualifiers>
-        <length>20</length>
+        <length>50</length>
       </stringQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
@@ -282,20 +282,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="c931df4a-c090-4756-9bf8-4b9fd6a3f2e1">
-      <name>ValueAsFilter</name>
-      <synonym>
-        <key>en</key>
-        <value>Value as filter</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
     <attributes uuid="40555ce6-34ab-472d-a603-7f82810f3344">
       <name>Value</name>
       <synonym>
@@ -305,6 +291,20 @@
       <type>
         <types>String</types>
         <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c931df4a-c090-4756-9bf8-4b9fd6a3f2e1">
+      <name>ValueAsFilter</name>
+      <synonym>
+        <key>en</key>
+        <value>Value as filter</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -339,20 +339,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="4efeb3b9-d8ba-4351-a3ab-d1cc8ab5448c">
-      <name>ValueAsFilter</name>
-      <synonym>
-        <key>en</key>
-        <value>Value as filter</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
     <attributes uuid="1ece1043-8e6a-42b2-8dff-3de309e311ad">
       <name>Value</name>
       <synonym>
@@ -362,6 +348,20 @@
       <type>
         <types>String</types>
         <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4efeb3b9-d8ba-4351-a3ab-d1cc8ab5448c">
+      <name>ValueAsFilter</name>
+      <synonym>
+        <key>en</key>
+        <value>Value as filter</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -459,6 +459,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="e731e2d2-5453-4ece-a1c9-34b6350d2558">
+      <name>ValueAsFilter</name>
+      <synonym>
+        <key>en</key>
+        <value>Value as filter</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="b760aca0-e20e-4486-9e40-78aeec6ab650">
     <producedTypes>
@@ -508,6 +522,15 @@
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="54ebfe82-589a-48c6-9a8c-b19db91d47ea">
+    <name>TestForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Test form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

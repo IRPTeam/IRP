@@ -54,6 +54,7 @@
   <commonModules>CommonModule.Unit_CatalogCode</commonModules>
   <commonModules>CommonModule.Unit_CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.Unit_ExpenseAndRevenueTypes</commonModules>
+  <commonModules>CommonModule.Unit_MockServiceDataCached</commonModules>
   <commonModules>CommonModule.Unit_Service</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
@@ -75,7 +76,7 @@
   <definedTypes>DefinedType.typeDescription</definedTypes>
   <definedTypes>DefinedType.typeFilesOwner</definedTypes>
   <constants>Constant.SaasMode</constants>
-  <constants>Constant.SaveServiceExchangeHistory</constants>
+  <constants>Constant.Unit_SaveServiceExchangeHistory</constants>
   <commonForms>CommonForm.AttachFile</commonForms>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
@@ -86,10 +87,10 @@
   <catalogs>Catalog.ItemKeys</catalogs>
   <catalogs>Catalog.Items</catalogs>
   <catalogs>Catalog.ItemTypes</catalogs>
-  <catalogs>Catalog.MockServiceData</catalogs>
   <catalogs>Catalog.Partners</catalogs>
-  <catalogs>Catalog.ServiceExchangeHistory</catalogs>
   <catalogs>Catalog.Specifications</catalogs>
+  <catalogs>Catalog.Unit_MockServiceData</catalogs>
+  <catalogs>Catalog.Unit_ServiceExchangeHistory</catalogs>
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <enums>Enum.CurrencyType</enums>

@@ -2,10 +2,10 @@
 &Around("SendRequestClientServer")
 Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo)
 	
-	NeedToSave = IntegrationServer.NeedToSaveServiceExchangeHistory();
+	NeedToSave = IntegrationServer.Unit_NeedToSaveServiceExchangeHistory();
 	
 	If NeedToSave Then 
-		ServiceExchangeData = GetServiceExchangeDataTemplate();
+		ServiceExchangeData = Unit_GetServiceExchangeDataTemplate();
 		ServiceExchangeData.StartTime = CurrentDate();
 		ServiceExchangeData.Headers = ConnectionSetting.Headers;
 		ServiceExchangeData.QueryType = ConnectionSetting.QueryType;
@@ -44,7 +44,7 @@ Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, Req
 	Description = Description + ResourceAddress;
 	ServiceExchangeData.Description = Description;
 	
-	IntegrationServer.SaveServiceExchangeData(ServiceExchangeData);
+	IntegrationServer.Unit_SaveServiceExchangeData(ServiceExchangeData);
 	
 	Return ServerResponse;
 	
@@ -63,7 +63,7 @@ EndFunction
 // * ServerResponse - See IntegrationClientServer.ServerResponse
 // * StartTime - Date -
 // * EndTime - Date -
-Function GetServiceExchangeDataTemplate() Export
+Function Unit_GetServiceExchangeDataTemplate() Export
 	ServiceExchangeData = New Structure;
 	ServiceExchangeData.Insert("Description", "");
 	ServiceExchangeData.Insert("ResourceAddress", "");

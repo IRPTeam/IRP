@@ -492,49 +492,6 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_HeadersValueAsFilter</name>
-              <id>54</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Headers.ValueAsFilter</segments>
-              </dataPath>
-              <extendedTooltip>
-                <name>Query_HeadersValueAsFilterExtendedTooltip</name>
-                <id>56</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>Query_HeadersValueAsFilterContextMenu</name>
-                <id>55</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>CheckBoxField</type>
-              <editMode>EnterOnInput</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-            </items>
-            <items xsi:type="form:FormField">
               <name>Query_HeadersValue</name>
               <id>57</id>
               <visible>true</visible>
@@ -583,6 +540,49 @@
                 <typeDomainEnabled>true</typeDomainEnabled>
                 <textEdit>true</textEdit>
               </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>Query_HeadersValueAsFilter</name>
+              <id>54</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.Query_Headers.ValueAsFilter</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>Query_HeadersValueAsFilterExtendedTooltip</name>
+                <id>56</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>Query_HeadersValueAsFilterContextMenu</name>
+                <id>55</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>CheckBoxField</type>
+              <editMode>EnterOnInput</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
             </items>
             <autoCommandBar>
               <name>Query_HeadersCommandBar</name>
@@ -900,49 +900,6 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_VariablesValueAsFilter</name>
-              <id>81</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Variables.ValueAsFilter</segments>
-              </dataPath>
-              <extendedTooltip>
-                <name>Query_VariablesValueAsFilterExtendedTooltip</name>
-                <id>83</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>Query_VariablesValueAsFilterContextMenu</name>
-                <id>82</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>CheckBoxField</type>
-              <editMode>EnterOnInput</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-            </items>
-            <items xsi:type="form:FormField">
               <name>Query_VariablesValue</name>
               <id>84</id>
               <visible>true</visible>
@@ -991,6 +948,49 @@
                 <typeDomainEnabled>true</typeDomainEnabled>
                 <textEdit>true</textEdit>
               </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>Query_VariablesValueAsFilter</name>
+              <id>81</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.Query_Variables.ValueAsFilter</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>Query_VariablesValueAsFilterExtendedTooltip</name>
+                <id>83</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>Query_VariablesValueAsFilterContextMenu</name>
+                <id>82</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>CheckBoxField</type>
+              <editMode>EnterOnInput</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
             </items>
             <autoCommandBar>
               <name>Query_VariablesCommandBar</name>
@@ -2062,6 +2062,7 @@
                   <autoFill>true</autoFill>
                 </contextMenu>
                 <type>TextDocumentField</type>
+                <readOnly>true</readOnly>
                 <editMode>Enter</editMode>
                 <showInHeader>true</showInHeader>
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -2405,6 +2406,49 @@
                 <typeDomainEnabled>true</typeDomainEnabled>
                 <textEdit>true</textEdit>
               </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>Query_BodyVariablesValueAsFilter</name>
+              <id>261</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.Query_BodyVariables.ValueAsFilter</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>Query_BodyVariablesValueAsFilterExtendedTooltip</name>
+                <id>263</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>Query_BodyVariablesValueAsFilterContextMenu</name>
+                <id>262</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>CheckBoxField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
             </items>
             <autoCommandBar>
               <name>Query_BodyVariablesCommandBar</name>
@@ -3547,6 +3591,7 @@
                   <autoFill>true</autoFill>
                 </contextMenu>
                 <type>TextDocumentField</type>
+                <readOnly>true</readOnly>
                 <editMode>Enter</editMode>
                 <showInHeader>true</showInHeader>
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -3878,7 +3923,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>CatalogObject.MockServiceData</types>
+      <types>CatalogObject.Unit_MockServiceData</types>
     </valueType>
     <view>
       <common>true</common>
@@ -4001,6 +4046,36 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>Query_Body</name>
+    <title>
+      <key>en</key>
+      <value>Query body</value>
+    </title>
+    <id>8</id>
+    <valueType/>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>Answer_Body</name>
+    <title>
+      <key>en</key>
+      <value>Answer body</value>
+    </title>
+    <id>9</id>
+    <valueType/>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>Test</name>
     <title>
@@ -4037,7 +4112,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>Query_TryLoadBody</name>
+        <name>TryLoadBody</name>
       </handler>
     </action>
     <representation>TextPicture</representation>
@@ -4058,7 +4133,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>Query_SaveBody</name>
+        <name>SaveBody</name>
       </handler>
     </action>
     <representation>TextPicture</representation>
@@ -4083,7 +4158,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>Query_ReloadBody</name>
+        <name>ReloadBody</name>
       </handler>
     </action>
     <representation>TextPicture</representation>
@@ -4108,7 +4183,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>Answer_ReloadBody</name>
+        <name>ReloadBody</name>
       </handler>
     </action>
     <representation>TextPicture</representation>
@@ -4129,7 +4204,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>Answer_SaveBody</name>
+        <name>SaveBody</name>
       </handler>
     </action>
     <representation>TextPicture</representation>
@@ -4150,7 +4225,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>Answer_TryLoadBody</name>
+        <name>TryLoadBody</name>
       </handler>
     </action>
     <representation>TextPicture</representation>
@@ -4160,5 +4235,10 @@
     <navigationPanel/>
     <commandBar/>
   </commandInterface>
-  <extInfo xsi:type="form:CatalogFormExtInfo"/>
+  <extInfo xsi:type="form:CatalogFormExtInfo">
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
+    </handlers>
+  </extInfo>
 </form:Form>

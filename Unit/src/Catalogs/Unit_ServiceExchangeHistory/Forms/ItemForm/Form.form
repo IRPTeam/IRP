@@ -1255,6 +1255,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>TextDocumentField</type>
+            <readOnly>true</readOnly>
             <editMode>Enter</editMode>
             <showInHeader>true</showInHeader>
             <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -1498,7 +1499,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>CatalogObject.ServiceExchangeHistory</types>
+      <types>CatalogObject.Unit_ServiceExchangeHistory</types>
     </valueType>
     <view>
       <common>true</common>
@@ -1682,7 +1683,7 @@
         <name>ReloadBody</name>
       </handler>
     </action>
-    <representation>Picture</representation>
+    <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

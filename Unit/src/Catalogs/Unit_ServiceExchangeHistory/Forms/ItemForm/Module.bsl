@@ -5,7 +5,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
-	RealObject = FormDataToValue(Object, Type("CatalogObject.ServiceExchangeHistory")); //CatalogObject.ServiceExchangeHistory 
+	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory 
 	
 	HeadersValue = RealObject.Headers.Get();
 	If TypeOf(HeadersValue) = Type("Map") Then
@@ -67,6 +67,8 @@ EndProcedure
 &AtClient
 Async Procedure ReloadBody(Command)
 	
+	OldModified = Modified;
+	
 	SizeNewFile = 0;
 	ContentFile = Undefined;
 	
@@ -95,7 +97,7 @@ Async Procedure ReloadBody(Command)
 	 
 	ReloadBodyAtServer(ContentFile, SizeNewFile);
 	
-	Modified = False;
+	Modified = OldModified;
 		 
 EndProcedure
 
@@ -105,7 +107,7 @@ EndProcedure
 
 &AtServer
 function GetBodyAtServer()
-	RealObject = FormDataToValue(Object, Type("CatalogObject.ServiceExchangeHistory")); //CatalogObject.ServiceExchangeHistory
+	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
 	Return RealObject.Body.Get();
 EndFunction
 
@@ -120,7 +122,7 @@ Procedure TryLoadBodyAtServer()
 		Return; 
 	EndIf;
 	
-	RealObject = FormDataToValue(Object, Type("CatalogObject.ServiceExchangeHistory")); //CatalogObject.ServiceExchangeHistory
+	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
 	BodyRowValue = RealObject.Body.Get();
 	
 	If Upper(Left(Object.BodyType, 5)) = "IMAGE" Then
@@ -145,7 +147,7 @@ EndProcedure
 &AtServer
 Procedure ReloadBodyAtServer(NewContent, Newsize)
 	
-	RealObject = FormDataToValue(Object, Type("CatalogObject.ServiceExchangeHistory")); //CatalogObject.ServiceExchangeHistory
+	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
 	
 	RealObject.Body = New ValueStorage(NewContent);
 	RealObject.BodyMD5 = CommonFunctionsServer.GetMD5(NewContent);

@@ -5,7 +5,7 @@
     <valueManagerType typeId="fea86871-4a41-47a3-94ed-7240bd8ee91e" valueTypeId="69931f46-c31e-4199-8140-f2b06191012e"/>
     <valueKeyType typeId="486141f5-a7f8-4986-9e28-a82f42f14c04" valueTypeId="e01c300b-731b-40b8-94bc-76aa3ec8f838"/>
   </producedTypes>
-  <name>SaveServiceExchangeHistory</name>
+  <name>Unit_SaveServiceExchangeHistory</name>
   <synonym>
     <key>en</key>
     <value>Save service exchange history</value>

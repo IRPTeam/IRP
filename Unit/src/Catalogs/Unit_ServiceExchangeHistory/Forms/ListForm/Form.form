@@ -616,13 +616,13 @@
 	ServiceExchangeHistory.Predefined,
 	ServiceExchangeHistory.PredefinedDataName,
 	CASE
-		WHEN ServiceExchangeHistory.Parent = VALUE(Catalog.ServiceExchangeHistory.EmptyRef)
+		WHEN ServiceExchangeHistory.Parent = VALUE(Catalog.Unit_ServiceExchangeHistory.EmptyRef)
 			THEN 2
 		ELSE 1
 	END AS RowIcon
 FROM
-	Catalog.ServiceExchangeHistory AS ServiceExchangeHistory</queryText>
-      <mainTable>Catalog.ServiceExchangeHistory</mainTable>
+	Catalog.Unit_ServiceExchangeHistory AS ServiceExchangeHistory</queryText>
+      <mainTable>Catalog.Unit_ServiceExchangeHistory</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>

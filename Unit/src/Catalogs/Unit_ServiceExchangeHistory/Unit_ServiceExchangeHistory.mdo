@@ -7,14 +7,14 @@
     <listType typeId="4b603f82-5160-49c7-8919-26c9c863597c" valueTypeId="8e0987dc-3b8e-4806-81f5-c0626b7169a3"/>
     <managerType typeId="88e5063a-2e59-499d-8171-9738e227ba04" valueTypeId="1b5db656-f5f6-4e32-9e31-6a6c8e39cda7"/>
   </producedTypes>
-  <name>ServiceExchangeHistory</name>
+  <name>Unit_ServiceExchangeHistory</name>
   <synonym>
     <key>en</key>
     <value>Service exchange history</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.ServiceExchangeHistory.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.ServiceExchangeHistory.StandardAttribute.Description</inputByString>
+  <inputByString>Catalog.Unit_ServiceExchangeHistory.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.Unit_ServiceExchangeHistory.StandardAttribute.Description</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>Use</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
@@ -36,8 +36,8 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.ServiceExchangeHistory.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.ServiceExchangeHistory.Form.ListForm</defaultListForm>
+  <defaultObjectForm>Catalog.Unit_ServiceExchangeHistory.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Unit_ServiceExchangeHistory.Form.ListForm</defaultListForm>
   <attributes uuid="b772dbb1-ad7c-4836-a62f-2658ee3ce5fc">
     <name>Time</name>
     <synonym>
@@ -202,7 +202,7 @@
     <type>
       <types>String</types>
       <stringQualifiers>
-        <length>20</length>
+        <length>50</length>
       </stringQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>

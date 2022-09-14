@@ -2,17 +2,17 @@
 
 Procedure Filling(FillingData, StandartProcessing) 
 
-	If TypeOf(FillingData) = Type("CatalogRef.ServiceExchangeHistory") Then
+	If TypeOf(FillingData) = Type("CatalogRef.Unit_ServiceExchangeHistory") Then
 		
 		InputQuery = FillingData;
 		InputAnswer = FillingData;
-		If FillingData.Parent.IsEmpty() Then
-			Selection = Catalogs.ServiceExchangeHistory.Select(InputQuery,,, "Time desc");
+		If InputAnswer.Parent.IsEmpty() Then
+			Selection = Catalogs.Unit_ServiceExchangeHistory.Select(InputQuery,,, "Time desc");
 			If Selection.Next() Then
 				InputAnswer = Selection.Ref;
 			EndIf;
 		Else
-			InputQuery = FillingData.Parent;
+			InputQuery = InputAnswer.Parent;
 		EndIf;
 		
 		Description = InputQuery.Description;
@@ -21,6 +21,8 @@ Procedure Filling(FillingData, StandartProcessing)
 		Query_ResourceAddress = InputQuery.ResourceAddress;
 		Query_Body = InputQuery.Body;
 		Query_BodyMD5 = InputQuery.BodyMD5;
+		Query_BodySize = InputQuery.BodySize;
+		Query_BodyType = InputQuery.BodyType;
 
 		HeadersValue = InputQuery.Headers.Get();
 		If TypeOf(HeadersValue) = Type("Map") Then
@@ -34,6 +36,8 @@ Procedure Filling(FillingData, StandartProcessing)
 		Answer_Message = InputAnswer.ResourceAddress;
 		Answer_StatusCode = InputAnswer.StatusCode;
 		Answer_Body = InputAnswer.Body;
+		Answer_BodySize = InputAnswer.BodySize;
+		Answer_BodyType = InputAnswer.BodyType;
 
 		HeadersValue = InputAnswer.Headers.Get();
 		If TypeOf(HeadersValue) = Type("Map") Then

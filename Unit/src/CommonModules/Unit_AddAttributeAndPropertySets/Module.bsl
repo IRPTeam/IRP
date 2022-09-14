@@ -55,12 +55,10 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Catalog.Extensions");
 	ArrayOfExcluded.Add("Catalog.IDInfoAddresses");
 	ArrayOfExcluded.Add("Catalog.IDInfoSets");
-	ArrayOfExcluded.Add("Catalog.MockServiceData");
 	ArrayOfExcluded.Add("Catalog.MovementRules");
 	ArrayOfExcluded.Add("Catalog.PrintTemplates");
 	ArrayOfExcluded.Add("Catalog.ReportOptions");
 	ArrayOfExcluded.Add("Catalog.RowIDs");
-	ArrayOfExcluded.Add("Catalog.ServiceExchangeHistory");
 	ArrayOfExcluded.Add("Catalog.TransactionsKeys");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
@@ -89,12 +87,10 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Catalog.Extensions");
 	ArrayOfExcluded.Add("Catalog.IDInfoAddresses");
 	ArrayOfExcluded.Add("Catalog.IDInfoSets");
-	ArrayOfExcluded.Add("Catalog.MockServiceData");
 	ArrayOfExcluded.Add("Catalog.MovementRules");
 	ArrayOfExcluded.Add("Catalog.PrintTemplates");
 	ArrayOfExcluded.Add("Catalog.ReportOptions");
 	ArrayOfExcluded.Add("Catalog.RowIDs");
-	ArrayOfExcluded.Add("Catalog.ServiceExchangeHistory");
 	ArrayOfExcluded.Add("Catalog.TransactionsKeys");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");

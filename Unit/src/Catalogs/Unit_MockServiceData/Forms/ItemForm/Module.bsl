@@ -49,15 +49,6 @@ EndProcedure
 #Region FormCommandsEventHandlers
 
 &AtClient
-Procedure Test(Command)
-	If Object.Ref.IsEmpty() Then
-		ShowMessageBox(, "First you need to write the element!");
-		Return;
-	EndIf;
-	OpenForm("Catalog.Unit_MockServiceData.Form.TestForm", New Structure("MockData", Object.Ref));
-EndProcedure
-
-&AtClient
 Procedure TryLoadBody(Command)
 	
 	isQuery = Left(Command.Name, 5) = "Query";

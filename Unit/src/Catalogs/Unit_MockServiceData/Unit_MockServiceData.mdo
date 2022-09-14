@@ -535,4 +535,20 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <commands uuid="833aa8fe-6e5b-4ac0-9d70-32746035427c">
+    <name>Test</name>
+    <synonym>
+      <key>en</key>
+      <value>Test</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>CatalogRef.Unit_ServiceExchangeHistory</types>
+      <types>CatalogRef.Unit_MockServiceData</types>
+    </commandParameterType>
+    <representation>PictureAndText</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.CheckSyntax</picture>
+    </picture>
+  </commands>
 </mdclass:Catalog>

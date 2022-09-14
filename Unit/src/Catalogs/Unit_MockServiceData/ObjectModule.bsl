@@ -1,5 +1,7 @@
 // @strict-types
 
+#Region EventHandlers
+
 Procedure Filling(FillingData, StandartProcessing) 
 
 	If TypeOf(FillingData) = Type("CatalogRef.Unit_ServiceExchangeHistory") Then
@@ -51,3 +53,5 @@ Procedure Filling(FillingData, StandartProcessing)
 	EndIf;
 
 EndProcedure
+
+#EndRegion

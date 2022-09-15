@@ -4366,7 +4366,7 @@ Procedure AddTables(Tables)
 	EndIf;
 	
 	If Not Tables.Property("WorkSheets") Then
-		Tables.Insert("GoodsReceipts", GetEmptyTable_WorkSheets());
+		Tables.Insert("WorkSheets", GetEmptyTable_WorkSheets());
 	EndIf;
 	
 	If Not Tables.Property("SerialLotNumbers") Then

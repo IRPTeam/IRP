@@ -49,35 +49,34 @@ Procedure FillPrintFormConfig(Parameter)
 	FindObj.Insert("Ref", RefDoc);
 	FindObj.Insert("NameTemplate", NameTemplate);
 	If PrintFormConfig.FindRows(FindObj).Count() = 0 Then
-		NewStr = PrintFormConfig.Add();
-		NewStr.Print = True;
+		NewStr				= PrintFormConfig.Add();
+		NewStr.Print		= True;
 		NewStr.Presentation = "" + Parameter.RefDocument;
-		NewStr.CountCopy = Parameter.CountCopy;
-		NewStr.BuilderLayout = Parameter.BuilderLayout;
+		NewStr.CountCopy	= Parameter.CountCopy;
+		NewStr.BuilderLayout= Parameter.BuilderLayout;
+		NewStr.LayoutLang	= Parameter.ModelLayout;
+		NewStr.DataLang		= Parameter.ModelData;
+		NewStr.NameTemplate = NameTemplate;
+		NewStr.Template		= UniversalPrintServer.GetSynonymTemplate(RefDoc, NameTemplate);
+		NewStr.Ref			= Parameter.RefDocument;
 		if Parameter.BuilderLayout then
 			NewStr.SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(RefDoc, Parameter);
 		else
 			//@skip-check property-return-type
 			NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;
 		EndIf;
-		NewStr.LayoutLang = Parameter.ModelLayout;
-		NewStr.NameTemplate = NameTemplate;
-		NewStr.Template = UniversalPrintServer.GetSynonymTemplate(RefDoc, NameTemplate);
-		NewStr.Ref = Parameter.RefDocument;
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure PrintFormConfigOnActivateRow(Item)
-	if Item.CurrentData <> Undefined Then
-		//@skip-check invocation-parameter-type-intersect
-		//@skip-check property-return-type
-		SetResult(Item.CurrentData.SpreadsheetDoc);
-		CodeLang = Item.CurrentData.LayoutLang;
-		if ValueIsFilled(CodeLang) Then
-			NameLang = UniversalPrintServer.LanguageNameByCode(CodeLang);
-			LayoutLang = Item.CurrentData.LayoutLang;
-		EndIf; 
+	CurrentData = Item.CurrentData;
+	if CurrentData <> Undefined Then
+		Items.LayoutLang.ReadOnly = not CurrentData.BuilderLayout;
+		Items.DataLang.ReadOnly = not CurrentData.BuilderLayout;
+		LayoutLang = CurrentData.LayoutLang;
+		DataLang = CurrentData.DataLang;
+		SetResult(CurrentData.SpreadsheetDoc);
 	EndIf;	
 EndProcedure
 
@@ -85,9 +84,30 @@ EndProcedure
 Procedure LayoutLangOnChange(Item)
 	CurrentData = Items.PrintFormConfig.CurrentData;
 	if CurrentData <> Undefined And CurrentData.LayoutLang <> LayoutLang Then
-		Result.LanguageCode = LayoutLang;
-		CurrentData.LayoutLang = LayoutLang			
+		RefreshTemplate(CurrentData)
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure DataLangOnChange(Item)
+	CurrentData = Items.PrintFormConfig.CurrentData;
+	if CurrentData <> Undefined And CurrentData.DataLang <> DataLang Then
+		RefreshTemplate(CurrentData)
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure RefreshTemplate(CurrentData)
+	Param = UniversalPrintServer.InitPrintParam(CurrentData.Ref);
+	FillPropertyValues(Param, CurrentData);
+	Param.ModelData = DataLang;
+	Param.ModelLayout = LayoutLang;
+	SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(Param.RefDocument, Param);
+	Param.SpreadsheetDoc = SpreadsheetDoc;
+	CurrentData.DataLang = DataLang;
+	CurrentData.LayoutLang = LayoutLang;
+	CurrentData.SpreadsheetDoc = SpreadsheetDoc;
+	SetResult(SpreadsheetDoc);
 EndProcedure
 
 // Set result.
@@ -137,6 +157,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			Continue;			
 		EndIf; 
 		Items.LayoutLang.ChoiceList.Add(It.LanguageCode, It.Name);				
+		Items.DataLang.ChoiceList.Add(It.LanguageCode, It.Name);
 	EndDo; 
 	
 EndProcedure

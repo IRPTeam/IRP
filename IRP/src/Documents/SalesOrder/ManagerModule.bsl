@@ -21,6 +21,7 @@ EndFunction
 Function SalesOrderPrint(Ref, Param)
 		
 	Template = GetTemplate("SalesOrderPrint");
+	Template.LanguageCode = Param.ModelLayout;
 	Query = New Query;
 	Text =
 		"SELECT
@@ -138,7 +139,6 @@ Function SalesOrderPrint(Ref, Param)
 			AreaListHeaderTAX.Parameters.NameTAX = SelectionHeaderTAX[It].TaxDescription;
 			Spreadsheet.Join(AreaListHeaderTAX);
 		EndDo;
-		
 		
 		Choice	= New Structure("Ref", SelectionHeader.Ref);
 		FindRow = SelectionItems.FindRows(Choice);

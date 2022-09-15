@@ -5,7 +5,7 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 EndFunction
 
 Function Print(Ref, Param) Export
-	if Upper(Param.NameTemplate) = Upper("SalesOrderPrint") then
+	if StrCompare(Param.NameTemplate, "SalesOrderPrint") = 0 Then
 		Return SalesOrderPrint(Ref, Param);
 	EndIf; 
 EndFunction
@@ -21,7 +21,7 @@ EndFunction
 Function SalesOrderPrint(Ref, Param)
 		
 	Template = GetTemplate("SalesOrderPrint");
-	Template.LanguageCode = Param.ModelLayout;
+	Template.LanguageCode = Param.LayoutLang;
 	Query = New Query;
 	Text =
 		"SELECT
@@ -98,7 +98,7 @@ Function SalesOrderPrint(Ref, Param)
 		|WHERE
 		|	SalesOrderTaxList.Ref = &Ref";
 
-	LCode = Param.ModelData;	
+	LCode = Param.DataLang;	
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrder.Company",LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrder.Partner",LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrder.Currency",LCode);
@@ -125,7 +125,7 @@ Function SalesOrderPrint(Ref, Param)
 	AreaListTAX			= Template.GetArea("ItemListTAX|ColumnTAX");
 
 	Spreadsheet = New SpreadsheetDocument;
-	Spreadsheet.LanguageCode = Param.ModelLayout;
+	Spreadsheet.LanguageCode = Param.LayoutLang;
 		
 	While SelectionHeader.Next() Do
         AreaCaption.Parameters.Fill(SelectionHeader);

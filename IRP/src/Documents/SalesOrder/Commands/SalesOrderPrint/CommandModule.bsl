@@ -9,11 +9,8 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 
 	For Each ItRef In CommandParameter Do
 		Param = InitPrintParam(ItRef);
-		Param.RefDocument = ItRef;
 		Param.NameTemplate = "SalesOrderPrint";
 		Param.BuilderLayout = True;
-		//SpreadsheetDoc = SalesOrderPrintServer(ItRef, Param);
-		//Param.SpreadsheetDoc = SpreadsheetDoc; 			
 
 		OpenForm("CommonForm.PrintForm", , ,"UniqueOpeningOfTheCommonPrintingPlate");
 		Notify("AddTemplatePrintForm", Param)

@@ -13,14 +13,14 @@
 // * CountCopy - Number -
 // * NameTemplate - String -
 // * BuilderLayout - Boolean -
-// * ModelData - String -
-// * ModelLayout - String -
-Function InitPrintParam(Ref, ModelLayout = Undefined, ModelData = Undefined) Export
-	If ModelLayout = Undefined Then
-		ModelLayout = LocalizationReuse.GetLocalizationCode();
+// * DataLang - String -
+// * LayoutLang - String -
+Function InitPrintParam(Ref, val LayoutLang = Undefined, val DataLang = Undefined) Export
+	If LayoutLang = Undefined Then
+		LayoutLang = LocalizationReuse.GetLocalizationCode();
 	EndIf;
-	If ModelData = Undefined Then
-		ModelData = LocalizationReuse.GetLocalizationCode();
+	If DataLang = Undefined Then
+		DataLang = LocalizationReuse.GetLocalizationCode();
 	EndIf;
 	Param = New Structure();
 	Param.Insert("SpreadsheetDoc", New SpreadsheetDocument);
@@ -28,8 +28,8 @@ Function InitPrintParam(Ref, ModelLayout = Undefined, ModelData = Undefined) Exp
 	Param.Insert("CountCopy", 1);
 	Param.Insert("NameTemplate", "");
 	Param.Insert("BuilderLayout", False);
-	Param.Insert("ModelData", ModelData);
-	Param.Insert("ModelLayout", ModelLayout);	
+	Param.Insert("LayoutLang", LayoutLang);
+	Param.Insert("DataLang", DataLang);
 	Return  Param; 
 EndFunction
 

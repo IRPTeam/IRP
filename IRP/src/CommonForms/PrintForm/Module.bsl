@@ -54,15 +54,14 @@ Procedure FillPrintFormConfig(Parameter)
 		NewStr.Presentation = "" + Parameter.RefDocument;
 		NewStr.CountCopy	= Parameter.CountCopy;
 		NewStr.BuilderLayout= Parameter.BuilderLayout;
-		NewStr.LayoutLang	= Parameter.ModelLayout;
-		NewStr.DataLang		= Parameter.ModelData;
+		NewStr.LayoutLang	= Parameter.LayoutLang;
+		NewStr.DataLang		= Parameter.DataLang;
 		NewStr.NameTemplate = NameTemplate;
 		NewStr.Template		= UniversalPrintServer.GetSynonymTemplate(RefDoc, NameTemplate);
 		NewStr.Ref			= Parameter.RefDocument;
 		if Parameter.BuilderLayout then
 			NewStr.SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(RefDoc, Parameter);
 		else
-			//@skip-check property-return-type
 			NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;
 		EndIf;
 	EndIf;
@@ -100,7 +99,10 @@ EndProcedure
 &AtClient
 Procedure PrintFormConfigOnStartEdit(Item, NewRow, Clone)
 	if Clone Then
-		SetResult(Items.PrintFormConfig.CurrentData.SpreadsheetDoc);
+		CurrentData = Items.PrintFormConfig.CurrentData;
+		if CurrentData <> Undefined Then
+			PrintFormConfigOnActivateRow(Item)			
+		EndIf;  
 	EndIf;
 EndProcedure
 
@@ -109,8 +111,8 @@ EndProcedure
 Procedure RefreshTemplate(CurrentData)
 	Param = UniversalPrintServer.InitPrintParam(CurrentData.Ref);
 	FillPropertyValues(Param, CurrentData);
-	Param.ModelData = DataLang;
-	Param.ModelLayout = LayoutLang;
+	Param.DataLang = DataLang;
+	Param.LayoutLang = LayoutLang;
 	SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(Param.RefDocument, Param);
 	Param.SpreadsheetDoc = SpreadsheetDoc;
 	CurrentData.DataLang = DataLang;

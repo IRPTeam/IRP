@@ -96,6 +96,15 @@ Procedure DataLangOnChange(Item)
 	EndIf;
 EndProcedure
 
+
+&AtClient
+Procedure PrintFormConfigOnStartEdit(Item, NewRow, Clone)
+	if Clone Then
+		SetResult(Items.PrintFormConfig.CurrentData.SpreadsheetDoc);
+	EndIf;
+EndProcedure
+
+
 &AtClient
 Procedure RefreshTemplate(CurrentData)
 	Param = UniversalPrintServer.InitPrintParam(CurrentData.Ref);

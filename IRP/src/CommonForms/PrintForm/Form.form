@@ -1360,6 +1360,14 @@
           <event>Selection</event>
           <name>PrintFormConfigSelection</name>
         </handlers>
+        <handlers>
+          <event>OnEditEnd</event>
+          <name>PrintFormConfigOnEditEnd</name>
+        </handlers>
+        <handlers>
+          <event>OnStartEdit</event>
+          <name>PrintFormConfigOnStartEdit</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <userVisible>

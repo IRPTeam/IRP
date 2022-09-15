@@ -1349,39 +1349,122 @@ Scenario: create PurchaseReturn300301
 
 
 Scenario: set True value to the constant
-		And I set "True" value to the constant "UseItemKey"
-		And I set "True" value to the constant "UseCompanies"
-		And I set "True" value to the constant "UseSerialLotNumbers"
-		And I set "True" value to the constant "UseExpenseAndRevenueTypes"
-		And I set "True" value to the constant "UseShipmentConfirmationAndGoodsReceipts"
-		And I set "True" value to the constant "UseStores"
-		And I set "True" value to the constant "UsePartnerTerms"
-		And I set "True" value to the constant "UseAging"
-		And I set "True" value to the constant "UseOrders"
-		And I set "True" value to the constant "UseDeliveryDate"
-		And I set "True" value to the constant "UseSpecialOffers"
-		And I set "True" value to the constant "UsePriceByProperties"
-		And I set "True" value to the constant "UseBankDocuments"
-		And I set "True" value to the constant "UsePartnerItems"
-		And I set "True" value to the constant "UseContactInformation"
-		And I set "True" value to the constant "UseBusinessUnits"
-		And I set "True" value to the constant "UseManagersAndSalesPersons"
-		And I set "True" value to the constant "UseIntegrations"
-		And I set "True" value to the constant "UseEquipments"
-		And I set "True" value to the constant "UseAddAttributesAndProperties"
-		And I set "True" value to the constant "UseAdditionalSettings"
-		And I set "True" value to the constant "UseUnitsAndDimensions"
-		And I set "True" value to the constant "UsePlannedReceiptReservation"
-		And I set "True" value to the constant "UseLandedCost"
-		And I set "True" value to the constant "UseRetail"
-		And I set "True" value to the constant "UseBundling"
-		And I set "True" value to the constant "UseCashTransaction"
-		And I set "True" value to the constant "UsePartnersHierarchy"
-		And I set "True" value to the constant "UseMobile"
-		And I set "True" value to the constant "UseChequeBonds"
+		// And I set "True" value to the constant "UseItemKey"
+		// And I set "True" value to the constant "UseCompanies"
+		// And I set "True" value to the constant "UseSerialLotNumbers"
+		// And I set "True" value to the constant "UseExpenseAndRevenueTypes"
+		// And I set "True" value to the constant "UseShipmentConfirmationAndGoodsReceipts"
+		// And I set "True" value to the constant "UseStores"
+		// And I set "True" value to the constant "UsePartnerTerms"
+		// And I set "True" value to the constant "UseAging"
+		// And I set "True" value to the constant "UseOrders"
+		// And I set "True" value to the constant "UseDeliveryDate"
+		// And I set "True" value to the constant "UseSpecialOffers"
+		// And I set "True" value to the constant "UsePriceByProperties"
+		// And I set "True" value to the constant "UseBankDocuments"
+		// And I set "True" value to the constant "UsePartnerItems"
+		// And I set "True" value to the constant "UseContactInformation"
+		// And I set "True" value to the constant "UseBusinessUnits"
+		// And I set "True" value to the constant "UseManagersAndSalesPersons"
+		// And I set "True" value to the constant "UseIntegrations"
+		// And I set "True" value to the constant "UseEquipments"
+		// And I set "True" value to the constant "UseAddAttributesAndProperties"
+		// And I set "True" value to the constant "UseAdditionalSettings"
+		// And I set "True" value to the constant "UseUnitsAndDimensions"
+		// And I set "True" value to the constant "UsePlannedReceiptReservation"
+		// And I set "True" value to the constant "UseLandedCost"
+		// And I set "True" value to the constant "UseRetail"
+		// And I set "True" value to the constant "UseBundling"
+		// And I set "True" value to the constant "UseCashTransaction"
+		// And I set "True" value to the constant "UsePartnersHierarchy"
+		// And I set "True" value to the constant "UseMobile"
+		// And I set "True" value to the constant "UseChequeBonds"
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I click "Check all" button
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                     | 'Use' |
+			| 'Use lock data modification' | 'Yes' |
+		And I activate "Use" field in "FunctionalOptions" table
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                        | 'Use' |
+			| 'Use consolidated retail sales' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                               | 'Use' |
+			| 'Use job queue for external functions' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'             | 'Use' |
+			| 'Use all functional' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'         | 'Use' |
+			| 'Use accounting' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+		
+		
+				
+				
 
 Scenario: set True value to the constant Use consolidated retail sales
-		And I set "True" value to the constant "UseConsolidatedRetailSales"
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                        |
+			| 'Use consolidated retail sales' |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+		
+Scenario: set True value to the constant Use accounting
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'         |
+			| 'Use accounting' |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window				
+
+Scenario: set True value to the constant Use job queue for external functions
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'         |
+			| 'Use job queue for external functions' |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window	
+
+Scenario: set True value to the constant Use lock data modification
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'         |
+			| 'Use lock data modification' |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window	
+
+Scenario: set True value to the constant EnableLinkedRowsIntegrity
+		And I execute 1C:Enterprise script at server
+ 			| "Constants.EnableLinkedRowsIntegrity.Set(True);" |
+
+Scenario: set True value to the constant SaasMode
+		And I execute 1C:Enterprise script at server
+ 			| "Constants.SaasMode.Set(True);" |
+
+Scenario: set True value to the constant UseSimpleMode
+		And I execute 1C:Enterprise script at server
+ 			| "Constants.UseSimpleMode.Set(True);" |
 
 Scenario: add sales tax settings 
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"
@@ -1663,3 +1746,41 @@ Scenario: check preparation
 			And the previous scenario executed successfully
 		Except
 			Then I stop the execution of scripts for this feature
+
+
+Scenario: create Document discount2
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click the button named "FormCreate"
+	And I input "Document discount 2" text in the field named "Description_en"
+	And I click Open button of "ENG" field
+	And I input "Document discount 2 TR" text in the field named "Description_tr"
+	And I click "Ok" button
+	And I select "Purchases and sales" exact value from "Document type" drop-down list
+	And I change checkbox "Launch"
+	And I click Select button of "Special offer type" field
+	And I click the button named "FormCreate"
+	And I input "Document discount 2" text in the field named "Description_en"
+	And I click Open button of "ENG" field
+	And I input "Document discount 2 TR" text in the field named "Description_tr"
+	And I click "Ok" button
+	And I click Select button of "Plugins" field
+	Then "Plugins" window is opened
+	And I go to line in "List" table
+		| Description               |
+		| ExternalSpecialOfferRules |
+	And I go to line in "List" table
+		| Description      |
+		| DocumentDiscount |
+	And I select current line in "List" table
+	And I click "Save and close" button
+	And I wait "Special offer type (create) *" window closing in 20 seconds
+	Then "Special offer types" window is opened
+	And I click the button named "FormChoose"
+	And I input "12" text in "Priority" field
+	And I input current date in "Start of" field
+	And I change checkbox "Manually"
+	And I change checkbox "Manual input value"
+	And I set checkbox "Launch"
+	And I click "Save and close" button
+	And I wait "Special offer (create) *" window closing in 20 seconds
+

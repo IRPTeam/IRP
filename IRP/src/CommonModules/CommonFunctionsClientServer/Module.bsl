@@ -96,7 +96,7 @@ Function GetSearchStringNumber(SearchString) Export
 	Return GetNumberPartFromString(SearchString, AccessSymbols);
 EndFunction
 
-Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", GetOnlyNumbers = False) Export
+Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", GetOnlyNumbers = False, GetAsNumber = True) Export
 
 	RejectSymbols = New Array;
 	For Index = 1 To StrLen(ReturnIfOnlyThisSymbolsPresent) Do
@@ -119,28 +119,14 @@ Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", Ge
 	If Not NumberPart.Count() Then
 		Return Undefined;
 	EndIf;
-
-	Return Number(StrConcat(NumberPart));
-
-EndFunction
-
-#Region Regexp
-
-// Regex.
-// 
-// Parameters:
-//  String - String - String
-//  Facet - String - RegExp
-// 
-// Returns:
-//  Boolean - is string match regexp
-Function Regex(String, Facet) Export
 	
-	Return True;
+	If GetAsNumber Then
+		Return Number(StrConcat(NumberPart));
+	Else
+		Return StrConcat(NumberPart);
+	EndIf;
 
 EndFunction
-
-#EndRegion
 
 Function GetSliceLastDateByRefAndDate(Ref, Date) Export
 	If Not ValueIsFilled(Ref) Then

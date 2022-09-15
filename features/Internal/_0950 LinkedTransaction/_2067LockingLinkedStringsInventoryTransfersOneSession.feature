@@ -11,7 +11,7 @@ import "Variables.feature"
 
 Scenario: _2067001 preparation (locking linked strings)
 	When set True value to the constant
-	And I set "True" value to the constant "EnableLinkedRowsIntegrity"
+	When set True value to the constant EnableLinkedRowsIntegrity
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info

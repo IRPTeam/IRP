@@ -43,6 +43,7 @@ Function GetExclude_Catalogs()
 	ArrayOfExcluded.Add("Catalog.MovementRules");
 	ArrayOfExcluded.Add("Catalog.ReportOptions");
 	ArrayOfExcluded.Add("Catalog.RetailCustomers");
+	ArrayOfExcluded.Add("Catalog.ExternalFunctions");
 	Return ArrayOfExcluded;
 EndFunction
 

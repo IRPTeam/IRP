@@ -33,10 +33,10 @@
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.Unit_MockServiceData.Form.ItemForm</defaultObjectForm>
   <attributes uuid="4bbda007-7cca-4983-ba16-f163a792bb3b">
-    <name>Query_Type</name>
+    <name>Request_Type</name>
     <synonym>
       <key>en</key>
-      <value>Query type</value>
+      <value>Request type</value>
     </synonym>
     <type>
       <types>String</types>
@@ -51,7 +51,7 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="d269f6ba-a6cd-4d66-9fbb-c9612e705de9">
-    <name>Query_ResourceAddress</name>
+    <name>Request_ResourceAddress</name>
     <synonym>
       <key>en</key>
       <value>Resource address</value>
@@ -67,10 +67,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="55250bd0-bab0-460a-a338-6f91f0b08758">
-    <name>Query_Body</name>
+    <name>Request_Body</name>
     <synonym>
       <key>en</key>
-      <value>Query's body</value>
+      <value>Request body</value>
     </synonym>
     <type>
       <types>ValueStorage</types>
@@ -82,10 +82,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="8cbefcdf-47cc-4980-9174-c750783cc001">
-    <name>Query_BodyMD5</name>
+    <name>Request_BodyMD5</name>
     <synonym>
       <key>en</key>
-      <value>Query's body (md5)</value>
+      <value>Request body (md5)</value>
     </synonym>
     <type>
       <types>String</types>
@@ -100,10 +100,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="d16817f0-bed7-4fc7-9e91-7f5a39b2f5ee">
-    <name>Query_BodyAsFilter</name>
+    <name>Request_BodyAsFilter</name>
     <synonym>
       <key>en</key>
-      <value>Query body as filter</value>
+      <value>Request body as filter</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -115,10 +115,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="5d1e2e8c-9327-4def-a243-a9513c57dcf4">
-    <name>Query_BodySize</name>
+    <name>Request_BodySize</name>
     <synonym>
       <key>en</key>
-      <value>Query body size</value>
+      <value>Request body size</value>
     </synonym>
     <type>
       <types>Number</types>
@@ -134,16 +134,31 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="b835b563-06b2-427b-a2f3-ba9c34e093ea">
-    <name>Query_BodyType</name>
+    <name>Request_BodyType</name>
     <synonym>
       <key>en</key>
-      <value>Query body type</value>
+      <value>Request body type</value>
     </synonym>
     <type>
       <types>String</types>
       <stringQualifiers>
         <length>50</length>
       </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4e6fdbeb-55fa-4598-9161-72fd3c159666">
+    <name>Request_BodyIsText</name>
+    <synonym>
+      <key>en</key>
+      <value>Request body is text</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -238,15 +253,30 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="e150b679-67d7-40de-99f9-4de8e907f9f6">
+    <name>Answer_BodyIsText</name>
+    <synonym>
+      <key>en</key>
+      <value>Answer body is text</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="02fabad1-3f73-429c-971c-e0188cf29e34">
     <producedTypes>
       <objectType typeId="f953a02c-8386-4fd5-8bc7-052e34c93d8b" valueTypeId="a4495e53-030a-4823-81c2-b01c30b2f95b"/>
       <rowType typeId="24a0eaa9-bfbd-4e30-9681-e4070a73186e" valueTypeId="41c810bd-8afa-4606-8c4d-55aca60eb273"/>
     </producedTypes>
-    <name>Query_Headers</name>
+    <name>Request_Headers</name>
     <synonym>
       <key>en</key>
-      <value>Query headers</value>
+      <value>Request headers</value>
     </synonym>
     <attributes uuid="83e2e42f-9e2c-4e7a-978c-c334818ef93e">
       <name>VariableName</name>
@@ -317,10 +347,10 @@
       <objectType typeId="efbad40b-85db-495c-9b0f-088754262de4" valueTypeId="328358cb-f875-446e-9768-f8d6066d6d6d"/>
       <rowType typeId="938d29e6-5658-490e-b67e-a436f21004f1" valueTypeId="cb23c753-4160-4aef-b0ef-5164fa5af404"/>
     </producedTypes>
-    <name>Query_Variables</name>
+    <name>Request_Variables</name>
     <synonym>
       <key>en</key>
-      <value>Query variables</value>
+      <value>Request variables</value>
     </synonym>
     <attributes uuid="2ec16f89-0d30-4aee-a8ca-24b3ada7b7e4">
       <name>VariableName</name>
@@ -374,10 +404,10 @@
       <objectType typeId="4447f208-86d9-4a37-9b32-179ea47e9adb" valueTypeId="98078442-b043-4645-a7ce-d6984988afa2"/>
       <rowType typeId="ba21b55f-a2ce-4c4c-a15b-639e067950ef" valueTypeId="2efbc1fe-a9c0-4e04-9473-4950a6f4bb19"/>
     </producedTypes>
-    <name>Query_AddressParts</name>
+    <name>Request_AddressParts</name>
     <synonym>
       <key>en</key>
-      <value>Query address parts</value>
+      <value>Request address parts</value>
     </synonym>
     <attributes uuid="cb484b15-2aa1-4e96-aaf5-52b3c9800ad5">
       <name>VariableName</name>
@@ -420,10 +450,10 @@
       <objectType typeId="87b2878c-00a2-4522-aaf4-816b8a3bf70b" valueTypeId="9b38f925-3927-4645-aca2-eafe836c7985"/>
       <rowType typeId="498ef143-845f-49b4-a807-6f95c3dd3f12" valueTypeId="f2f77f8e-229d-4ddb-bb50-3c13b53f5ad3"/>
     </producedTypes>
-    <name>Query_BodyVariables</name>
+    <name>Request_BodyVariables</name>
     <synonym>
       <key>en</key>
-      <value>Query body variables</value>
+      <value>Request body variables</value>
     </synonym>
     <attributes uuid="cc71106a-9b9d-4d14-869e-3b86ab29c926">
       <name>VariableName</name>
@@ -453,6 +483,21 @@
         <stringQualifiers>
           <length>100</length>
         </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9a843053-6760-4c54-a697-8730b369b0e1">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

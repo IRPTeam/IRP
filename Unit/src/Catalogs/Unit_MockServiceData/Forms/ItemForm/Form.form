@@ -189,13 +189,13 @@
     <name>GroupOfParts</name>
     <id>165</id>
     <items xsi:type="form:FormGroup">
-      <name>GroupQuery</name>
+      <name>GroupRequest</name>
       <id>167</id>
       <items xsi:type="form:FormGroup">
-        <name>GroupQueryAddress</name>
+        <name>GroupRequestAddress</name>
         <id>161</id>
         <items xsi:type="form:FormField">
-          <name>Query_Type</name>
+          <name>Request_Type</name>
           <id>10</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -203,10 +203,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.Query_Type</segments>
+            <segments>Object.Request_Type</segments>
           </dataPath>
           <extendedTooltip>
-            <name>Query_TypeExtendedTooltip</name>
+            <name>Request_TypeExtendedTooltip</name>
             <id>12</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -221,7 +221,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>Query_TypeContextMenu</name>
+            <name>Request_TypeContextMenu</name>
             <id>11</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -245,7 +245,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>Query_ResourceAddress</name>
+          <name>Request_ResourceAddress</name>
           <id>13</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -253,10 +253,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.Query_ResourceAddress</segments>
+            <segments>Object.Request_ResourceAddress</segments>
           </dataPath>
           <extendedTooltip>
-            <name>Query_ResourceAddressExtendedTooltip</name>
+            <name>Request_ResourceAddressExtendedTooltip</name>
             <id>15</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -271,7 +271,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>Query_ResourceAddressContextMenu</name>
+            <name>Request_ResourceAddressContextMenu</name>
             <id>14</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -286,7 +286,6 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
             <chooseType>true</chooseType>
@@ -301,10 +300,10 @@
         </userVisible>
         <title>
           <key>en</key>
-          <value>Group of query address</value>
+          <value>Group of request address</value>
         </title>
         <extendedTooltip>
-          <name>GroupQueryAddressExtendedTooltip</name>
+          <name>GroupRequestAddressExtendedTooltip</name>
           <id>162</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -328,13 +327,13 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormGroup">
-        <name>QueryPages</name>
+        <name>RequestPages</name>
         <id>28</id>
         <items xsi:type="form:FormGroup">
-          <name>GroupQuery_Headers</name>
+          <name>GroupRequest_Headers</name>
           <id>30</id>
           <items xsi:type="form:Table">
-            <name>Query_Headers</name>
+            <name>Request_Headers</name>
             <id>32</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -342,11 +341,11 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:DataPath">
-              <segments>Object.Query_Headers</segments>
+              <segments>Object.Request_Headers</segments>
             </dataPath>
             <titleLocation>None</titleLocation>
             <items xsi:type="form:FormField">
-              <name>Query_HeadersLineNumber</name>
+              <name>Request_HeadersLineNumber</name>
               <id>45</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -354,10 +353,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Headers.LineNumber</segments>
+                <segments>Object.Request_Headers.LineNumber</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_HeadersLineNumberExtendedTooltip</name>
+                <name>Request_HeadersLineNumberExtendedTooltip</name>
                 <id>47</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -372,7 +371,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_HeadersLineNumberContextMenu</name>
+                <name>Request_HeadersLineNumberContextMenu</name>
                 <id>46</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -392,7 +391,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_HeadersVariableName</name>
+              <name>Request_HeadersVariableName</name>
               <id>48</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -400,10 +399,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Headers.VariableName</segments>
+                <segments>Object.Request_Headers.VariableName</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_HeadersVariableNameExtendedTooltip</name>
+                <name>Request_HeadersVariableNameExtendedTooltip</name>
                 <id>50</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -418,7 +417,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_HeadersVariableNameContextMenu</name>
+                <name>Request_HeadersVariableNameContextMenu</name>
                 <id>49</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -442,7 +441,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_HeadersKey</name>
+              <name>Request_HeadersKey</name>
               <id>51</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -450,10 +449,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Headers.Key</segments>
+                <segments>Object.Request_Headers.Key</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_HeadersKeyExtendedTooltip</name>
+                <name>Request_HeadersKeyExtendedTooltip</name>
                 <id>53</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -468,7 +467,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_HeadersKeyContextMenu</name>
+                <name>Request_HeadersKeyContextMenu</name>
                 <id>52</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -492,7 +491,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_HeadersValue</name>
+              <name>Request_HeadersValue</name>
               <id>57</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -500,10 +499,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Headers.Value</segments>
+                <segments>Object.Request_Headers.Value</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_HeadersValueExtendedTooltip</name>
+                <name>Request_HeadersValueExtendedTooltip</name>
                 <id>59</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -518,7 +517,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_HeadersValueContextMenu</name>
+                <name>Request_HeadersValueContextMenu</name>
                 <id>58</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -542,7 +541,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_HeadersValueAsFilter</name>
+              <name>Request_HeadersValueAsFilter</name>
               <id>54</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -550,10 +549,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Headers.ValueAsFilter</segments>
+                <segments>Object.Request_Headers.ValueAsFilter</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_HeadersValueAsFilterExtendedTooltip</name>
+                <name>Request_HeadersValueAsFilterExtendedTooltip</name>
                 <id>56</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -568,7 +567,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_HeadersValueAsFilterContextMenu</name>
+                <name>Request_HeadersValueAsFilterContextMenu</name>
                 <id>55</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -585,7 +584,7 @@
               <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
             </items>
             <autoCommandBar>
-              <name>Query_HeadersCommandBar</name>
+              <name>Request_HeadersCommandBar</name>
               <id>34</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -601,10 +600,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_HeadersSearchString</name>
+              <name>Request_HeadersSearchString</name>
               <id>36</id>
               <extendedTooltip>
-                <name>Query_HeadersSearchStringExtendedTooltip</name>
+                <name>Request_HeadersSearchStringExtendedTooltip</name>
                 <id>38</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -619,7 +618,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_HeadersSearchStringContextMenu</name>
+                <name>Request_HeadersSearchStringContextMenu</name>
                 <id>37</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -628,7 +627,7 @@
                 </userVisible>
                 <autoFill>true</autoFill>
               </contextMenu>
-              <source>Query_HeadersSearchString</source>
+              <source>Request_HeadersSearchString</source>
               <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -639,10 +638,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_HeadersViewStatus</name>
+              <name>Request_HeadersViewStatus</name>
               <id>39</id>
               <extendedTooltip>
-                <name>Query_HeadersViewStatusExtendedTooltip</name>
+                <name>Request_HeadersViewStatusExtendedTooltip</name>
                 <id>41</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -657,7 +656,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_HeadersViewStatusContextMenu</name>
+                <name>Request_HeadersViewStatusContextMenu</name>
                 <id>40</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -667,7 +666,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>ViewStatusAddition</type>
-              <source>Query_HeadersViewStatus</source>
+              <source>Request_HeadersViewStatus</source>
               <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -678,10 +677,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_HeadersSearchControl</name>
+              <name>Request_HeadersSearchControl</name>
               <id>42</id>
               <extendedTooltip>
-                <name>Query_HeadersSearchControlExtendedTooltip</name>
+                <name>Request_HeadersSearchControlExtendedTooltip</name>
                 <id>44</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -696,7 +695,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_HeadersSearchControlContextMenu</name>
+                <name>Request_HeadersSearchControlContextMenu</name>
                 <id>43</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -706,13 +705,13 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>SearchControlAddition</type>
-              <source>Query_HeadersSearchControl</source>
+              <source>Request_HeadersSearchControl</source>
               <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
             </searchControlAddition>
             <extendedTooltip>
-              <name>Query_HeadersExtendedTooltip</name>
+              <name>Request_HeadersExtendedTooltip</name>
               <id>35</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -727,7 +726,7 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>Query_HeadersContextMenu</name>
+              <name>Request_HeadersContextMenu</name>
               <id>33</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -768,7 +767,7 @@
             <value>Headers</value>
           </title>
           <extendedTooltip>
-            <name>GroupQuery_HeadersExtendedTooltip</name>
+            <name>GroupRequest_HeadersExtendedTooltip</name>
             <id>31</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -789,10 +788,10 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
-          <name>GroupQuery_Variables</name>
+          <name>GroupRequest_Variables</name>
           <id>60</id>
           <items xsi:type="form:Table">
-            <name>Query_Variables</name>
+            <name>Request_Variables</name>
             <id>62</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -800,11 +799,11 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:DataPath">
-              <segments>Object.Query_Variables</segments>
+              <segments>Object.Request_Variables</segments>
             </dataPath>
             <titleLocation>None</titleLocation>
             <items xsi:type="form:FormField">
-              <name>Query_VariablesLineNumber</name>
+              <name>Request_VariablesLineNumber</name>
               <id>75</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -812,10 +811,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Variables.LineNumber</segments>
+                <segments>Object.Request_Variables.LineNumber</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_VariablesLineNumberExtendedTooltip</name>
+                <name>Request_VariablesLineNumberExtendedTooltip</name>
                 <id>77</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -830,7 +829,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_VariablesLineNumberContextMenu</name>
+                <name>Request_VariablesLineNumberContextMenu</name>
                 <id>76</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -850,7 +849,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_VariablesVariableName</name>
+              <name>Request_VariablesVariableName</name>
               <id>78</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -858,10 +857,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Variables.VariableName</segments>
+                <segments>Object.Request_Variables.VariableName</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_VariablesVariableNameExtendedTooltip</name>
+                <name>Request_VariablesVariableNameExtendedTooltip</name>
                 <id>80</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -876,7 +875,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_VariablesVariableNameContextMenu</name>
+                <name>Request_VariablesVariableNameContextMenu</name>
                 <id>79</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -900,7 +899,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_VariablesValue</name>
+              <name>Request_VariablesValue</name>
               <id>84</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -908,10 +907,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Variables.Value</segments>
+                <segments>Object.Request_Variables.Value</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_VariablesValueExtendedTooltip</name>
+                <name>Request_VariablesValueExtendedTooltip</name>
                 <id>86</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -926,7 +925,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_VariablesValueContextMenu</name>
+                <name>Request_VariablesValueContextMenu</name>
                 <id>85</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -950,7 +949,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_VariablesValueAsFilter</name>
+              <name>Request_VariablesValueAsFilter</name>
               <id>81</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -958,10 +957,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_Variables.ValueAsFilter</segments>
+                <segments>Object.Request_Variables.ValueAsFilter</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_VariablesValueAsFilterExtendedTooltip</name>
+                <name>Request_VariablesValueAsFilterExtendedTooltip</name>
                 <id>83</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -976,7 +975,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_VariablesValueAsFilterContextMenu</name>
+                <name>Request_VariablesValueAsFilterContextMenu</name>
                 <id>82</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -993,7 +992,7 @@
               <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
             </items>
             <autoCommandBar>
-              <name>Query_VariablesCommandBar</name>
+              <name>Request_VariablesCommandBar</name>
               <id>64</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1009,10 +1008,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_VariablesSearchString</name>
+              <name>Request_VariablesSearchString</name>
               <id>66</id>
               <extendedTooltip>
-                <name>Query_VariablesSearchStringExtendedTooltip</name>
+                <name>Request_VariablesSearchStringExtendedTooltip</name>
                 <id>68</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1027,7 +1026,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_VariablesSearchStringContextMenu</name>
+                <name>Request_VariablesSearchStringContextMenu</name>
                 <id>67</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1036,7 +1035,7 @@
                 </userVisible>
                 <autoFill>true</autoFill>
               </contextMenu>
-              <source>Query_VariablesSearchString</source>
+              <source>Request_VariablesSearchString</source>
               <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -1047,10 +1046,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_VariablesViewStatus</name>
+              <name>Request_VariablesViewStatus</name>
               <id>69</id>
               <extendedTooltip>
-                <name>Query_VariablesViewStatusExtendedTooltip</name>
+                <name>Request_VariablesViewStatusExtendedTooltip</name>
                 <id>71</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1065,7 +1064,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_VariablesViewStatusContextMenu</name>
+                <name>Request_VariablesViewStatusContextMenu</name>
                 <id>70</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1075,7 +1074,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>ViewStatusAddition</type>
-              <source>Query_VariablesViewStatus</source>
+              <source>Request_VariablesViewStatus</source>
               <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -1086,10 +1085,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_VariablesSearchControl</name>
+              <name>Request_VariablesSearchControl</name>
               <id>72</id>
               <extendedTooltip>
-                <name>Query_VariablesSearchControlExtendedTooltip</name>
+                <name>Request_VariablesSearchControlExtendedTooltip</name>
                 <id>74</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1104,7 +1103,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_VariablesSearchControlContextMenu</name>
+                <name>Request_VariablesSearchControlContextMenu</name>
                 <id>73</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1114,13 +1113,13 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>SearchControlAddition</type>
-              <source>Query_VariablesSearchControl</source>
+              <source>Request_VariablesSearchControl</source>
               <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
             </searchControlAddition>
             <extendedTooltip>
-              <name>Query_VariablesExtendedTooltip</name>
+              <name>Request_VariablesExtendedTooltip</name>
               <id>65</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1135,7 +1134,7 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>Query_VariablesContextMenu</name>
+              <name>Request_VariablesContextMenu</name>
               <id>63</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1176,7 +1175,7 @@
             <value>Variables</value>
           </title>
           <extendedTooltip>
-            <name>GroupQuery_VariablesExtendedTooltip</name>
+            <name>GroupRequest_VariablesExtendedTooltip</name>
             <id>61</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1197,10 +1196,10 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
-          <name>GroupQuery_AddressParts</name>
+          <name>GroupRequest_AddressParts</name>
           <id>87</id>
           <items xsi:type="form:Table">
-            <name>Query_AddressParts</name>
+            <name>Request_AddressParts</name>
             <id>89</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1208,11 +1207,11 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:DataPath">
-              <segments>Object.Query_AddressParts</segments>
+              <segments>Object.Request_AddressParts</segments>
             </dataPath>
             <titleLocation>None</titleLocation>
             <items xsi:type="form:FormField">
-              <name>Query_AddressPartsLineNumber</name>
+              <name>Request_AddressPartsLineNumber</name>
               <id>102</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1220,10 +1219,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_AddressParts.LineNumber</segments>
+                <segments>Object.Request_AddressParts.LineNumber</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_AddressPartsLineNumberExtendedTooltip</name>
+                <name>Request_AddressPartsLineNumberExtendedTooltip</name>
                 <id>104</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1238,7 +1237,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_AddressPartsLineNumberContextMenu</name>
+                <name>Request_AddressPartsLineNumberContextMenu</name>
                 <id>103</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1258,7 +1257,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_AddressPartsVariableName</name>
+              <name>Request_AddressPartsVariableName</name>
               <id>105</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1266,10 +1265,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_AddressParts.VariableName</segments>
+                <segments>Object.Request_AddressParts.VariableName</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_AddressPartsVariableNameExtendedTooltip</name>
+                <name>Request_AddressPartsVariableNameExtendedTooltip</name>
                 <id>107</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1284,7 +1283,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_AddressPartsVariableNameContextMenu</name>
+                <name>Request_AddressPartsVariableNameContextMenu</name>
                 <id>106</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1308,7 +1307,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_AddressPartsPartNumber</name>
+              <name>Request_AddressPartsPartNumber</name>
               <id>108</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1316,10 +1315,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_AddressParts.PartNumber</segments>
+                <segments>Object.Request_AddressParts.PartNumber</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_AddressPartsPartNumberExtendedTooltip</name>
+                <name>Request_AddressPartsPartNumberExtendedTooltip</name>
                 <id>110</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1334,7 +1333,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_AddressPartsPartNumberContextMenu</name>
+                <name>Request_AddressPartsPartNumberContextMenu</name>
                 <id>109</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1358,7 +1357,7 @@
               </extInfo>
             </items>
             <autoCommandBar>
-              <name>Query_AddressPartsCommandBar</name>
+              <name>Request_AddressPartsCommandBar</name>
               <id>91</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1374,10 +1373,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_AddressPartsSearchString</name>
+              <name>Request_AddressPartsSearchString</name>
               <id>93</id>
               <extendedTooltip>
-                <name>Query_AddressPartsSearchStringExtendedTooltip</name>
+                <name>Request_AddressPartsSearchStringExtendedTooltip</name>
                 <id>95</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1392,7 +1391,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_AddressPartsSearchStringContextMenu</name>
+                <name>Request_AddressPartsSearchStringContextMenu</name>
                 <id>94</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1401,7 +1400,7 @@
                 </userVisible>
                 <autoFill>true</autoFill>
               </contextMenu>
-              <source>Query_AddressPartsSearchString</source>
+              <source>Request_AddressPartsSearchString</source>
               <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -1412,10 +1411,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_AddressPartsViewStatus</name>
+              <name>Request_AddressPartsViewStatus</name>
               <id>96</id>
               <extendedTooltip>
-                <name>Query_AddressPartsViewStatusExtendedTooltip</name>
+                <name>Request_AddressPartsViewStatusExtendedTooltip</name>
                 <id>98</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1430,7 +1429,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_AddressPartsViewStatusContextMenu</name>
+                <name>Request_AddressPartsViewStatusContextMenu</name>
                 <id>97</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1440,7 +1439,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>ViewStatusAddition</type>
-              <source>Query_AddressPartsViewStatus</source>
+              <source>Request_AddressPartsViewStatus</source>
               <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -1451,10 +1450,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_AddressPartsSearchControl</name>
+              <name>Request_AddressPartsSearchControl</name>
               <id>99</id>
               <extendedTooltip>
-                <name>Query_AddressPartsSearchControlExtendedTooltip</name>
+                <name>Request_AddressPartsSearchControlExtendedTooltip</name>
                 <id>101</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1469,7 +1468,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_AddressPartsSearchControlContextMenu</name>
+                <name>Request_AddressPartsSearchControlContextMenu</name>
                 <id>100</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1479,13 +1478,13 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>SearchControlAddition</type>
-              <source>Query_AddressPartsSearchControl</source>
+              <source>Request_AddressPartsSearchControl</source>
               <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
             </searchControlAddition>
             <extendedTooltip>
-              <name>Query_AddressPartsExtendedTooltip</name>
+              <name>Request_AddressPartsExtendedTooltip</name>
               <id>92</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1500,7 +1499,7 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>Query_AddressPartsContextMenu</name>
+              <name>Request_AddressPartsContextMenu</name>
               <id>90</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1541,7 +1540,7 @@
             <value>Address parts</value>
           </title>
           <extendedTooltip>
-            <name>GroupQuery_AddressPartsExtendedTooltip</name>
+            <name>GroupRequest_AddressPartsExtendedTooltip</name>
             <id>88</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1562,13 +1561,13 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
-          <name>GroupQuery_Body</name>
+          <name>GroupRequest_Body</name>
           <id>173</id>
           <items xsi:type="form:FormGroup">
-            <name>GroupQueryBodyHeader</name>
+            <name>GroupRequestBodyHeader</name>
             <id>163</id>
             <items xsi:type="form:FormField">
-              <name>QueryBodySizePresentation</name>
+              <name>RequestBodySizePresentation</name>
               <id>201</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1576,10 +1575,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>QueryBodySizePresentation</segments>
+                <segments>RequestBodySizePresentation</segments>
               </dataPath>
               <extendedTooltip>
-                <name>QueryBodySizePresentationExtendedTooltip</name>
+                <name>RequestBodySizePresentationExtendedTooltip</name>
                 <id>203</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1594,7 +1593,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>QueryBodySizePresentationContextMenu</name>
+                <name>RequestBodySizePresentationContextMenu</name>
                 <id>202</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1624,11 +1623,11 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_BodyType</name>
+              <name>Request_BodyType</name>
               <id>232</id>
               <title>
                 <key>en</key>
-                <value>Body type</value>
+                <value>Type</value>
               </title>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1636,10 +1635,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_BodyType</segments>
+                <segments>Object.Request_BodyType</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_BodyTypeExtendedTooltip</name>
+                <name>Request_BodyTypeExtendedTooltip</name>
                 <id>234</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1654,7 +1653,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_BodyTypeContextMenu</name>
+                <name>Request_BodyTypeContextMenu</name>
                 <id>233</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1676,8 +1675,56 @@
                 <textEdit>true</textEdit>
               </extInfo>
             </items>
+            <items xsi:type="form:FormField">
+              <name>Request_BodyIsText</name>
+              <id>264</id>
+              <title>
+                <key>en</key>
+                <value>Text</value>
+              </title>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.Request_BodyIsText</segments>
+              </dataPath>
+              <titleLocation>Right</titleLocation>
+              <extendedTooltip>
+                <name>Request_BodyIsTextExtendedTooltip</name>
+                <id>266</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>Request_BodyIsTextContextMenu</name>
+                <id>265</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>CheckBoxField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+            </items>
             <items xsi:type="form:Button">
-              <name>Query_TryLoadBody</name>
+              <name>Request_TryLoadBody</name>
               <id>239</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1685,7 +1732,7 @@
                 <common>true</common>
               </userVisible>
               <extendedTooltip>
-                <name>Query_TryLoadBodyExtendedTooltip</name>
+                <name>Request_TryLoadBodyExtendedTooltip</name>
                 <id>240</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1700,7 +1747,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command.Query_TryLoadBody</commandName>
+              <commandName>Form.Command.Request_TryLoadBody</commandName>
               <representation>Auto</representation>
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1708,7 +1755,7 @@
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
-              <name>Query_SaveBody</name>
+              <name>Request_SaveBody</name>
               <id>237</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1716,7 +1763,7 @@
                 <common>true</common>
               </userVisible>
               <extendedTooltip>
-                <name>Query_SaveBodyExtendedTooltip</name>
+                <name>Request_SaveBodyExtendedTooltip</name>
                 <id>238</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1731,7 +1778,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command.Query_SaveBody</commandName>
+              <commandName>Form.Command.Request_SaveBody</commandName>
               <representation>Auto</representation>
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1739,7 +1786,7 @@
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
-              <name>Query_ReloadBody</name>
+              <name>Request_ReloadBody</name>
               <id>235</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1747,7 +1794,7 @@
                 <common>true</common>
               </userVisible>
               <extendedTooltip>
-                <name>Query_ReloadBodyExtendedTooltip</name>
+                <name>Request_ReloadBodyExtendedTooltip</name>
                 <id>236</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1762,7 +1809,7 @@
                 </extInfo>
               </extendedTooltip>
               <type>UsualButton</type>
-              <commandName>Form.Command.Query_ReloadBody</commandName>
+              <commandName>Form.Command.Request_ReloadBody</commandName>
               <representation>Auto</representation>
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
@@ -1776,10 +1823,10 @@
             </userVisible>
             <title>
               <key>en</key>
-              <value>Group of query body</value>
+              <value>Group of request body</value>
             </title>
             <extendedTooltip>
-              <name>GroupQueryBodyHeaderExtendedTooltip</name>
+              <name>GroupRequestBodyHeaderExtendedTooltip</name>
               <id>164</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1795,7 +1842,7 @@
             </extendedTooltip>
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
-              <group>HorizontalIfPossible</group>
+              <group>AlwaysHorizontal</group>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
               <throughAlign>Auto</throughAlign>
@@ -1803,10 +1850,10 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormGroup">
-            <name>GroupQueryBodyFilter</name>
+            <name>GroupRequestBodyFilter</name>
             <id>221</id>
             <items xsi:type="form:FormField">
-              <name>Query_BodyAsFilter</name>
+              <name>Request_BodyAsFilter</name>
               <id>19</id>
               <title>
                 <key>en</key>
@@ -1818,11 +1865,11 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_BodyAsFilter</segments>
+                <segments>Object.Request_BodyAsFilter</segments>
               </dataPath>
               <titleLocation>Right</titleLocation>
               <extendedTooltip>
-                <name>Query_BodyAsFilterExtendedTooltip</name>
+                <name>Request_BodyAsFilterExtendedTooltip</name>
                 <id>21</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1837,7 +1884,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_BodyAsFilterContextMenu</name>
+                <name>Request_BodyAsFilterContextMenu</name>
                 <id>20</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1854,7 +1901,7 @@
               <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_BodyMD5</name>
+              <name>Request_BodyMD5</name>
               <id>16</id>
               <title>
                 <key>en</key>
@@ -1866,10 +1913,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_BodyMD5</segments>
+                <segments>Object.Request_BodyMD5</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_BodyMD5ExtendedTooltip</name>
+                <name>Request_BodyMD5ExtendedTooltip</name>
                 <id>18</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1884,7 +1931,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_BodyMD5ContextMenu</name>
+                <name>Request_BodyMD5ContextMenu</name>
                 <id>17</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -1914,10 +1961,10 @@
             </userVisible>
             <title>
               <key>en</key>
-              <value>Group of filter query body</value>
+              <value>Group of filter request body</value>
             </title>
             <extendedTooltip>
-              <name>GroupQueryBodyFilterExtendedTooltip</name>
+              <name>GroupRequestBodyFilterExtendedTooltip</name>
               <id>222</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1941,13 +1988,13 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormGroup">
-            <name>BodyQueryPresentation</name>
+            <name>BodyRequestPresentation</name>
             <id>184</id>
             <items xsi:type="form:FormGroup">
-              <name>BodyQueryAsFile</name>
+              <name>BodyRequestAsFile</name>
               <id>186</id>
               <items xsi:type="form:Decoration">
-                <name>QueryNoPreview</name>
+                <name>RequestNoPreview</name>
                 <id>188</id>
                 <title>
                   <key>en</key>
@@ -1959,7 +2006,7 @@
                   <common>true</common>
                 </userVisible>
                 <extendedTooltip>
-                  <name>QueryNoPreviewExtendedTooltip</name>
+                  <name>RequestNoPreviewExtendedTooltip</name>
                   <id>190</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -1974,7 +2021,7 @@
                   </extInfo>
                 </extendedTooltip>
                 <contextMenu>
-                  <name>QueryNoPreviewContextMenu</name>
+                  <name>RequestNoPreviewContextMenu</name>
                   <id>189</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2001,7 +2048,7 @@
                 <value>File</value>
               </title>
               <extendedTooltip>
-                <name>BodyQueryAsFileExtendedTooltip</name>
+                <name>BodyRequestAsFileExtendedTooltip</name>
                 <id>187</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2022,10 +2069,10 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormGroup">
-              <name>BodyQueryAsStr</name>
+              <name>BodyRequestAsStr</name>
               <id>191</id>
               <items xsi:type="form:FormField">
-                <name>QueryBodyString</name>
+                <name>RequestBodyString</name>
                 <id>193</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2033,11 +2080,11 @@
                   <common>true</common>
                 </userVisible>
                 <dataPath xsi:type="form:DataPath">
-                  <segments>QueryBodyString</segments>
+                  <segments>RequestBodyString</segments>
                 </dataPath>
                 <titleLocation>None</titleLocation>
                 <extendedTooltip>
-                  <name>QueryBodyStringExtendedTooltip</name>
+                  <name>RequestBodyStringExtendedTooltip</name>
                   <id>195</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2052,7 +2099,7 @@
                   </extInfo>
                 </extendedTooltip>
                 <contextMenu>
-                  <name>QueryBodyStringContextMenu</name>
+                  <name>RequestBodyStringContextMenu</name>
                   <id>194</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2086,7 +2133,7 @@
                 <value>String</value>
               </title>
               <extendedTooltip>
-                <name>BodyQueryAsStrExtendedTooltip</name>
+                <name>BodyRequestAsStrExtendedTooltip</name>
                 <id>192</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2107,10 +2154,10 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormGroup">
-              <name>BodyQueryAsPic</name>
+              <name>BodyRequestAsPic</name>
               <id>196</id>
               <items xsi:type="form:FormField">
-                <name>QueryBodyPicture</name>
+                <name>RequestBodyPicture</name>
                 <id>198</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2118,11 +2165,11 @@
                   <common>true</common>
                 </userVisible>
                 <dataPath xsi:type="form:DataPath">
-                  <segments>QueryBodyPicture</segments>
+                  <segments>RequestBodyPicture</segments>
                 </dataPath>
                 <titleLocation>None</titleLocation>
                 <extendedTooltip>
-                  <name>QueryBodyPictureExtendedTooltip</name>
+                  <name>RequestBodyPictureExtendedTooltip</name>
                   <id>200</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2137,7 +2184,7 @@
                   </extInfo>
                 </extendedTooltip>
                 <contextMenu>
-                  <name>QueryBodyPictureContextMenu</name>
+                  <name>RequestBodyPictureContextMenu</name>
                   <id>199</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -2167,7 +2214,7 @@
                 <value>Picture</value>
               </title>
               <extendedTooltip>
-                <name>BodyQueryAsPicExtendedTooltip</name>
+                <name>BodyRequestAsPicExtendedTooltip</name>
                 <id>197</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2197,7 +2244,7 @@
               <value>Body Query Presentation</value>
             </title>
             <extendedTooltip>
-              <name>BodyQueryPresentationExtendedTooltip</name>
+              <name>BodyRequestPresentationExtendedTooltip</name>
               <id>185</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2226,7 +2273,7 @@
             <value>Body</value>
           </title>
           <extendedTooltip>
-            <name>GroupQuery_BodyExtendedTooltip</name>
+            <name>GroupRequest_BodyExtendedTooltip</name>
             <id>174</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2247,10 +2294,10 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
-          <name>GroupQuery_BodyVariables</name>
+          <name>GroupRequest_BodyVariables</name>
           <id>111</id>
           <items xsi:type="form:Table">
-            <name>Query_BodyVariables</name>
+            <name>Request_BodyVariables</name>
             <id>113</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2258,11 +2305,11 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:DataPath">
-              <segments>Object.Query_BodyVariables</segments>
+              <segments>Object.Request_BodyVariables</segments>
             </dataPath>
             <titleLocation>None</titleLocation>
             <items xsi:type="form:FormField">
-              <name>Query_BodyVariablesLineNumber</name>
+              <name>Request_BodyVariablesLineNumber</name>
               <id>126</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2270,10 +2317,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_BodyVariables.LineNumber</segments>
+                <segments>Object.Request_BodyVariables.LineNumber</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_BodyVariablesLineNumberExtendedTooltip</name>
+                <name>Request_BodyVariablesLineNumberExtendedTooltip</name>
                 <id>128</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2288,7 +2335,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_BodyVariablesLineNumberContextMenu</name>
+                <name>Request_BodyVariablesLineNumberContextMenu</name>
                 <id>127</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2308,7 +2355,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_BodyVariablesVariableName</name>
+              <name>Request_BodyVariablesVariableName</name>
               <id>129</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2316,10 +2363,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_BodyVariables.VariableName</segments>
+                <segments>Object.Request_BodyVariables.VariableName</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_BodyVariablesVariableNameExtendedTooltip</name>
+                <name>Request_BodyVariablesVariableNameExtendedTooltip</name>
                 <id>131</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2334,7 +2381,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_BodyVariablesVariableNameContextMenu</name>
+                <name>Request_BodyVariablesVariableNameContextMenu</name>
                 <id>130</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2358,7 +2405,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_BodyVariablesPathToValue</name>
+              <name>Request_BodyVariablesPathToValue</name>
               <id>132</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2366,10 +2413,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_BodyVariables.PathToValue</segments>
+                <segments>Object.Request_BodyVariables.PathToValue</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_BodyVariablesPathToValueExtendedTooltip</name>
+                <name>Request_BodyVariablesPathToValueExtendedTooltip</name>
                 <id>134</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2384,7 +2431,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_BodyVariablesPathToValueContextMenu</name>
+                <name>Request_BodyVariablesPathToValueContextMenu</name>
                 <id>133</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2408,7 +2455,57 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>Query_BodyVariablesValueAsFilter</name>
+              <name>Request_BodyVariablesValue</name>
+              <id>270</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.Request_BodyVariables.Value</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>Request_BodyVariablesValueExtendedTooltip</name>
+                <id>272</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>Request_BodyVariablesValueContextMenu</name>
+                <id>271</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>InputField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:InputFieldExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <wrap>true</wrap>
+                <chooseType>true</chooseType>
+                <typeDomainEnabled>true</typeDomainEnabled>
+                <textEdit>true</textEdit>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>Request_BodyVariablesValueAsFilter</name>
               <id>261</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2416,10 +2513,10 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.Query_BodyVariables.ValueAsFilter</segments>
+                <segments>Object.Request_BodyVariables.ValueAsFilter</segments>
               </dataPath>
               <extendedTooltip>
-                <name>Query_BodyVariablesValueAsFilterExtendedTooltip</name>
+                <name>Request_BodyVariablesValueAsFilterExtendedTooltip</name>
                 <id>263</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2434,7 +2531,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_BodyVariablesValueAsFilterContextMenu</name>
+                <name>Request_BodyVariablesValueAsFilterContextMenu</name>
                 <id>262</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2451,7 +2548,7 @@
               <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
             </items>
             <autoCommandBar>
-              <name>Query_BodyVariablesCommandBar</name>
+              <name>Request_BodyVariablesCommandBar</name>
               <id>115</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2467,10 +2564,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_BodyVariablesSearchString</name>
+              <name>Request_BodyVariablesSearchString</name>
               <id>117</id>
               <extendedTooltip>
-                <name>Query_BodyVariablesSearchStringExtendedTooltip</name>
+                <name>Request_BodyVariablesSearchStringExtendedTooltip</name>
                 <id>119</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2485,7 +2582,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_BodyVariablesSearchStringContextMenu</name>
+                <name>Request_BodyVariablesSearchStringContextMenu</name>
                 <id>118</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2494,7 +2591,7 @@
                 </userVisible>
                 <autoFill>true</autoFill>
               </contextMenu>
-              <source>Query_BodyVariablesSearchString</source>
+              <source>Request_BodyVariablesSearchString</source>
               <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -2505,10 +2602,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_BodyVariablesViewStatus</name>
+              <name>Request_BodyVariablesViewStatus</name>
               <id>120</id>
               <extendedTooltip>
-                <name>Query_BodyVariablesViewStatusExtendedTooltip</name>
+                <name>Request_BodyVariablesViewStatusExtendedTooltip</name>
                 <id>122</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2523,7 +2620,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_BodyVariablesViewStatusContextMenu</name>
+                <name>Request_BodyVariablesViewStatusContextMenu</name>
                 <id>121</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2533,7 +2630,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>ViewStatusAddition</type>
-              <source>Query_BodyVariablesViewStatus</source>
+              <source>Request_BodyVariablesViewStatus</source>
               <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -2544,10 +2641,10 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>Query_BodyVariablesSearchControl</name>
+              <name>Request_BodyVariablesSearchControl</name>
               <id>123</id>
               <extendedTooltip>
-                <name>Query_BodyVariablesSearchControlExtendedTooltip</name>
+                <name>Request_BodyVariablesSearchControlExtendedTooltip</name>
                 <id>125</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2562,7 +2659,7 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>Query_BodyVariablesSearchControlContextMenu</name>
+                <name>Request_BodyVariablesSearchControlContextMenu</name>
                 <id>124</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2572,13 +2669,13 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>SearchControlAddition</type>
-              <source>Query_BodyVariablesSearchControl</source>
+              <source>Request_BodyVariablesSearchControl</source>
               <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
             </searchControlAddition>
             <extendedTooltip>
-              <name>Query_BodyVariablesExtendedTooltip</name>
+              <name>Request_BodyVariablesExtendedTooltip</name>
               <id>116</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2593,7 +2690,7 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>Query_BodyVariablesContextMenu</name>
+              <name>Request_BodyVariablesContextMenu</name>
               <id>114</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2634,7 +2731,7 @@
             <value>Body variables</value>
           </title>
           <extendedTooltip>
-            <name>GroupQuery_BodyVariablesExtendedTooltip</name>
+            <name>GroupRequest_BodyVariablesExtendedTooltip</name>
             <id>112</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2661,10 +2758,10 @@
         </userVisible>
         <title>
           <key>en</key>
-          <value>Query pages</value>
+          <value>Request pages</value>
         </title>
         <extendedTooltip>
-          <name>QueryPagesExtendedTooltip</name>
+          <name>RequestPagesExtendedTooltip</name>
           <id>29</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2691,10 +2788,10 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Query</value>
+        <value>Request</value>
       </title>
       <extendedTooltip>
-        <name>GroupQueryExtendedTooltip</name>
+        <name>GroupRequestExtendedTooltip</name>
         <id>168</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -3295,7 +3392,7 @@
               <id>246</id>
               <title>
                 <key>en</key>
-                <value>Body type</value>
+                <value>Type</value>
               </title>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -3342,6 +3439,54 @@
                 <typeDomainEnabled>true</typeDomainEnabled>
                 <textEdit>true</textEdit>
               </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
+              <name>Request_BodyIsText1</name>
+              <id>267</id>
+              <title>
+                <key>en</key>
+                <value>Text</value>
+              </title>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.Request_BodyIsText</segments>
+              </dataPath>
+              <titleLocation>Right</titleLocation>
+              <extendedTooltip>
+                <name>Request_BodyIsText1ExtendedTooltip</name>
+                <id>269</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>Request_BodyIsText1ContextMenu</name>
+                <id>268</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>CheckBoxField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
             </items>
             <items xsi:type="form:Button">
               <name>Answer_TryLoadBody</name>
@@ -3462,7 +3607,7 @@
             </extendedTooltip>
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
-              <group>HorizontalIfPossible</group>
+              <group>AlwaysHorizontal</group>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
               <throughAlign>Auto</throughAlign>
@@ -3905,10 +4050,10 @@
     <savedData>true</savedData>
   </attributes>
   <attributes>
-    <name>QueryBodyPicture</name>
+    <name>RequestBodyPicture</name>
     <title>
       <key>en</key>
-      <value>Query body picture</value>
+      <value>Request body picture</value>
     </title>
     <id>2</id>
     <valueType>
@@ -3923,7 +4068,7 @@
     </edit>
   </attributes>
   <attributes>
-    <name>QueryBodySizePresentation</name>
+    <name>RequestBodySizePresentation</name>
     <title>
       <key>en</key>
       <value>Size</value>
@@ -3943,10 +4088,10 @@
     </edit>
   </attributes>
   <attributes>
-    <name>QueryBodyString</name>
+    <name>RequestBodyString</name>
     <title>
       <key>en</key>
-      <value>Query body string</value>
+      <value>Request body string</value>
     </title>
     <id>4</id>
     <valueType>
@@ -4017,10 +4162,10 @@
     </edit>
   </attributes>
   <attributes>
-    <name>Query_Body</name>
+    <name>Request_Body</name>
     <title>
       <key>en</key>
-      <value>Query body</value>
+      <value>Request body</value>
     </title>
     <id>8</id>
     <valueType/>
@@ -4047,7 +4192,7 @@
     </edit>
   </attributes>
   <formCommands>
-    <name>Query_TryLoadBody</name>
+    <name>Request_TryLoadBody</name>
     <title>
       <key>en</key>
       <value>Try load</value>
@@ -4068,7 +4213,7 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>Query_SaveBody</name>
+    <name>Request_SaveBody</name>
     <title>
       <key>en</key>
       <value>Save body</value>
@@ -4089,7 +4234,7 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>Query_ReloadBody</name>
+    <name>Request_ReloadBody</name>
     <title>
       <key>en</key>
       <value>Reload body</value>

@@ -9,9 +9,11 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	If TypeOf(CommandParameter) = Type("CatalogRef.Unit_ServiceExchangeHistory") Then
 		Parent = CommonFunctionsServer.GetRefAttribute(CommandParameter, "Parent"); // CatalogRef.Unit_ServiceExchangeHistory
 		If ValueIsFilled(Parent) Then
-			Parameters.Insert("Query", Parent);
+			Parameters.Insert("Request", Parent);
+			Parameters.Insert("Answer", CommandParameter);
 		Else
-			Parameters.Insert("Query", CommandParameter);
+			Parameters.Insert("Request", CommandParameter);
+			Parameters.Insert("Answer", IntegrationServer.Unit_GetLastAnswerByRequest(CommandParameter));
 		EndIf;
 	ElsIf TypeOf(CommandParameter) = Type("CatalogRef.Unit_MockServiceData") Then
 		Parameters.Insert("MockData", CommandParameter);

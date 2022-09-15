@@ -27,7 +27,7 @@
 	<item>
 		<selection>
 			<item>
-				<field>QueryType</field>
+				<field>RequestType</field>
 			</item>
 		</selection>
 		<filter>

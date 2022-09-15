@@ -7,7 +7,8 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	MockData = Parameters.MockData;
-	Query = Parameters.Query;
+	Request = Parameters.Request;
+	ReferenceAnswer = Parameters.Answer;
 
 EndProcedure
 
@@ -19,11 +20,26 @@ EndProcedure
 &AtClient
 Procedure RunTestMockData(Command)
 	ClearPreviousData();
+	If not ValueIsFilled(MockData) Then
+		ShowMessageBox(, "Select mock data element");
+		Return;
+	EndIf;
+	RunTestMockDataAtServer();
 EndProcedure
 
 &AtClient
 Procedure RunTestMockService(Command)
 	ClearPreviousData();
+	If IsBlankString(ServiceURL) Then
+		ShowMessageBox(, "Enter the path to the mock service");
+		Return;
+	EndIf;
+	RunTestMockServiceAtServer();
+EndProcedure
+
+&AtClient
+Procedure CompareAnswers(Command)
+	//TODO: Insert the handler content
 EndProcedure
 
 &AtClient
@@ -32,31 +48,16 @@ Procedure TryLoadBody(Command)
 EndProcedure
 
 &AtClient
-Async Procedure SaveBody(Command)
+Procedure SaveBody(Command)
 	
-	BodyRowValue = GetBodyAtServer();
+	BodyRowValue = GetBodyAtServer(); // BinaryData
 	
-	If TypeOf(BodyRowValue) = Type("Undefined") or (TypeOf(BodyRowValue) = Type("String") and IsBlankString(BodyRowValue)) Then
+	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
 		ShowMessageBox(,"Empty file!");
 		Return;
 	EndIf;
 	
-	If TypeOf(BodyRowValue) = Type("BinaryData") Then
-		BodyRowValue.BeginWrite();
-		Return;		
-	EndIf;
-	
-	FileDialog = New FileDialog(FileDialogMode.Save);
-
-	PathArray = Await FileDialog.ChooseAsync(); // Array
-	If PathArray = Undefined or PathArray.Count()=0 Then
-		Return;
-	EndIf;
-	FullFileName = PathArray[0]; // String
-	
-	TextFile = New TextDocument();
-	TextFile.SetText(String(BodyRowValue));
-	TextFile.Write(FullFileName);
+	BodyRowValue.BeginWrite();
 	
 EndProcedure
 
@@ -83,12 +84,13 @@ Procedure TryLoadBodyAtServer()
 	AnswerBodyString = "";
 	AnswerBodyPicture = "";
 	
-	If BodyType = "" or BodyType = "BINARY" Then
-		BodyGroup.CurrentPage = Items.BodyAnswerAsFile;
-		Return; 
-	EndIf;
-	
 	BodyRowValue = GetBodyAtServer(); // BinaryData
+	
+	If AnswerBodyIsText Then
+		AnswerBodyString = GetStringFromBinaryData(BodyRowValue);
+		BodyGroup.CurrentPage = Items.BodyAnswerAsStr;
+		Return;
+	EndIf;
 	
 	If Left(BodyType, 5) = "IMAGE" Then
 		//@skip-check empty-except-statement
@@ -99,8 +101,7 @@ Procedure TryLoadBodyAtServer()
 		Except EndTry;				
 	EndIf;
 	
-	AnswerBodyString = String(BodyRowValue);
-	BodyGroup.CurrentPage = Items.BodyAnswerAsStr;
+	BodyGroup.CurrentPage = Items.BodyAnswerAsFile;
 	
 EndProcedure
 
@@ -116,6 +117,111 @@ Procedure ClearPreviousData()
 	Answer_Body = Undefined;
 	AnswerBodyString = "";
 	AnswerBodyPicture = "";
+EndProcedure
+
+&AtServer
+Procedure RunTestMockDataAtServer()
+	
+	RequestStructure = Unit_MockService.GetStructureRequest();
+	
+	RequestStructure.Type = Request.RequestType; 
+	RequestStructure.Address = Request.ResourceAddress;
+	
+	RequestOptions = New Map;
+	ArrayOfSegments = StrSplit(RequestStructure.Address, "?");
+	If ArrayOfSegments.Count() > 1 Then
+		OptionsSegments = ArrayOfSegments[1];
+		ArrayOfSegments = StrSplit(OptionsSegments, "&");
+		For Each OptionsSegment In ArrayOfSegments Do
+			EqualPosition = StrFind(OptionsSegment, "=");
+			If EqualPosition > 1 Then
+				RequestOptions.Insert(OptionsSegment, "");
+			Else
+				RequestOptions.Insert(TrimAll(Mid(OptionsSegment,1,EqualPosition-1)), TrimAll(Mid(OptionsSegment,EqualPosition+1)));
+			EndIf;
+		EndDo;
+	EndIf;
+	RequestStructure.Options = New FixedMap(RequestOptions);
+	
+	HeadersMap = Request.Headers.Get();
+	If TypeOf(HeadersMap) = Type("Map") Then	
+		RequestStructure.Headers = New FixedMap(HeadersMap);
+	Else
+		RequestStructure.Headers = New FixedMap(New Map);
+	EndIf;
+	
+	RequestStructure.Body = Request.Body.Get();
+	
+	Answer = Unit_MockService.ComposeAnswerToRequestStructure(RequestStructure, MockData);
+	LoadAnswer(Answer);
+		
+EndProcedure
+
+&AtServer
+Procedure RunTestMockServiceAtServer()
+	
+	RequestStructure = Unit_MockService.GetStructureRequest();
+	
+	RequestStructure.Type = Request.RequestType; 
+	RequestStructure.Address = Request.ResourceAddress;
+	
+	RequestOptions = New Map;
+	ArrayOfSegments = StrSplit(RequestStructure.Address, "?");
+	If ArrayOfSegments.Count() > 1 Then
+		OptionsSegments = ArrayOfSegments[1];
+		ArrayOfSegments = StrSplit(OptionsSegments, "&");
+		For Each OptionsSegment In ArrayOfSegments Do
+			EqualPosition = StrFind(OptionsSegment, "=");
+			If EqualPosition > 1 Then
+				RequestOptions.Insert(OptionsSegment, "");
+			Else
+				RequestOptions.Insert(TrimAll(Mid(OptionsSegment,1,EqualPosition-1)), TrimAll(Mid(OptionsSegment,EqualPosition+1)));
+			EndIf;
+		EndDo;
+	EndIf;
+	RequestStructure.Options = New FixedMap(RequestOptions);
+	
+	HeadersMap = Request.Headers.Get();
+	If TypeOf(HeadersMap) = Type("Map") Then	
+		RequestStructure.Headers = New FixedMap(HeadersMap);
+	Else
+		RequestStructure.Headers = New FixedMap(New Map);
+	EndIf;
+	
+	RequestStructure.Body = Request.Body.Get();
+	
+	Answer = Unit_MockService.ComposeAnswerToRequestStructure(RequestStructure, MockData);
+	LoadAnswer(Answer);
+		
+EndProcedure
+
+&AtServer
+Procedure LoadAnswer(Answer)
+	
+	StatusCode = Answer.StatusCode;
+	Message = Answer.Reason;
+	
+	For Each HeaderItem In Answer.Headers Do
+		NewRecord = AnswerHeaders.Add();
+		NewRecord.Key = String(HeaderItem.Key);
+		NewRecord.Value = String(HeaderItem.Value);
+	EndDo;
+	
+	BodyRowValue = Answer.GetBodyAsBinaryData();
+	Answer_Body = New ValueStorage(BodyRowValue);
+	
+	BodyInfo = IntegrationServer.Unit_GetBodyInfo(BodyRowValue, Answer.Headers);
+	AnswerBodySize = BodyInfo.Size;  
+	
+	AnswerBodyIsText = True;
+	AnswerBodyType = String(Answer.Headers.Get("Content-Type"));
+	ArrayOfSegments = StrSplit(AnswerBodyType, "/");
+	If ArrayOfSegments.Count() >= 1 And Upper(TrimAll(ArrayOfSegments[0])) = "IMAGE" Then
+		AnswerBodyIsText = False;
+	EndIf;
+
+	AnswerBodySizePresentation = Unit_CommonFunctionsClientServer.GetSizePresentation(AnswerBodySize);
+	
 EndProcedure
 
 #EndRegion

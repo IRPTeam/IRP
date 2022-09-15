@@ -1,12 +1,11 @@
 // @strict-types
 
+#Region EventHandlers
+
 Function MainAnyMethod(Request)
 	
-	QueryType = Request.HTTPMethod; 
-	ResourceAddress = Request.RelativeURL;
+	Return Unit_MockService.ComposeAnswerToRequest(Request);
 	
-	
-	Response = New HTTPServiceResponse(200);
-	Response.SetBodyFromString("Test");
-	Return Response;
 EndFunction
+
+#EndRegion

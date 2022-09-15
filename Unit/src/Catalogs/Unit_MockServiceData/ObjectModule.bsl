@@ -6,32 +6,30 @@ Procedure Filling(FillingData, StandartProcessing)
 
 	If TypeOf(FillingData) = Type("CatalogRef.Unit_ServiceExchangeHistory") Then
 		
-		InputQuery = FillingData;
+		InputRequest = FillingData;
 		InputAnswer = FillingData;
 		If InputAnswer.Parent.IsEmpty() Then
-			Selection = Catalogs.Unit_ServiceExchangeHistory.Select(InputQuery,,, "Time desc");
-			If Selection.Next() Then
-				InputAnswer = Selection.Ref;
-			EndIf;
+			InputAnswer = IntegrationServer.Unit_GetLastAnswerByRequest(InputAnswer);
 		Else
-			InputQuery = InputAnswer.Parent;
+			InputRequest = InputAnswer.Parent;
 		EndIf;
 		
-		Description = InputQuery.Description;
+		Description = InputRequest.Description;
 		
-		Query_Type = InputQuery.QueryType;
-		Query_ResourceAddress = InputQuery.ResourceAddress;
-		Query_Body = InputQuery.Body;
-		Query_BodyMD5 = InputQuery.BodyMD5;
-		Query_BodySize = InputQuery.BodySize;
-		Query_BodyType = InputQuery.BodyType;
+		Request_Type = InputRequest.RequestType;
+		Request_ResourceAddress = InputRequest.ResourceAddress;
+		Request_Body = InputRequest.Body;
+		Request_BodyMD5 = InputRequest.BodyMD5;
+		Request_BodySize = InputRequest.BodySize;
+		Request_BodyType = InputRequest.BodyType;
+		Request_BodyIsText = InputRequest.BodyIsText;
 
-		HeadersValue = InputQuery.Headers.Get();
+		HeadersValue = InputRequest.Headers.Get();
 		If TypeOf(HeadersValue) = Type("Map") Then
 			For Each KeyValue In HeadersValue Do
-				QueryHeaderRow       = Query_Headers.Add();
-				QueryHeaderRow.Key   = String(KeyValue.Key);
-				QueryHeaderRow.Value = String(KeyValue.Value);
+				RequestHeaderRow       = Request_Headers.Add();
+				RequestHeaderRow.Key   = String(KeyValue.Key);
+				RequestHeaderRow.Value = String(KeyValue.Value);
 			EndDo;
 		EndIf;
 		
@@ -40,6 +38,7 @@ Procedure Filling(FillingData, StandartProcessing)
 		Answer_Body = InputAnswer.Body;
 		Answer_BodySize = InputAnswer.BodySize;
 		Answer_BodyType = InputAnswer.BodyType;
+		Answer_BodyIsText = InputAnswer.BodyIsText;
 
 		HeadersValue = InputAnswer.Headers.Get();
 		If TypeOf(HeadersValue) = Type("Map") Then

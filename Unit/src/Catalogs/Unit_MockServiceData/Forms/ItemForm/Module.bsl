@@ -8,25 +8,25 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	If Object.Ref.IsEmpty() Then
 		If Parameters.Property("Basis") and TypeOf(Parameters.Basis) = Type("CatalogRef.Unit_ServiceExchangeHistory") Then
-			InputQuery = Parameters.Basis;  // CatalogRef.Unit_ServiceExchangeHistory
+			InputRequest = Parameters.Basis;  // CatalogRef.Unit_ServiceExchangeHistory
 			InputAnswer = Parameters.Basis; // CatalogRef.Unit_ServiceExchangeHistory
 			If InputAnswer.Parent.IsEmpty() Then
-				Selection = Catalogs.Unit_ServiceExchangeHistory.Select(InputQuery,,, "Time desc");
+				Selection = Catalogs.Unit_ServiceExchangeHistory.Select(InputRequest,,, "Time desc");
 				If Selection.Next() Then
 					InputAnswer = Selection.Ref;
 				EndIf;
 			Else
-				InputQuery = InputAnswer.Parent;
+				InputRequest = InputAnswer.Parent;
 			EndIf;
-			Query_Body  = InputQuery.Body;
+			Request_Body  = InputRequest.Body;
 			Answer_Body = InputAnswer.Body;
 		EndIf;
 	Else
-		Query_Body = Object.Ref.Query_Body;
+		Request_Body = Object.Ref.Request_Body;
 		Answer_Body = Object.Ref.Answer_Body; 
 	EndIf; 
 	
-	QueryBodySizePresentation = Unit_CommonFunctionsClientServer.GetSizePresentation(Object.Query_BodySize);
+	RequestBodySizePresentation = Unit_CommonFunctionsClientServer.GetSizePresentation(Object.Request_BodySize);
 	AnswerBodySizePresentation = Unit_CommonFunctionsClientServer.GetSizePresentation(Object.Answer_BodySize);
 
 EndProcedure
@@ -35,8 +35,8 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	
-	ValueStorage = Query_Body; // ValueStorage
-	CurrentObject.Query_Body  = ValueStorage;
+	ValueStorage = Request_Body; // ValueStorage
+	CurrentObject.Request_Body  = ValueStorage;
 	
 	ValueStorage = Answer_Body; // ValueStorage
 	CurrentObject.Answer_Body = ValueStorage;
@@ -51,17 +51,17 @@ EndProcedure
 &AtClient
 Procedure TryLoadBody(Command)
 	
-	isQuery = Left(Command.Name, 5) = "Query";
-	TryLoadBodyAtServer(isQuery);
+	isRequest = Left(Command.Name, 7) = "Request";
+	TryLoadBodyAtServer(isRequest);
 	
 EndProcedure
 
 &AtClient
 Async Procedure SaveBody(Command)
 	
-	isQuery = Left(Command.Name, 5) = "Query";
+	isRequest = Left(Command.Name, 7) = "Request";
 	
-	BodyRowValue = GetBodyAtServer(isQuery);
+	BodyRowValue = GetBodyAtServer(isRequest);
 	
 	If TypeOf(BodyRowValue) = Type("Undefined") or (TypeOf(BodyRowValue) = Type("String") and IsBlankString(BodyRowValue)) Then
 		ShowMessageBox(,"Empty file!");
@@ -95,7 +95,7 @@ Async Procedure ReloadBody(Command)
 		Return;
 	EndIf; 
 	
-	isQuery = Left(Command.Name, 5) = "Query";
+	isRequest = Left(Command.Name, 7) = "Request";
 	
 	OldModified = Modified;
 	
@@ -114,13 +114,8 @@ Async Procedure ReloadBody(Command)
 	File = New File(FullFileName); 
 	SizeNewFile = File.Size();
 	
-	BodyType = ?(isQuery, Object.Query_BodyType, Object.Answer_BodyType);
-	BodyType = Upper(BodyType);
-	
-	If StrFind(BodyType, "TEXT") > 0
-			or StrFind(BodyType, "HTML") > 0
-			or StrFind(BodyType, "XML") > 0
-			or StrFind(BodyType, "JSON") > 0  Then
+	isText = ?(isRequest, Object.Request_BodyIsText, Object.Answer_BodyIsText);
+	If isText Then
 		TextFile = New TextDocument();
 		TextFile.Read(FullFileName);
 		ContentFile = TextFile.GetText(); 
@@ -128,7 +123,7 @@ Async Procedure ReloadBody(Command)
 		ContentFile = New BinaryData(FullFileName);
 	EndIf;
 	 
-	ReloadBodyAtServer(isQuery, ContentFile, SizeNewFile);
+	ReloadBodyAtServer(isRequest, ContentFile, SizeNewFile);
 	
 	Modified = OldModified;
 		 
@@ -141,33 +136,36 @@ EndProcedure
 #Region Private
 
 &AtServer
-Function GetBodyAtServer(isQuery)
-	CurrentBody = ?(isQuery, Query_Body, Answer_Body); // ValueStorage
+Function GetBodyAtServer(isRequest)
+	CurrentBody = ?(isRequest, Request_Body, Answer_Body); // ValueStorage
 	Return CurrentBody.Get();
 EndFunction
 
 &AtServer
-Procedure TryLoadBodyAtServer(isQuery)
+Procedure TryLoadBodyAtServer(isRequest)
 	
-	If isQuery Then
-		Prefix = "Query";
-		BodyType = Upper(Object.Query_BodyType);
-		BodyGroup = Items.BodyQueryPresentation;
+	If isRequest Then
+		Prefix = "Request";
+		BodyType = Upper(Object.Request_BodyType);
+		BodyIsText = Object.Request_BodyIsText;
+		BodyGroup = Items.BodyRequestPresentation;
 	Else
 		Prefix = "Answer";
 		BodyType = Upper(Object.Answer_BodyType);
+		BodyIsText = Object.Answer_BodyIsText;
 		BodyGroup = Items.BodyAnswerPresentation;
 	EndIf;
 	
 	ThisObject[Prefix+"BodyString"] = "";
 	ThisObject[Prefix+"BodyPicture"] = "";
 	
-	If BodyType = "" or BodyType = "BINARY" Then
-		BodyGroup.CurrentPage = Items["Body"+Prefix+"AsFile"];
-		Return; 
-	EndIf;
+	BodyRowValue = GetBodyAtServer(isRequest); // BinaryData
 	
-	BodyRowValue = GetBodyAtServer(isQuery); // BinaryData
+	If BodyIsText Then
+		ThisObject[Prefix+"BodyString"]  = String(BodyRowValue);
+		BodyGroup.CurrentPage = Items["Body"+Prefix+"AsStr"];
+		Return;
+	EndIf;
 	
 	If Left(BodyType, 5) = "IMAGE" Then
 		//@skip-check empty-except-statement
@@ -178,19 +176,18 @@ Procedure TryLoadBodyAtServer(isQuery)
 		Except EndTry;				
 	EndIf;
 	
-	ThisObject[Prefix+"BodyString"]  = String(BodyRowValue);
-	BodyGroup.CurrentPage = Items["Body"+Prefix+"AsStr"];
+	BodyGroup.CurrentPage = Items["Body"+Prefix+"AsFile"];
 	
 EndProcedure
 
 &AtServer
-Procedure ReloadBodyAtServer(isQuery, NewContent, Newsize)
+Procedure ReloadBodyAtServer(isRequest, NewContent, Newsize)
 	
-	If isQuery Then
-		Prefix = "Query";
-		Query_Body = New ValueStorage(NewContent);
-		Object.Query_BodyMD5 = CommonFunctionsServer.GetMD5(NewContent);
-		Object.Query_BodySize = Newsize;
+	If isRequest Then
+		Prefix = "Request";
+		Request_Body = New ValueStorage(NewContent);
+		Object.Request_BodyMD5 = CommonFunctionsServer.GetMD5(NewContent);
+		Object.Request_BodySize = Newsize;
 	Else
 		Prefix = "Answer";
 		Answer_Body = New ValueStorage(NewContent);
@@ -199,7 +196,7 @@ Procedure ReloadBodyAtServer(isQuery, NewContent, Newsize)
 	
 	ThisObject[Prefix+"BodySizePresentation"] = Unit_CommonFunctionsClientServer.GetSizePresentation(Newsize);
 	
-	TryLoadBodyAtServer(isQuery);
+	TryLoadBodyAtServer(isRequest);
 	
 EndProcedure
 

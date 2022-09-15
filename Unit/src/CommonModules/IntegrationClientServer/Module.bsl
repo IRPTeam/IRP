@@ -8,7 +8,7 @@ Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, Req
 		ServiceExchangeData = Unit_GetServiceExchangeDataTemplate();
 		ServiceExchangeData.StartTime = CurrentDate();
 		ServiceExchangeData.Headers = ConnectionSetting.Headers;
-		ServiceExchangeData.QueryType = ConnectionSetting.QueryType;
+		ServiceExchangeData.RequestType = ConnectionSetting.QueryType;
 		ServiceExchangeData.RequestBody = RequestBody;
 	EndIf;
 	
@@ -57,7 +57,7 @@ EndFunction
 //  Structure - Get service exchange data template:
 // * Description - String -
 // * ResourceAddress - String -
-// * QueryType - String -
+// * RequestType - String -
 // * Headers - Map -
 // * RequestBody - Undefined -
 // * ServerResponse - See IntegrationClientServer.ServerResponse
@@ -67,7 +67,7 @@ Function Unit_GetServiceExchangeDataTemplate() Export
 	ServiceExchangeData = New Structure;
 	ServiceExchangeData.Insert("Description", "");
 	ServiceExchangeData.Insert("ResourceAddress", "");
-	ServiceExchangeData.Insert("QueryType", "");
+	ServiceExchangeData.Insert("RequestType", "");
 	ServiceExchangeData.Insert("Headers", New Map);
 	ServiceExchangeData.Insert("RequestBody", Undefined);
 	ServiceExchangeData.Insert("ServerResponse", Undefined);

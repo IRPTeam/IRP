@@ -16,10 +16,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndDo;
 	EndIf;
 	
-	If Object.Parent.IsEmpty() Then			// Query
+	If Object.Parent.IsEmpty() Then			// Request
 		Items.GroupAnswer.Visible = False;
 	Else									// Answer
-		Items.GroupQuery.Visible = False;
+		Items.GroupRequest.Visible = False;
 	EndIf;
 	
 	BodySizePresentation = Unit_CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
@@ -84,10 +84,7 @@ Async Procedure ReloadBody(Command)
 	File = New File(FullFileName); 
 	SizeNewFile = File.Size();
 	
-	If StrFind(Upper(Object.BodyType), "TEXT") > 0
-			or StrFind(Upper(Object.BodyType), "HTML") > 0
-			or StrFind(Upper(Object.BodyType), "XML") > 0
-			or StrFind(Upper(Object.BodyType), "JSON") > 0  Then
+	If Object.BodyIsText Then
 		TextFile = New TextDocument();
 		TextFile.Read(FullFileName);
 		ContentFile = TextFile.GetText(); 
@@ -117,13 +114,19 @@ Procedure TryLoadBodyAtServer()
 	BodyString = "";
 	BodyPicture = "";
 	
-	If Object.BodyType = "" or Upper(Object.BodyType) = "BINARY" Then
+	If not Object.BodyIsText and (Object.BodyType = "" or Upper(Object.BodyType) = "BINARY") Then
 		Items.BodyPresentation.CurrentPage = Items.BodyAsFile;
 		Return; 
 	EndIf;
 	
 	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
 	BodyRowValue = RealObject.Body.Get();
+	
+	If Object.BodyIsText Then
+		BodyString = String(BodyRowValue);
+		Items.BodyPresentation.CurrentPage = Items.BodyAsStr;
+		Return;
+	EndIf;
 	
 	If Upper(Left(Object.BodyType, 5)) = "IMAGE" Then
 		//@skip-check empty-except-statement
@@ -134,8 +137,7 @@ Procedure TryLoadBodyAtServer()
 		Except EndTry;				
 	EndIf;
 	
-	BodyString = String(BodyRowValue);
-	Items.BodyPresentation.CurrentPage = Items.BodyAsStr;
+	Items.BodyPresentation.CurrentPage = Items.BodyAsFile;
 	
 EndProcedure
 

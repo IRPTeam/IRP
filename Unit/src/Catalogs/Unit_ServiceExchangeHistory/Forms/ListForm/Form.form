@@ -200,7 +200,7 @@
       <name>Status</name>
       <id>31</id>
       <items xsi:type="form:FormField">
-        <name>QueryType</name>
+        <name>RequestType</name>
         <id>25</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -208,10 +208,10 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>List.QueryType</segments>
+          <segments>List.RequestType</segments>
         </dataPath>
         <extendedTooltip>
-          <name>QueryTypeExtendedTooltip</name>
+          <name>RequestTypeExtendedTooltip</name>
           <id>27</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -226,7 +226,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>QueryTypeContextMenu</name>
+          <name>RequestTypeContextMenu</name>
           <id>26</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -606,7 +606,7 @@
 	ServiceExchangeHistory.Code,
 	ServiceExchangeHistory.Description,
 	ServiceExchangeHistory.Time,
-	ServiceExchangeHistory.QueryType,
+	ServiceExchangeHistory.RequestType,
 	ServiceExchangeHistory.StatusCode,
 	ServiceExchangeHistory.ResourceAddress,
 	ServiceExchangeHistory.Headers,

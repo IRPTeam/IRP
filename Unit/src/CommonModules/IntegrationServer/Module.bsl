@@ -1,6 +1,14 @@
 
 #Region Public
 
+// Is it necessary to save the history of service exchange?
+// 
+// Returns:
+//  Boolean - Need to save service exchange history
+Function Unit_NeedToSaveServiceExchangeHistory() Export
+	Return Constants.Unit_SaveServiceExchangeHistory.Get();	
+EndFunction
+
 // Save service exchange data to catalog.
 // 
 // Parameters:
@@ -11,17 +19,17 @@ Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 	HeadersMD5 = CommonFunctionsServer.GetMD5(ServiceExchangeData.Headers);
 	BodyMD5 = CommonFunctionsServer.GetMD5(ServiceExchangeData.RequestBody);
 
-	// Quick search query by description
+	// Quick search request by description
 	DescriptionLength = Metadata.Catalogs.Unit_ServiceExchangeHistory.DescriptionLength;
 	ValidDescription = TrimAll(Left(ServiceExchangeData.Description, DescriptionLength));
-	RequiredQuery = Catalogs.Unit_ServiceExchangeHistory.FindByDescription(
+	RequiredRequest = Catalogs.Unit_ServiceExchangeHistory.FindByDescription(
 			ValidDescription, True, Catalogs.Unit_ServiceExchangeHistory.EmptyRef());
 	
-	// Quick search query by attributes
-	If ValueIsFilled(RequiredQuery) Then
+	// Quick search request by attributes
+	If ValueIsFilled(RequiredRequest) Then
 		SearchQuery = New Query();
 		SearchQuery.SetParameter("ResourceAddress", ServiceExchangeData.ResourceAddress);
-		SearchQuery.SetParameter("QueryType", ServiceExchangeData.QueryType);
+		SearchQuery.SetParameter("RequestType", ServiceExchangeData.QueryType);
 		SearchQuery.SetParameter("HeadersMD5", HeadersMD5);
 		SearchQuery.SetParameter("BodyMD5", BodyMD5);
 		SearchQuery.Text =
@@ -32,44 +40,45 @@ Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 		|WHERE
 		|	ServiceExchangeHistory.Parent = VALUE(Catalog.Unit_ServiceExchangeHistory.EmptyRef)
 		|	AND CAST(ServiceExchangeHistory.ResourceAddress AS STRING(1000)) = &ResourceAddress
-		|	AND ServiceExchangeHistory.QueryType = &QueryType
+		|	AND ServiceExchangeHistory.RequestType = &RequestType
 		|	AND ServiceExchangeHistory.HeadersMD5 = &HeadersMD5
 		|	AND ServiceExchangeHistory.BodyMD5 = &BodyMD5
 		|	AND NOT ServiceExchangeHistory.DeletionMark";
 		ResultQuery = SearchQuery.Execute().Select();
 		If ResultQuery.Next() Then
-			RequiredQuery = ResultQuery.Ref;
+			RequiredRequest = ResultQuery.Ref;
 		Else
-			RequiredQuery = Catalogs.Unit_ServiceExchangeHistory.EmptyRef();
+			RequiredRequest = Catalogs.Unit_ServiceExchangeHistory.EmptyRef();
 		EndIf;
 	EndIf;
 	
 	NeedCheckAnswer = True;
 	
-	// Create a new query record
-	If Not ValueIsFilled(RequiredQuery) Then
+	// Create a new request record
+	If Not ValueIsFilled(RequiredRequest) Then
 		NewQuery = Catalogs.Unit_ServiceExchangeHistory.CreateItem();
 		NewQuery.Description = ValidDescription;
 		NewQuery.Time = ServiceExchangeData.StartTime;
-		NewQuery.QueryType = ServiceExchangeData.QueryType;
+		NewQuery.RequestType = ServiceExchangeData.RequestType;
 		NewQuery.ResourceAddress = ServiceExchangeData.ResourceAddress;
 		NewQuery.HeadersMD5 = HeadersMD5;
 		NewQuery.Headers = New ValueStorage(ServiceExchangeData.Headers);
 		NewQuery.BodyMD5 = BodyMD5;
 		NewQuery.Body = New ValueStorage(ServiceExchangeData.RequestBody);
+		NewQuery.BodyIsText = (TypeOf(ServiceExchangeData.RequestBody)=Type("String"));
 		
 		BodyInfo = Unit_GetBodyInfo(ServiceExchangeData.RequestBody, ServiceExchangeData.Headers);
 		NewQuery.BodySize = BodyInfo.Size;  
 		NewQuery.BodyType = BodyInfo.Type;
 		
 		NewQuery.Write();
-		RequiredQuery = NewQuery.Ref;
+		RequiredRequest = NewQuery.Ref;
 		NeedCheckAnswer = False;
 	EndIf;
 	
 	If NeedCheckAnswer Then
 		SearchQuery = New Query();
-		SearchQuery.SetParameter("Query", RequiredQuery);
+		SearchQuery.SetParameter("Request", RequiredRequest);
 		SearchQuery.SetParameter("Message", ServiceExchangeData.ServerResponse.Message);
 		SearchQuery.SetParameter("StatusCode", ServiceExchangeData.ServerResponse.StatusCode);
 		SearchQuery.SetParameter("BodyMD5", BodyMD5);
@@ -79,7 +88,7 @@ Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 		|FROM
 		|	Catalog.Unit_ServiceExchangeHistory AS ServiceExchangeHistory
 		|WHERE
-		|	ServiceExchangeHistory.Parent = &Query
+		|	ServiceExchangeHistory.Parent = &Request
 		|	AND CAST(ServiceExchangeHistory.ResourceAddress AS STRING(1000)) = &Message
 		|	AND ServiceExchangeHistory.StatusCode = &StatusCode
 		|	AND ServiceExchangeHistory.BodyMD5 = &BodyMD5
@@ -92,7 +101,7 @@ Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 	
 	// Create a new answer record
 	NewAnswer = Catalogs.Unit_ServiceExchangeHistory.CreateItem();
-	NewAnswer.Parent = RequiredQuery;
+	NewAnswer.Parent = RequiredRequest;
 	NewAnswer.Description = ServiceExchangeData.ServerResponse.Message;
 	NewAnswer.ResourceAddress = ServiceExchangeData.ServerResponse.Message;
 	NewAnswer.Time = ServiceExchangeData.EndTime;
@@ -101,6 +110,7 @@ Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 	NewAnswer.HeadersMD5 = CommonFunctionsServer.GetMD5(ServiceExchangeData.ServerResponse.Headers);
 	NewAnswer.Body = New ValueStorage(ServiceExchangeData.ServerResponse.ResponseBody);
 	NewAnswer.BodyMD5 = CommonFunctionsServer.GetMD5(ServiceExchangeData.ServerResponse.ResponseBody);
+	NewAnswer.BodyIsText = (TypeOf(ServiceExchangeData.ServerResponse.ResponseBody)=Type("String"));
 	
 	BodyInfo = Unit_GetBodyInfo(ServiceExchangeData.ServerResponse.ResponseBody, ServiceExchangeData.ServerResponse.Headers);
 	NewAnswer.BodySize = BodyInfo.Size;  
@@ -148,12 +158,19 @@ Function Unit_GetBodyInfo(Body, Headers) Export
 	
 EndFunction
 
-// Is it necessary to save the history of service exchange?
+// Get last answer by request.
+// 
+// Parameters:
+//  Request - CatalogRef.Unit_ServiceExchangeHistory
 // 
 // Returns:
-//  Boolean - Need to save service exchange history
-Function Unit_NeedToSaveServiceExchangeHistory() Export
-	Return Constants.Unit_SaveServiceExchangeHistory.Get();	
+//  CatalogRef.Unit_ServiceExchangeHistory - Unit get last answer by request
+Function Unit_GetLastAnswerByRequest(Request) Export
+	Selection = Catalogs.Unit_ServiceExchangeHistory.Select(Request,,, "Time desc");
+	If Selection.Next() Then
+		Return Selection.Ref;
+	EndIf;
+	Return Catalogs.Unit_ServiceExchangeHistory.EmptyRef();
 EndFunction
 
 #EndRegion

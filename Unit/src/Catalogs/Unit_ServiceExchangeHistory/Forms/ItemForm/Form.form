@@ -191,7 +191,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormGroup">
-    <name>GroupQuery</name>
+    <name>GroupRequest</name>
     <id>30</id>
     <items xsi:type="form:FormField">
       <name>ResourceAddress</name>
@@ -247,7 +247,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>QueryType</name>
+      <name>RequestType</name>
       <id>13</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -255,10 +255,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>Object.QueryType</segments>
+        <segments>Object.RequestType</segments>
       </dataPath>
       <extendedTooltip>
-        <name>QueryTypeExtendedTooltip</name>
+        <name>RequestTypeExtendedTooltip</name>
         <id>15</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -273,7 +273,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>QueryTypeContextMenu</name>
+        <name>RequestTypeContextMenu</name>
         <id>14</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -303,11 +303,11 @@
     </userVisible>
     <title>
       <key>en</key>
-      <value>Group of query</value>
+      <value>Group of request</value>
     </title>
     <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>
-      <name>GroupQueryExtendedTooltip</name>
+      <name>GroupRequestExtendedTooltip</name>
       <id>31</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -951,6 +951,54 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>BodyIsText</name>
+          <id>93</id>
+          <title>
+            <key>en</key>
+            <value>Text</value>
+          </title>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BodyIsText</segments>
+          </dataPath>
+          <titleLocation>Right</titleLocation>
+          <extendedTooltip>
+            <name>BodyIsTextExtendedTooltip</name>
+            <id>95</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>BodyIsTextContextMenu</name>
+            <id>94</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>CheckBoxField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+        </items>
+        <items xsi:type="form:FormField">
           <name>BodySizePresentation</name>
           <id>66</id>
           <visible>true</visible>
@@ -1062,7 +1110,7 @@
           </extendedTooltip>
           <type>UsualButton</type>
           <commandName>Form.Command.SaveBody</commandName>
-          <representation>Auto</representation>
+          <representation>Picture</representation>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
@@ -1093,7 +1141,7 @@
           </extendedTooltip>
           <type>UsualButton</type>
           <commandName>Form.Command.ReloadBody</commandName>
-          <representation>Auto</representation>
+          <representation>Picture</representation>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>

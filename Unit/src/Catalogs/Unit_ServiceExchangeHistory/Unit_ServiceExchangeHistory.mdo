@@ -56,10 +56,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="26c551a2-bd33-419b-826a-5638d45180cf">
-    <name>QueryType</name>
+    <name>RequestType</name>
     <synonym>
       <key>en</key>
-      <value>Query type</value>
+      <value>Request type</value>
     </synonym>
     <type>
       <types>String</types>
@@ -204,6 +204,21 @@
       <stringQualifiers>
         <length>50</length>
       </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ad44cbba-9e74-4122-9706-c2d6621d194f">
+    <name>BodyIsText</name>
+    <synonym>
+      <key>en</key>
+      <value>Body is text</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

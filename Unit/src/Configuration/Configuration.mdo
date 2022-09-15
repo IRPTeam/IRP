@@ -54,7 +54,7 @@
   <commonModules>CommonModule.Unit_CatalogCode</commonModules>
   <commonModules>CommonModule.Unit_CommonFunctionsClientServer</commonModules>
   <commonModules>CommonModule.Unit_ExpenseAndRevenueTypes</commonModules>
-  <commonModules>CommonModule.Unit_MockServiceDataCached</commonModules>
+  <commonModules>CommonModule.Unit_MockService</commonModules>
   <commonModules>CommonModule.Unit_Service</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>

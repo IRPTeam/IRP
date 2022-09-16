@@ -1652,9 +1652,9 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				Query = New Query();
 				Query.Text =
 				"SELECT
-				|	SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.Amount) AS Amount,
-				|	SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AmountTax) AS AmountTax,
-				|	SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.Quantity) AS Quantity
+				|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.Amount), 0) AS Amount,
+				|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AmountTax), 0) AS AmountTax,
+				|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.Quantity), 0) AS Quantity
 				|FROM
 				|	InformationRegister.T6080S_ReallocatedBatchesAmountValues.SliceLast(, OutgoingDocument = &OutgoingDocument
 				|	AND IncomingDocument = &IncomingDocument
@@ -1781,6 +1781,7 @@ Function GetPriceForEmptyAmountFromBatchBalance(ItemKey, Period)
 		|	BatchBalance.ItemKey = &ItemKey
 		|	AND BatchBalance.Period <= &Period
 		|	AND BatchBalance.RecordType = VALUE(AccumulationRecordType.Receipt)
+		|	AND BatchBalance.Amount > 0
 		|
 		|ORDER BY
 		|	Period DESC";

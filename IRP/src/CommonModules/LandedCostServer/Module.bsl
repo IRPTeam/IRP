@@ -69,7 +69,6 @@ Procedure LockDocuments(LocksStorage)
 	LocksStorage.Add(DataLock_BatchReallocateOutgoing);
 EndProcedure
 
-// Entry point
 Procedure Posting_BatchReallocate(BatchReallocateRef, EndPeriod) Export
 	LocksStorage = New Array();
 	If Not TransactionActive() Then
@@ -110,6 +109,7 @@ Procedure Posting_BatchWiceBalance(CalculationMovementCostRef, Company, Calculat
 	EndIf;
 EndProcedure
 
+// Entry point
 Procedure BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod)
 	If CalculationMode = Enums.CalculationMode.LandedCost Then
 		DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod);
@@ -1351,7 +1351,32 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			If IsNotMultiDirectionDocument(Document) // is not transfer, produce, bundling or unbundling
 				And Not ValueIsFilled(Row.SalesInvoice) // is not return by sales invoice
 				And TypeOf(Document) <> Type("DocumentRef.BatchReallocateIncoming") Then // is not receipt by btach reallocation
+				
+				If Row.Amount = 0 AND Row.Company.LandedCostFillEmptyAmount 
+					AND TypeOf(Document) = Type("DocumentRef.StockAdjustmentAsSurplus") Then
+						Price = GetPriceForEmptyAmountFromDataForReceipt(Row.BatchKey.ItemKey, Row.Date, Tables.DataForReceipt);
+						
+						If Price = 0 Then
+							Price = GetPriceForEmptyAmountFromBatchBalance(Row.BatchKey.ItemKey, Row.Date);
+						EndIf;
+						
+						If Price = 0 AND Not Row.Company.LandedCostPriceTypeForEmptyAmount.isEmpty() Then
+							PriceSettings = New Structure("ItemKey, PriceType, Period, Unit");
+							PriceSettings.ItemKey = Row.BatchKey.ItemKey;
+							PriceSettings.Period = Row.Date;
+							PriceSettings.PriceType = Row.Company.LandedCostPriceTypeForEmptyAmount;
+							PriceSettings.Unit = GetItemInfo.GetInfoByItemsKey(Row.BatchKey.ItemKey)[0].Unit;
+							Price = GetItemInfo.ItemPriceInfo(PriceSettings).Price;
+						EndIf;
+						
+						Row.Amount = Price * Row.Quantity;
+						Row.AmountBalance = Price * Row.Quantity;
+						
+						NewRow.Amount = Price * Row.Quantity;
+				EndIf;
+				
 				FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);
+				
 			EndIf;
 
 			If ValueIsFilled(Row.SalesInvoice) Then // return by sales invoice
@@ -1689,6 +1714,87 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 		EndDo;
 	EndIf;
 EndProcedure
+
+Function GetPriceForEmptyAmountFromDataForReceipt(ItemKey, Period, DataForReceipt)
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	TemporaryTable.BatchKey,
+		|	TemporaryTable.Period,
+		|	TemporaryTable.Amount,
+		|	TemporaryTable.Quantity
+		|INTO VT
+		|FROM
+		|	&DataForReceipt AS TemporaryTable
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT TOP 1
+		|	VT.BatchKey,
+		|	VT.Period AS Period,
+		|	VT.Amount,
+		|	VT.Quantity,
+		|	CASE
+		|		WHEN VT.Quantity = 0
+		|			THEN 0
+		|		ELSE VT.Amount / VT.Quantity
+		|	END AS Price
+		|FROM
+		|	VT AS VT
+		|WHERE
+		|	VT.BatchKey.ItemKey = &ItemKey
+		|	AND VT.Period <= &Period
+		|
+		|ORDER BY
+		|	Period DESC";
+	
+	Query.SetParameter("Period", Period);
+	Query.SetParameter("ItemKey", ItemKey);
+	Query.SetParameter("DataForReceipt", DataForReceipt);
+	Result = Query.Execute().Select();
+	
+	If Result.Next() Then 
+		Return Result.Price;
+	Else
+		Return 0;
+	EndIf;
+EndFunction
+
+Function GetPriceForEmptyAmountFromBatchBalance(ItemKey, Period)
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT TOP 1
+		|	BatchBalance.BatchKey,
+		|	BatchBalance.Period AS Period,
+		|	BatchBalance.Amount,
+		|	BatchBalance.Quantity,
+		|	CASE
+		|		WHEN BatchBalance.Quantity = 0
+		|			THEN 0
+		|		ELSE BatchBalance.Amount / BatchBalance.Quantity
+		|	END AS Price
+		|FROM
+		|	AccumulationRegister.R6020B_BatchBalance AS BatchBalance
+		|WHERE
+		|	BatchBalance.BatchKey.ItemKey = &ItemKey
+		|	AND BatchBalance.Period <= &Period
+		|	AND BatchBalance.RecordType = VALUE(AccumulationRecordType.Receipt)
+		|
+		|ORDER BY
+		|	Period DESC";
+	
+	Query.SetParameter("Period", Period);
+	Query.SetParameter("ItemKey", ItemKey);
+	Result = Query.Execute().Select();
+	
+	If Result.Next() Then 
+		Return Result.Price;
+	Else
+		Return 0;
+	EndIf;
+EndFunction
 
 Function GetArrayOfTransferDocument()
 	ArrayOfTypes = New Array();

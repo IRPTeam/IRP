@@ -86,17 +86,23 @@ EndFunction
 // Initialize for server.
 // 
 // Parameters:
-//  DocName - String - Document name ex. SalesOrder
+//  Doc - String, DocumentRefDocumentName - Document name ex. SalesOrder, or Document ref
 //  InitialData - Structure - First initial data
 //  FillingData - Structure - Filling data
 //  DefaultTable - String - Default table name
 // 
 // Returns:
 //  See CreateWrapper
-Function Initialize(DocName, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined) Export
-	DocMetadata = Metadata.Documents[DocName];
-	DocObject = Documents[DocMetadata.Name].CreateDocument();
-	DocObject.Fill(FillingData);
+Function Initialize(Doc, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined) Export
+	
+	If TypeOf(Doc) = Type("String") Then
+		DocMetadata = Metadata.Documents[Doc];
+		DocObject = Documents[DocMetadata.Name].CreateDocument();
+		DocObject.Fill(FillingData);
+	Else
+		DocMetadata = Doc.Metadata();
+		DocObject = Doc.GetObject();
+	EndIf;
 	
 	Wrapper = CreateWrapper(DefaultTable);
 	

@@ -1778,7 +1778,7 @@ Function GetPriceForEmptyAmountFromBatchBalance(ItemKey, Period)
 		|FROM
 		|	AccumulationRegister.R6020B_BatchBalance AS BatchBalance
 		|WHERE
-		|	BatchBalance.BatchKey.ItemKey = &ItemKey
+		|	BatchBalance.ItemKey = &ItemKey
 		|	AND BatchBalance.Period <= &Period
 		|	AND BatchBalance.RecordType = VALUE(AccumulationRecordType.Receipt)
 		|

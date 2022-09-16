@@ -17,7 +17,8 @@ Function ComposeAnswerToRequest(Request) Export
 	RequestStructure.Address = Request.RelativeURL;
 	RequestStructure.Options = Request.QueryOptions;
 	RequestStructure.Headers = Request.Headers;
-	RequestStructure.Body = Request.GetBodyAsBinaryData();
+	RequestStructure.BodyBinary = Request.GetBodyAsBinaryData();
+	RequestStructure.BodyString = Request.GetBodyAsString();
 	
 	Return ComposeAnswerToRequestStructure(RequestStructure);
 	
@@ -78,19 +79,19 @@ EndFunction
 Function AddressCheck(Address, Pattern) Export
 
 	AddressParts = StrSplit(Address, "/", False);
-	PatternParts = StrSplit(Address, "/", False);
+	PatternParts = StrSplit(Pattern, "/", False);
 	
 	If AddressParts.Count() < PatternParts.Count() Then
 		Return False;
 	Else
-		NumberExtraSections = PatternParts.Count() - AddressParts.Count();
+		NumberExtraSections = AddressParts.Count() - PatternParts.Count();
 		AnyString = GetAnyString();
 		For index = 1 To NumberExtraSections Do
 			PatternParts.Add(AnyString);
 		EndDo; 
 	EndIf;
 	
-	For index = 1 To AddressParts.Count() Do
+	For index = 0 To AddressParts.Count()-1 Do
 		If Not StringEqualsCheck(AddressParts[index], PatternParts[index]) Then
 			Return False;
 		EndIf;
@@ -111,7 +112,7 @@ EndFunction
 //  Boolean - address matches
 Function HeadersCheck(Headers, MockData) Export
 	For Each MockHeaderItem In MockData.Request_Headers Do
-		If MockHeaderItem.ValueAsFilter Then
+		If MockHeaderItem.ValueAsFilter and ValueIsFilled(MockHeaderItem.Value) Then
 			HeadersValue = Headers.Get(MockHeaderItem.Key); //String
 			If HeadersValue = Undefined Then
 				Return False;
@@ -209,14 +210,16 @@ EndFunction
 //  Structure - Get structure request:
 // * Type - String -
 // * Address - String -
-// * Body - BinaryData, String, Arbitrary -
+// * BodyBinary - BinaryData -
+// * BodyString - String -
 // * Headers - FixedMap -
 // * Options - FixedMap -
 Function GetStructureRequest() Export
 	Result = New Structure;
 	Result.Insert("Type", "");
 	Result.Insert("Address", "");
-	Result.Insert("Body");
+	Result.Insert("BodyBinary");
+	Result.Insert("BodyString", "");
 	Result.Insert("Headers");
 	Result.Insert("Options");
 	Return Result;
@@ -254,7 +257,8 @@ Function getMockDataByRequest(RequestStructure)
 	|	AND Unit_MockServiceData.Request_Type = &Request_Type
 	|	AND CASE
 	|		WHEN Unit_MockServiceData.Request_BodyAsFilter
-	|			THEN Unit_MockServiceData.Request_BodyMD5 = &BodyMD5
+	|			THEN (Unit_MockServiceData.Request_BodyMD5 = &BodyBinaryMD5
+	|			or Unit_MockServiceData.Request_BodyMD5 = &BodyStringMD5)
 	|		ELSE TRUE
 	|	END
 	|;
@@ -312,7 +316,9 @@ Function getMockDataByRequest(RequestStructure)
 	|		ON ttMockData.Ref = ttVariablesBodyFilter.Ref";
 	
 	Query.SetParameter("Request_Type", RequestStructure.Type);
-	Query.SetParameter("BodyMD5", CommonFunctionsServer.GetMD5(RequestStructure.Body));
+	
+	Query.SetParameter("BodyBinaryMD5", CommonFunctionsServer.GetMD5(RequestStructure.BodyBinary));
+	Query.SetParameter("BodyStringMD5", CommonFunctionsServer.GetMD5(GetBinaryDataFromString(RequestStructure.BodyString)));
 	
 	Selection = Query.Execute().Select();
 	While Selection.Next() Do
@@ -360,7 +366,18 @@ EndFunction
 //  Structure - request variables
 Function getRequestVariables(RequestStructure, MockData)
 	Result = new Structure;
-	// TODO: need to fill variables
+	For Each Element In MockData.Request_Variables Do
+		RequestValue = RequestStructure.Options.Get(Element.VariableName);
+		If ValueIsFilled(RequestValue) Then
+			Result.Insert(Element.VariableName, RequestValue);
+		EndIf;
+	EndDo;
+	For Each Element In MockData.Request_BodyVariables Do
+		RequestValue = RequestStructure.Options.Get(Element.VariableName);
+		If ValueIsFilled(RequestValue) Then
+			Result.Insert(Element.VariableName, RequestValue);
+		EndIf;
+	EndDo;
 	Return Result;
 EndFunction
 

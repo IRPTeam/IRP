@@ -15,9 +15,19 @@ EndFunction
 //  ServiceExchangeData - See IntegrationClientServer.Unit_GetServiceExchangeDataTemplate
 Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 
-	// Hash preparation
+	// Bodies and hashs preparation
+	RequestBody = ?(TypeOf(ServiceExchangeData.RequestBody)=Type("String"),
+			GetBinaryDataFromString(ServiceExchangeData.RequestBody),
+			ServiceExchangeData.RequestBody);
+	BodyMD5 = CommonFunctionsServer.GetMD5(RequestBody);
 	HeadersMD5 = CommonFunctionsServer.GetMD5(ServiceExchangeData.Headers);
-	BodyMD5 = CommonFunctionsServer.GetMD5(ServiceExchangeData.RequestBody);
+	
+	AnswerBody = ?(TypeOf(ServiceExchangeData.ServerResponse.ResponseBody)=Type("String"),
+			GetBinaryDataFromString(ServiceExchangeData.ServerResponse.ResponseBody),
+			ServiceExchangeData.ServerResponse.ResponseBody);
+	AnswerBodyMD5 = CommonFunctionsServer.GetMD5(AnswerBody);
+	AnswerHeadersMD5 = CommonFunctionsServer.GetMD5(ServiceExchangeData.ServerResponse.Headers);
+	
 
 	// Quick search request by description
 	DescriptionLength = Metadata.Catalogs.Unit_ServiceExchangeHistory.DescriptionLength;
@@ -29,7 +39,7 @@ Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 	If ValueIsFilled(RequiredRequest) Then
 		SearchQuery = New Query();
 		SearchQuery.SetParameter("ResourceAddress", ServiceExchangeData.ResourceAddress);
-		SearchQuery.SetParameter("RequestType", ServiceExchangeData.QueryType);
+		SearchQuery.SetParameter("RequestType", ServiceExchangeData.RequestType);
 		SearchQuery.SetParameter("HeadersMD5", HeadersMD5);
 		SearchQuery.SetParameter("BodyMD5", BodyMD5);
 		SearchQuery.Text =
@@ -64,10 +74,10 @@ Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 		NewQuery.HeadersMD5 = HeadersMD5;
 		NewQuery.Headers = New ValueStorage(ServiceExchangeData.Headers);
 		NewQuery.BodyMD5 = BodyMD5;
-		NewQuery.Body = New ValueStorage(ServiceExchangeData.RequestBody);
+		NewQuery.Body = New ValueStorage(RequestBody);
 		NewQuery.BodyIsText = (TypeOf(ServiceExchangeData.RequestBody)=Type("String"));
 		
-		BodyInfo = Unit_GetBodyInfo(ServiceExchangeData.RequestBody, ServiceExchangeData.Headers);
+		BodyInfo = Unit_GetBodyInfo(RequestBody, ServiceExchangeData.Headers);
 		NewQuery.BodySize = BodyInfo.Size;  
 		NewQuery.BodyType = BodyInfo.Type;
 		
@@ -107,12 +117,12 @@ Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 	NewAnswer.Time = ServiceExchangeData.EndTime;
 	NewAnswer.StatusCode = ServiceExchangeData.ServerResponse.StatusCode;
 	NewAnswer.Headers = New ValueStorage(ServiceExchangeData.ServerResponse.Headers);
-	NewAnswer.HeadersMD5 = CommonFunctionsServer.GetMD5(ServiceExchangeData.ServerResponse.Headers);
-	NewAnswer.Body = New ValueStorage(ServiceExchangeData.ServerResponse.ResponseBody);
-	NewAnswer.BodyMD5 = CommonFunctionsServer.GetMD5(ServiceExchangeData.ServerResponse.ResponseBody);
+	NewAnswer.HeadersMD5 = AnswerHeadersMD5;
+	NewAnswer.Body = New ValueStorage(AnswerBody);
+	NewAnswer.BodyMD5 = AnswerBodyMD5;
 	NewAnswer.BodyIsText = (TypeOf(ServiceExchangeData.ServerResponse.ResponseBody)=Type("String"));
 	
-	BodyInfo = Unit_GetBodyInfo(ServiceExchangeData.ServerResponse.ResponseBody, ServiceExchangeData.ServerResponse.Headers);
+	BodyInfo = Unit_GetBodyInfo(AnswerBody, ServiceExchangeData.ServerResponse.Headers);
 	NewAnswer.BodySize = BodyInfo.Size;  
 	NewAnswer.BodyType = BodyInfo.Type;
 	

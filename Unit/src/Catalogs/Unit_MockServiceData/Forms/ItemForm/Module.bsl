@@ -11,10 +11,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			InputRequest = Parameters.Basis;  // CatalogRef.Unit_ServiceExchangeHistory
 			InputAnswer = Parameters.Basis; // CatalogRef.Unit_ServiceExchangeHistory
 			If InputAnswer.Parent.IsEmpty() Then
-				Selection = Catalogs.Unit_ServiceExchangeHistory.Select(InputRequest,,, "Time desc");
-				If Selection.Next() Then
-					InputAnswer = Selection.Ref;
-				EndIf;
+				InputAnswer = IntegrationServer.Unit_GetLastAnswerByRequest(InputAnswer);
 			Else
 				InputRequest = InputAnswer.Parent;
 			EndIf;
@@ -61,29 +58,14 @@ Async Procedure SaveBody(Command)
 	
 	isRequest = Left(Command.Name, 7) = "Request";
 	
-	BodyRowValue = GetBodyAtServer(isRequest);
+	BodyRowValue = GetBodyAtServer(isRequest); // BinaryData
 	
-	If TypeOf(BodyRowValue) = Type("Undefined") or (TypeOf(BodyRowValue) = Type("String") and IsBlankString(BodyRowValue)) Then
+	If TypeOf(BodyRowValue) = Type("Undefined") or TypeOf(BodyRowValue) <> Type("BinaryData") Then
 		ShowMessageBox(,"Empty file!");
 		Return;
 	EndIf;
 	
-	If TypeOf(BodyRowValue) = Type("BinaryData") Then
-		BodyRowValue.BeginWrite();
-		Return;		
-	EndIf;
-	
-	FileDialog = New FileDialog(FileDialogMode.Save);
-
-	PathArray = Await FileDialog.ChooseAsync(); // Array
-	If PathArray = Undefined or PathArray.Count()=0 Then
-		Return;
-	EndIf;
-	FullFileName = PathArray[0]; // String
-	
-	TextFile = New TextDocument();
-	TextFile.SetText(String(BodyRowValue));
-	TextFile.Write(FullFileName);
+	BodyRowValue.BeginWrite();
 	
 EndProcedure
 
@@ -114,14 +96,7 @@ Async Procedure ReloadBody(Command)
 	File = New File(FullFileName); 
 	SizeNewFile = File.Size();
 	
-	isText = ?(isRequest, Object.Request_BodyIsText, Object.Answer_BodyIsText);
-	If isText Then
-		TextFile = New TextDocument();
-		TextFile.Read(FullFileName);
-		ContentFile = TextFile.GetText(); 
-	Else
-		ContentFile = New BinaryData(FullFileName);
-	EndIf;
+	ContentFile = New BinaryData(FullFileName);
 	 
 	ReloadBodyAtServer(isRequest, ContentFile, SizeNewFile);
 	
@@ -162,7 +137,7 @@ Procedure TryLoadBodyAtServer(isRequest)
 	BodyRowValue = GetBodyAtServer(isRequest); // BinaryData
 	
 	If BodyIsText Then
-		ThisObject[Prefix+"BodyString"]  = String(BodyRowValue);
+		ThisObject[Prefix+"BodyString"]  = GetStringFromBinaryData(BodyRowValue);
 		BodyGroup.CurrentPage = Items["Body"+Prefix+"AsStr"];
 		Return;
 	EndIf;

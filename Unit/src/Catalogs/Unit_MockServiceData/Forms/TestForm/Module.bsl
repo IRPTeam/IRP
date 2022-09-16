@@ -72,7 +72,7 @@ Function GetBodyAtServer()
 	If TypeOf(CurrentBody) = Type("ValueStorage") Then
 		Return CurrentBody.Get();
 	EndIf;
-	Return "";
+	Return Undefined;
 EndFunction
 
 &AtServer

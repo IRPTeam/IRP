@@ -84,13 +84,7 @@ Async Procedure ReloadBody(Command)
 	File = New File(FullFileName); 
 	SizeNewFile = File.Size();
 	
-	If Object.BodyIsText Then
-		TextFile = New TextDocument();
-		TextFile.Read(FullFileName);
-		ContentFile = TextFile.GetText(); 
-	Else
-		ContentFile = New BinaryData(FullFileName);
-	EndIf;
+	ContentFile = New BinaryData(FullFileName);
 	 
 	ReloadBodyAtServer(ContentFile, SizeNewFile);
 	
@@ -114,16 +108,16 @@ Procedure TryLoadBodyAtServer()
 	BodyString = "";
 	BodyPicture = "";
 	
-	If not Object.BodyIsText and (Object.BodyType = "" or Upper(Object.BodyType) = "BINARY") Then
+	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
+	BodyRowValue = RealObject.Body.Get(); //BinaryData
+	
+	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
 		Items.BodyPresentation.CurrentPage = Items.BodyAsFile;
-		Return; 
+		Return;
 	EndIf;
 	
-	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
-	BodyRowValue = RealObject.Body.Get();
-	
 	If Object.BodyIsText Then
-		BodyString = String(BodyRowValue);
+		BodyString = GetStringFromBinaryData(BodyRowValue);
 		Items.BodyPresentation.CurrentPage = Items.BodyAsStr;
 		Return;
 	EndIf;

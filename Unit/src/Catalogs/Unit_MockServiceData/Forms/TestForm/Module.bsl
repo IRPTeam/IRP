@@ -48,7 +48,7 @@ Procedure TryLoadBody(Command)
 EndProcedure
 
 &AtClient
-Procedure SaveBody(Command)
+Async Procedure SaveBody(Command)
 	
 	BodyRowValue = GetBodyAtServer(); // BinaryData
 	
@@ -57,7 +57,18 @@ Procedure SaveBody(Command)
 		Return;
 	EndIf;
 	
-	BodyRowValue.BeginWrite();
+	FileDialog = New FileDialog(FileDialogMode.Save);
+	If AnswerBodyIsText Then
+		FileDialog.DefaultExt = "txt";
+	EndIf;
+	
+	PathArray = Await FileDialog.ChooseAsync(); // Array
+	If PathArray = Undefined or PathArray.Count()=0 Then
+		Return;
+	EndIf;
+	FullFileName = PathArray[0]; // String	
+		
+	BodyRowValue.Write(FullFileName);
 	
 EndProcedure
 

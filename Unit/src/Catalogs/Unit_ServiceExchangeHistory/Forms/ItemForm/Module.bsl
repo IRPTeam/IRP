@@ -33,29 +33,25 @@ EndProcedure
 &AtClient
 Async Procedure SaveBody(Command)
 	
-	BodyRowValue = GetBodyAtServer();
+	BodyRowValue = GetBodyAtServer(); // BinaryData
 	
-	If TypeOf(BodyRowValue) = Type("Undefined") or (TypeOf(BodyRowValue) = Type("String") and IsBlankString(BodyRowValue)) Then
+	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
 		ShowMessageBox(,"Empty file!");
 		Return;
 	EndIf;
 	
-	If TypeOf(BodyRowValue) = Type("BinaryData") Then
-		BodyRowValue.BeginWrite();
-		Return;		
+	FileDialog = New FileDialog(FileDialogMode.Save);
+	If Object.BodyIsText Then
+		FileDialog.DefaultExt = "txt";
 	EndIf;
 	
-	FileDialog = New FileDialog(FileDialogMode.Save);
-
 	PathArray = Await FileDialog.ChooseAsync(); // Array
 	If PathArray = Undefined or PathArray.Count()=0 Then
 		Return;
 	EndIf;
-	FullFileName = PathArray[0]; // String
+	FullFileName = PathArray[0]; // String	
 	
-	TextFile = New TextDocument();
-	TextFile.SetText(String(BodyRowValue));
-	TextFile.Write(FullFileName);
+	BodyRowValue.Write(FullFileName);
 	
 EndProcedure
 

@@ -8931,15 +8931,15 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	EndIf;
 	SourceTable = GetFromTempStorage(Result[0].Value);
 	
-	SourceColumnsGroupBy = Parameters.LoadData.SourceColumnsGroupBy;
-	SourceColumnsSumBy   = Parameters.LoadData.SourceColumnsSumBy;
-	
-	SourceTable.GroupBy(SourceColumnsGroupBy, SourceColumnsSumBy);
-	
 	SourceTableExpanded = Undefined;
 	If Parameters.SerialLotNumbersExists Then
 		SourceTableExpanded = SourceTable.Copy();
 	EndIf;
+	
+	SourceColumnsGroupBy = Parameters.LoadData.SourceColumnsGroupBy;
+	SourceColumnsSumBy   = Parameters.LoadData.SourceColumnsSumBy;
+	
+	SourceTable.GroupBy(SourceColumnsGroupBy, SourceColumnsSumBy);
 	
 	// only for physical inventory
 	If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"

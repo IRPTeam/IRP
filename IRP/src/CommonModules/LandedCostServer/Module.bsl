@@ -1467,6 +1467,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 
 				If NeedReceipt <> 0 Then
 					//@skip-check property-return-type
+					//@skip-check invocation-parameter-type-intersect
 					Message(StrTemplate(R().LC_Error_001, Row.BatchKey, NeedReceipt, Row.Document));
 					
 					NewRow = Tables.DataForBatchShortageIncoming.Add();
@@ -1601,6 +1602,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 
 			If NeedExpense <> 0 Then
 				//@skip-check property-return-type
+				//@skip-check invocation-parameter-type-intersect
 				Message(StrTemplate(R().LC_Error_002, Row.BatchKey, NeedExpense, Row.Document));
 				NewRow = Tables.DataForBatchShortageOutgoing.Add();
 				NewRow.BatchKey = Row.BatchKey;
@@ -1687,6 +1689,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			EndIf;
 		EndDo;
 		For Each Row In ArrayForDelete Do
+			//@skip-check invocation-parameter-type-intersect
 			Rows.Delete(Row);
 		EndDo;
 	EndIf;
@@ -1855,6 +1858,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 			EndDo;
 			If NeedReceipt <> 0 Then
 				//@skip-check property-return-type
+				//@skip-check invocation-parameter-type-intersect
 				Message(StrTemplate(R().LC_Error_003, Row.BatchKey, NeedReceipt, Row.Document));
 				NewRow = Tables.DataForBatchShortageIncoming.Add();
 				NewRow.BatchKey = Row.BatchKey;
@@ -1876,6 +1880,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 		EndIf;
 	EndDo;
 	For Each Row In ArrayForDelete Do
+		//@skip-check invocation-parameter-type-intersect
 		Rows.Delete(Row);
 	EndDo;
 EndProcedure
@@ -1966,6 +1971,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 	EndDo;
 
 	For Each Row In ArrayForDelete Do
+		//@skip-check invocation-parameter-type-intersect
 		Rows.Delete(Row);
 	EndDo;
 EndProcedure
@@ -2097,6 +2103,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 		EndIf;
 	EndDo;
 	For Each Row In ArrayForDelete Do
+		//@skip-check invocation-parameter-type-intersect
 		Rows.Delete(Row);
 	EndDo;
 EndProcedure

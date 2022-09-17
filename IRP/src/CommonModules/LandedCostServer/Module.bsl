@@ -842,7 +842,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	TableOfReturnedBatches = GetTableOfReturnedBatches();
 
 	For Each Row In Tree.Rows Do
-		CalculateBatch(Row.Document, Row.Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance);
+		CalculateBatch(Row.Document, Row.Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance, CalculationSettings);
 		If TableOfReturnedBatches.Count() Then
 			For Each RowReturnedBatches In TableOfReturnedBatches Do
 				ArrayOfTreeRows = Tree.Rows.FindRows(New Structure("Document", RowReturnedBatches.Document));
@@ -1328,7 +1328,8 @@ EndFunction
 //  Tree - See GetBatchTree
 //  TableOfReturnedBatches - See GetTableOfReturnedBatches
 //  EmptyTable_BatchWiseBalance - See CreateTable_BatchWiseBalance
-Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance)
+//	CalculationSettings - See GetCalculationSettings
+Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance, CalculationSettings)
 	TableOfReturnedBatches.Clear();
 
 	DataForExpense = EmptyTable_BatchWiseBalance.CopyColumns(); // See CreateTable_BatchWiseBalance
@@ -1468,8 +1469,11 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				If NeedReceipt <> 0 Then
 					//@skip-check property-return-type
 					//@skip-check invocation-parameter-type-intersect
-					Message(StrTemplate(R().LC_Error_001, Row.BatchKey, NeedReceipt, Row.Document));
-					
+					Msg = StrTemplate(R().LC_Error_001, Row.BatchKey, NeedReceipt, Row.Document);
+					CommonFunctionsClientServer.ShowUsersMessage(Msg);
+					If CalculationSettings.RaiseOnCalculationError Then
+						Raise Msg;
+					EndIf;
 					NewRow = Tables.DataForBatchShortageIncoming.Add();
 					NewRow.BatchKey = Row.BatchKey;
 					NewRow.Document = Row.Document;
@@ -1603,7 +1607,12 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			If NeedExpense <> 0 Then
 				//@skip-check property-return-type
 				//@skip-check invocation-parameter-type-intersect
-				Message(StrTemplate(R().LC_Error_002, Row.BatchKey, NeedExpense, Row.Document));
+				Msg = StrTemplate(R().LC_Error_002, Row.BatchKey, NeedExpense, Row.Document);
+				CommonFunctionsClientServer.ShowUsersMessage(Msg);
+				If CalculationSettings.RaiseOnCalculationError Then
+					Raise Msg;
+				EndIf;
+				
 				NewRow = Tables.DataForBatchShortageOutgoing.Add();
 				NewRow.BatchKey = Row.BatchKey;
 				NewRow.Document = Row.Document;
@@ -1618,7 +1627,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfNewReceivedBatches = GetTableOfNewReceivedBatches();
 
 	If IsTransferDocument(Document) Then
-		CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches);
+		CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings);
 	ElsIf IsCompositeDocument(Document) Then
 		CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches);
 	ElsIf IsDecompositeDocument(Document) Then
@@ -1823,7 +1832,7 @@ Function IsTransferDocument(Document)
 	Return False;
 EndFunction
 
-Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches)
+Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings)
 	For Each Row In Rows Do
 		If Row.Direction = Enums.BatchDirection.Receipt And Not Row.IsOpeningBalance Then
 			NeedReceipt = Row.Quantity;
@@ -1859,7 +1868,11 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 			If NeedReceipt <> 0 Then
 				//@skip-check property-return-type
 				//@skip-check invocation-parameter-type-intersect
-				Message(StrTemplate(R().LC_Error_003, Row.BatchKey, NeedReceipt, Row.Document));
+				Msg = StrTemplate(R().LC_Error_003, Row.BatchKey, NeedReceipt, Row.Document);
+				CommonFunctionsClientServer.ShowUsersMessage(Msg);
+				If CalculationSettings.RaiseOnCalculationError Then
+					Raise Msg;
+				EndIf;
 				NewRow = Tables.DataForBatchShortageIncoming.Add();
 				NewRow.BatchKey = Row.BatchKey;
 				NewRow.Document = Row.Document;
@@ -2235,6 +2248,7 @@ EndFunction
 // * BeginPeriod - Date -
 // * EndPeriod - Date -
 // * Company - CatalogRef.Companies -
+// * RaiseOnCalculationError - Boolean -
 Function GetCalculationSettings() Export
 	Structure = New Structure;
 	Structure.Insert("CalculationMovementCostRef", Documents.CalculationMovementCosts.EmptyRef());
@@ -2242,6 +2256,7 @@ Function GetCalculationSettings() Export
 	Structure.Insert("BeginPeriod", Date(1,1,1));
 	Structure.Insert("EndPeriod", Date(1,1,1));
 	Structure.Insert("Company", Catalogs.Companies.EmptyRef());
+	Structure.Insert("RaiseOnCalculationError", False);
 	Return Structure;
 EndFunction
 

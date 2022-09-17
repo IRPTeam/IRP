@@ -116,6 +116,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="04c7b321-5fdc-436d-979a-9039fd3584f8">
+    <name>RaiseOnCalculationError</name>
+    <synonym>
+      <key>en</key>
+      <value>Raise on calculation error</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="bafc5961-e562-4d12-a3eb-28a27363e500">
     <name>DocumentForm</name>
     <synonym>

@@ -4,12 +4,24 @@ Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
 	Fields.Add("Document");
 EndProcedure
 
+// Presentation get processing.
+// 
+// Parameters:
+//  Data - Structure - Data:
+//  * Document - See Catalog.Batches.Document
+//  Presentation - String - Presentation
+//  StandardProcessing - Boolean - Standard processing
 Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	StandardProcessing = False;
 	Presentation = String(Data.Document);
 EndProcedure
 
-Procedure Create_Batches(CalculationMovementCostRef, Company, BeginPeriod, EndPeriod) Export
+// Create batches.
+// 
+// Parameters:
+//  CalculationSettings - See LandedCostServer.GetCalculationSettings
+// 
+Procedure Create_Batches(CalculationSettings) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -56,22 +68,23 @@ Procedure Create_Batches(CalculationMovementCostRef, Company, BeginPeriod, EndPe
 	|WHERE
 	|	Batches.Ref IS NULL
 	|	OR Batches.Date <> tmp.Date";
-	Query.SetParameter("FilterByCompany", ValueIsFilled(Company));
-	Query.SetParameter("CalculationMovementCostRef", CalculationMovementCostRef);
-	Query.SetParameter("Company", Company);
-	Query.SetParameter("BeginPeriod", BeginPeriod);
-	Query.SetParameter("EndPeriod", EndPeriod);
+	Query.SetParameter("FilterByCompany", ValueIsFilled(CalculationSettings.Company));
+	Query.SetParameter("CalculationMovementCostRef", CalculationSettings.CalculationMovementCostRef);
+	Query.SetParameter("Company", CalculationSettings.Company);
+	Query.SetParameter("BeginPeriod", CalculationSettings.BeginPeriod);
+	Query.SetParameter("EndPeriod", CalculationSettings.EndPeriod);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
 		If ValueIsFilled(QuerySelection.Ref) Then 
 			If QuerySelection.Date <> QuerySelection.OldDate Then
-				ObjBatch = QuerySelection.Ref.GetObject();
-				ObjBatch.Date = QuerySelection.Date;
+				BatchRef = QuerySelection.Ref; // CatalogRef.Batches
+				ObjBatch = BatchRef.GetObject();
+				ObjBatch.Date = QuerySelection.Date; // Date
 				ObjBatch.Write();
 			EndIf;
 		Else
-			NewBatch = Catalogs.Batches.CreateItem();
+			NewBatch = CreateItem();
 			NewBatch.Document = QuerySelection.Document;
 			NewBatch.Company = QuerySelection.Company;
 			NewBatch.Date = QuerySelection.Date;

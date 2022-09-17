@@ -6,12 +6,24 @@ Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
 	Fields.Add("Store");
 EndProcedure
 
+// Presentation get processing.
+// 
+// Parameters:
+//  Data - Structure - Data:
+//  * ItemKey - CatalogRef.ItemKeys
+//  * Store - CatalogRef.Stores
+//  Presentation - String - Presentation
+//  StandardProcessing - Boolean - Standard processing
 Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	StandardProcessing = False;
-	Presentation = String(Data.ItemKey)+" - "+String(Data.Store);
+	Presentation = String(Data.ItemKey) + " - " + String(Data.Store);
 EndProcedure
 
-Procedure Create_BatchKeys(Company, BeginPeriod, EndPeriod) Export
+// Create batch keys.
+// 
+// Parameters:
+//  CalculationSettings - See LandedCostServer.GetCalculationSettings
+Procedure Create_BatchKeys(CalculationSettings) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -44,14 +56,14 @@ Procedure Create_BatchKeys(Company, BeginPeriod, EndPeriod) Export
 	|		AND NOT BatchKeys.DeletionMark
 	|WHERE
 	|	BatchKeys.Ref IS NULL";
-	Query.SetParameter("FilterByCompany", ValueIsFilled(Company));
-	Query.SetParameter("Company", Company);
-	Query.SetParameter("BeginPeriod", BeginPeriod);
-	Query.SetParameter("EndPeriod", EndPeriod);
+	Query.SetParameter("FilterByCompany", ValueIsFilled(CalculationSettings.Company));
+	Query.SetParameter("Company", CalculationSettings.Company);
+	Query.SetParameter("BeginPeriod", CalculationSettings.BeginPeriod);
+	Query.SetParameter("EndPeriod", CalculationSettings.EndPeriod);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
-		NewBatchKey = Catalogs.BatchKeys.CreateItem();
+		NewBatchKey = CreateItem();
 		NewBatchKey.ItemKey = QuerySelection.ItemKey;
 		NewBatchKey.Store = QuerySelection.Store;
 		NewBatchKey.Write();

@@ -33,26 +33,6 @@ Procedure LockDocuments(LocksStorage)
 	LocksStorage.Add(DataLock_BatchReallocateOutgoing);
 EndProcedure
 
-Procedure Posting_BatchReallocate(BatchReallocateRef, EndPeriod) Export
-	LocksStorage = New Array();
-	If Not TransactionActive() Then
-		BeginTransaction(DataLockControlMode.Managed);
-		Try
-			BatchReallocate(LocksStorage, BatchReallocateRef, EndPeriod);
-			If TransactionActive() Then
-				CommitTransaction();
-			EndIf;
-		Except
-			If TransactionActive() Then
-				RollbackTransaction();
-			EndIf;
-			Raise ErrorDescription();
-		EndTry;
-	Else
-		BatchReallocate(LocksStorage, BatchReallocateRef, EndPeriod);
-	EndIf;
-EndProcedure
-
 // Posting batch wice balance.
 // 
 // Parameters:

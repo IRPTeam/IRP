@@ -1,4 +1,6 @@
 
+// @strict-types
+
 Procedure Posting(Cancel, PostingMode)
 	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_Clear(ThisObject.Ref, Cancel);
@@ -8,8 +10,8 @@ Procedure Posting(Cancel, PostingMode)
 	CalculationSettings.CalculationMovementCostRef = ThisObject.Ref;
 	CalculationSettings.Company = ThisObject.Company;
 	CalculationSettings.CalculationMode = ThisObject.CalculationMode;
-	CalculationSettings.BeginDate = ThisObject.BeginDate;
-	CalculationSettings.EndDate = ThisObject.EndDate;
+	CalculationSettings.BeginPeriod = ThisObject.BeginDate;
+	CalculationSettings.EndPeriod = ThisObject.EndDate;
 	
 	LandedCostServer.Posting_BatchWiceBalance(CalculationSettings);
 	For Each Records In ThisObject.RegisterRecords Do

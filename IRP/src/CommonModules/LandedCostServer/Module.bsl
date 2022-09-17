@@ -1353,7 +1353,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				And TypeOf(Document) <> Type("DocumentRef.BatchReallocateIncoming") Then // is not receipt by btach reallocation
 				
 				If Row.Amount = 0 AND Row.Company.LandedCostFillEmptyAmount 
-					AND TypeOf(Document) = Type("DocumentRef.StockAdjustmentAsSurplus") Then
+					AND (TypeOf(Document) = Type("DocumentRef.StockAdjustmentAsSurplus")
+					OR TypeOf(Document) = Type("DocumentRef.SalesReturn")) Then
 						Price = GetPriceForEmptyAmountFromDataForReceipt(Row.BatchKey.ItemKey, Row.Date, Tables.DataForReceipt);
 						
 						If Price = 0 Then

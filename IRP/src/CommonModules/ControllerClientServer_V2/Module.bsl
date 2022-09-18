@@ -428,10 +428,14 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False) Export
 					If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // steps enabler
 						// ItemList.TotalAmount does not have setter
 						If Upper(Property.DataPath) = Upper("ItemList.TotalAmount") Then
-							SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Row.Key, Value));
+							If Value <> Undefined Then
+								SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Row.Key, Value));
+								ModelClientServer_V2.EntryPoint(_SetterNameOrStepsEnabler, Parameters);
+							EndIf;
+						Else
+							ModelClientServer_V2.EntryPoint(_SetterNameOrStepsEnabler, Parameters);
 						EndIf;
-							
-						ModelClientServer_V2.EntryPoint(_SetterNameOrStepsEnabler, Parameters);
+
 					Else // setter
 						Results = ResultArray(Row.Key, Value);
 						ExecuteSetterByName(Parameters, Results, _SetterNameOrStepsEnabler);

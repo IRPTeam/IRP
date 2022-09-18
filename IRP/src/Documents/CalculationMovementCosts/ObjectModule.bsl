@@ -1,13 +1,20 @@
 
+// @strict-types
+
 Procedure Posting(Cancel, PostingMode)
 	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R5022T_Expenses.Expenses_Clear(ThisObject.Ref, Cancel);
-	LandedCostServer.Posting_BatchWiceBalance(ThisObject.Ref,
-	                                       ThisObject.Company,
-	                                       ThisObject.CalculationMode, 
-	                                       ThisObject.BeginDate, 
-	                                       ThisObject.EndDate);
+	
+	CalculationSettings = LandedCostServer.GetCalculationSettings();
+	CalculationSettings.CalculationMovementCostRef = ThisObject.Ref;
+	CalculationSettings.Company = ThisObject.Company;
+	CalculationSettings.CalculationMode = ThisObject.CalculationMode;
+	CalculationSettings.BeginPeriod = ThisObject.BeginDate;
+	CalculationSettings.EndPeriod = ThisObject.EndDate;
+	CalculationSettings.RaiseOnCalculationError = ThisObject.RaiseOnCalculationError;
+	
+	LandedCostServer.Posting_BatchWiceBalance(CalculationSettings);
 	For Each Records In ThisObject.RegisterRecords Do
 		Records.Read();
 	EndDo;
@@ -22,7 +29,7 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	If ThisObject.CalculationMode = Enums.CalculationMode.LandedCostBatchReallocate Then
-		CheckedAttributes.Delete(CheckedAttributes.Find("Company"));
+	If Not ThisObject.CalculationMode = Enums.CalculationMode.LandedCostBatchReallocate Then
+		CheckedAttributes.Add("Company");
 	EndIf;
 EndProcedure

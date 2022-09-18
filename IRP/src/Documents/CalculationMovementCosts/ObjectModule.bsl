@@ -29,7 +29,7 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	If ThisObject.CalculationMode = Enums.CalculationMode.LandedCostBatchReallocate Then
-		CheckedAttributes.Delete(CheckedAttributes.Find("Company"));
+	If Not ThisObject.CalculationMode = Enums.CalculationMode.LandedCostBatchReallocate Then
+		CheckedAttributes.Add("Company");
 	EndIf;
 EndProcedure

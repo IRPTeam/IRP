@@ -1,3 +1,4 @@
+
 // @strict-types
 
 #Region FormEventHandlers
@@ -133,6 +134,70 @@ EndProcedure
 #EndRegion
 
 #Region FormCommandsEventHandlers
+
+&AtServer
+Function CopyableSpreadsheetDocumentProperties()
+	Возврат "FitToPage,Output," +
+	"PageHeight,DuplexPrinting,Protection," +
+	"PrinterName,LanguageCode,Copies,PrintScale," +
+	"FirstPageNumber,PageOrientation,TopMargin," +
+	"LeftMargin,BottomMargin,RightMargin,Collate," +
+	"HeaderSize,FooterSize,PageSize,PrintAccuracy," +
+	"BackgroundPicture,BlackAndWhite,PageWidth,PerPage";
+EndFunction
+
+&AtClient
+Procedure Print(Command)
+	PackageDocuments = PrintAtServer();
+	PackageDocuments.Print();
+EndProcedure
+
+&AtServer
+Function PackageWithOneSpreadsheetDocument(SpreadsheetDoc)
+	SpreadsheetDocumentAddressInTemporaryStorage = PutToTempStorage(SpreadsheetDoc);
+	PackageWithOneDocument = New RepresentableDocumentBatch;
+	PackageWithOneDocument.Collate = True;
+	PackageWithOneDocument.Состав.Add(SpreadsheetDocumentAddressInTemporaryStorage);
+	FillPropertyValues(PackageWithOneDocument, SpreadsheetDoc, "Output, DuplexPrinting, PrinterName, Copies, PrintAccuracy");
+	if SpreadsheetDoc.Collate <> Undefined Then
+		PackageWithOneDocument.Collate = SpreadsheetDoc.Collate;
+	EndIf;
+	Return PackageWithOneDocument;
+EndFunction
+
+
+&AtServer
+Function PrintAtServer()
+	PackageDocuments = New RepresentableDocumentBatch;
+	PackageDocuments.Collate = True;
+	For Each ItPrint In PrintFormConfig Do
+		Copies = ItPrint.CountCopy;
+		For It = 0 To Copies - 1 Do
+			SpreadsheetDoc = New SpreadsheetDocument;
+			FillPropertyValues(SpreadsheetDoc, ItPrint.SpreadsheetDoc, CopyableSpreadsheetDocumentProperties());
+			SpreadsheetDoc.Put(ItPrint.SpreadsheetDoc);
+			PackageDocuments.Content.Add().Data = PackageWithOneSpreadsheetDocument(SpreadsheetDoc);
+		EndDo;
+	EndDo;
+	Return PackageDocuments;
+EndFunction
+
+&AtClient
+Procedure ResultOnChange(Item)
+	CurrentData = Items.PrintFormConfig.CurrentData;
+	If CurrentData <> Undefined Then
+		Items.PrintFormConfig.CurrentData.SpreadsheetDoc = SaveChangeResult();	
+	EndIf;
+EndProcedure
+
+&AtServer
+Function SaveChangeResult()
+	NewSpreadsheetDoc = New SpreadsheetDocument;
+	NewSpreadsheetDoc.LanguageCode = Result.LanguageCode;
+	NewSpreadsheetDoc.Put(Result);
+	FillPropertyValues(NewSpreadsheetDoc, Result, CopyableSpreadsheetDocumentProperties());
+	Return NewSpreadsheetDoc;
+EndFunction
 
 &AtClient
 Procedure EditResult(Command)

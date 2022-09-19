@@ -406,7 +406,8 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("ItemList.ExpCount"           , "SetItemListExpCount");
 	SettersMap.Insert("ItemList.SalesInvoice"       , "SetItemListSalesDocument");
 	SettersMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");
-	SettersMap.Insert("ItemList.TotalAmount"        , "StepItemListCalculations_IsTotalAmountChanged");
+	SettersMap.Insert("ItemList.TotalAmount"        , "StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+													  |StepItemListCalculations_IsTotalAmountChanged");
 	SettersMap.Insert("ItemList.<tax_rate>"         , "StepChangeTaxRate_AgreementInHeader");
 	SettersMap.Insert("ItemList."                   , "StepItemListCalculations_IsTaxRateChanged");
 	If IsBuilder Then
@@ -421,12 +422,26 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False) Export
 	If SetterNameOrStepsEnabler <> Undefined Then
 		If IsColumn Then
 			For Each Row In GetRows(Parameters, Parameters.TableName) Do
-				If StrStartsWith(SetterNameOrStepsEnabler, "Step") Then // steps enabler
-					ModelClientServer_V2.EntryPoint(SetterNameOrStepsEnabler, Parameters);
-				Else // setter
-					Results = ResultArray(Row.Key, Value);
-					ExecuteSetterByName(Parameters, Results, SetterNameOrStepsEnabler);
-				EndIf;
+				For Each _SetterNameOrStepsEnabler In StrSplit(SetterNameOrStepsEnabler, ",") Do
+					_SetterNameOrStepsEnabler = TrimAll(_SetterNameOrStepsEnabler);
+
+					If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // steps enabler
+						// ItemList.TotalAmount does not have setter
+						If Upper(Property.DataPath) = Upper("ItemList.TotalAmount") Then
+							If Value <> Undefined Then
+								SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Row.Key, Value));
+								ModelClientServer_V2.EntryPoint(_SetterNameOrStepsEnabler, Parameters);
+							EndIf;
+						Else
+							ModelClientServer_V2.EntryPoint(_SetterNameOrStepsEnabler, Parameters);
+						EndIf;
+
+					Else // setter
+						Results = ResultArray(Row.Key, Value);
+						ExecuteSetterByName(Parameters, Results, _SetterNameOrStepsEnabler);
+					EndIf;
+					
+				EndDo;
 			EndDo;
 		Else
 			Results = ResultArray(Undefined, Value);

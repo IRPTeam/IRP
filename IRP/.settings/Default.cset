@@ -202,6 +202,9 @@
     "right-exclusive-mode": {
       "enabled": false
     },
+    "module-self-reference": {
+      "enabled": false
+    },
     "right-save-user-data": {
       "enabled": false
     },

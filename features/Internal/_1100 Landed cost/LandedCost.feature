@@ -131,6 +131,7 @@ Scenario: _001 test data
 		When Create document Unbundling objects (LC)
 		When Create document RetailSalesReceipt objects (LC)
 		When Create document RetailReturnReceipt objects (LC)
+		When Create document ItemStockAdjustment objects (LC)
 	* Posting Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		Then "Purchase orders" window is opened
@@ -2290,6 +2291,86 @@ Scenario: _024 check Stock adjustment as surplus movements by register R5021 Rev
 						
 		
 				
-	
+Scenario: _027 check calculation movements cost for ItemStockAdjustment
+	* Post 	ItemStockAdjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |	
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* Create Calculetion movement cost
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click the button named "FormCreate"
+		And I input "18.09.2022 00:00:00" text in the field named "Date"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Landed cost" exact value from "Calculation mode" drop-down list
+		And I input "18.09.2022" text in "Begin date" field
+		And I input "18.09.2022" text in "End date" field
+		And I click "Post and close" button
+		And I wait "Calculation movement costs (create) *" window closing in 20 seconds
+	* Check report
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 10'    |
+		And I select current line in "List" table
+		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
+		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"	
+		And I click "Run report" button
+		And "Result" spreadsheet document contains "BathBalance_024_1" template lines by template
+		And I close all client application windows
+	* Clear posting 
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+	* Batches calculation
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date' | 'Company'      |
+			| '18.09.2022' | 'Main Company' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* Check report
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 10'    |
+		And I select current line in "List" table
+		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
+		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
+		And I click "Run report" button
+		And "Result" spreadsheet document contains "BathBalance_024_2" template lines by template	
+	* Post ItemStockAdjustment back	
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |	
+		And in the table "List" I click the button named "ListContextMenuPost"		
+	* Batches calculation
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date' | 'Company'      |
+			| '18.09.2022' | 'Main Company' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* Check report
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 10'    |
+		And I select current line in "List" table
+		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
+		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
+		And I click "Run report" button
+		And "Result" spreadsheet document contains "BathBalance_024_1" template lines by template
+		And I close all client application windows		
+							
 
 

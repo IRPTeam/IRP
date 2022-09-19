@@ -368,6 +368,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Company,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
+		|	ItemList.Key AS RowID,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO T6020S_BatchKeysInfo
 		|FROM
@@ -379,6 +380,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.ItemKey,
 		|	ItemList.Period,
 		|	ItemList.Store,
+		|	ItemList.Key,
 		|	VALUE(Enum.BatchDirection.Receipt)
 		|
 		|UNION ALL
@@ -389,6 +391,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Company,
 		|	ItemList.Store,
 		|	ItemList.ItemKeyWriteOff,
+		|	ItemList.Key,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|FROM
 		|	ItemList AS ItemList
@@ -399,6 +402,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.ItemKeyWriteOff,
 		|	ItemList.Period,
 		|	ItemList.Store,
+		|	ItemList.Key,
 		|	VALUE(Enum.BatchDirection.Expense)";
 EndFunction
 

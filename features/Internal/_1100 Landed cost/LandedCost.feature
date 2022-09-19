@@ -2320,7 +2320,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 			| 'Store 10'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
-		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
+		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"	
 		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_024_1" template lines by template
 		And I close all client application windows
@@ -2353,6 +2353,12 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 			| 'Number' |
 			| '1'      |	
 		And in the table "List" I click the button named "ListContextMenuPost"		
+	* Batches calculation
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Begin date' | 'Company'      |
+			| '18.09.2022' | 'Main Company' |
+		And in the table "List" I click the button named "ListContextMenuPost"
 	* Check report
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"

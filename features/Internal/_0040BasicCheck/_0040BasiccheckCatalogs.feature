@@ -980,6 +980,28 @@ Scenario: Open object form "PartnerItems"
 		Then I raise "Failed to open catalog form PartnerItems" exception
 	And I close current window
 
+Scenario: Open list form "BillOfMaterials" 
+
+	Given I open "BillOfMaterials" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form BillOfMaterials" exception
+	And I close current window
+
+Scenario: Open object form "BillOfMaterials"
+	And I close all client application windows
+	Given I open "BillOfMaterials" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form BillOfMaterials" exception
+	And I close current window
+
+Scenario: Open choise form "BillOfMaterials"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.BillOfMaterials.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PartnerItems" exception
+	And I close current window
+
 Scenario: Open choise form "SpecialOffers"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)

@@ -412,7 +412,6 @@ Scenario: _01541002 check filters in the PI list form
 			| 'Available fields' |
 			| 'Currency'         |
 		And I select current line in "SettingsComposerUserSettingsItem0AvailableFieldsTable" table
-		And I expand current line in "SettingsComposerUserSettingsItem0Filter" table
 		And I change checkbox named "SettingsComposerUserSettingsItem0FilterUse" in "SettingsComposerUserSettingsItem0Filter" table
 		And I finish line editing in "SettingsComposerUserSettingsItem0Filter" table
 		And I click "Finish editing" button

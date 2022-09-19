@@ -12,7 +12,7 @@ Background:
 
 
 Scenario: _001 test data
-	When set True value to the constant (LC)
+	When set True value to the constant
 	* Checking the availability of catalogs and batches registers
 		Given I open hyperlink "e1cib/list/Catalog.BatchKeys"
 		Given I open hyperlink "e1cib/list/Catalog.Batches"

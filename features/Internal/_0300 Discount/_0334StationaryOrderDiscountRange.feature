@@ -42,7 +42,7 @@ Scenario: _033402 range discount calculation by line
 		And I go to line in "Offers" table
 			| 'Presentation'                               |
 			| 'Range Discount Basic (Trousers)' |
-		And I activate "∑" field in "Offers" table
+		And I activate "Amount" field in "Offers" table
 		And I select current line in "Offers" table
 		And I input "6" text in the field named "PercentNumber"
 		And I click the button named "FormOk"
@@ -56,15 +56,15 @@ Scenario: _033402 range discount calculation by line
 		And I go to line in "Offers" table
 			| 'Presentation'                               |
 			| 'Range Discount Basic (Dress)' |
-		And I activate "∑" field in "Offers" table
+		And I activate "Amount" field in "Offers" table
 		And I select current line in "Offers" table
 		And I input "5" text in the field named "PercentNumber"
 		And I click the button named "FormOk"
 		And I click the button named "FormOK"
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity'      | 'Offers amount' | 'Unit' | 'Total amount'    |
-		| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000' | '260,00'        | 'pcs'  | '4 940,00'        |
-		| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'  | '120,00'        | 'pcs'  | '1 880,00'        |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Quantity' | 'Offers amount' | 'Unit' | 'Total amount' |
+		| 'Dress'    | '520,00' | 'XS/Blue'   | 'Store 01' | '10,000'   | '260,00'        | 'pcs'  | '4 940,00'     |
+		| 'Trousers' | '400,00' | '36/Yellow' | 'Store 01' | '5,000'    | '120,00'        | 'pcs'  | '1 880,00'     |
 		And in the table "ItemList" I click "% Offers" button
 		And I click "OK" button
 		And I click the button named "FormPostAndClose"
@@ -84,7 +84,7 @@ Scenario: _033403 check of the minimum percentage of the range discount by lines
 			And I go to line in "Offers" table
 				| 'Presentation'                               |
 				| 'Range Discount Basic (Trousers)' |
-			And I activate "∑" field in "Offers" table
+			And I activate "Amount" field in "Offers" table
 			And I select current line in "Offers" table
 			And I input "5" text in the field named "PercentNumber"
 			And I click the button named "FormOk"
@@ -98,7 +98,7 @@ Scenario: _033403 check of the minimum percentage of the range discount by lines
 			And I go to line in "Offers" table
 				| 'Presentation'                               |
 				| 'Range Discount Basic (Dress)' |
-			And I activate "∑" field in "Offers" table
+			And I activate "Amount" field in "Offers" table
 			And I select current line in "Offers" table
 			And I input "3" text in the field named "PercentNumber"
 			And I click the button named "FormOk"
@@ -127,7 +127,7 @@ Scenario: _033404 check of the maximum percentage of the range discount by lines
 			And I go to line in "Offers" table
 				| 'Presentation'                               |
 				| 'Range Discount Basic (Trousers)' |
-			And I activate "∑" field in "Offers" table
+			And I activate "Amount" field in "Offers" table
 			And I select current line in "Offers" table
 			And I input "7" text in the field named "PercentNumber"
 			And I click the button named "FormOk"
@@ -141,7 +141,7 @@ Scenario: _033404 check of the maximum percentage of the range discount by lines
 			And I go to line in "Offers" table
 				| 'Presentation'                               |
 				| 'Range Discount Basic (Dress)' |
-			And I activate "∑" field in "Offers" table
+			And I activate "Amount" field in "Offers" table
 			And I select current line in "Offers" table
 			And I input "10" text in the field named "PercentNumber"
 			And I click the button named "FormOk"
@@ -170,7 +170,7 @@ Scenario: _033405 Range discount and Special price discount calculation
 		And I go to line in "Offers" table
 			| 'Presentation'                               |
 			| 'Range Discount Basic (Trousers)' |
-		And I activate "∑" field in "Offers" table
+		And I activate "Amount" field in "Offers" table
 		And I select current line in "Offers" table
 		And I input "7" text in the field named "PercentNumber"
 		And I click the button named "FormOk"
@@ -209,7 +209,7 @@ Scenario: _033406 check the discount order Range discount and crowding out 2 pri
 		And I go to line in "Offers" table
 			| 'Presentation'                               |
 			| 'Range Discount Basic (Trousers)' |
-		And I activate "∑" field in "Offers" table
+		And I activate "Amount" field in "Offers" table
 		And I select current line in "Offers" table
 		And I input "7" text in the field named "PercentNumber"
 		And I click the button named "FormOk"
@@ -252,7 +252,7 @@ Scenario: _033407 range discount recalculation when the quantity of items in the
 		And I go to line in "Offers" table
 			| 'Presentation'                               |
 			| 'Range Discount Basic (Trousers)' |
-		And I activate "∑" field in "Offers" table
+		And I activate "Amount" field in "Offers" table
 		And I select current line in "Offers" table
 		And I input "7" text in the field named "PercentNumber"
 		And I click the button named "FormOk"

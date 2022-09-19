@@ -700,6 +700,13 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_119", NStr("en = 'Error Eval code'", Lang) + Chars.LF);
 #EndRegion
 
+#Region LandedCost
+
+	Strings.Insert("LC_Error_001", NStr("en = 'Can not receipt Batch key by sales return: %1 , Quantity: %2 , Doc: %3'", Lang) + Chars.LF);
+	Strings.Insert("LC_Error_002", NStr("en = 'Can not expense Batch key: %1 , Quantity: %2 , Doc: %3'", Lang) + Chars.LF);
+	Strings.Insert("LC_Error_003", NStr("en = 'Can not receipt Batch key: %1 , Quantity: %2 , Doc: %3'", Lang) + Chars.LF);
+#EndRegion
+
 #Region InfoMessages
 	// %1 - Purchase invoice
 	// %2 - Purchase order

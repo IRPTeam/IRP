@@ -8,7 +8,6 @@
 			box-sizing: border-box; margin: 0; 
 		}
 		html { 
-			overflow: hidden;
 			font-family: 'tahoma'; 
 		}
 		ol {
@@ -19,7 +18,7 @@
 		ol li {
 		  list-style-type: none;
 		  counter-increment: item;
-		  margin-bottom: 20px;
+		  margin-bottom: 10px;
 		}
 		ol li:before {
 		  content: counter(item);

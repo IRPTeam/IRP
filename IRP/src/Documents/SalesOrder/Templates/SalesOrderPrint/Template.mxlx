@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="http://v8.1c.ru/8.2/data/spreadsheet" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<languageSettings>
-		<currentLanguage>ru</currentLanguage>
+		<currentLanguage>en</currentLanguage>
 		<defaultLanguage>en</defaultLanguage>
 		<languageInfo>
 			<id>en</id>
@@ -160,10 +160,6 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Company:</v8:content>
 						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Компания:</v8:content>
-						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -187,10 +183,6 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Partner:</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Контрагент:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -471,7 +463,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Total amount:</v8:content>
+							<v8:content>Offers amount:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -479,7 +471,7 @@
 			<c>
 				<c>
 					<f>28</f>
-					<parameter>Total</parameter>
+					<parameter>TotalOffers</parameter>
 				</c>
 			</c>
 		</row>
@@ -511,7 +503,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Offers tax:</v8:content>
+							<v8:content>Total amount:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -519,7 +511,7 @@
 			<c>
 				<c>
 					<f>28</f>
-					<parameter>TotalOffers</parameter>
+					<parameter>Total</parameter>
 				</c>
 			</c>
 		</row>

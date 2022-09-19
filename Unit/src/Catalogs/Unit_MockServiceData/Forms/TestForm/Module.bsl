@@ -28,16 +28,6 @@ Procedure RunTestMockData(Command)
 EndProcedure
 
 &AtClient
-Procedure RunTestMockService(Command)
-	ClearPreviousData();
-	If IsBlankString(ServiceURL) Then
-		ShowMessageBox(, "Enter the path to the mock service");
-		Return;
-	EndIf;
-	RunTestMockServiceAtServer();
-EndProcedure
-
-&AtClient
 Procedure CompareAnswers(Command)
 	//TODO: Insert the handler content
 EndProcedure
@@ -141,6 +131,7 @@ Procedure RunTestMockDataAtServer()
 	RequestOptions = New Map;
 	ArrayOfSegments = StrSplit(RequestStructure.Address, "?");
 	If ArrayOfSegments.Count() > 1 Then
+		RequestStructure.Address = ArrayOfSegments[0];
 		OptionsSegments = ArrayOfSegments[1];
 		ArrayOfSegments = StrSplit(OptionsSegments, "&");
 		For Each OptionsSegment In ArrayOfSegments Do
@@ -161,49 +152,76 @@ Procedure RunTestMockDataAtServer()
 		RequestStructure.Headers = New FixedMap(New Map);
 	EndIf;
 	
-	RequestStructure.Body = Request.Body.Get();
+	BodyData = Request.Body.Get(); // BinaryData
+	RequestStructure.BodyBinary = BodyData;
+	Try
+		RequestStructure.BodyString = GetStringFromBinaryData(BodyData);
+	Except
+		RequestStructure.BodyString = "";
+	EndTry; 
+	
+	MockStructure = Unit_MockService.GetSelectionMockStructure();
+	MockStructure.Ref = MockData;
+	MockStructure.BodyMD5 = MockData.Request_BodyMD5;
+	MockStructure.BodyAsFilter = MockData.Request_BodyAsFilter;
+
+	MockStructure.Address = MockData.Request_ResourceAddress;
+	ArrayOfSegments = StrSplit(MockStructure.Address, "?");
+	If ArrayOfSegments.Count() > 1 Then
+		MockStructure.Address = ArrayOfSegments[0];
+	EndIf; 
+	
+	For Each Element In MockData.Request_Headers Do
+		If Element.ValueAsFilter Then
+			MockStructure.isHeaderFilter = True;
+			Break;
+		EndIf;
+	EndDo;
+	For Each Element In MockData.Request_Variables Do
+		If Element.ValueAsFilter Then
+			MockStructure.isVariablesFilter = True;
+			Break;
+		EndIf;
+	EndDo;
+	For Each Element In MockData.Request_BodyVariables Do
+		If Element.ValueAsFilter Then
+			MockStructure.isVariablesBodyFilter = True;
+			Break;
+		EndIf;
+	EndDo;
+	
+	RequestVariables = New Structure;
+	
+	CheckingResult = Unit_MockService.CheckRequestToMockData(RequestStructure, MockStructure, RequestVariables);
+	Logs = CheckingResult.Logs;
+	If not CheckingResult.Successfully Then
+		Return;
+	EndIf;
+	
+	LoadRequestVariables(RequestVariables);
 	
 	Answer = Unit_MockService.ComposeAnswerToRequestStructure(RequestStructure, MockData);
 	LoadAnswer(Answer);
 		
 EndProcedure
 
+// Load request variables.
+// 
+// Parameters:
+//  RequestVariables - Arbitrary, Structure - Request variables
 &AtServer
-Procedure RunTestMockServiceAtServer()
+Procedure LoadRequestVariables(RequestVariables)
 	
-	RequestStructure = Unit_MockService.GetStructureRequest();
-	
-	RequestStructure.Type = Request.RequestType; 
-	RequestStructure.Address = Request.ResourceAddress;
-	
-	RequestOptions = New Map;
-	ArrayOfSegments = StrSplit(RequestStructure.Address, "?");
-	If ArrayOfSegments.Count() > 1 Then
-		OptionsSegments = ArrayOfSegments[1];
-		ArrayOfSegments = StrSplit(OptionsSegments, "&");
-		For Each OptionsSegment In ArrayOfSegments Do
-			EqualPosition = StrFind(OptionsSegment, "=");
-			If EqualPosition > 1 Then
-				RequestOptions.Insert(OptionsSegment, "");
-			Else
-				RequestOptions.Insert(TrimAll(Mid(OptionsSegment,1,EqualPosition-1)), TrimAll(Mid(OptionsSegment,EqualPosition+1)));
-			EndIf;
-		EndDo;
-	EndIf;
-	RequestStructure.Options = New FixedMap(RequestOptions);
-	
-	HeadersMap = Request.Headers.Get();
-	If TypeOf(HeadersMap) = Type("Map") Then	
-		RequestStructure.Headers = New FixedMap(HeadersMap);
-	Else
-		RequestStructure.Headers = New FixedMap(New Map);
+	If TypeOf(RequestVariables) <> Type("Structure") Then
+		Return;
 	EndIf;
 	
-	RequestStructure.Body = Request.Body.Get();
-	
-	Answer = Unit_MockService.ComposeAnswerToRequestStructure(RequestStructure, MockData);
-	LoadAnswer(Answer);
-		
+	For Each KeyValue In RequestVariables Do
+		RecordVariables = Variables.Add();
+		RecordVariables.Key = String(KeyValue.Key);
+		RecordVariables.Value = String(KeyValue.Value); 
+	EndDo;
+
 EndProcedure
 
 &AtServer

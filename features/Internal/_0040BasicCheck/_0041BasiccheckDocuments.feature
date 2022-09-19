@@ -795,7 +795,49 @@ Scenario: Open object form "ConsolidatedRetailSales"
 		Then I raise "Failed to open document form ConsolidatedRetailSales" exception
 	And I close current window
 
+Scenario: Open list form "WorkOrder" 
+	And I close all client application windows
+	Given I open "WorkOrder" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form WorkOrder" exception
+	And I close current window
 
+Scenario: Open object form "WorkOrder"
+	And I close all client application windows
+	Given I open "WorkOrder" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form WorkOrder" exception
+	And I close current window
+
+Scenario: Open list form "WorkSheet" 
+	And I close all client application windows
+	Given I open "WorkSheet" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form WorkSheet" exception
+	And I close current window
+
+Scenario: Open object form "WorkSheet"
+	And I close all client application windows
+	Given I open "WorkSheet" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form WorkSheet" exception
+	And I close current window
+
+Scenario: Open choise form "WorkOrder"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.WorkOrder.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form WorkOrder" exception
+	And I close current window
+
+Scenario: Open choise form "WorkSheet"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.WorkSheet.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form WorkSheet" exception
+	And I close current window
 
 Scenario: Open choise form "ChequeBondTransaction"
 	And I close all client application windows

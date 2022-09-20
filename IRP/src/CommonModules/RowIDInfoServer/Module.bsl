@@ -5073,6 +5073,8 @@ Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 	// #1487
 	ElsIf DocAliase = Aliases.WO Then
 		Return GetFieldsToLock_ExternalLink_WO(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.WS Then
+		Return GetFieldsToLock_ExternalLink_WS(ExternalDocAliase, Aliases);		
 	Else
 		Raise StrTemplate("Not supported External link for [%1]", DocAliase);
 	EndIf;
@@ -5730,10 +5732,13 @@ Function GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.SO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+		Result.ItemList = "Item, ItemKey, Store, SalesOrder, WorkOrder";
 	ElsIf InternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder, WorkOrder";
+	ElsIf InternalDocAliase = Aliases.WS Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder, WorkOrder";
 	Else
 		Raise StrTemplate("Not supported Internal link for [SI] to [%1]", InternalDocAliase);
 	EndIf;
@@ -8448,6 +8453,23 @@ Function GetFieldsToLock_InternalLink_WS(InternalDocAliase, Aliases)
 	Return Result;
 EndFunction
 
+Function GetFieldsToLock_ExternalLink_WS(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	If ExternalDocAliase = Aliases.SI Then 
+		Result.Header   = "Company, Branch, Partner, LegalName";
+		Result.ItemList = "Item, ItemKey, SalesOrder, WorkOrder";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |PartnerSales      , Partner,
+							  |LegalNameSales    , LegalName,
+							  |ItemKey           , ItemList.ItemKey";
+	Else
+		Raise StrTemplate("Not supported External link for [SC] to [%1]", ExternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
 Procedure ApplyFilterSet_WS_ForSI(Query)
 	Query.Text =
 	"SELECT
@@ -9919,6 +9941,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	EndIf;
 	// check internal links
 	Query = New Query();
+	Query.TempTablesManager = New TempTablesManager();
 	Query.Text =
 	"SELECT
 	|	BasisesTable.RowID,
@@ -10009,8 +10032,13 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|		AND RowIDInfoFull.CurrentStep = BasisesTable.CurrentStep
 	|		AND RowIDInfoFull.ItemKey = BasisesTable.ItemKey
 	|		AND CASE
-	|			WHEN &Filter_Store
-	|				THEN RowIDInfoFull.Store = BasisesTable.Store
+	|			WHEN &Filter_Store then
+	//
+	|			case when RowIDInfoFull.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Product)
+	|           then RowIDInfoFull.Store = BasisesTable.Store
+	|			else true end
+	|
+	//|				THEN RowIDInfoFull.Store = BasisesTable.Store
 	|			ELSE TRUE
 	|		END
 	|WHERE
@@ -10032,7 +10060,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	Query.SetParameter("ItemList", ItemListTable);
 
 	Is = Is(Object);
-	If Is.RRR Or Is.SR Or Is.WO Or Is.WS Then
+	If Is.RRR Or Is.SR Then
 		Query.SetParameter("Filter_Store", False);
 	Else
 		Query.SetParameter("Filter_Store", True);
@@ -10453,6 +10481,10 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WO, DocAliases.SI);
 	EndIf;
 	
+	If Is.WS Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WS, DocAliases.SI);
+	EndIf;
+	
 	Return Tables;
 EndFunction
 
@@ -10474,7 +10506,7 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SC);
 		// #1487
 		//FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WO);
-		//FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WS);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WS);
 	EndIf;
 	
 	If Is.SC Then 

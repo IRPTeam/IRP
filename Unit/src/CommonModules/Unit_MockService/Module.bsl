@@ -1,5 +1,15 @@
 // @strict-types
 
+
+#Region Info
+
+Function Tests() Export
+	TestList = New Array;
+	Return TestList;
+EndFunction
+
+#EndRegion
+
 #Region Public
 
 // Compose answer to request.

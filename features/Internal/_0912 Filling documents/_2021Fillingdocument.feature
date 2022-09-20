@@ -401,6 +401,48 @@ Scenario: _0154100 preparation ( filling documents)
 Scenario: _01541001 check preparation
 	When check preparation
 
+Scenario: _01541002 check filters in the PI list form
+	And I close all client application windows
+	* Open PI list form
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	* Add filter by currency
+		And I click "Configure list..." button
+		Then "List Options" window is opened
+		And I go to line in "SettingsComposerUserSettingsItem0AvailableFieldsTable" table
+			| 'Available fields' |
+			| 'Currency'         |
+		And I select current line in "SettingsComposerUserSettingsItem0AvailableFieldsTable" table
+		And I change checkbox named "SettingsComposerUserSettingsItem0FilterUse" in "SettingsComposerUserSettingsItem0Filter" table
+		And I finish line editing in "SettingsComposerUserSettingsItem0Filter" table
+		And I click "Finish editing" button
+	* Check filter
+		And I set checkbox named "SettingsComposerUserSettingsItem4Use"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem4Value"
+		Then "Currencies" window is opened
+		And I go to line in "List" table
+			| 'Code' | 'Description'     |
+			| 'USD'  | 'American dollar' |
+		And I select current line in "List" table
+		And "List" table became equal
+			| 'Partner'   | 'Amount'   | 'Currency' |
+			| 'Ferron BP' | '4 000,00' | 'USD'      |
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem4Value"
+		Then "Currencies" window is opened
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| 'TRY'  | 'Turkish lira' |
+		And I select current line in "List" table
+		And "List" table became equal
+			| 'Partner'   | 'Amount'    | 'Currency' |
+			| 'Ferron BP' | '13 000,00' | 'TRY'      |
+		And I remove checkbox named "SettingsComposerUserSettingsItem4Use"
+		And "List" table became equal
+			| 'Partner'   | 'Amount'    | 'Currency' |
+			| 'Ferron BP' | '13 000,00' | 'TRY'      |
+			| 'Ferron BP' | '4 000,00'  | 'USD'      |
+		And I close all client application windows
+						
+
 Scenario: _0154101 check filling in and refilling Sales order
 	And I close all client application windows
 	* Open the Sales order creation form
@@ -8823,16 +8865,6 @@ Scenario: _0154188 check edit currency in the StockAdjustmentAsWriteOff
 		And I click "Ok" button
 		And I close all client application windows				
 		
-				
-		
-					
-		
-				
-		
-				
-		
-				
-
 
 
 Scenario: _999999 close TestClient session

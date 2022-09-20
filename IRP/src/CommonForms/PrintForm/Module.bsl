@@ -82,18 +82,12 @@ EndProcedure
 
 &AtClient
 Procedure LayoutLangOnChange(Item)
-	CurrentData = Items.PrintFormConfig.CurrentData;
-	if CurrentData <> Undefined And CurrentData.LayoutLang <> LayoutLang Then
-		RefreshTemplate(CurrentData)
-	EndIf;
+	RefreshTemplate();
 EndProcedure
 
 &AtClient
 Procedure DataLangOnChange(Item)
-	CurrentData = Items.PrintFormConfig.CurrentData;
-	if CurrentData <> Undefined And CurrentData.DataLang <> DataLang Then
-		RefreshTemplate(CurrentData)
-	EndIf;
+	RefreshTemplate();
 EndProcedure
 
 
@@ -109,17 +103,27 @@ EndProcedure
 
 
 &AtClient
-Procedure RefreshTemplate(CurrentData)
-	Param = UniversalPrintServer.InitPrintParam(CurrentData.Ref);
-	FillPropertyValues(Param, CurrentData);
-	Param.DataLang = DataLang;
-	Param.LayoutLang = LayoutLang;
-	SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(Param.RefDocument, Param);
-	Param.SpreadsheetDoc = SpreadsheetDoc;
-	CurrentData.DataLang = DataLang;
-	CurrentData.LayoutLang = LayoutLang;
-	CurrentData.SpreadsheetDoc = SpreadsheetDoc;
-	SetResult(SpreadsheetDoc);
+Procedure RefreshTemplate()
+	SelectRows = Items.PrintFormConfig.SelectedRows;
+	if SelectRows.Count() > 0 then
+		For Each ItRow In SelectRows Do	
+			SelectData = Items.PrintFormConfig.RowData(ItRow);
+			Param = UniversalPrintServer.InitPrintParam(SelectData.Ref);
+			FillPropertyValues(Param, SelectData);
+			Param.DataLang = DataLang;
+			Param.LayoutLang = LayoutLang;
+			SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(Param.RefDocument, Param);
+			Param.SpreadsheetDoc = SpreadsheetDoc;
+			SelectData.DataLang = DataLang;
+			SelectData.LayoutLang = LayoutLang;
+			SelectData.SpreadsheetDoc = SpreadsheetDoc;
+		EndDo;
+	EndIf;
+	CurrentData = Items.PrintFormConfig.CurrentData;
+	if CurrentData <> Undefined Then
+		SetResult(CurrentData.SpreadsheetDoc);
+	EndIf;
+	
 EndProcedure
 
 // Set result.

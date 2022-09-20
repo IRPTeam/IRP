@@ -1443,7 +1443,42 @@ Scenario: _0154098 check company and account (in english) input by search in lin
 		Then the form attribute named "Account" became equal to "Bank account, TRY"
 	And I close all client application windows
 
+Scenario: _0154099 check partner, legal name, Partner term, company input by search in line in a document Work order (in english)
+	And I close all client application windows
+	* Open a creation form Work order
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I click the button named "FormCreate"
+	* Partner input by search in line
+		And I select from "Partner" drop-down list by "fer" string
+	* Legal name input by search in line
+		And I select from "Legal name" drop-down list by "com" string
+	* Partner term input by search in line
+		And I select from "Partner term" drop-down list by "TRY" string
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
 
+Scenario: _01540100 check partner, legal name, company input by search in line in a document Work sheet (in english)
+	And I close all client application windows
+	* Open a creation form Work sheet
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I click the button named "FormCreate"
+	* Partner input by search in line
+		And I select from "Partner" drop-down list by "fer" string
+	* Legal name input by search in line
+		And I select from "Legal name" drop-down list by "com" string
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
 
 Scenario: _01540105 check item and item key input by search in line in a document Retail return receipt (in english)
 	And I close all client application windows

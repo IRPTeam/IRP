@@ -107,9 +107,6 @@ Scenario: _0154011  check autofilling the Partner term field in Purchase return 
 	When check the autocompletion of the partner term (by vendor) in the documents of purchase/returns 
 	And I close all client application windows
 
-
-
-
 Scenario: _0154013 check autofilling the Partner term field in Sales invoice
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I click the button named "FormCreate"
@@ -128,6 +125,11 @@ Scenario: _0154015 check autofilling the Partner term field in Sales return
 	When check the autocompletion of the partner term (by customer) in the documents of sales/returns 
 	And I close all client application windows
 
+Scenario: _0154016 check autofilling the Partner term field in Work order
+	Given I open hyperlink "e1cib/list/Document.WorkOrder"
+	And I click the button named "FormCreate"
+	When check the autocompletion of the partner term (by customer) in the documents of sales/returns  
+	And I close all client application windows
 
 
 Scenario: _0154017 check autofilling item key in Sales invoice by item only with one item key
@@ -185,8 +187,6 @@ Scenario: _0154027 check autofilling item key in Unbundling by item only with on
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	And I click the button named "FormCreate"
 	When check item key autofilling in bundling/transfer documents for an item that has only one item key
-
-
 
 Scenario: _0154030 check autofilling item key in Inventory transfer by item only with one item key 
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"

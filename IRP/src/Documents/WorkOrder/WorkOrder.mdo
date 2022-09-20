@@ -293,6 +293,16 @@
           <value>Enum.BillOfMaterialsTypes.EnumValue.Work</value>
         </value>
       </choiceParameters>
+      <choiceParameters>
+        <name>Filter.Active</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <choiceParameters>
+        <name>Filter.DeletionMark</name>
+        <value xsi:type="core:BooleanValue"/>
+      </choiceParameters>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

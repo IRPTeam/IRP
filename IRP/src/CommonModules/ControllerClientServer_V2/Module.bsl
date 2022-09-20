@@ -424,6 +424,7 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	EndIf;
 	
 	// Materials
+	SettersMap.Insert("Materials.BillOfMaterials"    , "SetMaterialsBillOfMaterials");
 	SettersMap.Insert("Materials.Item"               , "SetMaterialsItem");
 	SettersMap.Insert("Materials.ItemKey"            , "SetMaterialsItemKey");
 	SettersMap.Insert("Materials.Unit"               , "SetMaterialsUnit");
@@ -5483,6 +5484,30 @@ EndProcedure
 
 #Region MATERIALS
 
+#Region MATERIALS_BILL_OF_MATERIALS
+
+// Materials.BillOfMaterials.Set
+Procedure SetMaterialsBillOfMaterials(Parameters, Results) Export
+	Binding = BindMaterialsBillOfMaterials(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Materials.BillOfMaterials.Get
+Function GetMaterialsBillOfMaterials(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindMaterialsBillOfMaterials(Parameters).DataPath, _Key);
+EndFunction
+
+// Materials.BillOfMaterials.Bind
+Function BindMaterialsBillOfMaterials(Parameters)
+	DataPath = "Materials.BillOfMaterials";
+	Binding = New Structure();
+	Binding.Insert("WorkOrder", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials");
+	Binding.Insert("WorkSheet", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region MATERIALS_ITEM
 
 // Materials.Item.OnChange
@@ -5572,6 +5597,8 @@ EndFunction
 Function BindMaterialsItemKeyBOM(Parameters)
 	DataPath = "Materials.ItemKeyBOM";
 	Binding = New Structure();
+	Binding.Insert("WorkOrder", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials");
+	Binding.Insert("WorkSheet", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5816,6 +5843,37 @@ Procedure StepMaterialsChangeIsManualChangedByItemKey(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepMaterialsChangeIsManualChangedByItemKey";
 		Chain.ChangeIsManualChangedByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_UNIQUE_ID
+
+// Materials.UniqueID.Set
+Procedure SetMaterialsUniqueID(Parameters, Results) Export
+	Binding = BindMaterialsUniqueID(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Materials.UniqueID.Bind
+Function BindMaterialsUniqueID(Parameters)
+	DataPath = "Materials.UniqueID";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Materials.UniqueID.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Step
+Procedure StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Enable = True;
+	Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Setter = "SetMaterialsUniqueID";
+	For Each Row In GetRows(Parameters, "Materials") Do
+		Options = ModelClientServer_V2.ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsOptions();		
+		Options.ItemKeyBOM      = GetMaterialsItemKeyBOM(Parameters, Row.Key);
+		Options.BillOfMaterials = GetMaterialsBillOfMaterials(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials";
+		Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Options.Add(Options);
 	EndDo;	
 EndProcedure
 

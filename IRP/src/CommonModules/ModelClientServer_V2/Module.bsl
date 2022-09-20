@@ -242,7 +242,8 @@ Function GetChain()
 	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstation" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationExecute"));
 	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstationForReturn" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationForReturnExecute"));
 	
-	Chain.Insert("ChangeIsManualChangedByItemKey" , GetChainLink("ChangeIsManualChangedByItemKeyExecute"));
+	Chain.Insert("ChangeIsManualChangedByItemKey"               , GetChainLink("ChangeIsManualChangedByItemKeyExecute"));
+	Chain.Insert("ChangeUniqueIDByItemKeyBOMAndBillOfMaterials" , GetChainLink("ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsExecute"));
 	//Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
 	
 	// Extractors
@@ -1099,6 +1100,21 @@ Function ChangeIsManualChangedByItemKeyExecute(Options) Export
 	EndIf;
 	
 	Return Options.ItemKey <> Options.ItemKeyBOM Or Options.QuantityInBaseUnit <> Options.QuantityInBaseUnitBOM; 
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_UNIQUE_ID_BY_ITEM_KEY_BOM_AND_BILL_OF_MATERIALS
+
+Function ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("ItemKeyBOM, BillOfMaterials");
+EndFunction
+
+Function ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsExecute(Options) Export
+	If Not ValueIsFilled(Options.ItemKeyBOM) Or Not ValueIsFilled(Options.BillOfMaterials) Then
+		Return "";
+	EndIf;
+	Return String(Options.ItemKeyBOM.UUID()) + "-" + String(Options.BillOfMaterials.UUID()); 
 EndFunction
 
 #EndRegion

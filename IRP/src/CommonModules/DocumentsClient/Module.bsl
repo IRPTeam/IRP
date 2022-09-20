@@ -999,7 +999,8 @@ Function GetFormItemNames()
 				|InventoryUseSerialLotNumber, AccountBalanceIsFixedCurrency,
 				|ChequeBondsKey, ChequeBondsApArPostingDetail,
 				|WorkersQuantityInBaseUnit, WorkersKey,
-				|MaterialsQuantityInBaseUnit, MaterialsQuantityInBaseUnitBOM, MaterialsKey, MaterialsKeyOwner, MaterialsIsVisible, MaterialsIsManualChanged";
+				|MaterialsQuantityInBaseUnit, MaterialsQuantityInBaseUnitBOM, MaterialsKey, MaterialsKeyOwner, MaterialsIsVisible, MaterialsIsManualChanged,
+				|MaterialsUniqueID, MaterialsBillOfMaterials";
 	Return ItemNames;
 EndFunction	
 

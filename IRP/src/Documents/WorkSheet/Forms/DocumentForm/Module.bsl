@@ -173,6 +173,11 @@ Procedure MaterialsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter
 	SetVisibleRows_Materials(False);
 EndProcedure
 
+&AtClient
+Procedure MaterialsBeforeDeleteRow(Item, Cancel)
+	DocWorkSheetClient.MaterialsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
 #Region MATERIALS_COLUMNS
 
 #Region _ITEM

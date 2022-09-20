@@ -19,13 +19,6 @@
       <value>Include to work cost</value>
     </synonym>
   </enumValues>
-  <enumValues uuid="05207cf2-4f0b-4269-8bbd-04182ce7c1b9">
-    <name>IncludeToInvoice</name>
-    <synonym>
-      <key>en</key>
-      <value>Include to invoice</value>
-    </synonym>
-  </enumValues>
   <enumValues uuid="180e21e7-5b29-4ac6-a4d5-996f9ef022b8">
     <name>NotInclude</name>
     <synonym>

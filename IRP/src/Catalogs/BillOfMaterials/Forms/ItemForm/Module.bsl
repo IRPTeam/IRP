@@ -113,13 +113,21 @@ Procedure ContentItemStartChoice(Item, ChoiceData, StandardProcessing)
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	If Object.Type = PredefinedValue("Enum.BillOfMaterialsTypes.Work") Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
+			PredefinedValue("Enum.ItemTypes.Product"), DataCompositionComparisonType.Equal));
+	EndIf;		
 	DocumentsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 &AtClient
 Procedure ContentItemEditTextChange(Item, Text, StandardProcessing)
 	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));	
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	If Object.Type = PredefinedValue("Enum.BillOfMaterialsTypes.Work") Then
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
+			PredefinedValue("Enum.ItemTypes.Product"), ComparisonType.Equal));
+	EndIf;		
 	DocumentsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 

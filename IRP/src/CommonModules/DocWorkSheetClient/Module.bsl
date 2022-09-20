@@ -126,6 +126,16 @@ Procedure MaterialsBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFol
 	ViewClient_V2.MaterialsBeforeAddRow(Object, Form, Cancel, Clone, Undefined, KeyOwner);
 EndProcedure
 
+Procedure MaterialsBeforeDeleteRow(Object, Form, Item, Cancel) Export
+	CurrentData = Form.Items.Materials.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If ValueIsFilled(CurrentData.UniqueID) Then
+		Cancel = True;
+	EndIf;
+EndProcedure
+
 #Region MATERIALS_COLUMNS
 
 #Region _ITEM

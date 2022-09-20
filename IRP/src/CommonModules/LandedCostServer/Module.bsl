@@ -104,6 +104,7 @@ Function GetArrayOfBatchDocumentTypes()
 	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
 	ArrayOfTypes.Add(Type("DocumentRef.BatchReallocateIncoming"));
 	ArrayOfTypes.Add(Type("DocumentRef.BatchReallocateOutgoing"));
+	ArrayOfTypes.Add(Type("DocumentRef.WorkSheet"));
 	Return ArrayOfTypes;
 EndFunction
 

@@ -38,6 +38,14 @@ Function GetChoiceDataTable(Parameters)
 	Return Query.Execute().Unload();	
 EndFunction
 
+Function GetRefsBySearchString(ItemRef, SearchString) Export
+	Parameters = New Structure();
+	Parameters.Insert("Filter", New Structure("Item", ItemRef));
+	Parameters.Insert("SearchString", SearchString);
+	DataTable = GetChoiceDataTable(Parameters);
+	Return DataTable.UnloadColumn("Ref");
+EndFunction
+
 Function GetRefsByProperties(TableOfProperties, Item, AddInfo = Undefined) Export
 	If Not TableOfProperties.Count() Then
 		Query = New Query();

@@ -10,12 +10,6 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <choiceParameters>
-    <name>Filter.Employee</name>
-    <value xsi:type="core:BooleanValue">
-      <value>true</value>
-    </value>
-  </choiceParameters>
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
   <content>

@@ -1036,6 +1036,17 @@ Scenario: Create document SalesInvoice objects (LC)
 		| 'e1cib/data/Document.SalesInvoice?ref=b76e892a86cabee011ebfe689f814750' | '66936526-ed4b-4416-a333-fe6b8f85e1b5' | '66936526-ed4b-4416-a333-fe6b8f85e1b5' | '9'        | ''                                                                              | ''                                            | ''         | 'e1cib/data/Catalog.RowIDs?ref=b76e892a86cabee011ebfe689f81474f' | ''                                     |
 		| 'e1cib/data/Document.SalesInvoice?ref=b76e892a86cabee011ebff4278e33c8c' | 'cd8b7357-ac7a-4da4-afb2-1d927489e725' | 'cd8b7357-ac7a-4da4-afb2-1d927489e725' | '21'       | ''                                                                              | ''                                            | ''         | 'e1cib/data/Catalog.RowIDs?ref=b76e892a86cabee011ebff4278e33c8b' | ''                                     |
 
+Scenario: Create document ItemStockAdjustment objects (LC)
+
+	And I check or create document "ItemStockAdjustment" objects:
+		| 'Ref'                                                                          | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Store'                                                          | 'Author'                                                        | 'Branch' | 'Description' |
+		| 'e1cib/data/Document.ItemStockAdjustment?ref=b785989306affb7a11ed37fda2a88545' | 'False'        | 1        | '18.09.2022 12:37:05' | 'True'   | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'e1cib/data/Catalog.Stores?ref=aa6f120ed92fbced11eaeb5cc4ba3dbe' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                          | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'Unit'                                                          | 'Quantity' | 'QuantityInBaseUnit' | 'ItemKeyWriteOff'                                                  | 'SerialLotNumber' | 'SerialLotNumberWriteOff' |
+		| 'e1cib/data/Document.ItemStockAdjustment?ref=b785989306affb7a11ed37fda2a88545' | 'eb9d932a-7bae-4db9-a477-a0c47843ebf6' | 'e1cib/data/Catalog.Items?ref=86ffd69b4676df1211ea9f66fb552ee6' | 'e1cib/data/Catalog.ItemKeys?ref=86ffd69b4676df1211ea9f6752c4ca7f' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 2          | 2                    | 'e1cib/data/Catalog.ItemKeys?ref=86ffd69b4676df1211ea9f6752c4ca7e' | ''                | ''                        |
+		| 'e1cib/data/Document.ItemStockAdjustment?ref=b785989306affb7a11ed37fda2a88545' | 'd8093a66-f415-40c3-b7cf-16b55ccf6a7a' | 'e1cib/data/Catalog.Items?ref=86ffd69b4676df1211ea9f66f09eb6c6' | 'e1cib/data/Catalog.ItemKeys?ref=86ffd69b4676df1211ea9f673d168c64' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 3          | 3                    | 'e1cib/data/Catalog.ItemKeys?ref=86ffd69b4676df1211ea9f673d168c63' | ''                | ''                        |
+
 
 Scenario: Create document SalesInvoice objects (Revenue cost allocation)
 

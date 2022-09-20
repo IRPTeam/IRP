@@ -1498,6 +1498,44 @@ Scenario: _012027 try change item from item key
 		And "Item" attribute is read-only
 		And I close all client application windows
 				
+Scenario: _012029 search for item key in the selection form
+	And I close all client application windows
+	* Open SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click "Create" button
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+	* Search for item key
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I input "gre" text in the field named "SearchString"
+	* Check
+		And "List" table contains lines
+			| 'Item key' | 'Item'  | 'Specification' |
+			| 'L/Green'  | 'Dress' | ''              |
+			| 'XL/Green' | 'Dress' | ''              |
+		Then the number of "List" table lines is "равно" "2"
+	* Search another item key
+		And I input "bl" text in the field named "SearchString"
+		And "List" table became equal
+			| 'Item key' | 'Item'  |
+			| 'XS/Blue'  | 'Dress' |
+	* Select item key
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item key' | 'Item'  |
+			| 'XS/Blue'  | 'Dress' |
+		And I close all client application windows
+				
 
 
 Scenario: _999999 close TestClient session

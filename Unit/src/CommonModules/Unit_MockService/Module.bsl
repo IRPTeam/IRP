@@ -32,13 +32,15 @@ EndFunction
 // 
 // Returns:
 //  HTTPServiceResponse - Compose answer to request
-Function ComposeAnswerToRequestStructure(RequestStructure, MockData=Undefined) Export
+Function ComposeAnswerToRequestStructure(RequestStructure, MockData=Undefined, RequestVariables=Undefined) Export
 	
 	If MockData=Undefined Then
 		MockDataInfo = getMockDataByRequest(RequestStructure);
 		MockData = MockDataInfo.MockData;
 		RequestVariables = MockDataInfo.RequestVariables;
-	Else
+	EndIf;
+	
+	If RequestVariables=Undefined Then
 		RequestVariables = getRequestVariables(RequestStructure, MockData, "");
 	EndIf;
 	
@@ -289,7 +291,7 @@ Function VariablesCheck(RequestVariables, MockData, Logs)
 	For Each VareablesItem In MockData.Request_Variables Do
 		If VareablesItem.ValueAsFilter Then
 			VariableValue = "";
-			If RequestVariables.Property(VareablesItem.VariableName, VariableValue) Then
+			If not RequestVariables.Property(VareablesItem.VariableName, VariableValue) Then
 				AddLineToLogs(Logs, "Error: Variable not found - "+VareablesItem.VariableName);
 				Return False;
 			EndIf;  
@@ -323,7 +325,7 @@ Function VariablesBodyCheck(RequestVariables, MockData, Logs)
 	For Each VareablesItem In MockData.Request_BodyVariables Do
 		If VareablesItem.ValueAsFilter Then
 			VariableValue = "";
-			If RequestVariables.Property(VareablesItem.VariableName, VariableValue) Then
+			If not RequestVariables.Property(VareablesItem.VariableName, VariableValue) Then
 				AddLineToLogs(Logs, "Error: Variable not found - "+VareablesItem.VariableName);
 				Return False;
 			EndIf;  
@@ -587,31 +589,66 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
 		Return String(DataForValue);
 	EndIf;
 	
-	CurrentDataType = ArrayOfSegments[0]; 
-	NextPath = Mid(PathToValue,StrLen(CurrentDataType)+2);
+	CurrentDataType = ArrayOfSegments[0];
+	NextPath = Mid(PathToValue, StrLen(CurrentDataType)+2);
 	
 	If TypeOf(DataForValue) = Type("String") Then
+		
 		If CurrentDataType = "[xml]" Then
 			ReaderXML = New XMLReader();
 			ReaderXML.SetString(DataForValue);
-			ValueXML = XDTOFactory.ReadXML(ReaderXML);
+			ValueXML = XDTOFactory.ReadXML(ReaderXML); // Arbitrary
 			Return getValueOfBodyVariableByPath(NextPath, ValueXML);
+			
 		ElsIf CurrentDataType = "[json]" Then
 			ReaderJSON = New JSONReader();
 			ReaderJSON.SetString(DataForValue);
 			ValueJSON = ReadJSON(ReaderJSON);
 			Return getValueOfBodyVariableByPath(NextPath, ValueJSON);
+			
+		ElsIf CurrentDataType = "[base64]" Then
+			ValueBase64 = Base64Value(DataForValue);
+			Return getValueOfBodyVariableByPath(NextPath, ValueBase64);
+			
 		Else
 			Return String(DataForValue);
+			
 		EndIf;
+	
+	ElsIf TypeOf(DataForValue) = Type("BinaryData") Then
+		
+		If CurrentDataType = "[text]" Then
+			ValueText = GetStringFromBinaryData(DataForValue);
+			Return getValueOfBodyVariableByPath(NextPath, ValueText);
+			
+		ElsIf CurrentDataType = "[zip]" Then
+			FileName = ArrayOfSegments[1];
+			NextPath = Mid(NextPath,StrLen(FileName)+2);
+	 		ReadStream = New MemoryStream(GetBinaryDataBufferFromBinaryData(DataForValue));
+	 		ZIP = New ZipFileReader(ReadStream);
+	 		TempFile = TempFilesDir() + String(New UUID);
+	 		ZIP.ExtractAll(TempFile, ZIPRestoreFilePathsMode.DontRestore);
+	 		FileName = ?(FileName="[0]", ZIP.Items[0].Name, FileName);
+	 		NewBinaryData = New BinaryData(TempFile + "/" + FileName);
+	 		ZIP.Close();
+	 		ReadStream.Close();
+	 		DeleteFiles(TempFile);
+			Return getValueOfBodyVariableByPath(NextPath, NewBinaryData);
+			
+		Else
+			Return String(DataForValue);
+			
+		EndIf;
+	
 	ElsIf Left(CurrentDataType, 1) = "[" Then
 		// TODO: Other operation 
-	Else
-		NewValue = DataForValue[CurrentDataType];
+		
+	Else // get object property 
+		PropertyValue = DataForValue[CurrentDataType]; // Arbitrary
 		If IsBlankString(NextPath) Then
-			Return String(NewValue);
+			Return String(PropertyValue);
 		Else
-			Return getValueOfBodyVariableByPath(NextPath, NewValue);
+			Return getValueOfBodyVariableByPath(NextPath, PropertyValue);
 		EndIf;
 	EndIf;
 	

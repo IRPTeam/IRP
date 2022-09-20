@@ -200,7 +200,7 @@ Procedure RunTestMockDataAtServer()
 	
 	LoadRequestVariables(RequestVariables);
 	
-	Answer = Unit_MockService.ComposeAnswerToRequestStructure(RequestStructure, MockData);
+	Answer = Unit_MockService.ComposeAnswerToRequestStructure(RequestStructure, MockData, RequestVariables);
 	LoadAnswer(Answer);
 		
 EndProcedure

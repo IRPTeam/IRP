@@ -66,6 +66,18 @@ Procedure FillPrintFormConfig(Parameter)
 			NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;
 		EndIf;
 	EndIf;
+	
+	if PrintFormConfig.Count() = 1 and Items.PrintFormConfig.Visible Then
+		Hide(Undefined);
+		CurrentData = Items.PrintFormConfig.RowData(0);
+		Items.LayoutLang.ReadOnly = not CurrentData.BuilderLayout;
+		Items.DataLang.ReadOnly = not CurrentData.BuilderLayout;
+		LayoutLang = CurrentData.LayoutLang;
+		DataLang = CurrentData.DataLang;
+		SetResult(CurrentData.SpreadsheetDoc);
+	Elsif PrintFormConfig.Count() > 1 and Not Items.PrintFormConfig.Visible then 
+		Show(Undefined);
+	EndIf; 
 EndProcedure
 
 &AtClient
@@ -90,7 +102,6 @@ Procedure DataLangOnChange(Item)
 	RefreshTemplate();
 EndProcedure
 
-
 &AtClient
 Procedure PrintFormConfigOnStartEdit(Item, NewRow, Clone)
 	if Clone Then
@@ -100,7 +111,6 @@ Procedure PrintFormConfigOnStartEdit(Item, NewRow, Clone)
 		EndIf;  
 	EndIf;
 EndProcedure
-
 
 &AtClient
 Procedure RefreshTemplate()
@@ -123,7 +133,6 @@ Procedure RefreshTemplate()
 	if CurrentData <> Undefined Then
 		SetResult(CurrentData.SpreadsheetDoc);
 	EndIf;
-	
 EndProcedure
 
 // Set result.
@@ -238,8 +247,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndIf; 
 		Items.LayoutLang.ChoiceList.Add(It.LanguageCode, It.Name);				
 		Items.DataLang.ChoiceList.Add(It.LanguageCode, It.Name);
-	EndDo; 
-	
+	EndDo;
 EndProcedure
 
 

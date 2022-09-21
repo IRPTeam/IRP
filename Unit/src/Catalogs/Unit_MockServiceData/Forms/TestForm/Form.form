@@ -70,6 +70,10 @@
     <items xsi:type="form:FormField">
       <name>MockData</name>
       <id>6</id>
+      <title>
+        <key>en</key>
+        <value>Mock data</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

@@ -4334,5 +4334,9 @@
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
     </handlers>
+    <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
+    </handlers>
   </extInfo>
 </form:Form>

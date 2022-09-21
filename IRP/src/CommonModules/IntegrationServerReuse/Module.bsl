@@ -4,6 +4,8 @@ Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Exp
 		IntegrationSettingsRef = UniqueID.UniqueIDByName(Metadata.Catalogs.IntegrationSettings, IntegrationSettingName);
 	ElsIf TypeOf(IntegrationSettingName) = Type("CatalogRef.IntegrationSettings") Then
 		IntegrationSettingsRef = IntegrationSettingName;
+	Else
+		Raise R().Error_004; 
 	EndIf;
 
 	CustomizedSetting = New Structure();

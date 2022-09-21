@@ -27,9 +27,8 @@
   <limitLevelCount>true</limitLevelCount>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
-  <codeLength>9</codeLength>
+  <codeLength>12</codeLength>
   <descriptionLength>150</descriptionLength>
-  <codeType>String</codeType>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>

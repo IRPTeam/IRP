@@ -7,7 +7,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	If Object.Ref.IsEmpty() Then
-		If Parameters.Property("Basis") and TypeOf(Parameters.Basis) = Type("CatalogRef.Unit_ServiceExchangeHistory") Then
+		If Parameters.Property("Basis") And TypeOf(Parameters.Basis) = Type("CatalogRef.Unit_ServiceExchangeHistory") Then
 			InputRequest = Parameters.Basis;  // CatalogRef.Unit_ServiceExchangeHistory
 			InputAnswer = Parameters.Basis; // CatalogRef.Unit_ServiceExchangeHistory
 			If InputAnswer.Parent.IsEmpty() Then
@@ -18,14 +18,19 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			Request_Body  = InputRequest.Body;
 			Answer_Body = InputAnswer.Body;
 		EndIf;
-	Else
-		Request_Body = Object.Ref.Request_Body;
-		Answer_Body = Object.Ref.Answer_Body; 
 	EndIf; 
 	
-	RequestBodySizePresentation = Unit_CommonFunctionsClientServer.GetSizePresentation(Object.Request_BodySize);
-	AnswerBodySizePresentation = Unit_CommonFunctionsClientServer.GetSizePresentation(Object.Answer_BodySize);
+	RequestBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Request_BodySize);
+	AnswerBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Answer_BodySize);
 
+EndProcedure
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	
+	Request_Body = CurrentObject.Request_Body;
+	Answer_Body = CurrentObject.Answer_Body;
+	 
 EndProcedure
 
 
@@ -48,7 +53,7 @@ EndProcedure
 &AtClient
 Procedure TryLoadBody(Command)
 	
-	isRequest = Left(Command.Name, 7) = "Request";
+	isRequest = StrStartsWith(Command.Name, "Request");
 	TryLoadBodyAtServer(isRequest);
 	
 EndProcedure
@@ -56,12 +61,12 @@ EndProcedure
 &AtClient
 Async Procedure SaveBody(Command)
 	
-	isRequest = Left(Command.Name, 7) = "Request";
+	isRequest = StrStartsWith(Command.Name, "Request");
 	
 	BodyRowValue = GetBodyAtServer(isRequest); // BinaryData
 	
 	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
-		ShowMessageBox(,"Empty file!");
+		ShowMessageBox(, R().Mock_001);
 		Return;
 	EndIf;
 	
@@ -71,7 +76,7 @@ Async Procedure SaveBody(Command)
 	EndIf;
 	
 	PathArray = Await FileDialog.ChooseAsync(); // Array
-	If PathArray = Undefined or PathArray.Count()=0 Then
+	If PathArray = Undefined Or PathArray.Count() = 0 Then
 		Return;
 	EndIf;
 	FullFileName = PathArray[0]; // String	
@@ -83,14 +88,7 @@ EndProcedure
 &AtClient
 Async Procedure ReloadBody(Command)
 	
-	If Object.Ref.IsEmpty() Then
-		ShowMessageBox(, "First you need to write the element!");
-		Return;
-	EndIf; 
-	
-	isRequest = Left(Command.Name, 7) = "Request";
-	
-	OldModified = Modified;
+	isRequest = StrStartsWith(Command.Name, "Request");
 	
 	SizeNewFile = 0;
 	ContentFile = Undefined;
@@ -99,7 +97,7 @@ Async Procedure ReloadBody(Command)
 	FileDialog.CheckFileExistence = True;
 	
 	PathArray = Await FileDialog.ChooseAsync(); // Array
-	If PathArray = Undefined or PathArray.Count()=0 Then
+	If PathArray = Undefined Or PathArray.Count() = 0 Then
 		Return;
 	EndIf;
 	FullFileName = PathArray[0]; // String
@@ -111,8 +109,6 @@ Async Procedure ReloadBody(Command)
 	 
 	ReloadBodyAtServer(isRequest, ContentFile, SizeNewFile);
 	
-	Modified = OldModified;
-		 
 EndProcedure
 
 #EndRegion
@@ -121,6 +117,13 @@ EndProcedure
 
 #Region Private
 
+// Get body at server.
+// 
+// Parameters:
+//  isRequest - Boolean - Is request
+// 
+// Returns:
+//  BinaryData - Get body at server
 &AtServer
 Function GetBodyAtServer(isRequest)
 	CurrentBody = ?(isRequest, Request_Body, Answer_Body); // ValueStorage
@@ -132,12 +135,12 @@ Procedure TryLoadBodyAtServer(isRequest)
 	
 	If isRequest Then
 		Prefix = "Request";
-		BodyType = Upper(Object.Request_BodyType);
+		BodyType = Object.Request_BodyType;
 		BodyIsText = Object.Request_BodyIsText;
 		BodyGroup = Items.BodyRequestPresentation;
 	Else
 		Prefix = "Answer";
-		BodyType = Upper(Object.Answer_BodyType);
+		BodyType = Object.Answer_BodyType;
 		BodyIsText = Object.Answer_BodyIsText;
 		BodyGroup = Items.BodyAnswerPresentation;
 	EndIf;
@@ -145,24 +148,17 @@ Procedure TryLoadBodyAtServer(isRequest)
 	ThisObject[Prefix+"BodyString"] = "";
 	ThisObject[Prefix+"BodyPicture"] = "";
 	
-	BodyRowValue = GetBodyAtServer(isRequest); // BinaryData
+	BodyRowValue = GetBodyAtServer(isRequest);
 	
 	If BodyIsText Then
-		ThisObject[Prefix+"BodyString"]  = GetStringFromBinaryData(BodyRowValue);
+		ThisObject[Prefix+"BodyString"] = GetStringFromBinaryData(BodyRowValue);
 		BodyGroup.CurrentPage = Items["Body"+Prefix+"AsStr"];
-		Return;
+	ElsIf StrCompare(Left(BodyType, 5), "IMAGE") = 0 Then
+		ThisObject[Prefix+"BodyPicture"] = PutToTempStorage(BodyRowValue);
+		BodyGroup.CurrentPage = Items["Body"+Prefix+"AsPic"];
+	Else
+		BodyGroup.CurrentPage = Items["Body"+Prefix+"AsFile"];
 	EndIf;
-	
-	If Left(BodyType, 5) = "IMAGE" Then
-		//@skip-check empty-except-statement
-		Try
-			ThisObject[Prefix+"BodyPicture"] = PutToTempStorage(BodyRowValue);
-			BodyGroup.CurrentPage = Items["Body"+Prefix+"AsPic"];
-			Return;
-		Except EndTry;				
-	EndIf;
-	
-	BodyGroup.CurrentPage = Items["Body"+Prefix+"AsFile"];
 	
 EndProcedure
 
@@ -180,7 +176,7 @@ Procedure ReloadBodyAtServer(isRequest, NewContent, Newsize)
 		Object.Answer_BodySize = Newsize;
 	EndIf;
 	
-	ThisObject[Prefix+"BodySizePresentation"] = Unit_CommonFunctionsClientServer.GetSizePresentation(Newsize);
+	ThisObject[Prefix+"BodySizePresentation"] = CommonFunctionsClientServer.GetSizePresentation(Newsize);
 	
 	TryLoadBodyAtServer(isRequest);
 	

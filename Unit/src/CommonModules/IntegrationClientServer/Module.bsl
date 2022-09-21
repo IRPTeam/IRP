@@ -38,7 +38,7 @@ Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, Req
 	If Number(ConnectionSetting.Port) > 0 Then
 		Description = Description + ":" + Format(Number(ConnectionSetting.Port), "NG=;");
 	EndIf;
-	If Left(ResourceAddress, 1) <> "/" Then
+	If Not StrStartsWith(ResourceAddress, "/") Then
 		Description = Description + "/";
 	EndIf;
 	Description = Description + ResourceAddress;

@@ -16,13 +16,13 @@ EndFunction
 Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 
 	// Bodies and hashs preparation
-	RequestBody = ?(TypeOf(ServiceExchangeData.RequestBody)=Type("String"),
+	RequestBody = ?(TypeOf(ServiceExchangeData.RequestBody) = Type("String"),
 			GetBinaryDataFromString(ServiceExchangeData.RequestBody),
 			ServiceExchangeData.RequestBody);
 	BodyMD5 = CommonFunctionsServer.GetMD5(RequestBody);
 	HeadersMD5 = CommonFunctionsServer.GetMD5(ServiceExchangeData.Headers);
 	
-	AnswerBody = ?(TypeOf(ServiceExchangeData.ServerResponse.ResponseBody)=Type("String"),
+	AnswerBody = ?(TypeOf(ServiceExchangeData.ServerResponse.ResponseBody) = Type("String"),
 			GetBinaryDataFromString(ServiceExchangeData.ServerResponse.ResponseBody),
 			ServiceExchangeData.ServerResponse.ResponseBody);
 	AnswerBodyMD5 = CommonFunctionsServer.GetMD5(AnswerBody);
@@ -75,7 +75,7 @@ Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 		NewQuery.Headers = New ValueStorage(ServiceExchangeData.Headers);
 		NewQuery.BodyMD5 = BodyMD5;
 		NewQuery.Body = New ValueStorage(RequestBody);
-		NewQuery.BodyIsText = (TypeOf(ServiceExchangeData.RequestBody)=Type("String"));
+		NewQuery.BodyIsText = (TypeOf(ServiceExchangeData.RequestBody) = Type("String"));
 		
 		BodyInfo = Unit_GetBodyInfo(RequestBody, ServiceExchangeData.Headers);
 		NewQuery.BodySize = BodyInfo.Size;  
@@ -120,7 +120,7 @@ Procedure Unit_SaveServiceExchangeData(ServiceExchangeData) Export
 	NewAnswer.HeadersMD5 = AnswerHeadersMD5;
 	NewAnswer.Body = New ValueStorage(AnswerBody);
 	NewAnswer.BodyMD5 = AnswerBodyMD5;
-	NewAnswer.BodyIsText = (TypeOf(ServiceExchangeData.ServerResponse.ResponseBody)=Type("String"));
+	NewAnswer.BodyIsText = (TypeOf(ServiceExchangeData.ServerResponse.ResponseBody) = Type("String"));
 	
 	BodyInfo = Unit_GetBodyInfo(AnswerBody, ServiceExchangeData.ServerResponse.Headers);
 	NewAnswer.BodySize = BodyInfo.Size;  

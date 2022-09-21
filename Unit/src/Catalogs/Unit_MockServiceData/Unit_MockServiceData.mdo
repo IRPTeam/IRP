@@ -22,9 +22,8 @@
   <hierarchical>true</hierarchical>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
-  <codeLength>9</codeLength>
+  <codeLength>12</codeLength>
   <descriptionLength>150</descriptionLength>
-  <codeType>String</codeType>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
@@ -480,9 +479,7 @@
       </synonym>
       <type>
         <types>String</types>
-        <stringQualifiers>
-          <length>100</length>
-        </stringQualifiers>
+        <stringQualifiers/>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

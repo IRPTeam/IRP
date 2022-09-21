@@ -20,8 +20,9 @@ EndProcedure
 &AtClient
 Procedure RunTestMockData(Command)
 	ClearPreviousData();
-	If not ValueIsFilled(MockData) Then
-		ShowMessageBox(, "Select mock data element");
+	If Not ValueIsFilled(MockData) Then
+		CommonFunctionsClientServer.ShowUsersMessage(
+				StrTemplate(R().Error_010, Items.MockData.Title), "MockData", ThisObject);
 		Return;
 	EndIf;
 	RunTestMockDataAtServer();
@@ -40,10 +41,10 @@ EndProcedure
 &AtClient
 Async Procedure SaveBody(Command)
 	
-	BodyRowValue = GetBodyAtServer(); // BinaryData
+	BodyRowValue = GetBodyAtServer();
 	
 	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
-		ShowMessageBox(,"Empty file!");
+		ShowMessageBox(, R().Mock_001);
 		Return;
 	EndIf;
 	
@@ -53,7 +54,7 @@ Async Procedure SaveBody(Command)
 	EndIf;
 	
 	PathArray = Await FileDialog.ChooseAsync(); // Array
-	If PathArray = Undefined or PathArray.Count()=0 Then
+	If PathArray = Undefined Or PathArray.Count() = 0 Then
 		Return;
 	EndIf;
 	FullFileName = PathArray[0]; // String	
@@ -67,6 +68,10 @@ EndProcedure
 
 #Region Private
 
+// Get body at server.
+// 
+// Returns:
+//  BinaryData - Get body at server
 &AtServer
 Function GetBodyAtServer()
 	CurrentBody = Answer_Body; // ValueStorage
@@ -79,30 +84,22 @@ EndFunction
 &AtServer
 Procedure TryLoadBodyAtServer()
 	
-	BodyType = Upper(AnswerBodyType);
 	BodyGroup = Items.BodyAnswerPresentation;
 	
 	AnswerBodyString = "";
 	AnswerBodyPicture = "";
 	
-	BodyRowValue = GetBodyAtServer(); // BinaryData
+	BodyRowValue = GetBodyAtServer();
 	
 	If AnswerBodyIsText Then
 		AnswerBodyString = GetStringFromBinaryData(BodyRowValue);
 		BodyGroup.CurrentPage = Items.BodyAnswerAsStr;
-		Return;
+	ElsIf StrCompare(Left(AnswerBodyType, 5), "IMAGE") = 0 Then
+		AnswerBodyPicture = PutToTempStorage(BodyRowValue);
+		BodyGroup.CurrentPage = Items.BodyAnswerAsPic;
+	Else
+		BodyGroup.CurrentPage = Items.BodyAnswerAsFile;
 	EndIf;
-	
-	If Left(BodyType, 5) = "IMAGE" Then
-		//@skip-check empty-except-statement
-		Try
-			AnswerBodyPicture = PutToTempStorage(BodyRowValue);
-			BodyGroup.CurrentPage = Items.BodyAnswerAsPic;
-			Return;
-		Except EndTry;				
-	EndIf;
-	
-	BodyGroup.CurrentPage = Items.BodyAnswerAsFile;
 	
 EndProcedure
 
@@ -139,7 +136,9 @@ Procedure RunTestMockDataAtServer()
 			If EqualPosition > 1 Then
 				RequestOptions.Insert(OptionsSegment, "");
 			Else
-				RequestOptions.Insert(TrimAll(Mid(OptionsSegment,1,EqualPosition-1)), TrimAll(Mid(OptionsSegment,EqualPosition+1)));
+				RequestOptions.Insert(
+					TrimAll(Mid(OptionsSegment, 1, EqualPosition-1)), 
+					TrimAll(Mid(OptionsSegment, EqualPosition+1)));
 			EndIf;
 		EndDo;
 	EndIf;
@@ -194,7 +193,7 @@ Procedure RunTestMockDataAtServer()
 	
 	CheckingResult = Unit_MockService.CheckRequestToMockData(RequestStructure, MockStructure, RequestVariables);
 	Logs = CheckingResult.Logs;
-	If not CheckingResult.Successfully Then
+	If Not CheckingResult.Successfully Then
 		Return;
 	EndIf;
 	
@@ -245,11 +244,11 @@ Procedure LoadAnswer(Answer)
 	AnswerBodyIsText = True;
 	AnswerBodyType = String(Answer.Headers.Get("Content-Type"));
 	ArrayOfSegments = StrSplit(AnswerBodyType, "/");
-	If ArrayOfSegments.Count() >= 1 And Upper(TrimAll(ArrayOfSegments[0])) = "IMAGE" Then
+	If ArrayOfSegments.Count() >= 1 And StrCompare(ArrayOfSegments[0], "IMAGE") = 0 Then
 		AnswerBodyIsText = False;
 	EndIf;
 
-	AnswerBodySizePresentation = Unit_CommonFunctionsClientServer.GetSizePresentation(AnswerBodySize);
+	AnswerBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(AnswerBodySize);
 	
 EndProcedure
 

@@ -1,6 +1,8 @@
 // @strict-types
 
 
+#Region Public
+
 #Region Info
 
 Function Tests() Export
@@ -9,8 +11,6 @@ Function Tests() Export
 EndFunction
 
 #EndRegion
-
-#Region Public
 
 // Compose answer to request.
 // 
@@ -44,18 +44,18 @@ EndFunction
 //  HTTPServiceResponse - Compose answer to request
 Function ComposeAnswerToRequestStructure(RequestStructure, MockData=Undefined, RequestVariables=Undefined) Export
 	
-	If MockData=Undefined Then
+	If MockData = Undefined Then
 		MockDataInfo = getMockDataByRequest(RequestStructure);
 		MockData = MockDataInfo.MockData;
 		RequestVariables = MockDataInfo.RequestVariables;
 	EndIf;
 	
-	If RequestVariables=Undefined Then
+	If RequestVariables = Undefined Then
 		RequestVariables = getRequestVariables(RequestStructure, MockData, "");
 	EndIf;
 	
-	If not ValueIsFilled(MockData) Then
-		Return New HTTPServiceResponse(404, "Not Found");
+	If Not ValueIsFilled(MockData) Then
+		Return New HTTPServiceResponse(404, R().Mock_002);
 	EndIf;
 	
 	Response = New HTTPServiceResponse(MockData.Answer_StatusCode, MockData.Answer_Message);
@@ -95,25 +95,25 @@ Function CheckRequestToMockData(RequestStructure, Selection, RequestVariables) E
 	
 	Result = New Structure("Successfully, Logs", False, "");
 	
-	If not AddressCheck(RequestStructure.Address, Selection.Address, Result.Logs) Then
+	If Not AddressCheck(RequestStructure.Address, Selection.Address, Result.Logs) Then
 		Return Result;
 	EndIf;
 	
 	MockDataRef = Selection.Ref; // CatalogRef.Unit_MockServiceData
-	If Selection.isHeaderFilter and not HeadersCheck(RequestStructure.Headers, MockDataRef, Result.Logs) Then
+	If Selection.isHeaderFilter And Not HeadersCheck(RequestStructure.Headers, MockDataRef, Result.Logs) Then
 		Return Result;
 	EndIf;
 	
-	If Selection.BodyAsFilter and not BodyCheck(RequestStructure, Selection.BodyMD5, Result.Logs) Then
+	If Selection.BodyAsFilter And Not BodyCheck(RequestStructure, Selection.BodyMD5, Result.Logs) Then
 		Return Result;
 	EndIf;
 	
-	If Selection.isVariablesFilter or Selection.isVariablesBodyFilter Then
+	If Selection.isVariablesFilter Or Selection.isVariablesBodyFilter Then
 		RequestVariables = getRequestVariables(RequestStructure, MockDataRef, Result.Logs);
-		If Selection.isVariablesFilter and not VariablesCheck(RequestVariables, MockDataRef, Result.Logs) Then
+		If Selection.isVariablesFilter And Not VariablesCheck(RequestVariables, MockDataRef, Result.Logs) Then
 			Return Result;
 		EndIf;
-		If Selection.isVariablesBodyFilter and not VariablesBodyCheck(RequestVariables, MockDataRef, Result.Logs) Then
+		If Selection.isVariablesBodyFilter And Not VariablesBodyCheck(RequestVariables, MockDataRef, Result.Logs) Then
 			Return Result;
 		EndIf;
 	EndIf;
@@ -122,7 +122,7 @@ Function CheckRequestToMockData(RequestStructure, Selection, RequestVariables) E
 		RequestVariables = getRequestVariables(RequestStructure, MockDataRef, Result.Logs);
 	EndIf;
 	
-	AddLineToLogs(Result.Logs, "All checks passed successfully", True);
+	AddLineToLogs(Result.Logs, R().Mock_012, True);
 	Result.Successfully = True;
 	Return Result;
 	
@@ -186,15 +186,15 @@ EndFunction
 //  Boolean - address matches
 Function AddressCheck(Address, Pattern, Logs)
 
-	AddLineToLogs(Logs, "Start address check", True);
-	AddLineToLogs(Logs, "Input address: "+Address);
-	AddLineToLogs(Logs, "Pattern address: "+Pattern);
+	AddLineToLogs(Logs, R().Mock_004, True);
+	AddLineToLogs(Logs, StrTemplate("%1: %2", R().Mock_024, Address));
+	AddLineToLogs(Logs, StrTemplate("%1: %2", R().Mock_025, Pattern));
 
 	AddressParts = StrSplit(Address, "/", False);
 	PatternParts = StrSplit(Pattern, "/", False);
 	
 	If AddressParts.Count() < PatternParts.Count() Then
-		AddLineToLogs(Logs, "Error: There are more parts in the address pattern");
+		AddLineToLogs(Logs, R().Mock_013);
 		Return False;
 	Else
 		NumberExtraSections = AddressParts.Count() - PatternParts.Count();
@@ -204,16 +204,16 @@ Function AddressCheck(Address, Pattern, Logs)
 		EndDo; 
 	EndIf;
 	
-	For index = 0 To AddressParts.Count()-1 Do
+	For index = 0 To AddressParts.Count() - 1 Do
 		If Not StringEqualsCheck(AddressParts[index], PatternParts[index]) Then
-			AddLineToLogs(Logs, "Error: Difference in "+(index+1)+"-th part of the address");
-			AddLineToLogs(Logs, " * Required value: "+PatternParts[index]);
-			AddLineToLogs(Logs, " * Found value: "+AddressParts[index]);
+			AddLineToLogs(Logs, StrTemplate(R().Mock_014, index+1));
+			AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_022, PatternParts[index]));
+			AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_023, AddressParts[index]));
 			Return False;
 		EndIf;
 	EndDo;
 
-	AddLineToLogs(Logs, "Check passed successfully");
+	AddLineToLogs(Logs, R().Mock_011);
 	Return True;
 	
 EndFunction 
@@ -230,28 +230,30 @@ EndFunction
 //  Boolean - address matches
 Function HeadersCheck(Headers, MockData, Logs)
 	
-	AddLineToLogs(Logs, "Start headers check", True);
+	AddLineToLogs(Logs, R().Mock_005, True);
 	
 	For Each MockHeaderItem In MockData.Request_Headers Do
-		If MockHeaderItem.ValueAsFilter and ValueIsFilled(MockHeaderItem.Value) Then
+		
+		If MockHeaderItem.ValueAsFilter And ValueIsFilled(MockHeaderItem.Value) Then
 			
 			HeadersValue = Headers.Get(MockHeaderItem.Key); //String
 			If HeadersValue = Undefined Then
-				AddLineToLogs(Logs, "Error: Header not found - "+MockHeaderItem.Key);
+				AddLineToLogs(Logs, StrTemplate(R().Mock_015, MockHeaderItem.Key));
 				Return False;
 			EndIf;  
 			
 			If Not StringEqualsCheck(HeadersValue, MockHeaderItem.Value) Then
-				AddLineToLogs(Logs, "Error: Difference in meaning of header - "+MockHeaderItem.Key);
-				AddLineToLogs(Logs, " * Required value: "+MockHeaderItem.Value);
-				AddLineToLogs(Logs, " * Found value: "+HeadersValue);
+				AddLineToLogs(Logs, StrTemplate(R().Mock_016, MockHeaderItem.Key));
+				AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_022, MockHeaderItem.Value));
+				AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_023, HeadersValue));
 				Return False;
 			EndIf;
 
-		EndIf; 
+		EndIf;
+		 
 	EndDo;
 	
-	AddLineToLogs(Logs, "Check passed successfully");
+	AddLineToLogs(Logs, R().Mock_011);
 	Return True;
 	
 EndFunction 
@@ -267,20 +269,20 @@ EndFunction
 //  Boolean - Body checked
 Function BodyCheck(RequestStructure, MockBodyMD5, Logs)
 	
-	AddLineToLogs(Logs, "Start body check", True);
+	AddLineToLogs(Logs, R().Mock_006, True);
 	
 	BodyBinaryMD5 = CommonFunctionsServer.GetMD5(RequestStructure.BodyBinary);
 	BodyStringMD5 = CommonFunctionsServer.GetMD5(GetBinaryDataFromString(RequestStructure.BodyString));
 	
-	If BodyBinaryMD5 <> MockBodyMD5 and BodyStringMD5 <> MockBodyMD5 Then
-		AddLineToLogs(Logs, "Error: Difference in meaning of MD5");
-		AddLineToLogs(Logs, " * Required value: "+MockBodyMD5);
-		AddLineToLogs(Logs, " * MD5 binary: "+BodyBinaryMD5);
-		AddLineToLogs(Logs, " * MD5 string: "+BodyStringMD5);
+	If BodyBinaryMD5 <> MockBodyMD5 And BodyStringMD5 <> MockBodyMD5 Then
+		AddLineToLogs(Logs, R().Mock_017);
+		AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_022, MockBodyMD5));
+		AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_018, BodyBinaryMD5));
+		AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_019, BodyStringMD5));
 		Return False;
 	EndIf;
 	
-	AddLineToLogs(Logs, "Check passed successfully");
+	AddLineToLogs(Logs, R().Mock_011);
 	Return True;
 	
 EndFunction
@@ -296,25 +298,25 @@ EndFunction
 //  Boolean - Variables checked
 Function VariablesCheck(RequestVariables, MockData, Logs)
 	
-	AddLineToLogs(Logs, "Start variables check", True);
+	AddLineToLogs(Logs, R().Mock_007, True);
 	
 	For Each VareablesItem In MockData.Request_Variables Do
 		If VareablesItem.ValueAsFilter Then
 			VariableValue = "";
-			If not RequestVariables.Property(VareablesItem.VariableName, VariableValue) Then
-				AddLineToLogs(Logs, "Error: Variable not found - "+VareablesItem.VariableName);
+			If Not RequestVariables.Property(VareablesItem.VariableName, VariableValue) Then
+				AddLineToLogs(Logs, StrTemplate(R().Mock_020, VareablesItem.VariableName));
 				Return False;
 			EndIf;  
 			If Not StringEqualsCheck(VariableValue, VareablesItem.Value) Then
-				AddLineToLogs(Logs, "Error: Difference in meaning of variable - "+VareablesItem.VariableName);
-				AddLineToLogs(Logs, " * Required value: "+VareablesItem.Value);
-				AddLineToLogs(Logs, " * Found value: "+VariableValue);
+				AddLineToLogs(Logs, StrTemplate(R().Mock_021, VareablesItem.VariableName));
+				AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_022, VareablesItem.Value));
+				AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_023, VariableValue));
 				Return False;
 			EndIf;  
 		EndIf; 
 	EndDo;
 	
-	AddLineToLogs(Logs, "Check passed successfully");
+	AddLineToLogs(Logs, R().Mock_011);
 	Return True;
 	
 EndFunction
@@ -330,25 +332,25 @@ EndFunction
 //  Boolean - Body variables checked
 Function VariablesBodyCheck(RequestVariables, MockData, Logs)
 	
-	AddLineToLogs(Logs, "Start body's variables check", True);
+	AddLineToLogs(Logs, R().Mock_008, True);
 	
 	For Each VareablesItem In MockData.Request_BodyVariables Do
 		If VareablesItem.ValueAsFilter Then
 			VariableValue = "";
-			If not RequestVariables.Property(VareablesItem.VariableName, VariableValue) Then
-				AddLineToLogs(Logs, "Error: Variable not found - "+VareablesItem.VariableName);
+			If Not RequestVariables.Property(VareablesItem.VariableName, VariableValue) Then
+				AddLineToLogs(Logs, StrTemplate(R().Mock_020, VareablesItem.VariableName));
 				Return False;
 			EndIf;  
 			If Not StringEqualsCheck(VariableValue, VareablesItem.Value) Then
-				AddLineToLogs(Logs, "Error: Difference in meaning of variable - "+VareablesItem.VariableName);
-				AddLineToLogs(Logs, " * Required value: "+VareablesItem.Value);
-				AddLineToLogs(Logs, " * Found value: "+VariableValue);
+				AddLineToLogs(Logs, StrTemplate(R().Mock_021, VareablesItem.VariableName));
+				AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_022, VareablesItem.Value));
+				AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_023, VariableValue));
 				Return False;
 			EndIf;  
 		EndIf; 
 	EndDo;
 	
-	AddLineToLogs(Logs, "Check passed successfully");
+	AddLineToLogs(Logs, R().Mock_011);
 	Return True;
 	
 EndFunction
@@ -507,7 +509,6 @@ Function getMockDataByRequest(RequestStructure)
 			Result.RequestVariables = RequestVariables;
 			Break;
 		EndIf;  
-		
 	EndDo;
 	
 	Return Result;
@@ -525,21 +526,21 @@ EndFunction
 //  Structure - request variables
 Function getRequestVariables(RequestStructure, MockData, Logs)
 	
-	AddLineToLogs(Logs, "Start getting variables from the request", True);
+	AddLineToLogs(Logs, R().Mock_009, True);
 	
 	Result = new Structure;
 	For Each Element In MockData.Request_Variables Do
 		RequestValue = RequestStructure.Options.Get(Element.VariableName);
 		If ValueIsFilled(RequestValue) Then
 			Result.Insert(Element.VariableName, RequestValue);
-			AddLineToLogs(Logs, "Found out - "+Element.VariableName);
+			AddLineToLogs(Logs, StrTemplate("%1 - %2", R().Mock_003, Element.VariableName));
 		Else
-			AddLineToLogs(Logs, "Not Found - "+Element.VariableName);
+			AddLineToLogs(Logs, StrTemplate("%1 - %2", R().Mock_002, Element.VariableName));
 		EndIf;
 	EndDo;
 	
 	For Each Element In MockData.Request_BodyVariables Do
-		AddLineToLogs(Logs, "Calculation of "+Element.VariableName);
+		AddLineToLogs(Logs, StrTemplate(R().Mock_010, Element.VariableName));
 		RequestValue = getValueOfBodyVariable(RequestStructure, Element.PathToValue, Element.Value, Result);
 		Result.Insert(Element.VariableName, RequestValue);
 	EndDo;
@@ -584,9 +585,9 @@ EndFunction
 Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
 	
 	If isFirst Then
-		If Left(PathToValue, 6) = "[text]" Then
+		If StrStartsWith(PathToValue, "[text]") Then
 			Return getValueOfBodyVariableByPath(Mid(PathToValue,8), DataForValue.BodyString);
-		ElsIf Left(PathToValue, 6) = "[file]" Then
+		ElsIf StrStartsWith(PathToValue, "[file]") Then
 			Return getValueOfBodyVariableByPath(Mid(PathToValue,8), DataForValue.BodyBinary);
 		Else
 			Return "";
@@ -633,7 +634,7 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
 			
 		ElsIf CurrentDataType = "[zip]" Then
 			FileName = ArrayOfSegments[1];
-			NextPath = Mid(NextPath,StrLen(FileName)+2);
+			NextPath = Mid(NextPath, StrLen(FileName)+2);
 	 		ReadStream = New MemoryStream(GetBinaryDataBufferFromBinaryData(DataForValue));
 	 		ZIP = New ZipFileReader(ReadStream);
 	 		TempFile = TempFilesDir() + String(New UUID);
@@ -650,7 +651,7 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
 			
 		EndIf;
 	
-	ElsIf Left(CurrentDataType, 1) = "[" Then
+	ElsIf StrStartsWith(CurrentDataType, "[") Then
 		// TODO: Other operation 
 		
 	Else // get object property 
@@ -680,8 +681,8 @@ Function TransformationValue(SomeValue, RequestVariables)
 		Return "";
 	EndIF;
 	
-	IF StrLen(SomeValue) > 6 and Left(SomeValue, 3) = "$$$" and Right(SomeValue, 3) = "$$$" Then
-		KeyName = Mid(SomeValue, 4, StrLen(SomeValue)-4);
+	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "$$$") And StrEndsWith(SomeValue, "$$$") Then
+		KeyName = Mid(SomeValue, 4, StrLen(SomeValue)-6);
 		Try
 			Return RequestVariables[KeyName];
 		Except
@@ -689,7 +690,7 @@ Function TransformationValue(SomeValue, RequestVariables)
 		EndTry; 
 	EndIf;
 	 
-	IF StrLen(SomeValue) > 6 and Left(SomeValue, 3) = "{{{" and Right(SomeValue, 3) = "}}}" Then
+	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "{{{") And StrEndsWith(SomeValue, "}}}") Then
 		Params = CommonFunctionsServer.GetRecalculateExpressionParams();
 		Params.Eval = True;
 		Params.SafeMode = True;

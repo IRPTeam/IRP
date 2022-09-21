@@ -16,13 +16,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndDo;
 	EndIf;
 	
-	If Object.Parent.IsEmpty() Then			// Request
+	If Object.Parent.IsEmpty() Then	// Request
 		Items.GroupAnswer.Visible = False;
-	Else									// Answer
+	Else							// Answer
 		Items.GroupRequest.Visible = False;
 	EndIf;
 	
-	BodySizePresentation = Unit_CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
+	BodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
 	
 EndProcedure
 
@@ -33,10 +33,10 @@ EndProcedure
 &AtClient
 Async Procedure SaveBody(Command)
 	
-	BodyRowValue = GetBodyAtServer(); // BinaryData
+	BodyRowValue = GetBodyAtServer();
 	
 	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
-		ShowMessageBox(,"Empty file!");
+		ShowMessageBox(, R().Mock_001);
 		Return;
 	EndIf;
 	
@@ -46,7 +46,7 @@ Async Procedure SaveBody(Command)
 	EndIf;
 	
 	PathArray = Await FileDialog.ChooseAsync(); // Array
-	If PathArray = Undefined or PathArray.Count()=0 Then
+	If PathArray = Undefined Or PathArray.Count() = 0 Then
 		Return;
 	EndIf;
 	FullFileName = PathArray[0]; // String	
@@ -72,7 +72,7 @@ Async Procedure ReloadBody(Command)
 	FileDialog.CheckFileExistence = True;
 	
 	PathArray = Await FileDialog.ChooseAsync(); // Array
-	If PathArray = Undefined or PathArray.Count()=0 Then
+	If PathArray = Undefined Or PathArray.Count() = 0 Then
 		Return;
 	EndIf;
 	FullFileName = PathArray[0]; // String
@@ -92,6 +92,10 @@ EndProcedure
 
 #Region Private
 
+// Get body at server.
+// 
+// Returns:
+//  BinaryData - Get body at server
 &AtServer
 function GetBodyAtServer()
 	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
@@ -109,25 +113,15 @@ Procedure TryLoadBodyAtServer()
 	
 	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
 		Items.BodyPresentation.CurrentPage = Items.BodyAsFile;
-		Return;
-	EndIf;
-	
-	If Object.BodyIsText Then
+	ElsIf Object.BodyIsText Then
 		BodyString = GetStringFromBinaryData(BodyRowValue);
 		Items.BodyPresentation.CurrentPage = Items.BodyAsStr;
-		Return;
+	ElsIf StrCompare(Left(Object.BodyType, 5), "IMAGE") = 0 Then
+		BodyPicture = PutToTempStorage(BodyRowValue);
+		Items.BodyPresentation.CurrentPage = Items.BodyAsPic;
+	Else
+		Items.BodyPresentation.CurrentPage = Items.BodyAsFile;
 	EndIf;
-	
-	If Upper(Left(Object.BodyType, 5)) = "IMAGE" Then
-		//@skip-check empty-except-statement
-		Try
-			BodyPicture = PutToTempStorage(BodyRowValue);
-			Items.BodyPresentation.CurrentPage = Items.BodyAsPic;
-			Return;
-		Except EndTry;				
-	EndIf;
-	
-	Items.BodyPresentation.CurrentPage = Items.BodyAsFile;
 	
 EndProcedure
 
@@ -149,7 +143,7 @@ Procedure ReloadBodyAtServer(NewContent, Newsize)
 	
 	ValueToFormData(RealObject, Object);
 	
-	BodySizePresentation = Unit_CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
+	BodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
 	
 	TryLoadBodyAtServer();
 	

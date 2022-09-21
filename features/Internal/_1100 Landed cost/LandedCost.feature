@@ -2076,7 +2076,8 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 		And I move to "Other" tab
 		And I input "10.08.2021 16:00:00" text in "Date" field
 		And I move to the next attribute
-		// And I click "OK" button
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button
 		And I click "Post and close" button
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
@@ -2214,6 +2215,11 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button
 			And I input "5" text in "Number" field
+			And I move to "Item list" tab
+			And I activate "Price" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "1 000,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table	
 			And I click "Post and close" button
 		* Batches calculation
 			Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"

@@ -58,11 +58,12 @@ Procedure FillPrintFormConfig(Parameter)
 		NewStr.LayoutLang	= Parameter.LayoutLang;
 		NewStr.DataLang		= Parameter.DataLang;
 		NewStr.NameTemplate = NameTemplate;
-		NewStr.Template		= UniversalPrintServer.GetSynonymTemplate(RefDoc, NameTemplate);
 		NewStr.Ref			= Parameter.RefDocument;
 		if Parameter.BuilderLayout then
+			NewStr.Template		  = UniversalPrintServer.GetSynonymTemplate(RefDoc, NameTemplate);
 			NewStr.SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(RefDoc, Parameter);
 		else
+			NewStr.Template		  = NameTemplate;
 			NewStr.SpreadsheetDoc = Parameter.SpreadsheetDoc;
 		EndIf;
 	EndIf;

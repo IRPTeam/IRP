@@ -13,4 +13,6 @@
   <content>Catalog.ExternalFunctions</content>
   <content>InformationRegister.JobQueue</content>
   <content>Constant.MaximumServerDifficultLevel</content>
+  <content>DataProcessor.AnalyseXDTO</content>
+  <content>CommonModule.ConvertXDTO</content>
 </mdclass:Subsystem>

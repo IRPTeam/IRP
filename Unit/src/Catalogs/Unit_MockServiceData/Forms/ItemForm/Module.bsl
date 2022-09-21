@@ -66,7 +66,7 @@ Async Procedure SaveBody(Command)
 	BodyRowValue = GetBodyAtServer(isRequest); // BinaryData
 	
 	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
-		ShowMessageBox(, R().Mock_001);
+		ShowMessageBox(, R().Mock_Info_EmptyFile);
 		Return;
 	EndIf;
 	

@@ -248,6 +248,7 @@
   <commonModules>CommonModule.CommonFunctionsServer</commonModules>
   <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
   <commonModules>CommonModule.ControllerServer_V2</commonModules>
+  <commonModules>CommonModule.ConvertXDTO</commonModules>
   <commonModules>CommonModule.CreditLimitsServer</commonModules>
   <commonModules>CommonModule.CurrenciesClient</commonModules>
   <commonModules>CommonModule.CurrenciesClientServer</commonModules>
@@ -274,6 +275,8 @@
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
+  <commonModules>CommonModule.DocConsolidatedRetailSalesClient</commonModules>
+  <commonModules>CommonModule.DocConsolidatedRetailSalesServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
@@ -419,8 +422,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.DocConsolidatedRetailSalesClient</commonModules>
-  <commonModules>CommonModule.DocConsolidatedRetailSalesServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -814,7 +815,9 @@
   <reports>Report.OffsetOfAdvances</reports>
   <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
+  <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
+  <dataProcessors>DataProcessor.CreateSerialLotNumbers</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.FunctionalOptionSettings</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
@@ -824,7 +827,6 @@
   <dataProcessors>DataProcessor.Procurement</dataProcessors>
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
-  <dataProcessors>DataProcessor.CreateSerialLotNumbers</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

@@ -372,23 +372,28 @@ Function GetStyleByName(Name) Export
 	Return StyleColors[Name];
 EndFunction
 
-// Get m d5.
+// Get MD5.
 // 
 // Parameters:
 //  Object - Arbitrary - Object
+//  ReturnAsGUID - Boolean
 // 
 // Returns:
 //  String - Get MD5
-Function GetMD5(Object) Export
+Function GetMD5(Object, ReturnAsGUID = True) Export
 	DataToString = ValueToStringInternal(Object);
 	DataHashing = New DataHashing(HashFunction.MD5);
 	DataHashing.Append(DataToString);
 	HashSumString = StrReplace(String(DataHashing.HashSum), " ", "");
-	HashSumStringUUID = Left(HashSumString, 8) 	  + "-" + 
+	If ReturnAsGUID Then
+		HashSumStringUUID = Left(HashSumString, 8) 	  + "-" + 
 						Mid(HashSumString, 9, 4)  + "-" + 
 						Mid(HashSumString, 15, 4) + "-" + 
 						Mid(HashSumString, 18, 4) + "-" + 
 						Right(HashSumString, 12);
+	Else
+		HashSumStringUUID = HashSumString;
+	EndIf;
 	Return Upper(HashSumStringUUID);
 EndFunction
 
@@ -461,6 +466,78 @@ Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
 	NotSeparate = Attr.DataSeparation = Metadata.ObjectProperties.CommonAttributeDataSeparation.DontUse;
 		
 	Return (UseAtContent Or AutoUseAndUseAtContent) And NotSeparate;
+EndFunction
+
+// Base64 from string.
+// 
+// Parameters:
+//  String - String - String
+//  ReturnBinary - Boolean - Return binary
+// 
+// Returns:
+//  String, BinaryData - Base64 from string
+Function Base64FromString(String, ReturnBinary = False) Export
+	
+	MemoryStream = New MemoryStream();
+	DataWriter = New DataWriter(MemoryStream, TextEncoding.UTF8);
+	DataWriter.WriteLine(String);
+	DataWriter.Close();
+	BD = MemoryStream.CloseAndGetBinaryData();
+	
+	If ReturnBinary Then
+		Return BD;
+	Else
+		Return Base64String(BD);
+	EndIf;
+	
+EndFunction
+
+// String to base64 ZIP.
+// 
+// Parameters:
+//  String - String - String
+//  FileName - String - File name
+//  ReturnBinary - Boolean - Return binary
+// 
+// Returns:
+//  String, BinaryData - String to base64 ZIP
+Function StringToBase64ZIP(String, FileName, ReturnBinary = False) Export
+	TmpFileName = TempFilesDir() + FileName + ".xml";
+	DataWriter = New DataWriter(TmpFileName, TextEncoding.UTF8);
+	DataWriter.WriteLine(String, TextEncoding.UTF8);
+	DataWriter.Close();
+	
+	MStream = New MemoryStream();
+	ZIP = New ZipFileWriter(MStream, , , ZIPCompressionMethod.Deflate);
+	ZIP.Add(TmpFileName);
+	ZIP.Write();
+	BD = MStream.CloseAndGetBinaryData();
+	DeleteFiles(TmpFileName);
+	If ReturnBinary Then
+		Return BD;
+	Else
+		Return GetBase64StringFromBinaryData(BD);
+	EndIf;
+EndFunction
+
+// String from base64 ZIP.
+// 
+// Parameters:
+//  Base64Zip - String - Base64 zip
+//  FileName - String - File name
+// 
+// Returns:
+//  BinaryData - String from base64 ZIP
+Function StringFromBase64ZIP(Base64Zip, FileName) Export
+	MStream = New MemoryStream(GetBinaryDataBufferFromBase64String(Base64Zip));
+	ZIP = New ZipFileReader(MStream);
+	TmpFileName = TempFilesDir();
+	ZIP.Extract(ZIP.Items[0], TmpFileName);
+	Zip.Close();
+	MStream.CloseAndGetBinaryData();
+	BD = New BinaryData(TmpFileName + FileName);
+	DeleteFiles(TmpFileName + FileName);
+	Return BD;
 EndFunction
 
 #Region EvalExpression
@@ -615,6 +692,7 @@ Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export
 	QueryBuilder.FillSettings();
 	SetQueryBuilderFilters(QueryBuilder, CustomParameters.Filters);
 	Query = QueryBuilder.GetQuery();
+	//@skip-check unknown-method-property
 	ObjectServerModule.SetQueryComplexFilters(Query, CustomParameters.ComplexFilters);
 	QueryTable = Query.Execute().Unload();
 	Return QueryTable;

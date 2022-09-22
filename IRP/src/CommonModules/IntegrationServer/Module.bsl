@@ -27,9 +27,41 @@ Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 
 	ConnectionSetting.Insert("IntegrationSettingsRef", IntegrationSettings.Ref);
 	ConnectionSetting.Insert("IntegrationType", IntegrationSettings.IntegrationType);
+	ConnectionSetting.Insert("AddData", GetAdditionalSettings(IntegrationSettings.Ref));
 	Result.Success = True;
 	Result.Value = ConnectionSetting;
 	Return Result;
+EndFunction
+
+// Get additional settings.
+// 
+// Parameters:
+//  IntegrationSettings Integration settings
+// 
+// Returns:
+//  Structure - Get additional settings
+Function GetAdditionalSettings(IntegrationSettings) Export
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	IntegrationInfo.Key,
+		|	IntegrationInfo.Value,
+		|	IntegrationInfo.SecondValue
+		|FROM
+		|	InformationRegister.IntegrationInfo AS IntegrationInfo
+		|WHERE
+		|	IntegrationInfo.IntegrationSettings = &IntegrationSettings
+		|	AND IntegrationInfo.isProduct = &isProduct";
+	
+	Query.SetParameter("isProduct", SessionParameters.ConnectionSettings.isProduction);
+	Query.SetParameter("IntegrationSettings", IntegrationSettings);
+	QueryResult = Query.Execute().Unload();
+	
+	Str = New Structure;
+	For Each Row In QueryResult Do
+		Str.Insert(Row.Key, ?(IsBlankString(Row.Value), Row.SecondValue, Row.Value));
+	EndDo;
+	Return Str;
 EndFunction
 
 // Connection setting template.
@@ -52,6 +84,7 @@ EndFunction
 // * SecureConnection - Undefined -
 // * UseOSAuthentication - Boolean -
 // * Headers - Map -
+// * AddData - Structure - Data from register IntegrationInfo
 Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefined) Export
 	Return IntegrationServerReuse.ConnectionSettingTemplate(IntegrationType, AddInfo);
 EndFunction

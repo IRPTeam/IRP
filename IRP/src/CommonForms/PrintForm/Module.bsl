@@ -59,6 +59,7 @@ Procedure FillPrintFormConfig(Parameter)
 		NewStr.DataLang		= Parameter.DataLang;
 		NewStr.NameTemplate = NameTemplate;
 		NewStr.Ref			= Parameter.RefDocument;
+		ThisObject.IdResult	= PrintFormConfig.IndexOf(NewStr);
 		if Parameter.BuilderLayout then
 			NewStr.Template		  = UniversalPrintServer.GetSynonymTemplate(RefDoc, NameTemplate);
 			NewStr.SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(RefDoc, Parameter);
@@ -75,7 +76,7 @@ Procedure FillPrintFormConfig(Parameter)
 		Items.DataLang.ReadOnly = not CurrentData.BuilderLayout;
 		LayoutLang = CurrentData.LayoutLang;
 		DataLang = CurrentData.DataLang;
-		SetResult(CurrentData.SpreadsheetDoc);
+		SetResult();
 	Elsif PrintFormConfig.Count() > 1 and Not Items.PrintFormConfig.Visible then 
 		Show(Undefined);
 	EndIf; 
@@ -89,7 +90,8 @@ Procedure PrintFormConfigOnActivateRow(Item)
 		Items.DataLang.ReadOnly = not CurrentData.BuilderLayout;
 		LayoutLang = CurrentData.LayoutLang;
 		DataLang = CurrentData.DataLang;
-		SetResult(CurrentData.SpreadsheetDoc);
+		ThisObject.IdResult = PrintFormConfig.IndexOf(CurrentData);
+		SetResult();
 	EndIf;	
 EndProcedure
 
@@ -116,9 +118,16 @@ EndProcedure
 &AtClient
 Procedure RefreshTemplate()
 	SelectRows = Items.PrintFormConfig.SelectedRows;
+	if SelectRows.Count() = 0 then
+		SelectRows = New ValueList;
+		SelectRows.Add(PrintFormConfig.Get(ThisObject.IdResult))
+	EndIf; 	
 	if SelectRows.Count() > 0 then
 		For Each ItRow In SelectRows Do	
 			SelectData = Items.PrintFormConfig.RowData(ItRow);
+			if SelectData = Undefined Then
+				SelectData = PrintFormConfig.Get(ThisObject.IdResult);
+			EndIf;
 			Param = UniversalPrintServer.InitPrintParam(SelectData.Ref);
 			FillPropertyValues(Param, SelectData);
 			Param.DataLang = DataLang;
@@ -130,10 +139,8 @@ Procedure RefreshTemplate()
 			SelectData.SpreadsheetDoc = SpreadsheetDoc;
 		EndDo;
 	EndIf;
-	CurrentData = Items.PrintFormConfig.CurrentData;
-	if CurrentData <> Undefined Then
-		SetResult(CurrentData.SpreadsheetDoc);
-	EndIf;
+	SetResult();
+	
 EndProcedure
 
 // Set result.
@@ -141,8 +148,9 @@ EndProcedure
 // Parameters:
 //  SpreadsheetDoc -  SpreadsheetDocument 
 &AtServer
-Procedure SetResult(SpreadsheetDoc)
-	Result = SpreadsheetDoc;
+Procedure SetResult()
+	CurrentData = PrintFormConfig.Get(ThisObject.IdResult);
+	Result = CurrentData.SpreadsheetDoc;
 EndProcedure
 
 #EndRegion
@@ -256,7 +264,7 @@ EndProcedure
 Procedure Show(Command)
 	Items.PrintFormConfig.Visible = True;
 	Items.FormHide.Visible = True;
-	Items.FormShow.Visible = False;		
+	Items.FormShow.Visible = False;
 EndProcedure
 
 &AtClient

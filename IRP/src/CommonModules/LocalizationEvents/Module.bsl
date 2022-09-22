@@ -79,6 +79,7 @@ EndProcedure
 // Parameters:
 //  QueryText - String - Query text
 //  TableName - String - Table name
+//  LocalizationCode - String 
 //
 // Returns:
 //  String - Replace description localization prefix
@@ -90,6 +91,24 @@ Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table", Lo
 	QueryField = StrTemplate(QueryField, TableName, LocalizationCode);
 	Return StrReplace(QueryText, StrTemplate("%1.Description_en", TableName), QueryField);
 EndFunction
+
+// returns the description of the link in the specified language.
+//
+// Parameters:
+//  Ref - AnyRef 
+//  LocalizationCode - String 
+//
+// Returns:
+//  String - Replace description localization prefix
+Function DescriptionRefLocalization(Ref, LocalizationCode = Undefined) Export
+	If LocalizationCode = Undefined Then
+		LocalizationCode = LocalizationReuse.GetLocalizationCode()
+	EndIf;
+	Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_"+LocalizationCode);
+	Return Result;
+	
+EndFunction
+
 
 // Get catalog presentation.
 //

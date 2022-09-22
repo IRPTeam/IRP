@@ -62,7 +62,6 @@ Function SalesOrderPrint(Ref, Param)
 		|SELECT
 		|	SalesOrderTaxList.Ref AS Ref,
 		|	SalesOrderTaxList.Tax AS Tax,
-		|	SalesOrderTaxList.Tax.Description_en AS TaxDescription,
 		|	MIN(SalesOrderTaxList.LineNumber) AS LineNumber
 		|FROM
 		|	Document.SalesOrder.TaxList AS SalesOrderTaxList
@@ -79,8 +78,7 @@ Function SalesOrderPrint(Ref, Param)
 		|			AND NOT SalesOrderItemList.Cancel)
 		|GROUP BY
 		|	SalesOrderTaxList.Ref,
-		|	SalesOrderTaxList.Tax,
-		|	SalesOrderTaxList.Tax.Description_en
+		|	SalesOrderTaxList.Tax
 		|
 		|ORDER BY
 		|	LineNumber
@@ -105,7 +103,7 @@ Function SalesOrderPrint(Ref, Param)
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.ItemKey.Item",LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.ItemKey",LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.Unit",LCode);
-	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderTaxList.Tax",LCode);
+	//Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderTaxList.Tax",LCode);
 	Query.Text = Text;
 		
 	Query.Parameters.Insert("Ref", Ref);
@@ -136,7 +134,7 @@ Function SalesOrderPrint(Ref, Param)
 		
 		Spreadsheet.Put(AreaItemListHeader);
 		For It = 0 To SelectionHeaderTAX.Count() - 1 Do
-			AreaListHeaderTAX.Parameters.NameTAX = SelectionHeaderTAX[It].TaxDescription;
+			AreaListHeaderTAX.Parameters.NameTAX = LocalizationEvents.DescriptionRefLocalization(SelectionHeaderTAX[It].Tax, Spreadsheet.LanguageCode);
 			Spreadsheet.Join(AreaListHeaderTAX);
 		EndDo;
 		

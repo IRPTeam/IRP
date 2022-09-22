@@ -1,14 +1,6 @@
 
 #Region Public
 
-// Is it necessary to save the history of service exchange?
-// 
-// Returns:
-//  Boolean - Need to save service exchange history
-Function Unit_NeedToSaveServiceExchangeHistory() Export
-	Return Constants.Unit_SaveServiceExchangeHistory.Get();	
-EndFunction
-
 // Save service exchange data to catalog.
 // 
 // Parameters:

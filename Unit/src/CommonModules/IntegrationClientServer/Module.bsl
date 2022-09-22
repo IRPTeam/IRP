@@ -2,7 +2,7 @@
 &Around("SendRequestClientServer")
 Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo)
 	
-	NeedToSave = IntegrationServer.Unit_NeedToSaveServiceExchangeHistory();
+	NeedToSave = CommonFunctionsServer.GetRefAttribute(ConnectionSetting.IntegrationSettingsRef, "Unit_SaveExchangeHistory");
 	
 	If NeedToSave Then 
 		ServiceExchangeData = Unit_GetServiceExchangeDataTemplate();

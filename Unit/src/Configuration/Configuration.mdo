@@ -76,7 +76,6 @@
   <definedTypes>DefinedType.typeDescription</definedTypes>
   <definedTypes>DefinedType.typeFilesOwner</definedTypes>
   <constants>Constant.SaasMode</constants>
-  <constants>Constant.Unit_SaveServiceExchangeHistory</constants>
   <commonForms>CommonForm.AttachFile</commonForms>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>

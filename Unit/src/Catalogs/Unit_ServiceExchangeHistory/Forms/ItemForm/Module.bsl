@@ -1,4 +1,5 @@
 // @strict-types
+// @skip-check module-self-reference
 
 #Region FormEventHandlers
 
@@ -10,7 +11,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	HeadersValue = RealObject.Headers.Get();
 	If TypeOf(HeadersValue) = Type("Map") Then
 		For Each KeyValue In HeadersValue Do
-			HeaderRow = HeadersTable.Add();
+			HeaderRow = ThisObject.HeadersTable.Add();
 			HeaderRow.Key = String(KeyValue.Key);
 			HeaderRow.Value = String(KeyValue.Value);
 		EndDo;
@@ -22,7 +23,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.GroupRequest.Visible = False;
 	EndIf;
 	
-	BodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
+	ThisObject.BodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
 	
 EndProcedure
 
@@ -105,8 +106,8 @@ EndFunction
 &AtServer
 Procedure TryLoadBodyAtServer()
 	
-	BodyString = "";
-	BodyPicture = "";
+	ThisObject.BodyString = "";
+	ThisObject.BodyPicture = "";
 	
 	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
 	BodyRowValue = RealObject.Body.Get(); //BinaryData
@@ -114,10 +115,10 @@ Procedure TryLoadBodyAtServer()
 	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
 		Items.BodyPresentation.CurrentPage = Items.BodyAsFile;
 	ElsIf Object.BodyIsText Then
-		BodyString = GetStringFromBinaryData(BodyRowValue);
+		ThisObject.BodyString = GetStringFromBinaryData(BodyRowValue);
 		Items.BodyPresentation.CurrentPage = Items.BodyAsStr;
 	ElsIf StrCompare(Left(Object.BodyType, 5), "IMAGE") = 0 Then
-		BodyPicture = PutToTempStorage(BodyRowValue);
+		ThisObject.BodyPicture = PutToTempStorage(BodyRowValue);
 		Items.BodyPresentation.CurrentPage = Items.BodyAsPic;
 	Else
 		Items.BodyPresentation.CurrentPage = Items.BodyAsFile;
@@ -143,7 +144,7 @@ Procedure ReloadBodyAtServer(NewContent, Newsize)
 	
 	ValueToFormData(RealObject, Object);
 	
-	BodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
+	ThisObject.BodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
 	
 	TryLoadBodyAtServer();
 	

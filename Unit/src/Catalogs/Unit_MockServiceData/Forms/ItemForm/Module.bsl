@@ -1,4 +1,5 @@
 // @strict-types
+// @skip-check module-self-reference
 
 
 #Region FormEventHandlers
@@ -15,34 +16,26 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			Else
 				InputRequest = InputAnswer.Parent;
 			EndIf;
-			Request_Body  = InputRequest.Body;
-			Answer_Body = InputAnswer.Body;
+			LoadValueStorageInBody(True, InputRequest.Body);
+			LoadValueStorageInBody(False, InputAnswer.Body);
 		EndIf;
 	EndIf; 
 	
-	RequestBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Request_BodySize);
-	AnswerBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Answer_BodySize);
+	ThisObject.RequestBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Request_BodySize);
+	ThisObject.AnswerBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Answer_BodySize);
 
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
-	
-	Request_Body = CurrentObject.Request_Body;
-	Answer_Body = CurrentObject.Answer_Body;
-	 
+	LoadValueStorageInBody(True, CurrentObject.Request_Body);
+	LoadValueStorageInBody(False, CurrentObject.Answer_Body);
 EndProcedure
-
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	
-	ValueStorage = Request_Body; // ValueStorage
-	CurrentObject.Request_Body  = ValueStorage;
-	
-	ValueStorage = Answer_Body; // ValueStorage
-	CurrentObject.Answer_Body = ValueStorage;
-	
+	CurrentObject.Request_Body  = GetBodyValueStorage(True);
+	CurrentObject.Answer_Body = GetBodyValueStorage(False);
 EndProcedure
 
 #EndRegion
@@ -52,19 +45,15 @@ EndProcedure
 
 &AtClient
 Procedure TryLoadBody(Command)
-	
 	isRequest = StrStartsWith(Command.Name, "Request");
 	TryLoadBodyAtServer(isRequest);
-	
 EndProcedure
 
 &AtClient
 Async Procedure SaveBody(Command)
 	
 	isRequest = StrStartsWith(Command.Name, "Request");
-	
-	BodyRowValue = GetBodyAtServer(isRequest); // BinaryData
-	
+	BodyRowValue = GetBodyAtServer(isRequest);
 	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
 		ShowMessageBox(, R().Mock_Info_EmptyFile);
 		Return;
@@ -75,12 +64,11 @@ Async Procedure SaveBody(Command)
 		FileDialog.DefaultExt = "txt";
 	EndIf;
 	
-	PathArray = Await FileDialog.ChooseAsync(); // Array
+	PathArray = Await FileDialog.ChooseAsync();
 	If PathArray = Undefined Or PathArray.Count() = 0 Then
 		Return;
 	EndIf;
-	FullFileName = PathArray[0]; // String	
-		
+	FullFileName = PathArray[0];	
 	BodyRowValue.Write(FullFileName);
 	
 EndProcedure
@@ -88,25 +76,19 @@ EndProcedure
 &AtClient
 Async Procedure ReloadBody(Command)
 	
-	isRequest = StrStartsWith(Command.Name, "Request");
-	
-	SizeNewFile = 0;
-	ContentFile = Undefined;
-	
 	FileDialog = New FileDialog(FileDialogMode.Open);
 	FileDialog.CheckFileExistence = True;
-	
-	PathArray = Await FileDialog.ChooseAsync(); // Array
+	PathArray = Await FileDialog.ChooseAsync();
 	If PathArray = Undefined Or PathArray.Count() = 0 Then
 		Return;
 	EndIf;
-	FullFileName = PathArray[0]; // String
+	FullFileName = PathArray[0];
 	
 	File = New File(FullFileName); 
 	SizeNewFile = File.Size();
-	
 	ContentFile = New BinaryData(FullFileName);
 	 
+	isRequest = StrStartsWith(Command.Name, "Request");
 	ReloadBodyAtServer(isRequest, ContentFile, SizeNewFile);
 	
 EndProcedure
@@ -126,9 +108,34 @@ EndProcedure
 //  BinaryData - Get body at server
 &AtServer
 Function GetBodyAtServer(isRequest)
-	CurrentBody = ?(isRequest, Request_Body, Answer_Body); // ValueStorage
-	Return CurrentBody.Get();
+	Return GetBodyValueStorage(isRequest).Get();
 EndFunction
+
+// Get body as ValueStorage.
+// 
+// Parameters:
+//  isRequest - Boolean - Is request
+// 
+// Returns:
+//  ValueStorage - Get body as ValueStorage
+&AtServer
+Function GetBodyValueStorage(isRequest)
+	Return ?(isRequest, Request_Body, Answer_Body);
+EndFunction
+
+// Get body as ValueStorage.
+//  
+// Parameters:
+//  isRequest - Boolean - Is request
+//  Body - ValueStorage
+&AtServer
+Procedure LoadValueStorageInBody(isRequest, Body)
+	If isRequest Then
+		ThisObject["Request_Body"] = Body;
+	Else
+		ThisObject["Answer_Body"] = Body;
+	EndIf;
+EndProcedure
 
 &AtServer
 Procedure TryLoadBodyAtServer(isRequest)
@@ -147,7 +154,6 @@ Procedure TryLoadBodyAtServer(isRequest)
 	
 	ThisObject[Prefix+"BodyString"] = "";
 	ThisObject[Prefix+"BodyPicture"] = "";
-	
 	BodyRowValue = GetBodyAtServer(isRequest);
 	
 	If BodyIsText Then
@@ -182,6 +188,4 @@ Procedure ReloadBodyAtServer(isRequest, NewContent, Newsize)
 	
 EndProcedure
 
-
 #EndRegion
-

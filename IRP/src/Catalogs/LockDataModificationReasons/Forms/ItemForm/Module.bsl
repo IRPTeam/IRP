@@ -44,8 +44,24 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	
+	If CurrentObject.AdvancedMode Then
+		CurrentObject.DCS = New ValueStorage(SettingsComposer.Settings);
+	Else
+		CurrentObject.DCS = Undefined;
+	EndIf; 
+	
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	If CurrentObject.AdvancedMode Then
+		Settings = CurrentObject.DCS.Get(); // DataCompositionSettings
+		UpdateQuery(Settings);
+	EndIf;
+EndProcedure
+
 
 // Description opening.
 // 
@@ -96,7 +112,8 @@ Procedure SetVisible()
 	Items.RuleListComparisonType.Visible = Not Object.SetOneRuleForAllObjects;
 	Items.RuleListValue.Visible = Not Object.SetOneRuleForAllObjects;
 	Items.RuleListSetValueAsCode.Visible = Not Object.SetOneRuleForAllObjects;
-	Items.GroupRuleSettings.Visible = Object.SetOneRuleForAllObjects;
+	Items.GroupRuleSettings.Visible = Object.SetOneRuleForAllObjects And Not Object.AdvancedMode;
+	Items.GroupAdvancedRules.Visible = Object.AdvancedMode;
 EndProcedure
 
 &AtServer
@@ -128,6 +145,69 @@ Procedure SetOnlyReadModeByResponsibleUser()
 		
 		ThisObject.ReadOnly = True; 
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure AdvancedModeOnChange(Item)
+	SetVisible();
+	UpdateQuery();
+EndProcedure
+
+&AtClient
+Procedure RuleListOnChange(Item)
+	If Object.AdvancedMode Then
+		UpdateQuery();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure UpdateQuery(Settings = Undefined)
+	
+	DCSTemplate = Catalogs.LockDataModificationReasons.GetTemplate("DCS");
+	
+	DataSources = DCSTemplate.DataSources.Add();
+	DataSources.DataSourceType = "Local";
+	DataSources.Name = "DataSource";
+	
+	ValueListAvailableField = FillAttributeListHead();
+	AvailableField = New Array;
+	For Each Row In ValueListAvailableField Do
+		AvailableField.Add("DataSet." + StrSplit(String(Row), ".")[StrSplit(String(Row), ".").UBound()]);
+	EndDo;
+	AvailableFields = StrConcat(AvailableField, ", ");
+	For Each Row In Object.RuleList Do
+		If Row.DisableRule Or IsBlankString(Row.Type) Then
+			Continue;
+		EndIf;
+		
+		Query = 
+		"SELECT " + AvailableFields + "
+		|FROM
+		|    " + Row.Type + " AS DataSet";
+		DataSet = DCSTemplate.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
+		DataSet.Query = Query;
+		DataSet.Name = Row.Type;
+		DataSet.DataSource = DataSources.Name;
+	EndDo;
+	
+	If DCSTemplate.DataSets.Count() = 0 Then
+		SettingsComposer = New DataCompositionSettingsComposer();
+		Return;
+	EndIf;
+	
+	Address = PutToTempStorage(DCSTemplate, UUID);
+	SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Address));
+	If Not Settings = Undefined Then
+		SettingsComposer.LoadSettings(Settings);
+	EndIf;
+	SettingsComposer.Settings.Selection.Items.Clear();
+
+	For Each Field In SettingsComposer.Settings.Selection.SelectionAvailableFields.Items Do
+		Selection = SettingsComposer.Settings.Selection.Items.Add(Type("DataCompositionSelectedField"));
+		Selection.Use = True;
+		Selection.Field = Field.Field;
+	EndDo;
+
 EndProcedure
 
 #EndRegion
@@ -200,13 +280,19 @@ Procedure RuleListValueStartChoice(Item, ChoiceData, StandardProcessing)
 EndProcedure
 
 &AtServer
-Procedure FillAttributeListHead(ChoiceData)
+Function FillAttributeListHead(ChoiceData = Undefined)
 
 	VT = New ValueTable();
 	VT.Columns.Add("Attribute", New TypeDescription("String"));
 	VT.Columns.Add("Count", New TypeDescription("Number"));
 	ValueList = New ValueList();
+	Skip = 0;
 	For Each Row In Object.RuleList Do
+		If IsBlankString(Row.Type) Then
+			Skip = Skip + 1;
+			Continue;
+		EndIf;
+		
 		ValueList = New ValueList(); // ValueList of String
 		FillAttributeList(ValueList, Row.Type);
 		For Each VLRow In ValueList Do
@@ -215,15 +301,22 @@ Procedure FillAttributeListHead(ChoiceData)
 			VTRow.Count = 1;
 		EndDo;
 	EndDo;
-
+	// Group all added fields
 	VT.GroupBy("Attribute", "Count");
-	For Each AttributeName In VT.FindRows(New Structure("Count", Object.RuleList.Count())) Do
+	Array = New Array;
+	// get only fields, where Count the same as Count rows at RuleList. Other way - its not common attributes
+	For Each AttributeName In VT.FindRows(New Structure("Count", Object.RuleList.Count() - Skip)) Do
 		//@skip-check property-return-type
 		//@skip-check statement-type-change
 		Row = ValueList.FindByValue(AttributeName.Attribute);
-		ChoiceData.Add(Row.Value, Row.Presentation, , Row.Picture);
+		If ChoiceData = Undefined Then
+			Array.Add(Row.Value);
+		Else
+			ChoiceData.Add(Row.Value, Row.Presentation, , Row.Picture);
+		EndIf;
 	EndDo;
-EndProcedure
+	Return Array;
+EndFunction
 
 // Fill attribute list.
 // 
@@ -232,6 +325,9 @@ EndProcedure
 //  DataType - String - Data type
 &AtServer
 Procedure FillAttributeList(ChoiceData, DataType)
+	If IsBlankString(DataType) Then
+		Return;
+	EndIf;
 	MetadataType = Enums.MetadataTypes[StrSplit(DataType, ".")[0]];
 	MetaItem = Metadata.FindByFullName(DataType);
 	If MetadataInfo.hasAttributes(MetadataType) Then

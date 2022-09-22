@@ -15,7 +15,7 @@ Background:
 
 Scenario: preparation
 	When set True value to the constant
-	And I set "True" value to the constant "UseAccounting"
+	When set True value to the constant Use accounting
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then

@@ -96,7 +96,7 @@ Function GetSearchStringNumber(SearchString) Export
 	Return GetNumberPartFromString(SearchString, AccessSymbols);
 EndFunction
 
-Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", GetOnlyNumbers = False) Export
+Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", GetOnlyNumbers = False, GetAsNumber = True) Export
 
 	RejectSymbols = New Array;
 	For Index = 1 To StrLen(ReturnIfOnlyThisSymbolsPresent) Do
@@ -119,8 +119,12 @@ Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "", Ge
 	If Not NumberPart.Count() Then
 		Return Undefined;
 	EndIf;
-
-	Return Number(StrConcat(NumberPart));
+	
+	If GetAsNumber Then
+		Return Number(StrConcat(NumberPart));
+	Else
+		Return StrConcat(NumberPart);
+	EndIf;
 
 EndFunction
 

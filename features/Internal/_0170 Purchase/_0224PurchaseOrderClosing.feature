@@ -8,6 +8,9 @@ Functionality: purchase order closing
 Variables:
 import "Variables.feature"
 
+Background:
+	Given I launch TestClient opening script or connect the existing one
+
 Scenario: _0224000 preparation (Purchase order closing)
 	When set True value to the constant
 	And I close TestClient session

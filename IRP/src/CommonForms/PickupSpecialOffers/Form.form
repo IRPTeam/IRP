@@ -759,7 +759,7 @@
       <name>TotalAmount</name>
       <title>
         <key>en</key>
-        <value>∑</value>
+        <value>Amount</value>
       </title>
       <id>7</id>
       <valueType>

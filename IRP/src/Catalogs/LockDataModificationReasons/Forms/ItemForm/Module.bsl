@@ -1,7 +1,13 @@
+// @strict-types
+
+
 #Region FormEvents
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	
+	SetOnlyReadModeByResponsibleUser();
+	
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
@@ -20,8 +26,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			FillAttributeListHead(Items.Attribute.ChoiceList);
 		EndIf;
 	EndIf;
+	
 EndProcedure
 
+// Notification processing.
+// 
+// Parameters:
+//  EventName - String - Event name
+//  Parameter - Arbitrary - Parameter
+//  Source - Arbitrary - Source
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
@@ -34,6 +47,11 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
+// Description opening.
+// 
+// Parameters:
+//  Item - FormField - Item
+//  StandardProcessing - Boolean - Standard processing
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
@@ -43,10 +61,12 @@ EndProcedure
 Procedure ForAllUsersOnChange(Item)
 	SetVisible();
 EndProcedure
+
 &AtClient
 Procedure OnOpen(Cancel)
 	SetVisible();
 EndProcedure
+
 &AtClient
 Procedure SetOneRuleForAllObjectsOnChange(Item)
 	SetVisible();
@@ -57,6 +77,11 @@ Procedure ValueStartChoice(Item, ChoiceData, StandardProcessing)
 	If Object.RuleList.Count() Then
 		FillValueTypeHead(Object.RuleList[0].Type);
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SetCurrentUser(Command)
+	SetCurrentUserAtServer();
 EndProcedure
 
 #EndRegion
@@ -73,10 +98,48 @@ Procedure SetVisible()
 	Items.RuleListSetValueAsCode.Visible = Not Object.SetOneRuleForAllObjects;
 	Items.GroupRuleSettings.Visible = Object.SetOneRuleForAllObjects;
 EndProcedure
+
+&AtServer
+Procedure SetCurrentUserAtServer()
+	CurrentUser = SessionParameters.CurrentUser;
+	If CurrentUser.IsEmpty() Then
+		Return;
+	EndIf;
+	Search = Object.ResponsibleUsers.FindRows(New Structure("User", CurrentUser));
+	If Search.Count() > 0 Then
+		Return;
+	EndIf;
+	
+	NewUser = Object.ResponsibleUsers.Add();
+	NewUser.User = CurrentUser;
+EndProcedure
+
+&AtServer
+Procedure SetOnlyReadModeByResponsibleUser()
+	If Not ReadOnly Then
+		If Object.ResponsibleUsers.Count() = 0 Then
+			Return;
+		EndIf;
+		
+		Search = Object.ResponsibleUsers.FindRows(New Structure("User", SessionParameters.CurrentUser));
+		If Search.Count() > 0 Then
+			Return;
+		EndIf;
+		
+		ThisObject.ReadOnly = True; 
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region AddAttributes
 
+// Add attribute start choice.
+// 
+// Parameters:
+//  Item - FormField - Item
+//  ChoiceData - ChoiceParameter - Choice data
+//  StandardProcessing - Boolean - Standard processing
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
@@ -131,7 +194,7 @@ EndProcedure
 
 &AtClient
 Procedure RuleListValueStartChoice(Item, ChoiceData, StandardProcessing)
-	RowStructure = New Structure("SetValueAsCode, Attribute, Type");
+	RowStructure = New Structure("SetValueAsCode, Attribute, Type", True, "", "");
 	FillPropertyValues(RowStructure, Items.RuleList.CurrentData);
 	FillValueType(RowStructure);
 EndProcedure
@@ -144,7 +207,7 @@ Procedure FillAttributeListHead(ChoiceData)
 	VT.Columns.Add("Count", New TypeDescription("Number"));
 	ValueList = New ValueList();
 	For Each Row In Object.RuleList Do
-		ValueList = New ValueList();
+		ValueList = New ValueList(); // ValueList of String
 		FillAttributeList(ValueList, Row.Type);
 		For Each VLRow In ValueList Do
 			VTRow = VT.Add();
@@ -155,11 +218,18 @@ Procedure FillAttributeListHead(ChoiceData)
 
 	VT.GroupBy("Attribute", "Count");
 	For Each AttributeName In VT.FindRows(New Structure("Count", Object.RuleList.Count())) Do
+		//@skip-check property-return-type
+		//@skip-check statement-type-change
 		Row = ValueList.FindByValue(AttributeName.Attribute);
 		ChoiceData.Add(Row.Value, Row.Presentation, , Row.Picture);
 	EndDo;
 EndProcedure
 
+// Fill attribute list.
+// 
+// Parameters:
+//  ChoiceData - ValueList of String - Choice data
+//  DataType - String - Data type
 &AtServer
 Procedure FillAttributeList(ChoiceData, DataType)
 	MetadataType = Enums.MetadataTypes[StrSplit(DataType, ".")[0]];
@@ -188,6 +258,13 @@ Procedure FillAttributeList(ChoiceData, DataType)
 		EndIf;
 	EndDo;
 EndProcedure
+
+// Add child.
+// 
+// Parameters:
+//  MetaItem - MetadataObject - Meta item
+//  AttributeChoiceList - ValueList of String - Attribute choice list
+//  DataType - String - Data type
 &AtServer
 Procedure AddChild(MetaItem, AttributeChoiceList, DataType)
 
@@ -195,17 +272,28 @@ Procedure AddChild(MetaItem, AttributeChoiceList, DataType)
 		Return;
 	EndIf;
 	
-	If Not MetaItem[DataType].Count() Then
+	MetaCollection = MetaItem[DataType]; // Array of MetadataObjectAttribute
+	If Not MetaCollection.Count() Then
 		Return;
 	EndIf;
 
-	For Each AddChild In MetaItem[DataType] Do
+	For Each AddChild In MetaCollection Do
+		//@skip-check invocation-parameter-type-intersect
 		AttributeChoiceList.Add(DataType + "." + AddChild.Name, ?(IsBlankString(AddChild.Synonym), AddChild.Name,
 			AddChild.Synonym), , PictureLib[DataType]);
 	EndDo;
 
 EndProcedure
 
+// Fill value type.
+// 
+// Parameters:
+//  RowStructure - Structure - Row structure:
+// * SetValueAsCode - Boolean -
+// * Attribute - String -
+// * Type - String -
+//@skip-check statement-type-change
+//@skip-check property-return-type
 &AtServer
 Procedure FillValueType(RowStructure)
 
@@ -224,6 +312,12 @@ Procedure FillValueType(RowStructure)
 
 EndProcedure
 
+// Fill value type head.
+// 
+// Parameters:
+//  Type - String - Type
+//@skip-check statement-type-change
+//@skip-check property-return-type
 &AtServer
 Procedure FillValueTypeHead(Type)
 

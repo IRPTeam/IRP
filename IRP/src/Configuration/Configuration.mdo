@@ -423,8 +423,6 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.UniversalPrintServer</commonModules>
-  <commonModules>CommonModule.DocConsolidatedRetailSalesClient</commonModules>
-  <commonModules>CommonModule.DocConsolidatedRetailSalesServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

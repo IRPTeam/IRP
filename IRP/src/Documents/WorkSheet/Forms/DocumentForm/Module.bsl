@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -222,6 +223,15 @@ EndProcedure
 &AtClient
 Procedure MaterialsQuantityOnChange(Item)
 	DocWorkSheetClient.MaterialsQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region COST_WRITE_OFF
+
+&AtClient
+Procedure MaterialsCostWriteOffOnChange(Item)
+	DocWorkSheetClient.MaterialsCostWriteOffOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

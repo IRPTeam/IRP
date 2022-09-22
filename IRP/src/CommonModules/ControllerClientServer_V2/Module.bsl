@@ -5501,7 +5501,6 @@ EndFunction
 Function BindMaterialsBillOfMaterials(Parameters)
 	DataPath = "Materials.BillOfMaterials";
 	Binding = New Structure();
-	Binding.Insert("WorkOrder", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials");
 	Binding.Insert("WorkSheet", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -5597,7 +5596,6 @@ EndFunction
 Function BindMaterialsItemKeyBOM(Parameters)
 	DataPath = "Materials.ItemKeyBOM";
 	Binding = New Structure();
-	Binding.Insert("WorkOrder", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials");
 	Binding.Insert("WorkSheet", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -5875,6 +5873,72 @@ Procedure StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials(Parameters, 
 		Options.StepName = "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials";
 		Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Options.Add(Options);
 	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_COST_WRITE_OFF
+
+// Materials.CostWriteOff.OnChange
+Procedure MaterialsCostWriteOffOnChange(Parameters) Export
+	Binding = BindMaterialsCostWriteOff(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Materials.CostWriteOff.Set
+Procedure SetMaterialsCostWriteOff(Parameters, Results) Export
+	Binding = BindMaterialsCostWriteOff(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Materials.CostWriteOff.Get
+Function GetMaterialsCostWriteOff(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindMaterialsCostWriteOff(Parameters).DataPath, _Key);
+EndFunction
+
+// Materials.CostWriteOff.Bind
+Function BindMaterialsCostWriteOff(Parameters)
+	DataPath = "Materials.CostWriteOff";
+	Binding = New Structure();
+	Binding.Insert("WorkSheet", "StepMaterialsChangeStoreByCostWriteOff");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region MATERIALS_STORE
+
+// Materials.Store.Set
+Procedure SetMaterialsStore(Parameters, Results) Export
+	Binding = BindMaterialsStore(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Materials.Store.Get
+Function GetMaterialsStore(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindMaterialsStore(Parameters).DataPath, _Key);
+EndFunction
+
+// Materials.Store.Bind
+Function BindMaterialsStore(Parameters)
+	DataPath = "Materials.Store";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Materials.Store.ChangeStoreByCostWriteOff.Step
+Procedure StepMaterialsChangeStoreByCostWriteOff(Parameters, Chain) Export
+	Chain.ChangeStoreByCostWriteOff.Enable = True;
+	Chain.ChangeStoreByCostWriteOff.Setter = "SetMaterialsStore";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeStoreByCostWriteOffOptions();
+		Options.CostWriteOff    = GetMaterialsCostWriteOff(Parameters, Row.Key);
+		Options.BillOfMaterials = GetMaterialsBillOfMaterials(Parameters, Row.Key);
+		Options.CurrentStore    = GetMaterialsStore(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepMaterialsChangeStoreByCostWriteOff";
+		Chain.ChangeStoreByCostWriteOff.Options.Add(Options);
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -6370,6 +6434,7 @@ Function BindItemListSalesDocument(Parameters)
 	DataPath.Insert("SalesReturn"          , "ItemList.SalesInvoice");
 	DataPath.Insert("SalesReturnOrder"     , "ItemList.SalesInvoice");
 	DataPath.Insert("ShipmentConfirmation" , "ItemList.SalesInvoice");
+	DataPath.Insert("WorkSheet"            , "ItemList.SalesInvoice");
 	DataPath.Insert("RetailReturnReceipt"  , "ItemList.RetailSalesReceipt");
 	
 	Binding = New Structure();

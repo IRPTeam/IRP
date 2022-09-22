@@ -3,6 +3,85 @@
 	<item>
 		<selection>
 			<item>
+				<field>MaterialsItemBOM</field>
+			</item>
+			<item>
+				<field>MaterialsItemKeyBOM</field>
+			</item>
+			<item>
+				<field>MaterialsUnitBOM</field>
+			</item>
+			<item>
+				<field>MaterialsQuantityBOM</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Materials.IsManualChanged</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">true</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:use>false</dcscor:use>
+				<dcscor:parameter>BackColor</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Color">web:LightPink</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>TextColor</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Color">web:Crimson</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>MaterialsStore</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Materials.CostWriteOff</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.MaterialsCostWriteOff.IncludeToWorkCost</right>
+			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Materials.Store</left>
+				<comparisonType>NotFilled</comparisonType>
+				<right xsi:nil="true"/>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>MarkIncomplete</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>MaterialsStore</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Materials.CostWriteOff</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.MaterialsCostWriteOff.NotInclude</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>ReadOnly</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
 				<field>MaterialsLineNumber</field>
 			</item>
 			<item>
@@ -50,6 +129,9 @@
 			<item>
 				<field>MaterialsCostWriteOff</field>
 			</item>
+			<item>
+				<field>MaterialsStore</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
@@ -62,40 +144,6 @@
 			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>Visible</dcscor:parameter>
 				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>MaterialsItemBOM</field>
-			</item>
-			<item>
-				<field>MaterialsItemKeyBOM</field>
-			</item>
-			<item>
-				<field>MaterialsUnitBOM</field>
-			</item>
-			<item>
-				<field>MaterialsQuantityBOM</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.Materials.IsManualChanged</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">true</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:use>false</dcscor:use>
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">web:LightPink</dcscor:value>
-			</dcscor:item>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>TextColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">web:Crimson</dcscor:value>
 			</dcscor:item>
 		</appearance>
 	</item>

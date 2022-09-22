@@ -1222,6 +1222,17 @@ EndProcedure
 
 #EndRegion
 
+#Region MATERIALS_COST_WRITE_OFF
+
+// Materials.CostWriteOff
+Procedure MaterialsCostWriteOffOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsCostWriteOffOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region WORKERS

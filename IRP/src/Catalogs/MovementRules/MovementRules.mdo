@@ -264,6 +264,13 @@
         <value>28</value>
       </code>
     </items>
+    <items id="131d05cc-8d5d-4ad1-9438-2a1546d9b1c1">
+      <name>WS</name>
+      <description>WS</description>
+      <code xsi:type="core:StringValue">
+        <value>29</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

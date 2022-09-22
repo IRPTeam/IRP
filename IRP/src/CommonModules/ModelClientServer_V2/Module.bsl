@@ -244,6 +244,7 @@ Function GetChain()
 	
 	Chain.Insert("ChangeIsManualChangedByItemKey"               , GetChainLink("ChangeIsManualChangedByItemKeyExecute"));
 	Chain.Insert("ChangeUniqueIDByItemKeyBOMAndBillOfMaterials" , GetChainLink("ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsExecute"));
+	Chain.Insert("ChangeStoreByCostWriteOff"                    , GetChainLink("ChangeStoreByCostWriteOffExecute"));
 	//Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
 	
 	// Extractors
@@ -1115,6 +1116,26 @@ Function ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsExecute(Options) Export
 		Return "";
 	EndIf;
 	Return String(Options.ItemKeyBOM.UUID()) + "-" + String(Options.BillOfMaterials.UUID()); 
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_STORE_BY_COST_WRITE_OFF
+
+Function ChangeStoreByCostWriteOffOptions() Export
+	Return GetChainLinkOptions("CostWriteOff, BillOfMaterials, CurrentStore");
+EndFunction
+
+Function ChangeStoreByCostWriteOffExecute(Options) Export
+	If Options.CostWriteOff = PredefinedValue("Enum.MaterialsCostWriteOff.NotInclude") Then
+		Return Undefined;
+	EndIf;
+	
+	If ValueIsFilled(Options.CurrentStore) Then
+		Return Options.CurrentStore;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "BusinessUnit.MaterialStore");
 EndFunction
 
 #EndRegion

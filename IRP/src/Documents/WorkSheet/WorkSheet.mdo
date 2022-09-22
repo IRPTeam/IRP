@@ -305,6 +305,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="7cb413f3-548c-4ac9-a0e6-f7a5543a80af">
+      <name>SalesInvoice</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales invoice</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesInvoice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="0a060596-1f3d-457c-851c-d32999b3dac4">
       <name>WorkOrder</name>
       <synonym>
@@ -420,7 +434,6 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -848,6 +861,7 @@
     <commandParameterType>
       <types>DocumentRef.WorkOrder</types>
       <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.SalesInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

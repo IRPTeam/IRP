@@ -1304,12 +1304,21 @@ Function GetNextStep_SO(Source, RowItemList, Row)
 EndFunction
 
 Function GetNextStep_SI(Source, RowItemList, Row)
-	NextStep = Catalogs.MovementRules.EmptyRef();
-	If RowItemList.UseShipmentConfirmation And Not RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service
+	ItemType_Type = RowItemList.ItemKey.Item.ItemType.Type;
+	
+	If RowItemList.UseShipmentConfirmation 
+		And ItemType_Type = Enums.ItemTypes.Product
 		And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
-		NextStep = Catalogs.MovementRules.SC;
+		Return Catalogs.MovementRules.SC;
 	EndIf;
-	Return NextStep;
+	
+	If RowItemList.UseWorkSheet
+		And ItemType_Type = Enums.ItemTypes.Service
+		And Not Source.WorkSheets.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
+		Return Catalogs.MovementRules.WS;
+	EndIf;
+	
+	Return Catalogs.MovementRules.EmptyRef();
 EndFunction
 
 Function GetNextStep_SC(Source, ItemList, Row)
@@ -1434,8 +1443,10 @@ Function GetNextStep_WO(Source, RowItemList, Row)
 EndFunction
 
 Function GetNextStep_WS(Source, RowItemList, Row)
-	NextStep = Catalogs.MovementRules.SI;
-	Return NextStep;
+	If ValueIsFilled(RowItemList.SalesInvoice) Then
+		Return Catalogs.MovementRules.EmptyRef();
+	EndIf;
+	Return Catalogs.MovementRules.SI;
 EndFunction
 
 #EndRegion
@@ -4063,6 +4074,7 @@ Function ExtractData_FromWS(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.LegalName AS LegalName,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
+	|	TRUE AS UseWorkSheet,
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
@@ -4816,10 +4828,12 @@ Function GetBasisesFor_WS(FilterValues)
 	StepArray = New Array();
 	StepArray.Add(Catalogs.MovementRules.SI_WO_WS);
 	StepArray.Add(Catalogs.MovementRules.SI_WS);
+	StepArray.Add(Catalogs.MovementRules.WS);
 
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.WO_ForWS = True;
 	FilterSets.SO_ForWS = True;
+	FilterSets.SI_ForWS = True;
 
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -4869,11 +4883,10 @@ Function GetAvailableFilterSets()
 	// #1487
 	Result.Insert("SO_ForWO", False);
 	Result.Insert("SO_ForWS", False);
-	
 	Result.Insert("WO_ForWS", False);
-	
 	Result.Insert("WO_ForSI", False);
 	Result.Insert("WS_ForSI", False);
+	Result.Insert("SI_ForWS", False);
 	
 	Return Result;
 EndFunction
@@ -4915,7 +4928,13 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 		ApplyFilterSet_SI_ForSC(Query);
 		QueryArray.Add(GetDataByFilterSet_SI_ForSC());
 	EndIf;
-
+	
+	//#1487
+	If FilterSets.SI_ForWS Then
+		ApplyFilterSet_SI_ForWS(Query);
+		QueryArray.Add(GetDataByFilterSet_SI_ForWS());
+	EndIf;
+	
 	If FilterSets.SC_ForSI Then
 		ApplyFilterSet_SC_ForSI(Query);
 		QueryArray.Add(GetDataByFilterSet_SC_ForSI());
@@ -5733,12 +5752,9 @@ Function GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases)
 	If InternalDocAliase = Aliases.SO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder, WorkOrder";
-	ElsIf InternalDocAliase = Aliases.SC Then
+	ElsIf InternalDocAliase = Aliases.SC Or InternalDocAliase = Aliases.WS Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder, WorkOrder";
-	ElsIf InternalDocAliase = Aliases.WS Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder, WorkOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet, SalesOrder, WorkOrder";
 	Else
 		Raise StrTemplate("Not supported Internal link for [SI] to [%1]", InternalDocAliase);
 	EndIf;
@@ -5747,9 +5763,9 @@ EndFunction
 
 Function GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-	If ExternalDocAliase = Aliases.SC Then
+	If ExternalDocAliase = Aliases.SC Or ExternalDocAliase = Aliases.WS Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet, SalesOrder, WorkOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -5906,6 +5922,54 @@ Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
 	Query.Execute();
 EndProcedure
 
+Procedure ApplyFilterSet_SI_ForWS(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_SI_ForWS
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PartnerSales
+	|					THEN RowRef.PartnerSales = &PartnerSales
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalNameSales
+	|					THEN RowRef.LegalNameSales = &LegalNameSales
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
 Function GetDataByFilterSet_SI_ForSC()
 	Return "SELECT
 		   |	Doc.ItemKey,
@@ -5962,6 +6026,36 @@ Function GetDataByFilterSet_SI_ForSR_ForSRO()
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
 		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
 		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
+EndFunction
+
+Function GetDataByFilterSet_SI_ForWS()
+	Return 
+		"SELECT
+		|	Doc.ItemKey,
+		|	Doc.ItemKey.Item,
+		|	Doc.Store,
+		|	Doc.Ref,
+		|	Doc.Key,
+		|	Doc.Key,
+		|	CASE
+		|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+		|			THEN Doc.ItemKey.Item.Unit
+		|		ELSE Doc.ItemKey.Unit
+		|	END,
+		|	RowIDMovements.Quantity,
+		|	RowIDMovements.RowRef,
+		|	RowIDMovements.RowID,
+		|	RowIDMovements.Step,
+		|	Doc.LineNumber
+		|FROM
+		|	Document.SalesInvoice.ItemList AS Doc
+		|		INNER JOIN Document.SalesInvoice.RowIDInfo AS RowIDInfo
+		|		ON Doc.Ref = RowIDInfo.Ref
+		|		AND Doc.Key = RowIDInfo.Key
+		|		INNER JOIN RowIDMovements_SI_ForWS AS RowIDMovements
+		|		ON RowIDMovements.RowID = RowIDInfo.RowID
+		|		AND RowIDMovements.Basis = RowIDInfo.Ref
+		|		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
 #EndRegion
@@ -8444,9 +8538,9 @@ EndFunction
 
 Function GetFieldsToLock_InternalLink_WS(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
-	If InternalDocAliase = Aliases.WO Then
+	If InternalDocAliase = Aliases.WO Or InternalDocAliase = Aliases.SI Then
 		Result.Header   = "Company, Branch, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, SalesOrder, WorkOrder";
+		Result.ItemList = "Item, ItemKey, SalesOrder, SalesInvoice, WorkOrder";
 	Else
 		Raise StrTemplate("Not supported Internal link for [WS] to [%1]", InternalDocAliase);
 	EndIf;
@@ -9394,7 +9488,8 @@ Function GetColumnNames_ItemList()
 		   // #1487
 		   |WorkOrder,
 		   |WorkSheet,
-		   |BillOfMaterials";
+		   |BillOfMaterials,
+		   |UseWorkSheet";
 EndFunction
 
 Function GetEmptyTable_ItemList()
@@ -10412,6 +10507,8 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SR);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SRO);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SC);
+		// #1487
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.WS);		
 	EndIf;
 	
 	If Is.SC Then
@@ -10586,6 +10683,7 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	
 	If Is.WS Then
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WS, DocAliases.WO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WS, DocAliases.SI);
 	EndIf;
 	
 	Return Tables;

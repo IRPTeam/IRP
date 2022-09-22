@@ -191,6 +191,14 @@ EndProcedure
 
 #EndRegion
 
+#Region COST_WRITE_OFF
+
+Procedure MaterialsCostWriteOffOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.MaterialsCostWriteOffOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

@@ -253,6 +253,9 @@ Procedure LoadAnswer(Answer)
 	EndIf;
 
 	ThisObject.AnswerBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(ThisObject.AnswerBodySize);
+	If ThisObject.AnswerBodySize < Pow(2, 20) And ThisObject.AnswerBodyIsText Then
+		 TryLoadBodyAtServer();
+	EndIf;
 	
 EndProcedure
 

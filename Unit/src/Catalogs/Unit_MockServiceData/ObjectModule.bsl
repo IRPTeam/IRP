@@ -17,12 +17,14 @@ Procedure Filling(FillingData, StandartProcessing)
 		Description = InputRequest.Description;
 		
 		Request_Type = InputRequest.RequestType;
-		Request_ResourceAddress = InputRequest.ResourceAddress;
 		Request_Body = InputRequest.Body;
 		Request_BodyMD5 = InputRequest.BodyMD5;
 		Request_BodySize = InputRequest.BodySize;
 		Request_BodyType = InputRequest.BodyType;
 		Request_BodyIsText = InputRequest.BodyIsText;
+		
+		ArrayOfSegments = StrSplit(InputRequest.ResourceAddress, "?");
+		Request_ResourceAddress = ArrayOfSegments[0];
 
 		HeadersValue = InputRequest.Headers.Get();
 		If TypeOf(HeadersValue) = Type("Map") Then

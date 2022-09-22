@@ -22,7 +22,14 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf; 
 	
 	ThisObject.RequestBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Request_BodySize);
+	If Object.Request_BodySize < Pow(2, 20) And Object.Request_BodyIsText Then
+		 TryLoadBodyAtServer(True);
+	EndIf;
+	
 	ThisObject.AnswerBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Answer_BodySize);
+	If Object.Answer_BodySize < Pow(2, 20) And Object.Answer_BodyIsText Then
+		 TryLoadBodyAtServer(False);
+	EndIf;
 
 EndProcedure
 
@@ -34,8 +41,17 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	
+	If isEditRequestBody Then
+		ReloadTextBodyAtServer(True);
+	EndIf;
 	CurrentObject.Request_Body  = GetBodyValueStorage(True);
+	
+	If isEditAnswerBody Then
+		ReloadTextBodyAtServer(False);
+	EndIf;
 	CurrentObject.Answer_Body = GetBodyValueStorage(False);
+	
 EndProcedure
 
 #EndRegion
@@ -53,6 +69,13 @@ EndProcedure
 Async Procedure SaveBody(Command)
 	
 	isRequest = StrStartsWith(Command.Name, "Request");
+	
+	isEditBody = ?(isRequest, ThisObject.isEditRequestBody, ThisObject.isEditAnswerBody);
+	If isEditBody Then
+		ReloadTextBodyAtServer(isRequest);
+		Return;
+	EndIf;
+	
 	BodyRowValue = GetBodyAtServer(isRequest);
 	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
 		ShowMessageBox(, R().Mock_Info_EmptyFile);
@@ -95,6 +118,22 @@ EndProcedure
 
 #EndRegion
 
+
+#Region FormHeaderItemsEventHandlers
+
+&AtClient
+Procedure RequestBodyStringOnChange(Item)
+	ThisObject.isEditRequestBody = True;
+	ThisObject.Modified = True;
+EndProcedure
+
+&AtClient
+Procedure AnswerBodyStringOnChange(Item)
+	ThisObject.isEditAnswerBody = True;
+	ThisObject.Modified = True;
+EndProcedure
+
+#EndRegion
 
 
 #Region Private
@@ -145,11 +184,13 @@ Procedure TryLoadBodyAtServer(isRequest)
 		BodyType = Object.Request_BodyType;
 		BodyIsText = Object.Request_BodyIsText;
 		BodyGroup = Items.BodyRequestPresentation;
+		ThisObject.isEditRequestBody = False;
 	Else
 		Prefix = "Answer";
 		BodyType = Object.Answer_BodyType;
 		BodyIsText = Object.Answer_BodyIsText;
 		BodyGroup = Items.BodyAnswerPresentation;
+		ThisObject.isEditAnswerBody = False;
 	EndIf;
 	
 	ThisObject[Prefix+"BodyString"] = "";
@@ -176,15 +217,43 @@ Procedure ReloadBodyAtServer(isRequest, NewContent, Newsize)
 		Request_Body = New ValueStorage(NewContent);
 		Object.Request_BodyMD5 = CommonFunctionsServer.GetMD5(NewContent);
 		Object.Request_BodySize = Newsize;
+		ThisObject.isEditRequestBody = False;
+		
 	Else
 		Prefix = "Answer";
 		Answer_Body = New ValueStorage(NewContent);
 		Object.Answer_BodySize = Newsize;
+		ThisObject.isEditAnswerBody = False;
+		
 	EndIf;
 	
 	ThisObject[Prefix+"BodySizePresentation"] = CommonFunctionsClientServer.GetSizePresentation(Newsize);
 	
 	TryLoadBodyAtServer(isRequest);
+	
+EndProcedure
+
+&AtServer
+Procedure ReloadTextBodyAtServer(isRequest)
+	
+	If isRequest Then
+		NewContent = GetBinaryDataFromString(ThisObject.RequestBodyString);
+		Request_Body = New ValueStorage(NewContent);
+		Object.Request_BodyMD5 = CommonFunctionsServer.GetMD5(NewContent);
+		Object.Request_BodySize = StrLen(ThisObject.RequestBodyString);
+		ThisObject.RequestBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Request_BodySize);
+		ThisObject.isEditRequestBody = False;
+		
+	Else
+		NewContent = GetBinaryDataFromString(ThisObject.AnswerBodyString);
+		Answer_Body = New ValueStorage(NewContent);
+		Object.Answer_BodySize = StrLen(ThisObject.AnswerBodyString);
+		ThisObject.AnswerBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Answer_BodySize);
+		ThisObject.isEditAnswerBody = False;
+		
+	EndIf;
+	
+	ThisObject.Modified = True;
 	
 EndProcedure
 

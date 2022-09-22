@@ -18,6 +18,11 @@
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <basedOn>Catalog.Unit_ServiceExchangeHistory</basedOn>
   <createOnInput>Use</createOnInput>
+  <help>
+    <pages>
+      <lang>en</lang>
+    </pages>
+  </help>
   <fullTextSearch>Use</fullTextSearch>
   <hierarchical>true</hierarchical>
   <levelCount>2</levelCount>
@@ -565,6 +570,11 @@
       <key>en</key>
       <value>Item form</value>
     </synonym>
+    <help>
+      <pages>
+        <lang>en</lang>
+      </pages>
+    </help>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>

@@ -617,7 +617,7 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
 			ValueJSON = ReadJSON(ReaderJSON);
 			Return getValueOfBodyVariableByPath(NextPath, ValueJSON);
 			
-		ElsIf CurrentDataType = "[base64]" Then
+		ElsIf CurrentDataType = "[file]" Then
 			ValueBase64 = Base64Value(DataForValue);
 			Return getValueOfBodyVariableByPath(NextPath, ValueBase64);
 			

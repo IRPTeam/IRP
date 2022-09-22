@@ -17,13 +17,18 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndDo;
 	EndIf;
 	
-	If Object.Parent.IsEmpty() Then	// Request
+	// Request
+	If Object.Parent.IsEmpty() Then
 		Items.GroupAnswer.Visible = False;
-	Else							// Answer
+	// Answer
+	Else
 		Items.GroupRequest.Visible = False;
 	EndIf;
 	
 	ThisObject.BodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
+	If Object.BodySize < Pow(2, 20) And Object.BodyIsText Then
+		 TryLoadBodyAtServer();
+	EndIf;
 	
 EndProcedure
 

@@ -2,6 +2,13 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+		
+	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.ItemList);
+	For Each Row In ThisObject.ItemList Do
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, Row.Key, ThisObject.Currency, 0);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
 EndProcedure
 
 Procedure OnWrite(Cancel)

@@ -39,9 +39,11 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	IsProduct = Object.Type = PredefinedValue("Enum.BillOfMaterialsTypes.Product");
+	IsWork    = Object.Type = PredefinedValue("Enum.BillOfMaterialsTypes.Work");
 	Form.Items.BusinessUnitReleaseStore.Visible = IsProduct;
 	Form.Items.BusinessUnitSemiproductStore.Visible = IsProduct;
 	Form.Items.ContentBillOfMaterials.Visible = IsProduct;
+	Form.Items.ContentExpenseType.Visible = IsWork;
 	
 	// Button set as default
 	If IsDefaultBillOfMaterials(Object.Ref, Object.ItemKey) Then

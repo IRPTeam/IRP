@@ -132,6 +132,12 @@
 			<item>
 				<field>MaterialsStore</field>
 			</item>
+			<item>
+				<field>MaterialsProfitLossCenter</field>
+			</item>
+			<item>
+				<field>MaterialsExpenseType</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">

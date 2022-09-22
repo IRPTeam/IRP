@@ -66,14 +66,14 @@ Function GetMaterialsForWork(BillOfMaterialsRef, UUID) Export
 	|	BillOfMaterialsContent.ItemKey AS ItemKey,
 	|	BillOfMaterialsContent.Unit AS Unit,
 	|	BillOfMaterialsContent.Quantity AS Quantity,
-	
 	|	BillOfMaterialsContent.Item AS ItemBOM,
 	|	BillOfMaterialsContent.ItemKey AS ItemKeyBOM,
 	|	BillOfMaterialsContent.Unit AS UnitBOM,
 	|	BillOfMaterialsContent.Quantity AS QuantityBOM,
-	
 	|	BillOfMaterialsContent.Ref.BusinessUnit.MaterialStore AS Store,
-	|	VALUE(Enum.MaterialsCostWriteOff.IncludeToWorkCost) AS CostWriteOff
+	|	VALUE(Enum.MaterialsCostWriteOff.IncludeToWorkCost) AS CostWriteOff,
+	|	BillOfMaterialsContent.Ref.BusinessUnit AS ProfitLossCenter,
+	|	BillOfMaterialsContent.ExpenseType AS ExpenseType
 	|FROM
 	|	Catalog.BillOfMaterials.Content AS BillOfMaterialsContent
 	|WHERE
@@ -84,7 +84,7 @@ Function GetMaterialsForWork(BillOfMaterialsRef, UUID) Export
 	QueryTable = QueryResult.Unload();
 	
 	Address = PutToTempStorage(QueryTable, UUID);
-	GroupColumns = "BillOfMaterials, Item, ItemKey, Unit, ItemBOM, ItemKeyBOM, UnitBOM, Store, CostWriteOff";
+	GroupColumns = "BillOfMaterials, Item, ItemKey, Unit, ItemBOM, ItemKeyBOM, UnitBOM, Store, CostWriteOff, ProfitLossCenter, ExpenseType";
 	SumColumns = "Quantity, QuantityBOM";
 	
 	Return New Structure("Address, GroupColumns, SumColumns", Address, GroupColumns, SumColumns);

@@ -4,6 +4,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();	
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+	
 	Return Tables;
 EndFunction
 
@@ -15,7 +25,10 @@ EndFunction
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.SetRegisters(Tables, Ref, True);	
+	PostingServer.SetRegisters(Tables, Ref, True);
+	
+	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -99,6 +112,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(R5022T_Expenses());
 	Return QueryArray;
 EndFunction
 
@@ -106,10 +120,14 @@ Function Materials()
 	Return
 	"SELECT
 	|	WorkSheetItemList.Ref.Date AS Period,
+	|	WorkSheetItemList.Key,
 	|	WorkSheetItemList.ItemKey AS Work,
 	|	WorkSheetMaterials.Ref AS WorkSheet,
 	|	WorkSheetMaterials.Ref.Company AS Company,
 	|	WorkSheetMaterials.Ref.Branch AS Branch,
+	|	WorkSheetMaterials.Ref.Currency AS Currency,
+	|	WorkSheetMaterials.ProfitLossCenter AS ProfitLossCenter,
+	|	WorkSheetMaterials.ExpenseType AS ExpenseType,
 	|	WorkSheetMaterials.ItemKey,
 	|	WorkSheetMaterials.Store,
 	|	WorkSheetMaterials.CostWriteOff = VALUE(Enum.MaterialsCostWriteOff.IncludeToWorkCost) AS IncludeToWorkCost,
@@ -178,6 +196,10 @@ Function T6020S_BatchKeysInfo()
 	|	VALUE(Enum.BatchDirection.Expense) AS Direction,
 	|	Materials.Company,
 	|	Materials.Branch,
+	|	Materials.Currency,
+	|	Materials.Key AS RowID,
+	|	Materials.ProfitLossCenter,
+	|	Materials.ExpenseType,
 	|	Materials.Work,
 	|	Materials.WorkSheet,
 	|	Materials.ItemKey,
@@ -209,4 +231,25 @@ Function T3010S_RowIDInfo()
 	|		AND ItemList.Ref = &Ref
 	|		AND RowIDInfo.Key = ItemList.Key
 	|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function R5022T_Expenses()
+	Return
+	"SELECT
+	|	WriteOffBatchesInfo.Period,
+	|	WriteOffBatchesInfo.Company,
+	|	WriteOffBatchesInfo.Branch,
+	|	WriteOffBatchesInfo.ProfitLossCenter,
+	|	WriteOffBatchesInfo.ExpenseType,
+	|	WriteOffBatchesInfo.ItemKey,
+	|	WriteOffBatchesInfo.Currency,
+	|	WriteOffBatchesInfo.RowID AS Key,
+	|	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
+	|	WriteOffBatchesInfo.Amount AS Amount,
+	|	WriteOffBatchesInfo.Amount + WriteOffBatchesInfo.AmountTax AS AmountWithTaxes
+	|INTO R5022T_Expenses
+	|FROM
+	|	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo
+	|WHERE
+	|	WriteOffBatchesInfo.Document = &Ref";
 EndFunction

@@ -124,3 +124,24 @@ Function GetBillOfMaterialsByItemKey(Item, ItemKey) Export
 		Return Undefined;
 	EndIf;
 EndFunction
+
+Function GetExpenseTypeByBillOfMaterials(BillOfMaterials, ItemKey) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	BillOfMaterialsContent.ExpenseType AS ExpenseType
+	|FROM
+	|	Catalog.BillOfMaterials.Content AS BillOfMaterialsContent
+	|WHERE
+	|	BillOfMaterialsContent.Ref = &Ref
+	|	AND BillOfMaterialsContent.ItemKey = &ItemKey";
+	Query.SetParameter("Ref", BillOfMaterials);
+	Query.SetParameter("ItemKey", ItemKey);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.ExpenseType;
+	Else
+		Return Undefined;
+	EndIf;	
+EndFunction

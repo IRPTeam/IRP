@@ -245,6 +245,9 @@ Function GetChain()
 	Chain.Insert("ChangeIsManualChangedByItemKey"               , GetChainLink("ChangeIsManualChangedByItemKeyExecute"));
 	Chain.Insert("ChangeUniqueIDByItemKeyBOMAndBillOfMaterials" , GetChainLink("ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsExecute"));
 	Chain.Insert("ChangeStoreByCostWriteOff"                    , GetChainLink("ChangeStoreByCostWriteOffExecute"));
+	Chain.Insert("ChangeProfitLossCenterByBillOfMaterials"      , GetChainLink("ChangeProfitLossCenterByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
+	
 	//Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
 	
 	// Extractors
@@ -1139,6 +1142,40 @@ Function ChangeStoreByCostWriteOffExecute(Options) Export
 EndFunction
 
 #EndRegion
+
+#Region CHANGE_PROFIT_LOSS_CENTER_BY_BILL_OF_MATERIALS
+
+Function ChangeProfitLossCenterByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterials, CurrentProfitLossCenter");
+EndFunction
+
+Function ChangeProfitLossCenterByBillOfMaterialsExecute(Options) Export
+	If ValueIsFilled(Options.CurrentProfitLossCenter) Then
+		Return Options.CurrentProfitLossCenter;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "BusinessUnit");
+EndFunction
+		
+
+#EndRegion
+
+#Region CHANGE_EXPENSE_TYPE_BY_BILL_OF_MATERIALS
+
+Function ChangeExpenseTypeByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("ItemKeyBOM, BillOfMaterials, CurrentExpenseType");
+EndFunction
+
+Function ChangeExpenseTypeByBillOfMaterialsExecute(Options) Export
+	If ValueIsFilled(Options.CurrentExpenseType) Then
+		Return Options.CurrentExpenseType;
+	EndIf;
+	
+	Return ModelServer_V2.GetExpenseTypeByBillOfMaterials(Options.BillOfMaterials, Options.ItemKeyBOM);
+EndFunction
+
+#EndRegion
+
 
 //#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
 //

@@ -1397,4 +1397,39 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.WorkOrder.Attribute.Currency</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.WorkSheet.Attribute.Currency</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.WorkSheet.TabularSection.Materials.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.WorkSheet.TabularSection.Materials.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.WorkSheet.TabularSection.Materials</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

@@ -65,6 +65,7 @@ Function GetMaterialsForWork(BillOfMaterialsRef, UUID) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
+	|	BillOfMaterialsContent.Ref AS BillOfMaterials,
 	|	BillOfMaterialsContent.Item AS Item,
 	|	BillOfMaterialsContent.ItemKey AS ItemKey,
 	|	BillOfMaterialsContent.Unit AS Unit,
@@ -81,12 +82,8 @@ Function GetMaterialsForWork(BillOfMaterialsRef, UUID) Export
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	
-//	BillOfMaterials_UUID = String(Object.BillOfMaterials.UUID());
-//	For Each Row In QueryResults[1].Unload() Do
-//		RowUniqueID = String(Row.ItemKeyBOM.UUID()) + "-" + BillOfMaterials_UUID;
-	
 	Address = PutToTempStorage(QueryTable, UUID);
-	GroupColumns = "Item, ItemKey, Unit, Store, CostWriteOff, ProcurementMethod";
+	GroupColumns = "BillOfMaterials, Item, ItemKey, Unit, Store, CostWriteOff, ProcurementMethod";
 	
 	Return New Structure("Address, GroupColumns", Address, GroupColumns);
 EndFunction

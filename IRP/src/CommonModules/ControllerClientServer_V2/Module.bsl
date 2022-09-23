@@ -427,6 +427,7 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("Materials.BillOfMaterials"    , "SetMaterialsBillOfMaterials");
 	SettersMap.Insert("Materials.Item"               , "SetMaterialsItem");
 	SettersMap.Insert("Materials.ItemKey"            , "SetMaterialsItemKey");
+	SettersMap.Insert("Materials.ItemKeyBOM"         , "SetMaterialsItemKeyBOM");
 	SettersMap.Insert("Materials.Unit"               , "SetMaterialsUnit");
 	SettersMap.Insert("Materials.Quantity"           , "SetMaterialsQuantity");
 	SettersMap.Insert("Materials.QuantityBOM"        , "SetMaterialsQuantityBOM");
@@ -5501,7 +5502,11 @@ EndFunction
 Function BindMaterialsBillOfMaterials(Parameters)
 	DataPath = "Materials.BillOfMaterials";
 	Binding = New Structure();
-	Binding.Insert("WorkSheet", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials");
+	Binding.Insert("WorkSheet", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials,
+								|StepMaterialsChangeProfitLossCenterByBillOfMaterials,
+								|StepMaterialsChangeExpenseTypeByBillOfMaterials");
+								
+	Binding.Insert("WorkOrder", "StepMaterialsChangeUniqueIDByItemKeyAndBillOfMaterials");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5587,6 +5592,12 @@ EndProcedure
 
 #Region MATERIALS_ITEMKEY_BOM
 
+// Materials.ItemKeyBOM.Set
+Procedure SetMaterialsItemKeyBOM(Parameters, Results) Export
+	Binding = BindMaterialsItemKeyBOM(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
 // Materials.ItemKeyBOM.Get
 Function GetMaterialsItemKeyBOM(Parameters, _Key)
 	Return GetPropertyObject(Parameters, BindMaterialsItemKeyBOM(Parameters).DataPath, _Key);
@@ -5596,7 +5607,10 @@ EndFunction
 Function BindMaterialsItemKeyBOM(Parameters)
 	DataPath = "Materials.ItemKeyBOM";
 	Binding = New Structure();
-	Binding.Insert("WorkSheet", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials");
+	Binding.Insert("WorkSheet", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials,
+								|StepMaterialsChangeExpenseTypeByBillOfMaterials");
+	
+	Binding.Insert("WorkOrder", "StepMaterialsChangeUniqueIDByItemKeyAndBillOfMaterials");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5875,6 +5889,20 @@ Procedure StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials(Parameters, 
 	EndDo;	
 EndProcedure
 
+// Materials.UniqueID.ChangeUniqueIDByItemKeyAndBillOfMaterials.Step
+Procedure StepMaterialsChangeUniqueIDByItemKeyAndBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Enable = True;
+	Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Setter = "SetMaterialsUniqueID";
+	For Each Row In GetRows(Parameters, "Materials") Do
+		Options = ModelClientServer_V2.ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsOptions();		
+		Options.ItemKeyBOM      = GetMaterialsItemKey(Parameters, Row.Key);
+		Options.BillOfMaterials = GetMaterialsBillOfMaterials(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepMaterialsChangeUniqueIDByItemKeyAndBillOfMaterials";
+		Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
 #EndRegion
 
 #Region MATERIALS_COST_WRITE_OFF
@@ -5938,6 +5966,79 @@ Procedure StepMaterialsChangeStoreByCostWriteOff(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepMaterialsChangeStoreByCostWriteOff";
 		Chain.ChangeStoreByCostWriteOff.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_PROFIT_LOSS_CENTER
+
+// Materials.ProfitLossCenter.Set
+Procedure SetMaterialsProfitLossCenter(Parameters, Results) Export
+	Binding = BindMaterialsProfitLossCenter(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Materials.ProfitLossCenter.Get
+Function GetMaterialsProfitLossCenter(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindMaterialsProfitLossCenter(Parameters).DataPath, _Key);
+EndFunction
+
+// Materials.ProfitLossCenter.Bind
+Function BindMaterialsProfitLossCenter(Parameters)
+	DataPath = "Materials.ProfitLossCenter";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Materials.ProfitLossCenter.ChangeProfitLossCenterByBillOfMaterials.Step
+Procedure StepMaterialsChangeProfitLossCenterByBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeProfitLossCenterByBillOfMaterials.Enable = True;
+	Chain.ChangeProfitLossCenterByBillOfMaterials.Setter = "SetMaterialsProfitLossCenter";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeProfitLossCenterByBillOfMaterialsOptions();
+		Options.BillOfMaterials = GetMaterialsBillOfMaterials(Parameters, Row.Key);
+		Options.CurrentProfitLossCenter = GetMaterialsProfitLossCenter(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepMaterialsChangeProfitLossCenterByBillOfMaterials";
+		Chain.ChangeProfitLossCenterByBillOfMaterials.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_EXPENSE_TYPE
+
+// Materials.ExpenseType.Set
+Procedure SetMaterialsExpenseType(Parameters, Results) Export
+	Binding = BindMaterialsExpenseType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Materials.ExpenseType.Get
+Function GetMaterialsExpenseType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindMaterialsExpenseType(Parameters).DataPath, _Key);
+EndFunction
+
+// Materials.ExpenseType.Bind
+Function BindMaterialsExpenseType(Parameters)
+	DataPath = "Materials.ExpenseType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Materials.ExpenseType.ChangeExpenseTypeByBillOfMaterials.Step
+Procedure StepMaterialsChangeExpenseTypeByBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeExpenseTypeByBillOfMaterials.Enable = True;
+	Chain.ChangeExpenseTypeByBillOfMaterials.Setter = "SetMaterialsExpenseType";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeExpenseTypeByBillOfMaterialsOptions();
+		Options.ItemKeyBOM      = GetMaterialsItemKeyBOM(Parameters, Row.Key);
+		Options.BillOfMaterials = GetMaterialsBillOfMaterials(Parameters, Row.Key);
+		Options.CurrentExpenseType = GetMaterialsExpenseType(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepMaterialsChangeExpenseTypeByBillOfMaterials";
+		Chain.ChangeExpenseTypeByBillOfMaterials.Options.Add(Options);
 	EndDo;
 EndProcedure
 

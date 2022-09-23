@@ -4019,6 +4019,8 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|SELECT DISTINCT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
+	|	Materials.UniqueID,
+	|	Materials.BillOfMaterials,
 	|	Materials.Item,
 	|	Materials.ItemKey,
 	|	Materials.Unit,
@@ -8336,12 +8338,11 @@ Function GetFieldsToLock_ExternalLink_WO(ExternalDocAliase, Aliases)
 							  |Branch               , Branch,
 							  |PartnerSales         , Partner,
 							  |LegalNameSales       , LegalName,
-							  |ItemKey              , ItemList.ItemKey,
-							  |Store                , ItemList.Store";
+							  |ItemKey              , ItemList.ItemKey";
 	
 	ElsIf ExternalDocAliase = Aliases.SI Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.Header   = "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
+		Result.ItemList = "Item, ItemKey";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company              , Company,
 							  |Branch               , Branch,
@@ -8350,8 +8351,7 @@ Function GetFieldsToLock_ExternalLink_WO(ExternalDocAliase, Aliases)
 							  |AgreementSales       , Agreement,
 							  |CurrencySales        , Currency,
 							  |PriceIncludeTaxSales , PriceIncludeTax,
-							  |ItemKey              , ItemList.ItemKey,
-							  |Store                , ItemList.Store";
+							  |ItemKey              , ItemList.ItemKey";
 	
 	Else
 		Raise StrTemplate("Not supported External link for [WO] to [%1]", ExternalDocAliase);
@@ -9634,7 +9634,20 @@ EndFunction
 #Region EmptyTables_Materials
 
 Function GetColumnNames_Materials()
-	Return "Key, Ref, KeyOwner, Item, ItemKey, Store, Unit, ItemBOM, ItemKeyBOM, UnitBOM, CostWriteOff";
+	Return 
+		"Key,
+		|Ref,
+		|KeyOwner,
+		|Item,
+		|ItemKey,
+		|Store,
+		|Unit,
+		|ItemBOM,
+		|ItemKeyBOM,
+		|UnitBOM,
+		|CostWriteOff,
+		|BillOfMaterials,
+		|UniqueID";
 EndFunction
 
 Function GetColumnNamesSum_Materials()

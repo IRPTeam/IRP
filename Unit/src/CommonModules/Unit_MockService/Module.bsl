@@ -621,6 +621,13 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
 			ValueBase64 = Base64Value(DataForValue);
 			Return getValueOfBodyVariableByPath(NextPath, ValueBase64);
 			
+		ElsIf StrStartsWith(CurrentDataType, "[csv") Then
+			Separator = ",";
+			If CurrentDataType <> "[csv]" Then
+				Separator = Mid(CurrentDataType, 6, StrLen(CurrentDataType)-6);
+			EndIf; 
+			Return getValueOfBodyVariableByPath(NextPath, StrSplit(DataForValue, Separator, True));
+			
 		Else
 			Return String(DataForValue);
 			
@@ -654,8 +661,15 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
 	ElsIf StrStartsWith(CurrentDataType, "[") Then
 		// TODO: Other operation 
 		
-	Else // get object property 
-		PropertyValue = DataForValue[CurrentDataType]; // Arbitrary
+	Else // get object property
+	 
+	 	If TypeOf(DataForValue) = Type("Array") Then
+	 		NumberKey = Number(CurrentDataType);
+			PropertyValue = DataForValue[NumberKey]; // Arbitrary
+	 	Else
+			PropertyValue = DataForValue[CurrentDataType]; // Arbitrary
+	 	EndIf;
+	 
 		If IsBlankString(NextPath) Then
 			Return String(PropertyValue);
 		Else

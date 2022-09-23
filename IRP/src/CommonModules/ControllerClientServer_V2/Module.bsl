@@ -7860,7 +7860,9 @@ EndProcedure
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
 		// on client need ask user, do not transfer from cache to object
-		Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ViewClientModuleName);
+		// web-client-buf-fix
+		 ViewClient_V2.OnChainComplete(Parameters);
+		//Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ViewClientModuleName);
 	#ENDIF
 	
 	#IF Server THEN
@@ -7900,11 +7902,74 @@ Procedure CommitChainChanges(Parameters) Export
 			EndIf;
 		EndDo;
 		For Each ViewNotify In UniqueViewNotify Do
-			Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewClientModuleName, ViewNotify);
+			
+			// web-client-bug-fix
+			ExecuteViewNotify(Parameters, ViewNotify);
+			//Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewClientModuleName, ViewNotify);
 		EndDo;
 	#ENDIF
 	EndIf;
 EndProcedure
+
+#IF Client Then
+Procedure ExecuteViewNotify(Parameters, ViewNotify)
+	If ViewNotify = "OnOpenFormNotify"                         Then ViewClient_V2.OnOpenFormNotify(Parameters);
+	ElsIf ViewNotify = "InventoryOnAddRowFormNotify"           Then ViewClient_V2.InventoryOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "InventoryOnCopyRowFormNotify"          Then ViewClient_V2.InventoryOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "AccountBalanceOnAddRowFormNotify"      Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "AccountBalanceOnCopyRowFormNotify"     Then ViewClient_V2.AccountBalanceOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "ChequeBondsOnAddRowFormNotify"         Then ViewClient_V2.ChequeBondsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "ChequeBondsOnCopyRowFormNotify"        Then ViewClient_V2.ChequeBondsOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "ChequeBondsAfterDeleteRowFormNotify"   Then ViewClient_V2.ChequeBondsAfterDeleteRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OnSetChequeBondsChequeNotify"          Then ViewClient_V2.OnSetChequeBondsChequeNotify(Parameters);
+	ElsIf ViewNotify = "ItemListOnAddRowFormNotify"            Then ViewClient_V2.ItemListOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "ItemListOnCopyRowFormNotify"           Then ViewClient_V2.ItemListOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "ItemListAfterDeleteRowFormNotify"      Then ViewClient_V2.ItemListAfterDeleteRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListCancelNotify"             Then ViewClient_V2.OnSetItemListCancelNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListNetAmountNotify"          Then ViewClient_V2.OnSetItemListNetAmountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListQuantityNotify"           Then ViewClient_V2.OnSetItemListQuantityNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListQuantityInBaseUnitNotify" Then ViewClient_V2.OnSetItemListQuantityInBaseUnitNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListPhysCountNotify"          Then ViewClient_V2.OnSetItemListPhysCountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListManualFixedCountNotify"   Then ViewClient_V2.OnSetItemListManualFixedCountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetCalculationsNotify"               Then ViewClient_V2.OnSetCalculationsNotify(Parameters);
+	ElsIf ViewNotify = "PaymentListOnAddRowFormNotify"         Then ViewClient_V2.PaymentListOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "PaymentListOnCopyRowFormNotify"        Then ViewClient_V2.PaymentListOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "TransactionsOnAddRowFormNotify"        Then ViewClient_V2.TransactionsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "TransactionsOnCopyRowFormNotify"       Then ViewClient_V2.TransactionsOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OnSetAccountSenderNotify"              Then ViewClient_V2.OnSetAccountSenderNotify(Parameters);
+	ElsIf ViewNotify = "OnSetSendCurrencyNotify"               Then ViewClient_V2.OnSetSendCurrencyNotify(Parameters);
+	ElsIf ViewNotify = "OnSetSendAmountNotify"                 Then ViewClient_V2.OnSetSendAmountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetAccountReceiverNotify"            Then ViewClient_V2.OnSetAccountReceiverNotify(Parameters);
+	ElsIf ViewNotify = "OnSetReceiveCurrencyNotify"            Then ViewClient_V2.OnSetReceiveCurrencyNotify(Parameters);
+	ElsIf ViewNotify = "OnSetReceiveAmountNotify"              Then ViewClient_V2.OnSetReceiveAmountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetCashTransferOrderNotify"          Then ViewClient_V2.OnSetCashTransferOrderNotify(Parameters);
+	ElsIf ViewNotify = "OnSetStoreObjectAttrNotify"            Then ViewClient_V2.OnSetStoreObjectAttrNotify(Parameters);
+	ElsIf ViewNotify = "OnSetStoreNotify"                      Then ViewClient_V2.OnSetStoreNotify(Parameters);
+	ElsIf ViewNotify = "OnSetStoreTransitNotify"               Then ViewClient_V2.OnSetStoreTransitNotify(Parameters);
+	ElsIf ViewNotify = "OnSetStoreSenderNotify"                Then ViewClient_V2.OnSetStoreSenderNotify(Parameters);
+	ElsIf ViewNotify = "OnSetStoreReceiverNotify"              Then ViewClient_V2.OnSetStoreReceiverNotify(Parameters);
+	ElsIf ViewNotify = "OnSetDeliveryDateNotify"               Then ViewClient_V2.OnSetDeliveryDateNotify(Parameters);
+	ElsIf ViewNotify = "OnSetCompanyNotify"                    Then ViewClient_V2.OnSetCompanyNotify(Parameters);
+	ElsIf ViewNotify = "OnSetAccountNotify"                    Then ViewClient_V2.OnSetAccountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetCashAccountNotify"                Then ViewClient_V2.OnSetCashAccountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetTransactionTypeNotify"            Then ViewClient_V2.OnSetTransactionTypeNotify(Parameters);
+	ElsIf ViewNotify = "OnSetCurrencyNotify"                   Then ViewClient_V2.OnSetCurrencyNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPartnerNotify"                    Then ViewClient_V2.OnSetPartnerNotify(Parameters);
+	ElsIf ViewNotify = "OnSetLegalNameNotify"                  Then ViewClient_V2.OnSetLegalNameNotify(Parameters);
+	ElsIf ViewNotify = "OnSetConsolidatedRetailSalesNotify"    Then ViewClient_V2.OnSetConsolidatedRetailSalesNotify(Parameters);
+	ElsIf ViewNotify = "OnSetBranchNotify"                     Then ViewClient_V2.OnSetBranchNotify(Parameters);
+	ElsIf ViewNotify = "OnSetStatusNotify"                     Then ViewClient_V2.OnSetStatusNotify(Parameters);
+	ElsIf ViewNotify = "OnSetNumberNotify"                     Then ViewClient_V2.OnSetNumberNotify(Parameters);
+	ElsIf ViewNotify = "OnSetAgreementNotify"                  Then ViewClient_V2.OnSetAgreementNotify(Parameters);
+	ElsIf ViewNotify = "OnSetQuantityNotify"                   Then ViewClient_V2.OnSetQuantityNotify(Parameters);
+	ElsIf ViewNotify = "OnSetUnitNotify"                       Then ViewClient_V2.OnSetUnitNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemBundleNotify"                 Then ViewClient_V2.OnSetItemBundleNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemKeyBundleNotify"              Then ViewClient_V2.OnSetItemKeyBundleNotify(Parameters);
+	ElsIf ViewNotify = "PaymentsOnAddRowFormNotify"            Then ViewClient_V2.PaymentsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "PaymentsOnCopyRowFormNotify"           Then ViewClient_V2.PaymentsOnCopyRowFormNotify(Parameters);
+	EndIf;
+EndProcedure	
+#ENDIF
 
 // move changes from Cache to Object form CacheForm to Form
 Procedure _CommitChainChanges(Cache, Source)

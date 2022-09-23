@@ -171,6 +171,11 @@ Scenario: _0293002 create Work sheet based on Work order without SO (link, unlin
 		And I delete "$$WorkSheet1$$" variable
 		And I save the value of "Number" field as "$$NumberWorkSheet1$$"
 		And I save the window as "$$WorkSheet1$$"
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' |
+			| 'TRY'  |
+		And I select current line in "List" table
 		And I click the button named "FormPostAndClose"		
 				
 					
@@ -202,6 +207,11 @@ Scenario: _0293002 create Work sheet based on SO
 		And I delete "$$WorkSheet2$$" variable
 		And I save the value of "Number" field as "$$NumberWorkSheet2$$"
 		And I save the window as "$$WorkSheet2$$"
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' |
+			| 'TRY'  |
+		And I select current line in "List" table
 		And I click the button named "FormPostAndClose"		
 						
 					
@@ -246,6 +256,11 @@ Scenario: _0293003 create Work sheet based on WO with SO
 		And I delete "$$WorkSheet3$$" variable
 		And I save the value of "Number" field as "$$NumberWorkSheet3$$"
 		And I save the window as "$$WorkSheet3$$"
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' |
+			| 'TRY'  |
+		And I select current line in "List" table	
 		And I click the button named "FormPostAndClose"		
 							
 Scenario: _0293004 create Work sheet without bases document
@@ -355,12 +370,17 @@ Scenario: _0293004 create Work sheet without bases document
 			| '#' | 'Employee'        | 'Unit' | 'Quantity' |
 			| '1' | 'Alexander Orlov' | 'hour' | '2,000'    |
 			| '2' | 'David Romanov'   | 'hour' | '2,500'    |
-	* Filling branch
+	* Filling branch and currency
 		And I move to "Other" tab
 		And I click Choice button of the field named "Branch"
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Workshop 1'  |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' |
+			| 'TRY'  |
 		And I select current line in "List" table
 	* Post document
 		And I click the button named "FormPost"

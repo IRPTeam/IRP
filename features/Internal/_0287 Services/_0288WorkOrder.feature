@@ -10,7 +10,8 @@ I want to fill out the information on the services I received and which I provid
 For cost analysis
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one

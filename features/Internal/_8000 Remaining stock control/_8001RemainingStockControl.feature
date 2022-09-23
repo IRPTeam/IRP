@@ -59,6 +59,8 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create information register Barcodes records
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
+		When create items for work order
+		When Create catalog BillOfMaterials objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -156,6 +158,9 @@ Scenario:_800000 preparation (remaining stock control)
 		And I close all client application windows
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(251).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document PurchaseInvoice objects (for materials)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create information register UserSettings records (Retail document)
 	When create payment terminal
 	When create PaymentTypes
@@ -2409,7 +2414,72 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 		Then user message window does not contain messages
 		And I close all client application windows
 
-
+Scenario:_800051 check remaining stock control in the Work Sheet
+	And I close all client application windows
+	* Create WS
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I click "Create" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I activate field named "MaterialsLineNumber" in "Materials" table
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Add first work
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I activate field named "MaterialsLineNumber" in "Materials" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Installation' |
+		And I select current line in "List" table
+		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
+		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Furniture installation' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "MaterialsQuantity" in "Materials" table
+		And I go to line in "Materials" table
+			| 'Item'       | 'Item (BOM)' | 'Item key'   | 'Item key (BOM)' | 'Quantity' |
+			| 'Material 1' | 'Material 1' | 'Material 1' | 'Material 1'     | '2,000'    |
+		And I select current line in "Materials" table
+		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
+		And I finish line editing in "Materials" table
+	* Add second work
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Assembly' |
+		And I select current line in "List" table
+		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
+		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Assembly' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "MaterialsQuantity" in "Materials" table
+		And I go to line in "Materials" table
+			| 'Item'       | 'Item (BOM)' | 'Item key'   | 'Item key (BOM)' | 'Quantity' |
+			| 'Material 1' | 'Material 1' | 'Material 1' | 'Material 1'     | '2,000'    |
+		And I select current line in "Materials" table
+		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
+		And I finish line editing in "Materials" table
+						
 
 Scenario:_800055 check remaining stock control when unpost/change Sales order closing
 		And I close all client application windows

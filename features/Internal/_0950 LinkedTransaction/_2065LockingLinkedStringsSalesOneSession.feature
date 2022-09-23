@@ -46,6 +46,8 @@ Scenario: _2065001 preparation (locking linked strings)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CancelReturnReasons objects
+		When create items for work order
+		When Create catalog BillOfMaterials objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -93,6 +95,17 @@ Scenario: _2065001 preparation (locking linked strings)
 		| "Documents.PurchaseOrder.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 		| "Documents.PlannedReceiptReservation.FindByNumber(36).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document SO-WO-WS-SI
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+		| "Documents.WorkOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+		| "Documents.WorkSheet.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+
+
 
 Scenario: _20650011 check preparation
 	When check preparation
@@ -209,6 +222,46 @@ Scenario: _2065004 check locking header in the SC with linked documents (one ses
 		And "Transaction type" attribute is read-only
 		And "Branch" attribute is read-only
 	And I close all client application windows	
+
+
+Scenario: _20650041 check locking header in the WS with linked documents (one session)
+	And I close all client application windows
+	* Open WS
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'     |
+		And I select current line in "List" table
+	* Check locking header
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And "Company" attribute is read-only
+		And "Partner" attribute is read-only
+		And "Legal name" attribute is read-only
+		And I move to "Other" tab		
+		And "Branch" attribute is read-only
+	And I close all client application windows
+
+
+Scenario: _20650042 check locking header in the WO with linked documents (one session)
+	* Open WO
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '31'     |
+		And I select current line in "List" table
+	* Check locking header
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And "Store" attribute is read-only
+		And "Company" attribute is read-only
+		And "Partner" attribute is read-only
+		And "Legal name" attribute is read-only
+		And "Partner term" attribute is read-only
+		And I move to "Other" tab	
+		And "Price includes tax" attribute is read-only
+		And "Currency" attribute is read-only
+		And "Branch" attribute is read-only
+	And I close all client application windows	
+
 
 Scenario: _2065005 check locking tab in the SO with linked documents (one session)
 	* Open SO
@@ -543,7 +596,94 @@ Scenario: _2065007 check locking tab in the SC with linked documents (one sessio
 			And I click choice button of "Sales invoice" attribute in "ItemList" table
 			And I close current window
 		And I close all client application windows
-		
+
+
+Scenario: _20650071 check locking tab in the WS with linked documents (one session)
+	And I close all client application windows
+	* Open WS
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |
+		And I select current line in "List" table
+	* Check locking tab
+		* Items
+			And I go to line in "ItemList" table
+				| 'Item'         | 'Item key'     |
+				| 'Installation' | 'Installation' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Item" attribute in "ItemList" table'|
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key' |
+				| 'Assembly' | 'Assembly' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Item" attribute in "ItemList" table'|
+		* Item key
+			And I go to line in "ItemList" table
+				| 'Item'         | 'Item key'     |
+				| 'Installation' | 'Installation' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Item key" attribute in "ItemList" table'|
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key' |
+				| 'Assembly' | 'Assembly' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Item key" attribute in "ItemList" table'|
+		* Sales order
+			And I go to line in "ItemList" table
+				| 'Item'         | 'Item key'     |
+				| 'Installation' | 'Installation' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Sales order" attribute in "ItemList" table'|				
+		* Work order
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key' |
+				| 'Assembly' | 'Assembly' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Work order" attribute in "ItemList" table'|
+			And I close all client application windows
+			
+
+Scenario: _20650072 check locking tab in the WO with linked documents (one session)
+	And I close all client application windows
+	* Open WO
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '31'     |
+		And I select current line in "List" table
+	* Check locking tab
+		* Items
+			And I go to line in "ItemList" table
+				| 'Item'         | 'Item key'     |
+				| 'Installation' | 'Installation' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Item" attribute in "ItemList" table'|
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key' |
+				| 'Assembly' | 'Assembly' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Item" attribute in "ItemList" table'|
+		* Item key
+			And I go to line in "ItemList" table
+				| 'Item'         | 'Item key'     |
+				| 'Installation' | 'Installation' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Item key" attribute in "ItemList" table'|
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key' |
+				| 'Assembly' | 'Assembly' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Item key" attribute in "ItemList" table'|
+		* Sales order
+			And I go to line in "ItemList" table
+				| 'Item'         | 'Item key'     |
+				| 'Installation' | 'Installation' |
+			When I Check the steps for Exception
+				|'And I click choice button of "Sales order" attribute in "ItemList" table'|				
+			And I close all client application windows	
+						
+
 Scenario: 2065008 check unlock linked rows in the SO
 	And I close all client application windows
 	* Open SO
@@ -618,7 +758,57 @@ Scenario: 20650091 check unlock linked rows in the SC
 		And "ItemList" table contains lines
 			| 'Item key' | 'Item'  |
 			| '38/Black' | 'Shirt' |
-		And I close all client application windows			
+		And I close all client application windows	
+
+Scenario: 20650092 check unlock linked rows in the WS
+	And I close all client application windows
+	* Open WS
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'         | 'Item key'     |
+			| 'Installation' | 'Installation' |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Assembly'    |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table does not contain lines
+			| 'Item'         | 'Item key'     |
+			| 'Installation' | 'Installation' |
+		And I close all client application windows	
+
+Scenario: 20650093 check unlock linked rows in the WO
+	And I close all client application windows
+	* Open WO
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '31'     |
+		And I select current line in "List" table
+	* Check unlock linked rows
+		And I click "Unlock linked rows" button
+		And I go to line in "ItemList" table
+			| 'Item'         | 'Item key'     |
+			| 'Installation' | 'Installation' |
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Assembly'    |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table does not contain lines
+			| 'Item'         | 'Item key'     |
+			| 'Installation' | 'Installation' |
+		And I close all client application windows	
 
 Scenario: _2065010 change quantity in the linked string in the SO (one session)
 	* Open SO
@@ -815,6 +1005,49 @@ Scenario: _2065017 delete linked string in the SC (one session)
 			|'Can not delete linked row [1] [Dress] [XS/Blue]'|
 		And I close all client application windows
 
+Scenario: _2065018 delete linked string in the WO (one session)
+	* Open WO
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '31'     |
+		And I select current line in "List" table
+	* Delete linked string
+		And I go to line in "ItemList" table
+			| 'Item'         | 'Item key'     |
+			| 'Installation' | 'Installation' |
+		And I select current line in "ItemList" table
+		And in the table "ItemList" I click "Delete" button	
+		And "ItemList" table contains lines
+			| 'Item'         | 'Item key'     |
+			| 'Installation' | 'Installation' |		
+		And Delay 3
+		Then there are lines in TestClient message log
+			|'Can not delete linked row [1] [Installation] [Installation]'|
+		And I close all client application windows
+
+Scenario: _20650181 delete linked string in the WS (one session)
+		And I close all client application windows
+	* Open WS
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'     |
+		And I select current line in "List" table
+	* Delete linked string
+		And I go to line in "ItemList" table
+			| 'Item'         | 'Item key'     |
+			| 'Installation' | 'Installation' |
+		And I select current line in "ItemList" table
+		And in the table "ItemList" I click "Delete" button	
+		And "ItemList" table contains lines
+			| 'Item'         | 'Item key'     |
+			| 'Installation' | 'Installation' |		
+		And Delay 3
+		Then there are lines in TestClient message log
+			|'Can not delete linked row [1] [Installation] [Installation]'|
+		And I close all client application windows
+
 
 Scenario: _2065019 unpost SO with linked strings (one session)
 	And I close all client application windows
@@ -870,7 +1103,42 @@ Scenario: _2065021 unpost SC with linked strings (one session)
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
 			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 9 . Required: 0 . Lacking: 9 .'|		
 	And I close all client application windows		
-				
+
+Scenario: _2065022 unpost WS with linked strings (one session)
+	And I close all client application windows
+	* Select WS
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |
+	* Try unpost WS
+		And I activate field named "Date" in "List" table
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check message
+		Then there are lines in TestClient message log
+			|'Line No. [1] [Installation Installation] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+			|'Line No. [2] [Assembly Assembly] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+		And I close all client application windows	
+
+Scenario: _20650221 unpost WS with linked strings (one session)
+	And I close all client application windows
+	* Select WO
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '31'      |
+	* Try unpost WS
+		And I activate field named "Date" in "List" table
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check message
+		Then there are lines in TestClient message log
+			|'Line No. [1] [Installation Installation] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+			|'Line No. [2] [Assembly Assembly] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+		And I close all client application windows		
 
 Scenario: _2065023 delete SO with linked strings (one session)
 	And I close all client application windows
@@ -933,6 +1201,45 @@ Scenario: _2065025 delete SC with linked strings (one session)
 			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 9 . Required: 0 . Lacking: 9 .'|		
 	And I close all client application windows
 
+Scenario: _2065026 delete WO with linked strings (one session)
+	And I close all client application windows
+	* Select WO
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '31'     |
+	* Try delete WO
+		And I activate field named "Date" in "List" table
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check message
+		Then there are lines in TestClient message log
+			|'Line No. [1] [Installation Installation] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+			|'Line No. [2] [Assembly Assembly] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+		And I close all client application windows
+
+Scenario: _2065027 delete WS with linked strings (one session)
+	And I close all client application windows
+	* Select WS
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |
+	* Try delete WS
+		And I activate field named "Date" in "List" table
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check message
+		Then there are lines in TestClient message log
+			|'Line No. [1] [Installation Installation] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+			|'Line No. [2] [Assembly Assembly] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+		And I close all client application windows
 				
 
 Scenario: _2065029 check locking header in the SRO with linked documents (one session)

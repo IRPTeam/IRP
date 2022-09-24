@@ -30,10 +30,10 @@ Procedure PrintLastReceipt(Object, Cancel, AddInfo = Undefined) Export
 	EndIf;
 
 	Param = UniversalPrintServer.InitPrintParam(LastRetailSalesReceipt);
-	Param.NameTemplate = "Point of Sale";
+	Param.NameTemplate = "";
 	Param.BuilderLayout = False;
 	Param.SpreadsheetDoc = PrintResult;
-	PrintResult.Write("D:\bazil\2\1.pdf",  SpreadsheetDocumentFileType.PDF);
+
 	OpenForm("CommonForm.PrintForm", , ,"UniqueOpeningOfTheCommonPrintingPlate");
 	Notify("AddTemplatePrintForm", Param)
 

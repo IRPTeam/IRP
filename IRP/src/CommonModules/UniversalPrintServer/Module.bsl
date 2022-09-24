@@ -47,8 +47,6 @@ Function BuildSpreadsheetDoc(RefDocument, Param) Export
 	Return Result;	
 EndFunction
 
-
-
 // Object manager by link.
 // 
 // Parameters:
@@ -81,7 +79,6 @@ Function GetSynonymTemplate(Ref, NameTemplate) Export
 	Return Result;
 EndFunction
 
-
 // Language name by code.
 // 
 // Parameters:
@@ -91,13 +88,12 @@ EndFunction
 //  Undefined, String -- LanguageName By Code
 Function LanguageNameByCode(CodeL) Export
 	For Each It In Metadata.Languages Do
-		If Upper(CodeL) = Upper(It.LanguageCode) Then
+		If StrCompare(CodeL, It.LanguageCode)= 0 Then
 			Return It.Name;
 		EndIf;
 	EndDo;
 	Return Undefined;
 EndFunction
-
 
 // Code by language name.
 // 
@@ -108,7 +104,7 @@ EndFunction
 //  Undefined, String - Code by language name
 Function CodeByLanguageName(NameL) Export
 	For Each It In Metadata.Languages Do
-		If Upper(NameL) = Upper(It.Name) Then
+		If StrCompare(NameL, It.Name)= 0 Then
 			Return It.LanguageCode;
 		EndIf;
 	EndDo;

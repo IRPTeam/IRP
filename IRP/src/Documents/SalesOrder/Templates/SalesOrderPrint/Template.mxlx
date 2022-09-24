@@ -206,7 +206,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Number</v8:content>
+							<v8:content>#</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -486,7 +486,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>All row [Number]   [Total] [Currency]</v8:content>
+							<v8:content>Total row [Number]   [Total] [Currency]</v8:content>
 						</v8:item>
 					</tl>
 				</c>

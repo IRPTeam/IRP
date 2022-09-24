@@ -5,7 +5,7 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 EndFunction
 
 Function Print(Ref, Param) Export
-	if StrCompare(Param.NameTemplate, "SalesOrderPrint") = 0 Then
+	If StrCompare(Param.NameTemplate, "SalesOrderPrint") = 0 Then
 		Return SalesOrderPrint(Ref, Param);
 	EndIf; 
 EndFunction
@@ -103,24 +103,23 @@ Function SalesOrderPrint(Ref, Param)
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.ItemKey.Item",LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.ItemKey",LCode);
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.Unit",LCode);
-	//Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderTaxList.Tax",LCode);
 	Query.Text = Text;
 		
 	Query.Parameters.Insert("Ref", Ref);
-	Selection			= Query.ExecuteBatch();
-	SelectionHeader		= Selection[0].Select(); 
-	SelectionItems		= Selection[1].Unload();
+	Selection = Query.ExecuteBatch();
+	SelectionHeader = Selection[0].Select(); 
+	SelectionItems = Selection[1].Unload();
 	SelectionItems.Indexes.Add("Ref");
-	SelectionHeaderTAX	= Selection[2].Unload();
-	SelectionPercentTAX	= Selection[3].Unload();
+	SelectionHeaderTAX = Selection[2].Unload();
+	SelectionPercentTAX = Selection[3].Unload();
 
-	AreaCaption			= Template.GetArea("Caption");
-	AreaHeader			= Template.GetArea("Header");
-	AreaItemListHeader	= Template.GetArea("ItemListHeader|ItemColumn");
-	AreaItemList		= Template.GetArea("ItemList|ItemColumn");
-	AreaFooter			= Template.GetArea("Footer");
-	AreaListHeaderTAX	= Template.GetArea("ItemListHeaderTAX|ColumnTAX");
-	AreaListTAX			= Template.GetArea("ItemListTAX|ColumnTAX");
+	AreaCaption = Template.GetArea("Caption");
+	AreaHeader = Template.GetArea("Header");
+	AreaItemListHeader = Template.GetArea("ItemListHeader|ItemColumn");
+	AreaItemList = Template.GetArea("ItemList|ItemColumn");
+	AreaFooter = Template.GetArea("Footer");
+	AreaListHeaderTAX = Template.GetArea("ItemListHeaderTAX|ColumnTAX");
+	AreaListTAX = Template.GetArea("ItemListTAX|ColumnTAX");
 
 	Spreadsheet = New SpreadsheetDocument;
 	Spreadsheet.LanguageCode = Param.LayoutLang;
@@ -141,11 +140,11 @@ Function SalesOrderPrint(Ref, Param)
 		Choice	= New Structure("Ref", SelectionHeader.Ref);
 		FindRow = SelectionItems.FindRows(Choice);
 		
-		Number		= 0;
-		TotalSum	= 0;
-		TotalTax	= 0;
-		TotalNet	= 0;
-		TotalOffers	= 0;
+		Number = 0;
+		TotalSum = 0;
+		TotalTax = 0;
+		TotalNet = 0;
+		TotalOffers = 0;
 		For Each It In FindRow Do
 			Number = Number + 1;
 			AreaItemList.Parameters.Fill(It);	
@@ -154,28 +153,28 @@ Function SalesOrderPrint(Ref, Param)
 			
 			For ItTax = 0 To SelectionHeaderTAX.Count() - 1 Do
 				Tax = SelectionHeaderTAX[ItTax].Tax;
-				ChoiceTax	= New Structure("Ref, Key, Tax", SelectionHeader.Ref, It.Key, Tax);
-				FindRowTax		= SelectionPercentTAX.FindRows(ChoiceTax);
+				ChoiceTax = New Structure("Ref, Key, Tax", SelectionHeader.Ref, It.Key, Tax);
+				FindRowTax = SelectionPercentTAX.FindRows(ChoiceTax);
 				For Each ItPercent In FindRowTax Do
 					AreaListTAX.Parameters.PercentTax = ItPercent.TaxRate;
 					Spreadsheet.Join(AreaListTAX);
 				EndDo;
 			EndDo;
-			TotalSum	= TotalSum + It.TotalAmount;
-			TotalTax	= TotalTax + It.TaxAmount;
+			TotalSum = TotalSum + It.TotalAmount;
+			TotalTax = TotalTax + It.TaxAmount;
 			TotalOffers	= TotalOffers + It.OffersAmount;
-			TotalNet	= TotalNet + It.NetAmount
+			TotalNet = TotalNet + It.NetAmount
 		EndDo;
 	EndDo;
 	
-	AreaFooter.Parameters.Number		= Number;
-	AreaFooter.Parameters.Total			= TotalSum;
-	AreaFooter.Parameters.Currency		= SelectionHeader.Currency;
-	AreaFooter.Parameters.Total			= TotalSum;
-	AreaFooter.Parameters.TotalTax		= TotalTax;
-	AreaFooter.Parameters.TotalNet		= TotalNet;
-	AreaFooter.Parameters.TotalOffers	= TotalOffers;
-	AreaFooter.Parameters.Manager		= SelectionHeader.Author;
+	AreaFooter.Parameters.Number = Number;
+	AreaFooter.Parameters.Total = TotalSum;
+	AreaFooter.Parameters.Currency = SelectionHeader.Currency;
+	AreaFooter.Parameters.Total = TotalSum;
+	AreaFooter.Parameters.TotalTax = TotalTax;
+	AreaFooter.Parameters.TotalNet = TotalNet;
+	AreaFooter.Parameters.TotalOffers = TotalOffers;
+	AreaFooter.Parameters.Manager = SelectionHeader.Author;
 	Spreadsheet.Put(AreaFooter);
 	
 	Return Spreadsheet;

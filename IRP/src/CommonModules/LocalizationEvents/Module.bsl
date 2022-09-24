@@ -105,8 +105,10 @@ Function DescriptionRefLocalization(Ref, LocalizationCode = Undefined) Export
 		LocalizationCode = LocalizationReuse.GetLocalizationCode()
 	EndIf;
 	Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_"+LocalizationCode);
+	If Result = "" Then
+		Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_en");
+	EndIf;
 	Return Result;
-	
 EndFunction
 
 

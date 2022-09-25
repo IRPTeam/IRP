@@ -173,9 +173,9 @@ Function CopyableSpreadsheetDocumentProperties()
 	"PageHeight, DuplexPrinting, Protection," +
 	"PrinterName, LanguageCode, Copies, PrintScale," +
 	"FirstPageNumber, PageOrientation, TopMargin," +
-	"LeftMargin,BottomMargin,RightMargin,Collate," +
-	"HeaderSize,FooterSize,PageSize,PrintAccuracy," +
-	"BackgroundPicture,BlackAndWhite,PageWidth,PerPage";
+	"LeftMargin, BottomMargin, RightMargin, Collate," +
+	"HeaderSize, FooterSize, PageSize, PrintAccuracy," +
+	"BackgroundPicture, BlackAndWhite, PageWidth, PerPage";
 EndFunction
 
 &AtClient

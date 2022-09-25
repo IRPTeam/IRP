@@ -47,15 +47,33 @@ Function SalesOrderPrint(Ref, Param)
 		|	SalesOrderItemList.Price AS Price,
 		|	SalesOrderItemList.TaxAmount AS TaxAmount,
 		|	SalesOrderItemList.TotalAmount AS TotalAmount,
-		|	SalesOrderItemList.NetAmount AS NetAmount,	
+		|	SalesOrderItemList.NetAmount AS NetAmount,
 		|	SalesOrderItemList.OffersAmount AS OffersAmount,
 		|	SalesOrderItemList.Ref AS Ref,
 		|	SalesOrderItemList.Key AS Key
+		|INTO Items
 		|FROM
 		|	Document.SalesOrder.ItemList AS SalesOrderItemList
 		|WHERE
 		|	SalesOrderItemList.Ref = &Ref
 		|	AND NOT SalesOrderItemList.Cancel
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Items.Item AS Item,
+		|	Items.ItemKey AS ItemKey,
+		|	Items.Quantity AS Quantity,
+		|	Items.Unit AS Unit,
+		|	Items.Price AS Price,
+		|	Items.TaxAmount AS TaxAmount,
+		|	Items.TotalAmount AS TotalAmount,
+		|	Items.NetAmount AS NetAmount,
+		|	Items.OffersAmount AS OffersAmount,
+		|	Items.Ref AS Ref,
+		|	Items.Key AS Key
+		|FROM
+		|	Items AS Items
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -68,14 +86,11 @@ Function SalesOrderPrint(Ref, Param)
 		|WHERE
 		|	SalesOrderTaxList.Ref = &Ref
 		|	AND SalesOrderTaxList.Key IN
-		|		(SELECT
+		|			(SELECT
+		|				Items.Key AS Key
+		|			FROM
+		|				Items AS Items)
 		|
-		|			SalesOrderItemList.Key AS Key
-		|		FROM
-		|			Document.SalesOrder.ItemList AS SalesOrderItemList
-		|		WHERE
-		|			SalesOrderItemList.Ref = &Ref
-		|			AND NOT SalesOrderItemList.Cancel)
 		|GROUP BY
 		|	SalesOrderTaxList.Ref,
 		|	SalesOrderTaxList.Tax
@@ -94,7 +109,12 @@ Function SalesOrderPrint(Ref, Param)
 		|FROM
 		|	Document.SalesOrder.TaxList AS SalesOrderTaxList
 		|WHERE
-		|	SalesOrderTaxList.Ref = &Ref";
+		|	SalesOrderTaxList.Ref = &Ref
+		|	AND SalesOrderTaxList.Key IN
+		|			(SELECT
+		|				Items.Key AS Key
+		|			FROM
+		|				Items AS Items)";
 
 	LCode = Param.DataLang;	
 	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrder.Company",LCode);
@@ -108,10 +128,10 @@ Function SalesOrderPrint(Ref, Param)
 	Query.Parameters.Insert("Ref", Ref);
 	Selection = Query.ExecuteBatch();
 	SelectionHeader = Selection[0].Select(); 
-	SelectionItems = Selection[1].Unload();
+	SelectionItems = Selection[2].Unload();
 	SelectionItems.Indexes.Add("Ref");
-	SelectionHeaderTAX = Selection[2].Unload();
-	SelectionPercentTAX = Selection[3].Unload();
+	SelectionHeaderTAX = Selection[3].Unload();
+	SelectionPercentTAX = Selection[4].Unload();
 
 	AreaCaption = Template.GetArea("Caption");
 	AreaHeader = Template.GetArea("Header");

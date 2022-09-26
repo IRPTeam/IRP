@@ -2250,7 +2250,7 @@ Scenario: create items for work order
 
 	And I check or create catalog "Units" objects:
 		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'Item' | 'Quantity' | 'BasisUnit' | 'UOM' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
-		| 'e1cib/data/Catalog.Units?ref=b785989306affb7a11ed39a5560fdf74' | 'False'        | 9      | ''     | 1          | ''          | ''    | 'kg'             | ''                 | ''               | ''               |          |          |          |          |         |
+		| 'e1cib/data/Catalog.Units?ref=b785989306affb7a11ed39a5560fdf74' | 'False'        | 19     | ''     | 1          | ''          | ''    | 'kg'             | ''                 | ''               | ''               |          |          |          |          |         |
 
 	// Catalog.ItemKeys
 
@@ -2286,3 +2286,78 @@ Scenario: Create catalog BillOfMaterials objects
 		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39af48f5fa06' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf67' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6c' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 2          | ''                | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' |
 
 
+
+Scenario: create items for work order (LC)
+
+	// Catalog.AddAttributeAndPropertyValues
+
+	And I check or create for catalog "AddAttributeAndPropertyValues" objects with Data Exchange Load parameter set to true:
+		| 'Ref'                                                                                   | 'DeletionMark' | 'Owner'                                                                                              | 'AdditionalID' | 'Description_en'         | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=b785989306affb7a11ed39a5560fdf70' | 'False'        | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b785989306affb7a11ed3997c3dfb82e' | ''             | 'furniture installation' | ''                 | ''               | ''               | '_f4e8c834285644eca8f2f99a65674f77' |
+		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=b785989306affb7a11ed39a5560fdf72' | 'False'        | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b785989306affb7a11ed3997c3dfb82e' | ''             | 'furniture delivery'     | ''                 | ''               | ''               | '_8e9bf5e6247f4070ad5c8c234bb7c96e' |
+
+	// Catalog.ItemTypes
+
+	And I check or create catalog "ItemTypes" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'StockBalanceDetail'                | 'EachSerialLotNumberIsUnique' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.ItemTypes?ref=b785989306affb7a11ed39af48f5fa02' | 'False'        | ''       | 'False'    | 'Enum.ItemTypes.Product' | 'False'              | ''                                  | 'False'                       | 'Material'       | ''                 | ''               | 'Furniture TR'   | '_56ff3f8405984e5da4d72e49f8e438d8' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=b785989306affb7a11ed39b19df1d373' | 'False'        | ''       | 'False'    | 'Enum.ItemTypes.Service' | 'False'              | 'Enum.StockBalanceDetail.ByItemKey' | 'False'                       | 'Work'           | ''                 | ''               | ''               | '_e9cd5fe09a144ad8a973d108508fdc2b' |
+
+	// Catalog.Units
+
+	And I check or create catalog "Units" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Item' | 'Quantity' | 'BasisUnit' | 'UOM' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
+		| 'e1cib/data/Catalog.Units?ref=b785989306affb7a11ed39a5560fdf74' | 'False'        | ''     | 1          | ''          | ''    | 'kg'             | ''                 | ''               | ''               |          |          |          |          |         |
+		| 'e1cib/data/Catalog.Units?ref=b785989306affb7a11ed38a5560fdf77' | 'False'        | ''     | 1          | ''          | ''    | 'hour'           | ''                 | ''               | ''               |          |          |          |          |         |
+
+
+	// Catalog.Items
+
+	And I check or create catalog "Items" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture'                          | 'Vendor' | 'ItemID' | 'PackageUnit' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
+		| 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf65' | 'False'        | 'e1cib/data/Catalog.ItemTypes?ref=b785989306affb7a11ed39af48f5fa02' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Material 1'     | ''                 | ''               | ''               |          |          |          |          |         |
+		| 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf67' | 'False'        | 'e1cib/data/Catalog.ItemTypes?ref=b785989306affb7a11ed39af48f5fa02' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Material 2'     | ''                 | ''               | ''               |          |          |          |          |         |
+		| 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf68' | 'False'        | 'e1cib/data/Catalog.ItemTypes?ref=b785989306affb7a11ed39af48f5fa02' | 'e1cib/data/Catalog.Units?ref=b785989306affb7a11ed39a5560fdf74' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Material 3'     | ''                 | ''               | ''               |          |          |          |          |         |
+		| 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf69' | 'False'        | 'e1cib/data/Catalog.ItemTypes?ref=b785989306affb7a11ed39af48f5fa02' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Material 4'     | ''                 | ''               | ''               |          |          |          |          |         |
+		| 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf6e' | 'False'        | 'e1cib/data/Catalog.ItemTypes?ref=b785989306affb7a11ed39b19df1d373' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Installation'   | ''                 | ''               | ''               |          |          |          |          |         |
+		| 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf71' | 'False'        | 'e1cib/data/Catalog.ItemTypes?ref=b785989306affb7a11ed39b19df1d373' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Delivery'       | ''                 | ''               | ''               |          |          |          |          |         |
+		| 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39af48f5fa03' | 'False'        | 'e1cib/data/Catalog.ItemTypes?ref=b785989306affb7a11ed39b19df1d373' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Assembly'       | ''                 | ''               | ''               |          |          |          |          |         |
+
+	// Catalog.Units
+
+	And I check or create catalog "Units" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'Item' | 'Quantity' | 'BasisUnit' | 'UOM' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
+		| 'e1cib/data/Catalog.Units?ref=b785989306affb7a11ed39a5560fdf74' | 'False'        | 19     | ''     | 1          | ''          | ''    | 'kg'             | ''                 | ''               | ''               |          |          |          |          |         |
+
+	// Catalog.ItemKeys
+
+	And I check or create catalog "ItemKeys" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Item'                                                          | 'Unit' | 'Specification' | 'AffectPricingMD5' | 'UniqueMD5'                                       | 'ItemKeyID' | 'DefaultBillOfMaterials' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf66' | 'False'        | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf65' | ''     | ''              | ''                 | 'C3 71 97 8B 1A 4F 04 57 A6 92 0F A7 C5 BB 54 2F' | ''          | ''                       | 'Material 1'     | 'Material 1'       | 'Material 1'     | 'Material 1'     |          |          |          |          |         |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6c' | 'False'        | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf67' | ''     | ''              | ''                 | '2D A5 B3 B2 6C 50 07 6A D8 E8 5F D1 DC 91 29 ED' | ''          | ''                       | 'Material 2'     | 'Material 2'       | 'Material 2'     | 'Material 2'     |          |          |          |          |         |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6b' | 'False'        | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf68' | ''     | ''              | ''                 | '5B 87 22 4E 6F 66 76 8F 21 7A 35 6E D0 AB C5 A2' | ''          | ''                       | 'Material 3'     | 'Material 3'       | 'Material 3'     | 'Material 3'     |          |          |          |          |         |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6a' | 'False'        | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf69' | ''     | ''              | ''                 | '4D EA E0 7D 67 CC 1C 79 A6 BA BD 94 2A EF 4A 8E' | ''          | ''                       | 'Material 4'     | 'Material 4'       | 'Material 4'     | 'Material 4'     |          |          |          |          |         |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6f' | 'False'        | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf6e' | ''     | ''              | ''                 | '3D 41 AA E6 57 39 20 94 66 6A 36 CC EF 49 C0 38' | ''          | ''                       | 'Installation'   | 'Installation'     | 'Installation'   | 'Installation'   |          |          |          |          |         |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf73' | 'False'        | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf71' | ''     | ''              | ''                 | 'B7 05 85 CD 60 AC 47 67 22 2E 4F 76 B5 0E 4A E6' | ''          | ''                       | 'Delivery'       | 'Delivery'         | 'Delivery'       | 'Delivery'       |          |          |          |          |         |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39af48f5fa04' | 'False'        | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39af48f5fa03' | ''     | ''              | ''                 | '64 34 6C 42 83 92 39 BB FD AE 86 87 35 6C C8 D3' | ''          | ''                       | 'Assembly'       | 'Assembly'         | 'Assembly'       | 'Assembly'       |          |          |          |          |         |
+
+
+
+Scenario: Create catalog BillOfMaterials objects (LC)
+
+	And I check or create catalog "BusinessUnits" objects:
+		| 'Ref'                                                                   | 'DeletionMark' | 'Code' | 'Type'                            | 'UseConsolidatedRetailSales' | 'MaterialStore'                                                  | 'ReleaseStore'                                                   | 'SemiproductStore'                                               | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=b785989306affb7a11ed39af48f5fa05' | 'False'        | 6      | 'Enum.BusinessUnitTypes.Workshop' | 'False'                      | 'e1cib/data/Catalog.Stores?ref=86ffd69b4676df1211ea9f64f4e833d0' | 'e1cib/data/Catalog.Stores?ref=86ffd69b4676df1211ea9f64f4e833d0' | 'e1cib/data/Catalog.Stores?ref=86ffd69b4676df1211ea9f64f4e833d0' | 'Workshop 1'     | ''                 | ''               | ''               |
+
+	And I check or create catalog "BillOfMaterials" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Item'                                                          | 'ItemKey'                                                          | 'Unit'                                                          | 'Quantity' | 'Active' | 'BusinessUnit'                                                          | 'Type'                           | 'Description_en'         | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39a5560fdf75' | 'False'        | 1      | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf6e' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6f' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 1          | 'True'   | 'e1cib/data/Catalog.BusinessUnits?ref=b785989306affb7a11ed39af48f5fa05' | 'Enum.BillOfMaterialsTypes.Work' | 'Furniture installation' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39af48f5fa06' | 'False'        | 2      | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39af48f5fa03' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39af48f5fa04' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 1          | 'True'   | 'e1cib/data/Catalog.BusinessUnits?ref=b785989306affb7a11ed39af48f5fa05' | 'Enum.BillOfMaterialsTypes.Work' | 'Assembly'               | ''                 | ''               | ''               |
+
+	And I refill object tabular section "Content":
+		| 'Ref'                                                                     | 'Item'                                                          | 'ItemKey'                                                          | 'Unit'                                                          | 'Quantity' | 'BillOfMaterials' | 'ExpenseType'                                                                    |
+		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39a5560fdf75' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf65' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf66' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 2          | ''                | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b76e892a86cabee011ebfe98af57d4b3' |
+		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39a5560fdf75' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf67' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6c' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 4          | ''                | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b76e892a86cabee011ebfe98af57d4b3' |
+		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39a5560fdf75' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf68' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6b' | 'e1cib/data/Catalog.Units?ref=b785989306affb7a11ed39a5560fdf74' | 1.521      | ''                | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b76e892a86cabee011ebfe98af57d4b3' |
+		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39af48f5fa06' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf65' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf66' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 2          | ''                | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b76e892a86cabee011ebfe98af57d4b3' |
+		| 'e1cib/data/Catalog.BillOfMaterials?ref=b785989306affb7a11ed39af48f5fa06' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf67' | 'e1cib/data/Catalog.ItemKeys?ref=b785989306affb7a11ed39a5560fdf6c' | 'e1cib/data/Catalog.Units?ref=86ffd69b4676df1211ea9f63ccabb62c' | 2          | ''                | 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b76e892a86cabee011ebfe98af57d4b3' |

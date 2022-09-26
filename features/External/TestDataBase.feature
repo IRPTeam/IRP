@@ -674,6 +674,7 @@ Scenario: Create catalog Taxes objects (test data base)
 		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970' | 'CashRevenue'         |
 		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970' | 'RetailSalesReceipt'  |
 		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970' | 'RetailReturnReceipt' |
+		| 'e1cib/data/Catalog.Taxes?ref=b762b13668d0905011eb7663e35d7970' | 'WorkOrder' |
 
 Scenario: Create catalog InterfaceGroups objects (test data base)
 

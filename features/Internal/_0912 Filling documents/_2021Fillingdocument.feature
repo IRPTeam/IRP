@@ -42,6 +42,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
+		When Create catalog Taxes objects (for work order)
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
@@ -51,6 +52,8 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When Create catalog PlanningPeriods objects
+		When create items for work order
+		When Create catalog BillOfMaterials objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -397,6 +400,12 @@ Scenario: _0154100 preparation ( filling documents)
 				| "Number" |
 				| "$$NumberPurchaseInvoice30004$$" |
 			When create purchase invoice without order (Vendor Ferron, USD)
+	* Price list (work)
+		When Create document PriceList objects (works)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PriceList.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PriceList.FindByNumber(22).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: _01541001 check preparation
 	When check preparation
@@ -8866,6 +8875,435 @@ Scenario: _0154188 check edit currency in the StockAdjustmentAsWriteOff
 		And I close all client application windows				
 		
 
+Scenario: _0154189 check filling in and refilling Work order
+	And I close all client application windows
+	* Open the Work order creation form
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I click the button named "FormCreate"
+	* Check filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Company NDB"
+	* Check filling in Partner term if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		Then the form attribute named "Agreement" became equal to "Partner term NDB"
+	* Check filling in Company from Partner term
+		* Change company in Sales order
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Second Company' |
+			And I select current line in "List" table
+			Then the form attribute named "Company" became equal to "Second Company"
+			And I click Select button of "Partner term" field
+			And I select current line in "List" table
+		* Check the refill when selecting a partner term
+			Then the form attribute named "Company" became equal to "Main Company"
+	* Check clearing legal name, Partner term when re-selecting a partner
+		* Re-select partner
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Kalipso'     |
+			And I select current line in "List" table
+		* Check clearing fields
+			Then the form attribute named "Agreement" became equal to ""
+		* Check filling in legal name after re-selection partner
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
+		* Select partner term
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'                   |
+				| 'Basic Partner terms, without VAT' |
+			And I select current line in "List" table
+	* Check filling in Store and Compane from Partner term when re-selection partner
+		Then the form attribute named "Company" became equal to "Main Company"
+	* Check the item key autofill when adding Item (Item has one item key)
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Installation'      |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Item'         | 'Item key'     | 'Unit' | 'Quantity'     |
+			| 'Installation' | 'Installation' | 'pcs'  | '1,000'        |
+	* Check filling in prices when adding an Item and selecting an item key
+		* Filling in item and item key
+			And I delete a line in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Delivery'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key'  |
+				| 'Delivery' | 'Delivery'  |
+			And I select current line in "List" table
+		* Check filling in prices
+			And "ItemList" table contains lines
+				| 'Item'     | 'Price' | 'Item key' | 'Quantity' | 'Unit' |
+				| 'Delivery' | '80,00' | 'Delivery' | '1,000'    | 'pcs'  |
+	* Check refilling  price when reselection partner term
+		* Re-select partner term
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'           |
+				| 'Basic Partner terms, TRY' |
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
+		* Check store and price refilling in the added line
+			And "ItemList" table contains lines
+				| 'Item'     | 'Price'  | 'Item key' | 'Quantity' | 'Unit' | 'VAT' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Delivery' | '110,00' | 'Delivery' | '1,000'    | 'pcs'  | '18%' | '16,78'      | '93,22'      | '110,00'       |
+	* Check filling in prices on new lines at agreement reselection
+		* Add line
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Assembly'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'     | 'Item key' |
+				| 'Assembly' | 'Assembly' |
+			And I select current line in "List" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check filling in prices
+			And "ItemList" table became equal
+				| 'Item'     | 'Price type'        | 'Item key' | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order' |
+				| 'Delivery' | 'Basic Price Types' | 'Delivery' | ''                  | 'pcs'  | 'No'                 | '16,78'      | '1,000'    | '110,00' | '18%' | ''              | '93,22'      | '110,00'       | ''            |
+				| 'Assembly' | 'Basic Price Types' | 'Assembly' | ''                  | 'pcs'  | 'No'                 | '36,61'      | '2,000'    | '120,00' | '18%' | ''              | '203,39'     | '240,00'       | ''            |			
+	* Check the re-drawing of the form for taxes at company re-selection.
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Second Company' |
+			And I select current line in "List" table
+			If "ItemList" table does not contain "VAT" column Then
+	* Tax calculation check when filling in the company at reselection of the partner term
+		* Re-select partner term
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'           |
+				| 'Basic Partner terms, TRY' |
+			And I select current line in "List" table
+			Then "Update item list info" window is opened
+			And I click "OK" button
+		* Tax calculation check
+			And "ItemList" table contains lines
+				| 'Item'     | 'Price type'        | 'Item key' | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order' |
+				| 'Delivery' | 'Basic Price Types' | 'Delivery' | ''                  | 'pcs'  | 'No'                 | '16,78'      | '1,000'    | '110,00' | '18%' | ''              | '93,22'      | '110,00'       | ''            |
+				| 'Assembly' | 'Basic Price Types' | 'Assembly' | ''                  | 'pcs'  | 'No'                 | '36,61'      | '2,000'    | '120,00' | '18%' | ''              | '203,39'     | '240,00'       | ''            |			
+	* Check the line clearing in the tax tree when deleting a line from an order
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  |
+			| 'Assembly' | 'Assembly' |
+		And I delete a line in "ItemList" table
+		And "ItemList" table does not contain lines
+			| 'Item'     | 'Item key' |
+			| 'Assembly' | 'Assembly' |
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "16,78"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "93,22"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "110,00"
+	* Check tax recalculation when uncheck/re-check Price includes tax
+		* Unchecking box Price includes tax
+			And I move to "Other" tab
+			And I remove checkbox "Price include tax"
+		* Tax recalculation check
+			And I move to "Works" tab
+			And "ItemList" table became equal
+				| '#' | 'Item'     | 'Price type'        | 'Item key' | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order' |
+				| '1' | 'Delivery' | 'Basic Price Types' | 'Delivery' | ''                  | 'pcs'  | 'No'                 | '19,80'      | '1,000'    | '110,00' | '18%' | ''              | '110,00'     | '129,80'       | ''            |			
+		* Tick Price includes tax and check the calculation
+			And I move to "Other" tab
+			And I set checkbox "Price include tax"
+			And I move to "Works" tab
+			And "ItemList" table became equal
+				| '#' | 'Item'     | 'Price type'        | 'Item key' | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order' |
+				| '1' | 'Delivery' | 'Basic Price Types' | 'Delivery' | ''                  | 'pcs'  | 'No'                 | '16,78'      | '1,000'    | '110,00' | '18%' | ''              | '93,22'      | '110,00'       | ''            |			
+		* Check filling in currency tab
+			And I click "Save" button
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '18,83'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '110'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '110'    |			
+			And I close current window	
+		* Check recalculate Total amount and Net amount when change Tax rate
+			* Price includes tax
+				And I move to "Works" tab
+				And I go to line in "ItemList" table
+					| 'Item'     | 'Item key' |
+					| 'Delivery' | 'Delivery'  |
+				And I select current line in "ItemList" table
+				And I activate "VAT" field in "ItemList" table
+				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And "ItemList" table became equal
+					| '#' | 'Item'     | 'Price type'        | 'Item key' | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order' |
+					| '1' | 'Delivery' | 'Basic Price Types' | 'Delivery' | ''                  | 'pcs'  | 'No'                 | ''           | '1,000'    | '110,00' | '0%'  | ''              | '110,00'     | '110,00'       | ''            |				
+				And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+				Then the form attribute named "ItemListTotalNetAmount" became equal to "110,00"
+				Then the form attribute named "ItemListTotalTaxAmount" became equal to "0,00"
+				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "110,00"
+		* Add new line and check totals
+			And in the table "ItemList" I click "Add" button
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Installation' |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'         | 'Item key'     |
+				| 'Installation' | 'Installation' |
+			And I select current line in "List" table
+			And in the table "ItemList" I click "Add" button
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Installation' |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'         | 'Item key'     |
+				| 'Installation' | 'Installation' |	
+			And I select current line in "List" table
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "279,50"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "30,50"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "310,00"
+		* Delete line and check totals 
+			And I go to line in "ItemList" table
+				| 'Item'         | 'Item key'     |
+				| 'Installation' | 'Installation' |
+			And in the table "ItemList" I click "Delete" button
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "194,75"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "15,25"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "210,00"
+		* Change materials
+			And I go to line in "ItemList" table
+				| 'Item'         | 'Item key'     |
+				| 'Installation' | 'Installation' |
+			And I select current line in "ItemList" table
+			And I click choice button of "Bill of materials" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'            |
+				| 'Furniture installation' |
+			And I select current line in "List" table
+			And I go to line in "Materials" table
+				| 'Item'       | 'Item key'   |
+				| 'Material 2' | 'Material 2' |
+			And I activate "Procurement method" field in "Materials" table
+			And I select current line in "Materials" table
+			And I select "No reserve" exact value from "Procurement method" drop-down list in "Materials" table
+			And I finish line editing in "Materials" table
+			And I go to line in "Materials" table
+				| 'Item'       | 'Item key'   |
+				| 'Material 3' | 'Material 3' |
+			And I select current line in "Materials" table
+			And I click choice button of "Store" attribute in "Materials" table
+			Then "Stores" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 02'    |
+			And I select current line in "List" table
+			And I finish line editing in "Materials" table
+			And I go to line in "Materials" table
+				| 'Item'       | 'Item key'   |
+				| 'Material 1' | 'Material 1' |
+			And I select current line in "Materials" table
+			And I input "3,000" text in "Quantity" field of "Materials" table
+			And I finish line editing in "Materials" table
+			And I go to line in "Materials" table
+				| 'Item'       | 'Item key'   |
+				| 'Material 2' | 'Material 2' |
+		* Check materials
+			And "Materials" table became equal
+				| '#' | 'Cost write off'       | 'Item'       | 'Item key'   | 'Procurement method' | 'Unit' | 'Store'    | 'Quantity' |
+				| '1' | 'Include to work cost' | 'Material 1' | 'Material 1' | 'Stock'              | 'pcs'  | 'Store 01' | '3,000'    |
+				| '2' | 'Include to work cost' | 'Material 2' | 'Material 2' | 'No reserve'         | 'pcs'  | 'Store 01' | '4,000'    |
+				| '3' | 'Include to work cost' | 'Material 3' | 'Material 3' | 'Stock'              | 'kg'   | 'Store 02' | '1,521'    |
+			And I click "Post" button
+			And I delete "$$NumberWorkOrder1$$" variable
+			And I save the value of "Number" field as "$$NumberWorkOrder1$$"
+			And I click "Post and close" button
+		* Reopen and check document
+			Given I open hyperlink "e1cib/list/Document.WorkOrder"
+			And I go to line in "List" table
+				| 'Number'               |
+				| '$$NumberWorkOrder1$$' |
+			And I select current line in "List" table
+			Then the form attribute named "Partner" became equal to "Kalipso"
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
+			Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+			Then the form attribute named "Status" became equal to "Wait"
+			Then the form attribute named "Company" became equal to "Main Company"
+			And "ItemList" table became equal
+				| '#' | 'Item'         | 'Price type'        | 'Item key'     | 'Bill of materials'      | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order' |
+				| '1' | 'Delivery'     | 'Basic Price Types' | 'Delivery'     | ''                       | 'pcs'  | 'No'                 | ''           | '1,000'    | '110,00' | '0%'  | ''              | '110,00'     | '110,00'       | ''            |
+				| '2' | 'Installation' | 'Basic Price Types' | 'Installation' | 'Furniture installation' | 'pcs'  | 'No'                 | '15,25'      | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''            |
+			
+			And "Materials" table became equal
+				| '#' | 'Cost write off'       | 'Item'       | 'Item key'   | 'Procurement method' | 'Unit' | 'Store'    | 'Quantity' |
+				| '1' | 'Include to work cost' | 'Material 1' | 'Material 1' | 'Stock'              | 'pcs'  | 'Store 01' | '3'        |
+				| '2' | 'Include to work cost' | 'Material 2' | 'Material 2' | 'No reserve'         | 'pcs'  | 'Store 01' | '4'        |
+				| '3' | 'Include to work cost' | 'Material 3' | 'Material 3' | 'Stock'              | 'kg'   | 'Store 02' | '1,521'    |
+			Then the form attribute named "Currency" became equal to "TRY"
+			Then the form attribute named "ItemListTotalNetAmount" became equal to "194,75"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "15,25"
+			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "210,00"
+			Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+			And I close all client application windows
+			
 
-Scenario: _999999 close TestClient session
-	And I close TestClient session
+Scenario: _0154190 check filling in and refilling Work sheet
+	And I close all client application windows
+	* Open the Work sheet creation form
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I click the button named "FormCreate"
+	* Check filling in legal name if the partner has only one
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'NDB'         |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Company NDB"
+	* Check clearing legal name when re-selecting a partner
+		* Re-select partner
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Kalipso'     |
+			And I select current line in "List" table
+		* Check filling in legal name after re-selection partner
+			Then the form attribute named "LegalName" became equal to "Company Kalipso"
+	* Add works and materials
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I activate field named "MaterialsLineNumber" in "Materials" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Delivery'    |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Assembly'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
+		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Assembly'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Change materials
+		And I go to line in "Materials" table
+			| 'Item'       | 'Item key'   |
+			| 'Material 2' | 'Material 2' |
+		And I select current line in "Materials" table
+		And I input "3,000" text in the field named "MaterialsQuantity" of "Materials" table
+		And I finish line editing in "Materials" table
+		And I go to line in "Materials" table
+			| 'Item'       | 'Item key'   |
+			| 'Material 1' | 'Material 1' |
+		And I activate "Profit loss center" field in "Materials" table
+		And I select current line in "Materials" table
+		And I click choice button of "Profit loss center" attribute in "Materials" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+		And I finish line editing in "Materials" table
+		And I go to line in "Materials" table
+			| 'Item'       | 'Item key'   |
+			| 'Material 2' | 'Material 2' |
+		And I select current line in "Materials" table
+		And I click choice button of "Expense type" attribute in "Materials" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Delivery'    |
+		And I select current line in "List" table
+		And I finish line editing in "Materials" table
+	* Currency form
+		And I move to "Other" tab
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Turkish lira' |
+		And I select current line in "List" table
+		And in the table "ItemList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | ''       |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | ''       |
+		And I close current window
+	* Reopen document	
+		And I click "Post" button
+		And I delete "$$NumberWorkSheet1$$" variable
+		And I save the value of "Number" field as "$$NumberWorkSheet1$$"
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I go to line in "List" table
+			| 'Number'               |
+			| '$$NumberWorkSheet1$$' |
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Kalipso"
+		Then the form attribute named "LegalName" became equal to "Company Kalipso"
+		Then the form attribute named "Company" became equal to "Main Company"
+		And "ItemList" table became equal
+			| '#' | 'Item'     | 'Item key' | 'Bill of materials' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Sales order' | 'Work order' |
+			| '1' | 'Delivery' | 'Delivery' | ''                  | 'pcs'  | '1,000'    | ''              | ''            | ''           |
+			| '2' | 'Assembly' | 'Assembly' | 'Assembly'          | 'pcs'  | '1,000'    | ''              | ''            | ''           |
+		
+		And "Materials" table became equal
+			| '#' | 'Cost write off'       | 'Item (BOM)' | 'Item key'   | 'Profit loss center' | 'Item key (BOM)' | 'Unit (BOM)' | 'Quantity (BOM)' | 'Store'    | 'Item'       | 'Unit' | 'Quantity' | 'Expense type' |
+			| '1' | 'Include to work cost' | 'Material 1' | 'Material 1' | 'Front office'       | 'Material 1'     | 'pcs'        | '2'              | 'Store 01' | 'Material 1' | 'pcs'  | '2'        | 'Expense'      |
+			| '2' | 'Include to work cost' | 'Material 2' | 'Material 2' | 'Workshop 1'         | 'Material 2'     | 'pcs'        | '2'              | 'Store 01' | 'Material 2' | 'pcs'  | '3'        | 'Delivery'     |
+		Then the form attribute named "Currency" became equal to "TRY"
+		And I close all client application windows
+		
+				
+				
+				
+
+		
+						
+			
+						
+			
+						
+						
+						
+
+	

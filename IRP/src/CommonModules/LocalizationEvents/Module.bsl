@@ -77,7 +77,7 @@ EndProcedure
 // Replace description localization prefix.
 // 
 // Parameters:
-//  QueryText Query text
+//  QueryText - String - Query text
 //  TableName - String - Table name
 //  LocalizationCode - String - Localization code
 // 
@@ -95,7 +95,7 @@ EndFunction
 // returns the description of the link in the specified language.
 //
 // Parameters:
-//  Ref - AnyRef -
+//  Ref - AnyRef - 
 //  LocalizationCode - String - Localization code 
 //
 // Returns:

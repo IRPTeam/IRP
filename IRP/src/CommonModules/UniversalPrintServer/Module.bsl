@@ -1,10 +1,9 @@
 // @strict-types
 
-
 // Init print param.
 // 
 // Parameters:
-//  Ref Ref
+//  Ref - DocumentRef
 //  LayoutLang - String - Layout lang
 //  DataLang - String - Data lang
 // 

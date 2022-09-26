@@ -250,17 +250,17 @@ Scenario: _0293003 create Work sheet based on WO with SO
 			| '5' | 'Include to work cost' | 'Material 2' | 'Material 2' | 'Material 2'     | 'pcs'        | '2'              | 'Store 01' | 'Material 2' | 'pcs'  | '2'        |
 	
 		Then the form attribute named "Branch" became equal to "Front office"
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' |
+			| 'TRY'  |
+		And I select current line in "List" table	
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberWorkSheet3$$" variable
 		And I delete "$$WorkSheet3$$" variable
 		And I save the value of "Number" field as "$$NumberWorkSheet3$$"
 		And I save the window as "$$WorkSheet3$$"
-		And I click Choice button of the field named "Currency"
-		And I go to line in "List" table
-			| 'Code' |
-			| 'TRY'  |
-		And I select current line in "List" table	
 		And I click the button named "FormPostAndClose"		
 							
 Scenario: _0293004 create Work sheet without bases document

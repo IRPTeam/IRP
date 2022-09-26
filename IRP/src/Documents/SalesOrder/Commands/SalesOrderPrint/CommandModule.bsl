@@ -13,7 +13,7 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		Param.BuilderLayout = True;
 
 		OpenForm("CommonForm.PrintForm", , , "UniqueOpeningOfTheCommonPrintingPlate");
-		Notify("AddTemplatePrintForm", Param)
+		Notify("AddTemplatePrintForm", Param);
 	EndDo;
 EndProcedure
 

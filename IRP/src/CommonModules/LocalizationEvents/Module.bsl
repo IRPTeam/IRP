@@ -75,12 +75,12 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 EndProcedure
 
 // Replace description localization prefix.
-//
+// 
 // Parameters:
-//  QueryText - String - Query text
+//  QueryText Query text
 //  TableName - String - Table name
-//  LocalizationCode - String - 
-//
+//  LocalizationCode - String - Localization code
+// 
 // Returns:
 //  String - Replace description localization prefix
 Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table", LocalizationCode = Undefined) Export
@@ -96,7 +96,7 @@ EndFunction
 //
 // Parameters:
 //  Ref - AnyRef -
-//  LocalizationCode - String - 
+//  LocalizationCode - String - Localization code 
 //
 // Returns:
 //  String - Replace description localization prefix

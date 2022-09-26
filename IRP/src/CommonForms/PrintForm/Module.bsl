@@ -37,9 +37,8 @@ EndProcedure
 
 //  EventName - String - Event name
 //  Parameter - See UniversalPrintServer.InitPrintParam
-//  Source - ???????
 &AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
+Procedure NotificationProcessing(EventName, Parameter)
 	If EventName = "AddTemplatePrintForm" Then
 		FillPrintFormConfig(Parameter);	
 	EndIf;

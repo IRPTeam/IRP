@@ -1,12 +1,13 @@
 // @strict-types
 
+
 // Init print param.
 // 
 // Parameters:
-//  Ref - DocumentRef
-//  LayoutLang - String -
-//  DataLang - String -
-//  
+//  Ref Ref
+//  LayoutLang - String - Layout lang
+//  DataLang - String - Data lang
+// 
 // Returns:
 //  Structure - Init print param:
 // * SpreadsheetDoc - SpreadsheetDocument -

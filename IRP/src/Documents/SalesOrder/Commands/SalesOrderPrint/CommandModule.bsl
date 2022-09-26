@@ -12,19 +12,15 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		Param.NameTemplate = "SalesOrderPrint";
 		Param.BuilderLayout = True;
 
-		OpenForm("CommonForm.PrintForm", , ,"UniqueOpeningOfTheCommonPrintingPlate");
+		OpenForm("CommonForm.PrintForm", , , "UniqueOpeningOfTheCommonPrintingPlate");
 		Notify("AddTemplatePrintForm", Param)
 	EndDo;
-
 EndProcedure
-
 
 &AtServer
 Function InitPrintParam(It)
 	Return UniversalPrintServer.InitPrintParam(It);
 EndFunction
-
-
 
 // Sales order print server.
 // 

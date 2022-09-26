@@ -13,7 +13,7 @@
 &AtClient
 Procedure PrintFormConfigSelection(Item, RowSelected, Field, StandardProcessing)
 	If Field.Name = "PrintFormConfigPresentation" Or Field.Name = "PrintFormConfigNameTemplate" Then
-		If Not Item.CurrentData = Undefined and ValueIsFilled(Item.CurrentData.Ref) Then
+		If Not Item.CurrentData = Undefined And ValueIsFilled(Item.CurrentData.Ref) Then
 			StandardProcessing = False;
 			ShowValue(, Item.CurrentData.Ref);
 		EndIf;
@@ -25,9 +25,6 @@ Procedure OnOpen(Cancel)
 	EditResultSwitch();
 EndProcedure
 
-// Notification processing.
-// 
-// Parameters:
 &AtClient
 Procedure Show(Command)
 	SetVisiblePrintSetting(True);
@@ -38,10 +35,9 @@ Procedure Hide(Command)
 	SetVisiblePrintSetting(False);
 EndProcedure
 
-
 //  EventName - String - Event name
 //  Parameter - See UniversalPrintServer.InitPrintParam
-//  Source - Undefined
+//  Source - ???????
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "AddTemplatePrintForm" Then
@@ -52,7 +48,7 @@ EndProcedure
 // Fill print form config.
 // 
 // Parameters:
-//  Parameter See UniversalPrintServer.InitPrintParam
+//  Parameter - See UniversalPrintServer.InitPrintParam
 &AtClient
 Procedure FillPrintFormConfig(Parameter)
 	FindObj = New Structure();
@@ -83,12 +79,12 @@ Procedure FillPrintFormConfig(Parameter)
 	If PrintFormConfig.Count() = 1 And Items.PrintFormConfig.Visible Then
 		SetVisiblePrintSetting(False);
 		CurrentData = Items.PrintFormConfig.RowData(0);
-		Items.LayoutLang.ReadOnly = not CurrentData.BuilderLayout;
-		Items.DataLang.ReadOnly = not CurrentData.BuilderLayout;
+		Items.LayoutLang.ReadOnly = Not CurrentData.BuilderLayout;
+		Items.DataLang.ReadOnly = Not CurrentData.BuilderLayout;
 		LayoutLang = CurrentData.LayoutLang;
 		DataLang = CurrentData.DataLang;
 		SetResult();
-	Elsif PrintFormConfig.Count() > 1 And Not Items.PrintFormConfig.Visible Then 
+	ElsIf PrintFormConfig.Count() > 1 And Not Items.PrintFormConfig.Visible Then 
 		SetVisiblePrintSetting(True);
 	EndIf; 
 EndProcedure
@@ -97,8 +93,8 @@ EndProcedure
 Procedure PrintFormConfigOnActivateRow(Item)
 	CurrentData = Item.CurrentData;
 	If Not CurrentData = Undefined Then
-		Items.LayoutLang.ReadOnly = not CurrentData.BuilderLayout;
-		Items.DataLang.ReadOnly = not CurrentData.BuilderLayout;
+		Items.LayoutLang.ReadOnly = Not CurrentData.BuilderLayout;
+		Items.DataLang.ReadOnly = Not CurrentData.BuilderLayout;
 		LayoutLang = CurrentData.LayoutLang;
 		DataLang = CurrentData.DataLang;
 		ThisObject.IdResult = PrintFormConfig.IndexOf(CurrentData);
@@ -121,7 +117,7 @@ Procedure PrintFormConfigOnStartEdit(Item, NewRow, Clone)
 	If Clone Then
 		CurrentData = Items.PrintFormConfig.CurrentData;
 		If Not CurrentData = Undefined Then
-			PrintFormConfigOnActivateRow(Item)			
+			PrintFormConfigOnActivateRow(Item);			
 		EndIf;  
 	EndIf;
 EndProcedure
@@ -131,7 +127,7 @@ Procedure RefreshTemplate()
 	SelectRows = Items.PrintFormConfig.SelectedRows;
 	If SelectRows.Count() = 0 Then
 		SelectRows = New ValueList;
-		SelectRows.Add(PrintFormConfig.Get(ThisObject.IdResult))
+		SelectRows.Add(PrintFormConfig.Get(ThisObject.IdResult));
 	EndIf; 	
 	If SelectRows.Count() > 0 Then
 		For Each ItRow In SelectRows Do	
@@ -197,13 +193,12 @@ Function PackageWithOneSpreadsheetDocument(SpreadsheetDoc)
 	Return PackageWithOneDocument;
 EndFunction
 
-
 &AtServer
 Function PrintAtServer()
 	PackageDocuments = New RepresentableDocumentBatch;
 	PackageDocuments.Collate = True;
-	//setting the copy property to print the desired number of copies 
-	//in the RepresentableDocumentBatch object did not produce the expected result	
+	// setting the copy property to print the desired number of copies 
+	// in the RepresentableDocumentBatch object did not produce the expected result	
 	For Each ItPrint In PrintFormConfig Do
 		Copies = ItPrint.CountCopy;
 		For It = 0 To Copies - 1 Do
@@ -239,12 +234,9 @@ Procedure EditResult(Command)
 	Items.FormEditResult.Check = Not Items.FormEditResult.Check;
 	EditResultSwitch();
 EndProcedure
-
 #EndRegion
 
 #Region Private
-
-
 
 &AtClient
 Procedure EditResultSwitch()
@@ -272,7 +264,6 @@ Procedure SetVisiblePrintSetting(Visible)
 	Items.PrintFormConfig.Visible = Visible;
 	Items.FormHide.Visible = Visible;
 	Items.FormShow.Visible = Not Visible;
-		
 EndProcedure
 
 #EndRegion

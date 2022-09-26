@@ -117,12 +117,12 @@ Function SalesOrderPrint(Ref, Param)
 		|				Items AS Items)";
 
 	LCode = Param.DataLang;	
-	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrder.Company",LCode);
-	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrder.Partner",LCode);
-	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrder.Currency",LCode);
-	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.ItemKey.Item",LCode);
-	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.ItemKey",LCode);
-	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text,"SalesOrderItemList.Unit",LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrder.Company", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrder.Partner", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrder.Currency", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrderItemList.ItemKey.Item", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrderItemList.ItemKey", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrderItemList.Unit", LCode);
 	Query.Text = Text;
 		
 	Query.Parameters.Insert("Ref", Ref);
@@ -183,7 +183,7 @@ Function SalesOrderPrint(Ref, Param)
 			TotalSum = TotalSum + It.TotalAmount;
 			TotalTax = TotalTax + It.TaxAmount;
 			TotalOffers	= TotalOffers + It.OffersAmount;
-			TotalNet = TotalNet + It.NetAmount
+			TotalNet = TotalNet + It.NetAmount;
 		EndDo;
 	EndDo;
 	

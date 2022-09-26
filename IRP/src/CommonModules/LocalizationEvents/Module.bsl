@@ -79,13 +79,13 @@ EndProcedure
 // Parameters:
 //  QueryText - String - Query text
 //  TableName - String - Table name
-//  LocalizationCode - String 
+//  LocalizationCode - String - 
 //
 // Returns:
 //  String - Replace description localization prefix
 Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table", LocalizationCode = Undefined) Export
 	If LocalizationCode = Undefined Then
-		LocalizationCode = LocalizationReuse.GetLocalizationCode()
+		LocalizationCode = LocalizationReuse.GetLocalizationCode();
 	EndIf;
 	QueryField = "CASE WHEN %1.Description_%2 = """" THEN %1.Description_en ELSE %1.Description_%2 END ";
 	QueryField = StrTemplate(QueryField, TableName, LocalizationCode);
@@ -95,22 +95,21 @@ EndFunction
 // returns the description of the link in the specified language.
 //
 // Parameters:
-//  Ref - AnyRef 
-//  LocalizationCode - String 
+//  Ref - AnyRef -
+//  LocalizationCode - String - 
 //
 // Returns:
 //  String - Replace description localization prefix
 Function DescriptionRefLocalization(Ref, LocalizationCode = Undefined) Export
 	If LocalizationCode = Undefined Then
-		LocalizationCode = LocalizationReuse.GetLocalizationCode()
+		LocalizationCode = LocalizationReuse.GetLocalizationCode();
 	EndIf;
-	Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_"+LocalizationCode);
+	Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_" + LocalizationCode);
 	If Result = "" Then
 		Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_en");
 	EndIf;
 	Return Result;
 EndFunction
-
 
 // Get catalog presentation.
 //

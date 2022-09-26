@@ -34,9 +34,8 @@ Procedure PrintLastReceipt(Object, Cancel, AddInfo = Undefined) Export
 	Param.BuilderLayout = False;
 	Param.SpreadsheetDoc = PrintResult;
 
-	OpenForm("CommonForm.PrintForm", , ,"UniqueOpeningOfTheCommonPrintingPlate");
-	Notify("AddTemplatePrintForm", Param)
-
+	OpenForm("CommonForm.PrintForm", , , "UniqueOpeningOfTheCommonPrintingPlate");
+	Notify("AddTemplatePrintForm", Param);
 EndProcedure
 
 Procedure BeforeStartNewTransaction(Object, Form, DocRef) Export

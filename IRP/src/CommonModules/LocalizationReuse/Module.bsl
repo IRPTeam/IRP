@@ -99,12 +99,11 @@ EndFunction
 Function GetSessionParameter(Name) Export
 	Return ServiceSystemServer.GetSessionParameter(Name);
 EndFunction
-
-
+ 
 // Metadata languages.
 // 
 // Returns:
-//  
+//  Structure - Metadata languages
 Function MetadataLanguages() Export
 	Result = New Structure;
 	For Each It In Metadata.Languages Do

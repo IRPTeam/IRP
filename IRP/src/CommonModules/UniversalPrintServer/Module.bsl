@@ -1,11 +1,12 @@
 // @strict-types
 
-
 // Init print param.
 // 
 // Parameters:
 //  Ref - DocumentRef
-// 
+//  LayoutLang - String -
+//  DataLang - String -
+//  
 // Returns:
 //  Structure - Init print param:
 // * SpreadsheetDoc - SpreadsheetDocument -
@@ -15,7 +16,7 @@
 // * BuilderLayout - Boolean -
 // * DataLang - String -
 // * LayoutLang - String -
-Function InitPrintParam(Ref, val LayoutLang = Undefined, val DataLang = Undefined) Export
+Function InitPrintParam(Ref, Val LayoutLang = Undefined, Val DataLang = Undefined) Export
 	If LayoutLang = Undefined Then
 		LayoutLang = LocalizationReuse.GetLocalizationCode();
 	EndIf;
@@ -65,7 +66,7 @@ EndFunction
 //  NameTemplate - String -
 // 
 // Returns:
-//  Result - String
+//  Result - String -
 Function GetSynonymTemplate(Ref, NameTemplate) Export
 	Try
 		Result = Ref.Metadata().Templates.Find(NameTemplate).Synonym;
@@ -85,10 +86,10 @@ EndFunction
 //  CodeL - String -
 // 
 // Returns:
-//  Undefined, String -- LanguageName By Code
+//  Undefined, String - LanguageName By Code
 Function LanguageNameByCode(CodeL) Export
 	For Each It In Metadata.Languages Do
-		If StrCompare(CodeL, It.LanguageCode)= 0 Then
+		If StrCompare(CodeL, It.LanguageCode) = 0 Then
 			Return It.Name;
 		EndIf;
 	EndDo;
@@ -104,7 +105,7 @@ EndFunction
 //  Undefined, String - Code by language name
 Function CodeByLanguageName(NameL) Export
 	For Each It In Metadata.Languages Do
-		If StrCompare(NameL, It.Name)= 0 Then
+		If StrCompare(NameL, It.Name) = 0 Then
 			Return It.LanguageCode;
 		EndIf;
 	EndDo;

@@ -1,12 +1,11 @@
 // @strict-types
-// @skip-check module-self-reference
 
 #Region FormEventHandlers
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
-	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory 
+	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); // CatalogObject.Unit_ServiceExchangeHistory 
 	
 	HeadersValue = RealObject.Headers.Get();
 	If TypeOf(HeadersValue) = Type("Map") Then
@@ -17,16 +16,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndDo;
 	EndIf;
 	
-	// Request
-	If Object.Parent.IsEmpty() Then
-		Items.GroupAnswer.Visible = False;
-	// Answer
-	Else
-		Items.GroupRequest.Visible = False;
-	EndIf;
+	Items.GroupAnswer.Visible = Not Object.Parent.IsEmpty();
+	Items.GroupRequest.Visible = Object.Parent.IsEmpty();
 	
 	ThisObject.BodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.BodySize);
-	If Object.BodySize < Pow(2, 20) And Object.BodyIsText Then
+	
+	Megabyte = Pow(2, 20);
+	If Object.BodyIsText And Object.BodySize < Megabyte Then
 		 TryLoadBodyAtServer();
 	EndIf;
 	
@@ -41,7 +37,7 @@ Async Procedure SaveBody(Command)
 	
 	BodyRowValue = GetBodyAtServer();
 	
-	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
+	If Not TypeOf(BodyRowValue) = Type("BinaryData") Then
 		ShowMessageBox(, R().Mock_Info_EmptyFile);
 		Return;
 	EndIf;
@@ -77,11 +73,11 @@ Async Procedure ReloadBody(Command)
 	FileDialog = New FileDialog(FileDialogMode.Open);
 	FileDialog.CheckFileExistence = True;
 	
-	PathArray = Await FileDialog.ChooseAsync(); // Array
+	PathArray = Await FileDialog.ChooseAsync(); // Array of String
 	If PathArray = Undefined Or PathArray.Count() = 0 Then
 		Return;
 	EndIf;
-	FullFileName = PathArray[0]; // String
+	FullFileName = PathArray[0];
 	
 	File = New File(FullFileName); 
 	SizeNewFile = File.Size();
@@ -104,8 +100,13 @@ EndProcedure
 //  BinaryData - Get body at server
 &AtServer
 function GetBodyAtServer()
-	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
-	Return RealObject.Body.Get();
+	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); // CatalogObject.Unit_ServiceExchangeHistory
+	BodyRowValue = RealObject.Body.Get();
+	If TypeOf(BodyRowValue) = Type("BinaryData") Then
+		Return BodyRowValue;
+	Else
+		Return GetBinaryDataFromString("");
+	EndIf;
 EndFunction
 
 &AtServer
@@ -114,15 +115,12 @@ Procedure TryLoadBodyAtServer()
 	ThisObject.BodyString = "";
 	ThisObject.BodyPicture = "";
 	
-	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
-	BodyRowValue = RealObject.Body.Get(); //BinaryData
+	BodyRowValue = GetBodyAtServer();
 	
-	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
-		Items.BodyPresentation.CurrentPage = Items.BodyAsFile;
-	ElsIf Object.BodyIsText Then
+	If Object.BodyIsText Then
 		ThisObject.BodyString = GetStringFromBinaryData(BodyRowValue);
 		Items.BodyPresentation.CurrentPage = Items.BodyAsStr;
-	ElsIf StrCompare(Left(Object.BodyType, 5), "IMAGE") = 0 Then
+	ElsIf StrStartsWith(Upper(Object.BodyType), "IMAGE") Then
 		ThisObject.BodyPicture = PutToTempStorage(BodyRowValue);
 		Items.BodyPresentation.CurrentPage = Items.BodyAsPic;
 	Else
@@ -139,7 +137,7 @@ EndProcedure
 &AtServer
 Procedure ReloadBodyAtServer(NewContent, Newsize)
 	
-	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); //CatalogObject.Unit_ServiceExchangeHistory
+	RealObject = FormDataToValue(Object, Type("CatalogObject.Unit_ServiceExchangeHistory")); // CatalogObject.Unit_ServiceExchangeHistory
 	
 	RealObject.Body = New ValueStorage(NewContent);
 	RealObject.BodyMD5 = CommonFunctionsServer.GetMD5(NewContent);

@@ -152,21 +152,26 @@ EndFunction
 //  String - Size presentation
 Function GetSizePresentation(Size) Export
 	
-	Kilobyte = Size / 1024;
-	Megabyte = Kilobyte / 1024; 
-	Gigabyte = Megabyte / 1024;
-	Terabyte = Gigabyte / 1024;
+	Kilobyte = Pow(2, 10);
+	Megabyte = Pow(2, 20); 
+	Gigabyte = Pow(2, 30);
+	Terabyte = Pow(2, 40);
 	
-	If Size < Pow(2, 10) Then
-		Return Format(Size, "NZ=; NG=;")+" B";
-	ElsIf Size < Pow(2, 20) Then 
-		Return Format(Kilobyte, "NFD=1; NZ=; NG=;")+" kB";
-	ElsIf Size < Pow(2, 30) Then 
-		Return Format(Megabyte, "NFD=1; NZ=; NG=;")+" MB";
-	ElsIf Size < Pow(2, 40) Then 
-		Return Format(Gigabyte, "NFD=1; NZ=; NG=;")+" GB";
+	Kilobytes = Size / Kilobyte;
+	Megabytes = Size / Megabyte; 
+	Gigabytes = Size / Gigabyte;
+	Terabytes = Size / Terabyte;
+	
+	If Size < Kilobyte Then
+		Return Format(Size, "NZ=; NG=;") + " B";
+	ElsIf Size < Megabyte Then 
+		Return Format(Kilobytes, "NFD=1; NZ=; NG=;") + " kB";
+	ElsIf Size < Gigabyte Then 
+		Return Format(Megabytes, "NFD=1; NZ=; NG=;") + " MB";
+	ElsIf Size < Terabyte Then 
+		Return Format(Gigabytes, "NFD=1; NZ=; NG=;") + " GB";
 	Else 
-		Return Format(Terabyte, "NFD=1; NZ=; NG=;")+" TB";
+		Return Format(Terabytes, "NFD=1; NZ=; NG=;") + " TB";
 	EndIf;
 	
 EndFunction

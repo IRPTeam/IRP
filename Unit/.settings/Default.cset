@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "settings": {
+    "module-self-reference": {
+      "enabled": false
+    }
+  }
+}

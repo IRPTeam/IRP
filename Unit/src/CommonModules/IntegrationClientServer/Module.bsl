@@ -1,10 +1,12 @@
 
+#Region Public
+
 &Around("SendRequestClientServer")
 Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo)
 	
-	NeedToSave = CommonFunctionsServer.GetRefAttribute(ConnectionSetting.IntegrationSettingsRef, "Unit_SaveExchangeHistory");
+	isNeedingToSaveExchange = CommonFunctionsServer.GetRefAttribute(ConnectionSetting.IntegrationSettingsRef, "Unit_SaveExchangeHistory");
 	
-	If NeedToSave Then 
+	If isNeedingToSaveExchange Then 
 		ServiceExchangeData = Unit_GetServiceExchangeDataTemplate();
 		ServiceExchangeData.StartTime = CurrentDate();
 		ServiceExchangeData.Headers = ConnectionSetting.Headers;
@@ -14,7 +16,7 @@ Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, Req
 	
 	ServerResponse = ProceedWithCall(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo);
 	
-	If Not NeedToSave Then
+	If Not isNeedingToSaveExchange Then
 		Return ServerResponse;
 	EndIf;
 		
@@ -50,7 +52,6 @@ Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, Req
 	
 EndFunction
 
-
 // Get service exchange data template.
 // 
 // Returns:
@@ -75,3 +76,5 @@ Function Unit_GetServiceExchangeDataTemplate() Export
 	ServiceExchangeData.Insert("EndTime", Date(1,1,1));
 	Return ServiceExchangeData;
 EndFunction
+
+#EndRegion

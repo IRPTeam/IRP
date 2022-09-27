@@ -689,6 +689,7 @@
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <visible>true</visible>
+        <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
@@ -2123,21 +2124,6 @@
     </edit>
   </attributes>
   <attributes>
-    <name>Answer_Body</name>
-    <title>
-      <key>en</key>
-      <value>Answer body</value>
-    </title>
-    <id>16</id>
-    <valueType/>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <attributes>
     <name>ReferenceAnswer</name>
     <title>
       <key>en</key>
@@ -2183,6 +2169,26 @@
     <id>20</id>
     <valueType>
       <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>AnswerBodyMD5</name>
+    <title>
+      <key>en</key>
+      <value>Answer body (md5)</value>
+    </title>
+    <id>21</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers>
+        <length>36</length>
+      </stringQualifiers>
     </valueType>
     <view>
       <common>true</common>

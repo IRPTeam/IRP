@@ -6,7 +6,7 @@
 //  Lang - String - Lang
 // 
 // Returns:
-//  Structure, Arbitrary - Unit strings:
+//  Structure - Unit strings:
 // * Mock_Info_EmptyFile - String - Empty file!
 // * Mock_Info_NotFound - String - Not Found
 // * Mock_Info_FoundOut - String - Found out
@@ -32,6 +32,9 @@
 // * Mock_Info_FoundValue - String - Found value
 // * Mock_Info_InputAddress - String - Input address
 // * Mock_Info_PatternAddress - String - Pattern address
+// * Mock_Info_StatusCodeNotMatch - String - Status code does not match!
+// * Mock_Info_HeaderNotMatch - String - Headers do not match!
+// * Mock_Info_BodyNotMatch - String - Body does not match!
 &Around("Strings")
 Function Unit_Strings(Lang) Export
 	Strings = ProceedWithCall(Lang); // Structure
@@ -60,5 +63,8 @@ Function Unit_Strings(Lang) Export
 	Strings.Insert("Mock_Info_FoundValue", NStr("en = 'Found value'", Lang));
 	Strings.Insert("Mock_Info_InputAddress", NStr("en = 'Input address'", Lang));
 	Strings.Insert("Mock_Info_PatternAddress", NStr("en = 'Pattern address'", Lang));
+	Strings.Insert("Mock_Info_StatusCodeNotMatch", NStr("en = 'Status code does not match!'", Lang));
+	Strings.Insert("Mock_Info_HeaderNotMatch", NStr("en = 'Headers do not match!'", Lang));
+	Strings.Insert("Mock_Info_BodyNotMatch", NStr("en = 'Body does not match!'", Lang));
 	Return Strings;
 EndFunction

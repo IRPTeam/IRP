@@ -1,6 +1,5 @@
 // @strict-types
 
-
 #Region Public
 
 #Region Info
@@ -34,15 +33,16 @@ Function ComposeAnswerToRequest(Request) Export
 	
 EndFunction
 
-// Compose answer to structure of  request.
+// Compose answer to structure of request.
 // 
 // Parameters:
-//  RequestStructure - See Unit_MockService.GetStructureRequest
-//  MockData - CatalogRef.Unit_MockServiceData
+//  RequestStructure - See Unit_MockService.GetStructureRequest 
+//  MockData - CatalogRef.Unit_MockServiceData -
+//  RequestVariables - Structure - Request variables
 // 
 // Returns:
 //  HTTPServiceResponse - Compose answer to request
-Function ComposeAnswerToRequestStructure(RequestStructure, MockData=Undefined, RequestVariables=Undefined) Export
+Function ComposeAnswerToRequestStructure(RequestStructure, MockData = Undefined, RequestVariables = Undefined) Export
 	
 	If MockData = Undefined Then
 		MockDataInfo = getMockDataByRequest(RequestStructure);
@@ -155,6 +155,8 @@ EndFunction
 //  Structure - Get selection mock structure:
 // * Ref - CatalogRef.Unit_MockServiceData -
 // * Address - String -
+// * BodyMD5 - String -
+// * BodyAsFilter - Boolean -
 // * isHeaderFilter - Boolean -
 // * isVariablesFilter - Boolean -
 // * isVariablesBodyFilter - Boolean -
@@ -171,7 +173,6 @@ Function GetSelectionMockStructure() Export
 EndFunction
 
 #EndRegion 
-
 
 #Region Private
 
@@ -199,16 +200,16 @@ Function AddressCheck(Address, Pattern, Logs)
 	Else
 		NumberExtraSections = AddressParts.Count() - PatternParts.Count();
 		AnyString = GetAnyString();
-		For index = 1 To NumberExtraSections Do
+		For Index = 1 To NumberExtraSections Do
 			PatternParts.Add(AnyString);
 		EndDo; 
 	EndIf;
 	
-	For index = 0 To AddressParts.Count() - 1 Do
-		If Not StringEqualsCheck(AddressParts[index], PatternParts[index]) Then
-			AddLineToLogs(Logs, StrTemplate(R().Mock_Error_DifferenceInAddressPart, index+1));
-			AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_Info_RequiredValue, PatternParts[index]));
-			AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_Info_FoundValue, AddressParts[index]));
+	For Index = 0 To AddressParts.Count() - 1 Do
+		If Not StringEqualsCheck(AddressParts[Index], PatternParts[Index]) Then
+			AddLineToLogs(Logs, StrTemplate(R().Mock_Error_DifferenceInAddressPart, Index + 1));
+			AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_Info_RequiredValue, PatternParts[Index]));
+			AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_Info_FoundValue, AddressParts[Index]));
 			Return False;
 		EndIf;
 	EndDo;
@@ -220,14 +221,13 @@ EndFunction
 
 // Headers check.
 // 
-// Parameters: Address - String - Address
-// Pattern - String - Pattern of address
+// Parameters:
 //  Headers - FixedMap - Headers
 //  MockData - CatalogRef.Unit_MockServiceData - Mock data
-//  Logs - String
+//  Logs - String - Logs
 // 
 // Returns:
-//  Boolean - address matches
+//  Boolean - Headers check
 Function HeadersCheck(Headers, MockData, Logs)
 	
 	AddLineToLogs(Logs, R().Mock_Info_StartHeadersCheck, True);
@@ -394,7 +394,7 @@ EndFunction
 //  Logs - String
 //  NewLine - String
 //  isHeader - Boolean
-Procedure AddLineToLogs(Logs, NewLine, isHeader=False)
+Procedure AddLineToLogs(Logs, NewLine, isHeader = False)
 	Logs = Logs + ?(IsBlankString(Logs), "", Chars.CR);
 	If isHeader Then
 		Logs = Logs + "=== " + NewLine + " ===";
@@ -414,7 +414,31 @@ EndProcedure
 // * RequestVariables - Structure -
 Function getMockDataByRequest(RequestStructure)
 	
-	Result = New Structure("MockData, RequestVariables", Catalogs.Unit_MockServiceData.EmptyRef(), New Structure);
+	Result = New Structure;
+	Result.Insert("MockData", Catalogs.Unit_MockServiceData.EmptyRef());
+	Result.Insert("RequestVariables", New Structure);
+	
+	SelectionStructures = RunQueryForSearchMockData(RequestStructure);
+	For Each SelectionStructure In SelectionStructures Do
+		CheckingResult = CheckRequestToMockData(RequestStructure, SelectionStructure, Result.RequestVariables); 
+		If CheckingResult.Successfully Then
+			Result.MockData = SelectionStructure.Ref;
+			Break;
+		EndIf;  
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
+
+// Run query for search mock data.
+// 
+// Parameters:
+//  RequestStructure - See Unit_MockService.GetStructureRequest
+// 
+// Returns:
+//  Array of See Unit_MockService.GetSelectionMockStructure
+Function RunQueryForSearchMockData(RequestStructure)
 	
 	Query = New Query;
 	Query.Text =
@@ -422,7 +446,8 @@ Function getMockDataByRequest(RequestStructure)
 	|	Unit_MockServiceData.Ref AS Ref,
 	|	Unit_MockServiceData.Request_ResourceAddress AS Address,
 	|	Unit_MockServiceData.Request_BodyAsFilter AS BodyAsFilter,
-	|	Unit_MockServiceData.Request_BodyMD5 AS BodyMD5
+	|	Unit_MockServiceData.Request_BodyMD5 AS BodyMD5,
+	|	Unit_MockServiceData.Priority
 	|INTO ttMockData
 	|FROM
 	|	Catalog.Unit_MockServiceData AS Unit_MockServiceData
@@ -433,7 +458,7 @@ Function getMockDataByRequest(RequestStructure)
 	|	AND CASE
 	|		WHEN Unit_MockServiceData.Request_BodyAsFilter
 	|			THEN (Unit_MockServiceData.Request_BodyMD5 = &BodyBinaryMD5
-	|			or Unit_MockServiceData.Request_BodyMD5 = &BodyStringMD5)
+	|			OR Unit_MockServiceData.Request_BodyMD5 = &BodyStringMD5)
 	|		ELSE TRUE
 	|	END
 	|;
@@ -490,28 +515,18 @@ Function getMockDataByRequest(RequestStructure)
 	|		LEFT JOIN ttVariablesFilter AS ttVariablesFilter
 	|		ON ttMockData.Ref = ttVariablesFilter.Ref
 	|		LEFT JOIN ttVariablesBodyFilter AS ttVariablesBodyFilter
-	|		ON ttMockData.Ref = ttVariablesBodyFilter.Ref";
+	|		ON ttMockData.Ref = ttVariablesBodyFilter.Ref
+	|
+	|ORDER BY
+	|	ttMockData.Priority DESC,
+	|	ttMockData.Ref";
 	
 	Query.SetParameter("Request_Type", RequestStructure.Type);
 	
 	Query.SetParameter("BodyBinaryMD5", CommonFunctionsServer.GetMD5(RequestStructure.BodyBinary));
 	Query.SetParameter("BodyStringMD5", CommonFunctionsServer.GetMD5(GetBinaryDataFromString(RequestStructure.BodyString)));
 	
-	Selection = Query.Execute().Select();
-	While Selection.Next() Do
-		RequestVariables = New Structure;
-		SelectionStructure = GetSelectionMockStructure();
-		FillPropertyValues(SelectionStructure, Selection);
-		CheckingResult = CheckRequestToMockData(RequestStructure, SelectionStructure, RequestVariables); 
-		If CheckingResult.Successfully Then
-			MockDataRef = Selection.Ref; // CatalogRef.Unit_MockServiceData
-			Result.MockData = MockDataRef;
-			Result.RequestVariables = RequestVariables;
-			Break;
-		EndIf;  
-	EndDo;
-	
-	Return Result;
+	Return Query.Execute().Unload();
 	
 EndFunction
 
@@ -528,7 +543,7 @@ Function getRequestVariables(RequestStructure, MockData, Logs)
 	
 	AddLineToLogs(Logs, R().Mock_Info_StartGettingVariables, True);
 	
-	Result = new Structure;
+	Result = New Structure;
 	For Each Element In MockData.Request_Variables Do
 		RequestValue = RequestStructure.Options.Get(Element.VariableName);
 		If ValueIsFilled(RequestValue) Then
@@ -565,8 +580,21 @@ Function getValueOfBodyVariable(RequestStructure, PathToValue, MockValue, Reques
 		Return TransformationValue(MockValue, RequestVariables);
 	EndIf;
 	
+	NewPath = "";
+	NewData = Undefined;
+	
+	If StrStartsWith(PathToValue, "[text]") Then
+		NewPath = Mid(PathToValue,8);
+		NewData = RequestStructure.BodyString;
+	ElsIf StrStartsWith(PathToValue, "[file]") Then
+		NewPath = Mid(PathToValue,8);
+		NewData = RequestStructure.BodyBinary;
+	Else
+		Return "";
+	EndIf;
+	
 	Try
-		Return getValueOfBodyVariableByPath(PathToValue, RequestStructure, True);
+		Return getValueOfBodyVariableByPath(NewPath, NewData);
 	Except
 		Return "";
 	EndTry;
@@ -578,21 +606,10 @@ EndFunction
 // Parameters:
 //  PathToValue - String - Path to value
 //  DataForValue - Arbitrary
-//  isFirst - Boolean
 // 
 // Returns:
 //  String - Get value of body variable by path
-Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
-	
-	If isFirst Then
-		If StrStartsWith(PathToValue, "[text]") Then
-			Return getValueOfBodyVariableByPath(Mid(PathToValue,8), DataForValue.BodyString);
-		ElsIf StrStartsWith(PathToValue, "[file]") Then
-			Return getValueOfBodyVariableByPath(Mid(PathToValue,8), DataForValue.BodyBinary);
-		Else
-			Return "";
-		EndIf;
-	EndIf;
+Function getValueOfBodyVariableByPath(PathToValue, DataForValue)
 	
 	ArrayOfSegments = StrSplit(PathToValue, "/");
 	
@@ -606,15 +623,11 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
 	If TypeOf(DataForValue) = Type("String") Then
 		
 		If CurrentDataType = "[xml]" Then
-			ReaderXML = New XMLReader();
-			ReaderXML.SetString(DataForValue);
-			ValueXML = XDTOFactory.ReadXML(ReaderXML); // Arbitrary
+			ValueXML = CommonFunctionsServer.DeserializeXML(DataForValue);
 			Return getValueOfBodyVariableByPath(NextPath, ValueXML);
 			
 		ElsIf CurrentDataType = "[json]" Then
-			ReaderJSON = New JSONReader();
-			ReaderJSON.SetString(DataForValue);
-			ValueJSON = ReadJSON(ReaderJSON);
+			ValueJSON = CommonFunctionsServer.DeserializeJSON(DataForValue);
 			Return getValueOfBodyVariableByPath(NextPath, ValueJSON);
 			
 		ElsIf CurrentDataType = "[file]" Then
@@ -658,9 +671,6 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
 			
 		EndIf;
 	
-	ElsIf StrStartsWith(CurrentDataType, "[") Then
-		// TODO: Other operation 
-		
 	Else // get object property
 	 
 	 	If TypeOf(DataForValue) = Type("Array") Then
@@ -676,8 +686,6 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, isFirst=False)
 			Return getValueOfBodyVariableByPath(NextPath, PropertyValue);
 		EndIf;
 	EndIf;
-	
-	Return "";
 	
 EndFunction
 
@@ -696,7 +704,7 @@ Function TransformationValue(SomeValue, RequestVariables)
 	EndIF;
 	
 	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "$$$") And StrEndsWith(SomeValue, "$$$") Then
-		KeyName = Mid(SomeValue, 4, StrLen(SomeValue)-6);
+		KeyName = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
 		Try
 			Return RequestVariables[KeyName];
 		Except
@@ -708,7 +716,7 @@ Function TransformationValue(SomeValue, RequestVariables)
 		Params = CommonFunctionsServer.GetRecalculateExpressionParams();
 		Params.Eval = True;
 		Params.SafeMode = True;
-		Params.Expression = Mid(SomeValue, 4, StrLen(SomeValue)-6);
+		Params.Expression = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
 		Params.AddInfo = RequestVariables;
 		ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
 		If ResultInfo.isError Then

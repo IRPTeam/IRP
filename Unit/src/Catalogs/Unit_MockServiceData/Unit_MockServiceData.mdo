@@ -36,6 +36,25 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.Unit_MockServiceData.Form.ItemForm</defaultObjectForm>
+  <attributes uuid="adc47e3b-87dd-4ea4-b79b-f4857eb58faa">
+    <name>Priority</name>
+    <synonym>
+      <key>en</key>
+      <value>Priority</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>3</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="4bbda007-7cca-4983-ba16-f163a792bb3b">
     <name>Request_Type</name>
     <synonym>

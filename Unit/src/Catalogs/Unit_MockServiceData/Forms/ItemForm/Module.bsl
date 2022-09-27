@@ -1,6 +1,14 @@
 // @strict-types
-// @skip-check module-self-reference
 
+#Region Variables
+
+&AtServer
+Var Request_Body; // ValueStorage
+
+&AtServer
+Var Answer_Body; // ValueStorage
+
+#EndRegion
 
 #Region FormEventHandlers
 
@@ -9,7 +17,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	If Object.Ref.IsEmpty() Then
 		If Parameters.Property("Basis") And TypeOf(Parameters.Basis) = Type("CatalogRef.Unit_ServiceExchangeHistory") Then
-			InputRequest = Parameters.Basis;  // CatalogRef.Unit_ServiceExchangeHistory
+			InputRequest = Parameters.Basis; // CatalogRef.Unit_ServiceExchangeHistory
 			InputAnswer = Parameters.Basis; // CatalogRef.Unit_ServiceExchangeHistory
 			If InputAnswer.Parent.IsEmpty() Then
 				InputAnswer = IntegrationServer.Unit_GetLastAnswerByRequest(InputAnswer);
@@ -45,7 +53,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If isEditRequestBody Then
 		ReloadTextBodyAtServer(True);
 	EndIf;
-	CurrentObject.Request_Body  = GetBodyValueStorage(True);
+	CurrentObject.Request_Body = GetBodyValueStorage(True);
 	
 	If isEditAnswerBody Then
 		ReloadTextBodyAtServer(False);
@@ -56,6 +64,21 @@ EndProcedure
 
 #EndRegion
 
+#Region FormHeaderItemsEventHandlers
+
+&AtClient
+Procedure RequestBodyStringOnChange(Item)
+	ThisObject.isEditRequestBody = True;
+	ThisObject.Modified = True;
+EndProcedure
+
+&AtClient
+Procedure AnswerBodyStringOnChange(Item)
+	ThisObject.isEditAnswerBody = True;
+	ThisObject.Modified = True;
+EndProcedure
+
+#EndRegion
 
 #Region FormCommandsEventHandlers
 
@@ -77,7 +100,7 @@ Async Procedure SaveBody(Command)
 	EndIf;
 	
 	BodyRowValue = GetBodyAtServer(isRequest);
-	If TypeOf(BodyRowValue) <> Type("BinaryData") Then
+	If Not TypeOf(BodyRowValue) = Type("BinaryData") Then
 		ShowMessageBox(, R().Mock_Info_EmptyFile);
 		Return;
 	EndIf;
@@ -118,24 +141,6 @@ EndProcedure
 
 #EndRegion
 
-
-#Region FormHeaderItemsEventHandlers
-
-&AtClient
-Procedure RequestBodyStringOnChange(Item)
-	ThisObject.isEditRequestBody = True;
-	ThisObject.Modified = True;
-EndProcedure
-
-&AtClient
-Procedure AnswerBodyStringOnChange(Item)
-	ThisObject.isEditAnswerBody = True;
-	ThisObject.Modified = True;
-EndProcedure
-
-#EndRegion
-
-
 #Region Private
 
 // Get body at server.
@@ -170,9 +175,9 @@ EndFunction
 &AtServer
 Procedure LoadValueStorageInBody(isRequest, Body)
 	If isRequest Then
-		ThisObject["Request_Body"] = Body;
+		Request_Body = Body;
 	Else
-		ThisObject["Answer_Body"] = Body;
+		Answer_Body = Body;
 	EndIf;
 EndProcedure
 
@@ -200,7 +205,7 @@ Procedure TryLoadBodyAtServer(isRequest)
 	If BodyIsText Then
 		ThisObject[Prefix+"BodyString"] = GetStringFromBinaryData(BodyRowValue);
 		BodyGroup.CurrentPage = Items["Body"+Prefix+"AsStr"];
-	ElsIf StrCompare(Left(BodyType, 5), "IMAGE") = 0 Then
+	ElsIf StrStartsWith(Upper(BodyType), "IMAGE") Then
 		ThisObject[Prefix+"BodyPicture"] = PutToTempStorage(BodyRowValue);
 		BodyGroup.CurrentPage = Items["Body"+Prefix+"AsPic"];
 	Else
@@ -213,21 +218,19 @@ EndProcedure
 Procedure ReloadBodyAtServer(isRequest, NewContent, Newsize)
 	
 	If isRequest Then
-		Prefix = "Request";
 		Request_Body = New ValueStorage(NewContent);
 		Object.Request_BodyMD5 = CommonFunctionsServer.GetMD5(NewContent);
 		Object.Request_BodySize = Newsize;
+		ThisObject.RequestBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Newsize);
 		ThisObject.isEditRequestBody = False;
 		
 	Else
-		Prefix = "Answer";
 		Answer_Body = New ValueStorage(NewContent);
 		Object.Answer_BodySize = Newsize;
+		ThisObject.AnswerBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Newsize);
 		ThisObject.isEditAnswerBody = False;
 		
 	EndIf;
-	
-	ThisObject[Prefix+"BodySizePresentation"] = CommonFunctionsClientServer.GetSizePresentation(Newsize);
 	
 	TryLoadBodyAtServer(isRequest);
 	

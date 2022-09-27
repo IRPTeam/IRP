@@ -23,7 +23,9 @@ EndIf;
 
 	// if cache was initialized from this EntryPoint then ChainComplete
 	If Parameters.ModelEnvironment.FirstStepNames = StepNames Then
-		Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ControllerModuleName);
+		// web-client-bug-fix
+		ControllerClientServer_V2.OnChainComplete(Parameters);
+		//Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ControllerModuleName);
 		DestroyEntryPoint(Parameters);
 	EndIf;
 EndProcedure

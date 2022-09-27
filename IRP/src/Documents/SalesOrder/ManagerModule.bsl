@@ -196,7 +196,7 @@ Function SalesOrderPrint(Ref, Param)
 	AreaFooter.Parameters.TotalOffers = TotalOffers;
 	AreaFooter.Parameters.Manager = SelectionHeader.Author;
 	Spreadsheet.Put(AreaFooter);
-	
+	Spreadsheet = UniversalPrintServer.ResetLangSettings(Spreadsheet, Param.LayoutLang);
 	Return Spreadsheet;
 EndFunction
 

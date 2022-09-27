@@ -131,23 +131,21 @@ Procedure RefreshTemplate()
 		SelectRows = New ValueList;
 		SelectRows.Add(PrintFormConfig.Get(ThisObject.IdResult));
 	EndIf; 	
-	If SelectRows.Count() > 0 Then
-		For Each ItRow In SelectRows Do	
-			SelectData = Items.PrintFormConfig.RowData(ItRow);
-			If SelectData = Undefined Then
-				SelectData = PrintFormConfig.Get(ThisObject.IdResult);
-			EndIf;
-			Param = UniversalPrintServer.InitPrintParam(SelectData.Ref);
-			FillPropertyValues(Param, SelectData);
-			Param.DataLang = DataLang;
-			Param.LayoutLang = LayoutLang;
-			SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(Param.RefDocument, Param);
-			Param.SpreadsheetDoc = SpreadsheetDoc;
-			SelectData.DataLang = DataLang;
-			SelectData.LayoutLang = LayoutLang;
-			SelectData.SpreadsheetDoc = SpreadsheetDoc;
-		EndDo;
-	EndIf;
+	For Each ItRow In SelectRows Do	
+		SelectData = Items.PrintFormConfig.RowData(ItRow);
+		If SelectData = Undefined Then
+			SelectData = PrintFormConfig.Get(ThisObject.IdResult);
+		EndIf;
+		Param = UniversalPrintServer.InitPrintParam(SelectData.Ref);
+		FillPropertyValues(Param, SelectData);
+		Param.DataLang = DataLang;
+		Param.LayoutLang = LayoutLang;
+		SpreadsheetDoc = UniversalPrintServer.BuildSpreadsheetDoc(Param.RefDocument, Param);
+		Param.SpreadsheetDoc = SpreadsheetDoc;
+		SelectData.DataLang = DataLang;
+		SelectData.LayoutLang = LayoutLang;
+		SelectData.SpreadsheetDoc = SpreadsheetDoc;
+	EndDo;
 	SetResult();
 EndProcedure
 

@@ -111,3 +111,28 @@ Function CodeByLanguageName(NameL) Export
 	EndDo;
 	Return Undefined;
 EndFunction
+
+// Reset lang settings.
+// 
+// Parameters:
+//  Spreadsheet - SpreadsheetDocument -
+//  LangCode - String - Lang code
+// 
+// Returns:
+//  SpreadsheetDocument
+Function ResetLangSettings(Spreadsheet, LangCode) Export
+	XML = CommonFunctionsServer.SerializeXMLUseXDTO(Spreadsheet);
+	LangSettings = "<languageSettings>
+	|	<currentLanguage>%1</currentLanguage>
+	|	<defaultLanguage>%1</defaultLanguage>
+	|	<languageInfo>
+	|		<id>%1</id>
+	|		<code>%1</code>
+	|		<description>%1</description>
+	|	</languageInfo>
+	|</languageSettings>";
+	LangSettings = StrTemplate(LangSettings, LangCode);
+	XML = StrReplace(XML, "<languageCode>" + LangCode + "</languageCode>", LangSettings);
+	Result = CommonFunctionsServer.DeserializeXMLUseXDTO(XML); // SpreadsheetDocument
+	Return Result;
+EndFunction

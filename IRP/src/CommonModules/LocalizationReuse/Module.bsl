@@ -103,7 +103,9 @@ EndFunction
 // Metadata languages.
 // 
 // Returns:
-//  Structure - Metadata languages
+//  Structure - Metadata languages:
+//  * Key - String - Lang code
+//  * Value - String - Lang description
 Function MetadataLanguages() Export
 	Result = New Structure;
 	For Each It In Metadata.Languages Do

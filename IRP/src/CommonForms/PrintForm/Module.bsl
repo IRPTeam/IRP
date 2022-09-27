@@ -35,6 +35,9 @@ Procedure Hide(Command)
 	SetVisiblePrintSetting(False);
 EndProcedure
 
+// Notification processing.
+// 
+// Parameters:
 //  EventName - String - Event name
 //  Parameter - See UniversalPrintServer.InitPrintParam
 &AtClient
@@ -148,14 +151,10 @@ Procedure RefreshTemplate()
 	SetResult();
 EndProcedure
 
-// Set result.
-// 
-// Parameters:
-//  SpreadsheetDoc -  SpreadsheetDocument 
 &AtServer
 Procedure SetResult()
 	CurrentData = PrintFormConfig.Get(ThisObject.IdResult);
-	ThisObject.Result = CurrentData.SpreadsheetDoc;
+	ThisObject.Result = CurrentData.SpreadsheetDoc; // SpreadsheetDocument
 EndProcedure
 
 #EndRegion

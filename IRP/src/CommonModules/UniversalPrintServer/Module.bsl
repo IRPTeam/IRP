@@ -3,7 +3,7 @@
 // Init print param.
 // 
 // Parameters:
-//  Ref - DocumentRef
+//  Ref - DocumentRef - 
 //  LayoutLang - String - Layout lang
 //  DataLang - String - Data lang
 // 
@@ -14,8 +14,8 @@
 // * CountCopy - Number -
 // * NameTemplate - String -
 // * BuilderLayout - Boolean -
-// * DataLang - String -
 // * LayoutLang - String -
+// * DataLang - String -
 Function InitPrintParam(Ref, Val LayoutLang = Undefined, Val DataLang = Undefined) Export
 	If LayoutLang = Undefined Then
 		LayoutLang = LocalizationReuse.GetLocalizationCode();
@@ -66,7 +66,7 @@ EndFunction
 //  NameTemplate - String -
 // 
 // Returns:
-//  Result - String -
+//  String -
 Function GetSynonymTemplate(Ref, NameTemplate) Export
 	Try
 		Result = Ref.Metadata().Templates.Find(NameTemplate).Synonym;

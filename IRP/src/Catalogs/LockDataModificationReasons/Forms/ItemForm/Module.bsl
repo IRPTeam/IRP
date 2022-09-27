@@ -1,5 +1,5 @@
-// @strict-types
 
+// @strict-types
 
 #Region FormEvents
 
@@ -44,7 +44,6 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	
 	If CurrentObject.AdvancedMode Then
 		CurrentObject.DCS = New ValueStorage(SettingsComposer.Settings);
 	Else
@@ -61,7 +60,6 @@ Procedure OnReadAtServer(CurrentObject)
 		UpdateQuery(Settings);
 	EndIf;
 EndProcedure
-
 
 // Description opening.
 // 
@@ -98,6 +96,12 @@ EndProcedure
 &AtClient
 Procedure SetCurrentUser(Command)
 	SetCurrentUserAtServer();
+EndProcedure
+
+&AtClient
+Procedure ShowFilterQuery(Command)
+	Items.SettingsFilterShowFilterQuery.Check = Not Items.SettingsFilterShowFilterQuery.Check;
+	Items.FilterQuery.Visible = Items.SettingsFilterShowFilterQuery.Check;
 EndProcedure
 
 #EndRegion

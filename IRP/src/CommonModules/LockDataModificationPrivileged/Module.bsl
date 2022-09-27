@@ -290,7 +290,7 @@ Function ModifyDataIsLocked_ByTable(SourceParams, Rules, CheckCurrent, AddInfo =
 	If QueryResult.IsEmpty() Then
 		Return False;
 	EndIf;
-	Return ShowInfoAboutLock(QueryResult);
+//	Return ShowInfoAboutLock(QueryResult);
 EndFunction
 
 Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)

@@ -2411,7 +2411,7 @@ Scenario: _028 check landed cost by materials
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I select "Additional item cost" exact value from "Calculation mode" drop-down list
+		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
 		And I input "22.09.2022" text in "Begin date" field
 		And I input "26.09.2022" text in "End date" field
 		And I click "Post and close" button
@@ -2422,7 +2422,7 @@ Scenario: _028 check landed cost by materials
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
+		And I select "Additional item cost" exact value from "Calculation mode" drop-down list
 		And I input "22.09.2022" text in "Begin date" field
 		And I input "26.09.2022" text in "End date" field
 		And I click "Post and close" button

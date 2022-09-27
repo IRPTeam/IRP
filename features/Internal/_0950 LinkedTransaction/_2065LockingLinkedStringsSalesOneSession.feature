@@ -251,13 +251,12 @@ Scenario: _20650042 check locking header in the WO with linked documents (one se
 		And I select current line in "List" table
 	* Check locking header
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And "Store" attribute is read-only
 		And "Company" attribute is read-only
 		And "Partner" attribute is read-only
 		And "Legal name" attribute is read-only
 		And "Partner term" attribute is read-only
 		And I move to "Other" tab	
-		And "Price includes tax" attribute is read-only
+		And "Price include tax" attribute is read-only
 		And "Currency" attribute is read-only
 		And "Branch" attribute is read-only
 	And I close all client application windows	

@@ -401,6 +401,7 @@ Scenario: _0154100 preparation ( filling documents)
 				| "$$NumberPurchaseInvoice30004$$" |
 			When create purchase invoice without order (Vendor Ferron, USD)
 	* Price list (work)
+		And Delay 10
 		When Create document PriceList objects (works)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PriceList.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |

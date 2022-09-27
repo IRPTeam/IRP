@@ -59,6 +59,7 @@
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="ba2fd651-850a-44fb-9d74-faedcb601490">

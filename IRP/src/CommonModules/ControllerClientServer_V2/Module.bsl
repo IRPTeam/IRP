@@ -7261,6 +7261,7 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 	DataPath = "ItemList.QuantityInBaseUnit";
 	Binding = New Structure();
 	Binding.Insert("SalesOrder"           , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	Binding.Insert("WorkOrder"            , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
 	Binding.Insert("SalesOrderClosing"    , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
 	Binding.Insert("SalesInvoice"         , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
 	Binding.Insert("RetailSalesReceipt"   , "StepItemListCalculations_IsQuantityInBaseUnitChanged");

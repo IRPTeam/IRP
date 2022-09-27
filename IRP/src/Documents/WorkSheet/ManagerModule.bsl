@@ -3,6 +3,7 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();	
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
 	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
@@ -94,6 +95,12 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
+	If ValueIsFilled(Ref) Then
+		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		StrParams.Insert("BalancePeriod", Undefined);
+	EndIf;
+	
 	Return StrParams;
 EndFunction
 
@@ -109,6 +116,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(T3010S_RowIDInfo());
@@ -122,6 +130,8 @@ Function Materials()
 	|	WorkSheetItemList.Ref.Date AS Period,
 	|	WorkSheetItemList.Key,
 	|	WorkSheetItemList.ItemKey AS Work,
+	|	WorkSheetItemList.WorkOrder AS WorkOrder,
+	|	NOT WorkSheetItemList.WorkOrder.Ref IS NULL AS WorkOrderExists,
 	|	WorkSheetMaterials.Ref AS WorkSheet,
 	|	WorkSheetMaterials.Ref.Company AS Company,
 	|	WorkSheetMaterials.Ref.Branch AS Branch,
@@ -143,6 +153,144 @@ Function Materials()
 	|		AND WorkSheetMaterials.Ref = &Ref";
 EndFunction
 
+Function R4011B_FreeStocks()
+	Return
+		"SELECT
+		|	Materials.Period,
+		|	Materials.Store,
+		|	Materials.ItemKey,
+		|	Materials.WorkOrder,
+		|	Materials.WorkOrderExists,
+		|	SUM(Materials.Quantity) AS Quantity
+		|INTO MaterialsGroup
+		|FROM
+		|	Materials AS Materials
+		|WHERE
+		|	Materials.IncludeToWorkCost
+		|GROUP BY
+		|	Materials.Period,
+		|	Materials.Store,
+		|	Materials.ItemKey,
+		|	Materials.WorkOrder,
+		|	Materials.WorkOrderExists
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	StockReservation.Store AS Store,
+		|	StockReservation.Order AS Basis,
+		|	StockReservation.ItemKey AS ItemKey,
+		|	StockReservation.QuantityBalance AS Quantity
+		|INTO TmpStockReservation
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+		|		(SELECT
+		|			Materials.Store,
+		|			Materials.ItemKey,
+		|			Materials.WorkOrder
+		|		FROM
+		|			Materials AS Materials
+		|		WHERE
+		|			Materials.IncludeToWorkCost)) AS StockReservation
+		|WHERE
+		|	StockReservation.QuantityBalance > 0
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	MaterialsGroup.Period AS Period,
+		|	MaterialsGroup.Store AS Store,
+		|	MaterialsGroup.ItemKey AS ItemKey,
+		|	MaterialsGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0) AS Quantity
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	MaterialsGroup AS MaterialsGroup
+		|		LEFT JOIN TmpStockReservation AS TmpStockReservation
+		|		ON (MaterialsGroup.Store = TmpStockReservation.Store)
+		|		AND (MaterialsGroup.ItemKey = TmpStockReservation.ItemKey)
+		|		AND TmpStockReservation.Basis = MaterialsGroup.WorkOrder
+		|WHERE
+		|	MaterialsGroup.Quantity > ISNULL(TmpStockReservation.Quantity, 0)
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP MaterialsGroup
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP TmpStockReservation";
+EndFunction
+
+Function R4012B_StockReservation()
+	Return 
+		"SELECT
+		|	Materials.Period AS Period,
+		|	Materials.Store AS Store,
+		|	Materials.ItemKey AS ItemKey,
+		|	Materials.WorkOrder AS WorkOrder,
+		|	SUM(Materials.Quantity) AS Quantity
+		|INTO TmpMaterialsGroup
+		|FROM
+		|	Materials AS Materials
+		|WHERE
+		|	Materials.WorkOrderExists
+		|	AND Materials.IncludeToWorkCost
+		|GROUP BY
+		|	Materials.Period,
+		|	Materials.Store,
+		|	Materials.ItemKey,
+		|	Materials.WorkOrder
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	R4012B_StockReservationBalance.Store AS Store,
+		|	R4012B_StockReservationBalance.ItemKey AS ItemKey,
+		|	R4012B_StockReservationBalance.Order AS Order,
+		|	R4012B_StockReservationBalance.QuantityBalance AS QuantityBalance
+		|INTO TmpStockReservation
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+		|		(SELECT
+		|			Materials.Store,
+		|			Materials.ItemKey,
+		|			Materials.WorkOrder
+		|		FROM
+		|			TmpMaterialsGroup AS Materials)) AS R4012B_StockReservationBalance
+		|WHERE
+		|	R4012B_StockReservationBalance.QuantityBalance > 0
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	TmpMaterialsGroup.Period AS Period,
+		|	TmpMaterialsGroup.WorkOrder AS Order,
+		|	TmpMaterialsGroup.ItemKey AS ItemKey,
+		|	TmpMaterialsGroup.Store AS Store,
+		|	CASE
+		|		WHEN StockReservation.QuantityBalance > TmpMaterialsGroup.Quantity
+		|			THEN TmpMaterialsGroup.Quantity
+		|		ELSE StockReservation.QuantityBalance
+		|	END AS Quantity
+		|INTO R4012B_StockReservation
+		|FROM
+		|	TmpMaterialsGroup AS TmpMaterialsGroup
+		|		INNER JOIN TmpStockReservation AS StockReservation
+		|		ON TmpMaterialsGroup.WorkOrder = StockReservation.Order
+		|		AND TmpMaterialsGroup.ItemKey = StockReservation.ItemKey
+		|		AND TmpMaterialsGroup.Store = StockReservation.Store
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP TmpMaterialsGroup
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP TmpStockReservation";
+EndFunction
+
 Function R4010B_ActualStocks()
 	Return
 	"SELECT
@@ -152,21 +300,6 @@ Function R4010B_ActualStocks()
 	|	Materials.Store,
 	|	Materials.Quantity
 	|INTO R4010B_ActualStocks
-	|FROM
-	|	Materials AS Materials
-	|WHERE
-	|	Materials.IncludeToWorkCost";
-EndFunction
-
-Function R4011B_FreeStocks()
-	Return
-	"SELECT
-	|	Materials.Period,
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	Materials.ItemKey,
-	|	Materials.Store,
-	|	Materials.Quantity
-	|INTO R4011B_FreeStocks
 	|FROM
 	|	Materials AS Materials
 	|WHERE

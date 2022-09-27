@@ -15,6 +15,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	EndIf;
 	
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
@@ -81,13 +82,57 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
+	QueryArray.Add(Materials());
 	Return QueryArray;
+EndFunction
+
+Function Materials()
+	Return 
+	"SELECT
+	|	WorkOrderMaterials.Ref.Date AS Period,
+	|	WorkOrderMaterials.Ref AS Order,
+	|	WorkOrderMaterials.Ref.Company AS Company,
+	|	WorkOrderMaterials.Store AS Store,
+	|	WorkOrderMaterials.ItemKey AS ItemKey,
+	|	WorkOrderMaterials.QuantityInBaseUnit AS Quantity
+	|INTO Materials
+	|FROM
+	|	Document.WorkOrder.Materials AS WorkOrderMaterials
+	|WHERE
+	|	WorkOrderMaterials.Ref = &Ref
+	|	AND &StatusInfoPosting";
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
 	Return QueryArray;
+EndFunction
+
+Function R4011B_FreeStocks()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	Materials AS Materials
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R4012B_StockReservation()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4012B_StockReservation
+		|FROM
+		|	Materials AS Materials
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function T3010S_RowIDInfo()

@@ -7,7 +7,8 @@
 
 Feature: check Work sheet and Work order movements
 
-
+Variables:
+import "Variables.feature"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -51,6 +52,7 @@ Scenario: _045501 preparation (work sheet movements)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When create items for work order
+		And Delay 5
 		When Create catalog BillOfMaterials objects
 		When update ItemKeys
 	* Add plugin for taxes calculation

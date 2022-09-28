@@ -4014,6 +4014,7 @@ Scenario: _0154192 create document Retail Sales Receipt from Point of sale (paym
 		And I close all client application windows
 		
 Scenario: _0154193 check print last receipt from POS
+		And I close all client application windows
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
 	* Print receipt
@@ -4023,12 +4024,16 @@ Scenario: _0154193 check print last receipt from POS
 		And I click the button named "FormEditResult"
 		And I click the button named "FormShow"		
 		And "PrintFormConfig" table contains lines
-			| 'LL'     | 'Print' | 'Object'                | 'Template' | 'Count copy' |
-			| 'en, en' | 'Yes'   | 'Retail sales receipt*' | ''         | '1'          |	
+			| 'Print' | 'Object'                | 'Template' | 'Count copy' |
+			| 'Yes'   | 'Retail sales receipt*' | ''         | '1'          |	
 		And in "Result" spreadsheet document I move to "R16C4" cell
 		And in "Result" spreadsheet document I double-click the current cell
 		And in "Result" spreadsheet document I input text "111"
 		And in "Result" spreadsheet document I move to "R21C4" cell
+		And I activate "Count copy" field in "PrintFormConfig" table
+		And I select current line in "PrintFormConfig" table
+		And I input "2" text in "Count copy" field of "PrintFormConfig" table
+		And I finish line editing in "PrintFormConfig" table	
 		Then user message window does not contain messages
 		And I close all client application windows
 

@@ -99,11 +99,11 @@ Scenario: _2065001 preparation (locking linked strings)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
-		| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);" |
-	And I execute 1C:Enterprise script at server
 		| "Documents.WorkOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 		| "Documents.WorkSheet.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(182).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
 

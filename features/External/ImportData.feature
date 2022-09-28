@@ -2290,7 +2290,7 @@ Scenario: Create catalog BillOfMaterials objects
 
 	And I check or create catalog "BusinessUnits" objects:
 		| 'Ref'                                                                   | 'DeletionMark' | 'Code' | 'Type'                            | 'UseConsolidatedRetailSales' | 'MaterialStore'                                                  | 'ReleaseStore'                                                   | 'SemiproductStore'                                               | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=b785989306affb7a11ed39af48f5fa05' | 'False'        | 6      | 'Enum.BusinessUnitTypes.Workshop' | 'False'                      | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'Workshop 1'     | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=b785989306affb7a11ed39af48f5fa05' | 'False'        | 16     | 'Enum.BusinessUnitTypes.Workshop' | 'False'                      | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'Workshop 1'     | ''                 | ''               | ''               |
 
 
 	And I check or create catalog "BillOfMaterials" objects:

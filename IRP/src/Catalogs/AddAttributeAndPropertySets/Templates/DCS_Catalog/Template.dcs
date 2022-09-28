@@ -14,6 +14,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Item type</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Вид номенклатуры</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme tipi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -22,6 +30,14 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
+					<v8:content>Ref</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ссылка</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
 					<v8:content>Ref</v8:content>
 				</v8:item>
 			</title>
@@ -48,6 +64,14 @@ FROM
 						<v8:lang>en</v8:lang>
 						<v8:content>Item type</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Вид номенклатуры</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Malzeme tipi</v8:content>
+					</v8:item>
 				</title>
 				<valueType>
 					<v8:Type xmlns:d6p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d6p1:CatalogRef.ItemTypes</v8:Type>
@@ -59,6 +83,14 @@ FROM
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>Ref</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Ссылка</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>Ref</v8:content>
 					</v8:item>
 				</title>

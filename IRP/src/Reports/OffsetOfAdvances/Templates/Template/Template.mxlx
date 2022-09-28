@@ -167,6 +167,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>TRN_KEY</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>TRN_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>TRN_KEY</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -176,6 +184,14 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
+							<v8:content>ADV_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>ADV_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
 							<v8:content>ADV_KEY</v8:content>
 						</v8:item>
 					</tl>
@@ -189,6 +205,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Company</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Организация</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Şirket</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -199,6 +223,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Branch</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Структурное подразделение</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Şube</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -211,6 +243,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Partner</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Партнер</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Cari hesap</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -221,6 +261,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Legal name</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Контрагент</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Fatura hesabı</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -233,6 +281,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Currency</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Валюта</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Döviz</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -244,6 +300,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Agreement</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Соглашение</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Sözleşme</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -253,6 +317,14 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
+							<v8:content>#</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>#</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
 							<v8:content>#</v8:content>
 						</v8:item>
 					</tl>
@@ -266,6 +338,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Advances</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Авансы</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Avanslar</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -277,6 +357,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Transactions</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Основное</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>İşlemler</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -326,6 +414,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Open</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Открыт</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açık</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -336,6 +432,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Receipt</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Приход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Giriş</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -348,6 +452,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Expense</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Расход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Çıkış</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -358,6 +470,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Close</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Закрыть</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapalı</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -370,6 +490,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Open</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Открыт</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açık</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -380,6 +508,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Receipt</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Приход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Giriş</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -392,6 +528,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Expense</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Расход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Çıkış</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -402,6 +546,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Close</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Закрыть</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapalı</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -632,6 +784,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Payment date</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Дата оплаты</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Ödeme tarihi</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -643,6 +803,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Receipt</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Приход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Giriş</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -653,6 +821,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Expense</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Расход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Çıkış</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -704,6 +880,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>ADV=&gt;TRN</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>ADV=&gt;TRN</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>ADV=&gt;TRN</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -721,6 +905,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Period</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Период</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -730,6 +922,14 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
+							<v8:content>From ADV_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>From ADV_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
 							<v8:content>From ADV_KEY</v8:content>
 						</v8:item>
 					</tl>
@@ -743,6 +943,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Open</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Открыт</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açık</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -753,6 +961,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Receipt</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Приход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Giriş</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -765,6 +981,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Expense</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Расход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Çıkış</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -775,6 +999,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Close</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Закрыть</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapalı</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -787,6 +1019,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Period</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Период</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -796,6 +1036,14 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
+							<v8:content>To TRN_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>To TRN_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
 							<v8:content>To TRN_KEY</v8:content>
 						</v8:item>
 					</tl>
@@ -809,6 +1057,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Open</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Открыт</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açık</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -819,6 +1075,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Receipt</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Приход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Giriş</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -831,6 +1095,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Expense</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Расход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Çıkış</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -841,6 +1113,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Close</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Закрыть</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapalı</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -951,6 +1231,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>TRN=&gt;ADV</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>TRN=&gt;ADV</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>TRN=&gt;ADV</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -968,6 +1256,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Period</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Период</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -977,6 +1273,14 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
+							<v8:content>From TRN_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>From TRN_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
 							<v8:content>From TRN_KEY</v8:content>
 						</v8:item>
 					</tl>
@@ -990,6 +1294,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Open</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Открыт</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açık</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -1000,6 +1312,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Receipt</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Приход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Giriş</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -1012,6 +1332,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Expense</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Расход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Çıkış</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -1022,6 +1350,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Close</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Закрыть</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapalı</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -1034,6 +1370,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Period</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Период</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Dönem</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -1043,6 +1387,14 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
+							<v8:content>To ADV_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>To ADV_KEY</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
 							<v8:content>To ADV_KEY</v8:content>
 						</v8:item>
 					</tl>
@@ -1056,6 +1408,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Open</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Открыт</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Açık</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -1066,6 +1426,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Receipt</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Приход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Giriş</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -1078,6 +1446,14 @@
 							<v8:lang>en</v8:lang>
 							<v8:content>Expense</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Расход</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Çıkış</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -1088,6 +1464,14 @@
 						<v8:item>
 							<v8:lang>en</v8:lang>
 							<v8:content>Close</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Закрыть</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Kapalı</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -1419,6 +1803,14 @@
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
 		</format>
 	</format>
 	<format>
@@ -1432,6 +1824,14 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
 		</format>
@@ -1450,6 +1850,14 @@
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
 		</format>
 	</format>
 	<format>
@@ -1466,6 +1874,14 @@
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
 		</format>
 	</format>
 	<format>
@@ -1479,6 +1895,14 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
 		</format>
@@ -1496,6 +1920,14 @@
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
 		</format>
 	</format>
 	<format>
@@ -1509,6 +1941,14 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
 		</format>
@@ -1528,6 +1968,14 @@
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
 		</format>
 	</format>
 	<format>
@@ -1537,6 +1985,14 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
+				<v8:content>NFD=0; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=0; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
 				<v8:content>NFD=0; NGS=' '</v8:content>
 			</v8:item>
 		</format>
@@ -1551,6 +2007,14 @@
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
 		</format>
 	</format>
 	<format>
@@ -1563,6 +2027,14 @@
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
 		</format>
 	</format>
 	<format>
@@ -1573,6 +2045,14 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
 		</format>
@@ -1589,6 +2069,14 @@
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2; NGS=' '; DF=dd.MM.yyyy</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '; DF=dd.MM.yyyy</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2; NGS=' '; DF=dd.MM.yyyy</v8:content>
+			</v8:item>
 		</format>
 	</format>
 	<format>
@@ -1597,6 +2085,14 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2; NGS=' '; DF=dd.MM.yyyy</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '; DF=dd.MM.yyyy</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
 				<v8:content>NFD=2; NGS=' '; DF=dd.MM.yyyy</v8:content>
 			</v8:item>
 		</format>
@@ -1623,6 +2119,14 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2; NGS=' '; DF='dd.MM.yyyy HH:mm:ss'</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '; DF='dd.MM.yyyy HH:mm:ss'</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
 				<v8:content>NFD=2; NGS=' '; DF='dd.MM.yyyy HH:mm:ss'</v8:content>
 			</v8:item>
 		</format>
@@ -1659,6 +2163,14 @@
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
 		</format>
 	</format>
 	<format>
@@ -1671,6 +2183,14 @@
 				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
 		</format>
 	</format>
 	<format>
@@ -1680,6 +2200,14 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
 				<v8:content>NFD=2; NGS=' '</v8:content>
 			</v8:item>
 		</format>

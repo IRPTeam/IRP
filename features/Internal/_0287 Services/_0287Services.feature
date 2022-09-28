@@ -385,8 +385,8 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Quantity'     | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000' | ''              | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | 'Store 01' |
+			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Quantity' | 'Offers amount' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000'    | ''              | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | ''         |
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "84,75"
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "15,25"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "100,00"
@@ -415,9 +415,9 @@ Scenario: _029107 create a Sales order for service and product (Store does not u
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "1 083,05"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "7 100,00"
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Quantity'      | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000'  | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | 'Store 01' |
-			| '700,00' | 'Table'   | '18%' | 'Table'    | 'Stock'              | 'en description is empty' | '10,000' | 'pcs'  | 'No'                 | '1 067,80'   | '5 932,20'   | '7 000,00'     | 'Store 01' |
+			| 'Price'  | 'Item'    | 'VAT' | 'Item key' | 'Procurement method' | 'Price type'              | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| '100,00' | 'Service' | '18%' | 'Rent'     | ''                   | 'en description is empty' | '1,000'    | 'pcs'  | 'No'                 | '15,25'      | '84,75'      | '100,00'       | ''         |
+			| '700,00' | 'Table'   | '18%' | 'Table'    | 'Stock'              | 'en description is empty' | '10,000'   | 'pcs'  | 'No'                 | '1 067,80'   | '5 932,20'   | '7 000,00'     | 'Store 01' |
 		And I input end of the current month date in "Delivery date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder029107$$" variable
@@ -535,7 +535,7 @@ Scenario: _029130 create Retail sales receipt for service and product
 			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''                             | ''         | ''                  | ''                                     |
 			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''                             | ''                             | ''         | ''                  | ''                                     |
 			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Sales person'                 | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key'                              |
-			| ''                               | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | ''       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*' |
+			| ''                               | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | ''       | ''         | ''                             | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*' |
 			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*' |
 			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*' |
 		And I close all client application windows
@@ -688,7 +688,7 @@ Scenario: _029150 create Retail return receipt for service and product
 			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''                             | ''         | ''                  | ''        |
 			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''         | ''                             | ''                             | ''         | ''                  | ''        |
 			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Sales person'                 | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
-			| ''                               | '*'      | '-1'        | '50'     | '42,37'      | ''              | 'Main Company' | '*'       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
+			| ''                               | '*'      | '-1'        | '50'     | '42,37'      | ''              | 'Main Company' | '*'       | ''         | ''                             | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
 			| ''                               | '*'      | '-1'        | '200'    | '169,49'     | ''              | 'Main Company' | '*'       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button

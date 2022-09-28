@@ -133,6 +133,7 @@ Function ResetLangSettings(Spreadsheet, LangCode) Export
 	|</languageSettings>";
 	LangSettings = StrTemplate(LangSettings, LangCode);
 	XML = StrReplace(XML, "<languageCode>" + LangCode + "</languageCode>", LangSettings);
+	XML = StrReplace(XML, "<v8:lang/>", "<v8:lang>hide</v8:lang>");
 	Result = CommonFunctionsServer.DeserializeXMLUseXDTO(XML); // SpreadsheetDocument
 	Return Result;
 EndFunction

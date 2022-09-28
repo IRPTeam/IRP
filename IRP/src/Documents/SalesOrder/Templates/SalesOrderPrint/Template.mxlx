@@ -11,22 +11,27 @@
 		<languageInfo>
 			<id>tr</id>
 			<code>Turkish</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ru</id>
 			<code>Russian</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>fr</id>
 			<code>French</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>de</id>
 			<code>German</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ha</id>
 			<code>HASH</code>
+			<description/>
 		</languageInfo>
 	</languageSettings>
 	<columns>
@@ -56,13 +61,13 @@
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>9</index>
+			<index>8</index>
 			<column>
 				<formatIndex>5</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>8</index>
+			<index>9</index>
 			<column>
 				<formatIndex>5</formatIndex>
 			</column>
@@ -109,7 +114,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content></v8:content>
+							<v8:content/>
 						</v8:item>
 					</tl>
 				</c>
@@ -132,6 +137,13 @@
 					</tl>
 				</c>
 			</c>
+		</row>
+	</rowsItem>
+	<rowsItem>
+		<index>2</index>
+		<indexTo>3</indexTo>
+		<row>
+			<empty>true</empty>
 		</row>
 	</rowsItem>
 	<rowsItem>
@@ -196,6 +208,13 @@
 		</row>
 	</rowsItem>
 	<rowsItem>
+		<index>7</index>
+		<indexTo>9</indexTo>
+		<row>
+			<empty>true</empty>
+		</row>
+	</rowsItem>
+	<rowsItem>
 		<index>10</index>
 		<row>
 			<formatIndex>11</formatIndex>
@@ -210,7 +229,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content></v8:content>
+							<v8:content/>
 						</v8:item>
 					</tl>
 				</c>
@@ -225,7 +244,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content></v8:content>
+							<v8:content/>
 						</v8:item>
 					</tl>
 				</c>
@@ -240,7 +259,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content></v8:content>
+							<v8:content/>
 						</v8:item>
 					</tl>
 				</c>
@@ -255,7 +274,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content></v8:content>
+							<v8:content/>
 						</v8:item>
 					</tl>
 				</c>
@@ -270,7 +289,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content></v8:content>
+							<v8:content/>
 						</v8:item>
 					</tl>
 				</c>
@@ -285,7 +304,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content></v8:content>
+							<v8:content/>
 						</v8:item>
 					</tl>
 				</c>
@@ -349,40 +368,47 @@
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>18</f>
 					<parameter>Quantity</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>21</f>
+					<f>20</f>
 					<parameter>Unit</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>22</f>
+					<f>21</f>
 					<parameter>Price</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>23</f>
+					<f>22</f>
 					<parameter>OffersAmount</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>18</f>
 					<parameter>TaxAmount</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>25</f>
+					<f>23</f>
 					<parameter>TotalAmount</parameter>
 				</c>
 			</c>
+		</row>
+	</rowsItem>
+	<rowsItem>
+		<index>12</index>
+		<indexTo>13</indexTo>
+		<row>
+			<empty>true</empty>
 		</row>
 	</rowsItem>
 	<rowsItem>
@@ -391,12 +417,12 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>26</f>
+					<f>24</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>27</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -407,7 +433,7 @@
 			</c>
 			<c>
 				<c>
-					<f>28</f>
+					<f>26</f>
 					<parameter>TotalNet</parameter>
 				</c>
 			</c>
@@ -419,12 +445,12 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>26</f>
+					<f>24</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>27</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -435,7 +461,7 @@
 			</c>
 			<c>
 				<c>
-					<f>28</f>
+					<f>26</f>
 					<parameter>TotalTax</parameter>
 				</c>
 			</c>
@@ -454,12 +480,12 @@
 			<c>
 				<i>7</i>
 				<c>
-					<f>26</f>
+					<f>24</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>26</f>
+					<f>27</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -482,24 +508,42 @@
 			<c>
 				<i>1</i>
 				<c>
-					<f>29</f>
-					<tl>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Total row [Number]   [Total] [Currency]</v8:content>
-						</v8:item>
-					</tl>
-				</c>
-			</c>
-			<c>
-				<i>7</i>
-				<c>
-					<f>26</f>
+					<f>0</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>26</f>
+					<f>0</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>0</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>0</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>0</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>0</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>24</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>27</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -510,14 +554,49 @@
 			</c>
 			<c>
 				<c>
-					<f>28</f>
+					<f>26</f>
 					<parameter>Total</parameter>
 				</c>
 			</c>
 		</row>
 	</rowsItem>
 	<rowsItem>
+		<index>18</index>
+		<row>
+			<c>
+				<i>8</i>
+				<c>
+					<f>25</f>
+					<tl>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Currency:</v8:content>
+						</v8:item>
+					</tl>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>29</f>
+					<parameter>Currency</parameter>
+				</c>
+			</c>
+		</row>
+	</rowsItem>
+	<rowsItem>
 		<index>19</index>
+		<row>
+			<c>
+				<i>8</i>
+				<c>
+					<f>0</f>
+					<tl/>
+				</c>
+			</c>
+		</row>
+	</rowsItem>
+	<rowsItem>
+		<index>20</index>
 		<row>
 			<c>
 				<i>1</i>
@@ -575,14 +654,21 @@
 		</row>
 	</rowsItem>
 	<rowsItem>
-		<index>22</index>
+		<index>21</index>
+		<indexTo>22</indexTo>
+		<row>
+			<empty>true</empty>
+		</row>
+	</rowsItem>
+	<rowsItem>
+		<index>23</index>
 		<row>
 			<formatIndex>33</formatIndex>
 			<empty>true</empty>
 		</row>
 	</rowsItem>
 	<rowsItem>
-		<index>23</index>
+		<index>24</index>
 		<row>
 			<c>
 				<i>6</i>
@@ -594,7 +680,7 @@
 		</row>
 	</rowsItem>
 	<rowsItem>
-		<index>24</index>
+		<index>25</index>
 		<row>
 			<c>
 				<i>6</i>
@@ -606,8 +692,8 @@
 		</row>
 	</rowsItem>
 	<templateMode>true</templateMode>
-	<height>25</height>
-	<vgRows>25</vgRows>
+	<height>26</height>
+	<vgRows>26</vgRows>
 	<merge>
 		<r>5</r>
 		<c>2</c>
@@ -617,11 +703,6 @@
 		<r>6</r>
 		<c>2</c>
 		<w>6</w>
-	</merge>
-	<merge>
-		<r>17</r>
-		<c>1</c>
-		<w>5</w>
 	</merge>
 	<namedItem xsi:type="NamedItemCells">
 		<name>Caption</name>
@@ -634,11 +715,21 @@
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
+		<name>ColumnTAX</name>
+		<area>
+			<type>Columns</type>
+			<beginRow>-1</beginRow>
+			<endRow>-1</endRow>
+			<beginColumn>6</beginColumn>
+			<endColumn>6</endColumn>
+		</area>
+	</namedItem>
+	<namedItem xsi:type="NamedItemCells">
 		<name>Footer</name>
 		<area>
 			<type>Rows</type>
 			<beginRow>13</beginRow>
-			<endRow>19</endRow>
+			<endRow>20</endRow>
 			<beginColumn>-1</beginColumn>
 			<endColumn>-1</endColumn>
 		</area>
@@ -652,6 +743,16 @@
 			<beginColumn>-1</beginColumn>
 			<endColumn>-1</endColumn>
 			<columnsID>a6686965-7549-401f-be27-b1bfbc2bf7d3</columnsID>
+		</area>
+	</namedItem>
+	<namedItem xsi:type="NamedItemCells">
+		<name>ItemColumn</name>
+		<area>
+			<type>Columns</type>
+			<beginRow>-1</beginRow>
+			<endRow>-1</endRow>
+			<beginColumn>0</beginColumn>
+			<endColumn>9</endColumn>
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
@@ -675,49 +776,25 @@
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
-		<name>ItemColumn</name>
-		<area>
-			<type>Columns</type>
-			<beginRow>-1</beginRow>
-			<endRow>-1</endRow>
-			<beginColumn>0</beginColumn>
-			<endColumn>9</endColumn>
-		</area>
-	</namedItem>
-	<namedItem xsi:type="NamedItemCells">
-		<name>ItemListTAX</name>
+		<name>ItemListHeaderTAX</name>
 		<area>
 			<type>Rows</type>
-			<beginRow>24</beginRow>
+			<beginRow>23</beginRow>
 			<endRow>24</endRow>
 			<beginColumn>-1</beginColumn>
 			<endColumn>-1</endColumn>
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
-		<name>ColumnTAX</name>
-		<area>
-			<type>Columns</type>
-			<beginRow>-1</beginRow>
-			<endRow>-1</endRow>
-			<beginColumn>6</beginColumn>
-			<endColumn>6</endColumn>
-		</area>
-	</namedItem>
-	<namedItem xsi:type="NamedItemCells">
-		<name>ItemListHeaderTAX</name>
+		<name>ItemListTAX</name>
 		<area>
 			<type>Rows</type>
-			<beginRow>22</beginRow>
-			<endRow>23</endRow>
+			<beginRow>25</beginRow>
+			<endRow>25</endRow>
 			<beginColumn>-1</beginColumn>
 			<endColumn>-1</endColumn>
 		</area>
 	</namedItem>
-	<groupsBackColor>style:FormBackColor</groupsBackColor>
-	<groupsColor>style:FormTextColor</groupsColor>
-	<headersBackColor>style:FormBackColor</headersBackColor>
-	<headersColor>style:FormTextColor</headersColor>
 	<line width="2" gap="false">
 		<v8ui:style xsi:type="v8ui:SpreadsheetDocumentCellLineType">Solid</v8ui:style>
 	</line>
@@ -728,6 +805,7 @@
 	<font faceName="Arial" height="10" bold="false" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<font faceName="Arial" height="8" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<font faceName="Arial" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
+	<font ref="style:LargeTextFont" bold="true" italic="false" underline="false" strikeout="false" kind="StyleItem"/>
 	<format>
 		<width>16</width>
 	</format>
@@ -816,30 +894,13 @@
 		<horizontalAlignment>Right</horizontalAlignment>
 		<verticalAlignment>Center</verticalAlignment>
 		<fillType>Parameter</fillType>
-		<format>
-			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content>ND=10</v8:content>
-			</v8:item>
-		</format>
+		<format/>
 	</format>
 	<format>
 		<border>1</border>
 		<verticalAlignment>Center</verticalAlignment>
 		<textPlacement>Wrap</textPlacement>
 		<fillType>Parameter</fillType>
-	</format>
-	<format>
-		<border>1</border>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<verticalAlignment>Center</verticalAlignment>
-		<fillType>Parameter</fillType>
-		<format>
-			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content>ND=15; NFD=3; NZ=0.000</v8:content>
-			</v8:item>
-		</format>
 	</format>
 	<format>
 		<border>1</border>
@@ -854,10 +915,6 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content>ND=15; NFD=2; NZ=0.00</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>ru</v8:lang>
 				<v8:content>ND=15; NFD=2</v8:content>
 			</v8:item>
@@ -870,24 +927,12 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content>ND=15; NFD=2; NZ=0.00</v8:content>
-			</v8:item>
-			<v8:item>
 				<v8:lang>ru</v8:lang>
 				<v8:content>ND=15; NFD=2</v8:content>
 			</v8:item>
-		</format>
-	</format>
-	<format>
-		<border>1</border>
-		<horizontalAlignment>Right</horizontalAlignment>
-		<verticalAlignment>Center</verticalAlignment>
-		<fillType>Parameter</fillType>
-		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>ND=15; NFD=2; NZ=0.00</v8:content>
+				<v8:content>NZ=' '</v8:content>
 			</v8:item>
 		</format>
 	</format>
@@ -902,25 +947,38 @@
 		<horizontalAlignment>Right</horizontalAlignment>
 	</format>
 	<format>
-		<font>3</font>
+		<font>4</font>
 		<width>96</width>
 		<horizontalAlignment>Right</horizontalAlignment>
 	</format>
 	<format>
-		<font>3</font>
+		<font>4</font>
+		<width>96</width>
+		<horizontalAlignment>Right</horizontalAlignment>
+		<fillType>Parameter</fillType>
+		<format/>
+	</format>
+	<format>
+		<font>4</font>
+		<horizontalAlignment>Right</horizontalAlignment>
+	</format>
+	<format>
+		<font>4</font>
 		<width>96</width>
 		<horizontalAlignment>Right</horizontalAlignment>
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>ND=15; NFD=2</v8:content>
+				<v8:content>NZ=' '</v8:content>
 			</v8:item>
 		</format>
 	</format>
 	<format>
-		<font>1</font>
-		<fillType>Template</fillType>
+		<font>4</font>
+		<width>96</width>
+		<horizontalAlignment>Right</horizontalAlignment>
+		<fillType>Parameter</fillType>
 	</format>
 	<format>
 		<font>1</font>

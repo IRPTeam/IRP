@@ -230,6 +230,17 @@ Procedure EditResult(Command)
 	Items.FormEditResult.Check = Not Items.FormEditResult.Check;
 	EditResultSwitch();
 EndProcedure
+
+&AtClient
+Procedure ChangeLang(Command)
+	isCheck = Not Items.ChangeLang.Check; // Boolean
+	Items.ChangeLang.Check = isCheck;
+	Items.LayoutLang.Visible = isCheck;
+	Items.DataLang.Visible = isCheck;
+	Items.PrintFormConfigLayoutLang.Visible = isCheck;
+	Items.PrintFormConfigDataLang.Visible = isCheck;
+EndProcedure
+
 #EndRegion
 
 #Region Private

@@ -187,7 +187,6 @@ Function SalesOrderPrint(Ref, Param)
 		EndDo;
 	EndDo;
 	
-	AreaFooter.Parameters.Number = Number;
 	AreaFooter.Parameters.Total = TotalSum;
 	AreaFooter.Parameters.Currency = SelectionHeader.Currency;
 	AreaFooter.Parameters.Total = TotalSum;

@@ -6873,7 +6873,11 @@ Procedure StepItemListFillStoresInList(Parameters, Chain) Export
 		Options.Store        = GetStore(Parameters);
 		Options.StoreInList  = GetItemListStore(Parameters, Row.Key);
 		Options.IsUserChange = IsUserChange(Parameters);
-		OPtions.IsService    = GetItemListIsService(Parameters, Row.Key);
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, "IsService") Then
+			Options.IsService = GetItemListIsService(Parameters, Row.Key);
+		Else
+			Options.IsService = False;
+		EndIf;
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListFillStoresInList";
 		Chain.FillStoresInList.Options.Add(Options);

@@ -98,12 +98,6 @@ Procedure SetCurrentUser(Command)
 	SetCurrentUserAtServer();
 EndProcedure
 
-&AtClient
-Procedure ShowFilterQuery(Command)
-	Items.SettingsFilterShowFilterQuery.Check = Not Items.SettingsFilterShowFilterQuery.Check;
-	Items.FilterQuery.Visible = Items.SettingsFilterShowFilterQuery.Check;
-EndProcedure
-
 #EndRegion
 
 #Region Privat

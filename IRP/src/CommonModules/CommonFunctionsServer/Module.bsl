@@ -693,6 +693,7 @@ Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export
 	SetQueryBuilderFilters(QueryBuilder, CustomParameters.Filters);
 	Query = QueryBuilder.GetQuery();
 	//@skip-check unknown-method-property
+	//@skip-check dynamic-access-method-not-found
 	ObjectServerModule.SetQueryComplexFilters(Query, CustomParameters.ComplexFilters);
 	QueryTable = Query.Execute().Unload();
 	Return QueryTable;

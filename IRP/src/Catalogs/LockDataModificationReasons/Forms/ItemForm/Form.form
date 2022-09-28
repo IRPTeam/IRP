@@ -1159,36 +1159,6 @@
         <autoCommandBar>
           <name>SettingsFilterCommandBar</name>
           <id>145</id>
-          <items xsi:type="form:Button">
-            <name>SettingsFilterShowFilterQuery</name>
-            <id>160</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <extendedTooltip>
-              <name>SettingsFilterShowFilterQueryExtendedTooltip</name>
-              <id>161</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <type>Label</type>
-              <autoMaxWidth>true</autoMaxWidth>
-              <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:LabelDecorationExtInfo">
-                <horizontalAlign>Left</horizontalAlign>
-              </extInfo>
-            </extendedTooltip>
-            <commandName>Form.Command.ShowFilterQuery</commandName>
-            <representation>Auto</representation>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <placementArea>UserCmds</placementArea>
-            <representationInContextMenu>Auto</representationInContextMenu>
-          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1364,9 +1334,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.FilterQuery</segments>
-        </dataPath>
         <extendedTooltip>
           <name>FilterQueryExtendedTooltip</name>
           <id>159</id>
@@ -1392,19 +1359,10 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>TextDocumentField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:TextDocFieldExtInfo">
-          <width>50</width>
-          <autoMaxWidth>true</autoMaxWidth>
-          <height>10</height>
-          <autoMaxHeight>true</autoMaxHeight>
-          <horizontalStretch>true</horizontalStretch>
-          <verticalStretch>true</verticalStretch>
-        </extInfo>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -2514,23 +2472,6 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>SetCurrentUser</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>ShowFilterQuery</name>
-    <title>
-      <key>en</key>
-      <value>Show filter query</value>
-    </title>
-    <id>2</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>ShowFilterQuery</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

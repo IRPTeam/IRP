@@ -124,7 +124,7 @@ EndFunction
 
 Function SourceIsLocked(Val SourceParams)
 	Rules = CalculateRuleByObject(SourceParams);
-	If Rules = Undefined Then
+	If Rules.Count() = 0 Then
 		Return False;
 	EndIf;
 
@@ -322,7 +322,9 @@ Function isDataIsLocked_ByRef_SimpleMode(ArrayOfLockedReasons, SourceParams, Rul
 	Filter = New Array();
 	Fields = New Array();
 	Query = New Query();
-
+	
+	FindSimpleRules = False;
+	
 	For Index = 0 To Rules.Count() - 1 Do
 		If Rules[Index].LockDataModificationReasons.AdvancedMode Then
 			Continue;
@@ -336,8 +338,14 @@ Function isDataIsLocked_ByRef_SimpleMode(ArrayOfLockedReasons, SourceParams, Rul
 			|END AS Reason" + Index);
 		Query.SetParameter("Reason" + Index, Rules[Index].LockDataModificationReasons);
 		Query.SetParameter("Param" + Index, Rules[Index].Value);
+		
+		FindSimpleRules = True;
 	EndDo;
-
+	
+	If Not FindSimpleRules Then
+		Return False;
+	EndIf;
+	
 	Query.Text = "SELECT DISTINCT " + Chars.LF + StrConcat(Fields, "," + Chars.LF) + Chars.LF + "WHERE " + StrConcat(
 		Filter, " OR" + Chars.LF);
 
@@ -360,11 +368,13 @@ Function isDataIsLocked_ByRef_SimpleMode(ArrayOfLockedReasons, SourceParams, Rul
 	If Not QueryResult.IsEmpty() Then
 		ResultTable = QueryResult.Unload();
 		//@skip-check property-return-type
+		//@skip-check invocation-parameter-type-intersect
 		ArrayOfLockedReasons.Add(R().InfoMessage_019);
 		For Each Column In ResultTable.Columns Do
 			If Not ValueIsFilled(ResultTable[0][Column.Name]) Then
 				Continue;
 			EndIf;
+			//@skip-check invocation-parameter-type-intersect
 			ArrayOfLockedReasons.Add(ResultTable[0][Column.Name]);
 		EndDo;
 	EndIf;
@@ -377,8 +387,7 @@ Function DataIsLocked_ByRef_AdvancedMode(ArrayOfLockedReasons, SourceParams, Rul
 		If Not Rules[Index].LockDataModificationReasons.AdvancedMode Then
 			Continue;
 		EndIf;
-		
-//		Rules[Index].
+
 		Settings = Rules[Index].LockDataModificationReasons.DCS.Get(); // DataCompositionSettings
 		InitDataCompositionSchemeForRef(Settings, SourceParams.MetadataName, CheckCurrent);
 	EndDo;
@@ -392,6 +401,10 @@ EndFunction
 //  MetadataName - String - Metadata name
 Procedure InitDataCompositionSchemeForRef(Settings, MetadataName, CheckCurrent)
 	
+	Selection = Settings.Selection.Items.Add(Type("DataCompositionSelectedField"));
+	Selection.Use = True;
+	Selection.Field = New DataCompositionField("Code");
+	
 	DCSTemplate = Catalogs.LockDataModificationReasons.GetTemplate("DCS");
 	
 	DataSources = DCSTemplate.DataSources.Add();
@@ -399,32 +412,30 @@ Procedure InitDataCompositionSchemeForRef(Settings, MetadataName, CheckCurrent)
 	DataSources.Name = "DataSource";
 	
 	Query = 
-	"SELECT *
+	"SELECT 
+	|	*
 	|FROM
 	|    " + MetadataName + " AS DataSet";
 	DataSet = DCSTemplate.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
 	DataSet.Query = Query;
 	DataSet.Name = MetadataName;
 	DataSet.DataSource = DataSources.Name;
-	
-	If DCSTemplate.DataSets.Count() = 0 Then
-		Return;
-	EndIf;
-	
-	SettingsComposer = New DataCompositionSettingsComposer();
-	Address = PutToTempStorage(DCSTemplate);
-	SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Address));
-	If Not Settings = Undefined Then
-		SettingsComposer.LoadSettings(Settings);
-	EndIf;
-	SettingsComposer.Settings.Selection.Items.Clear();
 
-	For Each Field In SettingsComposer.Settings.Selection.SelectionAvailableFields.Items Do
-		Selection = SettingsComposer.Settings.Selection.Items.Add(Type("DataCompositionSelectedField"));
-		Selection.Use = True;
-		Selection.Field = Field.Field;
-	EndDo;
 
+	Composer = New DataCompositionTemplateComposer();
+	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
+
+	Processor = New DataCompositionProcessor();
+	Processor.Initialize(Template);
+
+	Output = New DataCompositionResultValueCollectionOutputProcessor();
+	Result = New ValueTable();
+	Output.SetObject(Result);
+	Output.Output(Processor);
+
+//
+//	DCSTemplate = IDInfoServer.GetDCSTemplate(MetadataName);
+//	Result = IDInfoServer.GetRefsByCondition(DCSTemplate, Settings);
 EndProcedure
 
 // Save rule settings.

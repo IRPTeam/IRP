@@ -428,6 +428,7 @@
   <commonModules>CommonModule.DocWorkOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocWorkSheetServer</commonModules>
   <commonModules>CommonModule.DocWorkSheetClient</commonModules>
+  <commonModules>CommonModule.UniversalPrintServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

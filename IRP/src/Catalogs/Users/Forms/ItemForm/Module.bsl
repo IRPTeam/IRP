@@ -1,3 +1,5 @@
+// @strict-types
+
 #Region FormEvents
 
 &AtServer
@@ -6,6 +8,13 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	CurrentObject.AdditionalProperties.Insert("Password", Password);
 EndProcedure
 
+// Notification processing.
+// 
+// Parameters:
+//  EventName - String - Event name
+//  Parameter - Undefined - Parameter
+//  Source - Undefined - Source
+//  AddInfo - Undefined - Add info
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
@@ -65,6 +74,11 @@ Procedure FillExistsLangs()
 
 EndProcedure
 
+// Description opening.
+// 
+// Parameters:
+//  Item - FormField - Item
+//  StandardProcessing - Boolean - Standard processing
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
@@ -78,6 +92,12 @@ Procedure SetPassword(Command)
 		ThisObject));
 EndProcedure
 
+// Set password finish.
+// 
+// Parameters:
+//  Result - Structure:
+//  * Password - String
+//  AdditionalParameters - Undefined - Additional parameters
 &AtClient
 Procedure SetPasswordFinish(Result, AdditionalParameters) Export
 	If Result = Undefined Then
@@ -91,12 +111,19 @@ EndProcedure
 Procedure Settings(Command)
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
 		Notify = New NotifyDescription("EditUserSettingsProceed", ThisObject);
+		//@skip-check property-return-type
+		//@skip-check invocation-parameter-type-intersect
 		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		EditUserSettingsProceed(DialogReturnCode.Yes);
 	EndIf;
 EndProcedure
 
+// Edit user settings proceed.
+// 
+// Parameters:
+//  Result - DialogReturnCode - Result
+//  AddInfo - Undefined - Add info
 &AtClient
 Procedure EditUserSettingsProceed(Result, AddInfo = Undefined) Export
 	If Result = DialogReturnCode.Yes And Write() Then
@@ -107,6 +134,12 @@ EndProcedure
 
 #Region AddAttributes
 
+// Add attribute start choice.
+// 
+// Parameters:
+//  Item - FormField - Item
+//  ChoiceData - ValueList - Choice data
+//  StandardProcessing - Boolean - Standard processing
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);

@@ -7,9 +7,20 @@ Procedure BeforeWrite(Cancel)
 EndProcedure
 
 Procedure OnWrite(Cancel)
+	
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	If Not Cancel Then
+		If Disable Then
+			User = InfoBaseUsers.FindByUUID(InfobaseUserID);
+			If Not User = Undefined Then
+				User.Delete();
+			EndIf;
+		EndIf;
+	EndIf;
+	
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

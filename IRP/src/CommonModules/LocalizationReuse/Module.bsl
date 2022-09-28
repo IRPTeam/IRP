@@ -99,3 +99,20 @@ EndFunction
 Function GetSessionParameter(Name) Export
 	Return ServiceSystemServer.GetSessionParameter(Name);
 EndFunction
+ 
+// Metadata languages.
+// 
+// Returns:
+//  Structure - Metadata languages:
+//  * Key - String - Lang code
+//  * Value - String - Lang description
+Function MetadataLanguages() Export
+	Result = New Structure;
+	For Each It In Metadata.Languages Do
+		If It.Name = "HASH" Then
+			Continue;			
+		EndIf;
+		Result.Insert(It.LanguageCode, It.Name);
+	EndDo;
+	Return Result;
+EndFunction

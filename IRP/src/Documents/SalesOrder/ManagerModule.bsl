@@ -4,6 +4,201 @@ Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
 	Return Undefined;
 EndFunction
 
+Function Print(Ref, Param) Export
+	If StrCompare(Param.NameTemplate, "SalesOrderPrint") = 0 Then
+		Return SalesOrderPrint(Ref, Param);
+	EndIf; 
+EndFunction
+
+// Sales order print.
+// 
+// Parameters:
+//  Ref - DocumentRef.SalesOrder
+//  Param - See UniversalPrintServer.InitPrintParam
+// 
+// Returns:
+//  SpreadsheetDocument - Sales order print
+Function SalesOrderPrint(Ref, Param)
+		
+	Template = GetTemplate("SalesOrderPrint");
+	Template.LanguageCode = Param.LayoutLang;
+	Query = New Query;
+	Text =
+		"SELECT
+		|	SalesOrder.Number AS Number,
+		|	SalesOrder.Date AS Date,
+		|	SalesOrder.Company.Description_en AS Company,
+		|	SalesOrder.Partner.Description_en AS Partner,
+		|	SalesOrder.Author AS Author,
+		|	SalesOrder.Ref AS Ref,
+		|	SalesOrder.Currency.Description_en AS Currency
+		|FROM
+		|	Document.SalesOrder AS SalesOrder
+		|WHERE
+		|	SalesOrder.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SalesOrderItemList.ItemKey.Item.Description_en AS Item,
+		|	SalesOrderItemList.ItemKey.Description_en AS ItemKey,
+		|	SalesOrderItemList.Quantity AS Quantity,
+		|	SalesOrderItemList.Unit.Description_en AS Unit,
+		|	SalesOrderItemList.Price AS Price,
+		|	SalesOrderItemList.TaxAmount AS TaxAmount,
+		|	SalesOrderItemList.TotalAmount AS TotalAmount,
+		|	SalesOrderItemList.NetAmount AS NetAmount,
+		|	SalesOrderItemList.OffersAmount AS OffersAmount,
+		|	SalesOrderItemList.Ref AS Ref,
+		|	SalesOrderItemList.Key AS Key
+		|INTO Items
+		|FROM
+		|	Document.SalesOrder.ItemList AS SalesOrderItemList
+		|WHERE
+		|	SalesOrderItemList.Ref = &Ref
+		|	AND NOT SalesOrderItemList.Cancel
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Items.Item AS Item,
+		|	Items.ItemKey AS ItemKey,
+		|	Items.Quantity AS Quantity,
+		|	Items.Unit AS Unit,
+		|	Items.Price AS Price,
+		|	Items.TaxAmount AS TaxAmount,
+		|	Items.TotalAmount AS TotalAmount,
+		|	Items.NetAmount AS NetAmount,
+		|	Items.OffersAmount AS OffersAmount,
+		|	Items.Ref AS Ref,
+		|	Items.Key AS Key
+		|FROM
+		|	Items AS Items
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SalesOrderTaxList.Ref AS Ref,
+		|	SalesOrderTaxList.Tax AS Tax,
+		|	MIN(SalesOrderTaxList.LineNumber) AS LineNumber
+		|FROM
+		|	Document.SalesOrder.TaxList AS SalesOrderTaxList
+		|WHERE
+		|	SalesOrderTaxList.Ref = &Ref
+		|	AND SalesOrderTaxList.Key IN
+		|			(SELECT
+		|				Items.Key AS Key
+		|			FROM
+		|				Items AS Items)
+		|
+		|GROUP BY
+		|	SalesOrderTaxList.Ref,
+		|	SalesOrderTaxList.Tax
+		|
+		|ORDER BY
+		|	LineNumber
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SalesOrderTaxList.Ref AS Ref,
+		|	SalesOrderTaxList.LineNumber AS LineNumber,
+		|	SalesOrderTaxList.Key AS Key,
+		|	SalesOrderTaxList.Tax AS Tax,
+		|	SalesOrderTaxList.TaxRate AS TaxRate
+		|FROM
+		|	Document.SalesOrder.TaxList AS SalesOrderTaxList
+		|WHERE
+		|	SalesOrderTaxList.Ref = &Ref
+		|	AND SalesOrderTaxList.Key IN
+		|			(SELECT
+		|				Items.Key AS Key
+		|			FROM
+		|				Items AS Items)";
+
+	LCode = Param.DataLang;	
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrder.Company", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrder.Partner", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrder.Currency", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrderItemList.ItemKey.Item", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrderItemList.ItemKey", LCode);
+	Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Text, "SalesOrderItemList.Unit", LCode);
+	Query.Text = Text;
+		
+	Query.Parameters.Insert("Ref", Ref);
+	Selection = Query.ExecuteBatch();
+	SelectionHeader = Selection[0].Select(); 
+	SelectionItems = Selection[2].Unload();
+	SelectionItems.Indexes.Add("Ref");
+	SelectionHeaderTAX = Selection[3].Unload();
+	SelectionPercentTAX = Selection[4].Unload();
+
+	AreaCaption = Template.GetArea("Caption");
+	AreaHeader = Template.GetArea("Header");
+	AreaItemListHeader = Template.GetArea("ItemListHeader|ItemColumn");
+	AreaItemList = Template.GetArea("ItemList|ItemColumn");
+	AreaFooter = Template.GetArea("Footer");
+	AreaListHeaderTAX = Template.GetArea("ItemListHeaderTAX|ColumnTAX");
+	AreaListTAX = Template.GetArea("ItemListTAX|ColumnTAX");
+
+	Spreadsheet = New SpreadsheetDocument;
+	Spreadsheet.LanguageCode = Param.LayoutLang;
+		
+	While SelectionHeader.Next() Do
+        AreaCaption.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaCaption);
+
+		AreaHeader.Parameters.Fill(SelectionHeader);
+		Spreadsheet.Put(AreaHeader);
+		
+		Spreadsheet.Put(AreaItemListHeader);
+		For It = 0 To SelectionHeaderTAX.Count() - 1 Do
+			AreaListHeaderTAX.Parameters.NameTAX = LocalizationEvents.DescriptionRefLocalization(SelectionHeaderTAX[It].Tax, Spreadsheet.LanguageCode);
+			Spreadsheet.Join(AreaListHeaderTAX);
+		EndDo;
+		
+		Choice	= New Structure("Ref", SelectionHeader.Ref);
+		FindRow = SelectionItems.FindRows(Choice);
+		
+		Number = 0;
+		TotalSum = 0;
+		TotalTax = 0;
+		TotalNet = 0;
+		TotalOffers = 0;
+		For Each It In FindRow Do
+			Number = Number + 1;
+			AreaItemList.Parameters.Fill(It);	
+			AreaItemList.Parameters.Number = Number;
+			Spreadsheet.Put(AreaItemList);
+			
+			For ItTax = 0 To SelectionHeaderTAX.Count() - 1 Do
+				Tax = SelectionHeaderTAX[ItTax].Tax;
+				ChoiceTax = New Structure("Ref, Key, Tax", SelectionHeader.Ref, It.Key, Tax);
+				FindRowTax = SelectionPercentTAX.FindRows(ChoiceTax);
+				For Each ItPercent In FindRowTax Do
+					AreaListTAX.Parameters.PercentTax = ItPercent.TaxRate;
+					Spreadsheet.Join(AreaListTAX);
+				EndDo;
+			EndDo;
+			TotalSum = TotalSum + It.TotalAmount;
+			TotalTax = TotalTax + It.TaxAmount;
+			TotalOffers	= TotalOffers + It.OffersAmount;
+			TotalNet = TotalNet + It.NetAmount;
+		EndDo;
+	EndDo;
+	
+	AreaFooter.Parameters.Total = TotalSum;
+	AreaFooter.Parameters.Currency = SelectionHeader.Currency;
+	AreaFooter.Parameters.Total = TotalSum;
+	AreaFooter.Parameters.TotalTax = TotalTax;
+	AreaFooter.Parameters.TotalNet = TotalNet;
+	AreaFooter.Parameters.TotalOffers = TotalOffers;
+	AreaFooter.Parameters.Manager = SelectionHeader.Author;
+	Spreadsheet.Put(AreaFooter);
+	Spreadsheet = UniversalPrintServer.ResetLangSettings(Spreadsheet, Param.LayoutLang);
+	Return Spreadsheet;
+EndFunction
+
 #EndRegion
 
 #Region Posting

@@ -75,17 +75,40 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 EndProcedure
 
 // Replace description localization prefix.
-//
+// 
 // Parameters:
 //  QueryText - String - Query text
 //  TableName - String - Table name
+//  LocalizationCode - String - Localization code
+// 
+// Returns:
+//  String - Replace description localization prefix
+Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table", LocalizationCode = Undefined) Export
+	If LocalizationCode = Undefined Then
+		LocalizationCode = LocalizationReuse.GetLocalizationCode();
+	EndIf;
+	QueryField = "CASE WHEN %1.Description_%2 = """" THEN %1.Description_en ELSE %1.Description_%2 END ";
+	QueryField = StrTemplate(QueryField, TableName, LocalizationCode);
+	Return StrReplace(QueryText, StrTemplate("%1.Description_en", TableName), QueryField);
+EndFunction
+
+// returns the description of the link in the specified language.
+//
+// Parameters:
+//  Ref - AnyRef - 
+//  LocalizationCode - String - Localization code 
 //
 // Returns:
 //  String - Replace description localization prefix
-Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table") Export
-	QueryField = "CASE WHEN %1.Description_%2 = """" THEN %1.Description_en ELSE %1.Description_%2 END ";
-	QueryField = StrTemplate(QueryField, TableName, LocalizationReuse.GetLocalizationCode());
-	Return StrReplace(QueryText, StrTemplate("%1.Description_en", TableName), QueryField);
+Function DescriptionRefLocalization(Ref, LocalizationCode = Undefined) Export
+	If LocalizationCode = Undefined Then
+		LocalizationCode = LocalizationReuse.GetLocalizationCode();
+	EndIf;
+	Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_" + LocalizationCode);
+	If Result = "" Then
+		Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_en");
+	EndIf;
+	Return Result;
 EndFunction
 
 // Get catalog presentation.

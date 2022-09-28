@@ -9172,9 +9172,9 @@ Function GetSeparatorColumns(DocReceiverMetadata) Export
 		Return "Company, Branch, Requester";
 	// #1487
 	ElsIf DocReceiverMetadata = Metadata.Documents.WorkOrder Then
-		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, LegalName";
+		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, LegalName, Currency";
 	ElsIf DocReceiverMetadata = Metadata.Documents.WorkSheet Then
-		Return "Company, Branch, Partner, LegalName";
+		Return "Company, Branch, Partner, LegalName, Currency";
 	EndIf;
 EndFunction
 

@@ -94,6 +94,7 @@ Function Materials()
 	|	WorkOrderMaterials.Ref.Company AS Company,
 	|	WorkOrderMaterials.Store AS Store,
 	|	WorkOrderMaterials.ItemKey AS ItemKey,
+	|	WorkOrderMaterials.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
 	|	WorkOrderMaterials.QuantityInBaseUnit AS Quantity
 	|INTO Materials
 	|FROM
@@ -120,7 +121,7 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	Materials AS Materials
 		|WHERE
-		|	TRUE";
+		|	Materials.IsProcurementMethod_Stock";
 EndFunction
 
 Function R4012B_StockReservation()
@@ -132,7 +133,7 @@ Function R4012B_StockReservation()
 		|FROM
 		|	Materials AS Materials
 		|WHERE
-		|	TRUE";
+		|	Materials.IsProcurementMethod_Stock";
 EndFunction
 
 Function T3010S_RowIDInfo()

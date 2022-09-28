@@ -6500,6 +6500,7 @@ Procedure StepItemListChangeProcurementMethodByItemKey(Parameters, Chain) Export
 		Options = ModelClientServer_V2.ChangeProcurementMethodByItemKeyOptions();
 		Options.ProcurementMethod = GetItemListProcurementMethod(Parameters, Row.Key);
 		Options.ItemKey           = GetItemListItemKey(Parameters, Row.Key);
+		Options.IsService         = GetItemListIsService(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListChangeProcurementMethodByItemKey";
 		Chain.ChangeProcurementMethodByItemKey.Options.Add(Options);
@@ -6872,6 +6873,7 @@ Procedure StepItemListFillStoresInList(Parameters, Chain) Export
 		Options.Store        = GetStore(Parameters);
 		Options.StoreInList  = GetItemListStore(Parameters, Row.Key);
 		Options.IsUserChange = IsUserChange(Parameters);
+		OPtions.IsService    = GetItemListIsService(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListFillStoresInList";
 		Chain.FillStoresInList.Options.Add(Options);
@@ -6897,6 +6899,7 @@ Procedure StepItemListDefaultStoreInList(Parameters, Chain, AgreementInHeader)
 	Options.StoreFromUserSettings = NewRow.Store;
 	If AgreementInHeader Then
 		Options.Agreement = GetAgreement(Parameters);
+		Options.IsService = GetItemListIsService(Parameters, NewRow.Key);
 	EndIf;
 	Options.StoreInList   = GetItemListStore(Parameters, NewRow.Key);
 	Options.StoreInHeader = GetStore(Parameters);
@@ -7525,7 +7528,22 @@ EndFunction
 // ItemList.IsService.Bind
 Function BindItemListIsService(Parameters)
 	DataPath = "ItemList.IsService";
-	Binding = New Structure();	
+	Binding = New Structure();
+	Binding.Insert("SalesOrder"           , "StepItemListFillStoresInList, 
+											|StepItemListChangeProcurementMethodByItemKey");
+	Binding.Insert("SalesOrderClosing"    , "StepItemListFillStoresInList,
+											|StepItemListChangeProcurementMethodByItemKey");
+	Binding.Insert("SalesInvoice"         , "StepItemListFillStoresInList");
+	Binding.Insert("RetailSalesReceipt"   , "StepItemListFillStoresInList");
+	Binding.Insert("PurchaseOrder"        , "StepItemListFillStoresInList");
+	Binding.Insert("PurchaseOrderClosing" , "StepItemListFillStoresInList");
+	Binding.Insert("PurchaseInvoice"      , "StepItemListFillStoresInList");
+	Binding.Insert("RetailReturnReceipt"  , "StepItemListFillStoresInList");
+	Binding.Insert("PurchaseReturnOrder"  , "StepItemListFillStoresInList");
+	Binding.Insert("PurchaseReturn"       , "StepItemListFillStoresInList");
+	Binding.Insert("SalesReturnOrder"     , "StepItemListFillStoresInList");
+	Binding.Insert("SalesReturn"          , "StepItemListFillStoresInList");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

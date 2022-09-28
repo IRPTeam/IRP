@@ -1004,10 +1004,13 @@ EndFunction
 #Region CHANGE_PROCUREMENT_METHOD_BY_ITEM_KEY
 
 Function ChangeProcurementMethodByItemKeyOptions() Export
-	Return GetChainLinkOptions("ProcurementMethod, ItemKey");
+	Return GetChainLinkOptions("ProcurementMethod, ItemKey, IsService");
 EndFunction
 
 Function ChangeProcurementMethodByItemKeyExecute(Options) Export
+	If Options.IsService = True Then
+		Return Undefined;
+	EndIf;
 	If ValueIsFilled(Options.ProcurementMethod) Then
 		Return Options.ProcurementMethod;
 	EndIf;
@@ -1360,11 +1363,14 @@ Function DefaultStoreInHeaderExecute(Options) Export
 EndFunction
 
 Function DefaultStoreInListOptions() Export
-	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement, StoreInPreviousRow");
+	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement, StoreInPreviousRow, IsService");
 EndFunction
 
 // fill store in tabular part ItemList by default
 Function DefaultStoreInListExecute(Options) Export
+	If Options.IsService = True Then
+		Return Undefined;
+	EndIf;
 	If ValueIsFilled(Options.StoreInList) Then
 		Return Options.StoreInList; // store already is filled
 	EndIf;
@@ -1433,11 +1439,14 @@ Function ChangeUseGoodsReceiptByUseShipmentConfirmationExecute(Options) Export
 EndFunction
 
 Function FillStoresInListOptions() Export
-	Return GetChainLinkOptions("Store, StoreInList, IsUserChange");
+	Return GetChainLinkOptions("Store, StoreInList, IsUserChange, IsService");
 EndFunction
 
 // fill Store in tabular part, if Store is not filled do not change store in ItemList
 Function FillStoresInListExecute(Options) Export
+	If Options.IsService = True Then
+		Return Undefined;
+	EndIf;
 	If Options.IsUserChange = True Then
 		Return Options.Store;
 	EndIf;

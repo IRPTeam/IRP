@@ -402,23 +402,11 @@ EndProcedure
 
 #EndRegion
 
-#Region SHIPMENT_CONFIRMATIONS
+#Region LINKED_DOCUMENTS
 
 &AtClient
-Procedure ShipmentConfirmationsTreeQuantityOnChange(Item)
-	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, "ShipmentConfirmations",
-		"ShipmentConfirmationsTree", "ShipmentConfirmation");
-	RowIDInfoClient.UpdateQuantity(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ShipmentConfirmationsTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure ShipmentConfirmationsTreeBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
+Procedure LinkedDocuments_ShipmentConfirmations(Command)
+	DocumentsClient.OpenLinkedDocuments(Object, ThisObject, "ShipmentConfirmations", "ShipmentConfirmation", "QuantityInShipmentConfirmation");
 EndProcedure
 
 #EndRegion

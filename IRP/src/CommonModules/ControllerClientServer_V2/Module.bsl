@@ -8751,6 +8751,10 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "PaymentsOnAddRowFormNotify"            Then ViewClient_V2.PaymentsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "PaymentsOnCopyRowFormNotify"           Then ViewClient_V2.PaymentsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListItemKey"                  Then ViewClient_V2.OnSetItemListItemKey(Parameters);
+	ElsIf ViewNotify = "WorkersOnCopyRowFormNotify"            Then ViewClient_V2.WorkersOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "WorkersOnAddRowFormNotify"             Then ViewClient_V2.WorkersOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "MaterialsOnAddRowFormNotify"           Then ViewClient_V2.MaterialsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "MaterialsOnCopyRowFormNotify"          Then ViewClient_V2.MaterialsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnSetUseGoodsReceiptNotify_IsProgrammAsTrue" Then ViewClient_V2.OnSetUseGoodsReceiptNotify_IsProgrammAsTrue(Parameters);
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

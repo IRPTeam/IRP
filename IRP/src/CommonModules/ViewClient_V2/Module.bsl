@@ -867,18 +867,12 @@ Procedure OnOpenFormNotify(Parameters) Export
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
-		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, 
-			"ShipmentConfirmations");
-		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
-		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form,
-			"GoodsReceipts");
-		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-			"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "GoodsReceipts");
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
@@ -1663,18 +1657,6 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
-	
-	// Update -> TradeDocumentsTree
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
-		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
-	EndIf;
-	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
-		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-			"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
-	EndIf;
 EndProcedure
 
 #EndRegion
@@ -2195,19 +2177,13 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 			Parameters.Form.Taxes_CreateFormControls();
-			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, 
-				"ShipmentConfirmations");
-			DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-				"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 		EndIf;
 		
 		If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 			Parameters.Form.Taxes_CreateFormControls();
-			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form,
-				"GoodsReceipts");
-			DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-				"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "GoodsReceipts");
 		EndIf;
 	EndDo;
 EndProcedure

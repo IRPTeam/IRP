@@ -974,8 +974,6 @@ Function GetFormItemNames()
 				|ItemListRowsKey,
 				|ResultsTable,
 				|RowIDInfo,
-				|ShipmentConfirmationsTreeKey, ShipmentConfirmationsTreeBasisKey,
-				|GoodsReceiptsTreeKey, GoodsReceiptsTreeBasisKey,
 				|BasisesTreeBasis, BasisesTreeBasisUnit, BasisesTreeQuantityInBaseUnit, BasisesTreeKey,
 				|BasisesTreeRowID, BasisesTreeRowRef, BasisesTreeBasisKey, BasisesTreeCurrentStep,
 				|ResultsTreeBasis, ResultsTreeBasisUnit, ResultsTreeQuantityInBaseUnit, ResultsTreeKey,
@@ -1000,7 +998,8 @@ Function GetFormItemNames()
 				|ChequeBondsKey, ChequeBondsApArPostingDetail,
 				|WorkersQuantityInBaseUnit, WorkersKey,
 				|MaterialsQuantityInBaseUnit, MaterialsQuantityInBaseUnitBOM, MaterialsKey, MaterialsKeyOwner, MaterialsIsVisible, MaterialsIsManualChanged,
-				|MaterialsUniqueID, MaterialsBillOfMaterials";
+				|MaterialsUniqueID, MaterialsBillOfMaterials,
+				|DocumentsTreeKey, DocumentsTreeBasisKey";
 	Return ItemNames;
 EndFunction	
 
@@ -1039,38 +1038,20 @@ EndProcedure
 
 #EndRegion
 
-#Region ShipmentConfirationsGoodsReceiptd
+#Region LINKED_DOCUMENTS
 
-Procedure SetLockedRowsForItemListByTradeDocuments(Object, Form, TableName) Export
-	For Each Row In Object.ItemList Do
-		Row.LockedRow = Object[TableName].FindRows(New Structure("Key", Row.Key)).Count() > 0;
-	EndDo;
-EndProcedure
+Procedure OpenLinkedDocuments(Object, Form, TableName, DocumentColumnName, QuantityColumnName) Export
+	FormParameters = New Structure();
 
-Procedure ClearTradeDocumentsTable(Object, Form, TableName) Export
-	If Not Object[TableName].Count() Then
-		Return;
-	EndIf;
-
-	ArrayOfRows = New Array();
-	For Each Row In Object[TableName] Do
-		If Not Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
-			ArrayOfRows.Add(Row);
-		EndIf;
-	EndDo;
-
-	For Each Row In ArrayOfRows Do
-		Object[TableName].Delete(Row);
-	EndDo;
-EndProcedure
-
-Procedure UpdateTradeDocumentsTree(Object, Form, TableName, TreeName, QuantityColumnName) Export
-	Form[TreeName].GetItems().Clear();
-
-	If Not Object[TableName].Count() Then
-		Return;
-	EndIf;
-
+	FormParameters.Insert("TableName", TableName);
+	FormParameters.Insert("DocumentColumnName", DocumentColumnName);
+	FormParameters.Insert("QuantityColumnName", QuantityColumnName);
+	
+	AdditionalParameters = New Structure();
+	AdditionalParameters.Insert("Object"    , Object);
+	AdditionalParameters.Insert("Form"      , Form);
+	AdditionalParameters.Insert("TableName" , TableName);
+	
 	ArrayOfRows = New Array();
 	For Each Row In Object.ItemList Do
 		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
@@ -1083,17 +1064,20 @@ Procedure UpdateTradeDocumentsTree(Object, Form, TableName, TreeName, QuantityCo
 		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
 	EndDo;
-
+	
+	Tree = New Array();
 	For Each Row In ArrayOfRows Do
-		NewRow0 = Form[TreeName].GetItems().Add();
-		NewRow0.Level             = 1;
-		NewRow0.Key               = Row.Key;
-		NewRow0.Item              = Row.Item;
-		NewRow0.ItemKey           = Row.ItemKey;
-		NewRow0.QuantityInInvoice = Row.QuantityInBaseUnit;
-		If CommonFunctionsClientServer.ObjectHasProperty(NewRow0, "PictureItem") Then
-			NewRow0.PictureItem = 0;
-		EndIf;
+		NewRow0 = New Structure();
+		NewRow0.Insert("Level"             , 1);
+		NewRow0.Insert("Key"               , Row.Key);
+		NewRow0.Insert("Item"              , Row.Item);
+		NewRow0.Insert("ItemKey"           , Row.ItemKey);
+		
+		NewRow0.Insert("QuantityInInvoice" , Row.QuantityInBaseUnit);
+		NewRow0.Insert("Quantity"          , 0);
+		NewRow0.Insert("QuantityInDocument", 0);
+		
+		NewRow0.Insert("Rows"              , New Array());
 
 		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
 
@@ -1102,41 +1086,54 @@ Procedure UpdateTradeDocumentsTree(Object, Form, TableName, TreeName, QuantityCo
 		EndIf;
 
 		For Each ItemOfArray In ArrayOfDocuments Do
-			NewRow1 = NewRow0.GetItems().Add();
-			FillPropertyValues(NewRow1, ItemOfArray);
-			NewRow1.Level                  = 2;
-			NewRow1.PictureEdit = True;
+			NewRow1 = New Structure();
+			
+			NewRow1.Insert("Level"           , 2);
+			NewRow1.Insert("PictureEdit"     , True);
+			
+			NewRow1.Insert("Key"      , ItemOfArray.Key);
+			NewRow1.Insert("BasisKey" , ItemOfArray.BasisKey);
+			NewRow1.Insert("Document" , ItemOfArray[DocumentColumnName]);
+			
+			NewRow1.Insert("Quantity"           , ItemOfArray.Quantity);
+			NewRow1.Insert("QuantityInDocument" , ItemOfArray[QuantityColumnName]);
+			
 			NewRow0.Quantity = NewRow0.Quantity + ItemOfArray.Quantity;
-			NewRow0[QuantityColumnName] = NewRow0[QuantityColumnName] + ItemOfArray[QuantityColumnName];
-			If CommonFunctionsClientServer.ObjectHasProperty(NewRow1, "PictureDocument") Then
-				NewRow1.PictureDocument = 1;
-			EndIf;
+			NewRow0.QuantityInDocument = NewRow0.QuantityInDocument + ItemOfArray[QuantityColumnName];
+			
+			NewRow0.Rows.Add(NewRow1);
 		EndDo;
+		Tree.Add(NewRow0);
 	EndDo;
-
-	For Each ItemTreeRows In Form[TreeName].GetItems() Do
-		Form.Items[TreeName].Expand(ItemTreeRows.GetID());
-	EndDo;
+	
+	FormParameters.Insert("Tree", Tree);
+	
+	Notify = New NotifyDescription("LinkedDocumentsEnd", ThisObject, AdditionalParameters);
+	OpenForm("CommonForm.LinkedDocuments", FormParameters, Form, ,,,Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-Procedure TradeDocumentsTreeQuantityOnChange(Object, Form, TableName, TreeName, DocumentColumnName) Export
-	CurrentRow = Form.Items[TreeName].CurrentData;
-	If CurrentRow = Undefined Then
+Procedure LinkedDocumentsEnd(Result, AdditionalParameters) Export
+	If Result = Undefined Then
 		Return;
 	EndIf;
-	RowParent = CurrentRow.GetParent();
-	TotalQuantity = 0;
-	For Each Row In RowParent.GetItems() Do
-		TotalQuantity = TotalQuantity + Row.Quantity;
+	
+	Object = AdditionalParameters.Object;
+	Form   = AdditionalParameters.Form;
+	TableName = AdditionalParameters.TableName;
+	
+	For Each TreeRow In Result Do
+		ArrayOfRows = Object[TableName].FindRows(TreeRow.Filter);
+		For Each Row In ArrayOfRows Do
+			Row.Quantity = TreeRow.Quantity;
+		EndDo;
 	EndDo;
-	RowParent.Quantity = TotalQuantity;
-	Filter = New Structure();
-	Filter.Insert("Key", CurrentRow.Key);
-	Filter.Insert("BasisKey", CurrentRow.BasisKey);
-	Filter.Insert(TrimAll(DocumentColumnName), CurrentRow[DocumentColumnName]);
-	ArrayOfRows = Object[TableName].FindRows(Filter);
-	For Each Row In ArrayOfRows Do
-		Row.Quantity = CurrentRow.Quantity;
+	
+	RowIDInfoClient.UpdateQuantity(Object, Form);
+EndProcedure
+
+Procedure SetLockedRowsForItemListByTradeDocuments(Object, Form, TableName) Export
+	For Each Row In Object.ItemList Do
+		Row.LockedRow = Object[TableName].FindRows(New Structure("Key", Row.Key)).Count() > 0;
 	EndDo;
 EndProcedure
 

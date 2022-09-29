@@ -29,11 +29,13 @@ Procedure PrintLastReceipt(Object, Cancel, AddInfo = Undefined) Export
 		Return;
 	EndIf;
 
-	PrintFormParameters = New Structure();
-	PrintFormParameters.Insert("Result", PrintResult);
-	PrintForm = GetForm("CommonForm.PrintForm", PrintFormParameters, Object);
-	PrintForm.Open();
+	Param = UniversalPrintServer.InitPrintParam(LastRetailSalesReceipt);
+	Param.NameTemplate = "";
+	Param.BuilderLayout = False;
+	Param.SpreadsheetDoc = PrintResult;
 
+	OpenForm("CommonForm.PrintForm", , , "UniqueOpeningOfTheCommonPrintingPlate");
+	Notify("AddTemplatePrintForm", Param);
 EndProcedure
 
 Procedure BeforeStartNewTransaction(Object, Form, DocRef) Export

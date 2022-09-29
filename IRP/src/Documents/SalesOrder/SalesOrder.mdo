@@ -1246,4 +1246,20 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <templates uuid="3596bb39-522f-4f15-8e2b-82ce2cdea4fa">
+    <name>SalesOrderPrint</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales order</value>
+    </synonym>
+  </templates>
+  <commands uuid="34291d62-91e3-4f95-8ce2-3de95d4efd57">
+    <name>SalesOrderPrint</name>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>DocumentRef.SalesOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

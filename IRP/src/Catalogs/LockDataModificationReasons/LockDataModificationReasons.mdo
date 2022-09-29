@@ -217,6 +217,22 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="38ab1ebc-6a15-4a61-bd1d-dc8a7272fffd">
+    <name>QueryFilter</name>
+    <synonym>
+      <key>en</key>
+      <value>Query filter</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="bdfb54d6-07fc-48d4-ac55-cb4f3cfaa8ae">
     <producedTypes>
       <objectType typeId="85b44ead-7878-4913-86f5-02ccbd3c51c2" valueTypeId="257e0d4e-1a4e-419a-b6db-fa8f614db850"/>

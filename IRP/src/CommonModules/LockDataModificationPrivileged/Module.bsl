@@ -401,19 +401,15 @@ EndFunction
 //  MetadataName - String - Metadata name
 Procedure InitDataCompositionSchemeForRef(Settings, MetadataName, CheckCurrent)
 	
-	Selection = Settings.Selection.Items.Add(Type("DataCompositionSelectedField"));
-	Selection.Use = True;
-	Selection.Field = New DataCompositionField("Code");
-	
 	DCSTemplate = Catalogs.LockDataModificationReasons.GetTemplate("DCS");
-	
+	DCSTemplate.DataSources.Clear();
 	DataSources = DCSTemplate.DataSources.Add();
 	DataSources.DataSourceType = "Local";
 	DataSources.Name = "DataSource";
 	
 	Query = 
 	"SELECT 
-	|	*
+	|	DataSet.Ref AS Ref
 	|FROM
 	|    " + MetadataName + " AS DataSet";
 	DataSet = DCSTemplate.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
@@ -421,21 +417,12 @@ Procedure InitDataCompositionSchemeForRef(Settings, MetadataName, CheckCurrent)
 	DataSet.Name = MetadataName;
 	DataSet.DataSource = DataSources.Name;
 
-
 	Composer = New DataCompositionTemplateComposer();
 	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
 
 	Processor = New DataCompositionProcessor();
 	Processor.Initialize(Template);
 
-	Output = New DataCompositionResultValueCollectionOutputProcessor();
-	Result = New ValueTable();
-	Output.SetObject(Result);
-	Output.Output(Processor);
-
-//
-//	DCSTemplate = IDInfoServer.GetDCSTemplate(MetadataName);
-//	Result = IDInfoServer.GetRefsByCondition(DCSTemplate, Settings);
 EndProcedure
 
 // Save rule settings.

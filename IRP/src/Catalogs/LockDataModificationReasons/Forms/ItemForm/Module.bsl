@@ -23,7 +23,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	If Object.SetOneRuleForAllObjects Then
 		If Object.RuleList.Count() Then
-			FillAttributeListHead(Items.Attribute.ChoiceList);
+			FillAttributeListHead(Object, Items.Attribute.ChoiceList);
 		EndIf;
 	EndIf;
 	
@@ -57,7 +57,7 @@ EndProcedure
 Procedure OnReadAtServer(CurrentObject)
 	If CurrentObject.AdvancedMode Then
 		Settings = CurrentObject.DCS.Get(); // DataCompositionSettings
-		UpdateQuery(Settings);
+		UpdateQuery(ThisObject, Settings);
 	EndIf;
 EndProcedure
 
@@ -148,18 +148,29 @@ EndProcedure
 &AtClient
 Procedure AdvancedModeOnChange(Item)
 	SetVisible();
-	UpdateQuery();
+	UpdateQueryFromServer();
 EndProcedure
 
 &AtClient
 Procedure RuleListOnChange(Item)
 	If Object.AdvancedMode Then
-		UpdateQuery();
+		UpdateQueryFromServer();
 	EndIf;
 EndProcedure
 
 &AtServer
-Procedure UpdateQuery(Settings = Undefined)
+Procedure UpdateQueryFromServer()
+	UpdateQuery(ThisObject, SettingsComposer.GetSettings());
+EndProcedure
+
+&AtServerNoContext
+Procedure UpdateQuery(Form, Settings)
+
+	ValueListAvailableField = FillAttributeListHead(Form.Object);
+
+	If ValueListAvailableField.Count() = 0 Then
+		Return;
+	EndIf;
 	
 	DCSTemplate = Catalogs.LockDataModificationReasons.GetTemplate("DCS");
 	
@@ -167,13 +178,12 @@ Procedure UpdateQuery(Settings = Undefined)
 	DataSources.DataSourceType = "Local";
 	DataSources.Name = "DataSource";
 	
-	ValueListAvailableField = FillAttributeListHead();
 	AvailableField = New Array;
 	For Each Row In ValueListAvailableField Do
 		AvailableField.Add("DataSet." + StrSplit(String(Row), ".")[StrSplit(String(Row), ".").UBound()]);
 	EndDo;
 	AvailableFields = StrConcat(AvailableField, ", ");
-	For Each Row In Object.RuleList Do
+	For Each Row In Form.Object.RuleList Do
 		If Row.DisableRule Or IsBlankString(Row.Type) Then
 			Continue;
 		EndIf;
@@ -188,24 +198,46 @@ Procedure UpdateQuery(Settings = Undefined)
 		DataSet.DataSource = DataSources.Name;
 	EndDo;
 	
-	If DCSTemplate.DataSets.Count() = 0 Then
-		SettingsComposer = New DataCompositionSettingsComposer();
-		Return;
-	EndIf;
-	
-	Address = PutToTempStorage(DCSTemplate, UUID);
+	SettingsComposer = New DataCompositionSettingsComposer();
+
+	Address = PutToTempStorage(DCSTemplate);
 	SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Address));
-	If Not Settings = Undefined Then
-		SettingsComposer.LoadSettings(Settings);
-	EndIf;
+	SettingsComposer.LoadSettings(DCSTemplate.DefaultSettings);
+	SettingsComposer.LoadSettings(Settings);
+
 	SettingsComposer.Settings.Selection.Items.Clear();
 
 	For Each Field In SettingsComposer.Settings.Selection.SelectionAvailableFields.Items Do
+		
+		If Field.Field = New DataCompositionField("SystemFields") Then
+			Continue;
+		EndIf;
+		
 		Selection = SettingsComposer.Settings.Selection.Items.Add(Type("DataCompositionSelectedField"));
 		Selection.Use = True;
 		Selection.Field = Field.Field;
 	EndDo;
-
+	
+	Composer = New DataCompositionTemplateComposer();
+	Template = Composer.Execute(DCSTemplate, SettingsComposer.GetSettings(), , , Type("DataCompositionValueCollectionTemplateGenerator"));
+	
+	QueryText = Template.DataSets[0].Query;
+	
+	RuleUUID = StrReplace(String(Form.Object.Ref.UUID()), "-", "");
+	QueryText = StrReplace(QueryText, "&P", "&P_" + RuleUUID + "_");
+	
+	QuerySchema = New QuerySchema();
+	QuerySchema.SetQueryText(QueryText);
+	FilterText = New Array;
+	For Each Row In QuerySchema.QueryBatch[0].Operators[0].Filter Do
+		FilterText.Add(Row);
+	EndDo;
+	QueryFilter = "CASE WHEN " + StrConcat(FilterText, Chars.LF + " AND ") + " THEN &REF_" + RuleUUID + " ELSE UNDEFINED END";
+	If StrCompare(Form.Object.QueryFilter, QueryFilter) Then
+		Form.Object.QueryFilter = QueryFilter;
+	EndIf;
+	
+	Form.SettingsComposer = SettingsComposer;
 EndProcedure
 
 #EndRegion
@@ -277,8 +309,8 @@ Procedure RuleListValueStartChoice(Item, ChoiceData, StandardProcessing)
 	FillValueType(RowStructure);
 EndProcedure
 
-&AtServer
-Function FillAttributeListHead(ChoiceData = Undefined)
+&AtServerNoContext
+Function FillAttributeListHead(Object, ChoiceData = Undefined)
 
 	VT = New ValueTable();
 	VT.Columns.Add("Attribute", New TypeDescription("String"));
@@ -321,7 +353,7 @@ EndFunction
 // Parameters:
 //  ChoiceData - ValueList of String - Choice data
 //  DataType - String - Data type
-&AtServer
+&AtServerNoContext
 Procedure FillAttributeList(ChoiceData, DataType)
 	If IsBlankString(DataType) Then
 		Return;
@@ -359,7 +391,7 @@ EndProcedure
 //  MetaItem - MetadataObject - Meta item
 //  AttributeChoiceList - ValueList of String - Attribute choice list
 //  DataType - String - Data type
-&AtServer
+&AtServerNoContext
 Procedure AddChild(MetaItem, AttributeChoiceList, DataType)
 
 	If MetaItem = Undefined Then

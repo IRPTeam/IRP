@@ -291,6 +291,22 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="a177b900-3f11-421c-9846-e6277a18abb3">
+    <name>Comment</name>
+    <synonym>
+      <key>en</key>
+      <value>Comment</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="02fabad1-3f73-429c-971c-e0188cf29e34">
     <producedTypes>
       <objectType typeId="f953a02c-8386-4fd5-8bc7-052e34c93d8b" valueTypeId="a4495e53-030a-4823-81c2-b01c30b2f95b"/>

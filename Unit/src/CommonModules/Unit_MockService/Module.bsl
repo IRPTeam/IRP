@@ -80,6 +80,34 @@ Function ComposeAnswerToRequestStructure(RequestStructure, MockData = Undefined,
 	
 EndFunction
 
+// Get mock data by request.
+// 
+// Parameters:
+//  RequestStructure - See Unit_MockService.GetStructureRequest 
+// 
+// Returns:
+//  Structure - Get mock data by request:
+// * MockData - CatalogRef.Unit_MockServiceData -
+// * RequestVariables - Structure -
+Function getMockDataByRequest(RequestStructure) Export
+	
+	Result = New Structure;
+	Result.Insert("MockData", Catalogs.Unit_MockServiceData.EmptyRef());
+	Result.Insert("RequestVariables", New Structure);
+	
+	SelectionStructures = RunQueryForSearchMockData(RequestStructure);
+	For Each SelectionStructure In SelectionStructures Do
+		CheckingResult = CheckRequestToMockData(RequestStructure, SelectionStructure, Result.RequestVariables); 
+		If CheckingResult.Successfully Then
+			Result.MockData = SelectionStructure.Ref;
+			Break;
+		EndIf;  
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
+
 // Check request to mock data.
 // 
 // Parameters:
@@ -403,34 +431,6 @@ Procedure AddLineToLogs(Logs, NewLine, isHeader = False)
 	EndIf; 
 EndProcedure
 
-// Get mock data by request.
-// 
-// Parameters:
-//  RequestStructure - See Unit_MockService.GetStructureRequest 
-// 
-// Returns:
-//  Structure - Get mock data by request:
-// * MockData - CatalogRef.Unit_MockServiceData -
-// * RequestVariables - Structure -
-Function getMockDataByRequest(RequestStructure)
-	
-	Result = New Structure;
-	Result.Insert("MockData", Catalogs.Unit_MockServiceData.EmptyRef());
-	Result.Insert("RequestVariables", New Structure);
-	
-	SelectionStructures = RunQueryForSearchMockData(RequestStructure);
-	For Each SelectionStructure In SelectionStructures Do
-		CheckingResult = CheckRequestToMockData(RequestStructure, SelectionStructure, Result.RequestVariables); 
-		If CheckingResult.Successfully Then
-			Result.MockData = SelectionStructure.Ref;
-			Break;
-		EndIf;  
-	EndDo;
-	
-	Return Result;
-	
-EndFunction
-
 // Run query for search mock data.
 // 
 // Parameters:
@@ -623,7 +623,10 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue)
 	If TypeOf(DataForValue) = Type("String") Then
 		
 		If CurrentDataType = "[xml]" Then
-			ValueXML = CommonFunctionsServer.DeserializeXML(DataForValue);
+			Reader = New XMLReader();
+			Reader.SetString(DataForValue);
+			ValueXML = XDTOFactory.ReadXML(Reader); // Arbitrary
+			Reader.Close();
 			Return getValueOfBodyVariableByPath(NextPath, ValueXML);
 			
 		ElsIf CurrentDataType = "[json]" Then

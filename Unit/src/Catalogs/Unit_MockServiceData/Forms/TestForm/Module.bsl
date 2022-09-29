@@ -1,12 +1,5 @@
 // @strict-types
 
-#Region Variables
-
-&AtServer
-Var Answer_Body; // ValueStorage
-
-#EndRegion
-
 #Region FormEventHandlers
 
 &AtServer
@@ -37,31 +30,37 @@ EndProcedure
 &AtClient
 Procedure CompareAnswers(Command)
 	
-	If Not ReferenceAnswer.StatusCode = StatusCode Then
-		ShowMessageBox(, R().Mock_Info_StatusCodeNotMatch);
+	AnswerStructure = GetAnswerStructure(ReferenceAnswer);
+	
+	If Not AnswerStructure.StatusCode = StatusCode Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Mock_Info_StatusCodeNotMatch, "StatusCode", ThisObject);
 	EndIf;
 	
 	isHeaderMatch = True;
-	ReferenceHeaders = ReferenceAnswer.Headers.Get(); // Map
-	If Not TypeOf(ReferenceHeaders) = Type("Map") Or Not AnswerHeaders.Count() = ReferenceHeaders.Count() Then
+	If Not TypeOf(AnswerStructure.Headers) = Type("Map") Or Not AnswerHeaders.Count() = AnswerStructure.Headers.Count() Then
 		isHeaderMatch = False;
 	Else
 		For Each HeaderItem In AnswerHeaders Do
-			ReferenceValue = ReferenceHeaders.Get(HeaderItem.Key);
+			ReferenceValue = AnswerStructure.Headers.Get(HeaderItem.Key);
 			If Not ReferenceValue = HeaderItem.Value Then
 				isHeaderMatch = False;
 				Break;
 			EndIf;
 		EndDo;
 	EndIf;
-	If isHeaderMatch Then
-		ShowMessageBox(, R().Mock_Info_HeaderNotMatch);
+	If Not isHeaderMatch Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Mock_Info_HeaderNotMatch, "GroupAnswer_Headers", ThisObject);
 	EndIf;
 	
-	If Not ReferenceAnswer.BodyMD5 = AnswerBodyMD5 Then
-		ShowMessageBox(, R().Mock_Info_BodyNotMatch);
+	If Not AnswerStructure.BodyMD5 = AnswerBodyMD5 Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Mock_Info_BodyNotMatch, "GroupAnswer_Body", ThisObject);
 	EndIf;
 	
+EndProcedure
+
+&AtClient
+Procedure FindMock(Command)
+	FindMockAtServer();
 EndProcedure
 
 &AtClient
@@ -104,10 +103,11 @@ EndProcedure
 //  BinaryData - Get body at server
 &AtServer
 Function GetBodyAtServer()
-	If TypeOf(Answer_Body) = Type("ValueStorage") Then
-		Return Answer_Body.Get();
+	If IsBlankString(Answer_Body) Then
+		Return GetBinaryDataFromString("");
+	Else
+		Return GetFromTempStorage(Answer_Body);
 	EndIf;
-	Return GetBinaryDataFromString("");
 EndFunction
 
 &AtServer
@@ -291,7 +291,7 @@ Procedure LoadAnswer(Answer)
 	EndDo;
 	
 	BodyRowValue = Answer.GetBodyAsBinaryData();
-	Answer_Body = New ValueStorage(BodyRowValue);
+	Answer_Body = PutToTempStorage(BodyRowValue, ThisObject.UUID);
 	
 	BodyInfo = IntegrationServer.Unit_GetBodyInfo(BodyRowValue, Answer.Headers);
 	ThisObject.AnswerBodySize = BodyInfo.Size;
@@ -312,5 +312,39 @@ Procedure LoadAnswer(Answer)
 	EndIf;
 	
 EndProcedure
+
+// Get answer structure.
+// 
+// Parameters:
+//  ReferenceAnswer - CatalogRef.Unit_ServiceExchangeHistory - Reference answer
+// 
+// Returns:
+//  Structure - Get answer structure:
+// * StatusCode - Number
+// * BodyMD5 - String
+// * Headers - Map
+&AtServerNoContext
+Function GetAnswerStructure(ReferenceAnswer)
+	
+	AnswerStructure = 
+		CommonFunctionsServer.GetAttributesFromRef(
+			ReferenceAnswer, "StatusCode, Headers, BodyMD5");
+	
+	Result = New Structure;
+	Result.Insert("StatusCode", AnswerStructure.StatusCode);
+	Result.Insert("BodyMD5", AnswerStructure.BodyMD5);
+	Result.Insert("Headers", AnswerStructure.Headers.Get());
+	Return Result;
+	
+EndFunction
+
+&AtServer
+Procedure FindMockAtServer()
+	
+	MockDataInfo = Unit_MockService.getMockDataByRequest(GetRequestStructure());
+	MockData = MockDataInfo.MockData;	
+	
+EndProcedure
+
 
 #EndRegion

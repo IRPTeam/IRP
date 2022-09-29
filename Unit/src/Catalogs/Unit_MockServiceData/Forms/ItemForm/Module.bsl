@@ -1,15 +1,5 @@
 // @strict-types
 
-#Region Variables
-
-&AtServer
-Var Request_Body; // ValueStorage
-
-&AtServer
-Var Answer_Body; // ValueStorage
-
-#EndRegion
-
 #Region FormEventHandlers
 
 &AtServer
@@ -24,8 +14,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			Else
 				InputRequest = InputAnswer.Parent;
 			EndIf;
-			LoadValueStorageInBody(True, InputRequest.Body);
-			LoadValueStorageInBody(False, InputAnswer.Body);
+			LoadBodyBinaryData(True, InputRequest.Body.Get());
+			LoadBodyBinaryData(False, InputAnswer.Body.Get());
 		EndIf;
 	EndIf; 
 	
@@ -43,8 +33,8 @@ EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
-	LoadValueStorageInBody(True, CurrentObject.Request_Body);
-	LoadValueStorageInBody(False, CurrentObject.Answer_Body);
+	LoadBodyBinaryData(True, CurrentObject.Request_Body.Get());
+	LoadBodyBinaryData(False, CurrentObject.Answer_Body.Get());
 EndProcedure
 
 &AtServer
@@ -53,12 +43,12 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If isEditRequestBody Then
 		ReloadTextBodyAtServer(True);
 	EndIf;
-	CurrentObject.Request_Body = GetBodyValueStorage(True);
+	CurrentObject.Request_Body = New ValueStorage(GetBodyBinaryData(True));
 	
 	If isEditAnswerBody Then
 		ReloadTextBodyAtServer(False);
 	EndIf;
-	CurrentObject.Answer_Body = GetBodyValueStorage(False);
+	CurrentObject.Answer_Body = New ValueStorage(GetBodyBinaryData(False));
 	
 EndProcedure
 
@@ -99,7 +89,7 @@ Async Procedure SaveBody(Command)
 		Return;
 	EndIf;
 	
-	BodyRowValue = GetBodyAtServer(isRequest);
+	BodyRowValue = GetBodyBinaryData(isRequest);
 	If Not TypeOf(BodyRowValue) = Type("BinaryData") Then
 		ShowMessageBox(, R().Mock_Info_EmptyFile);
 		Return;
@@ -143,41 +133,35 @@ EndProcedure
 
 #Region Private
 
-// Get body at server.
-// 
-// Parameters:
-//  isRequest - Boolean - Is request
-// 
-// Returns:
-//  BinaryData - Get body at server
-&AtServer
-Function GetBodyAtServer(isRequest)
-	Return GetBodyValueStorage(isRequest).Get();
-EndFunction
-
 // Get body as ValueStorage.
 // 
 // Parameters:
 //  isRequest - Boolean - Is request
 // 
 // Returns:
-//  ValueStorage - Get body as ValueStorage
+//  BinaryData - Get body as BinaryData
 &AtServer
-Function GetBodyValueStorage(isRequest)
-	Return ?(isRequest, Request_Body, Answer_Body);
-EndFunction
-
-// Get body as ValueStorage.
-//  
-// Parameters:
-//  isRequest - Boolean - Is request
-//  Body - ValueStorage
-&AtServer
-Procedure LoadValueStorageInBody(isRequest, Body)
-	If isRequest Then
-		Request_Body = Body;
+Function GetBodyBinaryData(isRequest)
+	AddressBinaryData = ?(isRequest, Request_Body, Answer_Body);
+	If IsBlankString(AddressBinaryData) Then
+		Return GetBinaryDataFromString("");
 	Else
-		Answer_Body = Body;
+		Return GetFromTempStorage(AddressBinaryData);
+	EndIf;
+EndFunction
+
+// Load body binary data.
+// 
+// Parameters:
+//  isRequest - Boolean - Is request
+//  BodyBinaryData - BinaryData, Undefined - Body binary data
+&AtServer
+Procedure LoadBodyBinaryData(isRequest, BodyBinaryData)
+	AddressBinaryData = PutToTempStorage(BodyBinaryData, ThisObject.UUID);
+	If isRequest Then
+		Request_Body = AddressBinaryData;
+	Else
+		Answer_Body = AddressBinaryData;
 	EndIf;
 EndProcedure
 
@@ -200,7 +184,7 @@ Procedure TryLoadBodyAtServer(isRequest)
 	
 	ThisObject[Prefix+"BodyString"] = "";
 	ThisObject[Prefix+"BodyPicture"] = "";
-	BodyRowValue = GetBodyAtServer(isRequest);
+	BodyRowValue = GetBodyBinaryData(isRequest);
 	
 	If BodyIsText Then
 		ThisObject[Prefix+"BodyString"] = GetStringFromBinaryData(BodyRowValue);
@@ -218,14 +202,14 @@ EndProcedure
 Procedure ReloadBodyAtServer(isRequest, NewContent, Newsize)
 	
 	If isRequest Then
-		Request_Body = New ValueStorage(NewContent);
+		LoadBodyBinaryData(True, New ValueStorage(NewContent));
 		Object.Request_BodyMD5 = CommonFunctionsServer.GetMD5(NewContent);
 		Object.Request_BodySize = Newsize;
 		ThisObject.RequestBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Newsize);
 		ThisObject.isEditRequestBody = False;
 		
 	Else
-		Answer_Body = New ValueStorage(NewContent);
+		LoadBodyBinaryData(False, New ValueStorage(NewContent));
 		Object.Answer_BodySize = Newsize;
 		ThisObject.AnswerBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Newsize);
 		ThisObject.isEditAnswerBody = False;
@@ -241,7 +225,7 @@ Procedure ReloadTextBodyAtServer(isRequest)
 	
 	If isRequest Then
 		NewContent = GetBinaryDataFromString(ThisObject.RequestBodyString);
-		Request_Body = New ValueStorage(NewContent);
+		LoadBodyBinaryData(True, New ValueStorage(NewContent));
 		Object.Request_BodyMD5 = CommonFunctionsServer.GetMD5(NewContent);
 		Object.Request_BodySize = StrLen(ThisObject.RequestBodyString);
 		ThisObject.RequestBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Request_BodySize);
@@ -249,7 +233,7 @@ Procedure ReloadTextBodyAtServer(isRequest)
 		
 	Else
 		NewContent = GetBinaryDataFromString(ThisObject.AnswerBodyString);
-		Answer_Body = New ValueStorage(NewContent);
+		LoadBodyBinaryData(False, New ValueStorage(NewContent));
 		Object.Answer_BodySize = StrLen(ThisObject.AnswerBodyString);
 		ThisObject.AnswerBodySizePresentation = CommonFunctionsClientServer.GetSizePresentation(Object.Answer_BodySize);
 		ThisObject.isEditAnswerBody = False;

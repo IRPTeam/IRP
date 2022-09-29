@@ -754,3 +754,103 @@ Procedure SetQueryBuilderFilters(QueryBuilder, QueryFilters)
 EndProcedure
 
 #EndRegion
+
+// Get attributes from ref. If there is no attribute, or there is no access, 
+// then the structure key will be Undefined, otherwise the required value.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+//  Attributes - String, FixedStructure, Structure, FixedArray, Array of String - List of attributes
+//  OnlyAllowed - Boolean - Requesting the value of attributes, taking into account rights at the record level
+// 
+// Returns:
+//   Structure:
+//   * Key - String
+//   * Value - Arbitrary 
+Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
+	
+	Result = New Structure;
+	
+	AttributesStructure = New Structure;
+	If TypeOf(Attributes) = Type("String") Then
+		If IsBlankString(Attributes) Then
+			Return Result;
+		EndIf;
+		Attributes = StrReplace(Attributes, " ", "");
+		Attributes = StrReplace(Attributes, Chars.LF, "");
+		AttributParts = StrSplit(Attributes, ",");
+		For Each AttributPart In AttributParts Do
+			Alias = StrReplace(AttributPart, ".", "");
+			AttributesStructure.Insert(Alias, AttributPart);
+		EndDo; 
+	ElsIf TypeOf(Attributes) = Type("Structure") Or TypeOf(Attributes) = Type("FixedStructure") Then
+		AttributesStructure = Attributes;
+	ElsIf TypeOf(Attributes) = Type("Array") Or TypeOf(Attributes) = Type("FixedArray") Then
+		For Each Item In Attributes Do
+			Alias = StrReplace(AttributPart, ".", "");
+			AttributesStructure.Insert(Alias, Item);
+		EndDo;
+	EndIf;
+	If AttributesStructure.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	FullTableName = Ref.Metadata().FullName();
+	
+	QueryFieldText = "";
+	For Each ItemAttribute In AttributesStructure Do
+		
+		FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
+		FieldAlias = ItemAttribute.Key;
+		QueryFieldText = QueryFieldText + ?(IsBlankString(QueryFieldText), "", ",") + "
+			|	" + FieldName + " AS " + FieldAlias;
+		
+		CurrentResult = Result;
+		FieldParts = StrSplit(FieldName, ".");
+		For Index = 0 To FieldParts.UBound() Do
+			CurrentResult.Insert(FieldParts[Index], Undefined);
+			If Index < FieldParts.UBound() Then
+				NewStructure = New Structure;
+				CurrentResult[FieldParts[Index]] = NewStructure; 
+				CurrentResult = NewStructure; 
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	If Not ValueIsFilled(Ref) Then
+		Return Result;
+	EndIf;
+	
+	Query = New Query;
+	Query.Parameters.Insert("Ref", Ref);
+	Query.Text =
+	"SELECT ALLOWED
+	|	&QueryFieldText
+	|FROM
+	|	&FullTableName AS Table
+	|WHERE
+	|	Table.Ref = &Ref";
+	
+	Query.Text = StrReplace(Query.Text, "&QueryFieldText", QueryFieldText);
+	Query.Text = StrReplace(Query.Text, "&FullTableName", FullTableName);
+	
+	If Not OnlyAllowed Then
+		Query.Text = StrReplace(Query.Text, " ALLOWED", "");
+	EndIf;
+	
+	SelectionDetailRecords = Query.Execute().Select();
+	If SelectionDetailRecords.Next() Then
+		For Each ItemAttribute In AttributesStructure Do
+			CurrentResult = Result;
+			FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
+			FieldParts = StrSplit(FieldName, ".");
+			For Index = 0 To FieldParts.UBound() - 1 Do
+				CurrentResult = CurrentResult[FieldParts[Index]]; // Structure 
+			EndDo;
+			CurrentResult[FieldParts[FieldParts.UBound()]] = SelectionDetailRecords[ItemAttribute.Key];
+		EndDo;
+	EndIf;
+	
+	Return Result;
+	
+EndFunction

@@ -505,12 +505,14 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 				| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                             | 'Detail' | 'Sales order'                               | 'Net amount' | 'Use goods receipt' |
 				| '1' | ''              | 'en description is empty' | 'Trousers' | '38/Yellow' | 'No'                 | '1,53'       | 'pcs'  | ''                   | '1,000'  | '10,00' | '18%' | ''              | '10,00'        | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 501 dated 30.03.2021 11:56:21' | '8,47'       | 'Yes'               |
 				| '2' | ''              | 'en description is empty' | 'Trousers' | '38/Yellow' | 'No'                 | '61,02'      | 'pcs'  | ''                   | '20,000' | '20,00' | '18%' | ''              | '400,00'       | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 503 dated 30.03.2021 11:57:06' | '338,98'     | 'Yes'               |
-			And "GoodsReceiptsTree" table contains lines
-				| 'Item'     | 'Item key'  | 'Goods receipt'           | 'Invoice' | 'GR'     | 'Quantity'      |
-				| 'Trousers' | '38/Yellow' | ''                        | '1,000'   | '1,000'  | '1,000'  |
-				| ''         | ''          | '$$GoodsReceipt0292022$$' | ''        | '1,000'  | '1,000'  |
-				| 'Trousers' | '38/Yellow' | ''                        | '20,000'  | '20,000' | '20,000' |
-				| ''         | ''          | '$$GoodsReceipt0292022$$' | ''        | '20,000' | '20,000' |
+			And in the table "ItemList" I click "Goods receipts" button
+			And "DocumentsTree" table became equal
+				| 'Presentation'            | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+				| 'Trousers (38/Yellow)'    | '1,000'   | '1,000'              | '1,000'    |
+				| '$$GoodsReceipt0292022$$' | ''        | '1,000'              | '1,000'    |
+				| 'Trousers (38/Yellow)'    | '20,000'  | '20,000'             | '20,000'   |
+				| '$$GoodsReceipt0292022$$' | ''        | '20,000'             | '20,000'   |
+			And I close current window		
 			And I click "Show row key" button
 			And "RowIDInfo" table contains lines
 				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
@@ -659,10 +661,12 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 			| 'Key'                                  | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
 			| '$$Rov1SalesInvoice029204$$' | 'Store 01' | ''                    | '5,000'                 | '1' | ''              | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '5,000' | 'pcs'  | '396,61'     | '520,00' | '18%' | ''              | '2 203,39'   | '2 600,00'     | '31.03.2021'    | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 		Then the number of "ItemList" table lines is "равно" "1"
-		And "ShipmentConfirmationsTree" table became equal
-			| 'Key'                        | 'Basis key'                            | 'Item'  | 'Shipment confirmation'          | 'Item key' | 'Invoice' | 'SC'    | 'Quantity' |
-			| '$$Rov1SalesInvoice029204$$' | '                                    ' | 'Dress' | ''                               | 'M/White'  | '5,000'   | '5,000' | '5,000'    |
-			| '$$Rov1SalesInvoice029204$$' | '$$Rov1ShipmentConfirmation029204$$'   | ''      | '$$ShipmentConfirmation029204$$' | ''         | ''        | '5,000' | '5,000'    |		
+		And in the table "ItemList" I click "Shipment confirmations" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                   | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Dress (M/White)'                | '5,000'   | '5,000'              | '5,000'    |
+			| '$$ShipmentConfirmation029204$$' | ''        | '5,000'              | '5,000'    |
+		And I close current window
 		And "RowIDInfo" table became equal
 			| '#' | 'Key'                        | 'Basis'                          | 'Row ID'                               | 'Next step' | 'Quantity'     | 'Basis key'                          | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1SalesInvoice029204$$' | '$$ShipmentConfirmation029204$$' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | ''          | '5,000' | '$$Rov1ShipmentConfirmation029204$$' | 'SI'           | '4a003d08-12af-4c34-98d5-5cdeb84616de' |

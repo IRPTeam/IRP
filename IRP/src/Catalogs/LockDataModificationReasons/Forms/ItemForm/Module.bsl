@@ -188,6 +188,10 @@ Procedure UpdateQuery(Form, Settings)
 			Continue;
 		EndIf;
 		
+		If Not DCSTemplate.DataSets.Find(Row.Type) = Undefined Then
+			Continue;
+		EndIf;
+		
 		Query = 
 		"SELECT " + AvailableFields + "
 		|FROM
@@ -203,7 +207,9 @@ Procedure UpdateQuery(Form, Settings)
 	Address = PutToTempStorage(DCSTemplate);
 	SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Address));
 	SettingsComposer.LoadSettings(DCSTemplate.DefaultSettings);
-	SettingsComposer.LoadSettings(Settings);
+	If Form.Object.isInitDCS Then
+		SettingsComposer.LoadSettings(Settings);
+	EndIf;
 
 	SettingsComposer.Settings.Selection.Items.Clear();
 
@@ -223,21 +229,19 @@ Procedure UpdateQuery(Form, Settings)
 	
 	QueryText = Template.DataSets[0].Query;
 	
-	RuleUUID = StrReplace(String(Form.Object.Ref.UUID()), "-", "");
-	QueryText = StrReplace(QueryText, "&P", "&P_" + RuleUUID + "_");
-	
 	QuerySchema = New QuerySchema();
 	QuerySchema.SetQueryText(QueryText);
 	FilterText = New Array;
 	For Each Row In QuerySchema.QueryBatch[0].Operators[0].Filter Do
 		FilterText.Add(Row);
 	EndDo;
-	QueryFilter = "CASE WHEN " + StrConcat(FilterText, Chars.LF + " AND ") + " THEN &REF_" + RuleUUID + " ELSE UNDEFINED END";
+	QueryFilter = "CASE WHEN " + StrConcat(FilterText, Chars.LF + " AND ") + " THEN &REF_ ELSE UNDEFINED END";
 	If StrCompare(Form.Object.QueryFilter, QueryFilter) Then
 		Form.Object.QueryFilter = QueryFilter;
 	EndIf;
 	
 	Form.SettingsComposer = SettingsComposer;
+	Form.Object.isInitDCS = True;
 EndProcedure
 
 #EndRegion

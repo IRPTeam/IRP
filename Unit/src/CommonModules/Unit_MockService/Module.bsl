@@ -156,6 +156,234 @@ Function CheckRequestToMockData(RequestStructure, Selection, RequestVariables) E
 	
 EndFunction
 
+// Transformation value.
+// 
+// Parameters:
+//  SomeValue - String - Some value
+//  RequestVariables - Structure - existing variables
+// 
+// Returns:
+//  String - Transformation value
+Function TransformationValue(SomeValue, RequestVariables) Export
+	
+	If IsBlankString(SomeValue) Then
+		Return "";
+	EndIF;
+	
+	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "$$$") And StrEndsWith(SomeValue, "$$$") Then
+		KeyName = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
+		Try
+			Return RequestVariables[KeyName];
+		Except
+			Return "";
+		EndTry; 
+	EndIf;
+	 
+	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "{{{") And StrEndsWith(SomeValue, "}}}") Then
+		Params = CommonFunctionsServer.GetRecalculateExpressionParams();
+		Params.Eval = True;
+		Params.SafeMode = True;
+		Params.Expression = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
+		Params.AddInfo = RequestVariables;
+		ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
+		If ResultInfo.isError Then
+			Return "";
+		Else
+			Return ResultInfo.Result;
+		EndIf; 
+	EndIf;
+	
+	Return SomeValue;
+	
+EndFunction
+
+// Get value of body variable by path.
+// 
+// Parameters:
+//  PathToValue - String - Path to value
+//  DataForValue - Arbitrary
+// 
+// Returns:
+//  String - Get value of body variable by path
+Function getValueOfBodyVariableByPath(PathToValue, DataForValue) Export
+	
+	ArrayOfSegments = StrSplit(PathToValue, "/");
+	
+	If ArrayOfSegments.Count() = 0 Then
+		Return String(DataForValue);
+	EndIf;
+	
+	CurrentDataType = ArrayOfSegments[0];
+	NextPath = Mid(PathToValue, StrLen(CurrentDataType)+2);
+	
+	If TypeOf(DataForValue) = Type("String") Then
+		
+		If CurrentDataType = "[xml]" Then
+			Reader = New XMLReader();
+			Reader.SetString(DataForValue);
+			ValueXML = XDTOFactory.ReadXML(Reader); // Arbitrary
+			Reader.Close();
+			Return getValueOfBodyVariableByPath(NextPath, ValueXML);
+			
+		ElsIf CurrentDataType = "[json]" Then
+			ValueJSON = CommonFunctionsServer.DeserializeJSON(DataForValue);
+			Return getValueOfBodyVariableByPath(NextPath, ValueJSON);
+			
+		ElsIf CurrentDataType = "[file]" Then
+			ValueBase64 = Base64Value(DataForValue);
+			Return getValueOfBodyVariableByPath(NextPath, ValueBase64);
+			
+		ElsIf StrStartsWith(CurrentDataType, "[csv") Then
+			Separator = ",";
+			If CurrentDataType <> "[csv]" Then
+				Separator = Mid(CurrentDataType, 6, StrLen(CurrentDataType)-6);
+			EndIf; 
+			Return getValueOfBodyVariableByPath(NextPath, StrSplit(DataForValue, Separator, True));
+			
+		Else
+			Return String(DataForValue);
+			
+		EndIf;
+	
+	ElsIf TypeOf(DataForValue) = Type("BinaryData") Then
+		
+		If CurrentDataType = "[text]" Then
+			ValueText = GetStringFromBinaryData(DataForValue);
+			Return getValueOfBodyVariableByPath(NextPath, ValueText);
+			
+		ElsIf CurrentDataType = "[zip]" Then
+	 		ReadStream = New MemoryStream(GetBinaryDataBufferFromBinaryData(DataForValue));
+	 		ZIP = New ZipFileReader(ReadStream);
+	 		TempFile = TempFilesDir() + String(New UUID);
+	 		If ArrayOfSegments.Count() > 1 Then
+				FileName = ArrayOfSegments[1];
+				NextPath = Mid(NextPath, StrLen(FileName)+2);
+		 		ZIP.ExtractAll(TempFile, ZIPRestoreFilePathsMode.DontRestore);
+		 		FileName = ?(FileName="[0]", ZIP.Items[0].Name, FileName);
+		 		NewBinaryData = New BinaryData(TempFile + "/" + FileName); // String, BinaryData
+		 		DeleteFiles(TempFile);
+	 		Else
+	 			NewBinaryData = "ZIP:";
+	 			For Each ZipItem In ZIP.Items Do
+	 				NewBinaryData = NewBinaryData + Chars.CR + "* " + ZipItem.FullName; 
+	 			EndDo;
+	 		EndIf;
+	 		ZIP.Close();
+	 		ReadStream.Close();
+			Return getValueOfBodyVariableByPath(NextPath, NewBinaryData);
+			
+		Else
+			Return String(DataForValue);
+			
+		EndIf;
+	
+	ElsIf TypeOf(DataForValue) = Type("XDTODataObject") Then
+		
+		If IsBlankString(CurrentDataType) Then
+			Result = "XDTODataObject";
+			For Each XDTOProperty In DataForValue.Properties() Do
+				Result = Result + Chars.CR + "* " + XDTOProperty.LocalName; 
+			EndDo;
+			Return Result;
+			
+		ElsIf IsBlankString(NextPath) Then
+			CurrentValue = DataForValue[CurrentDataType]; // Arbitrary
+			If TypeOf(CurrentValue) = Type("XDTODataObject") Then
+				Result = "XDTODataObject";
+				For Each XDTOProperty In CurrentValue.Properties() Do
+					Result = Result + Chars.CR + "* " + XDTOProperty.LocalName; 
+				EndDo;
+				Return Result;
+			Else
+				Return String(CurrentValue);
+			EndIf;
+			
+		Else
+			Return getValueOfBodyVariableByPath(NextPath, DataForValue[CurrentDataType]);
+			
+		EndIf;
+		
+	
+	Else // get object property
+	 
+	 	If TypeOf(DataForValue) = Type("Array") Or TypeOf(DataForValue) = Type("XDTOList") Then
+	 		If IsBlankString(CurrentDataType) Then
+	 			Return "Collection";
+	 		Else
+	 			NumberKey = Number(CurrentDataType);
+				PropertyValue = DataForValue[NumberKey]; // Arbitrary
+			EndIf
+	 	Else
+			PropertyValue = DataForValue[CurrentDataType]; // Arbitrary
+	 	EndIf;
+	 
+		If IsBlankString(NextPath) Then
+			Return String(PropertyValue);
+		Else
+			Return getValueOfBodyVariableByPath(NextPath, PropertyValue);
+		EndIf;
+	EndIf;
+	
+EndFunction
+
+// Get available commands.
+// 
+// Parameters:
+//  CurrentCommands - String - Current commands
+//  TypeData - Type - Type data
+//  AddInfo - String - Add info
+// 
+// Returns:
+//  Array of String - Get available commands
+Function getAvailableCommands(CurrentCommands, TypeData, AddInfo) Export
+	
+	Result = New Array;
+	
+	If CurrentCommands = "[file]" Or TypeData = Type("BinaryData") Then
+		Result.Add("[text]");
+		Result.Add("[zip]");
+	
+	ElsIf CurrentCommands = "[text]" Then
+		Result.Add("[xml]");
+		Result.Add("[json]");
+		Result.Add("[csv]");
+		Result.Add("[csv=?]");
+	
+	ElsIf StrStartsWith(CurrentCommands, "[csv") Or TypeData = Type("Array") Or TypeData = Type("XDTOList") Then
+		Result.Add("0");
+		Result.Add("1");
+		Result.Add("2");
+		Result.Add("3");
+		Result.Add("4");
+		Result.Add("5");
+		Result.Add("?");
+	
+	ElsIf TypeData = Type("String") Then
+		Result.Add("[file]");
+		Result.Add("[text]");
+		Result.Add("[xml]");
+		Result.Add("[json]");
+		Result.Add("[csv]");
+		Result.Add("[csv=?]");
+	
+	ElsIf TypeData = Type("ZipFileReader") Then
+		Result.Add("[0]");
+	
+	EndIf;
+	
+	If Not IsBlankString(AddInfo) Then
+		Parts = StrSplit(AddInfo, Chars.CR);
+		For Each Part In Parts Do
+			If StrStartsWith(Part, "* ") Then
+				Result.Add(Mid(Part, 3));
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	Return Result;
+	
+EndFunction
+	
 // Get structure of request.
 // 
 // Returns:
@@ -598,138 +826,6 @@ Function getValueOfBodyVariable(RequestStructure, PathToValue, MockValue, Reques
 	Except
 		Return "";
 	EndTry;
-	
-EndFunction
-
-// Get value of body variable by path.
-// 
-// Parameters:
-//  PathToValue - String - Path to value
-//  DataForValue - Arbitrary
-// 
-// Returns:
-//  String - Get value of body variable by path
-Function getValueOfBodyVariableByPath(PathToValue, DataForValue)
-	
-	ArrayOfSegments = StrSplit(PathToValue, "/");
-	
-	If ArrayOfSegments.Count() = 0 Then
-		Return String(DataForValue);
-	EndIf;
-	
-	CurrentDataType = ArrayOfSegments[0];
-	NextPath = Mid(PathToValue, StrLen(CurrentDataType)+2);
-	
-	If TypeOf(DataForValue) = Type("String") Then
-		
-		If CurrentDataType = "[xml]" Then
-			Reader = New XMLReader();
-			Reader.SetString(DataForValue);
-			ValueXML = XDTOFactory.ReadXML(Reader); // Arbitrary
-			Reader.Close();
-			Return getValueOfBodyVariableByPath(NextPath, ValueXML);
-			
-		ElsIf CurrentDataType = "[json]" Then
-			ValueJSON = CommonFunctionsServer.DeserializeJSON(DataForValue);
-			Return getValueOfBodyVariableByPath(NextPath, ValueJSON);
-			
-		ElsIf CurrentDataType = "[file]" Then
-			ValueBase64 = Base64Value(DataForValue);
-			Return getValueOfBodyVariableByPath(NextPath, ValueBase64);
-			
-		ElsIf StrStartsWith(CurrentDataType, "[csv") Then
-			Separator = ",";
-			If CurrentDataType <> "[csv]" Then
-				Separator = Mid(CurrentDataType, 6, StrLen(CurrentDataType)-6);
-			EndIf; 
-			Return getValueOfBodyVariableByPath(NextPath, StrSplit(DataForValue, Separator, True));
-			
-		Else
-			Return String(DataForValue);
-			
-		EndIf;
-	
-	ElsIf TypeOf(DataForValue) = Type("BinaryData") Then
-		
-		If CurrentDataType = "[text]" Then
-			ValueText = GetStringFromBinaryData(DataForValue);
-			Return getValueOfBodyVariableByPath(NextPath, ValueText);
-			
-		ElsIf CurrentDataType = "[zip]" Then
-			FileName = ArrayOfSegments[1];
-			NextPath = Mid(NextPath, StrLen(FileName)+2);
-	 		ReadStream = New MemoryStream(GetBinaryDataBufferFromBinaryData(DataForValue));
-	 		ZIP = New ZipFileReader(ReadStream);
-	 		TempFile = TempFilesDir() + String(New UUID);
-	 		ZIP.ExtractAll(TempFile, ZIPRestoreFilePathsMode.DontRestore);
-	 		FileName = ?(FileName="[0]", ZIP.Items[0].Name, FileName);
-	 		NewBinaryData = New BinaryData(TempFile + "/" + FileName);
-	 		ZIP.Close();
-	 		ReadStream.Close();
-	 		DeleteFiles(TempFile);
-			Return getValueOfBodyVariableByPath(NextPath, NewBinaryData);
-			
-		Else
-			Return String(DataForValue);
-			
-		EndIf;
-	
-	Else // get object property
-	 
-	 	If TypeOf(DataForValue) = Type("Array") Then
-	 		NumberKey = Number(CurrentDataType);
-			PropertyValue = DataForValue[NumberKey]; // Arbitrary
-	 	Else
-			PropertyValue = DataForValue[CurrentDataType]; // Arbitrary
-	 	EndIf;
-	 
-		If IsBlankString(NextPath) Then
-			Return String(PropertyValue);
-		Else
-			Return getValueOfBodyVariableByPath(NextPath, PropertyValue);
-		EndIf;
-	EndIf;
-	
-EndFunction
-
-// Transformation value.
-// 
-// Parameters:
-//  SomeValue - String - Some value
-//  RequestVariables - Structure - existing variables
-// 
-// Returns:
-//  String - Transformation value
-Function TransformationValue(SomeValue, RequestVariables)
-	
-	If IsBlankString(SomeValue) Then
-		Return "";
-	EndIF;
-	
-	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "$$$") And StrEndsWith(SomeValue, "$$$") Then
-		KeyName = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
-		Try
-			Return RequestVariables[KeyName];
-		Except
-			Return "";
-		EndTry; 
-	EndIf;
-	 
-	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "{{{") And StrEndsWith(SomeValue, "}}}") Then
-		Params = CommonFunctionsServer.GetRecalculateExpressionParams();
-		Params.Eval = True;
-		Params.SafeMode = True;
-		Params.Expression = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
-		Params.AddInfo = RequestVariables;
-		ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
-		If ResultInfo.isError Then
-			Return "";
-		Else
-			Return ResultInfo.Result;
-		EndIf; 
-	EndIf;
-	
-	Return SomeValue;
 	
 EndFunction
 

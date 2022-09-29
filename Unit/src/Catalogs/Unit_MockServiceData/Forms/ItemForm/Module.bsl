@@ -70,6 +70,29 @@ EndProcedure
 
 #EndRegion
 
+#Region FormTableItemsEventHandlers
+
+&AtClient
+Procedure Request_BodyVariablesPathToValueOpening(Item, StandardProcessing)
+	
+	StandardProcessing = False;
+	
+	CurrentRecord = Items.Request_BodyVariables.CurrentData;
+	PathToValue = CurrentRecord.PathToValue;
+	If IsBlankString(PathToValue) Then
+		PathToValue = ?(Object.Request_BodyIsText, "[text]", "[file]");
+	EndIf;
+	
+	OpenForm(
+		"Catalog.Unit_MockServiceData.Form.AccessConstructor", 
+		New Structure("PathToValue, AddressBody", PathToValue, Request_Body), 
+		Item
+	);
+
+EndProcedure
+
+#EndRegion
+
 #Region FormCommandsEventHandlers
 
 &AtClient
@@ -126,6 +149,21 @@ Async Procedure ReloadBody(Command)
 	 
 	isRequest = StrStartsWith(Command.Name, "Request");
 	ReloadBodyAtServer(isRequest, ContentFile, SizeNewFile);
+	
+EndProcedure
+
+&AtClient
+Procedure AnalyzeBody(Command)
+	
+	isRequest = StrStartsWith(Command.Name, "Request");
+	
+	AddressBody = ?(isRequest, Request_Body, Answer_Body);
+	BodyIsText = ?(isRequest, Object.Request_BodyIsText, Object.Answer_BodyIsText);
+	
+	OpenForm(
+		"Catalog.Unit_MockServiceData.Form.AccessConstructor", 
+		New Structure("PathToValue, AddressBody", ?(BodyIsText, "[text]", "[file]"), AddressBody)
+	);
 	
 EndProcedure
 

@@ -90,6 +90,18 @@ Async Procedure ReloadBody(Command)
 		 
 EndProcedure
 
+&AtClient
+Procedure AnalyzeBody(Command)
+	
+	AddressBody = PutToTempStorage(GetBodyAtServer(), ThisObject.UUID);
+	
+	OpenForm(
+		"Catalog.Unit_MockServiceData.Form.AccessConstructor", 
+		New Structure("PathToValue, AddressBody", ?(Object.BodyIsText, "[text]", "[file]"), AddressBody)
+	);
+	
+EndProcedure
+
 #EndRegion
 
 #Region Private

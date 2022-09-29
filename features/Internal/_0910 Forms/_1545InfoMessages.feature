@@ -790,7 +790,6 @@ Scenario: _154528 message when trying to create Purchase order based on Sales or
 				| 'Service' | 'Rent'     |
 			And I select current line in "List" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table
-			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And in the table "ItemList" I click "Add" button
 			And I click choice button of "Item" attribute in "ItemList" table

@@ -320,45 +320,7 @@ Scenario: _0154035 search the item key selection list
 
 
 
-	
-Scenario: _0154038 check the Deleting of the store field value by line with the service in a document Sales invoice
-	* Open a creation form Sales invoice
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I click the button named "FormCreate"
-	* Add to the table part of the product with the item type - Service
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'     |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
-			| 'Service' | 'Rent'     |
-		And I select current line in "List" table
-		And I activate "Quantity" field in "ItemList" table
-		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
-		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
-	* Deleting of the store field value by line with the service
-		And I activate field named "ItemListStore" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click Clear button of "Store" attribute in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check that the store field has been cleared
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
-		| 'Service'  | 'Rent'      | '1,000' | ''         |
-		And I close all client application windows
+
 
 Scenario: _0154039 check impossibility deleting of the store field by line with the product in a Sales invoice
 	* Open a creation form Sales invoice
@@ -399,44 +361,6 @@ Scenario: _0154039 check impossibility deleting of the store field by line with 
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 	
-Scenario: _0154040 check the Deleting of the store field value by line with the service in a document Purchase order
-	* Open a creation form Purchase order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I click the button named "FormCreate"
-	* Add to the table part of the product with the item type - Service
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'     |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
-			| 'Service' | 'Rent'     |
-		And I select current line in "List" table
-		And I activate "Quantity" field in "ItemList" table
-		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
-		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
-	* Deleting of the store field value by line with the service
-		And I activate field named "ItemListStore" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click Clear button of "Store" attribute in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check that the store field has been cleared
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
-		| 'Service'  | 'Rent'      | '1,000' | ''         |
-		And I close all client application windows
 
 Scenario: _0154041 check impossibility deleting of the store field by line with the product in a Purchase Order
 	* Open a creation form Purchase order
@@ -477,44 +401,7 @@ Scenario: _0154041 check impossibility deleting of the store field by line with 
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 		
-Scenario: _0154042 check the Deleting of the store field value by line with the service in a document Purchase invoice
-	* Open a creation form Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I click the button named "FormCreate"
-	* Add to the table part of the product with the item type - Service
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'     |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
-			| 'Service' | 'Rent'     |
-		And I select current line in "List" table
-		And I activate "Quantity" field in "ItemList" table
-		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
-		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
-	* Deleting of the store field value by line with the service
-		And I activate field named "ItemListStore" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click Clear button of "Store" attribute in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check that the store field has been cleared
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
-		| 'Service'  | 'Rent'      | '1,000' | ''         |
-		And I close all client application windows
+
 
 Scenario: _0154043 check impossibility deleting of the store field by line with the product in a Purchase invoice
 	* Open a creation form Purchase invoice

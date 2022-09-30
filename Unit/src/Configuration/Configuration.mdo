@@ -77,6 +77,7 @@
   <definedTypes>DefinedType.typeFilesOwner</definedTypes>
   <constants>Constant.SaasMode</constants>
   <commonForms>CommonForm.AttachFile</commonForms>
+  <commonForms>CommonForm.Unit_DataContentAnalyzer</commonForms>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
   <catalogs>Catalog.Currencies</catalogs>

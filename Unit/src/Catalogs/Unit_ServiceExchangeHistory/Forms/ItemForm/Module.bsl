@@ -95,8 +95,7 @@ Procedure AnalyzeBody(Command)
 	
 	AddressBody = PutToTempStorage(GetBodyAtServer(), ThisObject.UUID);
 	
-	OpenForm(
-		"Catalog.Unit_MockServiceData.Form.AccessConstructor", 
+	OpenForm("CommonForm.Unit_DataContentAnalyzer", 
 		New Structure("PathToValue, AddressBody", ?(Object.BodyIsText, "[text]", "[file]"), AddressBody)
 	);
 	

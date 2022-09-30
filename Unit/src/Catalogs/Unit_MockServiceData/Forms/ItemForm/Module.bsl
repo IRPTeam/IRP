@@ -83,8 +83,7 @@ Procedure Request_BodyVariablesPathToValueOpening(Item, StandardProcessing)
 		PathToValue = ?(Object.Request_BodyIsText, "[text]", "[file]");
 	EndIf;
 	
-	OpenForm(
-		"Catalog.Unit_MockServiceData.Form.AccessConstructor", 
+	OpenForm("CommonForm.Unit_DataContentAnalyzer", 
 		New Structure("PathToValue, AddressBody", PathToValue, Request_Body), 
 		Item
 	);
@@ -160,8 +159,7 @@ Procedure AnalyzeBody(Command)
 	AddressBody = ?(isRequest, Request_Body, Answer_Body);
 	BodyIsText = ?(isRequest, Object.Request_BodyIsText, Object.Answer_BodyIsText);
 	
-	OpenForm(
-		"Catalog.Unit_MockServiceData.Form.AccessConstructor", 
+	OpenForm("CommonForm.Unit_DataContentAnalyzer", 
 		New Structure("PathToValue, AddressBody", ?(BodyIsText, "[text]", "[file]"), AddressBody)
 	);
 	

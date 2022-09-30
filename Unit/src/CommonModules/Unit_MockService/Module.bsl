@@ -250,7 +250,10 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue) Export
 		If CurrentDataType = "[text]" Then
 			ValueText = GetStringFromBinaryData(DataForValue);
 			Return getValueOfBodyVariableByPath(NextPath, ValueText);
-			
+		
+		ElsIf CurrentDataType = "[file]" Then
+			Return getValueOfBodyVariableByPath(NextPath, DataForValue);
+				
 		ElsIf CurrentDataType = "[zip]" Then
 	 		ReadStream = New MemoryStream(GetBinaryDataBufferFromBinaryData(DataForValue));
 	 		ZIP = New ZipFileReader(ReadStream);

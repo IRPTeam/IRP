@@ -10,7 +10,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.AddressBody = Parameters.AddressBody;
 	
 	If IsBlankString(ThisObject.AddressBody) Then
-		
+		Items.GroupPages.CurrentPage = Items.GroupLoadData;
 	EndIf;
 	
 	If Not IsBlankString(ThisObject.PathToValue) Then
@@ -25,6 +25,24 @@ EndProcedure
 #EndRegion
 
 #Region FormCommandsEventHandlers
+
+&AtClient
+Procedure LoadText(Command)
+	
+	LoadTextAtServer();
+
+EndProcedure
+
+&AtClient
+Procedure LoadFile(Command)
+	
+	BeginPutFileToServer(
+		New NotifyDescription("AfterPutFileToServer", ThisObject), , , , 
+		New PutFilesDialogParameters(), 
+		ThisObject.UUID);
+	
+EndProcedure
+
 
 // Del command.
 // 
@@ -158,6 +176,46 @@ Procedure ReloadContent()
 		
 		CurrentTime = CurrentTime + 1;
 	EndDo;
+	
+EndProcedure
+
+&AtServer
+Procedure LoadTextAtServer()
+	
+	ThisObject.AddressBody = PutToTempStorage(GetBinaryDataFromString(ThisObject.InputText), ThisObject.UUID);
+	
+	ThisObject.InputText = "";
+	Items.GroupPages.CurrentPage = Items.GroupAnalyze;
+	
+	ThisObject.PathToValue = "[text]";
+	ThisObject.PatchParts.Add(ThisObject.PathToValue);
+	
+	ReloadContent();
+
+EndProcedure
+
+// After put file to server.
+// 
+// Parameters:
+//  FileDescription - Structure:
+//  * PutFileCanceled - Boolean
+//  * Address - String
+//  AddParameters - Undefined
+&AtClient
+Procedure AfterPutFileToServer(FileDescription, AddParameters) Export
+	
+	If FileDescription.PutFileCanceled Then
+		Return;
+	EndIf;
+	
+	ThisObject.AddressBody = FileDescription.Address;
+	
+	Items.GroupPages.CurrentPage = Items.GroupAnalyze;
+	
+	ThisObject.PathToValue = "[file]";
+	ThisObject.PatchParts.Add(ThisObject.PathToValue);
+	
+	ReloadContent();
 	
 EndProcedure
 

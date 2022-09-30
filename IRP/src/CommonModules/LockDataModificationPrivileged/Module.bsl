@@ -426,18 +426,14 @@ EndFunction
 //  Structure - Set query parameters
 Function SetQueryParameters(MetadataName, Rule)
 	
-	Params = New Structure;
-	DCSTemplate = LockDataModificationReuse.GetDSCTemplate(MetadataName);
-	Settings = Rule.DCS.Get(); // DataCompositionSettings
-	Composer = New DataCompositionTemplateComposer();
-	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
+	Template = LockDataModificationReuse.GetDSCTemplate(MetadataName, Rule);
 	
+	Params = New Structure;
 	For Each Param In Template.ParameterValues Do
 		Params.Insert(Param.Name, Param.Value);
 	EndDo;
 	Return Params;
 EndFunction
-
 
 Function GetResultLockCheck(Query)
 	ArrayOfLockedReasons = New Array;

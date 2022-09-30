@@ -4,10 +4,11 @@
 // 
 // Parameters:
 //  MetadataName - String - Metadata name
+//  Rule - CatalogRef.LockDataModificationReasons - Rule
 // 
 // Returns:
-//  DataCompositionSchema - Get DSCTemplate
-Function GetDSCTemplate(Val MetadataName) Export
+//  DataCompositionTemplate - Get DSCTemplate
+Function GetDSCTemplate(Val MetadataName, Rule) Export
 	DCSTemplate = Catalogs.LockDataModificationReasons.GetTemplate("DCS");
 	DataSources = DCSTemplate.DataSources.Add();
 	DataSources.DataSourceType = "Local";
@@ -22,5 +23,9 @@ Function GetDSCTemplate(Val MetadataName) Export
 	DataSet.Query = Query;
 	DataSet.Name = MetadataName;
 	DataSet.DataSource = DataSources.Name;
-	Return DCSTemplate
+	
+	Settings = Rule.DCS.Get(); // DataCompositionSettings
+	Composer = New DataCompositionTemplateComposer();
+	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
+	Return Template
 EndFunction

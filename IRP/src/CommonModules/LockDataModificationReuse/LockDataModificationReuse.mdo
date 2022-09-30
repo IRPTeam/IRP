@@ -6,5 +6,5 @@
     <value>Lock data modification reuse</value>
   </synonym>
   <server>true</server>
-  <returnValuesReuse>DuringSession</returnValuesReuse>
+  <returnValuesReuse>DuringRequest</returnValuesReuse>
 </mdclass:CommonModule>

@@ -287,7 +287,11 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue) Export
 			Return Result;
 			
 		ElsIf IsBlankString(NextPath) Then
-			CurrentValue = DataForValue[CurrentDataType]; // Arbitrary
+			If CurrentDataType = "[text]" Then
+				CurrentValue = DataForValue.Sequence().GetText(0);
+			Else
+				CurrentValue = DataForValue[CurrentDataType]; // XDTODataObject, String
+			EndIf;
 			If TypeOf(CurrentValue) = Type("XDTODataObject") Then
 				Result = "XDTODataObject";
 				For Each XDTOProperty In CurrentValue.Properties() Do
@@ -360,6 +364,7 @@ Function getAvailableCommands(CurrentCommands, TypeData, AddInfo) Export
 	
 	ElsIf TypeData = Type("String") Then
 		Result.Add("[file]");
+		Result.Add("[zip]");
 		Result.Add("[text]");
 		Result.Add("[xml]");
 		Result.Add("[json]");

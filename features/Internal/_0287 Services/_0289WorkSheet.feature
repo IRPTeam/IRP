@@ -415,11 +415,16 @@ Scenario: _0293008 create SI based on WS without bases document
 			| '1' | 'Assembly'     | 'Assembly'     | 'pcs'  | '1,000'    | '18%' |
 			| '2' | 'Installation' | 'Installation' | 'pcs'  | '1,000'    | '18%' |
 			| '3' | 'Delivery'     | 'Delivery'     | 'pcs'  | '1,000'    | '18%' |
-		And "WorkSheets" table became equal
-			| '#' | 'Key' | 'Work sheet'     | 'Quantity' | 'Quantity in work sheet' | 'Basis key' |
-			| '1' | '*'   | '$$WorkSheet4$$' | '1,000'    | '1,000'                  | '*'         |
-			| '2' | '*'   | '$$WorkSheet4$$' | '1,000'    | '1,000'                  | '*'         |
-			| '3' | '*'   | '$$WorkSheet4$$' | '1,000'    | '1,000'                  | '*'         |
+		And in the table "ItemList" I click "Work sheets" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Assembly (Assembly)'         | '1,000'   | '1,000'              | '1,000'    |
+			| '$$WorkSheet4$$'              | ''        | '1,000'              | '1,000'    |
+			| 'Installation (Installation)' | '1,000'   | '1,000'              | '1,000'    |
+			| '$$WorkSheet4$$'              | ''        | '1,000'              | '1,000'    |
+			| 'Delivery (Delivery)'         | '1,000'   | '1,000'              | '1,000'    |
+			| '$$WorkSheet4$$'              | ''        | '1,000'              | '1,000'    |
+		And I close current window
 		Then the form attribute named "Branch" became equal to "Workshop 1"
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
@@ -467,10 +472,14 @@ Scenario: _0293009 create SI based on WS (with WO and SO)
 			| '#' | 'Amount' | 'Special offer'    |
 			| '1' | '5,00'   | 'DocumentDiscount' |
 			| '2' | '5,00'   | 'DocumentDiscount' |
-		And "WorkSheets" table became equal
-			| '#' | 'Key' | 'Work sheet'     | 'Quantity' | 'Quantity in work sheet' | 'Basis key' |
-			| '1' | '*'   | '$$WorkSheet3$$' | '1,000'    | '1,000'                  | '*'         |
-			| '2' | '*'   | '$$WorkSheet3$$' | '1,000'    | '1,000'                  | '*'         |
+		And in the table "ItemList" I click "Work sheets" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Installation (Installation)' | '1,000'   | '1,000'              | '1,000'    |
+			| '$$WorkSheet3$$'              | ''        | '1,000'              | '1,000'    |
+			| 'Assembly (Assembly)'         | '1,000'   | '1,000'              | '1,000'    |
+			| '$$WorkSheet3$$'              | ''        | '1,000'              | '1,000'    |
+		And I close current window
 		Then the form attribute named "ManagerSegment" became equal to "Region 1"
 		Then the form attribute named "Branch" became equal to "Front office"
 		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "10,00"

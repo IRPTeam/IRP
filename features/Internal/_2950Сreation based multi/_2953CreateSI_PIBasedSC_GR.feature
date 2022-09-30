@@ -338,10 +338,12 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And "ItemList" table contains lines
 				| 'VAT' | 'Item'     | 'Price'  | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Quantity'      | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order'                               |
 				| '18%' | 'Trousers' | '400,00' | '36/Yellow' | '649,77'     | '1%'       | '10,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '3 350,23'   | '4 000,00'     | 'Store 02' | '*' |
-		And "ShipmentConfirmationsTree" table contains lines
-			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'     | 'Quantity'      |
-			| 'Trousers' | '36/Yellow' | ''                           | '10,000'  | '10,000' | '10,000' |
-			| ''         | ''          | 'Shipment confirmation 460*' | ''        | '10,000' | '10,000' |
+		And in the table "ItemList" I click "Shipment confirmations" button
+		And "DocumentsTree" table contains lines
+			| 'Presentation'               | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Trousers (36/Yellow)'       | '10,000'  | '10,000'             | '10,000'   |
+			| 'Shipment confirmation 460*' | ''        | '10,000'             | '10,000'   |
+		And I close current window
 		And I click the button named "FormPostAndClose"
 		When I click command interface button "Sales invoice (create)"
 		And Delay 2
@@ -355,12 +357,14 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 			| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Quantity'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Delivery date' |
 			| '*'          | 'Trousers' | '*'      | '38/Yellow' | '5,000' | ''              | '*'          | 'pcs'  | '*'            | 'Store 02' | '*'             |
 			| '*'          | 'Trousers' | '*'      | '36/Yellow' | '5,000' | ''              | '*'          | 'pcs'  | '*'            | 'Store 02' | '*'             |
-		And "ShipmentConfirmationsTree" table contains lines
-			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity'     |
-			| 'Trousers' | '38/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
-			| ''         | ''          | 'Shipment confirmation 458*' | ''        | '5,000' | '5,000' |
-			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
-			| ''         | ''          | 'Shipment confirmation 459*' | ''        | '5,000' | '5,000' |
+		And in the table "ItemList" I click "Shipment confirmations" button
+		And "DocumentsTree" table contains lines
+			| 'Presentation'               | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Trousers (38/Yellow)'       | '5,000'   | '5,000'              | '5,000'    |
+			| 'Shipment confirmation 458*' | ''        | '5,000'              | '5,000'    |
+			| 'Trousers (36/Yellow)'       | '5,000'   | '5,000'              | '5,000'    |
+			| 'Shipment confirmation 459*' | ''        | '5,000'              | '5,000'    |	
+		And I close current window
 		And I click the button named "FormPostAndClose"
 	And I close all client application windows
 
@@ -688,10 +692,12 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
 			| '400,00' | 'Trousers' | '18%' | '36/Yellow' | '5,000'    | '324,88'     | '1%'       | 'Basic Price Types' | 'pcs'  | '1 675,12'   | '2 000,00'     | 'Store 02' | '*'           |
-			And "ShipmentConfirmationsTree" table contains lines
-			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity' |
-			| 'Trousers' | '36/Yellow' | ''                           | '5,000'   | '5,000' | '5,000'    |
-			| ''         | ''          | 'Shipment confirmation 466*' | ''        | '5,000' | '5,000'    |
+			And in the table "ItemList" I click "Shipment confirmations" button
+			And "DocumentsTree" table contains lines
+				| 'Presentation'               | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+				| 'Trousers (36/Yellow)'       | '5,000'   | '5,000'              | '5,000'    |
+				| 'Shipment confirmation 466*' | ''        | '5,000'              | '5,000'    |
+			And I close current window			
 		And I click the button named "FormPostAndClose"
 		When I click command interface button "Sales invoice (create)"
 		And Delay 2
@@ -703,10 +709,12 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 			And "ItemList" table contains lines
 			| 'Price' | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |
 			| '68,48' | 'Trousers' | '18%' | '38/Yellow' | '5,000'    | '55,62'      | '1%'       | 'Basic Price Types' | 'pcs'  | '286,78'     | '342,40'       | 'Store 02' | '*'           |
-			And "ShipmentConfirmationsTree" table contains lines
-			| 'Item'     | 'Item key'  | 'Shipment confirmation'      | 'Invoice' | 'SC'    | 'Quantity'     |
-			| 'Trousers' | '38/Yellow' | ''                           | '5,000'   | '5,000' | '5,000' |
-			| ''         | ''          | 'Shipment confirmation 465*' | ''        | '5,000' | '5,000' |
+			And in the table "ItemList" I click "Shipment confirmations" button
+			And "DocumentsTree" table contains lines
+				| 'Presentation'               | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+				| 'Trousers (38/Yellow)'       | '5,000'   | '5,000'              | '5,000'    |
+				| 'Shipment confirmation 465*' | ''        | '5,000'              | '5,000'    |
+			And I close current window				
 		If the field named "Agreement" is equal to "Basic Partner terms, TRY" Then
 			And "ItemList" table contains lines
 			| 'Price' | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Tax amount' | 'SalesTax' | 'Price type'        | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Sales order' |

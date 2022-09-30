@@ -82,9 +82,11 @@ Scenario: _045501 preparation (work sheet movements)
 			| "Documents.WorkOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.WorkSheet.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
-		When Create WO (with no reserve)
+		When Create WO and WS (with no reserve)
 		And I execute 1C:Enterprise script at server
 			| "Documents.WorkOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.WorkSheet.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: _045502 check preparation
 	When check preparation
@@ -112,27 +114,27 @@ Scenario: _045503 check WorkSheet movements by the Register  "R4010 Actual stock
 			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '4'         | 'Store 01'   | 'Material 2' | ''                  |
 		And I close all client application windows
 		
-Scenario: _045504 check WorkSheet movements by the Register  "R4011 Free stocks"
-	* Select Work sheet
-		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+Scenario: _045504 check WorkOrder movements by the Register  "R4011 Free stocks" (stock)
+	* Select Work order
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '3' |
+			| '31' |
 	* Check movements by the Register  "R4011 Free stocks" 
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17' | ''            | ''                    | ''          | ''           | ''           |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''           |
-			| 'Register  "R4011 Free stocks"'          | ''            | ''                    | ''          | ''           | ''           |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''           |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'   |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '1,521'     | 'Store 01'   | 'Material 3' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '2'         | 'Store 01'   | 'Material 1' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '2'         | 'Store 01'   | 'Material 1' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '2'         | 'Store 01'   | 'Material 2' |
-			| ''                                       | 'Expense'     | '22.09.2022 15:55:17' | '4'         | 'Store 01'   | 'Material 2' |	
+			| 'Work order 31 dated 22.09.2022 12:41:21' | ''            | ''                    | ''          | ''           | ''           |
+			| 'Document registrations records'          | ''            | ''                    | ''          | ''           | ''           |
+			| 'Register  "R4011 Free stocks"'           | ''            | ''                    | ''          | ''           | ''           |
+			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''           |
+			| ''                                        | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'   |
+			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '1,521'     | 'Store 01'   | 'Material 3' |
+			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '2'         | 'Store 01'   | 'Material 1' |
+			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '2'         | 'Store 01'   | 'Material 1' |
+			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '2'         | 'Store 01'   | 'Material 2' |
+			| ''                                        | 'Expense'     | '22.09.2022 12:41:21' | '4'         | 'Store 01'   | 'Material 2' |	
 		And I close all client application windows				
 
 Scenario: _045505 check WorkSheet movements by the Register  "R4050 Stock inventory"
@@ -176,6 +178,48 @@ Scenario: _045506 check WorkSheet movements by the Register  "T3010S Row ID info
 			| ''                                       | 'Row ref'                              | 'Price' | 'Currency' | 'Unit' | 'Key'                                  | 'Row ID'                               | 'Unique ID' | 'Basis'                                   | 'Basis key'                            |
 			| ''                                       | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' | ''      | ''         | 'pcs'  | '8eb2727f-a1ed-4b08-86fe-c827c2a16a58' | 'f81d8d3d-3ac3-4b17-ab39-bea7738990fb' | '*'         | 'Work order 31 dated 22.09.2022 12:41:21' | 'fc41e496-14e3-4646-b488-c33a97dfe6dd' |
 			| ''                                       | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' | ''      | ''         | 'pcs'  | '400f5011-7637-4e38-a8cb-37b2e5a5025e' | 'c4929c56-c974-4162-b7b9-debfcbba6b3b' | '*'         | 'Work order 31 dated 22.09.2022 12:41:21' | '008ffbc8-93f9-4022-9276-ae3f150c1736' |
+		And I close all client application windows
+
+Scenario: _045507 check WorkOrder movements by the Register  "R4011 Free stocks" (no reserve)
+	* Select Work order
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '32' |
+	* Check movements by the Register  "R4011 Free stocks" 
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Work order 32 dated 28.09.2022 19:53:33' | ''            | ''                    | ''          | ''           | ''           |
+			| 'Document registrations records'          | ''            | ''                    | ''          | ''           | ''           |
+			| 'Register  "R4011 Free stocks"'           | ''            | ''                    | ''          | ''           | ''           |
+			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''           |
+			| ''                                        | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'   |
+			| ''                                        | 'Expense'     | '28.09.2022 19:53:33' | '1,521'     | 'Store 01'   | 'Material 3' |
+			| ''                                        | 'Expense'     | '28.09.2022 19:53:33' | '2'         | 'Store 01'   | 'Material 1' |
+			| ''                                        | 'Expense'     | '28.09.2022 19:53:33' | '2'         | 'Store 01'   | 'Material 1' |
+			| ''                                        | 'Expense'     | '28.09.2022 19:53:33' | '2'         | 'Store 01'   | 'Material 2' |				
+		And I close all client application windows
+
+Scenario: _045508 check WorkSheet movements by the Register  "R4011 Free stocks" (no reserve)
+		And I close all client application windows
+	* Select Work sheet
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R4011 Free stocks" 
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Work sheet 4 dated 29.09.2022 19:07:21' | ''            | ''                    | ''          | ''           | ''           |
+			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''           |
+			| 'Register  "R4011 Free stocks"'          | ''            | ''                    | ''          | ''           | ''           |
+			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''           |
+			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'   |
+			| ''                                       | 'Expense'     | '29.09.2022 19:07:21' | '4'         | 'Store 01'   | 'Material 2' |		
 		And I close all client application windows
 
 Scenario: _045510 check WorkOrder movements by the Register  "T3010S Row ID info"

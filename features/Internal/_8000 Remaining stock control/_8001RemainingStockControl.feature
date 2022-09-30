@@ -2481,6 +2481,169 @@ Scenario:_800051 check remaining stock control in the Work Sheet
 		And I finish line editing in "Materials" table
 						
 
+Scenario:_800051 check remaining stock control in the Work Sheet
+	And I close all client application windows
+	* Create WS
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I click "Create" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I activate field named "MaterialsLineNumber" in "Materials" table
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Add first work
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I activate field named "MaterialsLineNumber" in "Materials" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Installation' |
+		And I select current line in "List" table
+		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
+		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Furniture installation' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "MaterialsQuantity" in "Materials" table
+		And I go to line in "Materials" table
+			| 'Item'       | 'Item (BOM)' | 'Item key'   | 'Item key (BOM)' | 'Quantity' |
+			| 'Material 1' | 'Material 1' | 'Material 1' | 'Material 1'     | '2,000'    |
+		And I select current line in "Materials" table
+		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
+		And I finish line editing in "Materials" table
+	* Add second work
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Assembly' |
+		And I select current line in "List" table
+		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
+		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Assembly' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "MaterialsQuantity" in "Materials" table
+		And I go to line in "Materials" table
+			| 'Item'       | 'Item (BOM)' | 'Item key'   | 'Item key (BOM)' | 'Quantity' |
+			| 'Material 1' | 'Material 1' | 'Material 1' | 'Material 1'     | '2,000'    |
+		And I select current line in "Materials" table
+		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' |
+			| 'TRY'  |
+		And I select current line in "List" table		
+	* Check stock control
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Line No. [1] [Material 1 Material 1] R4010B_ActualStocks remaining: 10 . Required: 42 . Lacking: 32 .'|
+		And I close all client application windows
+				
+
+Scenario:_800052 check remaining stock control in the Work Order
+	And I close all client application windows
+	* Create WO
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I click "Create" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I activate field named "MaterialsLineNumber" in "Materials" table
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                      |
+			| 'Basic Partner terms, without VAT' |
+		And I select current line in "List" table			
+	* Add first work
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I activate field named "MaterialsLineNumber" in "Materials" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Installation' |
+		And I select current line in "List" table
+		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
+		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Furniture installation' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table	
+		And I activate field named "MaterialsQuantity" in "Materials" table
+		And I go to line in "Materials" table
+			| 'Item'       | 'Item key'   | 'Quantity' |
+			| 'Material 1' | 'Material 1' | '2,000'    |
+		And I select current line in "Materials" table
+		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
+		And I finish line editing in "Materials" table
+	* Add second work
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Assembly' |
+		And I select current line in "List" table
+		And I activate field named "ItemListBillOfMaterials" in "ItemList" table
+		And I click choice button of the attribute named "ItemListBillOfMaterials" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Assembly' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I activate field named "MaterialsQuantity" in "Materials" table
+		And I go to line in "Materials" table
+			| 'Item'       | 'Item key'   | 'Quantity' |
+			| 'Material 1' | 'Material 1' | '2,000'    |
+		And I select current line in "Materials" table
+		And I input "21,000" text in the field named "MaterialsQuantity" of "Materials" table
+		And I select "Approved" exact value from the drop-down list named "Status"		
+	* Check stock control
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Line No. [1] [Material 1 Material 1] R4010B_ActualStocks remaining: 10 . Required: 42 . Lacking: 32 .'|
+		And I close all client application windows
+
+
 Scenario:_800055 check remaining stock control when unpost/change Sales order closing
 		And I close all client application windows
 	* Trying to unpost 

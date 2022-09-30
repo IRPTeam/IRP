@@ -137,7 +137,6 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '45 819'   |
 			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '45 819'   |
 		And I close current window
-		Then the number of "ShipmentConfirmationsTree" table lines is "равно" 0
 		Then the form attribute named "ManagerSegment" became equal to "Region 1"
 		Then the form attribute named "Branch" became equal to "Distribution department"
 		Then the form attribute named "Author" became equal to "en description is empty"
@@ -612,13 +611,14 @@ Scenario: _024007 create SI based on SC	without SO
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
-		And "ShipmentConfirmationsTree" table became equal
-			| 'Item'  | 'Shipment confirmation'                              | 'Item key' | 'Invoice' | 'SC'     | 'Quantity'      |
-			| 'Dress' | ''                                                   | 'S/Yellow' | '15,000'  | '15,000' | '15,000' |
-			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '10,000' | '10,000' |
-			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '5,000'  | '5,000'  |
-			| 'Dress' | ''                                                   | 'L/Green'  | '8,000'   | '8,000'  | '8,000'  |
-			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '8,000'  | '8,000'  |
+		And in the table "ItemList" I click "Shipment confirmations" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                                       | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Dress (S/Yellow)'                                   | '15,000'  | '15,000'             | '15,000'   |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''        | '10,000'             | '10,000'   |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''        | '5,000'              | '5,000'    |
+			| 'Dress (L/Green)'                                    | '8,000'   | '8,000'              | '8,000'    |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''        | '8,000'              | '8,000'    |	
 		And I close all client application windows
 				
 

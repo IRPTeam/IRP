@@ -39,7 +39,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
 #EndRegion
@@ -47,19 +47,43 @@ EndProcedure
 #Region UNDOPOSTING
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	DataMapWithLockFields = New Map();
+	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+	Parameters.Insert("Unposting", True);
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+EndProcedure
+
+#EndRegion
+
+#Region CHECK_AFTER_WRITE
+
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	
+	If StatusInfo.Posting Then
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod",
+			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
+	EndIf;
+	
+	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+EndProcedure
+
+Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "TableDataPath", "Object.Materials");
+	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.WorkOrder.Materials", AddInfo);
 EndProcedure
 
 #EndRegion
@@ -83,6 +107,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(Materials());
+	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	Return QueryArray;
 EndFunction
 

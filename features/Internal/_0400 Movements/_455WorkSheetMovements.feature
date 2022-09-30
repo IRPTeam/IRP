@@ -82,7 +82,7 @@ Scenario: _045501 preparation (work sheet movements)
 			| "Documents.WorkOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.WorkSheet.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
-		When Create WO (with no reserve)
+		When Create WO and WS (with no reserve)
 		And I execute 1C:Enterprise script at server
 			| "Documents.WorkOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server

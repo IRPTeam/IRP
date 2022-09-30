@@ -295,22 +295,34 @@ EndFunction
 
 Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
 
-	ArrayOfLockedReasons = New Array;
-	
-	DataIsLocked = isDataIsLocked_ByRef_SimpleMode(ArrayOfLockedReasons, SourceParams, Rules, CheckCurrent, AddInfo);
-	
-	If Not DataIsLocked Then
-		DataIsLocked = DataIsLocked_ByRef_AdvancedMode(ArrayOfLockedReasons, SourceParams, Rules, CheckCurrent, AddInfo);
+	ArrayOfLockedReasonsByAdvanced = New Array;
+
+	ArrayOfLockedReasonsBySimple = isDataIsLocked_ByRef_SimpleMode(SourceParams, Rules, CheckCurrent, AddInfo);
+	If ArrayOfLockedReasonsBySimple.Count() = 0 Then
+		ArrayOfLockedReasonsByAdvanced = DataIsLocked_ByRef_AdvancedMode(SourceParams, Rules, CheckCurrent, AddInfo);
 	EndIf;
 	
-	Return DataIsLocked;
-	
+	If ArrayOfLockedReasonsBySimple.Count() OR ArrayOfLockedReasonsByAdvanced.Count() Then
+		ArrayOfLockedReasons = New Array;
+		ArrayOfLockedReasons.Add(R().InfoMessage_019);		
+		If ArrayOfLockedReasonsBySimple.Count() Then
+			ArrayOfLockedReasons.Add(StrConcat(ArrayOfLockedReasonsBySimple, Chars.LF));
+		EndIf;
+		
+		If ArrayOfLockedReasonsByAdvanced.Count() Then
+			ArrayOfLockedReasons.Add(StrConcat(ArrayOfLockedReasonsByAdvanced, Chars.LF));
+		EndIf;
+		CommonFunctionsClientServer.ShowUsersMessage(StrConcat(ArrayOfLockedReasons, Chars.LF));
+		Return True;
+	Else
+		Return False;
+	EndIf;
+
 EndFunction
 
 // Data is locked by ref simple mode.
 // 
 // Parameters:
-//  ArrayOfLockedReasons - Array of CatalogRef.LockDataModificationReasons - Array of locked reasons
 //  SourceParams - See FillLockDataSettings
 //  Rules - See GetRuleList
 //  CheckCurrent - Boolean - Check current
@@ -318,7 +330,7 @@ EndFunction
 // 
 // Returns:
 //  Boolean - Data is locked by ref simple mode
-Function isDataIsLocked_ByRef_SimpleMode(ArrayOfLockedReasons, SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
+Function isDataIsLocked_ByRef_SimpleMode(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
 	Filter = New Array();
 	Fields = New Array();
 	Query = New Query();
@@ -343,7 +355,7 @@ Function isDataIsLocked_ByRef_SimpleMode(ArrayOfLockedReasons, SourceParams, Rul
 	EndDo;
 	
 	If Not FindSimpleRules Then
-		Return False;
+		Return New Array;
 	EndIf;
 	
 	Query.Text = "SELECT DISTINCT " + Chars.LF + StrConcat(Fields, "," + Chars.LF) + Chars.LF + "WHERE " + StrConcat(
@@ -364,12 +376,75 @@ Function isDataIsLocked_ByRef_SimpleMode(ArrayOfLockedReasons, SourceParams, Rul
 		EndIf;
 		Query.SetParameter("SourceParam" + Index, SourceValue);
 	EndDo;
+	
+	Return GetResultLockCheck(Query);
+	
+EndFunction
+
+Function DataIsLocked_ByRef_AdvancedMode(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
+	
+	Query = New Query;
+	
+	QueryText = New Array;
+	For Index = 0 To Rules.Count() - 1 Do
+		Rule = Rules[Index].LockDataModificationReasons;
+		If Not Rule.AdvancedMode Then
+			Continue;
+		EndIf;
+		
+		RuleUUID = StrReplace(String(Rule.UUID()), "-", "");
+		QueryPart = StrReplace(Rule.QueryFilter, "&REF_", "&REF_" + RuleUUID);
+		QueryPart = StrReplace(QueryPart, "&P", "&P_" + RuleUUID + "_");
+		QueryText.Add(QueryPart);
+		Params = SetQueryParameters(SourceParams.MetadataName, Rule);
+		For Each Param In Params Do
+			Query.SetParameter(StrReplace(String(Param.Key), "P", "P_" + RuleUUID + "_"), Param.Value);
+		EndDo;
+		Query.SetParameter("REF_" + RuleUUID, Rule);
+	EndDo;
+	
+	If Not QueryText.Count() Then
+		Return New Array;
+	EndIf;
+	
+	Query.Text = "SELECT " + Chars.LF + StrConcat(QueryText, "," + Chars.LF) + Chars.LF +
+				 " FROM " + SourceParams.MetadataName + " AS DS" + Chars.LF +
+				 " WHERE DS.Ref = &Ref";
+	Query.SetParameter("Ref", SourceParams.Source.Ref);
+	
+	Return GetResultLockCheck(Query);
+	
+EndFunction
+
+// Get query parameters.
+// 
+// Parameters:
+//  MetadataName - String - Metadata name
+//  Rule - CatalogRef.LockDataModificationReasons - Rule
+// 
+// Returns:
+//  Structure - Set query parameters
+Function SetQueryParameters(MetadataName, Rule)
+	
+	Params = New Structure;
+	DCSTemplate = LockDataModificationReuse.GetDSCTemplate(MetadataName);
+	Settings = Rule.DCS.Get(); // DataCompositionSettings
+	Composer = New DataCompositionTemplateComposer();
+	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
+	
+	For Each Param In Template.ParameterValues Do
+		Params.Insert(Param.Name, Param.Value);
+	EndDo;
+	Return Params;
+EndFunction
+
+
+Function GetResultLockCheck(Query)
+	ArrayOfLockedReasons = New Array;
+	
 	QueryResult = Query.Execute();
 	If Not QueryResult.IsEmpty() Then
 		ResultTable = QueryResult.Unload();
-		//@skip-check property-return-type
-		//@skip-check invocation-parameter-type-intersect
-		ArrayOfLockedReasons.Add(R().InfoMessage_019);
 		For Each Column In ResultTable.Columns Do
 			If Not ValueIsFilled(ResultTable[0][Column.Name]) Then
 				Continue;
@@ -378,52 +453,8 @@ Function isDataIsLocked_ByRef_SimpleMode(ArrayOfLockedReasons, SourceParams, Rul
 			ArrayOfLockedReasons.Add(ResultTable[0][Column.Name]);
 		EndDo;
 	EndIf;
-	Return ArrayOfLockedReasons.Count() > 0;
-	
+	Return ArrayOfLockedReasons
 EndFunction
-
-Function DataIsLocked_ByRef_AdvancedMode(ArrayOfLockedReasons, SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
-	For Index = 0 To Rules.Count() - 1 Do
-		If Not Rules[Index].LockDataModificationReasons.AdvancedMode Then
-			Continue;
-		EndIf;
-
-		Settings = Rules[Index].LockDataModificationReasons.DCS.Get(); // DataCompositionSettings
-		InitDataCompositionSchemeForRef(Settings, SourceParams.MetadataName, CheckCurrent);
-	EndDo;
-	Return True;
-EndFunction
-
-// Init data composition scheme for ref.
-// 
-// Parameters:
-//  Settings - DataCompositionSettings - Settings
-//  MetadataName - String - Metadata name
-Procedure InitDataCompositionSchemeForRef(Settings, MetadataName, CheckCurrent)
-	
-	DCSTemplate = Catalogs.LockDataModificationReasons.GetTemplate("DCS");
-	DCSTemplate.DataSources.Clear();
-	DataSources = DCSTemplate.DataSources.Add();
-	DataSources.DataSourceType = "Local";
-	DataSources.Name = "DataSource";
-	
-	Query = 
-	"SELECT 
-	|	DataSet.Ref AS Ref
-	|FROM
-	|    " + MetadataName + " AS DataSet";
-	DataSet = DCSTemplate.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
-	DataSet.Query = Query;
-	DataSet.Name = MetadataName;
-	DataSet.DataSource = DataSources.Name;
-
-	Composer = New DataCompositionTemplateComposer();
-	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
-
-	Processor = New DataCompositionProcessor();
-	Processor.Initialize(Template);
-
-EndProcedure
 
 // Save rule settings.
 // 

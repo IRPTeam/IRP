@@ -378,6 +378,7 @@
   <commonModules>CommonModule.LocalizationEvents</commonModules>
   <commonModules>CommonModule.LocalizationReuse</commonModules>
   <commonModules>CommonModule.LocalizationServer</commonModules>
+  <commonModules>CommonModule.LockDataModificationReuse</commonModules>
   <commonModules>CommonModule.LockDataModificationPrivileged</commonModules>
   <commonModules>CommonModule.MetadataInfo</commonModules>
   <commonModules>CommonModule.MobileEvents</commonModules>

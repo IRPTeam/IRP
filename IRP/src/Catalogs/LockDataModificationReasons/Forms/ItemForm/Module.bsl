@@ -23,10 +23,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	If Object.SetOneRuleForAllObjects Then
 		If Object.RuleList.Count() Then
-			FillAttributeListHead(Object, Items.Attribute.ChoiceList);
+			FillAttributeListHead(Items.Attribute.ChoiceList);
 		EndIf;
 	EndIf;
-	
+
 EndProcedure
 
 // Notification processing.
@@ -57,7 +57,7 @@ EndProcedure
 Procedure OnReadAtServer(CurrentObject)
 	If CurrentObject.AdvancedMode Then
 		Settings = CurrentObject.DCS.Get(); // DataCompositionSettings
-		UpdateQuery(ThisObject, Settings);
+		UpdateQueryFromServer(Settings);
 	EndIf;
 EndProcedure
 
@@ -98,6 +98,17 @@ Procedure SetCurrentUser(Command)
 	SetCurrentUserAtServer();
 EndProcedure
 
+&AtClient
+Procedure AdvancedModeOnChange(Item)
+	SetVisible();
+	UpdateQueryFromClient();
+EndProcedure
+
+&AtClient
+Procedure RuleListOnChange(Item)
+	UpdateQueryFromClient();
+EndProcedure
+
 #EndRegion
 
 #Region Privat
@@ -112,6 +123,18 @@ Procedure SetVisible()
 	Items.RuleListSetValueAsCode.Visible = Not Object.SetOneRuleForAllObjects;
 	Items.GroupRuleSettings.Visible = Object.SetOneRuleForAllObjects And Not Object.AdvancedMode;
 	Items.GroupAdvancedRules.Visible = Object.AdvancedMode;
+EndProcedure
+
+&AtClient
+Procedure BeforeWrite(Cancel, WriteParameters)
+	UpdateQueryFromClient();
+EndProcedure
+
+&AtClient
+Procedure PagesMainOnCurrentPageChange(Item, CurrentPage)
+	If CurrentPage = Items.GroupFilterQuery Then
+		UpdateQueryFromClient();
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -145,28 +168,13 @@ Procedure SetOnlyReadModeByResponsibleUser()
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure AdvancedModeOnChange(Item)
-	SetVisible();
-	UpdateQueryFromServer();
-EndProcedure
-
-&AtClient
-Procedure RuleListOnChange(Item)
-	If Object.AdvancedMode Then
-		UpdateQueryFromServer();
-	EndIf;
-EndProcedure
-
 &AtServer
-Procedure UpdateQueryFromServer()
-	UpdateQuery(ThisObject, SettingsComposer.GetSettings());
+Procedure UpdateQueryFromServer(Settings = Undefined)
+	UpdateQuery(ThisObject, ?(Settings = Undefined, SettingsComposer.GetSettings(), Settings), FillAttributeListHead());
 EndProcedure
 
 &AtServerNoContext
-Procedure UpdateQuery(Form, Settings)
-
-	ValueListAvailableField = FillAttributeListHead(Form.Object);
+Procedure UpdateQuery(Form, Settings, ValueListAvailableField)
 
 	If ValueListAvailableField.Count() = 0 Then
 		Return;
@@ -180,9 +188,9 @@ Procedure UpdateQuery(Form, Settings)
 	
 	AvailableField = New Array;
 	For Each Row In ValueListAvailableField Do
-		AvailableField.Add("DataSet." + StrSplit(String(Row), ".")[StrSplit(String(Row), ".").UBound()]);
+		AvailableField.Add("DS." + StrSplit(String(Row), ".")[StrSplit(String(Row), ".").UBound()]);
 	EndDo;
-	AvailableFields = StrConcat(AvailableField, ", ");
+	AvailableFields = StrConcat(AvailableField, ", " + Chars.LF);
 	For Each Row In Form.Object.RuleList Do
 		If Row.DisableRule Or IsBlankString(Row.Type) Then
 			Continue;
@@ -195,7 +203,7 @@ Procedure UpdateQuery(Form, Settings)
 		Query = 
 		"SELECT " + AvailableFields + "
 		|FROM
-		|    " + Row.Type + " AS DataSet";
+		|    " + Row.Type + " AS DS";
 		DataSet = DCSTemplate.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
 		DataSet.Query = Query;
 		DataSet.Name = Row.Type;
@@ -225,23 +233,40 @@ Procedure UpdateQuery(Form, Settings)
 	EndDo;
 	
 	Composer = New DataCompositionTemplateComposer();
-	Template = Composer.Execute(DCSTemplate, SettingsComposer.GetSettings(), , , Type("DataCompositionValueCollectionTemplateGenerator"));
-	
-	QueryText = Template.DataSets[0].Query;
-	
-	QuerySchema = New QuerySchema();
-	QuerySchema.SetQueryText(QueryText);
-	FilterText = New Array;
-	For Each Row In QuerySchema.QueryBatch[0].Operators[0].Filter Do
-		FilterText.Add(Row);
-	EndDo;
-	QueryFilter = "CASE WHEN " + StrConcat(FilterText, Chars.LF + " AND ") + " THEN &REF_ ELSE UNDEFINED END";
-	If StrCompare(Form.Object.QueryFilter, QueryFilter) Then
-		Form.Object.QueryFilter = QueryFilter;
-	EndIf;
-	
+	Try
+		Template = Composer.Execute(DCSTemplate, SettingsComposer.GetSettings(), , , Type("DataCompositionValueCollectionTemplateGenerator"));
+
+		QueryText = Template.DataSets[0].Query;
+		
+		QuerySchema = New QuerySchema();
+		QuerySchema.SetQueryText(QueryText);
+		FilterText = New Array;
+		For Each Row In QuerySchema.QueryBatch[0].Operators[0].Filter Do
+			FilterText.Add(Row);
+		EndDo;
+		
+		QueryFilter = "CASE WHEN " + StrConcat(FilterText, Chars.LF + " AND ") + " THEN &REF_ ELSE UNDEFINED END";
+		If StrCompare(Form.Object.QueryFilter, QueryFilter) Then
+			Form.Object.QueryFilter = QueryFilter;
+			Form.Modified = True;
+		EndIf;
+		Form.Items.GroupAdvancedRules.Picture = PictureLib.AppearanceCheckBox;
+	Except	
+		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(ErrorInfo()));
+		Form.Items.GroupAdvancedRules.Picture = PictureLib.AppearanceCross;
+	EndTry;
 	Form.SettingsComposer = SettingsComposer;
-	Form.Object.isInitDCS = True;
+	If Not Form.Object.isInitDCS Then
+		Form.Object.isInitDCS = True;
+		Form.Modified = True;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure UpdateQueryFromClient()
+	If Object.AdvancedMode Then
+		UpdateQueryFromServer();
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -313,8 +338,8 @@ Procedure RuleListValueStartChoice(Item, ChoiceData, StandardProcessing)
 	FillValueType(RowStructure);
 EndProcedure
 
-&AtServerNoContext
-Function FillAttributeListHead(Object, ChoiceData = Undefined)
+&AtServer
+Function FillAttributeListHead(ChoiceData = Undefined)
 
 	VT = New ValueTable();
 	VT.Columns.Add("Attribute", New TypeDescription("String"));

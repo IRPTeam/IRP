@@ -17,6 +17,11 @@ Procedure BeforeDelete(Cancel)
 		Return;
 	EndIf;
 EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	isInitDCS = False;
+EndProcedure
+
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DisableRule Then
 		Return;

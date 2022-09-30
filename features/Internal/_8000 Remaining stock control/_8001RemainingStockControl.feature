@@ -2640,7 +2640,7 @@ Scenario:_800052 check remaining stock control in the Work Order
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Line No. [1] [Material 1 Material 1] R4010B_ActualStocks remaining: 10 . Required: 42 . Lacking: 32 .'|
+			|'Line No. [1] [Material 1 Material 1] R4011B_FreeStocks remaining: 10 . Required: 42 . Lacking: 32 .'|
 		And I close all client application windows
 
 

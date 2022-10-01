@@ -162,6 +162,7 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	AllDepTables.Add("SerialLotNumbers");
 	AllDepTables.Add("ShipmentConfirmations");
 	AllDepTables.Add("GoodsReceipts");
+	AllDepTables.Add("WorkSheets");
 	AllDepTables.Add("RowIDInfo");
 	
 	ArrayOfDepTables = New Array();
@@ -170,7 +171,18 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 			ArrayOfDepTables.Add(TableName);
 		EndIf;
 	EndDo;
-	Result.Insert("DependencyTables", ArrayOfDepTables);
+	Result.Insert("DependentTables", ArrayOfDepTables);
+	
+	AllSubordinateTables = New Array();
+	AllSubordinateTables.Add("Materials");
+	
+	ArrayOfSubordinateTables = New Array();
+	For Each TableName In AllSubordinateTables Do
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
+			ArrayOfSubordinateTables.Add(TableName);
+		EndIf;
+	EndDo;
+	Result.Insert("SubordinateTables", ArrayOfSubordinateTables);
 	
 	Return Result;
 EndFunction

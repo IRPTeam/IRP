@@ -137,7 +137,6 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '45 819'   |
 			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '45 819'   |
 		And I close current window
-		Then the number of "ShipmentConfirmationsTree" table lines is "равно" 0
 		Then the form attribute named "ManagerSegment" became equal to "Region 1"
 		Then the form attribute named "Branch" became equal to "Distribution department"
 		Then the form attribute named "Author" became equal to "en description is empty"
@@ -540,17 +539,17 @@ Scenario: _024006 create SI based on 2 SO with SC
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 3 dated 27.01.2021 19:50:45'            | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Shirt (36/Red)'                                      | 'Yes' | '5,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Service (Interner)'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                                     | 'Yes' | '5,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Service (Interner)'                                 | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
 			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Service (Interner)'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
-			| 'Dress (XS/Blue)'                                     | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Service (Interner)'                                 | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                    | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Dress (XS/Blue)'                                     | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shirt (36/Red)'                                      | 'Yes' | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress (XS/Blue)'                                     | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                    | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                                     | 'Yes' | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                    | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
 			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Shirt (36/Red)'                                      | 'Yes' | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                                     | 'Yes' | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "12"
 		And I click "Ok" button
 	* Create SI
@@ -576,15 +575,15 @@ Scenario: _024006 create SI based on 2 SO with SC
 		And I select current line in "List" table
 		And I click "Show row key" button
 		And "RowIDInfo" table became equal
-			| 'Basis'                                              | 'Next step' | 'Quantity'      | 'Current step' |
-			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '5,000'  | 'SI&SC'        |
-			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '1,000'  | 'SI'           |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '1,000'  | 'SI'           |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000' | 'SI&SC'        |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '1,000'  | 'SI'           |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
-			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''          | '3,000'  | 'SI'           |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '16,000' | 'SI'           |
+			| 'Basis'                                              | 'Next step' | 'Quantity'   | 'Current step' |
+			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '5,000'      | 'SI&SC'        |
+			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '1,000'      | 'SI&WO&WS'     |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '1,000'      | 'SI&WO&WS'     |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000'     | 'SI&SC'        |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '1,000'      | 'SI'           |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'      | 'SI'           |
+			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''          | '3,000'      | 'SI'           |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '16,000'     | 'SI'           |
 		And I close all client application windows
 
 Scenario: _024007 create SI based on SC	without SO
@@ -612,13 +611,14 @@ Scenario: _024007 create SI based on SC	without SO
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
-		And "ShipmentConfirmationsTree" table became equal
-			| 'Item'  | 'Shipment confirmation'                              | 'Item key' | 'Invoice' | 'SC'     | 'Quantity'      |
-			| 'Dress' | ''                                                   | 'S/Yellow' | '15,000'  | '15,000' | '15,000' |
-			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '10,000' | '10,000' |
-			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '5,000'  | '5,000'  |
-			| 'Dress' | ''                                                   | 'L/Green'  | '8,000'   | '8,000'  | '8,000'  |
-			| ''      | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''        | '8,000'  | '8,000'  |
+		And in the table "ItemList" I click "Shipment confirmations" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                                       | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Dress (S/Yellow)'                                   | '15,000'  | '15,000'             | '15,000'   |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''        | '10,000'             | '10,000'   |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''        | '5,000'              | '5,000'    |
+			| 'Dress (L/Green)'                                    | '8,000'   | '8,000'              | '8,000'    |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''        | '8,000'              | '8,000'    |	
 		And I close all client application windows
 				
 

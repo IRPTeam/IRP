@@ -39,10 +39,20 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.UseConsolidatedRetailSales.Visible = FOServer.IsUseConsolidatedRetailSales();
+	IsWorkshop = Object.Type = PredefinedValue("Enum.BusinessUnitTypes.Workshop");
+	IsRetail = Object.Type = PredefinedValue("Enum.BusinessUnitTypes.Retail");
+	Form.Items.UseConsolidatedRetailSales.Visible = FOServer.IsUseConsolidatedRetailSales() And IsRetail;
+	Form.Items.MaterialStore.Visible = IsWorkshop;
+	Form.Items.ReleaseStore.Visible = IsWorkshop;
+	Form.Items.SemiproductStore.Visible = IsWorkshop;
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure TypeOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);	
+EndProcedure
 
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export

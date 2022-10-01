@@ -351,15 +351,16 @@ Scenario: _018004 create PI based on GR without PO
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
-		And "GoodsReceiptsTree" table became equal
-			| 'Item'     | 'Item key'  | 'Goods receipt'                              | 'Invoice' | 'GR'     | 'Quantity'      |
-			| 'Dress'    | 'XS/Blue'   | ''                                           | '12,000'  | '12,000' | '12,000' |
-			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '10,000' | '10,000' |
-			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '2,000'  | '2,000'  |
-			| 'Trousers' | '38/Yellow' | ''                                           | '20,000'  | '20,000' | '20,000' |
-			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '20,000' | '20,000' |
-			| 'Boots'    | '39/18SD'   | ''                                           | '24,000'  | '24,000' | '24,000' |
-			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '24,000' | '24,000' |
+		And in the table "ItemList" I click "Goods receipts" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                               | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Dress (XS/Blue)'                            | '12,000'  | '12,000'             | '12,000'   |
+			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '10,000'             | '10,000'   |
+			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '2,000'              | '2,000'    |
+			| 'Trousers (38/Yellow)'                       | '20,000'  | '20,000'             | '20,000'   |
+			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '20,000'             | '20,000'   |
+			| 'Boots (39/18SD)'                            | '24,000'  | '24,000'             | '24,000'   |
+			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '24,000'             | '24,000'   |	
 		And I close all client application windows
 
 Scenario: _018005 create Purchase invoice based on Internal supply request

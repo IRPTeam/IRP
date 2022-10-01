@@ -70,6 +70,8 @@ Scenario: _001 test data
 		When Create information register PricesByProperties records (LC)
 		When Create information register TaxSettings records (LC)
 		When Create information register UserSettings records (LC)
+		When create items for work order (LC)
+		When Create catalog BillOfMaterials objects (LC)
 		And Delay 10
 		When update ItemKeys (LC)
 	* Add plugin for taxes calculation
@@ -112,6 +114,7 @@ Scenario: _001 test data
 		When Create catalog RowIDs objects (LC)
 		And Delay 10
 		When Create document Bundling objects (LC)
+		When Create document SO-WO-WS-SI (LC)
 		When Create document GoodsReceipt objects (LC)
 		When Create document InventoryTransfer objects (LC)
 		When Create document OpeningEntry objects (LC)
@@ -132,6 +135,7 @@ Scenario: _001 test data
 		When Create document RetailSalesReceipt objects (LC)
 		When Create document RetailReturnReceipt objects (LC)
 		When Create document ItemStockAdjustment objects (LC)
+		When Create document PurchaseInvoice objects (for materials LC)
 	* Posting Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		Then "Purchase orders" window is opened
@@ -233,6 +237,24 @@ Scenario: _001 test data
 	* Posting Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		Then "Retail return receipts" window is opened
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "5"
+	* Posting Work order
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		Then "Work order" window is opened
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "5"
+	* Posting Work sheet
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		Then "Work sheet" window is opened
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "5"
+	* Posting AdditionalCostAllocation
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		Then "Additional cost allocation" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"
@@ -2379,4 +2401,49 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 		And I close all client application windows		
 							
 
+Scenario: _028 check landed cost by materials
+	And I close all client application windows
+	* Create CalculationMovementCosts
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click "Create" button
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Landed cost (batch reallocate)" exact value from "Calculation mode" drop-down list
+		And I input "22.09.2022" text in "Begin date" field
+		And I input "26.09.2022" text in "End date" field
+		And I click "Post and close" button
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I click "Create" button
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Additional item cost" exact value from "Calculation mode" drop-down list
+		And I input "22.09.2022" text in "Begin date" field
+		And I input "26.09.2022" text in "End date" field
+		And I click "Post and close" button
+	* Check calculation
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "22.09.2022" text in the field named "DateBegin"
+		And I input "22.09.2022" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I click "Run report" button
+		And "Result" spreadsheet document contains "BathBalance_025_1" template lines by template
+		And I close all client application windows
 
+				
+
+		
+				
+				

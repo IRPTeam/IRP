@@ -9,11 +9,11 @@ Function GetSimpleParameters(Object, Form, TableName, Rows = Undefined)
 	Return GetParameters(ServerParameters, FormParameters);
 EndFunction
 
-Function GetLoadParameters(Object, Form, TableName, Address)
+Function GetLoadParameters(Object, Form, TableName, Address, GroupColumns = "", SumColumns = "")
 	FormParameters   = GetFormParameters(Form);
 	ServerParameters = GetServerParameters(Object);
 	ServerParameters.TableName = TableName;
-	LoadParameters   = ControllerClientServer_V2.GetLoadParameters(Address);
+	LoadParameters   = ControllerClientServer_V2.GetLoadParameters(Address, GroupColumns, SumColumns);
 	Return GetParameters(ServerParameters, FormParameters, LoadParameters);	
 EndFunction
 
@@ -217,6 +217,7 @@ Procedure OnChainComplete(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing"
@@ -607,6 +608,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	// affect to amounts
 	IsPriceChecked = False;
 	IsTaxRateChecked = False;
+	IsPriceTypeCheked = False;
 	
 	ArrayOfDataPaths = New Array();
 	
@@ -623,6 +625,8 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		ArrayOfDataPaths.Add(DataPaths);	
 		If Not Answer.Property("UpdatePriceTypes") Then
 			RemoveFromCache(DataPaths, Parameters);
+		Else
+			IsPriceTypeCheked = True;
 		EndIf;
 	EndIf;
 	
@@ -659,7 +663,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	EndIf;
 	
 	// not affect amounts
-	If Not (IsPriceChecked Or IsTaxRateChecked) Then
+	If Not (IsPriceTypeCheked Or IsPriceChecked Or IsTaxRateChecked) Then
 		DataPaths = "ItemList.NetAmount, ItemList.TaxAmount, ItemList.TotalAmount";
 		ArrayOfDataPaths.Add(DataPaths);
 		RemoveFromCache(DataPaths, Parameters, False);
@@ -676,6 +680,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
@@ -736,7 +741,8 @@ EndProcedure
 Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow, 
 															OnAddViewNotify = Undefined, 
 															OnCopyViewNotify = Undefined,
-															FillingValues = Undefined)
+															FillingValues = Undefined,
+															KeyOwner = Undefined)
 	Cancel = True;
 	NewRow = Object[TableName].Add();
 	If Clone Then // Copy()
@@ -745,13 +751,18 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 			Raise "Not found origin row for clone";
 		EndIf;
 		NewRow.Key = String(New UUID());
+		
+		If KeyOwner <> Undefined Then
+			NewRow.KeyOwner = KeyOwner;
+		EndIf;
+		
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
 		
 		// columns that do not need to be copied
 		ArrayOfExcludeProperties = New Array();
 		ArrayOfExcludeProperties.Add("Key");
-		If Parameters.ObjectMetadataInfo.DependencyTables.Find("RowIDInfo") <> Undefined Then
+		If Parameters.ObjectMetadataInfo.DependentTables.Find("RowIDInfo") <> Undefined Then
 			// columns is form attributes
 			ArrayOfExcludeProperties.Add("IsExternalLinked");
 			ArrayOfExcludeProperties.Add("IsInternalLinked");
@@ -759,7 +770,7 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 			ArrayOfExcludeProperties.Add("InternalLinks");
 		EndIf;
 		
-		If Parameters.ObjectMetadataInfo.DependencyTables.Find("SerialLotNumbers") <> Undefined Then
+		If Parameters.ObjectMetadataInfo.DependentTables.Find("SerialLotNumbers") <> Undefined Then
 			// columns is form attributes
 			ArrayOfExcludeProperties.Add("SerialLotNumbersPresentation");
 			ArrayOfExcludeProperties.Add("SerialLotNumberIsFilling");
@@ -772,6 +783,11 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 		ControllerClientServer_V2.CopyRow(TableName, Parameters, OnCopyViewNotify);
 	Else // Add()
 		NewRow.Key = String(New UUID());
+		
+		If KeyOwner <> Undefined Then
+			NewRow.KeyOwner = KeyOwner;
+		EndIf;
+		
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
 		
@@ -851,18 +867,12 @@ Procedure OnOpenFormNotify(Parameters) Export
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
-		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, 
-			"ShipmentConfirmations");
-		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
-		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form,
-			"GoodsReceipts");
-		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-			"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "GoodsReceipts");
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
@@ -873,6 +883,7 @@ Procedure OnOpenFormNotify(Parameters) Export
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
@@ -1108,6 +1119,136 @@ EndProcedure
 
 #EndRegion
 
+#Region MATERIALS
+
+Function MaterialsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined, KeyOwner = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Materials", Cancel, Clone, CurrentData,
+		"MaterialsOnAddRowFormNotify", "MaterialsOnCopyRowFormNotify", Undefined, KeyOwner);
+	Form.Items.Materials.CurrentRow = NewRow.GetID();
+	Form.Items.Materials.ChangeRow();
+	Return NewRow;
+EndFunction
+
+Procedure MaterialsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure MaterialsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure MaterialsLoad(Object, Form, Address, KeyOwner = Undefined, GroupColumns = "", SumColumns = "") Export
+	Parameters = GetLoadParameters(Object, Form, "Materials", Address, GroupColumns, SumColumns);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	
+	If KeyOwner <> Undefined Then
+		ControllerClientServer_V2.DeleteRowsFromTableByKeyOwner(Parameters, "Materials", KeyOwner);
+	EndIf;
+	
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.Materials.Add();
+		NewRow.Key = String(New UUID());
+		
+		If KeyOwner <> Undefined Then
+			NewRow.KeyOwner = KeyOwner;
+		EndIf;
+		
+		NewRows.Add(NewRow);
+	EndDo;
+	
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	ControllerClientServer_V2.MaterialsLoad(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_COLUMNS
+
+#Region MATERIALS_ITEM
+
+// Materials.Item
+Procedure MaterialsItemOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsItemOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_ITEM_KEY
+
+// Materials.ItemKey
+Procedure MaterialsItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsItemKeyOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_UNIT
+
+// Materials.Unit
+Procedure MaterialsUnitOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsUnitOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_QUANTITY
+
+// Materials.Quantity
+Procedure MaterialsQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsQuantityOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_COST_WRITE_OFF
+
+// Materials.CostWriteOff
+Procedure MaterialsCostWriteOffOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsCostWriteOffOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region WORKERS
+
+Function WorkersBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Workers", Cancel, Clone, CurrentData,
+		"WorkersOnAddRowFormNotify", "WorkersOnCopyRowFormNotify");
+	Form.Items.Workers.CurrentRow = NewRow.GetID();
+	Form.Items.Workers.ChangeRow();
+	Return NewRow;
+EndFunction
+
+Procedure WorkersOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure WorkersOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+#EndRegion
+
 #Region _ITEM_LIST_
 
 Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
@@ -1142,6 +1283,7 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
@@ -1250,6 +1392,23 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_BILL_OF_MATERIALS
+
+// ItemList.BillOfMaterials
+Procedure ItemListBillOfMaterialsOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	FormParameters = GetFormParameters(Form);
+	
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "ItemList";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.ItemListBillOfMaterialsOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST_UNIT
 
 // ItemList.Unit
@@ -1281,6 +1440,7 @@ EndProcedure
 
 Procedure OnSetItemListCancelNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+//		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
@@ -1375,6 +1535,7 @@ EndProcedure
 
 Procedure OnSetItemListNetAmountNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
@@ -1486,6 +1647,8 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
@@ -1495,16 +1658,14 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
 	
-	// Update -> TradeDocumentsTree
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
-		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
 	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
-		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-			"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "GoodsReceipts");
 	EndIf;
 EndProcedure
 
@@ -1571,6 +1732,7 @@ EndProcedure
 
 Procedure OnSetCalculationsNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
@@ -2011,7 +2173,9 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		Parameters = GetParameters(ServerParameters, FormParameters);
 		
 		If Not (Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
-			 Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder") Then
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder"
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+			 Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet") Then
 			OnSetStoreNotify(Parameters);
 		EndIf;
 		
@@ -2023,19 +2187,13 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 			Parameters.Form.Taxes_CreateFormControls();
-			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, 
-				"ShipmentConfirmations");
-			DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-				"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 		EndIf;
 		
 		If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 			Parameters.Form.Taxes_CreateFormControls();
-			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form,
-				"GoodsReceipts");
-			DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
-				"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "GoodsReceipts");
 		EndIf;
 	EndDo;
 EndProcedure
@@ -2320,6 +2478,8 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing"

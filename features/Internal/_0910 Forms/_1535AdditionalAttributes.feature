@@ -4966,3 +4966,164 @@ Scenario: _015400661 check that additional attributes and properties are display
 			| 'Property' | 'Value' |
 			| 'Test'     | ''      |	
 	And I close all client application windows
+
+
+Scenario: _015400662 check that additional attributes and properties are displayed on the form without reopening (document Work order)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Work order
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Document_WorkOrder       |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Work order" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Work order (create)"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Save" button
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400663 check that additional attributes and properties are displayed on the form without reopening (document Work sheet)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Work sheet
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Document_WorkSheet       |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Work sheet" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Work sheet (create)"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Save" button
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400664 check that additional attributes and properties are displayed on the form without reopening (Catalog_BillOfMaterials)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Create BillOfMaterials
+		Given I open hyperlink "e1cib/list/Catalog.BillOfMaterials"
+		And I click the button named "FormCreate"
+		And I input "Test" text in the field named "Description_en"
+		And I click Choice button of the field named "Item"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I select current line in "List" table
+		And I click Choice button of the field named "ItemKey"
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '38/18SD'  |
+		And I select current line in "List" table
+		And I click Select button of "Business unit" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Accountants office' |
+		And I select current line in "List" table		
+		And I click "Save and close" button
+	* Open BillOfMaterials form
+		Given I open hyperlink "e1cib/list/Catalog.BillOfMaterials"
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And field "Test" is not present on the form
+	* Adding by selected BillOfMaterials additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Catalog_BillOfMaterials  |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Bill of materials"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows

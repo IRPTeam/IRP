@@ -182,68 +182,68 @@
       <textEdit>true</textEdit>
     </extInfo>
   </items>
-  <items xsi:type="form:FormGroup">
-    <name>GroupStockBalanceDetails</name>
-    <id>54</id>
-    <items xsi:type="form:FormField">
-      <name>Type</name>
-      <id>33</id>
+  <items xsi:type="form:FormField">
+    <name>Type</name>
+    <id>33</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Type</segments>
+    </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>TypeOnChange</name>
+    </handlers>
+    <extendedTooltip>
+      <name>TypeExtendedTooltip</name>
+      <id>35</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.Type</segments>
-      </dataPath>
-      <handlers>
-        <event>OnChange</event>
-        <name>TypeOnChange</name>
-      </handlers>
-      <extendedTooltip>
-        <name>TypeExtendedTooltip</name>
-        <id>35</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>TypeContextMenu</name>
-        <id>34</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>RadioButtonField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
-        <radioButtonsType>Tumbler</radioButtonsType>
-        <choiceList>
-          <value xsi:type="core:ReferenceValue">
-            <value>Enum.ItemTypes.EnumValue.Service</value>
-          </value>
-        </choiceList>
-        <choiceList>
-          <value xsi:type="core:ReferenceValue">
-            <value>Enum.ItemTypes.EnumValue.Product</value>
-          </value>
-        </choiceList>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
       </extInfo>
-    </items>
+    </extendedTooltip>
+    <contextMenu>
+      <name>TypeContextMenu</name>
+      <id>34</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>RadioButtonField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+      <radioButtonsType>Tumbler</radioButtonsType>
+      <choiceList>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.ItemTypes.EnumValue.Service</value>
+        </value>
+      </choiceList>
+      <choiceList>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.ItemTypes.EnumValue.Product</value>
+        </value>
+      </choiceList>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormGroup">
+    <name>GroupStockBalanceDetails</name>
+    <id>54</id>
     <items xsi:type="form:FormField">
       <name>UseSerialLotNumber</name>
       <id>48</id>

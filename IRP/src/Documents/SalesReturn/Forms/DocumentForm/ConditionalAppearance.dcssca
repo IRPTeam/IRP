@@ -245,158 +245,6 @@
 	<item>
 		<selection>
 			<item>
-				<field>GoodsReceiptsTreeGoodsReceipt</field>
-			</item>
-			<item>
-				<field>GoodsReceiptsTreePictureDocument</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">GoodsReceiptsTree.Level</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">1</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>GoodsReceiptsTreeItem</field>
-			</item>
-			<item>
-				<field>GoodsReceiptsTreeItemKey</field>
-			</item>
-			<item>
-				<field>GoodsReceiptsTreePictureItem</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">GoodsReceiptsTree.Level</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">2</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>GoodsReceiptsTreeQuantityInInvoice</field>
-			</item>
-			<item>
-				<field>GoodsReceiptsTreeQuantityInGoodsReceipt</field>
-			</item>
-			<item>
-				<field>GoodsReceiptsTreeQuantity</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">GoodsReceiptsTree.Level</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">1</right>
-			</item>
-			<item xsi:type="FilterItemGroup">
-				<groupType>OrGroup</groupType>
-				<item xsi:type="FilterItemComparison">
-					<left xsi:type="dcscor:Field">GoodsReceiptsTree.QuantityInInvoice</left>
-					<comparisonType>NotEqual</comparisonType>
-					<right xsi:type="dcscor:Field">GoodsReceiptsTree.Quantity</right>
-				</item>
-				<item xsi:type="FilterItemComparison">
-					<left xsi:type="dcscor:Field">GoodsReceiptsTree.QuantityInGoodsReceipt</left>
-					<comparisonType>Less</comparisonType>
-					<right xsi:type="dcscor:Field">GoodsReceiptsTree.Quantity</right>
-				</item>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>TextColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">#FF6600</dcscor:value>
-			</dcscor:item>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Font</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Font" faceName="MS Shell Dlg" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>GoodsReceiptsTreeQuantityInInvoice</field>
-			</item>
-			<item>
-				<field>GoodsReceiptsTreeQuantityInGoodsReceipt</field>
-			</item>
-			<item>
-				<field>GoodsReceiptsTreeQuantity</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">GoodsReceiptsTree.Level</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">1</right>
-			</item>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">GoodsReceiptsTree.QuantityInInvoice</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="dcscor:Field">GoodsReceiptsTree.Quantity</right>
-			</item>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">GoodsReceiptsTree.QuantityInGoodsReceipt</left>
-				<comparisonType>GreaterOrEqual</comparisonType>
-				<right xsi:type="dcscor:Field">GoodsReceiptsTree.Quantity</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>TextColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">#339966</dcscor:value>
-			</dcscor:item>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Font</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Font" faceName="MS Shell Dlg" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>GoodsReceiptsTreeQuantity</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">GoodsReceiptsTree.Level</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">1</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>ReadOnly</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
 				<field>ItemListLandedCost</field>
 			</item>
 		</selection>
@@ -428,6 +276,51 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.ItemList.SalesInvoice</left>
 				<comparisonType>Filled</comparisonType>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>ReadOnly</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>ItemListStore</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.ItemList.Store</left>
+				<comparisonType>NotFilled</comparisonType>
+				<right xsi:nil="true"/>
+			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.ItemList.IsService</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">false</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>MarkIncomplete</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>ItemListStore</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.ItemList.IsService</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">true</right>
 			</item>
 		</filter>
 		<appearance>

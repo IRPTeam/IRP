@@ -244,6 +244,14 @@ Function GetChain()
 	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstation" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationExecute"));
 	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstationForReturn" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationForReturnExecute"));
 	
+	Chain.Insert("ChangeIsManualChangedByItemKey"               , GetChainLink("ChangeIsManualChangedByItemKeyExecute"));
+	Chain.Insert("ChangeUniqueIDByItemKeyBOMAndBillOfMaterials" , GetChainLink("ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsExecute"));
+	Chain.Insert("ChangeStoreByCostWriteOff"                    , GetChainLink("ChangeStoreByCostWriteOffExecute"));
+	Chain.Insert("ChangeProfitLossCenterByBillOfMaterials"      , GetChainLink("ChangeProfitLossCenterByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
+	
+	//Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -996,10 +1004,13 @@ EndFunction
 #Region CHANGE_PROCUREMENT_METHOD_BY_ITEM_KEY
 
 Function ChangeProcurementMethodByItemKeyOptions() Export
-	Return GetChainLinkOptions("ProcurementMethod, ItemKey");
+	Return GetChainLinkOptions("ProcurementMethod, ItemKey, IsService");
 EndFunction
 
 Function ChangeProcurementMethodByItemKeyExecute(Options) Export
+	If Options.IsService = True Then
+		Return Undefined;
+	EndIf;
 	If ValueIsFilled(Options.ProcurementMethod) Then
 		Return Options.ProcurementMethod;
 	EndIf;
@@ -1085,6 +1096,107 @@ Function ChangeConsolidatedRetailSalesByWorkstationForReturnExecute(Options) Exp
 EndFunction
 
 #EndRegion
+
+#Region CHANGE_IS_MANUAL_CHANGED_BY_ITEM_KEY
+
+Function ChangeIsManualChangedByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKeyBOM, ItemKey, QuantityInBaseUnitBOM, QuantityInBaseUnit");
+EndFunction
+
+Function ChangeIsManualChangedByItemKeyExecute(Options) Export
+	If Not ValueIsFilled(Options.ItemKeyBOM) Or Not ValueIsFilled(Options.ItemKey) Then
+		Return False;
+	EndIf;
+	
+	Return Options.ItemKey <> Options.ItemKeyBOM Or Options.QuantityInBaseUnit <> Options.QuantityInBaseUnitBOM; 
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_UNIQUE_ID_BY_ITEM_KEY_BOM_AND_BILL_OF_MATERIALS
+
+Function ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("ItemKeyBOM, BillOfMaterials");
+EndFunction
+
+Function ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsExecute(Options) Export
+	If Not ValueIsFilled(Options.ItemKeyBOM) Or Not ValueIsFilled(Options.BillOfMaterials) Then
+		Return "";
+	EndIf;
+	Return String(Options.ItemKeyBOM.UUID()) + "-" + String(Options.BillOfMaterials.UUID()); 
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_STORE_BY_COST_WRITE_OFF
+
+Function ChangeStoreByCostWriteOffOptions() Export
+	Return GetChainLinkOptions("CostWriteOff, BillOfMaterials, CurrentStore");
+EndFunction
+
+Function ChangeStoreByCostWriteOffExecute(Options) Export
+	If Options.CostWriteOff = PredefinedValue("Enum.MaterialsCostWriteOff.NotInclude") Then
+		Return Undefined;
+	EndIf;
+	
+	If ValueIsFilled(Options.CurrentStore) Then
+		Return Options.CurrentStore;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "BusinessUnit.MaterialStore");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PROFIT_LOSS_CENTER_BY_BILL_OF_MATERIALS
+
+Function ChangeProfitLossCenterByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterials, CurrentProfitLossCenter");
+EndFunction
+
+Function ChangeProfitLossCenterByBillOfMaterialsExecute(Options) Export
+	If ValueIsFilled(Options.CurrentProfitLossCenter) Then
+		Return Options.CurrentProfitLossCenter;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "BusinessUnit");
+EndFunction
+		
+
+#EndRegion
+
+#Region CHANGE_EXPENSE_TYPE_BY_BILL_OF_MATERIALS
+
+Function ChangeExpenseTypeByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("ItemKeyBOM, BillOfMaterials, CurrentExpenseType");
+EndFunction
+
+Function ChangeExpenseTypeByBillOfMaterialsExecute(Options) Export
+	If ValueIsFilled(Options.CurrentExpenseType) Then
+		Return Options.CurrentExpenseType;
+	EndIf;
+	
+	Return ModelServer_V2.GetExpenseTypeByBillOfMaterials(Options.BillOfMaterials, Options.ItemKeyBOM);
+EndFunction
+
+#EndRegion
+
+
+//#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
+//
+//Function ChangeBillOfMaterialsByItemKeyOptions() Export
+//	Return GetChainLinkOptions("Item, ItemKey, BillOfMaterials");
+//EndFunction
+//
+//Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
+//	If ValueIsFilled(Options.BillOfMaterials) Then
+//		Return Options.BillOfMaterials;
+//	EndIf;
+//	
+//	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.Item, Options.ItemKey);
+//EndFunction
+//
+//#EndRegion
 
 #Region CALCULATE_DIFFERENCE
 
@@ -1251,11 +1363,14 @@ Function DefaultStoreInHeaderExecute(Options) Export
 EndFunction
 
 Function DefaultStoreInListOptions() Export
-	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement, StoreInPreviousRow");
+	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement, StoreInPreviousRow, IsService");
 EndFunction
 
 // fill store in tabular part ItemList by default
 Function DefaultStoreInListExecute(Options) Export
+	If Options.IsService = True Then
+		Return Undefined;
+	EndIf;
 	If ValueIsFilled(Options.StoreInList) Then
 		Return Options.StoreInList; // store already is filled
 	EndIf;
@@ -1324,11 +1439,14 @@ Function ChangeUseGoodsReceiptByUseShipmentConfirmationExecute(Options) Export
 EndFunction
 
 Function FillStoresInListOptions() Export
-	Return GetChainLinkOptions("Store, StoreInList, IsUserChange");
+	Return GetChainLinkOptions("Store, StoreInList, IsUserChange, IsService");
 EndFunction
 
 // fill Store in tabular part, if Store is not filled do not change store in ItemList
 Function FillStoresInListExecute(Options) Export
+	If Options.IsService = True Then
+		Return Undefined;
+	EndIf;
 	If Options.IsUserChange = True Then
 		Return Options.Store;
 	EndIf;

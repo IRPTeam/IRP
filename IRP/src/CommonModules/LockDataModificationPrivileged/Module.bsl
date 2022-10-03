@@ -224,9 +224,7 @@ Function SourceLockedByRules(SourceParams, Rules, AddInfo = Undefined)
 	If MetaNameType = "Catalog" Or MetaNameType = "Document" Then
 		Return DataIsLocked_ByRef(SourceParams, Rules, AddInfo);
 	ElsIf MetaNameType = "AccumulationRegister" Or MetaNameType = "InformationRegister" Then
-		Return Not SourceParams.isNew 
-				And ModifyDataIsLocked_ByTable(SourceParams, Rules, True, AddInfo)
-				Or ModifyDataIsLocked_ByTable(SourceParams, Rules, False, AddInfo);
+		Return ModifyDataIsLocked_ByTable(SourceParams, Rules, AddInfo);
 	Else
 		Raise MetaNameType;
 	EndIf;
@@ -234,18 +232,18 @@ Function SourceLockedByRules(SourceParams, Rules, AddInfo = Undefined)
 	Return False;
 EndFunction
 
-Function ModifyDataIsLocked_ByTable(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
+Function ModifyDataIsLocked_ByTable(SourceParams, Rules, AddInfo = Undefined)
 	ArrayOfLockedReasonsByAdvanced = New Array;
 
-	ArrayOfLockedReasonsBySimple = ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, CheckCurrent, AddInfo);
+	ArrayOfLockedReasonsBySimple = ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo);
 	If ArrayOfLockedReasonsBySimple.Count() = 0 Then
-		ArrayOfLockedReasonsByAdvanced = ModifyDataIsLocked_ByTable_AdvancedMode(SourceParams, Rules, CheckCurrent, AddInfo);
+		ArrayOfLockedReasonsByAdvanced = ModifyDataIsLocked_ByTable_AdvancedMode(SourceParams, Rules, AddInfo);
 	EndIf;
 	
 	Return CalculateErrorAndShow(ArrayOfLockedReasonsBySimple, ArrayOfLockedReasonsByAdvanced);
 EndFunction
 
-Function ModifyDataIsLocked_ByTable_AdvancedMode(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
+Function ModifyDataIsLocked_ByTable_AdvancedMode(SourceParams, Rules, AddInfo = Undefined)
 	
 	Return New Array;
 	
@@ -264,9 +262,10 @@ EndFunction
 // 
 // Returns:
 //  Boolean - Data is locked by ref simple mode
-Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
-	Text = New Array();
-	Fields = New Array();
+Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, AddInfo = Undefined)
+	Filter = New Array;
+	Fields = New Array;
+	TotalFields = New Array;
 	Query = New Query();
 	
 	FindSimpleRules = False;
@@ -281,43 +280,58 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, CheckCurrent, Ad
 		Return New Array;
 	EndIf;
 	
-	If CheckCurrent Then
-		TemplateFilter = "Table.%1 = &%1";
-		MetadataName = SourceParams.MetadataName;
-		For Each Filter In SourceParams.Source.Filter Do
-			If Not Filter.Use Then
-				Continue;
-			EndIf;
-			Text.Add(StrTemplate(TemplateFilter, Filter.Name));
-			Query.SetParameter(Filter.Name, Filter.Value);
-		EndDo;
-	Else
-		Attributes = Rules.UnloadColumn("Attribute");
-		Query.TempTablesManager = New TempTablesManager();
-		Query.Text = "SELECT * INTO Table From &VTTable AS VTTable";
-		MetadataName = "Table";
-		Query.SetParameter("VTTable", SourceParams.Source.Unload( , StrConcat(Attributes, ",")));
-		Query.Execute();
-	EndIf;
+	// Check new record
+	Attributes = StrConcat(Rules.UnloadColumn("Attribute"), ",");
+	VTTable = SourceParams.Source.Unload( , Attributes);
+	VTTable.GroupBy(Attributes);
+	Query.SetParameter("VTTable", VTTable);
 
+	// Check Old record
+	TemplateFilter = "Table.%1 = &%1";
+	MetadataName = SourceParams.MetadataName;
+	For Each FilterInSet In SourceParams.Source.Filter Do
+		If Not FilterInSet.Use Then
+			Continue;
+		EndIf;
+		Filter.Add(StrTemplate(TemplateFilter, FilterInSet.Name));
+		Query.SetParameter(FilterInSet.Name, FilterInSet.Value);
+	EndDo;
 	For Index = 0 To Rules.Count() - 1 Do
 		
 		If Rules[Index].LockDataModificationReasons.AdvancedMode Then
 			Continue;
 		EndIf;
-		
-		Text.Add("Table." + Rules[Index].Attribute + " " + Rules[Index].ComparisonType + " (" + "&Param" + Index + ")");
-		Fields.Add("CASE WHEN Table." + Rules[Index].Attribute + " " + Rules[Index].ComparisonType + " (" + "&Param"
-			+ Index + ")
+		FilterRow = "Table." + Rules[Index].Attribute + " " + Rules[Index].ComparisonType + " (" + "&Param" + Index + ")";
+		Filter.Add(FilterRow);
+		Fields.Add("MAX(CASE WHEN Table." + Rules[Index].Attribute + " " + Rules[Index].ComparisonType + " (" + "&Param" + Index + ")
 			|THEN 
 			|	&Reason" + Index + " 
-			|END AS Reason" + Index);
+			|END) AS Reason" + Index);
+		TotalFields.Add("MAX(NT.Reason" + Index + ")");
 		Query.SetParameter("Reason" + Index, Rules[Index].LockDataModificationReasons);
 		Query.SetParameter("Param" + Index, Rules[Index].Value);
 	EndDo;
-	Query.Text = "SELECT DISTINCT " + Chars.LF + StrConcat(Fields, "," + Chars.LF) + Chars.LF + " From " + MetadataName
-		+ " AS Table 
-		  |WHERE " + StrConcat(Text, " AND ");
+	
+	Query.Text =  
+		"SELECT DISTINCT 
+		|	* 
+		|INTO TableCurrent
+		|FROM &VTTable AS VTTable
+		|
+		|;
+		|SELECT
+		|	" + StrConcat(TotalFields, "," + Chars.LF) + " 
+		|FROM (	SELECT DISTINCT 
+		|		" + StrConcat(Fields, "," + Chars.LF) + " 
+		|	FROM " + MetadataName	+ " AS Table 
+		|	WHERE " + StrConcat(Filter, " AND ") + "
+		|
+		|	UNION
+		|
+		|	SELECT DISTINCT 
+		|		" + StrConcat(Fields, "," + Chars.LF) + " 
+		|	FROM TableCurrent AS Table
+		|) AS NT";
 
 	Return GetResultLockCheck(Query);
 EndFunction

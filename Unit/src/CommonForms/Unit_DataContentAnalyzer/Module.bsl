@@ -15,12 +15,38 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	If Not IsBlankString(ThisObject.PathToValue) Then
 		PatchPartsString = StrSplit(ThisObject.PathToValue, "/");
-		ThisObject.PatchParts.LoadValues(PatchPartsString);
+		ThisObject.PathParts.LoadValues(PatchPartsString);
 	EndIf;
+	
+	AvailableCommands = Unit_MockService.getAllContentCommands();
+	For Each DescriptionCommand In AvailableCommands Do
+		NameNewCommand = "Add_" + DescriptionCommand.Key;
+		TileNewCommand = "" + DescriptionCommand.Value;
+		
+		NewCommand = Commands.Add(NameNewCommand);
+		NewCommand.Title = TileNewCommand;
+		NewCommand.Action = "AddCommand";
+		
+		NewItem = Items.Add(NameNewCommand, Type("FormButton"), Items.GroupOfPathCommands);
+		NewItem.Title = TileNewCommand;
+		NewItem.CommandName = NameNewCommand;
+		NewItem.Visible = False;
+	EndDo;
 	
 	ReloadContent();
 
 EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	
+	For Each Item In PathTree.GetItems() Do
+		ItemID = Item.GetID();
+		Items.PathTree.Expand(ItemID, True);
+	EndDo;
+
+EndProcedure
+
 
 #EndRegion
 
@@ -43,25 +69,6 @@ Procedure LoadFile(Command)
 	
 EndProcedure
 
-
-// Del command.
-// 
-// Parameters:
-//  Command - FormCommand - Command
-&AtClient
-Procedure DelCommand(Command)
-
-	If ThisObject.PatchParts.Count() = 0 Then
-		Return;
-	EndIf;
-	
-	ThisObject.PatchParts.Delete(ThisObject.PatchParts.Count()-1);
-	ThisObject.PathToValue = StrConcat(ThisObject.PatchParts.UnloadValues(), "/");
-
-	ReloadContent();
-
-EndProcedure
-
 // Add command.
 // 
 // Parameters:
@@ -75,10 +82,7 @@ Procedure AddCommand(Command)
 		Return;
 	EndIf;
 
-	ThisObject.PatchParts.Add(Items[Command.Name].Title);
-	ThisObject.PathToValue = StrConcat(ThisObject.PatchParts.UnloadValues(), "/");
-	
-	ReloadContent();
+	TryingAddCommand(Items[Command.Name].Title);
 
 EndProcedure
 
@@ -89,16 +93,40 @@ Procedure OK(Command)
 	
 EndProcedure
 
-&AtClient
-Async Procedure AddWord(Command)
-	
-	ShowInputString(New NotifyDescription("AfterInputString", ThisObject, Undefined), "");
-	
-EndProcedure
-
-
 #EndRegion
 
+#Region FormHeaderItemsEventHandlers
+
+&AtClient
+Procedure PathTreeOnActivateRow(Item)
+	
+	If Items.PathTree.CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	PreviosState = ThisObject.PathToValue;
+	
+	CurrentBranchID = Items.PathTree.CurrentRow; // Number
+	CurrentBranch = ThisObject.PathTree.FindByID(CurrentBranchID);
+	
+	ThisObject.PathParts.Clear();
+	While True Do
+		ThisObject.PathParts.Insert(0, CurrentBranch.Part);
+		If CurrentBranch.GetParent() = Undefined Then
+			Break;
+		EndIf;
+		CurrentBranch = CurrentBranch.GetParent();
+	EndDo;
+	ThisObject.PathToValue = StrConcat(ThisObject.PathParts.UnloadValues(), "/");
+	
+	If Not ThisObject.PathToValue = PreviosState Then
+		ReloadContent();
+		Items.PathTree.Expand(CurrentBranchID, True);
+	EndIf;
+
+EndProcedure
+
+#EndRegion
 
 #Region Private
 
@@ -113,11 +141,40 @@ Procedure AfterInputString(NewWord, Parameters) Export
     	TextCommand = NewWord;
     	If TypeOf(Parameters) = Type("String") Then
     		TextCommand = StrReplace(Parameters, "?", NewWord);
-    	EndIF;
-		ThisObject.PatchParts.Add(TextCommand);
-		ThisObject.PathToValue = StrConcat(ThisObject.PatchParts.UnloadValues(), "/");
-		ReloadContent();
+    	EndIf;
+    	TryingAddCommand(TextCommand);
     EndIf;
+EndProcedure
+
+// Trying add command.
+// 
+// Parameters:
+//  TextCommand - String - Text command
+&AtClient
+Procedure TryingAddCommand(TextCommand)
+	
+	If Items.PathTree.CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	CurrentBranchID = Items.PathTree.CurrentRow; // Number
+	CurrentBranch = ThisObject.PathTree.FindByID(CurrentBranchID);
+	
+	isExist = False;
+	For Each Child In CurrentBranch.GetItems() Do
+		If Child.Part = TextCommand Then
+			Items.PathTree.CurrentRow = Child.GetID(); 
+			isExist = True;
+			Break;
+		EndIf;
+	EndDo;
+	
+	If Not isExist Then
+		NewBranch = CurrentBranch.GetItems().Add();
+		NewBranch.Part = TextCommand;
+		NewBranch.Manual = True;
+		Items.PathTree.CurrentRow = NewBranch.GetID();
+	EndIf;
+	
 EndProcedure
 
 &AtServer
@@ -127,55 +184,38 @@ Procedure ReloadContent()
 		Return;
 	EndIf;
 	
-	OldItems = New Array; // Array of FormButton
-	OldCommands = New Array;  // Array of String
-	For Each Item In Items.GroupOfPathCommands.ChildItems Do
-		If StrStartsWith(Item.Name, "Add_") Then
-			OldItems.Add(Item);
-			OldCommands.Add(Item.CommandName);
-		EndIf
-	EndDo;
+	isInitTree = False;
+	If ThisObject.PathTree.GetItems().Count() = 0 Then
+		InitPathTree();
+		isInitTree = True;
+	EndIf;
 	
-	For Each OldItem In OldItems Do
-		Items.Delete(OldItem);
-	EndDo;
-	For Each OldCommand In OldCommands Do
-		Commands.Delete(Commands.Find(OldCommand));
-	EndDo;
+	CurrentBranchID = Items.PathTree.CurrentRow; // Number
+	CurrentBranch = ThisObject.PathTree.FindByID(CurrentBranchID);
 	
-	TypeResult = Type("Undefined");
 	Try
-		OriginalResult = Unit_MockService.getValueOfBodyVariableByPath(
+		ThisObject.Results = Unit_MockService.getValueOfBodyVariableByPath(
 			ThisObject.PathToValue, GetFromTempStorage(ThisObject.AddressBody));
-		TypeResult = TypeOf(OriginalResult);
-		ThisObject.Results = String(OriginalResult);
+		CurrentBranch.Error = False;
 	Except
+		CurrentBranch.Error = True;
 		ThisObject.Results = ErrorDescription();
 	EndTry;
 	
-	CurrentCommand = ?(ThisObject.PatchParts.Count() = 0, "", ThisObject.PatchParts.Get(ThisObject.PatchParts.Count() - 1).Value);
-	AddInfo = ?(StrFind(ThisObject.Results, "* ") = 0, "", ThisObject.Results);
-	If CurrentCommand = "[zip]" Then
-		TypeResult = Type("ZipFileReader");
-	ElsIf CurrentCommand = "[file]" Then
-		TypeResult = Type("BinaryData");
-	EndIf;
-	
-	AvailableCommands = Unit_MockService.getAvailableCommands(CurrentCommand, TypeResult, AddInfo);
-	
-	CurrentTime = CurrentUniversalDateInMilliseconds();
-	For Each DescriptionCommand In AvailableCommands Do
-		NewNameCommand = "Add_" + Format(CurrentTime, "NG=;");
-		NewCommand = Commands.Add(NewNameCommand);
-		NewCommand.Title = DescriptionCommand;
-		NewCommand.Action = "AddCommand";
-		
-		NewItem = Items.Add(NewNameCommand, Type("FormButton"), Items.GroupOfPathCommands);
-		NewItem.Title = DescriptionCommand;
-		NewItem.CommandName = NewNameCommand;
-		
-		CurrentTime = CurrentTime + 1;
+	CurrentCommand = ThisObject.PathParts.Get(ThisObject.PathParts.Count() - 1).Value; // String
+	AvailableCommands = Unit_MockService.getAvailableCommands(CurrentCommand);
+	For Each CommandItem In Items.GroupOfPathCommands.ChildItems Do
+		If CommandItem = Items.FormOK Then
+			Continue;
+		EndIf;
+		CommandItem.Visible = Not CurrentBranch.Error And Not AvailableCommands.Find(CommandItem.Title) = Undefined;
 	EndDo;
+	
+	If Not CurrentBranch.Error Then
+		If Not isInitTree And CurrentBranch.GetItems().Count() = 0 Then
+			ConstructTreeBranch(CurrentBranch);
+		EndIf;
+	EndIf;
 	
 EndProcedure
 
@@ -187,8 +227,8 @@ Procedure LoadTextAtServer()
 	ThisObject.InputText = "";
 	Items.GroupPages.CurrentPage = Items.GroupAnalyze;
 	
-	ThisObject.PathToValue = "[text]";
-	ThisObject.PatchParts.Add(ThisObject.PathToValue);
+	ThisObject.PathToValue = Unit_MockService.getAllContentCommands().Text;
+	ThisObject.PathParts.Add(ThisObject.PathToValue);
 	
 	ReloadContent();
 
@@ -212,11 +252,271 @@ Procedure AfterPutFileToServer(FileDescription, AddParameters) Export
 	
 	Items.GroupPages.CurrentPage = Items.GroupAnalyze;
 	
-	ThisObject.PathToValue = "[file]";
-	ThisObject.PatchParts.Add(ThisObject.PathToValue);
-	
 	ReloadContent();
 	
 EndProcedure
+
+&AtServer
+Procedure InitPathTree()
+	
+	AllCommands = Unit_MockService.getAllContentCommands();
+	
+	If IsBlankString(ThisObject.PathToValue) Then
+		ThisObject.PathToValue = AllCommands.File;
+		ThisObject.PathParts.Add(ThisObject.PathToValue);
+	EndIf;
+	
+	RootTree = ThisObject.PathTree.GetItems().Add();
+	RootTree.Part = ThisObject.PathParts[0].Value;
+	
+	ConstructTreeBranch(RootTree, AllCommands);
+	
+	CurrentBranches = ThisObject.PathTree.GetItems();
+	For Index = 1 To ThisObject.PathParts.Count() Do
+		CurrentCommand = ThisObject.PathParts.Get(Index - 1).Value;
+		isFound = False;
+		For Each TreeItem In CurrentBranches Do
+			If TreeItem.Part = CurrentCommand Then
+				isFound = True;
+				Items.PathTree.CurrentRow = TreeItem.GetID();
+				CurrentBranches = TreeItem.GetItems();
+				Break; 
+			EndIf;
+		EndDo;
+		If Not isFound Then
+			CommonFunctionsClientServer.ShowUsersMessage(
+				CurrentCommand + " - " + R().Mock_Info_NotFound, 
+				"PathToValue", ThisObject);
+			Break;
+		EndIf;
+	EndDo;
+	
+EndProcedure	
+
+// Init path tree.
+// 
+// Parameters:
+//  TreeBranch - FormDataTreeItem - a Branch of Tree
+//  AllCommands - See Unit_MockService.getAllContentCommands
+&AtServer
+Procedure ConstructTreeBranch(TreeBranch, AllCommands = Undefined)
+	
+	If AllCommands = Undefined Then
+		AllCommands = Unit_MockService.getAllContentCommands();
+	EndIf;
+	
+	CurrentCommand = TreeBranch.Part; // String
+	CurrentCommandPath = GetBranchCommandPath(TreeBranch);
+	
+	PreviousCommand = "";
+	PreviousBranch = TreeBranch.GetParent();
+	While Not PreviousBranch = Undefined Do
+		BranchCommand = PreviousBranch.Part;
+		If isTransformCommand(BranchCommand) Then
+			PreviousCommand = BranchCommand;
+			Break;
+		EndIf;
+		PreviousBranch = PreviousBranch.GetParent();
+	EndDo;
+	
+	NewChildren = New Array; // Array of FormDataTreeItem
+	
+	Try
+		CurrentResults = Unit_MockService.getValueOfBodyVariableByPath(
+			CurrentCommandPath, GetFromTempStorage(ThisObject.AddressBody), AllCommands);
+		TreeBranch.Error = False;
+	Except
+		CurrentResults = "";
+		TreeBranch.Error = True;
+		Return;
+	EndTry;
+	
+	If isAutoGeneratedContent(CurrentCommand, PreviousCommand, AllCommands) And Not CurrentResults = "Collection" Then
+		If StrLen(CurrentResults) > 22 Then
+			Try
+				CurrentValue = Base64Value(CurrentResults);
+				If TypeOf(CurrentValue) = Type("BinaryData") And CurrentValue.Size() > 22 Then
+					NewChild = TreeBranch.GetItems().Add();
+					NewChild.Part = AllCommands.File;
+					NewChildren.Add(NewChild);
+					CurrentResults = "";
+				EndIf;
+			Except
+				CurrentValue = Undefined;
+			EndTry;
+		EndIf;
+			
+		If StrFind(CurrentResults, Chars.CR + "* ") Then
+			Descriptions = StrSplit(CurrentResults, Chars.CR);
+			For Index = 1 To Descriptions.Count() - 1 Do
+				NameNewCommand = Descriptions.Get(Index);
+				If StrStartsWith(NameNewCommand, "* [text] = ") Then
+					NewChild = TreeBranch.GetItems().Insert(0);
+					NewChild.Part = AllCommands.Text;
+					NewChildren.Add(NewChild);
+				ElsIf StrStartsWith(NameNewCommand, "* ") Then
+					NameNewCommand = Mid(NameNewCommand, 3);
+					NewChild = TreeBranch.GetItems().Add();
+					NewChild.Part = NameNewCommand;
+					NewChildren.Add(NewChild);
+				EndIf;
+			EndDo;
+			If Descriptions[0] = "XDTODataObject" Then
+				NewChild = TreeBranch.GetItems().Add();
+				NewChild.Part = AllCommands.Text;
+				NewChildren.Add(NewChild);
+			EndIf;
+		EndIf;
+		
+	Else
+		
+		CurrentObjectResults = Undefined; // Arbitrary
+		Try
+			CurrentObjectResults = Unit_MockService.getValueOfBodyVariableByPath(
+				CurrentCommandPath, GetFromTempStorage(ThisObject.AddressBody), AllCommands, True);
+		Except
+			Return;
+		EndTry;
+		
+		NameNewCommand = "";
+		
+		If TypeOf(CurrentObjectResults) = Type("BinaryData") Then
+			BinarySteam = CurrentObjectResults.OpenStreamForRead();
+			BinaryBuffer = New BinaryDataBuffer(4);
+			BinarySteam.Read(BinaryBuffer, 0, 4);
+			If BinaryBuffer.Get(0) = 80 
+					And BinaryBuffer.Get(1) = 75
+					And BinaryBuffer.Get(2) = 3
+					And BinaryBuffer.Get(3) = 4 Then 
+				NameNewCommand = AllCommands.ZIP;
+			ElsIf Not PreviousCommand = AllCommands.Text Then
+				NameNewCommand = AllCommands.Text;
+			EndIf;
+			BinarySteam.Close();
+			
+		ElsIf TypeOf(CurrentObjectResults) = Type("String") Then
+			
+			If IsBlankString(NameNewCommand) And StrStartsWith(CurrentObjectResults, "<") Then
+				Try
+					XMLReader = New XMLReader();
+					XMLReader.SetString(CurrentObjectResults);
+					XMLResult = XDTOFactory.ReadXML(XMLReader); // Arbitrary
+					XMLReader.Close();
+					NameNewCommand = AllCommands.XML;
+				Except
+					XMLResult = Undefined;
+					XMLReader = Undefined;
+				EndTry;
+			EndIf;
+			
+			If IsBlankString(NameNewCommand) And 
+					(StrStartsWith(CurrentObjectResults, "{") Or StrStartsWith(CurrentObjectResults, "[")) Then
+				Try
+					JSONReader = New JSONReader();
+					JSONReader.SetString(CurrentObjectResults);
+					JSONResult = ReadJSON(JSONReader);
+					JSONReader.Close();
+					NameNewCommand = AllCommands.JSON;
+				Except
+					JSONResult = Undefined;
+					JSONReader = Undefined;
+				EndTry;
+			EndIf;
+			
+			If IsBlankString(NameNewCommand) Then
+				Try
+					CurrentValue = Base64Value(CurrentObjectResults);
+					If TypeOf(CurrentValue) = Type("BinaryData") And CurrentValue.Size() > 22 Then
+						NameNewCommand = AllCommands.File;
+					EndIf;
+				Except
+					CurrentValue = Undefined;
+				EndTry;
+			EndIf;
+			
+		ElsIf TypeOf(CurrentObjectResults) = Type("Array") Then
+			For Index = 0 To CurrentObjectResults.UBound() Do
+				NewChild = TreeBranch.GetItems().Add();
+				NewChild.Part = Format(Index, "NZ=; NG=;");
+				NewChildren.Add(NewChild);
+			EndDo;
+			
+		ElsIf TypeOf(CurrentObjectResults) = Type("XDTOList") Then
+			For Index = 0 To CurrentObjectResults.Count() - 1 Do
+				NewChild = TreeBranch.GetItems().Add();
+				NewChild.Part = Format(Index, "NZ=; NG=;");
+				NewChildren.Add(NewChild);
+			EndDo;
+			
+		EndIf;
+		
+		If Not IsBlankString(NameNewCommand) Then
+			NewChild = TreeBranch.GetItems().Add();
+			NewChild.Part = NameNewCommand;
+			NewChildren.Add(NewChild);
+		EndIf;	
+
+	EndIf;
+	
+	For Each Child In NewChildren Do
+		ConstructTreeBranch(Child, AllCommands);
+	EndDo;
+	
+EndProcedure	
+
+// Is transform command.
+// 
+// Parameters:
+//  CommandName - String
+// 
+// Returns:
+//  Boolean - Is transform command
+&AtServer
+Function isTransformCommand(CommandName)
+	Return StrStartsWith(CommandName, "[");
+EndFunction
+
+// Is auto generated content.
+// 
+// Parameters:
+//  CurrentCommand - String - Current command
+//  PreviousCommand - String - Previous command
+//  AllCommands - See Unit_MockService.getAllContentCommands
+// 
+// Returns:
+//  Boolean - Is auto generated content
+&AtServer
+Function isAutoGeneratedContent(CurrentCommand, PreviousCommand, AllCommands)
+
+	If CurrentCommand = AllCommands.ZIP Or CurrentCommand = AllCommands.XML Or CurrentCommand = AllCommands.JSON Then
+		Return True;
+	EndIf;
+	
+	If Not isTransformCommand(CurrentCommand) And
+			(PreviousCommand = AllCommands.XML Or PreviousCommand = AllCommands.JSON) Then
+		Return True;
+	EndIf;
+	
+	Return False;
+
+EndFunction
+
+// Get branch command path.
+// 
+// Parameters:
+//  TreeBranch - FormDataTreeItem - Tree branch
+// 
+// Returns:
+//  String - Command path
+&AtServer
+Function GetBranchCommandPath(TreeBranch)
+	ResultPath = New Array;
+	CurrentBranch = TreeBranch;
+	While Not CurrentBranch = Undefined Do
+		ResultPath.Insert(0, CurrentBranch.Part);
+		CurrentBranch = CurrentBranch.GetParent();
+	EndDo;
+	Return StrConcat(ResultPath, "/");
+EndFunction
 
 #EndRegion

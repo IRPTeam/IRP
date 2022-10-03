@@ -202,59 +202,65 @@ EndFunction
 // Parameters:
 //  PathToValue - String - Path to value
 //  DataForValue - Arbitrary
+//  AllCommands - See getAllContentCommands
+//  RowData - Boolean
 // 
 // Returns:
 //  String - Get value of body variable by path
-Function getValueOfBodyVariableByPath(PathToValue, DataForValue) Export
+Function getValueOfBodyVariableByPath(PathToValue, DataForValue, AllCommands = Undefined, RowData = False) Export
+	
+	If AllCommands = Undefined Then
+		AllCommands = getAllContentCommands();
+	EndIf;
 	
 	ArrayOfSegments = StrSplit(PathToValue, "/");
 	
 	If ArrayOfSegments.Count() = 0 Then
-		Return String(DataForValue);
+		Return ?(RowData, DataForValue, String(DataForValue));
 	EndIf;
 	
 	CurrentDataType = ArrayOfSegments[0];
-	NextPath = Mid(PathToValue, StrLen(CurrentDataType)+2);
+	NextPath = Mid(PathToValue, StrLen(CurrentDataType) + 2);
 	
 	If TypeOf(DataForValue) = Type("String") Then
 		
-		If CurrentDataType = "[xml]" Then
+		If CurrentDataType = AllCommands.XML Then
 			Reader = New XMLReader();
 			Reader.SetString(DataForValue);
 			ValueXML = XDTOFactory.ReadXML(Reader); // Arbitrary
 			Reader.Close();
-			Return getValueOfBodyVariableByPath(NextPath, ValueXML);
+			Return getValueOfBodyVariableByPath(NextPath, ValueXML, AllCommands, RowData);
 			
-		ElsIf CurrentDataType = "[json]" Then
-			ValueJSON = CommonFunctionsServer.DeserializeJSON(DataForValue);
-			Return getValueOfBodyVariableByPath(NextPath, ValueJSON);
+		ElsIf CurrentDataType = AllCommands.JSON Then
+			ValueJSON = CommonFunctionsServer.DeserializeJSON(DataForValue, True);
+			Return getValueOfBodyVariableByPath(NextPath, ValueJSON, AllCommands, RowData);
 			
-		ElsIf CurrentDataType = "[file]" Then
+		ElsIf CurrentDataType = AllCommands.File Then
 			ValueBase64 = Base64Value(DataForValue);
-			Return getValueOfBodyVariableByPath(NextPath, ValueBase64);
+			Return getValueOfBodyVariableByPath(NextPath, ValueBase64, AllCommands, RowData);
 			
 		ElsIf StrStartsWith(CurrentDataType, "[csv") Then
 			Separator = ",";
-			If CurrentDataType <> "[csv]" Then
-				Separator = Mid(CurrentDataType, 6, StrLen(CurrentDataType)-6);
+			If CurrentDataType <> AllCommands.CSV Then
+				Separator = Mid(CurrentDataType, 6, StrLen(CurrentDataType) - 6);
 			EndIf; 
-			Return getValueOfBodyVariableByPath(NextPath, StrSplit(DataForValue, Separator, True));
+			Return getValueOfBodyVariableByPath(NextPath, StrSplit(DataForValue, Separator, True), AllCommands, RowData);
 			
 		Else
-			Return String(DataForValue);
+			Return ?(RowData, DataForValue, String(DataForValue));
 			
 		EndIf;
 	
 	ElsIf TypeOf(DataForValue) = Type("BinaryData") Then
 		
-		If CurrentDataType = "[text]" Then
+		If CurrentDataType = AllCommands.Text Then
 			ValueText = GetStringFromBinaryData(DataForValue);
-			Return getValueOfBodyVariableByPath(NextPath, ValueText);
+			Return getValueOfBodyVariableByPath(NextPath, ValueText, AllCommands, RowData);
 		
-		ElsIf CurrentDataType = "[file]" Then
-			Return getValueOfBodyVariableByPath(NextPath, DataForValue);
+		ElsIf CurrentDataType = AllCommands.File Then
+			Return getValueOfBodyVariableByPath(NextPath, DataForValue, AllCommands, RowData);
 				
-		ElsIf CurrentDataType = "[zip]" Then
+		ElsIf CurrentDataType = AllCommands.ZIP Then
 	 		ReadStream = New MemoryStream(GetBinaryDataBufferFromBinaryData(DataForValue));
 	 		ZIP = New ZipFileReader(ReadStream);
 	 		TempFile = TempFilesDir() + String(New UUID);
@@ -262,7 +268,6 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue) Export
 				FileName = ArrayOfSegments[1];
 				NextPath = Mid(NextPath, StrLen(FileName)+2);
 		 		ZIP.ExtractAll(TempFile, ZIPRestoreFilePathsMode.DontRestore);
-		 		FileName = ?(FileName="[0]", ZIP.Items[0].Name, FileName);
 		 		NewBinaryData = New BinaryData(TempFile + "/" + FileName); // String, BinaryData
 		 		DeleteFiles(TempFile);
 	 		Else
@@ -273,61 +278,78 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue) Export
 	 		EndIf;
 	 		ZIP.Close();
 	 		ReadStream.Close();
-			Return getValueOfBodyVariableByPath(NextPath, NewBinaryData);
+			Return getValueOfBodyVariableByPath(NextPath, NewBinaryData, AllCommands, RowData);
 			
 		Else
-			Return String(DataForValue);
+			Return ?(RowData, DataForValue, String(DataForValue));
 			
 		EndIf;
 	
 	ElsIf TypeOf(DataForValue) = Type("XDTODataObject") Then
 		
 		If IsBlankString(CurrentDataType) Then
-			Result = "XDTODataObject";
-			For Each XDTOProperty In DataForValue.Properties() Do
-				Result = Result + Chars.CR + "* " + XDTOProperty.LocalName; 
-			EndDo;
-			Return Result;
+			Return ?(RowData, DataForValue, GetPresentationXDTODataObject(DataForValue));
 			
 		ElsIf IsBlankString(NextPath) Then
-			If CurrentDataType = "[text]" Then
+			If CurrentDataType = AllCommands.Text Then
 				CurrentValue = DataForValue.Sequence().GetText(0);
 			Else
 				CurrentValue = DataForValue[CurrentDataType]; // XDTODataObject, String
 			EndIf;
 			If TypeOf(CurrentValue) = Type("XDTODataObject") Then
-				Result = "XDTODataObject";
-				For Each XDTOProperty In CurrentValue.Properties() Do
-					Result = Result + Chars.CR + "* " + XDTOProperty.LocalName; 
-				EndDo;
-				Return Result;
+				Return ?(RowData, CurrentDataType, GetPresentationXDTODataObject(CurrentValue));
+			ElsIf TypeOf(CurrentValue) = Type("XDTOList") Then
+				Return getValueOfBodyVariableByPath(NextPath, CurrentValue, AllCommands, RowData);
 			Else
-				Return String(CurrentValue);
+				Return ?(RowData, CurrentValue, String(CurrentValue));
 			EndIf;
 			
 		Else
-			Return getValueOfBodyVariableByPath(NextPath, DataForValue[CurrentDataType]);
+			Return getValueOfBodyVariableByPath(NextPath, DataForValue[CurrentDataType], AllCommands, RowData);
 			
 		EndIf;
+	
+	ElsIf TypeOf(DataForValue) = Type("Map") Then
 		
+		If IsBlankString(CurrentDataType) Then
+			Return ?(RowData, DataForValue, GetPresentationMap(DataForValue));
+			
+		ElsIf IsBlankString(NextPath) Then
+			CurrentValue = DataForValue[CurrentDataType]; // Arbitrary
+			Return ?(RowData, CurrentValue, String(CurrentValue));
+			
+		Else
+			Return getValueOfBodyVariableByPath(NextPath, DataForValue[CurrentDataType], AllCommands, RowData);
+			
+		EndIf;
 	
 	Else // get object property
 	 
 	 	If TypeOf(DataForValue) = Type("Array") Or TypeOf(DataForValue) = Type("XDTOList") Then
 	 		If IsBlankString(CurrentDataType) Then
-	 			Return "Collection";
+	 			Return ?(RowData, DataForValue, "Collection");
 	 		Else
 	 			NumberKey = Number(CurrentDataType);
 				PropertyValue = DataForValue[NumberKey]; // Arbitrary
-			EndIf
+	 		EndIf
+	 	ElsIf TypeOf(DataForValue) = Type("Map") Then
+	 		If IsBlankString(CurrentDataType) Then
+	 			Return ?(RowData, DataForValue, "Map");
+	 		Else
+	 			PropertyValue = DataForValue[CurrentDataType]; // Arbitrary
+	 		EndIf
 	 	Else
 			PropertyValue = DataForValue[CurrentDataType]; // Arbitrary
 	 	EndIf;
 	 
 		If IsBlankString(NextPath) Then
-			Return String(PropertyValue);
+			If TypeOf(PropertyValue) = Type("XDTODataObject") Then
+				Return ?(RowData, PropertyValue, GetPresentationXDTODataObject(PropertyValue));
+			Else
+				Return ?(RowData, PropertyValue, String(PropertyValue));
+			EndIf;
 		Else
-			Return getValueOfBodyVariableByPath(NextPath, PropertyValue);
+			Return getValueOfBodyVariableByPath(NextPath, PropertyValue, AllCommands, RowData);
 		EndIf;
 	EndIf;
 	
@@ -337,57 +359,84 @@ EndFunction
 // 
 // Parameters:
 //  CurrentCommands - String - Current commands
-//  TypeData - Type - Type data
-//  AddInfo - String - Add info
 // 
 // Returns:
 //  Array of String - Get available commands
-Function getAvailableCommands(CurrentCommands, TypeData, AddInfo) Export
+Function getAvailableCommands(CurrentCommands) Export
+	
+	ContentCommands = getAllContentCommands();
 	
 	Result = New Array;
 	
-	If CurrentCommands = "[file]" Or TypeData = Type("BinaryData") Then
-		Result.Add("[text]");
-		Result.Add("[zip]");
+	If CurrentCommands = ContentCommands.File Then
+		Result.Add(ContentCommands.Text);
+		Result.Add(ContentCommands.ZIP);
 	
-	ElsIf CurrentCommands = "[text]" Then
-		Result.Add("[xml]");
-		Result.Add("[json]");
-		Result.Add("[csv]");
-		Result.Add("[csv=?]");
+	ElsIf CurrentCommands = ContentCommands.Text Then
+		Result.Add(ContentCommands.XML);
+		Result.Add(ContentCommands.JSON);
+		Result.Add(ContentCommands.CSV);
+		Result.Add(ContentCommands.CSV_Any);
 	
-	ElsIf StrStartsWith(CurrentCommands, "[csv") Or TypeData = Type("Array") Or TypeData = Type("XDTOList") Then
-		Result.Add("0");
-		Result.Add("1");
-		Result.Add("2");
-		Result.Add("3");
-		Result.Add("4");
-		Result.Add("5");
-		Result.Add("?");
+	ElsIf StrStartsWith(CurrentCommands, "[csv") Then
+		Result.Add(ContentCommands.Zero);
+		Result.Add(ContentCommands.First);
+		Result.Add(ContentCommands.Second);
+		Result.Add(ContentCommands.Third);
+		Result.Add(ContentCommands.Any);
 	
-	ElsIf TypeData = Type("String") Then
-		Result.Add("[file]");
-		Result.Add("[zip]");
-		Result.Add("[text]");
-		Result.Add("[xml]");
-		Result.Add("[json]");
-		Result.Add("[csv]");
-		Result.Add("[csv=?]");
+	ElsIf CurrentCommands = ContentCommands.ZIP Then
+	ElsIf CurrentCommands = ContentCommands.XML Then
+	ElsIf CurrentCommands = ContentCommands.JSON Then
 	
-	ElsIf TypeData = Type("ZipFileReader") Then
-		Result.Add("[0]");
+	Else
+		Result.Add(ContentCommands.File);
+		Result.Add(ContentCommands.ZIP);
+		Result.Add(ContentCommands.Text);
+		Result.Add(ContentCommands.XML);
+		Result.Add(ContentCommands.JSON);
+		Result.Add(ContentCommands.CSV);
+		Result.Add(ContentCommands.CSV_Any);
 	
 	EndIf;
 	
-	If Not IsBlankString(AddInfo) Then
-		Parts = StrSplit(AddInfo, Chars.CR);
-		For Each Part In Parts Do
-			If StrStartsWith(Part, "* ") Then
-				Result.Add(Mid(Part, 3));
-			EndIf;
-		EndDo;
-	EndIf;
+	Return Result;
 	
+EndFunction
+	
+// Get all content commands.
+// 
+// Returns:
+//  Structure - Get all content commands:
+// * Text - String - [text]
+// * File - String - [file]
+// * ZIP - String - [zip]
+// * XML - String - [xml]
+// * JSON - String - [json]
+// * CSV - String - [csv]
+// * CSV_Any - String - [csv=?]
+// * Zero - String - 0
+// * First - String - 1
+// * Second - String - 2
+// * Third - String - 3
+// * Any - String - ?
+Function getAllContentCommands() Export
+	
+	Result = New Structure;
+	
+	Result.Insert("Text", "[text]");
+	Result.Insert("File", "[file]");
+	Result.Insert("ZIP", "[zip]");
+	Result.Insert("XML", "[xml]");
+	Result.Insert("JSON", "[json]");
+	Result.Insert("CSV", "[csv]");
+	Result.Insert("CSV_Any", "[csv=?]");
+	Result.Insert("Zero", "0");
+	Result.Insert("First", "1");
+	Result.Insert("Second", "2");
+	Result.Insert("Third", "3");
+	Result.Insert("Any", "?");
+
 	Return Result;
 	
 EndFunction
@@ -834,6 +883,51 @@ Function getValueOfBodyVariable(RequestStructure, PathToValue, MockValue, Reques
 	Except
 		Return "";
 	EndTry;
+	
+EndFunction
+
+// Get presentation XDTOData object.
+// 
+// Parameters:
+//  XDTODataObject - XDTODataObject - XDTOData object
+// 
+// Returns:
+//	String - presentation XDTOData object  
+Function GetPresentationXDTODataObject(XDTODataObject)
+	
+	Result = "[XDTODataObject]";
+	
+	For Each XDTOProperty In XDTODataObject.Properties() Do
+		Result = Result + Chars.CR + "* " + XDTOProperty.LocalName; 
+	EndDo;
+	
+	Try
+		CurrentValue = XDTODataObject.Sequence().GetText(0);
+		Result = Result + Chars.CR + "* [text] = " + CurrentValue;
+	Except
+		// There is no text!!!
+	EndTry;
+
+	Return Result;
+	
+EndFunction
+
+// Get presentation map.
+// 
+// Parameters:
+//  MapObject - Map - Map object
+// 
+// Returns:
+//  String - Get presentation map
+Function GetPresentationMap(MapObject)
+	
+	Result = "[Map]";
+	
+	For Each KeyValue In MapObject Do
+		Result = Result + Chars.CR + "* " + KeyValue.Key; 
+	EndDo;
+	
+	Return Result;
 	
 EndFunction
 

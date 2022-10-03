@@ -622,15 +622,6 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="4edc6572-401c-4571-88e1-4ba2fe11fca2">
-    <name>AccessConstructor</name>
-    <synonym>
-      <key>en</key>
-      <value>Access constructor</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <commands uuid="833aa8fe-6e5b-4ac0-9d70-32746035427c">
     <name>Test</name>
     <synonym>

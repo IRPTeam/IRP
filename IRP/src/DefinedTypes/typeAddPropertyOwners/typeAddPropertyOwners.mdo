@@ -111,5 +111,9 @@
     <types>CatalogRef.PartnersBankAccounts</types>
     <types>DocumentRef.ChequeBondTransaction</types>
     <types>DocumentRef.ConsolidatedRetailSales</types>
+    <types>DocumentRef.WorkOrder</types>
+    <types>DocumentRef.WorkOrderClosing</types>
+    <types>DocumentRef.WorkSheet</types>
+    <types>CatalogRef.BillOfMaterials</types>
   </type>
 </mdclass:DefinedType>

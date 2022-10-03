@@ -247,6 +247,14 @@
         <isFolder>true</isFolder>
       </content>
     </items>
+    <items id="81751930-0f6e-4303-903f-f1d1e2ed8b19">
+      <name>WorkOrder</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>5</value>
+      </code>
+      <isFolder>true</isFolder>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <quickChoice>true</quickChoice>

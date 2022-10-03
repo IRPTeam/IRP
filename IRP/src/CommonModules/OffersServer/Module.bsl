@@ -6,7 +6,8 @@ Function isSaleDoc(Ref)
 		Or TypeOf(Ref) = Type("DocumentRef.SalesReturnOrder")
 		Or TypeOf(Ref) = Type("DocumentRef.SalesReturn")
 		Or TypeOf(Ref) = Type("DocumentRef.RetailSalesReceipt")
-		Or TypeOf(Ref) = Type("DocumentRef.RetailReturnReceipt");
+		Or TypeOf(Ref) = Type("DocumentRef.RetailReturnReceipt")
+		Or TypeOf(Ref) = Type("DocumentRef.WorkOrder");
 EndFunction
 
 Function isPurchaseDoc(Ref)

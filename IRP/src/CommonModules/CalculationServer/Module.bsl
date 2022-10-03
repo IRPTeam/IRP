@@ -1,9 +1,17 @@
 
 Function CalculateDocumentAmount(ItemList) Export
-	TotalAmount = ItemList.Total("TotalAmount");
-	CanceledRows = ItemList.FindRows(New Structure("Cancel", True));
-	For Each CanceledRow In CanceledRows Do
-		TotalAmount = TotalAmount - CanceledRow.TotalAmount;
+	CancelColumnIsPresent = False;
+	If ItemList.Count() 
+		And CommonFunctionsClientServer.ObjectHasProperty(ItemList[0], "Cancel") Then
+		CancelColumnIsPresent = True;
+	EndIf;
+		
+	TotalAmount = 0;
+	For Each Row In ItemList Do
+		If CancelColumnIsPresent And Row.Cancel Then
+			Continue;
+		EndIf;
+		TotalAmount = TotalAmount + Row.TotalAmount;
 	EndDo;
 	Return TotalAmount;
 EndFunction

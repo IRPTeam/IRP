@@ -155,7 +155,27 @@ Scenario: _023114 check the display of the header of the collapsible group in Sa
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
+Scenario: _023115 check the display of the header of the collapsible group in Work order
+	* Open list form Work order
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+	* Check the display of the header of the collapsible group
+		When check the display of the header of the collapsible group in sales, purchase and return documents
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP   Status: Wait" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Partner" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
 
+Scenario: _023116 check the display of the header of the collapsible group in Work sheet
+	Given I open hyperlink "e1cib/list/Document.WorkSheet"
+	When check the display of the header of the collapsible group in sales, purchase and return documents
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Ferron BP   Legal name: Company Ferron BP" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Partner" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
 
 Scenario: _024044 check the display of the header of the collapsible group in Sales invoice
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"

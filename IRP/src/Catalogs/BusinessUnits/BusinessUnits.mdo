@@ -58,6 +58,21 @@
   <defaultListForm>Catalog.BusinessUnits.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.BusinessUnits.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="e91c6b34-3fcc-4f60-9fbd-483fa2d8eeed">
+    <name>Type</name>
+    <synonym>
+      <key>en</key>
+      <value>Type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.BusinessUnitTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="72f0042f-9766-4477-af76-a3633fef9c3e">
     <name>UseConsolidatedRetailSales</name>
     <synonym>
@@ -66,6 +81,51 @@
     </synonym>
     <type>
       <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="f63ed0aa-493b-4462-9ffa-b0c5a232daf3">
+    <name>MaterialStore</name>
+    <synonym>
+      <key>en</key>
+      <value>Material store (input, writeoff)</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e2b0ef2c-b5bc-4be8-a3b6-5a4533b3bf2e">
+    <name>ReleaseStore</name>
+    <synonym>
+      <key>en</key>
+      <value>Release store (output, surplus)</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a7e74170-3004-4b0e-829c-863e07579fae">
+    <name>SemiproductStore</name>
+    <synonym>
+      <key>en</key>
+      <value>Semiproduct store (input, writeoff)</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

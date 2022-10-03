@@ -212,7 +212,6 @@ Scenario: _023107 check the filter for Legal name in the document Sales order
 	When check the filter by Legal name
 
 Scenario: _023108 check the filter for Partner terms (segments and validity period) in the document SalesOrder
-	check Partner term filter 
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	When check the filter by Partner term (by segments + expiration date)
@@ -241,6 +240,62 @@ Scenario: _023112 check the filter for Customers partner terms in the document S
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 	When check the filter by customer partner terms in the sales documents
+
+
+Scenario: _023113 check the filter for Legal name in the document Work order
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkOrder"
+	When check the filter by Legal name
+
+
+Scenario: _023114 check the filter for Company in the document Work order
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkOrder"
+	When check the filter by Company
+	
+Scenario: _023115 check Description in the document Work order
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkOrder"
+	When check Description
+
+Scenario: _023116 check the filter for Customer in the document WorkOrder
+	And I close all client application windows
+	* Open a form to create Work Order
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I click the button named "FormCreate"
+	When check the filter by customers in the sales documents
+
+
+Scenario: _023117 check the filter for Customers partner terms in the document WorkOrder
+	And I close all client application windows
+	* Open a form to create Work Order
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I click the button named "FormCreate"
+	When check the filter by customer partner terms in the sales documents
+
+
+Scenario: _023118 check the filter for Legal name in the document Work sheet
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkSheet"
+	When check the filter by Legal name
+
+
+Scenario: _023119 check the filter for Company in the document Work sheet
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkSheet"
+	When check the filter by Company
+	
+Scenario: _023120 check Description in the document Work sheet
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkSheet"
+	When check Description
+
+Scenario: _023121 check the filter for Customer in the document WorkSheet
+	And I close all client application windows
+	* Open a form to create Work Sheet
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I click the button named "FormCreate"
+	When check the filter by customers in the sales documents
 
 
 Scenario: _024036 check the filter for Legal name in the document Sales invoice

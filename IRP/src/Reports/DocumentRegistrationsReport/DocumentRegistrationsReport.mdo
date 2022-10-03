@@ -86,6 +86,8 @@
       <types>DocumentRef.BatchReallocateOutgoing</types>
       <types>DocumentRef.ChequeBondTransaction</types>
       <types>DocumentRef.ConsolidatedRetailSales</types>
+      <types>DocumentRef.WorkOrder</types>
+      <types>DocumentRef.WorkSheet</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

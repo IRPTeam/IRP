@@ -1,37 +1,124 @@
 
-//	@strict-types
+// strict-types
 
-Procedure LockCatalogs(LocksStorage)
-	// Set lock for table Catalog.Batches
-	DataLock_Batches = New DataLock();
-	ItemLock_Batches = DataLock_Batches.Add("Catalog.Batches");
-	ItemLock_Batches.Mode = DataLockMode.Exclusive;
-	DataLock_Batches.Lock();
-	LocksStorage.Add(DataLock_Batches);
-	
-	// Set lock for table Catalog.BatchKeys
-	DataLock_BatchKeys = New DataLock();
-	ItemLock_BatchKeys = DataLock_Batches.Add("Catalog.BatchKeys");
-	ItemLock_BatchKeys.Mode = DataLockMode.Exclusive;
-	DataLock_BatchKeys.Lock();
-	LocksStorage.Add(DataLock_BatchKeys);
-EndProcedure
+#Region TRANSFER_DOCUMENTS
 
-Procedure LockDocuments(LocksStorage)
-	// Set lock for Document.BatchReallocateIncoming
-	DataLock_BatchReallocateIncoming = New DataLock();
-	ItemLock_BatchReallocateIncoming = DataLock_BatchReallocateIncoming.Add("Document.BatchReallocateIncoming");
-	ItemLock_BatchReallocateIncoming.Mode = DataLockMode.Exclusive;
-	DataLock_BatchReallocateIncoming.Lock();
-	LocksStorage.Add(DataLock_BatchReallocateIncoming);
-	
-	// Set lock for Document.BatchReallocateOutgoing
-	DataLock_BatchReallocateOutgoing = New DataLock();
-	ItemLock_BatchReallocateOutgoing = DataLock_BatchReallocateOutgoing.Add("Document.BatchReallocateOutgoing");
-	ItemLock_BatchReallocateOutgoing.Mode = DataLockMode.Exclusive;
-	DataLock_BatchReallocateOutgoing.Lock();
-	LocksStorage.Add(DataLock_BatchReallocateOutgoing);
-EndProcedure
+Function GetArrayOfTransferDocument()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
+	Return ArrayOfTypes;
+EndFunction
+
+Function IsTransferDocument(Document)
+	ArrayOfTypes = GetArrayOfTransferDocument();
+	If ArrayOfTypes.Find(TypeOf(Document)) <> Undefined Then
+		Return True;
+	EndIf;
+	Return False;
+EndFunction
+
+#EndRegion
+
+#Region COMPOSITE_DOCUMNETS
+
+Function GetArrayOfCompositeDocument()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
+	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	Return ArrayOfTypes;
+EndFunction
+
+Function IsCompositeDocument(Document)
+	ArrayOfTypes = GetArrayOfCompositeDocument();
+	If ArrayOfTypes.Find(TypeOf(Document)) <> Undefined Then
+		Return True;
+	EndIf;
+	Return False;
+EndFunction
+
+#EndRegion
+
+#Region DECOMPOSITE_DOCUMENTS
+
+Function GetArrayOfDecompositeDocument()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
+	Return ArrayOfTypes;
+EndFunction
+
+Function IsDecompositeDocument(Document)
+	ArrayOfTypes = GetArrayOfDecompositeDocument();
+	If ArrayOfTypes.Find(TypeOf(Document)) <> Undefined Then
+		Return True;
+	EndIf;
+	Return False;
+EndFunction
+
+#EndRegion
+
+#Region MULTI_DIRECTION_DOCUMENTS
+
+// Get array of multi direction document.
+// 
+// Returns:
+//  Array - Get array of multi direction document
+Function GetArrayOfMultiDirectionDocument()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
+	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
+	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
+	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	Return ArrayOfTypes;
+EndFunction
+
+Function IsNotMultiDirectionDocument(Document)
+	ArrayOfTypes = GetArrayOfMultiDirectionDocument();
+	If ArrayOfTypes.Find(TypeOf(Document)) = Undefined Then
+		Return True;
+	EndIf;
+	Return False;
+EndFunction
+
+#EndRegion
+
+#Region BATCHES_DOCUMENTS
+
+// Get array of batch document types.
+// 
+// Returns:
+//  Array - Get array of batch document types
+Function GetArrayOfBatchDocumentTypes()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
+	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
+	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	ArrayOfTypes.Add(Type("DocumentRef.OpeningEntry"));
+	ArrayOfTypes.Add(Type("DocumentRef.PurchaseInvoice"));
+	ArrayOfTypes.Add(Type("DocumentRef.PurchaseReturn"));
+	ArrayOfTypes.Add(Type("DocumentRef.RetailSalesReceipt"));
+	ArrayOfTypes.Add(Type("DocumentRef.RetailReturnReceipt"));
+	ArrayOfTypes.Add(Type("DocumentRef.SalesInvoice"));
+	ArrayOfTypes.Add(Type("DocumentRef.SalesReturn"));
+	ArrayOfTypes.Add(Type("DocumentRef.StockAdjustmentAsSurplus"));
+	ArrayOfTypes.Add(Type("DocumentRef.StockAdjustmentAsWriteOff"));
+	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
+	ArrayOfTypes.Add(Type("DocumentRef.BatchReallocateIncoming"));
+	ArrayOfTypes.Add(Type("DocumentRef.BatchReallocateOutgoing"));
+	ArrayOfTypes.Add(Type("DocumentRef.WorkSheet"));
+	Return ArrayOfTypes;
+EndFunction
+
+// Get batch documents types.
+// 
+// Returns:
+//  TypeDescription - Get batch documents types
+Function GetBatchDocumentsTypes()
+	ArrayOfTypes = GetArrayOfBatchDocumentTypes();
+	Types = New TypeDescription(ArrayOfTypes);
+	Return Types;
+EndFunction
+
+#EndRegion
 
 // Posting batch wice balance.
 // 
@@ -81,9 +168,22 @@ Procedure BatchReallocate(LocksStorage, BatchReallocateRef, EndPeriod)
 	LockDocuments(LocksStorage);
 	ReleaseBatchReallocateDocuments(BatchReallocateRef);
 
-	EmptyLackItemList = GetEmptyLackItemList();
-	EmptyResultItemList = GetEmptyResultItemList();
-
+	// EmptyLackItemList
+	MetadataR4050B = Metadata.AccumulationRegisters.R4050B_StockInventory;
+	EmptyLackItemList = New ValueTable();
+	EmptyLackItemList.Columns.Add("Store", MetadataR4050B.Dimensions.Store.Type);
+	EmptyLackItemList.Columns.Add("ItemKey", MetadataR4050B.Dimensions.ItemKey.Type);
+	EmptyLackItemList.Columns.Add("Quantity", MetadataR4050B.Resources.Quantity.Type);
+	
+	// EmptyResultItemList
+	MetadataR4050B = Metadata.AccumulationRegisters.R4050B_StockInventory;
+	EmptyResultItemList = New ValueTable();
+	EmptyResultItemList.Columns.Add("Store", MetadataR4050B.Dimensions.Store.Type);
+	EmptyResultItemList.Columns.Add("ItemKey", MetadataR4050B.Dimensions.ItemKey.Type);
+	EmptyResultItemList.Columns.Add("Quantity", MetadataR4050B.Resources.Quantity.Type);
+	EmptyResultItemList.Columns.Add("CompanySender", MetadataR4050B.Dimensions.Company.Type);
+	EmptyResultItemList.Columns.Add("CompanyReceiver", MetadataR4050B.Dimensions.Company.Type);
+	
 	ProcessedRecorders = New Array();
 	LackOfBatches = True;
 	While LackOfBatches Do
@@ -814,7 +914,18 @@ Function GetBatchWiseBalance(CalculationSettings)
 	tmp_manager = New TempTablesManager();
 	Tree = GetBatchTree(tmp_manager, CalculationSettings);
 
-	EmptyTable_BatchWiseBalance = CreateTable_BatchWiseBalance();
+	// EmptyTable_BatchWiseBalance
+	RegMetadata = Metadata.AccumulationRegisters.R6010B_BatchWiseBalance;
+	EmptyTable_BatchWiseBalance = New ValueTable();
+	EmptyTable_BatchWiseBalance.Columns.Add("Batch"     , New TypeDescription("CatalogRef.Batches"));
+	EmptyTable_BatchWiseBalance.Columns.Add("BatchKey"  , New TypeDescription("CatalogRef.BatchKeys"));
+	EmptyTable_BatchWiseBalance.Columns.Add("Document"  , GetBatchDocumentsTypes());
+	EmptyTable_BatchWiseBalance.Columns.Add("Company"   , New TypeDescription("CatalogRef.Companies"));
+	EmptyTable_BatchWiseBalance.Columns.Add("Period"    , RegMetadata.StandardAttributes.Period.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("Quantity"  , RegMetadata.Resources.Quantity.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("Amount"    , RegMetadata.Resources.Amount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("AmountTax" , RegMetadata.Resources.AmountTax.Type);
+	
 	Tables = New Structure();
 	Tables.Insert("DataForExpense"               , EmptyTable_BatchWiseBalance.CopyColumns());
 	Tables.Insert("DataForReceipt"               , EmptyTable_BatchWiseBalance.CopyColumns());
@@ -827,20 +938,81 @@ Function GetBatchWiseBalance(CalculationSettings)
 	ArrayOfTypes_SalesInvoice.Add(Type("DocumentRef.RetailSalesReceipt"));
 	Tables.DataForSalesBatches.Columns.Add("SalesInvoice", New TypeDescription(ArrayOfTypes_SalesInvoice));
 
-	DataForBundleAmountValues = GetDataForBundleAmountValues();
+	// DataForBundleAmountValues
+	RegMetadata = Metadata.InformationRegisters.T6040S_BundleAmountValues;
+	DataForBundleAmountValues = New ValueTable();
+	DataForBundleAmountValues.Columns.Add("Period"         , RegMetadata.StandardAttributes.Period.Type);
+	DataForBundleAmountValues.Columns.Add("Company"        , RegMetadata.Dimensions.Company.Type);
+	DataForBundleAmountValues.Columns.Add("Batch"          , RegMetadata.Dimensions.Batch.Type);
+	DataForBundleAmountValues.Columns.Add("BatchKey"       , RegMetadata.Dimensions.BatchKey.Type);
+	DataForBundleAmountValues.Columns.Add("AmountValue"    , RegMetadata.Resources.AmountValue.Type);
+	DataForBundleAmountValues.Columns.Add("AmountTaxValue" , RegMetadata.Resources.AmountTaxValue.Type);
+	DataForBundleAmountValues.Columns.Add("BatchKeyBundle" , RegMetadata.Dimensions.BatchKeyBundle.Type);
 	Tables.Insert("DataForBundleAmountValues", DataForBundleAmountValues);
 	
-	DataForCompositeBatchesAmountValues = GetDataForCompositeBatchesAmountValues();
+	// DataForCompositeBatchesAmountValues
+	RegMetadata = Metadata.InformationRegisters.T6090S_CompositeBatchesAmountValues;
+	DataForCompositeBatchesAmountValues = New ValueTable();
+	DataForCompositeBatchesAmountValues.Columns.Add("Period"            , RegMetadata.StandardAttributes.Period.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("Company"           , RegMetadata.Dimensions.Company.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("Batch"             , RegMetadata.Dimensions.Batch.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("BatchKey"          , RegMetadata.Dimensions.BatchKey.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("BatchComposite"    , RegMetadata.Dimensions.BatchComposite.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("BatchKeyComposite" , RegMetadata.Dimensions.BatchKeyComposite.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("Quantity"          , RegMetadata.Resources.Quantity.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("Amount"            , RegMetadata.Resources.Amount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("AmountTax"         , RegMetadata.Resources.AmountTax.Type);
 	Tables.Insert("DataForCompositeBatchesAmountValues", DataForCompositeBatchesAmountValues);
 	
-	DataForReallocatedBatchesAmountValues = GetDataForReallocatedBatchesAmountValues();
+	// DataForReallocatedBatchesAmountValues
+	RegMetadata = Metadata.InformationRegisters.T6080S_ReallocatedBatchesAmountValues;
+	DataForReallocatedBatchesAmountValues = New ValueTable();
+	DataForReallocatedBatchesAmountValues.Columns.Add("Period"           , RegMetadata.StandardAttributes.Period.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("OutgoingDocument" , RegMetadata.Dimensions.OutgoingDocument.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("IncomingDocument" , RegMetadata.Dimensions.IncomingDocument.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("BatchKey"         , RegMetadata.Dimensions.BatchKey.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("Amount"           , RegMetadata.Resources.Amount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("AmountTax"        , RegMetadata.Resources.AmountTax.Type);
 	Tables.Insert("DataForReallocatedBatchesAmountValues", DataForReallocatedBatchesAmountValues);
 	
-	DataForWriteOffBatches = GetDataForWriteOffBatches();
+	// DataForWriteOffBatches
+	RegMetadata = Metadata.InformationRegisters.T6095S_WriteOffBatchesInfo;
+	DataForWriteOffBatches = New ValueTable();
+	DataForWriteOffBatches.Columns.Add("Period"           , RegMetadata.StandardAttributes.Period.Type);
+	DataForWriteOffBatches.Columns.Add("Document"         , RegMetadata.Dimensions.Document.Type);
+	DataForWriteOffBatches.Columns.Add("Company"          , RegMetadata.Dimensions.Company.Type);
+	DataForWriteOffBatches.Columns.Add("Branch"           , RegMetadata.Dimensions.Branch.Type);
+	DataForWriteOffBatches.Columns.Add("ProfitLossCenter" , RegMetadata.Dimensions.ProfitLossCenter.Type);
+	DataForWriteOffBatches.Columns.Add("ExpenseType"      , RegMetadata.Dimensions.ExpenseType.Type);
+	DataForWriteOffBatches.Columns.Add("ItemKey"          , RegMetadata.Dimensions.ItemKey.Type);
+	DataForWriteOffBatches.Columns.Add("Currency"         , RegMetadata.Dimensions.Currency.Type);
+	DataForWriteOffBatches.Columns.Add("RowID"            , RegMetadata.Dimensions.RowID.Type);
+	DataForWriteOffBatches.Columns.Add("Amount"           , RegMetadata.Resources.Amount.Type);
+	DataForWriteOffBatches.Columns.Add("AmountTax"        , RegMetadata.Resources.AmountTax.Type);
 	Tables.Insert("DataForWriteOffBatches", DataForWriteOffBatches);
 	
-	TableOfReturnedBatches = GetTableOfReturnedBatches();
-
+	//TableOfReturnedBatches
+	RegMetadata = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
+	TableOfReturnedBatches = New ValueTable();
+	TableOfReturnedBatches.Columns.Add("IsOpeningBalance" , New TypeDescription("Boolean"));
+	TableOfReturnedBatches.Columns.Add("Skip"             , New TypeDescription("Boolean"));
+	TableOfReturnedBatches.Columns.Add("Priority"         , New TypeDescription("Number"));
+	TableOfReturnedBatches.Columns.Add("BatchKey"         , New TypeDescription("CatalogRef.BatchKeys"));
+	TableOfReturnedBatches.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
+	TableOfReturnedBatches.Columns.Add("Amount"           , RegMetadata.Resources.Amount.Type);
+	TableOfReturnedBatches.Columns.Add("AmountTax"        , RegMetadata.Resources.AmountTax.Type);
+	TableOfReturnedBatches.Columns.Add("Document"         , GetBatchDocumentsTypes());
+	TableOfReturnedBatches.Columns.Add("Date"             , RegMetadata.StandardAttributes.Period.Type);
+	TableOfReturnedBatches.Columns.Add("Company"          , RegMetadata.Dimensions.Company.Type);
+	TableOfReturnedBatches.Columns.Add("Direction"        , RegMetadata.Dimensions.Direction.Type);
+	TableOfReturnedBatches.Columns.Add("Batch"            , New TypeDescription("CatalogRef.Batches"));
+	TableOfReturnedBatches.Columns.Add("QuantityBalance"  , RegMetadata.Resources.Quantity.Type);
+	TableOfReturnedBatches.Columns.Add("AmountBalance"    , RegMetadata.Resources.Amount.Type);
+	TableOfReturnedBatches.Columns.Add("AmountTaxBalance" , RegMetadata.Resources.AmountTax.Type);
+	TableOfReturnedBatches.Columns.Add("BatchDocument"    , RegMetadata.Dimensions.BatchDocument.Type);
+	TableOfReturnedBatches.Columns.Add("SalesInvoice"     , RegMetadata.Dimensions.SalesInvoice.Type);
+	
 	For Each Row In Tree.Rows Do
 		CalculateBatch(Row.Document, Row.Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance, CalculationSettings);
 		If TableOfReturnedBatches.Count() Then
@@ -904,11 +1076,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.Direction AS Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end AS ProfitLossCenter,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end AS ExpenseType,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end AS RowID,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end AS ProfitLossCenter,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ExpenseType else undefined end AS ExpenseType,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.RowID else undefined end AS RowID,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end AS ItemLinkID,
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
@@ -930,11 +1102,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ExpenseType else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.RowID else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end,
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.ItemKey
@@ -985,11 +1157,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.Direction AS Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end AS ProfitLossCenter,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end AS ExpenseType,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end AS RowID,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end AS ProfitLossCenter,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ExpenseType else undefined end AS ExpenseType,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.RowID else undefined end AS RowID,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end AS ItemLinkID,
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
@@ -1006,11 +1178,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.Direction,
 	|	T6020S_BatchKeysInfo.BatchDocument,
 	|	T6020S_BatchKeysInfo.SalesInvoice,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.ExpenseType else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.RowID else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Branch else undefined end,
-	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff then T6020S_BatchKeysInfo.Currency else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ProfitLossCenter else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.ExpenseType else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.RowID else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end,
+	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end,
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.ItemKey
@@ -1605,7 +1777,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					EndIf;
 					
 						// write-off batches
-					If TypeOf(Row.Document) = Type("DocumentRef.StockAdjustmentAsWriteOff") Then
+					If TypeOf(Row.Document) = Type("DocumentRef.StockAdjustmentAsWriteOff")
+						Or TypeOf(Row.Document) = Type("DocumentRef.WorkSheet") Then
 						NewRow_WriteOffBatches = Tables.DataForWriteOffBatches.Add();
 						FillPropertyValues(NewRow_WriteOffBatches, NewRow);
 						NewRow_WriteOffBatches.ExpenseType      = Row.ExpenseType;
@@ -1643,8 +1816,21 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	EndDo;
 	
 	// Bundling, Unbundling, Transfer, Produce
-	TableOfNewReceivedBatches = GetTableOfNewReceivedBatches();
-
+	TableOfNewReceivedBatches = New ValueTable();
+	TableOfNewReceivedBatches.Columns.Add("Batch");
+	TableOfNewReceivedBatches.Columns.Add("BatchKey");
+	TableOfNewReceivedBatches.Columns.Add("Document");
+	TableOfNewReceivedBatches.Columns.Add("Company");
+	TableOfNewReceivedBatches.Columns.Add("Date");
+	TableOfNewReceivedBatches.Columns.Add("Quantity");
+	TableOfNewReceivedBatches.Columns.Add("Amount");
+	TableOfNewReceivedBatches.Columns.Add("AmountTax");
+	TableOfNewReceivedBatches.Columns.Add("QuantityBalance");
+	TableOfNewReceivedBatches.Columns.Add("AmountBalance");
+	TableOfNewReceivedBatches.Columns.Add("AmountTaxBalance");
+	TableOfNewReceivedBatches.Columns.Add("IsOpeningBalance");
+	TableOfNewReceivedBatches.Columns.Add("Direction");
+	
 	If IsTransferDocument(Document) Then
 		CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings);
 	ElsIf IsCompositeDocument(Document) Then
@@ -1657,8 +1843,11 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRow = Tables.DataForReceipt.Add();
 			FillPropertyValues(NewRow, Row_Receipt);
 
-			Filter = GetBatchFilter(Document, Row_Receipt.BatchKey);
-
+			Filter = New Structure();
+			Filter.Insert("BatchKey", Row_Receipt.BatchKey);
+			Filter.Insert("IncomingDocument", Document);
+			Filter.Insert("OutgoingDocument", Document.Outgoing);
+			
 			FilteredRows = Tables.DataForReallocatedBatchesAmountValues.FindRows(Filter);
 			ReallocatedAmount    = 0;
 			ReallocatedAmountTax = 0;
@@ -1837,19 +2026,6 @@ Function GetPriceForEmptyAmountFromBatchBalance(ItemKey, Period)
 	EndIf;
 EndFunction
 
-Function GetArrayOfTransferDocument()
-	ArrayOfTypes = New Array();
-	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
-	Return ArrayOfTypes;
-EndFunction
-
-Function IsTransferDocument(Document)
-	ArrayOfTypes = GetArrayOfTransferDocument();
-	If ArrayOfTypes.Find(TypeOf(Document)) <> Undefined Then
-		Return True;
-	EndIf;
-	Return False;
-EndFunction
 
 Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings)
 	For Each Row In Rows Do
@@ -1917,20 +2093,6 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 	EndDo;
 EndProcedure
 
-Function GetArrayOfCompositeDocument()
-	ArrayOfTypes = New Array();
-	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
-	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
-	Return ArrayOfTypes;
-EndFunction
-
-Function IsCompositeDocument(Document)
-	ArrayOfTypes = GetArrayOfCompositeDocument();
-	If ArrayOfTypes.Find(TypeOf(Document)) <> Undefined Then
-		Return True;
-	EndIf;
-	Return False;
-EndFunction
 
 Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches)
 	For Each Row_Receipt In DataForReceipt Do
@@ -2015,19 +2177,6 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 	EndDo;
 EndProcedure
 
-Function GetArrayOfDecompositeDocument()
-	ArrayOfTypes = New Array();
-	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
-	Return ArrayOfTypes;
-EndFunction
-
-Function IsDecompositeDocument(Document)
-	ArrayOfTypes = GetArrayOfDecompositeDocument();
-	If ArrayOfTypes.Find(TypeOf(Document)) <> Undefined Then
-		Return True;
-	EndIf;
-	Return False;
-EndFunction
 
 Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches)
 	For Each Row_Receipt In DataForReceipt Do
@@ -2255,13 +2404,6 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	Return Table_SalesBatches;
 EndFunction
 
-Function IsNotMultiDirectionDocument(Document)
-	ArrayOfTypes = GetArrayOfMultiDirectionDocument();
-	If ArrayOfTypes.Find(TypeOf(Document)) = Undefined Then
-		Return True;
-	EndIf;
-	Return False;
-EndFunction
 
 #Region Constructors
 
@@ -2286,325 +2428,37 @@ Function GetCalculationSettings() Export
 	Return Structure;
 EndFunction
 
-// Get array of batch document types.
-// 
-// Returns:
-//  Array - Get array of batch document types
-Function GetArrayOfBatchDocumentTypes()
-	ArrayOfTypes = New Array();
-	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
-	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
-	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
-	ArrayOfTypes.Add(Type("DocumentRef.OpeningEntry"));
-	ArrayOfTypes.Add(Type("DocumentRef.PurchaseInvoice"));
-	ArrayOfTypes.Add(Type("DocumentRef.PurchaseReturn"));
-	ArrayOfTypes.Add(Type("DocumentRef.RetailSalesReceipt"));
-	ArrayOfTypes.Add(Type("DocumentRef.RetailReturnReceipt"));
-	ArrayOfTypes.Add(Type("DocumentRef.SalesInvoice"));
-	ArrayOfTypes.Add(Type("DocumentRef.SalesReturn"));
-	ArrayOfTypes.Add(Type("DocumentRef.StockAdjustmentAsSurplus"));
-	ArrayOfTypes.Add(Type("DocumentRef.StockAdjustmentAsWriteOff"));
-	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
-	ArrayOfTypes.Add(Type("DocumentRef.BatchReallocateIncoming"));
-	ArrayOfTypes.Add(Type("DocumentRef.BatchReallocateOutgoing"));
-	Return ArrayOfTypes;
-EndFunction
-
-// Get batch documents types.
-// 
-// Returns:
-//  TypeDescription - Get batch documents types
-Function GetBatchDocumentsTypes()
-	ArrayOfTypes = GetArrayOfBatchDocumentTypes();
-	Types = New TypeDescription(ArrayOfTypes);
-	Return Types;
-EndFunction
-
-// Create table batch wise balance.
-// 
-// Returns:
-//  ValueTable - Create table batch wise balance:
-// * Batch - CatalogRef.Batches -
-// * BatchKey - CatalogRef.BatchKeys -
-// * Document - See Catalog.Batches.Document
-// * Company - CatalogRef.Companies -
-// * Period - Date
-// * Quantity - Number
-// * Amount - Number
-// * AmountTax - Number
-Function CreateTable_BatchWiseBalance()
-	Table = New ValueTable();
-	Table.Columns.Add("Batch"     , New TypeDescription("CatalogRef.Batches"));
-	Table.Columns.Add("BatchKey"  , New TypeDescription("CatalogRef.BatchKeys"));
-	Table.Columns.Add("Document"  , GetBatchDocumentsTypes());
-	Table.Columns.Add("Company"   , New TypeDescription("CatalogRef.Companies"));
-	Table.Columns.Add("Period"    , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.StandardAttributes.Period.Type);
-	Table.Columns.Add("Quantity"  , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.Resources.Quantity.Type);
-	Table.Columns.Add("Amount"    , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.Resources.Amount.Type);
-	Table.Columns.Add("AmountTax" , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.Resources.AmountTax.Type);
-	Return Table;
-EndFunction
-
-// Get array of multi direction document.
-// 
-// Returns:
-//  Array - Get array of multi direction document
-Function GetArrayOfMultiDirectionDocument()
-	ArrayOfTypes = New Array();
-	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
-	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
-	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
-	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
-	Return ArrayOfTypes;
-EndFunction
-
-// Get data for write off batches.
-// 
-// Returns:
-//  ValueTable - Get data for write off batches:
-// * Period - Date
-// * Document - See InformationRegister.T6095S_WriteOffBatchesInfo.Document
-// * Company - See InformationRegister.T6095S_WriteOffBatchesInfo.Company
-// * Branch - See InformationRegister.T6095S_WriteOffBatchesInfo.Branch
-// * ProfitLossCenter - See InformationRegister.T6095S_WriteOffBatchesInfo.ProfitLossCenter
-// * ExpenseType - See InformationRegister.T6095S_WriteOffBatchesInfo.ExpenseType
-// * ItemKey - See InformationRegister.T6095S_WriteOffBatchesInfo.ItemKey
-// * Currency - See InformationRegister.T6095S_WriteOffBatchesInfo.Currency
-// * RowID - See InformationRegister.T6095S_WriteOffBatchesInfo.RowID
-// * Amount - See InformationRegister.T6095S_WriteOffBatchesInfo.Amount
-// * AmountTax - See InformationRegister.T6095S_WriteOffBatchesInfo.AmountTax
-Function GetDataForWriteOffBatches()
-	DataForWriteOffBatches = New ValueTable();
-	RegMetadata = Metadata.InformationRegisters.T6095S_WriteOffBatchesInfo;
-	DataForWriteOffBatches.Columns.Add("Period"           , RegMetadata.StandardAttributes.Period.Type);
-	DataForWriteOffBatches.Columns.Add("Document"         , RegMetadata.Dimensions.Document.Type);
-	DataForWriteOffBatches.Columns.Add("Company"          , RegMetadata.Dimensions.Company.Type);
-	DataForWriteOffBatches.Columns.Add("Branch"           , RegMetadata.Dimensions.Branch.Type);
-	DataForWriteOffBatches.Columns.Add("ProfitLossCenter" , RegMetadata.Dimensions.ProfitLossCenter.Type);
-	DataForWriteOffBatches.Columns.Add("ExpenseType"      , RegMetadata.Dimensions.ExpenseType.Type);
-	DataForWriteOffBatches.Columns.Add("ItemKey"          , RegMetadata.Dimensions.ItemKey.Type);
-	DataForWriteOffBatches.Columns.Add("Currency"         , RegMetadata.Dimensions.Currency.Type);
-	DataForWriteOffBatches.Columns.Add("RowID"            , RegMetadata.Dimensions.RowID.Type);
-	DataForWriteOffBatches.Columns.Add("Amount"           , RegMetadata.Resources.Amount.Type);
-	DataForWriteOffBatches.Columns.Add("AmountTax"        , RegMetadata.Resources.AmountTax.Type);
-	Return DataForWriteOffBatches
-EndFunction
-
-// Get table of returned batches.
-// 
-// Returns:
-//  ValueTable - Get table of returned batches:
-// * IsOpeningBalance - Boolean -
-// * Skip - Boolean -
-// * Priority - Number -
-// * BatchKey - CatalogRef.BatchKeys -
-// * Quantity - Number -
-// * Amount - Number -
-// * AmountTax - Number -
-// * Document - See Catalog.Batches.Document
-// * Date - Date
-// * Company - CatalogRef.Companies
-// * Direction - See InformationRegister.T6020S_BatchKeysInfo.Direction
-// * Batch - CatalogRef.Batches -
-// * QuantityBalance - Number -
-// * AmountBalance - Number -
-// * AmountTaxBalance - Number -
-// * BatchDocument - See InformationRegister.T6020S_BatchKeysInfo.BatchDocument
-// * SalesInvoice - See InformationRegister.T6020S_BatchKeysInfo.SalesInvoice
-Function GetTableOfReturnedBatches()
-	RegMetadata = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
-	TableOfReturnedBatches = New ValueTable();
-	TableOfReturnedBatches.Columns.Add("IsOpeningBalance" , New TypeDescription("Boolean"));
-	TableOfReturnedBatches.Columns.Add("Skip"             , New TypeDescription("Boolean"));
-	TableOfReturnedBatches.Columns.Add("Priority"         , New TypeDescription("Number"));
-	TableOfReturnedBatches.Columns.Add("BatchKey"         , New TypeDescription("CatalogRef.BatchKeys"));
-	TableOfReturnedBatches.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
-	TableOfReturnedBatches.Columns.Add("Amount"           , RegMetadata.Resources.Amount.Type);
-	TableOfReturnedBatches.Columns.Add("AmountTax"        , RegMetadata.Resources.AmountTax.Type);
-	TableOfReturnedBatches.Columns.Add("Document"         , GetBatchDocumentsTypes());
-	TableOfReturnedBatches.Columns.Add("Date"             , RegMetadata.StandardAttributes.Period.Type);
-	TableOfReturnedBatches.Columns.Add("Company"          , RegMetadata.Dimensions.Company.Type);
-	TableOfReturnedBatches.Columns.Add("Direction"        , RegMetadata.Dimensions.Direction.Type);
-	TableOfReturnedBatches.Columns.Add("Batch"            , New TypeDescription("CatalogRef.Batches"));
-	TableOfReturnedBatches.Columns.Add("QuantityBalance"  , RegMetadata.Resources.Quantity.Type);
-	TableOfReturnedBatches.Columns.Add("AmountBalance"    , RegMetadata.Resources.Amount.Type);
-	TableOfReturnedBatches.Columns.Add("AmountTaxBalance" , RegMetadata.Resources.AmountTax.Type);
-	TableOfReturnedBatches.Columns.Add("BatchDocument"    , RegMetadata.Dimensions.BatchDocument.Type);
-	TableOfReturnedBatches.Columns.Add("SalesInvoice"     , RegMetadata.Dimensions.SalesInvoice.Type);
-	Return TableOfReturnedBatches
-EndFunction
-
-// Get data for reallocated batches amount values.
-// 
-// Returns:
-//  ValueTable - Get data for reallocated batches amount values:
-// * Period - Date
-// * OutgoingDocument - See InformationRegister.T6080S_ReallocatedBatchesAmountValues.OutgoingDocument
-// * IncomingDocument - See InformationRegister.T6080S_ReallocatedBatchesAmountValues.IncomingDocument
-// * BatchKey - See InformationRegister.T6080S_ReallocatedBatchesAmountValues.BatchKey
-// * Quantity - See InformationRegister.T6080S_ReallocatedBatchesAmountValues.Quantity
-// * Amount - See InformationRegister.T6080S_ReallocatedBatchesAmountValues.Amount
-// * AmountTax - See InformationRegister.T6080S_ReallocatedBatchesAmountValues.AmountTax
-Function GetDataForReallocatedBatchesAmountValues()
-	DataForReallocatedBatchesAmountValues = New ValueTable();
-	RegMetadata = Metadata.InformationRegisters.T6080S_ReallocatedBatchesAmountValues;
-	DataForReallocatedBatchesAmountValues.Columns.Add("Period"           , RegMetadata.StandardAttributes.Period.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("OutgoingDocument" , RegMetadata.Dimensions.OutgoingDocument.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("IncomingDocument" , RegMetadata.Dimensions.IncomingDocument.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("BatchKey"         , RegMetadata.Dimensions.BatchKey.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("Amount"           , RegMetadata.Resources.Amount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("AmountTax"        , RegMetadata.Resources.AmountTax.Type);
-	Return DataForReallocatedBatchesAmountValues
-EndFunction
-
-// Get data for bundle amount values.
-// 
-// Returns:
-//  ValueTable - Get data for bundle amount values:
-// * Period - Date
-// * Company - See InformationRegister.T6040S_BundleAmountValues.Company
-// * Batch - See InformationRegister.T6040S_BundleAmountValues.Batch
-// * BatchKey - See InformationRegister.T6040S_BundleAmountValues.BatchKey
-// * AmountValue - See InformationRegister.T6040S_BundleAmountValues.AmountValue
-// * AmountTaxValue - See InformationRegister.T6040S_BundleAmountValues.AmountTaxValue
-// * BatchKeyBundle - See InformationRegister.T6040S_BundleAmountValues.BatchKeyBundle
-Function GetDataForBundleAmountValues()
-	DataForBundleAmountValues = New ValueTable();
-	RegMetadata = Metadata.InformationRegisters.T6040S_BundleAmountValues;
-	DataForBundleAmountValues.Columns.Add("Period"         , RegMetadata.StandardAttributes.Period.Type);
-	DataForBundleAmountValues.Columns.Add("Company"        , RegMetadata.Dimensions.Company.Type);
-	DataForBundleAmountValues.Columns.Add("Batch"          , RegMetadata.Dimensions.Batch.Type);
-	DataForBundleAmountValues.Columns.Add("BatchKey"       , RegMetadata.Dimensions.BatchKey.Type);
-	DataForBundleAmountValues.Columns.Add("AmountValue"    , RegMetadata.Resources.AmountValue.Type);
-	DataForBundleAmountValues.Columns.Add("AmountTaxValue" , RegMetadata.Resources.AmountTaxValue.Type);
-	DataForBundleAmountValues.Columns.Add("BatchKeyBundle" , RegMetadata.Dimensions.BatchKeyBundle.Type);
-	Return DataForBundleAmountValues
-EndFunction
-
-// Get data for composite batches amount values.
-// 
-// Returns:
-//  ValueTable - Get data for composite batches amount values:
-// * Period - Date
-// * Company - See InformationRegister.T6090S_CompositeBatchesAmountValues.Company
-// * Batch - See InformationRegister.T6090S_CompositeBatchesAmountValues.Batch
-// * BatchKey - See InformationRegister.T6090S_CompositeBatchesAmountValues.BatchKey
-// * BatchComposite - See InformationRegister.T6090S_CompositeBatchesAmountValues.BatchComposite
-// * BatchKeyComposite - See InformationRegister.T6090S_CompositeBatchesAmountValues.BatchKeyComposite
-// * Quantity - See InformationRegister.T6090S_CompositeBatchesAmountValues.Quantity
-// * Amount - See InformationRegister.T6090S_CompositeBatchesAmountValues.Amount
-// * AmountTax - See InformationRegister.T6090S_CompositeBatchesAmountValues.AmountTax
-Function GetDataForCompositeBatchesAmountValues()
-	DataForCompositeBatchesAmountValues = New ValueTable();
-	RegMetadata = Metadata.InformationRegisters.T6090S_CompositeBatchesAmountValues;
-	DataForCompositeBatchesAmountValues.Columns.Add("Period"            , RegMetadata.StandardAttributes.Period.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("Company"           , RegMetadata.Dimensions.Company.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("Batch"             , RegMetadata.Dimensions.Batch.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("BatchKey"          , RegMetadata.Dimensions.BatchKey.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("BatchComposite"    , RegMetadata.Dimensions.BatchComposite.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("BatchKeyComposite" , RegMetadata.Dimensions.BatchKeyComposite.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("Quantity"          , RegMetadata.Resources.Quantity.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("Amount"            , RegMetadata.Resources.Amount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("AmountTax"         , RegMetadata.Resources.AmountTax.Type);
-	Return DataForCompositeBatchesAmountValues
-EndFunction
-
-// Get empty lack item list.
-// 
-// Returns:
-//  ValueTable - Get empty lack item list:
-// * Store - See AccumulationRegister.R4050B_StockInventory.Store
-// * ItemKey - See AccumulationRegister.R4050B_StockInventory.ItemKey
-// * Quantity - See AccumulationRegister.R4050B_StockInventory.Quantity
-Function GetEmptyLackItemList()
-	MetadataR4050B = Metadata.AccumulationRegisters.R4050B_StockInventory;
-
-	EmptyLackItemList = New ValueTable();
-	EmptyLackItemList.Columns.Add("Store", MetadataR4050B.Dimensions.Store.Type);
-	EmptyLackItemList.Columns.Add("ItemKey", MetadataR4050B.Dimensions.ItemKey.Type);
-	EmptyLackItemList.Columns.Add("Quantity", MetadataR4050B.Resources.Quantity.Type);
-	
-	Return EmptyLackItemList;
-	
-EndFunction
-
-// Get empty result item list.
-// 
-// Returns:
-//  ValueTable - Get empty result item list:
-// * Store - See AccumulationRegister.R4050B_StockInventory.Store
-// * ItemKey - See AccumulationRegister.R4050B_StockInventory.ItemKey
-// * Quantity - See AccumulationRegister.R4050B_StockInventory.Quantity
-// * CompanySender - See AccumulationRegister.R4050B_StockInventory.Company
-// * CompanyReceiver - See AccumulationRegister.R4050B_StockInventory.Company
-Function GetEmptyResultItemList()
-	MetadataR4050B = Metadata.AccumulationRegisters.R4050B_StockInventory;
-
-	EmptyResultItemList = New ValueTable();
-	EmptyResultItemList.Columns.Add("Store", MetadataR4050B.Dimensions.Store.Type);
-	EmptyResultItemList.Columns.Add("ItemKey", MetadataR4050B.Dimensions.ItemKey.Type);
-	EmptyResultItemList.Columns.Add("Quantity", MetadataR4050B.Resources.Quantity.Type);
-	EmptyResultItemList.Columns.Add("CompanySender", MetadataR4050B.Dimensions.Company.Type);
-	EmptyResultItemList.Columns.Add("CompanyReceiver", MetadataR4050B.Dimensions.Company.Type);
-	
-	Return EmptyResultItemList;
-	
-EndFunction
-
-// Get table of new received batches.
-// 
-// Returns:
-//  ValueTable - Get table of new received batches:
-// * Batch - CatalogRef.Batches -
-// * BatchKey - CatalogRef.BatchKeys -
-// * Document - See Catalog.Batches.Document
-// * Company - CatalogRef.Companies
-// * Date - Date
-// * Quantity - Number -
-// * Amount - Number -
-// * AmountTax - Number -
-// * QuantityBalance - Number -
-// * AmountBalance - Number -
-// * AmountTaxBalance - Number -
-// * IsOpeningBalance - Boolean -
-// * Direction - See InformationRegister.T6020S_BatchKeysInfo.Direction
-Function GetTableOfNewReceivedBatches()
-	TableOfNewReceivedBatches = New ValueTable();
-	TableOfNewReceivedBatches.Columns.Add("Batch");
-	TableOfNewReceivedBatches.Columns.Add("BatchKey");
-	TableOfNewReceivedBatches.Columns.Add("Document");
-	TableOfNewReceivedBatches.Columns.Add("Company");
-	TableOfNewReceivedBatches.Columns.Add("Date");
-	TableOfNewReceivedBatches.Columns.Add("Quantity");
-	TableOfNewReceivedBatches.Columns.Add("Amount");
-	TableOfNewReceivedBatches.Columns.Add("AmountTax");
-	TableOfNewReceivedBatches.Columns.Add("QuantityBalance");
-	TableOfNewReceivedBatches.Columns.Add("AmountBalance");
-	TableOfNewReceivedBatches.Columns.Add("AmountTaxBalance");
-	TableOfNewReceivedBatches.Columns.Add("IsOpeningBalance");
-	TableOfNewReceivedBatches.Columns.Add("Direction");
-	Return TableOfNewReceivedBatches
-EndFunction
-
-// Get batch filter.
-// 
-// Parameters:
-//  Document - DocumentRef.BatchReallocateIncoming - Document
-//  BatchKey - CatalogRef.BatchKeys -
-// 
-// Returns:
-//  Structure - Get batch filter:
-// * BatchKey - CatalogRef.BatchKeys -
-// * IncomingDocument - DocumentRef.BatchReallocateIncoming -
-// * OutgoingDocument - DocumentRef.BatchReallocateOutgoing -
-Function GetBatchFilter(Document, BatchKey)
-	Filter = New Structure();
-	Filter.Insert("BatchKey", BatchKey);
-	Filter.Insert("IncomingDocument", Document);
-	Filter.Insert("OutgoingDocument", Document.Outgoing);
-	
-	Return Filter;
-EndFunction
-
 #EndRegion
+
+Procedure LockCatalogs(LocksStorage)
+	// Set lock for table Catalog.Batches
+	DataLock_Batches = New DataLock();
+	ItemLock_Batches = DataLock_Batches.Add("Catalog.Batches");
+	ItemLock_Batches.Mode = DataLockMode.Exclusive;
+	DataLock_Batches.Lock();
+	LocksStorage.Add(DataLock_Batches);
+	
+	// Set lock for table Catalog.BatchKeys
+	DataLock_BatchKeys = New DataLock();
+	ItemLock_BatchKeys = DataLock_Batches.Add("Catalog.BatchKeys");
+	ItemLock_BatchKeys.Mode = DataLockMode.Exclusive;
+	DataLock_BatchKeys.Lock();
+	LocksStorage.Add(DataLock_BatchKeys);
+EndProcedure
+
+Procedure LockDocuments(LocksStorage)
+	// Set lock for Document.BatchReallocateIncoming
+	DataLock_BatchReallocateIncoming = New DataLock();
+	ItemLock_BatchReallocateIncoming = DataLock_BatchReallocateIncoming.Add("Document.BatchReallocateIncoming");
+	ItemLock_BatchReallocateIncoming.Mode = DataLockMode.Exclusive;
+	DataLock_BatchReallocateIncoming.Lock();
+	LocksStorage.Add(DataLock_BatchReallocateIncoming);
+	
+	// Set lock for Document.BatchReallocateOutgoing
+	DataLock_BatchReallocateOutgoing = New DataLock();
+	ItemLock_BatchReallocateOutgoing = DataLock_BatchReallocateOutgoing.Add("Document.BatchReallocateOutgoing");
+	ItemLock_BatchReallocateOutgoing.Mode = DataLockMode.Exclusive;
+	DataLock_BatchReallocateOutgoing.Lock();
+	LocksStorage.Add(DataLock_BatchReallocateOutgoing);
+EndProcedure
+

@@ -266,4 +266,36 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="062ee647-2645-45b9-9819-bbd08759c7ec">
+    <name>Work</name>
+    <synonym>
+      <key>en</key>
+      <value>Work</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="cafa425f-0c56-425f-ae18-fca4a6678d22">
+    <name>WorkSheet</name>
+    <synonym>
+      <key>en</key>
+      <value>Work sheet</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.WorkSheet</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
 </mdclass:InformationRegister>

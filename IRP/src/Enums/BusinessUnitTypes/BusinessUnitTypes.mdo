@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="86c9bde0-c9f7-475a-87d9-37053daff178">
+  <producedTypes>
+    <refType typeId="f7c05ada-b9a8-467d-9f7e-15f4bc85cc02" valueTypeId="2b775806-fc6b-4bcc-bf37-03c981d96f4e"/>
+    <listType typeId="1a5090d6-0ad7-476c-927d-a9279d21430d" valueTypeId="9b259f75-99ae-4f50-838d-6ffbfcb44c5f"/>
+    <managerType typeId="a4dc5033-905e-4da5-a09f-b57803490591" valueTypeId="4b7a12ad-9dea-471c-8172-5abcb0cdb2f4"/>
+  </producedTypes>
+  <name>BusinessUnitTypes</name>
+  <synonym>
+    <key>en</key>
+    <value>Business unit types</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="2cb50505-0bb2-443e-9071-c1648e921299">
+    <name>Workshop</name>
+    <synonym>
+      <key>en</key>
+      <value>Workshop</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="186f477b-2a6d-4028-869b-dcfd0c0ae5b8">
+    <name>Department</name>
+    <synonym>
+      <key>en</key>
+      <value>Department</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="6c9a0458-5e40-4d4c-b5a2-0e05bc33e1fe">
+    <name>Retail</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

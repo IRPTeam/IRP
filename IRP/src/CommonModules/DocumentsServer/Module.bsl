@@ -39,12 +39,24 @@ Procedure SetNewTableUUID(Table, LinkedTables) Export
 		TableRow.Key = New UUID();
 
 		For Each LinkedTable In LinkedTables Do
-			Rows = LinkedTable.FindRows(New Structure("Key", CurrentKey));
-			For Each Row In Rows Do
-				Row.Key = TableRow.Key;
-			EndDo;
+			KeyOwnerIsPresent = False;
+			If LinkedTable.Count() Then
+				KeyOwnerIsPresent = CommonFunctionsClientServer.ObjectHasProperty(LinkedTable[0], "KeyOwner");
+			EndIf;
+			
+			If KeyOwnerIsPresent Then
+				Rows = LinkedTable.FindRows(New Structure("KeyOwner", CurrentKey));
+				For Each Row In Rows Do
+					Row.KeyOwner = TableRow.Key;
+					Row.Key = New UUID();
+				EndDo;
+			Else
+				Rows = LinkedTable.FindRows(New Structure("Key", CurrentKey));
+				For Each Row In Rows Do
+					Row.Key = TableRow.Key;
+				EndDo;
+			EndIf;
 		EndDo;
-
 	EndDo;
 EndProcedure
 

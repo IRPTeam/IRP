@@ -66,6 +66,7 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion

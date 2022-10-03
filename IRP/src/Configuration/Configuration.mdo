@@ -119,6 +119,7 @@
   <subsystems>Subsystem.Retail</subsystems>
   <subsystems>Subsystem.Accounting</subsystems>
   <subsystems>Subsystem.AdminFunctions</subsystems>
+  <subsystems>Subsystem.WorkOrders</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -423,6 +424,11 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.DocWorkOrderServer</commonModules>
+  <commonModules>CommonModule.DocWorkOrderClient</commonModules>
+  <commonModules>CommonModule.DocWorkOrderClosingServer</commonModules>
+  <commonModules>CommonModule.DocWorkSheetServer</commonModules>
+  <commonModules>CommonModule.DocWorkSheetClient</commonModules>
   <commonModules>CommonModule.UniversalPrintServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
@@ -620,6 +626,7 @@
   <commonForms>CommonForm.ReportForm</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
+  <commonForms>CommonForm.LinkedDocuments</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>
@@ -695,6 +702,7 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.BillOfMaterials</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
@@ -749,6 +757,9 @@
   <documents>Document.ChequeBondTransaction</documents>
   <documents>Document.ChequeBondTransactionItem</documents>
   <documents>Document.ConsolidatedRetailSales</documents>
+  <documents>Document.WorkOrder</documents>
+  <documents>Document.WorkOrderClosing</documents>
+  <documents>Document.WorkSheet</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -804,6 +815,9 @@
   <enums>Enum.ExternalFunctionType</enums>
   <enums>Enum.ConsolidatedRetailSalesStatuses</enums>
   <enums>Enum.JobStatus</enums>
+  <enums>Enum.MaterialsCostWriteOff</enums>
+  <enums>Enum.BusinessUnitTypes</enums>
+  <enums>Enum.BillOfMaterialsTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

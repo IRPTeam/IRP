@@ -222,9 +222,7 @@ Function SourceLockedByRules(SourceParams, Rules, AddInfo = Undefined)
 	MetaNameType = StrSplit(SourceParams.MetadataName, ".")[0];
 
 	If MetaNameType = "Catalog" Or MetaNameType = "Document" Then
-		Return Not SourceParams.isNew 
-				And	DataIsLocked_ByRef(SourceParams, Rules, True, AddInfo) 
-				Or DataIsLocked_ByRef(SourceParams, Rules, False, AddInfo);
+		Return DataIsLocked_ByRef(SourceParams, Rules, AddInfo);
 	ElsIf MetaNameType = "AccumulationRegister" Or MetaNameType = "InformationRegister" Then
 		Return Not SourceParams.isNew 
 				And ModifyDataIsLocked_ByTable(SourceParams, Rules, True, AddInfo)
@@ -324,13 +322,13 @@ Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, CheckCurrent, Ad
 	Return GetResultLockCheck(Query);
 EndFunction
 
-Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
+Function DataIsLocked_ByRef(SourceParams, Rules, AddInfo = Undefined)
 
 	ArrayOfLockedReasonsByAdvanced = New Array;
 
-	ArrayOfLockedReasonsBySimple = isDataIsLocked_ByRef_SimpleMode(SourceParams, Rules, CheckCurrent, AddInfo);
+	ArrayOfLockedReasonsBySimple = isDataIsLocked_ByRef_SimpleMode(SourceParams, Rules, AddInfo);
 	If ArrayOfLockedReasonsBySimple.Count() = 0 Then
-		ArrayOfLockedReasonsByAdvanced = DataIsLocked_ByRef_AdvancedMode(SourceParams, Rules, CheckCurrent, AddInfo);
+		ArrayOfLockedReasonsByAdvanced = DataIsLocked_ByRef_AdvancedMode(SourceParams, Rules, AddInfo);
 	EndIf;
 	
 	Return CalculateErrorAndShow(ArrayOfLockedReasonsBySimple, ArrayOfLockedReasonsByAdvanced);
@@ -365,7 +363,7 @@ EndFunction
 // 
 // Returns:
 //  Boolean - Data is locked by ref simple mode
-Function isDataIsLocked_ByRef_SimpleMode(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
+Function isDataIsLocked_ByRef_SimpleMode(SourceParams, Rules, AddInfo = Undefined)
 	Filter = New Array();
 	Fields = New Array();
 	Query = New Query();
@@ -376,15 +374,34 @@ Function isDataIsLocked_ByRef_SimpleMode(SourceParams, Rules, CheckCurrent, AddI
 		If Rules[Index].LockDataModificationReasons.AdvancedMode Then
 			Continue;
 		EndIf;
+		// Check rules for new object
 		Filter.Add("&SourceParam" + Index + " " + Rules[Index].ComparisonType + " (" + "&Param" + Index + ")");
 		Fields.Add("CASE WHEN &SourceParam" + Index + " " + Rules[Index].ComparisonType + 
 			" (" + "&Param" + Index + ")
 			|THEN 
-			|	&Reason"
-			+ Index + " 
+			|	&Reason" + Index + " 
 			|END AS Reason" + Index);
+			
 		Query.SetParameter("Reason" + Index, Rules[Index].LockDataModificationReasons);
 		Query.SetParameter("Param" + Index, Rules[Index].Value);
+		
+		If Rules[Index].ComparisonType = "IN HIERARCHY" And Rules[Index].Attribute = "Ref" Then
+			Query.SetParameter("SourceParam" + Index, SourceParams.Source.Parent);
+		Else
+			Query.SetParameter("SourceParam" + Index, SourceParams.Source[Rules[Index].Attribute]); // Arbitrary
+		EndIf;
+		
+		// Check rules by ref
+		Filter.Add("&SourceParamCurrent" + Index + " " + Rules[Index].ComparisonType + " (" + "&ParamCurrent" + Index + ")");
+		Fields.Add("CASE WHEN &SourceParamCurrent" + Index + " " + Rules[Index].ComparisonType + 
+			" (" + "&ParamCurrent" + Index + ")
+			|THEN 
+			|	&ReasonCurrent"	+ Index + " 
+			|END AS ReasonCurrent" + Index);	
+		Query.SetParameter("ReasonCurrent" + Index, Rules[Index].LockDataModificationReasons);
+		Query.SetParameter("ParamCurrent" + Index, Rules[Index].Value);
+		
+		Query.SetParameter("SourceParamCurrent" + Index, SourceParams.Source.Ref[Rules[Index].Attribute]);
 		
 		FindSimpleRules = True;
 	EndDo;
@@ -395,28 +412,12 @@ Function isDataIsLocked_ByRef_SimpleMode(SourceParams, Rules, CheckCurrent, AddI
 	
 	Query.Text = "SELECT DISTINCT " + Chars.LF + StrConcat(Fields, "," + Chars.LF) + Chars.LF + "WHERE " + StrConcat(
 		Filter, " OR" + Chars.LF);
-
-	For Index = 0 To Rules.Count() - 1 Do
-		If Rules[Index].LockDataModificationReasons.AdvancedMode Then
-			Continue;
-		EndIf;
-		If CheckCurrent Then
-			SourceValue = SourceParams.Source.Ref[Rules[Index].Attribute]; // Arbitrary
-		Else
-			If Rules[Index].ComparisonType = "IN HIERARCHY" And Rules[Index].Attribute = "Ref" Then
-				SourceValue = SourceParams.Source.Parent;
-			Else
-				SourceValue = SourceParams.Source[Rules[Index].Attribute]; // Arbitrary
-			EndIf;
-		EndIf;
-		Query.SetParameter("SourceParam" + Index, SourceValue);
-	EndDo;
 	
 	Return GetResultLockCheck(Query);
 	
 EndFunction
 
-Function DataIsLocked_ByRef_AdvancedMode(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
+Function DataIsLocked_ByRef_AdvancedMode(SourceParams, Rules, AddInfo = Undefined)
 	
 	Query = New Query;
 	
@@ -480,8 +481,10 @@ Function GetResultLockCheck(Query)
 			If Not ValueIsFilled(ResultTable[0][Column.Name]) Then
 				Continue;
 			EndIf;
-			//@skip-check invocation-parameter-type-intersect
-			ArrayOfLockedReasons.Add(ResultTable[0][Column.Name]);
+			If ArrayOfLockedReasons.Find(ResultTable[0][Column.Name]) = Undefined Then
+				//@skip-check invocation-parameter-type-intersect
+				ArrayOfLockedReasons.Add(ResultTable[0][Column.Name]);
+			EndIf;
 		EndDo;
 	EndIf;
 	Return ArrayOfLockedReasons

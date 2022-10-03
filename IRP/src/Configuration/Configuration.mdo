@@ -177,6 +177,7 @@
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.Unlock</commonPictures>
   <commonPictures>CommonPicture.Waiting</commonPictures>
+  <commonPictures>CommonPicture.Work</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>

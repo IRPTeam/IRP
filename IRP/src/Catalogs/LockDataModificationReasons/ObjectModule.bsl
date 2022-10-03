@@ -10,6 +10,7 @@ Procedure OnWrite(Cancel)
 	EndIf;
 
 	LockDataModificationPrivileged.SaveRuleSettings(ThisObject);
+	RefreshReusableValues();
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

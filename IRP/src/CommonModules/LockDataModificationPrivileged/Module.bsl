@@ -236,23 +236,53 @@ Function SourceLockedByRules(SourceParams, Rules, AddInfo = Undefined)
 	Return False;
 EndFunction
 
-// Modify data is locked by table.
+Function ModifyDataIsLocked_ByTable(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
+	ArrayOfLockedReasonsByAdvanced = New Array;
+
+	ArrayOfLockedReasonsBySimple = ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, CheckCurrent, AddInfo);
+	If ArrayOfLockedReasonsBySimple.Count() = 0 Then
+		ArrayOfLockedReasonsByAdvanced = ModifyDataIsLocked_ByTable_AdvancedMode(SourceParams, Rules, CheckCurrent, AddInfo);
+	EndIf;
+	
+	Return CalculateErrorAndShow(ArrayOfLockedReasonsBySimple, ArrayOfLockedReasonsByAdvanced);
+EndFunction
+
+Function ModifyDataIsLocked_ByTable_AdvancedMode(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
+	
+	Return New Array;
+	
+EndFunction
+
+// Modify data is locked by table simple.
 // 
 // Parameters:
-//  SourceParams - Structure:
-//   * Source - InformationRegisterRecordSet.Barcodes
-//   * isNew - Boolean -
-//   * MetadataName - String -
-//  Rules - Undefined, ValueTable - Rules
+//  SourceParams - Structure - Fill lock data settings:
+// * Source - InformationRegisterRecordSet -
+// * isNew - Boolean -
+// * MetadataName - String -
+//  Rules - See GetRuleList
 //  CheckCurrent - Boolean - Check current
 //  AddInfo - Undefined - Add info
 // 
 // Returns:
-//  Boolean - Modify data is locked by table
-Function ModifyDataIsLocked_ByTable(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
+//  Boolean - Data is locked by ref simple mode
+Function ModifyDataIsLocked_ByTable_Simple(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
 	Text = New Array();
 	Fields = New Array();
 	Query = New Query();
+	
+	FindSimpleRules = False;
+	For Index = 0 To Rules.Count() - 1 Do
+		If Rules[Index].LockDataModificationReasons.AdvancedMode Then
+			Continue;
+		EndIf;
+		FindSimpleRules = True;
+	EndDo;
+	
+	If Not FindSimpleRules Then
+		Return New Array;
+	EndIf;
+	
 	If CheckCurrent Then
 		TemplateFilter = "Table.%1 = &%1";
 		MetadataName = SourceParams.MetadataName;
@@ -273,12 +303,17 @@ Function ModifyDataIsLocked_ByTable(SourceParams, Rules, CheckCurrent, AddInfo =
 	EndIf;
 
 	For Index = 0 To Rules.Count() - 1 Do
+		
+		If Rules[Index].LockDataModificationReasons.AdvancedMode Then
+			Continue;
+		EndIf;
+		
 		Text.Add("Table." + Rules[Index].Attribute + " " + Rules[Index].ComparisonType + " (" + "&Param" + Index + ")");
 		Fields.Add("CASE WHEN Table." + Rules[Index].Attribute + " " + Rules[Index].ComparisonType + " (" + "&Param"
 			+ Index + ")
-					  |THEN 
-					  |	&Reason" + Index + " 
-											  |END AS Reason" + Index);
+			|THEN 
+			|	&Reason" + Index + " 
+			|END AS Reason" + Index);
 		Query.SetParameter("Reason" + Index, Rules[Index].LockDataModificationReasons);
 		Query.SetParameter("Param" + Index, Rules[Index].Value);
 	EndDo;
@@ -286,11 +321,7 @@ Function ModifyDataIsLocked_ByTable(SourceParams, Rules, CheckCurrent, AddInfo =
 		+ " AS Table 
 		  |WHERE " + StrConcat(Text, " AND ");
 
-	QueryResult = Query.Execute();
-	If QueryResult.IsEmpty() Then
-		Return False;
-	EndIf;
-//	Return ShowInfoAboutLock(QueryResult);
+	Return GetResultLockCheck(Query);
 EndFunction
 
 Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
@@ -302,6 +333,11 @@ Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefin
 		ArrayOfLockedReasonsByAdvanced = DataIsLocked_ByRef_AdvancedMode(SourceParams, Rules, CheckCurrent, AddInfo);
 	EndIf;
 	
+	Return CalculateErrorAndShow(ArrayOfLockedReasonsBySimple, ArrayOfLockedReasonsByAdvanced);
+
+EndFunction
+
+Function CalculateErrorAndShow(ArrayOfLockedReasonsBySimple, ArrayOfLockedReasonsByAdvanced)
 	If ArrayOfLockedReasonsBySimple.Count() OR ArrayOfLockedReasonsByAdvanced.Count() Then
 		ArrayOfLockedReasons = New Array;
 		ArrayOfLockedReasons.Add(R().InfoMessage_019);		
@@ -317,7 +353,6 @@ Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefin
 	Else
 		Return False;
 	EndIf;
-
 EndFunction
 
 // Data is locked by ref simple mode.

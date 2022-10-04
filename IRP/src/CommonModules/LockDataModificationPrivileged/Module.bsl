@@ -406,17 +406,18 @@ Function isDataIsLocked_ByRef_SimpleMode(SourceParams, Rules, AddInfo = Undefine
 		EndIf;
 		
 		// Check rules by ref
-		Filter.Add("&SourceParamCurrent" + Index + " " + Rules[Index].ComparisonType + " (" + "&ParamCurrent" + Index + ")");
-		Fields.Add("CASE WHEN &SourceParamCurrent" + Index + " " + Rules[Index].ComparisonType + 
-			" (" + "&ParamCurrent" + Index + ")
-			|THEN 
-			|	&ReasonCurrent"	+ Index + " 
-			|END AS ReasonCurrent" + Index);	
-		Query.SetParameter("ReasonCurrent" + Index, Rules[Index].LockDataModificationReasons);
-		Query.SetParameter("ParamCurrent" + Index, Rules[Index].Value);
-		
-		Query.SetParameter("SourceParamCurrent" + Index, SourceParams.Source.Ref[Rules[Index].Attribute]);
-		
+		If Not SourceParams.isNew Then
+			Filter.Add("&SourceParamCurrent" + Index + " " + Rules[Index].ComparisonType + " (" + "&ParamCurrent" + Index + ")");
+			Fields.Add("CASE WHEN &SourceParamCurrent" + Index + " " + Rules[Index].ComparisonType + 
+				" (" + "&ParamCurrent" + Index + ")
+				|THEN 
+				|	&ReasonCurrent"	+ Index + " 
+				|END AS ReasonCurrent" + Index);	
+			Query.SetParameter("ReasonCurrent" + Index, Rules[Index].LockDataModificationReasons);
+			Query.SetParameter("ParamCurrent" + Index, Rules[Index].Value);
+			
+			Query.SetParameter("SourceParamCurrent" + Index, SourceParams.Source.Ref[Rules[Index].Attribute]);
+		EndIf;
 		FindSimpleRules = True;
 	EndDo;
 	

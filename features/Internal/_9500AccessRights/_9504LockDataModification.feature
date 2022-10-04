@@ -1997,14 +1997,12 @@ Scenario: 950435 check the priorities of a simple and advanced data locking rule
 			| 'Number' |
 			| '115'    |
 		And in the table "List" I click "Post" button
-		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "GR number simple" string by template
 		And I go to line in "List" table
 			| 'Number' |
 			| '116'    |
 		And in the table "List" I click "Post" button
-		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "GR number advanced" string by template	
 		And I go to line in "List" table
@@ -2068,6 +2066,7 @@ Scenario: 950436 create advanced rules for branch and date
 			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                   |
 			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Branch and Date for purchase'                |		
 	* Check	rules
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		And I go to line in "List" table
 			| 'Number' |
@@ -2152,7 +2151,7 @@ Scenario: 950437 add responsible user in the lock data modification reasons
 					| 'CI'   |
 			And I click "Save and close" button
 		* Check
-			And I connect "TestAdmin" TestClient using "ABrown" login and "" password
+			And I connect "TestAdmin4" TestClient using "ABrown" login and "" password
 			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 			And I go to line in "List" table
 				| 'Reference'                    |
@@ -2216,7 +2215,7 @@ Scenario: 950438 lock data modification reasons for user
 		And I click "Save and close" button
 		And I wait "Lock data modification reason (create) *" window closing in 20 seconds
 	* Check
-		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
+		And I connect "TestAdmin4" TestClient using "ABrown" login and "" password
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number' |
@@ -2276,7 +2275,7 @@ Scenario: 950439 lock data modification reasons for user group
 		And I select current line in "List" table	
 		And I click "Save and close" button
 	* Check
-		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
+		And I connect "TestAdmin4" TestClient using "ABrown" login and "" password
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number' |
@@ -2343,7 +2342,11 @@ Scenario: 950440 lock data modification reasons with cross fields
 		And I select current line in "List" table
 		And I click Select button of "Delivery date" field
 		And I input current date in "Delivery date" field
+		And I go to line in "ItemList" table
+			| 'Item' |
+			| 'Bag'  |	
 		And I click "Post" button
+		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Date of shipment (cross fields)" string by template
 		And I close all client application windows

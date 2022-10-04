@@ -46,10 +46,11 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If CurrentObject.AdvancedMode Then
 		CurrentObject.DCS = New ValueStorage(SettingsComposer.Settings);
+		CurrentObject.PreviewText = String(SettingsComposer.Settings.Filter);
 	Else
 		CurrentObject.DCS = Undefined;
+		CurrentObject.PreviewText = "";
 	EndIf; 
-	
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 

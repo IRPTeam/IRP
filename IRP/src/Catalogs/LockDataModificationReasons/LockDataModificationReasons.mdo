@@ -248,6 +248,37 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="27032870-08fa-4f1e-8666-add400cbe1d7">
+    <name>PreviewText</name>
+    <synonym>
+      <key>en</key>
+      <value>Preview text</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b70638ee-e962-4f1b-8b88-eb6df5417503">
+    <name>CheckIsObjectLockedOnOpen</name>
+    <synonym>
+      <key>en</key>
+      <value>Check is object locked on open</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="bdfb54d6-07fc-48d4-ac55-cb4f3cfaa8ae">
     <producedTypes>
       <objectType typeId="85b44ead-7878-4913-86f5-02ccbd3c51c2" valueTypeId="257e0d4e-1a4e-419a-b6db-fa8f614db850"/>

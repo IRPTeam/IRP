@@ -3,19 +3,19 @@
 #Region EventSubscriptions
 
 Procedure BeforeWrite_DocumentsLockDataModification(Source, Cancel, WriteMode, PostingMode) Export
-	CheckLockData(Cancel, Source);
+	CheckLockData(Source, Cancel, Source.IsNew());
 EndProcedure
 
 Procedure BeforeWrite_CatalogsLockDataModification(Source, Cancel) Export
-	CheckLockData(Cancel, Source);
+	CheckLockData(Source, Cancel, Source.IsNew());
 EndProcedure
 
 Procedure BeforeWrite_InformationRegistersLockDataModification(Source, Cancel, Replacing) Export
-	CheckLockData(Cancel, Source);
+	CheckLockData(Source, Cancel);
 EndProcedure
 
 Procedure BeforeWrite_AccumulationRegistersLockDataModification(Source, Cancel, Replacing) Export
-	CheckLockData(Cancel, Source);
+	CheckLockData(Source, Cancel);
 EndProcedure
 
 #EndRegion
@@ -60,25 +60,39 @@ Function IsLockFormAttribute(Ref) Export
 	Return True;
 EndFunction
 
-#EndRegion
+// Lock form if object is locked.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  CurrentObject - DocumentObjectDocumentName, CatalogObjectCatalogName - Current object
+Procedure LockFormIfObjectIsLocked(Form, CurrentObject) Export
+	If CheckLockData(CurrentObject, , , True) Then
+		Form.ReadOnly = True;
+	EndIf;
+EndProcedure
 
-#Region Privat
-
-Procedure CheckLockData(Cancel, Source)
+Function CheckLockData(Source, Cancel = False, isNew = False, OnOpen = False) Export
 	If Cancel OR Source.DataExchange.Load 
 		OR SessionParameters.IgnoreLockModificationData 
 		OR Not Constants.UseLockDataModification.Get() Then
 			
-		Return;
+		Return False;
 	EndIf;
 	SourceParams = FillLockDataSettings();
 	SourceParams.Source = Source;
-	SourceParams.isNew = False;
+	
+	SourceParams.isNew = isNew;
+	SourceParams.OnOpen = OnOpen;
 	SourceParams.MetadataName = Source.Metadata().FullName();
 	If SourceIsLocked(SourceParams) Then
 		Cancel = True;
 	EndIf;
-EndProcedure
+	Return Cancel;
+EndFunction
+
+#EndRegion
+
+#Region Privat
 
 // Fill lock data settings.
 // 
@@ -86,11 +100,13 @@ EndProcedure
 //  Structure - Fill lock data settings:
 // * Source - DocumentObjectDocumentName, CatalogObjectCatalogName, Undefined -
 // * isNew - Boolean -
+// * OnOpen - Boolean -
 // * MetadataName - String -
 Function FillLockDataSettings()
 	SourceParams = New Structure();
 	SourceParams.Insert("Source", Undefined);
 	SourceParams.Insert("isNew", True);
+	SourceParams.Insert("OnOpen", False);
 	SourceParams.Insert("MetadataName", "");
 	Return SourceParams;
 EndFunction
@@ -182,8 +198,14 @@ Function GetRuleList(SourceParams)
 	|	LockDataModificationRules.Type = &MetadataName
 	|	AND Not LockDataModificationRules.DisableRule
 	|	AND Not LockDataModificationRules.LockDataModificationReasons.DeletionMark
-	|	AND Not LockDataModificationRules.LockDataModificationReasons.DisableRule";
+	|	AND Not LockDataModificationRules.LockDataModificationReasons.DisableRule
+	|	AND CASE
+	|		WHEN &CheckIsObjectLockedOnOpen
+	|			THEN LockDataModificationReasonVT.LockDataModificationReason.CheckIsObjectLockedOnOpen
+	|		ELSE TRUE
+	|	END";
 	Query.SetParameter("AccessGroup", AccessGroups);
+	Query.SetParameter("CheckIsObjectLockedOnOpen", SourceParams.OnOpen);
 	Query.SetParameter("User", SessionParameters.CurrentUser);
 	Query.SetParameter("MetadataName", SourceParams.MetadataName);
 
@@ -494,7 +516,14 @@ Function GetResultLockCheck(Query)
 			EndIf;
 			If ArrayOfLockedReasons.Find(ResultTable[0][Column.Name]) = Undefined Then
 				//@skip-check invocation-parameter-type-intersect
-				ArrayOfLockedReasons.Add(ResultTable[0][Column.Name]);
+				Rule = ResultTable[0][Column.Name]; // CatalogRef.LockDataModificationReasons
+				If Rule.AdvancedMode Then
+					Text = String(Rule) + ":" + Chars.LF +
+						String(Rule.DCS.Get().Filter);
+					ArrayOfLockedReasons.Add(Text);
+				Else
+					ArrayOfLockedReasons.Add(Rule);
+				EndIf;
 			EndIf;
 		EndDo;
 	EndIf;

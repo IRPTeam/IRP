@@ -100,6 +100,7 @@ EndProcedure
 
 &AtClient
 Procedure AdvancedModeOnChange(Item)
+	Object.SetOneRuleForAllObjects = True;
 	SetVisible();
 	UpdateQueryFromClient();
 EndProcedure
@@ -123,6 +124,7 @@ Procedure SetVisible()
 	Items.RuleListSetValueAsCode.Visible = Not Object.SetOneRuleForAllObjects;
 	Items.GroupRuleSettings.Visible = Object.SetOneRuleForAllObjects And Not Object.AdvancedMode;
 	Items.GroupAdvancedRules.Visible = Object.AdvancedMode;
+	Items.SetOneRuleForAllObjects.Visible = Not Object.AdvancedMode;
 EndProcedure
 
 &AtClient

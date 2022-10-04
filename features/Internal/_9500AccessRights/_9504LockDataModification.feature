@@ -2157,27 +2157,203 @@ Scenario: 950437 add responsible user in the lock data modification reasons
 					| 'CI'   |
 			And I click "Save and close" button
 		* Check
-			Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-			And I go to line in "List" table
-				| 'Number' |
-				| '117'    |
-			And in the table "List" I click "Post" button
-			Then user message window does not contain messages	
 			And I connect "TestAdmin" TestClient using "ABrown" login and "" password
-			Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 			And I go to line in "List" table
-				| 'Number' |
-				| '117'    |
-			And in the table "List" I click "Post" button
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Given Recent TestClient message contains "Data lock reasons:*" string by template
-			Given Recent TestClient message contains "Branch with responsible user" string by template
+				| 'Reference'                    |
+				| 'Branch with responsible user' |
+			And I select current line in "List" table
+			When I Check the steps for Exception
+				|'And I click choice button of the attribute named "ResponsibleUsersUser" in "ResponsibleUsers" table'|
+			When I Check the steps for Exception
+				|'And I click "Save and close" button'|			
 			And I close TestClient session
-			And I connect "Этот клиент" profile of TestClient				
-						
+			And I connect "Этот клиент" profile of TestClient	
+			Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+			And I go to line in "List" table
+				| 'Reference'                    |
+				| 'Branch with responsible user' |
+			And I select current line in "List" table			
+			And I click "Save and close" button	
+			Then user message window does not contain messages		
+
+Scenario: 950438 lock data modification reasons for user
+	And I connect "Этот клиент" profile of TestClient
+	And I close all client application windows
+	And I mark "Catalogs.LockDataModificationReasons" objects for deletion	
+	* Create reason
+		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+		And I click the button named "FormCreate"
+		And I input "Branch (user)" text in "ENG" field
+		And I set checkbox "Advanced mode"
+		And I set checkbox "Set one rule for all objects"
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Goods receipt" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I move to "Advanced rules" tab
+		And I finish line editing in "RuleList" table
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Internal supply request" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I move to "Advanced rules" tab
+		And I finish line editing in "RuleList" table
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I select "Branch" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
+		And I move to the next attribute
+		And I select "Equal to" exact value from the drop-down list named "SettingsFilterComparisonType" in "SettingsFilter" table
+		And I move to the next attribute
+		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+		And I finish line editing in "SettingsFilter" table
+		Then "Lock data modification reason (create) *" window is opened
+		And I move to "Users" tab
+		And in the table "UserList" I click the button named "UserListAdd"
+		And I click choice button of the attribute named "UserListUser" in "UserList" table
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Arina Brown (Financier 3)' |
+		And I select current line in "List" table
+		Then "Lock data modification reason (create) *" window is opened
+		And I finish line editing in "UserList" table
+		And I click "Save and close" button
+		And I wait "Lock data modification reason (create) *" window closing in 20 seconds
+	* Check
+		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '117'    |
+		And in the table "List" I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Branch (user)" string by template
+		And I close TestClient session
+		And I connect "Этот клиент" profile of TestClient
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '117'    |
+		And in the table "List" I click "Post" button
+		Then user message window does not contain messages	
 
 
+Scenario: 950439 lock data modification reasons for user group
+	And I connect "Этот клиент" profile of TestClient
+	And I close all client application windows
+	And I mark "Catalogs.LockDataModificationReasons" objects for deletion	
+	* Create reason
+		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+		And I click the button named "FormCreate"
+		And I input "Branch (user group)" text in "ENG" field
+		And I set checkbox "Advanced mode"
+		And I set checkbox "Set one rule for all objects"
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Goods receipt" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I move to "Advanced rules" tab
+		And I finish line editing in "RuleList" table
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Internal supply request" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I move to "Advanced rules" tab
+		And I finish line editing in "RuleList" table
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I select "Branch" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
+		And I move to the next attribute
+		And I select "Equal to" exact value from the drop-down list named "SettingsFilterComparisonType" in "SettingsFilter" table
+		And I move to the next attribute
+		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+		And I finish line editing in "SettingsFilter" table
+		And I move to "Access groups" tab
+		And in the table "AccessGroupList" I click the button named "AccessGroupListAdd"
+		And I click choice button of "Access group" attribute in "AccessGroupList" table
+		Then "User access groups" window is opened
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Administrators' |
+		And I select current line in "List" table	
+		And I click "Save and close" button
+	* Check
+		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '117'    |
+		And in the table "List" I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Branch (user group)" string by template
+		And I close TestClient session
+		And I connect "Этот клиент" profile of TestClient
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '117'    |
+		And in the table "List" I click "Post" button
+		Then user message window does not contain messages
+
+Scenario: 950440 lock data modification reasons with cross fields
+	And I connect "Этот клиент" profile of TestClient
+	And I close all client application windows
+	And I mark "Catalogs.LockDataModificationReasons" objects for deletion	
+	* Create reason
+		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+		And I click the button named "FormCreate"
+		And I input "Date of shipment (cross fields)" text in "ENG" field
+		And I set checkbox "Advanced mode"
+		And I set checkbox "For all users"
+		And I set checkbox "Set one rule for all objects"
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Sales invoice" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I move to "Advanced rules" tab
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I select "Date of shipment" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
+		And I move to the next attribute
+		And I click choice button of the attribute named "SettingsFilterComparisonType" in "SettingsFilter" table
+		And I finish line editing in "SettingsFilter" table
+		And in the table "SettingsFilter" I click the button named "SettingsFilterUseFieldAsValue"
+		And I select current line in "SettingsFilter" table
+		And I select "Less than" exact value from the drop-down list named "SettingsFilterComparisonType" in "SettingsFilter" table
+		And I activate field named "SettingsFilterRightValue" in "SettingsFilter" table
+		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
+		Then "Select field" window is opened
+		And I expand a line in "Source" table
+			| 'Available fields' |
+			| 'Date'             |
+		And I expand a line in "Source" table
+			| 'Available fields' |
+			| 'End dates'        |
+		And I go to line in "Source" table
+			| 'Available fields' |
+			| 'End of week'      |
+		And I select current line in "Source" table
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                            |
+			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Date of shipment (cross fields)'                      |
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '251'    |
+		And I select current line in "List" table
+		And I click Select button of "Delivery date" field
+		And I input current date in "Delivery date" field
+		And I click "Post" button
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Date of shipment (cross fields)" string by template
+		And I close all client application windows
+							
 
 Scenario: 950480 check access to the Lock data modification for user with role Full access only read 
 	And I connect "SBorisova" TestClient using "SBorisova" login and "F12345" password

@@ -10,3 +10,14 @@ EndProcedure
 Procedure RunBackgroundJobInDebugModeOnChangeAtServer()
 	SessionParameters.RunBackgroundJobInDebugMode = RunBackgroundJobInDebugMode;
 EndProcedure
+
+
+&AtClient
+Procedure IgnoreLockModificationDataOnChange(Item)
+	IgnoreLockModificationDataOnChangeAtServer();
+EndProcedure
+
+&AtServer
+Procedure IgnoreLockModificationDataOnChangeAtServer()
+	SessionParameters.IgnoreLockModificationData = IgnoreLockModificationData;
+EndProcedure

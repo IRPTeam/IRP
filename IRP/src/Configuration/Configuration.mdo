@@ -191,6 +191,7 @@
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
   <sessionParameters>SessionParameter.RunBackgroundJobInDebugMode</sessionParameters>
+  <sessionParameters>SessionParameter.IgnoreLockModificationData</sessionParameters>
   <roles>Role.BasicRole</roles>
   <roles>Role.CreateOrModifyUsers</roles>
   <roles>Role.FilterForUserSettings</roles>

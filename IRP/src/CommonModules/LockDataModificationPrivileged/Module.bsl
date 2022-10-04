@@ -3,62 +3,19 @@
 #Region EventSubscriptions
 
 Procedure BeforeWrite_DocumentsLockDataModification(Source, Cancel, WriteMode, PostingMode) Export
-	If Cancel Or Source.DataExchange.Load Or Not Constants.UseLockDataModification.Get() Then
-		Return;
-	EndIf;
-	SourceParams = FillLockDataSettings();
-	SourceParams.Source = Source;
-	SourceParams.isNew = Source.IsNew();
-	SourceParams.MetadataName = Source.Metadata().FullName();
-	If SourceIsLocked(SourceParams) Then
-		Cancel = True;
-	EndIf;
+	CheckLockData(Cancel, Source);
 EndProcedure
 
-// Before write catalogs lock data modification.
-// 
-// Parameters:
-//  Source - CatalogObject.ExpenseAndRevenueTypes, CatalogObject.Stores, CatalogObject.FileStorageVolumes, CatalogObject.Files, CatalogObject.Taxes, CatalogObject.BankTerms, CatalogObject.CashAccounts, CatalogObject.PartnerSegments, CatalogObject.SpecialOfferTypes, CatalogObject.ItemTypes, CatalogObject.PartnersBankAccounts, CatalogObject.Specifications, CatalogObject.PrintTemplates, CatalogObject.RetailCustomers, CatalogObject.FileStoragesInfo, CatalogObject.ExternalDataProc, CatalogObject.Extensions, CatalogObject.Companies, CatalogObject.Hardware, CatalogObject.SpecialOfferRules, CatalogObject.TaxAnalytics, CatalogObject.Currencies, CatalogObject.Agreements, CatalogObject.Workstations, CatalogObject.CashStatementStatuses, CatalogObject.IntegrationSettings, CatalogObject.ItemSegments, CatalogObject.MovementRules, CatalogObject.Users, CatalogObject.AddAttributeAndPropertySets, CatalogObject.Batches, CatalogObject.PaymentTerminals, CatalogObject.Countries, CatalogObject.SerialLotNumbers, CatalogObject.Units, CatalogObject.Items, CatalogObject.LegalNameContracts, CatalogObject.AccessProfiles, CatalogObject.IDInfoSets, CatalogObject.UserGroups, CatalogObject.PlanningPeriods, CatalogObject.IDInfoAddresses, CatalogObject.BusinessUnits, CatalogObject.CurrencyMovementSets, CatalogObject.LedgerTypes, CatalogObject.TaxRates, CatalogObjectCatalogName, CatalogObject.PaymentSchedules, CatalogObject.ItemKeys, CatalogObject.PaymentTypes, CatalogObject.UnitsOfMeasurement, CatalogObject.AccessGroups, CatalogObject.LockDataModificationReasons, CatalogObject.LedgerTypeVariants, CatalogObject.SpecialOffers, CatalogObject.InterfaceGroups, CatalogObject.ReportOptions, CatalogObject.PartnerItems, CatalogObject.PriceTypes, CatalogObject.ObjectStatuses, CatalogObject.AddAttributeAndPropertyValues, CatalogObject.ChequeBonds, CatalogObject.Partners, CatalogObject.AccountingOperations, CatalogObject.CancelReturnReasons - Source
-//  Cancel - Boolean - Cancel
-//  WriteMode - DocumentWriteMode - Write mode
-//  PostingMode - DocumentPostingMode - Posting mode
-Procedure BeforeWrite_CatalogsLockDataModification(Source, Cancel, WriteMode, PostingMode) Export
-	If Cancel Or Source.DataExchange.Load Or Not Constants.UseLockDataModification.Get() Then
-		Return;
-	EndIf;
-	SourceParams = FillLockDataSettings();
-	SourceParams.Source = Source;
-	SourceParams.isNew = Source.IsNew();
-	SourceParams.MetadataName = Source.Metadata().FullName();
-	If SourceIsLocked(SourceParams) Then
-		Cancel = True;
-	EndIf;
+Procedure BeforeWrite_CatalogsLockDataModification(Source, Cancel) Export
+	CheckLockData(Cancel, Source);
 EndProcedure
 
 Procedure BeforeWrite_InformationRegistersLockDataModification(Source, Cancel, Replacing) Export
-	If Cancel Or Source.DataExchange.Load Or Not Constants.UseLockDataModification.Get() Then
-		Return;
-	EndIf;
-	SourceParams = FillLockDataSettings();
-	SourceParams.Source = Source;
-	SourceParams.isNew = False;
-	SourceParams.MetadataName = Source.Metadata().FullName();
-	If SourceIsLocked(SourceParams) Then
-		Cancel = True;
-	EndIf;
+	CheckLockData(Cancel, Source);
 EndProcedure
 
 Procedure BeforeWrite_AccumulationRegistersLockDataModification(Source, Cancel, Replacing) Export
-	If Cancel Or Source.DataExchange.Load Or Not Constants.UseLockDataModification.Get() Then
-		Return;
-	EndIf;
-	SourceParams = FillLockDataSettings();
-	SourceParams.Source = Source;
-	SourceParams.isNew = False;
-	SourceParams.MetadataName = Source.Metadata().FullName();
-	If SourceIsLocked(SourceParams) Then
-		Cancel = True;
-	EndIf;
+	CheckLockData(Cancel, Source);
 EndProcedure
 
 #EndRegion
@@ -106,6 +63,22 @@ EndFunction
 #EndRegion
 
 #Region Privat
+
+Procedure CheckLockData(Cancel, Source)
+	If Cancel OR Source.DataExchange.Load 
+		OR SessionParameters.IgnoreLockModificationData 
+		OR Not Constants.UseLockDataModification.Get() Then
+			
+		Return;
+	EndIf;
+	SourceParams = FillLockDataSettings();
+	SourceParams.Source = Source;
+	SourceParams.isNew = False;
+	SourceParams.MetadataName = Source.Metadata().FullName();
+	If SourceIsLocked(SourceParams) Then
+		Cancel = True;
+	EndIf;
+EndProcedure
 
 // Fill lock data settings.
 // 

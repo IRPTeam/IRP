@@ -60,7 +60,7 @@ Function ComposeAnswerToRequestStructure(RequestStructure, MockData = Undefined,
 	
 	Response = New HTTPServiceResponse(MockData.Answer_StatusCode, MockData.Answer_Message);
 	For Each HeaderItem In MockData.Answer_Headers Do
-		Response.Headers.Insert(HeaderItem.Key, TransformationValue(HeaderItem.Value, RequestVariables));
+		Response.Headers.Insert(HeaderItem.Key, TransformationText(HeaderItem.Value, RequestVariables));
 	EndDo;
 	
 	BodyRowValue = MockData.Answer_Body.Get(); // BinaryData
@@ -71,7 +71,7 @@ Function ComposeAnswerToRequestStructure(RequestStructure, MockData = Undefined,
 		Else
 			BodyString = String(BodyRowValue);
 		EndIf;
-		Response.SetBodyFromString(TransformationValue(BodyString, RequestVariables));
+		Response.SetBodyFromString(TransformationText(BodyString, RequestVariables));
 	Else
 		Response.SetBodyFromBinaryData(BodyRowValue);
 	EndIf;
@@ -156,47 +156,6 @@ Function CheckRequestToMockData(RequestStructure, Selection, RequestVariables) E
 	
 EndFunction
 
-// Transformation value.
-// 
-// Parameters:
-//  SomeValue - String - Some value
-//  RequestVariables - Structure - existing variables
-// 
-// Returns:
-//  String - Transformation value
-Function TransformationValue(SomeValue, RequestVariables) Export
-	
-	If IsBlankString(SomeValue) Then
-		Return "";
-	EndIF;
-	
-	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "$$$") And StrEndsWith(SomeValue, "$$$") Then
-		KeyName = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
-		Try
-			Return RequestVariables[KeyName];
-		Except
-			Return "";
-		EndTry; 
-	EndIf;
-	 
-	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "{{{") And StrEndsWith(SomeValue, "}}}") Then
-		Params = CommonFunctionsServer.GetRecalculateExpressionParams();
-		Params.Eval = True;
-		Params.SafeMode = True;
-		Params.Expression = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
-		Params.AddInfo = RequestVariables;
-		ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
-		If ResultInfo.isError Then
-			Return "";
-		Else
-			Return ResultInfo.Result;
-		EndIf; 
-	EndIf;
-	
-	Return SomeValue;
-	
-EndFunction
-
 // Get value of body variable by path.
 // 
 // Parameters:
@@ -216,7 +175,7 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, AllCommands = U
 	ArrayOfSegments = StrSplit(PathToValue, "/");
 	
 	If ArrayOfSegments.Count() = 0 Then
-		Return ?(RowData, DataForValue, String(DataForValue));
+		Return ?(RowData, DataForValue, GetPresentationArbitrary(DataForValue));
 	EndIf;
 	
 	CurrentDataType = ArrayOfSegments[0];
@@ -247,7 +206,7 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, AllCommands = U
 			Return getValueOfBodyVariableByPath(NextPath, StrSplit(DataForValue, Separator, True), AllCommands, RowData);
 			
 		Else
-			Return ?(RowData, DataForValue, String(DataForValue));
+			Return ?(RowData, DataForValue, GetPresentationArbitrary(DataForValue));
 			
 		EndIf;
 	
@@ -281,7 +240,7 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, AllCommands = U
 			Return getValueOfBodyVariableByPath(NextPath, NewBinaryData, AllCommands, RowData);
 			
 		Else
-			Return ?(RowData, DataForValue, String(DataForValue));
+			Return ?(RowData, DataForValue, GetPresentationArbitrary(DataForValue));
 			
 		EndIf;
 	
@@ -301,22 +260,8 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, AllCommands = U
 			ElsIf TypeOf(CurrentValue) = Type("XDTOList") Then
 				Return getValueOfBodyVariableByPath(NextPath, CurrentValue, AllCommands, RowData);
 			Else
-				Return ?(RowData, CurrentValue, String(CurrentValue));
+				Return ?(RowData, CurrentValue, GetPresentationArbitrary(CurrentValue));
 			EndIf;
-			
-		Else
-			Return getValueOfBodyVariableByPath(NextPath, DataForValue[CurrentDataType], AllCommands, RowData);
-			
-		EndIf;
-	
-	ElsIf TypeOf(DataForValue) = Type("Map") Then
-		
-		If IsBlankString(CurrentDataType) Then
-			Return ?(RowData, DataForValue, GetPresentationMap(DataForValue));
-			
-		ElsIf IsBlankString(NextPath) Then
-			CurrentValue = DataForValue[CurrentDataType]; // Arbitrary
-			Return ?(RowData, CurrentValue, String(CurrentValue));
 			
 		Else
 			Return getValueOfBodyVariableByPath(NextPath, DataForValue[CurrentDataType], AllCommands, RowData);
@@ -327,14 +272,14 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, AllCommands = U
 	 
 	 	If TypeOf(DataForValue) = Type("Array") Or TypeOf(DataForValue) = Type("XDTOList") Then
 	 		If IsBlankString(CurrentDataType) Then
-	 			Return ?(RowData, DataForValue, "Collection");
+	 			Return ?(RowData, DataForValue, GetPresentationArbitrary(DataForValue));
 	 		Else
 	 			NumberKey = Number(CurrentDataType);
 				PropertyValue = DataForValue[NumberKey]; // Arbitrary
 	 		EndIf
 	 	ElsIf TypeOf(DataForValue) = Type("Map") Then
 	 		If IsBlankString(CurrentDataType) Then
-	 			Return ?(RowData, DataForValue, "Map");
+	 			Return ?(RowData, DataForValue, GetPresentationArbitrary(DataForValue));
 	 		Else
 	 			PropertyValue = DataForValue[CurrentDataType]; // Arbitrary
 	 		EndIf
@@ -346,7 +291,7 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, AllCommands = U
 			If TypeOf(PropertyValue) = Type("XDTODataObject") Then
 				Return ?(RowData, PropertyValue, GetPresentationXDTODataObject(PropertyValue));
 			Else
-				Return ?(RowData, PropertyValue, String(PropertyValue));
+				Return ?(RowData, PropertyValue, GetPresentationArbitrary(PropertyValue));
 			EndIf;
 		Else
 			Return getValueOfBodyVariableByPath(NextPath, PropertyValue, AllCommands, RowData);
@@ -831,7 +776,7 @@ Function getRequestVariables(RequestStructure, MockData, Logs)
 	Result = New Structure;
 	For Each Element In MockData.Request_Variables Do
 		RequestValue = RequestStructure.Options.Get(Element.VariableName);
-		If ValueIsFilled(RequestValue) Then
+		If Not RequestValue = Undefined Then
 			Result.Insert(Element.VariableName, RequestValue);
 			AddLineToLogs(Logs, StrTemplate("%1 - %2", R().Mock_Info_FoundOut, Element.VariableName));
 		Else
@@ -843,6 +788,27 @@ Function getRequestVariables(RequestStructure, MockData, Logs)
 		AddLineToLogs(Logs, StrTemplate(R().Mock_Info_StartCalculationOf, Element.VariableName));
 		RequestValue = getValueOfBodyVariable(RequestStructure, Element.PathToValue, Element.Value, Result);
 		Result.Insert(Element.VariableName, RequestValue);
+	EndDo;
+	
+	For Each Element In MockData.Request_AddressParts Do
+		AddLineToLogs(Logs, StrTemplate(R().Mock_Info_StartCalculationOf, Element.VariableName));
+		AddressParts = StrSplit(RequestStructure.Address, "/");
+		ValuePart = "";
+		If Element.PartNumber < AddressParts.Count() Then 
+			ValuePart = AddressParts[Element.PartNumber];
+		EndIf;
+		Result.Insert(Element.VariableName, ValuePart);
+		If Element.AsUrlVariable Then
+			AddressParts = StrSplit(ValuePart, "&");
+			For Each AddressPart In AddressParts Do
+				KeyValue = StrSplit(AddressPart, "=");
+				If KeyValue.Count() = 1 Then
+					Result.Insert(KeyValue[0], "");
+				Else
+					Result.Insert(KeyValue[0], KeyValue[1]);
+				EndIf;
+			EndDo;
+		EndIf;
 	EndDo;
 	
 	Return Result;
@@ -930,5 +896,145 @@ Function GetPresentationMap(MapObject)
 	Return Result;
 	
 EndFunction
+
+// Get presentation arbitrary.
+// 
+// Parameters:
+//  ArbitraryObject - Arbitrary - object
+// 
+// Returns:
+//  String - Get presentation
+Function GetPresentationArbitrary(ArbitraryObject)
+	
+	If TypeOf(ArbitraryObject) = Type("Array")
+			Or TypeOf(ArbitraryObject) = Type("XDTOList")
+			Or TypeOf(ArbitraryObject) = Type("ValueList")
+			Or TypeOf(ArbitraryObject) = Type("ValueTable") Then
+		Return "Collection";
+		
+	ElsIf TypeOf(ArbitraryObject) = Type("Map") Then
+		Return GetPresentationMap(ArbitraryObject);
+		
+	ElsIf TypeOf(ArbitraryObject) = Type("XDTODataObject") Then
+		Return GetPresentationXDTODataObject(ArbitraryObject);
+		
+	EndIf;
+	 
+	Return String(ArbitraryObject);
+	
+EndFunction
+
+// Get array from text.
+// 
+// Parameters:
+//  Text - String
+//  Start - String
+//  End - String
+// 
+// Returns:
+//  Array of String - Get array from text
+Function GetArrayFromText(Text, Start, End)
+	Result = New Array;
+	
+	CurrentPosition = 1;
+	While CurrentPosition <= StrLen(Text) Do
+		
+		StartPosition = StrFind(Text, Start, SearchDirection.FromBegin, CurrentPosition);
+		If StartPosition = 0 Then
+			Break;
+		EndIf;
+		ValueStart = StartPosition + StrLen(Start);
+		
+		EndPosition = StrFind(Text, End, SearchDirection.FromBegin, ValueStart);
+		If EndPosition = 0 Then
+			Break;
+		EndIf;
+		CurrentPosition = EndPosition + StrLen(End);
+		
+		Value = Mid(Text, StartPosition, CurrentPosition - StartPosition);
+		Result.Add(Value);
+		
+	EndDo;
+	
+	Return Result;
+EndFunction
+
+// Transformation value.
+// 
+// Parameters:
+//  SomeValue - String - Some value
+//  RequestVariables - Structure - existing variables
+// 
+// Returns:
+//  String - Transformation value
+Function TransformationValue(SomeValue, RequestVariables)
+	
+	If IsBlankString(SomeValue) Then
+		Return "";
+	EndIF;
+	
+	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "$$$") And StrEndsWith(SomeValue, "$$$") Then
+		KeyName = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
+		Try
+			Return RequestVariables[KeyName];
+		Except
+			Return "";
+		EndTry; 
+	EndIf;
+	 
+	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "{{{") And StrEndsWith(SomeValue, "}}}") Then
+		Params = CommonFunctionsServer.GetRecalculateExpressionParams();
+		Params.Eval = True;
+		Params.SafeMode = True;
+		Params.Expression = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
+		Params.AddInfo = RequestVariables;
+		ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
+		If ResultInfo.isError Then
+			Return "";
+		Else
+			Return ResultInfo.Result;
+		EndIf; 
+	EndIf;
+	
+	Return SomeValue;
+	
+EndFunction
+
+// Transformation text.
+// 
+// Parameters:
+//  SomeText - String - Some value
+//  RequestVariables - Structure - existing variables
+// 
+// Returns:
+//  String - Transformation value
+Function TransformationText(Val SomeText, RequestVariables)
+	
+	If IsBlankString(SomeText) Then
+		Return "";
+	EndIF;
+	
+	ArrayVarriables = GetArrayFromText(SomeText, "$$$", "$$$");
+	MapVarriables = New Map;
+	For Each ItemVariable In ArrayVarriables Do // String, String
+		MapVarriables.Insert(ItemVariable, TransformationValue(ItemVariable, RequestVariables));
+	EndDo;
+	For Each KeyValue In MapVarriables Do
+		SomeText = StrReplace(SomeText, KeyValue.Key, KeyValue.Value);
+	EndDo;
+	
+	ArrayVarriables = GetArrayFromText(SomeText, "{{{", "}}}");
+	MapVarriables = New Map;
+	For Each ItemVariable In ArrayVarriables Do // String, String
+		MapVarriables.Insert(ItemVariable, TransformationValue(ItemVariable, RequestVariables));
+	EndDo;
+	For Each KeyValue In MapVarriables Do
+		SomeText = StrReplace(SomeText, KeyValue.Key, KeyValue.Value);
+	EndDo;
+	
+	Return SomeText;
+	
+EndFunction
+
 
 #EndRegion

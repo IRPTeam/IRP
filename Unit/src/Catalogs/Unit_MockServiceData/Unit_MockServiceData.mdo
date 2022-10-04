@@ -483,6 +483,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="1cb8423b-b7c1-45b3-ad45-fe0be2e96776">
+      <name>AsUrlVariable</name>
+      <synonym>
+        <key>en</key>
+        <value>As URL variable</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="eae10679-c2d2-4ffe-b30b-33d0e19a5a4a">
     <producedTypes>

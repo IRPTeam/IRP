@@ -2692,6 +2692,49 @@
                 <textEdit>true</textEdit>
               </extInfo>
             </items>
+            <items xsi:type="form:FormField">
+              <name>Request_AddressPartsAsUrlVariable</name>
+              <id>283</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.Request_AddressParts.AsUrlVariable</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>Request_AddressPartsAsUrlVariableExtendedTooltip</name>
+                <id>285</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>Request_AddressPartsAsUrlVariableContextMenu</name>
+                <id>284</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>CheckBoxField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+            </items>
             <autoCommandBar>
               <name>Request_AddressPartsCommandBar</name>
               <id>91</id>

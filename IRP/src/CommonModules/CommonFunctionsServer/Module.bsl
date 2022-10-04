@@ -778,8 +778,8 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 		EndIf;
 		Attributes = StrReplace(Attributes, " ", "");
 		Attributes = StrReplace(Attributes, Chars.LF, "");
-		AttributParts = StrSplit(Attributes, ",");
-		For Each AttributPart In AttributParts Do
+		AttributeParts = StrSplit(Attributes, ",");
+		For Each AttributPart In AttributeParts Do
 			Alias = StrReplace(AttributPart, ".", "");
 			AttributesStructure.Insert(Alias, AttributPart);
 		EndDo; 
@@ -797,13 +797,12 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 	
 	FullTableName = Ref.Metadata().FullName();
 	
-	QueryFieldText = "";
+	QueryFields = New Array;
 	For Each ItemAttribute In AttributesStructure Do
 		
 		FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
 		FieldAlias = ItemAttribute.Key;
-		QueryFieldText = QueryFieldText + ?(IsBlankString(QueryFieldText), "", ",") + "
-			|	" + FieldName + " AS " + FieldAlias;
+		QueryFields.Add(FieldName + " AS " + FieldAlias);
 		
 		CurrentResult = Result;
 		FieldParts = StrSplit(FieldName, ".");
@@ -817,26 +816,21 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 		EndDo;
 	EndDo;
 	
-	If Not ValueIsFilled(Ref) Then
+	If Not ValueIsFilled(Ref) Or QueryFields.Count() = 0 Then
 		Return Result;
 	EndIf;
 	
 	Query = New Query;
 	Query.Parameters.Insert("Ref", Ref);
-	Query.Text =
-	"SELECT ALLOWED
-	|	&QueryFieldText
-	|FROM
-	|	&FullTableName AS Table
-	|WHERE
-	|	Table.Ref = &Ref";
-	
-	Query.Text = StrReplace(Query.Text, "&QueryFieldText", QueryFieldText);
-	Query.Text = StrReplace(Query.Text, "&FullTableName", FullTableName);
-	
-	If Not OnlyAllowed Then
-		Query.Text = StrReplace(Query.Text, " ALLOWED", "");
-	EndIf;
+	Query.Text = StrTemplate(
+		"SELECT %1
+		|	%2
+		|FROM %3 AS Table
+		|WHERE Table.Ref = &Ref", 
+		?(OnlyAllowed, "ALLOWED", ""), 
+		StrConcat(QueryFields, "," + Chars.CR + Chars.Tab),
+		FullTableName
+	);
 	
 	SelectionDetailRecords = Query.Execute().Select();
 	If SelectionDetailRecords.Next() Then

@@ -10,7 +10,7 @@ Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Exp
 
 	CustomizedSetting = New Structure();
 	SettingsSource = IntegrationSettingsRef.ConnectionSetting;
-	If Not SessionParameters.ConnectionSettings.isProduction Then
+	If Not ServiceSystemServer.isProduction() Then
 		SettingsSource = IntegrationSettingsRef.ConnectionSettingTest;
 	EndIf; 		  
 	For Each Str In SettingsSource Do

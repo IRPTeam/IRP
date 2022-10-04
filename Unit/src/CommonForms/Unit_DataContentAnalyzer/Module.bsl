@@ -1,6 +1,5 @@
 // @strict-types
 
-
 #Region FormEventHandlers
 
 &AtServer
@@ -414,7 +413,7 @@ Procedure ConstructTreeBranch(TreeBranch, AllCommands = Undefined)
 				Try
 					JSONReader = New JSONReader();
 					JSONReader.SetString(CurrentObjectResults);
-					JSONResult = ReadJSON(JSONReader);
+					JSONResult = ReadJSON(JSONReader, True);
 					JSONReader.Close();
 					NameNewCommand = AllCommands.JSON;
 				Except

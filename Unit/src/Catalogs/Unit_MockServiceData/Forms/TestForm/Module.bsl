@@ -227,7 +227,7 @@ Function GetRequestStructure()
 		ArrayOfSegments = StrSplit(OptionsSegments, "&");
 		For Each OptionsSegment In ArrayOfSegments Do
 			EqualPosition = StrFind(OptionsSegment, "=");
-			If EqualPosition > 1 Then
+			If EqualPosition = 0 Then
 				RequestOptions.Insert(OptionsSegment, "");
 			Else
 				RequestOptions.Insert(

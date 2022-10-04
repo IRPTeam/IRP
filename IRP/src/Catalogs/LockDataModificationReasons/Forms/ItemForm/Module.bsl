@@ -313,13 +313,17 @@ EndFunction
 
 &AtClient
 Procedure RuleListAttributeStartChoice(Item, ChoiceData, StandardProcessing)
-	ValueList = New ValueList();
-	FillAttributeList(ValueList, Items.RuleList.CurrentData.Type);
+	ValueList = FillAttributeList(Items.RuleList.CurrentData.Type);
 	Items.RuleListAttribute.ChoiceList.Clear();
 	For Each Row In ValueList Do
 		Items.RuleListAttribute.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
 	EndDo;
 EndProcedure
+
+&AtServer
+Function FillAttributeList(Type)
+	Return LockDataModificationReuse.FillAttributeList(Type).ChoiceData;
+EndFunction
 
 &AtClient
 Procedure AttributeStartChoice(Item, ChoiceData, StandardProcessing)
@@ -352,8 +356,7 @@ Function FillAttributeListHead(ChoiceData = Undefined)
 			Continue;
 		EndIf;
 		
-		ValueList = New ValueList(); // ValueList of String
-		FillAttributeList(ValueList, Row.Type);
+		ValueList = FillAttributeList(Row.Type);
 		For Each VLRow In ValueList Do
 			VTRow = VT.Add();
 			VTRow.Attribute = VLRow.Value;
@@ -377,68 +380,6 @@ Function FillAttributeListHead(ChoiceData = Undefined)
 	Return Array;
 EndFunction
 
-// Fill attribute list.
-// 
-// Parameters:
-//  ChoiceData - ValueList of String - Choice data
-//  DataType - String - Data type
-&AtServerNoContext
-Procedure FillAttributeList(ChoiceData, DataType)
-	If IsBlankString(DataType) Then
-		Return;
-	EndIf;
-	MetadataType = Enums.MetadataTypes[StrSplit(DataType, ".")[0]];
-	MetaItem = Metadata.FindByFullName(DataType);
-	If MetadataInfo.hasAttributes(MetadataType) Then
-		AddChild(MetaItem, ChoiceData, "Attributes");
-	EndIf;
-	If MetadataInfo.hasDimensions(MetadataType) Then
-		AddChild(MetaItem, ChoiceData, "Dimensions");
-	EndIf;
-	If MetadataInfo.hasStandardAttributes(MetadataType) Then
-		AddChild(MetaItem, ChoiceData, "StandardAttributes");
-	EndIf;
-	If MetadataInfo.hasRecalculations(MetadataType) Then
-		AddChild(MetaItem, ChoiceData, "Recalculations");
-	EndIf;
-	If MetadataInfo.hasAccountingFlags(MetadataType) Then
-		AddChild(MetaItem, ChoiceData, "AccountingFlags");
-	EndIf;
-
-	For Each CmAttribute In Metadata.CommonAttributes Do
-		If Not CmAttribute.Content.Find(Metadata.FindByFullName(DataType)) = Undefined And CmAttribute.Content.Find(
-			Metadata.FindByFullName(DataType)).Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
-			ChoiceData.Add("CommonAttribute." + CmAttribute.Name, ?(IsBlankString(CmAttribute.Synonym),
-				CmAttribute.Name, CmAttribute.Synonym), , PictureLib.CommonAttributes);
-		EndIf;
-	EndDo;
-EndProcedure
-
-// Add child.
-// 
-// Parameters:
-//  MetaItem - MetadataObject - Meta item
-//  AttributeChoiceList - ValueList of String - Attribute choice list
-//  DataType - String - Data type
-&AtServerNoContext
-Procedure AddChild(MetaItem, AttributeChoiceList, DataType)
-
-	If MetaItem = Undefined Then
-		Return;
-	EndIf;
-	
-	MetaCollection = MetaItem[DataType]; // Array of MetadataObjectAttribute
-	If Not MetaCollection.Count() Then
-		Return;
-	EndIf;
-
-	For Each AddChild In MetaCollection Do
-		//@skip-check invocation-parameter-type-intersect
-		AttributeChoiceList.Add(DataType + "." + AddChild.Name, ?(IsBlankString(AddChild.Synonym), AddChild.Name,
-			AddChild.Synonym), , PictureLib[DataType]);
-	EndDo;
-
-EndProcedure
 
 // Fill value type.
 // 

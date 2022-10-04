@@ -435,8 +435,8 @@ EndFunction
 Function DataIsLocked_ByRef_AdvancedMode(SourceParams, Rules, AddInfo = Undefined)
 	
 	Query = New Query;
-	
-	QueryText = New Array;
+	TotalFields = New Array;
+	Fields = New Array;
 	For Index = 0 To Rules.Count() - 1 Do
 		Rule = Rules[Index].LockDataModificationReasons;
 		If Not Rule.AdvancedMode Then
@@ -446,22 +446,45 @@ Function DataIsLocked_ByRef_AdvancedMode(SourceParams, Rules, AddInfo = Undefine
 		RuleUUID = StrReplace(String(Rule.UUID()), "-", "");
 		QueryPart = StrReplace(Rule.QueryFilter, "&REF_", "&REF_" + RuleUUID);
 		QueryPart = StrReplace(QueryPart, "&P", "&P_" + RuleUUID + "_");
-		QueryText.Add(QueryPart);
+		Fields.Add(QueryPart + " AS Rule_" + RuleUUID);
 		Params = SetQueryParameters(SourceParams.MetadataName, Rule);
 		For Each Param In Params Do
 			Query.SetParameter(StrReplace(String(Param.Key), "P", "P_" + RuleUUID + "_"), Param.Value);
 		EndDo;
 		Query.SetParameter("REF_" + RuleUUID, Rule);
+		TotalFields.Add("MAX(NS.Rule_" + RuleUUID + ")");
 	EndDo;
 	
-	If Not QueryText.Count() Then
+	If Not Fields.Count() Then
 		Return New Array;
 	EndIf;
-	
-	Query.Text = "SELECT " + Chars.LF + StrConcat(QueryText, "," + Chars.LF) + Chars.LF +
-				 " FROM " + SourceParams.MetadataName + " AS DS" + Chars.LF +
-				 " WHERE DS.Ref = &Ref";
+				 
 	Query.SetParameter("Ref", SourceParams.Source.Ref);
+	
+	VTTable = LockDataModificationReuse.GetVirtualTable(SourceParams.MetadataName);
+	FillPropertyValues(VTTable.Add(), SourceParams.Source);
+	Query.SetParameter("VTTable", VTTable);
+	
+	Query.Text =  
+		"SELECT 
+		|	* 
+		|INTO TableCurrent
+		|FROM &VTTable AS VTTable
+		|
+		|;
+		|SELECT
+		|	" + StrConcat(TotalFields, "," + Chars.LF) + " 
+		|FROM (	SELECT DISTINCT 
+		|		" + StrConcat(Fields, "," + Chars.LF) + " 
+		|	FROM " + SourceParams.MetadataName + " AS DS 
+		|	WHERE DS.Ref = &Ref
+		|
+		|	UNION
+		|
+		|	SELECT DISTINCT 
+		|		" + StrConcat(Fields, "," + Chars.LF) + " 
+		|	FROM TableCurrent AS DS
+		|) AS NS";
 	
 	Return GetResultLockCheck(Query);
 	

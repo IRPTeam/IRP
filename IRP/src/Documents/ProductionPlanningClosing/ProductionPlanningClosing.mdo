@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a702d851-b306-497c-86af-74188ce56880">
+  <producedTypes>
+    <objectType typeId="2046b025-bf1f-4cd7-a113-c1dce31790da" valueTypeId="2e37a1e0-c05b-4093-9dc3-1167fda9fb1e"/>
+    <refType typeId="ee701ee1-d839-42a2-b618-d605254b3dc3" valueTypeId="1c4a86d3-de31-40ec-b08e-ba463ecd597b"/>
+    <selectionType typeId="68706791-9f2b-44f7-8645-c28c7bae8597" valueTypeId="bfe7c8f6-11f1-475f-b1c4-1fc9f33ecf88"/>
+    <listType typeId="0c563a73-9560-465f-8eba-8a670ea3376f" valueTypeId="f389b9d5-bd1c-4a8e-a97b-2aebed82d9aa"/>
+    <managerType typeId="a8bbf7fa-ee07-4e53-bc25-87ff70a80e54" valueTypeId="ccf5168a-52cb-4064-9e28-d2c6df605883"/>
+  </producedTypes>
+  <name>ProductionPlanningClosing</name>
+  <synonym>
+    <key>en</key>
+    <value>(CORE) Production planning closing</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.ProductionPlanningClosing.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.ProductionPlanningClosing.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.ProductionPlanningClosing.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.ProductionPlanningClosing.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.MF_MaterialPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.MF_ProductionPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="b05d0a2c-0877-4ac7-9a98-f24edf1bc6b9">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="8e932d49-a243-4a3f-acbf-225adba31613">
+    <name>BusinessUnit</name>
+    <synonym>
+      <key>en</key>
+      <value>Business unit</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="72189a67-a5f0-45a2-b3f7-4895b43f0a37">
+    <name>ProductionPlanning</name>
+    <synonym>
+      <key>en</key>
+      <value>Production planning</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.MF_ProductionPlanning</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.ProductionPlanningClosing.Attribute.Company</field>
+    </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.BusinessUnit</name>
+      <field>Document.ProductionPlanningClosing.Attribute.BusinessUnit</field>
+    </choiceParameterLinks>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="e8aca585-11d6-4451-8d9e-619e4adaefea">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="97afa86d-8140-467f-99df-9b163aa81210">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c3477a38-04af-4c9e-8b79-e352158a69d8">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <commands uuid="b75831d1-7613-4b84-b333-553b8a6ace85">
+    <name>Generate</name>
+    <synonym>
+      <key>en</key>
+      <value>Production planning closing</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.ProductionPlanning</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
+</mdclass:Document>

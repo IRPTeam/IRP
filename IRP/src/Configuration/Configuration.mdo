@@ -759,6 +759,10 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
+  <documents>Document.ProductionPlanning</documents>
+  <documents>Document.ProductionPlanningCorrection</documents>
+  <documents>Document.ProductionPlanningClosing</documents>
+  <documents>Document.Production</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -817,6 +821,9 @@
   <enums>Enum.MaterialsCostWriteOff</enums>
   <enums>Enum.BusinessUnitTypes</enums>
   <enums>Enum.BillOfMaterialsTypes</enums>
+  <enums>Enum.ProductionPlanningTypes</enums>
+  <enums>Enum.ProductionTypes</enums>
+  <enums>Enum.MaterialTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -829,6 +836,7 @@
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.OffsetOfAdvances</reports>
   <reports>Report.PriceInfo</reports>
+  <reports>Report.MF_DetailingSupplies</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
@@ -896,6 +904,7 @@
   <informationRegisters>InformationRegister.T9014S_AccountsExpenseRevenue</informationRegisters>
   <informationRegisters>InformationRegister.T6095S_WriteOffBatchesInfo</informationRegisters>
   <informationRegisters>InformationRegister.JobQueue</informationRegisters>
+  <informationRegisters>InformationRegister.T7010S_BillOfMaterials</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -973,6 +982,10 @@
   <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R7010T_DetailingSupplies</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R7020T_MaterialPlanning</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R7030T_ProductionPlanning</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R7040T_ManualMaterialsCorretionInProduction</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>

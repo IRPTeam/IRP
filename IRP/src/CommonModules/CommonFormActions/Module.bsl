@@ -123,3 +123,14 @@ Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, Ar
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 EndProcedure
 
+Procedure OpenObjectForm(Field, FieldName, Ref, StandardProcessing) Export
+	If Upper(Field.Name) = Upper(FieldName) Then
+		StandardProcessing = False;
+		If Not ValueIsFilled(Ref) Then
+			Return;
+		EndIf;
+		OpenParameters = New Structure();
+		OpenParameters.Insert("Key", Ref);
+		OpenForm(CommonFormActionsServer.GetMetadataFullName(Ref) + ".ObjectForm", OpenParameters);
+	EndIf;	
+EndProcedure

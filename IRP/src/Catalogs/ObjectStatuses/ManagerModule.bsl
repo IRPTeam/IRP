@@ -1,5 +1,16 @@
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
-
+	If Parameters.Property("Filter") And Parameters.Filter.Property("Ref") Then
+		StandardProcessing = False;
+		QueryTable = GetChoiceDataTable_ByUser(Parameters);
+		
+		ChoiceData = New ValueList();
+		For Each Row In QueryTable Do
+			ChoiceData.Add(Row.Ref, Row.Presentation);
+		EndDo;
+		
+		Return;	
+	EndIf;
+	
 	If TypeOf(Parameters) <> Type("Structure") Or Not Parameters.Filter.Property("AdditionalParameters") Then
 		If Not Parameters.Filter.Count() Then
 			StandardProcessing = False;
@@ -56,4 +67,35 @@ Function GetChoiceDataTable(Parameters) Export
 		Query.SetParameter(QueryParameter.Key, QueryParameter.Value);
 	EndDo;
 	Return Query.Execute().Unload();
+EndFunction
+
+Function GetChoiceDataTable_ByUser(Parameters)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ObjectStatuses.Ref,
+	|	PRESENTATION(ObjectStatuses.Ref) AS Presentation
+	|FROM
+	|	Catalog.ObjectStatuses.Users AS ObjectStatusesUsers
+	|		INNER JOIN Catalog.ObjectStatuses AS ObjectStatuses
+	|		ON ObjectStatusesUsers.Ref = ObjectStatuses.Ref
+	|		AND NOT ObjectStatuses.DeletionMark
+	|		AND NOT ObjectStatuses.IsFolder
+	|		AND ObjectStatuses.Parent = &Parent
+	|		AND CASE
+	|			WHEN &Filter_SearchString
+	|				THEN ObjectStatuses.Description LIKE ""%"" + &SearchString + ""%""
+	|			ELSE TRUE
+	|		END
+	|		AND ObjectStatusesUsers.User = &User";
+	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "ObjectStatuses");
+	
+	Query.SetParameter("Parent"              , Catalogs.ObjectStatuses.ProductionPlanningCorrection);
+	Query.SetParameter("Filter_SearchString" , ValueIsFilled(Parameters.SearchString));
+	Query.SetParameter("SearchString"        , ?(ValueIsFilled(Parameters.SearchString),Parameters.SearchString, ""));
+	Query.SetParameter("User"                , SessionParameters.CurrentUser);
+		
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
 EndFunction

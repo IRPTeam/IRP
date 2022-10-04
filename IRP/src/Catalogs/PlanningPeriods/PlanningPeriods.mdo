@@ -139,6 +139,32 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="b8e99662-0fe3-43cd-bcd7-5ba9737fb45b">
+    <producedTypes>
+      <objectType typeId="191ea7cb-89fa-47e0-92e3-1f25722576d9" valueTypeId="21377b0d-ea2c-48d0-b6ef-2b09538fd671"/>
+      <rowType typeId="f0774b84-b40f-484a-92f2-0f1a79af067b" valueTypeId="74472744-eebd-421a-b67f-98371f74c316"/>
+    </producedTypes>
+    <name>BusinessUnits</name>
+    <synonym>
+      <key>en</key>
+      <value>Business units</value>
+    </synonym>
+    <attributes uuid="f54d04c5-d1f9-4473-99c0-2cfd955ac4a2">
+      <name>BusinessUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Business unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="e893d468-79d6-4537-8695-257b2a028b67">
     <name>ItemForm</name>
     <synonym>

@@ -120,6 +120,7 @@
   <subsystems>Subsystem.Accounting</subsystems>
   <subsystems>Subsystem.AdminFunctions</subsystems>
   <subsystems>Subsystem.WorkOrders</subsystems>
+  <subsystems>Subsystem.Manufacturing</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -177,6 +178,7 @@
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.Unlock</commonPictures>
   <commonPictures>CommonPicture.Waiting</commonPictures>
+  <commonPictures>CommonPicture.Factory</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -429,6 +431,10 @@
   <commonModules>CommonModule.DocWorkSheetServer</commonModules>
   <commonModules>CommonModule.DocWorkSheetClient</commonModules>
   <commonModules>CommonModule.UniversalPrintServer</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningServer</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningCorrectionServer</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningClosingServer</commonModules>
+  <commonModules>CommonModule.DocProductionServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -626,6 +632,7 @@
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.LinkedDocuments</commonForms>
+  <commonForms>CommonForm.EditStores</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>
@@ -836,7 +843,8 @@
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.OffsetOfAdvances</reports>
   <reports>Report.PriceInfo</reports>
-  <reports>Report.MF_DetailingSupplies</reports>
+  <reports>Report.DetailingSupplies</reports>
+  <reports>Report.ProductionPlanning</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
@@ -851,6 +859,7 @@
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
+  <dataProcessors>DataProcessor.ProductionWorkspace</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

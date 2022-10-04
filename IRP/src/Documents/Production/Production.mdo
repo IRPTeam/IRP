@@ -25,11 +25,7 @@
   <defaultListForm>Document.Production.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.Production.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.MF_MaterialPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.MF_ProductionPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.MF_LandedCostPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.MF_DetailingSupplies</registerRecords>
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
   <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
@@ -462,14 +458,14 @@
     </attributes>
   </tabularSections>
   <commands uuid="09865ee1-96a5-4f9c-a83f-4d12d47b414a">
-    <name>GenerateProduction</name>
+    <name>Generate</name>
     <synonym>
       <key>en</key>
       <value>Production</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
-      <types>DocumentRef.MF_ProductionPlanning</types>
+      <types>DocumentRef.ProductionPlanning</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

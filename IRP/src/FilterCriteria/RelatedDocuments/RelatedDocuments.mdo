@@ -99,6 +99,9 @@
   <content>Document.SalesInvoice.TabularSection.WorkSheets.Attribute.WorkSheet</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.WorkOrder</content>
   <content>Document.WorkSheet.TabularSection.ItemList.Attribute.SalesInvoice</content>
+  <content>Document.ProductionPlanningCorrection.Attribute.ProductionPlanning</content>
+  <content>Document.ProductionPlanningClosing.Attribute.ProductionPlanning</content>
+  <content>Document.Production.Attribute.ProductionPlanning</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>
@@ -153,6 +156,10 @@
       <types>DocumentRef.ConsolidatedRetailSales</types>
       <types>DocumentRef.WorkOrder</types>
       <types>DocumentRef.WorkSheet</types>
+      <types>DocumentRef.ProductionPlanning</types>
+      <types>DocumentRef.ProductionPlanningClosing</types>
+      <types>DocumentRef.ProductionPlanningCorrection</types>
+      <types>DocumentRef.Production</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

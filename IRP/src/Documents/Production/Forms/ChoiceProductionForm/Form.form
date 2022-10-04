@@ -926,7 +926,7 @@
       </title>
       <id>12</id>
       <valueType>
-        <types>CatalogRef.MF_BillOfMaterials</types>
+        <types>CatalogRef.BillOfMaterials</types>
       </valueType>
       <view>
         <common>true</common>
@@ -1073,7 +1073,7 @@
     </title>
     <id>10</id>
     <valueType>
-      <types>CatalogRef.MF_PlanningPeriods</types>
+      <types>CatalogRef.PlanningPeriods</types>
     </valueType>
     <view>
       <common>true</common>
@@ -1090,7 +1090,7 @@
     </title>
     <id>11</id>
     <valueType>
-      <types>DocumentRef.MF_ProductionPlanning</types>
+      <types>DocumentObject.ProductionPlanning</types>
     </valueType>
     <view>
       <common>true</common>
@@ -1162,13 +1162,13 @@
   <parameters>
     <name>PlanningPeriod</name>
     <valueType>
-      <types>CatalogRef.MF_PlanningPeriods</types>
+      <types>CatalogRef.PlanningPeriods</types>
     </valueType>
   </parameters>
   <parameters>
     <name>ProductionPlanning</name>
     <valueType>
-      <types>DocumentRef.MF_ProductionPlanning</types>
+      <types>DocumentRef.ProductionPlanning</types>
     </valueType>
   </parameters>
   <commandInterface>

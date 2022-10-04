@@ -25,10 +25,6 @@
   <defaultListForm>Document.ProductionPlanningCorrection.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.ProductionPlanningCorrection.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.MF_MaterialPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.MF_ProductionPlanning</registerRecords>
-  <registerRecords>InformationRegister.MF_BillOfMaterials</registerRecords>
-  <registerRecords>AccumulationRegister.MF_DetailingSupplies</registerRecords>
   <registerRecords>InformationRegister.T7010S_BillOfMaterials</registerRecords>
   <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>

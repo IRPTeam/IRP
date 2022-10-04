@@ -123,7 +123,7 @@
       <value>Planning period</value>
     </synonym>
     <type>
-      <types>CatalogRef.MF_PlanningPeriods</types>
+      <types>CatalogRef.PlanningPeriods</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -151,7 +151,7 @@
       <value>Bill of materials</value>
     </synonym>
     <type>
-      <types>CatalogRef.MF_BillOfMaterials</types>
+      <types>CatalogRef.BillOfMaterials</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

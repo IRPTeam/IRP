@@ -78,7 +78,7 @@
       <value>Bill of materials</value>
     </synonym>
     <type>
-      <types>CatalogRef.BusinessUnits</types>
+      <types>CatalogRef.BillOfMaterials</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

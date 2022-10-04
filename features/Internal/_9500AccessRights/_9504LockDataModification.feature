@@ -1988,7 +1988,7 @@ Scenario: 950435 check the priorities of a simple and advanced data locking rule
 		And I input "117" text in the field named "SettingsFilterRightValue" of "SettingsFilter" table
 		And I finish line editing in "SettingsFilter" table
 		And I click "Save and close" button
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                            |
 			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'GR number advanced'                                   |
 	* Check priority
@@ -1997,7 +1997,6 @@ Scenario: 950435 check the priorities of a simple and advanced data locking rule
 			| 'Number' |
 			| '115'    |
 		And in the table "List" I click "Post" button
-		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "GR number simple" string by template
@@ -2005,7 +2004,6 @@ Scenario: 950435 check the priorities of a simple and advanced data locking rule
 			| 'Number' |
 			| '116'    |
 		And in the table "List" I click "Post" button
-		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "GR number advanced" string by template	
@@ -2081,8 +2079,6 @@ Scenario: 950436 create advanced rules for branch and date
 			| 'Number' |
 			| '117'    |
 		And in the table "List" I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Branch and Date for purchase" string by template
 		And I go to line in "List" table
@@ -2096,10 +2092,9 @@ Scenario: 950436 create advanced rules for branch and date
 			| 'Number' |
 			| '117'    |
 		And in the table "List" I click "Post" button
-		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
-		Given Recent TestClient message contains "Branch with responsible user" string by template
+		Given Recent TestClient message contains "Branch and Date for purchase" string by template
 		And I close TestClient session
 		And I connect "Этот клиент" profile of TestClient		
 
@@ -2227,7 +2222,6 @@ Scenario: 950438 lock data modification reasons for user
 			| 'Number' |
 			| '117'    |
 		And in the table "List" I click "Post" button
-		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Branch (user)" string by template

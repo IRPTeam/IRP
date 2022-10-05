@@ -388,6 +388,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_033", NStr("en = 'Show all'", Lang));
 	Strings.Insert("Form_034", NStr("en = 'Hide all'", Lang));
 	Strings.Insert("Form_035", NStr("en = 'Head'", Lang));
+	Strings.Insert("Form_036", NStr("en = 'Set as default'", Lang));
+	Strings.Insert("Form_037", NStr("en = 'Unset as default'", Lang));
 #EndRegion
 
 #Region ErrorMessages
@@ -592,7 +594,7 @@ Function Strings(Lang) Export
 	// %3 - Red/38 
 	// %4 - 8 
 	// %5 - 10
-	Strings.Insert("Error_081", NStr("en = 'In line %1 quantity by %2-%3 %4 less than quantity by goods receipt %5'",
+	Strings.Insert("Error_081", NStr("en = 'In line %1 quantity by %2-%3 %4 less than quantity %5'",
 		Lang));
 	
 	// %1 - 1 
@@ -600,7 +602,7 @@ Function Strings(Lang) Export
 	// %3 - Red/38 
 	// %4 - 10 
 	// %5 - 8
-	Strings.Insert("Error_082", NStr("en = 'In line %1 quantity by %2-%3 %4 less than quantity by goods receipt %5'",
+	Strings.Insert("Error_082", NStr("en = 'In line %1 quantity by %2-%3 %4 less than quantity %5'",
 		Lang));
 	
 	// %1 - 12 

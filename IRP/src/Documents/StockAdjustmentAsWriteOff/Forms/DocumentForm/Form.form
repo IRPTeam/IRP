@@ -1647,7 +1647,7 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>ItemListEditCurrencies</name>
+            <name>EditCurrencies</name>
             <id>425</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1655,7 +1655,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>ItemListEditCurrenciesExtendedTooltip</name>
+              <name>EditCurrenciesExtendedTooltip</name>
               <id>426</id>
               <visible>true</visible>
               <enabled>true</enabled>

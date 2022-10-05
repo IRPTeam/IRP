@@ -412,23 +412,11 @@ EndProcedure
 
 #EndRegion
 
-#Region GOODS_RECEIPTS
+#Region LINKED_DOCUMENTS
 
 &AtClient
-Procedure GoodsReceiptsTreeQuantityOnChange(Item)
-	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, "GoodsReceipts", "GoodsReceiptsTree",
-		"GoodsReceipt");
-	RowIDInfoClient.UpdateQuantity(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure GoodsReceiptsTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure GoodsReceiptsTreeBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
+Procedure LinkedDocuments_GoodsReceipts(Command)
+	DocumentsClient.OpenLinkedDocuments(Object, ThisObject, "GoodsReceipts", "GoodsReceipt", "QuantityInGoodsReceipt");
 EndProcedure
 
 #EndRegion

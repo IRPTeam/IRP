@@ -283,10 +283,12 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		And I activate "Key" field in "ItemList" table
 		And I delete "$$Rov1SalesReturn28402$$" variable
 		And I save the current field value as "$$Rov1SalesReturn28402$$"
-		And "GoodsReceiptsTree" table contains lines
-			| 'Key'                      | 'Basis key'                 | 'Item'  | 'Item key' | 'Goods receipt'                               | 'Invoice' | 'GR'    | 'Quantity'     |
-			| '$$Rov1SalesReturn28402$$' | ''                          | 'Dress' | 'XS/Blue'  | ''                                            | '2,000'   | '2,000' | '2,000' |
-			| '$$Rov1SalesReturn28402$$' | '$$Rov1GoodsReceipt28402$$' | ''      | ''         | 'Goods receipt 125 dated 12.03.2021 08:56:32' | ''        | '2,000' | '2,000' |
+		And in the table "ItemList" I click "Goods receipts" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                                | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Dress (XS/Blue)'                             | '2,000'   | '2,000'              | '2,000'    |
+			| 'Goods receipt 125 dated 12.03.2021 08:56:32' | ''        | '2,000'              | '2,000'    |
+		And I close current window
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                      | 'Basis'                                       | 'Row ID'                    | 'Next step' | 'Quantity'     | 'Basis key'                 | 'Current step' | 'Row ref'                   |
 			| '1' | '$$Rov1SalesReturn28402$$' | 'Goods receipt 125 dated 12.03.2021 08:56:32' | '$$Rov1GoodsReceipt28402$$' | ''          | '2,000' | '$$Rov1GoodsReceipt28402$$' | 'SR'           | '$$Rov1GoodsReceipt28402$$' |
@@ -299,7 +301,9 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 			| '2,000'    | 'Dress (XS/Blue)'   | 'pcs'  |
 		And I click "Unlink" button
 		And I click "Ok" button
-		Then the number of "GoodsReceiptsTree" table lines is "равно" "0"
+		And in the table "ItemList" I click "Goods receipts" button
+		Then the number of "DocumentsTree" table lines is "равно" 0
+		And I close current window
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                      | 'Basis' | 'Row ID'                   | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                  |
@@ -313,10 +317,12 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 			| '2,000'    | 'Dress (XS/Blue)'   | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
-		And "GoodsReceiptsTree" table contains lines
-			| 'Key'                      | 'Basis key'                 | 'Item'  | 'Item key' | 'Goods receipt'                               | 'Invoice' | 'GR'    | 'Quantity'     |
-			| '$$Rov1SalesReturn28402$$' | ''                          | 'Dress' | 'XS/Blue'  | ''                                            | '2,000'   | '2,000' | '2,000' |
-			| '$$Rov1SalesReturn28402$$' | '$$Rov1GoodsReceipt28402$$' | ''      | ''         | 'Goods receipt 125 dated 12.03.2021 08:56:32' | ''        | '2,000' | '2,000' |
+		And in the table "ItemList" I click "Goods receipts" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                                | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Dress (XS/Blue)'                             | '2,000'   | '2,000'              | '2,000'    |
+			| 'Goods receipt 125 dated 12.03.2021 08:56:32' | ''        | '2,000'              | '2,000'    |
+		And I close current window
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                      | 'Basis'                                       | 'Row ID'                    | 'Next step' | 'Quantity'     | 'Basis key'                 | 'Current step' | 'Row ref'                   |
 			| '1' | '$$Rov1SalesReturn28402$$' | 'Goods receipt 125 dated 12.03.2021 08:56:32' | '$$Rov1GoodsReceipt28402$$' | ''          | '2,000' | '$$Rov1GoodsReceipt28402$$' | 'SR'           | '$$Rov1GoodsReceipt28402$$' |

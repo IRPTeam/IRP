@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConditionalAppearance xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+	<item>
+		<selection>
+			<item>
+				<field>MaterialsItemBOM</field>
+			</item>
+			<item>
+				<field>MaterialsItemKeyBOM</field>
+			</item>
+			<item>
+				<field>MaterialsUnitBOM</field>
+			</item>
+			<item>
+				<field>MaterialsQuantityBOM</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Materials.IsManualChanged</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">true</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:use>false</dcscor:use>
+				<dcscor:parameter>BackColor</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Color">web:LightPink</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>TextColor</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Color">web:Crimson</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>MaterialsStore</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Materials.CostWriteOff</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.MaterialsCostWriteOff.IncludeToWorkCost</right>
+			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Materials.Store</left>
+				<comparisonType>NotFilled</comparisonType>
+				<right xsi:nil="true"/>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>MarkIncomplete</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>MaterialsStore</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Materials.CostWriteOff</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.MaterialsCostWriteOff.NotInclude</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>ReadOnly</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>MaterialsLineNumber</field>
+			</item>
+			<item>
+				<field>MaterialsKey</field>
+			</item>
+			<item>
+				<field>MaterialsKeyOwner</field>
+			</item>
+			<item>
+				<field>MaterialsItem</field>
+			</item>
+			<item>
+				<field>MaterialsItemKey</field>
+			</item>
+			<item>
+				<field>MaterialsUnit</field>
+			</item>
+			<item>
+				<field>MaterialsQuantity</field>
+			</item>
+			<item>
+				<field>MaterialsQuantityInBaseUnit</field>
+			</item>
+			<item>
+				<field>MaterialsItemBOM</field>
+			</item>
+			<item>
+				<field>MaterialsItemKeyBOM</field>
+			</item>
+			<item>
+				<field>MaterialsUnitBOM</field>
+			</item>
+			<item>
+				<field>MaterialsQuantityBOM</field>
+			</item>
+			<item>
+				<field>MaterialsQuantityInBaseUnitBOM</field>
+			</item>
+			<item>
+				<field>MaterialsIsManualChanged</field>
+			</item>
+			<item>
+				<field>MaterialsIsVisible</field>
+			</item>
+			<item>
+				<field>MaterialsCostWriteOff</field>
+			</item>
+			<item>
+				<field>MaterialsStore</field>
+			</item>
+			<item>
+				<field>MaterialsProfitLossCenter</field>
+			</item>
+			<item>
+				<field>MaterialsExpenseType</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Materials.IsVisible</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">false</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>Visible</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+</ConditionalAppearance>

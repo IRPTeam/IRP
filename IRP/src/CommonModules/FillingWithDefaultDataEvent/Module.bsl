@@ -30,6 +30,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		ArrayOfAllMainTables.Add("ItemList");
 		ArrayOfAllMainTables.Add("PaymentList");
 		ArrayOfAllMainTables.Add("Transactions");
+		
 		ArrayOfMainTables = New Array();
 		For Each TableName In ArrayOfAllMainTables Do
 			If CommonFunctionsClientServer.ObjectHasProperty(Source, TableName) Then
@@ -39,6 +40,17 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		If Not ArrayOfMainTables.Count() Then
 			ArrayOfMainTables.Add("");
 		EndIf;
+		
+		// #1487
+		ArrayOfAllSubordinateTables = New Array();
+		ArrayOfAllSubordinateTables.Add("Materials");
+		
+		ArrayOfSubordinateTables = New Array();
+		For Each TableName In ArrayOfAllSubordinateTables Do
+			If CommonFunctionsClientServer.ObjectHasProperty(Source, TableName) Then
+				ArrayOfSubordinateTables.Add(TableName);
+			EndIf;
+		EndDo;
 		
 		// properties from UserSettings
 		ArrayOfUserSettingsProperties = New Array();
@@ -62,57 +74,53 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		// list of completed attributes in ReadOnlyProperties
 		// need call handler OnChange for each already filled attribute
 	
-		ArrayOfBasisDocumentProperties = StrSplit(ReadOnlyProperties, ",");
+		ArrayOfAllProperties = StrSplit(ReadOnlyProperties, ",");
+		
 		ArrayOfUserSettingsProperties   = StrSplit(UserSettingsProperties, ",");
+		ArrayOfBasisDocumentProperties = New Array();
+		ArrayOfSubordinateTablesProperties = New Array();
+		
+		For Each SubordinateTableName In ArrayOfSubordinateTables Do
+			For Each DataPath In ArrayOfAllProperties Do
+				_DataPath = TrimAll(DataPath);
+				Segments = StrSplit(_DataPath, ".");
+				If Segments.Count() = 2 And StrStartsWith(Segments[0], SubordinateTableName) Then
+					ArrayOfSubordinateTablesProperties.Add(_DataPath);
+				EndIf;
+			EndDo;
+		EndDo;
+		
+		For Each BasisProp In ArrayOfAllProperties Do
+			PropIsExists = False;
+			For Each SubProp In ArrayOfSubordinateTablesProperties Do
+				If TrimAll(Upper(BasisProp)) = TrimAll(Upper(SubProp)) Then
+					PropIsExists = True;
+					Break;
+				EndIf;
+			EndDo;
+			
+			If Not PropIsExists Then
+				ArrayOfBasisDocumentProperties.Add(BasisProp);
+			EndIf;
+		EndDo;
+		
+		Info = New Structure();
+		Info.Insert("ReadOnlyProperties"     , ReadOnlyProperties);
+		Info.Insert("UserSettingsProperties" , UserSettingsProperties);
+		Info.Insert("Data"                   , Data);
+		
 		For Each TableName In ArrayOfMainTables Do
-			// BasisDocument
-			ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
-			ServerParameters.IsBasedOn          = IsBasedOn;
-			ServerParameters.TableName          = TableName;
-			ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
-			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-			
-			For Each DataPath In ArrayOfBasisDocumentProperties Do
-				If Not ValueIsFilled(DataPath) Then
-					Continue;
-				EndIf;
-				Property = New Structure("DataPath", TrimAll(DataPath));
-				ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
-			EndDo;
-			
-			// UserSetting
-			ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
-			ServerParameters.IsBasedOn          = IsBasedOn;
-			ServerParameters.TableName          = TableName;
-			ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(ReadOnlyProperties), 
-				ReadOnlyProperties + ", " + UserSettingsProperties, UserSettingsProperties);;
-			Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-			
-			For Each PropertyName In ArrayOfUserSettingsProperties Do
-				If Not ValueIsFilled(PropertyName) Then
-					Continue;
-				EndIf;
-				Value = Data[PropertyName];
-				If ValueIsFilled(Value) 
-					And Not ValueIsFilled(Source[PropertyName])
-					And ArrayOfBasisDocumentProperties.Find(PropertyName) = Undefined Then
-						Source[PropertyName] = Value;
-				Else
-						Continue;
-				EndIf;
+			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfBasisDocumentProperties);
+		EndDo;
+		
+		For Each TableName In ArrayOfSubordinateTables Do
+			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfSubordinateTablesProperties);
+		EndDo;
+		
+		For Each TableName In ArrayOfMainTables Do
+			ProcessPropertiesByUserSettings(Info, Source, IsBasedOn, TableName, ArrayOfUserSettingsProperties, ArrayOfBasisDocumentProperties, ArrayOfSubordinateTables);
+		EndDo;
 				
-				DataPath = StrSplit(PropertyName, ".");
-				If DataPath.Count() = 1 Then
-					Property = New Structure("DataPath", TrimAll(DataPath[0]));
-					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
-				EndIf;
-			EndDo;
-			
-		EndDo; // ArrayOfMainTables
-		
-		
-		
-		
 	EndIf; // IsUsedNewFunctionality 
 	
 	For Each KeyValue In Data Do
@@ -204,6 +212,10 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 		Source.GoodsReceipts.Clear();
 	EndIf;
 	
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "WorkSheets") Then
+		Source.WorkSheets.Clear();
+	EndIf;
+	
 	// Update key in tabular sections
 	If CommonFunctionsClientServer.ObjectHasProperty(Source, "ItemList") Then
 		LinkedTables = New Array();
@@ -217,6 +229,55 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 		EndDo;
 		DocumentsServer.SetNewTableUUID(Source.ItemList, LinkedTables);
 	EndIf;
+EndProcedure
+
+Procedure ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfProperties)
+	// BasisDocument
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+	ServerParameters.IsBasedOn          = IsBasedOn;
+	ServerParameters.TableName          = TableName;
+	ServerParameters.ReadOnlyProperties = Info.ReadOnlyProperties;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+			
+	For Each DataPath In ArrayOfProperties Do
+		_DataPath = TrimAll(DataPath);
+		If Not ValueIsFilled(_DataPath) Then
+			Continue;
+		EndIf;
+				
+		Property = New Structure("DataPath", _DataPath);
+		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	EndDo;
+EndProcedure
+
+Procedure ProcessPropertiesByUserSettings(Info, Source, IsBasedOn, TableName, ArrayOfUserSettingsProperties, ArrayOfBasisDocumentProperties, ArrayOfSubordinateTablesProperties)
+	// UserSetting
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+	ServerParameters.IsBasedOn          = IsBasedOn;
+	ServerParameters.TableName          = TableName;
+	ServerParameters.ReadOnlyProperties = ?(ValueIsFilled(Info.ReadOnlyProperties), 
+	Info.ReadOnlyProperties + ", " + Info.UserSettingsProperties, Info.UserSettingsProperties);
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+			
+	For Each PropertyName In ArrayOfUserSettingsProperties Do
+		If Not ValueIsFilled(PropertyName) Then
+			Continue;
+		EndIf;
+		Value = Info.Data[PropertyName];
+		If ValueIsFilled(Value) And Not ValueIsFilled(Source[PropertyName])
+			And ArrayOfBasisDocumentProperties.Find(PropertyName) = Undefined 
+			And ArrayOfSubordinateTablesProperties.Find(PropertyName) = Undefined Then
+				Source[PropertyName] = Value;
+		Else
+			Continue;
+		EndIf;
+				
+		DataPath = StrSplit(PropertyName, ".");
+		If DataPath.Count() = 1 Then
+			Property = New Structure("DataPath", TrimAll(DataPath[0]));
+			ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+		EndIf;
+	EndDo;
 EndProcedure
 
 Function UsedNewFunctionality(Source)
@@ -265,7 +326,9 @@ Function UsedNewFunctionality(Source)
 	
 	Or TypeOf(Source) = Type("DocumentObject.CashTransferOrder")
 	Or TypeOf(Source) = Type("DocumentObject.ChequeBondTransaction")
-	Or TypeOf(Source) = Type("DocumentObject.ConsolidatedRetailSales");
+	Or TypeOf(Source) = Type("DocumentObject.ConsolidatedRetailSales")
+	Or TypeOf(Source) = Type("DocumentObject.WorkOrder")
+	Or TypeOf(Source) = Type("DocumentObject.WorkSheet");
 	
 	Return IsUsedNewFunctionality;
 EndFunction

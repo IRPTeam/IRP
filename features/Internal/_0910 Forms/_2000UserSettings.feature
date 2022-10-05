@@ -845,6 +845,43 @@ Scenario: _200001 customize the CI user settings
 			| 'Front office' |
 		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
+	* Fill in custom settings for Work order
+		And I go to line in "MetadataTree" table
+			| 'Group name'  |
+			| 'Work order' |
+		And I go to line in "MetadataTree" table
+			| 'Group name'  | 'Use' |
+			| 'Branch'      | 'No'  |
+		And I activate "Use" field in "MetadataTree" table
+		And I change "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+	* Fill in custom settings for Work sheet
+		And I go to line in "MetadataTree" table
+			| 'Group name' |
+			| 'Work sheet' |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'  | 'Use' |
+			| 'Branch'      | 'No'  |
+		And I activate "Use" field in "MetadataTree" table
+		And I change "Use" checkbox in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
 	And I click "Ok" button
 	* Open user settings
 		And I click "Settings" button
@@ -927,7 +964,19 @@ Scenario: _200005 check filling in field from custom user settings in Bank recei
 		Then the form attribute named "Currency" became equal to "USD"
 	And I close all client application windows
 
+Scenario: _200006 check filling in field from custom user settings in Work order
+	Given I open hyperlink "e1cib/list/Document.WorkOrder"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+	And I close all client application windows
 
+Scenario: _200007 check filling in field from custom user settings in Work sheet
+	Given I open hyperlink "e1cib/list/Document.WorkSheet"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+	And I close all client application windows
 
 Scenario:  _200008 check filling in field from custom user settings in Bundling
 	Given I open hyperlink "e1cib/list/Document.Bundling"

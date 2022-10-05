@@ -693,8 +693,6 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 					| 'Item'    | 'Item key' |
 					| 'Service' | 'Rent'     |
 			And I select current line in "List" table
-			And I activate "Procurement method" field in "ItemList" table
-			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 			And I move to the next attribute
 			And I activate "Price" field in "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
@@ -873,12 +871,11 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Store" became equal to "Store 02"
 	* Check filling in tabular part
 		Then the number of "ItemList" table lines is "меньше или равно" 2
 		And "ItemList" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Shipment basis'   |
-			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 02' | 'Sales order 800*' |
+			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 01' | 'Sales order 800*' |
 			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | 'Store 02' | 'Sales order 801*' |
 	And I close current window
 * Check filling in Purchase order (should get one string)

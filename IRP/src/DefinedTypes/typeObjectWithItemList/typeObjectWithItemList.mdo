@@ -31,5 +31,6 @@
     <types>DocumentRef.InventoryTransfer</types>
     <types>DocumentRef.GoodsReceipt</types>
     <types>DocumentRef.SalesInvoice</types>
+    <types>DocumentRef.WorkOrder</types>
   </type>
 </mdclass:DefinedType>

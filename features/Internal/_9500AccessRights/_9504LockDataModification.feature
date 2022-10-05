@@ -2087,7 +2087,7 @@ Scenario: 950436 create advanced rules for branch and date
 			| '119'    |
 		And in the table "List" I click "Post" button			
 		Then user message window does not contain messages	
-		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
+		And I connect "TestAdmin4" TestClient using "ABrown" login and "" password
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number' |
@@ -2395,6 +2395,8 @@ Scenario: 950441 check is object lock on open (documents)
 			| 'Front office'    |
 		And I select current line in "List" table
 		And I finish line editing in "SettingsFilter" table
+		And I finish line editing in "SettingsFilter" table
+		And in the table "SettingsFilter" I click the button named "SettingsFilterGroupFilterItems"
 		And I select "OR group" exact value from "Group type" drop-down list in "SettingsFilter" table
 		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
 		And I select "Date" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
@@ -2437,8 +2439,6 @@ Scenario: 950441 check is object lock on open (documents)
 		And I move to "Other" tab
 		And I input "05.10.2020 00:00:00" text in the field named "Date"
 		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
 		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
@@ -2449,14 +2449,6 @@ Scenario: 950441 check is object lock on open (documents)
 			| 'Front office' |
 		And I select current line in "List" table
 		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
-		Given Recent TestClient message contains "Data lock reasons:*" string by template
-		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
-		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
 		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
@@ -2508,7 +2500,6 @@ Scenario: 950442 check is object lock on open (catalogs)
 			| 'Dress'         |
 		And I select current line in "List" table
 		And I click "Save and close" button
-		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Check is object lock on open (catalogs):" string by template
 		Given Recent TestClient message contains 'Unit Equal to "pcs"' string by template
@@ -2530,7 +2521,6 @@ Scenario: 950442 check is object lock on open (catalogs)
 			| 'pcs'         |
 		And I select current line in "List" table
 		And I click "Save and close" button
-		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Check is object lock on open (catalogs):" string by template
 		Given Recent TestClient message contains 'Unit Equal to "pcs"' string by template
@@ -2582,7 +2572,8 @@ Scenario: 950450 check ignore lock modification data
 		And I go to line in "List" table
 			| 'Number' |
 			| '117'    |
-		And in the table "List" I click "Post" button			
+		And in the table "List" I click "Post" button	
+		And I click "OK" button		
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
 		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template

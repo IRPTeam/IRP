@@ -211,7 +211,7 @@ Scenario: _020001 check load currency rate from tcmb.gov.tr
 
 Scenario: _020002 check load currency rate from bank.gov.ua
 	* Preparation
-		If "$isProdMode$" variable is equal to "true" Then
+		If "$isProdMode$" variable is equal to "True" Then
 			Then I stop script execution "Skipped"
 	* Upload currency rate Bank UA (from bank.gov.ua)
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"

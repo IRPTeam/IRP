@@ -2004,7 +2004,8 @@ Scenario: 950435 check the priorities of a simple and advanced data locking rule
 			| '116'    |
 		And in the table "List" I click "Post" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
-		Given Recent TestClient message contains "GR number advanced" string by template	
+		Given Recent TestClient message contains "GR number advanced:" string by template
+		Given Recent TestClient message contains 'Number Less than "117"' string by template	
 		And I go to line in "List" table
 			| 'Number' |
 			| '117'    |
@@ -2079,7 +2080,8 @@ Scenario: 950436 create advanced rules for branch and date
 			| '117'    |
 		And in the table "List" I click "Post" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
-		Given Recent TestClient message contains "Branch and Date for purchase" string by template
+		Given Recent TestClient message contains "Branch and Date for purchase:" string by template
+		Given Recent TestClient message contains 'Branch Equal to "Front office" AND Date Less than "12.02.2021 16:20:00"' string by template
 		And I go to line in "List" table
 			| 'Number' |
 			| '119'    |
@@ -2093,7 +2095,8 @@ Scenario: 950436 create advanced rules for branch and date
 		And in the table "List" I click "Post" button
 		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
-		Given Recent TestClient message contains "Branch and Date for purchase" string by template
+		Given Recent TestClient message contains "Branch and Date for purchase:" string by template
+		Given Recent TestClient message contains 'Branch Equal to "Front office" AND Date Less than "12.02.2021 16:20:00"' string by template
 		And I close TestClient session
 		And I connect "Этот клиент" profile of TestClient		
 
@@ -2223,7 +2226,8 @@ Scenario: 950438 lock data modification reasons for user
 		And in the table "List" I click "Post" button
 		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
-		Given Recent TestClient message contains "Branch (user)" string by template
+		Given Recent TestClient message contains "Branch (user):" string by template
+		Given Recent TestClient message contains 'Branch Equal to "Front office"' string by template
 		And I close TestClient session
 		And I connect "Этот клиент" profile of TestClient
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
@@ -2284,7 +2288,7 @@ Scenario: 950439 lock data modification reasons for user group
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
-		Given Recent TestClient message contains "Branch (user group)" string by template
+		Given Recent TestClient message contains "Branch (user group):" string by template
 		And I close TestClient session
 		And I connect "Этот клиент" profile of TestClient
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
@@ -2348,9 +2352,252 @@ Scenario: 950440 lock data modification reasons with cross fields
 		And I click "Post" button
 		And I click "OK" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
-		Given Recent TestClient message contains "Date of shipment (cross fields)" string by template
+		Given Recent TestClient message contains "Date of shipment (cross fields):" string by template
+		Given Recent TestClient message contains 'DateOfShipment Less than Date.EndDates.EndOfWeek' string by template
 		And I close all client application windows
-							
+
+
+Scenario: 950441 check is object lock on open (documents)
+	And I close all client application windows
+	And I mark "Catalogs.LockDataModificationReasons" objects for deletion	
+	* Create reason
+		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+		And I click the button named "FormCreate"
+		And I set checkbox "Advanced mode"
+		And I set checkbox "For all users"
+		And I set checkbox "Set one rule for all objects"
+		And I set checkbox "Check is object locked on open"	
+		And I input "Check is object lock on open (documents)" text in "ENG" field
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Purchase invoice" exact value from "Type" drop-down list in "RuleList" table
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Purchase order" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I finish line editing in "RuleList" table
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Goods receipt" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I move to "Advanced rules" tab
+		And I finish line editing in "RuleList" table
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Internal supply request" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I move to "Advanced rules" tab
+		And I finish line editing in "RuleList" table
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I select "Branch" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
+		And I move to the next attribute
+		And I select "Equal to" exact value from the drop-down list named "SettingsFilterComparisonType" in "SettingsFilter" table
+		And I move to the next attribute
+		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office'    |
+		And I select current line in "List" table
+		And I finish line editing in "SettingsFilter" table
+		And I select "OR group" exact value from "Group type" drop-down list in "SettingsFilter" table
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I select "Date" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
+		And I move to the next attribute
+		And I select "Less than" exact value from the drop-down list named "SettingsFilterComparisonType" in "SettingsFilter" table
+		And I move to the next attribute
+		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
+		And I activate "Date" field in "SettingsFilter" table
+		And I input "12.02.2021 16:20:00" text in "Date" field of "SettingsFilter" table
+		And I finish line editing in "SettingsFilter" table
+		And I click "Save and close" button			
+	* Check creation
+		And "List" table contains lines
+			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                   |
+			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Check is object lock on open (documents)'    |		
+	* Check	rules
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
+			| 'Number' |
+			| '117'    |
+		And in the table "List" I click "Post" button			
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
+		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
+		And I go to line in "List" table
+			| 'Number' |
+			| '117'    |
+		And I select current line in "List" table
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
+		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
+		When I Check the steps for Exception
+			|'And I click "Post and close" button'|
+		And I close current window
+		And I go to line in "List" table
+			| 'Number' |
+			| '117'    |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		And I move to "Other" tab
+		And I input "05.10.2020 00:00:00" text in the field named "Date"
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
+		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
+		And I input "05.10.2022 00:00:00" text in the field named "Date"
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
+		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
+		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
+		And I input "" text in the field named "Branch"
+		And I click "Post" button
+		Then user message window does not contain messages	
+		And I close all client application windows
+																		
+
+Scenario: 950442 check is object lock on open (catalogs)
+	And I close all client application windows
+	And I mark "Catalogs.LockDataModificationReasons" objects for deletion	
+	* Create reason
+		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+		And I click the button named "FormCreate"
+		And I set checkbox "Advanced mode"
+		And I set checkbox "For all users"
+		And I set checkbox "Set one rule for all objects"
+		And I set checkbox "Check is object locked on open"	
+		And I input "Check is object lock on open (catalogs)" text in "ENG" field
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Items" exact value from "Type" drop-down list in "RuleList" table
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Item keys" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I move to "Advanced rules" tab
+		And I finish line editing in "RuleList" table
+		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+		And I select "Unit" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
+		And I move to the next attribute
+		And I select "Equal to" exact value from the drop-down list named "SettingsFilterComparisonType" in "SettingsFilter" table
+		And I move to the next attribute
+		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs'         |
+		And I select current line in "List" table
+		Then "Lock data modification reason (create) *" window is opened
+		And I finish line editing in "SettingsFilter" table
+		And I click "Save and close" button
+	* Check creation
+		And "List" table contains lines
+			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                  |
+			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Check is object lock on open (catalogs)'    |
+	* Check
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I click "OK" button
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Check is object lock on open (catalogs):" string by template
+		Given Recent TestClient message contains 'Unit Equal to "pcs"' string by template
+		And I close current window
+		Given I open hyperlink "e1cib/list/Catalog.ItemKeys"
+		And I go to line in "List" table
+			| 'Item key'   |
+			| 'S/Yellow'   |
+		And in the table "List" I click "Copy" button
+		And I click Select button of "Color" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Black'       |
+		And I select current line in "List" table
+		And I change the radio button named "UnitMode" value to "Own"
+		And I click Select button of "Unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs'         |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I click "OK" button
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Check is object lock on open (catalogs):" string by template
+		Given Recent TestClient message contains 'Unit Equal to "pcs"' string by template
+		And I close all client application windows
+		
+Scenario: 950450 check ignore lock modification data
+	* Preparation
+		And I close all client application windows
+		And I mark "Catalogs.LockDataModificationReasons" objects for deletion
+		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+		And I go to line in "List" table
+			| 'Reference' |
+			| 'Check is object lock on open (documents)'       |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And I go to line in "List" table
+			| 'Reference' |
+			| 'Check is object lock on open (catalogs)'       |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	* Ignore lock modification data
+		And In the command interface I select "Settings" "System settings"
+		And I set checkbox "Ignore lock modification data"
+	* Check
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		Then user message window does not contain messages	
+		And I close all client application windows		
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
+			| 'Number' |
+			| '117'    |
+		And in the table "List" I click "Post" button
+		Then user message window does not contain messages	
+		And I close all client application windows	
+	* Turn off ignore lock modification data
+		And I close all client application windows
+		And In the command interface I select "Settings" "System settings"
+		Then the form attribute named "IgnoreLockModificationData" became equal to "Yes"		
+		And I remove checkbox "Ignore lock modification data"		
+	* Check
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
+			| 'Number' |
+			| '117'    |
+		And in the table "List" I click "Post" button			
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Check is object lock on open (documents):" string by template
+		Given Recent TestClient message contains '( Branch Equal to "Front office" OR Date Less than "12.02.2021 16:20:00" )' string by template
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I click "OK" button
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "Check is object lock on open (catalogs):" string by template
+		Given Recent TestClient message contains 'Unit Equal to "pcs"' string by template
+		And I close all client application windows
+					
 
 Scenario: 950480 check access to the Lock data modification for user with role Full access only read 
 	And I connect "SBorisova" TestClient using "SBorisova" login and "F12345" password
@@ -2368,20 +2615,30 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 			
 
 Scenario: 950490 switch off function option and check that rules does not work
-			And I connect "Этот клиент" profile of TestClient
-			And I set "False" value to the constant "UseLockDataModification"
-			And I close TestClient session
-			And I connect "Этот клиент" profile of TestClient
-			Given I open hyperlink 'e1cib/list/Catalog.Currencies'
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Euro' |
-			And I select current line in "List" table
-			And I click "Save and close" button
-			Then user message window does not contain messages
-			When set True value to the constant Use lock data modification
-			And I close TestClient session
-			And I connect "Этот клиент" profile of TestClient
+	And I connect "Этот клиент" profile of TestClient
+	* Preparation
+		And I close all client application windows
+		And I mark "Catalogs.LockDataModificationReasons" objects for deletion
+		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+		And I go to line in "List" table
+			| 'Reference'                |
+			| 'attribute from extension' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	And I set "False" value to the constant "UseLockDataModification"
+	And I close TestClient session
+	And I connect "Этот клиент" profile of TestClient
+	Given I open hyperlink 'e1cib/list/Catalog.Currencies'
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Euro' |
+	And I select current line in "List" table
+	And I click "Save and close" button
+	Then user message window does not contain messages
+	When set True value to the constant Use lock data modification
+	And I close TestClient session
+	And I connect "Этот клиент" profile of TestClient
 
 
 

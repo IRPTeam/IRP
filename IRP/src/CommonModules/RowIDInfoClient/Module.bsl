@@ -18,9 +18,12 @@ Procedure UpdateQuantity(Object, Form) Export
 		TabularSectionName = "ShipmentConfirmations";
 	ElsIf Object.Property("GoodsReceipts") Then
 		TabularSectionName = "GoodsReceipts";
+	ElsIf Object.Property("WorkSheets") Then
+		TabularSectionName = "WorkSheets";
 	EndIf;
 	
 	For Each RowItemList In Object.ItemList Do
+		
 		IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 1 Then
 			If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then

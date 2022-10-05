@@ -292,11 +292,13 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 			| '#' | 'Key'                         | 'Basis'                                              | 'Row ID'                             | 'Next step' | 'Quantity'     | 'Basis key'                          | 'Current step' | 'Row ref'                            |
 			| '1' | '$$Rov1PurchaseReturn28402$$' | 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | '$$Rov1ShipmentConfirmation022502$$' | ''          | '4,000' | '$$Rov1ShipmentConfirmation022502$$' | 'PR'           | '$$Rov1ShipmentConfirmation022502$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
-		And "ShipmentConfirmationsTree" table contains lines
-			| 'Key'                         | 'Basis key'                          | 'Item'  | 'Item key' | 'Shipment confirmation'                              | 'Invoice' | 'SC'    | 'Quantity'     |
-			| '$$Rov1PurchaseReturn28402$$' | ''                                   | 'Dress' | 'S/Yellow' | ''                                                   | '4,000'   | '4,000' | '4,000' |
-			| '$$Rov1PurchaseReturn28402$$' | '$$Rov1ShipmentConfirmation022502$$' | ''      | ''         | 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | ''        | '4,000' | '4,000' |
-		Then the number of "ShipmentConfirmationsTree" table lines is "равно" "2"
+		And in the table "ItemList" I click "Shipment confirmations" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                                        | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Dress (S/Yellow)'                                    | '4,000'   | '4,000'              | '4,000'    |
+			| 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | ''        | '4,000'              | '4,000'    |
+		Then the number of "DocumentsTree" table lines is "равно" "2"
+		And I close current window
 	* Unlink line and check RowId tab
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I set checkbox "Linked documents"
@@ -309,7 +311,9 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 			| '4,000'    | 'Dress (S/Yellow)'   | 'pcs'  |
 		And I click "Unlink" button
 		And I click "Ok" button
-		Then the number of "ShipmentConfirmationsTree" table lines is "равно" "0"
+		And in the table "ItemList" I click "Shipment confirmations" button
+		Then the number of "DocumentsTree" table lines is "равно" "0"
+		And I close current window
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                         | 'Basis' | 'Row ID'                      | 'Next step' | 'Quantity'     | 'Basis key' | 'Current step' | 'Row ref'                     |
@@ -323,10 +327,13 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 			| '4,000'    | 'Dress (S/Yellow)'  | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
-		And "ShipmentConfirmationsTree" table contains lines
-			| 'Key'                         | 'Basis key'                          | 'Item'  | 'Item key' | 'Shipment confirmation'                              | 'Invoice' | 'SC'    | 'Quantity'     |
-			| '$$Rov1PurchaseReturn28402$$' | ''                                   | 'Dress' | 'S/Yellow' | ''                                                   | '4,000'   | '4,000' | '4,000' |
-			| '$$Rov1PurchaseReturn28402$$' | '$$Rov1ShipmentConfirmation022502$$' | ''      | ''         | 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | ''        | '4,000' | '4,000' |
+		And in the table "ItemList" I click "Shipment confirmations" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                                        | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Dress (S/Yellow)'                                    | '4,000'   | '4,000'              | '4,000'    |
+			| 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | ''        | '4,000'              | '4,000'    |
+		Then the number of "DocumentsTree" table lines is "равно" "2"
+		And I close current window
 		And "RowIDInfo" table contains lines
 			| '#' | 'Key'                         | 'Basis'                                              | 'Row ID'                             | 'Next step' | 'Quantity'     | 'Basis key'                          | 'Current step' | 'Row ref'                            |
 			| '1' | '$$Rov1PurchaseReturn28402$$' | 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | '$$Rov1ShipmentConfirmation022502$$' | ''          | '4,000' | '$$Rov1ShipmentConfirmation022502$$' | 'PR'           | '$$Rov1ShipmentConfirmation022502$$' |

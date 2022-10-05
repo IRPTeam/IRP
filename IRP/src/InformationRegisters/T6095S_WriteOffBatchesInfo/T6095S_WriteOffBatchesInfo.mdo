@@ -55,6 +55,7 @@
     </synonym>
     <type>
       <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+      <types>DocumentRef.WorkSheet</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

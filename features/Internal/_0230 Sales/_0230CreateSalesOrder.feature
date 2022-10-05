@@ -410,27 +410,10 @@ Scenario: _023004 check filling in procurement method using the button Fill in S
 			| 'Service'  | 'Rent' |
 		And I select current line in "List" table
 		And I activate "Procurement method" field in "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
+		When I Check the steps for Exception
+        	|'And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table'|
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-	* Check the cleaning method on the line with the service
-		And I go to line in "ItemList" table
-			| 'Item'    | 'Item key' | 'Procurement method' |
-			| 'Service' | 'Rent'     | 'Stock'              |
-		And I activate "Procurement method" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click Clear button of "Procurement method" attribute in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'  | 'Procurement method' |
-			| 'Trousers' | '38/Yellow' | 'Purchase'           |
-		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'  | 'Procurement method' |
-			| 'Shirt'      | '38/Black'  | 'Stock'              |
-			| 'Boots'      | '38/18SD'   | 'No reserve'             |
-			| 'High shoes' | '37/19SD'   | 'No reserve'             |
-			| 'Trousers'   | '38/Yellow' | 'Purchase'           |
-			| 'Service'    | 'Rent'      | ''                   |
 		And I click the button named "FormPost"
 	* Check the cleaning method on the line with the product
 		And I go to line in "ItemList" table
@@ -543,44 +526,6 @@ Scenario: _0154037 check impossibility deleting of the store field by line with 
 		| 'Dress'    | 'M/White'      | '1,000' | 'Store 01' |
 		And I close all client application windows
 
-Scenario: _0154036 check the Deleting of the store field value by line with the service in a document Sales order
-	* Open a creation form Sales Order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-	* Add to the table part of the product with the item type - Service
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'    |
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'     |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'    | 'Item key' |
-			| 'Service' | 'Rent'     |
-		And I select current line in "List" table
-		And I activate "Quantity" field in "ItemList" table
-		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
-		| 'Service'  | 'Rent'      | '1,000' | 'Store 01' |
-	* Deleting of the store field value by line with the service
-		And I activate field named "ItemListStore" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click Clear button of "Store" attribute in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check that the store field has been cleared
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Quantity'     | 'Store'    |
-		| 'Service'  | 'Rent'      | '1,000' | ''         |
-		And I close all client application windows
 
 Scenario: _023014 check movements by status and status history of a Sales Order document
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"

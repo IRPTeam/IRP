@@ -59,6 +59,7 @@ When Create catalog BusinessUnits objects (test data base)
 When Create catalog CancelReturnReasons objects (test data base)
 When Create catalog CashStatementStatuses objects (test data base)
 When Create catalog CashAccounts objects (test data base)
+When Create catalog Bill of materials objects (test data base)
 When Create catalog Companies objects (test data base)
 When Create catalog ConfigurationMetadata objects (test data base)
 When Create catalog IDInfoSets objects (test data base)
@@ -144,6 +145,8 @@ When Create document RetailReturnReceipt objects (test data base)
 When Create document RetailSalesReceipt objects (test data base)
 When Create document SalesInvoice objects (test data base)
 When Create document SalesOrder objects (test data base)
+When Create document WorkOrder objects (test data base)
+When Create document WorkSheet objects (test data base)
 When Create document SalesReturn objects (test data base)
 When Create document SalesReturnOrder objects (test data base)
 When Create document ShipmentConfirmation objects (test data base)
@@ -307,6 +310,16 @@ When Create catalog PartnerItems objects (test data base)
 		And Delay "3"
 * Posting CashExpense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting WorkOrder
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting WorkSheet
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"

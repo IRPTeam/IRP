@@ -8,8 +8,6 @@ EndProcedure
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "ShipmentConfirmations");
-	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "ShipmentConfirmations", "ShipmentConfirmationsTree",
-		"QuantityInShipmentConfirmation");
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 

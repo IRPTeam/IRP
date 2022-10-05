@@ -2535,6 +2535,7 @@ Scenario: 950450 check ignore lock modification data
 		And I go to line in "List" table
 			| 'Reference' |
 			| 'Check is object lock on open (documents)'       |
+		And Delay 5
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -2615,6 +2616,7 @@ Scenario: 950490 switch off function option and check that rules does not work
 		And I go to line in "List" table
 			| 'Reference'                |
 			| 'attribute from extension' |
+		And Delay 5
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button

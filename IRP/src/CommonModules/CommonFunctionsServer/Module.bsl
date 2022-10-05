@@ -784,9 +784,9 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 			AttributesStructure.Insert(Alias, AttributPart);
 		EndDo; 
 	ElsIf TypeOf(Attributes) = Type("Array") Or TypeOf(Attributes) = Type("FixedArray") Then
-		For Each Item In Attributes Do
+		For Each AttributPart In Attributes Do
 			Alias = StrReplace(AttributPart, ".", "");
-			AttributesStructure.Insert(Alias, Item);
+			AttributesStructure.Insert(Alias, AttributPart);
 		EndDo;
 	ElsIf TypeOf(Attributes) = Type("Structure") Or TypeOf(Attributes) = Type("FixedStructure") Then
 		AttributesStructure = Attributes;
@@ -810,11 +810,14 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 		CurrentResult = Result;
 		FieldParts = StrSplit(FieldName, ".");
 		For Index = 0 To FieldParts.UBound() Do
-			CurrentResult.Insert(FieldParts[Index], Undefined);
+			If Not CurrentResult.Property(FieldParts[Index]) Then
+				CurrentResult.Insert(FieldParts[Index], Undefined);
+			EndIf;
 			If Index < FieldParts.UBound() Then
-				NewStructure = New Structure;
-				CurrentResult[FieldParts[Index]] = NewStructure; 
-				CurrentResult = NewStructure; 
+				If CurrentResult[FieldParts[Index]] = Undefined Then
+					CurrentResult[FieldParts[Index]] = New Structure;
+				EndIf; 
+				CurrentResult = CurrentResult[FieldParts[Index]]; // Structure
 			EndIf;
 		EndDo;
 	EndDo;

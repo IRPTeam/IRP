@@ -226,13 +226,14 @@ Function GetRequestStructure()
 		OptionsSegments = ArrayOfSegments[1];
 		ArrayOfSegments = StrSplit(OptionsSegments, "&");
 		For Each OptionsSegment In ArrayOfSegments Do
-			EqualPosition = StrFind(OptionsSegment, "=");
+			KeyValueString = DecodeString(OptionsSegment, StringEncodingMethod.URLInURLEncoding);
+			EqualPosition = StrFind(KeyValueString, "=");
 			If EqualPosition = 0 Then
-				RequestOptions.Insert(OptionsSegment, "");
+				RequestOptions.Insert(KeyValueString, "");
 			Else
 				RequestOptions.Insert(
-					TrimAll(Mid(OptionsSegment, 1, EqualPosition - 1)), 
-					TrimAll(Mid(OptionsSegment, EqualPosition + 1)));
+					TrimAll(Mid(KeyValueString, 1, EqualPosition - 1)), 
+					TrimAll(Mid(KeyValueString, EqualPosition + 1)));
 			EndIf;
 		EndDo;
 	EndIf;

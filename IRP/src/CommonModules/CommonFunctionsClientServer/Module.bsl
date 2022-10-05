@@ -157,16 +157,19 @@ Function GetSizePresentation(Size) Export
 	Gigabyte = Pow(2, 30);
 	Terabyte = Pow(2, 40);
 	
+	FormatByte = "NZ=; NG=;";
+	FormatMore = "NFD=1; NZ=; NG=;";
+	
 	If Size < Kilobyte Then
-		Return Format(Size, "NZ=; NG=;") + " B";
+		Return Format(Size, FormatByte) + " B";
 	ElsIf Size < Megabyte Then 
-		Return Format(Size / Kilobyte, "NFD=1; NZ=; NG=;") + " kB";
+		Return Format(Size / Kilobyte, FormatMore) + " kB";
 	ElsIf Size < Gigabyte Then 
-		Return Format(Size / Megabyte, "NFD=1; NZ=; NG=;") + " MB";
+		Return Format(Size / Megabyte, FormatMore) + " MB";
 	ElsIf Size < Terabyte Then 
-		Return Format(Size / Gigabyte, "NFD=1; NZ=; NG=;") + " GB";
+		Return Format(Size / Gigabyte, FormatMore) + " GB";
 	Else 
-		Return Format(Size / Terabyte, "NFD=1; NZ=; NG=;") + " TB";
+		Return Format(Size / Terabyte, FormatMore) + " TB";
 	EndIf;
 	
 EndFunction

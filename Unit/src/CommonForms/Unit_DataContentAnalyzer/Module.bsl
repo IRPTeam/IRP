@@ -56,6 +56,11 @@ Procedure LoadText(Command)
 	
 	LoadTextAtServer();
 
+	For Each Item In PathTree.GetItems() Do
+		ItemID = Item.GetID();
+		Items.PathTree.Expand(ItemID, True);
+	EndDo;
+
 EndProcedure
 
 &AtClient
@@ -125,6 +130,15 @@ Procedure PathTreeOnActivateRow(Item)
 
 EndProcedure
 
+&AtClient
+Procedure ResultPagesOnCurrentPageChange(Item, CurrentPage)
+	
+	If Items.ResultPages.CurrentPage = Items.ResultHTML Then 
+		ThisObject.ResultsHTML = GetHTML(ThisObject.Results);
+	EndIf;
+
+EndProcedure
+
 #EndRegion
 
 #Region Private
@@ -189,6 +203,8 @@ Procedure ReloadContent()
 		isInitTree = True;
 	EndIf;
 	
+	AllCommands = Unit_MockService.getAllContentCommands();
+	
 	CurrentBranchID = Items.PathTree.CurrentRow; // Number
 	CurrentBranch = ThisObject.PathTree.FindByID(CurrentBranchID);
 	
@@ -200,6 +216,10 @@ Procedure ReloadContent()
 		CurrentBranch.Error = True;
 		ThisObject.Results = ErrorDescription();
 	EndTry;
+	
+	If Items.ResultPages.CurrentPage = Items.ResultHTML Then 
+		ThisObject.ResultsHTML = GetHTML(ThisObject.Results);
+	EndIf;
 	
 	CurrentCommand = ThisObject.PathParts.Get(ThisObject.PathParts.Count() - 1).Value; // String
 	AvailableCommands = Unit_MockService.getAvailableCommands(CurrentCommand);
@@ -253,6 +273,11 @@ Procedure AfterPutFileToServer(FileDescription, AddParameters) Export
 	
 	ReloadContent();
 	
+	For Each Item In PathTree.GetItems() Do
+		ItemID = Item.GetID();
+		Items.PathTree.Expand(ItemID, True);
+	EndDo;
+
 EndProcedure
 
 &AtServer
@@ -516,6 +541,31 @@ Function GetBranchCommandPath(TreeBranch)
 		CurrentBranch = CurrentBranch.GetParent();
 	EndDo;
 	Return StrConcat(ResultPath, "/");
+EndFunction
+
+// Get HTML from some text.
+// 
+// Parameters:
+//  SomeText - String - Some text
+//  isXML - Boolean - Is XML
+// 
+// Returns:
+//  String - Get HTML
+&AtServerNoContext
+Function GetHTML(Val SomeText)
+	If StrStartsWith(TrimL(SomeText), "<") and StrEndsWith(TrimR(SomeText), ">") Then
+		TempFile = GetTempFileName("xml");
+		XMLWriter = New XMLWriter;
+		XMLWriter.OpenFile(TempFile);
+        XMLWriter.WriteRaw(SomeText);
+        XMLWriter.Close();
+        Return TempFile;
+	Else
+		Template = "<html><body>%1</body></html>";
+		SomeText = StrReplace(SomeText, Chars.CR, "<br />");
+		StrTemplate(Template, SomeText);
+	EndIf;
+	Return StrTemplate(Template, SomeText);
 EndFunction
 
 #EndRegion

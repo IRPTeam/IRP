@@ -1,5 +1,9 @@
 
-// @strict-types
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	RunBackgroundJobInDebugMode = SessionParametersServer.GetSessionParameter("RunBackgroundJobInDebugMode");
+	IgnoreLockModificationData = SessionParametersServer.GetSessionParameter("IgnoreLockModificationData");
+EndProcedure
 
 &AtClient
 Procedure RunBackgroundJobInDebugModeOnChange(Item)
@@ -10,7 +14,6 @@ EndProcedure
 Procedure RunBackgroundJobInDebugModeOnChangeAtServer()
 	SessionParameters.RunBackgroundJobInDebugMode = RunBackgroundJobInDebugMode;
 EndProcedure
-
 
 &AtClient
 Procedure IgnoreLockModificationDataOnChange(Item)

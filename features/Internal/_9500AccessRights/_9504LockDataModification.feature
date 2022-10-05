@@ -2298,63 +2298,63 @@ Scenario: 950439 lock data modification reasons for user group
 		And in the table "List" I click "Post" button
 		Then user message window does not contain messages
 
-Scenario: 950440 lock data modification reasons with cross fields
-	And I connect "Этот клиент" profile of TestClient
-	And I close all client application windows
-	And I mark "Catalogs.LockDataModificationReasons" objects for deletion	
-	* Create reason
-		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
-		And I click the button named "FormCreate"
-		And I input "Date of shipment (cross fields)" text in "ENG" field
-		And I set checkbox "Advanced mode"
-		And I set checkbox "For all users"
-		And I set checkbox "Set one rule for all objects"
-		And in the table "RuleList" I click the button named "RuleListAdd"
-		And I select "Sales invoice" exact value from "Type" drop-down list in "RuleList" table
-		And I move to the next attribute
-		And I move to "Advanced rules" tab
-		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
-		And I select "Date of shipment" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
-		And I move to the next attribute
-		And I click choice button of the attribute named "SettingsFilterComparisonType" in "SettingsFilter" table
-		And I finish line editing in "SettingsFilter" table
-		And in the table "SettingsFilter" I click the button named "SettingsFilterUseFieldAsValue"
-		And I select current line in "SettingsFilter" table
-		And I select "Less than" exact value from the drop-down list named "SettingsFilterComparisonType" in "SettingsFilter" table
-		And I activate field named "SettingsFilterRightValue" in "SettingsFilter" table
-		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
-		Then "Select field" window is opened
-		And I expand a line in "Source" table
-			| 'Available fields' |
-			| 'Date'             |
-		And I expand a line in "Source" table
-			| 'Available fields' |
-			| 'End dates'        |
-		And I go to line in "Source" table
-			| 'Available fields' |
-			| 'End of week'      |
-		And I select current line in "Source" table
-		And I click "Save and close" button
-		And "List" table contains lines
-			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                            |
-			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Date of shipment (cross fields)'                      |
-	* Check
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number' |
-			| '251'    |
-		And I select current line in "List" table
-		And I click Select button of "Delivery date" field
-		And I input current date in "Delivery date" field
-		And I go to line in "ItemList" table
-			| 'Item' |
-			| 'Bag'  |	
-		And I click "Post" button
-		And I click "OK" button
-		Given Recent TestClient message contains "Data lock reasons:*" string by template
-		Given Recent TestClient message contains "Date of shipment (cross fields):" string by template
-		Given Recent TestClient message contains 'DateOfShipment Less than Date.EndDates.EndOfWeek' string by template
-		And I close all client application windows
+// Scenario: 950440 lock data modification reasons with cross fields
+// 	And I connect "Этот клиент" profile of TestClient
+// 	And I close all client application windows
+// 	And I mark "Catalogs.LockDataModificationReasons" objects for deletion	
+// 	* Create reason
+// 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+// 		And I click the button named "FormCreate"
+// 		And I input "Date of shipment (cross fields)" text in "ENG" field
+// 		And I set checkbox "Advanced mode"
+// 		And I set checkbox "For all users"
+// 		And I set checkbox "Set one rule for all objects"
+// 		And in the table "RuleList" I click the button named "RuleListAdd"
+// 		And I select "Sales invoice" exact value from "Type" drop-down list in "RuleList" table
+// 		And I move to the next attribute
+// 		And I move to "Advanced rules" tab
+// 		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
+// 		And I select "Date of shipment" exact value from the drop-down list named "SettingsFilterLeftValue" in "SettingsFilter" table
+// 		And I move to the next attribute
+// 		And I click choice button of the attribute named "SettingsFilterComparisonType" in "SettingsFilter" table
+// 		And I finish line editing in "SettingsFilter" table
+// 		And in the table "SettingsFilter" I click the button named "SettingsFilterUseFieldAsValue"
+// 		And I select current line in "SettingsFilter" table
+// 		And I select "Less than" exact value from the drop-down list named "SettingsFilterComparisonType" in "SettingsFilter" table
+// 		And I activate field named "SettingsFilterRightValue" in "SettingsFilter" table
+// 		And I click choice button of the attribute named "SettingsFilterRightValue" in "SettingsFilter" table
+// 		Then "Select field" window is opened
+// 		And I expand a line in "Source" table
+// 			| 'Available fields' |
+// 			| 'Date'             |
+// 		And I expand a line in "Source" table
+// 			| 'Available fields' |
+// 			| 'End dates'        |
+// 		And I go to line in "Source" table
+// 			| 'Available fields' |
+// 			| 'End of week'      |
+// 		And I select current line in "Source" table
+// 		And I click "Save and close" button
+// 		And "List" table contains lines
+// 			| 'Advanced mode' | 'For all users' | 'One rule' | 'Disable' | 'Reference'                                            |
+// 			| 'Yes'           | 'Yes'           | 'Yes'      | 'No'      | 'Date of shipment (cross fields)'                      |
+// 	* Check
+// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+// 		And I go to line in "List" table
+// 			| 'Number' |
+// 			| '251'    |
+// 		And I select current line in "List" table
+// 		And I click Select button of "Delivery date" field
+// 		And I input current date in "Delivery date" field
+// 		And I go to line in "ItemList" table
+// 			| 'Item' |
+// 			| 'Bag'  |	
+// 		And I click "Post" button
+// 		And I click "OK" button
+// 		Given Recent TestClient message contains "Data lock reasons:*" string by template
+// 		Given Recent TestClient message contains "Date of shipment (cross fields):" string by template
+// 		Given Recent TestClient message contains 'DateOfShipment Less than Date.EndDates.EndOfWeek' string by template
+// 		And I close all client application windows
 
 
 Scenario: 950441 check is object lock on open (documents)
@@ -2531,6 +2531,7 @@ Scenario: 950450 check ignore lock modification data
 		And I close all client application windows
 		And I mark "Catalogs.LockDataModificationReasons" objects for deletion
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+		And I click "Refresh" button	
 		And I go to line in "List" table
 			| 'Reference' |
 			| 'Check is object lock on open (documents)'       |

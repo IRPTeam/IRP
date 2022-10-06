@@ -55,8 +55,52 @@ Scenario: 950503 change login and check access
 	And "List" table contains lines
 		| 'Login'       |
 		| 'BorisovaS' |
-	And I close TestClient session
 		
-	
+Scenario: 950510 check disable user
+		And I connect launched Test client "Этот клиент"
+		And I close all client application windows	
+	* Disable user
+		Given I open hyperlink 'e1cib/list/Catalog.Users'
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'David Romanov (Financier 1)' |
+		And I select current line in "List" table
+		And I move to "Roles" tab
+		And "RoleList" table contains lines
+			| 'Value'           |
+			| 'Run thin client' |
+			| 'Run web client'  |
+			| 'Full access'     |
+			| 'Basic role'      |
+		And I set checkbox named "Disable"
+		And I click "Save and close" button
+		And I wait "David Romanov (Financier 1) (User) *" window closing in 20 seconds
+	* Check
+		When I Check the steps for Exception
+			|'And I connect "DRomanov" TestClient using "DRomanov" login and "" password'|
+	* Enable user
+		And I connect launched Test client "Этот клиент"
+		Given I open hyperlink 'e1cib/list/Catalog.Users'
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'David Romanov (Financier 1)' |
+		And I select current line in "List" table
+		Then the form attribute named "Disable" became equal to "Yes"
+		And I remove checkbox named "Disable"
+		And I move to "Roles" tab
+		And "RoleList" table contains lines
+			| 'Value'           |
+			| 'Run thin client' |
+			| 'Run web client'  |
+			| 'Full access'     |
+			| 'Basic role'      |
+		And I click "Save and close" button
+		And I wait "David Romanov (Financier 1) (User) *" window closing in 20 seconds
+	* Check
+		And I connect "DRomanov" TestClient using "DRomanov" login and "" password
+		And I close TestClient session
+				
+
+
 
 	

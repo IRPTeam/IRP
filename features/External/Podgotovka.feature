@@ -1214,6 +1214,24 @@ Scenario: create InventoryTransfer021030
 	And I save the window as "$$InventoryTransfer021030$$"
 	And I click the button named "FormPostAndClose"
 
+Scenario: Create document PriceList objects (works)
+
+	And I check or create document "PriceList" objects:
+		| 'Ref'                                                                | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'ItemType' | 'PriceListType'                    | 'PriceType'                                                          | 'Author'                                                        | 'Branch' | 'Description' |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c' | 'False'        | 21       | '25.09.2022 17:18:39' | 'False'  | ''         | 'Enum.PriceListTypes.PriceByItems' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d' | 'False'        | 22       | '25.09.2022 17:19:14' | 'False'  | ''         | 'Enum.PriceListTypes.PriceByItems' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                | 'Item'                                                          | 'Price' | 'InputUnit'                                                     | 'InputPrice' | 'Unit'                                                          |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf6e' | 100     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf71' | 110     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39af48f5fa03' | 120     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf6e' | 70      | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39a5560fdf71' | 80      | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d' | 'e1cib/data/Catalog.Items?ref=b785989306affb7a11ed39af48f5fa03' | 90      | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+
+
+
 Scenario: create SalesInvoice024016 (Shipment confirmation does not used)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"

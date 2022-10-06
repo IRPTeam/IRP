@@ -14,5 +14,9 @@
   <content>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</content>
   <content>InformationRegister.LockDataModificationRules</content>
   <content>Catalog.LockDataModificationReasons</content>
+  <content>SessionParameter.IgnoreLockModificationData</content>
+  <content>CommonModule.LockDataModificationReuse</content>
+  <content>EventSubscription.BeforeWrite_CatalogsLockDataModification</content>
+  <content>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

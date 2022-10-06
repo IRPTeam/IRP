@@ -505,12 +505,14 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 				| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                             | 'Detail' | 'Sales order'                               | 'Net amount' | 'Use goods receipt' |
 				| '1' | ''              | 'en description is empty' | 'Trousers' | '38/Yellow' | 'No'                 | '1,53'       | 'pcs'  | ''                   | '1,000'  | '10,00' | '18%' | ''              | '10,00'        | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 501 dated 30.03.2021 11:56:21' | '8,47'       | 'Yes'               |
 				| '2' | ''              | 'en description is empty' | 'Trousers' | '38/Yellow' | 'No'                 | '61,02'      | 'pcs'  | ''                   | '20,000' | '20,00' | '18%' | ''              | '400,00'       | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 503 dated 30.03.2021 11:57:06' | '338,98'     | 'Yes'               |
-			And "GoodsReceiptsTree" table contains lines
-				| 'Item'     | 'Item key'  | 'Goods receipt'           | 'Invoice' | 'GR'     | 'Quantity'      |
-				| 'Trousers' | '38/Yellow' | ''                        | '1,000'   | '1,000'  | '1,000'  |
-				| ''         | ''          | '$$GoodsReceipt0292022$$' | ''        | '1,000'  | '1,000'  |
-				| 'Trousers' | '38/Yellow' | ''                        | '20,000'  | '20,000' | '20,000' |
-				| ''         | ''          | '$$GoodsReceipt0292022$$' | ''        | '20,000' | '20,000' |
+			And in the table "ItemList" I click "Goods receipts" button
+			And "DocumentsTree" table became equal
+				| 'Presentation'            | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+				| 'Trousers (38/Yellow)'    | '1,000'   | '1,000'              | '1,000'    |
+				| '$$GoodsReceipt0292022$$' | ''        | '1,000'              | '1,000'    |
+				| 'Trousers (38/Yellow)'    | '20,000'  | '20,000'             | '20,000'   |
+				| '$$GoodsReceipt0292022$$' | ''        | '20,000'             | '20,000'   |
+			And I close current window		
 			And I click "Show row key" button
 			And "RowIDInfo" table contains lines
 				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
@@ -565,15 +567,15 @@ Scenario: _029203 create SI-SC based on SO (with procurement method - purchase)
 		And I click the button named "FormPost"
 		* Check ItemList tab
 			And "ItemList" table contains lines
-				| 'Key'                        | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
+				| 'Key'                        | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center' | 'Price type'         | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
 				| '$$Rov1SalesInvoice029203$$' | 'Store 01' | ''                    | '2,000'                 | '1' | ''              | 'en description is empty' | 'Service'  | 'Interner'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '30,51'      | '100,00' | '18%' | ''              | '169,49'     | '200,00'       | '31.03.2021'    | 'No'                        | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 				| '$$Rov2SalesInvoice029203$$' | 'Store 01' | ''                    | '8,000'                 | '2' | ''              | 'Basic Price Types'       | 'Trousers' | '38/Yellow' | 'No'                 | ''                   | '8,000'  | 'pcs'  | '488,14'     | '400,00' | '18%' | ''              | '2 711,86'   | '3 200,00'     | '31.03.2021'    | 'No'                        | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 				| '$$Rov3SalesInvoice029203$$' | 'Store 01' | ''                    | '11,000'                | '3' | ''              | 'Basic Price Types'       | 'Shirt'    | '38/Black'  | 'No'                 | ''                   | '11,000' | 'pcs'  | '587,29'     | '350,00' | '18%' | ''              | '3 262,71'   | '3 850,00'     | '31.03.2021'    | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 			Then the number of "ItemList" table lines is "равно" "3"
 		* Check RowIDInfo tab
 			And "RowIDInfo" table contains lines
-				| '#' | 'Key'                        | 'Basis'                                     | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-				| '1' | '$$Rov1SalesInvoice029203$$' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | ''          | '2,000'  | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI'           | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' |
+				| '#' | 'Key'                        | 'Basis'                                     | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                     | 'Current step' | 'Row ref'                              |
+				| '1' | '$$Rov1SalesInvoice029203$$' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | ''          | '2,000'  | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI&WO&WS'     | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' |
 				| '2' | '$$Rov2SalesInvoice029203$$' | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | ''          | '8,000'  | '$$Rov2PurchaseInvoice0292021$$'       | 'SI&SC'        | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' |
 				| '3' | '$$Rov3SalesInvoice029203$$' | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'        | '11,000' | '$$Rov4PurchaseInvoice0292021$$'       | 'SI&SC'        | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' |
 			Then the number of "RowIDInfo" table lines is "равно" "3"
@@ -659,10 +661,12 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 			| 'Key'                                  | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
 			| '$$Rov1SalesInvoice029204$$' | 'Store 01' | ''                    | '5,000'                 | '1' | ''              | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '5,000' | 'pcs'  | '396,61'     | '520,00' | '18%' | ''              | '2 203,39'   | '2 600,00'     | '31.03.2021'    | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
 		Then the number of "ItemList" table lines is "равно" "1"
-		And "ShipmentConfirmationsTree" table became equal
-			| 'Key'                        | 'Basis key'                            | 'Item'  | 'Shipment confirmation'          | 'Item key' | 'Invoice' | 'SC'    | 'Quantity' |
-			| '$$Rov1SalesInvoice029204$$' | '                                    ' | 'Dress' | ''                               | 'M/White'  | '5,000'   | '5,000' | '5,000'    |
-			| '$$Rov1SalesInvoice029204$$' | '$$Rov1ShipmentConfirmation029204$$'   | ''      | '$$ShipmentConfirmation029204$$' | ''         | ''        | '5,000' | '5,000'    |		
+		And in the table "ItemList" I click "Shipment confirmations" button
+		And "DocumentsTree" table became equal
+			| 'Presentation'                   | 'Invoice' | 'QuantityInDocument' | 'Quantity' |
+			| 'Dress (M/White)'                | '5,000'   | '5,000'              | '5,000'    |
+			| '$$ShipmentConfirmation029204$$' | ''        | '5,000'              | '5,000'    |
+		And I close current window
 		And "RowIDInfo" table became equal
 			| '#' | 'Key'                        | 'Basis'                          | 'Row ID'                               | 'Next step' | 'Quantity'     | 'Basis key'                          | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1SalesInvoice029204$$' | '$$ShipmentConfirmation029204$$' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | ''          | '5,000' | '$$Rov1ShipmentConfirmation029204$$' | 'SI'           | '4a003d08-12af-4c34-98d5-5cdeb84616de' |
@@ -676,13 +680,13 @@ Scenario: _029205 check movements in the register TM1010B_RowIDMovements
 		| 'Recorder'                                  | 'Row ID'                               | 'Step'  | 'Basis'                                     | 'Row ref'                              | 'Quantity' |
 		| 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PO&PI' | 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '5,000'    |
 		| 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PO&PI' | 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
-		| 'Sales order 501 dated 30.03.2021 11:56:21' | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7' | 'SI'    | 'Sales order 501 dated 30.03.2021 11:56:21' | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7' | '1,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7' | 'SI&WO&WS'    | 'Sales order 501 dated 30.03.2021 11:56:21' | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7' | '1,000'    |
 		| 'Sales order 501 dated 30.03.2021 11:56:21' | '2e0968f4-d293-4faa-abe0-d25c849e9c32' | 'SI&SC' | 'Sales order 501 dated 30.03.2021 11:56:21' | '2e0968f4-d293-4faa-abe0-d25c849e9c32' | '5,000'    |
 		| 'Sales order 501 dated 30.03.2021 11:56:21' | '2659612d-158f-49a2-bbf4-46c70f05eb9d' | 'SI&SC' | 'Sales order 501 dated 30.03.2021 11:56:21' | '2659612d-158f-49a2-bbf4-46c70f05eb9d' | '10,000'   |
 		| 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PO&PI' | 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
 		| 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PO&PI' | 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
 		| 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PO&PI' | 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '8,000'    |
-		| 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI&WO&WS'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
 		| 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PO&PI' | 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
 		| 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PO&PI' | 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
 		| 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PO&PI' | 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '10,000'   |
@@ -738,7 +742,7 @@ Scenario: _029205 check movements in the register TM1010B_RowIDMovements
 		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'SI&SC' | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
 		| '$$PurchaseInvoice0292022$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI'    | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
 		| '$$PurchaseInvoice0292022$$'                | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI'    | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
-		| '$$SalesInvoice029203$$'                    | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
+		| '$$SalesInvoice029203$$'                    | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI&WO&WS'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
 		| '$$SalesInvoice029203$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'SI&SC' | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
 		| '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SI&SC' | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
 		| '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'    | '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |

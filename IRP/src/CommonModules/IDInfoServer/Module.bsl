@@ -177,7 +177,6 @@ Function GetDCSTemplate(PredefinedDataName, AddInfo = Undefined) Export
 	Else
 		Raise R().Error_004;
 	EndIf;
-	Template = Catalogs.IDInfoSets.GetTemplate("DCS_Catalog");
 	Template.DataSets[0].Query = StrTemplate(Template.DataSets[0].Query, TableName);
 	Return Template;
 EndFunction
@@ -244,7 +243,7 @@ Function GetCountryByIDInfoType(IDInfoTypeRef, Country, UUIDForSettings, AddInfo
 EndFunction
 
 Function GetCountryFromValues(Ref, ArrayOfIDInfoTypes, AddInfo = Undefined) Export
-	Values = IDInfoServer.GetIDInfoTypeValues(Ref, ArrayOfIDInfoTypes);
+	Values = GetIDInfoTypeValues(Ref, ArrayOfIDInfoTypes);
 	Country = Catalogs.Countries.EmptyRef();
 	For Each Row In Values Do
 		If ValueIsFilled(Row.Country) Then
@@ -346,7 +345,7 @@ Function GetIDInfoTypeValues(Ref, ArrayOfIDInfoTypes = Undefined, AddInfo = Unde
 EndFunction
 
 Function GetIDInfoTypeValue(Ref, ArrayOfIDInfoTypes, AddInfo = Undefined) Export
-	Values = IDInfoServer.GetIDInfoTypeValues(Ref, ArrayOfIDInfoTypes);
+	Values = GetIDInfoTypeValues(Ref, ArrayOfIDInfoTypes);
 	If Values.Count() Then
 		Result = New Structure();
 		Result.Insert("Period" , Values[0].Period);

@@ -217,6 +217,14 @@
     <metadata>Document.ConsolidatedRetailSales</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Document.WorkOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.WorkSheet</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

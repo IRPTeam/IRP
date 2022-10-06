@@ -187,6 +187,98 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="dd295b40-ea5d-4d9d-9f0b-fec5567c56f0">
+    <name>AdvancedMode</name>
+    <synonym>
+      <key>en</key>
+      <value>Advanced mode</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c813a022-5ac4-46ac-88a0-8f42df928bac">
+    <name>DCS</name>
+    <synonym>
+      <key>en</key>
+      <value>DCS</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="38ab1ebc-6a15-4a61-bd1d-dc8a7272fffd">
+    <name>QueryFilter</name>
+    <synonym>
+      <key>en</key>
+      <value>Query filter</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9cd8a48f-20b8-404c-ac78-d53f1f73dd36">
+    <name>isInitDCS</name>
+    <synonym>
+      <key>en</key>
+      <value>Is init DCS</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="27032870-08fa-4f1e-8666-add400cbe1d7">
+    <name>PreviewText</name>
+    <synonym>
+      <key>en</key>
+      <value>Preview text</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b70638ee-e962-4f1b-8b88-eb6df5417503">
+    <name>CheckIsObjectLockedOnOpen</name>
+    <synonym>
+      <key>en</key>
+      <value>Check is object locked on open</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="bdfb54d6-07fc-48d4-ac55-cb4f3cfaa8ae">
     <producedTypes>
       <objectType typeId="85b44ead-7878-4913-86f5-02ccbd3c51c2" valueTypeId="257e0d4e-1a4e-419a-b6db-fa8f614db850"/>
@@ -417,6 +509,31 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="870ee010-42d6-4f37-b47d-4cf638117b40">
+    <producedTypes>
+      <objectType typeId="35645f25-7d98-4c00-95c2-c7afe71741a5" valueTypeId="805aea9d-cdc9-4410-8b1d-bb5209e97c68"/>
+      <rowType typeId="20a053f3-5f95-4d2c-8652-723c825f1e3c" valueTypeId="678a377b-4290-4beb-a99f-5239a3af1889"/>
+    </producedTypes>
+    <name>ResponsibleUsers</name>
+    <synonym>
+      <key>en</key>
+      <value>Responsible users</value>
+    </synonym>
+    <attributes uuid="78da9692-71ba-4de5-9341-33e5dd4b0cf1">
+      <name>User</name>
+      <synonym>
+        <key>en</key>
+        <value>User</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Users</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="13f935b3-bff3-4144-a391-f5baf8875768">
     <name>ItemForm</name>
     <synonym>
@@ -444,4 +561,12 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <templates uuid="f399c550-d07e-48de-8691-bf3b699d06c0">
+    <name>DCS</name>
+    <synonym>
+      <key>en</key>
+      <value>DCS</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
 </mdclass:Catalog>

@@ -243,6 +243,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="20523485-998e-40c6-afe4-212a74ca7aee">
+    <name>DefaultBillOfMaterials</name>
+    <synonym>
+      <key>en</key>
+      <value>Default bill of materials</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BillOfMaterials</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="1a7c6880-e7a8-4604-b4f4-2a08e91f04e2">
     <producedTypes>
       <objectType typeId="61efd4e4-2f07-483b-9e8d-75f7ecdc5a18" valueTypeId="05634248-679c-4559-a990-3ce9087709af"/>

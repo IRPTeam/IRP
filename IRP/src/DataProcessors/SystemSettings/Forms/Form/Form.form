@@ -55,6 +55,60 @@ After that - all jobs in CURRENT session will be start as common code, not like 
       <checkBoxType>Switcher</checkBoxType>
     </extInfo>
   </items>
+  <items xsi:type="form:FormField">
+    <name>IgnoreLockModificationData</name>
+    <id>10</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>IgnoreLockModificationData</segments>
+    </dataPath>
+    <toolTip>
+      <key>en</key>
+      <value>If this option is ON - all lock data reason will be disabled for current session</value>
+    </toolTip>
+    <toolTipRepresentation>ShowBottom</toolTipRepresentation>
+    <handlers>
+      <event>OnChange</event>
+      <name>IgnoreLockModificationDataOnChange</name>
+    </handlers>
+    <extendedTooltip>
+      <name>IgnoreLockModificationDataExtendedTooltip</name>
+      <id>12</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>IgnoreLockModificationDataContextMenu</name>
+      <id>11</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+      <checkBoxType>Switcher</checkBoxType>
+    </extInfo>
+  </items>
   <autoCommandBar>
     <name>FormCommandBar</name>
     <id>-1</id>
@@ -66,6 +120,10 @@ After that - all jobs in CURRENT session will be start as common code, not like 
     <horizontalAlign>Left</horizontalAlign>
     <autoFill>true</autoFill>
   </autoCommandBar>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
+  </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -95,6 +153,23 @@ After that - all jobs in CURRENT session will be start as common code, not like 
       <value>Run background job in debug mode</value>
     </title>
     <id>2</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>IgnoreLockModificationData</name>
+    <title>
+      <key>en</key>
+      <value>Ignore lock modification data</value>
+    </title>
+    <id>3</id>
     <valueType>
       <types>Boolean</types>
     </valueType>

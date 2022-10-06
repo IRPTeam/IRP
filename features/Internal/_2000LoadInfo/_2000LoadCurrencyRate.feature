@@ -47,8 +47,8 @@ Scenario: _020000 preparation (Loadinfo)
 			And I remove checkbox "is Product server"
 			And I click "Save and close" button
 			And "List" table contains lines
-				| 'ENG'                | 'is Product server' |
-				| 'File_"C__IB_http"_' | 'No'                |						
+				| 'is Product server' |
+				| 'No'                |						
 		* Add Plugin ExternalBankUa
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"

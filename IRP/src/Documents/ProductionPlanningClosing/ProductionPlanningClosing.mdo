@@ -113,6 +113,47 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <tabularSections uuid="21848652-b6ca-40ad-a376-70cf8fe9c816">
+    <producedTypes>
+      <objectType typeId="69c3281a-e74d-4417-9660-96ee7df69bf4" valueTypeId="e72b6649-0688-4015-9f55-f4531b70ebff"/>
+      <rowType typeId="d7a114c8-d5d2-42aa-8a03-dee5406ac1cc" valueTypeId="082b84ca-ece0-4a45-82a6-b0c3ad8969ce"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="ceb486a9-815b-46f0-acd1-7d70ea6f4a86">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="7e38ce49-34b4-46a6-b76b-da9bb6240acc">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <commands uuid="b75831d1-7613-4b84-b333-553b8a6ace85">
     <name>Generate</name>
     <synonym>

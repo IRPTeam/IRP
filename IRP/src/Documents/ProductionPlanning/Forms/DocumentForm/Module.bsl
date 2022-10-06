@@ -1,239 +1,262 @@
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocProductionPlanningServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.ProductionPlanningClosing = DocProductionPlanningClosingServer.GetProductionPlanningColosing(CurrentObject.Ref);
+	ThisObject.DependentDocument = DocProductionPlanningServer.GetDependentDocument(CurrentObject.Ref);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	MF_FormsServer.DocumentOnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	DocProductionPlanningServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		SetFormRules(Object, Object, ThisObject);
-		Items.DependentDocument.Visible = False;
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure OnOpen(Cancel)
-	If Not ValueIsFilled(Object.Ref) 
-		And Not ValueIsFilled(Object.PlanningPeriod) Then
-		NewPlanningPeriod = MF_FormsServer.GetPlanningPeriod(Object.Date, Object.BusinessUnit);
-		If NewPlanningPeriod <> Object.PlanningPeriod Then
-			Object.PlanningPeriod = NewPlanningPeriod;
-		EndIf;
-	EndIf;
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	MF_FormsServer.DocumentAfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetFormRules(Object, Object, ThisObject);
+	DocProductionPlanningServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	ThisObject.ProductionPlanningClosing = MF_FormsServer.GetProductionPlanningColosing(CurrentObject.Ref);
-	MF_FormsServer.DocumentOnReadAtServer(Object, ThisObject, CurrentObject);
-	SetFormRules(Object, Object, ThisObject);
-	ThisObject.ReadOnly = GetReadOnly();
+&AtClient
+Procedure OnOpen(Cancel)
+	DocProductionPlanningClient.OnOpen(Object, ThisObject, Cancel);	
 EndProcedure
 
-&AtServer
-Function GetReadOnly()
-	Query = New Query();
-	Query.Text = 
-	"SELECT TOP 1
-	|	InternalSupplyRequest.Ref,
-	|	InternalSupplyRequest.Date
-	|INTO tmpInternalSupplyRequest
-	|FROM
-	|	Document.InternalSupplyRequest AS InternalSupplyRequest
-	|WHERE
-	|	InternalSupplyRequest.MF_ProductionPlanning = &ProductionPlanning
-	|	AND NOT InternalSupplyRequest.DeletionMark
-	|	AND InternalSupplyRequest.Posted
-	|ORDER BY
-	|	InternalSupplyRequest.Date
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT TOP 1
-	|	MF_Production.Ref,
-	|	MF_Production.Date
-	|INTO tmpProduction
-	|FROM
-	|	Document.MF_Production AS MF_Production
-	|WHERE
-	|	NOT MF_Production.DeletionMark
-	|	AND MF_Production.Posted
-	|	AND MF_Production.ProductionPlanning = &ProductionPlanning
-	|ORDER BY
-	|	MF_Production.Date
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT TOP 1
-	|	MF_ProductionPlanningCorrection.Ref,
-	|	MF_ProductionPlanningCorrection.Date
-	|INTO tmpProductionPlanningCorrection
-	|FROM
-	|	Document.MF_ProductionPlanningCorrection AS MF_ProductionPlanningCorrection
-	|WHERE
-	|	NOT MF_ProductionPlanningCorrection.DeletionMark
-	|	AND MF_ProductionPlanningCorrection.Posted
-	|	AND MF_ProductionPlanningCorrection.ProductionPlanning = &ProductionPlanning
-	|ORDER BY 
-	|	MF_ProductionPlanningCorrection.Date
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpInternalSupplyRequest.Ref,
-	|	tmpInternalSupplyRequest.Date
-	|INTO tmpAllDocuments
-	|FROM
-	|	tmpInternalSupplyRequest AS tmpInternalSupplyRequest
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	tmpProduction.Ref,
-	|	tmpProduction.Date
-	|FROM
-	|	tmpProduction AS tmpProduction
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	tmpProductionPlanningCorrection.Ref,
-	|	tmpProductionPlanningCorrection.Date
-	|FROM
-	|	tmpProductionPlanningCorrection AS tmpProductionPlanningCorrection
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT TOP 1
-	|	tmpAllDocuments.Ref
-	|FROM
-	|	tmpAllDocuments AS tmpAllDocuments
-	|ORDER BY
-	|	tmpAllDocuments.Date";
-	Query.SetParameter("ProductionPlanning", Object.Ref);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	IsReadOnly = False;
-	If QuerySelection.Next() Then
-		ThisObject.DependentDocument = QuerySelection.Ref;
-		Items.DependentDocument.Visible =  True;
-		IsReadOnly = True;
-	Else
-		Items.DependentDocument.Visible = False;
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControl();
 	EndIf;
-	Return IsReadOnly Or ValueIsFilled(ThisObject.ProductionPlanningClosing);
-EndFunction
+	
+	If Not Source = ThisObject Then
+		Return;
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);	
+EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocProductionPlanningClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
 
 &AtClientAtServerNoContext
-Procedure SetFormRules(Object, CurrentObject, Form)
-	MF_FormsClientServer.DocumentSetFormRules(Object, CurrentObject, Form);
-	Form.Items.GroupHead.Visible = ValueIsFilled(Form.ProductionPlanningClosing);
-EndProcedure
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure DateOnChange(Item)
-	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
-EndProcedure
-
-&AtClient
-Procedure BusinessUnitOnChange(Item)
-	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
-	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure PlanningPeriodOnChange(Item)
-	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
-EndProcedure
-
-#Region Productions
-
-&AtClient
-Procedure ProductionsOnChange(Item)
-	MF_FormsClient.FillRowIDInTable(Object, ThisObject, "Productions");
-EndProcedure
-
-&AtClient
-Procedure ProductionsAfterDeleteRow(Item)
-	MF_FormsClient.ClearDependedTables(Object, ThisObject, "Productions", "BillOfMaterials");
-EndProcedure
-
-&AtClient
-Procedure ProductionsItemStartChoice(Item, ChoiceData, StandardProcessing)
-	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ProductionsItemEditTextChange(Item, Text, StandardProcessing)
-	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ProductionsItemOnChange(Item)
-	MF_FormsClient.ItemOnChange(Object, ThisObject, Item, "Productions");
-	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ProductionsItemKeyOnChange(Item)
-	MF_FormsClient.ItemKeyOnChange(Object, ThisObject, Item, "Productions");
-	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ProductionsUnitOnChange(Item)
-	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ProductionsQuantityOnChange(Item)
-	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ProductionsBillOfMaterialsOnChange(Item)
-	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ProductionsBillOfMaterialsStartChoice(Item, ChoiceData, StandardProcessing)
-	StandardProcessing = False;
-	CurrentData = Items.Productions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	Filters = New Array();
-	Filters.Add(DocumentsClientServer.CreateFilterItem("Item"    , CurrentData.Item, DataCompositionComparisonType.Equal));
-	Filters.Add(DocumentsClientServer.CreateFilterItem("ItemKey" , CurrentData.ItemKey, DataCompositionComparisonType.Equal));
+Procedure SetVisibilityAvailability(Object, Form)
+	IsFilled_ProductionPlanningClosing = ValueIsFilled(Form.ProductionPlanningClosing);
+	IsFilled_DependentDocument = ValueIsFilled(Form.DependentDocument);
 	
-	MF_FormsClient.BillOfMaterialsStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Filters);
-EndProcedure
-
-&AtClient
-Procedure ProductionsBillOfMaterialsEditTextChange(Item, Text, StandardProcessing)
-	StandardProcessing = False;
-	CurrentData = Items.Productions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	Filters = New Array();
-	Filters.Add(DocumentsClientServer.CreateFilterItem("Item"    , CurrentData.Item, DataCompositionComparisonType.Equal));
-	Filters.Add(DocumentsClientServer.CreateFilterItem("ItemKey" , CurrentData.ItemKey, DataCompositionComparisonType.Equal));
-	
-	MF_FormsClient.BillOfMaterialsEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Filters);
+	Form.ReadOnly = IsFilled_ProductionPlanningClosing Or IsFilled_DependentDocument;
+	Form.Items.DependentDocument.Visible = IsFilled_DependentDocument;
+	Form.Items.GroupHead.Visible = IsFilled_ProductionPlanningClosing;
 EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorations
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocProductionPlanningClient.DateOnChange(Object, ThisObject, Item);
+	//MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
+EndProcedure
+
+#EndRegion
+
+#Region COMPANY
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	DocProductionPlanningClient.CompanyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocProductionPlanningClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocProductionPlanningClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region BUSINESS_UNIT
+
+&AtClient
+Procedure BusinessUnitOnChange(Item)
+	DocProductionPlanningClient.BusinessUnitOnChange(Object, ThisObject, Item);
+	
+//	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
+//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region PLANNING_PERIOD
+
+&AtClient
+Procedure PlanningPeriodOnChange(Item)
+	DocProductionPlanningClient.PlanningPeriodOnChange(Object, ThisObject, Item);
+	
+	//MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS
+
+&AtClient
+Procedure ProductionsSelection(Item, RowSelected, Field, StandardProcessing)
+//	ProductionPlanningClient.ProductionsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+	
+//	If Not ThisObject.ReadOnly Then
+//		Return;
+//	EndIf;
+//	CurrentData = Items.Productions.CurrentData;
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	MF_FormsClient.OpenObjectForm(Field, "ProductionsItem", CurrentData.Item, StandardProcessing);
+//	MF_FormsClient.OpenObjectForm(Field, "ProductionsItemKey", CurrentData.ItemKey, StandardProcessing);
+//	MF_FormsClient.OpenObjectForm(Field, "ProductionsUnit", CurrentData.Unit, StandardProcessing);
+//	MF_FormsClient.OpenObjectForm(Field, "ProductionsBillOfMaterials", CurrentData.BillOfMaterials, StandardProcessing);	
+EndProcedure
+
+
+&AtClient
+Procedure ProductionsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+//	ProductionPlanningClient.ProductionsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+
+&AtClient
+Procedure ProductionsBeforeDeleteRow(Item, Cancel)
+//	ProductionPlanningClient.ProductionsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure ProductionsAfterDeleteRow(Item)
+//	ProductionPlanningClient.ProductionsAfterDeleteRow(Object, ThisObject, Item);
+
+//	MF_FormsClient.ClearDependedTables(Object, ThisObject, "Productions", "BillOfMaterials");
+EndProcedure
+
+#Region PRODUCTIONS_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ProductionsItemOnChange(Item)
+//	ProductionPlanningClient.ProductionsItemOnChange(Object, ThisObject, Item);
+
+//	MF_FormsClient.ItemOnChange(Object, ThisObject, Item, "Productions");
+//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ProductionsItemStartChoice(Item, ChoiceData, StandardProcessing)
+//	ProductionPlanningClient.ProductionsItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+
+//	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ProductionsItemEditTextChange(Item, Text, StandardProcessing)
+//	ProductionPlanningClient.ProductionsItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+
+//	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure ProductionsItemKeyOnChange(Item)
+//	ProductionPlanningClient.ProductionsItemKeyOnChange(Object, ThisObject, Item);
+
+//	MF_FormsClient.ItemKeyOnChange(Object, ThisObject, Item, "Productions");
+//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region BILL_OF_MATERIALS
+
+&AtClient
+Procedure ProductionsBillOfMaterialsOnChange(Item)
+//	ProductionPlanningClient.ProductionsBillOfMaterialsOnChange(Object, ThisObject, Item);
+
+//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure ProductionsUnitOnChange(Item)
+//	ProductionPlanningClient.ProductionsUnitOnChange(Object, ThisObject, Item);
+
+//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ProductionsQuantityOnChange(Item)
+//	ProductionPlanningClient.ProductionsQuantityOnChange(Object, ThisObject, Item);
+
+//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocWorkOrderClient);
+	Str.Insert("Server", DocWorkOrderServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure GroupTitleCollapsedClick(Item)
@@ -245,22 +268,43 @@ Procedure GroupTitleUncollapsedClick(Item)
 	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
 
+#EndRegion
+
+#Region ADD_ATTRIBUTES
+
 &AtClient
-Procedure ProductionsSelection(Item, RowSelected, Field, StandardProcessing)
-	If Not ThisObject.ReadOnly Then
-		Return;
-	EndIf;
-	CurrentData = Items.Productions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	MF_FormsClient.OpenObjectForm(Field, "ProductionsItem", CurrentData.Item, StandardProcessing);
-	MF_FormsClient.OpenObjectForm(Field, "ProductionsItemKey", CurrentData.ItemKey, StandardProcessing);
-	MF_FormsClient.OpenObjectForm(Field, "ProductionsUnit", CurrentData.Unit, StandardProcessing);
-	MF_FormsClient.OpenObjectForm(Field, "ProductionsBillOfMaterials", CurrentData.BillOfMaterials, StandardProcessing);	
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
 EndProcedure
 
 #EndRegion
+
+#Region EXTERNAL_COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
 
 &AtClient
 Procedure EditStores(Command)
@@ -268,16 +312,21 @@ Procedure EditStores(Command)
 	If CurrentData = Undefined Then 
 		Return;
 	EndIf;
-	FormParameters = MF_FormsClient.GetEditStoresParameters(CurrentData, Object);
+	FormParameters = ManufacturingClient.GetEditStoresParameters(CurrentData, Object);
 	FormParameters.Insert("ReadOnlyStores", ThisObject.ReadOnly);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditStoresContinue", MF_FormsClient, NotifyParameters);
-	OpenForm("CommonForm.MF_EditStores", FormParameters, ThisObject, , , , Notify , FormWindowOpeningMode.LockOwnerWindow);
+	Notify = New NotifyDescription("EditStoresContinue", ManufacturingClient, NotifyParameters);
+	OpenForm("CommonForm.EditStores", FormParameters, ThisObject, , , , Notify , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-&AtClient
-Procedure ShowRowKey(Command)
-	MF_FormsClient.ShowRowKey(ThisObject);
-EndProcedure
+#EndRegion
+
+#EndRegion
+
+
+
+
+
+

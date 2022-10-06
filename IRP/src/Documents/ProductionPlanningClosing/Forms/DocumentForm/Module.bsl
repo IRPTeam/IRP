@@ -1,33 +1,73 @@
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocProductionPlanningClosingServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	MF_FormsServer.DocumentOnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	DocProductionPlanningClosingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		SetFormRules(Object, Object, ThisObject);
+		SetVisibilityAvailability(Object, ThisObject);		
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure OnOpen(Cancel)
-	Return;
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	MF_FormsServer.DocumentAfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetFormRules(Object, Object, ThisObject);
+	DocProductionPlanningClosingServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	DocProductionPlanningClosingClient.OnOpen(Object, ThisObject, Cancel);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControl();
+	EndIf;
+	
+	If Not Source = ThisObject Then
+		Return;
+	EndIf;
 EndProcedure
 
 &AtServer
-Procedure OnReadAtServer(CurrentObject)
-	MF_FormsServer.DocumentOnReadAtServer(Object, ThisObject, CurrentObject);
-	SetFormRules(Object, Object, ThisObject);
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocProductionPlanningClosingClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClientAtServerNoContext
-Procedure SetFormRules(Object, CurrentObject, Form)
-	MF_FormsClientServer.DocumentSetFormRules(Object, CurrentObject, Form);
+Procedure SetVisibilityAvailability(Object, Form)
+	Return;
 EndProcedure
+
+#EndRegion
+
+//&AtClientAtServerNoContext
+//Procedure SetFormRules(Object, CurrentObject, Form)
+//	MF_FormsClientServer.DocumentSetFormRules(Object, CurrentObject, Form);
+//EndProcedure
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)

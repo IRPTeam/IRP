@@ -1,57 +1,110 @@
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocProductionServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.ProductionPlanningClosing = DocProductionPlanningClosingServer.GetProductionPlanningColosing(CurrentObject.ProductionPlanning);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	MF_DocProductionServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	DocProductionServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		SetFormRules(Object, Object, ThisObject);
+		SetVisibilityAvailability(Object, ThisObject);
+		SetCurrentQuantityError(False);		
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
-	Return;
-EndProcedure
-
-&AtClient
-Procedure OnOpen(Cancel)
-	Return;
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	MF_FormsServer.DocumentAfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetFormRules(Object, Object, ThisObject);
+	DocProductionServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	DocProductionClient.OnOpen(Object, ThisObject, Cancel);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControl();
+	EndIf;
+	
+	If Not Source = ThisObject Then
+		Return;
+	EndIf;
 EndProcedure
 
 &AtServer
-Procedure OnReadAtServer(CurrentObject)
-	ThisObject.ProductionPlanningClosing = MF_FormsServer.GetProductionPlanningColosing(CurrentObject.ProductionPlanning);
-	MF_FormsServer.DocumentOnReadAtServer(Object, ThisObject, CurrentObject);
-	SetFormRules(Object, Object, ThisObject);
-	ThisObject.ReadOnly = GetReadOnly();
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
-&AtServer
-Function GetReadOnly()
-	Return ValueIsFilled(ThisObject.ProductionPlanningClosing);
-EndFunction
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocProductionClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
 
 &AtClientAtServerNoContext
-Procedure SetFormRules(Object, CurrentObject, Form)
-	MF_FormsClientServer.DocumentSetFormRules(Object, CurrentObject, Form);
-	Form.Items.GroupHead.Visible = ValueIsFilled(Form.ProductionPlanningClosing);
+Procedure SetVisibilityAvailability(Object, Form)
+	IsFilled_ProductionPlanningClosing = ValueIsFilled(Form.ProductionPlanningClosing);
+	
+	Form.ReadOnly = IsFilled_ProductionPlanningClosing;
+	Form.Items.GroupHead.Visible = IsFilled_ProductionPlanningClosing;
+	
+	_Semiproduct = PredefinedValue("Enum.MaterialTypes.Semiproduct");
+	_Material    = PredefinedValue("Enum.MaterialTypes.Material");
+	_Service     = PredefinedValue("Enum.MaterialTypes.Service");
+	
 	For Each Row In Object.Materials Do
-		If Row.MaterialType = PredefinedValue("Enum.MF_MaterialTypes.Semiproduct") Then
+		If Row.MaterialType = _Semiproduct Then
 			Row.Picture = 2;
-		ElsIf Row.MaterialType = PredefinedValue("Enum.MF_MaterialTypes.Material") Then
+		ElsIf Row.MaterialType = _Material Then
 			Row.Picture = 3;
-		ElsIf Row.MaterialType = PredefinedValue("Enum.MF_MaterialTypes.Service") Then
+		ElsIf Row.MaterialType = _Service Then
 			Row.Picture = 1;
 		Else
 			Row.Picture = -1;
 		EndIf;
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+//&AtServer
+//Function GetReadOnly()
+//	Return ValueIsFilled(ThisObject.ProductionPlanningClosing);
+//EndFunction
+
+//&AtClientAtServerNoContext
+//Procedure SetFormRules(Object, CurrentObject, Form)
+//	MF_FormsClientServer.DocumentSetFormRules(Object, CurrentObject, Form);
+//	Form.Items.GroupHead.Visible = ValueIsFilled(Form.ProductionPlanningClosing);
+//	For Each Row In Object.Materials Do
+//		If Row.MaterialType = PredefinedValue("Enum.MF_MaterialTypes.Semiproduct") Then
+//			Row.Picture = 2;
+//		ElsIf Row.MaterialType = PredefinedValue("Enum.MF_MaterialTypes.Material") Then
+//			Row.Picture = 3;
+//		ElsIf Row.MaterialType = PredefinedValue("Enum.MF_MaterialTypes.Service") Then
+//			Row.Picture = 1;
+//		Else
+//			Row.Picture = -1;
+//		EndIf;
+//	EndDo;
+//EndProcedure
 
 &AtClient
 Procedure MaterialsMaterialTypeOnChange(Item)

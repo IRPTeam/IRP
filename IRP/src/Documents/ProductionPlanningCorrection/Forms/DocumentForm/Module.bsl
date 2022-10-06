@@ -1,82 +1,87 @@
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocProductionPlanningCorrectionServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.ProductionPlanningClosing = DocProductionPlanningClosingServer.GetProductionPlanningColosing(CurrentObject.ProductionPlanning);
+	ThisObject.ProductionPlanningCorrectionExists = DocProductionPlanningCorrectionServer.GetProductionPlanningCorrectionExists(CurrentObject.Ref);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+	SetCurrentQuantityError(Not IsCurrentQuantityActual());
+EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	MF_FormsServer.DocumentOnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	DocProductionPlanningCorrectionServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		SetFormRules(Object, Object, ThisObject);
-		SetCurrentQuantityError(False);
-		Items.ProductionPlanningCorrectionExists.Visible = False;		
+		SetVisibilityAvailability(Object, ThisObject);
+		SetCurrentQuantityError(False);		
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure OnOpen(Cancel)
-	If Not ValueIsFilled(Object.Ref) 
-		And Not ValueIsFilled(Object.PlanningPeriod) Then
-		NewPlanningPeriod = MF_FormsServer.GetPlanningPeriod(Object.Date, Object.BusinessUnit);
-		If NewPlanningPeriod <> Object.PlanningPeriod Then
-			Object.PlanningPeriod = NewPlanningPeriod;
-			MF_FormsClient.SetDocumentProductionPlanning(Object);
-		EndIf;
-	EndIf;
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-	MF_FormsServer.DocumentAfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetFormRules(Object, Object, ThisObject);
+	DocProductionPlanningCorrectionServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 	SetCurrentQuantityError(Not IsCurrentQuantityActual());
 EndProcedure
 
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	ThisObject.ProductionPlanningClosing = MF_FormsServer.GetProductionPlanningColosing(CurrentObject.ProductionPlanning);
-	MF_FormsServer.DocumentOnReadAtServer(Object, ThisObject, CurrentObject);
-	SetFormRules(Object, Object, ThisObject);
-	SetCurrentQuantityError(Not IsCurrentQuantityActual());
-	ThisObject.ReadOnly = GetReadOnly();
+&AtClient
+Procedure OnOpen(Cancel)
+	DocProductionPlanningCorrectionClient.OnOpen(Object, ThisObject, Cancel);
+	
+//	If Not ValueIsFilled(Object.Ref) 
+//		And Not ValueIsFilled(Object.PlanningPeriod) Then
+//		NewPlanningPeriod = MF_FormsServer.GetPlanningPeriod(Object.Date, Object.BusinessUnit);
+//		If NewPlanningPeriod <> Object.PlanningPeriod Then
+//			Object.PlanningPeriod = NewPlanningPeriod;
+//			MF_FormsClient.SetDocumentProductionPlanning(Object);
+//		EndIf;
+//	EndIf;
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControl();
+	EndIf;
+	
+	If Not Source = ThisObject Then
+		Return;
+	EndIf;
 EndProcedure
 
 &AtServer
-Function GetReadOnly()
-	If Not Object.Status.Posting Then
-		Return False;
-	EndIf;
-	Query = New Query();
-	Query.Text = 
-	"SELECT TOP 1
-	|	MF_ProductionPlanningCorrection.Ref
-	|FROM
-	|	Document.MF_ProductionPlanningCorrection AS MF_ProductionPlanningCorrection
-	|WHERE
-	|	NOT MF_ProductionPlanningCorrection.DeletionMark
-	|	AND MF_ProductionPlanningCorrection.Posted
-	|	AND MF_ProductionPlanningCorrection.ProductionPlanning = &ProductionPlanning
-	|	AND MF_ProductionPlanningCorrection.Ref <> &Ref
-	|	AND MF_ProductionPlanningCorrection.ApprovedDate > &ApprovedDate
-	|ORDER BY
-	|	MF_ProductionPlanningCorrection.ApprovedDate";
-	Query.SetParameter("Ref", Object.Ref);
-	Query.SetParameter("ApprovedDate", Object.ApprovedDate);
-	Query.SetParameter("ProductionPlanning", Object.ProductionPlanning);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	IsReadOnly = False;
-	If QuerySelection.Next() Then
-		ThisObject.ProductionPlanningCorrectionExists = QuerySelection.Ref;
-		Items.ProductionPlanningCorrectionExists.Visible =  True;
-		IsReadOnly = True;
-	Else
-		Items.ProductionPlanningCorrectionExists.Visible = False;
-	EndIf;
-	Return IsReadOnly Or ValueIsFilled(ThisObject.ProductionPlanningClosing);
-EndFunction
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocProductionPlanningCorrectionClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
 
 &AtClientAtServerNoContext
-Procedure SetFormRules(Object, CurrentObject, Form)
-	MF_FormsClientServer.DocumentSetFormRules(Object, CurrentObject, Form);
-	Form.Items.GroupHead.Visible = ValueIsFilled(Form.ProductionPlanningClosing);
+Procedure SetVisibilityAvailability(Object, Form)
+	IsFilled_ProductionPlanningClosing = ValueIsFilled(Form.ProductionPlanningClosing);
+	IsFilled_ProductionPlanningCorrectionExists = ValueIsFilled(Form.ProductionPlanningCorrectionExists);
+	
+	Form.ReadOnly = IsFilled_ProductionPlanningClosing Or IsFilled_ProductionPlanningCorrectionExists;
+	Form.Items.ProductionPlanningCorrectionExists.Visible = IsFilled_ProductionPlanningCorrectionExists;
+	Form.Items.GroupHead.Visible = IsFilled_ProductionPlanningClosing;
 EndProcedure
+
+#EndRegion
+
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)

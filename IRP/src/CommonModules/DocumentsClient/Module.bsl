@@ -999,7 +999,20 @@ Function GetFormItemNames()
 				|WorkersQuantityInBaseUnit, WorkersKey,
 				|MaterialsQuantityInBaseUnit, MaterialsQuantityInBaseUnitBOM, MaterialsKey, MaterialsKeyOwner, MaterialsIsVisible, MaterialsIsManualChanged,
 				|MaterialsUniqueID, MaterialsBillOfMaterials,
-				|DocumentsTreeKey, DocumentsTreeBasisKey";
+				|DocumentsTreeKey, DocumentsTreeBasisKey,
+				|GroupBillOfMaterials,
+				|ProductionTreeWriteofStoreEnable,
+				|ProductionTreeSurplusStoreEnable,
+				|ProductionTreeMaterialStore,
+				|ProductionTreeReleaseStore,
+				|ProductionTreeInputID,
+				|ProductionTreeOutputID,
+				|ProductionTreeUniqueID,
+				|ProductionTreeIsProduct,
+				|ProductionTreeIsSemiproduct,
+				|ProductionTreeIsMaterial,
+				|ProductionTreeIsService,
+				|ProductionsKey";
 	Return ItemNames;
 EndFunction	
 

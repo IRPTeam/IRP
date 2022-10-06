@@ -2,7 +2,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ProductionPlanningCorrectionServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
+	DocProductionPlanningCorrectionServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 #EndRegion

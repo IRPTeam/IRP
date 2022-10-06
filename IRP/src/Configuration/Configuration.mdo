@@ -435,6 +435,12 @@
   <commonModules>CommonModule.DocProductionPlanningCorrectionServer</commonModules>
   <commonModules>CommonModule.DocProductionPlanningClosingServer</commonModules>
   <commonModules>CommonModule.DocProductionServer</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningClient</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningCorrectionClient</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningClosingClient</commonModules>
+  <commonModules>CommonModule.DocProductionClient</commonModules>
+  <commonModules>CommonModule.ManufacturingClient</commonModules>
+  <commonModules>CommonModule.ManufacturingServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

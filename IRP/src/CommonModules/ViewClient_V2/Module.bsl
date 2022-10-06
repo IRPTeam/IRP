@@ -182,7 +182,9 @@ Function GetObjectPropertyNamesBeforeChange()
 		|Sender,
 		|Receiver,
 		|CashTransferOrder,
-		|RetailCustomer";
+		|RetailCustomer,
+		|PlanningPeriod,
+		|BusinessUnit";
 EndFunction
 
 // returns list of Table attributes for get value before the change
@@ -853,8 +855,6 @@ Procedure OnOpen(Object, Form, TableNames) Export
 	UpdateCacheBeforeChange(Object, Form);
 	For Each TableName In StrSplit(TableNames, ",") Do
 		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
-		// #optimization 2 
-//		ControllerClientServer_V2.FillPropertyFormByDefault(Form, "Store, DeliveryDate", Parameters);
 		ControllerClientServer_V2.FormOnOpen(Parameters);
 	EndDo;
 EndProcedure
@@ -2685,6 +2685,46 @@ Procedure ItemKeyBundleOnChange(Object, Form, TableNames) Export
 EndProcedure
 
 Procedure OnSetItemKeyBundleNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region PLANNING_PERIOD
+
+Procedure PlanningPeriodOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("PlanningPeriod", FormParameters);
+	FormParameters.EventCaller = "PlanningPeriodOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TableName;
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.PlanningPeriodOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetPlanningPeriodNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region BUSINESS_UNIT
+
+Procedure BusinessUnitOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("BusinessUnit", FormParameters);
+	FormParameters.EventCaller = "BusinessUnitOnUserChange";
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TableName;
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.BusinessUnitOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetBusinessUnitNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 

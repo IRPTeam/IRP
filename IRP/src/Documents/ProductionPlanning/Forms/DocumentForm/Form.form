@@ -452,6 +452,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Company</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>CompanyOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>CompanyExtendedTooltip</name>
             <id>9</id>
@@ -483,6 +487,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>CompanyStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>CompanyEditTextChange</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -1364,14 +1376,6 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <handlers>
-              <event>EditTextChange</event>
-              <name>ProductionsBillOfMaterialsEditTextChange</name>
-            </handlers>
-            <handlers>
-              <event>StartChoice</event>
-              <name>ProductionsBillOfMaterialsStartChoice</name>
-            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -1488,12 +1492,16 @@
           <name>ProductionsSelection</name>
         </handlers>
         <handlers>
-          <event>OnChange</event>
-          <name>ProductionsOnChange</name>
-        </handlers>
-        <handlers>
           <event>AfterDeleteRow</event>
           <name>ProductionsAfterDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>BeforeAddRow</event>
+          <name>ProductionsBeforeAddRow</name>
+        </handlers>
+        <handlers>
+          <event>BeforeDeleteRow</event>
+          <name>ProductionsBeforeDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -3272,6 +3280,10 @@
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
+  <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -3426,6 +3438,18 @@
     <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnWriteAtServer</event>
+      <name>OnWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

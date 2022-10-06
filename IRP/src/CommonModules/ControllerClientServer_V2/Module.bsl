@@ -1971,6 +1971,8 @@ Function BindDate(Parameters)
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
+	Binding.Insert("ProductionPlanning", "StepChangePlanningPeriodByDateAndBusinessUnit");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3388,6 +3390,76 @@ Function BindItemKeyBundle(Parameters)
 	DataPath = "ItemKeyBundle";
 	Binding = New Structure();
 	Binding.Insert("Unbundling", "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PLANNING_PERIOD
+
+// PlanningPeriod.OnChange
+Procedure PlanningPeriodOnChange(Parameters) Export
+	AddViewNotify("OnSetPlanningPeriodNotify", Parameters);
+	Binding = BindPlanningPeriod(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PlanningPeriod.Set
+Procedure SetPlanningPeriod(Parameters, Results) Export
+	Binding = BindPlanningPeriod(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPlanningPeriodNotify");
+EndProcedure
+
+//// PlanningPeriod.Get
+//Function GetPlanningPeriod(Parameters)
+//	Return GetPropertyObject(Parameters, BindPlanningPeriod(Parameters).DataPath);
+//EndFunction
+
+// PlanningPeriod.Bind
+Function BindPlanningPeriod(Parameters)
+	DataPath = "PlanningPeriod";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// PlanningPeriod.ChangePlanningPeriodByDateAndBusinessUnit.Step
+Procedure StepChangePlanningPeriodByDateAndBusinessUnit(Parameters, Chain) Export
+	Chain.ChangePlanningPeriodByDateAndBusinessUnit.Enable = True;
+	Chain.ChangePlanningPeriodByDateAndBusinessUnit.Setter = "SetPlanningPeriod";
+	Options = ModelClientServer_V2.ChangePlanningPeriodByDateAndBusinessUnitOptions();
+	Options.Date = GetDate(Parameters);
+	Options.BusinessUnit = GetBusinessUnit(Parameters);
+	Options.StepName = "StepChangePlanningPeriodByDateAndBusinessUnit";
+	Chain.ChangePlanningPeriodByDateAndBusinessUnit.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region BUSINESS_UNIT
+
+// BusinessUnit.OnChange
+Procedure BusinessUnitOnChange(Parameters) Export
+	AddViewNotify("OnSetBusinessUnitNotify", Parameters);
+	Binding = BindBusinessUnit(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// BusinessUnit.Set
+Procedure SetBusinessUnit(Parameters, Results) Export
+	Binding = BindBusinessUnit(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetBusinessUnitNotify");
+EndProcedure
+
+// BusinessUnit.Get
+Function GetBusinessUnit(Parameters)
+	Return GetPropertyObject(Parameters, BindBusinessUnit(Parameters).DataPath);
+EndFunction
+
+// BusinessUnit.Bind
+Function BindBusinessUnit(Parameters)
+	DataPath = "BusinessUnit";
+	Binding = New Structure();
+	Binding.Insert("ProductionPlanning", "StepChangePlanningPeriodByDateAndBusinessUnit");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8756,6 +8828,8 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "MaterialsOnAddRowFormNotify"           Then ViewClient_V2.MaterialsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "MaterialsOnCopyRowFormNotify"          Then ViewClient_V2.MaterialsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnSetUseGoodsReceiptNotify_IsProgrammAsTrue" Then ViewClient_V2.OnSetUseGoodsReceiptNotify_IsProgrammAsTrue(Parameters);
+	ElsIf ViewNotify = "OnSetPlanningPeriodNotify"             Then ViewClient_V2.OnSetPlanningPeriodNotify(Parameters);
+	ElsIf ViewNotify = "OnSetBusinessUnitNotify"               Then ViewClient_V2.OnSetBusinessUnitNotify(Parameters);
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);
 	EndIf;

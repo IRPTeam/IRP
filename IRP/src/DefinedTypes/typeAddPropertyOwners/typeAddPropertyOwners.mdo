@@ -115,5 +115,9 @@
     <types>DocumentRef.WorkOrderClosing</types>
     <types>DocumentRef.WorkSheet</types>
     <types>CatalogRef.BillOfMaterials</types>
+    <types>DocumentRef.Production</types>
+    <types>DocumentRef.ProductionPlanning</types>
+    <types>DocumentRef.ProductionPlanningClosing</types>
+    <types>DocumentRef.ProductionPlanningCorrection</types>
   </type>
 </mdclass:DefinedType>

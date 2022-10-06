@@ -3347,7 +3347,7 @@
     </title>
     <id>4</id>
     <valueType>
-      <types>DocumentObject.ProductionPlanningClosing</types>
+      <types>DocumentRef.ProductionPlanningClosing</types>
     </valueType>
     <view>
       <common>true</common>
@@ -3390,6 +3390,18 @@
     <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnWriteAtServer</event>
+      <name>OnWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

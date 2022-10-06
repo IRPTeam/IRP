@@ -2523,13 +2523,13 @@ Scenario: 950442 check is object lock on open (catalogs)
 		And I click "Save and close" button
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Check is object lock on open (catalogs):" string by template
-		Given Recent TestClient message contains 'Unit Equal to "pcs"' string by template
-		And I close current window
-		And I close all client application windows
+		Given Recent TestClient message contains 'Unit Equal to "pcs"' string by template	
+		And I close TestClient session
+		
 		
 Scenario: 950450 check ignore lock modification data
+		And I connect "Этот клиент" profile of TestClient
 	* Preparation
-		And I close all client application windows
 		And I mark "Catalogs.LockDataModificationReasons" objects for deletion
 		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 		And I click "Refresh" button	
@@ -2537,6 +2537,7 @@ Scenario: 950450 check ignore lock modification data
 			| 'Reference' |
 			| 'Check is object lock on open (documents)'       |
 		And Delay 5
+		And I activate current test client window
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button

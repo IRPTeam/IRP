@@ -11,7 +11,10 @@ To upload currency rates to the base
 
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+Tag = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Tag")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Tag"), "#Tag#")}"
+webPort = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("webPort")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("webPort"), "#webPort#")}"
+isProdMode = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("isProdMode")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("isProdMode"), "#isProdMode#")}"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -38,14 +41,14 @@ Scenario: _020000 preparation (Loadinfo)
 			When import mocks for currency rate
 			Given I open hyperlink "e1cib/list/Catalog.DataBaseStatus"
 			And I go to line in "List" table
-				| 'Description'        |
-				| 'File_"C__IB_http"_' |
+				| 'is Product server' |
+				| 'Yes'               |	
 			And I select current line in "List" table
 			And I remove checkbox "is Product server"
 			And I click "Save and close" button
 			And "List" table contains lines
-				| 'ENG'                | 'is Product server' |
-				| 'File_"C__IB_http"_' | 'No'                |						
+				| 'is Product server' |
+				| 'No'                |						
 		* Add Plugin ExternalBankUa
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"

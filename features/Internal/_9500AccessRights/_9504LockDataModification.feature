@@ -2524,6 +2524,7 @@ Scenario: 950442 check is object lock on open (catalogs)
 		Given Recent TestClient message contains "Data lock reasons:*" string by template
 		Given Recent TestClient message contains "Check is object lock on open (catalogs):" string by template
 		Given Recent TestClient message contains 'Unit Equal to "pcs"' string by template
+		And I close current window
 		And I close all client application windows
 		
 Scenario: 950450 check ignore lock modification data

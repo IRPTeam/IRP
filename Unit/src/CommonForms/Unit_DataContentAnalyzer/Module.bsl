@@ -554,7 +554,11 @@ EndFunction
 &AtServerNoContext
 Function GetHTML(Val SomeText)
 	If StrStartsWith(TrimL(SomeText), "<") and StrEndsWith(TrimR(SomeText), ">") Then
-		TempFile = GetTempFileName("xml");
+		If StrStartsWith(TrimL(SomeText), "<!DOCTYPE html") Then
+			TempFile = GetTempFileName("html");
+		Else
+			TempFile = GetTempFileName("xml");
+		EndIf;
 		XMLWriter = New XMLWriter;
 		XMLWriter.OpenFile(TempFile);
         XMLWriter.WriteRaw(SomeText);

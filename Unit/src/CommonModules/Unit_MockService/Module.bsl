@@ -507,6 +507,14 @@ Function HeadersCheck(Headers, MockData, Logs)
 				Return False;
 			EndIf;
 
+		ElsIf MockHeaderItem.ValueNeedFilled Then
+			
+			HeadersValue = Headers.Get(MockHeaderItem.Key); //String
+			If Not ValueIsFilled(HeadersValue) Then
+				AddLineToLogs(Logs, StrTemplate(R().Mock_Error_NotFound_Header, MockHeaderItem.Key));
+				Return False;
+			EndIf;  
+		
 		EndIf;
 		 
 	EndDo;
@@ -570,6 +578,12 @@ Function VariablesCheck(RequestVariables, MockData, Logs)
 				AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_Info_RequiredValue, VareablesItem.Value));
 				AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_Info_FoundValue, VariableValue));
 				Return False;
+			EndIf;
+		ElsIf VareablesItem.ValueNeedFilled Then
+			VariableValue = "";
+			If Not RequestVariables.Property(VareablesItem.VariableName, VariableValue) Or Not ValueIsFilled(VariableValue) Then
+				AddLineToLogs(Logs, StrTemplate(R().Mock_Error_NotFound_Variable, VareablesItem.VariableName));
+				Return False;
 			EndIf;  
 		EndIf; 
 	EndDo;
@@ -603,6 +617,12 @@ Function VariablesBodyCheck(RequestVariables, MockData, Logs)
 				AddLineToLogs(Logs, StrTemplate(R().Mock_Error_Difference_Variable, VareablesItem.VariableName));
 				AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_Info_RequiredValue, VareablesItem.Value));
 				AddLineToLogs(Logs, StrTemplate(" * %1: %2", R().Mock_Info_FoundValue, VariableValue));
+				Return False;
+			EndIf;
+		ElsIf VareablesItem.ValueNeedFilled Then
+			VariableValue = "";
+			If Not RequestVariables.Property(VareablesItem.VariableName, VariableValue) Or Not ValueIsFilled(VariableValue) Then
+				AddLineToLogs(Logs, StrTemplate(R().Mock_Error_NotFound_Variable, VareablesItem.VariableName));
 				Return False;
 			EndIf;  
 		EndIf; 
@@ -703,6 +723,7 @@ Function RunQueryForSearchMockData(RequestStructure)
 	|		ON Unit_MockServiceDataRequest_Headers.Ref = ttMockData.Ref
 	|WHERE
 	|	Unit_MockServiceDataRequest_Headers.ValueAsFilter
+	|	OR Unit_MockServiceDataRequest_Headers.ValueNeedFilled
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -715,6 +736,7 @@ Function RunQueryForSearchMockData(RequestStructure)
 	|		ON Unit_MockServiceDataRequest_Variables.Ref = ttMockData.Ref
 	|WHERE
 	|	Unit_MockServiceDataRequest_Variables.ValueAsFilter
+	|	OR Unit_MockServiceDataRequest_Variables.ValueNeedFilled
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -727,6 +749,7 @@ Function RunQueryForSearchMockData(RequestStructure)
 	|		ON Unit_MockServiceDataRequest_BodyVariables.Ref = ttMockData.Ref
 	|WHERE
 	|	Unit_MockServiceDataRequest_BodyVariables.ValueAsFilter
+	|	OR Unit_MockServiceDataRequest_BodyVariables.ValueNeedFilled
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -801,7 +824,8 @@ Function getRequestVariables(RequestStructure, MockData, Logs)
 		If Element.AsUrlVariable Then
 			AddressParts = StrSplit(ValuePart, "&");
 			For Each AddressPart In AddressParts Do
-				KeyValue = StrSplit(AddressPart, "=");
+				KeyValueString = DecodeString(AddressPart, StringEncodingMethod.URLInURLEncoding);
+				KeyValue = StrSplit(KeyValueString, "=");
 				If KeyValue.Count() = 1 Then
 					Result.Insert(KeyValue[0], "");
 				Else

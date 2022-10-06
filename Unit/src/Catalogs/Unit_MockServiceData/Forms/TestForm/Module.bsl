@@ -93,6 +93,17 @@ Async Procedure SaveBody(Command)
 	
 EndProcedure
 
+&AtClient
+Procedure AnalyzeBody(Command)
+	
+	AddressBody = PutToTempStorage(GetBodyAtServer(), ThisObject.UUID);
+	
+	OpenForm("CommonForm.Unit_DataContentAnalyzer", 
+		New Structure("PathToValue, AddressBody", ?(ThisObject.AnswerBodyIsText, "[text]", "[file]"), AddressBody)
+	);
+	
+EndProcedure
+
 #EndRegion
 
 #Region Private
@@ -185,19 +196,19 @@ Function GetMockStructure()
 	EndIf; 
 	
 	For Each Element In ThisObject.MockData.Request_Headers Do
-		If Element.ValueAsFilter Then
+		If Element.ValueAsFilter Or Element.ValueNeedFilled Then
 			MockStructure.isHeaderFilter = True;
 			Break;
 		EndIf;
 	EndDo;
 	For Each Element In ThisObject.MockData.Request_Variables Do
-		If Element.ValueAsFilter Then
+		If Element.ValueAsFilter Or Element.ValueNeedFilled Then
 			MockStructure.isVariablesFilter = True;
 			Break;
 		EndIf;
 	EndDo;
 	For Each Element In ThisObject.MockData.Request_BodyVariables Do
-		If Element.ValueAsFilter Then
+		If Element.ValueAsFilter Or Element.ValueNeedFilled Then
 			MockStructure.isVariablesBodyFilter = True;
 			Break;
 		EndIf;

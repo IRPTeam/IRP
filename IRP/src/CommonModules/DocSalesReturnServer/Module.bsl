@@ -27,6 +27,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	Form.Taxes_CreateFormControls();
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "SalesInvoice");
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
+	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 EndProcedure
 
 #EndRegion

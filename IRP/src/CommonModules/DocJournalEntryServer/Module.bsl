@@ -16,6 +16,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 EndProcedure
 
 #EndRegion

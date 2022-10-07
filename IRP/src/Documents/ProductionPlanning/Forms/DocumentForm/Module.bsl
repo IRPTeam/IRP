@@ -126,38 +126,22 @@ EndProcedure
 
 &AtClient
 Procedure ProductionsSelection(Item, RowSelected, Field, StandardProcessing)
-//	ProductionPlanningClient.ProductionsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-	
-//	If Not ThisObject.ReadOnly Then
-//		Return;
-//	EndIf;
-//	CurrentData = Items.Productions.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	MF_FormsClient.OpenObjectForm(Field, "ProductionsItem", CurrentData.Item, StandardProcessing);
-//	MF_FormsClient.OpenObjectForm(Field, "ProductionsItemKey", CurrentData.ItemKey, StandardProcessing);
-//	MF_FormsClient.OpenObjectForm(Field, "ProductionsUnit", CurrentData.Unit, StandardProcessing);
-//	MF_FormsClient.OpenObjectForm(Field, "ProductionsBillOfMaterials", CurrentData.BillOfMaterials, StandardProcessing);	
+	DocProductionPlanningClient.ProductionsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
-
 
 &AtClient
 Procedure ProductionsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-//	ProductionPlanningClient.ProductionsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+	DocProductionPlanningClient.ProductionsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
-
 
 &AtClient
 Procedure ProductionsBeforeDeleteRow(Item, Cancel)
-//	ProductionPlanningClient.ProductionsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+	DocProductionPlanningClient.ProductionsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient
 Procedure ProductionsAfterDeleteRow(Item)
-//	ProductionPlanningClient.ProductionsAfterDeleteRow(Object, ThisObject, Item);
-
-//	MF_FormsClient.ClearDependedTables(Object, ThisObject, "Productions", "BillOfMaterials");
+	DocProductionPlanningClient.ProductionsAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
 #Region PRODUCTIONS_COLUMNS
@@ -166,7 +150,7 @@ EndProcedure
 
 &AtClient
 Procedure ProductionsItemOnChange(Item)
-//	ProductionPlanningClient.ProductionsItemOnChange(Object, ThisObject, Item);
+	DocProductionPlanningClient.ProductionsItemOnChange(Object, ThisObject, Item);
 
 //	MF_FormsClient.ItemOnChange(Object, ThisObject, Item, "Productions");
 //	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
@@ -174,14 +158,14 @@ EndProcedure
 
 &AtClient
 Procedure ProductionsItemStartChoice(Item, ChoiceData, StandardProcessing)
-//	ProductionPlanningClient.ProductionsItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocProductionPlanningClient.ProductionsItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 
 //	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ProductionsItemEditTextChange(Item, Text, StandardProcessing)
-//	ProductionPlanningClient.ProductionsItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocProductionPlanningClient.ProductionsItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 
 //	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
@@ -192,7 +176,7 @@ EndProcedure
 
 &AtClient
 Procedure ProductionsItemKeyOnChange(Item)
-//	ProductionPlanningClient.ProductionsItemKeyOnChange(Object, ThisObject, Item);
+	DocProductionPlanningClient.ProductionsItemKeyOnChange(Object, ThisObject, Item);
 
 //	MF_FormsClient.ItemKeyOnChange(Object, ThisObject, Item, "Productions");
 //	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
@@ -204,7 +188,7 @@ EndProcedure
 
 &AtClient
 Procedure ProductionsBillOfMaterialsOnChange(Item)
-//	ProductionPlanningClient.ProductionsBillOfMaterialsOnChange(Object, ThisObject, Item);
+	DocProductionPlanningClient.ProductionsBillOfMaterialsOnChange(Object, ThisObject, Item);
 
 //	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
 EndProcedure
@@ -215,7 +199,7 @@ EndProcedure
 
 &AtClient
 Procedure ProductionsUnitOnChange(Item)
-//	ProductionPlanningClient.ProductionsUnitOnChange(Object, ThisObject, Item);
+	DocProductionPlanningClient.ProductionsUnitOnChange(Object, ThisObject, Item);
 
 //	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
 EndProcedure
@@ -226,7 +210,7 @@ EndProcedure
 
 &AtClient
 Procedure ProductionsQuantityOnChange(Item)
-//	ProductionPlanningClient.ProductionsQuantityOnChange(Object, ThisObject, Item);
+	DocProductionPlanningClient.ProductionsQuantityOnChange(Object, ThisObject, Item);
 
 //	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
 EndProcedure

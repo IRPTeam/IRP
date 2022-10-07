@@ -483,28 +483,28 @@ EndFunction
 
 #EndRegion
 
-Function GetUniqueProductionPlanning(Company, BusinessUnit, PlanningPeriod) Export
-	Query = New Query();
-	Query.Text = 
-	"SELECT TOP 2
-	|	MF_ProductionPlanning.Ref
-	|FROM
-	|	Document.MF_ProductionPlanning AS MF_ProductionPlanning
-	|WHERE
-	|	MF_ProductionPlanning.Company = &Company
-	|	AND MF_ProductionPlanning.BusinessUnit = &BusinessUnit
-	|	AND MF_ProductionPlanning.PlanningPeriod = &PlanningPeriod
-	|	AND MF_ProductionPlanning.Posted";
-	Query.SetParameter("Company"         , Company);
-	Query.SetParameter("BusinessUnit"    , BusinessUnit);
-	Query.SetParameter("PlanningPeriod"   , PlanningPeriod);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Count() = 1 Then
-		QuerySelection.Next();
-		Return QuerySelection.Ref;
-	EndIf;
-	Return Documents.MF_ProductionPlanning.EmptyRef();
-EndFunction
+//Function GetUniqueProductionPlanning(Company, BusinessUnit, PlanningPeriod) Export
+//	Query = New Query();
+//	Query.Text = 
+//	"SELECT TOP 2
+//	|	MF_ProductionPlanning.Ref
+//	|FROM
+//	|	Document.MF_ProductionPlanning AS MF_ProductionPlanning
+//	|WHERE
+//	|	MF_ProductionPlanning.Company = &Company
+//	|	AND MF_ProductionPlanning.BusinessUnit = &BusinessUnit
+//	|	AND MF_ProductionPlanning.PlanningPeriod = &PlanningPeriod
+//	|	AND MF_ProductionPlanning.Posted";
+//	Query.SetParameter("Company"         , Company);
+//	Query.SetParameter("BusinessUnit"    , BusinessUnit);
+//	Query.SetParameter("PlanningPeriod"   , PlanningPeriod);
+//	QueryResult = Query.Execute();
+//	QuerySelection = QueryResult.Select();
+//	If QuerySelection.Count() = 1 Then
+//		QuerySelection.Next();
+//		Return QuerySelection.Ref;
+//	EndIf;
+//	Return Documents.MF_ProductionPlanning.EmptyRef();
+//EndFunction
 
 

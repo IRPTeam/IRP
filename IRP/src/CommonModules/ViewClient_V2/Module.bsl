@@ -264,6 +264,12 @@ Procedure OnChainComplete(Parameters) Export
 		__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
 		Return;
 	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "ProductionPlanning" Then
+		__tmp_ProductionPlanning_OnChainComplete(Parameters);
+		Return;
+	EndIf;
+	
 	CommitChanges(Parameters);
 EndProcedure
 
@@ -444,6 +450,44 @@ Procedure __tmp_MoneyTransfer_CashTransferOrderOnUserChangeContinue(Answer, Noti
 EndProcedure
 
 Procedure __tmp_MoneyTransfer_CommitChanges(Parameters)
+	CommitChanges(Parameters);
+EndProcedure
+
+Procedure __tmp_ProductionPlanning_OnChainComplete(Parameters)
+	ArrayOfEventCallers = New Array();
+	ArrayOfEventCallers.Add("BusinessUnitOnUserChange");
+	ArrayOfEventCallers.Add("DateOnUserChange");
+	
+	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
+		__tmp_ProductionPlanning_CommitChanges(Parameters);
+		Return;
+	EndIf;
+	
+	// refill question BusinessUnit or Date
+	If (Parameters.EventCaller = "BusinessUnitOnUserChange"
+		Or Parameters.EventCaller = "DateOnUserChange") Then
+		
+		If IsChangedProperty(Parameters, "PlanningPeriod").IsChanged Then	
+			
+			NotifyParameters = New Structure("Parameters", Parameters);
+			ShowQueryBox(New NotifyDescription("__tmp_ProductionPlanning_BusinessUnitOrDateOnUserChangeContinue", ThisObject, NotifyParameters), 
+					R().QuestionToUser_015, QuestionDialogMode.YesNo);
+		Else
+			__tmp_ProductionPlanning_CommitChanges(Parameters);
+		EndIf;		
+		
+	Else
+		__tmp_ProductionPlanning_CommitChanges(Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_ProductionPlanning_BusinessUnitOrDateOnUserChangeContinue(Answer, NotifyParameters) Export
+	If Answer = DialogReturnCode.Yes Then
+		__tmp_ProductionPlanning_CommitChanges(NotifyParameters.Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_ProductionPlanning_CommitChanges(Parameters)
 	CommitChanges(Parameters);
 EndProcedure
 
@@ -1246,6 +1290,89 @@ EndProcedure
 Procedure WorkersOnCopyRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
 EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS
+
+Function ProductionsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Productions", Cancel, Clone, CurrentData,
+		"ProductionsOnAddRowFormNotify", "ProductionsOnCopyRowFormNotify");
+	Form.Items.Productions.CurrentRow = NewRow.GetID();
+	Form.Items.Productions.ChangeRow();
+	Return NewRow;
+EndFunction
+
+Procedure ProductionsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ProductionsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ProductionsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "Productions");
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_COLUMNS
+
+#Region PRODUCTIONS_ITEM
+
+// Productions.Item
+Procedure ProductionsItemOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Productions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Productions", Rows);
+	ControllerClientServer_V2.ProductionsItemOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_ITEM_KEY
+
+// Productions.ItemKey
+Procedure ProductionsItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Productions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Productions", Rows);
+	ControllerClientServer_V2.ProductionsItemKeyOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_UNIT
+
+// Productions.Unit
+Procedure ProductionsUnitOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Productions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Productions", Rows);
+	ControllerClientServer_V2.ProductionsUnitOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_QUANTITY
+
+// Productions.Quantity
+Procedure ProductionsQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Productions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Productions", Rows);
+	ControllerClientServer_V2.ProductionsQuantityOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_BILL_OF_MATERIALS
+
+// Productions.BillOfMaterials
+Procedure ProductionsBillOfMaterialsOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Productions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Productions", Rows);
+	ControllerClientServer_V2.ProductionsBillOfMaterialsOnChange(Parameters);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 

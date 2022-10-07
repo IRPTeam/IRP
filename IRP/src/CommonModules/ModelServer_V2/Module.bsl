@@ -145,3 +145,51 @@ Function GetExpenseTypeByBillOfMaterials(BillOfMaterials, ItemKey) Export
 		Return Undefined;
 	EndIf;	
 EndFunction
+
+Function GetPlanningPeriod(Date, BusinessUnit) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 2
+	|	Table.Ref AS Ref
+	|FROM
+	|	Catalog.PlanningPeriods.BusinessUnits AS TableBusinessUnits
+	|		INNER JOIN Catalog.PlanningPeriods AS Table
+	|		ON Table.Ref = TableBusinessUnits.Ref
+	|		AND &Date BETWEEN Table.StartDate AND Table.EndDate
+	|		AND NOT Table.DeletionMark
+	|		AND TableBusinessUnits.BusinessUnit = &BusinessUnit";
+	Query.SetParameter("Date", Date);
+	Query.SetParameter("BusinessUnit", BusinessUnit);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Count() = 1 Then
+		QuerySelection.Next();
+		Return QuerySelection.Ref;
+	EndIf;
+	Return Catalogs.PlanningPeriods.EmptyRef();
+EndFunction
+
+Function GetDocumentProductionPlanning(Company, BusinessUnit, PlanningPeriod) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 2
+	|	ProductionPlanning.Ref
+	|FROM
+	|	Document.ProductionPlanning AS ProductionPlanning
+	|WHERE
+	|	ProductionPlanning.Company = &Company
+	|	AND ProductionPlanning.BusinessUnit = &BusinessUnit
+	|	AND ProductionPlanning.PlanningPeriod = &PlanningPeriod
+	|	AND ProductionPlanning.Posted";
+	Query.SetParameter("Company"         , Company);
+	Query.SetParameter("BusinessUnit"    , BusinessUnit);
+	Query.SetParameter("PlanningPeriod"  , PlanningPeriod);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Count() = 1 Then
+		QuerySelection.Next();
+		Return QuerySelection.Ref;
+	EndIf;
+	Return Documents.ProductionPlanning.EmptyRef();
+EndFunction
+	

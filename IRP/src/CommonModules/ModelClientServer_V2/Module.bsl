@@ -252,6 +252,10 @@ Function GetChain()
 	
 	//Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
 	
+	Chain.Insert("ChangePlanningPeriodByDateAndBusinessUnit" , GetChainLink("ChangePlanningPeriodByDateAndBusinessUnitExecute"));
+	Chain.Insert("ChangeProductionPlanningByPlanningPeriod"  , GetChainLink("ChangeProductionPlanningByPlanningPeriodExecute"));
+	
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -1181,6 +1185,37 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_PLANNING_PERIOD_BY_DATE_AND_BUSINESS_UNIT
+
+Function ChangePlanningPeriodByDateAndBusinessUnitOptions() Export
+	Return GetChainLinkOptions("Date, BusinessUnit, CurrentPlaningPeriod");
+EndFunction
+
+Function ChangePlanningPeriodByDateAndBusinessUnitExecute(Options) Export
+	PlanningPeriod = ModelServer_V2.GetPlanningPeriod(Options.Date, Options.BusinessUnit);
+	If ValueIsFilled(PlanningPeriod) Then
+		Return PlanningPeriod;
+	EndIf;
+	Return Options.CurrentPlanningPeriod;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PRODUCTION_PLANNING_BY_PLANNING_PERIOD
+
+Function ChangeProductionPlanningByPlanningPeriodOptions() Export
+	Return GetChainLinkOptions("Company, BusinessUnit, PlaningPeriod, CurrentProductionPlanning");
+EndFunction
+
+Function ChangeProductionPlanningByPlanningPeriodExecute(Options) Export
+	ProductionPlanning = ModelServer_V2.GetDocumentProductionPlanning(Options.Company, Options.BusinessUnit, Options.PlanningPeriod);
+	If ValueIsFilled(ProductionPlanning) Then
+		Return ProductionPlanning;
+	EndIf;
+	Return Options.CurrentProductionPlanning;
+EndFunction
+
+#EndRegion
 
 //#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
 //
